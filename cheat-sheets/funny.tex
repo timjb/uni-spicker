@@ -1,0 +1,469 @@
+\documentclass{cheat-sheet}
+
+%\newcommand{\PS}{\mathcal{P}} % Powerset
+%\newcommand{\PSO}{\PS(\Omega)} % Powerset
+%\newcommand{\Alg}{\mathfrak{A}}
+%\newcommand{\Ring}{\mathfrak{R}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\supp}{\mathrm{supp}}
+\newcommand{\Bor}{\mathfrak{B}} % Borel
+\newcommand{\Leb}{\mathcal{L}} % Lebesgue
+\newcommand{\fue}{\overset{\text{f.ü.}}} % fast überall
+\newcommand{\dist}{\mathrm{dist}} % Entfernung
+
+\pdfinfo{
+  /Title (Zusammenfassung Funktionalanalysis)
+  /Author (Tim Baumann)
+}
+
+\begin{document}
+
+\maketitle{Zusammenfassung Funktionalanalysis}
+
+\begin{nota}
+  Sei im Folgenden $\K \in \{ \R, \C \}$.
+\end{nota}
+
+% TODO: Sei im Folgenden Y ein Banachraum?
+
+\begin{defn}
+  Ein \emph{Prä-Hilbertraum} ist ein $\K$-Vektorraum mit einem Skalarprodukt $\langle \cdot , \cdot \rangle$.
+\end{defn}
+
+\begin{defn}
+  Sei $V$ ein $\K$-Vektorraum. Eine \emph{Fréchet-Metrik} ist eine Funktion $\rho : V \to \R_{\geq 0}$, sodass für $x, y \in V$ gilt:
+  \begin{itemize}
+    \item $\rho(x) = \rho(-x)$
+    \item $\rho(x) = 0 \iff x = 0$
+    \item $\rho(x + y) \leq \rho(x) + \rho(y)$
+  \end{itemize}
+\end{defn}
+
+\begin{defn}
+  Sei $(X, d)$ ein metrischer Raum und $A_1, A_2 \subset X$, so ist
+  \[ \mathrm{dist}(A_1, A_2) \coloneqq \inf \Set{ d(x,y) }{ x \in A_1, y \in A_2 } \]
+  der \emph{Abstand} zwischen $A_1$ und $A_2$.
+\end{defn}
+
+\begin{defn}
+  Ein \emph{topologischer Raum} ist ein paar $(X, \tau)$, wobei $X$ eine Menge und $\tau \subset \mathcal{P}(X)$ ein System von offenen Mengen, sodass gilt:
+  \begin{itemize}
+    \item $\emptyset \in \tau$
+    \item $\tilde\tau \subset \tau \implies \bigcup_{U \in \tilde\tau} U \in \tau$
+    \item $U_1, U_2 \in \tau \implies U_1 \cap U_2 \in \tau$
+  \end{itemize}
+\end{defn}
+
+\begin{defn}
+  Ein topologischer Raum $(X, \tau)$ heißt \emph{Haussdorff-Raum}, wenn folgendes Trennungsaxiom erfüllt ist:
+  \[ \forall\, x_1, x_2 \in X : \exists\,U_1, U_2 \in \tau : x_1 \in U_1 \wedge x_2 \in U_2 \wedge U_1 \cap U_2 = \emptyset \]
+\end{defn}
+
+\begin{defn}
+  Sei $(X, \tau)$ ein topologischer Raum. Eine Menge $A \subset X$ heißt abgeschlossen, falls $X \setminus A \in \tau$, also das Komplement offen ist.
+\end{defn}
+
+\begin{defn}
+  Sei $(X, \tau)$ ein topologischer Raum und $A \subset X$. Dann heißen
+  \begin{align*}
+    A^{\circ} &\coloneqq \Set{ x \in X }{ \exists\,U \in \tau \text{ mit } x \in U \text{ und } U \subset A } \\
+    \overline{A} &\coloneqq \Set{ x \in X }{ \forall\,U \in \tau \text{ mit } x \in U \text{ gilt } U \cap A \not= \emptyset }
+  \end{align*}
+  \emph{Abschluss} bzw. \emph{Inneres} von $A$.
+\end{defn}
+
+\begin{defn}
+  Ist $(X, \tau)$ ein topologischer Raum und $A \subset X$, dann ist auch $(A, \tau_A)$ ein topologischer Raum mit der \em{Relativtopologie} $\tau_A \coloneqq \{ U \cap A \,|\,U \in \tau \}$.
+\end{defn}
+
+\begin{defn}
+  Sei $(X, \tau)$ ein topologischer Raum. Eine Teilmenge $A \subset X$ heißt \emph{dicht} in $X$, falls $\overline{A} = X$.
+\end{defn}
+
+\begin{defn}
+  Ein topologischer Raum $(X, \tau)$ heißt separabel, falls $X$ eine abzählbare dichte Teilmenge enthält. Eine Teilmenge $A \subset X$ heißt separabel, falls $(A, \tau_A)$ separabel ist.
+\end{defn}
+
+\begin{defn}
+  Seien $\tau_1, \tau_2$ zwei Topologien auf einer Menge $X$. Dann heißt $\tau_2$ \emph{stärker} (oder feiner) als $\tau_1$ bzw. $\tau_1$ \emph{schwächer} (oder gröber) als $\tau_2$, falls $\tau_1 \subset \tau_2$.
+\end{defn}
+
+\begin{defn}
+  Seien $d_1$ und $d_2$ Metriken auf einer Menge $X$ und $\tau_1$ und $\tau_2$ die induzierten Topologien. Dann heißt $d_1$ stärker als $d_2$, falls $\tau_1$ stärker ist als $\tau_2$.
+\end{defn}
+
+\begin{satz}
+  Sind $\| \cdot \|_1$ und $\| \cdot \|_2$ zwei Normen auf dem $\K$-Vektorraum $X$. Dann gilt:
+  \begin{itemize}
+    \item $\| \cdot \|_2 \text{ ist stärker als } \| \cdot \|_1 \iff \exists\,C > 0 : \forall\,x \in X : \| x \|_1 \leq C \| x \|_2$
+    \item $\| \cdot \|_1 \text{ und } \| \cdot \|_2 \text{ sind äquivalent } \iff \exists\,c, C > 0 : \forall\,x \in X : c \| x \|_1 \leq \| x \|_2 \leq C \| x \|_1$
+  \end{itemize}
+\end{satz}
+
+\begin{defn}
+  Die \emph{$p$-Norm} auf dem $\K^n$ ist definiert als
+  \begin{align*}
+    \| x \|_p &\coloneqq \left( \sum_{i = 1}^n |x_j|^p \right)^{\frac{1}{p}} \text{ für } 1 \leq p < \infty \\
+    \| x \|_{\infty} &\coloneqq \| x \|_max \coloneqq \max_{1 \leq i \leq n} |x_i|.
+  \end{align*}
+\end{defn}
+
+\begin{bem}
+  Alle $p$-Normen sind zueinander äquivalent.
+\end{bem}
+
+\begin{defn}
+  Seien $S \subset X$ eine Menge, $(X, \tau_X)$ und $(Y, \tau_Y)$ Hausdorff-Räume sowie $x_0 \in S$. Eine Funktion $f : S \to Y$ heißt \emph{stetig} in $x_0$, falls gilt:
+  \[ \forall\,V \in \tau_Y : f(x_0) \in V \implies \exists\,U \in \tau_X \text{ mit } x_0 \in U \wedge f(U \cap S) \subset V \]
+  Ist $X = S$, so heißt $f : X \to Y$ stetige Abbildung, falls $f$ stetig in allen Punkten $x_0 \in X$ ist, d.\,h. $V \in \tau_Y \implies f^{-1}(V) \in \tau_X$.
+\end{defn}
+
+\begin{bem}
+  In metrischen Räumen ist diese Definition äquivalent zur üblichen Folgendefinition.
+\end{bem}
+
+\begin{defn}
+  Sei $(X, d)$ ein metrischer Raum. Eine Folge $(x_k)_{k \in \N}$ heißt \emph{Cauchy-Folge}, falls $d(x_k, x_l) \xrightarrow{k, l \to \infty} 0$. Ein Punkt $x \in X$ heißt \emph{Häufungspunkt} der Folge, falls es eine Teilfolge $(x_{k_i})_{i \in \N}$ gibt mit $x_{k_i} - x \xrightarrow{i \to \infty} 0$.
+\end{defn}
+
+\begin{defn}
+  Ein metrischer Raum $(X, d)$ heißt \emph{vollständig}, falls jede Cauchy-Folge in $X$ einen Häufungspunkt besitzt.
+\end{defn}
+
+\begin{defn}
+  Ein normierter $\K$-Vektorraum heißt \emph{Banachraum}, falls er vollständig bzgl. der induzierten Metrik ist.
+\end{defn}
+
+\begin{defn}
+  Ein Banachraum heißt \emph{Banach-Algebra}, falls er eine Algebra ist mit $\| x \cdot y \|_X \leq \| x \|_x \cdot \| y \|_X$.
+\end{defn}
+
+\begin{defn}
+  Ein \emph{Hilbertraum} ist ein Prähilbertraum, der vollständig bzgl. der vom Skalarprodukt induzierten Norm ist.
+\end{defn}
+
+\begin{bem}
+  Ein normierter Raum ist genau dann ein Prähilbertraum, falls die Parallelogrammidentität
+  \[ \|x+y\|^2 + \|x-y\|^2 = 2 \|x\|^2 + 2 \|y\|^2 \]
+  gilt. Folglich ist ein Banachraum genau dann ein Hilbertraum, falls die Parallelogrammidentität gilt.
+\end{bem}
+
+\begin{defn}
+  Sei $\K^\N \coloneqq \Set{ (x_n)_{n \in \N} }{ \forall\,i \in \N : x_i \in \K }$ die Menge aller Folgen in $\K$. Mit der Fréchet-Metrik
+    \[ \rho(x) \coloneqq \sum_{i = 1}^\infty 2^{-i} \frac{ |x_i| }{ 1 + |x_i| } < 1 \]
+  wird der \emph{Folgenraum} $\K^\N$ zu einem Banachraum.
+\end{defn}
+
+\begin{satz}
+  Sind $(x^k) = (x^k_i)_{i \in \N} \in \K^\N$ und $x = (x_i)_{i \in \N} \in \K^\N$, so gilt
+  \[ \rho(x^k - x) \xrightarrow{k \to \infty} 0 \iff \forall\,i \in \N : x_i^k \xrightarrow{k \to \infty} x_i. \]
+\end{satz}
+
+\begin{defn}
+  Die Norm
+  \begin{align*}
+    \| x \|_{\ell^p} &\coloneqq \left( \sum_{i=1}^\infty |x_i|^p \right)^{\frac{1}{p}} \in [0, \infty], \text{ für } 1 \leq p < \infty \\
+    \| x \|_{\ell^\infty} &\coloneqq \sup_{i \in \N} |x_i| \in [0, \infty]
+  \end{align*}
+  heißt \emph{$\ell^p$-Norm} auf dem Raum $\ell^p(\K) \coloneqq \Set{ x \in \K^\N }{ \| x \|_{\ell^p} < \infty }$.
+\end{defn}
+
+\begin{satz}
+  Der Raum $\ell^p(\K)$ ist vollständig, also ein Banachraum.
+\end{satz}
+
+\begin{bem}
+  Im Fall $p = 2$ wird $\ell^2(\K)$ ein Hilbertraum mit dem Skalarprodukt $\langle x , y \rangle_{\ell^2} \coloneqq \sum_{i = 0}^\infty x_i \overline{y_i}$.
+\end{bem}
+
+\begin{defn}[Vervollständigung]
+  Sei $(X, d)$ ein metrischer Raum. Betrachte die Menge $X^\N$ aller Folgen in $X$ und definiere
+  \[ \tilde{X} \coloneqq \Set{ x \in X^\N }{ x \text{ ist Cauchy-Folge in } X }/\sim \]
+  mit der Äquivalenzrelation
+  \[ x \sim y \text{ in } \tilde{X} \iff d(x_j, y_j) \xrightarrow{j \to \infty} 0. \]
+  Diese Menge wird mit der Metrik
+  \[ \tilde{d}(x, y) \coloneqq \lim_{i \to \infty} d(x_i, y_i) \]
+  zu einem vollständigen metrischen Raum. Die injektive Abbildung $J : X \to \tilde{X}$, welche $x \in X$ auf die konstante Folge $(x)_{i \in \N}$, ist isometrisch, d.\,h. sie erhält. Wir können also $X$ als einen dichten Unterraum von $\tilde{X}$ auffassen. Man nennt $\tilde{X}$ \emph{Vervollständigung} von~$X$.
+\end{defn}
+
+\begin{defn}[\emph{Raum der beschränkten Funktionen}]
+  Sei $S$ eine Menge und $Y$ ein Banachraum über $\K$ mit Norm $y \mapsto |y|$. Dann ist
+  \[ B(S; Y) \coloneqq \Set{ f : S \to Y }{ f(S) \text { ist eine beschränkte Teilmenge von } Y } \]
+  die Menge der beschränkten Funktionen von $B$ nach $Y$. Diese Menge ist ein $\K$-Vektorraum und wird mit der Supremumsnorm $\| f \|_{B(S)} \coloneqq \sup_{x \in S} |f(x)|$ zu einem Banachraum.
+\end{defn}
+
+\begin{satz}
+  Ist $(X, d)$ ein vollständiger metrischer Raum und $Y \subset X$ abgeschlossen, so ist auch $(Y, d)$ ein vollständiger metrischer Raum.
+\end{satz}
+
+\begin{defn}[\emph{Raum stetiger Funktionen auf einem Kompaktum}]
+  Sei $S \subset \R^n$ beschränkt und abgeschlossen (d.\,h. kompakt) und $Y$ ein Banachraum über $\K$ mit Norm $y \mapsto |y|$, so ist
+  \[ \mathcal{C}^0(S; Y) \coloneqq \mathcal{C}(S; Y) \coloneqq \Set{ f : S \to Y }{ f \text{ ist stetig } } \]
+  die Menge der stetigen Funktionen von $S$ nach $Y$. Sie ist ein abgeschlossener Unterraum von $B(S; Y)$ mit der Norm $\| \cdot \|_{\mathcal{C}(S; Y)} = \| \cdot \|_{B(S; Y)}$, also ein Banachraum.
+\end{defn}
+
+\begin{bem}
+  Für $Y = \K$ ist $\mathcal{C}^0(S; \K) = \mathcal{C}(S)$ eine kommutative Banach-Algebra mit dem Produkt $(f \cdot g)(x) \coloneqq f(x) \cdot g(x)$.
+\end{bem}
+
+\begin{defn}
+  Eine Teilmenge $A \subset X$ heißt \emph{präkompakt}, falls es für jedes $\epsilon > 0$ eine Überdeckung von $A$ mit endlich vielen $\epsilon$-Kugeln $A \subset B_{\epsilon}(x_1) \cup ... \cup B_{\epsilon}(x_{n_\epsilon})$ mit $x_1, x_{n_\epsilon} \in X$ gibt.
+\end{defn}
+
+\begin{defn}
+  Eine Teilmenge $A \subset X$ eines metrischen Raumes $(X, d)$ heißt \emph{kompakt}, falls eine der folgenden äquivalenten Bedinungen erfüllt ist:
+  \begin{itemize}
+    \item $A$ ist \emph{überdeckungskompakt}: Für jede Überdeckung $A \subset \bigcup_{i \in I} A_i$ mit $A_i \opn X$,  gibt es eine endl. Teilmenge $J \subset I$ mit $A \subset \bigcup_{i \in J} A_i$.
+    \item $A$ ist \emph{folgenkompakt}: Jede Folge in $A$ besitzt eine konvergente Teilfolge mit Grenzwert in $A$.
+    \item $(A, d|_A)$ ist vollständig und $A$ ist \emph{präkompakt}.
+  \end{itemize}
+\end{defn}
+
+\begin{satz}
+  Sei $(X, d)$ ein metrischer Raum. Dann gilt:
+  \begin{itemize}
+    \item $A$ präkompakt $\implies$ $A$ beschränkt,
+    \item $A$ kompakt $\implies$ $A$ abgeschlossen und präkompakt,
+    \item Falls $X$ vollständig, dann $A$ präkompakt $\iff$ $\overline{A}$ kompakt.
+  \end{itemize}
+\end{satz}
+
+\begin{satz}
+  Sei $A \subset \K^n$. Dann gilt:
+  \begin{itemize}
+    \item $A$ präkompakt $\iff$ $A$ beschränkt,
+    \item $A$ kompakt $\iff$ $A$ abgeschlossen und beschränkt (Heine-Borel).
+  \end{itemize}
+\end{satz}
+
+\begin{satz}
+  Sei $(X, d)$ ein metrischer Raum und $A \subset X$ kompakt. Dann gibt es zu $x \in X$ ein $a \in A$ mit $d(x, a) = \dist(x, A)$.
+\end{satz}
+
+\begin{defn}
+  Sei $S \subset \R^n$ und $(K_n)_{n \in \N}$ eine Folge kompakter Teilmengen des $\R^n$. Dann heißt $(K_n)$ eine \emph{Ausschöpfung} von $S$, falls
+  \begin{itemize}
+    \item $S = \cup_{n \in \N} K_n$,
+    \item $\emptyset \not= K_i \subset K_{i+1} \subset S$ für alle $i \in \N$ und
+    \item für alle $x \in S$ gibt es ein $\delta > 0$ und $i \in \N$, sodass $B_\delta(x) \subset K_i$.
+  \end{itemize}
+\end{defn}
+
+\begin{bem}
+  Zu $S \opn \R^n$ und $S \cls \R^n$ existiert eine Ausschöpfung.
+\end{bem}
+
+\begin{defn}[\emph{Raum stetiger Funktionen auf Menge mit Ausschöpfung}]
+  Es sei $S \subset \R^n$ so, dass eine Ausschöpfung $(K_i)_{i \in \N}$ von $S$ existiert und $Y$ ein Banachraum. Dann bildet die Menge aller stetigen Funktionen
+  \[ C^0(S; Y) \coloneqq \Set{ f : S \to Y }{ f \text{ ist stetig auf } S } \]
+  einen $K$-Vektorraum und wird mit der Fréchet-Norm
+  \[ \varrho(f) \coloneqq \sum_{i \in \N} 2^{-i} \frac{ \| f \|_{C^0(K_i)} }{ 1 + \| f \|_{C^0(K_i)} } \]
+  zu einem vollständigen metrischen Raum.
+\end{defn}
+
+\begin{bem}
+  \begin{itemize}
+    \item Die von dieser Metrik erzeugte Topologie ist unabhängig von der Wahl der Ausschöpfung.
+    \item Ist $S \subset \R^n$ kompakt, so stimmt die Topologie mit der von $\| \cdot \|_{B(s)}$ überein.
+  \end{itemize}
+\end{bem}
+
+\begin{defn}
+  Sei $S \subset \R^n$ und $Y$ ein Banachraum. Für $f : S \to Y$ heißt
+  \[ \supp f \coloneqq \Set{ x \in S }{ f(x) \not= 0 } \]
+  \emph{Träger} (engl. support) von $f$.
+\end{defn}
+
+\begin{defn}
+  Sei $S \subset \R^n$ und $Y$ ein Banachraum. Dann ist
+  \[ \mathcal{C}_0^0(S; Y) \coloneqq \Set{ f \in \mathcal{C}^0(S; Y) }{ \supp f \text{ ist kompakt in } S } \]
+  die Menge der stetigen Fktn. mit kompaktem Träger von $S$ nach $Y$.
+\end{defn}
+
+\begin{defn}[\emph{Raum differenzierbarer Funktionen}]
+  Sei $\Omega \subset \R^n$ offen und beschränkt und $m \in \N$. Dann ist die Menge der differenzierbaren Funktionen von $\Omega$ nach $Y$
+  \begin{align*}
+    \mathcal{C}^m(\overline\Omega, Y) \coloneqq \{ f : \Omega \to Y \,|\, & f \text{ ist $m$-mal stetig differenzierbar in $\Omega$ } \\
+    & \text{ und für $k \leq m$ und } s_1, ..., s_k \in \{ 1, ..., n \} \\
+    & \text{ ist $\partial_{s_1} ... \partial_{s_k} f$ auf $\overline\Omega$ stetig fortsetzbar } \}
+  \end{align*}
+  ein Vektorraum und mit folgender Norm ein Banachraum:
+  \[ \| f \|_{\mathcal{C}^m(\overline\Omega)} = \sum_{|s| \leq m} \| \partial^s \|_{\mathcal{C}^0(\overline\Omega)} \]
+\end{defn}
+
+\begin{bem}
+  In obiger Norm wird die Summe über alle $k$-fache partielle Ableitungen mit $k \leq m$ gebildet.
+\end{bem}
+
+% TODO: Hölder-Räume
+% TODO: Unendlich differenzierbare Funktionen
+% TODO: Lebesgue-Räume
+% TODO: Sobolev-Räume
+% TODO: Faltungen und Dirac-Folge
+% TODO: Neumann-Reihe
+
+\begin{satz}
+  Sei $X$ ein normierter Raum und $Y \subset X$ ein abgeschlossener echter Teilraum. Für $0 < \Theta < 1$ (falls $X$ Hilbertraum, geht auch $\Theta = 1$) gibt es ein $x_{\Theta} \in X$ mit
+  \[ \|x_0\| = 1 \quad \text{und} \Theta \leq \dist(x_{\Theta}, Y) \leq 1. \]
+\end{satz}
+
+\begin{satz}
+  Für jeden normierten Raum $X$ gilt:
+  \[ \overline{B_1(0)} \text{ kompakt } \iff \dim(X) < \infty. \]
+\end{satz}
+
+\begin{defn}
+  Sei $S \subset \R^n$ kompakt, $Y$ ein Banachraum und $A \subset \mathcal{C}^0(S, Y)$. Dann heißt $A$ \emph{gleichgradig stetig}, falls
+  \[ \sup_{f \in A} \left| f(x) - f(y) \right| \xrightarrow{\left| x - y \right| \to 0} 0. \]
+\end{defn}
+
+\begin{defn}[Arzelà-Ascoli]
+  Sei $S \subset \R^n$ kompakt, $Y$ ein endlichdimensionaler Banachraum und $A \subset \mathcal{C}^0(S, Y)$. Dann gilt
+  \[ A \text{ präkompakt } \iff A \text{ ist beschränkt und gleichgradig stetig. } \]
+\end{defn}
+
+\begin{satz}[Fundamentallemma der Variationsrechnung]
+  Sei $\Omega \subset \R^n$ und $Y$ ein Banachraum. Für $g \in \Leb^1(\Omega, Y)$ sind dann äquivalent:
+  \begin{itemize}
+    \item Für alle $\xi \in \mathcal{C}_0^\infty$ gilt $\Int{\Omega}{}{(\xi \cdot g)}{x} = 0$.
+    \item Für alle beschränkten $E \in \Bor(\Omega)$ mit $\overline{E} \subset \Omega$ gilt $\Int{E}{}{g}{x} = 0$.
+    \item Es gilt $g \fue= 0$ in $\Omega$.
+  \end{itemize}
+\end{satz}
+
+\begin{satz}
+  Sei $T : X \to Y$ eine lineare Abbildung zwischen Vektorräumen $X$ und $Y$. Dann sind äquivalent:
+  \begin{itemize}
+    \begin{multicols}{3}
+      \item $T$ ist stetig.
+      \item $T$ ist stetig in $0$.
+      \item $\sup_{\|x\| \leq 1} \|Tx\| < \infty$.
+    \end{multicols}
+    \item $\exists\,C > 0 : \forall x \in X : \|Tx\| \leq C \cdot \|x\|$.
+  \end{itemize}
+\end{satz}
+
+\begin{defn}
+  Seien $X, Y$ Vektorräume mit einer Topologie. Dann ist
+  \[ \mathcal{L}(X, Y) = \Set{ T : X \to Y }{ X \text{ ist linear und stetig } } \]
+  die Menge aller \emph{linearen Operatoren} zwischen $X$ und $Y$. Falls die Stetigkeit nicht nur topologisch, sondern bezüglich einer Norm gilt, so redet man von \emph{beschränkten Operatoren}.
+\end{defn}
+
+\begin{satz}
+  Seien $X \not= \{0\}$, $Y \not= \{0\}$ Banachräume und $T, S \in \mathcal{L}(X, Y)$. Dann gilt: Falls $T$ invertierbar ist und $\|S-T\| < \tfrac{1}{\|T^{-1}\|}$, dann ist auch $S$ invertierbar.
+\end{satz}
+
+\begin{bem}
+  Die Menge aller invertierbaren Operatoren in $\mathcal{L}(X, Y)$ ist somit eine offene Teilmenge.
+\end{bem}
+
+\begin{defn}
+  Seien $X$ und $Y$ Banachräume über $\K$. Eine lineare Abbildung $T : X \to Y$ heißt \emph{kompakter (linearer) Operator}, falls eine der folgenden äquivalenten Bedingungen erfüllt ist:
+  \begin{itemize}
+    \begin{multicols}{2}
+      \item $\overline{T(B_1(0))}$ ist kompakt.
+      \item $T(B_1(0))$ ist präkompakt.
+    \end{multicols}
+    \item Für alle beschränkten $M \subset X$ ist $T(M) \subset Y$ präkompakt.
+    \item Für jede beschränkte Folge $(x_n)_{n \in \N}$ in $X$ besitzt $(T x_n)_{n \in \N}$ eine in $Y$ konvergente Teilfolge.
+  \end{itemize}
+\end{defn}
+
+\begin{defn}
+  Sei $X$ ein Vektorraum über $\K$. Dann ist $X' \coloneqq \mathcal{L}(X, \K)$ der \emph{Dualraum} von $X$. Elemente von $X'$ werden \emph{lineare Funktionale} genannt.
+  % Norm?
+\end{defn}
+
+\begin{satz}[Rieszscher Darstellungssatz]
+  Ist $X$ ein Hilbertraum, so ist
+  \begin{align*}
+    J : X \to X', \quad x \mapsto y \mapsto (y, x)_X
+  \end{align*}
+  ein isometrischer konjugiert linearer Isomorphismus.
+\end{satz}
+
+\begin{satz}[Lax-Milgram]
+  Sei $X$ ein Hilbertraum über $\K$ und $a : X \times X \to \K$ sesquilinear. Es gebe Konstanten $c_0$ und $C_0$ mit $0 < c_0 \leq C_0 < \infty$, sodass für alle $x, y \in X$ gilt:
+  \begin{itemize}
+    \item $\left| a(x, y) \right| \leq C_0 \cdot \|x\| \cdot \|y\|$ {\raggedright (Stetigkeit)}
+    \item $Re a(x, x) \geq c_0 \cdot \|x\|^2$ {\raggedright (Koerzivität)}
+  \end{itemize}
+  Dann existiert genau eine Abbildung $A : X \to X$ mit
+  \[ a(y, x) = (y, Ax) \text{ für alle $x, y \in X$. } \]
+  Außerdem gilt: $A \in \mathcal{L}(X)$ ist ein invertierbarer Operator mit
+  \[ \|A\| \leq C_0 \quad \text{und} \quad \|A^{-1}\| \leq \tfrac{1}{c_0}. \]
+\end{satz}
+
+% Fortsetzungssatz?
+
+\begin{satz}(Hahn-Banach)
+  Sei $X$ ein $\R$-Vektorraum, $Y \subset X$ ein Unterraum, $p : X \to \R$ linear und $f : Y \to \R$ linear, sodass $f(x) \leq p(x)$ für alle $x \in Y$. Dann existiert eine lineare Abbildung $F : X \to \R$ mit $f = F|_Y \text{ und } F \leq p$.
+\end{satz}
+
+% Korollar
+\begin{satz}
+  Sei $(X, \|\cdot\|_X)$ ein normierter $\K$-Vektorraum und $(Y, \|\cdot\|_Y)$ ein Unterraum. Dann gibt es zu $y \in Y'$ ein $x' \in X'$ mit $x'|_Y = y'$ und $\|x'\|_{X'} = \|y'\|_{Y'}$.
+\end{satz}
+
+\begin{satz}
+  Sei $Y$ abgeschlossener Unterraum des normierten Raumes $X$ und $x_0 \in X \setminus Y$. Dann gibt es ein $x' \in X'$ mit $x'|_Y = 0$, $\|x'\|_{X'} = 1$, $\langle x', x_0 \rangle = \dist(x_0, Y)$.
+\end{satz}
+
+\begin{bem}
+  Dann gibt es auch ein $x' \in X'$ mit $x'|_Y = 0$,
+  \[ \|x'\|_{X'} = (\dist(x_0, Y))^{-1} \quad \text{und} \quad \langle x', x_0 \rangle = 1. \]
+\end{bem}
+
+% Bemerkung: Der Satz kann als Verallgemeinerung des Projektionssatzes für Hilberträume im linearen Fall aufgefasst werden: Ist $X$ Hilbertraum, so definiere $\langle x', x \rangle_{X' \times X} = (x | \frac{x_0 - Px_0}{\|x_0 - Px_0\|_X})_X$, wobei $P$ orthogonale Projektion auf $Y$ sei. Dann ist $x' = 0$ auf $Y$ und daher $\langle x', x_0 \rangle_{X' \times X} = \langle x', x_0 - Px_0 \rangle = \| x_0 - Px_0 \|_X$. Außerdem ist $\langle x', x \rangle \leq \|x\|_X$. Daher hat $x'$ die Eigenschaft wie im Satz.
+
+% Korollar
+\begin{satz}
+  Seien $X$ normierter Raum und $x_0 \in X$. Dann gilt
+  \begin{itemize}
+    \item  Ist $x_0 \not= 0$, so gibt es $x_0' \in X'$ mit $\|x_0'\|_{X'} = 1$ und $\langle x_0', x_0 \rangle_{X' \times X} = \|x_0\|_X$.
+    \item Ist $\langle x', x_0 \rangle_{X' \times X} = 0$ für alle $x' \in X'$, so ist $x_0 = 0$.
+    \item Durch $Tx' = \langle x', x_0 \rangle_{X' \times X}$ für $x' \in X'$ ist ein $T \in \mathcal{L}(X', \K) = X''$, dem Bidualraum, definiert mit $\|T\| = \|x_0\|_X$.
+  \end{itemize}
+\end{satz}
+
+
+% 5. Prinzip der gleichmäßigen Beschränktheit
+
+\begin{satz}[Baire'scher Kategoriensatz]
+  Es sei $X \not= \emptyset$ ein vollständiger metrischer Raum und $X = \bigcup_{k \in \N} A_k$ mit abgeschlossenen Mengen $A_k \subset X$. Dann gibt es ein $k_0 \in \N$ mit $\mathrm{int}(A_{k_0}) \not= \emptyset$.
+\end{satz}
+
+% Korollar
+\begin{satz}
+  Jede Basis eines unendlichdimesinoalen Banachraumes ist überabzählbar.
+\end{satz}
+
+\begin{satz}[Prinzip der gleichmäßigen Beschränktheit]
+  Es sei $X$ ein nichtleerer vollständiger metrischer Raum und $Y$ ein normierter Raum. Gegeben sei eine Menge von Funktionen $F \subset \mathcal{C}^0(X, Y)$ mit $\forall x \in X : \sup_{f \in F} \|f(x)\|_Y < \infty$. Dann gibt es ein $x_0 \in X$ und ein $\epsilon > 0$, sodass $\sup_{B_\epsilon(x_0)} \sup_{f \in F} \|f(x)\|_Y < \infty$.
+\end{satz}
+
+\begin{satz}[Banach-Steinhaus]
+  Es sei $X$ ein Banachraum und $Y$ ein normierter Raum, $\mathcal{T} \subset \Leb(X, Y)$ mit $\forall x \in X : \sup_{T \in \mathcal{T}} \|Tx\|_Y < \infty$. DAnn ist $\mathcal{T}$ eine beschränkte Menge in $\Leb(X, Y)$, d.\,h. $\sup_{T \in \mathcal{T}} \|T\|_{\mathcal{L}(X, Y)}$.
+\end{satz}
+
+\begin{defn}
+  Seien $X$ und $Y$ topologische Räume, so heißt eine Abbildung $f : X \to Y$ \emph{offen}, falls für alle offenen $U \opn X$ das Bild $f(U) \opn Y$ offen ist.
+\end{defn}
+
+\begin{bem}
+  Ist $f$ bijektiv, so ist $f$ genau dann offen, wenn $f^{-1}$ stetig ist. Sind $X, Y$ normierte Räume und ist $T : X \to Y$ linear, so gilt: $T$ ist offen $\iff$ $\exists \delta > 0 : B_{\delta}(0) \subset T(B_1(0))$.
+\end{bem}
+
+\begin{satz}[von der offenen Abbildung]
+  Seien $X, Y$ Banachräume und $T \in \mathcal{L}(X, Y)$. Dann ist $T$ genau dann surjektiv, wenn $T$ offen ist.
+\end{satz}
+
+\begin{satz}[von der inversen Abbildung]
+  Seien $X, Y$ Banachräume und $T \in \mathcal{L}(X, Y)$ bijektiv, so ist $T^{-1}$ stetig, also $T^{-1} \in \mathcal{L}(Y, X)$.
+\end{satz}
+
+\begin{satz}[vom abgeschlossenen Graphen]
+  Seien $X, Y$ Banachräume und $T : X \to Y$ linear. Dann ist $\mathrm{Graph}(T) = \Set{ (x, Tx) }{ x \in X }$ genau dann abgeschlossen, wenn $T$ stetig ist. Dabei ist $\mathrm{Graph}(T) \subset X \times Y$ mit der \emph{Graphennorm} $\|(x,y)\|_{X \times Y} = \|x\|_X + \|y\|_Y$.
+\end{satz}
+
+\end{document}

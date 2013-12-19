@@ -1,0 +1,1076 @@
+\documentclass{cheat-sheet}
+
+\pdfinfo{
+  /Title (Zusammenfassung Analysis 2)
+  /Author (Tim Baumann)
+}
+
+% Ober- und Unterintegral, siehe
+% http://tex.stackexchange.com/questions/44237/lower-and-upper-riemann-integrals
+\def\upint{\mathchoice%
+    {\mkern13mu\overline{\vphantom{\intop}\mkern7mu}\mkern-20mu}%
+    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+    {\mkern7mu\overline{\vphantom{\intop}\mkern7mu}\mkern-14mu}%
+  \int}
+\def\lowint{\mkern3mu\underline{\vphantom{\intop}\mkern7mu}\mkern-10mu\int}
+\newcommand{\Lowint}[4]{{\textstyle \lowint\limits_{#1}^{#2}} #3 \,\d #4}
+\newcommand{\Lowintabdx}[1]{\Lowint{a}{b}{#1}{x}}
+\newcommand{\Upint}[4]{{\textstyle \upint\limits_{#1}^{#2}} #3 \,\d #4}
+\newcommand{\Upintabdx}[1]{\Upint{a}{b}{#1}{x}}
+
+
+\begin{document}
+
+\maketitle{Zusammenfassung Analysis \rom{2}}
+
+\begin{nota}
+Im Folgenden seien $a, b \in \R$ mit $a < b$ und $I, J \subset \R$ offene Intervalle.
+\end{nota}
+
+\section{Integration}
+
+\begin{defn}
+Eine \emph{Zerlegung} eines Intervalls $[a, b] \subset \R, a < b$ ist eine Menge $Z = \{ a = x_{0} < x_{1} < ... < x_{n} = b \}$. Die Zahl $\mu_{Z} \coloneqq \max\Set{x_{j} - x_{j-1}}{j \in \{1, ..., n\}}$ heißt \emph{Feinheit} der Zerlegung $Z$. Wenn $Z$, $Z'$ zwei Zerlegungen von $[a, b]$ sind mit $Z' \subset Z$, dann heißt $Z'$ Verfeinerung von $Z$.
+\end{defn}
+
+\begin{defn}
+Eine Funktion $\phi : [a, b] \to \R$ heißt \emph{Treppenfunktion} bezüglich einer Zerlegung $Z = \{ x_{0} < ... < x_{n} \}$ von $[a, b]$, wenn für alle $j \in \{ 1, ..., n \}$ die Funktion $\phi$ auf dem offenen Intervall $(x_{j-1}, x_{j})$ konstant ist. Die Menge aller Treppenfunktionen (bezüglich irgendeiner Zerlegung) eines Intervalls $[a, b]$ wird mit $\mathcal{T}_{[a, b]}$ bezeichnet.
+\end{defn}
+
+\begin{satz}
+$\mathcal{T}{[a, b]}$ ist ein UVR des reellen VR aller reellwertigen Funktionen auf $[a, b]$.
+\end{satz}
+
+\begin{defn}
+Sei $\phi : [a, b] \to \R$ eine Treppenfunktion bezüglich einer Zerlegung $Z = \{ x_0 < ... < x_n \}$. Dann heißt
+\[ \Intabdx{\phi(x)} \coloneqq \sum_{j = 1}^{n} \phi\left(\tfrac{x_{j-1} + x_j}{2}\right)(x_j - x_{j-1}) \]
+\emph{Integral} von $\phi$.
+\end{defn}
+
+\begin{bem}
+Obige Definition ist unabhängig von der gewählten Zerlegung $Z$.
+\end{bem}
+
+\begin{satz}
+Das Integral von Treppenfunktionen ist linear und monoton.
+\end{satz}
+
+\begin{defn}
+Sei $f : [a, b] \to \R$ beschränkt. Dann heißen
+
+\begin{align*}
+  \Upintabdx{f(x)} &\coloneqq \inf\left\{ \Intabdx{\phi(x)} : \phi \in \mathcal{T}{[a, b]}, \phi \ge f \right\} \\
+  \Lowintabdx{f(x)} &\coloneqq \sup\left\{ \Intabdx{\phi(x)} : \phi \in \mathcal{T}{[a, b]}, \phi \le f \right\}
+\end{align*}
+\emph{Oberintegral} bzw. \emph{Unterintegral} von $f$.
+\end{defn}
+
+\begin{bem}
+Da wir in der Definition vorraussetzen, dass die Funktion $f$ beschränkt ist, existieren Ober- und Unterintegral im eigentlichen Sinne.
+Für Treppenfunktionen sind Oberintegral und Unterintegral gleich dem Integral für Treppenfunktionen.
+Das Oberintegral ist immer größer gleich dem Unterintegral.
+\end{bem}
+
+\begin{satz}
+Für $f, f_{1}, f_{2} : [a, b] \to \R$ beschränkt und $\lambda \ge 0$ gilt
+
+\begin{enumerate}
+  \item $\Lowintabdx{f(x)} = - \Upintabdx{-f(x)}$
+  \item $\Upintabdx{(f_1 + f_2)(x)} \le \Upintabdx{f_1(x)}  + \Upintabdx{f_2(x)}$
+  \item $\Lowintabdx{(f_1 + f_2)(x)} \ge \Lowintabdx{f_1(x)}  + \Lowintabdx{f_2(x)}$
+  \item $\Upintabdx{(\lambda f)(x)} = \lambda \Upintabdx{f(x)}$
+  \item $\Lowintabdx{(\lambda f)(x)} = \lambda \Lowintabdx{f(x)}$
+\end{enumerate}
+\end{satz}
+
+\begin{defn}
+Eine Funktion $f : [a, b] \to \R$ heißt genau dann \emph{Riemann-integrierbar}, wenn gilt:
+\[ \Lowintabdx{f(x)} = \Upintabdx{f(x)}. \]
+\end{defn}
+
+\begin{bem}
+Für Treppenfunktionen stimmt das Riemann-Integral mit dem vorher definierten Integral für Treppenfunktionen überein.
+\end{bem}
+
+\begin{satz}
+Die Menge aller Riemann-integrierbaren Funktionen auf einem Intervall $[a, b]$ ist ein UVR des $\R$-VR aller Funktionen $f : [a, b] \to \R$ (genannt $\mathcal{R}_{[a, b]}$) und das Riemann-Integral verhält sich linear, dh. es gilt für alle $f, g : \mathcal{R}_{[a, b]}$ und $\lambda \in \R$:
+
+\begin{enumerate}
+  \item $\Intabdx{(f + g)(x)} = \Intabdx{f(x)} + \Intabdx{g(x)}$
+  \item $\Intabdx{(\lambda f)(x)} = \lambda \Intabdx{f(x)}$
+\end{enumerate}
+\end{satz}
+
+\begin{satz}
+Das Riemann-Integral verhält sich monoton.
+\end{satz}
+
+% TODO: 5.16
+
+\begin{satz}
+Alle monotonen und alle stetigen Funktionen $f : [a, b] \to \R$ sind Riemann-integrierbar.
+\end{satz}
+
+\begin{satz}
+Seien $f, g : R_{[a, b]}$, dann auch Riemann-integrierbar:
+
+\begin{enumerate}
+  \item $f_{+} : [a, b] \to \R,\ x \mapsto \max\{f(x), 0\}$
+  \item $f_{-} : [a, b] \to \R,\ x \mapsto \max\{-f(x), 0\}$
+  \item $|f|^{p} : [a, b] \to \R,\ x \mapsto |f(x)|^p, \text{ mit } p \ge 1$
+  \item $fg : [a, b] \to \R,\ x \mapsto f(x)g(x)$
+\end{enumerate}
+\end{satz}
+
+\begin{satz}[Erster MWS für das Riemann-Integral]
+  Seien $f, g : [a, b] \to \R$ stetig und $g \ge 0$. Dann gibt es ein $x_0 \in [a, b]$, sodass gilt:
+  \[ \Intabdx{f(x)g(x)} = f(x_0) \Intabdx{g(x)} \]
+\end{satz}
+
+\begin{defn}
+Sei $f : [a, b] \to \R$ beschränkt und $Z = \{ x_0 < ... < x_n \}$ eine Zerlegung von $[a, b]$. Dann heißt
+
+\begin{enumerate}
+  \item
+    $R(f, Z, \xi_1, ..., \xi_n) \coloneqq \sum_{j=1}^{n}\,f(\xi_j)(x_j - x_{j-1})$\\
+    \emph{Riemannsche Summe} von $f$ bzgl. $Z$ und den Stützstellen $\xi_j \in [x_{j-1}, x_j]$ für $j \in \{ 1, ..., n \}$.
+  \item
+    $O(f, Z) \coloneqq \sum_{j=1}^{n}\,(\sup\Set{f(x)}{x \in [x_{j-1}, x_j]})(x_j - x_{j-1})$\\
+    \emph{(Darbouxsche) Obersumme} von $f$ bzgl. $Z$
+  \item
+    $U(f, Z) \coloneqq \sum_{j=1}^{n}\,(\inf\Set{f(x)}{x \in [x_{j-1}, x_j]})(x_j - x_{j-1})$\\
+    \emph{(Darbouxsche) Untersumme} von $f$ bzgl. $Z$
+\end{enumerate}
+\end{defn}
+
+\begin{bem}
+Sei $Z'$ eine Verfeinerung von $Z$, dann gilt $O(f, Z') \le O(f, Z)$ und $U(f, Z') \ge U(f, Z)$.
+\end{bem}
+
+\begin{satz}
+Seien $Z_1$, und $Z_2$ Zerlegungen von $[a, b]$, dann gilt $U(f, Z_1) \le O(f, Z_2)$.
+\end{satz}
+
+\begin{satz}[Charakterisierung des Riemann-Integrals]
+Für eine beschränkte Funktion $f : [a, b] \to \R$ sind folgende vier Aussagen äquivalent:
+
+\begin{enumerate}
+  \item $f$ ist Riemann-integrierbar.
+  \item Für alle $\epsilon > 0$ gibt es eine Zerlegung $Z$ von $[a, b]$, sodass
+    \[ O(f, Z) - U(f, Z) < \epsilon. \]
+  \item Es gibt eine Zahl $\iota \in \R$ mit folgender Eigenschaft: Für alle $\epsilon > 0$ gibt es ein $\delta > 0$, sodass für jede Zerlegung $Z = \{ x_0 < ... < x_n \}$ von $[a, b]$ der Feinheit $\mu_Z \le \delta$ und jede Wahl von Stützstellen $\xi_1, ..., \xi_n$ gilt:
+  \[ |\iota - R(f, Z, \xi_1, ..., \xi_n)| < \epsilon \]
+  \item Es gibt eine Zahl $\iota \in \R$ mit folgender Eigenschaft: Für alle $\epsilon > 0$ gibt es eine Zerlegung $\widetilde{Z}_{\epsilon} = \{ \widetilde{x}_0 < ... < \widetilde{x}_m \}$ von $[a, b]$, sodass für jede Verfeinerung $Z = \{ x_1 < ... < x_n \}$ von $\widetilde{Z}_{\epsilon}$ und jede Wahl von Stützstellen $\xi_1, ..., \xi_n$ bzgl. $Z$ gilt:
+  \[ | \iota - R(f, Z, \xi_1, ..., \xi_n) | \le \epsilon. \]
+\end{enumerate}
+\end{satz}
+
+% TODO: Bemerkung danach
+% TODO: 5.29
+
+\begin{satz}
+Sei $f : [a, b] \to \R$ und $c \in (a, b)$. Dann ist $f$ genau dann Riemann-integrierbar, wenn $f\mid_{[a, c]}$ und $f\mid_{[c, b]}$ Riemann-integrierbar sind und es gilt in diesem Fall
+
+\[\Intabdx{f(x)} = \Intdx{a}{c}{f(x)} + \Intdx{c}{b}{f(x)} \]
+\end{satz}
+
+% TODO: Definition Integrationsgrenzen
+% TODO: p-Norm (5.32)
+
+\begin{satz}[Dreiecksungleichung für das Riemann-Integral]
+Für $f, g \in \mathcal{R}_{[a, b]}$ gilt $\Intabdx{|f(x) + g(x)|} \le \Intabdx{|f(x)|} + \Intabdx{|g(x)|}$.
+\end{satz}
+
+\begin{satz}[Vertauschung von Integration und Limes bei glm. Konvergenz]
+Sei $f_n : [a, b] \to \R, n \in \N$ eine Folge Riemann-integrierbarer Funktionen, welche gleichmäßig gegen $f : [a, b] \to \R$ konvergiert. Dann ist $f$ Riemann-integrierbar und es gilt
+
+\[ \Intabdx{f(x)} = \lim_{n \to \infty} \left(\Intabdx{f_n(x)} \right) \]
+\end{satz}
+
+\begin{defn}
+Eine differenzierbare Funktion $F: I \to \R$ heißt \emph{Stammfunktion} von $f$, wenn die Ableitung von $F$ gerade $f$ ist.
+\end{defn}
+
+\begin{bem}
+Zwei Stammfunktionen einer Funktion $f$ unterscheiden sich nur durch eine additive Konstante.
+\end{bem}
+
+\begin{satz}
+Sei $f : I \to \R$ stetig. Dann ist die Funktion
+\[ F : I \to \R,\ x \mapsto \Int{a}{x}{f(t)}{t} \]
+eine Stammfunktion von $f$.
+\end{satz}
+
+\begin{satz}[\emph{Hauptsatz der Differential- und Integralrechnung}]
+Sei $f : I \to \R$ stetig und $F$ eine Stammfunktion von $f$. Dann gilt für alle $x, y \in I$
+\[ \Intdx{x}{y}{f(x)} = F(y) - F(x) \]
+\end{satz}
+
+\begin{satz}[Vertauschung von Grenzwerten und Ableitungen]
+Sei $f_n : [a, b] \to \R$ eine Folge stetig differenzierbarer Funktionen, welche pktw. gegen $f : [a, b] \to \R$ konvergiert. Wenn die Folge der Ableitungen $f_n'$ gleichmäßig gegen eine Funktion $f^{*} : [a, b] \to \R$ konvergiert, dann ist auch $f$ differenzierbar und es gilt $f' = f^{*}$.
+\end{satz}
+
+\center
+\begin{tabular}{ | c | c | }
+  \hline
+  Funktion $f(x)$ & Stammfunktion $F(x)$ \\ \hline \hline
+  $x^n, n \in \Z\backslash\{-1\}$ & $\tfrac{1}{n+1}x^{n+1}$ \\ \hline
+  $\tfrac{1}{x}$ & $\ln(|x|)$ \\ \hline
+  $\sin(x)$ & $-\cos(x)$ \\ \hline
+  $\cos(x)$ & $\sin(x)$ \\ \hline
+  $\exp(ax)$ & $\tfrac{1}{a}\exp(ax)$ \\ \hline
+  $\tfrac{1}{1 + x^2}$ & $\arctan(x)$ \\ \hline
+  $x^n \ln(x)$ & $\tfrac{x^{n+1}}{n+1}(\ln x - \tfrac{1}{n+1}),\ n \ge 1$ \\ \hline
+  $\log_a x$ & $\tfrac{1}{\ln a}(x \ln x - x)$ \\ \hline
+\end{tabular}
+
+\begin{satz}[\emph{Substitutionsregel}]
+Sei $f : I \to \R$ stetig und sei $g : J \to I$ stetig differenzierbar. Dann gilt für $a, b \in J$:
+%\[ \Intab{f(g(t))g'(t)}{t} = \Int{g(a)}{g(b)}{f(x)} \]
+\end{satz}
+
+\begin{satz}[\emph{Partielle Integration}]
+Seien $f, g : [a, b] \to \R$ stetig differenzierbar. Dann gilt für $a, b \in I$:
+\[ \Intabdx{f(x)g'(x)} = [f(x)g(x)]_a^b - \Intabdx{f'(x)g(x)} \]
+\end{satz}
+
+\begin{defn}[Riemann-Integral für komplexwertige Funktionen]
+Eine komplexwertige Funktion $f : [a, b] \to \C$ heißt Riemann-integrierbar, wenn ihr Realteil $\Re(f)$ und ihr Imaginärteil $\Im(f)$ Riemann-integrierbar sind. Wir setzen
+\[ \Intabdx{f(x)} = \Intabdx{\Re(f)} + i \Intabdx{\Im(f)}. \]
+\end{defn}
+
+\begin{defn}[Uneigentliche Integrale]
+\begin{itemize}
+  \item Sei $a < b$ mit $b \in \R \cup \{ \infty \}$ und $f : [a, b) \to \R$ eine Funktion, sodass $f\mid_[a, R]$ für alle $R \in (a, b)$ Riemann-integrierbar ist. Wir setzen
+  \[ \Intabdx{f(x)} \coloneqq \lim_{R \uparrow b} \Intdx{a}{R}{f(x)} \]
+  falls der Grenzwert existiert.
+  \item Sei $a < b$ mit $a \in \R \cup \{ -\infty \}$ und $f : (a, b] \to \R$ eine Funktion, sodass $f\mid_[R, b]$ für alle $R \in (a, b)$ Riemann-integrierbar ist. Wir setzen
+  \[ \Intabdx{f(x)} \coloneqq \lim_{R \downarrow a} \Intdx{R}{b}{f(x)} \]
+  falls der Grenzwert existiert.
+  \item Sei $a < b$ mit $a \in \R \cup \{ -\infty \}$ und $b \in \R \cup \{ \infty \}$ und $c \in (a, b)$. Sei $f : (a, b) \to \R$ eine Funktion, sodass für alle $a < R_1 < c < R_2 < b$ die $f\mid_{[R_1, c]}$ und $f\mid_{[c, R_2]}$ Riemann-integrierbar sind. Wir setzen
+  \[ \Intabdx{f(x)} = \lim_{R_1 \downarrow a} \Intdx{R_1}{c}{f(x)} + \lim_{R_2 \uparrow b} \Intdx{c}{R_2}{f(x)} \]
+  falls beide Grenzwerte existieren.
+\end{itemize}
+\end{defn}
+
+% TODO: Integralvergleichskriterium
+
+\begin{defn}
+Für zwei Funktionen $f, g : [a, b] \to \R$, eine Zerlegung $Z = \{ a = x_0 < ... < x_n = b \}$ von $[a, b]$ und Stützstellen $\xi_1, ..., \xi_n$ bzgl. $Z$ heißt die Summe
+\[ S(f, \d g, Z, \xi_1, ..., \xi_n) \coloneqq \sum_{j=1}^{n}\!f(\xi_j)(g(\xi_j) - g(\xi_{j-1})) \]
+\emph{Riemann-Stieltjes-Summe} von $f$ bzgl. $g$ und der Zerlegung $Z$ mit Stützstellen $\xi_1, ..., \xi_n$.
+\end{defn}
+
+\begin{defn}
+Seien $f, g : [a, b] \to \R$. Die Funktion $f$ heißt \emph{Riemann-Stieltjes-integrierbar (RS-integrierbar)} bzgl. der \emph{Gewichtsfunktion} $g$, wenn gilt:
+
+\[ \exists\,\iota : \forall\,\epsilon > 0 : \exists\,\text{Zerlegung $Z$ von $[a, b]$} : \forall\,Z' \subset Z \text{ Verfeinerung} : \]
+\[ |\iota - S(f, \d g, Z, \xi_1, ..., \xi_n)| \le \epsilon \]
+
+Dieses (eindeutig bestimmte) $\iota$ heißt \emph{Riemann-Stieltjes-Integral (RS-Integral)} von $f$ bzgl. $g$.
+\end{defn}
+
+\begin{bem}
+Für die Identitätsfunktion $g(x) = x$ stimmt das Riemann-Stieltjes-Integral mit dem Riemann-Integral überein.
+\end{bem}
+
+% TODO: 5.59 Cauchy-Kriterium für Riemann-Stieltjes-Integrierbarkeit
+
+\begin{satz}[Linearität des RS-Integrals]
+\begin{itemize}
+  \item Seien $f_1, f_2 : [a, b] \to \R$ bzgl. $g : [a, b] \to \R$ RS-integrierbar und $\lambda_1, \lambda_2 \in \R$. Dann ist auch $(\lambda_1 f_1 + \lambda_2 f_2)$ bzgl. $g$ RS-integrierbar mit
+  \[ \Intab{(\lambda_1 f_1 + \lambda_2 f_2)(x)}{g(x)} = \lambda_1 \Intab{f_1(x)}{g(x)} + \lambda_2 \Intab{f_2(x)}{g(x)} \]
+  \item Sei $f : [a, b] \to \R$ bzgl. den Funktionen $g_1, g_2 : [a, b] \to \R$ RS-integrierbar und $\lambda_1, \lambda_2 \in \R$. Dann ist $f$ auch bzgl. $(\lambda_1 g_1 + \lambda_2 g_2)$ RS-integrierbar mit
+  \[ \Intab{f(x)}{(\lambda_1 g_1 + \lambda_2 g_2)} = \lambda_1 \Intab{f(x)}{g_1(x)} + \lambda_2 \Intab{f(x)}{g_2(x)} \]
+\end{itemize}
+\end{satz}
+
+\begin{satz}
+Seien $f, g : [a, b] \to \R$ und $c \in (a, b)$, dann ist $f$ genau dann bzgl. $g$ RS-integrierbar, wenn die Funktionen $f\mid_{[a, c]}$ bzgl $g\mid_{[a, c]}$ und $f\mid_{[c, b]}$ bzgl $g\mid_{[c, b]}$ RS-integrierbar sind und es gilt
+\[ \Intab{f(x)}{g(x)} = \Int{a}{c}{f(x)}{g(x)} + \Int{c}{b}{f(x)}{g(x)}. \]
+\end{satz}
+
+\begin{satz}[Partielle Integration beim RS-Integral]
+Sei $f : [a, b] \to \R$ bzgl. $g : [a, b] \to \R$ RS-integrierbar, dann ist auch $g$ bzgl. $f$ RS-integrierbar und es gilt
+\[ \Intab{f(x)}{g(x)} = [f(x)g(x)]_a^b - \Intab{g(x)}{f(x)} \]
+\end{satz}
+
+\begin{satz}[Riemann-Stieltjes- und Riemann-Integral]
+Sei $f \in \mathcal{R}_{[a, b]}$ und $g : [a, b] \to \R$ stetig differenzierbar, dann ist $f$ bzgl. $g$ RS-integrierbar mit
+\[ \Intab{f(x)}{g(x)} = \Intab{f(t)g'(t)}{t}. \]
+\end{satz}
+
+\begin{defn}
+Die \emph{Variation} von $g : [a, b] \to \R$ bzgl. einer Zerlegung $Z = \{ x_0 < ... < x_n \}$ von $[a, b]$ ist die nicht-negative Zahl
+\[ V(g, Z) \coloneqq \sum_{j=1}^{n} |g(x_j) - g(x_{j-1})|. \]
+Die \emph{Totalvariation} von $g : [a, b] \to \R$ ist
+\[ V_a^b(g) \coloneqq \sup\left\{ V(g, Z) : Z \text{ Zerlegung von } [a, b] \right\} \in \R_{\ge 0} \cup \{ \infty \}. \]
+Falls $V_a^b(g) < \infty$, so heißt $g$ \emph{von beschränkter Variation}.
+\end{defn}
+
+\begin{satz}
+Alle monotonen und alle Lipschitz-stetigen Funktionen sind von beschränkter Variation.
+\end{satz}
+
+\begin{satz}
+Sei $g : [a, b] \to \R$ von beschränkter Variation und $c \in (a, b)$, dann sind auch $g\mid_{[a, c]}$ und $g\mid_{[c, b]}$ von beschränkter Variation und es gilt
+\[ V_a^c(g\mid_{[a, c]}) + V_c^b(g\mid_{[c, b]}) = V_a^b(g). \]
+\end{satz}
+
+\begin{satz}
+Seien $g_1, g_2 : [a, b] \to \R$ von beschränkter Variation, dann gilt
+\[ V_a^b(g_1 + g_2) \le V_a^b(g_1) + V_a^b(g_2). \]
+\end{satz}
+
+\begin{satz}
+Die Menge aller Funktionen $g : [a, b] \to \R$ bildet einen UVR des VR der reellwertigen Funktionen auf $[a, b]$.
+\end{satz}
+
+\begin{satz}
+Sei $g : [a, b] \to \R$ von beschränkter Variation, dann ist jede stetige Funktion $f : [a, b] \to \R$ bzgl. $g$ RS-integrierbar mit
+\[ \left| \Intab{f(x)}{g(x)} \right| \le \| f \|_{\sup} \cdot V_a^b(g). \]
+\end{satz}
+
+\begin{satz}[1. MWS für RS-Integrale]
+Sei $f : [a, b] \to \R$ beschränkt und bzgl einer monoton wachsenden Gewichtsfunktion $g : [a, b] \to \R$ RS-integrierbar. Dann gibt es $\mu \in [\inf f([a, b]), \sup f([a, b])]$ mit
+\[ \Intab{f(x)}{g(x)} = \mu(g(b) - g(a)). \]
+\end{satz}
+
+\begin{satz}[2. MWS für RS-Integrale]
+Sei $f : [a, b] \to \R$ monoton und $g : [a, b] \to \R$ stetig, dann ist $f$ bzgl. $g$ RS-integrierbar und es gibt $c \in [a, b]$, sodass
+\[ \Intab{f(x)}{g(x)} = f(a)(g(c) - g(a)) + f(b)(g(b) - g(c)). \]
+\end{satz}
+
+\begin{satz}
+Sei $f_n : [a, b] \to \R$ eine Folge stetiger Funktionen, welche gleichmäßig gegen eine (stetige) Funktion $f : [a, b] \to \R$ konvergiert und $g : [a, b] \to \R$ von beschränkter Variation, dann gilt:
+
+\[ \Intab{f(x)}{g(x)} = \lim_{n \to \infty} \left(\Intab{f_n(x)}{g(x)}\right). \]
+\end{satz}
+
+\begin{satz}[Helly-Bray]
+Sie $f : [a, b] \to \R$ stetig und $g_n : [a, b] \to \R$ eine Folge von Funktionen von beschränkter Variation, sodass es eine Konstante $c > 0$ mit $V_a^b(g_n) < c$ für alle $n \in \N$ gibt. Konvergiere $g_n$ pktw. gegen eine Funktion $g : [a, b] \to \R$, dann gilt
+\[ \Intab{f(x)}{g(x)} = \lim_{n \to \infty} \left(\Intab{f(x)}{g_n(x)}\right). \]
+\end{satz}
+
+
+\section{Metrische und normierte Räume}
+
+\begin{defn}
+Ein \emph{metrischer Raum} $(X, d)$ ist ein Tupel bestehend aus einer Menge $X$ und einer Abbildung $d : X \times X \to \R$, genannt \emph{Metrik}, die folgende Eigenschaften erfüllt:
+
+\begin{enumerate}
+  \item $d(x, y) = 0 \iff (x = y)$
+  \item Symmetrie: $\forall\,x, y \in X : d(x, y) = d(y, x)$
+  \item Dreiecksungleichung: $\forall\, x, y, z \in X : d(x, y) + d(y, z) \ge d(x, z)$
+\end{enumerate}
+\end{defn}
+
+\begin{bem}
+Aus den obigen Axiomen folgt: $\forall\,x, y \in X : d(x, y) \ge 0$
+\end{bem}
+
+\begin{nota}
+Sei im folgenden $(X, d)$ ein metrischer Raum.
+\end{nota}
+
+% Beispiel: diskrete Metrik
+
+\begin{defn}
+  Für $r \in \R$ und $m \in X$ heißt
+  \[ B_r(m) = B_r^d(m) = \{ x \in X : d(x, m) < r \} \]
+  \emph{offener Ball} oder \emph{offene Kugel} um $m$ von Radius $r$ und
+  \[ B_r^a(m) = B_r^{a,d}(m) = \{ x \in X : d(x, m) \le r \} \]
+  \emph{abgeschlossener Ball} oder \emph{abgeschlossene Kugel} um $m$.
+\end{defn}
+
+\begin{defn}
+  $Y \subset X$ heißt eine Umgebung von $m$ bzgl. $d$, wenn gilt:
+  \[ \exists\,\epsilon > 0 : B_{\epsilon}(m) \subset Y. \]
+\end{defn}
+
+\begin{defn}
+\begin{itemize}
+  \item Eine Menge $U \subset X$ heißt \emph{offen} in $(X, d)$ (notiert $U \opn X$), falls $U$ eine Umgebung von allen Punkten $u \in U$ ist, d.\,h.
+  \[ \forall\,u \in U : \exists\,\epsilon_u > 0 : B_{\epsilon_u}(u) \subset U \]
+  \item Eine Menge $U \subset X$ heißt \emph{abgeschlossen} in $(X, d)$ (notiert $U \cls X$), falls $X \backslash U$ offen ist.
+  \item Ein Punkt $x \in X$ heißt \emph{Randpunkt} von $Y \subset X$, falls gilt:
+  \[ \forall\,\epsilon > 0 : ( B_{\epsilon}(x) \cap Y \not= \emptyset \text{ und } B_{\epsilon}(x) \cap (X \backslash Y) \not= \emptyset). \]
+  Die Menge aller Randpunkte von $Y$ wird mit \emph{$\partial Y$} bezeichnet.
+\end{itemize}
+\end{defn}
+
+\begin{bem}
+Die Mengen $\emptyset$ und $X$ sind jeweils sowohl offen als auch abgeschlossen in $X$. Es gilt außerdem $\partial Y = \partial (X \backslash Y)$ für alle $Y \subset X$.
+\end{bem}
+
+\begin{defn}
+Sei $Y \subset X$. Dann heißt
+\begin{itemize}
+  \item $Y^{\circ} \coloneqq Y \backslash \partial Y$ das \emph{Innere} oder der \emph{offene Kern} von $Y$.
+  \item $\overline{Y} \coloneqq Y \cup \partial Y$ der \emph{Abschluss} oder die \emph{abgeschl. Hülle} von $Y$.
+\end{itemize}
+\end{defn}
+
+\begin{satz}
+Obige Definition ergeben Sinn, d.\,h. es gilt für alle $Y \subset X$: $Y^{\circ} \opn X$ und $\overline{Y} \cls X$
+\end{satz}
+
+% Bemerkung: ! der Abschluss des offenen Balls ist nicht immer der abgeschlossene Ball
+
+\begin{satz}
+Sei $Y \subset X$. Dann gilt:
+\begin{multicols}{2}
+  \begin{itemize}
+    \item $(Y \opn X) \iff (Y \cap \partial Y) = \emptyset$
+    \item $(Y \cls X) \iff (\partial Y \subset Y)$
+  \end{itemize}
+\end{multicols}
+\end{satz}
+
+\begin{satz}[Metrische Räume sind hausdorffsch]
+Seien $x, y \in X$ mit $x \not= y$, dann gibt es offene Teilmengen $U_x, U_y \opn X$ mit $x \in U_x$, $y \in U_y$ und $U_x \cap U_y = \emptyset$.
+\end{satz}
+
+\begin{defn}
+Sei $x_n$ eine Folge in $X$. Die Folge heißt \emph{konvergent} in $(X, d)$, wenn gilt
+\[ \exists\,x \in X : \forall\,\epsilon > 0 : \exists\,N \in \N : \forall\,n \ge N : d(x_n, x) \le \epsilon. \]
+Die eindeutige Zahl $x$ heißt \emph{Grenzwert} oder \emph{Limes} von $(x_n)$, notiert $x = \lim_{n \to \infty} x_n$.
+\end{defn}
+
+\begin{satz}[Folgenkriterium für Abgeschlossenheit]
+Sei $A \subset X$. Dann sind folgende Aussagen äquivalent:
+\begin{enumerate}
+  \item $A$ ist abgeschlossen in $X$.
+  \item Für jede in $X$ konvergenten Folge, die vollständig in $A$ liegt, gilt $\lim_{n \to \infty} x_n \in A$.
+\end{enumerate}
+\end{satz}
+
+\begin{defn}
+Eine Folge $(x_n)$ heißt \emph{Cauchyfolge} in $(X, d)$, wenn gilt:
+\[ \forall\,\epsilon > 0 : \exists\,N \in \N : \forall\,n, m \in \N : |x_n - x_m| < \epsilon \]
+\end{defn}
+
+\begin{satz}
+Jede konvergente Folge $(x_n)$ in einem metrischen Raum ist eine Cauchyfolge.
+\end{satz}
+
+\begin{defn}
+Ein metrischer Raum $(X, d)$ heißt \emph{vollständig}, wenn jede Cauchyfolge in $(X, d)$ auch in $(X, d)$ konvergiert.
+\end{defn}
+
+% TODO: verallgemeinertes Intervallschachtelungsprinzip
+
+\begin{defn}
+Eine \emph{Norm} auf einem reellen VR $V$ ist eine Abbildung
+\[ \|...\| : V \to \R,\quad x \mapsto \| x \| \]
+für die gilt:
+\begin{enumerate}
+  \item $(\| x \| = 0) \iff (x = 0)$
+  \item $\forall\,x \in V, \lambda \in \R : \| \lambda x \| = |\lambda| \| x \|$
+  \item Dreiecksungleichung: $\forall\,x, y \in V : \| x + y \| \le \| x \| + \| y \|$
+\end{enumerate}
+Das Tupel $(V, \|...\|)$ heißt \emph{normierter Vektorraum}.
+\end{defn}
+
+\begin{bem}
+In jedem normierten Raum gilt $\| x \| \ge 0$.
+\end{bem}
+
+\begin{bem}[Wichtige Normen]
+\begin{itemize}
+  \item Die \emph{euklidische Norm} auf $\R^n$:
+  \[ \| (x_1, ..., x_n) \|_{\text{eukl}} \coloneqq \sqrt{x_1^2 + ... + x_n^2} \]
+  \item Die \emph{Maximumsnorm} auf $\R^n$:
+  \[ \| (x_1, ..., x_n) \|_{\text{max}} \coloneqq \max\left\{ |x_1|, ..., |x_n| \right\} \]
+  \item Sei $X$ eine nichtleere Menge. Dann ist die \emph{Supremumsnorm}
+  \[ \| f \|_{\text{sup}} \coloneqq \sup\left\{ |f(x)| : x \in X \right\} \]
+  eine Norm auf $V = \left\{ f : X \to \R : \sup_{x \in X} |f(x)| < \infty \right\}$.
+  \item Sei $V = \mathcal{C}([a, b], \R)$ der VR der reellwertigen stetigen Funktionen auf $[a, b]$ und $p \ge 1$. Dann ist die \emph{$p$-Norm}
+  \[ \|f\|_{p} \coloneqq \left( \Intabdx{|f(x)|^p} \right)^{\frac{1}{p}} \]
+  eine Norm auf $V$.
+  % TODO: Umbruch
+  \item Seien $(V, \| ... \|_V)$ und $(W, \| ... \|_W)$ zwei normierte (reelle) VR, dann ist auch $\mathrm{Hom}(V, W) \coloneqq \{ f : V \to W : f \text{ linear } \}$ ein reeller VR. Die Norm
+  \begin{align*}
+    \|f\|_{\text{op}} &\coloneqq \sup\left\{ \frac{ \| f(x) \|_W }{ \| x \|_V } : x \in V \backslash \{ 0 \} \right\}\\
+      &= \sup \left\{ \| f(x) \|_W : x \in V, \| x \|_V = 1 \right\}
+  \end{align*}
+  %\[ \|f\|_{\text{op}} \coloneqq \sup\left\{ \frac{ \| f(x) \|_W }{ \| x \|_V } : x \in V \backslash \{ 0 \} \right\} = \sup \left\{ \| f(x) \|_W : x \in V, \| x \|_V = 1 \right\} \]
+  auf $\mathrm{Hom}(V, W)$ heißt \emph{Operatornorm}.
+\end{itemize}
+\end{bem}
+
+%\begin{nota}
+%Im Folgenden bezeichne $(V, \| ... \|)$ einen normierten VR.
+%\end{nota}
+
+\begin{defn}
+Die Abbildung
+\[ d_{\| ... \|} : V \times V \to \R,\quad (x, y) \mapsto \| x - y \| \]
+ist eine Metrik auf $V$ und heißt von der Norm $\| ... \|$ \emph{induzierte Metrik} auf $V$.
+\end{defn}
+
+\begin{defn}
+Ein vollständiger normierter Vektorraum $(V, \| ... \|)$ heißt \emph{Banachraum}.
+\end{defn}
+
+% Aufgabe 6.28
+% Beobachtung 6.29
+
+\begin{satz}[Bolzano-Weierstraß]
+Für eine Folge $(x_n)$ in $(\R^m, \| ... \|_{\text{eukl}})$ gilt:
+
+\begin{itemize}
+  \item Ist $(x_n)$ beschränkt, d.\,h. gibt es ein $C > 0$, sodass $\|x_n\|_{\text{eukl}} \le C$ für alle $n \in \N$, dann hat $(x_n)$ eine konvergente Teilfolge.
+  \item Ist $(x_n)$ eine Cauchyfolge, so ist $(x_n)$ konvergent (d.\,h. $(\R^m, \| ... \|_{\text{eukl}})$) ist vollständig).
+\end{itemize}
+\end{satz}
+
+\begin{defn}
+Sei $V$ ein reeller VR. Zwei Normen $\| ... \|_1$ und $\| ... \|_2$ auf $V$ heißen äquivalent, wenn es $c, C > 0$ gibt, sodass für alle $x \in V$ gilt:
+\[ c \| x \|_2 \le \| x \|_1 \le C \| x \|_2 \]
+\end{defn}
+
+% Bemerkung 6.32 Topologie
+
+\begin{satz}
+Alle Normen auf $\R^n$ (und allen anderen endlich-dimensionalen, reellen VR) sind äquivalent.
+\end{satz}
+
+\begin{defn}
+Seien $(X, d_X)$ und $(Y, d_Y)$ zwei metrische Räume und $f : X \to Y$.
+\begin{itemize}
+  \item Die Abbildung $f$ heißt \emph{stetig} in $a \in X$, wenn gilt:
+  \[ \forall\,\epsilon > 0 : \exists\,\delta_a > 0 : d_X(x, a) < \delta_a \implies d_Y(f(x), f(a)) < \epsilon \]
+  Wenn $f$ in allen Punkten $x \in X$ stetig ist, so heißt $f$ stetig.
+  \item Die Abbildung $f$ heißt \emph{folgenstetig} in $a \in X$, wenn gilt:
+  \[ \lim_{x \to a} f(x) = f(a), \]
+  d.\,h. für jede Folge $(x_n)$ in $X$ mit $\lim_{n \to \infty} (x_n) = a$ gilt $\lim_{n \to \infty} f(x_n) = f(a).$
+\end{itemize}
+\end{defn}
+
+\begin{satz}
+Für eine Funktion $f : X \to Y$ zwischen zwei metrischen Räumen und $a \in X$ gilt:
+$f \text{ stetig in } a \iff f \text{ folgenstetig in } a$
+\end{satz}
+
+\begin{satz}
+Seien $f : X \to Y$ und $g : Y \to Z$ Abbildungen zwischen metrischen Räumen und $a \in X$. Falls $f$ in $a$ und $g$ in $f(a)$ stetig sind, so ist $(g \circ f) : X \to Z$ stetig in $a$.
+\end{satz}
+
+% Lemma 6.41
+
+\begin{satz}
+Seien $(V, \| ... \|_V)$ und $(W, \| ... \|_W)$ zwei normierte VR und $f : V \to W$ linear. Dann sind äquivalent:
+\begin{itemize}
+  \item $f$ ist stetig
+  \item $\exists\,C > 0 : \forall\,x \in V : \| f(x) \|_W < C \| x \|_V$
+  \item $\| f \|_\text{op} < \infty$
+\end{itemize}
+\end{satz}
+
+\begin{kor}
+Jede lineare Abbildung zwischen endlich-dimensionalen normierten reellen VR ist stetig.
+\end{kor}
+
+\begin{defn}
+Sei $X$ eine Menge und $(Y, d_Y)$ ein metrischer Raum. Sei $f_n : X \to Y$ eine Folge von Abbildungen. Die Folge $(f_n)$ \emph{konvergiert gleichmäßig} gegen eine Funktion $f : X \to Y$, wenn gilt:
+\[ \forall\,\epsilon > 0 : \exists\,N \in \N : \forall\,n \ge N : \sup\left\{ d_Y(f_n(x), f(x)) : x \in X \right\} \le \epsilon \]
+\end{defn}
+
+\begin{satz}
+Seien $(X, d_X)$ und $(Y, d_Y)$ zwei metrische Räume und sei $f_n : X \to Y$ eine Folge stetiger Abbildungen, die gleichmäßig gegen $f : X \to Y$ konvergiert. Dann ist $f$ stetig.
+\end{satz}
+
+\begin{kor}
+Der normierte VR $(\mathcal{C}([a, b], \R), \| ... \|_{\sup})$ der stetigen reellen Funktionen auf $[a, b]$ versehen mit der Supremumsnorm ist vollständig. Allgemeiner ist für jeden metrischen Raum $(X, d)$ der Vektorraum $\mathcal{C}(X, \R)$ bezüglich der Supremumsnorm vollständig.
+\end{kor}
+
+\begin{defn}
+Sei $W \subset X$ eine Teilmenge eines metrischen Raumes $(X, d)$. Eine Familie offener Teilmengen $\{ U_i \opn X : i \in I \}$ heißt \emph{offene Überdeckung} von $W$, wenn gilt:
+\[ W \subseteq \bigcup_{i \in I} U_i \]
+\end{defn}
+
+\begin{defn}
+Sei $(X, d)$ ein metrischer Raum. Eine Teilmenge $K \subset X$ heißt \emph{kompakt} in $(X, d)$, wenn gilt: Jede offene Überdeckung $\{ U_i \opn X : i \in I \}$ besitzt eine endliche offene Teilüberdeckung, d.\,h. es gibt eine endliche Teilmenge $J \subset I$, sodass $K \subseteq \bigcup_{j \in J} U_j$ gilt.
+\end{defn}
+
+% TODO: Beispiele und Gegenbeispiele für kompakte Mengen
+
+\begin{satz}
+Eine kompakte Teilmenge $K$ eines metrischen Raumes $(X, d)$ ist beschränkt und abgeschlossen.
+\end{satz}
+
+\begin{acht}
+Die Umkehrung gilt im Allgemeinen nicht.
+\end{acht}
+
+\begin{satz}[Heine-Borel]
+Im $\R^n$ gilt auch die Umkehrung: Eine beschränkte und abgeschlossene Teilmenge $K \subset (\R^n, \| ... \|_\text{eukl})$ ist kompakt. Allgemeiner ist jede beschränkte und abgeschlossene Teilmenge eines endlich-dimensionalen, normierten, reellen VR kompakt.
+\end{satz}
+
+\begin{acht}
+Obige Aussage gilt nicht für unendlichdimensionale, reelle, normierte VR.
+\end{acht}
+
+% Korollar 6.58
+
+\begin{satz}
+Sei $K$ eine kompakte Teilmenge eines metrischen Raumes $(X, d)$ und $A \subset K$ abgeschlossen in $X$. Dann ist auch $A$ kompakt.
+\end{satz}
+
+\begin{defn}
+Seien $[a_j, b_j], a_j < b_j, j = 1, ..., n$ kompakte Intervalle in $\R$, dann ist
+\begin{align*}
+  Q &\coloneqq [a_1, b_1] \times \cdots \times [a_n, b_n]\\
+  &= \left\{ (x_1, ..., x_n) \in \R^n : \forall\,j \in \{ 1, ..., n \} : a_j \le x_j \le b_j \right\}
+\end{align*}
+ein \emph{abgeschlossener Quader} im $\R^n$.
+\end{defn}
+
+\begin{satz}
+Abgeschlossene Quader im $\R^n$ sind kompakt.
+\end{satz}
+
+\begin{defn}
+Eine Teilmenge $A \subset X$ eines metrischen Raumes $(X, d)$ heißt \emph{folgenkompakt}, wenn jede Folge $(x_n)$ in $A$ eine konvergente Teilfolge besitzt, deren Grenzwert in $A$ liegt.
+\end{defn}
+
+\begin{satz}[Bolzano-Weierstraß]
+Jede kompakte Teilmenge eines metrischen Raums ist folgenkompakt.
+\end{satz}
+
+\begin{bem}
+Es gilt auch die Umkehrung: Jede folgenkompakte Teilmenge eines metrischen Raums ist kompakt.
+\end{bem}
+
+\begin{satz}
+Seien $(X, d_X)$ und $(Y, d_Y)$ zwei metrische Räume und $f : X \to Y$ eine stetige Abbildung. Sei $K \subset X$ kompakt. Dann ist $f(K) \subset Y$ kompakt.
+\end{satz}
+
+\begin{satz}[Weierstraßscher Satz vom Extremum]
+Sei $(X, d)$ ein metrischer Raum und $K \subset X$ eine nichtleere kompakte Teilmenge. Sei $f : X \to \R$ stetig. Dann gibt es $m, M \in K$, sodass gilt:
+\[ f(m) = \inf\left\{ f(x) : x \in K \right\},\quad f(M) = \sup\left\{ f(x) : x \in K \right\} \]
+\end{satz}
+
+\begin{defn}
+Seien $(X, d_X)$ und $(Y, d_Y)$ zwei metrische Räume. Eine Abbildung $f : X \to Y$ heißt \emph{gleichmäßig stetig}, wenn gilt:
+\[ \forall\,\epsilon > 0 : \exists\,\delta > 0 : \forall\,x, y \in X : \left(d_X(x, y) < \delta\right) \implies \left( d_Y(f(x), f(y)) < \epsilon \right) \]
+\end{defn}
+
+\begin{samepage} % Hack
+
+\begin{satz}
+Seien $(X, d_X)$ und $(Y, d_Y)$ zwei metrische Räume wobei $X$ kompakt ist und $f : X \to Y$ stetig. Dann ist $f$ gleichmäßig stetig.
+\end{satz}
+
+\section{Kurven}
+
+\end{samepage}
+
+\begin{nota}
+Sei nun $I \subset \R$ ein Intervall, das mindestens zwei Punkte enthält. Wir verwenden in diesem Abschnitt die euklidische Norm.
+\end{nota}
+
+\begin{defn}
+Eine stetige Abbildung $f : I \to \R^n$ heißt \emph{Kurve} im $\R^n$.\\
+\end{defn}
+
+\begin{defn}
+Sei $I = [a, b] \subset \R$ mit Zerlegung $Z = \{ a = t_0 < ... < t_m = b \}$ und $f : I \to \R^n$ eine Kurve. Dann hat der \emph{Polygonzug} $P_f(Z)$ die Länge
+\[ L(P_f(Z)) = \sum_{j = 1}^{m} \| f(t_j) - f(t_{j-1}) \|. \]
+\end{defn}
+
+\begin{defn}
+Eine Kurve $f : [a, b] \to \R^n$ heißt \emph{rektifizierbar}, wenn gilt: Es gibt ein $L \in \R$, sodass es für alle $\epsilon > 0$ ein $\delta > 0$ gibt, sodass für jede Zerlegung $Z$ von $[a, b]$ der Feinheit $\mu_Z \le \delta$ gilt:
+\[ |L - L(P_f(Z))| \le \epsilon \]
+\end{defn}
+
+% Beispiel: nicht rektifizierbare Kurve
+
+\begin{defn}
+Sei $I = (a, b) \subset \R$ ein offenes Intervall. Eine Kurve $f : I \to \R^n$ heißt in $t_0 \in I$ \emph{differenzierbar}, wenn der Limes
+\[ f'(t_0) = \lim_{t \to t_0} \frac{f(t) - f(t_0)}{t - t_0} \]
+existiert. Wenn $f$ in jedem Punkt $t \in I$ differenzierbar ist, so heißt $f$ differenzierbar.
+Falls $I$ kein offenes Intervall ist, so heißt die Kurve $f : I \to \R^n$ differenzierbar, wenn es ein offenes Intervall $J \supset I$ in $\R$ und eine differenzierbare Kurve $F : J \to \R^n$ gibt, sodass $F\mid_{I} = f$ gilt.
+\end{defn}
+
+\begin{bem}
+Eine Kurve $f = (f_1, ..., f_n) : I \to \R^n$ ist genau dann in $t \in I$ differenzierbar, wenn alle Komponentenfunktionen $f_1, ..., f_n$ in $t$ differenzierbar sind.
+\end{bem}
+
+\begin{satz}
+Jede stetig differenzierbare Kurve $f : [a, b] \to \R$ ist rektifizierbar mit Länge
+\[ L = \Intab{\| f'(t) \|}{t}. \]
+\end{satz}
+
+% Aufgabe 6.77
+
+\begin{defn}[Riemann-Integral für Funktionen nach $\R^n$] Eine beschränkte Funktion $f : [a, b] \to \R$ heißt \emph{Riemann-integrierbar}, wenn gilt: Es gibt ein $\iota \in \R^n$, sodass es für alle $\epsilon > 0$ ein $\delta > 0$ gibt, sodass für jede Zerlegung $Z = \{ a = t_0 < ... < t_m = b \}$ der Feinheit $\mu_Z \le \delta$ und Wahl von Stützstellen $\xi_1, ..., \xi_m$ bzgl. $Z$ gilt:
+\[ \| \iota - R(f, Z, \xi_1, ..., \xi_m) \| \le \epsilon. \]
+Der Vektor $\iota \in \R^n$ heißt \emph{Riemann-Integral} von $f$.
+\end{defn}
+
+\begin{bem}
+Eine Funktion $f = (f_1, ..., f_n) : [a, b] \to \R^n$ ist genau dann \emph{Riemann-integrierbar}, wenn jede Komponentenfunktion $f_j, j = 1, ..., n$ Riemann-integrierbar ist. Es gilt in diesem Fall:
+\[ \Intab{f(t)}{t} = \left( \Intab{f_1(t)}{t}, ..., \Intab{f_n(t)}{t} \right) \]
+Insbesondere sind stetige Funktionen $f : [a, b] \to \R^n$ stets Riemann-integrierbar.
+\end{bem}
+
+\begin{satz}
+Sei $f : [a, b] \to \R^n$ stetig, dann gilt:
+\[ \left\| \Intab{f(t)}{t} \right\| \le \Intab{\| f(t) \|}{t}. \]
+Es gilt Gleichheit, wenn alle f(t) gleichgerichtet sind, d.\,h. für alle $x_1, x_2 \in [a, b]$ mit $f(x_1) \not= 0$ gibt es ein $\lambda \ge 0$, sodass $f(x_2) = \lambda f(x_1)$.
+\end{satz}
+
+\begin{defn}
+Eine Kurve $f : [a, b] \to \R$ heißt \emph{regulär}, wenn sie stetig differenzierbar ist und die Ableitung $f'$ keine Nullstelle hat.
+\end{defn}
+
+\begin{kor}
+Sei $f : [a, b] \to \R^n$ eine reguläre Kurve, $x \coloneqq f(a)$ und $y \coloneqq f(b)$. Dann gilt für die Länge $L_f$ von $f$:
+\[ L_f \ge \| x - y \|. \]
+Falls hier Gleichheit gilt, dann gibt es eine stetig differenzierbare bijektive Abbildung $\phi : [a, b] \to [0, 1]$, sodass $f = c_{xy} \circ \phi$ wobei
+\[ c_{xy} : [0, 1] \to \R^n,\quad t \mapsto x + t(y - x) \]
+die Strecke von $x$ nach $y$ ist.\\
+\textit{Motto:} Die Gerade ist die kürzeste Verbindung zweier Punkte.
+\end{kor}
+
+
+\section{Partielle Ableitungen}
+
+\begin{defn}
+Sei $U \opn \R^n$ und $v \in \R^n$ mit $\| v \| = 1$. Eine Funktion $f : U \to \R^m$ heißt in einem Punkt $u \in U$ \emph{in Richtung $v$ differenzierbar}, wenn der Grenzwert
+\[ D_v f(u) \coloneqq \lim_{\substack{h \to 0\\h \not= 0}} \frac{f(u + hv) - f(u)}{h} \]
+existiert. In diesem Fall heißt $D_v f(u)$ die \emph{Richtungsableitung} von $f$ im Punkt $u \in U$ in Richtung $v \in \R^n$.
+\end{defn}
+
+\begin{defn}
+Sei $U \opn \R^n$ und $j \in \{ 1, ..., n \}$. Eine Abbildung $f : U \to \R^m$ heißt
+\begin{itemize}
+  \item im Punkt $u \in U$ bzgl. der $j$-ten Koordinatenrichtung \emph{partiell differenzierbar}, falls die Richtungsableitung
+  \[ D_j f(u) = \frac{\partial f}{\partial x_j}(u) \coloneqq D_{e_j} f \in \R^m \]
+  existiert. In diesem Fall heißt $D_j f(u)$ die \emph{$j$-te partielle Ableitung} von $f$ in $u$.
+  \item (auf U) bzgl. der $j$-ten Koordinatenrichtung partiell differenzierbar, wenn $f$ in jedem Punkt $u \in U$ bzgl. der $j$-ten Koordinatenrichtung partiell differenzierbar ist.
+  \item im Punkt $u \in U$ partiell differenzierbar, wenn $f$ für alle $j \in \{ 1, ..., n \}$ in $u$ bzgl. der $j$-ten Koordinatenrichtung partiell differenzierbar ist.
+  \item (auf U) partiell differenzierbar, wenn $f$ in jedem Punkt $u \in U$ partiell differenzierbar ist.
+\end{itemize}
+\end{defn}
+
+\begin{acht}
+Eine Funktion $f : U \to \R^m$, die in $u \in U$ partiell differenzierbar ist, muss noch lange nicht in $u$ stetig sein!
+\end{acht}
+
+\begin{defn}
+Ist $f : U \to \R^m, U \opn \R^n,$ partiell differenzierbar, so setzen wir
+\[ D_j f = \frac{\partial f}{\partial x_j} : U \to \R^m,\quad x \mapsto D_j f(x) = \frac{\partial f}{\partial x_j}(x) \]
+Falls die Abbildungen $D_j f$ für alle $j \in \{ 1, ..., n \}$ wieder partiell differenzierbar sind, also für alle $j, k \in \{ 1, ..., n \}$ die Abbildungen
+\[ D_k D_j f \coloneqq D_k (D_j f) : U \to \R^m \]
+existieren, so nennen wir $f$ \emph{zweimal partiell differenzierbar}. Alternative Schreibweise:
+\[ D_k D_j f = \frac{\partial^2 f}{\partial x_k \partial x_j}. \]
+Analog definiert man für $l \in \N$ rekursiv die \emph{$l$-te partielle Ableitung}
+\[ D_{j_l} D_{j_{l-1}} \cdots D_{j_1} f = \frac{\partial^l f}{\partial x_{j_l} \partial x_{j_{l-1}} \cdots \partial x_{j_1}}. \]
+Falls jede $l$-te partielle Ableitung stetig ist, so heißt $f$ \emph{$l$-mal stetig partiell differenzierbar}.
+\end{defn}
+
+\begin{samepage}
+
+\begin{satz}[Schwarz / Clairaut]
+Sei $U \opn \R^n$, $u \in U$ und $f : U \to \R^m$ sowie $j, k \in \{ 1, ..., n \}$. Wenn die ersten partiellen Ableitungen $D_j f$, $D_k f$ und die zweiten partiellen Ableitungen $D_j D_k f$ und $D_k D_j f$ im Punkt $u$ stetig sind, dann gilt
+\[ D_j D_k f(u) = D_k D_j f(u). \]
+\end{satz}
+
+% Verallgemeinerung
+
+
+\section{Die totale Ableitung}
+
+\end{samepage}
+
+\begin{defn}
+Sei $U \opn \R^n$ und $u \in U$. Eine Abbildung $f : U \to \R^m$ heißt \emph{in $u$ (total) differenzierbar}, wenn gilt: Es gibt eine $\R$-lineare Abbildung $A_u : \R^n \to \R^m$ und eine Abbildung $\phi_u : B_{r_u}(0) \to \R^m$ für ein hinreichend kleines $r_u > 0$, sodass gilt
+\begin{enumerate}
+  \item $\lim_{\eta \to 0} \tfrac{ \phi_u(\eta) }{ \| \eta \| } = 0$
+  \item für alle $\xi \in B_{r_u}(0)$ gilt $u + \xi \in U$ und
+  \item $f(u + \xi) = f(u) + A_u(\xi) + \phi_u(\xi)$
+\end{enumerate}
+Die $\R$-lineare Abbildung $A_u$ heißt das \emph{totale Differential} von $f$ in $u$. Man schreibt
+\[ A_u = D f(u). \]
+Wenn $f$ in jedem $u \in U$ total differenzierbar ist, dann heißt $f$ \emph{total differenzierbar}.
+\end{defn}
+
+\begin{bem}
+Seien $f_1, f_2 : U \to \R^m$ in $u \in U$ total differenzierbar. Dann ist auch $(f_1 + f_2)$ in $u$ total differenzierbar und es gilt
+\[ D (f_1 + f_2)(u) = D f_1(u) + D f_2(u) \]
+\end{bem}
+
+\begin{satz}
+Ist $f : U \to \R^m$ in $u \in U$ total differenzierbar, so ist $f$ in diesem Punkt $u$ stetig.
+\end{satz}
+
+\begin{acht}
+Wenn $f$ in einem Punkt $u$ partiell differenzierbar ist, so folgt daraus nicht, dass $f$ in diesem $u$ total differenzierbar ist. Selbst wenn in $u$ alle Richtungsableitungen existieren, muss $f$ in $u$ nicht total differenzierbar sein.
+\end{acht}
+
+\begin{satz}
+Sei $f : U \to \R^m$ in $u \in U$ total differenzierbar und $v \in \R^n$ mit $\| v \| = 1$. Dann ist $f$ in $u$ in Richtung $v$ ableitbar mit
+\[ D f(u) (v) = D_v f(u). \]
+\end{satz}
+
+\begin{defn}
+Sei $f : U \to \R^m$ in $u \in U$ total differenzierbar. Dann ist
+\[ D f(u) = J_u f \coloneqq \left( \frac{\partial f}{\partial x_1}(u), ..., \frac{\partial f}{\partial x_n}(u) \right) \in \R^{m \times n}. \]
+Die Matrix $J_u f$ heißt \emph{Jacobimatrix} von $f$ im Punkt $u$.
+\end{defn}
+
+% 6.99
+
+\begin{satz}
+Sei $f : U \to \R^m$ partiell diffbar und alle partiellen Ableitungen in $u \in U$ stetig. Dann ist $f$ in $u$ total differenzierbar.
+\end{satz}
+
+\begin{bem}
+Es gelten folgende Implikationen:\\
+$\quad\quad\,\,\, f$ ist stetig partiell differenzierbar\\
+$\implies$ $f$ ist total differenzierbar ($\!\implies f$ ist stetig)\\
+$\implies$ $f$ ist partiell differenzierbar
+\end{bem}
+
+\begin{satz}
+Sie $f : U \to \R^m$ $k$-mal stetig partiell differenzierbar mit $k \in \N$. Sei $1 \le l \le k$, dann sind alle $l$-ten partiellen Ableitungen von $f$ stetig.
+\end{satz}
+
+\begin{satz}[Kettenregel]
+Sei $U \opn \R^n$ und $V \opn \R^m$ sowie $g : U \to V$ und $f : V \to \R^l$ Abbildungen. Wenn g in $u \in U$ und $f$ in $g(u)$ total differenzierbar ist, dann ist $(f \circ g) : U \to \R^l$ in $u$ total differenzierbar mit
+\[ D(f \circ g)(u) = D f(g(u)) \circ D g(u). \]
+\end{satz}
+
+% Produktregel
+
+\begin{satz}[MWS]
+Sei $U \opn \R^n$, $u \in U$ und $f = (f_1, ..., f_m) : U \to \R^m$ stetig differenzierbar. Sei außerdem $\xi \in \R^n$, sodass das Bild der Strecke $[0, 1] \to \R^n, t \mapsto u + t \xi$ ganz in $U$ liegt. Dann gilt
+\[ f(u + \xi) - f(u) = \left( \Int{0}{1}{(J_{u + t \xi} f)}{t} \right) \cdot \xi = \Int{0}{1}{((J_{u + t \xi} f) \cdot \xi)}{t} \]
+\end{satz}
+
+\begin{kor}[Schrankensatz]
+Sei $U \opn \R^n$, $u \in U$, $f = (f_1, ..., f_m) : U \to \R^m$ und $\xi \in \R^n$ wie eben. Sei
+\[ M \coloneqq \sup \left\{ \| J_{u + t \xi} f \|_{\text{op}} : t \in [0, 1] \right\}, \]
+dann gilt
+\[ \| f(u + \xi) - f(u) \| \le M \| \xi \| \]
+\end{kor}
+
+\begin{nota}
+Sei $f : U \to \R$ $k$-mal stetig differenzierbar, $u \in U$ und $\xi = (\xi_1, ..., \xi_n) \in \R^n$. Dann setzen wir
+\[ d^k f(u)\,\xi^k \coloneqq \sum_{j_1=1}^n \cdots \sum_{j_k=1}^n (D_{j_k} \cdots D_{j_1} f(u))\,\xi_{j_1}\cdots\xi_{j_k} \]
+und
+\[ d^0 f(u) \xi^0 \coloneqq f(u). \]
+\end{nota}
+
+\begin{satz}[\emph{Taylorformel} in mehreren Veränderlichen]
+Sei $U \opn \R^n$ und $f : U \to \R$ eine $(p + 1)$-mal stetig differenzierbare Funktion. Ferner sei $u \in U$ und $\xi \in \R^n$, sodass für alle $t \in [0, 1]$ gilt $h(t) \coloneqq u + t \xi \in U$. Dann gibt es ein $\tau \in [0, 1]$, sodass
+\[ f(u + \xi) = F(1) = \left( \sum_{k=0}^{p} \frac{1}{k!}\,d^k f(u)\,\xi^k \right) + \frac{1}{(p + 1)!}\,d^{p+1} f(u + \tau \xi)\,\xi^{p+1}. \]
+\end{satz}
+
+\begin{bem}[Taylorformel für $p = 2$]
+Sei $f : U \to \R$ zweimal stetig differenzierbar. Wir nennen
+\begin{align*}
+  (\mathrm{Hess} f)(u) &\coloneqq (D_j D_k f(u))_{j,k}\\
+  &= \begin{pmatrix} D_1 D_1 f(u) & \cdots & D_1 D_n f(u) \\ D_2 D_1 f(u) & \cdots & D_2 D_n f(u) \\ \vdots & \ddots & \vdots \\ D_n D_1 f(u) & \cdots & D_n D_n f(u) \end{pmatrix} \in \R^{n \times n}
+\end{align*}
+die \emph{Hesse-Matrix} von $f$ in $u$. Es folgt mit der Taylorformel für $p = 2$:
+\[ f(u + \xi) = f(u) + \sum_{j=1}^{n} D f(u)\,\xi + \frac{1}{2} \cdot \xi^{\text{T}} \cdot (\mathrm{Hess} f)(u) \cdot \xi + R_2^{f,u}(u + \xi). \]
+\end{bem}
+
+\begin{defn}
+Sei $U \opn \R^n$ und $f : U \to \R$ partiell differenzierbar. Ein Punkt $u \in U$ heißt \emph{kritischer Punkt} von $f$, wenn
+\[ D_j f(u) = 0 \in \R^{1 \times n}\quad \forall\,j \in \{ 1, ..., n \}. \]
+\end{defn}
+
+\begin{satz}
+Sei $U \opn \R^n$ und $f : U \to \R$ partiell differenzierbar. Hat $f$ in $u \in U$ ein lokales Extremum, dann ist $u$ ein kritischer Punkt von $f$.
+\end{satz}
+
+\begin{defn}
+Eine reelle symmetrische Matrix $A \in \R^{n \times n}$ heißt
+\begin{itemize}
+  \item \emph{degeneriert}, wenn $\det(A) = 0$ gilt.
+  \item \emph{positiv definit}, wenn für alle $\xi \in \R^n \backslash \{ 0 \}$ gilt: $\xi^{\text{T}}A\xi > 0.$ Äquivalent ist $A$ positiv definit, wenn alle Eigenwerte von $A$ positiv sind.
+  \item \emph{negativ definit}, wenn $-A$ positiv definit ist (bzw. alle Eigenwerte von $A$ negativ sind).
+  \item \emph{indefinit}, wenn $A$ weder degeneriert, noch positiv, noch negativ definit ist (d.\,h. $A$ besitzt sowohl negative als auch positive Eigenwerte).
+\end{itemize}
+\end{defn}
+
+\begin{satz}[Hinreichende Bedingung für lokale Extrema]
+Sei $U \opn \R^n$, die Funktion $f : U \to \R$ zweimal stetig differenzierbar und $u \in U$ ein kritischer Punkt von $f$. Dann gilt
+\begin{enumerate}
+  \item Ist $(\mathrm{Hess} f)(u)$ positiv definit, so hat $f$ in $u$ ein isoliertes lokales Minimum.
+  \item Ist $(\mathrm{Hess} f)(u)$ negativ definit, so hat $f$ in $u$ ein isoliertes lokales Minimum.
+  \item Ist $(\mathrm{Hess} f)(u)$ indefinit, so hat $f$ in $u$ kein lokales Extremum (also einen Sattelpunkt).
+\end{enumerate}
+\end{satz}
+
+\begin{acht}
+Ist $(\mathrm{Hess} f)(u)$ degeneriert, so ist keine Aussage möglich.
+\end{acht}
+
+\begin{strat}[Bestimmung globaler Extrema auf Kompakta]
+Sei $K \subset \R^n$ ein Kompaktum mit $K^{\circ} \not= \emptyset$ und $f : K \to \R$ eine stetige und auf $K^{\circ}$ partiell differenzierbare Funktion. Als stetige Funktion auf einem Kompaktum nimmt $f$ auf $K$ ein Maximum und Minimum an. So kann man Maximum und Minimum bestimmen:
+\begin{enumerate}
+  \item Bestimme alle kritischen Stellen von $f\mid_{K^{\circ}}$.
+  \item Bestimme alle Extrema von $f$ auf dem Rand $\partial K$.
+  \item Vergleiche die Funktionswerte von $f$ an den kritischen Stellen in $f\mid_{K^{\circ}}$ und $f\mid_{\partial K}$.
+\end{enumerate}
+\end{strat}
+
+\begin{samepage}
+
+\begin{strat}[Bestimmung globaler Extrema]
+Sei $f : \R^n \to \R^m$ partiell differenzierbar.
+\begin{enumerate}
+  \item Bestimme alle Funktionswerte von $f$ in allen kritischen Stellen. Sei $M$ der größte und $m$ der kleinste Funktionswert an einer kritischen Stelle.
+  \item Wenn es ein $R > 0$ gibt, sodass $f\mid_{\R^n \backslash B_R(0)}$ nur Werte kleiner als $M$ bzw. Werte größer als $m$ annimmt, dann ist $M$ das globale Maximum bzw. $m$ das globale Minimum.
+\end{enumerate}
+\end{strat}
+
+
+\section{Satz von der Umkehrfunktion}
+
+\end{samepage}
+
+\begin{defn}
+Sei $U \opn \R^n$ und $V \opn \R^m$. Eine Abbildung $f : U \to V$ heißt \emph{($\mathcal{C}^1$-)Diffeomorphismus}, wenn $f$ invertierbar ist und sowohl $f$ als auch $f^{-1}$ stetig partiell differenzierbar sind.
+\end{defn}
+
+\begin{bem}
+Sei $f : U \to V$ ein Diffeomorphismus, wobei $U \opn \R^n$ und $V \opn \R^m$. Aus der Kettenregel folgt für $u \in U$:
+\[ (J_u f)^{-1} = J_{f(u)}(f^{-1}). \]
+\end{bem}
+
+\begin{satz}[Banachscher Fixpunktsatz]
+Sei $K \subset \R^n$ kompakt und $\psi : K \to K$ eine Kontraktion, d.\,h. es gibt eine Konstante $\kappa$ mit $0 < \kappa < 1$, sodass für alle $x, y \in K$ gilt
+\[ \| \psi(x) - \psi(y) \| \le \kappa\,\| x - y \|. \]
+Dann hat $\psi$ genau einen Fixpunkt in $K$.
+\end{satz}
+
+\begin{satz}[\emph{Satz von der lokalen Umkehrfunktion}]
+Sei $U \opn \R^n$ und $u \in U$ sowie $f : U \to \R^n$ stetig partiell differenzierbar. Wenn $D f(u)$ invertierbar ist, so gibt es offene Umgebungen $X, Y \opn \R^n$ mit $u \in X \subset U$, sodass $f(X) = Y$ gilt und $f\mid_X : X \to Y$ ein Diffeomorphismus ist.
+\end{satz}
+
+\begin{bem}
+Es ist wichtig, dass $f$ stetig partiell differenzierbar ist. Für Funktionen, die lediglich total differenzierbar sind, gilt der Satz von der lokalen Umkehrabbildungen im Allgemeinen nicht.
+\end{bem}
+
+\begin{kor}[Offenheitssatz]
+Sei $U \opn \R^n$ und $f : U \to \R^n$ stetig partiell differenzierbar. Wenn für alle $u \in U$ die Differentiale $D f(u)$ invertierbar sind, dann ist $f(U)$ eine offene Teilmenge von $\R^n$.
+\end{kor}
+
+\begin{samepage}
+
+\begin{kor}
+Sei $U \opn \R^n$ und $f : U \to \R^n$ eine injektive stetig partiell differenzierbare Abbildung, sodass für alle $u \in U$ die Differentiale $D f(u)$ invertierbar sind. Dann ist $f$ ein Diffeomorphismus auf sein Bild, d.\,h. $f\mid_{f(U)}$ ist ein Diffeomorphismus.
+\end{kor}
+
+
+\section{Satz über implizite Funktionen}
+
+\end{samepage}
+
+\begin{nota}
+Seien $U \opn \R^n$ und $V \opn \R^p$ offene Teilmengen, dann ist $U \times V$ eine offene Teilmenge von $\R^n \times \R^p = \R^{n + p}$. Sei $f : U \times V \to \R^q$ stetig differenzierbar. Für ein festes $u \in U$ sei
+\[ f_u : V \to \R^q,\quad v \mapsto f(u, v). \]
+Wir definieren
+\[ D_V f(u, v) \coloneqq D(f_u)(v) : \R^p \to \R^q \]
+bzw. als Matrix
+\[ J_V f(u, v) \coloneqq J_v(f_u) \in \R^{q \times p}. \]
+Analog definieren wir $f^v : U \to \R^q$ und $D_U f(u, v)$ bzw. $J_U f(u, v)$.
+\end{nota}
+
+\begin{bem}
+Offenbar gilt für $u \in U$ und $v \in V$:
+\[ J_{(u, v)} f = \left( J_U f(u, v), J_V f(u, v) \right) \in \R^{q \times (n + p)}. \]
+\end{bem}
+
+\begin{satz}
+Seien $U \opn \R^n$ und $V \opn \R^p$ und $f : U \times V \to \R^p$ stetig partiell differenzierbar, welche in einem Punkt $(u_0, v_0) \in U \times V$ eine Nullstelle habe, d.\,h. $f(u_0, v_0) = 0$. Wenn in diesem Punkt $J_V f(u_0, v_0) \in \R^{p \times p}$ invertierbar ist, dann gibt es
+\begin{itemize}
+  \item eine offene Menge $X \opn U \times V$ mit $(u_0, v_0) \in X$,
+  \item eine offene Menge $Y \opn \R^n \times \R^p$ mit $(u_0, 0) \in Y$,
+  \item einen Diffeomorphismus $G : Y \to X$ mit $G(u_0, 0) = (u_0, v_0)$,
+\end{itemize}
+sodass $f \circ G = \pi_2.$
+\end{satz}
+
+\begin{samepage}
+
+\begin{satz}[\emph{Satz über implizite Funktionen}]
+Seien $U \opn \R^n$ und $V \opn \R^p$ und $f : U \times V \to \R^p$ stetig partiell differenzierbar, welche in $(u_0, v_0) \in U \times V$ eine Nullstelle hat, d.\,h. $f(u_0, v_0) = 0 \in \R^p$. Wenn in diesem Punkt $J_V f(u_0, v_0) \in \R^{p \times p}$ invertierbar ist, dann gibt es
+\begin{itemize}
+  \item eine offene Menge $X \opn U \times V$ mit $(u_0, v_0) \in X$,
+  \item eine offene Menge $\widetilde{U} \opn U$ mit $u_0 \in \widetilde{U}$,
+  \item eine stetig partiell differenzierbare Abbildung $g : \widetilde{U} \to \R^p$,
+\end{itemize}
+sodass
+\[ f^{-1}(0) \cap X = \mathrm{Graph}(g) = \{ (u, g(u)) : u \in \widetilde{U}. \} \]
+In anderen Worten: Für alle $(u, v) \in X$ gilt
+\[ f(u, v) = 0 \iff v = g(u). \]
+Die Funktion $g$ erfüllt dabei
+\[ g(u_0) = v_0\quad\text{und}\quad J_{u_0} g = - \left(J_V f(u_0, v_0)\right)^{-1} \cdot J_U f(u_0, v_0). \]
+\end{satz}
+
+
+\section{Untermannigfaltigkeiten des $\R^n$}
+
+\end{samepage}
+
+\begin{defn}
+Eine Teilmenge $M \subset \R^n$ heißt $m$-dimensionale \emph{Untermannigfaltigkeit} von $\R^n$, wenn gilt: Für alle $u \in M$ gibt es eine offene Teilmenge $U \opn \R^n$ mit $u \in U$ und eine offene Teilmenge $V \opn \R^n$ mit $0 \in V$, sowie einen Diffeomorphismus $\Phi : U \to V$ mit $\Phi(u) = 0$, sodass gilt:
+  \[ \Phi(M \cap U) = V \cap \{ (x_1, ..., x_m, 0, ..., 0) \in \R^n \} \cong V \cap \R^m. \]
+Die Abbildung $\Phi$ heißt \emph{Karte} von $M$ um den Punkt $u$.
+\end{defn}
+
+\begin{defn}
+Sei $c : (-\epsilon, \epsilon) \to M \subset \R^n$ eine differenzierbare Kurve mit $c(0) = u \in M$, deren Bild ganz in $M$ liegt, dann heißt der Vektor $c'(0) \in \R^n$ \emph{Tangentialvektor} an $M$ in $u \in M$. Für $u \in M$ setzen wir
+\[ T_u M \coloneqq \{ v \in \R^n : v \text{ Tangentialvektor an } M \text{ in } u \}. \]
+Die Menge $T_u M$ heißt \emph{Tangentialraum} von $M$ im Punkt $u$.
+\end{defn}
+
+\begin{satz}
+Ist $M \subset \R^n$ eine $m$-dimensionale Untermannigfaltigkeit von $\R^n$ und $u \in M$, dann ist $T_u M$ ein $m$-dimensionaler UVR von $\R^n$.
+\end{satz}
+
+\begin{defn}
+Sei $M \subset \R^n$ eine $m$-dimensionale Untermannigfaltigkeit und $u \in M$. Das orthogonale Komplement (bzgl. des Standardskalarprodukts $\langle ..., ... \rangle$)
+\[ N_u M = (T_u M)^\perp \]
+von $T_u M$ in $\R^n$ heißt \emph{Normalraum} von $M$ im Punkt $u$.
+\end{defn}
+
+\begin{defn}
+Sei $U \opn \R^n$ und $f : U \to \R^p$ mit $p \le n$ stetig partiell differenzierbar. Ein Punkt $u \in U$ wird \emph{regulärer Punkt} von $f$ genannt, wenn die lineare Abbildung $D f(u) : \R^n \to \R^p$ Rang $p$ hat (also surjektiv ist). Sei $Y \in \R^p$, dann heißt sein Urbild
+\[ f^{-1}(\{y\}) = \{ u \in U : f(u) = y \} \]
+\emph{reguläres Urbild} oder \emph{reguläre Niveaumenge}, wenn alle Punkte in $f^{-1}(\{ y \})$ reguläre Punkte von $f$ sind.
+\end{defn}
+
+\begin{defn}
+Sei $U \opn \R^n$ und $f : U \to \R^p$ mit $p \le n$ stetig partiell differenzierbar. Ist $y \in \mathrm{Bild}(f)$ und $M \coloneqq f^{-1}(\{ y \})$ ein reguläres Urbild, dann ist $M$ eine $m$-dimensionale Untermannigfaltigkeit des $\R^n$, wobei $m = n - p$.
+\end{defn}
+
+\begin{defn}
+Sei $U \opn \R^n$ und $g : U \to \R$ partiell differenzierbar. Dann heißt die Abbildung
+\[ \nabla g : U \to \R^m,\quad u \mapsto \begin{pmatrix} D_1 g(u) \\ \vdots \\ D_n g(u) \end{pmatrix} \]
+\emph{Gradient} von $g$. Ist $g$ in $u$ differenzierbar, so gilt
+\[ \nabla g(u) = (J_u g)^\perp. \]
+\end{defn}
+
+\begin{satz}
+Sei $U \opn \R^n$ und $f = (f_1, ..., f_p) : U \to \R^p, p \le n$ stetig partiell differenzierbar. Ist $y = (y_1, ..., y_p) \in \mathrm{Bild}(f)$ und $M \coloneqq f^{-1}(\{ y \})$ ein reguläres Urbild sowie $u \in M$, dann ist $\{ \nabla f_1(u), ..., \nabla f_p(u) \}$ eine Basis von $N_u M$.
+\end{satz}
+
+\begin{satz}[Lokale Extrema unter Nebenbedinungen]
+Sei $U \opn \R^n$ offen und $f : U \to \R$ differenzierbar. Ferner sei $M \subset U \opn \R^n$ eine Untermannigfaltigkeit des $\R^n$ und $u_0 \in M$ ein Punkt, an welchem $f\mid_M$ ein lokales Extremum annimmt. Dann gilt $\nabla f(u_0) \in N_{u_0} M$.
+
+Ist $M$ sogar ein reguläres Urbild einer stetig partiell differenzierbaren Abbildung $ g = (g_1, ..., g_p) : U \to \R^p$, dann gibt es eindeutig bestimmte Zahlen $\lambda_1, ..., \lambda_p \in \R$, sodass
+\[ \nabla f(u_0) = \sum_{j = 1}^{p} \lambda_j \nabla g_j(u_0). \]
+Die Zahlen $\lambda_1, ..., \lambda_p \in \R$ heißen \emph{Lagrange-Multiplikatoren}.
+\end{satz}
+
+\end{document}

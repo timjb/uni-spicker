@@ -1,0 +1,1012 @@
+\documentclass{cheat-sheet}
+
+\pdfinfo{
+  /Title (Zusammenfassung Differentialgeometrie)
+  /Author (Tim Baumann)
+}
+
+\newcommand{\Intabdt}[1]{\Int{a}{b}{#1}{t}}
+\newcommand{\Bil}{\mathrm{Bil}}
+\newcommand{\SymBil}{\mathrm{SymBil}}
+\newcommand{\I}{\mathrm{I}}
+\newcommand{\II}{\mathrm{I\!I}}
+\newcommand{\spur}{\mathrm{spur}}
+\newcommand{\Graph}{\mathrm{Graph}}
+\newcommand{\Span}{\mathrm{span}}
+\newcommand{\Bild}{\mathrm{Bild}}
+\newcommand{\Exp}{\mathrm{Exp}} % geodätische Exponentialabbildung
+\newcommand{\ointervall}[1]{\left]#1\right[} % offenes Intervall
+
+% Kleinere Klammern
+\delimiterfactor=701
+
+
+\begin{document}
+
+\maketitle{Zusammenfassung Geometrie}
+
+
+\section{Geometrie von Kurven}
+
+% Erinnerung: Skalarprodukt, Isometrie, Winkel, Orthogonalität
+
+\begin{nota}
+  Sei im Folgenden $I$ ein Intervall, d.\,h. eine zusammenhängende Teilmenge von $\R$.
+\end{nota}
+
+\begin{defn}
+  Eine Abbildung $c : I \to \R^n$ heißt \emph{reguläre Kurve}, wenn $c$ beliebig oft differenzierbar ist und $c'(t) \not= 0$ für alle $t \in I$ gilt.
+
+  Der affine Unterraum $\tau_{c,t} \coloneqq c(t) + \R(c'(t))$ heißt \emph{Tangente} an $c$ im Punkt $c(t)$ bzw. Tangente an $c$ zum Zeitpunkt $t$.
+\end{defn}
+
+% Lemma 1.2: Tangenten ändern sich unter Parameterwechseln nicht
+
+\begin{defn}
+  Die \emph{Bogenlänge} (BL) einer regulären Kurve $c : [a, b] \to \R^n$ ist
+  \[ L(c) \coloneqq \Intabdt{\|c'(t)\|}. \]
+\end{defn}
+
+\begin{satz}
+  Die Bogenlänge ist invariant unter Umparametrisierung, d.\,h. sei $c : [a_2, b_2] \to \R^n$ eine reguläre Kurve und $\phi : [a_1, b_1] \to [a_2, b_2]$ ein Diffeomorphismus, dann gilt $L(c) = L(c \circ \phi)$.
+\end{satz}
+
+\begin{defn}
+  Eine reguläre Kurve $c : I \to \R^n$ heißt \emph{nach Bogenlänge parametrisiert}, wenn $\| c'(t) \| = 1$ für alle $t \in I$.
+\end{defn}
+
+\begin{satz}
+  Jede reguläre Kurve $c : I \to \R$ lässt sich nach BL parametrisieren, d.\,h. es existiert ein Intervall $J$ und ein Diffeomorphismus $\phi : J \to I$, welcher sogar orientierungserhaltend ist, sodass $\tilde{c} \coloneqq c \circ \phi$ nach BL parametrisiert ist.
+\end{satz}
+
+\begin{defn}
+  Zwei Vektoren $a, b \in \R^n$ heißen gleichgerichtet, falls $a = \lambda b$ für ein $\lambda \geq 0$.
+\end{defn}
+
+\begin{satz}
+  Sei $v : [a, b] \to \R^n$ stetig, dann gilt
+  \[ \| \Intabdt{v(t)} \| \leq \Intabdt{\|v(t)\|}, \]
+  wobei Gleichheit genau dann gilt, falls alle $v(t)$ gleichgerichtet sind.
+\end{satz}
+
+\begin{satz}
+  Sei $c : [a, b] \to \R^n$ eine reguläre Kurve und $x \coloneqq c(a), y \coloneqq c(b)$. Dann gilt $L(c) \geq d(x, y)$. Wenn $L(c) = d(x, y)$, dann gibt es einen Diffeomorphismus $\phi : [a, b] \to [0, 1]$, sodass
+  \[ c = c_{xy} \circ \phi, \]
+  wobei $c_{xy} : [0, 1] \to \R^n,\,t \mapsto x + t (y - x)$.
+\end{satz}
+
+% TODO: Definition Feinheit
+
+\begin{defn}
+  Sei $c : [a, b] \to \R^n$ eine stetige Kurve und $a = t_0 < t_1 < ... < t_k = b$ eine Zerteilung von $[a, b]$. Dann ist die Länge des \emph{Polygonzugs} durch die Punkte $c(t_i)$ gegeben durch
+  \[ \hat{L}_c(t_0, ..., t_k) = \sum_{j=1}^k \| c(t_j) - c(t_{j-1}) \|. \]
+\end{defn}
+
+\begin{defn}
+  Eine stetige Kurve $c$ heißt \emph{rektifizierbar} von Länge $\hat{L}_c$, wenn gilt: Für alle $\epsilon > 0$ gibt es ein $\delta > 0$, sodass für alle Unterteilungen $a = t_0 < t1 < ... < t_k = b$ der Feinheit mindestens $\delta$ gilt:
+  \[ \| \hat{L}_c - \hat{L}_c(t_0, t_1, ..., t_k) \| < \epsilon. \]
+\end{defn}
+
+\begin{defn}
+  Sei $c : I \to \R^n$ regulär und nach BL parametrisiert. Dann heißt der Vektor $c''(t)$ \emph{Krümmungsvektor} von $c$ in $t \in I$ und die Abbildung $\kappa : I \to \R, \quad t \mapsto \| c''(t) \|$ heißt \emph{Krümmung} der nach BL parametrisierten Kurve.
+\end{defn}
+
+\begin{defn}
+  Eine Kurve $c : I \to \R^2$ wird \emph{ebene Kurve} genannt.
+\end{defn}
+
+\begin{defn}
+  Sei $c$ eine reguläre, nach BL parametrisierte, ebene Kurve. Dann heißt
+  \[ n = n_c : I \to \R^2, \quad t \mapsto J \cdot c'(t) \text{ mit } J \coloneqq \begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix}  \]
+  das \emph{Normalenfeld} von $c$.
+\end{defn}
+
+\begin{bem}
+  Für alle $t \in I$ bildet $(c'(t), n_c(t))$ eine positiv orientierte Orthonormalbasis des $\R^2$.
+  Es gilt außerdem $c''(t) \perp c'(t)$, also $c''(t) = \kappa(t) \cdot n_c(t)$, d.\,h. die Krümmung ist im $\R^2$ vorzeichenbehaftet.
+\end{bem}
+
+\begin{satz}[\emph{Frenet-Gleichungen} ebener Kurven]
+  Sei $c : I \to \R^2$ regulär, nach BL parametrisiert und $v = c'$, dann gilt
+  \[ c'' = \kappa \cdot n \quad \text{ und } \quad n' = -\kappa \cdot v. \]
+\end{satz}
+
+% Matrixschreibweise?
+% Beispiel: Kreis
+
+\begin{bsp}
+  Die nach BL parametrisierte gegen den UZS durchlaufene Kreislinie mit Mittelpunkt $m \in \R^2$ und Radius $r > 0$
+  \[ c : \R \to \R^2, \quad t \mapsto m + r \begin{pmatrix} \cos(t/r) \\ \sin(t/r) \end{pmatrix} \]
+  hat konstante Krümmung $\kappa(t) = \tfrac{1}{r}$.
+\end{bsp}
+
+\begin{satz}
+  Sei $c : I \to \R^2$ glatte, nach BL parametrisiert mit konstanter Krümmung $\kappa(t) = R \not= 0$. Dann ist $c$ Teil eines Kreisbogens mit Radius $\tfrac{1}{|R|}$.
+\end{satz}
+
+\begin{defn}
+  Für $c : I \to \R^2$ regulär, nicht notwendigerweiße nach BL parametrisiert, ist die Krümmung zur Zeit $t$ definiert als
+  \[ \frac{\det(c'(t), c''(t))}{ \| c'(t) \|^3 } \]
+\end{defn}
+
+\begin{bem}
+  Obige Definition ist invariant unter orientierungserhaltenden Umparametrisierungen, und stimmt für nach BL parametrisierte Kurven mit der vorhergehenden Definition überein.
+\end{bem}
+
+\begin{satz}[Hauptsatz der lokalen ebenen Kurventheorie]
+  Sei $\kappa : I \to \R$ eine stetige Funktion und $t_0 \in I$ und $x_0, v_0 \in \R^2$ mit $\| v_0 \| = 1$. Dann gibt es ganu eine nach BL parametrisierte zweimal stetig differenzierbare Kurve $c : I \to \R^2$ mit Krümmung $\kappa$, $c(t_0) = x_0$ und $c'(t_0) = v(t_0) = v_0$.
+\end{satz}
+
+\begin{defn}
+  Eine reguläre Kurve $c : [a, b] \to \R^n$ heißt \emph{geschlossen}, falls $c(a) = c(b)$ und $c'(a) = c'(b)$.
+  Eine reguläre geschlossene Kurve $c$ heißt \emph{einfach geschlossen}, wenn $c|_{[a, b[}$ injektiv ist.
+\end{defn}
+
+\begin{defn}
+  Für eine geschlossene reguläre ebene Kurve $c : [a, b] \to \R^2$ heißt die Zahl
+  \[ \overline{\kappa}(c) \coloneqq \Intabdt{\kappa(t) \| c'(t) \|} \]
+  \emph{Totalkrümmung} von $c$.
+\end{defn}
+
+\begin{bem}
+  Ist $c$ nach BL parametrisiert, so ist $\overline{\kappa}(c) = \Intabdt{\kappa(t)}$.
+\end{bem}
+
+\begin{satz}
+  Die Totalkrümmung ist invariant unter orientierungserhaltenden Umparametrisierungen, d.\,h. ist $c : [a_2, b_2] \to \R^2$ eine reguläre Kurve und $\phi : [a_1, b_1] \to [a_2, b_2]$ eine Diffeomorphismus mit $\phi' > 0$, dann gilt $\overline\kappa(c) = \overline\kappa(c \circ \phi)$.
+\end{satz}
+
+\begin{satz}[\emph{Polarwinkelfunktion}]
+  Sei $\gamma = \begin{psmallmatrix} \gamma_1 \\ \gamma_2 \end{psmallmatrix} : [a, b] \to S^1$ stetig (glatt) und $\omega_a \in \R$, sodass $\gamma(a) = e^{i \omega_a}$. Dann gibt es eine eindeutige stetige (glatte) Abbildung $\omega : [a, b] \to \R$, genannt Polarwinkelfunktion von $\gamma$ mit $\omega(a) = \omega_a$ und $\gamma(t) = e^{i \omega(t)} = \begin{pmatrix} \cos(\omega(t)) \\ \sin(\omega(t)) \end{pmatrix}$ für alle $t \in [a, b]$.
+\end{satz}
+
+\begin{satz}
+  Seien $\omega$ und $\tilde\omega$ zwei stetige Polarwinkelfunktionen zu einer stetigen Abbildung $\gamma : [a, b] \to S^1$. Dann gibt es ein $k \in \Z$, sodass $\omega(t) - \tilde\omega(t) = 2 \pi k$ für alle $t \in [a, b]$.
+\end{satz}
+
+\begin{satz}
+  Sei $c : [a, b] \to \R^2$ eine ebene reguläre geschlossene Kurve, dann heißt die ganze Zahl
+  \[ U_c \coloneqq \frac{1}{2 \pi} \overline\kappa(c) = \frac{1}{2 \pi} \Intabdt{\kappa(t) \| c'(t) \|} \]
+  \emph{Tangentendrehzahl} oder \emph{Umlaufzahl} von $c$.
+\end{satz}
+
+\begin{satz}[Umlaufsatz von Hopf]
+  Die Tangentendrehzahl einer einfach geschlossenen regulären Kurve ist $\pm 1$.
+\end{satz}
+
+\begin{satz}
+  Für die Absolutkrümmung einer einfach geschlossenen regulären Kurve $c : [a, b] \to \R^2$ gilt $\kappa_{\text{abs}} \geq 2 \pi$, wobei Gleichheit genau dann gilt, wenn $\kappa_c$ das Vorzeichen nicht wechselt.
+\end{satz}
+
+\begin{satz}[Whitney-Graustein]
+  Für zwei glatte reguläre geschlossene ebene Kurven $c, d : [0, 1] \to \R^2$ sind folgende Aussagen äquivalent:
+  \begin{multicols}{2}
+    \begin{enumerate}[label=(\roman*),leftmargin=2em]
+      \item $c$ ist zu $d$ regulär homotop
+      \item $U_c = U_d$
+    \end{enumerate}
+  \end{multicols}
+\end{satz}
+
+\begin{defn}
+  Eine glatte reguläre Kurve $c : I \to \R^n$ ($n \geq 3$) heißt \emph{Frenet-Kurve}, wenn für alle $t \in I$ die Ableitungen $c'(t), c''(t), ..., c^{(n-1)}(t)$ linear unabhängig sind.
+\end{defn}
+
+\begin{defn}
+  Sei $c : I \to \R^n$ eine Frenet-Kurve und $t \in I$. Wende das Gram-Schmidtsche Orthogonalisierungsverfahren auf $\{ c'(t), c''(t), ..., c^{(n-1)}(t) \}$ an und ergänze das resultierende Orthonormalsystem $(b_1(t), ..., b_{n-1}(t))$ mit einem passenden Vektor $b_n(t)$ zu einer Orthonormalbasis, die positiv orientiert ist. Die so definierten Funktionen $b_1, ..., b_n : I \to \R^n$ sind stetig und werden zusammen das \emph{Frenet-$n$-Bein} von $c$ genannt.
+\end{defn}
+
+\begin{defn}
+  Sei $(b_1, ..., b_n)$ das Frenet-$n$-Bein einer Frenet-Kurve $c$. Dann gilt:
+  \[ A \coloneqq (\langle b_j' , b_k \rangle)_{jk} = \begin{pmatrix}
+    0 & \kappa_1 &&& 0 \\
+    - \kappa_1 & 0 & \kappa_2 \\
+    & \ddots & \ddots & \ddots \\
+    && - \kappa_{n-2} & 0 & \kappa_{n-1} \\
+    0 &&& - \kappa_{n-1} & 0
+  \end{pmatrix} \]
+  Die Funktion $\kappa_j : I \to \R, t \mapsto \langle b_j'(t) , b_{j+1}(t) \rangle, j = 1, ..., n - 1$ heißt $j-te$ \emph{Frenet-Krümmung} von $c$.
+\end{defn}
+
+% Aufgabe 1.23
+
+\begin{satz}[Hauptsatz der lokalen Raumkurventheorie]
+  Seien $\kappa_1, ..., \kappa_{n-1} : I \to \R$ glatte Funktionen mit $\kappa_1, ..., \kappa_{n-2} > 0$ und $t_0 \in I$ und $\{ v_1, ..., v_n \}$ eine positiv orientierte Orthonormalbasis, sowie $x_0 \in \R^n$. Dann gibt es genau eine nach BL parametrisierte Frenet-Kurve $c : I \to \R^n$, sodass gilt
+  \begin{itemize}
+    \item $c(t_0) = x_0$,
+    \item das Frenet-$n$-Bein von $c$ in $t_0$ ist $\{ v_1, ..., v_n \}$ und
+    \item die $j$-te Frenet-Krümmung von $c$ ist $\kappa_j$.
+  \end{itemize}
+\end{satz}
+
+\begin{defn}[Frenet-Kurven im $\R^3$]
+  Sei $c : I \to \R^3$ eine nach BL parametrisierte Frenet-Kurve und $t \in I$. Dann heißt
+  \begin{itemize}
+    \item $b_1(t) = v(t) = c'(t)$ der \emph{Tangentenvektor} an $c$ in $t$,
+    \item $b_2(t) = \tfrac{c''(t)}{\| c''(t) \|}$ \emph{Normalenvektor} an $c$ in $t$,
+    \item $\Span(b_1(t), b_2(t))$ \emph{Schmiegebene} an $c$ in $t$,
+    \item $b_3(t) = b_1(t) \times b_2(t)$ \emph{Binormalenvektor} an $c$ in $t$,
+    \item $\tau_c(t) = \tau(t) \coloneqq \kappa_2(t) = \langle b_2'(t) , b_3(t) \rangle$ \emph{Torsion} o. \emph{Windung} von~$c$.
+  \end{itemize}
+\end{defn}
+
+\begin{bem}
+  Die Frenet-Gleichungen für nach BL parametrisierte Frenet-Kurven im $\R^3$ lauten
+  \[
+      b_1' = \kappa_2 b_2, \quad
+      b_2' = - \kappa_c b_1 + \tau_c b_3, \quad
+      b_3' = - \tau_c b_2
+  \]
+\end{bem}
+
+% Nach Theorem 1.24 bestimmt die Kru ̈mmung und die Torsion eine nach Bogenla ̈nge
+% parametrisierte Frenet-Kurve im R3 bis auf eine euklidische Bewegung eindeutig
+
+\begin{bem}
+  Für eine nicht nach BL parametrisierte Frenet-Kurve $c : I \to \R^3$ gilt für Krümmung und Torsion
+  \[ \kappa_c \coloneqq \frac{\| c' \times c'' \|}{\| c' \|^3} \quad \text{und} \quad \tau_c \coloneqq \frac{\det(c', c'', c''')}{\| c' \times c'' \|^2}. \]
+\end{bem}
+
+% TODO: Redundant?
+
+\begin{defn}
+  Für eine glatte geschlossene reguläre Kurve $c : [a, b] \to \R^n$ ist die \emph{Totalkrümmung} definiert durch
+  \[ \overline\kappa(c) \coloneqq \Intabdt{\kappa_c(t) \cdot \| c'(t) \|}. \]
+
+  Hierbei ist die Krümmung einer regulären Raumkurve $c : I \to \R^n$ wie folgt definiert:
+  Sei $\phi : I \to J$ orientierungserhaltend
+  (d.\,h. $\phi' > 0$) und so gewählt,
+  dass $\tilde{c} \coloneqq c \circ \phi^{-1} : J \to \R^n$ nach
+  BL parametrisiert ist, dann definieren wir $\kappa_c(t) \coloneqq \kappa_{\tilde{c}}(\phi(t))$.
+\end{defn}
+
+\begin{satz}[Fenchel]
+  Für eine geschlossene reguläre glatte (oder $\mathcal{C}^2$) Kurve $c : [a, b] \to \R^3$ gilt
+  \[ \overline\kappa(c) \geq 2 \pi. \]
+  Gleichheit tritt genau dann ein, wenn $c$ eine einfach geschlossene konvexe reguläre glatte (oder $\mathcal{C}^2$) Kurve ist, die in einer affinen Ebene des $\R^3$ liegt.
+\end{satz}
+
+\begin{satz}
+  Sei $v : [0, b] \to S^2 \subset \R^3$ eine stetige rektifizierbare Kurve der Länge $L < 2 \pi$
+mit $c(0) = c(b)$, so liegt das Bild von $v$ ganz in einer offenen Hemisphäre.
+\end{satz}
+
+
+\section{Lokale Flächentheorie}
+
+\begin{nota}
+  Sei im Folgenden $m \in \N$ und $U \subset \R^m$ offen.
+\end{nota}
+
+\begin{defn}
+  Sei $f : U \to \R^n$ eine Abbildung und $v \in \R^m \setminus \{ 0 \}$. Dann heißt
+  \[ \partial_v f(u) \coloneqq \lim_{h \to 0} \frac{f(u + hv) - f(u)}{ h } \]
+  \emph{Richtungsableitung} von $f$ im Punkt $u$ (falls der Limes existiert). Für $v = e_j$ heißt
+  \[ \partial_j f(u) \coloneqq \partial_{e_j} f(u) \]
+  \emph{partielle Ableitung} nach der $j$-ten Variable. Falls die partielle Ableitung für alle $u \in U$ existiert, erhalten wir eine Funktion $\partial_j : U \to \R^n, u \mapsto \partial_j f(u)$. Definiere
+  \[ \partial_{j_1, j_2, ..., j_k} f \coloneqq \partial_{j_1} ( \partial_{j_2} ( ... ( \partial_{j_k} f) ) ). \]
+\end{defn}
+
+\begin{defn}
+  Eine Abbildung $f : U \to \R^n$ heißt $\mathcal{C}^k$-Abbildung, wenn alle $k$-ten partiellen Ableitungen von $f$ existieren und stetig sind. Wenn $f \in \mathcal{C}^k$ für beliebiges $k \in \N$, so heißt $f$ \emph{glatt}.
+\end{defn}
+
+\begin{satz}[Schwarz]
+  Ist $f$ eine $\mathcal{C}^k$-Abbildung, so kommt es bei allen $l$-ten partiellen Ableitungen mit $l \leq k$ nicht auf die Reihenfolge der partiellen Ableitungen an.
+\end{satz}
+
+\begin{defn}
+  Eine Abbildung $f : U \to \R^n$ heißt in $u \in U$ \emph{total differenzierbar}, wenn gilt: Es gibt eine lineare Abbildung $D_u f = \partial f_u : \R^m \to \R^n$, genannt das \emph{totale Differential} von $f$ in $u$, sodass für genügend kleine $h \in \R^n$ gilt:
+  \[ f(u + h) = f(u) + \partial f_u(h) + o(h) \]
+  für eine in einer Umgebung von $0$ definierten Funktion $o : \R^n \to \R^m$ mit $\lim_{h \to 0} \tfrac{o(h)}{\| h \|} = 0$.
+\end{defn}
+
+\begin{defn}
+  Für eine total differenzierbare Funktion $f$ heißt die Matrix $J_u f = (D_u f(e_1), ..., D_u f(e_n))$ \emph{Jacobi-Matrix} von $f$ in $u$.
+\end{defn}
+
+\begin{bem}
+Es gelten folgende Implikationen:\\
+$\quad\quad\,\,\, f$ ist stetig partiell differenzierbar\\
+$\implies$ $f$ ist total differenzierbar ($\!\implies f$ ist stetig)\\
+$\implies$ $f$ ist partiell differenzierbar
+\end{bem}
+
+% TODO: Kettenregel
+
+\begin{defn}
+  Eine total differenzierbare Abbildung $f : U \to \R^n$ heißt regulär oder Immersion, wenn für alle $u \in U$ gilt: $\mathrm{Rang}(J_u f) = m$, d.\,h. alle partiellen Ableitungen sind in jedem Punkt linear unabhängig und $J_u f$ ist injektiv. Insbesondere muss $m \leq n$ gelten.
+\end{defn}
+
+\begin{defn}
+  Sei $X : U \to \R^n$ eine (glatte) Immersion. Dann heißt das Bild $f(U)$ \emph{immergierte Fläche}, immersierte Fläche oder parametrisiertes Flächenstück. Sei $\tilde{U}$ offen in $\R^n$ und $\phi : \tilde{U} \to U$ ein Diffeomorphismus, dann heißt $\tilde{X} \coloneqq X \circ \phi : \tilde{U} \to \R^n$ \emph{Umparametrisierung} von $X$.
+\end{defn}
+
+\begin{nota}
+  Sei im folgenden $X : U \to \R^n$ eine Immersion.
+\end{nota}
+
+\begin{defn}
+  Für $u \in U$ heißt der Untervektorraum
+  \[ T_u X \coloneqq \Span(\partial_1 X(u), ..., \partial_m X(u)) = \mathrm{Bild}(D_u X) \subset \R^n \]
+  \emph{Tangentialraum} von $X$ in $u$ und sein orthogonales Komplement $N_u X \coloneqq (T_u X)^\perp \subset \R^n$ \emph{Normalraum} an $X$ in $u$.
+\end{defn}
+
+\begin{bem}
+  Für $u \in U$ definiert
+  \[ \langle v, w \rangle_u \coloneqq \langle D_u X(v), D_u X(w) \rangle_{\mathrm{eukl}} \]
+  ein Skalarprodukt auf dem $\R^m$. Die Positiv-Definitheit folgt dabei aus der Injektivität von $D_u$.
+\end{bem}
+
+\begin{bem}
+  Bezeichne mit $\mathrm{SymBil}(\R^m)$ die Menge der symmetrischen Bilinearformen auf $\R^m$.
+\end{bem}
+
+\begin{defn}
+  Die \emph{erste Fundamentalform} (FF) einer Immersion $X$ ist die Abbildung
+  \[ \I : U \to \mathrm{SymBil(\R^m)}, \quad u \mapsto \I_u \coloneqq \langle \cdot , \cdot \rangle_u. \]
+  Äquivalent dazu wird auch die Abbildung
+  \[ g : U \to \R^{m \times m}, \quad u \mapsto g_u \coloneqq (J_u X)^T (J_u X) \]
+  manchmal als erste Fundamentalform bezeichnet.
+\end{defn}
+
+\begin{defn}
+  Sei $c : [a, b] \to \R^n$ eine glatte Kurve. Wir nennen $c$ eine \emph{Kurve auf X}, wenn es eine glatte Kurve $\alpha : [a, b] \to U$ gibt, sodass $c = X \circ \alpha$
+\end{defn}
+
+\begin{bem}
+  Im obigen Fall gilt
+  \[ L(c) \coloneqq \Intabdt{\|c'(t)\|} = \Intabdt{\| D_{\alpha(t)} X(\alpha'(t)) \|}. \]
+\end{bem}
+
+\begin{bem}
+  Seien $c_1 = X \circ \alpha_1$ und $c_2 = X \circ \alpha_2$ zwei reguläre Kurven auf $X$, die sich in einem Punkt schneiden, d.\,h. $\alpha_1(t_1) = \alpha_2(t_2) =: u$. Dann ist der Schnittwinkel $\measuredangle(c_1'(t), c_2'(t))$ von $c_1$ und $c_2$ in $X(u)$ gegeben durch:
+  \begin{align*}
+    \cos(\measuredangle(c_1'(t), c_2'(t))) &= \frac{\langle c_1'(t_1) , c_2'(t_2) \rangle}{\| c_1'(t_1) \| \cdot \| c_2'(t_2) \|} \\
+    &= \frac{I_u(\alpha_1'(t_1), \alpha_2'(t_2))}{\sqrt{I_u(\alpha_1'(t_1), \alpha_1'(t_1)) \cdot I_u(\alpha_2'(t_2), \alpha_2'(t_2))}}
+  \end{align*}
+\end{bem}
+
+\begin{defn}
+  Sei $C \subset U$ eine kompakte messbare Teilmenge, dann heißt
+  \[ A(X(C)) \coloneqq \Int{C}{}{ \sqrt{\det(g_u)} }{u} \]
+  der Flächeninhalt von $X(C)$.
+\end{defn}
+
+\begin{satz}[Transformation der ersten FF]
+  Sei $\tilde{X} = X \circ \phi$ eine Umparametrisierung von $X$ mit einem Diffeo $\phi : \tilde{U} \to U$, dann gilt für $\tilde{g}_{\tilde{u}} = (J_{\tilde{u}} \tilde{X})^T (J_{\tilde{u}} \tilde{X})$:
+  \[ \tilde{g}_{\tilde{u}} = (J_{\tilde{u}}(\phi))^T \cdot g_{\phi(\tilde{u})} \cdot J_{\tilde{u}}(\phi). \]
+\end{satz}
+
+\begin{bsp}[Drehfläche]
+  Sei $c : I \to \R_{> 0} \times \R, t \mapsto (r(t), z(t))$ eine reguläre glatte Kurve. Dann heißt
+  \[ X : I \times \R \to \R^3, \quad (t, s) \mapsto (r(t) \cos(s), r(t) \sin(s), z(t)) \]
+  \emph{Drehfläche} mit Profilkurve $c$. Es gilt:
+  \[ g_{(t, s)} = \begin{pmatrix} \| c'(t) \|^2 & 0 \\ 0 & r(t)^2 \end{pmatrix} \]
+\end{bsp}
+
+\begin{bsp}[Kugelfläche] Die Einheitssphäre im $\R^3$ ist
+\[ X : \R^2 \to \R^3, \quad (s, t) \mapsto (- \sin(t) cos(t), \cos^2(t), \sin(t)). \]
+\end{bsp}
+
+\begin{defn}
+  Zwei Immersionen $X : U \to \R^n$ und $\tilde{X} : \tilde{U} \to \R^k$ heißen \emph{lokal isometrisch}, wenn es eine Umparametrisierung $\phi : U \to \tilde{U}$ gibt, sodass die ersten Fundamentalformen von $X$ und $\tilde{X} \circ \phi$ übereinstimmen. Ist eine Immersion $X$ isometrisch zu einer Immersion, deren Bild eine offene Teilmenge einer affinen Ebene ist, so heißt $X$ \emph{abwickelbar}.
+\end{defn}
+
+% Beispiel: Zylinderfläche
+% Beispiel: flacher Torus
+% Beispiel: Kegelfläche
+% Beispiel: Katenoid und Wendelfläche
+% Beispiel: Regelfläche
+
+\begin{defn}
+  Sei $X : U \to \R^n$ eine Immersion mit $U \subset \R^{n-1}$ offen. Dann heißt $X$ \emph{Hyperfläche} im $\R^n$.
+\end{defn}
+
+\begin{bem}
+  Es gilt in diesem Fall offenbar $\dim T_u = n - 1$ und $\dim N_u = 1$ für $u \in U$ und für einen Vektor $\nu_u \in N_u X \setminus \{ 0 \}$ gilt $N_u X = \R \cdot v_u$.
+\end{bem}
+
+\begin{defn}
+  $v_u \coloneqq \sum_{j=1}^{n} \det(\partial_1 X(u), ..., \partial_{n-1} X(u), e_j) e_j$
+\end{defn}
+
+\begin{bem}
+  Es gilt:
+  \begin{itemize}
+    \item $v_u \in N_u X \setminus \{ 0 \}$
+    \item $\det(\partial_1 X(u), ..., \partial_{n-1} X(u), v_u) > 0$
+  \end{itemize}
+\end{bem}
+
+\begin{bem}
+  Für $n = 3$ und $m = 2$ gilt $v_u = \partial_1 X(u) \times \partial_2 X(u)$.
+\end{bem}
+
+\begin{defn}
+  Für eine Hyperfläche $X : U \to \R^n$ heißt
+  \[ \nu : U \to S^{n-1} = \Set{ x \in \R^n }{ \| x \| = 1 }, \quad u \mapsto \nu_u \coloneqq \tfrac{v_u}{\| v_u \|} \]
+  \emph{Gaußabbildung}.
+\end{defn}
+
+\begin{satz}
+  Die Gaußabbildung einer Hyperfläche ist invariant unter orientierungserhaltenden Umparametrisierungen, d.\,h. ist $\phi : \tilde{U} \to U$ ein Diffeo mit $\det(J_{\tilde{u}} \phi) > 0$ für alle $\tilde{u} \in \tilde{U}$, dann ist $\tilde{\nu} = \nu \circ \phi$.
+\end{satz}
+
+\begin{nota}
+  $\Bil(\R^m, \R^n) \coloneqq \Set{ B : \R^m \times \R^m \to \R^n }{ B \text{ bilinear } }$
+\end{nota}
+
+\begin{defn}
+  Die \emph{vektorwertige zweite Fundamentalform} ist die Abbildung einer Immersion $X$ ist die Abbildung
+  \begin{align*}
+    \II : U \to \Bil(\R^m, \R^n), \quad & u \mapsto \II(u) = \II_u, \text { mit } \\
+    \II_u : \R^m \times \R^m \to \R^n, \quad & (v, w) \mapsto \II_u(v, w) \coloneqq (\partial_v \partial_w X(u))^{N_u},
+  \end{align*}
+  wobei $(\cdot)^{N_u}$ die orthogonale Projektion auf den Normalenraum bezeichnet.
+\end{defn}
+
+\begin{bem}
+  Nach dem Satz von Armandus Schwarz ist $\II_u$ eine symmetrische Bilinearform.
+\end{bem}
+
+\begin{bem}
+  Für eine Hyperfläche $X : U \to \R^n, \, (U \opn \R^{n-1})$ gilt
+  \[ \II_u(v, w) = h_u(v, w) \nu_u \quad \text{ mit } \quad h_u(v, w) = \langle \II_u(v, w) , \nu_u \rangle. \]
+\end{bem}
+
+\begin{defn}
+  Die Abbildung
+  \[ h : U \to \SymBil(\R^{n-1}), u \mapsto h_u = h(u) \]
+  mit $h_u(v, w) = \langle \II_u(v, w), \nu_u \rangle = \langle \partial_v \partial_w X(u), \nu_u \rangle$ heißt \emph{zweite Fundamentalform} der Hyperfläche $X$.
+\end{defn}
+
+\begin{bem}
+  Man kann die zweite FF auch als matrixwertige Abbildung
+  \[ h : U \to \R^{(n-1) \times (n-1)}, \quad u \mapsto (h_{jk}(u)) = \langle \partial_j \partial_k X(u), \nu_u \rangle \]
+  aufassen.
+\end{bem}
+
+\begin{satz}
+  Für die Gaußabbildung $\nu$ einer Hyperfläche $X : U \to \R^n$ gilt für alle $j, k \in \{ 1, ..., m \}$
+  \[ \langle \partial_j \nu , \partial_k X \rangle = - h_{jk} \quad \text{und} \quad \langle \partial_j \nu, \nu \rangle = 0. \]
+\end{satz}
+
+\begin{defn}
+  Sei $X : U \to \R^n$ eine Hyperfläche und $u \in U$, dann heißt die lineare Abbildung
+  \[ W_u \coloneqq - D_u \nu \circ (D_u X)^{-1} : T_u X \to T_u X \]
+  \emph{Weingartenabbildung} von $X$ im Punkt $u$.
+\end{defn}
+
+\begin{bem}
+  Es gilt $W_u(\partial_j X(u)) = - \partial_j \nu(u)$.
+\end{bem}
+
+\begin{satz}
+  \begin{itemize}
+    \item $W_u$ ist selbstadjungiert bzgl. der Einschränkung $\langle \cdot , \cdot \rangle_{T_u}$.
+    \item $h_{jk}(u) = \langle W_u(\partial_j X(u)), \partial_k X(u) \rangle$
+    \item Die Weingartenabbildung ist invariant unter orientierungserhaltenden Umparametrisierungen, d.\,h. ist $\phi : \tilde{U} \to U$ ein Diffeo mit $\det(J\phi) > 0$, dann gilt für $\tilde{X} \coloneqq X \circ \phi$ und alle $\tilde{u} \in \tilde{U}$: $W_{\phi(\tilde{u})} = \tilde{W}_{\tilde{u}}$.
+  \end{itemize}
+\end{satz}
+
+\begin{satz}
+  Sei $g_u = (g_{jk}(u))$ die Matrix der ersten und $h_u = (h_{jk}(u))$ die Matrix der zweiten FF einer Hyperfläche $X$, dann gilt für die Matrix $w_u = (w_{jk}(u))$ von $W_u$ bzgl. der Basis $\{ \partial_1 X(u), ..., \partial_{n-1} X(u) \}$ von $T_u X$:
+  \[ w_u = g_u^{-1} \cdot h_u \]
+\end{satz}
+
+\begin{bem}
+  Die Weingartenabbildung ist als selbstadjungierter Endomorphismus reell diagonalisierbar (Spektralsatz).
+\end{bem}
+
+\begin{defn}
+  Sei $X : U \to \R^n$ eine Hyperfläche.
+  \begin{itemize}
+    \item Die Eigenwerte $\kappa_1(u), ..., \kappa_{n-1}(u)$ mit Vielfachheiten von $W_u$ heißen \emph{Hauptkrümmungen} von $X$ in $u$ und die dazugehörigen Eigenvektoren \emph{Hauptkrümmungsrichtungen} von $X$ in $u$.
+    \item Die \emph{mittlere Krümmung} von $X$ ist definiert als
+    \[ H : U \to \R, \quad u \mapsto \tfrac{1}{n-1} \, \spur(W_u) = \tfrac{1}{n-1} \sum_{j=1}^{n-1} \kappa_j(u). \]
+    \item Die \emph{Gauß-(Kronecker-)Krümmung} von $X$ ist die Abbildung
+    \[ K : U \to \R, \quad u \mapsto \det(W_u) = \frac{\det(h_u)}{\det{g_u}} = \prod_{j=1}^{n-1} \kappa_j(u). \]
+  \end{itemize}
+\end{defn}
+
+\begin{satz}
+  Die Hauptkrümmungen, die mittlere Krümmung und die Gauß-Kronecker-Krümmung sind invariant unter orientierungserhaltenden Umparametrisiserungen.
+\end{satz}
+
+% Beispiel: Drehfläche
+
+\begin{satz}
+  Sei $X : U \to \R^n$ eine Hyperfläche und $u_0 \in U$ ein Punkt. Dann gibt es eine offene Umgebung $U_0 \opn U$ von $u_0$ und eine Umparametrisierung $\phi : U_0 \to \tilde{U}$, sodass für $\tilde{X} \coloneqq X \circ \phi^{-1}$ gilt:
+
+  Es gibt eine glatte (bzw. $\mathcal{C}^2$) Funktion $f : \tilde{U} \to \R$ mit $D_{\phi(u_0)} f = 0$, sodass $\tilde{X} = \Graph(f)$, d.\,h. es gilt für alle $\tilde{u} \in \tilde{U}$:
+  \[ \tilde{X}(\tilde{u}) = (\tilde{u}, f(\tilde{u})). \]
+\end{satz}
+
+\begin{nota}
+  $\nabla f = (\partial_1 f, ..., \partial_k f)$ heißt \emph{Gradient} von $f : \R^k \to \R^m$.
+\end{nota}
+
+\begin{satz}
+  Sei $U \opn \R^{n-1}$ und $f : U \to \R$ glatt. Dann ist die zweite FF der Graphen-Hyperfläche $X : U \to \R^n, u \mapsto (u, f(n))$
+  \[ h_{jk}(u) = \frac{\partial_{jk} f(u)}{\sqrt{1 + |\nabla f(u)|^2}}. \]
+\end{satz}
+
+\begin{satz}
+  Sei $X : U \to \R^n$ eine Hyperfläche, $u_0 \in U$, sowie $E_{u_0} \coloneqq X(u_0) + T_{u_0} X$ die affine Tangentialebene an $X$ in $u_0$. Dann gilt:
+  \begin{itemize}
+    \item Ist $K(u_0) > 0$, so liegt für eine kleine offene Umgebung $U_0 \subset U$ von $u_0$ das Bild $X(U_0)$ ganz auf einer Seite von $E_{u_0}$.
+    \item Ist $K(u_0) < 0$, so trifft für jede Umgebung $U_0 \subset U$ von $u_0$ das Bild $X(U_0)$ beide Seiten von $E_{u_0}$.
+  \end{itemize}
+\end{satz}
+
+% Sei $X : U \to \R^n$ eine Hyperfläche
+
+\begin{defn}
+  Sei $u_0 \in U, v \in T_{u_0} X, P_v \coloneqq X(u_0) + \Span(v, \nu(u_0))$.
+  Sei $U_0 \subset U$ eine offene Umgebung von $u_0$, dann heißt
+  \[ P_v \cap X(U_0) \]
+  \emph{Normalenschnitt} in $u_0$ in Richtung $v$.
+\end{defn}
+
+\begin{satz}
+  Wenn $U_0$ hinreichend klein, dann ist $P_v \cap X(U_0)$ Bild einer regulären glatten Kurve.
+\end{satz}
+
+\begin{defn}
+  Wenn $\| v \| = 1$, dann heißt
+  \[ \kappa_v(u) \coloneqq \langle W_u v, v \rangle \]
+  \emph{Normalkrümmungen} von $X$ in $u$ in Richtung $v$.
+\end{defn}
+
+\begin{bem}
+  Sei $\|v\| = 1$. Sei $c : I \to P_v \tilde{=} \R^2$ nach BL parametrisiert, sodass $\Bild(c) = P_v \cap X(U_0)$, und $c(0) = X(u_0)$ und $c'(0) = v$. Dann: $\kappa_v(u) = \kappa_c(0)$
+\end{bem}
+
+\begin{satz}
+  Die Hauptkrümmungen $\kappa_1(u_0), ..., \kappa_2(u_0)$ sind die Extrema der Abbildung
+  \[ T_{u_0} X \supset S^1 \to \R, \quad v \mapsto \kappa_v(u_0) = \langle W_{u_0} v, v \rangle. \]
+\end{satz}
+
+
+\subsection{Die Levi-Civita-Ableitung}
+
+\begin{defn}
+  Ein \emph{Vektorfeld} (VF) auf einer offenen Menge $U \opn \R^m$ ist eine Abbildung $v : U \to \R^m$.
+\end{defn}
+
+\begin{nota}
+  $\chi(U) = \Set{ v : U \to \R^n }{ \text{$v$ glatt} }$
+\end{nota}
+
+\begin{defn}
+  Sei $X : U \to \R^n$ eine immergierte Fläche, $U \opn \R^m$. Ein \emph{tangentiales Vektorfeld} längs $X$ ist eine glatte Abbildung $V : U \to \R^n$ mit $V(u) \in T_u X \, \forall u \in U$.
+\end{defn}
+
+\begin{defn}
+  Mit typtheoretischer Syntax ist ein tangentiales Vektorfeld längs $X$ eine glatte Abbildung $V : \prod_{u : U} T_u X$.
+\end{defn}
+
+\begin{nota}
+  $\chi(TX) = \Set{ V : U \to \R^n }{ \text{$V$ ist tang. VF längs $X$} }$
+\end{nota}
+
+\begin{bem}
+  Folgende Abbildung ist eine Bijektion:
+
+  \begin{align*}
+     H : \chi(U) \to \chi(TU), \quad &v \mapsto v^{\wedge} \coloneqq \partial_v X, \text{ wobei}\\
+     \partial_v X : \prod_{u : U} T_u X, \quad &u \mapsto \partial_{v(u)} X(u)
+   \end{align*} 
+\end{bem}
+
+\begin{nota}
+  Für ein glattes Vektorfeld $Y : U \to \R^n$ bezeichnet $Y^T$ das tangentiale Vektorfeld längs $X$ definiert durch
+  \[ Y^T : \prod_{u : U} T_u X, \quad u \mapsto (Y(u))^{T_u X}. \]
+\end{nota}
+
+\begin{defn}
+  Die Abbildung
+  \begin{align*}
+    \nabla : \chi(U) \times \chi(TX) &\to \chi(TX) \\
+    (w, V) &\mapsto \nabla_w V \coloneqq (\partial_w X)^T
+  \end{align*}
+  heißt \emph{Levi-Civita-Ableitung} von $V$ in Richtung $w$.
+\end{defn}
+
+\begin{acht}
+  Gradient $\not=$ Levi-Civita-Ableitung!
+\end{acht}
+
+\begin{satz}[Eigenschaften der Levi-Civita-Ableitung]
+  Sei $f : U \to \R$ glatt, $w_1, w_2, w \in \chi(U)$, $V, V_1, V_2 \in \chi(TX)$. Dann gilt:
+  \begin{itemize}
+    \item $\nabla_{f(w_1) + w_2} V = f \circ \nabla_{w_1} V + \nabla_{w_2} V$
+    \item $\nabla_w (V_1 + V_2) = \nabla_w V_1 + \nabla_w V_2$
+    \item $\nabla_w (f \cdot V) = f (\nabla_w V) + \partial_w f \cdot V $
+    \item $\partial_w \langle V_w, V_2 \rangle = \langle \nabla_w V_1 , V_2 \rangle + \langle V_1 , \nabla_w V_2 \rangle$ (Metrizität)
+  \end{itemize}
+\end{satz}
+
+\begin{nota}
+  Sei $j \in \{1, ..., m\}$, dann betrachten wir die konstante Abbildung $e_j : U \to \R^n, u \mapsto e_j$. Wir setzen $\nabla_j V \coloneqq \nabla_{e_j} V$.
+\end{nota}
+
+\begin{defn}
+  Sei $X : U \to \R^n$ eine Immersion, so können wir für $j, k \in \{ 1, ..., m\}$ schreiben:
+  \[ \nabla_j (\partial_k X) = \sum_{l=1}^m \Gamma_{jk}^l \partial_l (X). \]
+  Dabei heißen die Funktionen $\Gamma_{jk}^l : U \to \R$ \emph{Christoffel-Symbole}.
+\end{defn}
+
+\begin{nota}
+  $\Gamma_{jkl} \coloneqq \sum_{r=1}^m g_{rl} \Gamma_{jk}^r : U \to \R$
+\end{nota}
+
+\begin{satz}
+  $\Gamma_{jkl}\!=\!\sum_{r=1}^m \Gamma_{jk}^{r} \langle \partial_r X, \partial_l X \rangle\!=\!\langle \nabla_j (\partial_k X), \partial_l X \rangle\!=\!\langle \partial_j (\partial_k X), \partial_l X \rangle$
+\end{satz}
+
+\begin{satz}
+    Es gilt $\Gamma_{jk}^l = \Gamma_{kj}^l \,\, \text{und} \,\, \Gamma_{jkl} = \tfrac{1}{2} (\partial_j \cdot g_{kl} + \partial_k \cdot g_{jl} + \partial_l \cdot g_{jk})$.
+\end{satz}
+
+\begin{bem}
+  Schreiben wir $v = \sum_{k=1}^m v^k e_k$ für $v \in \chi(U)$, dann ist
+  \[ \nabla_j V = \sum_{l=1}^m \left( \partial_j v^l + \sum_{k=1}^m \Gamma_{jk}^l v^k \right) \partial_l X. \]
+\end{bem}
+
+
+% \subsection{Levi-Civita-Ableitung für Vektorfelder auf $U$}
+
+\begin{defn}[Levi-Civita-Ableitung für Vektorfelder auf $U$]
+  Sei $X : U \to \R^n$ eine immergierte Fläche, so heißt
+  \begin{align*}
+    \nabla_ : \chi(U) \times \chi(U) &\to \chi(U) \\[-12pt]
+    (w, v) &\mapsto \nabla_w v = H^{-1}(\nabla_w \overbrace{H(v)}^{=\,v^\wedge})
+  \end{align*}
+  \emph{Levi-Civita-Ableitung} von $v$ in Richtung $w$.
+\end{defn}
+
+\begin{bem}
+  Schreiben wir $v = \sum v^k \partial_k X$ für $V \in \chi(TX)$, dann ist
+  \begin{align*}
+    \nabla_j v =& \sum_{l=1}^m \left( \partial_j v^l + \sum_{k=1}^m \Gamma_{jk}^l v^k \right) e_l = \partial_j v + \Gamma_j v \text{ mit}\\
+    \Gamma_j :& \,\, U \to \R^{m \times m}, \,\, u \mapsto (\Gamma_{jk}^l(u))_{lk}.
+  \end{align*}
+\end{bem}
+
+\begin{satz}
+  Seien $v, v_1, v_2, w, w_1, w_2 \in \chi(U), f : U \to \R$ glatt. Dann:
+  \begin{itemize}
+    \item $\nabla_{f \cdot w_1 + w_2} v = f \cdot \nabla_{w_1} v + \nabla_{w_2} v$
+    \item $\nabla_w (v_1 + v_2) = \nabla_w v_1 + \nabla_w v_2$
+    \item $\nabla_w (f \cdot v) = f (\nabla_w v) + (\nabla_w f) \cdot v$
+    \item $\partial_w \I(v_1, v_2) = \I(\nabla_w v_1, v_2) + \I(v_1, \nabla_w v_2)$ (verträglich mit 1.\,FF)
+  \end{itemize}
+\end{satz}
+
+
+% \subsection{Tangentiale Vektorfelder längs Kurven}
+
+\begin{defn}
+  Sei $\alpha : [a, b] \to U$ eine glatte, reguläre Kurve, $c \coloneqq X \circ \alpha$. Eine glatte Abbildung $V : [a, b] \to \R^n$ mit $V(t) \in T_{\alpha(t)} X \forall t \in [a, b]$ \emph{tangentiales Vektorfeld} längs $c$.
+\end{defn}
+
+\begin{defn}
+  Typtheoretisch ist ein tangentiales VF längs $c$ eine glatte Abbildung $V : \prod_{t : [a, b]} T_{\alpha(t)} X$.
+\end{defn}
+
+\begin{bem}
+  Eine glatte Abbildung $v : U \to \R^m$ bestimmt eindeutig ein tang. VF vermöge
+  \[ V(t) := v^\wedge(t) = \partial_{v(t)} X(\alpha(t)) = J_{\alpha(t)} X \cdot v(t). \]
+  Schreiben wir $v = \sum v^j e_j$ und $\alpha = \sum \alpha^j e_j$, so gilt für $V = v^\wedge$:
+  \[ V' = \tfrac{\d}{\d t} V = \sum_{j=1}^m (v^j)' (\partial_j X \circ \alpha) + \sum_{j,k=1}^m v^j (\alpha^k)' (\partial_k \partial_j X \circ \alpha). \]
+\end{bem}
+
+\begin{defn}
+  Sei $X : U \to \R^n$ eine Immersion und $c = X \circ \alpha$ eine reguläre glatte Kurve auf $X$. Sei $V$ ein tang. VF längs $c$, dann heißt
+  \[ \tfrac{\nabla V}{\d t} \coloneqq (V')^T \]
+  die \emph{Levi-Civita-Ableitung} von $V$ längs $c$. Das tang. VF $V$ heißt \emph{(Levi-Civita-)parallel}, wenn gilt
+  \[ \tfrac{\nabla V}{\d t} = 0. \]
+\end{defn}
+
+\begin{bem}
+  Für $\alpha, v, V$ aus der letzten Bemerkung folgt
+  \[ \frac{\nabla V}{\d t} = \sum_{l=1}^m \left( (v^l)' + \sum_{j,k=1}^m v^j (\alpha^k)' (\Gamma_{jk}^l \circ \alpha) \right) (\partial_l X \circ \alpha). \]
+\end{bem}
+
+\begin{nota}
+  $\hat{\Gamma}_{\alpha} : [a, b] \to \R^{m \times m}, \,\, (\hat{\Gamma}_{\alpha}(t))_{jl} = \sum_{k=1}^m \Gamma_{jk}^l (\alpha(t))((\alpha^k)'(t))$
+\end{nota}
+
+\begin{defn}
+  Wir fassen eine glatte Abbildung $v : [a, b] \to \R^m$ als VF längs $\alpha : [a, b] \to U$ auf. Dann nennen wir
+  \[ \frac{\nabla v}{\d t} \coloneqq \sum_{l=1}^m \left( (v^l)' + \sum_{j,k=1}^m v^j (\alpha^k)' (\Gamma_{jk}^l \circ \alpha) \right) e_l = v' + \hat{\Gamma}_{\alpha} v \]
+  \emph{Levi-Cevita-Ableitung} von $v$ längs $\alpha$.
+\end{defn}
+
+\begin{satz}
+  Es gilt dann $\tfrac{\nabla (v^\wedge)}{\d t} = \left( \tfrac{\nabla v}{\d t} \right)^\wedge$. Ein VF $V = v^\wedge$ ist also genau dann parallel, wenn $v' + \hat{\Gamma}_\alpha v = 0$ bzw.
+  \[ (v^l)' + \sum_{j,k=1}^m v^j (\alpha^k)' (\Gamma_{jk}^l \circ \alpha) = 0 \quad \text{für alle $l = 1, ..., m$.} \]
+\end{satz}
+
+\begin{bem}
+  Es handelt sich bei $v' + \hat{\Gamma}_\alpha v = 0$ um ein System linearer Differentialgleichungen (mit nicht konstanten stetigen Koeffizienten). Damit existiert bei gegebenem Anfangswert $v(a)$ eine auf ganz $[a, b]$ definierte eindeutige Lösung der Differentialgleichung.
+\end{bem}
+
+\begin{defn}
+  Sei $X : U \to \R^n$ eine Immersion und $c = X \circ \alpha : [a, b] \to \R$ eine reguläre glatte Kurve auf $X$. Für $t \in [a, b]$ heißt die Abbildung
+  \[ P_t^c : T_{\alpha(a)} X \to T_{\alpha(t)} X, \quad x \mapsto V_x(t) \]
+  wobei $V_x : [a, b] \to \R^n$ das parallele tangentiale VF längs $c$ mit Anfangsbedingung $V_x(a) = x \in T_{\alpha(a)} X$ ist, \emph{Parallelverschiebung} längs $c$ von $c(a)$ nach $c(t)$.
+\end{defn}
+
+\begin{samepage}
+
+\begin{satz}
+  Sei $X : U \to \R^n$ eine Immersion und $c = X \circ \alpha : [a, b] \to \R^n$ eine reguläre glatte Kurve auf $X$. Für alle $t \in [a, b]$ ist die Abbildung $P_t^c : T_{\alpha(a)} X \to T_{\alpha(t)} X$ eine lineare Isometrie, d.\,h. $P_t^c$ ist linear und es gilt $\langle x, y \rangle = \langle P_t^c x, P_t^c y \rangle$ für alle $x, y \in T_{\alpha(a)} X$.
+\end{satz}
+
+
+\subsection{Geodäten}
+
+\end{samepage}
+
+\begin{defn}
+  Eine reguläre glatte Kurve $c = X \circ \alpha$ auf $X$ heißt \emph{Geodäte} auf $X$, wenn gilt
+  \[ (c'')^T = \tfrac{\nabla c'}{\d t} = 0 \quad\text{bzw.}\quad \tfrac{\nabla \alpha'}{\d t} = 0. \]
+\end{defn}
+
+\begin{satz}
+  Eine Geodäte ist immer proportional zur BL parametrisiert, d.\,h. $\|c'\|$ ist konstant.
+\end{satz}
+
+\begin{bem}
+  Sei $c = X \circ \alpha$ mit $\alpha = \sum \alpha^j e_j$ mit glatten Abb. $\alpha^j$. Dann gilt
+  \[ \frac{\nabla c'}{\d t} = \sum_{l=1}^m \left( (a^l)'' + \sum_{j,k=1}^m (a^j)' (\alpha^k)' (\Gamma_{jk}^l \circ \alpha) \right) (\partial_l X \circ \alpha). \]
+  Somit ist $c$ genau dann eine Geodäte, wenn gilt
+  \[ (a^l)'' + \sum_{j,k=1}^m (a^j)' (\alpha^k)' (\Gamma_{jk}^l \circ \alpha) \quad \text{für alle $l = 1, ..., m$} \]
+  oder $\alpha'' + \Gamma_{\alpha}(\alpha', \alpha') = 0$ (i.\,F. \emph{Geodätengleichung}), wobei
+  \begin{align*}
+    \Gamma_{\alpha} : [a, b] &\to \Bil(\R^m, \R^m), \  t \mapsto \Gamma_{\alpha(t)} \text{ mit }\\
+    \Gamma_{\alpha(t)}(v, w) &= \sum_{j,k,l=1}^m v^j w^k \Gamma_{jk}^l (\alpha(t)) e_l.
+  \end{align*}
+\end{bem}
+
+\begin{bem}
+  Es handelt sich hierbei um ein System nichtlinearer gew. DG zweiter Ordnung, welches nach dem Satz von Picard- Lindelöf bei gegebenen Anfangswerten immer eine eindeutige lokale Lösung besitzt. Es folgt:
+\end{bem}
+
+\begin{satz}[Lokale Existenz von Geodäten]
+  Sei $X : U \to \R^n$ eine Immersion, sei $u \in U$ und $w \in \R^m$. Dann gibt es eine offene Umgebung $U_w \opn \R^m$ von $w$ und eine $\epsilon > 0$, sodass gilt: Für jedes $v \in U_w$ gibt es eine eindeutige Lösung $\alpha_v : \ointervall{-\epsilon, \epsilon} \to U$ der Geodätengleichung mit $\alpha_v(0) = u$ und $\alpha_v'(0) = v$.
+
+  Anders ausgedrückt: Zu jedem $u \in U$ und zu jedem $W \in T_u X$ gibt es eine offene Umgebung $U_W \opn T_u X$ von $W$ sowie ein $\epsilon > 0$, sodass es für jedes $V \in U_W$ eine eindeutige Geodäte $c_v : \ointervall{-\epsilon, \epsilon} \to \R^n$ auf $X$ gibt mit $c_v(0) = X(u)$ und $c_v'(0) = V$.
+\end{satz}
+
+\begin{satz}[Spray-Eigenschaft]
+  Sei $\alpha_v : \ointervall{-\epsilon, \epsilon} \to U$ die eindeutige Lsg. der Geodätengleichung mit $\alpha_v(0) = u$ und $\alpha_v'(0) = v$ und $r > 0$. Dann ist die eindeutige Lösung der Geodätengleichung $\alpha_{rv}$ mit $\alpha_{rv}(0) = rv$ und $\alpha_{rv}'(0) = rv$ auf dem Intervall $\ointervall{-\tfrac{\epsilon}{r}, \tfrac{\epsilon}{r}}$ definiert und es gilt
+  \[ \alpha_{rv}(t) = \alpha_v(rt), \quad \text{für alle } t \in \ointervall{-\tfrac{\epsilon}{r}, \tfrac{\epsilon}{r}}. \]
+\end{satz}
+
+% todo: 2.48
+\begin{satz}
+  Sei $u \in U$. Dann gibt es ein $\epsilon_u > 0$, sodass für alle $v \in \overline{B_u^{\epsilon_u}}$ gilt: Die Geodätengleichung besitzt eine auf $[-1,1]$ definierte Lösung $\alpha_v$ mit $\alpha_v(0) = u$ und $\alpha_v'(0) = v$.
+\end{satz}
+
+\begin{defn}
+  Sei $u \in U$, dann heißt die Abbildung
+  \[ \Exp_u : B_u^{\epsilon_u} \to U, \quad v \mapsto \alpha_v(1) \]
+  \emph{(geodätische) Exponentialabbildung} von $X$ in $u$.
+\end{defn}
+
+\begin{defn}
+  Sei $u \in U$, dann gibt es ein $0 < \epsilon \leq \epsilon_u$, sodass $\Exp_u|B_u^\epsilon$ ein Diffeo auf sein Bild ist.
+\end{defn}
+
+\begin{defn}
+  Sei $\alpha : [a, b] \to U$ eine glatte Kurve, sodass $X \circ \alpha$ nach BL parametrisiert ist. Eine zweimal stetig differenzierbare Abbildung
+  \[ \ointervall{-\epsilon, \epsilon} \times [a, b] \to U, \quad (s, t) \mapsto \alpha_s(t) \]
+  mit $\alpha_0 = \alpha$ heißt eine \emph{Variation} von $\alpha$. Ist nun $X : U \to \R^n$ eine Immersion, so erhalten wir auch eine Variation der Kurve $c \coloneqq X \circ \alpha$ auf $X$ durch andere Kurven, nämlich $c_s \coloneqq X \circ \alpha_s$ auf $X$.
+\end{defn}
+
+\begin{nota}
+  $\delta \coloneqq \tfrac{\partial}{\partial s}|_{s=0}$.
+\end{nota}
+
+\begin{satz}[Variationsformel der Länge]
+  Unter obigen Annahmen gilt
+  \[ \delta L(c_s) = \langle c'(b), \delta c_s(b) \rangle - \langle c'(a), \delta c_s(a) \rangle - \Int{a}{b} \langle (c''(t))^T, \delta c_s(t) \rangle. \]
+\end{satz}
+
+\begin{satz}[Gaußlemma]
+  Die Parametrisierung $\widetilde{X} \coloneqq X \circ \Exp_u : B_u^\epsilon \to \R^n$ durch Exponentialkoordinaten ist eine radiale Isometrie: Seien $v \in B_u^{\epsilon_u} \setminus \{0\}$ und $w \in \R^m$ und zerlegen wir $w$ in $w = w_{\|} + w_\perp$ mit $w_{\|} \in \R v$ und $\langle w_\perp, v \rangle = 0$, dann gilt
+  \begin{align*}
+    \| D_v \widetilde{X}(w_{\|}) &= \| w_{\|} \|\\
+    D_v \widetilde{X}(w) &\perp D_v \widetilde{X}(v), \quad \text{wenn $w \perp v$  und somit }\\
+    \| D_v \widetilde{X}(w) \|^2 &= \| w_{\|} \|^2 + \| D_v \widetilde{X}(w_{\perp}) \|^2.
+  \end{align*}
+\end{satz}
+
+\begin{satz}
+  Sei $\gamma : [a, b] \to B_u^\epsilon$ reguläre glatte Kurve mit $\gamma(a) = 0, \gamma(b) = v$. Dann gilt: $L(X \circ \Exp_u \circ \gamma \geq \|v\|)$ mit $L(X \circ \Exp_u \circ \gamma) = \|v\| \iff \gamma(t) = \rho(t)v$ mit $\rho : [a, b] \to [0, 1]$ streng monoton wachsend.
+\end{satz}
+
+\begin{satz}
+  Sei $X : U \to \R^n$ eine Fläche, $u_0 \in U$, $\epsilon > 0$, sodass $\Exp_{u_0}^{\epsilon} \to U$ Diffeomorphismus. Sei $u \in \Exp_{u_0}(B_{u_0}^{\epsilon})$. Dann gibt es (bis auf Umparametrisierung) genau eine bzgl. der Länge
+  \[ L_\I(\alpha) \coloneqq \Int{a}{b}{\I_{\alpha(t)}(\alpha'(t), \alpha'(t))}{t} \]
+  kürzeste reguläre glatte Kurve $\alpha : [a, b] \to U$ mit $\alpha(a) = u_0$ und $\alpha(b) = u$ nämlich $\alpha : [0, 1] \to U, t \mapsto \Exp_{u_0}(t \cdot \Exp_{u_0}^{-1}(u))$.
+\end{satz}
+
+
+%\subsection{Krümmungstensor und Theorema egregium (Gauß)}
+
+\begin{defn}
+  Sei $X : U \to \R^n$ eine Fläche, dann heißt
+  \begin{align*}
+    [\cdot,\cdot] : \chi(U) \times \chi(U) &\to \chi(U)\\
+    (v, w) \mapsto [v, w] = \partial_v w - \partial_w v
+  \end{align*}
+  \emph{Lie-Klammer} der Vektorfelder $v$ und $w$.
+\end{defn}
+
+\begin{satz}
+  $\forall v, w \in \chi(U) : [v, w] = \nabla_v w - \nabla_w v$.
+\end{satz}
+
+% in Koordinaten: $[v, w] = \sum_{j,k=1}^m v^j \partial_j w^k e_k - \sum_{j,k=1}^m w^j \partial_j v^k e_k$
+
+\begin{defn}
+  \begin{align*}
+    R : \chi(U) \times \chi(U) \times \chi(U) &\to \chi(U)\\
+    (v, w, z) &\mapsto R(v, w) z \text{ mit }\\
+    R(v, w) z &= \nabla_v (\nabla_w z) - \nabla_w (\nabla_v z) - \nabla_{[v, w]} z
+  \end{align*}
+  heißt \emph{Krümmungstensor}.
+\end{defn}
+
+\begin{bem}
+  \[ \nabla_j = \partial_j + \Gamma_j, \text{ wobei } \Gamma_j : U \to \R^{m \times m} \]
+  \[ \nabla_j (\nabla_k z) = \partial_j \partial_k z + (\partial_j \Gamma_k) z) + \Gamma_k (\partial_j z) + \Gamma_j (\partial_k z) + \Gamma_j \Gamma_k z. \]
+  \[ R_{jk} \coloneqq R(e_j, e_k) z = \nabla_j (\nabla_k z) - \nabla_k (\nabla_j z) - \nabla_{[e_j, e_k]} z = \partial_j \partial_k z + (\partial_j \Gamma_k) z + \Gamma_k (\partial_j z) + \Gamma_j (\partial_k z) + \Gamma_j \Gamma_k z - (\partial_k \partial_j z + (\partial_k \Gamma_j) z + \Gamma_j (\partial_k z)) + \Gamma_k (\partial_j z) + \Gamma_k \Gamma_j z = \Gamma_j \Gamma_k z - \Gamma_k \Gamma_j + (\partial_j \Gamma_k - \partial_k \Gamma_j) z, \text{ wobei } \Gamma_j : U \to \R^{m \times m}, \partial_k \Gamma : U \to \R^{m \times m} \]
+  \[ R_{jk} = (\Gamma_j \cdot \Gamma_k - \Gamma_k \cdot \Gamma_j) + (\partial_j \Gamma_k - \partial_k \Gamma_j) \]
+\end{bem}
+
+
+% Krümmungstensor in lokalen Variablen
+
+$v = \sum v^j e_j, w = w^k e_k, v^j, w^k : U \to \R$ glatt
+
+\begin{align*}
+  R(v, w) z &= \nabla_v \nabla_w z - \nabla_w \nabla_v z - \nabla_{[v, w]} z =\\
+  &= \sum v^k \nabla_k (\sum w^j \nabla_j z) - \sum w^k \nabla_k (\sum v^j \nabla_j z) - \sum (v^j \partial_j w^k - w^j \partial_j v^k) \nabla_k z =\\
+  &= \sum v^k \nabla_k (w^j \nabla_j z) - \sum w^k \nabla_k (v^j \nabla_j z) - \sum (v^j \partial_j w^k - w^j \partial_j v^k) \nabla_k z\\
+  &= \sum_{j,k=1}^{m} v^k w^j \nabla_k \nabla_j z - \sum_{k, j = 1}{m} w^j v^k \nabla_j \nabla_k z\\
+  &= \sum_{k,j = 1}^m v^k w^j (\nabla_k \nabla_j z - \nabla_j \nabla_k z)\\
+  &= \sum_{k,j=1}^m v^k w^j (R_{kj} z)
+\end{align*}
+
+Setze $z = \sum z^l e_l, z^l : U \to \R$ glatt. Dann
+also $R_{ij}(e_k) = \sum R_{ijk}^l e_l$.
+
+\begin{align*}
+  R(v, w) z &= \sum_{i,j=1}^m v^i w^j R_{ij} z\\
+  &= \sum_{i,j=1}^m v^i w^j R_{ij}(\sum_{k=1}^m z^k e_k)\\
+  &= \sum_{k,i,j}^m v^i w^j z^k R_{ij}(e_k)\\
+  &= \sum_{i,j,k,l}^m v^i w^j z^k R_{ijk}^l e_l
+\end{align*}
+
+\begin{satz}
+  Die Abbildung
+  \begin{align*}
+    \I_{R_{ij}} : \chi(U) \times \chi(U) &\to \mathcal{C}^\infty(U, \R)
+    (v, w) &\mapsto \underbrace{\I(R_{ij}, v, w)}_{u \mapsto \I_u((R_{ij} v)(u), w(u))}
+  \end{align*}
+  ist eine antisymmetrische Bilinearform.
+\end{satz}
+
+\begin{nota}
+  $R_{ijkl} \coloneqq \I_u(R_{ij}(u) e_k, e_l)$
+\end{nota}
+
+\begin{satz}[Gaußgleichung]
+  \[ R_{ijkl}(u) = \langle \II_{jk} (u) \II_{kl}(u) \rangle - \langle \II_{ik}(u), \II_{jl}(u) \rangle, \]
+  wobei $\II_{jk}(u) = \left( \partial_j \partial_k X(u) \right)^{N_u}$
+\end{satz}
+
+\begin{bem}
+  Spezialfall: $X$ Hyperfläche, dann
+  \[ \II_{jk} = h_{jk} \nu, \]
+  Da $\langle \nu, \nu \rangle = 1$, folgt
+  \[ R_{ijkl} = h_{jk} h_{ie} - h_{ik} h_{jl}. \]
+\end{bem}
+
+\begin{satz}[Theorema egregium (Gauß)]
+  Sei $X : U \to \R^3$ eine Hyperfläche, dann gilt:
+  \[ K(u) = \frac{\det(h(u))}{\det(g(u))} = \frac{R_{1221}(u)}{\det(g(u))} \]
+  Letzter Ausdruck ist nur abhängig von der 1.\,FF und ihren Ableitungen.
+\end{satz}
+
+\begin{satz}[Codazzi-Mainardi-Gleichungen]
+  Sei $X : U \to \R^n$ eine Hyperfläche, dann gilt
+  \[ \partial_i h_{jk}(u) - \sum_{l=1}^{n-1} \Gamma_{ik}^l(u) h_{e_j}(u) = \partial_j h_{ik}(u) - \sum_{l=1}^{n-1} \Gamma_{jk}^l(u) h_{e_i}(u). \]
+\end{satz}
+
+\begin{satz}[Hauptsatz der lokalen Flächentheorie (Bonnet)]
+  Sei $U \opn \R^m$ einfach zusammenhängend und
+  \[ g, h : U \to \Set{ A \in \R^{m \times m} }{ A^T = A, \, A \text{ positiv definit } } \text{ glatt}. \]
+  Dann sind äquivalent:
+  \begin{itemize}
+    \item $\exists \, X : U \to \R^{m+1}$ Hyperfläche mit $g$ und $h$ als 1.\,FF bzw. 2.\,FF.
+    \item $g, h$ erfüllen Gaußgleichung der die Codazzi-Mainardi-Gleichung.
+  \end{itemize}
+\end{satz}
+
+
+% 2.10. Winkeltrue Abbildungen
+
+\begin{defn}
+  Sei $X : U \to \R^n$ eine Hyperfläche. Ein Punkt $u \in U$ heißt \emph{Nabelpunkt}, wenn in $u$ alle Hauptkrümmungen gleich sind, also $W_u = \mu I$ für ein $\mu \in \R$. Wenn alle $u \in U$ Nabelpunkte sind, so heißt $X$ \emph{Nabelpunkthyperfläche}.
+\end{defn}
+
+\begin{satz}
+  Sei $n \geq 3$ und $X : U \to \R^n$ eine Nabelpunkthyperfläche in $\mathcal{C}^3$, dann ist $X(U)$ Teilmenge einer Hyperebene oder einer Hypersphäre im $\R^n$.
+\end{satz}
+
+\begin{defn}
+  Sei $O \opn \R^n$. Eine $\mathcal{C}^2$-Abbildung $\Phi : O \to \R^n$ heißt \emph{orthogonales Hyperflächensystem}, wenn für alle $x \in O$ und alle $j, k \in \{ 1, ..., n \}, j \not= k$ gilt:
+  \[
+    \langle \partial_j \Phi(x), \partial_k \Phi(x) \rangle = 0
+    \quad \text{und} \quad
+    \langle \partial_j \Phi(x), \partial_j \Phi(x) \rangle \not= 0
+  \]
+\end{defn}
+
+\begin{nota}
+  Für $t \in \R$ ist $U^{j,t} = \Set{ (x_1, ..., x_n) \in O }{ x_j = t }$.
+\end{nota}
+
+\begin{bem}
+  Wenn $U^{j,t}$ offen in $\Set{ (x_1, ..., x_n) \in \R^n }{ x_j = t }$ ist, dann ist
+  \[ X^{j,t} \coloneqq \Phi|_{U^{j,t}} : U^{j,t} \to \R^n \]
+  eine Hyperfläche und $\partial_j \Phi(x) \perp T_x X^{j,t} = \mathrm{Spann} \Set{ \partial_k \Phi(x) }{ k \in \{ 1, ..., n \} \setminus \{ j \} } \forall x \in U^{j,t}$.
+\end{bem}
+
+\begin{defn}
+  Sei $X : U \to \R^n$ eine Hyperfläche und $c \coloneqq X \circ \alpha : I \to \R^n, I$ Intervall und $\alpha : I \to U$ glatt. Dann heißt $c$ \emph{Krümmungslinie}, wenn für alle $c'(t)$ für alle $t \in I$ eine Hauptkrümmungsrichtung von $X$ ist, d.\,h. ein Eigenvektor von $W_{\alpha(t)}$.
+\end{defn}
+
+\begin{satz}
+  Ist $\Phi : O \to \R^n$ orth. Hyperflächensystem, dann sind die Koordinatenlinien
+  \[ h \mapsto \Phi(t_1, ..., t_{j-1}, t_j + h, t_{j+1}, ..., t_n) \text{ mit } (t_1, ..., t_n) \in O \text{ fest} \]
+  Krümmungslinien von $X^{k, t_k}$ mit $k \not= j$.
+\end{satz}
+
+\begin{defn}
+  Eine lineare Abbildung $F : \R^n \to \R^n$ heißt \emph{konform}, wenn
+  \[ \measuredangle (v, w) = \measuredangle (F(v), F(w)) \quad \forall v, w \in \R^n. \]
+\end{defn}
+
+\begin{bem}
+  Jede lineare Abbildung lässt sich darstellen als
+  \[ F(x) = A_F \cdot x, \text{ mit } A_F \in \R^{n \times n} \]
+  und es gilt $F$ konform $\iff$ $\tfrac{1}{\mu} A_F \in O(n)$ für ein $\mu \in \R_{> 0}$. Dieses $\mu$ wird Streckungsfaktor genannt.
+
+\end{bem}
+
+\begin{defn}
+  Seien $O, \widetilde{O} \opn \R^n$. Ein $\mathcal{C}^1$-Diffeomorphismus $f : O \to \widetilde{O}$ heißt \emph{konform}, wenn für alle $x \in O$ die Abbildung $D_x f$ konform ist.
+\end{defn}
+
+\begin{bem}
+  $\lambda : O \to \R_{> 0}$, $\tfrac{1}{\lambda(x)} D_x f \in O(n)$ sei der konforme Faktor.
+\end{bem}
+
+% Konforme Abbildungen im $\R^2$
+
+Sei $O \opn \C$ zusammenhängend und $f : O \to \widetilde{O}$ konform. Ohne Einschränkung ist $\det(D_x f) > 0$ für alle $x \in O$ (sonst $\widetilde{f} = f \circ \overline{\cdot}$).
+Es folgt: $D_x f = \lambda(x) \begin{psmallmatrix} \cos \alpha_x & \sin \alpha_x \\ -\sin \alpha_x & \cos \alpha_x \end{psmallmatrix} = \lambda(x) \cdot e^{i \alpha_x} \in \C$ und somit ist $f$ holomorph.
+
+\begin{satz}[Liouville]
+  Sei $n \geq 3$. Wenn $f : O \to \widetilde{O}$ konform, dann ist $f$ kugeltrue, d.\,h. Wenn $X : U \to O$ eine Nabelpunkt-HF, dann ist $f \circ X : U \to \widetilde{O}$ auch eine Nabelpunkt-HF.
+\end{satz}
+
+\end{document}

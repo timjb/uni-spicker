@@ -1,0 +1,137 @@
+\documentclass{cheat-sheet}
+
+\usepackage{syntax}
+
+\pdfinfo{
+  /Title (Zusammenfassung Informatik 3)
+  /Author (Tim Baumann)
+}
+
+\begin{document}
+
+\maketitle{Zusammenfassung Informatik \rom{3}}
+
+\begin{abk}
+  \begin{tabular}{r l}
+    \textbf{WC} & Worst Case \\
+    \textbf{AC} & Worst Case \\
+    \textbf{BC} & Best Case
+  \end{tabular}
+\end{abk}
+
+\begin{alg}[Insertion Sort]
+  BC: $O(n)$; AC, WC: $O(n^2)$
+\end{alg}
+
+\begin{nota}
+  Sei $\mathcal{F}$ die Menge der Funktionen von $\N$ nach $\R_{\geq 0}$. Ist $g \in \mathcal{F}$, dann definieren wir
+  \begin{align*}
+    O(f) \coloneqq& \, \Set{ g \in \mathcal{F} }{ \exists\,c > 0\,\exists\,n_0 \in \N\,\forall\,n \geq n_0 : g(n) \leq c \cdot f(n) } \\
+    \Omega(f) \coloneqq& \, \Set{ g \in \mathcal{F} }{ \exists\,c > 0\,\exists\,n_0 \in \N\,\forall\,n \geq n_0 : g(n) \leq c \cdot f(n) } \\
+    o(f) \coloneqq& \, \Set{ g \in \mathcal{F} }{ \forall\,c > 0\,\exists\,n_0 \in \N\,\forall\,n \geq n_0 : g(n) \leq c \cdot f(n) } \\
+    \omega(f) \coloneqq& \, \Set{ g \in \mathcal{F} }{ \forall\,c > 0\,\exists\,n_0 \in \N\,\forall\,n \geq n_0 : g(n) \leq c \cdot f(n) } \\
+    \Theta(f) \coloneqq& \, \{ g \in \mathcal{F} \,|\, \exists\,c_1, c_2 > 0\,\exists\,n_0 \in \N\,\forall\,n \geq n_0 : \\
+    & \qquad \qquad \qquad c_1 \cdot f(n) \leq g(n) \leq c_2 \cdot f(n) \}
+              = O(f) \cap \Omega(f) \\
+  \end{align*}
+\end{nota}
+
+\begin{satz}
+  Seien $0 < \alpha < \beta$, $0 < a < b$ und $1 < A < B$. Betrachte
+  \begin{multicols}{3}
+    \begin{itemize}
+      \item $f_1(n) \coloneqq \log \log n$
+      \item $f_2(n) \coloneqq (\log n)^\alpha$
+      \item $f_3(n) \coloneqq (\log n)^\beta$
+      \item $f_4(n) \coloneqq n^a$
+      \item $f_5(n) \coloneqq n^a (\log n)^\alpha$
+      \item $f_6(n) \coloneqq n^b (\log n)^\alpha$
+      \item $f_7(n) \coloneqq n^b$
+      \item $f_8(n) \coloneqq A^n$
+      \item $f_9(n) \coloneqq A^n \cdot n^a$
+      \item $f_{10}(n) \coloneqq A^n \cdot n^b$
+      \item $f_{11}(n) \coloneqq B^n$
+    \end{itemize}
+  \end{multicols}
+  Es gilt: $f_i \in o(f_{i+1})$ für $i = 1, ..., 10$.
+\end{satz}
+
+% TODO: Definition RAM
+
+\begin{defn}[RAM]
+  Die Random Access Access Machine besitzt eine unendlich lange Liste von aufsteigend nummerierten Speicherzellen R[0], R[1], ..., die jeweils eine ganze Zahl beinhalten und einen Programmzähler. Sie kann mittels der folgenden Sprache programmiert werden:
+  \begin{grammar}
+    <Zieladresse> ::= <Adresse> | R[<Adresse>]
+
+    <Operand> ::= <Literal> | R[<Adresse>]
+
+    <Befehl> ::= <Zieladresse> `:=' <Operand> $\odot$ <Operand>
+    \alt `if' <Operand> $\bowtie$ <Operand> `goto' <Label>
+
+    <Programm> ::= <Befehl> `;' <Programm> | `End'
+  \end{grammar}
+  wobei $\odot \in \{ +, -, *, \div \}$ und $\bowtie \, \in \{ <, \leq, =, \geq, >, \not= \}$. Diese einfache Grammatik lässt sich auch für unbedingte Sprünge nutzen (mittels Bedingung $0 = 0$). Ein Sprung über das Ende des Programms hinaus lässt das Programm anhalten. Per Konvention steht die Größe der Eingabe in der Speicherzelle R[1], während die tatsächliche Eingabe in R[2], ..., R[R[1] + 1] abgelegt wird.
+\end{defn},
+
+% TODO: Einführung Bäume / gerichtete Graphen
+% TODO: Einführung Stochastik
+
+\begin{alg}
+  Zwei sortierte Folgen der Gesamtlänge $n$ können in $O(n)$ Zeit gemischt werden.
+\end{alg}
+
+\begin{alg}[Sortieren durch Mischen / Mergesort]
+  $n$ Elemente mit Schlüsseln aus einem total geordneten Universum können in $O(n \log n)$ Zeit nach ihren Schlüsseln sortiert werden.
+\end{alg}
+
+\begin{satz}[Master-Theorem]
+  Seien $a, b, c, k, N$ reelle Zahlen mit $a, c > 0$, $k \geq 0$, $b, N \in \N$ und $b \geq 2$ und sei $T : \N \to \R_{\geq 0}$ eine Funktion, die folgende Rekursionsungleichung erfüllt:
+  \[ T(n) \leq \begin{cases}
+    c, & \text{ für } n \leq N \\
+    c n^k + a T(\lceil n / b \rceil), & \text{ für } n > N
+  \end{cases} \]
+  Sei ferner $\lambda := \log_b a$. Dann gilt
+  \[ T(n) = \begin{cases}
+    O(n^k), & \text{ falls } \lambda < k \\
+    O(n^k \log n), & \text{ falls } \lambda = k \\
+    O(n^\lambda), & \text{ falls } \lambda > k.
+  \end{cases} \]
+\end{satz}
+
+\begin{satz}
+  Seien $a, b, c, k, N$ reelle Zahlen mit $a, c > 0$, $k \geq 0$, $b, N \in \N$ und $b \geq 2$ und sei $T : \N \to \R_{\geq 0}$ eine Funktion, die folgende Rekursionsungleichung erfüllt:
+  \[ T(n) \geq \begin{cases}
+    c, & \text{ für } n \leq N \\
+    c n^k + a T(\lceil n / b \rceil), & \text{ für } n > N
+  \end{cases} \]
+  Sei ferner $\lambda := \log_b a$. Dann gilt
+  \[ T(n) = \begin{cases}
+    \Omega(n^k), & \text{ falls } \lambda < k \\
+    \Omega(n^k \log n), & \text{ falls } \lambda = k \\
+    \Omega(n^\lambda), & \text{ falls } \lambda > k.
+  \end{cases} \]
+\end{satz}
+
+% Wichtigkeit?
+\begin{satz}
+  Seien $\beta, c, k, n$ reelle Zahlen mit $c, k > 0$, $n \in \N_0$ und $0 < \beta < 1$ und sei $T : \N_0 \to \R_{\geq 0}$ eine Funktion, die folgende Rekursionsungleichung erfüllt:
+  \[ T(n) \leq \begin{cases}
+    c, & \text{ für } n \leq N \\
+    c n^k + T(\lfloor \beta n \rfloor), & \text{ für } n > N.
+  \end{cases} \]
+  Dann ist $T(n) = O(n^k)$
+\end{satz}
+
+% TODO: Algorithmus beschreiben?
+
+\begin{satz}[Karatsuba und Ofman]
+  Zwei $n$-stellige Zahlen können in $O(n^{\log_2 3})$ Zeit multipliziert werden.
+\end{satz}
+
+% TODO: Algorithmus beschreiben?
+
+\begin{satz}[Selektion]
+  Gegeben seien eine Menge $X$ von $n$ Elementen aus einem total geordneten Universum und eine ganze Zahl $k$ mit $1 \leq k \leq n$. Dann können wir (deterministisch) in $O(n)$ Zeit das $k$-kleinste Element aus $X$ bestimmen.
+\end{satz}
+
+\end{document}
