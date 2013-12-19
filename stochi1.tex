@@ -10,6 +10,9 @@
 \renewcommand{\P}{\mathbb{P}}
 \newcommand{\PD}[2]{\P(#1\,|\,#2)}
 
+\newcommand{\IntO}[2]{\Int{\Omega}{}{#1}{#2}} % Integral über \Omega
+\newcommand{\IntOmu}[1]{\Int{\Omega}{}{#1}{\mu}} % Integral über \Omega bzgl. \mu
+
 \begin{document}
 
 \maketitle{Zusammenfassung Stochastik \rom{1}}
@@ -195,15 +198,15 @@ Zu jeder Booleschen Algebra $\mathfrak{A}$ gibt es eine Menge $\Omega$ derart, d
 % Definition: einfache Funktionen
 % Definition: $\mu$-Integral für einfache Funktionen
 
-% Eigenschaften: Linearität, Monotonie, \Int{\Omega}{}{\ind_A}{\mu} = \mu(A)
+% Eigenschaften: Linearität, Monotonie, \IntOmu{\ind_A} = \mu(A)
 
 \begin{satz}
-  Sei $0 \leq f_1 \leq f_2 \leq ...$ eine isotone Folge elementarer Funktionen über $(\Omega, \Alg)$. Dann gilt für jede elementare Funktion $f$ mit $f \leq \sup_{n \in N} f_n$ die Ungleichung $\Int{\Omega}{}{f}{\mu} \leq \sup_{n \in \N} \Int{\Omega}{}{f_n}{\mu}$.
+  Sei $0 \leq f_1 \leq f_2 \leq ...$ eine isotone Folge elementarer Funktionen über $(\Omega, \Alg)$. Dann gilt für jede elementare Funktion $f$ mit $f \leq \sup_{n \in N} f_n$ die Ungleichung $\IntOmu{f} \leq \sup_{n \in \N} \IntOmu{f_n}$.
 \end{satz}
 
 % Folgerung
 \begin{satz}
-  Seien $(f_n)_{n \in \N}$ und $(g_n)_{n \in \N}$ isotone Folgen elementarer Funktionen mit $\sup_{n \in \N} f_n = \sup_{n \in \N} g_n$. Dann ist $\sup_{n \in \N} \Int{\Omega}{}{f_n}{\mu} = \sup_{n \in \N} \Int{\Omega}{}{g_n}{\mu}$.
+  Seien $(f_n)_{n \in \N}$ und $(g_n)_{n \in \N}$ isotone Folgen elementarer Funktionen mit $\sup_{n \in \N} f_n = \sup_{n \in \N} g_n$. Dann ist $\sup_{n \in \N} \IntOmu{f_n} = \sup_{n \in \N} \IntOmu{g_n}$.
 \end{satz}
 
 % Satz: Jede nichtnegative, messbare, numerische Funktion ist Grenzwert einer Folge einfacher Funktionen
@@ -215,31 +218,31 @@ Zu jeder Booleschen Algebra $\mathfrak{A}$ gibt es eine Menge $\Omega$ derart, d
   Sei $f : (\Omega, \Alg, \mu) \to (\overline{R}^1, \LebAlg(\R^1))$ sein $\Alg$-messbar, numerisch. Dann gilt:
   \begin{align*}
     & \text{$F$ ist $\mu$-integrierbar} \\
-    \iff & \text{$f^+$ und $f^-$ sind $\mu$-integrierbar mit $\Int{\Omega}{}{f^{\pm}}{\mu} < \infty$} \\
-    \iff & \Int{\Omega}{}{|f|}{\mu} < \infty \\
-    \iff & \Int{\Omega}{}{g}{\mu} < \infty \text{ für eine $\Alg$-messbare, numerische Funktion mit $|f| \leq g$}.
+    \iff & \text{$f^+$ und $f^-$ sind $\mu$-integrierbar mit $\IntOmu{f^{\pm}} < \infty$} \\
+    \iff & \IntOmu{|f|} < \infty \\
+    \iff & \IntOmu{g} < \infty \text{ für eine $\Alg$-messbare, numerische Funktion mit $|f| \leq g$}.
   \end{align*}
 \end{satz}
 
 \begin{satz}
   Seien $f, g : (\Omega, \Alg, \mu) \to (\R^1, \LebAlg(\R^1))$ $\mu$-integrierbar. Dann sind $f \pm g$, $f \vee g$, $f \wedge g$ und $\alpha \cdot f$ für $\alpha \in \R^1$ $\mu$-integrierbar und es gilt
   \begin{align*}
-    \Int{\Omega}{}{\alpha \cdot f + \beta \cdot g}{\mu} = \alpha \Int{\Omega}{}{f}{\mu} + \beta \Int{\Omega}{}{g}{\mu}, & \quad
-    \left| \Int{\Omega}{}{f}{\mu} \right| \leq \Int{\Omega}{}{|f|}{\mu}, \\
-    f \leq g \implies \Int{\Omega}{}{f}{\mu} &\leq \Int{\Omega}{}{g}{\mu}
+    \IntOmu{\alpha \cdot f + \beta \cdot g} = \alpha \IntOmu{f} + \beta \IntOmu{g}, & \quad
+    \left| \IntOmu{f} \right| \leq \IntOmu{|f|}, \\
+    f \leq g \implies \IntOmu{f} &\leq \IntOmu{g}
   \end{align*}
 \end{satz}
 
 \begin{defn}
-  Mit $L^p(\mu) = L^p(\Omega, \Alg, \mu)$ bezeichnen wir den normierten Vektorraum der aus den Funktionen $f : (\Omega, \Alg, \mu) \to (\R^1, \LebAlg(\R^1))$ mit $\Int{\Omega}{}{|f|^p}{\mu} < \infty$ für $1 \leq p \leq \infty$ besteht. Die Norm in diesem Raum wird durch
-  \[ \|f\|_p \coloneqq \left( \Int{\Omega}{}{|f|^p}{\mu} \right)^{1/p} \]
+  Mit $L^p(\mu) = L^p(\Omega, \Alg, \mu)$ bezeichnen wir den normierten Vektorraum der aus den Funktionen $f : (\Omega, \Alg, \mu) \to (\R^1, \LebAlg(\R^1))$ mit $\IntOmu{|f|^p} < \infty$ für $1 \leq p \leq \infty$ besteht. Die Norm in diesem Raum wird durch
+  \[ \|f\|_p \coloneqq \left( \IntOmu{|f|^p} \right)^{1/p} \]
   definiert. Es kann gezeigt werden, dass die Normeigenschaften erfüllt sind.
 \end{defn}
 
 % Definition: Konvergenz im $L^p(\mu)$
 
 \begin{bem}
-  Der $L^p(\mu)$ ist ein vollständiger normierter Raum, d.\,h. jede Cauchy-Folge bzgl. der Norm $\| \cdot \|_p$ ist auch konvergent. Im Spezialfall $p = 2$ heißt $L^p(\mu)$ Hilbertraum der quadratisch integrierbaren Funktionen mit Skalarprodukt $\langle f , g \rangle = \Int{\Omega}{}{f \cdot g}{\mu}$. Es gilt in diesem Fall außerdem die Cauchy-Schwarz-Bunjakowski-Ungleichung:
+  Der $L^p(\mu)$ ist ein vollständiger normierter Raum, d.\,h. jede Cauchy-Folge bzgl. der Norm $\| \cdot \|_p$ ist auch konvergent. Im Spezialfall $p = 2$ heißt $L^p(\mu)$ Hilbertraum der quadratisch integrierbaren Funktionen mit Skalarprodukt $\langle f , g \rangle = \IntOmu{f \cdot g}$. Es gilt in diesem Fall außerdem die Cauchy-Schwarz-Bunjakowski-Ungleichung:
   \[ \| f \cdot g \|_{1} \leq \|f\|_2 \cdot \|g\|_2 \]
   Höldersche Ungleichung:
   \[ \| f \cdot g \|_{1} \leq \|f\|_p \cdot \|g\|_q \]
@@ -252,25 +255,25 @@ Zu jeder Booleschen Algebra $\mathfrak{A}$ gibt es eine Menge $\Omega$ derart, d
 
 \begin{satz}
   Sei $f_n : (\Omega, \Alg, \mu) \to (\R^1, \LebAlg(\R^1))$ $\Alg$-messbar und $0 \leq f_1 \leq f_2 \leq ...$. Dann gilt
-  \[ \Int{\Omega}{}{\sup_{n \in \N} f_n}{\mu} = \sup_{n \in \N} \Int{\Omega}{}{f_n}{\mu} \]
+  \[ \IntOmu{\sup_{n \in \N} f_n} = \sup_{n \in \N} \IntOmu{f_n} \]
 \end{satz}
 
 % Folgerung
 \begin{satz}[von Beppo Levi]
   Sei $(f_n)_{n \in \N}$ eine Folge monotoner nichtnegativer, $\Alg$-messbarer, numerischer Funktionen auf $(\Omega, \Alg, \mu)$. Dann gilt:
-  \[ \Int{\Omega}{}{\sum_{n=1}^{\infty} f_n}{\mu} = \sum_{n=1}^\infty \Int{\Omega}{}{f_n}{\mu} \]
+  \[ \IntOmu{\sum_{n=1}^{\infty} f_n} = \sum_{n=1}^\infty \IntOmu{f_n} \]
 \end{satz}
 
 % Folgerung
 \begin{satz}
   $f$ sei $\Alg$-messbar, nichtnegativ und $\mu$-integrierbar. Dann ist
-  \[ \nu(A) \coloneqq \Int{A}{}{f}{\mu} = \Int{\Omega}{}{f \cdot \chi_A}{\mu} \]
-  ein ednliches Maß auf $(\Omega, \Alg)$.
+  \[ \nu(A) \coloneqq \Int{A}{}{f}{\mu} = \IntOmu{f \cdot \chi_A} \]
+  ein endliches Maß auf $(\Omega, \Alg)$.
 \end{satz}
 
 \begin{satz}[Lemma von Fatou]
   Sei $f_n : (\Omega, \Alg, \mu) \to (\R^1, \LebAlg(\R^1))$ eine Folge $\Alg$-messbarer, nichtnegativer Funktionen. Dann gilt:
-  \[ \Int{\Omega}{}{\liminf_{n \to \infty} f_n}{\mu} \leq \liminf_{n \to \infty} \Int{\Omega}{}{f_n}{\mu} \]
+  \[ \IntOmu{\liminf_{n \to \infty} f_n} \leq \liminf_{n \to \infty} \IntOmu{f_n} \]
 \end{satz}
 
 \end{document}

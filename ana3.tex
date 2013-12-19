@@ -16,7 +16,8 @@
 \newcommand{\ind}{\mathbbm{1}} % indicator function
 \newcommand{\fue}{\overset{\text{f.ü.}}} % fast überall
 
-\newcommand{\IntOmu}[1]{\Int{\Omega}{}{#1}{\mu}}
+\newcommand{\IntO}[2]{\Int{\Omega}{}{#1}{#2}} % Integral über \Omega
+\newcommand{\IntOmu}[1]{\Int{\Omega}{}{#1}{\mu}} % Integral über \Omega bzgl. \mu
 
 % Kleinere Klammern
 \delimiterfactor=701
@@ -710,7 +711,7 @@
   \begin{doublespace}
     Sei $f \in \overline{\E}(\Omega, \Alg, \mu)$ bzw. $f \in \Leb^1(\Omega, \Alg, \mu)$, $(A_n)_{n \in \N}$ Folge in $\Alg$, $A_n \cap A_m = \emptyset$ für $n \not= m$, $A = \bigsqcup_{n=1}^\infty A_n$. Dann:\\[-10pt]
   \end{doublespace}
-  \[ \Int{A}{}{f}{\mu} \coloneqq \Int{\Omega}{}{f \cdot \ind_A}{\mu} = \sum_{n=1}^\infty \left( \Int{A_n}{}{f}{\mu} \right). \]
+  \[ \Int{A}{}{f}{\mu} \coloneqq \IntOmu{f \cdot \ind_A} = \sum_{n=1}^\infty \left( \Int{A_n}{}{f}{\mu} \right). \]
 \end{satz}
 
 \begin{satz}\begin{doublespace}
@@ -891,7 +892,7 @@
 
 \begin{satz}
   Sei $(\Omega, \Alg, \mu)$ ein Maßraum und $h \in \overline{\E}(\Omega, \Alg)$. Eine messbare Funktion $f : \Omega \to \overline{\R}$ ist genau dann $h\mu$-integrierbar, wenn $(f \cdot h)$ $\mu$-integrierbar ist. In diesem Fall gilt
-  \[ \Int{\Omega}{}{f}{(h \mu)} = \Int{\Omega}{}{f \cdot h}{\mu}. \]
+  \[ \IntO{f}{(h \mu)} = \IntOmu{f \cdot h}. \]
   Obige Gleichung ist auch erfüllt, wenn lediglich $f \geq 0$ gilt (also $f \in \overline{\E}(\Omega, \Alg)$; dann kann das Integral den Wert $\infty$ annehmen).
 \end{satz}
 
