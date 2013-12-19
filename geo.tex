@@ -60,7 +60,7 @@
 \end{satz}
 
 \begin{defn}
-  Zwei Vektoren $a, b \in \R^n$ heißen gleichgerichtet, falls $a = \lambda b$ für ein $\lambda \geq 0$.
+  Zwei Vektoren $a, b \in \R^n$ heißen \emph{gleichgerichtet}, falls $a = \lambda b$ für ein $\lambda \geq 0$.
 \end{defn}
 
 \begin{satz}
@@ -103,7 +103,7 @@
 
 \begin{bem}
   Für alle $t \in I$ bildet $(c'(t), n_c(t))$ eine positiv orientierte Orthonormalbasis des $\R^2$.
-  Es gilt außerdem $c''(t) \perp c'(t)$, also $c''(t) = \kappa(t) \cdot n_c(t)$, d.\,h. die Krümmung ist im $\R^2$ vorzeichenbehaftet.
+  Es gilt außerdem $c''(t) \perp c'(t)$, also $c''(t) = \kappa(t) \cdot n_c(t)$, d.\,h. die Krümmung hat im $\R^2$ ein Vorzeichen.
 \end{bem}
 
 \begin{satz}[\emph{Frenet-Gleichungen} ebener Kurven]
@@ -315,7 +315,7 @@ $\implies$ $f$ ist partiell differenzierbar
 % TODO: Kettenregel
 
 \begin{defn}
-  Eine total differenzierbare Abbildung $f : U \to \R^n$ heißt regulär oder Immersion, wenn für alle $u \in U$ gilt: $\mathrm{Rang}(J_u f) = m$, d.\,h. alle partiellen Ableitungen sind in jedem Punkt linear unabhängig und $J_u f$ ist injektiv. Insbesondere muss $m \leq n$ gelten.
+  Eine total differenzierbare Abbildung $f : U \to \R^n$ heißt \emph{regulär} oder \emph{Immersion}, wenn für alle $u \in U$ gilt: $\mathrm{Rang}(J_u f) = m$, d.\,h. alle partiellen Ableitungen sind in jedem Punkt linear unabhängig und $J_u f$ ist injektiv. Insbesondere muss $m \leq n$ gelten.
 \end{defn}
 
 \begin{defn}
@@ -400,7 +400,7 @@ $\implies$ $f$ ist partiell differenzierbar
 % Beispiel: Regelfläche
 
 \begin{defn}
-  Sei $X : U \to \R^n$ eine Immersion mit $U \subset \R^{n-1}$ offen. Dann heißt $X$ \emph{Hyperfläche} im $\R^n$.
+  Sei $X : U \to \R^n$ eine Immersion mit $U \subset \R^{n-1}$ offen. Dann heißt $X$ \emph{Hyperfläche} (HF) im $\R^n$.
 \end{defn}
 
 \begin{bem}
@@ -784,7 +784,7 @@ $\implies$ $f$ ist partiell differenzierbar
 
 \begin{satz}[Spray-Eigenschaft]
   Sei $\alpha_v : \ointervall{-\epsilon, \epsilon} \to U$ die eindeutige Lsg. der Geodätengleichung mit $\alpha_v(0) = u$ und $\alpha_v'(0) = v$ und $r > 0$. Dann ist die eindeutige Lösung der Geodätengleichung $\alpha_{rv}$ mit $\alpha_{rv}(0) = rv$ und $\alpha_{rv}'(0) = rv$ auf dem Intervall $\ointervall{-\tfrac{\epsilon}{r}, \tfrac{\epsilon}{r}}$ definiert und es gilt
-  \[ \alpha_{rv}(t) = \alpha_v(rt), \quad \text{für alle } t \in \ointervall{-\tfrac{\epsilon}{r}, \tfrac{\epsilon}{r}}. \]
+  $\alpha_{rv}(t) = \alpha_v(rt)$ für alle $t \in \ointervall{-\tfrac{\epsilon}{r}, \tfrac{\epsilon}{r}}$.
 \end{satz}
 
 % todo: 2.48
@@ -814,7 +814,7 @@ $\implies$ $f$ ist partiell differenzierbar
 
 \begin{satz}[Variationsformel der Länge]
   Unter obigen Annahmen gilt
-  \[ \delta L(c_s) = \langle c'(b), \delta c_s(b) \rangle - \langle c'(a), \delta c_s(a) \rangle - \Int{a}{b} \langle (c''(t))^T, \delta c_s(t) \rangle. \]
+  \[ \delta L(c_s) = \langle c'(b), \delta c_s(b) \rangle - \langle c'(a), \delta c_s(a) \rangle - \Int{a}{b}{\langle (c''(t))^T, \delta c_s(t) \rangle}{t}. \]
 \end{satz}
 
 \begin{satz}[Gaußlemma]
@@ -833,7 +833,7 @@ $\implies$ $f$ ist partiell differenzierbar
 \begin{satz}
   Sei $X : U \to \R^n$ eine Fläche, $u_0 \in U$, $\epsilon > 0$, sodass $\Exp_{u_0}^{\epsilon} \to U$ Diffeomorphismus. Sei $u \in \Exp_{u_0}(B_{u_0}^{\epsilon})$. Dann gibt es (bis auf Umparametrisierung) genau eine bzgl. der Länge
   \[ L_\I(\alpha) \coloneqq \Int{a}{b}{\I_{\alpha(t)}(\alpha'(t), \alpha'(t))}{t} \]
-  kürzeste reguläre glatte Kurve $\alpha : [a, b] \to U$ mit $\alpha(a) = u_0$ und $\alpha(b) = u$ nämlich $\alpha : [0, 1] \to U, t \mapsto \Exp_{u_0}(t \cdot \Exp_{u_0}^{-1}(u))$.
+  kürzeste reguläre glatte Kurve $\alpha : [a, b] \to U$ mit $\alpha(a) = u_0$ und $\alpha(b) = u$, nämlich $\alpha : [0, 1] \to U, \  t \mapsto \Exp_{u_0}(t \cdot \Exp_{u_0}^{-1}(u))$.
 \end{satz}
 
 
@@ -849,50 +849,36 @@ $\implies$ $f$ ist partiell differenzierbar
 \end{defn}
 
 \begin{satz}
-  $\forall v, w \in \chi(U) : [v, w] = \nabla_v w - \nabla_w v$.
+  Für alle $v, w \in \chi(U)$ ist $[v, w] = \nabla_v w - \nabla_w v$.
 \end{satz}
 
 % in Koordinaten: $[v, w] = \sum_{j,k=1}^m v^j \partial_j w^k e_k - \sum_{j,k=1}^m w^j \partial_j v^k e_k$
 
 \begin{defn}
+  Die Abbildung
   \begin{align*}
-    R : \chi(U) \times \chi(U) \times \chi(U) &\to \chi(U)\\
-    (v, w, z) &\mapsto R(v, w) z \text{ mit }\\
-    R(v, w) z &= \nabla_v (\nabla_w z) - \nabla_w (\nabla_v z) - \nabla_{[v, w]} z
+    R : \chi(U) \times \chi(U) &\times \chi(U) \to \chi(U), \quad (v, w, z) \mapsto R(v, w) z \\
+    \text{ mit } R(v, w) z &= \nabla_v (\nabla_w z) - \nabla_w (\nabla_v z) - \nabla_{[v, w]} z
   \end{align*}
   heißt \emph{Krümmungstensor}.
 \end{defn}
 
-\begin{bem}
-  \[ \nabla_j = \partial_j + \Gamma_j, \text{ wobei } \Gamma_j : U \to \R^{m \times m} \]
-  \[ \nabla_j (\nabla_k z) = \partial_j \partial_k z + (\partial_j \Gamma_k) z) + \Gamma_k (\partial_j z) + \Gamma_j (\partial_k z) + \Gamma_j \Gamma_k z. \]
-  \[ R_{jk} \coloneqq R(e_j, e_k) z = \nabla_j (\nabla_k z) - \nabla_k (\nabla_j z) - \nabla_{[e_j, e_k]} z = \partial_j \partial_k z + (\partial_j \Gamma_k) z + \Gamma_k (\partial_j z) + \Gamma_j (\partial_k z) + \Gamma_j \Gamma_k z - (\partial_k \partial_j z + (\partial_k \Gamma_j) z + \Gamma_j (\partial_k z)) + \Gamma_k (\partial_j z) + \Gamma_k \Gamma_j z = \Gamma_j \Gamma_k z - \Gamma_k \Gamma_j + (\partial_j \Gamma_k - \partial_k \Gamma_j) z, \text{ wobei } \Gamma_j : U \to \R^{m \times m}, \partial_k \Gamma : U \to \R^{m \times m} \]
-  \[ R_{jk} = (\Gamma_j \cdot \Gamma_k - \Gamma_k \cdot \Gamma_j) + (\partial_j \Gamma_k - \partial_k \Gamma_j) \]
+% TODO: Trilinearität
+
+\begin{bem}[Krümmungstensor in Koordinaten]
+  Wir rechnen:
+  \begin{align*}
+    \nabla_j (\nabla_k z) &= \partial_j \partial_k z + (\partial_j \Gamma_k) z + \Gamma_k (\partial_j z) + \Gamma_j (\partial_k z) + \Gamma_j \Gamma_k z, \\
+    R_{jk} z &\coloneqq R(e_j, e_k) z = \Gamma_j \Gamma_k z - \Gamma_k \Gamma_j z + (\partial_j \Gamma_k - \partial_k \Gamma_j) z, \\
+    R_{jk} &\coloneqq R(e_j, e_k) = (\Gamma_j \cdot \Gamma_k - \Gamma_k \cdot \Gamma_j) + (\partial_j \Gamma_k - \partial_k \Gamma_j).
+  \end{align*}
+  Für $v = \sum v^j e_j, w = w^k e_k : U \to \R^m$ mit $v^j, w^k : U \to \R$ glatt ist
+  \[ R(v, w) z = \sum_{k,j=1}^m v^k w^j (R_{kj} z) \]
+  und mit $z = \sum z^l e_l : U \to \R^m, z^l : U \to \R$ glatt folgt
+  \[ R(v, w) z = \sum_{i,j,k,l}^m v^i w^j z^k R_{ijk}^l e_l, \]
+  wobei $R_{ijk}^l : U \to \R$ so gewählt, dass $R_{ij}(e_k) = \sum R_{ijk}^l e_l$. Es gilt:
+  \[ R_{ijk}^l = \partial_i \Gamma_{jk}^l - \partial_j \Gamma_{ik}^l + \sum_{s=1}^m (\Gamma_{is}^l \Gamma_{jk}^s - \Gamma_{js}^l \Gamma_{ik}^s). \]
 \end{bem}
-
-
-% Krümmungstensor in lokalen Variablen
-
-$v = \sum v^j e_j, w = w^k e_k, v^j, w^k : U \to \R$ glatt
-
-\begin{align*}
-  R(v, w) z &= \nabla_v \nabla_w z - \nabla_w \nabla_v z - \nabla_{[v, w]} z =\\
-  &= \sum v^k \nabla_k (\sum w^j \nabla_j z) - \sum w^k \nabla_k (\sum v^j \nabla_j z) - \sum (v^j \partial_j w^k - w^j \partial_j v^k) \nabla_k z =\\
-  &= \sum v^k \nabla_k (w^j \nabla_j z) - \sum w^k \nabla_k (v^j \nabla_j z) - \sum (v^j \partial_j w^k - w^j \partial_j v^k) \nabla_k z\\
-  &= \sum_{j,k=1}^{m} v^k w^j \nabla_k \nabla_j z - \sum_{k, j = 1}{m} w^j v^k \nabla_j \nabla_k z\\
-  &= \sum_{k,j = 1}^m v^k w^j (\nabla_k \nabla_j z - \nabla_j \nabla_k z)\\
-  &= \sum_{k,j=1}^m v^k w^j (R_{kj} z)
-\end{align*}
-
-Setze $z = \sum z^l e_l, z^l : U \to \R$ glatt. Dann
-also $R_{ij}(e_k) = \sum R_{ijk}^l e_l$.
-
-\begin{align*}
-  R(v, w) z &= \sum_{i,j=1}^m v^i w^j R_{ij} z\\
-  &= \sum_{i,j=1}^m v^i w^j R_{ij}(\sum_{k=1}^m z^k e_k)\\
-  &= \sum_{k,i,j}^m v^i w^j z^k R_{ij}(e_k)\\
-  &= \sum_{i,j,k,l}^m v^i w^j z^k R_{ijk}^l e_l
-\end{align*}
 
 \begin{satz}
   Die Abbildung
@@ -908,20 +894,18 @@ also $R_{ij}(e_k) = \sum R_{ijk}^l e_l$.
 \end{nota}
 
 \begin{satz}[Gaußgleichung]
-  \[ R_{ijkl}(u) = \langle \II_{jk} (u) \II_{kl}(u) \rangle - \langle \II_{ik}(u), \II_{jl}(u) \rangle, \]
-  wobei $\II_{jk}(u) = \left( \partial_j \partial_k X(u) \right)^{N_u}$
+  Mit $\II_{jk}(u) = \left( \partial_j \partial_k X(u) \right)^{N_u}$ gilt
+  \[ R_{ijkl}(u) = \langle \II_{jk} (u) \II_{kl}(u) \rangle - \langle \II_{ik}(u), \II_{jl}(u) \rangle. \]
 \end{satz}
 
 \begin{bem}
-  Spezialfall: $X$ Hyperfläche, dann
-  \[ \II_{jk} = h_{jk} \nu, \]
-  Da $\langle \nu, \nu \rangle = 1$, folgt
-  \[ R_{ijkl} = h_{jk} h_{ie} - h_{ik} h_{jl}. \]
+  Im Spezialfall, dass $X$ eine HF ist, gilt $\II_{jk} = h_{jk} \nu$.\\
+  Da $\langle \nu, \nu \rangle = 1$, folgt $R_{ijkl} = h_{jk} h_{ie} - h_{ik} h_{jl}$.
 \end{bem}
 
 \begin{satz}[Theorema egregium (Gauß)]
-  Sei $X : U \to \R^3$ eine Hyperfläche, dann gilt:
-  \[ K(u) = \frac{\det(h(u))}{\det(g(u))} = \frac{R_{1221}(u)}{\det(g(u))} \]
+  Für eine HF $X : U \to \R^3$ gilt
+  \[ K(u) = \frac{\det(h(u))}{\det(g(u))} = \frac{R_{1221}(u)}{\det(g(u))}. \]
   Letzter Ausdruck ist nur abhängig von der 1.\,FF und ihren Ableitungen.
 \end{satz}
 
@@ -932,11 +916,11 @@ also $R_{ij}(e_k) = \sum R_{ijk}^l e_l$.
 
 \begin{satz}[Hauptsatz der lokalen Flächentheorie (Bonnet)]
   Sei $U \opn \R^m$ einfach zusammenhängend und
-  \[ g, h : U \to \Set{ A \in \R^{m \times m} }{ A^T = A, \, A \text{ positiv definit } } \text{ glatt}. \]
-  Dann sind äquivalent:
+  \[ g, h : U \to \Set{ A \in \R^{m \times m} }{ A^T = A, \, A \text{ positiv definit } } \]
+  glatt. Dann sind äquivalent:
   \begin{itemize}
     \item $\exists \, X : U \to \R^{m+1}$ Hyperfläche mit $g$ und $h$ als 1.\,FF bzw. 2.\,FF.
-    \item $g, h$ erfüllen Gaußgleichung der die Codazzi-Mainardi-Gleichung.
+    \item $g, h$ erfüllen die Gauß- und die Codazzi-Mainardi-Gleichung.
   \end{itemize}
 \end{satz}
 
@@ -948,7 +932,7 @@ also $R_{ij}(e_k) = \sum R_{ijk}^l e_l$.
 \end{defn}
 
 \begin{satz}
-  Sei $n \geq 3$ und $X : U \to \R^n$ eine Nabelpunkthyperfläche in $\mathcal{C}^3$, dann ist $X(U)$ Teilmenge einer Hyperebene oder einer Hypersphäre im $\R^n$.
+  Sei $n \geq 3$ und $X : U \to \R^n$ eine Nabelpunkt-HF in $\mathcal{C}^3$, dann ist $X(U)$ Teilmenge einer Hyperebene oder einer Hypersphäre im $\R^n$.
 \end{satz}
 
 \begin{defn}
@@ -965,13 +949,14 @@ also $R_{ij}(e_k) = \sum R_{ijk}^l e_l$.
 \end{nota}
 
 \begin{bem}
-  Wenn $U^{j,t}$ offen in $\Set{ (x_1, ..., x_n) \in \R^n }{ x_j = t }$ ist, dann ist
+  Falls $U^{j,t}$ offen ist in $\Set{ (x_1, ..., x_n) \in \R^n }{ x_j = t }$, ist
   \[ X^{j,t} \coloneqq \Phi|_{U^{j,t}} : U^{j,t} \to \R^n \]
-  eine Hyperfläche und $\partial_j \Phi(x) \perp T_x X^{j,t} = \mathrm{Spann} \Set{ \partial_k \Phi(x) }{ k \in \{ 1, ..., n \} \setminus \{ j \} } \forall x \in U^{j,t}$.
+  eine Hyperfläche und für alle $x \in U^{j,t}$ gilt
+  \[ \partial_j \Phi(x) \perp T_x X^{j,t} = \mathrm{Spann} \Set{ \partial_k \Phi(x) }{ k \in \{ 1, ..., n \} \setminus \{ j \} }. \]
 \end{bem}
 
 \begin{defn}
-  Sei $X : U \to \R^n$ eine Hyperfläche und $c \coloneqq X \circ \alpha : I \to \R^n, I$ Intervall und $\alpha : I \to U$ glatt. Dann heißt $c$ \emph{Krümmungslinie}, wenn für alle $c'(t)$ für alle $t \in I$ eine Hauptkrümmungsrichtung von $X$ ist, d.\,h. ein Eigenvektor von $W_{\alpha(t)}$.
+  Sei $X : U \to \R^n$ eine HF und $c \coloneqq X \circ \alpha : I \to \R^n, I$ Intervall und $\alpha : I \to U$ glatt. Dann heißt $c$ \emph{Krümmungslinie}, wenn für alle $c'(t)$ für alle $t \in I$ eine Hauptkrümmungsrichtung von $X$ ist, d.\,h. ein Eigenvektor von $W_{\alpha(t)}$.
 \end{defn}
 
 \begin{satz}
@@ -981,29 +966,27 @@ also $R_{ij}(e_k) = \sum R_{ijk}^l e_l$.
 \end{satz}
 
 \begin{defn}
-  Eine lineare Abbildung $F : \R^n \to \R^n$ heißt \emph{konform}, wenn
+  Eine lineare Abb. $F : \R^n \to \R^n$ heißt \emph{konform}, wenn
   \[ \measuredangle (v, w) = \measuredangle (F(v), F(w)) \quad \forall v, w \in \R^n. \]
 \end{defn}
 
 \begin{bem}
   Jede lineare Abbildung lässt sich darstellen als
-  \[ F(x) = A_F \cdot x, \text{ mit } A_F \in \R^{n \times n} \]
-  und es gilt $F$ konform $\iff$ $\tfrac{1}{\mu} A_F \in O(n)$ für ein $\mu \in \R_{> 0}$. Dieses $\mu$ wird Streckungsfaktor genannt.
-
+  \[ F(x) = A_F \cdot x \text{ mit } A_F \in \R^{n \times n} \]
+  und es gilt $F$ konform $\iff$ $\tfrac{1}{\mu} A_F \in O(n)$ für ein $\mu \in \R_{> 0}$. Dieses $\mu$ wird \emph{konformer Faktor} oder Streckungsfaktor genannt.
 \end{bem}
 
 \begin{defn}
   Seien $O, \widetilde{O} \opn \R^n$. Ein $\mathcal{C}^1$-Diffeomorphismus $f : O \to \widetilde{O}$ heißt \emph{konform}, wenn für alle $x \in O$ die Abbildung $D_x f$ konform ist.
 \end{defn}
 
-\begin{bem}
-  $\lambda : O \to \R_{> 0}$, $\tfrac{1}{\lambda(x)} D_x f \in O(n)$ sei der konforme Faktor.
-\end{bem}
-
 % Konforme Abbildungen im $\R^2$
-
-Sei $O \opn \C$ zusammenhängend und $f : O \to \widetilde{O}$ konform. Ohne Einschränkung ist $\det(D_x f) > 0$ für alle $x \in O$ (sonst $\widetilde{f} = f \circ \overline{\cdot}$).
-Es folgt: $D_x f = \lambda(x) \begin{psmallmatrix} \cos \alpha_x & \sin \alpha_x \\ -\sin \alpha_x & \cos \alpha_x \end{psmallmatrix} = \lambda(x) \cdot e^{i \alpha_x} \in \C$ und somit ist $f$ holomorph.
+\begin{bem}[Konforme Abbildungen im $\R^2$]
+  Sei $O \opn \C \cong \R^2$ zusammenhängend und $f : O \to \widetilde{O}$ konform.
+  Sei $\lambda : O \to \R_{> 0}$ der konforme Faktor, d.\,h. $\lambda(x)^{-1} D_x f \in O(n)$.
+  Ohne Einschränkung ist $\det(D_x f) > 0$ für alle $x \in O$ (sonst $\widetilde{f} = f \circ \overline{\,\cdot\,}$).
+  Es folgt: $D_x f = \lambda(x) \begin{psmallmatrix} \cos \alpha_x & \sin \alpha_x \\ -\sin \alpha_x & \cos \alpha_x \end{psmallmatrix} = \lambda(x) \cdot e^{i \alpha_x} \in \C$, also ist $f$ holomorph.
+\end{bem}
 
 \begin{satz}[Liouville]
   Sei $n \geq 3$. Wenn $f : O \to \widetilde{O}$ konform, dann ist $f$ kugeltrue, d.\,h. Wenn $X : U \to O$ eine Nabelpunkt-HF, dann ist $f \circ X : U \to \widetilde{O}$ auch eine Nabelpunkt-HF.
