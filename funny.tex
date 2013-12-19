@@ -11,6 +11,12 @@
 \newcommand{\fue}{\overset{\text{f.ü.}}} % fast überall
 \newcommand{\dist}{\mathrm{dist}} % Entfernung
 
+\newcommand{\IntO}[2]{\Int{\Omega}{}{#1}{#2}} % Integral über \Omega
+
+\newcommand{\convWith}[1]{\xrightarrow{#1 \to \infty}} % konvergiert für #1 gegen unendlich gegen
+\newcommand{\convWeaklyWith}[1]{\xrightharpoonup{#1 \to \infty}} % konvergiert schwach für #1 gegen unendlich gegen
+\newcommand{\convWeaklyStarWith}[1]{\xrightharpoonup[*]{#1 \to \infty}} % konvergiert schwach für #1 gegen unendlich gegen
+
 \pdfinfo{
   /Title (Zusammenfassung Funktionalanalysis)
   /Author (Tim Baumann)
@@ -123,7 +129,7 @@
 \end{bem}
 
 \begin{defn}
-  Sei $(X, d)$ ein metrischer Raum. Eine Folge $(x_k)_{k \in \N}$ heißt \emph{Cauchy-Folge}, falls $d(x_k, x_l) \xrightarrow{k, l \to \infty} 0$. Ein Punkt $x \in X$ heißt \emph{Häufungspunkt} der Folge, falls es eine Teilfolge $(x_{k_i})_{i \in \N}$ gibt mit $x_{k_i} - x \xrightarrow{i \to \infty} 0$.
+  Sei $(X, d)$ ein metrischer Raum. Eine Folge $(x_k)_{k \in \N}$ heißt \emph{Cauchy-Folge}, falls $d(x_k, x_l) \convWith{k, l} 0$. Ein Punkt $x \in X$ heißt \emph{Häufungspunkt} der Folge, falls es eine Teilfolge $(x_{k_i})_{i \in \N}$ gibt mit $x_{k_i} - x \convWith{i} 0$.
 \end{defn}
 
 \begin{defn}
@@ -156,7 +162,7 @@
 
 \begin{satz}
   Sind $(x^k) = (x^k_i)_{i \in \N} \in \K^\N$ und $x = (x_i)_{i \in \N} \in \K^\N$, so gilt
-  \[ \rho(x^k - x) \xrightarrow{k \to \infty} 0 \iff \forall\,i \in \N : x_i^k \xrightarrow{k \to \infty} x_i. \]
+  \[ \rho(x^k - x) \convWith{k} 0 \iff \forall\,i \in \N : x_i^k \convWith{k} x_i. \]
 \end{satz}
 
 \begin{defn}
@@ -180,7 +186,7 @@
   Sei $(X, d)$ ein metrischer Raum. Betrachte die Menge $X^\N$ aller Folgen in $X$ und definiere
   \[ \tilde{X} \coloneqq \Set{ x \in X^\N }{ x \text{ ist Cauchy-Folge in } X }/\sim \]
   mit der Äquivalenzrelation
-  \[ x \sim y \text{ in } \tilde{X} \iff d(x_j, y_j) \xrightarrow{j \to \infty} 0. \]
+  \[ x \sim y \text{ in } \tilde{X} \iff d(x_j, y_j) \convWith{j} 0. \]
   Diese Menge wird mit der Metrik
   \[ \tilde{d}(x, y) \coloneqq \lim_{i \to \infty} d(x_i, y_i) \]
   zu einem vollständigen metrischen Raum. Die injektive Abbildung $J : X \to \tilde{X}$, welche $x \in X$ auf die konstante Folge $(x)_{i \in \N}$, ist isometrisch, d.\,h. sie erhält. Wir können also $X$ als einen dichten Unterraum von $\tilde{X}$ auffassen. Man nennt $\tilde{X}$ \emph{Vervollständigung} von~$X$.
@@ -464,6 +470,57 @@
 
 \begin{satz}[vom abgeschlossenen Graphen]
   Seien $X, Y$ Banachräume und $T : X \to Y$ linear. Dann ist $\mathrm{Graph}(T) = \Set{ (x, Tx) }{ x \in X }$ genau dann abgeschlossen, wenn $T$ stetig ist. Dabei ist $\mathrm{Graph}(T) \subset X \times Y$ mit der \emph{Graphennorm} $\|(x,y)\|_{X \times Y} = \|x\|_X + \|y\|_Y$.
+\end{satz}
+
+\begin{defn}
+  Sei $X$ ein Banachraum.
+  \begin{itemize}
+    \item Eine Folge $(x_k)_{k \in \N}$ in $X$ \emph{konvergiert schwach} gegen $x \in X$ (notiert $x_k \convWeaklyWith{k} x$), falls für alle $x' \in X'$ gilt:
+    \[ \langle x', x_k \rangle_{X' \times X} \convWith{k} \langle x', x \rangle_{X' \times X} \]
+    \item Eine Folge $(x'_k)_{k \in \N}$ in $X'$ \emph{konvergiert schwach*} gegen $x' \in X'$ (notiert $x'_k \convWeaklyStarWith{k} x'$), falls für alle $x \in X$ gilt:
+    \[ \langle x'_k, x \rangle_{X' \times X} \convWith{k} \langle x', x \rangle_{X' \times X} \]
+    \item Analog sind \emph{schwache} und \emph{schwache* Cauchyfolgen} definiert.
+    \item Eine Menge $M \subset X$ (bzw. $M \subset X'$) heißt \emph{schwach folgenkompakt} bzw. \emph{schwach* folgenkompakt}, falls jede Folge in der Menge $M$ eine schwach (bzw. schwach*) konvergente Teilfolge besitzt deren Grenzwert wieder in $M$ liegt.
+  \end{itemize}
+\end{defn}
+
+\begin{bem}
+  Der schwache bzw. schwache* Grenzwert einer Folge ist eindeutig bestimmt. Starke Konvergenz impliziert schwache Konvergenz.
+\end{bem}
+
+\begin{satz}
+  Es gilt für $x, x_k \in X$, $x', x'_k \in X'$:
+  \begin{align*}
+    x_k \convWeaklyWith{k} x \,\, \text{ in } X \, \quad &\iff \quad J_x x_k \convWeaklyStarWith{k} J_x x \text{ in } X'' \\
+    x'_k \convWeaklyWith{k} x' \text{ in } X' \quad &\implies \qquad \,\, x'_k \convWeaklyStarWith{k} x' \text{ in } X'
+  \end{align*}
+\end{satz}
+
+\begin{lem}
+  \begin{itemize}
+    \item Aus $x'_k \convWeaklyStarWith{k} x'$ in $X'$ folgt $\|x'\|_{X'} \leq \liminf_{k \to \infty} \|x'_k\|_{X'}$, aus $x_k \convWeaklyWith{k} x$ in $X$ folgt $\|x\|_X \leq \liminf_{k \to \infty} \|x_k\|_X$.
+    \item Schwach bzw. schwach* konvergente Folgen sind beschränkt.
+    \item Aus $x_k \convWith{k} x$ in $X$ und $x'_k \convWeaklyStarWith{k} x'$ in $X'$ folgt $\langle x'_k, x_k \rangle_{X' \times X} \convWith{k} \langle x', x \rangle_{X' \times X}$. Dasselbe folgt mit $x_k \convWeaklyWith{k} x$ in $X$ und $x'_k \convWith{k} x'$ in $X'$.
+  \end{itemize}
+\end{lem}
+
+\begin{acht}
+  In der letzten Behauptung müssen wir vorraussetzen, dass mindestens eine Folge stark konvergiert. Für beidesmal schwache/schwache* Konvergenz ist die Aussage i.\,A. falsch.
+\end{acht}
+
+\iffalse
+\begin{bsp}
+  \begin{itemize}
+    \item Sei $1 \leq p < \infty$ und $\tfrac{1}{p} + \tfrac{1}{p'} = 1$ und $\omega \subset \R^n$ beschränkt. Dann gilt für $f, f_k \in L^p(\Omega)$:
+    \[ f_k \convWeaklyWith{k} f \text{ in } L^p(\Omega) \iff \forall g \in L^p(\Omega) : \IntO{f_k \cdot \overline{g}}{x} \convWith{k} \IntO{f \cdot \overline{g}}{x} \]
+    \item Sei $\Omega \subset \R^n$ boffen und beschränkt und $1 \leq p \leq \infty$, $m \in \N_{> 0}$. Für $u, u_k \in W^{m,p}(\Omega)$ gilt dann:
+    \[ u_k \convWeaklyWith{k} u \text{ in } W^{m,p}(\Omega) \iff \forall s, |s| \leq m : \partial^s u_k \convWeaklyWith{k} \partial^s u \text{ in } L^p(\Omega) \]
+  \end{itemize}
+\end{bsp}
+\fi
+
+\begin{satz}[Banach-Alaoglu]
+  Sei $X$ ein separabler Banachraum. Dann ist die abgeschl. Einheitskugel $\overline{B_1(0)} \subset X'$ schwach folgenkompakt.
 \end{satz}
 
 \end{document}
