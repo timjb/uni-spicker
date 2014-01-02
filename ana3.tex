@@ -722,7 +722,7 @@
 \vspace{-20pt}
 
 \begin{satz}[Ableiten unter Integral]
-  Seien $a, b \in \R$ mit $a < b$, sei $(\Omega, \Alg, \mu)$ ein Maßraum und sei $f : ]a, b[ \times \Omega \to (\R, \Bor)$ eine Funktion, sodass gilt
+  Seien $a, b \in \R$ mit $a < b$, sei $(\Omega, \Alg, \mu)$ ein Maßraum und sei $f : \left]a, b\right[ \times \Omega \to (\R, \Bor)$ eine Funktion, sodass gilt
   \begin{itemize}
     \item Für alle $t \in ]a, b[$ ist die Abbildung $f(t, -) : \Omega \to \R$ $\mu$-integrierbar.
     \item Für alle $\omega \in \Omega$ ist die Abbildung $f(-, \omega) : ]a, b[ \to \R$ differenzierbar.
@@ -935,28 +935,29 @@
 %           (\omega_1, ..., \omega_n) \mapsto \omega_j
 
 \begin{defn}
-  Seien $(\Omega_j, \Alg_j, \mu_j)$ Maßräume für $j = 1, ..., n$. Die kleinste $\sigma$-Algebra $\Alg$ auf $\sigma$, sodass alle $\Pi_j, j = 1, ..., n$ $(\Alg, \Alg_j)$-messbar sind, heißt \emph{Produkt} der $\sigma$-Algebren $\Alg_1, ..., \Alg_n$, notiert $\Alg =: \Alg_1 \times ... \times \Alg_n$.
+  Seien $(\Omega_j, \Alg_j, \mu_j)$ Maßräume für $j = 1, ..., n$. Die kleinste $\sigma$-Algebra $\Alg$ auf $\sigma$, sodass alle $\Pi_j, j = 1, ..., n$ $(\Alg, \Alg_j)$-messbar sind, heißt \emph{Produkt} der $\sigma$-Algebren $\Alg_1, ..., \Alg_n$, notiert $\Alg =: \Alg_1 \otimes ... \otimes \Alg_n$.
 \end{defn}
 
 \begin{satz}
   Sei $\mathcal{E}_j$ Erzeugendensystem von $\Alg_j, j = 1, ..., n$, d.\,h. $\Alg(\mathcal{E}_j) = \Alg_j$. Annahme: Für alle $j \in \{ 1, ..., n \}$ gibt es eine monoton gegen $\Omega_j$ wachsende Folge $(E^j_k)_{k \in \N}$ in $\mathcal{E}_j$. Dann ist
   \begin{align*}
-    \Alg_1 \times ... \times \Alg_n &= \Alg(\mathcal{E}_1 \times ... \times \mathcal{E}_n) \text{ mit }\\
+    \Alg_1 \otimes ... \otimes \Alg_n &= \Alg(\mathcal{E}_1 \times ... \times \mathcal{E}_n) \text{ mit }\\
     \mathcal{E}_1 \times ... \times \mathcal{E}_n &= \Set{ E_1 \times ... \times E_n }{ E_j \in \mathcal{E}_j, j = 1, ..., n }
   \end{align*}
 \end{satz}
 
 % Korollar
 \begin{satz}
-  $\Bor(\R^n) = \underbrace{\Bor(\R) \times ... \times \Bor(\R)}_{\text{$n$-mal}}$.
+  $\Bor(\R^n) = \underbrace{\Bor(\R) \otimes ... \otimes \Bor(\R)}_{\text{$n$-mal}}$.
 \end{satz}
 
 % Ziel: Maß \mu auf \Omega mit
 % $\mu(E_1 \times ... \times E_n) = \mu_1(E_1) \cdot ... \cdot \mu_n(E_n)$ für alle $E_j \in \mathcal{E}_j$.
 
-\begin{satz}
+\begin{satz}[Eindeutigkeit von Produktmaßen]
   Seien $(\Omega_j, \Alg_j, \mu_j)$ Maßräume und $E_j$ ein Erzeugendensystem von $\Alg_j$ für $j = 1, ..., n$. Angenommen, $E_j$ ist stabil unter Schnitten und $\exists (E_k^{(j)})_{k \in \N} \uparrow \Omega_j$ mit $\mu_j(E_k^{(j)}) < \infty$ für alle $j$.
-  Dann gibt es höchstens ein Maß $\nu : \Alg_1 \times ... \times \Alg_n \to [0, \infty]$ mit $\nu(E_1 \times ... \times E_n) = \mu_1(E_1) \cdot ... \cdot \mu_n(E_n), E_j \in \mathcal{E}_j$.
+  Dann gibt es höchstens ein Maß $\nu : \Alg_1 \otimes ... \otimes \Alg_n \to [0, \infty]$, sodass für alle $E_j \in \mathcal{E}_j, j \in \{ 1, ..., n \}$ gilt:
+  \[ \nu(E_1 \times ... \times E_n) = \mu_1(E_1) \cdot ... \cdot \mu_n(E_n). \]
 \end{satz}
 
 \begin{defn}
@@ -985,7 +986,7 @@
 \fi
 
 \begin{nota}
-  Seien $\Omega_1, \Omega_2$ Mengen, $\Omega \subset \Omega_1 \times \Omega_2, \omega_1 \in \Omega_1, \omega_2 \in \Omega_2$
+  Seien $\Omega_1, \Omega_2$ Mengen, $\Omega \subset \Omega_1 \otimes \Omega_2, \omega_1 \in \Omega_1, \omega_2 \in \Omega_2$
   \begin{align*}
     Q_{\omega_1} &\coloneqq \Set{ \omega_2 \in \Omega_2 }{ (\omega_1, \omega_2) \in Q } = \pi_2(\pi_1^{-1}(\{ \omega_1 \}) \cap Q)\\
     Q_{\omega_2} &\coloneqq \Set{ \omega_1 \in \Omega_1 }{ (\omega_1, \omega_2) \in Q } = \pi_1(\pi_2^{-1}(\{ \omega_2 \}) \cap Q)
@@ -993,12 +994,12 @@
 \end{nota}
 
 \begin{satz} % Lemma
-  $Q \subset \Alg_1 \times \Alg_2, \omega_1 \in \Omega_1, \omega_2 \in \Omega_2$
+  $Q \subset \Alg_1 \otimes \Alg_2, \omega_1 \in \Omega_1, \omega_2 \in \Omega_2$
   $\implies Q_{\omega_1} \in \Alg_2, Q_{\omega_2} \in \Alg_1$.
 \end{satz}
 
 \begin{satz}(Cavalieri 1) % Proposition
-  Seien $(\Omega_1, \Alg_1, \mu_1)$ und $(\Omega_2, \Alg_2, \mu_2)$ $\sigma$-endliche Maßräume, $Q \in \Alg_1 \times \Alg_2$. Dann:
+  Seien $(\Omega_1, \Alg_1, \mu_1)$ und $(\Omega_2, \Alg_2, \mu_2)$ $\sigma$-endliche Maßräume, $Q \in \Alg_1 \otimes \Alg_2$. Dann:
   \begin{itemize}
     \item $h_Q^1 : \Omega_1 \to [0, \infty], \omega_1 \mapsto \mu_2(Q_{\omega_1})$ ist $(\Alg_1, \overline{\Bor})$-messbar.
     \item $h_Q^2 : \Omega_2 \to [0, \infty], \omega_2 \mapsto \mu_1(Q_{\omega_2})$ ist $(\Alg_2, \overline{\Bor})$-messbar.
@@ -1008,12 +1009,12 @@
 \begin{satz}[Existenz von Produktmaßen]
   Die Abbildungen
   \begin{align*}
-    \nu_1 : \Alg_1 \times \Alg_2 \to [0, \infty], \quad & Q \mapsto \Int{\Omega_1}{}{\mu_2(Q \omega_1)}{\mu_1} \\
-    \nu_2 : \Alg_2 \times \Alg_1 \to [0, \infty], \quad & Q \mapsto \Int{\Omega_2}{}{\mu_1(Q \omega_2)}{\mu_2}
+    \nu_1 : \Alg_1 \otimes \Alg_2 \to [0, \infty], \quad & Q \mapsto \Int{\Omega_1}{}{\mu_2(Q \omega_1)}{\mu_1} \\
+    \nu_2 : \Alg_2 \otimes \Alg_1 \to [0, \infty], \quad & Q \mapsto \Int{\Omega_2}{}{\mu_1(Q \omega_2)}{\mu_2}
   \end{align*}
   sind Maße und es gilt für alle $A_1 \in \Alg_1$ und $A_2 \in \Alg_2$
   \[ \nu_1(A_1 \times A_2) = \mu_1(A_1) \cdot \mu_2(A_2) = \nu_2(A_1 \times A_2) \]
-  und somit $\nu_1 = \nu_2$.
+  und somit $\nu_1 = \nu_2$. Dieses Maß $\mu_1 \otimes \mu_2 \coloneqq \nu_1 = \nu_2$ heißt \emph{Produktmaß} von $\mu_1$ und $\mu_2$.
 \end{satz}
 
 % Name: Schnitte
@@ -1026,11 +1027,11 @@
 \end{nota}
 
 \begin{lem}
-  Angenommen, $f : \Omega_1 \times \Omega_2 \to \ER$ ist $(\Alg_1 \times \Alg_2, \overline{\Bor})$-messbar. Dann ist auch für alle $\omega_1 \in \Omega_1$ die Abbildung $f_{\omega_1}$ $(\Alg_2, \overline{\Bor})$-messbar und für alle $\omega_2 \in \Omega_2$ die Abbildung $f_{\omega_2}$ $(\Alg_1, \overline{\Bor})$-messbar.
+  Angenommen, $f : \Omega_1 \times \Omega_2 \to \ER$ ist $(\Alg_1 \otimes \Alg_2, \overline{\Bor})$-messbar. Dann ist auch für alle $\omega_1 \in \Omega_1$ die Abbildung $f_{\omega_1}$ $(\Alg_2, \overline{\Bor})$-messbar und für alle $\omega_2 \in \Omega_2$ die Abbildung $f_{\omega_2}$ $(\Alg_1, \overline{\Bor})$-messbar.
 \end{lem}
 
 \begin{satz}[Tonelli]
-  Sei $f \in \overline{\E}(\Omega_1 \times \Omega_2, \Alg_1 \times \Alg_2)$, dann:
+  Sei $f \in \overline{\E}(\Omega_1 \times \Omega_2, \Alg_1 \otimes \Alg_2)$, dann:
   \begin{itemize}
     \item $\Omega_2 \to [0, \infty], \quad \omega_2 \mapsto \Int{\Omega_1}{}{f_{\omega_2}}{\mu_1}$ ist $(\Alg_2, \overline{\Bor})$-messbar,
     \item $\Omega_1 \to [0, \infty], \quad \omega_1 \mapsto \Int{\Omega_2}{}{f_{\omega_1}}{\mu_2}$ ist $(\Alg_1, \overline{\Bor})$-messbar.
@@ -1038,8 +1039,8 @@
 \end{satz}
 
 \begin{satz}[Fubini]
-  Sei $f : \Omega_1 \times \Omega_2 \to \ER$ $(\mu_1 \times \mu_2)$-integrierbar. Dann ist für $\mu_1$-fast-alle $\omega_1 \in \Omega_1$ der Schnitt $f_{\omega_1}$ $\mu_2$-integrierbar, und die $\mu_1$-fast-überall definierte Funktion $\omega_1 \mapsto \Int{\Omega_2}{}{f_{\omega_1}}{\mu_2}$ ist $\mu_1$-integrierbar. Analoges gilt mit $1$ und $2$ vertauscht. Es gilt:
-  \[ \Int{\Omega_1 \times \Omega_2}{}{f}{(\mu_1 \times \mu_2)} = \Int{\Omega_1}{}{(\Int{\Omega_2}{}{f_{\omega_1}}{\mu_2})}{\mu_1} = \Int{\Omega_2}{}{(\Int{\Omega_1}{}{f_{\omega_2}}{\mu_1})}{\mu_2}. \]
+  Sei $f : \Omega_1 \times \Omega_2 \to \ER$ $(\mu_1 \otimes \mu_2)$-integrierbar. Dann ist für $\mu_1$-fast-alle $\omega_1 \in \Omega_1$ der Schnitt $f_{\omega_1}$ $\mu_2$-integrierbar, und die $\mu_1$-fast-überall definierte Funktion $\omega_1 \mapsto \Int{\Omega_2}{}{f_{\omega_1}}{\mu_2}$ ist $\mu_1$-integrierbar. Analoges gilt mit $1$ und $2$ vertauscht. Es gilt:
+  \[ \Int{\Omega_1 \times \Omega_2}{}{f}{(\mu_1 \otimes \mu_2)} = \Int{\Omega_1}{}{(\Int{\Omega_2}{}{f_{\omega_1}}{\mu_2})}{\mu_1} = \Int{\Omega_2}{}{(\Int{\Omega_1}{}{f_{\omega_2}}{\mu_1})}{\mu_2}. \]
 \end{satz}
 
 \end{document}
