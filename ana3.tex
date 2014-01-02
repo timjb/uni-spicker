@@ -301,8 +301,8 @@
 \begin{defn}
   Für $a, b \in \R^n$ heißen
   \[
-    ]a, b[\,\coloneqq \Set{ x \in \R^n }{ a \lhd x \lhd b }, \qquad
-    \mu(]a, b[) \coloneqq \prod_{j = 1}^{n} (b_j - a_j)
+    \left]a, b\right[\,\coloneqq \Set{ x \in \R^n }{ a \lhd x \lhd b }, \qquad
+    \mu(\left]a, b\right[) \coloneqq \prod_{j = 1}^{n} (b_j - a_j)
   \]
   \emph{Elementarquader} und \emph{Elementarinhalt}. Sei im Folgenden $\mathcal{E}$ die Menge aller Elementarquader.
 \end{defn}
@@ -501,7 +501,7 @@
   \begin{multicols}{3}
     \begin{itemize}
       \item $f$ ist messbar
-      \item $f(\Omega) \subset [0, \infty[$
+      \item $f(\Omega) \subset \left[0, \infty\right[$
       \item $f(\Omega)$ ist endlich
     \end{itemize}
   \end{multicols}
@@ -887,7 +887,7 @@
 \end{satz}
 
 \begin{satz}[Kurt Hensel]
-  Sei $\Phi : \mathrm{GL}_n(\R) \to (\R \setminus \{0\}, \cdot)$ ein Gruppenhomomorphismus, dann gibt es einen Gruppenautomorphismus $\phi : (\R \setminus \{0\}, \cdot) \to (\R \setminus \{0\}, \cdot)$, sodass $\Phi = \phi \circ \det$.
+  Sei $\Phi : \mathrm{GL}_n(\R) \to (\R \setminus \{0\}, \cdot)$ ein Gruppenhomomorphismus, dann gibt es einen Gruppen- automorphismus $\phi : (\R \setminus \{0\}, \cdot) \to (\R \setminus \{0\}, \cdot)$, sodass $\Phi = \phi \circ \det$.
 \end{satz}
 
 \begin{satz}
@@ -907,7 +907,7 @@
 
 % Lemma
 \begin{satz}
-  Situation wie im Satz. Sei $Q = ]a, b[ \subset U$ Elementarquader mit $a \lhd b$, dann gilt
+  Sei $U, \widetilde{U} \opn \R^d$, $\phi : U \to \widetilde{u}$ ein $\mathcal{C}^1$-Diffeomorphismus und $Q = \left]a, b\right[ \subset U$ Elementarquader mit $a \lhd b$, dann gilt
   \[ \mu_{LB}(Q) \cdot \inf_{q \in Q} \left|\det D \phi(q)\right| \leq \mu_{LB}(\phi(Q)) \leq \mu_{LB}(Q) \cdot \sup_{q \in Q} \left|\det(D(\phi(q)))\right|. \]
 \end{satz}
 
@@ -960,11 +960,11 @@
 \end{satz}
 
 \begin{defn}
-  $\Omega$ sei Menge eine Teilmenge $\Dyn \subset \Omega$ heißt \emph{Dynkin-System}, wenn gilt:
+  Sei $\Omega$ eine Menge. Eine Teilmenge $\Dyn \subset \Omega$ heißt \emph{Dynkin-System}, wenn gilt:
   \begin{itemize}
     \item $\Omega \in \Dyn$
     \item $D \in \Dyn \implies D^C = \Omega \setminus D \in \Dyn$
-    \item $(D_n)_{n \in \N}$ Folge pw. disjunkter Mengen in $\Dyn$. Dann: $\bigcup_{n \in \N} D_n \in \Dyn$
+    \item $(D_n)_{n \in \N}$ Folge pw. disjunkter Mengen in $\Dyn$, dann: $\bigcup_{n \in \N} D_n \in \Dyn$
   \end{itemize}
 \end{defn}
 
@@ -1026,21 +1026,20 @@
 \end{nota}
 
 \begin{lem}
-  Angenommen, $f : \Omega_1 \times \Omega_2 \to \ER$ ist $(\Alg_1 \times \Alg_2, \overline{B})$-messbar. Dann ist auch für alle $\omega_1 \in \Omega_1$ die Abbildung $f_{\omega_1}$ $(\Alg_2, \overline{B})$-messbar und für alle $\omega_2 \in \Omega_2$ die Abbildung $f_{\omega_2}$ $(\Alg_1, \overline{B})$-messbar.
+  Angenommen, $f : \Omega_1 \times \Omega_2 \to \ER$ ist $(\Alg_1 \times \Alg_2, \overline{\Bor})$-messbar. Dann ist auch für alle $\omega_1 \in \Omega_1$ die Abbildung $f_{\omega_1}$ $(\Alg_2, \overline{\Bor})$-messbar und für alle $\omega_2 \in \Omega_2$ die Abbildung $f_{\omega_2}$ $(\Alg_1, \overline{\Bor})$-messbar.
 \end{lem}
 
 \begin{satz}[Tonelli]
   Sei $f \in \overline{\E}(\Omega_1 \times \Omega_2, \Alg_1 \times \Alg_2)$, dann:
   \begin{itemize}
-    \item $\Omega_2 \to [0, \infty], \, \omega_2 \mapsto \Int{\Omega_1}{}{f_{\omega_2}}{\mu_1}$ ist $(\Alg_2, \overline{B})$-messbar,
-    \item $\Omega_1 \to [0, \infty], \, \quad \omega_1 \mapsto \Int{\Omega_2}{}{f_{\omega_1}}{\mu_2}$ ist $(\Alg_1, \overline{B})$-messbar.
+    \item $\Omega_2 \to [0, \infty], \quad \omega_2 \mapsto \Int{\Omega_1}{}{f_{\omega_2}}{\mu_1}$ ist $(\Alg_2, \overline{\Bor})$-messbar,
+    \item $\Omega_1 \to [0, \infty], \quad \omega_1 \mapsto \Int{\Omega_2}{}{f_{\omega_1}}{\mu_2}$ ist $(\Alg_1, \overline{\Bor})$-messbar.
   \end{itemize}
 \end{satz}
 
 \begin{satz}[Fubini]
-  Sei $f : \Omega_1 \times \Omega_2 \to \ER$ $(\mu_1 \times \mu_2)$-integrierbar. Dann ist für $\mu_1$-fast-alle $\omega_1$ ist $f_{\omega_1}$ $\mu_2$-integrierbar, und die für $\mu_1$-fast alle definierte Funktionen $\omega_1 \mapsto \Int{\Omega_2}{}{f_{\omega_1}}{\mu_2}$ ist $\mu_1$-integrierbar. Es gilt:
-    \[ \Int{\Omega_1 \times \Omega_2}{}{f}{(\mu_1 \times \mu_2)} = \Int{\Omega_1}{}{(\Int{\Omega_2}{}{f_{\omega_1}}{\mu_2})}{\mu_1} = \Int{\Omega_2}{}{(\Int{\Omega_1}{}{f_{\omega_2}}{\mu_1})}{\mu_2}. \]
-  Analoges gilt mit $1$ und $2$ vertauscht.
+  Sei $f : \Omega_1 \times \Omega_2 \to \ER$ $(\mu_1 \times \mu_2)$-integrierbar. Dann ist für $\mu_1$-fast-alle $\omega_1 \in \Omega_1$ der Schnitt $f_{\omega_1}$ $\mu_2$-integrierbar, und die $\mu_1$-fast-überall definierte Funktion $\omega_1 \mapsto \Int{\Omega_2}{}{f_{\omega_1}}{\mu_2}$ ist $\mu_1$-integrierbar. Analoges gilt mit $1$ und $2$ vertauscht. Es gilt:
+  \[ \Int{\Omega_1 \times \Omega_2}{}{f}{(\mu_1 \times \mu_2)} = \Int{\Omega_1}{}{(\Int{\Omega_2}{}{f_{\omega_1}}{\mu_2})}{\mu_1} = \Int{\Omega_2}{}{(\Int{\Omega_1}{}{f_{\omega_2}}{\mu_1})}{\mu_2}. \]
 \end{satz}
 
 \end{document}
