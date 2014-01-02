@@ -1034,7 +1034,8 @@
   Sei $f \in \overline{\E}(\Omega_1 \times \Omega_2, \Alg_1 \otimes \Alg_2)$, dann:
   \begin{itemize}
     \item $\Omega_2 \to [0, \infty], \quad \omega_2 \mapsto \Int{\Omega_1}{}{f_{\omega_2}}{\mu_1}$ ist $(\Alg_2, \overline{\Bor})$-messbar,
-    \item $\Omega_1 \to [0, \infty], \quad \omega_1 \mapsto \Int{\Omega_2}{}{f_{\omega_1}}{\mu_2}$ ist $(\Alg_1, \overline{\Bor})$-messbar.
+    \item $\Omega_1 \to [0, \infty], \quad \omega_1 \mapsto \Int{\Omega_2}{}{f_{\omega_1}}{\mu_2}$ ist $(\Alg_1, \overline{\Bor})$-messbar,
+    \item $\Int{\Omega_1 \times \Omega_2}{}{f}{(\mu_1 \otimes \mu_2)} = \Int{\Omega_1}{}{(\Int{\Omega_2}{}{f_{\omega_1}}{\mu_2})}{\mu_1} = \Int{\Omega_2}{}{(\Int{\Omega_1}{}{f_{\omega_2}}{\mu_1})}{\mu_2}$.
   \end{itemize}
 \end{satz}
 
