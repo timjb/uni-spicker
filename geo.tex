@@ -882,10 +882,13 @@ $\implies$ $f$ ist partiell differenzierbar
 
 \begin{satz}
   Die Abbildung
-  \begin{align*}
-    \I_{R_{ij}} : \chi(U) \times \chi(U) &\to \mathcal{C}^\infty(U, \R)
-    (v, w) &\mapsto \underbrace{\I(R_{ij}, v, w)}_{u \mapsto \I_u((R_{ij} v)(u), w(u))}
-  \end{align*}
+  \[
+    \I_{R_{ij}} : \chi(U) \times \chi(U) \to \mathcal{C}^\infty(U, \R), \qquad
+    (v, w) \mapsto \underbrace{\I(R_{ij}, v, w)}_{\mathclap{u \mapsto \I_u((R_{ij} v)(u), w(u))}}
+  \]
+
+  \vspace{-12pt}
+  
   ist eine antisymmetrische Bilinearform.
 \end{satz}
 
@@ -981,15 +984,25 @@ $\implies$ $f$ ist partiell differenzierbar
 \end{defn}
 
 % Konforme Abbildungen im $\R^2$
+\iffalse
 \begin{bem}[Konforme Abbildungen im $\R^2$]
   Sei $O \opn \C \cong \R^2$ zusammenhängend und $f : O \to \widetilde{O}$ konform.
   Sei $\lambda : O \to \R_{> 0}$ der konforme Faktor, d.\,h. $\lambda(x)^{-1} D_x f \in O(n)$.
   Ohne Einschränkung ist $\det(D_x f) > 0$ für alle $x \in O$ (sonst $\widetilde{f} = f \circ \overline{\,\cdot\,}$).
   Es folgt: $D_x f = \lambda(x) \begin{psmallmatrix} \cos \alpha_x & \sin \alpha_x \\ -\sin \alpha_x & \cos \alpha_x \end{psmallmatrix} = \lambda(x) \cdot e^{i \alpha_x} \in \C$, also ist $f$ holomorph.
 \end{bem}
+\fi
+
+\begin{satz}
+  Jede konforme Abbildung auf einer zusammenhängenden offenen Teilmenge des $\R^2$ ist bis auf Verknüpfung mit der komplexen Konjugation eine holomorphe reguläre Abbildung und umgekehrt.
+\end{satz}
+
+\begin{defn}
+  Eine Abbilung $f : O \to \widetilde{O}$ heißt \emph{kugeltreu}, wenn sie offene Teilmengen von Sphären auf offene Teilmengen von Sphären abbildet. Dabei gelten Hyperebenen als Sphären von unendlichem Radius.
+\end{defn}
 
 \begin{satz}[Liouville]
-  Sei $n \geq 3$. Wenn $f : O \to \widetilde{O}$ konform, dann ist $f$ kugeltrue, d.\,h. Wenn $X : U \to O$ eine Nabelpunkt-HF, dann ist $f \circ X : U \to \widetilde{O}$ auch eine Nabelpunkt-HF.
+  Wenn $n \geq 3$, dann ist jede konforme $\mathcal{C}^3$-Abb. $f : O \to \widetilde{O}$ kugeltreu, d.\,h. falls $X : U \to O$ eine Nabelpunkt-HF ist, dann ist $f \circ X : U \to \widetilde{O}$ auch eine Nabelpunkt-HF.
 \end{satz}
 
 \end{document}
