@@ -443,11 +443,11 @@ $\implies$ $f$ ist partiell differenzierbar
     \II : U \to \Bil(\R^m, \R^n), \quad & u \mapsto \II(u) = \II_u, \text { mit } \\
     \II_u : \R^m \times \R^m \to \R^n, \quad & (v, w) \mapsto \II_u(v, w) \coloneqq (\partial_v \partial_w X(u))^{N_u},
   \end{align*}
-  wobei $(\cdot)^{N_u}$ die orthogonale Projektion auf den Normalenraum bezeichnet.
+  wobei $(\cdot)^{N_u}$ die orth. Projektion auf den Normalenraum bezeichnet.
 \end{defn}
 
 \begin{bem}
-  Nach dem Satz von Armandus Schwarz ist $\II_u$ eine symmetrische Bilinearform.
+  Nach dem Satz von Amandus Schwarz ist $\II_u$ eine symmetrische Bilinearform.
 \end{bem}
 
 \begin{bem}
@@ -462,7 +462,7 @@ $\implies$ $f$ ist partiell differenzierbar
 \end{defn}
 
 \begin{bem}
-  Man kann die zweite FF auch als matrixwertige Abbildung
+  Man kann die zweite FF auch als matrixwertige Abb.
   \[ h : U \to \R^{(n-1) \times (n-1)}, \quad u \mapsto (h_{jk}(u)) = \langle \partial_j \partial_k X(u), \nu_u \rangle \]
   aufassen.
 \end{bem}
@@ -583,9 +583,9 @@ $\implies$ $f$ ist partiell differenzierbar
   Sei $X : U \to \R^n$ eine immergierte Fläche, $U \opn \R^m$. Ein \emph{tangentiales Vektorfeld} längs $X$ ist eine glatte Abbildung $V : U \to \R^n$ mit $V(u) \in T_u X \, \forall u \in U$.
 \end{defn}
 
-\begin{defn}
+\begin{bem}
   Mit typtheoretischer Syntax ist ein tangentiales Vektorfeld längs $X$ eine glatte Abbildung $V : \prod_{u : U} T_u X$.
-\end{defn}
+\end{bem}
 
 \begin{nota}
   $\chi(TX) = \Set{ V : U \to \R^n }{ \text{$V$ ist tang. VF längs $X$} }$
@@ -607,21 +607,21 @@ $\implies$ $f$ ist partiell differenzierbar
 
 \begin{defn}
   Die Abbildung
-  \begin{align*}
-    \nabla : \chi(U) \times \chi(TX) &\to \chi(TX) \\
-    (w, V) &\mapsto \nabla_w V \coloneqq (\partial_w X)^T
-  \end{align*}
+  \[
+    \nabla : \chi(U) \times \chi(TX) \to \chi(TX), \quad
+    (w, V) \mapsto \nabla_w V \coloneqq (\partial_w X)^T
+  \]
   heißt \emph{Levi-Civita-Ableitung} von $V$ in Richtung $w$.
 \end{defn}
 
 \begin{acht}
-  Gradient $\not=$ Levi-Civita-Ableitung!
+  Gradient $\not=$ Levi-Civita-Ableitung (trotz Symbol $\nabla$)!
 \end{acht}
 
 \begin{satz}[Eigenschaften der Levi-Civita-Ableitung]
   Sei $f : U \to \R$ glatt, $w_1, w_2, w \in \chi(U)$, $V, V_1, V_2 \in \chi(TX)$. Dann gilt:
   \begin{itemize}
-    \item $\nabla_{f(w_1) + w_2} V = f \circ \nabla_{w_1} V + \nabla_{w_2} V$
+    \item $\nabla_{f(w_1) + w_2} V = f \cdot \nabla_{w_1} V + \nabla_{w_2} V$
     \item $\nabla_w (V_1 + V_2) = \nabla_w V_1 + \nabla_w V_2$
     \item $\nabla_w (f \cdot V) = f (\nabla_w V) + \partial_w f \cdot V $
     \item $\partial_w \langle V_w, V_2 \rangle = \langle \nabla_w V_1 , V_2 \rangle + \langle V_1 , \nabla_w V_2 \rangle$ (Metrizität)
@@ -633,8 +633,8 @@ $\implies$ $f$ ist partiell differenzierbar
 \end{nota}
 
 \begin{defn}
-  Sei $X : U \to \R^n$ eine Immersion, so können wir für $j, k \in \{ 1, ..., m\}$ schreiben:
-  \[ \nabla_j (\partial_k X) = \sum_{l=1}^m \Gamma_{jk}^l \partial_l (X). \]
+  Sei $X : U \to \R^n$ eine Immersion, so schreiben wir:
+  \[ \nabla_j (\partial_k X) = \sum_{l=1}^m \Gamma_{jk}^l \partial_l (X)  \qquad \text{für $j,k \in \{ 1, ..., m \}$.} \]
   Dabei heißen die Funktionen $\Gamma_{jk}^l : U \to \R$ \emph{Christoffel-Symbole}.
 \end{defn}
 
@@ -649,6 +649,14 @@ $\implies$ $f$ ist partiell differenzierbar
 \begin{satz}
     Es gilt $\Gamma_{jk}^l = \Gamma_{kj}^l \,\, \text{und} \,\, \Gamma_{jkl} = \tfrac{1}{2} (\partial_j \cdot g_{kl} + \partial_k \cdot g_{jl} + \partial_l \cdot g_{jk})$.
 \end{satz}
+
+\begin{bem}
+  Die Christoffelsymbole kann man aus der 1.\,FF berechnen (hier sind $g^{lh}$ die Komponenten von $g^{-1}$):
+  \[
+    \Gamma_{jk}^l = \sum_{h=1}^m g^{lh} \cdot \Gamma_{jkh} 
+    = \tfrac{1}{2} \sum_{h=1}^m g^{lh} \cdot (\partial_j \cdot g_{kh} + \partial_k \cdot g_{jh} + \partial_h \cdot g_{jk}),
+  \]
+\end{bem}
 
 \begin{bem}
   Schreiben wir $v = \sum_{k=1}^m v^k e_k$ für $v \in \chi(U)$, dann ist
@@ -692,9 +700,9 @@ $\implies$ $f$ ist partiell differenzierbar
   Sei $\alpha : [a, b] \to U$ eine glatte, reguläre Kurve, $c \coloneqq X \circ \alpha$. Eine glatte Abbildung $V : [a, b] \to \R^n$ mit $V(t) \in T_{\alpha(t)} X \forall t \in [a, b]$ \emph{tangentiales Vektorfeld} längs $c$.
 \end{defn}
 
-\begin{defn}
-  Typtheoretisch ist ein tangentiales VF längs $c$ eine glatte Abbildung $V : \prod_{t : [a, b]} T_{\alpha(t)} X$.
-\end{defn}
+% \begin{defn}
+%   Typtheoretisch ist ein tangentiales VF längs $c$ eine glatte Abbildung $V : \prod_{t : [a, b]} T_{\alpha(t)} X$.
+% \end{defn}
 
 \begin{bem}
   Eine glatte Abbildung $v : U \to \R^m$ bestimmt eindeutig ein tang. VF vermöge
@@ -736,7 +744,7 @@ $\implies$ $f$ ist partiell differenzierbar
 
 \begin{defn}
   Sei $X : U \to \R^n$ eine Immersion und $c = X \circ \alpha : [a, b] \to \R$ eine reguläre glatte Kurve auf $X$. Für $t \in [a, b]$ heißt die Abbildung
-  \[ P_t^c : T_{\alpha(a)} X \to T_{\alpha(t)} X, \quad x \mapsto V_x(t) \]
+  \[ P_t^c : T_{\alpha(a)} X \to T_{\alpha(t)} X, \quad x \mapsto V_x(t), \]
   wobei $V_x : [a, b] \to \R^n$ das parallele tangentiale VF längs $c$ mit Anfangsbedingung $V_x(a) = x \in T_{\alpha(a)} X$ ist, \emph{Parallelverschiebung} längs $c$ von $c(a)$ nach $c(t)$.
 \end{defn}
 
@@ -827,7 +835,7 @@ $\implies$ $f$ ist partiell differenzierbar
 \end{satz}
 
 \begin{satz}
-  Sei $\gamma : [a, b] \to B_u^\epsilon$ reguläre glatte Kurve mit $\gamma(a) = 0, \gamma(b) = v$. Dann gilt: $L(X \circ \Exp_u \circ \gamma \geq \|v\|)$ mit $L(X \circ \Exp_u \circ \gamma) = \|v\| \iff \gamma(t) = \rho(t)v$ mit $\rho : [a, b] \to [0, 1]$ streng monoton wachsend.
+  Sei $\gamma : [a, b] \to B_u^\epsilon$ reguläre glatte Kurve mit $\gamma(a) = 0, \gamma(b) = v$. Dann gilt: $L(X \circ \Exp_u \circ \gamma) \geq \|v\|$ mit $L(X \circ \Exp_u \circ \gamma) = \|v\| \iff \gamma(t) = \rho(t)v$ mit $\rho : [a, b] \to [0, 1]$ streng monoton wachsend.
 \end{satz}
 
 \begin{satz}
@@ -841,10 +849,10 @@ $\implies$ $f$ ist partiell differenzierbar
 
 \begin{defn}
   Sei $X : U \to \R^n$ eine Fläche, dann heißt
-  \begin{align*}
-    [\cdot,\cdot] : \chi(U) \times \chi(U) &\to \chi(U)\\
+  \[
+    [\cdot,\cdot] : \chi(U) \times \chi(U) \to \chi(U), \quad
     (v, w) \mapsto [v, w] = \partial_v w - \partial_w v
-  \end{align*}
+  \]
   \emph{Lie-Klammer} der Vektorfelder $v$ und $w$.
 \end{defn}
 
@@ -888,7 +896,7 @@ $\implies$ $f$ ist partiell differenzierbar
   \]
 
   \vspace{-12pt}
-  
+
   ist eine antisymmetrische Bilinearform.
 \end{satz}
 
@@ -939,7 +947,7 @@ $\implies$ $f$ ist partiell differenzierbar
 \end{satz}
 
 \begin{defn}
-  Sei $O \opn \R^n$. Eine $\mathcal{C}^2$-Abbildung $\Phi : O \to \R^n$ heißt \emph{orthogonales Hyperflächensystem}, wenn für alle $x \in O$ und alle $j, k \in \{ 1, ..., n \}, j \not= k$ gilt:
+  Sei $O \opn \R^n$. Eine $\mathcal{C}^2$-Abbildung $\Phi : O \to \R^n$ heißt \emph{orthogonales Hyperflächensystem} (OHFS), wenn für alle $x \in O$ und alle $j, k \in \{ 1, ..., n \}, j \not= k$ gilt:
   \[
     \langle \partial_j \Phi(x), \partial_k \Phi(x) \rangle = 0
     \quad \text{und} \quad
@@ -963,8 +971,8 @@ $\implies$ $f$ ist partiell differenzierbar
 \end{defn}
 
 \begin{satz}
-  Ist $\Phi : O \to \R^n$ orth. Hyperflächensystem, dann sind die Koordinatenlinien
-  \[ h \mapsto \Phi(t_1, ..., t_{j-1}, t_j + h, t_{j+1}, ..., t_n) \text{ mit } (t_1, ..., t_n) \in O \text{ fest} \]
+  Ist $\Phi : O \to \R^n$ OHFS, dann sind die Koordinatenlinien
+  \[ h \mapsto \Phi(t_1, ..., t_{j-1}, t_j + h, t_{j+1}, ..., t_n) \quad \text{ mit } (t_1, ..., t_n) \in O \text{ fest} \]
   Krümmungslinien von $X^{k, t_k}$ mit $k \not= j$.
 \end{satz}
 
@@ -998,7 +1006,7 @@ $\implies$ $f$ ist partiell differenzierbar
 \end{satz}
 
 \begin{defn}
-  Eine Abbilung $f : O \to \widetilde{O}$ heißt \emph{kugeltreu}, wenn sie offene Teilmengen von Sphären auf offene Teilmengen von Sphären abbildet. Dabei gelten Hyperebenen als Sphären von unendlichem Radius.
+  Eine Abbildung $f : O \to \widetilde{O}$ heißt \emph{kugeltreu}, wenn sie offene Teilmengen von Sphären auf offene Teilmengen von Sphären abbildet. Dabei gelten Hyperebenen als Sphären mit Radius $\infty$.
 \end{defn}
 
 \begin{satz}[Liouville]
