@@ -770,9 +770,9 @@ $\implies$ $f$ ist partiell differenzierbar
 
 \begin{bem}
   Sei $c = X \circ \alpha$ mit $\alpha = \sum \alpha^j e_j$ mit glatten Abb. $\alpha^j$. Dann gilt
-  \[ \frac{\nabla c'}{\d t} = \sum_{l=1}^m \left( (a^l)'' + \sum_{j,k=1}^m (a^j)' (\alpha^k)' (\Gamma_{jk}^l \circ \alpha) \right) (\partial_l X \circ \alpha). \]
+  \[ \frac{\nabla c'}{\d t} = \sum_{l=1}^m \left( (\alpha^l)'' + \sum_{j,k=1}^m (\alpha^j)' (\alpha^k)' (\Gamma_{jk}^l \circ \alpha) \right) (\partial_l X \circ \alpha). \]
   Somit ist $c$ genau dann eine Geodäte, wenn gilt
-  \[ (a^l)'' + \sum_{j,k=1}^m (a^j)' (\alpha^k)' (\Gamma_{jk}^l \circ \alpha) \quad \text{für alle $l = 1, ..., m$} \]
+  \[ (\alpha^l)'' + \sum_{j,k=1}^m (\alpha^j)' (\alpha^k)' (\Gamma_{jk}^l \circ \alpha) \quad \text{für alle $l = 1, ..., m$} \]
   oder $\alpha'' + \Gamma_{\alpha}(\alpha', \alpha') = 0$ (i.\,F. \emph{Geodätengleichung}), wobei
   \begin{align*}
     \Gamma_{\alpha} : [a, b] &\to \Bil(\R^m, \R^m), \  t \mapsto \Gamma_{\alpha(t)} \text{ mit }\\
@@ -839,7 +839,7 @@ $\implies$ $f$ ist partiell differenzierbar
 \end{satz}
 
 \begin{satz}
-  Sei $X : U \to \R^n$ eine Fläche, $u_0 \in U$, $\epsilon > 0$, sodass $\Exp_{u_0}^{\epsilon} \to U$ Diffeomorphismus. Sei $u \in \Exp_{u_0}(B_{u_0}^{\epsilon})$. Dann gibt es (bis auf Umparametrisierung) genau eine bzgl. der Länge
+  Sei $X : U \to \R^n$ eine Fläche, $u_0 \in U$, $\epsilon > 0$, sodass $\Exp_{u_0} : B_{u_0}^{\epsilon} \to U$ Diffeomorphismus. Sei $u \in \Exp_{u_0}(B_{u_0}^{\epsilon})$. Dann gibt es (bis auf Umparametrisierung) genau eine bzgl. der Länge
   \[ L_\I(\alpha) \coloneqq \Int{a}{b}{\I_{\alpha(t)}(\alpha'(t), \alpha'(t))}{t} \]
   kürzeste reguläre glatte Kurve $\alpha : [a, b] \to U$ mit $\alpha(a) = u_0$ und $\alpha(b) = u$, nämlich $\alpha : [0, 1] \to U, \  t \mapsto \Exp_{u_0}(t \cdot \Exp_{u_0}^{-1}(u))$.
 \end{satz}
@@ -891,7 +891,7 @@ $\implies$ $f$ ist partiell differenzierbar
 \begin{satz}
   Die Abbildung
   \[
-    \I_{R_{ij}} : \chi(U) \times \chi(U) \to \mathcal{C}^\infty(U, \R), \qquad
+    \I_{R_{ij}} : \chi(U) \times \chi(U) \to \mathcal{C}^\infty(U, \R), \quad
     (v, w) \mapsto \underbrace{\I(R_{ij}, v, w)}_{\mathclap{u \mapsto \I_u((R_{ij} v)(u), w(u))}}
   \]
 
@@ -917,11 +917,11 @@ $\implies$ $f$ ist partiell differenzierbar
 \begin{satz}[Theorema egregium (Gauß)]
   Für eine HF $X : U \to \R^3$ gilt
   \[ K(u) = \frac{\det(h(u))}{\det(g(u))} = \frac{R_{1221}(u)}{\det(g(u))}. \]
-  Letzter Ausdruck ist nur abhängig von der 1.\,FF und ihren Ableitungen.
+  Letzter Ausdruck ist nur abh. von der 1.\,FF und ihren Ableitungen.
 \end{satz}
 
 \begin{satz}[Codazzi-Mainardi-Gleichungen]
-  Sei $X : U \to \R^n$ eine Hyperfläche, dann gilt
+  Sei $X : U \to \R^n$ HF, dann
   \[ \partial_i h_{jk}(u) - \sum_{l=1}^{n-1} \Gamma_{ik}^l(u) h_{e_j}(u) = \partial_j h_{ik}(u) - \sum_{l=1}^{n-1} \Gamma_{jk}^l(u) h_{e_i}(u). \]
 \end{satz}
 
@@ -956,7 +956,7 @@ $\implies$ $f$ ist partiell differenzierbar
 \end{defn}
 
 \begin{nota}
-  Für $t \in \R$ ist $U^{j,t} = \Set{ (x_1, ..., x_n) \in O }{ x_j = t }$.
+  Für $t \in \R$ ist $U^{j,t} \coloneqq \Set{ (x_1, ..., x_n) \in O }{ x_j = t }$.
 \end{nota}
 
 \begin{bem}
