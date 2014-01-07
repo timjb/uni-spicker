@@ -87,7 +87,7 @@
 \end{defn}
 
 \begin{defn}
-  Ein topologischer Raum $(X, \tau)$ heißt separabel, falls $X$ eine abzählbare dichte Teilmenge enthält. Eine Teilmenge $A \subset X$ heißt separabel, falls $(A, \tau_A)$ separabel ist.
+  Ein topologischer Raum $(X, \tau)$ heißt \emph{separabel}, falls $X$ eine abzählbare dichte Teilmenge enthält. Eine Teilmenge $A \subset X$ heißt separabel, falls $(A, \tau_A)$ separabel ist.
 \end{defn}
 
 \begin{defn}
@@ -520,7 +520,30 @@
 \fi
 
 \begin{satz}[Banach-Alaoglu]
-  Sei $X$ ein separabler Banachraum. Dann ist die abgeschl. Einheitskugel $\overline{B_1(0)} \subset X'$ schwach folgenkompakt.
+  Sei $X$ ein separabler Banachraum. Dann ist die abgeschl. Einheitskugel $\overline{B_1(0)} \subset X'$ schwach folgenkompakt, d.\,h. jede beschränkte Folge in $X'$ enthält eine schwach* konvergente Teilfolge.
 \end{satz}
+
+\begin{bsp}
+  Sei $\Omega \subset \R^n$ beschränkt und offen. Dann ist $L^1(\Omega)$ separabel (Approximation durch Treppenfunktionen und der Satz besagt: Ist $(f_k)_{k \in \N}$ in $L^{\infty}(\Omega)$ beschränkt, so gibt es eine Teilfolge $(f_{k_l})_{l \in \N}$ und ein $f \in L^\infty(\Omega)$, sodass
+  \[ \IntO{f_{k_l}{x} \cdot \overline{g}} \xrightarrow{l \to \infty} \IntO{f \cdot \overline{g}}{x} \quad \text{für alle $g \in L^1(\Omega)$} \]
+\end{bsp}
+
+\begin{bem}
+  Schwach*-Konvergenz impliziert eine sogenannte Schwach*-Topologie in dem Sinne, dass man sagt, eine Folge $(x_k')_{k \in \N}$ in $X'$ ist bzgl. dieser Topologie konvergent, wenn sie punktweise für alle $x \in X$ konvergiert.
+\end{bem}
+
+\begin{defn}
+  Sei $X$ ein Banachraum und $J_X$ die Isometrie bzgl. des Bidualraumes. Dann heißt $X$ \emph{reflexiv}, falls $J_X$ surjektiv ist.
+\end{defn}
+
+\begin{lem}
+  \begin{itemize}
+    \item Ist $X$ reflexiv, so stimmen schwache* und schwache konvergenz in $X'$ überein.
+    \item Ist $X$ reflexiv, so ist jeder abgeschlossene Unterraum von $X$ reflexiv.
+    \item Ist $T : X \to Y$ ein Isomorphismus, so gilt:
+      \[ X \text{ reflexiv } \iff Y \text{ reflexiv } \]
+    \item Es gilt: $X$ reflexiv $\iff$ $X'$ reflexiv.
+  \end{itemize}
+\end{lem}
 
 \end{document}
