@@ -164,6 +164,25 @@ Zu jeder Booleschen Algebra $\mathfrak{A}$ gibt es eine Menge $\Omega$ derart, d
   \end{itemize}
 \end{satz}
 
+\begin{lem}[Borel-Cantelli]
+  Sei $(A_n)_{n \in \N}$ eine Folge von Ereignissen über $(\Omega, \Alg, \P)$. Dann gilt für $A = \limsup_{n \to \infty}$
+  \[ \sum_{n=1}^\infty \P(A_n) < \infty \implies \P(A) = 0. \]
+  Falls die Ereignisse $(A_n)_{n \in \N}$ unabhängig sind, so gilt
+  \[ \sum_{n=1}^\infty \P(A_n) = \infty \implies \P(A) = 1. \]
+\end{lem}
+
+\begin{defn}
+  Sei $(\Alg_n)_{n \in \N}$ Folge von $\sigma$-Algebren über $\Omega$. Dann ist
+  \[ \mathcal{T}_\infty = \cap_{n=1}^\infty \mathcal{T}_n \quad \text{mit} \quad \mathcal{T}_n \coloneqq \sigma \left( \cup_{k=n}^\infty \Alg_k \right) \]
+  die \emph{terminale $\sigma$-Algebra} von $(\Alg_n)_{n \in \N}$.
+\end{defn}
+
+% Was bedeutet Unabhängigkeit von $\sigma$-Algebren?
+
+\begin{satz}[Null-Eins-Gesetz von Kolmogorow]
+  Sei $(\Alg_n)_{n \in \N}$ eine Folge von unabhängigen Unter-$\sigma$-Algebren in einem W-Raum $(\Omega, \Alg, \P)$. Dann gilt $\P(A) \in \{ 0, 1 \}$ für alle Ereignisse $A \in \mathcal{T}_\infty$ der terminalen $\sigma$-Algebra.
+\end{satz}
+
 \begin{defn}
   Eine $\Alg$-messbare numerische Funktion $X$ über einem Wahrscheinlichkeitsraum $(\Omega, \Alg, \P)$ heißt \emph{Zufallsgrüße} oder \emph{Zufallsvariable}.
 \end{defn}
@@ -215,13 +234,13 @@ Zu jeder Booleschen Algebra $\mathfrak{A}$ gibt es eine Menge $\Omega$ derart, d
 % Integral von nicht unbedingt nicht-negativen messbaren Funktionen
 
 \begin{satz}
-  Sei $f : (\Omega, \Alg, \mu) \to (\overline{R}^1, \LebAlg(\R^1))$ sein $\Alg$-messbar, numerisch. Dann gilt:
-  \begin{align*}
-    & \text{$F$ ist $\mu$-integrierbar} \\
-    \iff & \text{$f^+$ und $f^-$ sind $\mu$-integrierbar mit $\IntOmu{f^{\pm}} < \infty$} \\
-    \iff & \IntOmu{|f|} < \infty \\
-    \iff & \IntOmu{g} < \infty \text{ für eine $\Alg$-messbare, numerische Funktion mit $|f| \leq g$}.
-  \end{align*}
+  Sei $f : (\Omega, \Alg, \mu) \to (\overline{R}^1, \LebAlg(\R^1))$ sein $\Alg$-messbar, numerisch. Dann sind äquivalent:
+  \begin{itemize}
+    \item $f$ ist $\mu$-integrierbar
+    \item $f^+$ und $f^-$ sind $\mu$-integrierbar mit $\IntOmu{f^{\pm}} < \infty$
+    \item $\IntOmu{|f|} < \infty$
+    \item $\IntOmu{g} < \infty$ für eine $\Alg$-messbare, numerische Funktion mit $|f| \leq g$
+  \end{itemize}
 \end{satz}
 
 \begin{satz}
