@@ -54,7 +54,7 @@
 \begin{prob}[Starkes Maßproblem]
   Gesucht ist eine Abbildung $\mu : \PS(\R^n) \to [0, \infty]$ wie im schwachen Maßproblem, die anstelle der endlichen Additivität die Eigenschaft der $\sigma$-Additivität besitzt:
   \begin{itemize}
-    \item Für eine Folge $(A_n)_{n \in \N}$ paarweise disjunkter Teilmengen des $\R^n$ ist
+    \item Für eine Folge $(A_n)_{n \in \N}$ pw. disjunkter Teilmengen des $\R^n$ ist
       \[ \mu\left(\bigcup_{n \in \N} A_n\right) = \sum_{n=0}^\infty \mu(A_n) \]
   \end{itemize}
 \end{prob}
@@ -288,6 +288,10 @@
   Das äußere Maß $\mu^*$ eingeschränkt auf $\Alg^* \supset \Alg(\Ring)$ ist ein Maß.
 \end{bem}
 
+\begin{satz}
+  Sei $(\Omega, \Alg, \mu)$ ein $\sigma$-endlicher Maßraum und $\mathcal{E}$ ein Erzeuger von $\Alg$, der unter Schnitten abgeschlossen ist. Es gebe eine Folge $(E_n)_{n \in \N}$ mit $E_n \uparrow \Omega$ und $\mu(E_n) < \infty$ für jedes $n \in \N$. Dann ist $\mu$ durch die Werte auf $\mathcal{E}$ eindeutig festgelegt.
+\end{satz}
+
 \subsection{Das Lebesgue-Borel-Maß}
 
 \begin{nota}
@@ -328,10 +332,10 @@
 \end{bem}
 
 \begin{defn}
-  Sei $\mu$ ein Maß auf einer $\sigma$-Algebra $\Alg \subset \PSO$. Eine Menge $N \subset \Omega$ heißt \emph{Nullmenge}, wenn es eine Menge $A \in \Alg$ gibt mit $N \subset A$ und $\mu(A) = 0$. Die Menge aller Nullmengen ist $\mathfrak{N}_\mu \subset \PSO$.
+  Sei $\mu$ ein Maß auf einer $\sigma$-Algebra $\Alg \subset \PSO$. Eine Menge $N \subset \Omega$ heißt ($\mu$)-\emph{Nullmenge}, wenn es $A \in \Alg$ gibt mit $N \subset A$ und $\mu(A) = 0$. Die Menge aller Nullmengen ist $\mathfrak{N}_\mu \subset \PSO$.
 \end{defn}
 
-\begin{defn}[Fortsetzung auf Nullmengen]
+\begin{defn}
   Sei $\mu$ das Lebesgue- Borel-Maß auf $\Bor(\R^n)$. Dann heißt die von $\Bor(\R^n)$ und den ent\-sprech\-en\-den Nullmengen erzeugte $\sigma$-Algebra $\tilde{\Alg}_\mu$ \emph{Lebesguesche $\sigma$-Algebra}, notiert $\mathfrak{L}(\R^n)$, und das fortgesetzte Maß \emph{Lebesgue-Maß}.
 \end{defn}
 
@@ -623,10 +627,6 @@
 \begin{defn}
   Sei $(\Omega, \Alg, \mu)$ ein Maßraum, $A \in \Alg$ und $f \in \overline{\E}(\Omega, \Alg, \mu)$ oder $f \in \Leb^1(\Omega, \Alg, \mu)$. Dann ist das \emph{$\mu$-Integral von $f$ über $A$}
   \[ \Int{A}{}{f}{\mu} = \IntOmu{(\ind_A \cdot f)}. \]
-\end{defn}
-
-\begin{defn}
-  Sei $(\Omega, \Alg, \mu)$ ein Maßraum. Eine Menge $N \subset \Omega$ heißt \emph{($\mu$-)Nullmenge}, wenn es ein $A \in \Alg$ mit $\mu(A) = 0$ und $N \subset A$.
 \end{defn}
 
 \begin{defn}
