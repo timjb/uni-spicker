@@ -870,7 +870,7 @@
 \end{nota}
 
 \begin{nota}
-  Der Einheitswürfel im $\R^d$ ist $W_1 \coloneqq ](0, ..., 0), (1, ..., 1)]$.
+  Der Einheitswürfel im $\R^d$ ist $W_1 \coloneqq \left](0, ..., 0), (1, ..., 1)\right]$.
 \end{nota}
 
 \begin{satz}
@@ -1039,9 +1039,155 @@
   \end{itemize}
 \end{satz}
 
+\begin{samepage}
+
 \begin{satz}[Fubini]
   Sei $f : \Omega_1 \times \Omega_2 \to \ER$ $(\mu_1 \otimes \mu_2)$-integrierbar. Dann ist für $\mu_1$-fast-alle $\omega_1 \in \Omega_1$ der Schnitt $f_{\omega_1}$ $\mu_2$-integrierbar, und die $\mu_1$-fast-überall definierte Funktion $\omega_1 \mapsto \Int{\Omega_2}{}{f_{\omega_1}}{\mu_2}$ ist $\mu_1$-integrierbar. Analoges gilt mit $1$ und $2$ vertauscht. Es gilt:
   \[ \Int{\Omega_1 \times \Omega_2}{}{f}{(\mu_1 \otimes \mu_2)} = \Int{\Omega_1}{}{(\Int{\Omega_2}{}{f_{\omega_1}}{\mu_2})}{\mu_1} = \Int{\Omega_2}{}{(\Int{\Omega_1}{}{f_{\omega_2}}{\mu_1})}{\mu_2}. \]
 \end{satz}
+
+
+\section{Differentialformen}
+
+\begin{nota}
+  Sei im Folgenden $V$ ein $n$-dimensionaler $\R$-Vektorraum.
+\end{nota}
+
+\subsection{Alternierende Multilinearformen}
+
+\end{samepage}
+
+\begin{defn}
+  Eine \emph{alternierende $k$-Form} auf $V$ ist eine Abb.
+  \[ \omega : \underbrace{V \times ... \times V}_{\text{$k$-fach}} \to \R \]
+  mit folgenden Eigenschaften:
+  \begin{itemize}
+    \item $\omega$ ist \emph{multilinear}, d.\,h. linear in jedem Argument, d.\,h. für alle $l \in \{ 1, ..., k \}$ und $v_1, ..., v_{l-1}, v_{l+1}, ..., v_k \in V$ ist
+    \[ \omega(v_1, ..., v_{l-1}, -, v_{l+1}, ..., v_k) \in \mathrm{Hom}(V, \R). \]
+    \item Falls $v_j = v_l$ für $j < l$, dann ist $\omega(v_1, ..., v_j, ..., v_l, ..., v_k) = 0$.
+  \end{itemize}
+\end{defn}
+
+\begin{bsp}
+  Die Determinante ist eine alternierende $n$-Form auf $\R^n$.
+\end{bsp}
+
+\begin{nota}
+  $\Lambda^k V^* \coloneqq \{ \text{$k$-Formen auf $V$} \}$ für $k \in \N^*$
+  $\Lambda^0 V^* \coloneqq \mathbb{K} = \R$
+\end{nota}
+
+\begin{bem}
+  $\Lambda^1 V^* = V^*$
+\end{bem}
+
+\begin{lem}
+  Sei $\omega \in \Lambda V^*, \sigma \in S_k$, dann gilt:
+  \[ \omega(v_{\sigma(1)}, ..., v_{\sigma(k)}) = \mathrm{sgn}(\sigma) \cdot \omega(v_1, ..., v_k). \]
+\end{lem}
+
+\begin{nota}
+  % TODO: \bigoplus ist zu groß, \oplus etwas zu klein
+  $\Lambda V^* \coloneqq \oplus_{k=1}^n \Lambda^k V^*$
+\end{nota}
+
+% Dach-Produkt (wedge-Produkt)
+
+\begin{defn}
+  Seien $\phi_1, ..., \phi_k \in \Lambda^1 V^* = V^*$, dann ist
+  \begin{align*}
+    \phi_1 \wedge ... \wedge \phi_k &: V \times ... \times V \to \R \\
+    (v_1, ..., v_k) &\mapsto \det \begin{pmatrix}
+      \phi_1(v_1) & \phi_1(v_2) & ... & \phi_1(v_k) \\
+      \phi_2(v_1) & \phi_2(v_2) & ... & \phi_2(v_k) \\
+      \vdots & \vdots & \ddots & \vdots \\
+      \phi_k(v_1) & \phi_k(v_2) & ... & \phi_k(v_k)
+    \end{pmatrix}
+  \end{align*}
+\end{defn}
+
+\begin{bem}
+  $\phi_1 \wedge ... \wedge \phi_k \in \Lambda^k V^*$
+\end{bem}
+
+\begin{eign}
+  \begin{itemize}
+    \item Das Dachprodukt von Elementen aus $V^*$ ist in jedem Argument linear.
+    \item Für $\sigma \in S_k$ gilt $\phi_{\sigma(1)} \wedge ... \wedge \phi_{\sigma(k)} = \mathrm{sgn}(\sigma) \cdot (\phi_1 \wedge ... \wedge \phi_k)$.
+  \end{itemize}
+\end{eign}
+
+\begin{prop}
+  \begin{itemize}
+    \item Ist $\{ \phi_1, ..., \phi_n \}$ eine Basis von $V^*$, dann ist $\Set{ \phi_{j_1} \wedge ... \wedge \phi_{j_k} }{ 1 \leq j_1 < j_2 < ... < j_k \leq n }$ eine Basis von $\Lambda^k V^*$.
+
+    \vspace{4pt}
+
+    \begin{multicols}{2}
+      \item $\dim(\Lambda^k V^*) = {n \choose k}$
+      \item $\Lambda^k V^* = \{ 0 \}$ für $k > n$
+    \end{multicols}
+  \end{itemize}
+\end{prop}
+
+\begin{prop}
+  Seien $\phi_1, ..., \phi_k \in V^*$ und $A = (a_{jl}) \in \R^{k \times k}$ gegeben.
+  Dann gilt für $\varphi_j \coloneqq \sum_{l=1}^k a_{jl} \phi_l \in V^*, j = 1, ..., k$:
+  \[ \varphi_1 \wedge ... \wedge \varphi_k = \det(A) \cdot (\phi_1 \wedge ... \wedge \phi_k). \]
+\end{prop}
+
+\begin{satz}
+  Seien $k, l, m \in \N^*$. Dann gilt:
+  \begin{itemize}
+    \item Es gibt eine eindeutig bestimmte bilineare Abbildung
+    \[ (\Lambda^k V^*) \times (\Lambda^l V^*) \to \Lambda^{k+l} V^*, \quad (\omega, \widetilde{\omega}) \mapsto \omega \wedge \widetilde{\omega}, \]
+    sodass für $\omega = \phi_1 \wedge ... \wedge \phi_k$ und $\widetilde{\omega} = \widetilde{\phi}_1 \wedge ... \wedge \widetilde{\phi}_l$ ($\phi_j, \widetilde{\phi}_i \in V^*$) gilt:
+    \[ (\phi_1 \wedge \cdots \wedge \phi_k) \wedge (\widetilde{\phi}_1 \wedge ... \wedge \widetilde{\phi}_l) = \phi_1 \wedge ... \wedge \phi_k \wedge \widetilde{\phi}_1 \wedge ... \wedge \widetilde{\phi}_l. \]
+    \item Sei $\{ \phi_1 , ..., \phi_k \}$ eine Basis von $V^*$, dann gilt für $\omega = \sum_{\mathclap{i_1 < ... < i_k}} \, a_{i_1 \cdots i_k} (\phi_{i_1} \wedge ... \wedge \phi_{i_k})$ und $\widetilde{\omega} = \sum_{\mathclap{j_1 < ... < j_k}} \, \widetilde{a}_{j_1 ... j_k} (\phi_{j_1} \wedge ... \wedge \phi_{j_k})$:
+    \[ \omega \wedge \widetilde{\omega} = \sum_{\mathclap{\substack{i_1 < ... < i_k \\ j_1 < ... < j_l}}} \, (a_{i_1 \cdots i_k} \cdot \widetilde{a}_{j_1 \cdots j_l}) \cdot (\phi_{i_1} \wedge ... \wedge \phi_{i_k} \wedge \phi_{j_1} \wedge ... \wedge \phi_{j_l}) \]
+  \end{itemize}
+\end{satz}
+
+
+\subsection{Differentialformen}
+
+% Einsformen
+
+\begin{nota}
+  Sei im Folgenden $u \in U \opn \R^n$.
+
+  Setze $T_u U \coloneqq \{ u \} \times \R^n = \Set{ (u, V) }{ V \in \R^n } \cong \R^n$
+\end{nota}
+
+\begin{bem}
+  $T_u U$ ist ein $\R$-Vektorraum mit
+  \begin{multicols}{2}
+    \begin{itemize}
+      \item $(u, V) + (u, W) = (u, V + W)$
+      \item $\lambda (u, V) = (u, \lambda V)$
+    \end{itemize}
+  \end{multicols}
+\end{bem}
+
+\begin{bem}
+  Für $U_1, U_2 \opn \R^n$, $u \in U_1 \cap U_2$ gilt $T_u U_1 = T_u U_2$.
+\end{bem}
+
+\begin{defn}
+  \begin{itemize}
+    \item \emph{Tangentialbündel} an $U \opn \R^n$: $TU = \bigsqcup_{u \in U} T_u U$
+    \item \emph{Dualraum} von $T_u U$: $T_u^* = \Set{ \alpha : T_u U \to \R }{ \alpha \text{ linear } }$
+    \item \emph{Kotangentialbündel} an $U$: $T^* U = \bigsqcup_{u \in U} T_u^* U$
+    \item \emph{Einsform} (Differentialform von Grad 1, Pfaffsche Form) auf $U$:
+\[ \omega : U \to T^*U \quad \text{mit} \quad \omega(u) \in T_u^*U \]
+  \end{itemize}
+\end{defn}
+
+
+\begin{bsp}
+  Sei $f : U \to \R$ total diff'bar, dann heißt die Einsform
+  \[ \mathrm{df} : U \to T^*U, \quad u \mapsto (u, V) \mapsto (D_f (u)) V \]
+  totales Differential von $f$.
+\end{bsp}
 
 \end{document}
