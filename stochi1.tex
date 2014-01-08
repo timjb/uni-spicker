@@ -6,9 +6,14 @@
 }
 
 \newcommand{\Alg}{\mathfrak{A}}
+\newcommand{\Ring}{\mathfrak{R}}
 \newcommand{\LebAlg}{\mathfrak{L}} % Lebesgue-Borel-Mengen
 \renewcommand{\P}{\mathbb{P}}
 \newcommand{\PD}[2]{\P(#1\,|\,#2)}
+\newcommand{\E}{\mathbb{E}} % elementary functions
+\newcommand{\ER}{\overline\R} % extended reals
+\newcommand{\Bor}{\mathfrak{B}} % Borel
+\newcommand{\Leb}{\mathcal{L}} % Lebesgue
 
 \newcommand{\IntO}[2]{\Int{\Omega}{}{#1}{#2}} % Integral über \Omega
 \newcommand{\IntOmu}[1]{\Int{\Omega}{}{#1}{\mu}} % Integral über \Omega bzgl. \mu
@@ -108,6 +113,16 @@ Zu jeder Booleschen Algebra $\mathfrak{A}$ gibt es eine Menge $\Omega$ derart, d
   Sei $(\mathfrak{A}_i)_{(i \in I)}$ eine Familie von ($\sigma$-)\,Ringen / ($\sigma$-)\,Algebren über einer Menge $\Omega$. Dann ist auch $\cup_{i \in I} \mathfrak{A}_i$ ein ($\sigma$-)\,Ring / eine ($\sigma$-)\,Algebra über $\Omega$.
 \end{satz}
 
+% TODO: Definition Inhalt
+
+\begin{satz}
+  Sei $\Ring$ ein Ring und $\mu$ ein Inhalt. Es gelten für $n \in \N$ und $A_1, ..., A_n \in \Ring$ die Ein- und Ausschlussformeln
+  \begin{align*}
+    \mu(A_1 \cup ... \cup A_n) &= \sum_{k=1}^n (-1)^{k-1} \quad \sum_{\mathclap{1 \leq i_1 < ... < i_k \leq n}} \quad \mu(A_{i_1} \cap ... \cap A_{i_k}), \\
+    \mu(A_1 \cap ... \cap A_n) &= \sum_{k=1}^n (-1)^{k-1} \quad \sum_{\mathclap{1 \leq i_1 < ... < i_k \leq n}} \quad \mu(A_{i_1} \cup ... \cup A_{i_k}).
+  \end{align*}
+\end{satz}
+
 %\begin{defn}
 %  Sei $$
 %\end{defn}
@@ -184,7 +199,7 @@ Zu jeder Booleschen Algebra $\mathfrak{A}$ gibt es eine Menge $\Omega$ derart, d
 \end{satz}
 
 \begin{defn}
-  Eine $\Alg$-messbare numerische Funktion $X$ über einem Wahrscheinlichkeitsraum $(\Omega, \Alg, \P)$ heißt \emph{Zufallsgrüße} oder \emph{Zufallsvariable}.
+  Eine $\Alg$-messbare numerische Funktion $X$ über einem Wahrscheinlichkeitsraum $(\Omega, \Alg, \P)$ heißt \emph{Zufallsgröße} (ZG) oder \emph{Zufallsvariable}.
 \end{defn}
 
 \begin{defn}
@@ -192,7 +207,7 @@ Zu jeder Booleschen Algebra $\mathfrak{A}$ gibt es eine Menge $\Omega$ derart, d
   \[ P_X(B) = \P(X^{-1}(B)) = \P(\Set{ \omega \in \Omega  }{ X(\omega) \in B }) \]
   heißt \emph{Verteilung} der ZG $X$.
   \[ F_X(x) = P_X(\left]-\infty, x\right]) = \P(\Set{ \omega \in \Omega }{ X(\omega) \leq x }) \]
-  heißt die \emph{Verteilungsfunktion} der ZG $X$.
+  heißt die \emph{Verteilungsfunktion} (VF) der ZG $X$.
 \end{defn}
 
 \begin{satz}
@@ -294,5 +309,84 @@ Zu jeder Booleschen Algebra $\mathfrak{A}$ gibt es eine Menge $\Omega$ derart, d
   Sei $f_n : (\Omega, \Alg, \mu) \to (\R^1, \LebAlg(\R^1))$ eine Folge $\Alg$-messbarer, nichtnegativer Funktionen. Dann gilt:
   \[ \IntOmu{\liminf_{n \to \infty} f_n} \leq \liminf_{n \to \infty} \IntOmu{f_n} \]
 \end{satz}
+
+% Approximationssatz für Maße?
+
+% TODO: Verteilungen:
+% * Bernoulli
+% * Binomial
+% * geometrische Verteilung
+% * Pascal-Verteilung
+% * Poisson-Verteilung
+% * (verallgemeinerte) hypergeometrische Verteilung
+% * Exponentialverteilung
+
+% Unabhängigkeit von Mengensystemen
+
+\begin{satz}
+  Seien $(\Omega, \Alg, \mu)$ ein Maßraum, $(\Omega', \Alg')$ ein messbarer Raum und $f : \Omega' \to \Omega$ messbar. Bezeichne mit $\mu' \coloneqq \mu \circ f^{-1}$ das Bildmaß von $\mu$ unter $f$. Dann gilt für alle $\mu'$-integrierbaren Funktionen $g : \Omega' \to \R$:
+  \[ \Int{\Omega'}{}{g}{\mu'} = \IntOmu{g \circ f} \]
+\end{satz}
+
+\begin{satz}[Transformationssatz]
+  Sei $U, \widetilde{U} \opn \R^d$ und sei $\phi : U \to \widetilde{U}$ ein $\mathcal{C}^1$-Diffeomorphismus. Dann ist eine Funktion $f : \widetilde{U} \to \ER$ genau dann auf $\widetilde{U}$ Lebesgue-Borel-integrierbar, wenn $(f \circ \phi) \cdot \left|\det(D\phi)\right| : U \to \ER$ auf $U$ Lebesgue-Borel-interierbar ist. In diesem Fall gilt
+  \[ \Int{U}{}{(f \circ \phi) \cdot \left|\det(D\phi)\right|}{\mu_{LB}} = \Int{\phi(U)}{}{f}{\mu_{LB}} = \Int{\widetilde{U}}{}{f}{\mu_{LB}}. \]
+  Obige Gleichung ist auch erfüllt, wenn lediglich $f \geq 0$ gilt (also $f \in \overline{\E}(\widetilde{U}, \Bor(\widetilde{U}))$; dann kann das Integral auch den Wert $\infty$ annehmen).
+\end{satz}
+
+\begin{defn}
+  Für eine ZG $X : (\Omega, \Alg, \P) \to (\ER^1, \Leb(\ER^1))$ heißt die Zahl
+  \[ \E X := \Int{\Omega}{}{X}{\P} = \Int{\R^1}{}{\id}{P_X} \]
+  der \emph{Erwartungswert} der ZG X, wobei $P_X = \P \circ X^{-1}$.
+\end{defn}
+
+\begin{kor}
+  Sei $g : \R^1 \to \R^1$ Borel-messbar und $P_X$-integrierbar. Dann gilt
+  \[ \E g(X) = \Int{\R^1}{}{g}{P_X} = \Int{- \infty}{\infty}{g(x)}{F_X(x)}, \]
+  wobei das rechte Integral das uneigentliche Riemann-Stieltjes-Integral bzgl. $F_X$ ist.
+\end{kor}
+
+\begin{defn}
+  Für Zufallsvektoren $X = (X_1, ..., X_k)$ mit Werten in $\R^k$ ist
+  \[ \E X = (\E X_1, ..., \E X_k) \]
+\end{defn}
+
+Sei $g : \R^k \to \R$ Borel-messbar und $P_{(X_1, ..., X_k)}$-integrierbar. Dann ist
+\[ \E g(X_1, ..., X_k) = \Int{\R^k}{}{g(x_1, ...)}{P_{(X_1, ..., X_k)}} = \Int{-\infty}{\infty}{g(x_1, ..., x_k)}{F_X(x_1, ..., x_k)} \]
+
+% 3.7 Berechnung von Erwartungswerten
+
+% 3.7.1 Grundtypen & deren Mischung
+
+$F = F_X$ sei die VF einer ZG $X : (\Omega, \Alg, \P) \to (\R^1, \Leb(\R^1), P_X)$
+
+\begin{defn}
+  \begin{itemize}
+    \item $F_X$ heißt diskret, falls $F_X$ höchstens abzählbar viele Sprünge $x_1, x_2, ... \in \R$ mit $p_k \coloneqq F(x_k) - \lim_{x \uparrow x_k} F(x) > 0$ mit $\sum_{k=1}^\infty p_k = 1$ besitzt (dann ist $F_X$) zwischen den Sprüngen konstant)
+    item 
+    \item $F_X$ heißt \emph{stetig} (diffus, atomlos), wenn $F_X$ in jedem Punkt stetig ist. Dann gilt $P_X(\{ X = x \}) = 0$.
+    \item $F_X$ heißt \emph{absolut stetig} (totalstetig), wenn es für alle $\epsilon > 0$ ein $\delta > 0$ gibt, sodass für abzählbare viele, disjunkte Intervalle $I_k = \left]a_k, b_k\right]$ mit $\sum_{k} (b_k - a_k) < \delta$ sich $\sum_{k} (F_X(b_k) - F_X(a_k)) \leq \epsilon$ ergibt.
+    % Bsp: Lipschitz-stetige Funktionen
+    \item \emph{singulärstetig} (stetig, aber nicht absolutstetig), wenn die Wachstumspunkte VF $F_X$ eine Lebesgue-Nullmenge bilden, also
+    \[ \lambda_1(\Set{ x \in \R^2 }{ \forall \epsilon > 0 : F(x+\epsilon)- F(x-\epsilon) > 0 }) = 0 \]
+    % Bsp: Cantor-Treppe (Teufelstreppe)
+  \end{itemize}
+\end{defn}
+
+% TODO: was ist die Annahme bei dem Satz.
+\begin{satz}
+  $F_X'(x)$ existiert für Lebesgue-fast-alle $x \in \R^1$.
+\end{satz}
+
+\begin{satz}
+  Jede VF $F$ auf $\R^1$ besitzt eine eindeutige Zerlegung (Lebesgue-Zerlegung) als konvexe Linearkombination einer diskreten, singulär-stetigen und absolut-stetigen VF:
+  \[ F = \alpha_d F_d + \alpha_s F_s + \alpha_a F_a \]
+  mit $\alpha_d, \alpha_s, \alpha_a \geq 0$ und $\alpha_d + \alpha_s + \alpha_a = 1$.
+\end{satz}
+
+\begin{defn}
+  Falls $F_X$ absolut-stetig, dann heißt die nichtnegative, Lebesgue-messbare Funktion $ff_X(x) \coloneqq \begin{cases} F'_X(x) & \text{falls Ableitung ex.} \\ 0 & \text{sonst,} \end{cases}$
+  welche $\Int{\R^1}{}{f_X}{\lambda_1} = 1$ erfüllt, die \emph{W-Dichte} von $F_X$.
+\end{defn}
 
 \end{document}
