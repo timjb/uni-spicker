@@ -70,8 +70,12 @@
 \begin{defn}
   Eine Teilmenge $\Ring \subset \PSO$ heißt \emph{Ring}, wenn für $A, B \in \Ring$ gilt:
   \begin{itemize}
-    \item $\emptyset \in \Ring$
-    \item Abgeschlossenheit unter Differenzbildung: $A \setminus B \in \Ring$
+    \begin{minipage}{0.13\linewidth}
+      \item $\emptyset \in \Ring$
+    \end{minipage}
+    \begin{minipage}{0.85\linewidth}
+      \item Abgeschlossenheit unter Differenzen: $A \setminus B \in \Ring$
+    \end{minipage}
     \item Abgeschlossenheit unter endlichen Vereinigungen: $A \cup B \in \Ring$
   \end{itemize}
 \end{defn}
@@ -79,8 +83,12 @@
 \begin{defn}
   Eine Teilmenge $\Alg \subset \PSO$ heißt \emph{Algebra}, wenn für $A, B \in \Alg$ gilt:
   \begin{itemize}
-    \item $\emptyset \in \Alg$
-    \item Abgeschlossenheit unter Komplementbildung: $A^c = \Omega \setminus A \in \Alg$
+    \begin{minipage}{0.13\linewidth}
+      \item $\emptyset \in \Alg$
+    \end{minipage}
+    \begin{minipage}{0.85\linewidth}
+      \item Abgeschlossenheit unter Komplementen: $A^c = \Omega \setminus A \in \Alg$
+    \end{minipage}
     \item Abgeschlossenheit unter endlichen Vereinigungen: $A \cup B \in \Alg$
   \end{itemize}
 \end{defn}
@@ -130,8 +138,12 @@
 \begin{defn}
   Eine Funktion $\mu : \Ring \to [0, \infty]$ heißt \emph{Inhalt} auf $\Ring$, falls
   \begin{itemize}
-    \item $\mu(\emptyset) = 0$ und
-    \item $\mu(A \sqcup B) = \mu(A) + \mu(B)$ für disjunkte $A, B \in \Ring$.
+    \begin{minipage}{0.2\linewidth}
+      \item $\mu(\emptyset) = 0$
+    \end{minipage}
+    \begin{minipage}{0.75\linewidth}
+      \item $\mu(A \sqcup B) = \mu(A) + \mu(B)$ für disjunkte $A, B \in \Ring$.
+    \end{minipage}
   \end{itemize}
 \end{defn}
 
@@ -171,18 +183,20 @@
 \end{defn}
 
 \begin{defn}
-  Wir sagen eine Folge $(A_n)_{n \in \N}$ \emph{konvergiert} gegen $A \subset \Omega$, notiert $\lim_{n \to \infty} A_n = A$, wenn $(\ind_{A_n})_{n \in \N}$ punktweise gegen $\ind_A$ konvergiert.
+  Eine Folge $(A_n)_{n \in \N}$ \emph{konvergiert} gegen $A \subset \Omega$, notiert $\lim_{n \to \infty} A_n = A$, wenn $(\ind_{A_n})_{n \in \N}$ punktweise gegen $\ind_A$ konvergiert.
 \end{defn}
 
 \begin{defn}
   Für eine Folge $(A_n)_{n \in \N}$ in $\PS(\Omega)$ heißen
   \begin{align*}
-    \limsup_{n \to \infty} A_n \coloneqq&~\Set{ \omega \in \Omega }{ \omega \text{ liegt in unendlich vielen } A_n } \\[-5pt]
-    =&~\bigcap_{n = 0}^\infty \bigcup_{k = n}^\infty A_n \\
-    \liminf_{n \to \infty} A_n \coloneqq&~\Set{ \omega \in \Omega }{ \omega \text{ liegt in allen bis auf endlich vielen } A_n } \\[-5pt]
-    =&~\bigcup_{n = 0}^\infty \bigcap_{k = n}^\infty A_n
+    \limsup_{n \to \infty} A_n &\coloneqq \Set{ \omega \in \Omega }{ \omega \text{ liegt in unendlich vielen } A_n } \\
+    \liminf_{n \to \infty} A_n &\coloneqq \Set{ \omega \in \Omega }{ \omega \text{ liegt in allen bis auf endlich vielen } A_n }
   \end{align*}
-  \emph{Limes Superior} bzw. \emph{Limes Inferior} der Folge $A_n$.
+  \emph{Limes Superior} bzw. \emph{Limes Inferior} der Folge $A_n$. Es gilt
+  \[
+    \limsup_{n \to \infty} A_n = \bigcap_{n = 0}^\infty \bigcup_{k = n}^\infty A_n, \quad
+    \liminf_{n \to \infty} A_n = \bigcup_{n = 0}^\infty \bigcap_{k = n}^\infty A_n.
+  \]
 \end{defn}
 
 % TODO: Lemmas zum Limes Inferior, Limes Superior
@@ -292,6 +306,8 @@
   Sei $(\Omega, \Alg, \mu)$ ein $\sigma$-endlicher Maßraum und $\mathcal{E}$ ein Erzeuger von $\Alg$, der unter Schnitten abgeschlossen ist. Es gebe eine Folge $(E_n)_{n \in \N}$ mit $E_n \uparrow \Omega$ und $\mu(E_n) < \infty$ für jedes $n \in \N$. Dann ist $\mu$ durch die Werte auf $\mathcal{E}$ eindeutig festgelegt.
 \end{satz}
 
+\begin{samepage}
+
 \subsection{Das Lebesgue-Borel-Maß}
 
 \begin{nota}
@@ -302,10 +318,12 @@
   \end{itemize}
 \end{nota}
 
+\end{samepage}
+
 \begin{defn}
   Für $a, b \in \R^n$ heißen
   \[
-    \left]a, b\right[\,\coloneqq \Set{ x \in \R^n }{ a \lhd x \lhd b }, \qquad
+    \left]a, b\right[\,\coloneqq \Set{ x \in \R^n }{ a \lhd x \lhd b }, \quad
     \mu(\left]a, b\right[) \coloneqq \prod_{j = 1}^{n} (b_j - a_j)
   \]
   \emph{Elementarquader} und \emph{Elementarinhalt}. Sei im Folgenden $\mathcal{E}$ die Menge aller Elementarquader.
@@ -578,7 +596,7 @@
 \end{satz}
 
 \begin{satz}
-  Die Eigenschaften des Integrals für einfache Funktionen (Linearität, Monotonie) übertragen sich auf das allgemeine Lebesgue-Integral.
+  Die Eigenschaften des Integrals für einfache Funktionen (Linearität, Monotonie) übertragen sich auf das Lebesgue-Integral.
 \end{satz}
 
 \begin{satz}[Satz von der monotonen Konvergenz]
@@ -893,7 +911,7 @@
 \begin{satz}
   Sei $(\Omega, \Alg, \mu)$ ein Maßraum und $h \in \overline{\E}(\Omega, \Alg)$. Eine messbare Funktion $f : \Omega \to \overline{\R}$ ist genau dann $h\mu$-integrierbar, wenn $(f \cdot h)$ $\mu$-integrierbar ist. In diesem Fall gilt
   \[ \IntO{f}{(h \mu)} = \IntOmu{f \cdot h}. \]
-  Obige Gleichung ist auch erfüllt, wenn lediglich $f \geq 0$ gilt (also $f \in \overline{\E}(\Omega, \Alg)$; dann kann das Integral den Wert $\infty$ annehmen).
+  Obige Gleichung ist auch erfüllt, wenn lediglich $f \in \overline{\E}(\Omega, \Alg)$ gilt.
 \end{satz}
 
 \begin{bem}
@@ -914,7 +932,7 @@
 \begin{satz}[Transformationssatz]
   Sei $U, \widetilde{U} \opn \R^d$ und sei $\phi : U \to \widetilde{U}$ ein $\mathcal{C}^1$-Diffeomorphismus. Dann ist eine Funktion $f : \widetilde{U} \to \ER$ genau dann auf $\widetilde{U}$ Lebesgue-Borel-integrierbar, wenn $(f \circ \phi) \cdot \left|\det(D\phi)\right| : U \to \ER$ auf $U$ Lebesgue-Borel-interierbar ist. In diesem Fall gilt
   \[ \Int{U}{}{(f \circ \phi) \cdot \left|\det(D\phi)\right|}{\mu_{LB}} = \Int{\phi(U)}{}{f}{\mu_{LB}} = \Int{\widetilde{U}}{}{f}{\mu_{LB}}. \]
-  Obige Gleichung ist auch erfüllt, wenn lediglich $f \geq 0$ gilt (also $f \in \overline{\E}(\widetilde{U}, \Bor(\widetilde{U}))$; dann kann das Integral auch den Wert $\infty$ annehmen).
+  Obige Gleichung ist auch erfüllt, wenn lediglich $f \in \overline{\E}(\widetilde{U}, \Bor(\widetilde{U}))$ gilt.
 \end{satz}
 
 \begin{bem}
@@ -963,8 +981,12 @@
 \begin{defn}
   Sei $\Omega$ eine Menge. Eine Teilmenge $\Dyn \subset \Omega$ heißt \emph{Dynkin-System}, wenn gilt:
   \begin{itemize}
-    \item $\Omega \in \Dyn$
-    \item $D \in \Dyn \implies D^C = \Omega \setminus D \in \Dyn$
+    \begin{minipage}{0.2\linewidth}
+      \item $\Omega \in \Dyn$
+    \end{minipage}
+    \begin{minipage}{0.7\linewidth}
+      \item $D \in \Dyn \implies D^C = \Omega \setminus D \in \Dyn$
+    \end{minipage}
     \item $(D_n)_{n \in \N}$ Folge pw. disjunkter Mengen in $\Dyn$, dann: $\bigcup_{n \in \N} D_n \in \Dyn$
   \end{itemize}
 \end{defn}
