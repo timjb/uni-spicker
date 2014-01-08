@@ -47,6 +47,9 @@
 \newtheorem*{abk}{Abkürzung}
 \newtheorem*{alg}{Algorithmus}
 \newtheorem*{verf}{Verfahren}
+\newtheorem*{eig}{Eigenschaft}
+\newtheorem*{eign}{Eigenschaften}
+\newtheorem*{prop}{Proposition}
 
 \theoremstyle{remark}
 \newtheorem*{bem}{Bemerkung}
@@ -92,6 +95,8 @@
 \newcommand{\C}{\mathbb{C}} % Komplexe Zahlen
 \newcommand{\Q}{\mathbb{Q}} % Rationale Zahlen
 \renewcommand{\d}{\mathrm{d}} % Differentiator
+
+\newcommand{\id}{\mathrm{id}}
 
 % Integrale
 \newcommand{\Int}[4]{{\textstyle \int\limits_{#1}^{#2}} #3 \,\d #4}
