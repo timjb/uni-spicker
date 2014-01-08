@@ -772,7 +772,7 @@ $\implies$ $f$ ist partiell differenzierbar
   Sei $c = X \circ \alpha$ mit $\alpha = \sum \alpha^j e_j$ mit glatten Abb. $\alpha^j$. Dann gilt
   \[ \frac{\nabla c'}{\d t} = \sum_{l=1}^m \left( (\alpha^l)'' + \sum_{j,k=1}^m (\alpha^j)' (\alpha^k)' (\Gamma_{jk}^l \circ \alpha) \right) (\partial_l X \circ \alpha). \]
   Somit ist $c$ genau dann eine Geodäte, wenn gilt
-  \[ (\alpha^l)'' + \sum_{j,k=1}^m (\alpha^j)' (\alpha^k)' (\Gamma_{jk}^l \circ \alpha) \quad \text{für alle $l = 1, ..., m$} \]
+  \[ (\alpha^l)'' + \sum_{j,k=1}^m (\alpha^j)' (\alpha^k)' (\Gamma_{jk}^l \circ \alpha) = 0 \quad \text{für alle $l = 1, ..., m$} \]
   oder $\alpha'' + \Gamma_{\alpha}(\alpha', \alpha') = 0$ (i.\,F. \emph{Geodätengleichung}), wobei
   \begin{align*}
     \Gamma_{\alpha} : [a, b] &\to \Bil(\R^m, \R^m), \  t \mapsto \Gamma_{\alpha(t)} \text{ mit }\\
@@ -1012,5 +1012,43 @@ $\implies$ $f$ ist partiell differenzierbar
 \begin{satz}[Liouville]
   Wenn $n \geq 3$, dann ist jede konforme $\mathcal{C}^3$-Abb. $f : O \to \widetilde{O}$ kugeltreu, d.\,h. falls $X : U \to O$ eine Nabelpunkt-HF ist, dann ist $f \circ X : U \to \widetilde{O}$ auch eine Nabelpunkt-HF.
 \end{satz}
+
+% Klassifikation konformer Abbildungen in Dimension $n \geq 3$
+
+\begin{bsp} Konforme Abbildungen im $\R^n$ sind:
+  \begin{itemize}
+    \item Isometrien: $f(x) = Ax + b, A \in O(n), b \in \R^n$
+    \item Zentrische Streckungen: $f(x) = rx, r > 0$
+    \item Inversionen an Sphären: $\iota : \R^2 \to \R^2 \cup \{ \infty \}, x \mapsto \tfrac{x}{\|x\|^2}, x \not= 0$
+  \end{itemize}
+\end{bsp}
+
+\begin{lem}
+  Inversionen an Sphären sind kugeltreu und konform.
+\end{lem}
+
+\begin{defn}
+  Eine Hintereinanderschaltung von Isometrien, zentrischen Streckungen und Inversionen an Sphären heißt \emph{Möbius-Transformation}.
+\end{defn}
+
+\begin{bem}
+  Für $n = 2$ ist eine Möbius-Transformation eine Abb. $z \mapsto \tfrac{az+b}{cz+d}, z \in \C$, sodass Ausdruck def. ist mit $\det \left( \begin{smallmatrix} a & b \\ c & d \end{smallmatrix} \right) \not= 0$.
+\end{bem}
+
+\begin{satz}
+  Seien $O, \widetilde{O} \opn \R^n$, $n \geq 2$ und $f : O \to \widetilde{O}$ winkel- und kugeltreu. Dann ist $f$ Einschränkung einer Möbius-Transformation.
+\end{satz}
+
+\begin{kor}
+  Für $n \geq 3$ gilt: Jeder konforme $\mathcal{C}^3$-Diffeomorphismus $f$ ist Einschränkung einer Möbius-Transformation.
+\end{kor}
+
+
+\section{Minimalflächen}
+
+\begin{lem}
+  Sei $A \in \R^{n \times n}$, $B \in \R^{n \times (n-m)}$, $C = (A, B) \in \R^{n \times n}$. Wenn jeder Spaltenvektor von $B$ senkrecht auf allen anderen Spaltenvektoren von $C$ steht und normiert ist, dann gilt
+  \[ \det(C) = \sqrt{ \det(A^T A) }. \]
+\end{lem}
 
 \end{document}
