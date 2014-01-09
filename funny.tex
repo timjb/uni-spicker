@@ -546,4 +546,46 @@
   \end{itemize}
 \end{lem}
 
+\begin{lem}
+  Für jeden Banachraum $X$ gilt: $X'$ separabel $\implies$ $X$ separabel.
+\end{lem}
+
+\begin{bem}
+  Die Umkehrung gilt i.\,A. nicht! Gegenbeispiel: $X = L^1$.
+\end{bem}
+
+\begin{satz}[Eberlein-Shmulyan]
+  Sei $X$ reflexiver Banachraum. Dann ist die abgeschlossene Einheitskugel $\overline{B_1(0)} \subset X$ schwach folgenkompakt.
+\end{satz}
+
+\begin{bsp}
+  \begin{itemize}
+    \item Hilberträume $X$ sind reflexiv (folgt direkt aus dem Riesz'schen Darstellungssatz; im Reellen $J_X = (R_X R_{X'})^{-1}$, wobei $R_X : X \to X'$ der zugehörige isomorphismus). Daher: Ist $(x_k)_{k \in \N}$ eine beschränkte Folge in $X$, so existiert eine Teilfolge $(x_{k_l})_{l \in \N}$ und $x \in X$, sodass
+    \[ (y | x_{k_l})_X \xrightarrow{l \to \infty} (y | x)_X \]
+    für alle $y \in X$.
+    \item Sei $\Omega \subset \R^n$ beschränkt, $1 < p < \infty$, $\tfrac{1}{p} + \tfrac{1}{p'} = 1$. Dann ist $L^p(\Omega)$ reflexiv.
+    \item $L^1$ und $L^\infty$ sind genau dann nicht reflexiv, wenn sie unendlich-dimensional sind.
+  \end{itemize}
+\end{bsp}
+
+\begin{bem}
+  Analog zur schwach*-Topologie kann man auch eine schwache Topologie einführen.
+\end{bem}
+
+% Minkowski-Funktional
+
+% In Paragraph 2.1 haben wir gesehen, dass das Abstandsproblem zu konvexen, abgeschlossenen Mengen in allgemeinen Banachräumen nicht lösbar ist, in reflexiven aber doch, wie wir seher werden.
+
+\begin{satz}[Trennungssatz]
+  Seien $X$ ein normierter Raum, $M \subset X$ nicht leer, abgeschlossen, konvex und $x_0 \in X \setminus M$. Dann gibt es ein $x' \in X'$ und ein $\alpha \in \R$ mit
+  \[ Re \langle x', x \rangle_{X' \times X} \leq \alpha \]
+  für $x \in M$ und $Re \langle x', x_0 \rangle_{X' \times X} > \alpha$.
+\end{satz}
+
+% Geometrische Interpretation
+
+\begin{bem}
+  Es folgt $x' \not= 0$, also ist $\Set{ x \in X }{ Re \langle x', x \rangle_{X' \times X} = \alpha }$
+\end{bem}
+
 \end{document}
