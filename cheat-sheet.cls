@@ -53,6 +53,7 @@
 \newtheorem*{prop}{Proposition}
 \newtheorem*{modell}{Modell}
 \newtheorem*{sprech}{Sprechweise}
+\newtheorem*{beobachtung}{Beobachtung}
 
 \theoremstyle{remark}
 \newtheorem*{bem}{Bemerkung}
