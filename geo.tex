@@ -16,6 +16,7 @@
 \newcommand{\Bild}{\mathrm{Bild}}
 \newcommand{\Exp}{\mathrm{Exp}} % geodätische Exponentialabbildung
 \newcommand{\ointervall}[1]{\left]#1\right[} % offenes Intervall
+\newcommand{\A}{\mathfrak{A}}
 
 % Kleinere Klammern
 \delimiterfactor=701
@@ -1049,6 +1050,59 @@ $\implies$ $f$ ist partiell differenzierbar
 \begin{lem}
   Sei $A \in \R^{n \times n}$, $B \in \R^{n \times (n-m)}$, $C = (A, B) \in \R^{n \times n}$. Wenn jeder Spaltenvektor von $B$ senkrecht auf allen anderen Spaltenvektoren von $C$ steht und normiert ist, dann gilt
   \[ \det(C) = \sqrt{ \det(A^T A) }. \]
+\end{lem}
+
+% Vorlesung vom 13.1.2014
+
+% $U \opn \R^m$, $X : U \to \R^n$ immergierte Fläche, $C \subset U$ kompakt mit nicht leerem Inneren und glattem Rand
+
+% \[ A(X(C)) = \Int{C}{}{\sqrt{\det(g_u)}}{u} \]
+
+% Grund: Transformationssatz
+% Begründung 2: Infinitesimale Änderung
+
+\begin{defn}
+  Sei $f : U \to \R$ stetig, dann heißt
+  \[ \Int{C}{}{f}{\A} \coloneqq \Int{C}{}{f(u) \cdot \sqrt{\det(g_u)}}{\mu (u)} \]
+  \emph{Flächeninhalt}.
+\end{defn}
+
+\begin{prop}
+  Der Flächeninhalt ist invariant unter Umparametrisierungen: Sei $X = \widetilde{X} \circ \phi$, $\phi : U \to \widetilde{U}$ Diffeomorphismus, $C \subset U$ kompakt, dann gilt
+  \[ \Int{C}{}{\sqrt{\det(g_u)}}{\mu} = \Int{\phi(C)}{}{\sqrt{\det(\widetilde{g}_u)}}{\mu}. \]
+\end{prop}
+
+% Kapitel 3.2. Variationsformel für Flächeninhalte
+
+
+\begin{defn}
+  Sei $X : U \to \R^n$ immergierte $\mathcal{C}^2$-Fläche,
+  $C \subset U \subset \R^m$ "`schönes"' Kompaktum ($C = \overline{O}$, $O \opn U$ mit glattem Rand).
+  Dann ist eine Variation von $X$ auf $C$ eine Abbildung
+  \[
+    \left] -\epsilon, \epsilon \right[ \times U \xrightarrow{\mathcal{C}^2} \R^n, \quad
+    (x, u) \mapsto X^s(u)
+  \]
+  mit
+  \begin{itemize}
+    \item $X^s : U \to \R^n$ $\mathcal{C}^2$-Immersion
+    \item $X^0 = X$
+    \item $X^s|_{U \setminus C} = X|_{U \setminus C}$
+  \end{itemize}
+\end{defn}
+
+\begin{nota}
+  \begin{multicols}{2}
+    \begin{itemize}
+      \item $\A(s) \coloneqq \A(X^s(C))$
+      \item $\delta \coloneqq \tfrac{\delta}{\delta s}|_{s = 0}$
+    \end{itemize}
+  \end{multicols}
+\end{nota}
+
+\begin{lem}
+  Für kleine $\epsilon > 0$, kann die Variation so umparametrisiert werden, dass das Variationsvektorfeld normal an $X$ ist, d.\,h.
+  \[ \xi(u) \coloneqq \delta X^s(u) \in N_u X. \]
 \end{lem}
 
 \end{document}
