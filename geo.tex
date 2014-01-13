@@ -84,7 +84,7 @@
 \end{defn}
 
 \begin{defn}
-  Eine stetige Kurve $c$ heißt \emph{rektifizierbar} von Länge $\hat{L}_c$, wenn gilt: Für alle $\epsilon > 0$ gibt es ein $\delta > 0$, sodass für alle Unterteilungen $a = t_0 < t1 < ... < t_k = b$ der Feinheit mindestens $\delta$ gilt:
+  Eine stetige Kurve $c$ heißt \emph{rektifizierbar} von Länge $\hat{L}_c$, wenn gilt: Für alle $\epsilon > 0$ gibt es ein $\delta > 0$, sodass für alle Unter- teilungen $a = t_0 < t1 < ... < t_k = b$ der Feinheit mindestens $\delta$ gilt:
   \[ \| \hat{L}_c - \hat{L}_c(t_0, t_1, ..., t_k) \| < \epsilon. \]
 \end{defn}
 
@@ -97,9 +97,9 @@
 \end{defn}
 
 \begin{defn}
-  Sei $c$ eine reguläre, nach BL parametrisierte, ebene Kurve. Dann heißt
-  \[ n = n_c : I \to \R^2, \quad t \mapsto J \cdot c'(t) \text{ mit } J \coloneqq \begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix}  \]
-  das \emph{Normalenfeld} von $c$.
+  Sei $c$ eine reguläre, nach BL parametrisierte, ebene Kurve. Dann ist das \emph{Normalenfeld} von $c$ die Abbildung
+  \[ n = n_c : I \to \R^2, \quad t \mapsto J \cdot c'(t) \quad \text{mit } J \coloneqq (\begin{smallmatrix} 0 & -1 \\ 1 & 0 \end{smallmatrix}).  \]
+  
 \end{defn}
 
 \begin{bem}
@@ -131,7 +131,7 @@
 \end{defn}
 
 \begin{bem}
-  Obige Definition ist invariant unter orientierungserhaltenden Umparametrisierungen, und stimmt für nach BL parametrisierte Kurven mit der vorhergehenden Definition überein.
+  Obige Definition ist invariant unter orientierungs- erhaltenden Umparametrisierungen, und stimmt für nach BL parametrisierte Kurven mit der vorhergehenden Definition überein.
 \end{bem}
 
 \begin{satz}[Hauptsatz der lokalen ebenen Kurventheorie]
@@ -144,9 +144,8 @@
 \end{defn}
 
 \begin{defn}
-  Für eine geschlossene reguläre ebene Kurve $c : [a, b] \to \R^2$ heißt die Zahl
-  \[ \overline{\kappa}(c) \coloneqq \Intabdt{\kappa(t) \| c'(t) \|} \]
-  \emph{Totalkrümmung} von $c$.
+  Für eine geschlossene reguläre ebene Kurve $c : [a, b] \to \R^2$ ist die \emph{Totalkrümmung} von $c$ die Zahl
+  \[ \overline{\kappa}(c) \coloneqq \Intabdt{\kappa(t) \| c'(t) \|}. \]
 \end{defn}
 
 \begin{bem}
@@ -415,13 +414,10 @@ $\implies$ $f$ ist partiell differenzierbar
 \begin{bem}
   Es gilt:
   \begin{itemize}
-    \item $v_u \in N_u X \setminus \{ 0 \}$
-    \item $\det(\partial_1 X(u), ..., \partial_{n-1} X(u), v_u) > 0$
+    \miniitem{0.34 \linewidth}{$v_u \in N_u X \setminus \{ 0 \}$}
+    \miniitem{0.64 \linewidth}{$\det(\partial_1 X(u), ..., \partial_{n-1} X(u), v_u) > 0$}
+    \item Für $n = 3$ und $m = 2$ ist $v_u = \partial_1 X(u) \times \partial_2 X(u)$.
   \end{itemize}
-\end{bem}
-
-\begin{bem}
-  Für $n = 3$ und $m = 2$ gilt $v_u = \partial_1 X(u) \times \partial_2 X(u)$.
 \end{bem}
 
 \begin{defn}
@@ -557,7 +553,7 @@ $\implies$ $f$ ist partiell differenzierbar
 \begin{defn}
   Wenn $\| v \| = 1$, dann heißt
   \[ \kappa_v(u) \coloneqq \langle W_u v, v \rangle \]
-  \emph{Normalkrümmungen} von $X$ in $u$ in Richtung $v$.
+  \emph{Normalkrümmung} von $X$ in $u$ in Richtung $v$.
 \end{defn}
 
 \begin{bem}
@@ -1033,7 +1029,7 @@ $\implies$ $f$ ist partiell differenzierbar
 \end{defn}
 
 \begin{bem}
-  Für $n = 2$ ist eine Möbius-Transformation eine Abb. $z \mapsto \tfrac{az+b}{cz+d}, z \in \C$, sodass Ausdruck def. ist mit $\det \left( \begin{smallmatrix} a & b \\ c & d \end{smallmatrix} \right) \not= 0$.
+  Für $n = 2$, $\R^2 \cong \C$ ist eine Möbius-Transformation eine Abbildung $z \mapsto \tfrac{az+b}{cz+d}$ mit $a, b, c, d \in \C$, sodass dieser Ausdruck definiert ist mit $\det \left( \begin{smallmatrix} a & b \\ c & d \end{smallmatrix} \right) \not= 0$.
 \end{bem}
 
 \begin{satz}
@@ -1063,13 +1059,12 @@ $\implies$ $f$ ist partiell differenzierbar
 
 \begin{defn}
   Sei $f : U \to \R$ stetig, dann heißt
-  \[ \Int{C}{}{f}{\A} \coloneqq \Int{C}{}{f(u) \cdot \sqrt{\det(g_u)}}{\mu (u)} \]
-  \emph{Flächeninhalt}.
+  \[ \Int{C}{}{f}{\A} \coloneqq \Int{C}{}{f(u) \cdot \sqrt{\det(g_u)}}{\mu (u)} \quad \text{\emph{Flächeninhalt}.} \]
 \end{defn}
 
 \begin{prop}
   Der Flächeninhalt ist invariant unter Umparametrisierungen: Sei $X = \widetilde{X} \circ \phi$, $\phi : U \to \widetilde{U}$ Diffeomorphismus, $C \subset U$ kompakt, dann gilt
-  \[ \Int{C}{}{\sqrt{\det(g_u)}}{\mu} = \Int{\phi(C)}{}{\sqrt{\det(\widetilde{g}_u)}}{\mu}. \]
+  \[ \Int{C}{}{\sqrt{\det(g_u)}}{\mu (u)} = \Int{\phi(C)}{}{\sqrt{\det(\widetilde{g}_u)}}{\mu (\widetilde{u})}. \]
 \end{prop}
 
 % Kapitel 3.2. Variationsformel für Flächeninhalte
@@ -1081,13 +1076,12 @@ $\implies$ $f$ ist partiell differenzierbar
   Dann ist eine Variation von $X$ auf $C$ eine Abbildung
   \[
     \left] -\epsilon, \epsilon \right[ \times U \xrightarrow{\mathcal{C}^2} \R^n, \quad
-    (x, u) \mapsto X^s(u)
+    (x, u) \mapsto X^s(u) \quad \text{mit}
   \]
-  mit
   \begin{itemize}
-    \item $X^s : U \to \R^n$ $\mathcal{C}^2$-Immersion
-    \item $X^0 = X$
-    \item $X^s|_{U \setminus C} = X|_{U \setminus C}$
+    \miniitem{0.47 \linewidth}{$X^s : U \to \R^n$ $\mathcal{C}^2$-Immersion\vphantom{$|_{U \setminus C}$}}
+    \miniitem{0.17 \linewidth}{$X^0 = X_{\,}$\vphantom{$|_{U \setminus C}$}}
+    \miniitem{0.33 \linewidth}{$X^s|_{U \setminus C} = X|_{U \setminus C}$}
   \end{itemize}
 \end{defn}
 

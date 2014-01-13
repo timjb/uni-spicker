@@ -114,6 +114,11 @@
 \DeclarePairedDelimiterX\Set[2]{\lbrace}{\rbrace}%
  { #1 \,\delimsize|\, #2 }
 
+% Absolutwert, Norm
+% siehe http://tex.stackexchange.com/questions/43008/absolute-value-symbols
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}%
+
 % Offene und abgeschlossene Teilmengen
 % http://tex.stackexchange.com/questions/22371/subseteq-circ-as-a-single-symbol-open-subset
 \newcommand\opn{\mathrel{\ooalign{$\subset$\cr
@@ -141,9 +146,18 @@
 \DeclareMathOperator*{\textsum}{{\textstyle \mySum}}
 \renewcommand{\sum}{\textsum\limits}
 
+% Listeneintrag mit variabler Breite
+% siehe http://tex.stackexchange.com/questions/30526/two-column-list-different-column-widths
+\newcommand{\miniitem}[2]{%
+  \begin{minipage}{#1} {\item #2} \end{minipage}}
+
+\usepackage{ragged2e} % Flattersatz mit Silbentrennung
+
 \usepackage{multicol}
 \AtBeginDocument{
-  \raggedright % Flattersatz
+  % Entscheide:
+  %\RaggedRight % Flattersatz mit Silbentrennung
+  \raggedright % Flattersatz ohne Silbentrennung
   \footnotesize
   \begin{multicols}{3}
   % multicol parameters

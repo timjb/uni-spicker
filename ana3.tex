@@ -1,19 +1,19 @@
 \documentclass{cheat-sheet}
 
-\usepackage{bbm}
+\usepackage{bbm} % Für 1 mit Doppelstrich (Indikatorfunktion)
 \usepackage{amsopn}
 \usepackage{setspace}
 
-\newcommand{\ER}{\overline\R} % extended reals
-\newcommand{\PS}{\mathcal{P}} % Powerset
-\newcommand{\PSO}{\PS(\Omega)} % Powerset
-\newcommand{\Alg}{\mathfrak{A}}
-\newcommand{\Ring}{\mathfrak{R}}
-\newcommand{\Dyn}{\mathfrak{D}}
+\newcommand{\ER}{\overline\R} % Erweiterte reelle Zahlen
+\newcommand{\PS}{\mathcal{P}} % Potenzmenge
+\newcommand{\PSO}{\PS(\Omega)} % Potenzmenge
+\newcommand{\Alg}{\mathfrak{A}} % (Mengen-)Algebra
+\newcommand{\Ring}{\mathfrak{R}} % (Mengen-)Ring
+\newcommand{\Dyn}{\mathfrak{D}} % Dynkin-System
 \newcommand{\Bor}{\mathfrak{B}} % Borel
-\newcommand{\E}{\mathbb{E}} % elementary functions
+\newcommand{\E}{\mathbb{E}} % Elementare Funktion
 \newcommand{\Leb}{\mathcal{L}} % Lebesgue
-\newcommand{\ind}{\mathbbm{1}} % indicator function
+\newcommand{\ind}{\mathbbm{1}} % Indikatorfunktion
 \newcommand{\fue}{\overset{\text{f.ü.}}} % fast überall
 
 \newcommand{\IntO}[2]{\Int{\Omega}{}{#1}{#2}} % Integral über \Omega
@@ -74,12 +74,8 @@
 \begin{defn}
   Eine Teilmenge $\Ring \subset \PSO$ heißt \emph{Ring}, wenn für $A, B \in \Ring$ gilt:
   \begin{itemize}
-    \begin{minipage}{0.13\linewidth}
-      \item $\emptyset \in \Ring$
-    \end{minipage}
-    \begin{minipage}{0.85\linewidth}
-      \item Abgeschlossenheit unter Differenzen: $A \setminus B \in \Ring$
-    \end{minipage}
+    \miniitem{0.13 \linewidth}{$\emptyset \in \Ring$}
+    \miniitem{0.85 \linewidth}{Abgeschlossenheit unter Differenzen: $A \setminus B \in \Ring$}
     \item Abgeschlossenheit unter endlichen Vereinigungen: $A \cup B \in \Ring$
   \end{itemize}
 \end{defn}
@@ -87,12 +83,8 @@
 \begin{defn}
   Eine Teilmenge $\Alg \subset \PSO$ heißt \emph{Algebra}, wenn für $A, B \in \Alg$ gilt:
   \begin{itemize}
-    \begin{minipage}{0.13\linewidth}
-      \item $\emptyset \in \Alg$
-    \end{minipage}
-    \begin{minipage}{0.85\linewidth}
-      \item Abgeschlossenheit unter Komplementen: $A^c = \Omega \setminus A \in \Alg$
-    \end{minipage}
+    \miniitem{0.13 \linewidth}{$\emptyset \in \Alg$}
+    \miniitem{0.85 \linewidth}{Abgeschlossenheit unter Komplementen: $A^c = \Omega \setminus A \in \Alg$}
     \item Abgeschlossenheit unter endlichen Vereinigungen: $A \cup B \in \Alg$
   \end{itemize}
 \end{defn}
@@ -142,12 +134,8 @@
 \begin{defn}
   Eine Funktion $\mu : \Ring \to [0, \infty]$ heißt \emph{Inhalt} auf $\Ring$, falls
   \begin{itemize}
-    \begin{minipage}{0.2\linewidth}
-      \item $\mu(\emptyset) = 0$
-    \end{minipage}
-    \begin{minipage}{0.75\linewidth}
-      \item $\mu(A \sqcup B) = \mu(A) + \mu(B)$ für disjunkte $A, B \in \Ring$.
-    \end{minipage}
+    \miniitem{0.2 \linewidth}{$\mu(\emptyset) = 0$}
+    \miniitem{0.75 \linewidth}{$\mu(A \sqcup B) = \mu(A) + \mu(B)$ für disjunkte $A, B \in \Ring$.}
   \end{itemize}
 \end{defn}
 
@@ -389,8 +377,8 @@
 \end{satz}
 
 \begin{satz}
-  Sei $f : \Omega \to \Omega'$ eine Abbildung und $\mathcal{E}' \subset \mathcal{P}(\Omega')$, dann gilt
-  \[ \Alg(f^{-1}(\mathcal{E}')) = f^{-1}(\Alg(\mathcal{E}')) \]
+  Sei $f : \Omega \to \Omega'$ eine Abbildung und $\mathcal{E}' \subset \mathcal{P}(\Omega')$, dann ist
+  \[ \Alg(f^{-1}(\mathcal{E}')) = f^{-1}(\Alg(\mathcal{E}')). \]
 \end{satz}
 
 \begin{satz}
@@ -440,11 +428,13 @@
 \begin{satz}
   Für eine numerische Fkt. $f : (\Omega, \Alg) \to (\ER, \overline{\Bor})$ sind äquivalent:
   \begin{itemize}
-    \item $f$ ist messbar
-    \item für alle $a \in \R$ gilt $\{ f \geq a \} = f^{-1}([a, \infty]) \in \Alg$
-    \item für alle $a \in \R$ gilt $\{ f > a \} = f^{-1}(]a, \infty]) \in \Alg$
-    \item für alle $a \in \R$ gilt $\{ f \leq a \} = f^{-1}([-\infty, a]) \in \Alg$
-    \item für alle $a \in \R$ gilt $\{ f < a \} = f^{-1}([-\infty, a[) \in \Alg$
+    \miniitem{0.27 \linewidth}{$f$ ist messbar}
+    \miniitem{0.7 \linewidth}{$\forall \, a \in \R \,:\, \{ f \geq a \} = f^{-1}([a, \infty]) \in \Alg$}
+    \begin{multicols}{2}
+      \item $\forall \, a \in \R \,:\, \{ f > a \} \in \Alg$
+      \item $\forall \, a \in \R \,:\, \{ f \leq a \} \in \Alg$
+    \end{multicols}
+    \item $\forall \, a \in \R \,:\, \{ f < a \} \in \Alg$
   \end{itemize}
 \end{satz}
 
@@ -985,12 +975,8 @@
 \begin{defn}
   Sei $\Omega$ eine Menge. Eine Teilmenge $\Dyn \subset \Omega$ heißt \emph{Dynkin-System}, wenn gilt:
   \begin{itemize}
-    \begin{minipage}{0.2\linewidth}
-      \item $\Omega \in \Dyn$
-    \end{minipage}
-    \begin{minipage}{0.7\linewidth}
-      \item $D \in \Dyn \implies D^C = \Omega \setminus D \in \Dyn$
-    \end{minipage}
+    \miniitem{0.2 \linewidth}{$\Omega \in \Dyn$}
+    \miniitem{0.7 \linewidth}{$D \in \Dyn \implies D^C = \Omega \setminus D \in \Dyn$}
     \item $(D_n)_{n \in \N}$ Folge pw. disjunkter Mengen in $\Dyn$, dann: $\bigcup_{n \in \N} D_n \in \Dyn$
   \end{itemize}
 \end{defn}
@@ -1221,7 +1207,7 @@
 \end{nota}
 
 \begin{bem}
-  \[ \mathrm{d}x_j (v_1, ..., v_n) = v_j \]
+  $\mathrm{d}x_j (v_1, ..., v_n) = v_j$
 \end{bem}
 
 % Damit ist $(\mathrm{d}x_1(u), ..., \mathrm{d}x_j(u))$ eine Dualbasis von $((u, e_1), ..., (u, e_n))$
