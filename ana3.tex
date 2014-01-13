@@ -22,6 +22,10 @@
 % Kleinere Klammern
 \delimiterfactor=701
 
+\usepackage{relsize}
+\let\myBinom\binom
+\renewcommand{\binom}[2]{\mathsmaller{\myBinom{#1}{#2}}}
+
 \pdfinfo{
   /Title (Zusammenfassung Analysis 3)
   /Author (Tim Baumann)
@@ -1208,8 +1212,101 @@
 
 \begin{bsp}
   Sei $f : U \to \R$ total diff'bar, dann heißt die Einsform
-  \[ \mathrm{df} : U \to T^*U, \quad u \mapsto (u, V) \mapsto (D_f (u)) V \]
+  \[ \mathrm{d}f : U \to T^*U, \quad u \mapsto (u, V) \mapsto (D_f (u)) V \]
   totales Differential von $f$.
 \end{bsp}
+
+\begin{nota}
+  \[ x_j : U \to \R, \quad (u_1, ..., u_n) \quad v_j \text{ (Projektion auf $j$-te Koordinate)} \]
+\end{nota}
+
+\begin{bem}
+  \[ \mathrm{d}x_j (v_1, ..., v_n) = v_j \]
+\end{bem}
+
+% Damit ist $(\mathrm{d}x_1(u), ..., \mathrm{d}x_j(u))$ eine Dualbasis von $((u, e_1), ..., (u, e_n))$
+
+\begin{beobachtung}
+  Für jede Einsform $\omega$ auf $U$ gibt es $n$ Abbildungen $a_j : U \to \R$, sodass
+  $\omega = \sum_{j=1}^n a_j \mathrm{d}x_j$
+\end{beobachtung}
+
+\begin{defn}
+  Eine Einsform $\omega = \sum_{j=1}^n a_j \mathrm{d}x_j$ heißt stetig/diff'bar/$\mathcal{C}^k$, wenn für alle $j \in \{ 1, ..., n \}$: $a_j$ ist stetig/total diff'bar/$\mathcal{C}^k$.
+\end{defn}
+
+% Differentialformen höherer Ordnung
+
+\begin{defn}
+  Eine \emph{$k$-Form}, $k \in \N^*$ auf $U$:
+  \[ \omega : U \to \bigsqcup_{u \in U} \Lambda^k T_u^* U \]
+  mit $\omega(u) \in \Lambda^k T_u^* U$ für alle $u \in U$.
+  Eine \emph{$0$-Form} ist eine Abb. $\omega : U \to \R$.
+\end{defn}
+
+% $\{ \mathrm{d}x_{j_1}(u) \wedge ... \wedge \mathrm{d}x_{j_k}(u) \mid 1 \leq j_1 < ... < j_k \leq n \}$
+% Basis von $\Lambda^k T_u^* U$
+
+% Also: Gegeben $k$-Form $\omega$ auf $U$, dann gibt es $\binom{n}{k}$ Abbildungen $f_{j_1 \cdots j_k} : U \to \R$, $1 \leq j_1 < ... < j_k \leq n$, sodass
+% $\omega(u) = \sum_{1 \leq j_1 < ... < j_n \leq n} f_{j_1 \cdots j_k}(u) (\mathrm{d}x_{j_1}(u) \wedge ... \wedge \mathrm{d}x_{j_k}) $
+% Kurz: $\omega = \sum_{1 \leq j_1 < ... < j_k \leq n} f_{j_1 \cdots j_k} (\mathrm{d}x_{j_1} \wedge ... \wedge \mathrm{d} x_{j_k})$
+
+\begin{defn}
+  Die $k$-Form auf $U$ heißt stetig/diff'bar/$\mathcal{C}^k$, wenn alle $\binom{n}{k}$ Abbildungen $f_{j_1 \cdots j_k} : U \to \R$ stetig/total diff'bar/$\mathcal{C}^k$.
+\end{defn}
+
+\begin{beobachtung}
+  \begin{itemize}
+    \item $\{ k-\text{Form auf } U \}$ ist Modul über Ring $\{ f : U \to \R \}$
+    % $(\omega_1 + \omega_2)(u) = \omega_1(u) + \omega_2(u)$
+    % $(f \cdot \omega)(u) = f(u) \cdot \omega(u)$
+    \item $k$-Form $\omega$, $l$-Form $\eta$, dann $(\omega \wedge \eta)(u) = \omega(u) \wedge \eta(u)$ ist $(k+l)$-Form auf $U$.
+  \end{itemize}
+\end{beobachtung}
+
+\begin{defn}
+  $\omega = \sum_{1 \leq j_1 < ... < j_k \leq n} f_{j_1 \cdots j_k} (\mathrm{d}x_{j_1} \wedge ... \wedge \mathrm{d}x_{j_k})$ diff'bare $k$-Form auf $U$, dann heißt die $(k+1)$-Form
+  \[ \mathrm{d} \omega \coloneqq \sum_{j_1 < ... < j_k} \mathrm{d} f_{j_1 \cdots j_k} \wedge \mathrm{d} x_{j_1} \wedge ... \wedge \mathrm{d} x_{j_k} \]
+  \emph{äußere Ableitung} von $\omega$.
+\end{defn}
+
+\begin{bsp}
+  Für $k = 1$: $\omega = \sum_{j = 1}^n f_j \mathrm{d} x_j$
+  $\mathrm{d} \omega = \sum_{j=1}^n \mathrm{d} f_j \wedge \mathrm{d} x_j = \sum_{j=1}^n (\sum_{k=1}^n \frac{\partial f_j}{\partial x_k} \mathrm{d} x_k) \wedge \mathrm{d} x_j = \sum_{j=1}^k (\frac{\partial f_j}{\partial x_k} - \frac{\partial f_k}{\partial x_j}) \mathrm{d}x_k \wedge \mathrm{d}x_j$.
+
+  $k = n -1$: $\mathrm{dim}(\Lambda^{n-1} V^*) = \binom{n}{n-1} = n = \mathrm{dim}(V)$
+  $\Set{ (-1)^{j-1} \mathrm{d} x_1(u) \wedge ... \wedge \widehat{\mathrm{d} x_j(u)} \wedge ... \wedge \mathrm{d} x_n(u) }{ 1 \leq j \leq n }$ ist für alle $u \in U$ eine Basis von $\Lambda^{n-1} T_u^* U$.
+
+  $\omega = \sum_{j=1}^n (-1)^{j-1} f_j \d x_1 \wedge ... \wedge \widehat{\d x_j} \wedge ... \wedge \d x_n$
+  $\d \omega = \sum_{j=1}^n (-1)^{j-1} \d f_j \wedge \d x_1 \wedge ... \wedge \widehat{\d x_j} \wedge ... \wedge \d x_n = \begin{cases} 0, & \text{falls} j \not= k \\ \d x_1 \wedge ... \wedge \d x_n & j = k \end{cases}$
+\end{bsp}
+
+
+\begin{satz}
+  Eigenschaften von $\d$
+
+  \begin{itemize}
+    \item $\d(\lambda \omega_1 + \omega_2) = \lambda \d \omega_1 + \d \omega_2$
+    \item $\d (\omega \wedge \nu) = \d \omega \wedge \eta + (-1)^k \omega \wedge \d \eta$
+    \item $\d (\d \omega) = 0$
+  \end{itemize}
+\end{satz}
+
+\begin{defn}
+  \begin{itemize}
+    \item Eine $k$-Form $\omega$ heißt \emph{geschlossen}, wenn $\d \omega = 0$.
+    \item Für $k \geq 1$ heißt eine $k$-Form \emph{exakt}, wenn es eine $(k-1)$-Form $\eta$ gibt, sodass $\omega = \d \eta$.
+  \end{itemize}
+\end{defn}
+
+\begin{beobachtung}
+  $\omega$ exakt $\implies$ $\omega$ abgeschlossen
+\end{beobachtung}
+
+% Frage: Gilt auch die Umkehrung?
+
+\begin{lem}[Poincaré]
+  $U$ sternförmig, $\omega$ geschlossen $\implies$ $\omega$ exakt.
+\end{lem}
 
 \end{document}
