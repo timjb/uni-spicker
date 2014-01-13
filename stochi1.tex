@@ -9,7 +9,6 @@
 \newcommand{\Ring}{\mathfrak{R}}
 \newcommand{\LebAlg}{\mathfrak{L}} % Lebesgue-Borel-Mengen
 \renewcommand{\P}{\mathbb{P}}
-\newcommand{\PD}[2]{\P(#1\,|\,#2)}
 \newcommand{\E}{\mathbb{E}} % elementary functions
 \newcommand{\ER}{\overline\R} % extended reals
 \newcommand{\Bor}{\mathfrak{B}} % Borel
@@ -17,6 +16,10 @@
 
 \newcommand{\IntO}[2]{\Int{\Omega}{}{#1}{#2}} % Integral über \Omega
 \newcommand{\IntOmu}[1]{\Int{\Omega}{}{#1}{\mu}} % Integral über \Omega bzgl. \mu
+
+\usepackage{relsize}
+\let\myBinom\binom
+\renewcommand{\binom}[2]{\mathsmaller{\myBinom{#1}{#2}}}
 
 \begin{document}
 
@@ -84,10 +87,11 @@ Zu jeder Booleschen Algebra $\mathfrak{A}$ gibt es eine Menge $\Omega$ derart, d
 \end{bem}
 
 \begin{defn}
-  Sei $(A_n)_{n \in \N}$ eine Folge in einer $\sigma$-Algebra $\mathfrak{A}$. Dann sind der Limes Superior und Limes Inferior der Folge $A_n$ wie folgt definiert:
-
-  \[ \limsup_{n \to \infty} A_n \coloneqq \bigcap_{n = 1}^{\infty} \bigcup_{m = n}^{\infty} A_n \in \mathfrak{A} \]
-  \[ \liminf_{n \to \infty} A_n \coloneqq \bigcup_{n = 1}^{\infty} \bigcap_{m = n}^{\infty} A_n \in \mathfrak{A} \]
+  Sei $(A_n)_{n \in \N}$ eine Folge in einer $\sigma$-Algebra $\mathfrak{A}$. Setze
+  \[
+    \limsup_{n \to \infty} A_n \coloneqq \bigcap_{n = 1}^{\infty} \bigcup_{m = n}^{\infty} A_n \in \mathfrak{A}, \quad
+    \liminf_{n \to \infty} A_n \coloneqq \bigcup_{n = 1}^{\infty} \bigcap_{m = n}^{\infty} A_n \in \mathfrak{A}.
+  \]
 \end{defn}
 
 \begin{bem}
@@ -123,34 +127,255 @@ Zu jeder Booleschen Algebra $\mathfrak{A}$ gibt es eine Menge $\Omega$ derart, d
   \end{align*}
 \end{satz}
 
-%\begin{defn}
-%  Sei $$
-%\end{defn}
 
-% ...
+
+
+
+% Anfang strukturierte sortierte Einträge
+
+
+
+% Vorlesung 9
+
+\begin{bem}
+  Sei $\mu$ ein W-Maß auf $\Leb(\R^1)$. Dann definiert $x \mapsto F_{\mu}(x) \coloneqq \mu(\left] -\infty, x \right])$ eine VF. Für eine VF $F : \R \to [0,1]$ definiert umgekehrt $\mu_F(\left] a, b \right]) \coloneqq F(b) - F(a)$ ein W-Maß auf $\Leb(\R^1)$. Analog funktioniert dies auf dem $\R^d$.
+\end{bem}
+
+% Wichtige Verteilungsfunktionen:
+
+\begin{defn}[Wichtige Verteilungsfunktionen]\mbox{}\\
+  \begin{itemize}
+    \item \emph{Normalverteilung} (Gaußverteilung) mit EW $\mu$ und Varianz $\sigma^2$:
+    \[ F_{\mu \sigma^2}(x) = \tfrac{1}{\sqrt{2 \pi \sigma^2}} \Int{-\infty}{x}{\exp\left(\tfrac{-(t-\mu)^2}{2 \sigma^2}\right)}{t} \]
+    erfüllt $F_{\mu \sigma^2}'(x) = \exp\left(\tfrac{-(x-\mu)^2}{2 \sigma^2}\right)$, $F_{\mu \sigma^2}(\mu-x) = 1 - F_{\mu \sigma^2}(\mu+x)$
+    \item \emph{Exponentialverteilung} mit Parameter $\lambda > 0$:
+    \[ F_{\lambda}(x) = \begin{cases} 0, & \text{ für } x \leq 0 \\
+                                      1 - \exp(- \lambda x), & \text{ für } x > 0
+    \end{cases} \]
+    \item \emph{Poisson-Verteilung} mit Parameter $\lambda > 0$:
+    \[ F_{\lambda}(x) = \sum_{0 \leq n \leq x} \tfrac{\lambda^n}{n!} \exp(-\lambda) \]
+  \end{itemize}
+\end{defn}
+
+% Ausgelassen: Mehrdimensionale Normalverteilung, zweidimensionale Exponentialverteilung
+% Ausgelassen: Gauß-Levy-Kuzmin-Theorem, und zugehörige Verteilung
+% Ausgelassen: Wiener Maß für Modellierung von Brown'scher Bewegung
+
+% Kapitel 2. Elementare Wahrscheinlichkeitsrechnung
+
+% Kapitel 2.1. Definition der relativen und bedingten relativen Häufigkeit
+
+\begin{defn}
+  Ein Ereignis $A \in \Alg$ trete bei $n$ Versuchen genau $h_n(A) \in \N$ mal auf. Dann heißt
+  \begin{itemize}
+    \item $h_n(A)$ \emph{absolute Häufigkeit} von $A$,
+    \item $H_n(A) \coloneqq \tfrac{h_n(A)}{n}$ \emph{relative Häufigkeit} von $A$.
+  \end{itemize}
+\end{defn}
+
+\begin{bem}
+  Unmittelbar klar:
+  \begin{itemize}
+    \begin{minipage}{0.35\linewidth}
+      \item $H_n(A) \in [0,1]$
+    \end{minipage}
+    \begin{minipage}{0.60\linewidth}
+      \item $H_n(A) \leq H_n(B)$ für $A \subset B$
+    \end{minipage}
+    \item $H_n(A \sqcup B) = H_n(A) + H_n(B)$ für $A \cap B = \emptyset$
+  \end{itemize}
+\end{bem}
+
+\begin{bem}
+  Bei wachsendem $n$ stabilisiert sich normalerweise der Wert $H_n(A)$. Dieser Grenzwert ist die Wahrscheinlichkeit von $A$.
+\end{bem}
+
+
+% Vorlesung 10
+
+\begin{defn}
+  Seien $A, B \in \Alg$ Ereignisse, $n \in \N$ die Anzahl der Versuche. Dann heißt
+  \[ H_n(A \mid B) \coloneqq \tfrac{H_n(A \cap B)}{H_n(B)} = \tfrac{h_n(A \cap B)}{h_n(B)} \]
+  die \emph{relative Wahrscheinlichkeit} von $A$ unter der Bedingung $B$.
+\end{defn}
+
+\begin{bem}
+  Offenbar gilt:
+  \begin{itemize}
+    \begin{minipage}{0.35\linewidth}
+      \item $H_n(A \mid B) \in [0,1]$
+    \end{minipage}
+    \begin{minipage}{0.60\linewidth}
+      \item $H_n(A_1 \mid B) \leq H_n(A_2 \mid B)$ für $A_1 \subset A_2$
+    \end{minipage}
+    \item $H_n(A_1 \sqcup A_2 \mid B) = H_n(A_1 \mid B) + H_n(A_2 \mid B)$ für $A_1 \cap A_2 = \emptyset$
+  \end{itemize}
+\end{bem}
+
+% Kapitel 2.2. Geometrische Wahrscheinlichkeiten
+
+\begin{defn}
+  Sei $\Omega \in \Leb(\R^d)$ mit $\lambda_d(\Omega) > 0$. Dann heißt das W-Maß
+  \[ \P : \Leb(\Omega) \to [0, 1], \quad A \mapsto \tfrac{\lambda_d(A)}{\lambda_d(\Omega)} \]
+  auf $(\Omega, \Leb(\Omega))$ \emph{Gleichverteilung}.
+\end{defn}
+
+\begin{defn}
+  Sei $\Omega$ eine endliche Menge. Dann definiert
+  \[ \P : \mathcal{P} \to [0, 1], \quad A \mapsto \tfrac{|A|}{|\Omega|} = \tfrac{\text{\# günstige Fälle}}{\text{\# mögliche Fälle}} \]
+  ein W-Maß auf $(\Omega, \mathcal{P}(\Omega))$, genannt \emph{Laplace'sche Wkt}.
+\end{defn}
+
+\begin{bem}
+  Damit sind Berechnungen von Wkten mit kombinatorischen Überlegungen möglich.
+\end{bem}
+
+% Kapitel 2.4. Berechnung von Wahrscheinlichkeiten durch kombinatorische Überlegungen
+
+\begin{lem}[Fundamentalprinzip des Zählens]
+  Seien $A_1, ..., A_n$ endliche Mengen. Dann gilt $| A_1 \times ... \times A_n | = |A_1| \cdots |A_n|$.
+\end{lem}
+
+\begin{lem}
+  Sei $A$ eine endliche Menge, $r \leq n \coloneqq |A| < \infty$. Dann ist die Anzahl der $r$-Tupel mit Elementen aus $A$ gleich
+
+  \begin{center}
+    \begin{tabular}{ r | l l }
+      & Mit Wdh. & Ohne Wdh. \\ \hline
+      Mit Ordnung & $n^r$ & $\tfrac{n!}{(n-r)!}$ \\
+      Ohne Ordnung & $\tfrac{(n+r-1)!}{r!}$ & $\binom{n}{r} \coloneqq \tfrac{n!}{r!(n-r)!}$
+    \end{tabular}
+  \end{center}
+\end{lem}
+
+
+% Vorlesung 11
+
+\begin{lem}
+  Sei $A$ eine endliche Menge, $n \coloneqq |A| < \infty$. Dann ist die Anzahl der möglichen Zerlegungen von $A$ in disjunkte Mengen $B_1, ..., B_k$ mit $|B_i| = n_i$ und $n_1 + ... + n_k = n$ gleich
+  \[
+    \binom{n}{n_1, ..., n_k} \coloneqq \tfrac{n!}{n_1! \cdots n_k!}. \quad \text{\emph{(Multinomialkoeffizient)}}
+  \]
+\end{lem}
+
+% Ausgelassen: Beispiel Kartenverteilungen beim Skatspiel
+
+% Kapitel 2.5. Berechnung von geometrischen Wahrscheinlichkeiten
+
+% Ausgelassen: Beispiel Bertrand'sches Paradoxon (http://en.wikipedia.org/wiki/Bertrand_paradox_(probability))
+
+% Ausgelassen: Beispiel Buffonsches Nadelproblem (http://de.wikipedia.org/wiki/Buffonsches_Nadelproblem)
+% und dessen Verallgemeinerung auf Polygone
+
+
+% Vorlesung 12
+
+% Kapitel 2.6. Hypergeometrische Verteilung
+
+\begin{modell}
+  Eine Urne enthalte $N$ Kugeln, darunter $M \leq N$ schwarze. Dann ist ist die Wkt für das Ereignis $A^n_m$, dass sich unter $n$ gezogenen Kugeln genau $m \leq \min(n, M)$ schwarze Kugeln befinden,
+  \[ \P(A^n_m) = \frac{\binom{M}{m} \binom{N - M}{n - m}}{\binom{N}{n}}. \quad \text{\emph{(hypergeometrische Verteilung)}} \]
+\end{modell}
+
+% Ausgelassen: Beispiel: $m$-er beim Lotto
+% Ausgelassen: Beispiel: Capture-Recapture-Problem, Maximum-Likelihood-Schätzung
+
+\begin{bem}
+  Für Maximum-Likelihood-Schätzungen:
+  \begin{itemize}
+    \item Der Ausdruck $\binom{N-M}{n-m} / \binom{N}{n}$ wird maximal bei $N \coloneqq \lfloor \tfrac{n-M}{m} \rfloor$.
+    \item Der Ausdruck $\binom{M}{m} \cdot \binom{N-M}{n-m}$ wird maximal bei $M \coloneqq \lfloor \tfrac{m (N-1)}{n} \rfloor$.
+  \end{itemize}
+\end{bem}
+
+% Ausgelassen: Beispiel statistische Qualitätskontrolle
+
+\begin{modell}
+  Eine Urne enthalte $N$ Kugeln in $k \leq N$ verschiedenen Farben, darunter $N_1$ in der ersten Farbe, ..., $N_k$ in der $k$-ten Farbe, $N_1 + ... + N_k = N$. Dann ist ist die Wkt für das Ereignis $A^n_{n_1,...,n_k}$, dass sich unter $n$ gezogenen Kugeln genau $n_1 \leq N_1$ Kugeln der ersten Farbe, ..., und $n_k \leq N_k$ Kugeln der $k$-ten Farbe befinden, $n_1 + ... + n_k = n$, gleich
+  \[ \P(A^n_{n_1, ..., n_k}) = \frac{\binom{N_1}{n_1} \cdots \binom{N_k}{n_k}}{\binom{N}{n}}. \]
+  Diese W-Verteilung heißt \emph{polyhypergeometrische Verteilung}.
+\end{modell}
+
+% Ausgelassen: Zusatz-5er beim Lotto
+
+% Kapitel 2.7. Bedingte Wahrscheinlichkeiten
+
+\begin{defn}
+  Sei $(\Omega, \Alg, \P)$ ein W-Raum und $A, B \in \Alg$. Dann heißt
+  \[ \P(A \mid B) \coloneqq \begin{cases} \tfrac{\P(A \cap B)}{\P(B)}, & \text{ falls } \P(B) > 0 \\
+  0, & \text{ falls } \P(B) = 0 \end{cases} \]
+  Wahrscheinlichkeit von $A$ unter der Bedingung $B$.
+\end{defn}
+
+\begin{bem}
+  Falls $\P(B) > 0$ gilt, so ist $\P(- \mid B)$ ein W-Maß über $B$ auf der Spur-$\sigma$-Algebra $\Alg|_B$.
+\end{bem}
+
+\begin{lem}
+  Seien $A_1, ..., A_k \in \Alg$, dann gilt die Pfadregel:
+  \[ \P(A_1 \cap ... \cap A_k) = \P(A_1) \cdot \prod_{i=2}^k \P(A_i \mid A_1 \cap ... \cap A_{i-1}). \]
+\end{lem}
+
+% Ausgelassen: Beispiel: Lose ziehen
+
+% Kapitel 2.8. Formel der totalen Wahrscheinlichkeit und Bayes'sche Formel
+
+
+% Vorlesung 13
 
 \begin{satz}
-  Sei $A_1, A_2, ...$ eine Zerlegung von $\Omega$ und $B \in \Alg$. Dann gilt
+  Sei $(\Omega, \Alg, \P)$ ein W-Raum und $A_1, ... \in \Alg$ ein vollständiges Ereignissystem, d.\,h. paarweise disjunkt mit
+  \[ \Omega = \bigsqcup_{i = 1}^\infty A_i. \]
+  Dann gilt für jedes $B \in \Alg$ mit $\P(B) > 0$
   \begin{align*}
-    \P(B) &= \sum_{n=1}^\infty \PD{B}{A_n} \P(A_n) \quad \text{(Formel der totalen Wkt.)}\\
-    \PD{A_n}{B} &= \frac{\PD{B}{A_n} \cdot \P(A_n)}{\P(B)} \quad \text{(Formel von Bayes)}
+    \P(B) &= \sum_{i=1}^{\infty} \P(B \mid A_i) \cdot \P(A_i) & \text{(Formel der totalen Wkt)} \\
+    \P(A_n \mid B) &= \frac{\P(B \mid A_n) \cdot \P(A_n)}{\sum_{i=1}^\infty \P(B \mid A_i) \cdot \P(A_i)} & \text{(\emph{Bayessche Formel})}
   \end{align*}
 \end{satz}
 
+% Ausgelassen: Interpretation als "Mischformel"
+
+\begin{sprech}
+  In der Bayesischen Statistik heißt
+  \begin{itemize}
+    \item $\P(A_i)$ \quad \,\, \emph{A-priori-Wahrscheinlichkeit},
+    \item $\P(A_i \mid B)$ \emph{A-posteriori-Wahrscheinlichkeit}.
+  \end{itemize}
+\end{sprech}
+
+% Ausgelassen: Beispiel der Produktion auf zwei Maschinen mit untersch. Ausschussraten
+
+% Kapitel 2.9. Unabhängigkeit von Ereignissen
+
 \begin{defn}
-  Zwei Ereignisse $A, B \in \Alg$ heißen (stochastisch) ($\P$-)unabhängig, falls
+  Zwei Ereignisse $A, B \in \Alg$ heißen \emph{($\P$-)unabhängig}, falls
   \[ \P(A \cap B) = \P(A) \cdot \P(B). \]
 \end{defn}
 
+\begin{bem}
+  \begin{itemize}
+    \item $A \in \Alg$ mit $\P(A) = 0$ ist unabhängig zu jedem $B \in \Alg$.
+    \item Wenn $A, B \in \Alg$ unabhängig, dann sind auch unabhängig:
+    \[ (A^c, B), \quad (A, B^c), \quad (A^c, B^c) \]
+  \end{itemize}
+\end{bem}
+
 \begin{satz}
-  $A, B$ unabhängig $\iff$ $\PD{B}{A} = \P(B)$.
+  $A, B \in \Alg$ unabhängig $\iff$ $\P{B \mid A} = \P(B)$.
 \end{satz}
 
+% Ausgelassen: Beispiel: Ziehen von Karo-, Ass- und Karo-Ass-Karten
+
 \begin{defn}
-  Eine Familie $A_i)_{i \in I} \subset \Alg$ ($I$ endlich, abzählbar oder überabzählbar) heißt \emph{vollständig unabhhängig}, falls
-  \[ \P(A_{i_1} \cap A_{i_2} \cap ... \cap A_{i_m}) = \P(A_{i_1}) \cdot \P(A_{i_2}) \cdots \P(A_{i_n}) \]
-  für beliebige $i_1, ..., i_n \in I, 2 \leq n < \infty$ und \emph{paarweise unabh.}, falls
-  \[ \P(A_i \cap A_j) = \P(A_i) \cdot \P(A_j) \text{ für } i, j \in I, i \not= j. \]
+  Sei $(A_i)_{i \in I}$ ($I$ bel.) eine Familie von Ereignissen in $\Alg$.
+
+  \begin{itemize}
+    \item \emph{vollständig unabhhängig}, falls
+    \[ \P(A_{i_1} \cap A_{i_2} \cap ... \cap A_{i_m}) = \P(A_{i_1}) \cdot \P(A_{i_2}) \cdots \P(A_{i_n}) \]
+    für alle $i_1, ..., i_n \in I$ mit $2 \leq n < \infty$ und
+    \item \emph{paarweise unabhängig}, falls
+    \[ \P(A_i \cap A_j) = \P(A_i) \cdot \P(A_j) \quad \text{ für alle } i, j \in I, i \not= j. \]
+  \end{itemize}
 \end{defn}
 
 \begin{acht}
@@ -158,12 +383,106 @@ Zu jeder Booleschen Algebra $\mathfrak{A}$ gibt es eine Menge $\Omega$ derart, d
 \end{acht}
 
 \begin{defn}
-  Sei $(\Omega, \Alg, \P)$ ein Wahrscheinlichkeitsraum und $\Alg_1, \Alg_2 \subset \Alg$ zwei Ereignissysteme. Dann sind $\Alg_1$ und $\Alg_2$ unabhängig, falls $\P(A_1 \cap A_2) = \P(A_1) \cdot \P(A_2)$ für alle $A_1 \in \Alg_1, A_2 \in \Alg_2$.
+  Sei $(\Omega, \Alg, \P)$ ein W-Raum und $\Alg_1, \Alg_2 \subset \Alg$ Ereignissysteme. Dann heißen $\Alg_1$ und $\Alg_2$ \emph{unabhängig}, falls
+  \[ \P(A_1 \cap A_2) = \P(A_1) \cdot \P(A_2) \quad \text{für alle } A_1 \in \Alg_1, A_2 \in \Alg_2. \]
 \end{defn}
 
 \begin{satz}
-  Seien $\Alg_1, \Alg_2$ zwei unabhängige Ereignisalgebren. Dann sind die $\sigma$-Algebren $\tilde{\Alg_1} = \sigma(\Alg_1)$ und $\tilde{\Alg_2} = \sigma(\Alg_2)$ unabhängig.
+  Seien $\Alg_1, \Alg_2 \subset \Alg$ unabhängige Ereignissysteme, die Algebren sind. Dann sind auch die $\sigma$-Algebren $\sigma(\Alg_1)$ und $\sigma(\Alg_2)$ unabhängig.
 \end{satz}
+
+% Ausgelassen: Anwendung in der Zuverlässigkeitsanalyse (Reihenschaltung von Parallelschaltungen)
+
+
+% Vorlesung 14
+
+% Kapitel 2.10. Bernoulli-Schema
+
+\begin{satz}
+  Sei $(\Omega, \Alg, \P)$ ein W-Raum, $(A_i)_{i \in \N}$ Folge von unabhängigen Ereignissen mit gleicher Erfolgswkt $\P(A_i) = p$ für alle $i \in \N$. Für $k \leq n$, $k, n \in \N$ ist dann die Wahrscheinlichkeit, dass genau $k$ Stück der Ereignisse $A_1, ..., A_n$ eintreten, genau
+  \[ B(k, n, p) \coloneqq \binom{n}{k} \, p^k \, (1-p)^{n-k} \]
+  Die zugehörige VF $x \mapsto \sum_{\mathclap{0 \leq k \leq x}} B(k,n,p)$ heißt \emph{Binomialverteilung}.
+\end{satz}
+
+% Ausgelassen: Beispiel: Rosinen werden in einen Teig gemengt
+
+\begin{lem}
+  Voraussetzung wir im vorherigen Satz. Sei $r, k \in \N$, $1 \leq r$, dann ist die Wkt für das Ereignis $A_k^{(r)}$, dass beim Versuch $A_{k+r}$ der $r$-te Erfolg eintritt, gleich
+  \[ \P(A_k^{(r)}) = \binom{k+r-1}{r-1} \, p^r \, (1-p)^k. \]
+  Im Spezialfall $r = 1$ ist $\P(A_k^{(1)}) = p \, (1-p)^k$.
+\end{lem}
+
+\begin{satz}
+  Sei $(\Omega, \Alg, \P)$ ein W-Raum, $A_1, ..., A_r \in \Alg$ mit $p_i \coloneqq \P(A_i)$ für $i = 1, ..., k$ und $p_1 + ... + p_r = 1$. Dann ist die Wahrscheinlichkeit, dass bei $n \in \N$ Versuchen $A_1$ genau $n_1$-mal, $A_2$ genau $n_2$-mal, ..., $A_r$ genau $n_r$-mal auftritt ($n_1 + ... + n_r = n$), genau
+  \[ B(n_1, ..., n_r, n, p_1, ..., p_r) \coloneqq \binom{n}{n_1, ..., n_r} p_1^{n_1} \cdots p_r^{n_r}. \]
+  Diese W-Verteilung heißt \emph{Multinomialverteilung}.
+\end{satz}
+
+% Kapitel 2.11. Grenzwertsatz von Poisson -- Gesetz der kleinen Zahlen
+
+\begin{satz}
+  Für $0 \leq m \leq n$, $p \in [0, 1]$ gilt
+  \[ \frac{\binom{M}{m} \binom{N-M}{n-m}}{\binom{N}{n}} \enspace \xrightarrow[M/N \to p]{M, N \to \infty} \enspace \binom{n}{m} \, p^m \, (1-p)^{n-m}. \]
+\end{satz}
+
+% Intuitive Interpretation: Ein Urnenmodell mit vielen Kugeln können wir auch als Bernoulli-Experiment auffassen, ohne uns einen zu großen Fehler einzuhandeln
+
+\begin{satz}[GWS von Poisson]
+  Für $k \in \N$, $\lambda \in \R_{>0}$ gilt
+  \[ \binom{n}{m} \, p_n^m \, (1-p_n)^{n-m} \enspace \xrightarrow[n p_n \to \lambda]{n \to \infty} \enspace \frac{\lambda^k}{k!} \exp(-\lambda). \]
+\end{satz}
+
+% Vorlesung 15
+
+% Vorlesung 16
+
+% Vorlesung 17
+
+% Vorlesung 18
+
+% Vorlesung 19
+
+% Vorlesung 20
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% End sortierte Einträge
+
+
+
+
+
 
 
 \begin{satz}[von Lusin]
@@ -317,9 +636,7 @@ Zu jeder Booleschen Algebra $\mathfrak{A}$ gibt es eine Menge $\Omega$ derart, d
 % * Binomial
 % * geometrische Verteilung
 % * Pascal-Verteilung
-% * Poisson-Verteilung
 % * (verallgemeinerte) hypergeometrische Verteilung
-% * Exponentialverteilung
 
 % Unabhängigkeit von Mengensystemen
 
@@ -385,8 +702,92 @@ $F = F_X$ sei die VF einer ZG $X : (\Omega, \Alg, \P) \to (\R^1, \Leb(\R^1), P_X
 \end{satz}
 
 \begin{defn}
-  Falls $F_X$ absolut-stetig, dann heißt die nichtnegative, Lebesgue-messbare Funktion $ff_X(x) \coloneqq \begin{cases} F'_X(x) & \text{falls Ableitung ex.} \\ 0 & \text{sonst,} \end{cases}$
+  Falls $F_X$ absolut-stetig, dann heißt die nicht-negative, Lebesgue-messbare Funktion $ff_X(x) \coloneqq \begin{cases} F'_X(x) & \text{falls Ableitung ex.} \\ 0 & \text{sonst,} \end{cases}$
   welche $\Int{\R^1}{}{f_X}{\lambda_1} = 1$ erfüllt, die \emph{W-Dichte} von $F_X$.
+\end{defn}
+
+% 10.1.2014
+
+\[ \E X = \Int{\R^1}{}{x}{F_X} = \Int{\R^1}{}{\id \cdot f_X}{\lambda} = \Int{- \infty}{\infty}{x \cdot f_X(x)}{x} \]
+
+\begin{bem}
+  Für diskrete $F_X$, also
+  \[ F(x) = c_i \quad \text{für alle} x \in \left] x_i, x_{i+1} \right[ \]
+  für $x_1, ... \in \R$ und $c_1, ... \in \R$ gilt
+  \[ \E X = \sum_{i=1} (x_{i}) \]
+\end{bem}
+
+% \[ \E X = \Int \]
+
+Deutung der $\E X$ als Massenschwerpunkte
+
+...
+
+% Analoge Betrachtungen für $k$-dimensionale Z-Verteilungen $(X_1, ..., X_k)$
+
+$F_(X_1, ..., X_k)$ heißt \emph{absolut stetig}, falls für alle $\epsilon > 0$ ein $\delta > 0$ existiert, sodass für $I_{\alpha} = \left] a_j, b_j \right]$, $j = 1, 2, ...$ mit $\sum_{j \geq 1} \lambda_k(I_j) \leq \delta$ gilt:
+\[ \sum_{j \geq 1} \P_{(X_1, ..., X_k)}(I) = \sum_{j \geq 1} (triangle F_{(X_1, ..., X_k)}) I_j \leq \epsilon \]
+
+Genau dann existiert eine (Lebesgue-) Borel-messbare Funktion $f_{(X_1, ..., Xk)}(x_1, ..., x_k) \geq 0$ mit $\Int{\R^1}{}{f_{(X_1, ..., X_k)}}{\lambda_k} = 1$
+
+Sei $g : \R^k \to \R^1$ Borel-messbar
+
+$\E g(X_1, ..., X_k) = \Int{\R^1}{}{g \cdot f_{(X_1, ..., X_k)}}{\lambda_k}$
+ 
+Falls $F_{(X_1, ..., X_k)}$ "hinreichend glatt", so ergibt sich
+$f_{X_1, ..., X_k}(x_1, ..., x_k) = \frac{\partial^k}{\partial_{x_1} \cdot \partial_{x_k}} F_{(X_1, ..., X_k)}(x_1, ..., x_k)$
+
+$F_{X_1, ..., X_k}$ heißt singulär-stetig, falls $P_{(X_1, ..., X_k)}(\{ x \}) = 0 \forall x \in \R^k$
+und es existiert eine Lebesgue-messbare Menge $S$ mit $\lambda_k(S) = 0$ und $P((X_1, ..., X_k))(S) = 1$.
+
+$F_{(X_1, ..., X_k)}$ heißt diskret, falls eine höchstens abzählbare Punktmenge $S = \{ x_1, ... \} \subset \R^k$ und $p_i = P_{(X_1, ..., X_k)}(\{ x_i \}) > 0$ mit $\sum_{i \geq 1} p_i = 1$
+
+Sei $x_i = (x_i^{(1)}, ..., x_i^{(k)}) \in \R^k$
+
+$\E g(X_1, ..., X_k) = \sum_{i \geq 1} g(x_i^{(1)}, ..., x_i^{(k)}) p_i$
+
+% Riemann-Stieltjes-Integral
+
+$g : \R^1 \to \R^1$ sei zunächst beliebig (stetig oder hinreichend glatt)
+
+Sei $a = \xi_0^{(n)} < \xi_1^{(n)} < ... < x_{k_n}^{(n)}$ und $x_k^{(n)} \in \left] \xi_{k-1}^{(n)}, \xi_{k}^{(n)} \right[$.
+
+\begin{defn}
+  $(\xi_n)$ sei eine Zerlegungsfolge mit $\max_{1 \leq k \leq k_n} (x_k^{(n)} - x_{k-1}^{(n)}) \xrightarrow{n \to \infty} 0$
+
+  $(x_k^{(n)})$ sei eine Zwischenwertfolge
+
+  \[ \lim_{n \to \infty} \sum_{k=1}^{k_n} g(x_k^{(n)}) (F(x_k^{(n)}) - F(x_{k-1}^{(n)})) = \Int{a}{b}{g(x)}{F(x)} = \Int{[a, b]}{}{g}{F\lambda_1} \]
+
+  wobei $F : \R^1 \to \R^1$ zunächst beliebig (monoton oder von beschränkter Variation)
+\end{defn}
+
+% partielle Integration für R-S-Integrale
+
+Sei $g$ bzgl. $F$ R-S-integrierbar, d.\,h. der Grenzwert oben existiert
+Dann ist auch $F$ bzgl. $g$ R-S-integrierbar und es gilt
+
+\[ \Int{a}{b}{g(x)}{F(x)} = [g(x) \cdot F(x)]_a^b - \Int{a}{b}{F(x)}{g(x)} \]
+
+Ausnutzen der partiellen Integration zur Berechnung von Erwartungswerten
+
+\[ \E X = \Int{- \infty}{\infty}{x}{F(x)} \]
+\[ \Int{a}{b}{x}{F_X(x)} = \lim_{a \to -\infty, b \to \infty} [x \cdot F_X(-x)]_0^{-a} - \Int{0}{-a}{F_X(-x)}{x} + [x (F_X(x) - 1)]_0^b - \Int{0}{b}{(F_X(x) - 1)}{x} \]
+
+Falls $\lim{x \to \infty} x F_X(-x) = \lim{x \to \infty} x (1 - F_X(x)) = 0$, so gilt
+
+$\E X = \Int{0}{\infty}{1 - F_X(x) - F_X(-x)}{x}$, falls $\E |X| < \infty$
+
+$\E |X| = \Int{0}{\infty}{1 - F_X(x) - F_X(-x)}{x}$
+
+Genauso werden Erwartungswerte von Funktionen von $X$ berechnet, z.B. mit $x^2 F_X(-x) \xrightarrow{x \to \infty} 0$ und $x^2 (1 - F_X(x)) \xrightarrow{x \to \infty} 0$
+
+$\E X^2 = 2 \Int{0}{\infty}{x (1 - F_X(x) + F_X(-x))}{x} = \P(|X| > x)$ (falls $F_X$ stetig)
+
+$\E |X|^k = k \Int{0}{\infty}{x^{k-1} (1 - F_X(x) + F_X(-x))}{x}$
+
+\begin{defn}
+  $\E X^k$ ($\E |X|^k$) heißt $k$-tes (absolutes) Moment der ZG $X$. $\E (X - \E X)^k$ heißt $k$-tes zentriertes Moment der ZG X. $\mathrm{Var}(X) \coloneqq D^2 X = \E (X - \E X)^2 = \E X^2$ heißt \emph{Streuung} (Dispersion, Varianz) der ZG $X$.
 \end{defn}
 
 \end{document}

@@ -38,6 +38,7 @@
 \newtheorem*{nota}{Notation}
 \newtheorem*{defn}{Definition}
 \newtheorem*{bsp}{Beispiel}
+\newtheorem*{bspe}{Beispiele}
 \newtheorem*{satz}{Satz}
 \newtheorem*{lem}{Lemma}
 \newtheorem*{kor}{Korollar}
@@ -50,6 +51,8 @@
 \newtheorem*{eig}{Eigenschaft}
 \newtheorem*{eign}{Eigenschaften}
 \newtheorem*{prop}{Proposition}
+\newtheorem*{modell}{Modell}
+\newtheorem*{sprech}{Sprechweise}
 
 \theoremstyle{remark}
 \newtheorem*{bem}{Bemerkung}
