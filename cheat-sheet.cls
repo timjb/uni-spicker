@@ -40,8 +40,10 @@
 \newtheorem*{bsp}{Beispiel}
 \newtheorem*{bspe}{Beispiele}
 \newtheorem*{satz}{Satz}
+\newtheorem*{beweis}{Beweis}
 \newtheorem*{lem}{Lemma}
 \newtheorem*{kor}{Korollar}
+\newtheorem*{korollar}{Korollar}
 \newtheorem*{acht}{Achtung}
 \newtheorem*{strat}{Strategie}
 \newtheorem*{prob}{Problem}

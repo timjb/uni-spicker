@@ -59,7 +59,7 @@
   Gesucht ist eine Abbildung $\mu : \PS(\R^n) \to [0, \infty]$ wie im schwachen Maßproblem, die anstelle der endlichen Additivität die Eigenschaft der $\sigma$-Additivität besitzt:
   \begin{itemize}
     \item Für eine Folge $(A_n)_{n \in \N}$ pw. disjunkter Teilmengen des $\R^n$ ist
-      \[ \mu\left(\bigcup_{n \in \N} A_n\right) = \sum_{n=0}^\infty \mu(A_n) \]
+      \[ \mu\left(\bigcup_{n \in \N} A_n\right) = \sum_{n=0}^\infty \mu(A_n). \]
   \end{itemize}
 \end{prob}
 
@@ -72,7 +72,7 @@
 \end{nota}
 
 \begin{defn}
-  Eine Teilmenge $\Ring \subset \PSO$ heißt \emph{Ring}, wenn für $A, B \in \Ring$ gilt:
+  $\Ring \subset \PSO$ heißt \emph{Ring}, wenn für alle $A, B \in \Ring$ gilt:
   \begin{itemize}
     \miniitem{0.13 \linewidth}{$\emptyset \in \Ring$}
     \miniitem{0.85 \linewidth}{Abgeschlossenheit unter Differenzen: $A \setminus B \in \Ring$}
@@ -81,7 +81,7 @@
 \end{defn}
 
 \begin{defn}
-  Eine Teilmenge $\Alg \subset \PSO$ heißt \emph{Algebra}, wenn für $A, B \in \Alg$ gilt:
+  $\Alg \subset \PSO$ heißt \emph{Algebra}, wenn für alle $A, B \in \Alg$ gilt:
   \begin{itemize}
     \miniitem{0.13 \linewidth}{$\emptyset \in \Alg$}
     \miniitem{0.85 \linewidth}{Abgeschlossenheit unter Komplementen: $A^c = \Omega \setminus A \in \Alg$}
@@ -284,13 +284,10 @@
 
 \begin{bem}
   Im Beweis wird ein äußeres Maß auf $\Omega$ so definiert:
-
-  \[ \mu^*(Q) \coloneqq \inf \left\{ \sum_{i = 0}^\infty \mu(A_n) \,\middle|\, (A_n)_{n \in \N} \in \mathfrak{U}(Q) \right\}, \]
-
-  wobei $\inf \emptyset \coloneqq \infty$ und
-
-  \[ \mathfrak{U}(Q) \coloneqq \left\{ (A_n)_{n \in \N} \,\middle|\, Q \subset \bigcup_{n = 0}^\infty A_n \text{ und } A_n \text{ Folge in } \Ring \right\}. \]
-
+  \begin{align*}
+    \mathfrak{U}(Q) &\coloneqq \left\{ (A_n)_{n \in \N} \,\middle|\, Q \subset \bigcup_{n = 0}^\infty A_n \text{ und } A_n \text{ Folge in } \Ring \right\}, \\
+    \mu^*(Q) &\coloneqq \inf \left( \left\{ \sum_{i = 0}^\infty \mu(A_n) \,\middle|\, (A_n)_{n \in \N} \in \mathfrak{U}(Q) \right\} \cup \{ \infty \} \right).
+  \end{align*}
   Das äußere Maß $\mu^*$ eingeschränkt auf $\Alg^* \supset \Alg(\Ring)$ ist ein Maß.
 \end{bem}
 
@@ -322,11 +319,11 @@
 \end{defn}
 
 \begin{satz}
-  Für alle $A \in \Ring(\mathcal{E})$ gibt es paarweise disjunkte Elementarquader $Q_1, ..., Q_p \in \mathcal{E}$ sodass $A = \sqcup_{i = 1}^p Q_i$.
+  Für alle $A \in \Ring(\mathcal{E})$ gibt es paarweise disjunkte Elementarquader $Q_1, ..., Q_p \in \mathcal{E}$ sodass $A = Q_1 \sqcup ... \sqcup Q_p$.
 \end{satz}
 
 \begin{defn}
-  Für $A \in \Ring(\mathcal{E})$ setze $\mu(A) \coloneqq \textstyle\sum_{i = 1}^p \mu(Q_i)$, wenn $A = \sqcup_{i = 1}^p Q_i$ für paarweise disjunkte $Q_1, ..., Q_p$.
+  Für $A \in \Ring(\mathcal{E})$ setze $\mu(A) \coloneqq \textstyle\sum_{i = 1}^p \mu(Q_i)$, wenn $A = Q_1 \sqcup ... \sqcup Q_p$ für paarweise disjunkte $Q_1, ..., Q_p$.
 \end{defn}
 
 \begin{satz}
@@ -526,8 +523,7 @@
 
 \begin{defn}
   Sei $f \in \E(\Omega, \Alg)$ und $\Omega = A_1 \sqcup ... \sqcup A_k$ eine disjunkte Vereinigung von Mengen mit $A_j \in \Alg$ für alle $j = 1, ..., k$, sodass $f(A_j) = \{ y_j \}$, dann heißt die Darstellung
-  \[ f = \sum_{j=1}^k y_j \cdot \ind_{A_j} \]
-  \emph{kanonische Darstellung} von $f$.
+  \[ f = \sum_{j=1}^k y_j \cdot \ind_{A_j} \quad \text{\emph{kanonische Darstellung}.} \]
 \end{defn}
 
 \begin{bem}
@@ -549,8 +545,7 @@
 
 \begin{defn}
   Sei $f \in \E(\Omega, \Alg)$ und $\textstyle f = \sum_{j=1}^k y_j \ind_{A_j}$ eine kanonische Darstellung von $f$. Sei ferner $\mu$ ein Maß auf $\Alg$. Dann heißt die Größe
-  \[ \IntOmu{f} \coloneqq \sum_{j=1}^k y_j \mu(A_j) \]
-  das Lebesgue-Integral von $f$ auf $\Omega$ bzgl. des Maßes $\mu$.
+  \[ \IntOmu{f} \coloneqq \sum_{j=1}^k y_j \mu(A_j) \quad \text{\emph{Lebesgue-Integral} von $f$ bzgl. $\mu$.} \]
 \end{defn}
 
 \begin{bem}
@@ -560,8 +555,7 @@
 \begin{satz}
   Seien $f, g \in \E(\Omega, \Alg)$, $\mu$ ein Maß auf $\Alg$ und $\alpha \geq 0$, dann gilt
   \begin{itemize}
-    \item $\IntOmu{(\alpha f)} = \alpha \IntOmu{f}$
-    \item Additivität: $\IntOmu{(f + g)} = \IntOmu{f} + \IntOmu{g}$
+    \item Linearität: $\IntOmu{(\alpha \cdot f + g)} = \alpha \cdot \IntOmu{f} + \IntOmu{g}$
     \item Monotonie: Falls $g \leq f$, dann $\IntOmu{g} \leq \IntOmu{f}$
   \end{itemize}
 \end{satz}
@@ -581,8 +575,7 @@
 
 \begin{defn}
   Für eine Funktion $f \in \overline{\E}(\Omega, \Alg)$ (d.\,h. es existiert eine Folge $(g_n)_{n \in \N}$ in $\E(\Omega, \Alg)$ mit $f = \sup_{n \in \N} g_n$) und ein Maß $\mu$ auf $\Alg$ heißt
-  \[ \IntOmu{f} \coloneqq \sup_{n \in \N} \IntOmu{g_n} \]
-  \emph{Lebesgue-Integral} von $f$ über $\Omega$ bzgl. $\mu$.
+  \[ \IntOmu{f} \coloneqq \sup_{n \in \N} \IntOmu{g_n} \quad \text{\emph{Lebesgue-Integral} von $f$ bzgl. $\mu$.} \]
 \end{defn}
 
 \begin{satz}
@@ -603,7 +596,7 @@
 \end{bem}
 
 \begin{defn}
-  Eine messbare Funktion $f : (\Omega, \Alg) \to (\ER, \overline{\Bor})$ heißt \emph{integrierbar} oder genauer $\mu$-integrierbar (im Sinne von Lebesgue), wenn gilt:
+  Eine messbare Funktion $f : (\Omega, \Alg) \to (\ER, \overline{\Bor})$ heißt \emph{integrierbar} bzw. $\mu$-integrierbar (im Sinne von Lebesgue), falls
   \[ \IntOmu{f^+} < \infty \quad \text{und} \quad \IntOmu{f^-} < \infty. \]
   In diesem Fall definieren wir das \emph{Lebesgue-Integral} von $f$ als
   \[ \IntOmu{f} \coloneqq \IntOmu{f^+} - \IntOmu{f^-}. \]
@@ -744,6 +737,8 @@
   $F'(t) = \IntOmu{h_t}$, wobei $h_t : \Omega \to \R, \, \omega \mapsto f(-, \omega)'(t)$.
 \end{satz}
 
+\begin{samepage}
+
 \begin{satz}
   Sei $f \in \overline{\E}(\Omega, \Alg, \mu)$. Dann ist die Abbildung
   \[ f \mu : \Alg \to [0, \infty], \quad A \mapsto \Int{A}{}{f}{\mu} \]
@@ -751,6 +746,8 @@
 \end{satz}
 
 \subsection{Zusammenhang mit dem Riemann-Integral}
+
+\end{samepage}
 
 \begin{defn}
   Eine \emph{Zerlegung} eines Intervalls $[a, b]$ ist eine geordnete endliche Teilmenge $\{ a = a_0 < a_1 < ... < a_k = b\} \subset [a, b]$.
@@ -1051,8 +1048,6 @@
   \end{itemize}
 \end{satz}
 
-\begin{samepage}
-
 \begin{satz}[Fubini]
   Sei $f : \Omega_1 \times \Omega_2 \to \ER$ $(\mu_1 \otimes \mu_2)$-integrierbar. Dann ist für $\mu_1$-fast-alle $\omega_1 \in \Omega_1$ der Schnitt $f_{\omega_1}$ $\mu_2$-integrierbar, und die $\mu_1$-fast-überall definierte Funktion $\omega_1 \mapsto \Int{\Omega_2}{}{f_{\omega_1}}{\mu_2}$ ist $\mu_1$-integrierbar. Analoges gilt mit $1$ und $2$ vertauscht. Es gilt:
   \[ \Int{\Omega_1 \times \Omega_2}{}{f}{(\mu_1 \otimes \mu_2)} = \Int{\Omega_1}{}{(\Int{\Omega_2}{}{f_{\omega_1}}{\mu_2})}{\mu_1} = \Int{\Omega_2}{}{(\Int{\Omega_1}{}{f_{\omega_2}}{\mu_1})}{\mu_2}. \]
@@ -1066,8 +1061,6 @@
 \end{nota}
 
 \subsection{Alternierende Multilinearformen}
-
-\end{samepage}
 
 \begin{defn}
   Eine \emph{alternierende $k$-Form} auf $V$ ist eine Abb.
