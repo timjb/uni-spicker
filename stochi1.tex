@@ -5,14 +5,17 @@
   /Author (Tim Baumann)
 }
 
-\newcommand{\Alg}{\mathfrak{A}}
-\newcommand{\Ring}{\mathfrak{R}}
+\usepackage{bbm} % Für 1 mit Doppelstrich (Indikatorfunktion)
+
+\newcommand{\Alg}{\mathfrak{A}} % (Mengen-)Algebra
+\newcommand{\Ring}{\mathfrak{R}} % (Mengen-)Ring
 \newcommand{\LebAlg}{\mathfrak{L}} % Lebesgue-Borel-Mengen
 \renewcommand{\P}{\mathbb{P}}
-\newcommand{\E}{\mathbb{E}} % elementary functions
-\newcommand{\ER}{\overline\R} % extended reals
+\newcommand{\E}{\mathbb{E}} % Elementare Funktion
+\newcommand{\ER}{\overline\R} % Erweiterte reelle Zahlen
 \newcommand{\Bor}{\mathfrak{B}} % Borel
 \newcommand{\Leb}{\mathcal{L}} % Lebesgue
+\newcommand{\ind}{\mathbbm{1}} % Indikatorfunktion
 
 \newcommand{\IntO}[2]{\Int{\Omega}{}{#1}{#2}} % Integral über \Omega
 \newcommand{\IntOmu}[1]{\Int{\Omega}{}{#1}{\mu}} % Integral über \Omega bzgl. \mu
@@ -138,7 +141,7 @@ Zu jeder Booleschen Algebra $\mathfrak{A}$ gibt es eine Menge $\Omega$ derart, d
 % Vorlesung 9
 
 \begin{bem}
-  Sei $\mu$ ein W-Maß auf $\Leb(\R^1)$. Dann definiert $x \mapsto F_{\mu}(x) \coloneqq \mu(\left] -\infty, x \right])$ eine VF. Für eine VF $F : \R \to [0,1]$ definiert umgekehrt $\mu_F(\left] a, b \right]) \coloneqq F(b) - F(a)$ ein W-Maß auf $\Leb(\R^1)$. Analog funktioniert dies auf dem $\R^d$.
+  Sei $\mu$ ein W-Maß auf $\LebAlg(\R^1)$. Dann definiert $x \mapsto F_{\mu}(x) \coloneqq \mu(\left] -\infty, x \right])$ eine VF. Für eine VF $F : \R \to [0,1]$ definiert umgekehrt $\mu_F(\left] a, b \right]) \coloneqq F(b) - F(a)$ ein W-Maß auf $\LebAlg(\R^1)$. Analog funktioniert dies auf dem $\R^d$.
 \end{bem}
 
 % Wichtige Verteilungsfunktionen:
@@ -161,7 +164,9 @@ Zu jeder Booleschen Algebra $\mathfrak{A}$ gibt es eine Menge $\Omega$ derart, d
 % Ausgelassen: Gauß-Levy-Kuzmin-Theorem, und zugehörige Verteilung
 % Ausgelassen: Wiener Maß für Modellierung von Brown'scher Bewegung
 
-% Kapitel 2. Elementare Wahrscheinlichkeitsrechnung
+% Kapitel 2.
+
+\section{Elementare Wahrscheinlichkeitsrechnung}
 
 % Kapitel 2.1. Definition der relativen und bedingten relativen Häufigkeit
 
@@ -176,12 +181,8 @@ Zu jeder Booleschen Algebra $\mathfrak{A}$ gibt es eine Menge $\Omega$ derart, d
 \begin{bem}
   Unmittelbar klar:
   \begin{itemize}
-    \begin{minipage}{0.35\linewidth}
-      \item $H_n(A) \in [0,1]$
-    \end{minipage}
-    \begin{minipage}{0.60\linewidth}
-      \item $H_n(A) \leq H_n(B)$ für $A \subset B$
-    \end{minipage}
+    \miniitem{0.35\linewidth}{$H_n(A) \in [0,1]$}
+    \miniitem{0.60\linewidth}{$H_n(A) \leq H_n(B)$ für $A \subset B$}
     \item $H_n(A \sqcup B) = H_n(A) + H_n(B)$ für $A \cap B = \emptyset$
   \end{itemize}
 \end{bem}
@@ -202,12 +203,8 @@ Zu jeder Booleschen Algebra $\mathfrak{A}$ gibt es eine Menge $\Omega$ derart, d
 \begin{bem}
   Offenbar gilt:
   \begin{itemize}
-    \begin{minipage}{0.35\linewidth}
-      \item $H_n(A \mid B) \in [0,1]$
-    \end{minipage}
-    \begin{minipage}{0.60\linewidth}
-      \item $H_n(A_1 \mid B) \leq H_n(A_2 \mid B)$ für $A_1 \subset A_2$
-    \end{minipage}
+    \miniitem{0.35\linewidth}{$H_n(A \mid B) \in [0,1]$}
+    \miniitem{0.60\linewidth}{$H_n(A_1 \mid B) \leq H_n(A_2 \mid B)$ für $A_1 \subset A_2$}
     \item $H_n(A_1 \sqcup A_2 \mid B) = H_n(A_1 \mid B) + H_n(A_2 \mid B)$ für $A_1 \cap A_2 = \emptyset$
   \end{itemize}
 \end{bem}
@@ -215,9 +212,9 @@ Zu jeder Booleschen Algebra $\mathfrak{A}$ gibt es eine Menge $\Omega$ derart, d
 % Kapitel 2.2. Geometrische Wahrscheinlichkeiten
 
 \begin{defn}
-  Sei $\Omega \in \Leb(\R^d)$ mit $\lambda_d(\Omega) > 0$. Dann heißt das W-Maß
-  \[ \P : \Leb(\Omega) \to [0, 1], \quad A \mapsto \tfrac{\lambda_d(A)}{\lambda_d(\Omega)} \]
-  auf $(\Omega, \Leb(\Omega))$ \emph{Gleichverteilung}.
+  Sei $\Omega \in \LebAlg(\R^d)$ mit $\lambda_d(\Omega) > 0$. Dann heißt das W-Maß
+  \[ \P : \LebAlg(\Omega) \to [0, 1], \quad A \mapsto \tfrac{\lambda_d(A)}{\lambda_d(\Omega)} \]
+  auf $(\Omega, \LebAlg(\Omega))$ \emph{Gleichverteilung}.
 \end{defn}
 
 \begin{defn}
@@ -432,28 +429,358 @@ Zu jeder Booleschen Algebra $\mathfrak{A}$ gibt es eine Menge $\Omega$ derart, d
   \[ \binom{n}{m} \, p_n^m \, (1-p_n)^{n-m} \enspace \xrightarrow[n p_n \to \lambda]{n \to \infty} \enspace \frac{\lambda^k}{k!} \exp(-\lambda). \]
 \end{satz}
 
+
 % Vorlesung 15
+
+\begin{defn}
+  Sei $(\Omega, \Alg)$ ein messbarer Raum mit zwei W-Maßen $\P_1$ und $\P_2$. Dann heißt
+  \[ \mathrm{d}_\infty(\P_1, \P_2) \coloneqq \sup_{A \in \Alg} \abs{\P_1(A) - \P_2(A)} \]
+  \emph{Totalvariation} des signierten Maßes $\P_1 - \P_2$.
+\end{defn}
+
+\begin{satz}
+  Seien $\P_1$ und $\P_2$ zwei W-Maße auf $(\N, \mathcal{P}(\N))$, $\P_1(\{ i \}) = p_i$, $\P_2(\{ i \}) = q_i$ für alle $i \in \N$. Dann gilt
+  \[ \mathrm{d}_\infty(\P_1, \P_2) = \tfrac{1}{2} \sum_{i=0}^\infty \abs{p_i - q_i}. \]
+\end{satz}
+
+\begin{lem}
+  Für $n, k \in \N$, $p \in \left[0,1\right]$ und $\P_1$ und $\P_2$ wie eben definiert durch $p_i \coloneqq \binom{n}{k} p^k (1-p)^{n-k}$, $q_i \coloneqq \tfrac{(np)^k}{k!} \exp(-np)$ gilt
+  \[ \mathrm{d}_\infty(\P_1, \P_2) \leq 2 n p^2. \]
+\end{lem}
+
+% Kapitel 2.10. 0-1-Gesetze von Borel-Cantelli und Kolmogorow
+
+\begin{lem}[Borel-Cantelli]
+  Sei $(A_n)_{n \in \N}$ eine Folge von Ereignissen über $(\Omega, \Alg, \P)$. Dann gilt für $A = \limsup_{n \to \infty} A_n$
+  \[ \sum_{n=1}^\infty \P(A_n) < \infty \enspace \implies \enspace \P(A) = 0. \]
+  Falls die Ereignisse $(A_n)_{n \in \N}$ unabhängig sind, so gilt
+  \[ \sum_{n=1}^\infty \P(A_n) = \infty \enspace \implies \enspace \P(A) = 1, \]
+  also zusammengefasst $\P(A) \in \{ 0, 1 \}$.
+\end{lem}
+
+\begin{defn}
+  Sei $(\Alg_n)_{n \in \N}$ Folge von $\sigma$-Algebren über $\Omega$. Dann ist
+  \[ \mathcal{T}_\infty = \bigcap_{n=1}^\infty \mathcal{T}_n \quad \text{mit} \quad \mathcal{T}_n \coloneqq \sigma \left( \bigcup_{k=n}^\infty \Alg_k \right) \]
+  die \emph{terminale $\sigma$-Algebra} von $(\Alg_n)_{n \in \N}$.
+\end{defn}
+
+% Was bedeutet Unabhängigkeit von $\sigma$-Algebren?
+
+\begin{satz}[Null-Eins-Gesetz von Kolmogorow]
+  Sei $(\Alg_n)_{n \in \N}$ eine Folge von unabhängigen Unter-$\sigma$-Algebren in einem W-Raum $(\Omega, \Alg, \P)$. Dann gilt $\P(A) \in \{ 0, 1 \}$ für alle Ereignisse $A \in \mathcal{T}_\infty$ der terminalen $\sigma$-Algebra.
+\end{satz}
+
+% Kapitel 3. Integrationstheorie
+
+\section{Integrationstheorie}
+
+% Kapitel 3.1. Messbare Abbildungen und Zufallsgrößen
+
+\begin{defn}
+  Seien $(\Omega_1, \Alg_1)$ und $(\Omega_2, \Alg_2)$ messbare Räume. Dann heißt $f : \Omega_1 \to \Omega_2$ \emph{$(\Alg_1, \Alg_2)$-messbar}, falls
+  \[ f^{-1}(A_2) \in \Alg_1 \quad \text{für alle } A_2 \in \Alg_2. \]
+\end{defn}
+
+\begin{nota}
+  Für solches $f$ schreiben wir $f : (\Omega_1, \Alg_1) \to (\Omega_2, \Alg_2)$.
+\end{nota}
+
+\begin{nota}
+  Sei $\Omega$ eine Menge, $A \subset \Omega$. Dann heißt
+  \[ \ind_A : \Omega \to \R, \quad \omega \mapsto \abs{\Set{ \star }{ \omega \in A }} =
+  \begin{cases}
+    1, & \text{falls } \omega \in A \\
+    0, & \text{falls } \omega \not\in A
+  \end{cases} \]
+  \emph{Indikatorfunktion} von $A$.
+\end{nota}
+
+\begin{beobachtung}
+  Sei $(\Omega, \Alg)$ messbarer Raum, $A \subset \Omega$, dann gilt
+  \[ \ind_A \text{ $(\Alg, \LebAlg(\R^1))$-messbar} \enspace \iff \enspace A \in \Alg. \]
+\end{beobachtung}
+
 
 % Vorlesung 16
 
+\begin{lem}
+  Die Verkettung messbarer Abbildungen ist messbar, d.\,h. für $f : (\Omega_1, \Alg_1) \to (\Omega_2, \Alg_2)$ und $g : (\Omega_2, \Alg_2) \to (\Omega_3, \Alg_3)$ gilt $g \circ f : (\Omega_1, \Alg_1) \to (\Omega_3, \Alg_3)$.
+\end{lem}
+
+\begin{lem}
+  Sei $f : \Omega \to \Omega'$ eine Abb. und $\mathcal{E}' \subset \mathcal{P}(\Omega)$, dann ist
+  \[ \Alg(f^{-1}(\mathcal{E}')) = f^{-1}(\Alg(\mathcal{E}')). \]
+\end{lem}
+
+\begin{lem}
+  Sei $(\Omega, \Alg)$ ein messbarer Raum und $f : \Omega \to \Omega'$ eine Abbildung, sowie $\mathcal{E} \subset \P(\Omega')$. Dann gilt
+  \[ f \text{ ist $(\Alg, \sigma(\mathcal{E}))$-messbar} \enspace \iff \enspace f^{-1}(E) \in \Alg \text{ für alle } E \in \mathcal{E}. \]
+\end{lem}
+
+\begin{nota}
+  Seien $f, g : \Omega \to \overline{\R}$ zwei numerische Funktionen. Setze
+    \[ \{ f \leq g \} \coloneqq \Set{ \omega \in \Omega }{ f(\omega) \leq g(\omega) } \subset \Omega \]
+  und definiere analog $\{ f < g \}$, $\{ f \geq g \}$, $\{ f > g \}$, $\{ f = g \}$, $\{ f \not= g \}$.
+\end{nota}
+
+\begin{satz}
+  Für eine numerische Fkt. $f : (\Omega, \Alg) \to (\ER, \overline{\Bor})$ sind äquivalent:
+  \begin{itemize}
+    \miniitem{0.27 \linewidth}{$f$ ist messbar}
+    \miniitem{0.7 \linewidth}{$\forall \, a \in \R \,:\, \{ f \geq a \} = f^{-1}([a, \infty]) \in \Alg$}
+    \begin{multicols}{2}
+      \item $\forall \, a \in \R \,:\, \{ f > a \} \in \Alg$
+      \item $\forall \, a \in \R \,:\, \{ f \leq a \} \in \Alg$
+    \end{multicols}
+    \item $\forall \, a \in \R \,:\, \{ f < a \} \in \Alg$
+  \end{itemize}
+\end{satz}
+
+\begin{defn}
+  \begin{itemize}
+    \item Sei $(\Omega, \Alg)$ ein messbarer Raum, $f : \Omega' \to \Omega$ eine Abbildung, dann heißt
+    \[ \sigma(f) \coloneqq f^{-1}(\Alg) \coloneqq \Set{ f^{-1}(A) }{ A \in \Alg } \]
+    die \emph{von $f$ erzeugte $\sigma$-Algebra}.
+    \item Sei $(\Omega_i, \Alg_i)_{i \in I}$ eine Familie von messbaren Räumen, $f_i : \Omega' \to \Omega_i$ für alle $i \in I$ eine Abbildung. Dann heißt
+    \[ \sigma((f_i)_{i \in I}) \coloneqq \sigma(\bigcup_{i \in I} \sigma(f_i)) = \sigma(\bigcup_{i \in I} f_i^{-1}(\Alg_i)) \]
+    die \emph{von der Familie $(f_i)_{i \in I}$ erzeugte $\sigma$-Algebra}.
+  \end{itemize}
+\end{defn}
+
+\begin{defn}
+  Sei $(\Omega', \Alg', \mu')$ ein Maßraum, $(\Omega, \Alg)$ ein messbarer Raum, $f : (\Omega', \Alg) \to (\Omega, \Alg)$. Dann ist durch
+  \[ \mu'_f \coloneqq \mu' \circ f^{-1} : \Alg \to [0, \infty], \quad A \mapsto \mu'(f^{-1}(A)) \]
+  ein Maß auf $(\Omega, \Alg)$, das sog. \emph{Bildmaß} von $\mu'$ unter $f$, definiert.
+\end{defn}
+
+\begin{satz}
+  Für zwei numerische Funktionen $f, g : (\Omega, \Alg) \to (\ER, \overline{\Bor})$ gilt:
+  \begin{multicols}{3}
+    \begin{itemize}
+      \item $\{ f < g \} \in \Alg$
+      \item $\{ f \leq g \} \in \Alg$
+      \item $\{ f > g \} \in \Alg$
+      \item $\{ f \geq g \} \in \Alg$
+      \item $\{ f = g \} \in \Alg$
+      \item $\{ f \not= g \} \in \Alg$
+    \end{itemize}
+  \end{multicols}
+\end{satz}
+
+\begin{satz}
+  Seien $f, g : (\Omega, \Alg) \to (\ER, \overline{\Bor})$ messbare numerische Funktionen und $\lambda, \mu \in \R$. Dann auch messbar (\ddag: falls $0 \not\in \mathrm{Bild}(f)$):
+  \begin{multicols}{5}
+    \begin{itemize}
+      \item $\lambda \cdot f$
+      \item $f + \mu \cdot g$
+      \item $f \cdot g$
+      \item $\tfrac{1}{f}$ (\ddag)
+      \item $\tfrac{g}{f}$ (\ddag)
+    \end{itemize}
+  \end{multicols}
+\end{satz}
+
+\begin{satz}
+  Seien $f_n : (\Omega, \Alg) \to (\ER, \overline{\Bor}), n \in \N$ messbare numerische Funktionen, dann auch messbar:
+  \begin{multicols}{4}
+    \begin{itemize}
+      \item $\sup_{n \in \N} f_n$
+      \item $\inf_{n \in \N} f_n$
+      \item $\liminf_{n \in \N} f_n$
+      \item $\limsup_{n \in \N} f_n$
+    \end{itemize}
+  \end{multicols}
+  \vspace{4pt}
+  Dabei werden Infimum, Supremum, usw. punktweise gebildet.
+\end{satz}
+
+\begin{defn}
+  Für $f : \Omega \to \ER$ heißen die Funktionen
+  \begin{itemize}
+    \item $\left|f\right| \coloneqq \max(f, -f) : \Omega \to [0, \infty]$ \emph{Betrag} von $f$
+    \item $f^+ \coloneqq \,\,\,\, \max(f, 0) : \Omega \to [0, \infty]$ \emph{Positivteil} von $f$
+    \item $f^- \coloneqq -\min(f, 0) : \Omega \to [0, \infty]$ \emph{Negativteil} von $f$
+  \end{itemize}
+\end{defn}
+
+\begin{satz}
+  Falls $f : (\Omega, \Alg) \to (\ER, \overline\Bor)$ messbar, dann auch $\left|f\right|$, $f^+$ und $f^-$.
+\end{satz}
+
+
 % Vorlesung 17
 
+\begin{satz}
+  \begin{itemize}
+    \item Sei $(\Omega, \mathcal{O})$ ein topologischer Raum und $f : \Omega \to \R^n$ stetig. Dann ist $f$ $(\sigma(\mathcal{O}), \Bor(\R^n))$-messbar. % und $(\LebAlg(\mathcal{O}), \LebAlg(\R^n))$-messbar.
+    \item $\sigma(\mathcal{O})$ ist die kleinste $\sigma$-Algebra, bezüglich der alle stetigen Funktionen $f : \Omega \to \R^n$ Borel-messbar sind.
+  \end{itemize}
+\end{satz}
+
+\begin{satz}[von Lusin]
+  Sei $M \in \LebAlg(\R^n)$ mit $\lambda_n(M) < \infty$ und $f : M \to \R$ beschränkt. Dann ist $f$ genau dann Borel-messbar, wenn gilt:
+  \[ \forall \, \epsilon > 0 \,:\, \exists \, K_\epsilon \subset M \text{ kompakt} \,:\, \lambda_n(M \setminus K_\epsilon) < \epsilon \text{ und } f|_{K_\epsilon} \text{ stetig}. \]
+\end{satz}
+
+\begin{defn}
+  Eine Funktion $f : \R \to \R$ heißt \emph{Càdlàg-Funktion} (continue à droite, limite à gauche), falls für alle $x \in \R$ gilt:
+  \[ \lim_{y \uparrow x} f(y) \text{ existiert} \quad \text{und} \quad \lim_{y \downarrow x} f(y) = f(x). \]
+\end{defn}
+
+\begin{beobachtung}
+  Jede kumulierte VF ist eine Càdlàg-Funktion.
+\end{beobachtung}
+
+\begin{defn}
+Die \emph{Variation} von $g : [a, b] \to \R$ bzgl. einer Zerlegung $Z = \{ a = x_0 < ... < x_n = b \}$ von $[a, b]$ ist die nicht-negative Zahl
+\[ V(g, Z) \coloneqq \sum_{j=1}^{n} |g(x_j) - g(x_{j-1})|. \]
+Die \emph{Totalvariation} von $g : [a, b] \to \R$ ist
+\[ V_a^b(g) \coloneqq \sup\left\{ V(g, Z) : Z \text{ Zerlegung von } [a, b] \right\} \in \R_{\ge 0} \cup \{ \infty \}. \]
+Falls $V_a^b(g) < \infty$, so heißt $g$ \emph{von beschränkter Variation}.
+\end{defn}
+
+\begin{satz}
+  Es sind messbar:
+  \begin{itemize}
+    \begin{multicols}{2}
+      \item Monotone Funktionen
+      \item Càdlàg-Funktionen
+    \end{multicols}
+    \item Funktionen von beschränkter Variation
+  \end{itemize}
+\end{satz}
+
+\begin{defn}
+  Eine $\Alg$-messbare numerische Funktion $X$ über einem W-Raum $(\Omega, \Alg, \P)$ heißt \emph{Zufallsgröße} (ZG) oder \emph{Zufallsvariable}.
+\end{defn}
+
+% Bezeichnung: X, Y, Z, ...
+
+\begin{bem}
+  Häufig fordert man zusätzlich $\P(\{ X = \pm \infty \}) = 0$.
+\end{bem}
+
+\begin{defn}
+  Das durch die ZG $X$ induzierte Bildmaß
+  \[ P_X : \LebAlg(\R^1) \to [0,1], \quad B \mapsto \P(\{ X \in B \}) = \P(X^{-1}(B)) \]
+  heißt \emph{Verteilungsgesetz} der ZG $X$ und
+  \[ F_X : \R \to \R, \quad x \mapsto P_X(\left]-\infty, x\right]) = \P(\{ X \leq x \}) \]
+  heißt \emph{Verteilungsfunktion} (VF) der ZG $X$.
+\end{defn}
+
+% Kapitel 3.2. Existenz einer ZG bei gegebener VF
+
+\begin{satz}
+  Sei $F$ eine VF auf $\R^1$. Dann existiert ein W-Raum $(\Omega, \Alg, \P)$ und eine ZG $X$ auf $\Omega$ derart, dass $F_X = F$.
+\end{satz}
+
+\begin{beweis}
+  \begin{enumerate}
+    \item Möglichkeit: Wähle $\Omega \coloneqq \R^1$, $\Alg \coloneqq \LebAlg(\R^1)$ und $\P \coloneqq \mu_F$ als das von von $F$ erzeugte Maß und setze $X \coloneqq \id$.
+    \item Möglichkeit: Wähle $\Omega \coloneqq [0,1]$, $\Alg \coloneqq \Leb([0,1])$, $\P \coloneqq \lambda_1$. Setze
+    \[
+      X(w) \coloneqq F^{-}(w) \coloneqq \inf \{ F \geq w \} \enspace \text{ für } w > 0, \quad
+      X(0) \coloneqq \lim_{w \downarrow 0} F^{-}(w)
+    \]
+  \end{enumerate}
+\end{beweis}
+
+% Ausgelassen: Wichtiges Prinzip bei der erzeugung von Pseudo-Zufallszahlen
+
+
 % Vorlesung 18
+
+\begin{defn}
+  Sei $X_1, ..., X_n$ eine endliche Familie von ZGen über $(\Omega, \Alg, \P)$. Diese Familie heißt \emph{stochastisch unabhängig}, falls
+  \[ \P(\bigcap_{i=1}^n \{ X_i \in B_i \}) = \prod_{i=1}^n \P(\{ X_i \in B_i \}) \quad \text{für alle $B_1, ..., B_n \in \LebAlg(\ER^1)$.} \]
+\end{defn}
+
+\begin{satz}
+  Seien $X_1, ..., X_n$ unabhängige ZGen über $(\Omega, \Alg, \P)$ und $g_1, ..., g_n : \R \to \R$ Borel-messbar. Setze $Y_i \coloneqq g_i(X_i) \coloneqq g_i \circ X_i$ für $i = 1, ..., n$, dann sind auch $Y_1, ..., Y_n$ unabhängige ZGen.
+\end{satz}
+
+% Kapitel 3.3. Integrale nichtnegativer messbarer Funktionen
+
+\begin{defn}
+  Eine Funktion $f : (\Omega, \Alg) \to (\R, \Bor)$ heißt \emph{einfache Funktion} oder \emph{Elementarfunktion} auf $(\Omega, \Alg)$, wenn gilt:
+  \begin{multicols}{3}
+    \begin{itemize}
+      \item $f$ ist messbar
+      \item $f(\Omega) \subset \left[0, \infty\right[$
+      \item $f(\Omega)$ ist endlich
+    \end{itemize}
+  \end{multicols}
+  Die Menge aller elementaren Funktionen auf $(\Omega, \Alg)$ ist $\E(\Omega, \Alg)$.
+\end{defn}
+
+\begin{nota}
+  $a \wedge b \coloneqq \min \{a, b\} \enspace \text{und} \enspace a \vee b \coloneqq \max \{a, b\}$
+\end{nota}
+
+\begin{satz}
+  Seien $f, g \in \E(\Omega, \Alg)$ und $a \geq 0$. Dann auch in $\E(\Omega, \Alg)$:
+  \begin{multicols}{5}
+    \begin{itemize}
+      \item $f + g$
+      \item $f \cdot g$
+      \item $f \vee g$
+      \item $f \wedge g$
+      \item $a \cdot f$
+    \end{itemize}
+  \end{multicols}
+\end{satz}
+
+\begin{defn}
+  Sei $f \in \E(\Omega, \Alg)$ und $\Omega = A_1 \sqcup ... \sqcup A_k$ eine disjunkte Vereinigung von Mengen mit $A_j \in \Alg$ für alle $j = 1, ..., k$, sodass $f(A_j) = \{ y_j \}$, dann heißt die Darstellung
+  \[ f = \sum_{j=1}^k y_j \cdot \ind_{A_j} \quad \text{\emph{kanonische Darstellung}.} \]
+\end{defn}
+
+\begin{defn}
+  Sei $(\Omega, \Alg, \mu)$ ein Maßraum, $f : \Omega \to \R$ elementar. Dann heißt die (von der Darstellung $f = \sum_{j=1}^k y_j \cdot \ind_{A_j}$ unabh.) Zahl
+  \[ \IntOmu{f} \coloneqq \sum_{j=1}^k y_j \mu(A_j) \quad \text{\emph{$\mu$-Integral} von $f$.} \]
+\end{defn}
+
+\begin{satz}
+  Es gilt für $f, g \in \E(\Omega, \Alg)$, $a, b \geq 0$:
+  \begin{itemize}
+    \miniitem{0.3\linewidth}{$\IntOmu{\ind_A} = \mu(A)$}
+    \miniitem{0.5\linewidth}{$f \leq g \implies \IntOmu{f} \leq \IntOmu{g}$}
+    \item $\IntOmu{a \cdot f + b \cdot g} = a \cdot \IntOmu{f} + b \cdot \IntOmu{g}$
+  \end{itemize}
+\end{satz}
+
+% Ausgelassen: Beispiel Dirichlet-Funktion $\ind_{\Q}$
+
+\begin{satz}
+  Sei $(f_n)_{n \in \N}$ eine isotone (= monotone) Folge elementarer Funktionen über $(\Omega, \Alg)$. Dann gilt für jede elementare Funktion $f$ mit $f \leq \sup_{n \in N} f_n$ die Ungleichung $\IntOmu{f} \leq \sup_{n \in \N} \IntOmu{f_n}$.
+\end{satz}
+
+\begin{korollar}
+  Seien $(f_n)_{n \in \N}$ und $(g_n)_{n \in \N}$ isotone Folgen elementarer Funktionen mit $\sup_{n \in \N} f_n = \sup_{n \in \N} g_n$. Dann ist $\sup_{n \in \N} \IntOmu{f_n} = \sup_{n \in \N} \IntOmu{g_n}$.
+\end{korollar}
+
+\begin{satz}
+  Sei $f : (\Omega, \Alg, \mu) \to (\ER, \LebAlg(\ER))$ nichtnegativ. Dann gibt es eine isotone Folge $(f_n)_{n \in \N}$ elementarer Funktionen mit $\sup_{n \in \N} f_n = f$.
+\end{satz}
+
+\begin{defn}
+  Sei $f : (\Omega, \Alg, \mu) \to (\ER, \LebAlg(\ER))$ nichtnegativ und $(f_n)_{n \in \N}$ eine Folge elementarer Funktionen mit $\sup_{n \in \N} f_n = f$. Dann heißt
+  \[ \IntOmu{f} \coloneqq \sup_{n \in \N} \IntOmu{f_n} \quad \text{\emph{$\mu$-Integral} von $f$.} \]
+\end{defn}
+
+% Kapitel 3.4. Integral einer beliebigen, messbaren Funktion
+
+\begin{defn}
+  Eine $\Alg$-messbare, numerische Fkt. $f : (\Omega, \Alg, \mu) \to (\ER, \LebAlg(\ER))$ heißt \emph{$\mu$-integrierbar}, falls
+  \[ \IntOmu{f^+} < \infty \quad \text{und} \quad \IntOmu{f^-} < \infty. \]
+  In diesem Fall definieren wir das \emph{Lebesgue-Integral} von $f$ als
+  \[ \IntOmu{f} \coloneqq \IntOmu{f^+} - \IntOmu{f^-}. \]
+\end{defn}
+
 
 % Vorlesung 19
 
 % Vorlesung 20
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -483,84 +810,9 @@ Zu jeder Booleschen Algebra $\mathfrak{A}$ gibt es eine Menge $\Omega$ derart, d
 
 
 
-
-
-\begin{satz}[von Lusin]
-  $f : ([a, b], \LebAlg([a, b])) \to (\R^1, \LebAlg(\R^1))$ ist Borel-messbar $\iff$ $\forall \epsilon > 0 : \exists K\epsilon \subset [a, b]$ abgeschlossen mit $\lambda_1(\R^1 \setminus K_\epsilon)$ und $f|_{K_\epsilon}$ stetig.
-\end{satz}
-
-\begin{satz}
-  Folgerung: Es sind messbar
-  \begin{itemize}
-    \item monotone Funktionen
-    \item Funktionen mit endlicher Variation
-    \item Càdlàg-Funktionen, das sind Funktionen $f : [a, b] \to \R$ mit $\lim_{\epsilon \downarrow 0} f(x+\epsilon) = f(x)$ für alle $x \in \left[a, b\right[$.
-  \end{itemize}
-\end{satz}
-
-\begin{lem}[Borel-Cantelli]
-  Sei $(A_n)_{n \in \N}$ eine Folge von Ereignissen über $(\Omega, \Alg, \P)$. Dann gilt für $A = \limsup_{n \to \infty}$
-  \[ \sum_{n=1}^\infty \P(A_n) < \infty \implies \P(A) = 0. \]
-  Falls die Ereignisse $(A_n)_{n \in \N}$ unabhängig sind, so gilt
-  \[ \sum_{n=1}^\infty \P(A_n) = \infty \implies \P(A) = 1. \]
-\end{lem}
-
-\begin{defn}
-  Sei $(\Alg_n)_{n \in \N}$ Folge von $\sigma$-Algebren über $\Omega$. Dann ist
-  \[ \mathcal{T}_\infty = \cap_{n=1}^\infty \mathcal{T}_n \quad \text{mit} \quad \mathcal{T}_n \coloneqq \sigma \left( \cup_{k=n}^\infty \Alg_k \right) \]
-  die \emph{terminale $\sigma$-Algebra} von $(\Alg_n)_{n \in \N}$.
-\end{defn}
-
-% Was bedeutet Unabhängigkeit von $\sigma$-Algebren?
-
-\begin{satz}[Null-Eins-Gesetz von Kolmogorow]
-  Sei $(\Alg_n)_{n \in \N}$ eine Folge von unabhängigen Unter-$\sigma$-Algebren in einem W-Raum $(\Omega, \Alg, \P)$. Dann gilt $\P(A) \in \{ 0, 1 \}$ für alle Ereignisse $A \in \mathcal{T}_\infty$ der terminalen $\sigma$-Algebra.
-\end{satz}
-
-\begin{defn}
-  Eine $\Alg$-messbare numerische Funktion $X$ über einem Wahrscheinlichkeitsraum $(\Omega, \Alg, \P)$ heißt \emph{Zufallsgröße} (ZG) oder \emph{Zufallsvariable}.
-\end{defn}
-
-\begin{defn}
-  Die durch die ZG $X$ auf $(\R^1, \LebAlg(\R^1))$ induzierte Bildmaß $P_X$
-  \[ P_X(B) = \P(X^{-1}(B)) = \P(\Set{ \omega \in \Omega  }{ X(\omega) \in B }) \]
-  heißt \emph{Verteilung} der ZG $X$.
-  \[ F_X(x) = P_X(\left]-\infty, x\right]) = \P(\Set{ \omega \in \Omega }{ X(\omega) \leq x }) \]
-  heißt die \emph{Verteilungsfunktion} (VF) der ZG $X$.
-\end{defn}
-
-\begin{satz}
-  $F$ sei eine VF auf $\R^1$. Dann existiert ein Wahrscheinlichkeits-Raum $(\Omega, \Alg, \P$ und eine ZG $X$ derart, dass
-  \[ F_X(x) = F(x) \text{ für } x \in \R^1 \]
-\end{satz}
-
-\begin{nota}
-  Sei $X$ eine Zufallsgröße und $B \in \LebAlg(\overline{\R}^1)$. Dann schreibe
-  \[ \{ X \in B \} = X^{-1}(B). \]
-\end{nota}
-
-\begin{defn}
-  Eine endliche Familie von Zufallsgrößen $X_1, ..., X_n$ heißt \emph{stochastisch unabhängig}, falls
-  \[ \P(\bigcap_{i=1}^n \{ X_i \in B_i \}) = \prod_{i=1}^n \P(\{ X_i \in B_i \}) \text{ für alle } B_i \in \mathcal{L}(\overline{R}^1), i = 1, ..., n. \]
-\end{defn}
-
-\begin{satz}
-  Seien $X_1, ..., X_n$ unabhängige Zufallsgrößen über $(\Omega, \Alg, \P)$ von $g_1, ..., g_n$ Borel-messbare Funktionen von $\R^1$ nach $\R^1$. Dann sind auch die Zufallsgrößen $Y_i \coloneqq g_i \circ X_i$ unabhängig über $(\Omega, \Alg, \P)$.
-\end{satz}
-
-% Definition: einfache Funktionen
-% Definition: $\mu$-Integral für einfache Funktionen
-
-% Eigenschaften: Linearität, Monotonie, \IntOmu{\ind_A} = \mu(A)
-
-\begin{satz}
-  Sei $0 \leq f_1 \leq f_2 \leq ...$ eine isotone Folge elementarer Funktionen über $(\Omega, \Alg)$. Dann gilt für jede elementare Funktion $f$ mit $f \leq \sup_{n \in N} f_n$ die Ungleichung $\IntOmu{f} \leq \sup_{n \in \N} \IntOmu{f_n}$.
-\end{satz}
+% TODO: Was ist eine numerische Funktion?
 
 % Folgerung
-\begin{satz}
-  Seien $(f_n)_{n \in \N}$ und $(g_n)_{n \in \N}$ isotone Folgen elementarer Funktionen mit $\sup_{n \in \N} f_n = \sup_{n \in \N} g_n$. Dann ist $\sup_{n \in \N} \IntOmu{f_n} = \sup_{n \in \N} \IntOmu{g_n}$.
-\end{satz}
 
 % Satz: Jede nichtnegative, messbare, numerische Funktion ist Grenzwert einer Folge einfacher Funktionen
 % Def: $\mu$-Integral von solchen Funktionen
@@ -652,7 +904,7 @@ Zu jeder Booleschen Algebra $\mathfrak{A}$ gibt es eine Menge $\Omega$ derart, d
 \end{satz}
 
 \begin{defn}
-  Für eine ZG $X : (\Omega, \Alg, \P) \to (\ER^1, \Leb(\ER^1))$ heißt die Zahl
+  Für eine ZG $X : (\Omega, \Alg, \P) \to (\ER^1, \LebAlg(\ER^1))$ heißt die Zahl
   \[ \E X := \Int{\Omega}{}{X}{\P} = \Int{\R^1}{}{\id}{P_X} \]
   der \emph{Erwartungswert} der ZG X, wobei $P_X = \P \circ X^{-1}$.
 \end{defn}
@@ -675,7 +927,7 @@ Sei $g : \R^k \to \R$ Borel-messbar und $P_{(X_1, ..., X_k)}$-integrierbar. Dann
 
 % 3.7.1 Grundtypen & deren Mischung
 
-$F = F_X$ sei die VF einer ZG $X : (\Omega, \Alg, \P) \to (\R^1, \Leb(\R^1), P_X)$
+$F = F_X$ sei die VF einer ZG $X : (\Omega, \Alg, \P) \to (\R^1, \LebAlg(\R^1), P_X)$
 
 \begin{defn}
   \begin{itemize}
