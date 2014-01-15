@@ -400,10 +400,20 @@
   \[ \|A\| \leq C_0 \quad \text{und} \quad \|A^{-1}\| \leq \tfrac{1}{c_0}. \]
 \end{satz}
 
-% Fortsetzungssatz?
+\begin{satz}[Hahn-Banach]
+  Sei $X$ ein $\R$-VR und
+  \begin{itemize}
+    \item $p : X \to \R$ sublinear, d.\,h. für alle $x, y \in X$ und $\alpha \in \R_{\geq 0}$ gelte
+    \[ p(x+y) \leq p(x) + p(y) \quad \text{und} \quad p(\alpha x) = \alpha p(x), \]
+    \item $f : Y \to \R$ linear auf einem Unterraum $Y \subset X$ und
+    \item $f(x) \leq p(x)$ für $x \in Y$.
+  \end{itemize}
+  Dann gibt es eine lineare Abbildung $F : X \to \R$ mit
+  \[ F(x) = f(x) \text{ für $x \in Y$} \quad \text{und} \quad F(x) \leq p(x) \text{ für } x \in X. \]
+\end{satz}
 
-\begin{satz}(Hahn-Banach)
-  Sei $X$ ein $\R$-Vektorraum, $Y \subset X$ ein Unterraum, $p : X \to \R$ linear und $f : Y \to \R$ linear, sodass $f(x) \leq p(x)$ für alle $x \in Y$. Dann existiert eine lineare Abbildung $F : X \to \R$ mit $f = F|_Y \text{ und } F \leq p$.
+\begin{satz}(Hahn-Banach für lineare Funktionale)
+  Sei $X$ ein $\R$-VR, $Y \subset X$ ein Unterraum, $p : X \to \R$ linear und $f : Y \to \R$ linear, sodass $f(x) \leq p(x)$ für alle $x \in Y$. Dann existiert eine lineare Abbildung $F : X \to \R$ mit $f = F|_Y \text{ und } F \leq p$.
 \end{satz}
 
 % Korollar
@@ -439,10 +449,9 @@
   Es sei $X \not= \emptyset$ ein vollständiger metrischer Raum und $X = \bigcup_{k \in \N} A_k$ mit abgeschlossenen Mengen $A_k \subset X$. Dann gibt es ein $k_0 \in \N$ mit $\mathrm{int}(A_{k_0}) \not= \emptyset$.
 \end{satz}
 
-% Korollar
-\begin{satz}
-  Jede Basis eines \infty-dimensionalen Banachraumes ist überabzählbar.
-\end{satz}
+\begin{kor}
+  Jede Basis eines $\infty$-dimensionalen Banachraumes ist überabzählbar.
+\end{kor}
 
 \begin{satz}[Prinzip der gleichmäßigen Beschränktheit]
   Es sei $X$ ein nichtleerer vollständiger metrischer Raum und $Y$ ein normierter Raum. Gegeben sei eine Menge von Funktionen $F \subset \mathcal{C}^0(X, Y)$ mit $\forall x \in X : \sup_{f \in F} \|f(x)\|_Y < \infty$. Dann gibt es ein $x_0 \in X$ und ein $\epsilon > 0$, sodass $\sup_{B_\epsilon(x_0)} \sup_{f \in F} \|f(x)\|_Y < \infty$.
@@ -576,16 +585,51 @@
 
 % In Paragraph 2.1 haben wir gesehen, dass das Abstandsproblem zu konvexen, abgeschlossenen Mengen in allgemeinen Banachräumen nicht lösbar ist, in reflexiven aber doch, wie wir seher werden.
 
+% Unterkapitel Minkowski-Funktional
+
 \begin{satz}[Trennungssatz]
   Seien $X$ ein normierter Raum, $M \subset X$ nicht leer, abgeschlossen, konvex und $x_0 \in X \setminus M$. Dann gibt es ein $x' \in X'$ und ein $\alpha \in \R$ mit
-  \[ Re \langle x', x \rangle_{X' \times X} \leq \alpha \]
-  für $x \in M$ und $Re \langle x', x_0 \rangle_{X' \times X} > \alpha$.
+  \[ Re \langle x', x_0 \rangle_{X' \times X} > \alpha \quad \text{und} \quad Re \langle x', x \rangle_{X' \times X} \leq \alpha \enspace \text{für } x \in M. \]
 \end{satz}
 
 % Geometrische Interpretation
 
-\begin{bem}
-  Es folgt $x' \not= 0$, also ist $\Set{ x \in X }{ Re \langle x', x \rangle_{X' \times X} = \alpha }$
-\end{bem}
+% Häh?
+% \begin{bem}
+%  Es folgt $x' \not= 0$, also ist $\Set{ x \in X }{ Re \langle x', x \rangle_{X' \times X} = \alpha }$
+% \end{bem}
+
+\begin{satz}
+  Sei $X$ ein normierter Raum, $M \subset X$ konvex und abgeschlossen. Dann ist $M$ schwach folgenabgeschlossen, d.\,h. sind $x_k, x \in X$ für $k \in \N$, so gilt
+  \[ \forall \, k \in \N \,:\, x_k \in M, x_k \convWeaklyWith{k} x \text{ in } X \implies x \in M \]
+\end{satz}
+
+\begin{lem}[Mazur]
+  Sei $X$ normierter Raum und $(x_k)_{k \in \N}$ Folge in $X$ mit $x_k \convWeaklyWith{k} x$. Dann gilt $x \in \mathrm{conv} \Set{ x_k }{ k \in \N }$
+\end{lem}
+
+\begin{satz}
+  Sei $X$ ein reflexiver Banachraum und $M \subset X$ nicht leer, konvex, abgeschlossen. Dann gibt es zu $\tilde{x}$ ein $x \in M$ mit $\| x - \tilde{x} \| = \mathrm{dist}(\tilde{x}, M)$.
+\end{satz}
+
+% Der Satz über die schwache Folgenabgeschlossenheit konvexer abgeschlossener Mengen spielt eine wichtige Rolle für Existenzaussagen für partielle Differentialgleichungen mit Nebenbedingungen
+
+% Sei dazu $\Omega \subset \R^n$ offen, beschränkt, zusammenhängend mit $\mathcal{C}^{0,1}$-Rand sowie $\K = \R$. Sei $a_{ij} = a_{ji} \in L^\infty(\Omega)$, $i,j = 1, ..., n$ gleichmäßig elliptisch, $f \in L^2(\Omega)$ sowie $E(u) = \Int{}{}{ \tfrac{1}{2} \sum_{i,j=1}^n \partial_i u a_{ij} \partial_j u + f u }{x}$, $E : W^{1,2}(\Omega) \to \R$.
+
+% Für $M \subset W^{1,2}(\Omega)$ nicht leer, konvex, abgeschlossen mit $\forall \, u_0 \in M \,:\, \exists \, C_0 < \infty \,:\, \forall \, \xi \in \R \,:\, u_0 + \xi \in M \implies \abs{\xi} \leq C$ gilt dann (ohne Beweis)
+% \begin{itemize}
+%   \item $E$ besitzt auf $M$ ein absolutes Minimum
+%   \item Die absoluten Minima von $E$ auf $M$ sind genau die Lösungen der Variationsungleichung: Finde $u \in M$, sodass $\Int{\Omega}{}{\sum_{i,j=1}^n \partial_i (u-v) a_{ij} \partial_j u + (u-v) f}{x}$ für alle $v \in M$.
+%   \item Ist $M$ ein abgeschlossener affiner Unterraum $M = u_0 + M_0$ mit $M_0$ Unterraum, so ist die Variationsungleichung äquivalent zu: Finde $u \in M$, sodass $\Int{\Omega}{}{\sum_{i,j=1}^n \partial_i v a_{ij} u + v f}{x} = 0$ für alle $v \in M_0$
+%   \item Hat $M$ die Eigenschaft $v \in M$, $\xi \in \R$ mit $v + \xi \in M$ $\implies \xi = 0$, so ist die Lösung eindeutig.
+% \end{itemize}
+
+\begin{bsp}
+  \begin{itemize}
+    \item Sei $M = W_0^{1,2}(\Omega)$. Dann ist die eindeutige Lösbarkeit des zugehörigen (schwachen) Dirichlet-Problems gesichert.
+    \item Sei $M = \Set{ u \in W^{1,2}(\Omega) }{ \Int{\Omega}{}{u}{x} = 0 }$ und gelte $\Int{\Omega}{}{f}{x} = 0$. Dann sichern Punkt 3, 4 die eindeutige Lösbarkeit des zugehörigen Neumann-Problems.
+    \item Seien $u_0, \psi_0 \in W^{1,2}(\Omega)$ gegeben und $u_0(x) \geq \phi_0(x)$ für fast alle $x \in \Omega$. Definiere $M = \Set{ v \in W^{1,2}(\Omega) }{ v = u_0 \text{ auf } \partial \Omega, v \geq \psi \text{ in } \Omega }$. Dann sichern die Punkte 1 bzw. 2 und 4 die eindeutige Existenz einer Lösung dieses Hindernis-Problems.
+  \end{itemize}
+\end{bsp}
 
 \end{document}
