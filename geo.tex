@@ -16,7 +16,7 @@
 \newcommand{\Bild}{\mathrm{Bild}}
 \newcommand{\Exp}{\mathrm{Exp}} % geodätische Exponentialabbildung
 \newcommand{\ointervall}[1]{\left]#1\right[} % offenes Intervall
-\newcommand{\A}{\mathfrak{A}}
+\newcommand{\A}{\mathcal{A}}
 
 % Kleinere Klammern
 \delimiterfactor=701
@@ -1098,5 +1098,29 @@ $\implies$ $f$ ist partiell differenzierbar
   Für kleine $\epsilon > 0$, kann die Variation so umparametrisiert werden, dass das Variationsvektorfeld normal an $X$ ist, d.\,h.
   \[ \xi(u) \coloneqq \delta X^s(u) \in N_u X. \]
 \end{lem}
+
+\begin{defn}
+  In dieser Situation schreiben wir mit der 2. FF $\II$ von $X$
+  \[ h^\xi : U \to \R^{m \times m}, \quad u \mapsto (\langle \II(\partial_j X(u), \partial_k X(u)), \xi \rangle)_{jk}. \]
+\end{defn}
+
+\begin{lem}
+  Sei $A : \R \to \mathrm{GL}_m(\R) \subset \R^{m \times m}$ diff'bar, dann
+  \[ (\det(A))' = \det(A(t)) \cdot \spur(A^{-1}(t) \cdot A'(t)). \]
+\end{lem}
+
+\begin{satz}
+  Es gilt $\delta \A(s) = - \Int{C}{}{\spur(g^{-1} h^\xi)}{\A}$.
+\end{satz}
+
+\begin{defn}
+  Eine Fläche $X : U \to \R^n$ heißt \emph{Minimalfläche} wenn für jedes schöne Kompaktum $C \subset U$ und für jede normale Variation $X^s$ von $X$ auf $C$ gilt: $\delta \A(X^s|_C) = 0$
+\end{defn}
+
+\begin{satz}
+  Eine Fläche $X$ ist genau dann eine Minimalfläche, wenn
+  \[ \spur(g^{-1} h^{\mu}) = 0 \]
+  für jedes Normalenvektorfeld $\mu$ an $X$, wobei $h^\mu_{jk} \coloneqq \langle \II(\partial_j X, \partial_k X), \mu \rangle$.
+\end{satz}
 
 \end{document}
