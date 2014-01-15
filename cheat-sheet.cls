@@ -56,6 +56,8 @@
 \newtheorem*{modell}{Modell}
 \newtheorem*{sprech}{Sprechweise}
 \newtheorem*{beobachtung}{Beobachtung}
+\newtheorem*{antwort}{Antwort}
+\newtheorem*{anmerkung}{Anmerkung}
 
 \theoremstyle{remark}
 \newtheorem*{bem}{Bemerkung}
