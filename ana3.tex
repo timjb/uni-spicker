@@ -1196,7 +1196,7 @@
 \end{bsp}
 
 \begin{nota}
-  \[ x_j : U \to \R, \quad (u_1, ..., u_n) \quad v_j \text{ (Projektion auf $j$-te Koordinate)} \]
+  $x_j : U \to \R, \quad (u_1, ..., u_n) \mapsto u_j$ (Proj. auf $j$-te Koordinate)
 \end{nota}
 
 \begin{bem}
@@ -1236,7 +1236,7 @@
 
 \begin{beobachtung}
   \begin{itemize}
-    \item $\{ k-\text{Form auf } U \}$ ist Modul über Ring $\{ f : U \to \R \}$
+    \item $\{ k-\text{Form auf } U \}$ ist Modul über $\{ f : U \to \R \}$
     % $(\omega_1 + \omega_2)(u) = \omega_1(u) + \omega_2(u)$
     % $(f \cdot \omega)(u) = f(u) \cdot \omega(u)$
     \item $k$-Form $\omega$, $l$-Form $\eta$, dann $(\omega \wedge \eta)(u) = \omega(u) \wedge \eta(u)$ ist $(k+l)$-Form auf $U$.
@@ -1262,12 +1262,39 @@
 
 
 \begin{satz}
-  Eigenschaften von $\d$
+  \begin{itemize}
+    \item $\d (\omega \wedge \nu) = \d \omega \wedge \eta + (-1)^k \omega \wedge \d \eta$
+    \begin{multicols}{2}
+      \item $\d(\lambda \omega_1 + \omega_2) = \lambda \d \omega_1 + \d \omega_2$
+      \item $\d (\d \omega) = 0$
+    \end{multicols}
+  \end{itemize}
+\end{satz}
+
+\begin{defn}
+  Sei $U \opn \R^n$, $\widetilde{U} \opn \R^m$ und $\phi : \widetilde{U} \to U$ total diff'bar
+  Der \emph{Rücktransport} (pullback) von $\omega$ unter $\phi$ ist eine $k$-Form auf $\widetilde{U}$ definiert durch
+  \[ \phi^* \omega (\widetilde{u})) (X_1, ..., X_k) = (\omega (\phi(\widetilde{u})))((D_{\widetilde{u}} \phi) X_1, ..., D_{\widetilde{u}} \phi) X_1) \quad \text{für alle } \widetilde{u} \in \widetilde{U}, X_1, ..., X_k \in T_{\widetilde{u}} \widetilde{U} \]
+\end{defn}
+
+\begin{anmerkung}
+  Sei $\phi : \widetilde{U} \to U$ total diff'bar. Sei $\widetilde{u} \in \widetilde{U}$, dann ist
+  \[ D_{\widetilde{u}} \phi : T_{\widetilde{u}} \widetilde{U} \to T_{\phi(\widetilde{u})} U \quad \text{linear}. \]
+\end{anmerkung}
+
+\begin{satz}
+  % TODO: Voraussetzungen verschönern
+
+  Sei $\check{U} \opn \R^d$, $\widetilde{U} \opn \R^m$, $U \opn \R^n$ und $\psi : \check{U} \to \widetilde{U}$ und $\phi : \widetilde{U} \to U$ $\mathcal{C}^1$-Abbildungen.
+  Seien $\omega, \omega_1, \omega_2$ $k$-Formen auf $U$, $\eta$ ein $l$-Form auf $U$ und $\lambda \in \R$. Dann gilt
 
   \begin{itemize}
-    \item $\d(\lambda \omega_1 + \omega_2) = \lambda \d \omega_1 + \d \omega_2$
-    \item $\d (\omega \wedge \nu) = \d \omega \wedge \eta + (-1)^k \omega \wedge \d \eta$
-    \item $\d (\d \omega) = 0$
+    \item $\phi^*(\lambda \omega_1 + \omega_2) = \lambda \phi^*(\omega_1) + \phi^*(\omega_2)$
+    \item $\phi^*(\omega \wedge \eta) = (\phi^* \omega) \wedge (\phi^* \eta)$
+    \item $\psi^*(\phi^* \omega) = (\phi \circ \psi)^* \omega$
+    \item Wenn $\phi$ eine $\mathcal{C}^2$-Abb. ist, dann $\d (\varphi^* \omega) = \phi^* (\d \omega)$
+    \item Wenn $\omega = \sum_{j_1 < ... < j_k} f_{j_1 \cdots f_k} \d x_{j_1} \wedge ... \wedge \d x_{j_k} : U \to \R$, dann gilt:
+    \[ \phi^* \omega = \sum_{j_1 < ... < j_k} (f_{j_1 \cdots j_k} \cdot \phi) \d \phi_{j_1} \wedge ... \wedge \d \phi_{j_k} \]
   \end{itemize}
 \end{satz}
 
@@ -1287,5 +1314,6 @@
 \begin{lem}[Poincaré]
   $U$ sternförmig, $\omega$ geschlossen $\implies$ $\omega$ exakt.
 \end{lem}
+
 
 \end{document}

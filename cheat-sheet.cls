@@ -47,6 +47,7 @@
 \newtheorem*{acht}{Achtung}
 \newtheorem*{strat}{Strategie}
 \newtheorem*{prob}{Problem}
+\newtheorem*{problem}{Problem}
 \newtheorem*{abk}{Abkürzung}
 \newtheorem*{alg}{Algorithmus}
 \newtheorem*{verf}{Verfahren}
