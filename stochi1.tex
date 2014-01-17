@@ -11,11 +11,14 @@
 \newcommand{\Ring}{\mathfrak{R}} % (Mengen-)Ring
 \newcommand{\LebAlg}{\mathfrak{L}} % Lebesgue-Borel-Mengen
 \renewcommand{\P}{\mathbb{P}}
-\newcommand{\E}{\mathbb{E}} % Elementare Funktion
+\newcommand{\E}{\mathbb{E}} % Elementare Funktion, Erwartungswert
 \newcommand{\ER}{\overline\R} % Erweiterte reelle Zahlen
 \newcommand{\Bor}{\mathfrak{B}} % Borel
 \newcommand{\Leb}{\mathcal{L}} % Lebesgue
 \newcommand{\ind}{\mathbbm{1}} % Indikatorfunktion
+\newcommand{\Var}{\mathrm{Var}} % Varianz
+\newcommand{\cov}{\mathrm{Var}} % Kovarianz
+\newcommand{\cor}{\mathrm{Var}} % Korrelation
 
 \newcommand{\IntO}[2]{\Int{\Omega}{}{#1}{#2}} % Integral über \Omega
 \newcommand{\IntOmu}[1]{\Int{\Omega}{}{#1}{\mu}} % Integral über \Omega bzgl. \mu
@@ -1041,5 +1044,187 @@ $\E |X|^k = k \Int{0}{\infty}{x^{k-1} (1 - F_X(x) + F_X(-x))}{x}$
 \begin{defn}
   $\E X^k$ ($\E |X|^k$) heißt $k$-tes (absolutes) Moment der ZG $X$. $\E (X - \E X)^k$ heißt $k$-tes zentriertes Moment der ZG X. $\mathrm{Var}(X) \coloneqq D^2 X = \E (X - \E X)^2 = \E X^2$ heißt \emph{Streuung} (Dispersion, Varianz) der ZG $X$.
 \end{defn}
+
+
+
+% Vorlesung (15.1.2014)
+
+% Kapitel 2.8.
+
+$X$ sei ZG über $(\Omega, \Alg, \P)$ mit $\E \abs{X}^n < \infty$ für alle $n \in \N$.
+
+\[ \E X^n = \Int{\R^n}{}{x^n \P_X}{x} = \Int{-\infty}{\infty}{x^n}{F_X(x)} \]
+
+heißt \emph{$n$-tes Moment}
+
+$\E X$ Erwartungswert (Schwerpunkt der W-Massenverteilung) "`Lageparameter"'
+
+$\mathbb{D}^2 X = \Var(X) = \E(X-\E X)^2 = \E(X^2) - (\E X)^2 \geq 0$
+
+Eigenschaft: $\Var(aX+b) = a^2 \Var(X)$ für $a, b \in \R^1$
+
+$\Var(X) \leq \E (X-c)^2$ für alle $c \in \R^1$
+
+$\Var(X) = 0$ $\iff$ $X - \E X = 0$ $\iff$ $X = \mathrm{const}$ $\P$-fast-sicher
+
+\begin{satz}
+  $X$ sei eine ZG und $g : \left[ 0, \infty \right[ \to [0,\infty]$ nichtfallend. Dann gilt $\P(\abs{X} \geq \epsilon) \leq \frac{\E g(\abs{X})}{g(\epsilon)}$ für beliebiges $\epsilon > 0$.
+\end{satz}
+
+Spezialfälle:
+
+\begin{itemize}
+  \item $g(x) = x$, dann $\P(\abs{X} \geq \epsilon) \leq \frac{\E X}{\epsilon}$ \emph{Markow-Ungleichung}
+  \item $g(x) = x^2$, dann $\P(\abs{X - \E X} \geq \epsilon) \leq \frac{\E (X - \E X)^2}{\epsilon^2} = \frac{\Var(X)}{\epsilon^2}$ \emph{Tschebyschew-Ungleichung}
+  \item $g(x) = \exp(ax)$ für $a > 0$, dann $\P(\abs{X} \geq \epsilon) \leq \exp(-a\epsilon) \E \exp(a \abs{X})$
+\end{itemize}
+
+$0 > B = \E \exp(a \abs{X}) \geq \frac{a^n \E \abs{X}^n}{n!}$
+
+$\implies$ $\E \abs{X}^n \leq \tfrac{B}{a^n} n!$ für alle $n \in \N$
+
+$\implies$ $\abs{\E X^n} \leq \tfrac{B}{a^n} n!$
+
+$\implies$ $\E \exp(z X)$ ist analytisch für $\abs{z} < a$
+
+\begin{defn}
+  $\E \exp(z X)$ heißt momenterzeugende Funktion der ZG $X$ oder VF $F_X$.
+\end{defn}
+
+% Beispiel
+$X = N(\mu, \sigma^2)$ $\implies$ $\E \exp(z X) = \exp\left( z\mu + \tfrac{\sigma^2}{2} z^2 \right)$ für $z \in \C$
+
+\emph{Höldersche Ungleichung}:
+
+$\abs{\E X Y} \leq \E \abs{XY} \leq (\E \abs{X}^p)^{\tfrac{1}{p}} \cdot (\E \abs{X}^q)^{\tfrac{1}{q}}$ für $p, q \geq 1$
+
+$\implies$ Cauchy-Schwarz-Bunjakowski-Ungleichung für $p = q = 2$:
+
+$\abs{\E XY} \leq \sqrt{ \E (X^2) \E(Y^2) }$
+
+Verallgemeinerung:
+
+$\E(X_1^{n_1} \cdots X_k^{n_k}) \leq (\E \abs{X_1}^n)^{\tfrac{n_1}{n}} \cdots (\E \abs{X_k}^n)^{\tfrac{n_k}{n}}$, $n = n_1 + ... + n_k$
+
+\emph{Jensensche Ungleichung}
+
+Sei $g : \R^1 \to \R^1$ konvex auf einem Intervall $J$, d.\,h.
+
+$g(\alpha x + (1-\alpha)y) \leq \alpha g(x) + (1-\alpha) g(y)$ für alle $x, y \in I$ und $\alpha \in [0,1]$
+
+Per Induktion folgt: $g(\sum_{i=1}^n \alpha_i x_i) \leq \sum_{i=1}^n \alpha_i g(x_i)$ für $x_1, ..., x_n \in J$, $\alpha_i \geq 0$, $\alpha_1 + ... + \alpha_n = 1$
+
+\begin{satz}
+  $g(\E X) \leq \E g(X)$, falls $\P(X \in J) = 1$ und $\E \abs{X} < \infty$
+\end{satz}
+
+% Bespiel
+
+$g(x) = \abs{x}^{\tfrac{n}{m}}$ für $0 < m \leq n$, $\implies$ \emph{Ljapunow-Ungleichung}
+
+\begin{problem}[Momentenproblem]
+  Unter welchen Bedingungen ist eine Zahlenfolge $c_0 = 1, c_1, c_2, ...$ eine Momentenfolge einer ZG $X$, d.\,h. $c_n = \E X^n$.
+\end{problem}
+
+\begin{antwort}
+  $0 \leq \E(z_0 + z_1 X + ... + z_n X^n)^2 = \E(\sum_{i,j=1}^n z_i z_j X^{i+j}) = \sum_{i,j=1}^n z_i z_j c_{i+j}$ genau dann, wenn
+
+  $\det \begin{pmatrix} c_0 & c_1 & \cdots & c_n \\ c_1 & c_2 & \cdots & c_{n+1} \\ \vdots & \vdots & & \vdots \\ c_n & c_{n+1} & \cdots & c_{2n} \end{pmatrix} \geq 0$.
+\end{antwort}
+
+\begin{problem}
+  Wann ist die zugehörige VF $F_X$ eindeutig festgelegt? $c_n = \Int{0}{\infty}{x^n}{F_X(x)}$ (Stieltjes-MP), $c_n = \Int{-\infty}{\infty}{x^n}{F_X(x)}$ (Hamburger MP)
+
+  Hinreichende Bedingung für Bestimmtheit:
+
+  Stieltjes-MP: $\sum_{n=1}^\infty \frac{1}{c_{2n}^{\tfrac{1}{n}}} = \infty$
+
+  Hamburger MP: $\sum_{n=1}^\infty \frac{1}{c_{2n}^{\tfrac{1}{2n}}} = \infty$
+
+  (Carleman-Kriterien)
+\end{problem}
+
+
+% Vorlesung vom 17.1.2014
+
+% Kapitel 3.9. Randverteilungen von ZVen und Unabhängigkeit
+
+\begin{defn}
+  Sei $X = (X_1, ..., X_k)$ eine $k$-dimensionale ZV über $(\Omega, \Alg, \P)$. $X_1, ..., X_k$ heißen \emph{stochastisch unabhängig}, falls
+  \[ \P(\bigcap_{i=1}^k \{ X_i \in B_i \}) = \prod_{i=1}^k \P(\{ X_i \in B_i \}) \]
+  für alle $B_1, ..., B_k \in \mathcal{L}(\R^1)$. Dies ist genau dann der Fall, wenn
+  \[ \P(X_1 \leq x_1, ..., X_k \leq x_k) = \P(X_1 \leq x_1) \cdots \P(X_k \leq X_k) \]
+  für alle $x_1, ..., x_k \in \R$. Falls die W-Dichte $f_X(x_1, ..., x_k) = \tfrac{\partial}{\partial x_1 \cdots \partial x_k} F(x_1, ..., x_k)$ existiert (also $F_X$ absolut stetig), ist dies äquivalent zu
+  \[ f_X(x_1, ..., x_k) = f_{X_1}(x_1) \cdots f_{X_k}(x_k). \]
+  Für diskrete Verteilungen ist dies äquivalent zu
+  \[ \P(X_1 = x_1, ..., X_k = x_k) = \P(X_1 = x_1) \cdots \P(X_k = x_k) \]
+  für alle $x_1, ..., x_k \in \R$.
+\end{defn}
+
+\begin{defn}
+  Für eine $k$-dimensionale ZV $X = (X_1, ..., X_k)$ heißt
+  \[ F_{(X_{i_1}, ..., X_{i_l})}(x_{i_1}, ..., x_{i_l}) = \lim_{\substack{x_j \to \infty}_{j \in \{ 1, ..., k\} \setminus \{ i_1, ..., i_l \}}} F_(X_1, ..., X_k)(x_1, ..., x_k) \]
+  für $1 \leq i_1 < ... < i_l \leq k$, $l = 1, ..., k-1$ \emph{$l$-dimensionale Rand-(Marginal-)verteilungsfunktion}.
+\end{defn}
+
+Falls $f_X(x_1, ..., x_k)$ existiert, so existieren sämtliche Randdichten
+
+\[ f_{(X_{i_1}, ..., X_{i_k})}(x_{i_1}, ..., x_{i_k}) = \Int{\R^{k-l}}{}{f_{(X_1, ..., X_k)}(x_1, ..., x_k)}{(x_1, \widehat{x_{i_1}}, ..., \widehat{x_{i_k}}, ..., x_k)} \]
+
+Analog folgt für eine diskrete ZV die Diskretheit der Randverteilungen $k=2$:
+
+\[ \P(X_1 = x_m^{(1)}) = \sum_{x_m^{(2)}} \P(X_1 = x_m^{(1)}, X_2 = x_m^{(2)}) \]
+\[ \P(X_2 = x_m^{(2)}) = \sum_{x_m^{(1)}} \P(X_1 = x_m^{(1)}, X_2 = x_m^{(2)}) \]
+
+wobei $x_m = (x_m^{(1)}, ..., x_m^{(k)})$ die Massenschwerpunkte sind.
+
+Wichtig: Im allgemeinen bestimmen die Randverteilungen nicht die gemeinsame Verteilung des Vektors.
+
+% Copula: Vorgabe des Zusammenhangs der Komponenten und eindimensionale Randverteilungen
+
+% Kapitel 3.10. Kovarianz und Korrelation
+
+\begin{defn}
+  $(X, Y)$ sei eine zweidimensionale ZVüber $(\Omega, \Alg, \P)$ mit $\E X^2 < \infty$, $\E Y^2 < \infty$. Dann heißt
+  \[ \cov(X, Y) \coloneqq \E(XY) - \E X \E Y = \E ((X - \E X) \cdot (Y - \E Y)) \]
+  \emph{Kovarianz} von $X$ und $Y$ und
+  \[ \cor(X, Y) \coloneqq \frac{\cov(X, Y)}{\sqrt{\Var(X) \cdot \Var(Y)}} \]
+  \emph{Korrelation} von $X$ und $Y$.
+\end{defn}
+
+\begin{satz}
+  \begin{itemize}
+    \item Falls $X, Y$ unabhängig, so gilt $\cov(X, Y) = \cor(X, Y) = 0$
+    \item $\abs{\cor(X, Y)} \leq 1$
+    \item $\cor(X, Y) = 1 \iff \exists \, a, b \in \R^1 \,:\, \P(Y = aX + b) = 1$.
+  \end{itemize}
+\end{satz}
+
+\begin{defn}
+  Falls $\cor(X, Y) = 0$, so heißen $X, Y$ \emph{unkorreliert}.
+\end{defn}
+
+\begin{acht}
+  Aus Unkorreliertheit folgt i.\,A. nicht Unabhängigkeit!
+\end{acht}
+
+\begin{bsp}
+  Sei $X$ eine ZG mit der symmetrischen Dichte $f_X(x) = f_X(-x)$ und $\Int{-\infty}{\infty}{\abs{x}^3 f_X(x)}{x} < \infty$, dann ist $\cov(X, X^2) = 0$, aber $X$ und $X^2$ nicht unabhängig.
+\end{bsp}
+
+\begin{bem}
+  \begin{itemize}
+    \item $\cor(X, Y) = 1$: positive Korrelation
+    \item $\cor(X, Y) = -1$: negative Korrelation
+    \item $\cor(X, Y) = 0$: Unkorreliertheit
+  \end{itemize}
+\end{bem}
+
+Wichtig: Falls $(X, Y)$ eine zweidimensionale Normalverteilung besitzt, so folgt aus $\cor(X, Y) = 0$ die Unabhängigkeit von $X$ und $Y$.
+
+\begin{satz}
+  $X_1, ..., X_n$ seien paarweise unkorrelierte ZGen mit $\E X_i^2 < \infty$ für $i = 1, ..., n$. Dann gilt
+  \[ \Var(X_1 + ... + X_n) = \Var(X_1) + ... + \Var(X_n) \]
+\end{satz}
 
 \end{document}
