@@ -951,7 +951,7 @@
   Sei $\mathcal{E}_j$ Erzeugendensystem von $\Alg_j, j = 1, ..., n$, d.\,h. $\Alg(\mathcal{E}_j) = \Alg_j$. Annahme: Für alle $j \in \{ 1, ..., n \}$ gibt es eine monoton gegen $\Omega_j$ wachsende Folge $(E^j_k)_{k \in \N}$ in $\mathcal{E}_j$. Dann ist
   \begin{align*}
     \Alg_1 \otimes ... \otimes \Alg_n &= \Alg(\mathcal{E}_1 \times ... \times \mathcal{E}_n) \text{ mit }\\
-    \mathcal{E}_1 \times ... \times \mathcal{E}_n &= \Set{ E_1 \times ... \times E_n }{ E_j \in \mathcal{E}_j, j = 1, ..., n }
+    \mathcal{E}_1 \times ... \times \mathcal{E}_n &= \Set{ E_1 \times ... \times E_n }{ E_j \in \mathcal{E}_j, j = 1, ..., n }.
   \end{align*}
 \end{satz}
 
@@ -1079,11 +1079,10 @@
 
 \begin{nota}
   $\Lambda^k V^* \coloneqq \{ \text{$k$-Formen auf $V$} \}$ für $k \in \N^*$
-  $\Lambda^0 V^* \coloneqq \mathbb{K} = \R$
 \end{nota}
 
 \begin{bem}
-  $\Lambda^1 V^* = V^*$
+  $\Lambda^1 V^* = V^*$, $\Lambda^0 V^* \coloneqq \mathbb{K} = \R$
 \end{bem}
 
 \begin{lem}
@@ -1091,15 +1090,18 @@
   \[ \omega(v_{\sigma(1)}, ..., v_{\sigma(k)}) = \mathrm{sgn}(\sigma) \cdot \omega(v_1, ..., v_k). \]
 \end{lem}
 
+\iffalse
+% Definitionsmenge für das Dachprodukt
 \begin{nota}
   % TODO: \bigoplus ist zu groß, \oplus etwas zu klein
   $\Lambda V^* \coloneqq \oplus_{k=1}^n \Lambda^k V^*$
 \end{nota}
+\fi
 
 % Dach-Produkt (wedge-Produkt)
 
 \begin{defn}
-  Seien $\phi_1, ..., \phi_k \in \Lambda^1 V^* = V^*$, dann ist
+  Für $\phi_1, ..., \phi_k \in \Lambda^1 V^* = V^*$ ist das \emph{Dachprodukt} $\phi_1 \wedge ... \wedge \phi_k \in \Lambda^k V^*$ definiert durch
   \begin{align*}
     \phi_1 \wedge ... \wedge \phi_k &: V \times ... \times V \to \R \\
     (v_1, ..., v_k) &\mapsto \det \begin{pmatrix}
@@ -1110,10 +1112,6 @@
     \end{pmatrix}
   \end{align*}
 \end{defn}
-
-\begin{bem}
-  $\phi_1 \wedge ... \wedge \phi_k \in \Lambda^k V^*$
-\end{bem}
 
 \begin{eign}
   \begin{itemize}
@@ -1168,8 +1166,8 @@
   $T_u U$ ist ein $\R$-Vektorraum mit
   \begin{multicols}{2}
     \begin{itemize}
-      \item $(u, V) + (u, W) = (u, V + W)$
-      \item $\lambda (u, V) = (u, \lambda V)$
+      \item $(u, V) + (u, W) = (u, V + W)$,
+      \item $\lambda (u, V) = (u, \lambda V)$.
     \end{itemize}
   \end{multicols}
 \end{bem}
@@ -1180,9 +1178,9 @@
 
 \begin{defn}
   \begin{itemize}
-    \item \emph{Tangentialbündel} an $U \opn \R^n$: $TU = \bigsqcup_{u \in U} T_u U$
+    \item \emph{Tangentialbündel} an $U \opn \R^n$: $TU = \bigsqcup_{\mathclap{u \in U}} T_u U$
     \item \emph{Dualraum} von $T_u U$: $T_u^* = \Set{ \alpha : T_u U \to \R }{ \alpha \text{ linear } }$
-    \item \emph{Kotangentialbündel} an $U$: $T^* U = \bigsqcup_{u \in U} T_u^* U$
+    \item \emph{Kotangentialbündel} an $U$: $T^* U = \bigsqcup_{\mathclap{u \in U}} T_u^* U$
     \item \emph{Einsform} (Differentialform von Grad 1, Pfaffsche Form) auf $U$:
 \[ \omega : U \to T^*U \quad \text{mit} \quad \omega(u) \in T_u^*U \]
   \end{itemize}
@@ -1191,90 +1189,102 @@
 
 \begin{bsp}
   Sei $f : U \to \R$ total diff'bar, dann heißt die Einsform
-  \[ \mathrm{d}f : U \to T^*U, \quad u \mapsto (u, V) \mapsto (D_f (u)) V \]
-  totales Differential von $f$.
+  \[ \d f : U \to T^*U, \quad u \mapsto (u, V) \mapsto D_u f (V) \quad \text{\emph{totales Differential}.} \]
 \end{bsp}
 
 \begin{nota}
-  $x_j : U \to \R, \quad (u_1, ..., u_n) \mapsto u_j$ (Proj. auf $j$-te Koordinate)
+  $x_j : U \to \R, \quad (u_1, ..., u_n) \mapsto u_j$ % (Projektion auf $j$-te Koordinate)
 \end{nota}
 
 \begin{bem}
-  $\mathrm{d}x_j (v_1, ..., v_n) = v_j$
+  $\d x_j (v_1, ..., v_n) = v_j$
 \end{bem}
 
-% Damit ist $(\mathrm{d}x_1(u), ..., \mathrm{d}x_j(u))$ eine Dualbasis von $((u, e_1), ..., (u, e_n))$
+% Damit ist $(\d x_1(u), ..., \d x_j(u))$ eine Dualbasis von $((u, e_1), ..., (u, e_n))$
 
+\iffalse % Allgemeiner aufgeschrieben für $k$-Formen
 \begin{beobachtung}
-  Für jede Einsform $\omega$ auf $U$ gibt es $n$ Abbildungen $a_j : U \to \R$, sodass
-  $\omega = \sum_{j=1}^n a_j \mathrm{d}x_j$
+  Für jede Einsform $\omega$ auf $U$ gibt es $n$ Abbildungen $a_j : U \to \R$, $j = 1, ..., n$, sodass $\omega = \sum_{j=1}^n a_j \d x_j$.
 \end{beobachtung}
 
 \begin{defn}
-  Eine Einsform $\omega = \sum_{j=1}^n a_j \mathrm{d}x_j$ heißt stetig/diff'bar/$\mathcal{C}^k$, wenn für alle $j \in \{ 1, ..., n \}$: $a_j$ ist stetig/total diff'bar/$\mathcal{C}^k$.
+  Eine Einsform $\omega = \sum_{j=1}^n a_j \d x_j$ heißt stetig/diff'bar/$\mathcal{C}^k$, wenn für alle $j \in \{ 1, ..., n \}$: $a_j$ ist stetig/total diff'bar/$\mathcal{C}^k$.
 \end{defn}
+\fi
 
 % Differentialformen höherer Ordnung
 
 \begin{defn}
-  Eine \emph{$k$-Form}, $k \in \N^*$ auf $U$:
-  \[ \omega : U \to \bigsqcup_{u \in U} \Lambda^k T_u^* U \]
-  mit $\omega(u) \in \Lambda^k T_u^* U$ für alle $u \in U$.
-  Eine \emph{$0$-Form} ist eine Abb. $\omega : U \to \R$.
+  Eine \emph{$k$-Form} auf $U$, $k \in \N^*$, ist eine Abbildung
+  \[ \omega : U \to \bigsqcup_{\mathclap{u \in U}} \Lambda^k T_u^* U \quad \text{mit} \quad \omega(u) \in \Lambda^k T_u^* U \text{ für alle } u \in U. \]
+  Eine \emph{$0$-Form} ist eine Abbildung $\omega : U \to \R$.
 \end{defn}
 
-% $\{ \mathrm{d}x_{j_1}(u) \wedge ... \wedge \mathrm{d}x_{j_k}(u) \mid 1 \leq j_1 < ... < j_k \leq n \}$
+% $\{ \d x_{j_1}(u) \wedge ... \wedge \d x_{j_k}(u) \mid 1 \leq j_1 < ... < j_k \leq n \}$
 % Basis von $\Lambda^k T_u^* U$
 
-% Also: Gegeben $k$-Form $\omega$ auf $U$, dann gibt es $\binom{n}{k}$ Abbildungen $f_{j_1 \cdots j_k} : U \to \R$, $1 \leq j_1 < ... < j_k \leq n$, sodass
-% $\omega(u) = \sum_{1 \leq j_1 < ... < j_n \leq n} f_{j_1 \cdots j_k}(u) (\mathrm{d}x_{j_1}(u) \wedge ... \wedge \mathrm{d}x_{j_k}) $
-% Kurz: $\omega = \sum_{1 \leq j_1 < ... < j_k \leq n} f_{j_1 \cdots j_k} (\mathrm{d}x_{j_1} \wedge ... \wedge \mathrm{d} x_{j_k})$
+\begin{beobachtung}
+  Sei $\omega$ eine $k$-Form auf $U$, dann gibt es $\binom{n}{k}$ Funktionen $f_{j_1 \cdots j_k} : U \to \R$, $1 \leq j_1 < ... < j_k \leq n$, sodass
+  \[ \omega = \sum_{\mathclap{j_1 < ... < j_k}} f_{j_1 \cdots j_k} \d x_{j_1} \wedge ... \wedge \d x_{j_k}. \]
+\end{beobachtung}
 
 \begin{defn}
-  Die $k$-Form auf $U$ heißt stetig/diff'bar/$\mathcal{C}^k$, wenn alle $\binom{n}{k}$ Abbildungen $f_{j_1 \cdots j_k} : U \to \R$ stetig/total diff'bar/$\mathcal{C}^k$.
+  Die $k$-Form $\omega$ auf $U$ heißt stetig/diff'bar/$\mathcal{C}^k$, wenn alle $\binom{n}{k}$ Abbildungen $f_{j_1 \cdots j_k} : U \to \R$ stetig/total diff'bar/$\mathcal{C}^k$ sind.
 \end{defn}
 
 \begin{beobachtung}
   \begin{itemize}
-    \item $\{ k-\text{Form auf } U \}$ ist Modul über $\{ f : U \to \R \}$
+    \item $\{ k\text{-Form auf } U \}$ ist Modul über $\{ f : U \to \R \}$
     % $(\omega_1 + \omega_2)(u) = \omega_1(u) + \omega_2(u)$
     % $(f \cdot \omega)(u) = f(u) \cdot \omega(u)$
-    \item $k$-Form $\omega$, $l$-Form $\eta$, dann $(\omega \wedge \eta)(u) = \omega(u) \wedge \eta(u)$ ist $(k+l)$-Form auf $U$.
+    \item Für eine $k$-Form $\omega$ und eine $l$-Form $\eta$ ist $\omega \wedge \eta$ definiert durch $(\omega \wedge \eta)(u) \coloneqq \omega(u) \wedge \eta(u)$ für $u \in U$ eine $(k{+}l)$-Form auf $U$.
   \end{itemize}
 \end{beobachtung}
 
 \begin{defn}
-  $\omega = \sum_{1 \leq j_1 < ... < j_k \leq n} f_{j_1 \cdots j_k} (\mathrm{d}x_{j_1} \wedge ... \wedge \mathrm{d}x_{j_k})$ diff'bare $k$-Form auf $U$, dann heißt die $(k+1)$-Form
-  \[ \mathrm{d} \omega \coloneqq \sum_{j_1 < ... < j_k} \mathrm{d} f_{j_1 \cdots j_k} \wedge \mathrm{d} x_{j_1} \wedge ... \wedge \mathrm{d} x_{j_k} \]
-  \emph{äußere Ableitung} von $\omega$.
+  Sei $\omega = \sum_{\mathclap{j_1 < ... < j_k}} f_{j_1 \cdots j_k} (\d x_{j_1} \wedge ... \wedge \d x_{j_k})$ eine diff'bare $k$-Form auf $U$, dann heißt die $(k{+}1)$-Form
+  \[ \d \omega \coloneqq \sum_{\mathclap{j_1 < ... < j_k}} \d f_{j_1 \cdots j_k} \wedge \d x_{j_1} \wedge ... \wedge \d x_{j_k} \quad \text{\emph{äußere Ableitung}}. \]
 \end{defn}
 
+% Herleitung:
+\iffalse
 \begin{bsp}
-  Für $k = 1$: $\omega = \sum_{j = 1}^n f_j \mathrm{d} x_j$
-  $\mathrm{d} \omega = \sum_{j=1}^n \mathrm{d} f_j \wedge \mathrm{d} x_j = \sum_{j=1}^n (\sum_{k=1}^n \frac{\partial f_j}{\partial x_k} \mathrm{d} x_k) \wedge \mathrm{d} x_j = \sum_{j=1}^k (\frac{\partial f_j}{\partial x_k} - \frac{\partial f_k}{\partial x_j}) \mathrm{d}x_k \wedge \mathrm{d}x_j$.
+  Für $k = 1$: $\omega = \sum_{j = 1}^n f_j \d x_j$
+  $\d \omega = \sum_{j=1}^n \d f_j \wedge \d x_j = \sum_{j=1}^n (\sum_{k=1}^n \frac{\partial f_j}{\partial x_k} \d x_k) \wedge \d x_j = \sum_{j=1}^k (\frac{\partial f_j}{\partial x_k} - \frac{\partial f_k}{\partial x_j}) \d x_k \wedge \d x_j$.
 
   $k = n -1$: $\mathrm{dim}(\Lambda^{n-1} V^*) = \binom{n}{n-1} = n = \mathrm{dim}(V)$
-  $\Set{ (-1)^{j-1} \mathrm{d} x_1(u) \wedge ... \wedge \widehat{\mathrm{d} x_j(u)} \wedge ... \wedge \mathrm{d} x_n(u) }{ 1 \leq j \leq n }$ ist für alle $u \in U$ eine Basis von $\Lambda^{n-1} T_u^* U$.
+  $\Set{ (-1)^{j-1} \d x_1(u) \wedge ... \wedge \widehat{\d x_j(u)} \wedge ... \wedge \d x_n(u) }{ 1 \leq j \leq n }$ ist für alle $u \in U$ eine Basis von $\Lambda^{n-1} T_u^* U$.
 
   $\omega = \sum_{j=1}^n (-1)^{j-1} f_j \d x_1 \wedge ... \wedge \widehat{\d x_j} \wedge ... \wedge \d x_n$
   $\d \omega = \sum_{j=1}^n (-1)^{j-1} \d f_j \wedge \d x_1 \wedge ... \wedge \widehat{\d x_j} \wedge ... \wedge \d x_n = \begin{cases} 0, & \text{falls} j \not= k \\ \d x_1 \wedge ... \wedge \d x_n & j = k \end{cases}$
 \end{bsp}
+\fi
 
-
-\begin{satz}
+\begin{bem}
   \begin{itemize}
-    \item $\d (\omega \wedge \nu) = \d \omega \wedge \eta + (-1)^k \omega \wedge \d \eta$
+    \item Für eine diff'bare Einsform $\omega = \sum_{j=1}^n f_j dx_j$ auf $U$ gilt
+    \[ \d \omega = \sum_{j<l} \left( \frac{\partial f_l}{\partial x_j} - \frac{\partial f_j}{\partial x_l} \right) \d x_j \wedge \d x_l. \]
+    \item Eine diff'bare $(n{-}1)$-Form $\omega$ auf $U$ können wir schreiben als
+    \[ \omega = \sum_{j=1}^n (-1)^{j-1} f_j \d x_1 \wedge ... \wedge \widehat{\d x_j} \wedge ... \wedge x_n \]
+    mit total diff'baren Funktionen $f_j : U \to \R$. Dann ist
+    \[ \d \omega = \left( \sum_{j=1}^n \frac{\partial f_j}{\partial x_j} \right) \d x_1 \wedge ... \wedge \d x_n. \]
+  \end{itemize}
+\end{bem}
+
+\begin{satz}%[Eigenschaften der äußeren Ableitung]
+  \begin{itemize}
+    \item $\d (\omega \wedge \eta) = \d \omega \wedge \eta + (-1)^k \omega \wedge \d \eta$
     \begin{multicols}{2}
       \item $\d(\lambda \omega_1 + \omega_2) = \lambda \d \omega_1 + \d \omega_2$
-      \item $\d (\d \omega) = 0$
+      \item $\d (\d \omega) = 0$, falls $\omega$ $\mathcal{C}^2$ ist
     \end{multicols}
   \end{itemize}
 \end{satz}
 
 \begin{defn}
-  Sei $U \opn \R^n$, $\widetilde{U} \opn \R^m$ und $\phi : \widetilde{U} \to U$ total diff'bar
-  Der \emph{Rücktransport} (pullback) von $\omega$ unter $\phi$ ist eine $k$-Form auf $\widetilde{U}$ definiert durch
-  \[ \phi^* \omega (\widetilde{u})) (X_1, ..., X_k) = (\omega (\phi(\widetilde{u})))((D_{\widetilde{u}} \phi) X_1, ..., D_{\widetilde{u}} \phi) X_1) \quad \text{für alle } \widetilde{u} \in \widetilde{U}, X_1, ..., X_k \in T_{\widetilde{u}} \widetilde{U} \]
+  Sei $U \opn \R^n$, $\widetilde{U} \opn \R^m$, $\phi : \widetilde{U} \to U$ total diff'bar und $\omega$ eine $k$-Form auf $U$. Die $k$-Form $\phi^* \omega$ auf $\widetilde{U}$, welche durch
+  \[ (\phi^* \omega (\widetilde{u})) (X_1, ..., X_k) = (\omega (\phi(\widetilde{u})))(D_{\widetilde{u}} \phi (X_1), ..., D_{\widetilde{u}} \phi (X_k))  \]
+  für alle $\widetilde{u} \in \widetilde{U}$, $X_1, ..., X_k \in T_{\widetilde{u}} \widetilde{U}$ definiert ist, heißt \emph{Rücktransport} von $\omega$ über $\phi$.
 \end{defn}
 
 \begin{anmerkung}
@@ -1285,35 +1295,50 @@
 \begin{satz}
   % TODO: Voraussetzungen verschönern
 
-  Sei $\check{U} \opn \R^d$, $\widetilde{U} \opn \R^m$, $U \opn \R^n$ und $\psi : \check{U} \to \widetilde{U}$ und $\phi : \widetilde{U} \to U$ $\mathcal{C}^1$-Abbildungen.
+  Sei $\check{U} \opn \R^d$, $\widetilde{U} \opn \R^m$, $U \opn \R^n$ und $\psi : \check{U} \to \widetilde{U}$ und $\phi : \widetilde{U} \to U$ total diff'bar.
   Seien $\omega, \omega_1, \omega_2$ $k$-Formen auf $U$, $\eta$ ein $l$-Form auf $U$ und $\lambda \in \R$. Dann gilt
 
   \begin{itemize}
-    \item $\phi^*(\lambda \omega_1 + \omega_2) = \lambda \phi^*(\omega_1) + \phi^*(\omega_2)$
-    \item $\phi^*(\omega \wedge \eta) = (\phi^* \omega) \wedge (\phi^* \eta)$
-    \item $\psi^*(\phi^* \omega) = (\phi \circ \psi)^* \omega$
-    \item Wenn $\phi$ eine $\mathcal{C}^2$-Abb. ist, dann $\d (\varphi^* \omega) = \phi^* (\d \omega)$
+    \item $\phi^*(\lambda \omega_1 + \omega_2) = \lambda \phi^*(\omega_1) + \phi^*(\omega_2)$ \hfill (Linearität)
+    \item $\phi^*(\omega \wedge \eta) = (\phi^* \omega) \wedge (\phi^* \eta)$ \hfill (Verträglichkeit mit $\wedge$)
+    \item $\psi^*(\phi^* \omega) = (\phi \circ \psi)^* \omega$ \hfill (Funktorialität)
+    \item $\d (\varphi^* \omega) = \phi^* (\d \omega)$, falls $\omega$ diff'bar und $\phi$ eine $\mathcal{C}^2$-Abb. ist
     \item Wenn $\omega = \sum_{j_1 < ... < j_k} f_{j_1 \cdots f_k} \d x_{j_1} \wedge ... \wedge \d x_{j_k} : U \to \R$, dann gilt:
-    \[ \phi^* \omega = \sum_{j_1 < ... < j_k} (f_{j_1 \cdots j_k} \cdot \phi) \d \phi_{j_1} \wedge ... \wedge \d \phi_{j_k} \]
+    \[ \phi^* \omega = \sum_{j_1 < ... < j_k} (f_{j_1 \cdots j_k} \circ \phi) \d \phi_{j_1} \wedge ... \wedge \d \phi_{j_k} \]
   \end{itemize}
 \end{satz}
 
 \begin{defn}
   \begin{itemize}
-    \item Eine $k$-Form $\omega$ heißt \emph{geschlossen}, wenn $\d \omega = 0$.
-    \item Für $k \geq 1$ heißt eine $k$-Form \emph{exakt}, wenn es eine $(k-1)$-Form $\eta$ gibt, sodass $\omega = \d \eta$.
+    \item Für $k \geq 1$ heißt eine $k$-Form auf $U$ \emph{exakt}, wenn es eine diff'bare $(k{-}1)$-Form $\eta$ auf $U$ gibt, sodass $\omega = \d \eta$.
+    \item Eine diff'bare $k$-Form $\omega$ auf $U$ heißt \emph{geschlossen}, wenn $\d \omega = 0$.
   \end{itemize}
 \end{defn}
 
 \begin{beobachtung}
-  $\omega$ exakt $\implies$ $\omega$ abgeschlossen
+  Jede diff'bare exakte $k$-Form auf $U$ ist geschlossen.
 \end{beobachtung}
 
 % Frage: Gilt auch die Umkehrung?
 
+\begin{defn}
+  Eine Teilmenge $U \subset \R^n$ heißt \emph{sternförmig}, falls es einen Punkt $u_0 \in U$ gibt, sodass für alle anderen Punkte $u \in U$ die Verbindungsstrecke von $u_0$ nach $u$ in $U$ liegt.
+\end{defn}
+
 \begin{lem}[Poincaré]
-  $U$ sternförmig, $\omega$ geschlossen $\implies$ $\omega$ exakt.
+  Ist $U$ sternförmig, dann ist jede stetig diff'bare $k$-Form mit $k \geq 1$ auch exakt.
 \end{lem}
 
+\begin{bem}
+  Statt Sternförmigkeit kann man auch nur Zusammenziehbarkeit fordern.
+\end{bem}
+
+% In der Sprache der de Rham Kohomologie besagt das Lemma von Poincaré, dass die de Rham Kohomologiegruppen von Grad $\geq 1$ von sternförmigen (oder allgemeiner zusammenziehbaren) Teilmenge $U \opn \R^n$ alle verschwinden.
+
+\begin{lem}
+  Sei $U \opn \R^n$ und $V \opn R^{n{+}1} = \R \times \R^n$, sodass der Zylinder $[0,1] \times U$ in $V$ liegt. Sei $\sigma$ eine geschlossene stetig diff'bare $k$-Form auf $V$ mit $k \geq 1$ und sei $\varphi_r : U \to V, \enspace u \mapsto (r, u)$ für $r \in \{ 0, 1 \}$.
+  %die Abbildungen, welche $U$ mit den "`Deckeln des Zylinders"' $[0,1] \times U \subet V$ identifizieren.
+  Dann gibt es eine stetig diff'bare $(k{-}1)$-Form $\eta$ auf $U$ mit $\varphi_1^* \sigma - \varphi_2^* \sigma = \d \eta$.
+\end{lem}
 
 \end{document}
