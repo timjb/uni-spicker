@@ -119,7 +119,7 @@
     \mathcal{R}(E) &\coloneqq \Set{ \Ring \subset \PSO }{ E \subset \Ring, \Ring \text{ Ring} } \text{ und} \\
     \mathcal{A}(E) &\coloneqq \Set{ \Alg \subset \PSO }{ E \subset \Alg, \Alg \text{ $\sigma$-Algebra} }.
   \end{align*}
-  Dann heißen $\quad\Ring(E) \coloneqq\!\bigcap_{\Ring \in \mathcal{R}(E)}\!\Ring, \quad \Alg(E)  \coloneqq\!\bigcap_{\Alg  \in \mathcal{A}(E)}\!\Alg$\\
+  Dann heißen $\quad\Ring(E) \coloneqq \enspace \bigcap_{\mathclap{\Ring \in \mathcal{R}(E)}} \enspace \Ring, \quad \Alg(E)  \coloneqq \enspace \bigcap_{\mathclap{\Alg  \in \mathcal{A}(E)}} \enspace \Alg$\\
   von $E$ \emph{erzeugter Ring} bzw. von $E$ \emph{erzeugte $\sigma$-Algebra}.
 \end{defn}
 
@@ -152,9 +152,9 @@
   Für einen Inhalt $\mu$ auf $\Ring$ gilt für alle $A, B \in \Ring$:
   \begin{itemize}
     \item $\mu(A \cup B) + \mu(A \cap B) = \mu(A) + \mu(B)$
-    \item Monotonie: $A \subset B \implies \mu(A) \leq \mu(B)$
+    \item $A \subset B \implies \mu(A) \leq \mu(B)$ \hfill (Monotonie)
     \item Aus $A \subset B$ und $\mu(B) < \infty$ folgt $\mu(B \setminus A) = \mu(B) - \mu(A)$
-    \item Subadditivität: Für $A_1, ..., A_n \in \Ring$ ist $\mu\left(\bigcup_{i = 1}^n A_i \right) \leq \sum_{i = 1}^n \mu(A_i)$
+    \item Für $A_1, ..., A_n \in \Ring$ ist $\mu\left(\bigcup_{i = 1}^n A_i \right) \leq \sum_{i = 1}^n \mu(A_i)$ \hfill (Subadditivität)
     \item Ist $(A_n)_{n \in \N}$ eine Folge disjunkter Elemente aus $\Ring$, sodass $\bigsqcup_{n \in \N} A_n \in \Ring$, so gilt $\mu(\bigsqcup_{n \in \N} A_n) \geq \sum_{n=0}^\infty \mu(A_n)$.
   \end{itemize}
 \end{satz}
@@ -164,13 +164,13 @@
 \end{defn}
 
 \begin{satz}
-  Ein Maß auf einer $\sigma$-Algebra~$\Alg$ ist $\sigma$-subadditiv, d.\,h. für alle Folgen $(A_n)_{n \in \N}$ in $\Alg$ gilt
-  \[ \mu(\bigcup_{n \in \N} A_n) \leq \sum_{n=0}^\infty \mu(A_n). \]
+  Ein Maß auf einer $\sigma$-Algebra~$\Alg$ ist $\sigma$-subadditiv, d.\,h. es gilt
+  \[ \mu(\bigcup_{n \in \N} A_n) \leq \sum_{n=0}^\infty \mu(A_n) \quad \text{für alle Folgen $(A_n)_{n \in \N}$ in $\Alg$}. \]
 \end{satz}
 
 \begin{defn}
   Sei $A \subset \Omega$. Dann heißt die Abbildung
-  \[ \chi_A = \ind_A : \Omega \to \R, \quad \omega \mapsto \begin{cases} 1, & \text{ falls } \omega \in A \\ 0, & \text{ falls } \omega \not\in A \end{cases} \]
+  \[ \chi_A = \ind_A : \Omega \to \R, \quad \omega \mapsto \abs{\Set{ \star }{ \omega \in A }} = \begin{cases} 1, & \text{ falls } \omega \in A \\ 0, & \text{ falls } \omega \not\in A \end{cases} \]
   \emph{Indikatorfunktion} oder \emph{charakteristische Funktion} von $A$.
 \end{defn}
 
@@ -194,7 +194,7 @@
 % TODO: Lemmas zum Limes Inferior, Limes Superior
 
 \begin{satz}
-  Es gilt $\lim_{n \to \infty} A_n = A \iff \liminf_{n \to \infty} A_n = \limsup_{n \to \infty} A_n = A$.
+  Es gilt $\lim_{\mathclap{n \to \infty}} A_n = A \iff \liminf_{n \to \infty} A_n = \limsup_{n \to \infty} A_n = A$.
 \end{satz}
 
 \begin{defn}
@@ -208,8 +208,8 @@
 \begin{satz}
   Sei $(A_n)_{n \in \N}$ eine Folge in $\PSO$.
   \begin{itemize}
-    \item Ist $(A_n)$ monoton wachsend, so gilt $\lim_{n \to \infty} A_n = \bigcup_{n \in \N} A_n$.
-    \item Ist $(A_n)$ monoton fallend, so gilt $\lim_{n \to \infty} A_n = \bigcap_{n \in \N} A_n$.
+    \item Ist $(A_n)$ monoton wachsend, so gilt $\lim_{\mathclap{n \to \infty}} A_n = \bigcup_{\mathclap{n \in \N}} A_n$.
+    \item Ist $(A_n)$ monoton fallend, so gilt $\lim_{\mathclap{n \to \infty}} A_n = \bigcap_{\mathclap{n \in \N}} A_n$.
   \end{itemize}
 \end{satz}
 
@@ -240,12 +240,11 @@
 
 \begin{defn}
   Ein Inhalt auf einem Ring $\Ring \subset \PSO$ heißt \emph{$\sigma$-endlich}, wenn gilt: Es gibt eine Folge $(S_n)_{n \in \N}$ in $\Ring$, sodass
-  \begin{multicols}{2}
-    \begin{itemize}
-      \item $\Omega = \bigcup_{n \in \N} S_n$ und
-      \item $\mu(S_n) < \infty$ für alle $n \in \N$.
-    \end{itemize}
-  \end{multicols}
+  \[
+      \Omega = \bigcup_{n \in \N} S_n
+      \quad \text{und} \quad
+      \mu(S_n) < \infty \text{ für alle } n \in \N.
+  \]
 \end{defn}
 
 \begin{defn}
@@ -255,9 +254,9 @@
 \begin{defn}
   Eine numerische Funktion $\mu^* : \PSO \to \overline{\R}$ heißt \emph{äußeres Maß} auf $\Omega$, wenn gilt:
   \begin{itemize}
-    \item $\mu^*(\emptyset) = 0$
-    \item Monotonie: $A \subset B \implies \mu^*(A) \leq \mu^*(B)$
-    \item $\sigma$-Subadditivität: Ist $(A_n)_{n \in \N}$ eine Folge von Teilmengen von $\Omega$, dann gilt $\mu^*\left(\bigcup_{n \in \N} A_n \right) \leq \sum_{n = 0}^\infty \mu^*(A_n)$
+    \miniitem{0.3 \linewidth}{$\mu^*(\emptyset) = 0$}
+    \miniitem{0.68 \linewidth}{$A \subset B \implies \mu^*(A) \leq \mu^*(B)$ \hfill (Monotonie)}
+    \item Für eine Folge $(A_n)_{n \in \N}$ in $\mathcal{P}(\Omega)$ gilt $\mu^*\left(\bigcup_{n \in \N} A_n \right) \leq \sum_{n = 0}^\infty \mu^*(A_n)$. %\hfill ($\sigma$-Subadditivität)
   \end{itemize}
 \end{defn}
 
@@ -266,14 +265,14 @@
 \end{bem}
 
 \begin{defn}
-  Eine Teilmenge $A \subset \Omega$ heißt \emph{$\mu^*$-messbar}, falls für alle $Q \subset \Omega$ gilt
-  \[ \mu^*(Q) = \mu^*(Q \cap A) + \mu^*(Q \setminus A). \]
+  Eine Teilmenge $A \subset \Omega$ heißt \emph{$\mu^*$-messbar}, falls
+  \[ \mu^*(Q) = \mu^*(Q \cap A) + \mu^*(Q \setminus A) \quad \text{für alle } Q \subset \Omega. \]
 \end{defn}
 
 \begin{satz}[Carathéodory]
-  Sei $\mu^* : \PSO \to [0, \infty]$ ein äußeres Maß, dann gilt
+  Für ein äußeres Maß $\mu^* : \PSO \to [0, \infty]$ ist
   \begin{itemize}
-    \item Die Menge $\Alg^* \coloneqq \Set{ A \subset \Omega }{ A \text{ ist $\mu^*$-messbar } }$ ist eine $\sigma$-Algebra.
+    \item $\Alg^* \coloneqq \Set{ A \subset \Omega }{ A \text{ ist $\mu^*$-messbar } }$ eine $\sigma$-Algebra und
     \item $\mu^*|_{\Alg^*}$ ist ein Maß auf $\Alg^*$.
   \end{itemize}
 \end{satz}
@@ -365,7 +364,7 @@
 % Aufgabe 1.55
 \begin{satz}
   \begin{itemize}
-    \item Seien $(\Omega, \Alg)$ ein messbarer Raum, $\Omega'$ eine Menge und $f : \Omega \to \Omega'$ eine Abbildung. Dann ist $\Alg' \coloneqq \Set{ A' \subset \Omega' }{ f^{-1}(A') \in \Alg }$ die größte $\sigma$-Algebra auf $\Omega'$, sodass $f$ messbar ist.
+    \item Seien $(\Omega, \Alg)$ ein messbarer Raum, $\Omega'$ eine Menge und $f : \Omega \to \Omega'$ eine Abbildung. Die größte $\sigma$-Algebra auf $\Omega'$, sodass $f$ messbar ist, ist dann $\Alg' \coloneqq \Set{ A' \subset \Omega' }{ f^{-1}(A') \in \Alg }$.
     \item Ist $\Omega$ eine Menge und $(\Omega', \Alg')$ ein messbarer Raum sowie $f : \Omega \to \Omega'$ eine Abbildung. Dann ist $f^{-1}(\Alg')$ eine $\sigma$-Algebra.
     \item Seien $I$ eine Indexmenge, $\Omega$ eine Menge, $(\Omega_i, \Alg_i), i \in I$ messbare Räume und $f_i : \Omega \to \Omega_i$ Abbildungen, dann ist
     \[ \Alg \coloneqq \Alg\left( \bigcup_{i \in I} f_i^{-1}(\Alg_i) \right) \]
@@ -477,13 +476,7 @@
 \end{satz}
 
 \begin{satz}
-  Seien $f_1, ..., f_n : (\Omega, \Alg) \to (\ER, \overline{\Bor})$ messbare numerische Funktionen, dann auch messbar:
-  \begin{multicols}{2}
-    \begin{itemize}
-      \item $\max(f_1, ..., f_n)$
-      \item $\min(f_1, ..., f_n)$
-    \end{itemize}
-  \end{multicols}
+  Seien $f_1, ..., f_n : (\Omega, \Alg) \to (\ER, \overline{\Bor})$ messbare numerische Fktn., dann sind auch $\max(f_1, ..., f_n)$ und $\min(f_1, ..., f_n)$ messbar.
 \end{satz}
 
 \begin{defn}
@@ -499,15 +492,11 @@
   $f = f^+ - f^-$ und $\left|f\right| = f^+ + f^-$
 \end{bem}
 
-\begin{samepage}
-
 \begin{satz}
   Falls $f : (\Omega, \Alg) \to (\ER, \overline\Bor)$ messbar, dann auch $\left|f\right|$, $f^+$ und $f^-$.
 \end{satz}
 
 \subsection{Das Lebesguesche Integral}
-
-\end{samepage}
 
 \begin{defn}
   Eine Funktion $f : (\Omega, \Alg) \to (\R, \Bor)$ heißt \emph{einfache Funktion} oder \emph{Elementarfunktion} auf $(\Omega, \Alg)$, wenn gilt:
@@ -622,10 +611,11 @@
 
 \begin{satz}
   \begin{itemize}
-    \item $\Leb^1(\Omega, \Alg, \mu)$ ist ein $\R$-VR und die Abbildung ${\textstyle \int} : \Leb^1(\Omega, \Alg, \mu) \to \R, \, f \mapsto \IntOmu{f}$ ist linear.
+    \item $\Leb^1(\Omega, \Alg, \mu)$ ist ein $\R$-VR und die Abbildung
+    \[ {\textstyle \int} : \Leb^1(\Omega, \Alg, \mu) \to \R, \quad f \mapsto \IntOmu{f} \quad \text{ist linear.} \]
     \item $f, g \in \Leb^1(\Omega, \Alg, \mu) \implies \max(f, g), \, \min(f, g) \in \Leb^1(\Omega, \Alg, \mu)$
-    \item Monotonie: $f, g \in \Leb^1(\Omega, \Alg, \mu), \, f \leq g \implies \IntOmu{f} \leq \IntOmu{g}$.
-    \item Dreiecksungleichung: $\big| \IntOmu{f} \big| \leq \IntOmu{\left|f\right|}$ für alle $f \in \Leb^1(\Omega, \Alg, \mu)$
+    \item $f, g \in \Leb^1(\Omega, \Alg, \mu), \, f \leq g \implies \IntOmu{f} \leq \IntOmu{g}$ \hfill (Monotonie)
+    \item $\abs{\IntOmu{f}} \leq \IntOmu{\abs{f}}$ für alle $f \in \Leb^1(\Omega, \Alg, \mu)$ \hfill ($\triangle$-Ungleichung)
   \end{itemize}
 \end{satz}
 
@@ -727,13 +717,13 @@
 \vspace{-20pt}
 
 \begin{satz}[Ableiten unter Integral]
-  Seien $a, b \in \R$ mit $a < b$, sei $(\Omega, \Alg, \mu)$ ein Maßraum und sei $f : \left]a, b\right[ \times \Omega \to (\R, \Bor)$ eine Funktion, sodass gilt
+  Seien $a, b \in \R$ mit $a < b$, $(\Omega, \Alg, \mu)$ ein Maßraum und sei $f : \left]a, b\right[ \times \Omega \to (\R, \Bor)$ eine Funktion, sodass:
   \begin{itemize}
-    \item Für alle $t \in ]a, b[$ ist die Abbildung $f(t, -) : \Omega \to \R$ $\mu$-integrierbar.
-    \item Für alle $\omega \in \Omega$ ist die Abbildung $f(-, \omega) : ]a, b[ \to \R$ differenzierbar.
-    \item Es gibt eine Funktion $g \in \Leb^1(\Omega, \Alg, \mu)$ mit $g \geq 0$, sodass für alle $t \in ]a, b[$ und fast alle $\omega \in \Omega$ gilt: $\left|f(-, \omega)'(t)\right| \leq g(\omega)$.
+    \item Für alle $t \in \left]a, b\right[$ ist die Abbildung $f(t, -) : \Omega \to \R$ $\mu$-integrierbar.
+    \item Für alle $\omega \in \Omega$ ist die Abbildung $f(-, \omega) : \left]a, b\right[ \to \R$ diff'bar.
+    \item Es gibt eine Funktion $g \in \Leb^1(\Omega, \Alg, \mu)$ mit $g \geq 0$, sodass für alle $t \in \left]a, b\right[$ und fast alle $\omega \in \Omega$ gilt: $\left|f(-, \omega)'(t)\right| \leq g(\omega)$.
   \end{itemize}
-  Dann ist die Funktion $F : ]a, b[ \to \R, t \mapsto \IntOmu{f_t}$ differenzierbar mit\\[-3pt]
+  Dann ist die Funktion $F : \left]a, b\right[ \to \R, t \mapsto \IntOmu{f_t}$ differenzierbar mit\\[-3pt]
   $F'(t) = \IntOmu{h_t}$, wobei $h_t : \Omega \to \R, \, \omega \mapsto f(-, \omega)'(t)$.
 \end{satz}
 
@@ -780,8 +770,7 @@
 
 \begin{defn}
   Eine beschränkte Funktion $f : [a, b] \to \R$ heißt \emph{Riemann-integrierbar}, wenn $O_*(f) = U^*(f)$. In diesem Fall heißt
-  \[ \Int{a}{b}{f(x)}{x} \coloneqq O_*(f) = U^*(f) \]
-  das \emph{Riemann-Integral} von $f$.
+  \[ \Int{a}{b}{f(x)}{x} \coloneqq O_*(f) = U^*(f) \quad \text{\emph{Riemann-Integral} von $f$.} \]
 \end{defn}
 
 \begin{nota}
@@ -801,7 +790,12 @@
 \begin{satz}
   Sei $f : [a, b] \to \R$ beschränkt und $(Z_k)_{k \in \N}$ eine Folge in $\mathcal{Z}([a, b])$ mit $\lim_{n \to \infty} \left|Z_k\right| = 0$. Dann gilt:
   \begin{itemize}
-    \item Sei $R = \bigcup_{k=1}^\infty \bigcup_{j=1}^{n_k} \{ a_j^k \}$ die Vereinigung aller Zerlegungen $Z_k, k \in \N$. Für alle $x \in [a, b] \setminus R$ gilt dann $\lim_{k \to \infty} f^k(x) = f^*(x)$ und $\lim_{k \to \infty} f_k(x) = f_*(x)$.
+    \item Sei $R = \bigcup_{k=1}^\infty \bigcup_{j=1}^{n_k} \{ a_j^k \}$ die Vereinigung aller Zerlegungen $Z_k, k \in \N$. Für alle $x \in [a, b] \setminus R$ gilt dann
+    \[
+      \lim_{k \to \infty} f^k(x) = f^*(x)
+      \quad \text{und} \quad
+      \lim_{k \to \infty} f_k(x) = f_*(x).
+    \]
     \item Die Funktionen $f^*$ und $f_*$ sind Borel-messbar und integrierbar bzgl. des Borel-Maßes $\mu$ mit
     \[ \Int{[a, b]}{}{f^*}{\mu} = O_*(f) \quad \text{und} \quad \Int{[a, b]}{}{f_*}{\mu} = O^*(f). \]
   \end{itemize}
@@ -866,9 +860,9 @@
   Sei $f : \R \to \R$ eine beliebige Abbildung. Dann ist $C(f)$ eine $G_\delta$-Menge (und somit $D(f)$ eine $F_\sigma$-Menge).
 \end{satz}
 
-\begin{satz}
+\begin{kor}
   Es gibt keine Abbildung $f : \R \to \R$ mit $D(f) = \R \setminus \Q$.
-\end{satz}
+\end{kor}
 
 \begin{defn}
   Ein Maß $\mu$ auf $\Bor(\R^d)$ heißt \emph{translationsinvariant}, wenn für jedes $v \in \R^d$ gilt $(T_v)_* \mu = \mu$, wobei $T_v : \R^d \to \R^d$, $x \mapsto x + v$ die Translation um den Vektor $v$ bezeichnet.
@@ -1010,8 +1004,8 @@
 \begin{satz}(Cavalieri 1) % Proposition
   Seien $(\Omega_1, \Alg_1, \mu_1)$ und $(\Omega_2, \Alg_2, \mu_2)$ $\sigma$-endliche Maßräume, $Q \in \Alg_1 \otimes \Alg_2$. Dann:
   \begin{itemize}
-    \item $h_Q^1 : \Omega_1 \to [0, \infty], \omega_1 \mapsto \mu_2(Q_{\omega_1})$ ist $(\Alg_1, \overline{\Bor})$-messbar.
-    \item $h_Q^2 : \Omega_2 \to [0, \infty], \omega_2 \mapsto \mu_1(Q_{\omega_2})$ ist $(\Alg_2, \overline{\Bor})$-messbar.
+    \item $h_Q^1 : \Omega_1 \to [0, \infty], \enspace \omega_1 \mapsto \mu_2(Q_{\omega_1})$ \enspace ist $(\Alg_1, \overline{\Bor})$-messbar.
+    \item $h_Q^2 : \Omega_2 \to [0, \infty], \enspace \omega_2 \mapsto \mu_1(Q_{\omega_2})$ \enspace ist $(\Alg_2, \overline{\Bor})$-messbar.
   \end{itemize}
 \end{satz}
 
@@ -1042,17 +1036,18 @@
 \begin{satz}[Tonelli]
   Sei $f \in \overline{\E}(\Omega_1 \times \Omega_2, \Alg_1 \otimes \Alg_2)$, dann:
   \begin{itemize}
-    \item $\Omega_2 \to [0, \infty], \quad \omega_2 \mapsto \Int{\Omega_1}{}{f_{\omega_2}}{\mu_1}$ ist $(\Alg_2, \overline{\Bor})$-messbar,
-    \item $\Omega_1 \to [0, \infty], \quad \omega_1 \mapsto \Int{\Omega_2}{}{f_{\omega_1}}{\mu_2}$ ist $(\Alg_1, \overline{\Bor})$-messbar,
-    \item $\Int{\Omega_1 \times \Omega_2}{}{f}{(\mu_1 \otimes \mu_2)} = \Int{\Omega_1}{}{(\Int{\Omega_2}{}{f_{\omega_1}}{\mu_2})}{\mu_1} = \Int{\Omega_2}{}{(\Int{\Omega_1}{}{f_{\omega_2}}{\mu_1})}{\mu_2}$.
+    \item $\Omega_2 \to [0, \infty], \enspace \omega_2 \mapsto \Int{\Omega_1}{}{f_{\omega_2}}{\mu_1}$ \enspace ist $(\Alg_2, \overline{\Bor})$-messbar,
+    \item $\Omega_1 \to [0, \infty], \enspace \omega_1 \mapsto \Int{\Omega_2}{}{f_{\omega_1}}{\mu_2}$ \enspace ist $(\Alg_1, \overline{\Bor})$-messbar,
+    \item \quad $\Int{\mathclap{\Omega_1 \otimes \Omega_2}}{}{f}{(\mu_1 \otimes \mu_2)} = \Int{\Omega_1}{}{(\Int{\Omega_2}{}{f_{\omega_1}}{\mu_2})}{\mu_1} = \Int{\Omega_2}{}{(\Int{\Omega_1}{}{f_{\omega_2}}{\mu_1})}{\mu_2}$.
   \end{itemize}
 \end{satz}
 
 \begin{satz}[Fubini]
   Sei $f : \Omega_1 \times \Omega_2 \to \ER$ $(\mu_1 \otimes \mu_2)$-integrierbar. Dann ist für $\mu_1$-fast-alle $\omega_1 \in \Omega_1$ der Schnitt $f_{\omega_1}$ $\mu_2$-integrierbar, und die $\mu_1$-fast-überall definierte Funktion $\omega_1 \mapsto \Int{\Omega_2}{}{f_{\omega_1}}{\mu_2}$ ist $\mu_1$-integrierbar. Analoges gilt mit $1$ und $2$ vertauscht. Es gilt:
-  \[ \Int{\Omega_1 \times \Omega_2}{}{f}{(\mu_1 \otimes \mu_2)} = \Int{\Omega_1}{}{(\Int{\Omega_2}{}{f_{\omega_1}}{\mu_2})}{\mu_1} = \Int{\Omega_2}{}{(\Int{\Omega_1}{}{f_{\omega_2}}{\mu_1})}{\mu_2}. \]
+  \[ \Int{\mathclap{\Omega_1 \otimes \Omega_2}}{}{f}{(\mu_1 \otimes \mu_2)} = \Int{\Omega_1}{}{(\Int{\Omega_2}{}{f_{\omega_1}}{\mu_2})}{\mu_1} = \Int{\Omega_2}{}{(\Int{\Omega_1}{}{f_{\omega_2}}{\mu_1})}{\mu_2}. \]
 \end{satz}
 
+\begin{samepage}
 
 \section{Differentialformen}
 
@@ -1064,8 +1059,7 @@
 
 \begin{defn}
   Eine \emph{alternierende $k$-Form} auf $V$ ist eine Abb.
-  \[ \omega : \underbrace{V \times ... \times V}_{\text{$k$-fach}} \to \R \]
-  mit folgenden Eigenschaften:
+  \[ \omega : \underbrace{V \times ... \times V}_{\text{$k$-fach}} \to \R \quad \text{mit} \]
   \begin{itemize}
     \item $\omega$ ist \emph{multilinear}, d.\,h. linear in jedem Argument, d.\,h. für alle $l \in \{ 1, ..., k \}$ und $v_1, ..., v_{l-1}, v_{l+1}, ..., v_k \in V$ ist
     \[ \omega(v_1, ..., v_{l-1}, -, v_{l+1}, ..., v_k) \in \mathrm{Hom}(V, \R). \]
@@ -1089,6 +1083,8 @@
   Sei $\omega \in \Lambda V^*, \sigma \in S_k$, dann gilt:
   \[ \omega(v_{\sigma(1)}, ..., v_{\sigma(k)}) = \mathrm{sgn}(\sigma) \cdot \omega(v_1, ..., v_k). \]
 \end{lem}
+
+\end{samepage}
 
 \iffalse
 % Definitionsmenge für das Dachprodukt
@@ -1133,6 +1129,8 @@
   \end{itemize}
 \end{prop}
 
+\begin{samepage}
+
 \begin{prop}
   Seien $\phi_1, ..., \phi_k \in V^*$ und $A = (a_{jl}) \in \R^{k \times k}$ gegeben.
   Dann gilt für $\varphi_j \coloneqq \sum_{l=1}^k a_{jl} \phi_l \in V^*, j = 1, ..., k$:
@@ -1153,6 +1151,8 @@
 
 
 \subsection{Differentialformen}
+
+\end{samepage}
 
 % Einsformen
 
