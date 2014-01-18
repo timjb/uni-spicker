@@ -152,9 +152,9 @@
   Für einen Inhalt $\mu$ auf $\Ring$ gilt für alle $A, B \in \Ring$:
   \begin{itemize}
     \item $\mu(A \cup B) + \mu(A \cap B) = \mu(A) + \mu(B)$
-    \item $A \subset B \implies \mu(A) \leq \mu(B)$ \hfill (Monotonie)
+    \item $A \subset B \implies \mu(A) \leq \mu(B)$ \pright{Monotonie}
     \item Aus $A \subset B$ und $\mu(B) < \infty$ folgt $\mu(B \setminus A) = \mu(B) - \mu(A)$
-    \item Für $A_1, ..., A_n \in \Ring$ ist $\mu\left(\bigcup_{i = 1}^n A_i \right) \leq \sum_{i = 1}^n \mu(A_i)$ \hfill (Subadditivität)
+    \item Für $A_1, ..., A_n \in \Ring$ ist $\mu\left(\bigcup_{i = 1}^n A_i \right) \leq \sum_{i = 1}^n \mu(A_i)$ \pright{Subadditivität}
     \item Ist $(A_n)_{n \in \N}$ eine Folge disjunkter Elemente aus $\Ring$, sodass $\bigsqcup_{n \in \N} A_n \in \Ring$, so gilt $\mu(\bigsqcup_{n \in \N} A_n) \geq \sum_{n=0}^\infty \mu(A_n)$.
   \end{itemize}
 \end{satz}
@@ -255,7 +255,7 @@
   Eine numerische Funktion $\mu^* : \PSO \to \overline{\R}$ heißt \emph{äußeres Maß} auf $\Omega$, wenn gilt:
   \begin{itemize}
     \miniitem{0.3 \linewidth}{$\mu^*(\emptyset) = 0$}
-    \miniitem{0.68 \linewidth}{$A \subset B \implies \mu^*(A) \leq \mu^*(B)$ \hfill (Monotonie)}
+    \miniitem{0.68 \linewidth}{$A \subset B \implies \mu^*(A) \leq \mu^*(B)$ \pright{Monotonie}}
     \item Für eine Folge $(A_n)_{n \in \N}$ in $\mathcal{P}(\Omega)$ gilt $\mu^*\left(\bigcup_{n \in \N} A_n \right) \leq \sum_{n = 0}^\infty \mu^*(A_n)$. %\hfill ($\sigma$-Subadditivität)
   \end{itemize}
 \end{defn}
@@ -544,8 +544,8 @@
 \begin{satz}
   Seien $f, g \in \E(\Omega, \Alg)$, $\mu$ ein Maß auf $\Alg$ und $\alpha \geq 0$, dann gilt
   \begin{itemize}
-    \item Linearität: $\IntOmu{(\alpha \cdot f + g)} = \alpha \cdot \IntOmu{f} + \IntOmu{g}$
-    \item Monotonie: Falls $g \leq f$, dann $\IntOmu{g} \leq \IntOmu{f}$
+    \item $\IntOmu{(\alpha \cdot f + g)} = \alpha \cdot \IntOmu{f} + \IntOmu{g}$ \pright{Linearität}
+    \item Falls $g \leq f$, dann $\IntOmu{g} \leq \IntOmu{f}$ \pright{Monotonie}
   \end{itemize}
 \end{satz}
 
@@ -614,8 +614,8 @@
     \item $\Leb^1(\Omega, \Alg, \mu)$ ist ein $\R$-VR und die Abbildung
     \[ {\textstyle \int} : \Leb^1(\Omega, \Alg, \mu) \to \R, \quad f \mapsto \IntOmu{f} \quad \text{ist linear.} \]
     \item $f, g \in \Leb^1(\Omega, \Alg, \mu) \implies \max(f, g), \, \min(f, g) \in \Leb^1(\Omega, \Alg, \mu)$
-    \item $f, g \in \Leb^1(\Omega, \Alg, \mu), \, f \leq g \implies \IntOmu{f} \leq \IntOmu{g}$ \hfill (Monotonie)
-    \item $\abs{\IntOmu{f}} \leq \IntOmu{\abs{f}}$ für alle $f \in \Leb^1(\Omega, \Alg, \mu)$ \hfill ($\triangle$-Ungleichung)
+    \item $f, g \in \Leb^1(\Omega, \Alg, \mu), \, f \leq g \implies \IntOmu{f} \leq \IntOmu{g}$ \pright{Monotonie}
+    \item $\abs{\IntOmu{f}} \leq \IntOmu{\abs{f}}$ für alle $f \in \Leb^1(\Omega, \Alg, \mu)$ \pright{$\triangle$-Ungleichung}
   \end{itemize}
 \end{satz}
 
@@ -1299,9 +1299,9 @@
   Seien $\omega, \omega_1, \omega_2$ $k$-Formen auf $U$, $\eta$ ein $l$-Form auf $U$ und $\lambda \in \R$. Dann gilt
 
   \begin{itemize}
-    \item $\phi^*(\lambda \omega_1 + \omega_2) = \lambda \phi^*(\omega_1) + \phi^*(\omega_2)$ \hfill (Linearität)
-    \item $\phi^*(\omega \wedge \eta) = (\phi^* \omega) \wedge (\phi^* \eta)$ \hfill (Verträglichkeit mit $\wedge$)
-    \item $\psi^*(\phi^* \omega) = (\phi \circ \psi)^* \omega$ \hfill (Funktorialität)
+    \item $\phi^*(\lambda \omega_1 + \omega_2) = \lambda \phi^*(\omega_1) + \phi^*(\omega_2)$ \pright{Linearität}
+    \item $\phi^*(\omega \wedge \eta) = (\phi^* \omega) \wedge (\phi^* \eta)$ \pright{Verträglichkeit mit $\wedge$}
+    \item $\psi^*(\phi^* \omega) = (\phi \circ \psi)^* \omega$ \pright{Funktorialität}
     \item $\d (\varphi^* \omega) = \phi^* (\d \omega)$, falls $\omega$ diff'bar und $\phi$ eine $\mathcal{C}^2$-Abb. ist
     \item Wenn $\omega = \sum_{j_1 < ... < j_k} f_{j_1 \cdots f_k} \d x_{j_1} \wedge ... \wedge \d x_{j_k} : U \to \R$, dann gilt:
     \[ \phi^* \omega = \sum_{j_1 < ... < j_k} (f_{j_1 \cdots j_k} \circ \phi) \d \phi_{j_1} \wedge ... \wedge \d \phi_{j_k} \]

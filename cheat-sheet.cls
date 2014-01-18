@@ -107,6 +107,9 @@
 
 \newcommand{\id}{\mathrm{id}}
 
+% Name einer Eigenschaft rechts ausgerichtet in Klammern
+\newcommand{\pright}[1]{\hfill ({#1}) \,}
+
 % Integrale
 \newcommand{\Int}[4]{{\textstyle \int\limits_{#1}^{#2}} #3 \,\d #4}
 \newcommand{\Intdx}[3]{\Int{#1}{#2}{#3}{x}}
