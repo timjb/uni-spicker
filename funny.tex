@@ -529,7 +529,7 @@
 \fi
 
 \begin{satz}[Banach-Alaoglu]
-  Sei $X$ ein separabler Banachraum. Dann ist die abgeschl. Einheitskugel $\overline{B_1(0)} \subset X'$ schwach folgenkompakt, d.\,h. jede beschränkte Folge in $X'$ enthält eine schwach* konvergente Teilfolge.
+  Sei $X$ ein separabler Banachraum. Dann ist die abgeschl. Einheitskugel $\overline{B_1(0)} \subset X'$ schwach* folgenkompakt.
 \end{satz}
 
 \begin{bsp}
@@ -631,5 +631,67 @@
     \item Seien $u_0, \psi_0 \in W^{1,2}(\Omega)$ gegeben und $u_0(x) \geq \phi_0(x)$ für fast alle $x \in \Omega$. Definiere $M = \Set{ v \in W^{1,2}(\Omega) }{ v = u_0 \text{ auf } \partial \Omega, v \geq \psi \text{ in } \Omega }$. Dann sichern die Punkte 1 bzw. 2 und 4 die eindeutige Existenz einer Lösung dieses Hindernis-Problems.
   \end{itemize}
 \end{bsp}
+
+
+% Kapitel 7. Endlich-dimensionale Approximation
+
+% Für numerische Berechnungen ist die Approximation von Elementen oder Unterräumen unendlich-dimensionaler Räume mit endlich-dimensionaler Information von großer Relevanz. Eine abzählbare Approximation durch endlich-dimensionale Unterräume ist nur für separable Räume möglich:
+
+\begin{lem}
+  Ist $X$ $\infty$-dimensionaler Raum, so sind äquivalent:
+  \begin{itemize}
+    \item $X$ ist separabel
+    \item $\exists X_n \subset X$ endlich-dim. Unterräume : $\forall \,n \in \N \,:\, X_n \subset X_{n{+}1}$ und $\bigcup_{n \in \N} X_n$ ist dicht in $X$.
+    \item $\exists X_n \subset X$ endlich-dim. Unterräume : $E_n \cap E_m = \{ 0 \}$ für $n \not= m$ und $\bigcup_{n \in \N} (E_0 \oplus ... \oplus E_n)$ ist dicht in $X$.
+    \item $\exists$ linear unabhängige Menge $\Set{ e_n }{ n \in \N }$ mit $\mathrm{span}\Set{e_n}{ n \in \N }$ ist dicht in $X$.
+  \end{itemize}
+\end{lem}
+
+% Aussage (1) bedeutet, dass es zu $x \in X$ Punkte $x_n \in X$ gibt mit $x_n \xrightarrow{n \to \infty} x$
+% Aussage (4) bedeutet, dass es zu $x \in X$ und $n \in \N$ fr $k = 0, ...., n$ Zahlen $\alpha_{n,k}$ gibt mit $\| x - \sum_{k=0}^n \alpha_{n,k} \|_X \xrightarrow{n \to \infty} 0$
+% Falls die $\alpha_{n,k}$ unabhängig von $u$ gewählt werden können:
+
+\begin{defn}
+  Sei $X$ normierter Raum. Eine Folge $(x_n)_{n \in \N}$ heißt \emph{Schauder-Basis} von $X$, falls:
+  \[ \forall \, x \in X \,:\, \exists \text{ eindeutige bestimmte } \alpha_k \in \K \,:\, \sum_{k=0}^n \alpha_n e_k \xrightarrow{n \to \infty} x \text{ in } X. \]
+\end{defn}
+
+% Sind $X^1$, $X^2$ Banachräume mit Schauderbasen $(e_k^1)_{k \in \N}$ und $(e_l^2)_{l \in \N}$ und $S \in \mathcal{L}(X^1, X^2)$, so haben $Se_k^1$ Darstellungen bzgl. $(e^2_l)_{l \in \N}$, d.\,h. es ex. eindeutig bestimmte $a_{k,l} \in \K$ mit $Se_k^1 = \sum_{l=1}^\infty a_{k,l} e_l^2$, also gilt für $x = \sum_{k=0}^\infty \alpha_k e_k^1$:
+% \[ Sx = \sum_{k=0}^\infty \sum_{i=0}^\infty \alpha_k a_{k,l} e_l^2 \]
+
+$S$ ist also eindeutig bestimmt durch die "`unendliche Matrix"' $(a_{k,l})_{k,l \in \N}$.
+
+% Kapitel 7.1. Orthogonalsysteme
+
+\begin{defn}
+  Sei $X$ ein Prähilbertraum. Eine Folge $(e_k)_{k \in \N}$, $N \subset \N$ in $X$ heißt \emph{Orthogonalsystem}, falls $(e_k | e_l) = 0$ für $k \not= l$ und $e_k \not= 0$ für alle $k \in \N$ und \emph{Orthonormalsystem}, falls zusätzlich $\|e_k\| = 1$ für alle $k \in \N$ gilt.
+\end{defn}
+
+\begin{lem}[Besselsche Ungleichung]
+  Sei $(e_k)_{k \in \N}$ ein (endliches) Orthonormalsystem des Prähilbertraumes $X$. Dann gilt für alle $x \in X$: $0 \leq \|x\|^2 - \sum_{k=0}^n \abs{(x|e_k)}^2 = \| x - \sum_{k=0}\infty (x | e_k) e_k \|^2 = \dist(x, \mathrm{span} \{ e_0, ..., e_n \})^2$.
+\end{lem}
+
+\begin{satz}
+  Sei $(e_k)_{k \in \N}$ ein Orthonormalsystem des Prä-Hilbertraumes $X$. Dann sind äquivalent:
+  \begin{itemize}
+    \item $\mathrm{span} \Set{ e_k }{ k \in \N }$ liegt dicht in $X$
+    \item $(e_k)_{k \in \N}$ ist eine Schauder-Basis von $X$.
+    \item Für alle $x \in X$ $x = \sum_{k=0}^\infty (x | e_k) e_k$ (Darstellung)
+    \item Für alle $x, y \in X$ gilt $(x|y) = \sum_{k=0}^\infty (x|e_k) \overline{(y|e_k)}$ (Parseval-Identität)
+    \item Für alle $x \in X$ gilt $\| x \|^2 = \sum_{k=0}^\infty \abs{(x|e_k)}^2$
+  \end{itemize}
+\end{satz}
+
+\begin{defn}
+  Ist eine dieser Bedingungen erfüllt, nennen wir die $(e_k)_{k \in \N}$ \emph{Orthonormalbasis}.
+\end{defn}
+
+\begin{satz}
+  Jeder $\infty$-dim. Hilbertraum über $\K$ ist genau dann $X$ separabel, wenn $X$ eine Orthonormalbasis besitzt.
+\end{satz}
+
+\begin{bem}
+  In diesem Fall ist $X$ isometrisch isomorph zu $\mathcal{l}^l(\K)$ (Übergang zu Koeffizienten bzgl. Basis)
+\end{bem}
 
 \end{document}
