@@ -10,7 +10,6 @@
 \newcommand{\SymBil}{\mathrm{SymBil}}
 \newcommand{\I}{\mathrm{I}}
 \newcommand{\II}{\mathrm{I\!I}}
-\newcommand{\spur}{\mathrm{spur}}
 \newcommand{\Graph}{\mathrm{Graph}}
 \newcommand{\Span}{\mathrm{span}}
 \newcommand{\Bild}{\mathrm{Bild}}
@@ -1063,7 +1062,7 @@ $\implies$ $f$ ist partiell differenzierbar
 \end{defn}
 
 \begin{prop}
-  Der Flächeninhalt ist invariant unter Umparametrisierungen: Sei $X = \widetilde{X} \circ \phi$, $\phi : U \to \widetilde{U}$ Diffeomorphismus, $C \subset U$ kompakt, dann gilt
+  Der Flächeninhalt ist invariant unter Umparametrisierungen: Sei $X = \widetilde{X} \circ \phi$, $\phi : U \to \widetilde{U}$ ein Diffeomorphismus, $C \subset U$ kompakt, dann gilt
   \[ \Int{C}{}{\sqrt{\det(g_u)}}{\mu (u)} = \Int{\phi(C)}{}{\sqrt{\det(\widetilde{g}_u)}}{\mu (\widetilde{u})}. \]
 \end{prop}
 
@@ -1072,16 +1071,16 @@ $\implies$ $f$ ist partiell differenzierbar
 
 \begin{defn}
   Sei $X : U \to \R^n$ immergierte $\mathcal{C}^2$-Fläche,
-  $C \subset U \subset \R^m$ "`schönes"' Kompaktum ($C = \overline{O}$, $O \opn U$ mit glattem Rand).
+  $C \subset U \subset \R^m$ ein Kompaktum mit nichtleerem Inneren, dessen Rand eine Nullmenge ist.
   Dann ist eine Variation von $X$ auf $C$ eine Abbildung
   \[
     \left] -\epsilon, \epsilon \right[ \times U \xrightarrow{\mathcal{C}^2} \R^n, \quad
     (x, u) \mapsto X^s(u) \quad \text{mit}
   \]
   \begin{itemize}
-    \miniitem{0.47 \linewidth}{$X^s : U \to \R^n$ $\mathcal{C}^2$-Immersion\vphantom{$|_{U \setminus C}$}}
-    \miniitem{0.17 \linewidth}{$X^0 = X_{\,}$\vphantom{$|_{U \setminus C}$}}
-    \miniitem{0.33 \linewidth}{$X^s|_{U \setminus C} = X|_{U \setminus C}$}
+    \miniitem{0.48 \linewidth}{$X^s : U \to \R^n$ $\mathcal{C}^2$-Immersion\vphantom{$|_{U \setminus C}$},}
+    \miniitem{0.19 \linewidth}{$X^0 = X_{\,}$\vphantom{$|_{U \setminus C}$},}
+    \miniitem{0.30 \linewidth}{$X^s|_{U \setminus C} = X|_{U \setminus C}$.}
   \end{itemize}
 \end{defn}
 
@@ -1095,9 +1094,13 @@ $\implies$ $f$ ist partiell differenzierbar
 \end{nota}
 
 \begin{lem}
-  Für kleine $\epsilon > 0$, kann die Variation so umparametrisiert werden, dass das Variationsvektorfeld normal an $X$ ist, d.\,h.
-  \[ \xi(u) \coloneqq \delta X^s(u) \in N_u X. \]
+  Für $\epsilon > 0$ klein genug kann die Variation so umparametri- siert werden, dass das Variationsvektorfeld normal an $X$ ist, d.\,h.
+  \[ \xi(u) \coloneqq \delta X^s(u) \in N_u X \quad \text{ für alle } u \in U. \]
 \end{lem}
+
+\begin{defn}
+  Eine kompakte $\mathcal{C}^2$-Variation $X^s$ einer Immersion $X$ heißt \emph{normal}, wenn $\delta X^s$ ein Normalenvektorfeld längs $X$ ist.
+\end{defn}
 
 \begin{defn}
   In dieser Situation schreiben wir mit der 2. FF $\II$ von $X$
@@ -1114,7 +1117,8 @@ $\implies$ $f$ ist partiell differenzierbar
 \end{satz}
 
 \begin{defn}
-  Eine Fläche $X : U \to \R^n$ heißt \emph{Minimalfläche} wenn für jedes schöne Kompaktum $C \subset U$ und für jede normale Variation $X^s$ von $X$ auf $C$ gilt: $\delta \A(X^s|_C) = 0$
+  Eine Fläche $X : U \to \R^n$ heißt \emph{Minimalfläche}, wenn für jedes Kompaktum $C \subset U$ mit nichtleerem Inneren und Rand von Maß Null und für jede normale Variation $X^s$ von $X$ auf $C$ gilt:
+  \[ \delta \A(X^s|_C) = 0. \]
 \end{defn}
 
 \begin{satz}

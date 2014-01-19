@@ -105,6 +105,7 @@
 \newcommand{\Q}{\mathbb{Q}} % Rationale Zahlen
 \renewcommand{\d}{\mathrm{d}} % Differentiator
 
+\newcommand{\spur}{\mathrm{spur}} % Spur
 \newcommand{\id}{\mathrm{id}}
 
 % Name einer Eigenschaft rechts ausgerichtet in Klammern
