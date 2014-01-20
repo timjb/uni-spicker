@@ -1104,7 +1104,7 @@ $\implies$ $f$ ist partiell differenzierbar
 
 \begin{defn}
   In dieser Situation schreiben wir mit der 2. FF $\II$ von $X$
-  \[ h^\xi : U \to \R^{m \times m}, \quad u \mapsto (\langle \II(\partial_j X(u), \partial_k X(u)), \xi \rangle)_{jk}. \]
+  \[ h^\xi : U \to \R^{m \times m}, \quad u \mapsto (\langle \II(e_j, e_k), \xi \rangle)_{jk}. \]
 \end{defn}
 
 \begin{lem}
@@ -1126,5 +1126,65 @@ $\implies$ $f$ ist partiell differenzierbar
   \[ \spur(g^{-1} h^{\mu}) = 0 \]
   für jedes Normalenvektorfeld $\mu$ an $X$, wobei $h^\mu_{jk} \coloneqq \langle \II(\partial_j X, \partial_k X), \mu \rangle$.
 \end{satz}
+
+\begin{bem}
+  Sei $\mu$ ein Normalenvektorfeld an eine Hyperfläche $X$. Dann gibt es eine Funktion $f : U \to \R$ mit $\mu = f \cdot \nu$, wobei $\nu$ die Gaußabbildung von $X$ ist. Dann ist $h^\mu = f \cdot h$ und $g^{-1} h^{\mu} = f \cdot g^{-1} \cdot h = f \cdot w$, wobei $w$ die Weingartenabbildung ist. Wir erhalten damit:
+\end{bem}
+
+\begin{satz}
+  Eine Hyperfläche $X : U \to \R^n$ ist genau dann minimal, wenn
+  \[ H \equiv \frac{\kappa_1 + ... + \kappa_{n{-}1}}{n-1} \equiv \frac{\spur(w)}{n-1} \equiv 0. \]
+\end{satz}
+
+% Beispiele für minimale Hyperflächen
+
+%\begin{itemize}
+%  \item offene Teilmenge einer Ebene
+%  \item Katenoid $X : \R^2 \to \R^3, \quad (s, t) \mapsto (\cosh(s) \cdot \cos(s), cosh(s) \cdot \sin(t), s)$ "`einzige"' minimale Drehfläche ohne Selbstschnitte
+%  \item Wendelfläche $X : \R^2 \to \R^2, \quad (s, t) \mapsto (\sinh(s), \cos(t), \sinh(s), \sin(t), t)$ "`einzige"' minimale Regelfläche
+%  \item Scherksche Fläche
+%  \item Enneper-Fläche $X : \R^2 \to \R^3, \quad (x, y) \mapsto \begin{pmatrix} x - \frac{x^3}{3} + xy ^2 \\ y - \frac{y^3}{yx^2} \\ x^2 - y^2 \end{pmatrix}$
+%  \item Henneberg-Fläche $X : \R^2 \to \R^3, \quad (x, y) \mapsto \begin{pmatrix} 2 \sinh(x) \cos(y) - \tfrac{2}{3} \sinh(3x) \cos(3y) \\ 2 \sinh(x) \sin(y) - \tfrac{2}{3} \sinh(3x) \sin(3y) \\ 2 \cosh(2x) \cos(2y) \end{pmatrix}$
+%  \item Catalan-Fläche: $X : \R^2 \to \R^3, \quad (x, y) \mapsto \begin{pmatrix} x - \sin(x) \cosh(y) \\ 1 - \cos(x) \cosh(y) \\ y \sin(\tfrac{x}{2}) \sinh(\tfrac{y}{2}) \end{pmatrix}$
+%\end{itemize}
+
+% Verallgemeinerung von Hyperflächen:
+
+% 3.3. Flächen konstanter mittlerer Krümmung
+
+Situation: $X : U \to \R^2$ immergierte $\mathcal{C}^2$-Hyperfläche. Dann gilt
+
+\[ \forall u_0 \in U \,:\, \exists V_{u_0} \opn U \text{ mit } x|_{u_0} \to \R^n \text{ Einbettung } \]
+
+als Konsequenz aus dem Umkehrsatz.
+
+Wähle $u_0 \in U$, $C \subset V_{u_0}$ Kompaktum mit glattem Rand, Abschluss einer offenen Menge $C^\circ$.
+
+Dann gibt es ein Kompaktum $D \subset \R^n$ mit stückweise glattem Rand, welches Abschluss einer offenen Menge ist mit $X(C) \subset \partial D$. Wir nennen $D$ "`Dose"', $X(C)$ "`Deckel"' und $\partial D \setminus X(C)$ Boden.
+
+Variation: $\left] -\epsilon, \epsilon \right[ \times U \to \R^n$ $\mathcal{C}^2$ mit
+
+\begin{itemize}
+  \item $X^0 = X$
+  \item $X^s|_{U \setminus C} = X|_{U \setminus C}$
+  \item $X^s|_{V_{u_0}}$ Einbettungen für alle $s \in \left] -\epsilon, \epsilon \right[$
+\end{itemize}
+
+Wähle "`Dosen"' $D^s$ mit $\partial X^s(C) \subset \partial D^s$, sodass gilt
+\[ \partial D^s \setminus X^s(C) = \partial D \setminus X(C). \]
+
+$X^s$ heißt \emph{Variation mit konstantem Volumen}, wenn
+\[ \mathrm{Vol}(D^s) = \mathrm{Vol}(D). \]
+
+\begin{defn}
+  $X$ heißt \emph{minimal bei konstantem Volumen}, wenn für alle Variationen von $X$ auf derartigen Kompakta $C$ mit konstantem Volumen gilt:
+  \[ \delta \mathcal{A} (X^s|_C) = 0. \]
+\end{defn}
+
+Ohne Einschränkung:
+\begin{itemize}
+  \item $X^s$ ist normale Variation mit konstantem Volumen, % (Lemma 3.3)
+  d.\,h. $X^s = X + \tau_s \nu$, wobei $\tau : \left] -\epsilon, \epsilon \right[ \times U \to \R, \quad \tau_s(u)$ mit $\tau_0 = 0$, $\tau_s|_{U \setminus C} = 0$.
+\end{itemize}
 
 \end{document}
