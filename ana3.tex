@@ -424,12 +424,12 @@
   Für eine numerische Fkt. $f : (\Omega, \Alg) \to (\ER, \overline{\Bor})$ sind äquivalent:
   \begin{itemize}
     \miniitem{0.27 \linewidth}{$f$ ist messbar}
-    \miniitem{0.7 \linewidth}{$\forall \, a \in \R \,:\, \{ f \geq a \} = f^{-1}([a, \infty]) \in \Alg$}
+    \miniitem{0.7 \linewidth}{$\fa{a \in \R} \{ f \geq a \} = f^{-1}([a, \infty]) \in \Alg$}
     \begin{multicols}{2}
-      \item $\forall \, a \in \R \,:\, \{ f > a \} \in \Alg$
-      \item $\forall \, a \in \R \,:\, \{ f \leq a \} \in \Alg$
+      \item $\fa{a \in \R} \{ f > a \} \in \Alg$
+      \item $\fa{a \in \R} \{ f \leq a \} \in \Alg$
     \end{multicols}
-    \item $\forall \, a \in \R \,:\, \{ f < a \} \in \Alg$
+    \item $\fa{a \in \R} \{ f < a \} \in \Alg$
   \end{itemize}
 \end{satz}
 
@@ -684,7 +684,7 @@
 
 \begin{satz}
   \begin{doublespace}
-    Sei $(f_n)_{n \in \N}$ Folge messbarer Fkt. $f_n : (\Omega, \Alg, \mu) \to (\ER, \overline{\Bor})$ und $g \in \Leb^1(\Omega, \Alg, \mu), g \geq 0$, sodass $\forall n \in \N : \left|f_n\right| \overset{\text{f.ü.}}\leq g$. Dann:\\[-16pt]
+    Sei $(f_n)_{n \in \N}$ Folge messbarer Fkt. $f_n : (\Omega, \Alg, \mu) \to (\ER, \overline{\Bor})$ und $g \in \Leb^1(\Omega, \Alg, \mu), g \geq 0$, sodass $\fa{n \in \N} \abs{f_n} \overset{\text{f.ü.}}\leq g$. Dann:\\[-16pt]
   \end{doublespace}
   \begin{align*}
     \IntOmu{(\liminf_{n \to \infty} (f_n))}
@@ -832,7 +832,7 @@
 \end{satz}
 
 \begin{satz}
-  Sei $f : [a, b \to \R$ Lebesgue-integrierbar. Wenn $\forall\,t \in [a, b]$ gilt: $\Int{[a, t]}{}{f}{\lambda} = F(t) = 0$, dann $f \fue= 0$.
+  Sei $f : [a, b] \to \R$ Lebesgue-integrierbar. Wenn $\forall \, t \in [a, b]$ gilt: $\Int{[a, t]}{}{f}{\lambda} = F(t) = 0$, dann $f \fue= 0$.
 \end{satz}
 
 \begin{nota}

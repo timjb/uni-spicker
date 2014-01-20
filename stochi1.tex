@@ -533,10 +533,10 @@ Zu jeder Booleschen Algebra $\mathfrak{A}$ gibt es eine Menge $\Omega$ derart, d
     \miniitem{0.27 \linewidth}{$f$ ist messbar}
     \miniitem{0.7 \linewidth}{$\forall \, a \in \R \,:\, \{ f \geq a \} = f^{-1}([a, \infty]) \in \Alg$}
     \begin{multicols}{2}
-      \item $\forall \, a \in \R \,:\, \{ f > a \} \in \Alg$
-      \item $\forall \, a \in \R \,:\, \{ f \leq a \} \in \Alg$
+      \item $\fa{a \in \R} \{ f > a \} \in \Alg$
+      \item $\fa{a \in \R} \{ f \leq a \} \in \Alg$
     \end{multicols}
-    \item $\forall \, a \in \R \,:\, \{ f < a \} \in \Alg$
+    \item $\fa{a \in \R} \{ f < a \} \in \Alg$
   \end{itemize}
 \end{satz}
 
@@ -623,7 +623,7 @@ Zu jeder Booleschen Algebra $\mathfrak{A}$ gibt es eine Menge $\Omega$ derart, d
 
 \begin{satz}[von Lusin]
   Sei $M \in \LebAlg(\R^n)$ mit $\lambda_n(M) < \infty$ und $f : M \to \R$ beschränkt. Dann ist $f$ genau dann Borel-messbar, wenn gilt:
-  \[ \forall \, \epsilon > 0 \,:\, \exists \, K_\epsilon \subset M \text{ kompakt} \,:\, \lambda_n(M \setminus K_\epsilon) < \epsilon \text{ und } f|_{K_\epsilon} \text{ stetig}. \]
+  \[ \fa{\epsilon > 0} \ex{K_\epsilon \subset M \text{ kompakt}} \lambda_n(M \setminus K_\epsilon) < \epsilon \text{ und } f|_{K_\epsilon} \text{ stetig}. \]
 \end{satz}
 
 \begin{defn}
@@ -984,7 +984,7 @@ $F = F_X$ sei die VF einer ZG $X : (\Omega, \Alg, \P) \to (\R^1, \LebAlg(\R^1), 
     \item $F_X$ heißt \emph{absolut stetig} (totalstetig), wenn es für alle $\epsilon > 0$ ein $\delta > 0$ gibt, sodass für abzählbare viele, disjunkte Intervalle $I_k = \left]a_k, b_k\right]$ mit $\sum_{k} (b_k - a_k) < \delta$ sich $\sum_{k} (F_X(b_k) - F_X(a_k)) \leq \epsilon$ ergibt.
     % Bsp: Lipschitz-stetige Funktionen
     \item \emph{singulärstetig} (stetig, aber nicht absolutstetig), wenn die Wachstumspunkte VF $F_X$ eine Lebesgue-Nullmenge bilden, also
-    \[ \lambda_1(\Set{ x \in \R^2 }{ \forall \epsilon > 0 : F(x+\epsilon)- F(x-\epsilon) > 0 }) = 0 \]
+    \[ \lambda_1(\Set{ x \in \R^2 }{ \fa{\epsilon > 0} F(x+\epsilon)- F(x-\epsilon) > 0 }) = 0 \]
     % Bsp: Cantor-Treppe (Teufelstreppe)
   \end{itemize}
 \end{defn}

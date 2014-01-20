@@ -118,6 +118,10 @@
 \newcommand{\Intab}[2]{\Int{a}{b}{#1}{#2}}
 \newcommand{\Intabdx}[1]{\Intdx{a}{b}{#1}}
 
+% Schöne Fürall- und Existenzquantoren
+\newcommand{\fa}[1]{\forall \, {#1} \,:\,}
+\newcommand{\ex}[1]{\exists \, {#1} \,:\,}
+
 % Schöne Mengen { #1 | #2 }
 % siehe http://tex.stackexchange.com/questions/13634/define-pretty-sets-in-latex-esp-how-to-do-the-condition-separator
 \usepackage{mathtools}

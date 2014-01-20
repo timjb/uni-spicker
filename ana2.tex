@@ -265,8 +265,8 @@ Für zwei Funktionen $f, g : [a, b] \to \R$, eine Zerlegung $Z = \{ a = x_0 < ..
 \begin{defn}
 Seien $f, g : [a, b] \to \R$. Die Funktion $f$ heißt \emph{Riemann-Stieltjes-integrierbar (RS-integrierbar)} bzgl. der \emph{Gewichtsfunktion} $g$, wenn gilt:
 
-\[ \exists\,\iota : \forall\,\epsilon > 0 : \exists\,\text{Zerlegung $Z$ von $[a, b]$} : \forall\,Z' \subset Z \text{ Verfeinerung} : \]
-\[ |\iota - S(f, \d g, Z, \xi_1, ..., \xi_n)| \le \epsilon \]
+\[ \ex{\iota} \fa{\epsilon > 0} \ex{\text{Zerlegung $Z$ von $[a, b]$}} \fa{Z' \subset Z \text{ Verfeinerung}} \]
+\[ \abs{\iota - S(f, \d g, Z, \xi_1, ..., \xi_n)} \le \epsilon \]
 
 Dieses (eindeutig bestimmte) $\iota$ heißt \emph{Riemann-Stieltjes-Integral (RS-Integral)} von $f$ bzgl. $g$.
 \end{defn}
@@ -361,13 +361,13 @@ Ein \emph{metrischer Raum} $(X, d)$ ist ein Tupel bestehend aus einer Menge $X$ 
 
 \begin{enumerate}
   \item $d(x, y) = 0 \iff (x = y)$
-  \item Symmetrie: $\forall\,x, y \in X : d(x, y) = d(y, x)$
-  \item Dreiecksungleichung: $\forall\, x, y, z \in X : d(x, y) + d(y, z) \ge d(x, z)$
+  \item Symmetrie: $\fa{x, y \in X} d(x, y) = d(y, x)$
+  \item Dreiecksungleichung: $\fa{x, y, z \in X} d(x, y) + d(y, z) \ge d(x, z)$
 \end{enumerate}
 \end{defn}
 
 \begin{bem}
-Aus den obigen Axiomen folgt: $\forall\,x, y \in X : d(x, y) \ge 0$
+Aus den obigen Axiomen folgt: $\fa{x, y \in X} d(x, y) \ge 0$
 \end{bem}
 
 \begin{nota}
@@ -385,17 +385,17 @@ Sei im folgenden $(X, d)$ ein metrischer Raum.
 \end{defn}
 
 \begin{defn}
-  $Y \subset X$ heißt eine Umgebung von $m$ bzgl. $d$, wenn gilt:
-  \[ \exists\,\epsilon > 0 : B_{\epsilon}(m) \subset Y. \]
+  $Y \subset X$ heißt eine \emph{Umgebung} von $m$ bzgl. $d$, wenn gilt:
+  \[ \ex{\epsilon > 0} B_{\epsilon}(m) \subset Y. \]
 \end{defn}
 
 \begin{defn}
 \begin{itemize}
   \item Eine Menge $U \subset X$ heißt \emph{offen} in $(X, d)$ (notiert $U \opn X$), falls $U$ eine Umgebung von allen Punkten $u \in U$ ist, d.\,h.
-  \[ \forall\,u \in U : \exists\,\epsilon_u > 0 : B_{\epsilon_u}(u) \subset U \]
+  \[ \fa{u \in U} \ex{\epsilon_u > 0} B_{\epsilon_u}(u) \subset U \]
   \item Eine Menge $U \subset X$ heißt \emph{abgeschlossen} in $(X, d)$ (notiert $U \cls X$), falls $X \backslash U$ offen ist.
   \item Ein Punkt $x \in X$ heißt \emph{Randpunkt} von $Y \subset X$, falls gilt:
-  \[ \forall\,\epsilon > 0 : ( B_{\epsilon}(x) \cap Y \not= \emptyset \text{ und } B_{\epsilon}(x) \cap (X \backslash Y) \not= \emptyset). \]
+  \[ \fa{\epsilon > 0} ( B_{\epsilon}(x) \cap Y \not= \emptyset \text{ und } B_{\epsilon}(x) \cap (X \backslash Y) \not= \emptyset). \]
   Die Menge aller Randpunkte von $Y$ wird mit \emph{$\partial Y$} bezeichnet.
 \end{itemize}
 \end{defn}
@@ -434,7 +434,7 @@ Seien $x, y \in X$ mit $x \not= y$, dann gibt es offene Teilmengen $U_x, U_y \op
 
 \begin{defn}
 Sei $x_n$ eine Folge in $X$. Die Folge heißt \emph{konvergent} in $(X, d)$, wenn gilt
-\[ \exists\,x \in X : \forall\,\epsilon > 0 : \exists\,N \in \N : \forall\,n \ge N : d(x_n, x) \le \epsilon. \]
+\[ \ex{x \in X} \fa{\epsilon > 0} \ex{N \in \N} \fa{n \ge N} d(x_n, x) \le \epsilon. \]
 Die eindeutige Zahl $x$ heißt \emph{Grenzwert} oder \emph{Limes} von $(x_n)$, notiert $x = \lim_{n \to \infty} x_n$.
 \end{defn}
 
@@ -448,7 +448,7 @@ Sei $A \subset X$. Dann sind folgende Aussagen äquivalent:
 
 \begin{defn}
 Eine Folge $(x_n)$ heißt \emph{Cauchyfolge} in $(X, d)$, wenn gilt:
-\[ \forall\,\epsilon > 0 : \exists\,N \in \N : \forall\,n, m \in \N : |x_n - x_m| < \epsilon \]
+\[ \fa{\epsilon > 0} \ex{N \in \N} \fa{n, m \in \N} \abs{x_n - x_m} < \epsilon \]
 \end{defn}
 
 \begin{satz}
@@ -466,9 +466,9 @@ Eine \emph{Norm} auf einem reellen VR $V$ ist eine Abbildung
 \[ \|...\| : V \to \R,\quad x \mapsto \| x \| \]
 für die gilt:
 \begin{enumerate}
-  \item $(\| x \| = 0) \iff (x = 0)$
-  \item $\forall\,x \in V, \lambda \in \R : \| \lambda x \| = |\lambda| \| x \|$
-  \item Dreiecksungleichung: $\forall\,x, y \in V : \| x + y \| \le \| x \| + \| y \|$
+  \item $(\norm{x} = 0) \iff (x = 0)$
+  \item $\fa{x \in V, \lambda \in \R} \norm{\lambda x} = \abs{\lambda} \norm{x}$
+  \item Dreiecksungleichung: $\fa{x, y \in V} \norm{x + y} \le \norm{x} + \norm{y}$
 \end{enumerate}
 Das Tupel $(V, \|...\|)$ heißt \emph{normierter Vektorraum}.
 \end{defn}
@@ -541,7 +541,7 @@ Alle Normen auf $\R^n$ (und allen anderen endlich-dimensionalen, reellen VR) sin
 Seien $(X, d_X)$ und $(Y, d_Y)$ zwei metrische Räume und $f : X \to Y$.
 \begin{itemize}
   \item Die Abbildung $f$ heißt \emph{stetig} in $a \in X$, wenn gilt:
-  \[ \forall\,\epsilon > 0 : \exists\,\delta_a > 0 : d_X(x, a) < \delta_a \implies d_Y(f(x), f(a)) < \epsilon \]
+  \[ \fa{\epsilon > 0} \ex{\delta_a > 0} d_X(x, a) < \delta_a \implies d_Y(f(x), f(a)) < \epsilon \]
   Wenn $f$ in allen Punkten $x \in X$ stetig ist, so heißt $f$ stetig.
   \item Die Abbildung $f$ heißt \emph{folgenstetig} in $a \in X$, wenn gilt:
   \[ \lim_{x \to a} f(x) = f(a), \]
@@ -564,7 +564,7 @@ Seien $f : X \to Y$ und $g : Y \to Z$ Abbildungen zwischen metrischen Räumen un
 Seien $(V, \| ... \|_V)$ und $(W, \| ... \|_W)$ zwei normierte VR und $f : V \to W$ linear. Dann sind äquivalent:
 \begin{itemize}
   \item $f$ ist stetig
-  \item $\exists\,C > 0 : \forall\,x \in V : \| f(x) \|_W < C \| x \|_V$
+  \item $\ex{C > 0} \fa{x \in V} \| f(x) \|_W < C \| x \|_V$
   \item $\| f \|_\text{op} < \infty$
 \end{itemize}
 \end{satz}
@@ -575,7 +575,7 @@ Jede lineare Abbildung zwischen endlich-dimensionalen normierten reellen VR ist 
 
 \begin{defn}
 Sei $X$ eine Menge und $(Y, d_Y)$ ein metrischer Raum. Sei $f_n : X \to Y$ eine Folge von Abbildungen. Die Folge $(f_n)$ \emph{konvergiert gleichmäßig} gegen eine Funktion $f : X \to Y$, wenn gilt:
-\[ \forall\,\epsilon > 0 : \exists\,N \in \N : \forall\,n \ge N : \sup\left\{ d_Y(f_n(x), f(x)) : x \in X \right\} \le \epsilon \]
+\[ \fa{\epsilon > 0} \ex{N \in \N} \fa{n \ge N} \sup \Set{d_Y(f_n(x), f(x))}{x \in X} \le \epsilon \]
 \end{defn}
 
 \begin{satz}
@@ -623,7 +623,7 @@ Sei $K$ eine kompakte Teilmenge eines metrischen Raumes $(X, d)$ und $A \subset 
 Seien $[a_j, b_j], a_j < b_j, j = 1, ..., n$ kompakte Intervalle in $\R$, dann ist
 \begin{align*}
   Q &\coloneqq [a_1, b_1] \times \cdots \times [a_n, b_n]\\
-  &= \left\{ (x_1, ..., x_n) \in \R^n : \forall\,j \in \{ 1, ..., n \} : a_j \le x_j \le b_j \right\}
+  &= \Set{ (x_1, ..., x_n) \in \R^n }{ \fa{j \in \{ 1, ..., n \}} a_j \le x_j \le b_j }
 \end{align*}
 ein \emph{abgeschlossener Quader} im $\R^n$.
 \end{defn}
@@ -655,7 +655,7 @@ Sei $(X, d)$ ein metrischer Raum und $K \subset X$ eine nichtleere kompakte Teil
 
 \begin{defn}
 Seien $(X, d_X)$ und $(Y, d_Y)$ zwei metrische Räume. Eine Abbildung $f : X \to Y$ heißt \emph{gleichmäßig stetig}, wenn gilt:
-\[ \forall\,\epsilon > 0 : \exists\,\delta > 0 : \forall\,x, y \in X : \left(d_X(x, y) < \delta\right) \implies \left( d_Y(f(x), f(y)) < \epsilon \right) \]
+\[ \fa{\epsilon > 0} \ex{\delta > 0} \fa{x, y \in X} \left(d_X(x, y) < \delta\right) \implies \left( d_Y(f(x), f(y)) < \epsilon \right) \]
 \end{defn}
 
 \begin{samepage} % Hack
@@ -877,8 +877,8 @@ Sei $f : U \to \R$ zweimal stetig differenzierbar. Wir nennen
   (\mathrm{Hess} f)(u) &\coloneqq (D_j D_k f(u))_{j,k}\\
   &= \begin{pmatrix} D_1 D_1 f(u) & \cdots & D_1 D_n f(u) \\ D_2 D_1 f(u) & \cdots & D_2 D_n f(u) \\ \vdots & \ddots & \vdots \\ D_n D_1 f(u) & \cdots & D_n D_n f(u) \end{pmatrix} \in \R^{n \times n}
 \end{align*}
-die \emph{Hesse-Matrix} von $f$ in $u$. Es folgt mit der Taylorformel für $p = 2$:
-\[ f(u + \xi) = f(u) + \sum_{j=1}^{n} D f(u)\,\xi + \frac{1}{2} \cdot \xi^{\text{T}} \cdot (\mathrm{Hess} f)(u) \cdot \xi + R_2^{f,u}(u + \xi). \]
+die \emph{Hesse-Matrix} von $f$ in $u$. Mit der Taylorformel für $p = 2$ folgt
+\[ f(u + \xi) = f(u) + \sum_{j=1}^{n} D f(u)\,\xi + \tfrac{1}{2} \cdot \xi^{\text{T}} \cdot (\mathrm{Hess} f)(u) \cdot \xi + R_2^{f,u}(u + \xi). \]
 \end{bem}
 
 \begin{defn}

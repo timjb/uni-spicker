@@ -62,7 +62,7 @@
 
 \begin{defn}
   Ein topologischer Raum $(X, \tau)$ heißt \emph{Haussdorff-Raum}, wenn folgendes Trennungsaxiom erfüllt ist:
-  \[ \forall\, x_1, x_2 \in X : \exists\,U_1, U_2 \in \tau : x_1 \in U_1 \wedge x_2 \in U_2 \wedge U_1 \cap U_2 = \emptyset \]
+  \[ \fa{x_1, x_2 \in X} \ex{U_1, U_2 \in \tau} x_1 \in U_1 \wedge x_2 \in U_2 \wedge U_1 \cap U_2 = \emptyset \]
 \end{defn}
 
 \begin{defn}
@@ -101,8 +101,8 @@
 \begin{satz}
   Sind $\| \cdot \|_1$ und $\| \cdot \|_2$ zwei Normen auf dem $\K$-Vektorraum $X$. Dann gilt:
   \begin{itemize}
-    \item $\| \cdot \|_2 \text{ ist stärker als } \| \cdot \|_1 \iff \exists\,C > 0 : \forall\,x \in X : \| x \|_1 \leq C \| x \|_2$
-    \item $\| \cdot \|_1 \text{ und } \| \cdot \|_2 \text{ sind äquivalent } \iff \exists\,c, C > 0 : \forall\,x \in X : c \| x \|_1 \leq \| x \|_2 \leq C \| x \|_1$
+    \item $\| \cdot \|_2 \text{ ist stärker als } \| \cdot \|_1 \iff \ex{C > 0} \fa{x \in X} \| x \|_1 \leq C \| x \|_2$
+    \item $\| \cdot \|_1 \text{ und } \| \cdot \|_2 \text{ sind äquivalent } \iff \ex{c, C > 0} \fa{x \in X} c \| x \|_1 \leq \| x \|_2 \leq C \| x \|_1$
   \end{itemize}
 \end{satz}
 
@@ -120,7 +120,7 @@
 
 \begin{defn}
   Seien $S \subset X$ eine Menge, $(X, \tau_X)$ und $(Y, \tau_Y)$ Hausdorff-Räume sowie $x_0 \in S$. Eine Funktion $f : S \to Y$ heißt \emph{stetig} in $x_0$, falls gilt:
-  \[ \forall\,V \in \tau_Y : f(x_0) \in V \implies \exists\,U \in \tau_X \text{ mit } x_0 \in U \wedge f(U \cap S) \subset V \]
+  \[ \fa{V \in \tau_Y} f(x_0) \in V \implies \exists\,U \in \tau_X \text{ mit } x_0 \in U \wedge f(U \cap S) \subset V \]
   Ist $X = S$, so heißt $f : X \to Y$ stetige Abbildung, falls $f$ stetig in allen Punkten $x_0 \in X$ ist, d.\,h. $V \in \tau_Y \implies f^{-1}(V) \in \tau_X$.
 \end{defn}
 
@@ -155,14 +155,14 @@
 \end{bem}
 
 \begin{defn}
-  Sei $\K^\N \coloneqq \Set{ (x_n)_{n \in \N} }{ \forall\,i \in \N : x_i \in \K }$ die Menge aller Folgen in $\K$. Mit der Fréchet-Metrik
+  Sei $\K^\N \coloneqq \Set{ (x_n)_{n \in \N} }{ \fa{i \in \N} x_i \in \K }$ die Menge aller Folgen in $\K$. Mit der Fréchet-Metrik
     \[ \rho(x) \coloneqq \sum_{i = 1}^\infty 2^{-i} \frac{ |x_i| }{ 1 + |x_i| } < 1 \]
   wird der \emph{Folgenraum} $\K^\N$ zu einem Banachraum.
 \end{defn}
 
 \begin{satz}
   Sind $(x^k) = (x^k_i)_{i \in \N} \in \K^\N$ und $x = (x_i)_{i \in \N} \in \K^\N$, so gilt
-  \[ \rho(x^k - x) \convWith{k} 0 \iff \forall\,i \in \N : x_i^k \convWith{k} x_i. \]
+  \[ \rho(x^k - x) \convWith{k} 0 \iff \fa{i \in \N} x_i^k \convWith{k} x_i. \]
 \end{satz}
 
 \begin{defn}
@@ -345,7 +345,7 @@
       \item $T$ ist stetig in $0$.
       \item $\sup_{\|x\| \leq 1} \|Tx\| < \infty$.
     \end{multicols}
-    \item $\exists\,C > 0 : \forall x \in X : \|Tx\| \leq C \cdot \|x\|$.
+    \item $\ex{C > 0} \fa{x \in X} \|Tx\| \leq C \cdot \|x\|$.
   \end{itemize}
 \end{satz}
 
@@ -454,11 +454,11 @@
 \end{kor}
 
 \begin{satz}[Prinzip der gleichmäßigen Beschränktheit]
-  Es sei $X$ ein nichtleerer vollständiger metrischer Raum und $Y$ ein normierter Raum. Gegeben sei eine Menge von Funktionen $F \subset \mathcal{C}^0(X, Y)$ mit $\forall x \in X : \sup_{f \in F} \|f(x)\|_Y < \infty$. Dann gibt es ein $x_0 \in X$ und ein $\epsilon > 0$, sodass $\sup_{B_\epsilon(x_0)} \sup_{f \in F} \|f(x)\|_Y < \infty$.
+  Es sei $X$ ein nichtleerer vollständiger metrischer Raum und $Y$ ein normierter Raum. Gegeben sei eine Menge von Funktionen $F \subset \mathcal{C}^0(X, Y)$ mit $\fa{x \in X} \sup_{f \in F} \|f(x)\|_Y < \infty$. Dann gibt es ein $x_0 \in X$ und ein $\epsilon > 0$, sodass $\sup_{B_\epsilon(x_0)} \sup_{f \in F} \|f(x)\|_Y < \infty$.
 \end{satz}
 
 \begin{satz}[Banach-Steinhaus]
-  Es sei $X$ ein Banachraum und $Y$ ein normierter Raum, $\mathcal{T} \subset \Leb(X, Y)$ mit $\forall x \in X : \sup_{T \in \mathcal{T}} \|Tx\|_Y < \infty$. DAnn ist $\mathcal{T}$ eine beschränkte Menge in $\Leb(X, Y)$, d.\,h. $\sup_{T \in \mathcal{T}} \|T\|_{\mathcal{L}(X, Y)}$.
+  Es sei $X$ ein Banachraum und $Y$ ein normierter Raum, $\mathcal{T} \subset \Leb(X, Y)$ mit $\fa{x \in X} \sup_{T \in \mathcal{T}} \|Tx\|_Y < \infty$. DAnn ist $\mathcal{T}$ eine beschränkte Menge in $\Leb(X, Y)$, d.\,h. $\sup_{T \in \mathcal{T}} \|T\|_{\mathcal{L}(X, Y)}$.
 \end{satz}
 
 \begin{defn}
@@ -466,7 +466,7 @@
 \end{defn}
 
 \begin{bem}
-  Ist $f$ bijektiv, so ist $f$ genau dann offen, wenn $f^{-1}$ stetig ist. Sind $X, Y$ normierte Räume und ist $T : X \to Y$ linear, so gilt: $T$ ist offen $\iff$ $\exists \delta > 0 : B_{\delta}(0) \subset T(B_1(0))$.
+  Ist $f$ bijektiv, so ist $f$ genau dann offen, wenn $f^{-1}$ stetig ist. Sind $X, Y$ normierte Räume und ist $T : X \to Y$ linear, so gilt: $T$ ist offen $\iff$ $\ex{\delta > 0} B_{\delta}(0) \subset T(B_1(0))$.
 \end{bem}
 
 \begin{satz}[von der offenen Abbildung]
@@ -521,9 +521,9 @@
 \begin{bsp}
   \begin{itemize}
     \item Sei $1 \leq p < \infty$ und $\tfrac{1}{p} + \tfrac{1}{p'} = 1$ und $\omega \subset \R^n$ beschränkt. Dann gilt für $f, f_k \in L^p(\Omega)$:
-    \[ f_k \convWeaklyWith{k} f \text{ in } L^p(\Omega) \iff \forall g \in L^p(\Omega) : \IntO{f_k \cdot \overline{g}}{x} \convWith{k} \IntO{f \cdot \overline{g}}{x} \]
+    \[ f_k \convWeaklyWith{k} f \text{ in } L^p(\Omega) \iff \fa{g \in L^p(\Omega)} \IntO{f_k \cdot \overline{g}}{x} \convWith{k} \IntO{f \cdot \overline{g}}{x} \]
     \item Sei $\Omega \subset \R^n$ boffen und beschränkt und $1 \leq p \leq \infty$, $m \in \N_{> 0}$. Für $u, u_k \in W^{m,p}(\Omega)$ gilt dann:
-    \[ u_k \convWeaklyWith{k} u \text{ in } W^{m,p}(\Omega) \iff \forall s, |s| \leq m : \partial^s u_k \convWeaklyWith{k} \partial^s u \text{ in } L^p(\Omega) \]
+    \[ u_k \convWeaklyWith{k} u \text{ in } W^{m,p}(\Omega) \iff \fa{s, \abs{s} \leq m} \partial^s u_k \convWeaklyWith{k} \partial^s u \text{ in } L^p(\Omega) \]
   \end{itemize}
 \end{bsp}
 \fi
@@ -601,7 +601,7 @@
 
 \begin{satz}
   Sei $X$ ein normierter Raum, $M \subset X$ konvex und abgeschlossen. Dann ist $M$ schwach folgenabgeschlossen, d.\,h. sind $x_k, x \in X$ für $k \in \N$, so gilt
-  \[ \forall \, k \in \N \,:\, x_k \in M, x_k \convWeaklyWith{k} x \text{ in } X \implies x \in M \]
+  \[ \fa{k \in \N} x_k \in M, x_k \convWeaklyWith{k} x \text{ in } X \implies x \in M \]
 \end{satz}
 
 \begin{lem}[Mazur]
@@ -616,7 +616,7 @@
 
 % Sei dazu $\Omega \subset \R^n$ offen, beschränkt, zusammenhängend mit $\mathcal{C}^{0,1}$-Rand sowie $\K = \R$. Sei $a_{ij} = a_{ji} \in L^\infty(\Omega)$, $i,j = 1, ..., n$ gleichmäßig elliptisch, $f \in L^2(\Omega)$ sowie $E(u) = \Int{}{}{ \tfrac{1}{2} \sum_{i,j=1}^n \partial_i u a_{ij} \partial_j u + f u }{x}$, $E : W^{1,2}(\Omega) \to \R$.
 
-% Für $M \subset W^{1,2}(\Omega)$ nicht leer, konvex, abgeschlossen mit $\forall \, u_0 \in M \,:\, \exists \, C_0 < \infty \,:\, \forall \, \xi \in \R \,:\, u_0 + \xi \in M \implies \abs{\xi} \leq C$ gilt dann (ohne Beweis)
+% Für $M \subset W^{1,2}(\Omega)$ nicht leer, konvex, abgeschlossen mit $\fa{u_0 \in M} \ex{C_0 < \infty} \fa{\xi \in \R} u_0 + \xi \in M \implies \abs{\xi} \leq C$ gilt dann (ohne Beweis)
 % \begin{itemize}
 %   \item $E$ besitzt auf $M$ ein absolutes Minimum
 %   \item Die absoluten Minima von $E$ auf $M$ sind genau die Lösungen der Variationsungleichung: Finde $u \in M$, sodass $\Int{\Omega}{}{\sum_{i,j=1}^n \partial_i (u-v) a_{ij} \partial_j u + (u-v) f}{x}$ für alle $v \in M$.
@@ -641,7 +641,7 @@
   Ist $X$ $\infty$-dimensionaler Raum, so sind äquivalent:
   \begin{itemize}
     \item $X$ ist separabel
-    \item $\exists X_n \subset X$ endlich-dim. Unterräume : $\forall \,n \in \N \,:\, X_n \subset X_{n{+}1}$ und $\bigcup_{n \in \N} X_n$ ist dicht in $X$.
+    \item $\exists X_n \subset X$ endlich-dim. Unterräume : $\fa{n \in \N} X_n \subset X_{n{+}1}$ und $\bigcup_{n \in \N} X_n$ ist dicht in $X$.
     \item $\exists X_n \subset X$ endlich-dim. Unterräume : $E_n \cap E_m = \{ 0 \}$ für $n \not= m$ und $\bigcup_{n \in \N} (E_0 \oplus ... \oplus E_n)$ ist dicht in $X$.
     \item $\exists$ linear unabhängige Menge $\Set{ e_n }{ n \in \N }$ mit $\mathrm{span}\Set{e_n}{ n \in \N }$ ist dicht in $X$.
   \end{itemize}
@@ -653,7 +653,7 @@
 
 \begin{defn}
   Sei $X$ normierter Raum. Eine Folge $(x_n)_{n \in \N}$ heißt \emph{Schauder-Basis} von $X$, falls:
-  \[ \forall \, x \in X \,:\, \exists \text{ eindeutige bestimmte } \alpha_k \in \K \,:\, \sum_{k=0}^n \alpha_n e_k \xrightarrow{n \to \infty} x \text{ in } X. \]
+  \[ \fa{x \in X} \ex{\text{eindeutige bestimmte } \alpha_k \in \K} \sum_{k=0}^n \alpha_n e_k \xrightarrow{n \to \infty} x \text{ in } X. \]
 \end{defn}
 
 % Sind $X^1$, $X^2$ Banachräume mit Schauderbasen $(e_k^1)_{k \in \N}$ und $(e_l^2)_{l \in \N}$ und $S \in \mathcal{L}(X^1, X^2)$, so haben $Se_k^1$ Darstellungen bzgl. $(e^2_l)_{l \in \N}$, d.\,h. es ex. eindeutig bestimmte $a_{k,l} \in \K$ mit $Se_k^1 = \sum_{l=1}^\infty a_{k,l} e_l^2$, also gilt für $x = \sum_{k=0}^\infty \alpha_k e_k^1$:
