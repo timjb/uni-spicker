@@ -1340,4 +1340,120 @@
   Dann gibt es eine stetig diff'bare $(k{-}1)$-Form $\eta$ auf $U$ mit $\varphi_1^* \sigma - \varphi_2^* \sigma = \d \eta$.
 \end{lem}
 
+% 20.1.2014
+
+% Überschrift: Vektoranalyis
+
+% $U \opn \R^n$, $f : U \to \R$ $\mathcal{C}^1$-Funktion, $F = \begin{pmatrix} F_1 \\ \vdots \\ F_n \end{pmatrix} : U \to \R^n$ $\mathcal{C}^1$-Vektorfeld
+
+% $\mathrm{grad} f : U \to \R^n, \quad u \mapsto \begin{pmatrix} \tfrac{\partial f}{\partial x_1} (u) \\ \vdots \tfrac{\partial f}{\partial x_n} (u) \end{pmatrix}$ heißt \emph{Gradient} von $f$
+
+\emph{Divergenz von $F$}
+$\mathrm{div} F : U \to \R, \quad u \mapsto \sum_{j=1}^n \frac{\partial F_j}{\partial x_j} (u)$
+
+\emph{Rotation von $F$}
+$\mathrm{rot} F : U \to \R^3, \quad u \mapsto \begin{pmatrix}
+  \frac{\partial F_3}{\partial x_2} (u) - \frac{\partial F_2}{\partial x_3} (u) \\
+  \frac{\partial F_1}{\partial x_3} (u) - \frac{\partial F_3}{\partial x_1} (u) \\
+  \frac{\partial F_2}{\partial x_1} (u) - \frac{\partial F_1}{\partial x_2} (u)
+\end{pmatrix}$
+
+Physiker-Notation:
+
+Nabla-Operator $\nabla = \begin{pmatrix} \frac{\partial}{\partial x_1} \\ \vdots \\ \frac{\partial}{\partial x_n} \end{pmatrix}$ % TODO: Pfeil!
+
+$\mathrm{grad} f = \nabla f$ % Pfeil!
+
+$\mathrm{div} F = \nabla \cdot F$ % Pfeile!
+"`Skalarprodukt-Analogon"'
+ 
+in $\R^3$: $\mathrm{rot} F = \nabla \times F$ % Pfeile!
+"`Vektorprodukt-Analogon"'
+
+Vektoranalysis im $\R^3$ mit Physiker-Notation
+
+$\d s = \begin{pmatrix} \d x_1 \\ \d x_2 \\ \d x_3 \end{pmatrix}$ % Pfeil über s
+
+$\d S = \begin{pmatrix} \d x_2 \wedge \d x_3 \\ \d x_3 \wedge \d x_1 \\ \d x_1 \wedge \d x_2 \end{pmatrix}$ % Pfeil über S
+
+$\d V = \d x_1 \wedge \d x_2 \wedge \d x_3$
+
+In Analogon zum Skalarprodukt in $U \opn \R^3$
+
+$0$-Form auf $U$: $f : U \to \R$
+
+$1$-Form auf $U$: $\omega = \sum_{j=1}^3 f_j \d x_j = F \cdot \d s$, $F = \begin{pmatrix} f_1 \\ f_2 \\ f_3 \end{pmatrix} : U \to \R^3$
+
+$2$-Form auf $U$: $\omega = g_1 \d x_2 \wedge \d x_3 + g_2 \d x_3 + \d x_1 + g_3 \d x_1 \wedge x_2 =: G \cdot \d S$, $G = \begin{pmatrix} g_1 \\ g_2 \\ g_3 \end{pmatrix}$
+
+$3$-Form auf $U$: $\omega = g \cdot \d V$, $g : U \to \R$
+
+Annahme: $f, g, F, G$ seien $\mathcal{C}^1$, dann gilt:
+
+\begin{itemize}
+  \item $\d f = \sum_{j=1}^3 \frac{\partial f}{\partial x_j} \d x_j = \mathrm{grad}(f) \cdot \d s$
+  \item $\d (F \cdot \d s) = \d (\sum_{j=1}^3 f_j \d x_j) = \sum_{j=1}^3 \d (f_j \d x_j) = \sum_{j=1}^3 \sum_{k=1}^3 \frac{\partial f}{\partial x_k} \d x_k \wedge \d x_j = ... = (\frac{\partial f_3}{\partial x_2} - \frac{\partial f_2}{\partial x_2}) \d x_2 \wedge \d x_3 + (\frac{\partial f_3}{\partial x_1} - \frac{f_1}{x_3}) \d x_1 \wedge \d x_3 + (\frac{\partial f_2}{\partial x_1} - \frac{f_1}{x_2}) \d x_1 \wedge \d x_2$
+  \item $\d (G \d S) = \d (G_1 \d x_2 \wedge \ x_3 + G_2 \d x_3 \wedge \d x_1 + G_3 \d x_1 \wedge \d x_2) = (\sum_{j=1}^3 \frac{\partial G_j}{\partial x_j}) \d x_1 \wedge \d x_2 \wedge \d x_3 = (\mathrm{div} G) \d V$
+\end{itemize}
+
+% Aufgabe:
+
+Sei $f : U \to \R$ ein $\mathcal{C}^2$-Vektorfeld, $F : U \to \R^3$ $\mathcal{C}^2$, dann gilt:
+$\mathrm{rot} (\mathrm{grad} f) = 0$, $\mathrm{div}(\mathrm{rot} F) = 0$
+
+% Aufgabe:
+
+Sei $U$ sternförmig (oder allgemeiner zusammenziehbar). Zu zeigen:
+
+\begin{itemize}
+  \item Ist $f : U \to \R^3$ ein $\mathcal{C}^1$-Vektorfeld mit $\mathrm{rot} F = 0$, dann gibt es $f : U \to \R$ ($\mathcal{C}^1$) mit $F = \mathrm{grad} f$.
+  \item Ist $G : U \to \R^3$ ein $\mathcal{C}^1$-Vektorfeld mit $\mathrm{div} G = 0$, dann gibt es $\widehat{F} : U \to \R^3$ ($\mathcal{C}^1$) mit $G = \mathrm{rot} \widehat{F}$.
+\end{itemize}
+
+
+% 3.2. Integration von Differentialformen
+
+\begin{defn}
+  Sei $U \opn \R^n$, $\omega = f \d x_1 \wedge ... \wedge \d x_n$ eine $n$-Form, wobei $f : U \to \R$ Lebesgue-integrierbar. Sei $C \subset U$ eine Borel-Menge, dann
+  \[ \Int{C}{}{\omega}{} \coloneqq \Int{C}{}{f}{\lambda_n} \in \R \]
+\end{defn}
+
+% Übungsaufgabe:
+
+$\phi : \widetilde{U} \to U$ sei $\mathcal{C}^1$-Abbildung, $U, \widetilde{U} \opn \R^n$, dann
+$\phi^* \omega = ((f \circ \phi) \cdot \det(D\phi)) \d x_1 \wedge ... \wedge \d x_n$
+
+Transformationsregel für Integrale von $n$-Formen
+
+Sei $\phi : \widetilde{U} \to U$, $\widetilde{U}, U \opn \R^n$. Sei $\omega = f \d x_1 \wedge ... \wedge \d x_n$ eine $n$-Form auf $U$. Dann gilt für ein Kompaktum $C \subset \widetilde{U}$:
+\[ \Int{C}{}{\phi^* \omega}{} = \Int{C}{}{(f \circ \phi) \cdot \det(D\phi) \d x_1 \wedge ... \wedge \d x_n}{} = \Int{C}{}{(f \circ \phi) \det(D\phi)}{\d \lambda_n}. \]
+Wenn $\det(D\phi(\widetilde{u})) > 0$ für alle $\widetilde{u} \in U$ (also $\phi$ orientierungserhaltend):
+\[ \Int{C}{}{\phi^* \omega}{} = \Int{C}{}{(f \circ \phi) \cdot \abs{\det{D\phi}}} = \Int{\phi(C)}{}{f}{\d \lambda_n} = \Int{\phi(C)}{}{\omega}{} \]
+Wenn $\det(D\phi(\widetilde{u})) < 0$ für alle $\widetilde{u} \in U$ (also $\phi$ orientierungsumkehrend):
+\[ \Int{C}{}{\phi^* \omega}{} = - \Int{\phi(C)}{}{\omega}{} \]
+
+Teilung der Eins:
+
+Hutfunktion: $g : \R \to \R, \quad x \mapsto \begin{cases} \exp(\frac{1}{t^2 - 1}), & \abs{x} < 0 \\ 0, \abs{x} \geq 1 \end{cases}$ ist $\mathcal{C}^2$
+
+Hutsummen: $G : \R \to \R, \quad x \mapsto \sum_{k \in \Z} g(x-k)$
+
+normalisierter Hut für $k \in \Z$: $h_k : \R \to \R, \quad x \mapsto \frac{g(x-k)}{G(x)}$ ist $\mathcal{C}^\infty$, dann $\mathrm{supp}(h_k) = \left[ k-1, k+1 \right]$
+
+Tolle Eigenschaft: $\sum_{k \in \Z} h_k(x) = \sum_{k \in \Z} \frac{g(x-k)}{G(x)} = \frac{1}{G(x)} \sum_{k \in \Z} g(x-k) = 1$ für alle $x \in \R$
+
+Also $\{ h_k \}$ bilden \emph{Teilung der Eins}
+
+In $\R^n$: Sei $q = (q_1, ..., q_n) \in \Z^n$, $\epsilon > 0$
+
+$\d \alpha_{q,\epsilon} : \R^n \to \R, (x_1, ..., x_n) \mapsto \prod_{j=1}^{n} h_{q_j} \cdot (\frac{x_j}{\epsilon})$
+
+Es gilt:
+
+\begin{itemize}
+  \item $\d \alpha_{q, \epsilon}$ ist $\mathcal{C}^\infty$
+  \item $\mathrm{supp} \alpha_{q,\epsilon} = \Set{ (x_1, ..., x_n) \in \R^n }{ \abs{x_j - \epsilon q_j} \leq \epsilon \text{ für alle } j \in \{ 1, ..., n \} }$
+  \item $\sum_{q \in \Z^n} \alpha_{q, \epsilon} = 1$ (Übung)
+\end{itemize}
+
 \end{document}
