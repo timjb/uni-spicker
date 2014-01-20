@@ -491,7 +491,7 @@ Zu jeder Booleschen Algebra $\mathfrak{A}$ gibt es eine Menge $\Omega$ derart, d
 
 \begin{nota}
   Sei $\Omega$ eine Menge, $A \subset \Omega$. Dann heißt
-  \[ \ind_A : \Omega \to \R, \quad \omega \mapsto \abs{\Set{ \star }{ \omega \in A }} =
+  \[ \chi_1 = \ind_A : \Omega \to \R, \quad \omega \mapsto \abs{\Set{ \star }{ \omega \in A }} =
   \begin{cases}
     1, & \text{falls } \omega \in A \\
     0, & \text{falls } \omega \not\in A
@@ -862,13 +862,41 @@ Falls $V_a^b(g) < \infty$, so heißt $g$ \emph{von beschränkter Variation}.
 
 % Kapitel 3.5.1. Satz von der monotonen Konvergenz
 
-% TODO
+\begin{satz}[von der monotonen Konvergenz]
+  Sei für alle $n \in \N$ die Funktion $f_n : (\Omega, \Alg, \mu) \to (\R^1, \LebAlg(\R^1))$ nicht negativ und $\Alg$-messbar, sodass $(f_n)_{n \in \N}$ eine isotone Folge ist. Dann gilt
+  \[ \IntOmu{\lim_{n \to \infty} f_n} = \IntOmu{\sup_{n \in \N} f_n} = \sup_{n \in \N} \IntOmu{f_n} = \lim_{n \to \infty} \IntOmu{f_n}. \]
+\end{satz}
 
+\begin{kor}[Beppo Levi]
+  Sei $(f_n)_{n \in \N}$ eine Folge nicht negativer, $\Alg$-messbarer, numerischer Funktionen auf $(\Omega, \Alg, \mu)$. Dann gilt
+  \[ \IntOmu{\sum_{n=1}^{\infty} f_n} = \sum_{n=1}^\infty \IntOmu{f_n}. \]
+\end{kor}
+
+\begin{defn}
+  Sei $(\Omega, \Alg)$ ein messbarer Raum mit Maßen $\mu$ und $\eta$. Dann heißt $\mu$ \emph{absolut stetig} bezüglich $\eta$ (notiert $\mu \ll \eta$), falls
+  \[ \eta(A) = 0 \implies \mu(A) = 0 \quad \text{ für alle } A \in \Alg. \]
+\end{defn}
+
+% TODO: Namen dieses Maßes?
+\begin{satz}
+  Sei $(\Omega, \Alg, \mu)$ ein Maßraum und $f : (\Omega, \Alg) \to (\ER^1, \Leb(\ER^1))$ nichtnegativ und $\mu$-integrierbar. Dann definiert
+  \[ \nu : \Alg \to \left[0, \infty \right], \quad A \mapsto \Int{A}{}{f}{\mu} = \IntOmu{f \cdot \chi_A} \]
+  ein zu $\mu$ absolut stetiges, endliches Maß auf $(\Omega, \Alg)$.
+\end{satz}
+
+\begin{lem}[Fatou]
+  Sei für $n \in \N$ die Fkt. $f_n : (\Omega, \Alg, \mu) \to (\R^1, \LebAlg(\R^1))$ nicht negativ und $\Alg$-messbar. Dann gilt
+  \[ \IntOmu{\liminf_{n \to \infty} f_n} \leq \liminf_{n \to \infty} \IntOmu{f_n}. \]
+  Falls $\IntOmu{\sup_{n \in \N} f_n} < \infty$, gilt zusätzlich
+  \[ \IntOmu{\limsup_{n \to \infty} f_n} \geq \limsup_{n \to \infty} \IntOmu{f_n}. \]
+\end{lem}
 
 
 % Vorlesung 20
 
+% Satz von F. Riesz
 
+% TODO
 
 
 
@@ -898,35 +926,6 @@ Falls $V_a^b(g) < \infty$, so heißt $g$ \emph{von beschränkter Variation}.
 
 % TODO: Was ist eine numerische Funktion?
 
-% Folgerung
-
-% Satz: Jede nichtnegative, messbare, numerische Funktion ist Grenzwert einer Folge einfacher Funktionen
-% Def: $\mu$-Integral von solchen Funktionen
-
-
-
-\begin{satz}
-  Sei $f_n : (\Omega, \Alg, \mu) \to (\R^1, \LebAlg(\R^1))$ $\Alg$-messbar und $0 \leq f_1 \leq f_2 \leq ...$. Dann gilt
-  \[ \IntOmu{\sup_{n \in \N} f_n} = \sup_{n \in \N} \IntOmu{f_n} \]
-\end{satz}
-
-% Folgerung
-\begin{satz}[von Beppo Levi]
-  Sei $(f_n)_{n \in \N}$ eine Folge monotoner nichtnegativer, $\Alg$-messbarer, numerischer Funktionen auf $(\Omega, \Alg, \mu)$. Dann gilt:
-  \[ \IntOmu{\sum_{n=1}^{\infty} f_n} = \sum_{n=1}^\infty \IntOmu{f_n} \]
-\end{satz}
-
-% Folgerung
-\begin{satz}
-  $f$ sei $\Alg$-messbar, nichtnegativ und $\mu$-integrierbar. Dann ist
-  \[ \nu(A) \coloneqq \Int{A}{}{f}{\mu} = \IntOmu{f \cdot \chi_A} \]
-  ein endliches Maß auf $(\Omega, \Alg)$.
-\end{satz}
-
-\begin{satz}[Lemma von Fatou]
-  Sei $f_n : (\Omega, \Alg, \mu) \to (\R^1, \LebAlg(\R^1))$ eine Folge $\Alg$-messbarer, nichtnegativer Funktionen. Dann gilt:
-  \[ \IntOmu{\liminf_{n \to \infty} f_n} \leq \liminf_{n \to \infty} \IntOmu{f_n} \]
-\end{satz}
 
 % Approximationssatz für Maße?
 
