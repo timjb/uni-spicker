@@ -10,15 +10,16 @@
 \newcommand{\Alg}{\mathfrak{A}} % (Mengen-)Algebra
 \newcommand{\Ring}{\mathfrak{R}} % (Mengen-)Ring
 \newcommand{\LebAlg}{\mathfrak{L}} % Lebesgue-Borel-Mengen
-\renewcommand{\P}{\mathbb{P}}
+\renewcommand{\P}{\mathbb{P}} % Wahrscheinlichkeitsmaß
 \newcommand{\E}{\mathbb{E}} % Elementare Funktion, Erwartungswert
-\newcommand{\ER}{\overline\R} % Erweiterte reelle Zahlen
 \newcommand{\Bor}{\mathfrak{B}} % Borel
 \newcommand{\Leb}{\mathcal{L}} % Lebesgue
 \newcommand{\ind}{\mathbbm{1}} % Indikatorfunktion
 \newcommand{\Var}{\mathrm{Var}} % Varianz
 \newcommand{\cov}{\mathrm{Var}} % Kovarianz
 \newcommand{\cor}{\mathrm{Var}} % Korrelation
+\DeclareMathOperator*{\esssup}{ess\,sup} % Essentielles Supremum
+\newcommand{\fue}{\overset{\text{f.ü.}}} % fast überall
 
 \newcommand{\IntO}[2]{\Int{\Omega}{}{#1}{#2}} % Integral über \Omega
 \newcommand{\IntOmu}[1]{\Int{\Omega}{}{#1}{\mu}} % Integral über \Omega bzgl. \mu
@@ -521,7 +522,7 @@ Zu jeder Booleschen Algebra $\mathfrak{A}$ gibt es eine Menge $\Omega$ derart, d
 \end{lem}
 
 \begin{nota}
-  Seien $f, g : \Omega \to \overline{\R}$ zwei numerische Funktionen. Setze
+  Seien $f, g : \Omega \to \ER$ zwei numerische Funktionen. Setze
     \[ \{ f \leq g \} \coloneqq \Set{ \omega \in \Omega }{ f(\omega) \leq g(\omega) } \subset \Omega \]
   und definiere analog $\{ f < g \}$, $\{ f \geq g \}$, $\{ f > g \}$, $\{ f = g \}$, $\{ f \not= g \}$.
 \end{nota}
@@ -783,6 +784,88 @@ Falls $V_a^b(g) < \infty$, so heißt $g$ \emph{von beschränkter Variation}.
 
 % Vorlesung 19
 
+\begin{satz}
+  Sei $f : (\Omega, \Alg, \mu) \to (\ER^1, \LebAlg(\R^1))$ messbar. Dann sind äquivalent:
+  \begin{itemize}
+    \miniitem{0.38 \linewidth}{$f$ ist $\mu$-integrierbar}
+    \miniitem{0.6 \linewidth}{$f^+$ und $f^-$ sind $\mu$-integrierbar}
+    \miniitem{0.38 \linewidth}{$\abs{f}$ ist $\mu$-integrierbar}
+    \miniitem{0.6 \linewidth}{$\exists$ $\mu$-integrierbare Funktion $g$ mit $\abs{f} \leq g$}
+  \end{itemize}
+\end{satz}
+
+% Ausgelassen: Bemerkung, dass i.A. uneigentliche Riemann-Integrale nicht Lebesgue-integrierbar sind
+
+\begin{satz}
+  Seien $f, g : (\Omega, \Alg, \mu) \to (\ER^1, \LebAlg(\ER^1))$ $\mu$-integrierbar und $\alpha, \beta \in \R$. Dann sind auch $\mu$-integrierbar:
+  \begin{itemize}
+    \begin{multicols}{4}
+      \item $f \pm g$
+      \item $f \vee g$
+      \item $f \wedge g$
+      \item $\alpha \cdot f$
+    \end{multicols}
+  \end{itemize}
+  Es gilt: \enspace
+  \begin{minipage}{0.86\linewidth}
+    \begin{itemize}
+      \item $\IntOmu{(\alpha \cdot f + \beta \cdot g)} = \alpha \IntOmu{f} + \beta \IntOmu{g}$ \pright{Linearität}
+    \end{itemize}
+  \end{minipage}
+  \vspace{-4pt}
+  \begin{itemize}
+    \miniitem{0.35 \linewidth}{$\abs{\IntOmu{f}} \leq \IntOmu{\abs{f}}$} %\enspace ($\triangle$-Ungl.)}
+    \miniitem{0.63 \linewidth}{$f \leq g \implies \IntOmu{f} \leq \IntOmu{g}$ \pright{Monotonie}}
+  \end{itemize} 
+\end{satz}
+
+\begin{acht}
+  Das Produkt $(f \cdot g)$ ist i.\,A. nicht $\mu$-integrierbar!
+\end{acht}
+
+\begin{defn}
+  Sei $(\Omega, \Alg, \mu)$ ein Maßraum und $f : (\Omega, \Alg) \to (\ER, \mathcal{L}(\ER))$. Für $p \in \left[1, \infty\right[$ heißt $f$ \emph{$p$-integrierbar}, falls $\abs{f}^p$ $\mu$-integrierbar ist.
+  \begin{align*}
+    L^p(\Omega, \Alg, \mu) &\coloneqq \Set{ f : \Omega \to \ER }{\text{$f$ $p$-integrierbar, also } \IntOmu{\abs{f}^p} < \infty}, \\
+    L^\infty(\Omega, \Alg, \mu) &\coloneqq \Set{ f : \Omega \to \ER }{\exists \, C > 0 \,:\, \abs{f} \leq C \text{ fast überall}}
+  \end{align*}
+  ist dann ein VR, genannt \emph{Lebesgue-Raum} ($L^p$-Raum), mit Norm
+  \begin{align*}
+    \norm{f}_p &\coloneqq ( \IntOmu{\abs{f}^p} )^{\tfrac{1}{p}} \\
+    \norm{f}_\infty &\coloneqq \esssup_{\omega \in \Omega} \, \abs{f(\omega)} \coloneqq \inf \Set{ C \in \R }{ \abs{f} \leq C \text{ fast-überall} }
+  \end{align*}
+  Wir betrachten in $L^p$ zwei Funktionen als gleich, wenn sie bis auf einer Nullmenge übereinstimmen. Die $\triangle$-Ungleichung in $L^p$ wird auch \emph{Minkowski-Ungleichung} genannt.
+\end{defn}
+
+\begin{satz}
+  Der $L^p(\mu)$ ist ein vollständiger normierter Raum, d.\,h. jede Cauchy-Folge bzgl. der Norm $\| \cdot \|_p$ ist auch konvergent.
+\end{satz}
+
+\begin{satz}
+  Sei $f \in L^p(\Omega, \Alg, \mu)$, $g \in \L^q(\Omega, \Alg, \mu)$ mit $\tfrac{1}{p} + \tfrac{1}{q} = 1$. Dann ist $fg \in \L^1(\Omega, \Alg, \mu)$ und es gilt
+  \[ \norm{fg}_1 \leq \norm{f}_p \cdot \norm{g}_q \quad \text{\emph{(Hölder-Ungleichung).}} \]
+\end{satz}
+
+\begin{bem}
+  Für $p = 2$ ist $L^p(\Omega, \Alg, \mu)$ der Hilbertraum der quadratisch integrierbaren Funktionen mit dem Skalarprodukt
+  \[ \langle f , g \rangle \coloneqq \IntOmu{(f \cdot g)}. \]
+  Mit $q = 2$ folgt aus der Hölder-Ungleichung
+  \[ \abs{\langle f , g \rangle} = \norm{fg}_1 \leq \norm{f}_2 \cdot \norm{g}_2 \quad \text{\emph{(Cauchy-Schwarz-Ungl.)}} \]
+\end{bem}
+
+\begin{satz}
+  Sei $f : (\Omega, \Alg, \mu) \to (\ER^1, \mathcal{L}(\ER^1))$ nichtnegativ. Dann gilt
+  \[ \IntOmu{f} = 0 \quad \iff \quad f \fue{=} 0. \]
+\end{satz}
+
+% Kapitel 3.5. Konvergenzsätze für Integrale messbarer Funktionen
+
+% Kapitel 3.5.1. Satz von der monotonen Konvergenz
+
+% TODO
+
+
+
 % Vorlesung 20
 
 
@@ -820,46 +903,7 @@ Falls $V_a^b(g) < \infty$, so heißt $g$ \emph{von beschränkter Variation}.
 % Satz: Jede nichtnegative, messbare, numerische Funktion ist Grenzwert einer Folge einfacher Funktionen
 % Def: $\mu$-Integral von solchen Funktionen
 
-% Integral von nicht unbedingt nicht-negativen messbaren Funktionen
 
-\begin{satz}
-  Sei $f : (\Omega, \Alg, \mu) \to (\overline{R}^1, \LebAlg(\R^1))$ sein $\Alg$-messbar, numerisch. Dann sind äquivalent:
-  \begin{itemize}
-    \item $f$ ist $\mu$-integrierbar
-    \item $f^+$ und $f^-$ sind $\mu$-integrierbar mit $\IntOmu{f^{\pm}} < \infty$
-    \item $\IntOmu{|f|} < \infty$
-    \item $\IntOmu{g} < \infty$ für eine $\Alg$-messbare, numerische Funktion mit $|f| \leq g$
-  \end{itemize}
-\end{satz}
-
-\begin{satz}
-  Seien $f, g : (\Omega, \Alg, \mu) \to (\R^1, \LebAlg(\R^1))$ $\mu$-integrierbar. Dann sind $f \pm g$, $f \vee g$, $f \wedge g$ und $\alpha \cdot f$ für $\alpha \in \R^1$ $\mu$-integrierbar und es gilt
-  \begin{align*}
-    \IntOmu{\alpha \cdot f + \beta \cdot g} = \alpha \IntOmu{f} + \beta \IntOmu{g}, & \quad
-    \left| \IntOmu{f} \right| \leq \IntOmu{|f|}, \\
-    f \leq g \implies \IntOmu{f} &\leq \IntOmu{g}
-  \end{align*}
-\end{satz}
-
-\begin{defn}
-  Mit $L^p(\mu) = L^p(\Omega, \Alg, \mu)$ bezeichnen wir den normierten Vektorraum der aus den Funktionen $f : (\Omega, \Alg, \mu) \to (\R^1, \LebAlg(\R^1))$ mit $\IntOmu{|f|^p} < \infty$ für $1 \leq p \leq \infty$ besteht. Die Norm in diesem Raum wird durch
-  \[ \|f\|_p \coloneqq \left( \IntOmu{|f|^p} \right)^{1/p} \]
-  definiert. Es kann gezeigt werden, dass die Normeigenschaften erfüllt sind.
-\end{defn}
-
-% Definition: Konvergenz im $L^p(\mu)$
-
-\begin{bem}
-  Der $L^p(\mu)$ ist ein vollständiger normierter Raum, d.\,h. jede Cauchy-Folge bzgl. der Norm $\| \cdot \|_p$ ist auch konvergent. Im Spezialfall $p = 2$ heißt $L^p(\mu)$ Hilbertraum der quadratisch integrierbaren Funktionen mit Skalarprodukt $\langle f , g \rangle = \IntOmu{f \cdot g}$. Es gilt in diesem Fall außerdem die Cauchy-Schwarz-Bunjakowski-Ungleichung:
-  \[ \| f \cdot g \|_{1} \leq \|f\|_2 \cdot \|g\|_2 \]
-  Höldersche Ungleichung:
-  \[ \| f \cdot g \|_{1} \leq \|f\|_p \cdot \|g\|_q \]
-  wobei $p, q \in [1, \infty]$ mit $\tfrac{1}{p} + \tfrac{1}{q} = 1$.
-\end{bem}
-
-% Konvergenzsätze für Integrale messbarer Funktionen
-
-% 3.5.1 Satz von der monotonen Konvergenz
 
 \begin{satz}
   Sei $f_n : (\Omega, \Alg, \mu) \to (\R^1, \LebAlg(\R^1))$ $\Alg$-messbar und $0 \leq f_1 \leq f_2 \leq ...$. Dann gilt

@@ -99,6 +99,7 @@
 
 % Mathematische Symbole
 \newcommand{\R}{\mathbb{R}} % Reelle Zahlen
+\newcommand{\ER}{\overline\R} % Erweiterte reelle Zahlen
 \newcommand{\N}{\mathbb{N}} % Natürliche Zahlen
 \newcommand{\Z}{\mathbb{Z}} % Ganze Zahlen
 \newcommand{\C}{\mathbb{C}} % Komplexe Zahlen
@@ -106,7 +107,7 @@
 \renewcommand{\d}{\mathrm{d}} % Differentiator
 
 \newcommand{\spur}{\mathrm{spur}} % Spur
-\newcommand{\id}{\mathrm{id}}
+\newcommand{\id}{\mathrm{id}} % Identität
 
 % Name einer Eigenschaft rechts ausgerichtet in Klammern
 \newcommand{\pright}[1]{\hfill ({#1}) \,}
