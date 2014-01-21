@@ -691,7 +691,60 @@ $S$ ist also eindeutig bestimmt durch die "`unendliche Matrix"' $(a_{k,l})_{k,l 
 \end{satz}
 
 \begin{bem}
-  In diesem Fall ist $X$ isometrisch isomorph zu $\mathcal{l}^l(\K)$ (Übergang zu Koeffizienten bzgl. Basis)
+  In diesem Fall ist $X$ isometrisch isomorph zu $\mathcal{l}^2(\K)$ (Übergang zu Koeffizienten bzgl. Basis)
 \end{bem}
+
+
+% Vorlesung vom 21.1.2014
+
+\begin{bsp}
+  Betrachte $L^2(\left] -\pi, \pi \right[, \K)$. Dann ist durch $e_k(x) = \frac{1}{\sqrt{2\pi}} e^{ikx}$ für $k \in \Z$ eine Orthonormalbasis von $L^2(\left] -\pi, \pi \right[, \C)$ gegeben. Weiter ist durch $\widetilde{e}_0(x) = \frac{1}{\sqrt{2\pi}}$, $\widetilde{e}_{k}(x) = \frac{1}{\sqrt{2\pi}} \sin(kx)$ für $k > 0$ und $\widetilde{e}_k(x) = \frac{1}{\sqrt{2 \pi}} \cos(kx)$ für $k < 0$ eine ONB von $L^2(\left] -\pi, \pi \right[, \R)$ gegeben.
+\end{bsp}
+
+% Dazu nachzuweisen: Orthogonalsystem (Übungsaufgabe), Dichtheit (dazu folgender Beweis)
+
+\begin{lem}
+  Zu $f \in L^2(\left] -\pi, \pi \right[, \C)$ sei $P_n f = \sum_{\abs{k} \leq n} (f | e_k)_{L^2} e_k$ mit $e_k$ wie im Beispiel die \emph{Fourier-Summe} von $f$. Ist $f$ Lipschitz-stetig, gilt $f(x) = \lim_{n \to \infty} P_n f(x)$.
+\end{lem}
+
+% 7.2. Projektion
+
+Die Fourier-Summe erlaubt die explizite Approximation von $f$ im Unterraum $X = \mathrm{span} \Set{e_k}{ \abs{k} \leq n }$. Allgemein führt man ein:
+
+\begin{defn}
+  Sei $Y$ Unterraum des Vektorraums $X$. Eine lineare Abbildung $P : X \to X$ heißt \emph{(lineare) Projektion auf $Y$}, falls $P^2 = P$ und $\mathrm{Bild}(P) = Y$.
+\end{defn}
+
+\begin{lem}
+  \begin{itemize}
+    \item $P$ ist Projektion auf $Y$ $\iff$ $P : X \to Y$ und $P = \mathrm{Id}$ auf $Y$.
+    \item $P : X \to X$ ist Projektion $\implies$ $X = \mathrm{ker}(P) \oplus \mathrm{im}(P)$
+    \item $P : X \to X$ ist Projektion $\implies$ $\mathrm{Id} - P$ ist Projektion und $\ker(\mathrm{Id} - P) = \mathrm{im}(P)$, $\mathrm{im}(\mathrm{Id} - P) = \mathrm{ker}(P)$.
+    \item Zu jedem Unterraum $Y$ von $X$ gibt es eine Projektion auf $Y$.
+  \end{itemize}
+\end{lem}
+
+% Bemerkung: Die Projektion in (4) ist i.\,A. nicht stetig; dazu in Kürze mehr
+
+% Im Paragraph 3 hatten wir für normierte Räume $X$ bereits die Menge der \emph{stetigen (linearen) Projektionen} $\mathcal{P}(X) = \Set{P \in \mathcal{L}(X)}{P^2 = P}$ eingeführt
+
+\begin{lem}
+  Für $P \in \mathcal{P}(X)$ gilt:
+  \begin{itemize}
+    \item $\mathrm{ker}(P)$ und $\mathrm{im}(P)$ sind abgeschlossen
+    \item $\norm{P} \geq 1$ oder $\norm{P} = 0$
+  \end{itemize}
+\end{lem}
+
+\begin{satz}[vom abgeschlossenen Komplement]
+  Sei $X$ ein Banachraum. Gegeben sei ein abgeschlossener Unterraum $Y$ sowie ein Unterraum $Z$ mit $X = Y \oplus Z$. Dann gilt:
+  \[ \ex{\text{stetige Projektion $P$ auf $Y$ mit $Z = \ker(P$}} \iff Z \text{ ist abgeschlossen} \]
+\end{satz}
+
+\begin{bem}
+  Ist $Y$ abgeschlossener Unterraum eines Banachraumes $X$, so besitzt $Y$ ein abeschlossenes Komplement genau dann, wenn es eine stetige Projektion auf $Y$ gibt.
+\end{bem}
+
+Zwei wichtige Klassen von Unterräumen, die ein abgeschlossenes Komplement besitzen, sind endlich-dimensionale Unterräume beliebiger Banachräume sowie abgeschlossene Unterräume von Hilberträumen.
 
 \end{document}
