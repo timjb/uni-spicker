@@ -324,6 +324,35 @@
 
 % Ausgelassen: Beispiel: Inhalt der Elementarquader im $\R^d$
 
+\begin{defn}
+  Sei $f : \R^d \to \R^1$ eine Funktion, $x = (x_1, ..., x_d) \in \R^d$ und $h = (h_1, ..., h_d) \in \R_{\geq 0}^d$. Dann heißt
+  \[ (\triangle f)(\left] x, x + h \right]) \coloneqq \sum_{\mathclap{\delta_1, ..., \delta_d \in \{0,1\}}} \, (-1)^{d-(\delta_1 + ... + \delta_k)} f(x_1 + \delta_1 h_1, ..., x_d + \delta_d h_d) \]
+  \emph{Zuwachs} von $f$ im Hyperquader $\left] x, x+h \right]$.
+\end{defn}
+% Ausgelassen: Alternative, rekursive Definition der Zuwächse
+
+\begin{defn}
+  Eine Funktion $G : \R^d \to \R$ heißt \emph{maßerzeugende Funktion}, falls gilt
+  \begin{itemize}
+    \item $G$ ist nicht-fallend in jedem Argument, d.\,h. für alle $k \in \{ 1, ..., d \}$ und $x_1, ..., x_d \in \R$ ist $f(x_1, ..., x_{k-1}, -, x_{k+1}, ..., x_d)$ nicht-fallend.
+    \item $G$ ist rechtsseitig stetig in jedem Argument, d.\,h. für alle $k \in \{ 1, ..., d \}$ und $x_1, ..., x_d \in \R$ gilt
+    \[ \lim_{h \downarrow 0} f(x_1, ..., x_{k-1}, x_k + h, x_{k+1}, ..., x_d) = f(x_1, ..., x_d). \]
+    \item Für alle $x \in \R^d$ und $h \in \R_{\geq 0}^d$ ist der Zuwachs $(\triangle G)(\left] x, x + h \right]) \geq 0$.
+  \end{itemize}
+\end{defn}
+
+% Ausgelassen: Bemerkung: Die dritte Eigenschaft folgt i.A. nicht aus den beiden ersten; Gegenbeispiel
+
+\begin{defn}
+  Eine maßerzeugende Funktion $F$ heißt \emph{Verteilungsfunktion} (VF) in $\R^d$, falls zusätzlich gilt:
+  \[
+    \lim_{\substack{x_1 \to \infty \\ ... \\ x_d \to \infty}} F(x_1, ..., x_d) = 1
+    \quad \text{und} \quad
+    \lim_{x_i \to -\infty} F(x_1, ..., x_d) = 0
+  \]
+  für alle $i \in \{ 1, ..., d \}$ und $x_1, ..., \widehat{x_i}, ..., x_d \in \R$ fest.
+\end{defn}
+
 % TODO: maßerzeugende Funktionen, ...
 
 
