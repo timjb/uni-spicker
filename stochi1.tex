@@ -217,8 +217,7 @@ Zu jeder Booleschen Algebra $\mathfrak{A}$ gibt es eine Menge $\Omega$ derart, d
 
 \begin{defn}
   Sei $\Omega \in \LebAlg(\R^d)$ mit $\lambda_d(\Omega) > 0$. Dann heißt das W-Maß
-  \[ \P : \LebAlg(\Omega) \to [0, 1], \quad A \mapsto \tfrac{\lambda_d(A)}{\lambda_d(\Omega)} \]
-  auf $(\Omega, \LebAlg(\Omega))$ \emph{Gleichverteilung}.
+  \[ \P : \LebAlg(\Omega) \to [0, 1], \quad A \mapsto \tfrac{\lambda_d(A)}{\lambda_d(\Omega)} \quad \text{\emph{Gleichverteilung}.} \]
 \end{defn}
 
 \begin{defn}
@@ -369,7 +368,6 @@ Zu jeder Booleschen Algebra $\mathfrak{A}$ gibt es eine Menge $\Omega$ derart, d
 
 \begin{defn}
   Sei $(A_i)_{i \in I}$ ($I$ bel.) eine Familie von Ereignissen in $\Alg$.
-
   \begin{itemize}
     \item \emph{vollständig unabhhängig}, falls
     \[ \P(A_{i_1} \cap A_{i_2} \cap ... \cap A_{i_m}) = \P(A_{i_1}) \cdot \P(A_{i_2}) \cdots \P(A_{i_n}) \]
@@ -894,7 +892,138 @@ Falls $V_a^b(g) < \infty$, so heißt $g$ \emph{von beschränkter Variation}.
 
 % Vorlesung 20
 
-% Satz von F. Riesz
+% Kapitel 3.5.3. Satz von F. Riesz
+
+\begin{defn}
+  Eine Folge $(f_n)_{n \in \N}$ $\Alg$-messbarer, numerischer Fktn. über $(\Omega, \Alg, \mu)$ \emph{konvergiert $\mu$-fast-überall} gegen $f : \Omega \to \Alg$, falls
+  \[ \lim_{n \to \infty} f_n(\omega) = f(\omega) \quad \text{für $\mu$-fast-alle $\omega \in \Omega$ gilt.} \]
+\end{defn}
+
+% Ausgelassen: Notation
+
+\begin{satz}[Riesz]
+  Sei $(f_n)_{n \in \N}$ Folge in $L^p(\Omega, \Alg, \mu)$, $f_n \xrightarrow[n \to \infty]{\text{f.ü.}} f$ mit $f \in L^p(\mu)$. Dann gilt
+  \[ f_n \xrightarrow[n \to \infty]{L^p(\mu)} f \quad \iff \quad \Int{\Omega}{}{\abs{f_n}^p}{\mu} \xrightarrow{n \to \infty} \Int{\Omega}{}{\abs{f}^p}{\mu}. \]
+\end{satz}
+
+% Kapitel 3.5.4. Satz von der majorisierten Konvergenz
+
+\begin{satz}[von der majorisierten Konvergenz]
+  Sei $(f_n)_{n \in \N}$ Folge $\Alg$-messbarer numerischer Funktionen auf $(\Omega, \Alg, \mu)$ und $g \in L^1(\mu)$ nicht negativ, sodass $\abs{f_n} \leq g$ für alle $n \in \N$. Sei desweiteren $f : \Omega \to \ER$ messbar mit $f_n \xrightarrow[n \to \infty]{\text{$\mu$-f.ü.}} f$. Dann ist
+  \[ f \in L^1(\mu) \quad \text{mit} \quad \Int{\Omega}{}{f}{\mu} = \lim_{n \to \infty} \Int{\Omega}{}{f_n}{\mu}. \]
+\end{satz}
+
+% Kapitel 3.6. Integration bzgl. des Bildmaßes
+
+\begin{satz}
+  Sei $f : (\Omega, \Alg, \mu) \to (\Omega', \Alg')$ und $\mu' \coloneqq \mu \circ f^{-1}$ das Bildmaß von $\mu$ unter $f$. Sei $g : (\Omega', \Alg') \to (\R^1, \Bor(\R^1))$ nicht negativ. Dann gilt
+  \[ \Int{\Omega'}{}{g}{\mu'} = \Int{\Omega}{}{(g \circ f)}{\mu}. \]
+\end{satz}
+
+% Vorlesung 21
+
+% TODO: Klare Abtrennung Lebesgue-Borel-Maß und Lebesgue-Maß
+% TODO: Klare Abtrennung Borel-Mengen und Lebesgue-Mengen
+% TODO: Einführung des Symbols $\lambda_d$ für das Lebesgue-Maß auf $\R^d$
+\begin{satz}[Transformationssatz]
+  Sei $U, \widetilde{U} \opn \R^d$ und sei $\phi : U \to \widetilde{U}$ ein $\mathcal{C}^1$-Diffeomorphismus. Dann ist eine Funktion $f : \widetilde{U} \to \ER$ genau dann auf $\widetilde{U}$ Lebesgue-Borel-integrierbar, wenn $(f \circ \phi) \cdot \left|\det(D\phi)\right| : U \to \ER$ auf $U$ Lebesgue-Borel-interierbar ist. In diesem Fall gilt
+  \[ \Int{U}{}{(f \circ \phi) \cdot \left|\det(D\phi)\right|}{\lambda_d} = \Int{\phi(U)}{}{f}{\lambda_d} = \Int{\widetilde{U}}{}{f}{\lambda_d}. \]
+  Obige Gleichung ist auch erfüllt, wenn lediglich $f \geq 0$ gilt.
+\end{satz}
+
+\begin{defn}
+  Für eine ZG $X : (\Omega, \Alg, \P) \to (\ER^1, \Bor(\ER^1))$ heißt die Zahl
+  \[ \E X := \Int{\Omega}{}{X}{\P} \qquad \text{\emph{Erwartungswert} von $X$.} \]
+\end{defn}
+
+\begin{satz}
+  $\E X = \Int{\R^1}{}{\id}{P_X}$, wobei $P_X \coloneqq \P \circ X^{-1}$.
+\end{satz}
+% TODO: Eigene Definition für $P_X$, genannt "`Verteilungsgesetz"'
+
+\begin{kor}
+  Sei $g : \R^1 \to \R^1$ messbar und $P_X$-integrierbar. Dann gilt
+  \[ \E g(X) = \Int{\R^1}{}{g}{P_X} = \Int{-\infty}{\infty}{g(x)}{P_X(x)}, \]
+  wobei rechts ein uneigentliches Riemann-Stieltjes-Integral steht.
+\end{kor}
+
+% TODO: Definition "`Zufallsvektor"'?
+\begin{defn}
+  Für Zufallsvektoren $X = (X_1, ..., X_k)$ mit Werten in $\R^k$ definieren wir $\E X \coloneqq (\E X_1, ..., \E X_k)$.
+\end{defn}
+
+% TODO: Was ist eine numerische Funktion?
+
+\begin{bem}
+  Sei $X = (X_1, ..., X_k)$ ein Zufallsvektor und $g : \R^k \to \R$ Borel-messbar und $P_X$-integrierbar. Dann ist
+  \[ \E g(X_1, ..., X_k) = \Int{\R^k}{}{g}{P_{X}}. \]
+\end{bem}
+
+% Kapitel 3.7. Berechnung von Erwartungswerten
+
+% Kapitel 3.7.1. Typen von Verteilungsfunktionen
+
+\begin{satz}
+  Sei $F_X$ VF einer ZG $X : (\Omega, \Alg, \P) \to (\R^1, \LebAlg(\R^1)$. Dann existiert für Lebesgue-fast-alle $x \in \R^1$ die Ableitung $F'(x)$.
+\end{satz}
+
+% TODO: Definition Verteilungsfunktion
+\begin{defn}
+  Sei $F_X$ VF einer ZG $X : (\Omega, \Alg, \P) \to (\R^1, \LebAlg(\R^1)$.
+  \begin{itemize}
+    \item $F_X$ heißt \emph{diskret}, falls $F_X$ höchstens abzählbar viele Sprungstellen $x_1, x_2, ... \in \R$ besitzt mit
+      \[ \fa{k \in J \subset \N} p_k \coloneqq F_X(x_k) - \lim_{\mathclap{x \uparrow x_k}} F_X(x) > 0, \quad \sum_{k=1}^\infty p_k = 1. \]
+    Dann ist $F_X$ zwischen den Sprüngen konstant.
+    \item $F_X$ heißt \emph{stetig} (diffus, atomlos), wenn $F_X$ in jedem Punkt stetig ist. Dann gilt $P_X(\{ X = x \}) = 0$ für alle $x \in \R$.
+  \end{itemize}
+  Für stetige Verteilungen ergibt sich eine weitere Unterteilung:
+  \begin{itemize}
+    \item $F_X$ heißt \emph{absolutstetig} (totalstetig), wenn es für alle $\epsilon > 0$ ein $\delta > 0$ gibt, sodass für höchstens abzählbar viele, disjunkte Intervalle $I_k = \left]a_k, b_k\right]$ mit $k \in J \subset \N$ gilt:
+    \[ \sum_{k \in J} (b_k - a_k) < \delta \enspace \implies \enspace \sum_{k \in J} (F_X(b_k) - F_X(a_k)) < \epsilon. \]
+    % Ausgelassen: Beispiel: Lipschitz-stetige Funktionen
+    \item $F_X$ heißt \emph{singulärstetig} (stetig, aber nicht absolutstetig), wenn die Wachstumspunkte von $F_X$ eine Nullmenge bilden, also
+    \[ \lambda_1(\Set{ x \in \R^1 }{ \fa{\epsilon > 0} F(x+\epsilon)- F(x-\epsilon) > 0 }) = 0 \]
+    oder äquivalent dazu die Ableitung fast-überall verschwindet, also
+    \[ \lambda_1(\Set{ x \in \R^1 }{ F_X'(x) = 0 }) = 1. \]
+    % Ausgelassen: Beispiel: Cantor-Treppe (Teufelstreppe)
+  \end{itemize}
+\end{defn}
+
+\begin{satz}
+  Jede VF $F$ auf $\R^1$ besitzt eine eindeutige Zerlegung (Lebesgue-Zerlegung) als konvexe Linearkombination einer diskreten, einer singulär-stetigen und einer absolut-stetigen VF
+  \[ F = \alpha_d F_d + \alpha_s F_s + \alpha_a F_a \quad \text{mit} \quad \alpha_d, \alpha_s, \alpha_a \geq 0, \, \alpha_d {+} \alpha_s {+} \alpha_a = 1. \]
+\end{satz}
+
+\begin{defn}
+  Falls $F_X$ absolut-stetig, dann heißt die nicht negative, Lebesgue-messbare Funktion
+  \[ f = f_X = F'_X : \R \to \R_{\geq 0}, \quad x \mapsto \begin{cases} F'_X(x), & \text{falls Ableitung ex.} \\ 0, & \text{sonst} \end{cases} \]
+  \emph{(Wahrscheinlichkeits-)Dichte} (WD) von $F_X$  bzw. von $X$.
+\end{defn}
+
+\begin{bem}
+  Dann gilt für alle $y \in \R$:
+  \[ \Int{\mathclap{-\infty}}{y}{f_X(x)}{x} = F_X(y), \quad \text{also insbesondere} \quad \Int{\mathclap{-\infty}}{\infty}{f_X(x)}{x} = 1. \]
+\end{bem}
+
+\begin{bem}
+  $F_X$ ist als VF genau dann absolut stetig, wenn das Maß $P_X$ bezüglich $\lambda_1$ absolut stetig ist (also $P_Y \ll \lambda_1$ gilt).
+\end{bem}
+
+% Vorlesung vom 10.1.2014
+
+% Ausgelassen: Beispiele:
+% * Dichte bei Standard-Normalverteilung und Exponentialverteilung
+% * Sprunghöhen bei Poissonverteilung
+
+\begin{satz}\mbox{}\vspace{-16pt}
+  \[ \E(X) = \begin{cases}
+    \Int{\R^1}{}{x \cdot f_X(x)}{x}, & \text{falls $F_X$ absolutstetig mit WD $f_X$} \\
+    \sum_{k \in J} x_k \cdot p_k, & \parbox[t]{.6\textwidth}{falls $F_X$ diskret mit Sprüngen $p_k$ \\ bei $x_k$, $k \in J \subset \N$}
+  \end{cases} \]
+\end{satz}
+
+% Ausgelassen: Deutung der $\E X$ als Massenschwerpunkte
+% Ausgelassen: Beispiel Würfelwurf
 
 % TODO
 
@@ -902,122 +1031,21 @@ Falls $V_a^b(g) < \infty$, so heißt $g$ \emph{von beschränkter Variation}.
 
 
 
+% Ende bereinigte/verschönerte Einträge
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-% End sortierte Einträge
-
-
-
-
-
-% TODO: Was ist eine numerische Funktion?
 
 
 % Approximationssatz für Maße?
 
 % TODO: Verteilungen:
 % * Bernoulli
-% * Binomial
 % * geometrische Verteilung
 % * Pascal-Verteilung
-% * (verallgemeinerte) hypergeometrische Verteilung
-
-% Unabhängigkeit von Mengensystemen
-
-\begin{satz}
-  Seien $(\Omega, \Alg, \mu)$ ein Maßraum, $(\Omega', \Alg')$ ein messbarer Raum und $f : \Omega' \to \Omega$ messbar. Bezeichne mit $\mu' \coloneqq \mu \circ f^{-1}$ das Bildmaß von $\mu$ unter $f$. Dann gilt für alle $\mu'$-integrierbaren Funktionen $g : \Omega' \to \R$:
-  \[ \Int{\Omega'}{}{g}{\mu'} = \IntOmu{g \circ f} \]
-\end{satz}
-
-\begin{satz}[Transformationssatz]
-  Sei $U, \widetilde{U} \opn \R^d$ und sei $\phi : U \to \widetilde{U}$ ein $\mathcal{C}^1$-Diffeomorphismus. Dann ist eine Funktion $f : \widetilde{U} \to \ER$ genau dann auf $\widetilde{U}$ Lebesgue-Borel-integrierbar, wenn $(f \circ \phi) \cdot \left|\det(D\phi)\right| : U \to \ER$ auf $U$ Lebesgue-Borel-interierbar ist. In diesem Fall gilt
-  \[ \Int{U}{}{(f \circ \phi) \cdot \left|\det(D\phi)\right|}{\mu_{LB}} = \Int{\phi(U)}{}{f}{\mu_{LB}} = \Int{\widetilde{U}}{}{f}{\mu_{LB}}. \]
-  Obige Gleichung ist auch erfüllt, wenn lediglich $f \geq 0$ gilt (also $f \in \overline{\E}(\widetilde{U}, \Bor(\widetilde{U}))$; dann kann das Integral auch den Wert $\infty$ annehmen).
-\end{satz}
-
-\begin{defn}
-  Für eine ZG $X : (\Omega, \Alg, \P) \to (\ER^1, \LebAlg(\ER^1))$ heißt die Zahl
-  \[ \E X := \Int{\Omega}{}{X}{\P} = \Int{\R^1}{}{\id}{P_X} \]
-  der \emph{Erwartungswert} der ZG X, wobei $P_X = \P \circ X^{-1}$.
-\end{defn}
-
-\begin{kor}
-  Sei $g : \R^1 \to \R^1$ Borel-messbar und $P_X$-integrierbar. Dann gilt
-  \[ \E g(X) = \Int{\R^1}{}{g}{P_X} = \Int{- \infty}{\infty}{g(x)}{F_X(x)}, \]
-  wobei das rechte Integral das uneigentliche Riemann-Stieltjes-Integral bzgl. $F_X$ ist.
-\end{kor}
-
-\begin{defn}
-  Für Zufallsvektoren $X = (X_1, ..., X_k)$ mit Werten in $\R^k$ ist
-  \[ \E X = (\E X_1, ..., \E X_k) \]
-\end{defn}
-
-Sei $g : \R^k \to \R$ Borel-messbar und $P_{(X_1, ..., X_k)}$-integrierbar. Dann ist
-\[ \E g(X_1, ..., X_k) = \Int{\R^k}{}{g(x_1, ...)}{P_{(X_1, ..., X_k)}} = \Int{-\infty}{\infty}{g(x_1, ..., x_k)}{F_X(x_1, ..., x_k)} \]
-
-% 3.7 Berechnung von Erwartungswerten
-
-% 3.7.1 Grundtypen & deren Mischung
-
-$F = F_X$ sei die VF einer ZG $X : (\Omega, \Alg, \P) \to (\R^1, \LebAlg(\R^1), P_X)$
-
-\begin{defn}
-  \begin{itemize}
-    \item $F_X$ heißt diskret, falls $F_X$ höchstens abzählbar viele Sprünge $x_1, x_2, ... \in \R$ mit $p_k \coloneqq F(x_k) - \lim_{x \uparrow x_k} F(x) > 0$ mit $\sum_{k=1}^\infty p_k = 1$ besitzt (dann ist $F_X$) zwischen den Sprüngen konstant)
-    item 
-    \item $F_X$ heißt \emph{stetig} (diffus, atomlos), wenn $F_X$ in jedem Punkt stetig ist. Dann gilt $P_X(\{ X = x \}) = 0$.
-    \item $F_X$ heißt \emph{absolut stetig} (totalstetig), wenn es für alle $\epsilon > 0$ ein $\delta > 0$ gibt, sodass für abzählbare viele, disjunkte Intervalle $I_k = \left]a_k, b_k\right]$ mit $\sum_{k} (b_k - a_k) < \delta$ sich $\sum_{k} (F_X(b_k) - F_X(a_k)) \leq \epsilon$ ergibt.
-    % Bsp: Lipschitz-stetige Funktionen
-    \item \emph{singulärstetig} (stetig, aber nicht absolutstetig), wenn die Wachstumspunkte VF $F_X$ eine Lebesgue-Nullmenge bilden, also
-    \[ \lambda_1(\Set{ x \in \R^2 }{ \fa{\epsilon > 0} F(x+\epsilon)- F(x-\epsilon) > 0 }) = 0 \]
-    % Bsp: Cantor-Treppe (Teufelstreppe)
-  \end{itemize}
-\end{defn}
-
-% TODO: was ist die Annahme bei dem Satz.
-\begin{satz}
-  $F_X'(x)$ existiert für Lebesgue-fast-alle $x \in \R^1$.
-\end{satz}
-
-\begin{satz}
-  Jede VF $F$ auf $\R^1$ besitzt eine eindeutige Zerlegung (Lebesgue-Zerlegung) als konvexe Linearkombination einer diskreten, singulär-stetigen und absolut-stetigen VF:
-  \[ F = \alpha_d F_d + \alpha_s F_s + \alpha_a F_a \]
-  mit $\alpha_d, \alpha_s, \alpha_a \geq 0$ und $\alpha_d + \alpha_s + \alpha_a = 1$.
-\end{satz}
-
-\begin{defn}
-  Falls $F_X$ absolut-stetig, dann heißt die nicht-negative, Lebesgue-messbare Funktion $ff_X(x) \coloneqq \begin{cases} F'_X(x) & \text{falls Ableitung ex.} \\ 0 & \text{sonst,} \end{cases}$
-  welche $\Int{\R^1}{}{f_X}{\lambda_1} = 1$ erfüllt, die \emph{W-Dichte} von $F_X$.
-\end{defn}
-
-% 10.1.2014
-
-\[ \E X = \Int{\R^1}{}{x}{F_X} = \Int{\R^1}{}{\id \cdot f_X}{\lambda} = \Int{- \infty}{\infty}{x \cdot f_X(x)}{x} \]
-
-\begin{bem}
-  Für diskrete $F_X$, also
-  \[ F(x) = c_i \quad \text{für alle} x \in \left] x_i, x_{i+1} \right[ \]
-  für $x_1, ... \in \R$ und $c_1, ... \in \R$ gilt
-  \[ \E X = \sum_{i=1} (x_{i}) \]
-\end{bem}
 
 % \[ \E X = \Int \]
-
-Deutung der $\E X$ als Massenschwerpunkte
 
 ...
 
