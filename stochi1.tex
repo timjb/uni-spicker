@@ -15,9 +15,15 @@
 \newcommand{\Bor}{\mathfrak{B}} % Borel
 \newcommand{\Leb}{\mathcal{L}} % Lebesgue
 \newcommand{\ind}{\mathbbm{1}} % Indikatorfunktion
+
+% TODO: Groß- oder Kleinschreibung?
 \newcommand{\Var}{\mathrm{Var}} % Varianz
-\newcommand{\cov}{\mathrm{Var}} % Kovarianz
+\newcommand{\var}{\mathrm{Var}} % Varianz
+\newcommand{\Cov}{\mathrm{Cov}} % Kovarianz
+\newcommand{\cov}{\mathrm{Cov}} % Kovarianz
+\newcommand{\Cor}{\mathrm{Cor}} % Korrelation
 \newcommand{\cor}{\mathrm{Cor}} % Korrelation
+
 \DeclareMathOperator*{\esssup}{ess\,sup} % Essentielles Supremum
 \newcommand{\fue}{\overset{\text{f.ü.}}} % fast überall
 
@@ -1297,5 +1303,98 @@ Wichtig: Falls $(X, Y)$ eine zweidimensionale Normalverteilung besitzt, so folgt
   $X_1, ..., X_n$ seien paarweise unkorrelierte ZGen mit $\E X_i^2 < \infty$ für $i = 1, ..., n$. Dann gilt
   \[ \Var(X_1 + ... + X_n) = \Var(X_1) + ... + \Var(X_n) \]
 \end{satz}
+
+
+% Vorlesung vom 22.1.2014
+
+Wir wollen die Kovarianz der ZG $X$ und $Y$ berechnen.
+
+1. Fall: Es existiert eine gemeinsame WD von $(X, Y)$, $f_{(X, Y)}(x, y)$ (Lebesgue-messbar, $\geq 0$, $\Int{\R^2}{}{f_{(X,Y)}(x,y)}{(x, y)} = 1$)
+
+Beispiel: $2$-dimensionale Normalverteilungsdichte
+
+\[ f_{(X,Y)}(x,y) = \frac{1}{2 \pi \sigma_1 \sigma_2 \sqrt{1 - \rho^2}} \exp \left( - \frac{1}{2 (1 - \rho^2)} \left( \frac{(x-\mu_1)^2}{\sigma_1^2} + \frac{(y-\mu_2)^2}{\sigma_2^2} - \frac{2 \rho (x-\mu_1)(y-\mu_2)}{\sigma_1 \sigma_2} \right) \right), \]
+
+wobei $\mu_1 = \E X$, $\mu_2 = \E Y$, $\sigma_1^2 = \Var(X)$, $\sigma_2^2 = \Var(Y)$
+
+$\E (X \cdot Y) = \Int{\R^2}{}{x \cdot y \cdot f_{(X,Y)}(x,y)}{(x, y)} = \mu_1 \cdot \mu_2 + \sigma_1 \cdot \sigma_2 \cdot \rho$
+
+Also: $\Cov(X, Y) = \sigma_1 \cdot \sigma_2 \cdot \rho$ und $\cor(X, Y) = \rho \in [-1, 1]$.
+
+Randverteilungen:
+
+$f_X(x) = \Int{-\infty}{\infty}{f_{(X,Y)}(x,y)}{y}$
+$f_Y(y) = \Int{-\infty}{\infty}{f_{(X,Y)}(x,y)}{x}$
+
+$\E X = \Int{-\infty}{\infty}{x f_X(x)}{x} = \Int{-\infty}{\infty}{\Int{-\infty}{\infty}{x f_{(X,Y)}(x,y)}{x}}{y}$
+
+2. Fall: $(X, Y)$ mit Werten in einer höchstens abzählbaren Menge an $(x_i, y_i)$ wird mit Wahrscheinlichkeit $p_{ij} > 0$ angenommen, $i, j = 1, 2, ...$.
+
+\[ \P((X, Y) = (x_i, y_i)) = \P(X=x_1, Y=y_j) \]
+
+\[ \E(X \cdot Y) = \sum_{i=1} \sum_{j=1} x_i \cdot y_j p_{ij} \]
+
+\[ \E X = \sum_{i=1} x_i \P(X = x_i) = \sum_{i=1} \sum_{j=1} x_i p_{ij} \]
+
+\[ \E Y = \sum_{j=1} y_j \P(Y = y_j) = \sum_{j=1} \sum_{i=1} y_j p_{ij} \]
+
+\[ \Cov(X, Y) = \E (X \cdot Y) - (\E X) \cdot (\E Y) = \sum_{i=1} \sum_{j=1} x_i y_j (p_{ij} - p_i \cdot q_j) \]
+
+mit $p_i \coloneqq \sum_{j=1} p_{ij}$, $q_j \coloneqq \sum_{i=1} p_{ij}$
+
+3. Fall: $(X, Y)$ ist singulär-stetig verteilt oder besitzt eine singulär-stetige Komponente
+
+Beispiel: Zweidimensionale Exponentialverteilung \ldots
+
+\[ \overline{F}(x,y) = \P(X > x, Y > y) = \exp \left( -(\lambda x + \mu y + \nu \max(x,y)) \right) \]
+
+\[ F(x, y) = \P(A^c \cap B^c) = \P((A \cup B)^c) = 1 - \P(A \cup B) = 1 - \P(A) - \P(B) + \P(A \cap B) = 1 - \overline{F}(x,0) - \overline{F}(0,y) + \overline{F}(x,y) \]
+
+\[ \E XY = \Int{\R^2}{}{x \cdot y}{F(x,y)} = ... = - \Int{0}{\infty}{[y \cdot \P(X > x, Y > y)]_{y=0}^{y=\infty}}{x} + \Int{\R_{\geq 0}^2}{}{\P(X > x, Y > y)}{(x,y)} \]
+
+Für $(X, Y) \in \R^2$ gilt
+
+\[ \E (XY) = \Int{0}{\infty}{\Int{0}{\infty}{\underbrace{\P(X > x, Y > y)}_{= \overline{F}(x,y)}}{x}}{y} \]
+
+Falls $(X, Y) \in \R^2$, so gilt:
+
+\[ \E (X \cdot Y) = \Int{0}{\infty}{\Int{0}{\infty}{(\P(X > x, Y > y) + \P(X \leq -x, Y \leq -y) - \P(X \geq x, Y \leq -y) - \P(X \leq -x, Y > y))}{y}}{x} \]
+
+Im Beispiel:
+
+\[ \E (X \cdot Y) = \Int{0}{\infty}{\Int{0}{\infty}{\exp(-\lambda x - \mu y - \nu \max(x,y))}{x}}{y} = ... = \frac{1}{\lambda (\mu + \nu)} + \frac{1}{\mu (\lambda + \nu)} - (\frac{1}{\lambda} + \frac{1}{\mu}) \frac{1}{\lambda + \mu + \nu} \]
+
+\[ \E X = \Int{0}{\infty}{x}{F(x)} = \Int{0}{\infty}{\P(X > x)}{x} = \frac{1}{\lambda + \nu} \]
+
+\[ \cor(X,Y) = ... = \frac{\nu}{(\lambda + \nu) (\mu + \nu) (\lambda + \mu + \nu)} \]
+
+Also: $\nu = 0$ genau dann, wenn $X$ und $Y$ unabhängig
+
+% Kapitel 4. Funktionen von Zufalssgrößen und -vektoren
+
+% Kapitel 4.1. Funktion einer Zufallsgröße
+
+$Y = g(X)$, $g : \R^1 \to \R^1$ Borel-messbar
+
+\[ F_Y(y) = \P(Y \leq y) = \P(Y in \left] -\infty, y \right[) = \P(X \in g^{-1}(\left] -\infty, y \right])) \]
+
+Beispiel: $Y = X^2$, $y \geq 0$
+
+$F_Y(y) = \P(X^2 \leq y) = \P(\abs{X} \leq \sqrt{y}) = \P(-\sqrt{y} \leq X \leq \sqrt{y}) = \P(X = -\sqrt{y}) + F_X(\sqrt{y}) - F_X(-\sqrt{y}) = F_X(\sqrt{y}) - \lim_{z \uparrow -\sqrt{y}} F_X(z)$
+
+\begin{satz}
+  $X$ sei absolut stetig mit Dichte $f_X$ und $\P(X \in D) = 1$ für $D \subset \R^1$ offen und $g : D \to \R^1$ eine $\mathcal{C}^1$-Funktion mit $g'(x) > 0$ für alle $x \in D$. Dann ist $Y = g(X)$ absolut-stetig mit der Dichte
+  \[ f_Y(y) = \begin{cases} 0, & \text{für } y \in \R^1 \setminus g(D) \\ \frac{f_X(g^{-1}(y))}{\abs{g'(g^{-1}(y))}} & \text{für } y \in g(D) \end{cases} \]
+\end{satz}
+
+\begin{bsp}
+  $Y = e^{N (\mu, \sigma^2)} + c$
+
+  Dann heißt $Y$ logarithmisch normalverteilt
+
+  $g(x) = e^x + c$
+
+  Ausgelassen: Rechnungen
+\end{bsp}
 
 \end{document}
