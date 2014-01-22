@@ -56,9 +56,11 @@
 \newtheorem*{prop}{Proposition}
 \newtheorem*{modell}{Modell}
 \newtheorem*{sprech}{Sprechweise}
+\newtheorem*{beob}{Beobachtung}
 \newtheorem*{beobachtung}{Beobachtung}
 \newtheorem*{antwort}{Antwort}
 \newtheorem*{anmerkung}{Anmerkung}
+\newtheorem*{nomenklatur}{Nomenklatur}
 
 \theoremstyle{remark}
 \newtheorem*{bem}{Bemerkung}
@@ -121,6 +123,9 @@
 % Schöne Fürall- und Existenzquantoren
 \newcommand{\fa}[1]{\forall \, {#1} \,:\,}
 \newcommand{\ex}[1]{\exists \, {#1} \,:\,}
+
+% :<=> (Definitionsdoppelpfeil)
+\newcommand{\coloniff}{\enspace:\!\iff}
 
 % Schöne Mengen { #1 | #2 }
 % siehe http://tex.stackexchange.com/questions/13634/define-pretty-sets-in-latex-esp-how-to-do-the-condition-separator

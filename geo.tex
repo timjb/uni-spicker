@@ -1187,4 +1187,47 @@ Ohne Einschränkung:
   d.\,h. $X^s = X + \tau_s \nu$, wobei $\tau : \left] -\epsilon, \epsilon \right[ \times U \to \R, \quad \tau_s(u)$ mit $\tau_0 = 0$, $\tau_s|_{U \setminus C} = 0$.
 \end{itemize}
 
+Sodann gilt:
+
+\[ \delta X^s = \frac{\partial}{\partial s}|_{s=0} X^s = (\frac{\partial}{\partial s}|_{s=0} \tau_s) \cdot \nu, \]
+also
+\[ (\partial \tau_s) = \langle \delta X^s, \nu \rangle \] % da \nu Einheitsnormalenvektorfeld
+
+Annahme (o.E.):
+\begin{itemize}
+  \item $\fa{u \in C} \abs{(X(u) + \R \nu(u)) \cap (\partial D \setminus X(C))} = 1$.
+  \item Im Schnittpunkt $y_u \in (X(u) + \R \nu(u)) \cap (\partial D \setminus X(C))$ gilt: $\nu(u)$ nicht tangential an $\partial D \setminus X(C)$.
+\end{itemize}
+
+Nach Verkleinerung von $C$ (hierbei geht Glattheit von $\partial D$ verloren, es bleibt Glattheit von $\partial D \setminus X(C)$):
+Jeder Punkt von Boden liegt auf mindestens einer Geraden $X(u) + \R \nu(u)$
+
+Also gilt: $\ex{b : C \to \R_{\leq 0}}$ stetig
+mit $\fa{s \in \left] -\epsilon, \epsilon \right[} \fa{u \in C} b(u) \leq \tau_s(u)$ und $b(u) = 0 \iff u \in \partial C$, sodass $D^s = \Set{X(u) + r \nu(u)}{ u \in C, b(u) \leq r \leq \tau_s(u) }$
+
+\begin{prop}
+  Sei $X^s = X + \tau_s \nu$ eine Variation von $X$ auf $C$. Sei $V^s \coloneqq \mathrm{Vol}(D^s)$, dann gilt
+  \[ \delta V^s = \Int{C}{}{\delta \tau_s}{\mathcal{A}}. \]
+\end{prop}
+
+$L^2$-Skalarprodukt bzgl. $\d \mathcal{A} = \sqrt{\det(g_u)} \d u$
+
+(Hintergrund: $X : U \to \R^n$ Hyperfläche, $C \subset U$ kompakt)
+
+$V = \mathcal{C}^0(C, \R) = \Set{ f : C \to \R }{ \text{stetig} }$
+
+Skalarprodukt:
+\begin{align*}
+  \mathcal{C}^0(C, \R) \times \mathcal{C}^0(C, \R) &\to \R
+  (f_1, f_2) &\mapsto \Int{C}{}{f_1 \cdot f_2}{\mathcal{A}} =: \langle f_1 , f_2 \rangle_{L^2}
+\end{align*}
+
+Analog ($\mathcal{C}^0_C(U, \R) = \Set{ f : U \to \R }{ \text{stetig mit } \supp f \text{ kompakt} }$):
+\begin{align*}
+  \mathcal{C}^0_C(U, \R) \times \mathcal{C}^0_C(U, \R) &\to \R
+  (f_1, f_2) &\mapsto \Int{C}{}{f_1 \cdot f_2}{\mathcal{A}} =: \langle f_1 , f_2 \rangle_{L^2}
+\end{align*}
+
+
+
 \end{document}
