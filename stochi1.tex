@@ -6,6 +6,7 @@
 }
 
 \usepackage{bbm} % Für 1 mit Doppelstrich (Indikatorfunktion)
+\usepackage{stmaryrd} % Für \vartimes
 
 \newcommand{\Alg}{\mathfrak{A}} % (Mengen-)Algebra
 \newcommand{\Ring}{\mathfrak{R}} % (Mengen-)Ring
@@ -15,6 +16,7 @@
 \newcommand{\Bor}{\mathfrak{B}} % Borel
 \newcommand{\Leb}{\mathcal{L}} % Lebesgue
 \newcommand{\ind}{\mathbbm{1}} % Indikatorfunktion
+\renewcommand{\ER}{\overline{\R^1}} % Erweiterte reelle Zahlen, Heine-Notation (mit ^1)
 
 % TODO: Groß- oder Kleinschreibung?
 \newcommand{\Var}{\mathrm{Var}} % Varianz
@@ -23,6 +25,17 @@
 \newcommand{\cov}{\mathrm{Cov}} % Kovarianz
 \newcommand{\Cor}{\mathrm{Cor}} % Korrelation
 \newcommand{\cor}{\mathrm{Cor}} % Korrelation
+
+% Symmetrische Differenz
+\DeclareMathOperator{\symmdiff}{\triangle}
+
+% Kleinere \bigvee und \bigwedge
+\let\myBigvee\bigvee
+\DeclareMathOperator*{\textbigvee}{{\textstyle \myBigvee}}
+\renewcommand{\bigvee}{\textbigvee\limits}
+\let\myBigwedge\bigwedge
+\DeclareMathOperator*{\textbigwedge}{{\textstyle \myBigwedge}}
+\renewcommand{\bigwedge}{\textbigwedge\limits}
 
 \DeclareMathOperator*{\esssup}{ess\,sup} % Essentielles Supremum
 \newcommand{\fue}{\overset{\text{f.ü.}}} % fast überall
@@ -38,72 +51,124 @@
 
 \maketitle{Zusammenfassung Stochastik \rom{1}}
 
-\section{Der abstrakte Maßbegriff}
+% Kapitel 1
+\section{Der abstrakte Maß- und Wkts-Begriff}
 
-% TODO: Ereignisalgebra?
+% Kapitel 1.1. Zufällige Ereignisse, Ereignisalgebra
 
+\iffalse
 \begin{defn}
-  Eine \emph{Ereignisalgebra} oder \emph{Boolesche Algebra} ist eine Menge $\mathfrak{A}$ mit zweistelligen Verknüpfungen $\wedge$ (\glqq und\grqq) und $\vee$ (\glqq oder\grqq), einer einstelligen Verknüpfung $\overline{\,\cdot\,}$ (Komplement) und ausgezeichneten Elementen $U \in \mathfrak{A}$ (unmögliches Ereignis) und $S \in \mathfrak{A}$ (sicheres Ereignis), sodass für $A, B, C \in \mathfrak{A}$ gilt:
-
-  \begin{multicols}{2}
-    \scriptsize
-    \begin{enumerate}[label=\roman*.,leftmargin=2em]
-      \item $A \wedge A = A$
-      \item $A \wedge B = B \wedge A$
-      \item $A \wedge S = A$
-      \item $A \wedge U = U$
-      \item $A \wedge \overline{A} = U$
-      \item $A \wedge (B \wedge C) = (A \wedge B) \wedge C$
-      \item $A \vee A = A$
-      \item $A \vee S = S$
-      \item $A \vee U = A$
-      \item $A \vee \overline{A} = S$
-      \item $A \vee (B \vee C) = (A \vee B) \vee C$
-      \item $A \wedge (B \vee C) = (A \wedge B) \vee (A \wedge C)$
-    \end{enumerate}
-  \end{multicols}
-\end{defn}
-
-\begin{defn}
-  Sei $\mathfrak{A}$ eine Boolesche Algebra. Dann definiert
-  \[ A \leq B \colon\iff A \wedge B = B \]
-  eine Partialordnung auf $\mathfrak{A}$, gesprochen $A$ impliziert $B$.
-\end{defn}
-
-\begin{defn}
-  Eine \emph{Algebra} (auch Mengenalgebra) $\mathfrak{A} \subset \mathcal{P}(\Omega)$ ist ein System von Teilmengen einer Menge $\Omega$ mit $\emptyset \in \mathfrak{A}$, das unter folgenden Operationen stabil ist:
+  Ein \emph{zufälliger Versuch} ist ein Experiment,
   \begin{itemize}
-    \item Vereinigung: $A, B \in \mathfrak{A} \implies A \cup B \in \mathfrak{A}$
-    \item Durchschnitt: $A, B \in \mathfrak{A} \implies A \cap B \in \mathfrak{A}$
-    \item Komplementbildung: $A \in \mathfrak{A} \implies A^c \coloneqq \Omega \backslash A \in \mathfrak{A}$
+    \item welches unter einem festen Bedingungskomplex beliebig oft wiederholbar ist und
+    \item dessen Ausgänge wohldefiniert und bei jeder Wiederholung ungewiss sind.
   \end{itemize}
 \end{defn}
 
-\begin{satz}[Isomorphiesatz von Stone]
-Zu jeder Booleschen Algebra $\mathfrak{A}$ gibt es eine Menge $\Omega$ derart, dass $\mathfrak{A}$ isomorph zu einer Mengenalgebra $\mathfrak{A}$ in $\mathcal{P}(\Omega)$ ist.
-\end{satz}
+\begin{defn}
+  Ein zufälliges Ereignis ist ein Ergebnis eines zufälligen Experiments.
+\end{defn}
+\fi
+
+% Ausgelassen: Beispiele: * Werfen eines Würfels, * Werfen einer Münze, * Lebensdauer eines Menschen
 
 \begin{defn}
-  Eine \emph{$\sigma$-Algebra} ist eine Algebra $\mathfrak{A} \subset \mathcal{P}(\Omega)$, die nicht nur unter endlichen, sondern sogar unter abzählbaren Vereinigungen stabil ist, d.\,h.
+  Eine \emph{Ereignisalgebra} oder \emph{Boolesche Algebra} ist eine Menge $\Alg$ mit zweistelligen Verknüpfungen $\wedge$ (\glqq und\grqq) und $\vee$ (\glqq oder\grqq), einer einstelligen Verknüpfung $\overline{\,\cdot\,}$ (Komplement) und ausgezeichneten Elementen $U \in \Alg$ (unmögliches Ereignis) und $S \in \Alg$ (sicheres Ereignis), sodass für alle $A, B, C \in \Alg$ gilt:
 
-  \[ (A_n)_{n \in \N} \text{ Folge in } \mathfrak{A} \implies \bigcup_{n = 0}^{\infty} A_n \in \mathfrak{A}. \]
+  {\scriptsize
+  \begin{itemize}%\begin{enumerate}[label=\roman*.,leftmargin=2em]
+    \miniitem{0.25\linewidth}{$A \wedge A = A$}
+    \miniitem{0.29\linewidth}{$A \wedge B = B \wedge A$}
+    \miniitem{0.29\linewidth}{$A \wedge S = A$}
+    \miniitem{0.25\linewidth}{$A \wedge U = U$}
+    \miniitem{0.29\linewidth}{$A \wedge \overline{A} = U$}
+    \miniitem{0.40\linewidth}{$A \wedge (B \wedge C) = (A \wedge B) \wedge C$}
+    \miniitem{0.25\linewidth}{$A \vee A = A$}
+    \miniitem{0.29\linewidth}{$A \vee B = B \vee A$}
+    \miniitem{0.29\linewidth}{$A \vee S = S$}
+    \miniitem{0.25\linewidth}{$A \vee U = A$}
+    \miniitem{0.29\linewidth}{$A \vee \overline{A} = S$}
+    \miniitem{0.40\linewidth}{$A \vee (B \vee C) = (A \vee B) \vee C$}
+    \miniitem{0.98\linewidth}{$A \wedge (B \vee C) = (A \wedge B) \vee (A \wedge C)$}
+  \end{itemize}}
+\end{defn}
+
+\begin{defn}
+  Sei $\Alg$ eine Ereignisalgebra und $A, B$ Ereignisse.
+  \begin{itemize}
+    \item Durch $A \leq B \coloniff A \wedge B = B$ (gesprochen $A$ \emph{impliziert} $B$) ist auf $\Alg$ eine Partialordnung definiert.
+    \item $A$ und $B$ heißen \emph{äquivalent}, falls $A \leq B$ und $B \leq A$.
+    \item $A$ und $B$ heißen \emph{unvereinbar}, falls $A \wedge B = U$.
+  \end{itemize}
+\end{defn}
+
+\begin{kor}
+  In einer Ereignisalgebra $\Alg$ gilt mit $A, B \in \Alg$:
+  \begin{itemize}
+    \miniitem{0.3\linewidth}{$\overline{\overline{A}} = A$}
+    \miniitem{0.68\linewidth}{$A \le B \iff \overline{B} \le \overline{A}$ \pright{Kontraposition}}
+  \end{itemize}
+  % Liste neu begonnen für mehr Abstand
+  \vspace{-2pt} % aber etwas zu viel
+  \begin{itemize}
+    \miniitem{0.3\linewidth}{$\overline{A \vee B} = \overline{A} \wedge \overline{B}$}
+    \miniitem{0.68\linewidth}{$\overline{A \wedge B} = \overline{A} \vee \overline{B}$ \pright{De Morgansche Regeln}}
+  \end{itemize}
+\end{kor}
+
+\begin{kor}
+  Durch Induktion folgt aus den De Morganschen Regeln:
+  \[
+    \overline{\left( \bigvee_{i=1}^n A_i \right)} = \bigwedge_{i=1}^n \overline{A_i}
+    \quad \text{und} \quad
+    \overline{\left( \bigwedge_{i=1}^n A_i \right)} = \bigvee_{i=1}^n \overline{A_i}
+    \quad \text{für } A_1, ..., A_n \in \Alg.
+  \]
+\end{kor}
+
+% Ausgelassen: De Morgan für unendliche Mengen
+
+\begin{defn}
+  Eine \emph{Algebra} (Mengenalgebra) über $\Omega$ ist ein System von Teilmengen $\Alg \subset \mathcal{P}(\Omega)$ mit $\Omega \in \Alg$, das unter endl. Vereinigungen und Komplementen stabil ist, d.\,h. für alle $A, B \in \Alg$ gilt:
+  \begin{itemize}
+    \begin{multicols}{3}
+      \item $\Omega \in \Alg$
+      \item $A \cup B \in \Alg$
+      \item $A^c \coloneqq \Omega \setminus A \in \Alg$
+    \end{multicols}
+  \end{itemize}
 \end{defn}
 
 \begin{bem}
-  Es gilt damit:
-
-  \begin{itemize}
-    \item $\Omega = \emptyset^c \in \mathfrak{A}$
-    \item Abgeschlossenheit unter abzählbaren Schnitten:
-  \[ (A_n)_{n \in \N} \text{ Folge in } \mathfrak{A} \implies \bigcap_{n = 0}^{\infty} A_n = \left( \bigcup_{n = 0}^{\infty} (A_n)^c \right)^c \in \mathfrak{A}. \]
-  \end{itemize}
+  Aus den De Morganschen Regeln folgt, dass Mengenalgebren auch unter endlichen Schnitten stabil sind.
 \end{bem}
 
+\begin{satz}[Isomorphiesatz von Stone]
+  Zu jeder Ereignisalgebra $\Alg$ gibt es eine Menge $\Omega$, sodass $\Alg$ isomorph zu einer Mengenalgebra über $\Omega$ ist.
+\end{satz}
+% Ausgelassen: Präzisierung
+
+\begin{nota}
+  $A \symmdiff B \coloneqq (A \setminus B) \cup (B \setminus A)$ heißt \emph{symm. Differenz}.
+\end{nota}
+
 \begin{defn}
-  Sei $(A_n)_{n \in \N}$ eine Folge in einer $\sigma$-Algebra $\mathfrak{A}$. Setze
+  Eine \emph{$\sigma$-Algebra} über $\Omega$ ist eine Algebra $\Alg \subset \mathcal{P}(\Omega)$ über $\Omega$, die auch unter abzählbaren Vereinigungen stabil ist, d.\,h.
+  \[ \bigcup_{n = 0}^{\infty} A_n \in \Alg \quad \text{für alle Folgen $(A_n)_{n \in \N}$ in $\Alg$}. \]
+\end{defn}
+
+% Ausgelassen: Bemerkung $\emptyset \in \Alg$
+
+\begin{bem}
+  Jede $\sigma$-Algebra ist auch unter abzählb. Schnitten stabil.
+\end{bem}
+
+
+\begin{defn}
+  Sei $(A_n)_{n \in \N}$ eine Folge in einer $\sigma$-Algebra $\Alg$. Setze
   \[
-    \limsup_{n \to \infty} A_n \coloneqq \bigcap_{n = 1}^{\infty} \bigcup_{m = n}^{\infty} A_n \in \mathfrak{A}, \quad
-    \liminf_{n \to \infty} A_n \coloneqq \bigcup_{n = 1}^{\infty} \bigcap_{m = n}^{\infty} A_n \in \mathfrak{A}.
+    \limsup_{n \to \infty} A_n \coloneqq \bigcap_{n = 1}^{\infty} \bigcup_{m = n}^{\infty} A_n \in \Alg, \quad
+    \liminf_{n \to \infty} A_n \coloneqq \bigcup_{n = 1}^{\infty} \bigcap_{m = n}^{\infty} A_n \in \Alg.
   \]
 \end{defn}
 
@@ -112,26 +177,158 @@ Zu jeder Booleschen Algebra $\mathfrak{A}$ gibt es eine Menge $\Omega$ derart, d
 \end{bem}
 
 \begin{defn}
-  Ein \emph{Ring} $\mathfrak{A} \subset \mathcal{P}(\Omega)$ ist ein System von Teilmengen einer Menge $\Omega$ mit $\emptyset \in \mathfrak{A}$, das unter folgenden Operation stabil ist:
+  Eine Folge $(A_n)_{n \in \N}$ in einer $\sigma$-Algebra $\Alg$ \emph{konvergiert} gegen $A \in \Alg$, notiert $\lim_{\mathclap{n \to \infty}} A_n = A$, falls $A = \liminf_{n \to \infty} A_n = \limsup_{n \to \infty} A_n$.
+\end{defn}
 
+% TODO: Definition isoton / antiton?
+\begin{satz}
+  Für isotone / antitone Folgen $(A_n)_{n \in \N}$ in $\Alg$ gilt:
+  \[
+    \lim_{\mathclap{n \to \infty}} A_n = \bigcup_{n=1}^\infty A_n
+    \quad \big/ \quad
+    \lim_{\mathclap{n \to \infty}} A_n = \bigcap_{n=1}^\infty A_n
+  \]
+\end{satz}
+
+\begin{defn}
+  Ein \emph{Ring} (Mengenring) über $\Omega$ ist ein System von Teilmengen $\Ring \subset \mathcal{P}(\Omega)$ mit $\emptyset \in \Ring$, das unter endlichen Vereinigungen und Differenzen stabil ist, d.\,h. für alle $A, B \in \Ring$ gilt:
   \begin{itemize}
-    \item Vereinigung: $A, B \in \mathfrak{A} \implies A \cup B \in \mathfrak{A}$
-    \item Differenz: $A, B \in \mathfrak{A} \implies B \backslash A = B \cap A^c \in \mathfrak{A}$
+    \begin{multicols}{3}
+      \item $\emptyset \in \Ring$
+      \item $A \cup B \in \Ring$
+      \item $A \setminus B \in \Ring$
+    \end{multicols}
   \end{itemize}
-
-  Ein Ring, der nicht nur unter endlicher, sondern sogar unter abzählbarer Vereinigung stabil ist, heißt \emph{$\sigma$-Ring}.
 \end{defn}
 
 \begin{bem}
-  $\mathfrak{A}$ ($\sigma$-)\,Algebra $\iff$ $\mathfrak{A}$ ($\sigma$-)\,Ring und $\Omega \in \mathfrak{A}$.
+  Ein Ring ist auch unter Schnitten stabil, da
+  \[ A \cap B = (A \cup B) \setminus (A \symmdiff B). \]
+\end{bem}
+
+\begin{defn}
+  Ein \emph{$\sigma$-Ring} über $\Omega$ ist ein Ring $\Ring \subset \mathcal{P}(\Omega)$ über $\Omega$, der auch unter abzählbaren Vereinigungen stabil ist, d.\,h.
+  \[ \bigcup_{n = 0}^{\infty} A_n \in \Alg \quad \text{für alle Folgen $(A_n)_{n \in \N}$ in $\Alg$}. \]
+\end{defn}
+
+\begin{bem}
+  Jeder $\sigma$-Ring ist auch unter abzählb. Schnitten stabil.
 \end{bem}
 
 \begin{satz}
-  Sei $(\mathfrak{A}_i)_{(i \in I)}$ eine Familie von ($\sigma$-)\,Ringen / ($\sigma$-)\,Algebren über einer Menge $\Omega$. Dann ist auch $\cup_{i \in I} \mathfrak{A}_i$ ein ($\sigma$-)\,Ring / eine ($\sigma$-)\,Algebra über $\Omega$.
+  $\Alg$ ist ($\sigma$-)\,Algebra $\iff$ $\Alg$ ist ($\sigma$-)\,Ring mit $\Omega \in \Alg$.
 \end{satz}
 
-% TODO: Definition Inhalt
+\begin{satz}
+  Sei $(\Alg_i)_{i \in I}$ Familie von ($\sigma$-)\,Ringen / ($\sigma$-)\,Algebren über $\Omega$. Dann ist der Schnitt $\bigcap_{i \in I} \Alg_i$ ein ($\sigma$-)\,Ring / eine ($\sigma$-)\,Algebra über $\Omega$.
+\end{satz}
 
+\begin{defn}
+  Sei $E \subset \mathcal{P}(\Omega)$. Setze
+  \begin{align*}
+    \mathcal{R}(E) &\coloneqq \Set{ \Ring \subset \mathcal{P}(\Omega) }{ E \subset \Ring, \Ring \text{ $\sigma$-Ring} } \text{ und} \\
+    \mathcal{A}(E) &\coloneqq \Set{ \Alg \subset \mathcal{P}(\Omega) }{ E \subset \Alg, \Alg \text{ $\sigma$-Algebra} }.
+  \end{align*}
+  Dann heißen $\quad\rho(E) \coloneqq \enspace \bigcap_{\mathclap{\Ring \in \mathcal{R}(E)}} \enspace \Ring, \quad \sigma(E) \coloneqq \enspace \bigcap_{\mathclap{\Alg  \in \mathcal{A}(E)}} \enspace \Alg$\\
+  von $E$ \emph{erzeugter Ring} bzw. von $E$ \emph{erzeugte $\sigma$-Algebra}.
+\end{defn}
+
+\begin{defn}
+  Die \emph{Borel-Mengen} in $\R^1$ sind $\Bor(\R^1) \coloneqq \sigma(\mathcal{E})$, wobei wir $\mathcal{E}$ aus folgenden äquivalenten Optionen wählen dürfen:
+  \begin{itemize}
+    \miniitem{0.26\linewidth}{$\Set{ \left] a, b \right] }{ a \leq b }$}
+    \miniitem{0.26\linewidth}{$\Set{ \left] a, b \right[ }{ a \leq b }$}
+    \miniitem{0.45\linewidth}{$\Set{ G \subset \R^1 }{\text{$G$ abgeschl.}}$}
+    \miniitem{0.26\linewidth}{$\Set{ \left[ a, b \right] }{ a \leq b }$}
+    \miniitem{0.26\linewidth}{$\Set{ \left[ a, b \right[ }{ a \leq b }$}
+    \miniitem{0.45\linewidth}{$\Set{ F \subset \R^1 }{\text{$F$ offen}}$}
+  \end{itemize}
+\end{defn}
+
+\begin{defn}
+  Allgemeiner ist für $d \in \N$ die $\sigma$-Algebra der Borel-Mengen in $\R^d$ gleich $\Bor(\R^d) \coloneqq \sigma(\mathcal{E})$, wobei
+  \[ \mathcal{E} \coloneqq \Set{ \vartimes_{i=1}^d \left] a_i, b_i \right] }{ \fa{i \in \{1, ..., d\}} a_i \leq b_i }. \]
+  % Ausgelassen: Äquivalent offene Mengen oder geschlossene Mengen
+\end{defn}
+
+% Kapitel 1.3. Mengenfunktionen (Inhalt, Prämaß, Maß)
+
+\begin{nota}
+  $\ER \coloneqq \R \cup \{-\infty, +\infty\} = \left[ -\infty, \infty \right]$
+\end{nota}
+
+\begin{defn}
+  Funktionen mit Wertebereich $\ER$ heißen \emph{numerisch}.
+\end{defn}
+
+\begin{defn}
+  Sei $\Ring$ ein Ring über $\Omega$. Eine Fkt. $\mu : \Ring \to \left[ 0, \infty \right]$ heißt
+  \begin{itemize}
+    \item \emph{Inhalt} auf $\Ring$, falls $\mu(\emptyset) = 0$ und $\mu(A \cup B) = \mu(A) + \mu(B)$ für alle $A, B \in \Ring$ mit $A \cap B = \emptyset$ gilt.
+    \item \emph{Prämaß} auf $\Ring$, wenn $\mu$ ein Inhalt ist und für alle Folgen $(A_n)_{n \in \N}$ in $\Ring$ mit $A_i \cap A_j = \emptyset$ für $i \not= j$ und $\bigcup_{n=1}^\infty A_n \in \Ring$ gilt:
+    \begin{align*}
+      \mu \left( \bigcup_{n=1}^\infty A_n \right) &= \sum_{n=1}^\infty \mu(A_n) & \text{($\sigma$-Additivität)}
+    \end{align*}
+    \item \emph{Maß}, wenn $\mu$ Prämaß und $\Ring$ in Wahrheit sogar eine $\sigma$-Algebra ist. Dann ist die letzte Vorraussetzung in Punkt 2 immer erfüllt.
+  \end{itemize}
+\end{defn}
+
+\begin{defn}
+  \begin{itemize}
+    \item Ein Inhalt / Maß $\mu$ auf einem Ring / einer $\sigma$-Algebra $\Alg$ über $\Omega$ heißt \emph{endlich}, falls $\mu(\Omega) < \infty$.
+    \item Ein endliches Maß mit $\mu(\Omega) = 1$ heißt \emph{Wahrscheinlichkeitsmaß} (W-Maß). W-Maße werden für gewöhnlich mit $\P$ bezeichnet.
+  \end{itemize}
+\end{defn}
+
+\begin{nota}
+  Sei $\Omega$ eine Menge, $A \subset \Omega$. Dann heißt
+  \[ \chi_1 = \ind_A : \Omega \to \R, \quad \omega \mapsto \abs{\Set{ \star }{ \omega \in A }} =
+  \begin{cases}
+    1, & \text{falls } \omega \in A \\
+    0, & \text{falls } \omega \not\in A
+  \end{cases} \]
+  \emph{Indikatorfunktion} von $A$.
+\end{nota}
+
+\begin{bsp}
+  Sei $\Ring$ ein Ring über $\Omega$ und $\omega \in \Omega$. Die Abbildung
+  \[ \delta_{\omega} : \Ring \to \left[ 0, \infty \right], \quad A \mapsto \ind_A(\omega) \]
+  ist dann ein Prämaß auf $\Ring$, genannt \emph{Dirac-(Prä)-Maß}.
+\end{bsp}
+
+\begin{lem}
+  Sei $\mu$ ein Inhalt auf einem Ring $\Ring$. Seien $A, B \in \Ring$ und $(A_n)_{n \in \N}$ Folge in $\Ring$ mit $\mu(A) < \infty$ und $\fa{n \in \N} \mu(A_n) < \infty$. Dann:
+  \begin{itemize}
+    \item $\mu(A \cup B) = \mu(A) + \mu(B) - \mu(A \cap B)$
+    \item $A \subset B \implies \mu(A) \leq \mu(B)$ \pright{Isotonie}
+    \item $A \subset B \implies \mu(B \setminus A) = \mu(B) - \mu(A)$
+    \item $\mu(\bigcup_{i=1}^n A_i) \leq \sum_{i=1}^n \mu(A_i)$ \pright{Subadditivität}
+    \item $\mu(\bigcup_{i=1}^n A_i) = \sum_{k=1}^n (-1)^{k{-}1} \enspace \sum_{\mathclap{1 \leq i_1 < ... < i_k \leq n}} \enspace \mu(A_{i_1} \cap ... \cap A_{i_k})$
+    % Ausgelassen: Name der letzten Eigenschaft: Inklusions- Exklusionsprinzip
+  \end{itemize}
+\end{lem}
+
+\begin{satz}
+  Sei $\mu$ ein Inhalt auf $\Ring \subset \mathcal{P}(\Omega)$. Wir betrachten die Aussagen:
+
+  \begin{enumerate}[label=(\roman*),leftmargin=2em]
+    \item $\mu$ ist ein Prämaß auf $\Ring$.
+    \item Stetigkeit von unten: Für jede monoton wachsende Folge $(A_n)_{n \in \N}$ in $\Ring$ mit $A \coloneqq \lim_{n \to \infty} A_n = \bigcup_{n = 0}^\infty A_n \in \Ring$ gilt $\lim_{n \to \infty} \mu(A_n) = \mu(A)$.
+    \item Stetigkeit von oben: Für jede monoton fallende Folge $(A_n)_{n \in \N}$ in $\Ring$ mit $\mu(A_0) < \infty$ und $A \coloneqq \lim_{n \to \infty} A_n = \bigcap_{n = 0}^\infty A_n \in \Ring$ gilt $\lim_{n \to \infty} \mu(A_n) = \mu(A)$.
+    \item Für jede monoton fallende Folge $(A_n)_{n \in \N}$ in $\Ring$ mit $\mu(A_0) < \infty$ und $\lim_{n \to \infty} A_n = \bigcap_{n = 0}^\infty A_n = \emptyset$ gilt $\lim_{n \to \infty} \mu(A_n) = 0$.
+  \end{enumerate}
+
+  Dann gilt (i) $\iff$ (ii) $\implies$ (iii) $\iff$ (iv).\\
+  Falls $\mu$ endlich ist, so gilt auch (iii) $\implies$ (ii).
+\end{satz}
+
+% Ausgelassen: Beispiel: Inhalt der Elementarquader im $\R^d$
+
+% TODO: maßerzeugende Funktionen, ...
+
+
+% ------- TODO: überarbeiten
+\iffalse
 \begin{satz}
   Sei $\Ring$ ein Ring und $\mu$ ein Inhalt. Es gelten für $n \in \N$ und $A_1, ..., A_n \in \Ring$ die Ein- und Ausschlussformeln
   \begin{align*}
@@ -139,6 +336,8 @@ Zu jeder Booleschen Algebra $\mathfrak{A}$ gibt es eine Menge $\Omega$ derart, d
     \mu(A_1 \cap ... \cap A_n) &= \sum_{k=1}^n (-1)^{k-1} \quad \sum_{\mathclap{1 \leq i_1 < ... < i_k \leq n}} \quad \mu(A_{i_1} \cup ... \cup A_{i_k}).
   \end{align*}
 \end{satz}
+\fi
+% ------ TODO Ende
 
 
 
@@ -175,7 +374,6 @@ Zu jeder Booleschen Algebra $\mathfrak{A}$ gibt es eine Menge $\Omega$ derart, d
 % Ausgelassen: Wiener Maß für Modellierung von Brown'scher Bewegung
 
 % Kapitel 2.
-
 \section{Elementare Wahrscheinlichkeitsrechnung}
 
 % Kapitel 2.1. Definition der relativen und bedingten relativen Häufigkeit
@@ -493,16 +691,6 @@ Zu jeder Booleschen Algebra $\mathfrak{A}$ gibt es eine Menge $\Omega$ derart, d
   Für solches $f$ schreiben wir $f : (\Omega_1, \Alg_1) \to (\Omega_2, \Alg_2)$.
 \end{nota}
 
-\begin{nota}
-  Sei $\Omega$ eine Menge, $A \subset \Omega$. Dann heißt
-  \[ \chi_1 = \ind_A : \Omega \to \R, \quad \omega \mapsto \abs{\Set{ \star }{ \omega \in A }} =
-  \begin{cases}
-    1, & \text{falls } \omega \in A \\
-    0, & \text{falls } \omega \not\in A
-  \end{cases} \]
-  \emph{Indikatorfunktion} von $A$.
-\end{nota}
-
 \begin{beobachtung}
   Sei $(\Omega, \Alg)$ messbarer Raum, $A \subset \Omega$, dann gilt
   \[ \ind_A \text{ $(\Alg, \LebAlg(\R^1))$-messbar} \enspace \iff \enspace A \in \Alg. \]
@@ -532,7 +720,7 @@ Zu jeder Booleschen Algebra $\mathfrak{A}$ gibt es eine Menge $\Omega$ derart, d
 \end{nota}
 
 \begin{satz}
-  Für eine numerische Fkt. $f : (\Omega, \Alg) \to (\ER, \overline{\Bor})$ sind äquivalent:
+  Für eine Funktion $f : (\Omega, \Alg) \to (\ER, \overline{\Bor})$ sind äquivalent:
   \begin{itemize}
     \miniitem{0.27 \linewidth}{$f$ ist messbar}
     \miniitem{0.7 \linewidth}{$\forall \, a \in \R \,:\, \{ f \geq a \} = f^{-1}([a, \infty]) \in \Alg$}
@@ -700,7 +888,7 @@ Falls $V_a^b(g) < \infty$, so heißt $g$ \emph{von beschränkter Variation}.
 
 \begin{defn}
   Sei $X_1, ..., X_n$ eine endliche Familie von ZGen über $(\Omega, \Alg, \P)$. Diese Familie heißt \emph{stochastisch unabhängig}, falls
-  \[ \P(\bigcap_{i=1}^n \{ X_i \in B_i \}) = \prod_{i=1}^n \P(\{ X_i \in B_i \}) \quad \text{für alle $B_1, ..., B_n \in \LebAlg(\ER^1)$.} \]
+  \[ \P(\bigcap_{i=1}^n \{ X_i \in B_i \}) = \prod_{i=1}^n \P(\{ X_i \in B_i \}) \quad \text{für alle $B_1, ..., B_n \in \LebAlg(\ER)$.} \]
 \end{defn}
 
 \begin{satz}
@@ -789,7 +977,7 @@ Falls $V_a^b(g) < \infty$, so heißt $g$ \emph{von beschränkter Variation}.
 % Vorlesung 19
 
 \begin{satz}
-  Sei $f : (\Omega, \Alg, \mu) \to (\ER^1, \LebAlg(\R^1))$ messbar. Dann sind äquivalent:
+  Sei $f : (\Omega, \Alg, \mu) \to (\ER, \LebAlg(\R^1))$ messbar. Dann sind äquivalent:
   \begin{itemize}
     \miniitem{0.38 \linewidth}{$f$ ist $\mu$-integrierbar}
     \miniitem{0.6 \linewidth}{$f^+$ und $f^-$ sind $\mu$-integrierbar}
@@ -801,7 +989,7 @@ Falls $V_a^b(g) < \infty$, so heißt $g$ \emph{von beschränkter Variation}.
 % Ausgelassen: Bemerkung, dass i.A. uneigentliche Riemann-Integrale nicht Lebesgue-integrierbar sind
 
 \begin{satz}
-  Seien $f, g : (\Omega, \Alg, \mu) \to (\ER^1, \LebAlg(\ER^1))$ $\mu$-integrierbar und $\alpha, \beta \in \R$. Dann sind auch $\mu$-integrierbar:
+  Seien $f, g : (\Omega, \Alg, \mu) \to (\ER, \LebAlg(\ER))$ $\mu$-integrierbar und $\alpha, \beta \in \R$. Dann sind auch $\mu$-integrierbar:
   \begin{itemize}
     \begin{multicols}{4}
       \item $f \pm g$
@@ -858,7 +1046,7 @@ Falls $V_a^b(g) < \infty$, so heißt $g$ \emph{von beschränkter Variation}.
 \end{bem}
 
 \begin{satz}
-  Sei $f : (\Omega, \Alg, \mu) \to (\ER^1, \mathcal{L}(\ER^1))$ nichtnegativ. Dann gilt
+  Sei $f : (\Omega, \Alg, \mu) \to (\ER, \mathcal{L}(\ER))$ nichtnegativ. Dann gilt
   \[ \IntOmu{f} = 0 \quad \iff \quad f \fue{=} 0. \]
 \end{satz}
 
@@ -883,7 +1071,7 @@ Falls $V_a^b(g) < \infty$, so heißt $g$ \emph{von beschränkter Variation}.
 
 % TODO: Namen dieses Maßes?
 \begin{satz}
-  Sei $(\Omega, \Alg, \mu)$ ein Maßraum und $f : (\Omega, \Alg) \to (\ER^1, \Leb(\ER^1))$ nichtnegativ und $\mu$-integrierbar. Dann definiert
+  Sei $(\Omega, \Alg, \mu)$ ein Maßraum und $f : (\Omega, \Alg) \to (\ER, \Leb(\ER))$ nichtnegativ und $\mu$-integrierbar. Dann definiert
   \[ \nu : \Alg \to \left[0, \infty \right], \quad A \mapsto \Int{A}{}{f}{\mu} = \IntOmu{f \cdot \chi_A} \]
   ein zu $\mu$ absolut stetiges, endliches Maß auf $(\Omega, \Alg)$.
 \end{satz}
@@ -938,7 +1126,7 @@ Falls $V_a^b(g) < \infty$, so heißt $g$ \emph{von beschränkter Variation}.
 \end{satz}
 
 \begin{defn}
-  Für eine ZG $X : (\Omega, \Alg, \P) \to (\ER^1, \Bor(\ER^1))$ heißt die Zahl
+  Für eine ZG $X : (\Omega, \Alg, \P) \to (\ER, \Bor(\ER))$ heißt die Zahl
   \[ \E X := \Int{\Omega}{}{X}{\P} \qquad \text{\emph{Erwartungswert} von $X$.} \]
 \end{defn}
 
@@ -957,8 +1145,6 @@ Falls $V_a^b(g) < \infty$, so heißt $g$ \emph{von beschränkter Variation}.
 \begin{defn}
   Für Zufallsvektoren $X = (X_1, ..., X_k)$ mit Werten in $\R^k$ definieren wir $\E X \coloneqq (\E X_1, ..., \E X_k)$.
 \end{defn}
-
-% TODO: Was ist eine numerische Funktion?
 
 \begin{bem}
   Sei $X = (X_1, ..., X_k)$ ein Zufallsvektor und $g : \R^k \to \R$ Borel-messbar und $P_X$-integrierbar. Dann ist
