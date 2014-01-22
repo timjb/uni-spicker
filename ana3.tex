@@ -14,6 +14,7 @@
 \newcommand{\Leb}{\mathcal{L}} % Lebesgue
 \newcommand{\ind}{\mathbbm{1}} % Indikatorfunktion
 \newcommand{\fue}{\overset{\text{f.ü.}}} % fast überall
+\newcommand{\Atlas}{\mathcal{A}} % Atlas
 
 \newcommand{\IntO}[2]{\Int{\Omega}{}{#1}{#2}} % Integral über \Omega
 \newcommand{\IntOmu}[1]{\Int{\Omega}{}{#1}{\mu}} % Integral über \Omega bzgl. \mu
@@ -1455,5 +1456,86 @@ Es gilt:
   \item $\mathrm{supp} \alpha_{q,\epsilon} = \Set{ (x_1, ..., x_n) \in \R^n }{ \abs{x_j - \epsilon q_j} \leq \epsilon \text{ für alle } j \in \{ 1, ..., n \} }$
   \item $\sum_{q \in \Z^n} \alpha_{q, \epsilon} = 1$ (Übung)
 \end{itemize}
+
+
+% Vorlesung vom 22.1.2014
+
+% Kapitel 2.4. Integration von Differentialformen auf Untermannigfaltigkeiten
+
+\begin{defn}
+  Eine $m$-dimensionale \emph{Untermannigfaltigkeit} (UMF) des $\R^n$ ist eine Teilmenge $M \subset \R^n$ mit:
+  \begin{itemize}
+    \item $\fa{x \in M} \ex{\widetilde{U} \opn \R^n, x \in \widetilde{U}} \ex{\widetilde{V} \opn \R^n} \ex{\widetilde{\phi} : \widetilde{U} \to \widetilde{V}}$ Diffeomorphismus, sodass gilt:
+    \[ \widetilde{\phi}(M \cap \widetilde{U}) = \widetilde{V} \cap \underbrace{\Set{ (x_1, ..., x_m, 0, ..., 0) }{ x_1, ..., x_m \in \R }}_{\R^m \subset \R^m \oplus \R^{n-m} \cong \R^n} \]
+  \end{itemize}
+\end{defn}
+
+\begin{nomenklatur}
+  $\widetilde{\phi} : \widetilde{U} \to \widetilde{V}$ heißt \emph{Untermannigfaltigkeit-Karte}, notiert $(\widetilde{\phi}, \widetilde{U})$
+\end{nomenklatur}
+
+\begin{defn}
+  $\widetilde{\Atlas} = \Set{ \underbrace{(\widetilde{\phi}_i, \widetilde{U}_i)}_{\text{UMF-Karten von $M$}} }{ i \in I }$ mit $\underbrace{M \subset \bigcup_{i \in I} \widetilde{U}_i}_{\text{Überdeckungseigenschaft}}$ heißt \emph{UMF-Atlas} von $M$.
+\end{defn}
+
+\begin{beob}
+  $\widetilde{\phi} : \widetilde{U} \to \widetilde{V}$ ist UMF-Karte von $M$, dann $M \cup \widetilde{U} \opn M$ (bzgl. Relativtopologie), $\widetilde{V} \cap \R^m \opn \R^m$
+\end{beob}
+
+\begin{defn}
+  Der Homöomorphismus $\phi \coloneqq \widetilde{\phi}|_{U} : U \to V$ heißt \emph{Karte von $M$}.
+\end{defn}
+
+\begin{defn}
+  Ist $\widetilde{A} = \Set{ (\widetilde{\phi}_i, \widetilde{U}_i) }{ i \in I }$ ein UMF-Atlas, dann heißt $\Atlas = \Set{ (\phi_i, U_i) }{ i \in I }$ \emph{Atlas von $M$}.
+\end{defn}
+
+\begin{defn}
+  Ein Atlas $\Atlas = \Set{ (\phi_i, U_i) }{ i \in I }$ heißt \emph{orientiert}, wenn für alle $i, j \in I$ die Abbildung $\phi_j \circ \phi_i^{-1} |_{\phi_i(U_i \cap U_j)} : \phi(U_i \cap U_j) \to \phi_j(U_i \cap U_j)$ orientierungserhaltend sind, wenn $U_i \cap U_j \not= \emptyset$.
+  % Definition mit Funktionaldeterminante?
+\end{defn}
+
+\begin{defn}
+  \begin{itemize}
+    \item Eine UMF $M$ von $\R^n$ heißt \emph{orientierbar}, wenn $M$ einen orientierten Atlas besitzt.
+    \item Zwei orientierte Atlanten $\Atlas_1, \Atlas_2$ von $M$ heißen gleichorientiert, wenn $\Atlas = \Atlas_1 \cup \Atlas_2$ ein orientierter Atlas ist.
+    \item Eine \emph{Orientierung} auf einer orientierbaren UMF $M$ ist eine Äquivalenzklasse bzgl. der Äquivalenzrelation $\Atlas_1 \sim \Atlas_2 :\iff \Atlas_1, \Atlas_2$ gleichorientiert auf der Menge aller orientierten Atlanten.
+    \item $M$ orientierbare UMF, $[A]$ Orientierung von $M$, dann heißt $(M, [\Atlas])$ \emph{orientierte UMF}.
+    \item $\Atlas'$ orientierter Atlas von $(M, [\Atlas])$ heißt \emph{positiv orientiert}, wenn $\Atlas' \in [\Atlas]$.
+  \end{itemize}
+\end{defn}
+
+Gegeben $(M, [\Atlas])$ orientierte UMF, $\Atlas = \Set{ (\phi_i, U_i) }{ i \in I }$ ein positiv orientierter Atlas,
+\[ \tau : \R^m \to \R^m, \quad (x_1, ..., x_m) \mapsto (x_1, ..., x_{m-1}, - x_m) \]
+orientierungsumkehrend. Dann ist auch $\Atlas' = \Set{ (\phi_i', U_i) }{ i \in I }$ mit $\phi_i' = \tau \circ \phi_i : U_i \to \tau(V_i)$
+ein orientierter Atlas von $M$, aber $\Atlas' \not\in [A]$.
+Notation: $-[\Atlas] \coloneqq [\Atlas']$ die zu $[\Atlas]$ entgegengesetzte Orientierung.
+
+Integration von $k$-Formen auf $k$-dimensionalen UMFen
+
+Gegeben:
+\begin{itemize}
+  \item $\widehat{U} \opn \R^n$
+  \item $M \subset \widehat{U} \subset \R^n$ $k$-dimensionale UMF
+  \item $\omega$ $k$-Form auf $U$
+  \item $C \subset M$ kompakt
+  \item $[\Atlas]$ Orientierung von $M$
+\end{itemize}
+
+Gesucht: $\Int{(C, [\Atlas])}{}{\omega}{}$
+
+Fall 1: $\ex{\phi : U \to V}$ positiv orientierte Karte mit $C \subset U$, dann setze:
+
+% TODO: LaTeX-Makro für Integral von Differentialformen
+
+\[ \Int{(C, [\Atlas])}{}{\omega}{} \coloneqq \Int{\phi(C)}{}{(\phi^{-1})^* \omega} \]
+
+Unabhängigkeit von Karte:
+
+Sei $\phi' : U' \to V'$ positiv orientierte Karte mit $C \subset U'$, o.\,E. $U' = U$.
+
+$\iota \coloneqq \phi \circ \phi'^{-1}$
+
+\[ \Int{\phi(C)}{}{(\phi^{-1})^* \omega} = \Int{\phi(C)}{}{(\phi'^{-1} \circ \iota^{-1})^* \omega}{} = \Int{\phi(C)}{}{\iota^{-1*} (\phi'^{-1*} \omega)}{} = \Int{\phi'(C)}{}{\phi'^{-1*} \omega}{} \]
 
 \end{document}
