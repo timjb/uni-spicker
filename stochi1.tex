@@ -1612,4 +1612,74 @@ $F_Y(y) = \P(X^2 \leq y) = \P(\abs{X} \leq \sqrt{y}) = \P(-\sqrt{y} \leq X \leq 
   Ausgelassen: Rechnungen
 \end{bsp}
 
+
+% Vorlesung vom 24.1.2014
+
+\begin{bem}
+  Falls die Ableitung $g'(x), x \in D$ wechselndes Vorzeichen besitzt, so muss in Monotoniebereiche unterteilt werden.
+\end{bem}
+
+\begin{bsp}
+  $Y = e^{N(\mu, \sigma^2) + c}$, speziell $\mu = 0$, $\sigma^2 = 1$, $c = 0$, dann
+  \[ f_Y(y) = \frac{1}{\sqrt{2 \pi}} \exp(- \frac{(\log y)^2}{2}). \]
+\end{bsp}
+
+% Vorkommen:
+% * Korngrößenverteilung
+% * Schadenshöhenverteilung
+
+Die Funktion
+\[ f_a(y) \coloneqq f_Y(y) \cdot (1 + a \cdot \sin(2 \pi \log y)), y \in \R_{>0}^1, a \in [0,1] \]
+
+Für $a \in [0,1]$ ist dann $\Int{-\infty}{\infty}{f_a(y)}{y} = 1$
+
+\[ \E Y^n = \Int{0}{\infty}{y^n f_Y(y)}{y} = ... = \exp(- \frac{n^2}{2}) \]
+
+und
+
+\[ \Int{0}{\infty}{y^n f_a(y)}{y} = \exp(- \frac{n^2}{2}) \]
+
+
+% Kapitel 4.2. Funktionen eines Zufallsvektors
+
+Sei $X = (X_1, ..., X_k)$ ein $k$-dimensionaler Zufallsvektor,
+$g = (g_1, ..., g_k) : \R^k \to \R^k$ mit $g_i : \R^k \to \R^1$ für $i = 1, ..., k$ Borel-messbar.
+Dann ist $Y = g(X)$ ein $k$-dimensionaler ZV mit $P_Y = P_X \circ g^{-1}$
+Falls $f_{(X_1, ..., X_k)}$ eine W-Dichte von $X$ ist und $g$ ein $\mathcal{C}^1$-Diffeomorphismus ist, dann existiert die W-Dichte von $f_{(Y_1, ..., Y_k)}$ von $Y$.
+
+\begin{satz}
+  Seien $G, H \opn \R^k$ offen und $g = (g_1, ..., g_k) : G \to H$ ein $\mathcal{C}^1$-Diffeomorphismus.
+  % Ausgelassen: Definition Jacobian, Funktionaldeterminante
+  Dann findet man Funktionen $h_i : H \to \R^1$, $i = 1, ..., k$ mit $h(y_1, ..., y_k) = (h_1(y_1, ..., y_k), ..., h_k(y_1, ..., y_k))$ für $(y_1, ..., y_k) \in H$, sodass für die Dichte von $Y = (Y_1, ..., Y_k)$ gilt:
+  \[ f_{(Y_1, ..., Y_k)}(y_1, ..., y_k) = \begin{cases} \frac{f_{(X_1, ..., X_k)}(h_1(y_1, ..., y_k), ..., h_k(y_1, ..., y_k))}{\abs{\det D g(h_1(y_1, ..., y_k), ..., h_k(y_1, ..., y_k))}} & \text{für $(y_1, ..., y_k) \in H$} \\ 0, & \text{sonst} \end{cases} \]
+\end{satz}
+
+Beachte: $\det D(h)(y_1, ..., y_k) = \frac{1}{\det D(g)(h_1(y_1, ..., y_k), ..., h_k(y_1, ..., y_k))}$
+
+\begin{bsp}[Box-Muller-Transformation]
+
+  \begin{align*}
+    Y_1 &= g_1(X_1, X_2) = \sqrt{- 2 \log (X_1)} \sin(2 \pi X_2) \\
+    Y_2 &= g_2(X_1, X_2) = \sqrt{- 2 \log (X_1)} \cos(2 \pi X_2)
+  \end{align*}
+  mit $X_1$ und $X_2$ gleichverteilt auf $[0,1]$.
+
+  \[ f_{(X_1)}(x_1, x_2) = \ind_{\left] 0,1 \right[} \]
+
+  Behauptung: Dann ist $f_{(Y_1, Y_2)} = \phi(y_1) \cdot \phi(y_2)$, wobei $\phi(y) = \frac{1}{\sqrt{2 \pi}} \exp(- \frac{y^2}{2})$ oder $Y_1, Y_2 \sim N(0, 1)$ und unabhängig.
+\end{bsp}
+
+\begin{bsp}
+  \begin{align*}
+    Y_1 &= g_1(X_1, X_2) = \sqrt{X_1^2 + X_2^2} \\
+    Y_2 &= g_2(X_1, X_2) = \begin{cases} \arctan(\frac{X_2}{X_1}) & \text{für $X_2 \geq 0$, $X_1 \in \R^1 \setminus \{ 0 \}$} \\ \arctan(\frac{X_2}{X_1}) + \pi, & \text{für } X_2 < 0, X_1 \in \R^1 \setminus \{ 0 \} \end{cases}
+  \end{align*}
+
+  Wenn $X_1, X_2 \sim N(0, \sigma^2)$, unabhängig $\implies$ $f_{(X_1, X_2)}(x_1, x_2) = \phi(\frac{x_1}{\sigma}) \phi(\frac{x_2}{\sigma})$
+
+  Ergebnis: $f_{(Y_1, Y_2)}(y_1, y_2) = \frac{1}{2 \pi} \cdot \underbrace{\frac{y_1}{\sigma^2} \exp(- \frac{y_1^2}{\sigma^2})}_{\text{Dichte der Rayleigh-Verteilung}}$ für $(y_1, y_2) \in \left] 0, \infty \right[ \times \left] 0, 2\pi \right]$
+
+  \[ F_{Y_1}(y) = ... = 1 - \exp(- \frac{y^2}{2 \sigma^2}) \]
+\end{bsp}
+
 \end{document}
