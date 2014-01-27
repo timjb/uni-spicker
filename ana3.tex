@@ -16,6 +16,8 @@
 \newcommand{\fue}{\overset{\text{f.ü.}}} % fast überall
 \newcommand{\Atlas}{\mathcal{A}} % Atlas
 
+% Integrale
+\newcommand{\Intdf}[2]{{\textstyle \int\limits_{#1}} #2} % Differentialformintegral
 \newcommand{\IntO}[2]{\Int{\Omega}{}{#1}{#2}} % Integral über \Omega
 \newcommand{\IntOmu}[1]{\Int{\Omega}{}{#1}{\mu}} % Integral über \Omega bzgl. \mu
 
@@ -1326,7 +1328,7 @@
 \end{defn}
 
 \begin{lem}[Poincaré]
-  Ist $U$ sternförmig, dann ist jede stetig diff'bare $k$-Form mit $k \geq 1$ auch exakt.
+  Ist $U$ sternförmig, dann ist jede geschlossene, stetig diff'bare $k$-Form mit $k \geq 1$ auch exakt.
 \end{lem}
 
 \begin{bem}
@@ -1537,5 +1539,103 @@ Sei $\phi' : U' \to V'$ positiv orientierte Karte mit $C \subset U'$, o.\,E. $U'
 $\iota \coloneqq \phi \circ \phi'^{-1}$
 
 \[ \Int{\phi(C)}{}{(\phi^{-1})^* \omega} = \Int{\phi(C)}{}{(\phi'^{-1} \circ \iota^{-1})^* \omega}{} = \Int{\phi(C)}{}{\iota^{-1*} (\phi'^{-1*} \omega)}{} = \Int{\phi'(C)}{}{\phi'^{-1*} \omega}{} \]
+
+% Vorlesung vom 27.1.2013
+
+Fall 2: Es existiert keine positiv orientierte Karte $\phi : U \to V$ mit $C \subset U$:
+
+Wähle (endliche) Teilung der Eins, d.\,h.
+
+$\alpha_i : C \to \R$, $i = 1, ..., r$ mit
+
+\begin{itemize}
+  \item $\sum_{i=1}^r \alpha_i(x) = 1$ für alle $x \in C$
+  \item zu demem $i \in \{ 1, ..., r\}$ gibt es eine positiv orientierte Karte $\phi_i : U_i \to V_i$ mit $\supp(\alpha_i) \subset U_i$.
+\end{itemize}
+
+Dann: $\Int{C}{}{\omega}{} = \Int{(C, [\Atlas])}{}{\omega}{} \coloneqq \sum_{j=1}^r \Int{\phi_j(\supp(\alpha_j) \cap C)}{}{(\alpha_j \circ \phi_j^{-1}) \cdot (\phi_j^{-1}) \omega}{}$
+
+Übungsaufgabe: Unabhängigkeit von Teilung der Eins und Kartenwahl
+
+% Kapitel 2.5. Satz von Stokes
+
+\begin{satz}[Stokes]
+  Gegeben sei
+  \begin{itemize}
+    \item $M \subset \R^n$ $k$-dimensionale Untermannigfaltigkeit
+    \item $\widehat{U} \opn \R^n$, $M \subset \widehat{U}$
+    \item $\omega$ stetig diff'bare $(k{-}1)$-Form auf $\widehat{U}$.
+    \item $C \subset M$ Kompaktum mit glattem Rand $\partial_M C$.
+  \end{itemize}
+  Dann gilt (bzgl. der induzierten Orientierung auf $\partial_M C$)
+  \[ \Int{C}{}{\d \omega}{} = \Int{\partial_M C}{}{\omega}{} \]
+\end{satz}
+
+% Erklärung
+
+Halbraum:
+
+\[ H^k = \Set{ (x_1, ..., x_k) \subset \R^k }{ x_1 \leq 0 } \]
+
+Rand von $H^k$:
+
+\[ \partial H^k = \Set{ (0, x_2, ..., x_k) \in \R^k }{ x_2, ..., x_k \in \R } \]
+
+Beobachtung: $\partial H^k$ ist $(k{-}1)$-dimesionale UMF von $\R^k$.
+UMF-Karte:
+
+\begin{align*}
+  \widetilde{\phi} : \R^k \to \R^k, \quad (x_1, ..., x_k) \mapsto (x_2, ..., x_k, x_1)
+\end{align*}
+
+Karte $phi = \mathrm{proj}_{\R^{k{-}1}} \circ \widetilde{\phi}|_{\partial H^k} : \partial H_k \to \R^{k{-}1}$, $(0, x2, ..., x_k) \mapsto (x_2, ..., x_k)$
+orientierter Atlas $\Atlas = \{ (\phi, \partial H_k) \}$ und $(\partial H_k, [\Atlas])$ ist eine orientierte UMF
+
+% Bemerkung:
+% \[ \phi^{-1} : \R^{k{-}1} \to \R^k, \quad (t_1, ..., x_{k-1}) \mapsto (0, t_1, ..., t_{k-1}) \]
+
+\begin{defn}
+  Sei $C \subset M \subset \R^n$, wobei $C$ kompakt und $M$ eine $k$-dimensionale UMF.
+
+  Ein Punkt $x \in M$ heißt \emph{Randpunkt} von $C$ relativ zu $M$, wenn gilt:
+  \[ \fa{\underbrace{U \opn M}_{\text{bzgl. der Relativtopologie}} \text{ mit } x \in U} U \cap C \not= \emptyset \enspace \text{und} \enspace U \cap (M \setminus C) \not= \emptyset. \]
+\end{defn}
+
+% Ausgelassen: Definition Relativtopologie
+
+\begin{nota}
+  $\partial_M C \coloneqq \{ \text{Randpunkte von $C$ relativ zu $M$} \}$
+\end{nota}
+
+\begin{defn}
+  $C$ hat glatten Rand in $M$, wenn gilt:
+  \[ \fa{x \in \partial_M C} \ex{\text{UMF-Karte } \widetilde{\phi} : \widetilde{U} \to \widetilde{V} \text{ mit } x \in \widetilde{U}} \]
+  für $\phi \coloneqq \mathrm{proj}_{\R^k} \circ \widetilde{\phi}|_U : U \to V$ (Homöo) gilt:
+  \begin{itemize}
+    \item $\phi(U \cap C) = V \cap H_k$
+    \item $\phi(U \cap \partial_M C) = V \cap \partial H_k$
+  \end{itemize}
+  Eine UMF-Karte $(\widetilde{\phi}, \widetilde{U})$ (bzw. eine Karte $(\phi, U)$), die diese Bedingungen erfüllt, heißt \emph{Rand-adaptiert}.
+\end{defn}
+
+% Übungsaufgabe:
+\begin{lem}
+  $C \subset M$ Kompaktum mit glattem Rand. Dann gilt:
+  \begin{itemize}
+    \item  Ist $\Atlas = \Set{ (\widetilde{\phi}_i, \widetilde{U}_i) }{ i \in I }$ ein UMF-Atlas von $M$ aus Rand-adaptierten Karten, dann ist
+    \[ \Atlas' = \Set{ (\phi_i', \widetilde{U}_i) }{ i \in I } \]
+    \[ \phi_i' = \rho \circ \widetilde{\phi} \]
+    \[ \rho : \R^n \to \R^n, \quad (x_1, ..., x_n) \mapsto (x_2, ..., x_k, x_1, x_{k+1}, ..., x_n) \]
+    ein UMF-Atlas von $\partial_M C$. Insbesondere ist $\partial_M C$ eine $(k{-}1)$-dimensionale UMF.
+    \item Ist $M$ orientiert, dann gibt es einen positiv orientierten, Rand-adaptierten Atlas $\Atlas = \Set{ (\widetilde{phi}_i, \widetilde{U}_i) }{ i \in I }$ von $M$. Sodann ist $\Atlas'$ ein orientierter UMF-Atlas von $\partial_m C$. ($[\Atlas']$ definiert eine Orientierung auf $\partial_M C$.)
+  \end{itemize}
+\end{lem}
+
+% Vorbereitungslemma:
+
+\begin{lem}
+  Sei $\Omega$ eine stetig diff'bare $(k{-}1)$-Form auf $\R^k$ mit kompaktem Träger. Dann gilt:
+  \[ \Intdf{H_k}{\d \omega} = \Intdf{\partial H_k}{\omega}. \]
+\end{lem}
 
 \end{document}
