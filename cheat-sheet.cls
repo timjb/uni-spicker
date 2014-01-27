@@ -120,6 +120,9 @@
 \newcommand{\Intab}[2]{\Int{a}{b}{#1}{#2}}
 \newcommand{\Intabdx}[1]{\Intdx{a}{b}{#1}}
 
+% Träger
+\newcommand{\supp}{\mathop{\mathrm{supp}}}
+
 % Schöne Fürall- und Existenzquantoren
 \newcommand{\fa}[1]{\forall \, {#1} \,:\,}
 \newcommand{\ex}[1]{\exists \, {#1} \,:\,}

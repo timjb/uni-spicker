@@ -1228,6 +1228,66 @@ Analog ($\mathcal{C}^0_C(U, \R) = \Set{ f : U \to \R }{ \text{stetig mit } \supp
   (f_1, f_2) &\mapsto \Int{C}{}{f_1 \cdot f_2}{\mathcal{A}} =: \langle f_1 , f_2 \rangle_{L^2}
 \end{align*}
 
+% Vorlesung vom 27.1.2014
 
+% Situation: $C \subset U$ kompakt mit $C = \overline{\C^\circ}$ mit $\C^\circ \opn \R^n$, $\partial C$ glatt
+
+\begin{lem}
+  Sei $f : U \to \R$ eine $\mathcal{C}^2$-Abbildung mit $\supp(f) \subset C$. Wenn $\Int{C}{}{f}{\mathcal{A}} = 0$, dann gibt es eine normale Variation $X^s = X + \tau_s$ mit konstantem Volumen, sodass
+  \[ f = \delta \tau_s = \langle \delta X^s , \nu \rangle \]
+\end{lem}
+
+\begin{nota}
+  \begin{itemize}
+    \item $\delta \mathcal{A}^s \coloneqq \delta(\mathcal{A}(X^s(C))) = - \Int{C}{}{f \cdot (n{-}1) \cdot H}{\mathcal{A}} = - \langle f, (n{-}1) H \rangle_{L^1}$
+    \item $\delta V^s \coloneqq \Int{C}{}{\underbrace{\langle X^s , \nu \rangle}_{f \coloneqq} \sqrt{\det(g_u)}}{u} = \langle f , 1 \rangle_{L^1}$
+  \end{itemize}
+\end{nota}
+
+\begin{prop}
+  Es sind äquivalent:
+  \begin{itemize}
+    \item $\delta \mathcal{A}^s = 0$ für jede normale Variation $X^s$ von $X$ auf $C$ mit konstantem Volumen
+    \item $\ex{\lambda \in \R} \delta(\mathcal{A}^s) + \lambda \nu^s) = 0$ für alle normalen Variation (auch mit nicht konstantem Volument)
+  \end{itemize}
+\end{prop}
+
+% TODO: Definition CMC (constant mean curvature)
+
+\begin{satz}
+  Sei $X : U \to \R^n$ eine $\mathcal{C}^3$-Hyperfläche mit $U$ zusammenhängend, dann sind äquivalent:
+  \begin{itemize}
+    \item $X$ minimal bei konstantem Volumen
+    \item $H \equiv \mathrm{konstant}$ (also $X$ CMC-Fläche)
+  \end{itemize}
+\end{satz}
+
+% Bemerkung: Funktionentheorie, differenzierbare Funktionen $\C \to \C$ (holomorphe Funktionen)
+
+% Sei $F : \C \to \C$ eine $\mathcal{C}^1$-Abbildung, $F = u + i v$ mit $u, v : \R \to \R$
+
+% $J_{x+iy} F = \begin{pmatrix} \tfrac{\partial u}{\partial x}(x+iy) & \tfrac{\partial u}{\partial y}(x+iy) \\ \tfrac{\partial v}{\partial x}(x+iy) \tfrac{\partial v}{\partial y}(x+iy) \end{pmatrix}$
+
+% $F$ komplex diff'bar, wenn gilt: $\frac{\partial u}{\partial x} = \frac{\partial v}{\partial y}$ und $\frac{\partial u}{\partial y} = -\frac{\partial v}{\partial x}$ (Cauchy-Riemann-DGL)
+
+% Kapitel 3.4. Minimalflächen in $\R^3$
+
+Sei $U \opn \C$, $F : U \to \C$ eine $\mathcal{C}^1$-Funktion
+
+\begin{nota}[Wirtinger]
+  \begin{itemize}
+    \item $\partial_{Z} F = \tfrac{1}{2} (\partial_1 F - i \partial_2 F)$
+    \item $\partial_{\overline{Z}} F = \tfrac{1}{2} (\partial_1 F + i \partial_2 F)$
+  \end{itemize}
+\end{nota}
+
+\begin{lem}
+  $F$ ist genau dann holomorph, wenn $\partial_{\overline{Z}} F = 0$. In diesem Fall gilt: $F' = \partial z F$.
+\end{lem}
+
+\begin{lem}
+  $F : U \to \C$ sei $\mathcal{C}^2$, dann gilt
+  \[ \partial_Z \partial_{\overline{Z}} F = \tfrac{1}{4} \triangle F = \tfrac{1}{4} (\partial_1 \partial_1 F + \partial_2 \partial_2 F) \]
+\end{lem}
 
 \end{document}
