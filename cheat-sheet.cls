@@ -110,6 +110,7 @@
 
 \newcommand{\spur}{\mathrm{spur}} % Spur
 \newcommand{\id}{\mathrm{id}} % Identität
+\newcommand{\Id}{\mathrm{Id}} % Identität
 
 % Name einer Eigenschaft rechts ausgerichtet in Klammern
 \newcommand{\pright}[1]{\hfill ({#1}) \,}
@@ -120,8 +121,9 @@
 \newcommand{\Intab}[2]{\Int{a}{b}{#1}{#2}}
 \newcommand{\Intabdx}[1]{\Intdx{a}{b}{#1}}
 
-% Träger
-\newcommand{\supp}{\mathop{\mathrm{supp}}}
+
+\newcommand{\im}{\mathop{\mathrm{im}}} % Bild (image)
+\newcommand{\supp}{\mathop{\mathrm{supp}}} % Träger (support)
 
 % Schöne Fürall- und Existenzquantoren
 \newcommand{\fa}[1]{\forall \, {#1} \,:\,}

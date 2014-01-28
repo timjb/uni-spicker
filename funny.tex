@@ -5,7 +5,6 @@
 %\newcommand{\Alg}{\mathfrak{A}}
 %\newcommand{\Ring}{\mathfrak{R}}
 \newcommand{\K}{\mathbb{K}}
-\newcommand{\supp}{\mathrm{supp}}
 \newcommand{\Bor}{\mathfrak{B}} % Borel
 \newcommand{\Leb}{\mathcal{L}} % Lebesgue
 \newcommand{\fue}{\overset{\text{f.ü.}}} % fast überall
@@ -717,9 +716,9 @@ Die Fourier-Summe erlaubt die explizite Approximation von $f$ im Unterraum $X = 
 
 \begin{lem}
   \begin{itemize}
-    \item $P$ ist Projektion auf $Y$ $\iff$ $P : X \to Y$ und $P = \mathrm{Id}$ auf $Y$.
+    \item $P$ ist Projektion auf $Y$ $\iff$ $P : X \to Y$ und $P = \Id$ auf $Y$.
     \item $P : X \to X$ ist Projektion $\implies$ $X = \mathrm{ker}(P) \oplus \mathrm{im}(P)$
-    \item $P : X \to X$ ist Projektion $\implies$ $\mathrm{Id} - P$ ist Projektion und $\ker(\mathrm{Id} - P) = \mathrm{im}(P)$, $\mathrm{im}(\mathrm{Id} - P) = \mathrm{ker}(P)$.
+    \item $P : X \to X$ ist Projektion $\implies$ $\Id - P$ ist Projektion und $\ker(\Id - P) = \mathrm{im}(P)$, $\mathrm{im}(\Id - P) = \mathrm{ker}(P)$.
     \item Zu jedem Unterraum $Y$ von $X$ gibt es eine Projektion auf $Y$.
   \end{itemize}
 \end{lem}
@@ -826,5 +825,66 @@ Wir hatten aber schon festgestellt, dass wir, wenn $Y$ vollständig, "`$\overlin
     \item Für jede beschränkte Folge $(x_n)_{n \in \N}$ besitzt $(T x_n)_{n \in \N}$ eine in $Y$ konvergente Teilfolge.
   \end{itemize}
 \end{lem}
+
+% Vorlesung vom 28.1.2014
+
+\begin{lem}
+  Seien $X, Y$ Banachräume. Dann gilt:
+  \begin{itemize}
+    \item Für jede lineare Abbildung $T : X \to Y$ gilt: $T$ kompakt $\implies$ $T$ vollständig. Ist $X$ zudem reflexiv, gilt auch die Rückrichtung. % Eberleyn-Schmuljan
+    \item $K(X, Y)$ ist abgeeschlossener Unterraum von $\mathcal{L}(X, Y)$
+    \item Ist $T \in \L(X, Y)$ mit $\dim \mathrm{im}(T) < \infty$, so ist $T \in K(X, Y)$
+    \item Ist $Y$ Hilbertraum, so gilt für $T \in \mathcal{L}(X, Y)$
+    \[ T \in K(X, Y) \iff \ex{(T_n)_{n \in \N} \text{ Folge in } \mathcal{L}(X, Y) \text{ mit } \mathrm{im}(T_n) < \infty} \norm{T-T_n} \xrightarrow{n \to \infty} 0 \]
+    \item Für $P \in \mathcal{P}(X)$ gilt: $P \in K(X) \iff \dim \mathrm{im}(P) < \infty$
+  \end{itemize}
+\end{lem}
+
+% In Anwendungen, in denen Fixpunktsätze für kompakte Operatoren benutzt werden sollen, ist noch folgende Aussage sehr nützlich:
+
+\begin{lem}
+  Für $T_1 \in \mathcal{L}(X, Y)$ und $T_2 \in \mathcal{L}(X, Y)$ gilt:
+  $T_1$ oder $T_2$ kompakt $\implies$ $T_2 T_1$ kompakt
+\end{lem}
+
+\iffalse
+\begin{bspe}
+  \begin{itemize}
+    \item Sei $\Omega \opn \R^n$, beschränkt mit $\mathcal{C}^{0,1}$-Rand. Seien $m_1 > m_2 \in \N$ und $1 \leq p_1, p_2 < \infty$ sowie $m_1 - \tfrac{n}{p_1} > m_2 - \tfrac{n}{p_2}$. Dann ist die Einbettung $\Id : W^{m_1,p_1}(\Omega) \to W^{m_2,p_2}(\Omega)$ stetig und kompakt.
+    \item Viele Integraloperatoren, vgl. z.\,B. ÜA24
+  \end{itemize}
+\end{bspe}
+\fi
+
+% Kapitel 9. Spektraltheorie
+
+% Seien im Folgenden, sofern nicht anders spezifiziert, $X$ ein Banachraum über $\C$ und $T \in \mathcal{L}(X)$
+
+\begin{defn}
+  Die \emph{Resolventenmenge} von $T$ ist definiert als
+  \[ \rho(T) \coloneqq \Set{ \lambda \in \C }{ \ker (\lambda \Id - T) = \{ 0 \} } \text{ und } \im (\lambda \Id - T) = X, \]
+  das \emph{Spektrum} von $T$ durch $\sigma(T) \coloneqq \C \setminus \rho(T)$. Das Spektrum zerlegen wir in das \emph{Punktspektrum}
+  \[ \sigma_p(T) \coloneqq \Set{ \lambda \in \sigma(T) }{ \ker(\lambda \Id - T) \not= \emptyset }, \]
+  das \emph{kontinuierliche Spektrum}
+  \[ \sigma_c(T) \coloneqq \Set{ \lambda \in \sigma(T) }{ \ker(\lambda \Id - T) = \{ 0 \} \text{ und } \im (\lambda \Id - T) \not= X, \text{ aber } \overline{\im (\lambda \Id - T) = X } }, \]
+  sowie das \emph{Restspektrum} (Residualspektrum)
+  \[ \sigma_r(T) \coloneqq \Set{ \lambda \in \sigma(T) }{ \ker(\lambda \Id - T) = \{ 0 \} \text{ und } \overline{\im(\lambda \Id - T)} \not= X }. \]
+\end{defn}
+
+Offenbar ist $\lambda \in \rho(T)$ genau dann, $\lambda \Id - T : X \to X$ bijektiv ist. Nach dem Satz von der inversen Abbildung ist dies äquivalent zur Existenz von
+\[ R(\lambda, T) = (\lambda \Id - T)^{-1} \in \mathcal{L}(X), \]
+der sogenannten \emph{Resolvente} von $T$ in $\lambda$. Als Funktion von $\lambda$ heißt sie auch \emph{Resolventenfunktion}. Weiterhin ist $\lambda \in \sigma_p(T)$ offenbar äquivalent zu $\ex{x \not= 0} Tx = \lambda x$, dann heißt $\lambda$ \emph{Eigenwert} und $x$ \emph{Eigenvektor} (oder \emph{Eigenfunktion}). Der Unterraum $\ker(\Id \lambda - T)$ ist der \emph{Eigenraum} von $T$ zum Eigenwert $\lambda$. Er ist $T$-invariant.
+
+% TODO: Satz von der Neumannschen Reihe
+
+\begin{satz}
+  $\rho(T)$ ist offen und $\lambda \mapsto R(\lambda, T)$ ist eine komplex-analytische Abbildung von $\rho(T)$ nach $\mathcal{L}(X)$. Es gilt für $\lambda \in \rho(T)$: $\norm{R(\lambda, T)}^{-1} \leq \dist(\lambda, \rho(T))$
+\end{satz}
+
+\begin{satz}
+  Das Spektrum $\sigma(T)$ ist kompakt und nichtleer (falls $X \not= \{ 0 \}$) mit
+  \[ \sup_{\lambda \in \sigma(T)} = \lim_{m \to \infty} \norm{T^m}^{\tfrac{1}{m}} \leq \norm{T}. \]
+  Der Wert heißt \emph{Spektralradius}.
+\end{satz}
 
 \end{document}
