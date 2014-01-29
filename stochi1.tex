@@ -49,6 +49,13 @@
 
 \begin{document}
 
+% TODO: Approximationssatz für Maße?
+
+% TODO: Verteilungen:
+% * Bernoulli
+% * geometrische Verteilung
+% * Pascal-Verteilung
+
 \maketitle{Zusammenfassung Stochastik \rom{1}}
 
 % Kapitel 1
@@ -507,7 +514,7 @@
 
 \begin{satz}
   Das Lebesgue-Maß auf dem $\R^d$ ist bewegungsinvariant, d.\,h.
-  \[ \fa{A \in \Bor(\R^d), \, O \in \mathrm{SO}_d, \, x \in \R^d} \lambda_d(O \cdot A + x) = \lambda_d(A) \]
+  \[ \fa{A \in \Bor(\R^d), \, O \in \mathrm{SO}_d, \, x \in \R^d} \lambda_d(O \cdot A + x) = \lambda_d(A). \]
   Das Lebesgue-Maß ist bis auf einen multiplikativen Faktor das einzige verschiebungsinvariante Maß auf $(\R^d, \Bor(\R^d))$.
 \end{satz}
 
@@ -543,16 +550,16 @@
 \begin{defn}[Wichtige Verteilungsfunktionen]\mbox{}\\
   \begin{itemize}
     \item \emph{Exponentialverteilung} mit Parameter $\lambda > 0$:
-    \[ F_{\lambda}(x) = \max(0, 1 - \exp(- \lambda x)) \]
+    \[ F_{\lambda}(x) = \max(0, 1 - \exp(- \lambda x)) \tag*{Exp($\lambda$)} \]
     %\[ F_{\lambda}(x) = \begin{cases} 0, & \text{ für } x \leq 0 \\
     %                                  1 - \exp(- \lambda x), & \text{ für } x > 0
     %\end{cases} \]
     \item \emph{Poisson-Verteilung} mit Parameter $\lambda > 0$:
-    \[ F_{\lambda}(x) = \sum_{0 \leq n \leq x} \tfrac{\lambda^n}{n!} \exp(-\lambda) \]
+    \[ F_{\lambda}(x) = \sum_{0 \leq n \leq x} \tfrac{\lambda^n}{n!} \exp(-\lambda) \tag*{Poi($\lambda$)} \]
     \item \emph{Gleichverteilung} auf $\left] a, b \right]$: $F(x) = \min(1, \max(0, \tfrac{x - a}{b - a}))$
     %\[ F(x) \coloneqq 0 \text{ für } x < a, \quad F(x) \coloneqq \tfrac{x-a}{b-a} \text{ für } x \in \left[ a, \right], \quad F(x) \coloneqq 1 \text{ für } x > b \]
     \item \emph{Normalverteilung} (Gaußverteilung) mit EW $\mu$ und Varianz $\sigma^2$:
-    \[ F_{\mu \sigma^2}(x) = \tfrac{1}{\sqrt{2 \pi \sigma^2}} \Int{-\infty}{x}{\exp\left(\tfrac{-(t-\mu)^2}{2 \sigma^2}\right)}{t} \]
+    \[ F_{\mu \sigma^2}(x) = \tfrac{1}{\sqrt{2 \pi \sigma^2}} \Int{-\infty}{x}{\exp\left(\tfrac{-(t-\mu)^2}{2 \sigma^2}\right)}{t} \tag*{N($\mu$, $\sigma^2$)} \]
     erfüllt $F_{\mu \sigma^2}'(x) = \exp\left(\tfrac{-(x-\mu)^2}{2 \sigma^2}\right)$, $F_{\mu \sigma^2}(\mu-x) = 1 - F_{\mu \sigma^2}(\mu+x)$
     \item $d$-dimensionale \emph{Normalverteilung} mit Erwartungswertvektor $m \in \R^d$ positiv definiter Kovarianzenmatrix $C \in \R^{d \times d}$:
     \[ F(x) = \tfrac{1}{\sqrt{(2 \pi)^d \det C}} \enspace \Int{\left] -\infty, x \right]}{}{\!\! \exp(- \tfrac{1}{2} (y-m)^T C^{-1} (y-m))}{y} \]
@@ -823,8 +830,8 @@
 % Intuitive Interpretation: Ein Urnenmodell mit vielen Kugeln können wir auch als Bernoulli-Experiment auffassen, ohne uns einen zu großen Fehler einzuhandeln
 
 \begin{satz}[GWS von Poisson]
-  Für $k \in \N$, $\lambda \in \R_{>0}$ gilt
-  \[ \binom{n}{m} \, p_n^m \, (1-p_n)^{n-m} \enspace \xrightarrow[n p_n \to \lambda]{n \to \infty} \enspace \frac{\lambda^k}{k!} \exp(-\lambda). \]
+  Für $m \in \N$, $\lambda \in \R_{>0}$ gilt
+  \[ \binom{n}{m} \, p_n^m \, (1-p_n)^{n-m} \enspace \xrightarrow[n p_n \to \lambda]{n \to \infty} \enspace \frac{\lambda^m}{m!} \exp(-\lambda). \]
 \end{satz}
 
 
@@ -1042,11 +1049,16 @@ Falls $V_a^b(g) < \infty$, so heißt $g$ \emph{von beschränkter Variation}.
   Eine $\Alg$-messbare numerische Funktion $X$ über einem W-Raum $(\Omega, \Alg, \P)$ heißt \emph{Zufallsgröße} (ZG) oder \emph{Zufallsvariable}.
 \end{defn}
 
-% Bezeichnung: X, Y, Z, ...
+% Ausgelassen: Typische Bezeichnung mit Großbuchstaben, beginnend mit X, Y, Z, ...
 
 \begin{bem}
   Häufig fordert man zusätzlich $\P(\{ X = \pm \infty \}) = 0$.
 \end{bem}
+
+\begin{nota}
+  Für eine ZG $X$ und eine Fkt. $g : \R^1 \to \ER$ schreiben wir
+  \[ f(X) \coloneqq f \circ X : \Omega \to \ER. \]
+\end{nota}
 
 \begin{defn}
   Das durch die ZG $X$ induzierte Bildmaß
@@ -1351,7 +1363,7 @@ Falls $V_a^b(g) < \infty$, so heißt $g$ \emph{von beschränkter Variation}.
   Sei $F_X$ VF einer ZG $X : (\Omega, \Alg, \P) \to (\R^1, \LebAlg(\R^1)$.
   \begin{itemize}
     \item $F_X$ heißt \emph{diskret}, falls $F_X$ höchstens abzählbar viele Sprungstellen $x_1, x_2, ... \in \R$ besitzt mit
-      \[ \fa{k \in J \subset \N} p_k \coloneqq F_X(x_k) - \lim_{\mathclap{x \uparrow x_k}} F_X(x) > 0, \quad \sum_{k=1}^\infty p_k = 1. \]
+      \[ \fa{j \in J \subset \N} p_j \coloneqq F_X(x_j) - \lim_{\mathclap{x \uparrow x_j}} F_X(x) > 0, \quad \sum_{j=1}^\infty p_j = 1. \]
     Dann ist $F_X$ zwischen den Sprüngen konstant.
     \item $F_X$ heißt \emph{stetig} (diffus, atomlos), wenn $F_X$ in jedem Punkt stetig ist. Dann gilt $P_X(\{ X = x \}) = 0$ für alle $x \in \R$.
   \end{itemize}
@@ -1395,63 +1407,80 @@ Falls $V_a^b(g) < \infty$, so heißt $g$ \emph{von beschränkter Variation}.
 % * Sprunghöhen bei Poissonverteilung
 
 \begin{satz}\mbox{}\vspace{-16pt}
-  \[ \E(X) = \begin{cases}
+  \[ \E X = \begin{cases}
     \Int{\R^1}{}{x \cdot f_X(x)}{x}, & \text{falls $F_X$ absolutstetig mit WD $f_X$} \\
-    \sum_{k \in J} x_k \cdot p_k, & \parbox[t]{.6\textwidth}{falls $F_X$ diskret mit Sprüngen $p_k$ \\ bei $x_k$, $k \in J \subset \N$}
+    \sum_{j \in J} x_j \cdot p_j, & \parbox[t]{.6\textwidth}{falls $F_X$ diskret mit Sprüngen $p_j$ \\ bei $x_j$, $j \in J \subset \N$}
   \end{cases} \]
 \end{satz}
 
 % Ausgelassen: Deutung der $\E X$ als Massenschwerpunkte
 % Ausgelassen: Beispiel Würfelwurf
 
-% TODO
+% TODO: Definition der Notation $X \sim Verteilungsfunktion$
 
+\begin{satz}[Erwartungswerte bekannter Zufallsverteilungen]\mbox{}\\[10pt]
+  \begin{multicols}{2}
+    \begin{itemize}
+      \item Für $X \sim$ Poi($\lambda$): $\E X = \lambda$
+      \item Für $X \sim$ Exp($\lambda$): $\E X = \tfrac{1}{\lambda}$
+      \item Für $N \sim$ N($\mu$, $\sigma^2$): $\E X = \mu$
+      \item Für $N \sim$ N(0, 1): $\E \abs{X} = \sqrt{\tfrac{2}{\pi}}$
+    \end{itemize}
+  \end{multicols}
+\end{satz}
 
+\begin{bem}
+  Die Cauchy-Verteilung hat die VF bzw. die W-Dichte
+  \[ F(x) = \tfrac{1}{\pi} \arctan(x) + \tfrac{1}{2}, \qquad f(x) = \tfrac{1}{\pi (1 + x^2)}. \]
+  Eine Cauchy-verteilte ZG $X$ hat keinen EW, da $\Int{\R^1}{}{\abs{x} \cdot f(x)}{x} = \infty$.
+\end{bem}
 
+\begin{defn}
+  Seien $X_1, ..., X_d : (\Omega, \Alg, \P) \to (\R^1, \Bor(\R^1))$ ZGen,
+  \[ F = F_{(X_1, ..., X_d)} : \R^d \to \left[ 0, 1 \right], \quad (x_1, ..., x_d) \mapsto \P(X_1 {\leq} x_1, ..., X_k {\leq} x_k) \]
+  die dazugehörige VF und $P = P_{(X_1, ..., X_d)}$ das von der VF induzierte Maß auf $\Bor(\R^d)$.
+  \begin{itemize}
+    \item $F$ heißt \emph{diskret}, falls es eine höchstens abzählbare Menge $\Set{ y_i \in \R^d }{ i \in I }$ mit $I \subset \N$ gibt, sodass
+    \[ \fa{i \in I} P(\{ y_i \}) > 0 \quad \text{und} \quad \sum_{i \in I} P(\{ y_i \}) = 0. \]
+    \item $F$ heißt \emph{stetig}, wenn $P(\{ y \}) = 0$ für alle $y \in \R^1$.
+    \item $F$ heißt \emph{absolut stetig}, falls das Maß $P$ absolut stetig bzgl. dem Lebesgue-Maß ist, also $P \ll \lambda_d$ gilt. Dazu äquivalent: Für alle $\epsilon > 0$ gibt es ein $\delta > 0$, sodass für höchstens abzählbar viele, disjunkte Elementarquader $Q_{j} = \left] a_j, b_j \right]$ mit $j \in J \subset \N$  gilt:
+    \[ \sum_{j \in J} \lambda_d(Q_j) \leq \delta \implies \sum_{j \in J} P(Q_j) = \sum_{j \geq J} (\triangle F) Q_j \leq \epsilon. \]
+    \item $F$ heißt \emph{singulär stetig}, wenn $F$ stetig ist und eine Lebesgue-Menge $S$ mit $\lambda_d(S) = 0$ und $P(S) = 1$ existiert.
+  \end{itemize}
+\end{defn}
 
+\begin{bem}
+  Falls $F$ absolut stetig, ex. die W-Dichte, die f.\,ü. durch
+  \[ f = f_{(X_1, ..., X_d)} : \R^d \to \R_{\geq 0}, \quad (x_1, ..., x_d) \mapsto \tfrac{\partial^d}{\partial x_1 \cdots \partial x_d} F(x_1, ..., x_d) \]
+  gegeben ist und $\Int{\mathclap{\left] -\infty, x \right]}}{}{f(y)}{y} = F(x)$ für alle $x \in \R^d$ erfüllt.
+\end{bem}
 
-% Ende bereinigte/verschönerte Einträge
+% Ausgelassen: Obiges $f$ wird auch als Radon-Nikodym-Ableitung bezeichnet
 
+\begin{satz}
+  Sei $X$ eine ZG und $g : \R^1 \to \R^1$ messbar. Dann gilt
+  \[ \E g(X) = \begin{cases}
+    \Int{\R^1}{}{g(x) \cdot f_X(x)}{x}, & \text{falls $F_X$ absolutstetig mit WD $f_X$} \\
+    \sum_{j \in J} g(x_j) \cdot p_j, & \parbox[t]{.6\textwidth}{falls $F_X$ diskret mit Sprüngen $j_k$ \\ bei $x_j$, $j \in J \subset \N$ (und wohldefiniert)}
+  \end{cases} \]
+\end{satz}
 
-
-
-
-
-% Approximationssatz für Maße?
-
-% TODO: Verteilungen:
-% * Bernoulli
-% * geometrische Verteilung
-% * Pascal-Verteilung
-
-% \[ \E X = \Int \]
-
-...
-
-% Analoge Betrachtungen für $k$-dimensionale Z-Verteilungen $(X_1, ..., X_k)$
-
-$F_(X_1, ..., X_k)$ heißt \emph{absolut stetig}, falls für alle $\epsilon > 0$ ein $\delta > 0$ existiert, sodass für $I_{\alpha} = \left] a_j, b_j \right]$, $j = 1, 2, ...$ mit $\sum_{j \geq 1} \lambda_k(I_j) \leq \delta$ gilt:
-\[ \sum_{j \geq 1} \P_{(X_1, ..., X_k)}(I) = \sum_{j \geq 1} (triangle F_{(X_1, ..., X_k)}) I_j \leq \epsilon \]
-
-Genau dann existiert eine (Lebesgue-) Borel-messbare Funktion $f_{(X_1, ..., Xk)}(x_1, ..., x_k) \geq 0$ mit $\Int{\R^1}{}{f_{(X_1, ..., X_k)}}{\lambda_k} = 1$
-
-Sei $g : \R^k \to \R^1$ Borel-messbar
-
-$\E g(X_1, ..., X_k) = \Int{\R^1}{}{g \cdot f_{(X_1, ..., X_k)}}{\lambda_k}$
- 
-Falls $F_{(X_1, ..., X_k)}$ "hinreichend glatt", so ergibt sich
-$f_{X_1, ..., X_k}(x_1, ..., x_k) = \frac{\partial^k}{\partial_{x_1} \cdot \partial_{x_k}} F_{(X_1, ..., X_k)}(x_1, ..., x_k)$
-
-$F_{X_1, ..., X_k}$ heißt singulär-stetig, falls $P_{(X_1, ..., X_k)}(\{ x \}) = 0 \forall x \in \R^k$
-und es existiert eine Lebesgue-messbare Menge $S$ mit $\lambda_k(S) = 0$ und $P((X_1, ..., X_k))(S) = 1$.
-
-$F_{(X_1, ..., X_k)}$ heißt diskret, falls eine höchstens abzählbare Punktmenge $S = \{ x_1, ... \} \subset \R^k$ und $p_i = P_{(X_1, ..., X_k)}(\{ x_i \}) > 0$ mit $\sum_{i \geq 1} p_i = 1$
-
-Sei $x_i = (x_i^{(1)}, ..., x_i^{(k)}) \in \R^k$
-
-$\E g(X_1, ..., X_k) = \sum_{i \geq 1} g(x_i^{(1)}, ..., x_i^{(k)}) p_i$
+% Ausgelassen: Analoge Überlegung für $g . \R^d \to \R$ Borel-messbar und ZGen $X_1, ..., X_d$, dann
+% * $\E g(X_1, ..., X_d) = \Int{\R^1}{}{g \cdot f_{(X_1, ..., X_d)}}{\lambda_d}$
+%   falls $F_{(X_1, ..., X_d)}$ absolut stetig mit Dichte $f_{(X_1, ..., X_d)}$
+% * $\E g(X_1, ..., X_k) = \sum_{i \geq 1} g(x_i^{(1)}, ..., x_i^{(k)}) p_i$,
+%   falls $F_{(X_1, ..., X_d)}$ diskret
 
 % Riemann-Stieltjes-Integral
+
+
+
+
+
+
+
+
+
 
 $g : \R^1 \to \R^1$ sei zunächst beliebig (stetig oder hinreichend glatt)
 
