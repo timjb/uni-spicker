@@ -56,6 +56,7 @@
 \newtheorem*{prop}{Proposition}
 \newtheorem*{modell}{Modell}
 \newtheorem*{sprech}{Sprechweise}
+\newtheorem*{sprechweise}{Sprechweise}
 \newtheorem*{beob}{Beobachtung}
 \newtheorem*{beobachtung}{Beobachtung}
 \newtheorem*{antwort}{Antwort}

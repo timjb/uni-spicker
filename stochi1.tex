@@ -274,9 +274,11 @@
 \end{defn}
 
 \begin{defn}
+  Ein Inhalt/Maß $\mu$ auf einem Ring / einer $\sigma$-Algebra $\Alg$
   \begin{itemize}
-    \item Ein Inhalt / Maß $\mu$ auf einem Ring / einer $\sigma$-Algebra $\Alg$ über $\Omega$ heißt \emph{endlich}, falls $\mu(\Omega) < \infty$.
-    \item Ein endliches Maß mit $\mu(\Omega) = 1$ heißt \emph{Wahrscheinlichkeitsmaß} (W-Maß). W-Maße werden für gewöhnlich mit $\P$ bezeichnet.
+    \item heißt \emph{endlich}, falls $\mu(\Omega) < \infty$,
+    \item heißt \emph{$\sigma$-endlich}, falls eine Folge $A_n$ in $\Alg$ existiert, sodass
+    \[ \Omega = \bigcup_{n \in \N} A_n \quad \text{und} \quad \fa{i \in \N} \mu(A_i) < \infty. \]
   \end{itemize}
 \end{defn}
 
@@ -303,10 +305,16 @@
     \item $A \subset B \implies \mu(A) \leq \mu(B)$ \pright{Isotonie}
     \item $A \subset B \implies \mu(B \setminus A) = \mu(B) - \mu(A)$
     \item $\mu(\bigcup_{i=1}^n A_i) \leq \sum_{i=1}^n \mu(A_i)$ \pright{Subadditivität}
-    \item $\mu(\bigcup_{i=1}^n A_i) = \sum_{k=1}^n (-1)^{k{-}1} \enspace \sum_{\mathclap{1 \leq i_1 < ... < i_k \leq n}} \enspace \mu(A_{i_1} \cap ... \cap A_{i_k})$
-    % Ausgelassen: Name der letzten Eigenschaft: Inklusions- Exklusionsprinzip
   \end{itemize}
 \end{lem}
+
+\begin{satz}
+  Sei $\Ring$ ein Ring und $\mu$ ein Inhalt. Es gelten für $n \in \N$ und $A_1, ..., A_n \in \Ring$ die Ein- und Ausschlussformeln
+  \begin{align*}
+    \mu(A_1 \cup ... \cup A_n) &= \sum_{k=1}^n (-1)^{k-1} \quad \sum_{\mathclap{1 \leq i_1 < ... < i_k \leq n}} \quad \mu(A_{i_1} \cap ... \cap A_{i_k}), \\
+    \mu(A_1 \cap ... \cap A_n) &= \sum_{k=1}^n (-1)^{k-1} \quad \sum_{\mathclap{1 \leq i_1 < ... < i_k \leq n}} \quad \mu(A_{i_1} \cup ... \cup A_{i_k}).
+  \end{align*}
+\end{satz}
 
 \begin{satz}
   Sei $\mu$ ein Inhalt auf $\Ring \subset \mathcal{P}(\Omega)$. Wir betrachten die Aussagen:
@@ -325,14 +333,20 @@
 % Ausgelassen: Beispiel: Inhalt der Elementarquader im $\R^d$
 
 \begin{defn}
+  Seien $a = (a_1, ..., a_d), b = (b_1, ..., b_d) \in \R^d$. Wir schreiben $a \leq b$, falls $a_i \leq b_i$ für alle $i \in \{ 1, ..., d \}$ gilt. Dann heißt
+  \[ \left] a, b \right] \coloneqq \Set{ (x_1, ..., x_d) \in \R^d }{ a_i < x_i \leq b_i \text{ für alle } i \in \{ 1, ..., d \} } \]
+  von $a$ und $b$ aufgespannter \emph{Elementarquader} in $\R^d$.
+\end{defn}
+
+\begin{defn}
   Sei $f : \R^d \to \R^1$ eine Funktion, $x = (x_1, ..., x_d) \in \R^d$ und $h = (h_1, ..., h_d) \in \R_{\geq 0}^d$. Dann heißt
   \[ (\triangle f)(\left] x, x + h \right]) \coloneqq \sum_{\mathclap{\delta_1, ..., \delta_d \in \{0,1\}}} \, (-1)^{d-(\delta_1 + ... + \delta_k)} f(x_1 + \delta_1 h_1, ..., x_d + \delta_d h_d) \]
-  \emph{Zuwachs} von $f$ im Hyperquader $\left] x, x+h \right]$.
+  \emph{Zuwachs} von $f$ im Elementarquader $\left] x, x+h \right]$.
 \end{defn}
 % Ausgelassen: Alternative, rekursive Definition der Zuwächse
 
 \begin{defn}
-  Eine Funktion $G : \R^d \to \R$ heißt \emph{maßerzeugende Funktion}, falls gilt
+  $G : \R^d \to \R$ heißt \emph{maßerzeugende Funktion}, falls
   \begin{itemize}
     \item $G$ ist nicht-fallend in jedem Argument, d.\,h. für alle $k \in \{ 1, ..., d \}$ und $x_1, ..., x_d \in \R$ ist $f(x_1, ..., x_{k-1}, -, x_{k+1}, ..., x_d)$ nicht-fallend.
     \item $G$ ist rechtsseitig stetig in jedem Argument, d.\,h. für alle $k \in \{ 1, ..., d \}$ und $x_1, ..., x_d \in \R$ gilt
@@ -346,35 +360,174 @@
 \begin{defn}
   Eine maßerzeugende Funktion $F$ heißt \emph{Verteilungsfunktion} (VF) in $\R^d$, falls zusätzlich gilt:
   \[
-    \lim_{\substack{x_1 \to \infty \\ ... \\ x_d \to \infty}} F(x_1, ..., x_d) = 1
-    \quad \text{und} \quad
-    \lim_{x_i \to -\infty} F(x_1, ..., x_d) = 0
+    \lim_{\mathclap{\substack{x_1 \to \infty \\ ... \\ x_d \to \infty}}} F(x_1, ..., x_d) = 1
+    \qquad \text{und} \qquad
+    \lim_{\mathclap{x_i \to -\infty}} F(x_1, ..., x_d) = 0
   \]
   für alle $i \in \{ 1, ..., d \}$ und $x_1, ..., \widehat{x_i}, ..., x_d \in \R$ fest.
 \end{defn}
 
-% TODO: maßerzeugende Funktionen, ...
+\begin{bem}
+  Sei $G_i : \R^1 \to \R_{> 0}^1$ für $i \in \{ 1, ..., d \}$ maßerzeugende Funktion im $\R^1$, dann ist
+  \[ G : \R^d \to \R_{>0}^1, \quad (x_1, ..., x_d) \mapsto G_1(x_1) \cdot ... \cdot G_d(x_d) \]
+  eine maßerzeugende Funktion in $\R^d$ und es gilt für jeden Elementarquader $\left] a, b \right] \subset \R^d$ mit $a = (a_1, ..., a_d)$, $b = (b_1, ..., b_d)$:
+  \[ (\triangle G)(\left] a, b \right]) = \prod_{i=1}^d \left( G_i(b_i) - G_i(a_i) \right). \]
+\end{bem}
+% Ausgelassen: Spezialfall $G_1 = ... = G_d = \max(0, \id)$
 
-
-% ------- TODO: überarbeiten
-\iffalse
 \begin{satz}
-  Sei $\Ring$ ein Ring und $\mu$ ein Inhalt. Es gelten für $n \in \N$ und $A_1, ..., A_n \in \Ring$ die Ein- und Ausschlussformeln
+  Der Ring aller Elementarquader im $\R^d$ ist
   \begin{align*}
-    \mu(A_1 \cup ... \cup A_n) &= \sum_{k=1}^n (-1)^{k-1} \quad \sum_{\mathclap{1 \leq i_1 < ... < i_k \leq n}} \quad \mu(A_{i_1} \cap ... \cap A_{i_k}), \\
-    \mu(A_1 \cap ... \cap A_n) &= \sum_{k=1}^n (-1)^{k-1} \quad \sum_{\mathclap{1 \leq i_1 < ... < i_k \leq n}} \quad \mu(A_{i_1} \cup ... \cup A_{i_k}).
+     \Ring \coloneqq \{ \bigcup_{i=1}^m \left] a_i, b_i \right] \,\mid\,\, & m \in \N \text{ und } \left] a_1, b_1 \right], ..., \left] a_m, b_m \right] \\[-8pt]
+     & \text{disjunkte Elementarquader im } \R^d \}
   \end{align*}
+  und für jede maßerzeugende Funktion $G : \R^d \to \R^1$ definiert
+  \[ \mu_G : \Ring \to \left[ 0, \infty \right[, \quad \bigcup_{i=1}^m \left] a_i, b_i \right] \mapsto \sum_{i=1}^m (\triangle G)(\left] a_i, b_i \right]) \]
+  einen Inhalt auf $\Ring$, der sogar ein Prämaß ist.
 \end{satz}
-\fi
-% ------ TODO Ende
 
+% Kapitel 1.4. Fortsetzungssätze für Prämaße
 
+\begin{defn}
+  Eine numerische Funktion $\mu^* : \mathcal{P}(\Omega) \to \overline{\R}$ heißt \emph{äußeres Maß} auf $\Omega$, wenn gilt:
+  \begin{itemize}
+    \miniitem{0.3 \linewidth}{$\mu^*(\emptyset) = 0$}
+    \miniitem{0.68 \linewidth}{$A \subset B \implies \mu^*(A) \leq \mu^*(B)$ \pright{Monotonie}}
+    \item Für eine Folge $(A_n)_{n \in \N}$ in $\mathcal{P}(\Omega)$ gilt $\mu^*\left(\bigcup_{n \in \N} A_n \right) \leq \sum_{n = 0}^\infty \mu^*(A_n)$. %\hfill ($\sigma$-Subadditivität)
+  \end{itemize}
+\end{defn}
 
+\begin{bem}
+  Wegen $\mu^*(\emptyset) = 0$ und der Monotonie nimmt ein äußeres Maß nur Werte in $[0, \infty]$ an.
+\end{bem}
 
+\begin{defn}
+  Eine Teilmenge $A \subset \Omega$ heißt \emph{$\mu^*$-messbar}, falls
+  \[ \mu^*(Q) = \mu^*(Q \cap A) + \mu^*(Q \setminus A) \quad \text{für alle } Q \subset \Omega. \]
+\end{defn}
 
-% Anfang strukturierte sortierte Einträge
+\begin{satz}[Carathéodory]
+  Für ein äußeres Maß $\mu^* : \mathcal{P}(\Omega) \to [0, \infty]$ ist
+  \begin{itemize}
+    \item $\Alg^* \coloneqq \Set{ A \subset \Omega }{ A \text{ ist $\mu^*$-messbar } }$ eine $\sigma$-Algebra und
+    \item $\mu^*|_{\Alg^*}$ ein Maß auf $\Alg^*$.
+  \end{itemize}
+\end{satz}
 
+\begin{satz}[\emph{1. Fortsetzungssatz}]
+  \begin{itemize}
+    \item Sei $\mu$ ein Prämaß auf einem Ring $\Ring$ über $\Omega$. Dann existiert eine Fortsetzung $\widetilde{\mu}$ von $\mu$ zu einem Maß auf der von $\Ring$ erzeugten $\sigma$-Algebra $\Alg \coloneqq \sigma(\Ring)$, sodass $\widetilde{\mu}|_{\Ring} = \mu$.
+    \item Falls $\mu$ $\sigma$-endlich ist, so ist die Fortsetzung eindeutig.
+  \end{itemize}
+\end{satz}
 
+\begin{bem}
+  Im Beweis wird ein äußeres Maß $\mu^*$ auf $\Omega$ so definiert:
+  \begin{align*}
+    \mathfrak{U}(Q) &\coloneqq \left\{ (A_n)_{n \in \N} \,\middle|\, Q \subset \bigcup_{n = 0}^\infty A_n \text{ und } A_n \text{ Folge in } \Ring \right\}, \\
+    \mu^*(Q) &\coloneqq \inf \left( \left\{ \sum_{i = 0}^\infty \mu(A_n) \,\middle|\, (A_n)_{n \in \N} \in \mathfrak{U}(Q) \right\} \cup \{ \infty \} \right).
+  \end{align*}
+  Das äußere Maß $\mu^*$ eingeschränkt auf $\Alg^* \supset \Alg(\Ring)$ ist ein Maß.
+\end{bem}
+
+% Kapitel 1.5. Vervollständigung von Maßräumen
+
+\begin{defn}
+  Sei $\Omega$ eine Menge und $\Alg \subset \mathcal{P}(\Omega)$ eine $\sigma$-Algebra auf $\Omega$, sowie ggf. $\mu$ ein Maß auf $\Alg$. Dann heißt
+  \begin{itemize}
+    \item das Tupel $(\Omega, \Alg)$ \emph{messbarer Raum},
+    \item das Tripel $(\Omega, \Alg, \mu)$ \emph{Maßraum}.
+  \end{itemize}
+\end{defn}
+
+% Fragen:
+% * Welche Mengen aus $\mathcal{P}(\Omega)$, die nicht in $\sigma(\Alg)$ liegen, umfasst $\Alg^*$?
+% * Kann $\mu^*|_{\Alg^*}$ noch weiter ausgedehnt werden?
+
+\begin{satz}
+  Unter den Bedingungen des 1. Fortsetzungssatzes ist $\Alg^*$ die größte $\sigma$-Algebra $\overline{\Alg}$ mit $\Alg \subset \overline{\Alg}$, sodass $\mu^*|_{\overline{\Alg}}$ ein Maß ist.
+\end{satz}
+
+\begin{defn}
+  Sei $(\Omega, \Alg, \mu)$ ein Maßraum. Eine Menge $N \subset \Omega$ heißt \emph{Nullmenge}, falls es ein $A \in \Alg$ gibt, sodass $N \subset A$ und $\mu(A) = 0$.
+\end{defn}
+
+\begin{defn}
+  Ein Maßraum $(\Omega, \Alg, \mu)$ heißt \emph{vollständig}, falls jede Nullmenge $N \subset \Omega$ ein Element von $\Alg$ ist.
+\end{defn}
+
+\begin{satz}
+  $(\Omega, \Alg^*, \mu^*|_{\Alg^*})$ ist vollständig für jedes bel. äußere Maß $\mu^*$.
+\end{satz}
+
+\begin{satz}
+  Jeder Maßraum $(\Omega, \Alg, \mu)$ kann zu einem vollständigen Maßraum $(\Omega, \Alg_c, \mu_c)$ erweitert werden mit
+  \[
+    \Alg_c \coloneqq \Set{ A \cup N }{ A \in \Alg, \, N \text{ $\mu$-Nullmenge} }, \quad
+    \mu_c(A \cup N) \coloneqq \mu(A).
+  \]
+\end{satz}
+
+\begin{satz}
+  Sei $\mu$ ein $\sigma$-endliches Prämaß auf dem Ring $\Ring$ über $\Omega$ sowie $\widetilde{\Alg} \coloneqq \sigma(\Ring)$. Dann gilt $\Alg^* = \Alg_c$ und $\mu^*|_{\Alg^*} = \widetilde{\mu}_c$, wobei $\widetilde{\mu}$ das eindeutig fortgesetzte Maß ist.
+\end{satz}
+
+% Ausgelassen: Korollar: Alle Teilmengen einer Nullmenge $N_0$ bilden zusammen eine $\sigma$-Algebra über $N_0$.
+
+\begin{sprech}
+  Eine Eigenschaft oder Aussage gilt für \emph{fast alle} $\omega \in \Omega$ oder \emph{$\mu$-fast-überall}, wenn es eine Nullmenge $N_0 \subset \Omega$ gibt, sodass die Aussage oder Eigenschaft für alle $\omega \in N_0^c$ gilt.
+\end{sprech}
+
+\begin{defn}
+  Sei $(\Omega, \Alg, \mu)$ ein Maßraum.
+  \begin{itemize}
+    \item Dann heißt $\mu$ \emph{diffus} (atomlos), falls $\mu(\{ \omega \}) = 0$ für alle $\omega \in \Omega$.
+    \item Sei $\eta$ ein weiteres Maß auf $(\Omega, \Alg)$. Dann heißt $\mu$ \emph{absolut stetig} bezüglich $\eta$ (notiert $\mu \ll \eta$), falls
+  \[ \eta(A) = 0 \implies \mu(A) = 0 \quad \text{ für alle } A \in \Alg. \]
+  \end{itemize}
+\end{defn}
+
+% Ausgelassen: Elementarere Definition (bzw. Charakterisierung) von Nullmengen in $\R^d$
+
+% Ausgelassen: Beispiele für Nullmengen
+% * Höchstens abzählbare Mengen im $\R^1$
+% * Alle Dezimalzahlen im $\R^1$, wobei eine Ziffer verboten wird
+% * Die Diagonale im $\R^2$
+
+% Kapitel 1.6. Das Lebesgue-Borel-Maß
+
+\begin{defn}
+  Die von den Elementarquadern im $\R^d$ erzeugte $\sigma$-Algebra heißt \emph{Borel-$\sigma$-Algebra} $\Bor(\R^d)$. Das von der maßerzeugenden Funktion
+  \[ G : \R^d \to \R, \quad (x_1, ..., x_d) \mapsto x_1 \cdot ... \cdot x_d \]
+  erzeugte Prämaß auf dem von den Elementarquadern erzeugten Ring $\mu_G$, das zu einem Maß $\widetilde{\mu}_G$ auf $\Bor(\R^d)$ fortgesetzt wird, heißt \emph{Lebesgue-Borel-Maß}. Die durch Hinzunahme aller Nullmengen vervollständigte $\sigma$-Algebra $\Alg^* = \Bor(\R^d)_c$ heißt \emph{Lebesgue-$\sigma$- Algebra} und das fortgesetzte Maß $\lambda_d \coloneqq \mu_G^*$ \emph{Lebesgue-Maß}.
+\end{defn}
+
+\begin{satz}
+  Das Lebesgue-Maß auf dem $\R^d$ ist bewegungsinvariant, d.\,h.
+  \[ \fa{A \in \Bor(\R^d), \, O \in \mathrm{SO}_d, \, x \in \R^d} \lambda_d(O \cdot A + x) = \lambda_d(A) \]
+  Das Lebesgue-Maß ist bis auf einen multiplikativen Faktor das einzige verschiebungsinvariante Maß auf $(\R^d, \Bor(\R^d))$.
+\end{satz}
+
+% Kapitel 1.7. Das Wahrscheinlichkeitsmaß -- Wahrscheinlichkeitstheorie nach Kolmogorow
+
+\begin{sprech}
+  Sei $(\Omega, \Alg)$ ein messbarer Raum. Wir nennen $\Omega$ abstrakte Grundmenge und die Elemente von $\Omega$ Elementarereignisse. Die $\sigma$-Algebra $\Alg$ enthält zufällige Ereignisse, unter anderem das sichere Ereignis $\Omega$ und das unmögliche Ereignis $\emptyset$.
+\end{sprech}
+
+\begin{defn}
+  Sei $(\Omega, \Alg, \P)$ ein Maßraum mit $\P(\Omega) = 1$. Dann heißt $\P$ \emph{Wahrscheinlichkeitsmaß} (W-Maß) und das Tripel $(\Omega, \Alg, \P)$ \emph{Wahrscheinlichkeitsraum} (W-Raum).
+\end{defn}
+
+\begin{sprech}
+  Sei $(\Omega, \Alg, \P)$ ein W-Raum und $A, B \in \Alg$. Wir sagen:
+  \begin{itemize}
+    \item $A$ ist \emph{fast sicher}, wenn $\P(A) = 1$.
+    \item $A$ ist \emph{fast unmöglich}, wenn $\P(A) = 0$.
+    \item $A$ und $B$ sind \emph{äquivalent}, wenn $\P(A \symmdiff B) = 0$.
+  \end{itemize}
+\end{sprech}
+
+% Ausgelassen: Akkumulierte Axiomensammlung für W-Räume
 
 % Vorlesung 9
 
@@ -398,7 +551,7 @@
   \end{itemize}
 \end{defn}
 
-% Ausgelassen: Mehrdimensionale Normalverteilung, zweidimensionale Exponentialverteilung
+% Ausgelassen: Gleichverteilung, Mehrdimensionale Normalverteilung, zweidimensionale Exponentialverteilung
 % Ausgelassen: Gauß-Levy-Kuzmin-Theorem, und zugehörige Verteilung
 % Ausgelassen: Wiener Maß für Modellierung von Brown'scher Bewegung
 
@@ -1092,11 +1245,6 @@ Falls $V_a^b(g) < \infty$, so heißt $g$ \emph{von beschränkter Variation}.
   Sei $(f_n)_{n \in \N}$ eine Folge nicht negativer, $\Alg$-messbarer, numerischer Funktionen auf $(\Omega, \Alg, \mu)$. Dann gilt
   \[ \IntOmu{\sum_{n=1}^{\infty} f_n} = \sum_{n=1}^\infty \IntOmu{f_n}. \]
 \end{kor}
-
-\begin{defn}
-  Sei $(\Omega, \Alg)$ ein messbarer Raum mit Maßen $\mu$ und $\eta$. Dann heißt $\mu$ \emph{absolut stetig} bezüglich $\eta$ (notiert $\mu \ll \eta$), falls
-  \[ \eta(A) = 0 \implies \mu(A) = 0 \quad \text{ für alle } A \in \Alg. \]
-\end{defn}
 
 % TODO: Namen dieses Maßes?
 \begin{satz}
