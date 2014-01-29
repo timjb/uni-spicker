@@ -1091,12 +1091,12 @@ Falls $V_a^b(g) < \infty$, so heißt $g$ \emph{von beschränkter Variation}.
 % Vorlesung 18
 
 \begin{defn}
-  Sei $X_1, ..., X_n$ eine endliche Familie von ZGen über $(\Omega, \Alg, \P)$. Diese Familie heißt \emph{stochastisch unabhängig}, falls
+  Sei $X_1, ..., X_n$ eine endliche Familie von ZGn über $(\Omega, \Alg, \P)$. Diese Familie heißt \emph{stochastisch unabhängig}, falls
   \[ \P(\bigcap_{i=1}^n \{ X_i \in B_i \}) = \prod_{i=1}^n \P(\{ X_i \in B_i \}) \quad \text{für alle $B_1, ..., B_n \in \LebAlg(\ER)$.} \]
 \end{defn}
 
 \begin{satz}
-  Seien $X_1, ..., X_n$ unabhängige ZGen über $(\Omega, \Alg, \P)$ und $g_1, ..., g_n : \R \to \R$ Borel-messbar. Setze $Y_i \coloneqq g_i(X_i) \coloneqq g_i \circ X_i$ für $i = 1, ..., n$, dann sind auch $Y_1, ..., Y_n$ unabhängige ZGen.
+  Seien $X_1, ..., X_n$ unabhängige ZGn über $(\Omega, \Alg, \P)$ und $g_1, ..., g_n : \R \to \R$ Borel-messbar. Setze $Y_i \coloneqq g_i(X_i) \coloneqq g_i \circ X_i$ für $i = 1, ..., n$, dann sind auch $Y_1, ..., Y_n$ unabhängige ZGn.
 \end{satz}
 
 % Kapitel 3.3. Integrale nichtnegativer messbarer Funktionen
@@ -1329,6 +1329,16 @@ Falls $V_a^b(g) < \infty$, so heißt $g$ \emph{von beschränkter Variation}.
   \[ \E X := \Int{\Omega}{}{X}{\P} \qquad \text{\emph{Erwartungswert} von $X$.} \]
 \end{defn}
 
+% Ausgelassen: Interpretation als Schwerpunkt der W-Massenverteilung, Lageparameter
+
+\begin{bem}
+  Für eine konstante ZGe $X : \Omega \to \R$, also $\fa{\omega \in \Omega} X(\omega) = x$, gilt $\E X = x$.
+\end{bem}
+
+\begin{satz}
+  Der Erwartungswert ist linear, d.\,h. für ZGn $X$ und $Y$ und $\lambda \in \R$ gilt $\E (\lambda X + Y) = \lambda \E X + \E Y$.
+\end{satz}
+
 \begin{satz}
   $\E X = \Int{\R^1}{}{\id}{P_X}$, wobei $P_X \coloneqq \P \circ X^{-1}$.
 \end{satz}
@@ -1436,7 +1446,7 @@ Falls $V_a^b(g) < \infty$, so heißt $g$ \emph{von beschränkter Variation}.
 \end{bem}
 
 \begin{defn}
-  Seien $X_1, ..., X_d : (\Omega, \Alg, \P) \to (\R^1, \Bor(\R^1))$ ZGen,
+  Seien $X_1, ..., X_d : (\Omega, \Alg, \P) \to (\R^1, \Bor(\R^1))$ ZGn,
   \[ F = F_{(X_1, ..., X_d)} : \R^d \to \left[ 0, 1 \right], \quad (x_1, ..., x_d) \mapsto \P(X_1 {\leq} x_1, ..., X_k {\leq} x_k) \]
   die dazugehörige VF und $P = P_{(X_1, ..., X_d)}$ das von der VF induzierte Maß auf $\Bor(\R^d)$.
   \begin{itemize}
@@ -1465,7 +1475,7 @@ Falls $V_a^b(g) < \infty$, so heißt $g$ \emph{von beschränkter Variation}.
   \end{cases} \]
 \end{satz}
 
-% Ausgelassen: Analoge Überlegung für $g . \R^d \to \R$ Borel-messbar und ZGen $X_1, ..., X_d$, dann
+% Ausgelassen: Analoge Überlegung für $g . \R^d \to \R$ Borel-messbar und ZGn $X_1, ..., X_d$, dann
 % * $\E g(X_1, ..., X_d) = \Int{\R^1}{}{g \cdot f_{(X_1, ..., X_d)}}{\lambda_d}$
 %   falls $F_{(X_1, ..., X_d)}$ absolut stetig mit Dichte $f_{(X_1, ..., X_d)}$
 % * $\E g(X_1, ..., X_k) = \sum_{i \geq 1} g(x_i^{(1)}, ..., x_i^{(k)}) p_i$,
@@ -1473,90 +1483,156 @@ Falls $V_a^b(g) < \infty$, so heißt $g$ \emph{von beschränkter Variation}.
 
 % Riemann-Stieltjes-Integral
 
-
-
-
-
-
-
-
-
-
-$g : \R^1 \to \R^1$ sei zunächst beliebig (stetig oder hinreichend glatt)
-
-Sei $a = \xi_0^{(n)} < \xi_1^{(n)} < ... < x_{k_n}^{(n)}$ und $x_k^{(n)} \in \left] \xi_{k-1}^{(n)}, \xi_{k}^{(n)} \right[$.
-
 \begin{defn}
-  $(\xi_n)$ sei eine Zerlegungsfolge mit $\max_{1 \leq k \leq k_n} (x_k^{(n)} - x_{k-1}^{(n)}) \xrightarrow{n \to \infty} 0$
-
-  $(x_k^{(n)})$ sei eine Zwischenwertfolge
-
-  \[ \lim_{n \to \infty} \sum_{k=1}^{k_n} g(x_k^{(n)}) (F(x_k^{(n)}) - F(x_{k-1}^{(n)})) = \Int{a}{b}{g(x)}{F(x)} = \Int{[a, b]}{}{g}{F\lambda_1} \]
-
-  wobei $F : \R^1 \to \R^1$ zunächst beliebig (monoton oder von beschränkter Variation)
+  Eine \emph{Zerlegung} eines Intervalls $[a, b]$ ist eine geordnete endliche Menge $Z = \{ a = x_0 < x_1 < ... < x_k = b\} \subset [a, b]$. Eine weitere Zerlegung $\widetilde{Z}$ desselben Intervalls heißt \emph{Verfeinerung} von $Z$, falls $\widetilde{Z} \supset Z$.
 \end{defn}
 
-% partielle Integration für R-S-Integrale
-
-Sei $g$ bzgl. $F$ R-S-integrierbar, d.\,h. der Grenzwert oben existiert
-Dann ist auch $F$ bzgl. $g$ R-S-integrierbar und es gilt
-
-\[ \Int{a}{b}{g(x)}{F(x)} = [g(x) \cdot F(x)]_a^b - \Int{a}{b}{F(x)}{g(x)} \]
-
-Ausnutzen der partiellen Integration zur Berechnung von Erwartungswerten
-
-\[ \E X = \Int{- \infty}{\infty}{x}{F(x)} \]
-\[ \Int{a}{b}{x}{F_X(x)} = \lim_{a \to -\infty, b \to \infty} [x \cdot F_X(-x)]_0^{-a} - \Int{0}{-a}{F_X(-x)}{x} + [x (F_X(x) - 1)]_0^b - \Int{0}{b}{(F_X(x) - 1)}{x} \]
-
-Falls $\lim{x \to \infty} x F_X(-x) = \lim{x \to \infty} x (1 - F_X(x)) = 0$, so gilt
-
-$\E X = \Int{0}{\infty}{1 - F_X(x) - F_X(-x)}{x}$, falls $\E |X| < \infty$
-
-$\E |X| = \Int{0}{\infty}{1 - F_X(x) - F_X(-x)}{x}$
-
-Genauso werden Erwartungswerte von Funktionen von $X$ berechnet, z.B. mit $x^2 F_X(-x) \xrightarrow{x \to \infty} 0$ und $x^2 (1 - F_X(x)) \xrightarrow{x \to \infty} 0$
-
-$\E X^2 = 2 \Int{0}{\infty}{x (1 - F_X(x) + F_X(-x))}{x} = \P(|X| > x)$ (falls $F_X$ stetig)
-
-$\E |X|^k = k \Int{0}{\infty}{x^{k-1} (1 - F_X(x) + F_X(-x))}{x}$
+\begin{nota}
+  Die Menge aller Zerlegungen von $[a, b]$ ist $\mathcal{Z}([a, b])$.
+\end{nota}
 
 \begin{defn}
-  $\E X^k$ ($\E |X|^k$) heißt $k$-tes (absolutes) Moment der ZG $X$. $\E (X - \E X)^k$ heißt $k$-tes zentriertes Moment der ZG X. $\mathrm{Var}(X) \coloneqq D^2 X = \E (X - \E X)^2 = \E X^2$ heißt \emph{Streuung} (Dispersion, Varianz) der ZG $X$.
+  Eine Menge von Stützstellen bzgl. einer Zerlegung $\{ x_0 < ... < x_k \}$ von $\left[ a, b \right]$ ist eine Menge $\{ \xi_1, ..., \xi_k \}$ mit $\xi_i \in \left] x_{i{-}1}, x_i \right[$ für $i \in \{ 1, ..., k \}$.
 \end{defn}
 
+\begin{defn}
+  Für zwei Funktionen $f, g : [a, b] \to \R$, eine Zerlegung $Z = \{ a = x_0 < ... < x_n = b \}$ von $[a, b]$ und Stützstellen $\xi_1, ..., \xi_n$ bzgl. $Z$ heißt die Summe
+  \[ S(f, \d g, Z, \xi_1, ..., \xi_n) \coloneqq \sum_{j=1}^{n}\!f(\xi_j)(g(x_j) - g(x_{j{-}1})) \]
+  \emph{Riemann-Stieltjes-Summe} von $f$ bzgl. $g$ und der Zerlegung $Z$ mit Stützstellen $\xi_1, ..., \xi_n$.
+\end{defn}
 
+\begin{defn}
+  Seien $f, G : \left[ a, b \right] \to \R$. Die Funktion $f$ heißt \emph{Riemann-Stieltjes-integrierbar} (RS-integrierbar) bzgl. der \emph{Gewichtsfunktion} $G$, wenn gilt: Es gibt ein $\iota \in \R$, sodass für alle $\epsilon > 0$ eine Zerlegung $Z_{\epsilon}$ von $\left[ a, b \right]$ existiert, sodass für alle Verfeinerungen $Z \supset Z_{\epsilon}$ und Wahlen von Stützstellen $\xi_1, ..., \xi_n$ gilt:
+  \[ \abs{\iota - S(f, \d G, Z, \xi_1, ..., \xi_n)} \le \epsilon. \]
+  Dieses (eindeutig bestimmte) $\iota$ heißt \emph{Riemann-Stieltjes-Integral} (RS-Integral) von $f$ bzgl. $G$, geschrieben
+  \[ \Int{a}{b}{f(x)}{G(x)} \coloneqq \iota. \]
+\end{defn}
 
-% Vorlesung (15.1.2014)
-
-% Kapitel 2.8.
-
-$X$ sei ZG über $(\Omega, \Alg, \P)$ mit $\E \abs{X}^n < \infty$ für alle $n \in \N$.
-
-\[ \E X^n = \Int{\R^n}{}{x^n \P_X}{x} = \Int{-\infty}{\infty}{x^n}{F_X(x)} \]
-
-heißt \emph{$n$-tes Moment}
-
-$\E X$ Erwartungswert (Schwerpunkt der W-Massenverteilung) "`Lageparameter"'
-
-$\mathbb{D}^2 X = \Var(X) = \E(X-\E X)^2 = \E(X^2) - (\E X)^2 \geq 0$
-
-Eigenschaft: $\Var(aX+b) = a^2 \Var(X)$ für $a, b \in \R^1$
-
-$\Var(X) \leq \E (X-c)^2$ für alle $c \in \R^1$
-
-$\Var(X) = 0$ $\iff$ $X - \E X = 0$ $\iff$ $X = \mathrm{const}$ $\P$-fast-sicher
+\begin{bem}
+  Mit $G \coloneqq \id$ erhalten wir aus dem RS-Integral das gewöhnliche Riemann-Integral.
+\end{bem}
 
 \begin{satz}
-  $X$ sei eine ZG und $g : \left[ 0, \infty \right[ \to [0,\infty]$ nichtfallend. Dann gilt $\P(\abs{X} \geq \epsilon) \leq \frac{\E g(\abs{X})}{g(\epsilon)}$ für beliebiges $\epsilon > 0$.
+  Das RS-Integral ist sowohl in der integrierten Funktion als auch der Gewichtsfunktion linear.
+\end{satz}
+% Ausgelassen: Genaue Formulierung davon (siehe Ana2-Zusammenfassung)
+
+\begin{satz}
+  Für $f$ bzgl. $G$ auf $\left[ a, b \right]$ RS-int'bar und $G$ stetig diff'bar gilt
+  \[ \Int{a}{b}{f(x)}{G(x)} = \Int{a}{b}{f(x) \cdot G'(x)}{x}. \]
 \end{satz}
 
-Spezialfälle:
+% Ausgelassen: Lemmas für RS-Integral über halboffene Intervalle
 
-\begin{itemize}
-  \item $g(x) = x$, dann $\P(\abs{X} \geq \epsilon) \leq \frac{\E X}{\epsilon}$ \emph{Markow-Ungleichung}
-  \item $g(x) = x^2$, dann $\P(\abs{X - \E X} \geq \epsilon) \leq \frac{\E (X - \E X)^2}{\epsilon^2} = \frac{\Var(X)}{\epsilon^2}$ \emph{Tschebyschew-Ungleichung}
-  \item $g(x) = \exp(ax)$ für $a > 0$, dann $\P(\abs{X} \geq \epsilon) \leq \exp(-a\epsilon) \E \exp(a \abs{X})$
-\end{itemize}
+\begin{satz}[Partielle Integration] % für RS-Integrale
+  Sei $f : \left[ a, b \right] \to \R$ bzgl. $G : \left[ a, b \right] \to \R$ RS-integrierbar. Dann ist auch $G$ bzgl. $f$ RS-integrierbar und es gilt
+  \[ \Int{a}{b}{f(x)}{G(x)} = \left[ G(x) \cdot f(x) \right]_a^b - \Int{a}{b}{G(x)}{f(x)}. \]
+\end{satz}
+
+\begin{bem}
+  Wir können uneigentliche RS-Integrale analog zu uneigentlichen Riemann-Integralen definieren.
+\end{bem}
+
+% TODO: Steht hier etwas wichtiges (und richtiges)?
+\iffalse
+  % Ausnutzen der partiellen Integration zur Berechnung von Erwartungswerten
+
+  \[ \E X = \Int{- \infty}{\infty}{x}{F(x)} \]
+
+  Falls $\lim{x \to \infty} x F_X(-x) = \lim{x \to \infty} x (1 - F_X(x)) = 0$, so gilt
+
+  $\E X = \Int{0}{\infty}{1 - F_X(x) - F_X(-x)}{x}$, falls $\E |X| < \infty$
+
+  $\E |X| = \Int{0}{\infty}{1 - F_X(x) - F_X(-x)}{x}$
+
+  Genauso werden Erwartungswerte von Funktionen von $X$ berechnet, z.B. mit $x^2 F_X(-x) \xrightarrow{x \to \infty} 0$ und $x^2 (1 - F_X(x)) \xrightarrow{x \to \infty} 0$
+
+  $\E X^2 = 2 \Int{0}{\infty}{x (1 - F_X(x) + F_X(-x))}{x} = \P(|X| > x)$ (falls $F_X$ stetig)
+
+  $\E |X|^k = k \Int{0}{\infty}{x^{k-1} (1 - F_X(x) + F_X(-x))}{x}$
+\fi
+
+\begin{satz}
+  $\E X = \Int{\R^1}{}{\id}{P_X} = \Int{-\infty}{\infty}{x}{F_X(x)}$
+\end{satz}
+
+% Vorlesung vom 15.1.2014
+
+% Kapitel 3.8. Momente von Zufallsgrößen bzw. von Verteilungsfunktionen
+
+\begin{defn}
+  Sei $X$ eine ZG über $(\Omega, \Alg, \P)$ und $k \in \N$. Dann heißt
+  \begin{itemize}
+    \item $\E X^k$ \emph{$k$-tes Moment},
+    \item $\E \abs{X}^k$ \emph{$k$-tes absolutes Moment},
+    \item $\E (X - \E X)^k$ \emph{$k$-tes zentriertes Moment},
+    \item $\E \abs{X - \E X}^k$ \emph{$k$-tes zentriertes absolutes Moment},
+    \item $\Var(X) \coloneqq \mathbb{D}^2 X \coloneqq \E (X - \E X)^2$ \emph{Varianz} (Dispersion, Streuung),
+    \item $\sqrt{\Var(X)}$ \emph{Standardabweichung} von $X$.
+  \end{itemize}
+\end{defn}
+% Ausgelassen: Mechanische Deutung der Momente, z.B. von $\mathbb{D}^2 X$ als Trägheitsmomente der W-Massenverteilung
+
+\begin{lem}
+  Es gilt $\Var(X) = \E (X {-} \E X)^2 = \E X^2 - (\E X)^2 \geq 0$.
+  % Zwischenschritt: $\E (X^2 - 2 X \cdot \E X + (\E X)^2)$
+\end{lem}
+
+% Ausgelassen: Korollar: $\abs{\E X} \leq \sqrt{\E X^2}$
+
+\begin{lem}
+  $\E X^k = \Int{\Omega}{}{X^n}{\P} = \Int{\R^1}{}{\id^n}{P_X} = \Int{-\infty}{\infty}{x^n}{F_X} =$
+  \[
+    \qquad = \begin{cases}
+      \Int{\R^1}{}{x^k \cdot f_X(x)}{x}, & \text{falls $F_X$ absolutstetig mit WD $f_X$} \\
+      \sum_{j \in J} x_j^k \cdot p_j, & \parbox[t]{0.5\textwidth}{falls $F_X$ diskret mit Sprüngen $p_j$ \\ bei $x_j$, $j \in J \subset \N$}
+    \end{cases}
+  \]
+\end{lem}
+
+\begin{bem}
+  Falls $\E \abs{X}^k < \infty$, dann existiert auch $\E X^k$.
+\end{bem}
+
+\begin{lem}
+  Es gilt für eine ZG $X$ und $a, b, c \in \R^1$:
+  \begin{itemize}
+    \begin{multicols}{2}
+      \item $\Var(aX+b) = a^2 \Var(X)$
+      \item $\Var(X) \leq \E (X-c)^2$
+      %\item $\Var(X) = \min_{a \in \R} \E (X-a)^2$
+    \end{multicols}
+    \item $\Var(X) = 0$ $\iff$ $\E (X - \E X) = 0$ $\iff$ $X \equiv \mathrm{const}$ $\P$-fast-sicher
+  \end{itemize}
+\end{lem}
+
+% TODO: Kumulanten, kumulantenerzeugende Funktion, Med (?)
+
+\begin{satz}[Verallgemeinerte Tschebyschow-Ungleichung]
+  $X$ sei eine ZG und $g : \left[ 0, \infty \right[ \to \left[ 0, \infty \right[$ monoton steigend. Dann gilt für alle $\epsilon > 0$:
+  \[ \P(\abs{X} \geq \epsilon) \leq \frac{\E g(\abs{X})}{g(\epsilon)} \]
+\end{satz}
+
+% Spezialfälle:
+\begin{kor}
+  \begin{itemize}
+    \item \emph{Markow-Ungleichung}: $\P(\abs{X} \geq \epsilon) \leq \tfrac{\E X}{\epsilon}$.
+    \item \emph{Tschebyschow-Ungleichung}: $\P(\abs{X - \E X} \geq \epsilon) \leq \frac{\Var(X)}{\epsilon^2}$.
+    \item Für alle $a > 0$ gilt $\P(\abs{X} \geq \epsilon) \leq \tfrac{\E \exp(a \abs{X})}{\exp(a\epsilon) }$.
+  \end{itemize}
+\end{kor}
+
+
+
+
+
+
+
+
+
+
+
+
 
 $0 > B = \E \exp(a \abs{X}) \geq \frac{a^n \E \abs{X}^n}{n!}$
 
@@ -1597,7 +1673,7 @@ Per Induktion folgt: $g(\sum_{i=1}^n \alpha_i x_i) \leq \sum_{i=1}^n \alpha_i g(
   $g(\E X) \leq \E g(X)$, falls $\P(X \in J) = 1$ und $\E \abs{X} < \infty$
 \end{satz}
 
-% Bespiel
+% Beispiel
 
 $g(x) = \abs{x}^{\tfrac{n}{m}}$ für $0 < m \leq n$, $\implies$ \emph{Ljapunow-Ungleichung}
 
@@ -1702,7 +1778,7 @@ Wichtig: Im allgemeinen bestimmen die Randverteilungen nicht die gemeinsame Vert
 Wichtig: Falls $(X, Y)$ eine zweidimensionale Normalverteilung besitzt, so folgt aus $\cor(X, Y) = 0$ die Unabhängigkeit von $X$ und $Y$.
 
 \begin{satz}
-  $X_1, ..., X_n$ seien paarweise unkorrelierte ZGen mit $\E X_i^2 < \infty$ für $i = 1, ..., n$. Dann gilt
+  $X_1, ..., X_n$ seien paarweise unkorrelierte ZGn mit $\E X_i^2 < \infty$ für $i = 1, ..., n$. Dann gilt
   \[ \Var(X_1 + ... + X_n) = \Var(X_1) + ... + \Var(X_n) \]
 \end{satz}
 
@@ -1872,7 +1948,7 @@ Beachte: $\det D(h)(y_1, ..., y_k) = \frac{1}{\det D(g)(h_1(y_1, ..., y_k), ...,
 
 % Vorlesung vom 29.1.2014
 
-% Kapitel 4.3. Verteilung von Summe, Produkt und Quotient von (unabhängigen) ZGen
+% Kapitel 4.3. Verteilung von Summe, Produkt und Quotient von (unabhängigen) ZGn
 
 \begin{satz}
   $(X, Y)$ besitze eine gemeinsame Dichte $f_{(X, Y)}$ (also $\P(X = 0) = \P(Y = 0) = 0$). Dann gilt für die Dichten von $Z_1 \coloneqq X + Y$, $Z_2 \coloneqq X \cdot Y$, $Z_3 \coloneqq \tfrac{X}{Y}$.
@@ -1927,7 +2003,7 @@ Gewisse Verteilungen sind "`faltungsstabil"', d.\,h. bei der Faltung bleibt der 
   Falls $X_1$ und $X_2$ unabhängig und $X_1 + X_2$ Poisson-verteilt (also $X_1 + X_2 \overbrace{=}^d Poi(\lambda)$), dann sind $X_1$ und $X_2$ Poisson-verteilt.
 \end{satz}
 
-Wichtige Ergebnisse über Summen unabhängiger ZGen:
+Wichtige Ergebnisse über Summen unabhängiger ZGn:
 
 \begin{itemize}
   \item $\tfrac{1}{n}(X_1 + ... + X_n) \xrightarrow[\text{$\P$-fast-überall}]{n \to \infty} \E X_1$ falls $X_1, ..., X_n$ unabhängig, identisch verteilt und $\E \abs{X_1} < \infty$ (GGZ)
