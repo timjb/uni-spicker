@@ -245,11 +245,14 @@
   \end{itemize}
 \end{defn}
 
+% Definition wird später wiederholt!
+\iffalse
 \begin{defn}
   Allgemeiner ist für $d \in \N$ die $\sigma$-Algebra der Borel-Mengen in $\R^d$ gleich $\Bor(\R^d) \coloneqq \sigma(\mathcal{E})$, wobei
   \[ \mathcal{E} \coloneqq \Set{ \vartimes_{i=1}^d \left] a_i, b_i \right] }{ \fa{i \in \{1, ..., d\}} a_i \leq b_i }. \]
   % Ausgelassen: Äquivalent offene Mengen oder geschlossene Mengen
 \end{defn}
+\fi
 
 % Kapitel 1.3. Mengenfunktionen (Inhalt, Prämaß, Maß)
 
@@ -378,11 +381,11 @@
 \begin{satz}
   Der Ring aller Elementarquader im $\R^d$ ist
   \begin{align*}
-     \Ring \coloneqq \{ \bigcup_{i=1}^m \left] a_i, b_i \right] \,\mid\,\, & m \in \N \text{ und } \left] a_1, b_1 \right], ..., \left] a_m, b_m \right] \\[-8pt]
+     \Ring \coloneqq \{ \bigsqcup_{i=1}^m \left] a_i, b_i \right] \,\mid\,\, & m \in \N \text{ und } \left] a_1, b_1 \right], ..., \left] a_m, b_m \right] \\[-8pt]
      & \text{disjunkte Elementarquader im } \R^d \}
   \end{align*}
   und für jede maßerzeugende Funktion $G : \R^d \to \R^1$ definiert
-  \[ \mu_G : \Ring \to \left[ 0, \infty \right[, \quad \bigcup_{i=1}^m \left] a_i, b_i \right] \mapsto \sum_{i=1}^m (\triangle G)(\left] a_i, b_i \right]) \]
+  \[ \mu_G : \Ring \to \left[ 0, \infty \right[, \quad \bigsqcup_{i=1}^m \left] a_i, b_i \right] \mapsto \sum_{i=1}^m (\triangle G)(\left] a_i, b_i \right]) \]
   einen Inhalt auf $\Ring$, der sogar ein Prämaß ist.
 \end{satz}
 
@@ -539,19 +542,26 @@
 
 \begin{defn}[Wichtige Verteilungsfunktionen]\mbox{}\\
   \begin{itemize}
+    \item \emph{Exponentialverteilung} mit Parameter $\lambda > 0$:
+    \[ F_{\lambda}(x) = \max(0, 1 - \exp(- \lambda x)) \]
+    %\[ F_{\lambda}(x) = \begin{cases} 0, & \text{ für } x \leq 0 \\
+    %                                  1 - \exp(- \lambda x), & \text{ für } x > 0
+    %\end{cases} \]
+    \item \emph{Poisson-Verteilung} mit Parameter $\lambda > 0$:
+    \[ F_{\lambda}(x) = \sum_{0 \leq n \leq x} \tfrac{\lambda^n}{n!} \exp(-\lambda) \]
+    \item \emph{Gleichverteilung} auf $\left] a, b \right]$: $F(x) = \min(1, \max(0, \tfrac{x - a}{b - a}))$
+    %\[ F(x) \coloneqq 0 \text{ für } x < a, \quad F(x) \coloneqq \tfrac{x-a}{b-a} \text{ für } x \in \left[ a, \right], \quad F(x) \coloneqq 1 \text{ für } x > b \]
     \item \emph{Normalverteilung} (Gaußverteilung) mit EW $\mu$ und Varianz $\sigma^2$:
     \[ F_{\mu \sigma^2}(x) = \tfrac{1}{\sqrt{2 \pi \sigma^2}} \Int{-\infty}{x}{\exp\left(\tfrac{-(t-\mu)^2}{2 \sigma^2}\right)}{t} \]
     erfüllt $F_{\mu \sigma^2}'(x) = \exp\left(\tfrac{-(x-\mu)^2}{2 \sigma^2}\right)$, $F_{\mu \sigma^2}(\mu-x) = 1 - F_{\mu \sigma^2}(\mu+x)$
-    \item \emph{Exponentialverteilung} mit Parameter $\lambda > 0$:
-    \[ F_{\lambda}(x) = \begin{cases} 0, & \text{ für } x \leq 0 \\
-                                      1 - \exp(- \lambda x), & \text{ für } x > 0
-    \end{cases} \]
-    \item \emph{Poisson-Verteilung} mit Parameter $\lambda > 0$:
-    \[ F_{\lambda}(x) = \sum_{0 \leq n \leq x} \tfrac{\lambda^n}{n!} \exp(-\lambda) \]
+    \item $d$-dimensionale \emph{Normalverteilung} mit Erwartungswertvektor $m \in \R^d$ positiv definiter Kovarianzenmatrix $C \in \R^{d \times d}$:
+    \[ F(x) = \tfrac{1}{\sqrt{(2 \pi)^d \det C}} \enspace \Int{\left] -\infty, x \right]}{}{\!\! \exp(- \tfrac{1}{2} (y-m)^T C^{-1} (y-m))}{y} \]
+    \item \emph{$2$-dimensionale Exponentialverteilung} mit $\lambda, \mu > 0$, $\nu \geq 0$:
+    \[ F(x, y) = \begin{cases} 0, \text{ falls $x < 0$ oder $y < 0$, ansonsten:} \\ 1 - e^{-(\lambda {+} \nu) x} - e^{-(\mu {+} \nu) y} + e^{-(\lambda x {+} \mu y {+} \nu \max(x, y))} \end{cases} \]
   \end{itemize}
 \end{defn}
 
-% Ausgelassen: Gleichverteilung, Mehrdimensionale Normalverteilung, zweidimensionale Exponentialverteilung
+% Ausgelassen: zweidimensionale Exponentialverteilung
 % Ausgelassen: Gauß-Levy-Kuzmin-Theorem, und zugehörige Verteilung
 % Ausgelassen: Wiener Maß für Modellierung von Brown'scher Bewegung
 
@@ -1829,5 +1839,70 @@ Beachte: $\det D(h)(y_1, ..., y_k) = \frac{1}{\det D(g)(h_1(y_1, ..., y_k), ...,
 
   \[ F_{Y_1}(y) = ... = 1 - \exp(- \frac{y^2}{2 \sigma^2}) \]
 \end{bsp}
+
+
+% Vorlesung vom 29.1.2014
+
+% Kapitel 4.3. Verteilung von Summe, Produkt und Quotient von (unabhängigen) ZGen
+
+\begin{satz}
+  $(X, Y)$ besitze eine gemeinsame Dichte $f_{(X, Y)}$ (also $\P(X = 0) = \P(Y = 0) = 0$). Dann gilt für die Dichten von $Z_1 \coloneqq X + Y$, $Z_2 \coloneqq X \cdot Y$, $Z_3 \coloneqq \tfrac{X}{Y}$.
+  \begin{align*}
+    f_{Z_1}(z) &= \Int{-\infty}{\infty}{f_{(X, Y)}(z - y, y)}{y} \overbrace{=}^{\mathclap{\text{f.\,unabh.}}} \\
+    f_{Z_2}(z) &= \Int{-\infty}{\infty}{f_{(X, Y)}(z/y, y) \cdot \tfrac{1}{\abs{y}}}{y} = ... \\
+    f_{Z_3}(z) &= \Int{-\infty}{\infty}{f_{(X, Y)}(x \cdot y, y) \cdot \abs{y}}{y} = ...
+  \end{align*}
+\end{satz}
+
+\begin{bsp}
+  Seien $X, Y$ unabhängig, $N(0,1)$-verteilt, $Z \coloneqq \tfrac{X}{Y}$. Dann:
+  \[ f_Z(z) = ... = \tfrac{1}{\pi (1 + z^2)} \] % Dichte der (Standard-)Cauchy-Verteilung
+\end{bsp}
+
+\begin{bsp}
+  Sei nun $X \sim F_X$ unabhängig von $Y \sim F_Y$. Dann
+  \[ \E g(X, Y) = \Int{\R^2}{}{g(x,y)}{P_{(X, Y)}} = ... = \Int{\R^1}{}{\Int{\R^1}{}{g(x,y)}{P_X(x)}}{P_Y(y)} \]
+  Mit Verteilungsfunktionen kann man schreiben:
+  \[ \E g(X, Y) = \Int{\R^2}{}{g(x, y)}{F_{X, Y}(x, y)} = \Int{\R^1}{}{\Int{\R^1}{}{g(x, y)}{F_X(x)}}{F_Y(y)} \]
+\end{bsp}
+
+% Beachte: $F_{(X, Y)}(x, y) \coloneqq F_X(x) \cdot F_Y(y)$.
+
+\[ \P(X + Y \leq z) = ... = \Int{\R^1}{}{F_X(z-y)}{F_Y(y)} =: (F_X * F_Y)(z) \]
+
+\emph{Faltung von $F_X$ und $F_Y$}
+
+\begin{bem}
+  \begin{itemize}
+    \item $F_X * F_Y = F_Y * F_X$
+    \item $F_{X + Y} = F_X * F_Y$
+    \item Falls $X$ oder $Y$ eine Dichte besitzen, so auch $X + Y$:
+    \[ f_{X+Y}(z) = \Int{-\infty}{\infty}{f_X(z-y)}{F_Y(y)} = \Int{-\infty}{\infty}{f_Y(z-x)}{F_X(x)} = \Int{-\infty}{\infty}{f_Y(z-x)}{f_X(x)}{y} \]
+    % (Faltung glättet)
+    \item Verallgemeinerung: $F_{X_1 + ... + X_n} = F_{X_1} * ... * F_{X_n}$, falls $X_1, ..., X_n$ unabhängig.
+  \end{itemize}
+\end{bem}
+
+Gewisse Verteilungen sind "`faltungsstabil"', d.\,h. bei der Faltung bleibt der Verteilungstyp erhalten
+
+\begin{bsp}
+  $X_i$ sei Poisson-verteilt mit Paramter $\lambda_i > 0$, $i = 1, 2$. Dann ist $X_1 + X_2$ Poisson-verteilt mit Parameter $\lambda_1 + \lambda_2$, falls $X_1$ und $X_2$ unabhängig sind.
+\end{bsp}
+
+\begin{bsp}
+  Sei $X_i \overbrace{=}^{d} N(\mu_i, \sigma_i^2)$, $i = 1,2$ unabhängig. Dann: $X_1 + X_2 \overbrace{=}^{d} N(\mu_1 + \mu_2, \sigma_1^2 + \sigma_2^2)$.
+\end{bsp}
+
+\begin{satz}
+  Falls $X_1$ und $X_2$ unabhängig und $X_1 + X_2$ normalverteilt (also $X_1 + X_2 \overbrace{=}^d N(\mu, \sigma^2)$), dann sind $X_1$ und $X_2$ normalverteilt.
+  Falls $X_1$ und $X_2$ unabhängig und $X_1 + X_2$ Poisson-verteilt (also $X_1 + X_2 \overbrace{=}^d Poi(\lambda)$), dann sind $X_1$ und $X_2$ Poisson-verteilt.
+\end{satz}
+
+Wichtige Ergebnisse über Summen unabhängiger ZGen:
+
+\begin{itemize}
+  \item $\tfrac{1}{n}(X_1 + ... + X_n) \xrightarrow[\text{$\P$-fast-überall}]{n \to \infty} \E X_1$ falls $X_1, ..., X_n$ unabhängig, identisch verteilt und $\E \abs{X_1} < \infty$ (GGZ)
+  \item $\sqrt{n} (\tfrac{1}{n}(X_1 + ... + X_n) - \E X_1) \xrightarrow[d]{n \to \infty} N(0, \Var(X_1))$, falls $\Var(X_1) < \infty$
+\end{itemize}
 
 \end{document}
