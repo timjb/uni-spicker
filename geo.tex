@@ -1270,7 +1270,7 @@ Analog ($\mathcal{C}^0_C(U, \R) = \Set{ f : U \to \R }{ \text{stetig mit } \supp
 
 % $F$ komplex diff'bar, wenn gilt: $\frac{\partial u}{\partial x} = \frac{\partial v}{\partial y}$ und $\frac{\partial u}{\partial y} = -\frac{\partial v}{\partial x}$ (Cauchy-Riemann-DGL)
 
-% Kapitel 3.4. Minimalflächen in $\R^3$
+% Kapitel 3.4. Minimalflächen im $\R^3$
 
 Sei $U \opn \C$, $F : U \to \C$ eine $\mathcal{C}^1$-Funktion
 
@@ -1288,6 +1288,78 @@ Sei $U \opn \C$, $F : U \to \C$ eine $\mathcal{C}^1$-Funktion
 \begin{lem}
   $F : U \to \C$ sei $\mathcal{C}^2$, dann gilt
   \[ \partial_Z \partial_{\overline{Z}} F = \tfrac{1}{4} \triangle F = \tfrac{1}{4} (\partial_1 \partial_1 F + \partial_2 \partial_2 F) \]
+\end{lem}
+
+% Vorlesung vom 29.1.2014
+
+\begin{defn}
+  $F : \C \to \C$ heißt in $z_0$ \emph{komplex diff'bar}, wenn
+  \[ F'(z_0) \coloneqq \lim_{z \to z_0} \tfrac{F(z) - F(z_0)}{z - z_0} \quad \text{existiert.} \]
+\end{defn}
+
+% Für $\mathcal{C}^1$-Funktionen $F = (F_1, ..., F_n) : U \to \C^n$
+% machen Definition von komplexer Diff'barkeit, Wirtinger-Notation und obiges Lemma Sinn (komponentenweise)
+
+% Für eine Funktion $F : U \to \R^n$, wobei $U \opn \C$:
+% Verwende die kanonische Abbildung $can : \R^n \to \C^n$, dann
+% \[ \partial_Z F \coloneqq \partial_Z (can \circ F) \]
+% \[ \partial_\overline{Z} F \coloneqq \partial_\overline{Z} (can \circ F) \]
+
+$\C$-bilinear Erweiterung: % des typischen Skalarprodukts auf dem $\R^n$
+
+\[ \langle \begin{pmatrix} z_1 \\ \vdots \\ z_n \end{pmatrix} , \begin{pmatrix} w_1 \\ \vdots \\ w_n \end{pmatrix} \langle \coloneqq \sum_{j=1}^n z_j w_j \]
+
+Eigenschaften:
+
+\begin{itemize}
+  \item Nicht hermetisch
+  \item symmetrisch
+  \item $\C$-bilinear
+  \item Nicht positiv definit
+\end{itemize}
+
+\begin{defn}
+  $z \in \C^n$ heißt \emph{isotrop}, wenn $\langle z, z \rangle = 0$.
+\end{defn}
+
+% Beispiel im $\C^2$: $begin{pmatrix} 1 \\ i \end{pmatrix}$
+
+\begin{lem}
+  Sei $z = x + iy \in \C^n$ mit $x, y \in \R^n$. Dann gilt:
+  \[ z \text{ isotrop} \quad \iff \quad \norm{x} = \norm{y} \text{ und } x \perp y \]
+\end{lem}
+
+\begin{defn}
+  Eine $\mathcal{C}^2$-Hyperfläche $X : U \to \R^3$ heißt \emph{konform parametrisiert}, wenn gilt: $g = \lambda^2 I_2$. Die $\mathcal{C}^1$-Funktion $\lambda : U \to \R$ heißt \emph{konformer Faktor}.
+\end{defn}
+
+\begin{bem}
+  Durch Umparametrisierung kann "`jede"' (hinreichend reguläre) Hyperfläche konform parametrisiert werden.
+\end{bem}
+
+\begin{lem}
+  Sei $X : U \to \R^3 \subset \C^3$ eine $\mathcal{C}^2$-Hyperfläche. Dann sind äquivalent:
+  \begin{itemize}
+    \item $X$ ist konform parametrisiert
+    \item $\langle \partial_Z X, \partial Z X \rangle \equiv 0$
+  \end{itemize}
+  Dann gilt $\lambda = \sqrt{2 \langle \partial_Z X , \overline{\partial_Z X} \rangle}$.
+\end{lem}
+
+\begin{lem}
+  Sei $X : U \to \R^3 \subset \C^3$ eine konform parametrisierte $\mathcal{C}^2$-Hyperfläche. Dann:
+  \begin{itemize}
+    \item $\triangle X = 2 \lambda^2 H \nu$ % $\lambda$ konformer Faktor, $H$ mittlere Krümmung, $\nu$ Gauß-Abbildung
+  \end{itemize}
+\end{lem}
+
+\begin{lem}
+  Sei $X : U \to \R^3$ eine Hyperfläche. Dann sind äquivalent:
+  \begin{itemize}
+    \item $X$ konform parametrisierte Minimalfläche
+    \item $\partial_Z X : U \to \C^3 \setminus \{ 0 \}$ holomorph und isotrop.
+    % d.h. $\partial_{\overline{Z}} (\partial_Z X) = 0$ und $\langle \partial_Z X, \partial_Z X \rangle = 0$
+  \end{itemize}
 \end{lem}
 
 \end{document}
