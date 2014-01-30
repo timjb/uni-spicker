@@ -1,15 +1,17 @@
 \documentclass{cheat-sheet}
 
-%\newcommand{\PS}{\mathcal{P}} % Powerset
-%\newcommand{\PSO}{\PS(\Omega)} % Powerset
-%\newcommand{\Alg}{\mathfrak{A}}
-%\newcommand{\Ring}{\mathfrak{R}}
 \newcommand{\K}{\mathbb{K}}
 \newcommand{\Bor}{\mathfrak{B}} % Borel
 \newcommand{\Leb}{\mathcal{L}} % Lebesgue
 \newcommand{\fue}{\overset{\text{f.ü.}}} % fast überall
-\newcommand{\dist}{\mathrm{dist}} % Entfernung
+\newcommand{\dist}{\mathrm{dist}} % Entfernung (distance)
+\newcommand{\diam}{\mathrm{diam}} % Durchmesser (diameter)
 \newcommand{\codim}{\mathrm{codim}} % Kodimension
+\newcommand{\scp}[2]{\left( #1 \!\mid\! #2 \right)} % Skalarprodukt
+\newcommand{\dup}[2]{\langle #1 , #2 \rangle} % Duale Paarung
+\newcommand{\inte}{\mathop{\mathrm{int}}} % Inneres (interior)
+\newcommand{\clos}{\mathop{\mathrm{clos}}} % Abschluss (closure)
+\newcommand{\bdry}{\mathop{\mathrm{bdry}}} % Rand (boundary)
 
 \newcommand{\IntO}[2]{\Int{\Omega}{}{#1}{#2}} % Integral über \Omega
 
@@ -26,61 +28,206 @@
 
 \maketitle{Zusammenfassung Funktionalanalysis}
 
+% Thema der Vorlesung:
+% Kurz gesagt: Um unendlich-dimensionale Vektorräume und (lineare und stetige) Abbildungen zwischen solchen
+
+% Beispiele:
+% * Sei $\Omega \subset \R^n$ offen und beschränkt. Dann ist $\mathcal{C}(\overline{\Omega}) = \Set{ f : \Omega \to \R }{ f \text{ stetig} }$ mit der Norm $\norm{f}_\infty = \sup_{\omega \in \Omega} \abs{f(\omega)}$ ein Banachraum, d.\,h. ein vollständiger, normierter Vektorraum. Er ist allerdings nicht endlich-dimensional (ausgelassen: Begründung dafür).
+% * Für eine lineare Abbildung zwischen endlich-dimensionalen Vektorräumen ist aus der linearen Algebra bekannt, dass sie injektiv genau dann sind, wenn sie surjektiv sind. Sind diese Vektorräume unendlich-dimensional ist dies i.\,A. falsch. Z.B. sei $C_* \coloneqq \Set{ (x_k)_{k \in \N} \text{ Folge in } \R }{ \ex{N \in \N} \fa{n \geq N} x_n = 0 }$ der Vektorraum der irgendwann abbrechenden Folgen. Der Shiftoperator
+%   \[ T : C_* \to C_*, (x_0, x_1, x_2, ...) \mapsto (0, x_0, x_1, x_2, ...) \]
+%   ist offensichtlich linear und injektiv, aber nicht surjektiv.
+% * Sturm-Liouville-Problem (Details ausgelassen)
+
+% Kapitel 1.
+
+% Kapitel 1.1. Strukturen
+
 \begin{nota}
   Sei im Folgenden $\K \in \{ \R, \C \}$.
 \end{nota}
 
-% TODO: Sei im Folgenden Y ein Banachraum?
-
 \begin{defn}
-  Ein \emph{Prä-Hilbertraum} ist ein $\K$-Vektorraum mit einem Skalarprodukt $\langle \cdot , \cdot \rangle$.
+  Sei $X$ ein $\K$-Vektorraum. Eine \emph{Halbnorm} ist eine Abb. $\norm{\blank} : X \to \R, x \mapsto \norm{x}$, sodass für alle $x, y \in X$ und $\alpha \in \K$ gilt:
+  \begin{itemize}
+    \begin{multicols}{2}
+      \item $\norm{x} \geq 0$ \enspace (Positivität)
+      \item $\norm{\alpha x} = \abs{\alpha} \cdot \norm{x}$ \enspace (Homogenität)
+    \end{multicols}
+    \item $\norm{x + y} \leq \norm{x} + \norm{y}$ \enspace ($\triangle$-Ungleichung)
+  \end{itemize}
+  Eine \emph{Norm} ist eine Halbnorm, für die zusätzlich gilt:
+  \[ \norm{x} = 0 \enspace \iff \enspace x = 0. \]
 \end{defn}
 
 \begin{defn}
-  Sei $V$ ein $\K$-Vektorraum. Eine \emph{Fréchet-Metrik} ist eine Funktion $\rho : V \to \R_{\geq 0}$, sodass für $x, y \in V$ gilt:
+  Sei $X$ ein $\K$-Vektorraum.
   \begin{itemize}
-    \item $\rho(x) = \rho(-x)$
-    \item $\rho(x) = 0 \iff x = 0$
-    \item $\rho(x + y) \leq \rho(x) + \rho(y)$
+    \item Eine Abbildung $f : X \times X \to \K$ heißt \emph{Sesquilinearform}, wenn für alle $x, x_1, x_2, y, y_1, y_2 \in X$ und $\alpha \in \K$ gilt:
+    \begin{align*}
+      f(\alpha x_1 + x_2, y) &= \alpha f(x_1, y) + f(x_2, y) \tag*{(Linearität im 1. Arg)} \\
+      f(x, \alpha y_1 + y_2) &= \overline{\alpha} f(x, y_1) + f(x, y_2) \tag*{(Antilinearität im 2. Arg)}
+    \end{align*}
+    \item Eine \emph{Hermitische Form} $f$ ist eine Sesquilinearform, für die gilt:
+    \[ \fa{x, y \in X} f(x, y) = \overline{f(y, x)} \tag*{(Symmetrie)} \]
+    Für alle $x \in X$ gilt dann $f(x, x) = \overline{f(x, x)}$, also ist $f(x, x)$ reell.
+    \item Eine Sesquilinearform $f$ heißt \emph{positiv semidefinit}, falls $f(x, x) \geq 0$ für alle $x \in X$ gilt. Falls zusätzlich $f(x, x) = 0$ genau dann gilt, wenn $x = 0$, dann heißt $f$ \emph{positiv definit}.
+    \item Ein \emph{Skalarprodukt} ist eine positiv definite Hermitische Form
+    \[ \scp{\blank}{\blank} : X \times X \to \K, \quad (x, y) \mapsto \scp{x}{y}. \]
+  \end{itemize}
+\end{defn}
+
+\begin{satz}
+  Für eine positiv semidefinite Hermitische Form $\scp{\blank}{\blank}$ ist durch $x \mapsto \sqrt{\scp{x}{x}}$ eine Halbnorm definiert. Ist die Form auch positiv definit, also ein Skalarprodukt, handelt es sich dabei um eine Norm, die sogenannte \emph{induzierte Norm}.
+\end{satz}
+
+\begin{satz}
+  Für ein Skalarprodukt $\scp{\blank}{\blank}$ auf einem $\K$-VR $X$ und die davon induzierte Norm gilt für alle $x, y \in X$:
+  \begin{itemize}
+    \item $\abs{\scp{x}{y}} \leq \norm{x} \cdot \norm{y}$ \pright{Cauchy-Schwarzsche Ungleichung}
+    \item $\norm{x+y}^2 + \norm{x-y}^2 = 2 (\norm{x}^2 + \norm{y}^2)$ \pright{Parallelogrammidentität}
+  \end{itemize}
+  Gleichheit gilt bei CS genau dann, wenn $x$ und $y$ gleichgerichtet sind.
+\end{satz}
+
+\begin{defn}
+  Ein $\K$-VR mit einer Norm heißt \emph{normierter Raum}, mit einem Skalarprodukt \emph{Prähilbertraum}.
+\end{defn}
+
+\begin{defn}
+  Sei $X$ ein Prähilbertraum. Zwei Vektoren $x, y \in X$ heißen \emph{zueinander orthogonal}, notiert $x \perp y$, wenn $\scp{x}{y} = 0$.
+\end{defn}
+
+\begin{satz}
+  Für zwei orthogonale Vektoren $x, y \in X$ gilt
+  \[ \norm{x - y}^2 = \norm{x + y}^2 = \norm{x}^2 + \norm{y}^2. \tag*{(Pythagoras)} \]
+\end{satz}
+
+\begin{lem}
+  Seien $Y$ und $Z$ Unterräume eines VR $X$, dann ist auch $Y + Z \coloneqq \Set{ y + z }{ y \in Y, z \in Z }$ ein Unterraum von $X$.
+\end{lem}
+
+\begin{defn}
+  Für Unterräume $Y$ und $Z$ eines VR $X$ mit $Y \cap Z = \{ 0 \}$ heißt $Y \oplus Z \coloneqq Y + Z$ \emph{direkte Summe} von $Y$ und $Z$.
+\end{defn}
+
+\begin{defn}
+  Zwei Unterräume $Y$ und $Z$ von $X$ heißen \emph{orthogonal}, notiert $Y \perp Z$, falls $\fa{y \in Y, z \in Z} y \perp z$.
+\end{defn}
+
+\begin{defn}
+  Für einen $\K$-VR $X$ und einen Unterraum $Y \subset X$ heißt
+  \[ Y^\perp \coloneqq \Set{ x \in X }{ \mathrm{span} \{ x \} \perp Y } \quad \text{\emph{orthog. Komplement} von $Y$}. \]
+\end{defn}
+
+% Ausgelassen: Restklassenbildung über Halbnorm
+
+\begin{defn}
+  Ein \emph{metrischer Raum} ist ein Paar $(X, d)$ mit einer Mange $X$ und einer \emph{Metrik} $d : X {\times} X \to \R$, d.\,h. für $x, y, z \in X$ gilt:
+  \begin{itemize}
+    \item $d(x, y) \geq 0$ \enspace und \enspace $d(x, y) = 0 \iff x = y$ \pright{Positivität}
+    \miniitem{0.44 \linewidth}{$d(x, y) = d(y, x)$ (Symm.)}
+    \miniitem{0.54 \linewidth}{$d(x, z) \leq d(x, y) + d(y, z)$ \enspace ($\triangle$-Ungl.)}
+  \end{itemize}
+\end{defn}
+
+% Ausgelassen: Definition Halbmetrik (ohne Axiom $d(x, y) = 0 \iff x = y$)
+
+\begin{defn}
+  Sei $V$ ein $\K$-Vektorraum. Eine \emph{Fréchet-Metrik} ist eine Funktion $\rho : V \to \R_{\geq 0}$, sodass für alle $x, y \in V$ gilt:
+  \begin{itemize}
+    \miniitem{0.25 \linewidth}{$\rho(x) = \rho(-x)$}
+    \miniitem{0.36 \linewidth}{$\rho(x) = 0 \iff x = 0$}
+    \miniitem{0.36 \linewidth}{$\rho(x + y) \leq \rho(x) + \rho(y)$}
+  \end{itemize}
+\end{defn}
+
+\begin{bsp}
+  Auf dem $\R^n$ ist $x \mapsto \tfrac{\norm{x}}{1 + \norm{x}}$ eine Fréchet-Metrik.
+\end{bsp}
+
+\begin{defn}
+  Sei $(X, d)$ ein metrischer Raum und $A, B \subset X$, so heißt
+  \[ \dist(A_1, A_2) \coloneqq \inf \Set{ d(x,y) }{ x \in A_1, y \in A_2 } \quad \text{\emph{Abstand} zw. $A$ und $B$.} \]
+\end{defn}
+
+% Ausgelassen: Für $x \in X$ und $A \subset X$ schreibe $\dist(x, A) = \dist(\{ x \}, A)$.
+
+\begin{bem}
+  Für $A \subset X$ ist die Abbildung $x \mapsto \dist(x, A)$ Lipschitz-stetig mit Lipschitz-Konstante $\leq 1$.
+\end{bem}
+
+\begin{defn}
+  Sei $(X, d)$ metrischer Raum, $A \subset X$, $\epsilon > 0$, dann heißt
+  \[ B_\epsilon(A) \coloneqq \Set{ y \in X }{ \dist(\{ y \}, A) < A} \quad \text{\emph{$\epsilon$-Umgebung} von $A$.} \]
+  Für $x \in X$ ist $B_\epsilon(x) \coloneqq B_\epsilon(\{ x \})$ die \emph{$\epsilon$-Kugel} um $x$.
+\end{defn}
+
+\begin{defn}
+  Der Durchmesser von $A \subset X$ ist definiert durch
+  \[ \diam(\emptyset) \coloneqq 0, \quad \diam(A) \coloneqq \sup \Set{ d(x, y) }{ x, y \in A } \text{ für } A \not= \emptyset. \]
+\end{defn}
+
+\begin{defn}
+  $A {\subset} X$ mit $\diam(A) < \infty$ heißt \emph{beschränkt}.
+\end{defn}
+
+\begin{defn}
+  Sei $(X, d)$ ein normierter Raum und $A \subset X$, dann heißt
+  \begin{itemize}
+    \item $\inte A \coloneqq A^\circ \coloneqq \Set{x \in X}{ \ex{\epsilon > 0} \! B_e(x) \subset A }$ das \emph{Innere} von $A$,
+    \item $\clos A \coloneqq \overline{A} \coloneqq \Set{x \in X}{ \fa{\epsilon > 0} \! B_\epsilon(x) {\cap} A \not= \emptyset }$ \emph{Abschluss} von $A$,
+    \item $\bdry A \coloneqq \partial A \coloneqq \overline{A} \setminus A^\circ$ \emph{Rand} von $A$,
+    \item $A^c \coloneqq \complement A \coloneqq X \setminus A$ \emph{Komplement} von $A$.
   \end{itemize}
 \end{defn}
 
 \begin{defn}
-  Sei $(X, d)$ ein metrischer Raum und $A_1, A_2 \subset X$, so ist
-  \[ \mathrm{dist}(A_1, A_2) \coloneqq \inf \Set{ d(x,y) }{ x \in A_1, y \in A_2 } \]
-  der \emph{Abstand} zwischen $A_1$ und $A_2$.
+  Eine Menge $A \subset X$ heißt \emph{offen}, falls $A = A^\circ$, und \emph{abgeschlossen}, falls $A = \overline{A}$.
 \end{defn}
 
+% Thema: Topologie
+
 \begin{defn}
-  Ein \emph{topologischer Raum} ist ein paar $(X, \tau)$, wobei $X$ eine Menge und $\tau \subset \mathcal{P}(X)$ ein System von offenen Mengen, sodass gilt:
+  Ein \emph{topologischer Raum} ist ein Paar $(X, \tau)$, wobei $X$ eine Menge und $\tau \subset \mathcal{P}(X)$ ein System von Teilmengen von $X$, den sogenannten \emph{offenen} Mengen, ist, sodass gilt:
+  \vspace{-4pt}
   \begin{itemize}
-    \item $\emptyset \in \tau$
-    \item $\tilde\tau \subset \tau \implies \bigcup_{U \in \tilde\tau} U \in \tau$
-    \item $U_1, U_2 \in \tau \implies U_1 \cap U_2 \in \tau$
+    \miniitem{0.24 \linewidth}{$\emptyset \in \tau, X \in \tau$}
+    \miniitem{0.34 \linewidth}{$\fa{\widetilde\tau \subset \tau} \bigcup^{\phantom{\mathclap{\widetilde\tau \subset U}}}_{\mathclap{U \in \widetilde\tau}} U \in \tau$}
+    \miniitem{0.39 \linewidth}{$\fa{U_1, U_2 \in \tau} U_1 \cap U_2 \in \tau$}
   \end{itemize}
 \end{defn}
 
 \begin{defn}
-  Ein topologischer Raum $(X, \tau)$ heißt \emph{Haussdorff-Raum}, wenn folgendes Trennungsaxiom erfüllt ist:
+  Sei $(X, \tau)$ ein topolischer Raum. Eine Menge $A \subset X$ heißt \emph{abgeschlossen}, wenn das Komplement offen ist, also $A^c \in \tau$.
+\end{defn}
+
+\begin{defn}
+  Ein \emph{Hausdorff-Raum} ist ein topologischer Raum $(X, \tau)$, der folgendes Trennungsaxiom erfüllt:
   \[ \fa{x_1, x_2 \in X} \ex{U_1, U_2 \in \tau} x_1 \in U_1 \wedge x_2 \in U_2 \wedge U_1 \cap U_2 = \emptyset \]
 \end{defn}
 
 \begin{defn}
-  Sei $(X, \tau)$ ein topologischer Raum. Eine Menge $A \subset X$ heißt abgeschlossen, falls $X \setminus A \in \tau$, also das Komplement offen ist.
+  Ist $(X, \tau)$ ein topologischer Raum und $A \subset X$, dann ist auch $(A, \tau_A)$ ein topologischer Raum mit der sogenannten \emph{Relativtopologie} $\tau_A \coloneqq \{ U \cap A \,|\,U \in \tau \}$.
 \end{defn}
 
 \begin{defn}
-  Sei $(X, \tau)$ ein topologischer Raum und $A \subset X$. Dann heißen
-  \begin{align*}
-    A^{\circ} &\coloneqq \Set{ x \in X }{ \exists\,U \in \tau \text{ mit } x \in U \text{ und } U \subset A } \\
-    \overline{A} &\coloneqq \Set{ x \in X }{ \forall\,U \in \tau \text{ mit } x \in U \text{ gilt } U \cap A \not= \emptyset }
-  \end{align*}
-  \emph{Abschluss} bzw. \emph{Inneres} von $A$.
+  Sei $(X, \tau)$ ein topol. Raum und $A \subset X$, dann heißt
+  \begin{itemize}
+    \item $A^\circ \coloneqq \Set{x \in X}{ \ex{U \in \tau} \! x \in U \text{ und } U \subset A }$ das \emph{Innere} von $A$,
+    \item $\overline{A} \coloneqq \Set{x \in X}{ \fa{U \in \tau \text{ mit } x \in U} U \cap A \not= \emptyset }$ \emph{Abschluss} von $A$.
+    % TODO: Rand?
+  \end{itemize}
 \end{defn}
 
 \begin{defn}
-  Ist $(X, \tau)$ ein topologischer Raum und $A \subset X$, dann ist auch $(A, \tau_A)$ ein topologischer Raum mit der \em{Relativtopologie} $\tau_A \coloneqq \{ U \cap A \,|\,U \in \tau \}$.
+  Sei $(X, d)$ ein metrischer Raum. Dann ist
+  \[ (X, \tau) \quad \text{mit} \quad \tau \coloneqq \Set{A \subset X}{ \inte A = A } \]
+  ein topol. Raum, wobei $\tau$ die von $d$ \emph{induzierte Topologie} heißt.
 \end{defn}
+
+\begin{bem}
+  Die direkte Definitionen des Abschlusses, des Inneren, usw. für metrische Räume stimmen mit den Definitionen dieser Begriffe über die induzierte Topologie überein.
+\end{bem}
 
 \begin{defn}
   Sei $(X, \tau)$ ein topologischer Raum. Eine Teilmenge $A \subset X$ heißt \emph{dicht} in $X$, falls $\overline{A} = X$.
@@ -95,33 +242,41 @@
 \end{defn}
 
 \begin{defn}
-  Seien $d_1$ und $d_2$ Metriken auf einer Menge $X$ und $\tau_1$ und $\tau_2$ die induzierten Topologien. Dann heißt $d_1$ stärker als $d_2$, falls $\tau_1$ stärker ist als $\tau_2$.
+  Seien $d_1$ und $d_2$ Metriken auf einer Menge $X$ und $\tau_1$ und $\tau_2$ die induzierten Topologien. Dann heißt $d_1$ \emph{stärker} als $d_2$, falls $\tau_1$ stärker ist als $\tau_2$. Ist $\tau_1 = \tau_2$, so heißen $d_1$ und $d_2$ äquivalent.
 \end{defn}
 
+% Ausgelassen: Entsprechende Definition für Normen
+
 \begin{satz}
-  Sind $\| \cdot \|_1$ und $\| \cdot \|_2$ zwei Normen auf dem $\K$-Vektorraum $X$. Dann gilt:
+  Seien $\norm{\blank}_1$ und $\norm{\blank}_2$ zwei Normen auf dem $\K$-VR $X$. Dann:
   \begin{itemize}
-    \item $\| \cdot \|_2 \text{ ist stärker als } \| \cdot \|_1 \iff \ex{C > 0} \fa{x \in X} \| x \|_1 \leq C \| x \|_2$
-    \item $\| \cdot \|_1 \text{ und } \| \cdot \|_2 \text{ sind äquivalent } \iff \ex{c, C > 0} \fa{x \in X} c \| x \|_1 \leq \| x \|_2 \leq C \| x \|_1$
+    \item $\norm{\blank}_2 \text{ ist stärker als } \norm{\blank}_1 \iff \ex{C > 0} \fa{x \in X} \norm{x}_1 \leq C \norm{x}_2$
+    \item $\norm{\blank}_1 \text{ und } \norm{\blank}_2 \text{ sind äquivalent} \iff $\\
+    $\ex{c, C > 0} \fa{x \in X} c \norm{x}_1 \leq \norm{x}_2 \leq C \norm{x}_1$
   \end{itemize}
 \end{satz}
 
 \begin{defn}
-  Die \emph{$p$-Norm} auf dem $\K^n$ ist definiert als
-  \begin{align*}
-    \| x \|_p &\coloneqq \left( \sum_{i = 1}^n |x_j|^p \right)^{\frac{1}{p}} \text{ für } 1 \leq p < \infty \\
-    \| x \|_{\infty} &\coloneqq \| x \|_max \coloneqq \max_{1 \leq i \leq n} |x_i|.
-  \end{align*}
+  Die \emph{$p$-Norm} auf dem $\K^n$ ist definiert für $p \in \left[ 1, \infty \right]$ als
+  \[
+    \norm{x}_p \coloneqq \left( \sum_{i = 1}^n \abs{x_j}^p \right)^{\frac{1}{p}} \text{ für } 1 \leq p < \infty, \quad
+    \norm{x}_{\infty} \coloneqq \max_{1 \leq i \leq n} \abs{x_i}.
+  \]
+  % Ausgelassen: Alternative Bezeichung $\norm{\blank}_{\mathrm{max}}$ für $\norm{\blank}_\infty$
 \end{defn}
 
 \begin{bem}
-  Alle $p$-Normen sind zueinander äquivalent.
+  Alle $p$-Normen auf dem $\K^n$ sind zueinander äquivalent.
 \end{bem}
 
+% Ausgelassen: Die euklidische Norm und die Fréchet-Metrik $\rho(x) \coloneqq \frac{\norm{x}}{1 + \norm{x}}$ erzeugen im $\K^n$ diesselbe Topologie.
+
+% Thema: Stetigkeit
+
 \begin{defn}
-  Seien $S \subset X$ eine Menge, $(X, \tau_X)$ und $(Y, \tau_Y)$ Hausdorff-Räume sowie $x_0 \in S$. Eine Funktion $f : S \to Y$ heißt \emph{stetig} in $x_0$, falls gilt:
-  \[ \fa{V \in \tau_Y} f(x_0) \in V \implies \exists\,U \in \tau_X \text{ mit } x_0 \in U \wedge f(U \cap S) \subset V \]
-  Ist $X = S$, so heißt $f : X \to Y$ stetige Abbildung, falls $f$ stetig in allen Punkten $x_0 \in X$ ist, d.\,h. $V \in \tau_Y \implies f^{-1}(V) \in \tau_X$.
+  Seien $(X, \tau_X)$ und $(Y, \tau_Y)$ Hausdorff-Räume, $S \subset X$, sowie $x_0 \in S$. Eine Funktion $f : S \to Y$ heißt \emph{stetig} in $x_0$, falls gilt:
+  \[ \fa{V \in \tau_Y} f(x_0) \in V \implies \ex{U \in \tau_X \text{ mit } x_0 \in U} f(U \cap S) \subset V \]
+  Ist $X = S$, so heißt $f : X \to Y$ stetige Abbildung, falls $f$ stetig in allen Punkten $x_0 \in X$ ist. Das ist genau dann der Fall, wenn das Urbild offener Mengen offen ist, d.\,h. $\fa{V \in \tau_Y} f^{-1}(V) \in \tau_X$.
 \end{defn}
 
 \begin{bem}
@@ -129,68 +284,100 @@
 \end{bem}
 
 \begin{defn}
-  Sei $(X, d)$ ein metrischer Raum. Eine Folge $(x_k)_{k \in \N}$ heißt \emph{Cauchy-Folge}, falls $d(x_k, x_l) \convWith{k, l} 0$. Ein Punkt $x \in X$ heißt \emph{Häufungspunkt} der Folge, falls es eine Teilfolge $(x_{k_i})_{i \in \N}$ gibt mit $x_{k_i} - x \convWith{i} 0$.
+  Sei $(X, d)$ ein metrischer Raum und $(x_k)_{k \in \N}$ eine Folge in $X$. Die Folge heißt \emph{Cauchy-Folge}, falls
+  \[ d(x_k, x_l) \convWith{k, l} 0. \]
+  Ein Punkt $x \in X$ heißt \emph{Häufungspunkt} der Folge, falls es eine Teilfolge $(x_{k_i})_{i \in \N}$ gibt mit $x_{k_i} - x \convWith{i} 0$.
 \end{defn}
 
 \begin{defn}
-  Ein metrischer Raum $(X, d)$ heißt \emph{vollständig}, falls jede Cauchy-Folge in $X$ einen Häufungspunkt besitzt.
+  Ein metrischer Raum $(X, d)$ heißt \emph{vollständig}, falls jede Cauchy-Folge in $X$ einen Häufungspunkt (den Grenzwert) hat.
 \end{defn}
 
 \begin{defn}
-  Ein normierter $\K$-Vektorraum heißt \emph{Banachraum}, falls er vollständig bzgl. der induzierten Metrik ist.
+  \begin{itemize}
+    \item Ein normierter $\K$-Vektorraum heißt \emph{Banachraum}, wenn er vollständig bezüglich der induzierten Metrik ist.
+    \item Ein Banachraum $X$ heißt \emph{Banach-Algebra}, falls er eine Algebra ist mit $\norm{x \cdot y}_X \leq \norm{x}_X \cdot \norm{y}_X$.
+    \item Ein \emph{Hilbertraum} ist ein Prähilbertraum, der vollständig bzgl. der vom Skalarprodukt induzierten Norm ist.
+  \end{itemize}
 \end{defn}
 
-\begin{defn}
-  Ein Banachraum heißt \emph{Banach-Algebra}, falls er eine Algebra ist mit $\| x \cdot y \|_X \leq \| x \|_x \cdot \| y \|_X$.
-\end{defn}
-
-\begin{defn}
-  Ein \emph{Hilbertraum} ist ein Prähilbertraum, der vollständig bzgl. der vom Skalarprodukt induzierten Norm ist.
-\end{defn}
+% Ausgelassen: Beispiel $\R$ ist ein Banachraum, genauso $\K^n$
 
 \begin{bem}
-  Ein normierter Raum ist genau dann ein Prähilbertraum, falls die Parallelogrammidentität
-  \[ \|x+y\|^2 + \|x-y\|^2 = 2 \|x\|^2 + 2 \|y\|^2 \]
+  Ein normierter Raum $X$ ist genau dann ein Prähilbertraum, falls die Parallelogrammidentität
+  \[ \fa{x,y \in X} \norm{x+y}^2 + \norm{x-y}^2 = 2 \left(\norm{x}^2 + \norm{y}^2\right) \]
   gilt. Folglich ist ein Banachraum genau dann ein Hilbertraum, falls die Parallelogrammidentität gilt.
 \end{bem}
 
+% Thema: Folgenräume
+
 \begin{defn}
-  Sei $\K^\N \coloneqq \Set{ (x_n)_{n \in \N} }{ \fa{i \in \N} x_i \in \K }$ die Menge aller Folgen in $\K$. Mit der Fréchet-Metrik
-    \[ \rho(x) \coloneqq \sum_{i = 1}^\infty 2^{-i} \frac{ |x_i| }{ 1 + |x_i| } < 1 \]
-  wird der \emph{Folgenraum} $\K^\N$ zu einem Banachraum.
+  Sei $\K^\N \coloneqq \{ (x_n)_{n \in \N} \text{ Folge in } \K \}$. Die Fréchet-Metrik
+    \[ \rho(x) \coloneqq \sum_{i = 1}^\infty 2^{-i} \tfrac{ \abs{x_i} }{ 1 + \abs{x_i} } < 1 \]
+  macht $\K^\N$ zu einem metrischen Raum, dem \emph{Folgenraum}.
 \end{defn}
 
 \begin{satz}
-  Sind $(x^k) = (x^k_i)_{i \in \N} \in \K^\N$ und $x = (x_i)_{i \in \N} \in \K^\N$, so gilt
+  Sei $(x^k)_{k \in \N}$ eine Folge in $\K^\N$ mit $x^k = (x^k_i)_{i \in \N}$ und $x = (x_i)_{i \in \N} \in \K^\N$, so gilt
   \[ \rho(x^k - x) \convWith{k} 0 \iff \fa{i \in \N} x_i^k \convWith{k} x_i. \]
 \end{satz}
 
+\begin{satz}
+  Der Folgenraum $\K^\N$ ist vollständig.
+\end{satz}
+
 \begin{defn}
-  Die Norm
+  Für $p \in \left[ 1, \infty \right]$ und $x = (x_i)_{i \in \N} \in \K^\N$ heißt die Norm
   \begin{align*}
-    \| x \|_{\ell^p} &\coloneqq \left( \sum_{i=1}^\infty |x_i|^p \right)^{\frac{1}{p}} \in [0, \infty], \text{ für } 1 \leq p < \infty \\
-    \| x \|_{\ell^\infty} &\coloneqq \sup_{i \in \N} |x_i| \in [0, \infty]
+    \norm{x}_{\ell^p} &\coloneqq \left( \sum_{i=1}^\infty \abs{x_i}^p \right)^{\frac{1}{p}} \!\in \left[ 0, \infty \right], \text{ für } 1 \leq p < \infty \\
+    \norm{x}_{\ell^\infty} &\coloneqq \sup_{i \in \N} \abs{x_i} \in \left[0, \infty\right]
   \end{align*}
-  heißt \emph{$\ell^p$-Norm} auf dem Raum $\ell^p(\K) \coloneqq \Set{ x \in \K^\N }{ \| x \|_{\ell^p} < \infty }$.
+  \emph{$\ell^p$-Norm} auf dem Raum $\ell^p(\K) \coloneqq \Set{ x \in \K^\N }{ \norm{x}_{\ell^p} < \infty }$.
 \end{defn}
 
 \begin{satz}
-  Der Raum $\ell^p(\K)$ ist vollständig, also ein Banachraum.
+  Der Raum $(\ell^p(\K), \norm{\blank}_{\ell^p})$ ist ein Banachraum.
 \end{satz}
 
 \begin{bem}
-  Im Fall $p = 2$ wird $\ell^2(\K)$ ein Hilbertraum mit dem Skalarprodukt $\langle x , y \rangle_{\ell^2} \coloneqq \sum_{i = 0}^\infty x_i \overline{y_i}$.
+  Im Fall $p {=} 2$ ist $\ell^2(\K)$ ein Hilbertraum mit Skalar- produkt $\scp{x}{y}_{\ell^2} \coloneqq \sum_{i = 0}^\infty x_i \overline{y_i}$ für $x = (x_i)_{i \in \N}, \, y = (y_i)_{i \in \N} \in \ell^2(\K)$.
 \end{bem}
 
-\begin{defn}[Vervollständigung]
+% Thema: Vervollständigung
+
+\begin{satz}[Vervollständigung]
   Sei $(X, d)$ ein metrischer Raum. Betrachte die Menge $X^\N$ aller Folgen in $X$ und definiere
-  \[ \tilde{X} \coloneqq \Set{ x \in X^\N }{ x \text{ ist Cauchy-Folge in } X }/\sim \]
-  mit der Äquivalenzrelation
-  \[ x \sim y \text{ in } \tilde{X} \iff d(x_j, y_j) \convWith{j} 0. \]
+  \[ \widetilde{X} \coloneqq \Set{ x \in X^\N }{ x \text{ ist Cauchy-Folge in } X }/\sim \]
+  mit der Äquivalenzrelation $x \sim y \text{ in } \widetilde{X} \!\coloniff\! d(x_j, y_j) \convWith{j} 0$.
   Diese Menge wird mit der Metrik
-  \[ \tilde{d}(x, y) \coloneqq \lim_{i \to \infty} d(x_i, y_i) \]
-  zu einem vollständigen metrischen Raum. Die injektive Abbildung $J : X \to \tilde{X}$, welche $x \in X$ auf die konstante Folge $(x)_{i \in \N}$, ist isometrisch, d.\,h. sie erhält. Wir können also $X$ als einen dichten Unterraum von $\tilde{X}$ auffassen. Man nennt $\tilde{X}$ \emph{Vervollständigung} von~$X$.
+  \[ \widetilde{d}(x, y) \coloneqq \lim_{i \to \infty} d(x_i, y_i) \]
+  zu einem vollständigen metrischen Raum. Die injektive Abbildung $J : X \to \tilde{X}$, welche $x \in X$ auf die konstante Folge $(x)_{i \in \N}$ abbildet, ist isometrisch, d.\,h.
+  $\fa{x, y \in X} \widetilde{d}(J(x), J(y)) = d(x, y)$.
+  Wir können also $X$ als einen dichten Unterraum von $\widetilde{X}$ auffassen.
+\end{satz}
+
+\begin{defn}
+  Man nennt $\widetilde{X}$ \emph{Vervollständigung} von~$X$.
 \end{defn}
+
+% Kapitel 1.2. Funktionenräume
+
+% TODO: Sei im Folgenden Y ein Banachraum?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \begin{defn}[\emph{Raum der beschränkten Funktionen}]
   Sei $S$ eine Menge und $Y$ ein Banachraum über $\K$ mit Norm $y \mapsto |y|$. Dann ist
