@@ -9,6 +9,7 @@
 \newcommand{\Leb}{\mathcal{L}} % Lebesgue
 \newcommand{\fue}{\overset{\text{f.ü.}}} % fast überall
 \newcommand{\dist}{\mathrm{dist}} % Entfernung
+\newcommand{\codim}{\mathrm{codim}} % Kodimension
 
 \newcommand{\IntO}[2]{\Int{\Omega}{}{#1}{#2}} % Integral über \Omega
 
@@ -885,6 +886,72 @@ der sogenannten \emph{Resolvente} von $T$ in $\lambda$. Als Funktion von $\lambd
   Das Spektrum $\sigma(T)$ ist kompakt und nichtleer (falls $X \not= \{ 0 \}$) mit
   \[ \sup_{\lambda \in \sigma(T)} = \lim_{m \to \infty} \norm{T^m}^{\tfrac{1}{m}} \leq \norm{T}. \]
   Der Wert heißt \emph{Spektralradius}.
+\end{satz}
+
+% Vorlesung vom 30.1.2014
+
+\begin{lem}
+  \begin{itemize}
+    \item Ist $\dim X < \infty$, so ist $\sigma(T) = \sigma_p(T)$.
+    \item Ist $\dim X = \infty$ und $T \in K(X)$, so ist $0 \in \sigma(T)$.
+  \end{itemize}
+\end{lem}
+
+\begin{bem}
+  Im Punkt 2 ist i.\,A. $0$ kein Eigenwert, also $0 \not\in \sigma_p(T)$.
+\end{bem}
+
+% Im Folgenden wollen wir das Punktspektrum genauer untersuchen.
+% Betrachte dazu für $T \in \mathcal{L}(X)$ und $y \in X$ das Problem:
+% Finde $\lambda \in \C$ und $x \in X$ mit $Tx - \lambda x = y$.
+% Ist $\lambda \in \rho(T)$, so existiert eine eindeutig bestimmte Lösung $x$ dieser Gleichung.
+% Ist $\lambda \in \sigma_p(T)$, so ist die Lösung, falls sie existiert, nicht eindeutig bestimmt,
+% damit $A_{\lambda} = \lambda \Id - T$ die Addition eines Elements aus $\ker(A_{\lambda})$ eine weitere Lösung ergibt. Auf der anderen Seite muss $\lambda \in \mathrm{im}(A_\lambda)$ sein, damit Lösung existieren kann.
+
+% Eine wichtige Klasse von Operatoren sind in diesem Zusammenhang:
+
+\begin{defn}
+  Eine Abbildung $A \in \mathcal{L}(X, Y)$ heißt \emph{Fredholm-Operator}, falls gilt:
+  \begin{itemize}
+    \item $\dim \ker(A) < \infty$
+    \item $\im(A)$ ist abgeschlossen
+    \item $\codim \im(A) < \infty$
+  \end{itemize}
+  Der \emph{Index} eines Fredholm-Operators ist $\mathrm{ind}(A) = \dim \ker (A) - \codim \im(A)$.
+\end{defn}
+
+\begin{bspe}
+  \begin{itemize}
+    \item Sei $X = W^{1,2}(\Omega)$, $Y = (W^{1,2}(\Omega))'$. Dann ist $A : W^{1,2}(\Omega) \to (W^{1,2}(\Omega))'$ definiert durch $\langle Au, v \rangle \coloneqq \Int{\Omega}{}{\sum_{i,j} \partial_i v \cdot a_{ij} \partial_j u}{x}$ für $u , v \in W^{1,2}(\Omega)$, der der schwache elliptische Differentialoperatoren mit Neumann-Randbedingungen. Aus Kapitel 4.1 und 6 wissen wir: Der Kern $\ker(A)$ besteht aus den konstanten Funktionen, also ist $\dim \ker(A) = 1$. Das Bild von $A$ ist $\im(A) = \Set{ F \in Y }{ \langle F, 1 \rangle_{W^{1,2}(\Omega)} = 0 }$, also abgeschlossen mit $\codim \im(A) = 1$. Es ist $Y = \im(A) \oplus \mathrm{span} \{ F_0 \}$, wenn $\langle F_0 , v \rangle = \Int{\Omega}{}{v}{x}$. Also ist $A$ ein Fredholm-Operator mit Index $0$.
+    \item Für das homogene Dirichlet-Problem ist der Operator $A : W_0^{1,2}(\Omega) \to (W_0^{1,2}(\Omega))'$ ein Isomorphismus.
+  \end{itemize}
+\end{bspe}
+
+Eine wichtige Klasse von Fredhom-Operatoren sind kompakte Störungen von $\Id$. Es gilt (ohne Beweis):
+
+\begin{satz}
+  Sei $T \in K(X)$. Dann gilt für $A = \Id - T$:
+  \begin{itemize}
+    \item $\dim \ker T < \infty$
+    \item $\im(A)$ ist abgeschlossen
+    \item $\ker A = \{ 0 \} \implies \im(A) = X$
+    \item $\codim \im(A) = \dim \ker(A)$
+  \end{itemize}
+  Insbesondere ist $A$ also ein Fredholm-Operator mit Index $0$.
+\end{satz}
+
+\begin{satz}[Riesz-Schauder -- Spektralsatz für kompakte Operatoren]
+  Für $T \in K(X)$ gilt:
+  \begin{itemize}
+    \item Die Menge $\sigma(T) \setminus \{ 0 \}$ besteht aus höchstens abzählbar vielen Elementen mit $0$ als einzig möglichem Häufungspunkt. Falls $\abs{\sigma(T)} = \infty$, ist $\overline{\sigma(T)} = \sigma_p(T) \cup \{ 0 \}$
+    \item Für $\lambda \in \sigma(T) \setminus \{ 0 \}$ ist $1 \leq n_{\lambda} = \max \Set{n \in \N_{+}}{ \ker(\lambda \Id - T)^{n-1} \not= \ker(\lambda \Id - T)^n } < \infty$. Die Zahl $n_\lambda$ heißt \emph{Ordnung} von $\lambda$, $\dim (\ker (\lambda \Id - T))$ heißt \emph{Vielfachheit} von $\lambda$.
+    \item Für $\lambda \in \sigma(T) \setminus \{ 0 \}$ gilt $X = \ker (\lambda \Id - T)^{n_\lambda} \oplus \im (\lambda \Id - T)^{n_\lambda}$
+  \end{itemize}
+  Beide Unterräume sind abgeschlossen und $T$-invariant und der \emph{charakteristische Unterraum} $\ker (\lambda \Id - T)^{n_\lambda}$ ist endlich-dimensional.
+  \begin{itemize}
+    \item  Für $\lambda \in \sigma(T) \setminus \{ 0 \}$ ist $\sigma(T|_{\im (\lambda \Id - T)^{n_\lambda}}) = \sigma(T) \setminus \{ \lambda \}$
+    \item Ist $E_\lambda$ für $\lambda \in \sigma(T) \setminus \{ 0 \}$ die Projektion auf $\ker (\lambda \Id - T)^{n_\lambda}$ gemäß der Zerlegung in Punkt 3, so gilt $E_\lambda E_\mu = \delta_{\lambda \mu} E_\lambda$ für $\lambda, \mu \in \sigma(T) \setminus \{ 0 \}$
+  \end{itemize}
 \end{satz}
 
 \end{document}
