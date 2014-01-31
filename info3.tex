@@ -58,7 +58,7 @@
 
 % TODO: Definition RAM
 
-\begin{defn}[RAM]
+\begin{definition}[RAM]
   Die Random Access Access Machine besitzt eine unendlich lange Liste von aufsteigend nummerierten Speicherzellen R[0], R[1], ..., die jeweils eine ganze Zahl beinhalten und einen Programmzähler. Sie kann mittels der folgenden Sprache programmiert werden:
   \begin{grammar}
     <Zieladresse> ::= <Adresse> | R[<Adresse>]
@@ -71,7 +71,7 @@
     <Programm> ::= <Befehl> `;' <Programm> | `End'
   \end{grammar}
   wobei $\odot \in \{ +, -, *, \div \}$ und $\bowtie \, \in \{ <, \leq, =, \geq, >, \not= \}$. Diese einfache Grammatik lässt sich auch für unbedingte Sprünge nutzen (mittels Bedingung $0 = 0$). Ein Sprung über das Ende des Programms hinaus lässt das Programm anhalten. Per Konvention steht die Größe der Eingabe in der Speicherzelle R[1], während die tatsächliche Eingabe in R[2], ..., R[R[1] + 1] abgelegt wird.
-\end{defn},
+\end{definition},
 
 % TODO: Einführung Bäume / gerichtete Graphen
 % TODO: Einführung Stochastik

@@ -64,22 +64,22 @@
 % Kapitel 1.1. Zufällige Ereignisse, Ereignisalgebra
 
 \iffalse
-\begin{defn}
+\begin{definition}
   Ein \emph{zufälliger Versuch} ist ein Experiment,
   \begin{itemize}
     \item welches unter einem festen Bedingungskomplex beliebig oft wiederholbar ist und
     \item dessen Ausgänge wohldefiniert und bei jeder Wiederholung ungewiss sind.
   \end{itemize}
-\end{defn}
+\end{definition}
 
-\begin{defn}
+\begin{definition}
   Ein zufälliges Ereignis ist ein Ergebnis eines zufälligen Experiments.
-\end{defn}
+\end{definition}
 \fi
 
 % Ausgelassen: Beispiele: * Werfen eines Würfels, * Werfen einer Münze, * Lebensdauer eines Menschen
 
-\begin{defn}
+\begin{definition}
   Eine \emph{Ereignisalgebra} oder \emph{Boolesche Algebra} ist eine Menge $\Alg$ mit zweistelligen Verknüpfungen $\wedge$ (\glqq und\grqq) und $\vee$ (\glqq oder\grqq), einer einstelligen Verknüpfung $\overline{\,\cdot\,}$ (Komplement) und ausgezeichneten Elementen $U \in \Alg$ (unmögliches Ereignis) und $S \in \Alg$ (sicheres Ereignis), sodass für alle $A, B, C \in \Alg$ gilt:
 
   {\scriptsize
@@ -98,16 +98,16 @@
     \miniitem{0.40\linewidth}{$A \vee (B \vee C) = (A \vee B) \vee C$}
     \miniitem{0.98\linewidth}{$A \wedge (B \vee C) = (A \wedge B) \vee (A \wedge C)$}
   \end{itemize}}
-\end{defn}
+\end{definition}
 
-\begin{defn}
+\begin{definition}
   Sei $\Alg$ eine Ereignisalgebra und $A, B$ Ereignisse.
   \begin{itemize}
     \item Durch $A \leq B \coloniff A \wedge B = B$ (gesprochen $A$ \emph{impliziert} $B$) ist auf $\Alg$ eine Partialordnung definiert.
     \item $A$ und $B$ heißen \emph{äquivalent}, falls $A \leq B$ und $B \leq A$.
     \item $A$ und $B$ heißen \emph{unvereinbar}, falls $A \wedge B = U$.
   \end{itemize}
-\end{defn}
+\end{definition}
 
 \begin{kor}
   In einer Ereignisalgebra $\Alg$ gilt mit $A, B \in \Alg$:
@@ -135,7 +135,7 @@
 
 % Ausgelassen: De Morgan für unendliche Mengen
 
-\begin{defn}
+\begin{definition}
   Eine \emph{Algebra} (Mengenalgebra) über $\Omega$ ist ein System von Teilmengen $\Alg \subset \mathcal{P}(\Omega)$ mit $\Omega \in \Alg$, das unter endl. Vereinigungen und Komplementen stabil ist, d.\,h. für alle $A, B \in \Alg$ gilt:
   \begin{itemize}
     \begin{multicols}{3}
@@ -144,7 +144,7 @@
       \item $A^c \coloneqq \Omega \setminus A \in \Alg$
     \end{multicols}
   \end{itemize}
-\end{defn}
+\end{definition}
 
 \begin{bem}
   Aus den De Morganschen Regeln folgt, dass Mengenalgebren auch unter endlichen Schnitten stabil sind.
@@ -159,10 +159,10 @@
   $A \symmdiff B \coloneqq (A \setminus B) \cup (B \setminus A)$ heißt \emph{symm. Differenz}.
 \end{nota}
 
-\begin{defn}
+\begin{definition}
   Eine \emph{$\sigma$-Algebra} über $\Omega$ ist eine Algebra $\Alg \subset \mathcal{P}(\Omega)$ über $\Omega$, die auch unter abzählbaren Vereinigungen stabil ist, d.\,h.
   \[ \bigcup_{n = 0}^{\infty} A_n \in \Alg \quad \text{für alle Folgen $(A_n)_{n \in \N}$ in $\Alg$}. \]
-\end{defn}
+\end{definition}
 
 % Ausgelassen: Bemerkung $\emptyset \in \Alg$
 
@@ -171,21 +171,21 @@
 \end{bem}
 
 
-\begin{defn}
+\begin{definition}
   Sei $(A_n)_{n \in \N}$ eine Folge in einer $\sigma$-Algebra $\Alg$. Setze
   \[
     \limsup_{n \to \infty} A_n \coloneqq \bigcap_{n = 1}^{\infty} \bigcup_{m = n}^{\infty} A_n \in \Alg, \quad
     \liminf_{n \to \infty} A_n \coloneqq \bigcup_{n = 1}^{\infty} \bigcap_{m = n}^{\infty} A_n \in \Alg.
   \]
-\end{defn}
+\end{definition}
 
 \begin{bem}
   In einer $\sigma$-Algebra, in der die Mengen mögliche Ereignisse beschreiben, ist der Limes Superior das Ereignis, das eintritt, wenn unendlich viele Ereignisse der Folge $A_n$ eintreten. Der Limes Infinum tritt genau dann ein, wenn alle bis auf endlich viele Ereignisse der Folge $A_n$ eintreten.
 \end{bem}
 
-\begin{defn}
+\begin{definition}
   Eine Folge $(A_n)_{n \in \N}$ in einer $\sigma$-Algebra $\Alg$ \emph{konvergiert} gegen $A \in \Alg$, notiert $\lim_{\mathclap{n \to \infty}} A_n = A$, falls $A = \liminf_{n \to \infty} A_n = \limsup_{n \to \infty} A_n$.
-\end{defn}
+\end{definition}
 
 % TODO: Definition isoton / antiton?
 \begin{satz}
@@ -197,7 +197,7 @@
   \]
 \end{satz}
 
-\begin{defn}
+\begin{definition}
   Ein \emph{Ring} (Mengenring) über $\Omega$ ist ein System von Teilmengen $\Ring \subset \mathcal{P}(\Omega)$ mit $\emptyset \in \Ring$, das unter endlichen Vereinigungen und Differenzen stabil ist, d.\,h. für alle $A, B \in \Ring$ gilt:
   \begin{itemize}
     \begin{multicols}{3}
@@ -206,17 +206,17 @@
       \item $A \setminus B \in \Ring$
     \end{multicols}
   \end{itemize}
-\end{defn}
+\end{definition}
 
 \begin{bem}
   Ein Ring ist auch unter Schnitten stabil, da
   \[ A \cap B = (A \cup B) \setminus (A \symmdiff B). \]
 \end{bem}
 
-\begin{defn}
+\begin{definition}
   Ein \emph{$\sigma$-Ring} über $\Omega$ ist ein Ring $\Ring \subset \mathcal{P}(\Omega)$ über $\Omega$, der auch unter abzählbaren Vereinigungen stabil ist, d.\,h.
   \[ \bigcup_{n = 0}^{\infty} A_n \in \Alg \quad \text{für alle Folgen $(A_n)_{n \in \N}$ in $\Alg$}. \]
-\end{defn}
+\end{definition}
 
 \begin{bem}
   Jeder $\sigma$-Ring ist auch unter abzählb. Schnitten stabil.
@@ -230,7 +230,7 @@
   Sei $(\Alg_i)_{i \in I}$ Familie von ($\sigma$-)\,Ringen / ($\sigma$-)\,Algebren über $\Omega$. Dann ist der Schnitt $\bigcap_{i \in I} \Alg_i$ ein ($\sigma$-)\,Ring / eine ($\sigma$-)\,Algebra über $\Omega$.
 \end{satz}
 
-\begin{defn}
+\begin{definition}
   Sei $E \subset \mathcal{P}(\Omega)$. Setze
   \begin{align*}
     \mathcal{R}(E) &\coloneqq \Set{ \Ring \subset \mathcal{P}(\Omega) }{ E \subset \Ring, \Ring \text{ $\sigma$-Ring} } \text{ und} \\
@@ -238,9 +238,9 @@
   \end{align*}
   Dann heißen $\quad\rho(E) \coloneqq \enspace \bigcap_{\mathclap{\Ring \in \mathcal{R}(E)}} \enspace \Ring, \quad \sigma(E) \coloneqq \enspace \bigcap_{\mathclap{\Alg  \in \mathcal{A}(E)}} \enspace \Alg$\\
   von $E$ \emph{erzeugter Ring} bzw. von $E$ \emph{erzeugte $\sigma$-Algebra}.
-\end{defn}
+\end{definition}
 
-\begin{defn}
+\begin{definition}
   Die \emph{Borel-Mengen} in $\R^1$ sind $\Bor(\R^1) \coloneqq \sigma(\mathcal{E})$, wobei wir $\mathcal{E}$ aus folgenden äquivalenten Optionen wählen dürfen:
   \begin{itemize}
     \miniitem{0.26\linewidth}{$\Set{ \left] a, b \right] }{ a \leq b }$}
@@ -250,15 +250,15 @@
     \miniitem{0.26\linewidth}{$\Set{ \left[ a, b \right[ }{ a \leq b }$}
     \miniitem{0.45\linewidth}{$\Set{ F \subset \R^1 }{\text{$F$ offen}}$}
   \end{itemize}
-\end{defn}
+\end{definition}
 
 % Definition wird später wiederholt!
 \iffalse
-\begin{defn}
+\begin{definition}
   Allgemeiner ist für $d \in \N$ die $\sigma$-Algebra der Borel-Mengen in $\R^d$ gleich $\Bor(\R^d) \coloneqq \sigma(\mathcal{E})$, wobei
   \[ \mathcal{E} \coloneqq \Set{ \vartimes_{i=1}^d \left] a_i, b_i \right] }{ \fa{i \in \{1, ..., d\}} a_i \leq b_i }. \]
   % Ausgelassen: Äquivalent offene Mengen oder geschlossene Mengen
-\end{defn}
+\end{definition}
 \fi
 
 % Kapitel 1.3. Mengenfunktionen (Inhalt, Prämaß, Maß)
@@ -267,11 +267,11 @@
   $\ER \coloneqq \R \cup \{-\infty, +\infty\} = \left[ -\infty, \infty \right]$
 \end{nota}
 
-\begin{defn}
+\begin{definition}
   Funktionen mit Wertebereich $\ER$ heißen \emph{numerisch}.
-\end{defn}
+\end{definition}
 
-\begin{defn}
+\begin{definition}
   Sei $\Ring$ ein Ring über $\Omega$. Eine Fkt. $\mu : \Ring \to \left[ 0, \infty \right]$ heißt
   \begin{itemize}
     \item \emph{Inhalt} auf $\Ring$, falls $\mu(\emptyset) = 0$ und $\mu(A \cup B) = \mu(A) + \mu(B)$ für alle $A, B \in \Ring$ mit $A \cap B = \emptyset$ gilt.
@@ -281,16 +281,16 @@
     \end{align*}
     \item \emph{Maß}, wenn $\mu$ Prämaß und $\Ring$ in Wahrheit sogar eine $\sigma$-Algebra ist. Dann ist die letzte Vorraussetzung in Punkt 2 immer erfüllt.
   \end{itemize}
-\end{defn}
+\end{definition}
 
-\begin{defn}
+\begin{definition}
   Ein Inhalt/Maß $\mu$ auf einem Ring / einer $\sigma$-Algebra $\Alg$
   \begin{itemize}
     \item heißt \emph{endlich}, falls $\mu(\Omega) < \infty$,
     \item heißt \emph{$\sigma$-endlich}, falls eine Folge $A_n$ in $\Alg$ existiert, sodass
     \[ \Omega = \bigcup_{n \in \N} A_n \quad \text{und} \quad \fa{i \in \N} \mu(A_i) < \infty. \]
   \end{itemize}
-\end{defn}
+\end{definition}
 
 \begin{nota}
   Sei $\Omega$ eine Menge, $A \subset \Omega$. Dann heißt
@@ -342,20 +342,20 @@
 
 % Ausgelassen: Beispiel: Inhalt der Elementarquader im $\R^d$
 
-\begin{defn}
+\begin{definition}
   Seien $a = (a_1, ..., a_d), b = (b_1, ..., b_d) \in \R^d$. Wir schreiben $a \leq b$, falls $a_i \leq b_i$ für alle $i \in \{ 1, ..., d \}$ gilt. Dann heißt
   \[ \left] a, b \right] \coloneqq \Set{ (x_1, ..., x_d) \in \R^d }{ a_i < x_i \leq b_i \text{ für alle } i \in \{ 1, ..., d \} } \]
   von $a$ und $b$ aufgespannter \emph{Elementarquader} in $\R^d$.
-\end{defn}
+\end{definition}
 
-\begin{defn}
+\begin{definition}
   Sei $f : \R^d \to \R^1$ eine Funktion, $x = (x_1, ..., x_d) \in \R^d$ und $h = (h_1, ..., h_d) \in \R_{\geq 0}^d$. Dann heißt
   \[ (\triangle f)(\left] x, x + h \right]) \coloneqq \sum_{\mathclap{\delta_1, ..., \delta_d \in \{0,1\}}} \, (-1)^{d-(\delta_1 + ... + \delta_k)} f(x_1 + \delta_1 h_1, ..., x_d + \delta_d h_d) \]
   \emph{Zuwachs} von $f$ im Elementarquader $\left] x, x+h \right]$.
-\end{defn}
+\end{definition}
 % Ausgelassen: Alternative, rekursive Definition der Zuwächse
 
-\begin{defn}
+\begin{definition}
   $G : \R^d \to \R$ heißt \emph{maßerzeugende Funktion}, falls
   \begin{itemize}
     \item $G$ ist nicht-fallend in jedem Argument, d.\,h. für alle $k \in \{ 1, ..., d \}$ und $x_1, ..., x_d \in \R$ ist $f(x_1, ..., x_{k-1}, -, x_{k+1}, ..., x_d)$ nicht-fallend.
@@ -363,11 +363,11 @@
     \[ \lim_{h \downarrow 0} f(x_1, ..., x_{k-1}, x_k + h, x_{k+1}, ..., x_d) = f(x_1, ..., x_d). \]
     \item Für alle $x \in \R^d$ und $h \in \R_{\geq 0}^d$ ist der Zuwachs $(\triangle G)(\left] x, x + h \right]) \geq 0$.
   \end{itemize}
-\end{defn}
+\end{definition}
 
 % Ausgelassen: Bemerkung: Die dritte Eigenschaft folgt i.A. nicht aus den beiden ersten; Gegenbeispiel
 
-\begin{defn}
+\begin{definition}
   Eine maßerzeugende Funktion $F$ heißt \emph{Verteilungsfunktion} (VF) in $\R^d$, falls zusätzlich gilt:
   \[
     \lim_{\mathclap{\substack{x_1 \to \infty \\ ... \\ x_d \to \infty}}} F(x_1, ..., x_d) = 1
@@ -375,7 +375,7 @@
     \lim_{\mathclap{x_i \to -\infty}} F(x_1, ..., x_d) = 0
   \]
   für alle $i \in \{ 1, ..., d \}$ und $x_1, ..., \widehat{x_i}, ..., x_d \in \R$ fest.
-\end{defn}
+\end{definition}
 
 \begin{bem}
   Sei $G_i : \R^1 \to \R_{> 0}^1$ für $i \in \{ 1, ..., d \}$ maßerzeugende Funktion im $\R^1$, dann ist
@@ -398,23 +398,23 @@
 
 % Kapitel 1.4. Fortsetzungssätze für Prämaße
 
-\begin{defn}
+\begin{definition}
   Eine numerische Funktion $\mu^* : \mathcal{P}(\Omega) \to \overline{\R}$ heißt \emph{äußeres Maß} auf $\Omega$, wenn gilt:
   \begin{itemize}
     \miniitem{0.3 \linewidth}{$\mu^*(\emptyset) = 0$}
     \miniitem{0.68 \linewidth}{$A \subset B \implies \mu^*(A) \leq \mu^*(B)$ \pright{Monotonie}}
     \item Für eine Folge $(A_n)_{n \in \N}$ in $\mathcal{P}(\Omega)$ gilt $\mu^*\left(\bigcup_{n \in \N} A_n \right) \leq \sum_{n = 0}^\infty \mu^*(A_n)$. %\hfill ($\sigma$-Subadditivität)
   \end{itemize}
-\end{defn}
+\end{definition}
 
 \begin{bem}
   Wegen $\mu^*(\emptyset) = 0$ und der Monotonie nimmt ein äußeres Maß nur Werte in $[0, \infty]$ an.
 \end{bem}
 
-\begin{defn}
+\begin{definition}
   Eine Teilmenge $A \subset \Omega$ heißt \emph{$\mu^*$-messbar}, falls
   \[ \mu^*(Q) = \mu^*(Q \cap A) + \mu^*(Q \setminus A) \quad \text{für alle } Q \subset \Omega. \]
-\end{defn}
+\end{definition}
 
 \begin{satz}[Carathéodory]
   Für ein äußeres Maß $\mu^* : \mathcal{P}(\Omega) \to [0, \infty]$ ist
@@ -442,13 +442,13 @@
 
 % Kapitel 1.5. Vervollständigung von Maßräumen
 
-\begin{defn}
+\begin{definition}
   Sei $\Omega$ eine Menge und $\Alg \subset \mathcal{P}(\Omega)$ eine $\sigma$-Algebra auf $\Omega$, sowie ggf. $\mu$ ein Maß auf $\Alg$. Dann heißt
   \begin{itemize}
     \item das Tupel $(\Omega, \Alg)$ \emph{messbarer Raum},
     \item das Tripel $(\Omega, \Alg, \mu)$ \emph{Maßraum}.
   \end{itemize}
-\end{defn}
+\end{definition}
 
 % Fragen:
 % * Welche Mengen aus $\mathcal{P}(\Omega)$, die nicht in $\sigma(\Alg)$ liegen, umfasst $\Alg^*$?
@@ -458,13 +458,13 @@
   Unter den Bedingungen des 1. Fortsetzungssatzes ist $\Alg^*$ die größte $\sigma$-Algebra $\overline{\Alg}$ mit $\Alg \subset \overline{\Alg}$, sodass $\mu^*|_{\overline{\Alg}}$ ein Maß ist.
 \end{satz}
 
-\begin{defn}
+\begin{definition}
   Sei $(\Omega, \Alg, \mu)$ ein Maßraum. Eine Menge $N \subset \Omega$ heißt \emph{Nullmenge}, falls es ein $A \in \Alg$ gibt, sodass $N \subset A$ und $\mu(A) = 0$.
-\end{defn}
+\end{definition}
 
-\begin{defn}
+\begin{definition}
   Ein Maßraum $(\Omega, \Alg, \mu)$ heißt \emph{vollständig}, falls jede Nullmenge $N \subset \Omega$ ein Element von $\Alg$ ist.
-\end{defn}
+\end{definition}
 
 \begin{satz}
   $(\Omega, \Alg^*, \mu^*|_{\Alg^*})$ ist vollständig für jedes bel. äußere Maß $\mu^*$.
@@ -488,14 +488,14 @@
   Eine Eigenschaft oder Aussage gilt für \emph{fast alle} $\omega \in \Omega$ oder \emph{$\mu$-fast-überall}, wenn es eine Nullmenge $N_0 \subset \Omega$ gibt, sodass die Aussage oder Eigenschaft für alle $\omega \in N_0^c$ gilt.
 \end{sprech}
 
-\begin{defn}
+\begin{definition}
   Sei $(\Omega, \Alg, \mu)$ ein Maßraum.
   \begin{itemize}
     \item Dann heißt $\mu$ \emph{diffus} (atomlos), falls $\mu(\{ \omega \}) = 0$ für alle $\omega \in \Omega$.
     \item Sei $\eta$ ein weiteres Maß auf $(\Omega, \Alg)$. Dann heißt $\mu$ \emph{absolut stetig} bezüglich $\eta$ (notiert $\mu \ll \eta$), falls
   \[ \eta(A) = 0 \implies \mu(A) = 0 \quad \text{ für alle } A \in \Alg. \]
   \end{itemize}
-\end{defn}
+\end{definition}
 
 % Ausgelassen: Elementarere Definition (bzw. Charakterisierung) von Nullmengen in $\R^d$
 
@@ -506,11 +506,11 @@
 
 % Kapitel 1.6. Das Lebesgue-Borel-Maß
 
-\begin{defn}
+\begin{definition}
   Die von den Elementarquadern im $\R^d$ erzeugte $\sigma$-Algebra heißt \emph{Borel-$\sigma$-Algebra} $\Bor(\R^d)$. Das von der maßerzeugenden Funktion
   \[ G : \R^d \to \R, \quad (x_1, ..., x_d) \mapsto x_1 \cdot ... \cdot x_d \]
   erzeugte Prämaß auf dem von den Elementarquadern erzeugten Ring $\mu_G$, das zu einem Maß $\widetilde{\mu}_G$ auf $\Bor(\R^d)$ fortgesetzt wird, heißt \emph{Lebesgue-Borel-Maß}. Die durch Hinzunahme aller Nullmengen vervollständigte $\sigma$-Algebra $\Alg^* = \Bor(\R^d)_c$ heißt \emph{Lebesgue-$\sigma$- Algebra} und das fortgesetzte Maß $\lambda_d \coloneqq \mu_G^*$ \emph{Lebesgue-Maß}.
-\end{defn}
+\end{definition}
 
 \begin{satz}
   Das Lebesgue-Maß auf dem $\R^d$ ist bewegungsinvariant, d.\,h.
@@ -524,9 +524,9 @@
   Sei $(\Omega, \Alg)$ ein messbarer Raum. Wir nennen $\Omega$ abstrakte Grundmenge und die Elemente von $\Omega$ Elementarereignisse. Die $\sigma$-Algebra $\Alg$ enthält zufällige Ereignisse, unter anderem das sichere Ereignis $\Omega$ und das unmögliche Ereignis $\emptyset$.
 \end{sprech}
 
-\begin{defn}
+\begin{definition}
   Sei $(\Omega, \Alg, \P)$ ein Maßraum mit $\P(\Omega) = 1$. Dann heißt $\P$ \emph{Wahrscheinlichkeitsmaß} (W-Maß) und das Tripel $(\Omega, \Alg, \P)$ \emph{Wahrscheinlichkeitsraum} (W-Raum).
-\end{defn}
+\end{definition}
 
 \begin{sprech}
   Sei $(\Omega, \Alg, \P)$ ein W-Raum und $A, B \in \Alg$. Wir sagen:
@@ -547,7 +547,7 @@
 
 % Wichtige Verteilungsfunktionen:
 
-\begin{defn}[Wichtige Verteilungsfunktionen]\mbox{}\\
+\begin{definition}[Wichtige Verteilungsfunktionen]\mbox{}\\
   \begin{itemize}
     \item \emph{Exponentialverteilung} mit Parameter $\lambda > 0$:
     \[ F_{\lambda}(x) = \max(0, 1 - \exp(- \lambda x)) \tag*{Exp($\lambda$)} \]
@@ -566,7 +566,7 @@
     \item \emph{$2$-dimensionale Exponentialverteilung} mit $\lambda, \mu > 0$, $\nu \geq 0$:
     \[ F(x, y) = \begin{cases} 0, \text{ falls $x < 0$ oder $y < 0$, ansonsten:} \\ 1 - e^{-(\lambda {+} \nu) x} - e^{-(\mu {+} \nu) y} + e^{-(\lambda x {+} \mu y {+} \nu \max(x, y))} \end{cases} \]
   \end{itemize}
-\end{defn}
+\end{definition}
 
 % Ausgelassen: zweidimensionale Exponentialverteilung
 % Ausgelassen: Gauß-Levy-Kuzmin-Theorem, und zugehörige Verteilung
@@ -577,13 +577,13 @@
 
 % Kapitel 2.1. Definition der relativen und bedingten relativen Häufigkeit
 
-\begin{defn}
+\begin{definition}
   Ein Ereignis $A \in \Alg$ trete bei $n$ Versuchen genau $h_n(A) \in \N$ mal auf. Dann heißt
   \begin{itemize}
     \item $h_n(A)$ \emph{absolute Häufigkeit} von $A$,
     \item $H_n(A) \coloneqq \tfrac{h_n(A)}{n}$ \emph{relative Häufigkeit} von $A$.
   \end{itemize}
-\end{defn}
+\end{definition}
 
 \begin{bem}
   Unmittelbar klar:
@@ -601,11 +601,11 @@
 
 % Vorlesung 10
 
-\begin{defn}
+\begin{definition}
   Seien $A, B \in \Alg$ Ereignisse, $n \in \N$ die Anzahl der Versuche. Dann heißt
   \[ H_n(A \mid B) \coloneqq \tfrac{H_n(A \cap B)}{H_n(B)} = \tfrac{h_n(A \cap B)}{h_n(B)} \]
   die \emph{relative Wahrscheinlichkeit} von $A$ unter der Bedingung $B$.
-\end{defn}
+\end{definition}
 
 \begin{bem}
   Offenbar gilt:
@@ -618,16 +618,16 @@
 
 % Kapitel 2.2. Geometrische Wahrscheinlichkeiten
 
-\begin{defn}
+\begin{definition}
   Sei $\Omega \in \LebAlg(\R^d)$ mit $\lambda_d(\Omega) > 0$. Dann heißt das W-Maß
   \[ \P : \LebAlg(\Omega) \to [0, 1], \quad A \mapsto \tfrac{\lambda_d(A)}{\lambda_d(\Omega)} \quad \text{\emph{Gleichverteilung}.} \]
-\end{defn}
+\end{definition}
 
-\begin{defn}
+\begin{definition}
   Sei $\Omega$ eine endliche Menge. Dann definiert
   \[ \P : \mathcal{P} \to [0, 1], \quad A \mapsto \tfrac{|A|}{|\Omega|} = \tfrac{\text{\# günstige Fälle}}{\text{\# mögliche Fälle}} \]
   ein W-Maß auf $(\Omega, \mathcal{P}(\Omega))$, genannt \emph{Laplace'sche Wkt}.
-\end{defn}
+\end{definition}
 
 \begin{bem}
   Damit sind Berechnungen von Wkten mit kombinatorischen Überlegungen möglich.
@@ -703,12 +703,12 @@
 
 % Kapitel 2.7. Bedingte Wahrscheinlichkeiten
 
-\begin{defn}
+\begin{definition}
   Sei $(\Omega, \Alg, \P)$ ein W-Raum und $A, B \in \Alg$. Dann heißt
   \[ \P(A \mid B) \coloneqq \begin{cases} \tfrac{\P(A \cap B)}{\P(B)}, & \text{ falls } \P(B) > 0 \\
   0, & \text{ falls } \P(B) = 0 \end{cases} \]
   Wahrscheinlichkeit von $A$ unter der Bedingung $B$.
-\end{defn}
+\end{definition}
 
 \begin{bem}
   Falls $\P(B) > 0$ gilt, so ist $\P(- \mid B)$ ein W-Maß über $B$ auf der Spur-$\sigma$-Algebra $\Alg|_B$.
@@ -750,10 +750,10 @@
 
 % Kapitel 2.9. Unabhängigkeit von Ereignissen
 
-\begin{defn}
+\begin{definition}
   Zwei Ereignisse $A, B \in \Alg$ heißen \emph{($\P$-)unabhängig}, falls
   \[ \P(A \cap B) = \P(A) \cdot \P(B). \]
-\end{defn}
+\end{definition}
 
 \begin{bem}
   \begin{itemize}
@@ -769,7 +769,7 @@
 
 % Ausgelassen: Beispiel: Ziehen von Karo-, Ass- und Karo-Ass-Karten
 
-\begin{defn}
+\begin{definition}
   Sei $(A_i)_{i \in I}$ ($I$ bel.) eine Familie von Ereignissen in $\Alg$.
   \begin{itemize}
     \item \emph{vollständig unabhhängig}, falls
@@ -778,16 +778,16 @@
     \item \emph{paarweise unabhängig}, falls
     \[ \P(A_i \cap A_j) = \P(A_i) \cdot \P(A_j) \quad \text{ für alle } i, j \in I, i \not= j. \]
   \end{itemize}
-\end{defn}
+\end{definition}
 
 \begin{acht}
   Aus paarweiser Unabhängigkeit folgt nicht vollständige Unabhängigkeit (Gegenbeispiel: Bernsteins Tetraeder).
 \end{acht}
 
-\begin{defn}
+\begin{definition}
   Sei $(\Omega, \Alg, \P)$ ein W-Raum und $\Alg_1, \Alg_2 \subset \Alg$ Ereignissysteme. Dann heißen $\Alg_1$ und $\Alg_2$ \emph{unabhängig}, falls
   \[ \P(A_1 \cap A_2) = \P(A_1) \cdot \P(A_2) \quad \text{für alle } A_1 \in \Alg_1, A_2 \in \Alg_2. \]
-\end{defn}
+\end{definition}
 
 \begin{satz}
   Seien $\Alg_1, \Alg_2 \subset \Alg$ unabhängige Ereignissysteme, die Algebren sind. Dann sind auch die $\sigma$-Algebren $\sigma(\Alg_1)$ und $\sigma(\Alg_2)$ unabhängig.
@@ -837,11 +837,11 @@
 
 % Vorlesung 15
 
-\begin{defn}
+\begin{definition}
   Sei $(\Omega, \Alg)$ ein messbarer Raum mit zwei W-Maßen $\P_1$ und $\P_2$. Dann heißt
   \[ \mathrm{d}_\infty(\P_1, \P_2) \coloneqq \sup_{A \in \Alg} \abs{\P_1(A) - \P_2(A)} \]
   \emph{Totalvariation} des signierten Maßes $\P_1 - \P_2$.
-\end{defn}
+\end{definition}
 
 \begin{satz}
   Seien $\P_1$ und $\P_2$ zwei W-Maße auf $(\N, \mathcal{P}(\N))$, $\P_1(\{ i \}) = p_i$, $\P_2(\{ i \}) = q_i$ für alle $i \in \N$. Dann gilt
@@ -863,11 +863,11 @@
   also zusammengefasst $\P(A) \in \{ 0, 1 \}$.
 \end{lem}
 
-\begin{defn}
+\begin{definition}
   Sei $(\Alg_n)_{n \in \N}$ Folge von $\sigma$-Algebren über $\Omega$. Dann ist
   \[ \mathcal{T}_\infty = \bigcap_{n=1}^\infty \mathcal{T}_n \quad \text{mit} \quad \mathcal{T}_n \coloneqq \sigma \left( \bigcup_{k=n}^\infty \Alg_k \right) \]
   die \emph{terminale $\sigma$-Algebra} von $(\Alg_n)_{n \in \N}$.
-\end{defn}
+\end{definition}
 
 % Was bedeutet Unabhängigkeit von $\sigma$-Algebren?
 
@@ -881,10 +881,10 @@
 
 % Kapitel 3.1. Messbare Abbildungen und Zufallsgrößen
 
-\begin{defn}
+\begin{definition}
   Seien $(\Omega_1, \Alg_1)$ und $(\Omega_2, \Alg_2)$ messbare Räume. Dann heißt $f : \Omega_1 \to \Omega_2$ \emph{$(\Alg_1, \Alg_2)$-messbar}, falls
   \[ f^{-1}(A_2) \in \Alg_1 \quad \text{für alle } A_2 \in \Alg_2. \]
-\end{defn}
+\end{definition}
 
 \begin{nota}
   Für solches $f$ schreiben wir $f : (\Omega_1, \Alg_1) \to (\Omega_2, \Alg_2)$.
@@ -931,7 +931,7 @@
   \end{itemize}
 \end{satz}
 
-\begin{defn}
+\begin{definition}
   \begin{itemize}
     \item Sei $(\Omega, \Alg)$ ein messbarer Raum, $f : \Omega' \to \Omega$ eine Abbildung, dann heißt
     \[ \sigma(f) \coloneqq f^{-1}(\Alg) \coloneqq \Set{ f^{-1}(A) }{ A \in \Alg } \]
@@ -940,13 +940,13 @@
     \[ \sigma((f_i)_{i \in I}) \coloneqq \sigma(\bigcup_{i \in I} \sigma(f_i)) = \sigma(\bigcup_{i \in I} f_i^{-1}(\Alg_i)) \]
     die \emph{von der Familie $(f_i)_{i \in I}$ erzeugte $\sigma$-Algebra}.
   \end{itemize}
-\end{defn}
+\end{definition}
 
-\begin{defn}
+\begin{definition}
   Sei $(\Omega', \Alg', \mu')$ ein Maßraum, $(\Omega, \Alg)$ ein messbarer Raum, $f : (\Omega', \Alg) \to (\Omega, \Alg)$. Dann ist durch
   \[ \mu'_f \coloneqq \mu' \circ f^{-1} : \Alg \to [0, \infty], \quad A \mapsto \mu'(f^{-1}(A)) \]
   ein Maß auf $(\Omega, \Alg)$, das sog. \emph{Bildmaß} von $\mu'$ unter $f$, definiert.
-\end{defn}
+\end{definition}
 
 \begin{satz}
   Für zwei numerische Funktionen $f, g : (\Omega, \Alg) \to (\ER, \overline{\Bor})$ gilt:
@@ -989,14 +989,14 @@
   Dabei werden Infimum, Supremum, usw. punktweise gebildet.
 \end{satz}
 
-\begin{defn}
+\begin{definition}
   Für $f : \Omega \to \ER$ heißen die Funktionen
   \begin{itemize}
     \item $\left|f\right| \coloneqq \max(f, -f) : \Omega \to [0, \infty]$ \emph{Betrag} von $f$
     \item $f^+ \coloneqq \,\,\,\, \max(f, 0) : \Omega \to [0, \infty]$ \emph{Positivteil} von $f$
     \item $f^- \coloneqq -\min(f, 0) : \Omega \to [0, \infty]$ \emph{Negativteil} von $f$
   \end{itemize}
-\end{defn}
+\end{definition}
 
 \begin{satz}
   Falls $f : (\Omega, \Alg) \to (\ER, \overline\Bor)$ messbar, dann auch $\left|f\right|$, $f^+$ und $f^-$.
@@ -1017,22 +1017,22 @@
   \[ \fa{\epsilon > 0} \ex{K_\epsilon \subset M \text{ kompakt}} \lambda_n(M \setminus K_\epsilon) < \epsilon \text{ und } f|_{K_\epsilon} \text{ stetig}. \]
 \end{satz}
 
-\begin{defn}
+\begin{definition}
   Eine Funktion $f : \R \to \R$ heißt \emph{Càdlàg-Funktion} (continue à droite, limite à gauche), falls für alle $x \in \R$ gilt:
   \[ \lim_{y \uparrow x} f(y) \text{ existiert} \quad \text{und} \quad \lim_{y \downarrow x} f(y) = f(x). \]
-\end{defn}
+\end{definition}
 
 \begin{beobachtung}
   Jede kumulierte VF ist eine Càdlàg-Funktion.
 \end{beobachtung}
 
-\begin{defn}
+\begin{definition}
 Die \emph{Variation} von $g : [a, b] \to \R$ bzgl. einer Zerlegung $Z = \{ a = x_0 < ... < x_n = b \}$ von $[a, b]$ ist die nicht-negative Zahl
 \[ V(g, Z) \coloneqq \sum_{j=1}^{n} |g(x_j) - g(x_{j-1})|. \]
 Die \emph{Totalvariation} von $g : [a, b] \to \R$ ist
 \[ V_a^b(g) \coloneqq \sup\left\{ V(g, Z) : Z \text{ Zerlegung von } [a, b] \right\} \in \R_{\ge 0} \cup \{ \infty \}. \]
 Falls $V_a^b(g) < \infty$, so heißt $g$ \emph{von beschränkter Variation}.
-\end{defn}
+\end{definition}
 
 \begin{satz}
   Es sind messbar:
@@ -1045,9 +1045,9 @@ Falls $V_a^b(g) < \infty$, so heißt $g$ \emph{von beschränkter Variation}.
   \end{itemize}
 \end{satz}
 
-\begin{defn}
+\begin{definition}
   Eine $\Alg$-messbare numerische Funktion $X$ über einem W-Raum $(\Omega, \Alg, \P)$ heißt \emph{Zufallsgröße} (ZG) oder \emph{Zufallsvariable}.
-\end{defn}
+\end{definition}
 
 % Ausgelassen: Typische Bezeichnung mit Großbuchstaben, beginnend mit X, Y, Z, ...
 
@@ -1060,13 +1060,13 @@ Falls $V_a^b(g) < \infty$, so heißt $g$ \emph{von beschränkter Variation}.
   \[ f(X) \coloneqq f \circ X : \Omega \to \ER. \]
 \end{nota}
 
-\begin{defn}
+\begin{definition}
   Das durch die ZG $X$ induzierte Bildmaß
   \[ P_X : \LebAlg(\R^1) \to [0,1], \quad B \mapsto \P(\{ X \in B \}) = \P(X^{-1}(B)) \]
   heißt \emph{Verteilungsgesetz} der ZG $X$ und
   \[ F_X : \R \to \R, \quad x \mapsto P_X(\left]-\infty, x\right]) = \P(\{ X \leq x \}) \]
   heißt \emph{Verteilungsfunktion} (VF) der ZG $X$.
-\end{defn}
+\end{definition}
 
 % Kapitel 3.2. Existenz einer ZG bei gegebener VF
 
@@ -1090,10 +1090,10 @@ Falls $V_a^b(g) < \infty$, so heißt $g$ \emph{von beschränkter Variation}.
 
 % Vorlesung 18
 
-\begin{defn}
+\begin{definition}
   Sei $X_1, ..., X_n$ eine endliche Familie von ZGn über $(\Omega, \Alg, \P)$. Diese Familie heißt \emph{stochastisch unabhängig}, falls
   \[ \P(\bigcap_{i=1}^n \{ X_i \in B_i \}) = \prod_{i=1}^n \P(\{ X_i \in B_i \}) \quad \text{für alle $B_1, ..., B_n \in \LebAlg(\ER)$.} \]
-\end{defn}
+\end{definition}
 
 \begin{satz}
   Seien $X_1, ..., X_n$ unabhängige ZGn über $(\Omega, \Alg, \P)$ und $g_1, ..., g_n : \R \to \R$ Borel-messbar. Setze $Y_i \coloneqq g_i(X_i) \coloneqq g_i \circ X_i$ für $i = 1, ..., n$, dann sind auch $Y_1, ..., Y_n$ unabhängige ZGn.
@@ -1101,7 +1101,7 @@ Falls $V_a^b(g) < \infty$, so heißt $g$ \emph{von beschränkter Variation}.
 
 % Kapitel 3.3. Integrale nichtnegativer messbarer Funktionen
 
-\begin{defn}
+\begin{definition}
   Eine Funktion $f : (\Omega, \Alg) \to (\R, \Bor)$ heißt \emph{einfache Funktion} oder \emph{Elementarfunktion} auf $(\Omega, \Alg)$, wenn gilt:
   \begin{multicols}{3}
     \begin{itemize}
@@ -1111,7 +1111,7 @@ Falls $V_a^b(g) < \infty$, so heißt $g$ \emph{von beschränkter Variation}.
     \end{itemize}
   \end{multicols}
   Die Menge aller elementaren Funktionen auf $(\Omega, \Alg)$ ist $\E(\Omega, \Alg)$.
-\end{defn}
+\end{definition}
 
 \begin{nota}
   $a \wedge b \coloneqq \min \{a, b\} \enspace \text{und} \enspace a \vee b \coloneqq \max \{a, b\}$
@@ -1130,15 +1130,15 @@ Falls $V_a^b(g) < \infty$, so heißt $g$ \emph{von beschränkter Variation}.
   \end{multicols}
 \end{satz}
 
-\begin{defn}
+\begin{definition}
   Sei $f \in \E(\Omega, \Alg)$ und $\Omega = A_1 \sqcup ... \sqcup A_k$ eine disjunkte Vereinigung von Mengen mit $A_j \in \Alg$ für alle $j = 1, ..., k$, sodass $f(A_j) = \{ y_j \}$, dann heißt die Darstellung
   \[ f = \sum_{j=1}^k y_j \cdot \ind_{A_j} \quad \text{\emph{kanonische Darstellung}.} \]
-\end{defn}
+\end{definition}
 
-\begin{defn}
+\begin{definition}
   Sei $(\Omega, \Alg, \mu)$ ein Maßraum, $f : \Omega \to \R$ elementar. Dann heißt die (von der Darstellung $f = \sum_{j=1}^k y_j \cdot \ind_{A_j}$ unabh.) Zahl
   \[ \IntOmu{f} \coloneqq \sum_{j=1}^k y_j \mu(A_j) \quad \text{\emph{$\mu$-Integral} von $f$.} \]
-\end{defn}
+\end{definition}
 
 \begin{satz}
   Es gilt für $f, g \in \E(\Omega, \Alg)$, $a, b \geq 0$:
@@ -1163,19 +1163,19 @@ Falls $V_a^b(g) < \infty$, so heißt $g$ \emph{von beschränkter Variation}.
   Sei $f : (\Omega, \Alg, \mu) \to (\ER, \LebAlg(\ER))$ nichtnegativ. Dann gibt es eine isotone Folge $(f_n)_{n \in \N}$ elementarer Funktionen mit $\sup_{n \in \N} f_n = f$.
 \end{satz}
 
-\begin{defn}
+\begin{definition}
   Sei $f : (\Omega, \Alg, \mu) \to (\ER, \LebAlg(\ER))$ nichtnegativ und $(f_n)_{n \in \N}$ eine Folge elementarer Funktionen mit $\sup_{n \in \N} f_n = f$. Dann heißt
   \[ \IntOmu{f} \coloneqq \sup_{n \in \N} \IntOmu{f_n} \quad \text{\emph{$\mu$-Integral} von $f$.} \]
-\end{defn}
+\end{definition}
 
 % Kapitel 3.4. Integral einer beliebigen, messbaren Funktion
 
-\begin{defn}
+\begin{definition}
   Eine $\Alg$-messbare, numerische Fkt. $f : (\Omega, \Alg, \mu) \to (\ER, \LebAlg(\ER))$ heißt \emph{$\mu$-integrierbar}, falls
   \[ \IntOmu{f^+} < \infty \quad \text{und} \quad \IntOmu{f^-} < \infty. \]
   In diesem Fall definieren wir das \emph{Lebesgue-Integral} von $f$ als
   \[ \IntOmu{f} \coloneqq \IntOmu{f^+} - \IntOmu{f^-}. \]
-\end{defn}
+\end{definition}
 
 
 % Vorlesung 19
@@ -1219,7 +1219,7 @@ Falls $V_a^b(g) < \infty$, so heißt $g$ \emph{von beschränkter Variation}.
   Das Produkt $(f \cdot g)$ ist i.\,A. nicht $\mu$-integrierbar!
 \end{acht}
 
-\begin{defn}
+\begin{definition}
   Sei $(\Omega, \Alg, \mu)$ ein Maßraum und $f : (\Omega, \Alg) \to (\ER, \mathcal{L}(\ER))$. Für $p \in \left[1, \infty\right[$ heißt $f$ \emph{$p$-integrierbar}, falls $\abs{f}^p$ $\mu$-integrierbar ist.
   \begin{align*}
     L^p(\Omega, \Alg, \mu) &\coloneqq \Set{ f : \Omega \to \ER }{\text{$f$ $p$-integrierbar, also } \IntOmu{\abs{f}^p} < \infty}, \\
@@ -1231,7 +1231,7 @@ Falls $V_a^b(g) < \infty$, so heißt $g$ \emph{von beschränkter Variation}.
     \norm{f}_\infty &\coloneqq \esssup_{\omega \in \Omega} \, \abs{f(\omega)} \coloneqq \inf \Set{ C \in \R }{ \abs{f} \leq C \text{ fast-überall} }
   \end{align*}
   Wir betrachten in $L^p$ zwei Funktionen als gleich, wenn sie bis auf einer Nullmenge übereinstimmen. Die $\triangle$-Ungleichung in $L^p$ wird auch \emph{Minkowski-Ungleichung} genannt.
-\end{defn}
+\end{definition}
 
 \begin{satz}
   Der $L^p(\mu)$ ist ein vollständiger normierter Raum, d.\,h. jede Cauchy-Folge bzgl. der Norm $\| \cdot \|_p$ ist auch konvergent.
@@ -1287,10 +1287,10 @@ Falls $V_a^b(g) < \infty$, so heißt $g$ \emph{von beschränkter Variation}.
 
 % Kapitel 3.5.3. Satz von F. Riesz
 
-\begin{defn}
+\begin{definition}
   Eine Folge $(f_n)_{n \in \N}$ $\Alg$-messbarer, numerischer Fktn. über $(\Omega, \Alg, \mu)$ \emph{konvergiert $\mu$-fast-überall} gegen $f : \Omega \to \Alg$, falls
   \[ \lim_{n \to \infty} f_n(\omega) = f(\omega) \quad \text{für $\mu$-fast-alle $\omega \in \Omega$ gilt.} \]
-\end{defn}
+\end{definition}
 
 % Ausgelassen: Notation
 
@@ -1324,10 +1324,10 @@ Falls $V_a^b(g) < \infty$, so heißt $g$ \emph{von beschränkter Variation}.
   Obige Gleichung ist auch erfüllt, wenn lediglich $f \geq 0$ gilt.
 \end{satz}
 
-\begin{defn}
+\begin{definition}
   Für eine ZG $X : (\Omega, \Alg, \P) \to (\ER, \Bor(\ER))$ heißt die Zahl
   \[ \E X := \Int{\Omega}{}{X}{\P} \qquad \text{\emph{Erwartungswert} von $X$.} \]
-\end{defn}
+\end{definition}
 
 % Ausgelassen: Interpretation als Schwerpunkt der W-Massenverteilung, Lageparameter
 
@@ -1351,9 +1351,9 @@ Falls $V_a^b(g) < \infty$, so heißt $g$ \emph{von beschränkter Variation}.
 \end{kor}
 
 % TODO: Definition "`Zufallsvektor"'?
-\begin{defn}
+\begin{definition}
   Für Zufallsvektoren $X = (X_1, ..., X_k)$ mit Werten in $\R^k$ definieren wir $\E X \coloneqq (\E X_1, ..., \E X_k)$.
-\end{defn}
+\end{definition}
 
 \begin{bem}
   Sei $X = (X_1, ..., X_k)$ ein Zufallsvektor und $g : \R^k \to \R$ Borel-messbar und $P_X$-integrierbar. Dann ist
@@ -1369,7 +1369,7 @@ Falls $V_a^b(g) < \infty$, so heißt $g$ \emph{von beschränkter Variation}.
 \end{satz}
 
 % TODO: Definition Verteilungsfunktion
-\begin{defn}
+\begin{definition}
   Sei $F_X$ VF einer ZG $X : (\Omega, \Alg, \P) \to (\R^1, \LebAlg(\R^1)$.
   \begin{itemize}
     \item $F_X$ heißt \emph{diskret}, falls $F_X$ höchstens abzählbar viele Sprungstellen $x_1, x_2, ... \in \R$ besitzt mit
@@ -1388,18 +1388,18 @@ Falls $V_a^b(g) < \infty$, so heißt $g$ \emph{von beschränkter Variation}.
     \[ \lambda_1(\Set{ x \in \R^1 }{ F_X'(x) = 0 }) = 1. \]
     % Ausgelassen: Beispiel: Cantor-Treppe (Teufelstreppe)
   \end{itemize}
-\end{defn}
+\end{definition}
 
 \begin{satz}
   Jede VF $F$ auf $\R^1$ besitzt eine eindeutige Zerlegung (Lebesgue-Zerlegung) als konvexe Linearkombination einer diskreten, einer singulär-stetigen und einer absolut-stetigen VF
   \[ F = \alpha_d F_d + \alpha_s F_s + \alpha_a F_a \quad \text{mit} \quad \alpha_d, \alpha_s, \alpha_a \geq 0, \, \alpha_d {+} \alpha_s {+} \alpha_a = 1. \]
 \end{satz}
 
-\begin{defn}
+\begin{definition}
   Falls $F_X$ absolut-stetig, dann heißt die nicht negative, Lebesgue-messbare Funktion
   \[ f = f_X = F'_X : \R \to \R_{\geq 0}, \quad x \mapsto \begin{cases} F'_X(x), & \text{falls Ableitung ex.} \\ 0, & \text{sonst} \end{cases} \]
   \emph{(Wahrscheinlichkeits-)Dichte} (WD) von $F_X$  bzw. von $X$.
-\end{defn}
+\end{definition}
 
 \begin{bem}
   Dann gilt für alle $y \in \R$:
@@ -1445,7 +1445,7 @@ Falls $V_a^b(g) < \infty$, so heißt $g$ \emph{von beschränkter Variation}.
   Eine Cauchy-verteilte ZG $X$ hat keinen EW, da $\Int{\R^1}{}{\abs{x} \cdot f(x)}{x} = \infty$.
 \end{bem}
 
-\begin{defn}
+\begin{definition}
   Seien $X_1, ..., X_d : (\Omega, \Alg, \P) \to (\R^1, \Bor(\R^1))$ ZGn,
   \[ F = F_{(X_1, ..., X_d)} : \R^d \to \left[ 0, 1 \right], \quad (x_1, ..., x_d) \mapsto \P(X_1 {\leq} x_1, ..., X_k {\leq} x_k) \]
   die dazugehörige VF und $P = P_{(X_1, ..., X_d)}$ das von der VF induzierte Maß auf $\Bor(\R^d)$.
@@ -1457,7 +1457,7 @@ Falls $V_a^b(g) < \infty$, so heißt $g$ \emph{von beschränkter Variation}.
     \[ \sum_{j \in J} \lambda_d(Q_j) \leq \delta \implies \sum_{j \in J} P(Q_j) = \sum_{j \geq J} (\triangle F) Q_j \leq \epsilon. \]
     \item $F$ heißt \emph{singulär stetig}, wenn $F$ stetig ist und eine Lebesgue-Menge $S$ mit $\lambda_d(S) = 0$ und $P(S) = 1$ existiert.
   \end{itemize}
-\end{defn}
+\end{definition}
 
 \begin{bem}
   Falls $F$ absolut stetig, ex. die W-Dichte, die f.\,ü. durch
@@ -1483,30 +1483,30 @@ Falls $V_a^b(g) < \infty$, so heißt $g$ \emph{von beschränkter Variation}.
 
 % Riemann-Stieltjes-Integral
 
-\begin{defn}
+\begin{definition}
   Eine \emph{Zerlegung} eines Intervalls $[a, b]$ ist eine geordnete endliche Menge $Z = \{ a = x_0 < x_1 < ... < x_k = b\} \subset [a, b]$. Eine weitere Zerlegung $\widetilde{Z}$ desselben Intervalls heißt \emph{Verfeinerung} von $Z$, falls $\widetilde{Z} \supset Z$.
-\end{defn}
+\end{definition}
 
 \begin{nota}
   Die Menge aller Zerlegungen von $[a, b]$ ist $\mathcal{Z}([a, b])$.
 \end{nota}
 
-\begin{defn}
+\begin{definition}
   Eine Menge von Stützstellen bzgl. einer Zerlegung $\{ x_0 < ... < x_k \}$ von $\left[ a, b \right]$ ist eine Menge $\{ \xi_1, ..., \xi_k \}$ mit $\xi_i \in \left] x_{i{-}1}, x_i \right[$ für $i \in \{ 1, ..., k \}$.
-\end{defn}
+\end{definition}
 
-\begin{defn}
+\begin{definition}
   Für zwei Funktionen $f, g : [a, b] \to \R$, eine Zerlegung $Z = \{ a = x_0 < ... < x_n = b \}$ von $[a, b]$ und Stützstellen $\xi_1, ..., \xi_n$ bzgl. $Z$ heißt die Summe
   \[ S(f, \d g, Z, \xi_1, ..., \xi_n) \coloneqq \sum_{j=1}^{n}\!f(\xi_j)(g(x_j) - g(x_{j{-}1})) \]
   \emph{Riemann-Stieltjes-Summe} von $f$ bzgl. $g$ und der Zerlegung $Z$ mit Stützstellen $\xi_1, ..., \xi_n$.
-\end{defn}
+\end{definition}
 
-\begin{defn}
+\begin{definition}
   Seien $f, G : \left[ a, b \right] \to \R$. Die Funktion $f$ heißt \emph{Riemann-Stieltjes-integrierbar} (RS-integrierbar) bzgl. der \emph{Gewichtsfunktion} $G$, wenn gilt: Es gibt ein $\iota \in \R$, sodass für alle $\epsilon > 0$ eine Zerlegung $Z_{\epsilon}$ von $\left[ a, b \right]$ existiert, sodass für alle Verfeinerungen $Z \supset Z_{\epsilon}$ und Wahlen von Stützstellen $\xi_1, ..., \xi_n$ gilt:
   \[ \abs{\iota - S(f, \d G, Z, \xi_1, ..., \xi_n)} \le \epsilon. \]
   Dieses (eindeutig bestimmte) $\iota$ heißt \emph{Riemann-Stieltjes-Integral} (RS-Integral) von $f$ bzgl. $G$, geschrieben
   \[ \Int{a}{b}{f(x)}{G(x)} \coloneqq \iota. \]
-\end{defn}
+\end{definition}
 
 \begin{bem}
   Mit $G \coloneqq \id$ erhalten wir aus dem RS-Integral das gewöhnliche Riemann-Integral.
@@ -1560,7 +1560,7 @@ Falls $V_a^b(g) < \infty$, so heißt $g$ \emph{von beschränkter Variation}.
 
 % Kapitel 3.8. Momente von Zufallsgrößen bzw. von Verteilungsfunktionen
 
-\begin{defn}
+\begin{definition}
   Sei $X$ eine ZG über $(\Omega, \Alg, \P)$ und $k \in \N$. Dann heißt
   \begin{itemize}
     \item $\E X^k$ \emph{$k$-tes Moment},
@@ -1570,7 +1570,7 @@ Falls $V_a^b(g) < \infty$, so heißt $g$ \emph{von beschränkter Variation}.
     \item $\Var(X) \coloneqq \mathbb{D}^2 X \coloneqq \E (X - \E X)^2$ \emph{Varianz} (Dispersion, Streuung),
     \item $\sqrt{\Var(X)}$ \emph{Standardabweichung} von $X$.
   \end{itemize}
-\end{defn}
+\end{definition}
 % Ausgelassen: Mechanische Deutung der Momente, z.B. von $\mathbb{D}^2 X$ als Trägheitsmomente der W-Massenverteilung
 
 \begin{lem}
@@ -1642,9 +1642,9 @@ $\implies$ $\abs{\E X^n} \leq \tfrac{B}{a^n} n!$
 
 $\implies$ $\E \exp(z X)$ ist analytisch für $\abs{z} < a$
 
-\begin{defn}
+\begin{definition}
   $\E \exp(z X)$ heißt momenterzeugende Funktion der ZG $X$ oder VF $F_X$.
-\end{defn}
+\end{definition}
 
 % Beispiel
 $X = N(\mu, \sigma^2)$ $\implies$ $\E \exp(z X) = \exp\left( z\mu + \tfrac{\sigma^2}{2} z^2 \right)$ für $z \in \C$
@@ -1704,7 +1704,7 @@ $g(x) = \abs{x}^{\tfrac{n}{m}}$ für $0 < m \leq n$, $\implies$ \emph{Ljapunow-U
 
 % Kapitel 3.9. Randverteilungen von ZVen und Unabhängigkeit
 
-\begin{defn}
+\begin{definition}
   Sei $X = (X_1, ..., X_k)$ eine $k$-dimensionale ZV über $(\Omega, \Alg, \P)$. $X_1, ..., X_k$ heißen \emph{stochastisch unabhängig}, falls
   \[ \P(\bigcap_{i=1}^k \{ X_i \in B_i \}) = \prod_{i=1}^k \P(\{ X_i \in B_i \}) \]
   für alle $B_1, ..., B_k \in \mathcal{L}(\R^1)$. Dies ist genau dann der Fall, wenn
@@ -1714,13 +1714,13 @@ $g(x) = \abs{x}^{\tfrac{n}{m}}$ für $0 < m \leq n$, $\implies$ \emph{Ljapunow-U
   Für diskrete Verteilungen ist dies äquivalent zu
   \[ \P(X_1 = x_1, ..., X_k = x_k) = \P(X_1 = x_1) \cdots \P(X_k = x_k) \]
   für alle $x_1, ..., x_k \in \R$.
-\end{defn}
+\end{definition}
 
-\begin{defn}
+\begin{definition}
   Für eine $k$-dimensionale ZV $X = (X_1, ..., X_k)$ heißt
   \[ F_{(X_{i_1}, ..., X_{i_l})}(x_{i_1}, ..., x_{i_l}) = \lim_{\substack{x_j \to \infty}_{j \in \{ 1, ..., k\} \setminus \{ i_1, ..., i_l \}}} F_(X_1, ..., X_k)(x_1, ..., x_k) \]
   für $1 \leq i_1 < ... < i_l \leq k$, $l = 1, ..., k-1$ \emph{$l$-dimensionale Rand-(Marginal-)verteilungsfunktion}.
-\end{defn}
+\end{definition}
 
 Falls $f_X(x_1, ..., x_k)$ existiert, so existieren sämtliche Randdichten
 
@@ -1739,13 +1739,13 @@ Wichtig: Im allgemeinen bestimmen die Randverteilungen nicht die gemeinsame Vert
 
 % Kapitel 3.10. Kovarianz und Korrelation
 
-\begin{defn}
+\begin{definition}
   $(X, Y)$ sei eine zweidimensionale ZVüber $(\Omega, \Alg, \P)$ mit $\E X^2 < \infty$, $\E Y^2 < \infty$. Dann heißt
   \[ \cov(X, Y) \coloneqq \E(XY) - \E X \E Y = \E ((X - \E X) \cdot (Y - \E Y)) \]
   \emph{Kovarianz} von $X$ und $Y$ und
   \[ \cor(X, Y) \coloneqq \frac{\cov(X, Y)}{\sqrt{\Var(X) \cdot \Var(Y)}} \]
   \emph{Korrelation} von $X$ und $Y$.
-\end{defn}
+\end{definition}
 
 \begin{satz}
   \begin{itemize}
@@ -1755,9 +1755,9 @@ Wichtig: Im allgemeinen bestimmen die Randverteilungen nicht die gemeinsame Vert
   \end{itemize}
 \end{satz}
 
-\begin{defn}
+\begin{definition}
   Falls $\cor(X, Y) = 0$, so heißen $X, Y$ \emph{unkorreliert}.
-\end{defn}
+\end{definition}
 
 \begin{acht}
   Aus Unkorreliertheit folgt i.\,A. nicht Unabhängigkeit!
