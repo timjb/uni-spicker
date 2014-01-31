@@ -36,7 +36,8 @@
 \theoremstyle{definition}
 
 \newtheorem*{nota}{Notation}
-\newtheorem*{defn}{Definition}
+\newtheorem*{definition}{Definition}
+\newtheorem*{defn}{Defn} % Kurzform!
 \newtheorem*{bsp}{Beispiel}
 \newtheorem*{bspe}{Beispiele}
 \newtheorem*{satz}{Satz}
@@ -118,10 +119,9 @@
 
 % Integrale
 \newcommand{\Int}[4]{{\textstyle \int\limits_{#1}^{#2}} #3 \,\d #4}
-\newcommand{\Intdx}[3]{\Int{#1}{#2}{#3}{x}}
-\newcommand{\Intab}[2]{\Int{a}{b}{#1}{#2}}
-\newcommand{\Intabdx}[1]{\Intdx{a}{b}{#1}}
-
+\newcommand{\Intdx}[3]{\Int{#1}{#2}{#3}{x}} % Integral mit dx
+\newcommand{\Intab}[2]{\Int{a}{b}{#1}{#2}} % Integral über [a, b]
+\newcommand{\Intabdx}[1]{\Intdx{a}{b}{#1}} % Integral über [a, b] mit dx
 
 \newcommand{\im}{\mathop{\mathrm{im}}} % Bild (image)
 \newcommand{\supp}{\mathop{\mathrm{supp}}} % Träger (support)
@@ -129,6 +129,9 @@
 % Schöne Fürall- und Existenzquantoren
 \newcommand{\fa}[1]{\forall \, {#1} \,:\,}
 \newcommand{\ex}[1]{\exists \, {#1} \,:\,}
+
+% Platzhalter
+\newcommand{\blank}{\text{--}}
 
 % :<=> (Definitionsdoppelpfeil)
 \newcommand{\coloniff}{\enspace:\!\iff}
