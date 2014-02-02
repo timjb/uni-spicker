@@ -60,6 +60,7 @@
 \newtheorem*{sprechweise}{Sprechweise}
 \newtheorem*{beob}{Beobachtung}
 \newtheorem*{beobachtung}{Beobachtung}
+\newtheorem*{umformulierung}{Umformulierung}
 \newtheorem*{antwort}{Antwort}
 \newtheorem*{anmerkung}{Anmerkung}
 \newtheorem*{nomenklatur}{Nomenklatur}
@@ -67,6 +68,8 @@
 \theoremstyle{remark}
 \newtheorem*{bem}{Bemerkung}
 
+% Listenstil
+\usepackage{paralist} % Für Inline-Listen
 \usepackage{enumitem}
 \setitemize[0]{leftmargin=10pt,itemindent=0pt,itemsep=0pt}
 \setenumerate[0]{leftmargin=10pt,itemindent=0pt,itemsep=0pt}

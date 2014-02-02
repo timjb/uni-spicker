@@ -5,6 +5,7 @@
 \newcommand{\K}{\mathbb{K}}
 \newcommand{\Bor}{\mathfrak{B}} % Borel
 \newcommand{\Leb}{\mathcal{L}} % Lebesgue
+\newcommand{\LSO}{\mathcal{L}} % Menge der linearen stetigen Operatoren
 \newcommand{\fue}{\overset{\text{f.ü.}}} % fast überall
 \newcommand{\dist}{\mathrm{dist}} % Entfernung (distance)
 \newcommand{\diam}{\mathrm{diam}} % Durchmesser (diameter)
@@ -14,9 +15,13 @@
 \newcommand{\inte}{\mathop{\mathrm{int}}} % Inneres (interior)
 \newcommand{\clos}{\mathop{\mathrm{clos}}} % Abschluss (closure)
 \newcommand{\bdry}{\mathop{\mathrm{bdry}}} % Rand (boundary)
+\newcommand{\conv}{\mathop{\mathrm{conv}}} % Konvexe Hülle
+\newcommand{\Graph}{\mathop{\mathrm{Graph}}} % Graph
 \newcommand{\Hoel}{\mathrm{\text{Höl}}} % Hölder
 \newcommand{\Alg}{\mathfrak{A}} % (Mengen-)Algebra
 \newcommand{\ind}{\mathbbm{1}} % Indikatorfunktion
+
+\renewcommand{\Re}{\operatorname{Re}} % Realteil
 
 \newcommand{\IntO}[2]{\Int{\Omega}{}{#1}{#2}} % Integral über \Omega
 
@@ -43,9 +48,10 @@
 %   ist offensichtlich linear und injektiv, aber nicht surjektiv.
 % * Sturm-Liouville-Problem (Details ausgelassen)
 
-% Kapitel 1.
+% Kapitel 1. Strukturen und Funktionenräume
 
-% Kapitel 1.1. Strukturen
+% Kapitel 1.1.
+\section{Allgemeine Strukturen}
 
 \begin{nota}
   Sei im Folgenden $\K \in \{ \R, \C \}$.
@@ -97,6 +103,10 @@
 \begin{definition}
   Ein $\K$-VR mit einer Norm heißt \emph{normierter Raum}, mit einem Skalarprodukt \emph{Prähilbertraum}.
 \end{definition}
+
+\begin{satz}
+  Die Norm und das Skalarprodukt sind stetig.
+\end{satz}
 
 \begin{definition}
   Sei $X$ ein Prähilbertraum. Zwei Vektoren $x, y \in X$ heißen \emph{zueinander orthogonal}, notiert $x \perp y$, wenn $\scp{x}{y} = 0$.
@@ -169,7 +179,7 @@
 
 \begin{definition}
   Der Durchmesser von $A \subset X$ ist definiert durch
-  \[ \diam(\emptyset) \coloneqq 0, \quad \diam(A) \coloneqq \sup \Set{ d(x, y) }{ x, y \in A } \text{ für } A \not= \emptyset. \]
+  \[ \diam(A) \coloneqq \sup \left( \Set{ d(x, y) }{ x, y \in A } \cup \{ 0 \} \right). \]
 \end{definition}
 
 \begin{definition}
@@ -359,7 +369,7 @@
   \[ \widetilde{X} \coloneqq \Set{ x \in X^\N }{ x \text{ ist Cauchy-Folge in } X }/\sim \]
   mit der Äquivalenzrelation $x \sim y \text{ in } \widetilde{X} \!\coloniff\! d(x_j, y_j) \convWith{j} 0$.
   Diese Menge wird mit der Metrik
-  \[ \widetilde{d}(x, y) \coloneqq \lim_{i \to \infty} d(x_i, y_i) \]
+  \[ \widetilde{d}(x, y) \coloneqq \lim_{\mathclap{i \to \infty}} d(x_i, y_i) \]
   zu einem vollständigen metrischen Raum. Die injektive Abbildung $J : X \to \tilde{X}$, welche $x \in X$ auf die konstante Folge $(x)_{i \in \N}$ abbildet, ist isometrisch, d.\,h.
   $\fa{x, y \in X} \widetilde{d}(J(x), J(y)) = d(x, y)$.
   Wir können also $X$ als einen dichten Unterraum von $\widetilde{X}$ auffassen.
@@ -369,7 +379,8 @@
   Man nennt $\widetilde{X}$ \emph{Vervollständigung} von~$X$.
 \end{definition}
 
-% Kapitel 1.2. Funktionenräume
+% Kapitel 1.2.
+\section{Funktionenräume}
 
 \begin{nota}
   Sei im Folgenden $Y$ ein Banachraum.
@@ -432,7 +443,7 @@
 \begin{definition}
   Sei $S \subset \R^n$ und $Y$ ein Banachraum. Dann ist
   \[ \mathcal{C}_0^0(S; Y) \coloneqq \Set{ f \in \mathcal{C}^0(S; Y) }{ \supp f \text{ ist kompakt in } \R^n } \]
-  die Menge der stetigen Fktn. mit kompaktem Träger von $S$ nach $Y$.
+  die Menge der \emph{stetigen Funktionen mit kompaktem Träger}. %von $S$ nach $Y$.
 \end{definition}
 
 \begin{definition}
@@ -498,9 +509,17 @@
 
 % Ausgelassen: Charakterisierung der Lebesgue-integrierbaren Funktionen
 
+\begin{defn}
+  Sei $(\Omega, \Alg, \mu)$ ein Maßraum und $(Y, d)$ ein metrischer Raum. Eine Abbildung $f : \Omega \to Y$ heißt \emph{$\mu$-messbar} ($\mu$-mb), wenn gilt:
+  \begin{itemize}
+    \item $\fa{U \opn Y \text{ offen}} f^{-1}(U) \in \Alg$
+    \item Es gibt eine $\mu$-Nullmenge $N$, sodass $f(\Omega \setminus N)$ separabel ist.
+  \end{itemize}
+\end{defn}
+
 \begin{satz}[Bochner-Kriterium]
   Für $f : \Omega \to Y$ gilt:
-  \[ f \in L(\mu, Y) \iff f \text{$\mu$-messbar und } \abs{f} \in L(\mu, \R). \]
+  \[ f \in L(\mu, Y) \iff f \text{ ist $\mu$-messbar und } \abs{f} \in L(\mu, \R). \]
 \end{satz}
 
 \begin{satz}[Majoranten-Kriterium]
@@ -513,29 +532,153 @@
   \[ f_n \xrightarrow[\text{f.ü.}]{n \to \infty} f \enspace\implies\enspace f \in L(\Omega, Y) \text{ mit } \Int{\Omega}{}{f}{\mu} = \lim_{n \to \infty} \Int{\Omega}{}{f_n}{\mu}. \]
 \end{satz}
 
-% TODO: $L^p$-Räume, Sobolev-Räume
+\begin{defn}
+  Sei $(\Omega, \Alg, \mu)$ ein Maßraum und $Y$ ein Banachraum. Dann heißt $f : \Omega \to Y$ \emph{wesentlich beschränkt}, falls
+  \[ \sup_{\omega \in \Omega \setminus N} \norm{f(\omega)} < \infty \quad \text{für eine Nullmenge $N \subset \Omega$.} \]
+\end{defn}
 
+\begin{defn}
+  Sei $(\Omega, \Alg, \mu)$ ein Maßraum, $Y$ ein Banachraum und $p \in \left[ 1, \infty \right[$.
+  \begin{align*}
+    L^p(\mu, Y) &\coloneqq \Set{ f : \Omega \to Y }{ \text{$f$ ist $\mu$-mb und $\norm{f}^p \in L(\mu, \R)$} } / \sim \\
+    L^\infty(\mu, Y) &\coloneqq \Set{ f : \Omega \to Y }{ \text{$f$ ist $\mu$-mb und wes. beschr. bzgl. $\mu$} } / \sim
+  \end{align*}
+  heißen \emph{Lebesgue-Räume}. Dabei ist $f \sim g$, wenn $f$ und $g$ fast-überall übereinstimmen. Sie sind Banachräume mit Norm
+  \[
+    \norm{f}_{L^p} \coloneqq \left( \Int{\Omega}{}{\abs{f}^p}{\mu} \right)^{\tfrac{1}{p}},
+    \quad
+    \norm{f}_{L^\infty} \coloneqq \!\!\!\!\! \inf_{\substack{N \subset \Omega \\ N \text{ Nullmenge}}} \left( \sup_{\omega \in \Omega \setminus N} \norm{f(\omega)} \right).
+  \]
+\end{defn}
 
+% Ausgelassen: Es gilt $L(\mu, Y) = L^1(\mu, Y)$
 
-
-
-
-
-\begin{definition}
-  Eine Teilmenge $A \subset X$ heißt \emph{präkompakt}, falls es für jedes $\epsilon > 0$ eine Überdeckung von $A$ mit endlich vielen $\epsilon$-Kugeln $A \subset B_{\epsilon}(x_1) \cup ... \cup B_{\epsilon}(x_{n_\epsilon})$ mit $x_1, x_{n_\epsilon} \in X$ gibt.
-\end{definition}
-
-\begin{definition}
-  Eine Teilmenge $A \subset X$ eines metrischen Raumes $(X, d)$ heißt \emph{kompakt}, falls eine der folgenden äquivalenten Bedinungen erfüllt ist:
-  \begin{itemize}
-    \item $A$ ist \emph{überdeckungskompakt}: Für jede Überdeckung $A \subset \bigcup_{i \in I} A_i$ mit $A_i \opn X$,  gibt es eine endl. Teilmenge $J \subset I$ mit $A \subset \bigcup_{i \in J} A_i$.
-    \item $A$ ist \emph{folgenkompakt}: Jede Folge in $A$ besitzt eine konvergente Teilfolge mit Grenzwert in $A$.
-    \item $(A, d|_A)$ ist vollständig und $A$ ist \emph{präkompakt}.
-  \end{itemize}
-\end{definition}
+\begin{bem}
+  Für $p {=} 2$ wird, falls $Y$ ein Hilbertraum ist, $L^2(\mu, Y)$ ebenfalls zu einem Hilbertraum mit Skalarprodukt
+  \[ \scp{f}{g}_{L^2(\mu, Y)} \coloneqq \Int{\Omega}{}{\scp{f}{g}_Y}{\mu}. \]
+\end{bem}
 
 \begin{satz}
-  Sei $(X, d)$ ein metrischer Raum. Dann gilt:
+  Sei $n \in \N$, $q, p_1, ..., p_n \in \left[ 1, \infty \right]$ mit $\tfrac{1}{p_1} + ... + \tfrac{1}{p_n} = \tfrac{1}{q}$ und $f_i \in L^{p_i}(\mu, \K)$ für $i \in \{ 1, ..., n \}$. Dann ist $f_1 \cdot ... \cdot f_n \in L^q(\mu, \K)$ und es gilt die Hölder-Ungleichung $\norm{f_1 \cdot ... \cdot f_n}_{L^q} \leq \norm{f_1}_{L^{p_1}} \cdot ... \cdot \norm{f_n}_{L^{p_n}}$.
+\end{satz}
+
+\begin{bem}
+  Das Majorantenkriterium sowie der Konvergenzsatz von Lebesgue übertragen sich direkt auf $L^p(\mu, Y)$ mit $y < \infty$.
+\end{bem}
+
+% TODO: Was ist ein Multiindex?
+
+\begin{defn}
+  Sei $\Omega \opn \R^n$ und $f, g : \Omega \to \R$. Falls für einen Multi-Index $s$
+  \[
+    \Int{\Omega}{}{\partial^s \zeta f}{\lambda_n} = (-1)^{\abs{s}} \cdot \Int{\Omega}{}{\zeta g}{\lambda_n} 
+    \quad
+    \text{für alle } \zeta \in \mathcal{C}_0^\infty(\Omega)
+  \]
+  gilt, so heißt $g$ die \emph{$s$-te schwache Ableitung} von $g$.
+\end{defn}
+
+% Ausgelassen: Einführung und Motivation der Sobolev-Räume als Vervollständigung von
+% \[ X \coloneqq \Set{ f \in \mathcal{C}^\infty(\Omega) }{ \norm{f}_X < \infty } \quad \text{mit} \quad \norm{f}_X \coloneqq \sum_{\abs{s} \leq m} \norm{\partial^s f}_{L^p(\Omega)}. \]
+
+\begin{defn}
+  Sei $\Omega \opn \R^n$, $m \in \N$ und $p \in \left[ 1, \infty \right]$. Dann heißt
+  \begin{align*}
+    W^{m,p}(\Omega) \coloneqq \{ f \in L^p(\Omega) \mid \, &\text{$f$ hat für alle Multi-Indizes $s$ mit $\abs{s} \leq m$}\\
+    &\text{eine schwache Ableitung $f^{(s)} \in L^p(\Omega)$} \}
+  \end{align*}
+  \emph{Sobolev-Raum} der Ordnung $m$ zum Exponenten $p$. Mit der Norm
+  \[ \norm{f}_{W^{m,p}(\Omega)} \coloneqq \!\! \sum_{\abs{s} \leq m} \norm{f^{(s)}}_{L^p(\Omega)} \]
+  wird $W^{m,p}(\Omega)$ für $p < \infty$ zum Banachraum.
+\end{defn}
+
+\begin{samepage}
+
+% Ausgelassen: Beispiel $f(x) \coloneqq \abs{x}$ auf $\left] 0, 1 \right[$.
+
+\begin{bem}
+  Für $p \geq 2$ sind Sobolev-Funktionen i.\,A. nicht stetig!
+\end{bem}
+
+\begin{defn}
+  Sei $\Omega \opn \R^n$, $m \in \N$ und $p \in \left[ 1, \infty \right[$. Dann heißt
+  \begin{align*}
+    W^{m,p}_0(\Omega) \coloneqq \{ f \in W^{m,p}(\Omega) \mid \, &\text{$\exists$ Folge $(f_k)_{k \in \N}$ in $\mathcal{C}_0^\infty(\Omega)$, sodass}\\
+    &\norm{f - f_k}_{W^{m,p}(\Omega)} \to 0 \text{ für } k \to \infty \}
+  \end{align*}
+  \emph{Sobolev-Raum mit Null-Randwerten} der Ordnung $m$ zum Exponent $p$. Er ist ein abgeschlossener Unterraum von $W^{m,p}(\Omega)$.
+\end{defn}
+
+% Kapitel 2.
+\section{Teilmengen von (Funktionen-)Räumen}
+
+\end{samepage}
+
+% Kapitel 2.1. Konvexe Teilmengen
+
+\begin{defn}
+  Sei $X$ ein $\K$-VR. Die \emph{konvexe Hülle} von $A \subset X$ ist
+  \[ \conv(A) \coloneqq \Set{ \sum_{i=0}^k a_i x_i }{ k {\in} \N, x_1, ..., x_k {\in} A, a_1, ..., a_k {\in} \R_{> 0}, \sum_{i=1}^k a_i = 1 }. \]
+  Die Menge $A$ heißt \emph{konvex}, wenn $A = \conv(A)$.
+\end{defn}
+
+\begin{defn}
+  Ist $A \subset X$ konvex, so heißt $f : A \to \R \cup \{ \pm\infty \}$ \emph{konvexe Funktion}, falls für alle $x, y \in A$ und $t \in \left[ 0, 1 \right]$ gilt:
+  \[ f((1{-}t)x + t y) \leq (1-t) f(x) + t f(y) \]
+  Eine Funktion $g : A \to \R \cup \{ \pm \infty \}$ heißt konkav, falls $-g$ konvex ist.
+\end{defn}
+
+\begin{satz}
+  Sei $X$ ein Hilbertraum und $A \subset X$ nicht leer, abgeschlossen und konvex. Dann gibt es genau eine Abbildung $P : X \to A$ mit
+  \[ \norm{x - P(x)}_X = \dist(x, A) = \inf_{y \in A} \norm{x - y}_X \quad \text{für alle $x \in X$.} \]
+  Für $x \in X$ ist eine äquivalente Charakterisierung von $P(x)$ durch
+  \[ \Re \scp{x-P(x)}{a-P(x)}_X \leq 0 \quad \text{für alle $a \in A$} \]
+  gegeben. Die Abbildung $P$ heißt \emph{orthogonale Projektion} auf $A$.
+\end{satz}
+
+\begin{defn}
+  Sei $X$ ein $\K$-VR. $A \subset X$ heißt \emph{affiner Unterraum}, falls
+  \[ (1{-}\alpha) x + \alpha y \in A \quad \text{für alle $x, y \in A$, $\alpha \in \K$.} \]
+\end{defn}
+
+\begin{satz}
+  Ist im vorherigen Satz $A$ nicht leer, abgeschlossen und affiner Unterraum von $X$, dann ist $P$ affin linear, d.\,h.
+  \[ P\left( (1{-}\alpha) x + \alpha y \right) = P \left( (1{-}\alpha) x \right) + P \left( \alpha y \right) \quad \text{für alle $x, y \in A$, $\alpha \in \K$.} \]
+\end{satz}
+
+\begin{satz}
+  Ist im vorherigen Satz $A$ nicht leer und abgeschlossener Unterraum von $X$, dann ist $P$ linear und $\fa{x \in X} x - P(x) \perp A$.
+\end{satz}
+
+\begin{satz}[vom fast orthogonalen Komplement]
+  Sei $X$ ein normierter Raum, $Y \subset X$ ein abgeschlossener echter Teilraum und $\theta \in \left] 0, 1 \right[$ (bzw. $\theta \in \left] 0, 1 \right]$, falls $X$ ein Hilbertraum). Dann gibt es ein $x_0 \in X$ mit $\norm{x_0} = 1$ und $\theta \leq \dist(x_0, Y) \leq 1$.
+\end{satz}
+
+% Kapitel 2.2. Kompakte Teilmengen
+
+\begin{defn}
+  Eine Teilmenge $A \subset X$ heißt \emph{präkompakt}, falls es für jedes $\epsilon > 0$ eine Überdeckung von $A$ mit endlich vielen $\epsilon$-Kugeln $A \subset B_{\epsilon}(x_1) \cup ... \cup B_{\epsilon}(x_{n_\epsilon})$ mit $x_1, ..., x_{n_\epsilon} \in X$ gibt.
+\end{defn}
+
+\begin{defn}
+  Sei $A \subset X$ eine Menge. Eine Überdeckung von $A$ ist ein System von Teilmengen $\Set{ A_i \subset X }{ i \in I }$, sodass $A \subset \bigcup_{i \in I} A_i$.
+\end{defn}
+
+\begin{defn}
+  Eine Teilmenge $A \subset X$ eines metrischen Raumes $(X, d)$ heißt \emph{kompakt}, falls eine der folgenden äquiv. Aussagen gilt:
+  \begin{itemize}
+    \item $A$ ist \emph{überdeckungskompakt}: Für jede offene Überdeckung $\Set{A_i \opn X}{i \in I}$ von $A$ gibt es eine endliche Teilmenge $J \subset I$, sodass $\Set{A_i}{i \in J}$ ebenfalls eine Überdeckung von $A$ ist.
+    \item $A$ ist \emph{folgenkompakt}: Jede Folge in $A$ besitzt eine konvergente Teilfolge mit Grenzwert in $A$.
+    \item $(A, d|_A)$ ist vollständig und $A$ ist präkompakt.
+  \end{itemize}
+\end{defn}
+
+\begin{acht}
+  In topologischen Räumen sind die obigen Begriffe i.\,A. nicht äquivalent.
+\end{acht}
+
+\begin{satz}
+  Sei $(X, d)$ ein metrischer Raum und $A \subset X$. Dann gilt:
   \begin{itemize}
     \item $A$ präkompakt $\implies$ $A$ beschränkt,
     \item $A$ kompakt $\implies$ $A$ abgeschlossen und präkompakt,
@@ -544,115 +687,373 @@
 \end{satz}
 
 \begin{satz}
-  Sei $A \subset \K^n$. Dann gilt:
-  \begin{itemize}
+  Sei $A \subset \K^n$. Dann gilt: \enspace
+  \begin{inparaitem}
     \item $A$ präkompakt $\iff$ $A$ beschränkt,
+  \end{inparaitem}
+  \begin{itemize}
     \item $A$ kompakt $\iff$ $A$ abgeschlossen und beschränkt (Heine-Borel).
   \end{itemize}
 \end{satz}
 
-\begin{satz}
-  Sei $(X, d)$ ein metrischer Raum und $A \subset X$ kompakt. Dann gibt es zu $x \in X$ ein $a \in A$ mit $d(x, a) = \dist(x, A)$.
-\end{satz}
+\begin{lem}
+  Jeder endlich-dimensionale Unterraum eines normierten Raumes ist vollständig und daher abgeschlossener Unterraum.
+\end{lem}
 
-% TODO: Hölder-Räume
-% TODO: Unendlich differenzierbare Funktionen
-% TODO: Lebesgue-Räume
-% TODO: Sobolev-Räume
-% TODO: Faltungen und Dirac-Folge
-% TODO: Neumann-Reihe
-
-\begin{satz}
-  Sei $X$ ein normierter Raum und $Y \subset X$ ein abgeschlossener echter Teilraum. Für $0 < \Theta < 1$ (falls $X$ Hilbertraum, geht auch $\Theta = 1$) gibt es ein $x_{\Theta} \in X$ mit
-  \[ \|x_0\| = 1 \quad \text{und} \Theta \leq \dist(x_{\Theta}, Y) \leq 1. \]
-\end{satz}
+\begin{lem}
+  Sei $(X, d)$ ein metrischer Raum. Ist $Y \subset X$ und $(Y, d|_{Y \times Y})$ vollständig, so ist $Y$ abgeschlossen in $X$.
+\end{lem}
 
 \begin{satz}
   Für jeden normierten Raum $X$ gilt:
   \[ \overline{B_1(0)} \text{ kompakt } \iff \dim(X) < \infty. \]
 \end{satz}
 
-\begin{definition}
-  Sei $S \subset \R^n$ kompakt, $Y$ ein Banachraum und $A \subset \mathcal{C}^0(S, Y)$. Dann heißt $A$ \emph{gleichgradig stetig}, falls
-  \[ \sup_{f \in A} \left| f(x) - f(y) \right| \xrightarrow{\left| x - y \right| \to 0} 0. \]
-\end{definition}
+% Ausgelassen: Man kann $\overline{B_1(0)}$ durch jede andere abgeschlossene Kugel ersetzen.
 
-\begin{definition}[Arzelà-Ascoli]
-  Sei $S \subset \R^n$ kompakt, $Y$ ein endlichdimensionaler Banachraum und $A \subset \mathcal{C}^0(S, Y)$. Dann gilt
-  \[ A \text{ präkompakt } \iff A \text{ ist beschränkt und gleichgradig stetig. } \]
-\end{definition}
+\begin{satz}
+  Sei $(X, d)$ ein metrischer Raum und $A \subset X$ kompakt. Dann gibt es zu $x \in X$ ein $a \in A$ mit $d(x, a) = \dist(x, A)$.
+\end{satz}
 
-\begin{satz}[Fundamentallemma der Variationsrechnung]
-  Sei $\Omega \subset \R^n$ und $Y$ ein Banachraum. Für $g \in \Leb^1(\Omega, Y)$ sind dann äquivalent:
+\begin{defn}
+  Sei $S \subset \R^n$ kompakt, $Y$ ein Banachraum und $A \subset \mathcal{C}^0(S, Y)$.
+  $A$ heißt \emph{gleichgradig stetig}, falls $\sup_{f \in A} \norm{f(x) - f(y)} \xrightarrow[\norm{x - y} \to 0]{} 0$.
+\end{defn}
+
+\begin{satz}[Arzelà-Ascoli]
+  Sei $S \subset \R^n$ kompakt, $Y$ ein endlich- dimensionaler Banachraum und $A \subset \mathcal{C}^0(S, Y)$. Dann gilt
+  \[ A \text{ präkompakt } \iff A \text{ ist pktw. beschränkt und gleichgradig stetig. } \]
+\end{satz}
+
+% Ausgelassen: Bemerkung: Es gibt eine Erweiterung auf unendlich-dimensionales $Y$ (mit Zusatzbedingung)
+
+% Ausgelassen: Beispiel: Teilmengen von Hölder-Räumen
+
+% Ausgelassen: Etwas allgemeinere Definition von Faltung mit zweistelligem $f$
+
+\begin{defn}
+  Sei $\varphi \in L^1(\lambda_n, \R)$, $f \in L^p(\lambda_n, Y)$ mit $p \in \left[ 1, \infty \right]$. Dann heißt
+  \[ (\varphi * f) : \R^n \to Y, \quad x \mapsto \Int{\R^n}{}{\varphi(x - y) \cdot f(y)}{y} \]
+  \emph{Faltung} von $\varphi$ mit $f$. Es gilt $\varphi * f \in L^p(\lambda_n, Y)$.
+\end{defn}
+
+\begin{satz}
+  Es gilt in diesem Fall die Faltungsabschätzung
+  \[ \norm{\varphi * f}_{L^p(\lambda_n, Y)} \leq \norm{\varphi}_{L^1(\lambda_n, \R)} \cdot \norm{f}_{L^p(\lambda_n, Y)}. \]
+\end{satz}
+
+\begin{satz}
+  $\supp (\varphi * f) \subset \Set{x + y}{x \in \supp(\varphi), y \in \supp(f)}$
+\end{satz}
+
+\begin{lem}
+  Ist $\varphi \in \mathcal{C}_0^\infty(\lambda_n, \R)$, $f \in L^p(\lambda_n, \R)$, so ist $\varphi * f \in \mathcal{C}^\infty(\lambda_n, \R)$ und für einen beliebigen Multi-Index $s$ gilt: $\partial^s (\varphi * f) = (\partial^s \varphi) * f$.
+\end{lem}
+
+% Vielleicht weitere Eigenschaften der Faltung einfügen:
+% * Symmetrie
+% * Assoziativität
+
+\begin{bem}
+  $L^1(\lambda_n, \K)$ ist mit der Faltung eine Banach-Algebra.
+\end{bem}
+
+\begin{defn}
+  Eine Folge $(\varphi_k)_{k \in \N}$ heißt (allgemeine) \emph{Dirac-Folge}, falls
+  \begin{align*}
+    \varphi_k \geq 0, \quad \Int{\R^n}{}{\varphi_k}{\lambda_n} = 1, \quad &\text{für alle $k \in \N$,}\\
+    \Int{\mathclap{\R^n \setminus B_\rho(0)}}{}{\varphi_j}{\lambda_n} \convWith{j} 0 \quad &\text{für alle $\epsilon > 0$.}
+  \end{align*}
+\end{defn}
+
+\begin{satz}
+  Sei $\varphi \in L^1(\lambda^n, \R)$ mit $\varphi \geq 0$ und $\Int{\R^n}{}{\varphi}{\lambda_n} = 1$. Setze
+  \[ \varphi_\epsilon : \R^n \to \R, \quad x \mapsto \epsilon^{-n} \cdot \varphi(\tfrac{x}{\epsilon}). \]
+  Dann ist $(\varphi_\epsilon)_{\epsilon > 0}$ eine allgemeine Dirac-Folge.
+\end{satz}
+
+\begin{defn}
+  Sei $\varphi \in \mathcal{C}^\infty_0(\R^n)$, sodass $\supp(\varphi) \subset B_1(0) \subset \R^n$. Dann heißt die Folge $(\varphi_\epsilon)_{\epsilon > 0}$ aus obigem Satz \emph{Standard-Dirac-Folge}.
+\end{defn}
+
+\begin{lem}
+  Sei $p \in \left[ 1, \infty \right[$. Dann gilt für $f \in L^p(\lambda_n, Y)$:
   \begin{itemize}
-    \item Für alle $\xi \in \mathcal{C}_0^\infty$ gilt $\Int{\Omega}{}{(\xi \cdot g)}{x} = 0$.
-    \item Für alle beschränkten $E \in \Bor(\Omega)$ mit $\overline{E} \subset \Omega$ gilt $\Int{E}{}{g}{x} = 0$.
-    \item Es gilt $g \fue= 0$ in $\Omega$.
+    \item $\norm{f(\cdot + h) - f}_{L^p(\lambda_n)} \xrightarrow{\abs{h} \to 0} 0$ mit $h \in \R^n$.
+    \item Ist $(\varphi_k)_{k \in \N}$ eine Dirac-Folge, so gilt $\varphi_k * f \convWith{k} f$ in $L^p(\lambda_n, Y)$.
+  \end{itemize}
+\end{lem}
+
+\begin{satz}
+  Sei $p \in \left[ 1, \infty \right[$, $\Omega \opn \R^n$ offen und $Y$ ein Banachraum. Dann ist $\mathcal{C}_0^\infty(\Omega, Y)$ dicht in $L^p(\Omega, Y)$.
+\end{satz}
+
+% Ausgelassen: Beweis-Idee: Approximation durch Faltung mit Dirac-Folge
+
+\begin{satz}[M. Riesz]
+  Sei $p \in \left[ 1, \infty \right[$ und $Y$ ein endlich-dimensionaler Banachraum. Dann ist $A {\subset} L^p(\lambda_n, Y)$ präkompakt genau dann, wenn
+  \begin{itemize}
+    \begin{multicols}{2}
+      \item $\sup_{f \in A} \norm{f}_{L^p(\lambda_n, Y)} < \infty$,
+      \item $\sup_{f \in A} \norm{f}_{L^p(\R^n \setminus B_R(0))} \convWith{R} 0$,
+    \end{multicols}
+    \item $\sup_{f \in A} \norm{f(\cdot + h) - f}_{L^p(\lambda_n, Y)} \xrightarrow{\abs{h} \to 0} 0$ mit $h \in \R^n$.
   \end{itemize}
 \end{satz}
+
+% Bemerkung: Der Satz gilt auch für $L^p(\left] 0, 1 \right[, \R)$, bzw. in ähnlicher Form für $L^p(\Omega, Y)$ mit offenem $\Omega \subset \R^n$.
+
+\begin{samepage}
+
+\begin{satz}[Fundamentallemma der Variationsrechnung]
+  Sei $\Omega \subset \R^n$ und $Y$ ein Banachraum. Für $g \in L^1(\Omega, Y)$ sind dann äquivalent:
+  \begin{itemize}
+    % (Phantome, damit Zeilen auf gleicher Höhe stehen)
+    \miniitem{0.6 \linewidth}{Für alle $\xi \in \mathcal{C}_0^\infty$ gilt $\Int{\Omega}{\phantom{\Omega}}{(\xi \cdot g)}{x} = 0$.}
+    \miniitem{0.37 \linewidth}{Es gilt $g \overset{\text{f.ü.}}= \underset{\phantom{\Omega}}0$ in $\Omega$.}
+    \item Für alle beschränkten $E \in \Bor(\Omega)$ mit $\overline{E} \subset \Omega$ gilt $\Int{E}{}{g}{x} = 0$.
+  \end{itemize}
+\end{satz}
+
+\begin{lem}
+  Für $p \in \left[ 1, \infty \right[$ ist $W^{m,p}(\Omega) \cap \mathcal{C}^\infty(\Omega)$ dicht in $W^{m,p}(\Omega)$.
+\end{lem}
+
+% Kapitel 3.
+\section{Lineare Operatoren}
+
+\end{samepage}
+
+\begin{nota}
+  Seien im Folgenden $X$, $Y$ und $Z$ normierte $\K$-VRe.
+\end{nota}
+
+\begin{nota}
+  Für lineare Abb. $T : X \to Y$ und $S : Y \to Z$ schreibe
+  \[ Tx \coloneqq T(x), \quad Sy \coloneqq S(y), \quad ST \coloneqq S \circ T. \]
+\end{nota}
 
 \begin{satz}
   Sei $T : X \to Y$ eine lineare Abbildung zwischen Vektorräumen $X$ und $Y$. Dann sind äquivalent:
   \begin{itemize}
-    \begin{multicols}{3}
-      \item $T$ ist stetig.
-      \item $T$ ist stetig in $0$.
-      \item $\sup_{\|x\| \leq 1} \|Tx\| < \infty$.
-    \end{multicols}
-    \item $\ex{C > 0} \fa{x \in X} \|Tx\| \leq C \cdot \|x\|$.
+    \item $\ex{C > 0} \fa{x \in X} \norm{Tx} \leq C \cdot \norm{x}$.
+  \end{itemize}
+  \vspace{-8pt}
+  \begin{itemize}
+    \miniitem{0.27 \linewidth}{$T$ ist stetig.}
+    \miniitem{0.4 \linewidth}{$T$ ist stetig in $x_0 \in X$.}
+    \miniitem{0.3 \linewidth}{$\sup_{\norm{x} \leq 1} \norm{Tx} < \overset{\phantom{\norm{x}}}\infty$.}
   \end{itemize}
 \end{satz}
 
-\begin{definition}
-  Seien $X, Y$ Vektorräume mit einer Topologie. Dann ist
-  \[ \mathcal{L}(X, Y) = \Set{ T : X \to Y }{ X \text{ ist linear und stetig } } \]
-  die Menge aller \emph{linearen Operatoren} zwischen $X$ und $Y$. Falls die Stetigkeit nicht nur topologisch, sondern bezüglich einer Norm gilt, so redet man von \emph{beschränkten Operatoren}.
-\end{definition}
+\begin{bem}
+  Wenn $X$ endlich-dimensional ist, dann ist jede lineare Abbildung $T : X \to Y$ stetig.
+\end{bem}
+
+\begin{defn}
+  Seien $X, Y$ Vektorräume mit einer Topologie. Dann heißt
+  \[ \LSO(X, Y) \coloneqq \Set{ T : X \to Y }{ X \text{ ist linear und stetig } } \]
+  Raum der \emph{linearen stetigen Operatoren} zw. $X$ und $Y$ mit Norm
+  \[ \norm{T}_{\LSO(X, Y)} \coloneqq \sup_{\norm{x} \leq 1} \norm{Tx}. \]
+  Falls die Stetigkeit nicht nur topologisch, sondern bezüglich einer Norm gilt, so redet man von \emph{linearen beschränkten Operatoren}.
+\end{defn}
+
+\begin{nota}
+  $\LSO(X) \coloneqq \LSO(X, X)$
+\end{nota}
+
+\begin{bem}
+  Die linearen stetigen Operatoren zwischen VR bilden eine Kategorie, das heißt insbesondere, dass die Identitätsabbildung von einem VR in sich selbst sowie die Verkettung zweier linearer stetiger Operatoren wieder linear und stetig ist.
+\end{bem}
 
 \begin{satz}
-  Seien $X \not= \{0\}$, $Y \not= \{0\}$ Banachräume und $T, S \in \mathcal{L}(X, Y)$. Dann gilt: Falls $T$ invertierbar ist und $\|S-T\| < \tfrac{1}{\|T^{-1}\|}$, dann ist auch $S$ invertierbar.
+  \begin{itemize}
+    \item Ist $Y$ ein Banachraum, dann auch $\LSO(X, Y)$.
+    \item $\LSO(X)$ ist eine Banachalgebra (bzgl. $\circ$), falls $X$ Banachraum.
+  \end{itemize}
+\end{satz}
+
+\begin{satz}
+  Für $T \in \LSO(X, Y)$ und $x \in X$ gilt: $\norm{Tx}_Y \leq \norm{T}_{\LSO(X, Y)} \cdot \norm{x}_X$.
+\end{satz}
+
+% Ausgelassen: Beispiel: $A = \Set{ T|_{\overline{B_R(0)}} }{ T \in \LSO(X, Y), \norm{T} \leq M }$
+
+\begin{defn}
+  Der Raum $X' \coloneqq \LSO(X, \K)$ heißt \emph{Dualraum} von $X$. Die Elemente von $X'$ heißen \emph{lineare Funktionale}. Schreibe
+  \[ \langle x', x \rangle_{X' {\times} X} \coloneqq x'(x) \quad \text{für $x' \in X'$ und $x \in X$ (duale Paarung)}. \]
+  % Ausgelassen: Norm ist die von $\LSO(X, \K)$
+\end{defn}
+
+% Ausgelassen: Definition der Menge der kompakte lineare Operatoren (kommt später)
+% Ausgelassen: Definition der Menge der linearen, stetigen Projektionen (kommt später)
+
+\begin{defn}
+  Sei $T \in \LSO(X, Y)$. Dann heißt
+  \begin{align*}
+    \ker T \coloneqq \Set{ x \in X }{ Tx = 0 } \quad &\text{\emph{Kern} von $T$,}\\
+    \im T \coloneqq T(X) \coloneqq \Set{ Tx }{ x \in X } \quad &\text{\emph{Bild} von $T$.}
+  \end{align*}
+\end{defn}
+
+\begin{bem}
+  Aus der Stetigkeit von $T$ folgt, dass $\ker T$ ein abgeschlossener Unterraum von $X$ ist.
+\end{bem}
+
+% Ausgelassen: Vorgriff auf Satz von der inversen Abbildung
+
+\begin{defn}
+  Der \emph{adjungierter Operator} von $T \in \LSO(X, Y)$ ist
+  \[ T' : Y' \to X', \quad y' \mapsto y' \circ T. \]
+\end{defn}
+
+\begin{satz}
+  Es gilt $T' \in \Leb(Y', X')$ und $\norm{T'}_{\LSO(Y', X')} = \norm{T}_{\LSO(X, Y)}$.
+\end{satz}
+
+\begin{bsp}
+  Seien $p, q \in \left[ 1, \infty \right]$ mit $\tfrac{1}{p} + \tfrac{1}{q} = 1$ und $g \in L^q(S, \K)$. Dann ist ein Funktional $T_g \in (L^p(S, \K))'$ definiert durch
+  \[ T_g : L^p(S, \K) \to \K, \quad f \mapsto \Int{S}{}{f \cdot \overline{g}}{\mu}. \]
+\end{bsp}
+
+% Ausgelassen: Beispiel: Funktional auf $(W^{m,p}(S,\K))'$
+% Ausgelassen: Beispiel: Operator, der mit Dirac-Folge faltet
+
+\begin{satz}
+  Sei $X$ Banachraum und $T \in \LSO(X)$ mit $\limsup_{m \to \infty} \,\norm{T^m}^{\tfrac{1}{m}} < 1$. Dann ist $(\Id - T)$ bijektiv und $(\Id - T)^{-1} \in \LSO(X)$ mit
+  \[ (\Id - T)^{-1} = \sum_{n=0}^\infty T^n. \]
+\end{satz}
+
+\begin{bem}
+  Damit die Voraussetzung erfüllt ist, reicht $\norm{T} < 1$.
+\end{bem}
+
+\begin{satz}
+  Seien $X \not= \{0\}$, $Y \not= \{0\}$ Banachräume und $T, S \in \mathcal{L}(X, Y)$. Falls $T$ invertierbar ist mit $\norm{S-T} < \norm{T^{-1}}^{-1}$, dann auch $S$.
 \end{satz}
 
 \begin{bem}
   Die Menge aller invertierbaren Operatoren in $\mathcal{L}(X, Y)$ ist somit eine offene Teilmenge.
 \end{bem}
 
-\begin{definition}
-  Seien $X$ und $Y$ Banachräume über $\K$. Eine lineare Abbildung $T : X \to Y$ heißt \emph{kompakter (linearer) Operator}, falls eine der folgenden äquivalenten Bedingungen erfüllt ist:
-  \begin{itemize}
-    \begin{multicols}{2}
-      \item $\overline{T(B_1(0))}$ ist kompakt.
-      \item $T(B_1(0))$ ist präkompakt.
-    \end{multicols}
-    \item Für alle beschränkten $M \subset X$ ist $T(M) \subset Y$ präkompakt.
-    \item Für jede beschränkte Folge $(x_n)_{n \in \N}$ in $X$ besitzt $(T x_n)_{n \in \N}$ eine in $Y$ konvergente Teilfolge.
-  \end{itemize}
-\end{definition}
+\begin{satz}
+  Sei $f(z) = \sum_{n=0}^\infty a_n z^n$ eine Potenzreihe in $\K$ mit Konvergenz- radius $\rho > 0$ und $X$ ein Banachraum. Dann gilt für $T \in \LSO(X)$:
+  \[ \limsup_{n \to \infty} \norm{T^m}^{\tfrac{1}{m}} < \rho \implies f(T) \coloneqq \sum_{n=0}^\infty a_n T^n \in \LSO(X). \]
+\end{satz}
 
-\begin{definition}
-  Sei $X$ ein Vektorraum über $\K$. Dann ist $X' \coloneqq \mathcal{L}(X, \K)$ der \emph{Dualraum} von $X$. Elemente von $X'$ werden \emph{lineare Funktionale} genannt.
-  % Norm?
-\end{definition}
+\begin{bsp}
+  Die Exponentialfunktion auf einem Banachraum $X$ ist
+  \[ \exp : \LSO(X) \to \LSO(X), \quad T \mapsto \sum_{n=0}^\infty \tfrac{1}{n!} T^n. \]
+  Für $T, S \in \LSO(X)$ mit $TS = ST$ gilt $\exp(T+S) = \exp(T) \circ \exp(S)$.
+\end{bsp}
+
+% Ausgelassen: Beispiel Evolutionsgleichungen
+
+\begin{bsp}
+  Der Logarithmus auf einem Banachraum $X$ ist
+  \[
+    \log : \Set{ T \in \LSO(X) }{ \norm{\Id - T} < 1 } \to \LSO(X), \enspace T \mapsto - \sum_{n=1}^{\infty} \tfrac{1}{n} (\Id - T)^n.
+  \]
+\end{bsp}
+
+\begin{defn}
+  Sei $\Omega \opn \R^n$ und $p \in \left[ 1, \infty \right]$. Dann heißt
+  \begin{align*}
+    L_{\mathrm{loc}}^p(\Omega) \coloneqq \{ f : \Omega \to \K \mid \, &\text{Für alle präkompakten $D \subset \R^n$}\\[-4pt]
+    &\text{mit $D \subset \Omega$ ist $f|_D \in L^p(D)$} \}.
+  \end{align*}
+  Raum der zur $p$-ten Potenz \emph{lokal in $\Omega$ integrierbaren Fktn}.
+\end{defn}
+
+\begin{bem}
+  Analog ist $W_{\mathrm{loc}}^{m,p}$ definiert.
+\end{bem}
+
+\begin{defn}
+  Sei $\Omega \opn \R^n$ und für Multi-Indizes $s$ mit $\abs{s} \leq m$ Funktionen $a_s : \Omega \to \K$ gegeben. Dann definiert
+  \[ (Tf)(x) \coloneqq \sum_{\abs{s} \leq m} a_s(x) \cdot \partial^s f(x) \]
+  einen \emph{linearen Differentialoperator} der Ordnung $m$ mit Koeffizienten $a_s$. Z.\,B. ist $T \in \LSO(\mathcal{C}^m(\Omega), \mathcal{C}^0(\Omega))$.
+\end{defn}
+
+% Kapitel 4.
+\section{Lineare Funktionale}
 
 \begin{satz}[Rieszscher Darstellungssatz]
   Ist $X$ ein Hilbertraum, so ist
   \begin{align*}
-    J : X \to X', \quad x \mapsto y \mapsto (y, x)_X
+    J : X \to X', \quad x \mapsto y \mapsto \langle J(x), y \rangle_{X' {\times} X} \coloneqq \scp{y}{x}_X
   \end{align*}
-  ein isometrischer konjugiert linearer Isomorphismus.
+  ein isometrischer konjugiert lin. Isomorphismus, d\,h. für $x, y \in X$ gilt:
+  \begin{itemize}
+    \miniitem{0.56 \linewidth}{$\fa{\alpha \in \K} J(\alpha x + y) = \overline{\alpha} Jx + Jy$}
+    \miniitem{0.41 \linewidth}{$\norm{Jx}_{X'} = \norm{x}_X$}
+  \end{itemize}
 \end{satz}
+
+% Eigentlich nur der Rieszsche Darstellungssatz in etwas anderen Worten
+\begin{umformulierung}
+  Zu jedem $x' \in X'$ gibt es genau ein $x_0 \in X$ mit
+  \[
+    \fa{x \in X} \langle x', x \rangle_{X' {\times} X} = \scp{x}{x_0}_X
+    \quad \text{und} \quad
+    \norm{x'}_{X'} = \norm{x_0}_{X}.
+  \]
+\end{umformulierung}
+
+% Kommt im Skript hinter dem Satz von Lex-Milgram, als Reformulierung für den Operator $A$.
+\begin{lem}
+  Sei $X$ ein Hilbertraum und $A \in \LSO(X)$ koerziv, d.\,h.
+  \[ \ex{c_0 > 0} \fa{x \in X} \Re \scp{x}{Ax}_X \geq c_0 \cdot \norm{x}_X^2. \]
+  Dann ist $A$ invertierbar in $\LSO(X)$ und $\norm{A^{-1}} \leq \tfrac{1}{c_0}$.
+\end{lem}
 
 \begin{satz}[Lax-Milgram]
   Sei $X$ ein Hilbertraum über $\K$ und $a : X \times X \to \K$ sesquilinear. Es gebe Konstanten $c_0$ und $C_0$ mit $0 < c_0 \leq C_0 < \infty$, sodass für alle $x, y \in X$ gilt:
   \begin{itemize}
-    \item $\left| a(x, y) \right| \leq C_0 \cdot \|x\| \cdot \|y\|$ {\raggedright (Stetigkeit)}
-    \item $Re a(x, x) \geq c_0 \cdot \|x\|^2$ {\raggedright (Koerzivität)}
+    \item $\abs{a(x, y)} \leq C_0 \cdot \norm{x}_X \cdot \norm{y}_X$ \pright{Stetigkeit}
+    \item $\Re a(x, x) \geq c_0 \cdot \norm{x}_X^2$ \pright{Koerzivität}
   \end{itemize}
   Dann existiert genau eine Abbildung $A : X \to X$ mit
-  \[ a(y, x) = (y, Ax) \text{ für alle $x, y \in X$. } \]
-  Außerdem gilt: $A \in \mathcal{L}(X)$ ist ein invertierbarer Operator mit
-  \[ \|A\| \leq C_0 \quad \text{und} \quad \|A^{-1}\| \leq \tfrac{1}{c_0}. \]
+  \[ a(y, x) = \scp{y}{Ax}_X \quad \text{für alle $x, y \in X$.} \]
+  Außerdem gilt: $A \in \LSO(X)$ ist ein invertierbarer Operator mit
+  \[
+    \norm{A}_{\LSO(X)} \leq C_0
+    \quad \text{und} \quad
+    \norm{A^{-1}}_{\LSO(X)} \leq \tfrac{1}{c_0}.
+  \]
 \end{satz}
+
+\begin{kor}
+  Sei $A \in \LSO(X)$ der Operator aus dem Satz von Lex- Milgram und $J_X$ die Isometrie aus dem Rieszschen Darstellungssatz. Zu $x' \in X'$ ist dann $x \coloneqq A^{-1} J^{-1} x'$ die eindeutige Lösung zu
+  \[ a(y, x) = x'(y) \quad \text{für alle $y \in X$.} \]
+  Es gilt die Stabilitätsaussage $\norm{x}_X \leq \tfrac{1}{c_0} \norm{x'}_{X'}$.
+  Falls $a : X {\times} X \to \K$ ein Skalarprodukt ist, so ist $x$ das eindeutige Minimum von
+  \[ E(y) \coloneqq \tfrac{1}{2} a(y, y) - \Re x'(y). \]
+\end{kor}
+
+% Kapitel 4.1. Anwendung auf elliptische Randwertprobleme
+
+% ************
+% *   TODO   *
+% ************
+%
+% Neumann-Randwertproblem, Dirichlet-Randwertproblem, Poincaré-Ungleichung
+
+
+% Kapitel 4.2. Dualraum von $L^p$
+
+\begin{satz}
+  Seien $p \in \left[ 1, \infty \right[$, $p' \in \left] 1, \infty \right]$ mit $\tfrac{1}{p} + \tfrac{1}{p'} = 1$ und $\Omega \subset \R^n$ beschränkt. Dann definiert
+  \[ J : L^p(\Omega) \to (L^{p'}(\Omega))', \quad f \mapsto g \mapsto \Int{\Omega}{}{g \cdot \overline{f}}{\lambda_n} \]
+  einen konjugiert linearen isometrischen Isomorphismus. Für $p=2$ ist $J$ gerade der Isomorphismus aus dem Rieszschen Darstellungssatz.
+\end{satz}
+
+% Ausgelassen: Beweisidee mit Formulierung des Satzes von Radon-Nikodym
+
+
+% Kapitel 4.3. Satz von Hahn-Banach
+
+% Ausgelassen: Formulierung des Lemmas von Zorn
 
 \begin{satz}[Hahn-Banach]
   Sei $X$ ein $\R$-VR und
@@ -666,90 +1067,149 @@
   \[ F(x) = f(x) \text{ für $x \in Y$} \quad \text{und} \quad F(x) \leq p(x) \text{ für } x \in X. \]
 \end{satz}
 
+% Dieser Satz steht so nicht im Skript! Keine Ahnung, wo ich den herhab.
+\iffalse
 \begin{satz}(Hahn-Banach für lineare Funktionale)
   Sei $X$ ein $\R$-VR, $Y \subset X$ ein Unterraum, $p : X \to \R$ linear und $f : Y \to \R$ linear, sodass $f(x) \leq p(x)$ für alle $x \in Y$. Dann existiert eine lineare Abbildung $F : X \to \R$ mit $f = F|_Y \text{ und } F \leq p$.
 \end{satz}
+\fi
 
 % Korollar
+\begin{kor}
+  Sei $(X, \norm{\blank})$ ein normierter $\K$-Vektorraum und $Y$ ein Unterraum. Dann gibt es zu $y \in Y'$ ein $x' \in X'$ mit
+  \[
+    x'|_Y = y'
+    \quad \text{und} \quad
+    \norm{x'}_{X'} = \norm{y}_{Y'}.
+  \]
+\end{kor}
+
 \begin{satz}
-  Sei $(X, \|\cdot\|_X)$ ein normierter $\K$-Vektorraum und $(Y, \|\cdot\|_Y)$ ein Unterraum. Dann gibt es zu $y \in Y'$ ein $x' \in X'$ mit $x'|_Y = y'$ und $\|x'\|_{X'} = \|y'\|_{Y'}$.
+  Sei $Y$ abgeschlossener Unterraum des normierten Raumes $X$ und $x_0 \in X \setminus Y$. Dann gibt es ein $x' \in X'$ mit
+  \[
+    x'|_Y = 0, \quad
+    \norm{x'}_{X'} = 1
+    \quad \text{und} \quad
+    \langle x', x_0 \rangle = \dist(x_0, Y).
+  \]
 \end{satz}
 
 \begin{satz}
-  Sei $Y$ abgeschlossener Unterraum des normierten Raumes $X$ und $x_0 \in X \setminus Y$. Dann gibt es ein $x' \in X'$ mit $x'|_Y = 0$, $\|x'\|_{X'} = 1$, $\langle x', x_0 \rangle = \dist(x_0, Y)$.
+  Es gibt dann auch ein $x' \in X'$ mit
+  \[
+    x'|_Y = 0, \quad
+    \norm{x'}_{X'} = (\dist(x_0, Y))^{-1}
+    \quad \text{und} \quad
+    \langle x', x_0 \rangle = 1.
+  \]
 \end{satz}
 
 \begin{bem}
-  Dann gibt es auch ein $x' \in X'$ mit $x'|_Y = 0$,
-  \[ \|x'\|_{X'} = (\dist(x_0, Y))^{-1} \quad \text{und} \quad \langle x', x_0 \rangle = 1. \]
+  Der Satz kann als Verallgemeinerung des Projektions- satzes für Hilberträume im linearen Fall aufgefasst werden: Ist $X$ Hilbertraum mit abgeschlossenem Unterraum $Y$, so definiere
+  \[ \langle x', x \rangle_{X' {\times} X} \coloneqq \scp{x}{\tfrac{x_0 - Px_0}{\norm{x_0 - Px_0}_X}}_X, \]
+  wobei $P$ die orthogonale Projektion auf $Y$ sei. Dann gilt:
+  \[
+    x'|_Y = 0, \quad
+    %\langle x', x_0 \rangle_{X' {\times} X} = \langle x', x_0 - Px_0 \rangle = \norm{x_0 - Px_0}_X
+    \langle x', x_0 \rangle_{X' {\times} X} = \norm{x_0 - Px_0}_X
+    \quad \text{und} \quad
+    \langle x', x \rangle \leq \norm{x}_X.
+  \]
+  %Daher hat $x'$ die Eigenschaft wie im Satz. 
 \end{bem}
 
-% Bemerkung: Der Satz kann als Verallgemeinerung des Projektionssatzes für Hilberträume im linearen Fall aufgefasst werden: Ist $X$ Hilbertraum, so definiere $\langle x', x \rangle_{X' \times X} = (x | \frac{x_0 - Px_0}{\|x_0 - Px_0\|_X})_X$, wobei $P$ orthogonale Projektion auf $Y$ sei. Dann ist $x' = 0$ auf $Y$ und daher $\langle x', x_0 \rangle_{X' \times X} = \langle x', x_0 - Px_0 \rangle = \| x_0 - Px_0 \|_X$. Außerdem ist $\langle x', x \rangle \leq \|x\|_X$. Daher hat $x'$ die Eigenschaft wie im Satz.
+\begin{samepage}
 
-% Korollar
-\begin{satz}
-  Seien $X$ normierter Raum und $x_0 \in X$. Dann gilt
+\begin{kor}
+  Sei $X$ ein normierter Raum und $x_0 \in X$. Dann gilt
   \begin{itemize}
-    \item  Ist $x_0 \not= 0$, so gibt es $x_0' \in X'$ mit $\|x_0'\|_{X'} = 1$ und $\langle x_0', x_0 \rangle_{X' \times X} = \|x_0\|_X$.
-    \item Ist $\langle x', x_0 \rangle_{X' \times X} = 0$ für alle $x' \in X'$, so ist $x_0 = 0$.
-    \item Durch $Tx' = \langle x', x_0 \rangle_{X' \times X}$ für $x' \in X'$ ist ein $T \in \mathcal{L}(X', \K) = X''$, dem Bidualraum, definiert mit $\|T\| = \|x_0\|_X$.
+    %\item  Ist $x_0 \not= 0$, so gibt es $x_0' \in X'$ mit $\norm{x_0'}_{X'} = 1$ und $\langle x_0', x_0 \rangle_{X' {\times} X} = \norm{x_0}_X$.
+    \item  Ist $x_0 \not= 0$, so ex. $x_0' \in X'$ mit $\norm{x_0'} {=} 1$ und $\langle x_0', x_0 \rangle_{X' {\times} X} {=} \norm{x_0}_X$.
+    \item Ist $\langle x', x_0 \rangle_{X' {\times} X} = 0$ für alle $x' \in X'$, so ist $x_0 = 0$.
+    \item Durch $Tx' \coloneqq \langle x', x_0 \rangle_{X' {\times} X}$ für $x' \in X'$ ist $T \in \mathcal{L}(X', \K) = X''$, dem Bidualraum, definiert mit $\norm{T}_{X''} = \norm{x_0}_X$.
   \end{itemize}
-\end{satz}
+\end{kor}
 
+% Kapitel 5.
+\section{Prinzip der gleichmäßigen Beschränktheit}
 
-% 5. Prinzip der gleichmäßigen Beschränktheit
+\end{samepage}
 
 \begin{satz}[Baire'scher Kategoriensatz]
-  Es sei $X \not= \emptyset$ ein vollständiger metrischer Raum und $X = \bigcup_{k \in \N} A_k$ mit abgeschlossenen Mengen $A_k \subset X$. Dann gibt es ein $k_0 \in \N$ mit $\mathrm{int}(A_{k_0}) \not= \emptyset$.
+  Es sei $X \not= \emptyset$ ein vollständiger metrischer Raum und $(A_k)_{k \in \N}$ eine Folge abgeschlossener Mengen $A_k \cls X$, sodass $X = \bigcup_{\mathclap{k \in \N}} A_k$. Dann gibt es $k_0 \in \N$ mit $\inte(A_{k_0}) \not= \emptyset$.
 \end{satz}
 
 \begin{kor}
-  Jede Basis eines $\infty$-dimensionalen Banachraumes ist überabzählbar.
+  Jede Basis eines $\infty$-dim. Banachraumes ist überabzählb.
 \end{kor}
 
 \begin{satz}[Prinzip der gleichmäßigen Beschränktheit]
-  Es sei $X$ ein nichtleerer vollständiger metrischer Raum und $Y$ ein normierter Raum. Gegeben sei eine Menge von Funktionen $F \subset \mathcal{C}^0(X, Y)$ mit $\fa{x \in X} \sup_{f \in F} \|f(x)\|_Y < \infty$. Dann gibt es ein $x_0 \in X$ und ein $\epsilon > 0$, sodass $\sup_{B_\epsilon(x_0)} \sup_{f \in F} \|f(x)\|_Y < \infty$.
+  Es sei $X \not= \emptyset$ ein vollständiger metrischer Raum, $Y$ ein normierter Raum und $F \subset \mathcal{C}^0(X, Y)$ eine Menge von Funktionen. Dann gilt:
+  \[
+    \fa{x {\in} X} \! \sup_{f \in F} \norm{f(x)}_Y {<} \infty
+    \implies
+    \ex{x_0 {\in} X, \epsilon {>} 0} \!\!\!\!\! \sup_{x {\in} B_\epsilon(x_0)} \sup_{f \in F} \norm{f(x)} {<} \infty.
+  \]
 \end{satz}
 
 \begin{satz}[Banach-Steinhaus]
-  Es sei $X$ ein Banachraum und $Y$ ein normierter Raum, $\mathcal{T} \subset \Leb(X, Y)$ mit $\fa{x \in X} \sup_{T \in \mathcal{T}} \|Tx\|_Y < \infty$. DAnn ist $\mathcal{T}$ eine beschränkte Menge in $\Leb(X, Y)$, d.\,h. $\sup_{T \in \mathcal{T}} \|T\|_{\mathcal{L}(X, Y)}$.
+  Es sei $X$ ein Banachraum, $Y$ ein normierter Raum und $\mathcal{T} \subset \LSO(X, Y)$. Dann gilt:
+  \[
+    \fa{x \in X} \sup_{T \in \mathcal{T}} \norm{Tx}_Y < \infty
+    \enspace \implies \enspace
+    \sup_{T \in \mathcal{T}} \norm{T}_{\LSO(X, Y)} < \infty.
+  \]
 \end{satz}
 
-\begin{definition}
-  Seien $X$ und $Y$ topologische Räume, so heißt eine Abbildung $f : X \to Y$ \emph{offen}, falls für alle offenen $U \opn X$ das Bild $f(U) \opn Y$ offen ist.
-\end{definition}
+\begin{defn}
+  Seien $X$ und $Y$ topologische Räume, so heißt $f : X \to Y$ \emph{offen}, falls für alle offenen $U \opn X$ das Bild $f(U) \subset Y$ offen ist.
+\end{defn}
 
 \begin{bem}
   Ist $f$ bijektiv, so ist $f$ genau dann offen, wenn $f^{-1}$ stetig ist. Sind $X, Y$ normierte Räume und ist $T : X \to Y$ linear, so gilt: $T$ ist offen $\iff$ $\ex{\delta > 0} B_{\delta}(0) \subset T(B_1(0))$.
 \end{bem}
 
 \begin{satz}[von der offenen Abbildung]
-  Seien $X, Y$ Banachräume und $T \in \mathcal{L}(X, Y)$. Dann ist $T$ genau dann surjektiv, wenn $T$ offen ist.
+  Seien $X, Y$ Banachräume und $T \in \LSO(X, Y)$. Dann ist $T$ genau dann surjektiv, wenn $T$ offen ist.
 \end{satz}
 
+\begin{samepage}
+
 \begin{satz}[von der inversen Abbildung]
-  Seien $X, Y$ Banachräume und $T \in \mathcal{L}(X, Y)$ bijektiv, so ist $T^{-1}$ stetig, also $T^{-1} \in \mathcal{L}(Y, X)$.
+  Seien $X, Y$ Banachräume und $T \in \LSO(X, Y)$ bijektiv, so ist $T^{-1}$ stetig, also $T^{-1} \in \LSO(Y, X)$.
 \end{satz}
 
 \begin{satz}[vom abgeschlossenen Graphen]
-  Seien $X, Y$ Banachräume und $T : X \to Y$ linear. Dann ist $\mathrm{Graph}(T) = \Set{ (x, Tx) }{ x \in X }$ genau dann abgeschlossen, wenn $T$ stetig ist. Dabei ist $\mathrm{Graph}(T) \subset X \times Y$ mit der \emph{Graphennorm} $\|(x,y)\|_{X \times Y} = \|x\|_X + \|y\|_Y$.
+  Seien $X, Y$ Banachräume und $T : X \to Y$ linear. Dann ist $\Graph(T) = \Set{ (x, Tx) }{ x \in X }$ genau dann abgeschlossen, wenn $T$ stetig ist. Dabei ist $\Graph(T) \subset X \times Y$ mit der \emph{Graphennorm} $\norm{(x,y)}_{X \times Y} = \norm{x}_X + \norm{y}_Y$.
 \end{satz}
+
+
+% Kapitel 6.
+\section{Schwache Konvergenz}
+
+\end{samepage}
 
 \begin{definition}
   Sei $X$ ein Banachraum.
   \begin{itemize}
     \item Eine Folge $(x_k)_{k \in \N}$ in $X$ \emph{konvergiert schwach} gegen $x \in X$ (notiert $x_k \convWeaklyWith{k} x$), falls für alle $x' \in X'$ gilt:
-    \[ \langle x', x_k \rangle_{X' \times X} \convWith{k} \langle x', x \rangle_{X' \times X} \]
+    \[ \langle x', x_k \rangle_{X' {\times} X} \convWith{k} \langle x', x \rangle_{X' {\times} X} \]
     \item Eine Folge $(x'_k)_{k \in \N}$ in $X'$ \emph{konvergiert schwach*} gegen $x' \in X'$ (notiert $x'_k \convWeaklyStarWith{k} x'$), falls für alle $x \in X$ gilt:
-    \[ \langle x'_k, x \rangle_{X' \times X} \convWith{k} \langle x', x \rangle_{X' \times X} \]
+    \[ \langle x'_k, x \rangle_{X' {\times} X} \convWith{k} \langle x', x \rangle_{X' {\times} X} \]
     \item Analog sind \emph{schwache} und \emph{schwache* Cauchyfolgen} definiert.
     \item Eine Menge $M \subset X$ (bzw. $M \subset X'$) heißt \emph{schwach folgenkompakt} bzw. \emph{schwach* folgenkompakt}, falls jede Folge in der Menge $M$ eine schwach (bzw. schwach*) konvergente Teilfolge besitzt deren Grenzwert wieder in $M$ liegt.
   \end{itemize}
 \end{definition}
 
 \begin{bem}
-  Der schwache bzw. schwache* Grenzwert einer Folge ist eindeutig bestimmt. Starke Konvergenz impliziert schwache Konvergenz.
+  Der schwache bzw. schwache* Grenzwert einer Folge ist eindeutig. Aus starker Konvergenz folgt schwache Konvergenz.
 \end{bem}
+
+\begin{satz}
+  Sei $X$ ein normierter $\K$-Vektorraum. Dann ist durch
+  \[ J_X : X \to X'', \quad x \mapsto x' \mapsto \langle Jx , x' \rangle_{X'' {\times} X'} \coloneqq \langle x', x \rangle_{X' {\times} X} \]
+  eine isometrische Abbildung $J_X \in \LSO(X, X'')$ definiert.
+\end{satz}
 
 \begin{satz}
   Es gilt für $x, x_k \in X$, $x', x'_k \in X'$:
@@ -761,30 +1221,40 @@
 
 \begin{lem}
   \begin{itemize}
-    \item Aus $x'_k \convWeaklyStarWith{k} x'$ in $X'$ folgt $\|x'\|_{X'} \leq \liminf_{k \to \infty} \|x'_k\|_{X'}$, aus $x_k \convWeaklyWith{k} x$ in $X$ folgt $\|x\|_X \leq \liminf_{k \to \infty} \|x_k\|_X$.
+    \item Aus $x'_k \convWeaklyStarWith{k} x'$ in $X'$ folgt $\norm{x'}_{X'} \leq \liminf_{k \to \infty} \|x'_k\|_{X'}$, aus $x_k \convWeaklyWith{k} x$ in $X$ folgt $\|x\|_X \leq \liminf_{k \to \infty} \norm{x_k}_X$.
     \item Schwach bzw. schwach* konvergente Folgen sind beschränkt.
     \item Aus $x_k \convWith{k} x$ in $X$ und $x'_k \convWeaklyStarWith{k} x'$ in $X'$ folgt $\langle x'_k, x_k \rangle_{X' \times X} \convWith{k} \langle x', x \rangle_{X' \times X}$. Dasselbe folgt mit $x_k \convWeaklyWith{k} x$ in $X$ und $x'_k \convWith{k} x'$ in $X'$.
   \end{itemize}
 \end{lem}
 
 \begin{acht}
-  In der letzten Behauptung müssen wir vorraussetzen, dass mindestens eine Folge stark konvergiert. Für beidesmal schwache/schwache* Konvergenz ist die Aussage i.\,A. falsch.
+  In der letzten Behauptung müssen wir voraussetzen, dass mindestens eine Folge stark konvergiert. Für beidesmal schwache/schwache* Konvergenz ist die Aussage i.\,A. falsch.
 \end{acht}
 
-\iffalse
 \begin{bsp}
-  \begin{itemize}
-    \item Sei $1 \leq p < \infty$ und $\tfrac{1}{p} + \tfrac{1}{p'} = 1$ und $\omega \subset \R^n$ beschränkt. Dann gilt für $f, f_k \in L^p(\Omega)$:
-    \[ f_k \convWeaklyWith{k} f \text{ in } L^p(\Omega) \iff \fa{g \in L^p(\Omega)} \IntO{f_k \cdot \overline{g}}{x} \convWith{k} \IntO{f \cdot \overline{g}}{x} \]
-    \item Sei $\Omega \subset \R^n$ boffen und beschränkt und $1 \leq p \leq \infty$, $m \in \N_{> 0}$. Für $u, u_k \in W^{m,p}(\Omega)$ gilt dann:
-    \[ u_k \convWeaklyWith{k} u \text{ in } W^{m,p}(\Omega) \iff \fa{s, \abs{s} \leq m} \partial^s u_k \convWeaklyWith{k} \partial^s u \text{ in } L^p(\Omega) \]
-  \end{itemize}
+  Sei $p \in \left[ 1, \infty \right[$, $p' \in \left] 1, \infty \right]$ mit $\tfrac{1}{p} + \tfrac{1}{p'} = 1$ und $\Omega \subset \R^n$ beschränkt. Dann gilt für $f, f_k \in L^p(\Omega)$ (jeweils mit $k {\to} \infty$):
+  \[ f_k \xrightharpoonup{\phantom{A}} f \text{ in } L^p(\Omega) \iff \fa{g \in L^{p'}(\Omega)} \IntO{f_k \cdot \overline{g}}{x} \xrightarrow{\phantom{A}} \IntO{f \cdot \overline{g}}{x} \]
 \end{bsp}
-\fi
+
+\begin{bsp}
+  Sei $\Omega \subset \R^n$ offen und beschränkt und $p \in \left[ 1, \infty \right]$, $m \in \N_{> 0}$. Für $u, u_k \in W^{m,p}(\Omega)$ gilt dann (jeweils mit $k {\to} \infty$):
+  \[ u_k \xrightharpoonup{\phantom{A}} u \text{ in } W^{m,p}(\Omega) \iff \fa{s, \abs{s} \leq m} \partial^s u_k \xrightharpoonup{\phantom{A}} \partial^s u \text{ in } L^p(\Omega) \]
+\end{bsp}
 
 \begin{satz}[Banach-Alaoglu]
   Sei $X$ ein separabler Banachraum. Dann ist die abgeschl. Einheitskugel $\overline{B_1(0)} \subset X'$ schwach* folgenkompakt.
 \end{satz}
+
+
+
+
+
+
+
+
+
+
+
 
 \begin{bsp}
   Sei $\Omega \subset \R^n$ beschränkt und offen. Dann ist $L^1(\Omega)$ separabel (Approximation durch Treppenfunktionen und der Satz besagt: Ist $(f_k)_{k \in \N}$ in $L^{\infty}(\Omega)$ beschränkt, so gibt es eine Teilfolge $(f_{k_l})_{l \in \N}$ und ein $f \in L^\infty(\Omega)$, sodass
@@ -887,7 +1357,8 @@
 \end{bsp}
 
 
-% Kapitel 7. Endlich-dimensionale Approximation
+% Kapitel 7.
+\section{Endlich-dimensionale Approximation}
 
 % Für numerische Berechnungen ist die Approximation von Elementen oder Unterräumen unendlich-dimensionaler Räume mit endlich-dimensionaler Information von großer Relevanz. Eine abzählbare Approximation durch endlich-dimensionale Unterräume ist nur für separable Räume möglich:
 
@@ -1051,6 +1522,19 @@ Man rechnet leicht nach, dass zu einer Folge $(P_n)_{n \in \N}$ mit (P1), (P2) m
 
 Die Unterräume $E_n = \mathrm{im}(Q_n)$ erfüllen dann (3) aus dem ersten Lemma und (2) mit $X_n = E_0 \oplus ... \oplus E_n$.
 
+% Wohin hiermit?
+\begin{definition}
+  Seien $X$ und $Y$ Banachräume über $\K$. Eine lineare Abbildung $T : X \to Y$ heißt \emph{kompakter (linearer) Operator}, falls eine der folgenden äquivalenten Bedingungen erfüllt ist:
+  \begin{itemize}
+    \begin{multicols}{2}
+      \item $\overline{T(B_1(0))}$ ist kompakt.
+      \item $T(B_1(0))$ ist präkompakt.
+    \end{multicols}
+    \item Für alle beschränkten $M \subset X$ ist $T(M) \subset Y$ präkompakt.
+    \item Für jede beschränkte Folge $(x_n)_{n \in \N}$ in $X$ besitzt $(T x_n)_{n \in \N}$ eine in $Y$ konvergente Teilfolge.
+  \end{itemize}
+\end{definition}
+
 % Beispiele
 \begin{itemize}
   \item Ist $X$ Hilbertraum und $X = \overline{\bigcup_{n \in \N} X_n}$ mit $\mathrm{dim} X_n < \infty$, $X_n \subset X_{n+1}$, so sei $P_n$ die orthogonale Projektion auf $X_n$ und mit $X_{n+1} = X_n \perp E_n$ sei $Q_n$ die orthogonale Projektion auf $E_n$. Ist speziell $X_n = \mathrm{span} \Set{ e_i }{ 0 \leq i \leq n }$ mit einer ONB $(e_i)_{i \in \N}$, so ist
@@ -1064,7 +1548,8 @@ Die Unterräume $E_n = \mathrm{im}(Q_n)$ erfüllen dann (3) aus dem ersten Lemma
 \end{itemize}
 
 
-% Abschnitt 8. Kompakte Operatoren
+% Kapitel 8.
+\section{Kompakte Operatoren}
 
 Für normierte $\K$-Vektorräume $X, Y$ hatten wir im Abschnitt 3 die Menge der kompakten linearen Operatoren von $X$ nach $Y$
 
@@ -1129,8 +1614,6 @@ Wir hatten aber schon festgestellt, dass wir, wenn $Y$ vollständig, "`$\overlin
 Offenbar ist $\lambda \in \rho(T)$ genau dann, $\lambda \Id - T : X \to X$ bijektiv ist. Nach dem Satz von der inversen Abbildung ist dies äquivalent zur Existenz von
 \[ R(\lambda, T) = (\lambda \Id - T)^{-1} \in \mathcal{L}(X), \]
 der sogenannten \emph{Resolvente} von $T$ in $\lambda$. Als Funktion von $\lambda$ heißt sie auch \emph{Resolventenfunktion}. Weiterhin ist $\lambda \in \sigma_p(T)$ offenbar äquivalent zu $\ex{x \not= 0} Tx = \lambda x$, dann heißt $\lambda$ \emph{Eigenwert} und $x$ \emph{Eigenvektor} (oder \emph{Eigenfunktion}). Der Unterraum $\ker(\Id \lambda - T)$ ist der \emph{Eigenraum} von $T$ zum Eigenwert $\lambda$. Er ist $T$-invariant.
-
-% TODO: Satz von der Neumannschen Reihe
 
 \begin{satz}
   $\rho(T)$ ist offen und $\lambda \mapsto R(\lambda, T)$ ist eine komplex-analytische Abbildung von $\rho(T)$ nach $\mathcal{L}(X)$. Es gilt für $\lambda \in \rho(T)$: $\norm{R(\lambda, T)}^{-1} \leq \dist(\lambda, \rho(T))$
