@@ -60,13 +60,14 @@
 \newtheorem*{sprechweise}{Sprechweise}
 \newtheorem*{beob}{Beobachtung}
 \newtheorem*{beobachtung}{Beobachtung}
-\newtheorem*{umformulierung}{Umformulierung}
 \newtheorem*{antwort}{Antwort}
 \newtheorem*{anmerkung}{Anmerkung}
 \newtheorem*{nomenklatur}{Nomenklatur}
 
 \theoremstyle{remark}
 \newtheorem*{bem}{Bemerkung}
+\newtheorem*{beweisidee}{Beweisidee}
+\newtheorem*{umformulierung}{Umformulierung}
 
 % Listenstil
 \usepackage{paralist} % Für Inline-Listen
@@ -132,6 +133,7 @@
 % Schöne Fürall- und Existenzquantoren
 \newcommand{\fa}[1]{\forall \, {#1} \,:\,}
 \newcommand{\ex}[1]{\exists \, {#1} \,:\,}
+\newcommand{\exu}[1]{\exists! \, {#1} \,:\,} % Eindeutige Existenz
 
 % Platzhalter
 \newcommand{\blank}{\text{--}}
