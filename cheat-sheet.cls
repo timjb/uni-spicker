@@ -37,7 +37,7 @@
 
 \newtheorem*{nota}{Notation}
 \newtheorem*{definition}{Definition}
-\newtheorem*{defn}{Defn} % Kurzform!
+\newtheorem*{defn}{Def} % Kurzform!
 \newtheorem*{bsp}{Beispiel}
 \newtheorem*{bspe}{Beispiele}
 \newtheorem*{satz}{Satz}
