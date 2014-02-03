@@ -36,7 +36,6 @@
 \theoremstyle{definition}
 
 \newtheorem*{nota}{Notation}
-\newtheorem*{definition}{Definition}
 \newtheorem*{defn}{Def} % Kurzform!
 \newtheorem*{bsp}{Beispiel}
 \newtheorem*{bspe}{Beispiele}

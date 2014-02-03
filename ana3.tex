@@ -75,27 +75,27 @@
   Sei im Folgenden $\Omega$ eine Menge.
 \end{nota}
 
-\begin{definition}
+\begin{defn}
   $\Ring \subset \PSO$ heißt \emph{Ring}, wenn für alle $A, B \in \Ring$ gilt:
   \begin{itemize}
     \miniitem{0.13 \linewidth}{$\emptyset \in \Ring$}
     \miniitem{0.85 \linewidth}{Abgeschlossenheit unter Differenzen: $A \setminus B \in \Ring$}
     \item Abgeschlossenheit unter endlichen Vereinigungen: $A \cup B \in \Ring$
   \end{itemize}
-\end{definition}
+\end{defn}
 
-\begin{definition}
+\begin{defn}
   $\Alg \subset \PSO$ heißt \emph{Algebra}, wenn für alle $A, B \in \Alg$ gilt:
   \begin{itemize}
     \miniitem{0.13 \linewidth}{$\emptyset \in \Alg$}
     \miniitem{0.85 \linewidth}{Abgeschlossenheit unter Komplementen: $A^c = \Omega \setminus A \in \Alg$}
     \item Abgeschlossenheit unter endlichen Vereinigungen: $A \cup B \in \Alg$
   \end{itemize}
-\end{definition}
+\end{defn}
 
-\begin{definition}
+\begin{defn}
   Eine Algebra $\Alg \subset \PSO)$ heißt \emph{$\sigma$-Algebra}, wenn $\Alg$ unter abzählbaren Vereinigungen abgeschlossen ist, d.\,h. für jede Folge $(A_n)_{n \in \N}$ in $\Alg$ gilt $\bigcup_{n \in \N} A_n \in \Alg$.
-\end{definition}
+\end{defn}
 
 \begin{bem}
   \begin{itemize}
@@ -117,7 +117,7 @@
   Sei $(A_i)_{i \in I}$ eine Familie von Ringen / Algebren / $\sigma$-Algebren über $\Omega$. Dann ist auch $\cap_{i \in I} A_i$ ein Ring / eine Algebra / eine $\sigma$-Algebra über $\Omega$.
 \end{satz}
 
-\begin{definition}
+\begin{defn}
   Sei $E \subset \PSO$. Setze
   \begin{align*}
     \mathcal{R}(E) &\coloneqq \Set{ \Ring \subset \PSO }{ E \subset \Ring, \Ring \text{ Ring} } \text{ und} \\
@@ -125,32 +125,32 @@
   \end{align*}
   Dann heißen $\quad\Ring(E) \coloneqq \enspace \bigcap_{\mathclap{\Ring \in \mathcal{R}(E)}} \enspace \Ring, \quad \Alg(E)  \coloneqq \enspace \bigcap_{\mathclap{\Alg  \in \mathcal{A}(E)}} \enspace \Alg$\\
   von $E$ \emph{erzeugter Ring} bzw. von $E$ \emph{erzeugte $\sigma$-Algebra}.
-\end{definition}
+\end{defn}
 
-\begin{definition}
+\begin{defn}
   Ist $(\Omega, \mathcal{O})$ ein topologischer Raum, dann heißt $\Bor = \Bor(\Omega, \mathcal{O}) \coloneqq \Alg(\mathcal{O})$ \emph{Borelsche $\sigma$-Algebra} von $(\Omega, \mathcal{O})$.
-\end{definition}
+\end{defn}
 
 \begin{bem}
   Die Borelsche $\sigma$-Algebra $\Bor(\R)$ wird auch erzeugt von $\Set{I \subset \R }{ I \text{ Intervall } }$. Dabei spielt es keine Rolle, ob man nur geschlossene, nur offene, nur nach einer Seite halboffene Intervalle oder gar nur Intervalle obiger Art mit Endpunkten in $\Q$ zulässt.
 \end{bem}
 
-\begin{definition}
+\begin{defn}
   Eine Funktion $\mu : \Ring \to [0, \infty]$ heißt \emph{Inhalt} auf $\Ring$, falls
   \begin{itemize}
     \miniitem{0.2 \linewidth}{$\mu(\emptyset) = 0$}
     \miniitem{0.75 \linewidth}{$\mu(A \sqcup B) = \mu(A) + \mu(B)$ für disjunkte $A, B \in \Ring$.}
   \end{itemize}
-\end{definition}
+\end{defn}
 
-\begin{definition}
+\begin{defn}
   Ein Inhalt $\mu : \Ring \to [0, \infty]$ heißt \emph{Prämaß} auf $\Ring$, wenn $\mu$ $\sigma$-additiv ist, d.\,h. wenn für jede Folge $(A_n)_{n \in \N}$ paarweise disjunkter Elemente von $\Ring$ mit $\bigsqcup_{n \in \N} A_n \in \Ring$ gilt:
   \[ \mu\left(\bigsqcup_{n \in \N} A_n\right) = \sum_{n=0}^\infty \mu(A_n) \]
-\end{definition}
+\end{defn}
 
-\begin{definition}
+\begin{defn}
   Ein \emph{Maß} ist ein Prämaß auf einer $\sigma$-Algebra.
-\end{definition}
+\end{defn}
 
 \begin{satz}
   Für einen Inhalt $\mu$ auf $\Ring$ gilt für alle $A, B \in \Ring$:
@@ -163,26 +163,26 @@
   \end{itemize}
 \end{satz}
 
-\begin{definition}
+\begin{defn}
   Ein Inhalt / Maß auf einem Ring~$\Ring$ / einer $\sigma$-Algebra~$\Alg$ heißt \emph{endlich}, falls $\mu(A) < \infty$ für alle $A \in \Ring$ bzw. $A \in \Alg$.
-\end{definition}
+\end{defn}
 
 \begin{satz}
   Ein Maß auf einer $\sigma$-Algebra~$\Alg$ ist $\sigma$-subadditiv, d.\,h. es gilt
   \[ \mu(\bigcup_{n \in \N} A_n) \leq \sum_{n=0}^\infty \mu(A_n) \quad \text{für alle Folgen $(A_n)_{n \in \N}$ in $\Alg$}. \]
 \end{satz}
 
-\begin{definition}
+\begin{defn}
   Sei $A \subset \Omega$. Dann heißt die Abbildung
   \[ \chi_A = \ind_A : \Omega \to \R, \quad \omega \mapsto \abs{\Set{ \star }{ \omega \in A }} = \begin{cases} 1, & \text{ falls } \omega \in A \\ 0, & \text{ falls } \omega \not\in A \end{cases} \]
   \emph{Indikatorfunktion} oder \emph{charakteristische Funktion} von $A$.
-\end{definition}
+\end{defn}
 
-\begin{definition}
+\begin{defn}
   Eine Folge $(A_n)_{n \in \N}$ \emph{konvergiert} gegen $A \subset \Omega$, notiert $\lim_{n \to \infty} A_n = A$, wenn $(\ind_{A_n})_{n \in \N}$ punktweise gegen $\ind_A$ konvergiert.
-\end{definition}
+\end{defn}
 
-\begin{definition}
+\begin{defn}
   Für eine Folge $(A_n)_{n \in \N}$ in $\PS(\Omega)$ heißen
   \begin{align*}
     \limsup_{n \to \infty} A_n &\coloneqq \Set{ \omega \in \Omega }{ \omega \text{ liegt in unendlich vielen } A_n } \\
@@ -193,7 +193,7 @@
     \limsup_{n \to \infty} A_n = \bigcap_{n = 0}^\infty \bigcup_{k = n}^\infty A_k, \quad
     \liminf_{n \to \infty} A_n = \bigcup_{n = 0}^\infty \bigcap_{k = n}^\infty A_k.
   \]
-\end{definition}
+\end{defn}
 
 % TODO: Lemmas zum Limes Inferior, Limes Superior
 
@@ -201,13 +201,13 @@
   Es gilt $\lim_{\mathclap{n \to \infty}} A_n = A \iff \liminf_{n \to \infty} A_n = \limsup_{n \to \infty} A_n = A$.
 \end{satz}
 
-\begin{definition}
+\begin{defn}
   Eine Folge $(A_n)_{n \in \N}$ in $\PSO$ heißt
   \begin{itemize}
     \item \emph{monoton wachsend}, wenn für alle $n \in \N$ gilt $A_n \subset A_{n+1}$,
     \item \emph{monoton fallend}, wenn für alle $n \in \N$ gilt $A_n \supset A_{n+1}$.
   \end{itemize}
-\end{definition}
+\end{defn}
 
 \begin{satz}
   Sei $(A_n)_{n \in \N}$ eine Folge in $\PSO$.
@@ -242,36 +242,36 @@
   \end{itemize}
 \end{satz}
 
-\begin{definition}
+\begin{defn}
   Ein Inhalt auf einem Ring $\Ring \subset \PSO$ heißt \emph{$\sigma$-endlich}, wenn gilt: Es gibt eine Folge $(S_n)_{n \in \N}$ in $\Ring$, sodass
   \[
       \Omega = \bigcup_{n \in \N} S_n
       \quad \text{und} \quad
       \mu(S_n) < \infty \text{ für alle } n \in \N.
   \]
-\end{definition}
+\end{defn}
 
-\begin{definition}
+\begin{defn}
   Eine Funktion $f : \Omega \to \overline{\R} = \R \cup \{ \pm \infty \}$ wird \emph{numerische Funktion} genannt.
-\end{definition}
+\end{defn}
 
-\begin{definition}
+\begin{defn}
   Eine numerische Funktion $\mu^* : \PSO \to \overline{\R}$ heißt \emph{äußeres Maß} auf $\Omega$, wenn gilt:
   \begin{itemize}
     \miniitem{0.3 \linewidth}{$\mu^*(\emptyset) = 0$}
     \miniitem{0.68 \linewidth}{$A \subset B \implies \mu^*(A) \leq \mu^*(B)$ \pright{Monotonie}}
     \item Für eine Folge $(A_n)_{n \in \N}$ in $\mathcal{P}(\Omega)$ gilt $\mu^*\left(\bigcup_{n \in \N} A_n \right) \leq \sum_{n = 0}^\infty \mu^*(A_n)$. %\hfill ($\sigma$-Subadditivität)
   \end{itemize}
-\end{definition}
+\end{defn}
 
 \begin{bem}
   Wegen $\mu^*(\emptyset) = 0$ und der Monotonie nimmt ein äußeres Maß nur Werte in $[0, \infty]$ an.
 \end{bem}
 
-\begin{definition}
+\begin{defn}
   Eine Teilmenge $A \subset \Omega$ heißt \emph{$\mu^*$-messbar}, falls
   \[ \mu^*(Q) = \mu^*(Q \cap A) + \mu^*(Q \setminus A) \quad \text{für alle } Q \subset \Omega. \]
-\end{definition}
+\end{defn}
 
 \begin{satz}[Carathéodory]
   Für ein äußeres Maß $\mu^* : \PSO \to [0, \infty]$ ist
@@ -312,54 +312,54 @@
 
 \end{samepage}
 
-\begin{definition}
+\begin{defn}
   Für $a, b \in \R^n$ heißen
   \[
     \left]a, b\right[\,\coloneqq \Set{ x \in \R^n }{ a \lhd x \lhd b }, \quad
     \mu(\left]a, b\right[) \coloneqq \prod_{j = 1}^{n} (b_j - a_j)
   \]
   \emph{Elementarquader} und \emph{Elementarinhalt}. Sei im Folgenden $\mathcal{E}$ die Menge aller Elementarquader.
-\end{definition}
+\end{defn}
 
 \begin{satz}
   Für alle $A \in \Ring(\mathcal{E})$ gibt es paarweise disjunkte Elementarquader $Q_1, ..., Q_p \in \mathcal{E}$ sodass $A = Q_1 \sqcup ... \sqcup Q_p$.
 \end{satz}
 
-\begin{definition}
+\begin{defn}
   Für $A \in \Ring(\mathcal{E})$ setze $\mu(A) \coloneqq \textstyle\sum_{i = 1}^p \mu(Q_i)$, wenn $A = Q_1 \sqcup ... \sqcup Q_p$ für paarweise disjunkte $Q_1, ..., Q_p$.
-\end{definition}
+\end{defn}
 
 \begin{satz}
   $\mu$ definiert ein Prämaß auf $\Ring(\mathcal{E})$, genannt das \emph{Lebesgue-Borel-Prämaß} auf $\R^n$.
 \end{satz}
 
-\begin{definition}
+\begin{defn}
   Die eindeutige (da $\mu$ $\sigma$-endlich) Fortsetzung $\tilde{\mu}$ von $\mu$ auf $\Alg(\mathcal{E}) = \Bor(\R^n)$ wird \emph{Lebesgue-Borel-Maß} genannt.
-\end{definition}
+\end{defn}
 
 \begin{bem}
   Nur das Lebesgue-Borel-Maß ist ein Maß auf $\Bor(\R^n)$, welches jedem Elementarquader seinen Elementarinhalt zuordnet.
 \end{bem}
 
-\begin{definition}
+\begin{defn}
   Sei $\mu$ ein Maß auf einer $\sigma$-Algebra $\Alg \subset \PSO$. Eine Menge $N \subset \Omega$ heißt ($\mu$)-\emph{Nullmenge}, wenn es $A \in \Alg$ gibt mit $N \subset A$ und $\mu(A) = 0$. Die Menge aller Nullmengen ist $\mathfrak{N}_\mu \subset \PSO$.
-\end{definition}
+\end{defn}
 
-\begin{definition}
+\begin{defn}
   Sei $\mu$ das Lebesgue- Borel-Maß auf $\Bor(\R^n)$. Dann heißt die von $\Bor(\R^n)$ und den ent\-sprech\-en\-den Nullmengen erzeugte $\sigma$-Algebra $\tilde{\Alg}_\mu$ \emph{Lebesguesche $\sigma$-Algebra}, notiert $\mathfrak{L}(\R^n)$, und das fortgesetzte Maß \emph{Lebesgue-Maß}.
-\end{definition}
+\end{defn}
 
-\begin{definition}
+\begin{defn}
   Sei $\Omega$ eine Menge und $\Alg \subset \PSO$ eine $\sigma$-Algebra auf $\Omega$, sowie ggf. $\mu$ ein Maß auf $\Alg$. Dann heißt
   \begin{itemize}
     \item das Tupel $(\Omega, \Alg)$ \emph{messbarer Raum},
     \item das Tripel $(\Omega, \Alg, \mu)$ \emph{Maßraum}.
   \end{itemize}
-\end{definition}
+\end{defn}
 
-\begin{definition}
+\begin{defn}
   Seien $(\Omega, \Alg)$ und $(\Omega', \Alg')$ zwei messbare Räume. Eine Abbildung $f : \Omega \to \Omega'$ heißt \emph{messbar} oder genauer $(\Alg, \Alg')$-messbar, wenn für alle $A' \in \Omega'$ gilt $f^{-1}(A') \in \Omega$ oder, kürzer, $f^{-1}(\Alg') \subset \Alg$.
-\end{definition}
+\end{defn}
 
 \begin{bem}
   Die messbaren Räume bilden eine Kategorie mit messbaren Abbildungen als Morphismen, d.\,h. die Identitäts- abbildung von einem messbaren Raum zu sich selbst ist messbar und die Verkettung zweier messbarer Abbildungen ist messbar.
@@ -410,10 +410,10 @@
   Sei $(\Omega, \Alg, \mu)$ ein Maßraum, $(\Omega', \Alg')$ und $(\Omega'', \Alg'')$ messbare Räume und $f : \Omega' \to \Omega''$, $g : \Omega \to \Omega'$ messbare Abbildungen, dann gilt $(f \circ g)_* \mu = f_*(g_* \mu)$.
 \end{bem}
 
-\begin{definition}
+\begin{defn}
   Die $\sigma$-Algebra der Borelmengen auf $\ER = \R \cup \{ \pm \infty \}$ ist
   \[ \Bor(\ER) = \Set{ A, A \cup \{ +\infty \}, A \cup \{ -\infty \}, A \cup \{ \pm \infty \} }{ A \in \Bor(\R) }. \]
-\end{definition}
+\end{defn}
 
 \begin{satz}
   $\Bor(\ER) = \Alg(\Set{ [a, \infty] }{ a \in \R })$
@@ -483,14 +483,14 @@
   Seien $f_1, ..., f_n : (\Omega, \Alg) \to (\ER, \overline{\Bor})$ messbare numerische Fktn., dann sind auch $\max(f_1, ..., f_n)$ und $\min(f_1, ..., f_n)$ messbar.
 \end{satz}
 
-\begin{definition}
+\begin{defn}
   Für $f : \Omega \to \ER$ heißen die Funktionen
   \begin{itemize}
     \item $\left|f\right| \coloneqq \max(f, -f) : \Omega \to [0, \infty]$ \emph{Betrag} von $f$
     \item $f^+ \coloneqq \,\,\,\, \max(f, 0) : \Omega \to [0, \infty]$ \emph{Positivteil} von $f$
     \item $f^- \coloneqq -\min(f, 0) : \Omega \to [0, \infty]$ \emph{Negativteil} von $f$
   \end{itemize}
-\end{definition}
+\end{defn}
 
 \begin{bem}
   $f = f^+ - f^-$ und $\left|f\right| = f^+ + f^-$
@@ -502,7 +502,7 @@
 
 \subsection{Das Lebesguesche Integral}
 
-\begin{definition}
+\begin{defn}
   Eine Funktion $f : (\Omega, \Alg) \to (\R, \Bor)$ heißt \emph{einfache Funktion} oder \emph{Elementarfunktion} auf $(\Omega, \Alg)$, wenn gilt:
   \begin{multicols}{3}
     \begin{itemize}
@@ -512,12 +512,12 @@
     \end{itemize}
   \end{multicols}
   Die Menge aller einfachen Funktionen auf $(\Omega, \Alg)$ ist $\E(\Omega, \Alg)$.
-\end{definition}
+\end{defn}
 
-\begin{definition}
+\begin{defn}
   Sei $f \in \E(\Omega, \Alg)$ und $\Omega = A_1 \sqcup ... \sqcup A_k$ eine disjunkte Vereinigung von Mengen mit $A_j \in \Alg$ für alle $j = 1, ..., k$, sodass $f(A_j) = \{ y_j \}$, dann heißt die Darstellung
   \[ f = \sum_{j=1}^k y_j \cdot \ind_{A_j} \quad \text{\emph{kanonische Darstellung}.} \]
-\end{definition}
+\end{defn}
 
 \begin{bem}
   Die kanonische Darstellung ist nicht eindeutig.
@@ -536,10 +536,10 @@
   \end{multicols}
 \end{satz}
 
-\begin{definition}
+\begin{defn}
   Sei $f \in \E(\Omega, \Alg)$ und $\textstyle f = \sum_{j=1}^k y_j \ind_{A_j}$ eine kanonische Darstellung von $f$. Sei ferner $\mu$ ein Maß auf $\Alg$. Dann heißt die Größe
   \[ \IntOmu{f} \coloneqq \sum_{j=1}^k y_j \mu(A_j) \quad \text{\emph{Lebesgue-Integral} von $f$ bzgl. $\mu$.} \]
-\end{definition}
+\end{defn}
 
 \begin{bem}
   Obige Größe ist wohldefiniert, d.\,h. unabhängig von der kanonischen Darstellung.
@@ -562,14 +562,14 @@
   \[ \sup_{n \in \N} \IntOmu{f_n} = \sup_{n \in \N} \IntOmu{g_n}. \]
 \end{kor}
 
-\begin{definition}
+\begin{defn}
   Sei $\overline{\E}(\Omega, \Alg)$ die Menge aller Funktionen $f : \Omega \to \ER$, die Grenzfunktionen (pktw. Konvergenz) monoton wachsender Funktionenfolgen in $\E(\Omega, \Alg)$ sind.
-\end{definition}
+\end{defn}
 
-\begin{definition}
+\begin{defn}
   Für eine Funktion $f \in \overline{\E}(\Omega, \Alg)$ (d.\,h. es existiert eine Folge $(g_n)_{n \in \N}$ in $\E(\Omega, \Alg)$ mit $f = \sup_{n \in \N} g_n$) und ein Maß $\mu$ auf $\Alg$ heißt
   \[ \IntOmu{f} \coloneqq \sup_{n \in \N} \IntOmu{g_n} \quad \text{\emph{Lebesgue-Integral} von $f$ bzgl. $\mu$.} \]
-\end{definition}
+\end{defn}
 
 \begin{satz}
   $\overline{\E}(\Omega, \Alg) = \Set{ f : (\Omega, \Alg) \to (\ER, \Bor) }{ f \text{ messbar und } f \geq 0 }$
@@ -588,12 +588,12 @@
   Die Aussage ist für monoton fallende Fktn. i.\,A. falsch.
 \end{bem}
 
-\begin{definition}
+\begin{defn}
   Eine messbare Funktion $f : (\Omega, \Alg) \to (\ER, \overline{\Bor})$ heißt \emph{integrierbar} bzw. $\mu$-integrierbar (im Sinne von Lebesgue), falls
   \[ \IntOmu{f^+} < \infty \quad \text{und} \quad \IntOmu{f^-} < \infty. \]
   In diesem Fall definieren wir das \emph{Lebesgue-Integral} von $f$ als
   \[ \IntOmu{f} \coloneqq \IntOmu{f^+} - \IntOmu{f^-}. \]
-\end{definition}
+\end{defn}
 
 \begin{nota}
   $\Leb^1(\Omega, \Alg, \mu) = \Leb^1(\mu)$ bezeichnet die Menge der $\mu$-integrierbaren Funktionen auf $\Omega$.
@@ -623,31 +623,31 @@
   \end{itemize}
 \end{satz}
 
-\begin{definition}
+\begin{defn}
   Sei $(\Omega, \Alg, \mu)$ ein Maßraum, $A \in \Alg$ und $f \in \overline{\E}(\Omega, \Alg, \mu)$ oder $f \in \Leb^1(\Omega, \Alg, \mu)$. Dann ist das \emph{$\mu$-Integral von $f$ über $A$}
   \[ \Int{A}{}{f}{\mu} = \IntOmu{(\ind_A \cdot f)}. \]
-\end{definition}
+\end{defn}
 
-\begin{definition}
+\begin{defn}
   Ein Maßraum $(\Omega, \Alg, \mu)$ heißt \emph{vollständig}, wenn jede Nullmenge $N \subset \Omega$ in $\Alg$ liegt.
-\end{definition}
+\end{defn}
 
-\begin{definition}
+\begin{defn}
   Sei $(\Omega, \Alg, \mu)$ ein Maßraum. Setze
   \begin{align*}
     \tilde{\mathfrak{N}}_\mu &\coloneqq \Set{N \subset \Omega}{N \text{ ist $\mu$-Nullmenge }}, \\
     \tilde{\Alg}_\mu &\coloneqq \Set{ A \cup N }{ A \in \Alg, \, N \in \tilde{\mathfrak{N}}_\mu }.
   \end{align*}
   Dann ist $\tilde{\Alg}_\mu$ eine $\sigma$-Algebra und mit $\tilde{\mu}(A \cup N) \coloneqq \mu(A)$ ist $(\Omega, \tilde{\Alg}_\mu, \tilde{\mu})$ ein Maßraum, genannt \emph{Vervollständigung} von $(\Omega, \Alg, \mu)$.
-\end{definition}
+\end{defn}
 
-\begin{definition}
+\begin{defn}
   Sei $(\Omega, \Alg, \mu)$ ein Maßraum und $E(\omega)$ eine Aussage für alle $\omega \in \Omega$. Man sagt, $E$ ist \emph{($\mu$)-fast-überall wahr}, wenn $\Set{\omega \in \Omega}{\neg E(\omega)}$ eine Nullmenge ist.
 
   Zwei Funktionen $f, g : \Omega \to X$ heißen \emph{($\mu$-)fast-überall gleich}, notiert $f \overset{\text{f.ü.}}= g$, wenn $\Set{\omega \in \Omega}{f(\omega) \not= g(\omega)}$ eine Nullmenge ist.
 
   Eine Funktion $f : \Omega \to \ER$ heißt \emph{($\mu$)-fast-überall} endlich, wenn $\Set{\omega \in \Omega}{ f(\omega) = \infty}$ eine Nullmenge ist.
-\end{definition}
+\end{defn}
 
 \begin{bem}
   Das Cantorsche Diskontinuum ist eine Menge $C \subset [0, 1]$, $C \in \Bor$, welche die bemerkenswerte Eigenschaft hat, dass sie gleichzeitig überabzählbar ist und Maß $0$ besitzt. Da außerdem $\Bor \cong \R$ gilt, folgt $\PS(C) \cong \PS(\R) \not\cong \R \cong \Bor$. Somit gibt es eine Nullmenge $N \subset C$, die nicht in $\Bor$ liegt. Es folgt:
@@ -657,9 +657,9 @@
   Der Maßraum $(\R, \Bor, \mu)$ ist nicht vollständig.
 \end{satz}
 
-\begin{definition}
+\begin{defn}
   Sei $(\R^n, \Bor_L^n, \lambda)$ die Vervollständigung von $(\R^n, \Bor^n, \mu$, dann heißt $\Bor_L$ die \emph{Lebesguesche $\sigma$-Algebra} und $\lambda$ das \emph{Lebesgue-Maß} auf $\R^n$ (analog: $(\ER, \overline{\Bor}, \lambda)$).
-\end{definition}
+\end{defn}
 
 \begin{satz}
   Sei $f \in \overline{\E}(\Omega, \Alg, \mu)$, dann gilt $\IntOmu{f} = 0 \iff f \overset{\text{f.ü.}}= 0$.
@@ -743,27 +743,27 @@
 
 \end{samepage}
 
-\begin{definition}
+\begin{defn}
   Eine \emph{Zerlegung} eines Intervalls $[a, b]$ ist eine geordnete endliche Teilmenge $\{ a = x_0 < x_1 < ... < x_k = b\} \subset [a, b]$.
-\end{definition}
+\end{defn}
 
 \begin{nota}
   Die Menge aller Zerlegungen von $[a, b]$ ist $\mathcal{Z}([a, b])$.
 \end{nota}
 
-\begin{definition}
+\begin{defn}
   Die \emph{Feinheit} einer Zerlegung $\{ x_0 < ... < x_k \} \in \mathcal{Z}([a, b])$ ist
   \[ \abs{Z} \coloneqq \max \Set{ x_j - x_{j-1} }{ j \in \{ 1, ..., n \} }. \]
-\end{definition}
+\end{defn}
 
-\begin{definition}
+\begin{defn}
   Für eine beschränkte Funktion $f : [a, b] \to \R$ und eine Zerlegung $Z = \{ a_0, ..., a_n \} \in \mathcal{Z}([a, b])$ bezeichnen
   \begin{align*}
     O(f, Z) &\coloneqq \sum_{j=1}^n (\sup \Set{ f(x) }{ x \in [x_{j-1}, x_j] })(x_j - x_{j-1}),\\
     U(f, Z) &\coloneqq \sum_{j=1}^n (\inf \Set{ f(x) }{ x \in [x_{j-1}, x_j] })(x_j - x_{j-1})
   \end{align*}
   die \emph{(Darbouxschen) Ober- und Untersummen} von $f$ bzgl. $Z$.
-\end{definition}
+\end{defn}
 
 \begin{nota}
   \begin{align*}\\[-24pt]
@@ -772,10 +772,10 @@
   \end{align*}
 \end{nota}
 
-\begin{definition}
+\begin{defn}
   Eine beschränkte Funktion $f : [a, b] \to \R$ heißt \emph{Riemann-integrierbar}, wenn $O_*(f) = U^*(f)$. In diesem Fall heißt
   \[ \Int{a}{b}{f(x)}{x} \coloneqq O_*(f) = U^*(f) \quad \text{\emph{Riemann-Integral} von $f$.} \]
-\end{definition}
+\end{defn}
 
 \begin{nota}
   Sei $(Z_k)_{k \in \N}$ eine Folge in $\mathcal{Z}([a, b])$ mit $Z_k = \{ a_0^k, a_1^k, ..., a^k_{n_k} \}$. Für eine beschränkte Funktion $f : [a, b] \to \R$ definieren wir $f^k, f_k, f^*, f_* : [a, b] \to \R$ durch
@@ -848,13 +848,13 @@
   \end{align*}
 \end{nota}
 
-\begin{definition}
+\begin{defn}
   Sei $A \subset \R$, $A$ heißt
   \begin{itemize}
     \item \emph{$G_{\delta}$-Menge}, wenn gilt: $A = \cap_{n \in \N}\,O_n, \, O_n \opn \R\ \forall\,n \in \N$
     \item \emph{$F_{\sigma}$-Menge}, wenn gilt: $A = \cup_{n \in \N}\,F_n, \,\, F_n \, \cls \R\ \forall\,n \in \N$
   \end{itemize}
-\end{definition}
+\end{defn}
 
 \begin{bem}
   $A $ ist $G_\delta$-Menge $\iff$ $A^C$ ist $F_\sigma$-Menge.
@@ -868,9 +868,9 @@
   Es gibt keine Abbildung $f : \R \to \R$ mit $D(f) = \R \setminus \Q$.
 \end{kor}
 
-\begin{definition}
+\begin{defn}
   Ein Maß $\mu$ auf $\Bor(\R^d)$ heißt \emph{translationsinvariant}, wenn für jedes $v \in \R^d$ gilt $(T_v)_* \mu = \mu$, wobei $T_v : \R^d \to \R^d$, $x \mapsto x + v$ die Translation um den Vektor $v$ bezeichnet.
-\end{definition}
+\end{defn}
 
 \begin{nota}
   Bezeichne mit $\mu_{LB}$ das Borel-Lebesgue-Maß auf $\R^d$.
@@ -941,9 +941,9 @@
 %   \Pi_j : \Omega = \Omega_1 \times ... \times \Omega_n \to \Omega_j
 %           (\omega_1, ..., \omega_n) \mapsto \omega_j
 
-\begin{definition}
+\begin{defn}
   Seien $(\Omega_j, \Alg_j, \mu_j)$ Maßräume für $j = 1, ..., n$. Die kleinste $\sigma$-Algebra $\Alg$ auf $\sigma$, sodass alle $\Pi_j, j = 1, ..., n$ $(\Alg, \Alg_j)$-messbar sind, heißt \emph{Produkt} der $\sigma$-Algebren $\Alg_1, ..., \Alg_n$, notiert $\Alg =: \Alg_1 \otimes ... \otimes \Alg_n$.
-\end{definition}
+\end{defn}
 
 \begin{satz}
   Sei $\mathcal{E}_j$ Erzeugendensystem von $\Alg_j, j = 1, ..., n$, d.\,h. $\Alg(\mathcal{E}_j) = \Alg_j$. Annahme: Für alle $j \in \{ 1, ..., n \}$ gibt es eine monoton gegen $\Omega_j$ wachsende Folge $(E^j_k)_{k \in \N}$ in $\mathcal{E}_j$. Dann ist
@@ -967,14 +967,14 @@
   \[ \nu(E_1 \times ... \times E_n) = \mu_1(E_1) \cdot ... \cdot \mu_n(E_n). \]
 \end{satz}
 
-\begin{definition}
+\begin{defn}
   Sei $\Omega$ eine Menge. Eine Teilmenge $\Dyn \subset \Omega$ heißt \emph{Dynkin-System}, wenn gilt:
   \begin{itemize}
     \miniitem{0.2 \linewidth}{$\Omega \in \Dyn$}
     \miniitem{0.7 \linewidth}{$D \in \Dyn \implies D^C = \Omega \setminus D \in \Dyn$}
     \item $(D_n)_{n \in \N}$ Folge pw. disjunkter Mengen in $\Dyn$, dann: $\bigcup_{n \in \N} D_n \in \Dyn$
   \end{itemize}
-\end{definition}
+\end{defn}
 
 \iffalse
 \begin{aufg}
@@ -1061,7 +1061,7 @@
 
 \subsection{Alternierende Multilinearformen}
 
-\begin{definition}
+\begin{defn}
   Eine \emph{alternierende $k$-Form} auf $V$ ist eine Abb.
   \[ \omega : \underbrace{V \times ... \times V}_{\text{$k$-fach}} \to \R \quad \text{mit} \]
   \begin{itemize}
@@ -1069,7 +1069,7 @@
     \[ \omega(v_1, ..., v_{l-1}, -, v_{l+1}, ..., v_k) \in \mathrm{Hom}(V, \R). \]
     \item Falls $v_j = v_l$ für $j < l$, dann ist $\omega(v_1, ..., v_j, ..., v_l, ..., v_k) = 0$.
   \end{itemize}
-\end{definition}
+\end{defn}
 
 \begin{bsp}
   Die Determinante ist eine alternierende $n$-Form auf $\R^n$.
@@ -1100,7 +1100,7 @@
 
 % Dach-Produkt (wedge-Produkt)
 
-\begin{definition}
+\begin{defn}
   Für $\phi_1, ..., \phi_k \in \Lambda^1 V^* = V^*$ ist das \emph{Dachprodukt} $\phi_1 \wedge ... \wedge \phi_k \in \Lambda^k V^*$ definiert durch
   \begin{align*}
     \phi_1 \wedge ... \wedge \phi_k &: V \times ... \times V \to \R \\
@@ -1111,7 +1111,7 @@
       \phi_k(v_1) & \phi_k(v_2) & ... & \phi_k(v_k)
     \end{pmatrix}
   \end{align*}
-\end{definition}
+\end{defn}
 
 \begin{eign}
   \begin{itemize}
@@ -1180,7 +1180,7 @@
   Für $U_1, U_2 \opn \R^n$, $u \in U_1 \cap U_2$ gilt $T_u U_1 = T_u U_2$.
 \end{bem}
 
-\begin{definition}
+\begin{defn}
   \begin{itemize}
     \item \emph{Tangentialbündel} an $U \opn \R^n$: $TU = \bigsqcup_{\mathclap{u \in U}} T_u U$
     \item \emph{Dualraum} von $T_u U$: $T_u^* = \Set{ \alpha : T_u U \to \R }{ \alpha \text{ linear } }$
@@ -1188,7 +1188,7 @@
     \item \emph{Einsform} (Differentialform von Grad 1, Pfaffsche Form) auf $U$:
 \[ \omega : U \to T^*U \quad \text{mit} \quad \omega(u) \in T_u^*U \]
   \end{itemize}
-\end{definition}
+\end{defn}
 
 
 \begin{bsp}
@@ -1211,18 +1211,18 @@
   Für jede Einsform $\omega$ auf $U$ gibt es $n$ Abbildungen $a_j : U \to \R$, $j = 1, ..., n$, sodass $\omega = \sum_{j=1}^n a_j \d x_j$.
 \end{beobachtung}
 
-\begin{definition}
+\begin{defn}
   Eine Einsform $\omega = \sum_{j=1}^n a_j \d x_j$ heißt stetig/diff'bar/$\mathcal{C}^k$, wenn für alle $j \in \{ 1, ..., n \}$: $a_j$ ist stetig/total diff'bar/$\mathcal{C}^k$.
-\end{definition}
+\end{defn}
 \fi
 
 % Differentialformen höherer Ordnung
 
-\begin{definition}
+\begin{defn}
   Eine \emph{$k$-Form} auf $U$, $k \in \N^*$, ist eine Abbildung
   \[ \omega : U \to \bigsqcup_{\mathclap{u \in U}} \Lambda^k T_u^* U \quad \text{mit} \quad \omega(u) \in \Lambda^k T_u^* U \text{ für alle } u \in U. \]
   Eine \emph{$0$-Form} ist eine Abbildung $\omega : U \to \R$.
-\end{definition}
+\end{defn}
 
 % $\{ \d x_{j_1}(u) \wedge ... \wedge \d x_{j_k}(u) \mid 1 \leq j_1 < ... < j_k \leq n \}$
 % Basis von $\Lambda^k T_u^* U$
@@ -1232,9 +1232,9 @@
   \[ \omega = \sum_{\mathclap{j_1 < ... < j_k}} f_{j_1 \cdots j_k} \d x_{j_1} \wedge ... \wedge \d x_{j_k}. \]
 \end{beobachtung}
 
-\begin{definition}
+\begin{defn}
   Die $k$-Form $\omega$ auf $U$ heißt stetig/diff'bar/$\mathcal{C}^k$, wenn alle $\binom{n}{k}$ Abbildungen $f_{j_1 \cdots j_k} : U \to \R$ stetig/total diff'bar/$\mathcal{C}^k$ sind.
-\end{definition}
+\end{defn}
 
 \begin{beobachtung}
   \begin{itemize}
@@ -1245,10 +1245,10 @@
   \end{itemize}
 \end{beobachtung}
 
-\begin{definition}
+\begin{defn}
   Sei $\omega = \sum_{\mathclap{j_1 < ... < j_k}} f_{j_1 \cdots j_k} (\d x_{j_1} \wedge ... \wedge \d x_{j_k})$ eine diff'bare $k$-Form auf $U$, dann heißt die $(k{+}1)$-Form
   \[ \d \omega \coloneqq \sum_{\mathclap{j_1 < ... < j_k}} \d f_{j_1 \cdots j_k} \wedge \d x_{j_1} \wedge ... \wedge \d x_{j_k} \quad \text{\emph{äußere Ableitung}}. \]
-\end{definition}
+\end{defn}
 
 % Herleitung:
 \iffalse
@@ -1285,11 +1285,11 @@
   \end{itemize}
 \end{satz}
 
-\begin{definition}
+\begin{defn}
   Sei $U \opn \R^n$, $\widetilde{U} \opn \R^m$, $\phi : \widetilde{U} \to U$ total diff'bar und $\omega$ eine $k$-Form auf $U$. Die $k$-Form $\phi^* \omega$ auf $\widetilde{U}$, welche durch
   \[ (\phi^* \omega (\widetilde{u})) (X_1, ..., X_k) = (\omega (\phi(\widetilde{u})))(D_{\widetilde{u}} \phi (X_1), ..., D_{\widetilde{u}} \phi (X_k))  \]
   für alle $\widetilde{u} \in \widetilde{U}$, $X_1, ..., X_k \in T_{\widetilde{u}} \widetilde{U}$ definiert ist, heißt \emph{Rücktransport} von $\omega$ über $\phi$.
-\end{definition}
+\end{defn}
 
 \begin{anmerkung}
   Sei $\phi : \widetilde{U} \to U$ total diff'bar. Sei $\widetilde{u} \in \widetilde{U}$, dann ist
@@ -1312,12 +1312,12 @@
   \end{itemize}
 \end{satz}
 
-\begin{definition}
+\begin{defn}
   \begin{itemize}
     \item Für $k \geq 1$ heißt eine $k$-Form auf $U$ \emph{exakt}, wenn es eine diff'bare $(k{-}1)$-Form $\eta$ auf $U$ gibt, sodass $\omega = \d \eta$.
     \item Eine diff'bare $k$-Form $\omega$ auf $U$ heißt \emph{geschlossen}, wenn $\d \omega = 0$.
   \end{itemize}
-\end{definition}
+\end{defn}
 
 \begin{beobachtung}
   Jede diff'bare exakte $k$-Form auf $U$ ist geschlossen.
@@ -1325,9 +1325,9 @@
 
 % Frage: Gilt auch die Umkehrung?
 
-\begin{definition}
+\begin{defn}
   Eine Teilmenge $U \subset \R^n$ heißt \emph{sternförmig}, falls es einen Punkt $u_0 \in U$ gibt, sodass für alle anderen Punkte $u \in U$ die Verbindungsstrecke von $u_0$ nach $u$ in $U$ liegt.
-\end{definition}
+\end{defn}
 
 \begin{lem}[Poincaré]
   Ist $U$ sternförmig, dann ist jede geschlossene, stetig diff'bare $k$-Form mit $k \geq 1$ auch exakt.
@@ -1418,10 +1418,10 @@ Sei $U$ sternförmig (oder allgemeiner zusammenziehbar). Zu zeigen:
 
 % 3.2. Integration von Differentialformen
 
-\begin{definition}
+\begin{defn}
   Sei $U \opn \R^n$, $\omega = f \d x_1 \wedge ... \wedge \d x_n$ eine $n$-Form, wobei $f : U \to \R$ Lebesgue-integrierbar. Sei $C \subset U$ eine Borel-Menge, dann
   \[ \Int{C}{}{\omega}{} \coloneqq \Int{C}{}{f}{\lambda_n} \in \R \]
-\end{definition}
+\end{defn}
 
 % Übungsaufgabe:
 
@@ -1466,40 +1466,40 @@ Es gilt:
 
 % Kapitel 2.4. Integration von Differentialformen auf Untermannigfaltigkeiten
 
-\begin{definition}
+\begin{defn}
   Eine $m$-dimensionale \emph{Untermannigfaltigkeit} (UMF) des $\R^n$ ist eine Teilmenge $M \subset \R^n$ mit:
   \begin{itemize}
     \item $\fa{x \in M} \ex{\widetilde{U} \opn \R^n, x \in \widetilde{U}} \ex{\widetilde{V} \opn \R^n} \ex{\widetilde{\phi} : \widetilde{U} \to \widetilde{V}}$ Diffeomorphismus, sodass gilt:
     \[ \widetilde{\phi}(M \cap \widetilde{U}) = \widetilde{V} \cap \underbrace{\Set{ (x_1, ..., x_m, 0, ..., 0) }{ x_1, ..., x_m \in \R }}_{\R^m \subset \R^m \oplus \R^{n-m} \cong \R^n} \]
   \end{itemize}
-\end{definition}
+\end{defn}
 
 \begin{nomenklatur}
   $\widetilde{\phi} : \widetilde{U} \to \widetilde{V}$ heißt \emph{Untermannigfaltigkeit-Karte}, notiert $(\widetilde{\phi}, \widetilde{U})$
 \end{nomenklatur}
 
-\begin{definition}
+\begin{defn}
   $\widetilde{\Atlas} = \Set{ \underbrace{(\widetilde{\phi}_i, \widetilde{U}_i)}_{\text{UMF-Karten von $M$}} }{ i \in I }$ mit $\underbrace{M \subset \bigcup_{i \in I} \widetilde{U}_i}_{\text{Überdeckungseigenschaft}}$ heißt \emph{UMF-Atlas} von $M$.
-\end{definition}
+\end{defn}
 
 \begin{beob}
   $\widetilde{\phi} : \widetilde{U} \to \widetilde{V}$ ist UMF-Karte von $M$, dann $M \cup \widetilde{U} \opn M$ (bzgl. Relativtopologie), $\widetilde{V} \cap \R^m \opn \R^m$
 \end{beob}
 
-\begin{definition}
+\begin{defn}
   Der Homöomorphismus $\phi \coloneqq \widetilde{\phi}|_{U} : U \to V$ heißt \emph{Karte von $M$}.
-\end{definition}
+\end{defn}
 
-\begin{definition}
+\begin{defn}
   Ist $\widetilde{A} = \Set{ (\widetilde{\phi}_i, \widetilde{U}_i) }{ i \in I }$ ein UMF-Atlas, dann heißt $\Atlas = \Set{ (\phi_i, U_i) }{ i \in I }$ \emph{Atlas von $M$}.
-\end{definition}
+\end{defn}
 
-\begin{definition}
+\begin{defn}
   Ein Atlas $\Atlas = \Set{ (\phi_i, U_i) }{ i \in I }$ heißt \emph{orientiert}, wenn für alle $i, j \in I$ die Abbildung $\phi_j \circ \phi_i^{-1} |_{\phi_i(U_i \cap U_j)} : \phi(U_i \cap U_j) \to \phi_j(U_i \cap U_j)$ orientierungserhaltend sind, wenn $U_i \cap U_j \not= \emptyset$.
   % Definition mit Funktionaldeterminante?
-\end{definition}
+\end{defn}
 
-\begin{definition}
+\begin{defn}
   \begin{itemize}
     \item Eine UMF $M$ von $\R^n$ heißt \emph{orientierbar}, wenn $M$ einen orientierten Atlas besitzt.
     \item Zwei orientierte Atlanten $\Atlas_1, \Atlas_2$ von $M$ heißen gleichorientiert, wenn $\Atlas = \Atlas_1 \cup \Atlas_2$ ein orientierter Atlas ist.
@@ -1507,7 +1507,7 @@ Es gilt:
     \item $M$ orientierbare UMF, $[A]$ Orientierung von $M$, dann heißt $(M, [\Atlas])$ \emph{orientierte UMF}.
     \item $\Atlas'$ orientierter Atlas von $(M, [\Atlas])$ heißt \emph{positiv orientiert}, wenn $\Atlas' \in [\Atlas]$.
   \end{itemize}
-\end{definition}
+\end{defn}
 
 Gegeben $(M, [\Atlas])$ orientierte UMF, $\Atlas = \Set{ (\phi_i, U_i) }{ i \in I }$ ein positiv orientierter Atlas,
 \[ \tau : \R^m \to \R^m, \quad (x_1, ..., x_m) \mapsto (x_1, ..., x_{m-1}, - x_m) \]
@@ -1596,12 +1596,12 @@ orientierter Atlas $\Atlas = \{ (\phi, \partial H_k) \}$ und $(\partial H_k, [\A
 % Bemerkung:
 % \[ \phi^{-1} : \R^{k{-}1} \to \R^k, \quad (t_1, ..., x_{k-1}) \mapsto (0, t_1, ..., t_{k-1}) \]
 
-\begin{definition}
+\begin{defn}
   Sei $C \subset M \subset \R^n$, wobei $C$ kompakt und $M$ eine $k$-dimensionale UMF.
 
   Ein Punkt $x \in M$ heißt \emph{Randpunkt} von $C$ relativ zu $M$, wenn gilt:
   \[ \fa{\underbrace{U \opn M}_{\text{bzgl. der Relativtopologie}} \text{ mit } x \in U} U \cap C \not= \emptyset \enspace \text{und} \enspace U \cap (M \setminus C) \not= \emptyset. \]
-\end{definition}
+\end{defn}
 
 % Ausgelassen: Definition Relativtopologie
 
@@ -1609,7 +1609,7 @@ orientierter Atlas $\Atlas = \{ (\phi, \partial H_k) \}$ und $(\partial H_k, [\A
   $\partial_M C \coloneqq \{ \text{Randpunkte von $C$ relativ zu $M$} \}$
 \end{nota}
 
-\begin{definition}
+\begin{defn}
   $C$ hat glatten Rand in $M$, wenn gilt:
   \[ \fa{x \in \partial_M C} \ex{\text{UMF-Karte } \widetilde{\phi} : \widetilde{U} \to \widetilde{V} \text{ mit } x \in \widetilde{U}} \]
   für $\phi \coloneqq \mathrm{proj}_{\R^k} \circ \widetilde{\phi}|_U : U \to V$ (Homöo) gilt:
@@ -1618,7 +1618,7 @@ orientierter Atlas $\Atlas = \{ (\phi, \partial H_k) \}$ und $(\partial H_k, [\A
     \item $\phi(U \cap \partial_M C) = V \cap \partial H_k$
   \end{itemize}
   Eine UMF-Karte $(\widetilde{\phi}, \widetilde{U})$ (bzw. eine Karte $(\phi, U)$), die diese Bedingungen erfüllt, heißt \emph{Rand-adaptiert}.
-\end{definition}
+\end{defn}
 
 % Übungsaufgabe:
 \begin{lem}
