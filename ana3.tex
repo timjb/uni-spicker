@@ -21,6 +21,8 @@
 \newcommand{\IntO}[2]{\Int{\Omega}{}{#1}{#2}} % Integral über \Omega
 \newcommand{\IntOmu}[1]{\Int{\Omega}{}{#1}{\mu}} % Integral über \Omega bzgl. \mu
 
+\newcommand{\scp}[2]{\langle #1 , #2 \rangle} % Skalarprodukt
+
 % Kleinere Klammern
 \delimiterfactor=701
 
@@ -1639,5 +1641,101 @@ orientierter Atlas $\Atlas = \{ (\phi, \partial H_k) \}$ und $(\partial H_k, [\A
 \end{lem}
 
 % Vorlesung vom 29.1.2014: Beweis von obigem Lemma und dem Satz von Stokes
+
+% Vorlesung vom 3.2.2014
+
+\begin{kor}
+  Sei
+  \begin{itemize}
+    \item $\omega$ stetig diff'bare $(k{-}1)$-Form auf $\widehat{U} \opn \R^n$
+    \item $M \subset \widehat{U}$ eine orientierte $k$-dimensionale kompakte UMF.
+  \end{itemize}
+  Dann: $\Intdf{M}{\d \omega} = 0$
+\end{kor}
+
+% Kapitel 2.6. Klassische Integralsätze der Vektoranalysis
+
+
+\begin{satz}[Divergenzsatz]
+  Sei $C \subset \R^n$ kompakt mit glattem Rand, $C^\circ \not= \emptyset$, $C = \overline{C^\circ}$, $G : \R^n \to \R^n$ ein $\mathcal{C}^1$-Vektorfeld, dann gilt:
+  \[ \Int{C}{}{(\mathrm{div} G)}{\lambda_n} = \Int{\partial_C}{}{\langle G, \nu \rangle}{\mathcal{A}}. \]
+\end{satz}
+
+% Rhetorische Frage: Was ist $\nu$?
+
+% Orientierung von Hyperflächen:
+
+% Notation: $\partial_j f = \tfrac{\partial f}{\partial x_j}$
+
+\begin{defn}
+  Sei $M \subset \R^n$ eine UMF und $c : \left] -\epsilon, \epsilon \right[ \to \R^n$ $\mathcal{C}^\infty$ mit $\im(c) \subset M$, dann heißt der Vektor $(c(0), c'(0)) \in T_{c(0)} \R^n$ \emph{Tangentialvektor} an $M$ in $c(0) = x$.
+\end{defn}
+
+\begin{defn}
+  Die Menge aller Tangentialvektoren
+  \[ T_x M = \Set{ (x, v) \in T_x \R^n }{ (x, v) \text{ Tangentialvektor an $M$ in $x$}} \]
+  heißt \emph{Tangentialraum} an $M$ in $x$.
+\end{defn}
+
+\begin{prop}
+  Sei $\widetilde{\phi} : \widetilde{U} \to \widetilde{V}$ (mit $U, V \opn \R^n$, $\phi$ ein Diffeomorphismus) eine UMF-Karte von $M$ um $x$ und $\phi$ sei die induzierte Karte. Dann gilt
+  \begin{align*}
+    T_x M &= \{ x \} \times D (\widetilde{\phi}^{-1}) (\phi(x)) \Set{ y \in \R^n }{ y_{k+1} = ... = y_n = 0 } \\
+    &= \{ x \} \times \mathrm{span} \{ \partial_1 \phi^{-1} (\phi(x)), ..., \partial_k \phi^{-1} (\phi(x)) \}.
+  \end{align*}
+\end{prop}
+
+$T_x \R^n$ ist ein euklidischer VR mit $\langle (x, v), (x, w) \rangle \coloneqq \langle v, w \rangle_{\mathrm{eukl}}$
+
+$N_x M \coloneqq (T_x M)^\perp$ \emph{Normalraum} an $M$ in $X$
+
+$T_x \R^n = N_x M \perp T_x M$
+
+% Spezialfall: Hyperfläche ($(n {-} 1)$-dimensionale Untermannigfaltigkeit von $\R^n$)
+
+\begin{defn}
+  Sei $M \subset \R^n$ eine Hyperfläche. Eine stetige Abbildung $\nu : M \to \S^{n {-} 1}$ heißt \emph{Einheitsnormalenvektorfeld} (ENF) auf $M$, wenn $\fa{x \in X} \scp{x}{\nu(x)} \in N_x M$.
+\end{defn}
+
+\begin{defn}
+  Sei $(M, [\Atlas])$ eine orientierte HF in $\R^n$. Ein ENF $\nu : M \to S^{n {-} 1}$ heißt \emph{positiv orientiert}, wenn
+  \[ \fa{x \in U} \det(\nu(x), \partial_1 \phi^{-1}(\phi(x)), ..., \partial_{n {-} 1} \phi^{-1} (\phi(x))) > 0, \]
+  wobei $(\phi, U)$ eine positiv orientierte Karte von $M$.
+\end{defn}
+
+\begin{satz}
+  Sei $M \subset \R^n$ eine Hyperfläche.
+  \begin{itemize}
+    \item Ist $[\Atlas]$ eine Orientierung von $M$, so gibt es ein eindeutig bestimmtes positiv orientiertes (bzgl. $[\Atlas]$) ENF auf $M$.
+    \item Ist $\nu$ ein ENF auf $M$, dann trägt $M$ genau eine Orientierung, sodass $\nu$ positiv orientiert ist.
+  \end{itemize}
+\end{satz}
+
+Gegeben durch:
+
+$u(x) \coloneqq \sum_{j=1}^n \det(e_j, \partial_1 \phi^{-1}(\phi(x)), ..., \partial_{n {-} 1} \phi^{-1} (\phi(x))) e_j$
+
+$\nu(x) \coloneqq \tfrac{u(x)}{\norm{u(x)}}$ (unabhängig von pos. orientierter Karte)
+
+Im Fall $n = 3$ ist $u(x) = \partial_1 \phi^{-1}(\phi(x)) \times \partial_x \phi^{-1}(\phi(x))$
+
+Im Fall $n=3$:
+
+$G = (G_1, G_2, G_3) : \widehat{U} \to \R^3$ $\mathcal{C}^1$, $\widehat{U} \opn \R^3$
+
+Bekannt: $\d (G \cdot \d S) = \div (G) \d V$
+
+\begin{satz}
+  Sei $C \subset \widehat{U}$ kompakt mit $C = \overline{C^{\circ}} \not= \emptyset$, $\partial C$ glatt. Dann ist
+  \[ \Intdf{C}{\div(G) \d V} = ... = \Intdf{\partial C}{G \cdot \d S} = \Int{\partial C}{}{\scp{G, \nu}}{\mathcal{A}}. \]
+\end{satz}
+
+Sei $\widehat{\phi} : U \to \R^3$ eine bzgl. $C$ Rand-adaptierte, positiv orientierte Karte von $\widehat{U}$, $\phi : \partial C \cap U \to V \opn \R^2$
+
+\emph{1. Fundamentalform}:
+
+$g = g_\phi : V \to \R^2, v \mapsto \begin{pmatrix} \scp{\partial_1 \phi^{-1}(v)}{\partial_2 \phi^{-1}(v)} & \scp{\partial_1 \phi^{-1}(v)}{\partial_1 \phi^{-1}(v)} \\ \scp{\partial_2 \phi^{-1}(v)}{\partial_1 \phi^{-1}(v)} & \scp{\partial_2 \phi^{-1}(v)}{\partial_2 \phi^{-1}(v)} \end{pmatrix}$
+
+Sei $\phi^{-1} = (\phi_1^{-1}, \phi_2^{-1}, \phi_3^{-1})$
 
 \end{document}
