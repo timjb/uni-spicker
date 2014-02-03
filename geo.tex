@@ -1362,4 +1362,95 @@ Eigenschaften:
   \end{itemize}
 \end{lem}
 
+% Vorlesung vom 3.2.2014
+
+\begin{defn}
+  Sei $U \opn \C$ und $f : U \to \C$ holomorph. Eine holomorphe Funktion $F : U \to \C$ heißt \emph{Stammfunktion} (STF) von $f$, wenn gilt: Für die komplexe Ableitung $F'$ von $F$ gilt $F' = f$.
+\end{defn}
+
+\begin{bem}
+  Sei $U$ zusammenhängend und $F_1, F_2 : U \to \C$ zwei STFn von $f$, dann $F_1 - F_2 = const$.
+\end{bem}
+
+\begin{defn}
+  Sei $f = (f_1, ..., f_n) : U \to \C^n$. Eine holomorphe Funktion $F = (F_1, ..., F_n) : U \to \C^n$ heißt \emph{Stammfunktion} von $f$, wenn $F_j' = f_j$ für $j = 1, ..., n$.
+\end{defn}
+
+\begin{nota}
+  $\int f$ für eine STF von $f$.
+\end{nota}
+
+\begin{lem}
+  Sei $X : U \to \R^3$ eine konform parametrisierte Hyperfläche, dann:
+  \[ X - 2 \Re (\int \partial_z X) = const. \]
+\end{lem}
+
+\begin{bem}
+  Sei $X : U \to \R^3$ konform parametrisierte Minimalfläche, dann gilt $X = 2 \Re (\int \partial_z X)$ bis auf Translation.
+\end{bem}
+
+\begin{satz}
+  Es gibt (bis auf Translation) eindeutige Beziehung zwischen der Menge der konform parametrisierten Hyperflächen $X : U \to \R^3 \subset \C^3$ und der Menge der holomorph isotropen Abbildungen $Y \to \C^3 \setminus \{ 0 \}$ gegeben durch
+  \[ Y = 2 \partial_z X, \quad X = \Re \int Y \]
+\end{satz}
+
+% Assoziierte Familien
+
+% Gegeben: $X : U \to \R^3 \subset \C^3$ eine konform parametrisierte minimale $\mathcal{C}^2$-Hyperfläche, $U$ zusammenhängend
+% $Y \coloneqq 2 \partial_z X$
+% $X_\Theta \coloneqq \Re(\int Y_\Theta = \Re(\exp(i \Theta) \int Y)) : U \to \R^3$
+% Annahme (Wahl der Translation):
+% * $Y_0 = X$
+% * Familie stetig in $\Theta$
+% * $(2 \pi)$-periodisch
+
+% Man nennt $X_\Theta$ die \emph{assoziierte Familie} von $X$, es gilt
+% $X_{\Theta + \pi} = - X_{\Theta}$
+
+\begin{beob}
+  $Y_\Theta = \exp(i \Theta) Y$ mit $\Theta \in \R$ ist wieder holomorph, isotrop und $\not= 0$ ($Y_\Theta : U \to \C^3$).
+\end{beob}
+
+\begin{lem}
+  Jede Hyperfläche $X_\Theta$ für $\Theta \in \R$ in der assoziierten Familie von $X$ ist isometrisch zu $X$, d.\,h. $g_{\Theta} = g$.
+\end{lem}
+
+Reelle Schreibweise:
+
+\[ X_{\Theta} = \Re (\exp(i \Theta) \int Y) = \Re ((\cos(\Theta) + i \sin(\Theta)) \int Y) = \cos(\Theta) \Re(\int Y) + \sin(\Theta) \Re(i \int Y) = \cos(\Theta) \Re(\int Y) + \sin(\Theta) \Re (\exp(i \tfrac{\pi}{2} \int Y)) = \cos(\Theta) X + \sin(\Theta) X^* \]
+% TODO: Frage: Was ist $X$, was $X^*$?
+
+% Weierstraß-Darstellung
+
+Gegeben: $X : U \to \R^3 \subset \C^3$ konform parametrisierte Minimalfläche
+$U \opn \R^2$ offen und zusammenhängend
+
+$Y = (Y_1, Y_2, Y_3) = 2 \partial_z X : U \to \C^3 \setminus \{0\}$ holomorph und isotrop.
+
+Da $Y$ isotrop: $Y_1^2 + Y_2^2 + Y_3^2 = 0$
+
+\begin{defn}
+  $Y_{\pm} \coloneqq Y_1 \pm i Y_2 : U \to \C$
+\end{defn}
+
+Dann: $- Y_{+} Y_{-} = - (Y_1^2 + Y_2^2) = Y_3^2$
+
+\begin{defn}
+  $h \coloneqq Y_3 : U \to \C$ holomorph\\
+  $g \coloneqq \tfrac{Y_3}{Y_{-}} : U \to \C$ meromorph
+\end{defn}
+
+Es gilt: $-hg = Y_{+}$, $\tfrac{h}{g} = Y_{-}$
+
+% => wir können $Y_1, Y_2, Y_3$ aus $g$ und $h$ rekonstruieren
+
+Da $2 Y_1 = Y_{+} + Y_{-}$, $2 Y_2 = i (Y_{+}) - Y_{i}$, folgt
+$Y_1 = \tfrac{1}{2} (Y_{+} + Y_{-}) = \tfrac{h}{2} (\tfrac{1}{g} - g)$, $Y_2 = i \tfrac{h}{2} (\tfrac{1}{g} + g)$
+
+\begin{satz}[Weierstraß-Darstellung]
+  Eine konform parametrisierte $\mathcal{C}^2$-Hyperfläche $X : U \to \R^3$ hat bis auf Translation die Gestalt
+  \[ X = \Re \left( \int h \cdot (\tfrac{1}{2} (\tfrac{1}{g} - g), \tfrac{i}{2} (\tfrac{1}{g} + g), 1) \right), \]
+  wobei $h : U \to \C$ holomorph, $g : U \to \overline{\C}$ meromorph, sodass $Y$ holomorph ist und keine Nullstelle hat.
+\end{satz}
+
 \end{document}
