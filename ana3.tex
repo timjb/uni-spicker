@@ -190,8 +190,8 @@
   \end{align*}
   \emph{Limes Superior} bzw. \emph{Limes Inferior} der Folge $A_n$. Es gilt
   \[
-    \limsup_{n \to \infty} A_n = \bigcap_{n = 0}^\infty \bigcup_{k = n}^\infty A_n, \quad
-    \liminf_{n \to \infty} A_n = \bigcup_{n = 0}^\infty \bigcap_{k = n}^\infty A_n.
+    \limsup_{n \to \infty} A_n = \bigcap_{n = 0}^\infty \bigcup_{k = n}^\infty A_k, \quad
+    \liminf_{n \to \infty} A_n = \bigcup_{n = 0}^\infty \bigcap_{k = n}^\infty A_k.
   \]
 \end{definition}
 
@@ -676,7 +676,7 @@
 \end{satz}
 
 \begin{satz}
-  Sei $f : (\Omega, \Alg, \mu) \to (\ER, \overline{\Bor})$ eine messbare Fkt. und $g \in \Leb^1(\Omega, \Alg, \mu), g \geq 0$. Wenn $f \fue\leq g$, dann gilt $f \in \Leb^1(\Omega, \Alg, \mu)$.
+  Sei $f : (\Omega, \Alg, \mu) \to (\ER, \overline{\Bor})$ eine messbare Fkt. und $g \in \Leb^1(\Omega, \Alg, \mu), g \geq 0$. Wenn $\abs{f} \fue\leq g$, dann gilt $f \in \Leb^1(\Omega, \Alg, \mu)$.
 \end{satz}
 
 % \begin{doublespace} ... \end{doublespace} für einheitlichen Zeilenabstand.
