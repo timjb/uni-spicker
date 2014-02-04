@@ -15,6 +15,12 @@
 \newcommand{\ind}{\mathbbm{1}} % Indikatorfunktion
 \newcommand{\fue}{\overset{\text{f.ü.}}} % fast überall
 \newcommand{\Atlas}{\mathcal{A}} % Atlas
+\newcommand{\grad}{\mathrm{grad}} % Gradient
+\newcommand{\divergence}{\mathrm{div}} % Divergenz
+\newcommand{\rot}{\mathrm{rot}} % Rotation
+
+\theoremstyle{definition}
+\newtheorem*{phnota}{Physiker-Notation}
 
 % Integrale
 \newcommand{\Intdf}[2]{{\textstyle \int\limits_{#1}} #2} % Differentialformintegral
@@ -43,7 +49,7 @@
 \section{Maßtheorie}
 
 \begin{prob}[Schwaches Maßproblem]
-  Gesucht: Abbildung $\mu : \PS(\R^n) \to [\R, \infty]$ mit folgenden Eigenschaften:
+  Gesucht ist eine Abbildung $\mu : \PS(\R^n) \to [\R, \infty]$ mit folgenden Eigenschaften:
   \begin{itemize}
     \item Normierung: $\mu([0, 1]^n) = 1$
     \item Endliche Additivität: Sind $A, B \subset \R^n$ disjunkt, so gilt $\mu(A \cup B) = \mu(A) + \mu(B)$.
@@ -52,7 +58,7 @@
 \end{prob}
 
 \begin{satz}[Hausdorff]
-  Das schwache Maßproblem ist für $n \geq 3$ nicht lösbar.
+  Das schwache Maßproblem ist für $n \geq 3$ unlösbar.
 \end{satz}
 
 \begin{satz}[Banach]
@@ -1053,13 +1059,11 @@
 
 \begin{samepage}
 
-\section{Differentialformen}
+\section{Alternierende Multilinearformen}
 
 \begin{nota}
   Sei im Folgenden $V$ ein $n$-dimensionaler $\R$-Vektorraum.
 \end{nota}
-
-\subsection{Alternierende Multilinearformen}
 
 \begin{defn}
   Eine \emph{alternierende $k$-Form} auf $V$ ist eine Abb.
@@ -1154,7 +1158,7 @@
 \end{satz}
 
 
-\subsection{Differentialformen}
+\section{Differentialformen}
 
 \end{samepage}
 
@@ -1339,6 +1343,8 @@
 
 % In der Sprache der de Rham Kohomologie besagt das Lemma von Poincaré, dass die de Rham Kohomologiegruppen von Grad $\geq 1$ von sternförmigen (oder allgemeiner zusammenziehbaren) Teilmenge $U \opn \R^n$ alle verschwinden.
 
+\begin{samepage}
+
 \begin{lem}
   Sei $U \opn \R^n$ und $V \opn R^{n{+}1} = \R \times \R^n$, sodass der Zylinder $[0,1] \times U$ in $V$ liegt. Sei $\sigma$ eine geschlossene stetig diff'bare $k$-Form auf $V$ mit $k \geq 1$ und sei $\varphi_r : U \to V, \enspace u \mapsto (r, u)$ für $r \in \{ 0, 1 \}$.
   %die Abbildungen, welche $U$ mit den "`Deckeln des Zylinders"' $[0,1] \times U \subet V$ identifizieren.
@@ -1347,155 +1353,211 @@
 
 % 20.1.2014
 
-% Überschrift: Vektoranalyis
+\subsection{Vektoranalysis}
 
-% $U \opn \R^n$, $f : U \to \R$ $\mathcal{C}^1$-Funktion, $F = \begin{pmatrix} F_1 \\ \vdots \\ F_n \end{pmatrix} : U \to \R^n$ $\mathcal{C}^1$-Vektorfeld
+\end{samepage}
 
-% $\mathrm{grad} f : U \to \R^n, \quad u \mapsto \begin{pmatrix} \tfrac{\partial f}{\partial x_1} (u) \\ \vdots \tfrac{\partial f}{\partial x_n} (u) \end{pmatrix}$ heißt \emph{Gradient} von $f$
-
-\emph{Divergenz von $F$}
-$\mathrm{div} F : U \to \R, \quad u \mapsto \sum_{j=1}^n \frac{\partial F_j}{\partial x_j} (u)$
-
-\emph{Rotation von $F$}
-$\mathrm{rot} F : U \to \R^3, \quad u \mapsto \begin{pmatrix}
-  \frac{\partial F_3}{\partial x_2} (u) - \frac{\partial F_2}{\partial x_3} (u) \\
-  \frac{\partial F_1}{\partial x_3} (u) - \frac{\partial F_3}{\partial x_1} (u) \\
-  \frac{\partial F_2}{\partial x_1} (u) - \frac{\partial F_1}{\partial x_2} (u)
-\end{pmatrix}$
-
-Physiker-Notation:
-
-Nabla-Operator $\nabla = \begin{pmatrix} \frac{\partial}{\partial x_1} \\ \vdots \\ \frac{\partial}{\partial x_n} \end{pmatrix}$ % TODO: Pfeil!
-
-$\mathrm{grad} f = \nabla f$ % Pfeil!
-
-$\mathrm{div} F = \nabla \cdot F$ % Pfeile!
-"`Skalarprodukt-Analogon"'
- 
-in $\R^3$: $\mathrm{rot} F = \nabla \times F$ % Pfeile!
-"`Vektorprodukt-Analogon"'
-
-Vektoranalysis im $\R^3$ mit Physiker-Notation
-
-$\d s = \begin{pmatrix} \d x_1 \\ \d x_2 \\ \d x_3 \end{pmatrix}$ % Pfeil über s
-
-$\d S = \begin{pmatrix} \d x_2 \wedge \d x_3 \\ \d x_3 \wedge \d x_1 \\ \d x_1 \wedge \d x_2 \end{pmatrix}$ % Pfeil über S
-
-$\d V = \d x_1 \wedge \d x_2 \wedge \d x_3$
-
-In Analogon zum Skalarprodukt in $U \opn \R^3$
-
-$0$-Form auf $U$: $f : U \to \R$
-
-$1$-Form auf $U$: $\omega = \sum_{j=1}^3 f_j \d x_j = F \cdot \d s$, $F = \begin{pmatrix} f_1 \\ f_2 \\ f_3 \end{pmatrix} : U \to \R^3$
-
-$2$-Form auf $U$: $\omega = g_1 \d x_2 \wedge \d x_3 + g_2 \d x_3 + \d x_1 + g_3 \d x_1 \wedge x_2 =: G \cdot \d S$, $G = \begin{pmatrix} g_1 \\ g_2 \\ g_3 \end{pmatrix}$
-
-$3$-Form auf $U$: $\omega = g \cdot \d V$, $g : U \to \R$
-
-Annahme: $f, g, F, G$ seien $\mathcal{C}^1$, dann gilt:
-
-\begin{itemize}
-  \item $\d f = \sum_{j=1}^3 \frac{\partial f}{\partial x_j} \d x_j = \mathrm{grad}(f) \cdot \d s$
-  \item $\d (F \cdot \d s) = \d (\sum_{j=1}^3 f_j \d x_j) = \sum_{j=1}^3 \d (f_j \d x_j) = \sum_{j=1}^3 \sum_{k=1}^3 \frac{\partial f}{\partial x_k} \d x_k \wedge \d x_j = ... = (\frac{\partial f_3}{\partial x_2} - \frac{\partial f_2}{\partial x_2}) \d x_2 \wedge \d x_3 + (\frac{\partial f_3}{\partial x_1} - \frac{f_1}{x_3}) \d x_1 \wedge \d x_3 + (\frac{\partial f_2}{\partial x_1} - \frac{f_1}{x_2}) \d x_1 \wedge \d x_2$
-  \item $\d (G \d S) = \d (G_1 \d x_2 \wedge \ x_3 + G_2 \d x_3 \wedge \d x_1 + G_3 \d x_1 \wedge \d x_2) = (\sum_{j=1}^3 \frac{\partial G_j}{\partial x_j}) \d x_1 \wedge \d x_2 \wedge \d x_3 = (\mathrm{div} G) \d V$
-\end{itemize}
-
-% Aufgabe:
-
-Sei $f : U \to \R$ ein $\mathcal{C}^2$-Vektorfeld, $F : U \to \R^3$ $\mathcal{C}^2$, dann gilt:
-$\mathrm{rot} (\mathrm{grad} f) = 0$, $\mathrm{div}(\mathrm{rot} F) = 0$
-
-% Aufgabe:
-
-Sei $U$ sternförmig (oder allgemeiner zusammenziehbar). Zu zeigen:
-
-\begin{itemize}
-  \item Ist $f : U \to \R^3$ ein $\mathcal{C}^1$-Vektorfeld mit $\mathrm{rot} F = 0$, dann gibt es $f : U \to \R$ ($\mathcal{C}^1$) mit $F = \mathrm{grad} f$.
-  \item Ist $G : U \to \R^3$ ein $\mathcal{C}^1$-Vektorfeld mit $\mathrm{div} G = 0$, dann gibt es $\widehat{F} : U \to \R^3$ ($\mathcal{C}^1$) mit $G = \mathrm{rot} \widehat{F}$.
-\end{itemize}
-
-
-% 3.2. Integration von Differentialformen
+% Notation: Sei im Folgenden $U \opn \R^n$
 
 \begin{defn}
-  Sei $U \opn \R^n$, $\omega = f \d x_1 \wedge ... \wedge \d x_n$ eine $n$-Form, wobei $f : U \to \R$ Lebesgue-integrierbar. Sei $C \subset U$ eine Borel-Menge, dann
-  \[ \Int{C}{}{\omega}{} \coloneqq \Int{C}{}{f}{\lambda_n} \in \R \]
+  Sei $f : U \to \R$ stetig diff'bar, dann heißt das stetige Vektorfeld
+  \[
+    \grad f : U \to \R^n, \quad
+    u \mapsto \left( \tfrac{\partial f}{\partial x_1} (u), ..., \tfrac{\partial f}{\partial x_n} (u) \right)^T
+    \quad \text{\emph{Gradient} von $f$.}
+  \]
 \end{defn}
 
-% Übungsaufgabe:
-
-$\phi : \widetilde{U} \to U$ sei $\mathcal{C}^1$-Abbildung, $U, \widetilde{U} \opn \R^n$, dann
-$\phi^* \omega = ((f \circ \phi) \cdot \det(D\phi)) \d x_1 \wedge ... \wedge \d x_n$
-
-Transformationsregel für Integrale von $n$-Formen
-
-Sei $\phi : \widetilde{U} \to U$, $\widetilde{U}, U \opn \R^n$. Sei $\omega = f \d x_1 \wedge ... \wedge \d x_n$ eine $n$-Form auf $U$. Dann gilt für ein Kompaktum $C \subset \widetilde{U}$:
-\[ \Int{C}{}{\phi^* \omega}{} = \Int{C}{}{(f \circ \phi) \cdot \det(D\phi) \d x_1 \wedge ... \wedge \d x_n}{} = \Int{C}{}{(f \circ \phi) \det(D\phi)}{\d \lambda_n}. \]
-Wenn $\det(D\phi(\widetilde{u})) > 0$ für alle $\widetilde{u} \in U$ (also $\phi$ orientierungserhaltend):
-\[ \Int{C}{}{\phi^* \omega}{} = \Int{C}{}{(f \circ \phi) \cdot \abs{\det{D\phi}}} = \Int{\phi(C)}{}{f}{\d \lambda_n} = \Int{\phi(C)}{}{\omega}{} \]
-Wenn $\det(D\phi(\widetilde{u})) < 0$ für alle $\widetilde{u} \in U$ (also $\phi$ orientierungsumkehrend):
-\[ \Int{C}{}{\phi^* \omega}{} = - \Int{\phi(C)}{}{\omega}{} \]
-
-Teilung der Eins:
-
-Hutfunktion: $g : \R \to \R, \quad x \mapsto \begin{cases} \exp(\frac{1}{t^2 - 1}), & \abs{x} < 0 \\ 0, \abs{x} \geq 1 \end{cases}$ ist $\mathcal{C}^2$
-
-Hutsummen: $G : \R \to \R, \quad x \mapsto \sum_{k \in \Z} g(x-k)$
-
-normalisierter Hut für $k \in \Z$: $h_k : \R \to \R, \quad x \mapsto \frac{g(x-k)}{G(x)}$ ist $\mathcal{C}^\infty$, dann $\mathrm{supp}(h_k) = \left[ k-1, k+1 \right]$
-
-Tolle Eigenschaft: $\sum_{k \in \Z} h_k(x) = \sum_{k \in \Z} \frac{g(x-k)}{G(x)} = \frac{1}{G(x)} \sum_{k \in \Z} g(x-k) = 1$ für alle $x \in \R$
-
-Also $\{ h_k \}$ bilden \emph{Teilung der Eins}
-
-In $\R^n$: Sei $q = (q_1, ..., q_n) \in \Z^n$, $\epsilon > 0$
-
-$\d \alpha_{q,\epsilon} : \R^n \to \R, (x_1, ..., x_n) \mapsto \prod_{j=1}^{n} h_{q_j} \cdot (\frac{x_j}{\epsilon})$
-
-Es gilt:
-
-\begin{itemize}
-  \item $\d \alpha_{q, \epsilon}$ ist $\mathcal{C}^\infty$
-  \item $\mathrm{supp} \alpha_{q,\epsilon} = \Set{ (x_1, ..., x_n) \in \R^n }{ \abs{x_j - \epsilon q_j} \leq \epsilon \text{ für alle } j \in \{ 1, ..., n \} }$
-  \item $\sum_{q \in \Z^n} \alpha_{q, \epsilon} = 1$ (Übung)
-\end{itemize}
-
-
-% Vorlesung vom 22.1.2014
-
-% Kapitel 2.4. Integration von Differentialformen auf Untermannigfaltigkeiten
+\begin{defn}
+  Sei $F = (F_1, ..., F_n)^T : U \to \R^n$ ein $\mathcal{C}^1$-VF, dann heißt
+  \[
+    \divergence F : U \to \R, \quad u \mapsto \sum_{j=1}^n \tfrac{\partial F_j}{\partial x_j}
+    \qquad \text{\emph{Divergenz} von $F$.}
+  \]
+\end{defn}
 
 \begin{defn}
-  Eine $m$-dimensionale \emph{Untermannigfaltigkeit} (UMF) des $\R^n$ ist eine Teilmenge $M \subset \R^n$ mit:
+  Ist $n {=} 3$ und $F = (F_1, F_2, F_3)^T : U \to \R^3$ ein $\mathcal{C}^1$-VF, dann ist die \emph{Rotation} von $f$ definiert als folgendes VF:
+  \[
+    \rot F : U \to \R^3, \quad
+    u \mapsto \left(
+      \tfrac{\partial F_3}{\partial x_2} - \tfrac{\partial F_2}{\partial x_3},
+      \tfrac{\partial F_1}{\partial x_3} - \tfrac{\partial F_3}{\partial x_1},
+      \tfrac{\partial F_2}{\partial x_1} - \tfrac{\partial F_1}{\partial x_2}
+    \right)^T (u)
+  \]
+\end{defn}
+
+% Physiker-Notation:
+\begin{phnota}
+  \emph{Nabla-Operator}: $\vec{\nabla} \coloneqq \left( \tfrac{\partial}{\partial x_1}, ..., \tfrac{\partial}{\partial x_n} \right)^T$\\
+  Damit schreibt man auch:
+  \[
+    \grad f = \vec{\nabla} f, \quad
+    \divergence F = \vec{\nabla} \cdot F, \quad % Skalarprodukt-Analogon
+    \rot F = \vec{\nabla} \times F % Vektorprodukt-Analogon
+  \]
+\end{phnota}
+
+\begin{phnota}
+  Für Vektoranalysis im $\R^3$ verwendet man:
+  \begin{align*}
+    \d \vec{s} &\coloneqq \left( \d x_1, \d x_2, \d x_3 \right)^T \\
+    \d \vec{S} &\coloneqq \left( \d x_2 \wedge \d x_3, \d x_3 \wedge \d x_1, \d x_1 \wedge \d x_2 \right)^T \\
+    \d V &\coloneqq \d x_1 \wedge \d x_2 \wedge \d x_3
+  \end{align*}
+\end{phnota}
+
+\begin{bem}
+  Sei $\omega_i$ eine $i$-Form auf $U \opn \R^3$ für $i \in \{ 0, 1, 2, 3 \}$. Dann gilt für passende $f, g : U \to \R$ und Vektorfelder $F, G : U \to \R^3$:
+  \[
+    \omega_0 = f, \quad
+    \omega_1 = F \cdot \d \vec{s}, \quad
+    \omega_2 = G \cdot \d \vec{S}, \quad
+    \omega_3 = g \d V
+  \]
+  Angenommen, $f, g, F, G$ sind stetig differenzierbar. Dann gilt:
+  \[
+    \d f = \grad f \cdot \d \vec{s}, \quad
+    \d \left(F \cdot \d \vec{s}\right) = \rot F \cdot \d \vec{S}, \quad
+    \d \left(G \cdot \d \vec{S}\right) = \divergence G \, \d V
+  \]
+\end{bem}
+
+% Aufgabe
+\begin{lem}
+  Für $f : U \to \R$ und $F : U \to \R^3$ zweimal stetig diff'bar gilt
+  \[
+    \rot (\grad f) = 0
+    \quad \text{und} \quad
+    \divergence(\rot F) = 0.
+  \]
+\end{lem}
+
+\begin{samepage}
+
+% Aufgabe (Folgerung aus dem Satz von Poincaré)
+\begin{lem}
+  Sei $U \opn \R^n$ sternförmig und $F, G : U \to \R^3$ stetig diffbar.
   \begin{itemize}
-    \item $\fa{x \in M} \ex{\widetilde{U} \opn \R^n, x \in \widetilde{U}} \ex{\widetilde{V} \opn \R^n} \ex{\widetilde{\phi} : \widetilde{U} \to \widetilde{V}}$ Diffeomorphismus, sodass gilt:
-    \[ \widetilde{\phi}(M \cap \widetilde{U}) = \widetilde{V} \cap \underbrace{\Set{ (x_1, ..., x_m, 0, ..., 0) }{ x_1, ..., x_m \in \R }}_{\R^m \subset \R^m \oplus \R^{n-m} \cong \R^n} \]
+    \item Wenn $\rot F = 0$, dann ex. $f : U {\to} \R$ stetig diff'bar mit $F = \grad f$.
+    \item Wenn $\divergence G = 0$, dann ex. $F : U {\to} \R^3$ stetig diff'bar mit $G = \rot F$.
+  \end{itemize}
+\end{lem}
+
+% Kapitel 2.3.
+\subsection{Integration von Differentialformen}
+
+\end{samepage}
+
+\begin{defn}
+  Sei $U \opn \R^n$, $\omega = f \d x_1 \wedge ... \wedge \d x_n$ eine $n$-Form, wobei $f : U {\to} \R$ Lebesgue-integrierbar sei. Für eine Borel-Menge $C \subset U$ heißt dann
+  \[
+    \Int{C}{}{\omega}{} \coloneqq \Int{C}{}{f}{\lambda_n} \in \R
+    \qquad \text{\emph{Integral} von $\omega$ über $C$.}
+  \]
+\end{defn}
+
+\begin{defn}
+  Seien $U, \tilde{U} \opn \R^n$. Ein $\mathcal{C}^1$-Diffeomorphismus $\phi : \tilde{U} \to U$ heißt
+  \begin{itemize}
+    \item \emph{orientierungserhaltend}, wenn $\det (J_{\tilde{u}} \phi) > 0$ für alle $\tilde{u} \in \tilde{U}$,
+    \item \emph{orientierungsumkehrend}, wenn $\det (J_{\tilde{u}} \phi) < 0$ für alle $\tilde{u} \in \tilde{U}$.
   \end{itemize}
 \end{defn}
 
-\begin{nomenklatur}
-  $\widetilde{\phi} : \widetilde{U} \to \widetilde{V}$ heißt \emph{Untermannigfaltigkeit-Karte}, notiert $(\widetilde{\phi}, \widetilde{U})$
-\end{nomenklatur}
+% Übungsaufgabe:
+\begin{lem}
+  Seien $U, \tilde{U} \opn \R^n$ offen und $\phi : \widetilde{U} \to U$ total diff'bar. Dann gilt für eine $n$-Form $\omega = f \d x_1 \wedge ... \wedge x_n$ auf $U$:
+  \[ \phi^* \omega = ((f \circ \phi) \cdot \det(D\phi)) \, \d x_1 \wedge ... \wedge \d x_n \]
+\end{lem}
+
+% Transformationsverhalten von Integralen von Differentialformen
+\begin{satz}
+  Seien $U, \tilde{U} \opn \R^n$, $C \subset \tilde{U}$ kompakt, $\phi : \tilde{U} \to U$ ein $\mathcal{C}^1$-Diffeo und $\omega = f \, \d x_1 \wedge ... \wedge \d x_n$ eine stetige $n$-Form auf $U$. Dann gilt:
+  \begin{itemize}
+    \item Wenn $\phi$ orientierungserhaltend: \quad\, $\Int{\mathclap{\phi(C)}}{}{f}{\lambda_n} = \Intdf{\mathclap{\phi(C)}}{\omega} = \Intdf{C}{\phi^* \omega}$
+    \item Wenn $\phi$ orientierungsumkehrend: \enspace $\Int{\mathclap{\phi(C)}}{}{f}{\lambda_n} = \Intdf{\mathclap{\phi(C)}}{\omega} = -\Intdf{C}{\phi^* \omega}$
+  \end{itemize}
+\end{satz}
+
+\begin{samepage}
+
+\begin{bem}[Teilung der Eins]
+  Setze % "`Hutfunktion"', "`Hutsummen"' und "`normalisierter Hut"'
+  \begin{align*}
+    g : \R \to \R, \quad x &\mapsto \begin{cases} \exp \left( \tfrac{1}{x^2 - 1} \right), & \text{für } \abs{x} < 0 \\ 0, & \text{für } \abs{x} \geq 1 \end{cases} \\
+    G : \R \to \R, \quad x &\mapsto \sum_{k \in \Z} g(x-k) \\
+    h_k : \R \to \R, \quad x &\mapsto \tfrac{g(x-k)}{G(x)} \qquad \text{für alle $k \in \Z$.}
+  \end{align*}
+
+  Dann gilt $h_k \in \mathcal{C}^\infty(\R, \R)$ und $\supp(h_k) = \left[ k{-}1, k{+}1 \right]$ für alle $k \in \Z$.
+  Die Menge $\Set{h_k}{k \in \Z}$ bildet eine \emph{Teilung der Eins}, da
+  \[ \fa{x \in \R} \sum_{k \in \Z} h_k(x) = \sum_{k \in \Z} \tfrac{g(x-k)}{G(x)} = \tfrac{1}{G(x)} \sum_{k \in \Z} g(x-k) = 1. \]
+\end{bem}
+
+% Ausgelassen: Teilung der $1$ in $\R^n$
+\iffalse
+  Sei $q = (q_1, ..., q_n) \in \Z^n$, $\epsilon > 0$
+
+  $\d \alpha_{q,\epsilon} : \R^n \to \R, (x_1, ..., x_n) \mapsto \prod_{j=1}^{n} h_{q_j} \cdot (\frac{x_j}{\epsilon})$
+
+  Es gilt:
+
+  \begin{itemize}
+    \item $\d \alpha_{q, \epsilon}$ ist $\mathcal{C}^\infty$
+    \item $\mathrm{supp} \alpha_{q,\epsilon} = \Set{ (x_1, ..., x_n) \in \R^n }{ \abs{x_j - \epsilon q_j} \leq \epsilon \text{ für alle } j \in \{ 1, ..., n \} }$
+    \item $\sum_{q \in \Z^n} \alpha_{q, \epsilon} = 1$ (Übung)
+  \end{itemize}
+\fi
+
+% Vorlesung vom 22.1.2014
+
+% Kapitel 2.4.
+\subsection{Integration von Differentialformen auf UMFen}
+
+\end{samepage}
 
 \begin{defn}
-  $\widetilde{\Atlas} = \Set{ \underbrace{(\widetilde{\phi}_i, \widetilde{U}_i)}_{\text{UMF-Karten von $M$}} }{ i \in I }$ mit $\underbrace{M \subset \bigcup_{i \in I} \widetilde{U}_i}_{\text{Überdeckungseigenschaft}}$ heißt \emph{UMF-Atlas} von $M$.
+  Eine $k$-dimensionale \emph{Untermannigfaltigkeit} (UMF) des $\R^n$ ist eine nichtleere Teilmenge $M \subset \R^n$, sodass für alle $x \in M$ gilt:
+  \begin{align*}
+    & \ex{\text{Umgebung $\widetilde{U}$ von $x$}} \ex{\widetilde{V} \opn \R^n} \ex{\widetilde{\phi} : \widetilde{U} \to \widetilde{V} \text{ Diffeo}} \\
+    & \widetilde{\phi}(M \cap \widetilde{U}) = \widetilde{V} \cap \Set{ (x_1, ..., x_k, 0, ..., 0) }{ x_1, ..., x_k \in \R } \cong \widetilde{V} \cap \R^k
+  \end{align*}
+\end{defn}
+
+\begin{nomenklatur}
+  $\widetilde{\phi} : \widetilde{U} \to \widetilde{V}$ heißt \emph{UMF-Karte}, notiert $(\widetilde{\phi}, \widetilde{U})$.
+\end{nomenklatur}
+
+\begin{nota}
+  Für $n \geq k$: $\pi_k : \R^n \to \R^k, \enspace (x_1, ..., x_n) \mapsto (x_1, ..., x_k)$.
+\end{nota}
+
+\begin{nota}
+  $U \coloneqq M \cap \widetilde{U}$, \enspace $V \coloneqq \pi_k(\widetilde{V})$
+\end{nota}
+
+\begin{defn}
+  $\widetilde{\Atlas} = \Set{ \underbrace{(\widetilde{\phi}_i, \widetilde{U}_i)}_{\mathclap{\text{UMF-Karten von $M$}}} }{ i \in I }$ mit $M \subset \bigcup_{i \in I} \widetilde{U}_i$ heißt \emph{UMF-Atlas}. %von $M$.
 \end{defn}
 
 \begin{beob}
-  $\widetilde{\phi} : \widetilde{U} \to \widetilde{V}$ ist UMF-Karte von $M$, dann $M \cup \widetilde{U} \opn M$ (bzgl. Relativtopologie), $\widetilde{V} \cap \R^m \opn \R^m$
+  Sei $\widetilde{\phi} : \widetilde{U} \to \widetilde{V}$ UMF-Karte von $M$, dann ist $U = M \cup \widetilde{U} \opn M$ und $V = \widetilde{V} \cap \R^k \opn \R^k$ (bzgl. Relativtopologie).
 \end{beob}
 
 \begin{defn}
-  Der Homöomorphismus $\phi \coloneqq \widetilde{\phi}|_{U} : U \to V$ heißt \emph{Karte von $M$}.
+  Sei $\widetilde{\phi} : \widetilde{U} \to \widetilde{V}$ eine UMF-Karte mit $x \in U = M \cap \widetilde{U}$. Dann heißt der Homöo $\phi \coloneqq \pi_k \circ \widetilde{\phi}|_{U} : U \to V$ \emph{Karte} von $M$ um $x$.
 \end{defn}
 
 \begin{defn}
-  Ist $\widetilde{A} = \Set{ (\widetilde{\phi}_i, \widetilde{U}_i) }{ i \in I }$ ein UMF-Atlas, dann heißt $\Atlas = \Set{ (\phi_i, U_i) }{ i \in I }$ \emph{Atlas von $M$}.
+  Sei $\widetilde{A} = \Set{ (\widetilde{\phi}_i, \widetilde{U}_i) }{ i \in I }$ ein UMF-Atlas, dann heißt die Menge der davon induzierten Karten $\Atlas = \Set{ (\phi_i, U_i) }{ i \in I }$ \emph{Atlas} von $M$.
 \end{defn}
 
 \begin{defn}
-  Ein Atlas $\Atlas = \Set{ (\phi_i, U_i) }{ i \in I }$ heißt \emph{orientiert}, wenn für alle $i, j \in I$ die Abbildung $\phi_j \circ \phi_i^{-1} |_{\phi_i(U_i \cap U_j)} : \phi(U_i \cap U_j) \to \phi_j(U_i \cap U_j)$ orientierungserhaltend sind, wenn $U_i \cap U_j \not= \emptyset$.
+  Ein Atlas $\Atlas = \Set{ (\phi_i, U_i) }{ i \in I }$ heißt \emph{orientiert}, wenn alle \emph{Kartenwechsel}, das sind die Diffeomorphismen
+  \[ \phi_j \circ \phi_i^{-1} |_{\phi_i(U_i \cap U_j)} : \phi(U_i \cap U_j) \to \phi_j(U_i \cap U_j) \]
+  für $i, j \in I$ mit $U_i \cap U_j \not= \emptyset$ orientierungserhaltend sind.
   % Definition mit Funktionaldeterminante?
 \end{defn}
 
@@ -1503,104 +1565,83 @@ Es gilt:
   \begin{itemize}
     \item Eine UMF $M$ von $\R^n$ heißt \emph{orientierbar}, wenn $M$ einen orientierten Atlas besitzt.
     \item Zwei orientierte Atlanten $\Atlas_1, \Atlas_2$ von $M$ heißen gleichorientiert, wenn $\Atlas = \Atlas_1 \cup \Atlas_2$ ein orientierter Atlas ist.
-    \item Eine \emph{Orientierung} auf einer orientierbaren UMF $M$ ist eine Äquivalenzklasse bzgl. der Äquivalenzrelation $\Atlas_1 \sim \Atlas_2 :\iff \Atlas_1, \Atlas_2$ gleichorientiert auf der Menge aller orientierten Atlanten.
-    \item $M$ orientierbare UMF, $[A]$ Orientierung von $M$, dann heißt $(M, [\Atlas])$ \emph{orientierte UMF}.
-    \item $\Atlas'$ orientierter Atlas von $(M, [\Atlas])$ heißt \emph{positiv orientiert}, wenn $\Atlas' \in [\Atlas]$.
+    \item Eine \emph{Orientierung} auf einer orientierbaren UMF $M$ ist eine Äquivalenzklasse bzgl. der Äquivalenzrelation
+    \[ \Atlas_1 \sim \Atlas_2 \coloniff \text{$\Atlas_1$ und $\Atlas_2$ sind gleichorientiert} \]
+    auf der Menge der Atlanten auf $M$.
+    \item $M$ orientierbare UMF, $[A]$ Orientierung von $M$, dann heißt $(M, [\Atlas])$ \emph{orientierte Untermannigfaltigkeit}.
+    \item Ein orientierter Atlas $\Atlas'$ von $(M, [\Atlas])$ heißt \emph{positiv orientiert}, wenn $\Atlas' \in [\Atlas]$.
   \end{itemize}
 \end{defn}
 
-Gegeben $(M, [\Atlas])$ orientierte UMF, $\Atlas = \Set{ (\phi_i, U_i) }{ i \in I }$ ein positiv orientierter Atlas,
-\[ \tau : \R^m \to \R^m, \quad (x_1, ..., x_m) \mapsto (x_1, ..., x_{m-1}, - x_m) \]
-orientierungsumkehrend. Dann ist auch $\Atlas' = \Set{ (\phi_i', U_i) }{ i \in I }$ mit $\phi_i' = \tau \circ \phi_i : U_i \to \tau(V_i)$
-ein orientierter Atlas von $M$, aber $\Atlas' \not\in [A]$.
-Notation: $-[\Atlas] \coloneqq [\Atlas']$ die zu $[\Atlas]$ entgegengesetzte Orientierung.
+% Bemerkung: Eine typische nicht-orientierbare UMF des $\R^3$ ist das Möbiusband
 
-Integration von $k$-Formen auf $k$-dimensionalen UMFen
+\begin{nota}
+  Folgender Diffeomorphismus ist orientierungsumkehrend:
+  \[ \tau : \R^m \to \R^m, \quad (x_1, ..., x_m) \mapsto (x_1, ..., x_{m-1}, - x_m) \]
+\end{nota}
 
-Gegeben:
-\begin{itemize}
-  \item $\widehat{U} \opn \R^n$
-  \item $M \subset \widehat{U} \subset \R^n$ $k$-dimensionale UMF
-  \item $\omega$ $k$-Form auf $U$
-  \item $C \subset M$ kompakt
-  \item $[\Atlas]$ Orientierung von $M$
-\end{itemize}
+\begin{defn}
+  Sei $(M, [\Atlas])$ eine orientierte UMF, $\Atlas = \Set{ (\phi_i, U_i) }{ i \in I }$ ein positiv orientierter Atlas. Dann ist auch
+  \[
+    \Atlas' = \Set{ (\phi_i', U_i) }{ i \in I }
+    \quad \text{mit} \quad
+    \phi_i' = \tau \circ \phi_i : U_i \to \tau(V_i)
+  \]
+  ein orientierter Atlas von $M$, aber $\Atlas' \not\in [A]$.\\
+  Dann heißt $-[\Atlas] \coloneqq [\Atlas']$ die zu $[\Atlas]$ entgegengesetzte Orientierung.
+\end{defn}
 
-Gesucht: $\Int{(C, [\Atlas])}{}{\omega}{}$
+\begin{bem}
+  Wenn $(M, [\Atlas])$ nicht zusammenhängend ist, gibt es nicht nur die zwei Orientierungen $[\Atlas]$ und $-[\Atlas]$.
+\end{bem}
 
-Fall 1: $\ex{\phi : U \to V}$ positiv orientierte Karte mit $C \subset U$, dann setze:
+% Integration von $k$-Formen auf $k$-dimensionalen UMFen
+\begin{defn}
+  Sei $\hat{U} \opn \R^n$ und $M \subset \hat{U}$ eine orientierbare $k$-dimensionale UMF und $[\Atlas]$ eine Orientierung von $M$. Sei $\omega$ eine stetige $k$-Form auf $\hat{U}$. Sei außerdem $C \subset M$ kompakt.
+  \begin{itemize}
+    \item Angenommen, es gibt eine Karte $\phi : U \to V$ mit $C \subset U$ in einem positiv orientierten Atlas $\Atlas$ von $(M, [\Atlas])$. Dann setzen wir
+    \[ \Intdf{C}{\omega} \coloneqq \,\, \Intdf{\mathclap{(C, [\Atlas])}}{\,\omega} \coloneqq \, \Intdf{\mathclap{\phi(C)}}{\, (\phi^{-1})^* \omega}. \]
+    \item Angenommen, es gibt keine solche Karte. Dann wählen wir eine passende Teilung der Eins, also eine endliche Familie
+    \[
+      \Set{\alpha_j : C \to \R \text{ stetig}}{j \in \{ 1, ..., r \}}
+      \enspace \text{mit} \enspace
+      \fa{x \in C} \sum_{i=1}^r \alpha_j(x) = 1,
+    \]
+    sodass es für jedes $j \in \{ 1, ..., r \}$ eine Karte $\phi_j : U_j \to V_j$ aus einem positiv orientierten Atlas von $(M, [\Atlas])$ mit $\supp(\alpha_j) \subset U_j$ gibt.\\
+    Setze $C_j \coloneqq \supp(\alpha_j) \cap C$ für $j \in \{ 1, ..., r \}$ und definiere
+    \[
+      \Intdf{C}{\omega} \coloneqq \Intdf{\mathclap{(C, [\Atlas])}}{\omega} \coloneqq \sum_{j=1}^r \Intdf{\,\phi_j(C_j)}{(\alpha_j \circ \phi_j^{-1}) \cdot (\phi_j^{-1})^* \omega}.
+    \]
+  \end{itemize}
+\end{defn}
 
-% TODO: LaTeX-Makro für Integral von Differentialformen
-
-\[ \Int{(C, [\Atlas])}{}{\omega}{} \coloneqq \Int{\phi(C)}{}{(\phi^{-1})^* \omega} \]
-
-Unabhängigkeit von Karte:
-
-Sei $\phi' : U' \to V'$ positiv orientierte Karte mit $C \subset U'$, o.\,E. $U' = U$.
-
-$\iota \coloneqq \phi \circ \phi'^{-1}$
-
-\[ \Int{\phi(C)}{}{(\phi^{-1})^* \omega} = \Int{\phi(C)}{}{(\phi'^{-1} \circ \iota^{-1})^* \omega}{} = \Int{\phi(C)}{}{\iota^{-1*} (\phi'^{-1*} \omega)}{} = \Int{\phi'(C)}{}{\phi'^{-1*} \omega}{} \]
-
-% Vorlesung vom 27.1.2013
-
-Fall 2: Es existiert keine positiv orientierte Karte $\phi : U \to V$ mit $C \subset U$:
-
-Wähle (endliche) Teilung der Eins, d.\,h.
-
-$\alpha_i : C \to \R$, $i = 1, ..., r$ mit
-
-\begin{itemize}
-  \item $\sum_{i=1}^r \alpha_i(x) = 1$ für alle $x \in C$
-  \item zu demem $i \in \{ 1, ..., r\}$ gibt es eine positiv orientierte Karte $\phi_i : U_i \to V_i$ mit $\supp(\alpha_i) \subset U_i$.
-\end{itemize}
-
-Dann: $\Int{C}{}{\omega}{} = \Int{(C, [\Atlas])}{}{\omega}{} \coloneqq \sum_{j=1}^r \Int{\phi_j(\supp(\alpha_j) \cap C)}{}{(\alpha_j \circ \phi_j^{-1}) \cdot (\phi_j^{-1}) \omega}{}$
-
-Übungsaufgabe: Unabhängigkeit von Teilung der Eins und Kartenwahl
+% Übungsaufgabe: Unabhängigkeit von Teilung der Eins und Kartenwahl
 
 % Kapitel 2.5. Satz von Stokes
 
-\begin{satz}[Stokes]
-  Gegeben sei
-  \begin{itemize}
-    \item $M \subset \R^n$ $k$-dimensionale Untermannigfaltigkeit
-    \item $\widehat{U} \opn \R^n$, $M \subset \widehat{U}$
-    \item $\omega$ stetig diff'bare $(k{-}1)$-Form auf $\widehat{U}$.
-    \item $C \subset M$ Kompaktum mit glattem Rand $\partial_M C$.
-  \end{itemize}
-  Dann gilt (bzgl. der induzierten Orientierung auf $\partial_M C$)
-  \[ \Int{C}{}{\d \omega}{} = \Int{\partial_M C}{}{\omega}{} \]
-\end{satz}
+\begin{nota}
+  $H_k \coloneqq \Set{ (x_1, ..., x_k) \subset \R^k }{ x_1 \leq 0 }$ heißt Halbraum.
+\end{nota}
 
-% Erklärung
+\begin{bem}
+  $\partial H_k = \Set{ (0, x_2, ..., x_k) \in \R^k }{ x_2, ..., x_k \in \R }$
+\end{bem}
 
-Halbraum:
-
-\[ H^k = \Set{ (x_1, ..., x_k) \subset \R^k }{ x_1 \leq 0 } \]
-
-Rand von $H^k$:
-
-\[ \partial H^k = \Set{ (0, x_2, ..., x_k) \in \R^k }{ x_2, ..., x_k \in \R } \]
-
-Beobachtung: $\partial H^k$ ist $(k{-}1)$-dimesionale UMF von $\R^k$.
-UMF-Karte:
-
-\begin{align*}
-  \widetilde{\phi} : \R^k \to \R^k, \quad (x_1, ..., x_k) \mapsto (x_2, ..., x_k, x_1)
-\end{align*}
-
-Karte $phi = \mathrm{proj}_{\R^{k{-}1}} \circ \widetilde{\phi}|_{\partial H^k} : \partial H_k \to \R^{k{-}1}$, $(0, x2, ..., x_k) \mapsto (x_2, ..., x_k)$
-orientierter Atlas $\Atlas = \{ (\phi, \partial H_k) \}$ und $(\partial H_k, [\Atlas])$ ist eine orientierte UMF
+\begin{beob}
+  $\partial H_k$ ist eine $(k{-}1)$-dimensionale UMF von $\R^k$ mit Atlas $\Atlas = \{ (\beta, \partial H_k) \}$, wobei die Karte $\beta$ definiert ist durch
+  \begin{align*}
+    \tilde{\beta} : \R^k \to \R^k, \quad &(x_1, ..., x_k) \mapsto (x_2, ..., x_k, x_1), \\
+    \beta : \R^k \to \R^{k-1}, \quad &(0, x_2, ..., x_k) \mapsto (x_2, ..., x_k).
+  \end{align*}
+\end{beob}
 
 % Bemerkung:
 % \[ \phi^{-1} : \R^{k{-}1} \to \R^k, \quad (t_1, ..., x_{k-1}) \mapsto (0, t_1, ..., t_{k-1}) \]
 
 \begin{defn}
-  Sei $C \subset M \subset \R^n$, wobei $C$ kompakt und $M$ eine $k$-dimensionale UMF.
-
+  Sei $C \subset M \subset \R^n$, wobei $C$ kompakt und $M$ eine $k$-dim. UMF.\\
   Ein Punkt $x \in M$ heißt \emph{Randpunkt} von $C$ relativ zu $M$, wenn gilt:
-  \[ \fa{\underbrace{U \opn M}_{\text{bzgl. der Relativtopologie}} \text{ mit } x \in U} U \cap C \not= \emptyset \enspace \text{und} \enspace U \cap (M \setminus C) \not= \emptyset. \]
+  \[ \fa{\underbrace{U \opn M}_{\mathclap{\text{in der Relativtopologie}}} \text{ mit } x \in U} U \cap C \not= \emptyset \enspace \text{und} \enspace U \cap (M \setminus C) \not= \emptyset. \]
 \end{defn}
 
 % Ausgelassen: Definition Relativtopologie
@@ -1610,35 +1651,68 @@ orientierter Atlas $\Atlas = \{ (\phi, \partial H_k) \}$ und $(\partial H_k, [\A
 \end{nota}
 
 \begin{defn}
-  $C$ hat glatten Rand in $M$, wenn gilt:
-  \[ \fa{x \in \partial_M C} \ex{\text{UMF-Karte } \widetilde{\phi} : \widetilde{U} \to \widetilde{V} \text{ mit } x \in \widetilde{U}} \]
-  für $\phi \coloneqq \mathrm{proj}_{\R^k} \circ \widetilde{\phi}|_U : U \to V$ (Homöo) gilt:
+  Sei $C \subset M \subset \R^n$, wobei $C$ kompakt und $M$ eine $k$-dim. UMF.
+  Dann hat $C$ glatten Rand in $M$, wenn gilt: Für alle $x \in \partial_M C$ gibt es eine UMF-Karte $\widetilde{\phi} : \widetilde{U} \to \widetilde{V}$ mit $x \in \widetilde{U}$, sodass für die Karte $\phi$ gilt:
   \begin{itemize}
-    \item $\phi(U \cap C) = V \cap H_k$
-    \item $\phi(U \cap \partial_M C) = V \cap \partial H_k$
+    \begin{multicols}{2}
+      \item $\phi(U \cap C) = V \cap H_k$
+      \item $\phi(U \cap \partial_M C) = V \cap \partial H_k$
+    \end{multicols}
   \end{itemize}
+\end{defn}
+
+\begin{defn}
   Eine UMF-Karte $(\widetilde{\phi}, \widetilde{U})$ (bzw. eine Karte $(\phi, U)$), die diese Bedingungen erfüllt, heißt \emph{Rand-adaptiert}.
 \end{defn}
 
+\begin{nota}
+  $\rho : \R^n \to \R^n, \enspace (x_1, ..., x_n) \mapsto (x_2, ..., x_k, x_1, x_{k+1}, ..., x_n)$
+\end{nota}
+
 % Übungsaufgabe:
 \begin{lem}
-  $C \subset M$ Kompaktum mit glattem Rand. Dann gilt:
+  Sei $M \subset \R^n$ eine $k$-dimensionale UMF mit $k \geq 2$ und $C \subset M$ ein Kompaktum mit glattem Rand. Dann gilt:
   \begin{itemize}
-    \item  Ist $\Atlas = \Set{ (\widetilde{\phi}_i, \widetilde{U}_i) }{ i \in I }$ ein UMF-Atlas von $M$ aus Rand-adaptierten Karten, dann ist
-    \[ \Atlas' = \Set{ (\phi_i', \widetilde{U}_i) }{ i \in I } \]
-    \[ \phi_i' = \rho \circ \widetilde{\phi} \]
-    \[ \rho : \R^n \to \R^n, \quad (x_1, ..., x_n) \mapsto (x_2, ..., x_k, x_1, x_{k+1}, ..., x_n) \]
-    ein UMF-Atlas von $\partial_M C$. Insbesondere ist $\partial_M C$ eine $(k{-}1)$-dimensionale UMF.
-    \item Ist $M$ orientiert, dann gibt es einen positiv orientierten, Rand-adaptierten Atlas $\Atlas = \Set{ (\widetilde{phi}_i, \widetilde{U}_i) }{ i \in I }$ von $M$. Sodann ist $\Atlas'$ ein orientierter UMF-Atlas von $\partial_m C$. ($[\Atlas']$ definiert eine Orientierung auf $\partial_M C$.)
+    \item Es gibt einen UMF-Atlas $\Atlas = \Set{ (\widetilde{\phi}_i, \widetilde{U}_i) }{ i \in I }$ bestehend aus bzgl. $C$ Rand-adaptierten UMF-Karten von $M$.
+    \item  Ist $\Atlas$ ein solcher UMF-Atlas, dann ist ein UMF-Atlas von $\partial_M C$:
+    \[
+      \Atlas' \coloneqq \Set{ (\phi_i', \widetilde{U}_i) }{ i \in I }.
+      \quad \text{mit} \quad
+      \phi_i' \coloneqq \rho \circ \widetilde{\phi}
+    \]
+    Insbesondere ist $\partial_M C$ eine $(k{-}1)$-dimensionale UMF.
+    \item Ist $M$ orientiert, dann gibt es einen positiv orientierten, Rand- adaptierten Atlas $\Atlas = \Set{ (\widetilde{\phi}_i, \widetilde{U}_i) }{ i \in I }$ von $M$. Sodann ist $\Atlas'$ ein orientierter UMF-Atlas von $\partial_M C$.
   \end{itemize}
 \end{lem}
+
+\begin{defn}
+   $[\Atlas']$ heißt \emph{induzierte Orientierung} auf $\partial_M C$.
+\end{defn}
 
 % Vorbereitungslemma:
 
 \begin{lem}
-  Sei $\Omega$ eine stetig diff'bare $(k{-}1)$-Form auf $\R^k$ mit kompaktem Träger. Dann gilt:
-  \[ \Intdf{H_k}{\d \omega} = \Intdf{\partial H_k}{\omega}. \]
+  Sei $\omega$ eine stetig diff'bare $(k{-}1)$-Form auf $\R^k$ mit kompaktem Träger. Dann gilt:
+  \[ \Intdf{H_k}{\d \omega} = \, \Intdf{\mathclap{\partial H_k}}{\, \omega}. \]
 \end{lem}
+
+\begin{satz}[Stokes]
+  Sei $M \subset \R^n$ eine orientierte $k$-dim. UMF von $\R^n$ und $C \subset M$ kompakt mit glattem Rand $\partial_M C$. Sei $U \opn \R^n$ mit $M \subset U$ sowie $\omega$ eine stetig diff'bare $(k{-}1)$-Form auf $U$. Dann gilt (bzgl. der induzierten Orientierung auf $\partial_M C$):
+  \[ \Intdf{C}{\d \omega} = \, \Intdf{\mathclap{\partial_M C}}{\,\omega} \]
+\end{satz}
+
+\iffalse
+\begin{satz}[Stokes]
+  Gegeben sei
+  \begin{itemize}
+    \item $M \subset \R^n$ $k$-dimensionale Untermannigfaltigkeit
+    \item $\widehat{U} \opn \R^n$, $M \subset \widehat{U}$
+    \item $\omega$ stetig diff'bare $(k{-}1)$-Form auf $\widehat{U}$.
+    \item $C \subset M$ Kompaktum mit glattem Rand $\partial_M C$.
+  \end{itemize}
+  Dann gilt (bzgl. der induzierten Orientierung auf $\partial_M C$)
+\end{satz}
+\fi
 
 % Vorlesung vom 29.1.2014: Beweis von obigem Lemma und dem Satz von Stokes
 
