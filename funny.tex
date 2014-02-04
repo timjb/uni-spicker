@@ -1744,7 +1744,7 @@ Die Unterräume $E_n = \im(Q_n)$ erfüllen dann (3) aus dem ersten Lemma und (2)
   \end{itemize}
   Das Spektrum wird noch weiter zerlegt in das
   \begin{itemize}
-    \item \emph{Punktspektrum} $\sigma_p(T) \coloneqq \Set{ \lambda \in \sigma(T) }{ \ker(\lambda \Id - T) \not= \emptyset }$,
+    \item \emph{Punktspektrum} $\sigma_p(T) \coloneqq \Set{ \lambda \in \sigma(T) }{ \ker(\lambda \Id - T) \not= \{ 0 \} }$,
     \item \emph{kontinuierliche Spektrum}
     \begin{align*}
       \sigma_c(T) \coloneqq \{ \lambda \in \sigma(T) \mid\, &\ker(\lambda \Id - T) = \{ 0 \} \text{ und } \im (\lambda \Id - T) \not= X,\\[-2pt]
@@ -1806,6 +1806,10 @@ Die Unterräume $E_n = \im(Q_n)$ erfüllen dann (3) aus dem ersten Lemma und (2)
 
 \iffalse
 
+\begin{bsp}
+  Sei $H$ ein Hilbertraum mit ONB $(e_n)_{n \in \N}$. Setze $S e_n \coloneqq e_{n+1}$ für $n \in \N$. Dann ist $S \in \LSO(H, H)$ ein Fredholm-Operator mit $\ind(S) = -1$.
+\end{bsp}
+
 % ********
 % * TODO *
 % ********
@@ -1855,5 +1859,26 @@ Die Unterräume $E_n = \im(Q_n)$ erfüllen dann (3) aus dem ersten Lemma und (2)
     \item Ist $E_\lambda$ für $\lambda \in \sigma(T) \setminus \{ 0 \}$ die Projektion auf $\ker (\lambda \Id - T)^{n_\lambda}$ gemäß der Zerlegung in Punkt 3, so gilt $E_\lambda E_\mu = \delta_{\lambda \mu} E_\lambda$ für $\lambda, \mu \in \sigma(T) \setminus \{ 0 \}$
   \end{itemize}
 \end{satz}
+
+% Vorlesung vom 4.2.2014
+
+% Erste Stunde der Vorlesung: Wiederholung, Beweis des Spektralsatzes
+
+\begin{kor}
+  Ist $T \in \mathcal{K}$ und $\lambda \in \sigma(T) \setminus \{ 0 \}$, so hat die Resolventenfunktion $\mu \mapsto R(\mu, T)$ in $\lambda$ einen isolierten \emph{Pol} der Ordnung $n_{\lambda}$, d.\,h.
+  \[ \mu \mapsto (\mu - \lambda)^{n_\lambda} R_{\lambda} R_{\lambda}(\mu, T) \]
+  kann im Punkt $\lambda$ komplex analytisch fortgesetzt werden. Der Wert in $\lambda$ ist von Null verschieden.
+\end{kor}
+
+% Beweisidee: Nutze die Zerlegung (3) des Spektralsatzes $X = \ker((\lambda \Id - T)^{n_\lambda}) \oplus \im((\lambda \Id - T)^{n_\lambda})$.
+% Schreibe $R(\lambda+\mu, T) = R(\lambda + \mu, T|_{\im(E_\lambda)}) E_\lambda + R(\lambda + \mu, T|_{\ker(E_\lambda)}) (\Id - E_{\lambda})$ (komplex analytisch nach dem ersten Satz)
+
+\begin{kor}[Fredholmsche Alternative]
+  Ist $T \in \mathcal{K}(X)$ und $\lambda \not= 0$, so gilt: Entweder ist die Gleichung $Tx - \lambda x = y$ eindeutig lösbar für jedes $y \in X$ oder die Gleichung $Tx - \lambda x = 0$ hat nichttriviale Lsgen.
+\end{kor}
+
+\begin{kor}
+  Sei $X$ ein endlich-dimensionaler VR über $\C$ und $T : X \to X$ linear. Dann gibt es paarwise verschiedene $\lambda_1, ..., \lambda_m \in \C$, wobei $1 \leq m \leq \dim X$, sodass $\sigma(T) = \sigma_p(T) = \{ \lambda_1, ..., \lambda_m \}$ und Ordnungen $n_{\lambda_j}$ mit $X = \ker \left( (\lambda \Id - T)^{n_{\lambda_1}} \right) \oplus ... \oplus \ker \left( (\lambda \Id - T)^{n_{\lambda_1}} \right)$.
+\end{kor}
 
 \end{document}
