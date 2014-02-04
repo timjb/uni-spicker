@@ -1027,11 +1027,11 @@
 \end{beobachtung}
 
 \begin{defn}
-Die \emph{Variation} von $g : [a, b] \to \R$ bzgl. einer Zerlegung $Z = \{ a = x_0 < ... < x_n = b \}$ von $[a, b]$ ist die nicht-negative Zahl
-\[ V(g, Z) \coloneqq \sum_{j=1}^{n} |g(x_j) - g(x_{j-1})|. \]
-Die \emph{Totalvariation} von $g : [a, b] \to \R$ ist
-\[ V_a^b(g) \coloneqq \sup\left\{ V(g, Z) : Z \text{ Zerlegung von } [a, b] \right\} \in \R_{\ge 0} \cup \{ \infty \}. \]
-Falls $V_a^b(g) < \infty$, so heißt $g$ \emph{von beschränkter Variation}.
+  Die \emph{Variation} von $g : [a, b] \to \R$ bzgl. einer Zerlegung $Z = \{ a = x_0 < ... < x_n = b \}$ von $[a, b]$ ist die nicht-negative Zahl
+  \[ V(g, Z) \coloneqq \sum_{j=1}^{n} |g(x_j) - g(x_{j-1})|. \]
+  Die \emph{Totalvariation} von $g : [a, b] \to \R$ ist
+  \[ V_a^b(g) \coloneqq \sup\left\{ V(g, Z) : Z \text{ Zerlegung von } [a, b] \right\} \in \R_{\ge 0} \cup \{ \infty \}. \]
+  Falls $V_a^b(g) < \infty$, so heißt $g$ \emph{von beschränkter Variation}.
 \end{defn}
 
 \begin{satz}
@@ -1326,7 +1326,7 @@ Falls $V_a^b(g) < \infty$, so heißt $g$ \emph{von beschränkter Variation}.
 
 \begin{defn}
   Für eine ZG $X : (\Omega, \Alg, \P) \to (\ER, \Bor(\ER))$ heißt die Zahl
-  \[ \E X := \Int{\Omega}{}{X}{\P} \qquad \text{\emph{Erwartungswert} von $X$.} \]
+  \[ \E X := \Int{\Omega}{}{X}{\P} \qquad \text{\emph{Erwartungswert} (EW) von $X$.} \]
 \end{defn}
 
 % Ausgelassen: Interpretation als Schwerpunkt der W-Massenverteilung, Lageparameter
@@ -1533,17 +1533,17 @@ Falls $V_a^b(g) < \infty$, so heißt $g$ \emph{von beschränkter Variation}.
   Wir können uneigentliche RS-Integrale analog zu uneigentlichen Riemann-Integralen definieren.
 \end{bem}
 
+% Ausnutzen der partiellen Integration zur Berechnung von Erwartungswerten
+\begin{satz}
+  Sei $\E \abs{X} = \Int{0}{\infty}{1 - F_X(x) + F_X(-x)}{x} < \infty$ und $\lim_{x \to \infty} x \cdot F_X(-x) = \lim_{x \to \infty} x \cdot (1-F_X(x)) = 0$. Dann gilt
+  \[ \E X = \Int{0}{\infty}{1 - F_X(x) - F_X(-x)}{x}. \]
+\end{satz}
+
 % TODO: Steht hier etwas wichtiges (und richtiges)?
 \iffalse
-  % Ausnutzen der partiellen Integration zur Berechnung von Erwartungswerten
-
   \[ \E X = \Int{- \infty}{\infty}{x}{F(x)} \]
 
   Falls $\lim{x \to \infty} x F_X(-x) = \lim{x \to \infty} x (1 - F_X(x)) = 0$, so gilt
-
-  $\E X = \Int{0}{\infty}{1 - F_X(x) - F_X(-x)}{x}$, falls $\E |X| < \infty$
-
-  $\E |X| = \Int{0}{\infty}{1 - F_X(x) - F_X(-x)}{x}$
 
   Genauso werden Erwartungswerte von Funktionen von $X$ berechnet, z.B. mit $x^2 F_X(-x) \xrightarrow{x \to \infty} 0$ und $x^2 (1 - F_X(x)) \xrightarrow{x \to \infty} 0$
 
@@ -1578,7 +1578,9 @@ Falls $V_a^b(g) < \infty$, so heißt $g$ \emph{von beschränkter Variation}.
   % Zwischenschritt: $\E (X^2 - 2 X \cdot \E X + (\E X)^2)$
 \end{lem}
 
-% Ausgelassen: Korollar: $\abs{\E X} \leq \sqrt{\E X^2}$
+\begin{kor}
+  $(\E X)^2 \leq \E (X^2)$
+\end{kor}
 
 \begin{lem}
   $\E X^k = \Int{\Omega}{}{X^n}{\P} = \Int{\R^1}{}{\id^n}{P_X} = \Int{-\infty}{\infty}{x^n}{F_X} =$
@@ -1609,149 +1611,165 @@ Falls $V_a^b(g) < \infty$, so heißt $g$ \emph{von beschränkter Variation}.
 % TODO: Kumulanten, kumulantenerzeugende Funktion, Med (?)
 
 \begin{satz}[Verallgemeinerte Tschebyschow-Ungleichung]
-  $X$ sei eine ZG und $g : \left[ 0, \infty \right[ \to \left[ 0, \infty \right[$ monoton steigend. Dann gilt für alle $\epsilon > 0$:
+  Sei $X$ sei eine ZG und $g : \left[ 0, \infty \right[ \to \left[ 0, \infty \right[$ nicht fallend. Dann gilt für alle $\epsilon > 0$:
   \[ \P(\abs{X} \geq \epsilon) \leq \frac{\E g(\abs{X})}{g(\epsilon)} \]
 \end{satz}
 
 % Spezialfälle:
 \begin{kor}
   \begin{itemize}
-    \item \emph{Markow-Ungleichung}: $\P(\abs{X} \geq \epsilon) \leq \tfrac{\E X}{\epsilon}$.
-    \item \emph{Tschebyschow-Ungleichung}: $\P(\abs{X - \E X} \geq \epsilon) \leq \frac{\Var(X)}{\epsilon^2}$.
+    \item \emph{Markow-Ungleichung}: $\P(\abs{X} \geq \epsilon) \leq \tfrac{\E \abs{X}}{\epsilon}$.
+    \item \emph{Tschebyschow-Ungleichung}: $\P(\abs{X - \E X} \geq \epsilon) \leq \tfrac{\Var(X)}{\epsilon^2}$.
     \item Für alle $a > 0$ gilt $\P(\abs{X} \geq \epsilon) \leq \tfrac{\E \exp(a \abs{X})}{\exp(a\epsilon) }$.
   \end{itemize}
 \end{kor}
 
-
-
-
-
-
-
-
-
-
-
-
-
-$0 > B = \E \exp(a \abs{X}) \geq \frac{a^n \E \abs{X}^n}{n!}$
-
-$\implies$ $\E \abs{X}^n \leq \tfrac{B}{a^n} n!$ für alle $n \in \N$
-
-$\implies$ $\abs{\E X^n} \leq \tfrac{B}{a^n} n!$
-
-$\implies$ $\E \exp(z X)$ ist analytisch für $\abs{z} < a$
+\iffalse
+  $0 > B = \E \exp(a \abs{X}) \geq \frac{a^n \E \abs{X}^n}{n!}$
+  $\implies$ $\E \abs{X}^n \leq \tfrac{B}{a^n} n!$ für alle $n \in \N$
+  $\implies$ $\abs{\E X^n} \leq \tfrac{B}{a^n} n!$
+  $\implies$ $\E \exp(z X)$ ist analytisch für $\abs{z} < a$
+\fi
 
 \begin{defn}
-  $\E \exp(z X)$ heißt momenterzeugende Funktion der ZG $X$ oder VF $F_X$.
+  Die Abbildung $t \mapsto \E \exp(t X) = \sum_{n=0}^\infty \tfrac{t^n}{n!} \E X^n$ heißt momenterzeugende Funktion der ZG $X$ oder VF $F_X$.
 \end{defn}
 
 % Beispiel
-$X = N(\mu, \sigma^2)$ $\implies$ $\E \exp(z X) = \exp\left( z\mu + \tfrac{\sigma^2}{2} z^2 \right)$ für $z \in \C$
-
-\emph{Höldersche Ungleichung}:
-
-$\abs{\E X Y} \leq \E \abs{XY} \leq (\E \abs{X}^p)^{\tfrac{1}{p}} \cdot (\E \abs{X}^q)^{\tfrac{1}{q}}$ für $p, q \geq 1$
-
-$\implies$ Cauchy-Schwarz-Bunjakowski-Ungleichung für $p = q = 2$:
-
-$\abs{\E XY} \leq \sqrt{ \E (X^2) \E(Y^2) }$
-
-Verallgemeinerung:
-
-$\E(X_1^{n_1} \cdots X_k^{n_k}) \leq (\E \abs{X_1}^n)^{\tfrac{n_1}{n}} \cdots (\E \abs{X_k}^n)^{\tfrac{n_k}{n}}$, $n = n_1 + ... + n_k$
-
-\emph{Jensensche Ungleichung}
-
-Sei $g : \R^1 \to \R^1$ konvex auf einem Intervall $J$, d.\,h.
-
-$g(\alpha x + (1-\alpha)y) \leq \alpha g(x) + (1-\alpha) g(y)$ für alle $x, y \in I$ und $\alpha \in [0,1]$
-
-Per Induktion folgt: $g(\sum_{i=1}^n \alpha_i x_i) \leq \sum_{i=1}^n \alpha_i g(x_i)$ für $x_1, ..., x_n \in J$, $\alpha_i \geq 0$, $\alpha_1 + ... + \alpha_n = 1$
+\begin{bsp}
+  Für $X \sim N(\mu, \sigma^2)$ gilt $\E \exp(z X) = \exp\left( z\mu + \tfrac{\sigma^2}{2} z^2 \right)$.
+\end{bsp}
 
 \begin{satz}
-  $g(\E X) \leq \E g(X)$, falls $\P(X \in J) = 1$ und $\E \abs{X} < \infty$
+  Für $p, q \in \left] 1, \infty \right[$ mit $\tfrac{1}{p} + \tfrac{1}{q} = 1$ und ZGen $X, Y$ gilt
+  \[
+    \abs{\E X Y} \leq \E \abs{XY} \leq (\E \abs{X}^p)^{\tfrac{1}{p}} \cdot (\E \abs{X}^q)^{\tfrac{1}{q}}
+    \quad \text{\emph{(Hölder-Ungl).}}
+  \]
 \end{satz}
 
-% Beispiel
+\begin{kor}
+  \emph{Cauchy-Schwarz-Ungl}: $\abs{\E XY} \leq \sqrt{ \E (X^2) \cdot \E(Y^2) }$
+\end{kor}
 
-$g(x) = \abs{x}^{\tfrac{n}{m}}$ für $0 < m \leq n$, $\implies$ \emph{Ljapunow-Ungleichung}
+\iffalse
+  Verallgemeinerung:
 
-\begin{problem}[Momentenproblem]
-  Unter welchen Bedingungen ist eine Zahlenfolge $c_0 = 1, c_1, c_2, ...$ eine Momentenfolge einer ZG $X$, d.\,h. $c_n = \E X^n$.
-\end{problem}
+  $\E(X_1^{n_1} \cdots X_k^{n_k}) \leq (\E \abs{X_1}^n)^{\tfrac{n_1}{n}} \cdots (\E \abs{X_k}^n)^{\tfrac{n_k}{n}}$, $n = n_1 + ... + n_k$
+\fi
+
+\begin{defn}
+  Eine Funktion $g : J \to \R$ heißt \emph{konvex}, falls gilt:
+  \[ \fa{x, y \in J} \fa{t \in \left[ 0, 1 \right]} g(t a + (1{-}t)b) \leq t g(a) + (1{-}t) g(b) \]
+\end{defn}
+
+\begin{satz}
+  Sei $g : \R^1 \to \R^1$ konvex auf einem Intervall $J$ und $X$ eine ZG mit $\P(X \in J) = 1$ und $\P \abs{X} < \infty$. Dann gilt für $x, y \in I$, $t \in \left[0,1\right]$:
+  \[
+    g(\E X) \leq \E g(X)
+    \quad \text{(\emph{Jensen-Ungleichung}).}
+  \]
+\end{satz}
+
+\iffalse
+  Per Induktion folgt: $g(\sum_{i=1}^n \alpha_i x_i) \leq \sum_{i=1}^n \alpha_i g(x_i)$ für $x_1, ..., x_n \in J$, $\alpha_i \geq 0$, $\alpha_1 + ... + \alpha_n = 1$
+\fi
+
+\begin{kor}
+  % Für  $g(x) = \abs{x}^{\tfrac{n}{m}}$ für $0 < m \leq n$:
+  \emph{Ljapunow-Ungleichung}: $\abs{\E X}^{\tfrac{n}{m}} \leq \E \abs{X}^{\tfrac{n}{m}}$
+\end{kor}
+
+\begin{frage}[Momentenproblem (MP)]
+  Unter welchen Bedingungen ist eine Folge $(c_i)_{i \in \N}$ eine Momentenfolge einer ZG $X$ d.\,h. $c_i = \E X^i$?
+\end{frage}
 
 \begin{antwort}
-  $0 \leq \E(z_0 + z_1 X + ... + z_n X^n)^2 = \E(\sum_{i,j=1}^n z_i z_j X^{i+j}) = \sum_{i,j=1}^n z_i z_j c_{i+j}$ genau dann, wenn
+  % $0 \leq \E(z_0 + z_1 X + ... + z_n X^n)^2 = \E(\sum_{i,j=1}^n z_i z_j X^{i+j}) = \sum_{i,j=1}^n z_i z_j c_{i+j}$ genau dann, wenn
 
-  $\det \begin{pmatrix} c_0 & c_1 & \cdots & c_n \\ c_1 & c_2 & \cdots & c_{n+1} \\ \vdots & \vdots & & \vdots \\ c_n & c_{n+1} & \cdots & c_{2n} \end{pmatrix} \geq 0$.
+  Genau dann, wenn
+
+  \[
+    \fa{n \in \N} \det \left( \begin{smallmatrix} c_0 & c_1 & \cdots & c_n \\ c_1 & c_2 & \cdots & c_{n+1} \\ \vdots & \vdots & & \vdots \\ c_n & c_{n+1} & \cdots & c_{2n} \end{smallmatrix} \right) \geq 0.
+  \]
 \end{antwort}
 
-\begin{problem}
-  Wann ist die zugehörige VF $F_X$ eindeutig festgelegt? $c_n = \Int{0}{\infty}{x^n}{F_X(x)}$ (Stieltjes-MP), $c_n = \Int{-\infty}{\infty}{x^n}{F_X(x)}$ (Hamburger MP)
+\begin{frage}
+  Wann ist die zugehörige VF $F_X$ eindeutig festgelegt?
+\end{frage}
 
-  Hinreichende Bedingung für Bestimmtheit:
+\begin{bem}
+  Dabei unterscheiden wir folgende Momentenprobleme:
+  \begin{itemize}
+    \begin{multicols}{2}
+      \item Stieltjes: $c_n = \Int{0}{\infty}{x^n}{F_X(x)}$
+      \item Hamburger: $c_n = \Int{\mathclap{-\infty}}{\infty}{x^n}{F_X(x)}$
+    \end{multicols}
+  \end{itemize}
+\end{bem}
 
-  Stieltjes-MP: $\sum_{n=1}^\infty \frac{1}{c_{2n}^{\tfrac{1}{n}}} = \infty$
-
-  Hamburger MP: $\sum_{n=1}^\infty \frac{1}{c_{2n}^{\tfrac{1}{2n}}} = \infty$
-
-  (Carleman-Kriterien)
-\end{problem}
+\begin{antwort}
+  Hinreichende Bedingung für Bestimmtheit (Carleman):
+  \begin{itemize}
+    \begin{multicols}{2}
+      \item Stieltjes: $\sum_{n=1}^\infty c_{n}^{-\tfrac{1}{2n}} = \infty$
+      \item Hamburger: $\sum_{n=1}^\infty c_{2n}^{-\tfrac{1}{2n}} = \infty$
+    \end{multicols}
+  \end{itemize}
+\end{antwort}
 
 
 % Vorlesung vom 17.1.2014
 
 % Kapitel 3.9. Randverteilungen von ZVen und Unabhängigkeit
 
-\begin{defn}
-  Sei $X = (X_1, ..., X_k)$ eine $k$-dimensionale ZV über $(\Omega, \Alg, \P)$. $X_1, ..., X_k$ heißen \emph{stochastisch unabhängig}, falls
+\begin{bem}
+  Sei $X = (X_1, ..., X_k)$ eine $k$-dimensionale ZG über $(\Omega, \Alg, \P)$. Die ZG $X_1, ..., X_k$ heißen \emph{stochastisch unabhängig}, falls
   \[ \P(\bigcap_{i=1}^k \{ X_i \in B_i \}) = \prod_{i=1}^k \P(\{ X_i \in B_i \}) \]
   für alle $B_1, ..., B_k \in \mathcal{L}(\R^1)$. Dies ist genau dann der Fall, wenn
-  \[ \P(X_1 \leq x_1, ..., X_k \leq x_k) = \P(X_1 \leq x_1) \cdots \P(X_k \leq X_k) \]
-  für alle $x_1, ..., x_k \in \R$. Falls die W-Dichte $f_X(x_1, ..., x_k) = \tfrac{\partial}{\partial x_1 \cdots \partial x_k} F(x_1, ..., x_k)$ existiert (also $F_X$ absolut stetig), ist dies äquivalent zu
-  \[ f_X(x_1, ..., x_k) = f_{X_1}(x_1) \cdots f_{X_k}(x_k). \]
+  \[ \P(X_1 \leq x_1, ..., X_k \leq x_k) = \P(X_1 \leq x_1) \cdot ... \cdot \P(X_k \leq x_k) \]
+  für alle $x_1, ..., x_k \in \R$. Falls $F_X$ absolut stetig ist, also die W-Dichte $f_X(x_1, ..., x_k) = \tfrac{\partial F(x_1, ..., x_k)}{\partial x_1 \cdots \partial x_k}$ existiert, ist dies äquivalent zu
+  \[ \fa{x_1, ..., x_k {\in} \R} f_X(x_1, ..., x_k) = f_{X_1}(x_1) \cdot ... \cdot f_{X_k}(x_k). \]
   Für diskrete Verteilungen ist dies äquivalent zu
-  \[ \P(X_1 = x_1, ..., X_k = x_k) = \P(X_1 = x_1) \cdots \P(X_k = x_k) \]
-  für alle $x_1, ..., x_k \in \R$.
-\end{defn}
+  \[ \fa{x_1, ..., x_k {\in} \R} \P(X_1 {=} x_1, ..., X_k {=} x_k) = \P(X_1 {=} x_1) \cdot ... \cdot \P(X_k {=} x_k). \]
+\end{bem}
 
 \begin{defn}
   Für eine $k$-dimensionale ZV $X = (X_1, ..., X_k)$ heißt
-  \[ F_{(X_{i_1}, ..., X_{i_l})}(x_{i_1}, ..., x_{i_l}) = \lim_{\substack{x_j \to \infty}_{j \in \{ 1, ..., k\} \setminus \{ i_1, ..., i_l \}}} F_(X_1, ..., X_k)(x_1, ..., x_k) \]
-  für $1 \leq i_1 < ... < i_l \leq k$, $l = 1, ..., k-1$ \emph{$l$-dimensionale Rand-(Marginal-)verteilungsfunktion}.
+  \[ F_{(X_{i_1}, ..., X_{i_l})}(x_{i_1}, ..., x_{i_l}) = \quad \lim_{\mathclap{\substack{x_j \to \infty \\ j \in \{ 1, ..., k\} \setminus \{ i_1, ..., i_l \}}}} \quad F_{X}(x_1, ..., x_k) \]
+  mit $l \in \{1, ..., k{-}1 \}$ und $1 \leq i_1 < ... < i_l \leq k$ \emph{$l$-dimensionale Rand-(Marginal-)verteilungsfunktion}.
 \end{defn}
 
-Falls $f_X(x_1, ..., x_k)$ existiert, so existieren sämtliche Randdichten
+\begin{bem}
+  Falls $f_X(x_1, ..., x_k)$ ex., so existieren alle Randdichten
+  \[ f_{(X_{i_1}, ..., X_{i_l})}(x_{i_1}, ..., x_{i_l}) = \Int{\R^{k{-}l}}{}{f_{X}(x_1, ..., x_k)}{x_{i_1} \cdots \d x_{i_l}}. \]
+  Für $k{=}2$ und ZV diskret mit Masseschwerpunkten $x_m = (x_m^{1}, x_m^{2})$:
+  \[ \P(X_1 = x_m^{1}) = \sum_{x_m^{2}} \P(X_1 = x_m^{1}, X_2 = x_m^{2}) \]
+  %\[ \P(X_2 = x_m^{2}) = \sum_{x_m^{1}} \P(X_1 = x_m^{1}, X_2 = x_m^{2}) \]
+\end{bem}
 
-\[ f_{(X_{i_1}, ..., X_{i_k})}(x_{i_1}, ..., x_{i_k}) = \Int{\R^{k-l}}{}{f_{(X_1, ..., X_k)}(x_1, ..., x_k)}{(x_1, \widehat{x_{i_1}}, ..., \widehat{x_{i_k}}, ..., x_k)} \]
-
-Analog folgt für eine diskrete ZV die Diskretheit der Randverteilungen $k=2$:
-
-\[ \P(X_1 = x_m^{(1)}) = \sum_{x_m^{(2)}} \P(X_1 = x_m^{(1)}, X_2 = x_m^{(2)}) \]
-\[ \P(X_2 = x_m^{(2)}) = \sum_{x_m^{(1)}} \P(X_1 = x_m^{(1)}, X_2 = x_m^{(2)}) \]
-
-wobei $x_m = (x_m^{(1)}, ..., x_m^{(k)})$ die Massenschwerpunkte sind.
-
-Wichtig: Im allgemeinen bestimmen die Randverteilungen nicht die gemeinsame Verteilung des Vektors.
+\begin{bem}
+ Im Allgemeinen bestimmen die Randverteilungen nicht die gemeinsame Verteilung des Vektors.
+\end{bem}
 
 % Copula: Vorgabe des Zusammenhangs der Komponenten und eindimensionale Randverteilungen
 
 % Kapitel 3.10. Kovarianz und Korrelation
 
 \begin{defn}
-  $(X, Y)$ sei eine zweidimensionale ZVüber $(\Omega, \Alg, \P)$ mit $\E X^2 < \infty$, $\E Y^2 < \infty$. Dann heißt
-  \[ \cov(X, Y) \coloneqq \E(XY) - \E X \E Y = \E ((X - \E X) \cdot (Y - \E Y)) \]
-  \emph{Kovarianz} von $X$ und $Y$ und
-  \[ \cor(X, Y) \coloneqq \frac{\cov(X, Y)}{\sqrt{\Var(X) \cdot \Var(Y)}} \]
-  \emph{Korrelation} von $X$ und $Y$.
+  $(X, Y)$ sei eine zweidimensionale ZV über $(\Omega, \Alg, \P)$ mit $\E X^2 < \infty$ und $\E Y^2 < \infty$. Dann heißen
+  \begin{align*}
+    \cov(X, Y) &\coloneqq \E(X \cdot Y) - \E X \cdot \E Y = \E ((X - \E X) \cdot (Y - \E Y)) \\
+    \cor(X, Y) &\coloneqq \tfrac{\cov(X, Y)}{\sqrt{\Var(X) \cdot \Var(Y)}}
+  \end{align*}
+  \emph{Kovarianz} bzw. \emph{Korrelation} von $X$ und $Y$.
 \end{defn}
 
 \begin{satz}
   \begin{itemize}
     \item Falls $X, Y$ unabhängig, so gilt $\cov(X, Y) = \cor(X, Y) = 0$
-    \item $\abs{\cor(X, Y)} \leq 1$
-    \item $\cor(X, Y) = 1 \iff \exists \, a, b \in \R^1 \,:\, \P(Y = aX + b) = 1$.
+    \miniitem{0.28 \linewidth}{$\abs{\cor(X, Y)} \leq 1$}
+    \miniitem{0.70 \linewidth}{$\cor(X, Y) {=} 1 \!\iff\! \exists \, a,b \in \R : \P(Y {=} aX {+} b) {=} 1$}
   \end{itemize}
 \end{satz}
 
@@ -1759,23 +1777,31 @@ Wichtig: Im allgemeinen bestimmen die Randverteilungen nicht die gemeinsame Vert
   Falls $\cor(X, Y) = 0$, so heißen $X, Y$ \emph{unkorreliert}.
 \end{defn}
 
+\begin{sprech}
+  \begin{itemize}
+    \item $\cor(X, Y) \approx 1$: positive Korrelation
+    \item $\cor(X, Y) \approx -1$: negative Korrelation
+    %\item $\cor(X, Y) = 0$: Unkorreliertheit
+  \end{itemize}
+\end{sprech}
+
 \begin{acht}
   Aus Unkorreliertheit folgt i.\,A. nicht Unabhängigkeit!
 \end{acht}
 
 \begin{bsp}
-  Sei $X$ eine ZG mit der symmetrischen Dichte $f_X(x) = f_X(-x)$ und $\Int{-\infty}{\infty}{\abs{x}^3 f_X(x)}{x} < \infty$, dann ist $\cov(X, X^2) = 0$, aber $X$ und $X^2$ nicht unabhängig.
+  Sei $X$ eine ZG mit der symmetrischen Dichte
+  \[
+    f_X(x) = f_X(-x)
+    \quad \text{und} \quad
+    \Int{-\infty}{\infty}{\abs{x}^3 f_X(x)}{x} < \infty,
+  \]
+  dann ist $\cov(X, X^2) = 0$, aber $X$ und $X^2$ nicht unabhängig.
 \end{bsp}
 
 \begin{bem}
-  \begin{itemize}
-    \item $\cor(X, Y) = 1$: positive Korrelation
-    \item $\cor(X, Y) = -1$: negative Korrelation
-    \item $\cor(X, Y) = 0$: Unkorreliertheit
-  \end{itemize}
+ Falls $(X, Y)$ eine zweidimensionale Normalverteilung besitzt, so folgt aus $\cor(X, Y) = 0$ die Unabhängigkeit von $X$ und $Y$.
 \end{bem}
-
-Wichtig: Falls $(X, Y)$ eine zweidimensionale Normalverteilung besitzt, so folgt aus $\cor(X, Y) = 0$ die Unabhängigkeit von $X$ und $Y$.
 
 \begin{satz}
   $X_1, ..., X_n$ seien paarweise unkorrelierte ZGn mit $\E X_i^2 < \infty$ für $i = 1, ..., n$. Dann gilt
@@ -1785,165 +1811,207 @@ Wichtig: Falls $(X, Y)$ eine zweidimensionale Normalverteilung besitzt, so folgt
 
 % Vorlesung vom 22.1.2014
 
-Wir wollen die Kovarianz der ZG $X$ und $Y$ berechnen.
+% Wir wollen die Kovarianz der ZG $X$ und $Y$ berechnen.
 
-1. Fall: Es existiert eine gemeinsame WD von $(X, Y)$, $f_{(X, Y)}(x, y)$ (Lebesgue-messbar, $\geq 0$, $\Int{\R^2}{}{f_{(X,Y)}(x,y)}{(x, y)} = 1$)
+\begin{bem}
+  Seien $X$ und $Y$ ZGen. Gesucht: $\E (X \cdot Y)$
+  \begin{itemize}
+    \item Angenommen, es existiert eine gemeinsame WD $f_{(X, Y)}$. Dann:
+    \begin{align*}
+      \E (XY) &= \Int{\R^2}{}{x y \cdot f_{(X,Y)}(x,y)}{(x, y)} \\
+      \E X &= \Int{-\infty}{\infty}{x \left(\Int{-\infty}{\infty}{f_{(X, Y)}(x,y)}{y}\right)}{x}
+    \end{align*}
+    \item Angenommen, $(X, Y)$ hat Werte in einer höchstens abzählbaren Menge $(x_i, y_j)_{(i,j) \in I\!J}$ mit $I\!J \subset \N {\times} \N$, die mit Wahrscheinlichkeit $p_{ij} > 0$ angenommen werden. Dann gilt
+    \begin{align*}
+      \E (XY) &= \sum_{(i,j) \in I\!J} x_i y_j p_{ij} \\
+      \E X &= \sum_{i \in \pi_1(I\!J)} x_i \cdot \P(X{=}x_i) = \sum_{(i,j) \in I\!J} x_i p_{ij} \\
+      \Cov(X, Y) &= \sum_{(i,j) \in I\!J} x_i y_j \left( p_{ij} - \P(X{=}x_i) \cdot \P(Y{=}y_j) \right)
+    \end{align*}
+    \item Angenommen, $(X, Y)$ ist singulär-stetig verteilt oder besitzt eine singulärstetige Komponente. Dann gilt:
+    \begin{align*}
+      \E (XY) &= \myint{-\infty}{\infty} \Int{-\infty}{\infty}{x \cdot y}{F(x, y)} \\
+      \E (XY) &= \Int{0}{\infty}{\Int{0}{\infty}{\P(X > x, Y > y)}{x}}{y} \quad \text{für $X, Y \geq 0$.}
+    \end{align*}
+  \end{itemize}
+\end{bem}
 
-Beispiel: $2$-dimensionale Normalverteilungsdichte
+\iffalse
+  1. Fall: Es existiert eine gemeinsame WD von $(X, Y)$, $f_{(X, Y)}(x, y)$ (Lebesgue-messbar, $\geq 0$, $\Int{\R^2}{}{f_{(X,Y)}(x,y)}{(x, y)} = 1$)
 
-\[ f_{(X,Y)}(x,y) = \frac{1}{2 \pi \sigma_1 \sigma_2 \sqrt{1 - \rho^2}} \exp \left( - \frac{1}{2 (1 - \rho^2)} \left( \frac{(x-\mu_1)^2}{\sigma_1^2} + \frac{(y-\mu_2)^2}{\sigma_2^2} - \frac{2 \rho (x-\mu_1)(y-\mu_2)}{\sigma_1 \sigma_2} \right) \right), \]
+  Beispiel: $2$-dimensionale Normalverteilungsdichte
 
-wobei $\mu_1 = \E X$, $\mu_2 = \E Y$, $\sigma_1^2 = \Var(X)$, $\sigma_2^2 = \Var(Y)$
+  \[ f_{(X,Y)}(x,y) = \frac{1}{2 \pi \sigma_1 \sigma_2 \sqrt{1 - \rho^2}} \exp \left( - \frac{1}{2 (1 - \rho^2)} \left( \frac{(x-\mu_1)^2}{\sigma_1^2} + \frac{(y-\mu_2)^2}{\sigma_2^2} - \frac{2 \rho (x-\mu_1)(y-\mu_2)}{\sigma_1 \sigma_2} \right) \right), \]
 
-$\E (X \cdot Y) = \Int{\R^2}{}{x \cdot y \cdot f_{(X,Y)}(x,y)}{(x, y)} = \mu_1 \cdot \mu_2 + \sigma_1 \cdot \sigma_2 \cdot \rho$
+  wobei $\mu_1 = \E X$, $\mu_2 = \E Y$, $\sigma_1^2 = \Var(X)$, $\sigma_2^2 = \Var(Y)$
 
-Also: $\Cov(X, Y) = \sigma_1 \cdot \sigma_2 \cdot \rho$ und $\cor(X, Y) = \rho \in [-1, 1]$.
+  $\E (X \cdot Y) = \Int{\R^2}{}{x y \cdot f_{(X,Y)}(x,y)}{(x, y)} = \mu_1 \cdot \mu_2 + \sigma_1 \cdot \sigma_2 \cdot \rho$
 
-Randverteilungen:
+  Also: $\Cov(X, Y) = \sigma_1 \cdot \sigma_2 \cdot \rho$ und $\cor(X, Y) = \rho \in [-1, 1]$.
 
-$f_X(x) = \Int{-\infty}{\infty}{f_{(X,Y)}(x,y)}{y}$
-$f_Y(y) = \Int{-\infty}{\infty}{f_{(X,Y)}(x,y)}{x}$
+  Randverteilungen:
 
-$\E X = \Int{-\infty}{\infty}{x f_X(x)}{x} = \Int{-\infty}{\infty}{\Int{-\infty}{\infty}{x f_{(X,Y)}(x,y)}{x}}{y}$
+  $f_X(x) = \Int{-\infty}{\infty}{f_{(X,Y)}(x,y)}{y}$
+  $f_Y(y) = \Int{-\infty}{\infty}{f_{(X,Y)}(x,y)}{x}$
 
-2. Fall: $(X, Y)$ mit Werten in einer höchstens abzählbaren Menge an $(x_i, y_i)$ wird mit Wahrscheinlichkeit $p_{ij} > 0$ angenommen, $i, j = 1, 2, ...$.
+  $\E X = \Int{-\infty}{\infty}{x f_X(x)}{x} = \Int{-\infty}{\infty}{\Int{-\infty}{\infty}{x f_{(X,Y)}(x,y)}{x}}{y}$
 
-\[ \P((X, Y) = (x_i, y_i)) = \P(X=x_1, Y=y_j) \]
+  2. Fall: $(X, Y)$ mit Werten in einer höchstens abzählbaren Menge an $(x_i, y_i)$ wird mit Wahrscheinlichkeit $p_{ij} > 0$ angenommen, $i, j = 1, 2, ...$.
 
-\[ \E(X \cdot Y) = \sum_{i=1} \sum_{j=1} x_i \cdot y_j p_{ij} \]
+  \[ \P((X, Y) = (x_i, y_i)) = \P(X=x_1, Y=y_j) \]
+  \[ \E(X \cdot Y) = \sum_{i=1} \sum_{j=1} x_i \cdot y_j p_{ij} \]
+  \[ \E X = \sum_{i=1} x_i \P(X = x_i) = \sum_{i=1} \sum_{j=1} x_i p_{ij} \]
+  \[ \E Y = \sum_{j=1} y_j \P(Y = y_j) = \sum_{j=1} \sum_{i=1} y_j p_{ij} \]
+  \[ \Cov(X, Y) = \E (X \cdot Y) - (\E X) \cdot (\E Y) = \sum_{i=1} \sum_{j=1} x_i y_j (p_{ij} - p_i \cdot q_j) \]
 
-\[ \E X = \sum_{i=1} x_i \P(X = x_i) = \sum_{i=1} \sum_{j=1} x_i p_{ij} \]
+  mit $p_i \coloneqq \sum_{j=1} p_{ij}$, $q_j \coloneqq \sum_{i=1} p_{ij}$
 
-\[ \E Y = \sum_{j=1} y_j \P(Y = y_j) = \sum_{j=1} \sum_{i=1} y_j p_{ij} \]
+  3. Fall: $(X, Y)$ ist singulär-stetig verteilt oder besitzt eine singulär-stetige Komponente
 
-\[ \Cov(X, Y) = \E (X \cdot Y) - (\E X) \cdot (\E Y) = \sum_{i=1} \sum_{j=1} x_i y_j (p_{ij} - p_i \cdot q_j) \]
+  Beispiel: Zweidimensionale Exponentialverteilung \ldots
 
-mit $p_i \coloneqq \sum_{j=1} p_{ij}$, $q_j \coloneqq \sum_{i=1} p_{ij}$
+  \[ \overline{F}(x,y) = \P(X > x, Y > y) = \exp \left( -(\lambda x + \mu y + \nu \max(x,y)) \right) \]
 
-3. Fall: $(X, Y)$ ist singulär-stetig verteilt oder besitzt eine singulär-stetige Komponente
+  \[ F(x, y) = \P(A^c \cap B^c) = \P((A \cup B)^c) = 1 - \P(A \cup B) = 1 - \P(A) - \P(B) + \P(A \cap B) = 1 - \overline{F}(x,0) - \overline{F}(0,y) + \overline{F}(x,y) \]
 
-Beispiel: Zweidimensionale Exponentialverteilung \ldots
+  \[ \E XY = \Int{\R^2}{}{x \cdot y}{F(x,y)} = ... = - \Int{0}{\infty}{[y \cdot \P(X > x, Y > y)]_{y=0}^{y=\infty}}{x} + \Int{\R_{\geq 0}^2}{}{\P(X > x, Y > y)}{(x,y)} \]
 
-\[ \overline{F}(x,y) = \P(X > x, Y > y) = \exp \left( -(\lambda x + \mu y + \nu \max(x,y)) \right) \]
+  Für $(X, Y) \in \R^2$ gilt
 
-\[ F(x, y) = \P(A^c \cap B^c) = \P((A \cup B)^c) = 1 - \P(A \cup B) = 1 - \P(A) - \P(B) + \P(A \cap B) = 1 - \overline{F}(x,0) - \overline{F}(0,y) + \overline{F}(x,y) \]
+  \[ \E (XY) = \Int{0}{\infty}{\Int{0}{\infty}{\underbrace{\P(X > x, Y > y)}_{= \overline{F}(x,y)}}{x}}{y} \]
 
-\[ \E XY = \Int{\R^2}{}{x \cdot y}{F(x,y)} = ... = - \Int{0}{\infty}{[y \cdot \P(X > x, Y > y)]_{y=0}^{y=\infty}}{x} + \Int{\R_{\geq 0}^2}{}{\P(X > x, Y > y)}{(x,y)} \]
+  Falls $(X, Y) \in \R^2$, so gilt:
 
-Für $(X, Y) \in \R^2$ gilt
+  \[ \E (X \cdot Y) = \Int{0}{\infty}{\Int{0}{\infty}{(\P(X > x, Y > y) + \P(X \leq -x, Y \leq -y) - \P(X \geq x, Y \leq -y) - \P(X \leq -x, Y > y))}{y}}{x} \]
 
-\[ \E (XY) = \Int{0}{\infty}{\Int{0}{\infty}{\underbrace{\P(X > x, Y > y)}_{= \overline{F}(x,y)}}{x}}{y} \]
+  Im Beispiel:
 
-Falls $(X, Y) \in \R^2$, so gilt:
+  \[ \E (X \cdot Y) = \Int{0}{\infty}{\Int{0}{\infty}{\exp(-\lambda x - \mu y - \nu \max(x,y))}{x}}{y} = ... = \frac{1}{\lambda (\mu + \nu)} + \frac{1}{\mu (\lambda + \nu)} - (\frac{1}{\lambda} + \frac{1}{\mu}) \frac{1}{\lambda + \mu + \nu} \]
 
-\[ \E (X \cdot Y) = \Int{0}{\infty}{\Int{0}{\infty}{(\P(X > x, Y > y) + \P(X \leq -x, Y \leq -y) - \P(X \geq x, Y \leq -y) - \P(X \leq -x, Y > y))}{y}}{x} \]
+  \[ \E X = \Int{0}{\infty}{x}{F(x)} = \Int{0}{\infty}{\P(X > x)}{x} = \frac{1}{\lambda + \nu} \]
+  \[ \cor(X,Y) = ... = \frac{\nu}{(\lambda + \nu) (\mu + \nu) (\lambda + \mu + \nu)} \]
 
-Im Beispiel:
-
-\[ \E (X \cdot Y) = \Int{0}{\infty}{\Int{0}{\infty}{\exp(-\lambda x - \mu y - \nu \max(x,y))}{x}}{y} = ... = \frac{1}{\lambda (\mu + \nu)} + \frac{1}{\mu (\lambda + \nu)} - (\frac{1}{\lambda} + \frac{1}{\mu}) \frac{1}{\lambda + \mu + \nu} \]
-
-\[ \E X = \Int{0}{\infty}{x}{F(x)} = \Int{0}{\infty}{\P(X > x)}{x} = \frac{1}{\lambda + \nu} \]
-
-\[ \cor(X,Y) = ... = \frac{\nu}{(\lambda + \nu) (\mu + \nu) (\lambda + \mu + \nu)} \]
-
-Also: $\nu = 0$ genau dann, wenn $X$ und $Y$ unabhängig
+  Also: $\nu = 0$ genau dann, wenn $X$ und $Y$ unabhängig
+\fi
 
 % Kapitel 4. Funktionen von Zufalssgrößen und -vektoren
 
 % Kapitel 4.1. Funktion einer Zufallsgröße
 
-$Y = g(X)$, $g : \R^1 \to \R^1$ Borel-messbar
-
-\[ F_Y(y) = \P(Y \leq y) = \P(Y in \left] -\infty, y \right[) = \P(X \in g^{-1}(\left] -\infty, y \right])) \]
-
-Beispiel: $Y = X^2$, $y \geq 0$
-
-$F_Y(y) = \P(X^2 \leq y) = \P(\abs{X} \leq \sqrt{y}) = \P(-\sqrt{y} \leq X \leq \sqrt{y}) = \P(X = -\sqrt{y}) + F_X(\sqrt{y}) - F_X(-\sqrt{y}) = F_X(\sqrt{y}) - \lim_{z \uparrow -\sqrt{y}} F_X(z)$
-
 \begin{satz}
-  $X$ sei absolut stetig mit Dichte $f_X$ und $\P(X \in D) = 1$ für $D \subset \R^1$ offen und $g : D \to \R^1$ eine $\mathcal{C}^1$-Funktion mit $g'(x) > 0$ für alle $x \in D$. Dann ist $Y = g(X)$ absolut-stetig mit der Dichte
-  \[ f_Y(y) = \begin{cases} 0, & \text{für } y \in \R^1 \setminus g(D) \\ \frac{f_X(g^{-1}(y))}{\abs{g'(g^{-1}(y))}} & \text{für } y \in g(D) \end{cases} \]
+  Sei $Y \coloneqq g(X)$, wobei $g : \R^1 \to \R^1$ mb und $X$ eine ZG. Dann:
+  \[ F_Y(y) = \P(Y \leq y) = \P(X \in g^{-1}(\left] -\infty, y \right])). \]
 \end{satz}
 
-\begin{bsp}
-  $Y = e^{N (\mu, \sigma^2)} + c$
+\iffalse
+  \[ F_Y(y) = \P(Y \leq y) = \P(Y \in \left] -\infty, y \right[) = \P(X \in g^{-1}(\left] -\infty, y \right])) \]
 
-  Dann heißt $Y$ logarithmisch normalverteilt
+  Beispiel: $Y = X^2$, $y \geq 0$
 
-  $g(x) = e^x + c$
+  $F_Y(y) = \P(X^2 \leq y) = \P(\abs{X} \leq \sqrt{y}) = \P(-\sqrt{y} \leq X \leq \sqrt{y}) = \P(X = -\sqrt{y}) + F_X(\sqrt{y}) - F_X(-\sqrt{y}) = F_X(\sqrt{y}) - \lim_{z \uparrow -\sqrt{y}} F_X(z)$
+\fi
 
-  Ausgelassen: Rechnungen
-\end{bsp}
+\begin{satz}
+  $X$ sei absolut stetig mit Dichte $f_X$ und $\P(X \in D) = 1$ für $D \subset \R^1$ offen und $g : D \to \R^1$ eine $\mathcal{C}^1$-Funktion mit $g'(x) > 0$ für alle $x \in D$. Dann ist $Y \coloneqq g(X)$ absolut-stetig mit der Dichte
+  \[
+    f_Y(y) = \begin{cases}
+      0, & \text{für } y \in \R^1 \setminus g(D) \\
+      \tfrac{f_X(g^{-1}(y))}{\abs{g'(g^{-1}(y))}} & \text{für } y \in g(D)
+    \end{cases}
+  \]
+\end{satz}
+
+\iffalse
+  \begin{bsp}
+    $Y = e^{N (\mu, \sigma^2)} + c$
+
+    Dann heißt $Y$ logarithmisch normalverteilt
+
+    $g(x) = e^x + c$
+
+    Ausgelassen: Rechnungen
+  \end{bsp}
+\fi
 
 
 % Vorlesung vom 24.1.2014
 
 \begin{bem}
-  Falls die Ableitung $g'(x), x \in D$ wechselndes Vorzeichen besitzt, so muss in Monotoniebereiche unterteilt werden.
+  Falls die Ableitung $g' : D \to \R^1$ wechselndes Vorzeichen besitzt, so muss in Monotoniebereiche unterteilt werden.
 \end{bem}
 
-\begin{bsp}
-  $Y = e^{N(\mu, \sigma^2) + c}$, speziell $\mu = 0$, $\sigma^2 = 1$, $c = 0$, dann
-  \[ f_Y(y) = \frac{1}{\sqrt{2 \pi}} \exp(- \frac{(\log y)^2}{2}). \]
-\end{bsp}
+\iffalse
+  \begin{bsp}
+    $Y = e^{N(\mu, \sigma^2) + c}$, speziell $\mu = 0$, $\sigma^2 = 1$, $c = 0$, dann
+    \[ f_Y(y) = \frac{1}{\sqrt{2 \pi}} \exp(- \frac{(\log y)^2}{2}). \]
+  \end{bsp}
 
-% Vorkommen:
-% * Korngrößenverteilung
-% * Schadenshöhenverteilung
+  % Vorkommen:
+  % * Korngrößenverteilung
+  % * Schadenshöhenverteilung
 
-Die Funktion
-\[ f_a(y) \coloneqq f_Y(y) \cdot (1 + a \cdot \sin(2 \pi \log y)), y \in \R_{>0}^1, a \in [0,1] \]
+  Die Funktion
+  \[ f_a(y) \coloneqq f_Y(y) \cdot (1 + a \cdot \sin(2 \pi \log y)), y \in \R_{>0}^1, a \in [0,1] \]
 
-Für $a \in [0,1]$ ist dann $\Int{-\infty}{\infty}{f_a(y)}{y} = 1$
+  Für $a \in [0,1]$ ist dann $\Int{-\infty}{\infty}{f_a(y)}{y} = 1$
 
-\[ \E Y^n = \Int{0}{\infty}{y^n f_Y(y)}{y} = ... = \exp(- \frac{n^2}{2}) \]
+  \[ \E Y^n = \Int{0}{\infty}{y^n f_Y(y)}{y} = ... = \exp(- \frac{n^2}{2}) \]
 
-und
+  und
 
-\[ \Int{0}{\infty}{y^n f_a(y)}{y} = \exp(- \frac{n^2}{2}) \]
+  \[ \Int{0}{\infty}{y^n f_a(y)}{y} = \exp(- \frac{n^2}{2}) \]
+\fi
 
 
 % Kapitel 4.2. Funktionen eines Zufallsvektors
 
-Sei $X = (X_1, ..., X_k)$ ein $k$-dimensionaler Zufallsvektor,
-$g = (g_1, ..., g_k) : \R^k \to \R^k$ mit $g_i : \R^k \to \R^1$ für $i = 1, ..., k$ Borel-messbar.
-Dann ist $Y = g(X)$ ein $k$-dimensionaler ZV mit $P_Y = P_X \circ g^{-1}$
-Falls $f_{(X_1, ..., X_k)}$ eine W-Dichte von $X$ ist und $g$ ein $\mathcal{C}^1$-Diffeomorphismus ist, dann existiert die W-Dichte von $f_{(Y_1, ..., Y_k)}$ von $Y$.
+\iffalse
+  Sei $X = (X_1, ..., X_k)$ ein $k$-dimensionaler Zufallsvektor,
+  $g = (g_1, ..., g_k) : \R^k \to \R^k$ mit $g_i : \R^k \to \R^1$ für $i = 1, ..., k$ Borel-messbar.
+  Dann ist $Y = g(X)$ ein $k$-dimensionaler ZV mit $P_Y = P_X \circ g^{-1}$
+  Falls $f_{(X_1, ..., X_k)}$ eine W-Dichte von $X$ ist und $g$ ein $\mathcal{C}^1$-Diffeomorphismus ist, dann existiert die W-Dichte von $f_{(Y_1, ..., Y_k)}$ von $Y$.
+\fi
 
 \begin{satz}
-  Seien $G, H \opn \R^k$ offen und $g = (g_1, ..., g_k) : G \to H$ ein $\mathcal{C}^1$-Diffeomorphismus.
+  Sei $X = (X_1, ..., X_k)$ ein $k$-dimensionaler Zufallsvektor mit WD $f_X$, $G, H \opn \R^k$ offen und $g = (g_1, ..., g_k) : G \to H$ ein $\mathcal{C}^1$-Diffeo.
   % Ausgelassen: Definition Jacobian, Funktionaldeterminante
   Dann findet man Funktionen $h_i : H \to \R^1$, $i = 1, ..., k$ mit $h(y_1, ..., y_k) = (h_1(y_1, ..., y_k), ..., h_k(y_1, ..., y_k))$ für $(y_1, ..., y_k) \in H$, sodass für die Dichte von $Y = (Y_1, ..., Y_k)$ gilt:
-  \[ f_{(Y_1, ..., Y_k)}(y_1, ..., y_k) = \begin{cases} \frac{f_{(X_1, ..., X_k)}(h_1(y_1, ..., y_k), ..., h_k(y_1, ..., y_k))}{\abs{\det D g(h_1(y_1, ..., y_k), ..., h_k(y_1, ..., y_k))}} & \text{für $(y_1, ..., y_k) \in H$} \\ 0, & \text{sonst} \end{cases} \]
+  \[
+    f_{Y}(y_1, ..., y_k) = \begin{cases}
+      0, \quad \text{für $(y_1, ..., y_k) \not\in H$, ansonsten} \\
+      \tfrac{f_{X}(h_1(y_1, ..., y_k), ..., h_k(y_1, ..., y_k))}{\abs{\det D g(h_1(y_1, ..., y_k), ..., h_k(y_1, ..., y_k))}}
+    \end{cases}
+  \]
 \end{satz}
 
-Beachte: $\det D(h)(y_1, ..., y_k) = \frac{1}{\det D(g)(h_1(y_1, ..., y_k), ..., h_k(y_1, ..., y_k))}$
+% Beachte: $\det D(h)(y_1, ..., y_k) = \frac{1}{\det D(g)(h_1(y_1, ..., y_k), ..., h_k(y_1, ..., y_k))}$
 
-\begin{bsp}[Box-Muller-Transformation]
+\iffalse
+  \begin{bsp}[Box-Muller-Transformation]
 
-  \begin{align*}
-    Y_1 &= g_1(X_1, X_2) = \sqrt{- 2 \log (X_1)} \sin(2 \pi X_2) \\
-    Y_2 &= g_2(X_1, X_2) = \sqrt{- 2 \log (X_1)} \cos(2 \pi X_2)
-  \end{align*}
-  mit $X_1$ und $X_2$ gleichverteilt auf $[0,1]$.
+    \begin{align*}
+      Y_1 &= g_1(X_1, X_2) = \sqrt{- 2 \log (X_1)} \sin(2 \pi X_2) \\
+      Y_2 &= g_2(X_1, X_2) = \sqrt{- 2 \log (X_1)} \cos(2 \pi X_2)
+    \end{align*}
+    mit $X_1$ und $X_2$ gleichverteilt auf $[0,1]$.
 
-  \[ f_{(X_1)}(x_1, x_2) = \ind_{\left] 0,1 \right[} \]
+    \[ f_{(X_1)}(x_1, x_2) = \ind_{\left] 0,1 \right[} \]
 
-  Behauptung: Dann ist $f_{(Y_1, Y_2)} = \phi(y_1) \cdot \phi(y_2)$, wobei $\phi(y) = \frac{1}{\sqrt{2 \pi}} \exp(- \frac{y^2}{2})$ oder $Y_1, Y_2 \sim N(0, 1)$ und unabhängig.
-\end{bsp}
+    Behauptung: Dann ist $f_{(Y_1, Y_2)} = \phi(y_1) \cdot \phi(y_2)$, wobei $\phi(y) = \frac{1}{\sqrt{2 \pi}} \exp(- \frac{y^2}{2})$ oder $Y_1, Y_2 \sim N(0, 1)$ und unabhängig.
+  \end{bsp}
 
-\begin{bsp}
-  \begin{align*}
-    Y_1 &= g_1(X_1, X_2) = \sqrt{X_1^2 + X_2^2} \\
-    Y_2 &= g_2(X_1, X_2) = \begin{cases} \arctan(\frac{X_2}{X_1}) & \text{für $X_2 \geq 0$, $X_1 \in \R^1 \setminus \{ 0 \}$} \\ \arctan(\frac{X_2}{X_1}) + \pi, & \text{für } X_2 < 0, X_1 \in \R^1 \setminus \{ 0 \} \end{cases}
-  \end{align*}
+  \begin{bsp}
+    \begin{align*}
+      Y_1 &= g_1(X_1, X_2) = \sqrt{X_1^2 + X_2^2} \\
+      Y_2 &= g_2(X_1, X_2) = \begin{cases} \arctan(\frac{X_2}{X_1}) & \text{für $X_2 \geq 0$, $X_1 \in \R^1 \setminus \{ 0 \}$} \\ \arctan(\frac{X_2}{X_1}) + \pi, & \text{für } X_2 < 0, X_1 \in \R^1 \setminus \{ 0 \} \end{cases}
+    \end{align*}
 
-  Wenn $X_1, X_2 \sim N(0, \sigma^2)$, unabhängig $\implies$ $f_{(X_1, X_2)}(x_1, x_2) = \phi(\frac{x_1}{\sigma}) \phi(\frac{x_2}{\sigma})$
+    Wenn $X_1, X_2 \sim N(0, \sigma^2)$, unabhängig $\implies$ $f_{(X_1, X_2)}(x_1, x_2) = \phi(\frac{x_1}{\sigma}) \phi(\frac{x_2}{\sigma})$
 
-  Ergebnis: $f_{(Y_1, Y_2)}(y_1, y_2) = \frac{1}{2 \pi} \cdot \underbrace{\frac{y_1}{\sigma^2} \exp(- \frac{y_1^2}{\sigma^2})}_{\text{Dichte der Rayleigh-Verteilung}}$ für $(y_1, y_2) \in \left] 0, \infty \right[ \times \left] 0, 2\pi \right]$
+    Ergebnis: $f_{(Y_1, Y_2)}(y_1, y_2) = \frac{1}{2 \pi} \cdot \underbrace{\frac{y_1}{\sigma^2} \exp(- \frac{y_1^2}{\sigma^2})}_{\text{Dichte der Rayleigh-Verteilung}}$ für $(y_1, y_2) \in \left] 0, \infty \right[ \times \left] 0, 2\pi \right]$
 
-  \[ F_{Y_1}(y) = ... = 1 - \exp(- \frac{y^2}{2 \sigma^2}) \]
-\end{bsp}
+    \[ F_{Y_1}(y) = ... = 1 - \exp(- \frac{y^2}{2 \sigma^2}) \]
+  \end{bsp}
+\fi
 
 
 % Vorlesung vom 29.1.2014
@@ -1951,86 +2019,105 @@ Beachte: $\det D(h)(y_1, ..., y_k) = \frac{1}{\det D(g)(h_1(y_1, ..., y_k), ...,
 % Kapitel 4.3. Verteilung von Summe, Produkt und Quotient von (unabhängigen) ZGn
 
 \begin{satz}
-  $(X, Y)$ besitze eine gemeinsame Dichte $f_{(X, Y)}$ (also $\P(X = 0) = \P(Y = 0) = 0$). Dann gilt für die Dichten von $Z_1 \coloneqq X + Y$, $Z_2 \coloneqq X \cdot Y$, $Z_3 \coloneqq \tfrac{X}{Y}$.
+  $(X, Y)$ besitze eine gemeinsame Dichte $f_{(X, Y)}$. Dann gilt für die Dichten von $Z_1 \coloneqq X + Y$, $Z_2 \coloneqq X \cdot Y$, $Z_3 \coloneqq \tfrac{X}{Y}$:
   \begin{align*}
-    f_{Z_1}(z) &= \Int{-\infty}{\infty}{f_{(X, Y)}(z - y, y)}{y} \overbrace{=}^{\mathclap{\text{f.\,unabh.}}} \\
-    f_{Z_2}(z) &= \Int{-\infty}{\infty}{f_{(X, Y)}(z/y, y) \cdot \tfrac{1}{\abs{y}}}{y} = ... \\
-    f_{Z_3}(z) &= \Int{-\infty}{\infty}{f_{(X, Y)}(x \cdot y, y) \cdot \abs{y}}{y} = ...
+    f_{Z_1}(z) &= \Int{\mathclap{-\infty}}{\infty}{f_{(X, Y)}(z - y, y)}{y} \overset{\text{Unabh.}}= \Int{\mathclap{-\infty}}{\infty}{f_X(z-y) \cdot f_Y(y)}{y} \\
+    f_{Z_2}(z) &= \Int{\mathclap{-\infty}}{\infty}{f_{(X, Y)}(\tfrac{z}{y}, y) \cdot \tfrac{1}{\abs{y}}}{y} \overset{\text{Unabh.}}= \Int{\mathclap{-\infty}}{\infty}{f_X(\tfrac{z}{y}) \cdot f_Y(y) \cdot \tfrac{1}{\abs{y}}}{y} \\
+    f_{Z_3}(z) &= \Int{\mathclap{-\infty}}{\infty}{f_{(X, Y)}(x y, y) \cdot \abs{y}}{y} \overset{\text{Unabh.}}= \Int{\mathclap{-\infty}}{\infty}{f_X(zy) \cdot f_Y(y) \cdot \abs{y}}{y}
   \end{align*}
 \end{satz}
 
 \begin{bsp}
   Seien $X, Y$ unabhängig, $N(0,1)$-verteilt, $Z \coloneqq \tfrac{X}{Y}$. Dann:
-  \[ f_Z(z) = ... = \tfrac{1}{\pi (1 + z^2)} \] % Dichte der (Standard-)Cauchy-Verteilung
+  \[ f_Z(z) = ... = \tfrac{1}{\pi (1 + z^2)} \quad \text{(Cauchy-verteilt).} \] % Dichte der (Standard-)Cauchy-Verteilung
 \end{bsp}
 
-\begin{bsp}
-  Sei nun $X \sim F_X$ unabhängig von $Y \sim F_Y$. Dann
-  \[ \E g(X, Y) = \Int{\R^2}{}{g(x,y)}{P_{(X, Y)}} = ... = \Int{\R^1}{}{\Int{\R^1}{}{g(x,y)}{P_X(x)}}{P_Y(y)} \]
-  Mit Verteilungsfunktionen kann man schreiben:
-  \[ \E g(X, Y) = \Int{\R^2}{}{g(x, y)}{F_{X, Y}(x, y)} = \Int{\R^1}{}{\Int{\R^1}{}{g(x, y)}{F_X(x)}}{F_Y(y)} \]
-\end{bsp}
+\iffalse
+  \begin{bsp}
+    Sei nun $X \sim F_X$ unabhängig von $Y \sim F_Y$. Dann
+    \[ \E g(X, Y) = \Int{\R^2}{}{g(x,y)}{P_{(X, Y)}} = ... = \Int{\R^1}{}{\Int{\R^1}{}{g(x,y)}{P_X(x)}}{P_Y(y)} \]
+    Mit Verteilungsfunktionen kann man schreiben:
+    \[ \E g(X, Y) = \Int{\R^2}{}{g(x, y)}{F_{X, Y}(x, y)} = \Int{\R^1}{}{\Int{\R^1}{}{g(x, y)}{F_X(x)}}{F_Y(y)} \]
+  \end{bsp}
+\fi
 
 % Beachte: $F_{(X, Y)}(x, y) \coloneqq F_X(x) \cdot F_Y(y)$.
 
-\[ \P(X + Y \leq z) = ... = \Int{\R^1}{}{F_X(z-y)}{F_Y(y)} =: (F_X * F_Y)(z) \]
+\begin{defn}
+  Seien $X$ und $Y$ unabhängige ZGen. Dann gilt für $z \in \R$:
+  \[ F_{X{+}Y}(z) = \P(X {+} Y \leq z) = \Int{\R^1}{}{F_X(z-y)}{F_Y(y)} =: (F_X * F_Y)(z). \]
+  Dabei heißt $(F_X * F_Y)$ \emph{Faltung} von $F_X$ und $F_Y$.
+\end{defn}
 
-\emph{Faltung von $F_X$ und $F_Y$}
-
-\begin{bem}
+\begin{prop}
   \begin{itemize}
-    \item $F_X * F_Y = F_Y * F_X$
-    \item $F_{X + Y} = F_X * F_Y$
-    \item Falls $X$ oder $Y$ eine Dichte besitzen, so auch $X + Y$:
-    \[ f_{X+Y}(z) = \Int{-\infty}{\infty}{f_X(z-y)}{F_Y(y)} = \Int{-\infty}{\infty}{f_Y(z-x)}{F_X(x)} = \Int{-\infty}{\infty}{f_Y(z-x)}{f_X(x)}{y} \]
+    \item $F_X * F_Y = F_Y * F_X$ (Kommutativität)
+    \item $F_{X + Y} = F_X * F_Y$, wenn $X$ und $Y$ unabhängig
+    \item Falls $X$ oder $Y$ eine Dichte besitzen, so auch $X {+} Y$ bei Unabh.:
+    \begin{align*}
+      f_{X+Y}(z) &\overset{\phantom{\text{oder}}}= \Int{-\infty}{\infty}{f_X(z-y)}{F_Y(y)} \overset{\text{oder}}= \Int{-\infty}{\infty}{f_Y(z-x)}{F_X(x)} \\
+      &\overset{\text{oder}}= \Int{-\infty}{\infty}{f_Y(z-x)}{f_X(x)}{y}
+    \end{align*}
     % (Faltung glättet)
-    \item Verallgemeinerung: $F_{X_1 + ... + X_n} = F_{X_1} * ... * F_{X_n}$, falls $X_1, ..., X_n$ unabhängig.
+    %\item Verallgemeinerung: $F_{X_1 + ... + X_n} = F_{X_1} * ... * F_{X_n}$, falls $X_1, ..., X_n$ unabhängig.
   \end{itemize}
-\end{bem}
+\end{prop}
 
-Gewisse Verteilungen sind "`faltungsstabil"', d.\,h. bei der Faltung bleibt der Verteilungstyp erhalten
+\iffalse
+  % Gewisse Verteilungen sind "`faltungsstabil"', d.\,h. bei der Faltung bleibt der Verteilungstyp erhalten
+  \begin{bsp}
+    $X_i$ sei Poisson-verteilt mit Paramter $\lambda_i > 0$, $i = 1, 2$. Dann ist $X_1 + X_2$ Poisson-verteilt mit Parameter $\lambda_1 + \lambda_2$, falls $X_1$ und $X_2$ unabhängig sind.
+  \end{bsp}
 
-\begin{bsp}
-  $X_i$ sei Poisson-verteilt mit Paramter $\lambda_i > 0$, $i = 1, 2$. Dann ist $X_1 + X_2$ Poisson-verteilt mit Parameter $\lambda_1 + \lambda_2$, falls $X_1$ und $X_2$ unabhängig sind.
-\end{bsp}
-
-\begin{bsp}
-  Sei $X_i \overbrace{=}^{d} N(\mu_i, \sigma_i^2)$, $i = 1,2$ unabhängig. Dann: $X_1 + X_2 \overbrace{=}^{d} N(\mu_1 + \mu_2, \sigma_1^2 + \sigma_2^2)$.
-\end{bsp}
+  \begin{bsp}
+    Sei $X_i \overbrace{=}^{d} N(\mu_i, \sigma_i^2)$, $i = 1,2$ unabhängig. Dann: $X_1 + X_2 \overbrace{=}^{d} N(\mu_1 + \mu_2, \sigma_1^2 + \sigma_2^2)$.
+  \end{bsp}
+\fi
 
 \begin{satz}
-  Falls $X_1$ und $X_2$ unabhängig und $X_1 + X_2$ normalverteilt (also $X_1 + X_2 \overbrace{=}^d N(\mu, \sigma^2)$), dann sind $X_1$ und $X_2$ normalverteilt.
-  Falls $X_1$ und $X_2$ unabhängig und $X_1 + X_2$ Poisson-verteilt (also $X_1 + X_2 \overbrace{=}^d Poi(\lambda)$), dann sind $X_1$ und $X_2$ Poisson-verteilt.
+  \begin{itemize}
+    \item Seien $X_1$ und $X_2$ unabhängig und $(X_1 {+} X_2)$ normalverteilt (also $X_1 + X_2 \sim N(\mu, \sigma^2)$). Dann sind $X_1$ und $X_2$ normalverteilt.
+    \item Seien $X_1$ und $X_2$ unabhängig und $(X_1 {+} X_2)$ Poisson-verteilt (also $X_1 + X_2 \sim Poi(\lambda)$). Dann sind auch $X_1$ und $X_2$ Poisson-verteilt.
+  \end{itemize}
 \end{satz}
 
-Wichtige Ergebnisse über Summen unabhängiger ZGn:
-
-\begin{itemize}
-  \item $\tfrac{1}{n}(X_1 + ... + X_n) \xrightarrow[\text{$\P$-fast-überall}]{n \to \infty} \E X_1$ falls $X_1, ..., X_n$ unabhängig, identisch verteilt und $\E \abs{X_1} < \infty$ (GGZ)
-  \item $\sqrt{n} (\tfrac{1}{n}(X_1 + ... + X_n) - \E X_1) \xrightarrow[d]{n \to \infty} N(0, \Var(X_1))$, falls $\Var(X_1) < \infty$
-\end{itemize}
+% Wichtige Ergebnisse über Summen unabhängiger ZGn:
+\begin{satz}
+  Seien $X_1, ..., X_n$ unabhängig. Dann gilt:
+  \begin{itemize}
+    \item $\tfrac{1}{n}(X_1 + ... + X_n) \xrightarrow[\text{$\P$-f.ü.}]{n \to \infty} \E X_1$, falls $X_1, ..., X_n$ identisch verteilt. % und $\E \abs{X_1} < \infty$ (GGZ)
+    \item $\sqrt{n} (\tfrac{1}{n}(X_1 + ... + X_n) - \E X_1) \xrightarrow{n \to \infty} N(0, \Var(X_1))$, falls $\Var(X_1) < \infty$
+  \end{itemize}
+\end{satz}
 
 % Vorlesung vom 31.1.2014
 
 % Kapitel 4.4. Produkt-Maße und der Satz von Fubini-Tonelli
+\subsection{Produkt-Maße und der Satz von Fubini-Tonelli}
 
 % Kapitel 4.4.1. Produkte von $\sigma$-Algebren
 
-Seien $(\Omega_i, \Alg_i)$ für $i \in \{ 1, ..., n \}$ messbare Räume.
+\begin{voraussetzung}
+  Seien $(\Omega_i, \Alg_i)$ für $i \in \{ 1, ..., n \}$ messbare Räume und $\Omega \coloneqq \Omega_1 \times ... \times \Omega_n$ das kartesische Produkt der Mengen.
+\end{voraussetzung}
 
-Dann ist $\Omega = \Omega_1 \times ... \times \Omega_n$ das kartesische Produkt der Mengen.
+\begin{nota}
+  $\pi_i : \Omega \to \Omega_i, \enspace (\omega_1, ..., \omega_1) \mapsto \omega_i$ (Projektionsabbildung)
+\end{nota}
 
 \begin{defn}
-  \[ \Alg \coloneqq \sigma \left( \pi_1^{-1}(\Alg_1) \cup ... \cup \pi_n^{-1}(\Alg_n) \right), \]
-  wobei $\pi_i : \Omega \to \Omega_i, (\omega_1, ..., \omega_1) \mapsto \omega_i$ die Projektionsabbildungen sind, heißt \emph{Produkt-$\sigma$-Algebra} von $\Alg_1, ..., \Alg_n$, notiert $\Alg = \Alg_1 \otimes ... \otimes \Alg_n$.
-  % Äquivalent
-  \[ \Alg = \sigma \left( \Set{ A_1 \times ... \times A_n }{ A_1 \in \Alg_1, ..., A_n \in \Alg_n } \right) \]
-  \[ \pi_i^{-1}(A_i) = \Omega_1 \times ... \times A_i \times ... \times \Omega_n. \]
+  Die \emph{Produkt-$\sigma$-Algebra} von $\Alg_1, ..., \Alg_n$ ist definiert durch
+  \[ \Alg \coloneqq \Alg_1 \otimes ... \otimes \Alg_n \coloneqq \sigma \left( \pi_1^{-1}(\Alg_1) \cup ... \cup \pi_n^{-1}(\Alg_n) \right). \]
+  %\[ \pi_i^{-1}(A_i) = \Omega_1 \times ... \times A_i \times ... \times \Omega_n. \]
 \end{defn}
+
+\begin{satz}
+  $\Alg = \sigma \left( \Set{ A_1 \times ... \times A_n }{ A_1 \in \Alg_1, ..., A_n \in \Alg_n } \right)$
+\end{satz}
 
 \begin{lem}
   Sei $\mathcal{E}_i$ mit $\sigma(E_i) = \Alg_i$ und es existieren Folgen $(E_i^k)_{k \in \N}$ in $\mathcal{E}_i$ mit $E_i^k \uparrow \Omega_i$. Dann gilt:
-  \[ \bigotimes_{i=1}^n = \sigma \left( \Set{ E_1 \times ... \times E_n }{ E_1 \in \mathcal{E}_1, ..., E_n \in \mathcal{E}_n } \right) \]
+  \[ \Alg_1 \otimes ... \otimes \Alg_n = \sigma \left( \Set{ E_1 \times ... \times E_n }{ E_1 \in \mathcal{E}_1, ..., E_n \in \mathcal{E}_n } \right) \]
 \end{lem}
 
 % Bemerkung: Die Zusatz-Voraussetzung ist erfüllt für $\mathcal{E}_i \coloneqq \Alg_i$ oder wenn $\Omega_i \in \mathcal{E}_i$
@@ -2058,7 +2145,7 @@ Dann ist $\Omega = \Omega_1 \times ... \times \Omega_n$ das kartesische Produkt 
 % O.B.d.A. $n=2$, also $\Omega = \Omega_1 \times \Omega_2$, $\Alg = \Alg_1 \otimes \Alg_2$
 
 \begin{satz}
-  Sei $\mu_1$ auf $(\Omega_1, \Alg_1)$ und $\mu_2$ auf $(\Omega_2, \Alg_2)$ zwei $\sigma$-endliche Maße. Dann existiert genau ein Maß $\mu \coloneqq \mu_1 \times \mu_2$ auf $\Alg = \Alg_1 \otimes \Alg_2$ mit der Eigenschaft
+  Sei $\mu_1$ auf $(\Omega_1, \Alg_1)$ und $\mu_2$ auf $(\Omega_2, \Alg_2)$ zwei $\sigma$-endliche Maße. Dann ex. genau ein Maß $\mu \coloneqq \mu_1 \times \mu_2$ auf $\Alg = \Alg_1 \otimes \Alg_2$ mit
   \[ \fa{A_1 \in \Alg_1, A_2 \in \Alg_2} (\mu_1 \times \mu_2)(A_1 \times A_2) = \mu_1(A_1) \cdot \mu_2(A_2). \]
   Das Maß $\mu$ ist dann auch $\sigma$-endlich auf $(\Omega, \Alg)$.
   % mit $0 \cdot \infty = \infty \cdot 0 \coloneqq 0$

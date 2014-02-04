@@ -41,8 +41,10 @@
 \newtheorem*{bspe}{Beispiele}
 \newtheorem*{satz}{Satz}
 \newtheorem*{beweis}{Beweis}
+\newtheorem*{frage}{Frage}
 \newtheorem*{lem}{Lemma}
 \newtheorem*{kor}{Korollar}
+\newtheorem*{voraussetzung}{Voraussetzun}
 \newtheorem*{korollar}{Korollar}
 \newtheorem*{acht}{Achtung}
 \newtheorem*{strat}{Strategie}
@@ -121,7 +123,8 @@
 \newcommand{\pright}[1]{\hfill ({#1}) \,}
 
 % Integrale
-\newcommand{\Int}[4]{{\textstyle \int\limits_{#1}^{#2}} #3 \,\d #4}
+\newcommand{\myint}[2]{{\textstyle \int\limits_{#1}^{#2}}}
+\newcommand{\Int}[4]{\myint{#1}{#2} #3 \,\d #4}
 \newcommand{\Intdx}[3]{\Int{#1}{#2}{#3}{x}} % Integral mit dx
 \newcommand{\Intab}[2]{\Int{a}{b}{#1}{#2}} % Integral über [a, b]
 \newcommand{\Intabdx}[1]{\Intdx{a}{b}{#1}} % Integral über [a, b] mit dx
