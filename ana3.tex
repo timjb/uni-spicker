@@ -1731,7 +1731,7 @@
 
 
 \begin{satz}[Divergenzsatz]
-  Sei $C \subset \R^n$ kompakt mit glattem Rand, $C^\circ \not= \emptyset$, $C = \overline{C^\circ}$, $G : \R^n \to \R^n$ ein $\mathcal{C}^1$-Vektorfeld, dann gilt:
+  Sei $C \subset \hat{U} \opn \R^n$ kompakt mit glattem Rand, $C^\circ \not= \emptyset$, $C = \overline{C^\circ}$, $G : \hat{U} \to \R^n$ ein $\mathcal{C}^1$-Vektorfeld, dann gilt:
   \[ \Int{C}{}{(\mathrm{div} G)}{\lambda_n} = \Int{\partial_C}{}{\langle G, \nu \rangle}{\mathcal{A}}. \]
 \end{satz}
 
@@ -1797,11 +1797,11 @@ Im Fall $n=3$:
 
 $G = (G_1, G_2, G_3) : \widehat{U} \to \R^3$ $\mathcal{C}^1$, $\widehat{U} \opn \R^3$
 
-Bekannt: $\d (G \cdot \d S) = \div (G) \d V$
+Bekannt: $\d (G \cdot \d S) = \divergence (G) \d V$
 
 \begin{satz}
   Sei $C \subset \widehat{U}$ kompakt mit $C = \overline{C^{\circ}} \not= \emptyset$, $\partial C$ glatt. Dann ist
-  \[ \Intdf{C}{\div(G) \d V} = ... = \Intdf{\partial C}{G \cdot \d S} = \Int{\partial C}{}{\scp{G, \nu}}{\mathcal{A}}. \]
+  \[ \Intdf{C}{\divergence(G) \d V} = ... = \Intdf{\partial C}{G \cdot \d S} = \Int{\partial C}{}{\scp{G, \nu}}{\mathcal{A}}. \]
 \end{satz}
 
 Sei $\widehat{\phi} : U \to \R^3$ eine bzgl. $C$ Rand-adaptierte, positiv orientierte Karte von $\widehat{U}$, $\phi : \partial C \cap U \to V \opn \R^2$
@@ -1811,5 +1811,57 @@ Sei $\widehat{\phi} : U \to \R^3$ eine bzgl. $C$ Rand-adaptierte, positiv orient
 $g = g_\phi : V \to \R^2, v \mapsto \begin{pmatrix} \scp{\partial_1 \phi^{-1}(v)}{\partial_2 \phi^{-1}(v)} & \scp{\partial_1 \phi^{-1}(v)}{\partial_1 \phi^{-1}(v)} \\ \scp{\partial_2 \phi^{-1}(v)}{\partial_1 \phi^{-1}(v)} & \scp{\partial_2 \phi^{-1}(v)}{\partial_2 \phi^{-1}(v)} \end{pmatrix}$
 
 Sei $\phi^{-1} = (\phi_1^{-1}, \phi_2^{-1}, \phi_3^{-1})$
+
+% Vorlesung vom 5.2.2014
+
+% Kurvenintegrale
+
+Sei $M \subset \R^n$ eine $1$-dimensionale UMF, $\omega = \sum_{j=1}^n F_j \d x_j = F \cdot \d \vec{s}$ mit $F = (F_1, ..., F_n)^T$ eine stetige $1$-Form auf $\R^n$.
+
+Sei $(\phi, U)$ eine Karte von $M$, $U$ zusammmenhängend, dann $\phi(U) =: V \opn \R^1$ ebenfalls zusammenhängend, d.\,h. $V = \left] a, b \right[$. Dann ist
+\[ \phi^{-1} : \left] a, b \right[ \to \R^n, \quad t \mapsto \left( \phi_1^{-1}(t), ..., \phi_n^{-1}(t) \right)^T \]
+eine glatte reguläre Kurve.
+\[ (\phi^{-1})^* \omega = \sum_{j=1}^n (F_j \circ \phi^{-1}) \d \phi_j^{-1} = \sum_{j=1}^n (F_j \circ \phi^{-1}) (\phi_j^{-1})' \d t \]
+\[ (\phi^{-1})^* (F \cdot \d \vec{s}) = \langle F \circ \phi^{-1}, (\phi^{-1})' \rangle \]
+Also:
+\[ \Intdf{U}{\omega} = \Intdf{\left] a, b \right[}{(\phi^{-1})^* \omega} = \Int{\left] a, b \right[}{}{\langle F \circ \phi^{-1} , (\phi^{-1})' \rangle}{\lambda_1} = \Int{a}{b}{\langle (F \circ \phi^{-1})(t) , (\phi^{-1})'(t) \rangle}{t} = \Int{a}{b}{\langle F(\phi^{-1}(t)) , \tau(t) \rangle \norm{(\phi^{-1})'(t)}}{t}, \]
+
+wobei $\tau(t) = \tfrac{(\phi^{-1})'(t)}{\norm{(\phi^{-1})'(t)}}$ ein positiv orientierter Einheitstangentialvektor
+
+\begin{defn}
+  Sei $f : \R^n \to \R$ stetig, $\gamma : \left[ a, b \right] \to \R^n$ eine $\mathcal{C}^1$-Kurve
+
+  \[ \Int{\gamma}{}{f}{s} \coloneqq \Int{a}{b}{f(\gamma(t)) \cdot \norm{\gamma'(t)}}{t} \]
+  \[ \Int{\gamma}{}{F {\cdot}}{\vec{s}} \coloneqq \Int{\gamma}{}{\langle F , \tau \rangle}{s} \]
+\end{defn}
+
+\begin{satz}[Stokes, klassisch]
+  Sei $\hat{U} \opn \R^3$, $M \subset \hat{U}$, eine $2$-dimensionale UMF. Sei $C \subset M$ kompakt mit glattem Rand. Sei $F : \hat{U} \to \R^3$ stetig, dann
+  \[ \Int{\partial_M C}{}{\langle F, \tau \rangle}{s} = \Int{C}{}{\langle \rot F, \nu \rangle}{S} \]
+\end{satz}
+
+% Der Cauchysche Integralsatz
+
+Wir identifizieren $\R^2 \cong \C$ mit $(x, y)^T \mapsto x + iy$
+
+$\R$-lineare Abbildung: Multiplikation mit $\left( \begin{smallmatrix} a & b \\ c & d \end{smallmatrix} \right) \in \R^{2 \times 2}$
+
+$\C$-linear Abbildung: Multiplication mit $\mu \in \C^{1 \times 1} = \C$
+
+% ...
+
+\begin{defn}
+  Sei $\gamma : \left[ a, b \right] \to \C$ stetig diff'bar und $f : \C \to \C$. Dann heißt
+
+  \[
+    \Int{\gamma}{}{f}{z} \coloneqq \Int{a}{b}{f(\gamma(t)) \cdot \gamma'(t)}{t}
+    \quad \text{\emph{komplexes Kurvenintegral}.}
+  \]
+\end{defn}
+
+\begin{satz}[Cauchscher Integralsatz]
+  $V \opn \C$, $f : U \to \C$ holomorph. Sei $C \subset U$ ein Kompaktum, dessen Rand Bild einer glatten Kurve $\gamma$ ist, dann gilt:
+  \[ \Int{\gamma}{}{f}{z} = 0. \]
+\end{satz}
 
 \end{document}
