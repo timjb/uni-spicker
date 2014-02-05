@@ -871,6 +871,8 @@
 
 % Was bedeutet Unabhängigkeit von $\sigma$-Algebren?
 
+\begin{samepage}
+
 \begin{satz}[Null-Eins-Gesetz von Kolmogorow]
   Sei $(\Alg_n)_{n \in \N}$ eine Folge von unabhängigen Unter-$\sigma$-Algebren in einem W-Raum $(\Omega, \Alg, \P)$. Dann gilt $\P(A) \in \{ 0, 1 \}$ für alle Ereignisse $A \in \mathcal{T}_\infty$ der terminalen $\sigma$-Algebra.
 \end{satz}
@@ -878,6 +880,8 @@
 % Kapitel 3. Integrationstheorie
 
 \section{Integrationstheorie}
+
+\end{samepage}
 
 % Kapitel 3.1. Messbare Abbildungen und Zufallsgrößen
 
@@ -2165,5 +2169,81 @@
   Für $k, l \in \N_{>0}$ mit $k + l = n$ gilt $\lambda_n = \lambda_k \times \lambda_l$
   % $\lambda_n$ ist Lebesgue-Maß auf $(\R^n, \Leb(\R^n))$
 \end{kor}
+
+% Vorlesung vom 5.2.2014
+
+% Sei $(\Omega_1 \times \Omega_2, \Alg_1 \otimes \Alg_2)$ ein messbarer Produktraum
+
+\begin{defn}
+  Sei $A \subset \Omega_1 \times \Omega_2$, $\omega_1 \in \Omega_1$, $\omega_2 \in \Omega_2$, $f : \Omega_1 \to Omega_2 \to \R^1$. Dann heißen
+  \begin{align*}
+    A_{\omega_1} &\coloneqq \Set{ \omega_2 }{ (\omega_1, \omega_2) \in A } = \pi_2(A \cap \pi_1^{-1}(\omega_1)) \enspace \text{\emph{$\omega_1$-Schnitt} von $A$,} \\
+    A_{\omega_2} &\coloneqq \Set{ \omega_1 }{ (\omega_1, \omega_2) \in A } = \pi_1(A \cap \pi_2^{-1}(\omega_2)) \enspace \text{\emph{$\omega_2$-Schnitt} von $A$,} \\
+    f_{\omega_1} &: \Omega_2 \to \R^1, \enspace \omega_2 \mapsto f(\omega_1, \omega_2) \quad \text{\emph{$\omega_1$-Schnitt von $f$,}} \\
+    f_{\omega_2} &: \Omega_1 \to \R^1, \enspace \omega_1 \mapsto f(\omega_1, \omega_2) \quad \text{\emph{$\omega_2$-Schnitt von $f$.}}
+  \end{align*}
+\end{defn}
+
+\begin{satz}
+  Sei $A \in \Alg_1 \otimes \Alg_2$ und $f$ sei $(\Alg_1 {\otimes} \Alg_2)$-messbar. Dann gilt
+  \begin{align*}
+    \fa{\omega_1 \in \Omega_1} A_{\omega_1} \in \Alg_2
+    \quad &\text{und} \quad
+    \fa{\omega_2 \in \Omega_2} A_{\omega_2} \in \Alg_1 \\
+    \fa{\omega_1 \in \Omega_1} f_{\omega_1} \text{ ist $\Alg_2$-messbar }
+    \quad &\text{und} \quad
+    \fa{\omega_2 \in \Omega_2} f_{\omega_2} \text{ ist $\Alg_1$-messbar }
+  \end{align*}
+\end{satz}
+
+\begin{lem}
+  Sei $\mu_i$ ein $\sigma$-endliches Maß auf $(\Omega_i, \Alg_i)$ für $i = 1,2$. Dann sind für $A \in \Alg_1 \otimes \Alg_2$ die Funktionen $f_1(\omega_1) = \mu_2(A_{\omega_1})$ bzw. $f_2(\omega_2) = \mu_1(A_{\omega_2})$ nichtnegative $\Alg_1$- bzw. $\Alg_2$-messbare Funktionen auf $\Omega_1$ bzw. $\Omega_2$ und es gilt
+  \[
+    \Int{\Omega_1}{}{f_1}{\mu_1} = \mu(A) = \Int{\Omega_2}{}{f_2}{\mu_2},
+  \]
+  wobei $\mu = \mu_1 \times \mu_2$ das Produktmaß auf $\Alg_1 \otimes \Alg_2$ ist.
+\end{lem}
+
+\begin{satz}[Fubini, Tonelli]
+  Seien $(\Omega_1, \Alg_1, \mu_1)$ und $(\Omega_2, \Alg_2, \mu_2)$ zwei $\sigma$-endliche Maßräume und sei
+  \[ f : \Omega_1 \times \Omega_2 \to \ER \]
+  eine nichtnegative, numerische $(\Alg_1 {\otimes} \Alg_2)$-messbare Funktion. Dann sind
+  \begin{align*}
+    \omega_1 \mapsto \Int{\Omega_2}{}{f_{\omega_1}}{\mu_2}
+    \quad \text{und} \quad
+    \omega_2 \mapsto \Int{\Omega_1}{}{f_{\omega_2}}{\mu_1}
+  \end{align*}
+  $\Alg_1$- bzw. $\Alg_2$-messbare Funktionen und es gilt
+  \[
+    \Int{\mathclap{\Omega_1 \times \Omega_2}}{}{f}{(\mu_1 {\times} \mu_2)} =
+    \Int{\Omega_1}{}{\left( \Int{\Omega_2}{}{f_{\omega_1}}{\mu_2} \right)}{\mu_1} = 
+    \Int{\Omega_2}{}{\left( \Int{\Omega_1}{}{f_{\omega_2}}{\mu_1} \right)}{\mu_2}
+  \]
+\end{satz}
+
+\begin{bem}
+  Falls $f$ $(\Omega_1 {\otimes} \Omega_2)$-messbar mit Vorzeichenwechsel, so muss $\Int{\Omega_1 {\times} \Omega_2}{\abs{f}}{}{(\mu_1 {\times} \mu_2)}$ vorausgesetzt werden.
+  % Überprüfen mit Fubini für nichtnegative Funktionen.
+\end{bem}
+
+% Kapitel 4.4.4. Beispiele zu Fubini-Tonelli
+
+\iffalse
+  $\Omega_1 = \Omega_2 = \left[ 0, 1 \right]$, $\mu_1 = \mu_2 = \lambda_1$
+  \begin{itemize}
+    \item $f(x, y) \coloneqq \tfrac{x^2 - y^2}{(x^2 + y^2)^2}$
+    \item $f(x, y) \coloneqq \begin{cases} (x - \tfrac{1}{2})^{-3} & \text{für } 0 < y < \abs{x - \tfrac{1}{2}} \\ 0, & \text{sonst}$
+    \item $f(x, y) \coloneqq \tfrac{x-y}{(x^2 + y^2)^\tfrac{3}{2}}$
+    \item $f(x, y) \coloneqq \tfrac{1}{(1-xy)^p}$ mit $p > 0$
+  \end{itemize}
+
+  Beispiel: Gaußsches weißes Rauschen
+
+  Sei $T = \left[ 0, 1 \right]$, $(X_t)_{t \in T}$ eine Familie unabhängiger, $N(0, 1)$-vertielter ZGn über eiem W-Raum $(\Omega, \Alg, \P)$.
+
+  Produktraum: $(T \times \Omega, \Leb(T) \otimes \Alg, \lambda_1 \times \P)$
+
+  Problem: $\Int{T}{}{\Int{T}{}{\E X_s X_t}{s}}{t} = \lambda_2(\Set{ (s, s) }{ s \in T }) = 0$
+\fi
 
 \end{document}

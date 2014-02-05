@@ -45,7 +45,7 @@
 \newtheorem*{situation}{Situation}
 \newtheorem*{lem}{Lemma}
 \newtheorem*{kor}{Korollar}
-\newtheorem*{voraussetzung}{Voraussetzun}
+\newtheorem*{voraussetzung}{Voraussetzung}
 \newtheorem*{korollar}{Korollar}
 \newtheorem*{acht}{Achtung}
 \newtheorem*{strat}{Strategie}
