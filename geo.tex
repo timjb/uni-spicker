@@ -1169,12 +1169,12 @@ $\implies$ $f$ ist partiell differenzierbar
 \end{satz}
 
 \begin{bem}
-  Sei $\mu$ ein Normalenvektorfeld an eine Hyperfläche $X$. Dann gibt es eine Funktion $f : U \to \R$ mit $\mu = f \cdot \nu$, wobei $\nu$ die Gaußabbildung von $X$ ist. Dann ist $h^\mu = f \cdot h$ und $g^{-1} h^{\mu} = f \cdot g^{-1} \cdot h = f \cdot w$, wobei $w$ die Weingartenabbildung ist. Wir erhalten damit:
+  Sei $\mu$ ein Normalenvektorfeld an eine Hyperfläche $X$. Dann gibt es eine Funktion $f : U \to \R$ mit $\mu = f \cdot \nu$, wobei $\nu$ die Gaußabbildung von $X$ ist. Dann ist $h^\mu = f \cdot h$ und $g^{-1} h^{\mu} = f \cdot g^{-1} \cdot h = f \cdot w$, wobei $w$ die Weingartenabbildung ist.
 \end{bem}
 
 \begin{satz}
   Eine Hyperfläche $X : U \to \R^n$ ist genau dann minimal, wenn
-  \[ H \equiv \frac{\kappa_1 + ... + \kappa_{n{-}1}}{n-1} \equiv \frac{\spur(w)}{n-1} \equiv 0. \]
+  \[ H \equiv \tfrac{\kappa_1 + ... + \kappa_{n{-}1}}{n-1} \equiv \tfrac{\spur(w)}{n-1} \equiv 0. \]
 \end{satz}
 
 % Beispiele für minimale Hyperflächen
@@ -1189,69 +1189,71 @@ $\implies$ $f$ ist partiell differenzierbar
 %  \item Catalan-Fläche: $X : \R^2 \to \R^3, \quad (x, y) \mapsto \begin{pmatrix} x - \sin(x) \cosh(y) \\ 1 - \cos(x) \cosh(y) \\ y \sin(\tfrac{x}{2}) \sinh(\tfrac{y}{2}) \end{pmatrix}$
 %\end{itemize}
 
-% Verallgemeinerung von Hyperflächen:
+\begin{satz}
+  Für eine minimale immergierte HF $X : U \to \R^n$ gilt: Um jeden Punkt $u_0 \in U$ gibt es ein Kompaktum $C \subset U$ mit nicht leerem Inneren, dessen Rand eine Nullmenge ist und welches $u_0 \in C^\circ$ erfüllt, sodass für jede immergiere HF $\tilde{X} : U \to \R^n$ mit $X|_{U \setminus C} = \tilde{X}|_{U \setminus C}$ erfüllt gilt: $\A(X(C)) \leq \A(\tilde{X}(C))$. Gleichheit tritt genau dann ein, wenn $\tilde{X}$ eine Umparametrisierung von $X$ ist.
+\end{satz}
 
-% 3.3. Flächen konstanter mittlerer Krümmung
+% Verallgemeinerung von minimalen Hyperflächen:
 
-Situation: $X : U \to \R^2$ immergierte $\mathcal{C}^2$-Hyperfläche. Dann gilt
+% 3.3.
+\subsection{Flächen konstanter mittlerer Krümmung}
 
-\[ \fa{u_0 \in U} \exists V_{u_0} \opn U \text{ mit } x|_{u_0} \to \R^n \text{ Einbettung } \]
+\begin{situation}
+  Sei $X : U \to \R^2$ immergierte $\mathcal{C}^3$-Hyperfläche und $U_0 \subset U$ offen, sodass $X|_{U_0}$ ein Homöomorphismus auf sein Bild ist. Sei $C \subset U_0$ ein Kompaktum mit glattem Rand, das Abschluss einer offenen Menge $C^\circ$ ist. Sei außerdem $D \subset \R^n$ kompakt, sodass $X(C) \subset \partial D$. Wir nennen $D$ \emph{Dose} mit \emph{Deckel} $X(C)$ und \emph{Boden} $\partial D \setminus X(C)$. Wir betrachten eine $\mathcal{C}^2$-Variation $\left] -\epsilon, \epsilon \right[ \times U \to \R^n$, $(s, u) \mapsto X^s(u)$ auf $C$ mit $X^0 = X$, sodass gilt:
 
-als Konsequenz aus dem Umkehrsatz.
+  \begin{itemize}
+    \miniitem{0.37 \linewidth}{$X^s|_{U \setminus C} = X|_{U \setminus C}$}
+    \miniitem{0.6 \linewidth}{$\fa{s \in \left] -\epsilon, \epsilon \right[} X^s|_{U_0}$ ist eine Einbettung}
+  \end{itemize}
 
-Wähle $u_0 \in U$, $C \subset V_{u_0}$ Kompaktum mit glattem Rand, Abschluss einer offenen Menge $C^\circ$.
-
-Dann gibt es ein Kompaktum $D \subset \R^n$ mit stückweise glattem Rand, welches Abschluss einer offenen Menge ist mit $X(C) \subset \partial D$. Wir nennen $D$ "`Dose"', $X(C)$ "`Deckel"' und $\partial D \setminus X(C)$ Boden.
-
-Variation: $\left] -\epsilon, \epsilon \right[ \times U \to \R^n$ $\mathcal{C}^2$ mit
-
-\begin{itemize}
-  \item $X^0 = X$
-  \item $X^s|_{U \setminus C} = X|_{U \setminus C}$
-  \item $X^s|_{V_{u_0}}$ Einbettungen für alle $s \in \left] -\epsilon, \epsilon \right[$
-\end{itemize}
-
-Wähle "`Dosen"' $D^s$ mit $\partial X^s(C) \subset \partial D^s$, sodass gilt
-\[ \partial D^s \setminus X^s(C) = \partial D \setminus X(C). \]
-
-$X^s$ heißt \emph{Variation mit konstantem Volumen}, wenn
-\[ \mathrm{Vol}(D^s) = \mathrm{Vol}(D). \]
+  Dann ist $X^s(C)$ Flächenstück einer Dose $D^s$, wobei der Boden von $D^s$ mit dem von $D$ übereinstimmt, d.\,h. $\partial D^s \setminus X^s(C) = \partial D \setminus X(C)$.
+\end{situation}
 
 \begin{defn}
-  $X$ heißt \emph{minimal bei konstantem Volumen}, wenn für alle Variationen von $X$ auf derartigen Kompakta $C$ mit konstantem Volumen gilt:
-  \[ \delta \mathcal{A} (X^s|_C) = 0. \]
+  $X^s$ heißt \emph{Variation mit konstantem Volumen}, wenn
+  \[
+    \mathrm{Vol}(D^s) = \mathrm{Vol}(D)
+    \quad \text{für alle $s \in \left] -\epsilon, \epsilon \right[$}.
+  \]
 \end{defn}
 
-Ohne Einschränkung:
-\begin{itemize}
-  \item $X^s$ ist normale Variation mit konstantem Volumen, % (Lemma 3.3)
-  d.\,h. $X^s = X + \tau_s \nu$, wobei $\tau : \left] -\epsilon, \epsilon \right[ \times U \to \R, \quad \tau_s(u)$ mit $\tau_0 = 0$, $\tau_s|_{U \setminus C} = 0$.
-\end{itemize}
 
-Sodann gilt:
+\begin{defn}
+  $X$ heißt \emph{minimal bei konstantem Volumen}, wenn für alle Variationen von $X$ auf derartigen Kompakta $C \subset U$ mit konstantem Volumen gilt: $\delta \A (X^s|_C) = 0$.
+\end{defn}
 
-\[ \delta X^s = \frac{\partial}{\partial s}|_{s=0} X^s = (\frac{\partial}{\partial s}|_{s=0} \tau_s) \cdot \nu, \]
-also
-\[ (\partial \tau_s) = \langle \delta X^s, \nu \rangle \] % da \nu Einheitsnormalenvektorfeld
+% Annahmen zum leichteren Rechnen, Resultate aber unabhängig von Dose
+\iffalse
+  Ohne Einschränkung:
+  \begin{itemize}
+    \item $X^s$ ist normale Variation mit konstantem Volumen, % (Lemma 3.3)
+    d.\,h. $X^s = X + \tau_s \nu$, wobei $\tau : \left] -\epsilon, \epsilon \right[ \times U \to \R, \quad \tau_s(u)$ mit $\tau_0 = 0$, $\tau_s|_{U \setminus C} = 0$.
+  \end{itemize}
 
-Annahme (o.E.):
-\begin{itemize}
-  \item $\fa{u \in C} \abs{(X(u) + \R \nu(u)) \cap (\partial D \setminus X(C))} = 1$.
-  \item Im Schnittpunkt $y_u \in (X(u) + \R \nu(u)) \cap (\partial D \setminus X(C))$ gilt: $\nu(u)$ nicht tangential an $\partial D \setminus X(C)$.
-\end{itemize}
+  Sodann gilt:
 
-Nach Verkleinerung von $C$ (hierbei geht Glattheit von $\partial D$ verloren, es bleibt Glattheit von $\partial D \setminus X(C)$):
-Jeder Punkt von Boden liegt auf mindestens einer Geraden $X(u) + \R \nu(u)$
+  \[ \delta X^s = \tfrac{\partial}{\partial s}|_{s=0} X^s = \left( \tfrac{\partial}{\partial s}|_{s=0} \tau_s \right) \cdot \nu, \]
+  also
+  \[ (\partial \tau_s) = \langle \delta X^s, \nu \rangle \] % da \nu Einheitsnormalenvektorfeld
 
-Also gilt: $\ex{b : C \to \R_{\leq 0}}$ stetig
-mit $\fa{s \in \left] -\epsilon, \epsilon \right[} \fa{u \in C} b(u) \leq \tau_s(u)$ und $b(u) = 0 \iff u \in \partial C$, sodass $D^s = \Set{X(u) + r \nu(u)}{ u \in C, b(u) \leq r \leq \tau_s(u) }$
+  \begin{itemize}
+    \item $\fa{u \in C} \abs{(X(u) + \R \nu(u)) \cap (\partial D \setminus X(C))} = 1$.
+    \item Im Schnittpunkt $y_u \in (X(u) + \R \nu(u)) \cap (\partial D \setminus X(C))$ gilt: $\nu(u)$ nicht tangential an $\partial D \setminus X(C)$.
+  \end{itemize}
+
+  Nach Verkleinerung von $C$ (hierbei geht Glattheit von $\partial D$ verloren, es bleibt Glattheit von $\partial D \setminus X(C)$):
+  Jeder Punkt von Boden liegt auf mindestens einer Geraden $X(u) + \R \nu(u)$
+
+  Also gilt: $\ex{b : C \to \R_{\leq 0}}$ stetig
+  mit $\fa{s \in \left] -\epsilon, \epsilon \right[} \fa{u \in C} b(u) \leq \tau_s(u)$ und $b(u) = 0 \iff u \in \partial C$, sodass $D^s = \Set{X(u) + r \nu(u)}{ u \in C, b(u) \leq r \leq \tau_s(u) }$
+\fi
 
 \begin{prop}
-  Sei $X^s = X + \tau_s \nu$ eine Variation von $X$ auf $C$. Sei $V^s \coloneqq \mathrm{Vol}(D^s)$, dann gilt
-  \[ \delta V^s = \Int{C}{}{\delta \tau_s}{\mathcal{A}}. \]
+  Sei $X^s = X + \tau_s \nu$ eine normale Variation von $X$ auf $C$. Sei $V^s \coloneqq \mathrm{Vol}(D^s)$, dann gilt
+  \[ \delta V^s = \Int{C}{}{\delta \tau_s}{\A} = \Int{C}{}{\langle \delta X^s(u), \nu (u) \rangle \sqrt{\det(g_u)}}{u}. \]
 \end{prop}
 
-$L^2$-Skalarprodukt bzgl. $\d \mathcal{A} = \sqrt{\det(g_u)} \d u$
+$L^2$-Skalarprodukt bzgl. $\d \A = \sqrt{\det(g_u)} \d u$
 
 (Hintergrund: $X : U \to \R^n$ Hyperfläche, $C \subset U$ kompakt)
 
@@ -1260,13 +1262,13 @@ $V = \mathcal{C}^0(C, \R) = \Set{ f : C \to \R }{ \text{stetig} }$
 Skalarprodukt:
 \begin{align*}
   \mathcal{C}^0(C, \R) \times \mathcal{C}^0(C, \R) &\to \R
-  (f_1, f_2) &\mapsto \Int{C}{}{f_1 \cdot f_2}{\mathcal{A}} =: \langle f_1 , f_2 \rangle_{L^2}
+  (f_1, f_2) &\mapsto \Int{C}{}{f_1 \cdot f_2}{\A} =: \langle f_1 , f_2 \rangle_{L^2}
 \end{align*}
 
 Analog ($\mathcal{C}^0_C(U, \R) = \Set{ f : U \to \R }{ \text{stetig mit } \supp f \text{ kompakt} }$):
 \begin{align*}
   \mathcal{C}^0_C(U, \R) \times \mathcal{C}^0_C(U, \R) &\to \R
-  (f_1, f_2) &\mapsto \Int{C}{}{f_1 \cdot f_2}{\mathcal{A}} =: \langle f_1 , f_2 \rangle_{L^2}
+  (f_1, f_2) &\mapsto \Int{C}{}{f_1 \cdot f_2}{\A} =: \langle f_1 , f_2 \rangle_{L^2}
 \end{align*}
 
 % Vorlesung vom 27.1.2014
@@ -1274,13 +1276,13 @@ Analog ($\mathcal{C}^0_C(U, \R) = \Set{ f : U \to \R }{ \text{stetig mit } \supp
 % Situation: $C \subset U$ kompakt mit $C = \overline{\C^\circ}$ mit $\C^\circ \opn \R^n$, $\partial C$ glatt
 
 \begin{lem}
-  Sei $f : U \to \R$ eine $\mathcal{C}^2$-Abbildung mit $\supp(f) \subset C$. Wenn $\Int{C}{}{f}{\mathcal{A}} = 0$, dann gibt es eine normale Variation $X^s = X + \tau_s$ mit konstantem Volumen, sodass
+  Sei $f : U \to \R$ eine $\mathcal{C}^2$-Abbildung mit $\supp(f) \subset C$. Wenn $\Int{C}{}{f}{\A} = 0$, dann gibt es eine normale Variation $X^s = X + \tau_s$ mit konstantem Volumen, sodass
   \[ f = \delta \tau_s = \langle \delta X^s , \nu \rangle \]
 \end{lem}
 
 \begin{nota}
   \begin{itemize}
-    \item $\delta \mathcal{A}^s \coloneqq \delta(\mathcal{A}(X^s(C))) = - \Int{C}{}{f \cdot (n{-}1) \cdot H}{\mathcal{A}} = - \langle f, (n{-}1) H \rangle_{L^1}$
+    \item $\delta \A^s \coloneqq \delta(\A(X^s(C))) = - \Int{C}{}{f \cdot (n{-}1) \cdot H}{\A} = - \langle f, (n{-}1) H \rangle_{L^1}$
     \item $\delta V^s \coloneqq \Int{C}{}{\underbrace{\langle X^s , \nu \rangle}_{f \coloneqq} \sqrt{\det(g_u)}}{u} = \langle f , 1 \rangle_{L^1}$
   \end{itemize}
 \end{nota}
@@ -1288,8 +1290,8 @@ Analog ($\mathcal{C}^0_C(U, \R) = \Set{ f : U \to \R }{ \text{stetig mit } \supp
 \begin{prop}
   Es sind äquivalent:
   \begin{itemize}
-    \item $\delta \mathcal{A}^s = 0$ für jede normale Variation $X^s$ von $X$ auf $C$ mit konstantem Volumen
-    \item $\ex{\lambda \in \R} \delta(\mathcal{A}^s) + \lambda \nu^s) = 0$ für alle normalen Variation (auch mit nicht konstantem Volument)
+    \item $\delta \A^s = 0$ für jede normale Variation $X^s$ von $X$ auf $C$ mit konstantem Volumen
+    \item $\ex{\lambda \in \R} \delta(\A^s) + \lambda \nu^s) = 0$ für alle normalen Variation (auch mit nicht konstantem Volument)
   \end{itemize}
 \end{prop}
 

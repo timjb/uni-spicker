@@ -42,6 +42,7 @@
 \newtheorem*{satz}{Satz}
 \newtheorem*{beweis}{Beweis}
 \newtheorem*{frage}{Frage}
+\newtheorem*{situation}{Situation}
 \newtheorem*{lem}{Lemma}
 \newtheorem*{kor}{Korollar}
 \newtheorem*{voraussetzung}{Voraussetzun}
