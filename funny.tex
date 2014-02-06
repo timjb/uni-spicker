@@ -1878,7 +1878,56 @@ Die Unterräume $E_n = \im(Q_n)$ erfüllen dann (3) aus dem ersten Lemma und (2)
 \end{kor}
 
 \begin{kor}
-  Sei $X$ ein endlich-dimensionaler VR über $\C$ und $T : X \to X$ linear. Dann gibt es paarwise verschiedene $\lambda_1, ..., \lambda_m \in \C$, wobei $1 \leq m \leq \dim X$, sodass $\sigma(T) = \sigma_p(T) = \{ \lambda_1, ..., \lambda_m \}$ und Ordnungen $n_{\lambda_j}$ mit $X = \ker \left( (\lambda \Id - T)^{n_{\lambda_1}} \right) \oplus ... \oplus \ker \left( (\lambda \Id - T)^{n_{\lambda_1}} \right)$.
+  Sei $X$ ein endlich-dimensionaler VR über $\C$ und $T : X {\to} X$ linear. Dann gibt es paarwise verschiedene $\lambda_1, ..., \lambda_m \in \C$, wobei $1 \leq m \leq \dim X$, sodass $\sigma(T) = \sigma_p(T) = \{ \lambda_1, ..., \lambda_m \}$ und Ordnungen $n_{\lambda_j}$ mit $X = \ker \left( (\lambda \Id {-} T)^{n_{\lambda_1}} \right) \oplus ... \oplus \ker \left( (\lambda \Id {-} T)^{n_{\lambda_1}} \right)$.
 \end{kor}
+
+% Vorlesung vom 6.2.2014
+
+Sei $X$ ein Hilbertraum über $\C$ und $T \in \mathcal{L}(X)$ \emph{normal}, d.\,h. $T^* T - T T^* = 0$, wobei $T^* \coloneqq R_{X}^{-1} T' R_X$ mit $R_X$ die Isometrie aus dem Rieszschen Darstellungssatz bzw. $\fa{x, y \in X} \scp{x}{T^* y} = \scp{Tx}{y}$, lassen sich die Aussagen noch konkretisieren. Es gilt:
+
+\begin{satz}[Spektralsatz für kompakte normale Operatoren]
+  Sei $X$ ein Hilbertraum über $\C$ und $0 \not= T \in \mathcal{K}(X)$ normal. Dann gilt:
+  \begin{itemize}
+    \item Es existiert eine ONS $(e_k)_{k \in N}$ in $X$ und Folge $(\lambda_k)_{k \in N}$ in $\C$, wobei $N \subset \N$, sodass $\lambda_k \not= 0$ und $T_{e_k} = \lambda_k e_k$ für $k \in N$ sowie $\sigma(T) \setminus \{ 0 \} = \Set{ \lambda_k }{ k \in N }$. Falls $\abs{N} = \infty$, gilt $\lambda_k \convWith{k} 0$.
+    \item Für die Ordnungen gilt $n_{\lambda_k} = 1$ für alle $k$.
+    \item $X = \ker(T) \perp \mathrm{span} \Set{ e_k }{ k \in N }$
+    \item $\fa{x \in X} Tx = \sum_{k \in N} \lambda_k \scp{x}{e_k} e_k$
+  \end{itemize}
+\end{satz}
+
+\begin{bem}
+  Die Werte $\lambda_k$ können für verschiedene $k$ gleich sein.
+\end{bem}
+
+\begin{lem}
+  Seien $X$ ein Hilbertraum über $\C$ und $T \in \LSO(x)$ normal. Dann gilt:
+  \begin{itemize}
+    \item  Ist $X \not= 0$, gilt $\sup \sigma(T) \lambda = \norm{T}$
+    \item Ist $T$ \emph{selbstadjungiert}, d.\,h. $T^* = T$, so ist $\sigma_p(T) \subset \left[ -\norm{T}, \norm{T} \right]$ und, falls $T$ auch kompakt ist $\norm{T}$ oder $-\norm{T}$ ein Eigenwert.
+    \item Ist $T$ selbstadjungiert und \emph{positiv semidefinit}, d.\,h. $\fa{x \in X} \scp{Tx}{x} \geq 0$, so gilt $\sigma_p(T) \subset \left[ 0, \norm{T} \right]$ und falls $T$ auch kompakt ist, sit $\norm{T}$ Eigenwert.
+  \end{itemize}
+\end{lem}
+
+\iffalse
+\begin{bsp}[Eigenwertproblem für den Laplace-Operator]
+  Sei $\Omega \subset \R^n$ offen und beschränkt. Betrachte Funktion $v : \overline{\Omega} \times \left] 0, \infty \right[ \to \R$, die die lineare Wellengleichung $\partial_t^2 v(x, t) = \triangle v = 0$ in $\Omega \times \left] 0, \infty \right[$ mit der Randbedingung $v = 0$ auf $\partial \Omega \times \left] 0, \infty \right[$. Im Fall $n=2$ beschreibt $v(x, t)$ bspw. Auslenkung einer dünnen, eingespannten Membran.
+
+  Ansatz: $v(x,t) = u(x) w(t)$. Es folgt: $w^{\|} u = w \triangle u$. Dies ist (für $v \not= 0$) nur möglich, falls es ein $\lambda \in \R$ gibt mit (1) $\triangle u + \lambda u = 0$ in $\Omega$ und (2) $w'' + \lambda w = 0$ in $\left] 0, \infty \right[$. Multiplizieren wir (1) mit $u$ erhalten wir (formal)
+  \[ \lambda \norm{u}_{L^2}^2 = - \Int{\Omega}{}{\triangle u \cdot u}{x} = - \Int{\partial \Omega}{}{u \cdot \triangle u}{x} + \Int{\Omega}{}{\abs{\nabla u}^2}{x} \geq 0, \]
+  also $\lambda > 0$.
+
+  Gleichung (2) hat für jedes $\lambda > 0$ die allgemeine Lösung
+  \[ w(t) = a_1 \cos(\mu t) + a_2 \sin(\mu t) \quad \text{mit $a_i \in \R$, $\mu = \sqrt{\lambda}$}. \]
+  Gleichung (1) ist ein Eigenwertproblem. Dessen schwache Form lautet:
+  Finde $\lambda \in \R$, $n \in W_0^{1,2}(\Omega, \R)$ mit $n \not= 0$:
+  \[ \fa{\zeta \in W_0^{1,2}(\Omega, \R)} \Int{\Omega}{}{\nabla \zeta \cdot \nabla u - \lambda u v}{x} = 0. \]
+  Der Spektralsatz, angewendet auf $T = J A^{-1}$, wobei $A^{-1}$ der Lösungsoperator zu:
+  Für $f \in \LSO(\Omega)$ finde $u_f \in W_0^{1,2}(\Omega) \,:\, \fa{\zeta \in W_0^{1,2}(\Omega)} \Int{\Omega}{}{\nabla \zeta \cdot \nabla u - \zeta f}{x} = 0$.
+
+  Aus Kapitel 4 wissen wirr: $A^{-1} : L^2(\Omega) \to W_0^{1,2}(\Omega)$ und $J : W_0^{1,2}(\Omega) \to L^2(\Omega)$ die kompakte Einbettung ($x \mapsto x$). Es folgt leicht, dass $T$ kompakt, injektiv, selbstadjungiert und positiv semidefinit. Mit Hilfre des Spektralsatzes folgt, dass es paarweise verschiedene Eigenwerte $\lambda_k > 0$ für $\k \in \N$ und endlich-dimensionale Unterräume $E_k \subset W_0^{1,2}(\Omega, \R)$ (die Eigenräume) mit $\lambda_k \convWith{k} \infty$ und $L^2(\Omega, \R) = \overline{\perp_{k \in \N} E_k}$ und $(\lambda, u) \in \R \times W_0^{1,2}(\Omega, \R)$ mit $u \not= 0$ ist schwache Lösung von (*) genau dann, wenn $\lambda = \lambda_k$, $u \in E_k$ für ein $k \in \N$.
+\end{bsp}
+\fi
+
+% In Klausur zugelassen: Einseitig beschriebene Din-A4-Seite
 
 \end{document}
