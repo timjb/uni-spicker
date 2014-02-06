@@ -1153,7 +1153,7 @@ $\implies$ $f$ ist partiell differenzierbar
   \[ (\det(A))' = \det(A(t)) \cdot \spur(A^{-1}(t) \cdot A'(t)). \]
 \end{lem}
 
-\begin{satz}
+\begin{satz}[1. Variation]
   Es gilt $\delta \A(s) = - \Int{C}{}{\spur(g^{-1} h^\xi)}{\A}$.
 \end{satz}
 
@@ -1165,12 +1165,17 @@ $\implies$ $f$ ist partiell differenzierbar
 \begin{satz}
   Eine Fläche $X$ ist genau dann eine Minimalfläche, wenn
   \[ \spur(g^{-1} h^{\mu}) = 0 \]
-  für jedes Normalenvektorfeld $\mu$ an $X$, wobei $h^\mu_{jk} \coloneqq \langle \II(\partial_j X, \partial_k X), \mu \rangle$.
+  für jedes Normalenvektorfeld $\mu$ an $X$.
 \end{satz}
 
 \begin{bem}
   Sei $\mu$ ein Normalenvektorfeld an eine Hyperfläche $X$. Dann gibt es eine Funktion $f : U \to \R$ mit $\mu = f \cdot \nu$, wobei $\nu$ die Gaußabbildung von $X$ ist. Dann ist $h^\mu = f \cdot h$ und $g^{-1} h^{\mu} = f \cdot g^{-1} \cdot h = f \cdot w$, wobei $w$ die Weingartenabbildung ist.
 \end{bem}
+
+\begin{satz}[1. Variation für HF]
+  Ist $X : U \to \R^n$ eine HF und $X^s : U \to \R^n$ eine normale Variation von $X$ auf einem Kompaktum $C \subset U$ mit nichtleerem Inneren und Rand vom Maß Null und $\xi = \delta X^x = f \nu$ mit $f : U \to \R$, dann gilt
+  \[ \delta \A(X^s|_C) = - \Int{C}{}{f (n{-}1) H}{\A}. \]
+\end{satz}
 
 \begin{satz}
   Eine Hyperfläche $X : U \to \R^n$ ist genau dann minimal, wenn
@@ -1219,7 +1224,7 @@ $\implies$ $f$ ist partiell differenzierbar
 
 
 \begin{defn}
-  $X$ heißt \emph{minimal bei konstantem Volumen}, wenn für alle Variationen von $X$ auf derartigen Kompakta $C \subset U$ mit konstantem Volumen gilt: $\delta \A (X^s|_C) = 0$.
+  Die Hyperfläche $X$ heißt \emph{minimal bei konstantem Volumen}, wenn für alle Variationen von $X$ auf derartigen Kompakta $C \subset U$ mit konstantem Volumen gilt: $\delta \A (X^s|_C) = 0$.
 \end{defn}
 
 % Annahmen zum leichteren Rechnen, Resultate aber unabhängig von Dose
@@ -1253,59 +1258,74 @@ $\implies$ $f$ ist partiell differenzierbar
   \[ \delta V^s = \Int{C}{}{\delta \tau_s}{\A} = \Int{C}{}{\langle \delta X^s(u), \nu (u) \rangle \sqrt{\det(g_u)}}{u}. \]
 \end{prop}
 
-$L^2$-Skalarprodukt bzgl. $\d \A = \sqrt{\det(g_u)} \d u$
+\begin{nota}
+  $\mathcal{C}^0_C(U, \R) = \Set{ f : U \to \R }{ \text{stetig mit } \supp f \text{ kompakt} }$
+\end{nota}
 
-(Hintergrund: $X : U \to \R^n$ Hyperfläche, $C \subset U$ kompakt)
+\iffalse
+  $V = \mathcal{C}^0(C, \R) = \Set{ f : C \to \R }{ \text{stetig} }$
 
-$V = \mathcal{C}^0(C, \R) = \Set{ f : C \to \R }{ \text{stetig} }$
+  Skalarprodukt:
+  \begin{align*}
+    \mathcal{C}^0(C, \R) \times \mathcal{C}^0(C, \R) &\to \R
+    (f_1, f_2) &\mapsto \Int{C}{}{f_1 \cdot f_2}{\A} =: \langle f_1 , f_2 \rangle_{L^2}
+  \end{align*}
+\fi
 
-Skalarprodukt:
-\begin{align*}
-  \mathcal{C}^0(C, \R) \times \mathcal{C}^0(C, \R) &\to \R
-  (f_1, f_2) &\mapsto \Int{C}{}{f_1 \cdot f_2}{\A} =: \langle f_1 , f_2 \rangle_{L^2}
-\end{align*}
+\begin{defn}
+  Sei $X : U \to \R^n$ eine HF. Dann ist folgende Abbildung ein Skalarprodukt, genannt \emph{$L^2$-Skalarprodukt bzgl. $\d \A$}:
+  \[
+    \mathcal{C}^0_C(U, \R) \times \mathcal{C}^0_C(U, \R) \to \R, \quad
+    (f_1, f_2) \mapsto \Int{C}{}{f_1 \cdot f_2}{\A} =: \langle f_1 , f_2 \rangle_{L^2}
+  \]
+\end{defn}
 
-Analog ($\mathcal{C}^0_C(U, \R) = \Set{ f : U \to \R }{ \text{stetig mit } \supp f \text{ kompakt} }$):
-\begin{align*}
-  \mathcal{C}^0_C(U, \R) \times \mathcal{C}^0_C(U, \R) &\to \R
-  (f_1, f_2) &\mapsto \Int{C}{}{f_1 \cdot f_2}{\A} =: \langle f_1 , f_2 \rangle_{L^2}
-\end{align*}
+\begin{nota}
+  \begin{itemize}
+    \item $\delta V^s \coloneqq \Int{C}{}{\langle X^s , \nu \rangle \sqrt{\det(g_u)}}{u} = \langle f , 1 \rangle_{L^1}, f \coloneqq \langle X^s , \nu \rangle$
+    \item $\delta \A^s \coloneqq \delta(\A(X^s(C))) = - \Int{C}{}{f \cdot (n{-}1) \cdot H}{\A} = - \langle f, (n{-}1) H \rangle_{L^1}$
+  \end{itemize}
+\end{nota}
+
 
 % Vorlesung vom 27.1.2014
 
 % Situation: $C \subset U$ kompakt mit $C = \overline{\C^\circ}$ mit $\C^\circ \opn \R^n$, $\partial C$ glatt
 
 \begin{lem}
-  Sei $f : U \to \R$ eine $\mathcal{C}^2$-Abbildung mit $\supp(f) \subset C$. Wenn $\Int{C}{}{f}{\A} = 0$, dann gibt es eine normale Variation $X^s = X + \tau_s$ mit konstantem Volumen, sodass
-  \[ f = \delta \tau_s = \langle \delta X^s , \nu \rangle \]
+  Sei $f : U \to \R$ eine $\mathcal{C}^2$-Abbildung mit $\supp(f) \subset C$. Wenn $\Int{C}{}{f}{\A} = 0$, dann gibt es eine normale Variation $X^s = X + \tau_s \nu$ mit konstantem Volumen, sodass $f = \delta \tau_s = \langle \delta X^s , \nu \rangle$.
 \end{lem}
-
-\begin{nota}
-  \begin{itemize}
-    \item $\delta \A^s \coloneqq \delta(\A(X^s(C))) = - \Int{C}{}{f \cdot (n{-}1) \cdot H}{\A} = - \langle f, (n{-}1) H \rangle_{L^1}$
-    \item $\delta V^s \coloneqq \Int{C}{}{\underbrace{\langle X^s , \nu \rangle}_{f \coloneqq} \sqrt{\det(g_u)}}{u} = \langle f , 1 \rangle_{L^1}$
-  \end{itemize}
-\end{nota}
 
 \begin{prop}
   Es sind äquivalent:
   \begin{itemize}
-    \item $\delta \A^s = 0$ für jede normale Variation $X^s$ von $X$ auf $C$ mit konstantem Volumen
-    \item $\ex{\lambda \in \R} \delta(\A^s) + \lambda \nu^s) = 0$ für alle normalen Variation (auch mit nicht konstantem Volument)
+    \item Es gilt $\delta \A^s = 0$ für jede normale Variation $X^s$ von $X$ auf $C$ mit konstantem Volumen.
+    \item Es gibt $\lambda \in \R$, genannt \emph{Lagrange-Multiplikator}, sodass $\delta(\A^s + \lambda \nu^s) = 0$ für alle normalen Variationen.
   \end{itemize}
 \end{prop}
+% Hinweis: In Punkt 2 sind auch Variationen mit nicht konstantem Volumen zugelassen.
 
 % TODO: Definition CMC (constant mean curvature)
+\begin{defn}
+  Eine Fläche heißt \emph{CMC-Fläche} (constant mean curvature), wenn die mittlere Krümmung $H$ konstant ist.
+\end{defn}
+
+\begin{samepage}
 
 \begin{satz}
-  Sei $X : U \to \R^n$ eine $\mathcal{C}^3$-Hyperfläche mit $U$ zusammenhängend, dann sind äquivalent:
+  Sei $X : U \to \R^n$ eine $\mathcal{C}^3$-Hyperfläche mit $U \opn \R^{n-1}$ zusammenhängend, dann sind äquivalent:
   \begin{itemize}
-    \item $X$ minimal bei konstantem Volumen
-    \item $H \equiv \mathrm{konstant}$ (also $X$ CMC-Fläche)
+    \miniitem{0.59 \linewidth}{$X$ ist minimal bei konst. Volumen.}
+    \miniitem{0.36 \linewidth}{$X$ ist eine CMC-Fläche.}
   \end{itemize}
 \end{satz}
 
-% Bemerkung: Funktionentheorie, differenzierbare Funktionen $\C \to \C$ (holomorphe Funktionen)
+% Kapitel 3.4.
+\subsection{Minimalflächen im $\R^3$}
+
+\end{samepage}
+
+% Unterkapitel: Etwas Funktionentheorie
 
 % Sei $F : \C \to \C$ eine $\mathcal{C}^1$-Abbildung, $F = u + i v$ mit $u, v : \R \to \R$
 
@@ -1313,32 +1333,38 @@ Analog ($\mathcal{C}^0_C(U, \R) = \Set{ f : U \to \R }{ \text{stetig mit } \supp
 
 % $F$ komplex diff'bar, wenn gilt: $\frac{\partial u}{\partial x} = \frac{\partial v}{\partial y}$ und $\frac{\partial u}{\partial y} = -\frac{\partial v}{\partial x}$ (Cauchy-Riemann-DGL)
 
-% Kapitel 3.4. Minimalflächen im $\R^3$
+\begin{situation}
+  Sei $U \opn \C$, $F : U \to \C$ eine $\mathcal{C}^1$-Funktion. Identifiziere $\C \cong \R^2$ mittels $\left( \begin{smallmatrix} a \\ b \end{smallmatrix} \right) \mapsto a + ib$.
+\end{situation}
 
-Sei $U \opn \C$, $F : U \to \C$ eine $\mathcal{C}^1$-Funktion
+\begin{defn}
+  $F$ heißt in $z_0$ \emph{holomorph} (komplex diff'bar), wenn
+  \[ F'(z_0) \coloneqq \lim_{z \to z_0} \tfrac{F(z) - F(z_0)}{z - z_0} \quad \text{existiert.} \]
+\end{defn}
 
 \begin{nota}[Wirtinger]
-  \begin{itemize}
-    \item $\partial_{Z} F = \tfrac{1}{2} (\partial_1 F - i \partial_2 F)$
-    \item $\partial_{\overline{Z}} F = \tfrac{1}{2} (\partial_1 F + i \partial_2 F)$
-  \end{itemize}
+  \begin{minipage}[t]{0.5 \linewidth}
+    \begin{itemize}
+      \item $\partial_{z} F = \tfrac{1}{2} (\partial_1 F - i \partial_2 F)$
+      \item $\partial_{\overline{z}} F = \tfrac{1}{2} (\partial_1 F + i \partial_2 F)$
+    \end{itemize}
+  \end{minipage}
 \end{nota}
 
 \begin{lem}
-  $F$ ist genau dann holomorph, wenn $\partial_{\overline{Z}} F = 0$. In diesem Fall gilt: $F' = \partial z F$.
+  Die Funktion $F$ ist genau dann holomorph, wenn $\partial_{\overline{z}} F = 0$. In diesem Fall gilt: $F' = \partial_z F$.
 \end{lem}
 
+\begin{nota}
+  $\triangle F \coloneqq \partial_1 \partial_1 F + \partial_2 \partial_2 F$
+\end{nota}
+
 \begin{lem}
-  $F : U \to \C$ sei $\mathcal{C}^2$, dann gilt
-  \[ \partial_Z \partial_{\overline{Z}} F = \tfrac{1}{4} \triangle F = \tfrac{1}{4} (\partial_1 \partial_1 F + \partial_2 \partial_2 F) \]
+  Sei $F : U \to \C$ eine $\mathcal{C}^2$-Funktion, dann gilt
+  \[ \partial_z \partial_{\overline{z}} F = \tfrac{1}{4} \triangle F = \tfrac{1}{4} (\partial_1 \partial_1 F + \partial_2 \partial_2 F). \]
 \end{lem}
 
 % Vorlesung vom 29.1.2014
-
-\begin{defn}
-  $F : \C \to \C$ heißt in $z_0$ \emph{komplex diff'bar}, wenn
-  \[ F'(z_0) \coloneqq \lim_{z \to z_0} \tfrac{F(z) - F(z_0)}{z - z_0} \quad \text{existiert.} \]
-\end{defn}
 
 % Für $\mathcal{C}^1$-Funktionen $F = (F_1, ..., F_n) : U \to \C^n$
 % machen Definition von komplexer Diff'barkeit, Wirtinger-Notation und obiges Lemma Sinn (komponentenweise)
@@ -1348,21 +1374,23 @@ Sei $U \opn \C$, $F : U \to \C$ eine $\mathcal{C}^1$-Funktion
 % \[ \partial_Z F \coloneqq \partial_Z (can \circ F) \]
 % \[ \partial_\overline{Z} F \coloneqq \partial_\overline{Z} (can \circ F) \]
 
-$\C$-bilinear Erweiterung: % des typischen Skalarprodukts auf dem $\R^n$
-
-\[ \langle \begin{pmatrix} z_1 \\ \vdots \\ z_n \end{pmatrix} , \begin{pmatrix} w_1 \\ \vdots \\ w_n \end{pmatrix} \langle \coloneqq \sum_{j=1}^n z_j w_j \]
-
-Eigenschaften:
-
-\begin{itemize}
-  \item Nicht hermetisch
-  \item symmetrisch
-  \item $\C$-bilinear
-  \item Nicht positiv definit
-\end{itemize}
+% $\C$-bilinear Erweiterung: % des typischen Skalarprodukts auf dem $\R^n$
+% \[ \langle \begin{pmatrix} z_1 \\ \vdots \\ z_n \end{pmatrix} , \begin{pmatrix} w_1 \\ \vdots \\ w_n \end{pmatrix} \langle \coloneqq \sum_{j=1}^n z_j w_j \]
 
 \begin{defn}
-  $z \in \C^n$ heißt \emph{isotrop}, wenn $\langle z, z \rangle = 0$.
+  Folgene Abbildung ist symmetrisch und über $\C$ bilinear:
+  \[
+    \langle \blank , \blank \rangle : \C^n \times \C^n \to \C, \quad
+    (z, w) \mapsto \langle z, w \rangle \coloneqq \sum_{j=1}^n z_j w_j
+  \]
+\end{defn}
+
+\begin{bem}
+  Die Abbildung ist nicht positiv definit, nicht hermetisch und damit auch kein Skalarprodukt.
+\end{bem}
+
+\begin{defn}
+  Ein Vektor $z \in \C^n$ heißt \emph{isotrop}, wenn $\langle z, z \rangle = 0$.
 \end{defn}
 
 % Beispiel im $\C^2$: $begin{pmatrix} 1 \\ i \end{pmatrix}$
@@ -1372,47 +1400,52 @@ Eigenschaften:
   \[ z \text{ isotrop} \quad \iff \quad \norm{x} = \norm{y} \text{ und } x \perp y \]
 \end{lem}
 
+% Unterkapitel: Konforme Parametrisierungen
+
 \begin{defn}
-  Eine $\mathcal{C}^2$-Hyperfläche $X : U \to \R^3$ heißt \emph{konform parametrisiert}, wenn gilt: $g = \lambda^2 I_2$. Die $\mathcal{C}^1$-Funktion $\lambda : U \to \R$ heißt \emph{konformer Faktor}.
+  Eine $\mathcal{C}^2$-HF $X : U \to \R^3$ heißt \emph{konform parametrisiert}, wenn es eine $\mathcal{C}^1$-Funktion $\lambda : U \to \R_{>0}$, genannt \emph{konformer Faktor}, gibt, sodass $g = \lambda^2 I_2$, wobei $g$ die 1.\,FF von $X$ ist.
 \end{defn}
 
 \begin{bem}
-  Durch Umparametrisierung kann "`jede"' (hinreichend reguläre) Hyperfläche konform parametrisiert werden.
+  Durch Umparametrisierung kann jede hinreichend reguläre Hyperfläche konform parametrisiert werden.
 \end{bem}
 
 \begin{lem}
-  Sei $X : U \to \R^3 \subset \C^3$ eine $\mathcal{C}^2$-Hyperfläche. Dann sind äquivalent:
-  \begin{itemize}
-    \item $X$ ist konform parametrisiert
-    \item $\langle \partial_Z X, \partial Z X \rangle \equiv 0$
-  \end{itemize}
-  Dann gilt $\lambda = \sqrt{2 \langle \partial_Z X , \overline{\partial_Z X} \rangle}$.
+  Sei $X : U \to \R^3 \subset \C^3$ eine $\mathcal{C}^2$-Hyperfläche. Dann gilt
+  \[
+    \text{$X$ ist konform parametrisiert}
+    \enspace \iff \enspace
+    \langle \partial_z X, \partial_z X \rangle \equiv 0.
+  \]
+  Dann gilt $\lambda = \sqrt{2 \langle \partial_z X , \overline{\partial_z X} \rangle}$.
 \end{lem}
 
 \begin{lem}
-  Sei $X : U \to \R^3 \subset \C^3$ eine konform parametrisierte $\mathcal{C}^2$-Hyperfläche. Dann:
-  \begin{itemize}
-    \item $\triangle X = 2 \lambda^2 H \nu$ % $\lambda$ konformer Faktor, $H$ mittlere Krümmung, $\nu$ Gauß-Abbildung
-  \end{itemize}
+  Sei $X : U \to \R^3 \subset \C^3$ eine konform param. $\mathcal{C}^2$-HF. Dann:
+  \[ \triangle X = 2 \lambda^2 H \nu. \]
 \end{lem}
 
 \begin{lem}
   Sei $X : U \to \R^3$ eine Hyperfläche. Dann sind äquivalent:
   \begin{itemize}
-    \item $X$ konform parametrisierte Minimalfläche
-    \item $\partial_Z X : U \to \C^3 \setminus \{ 0 \}$ holomorph und isotrop.
-    % d.h. $\partial_{\overline{Z}} (\partial_Z X) = 0$ und $\langle \partial_Z X, \partial_Z X \rangle = 0$
+    \item $X$ ist eine konform parametrisierte Minimalfläche.
+    \item $\partial_z X : U \to \C^3 \setminus \{ 0 \}$ ist holomorph und isotrop, also
+    \[
+      \partial_{\overline{z}} (\partial_z X) = 0
+      \quad \text{und} \quad
+      \langle \partial_z X, \partial_z X \rangle = 0.
+    \]
   \end{itemize}
 \end{lem}
 
 % Vorlesung vom 3.2.2014
 
 \begin{defn}
-  Sei $U \opn \C$ und $f : U \to \C$ holomorph. Eine holomorphe Funktion $F : U \to \C$ heißt \emph{Stammfunktion} (STF) von $f$, wenn gilt: Für die komplexe Ableitung $F'$ von $F$ gilt $F' = f$.
+  Sei $U \opn \C$ und $f : U \to \C$ holomorph. Eine holomorphe Fkt. $F : U \to \C$ heißt \emph{Stammfunktion} (STF) von $f$, wenn $F' = f$.
 \end{defn}
 
 \begin{bem}
-  Sei $U$ zusammenhängend und $F_1, F_2 : U \to \C$ zwei STFn von $f$, dann $F_1 - F_2 = const$.
+  Sei $U$ zusammenhängend und $F_1, F_2 : U \to \C$ zwei STFn von $f$, dann ist $F_1 - F_2 = \mathrm{const}$.
 \end{bem}
 
 \begin{defn}
@@ -1420,24 +1453,24 @@ Eigenschaften:
 \end{defn}
 
 \begin{nota}
-  $\int f$ für eine STF von $f$.
+  Wir schreiben ${\textstyle \int} f$ für eine STF von $f$.
 \end{nota}
 
 \begin{lem}
-  Sei $X : U \to \R^3$ eine konform parametrisierte Hyperfläche, dann:
-  \[ X - 2 \Re (\int \partial_z X) = const. \]
+  Sei $X : U \to \R^3$ eine konform parametrisierte HF, dann:
+  \[ X - 2 \Re \left( {\textstyle \int} \partial_z X \right) = \mathrm{const}. \]
 \end{lem}
 
 \begin{bem}
-  Sei $X : U \to \R^3$ konform parametrisierte Minimalfläche, dann gilt $X = 2 \Re (\int \partial_z X)$ bis auf Translation.
+  Sei $X : U \to \R^3$ konform parametrisierte Minimalfläche, dann gilt $X = 2 \Re \left( {\textstyle \int} \partial_z X \right)$ bis auf Translation.
 \end{bem}
 
 \begin{satz}
-  Es gibt (bis auf Translation) eindeutige Beziehung zwischen der Menge der konform parametrisierten Hyperflächen $X : U \to \R^3 \subset \C^3$ und der Menge der holomorph isotropen Abbildungen $Y \to \C^3 \setminus \{ 0 \}$ gegeben durch
-  \[ Y = 2 \partial_z X, \quad X = \Re \int Y \]
+  Es gibt (bis auf Translation) eine eindeutige Beziehung zwischen der Menge der konform parametrisierten Hyperflächen $X : U \to \R^3 \subset \C^3$ und der Menge der holomorph isotropen Abbildungen $Y \to \C^3 \setminus \{ 0 \}$ gegeben durch (bis auf Translation)
+  \[ Y = 2 \partial_z X, \qquad X = \Re {\textstyle \int} Y \]
 \end{satz}
 
-% Assoziierte Familien
+% Unterkapitel: Assoziierte Familien
 
 % Gegeben: $X : U \to \R^3 \subset \C^3$ eine konform parametrisierte minimale $\mathcal{C}^2$-Hyperfläche, $U$ zusammenhängend
 % $Y \coloneqq 2 \partial_z X$
@@ -1450,50 +1483,86 @@ Eigenschaften:
 % Man nennt $X_\Theta$ die \emph{assoziierte Familie} von $X$, es gilt
 % $X_{\Theta + \pi} = - X_{\Theta}$
 
-\begin{beob}
-  $Y_\Theta = \exp(i \Theta) Y$ mit $\Theta \in \R$ ist wieder holomorph, isotrop und $\not= 0$ ($Y_\Theta : U \to \C^3$).
-\end{beob}
+\begin{defn}
+  Sei $X : U \to \R^3 \subset \C^3$ eine konform parametrisierte minimale $\mathcal{C}^2$-HF und $Y \coloneqq 2 \partial_z X : U \to \C^3 \setminus \{ 0 \}$ (isotrop, holomorph). Sei $\Theta \in \R$, dann ist auch
+  \[ Y_\Theta : U \to \C^3 \setminus \{ 0 \}, \quad u \mapsto \exp(i \Theta) Y(u) \]
+  holomorph und isotrop. Wir erhalten dann eine $2 \pi$-periodische Schar von Minimalflächen durch
+  \[ X_{\Theta} = \Re ({\textstyle \int} Y_{\Theta}) = \Re (\exp(i \Theta) {\textstyle \int} Y) : U \to \R^3, \Theta \in \R. \]
+\end{defn}
 
 \begin{lem}
   Jede Hyperfläche $X_\Theta$ für $\Theta \in \R$ in der assoziierten Familie von $X$ ist isometrisch zu $X$, d.\,h. $g_{\Theta} = g$.
 \end{lem}
 
-Reelle Schreibweise:
+\begin{beob}
+  $X_{\Theta + \pi} = - X_{\Theta}$
+\end{beob}
 
-\[ X_{\Theta} = \Re (\exp(i \Theta) \int Y) = \Re ((\cos(\Theta) + i \sin(\Theta)) \int Y) = \cos(\Theta) \Re(\int Y) + \sin(\Theta) \Re(i \int Y) = \cos(\Theta) \Re(\int Y) + \sin(\Theta) \Re (\exp(i \tfrac{\pi}{2} \int Y)) = \cos(\Theta) X + \sin(\Theta) X^* \]
-% TODO: Frage: Was ist $X$, was $X^*$?
+\begin{defn}
+  Sei $X : U \to \R^3$ eine konform param. Minimalfläche, dann ist
+  \[ X^* \coloneqq X_{\tfrac{\pi}{2}} = \Re (i {\textstyle \int} Y) = - \Im ({\textstyle \int} Y) \]
+  die zu $X$ \emph{konjugierte Minimalfläche}.
+\end{defn}
+
+\begin{beob}
+  Es gilt $X_{\Theta} = \cos(\Theta) X + \sin(\Theta) X^*$.
+\end{beob}
 
 % Weierstraß-Darstellung
 
-Gegeben: $X : U \to \R^3 \subset \C^3$ konform parametrisierte Minimalfläche
-$U \opn \R^2$ offen und zusammenhängend
+\iffalse
+  Gegeben: $X : U \to \R^3 \subset \C^3$ konform parametrisierte Minimalfläche
+  $U \opn \R^2$ offen und zusammenhängend
 
-$Y = (Y_1, Y_2, Y_3) = 2 \partial_z X : U \to \C^3 \setminus \{0\}$ holomorph und isotrop.
+  $Y = (Y_1, Y_2, Y_3) = 2 \partial_z X : U \to \C^3 \setminus \{0\}$ holomorph und isotrop.
 
-Da $Y$ isotrop: $Y_1^2 + Y_2^2 + Y_3^2 = 0$
+  Da $Y$ isotrop: $Y_1^2 + Y_2^2 + Y_3^2 = 0$
 
-\begin{defn}
-  $Y_{\pm} \coloneqq Y_1 \pm i Y_2 : U \to \C$
-\end{defn}
+  \begin{defn}
+    $Y_{\pm} \coloneqq Y_1 \pm i Y_2 : U \to \C$
+  \end{defn}
 
-Dann: $- Y_{+} Y_{-} = - (Y_1^2 + Y_2^2) = Y_3^2$
+  Dann: $- Y_{+} Y_{-} = - (Y_1^2 + Y_2^2) = Y_3^2$
 
-\begin{defn}
-  $h \coloneqq Y_3 : U \to \C$ holomorph\\
-  $g \coloneqq \tfrac{Y_3}{Y_{-}} : U \to \C$ meromorph
-\end{defn}
+  \begin{defn}
+    $h \coloneqq Y_3 : U \to \C$ holomorph\\
+    $g \coloneqq \tfrac{Y_3}{Y_{-}} : U \to \C$ meromorph
+  \end{defn}
 
-Es gilt: $-hg = Y_{+}$, $\tfrac{h}{g} = Y_{-}$
+  Es gilt: $-hg = Y_{+}$, $\tfrac{h}{g} = Y_{-}$
 
-% => wir können $Y_1, Y_2, Y_3$ aus $g$ und $h$ rekonstruieren
+  % => wir können $Y_1, Y_2, Y_3$ aus $g$ und $h$ rekonstruieren
 
-Da $2 Y_1 = Y_{+} + Y_{-}$, $2 Y_2 = i (Y_{+}) - Y_{i}$, folgt
-$Y_1 = \tfrac{1}{2} (Y_{+} + Y_{-}) = \tfrac{h}{2} (\tfrac{1}{g} - g)$, $Y_2 = i \tfrac{h}{2} (\tfrac{1}{g} + g)$
+  Da $2 Y_1 = Y_{+} + Y_{-}$, $2 Y_2 = i (Y_{+}) - Y_{i}$, folgt
+  $Y_1 = \tfrac{1}{2} (Y_{+} + Y_{-}) = \tfrac{h}{2} (\tfrac{1}{g} - g)$, $Y_2 = i \tfrac{h}{2} (\tfrac{1}{g} + g)$
+\fi
 
 \begin{satz}[Weierstraß-Darstellung]
-  Eine konform parametrisierte $\mathcal{C}^2$-Hyperfläche $X : U \to \R^3$ hat bis auf Translation die Gestalt
-  \[ X = \Re \left( \int h \cdot (\tfrac{1}{2} (\tfrac{1}{g} - g), \tfrac{i}{2} (\tfrac{1}{g} + g), 1) \right), \]
-  wobei $h : U \to \C$ holomorph, $g : U \to \overline{\C}$ meromorph, sodass $Y$ holomorph ist und keine Nullstelle hat.
+  Eine konform param. minimale $\mathcal{C}^2$-HF $X : U \to \R^3$ hat (bis auf Translation) die Gestalt
+  \[
+    X = \Re \left( {\textstyle \int} Y \right)
+    \quad \text{mit} \quad
+    Y = h \cdot (\tfrac{1}{2} (\tfrac{1}{g} - g), \tfrac{i}{2} (\tfrac{1}{g} + g), 1),
+  \]
+  wobei $h : U \to \C$ holomorph und $g : U \to \overline{\C}$ meromorph sind, sodass die Komponenten von $Y$ keine gemeinsamen Nullstellen haben und keine Singularitäten haben.
 \end{satz}
+
+% Vorlesung vom 5.2.2014
+
+\begin{beob}
+  Ist $X$ durch $g$ und $h$ gegeben, dann ist die assoziierte Familie $X_{\Theta}$ durch $h_{\Theta} = \exp(i \Theta) h$ und $g_{\Theta} = g$ definiert.
+\end{beob}
+
+\begin{satz}
+  Sei $U \opn \C$ zusammenhängend, $X : U \to \R^3$ eine konform param. $\mathcal{C}^2$-HF, die durch $h$ und $g$ gegeben ist. Dann gilt $\nu = \Phi \circ g$ für die Gaußabb. $\nu$ von $X$ mit der stereographischen Projektion
+  \[
+    \Phi : \C \to S^2 \subset \R^3 \cong \C \times \R, \quad z \mapsto \tfrac{1}{\abs{z}^2 + 1} (2z, \abs{z}^2 + 1).
+  \]
+\end{satz}
+
+\begin{kor}
+  Sei $X$ eine zusammenhängende konform param. minimale $\mathcal{C}^2$-HF im $\R^3$ mit Gaußabb. $\nu$, dann gilt für die Gaußabbildung $\nu_{\Theta}$ der assoziierten Familie $X_{\Theta}$
+  \[ \nu_{\Theta} = \nu. \]
+\end{kor}
 
 \end{document}
