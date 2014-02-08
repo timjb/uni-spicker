@@ -419,9 +419,9 @@
 \end{bem}
 
 \begin{defn}
-  Sei $S \subset \R^n$ und $(K_n)_{n \in \N}$ eine Folge kompakter Teil- mengen des $\R^n$. Dann heißt $(K_n)$ eine \emph{Ausschöpfung} von $S$, falls:
+  Sei $S \subset \R^n$ und $(K_n)_{n \in \N}$ eine Folge kompakter Teilmengen des $\R^n$. Dann heißt $(K_n)$ eine \emph{Ausschöpfung} von $S$, falls:
   \begin{itemize}
-    \item Für alle $x \in S$ gibt es ein $\delta > 0$ und $i \in \N$, sodass $B_\delta(x) \subset K_i$.
+    \item Für alle $x \in S$ gibt es ein $\delta > 0$ und $i \in \N$, sodass $B_\delta(x) \cap S \subset K_i$.
     \\[-4pt]
     \miniitem{0.3 \linewidth}{$S = \bigcup_{n \in \N}^{\phantom{n \in \N}} K_n$}
     \miniitem{0.67 \linewidth}{$\emptyset \not= K_i \subset K_{i+1} \subset S$ für alle $i \in \N$}
@@ -1012,7 +1012,7 @@
   \]
 \end{umformulierung}
 
-% Kommt im Skript hinter dem Satz von Lex-Milgram, als Reformulierung für den Operator $A$.
+% Kommt im Skript hinter dem Satz von Lax-Milgram, als Reformulierung für den Operator $A$.
 \begin{lem}
   Sei $X$ ein Hilbertraum und $A \in \LSO(X)$ koerziv, d.\,h.
   \[ \ex{c_0 > 0} \fa{x \in X} \Re \scp{x}{Ax}_X \geq c_0 \cdot \norm{x}_X^2. \]
@@ -1036,7 +1036,7 @@
 \end{satz}
 
 \begin{kor}
-  Sei $A \in \LSO(X)$ der Operator aus dem Satz von Lex- Milgram und $J_X$ die Isometrie aus dem Rieszschen Darstellungssatz. Zu $x' \in X'$ ist dann $x \coloneqq A^{-1} J^{-1} x'$ die eindeutige Lösung zu
+  Sei $A \in \LSO(X)$ der Operator aus dem Satz von Lax- Milgram und $J_X$ die Isometrie aus dem Rieszschen Darstellungssatz. Zu $x' \in X'$ ist dann $x \coloneqq A^{-1} J^{-1} x'$ die eindeutige Lösung zu
   \[ a(y, x) = x'(y) \quad \text{für alle $y \in X$.} \]
   Es gilt die Stabilitätsaussage $\norm{x}_X \leq \tfrac{1}{c_0} \norm{x'}_{X'}$.
   Falls $a : X {\times} X \to \K$ ein Skalarprodukt ist, so ist $x$ das eindeutige Minimum von
@@ -1045,11 +1045,48 @@
 
 % Kapitel 4.1. Anwendung auf elliptische Randwertprobleme
 
-% ************
-% *   TODO   *
-% ************
-%
-% Neumann-Randwertproblem, Dirichlet-Randwertproblem, Poincaré-Ungleichung
+\begin{prob}
+  Sei $\Omega \subset \R^n$ offen, beschränkt. Gesucht ist $u \in \mathcal{C}^2$ mit
+
+  \[ - \sum_{i=1}^n \partial_i \left( \sum_{j=1}^n a_{ij} \partial_j u + h_i \right) + bu + f = 0, \]
+
+  wobei $a_{ij}, h_i \in \mathcal{C}^1(\Omega)$ und $f, b \in \mathcal{C}^0(\Omega)$ gegeben sind.
+  Es sei $a = (a_{ij})$ gleichmäßig elliptisch, d.\,h. es gibt $c_0 > 0$, sodass
+
+  \[ \fa{x \in \Omega} \fa{\xi \in \R^n} \xi^T a(x) \xi = \sum_{i,j}^n \xi_i a_{ij}(x) \xi_j \geq c_0 \norm{\xi}^2. \]
+
+  Außerdem soll eine der folgenden Randwertbedingungen erfüllt sein:
+
+  \begin{itemize}
+    \item \emph{Dirichlet-Randbedingung}: $u|_{\partial \Omega} = g$ für gegebenes $g \in \mathcal{C}^0(\partial \Omega)$. Gesucht ist dann $u \in \mathcal{C}^2(\Omega) \cap \mathcal{C}^0(\overline{\Omega})$.
+    \item \emph{Neumann-Randbedingung}: Auf $\partial \Omega$ gilt für geg. $g \in \mathcal{C}^0(\overline{\Omega})$
+    \[ - \sum_{i=1}^n \nu_i \left( \sum_{j=1}^n a_{ij} \partial_j u + h_i \right) = g, \]
+    wobei $\partial \Omega$ ein $\mathcal{C}^1$-Rand mit äußerer Normalen $\nu = (\nu_1, ..., \nu_n)$ und $a_{ij}, h_i \in \mathcal{C}^0(\overline{\Omega})$. Gesucht ist dann $u \in \mathcal{C}^2(\Omega) \cap \mathcal{C}^1(\overline{\Omega})$.
+  \end{itemize}
+\end{prob}
+
+\begin{defn}
+  \begin{itemize}
+    \item $u : \Omega \to \R$ heißt \emph{schwache Lösung des Dirichlet-RWP}, falls $u \in W^{1,2}_0(\Omega)$ und für alle Testfunktionen $\zeta \in W_0^{1,2}(\Omega)$ gilt
+    \[ \Int{\Omega}{}{\left(\sum_{i=1}^n (\partial_i \zeta) \sum_{j=1}^n a_{ij} \partial_j u + h_i \right) + \zeta (bu + f)}{x} = 0. \]
+    \item $u : \Omega \to \R$ heißt \emph{schwache Lösung des Neumann-RWP}, falls $u \in W^{1,2}(\Omega)$ und obige Gleichung für alle $W^{1,2}(\Omega)$ erfüllt ist.
+  \end{itemize}
+\end{defn}
+
+\begin{satz}
+  Sei $b_0 > 0$, sodass $b(x) \geq b_0$ für fast alle $x \in \Omega$. Dann gibt es genau eine schwache Lösung $u \in W^{1,2}(\Omega)$ des Neumann-Rand- problems und es gilt mit Konstante $C > 0$ von $f$ und $h$ unabhängig:
+  \[ \norm{u}_{W^{1,2}(\Omega)} \leq C (\norm{h}_{L^2} + \norm{f}_{L^2}). \]
+\end{satz}
+
+\begin{lem}[Poincaré-Ungleichung]
+  Ist $\Omega \subset \R^n$ offen und beschränkt, so gibt es eine Konstante $C_p$ (abhängig von $\Omega$), sodass
+  \[ \fa{u \in W_0^{1,2}(\Omega)} \norm{u}_{L^2(\Omega)}^2 \leq C_p \norm{\nabla u}_{L^2(\Omega)} \]
+\end{lem}
+
+\begin{satz}
+  Sei $b \geq 0$, dann gibt es genau eine schwache Lösung $u \in W_0^{1,2}(\Omega)$ des Dirichlet-Randproblems und es gilt mit einer Konstante $C > 0$ von $f$ und $h$ unabhängig:
+  \[ \norm{u}_{W^{1,2}(\Omega)} \leq C (\norm{h}_{L^2} + \norm{f}_{L^2}). \]
+\end{satz}
 
 
 % Kapitel 4.2. Dualraum von $L^p$
@@ -1067,6 +1104,7 @@
 
 % Ausgelassen: Formulierung des Lemmas von Zorn
 
+\begin{samepage}
 \begin{satz}[Hahn-Banach]
   Sei $X$ ein $\R$-VR und
   \begin{itemize}
@@ -1078,6 +1116,7 @@
   Dann gibt es eine lineare Abbildung $F : X \to \R$ mit
   \[ F(x) = f(x) \text{ für $x \in Y$} \quad \text{und} \quad F(x) \leq p(x) \text{ für } x \in X. \]
 \end{satz}
+\end{samepage}
 
 % Dieser Satz steht so nicht im Skript! Keine Ahnung, wo ich den herhab.
 \iffalse
@@ -1350,40 +1389,37 @@
   Sei $X$ ein reflexiver Banachraum und $M \subset X$ nicht leer, konvex und abgeschlossen. Dann gibt es zu jedem $\widetilde{x} \in X$ ein $x \in M$ mit $\norm{x - \tilde{x}} = \mathrm{dist}(\widetilde{x}, M)$.
 \end{satz}
 
-
-
-
-
-
-% TODO: Einkommentieren, ergänzen, verbessern:
-
 % Der Satz über die schwache Folgenabgeschlossenheit konvexer abgeschlossener Mengen spielt eine wichtige Rolle für Existenzaussagen für partielle Differentialgleichungen mit Nebenbedingungen
 
-% Sei dazu $\Omega \subset \R^n$ offen, beschränkt, zusammenhängend mit $\mathcal{C}^{0,1}$-Rand sowie $\K = \R$. Sei $a_{ij} = a_{ji} \in L^\infty(\Omega)$, $i,j = 1, ..., n$ gleichmäßig elliptisch, $f \in L^2(\Omega)$ sowie $E(u) = \Int{}{}{ \tfrac{1}{2} \sum_{i,j=1}^n \partial_i u a_{ij} \partial_j u + f u }{x}$, $E : W^{1,2}(\Omega) \to \R$.
+\begin{satz}
 
-% Für $M \subset W^{1,2}(\Omega)$ nicht leer, konvex, abgeschlossen mit $\fa{u_0 \in M} \ex{C_0 < \infty} \fa{\xi \in \R} u_0 + \xi \in M \implies \abs{\xi} \leq C$ gilt dann (ohne Beweis)
-% \begin{itemize}
-%   \item $E$ besitzt auf $M$ ein absolutes Minimum
-%   \item Die absoluten Minima von $E$ auf $M$ sind genau die Lösungen der Variationsungleichung: Finde $u \in M$, sodass $\Int{\Omega}{}{\sum_{i,j=1}^n \partial_i (u-v) a_{ij} \partial_j u + (u-v) f}{x}$ für alle $v \in M$.
-%   \item Ist $M$ ein abgeschlossener affiner Unterraum $M = u_0 + M_0$ mit $M_0$ Unterraum, so ist die Variationsungleichung äquivalent zu: Finde $u \in M$, sodass $\Int{\Omega}{}{\sum_{i,j=1}^n \partial_i v a_{ij} u + v f}{x} = 0$ für alle $v \in M_0$
-%   \item Hat $M$ die Eigenschaft $v \in M$, $\xi \in \R$ mit $v + \xi \in M$ $\implies \xi = 0$, so ist die Lösung eindeutig.
-% \end{itemize}
+  Sei $\Omega \subset \R^n$ offen, beschränkt, zusammenhängend mit $\mathcal{C}^{0,1}$-Rand sowie $\K = \R$. Sei $a_{ij} = a_{ji} \in L^\infty(\Omega)$ für $i,j = 1, ..., n$, sodass $a = (a_{ij})$ gleichmäßig elliptisch ist und $f \in L^2(\Omega)$. Betrachte $E \in W^{1,2}(\Omega) \to \R$ gegeben durch
+  \[
+    E(u) = \Int{\Omega}{}{ \tfrac{1}{2} \sum_{i,j=1}^n \partial_i u a_{ij} \partial_j u + f u }{x}
+  \]
+  Für $M \subset W^{1,2}(\Omega)$ nicht leer, konvex und abgeschlossen mit
+  \[ \fa{u_0 \in M} \ex{C_0 < \infty} \fa{\xi \in \R} u_0 + \xi \in M \implies \abs{\xi} \leq C_0 \]
+  gilt dann: %(ohne Beweis)
+  \begin{itemize}
+    \item $E$ besitzt ein absolutes Minimum auf $M$.
+    \item Die absoluten Minima von $E$ auf $M$ sind genau die Lösungen der Variationsungleichung: Finde $u \in M$, sodass
+    \[ \fa{v \in M} \Int{\Omega}{}{\sum_{i,j=1}^n \partial_i (u-v) a_{ij} \partial_j u + (u-v) f}{x} \leq 0. \]
+    \item Ist $M$ ein abgeschlossener affiner Unterraum $M = u_0 + M_0$ mit $M_0$ Unterraum, so ist die Variationsungleichung äquivalent zu: Finde $u \in M$, sodass $\Int{\Omega}{}{\sum_{i,j=1}^n \partial_i v a_{ij} u + v f}{x} = 0$ für alle $v \in M_0$.
+    \item Hat $M$ die Eigenschaft
+    \[ \fa{v \in M} \fa{\xi \in \R} v + \xi \in M \implies \xi = 0, \]
+    so ist die Lösung eindeutig.
+  \end{itemize}
+\end{satz}
 
 \begin{samepage}
 
-\begin{bsp}
+\begin{bspe}
   \begin{itemize}
     \item Sei $M = W_0^{1,2}(\Omega)$. Dann ist die eindeutige Lösbarkeit des zugehörigen (schwachen) Dirichlet-Problems gesichert.
     \item Sei $M = \Set{ u \in W^{1,2}(\Omega) }{ \Int{\Omega}{}{u}{x} = 0 }$ und gelte $\Int{\Omega}{}{f}{x} = 0$. Dann sichern Punkt 3, 4 die eindeutige Lösbarkeit des zugehörigen Neumann-Problems.
     \item Seien $u_0, \psi_0 \in W^{1,2}(\Omega)$ gegeben und $u_0(x) \geq \phi_0(x)$ für fast alle $x \in \Omega$. Definiere $M = \Set{ v \in W^{1,2}(\Omega) }{ v = u_0 \text{ auf } \partial \Omega, v \geq \psi \text{ in } \Omega }$. Dann sichern die Punkte 1 bzw. 2 und 4 die eindeutige Existenz einer Lösung dieses Hindernis-Problems.
   \end{itemize}
-\end{bsp}
-
-
-
-
-
-
+\end{bspe}
 
 
 % Vorlesung vom 16.1.2014
@@ -1511,6 +1547,8 @@
   Wenn $f$ Lipschitz-stetig ist, dann gilt $f(x) = \lim_{\mathclap{n \to \infty}} P_n f(x)$.
 \end{lem}
 
+\begin{samepage}
+
 \begin{bem}
   Die Fourier-Summe erlaubt die explizite Approx. von $f$ im Unterraum $X = \mathrm{span} \Set{e_k}{ \abs{k} \leq n }$.
 \end{bem}
@@ -1519,6 +1557,8 @@
 
 % Kapitel 7.2.
 \subsection{Lineare Projektionen}
+
+\end{samepage}
 
 \begin{defn}
   Sei $Y$ Unterraum des VR $X$. Eine lineare Abb. $P : X \to X$ heißt \emph{(lineare) Projektion auf $Y$}, falls $P^2 = P$ und $\im(P) = Y$.
