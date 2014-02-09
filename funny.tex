@@ -923,17 +923,23 @@
   Es gilt $T' \in \Leb(Y', X')$ und $\norm{T'}_{\LSO(Y', X')} = \norm{T}_{\LSO(X, Y)}$.
 \end{satz}
 
-\begin{bsp}
-  Seien $p, q \in \left[ 1, \infty \right]$ mit $\tfrac{1}{p} + \tfrac{1}{q} = 1$ und $g \in L^q(S, \K)$. Dann ist ein Funktional $T_g \in (L^p(S, \K))'$ definiert durch
-  \[ T_g : L^p(S, \K) \to \K, \quad f \mapsto \Int{S}{}{f \cdot \overline{g}}{\mu}. \]
-\end{bsp}
+% Steht noch an anderer Stelle im Skript (Kapitel 4.2. Dualraum von $L^p$).
+\iffalse
+  \begin{bsp}
+    Seien $p, q \in \left[ 1, \infty \right]$ mit $\tfrac{1}{p} + \tfrac{1}{q} = 1$ und $g \in L^q(S, \K)$. Dann ist ein Funktional $T_g \in (L^p(S, \K))'$ definiert durch
+    \[ T_g : L^p(S, \K) \to \K, \quad f \mapsto \Int{S}{}{f \cdot \overline{g}}{\mu}. \]
+  \end{bsp}
+\fi
 
 % Ausgelassen: Beispiel: Funktional auf $(W^{m,p}(S,\K))'$
 % Ausgelassen: Beispiel: Operator, der mit Dirac-Folge faltet
 
 \begin{satz}
   Sei $X$ Banachraum und $T \in \LSO(X)$ mit $\limsup_{m \to \infty} \,\norm{T^m}^{\tfrac{1}{m}} < 1$. Dann ist $(\Id - T)$ bijektiv und $(\Id - T)^{-1} \in \LSO(X)$ mit
-  \[ (\Id - T)^{-1} = \sum_{n=0}^\infty T^n. \]
+  \[
+    (\Id - T)^{-1} = \sum_{n=0}^\infty T^n
+    \quad \text{(\emph{Neumann-Reihe}).}
+  \]
 \end{satz}
 
 \begin{bem}
@@ -1068,7 +1074,7 @@
 \begin{defn}
   \begin{itemize}
     \item $u : \Omega \to \R$ heißt \emph{schwache Lösung des Dirichlet-RWP}, falls $u \in W^{1,2}_0(\Omega)$ und für alle Testfunktionen $\zeta \in W_0^{1,2}(\Omega)$ gilt
-    \[ \Int{\Omega}{}{\left(\sum_{i=1}^n (\partial_i \zeta) \sum_{j=1}^n a_{ij} \partial_j u + h_i \right) + \zeta (bu + f)}{x} = 0. \]
+    \[ \Int{\Omega}{}{\left(\sum_{i=1}^n (\partial_i \zeta) \left( \sum_{j=1}^n a_{ij} \partial_j u + h_i \right) \right) + \zeta (bu + f)}{x} = 0. \]
     \item $u : \Omega \to \R$ heißt \emph{schwache Lösung des Neumann-RWP}, falls $u \in W^{1,2}(\Omega)$ und obige Gleichung für alle $W^{1,2}(\Omega)$ erfüllt ist.
   \end{itemize}
 \end{defn}
@@ -1411,8 +1417,6 @@
   \end{itemize}
 \end{satz}
 
-\begin{samepage}
-
 \begin{bspe}
   \begin{itemize}
     \item Sei $M = W_0^{1,2}(\Omega)$. Dann ist die eindeutige Lösbarkeit des zugehörigen (schwachen) Dirichlet-Problems gesichert.
@@ -1426,8 +1430,6 @@
 
 % Kapitel 7.
 \section{Endlich-dimensionale Approximation}
-
-\end{samepage}
 
 % Für numerische Berechnungen ist die Approximation von Elementen oder Unterräumen unendlich-dimensionaler Räume mit endlich-dimensionaler Information von großer Relevanz. Eine abzählbare Approximation durch endlich-dimensionale Unterräume ist nur für separable Räume möglich:
 
@@ -1741,7 +1743,7 @@ Die Unterräume $E_n = \im(Q_n)$ erfüllen dann (3) aus dem ersten Lemma und (2)
     \item Für jede lineare Abbildung $T : X \to Y$ gilt: Wenn $T$ kompakt ist, dann ist $T$ vollstetig. Ist $X$ reflexiv, gilt auch die Rückrichtung. % Nach Eberleyn-Schmuljan
     \item $\mathcal{K}(X, Y)$ ist ein abgeschlossener Unterraum von $\LSO(X, Y)$.
     \item Ist $T \in \LSO(X, Y)$ mit $\dim \im(T) < \infty$, so ist $T \in \mathcal{K}(X, Y)$.
-    \item Sei $Y$ ein Hilbertraum und $T \in \LSO(X, Y)$. Es gilt $T \in \mathcal{K}(X, Y)$ genau dann, wenn es eine Folge $(T_n)_{n \in \N}$ in $\LSO(X, Y)$ gibt mit $\fa{n \in \N} \im(T_n) < \infty$, sodass $\norm{T-T_n} \convWith{n} 0$.
+    \item Sei $Y$ ein Hilbertraum und $T \in \LSO(X, Y)$. Es gilt $T \in \mathcal{K}(X, Y)$ genau dann, wenn es eine Folge $(T_n)_{n \in \N}$ in $\LSO(X, Y)$ gibt mit $\fa{n \in \N} \dim \im(T_n) < \infty$, sodass $\norm{T-T_n} \convWith{n} 0$.
     \item Für $P \in \mathcal{P}(X)$ gilt: $P \in \mathcal{K}(X) \iff \dim \mathrm{im}(P) < \infty$.
   \end{itemize}
 \end{lem}
