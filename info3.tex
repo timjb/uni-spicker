@@ -7,32 +7,41 @@
   /Author (Tim Baumann)
 }
 
+\newcommand{\Alg}{\mathfrak{A}} % (Mengen-)Algebra
+\renewcommand{\P}{\mathbb{P}} % Wahrscheinlichkeitsmaß
+\newcommand{\E}{\mathbb{E}} % Erwartungswert
+\newcommand{\code}[1]{\em{#1}}
+
 \begin{document}
 
 \maketitle{Zusammenfassung Informatik \rom{3}}
 
+\theoremstyle{definition}
 \newtheorem*{definition}{Definition}
+\newtheorem*{datenstruktur}{Datenstruktur}
 
 \begin{abk}
-  \begin{tabular}{r l}
-    \textbf{WC} & Worst Case \\
-    \textbf{AC} & Worst Case \\
-    \textbf{BC} & Best Case
-  \end{tabular}
+  \textbf{WC}/\textbf{BC}/\textbf{AC} steht für Worst/Average/Best Case.
 \end{abk}
+
+
+% Kapitel 2: Grundlagen
+
+% Kapitel 2.1. Asymptotische Notation
 
 \begin{alg}[Insertion Sort]
   BC: $O(n)$; AC, WC: $O(n^2)$
 \end{alg}
 
 \begin{nota}
-  Sei $\mathcal{F}$ die Menge der Funktionen von $\N$ nach $\R_{\geq 0}$. Ist $g \in \mathcal{F}$, dann definieren wir
+  $\mathcal{F} \coloneqq \{ f : \N \to \R_{\geq 0} \}$.
+  Für $f \in \mathcal{F}$ ist
   \begin{align*}
-    O(f) \coloneqq& \, \Set{ g \in \mathcal{F} }{ \exists\,c > 0\,\exists\,n_0 \in \N\,\forall\,n \geq n_0 : g(n) \leq c \cdot f(n) } \\
-    \Omega(f) \coloneqq& \, \Set{ g \in \mathcal{F} }{ \exists\,c > 0\,\exists\,n_0 \in \N\,\forall\,n \geq n_0 : g(n) \leq c \cdot f(n) } \\
-    o(f) \coloneqq& \, \Set{ g \in \mathcal{F} }{ \forall\,c > 0\,\exists\,n_0 \in \N\,\forall\,n \geq n_0 : g(n) \leq c \cdot f(n) } \\
-    \omega(f) \coloneqq& \, \Set{ g \in \mathcal{F} }{ \forall\,c > 0\,\exists\,n_0 \in \N\,\forall\,n \geq n_0 : g(n) \leq c \cdot f(n) } \\
-    \Theta(f) \coloneqq& \, \{ g \in \mathcal{F} \,|\, \exists\,c_1, c_2 > 0\,\exists\,n_0 \in \N\,\forall\,n \geq n_0 : \\
+         O(f) \coloneqq& \, \Set{ g \in \mathcal{F} }{ \ex{c > 0} \ex{n_0 \in \N} \fa{n \geq n_0} g(n) \leq c \cdot f(n) } \\
+    \Omega(f) \coloneqq& \, \Set{ g \in \mathcal{F} }{ \ex{c > 0} \ex{n_0 \in \N} \fa{n \geq n_0} g(n) \geq c \cdot f(n) } \\
+         o(f) \coloneqq& \, \Set{ g \in \mathcal{F} }{ \fa{c > 0} \ex{n_0 \in \N} \fa{n \geq n_0} g(n) \leq c \cdot f(n) } \\
+    \omega(f) \coloneqq& \, \Set{ g \in \mathcal{F} }{ \fa{c > 0} \ex{n_0 \in \N} \fa{n \geq n_0} g(n) \geq c \cdot f(n) } \\
+    \Theta(f) \coloneqq& \, \{ g \in \mathcal{F} \,|\, \ex{c_1, c_2 > 0} \ex{n_0 \in \N} \fa{n \geq n_0} \\
     & \qquad \qquad \qquad c_1 \cdot f(n) \leq g(n) \leq c_2 \cdot f(n) \}
               = O(f) \cap \Omega(f) \\
   \end{align*}
@@ -40,8 +49,8 @@
 
 \begin{satz}
   Seien $0 < \alpha < \beta$, $0 < a < b$ und $1 < A < B$. Betrachte
-  \begin{multicols}{3}
-    \begin{itemize}
+  \begin{itemize}
+    \begin{multicols}{3}
       \item $f_1(n) \coloneqq \log \log n$
       \item $f_2(n) \coloneqq (\log n)^\alpha$
       \item $f_3(n) \coloneqq (\log n)^\beta$
@@ -53,14 +62,16 @@
       \item $f_9(n) \coloneqq A^n \cdot n^a$
       \item $f_{10}(n) \coloneqq A^n \cdot n^b$
       \item $f_{11}(n) \coloneqq B^n$
-    \end{itemize}
-  \end{multicols}
+    \end{multicols}
+  \end{itemize}
   Es gilt: $f_i \in o(f_{i+1})$ für $i = 1, ..., 10$.
 \end{satz}
 
+% Kapitel 2.2. Die Random-Access-Maschine
+
 % TODO: Definition RAM
 
-\begin{definition}[RAM]
+\begin{defn}[RAM]
   Die Random Access Access Machine besitzt eine unendlich lange Liste von aufsteigend nummerierten Speicherzellen R[0], R[1], ..., die jeweils eine ganze Zahl beinhalten und einen Programmzähler. Sie kann mittels der folgenden Sprache programmiert werden:
   \begin{grammar}
     <Zieladresse> ::= <Adresse> | R[<Adresse>]
@@ -73,18 +84,54 @@
     <Programm> ::= <Befehl> `;' <Programm> | `End'
   \end{grammar}
   wobei $\odot \in \{ +, -, *, \div \}$ und $\bowtie \, \in \{ <, \leq, =, \geq, >, \not= \}$. Diese einfache Grammatik lässt sich auch für unbedingte Sprünge nutzen (mittels Bedingung $0 = 0$). Ein Sprung über das Ende des Programms hinaus lässt das Programm anhalten. Per Konvention steht die Größe der Eingabe in der Speicherzelle R[1], während die tatsächliche Eingabe in R[2], ..., R[R[1] + 1] abgelegt wird.
-\end{definition},
+\end{defn}
 
-% TODO: Einführung Bäume / gerichtete Graphen
-% TODO: Einführung Stochastik
+% Kapitel 2.3. Gerichtete Bäume
+
+\begin{defn}
+  Ein \emph{Graph} ist ein Tupel $(V, E)$, wobei $V$ eine endliche Mengen von \emph{Knoten} und $E \subset V \times V$ die Menge der \emph{Kanten} ist.
+\end{defn}
+
+% Ausgelassen: Einführung Bäume / gerichtete Graphen
+
+% Kapitel 2.4. Stochastik
+
+% * Grundlegende Axiome von W-Räumen, W-Maßen
+% * Definition bedingte Wahrscheinlichkeit, Satz von der totalen Wkt
+% * Unabhängigkeit
+
+\begin{defn}
+  Eine Zufallsvariable auf einem Wahrscheinlichkeitsraum $(\Omega, \Alg, \P)$ ist eine Borel-messbare Funktion $X : \Omega \to \R$.
+\end{defn}
+
+\begin{defn}
+  Der Erwartungswert einer Zufallsvariable $X$ auf einem (diskreten) Wahrscheinlichkeitsraum $(\Omega, \Alg, \P)$ ist
+  \[ \E \coloneqq \Int{\Omega}{}{X}{\P} = \sum_{\omega \in \Omega} \P(\{ \omega \}) \cdot X(\omega). \]
+\end{defn}
+
+% Ausgelassen: Einschub zu unendlichen Summen, Integralvergleichskriterium
+
+\begin{bem}
+  Es gilt für $\abs{x} < 1$: $\sum_{k=1}^\infty k x^{k{-}1} = \tfrac{1}{(1-x)^2}$.
+\end{bem}
+
+% Ausgelassen: Eigenschaften des Erwartungswerts (Linearität etc.)
+% Ausgelassen: Defintion des bedingten Erwartungswertes
+
+
+% Kapitel 3. Sortieren und Verwandtes
+
+% Kapitel 3.1. Mischen und Sortieren durch Mischen
 
 \begin{alg}
   Zwei sortierte Folgen der Gesamtlänge $n$ können in $O(n)$ Zeit gemischt werden.
 \end{alg}
 
-\begin{alg}[Sortieren durch Mischen / Mergesort]
-  $n$ Elemente mit Schlüsseln aus einem total geordneten Universum können in $O(n \log n)$ Zeit nach ihren Schlüsseln sortiert werden.
+\begin{alg}[Mergesort]
+  BC, AC, WC: $O(n \log n)$
 \end{alg}
+
+% Kapitel 3.2. Rekursionsungleichungen
 
 \begin{satz}[Master-Theorem]
   Seien $a, b, c, k, N$ reelle Zahlen mit $a, c > 0$, $k \geq 0$, $b, N \in \N$ und $b \geq 2$ und sei $T : \N \to \R_{\geq 0}$ eine Funktion, die folgende Rekursionsungleichung erfüllt:
@@ -114,26 +161,418 @@
   \end{cases} \]
 \end{satz}
 
-% Wichtigkeit?
-\begin{satz}
-  Seien $\beta, c, k, n$ reelle Zahlen mit $c, k > 0$, $n \in \N_0$ und $0 < \beta < 1$ und sei $T : \N_0 \to \R_{\geq 0}$ eine Funktion, die folgende Rekursionsungleichung erfüllt:
-  \[ T(n) \leq \begin{cases}
-    c, & \text{ für } n \leq N \\
-    c n^k + T(\lfloor \beta n \rfloor), & \text{ für } n > N.
-  \end{cases} \]
-  Dann ist $T(n) = O(n^k)$
-\end{satz}
+% Ausgelassen, da einfaches Korollar mit $\beta \coloneqq \frac{1}{b}, a \coloneqq 1$.
+\iffalse
+  \begin{satz}
+    Seien $\beta, c, k, n$ reelle Zahlen mit $c, k > 0$, $n \in \N_0$ und $0 < \beta < 1$ und sei $T : \N_0 \to \R_{\geq 0}$ eine Funktion, die folgende Rekursionsungleichung erfüllt:
+    \[ T(n) \leq \begin{cases}
+      c, & \text{ für } n \leq N \\
+      c n^k + T(\lfloor \beta n \rfloor), & \text{ für } n > N.
+    \end{cases} \]
+    Dann ist $T(n) = O(n^k)$
+  \end{satz}
+\fi
 
-% TODO: Algorithmus beschreiben?
+% Kapitel 3.3. Multiplikation großer Zahlen
 
+% Ausgelassen: Beschreibung des Algorithmus
 \begin{satz}[Karatsuba und Ofman]
   Zwei $n$-stellige Zahlen können in $O(n^{\log_2 3})$ Zeit multipliziert werden.
 \end{satz}
 
-% TODO: Algorithmus beschreiben?
+% Kapitel 3.4. Selektion (Auswählen)
 
+\begin{defn}
+  Für $\beta \in \left[ \tfrac{1}{2}, 1 \right[$ ist ein $\beta$-Splitter eine Funktion, die aus einer List von $n$ Schlüsseln einen Schlüssel auswählt, sodass höchstens je $\beta n$ Schlüssel der Liste größer bzw. kleiner sind.
+\end{defn}
+
+% Ausgelassen: Beschreibung des Algorithmus
 \begin{satz}[Selektion]
   Gegeben seien eine Menge $X$ von $n$ Elementen aus einem total geordneten Universum und eine ganze Zahl $k$ mit $1 \leq k \leq n$. Dann können wir (deterministisch) in $O(n)$ Zeit das $k$-kleinste Element aus $X$ bestimmen.
+\end{satz}
+
+% Kapitel 3.5. Quicksort
+
+\begin{alg}[Quicksort]
+  BC, AC: $O(n \log n)$, WC: $O(n^2)$
+\end{alg}
+
+% Kapitel 3.6. Heapsort
+
+\begin{alg}[Heapsort]
+  Inplace, BC/AC/WC: $O(n \log n)$
+\end{alg}
+
+% Kapitel 3.7. Untere Schranken für Sortieren
+
+\begin{satz}
+  Jeder deterministische vergleichsbasierte Sortieralgorithmus hat im RAM-Modell eine Worst-Case-Laufzeit von $O(n \log n)$. Wenn alle Permutation mit gleicher Wkt. auftreten, gilt dies auch für die mittlere Laufzeit.
+\end{satz}
+
+\begin{satz}
+  Jeder randomisierte vergleichsbasierte Sortieralgorithmus hat im RAM-Modell eine erwartete Laufzeit von $\Omega(n \log n)$ auf WC-Eingaben der Länge $n$.
+\end{satz}
+
+% Kapitel 4. Sortieren in anderen Modellen
+
+% Kapitel 4.1. Sortieren von ganzen Zahlen
+
+\fbox{
+  \begin{minipage}{8.5cm}
+    \hfill\vspace{2.5cm}
+  \end{minipage}
+}
+
+\begin{satz}[Sortieren durch Zählen]
+  $n$ ganze Zahlen im Bereich $\{ 0, ..., m-1 \}$ können in Zeit $O(n+m)$ sortiert werden.
+\end{satz}
+
+\begin{satz}[Radix-Sort]
+  $n$ ganze Zahlen im Bereich $\{ 0, ..., 10^k-1 \}$ können in Zeit $O(nk)$ sortiert werden.
+\end{satz}
+
+% Kapitel 4.2. Sortieren von Strings
+
+\begin{satz}
+  $n$ Strings mit insgesamt $N$ Zeichen aus dem Alphabet $\{ 0, ..., m-1 \}$ können in $O(n + m + N)$ Zeit sortiert werden.
+\end{satz}
+
+% Kapitel 4.3. Sortiernetzwerke
+
+\begin{satz}[0-1-Prinzip]
+  Sortiert ein Vergleichsnetzwerk für $n$ Schlüssel alle 0-1-Tupel der Länge $n$ korrekt, dann sortiert es alle Tupel der Länge $n$ korrekt, ist also ein Sortiernetzwerk.
+\end{satz}
+
+\begin{satz}
+  Für jede Zweierpotenz $n$ gibt es ein Sortiernetzwerk für $n$ Schlüssel mit Tiefe $\log_2 n (1 + \log_2 n) / 2$.
+\end{satz}
+
+% Kapitel 5. Einfache Datenstrukturen
+
+% Kapitel 5.1. Keller und Warteschlangen
+
+% Keller (LIFO queues) unterstützen die Operationen push und pop
+
+% Warteschlangen (FIFI queues) unterstützen die Operationen enqueue und dequeue
+
+% Kapitel 5.2. Abstrakte Datentypen für Mengen
+
+% Wörterbücher $S$ unterstützen die Operationen
+% * S.insert(I, R)
+% * S.delete(I)
+% * S.member(I)
+% * S.lookup(I)
+
+% Prioritätswarteschlangen unterstützen die folgenden Operationen
+% * S.insert(I, x, R)
+% * S.delete(I)
+% * S.find_min()
+
+% Kapitel 5.3. Felder
+% Ausgelassen: Direktspeicherung, Konsekutive Speicherung
+
+% Kapitel 5.4. Verkettete Listen
+
+% Kapitel 6. Prioritätswarteschlangen
+
+% Kapitel 6.1. Binäre Heaps
+
+\begin{center}
+  \begin{tabular}{r | l l}
+    & BinHeap & FibHeap \\ \hline
+    insert & $O(\log n)$ & $O(1)$ \\
+    delete & $O(\log n)$ & $O(\log n)$ \\
+    find_min & $O(1)$ & $O(1)$ \\
+    decrease_key & $O(\log n)$ & $O(1)$ \\
+  \end{tabular}
+\end{center}
+
+% Kapitel 6.2. Fibonacci-Heaps
+
+\begin{satz}
+  Der Grad jedes Knoten in einem Fibonacci-Heap mit $n$ Knoten ist $O(\log n)$
+\end{satz}
+
+\begin{satz}[amortisierte Kosten des Fibonacci-Heaps]
+  Eine Folge von $r$ insert-, find_min- und decrease_key- und $n \leq r$ delete-Operationen auf einem am Anfang leeren Fibonacci-Heap können in $O(r + n \log r)$ Zeit ausgeführt werden.
+\end{satz}
+
+% Kapitel 7. Bäume
+
+% Kapitel 7.1. Natürliche Bäume
+
+% Ausgelassen: Was ist Inorder-Reihenfolge?
+% Unterscheidung: Höhenbalancierte Bäume, gewichtsbalancierte Bäume, $(a, b)$-Bäume
+
+\begin{satz}
+  AVL-Bäume unterstützen alle Operationen einer Prioritätswarteschlange und eines Wörterbuchs in Zeit $O(\log n)$, wobei $n$ die Anzahl der gespeicherten Tupel ist.
+\end{satz}
+
+\begin{satz}
+  Seien $a$ und $b$ ganzzahlige Konstanten mit $a \geq 2$ und $b \geq 2 a - 1$. Dann unterstützen $(a, b)$-Bäume alle Operationen einer Prioritätswarteschlange und eines Wörterbuchs in Zeit $O(\log n)$, wobei $n$ die Anzahl der gespeicherten Tupel ist.
+\end{satz}
+
+\begin{defn}
+  Der Belegungsfaktor einer Hashtabelle ist $\alpha \coloneqq n / s$, wobei $n$ die Anzahl der Schlüssel und $s$ die Größe der Hashtabelle ist.
+\end{defn}
+
+\begin{satz}
+  Eine Wörterbuchoperation auf einer Hashtabelle mit Belegungsfaktor $\alpha$ kann unter den Annahmen (A) und (B) in mittlerer Zeit $O(t + \alpha)$ ausgeführt werden, wobei $t$ die Auswertungszeit der Hashfunktion ist.
+\end{satz}
+
+% Kapitel 8. Hashing
+
+% Kapitel 8.1. Universelles Hashing
+
+\begin{defn}
+  Sei $s \in \N$, $U$ eine Menge und $\mathcal{H}$ eine endliche Klasse von Funktionen von $U$ nach $\{ 0, ..., s-1 \}$. Die Klasse $\mathcal{H}$ heißt $c$-universell, wobei $c > 0$, falls
+  \[
+    \abs{\Set{h \in \mathcal{H}}{ h(x) = h(y) }} \quad \text{für alle $x, y \in U$ mit $x \not= y$.}
+  \]
+\end{defn}
+
+\begin{satz}
+  Eine Wörterbuchoperation auf einer Hashtabelle mit Belegungsfaktor $\alpha$ kann in erwarteter Zeit $O(t + \alpha)$ ausgeführt werden, wobei $t$ die Auswertungszeit der Hashfunktion ist, wenn die Hashfunktion zufällig aus einer universellen Klasse $\mathcal{H}$ von Hashfunktionen gewählt wird.
+\end{satz}
+
+\begin{lem}
+  Sei $s \in \N$ und $p$ eine Primzahl. Für $a \in \{ 1, ..., p-1 \}$ sei
+  \[
+    h_a : \{ 0, ..., p{-}1 \} \to \{ 0, ..., s{-}1 \}, \quad
+    x \mapsto (ax \bmod p) \bmod s.
+  \]
+  Dann ist $\mathcal{H} = \Set{h_a}{1 \leq a \leq p-1}$ eine 2-universelle Klasse von Hashfunktionen von $\{ 0, ..., p{-}1 \}$ nach $\{ 0, ..., s{-}1 \}$.
+\end{lem}
+
+\begin{lem}
+  Sei $r \in \N$, $s$ eine Primzahl und $\Sigma = \{ 0, ..., s{-}1 \}$. Für jedes $r$-Tupel $a = (a_1, ..., a_r) \in \Sigma^r$ sei
+  \[
+    h_a : \Sigma^r \to \Sigma, \quad
+    (x_1, ..., x_r) \mapsto \left( \sum_{i=1}^r a_i x_i \right) \bmod s.
+  \]
+  Dann ist $\mathcal{H} = \Set{h_a}{a \in \Sigma^r}$ eine 1-universelle Klasse von Funktionen von $\Sigma^r$ nach $\Sigma$.
+\end{lem}
+
+% Ausgelassen: Kapitel 8.2. Perfektes Hashing
+
+% Kapitel 9. Das Union-Find-Problem
+
+% Eine Union-Find-Datenstruktur stellt folgende Operationen zur Verfügung:
+% * initialize(n)
+% * union(v, w)
+% * find(v)
+
+% Kapitel 9.1. Union-Find-Datenstrukturen
+
+% 9.1.
+\begin{satz}
+  Eine Operationsfolge bestehend aus \code{initialize(n)} und $m$ \code{union}- und \code{find}-Operationen kann in $O(m + n \log n)$ Zeit ausgeführt werden.
+\end{satz}
+
+\begin{satz}
+  Eine Operationsfolge bestehend aus \code{initialize(n)} gefolgt von $m$ \code{union}- und \code{find}-Operationen kann in $O(n + m \alpha(n, \tfrac{m}{n}))$ Zeit ausgeführt werden, wobei $\alpha$ die inverse Ackermann-Funktion bezeichnet.
+\end{satz}
+
+% Kapitel 10. Tiefensuche mit Anwendungen
+
+% Kapitel 10.1. Graphen und ihre Darstellung am Rechner
+
+% Einführung von Terminologie:
+% * Multigraphen, Kanten, Knoten, Schleifen
+% * gerichtete, ungerichtete, gemischte Multigraphen
+% * Kreise, einfache Kreise, azyklisch, zusammenhängend
+% * Eingangsgrad, Ausgangsgrad
+% * dünne, dichte Graphen
+% * Baum
+
+\begin{lem}
+  Sei $T = (V, E)$ ein ungerichteter Graph. Dann ist $T$ genau dann ein Baum, wenn beliebige zwei der folgenden Bedingungen erfüllt sind. Dann gilt auch die dritte Bedingung.
+  \begin{itemize}
+    \miniitem{0.46 \linewidth}{$T$ ist zusammmenhängend.}
+    \miniitem{0.28 \linewidth}{$T$ ist azyklisch.}
+    \miniitem{0.2 \linewidth}{$\abs{E} = \abs{V} - 1$}
+  \end{itemize}
+\end{lem}
+
+% Ausgelassen: Repräsentation von Graphen an Rechnern mittels Adjazenzmatrizen, Adjazenzlisten
+
+% Kapitel 10.2. Tiefensuche
+
+% Klassifikation von Kanten in DFS-Bäumen: Baumkante, Vorwärtskante, Rückwärtskante, Querkante
+
+% Kapitel 10.3. Topologisches Sortieren
+
+\begin{satz}
+  Eine topologische Sortierung eines gerichteten azyklischen Graphen kann in $O(n+m)$ Zeit berechnet werden.
+\end{satz}
+
+% Kapitel 10.4. Starke Zusammenhangskomponenten
+
+\begin{satz}
+  Sei $W$ ein DFS-Wald eines ungerichteten Graphen $G = (V, E)$ und seien $u, v \in V$. Dann gehören $u$ und $v$ genau dann zur selben Zusammenhangskomponente von $G$, wenn sie Knoten im selben Baum von $W$ sind.
+\end{satz}
+
+\begin{defn}
+  Eine \emph{starke Zusammenhangskomponente} in einem gerichteten Graphen ist eine maximale Gruppe von Knoten, sodass zwischen je zwei Knoten der Gruppe ein Pfad existiert.
+\end{defn}
+
+\begin{satz}
+  Die starken Zusammenhangskomponenten eines gerichteten Graphen mit $n$ Knoten und $m$ Kanten können in $O(n+m)$ Zeit berechnet werden.
+\end{satz}
+
+% Kapitel 11. Kürzeste Wege
+
+% Probleme
+% * Was ist der schnellste/beste/kürzeste Weg von A nach B?
+% * Single-Source-Shortest-Paths (SSSP)
+% * All-Pairs-Shortest-Paths (APSP)
+
+% Kapitel 11.1. Das Single-Source-Shortest-Paths-Problem
+
+\begin{lem}[$\triangle$-Ungleichung]
+  Für jede Kante $(u, v) \in E$ ist $\delta(v) \leq \delta(u) + c(u, v)$
+\end{lem}
+
+\begin{alg}[Bellman-Ford]
+  Relaxiere $n$ mal je alle Kanten im Graphen.
+\end{alg}
+
+\begin{satz}
+  Das Single-Source-Shortest-Paths-Problem mit $n$ Knoten und $m$ Kanten kann in Zeit $O(nm)$ gelöst werden.
+\end{satz}
+
+\begin{satz}[\emph{Dijkstras Algorithmus}]
+  Das Single-Source-Shortest-Paths-Problem kann in $O(n \log n + m)$ Zeit gelöst werden.
+\end{satz}
+
+% Mit Breitensuche:
+\begin{satz}
+  Das Single-Source-Shortest-Paths-Problem kann in Netzwerken mit $n$ Knoten, $m$ Kanten und allen Kantenkosten 1 in Zeit $O(n+m)$ gelöst werden.
+\end{satz}
+
+% Kapitel 11.2. Das All-Pairs-Shortest-Paths-Problem
+
+\begin{alg}[Floyd-Warshall]
+  Verwende Tabelle mit aktuell berechneter Entfernung zwischen je zwei Knoten (dynamische Programmierung). Betrachte dann alle Tripel von Knoten, wende Dreiecksungleichung an.
+\end{alg}
+
+\begin{satz}
+  Das All-Pairs-Shortest-Paths-Problem mit $n$ Knoten kann in Zeit $O(n^3)$ gelöst werden.
+\end{satz}
+
+% Kapitel 12. Minimale Spannbäume
+
+% Kapitel 12.1. Ein generischer MST-Algorithmus
+
+% Kapitel 12.2. Der Kruskal-Algorithmus
+
+\begin{alg}[Kruskal]
+  Für immer diejenige Kante zum Spannbaum hinzu, die die geringsten Kosten hat und durch die kein Zirkel entsteht. Laufzeit: $O(m \log n)$
+\end{alg}
+
+% Kapitel 12.3. Der Prim-Algorithmus
+
+\begin{alg}[Prim]
+  Wir lassen einen minimalen Baum zwischen einer Gruppe durch Knoten durch Hinzunahme der jeweils günstigsten Kante nach "`draußen"' wachsen.
+\end{alg}
+
+\begin{satz}
+  Ein minimal aufspannender Wald eines ungerichteten Netzwerks mit $n$ Knoten und $m$ Kanten kann in Zeit $O(n \log n + m)$ berechnet werden.
+\end{satz}
+
+% Kapitel 12. NP-Vollständigkeit
+
+% Kapitel 12.1. Turing-Maschinen
+
+\begin{defn}
+  Eine (deterministische) \emph{Turing-Maschine} (DTM) ist ein Tupel $(Q, \Sigma, \Gamma, \delta, q_{0}, q_{a}, q_{r}, \textvisiblespace)$ mit
+
+  \begin{itemize}{\leftmargin=0em}
+    \setlength{\leftmargin}{0pt}
+    \item Einer Zustandsmenge $Q$ (endlich)
+    \item Einem Eingabealphabet $\Sigma$ (endlich)
+    \item Einem \emph{Bandalphabet} $\Gamma$ enthält $\Sigma$
+    \item Einer Übergangsfunktion $\delta : Q \times \Gamma \to Q \times \Gamma \times \{ \leftarrow, \rightarrow \} $
+    \item Einem Startzustand $q_{0} \in Q$
+    \item Einem \emph{akzeptierenden Zustand} $q_{a} \in Q$
+    \item Einem \emph{verwerfenden Zustand} $q_{r} \in Q$
+    \item Einem Symbol $\textvisiblespace \in \Gamma \backslash \Sigma$
+  \end{itemize}
+\end{defn}
+
+\begin{satz}
+  Jede Sprache, die von einer RAM mit dem logarithmischen Kostenmaß in Zeit $T(n) \geq n$ entschieden wird, wird von einer Turing-Maschine in Zeit $O(T(n)^4)$ entschieden.
+\end{satz}
+
+% Ausgelassen: Einführen von NTMs (nichtdeterministischen Turing-Maschinen)
+
+\begin{nota}
+  \begin{itemize}
+    \item Die Menge aller von einer DTM in Polynomialzeit entscheidbaren Sprachen ist $\mathrm{P}$.
+    \item Die Menge aller von einer NTM in Polynomialzeit entscheidbaren Sprachen ist $\mathrm{NP}$.
+  \end{itemize}
+\end{nota}
+
+\begin{frage}
+  $\mathrm{N} = \mathrm{NP}$?
+\end{frage}
+
+\begin{prob}[Independent Set]
+  Frage: Enthält ein gegebener Graph eine unabhängige Menge der Größe $k$, also $k$ Knoten, von denen keine zwei benachbart sind.
+\end{prob}
+
+% Kapitel 12.2 Polynomialzeit-Reduktion
+
+\begin{prob}[Clique]
+  Frage: Enthält ein gegebener Graph eine Clique der Größe $k$, also einen vollständigen Untergraphen mit $k$ Knoten?
+\end{prob}
+
+\begin{prob}[Vertex Cover]
+  Eine Knotenüberdeckung ist eine Teilmenge aller Knoten in einem Graph, sodass jede Kante im Graph mindestens einen dieser Knoten als Randpunkt besitzt. Frage: Enthält ein gegebener Graph eine Knotenüberdeckung der Größe $k$?
+\end{prob}
+
+\begin{defn}
+  Seien $L_1$ und $L_2$ Sprachen über $\Sigma_1$ bzw. $\Sigma_2$. Eine \emph{Polynomialzeit-Reduktion} von $L_1$ auf $L_2$ ist eine Funktion $f : \Sigma_1^* \to \Sigma_2^*$ mit folgenden Eigenschaften:
+  \begin{itemize}
+    \item Es gibt eine DTM $M$ und ein Polynom $p$, sodass $M$ auf jeder Eingabe $w \in \Sigma_1^*$ den Wert $f(w)$ in maximal $p(\abs{w})$ Schritten berechnet.
+    \item Für alle $w \in \Sigma_1^*$ gilt: $w \in L_1 \iff f(w) \in L_2$
+  \end{itemize}
+\end{defn}
+
+\begin{nota}
+  Wenn es eine Polynomialzeit-Reduktion von $L_1$ auf $L_2$ gibt, so schreiben wir $L_1 \leq_p L_2$
+\end{nota}
+
+\begin{lem}
+  Die Relation $\leq_p$ ist reflexiv und transitiv.
+\end{lem}
+
+\begin{lem}
+  Es gibt Polynomialzeit-Reduktion zwischen den Problemen Independent Set, Clique und Vertex Cover.
+\end{lem}
+
+\begin{satz}
+  Gilt $L_1 \leq_p L_2$ und ist $L_2 \in \mathrm{P}$, dann ist auch $L_1 \in \mathrm{P}$.
+\end{satz}
+
+\begin{defn}
+  Eine Sprache $L$ heißt \emph{NP-hart} oder \emph{NP-schwer}, wenn $L' \leq_p L$ für alle $L' \in \mathrm{NP}$. Ist $L$ NP-schwer und gilt zugleich $L \in \mathrm{NP}$, so heißt $L$ \emph{NP-vollständig}.
+\end{defn}
+
+% Kapitel 13.3. Die NP-Vollständigkeit von SAT
+
+% Ausgelassen: Defintion Literal, Klausel, konjunktive Normalform (CNF)
+
+\begin{nota}
+  $\mathrm{SAT} \coloneqq \Set{ \langle F \rangle }{\text{$F$ ist eine erfüllbare Boolesche Formel in CNF}}$
+\end{nota}
+
+\begin{satz}[Cook]
+  SAT ist NP-vollständig.
+\end{satz}
+
+\begin{satz}
+  Independent Set (und somit auch Clique und Vertex Cover) sind NP-vollständig.
 \end{satz}
 
 \end{document}
