@@ -46,7 +46,12 @@
 
 \maketitle{Zusammenfassung Analysis \rom{3}}
 
+% Vorlesung vom 14.10.2013
+
+% Kapitel 1.
 \section{Maßtheorie}
+
+% Kapitel 1.1. Das Maßproblem
 
 \begin{prob}[Schwaches Maßproblem]
   Gesucht ist eine Abbildung $\mu : \PS(\R^n) \to [\R, \infty]$ mit folgenden Eigenschaften:
@@ -65,6 +70,8 @@
   Das schwache Maßproblem ist für $n = 1, 2$ lösbar, aber nicht eindeutig lösbar.
 \end{satz}
 
+% Ausgelassen: Zusammenhang mit dem Banach-Tarski-Paradox
+
 \begin{prob}[Starkes Maßproblem]
   Gesucht ist eine Abbildung $\mu : \PS(\R^n) \to [0, \infty]$ wie im schwachen Maßproblem, die anstelle der endlichen Additivität die Eigenschaft der $\sigma$-Additivität besitzt:
   \begin{itemize}
@@ -76,6 +83,8 @@
 \begin{satz}
   Das starke Maßproblem besitzt keine Lösung.
 \end{satz}
+
+% Vorlesung vom 16.10.2014
 
 \begin{nota}
   Sei im Folgenden $\Omega$ eine Menge.
@@ -134,12 +143,14 @@
 \end{defn}
 
 \begin{defn}
-  Ist $(\Omega, \mathcal{O})$ ein topologischer Raum, dann heißt $\Bor = \Bor(\Omega, \mathcal{O}) \coloneqq \Alg(\mathcal{O})$ \emph{Borelsche $\sigma$-Algebra} von $(\Omega, \mathcal{O})$.
+  Ist $(\Omega, \mathcal{O})$ ein topologischer Raum, dann heißt $\Bor \coloneqq \Bor(\Omega, \mathcal{O}) \coloneqq \Alg(\mathcal{O})$ \emph{Borelsche $\sigma$-Algebra} von $(\Omega, \mathcal{O})$.
 \end{defn}
 
 \begin{bem}
   Die Borelsche $\sigma$-Algebra $\Bor(\R)$ wird auch erzeugt von $\Set{I \subset \R }{ I \text{ Intervall } }$. Dabei spielt es keine Rolle, ob man nur geschlossene, nur offene, nur nach einer Seite halboffene Intervalle oder gar nur Intervalle obiger Art mit Endpunkten in $\Q$ zulässt.
 \end{bem}
+
+% Kapitel 1.3. Inhalte, Prämaße, Maße
 
 \begin{defn}
   Eine Funktion $\mu : \Ring \to [0, \infty]$ heißt \emph{Inhalt} auf $\Ring$, falls
@@ -153,6 +164,8 @@
   Ein Inhalt $\mu : \Ring \to [0, \infty]$ heißt \emph{Prämaß} auf $\Ring$, wenn $\mu$ $\sigma$-additiv ist, d.\,h. wenn für jede Folge $(A_n)_{n \in \N}$ paarweise disjunkter Elemente von $\Ring$ mit $\bigsqcup_{n \in \N} A_n \in \Ring$ gilt:
   \[ \mu\left(\bigsqcup_{n \in \N} A_n\right) = \sum_{n=0}^\infty \mu(A_n) \]
 \end{defn}
+
+% Vorlesung vom 21.10.2013
 
 \begin{defn}
   Ein \emph{Maß} ist ein Prämaß auf einer $\sigma$-Algebra.
@@ -223,6 +236,8 @@
   \end{itemize}
 \end{satz}
 
+% Vorlesung vom 23.10.2013
+
 \begin{satz}
   Sei $\mu$ ein Inhalt auf $\Ring \subset \PSO$. Wir betrachten die Aussagen:
 
@@ -247,6 +262,8 @@
     \item Sei $\mu$ endlich und $(A_n)_{n \in \N}$ eine gegen $A$ konvergente Folge in $\Alg$, dann gilt $A \in \Alg$ und $\mu(A) = \lim_{n \to \infty} \mu(A_n)$.
   \end{itemize}
 \end{satz}
+
+% Kapitel 1.4. Fortsetzungssatz für Prämaße
 
 \begin{defn}
   Ein Inhalt auf einem Ring $\Ring \subset \PSO$ heißt \emph{$\sigma$-endlich}, wenn gilt: Es gibt eine Folge $(S_n)_{n \in \N}$ in $\Ring$, sodass
@@ -306,6 +323,9 @@
 
 \begin{samepage}
 
+% Vorlesung vom 30.10.2013
+
+% Kapitel 1.5.
 \subsection{Das Lebesgue-Borel-Maß}
 
 \begin{nota}
@@ -363,6 +383,8 @@
   \end{itemize}
 \end{defn}
 
+% Kapitel 1.6. Messbare Abbildungen
+
 \begin{defn}
   Seien $(\Omega, \Alg)$ und $(\Omega', \Alg')$ zwei messbare Räume. Eine Abbildung $f : \Omega \to \Omega'$ heißt \emph{messbar} oder genauer $(\Alg, \Alg')$-messbar, wenn für alle $A' \in \Omega'$ gilt $f^{-1}(A') \in \Omega$ oder, kürzer, $f^{-1}(\Alg') \subset \Alg$.
 \end{defn}
@@ -370,6 +392,8 @@
 \begin{bem}
   Die messbaren Räume bilden eine Kategorie mit messbaren Abbildungen als Morphismen, d.\,h. die Identitäts- abbildung von einem messbaren Raum zu sich selbst ist messbar und die Verkettung zweier messbarer Abbildungen ist messbar.
 \end{bem}
+
+% Vorlesung vom 4.11.2013
 
 % Aufgabe 1.55
 \begin{satz}
@@ -430,6 +454,8 @@
     \[ \{ f \leq g \} \coloneqq \Set{ \omega \in \Omega }{ f(\omega) \leq g(\omega) } \subset \Omega \]
   und definiere analog $\{ f < g \}$, $\{ f \geq g \}$, $\{ f > g \}$, $\{ f = g \}$, $\{ f \not= g \}$.
 \end{nota}
+
+% Vorlesung vom 6.11.2013
 
 \begin{satz}
   Für eine numerische Fkt. $f : (\Omega, \Alg) \to (\ER, \overline{\Bor})$ sind äquivalent:
@@ -506,6 +532,7 @@
   Falls $f : (\Omega, \Alg) \to (\ER, \overline\Bor)$ messbar, dann auch $\left|f\right|$, $f^+$ und $f^-$.
 \end{satz}
 
+% Kapitel 1.7.
 \subsection{Das Lebesguesche Integral}
 
 \begin{defn}
@@ -577,6 +604,8 @@
   \[ \IntOmu{f} \coloneqq \sup_{n \in \N} \IntOmu{g_n} \quad \text{\emph{Lebesgue-Integral} von $f$ bzgl. $\mu$.} \]
 \end{defn}
 
+% Vorlesung vom 13.11.2013
+
 \begin{satz}
   $\overline{\E}(\Omega, \Alg) = \Set{ f : (\Omega, \Alg) \to (\ER, \Bor) }{ f \text{ messbar und } f \geq 0 }$
 \end{satz}
@@ -593,6 +622,8 @@
 \begin{bem}
   Die Aussage ist für monoton fallende Fktn. i.\,A. falsch.
 \end{bem}
+
+% Vorlesung vom 18.11.2013
 
 \begin{defn}
   Eine messbare Funktion $f : (\Omega, \Alg) \to (\ER, \overline{\Bor})$ heißt \emph{integrierbar} bzw. $\mu$-integrierbar (im Sinne von Lebesgue), falls
@@ -634,6 +665,8 @@
   \[ \Int{A}{}{f}{\mu} = \IntOmu{(\ind_A \cdot f)}. \]
 \end{defn}
 
+% Kapitel 1.8. Fast-überall wahre Eigenschaften
+
 \begin{defn}
   Ein Maßraum $(\Omega, \Alg, \mu)$ heißt \emph{vollständig}, wenn jede Nullmenge $N \subset \Omega$ in $\Alg$ liegt.
 \end{defn}
@@ -654,6 +687,8 @@
 
   Eine Funktion $f : \Omega \to \ER$ heißt \emph{($\mu$)-fast-überall} endlich, wenn $\Set{\omega \in \Omega}{ f(\omega) = \infty}$ eine Nullmenge ist.
 \end{defn}
+
+% Vorlesung vom 20.11.2013
 
 \begin{bem}
   Das Cantorsche Diskontinuum ist eine Menge $C \subset [0, 1]$, $C \in \Bor$, welche die bemerkenswerte Eigenschaft hat, dass sie gleichzeitig überabzählbar ist und Maß $0$ besitzt. Da außerdem $\Bor \cong \R$ gilt, folgt $\PS(C) \cong \PS(\R) \not\cong \R \cong \Bor$. Somit gibt es eine Nullmenge $N \subset C$, die nicht in $\Bor$ liegt. Es folgt:
@@ -685,11 +720,15 @@
   Sei $f : (\Omega, \Alg, \mu) \to (\ER, \overline{\Bor})$ eine messbare Fkt. und $g \in \Leb^1(\Omega, \Alg, \mu), g \geq 0$. Wenn $\abs{f} \fue\leq g$, dann gilt $f \in \Leb^1(\Omega, \Alg, \mu)$.
 \end{satz}
 
+% Kapitel 1.9. Konvergenzsätze
+
 % \begin{doublespace} ... \end{doublespace} für einheitlichen Zeilenabstand.
 % Sonst Kraut und Rüben mit den ganzen Inline-Integralen.
 \begin{satz}[Lemma von Fatou]\begin{doublespace}
   Sei $(f_n)_{n \in \N}$ eine Funktionenfolge mit $f_n$ $\mu$-integrierbar und $f_n \overset{\text{f.ü.}}\geq 0$. Dann $\IntOmu{(\liminf_{n \to \infty} f_n)} \leq \liminf_{n \to \infty} \IntOmu{fn}$.
 \end{doublespace}\end{satz}
+
+% Vorlesung vom 25.11.2013
 
 \vspace{-20pt}
 
@@ -745,6 +784,7 @@
   ein Maß, genannt \emph{Maß mit der Dichte $f$ bzgl. $\mu$} oder \emph{Stieltjes-Maß} zu $f$.
 \end{satz}
 
+% Kapitel 1.10.
 \subsection{Zusammenhang mit dem Riemann-Integral}
 
 \end{samepage}
@@ -834,7 +874,7 @@
   Falls eine der Bedingungen erfüllt ist, so stimmt das Riemann- Integral von $f$ auf $I$ mit dem Lebesgue-Integral von $f$ auf $I$ überein.
 \end{satz}
 
-
+% Kapitel 1.11.
 \subsection{Miscellanea}
 \end{samepage}
 
@@ -874,6 +914,8 @@
   Es gibt keine Abbildung $f : \R \to \R$ mit $D(f) = \R \setminus \Q$.
 \end{kor}
 
+% Kapitel 1.12. Der Transformationssatz
+
 \begin{defn}
   Ein Maß $\mu$ auf $\Bor(\R^d)$ heißt \emph{translationsinvariant}, wenn für jedes $v \in \R^d$ gilt $(T_v)_* \mu = \mu$, wobei $T_v : \R^d \to \R^d$, $x \mapsto x + v$ die Translation um den Vektor $v$ bezeichnet.
 \end{defn}
@@ -899,6 +941,8 @@
   Das Lebesgue-Borel-Maß $\mu_{LB}$ ist invariant unter Transformationen in $\mathrm{SL}_n(\R)$. Ferner ist $\mu_{LB}$ invariant unter Euklidischen Bewegungen.
 \end{satz}
 
+% Vorlesung vom 4.12.2013
+
 \begin{satz}[Kurt Hensel]
   Sei $\Phi : \mathrm{GL}_n(\R) \to (\R \setminus \{0\}, \cdot)$ ein Gruppenhomomorphismus, dann gibt es einen Gruppen- automorphismus $\phi : (\R \setminus \{0\}, \cdot) \to (\R \setminus \{0\}, \cdot)$, sodass $\Phi = \phi \circ \det$.
 \end{satz}
@@ -908,6 +952,8 @@
   \[ \IntO{f}{(h \mu)} = \IntOmu{f \cdot h}. \]
   Obige Gleichung ist auch erfüllt, wenn lediglich $f \in \overline{\E}(\Omega, \Alg)$ gilt.
 \end{satz}
+
+% Vorlesung vom 9.12.2013
 
 \begin{bem}
   Somit ist $g (h \mu) = (g \cdot h) \mu$.
@@ -924,6 +970,8 @@
   \[ \mu_{LB}(Q) \cdot \inf_{q \in Q} \left|\det D \phi(q)\right| \leq \mu_{LB}(\phi(Q)) \leq \mu_{LB}(Q) \cdot \sup_{q \in Q} \left|\det(D(\phi(q)))\right|. \]
 \end{satz}
 
+% Vorlesung vom 11.2.2013
+
 \begin{satz}[Transformationssatz]
   Sei $U, \widetilde{U} \opn \R^d$ und sei $\phi : U \to \widetilde{U}$ ein $\mathcal{C}^1$-Diffeomorphismus. Dann ist eine Funktion $f : \widetilde{U} \to \ER$ genau dann auf $\widetilde{U}$ Lebesgue-Borel-integrierbar, wenn $(f \circ \phi) \cdot \left|\det(D\phi)\right| : U \to \ER$ auf $U$ Lebesgue-Borel-interierbar ist. In diesem Fall gilt
   \[ \Int{U}{}{(f \circ \phi) \cdot \left|\det(D\phi)\right|}{\mu_{LB}} = \Int{\phi(U)}{}{f}{\mu_{LB}} = \Int{\widetilde{U}}{}{f}{\mu_{LB}}. \]
@@ -934,8 +982,7 @@
   Im Transformationssatz kann man "`Lebesgue-Borel"' durch "`Lebesgue"' ersetzen.
 \end{bem}
 
-
-% Produktstrukturen
+% Kapitel 1.13. Produktstrukturen
 
 % Ziel: $(\Omega_j, \Alg_j, \mu_j)$ Maßräume $j = 1, ..., n$.
 % Betrachte: \Omega_1 \times ... \times \Omega_n = \Omega
@@ -963,6 +1010,8 @@
 \begin{satz}
   $\Bor(\R^n) = \underbrace{\Bor(\R) \otimes ... \otimes \Bor(\R)}_{\text{$n$-mal}}$.
 \end{satz}
+
+% Vorlesung vom 16.12.2013
 
 % Ziel: Maß \mu auf \Omega mit
 % $\mu(E_1 \times ... \times E_n) = \mu_1(E_1) \cdot ... \cdot \mu_n(E_n)$ für alle $E_j \in \mathcal{E}_j$.
@@ -1019,6 +1068,8 @@
   \end{itemize}
 \end{satz}
 
+% Vorlesung vom 18.12.2013
+
 \begin{satz}[Existenz von Produktmaßen]
   Die Abbildungen
   \begin{align*}
@@ -1059,6 +1110,11 @@
 
 \begin{samepage}
 
+% Vorlesung vom 8.1.2014
+
+% Kapitel 2. Differentialformen
+
+% Kapitel 2.1.
 \section{Alternierende Multilinearformen}
 
 \begin{nota}
@@ -1101,8 +1157,6 @@
   $\Lambda V^* \coloneqq \oplus_{k=1}^n \Lambda^k V^*$
 \end{nota}
 \fi
-
-% Dach-Produkt (wedge-Produkt)
 
 \begin{defn}
   Für $\phi_1, ..., \phi_k \in \Lambda^1 V^* = V^*$ ist das \emph{Dachprodukt} $\phi_1 \wedge ... \wedge \phi_k \in \Lambda^k V^*$ definiert durch
@@ -1157,7 +1211,7 @@
   \end{itemize}
 \end{satz}
 
-
+% Kapitel 2.2.
 \section{Differentialformen}
 
 \end{samepage}
@@ -1719,12 +1773,8 @@
 % Vorlesung vom 3.2.2014
 
 \begin{kor}
-  Sei
-  \begin{itemize}
-    \item $\omega$ stetig diff'bare $(k{-}1)$-Form auf $\widehat{U} \opn \R^n$
-    \item $M \subset \widehat{U}$ eine orientierte $k$-dimensionale kompakte UMF.
-  \end{itemize}
-  Dann: $\Intdf{M}{\d \omega} = 0$
+  Sei $\omega$ stetig diff'bare $(k{-}1)$-Form auf $\widehat{U} \opn \R^n$, $M \subset \widehat{U}$ eine orientierte $k$-dimensionale kompakte UMF.
+  Dann gilt: $\Intdf{M}{\d \omega} = 0$
 \end{kor}
 
 % Kapitel 2.6. Klassische Integralsätze der Vektoranalysis
@@ -1736,6 +1786,10 @@
 \end{satz}
 
 % Rhetorische Frage: Was ist $\nu$?
+
+\begin{defn}
+  Eine $(n{-}1)$-dimensionale UMF $M \subset \R^n$ heißt \emph{Hyperfläche}.
+\end{defn}
 
 % Orientierung von Hyperflächen:
 
@@ -1759,11 +1813,13 @@
   \end{align*}
 \end{prop}
 
-$T_x \R^n$ ist ein euklidischer VR mit $\langle (x, v), (x, w) \rangle \coloneqq \langle v, w \rangle_{\mathrm{eukl}}$
+% $T_x \R^n$ ist ein euklidischer VR mit $\langle (x, v), (x, w) \rangle \coloneqq \langle v, w \rangle_{\mathrm{eukl}}$
 
-$N_x M \coloneqq (T_x M)^\perp$ \emph{Normalraum} an $M$ in $X$
+\begin{defn}
+  $N_x M \coloneqq (T_x M)^\perp$ heißt \emph{Normalraum} an $M$ in $X$
+\end{defn}
 
-$T_x \R^n = N_x M \perp T_x M$
+% $T_x \R^n = N_x M \perp T_x M$
 
 % Spezialfall: Hyperfläche ($(n {-} 1)$-dimensionale Untermannigfaltigkeit von $\R^n$)
 
@@ -1785,73 +1841,112 @@ $T_x \R^n = N_x M \perp T_x M$
   \end{itemize}
 \end{satz}
 
-Gegeben durch:
+% TODO: Weitere Vorraussetzungen, Orientierung
+\begin{defn}
+  Sei $\phi : \partial C \cap U \to V \opn \R^n$ eine Karte von $\partial C$. Dann heißt
+  \[
+    g = g_\phi : V \to \R^{2 \times 2}, \quad
+    v \mapsto \left( \begin{smallmatrix}
+      \langle \partial_1 \phi^{-1}(v), \partial_1 \phi^{-1}(v) \rangle &
+      \langle \partial_2 \phi^{-1}(v), \partial_1 \phi^{-1}(v) \rangle \\
+      \langle \partial_1 \phi^{-1}(v), \partial_2 \phi^{-1}(v) \rangle &
+      \langle \partial_2 \phi^{-1}(v), \partial_2 \phi^{-1}(v) \rangle
+    \end{smallmatrix} \right)
+  \]
+  \emph{1. Fundamentalform} von $\partial C$ bzgl. $\phi$.
+\end{defn}
 
-$u(x) \coloneqq \sum_{j=1}^n \det(e_j, \partial_1 \phi^{-1}(\phi(x)), ..., \partial_{n {-} 1} \phi^{-1} (\phi(x))) e_j$
+\begin{defn}
+  Sei $M \subset \R^n$ eine $k$-dimensionale UMF mit endlichen UMF-Atlas und $\Set{(\tilde{\phi}_j, U_j)}{j=1, ..., m}$ der davon induzierte Atlas. Ist nun $\Set{\alpha_j}{j = 1,...,m}$ eine stetige Teilung der Eins auf $\bigcup_{j=1}^m \tilde{U}_j$ mit $\alpha_j(x) = 0$ für $x \in (\bigcup_{l=1}^m \hat{U}_l) \setminus U_j$
+  Das \emph{Oberflächenintegral} einer stetigen Funktion $f : M \to \R$ ist
+  \[ \Int{M}{}{f}{S} \coloneqq \sum_{j=1}^m \Int{\phi_j(U_j)}{}{((\alpha_j \cdot f) \circ \phi_j^{-1}) \sqrt{\det(g_{\phi_j})}}{\lambda_k} \]
+\end{defn}
 
-$\nu(x) \coloneqq \tfrac{u(x)}{\norm{u(x)}}$ (unabhängig von pos. orientierter Karte)
-
-Im Fall $n = 3$ ist $u(x) = \partial_1 \phi^{-1}(\phi(x)) \times \partial_x \phi^{-1}(\phi(x))$
-
-Im Fall $n=3$:
-
-$G = (G_1, G_2, G_3) : \widehat{U} \to \R^3$ $\mathcal{C}^1$, $\widehat{U} \opn \R^3$
-
-Bekannt: $\d (G \cdot \d S) = \divergence (G) \d V$
-
-\begin{satz}
-  Sei $C \subset \widehat{U}$ kompakt mit $C = \overline{C^{\circ}} \not= \emptyset$, $\partial C$ glatt. Dann ist
-  \[ \Intdf{C}{\divergence(G) \d V} = ... = \Intdf{\partial C}{G \cdot \d S} = \Int{\partial C}{}{\scp{G, \nu}}{\mathcal{A}}. \]
+\begin{satz}[Gauß-Ostrogradski]
+  Sei $\hat{U} \opn \R^3$, $G = (G_1, ..., G_3)^T : \hat{U} \to \R^3$ ein $\mathcal{C}^1$-Vektorfeld und $C \subset \hat{U}$ kompakt. Dann gilt
+  \[
+    \Int{C}{}{(\divergence G)}{V} = \Int{\partial C}{}{G \cdot}{\vec{S}}, \qquad
+    \Int{C}{}{(\divergence G)}{\lambda_3} = \Int{\partial C}{}{\langle G, \nu \rangle}{S}
+  \]
 \end{satz}
 
-Sei $\widehat{\phi} : U \to \R^3$ eine bzgl. $C$ Rand-adaptierte, positiv orientierte Karte von $\widehat{U}$, $\phi : \partial C \cap U \to V \opn \R^2$
+\iffalse
+  Gegeben durch:
+  $u(x) \coloneqq \sum_{j=1}^n \det(e_j, \partial_1 \phi^{-1}(\phi(x)), ..., \partial_{n {-} 1} \phi^{-1} (\phi(x))) e_j$
+  $\nu(x) \coloneqq \tfrac{u(x)}{\norm{u(x)}}$ (unabhängig von pos. orientierter Karte)
+  Im Fall $n = 3$ ist $u(x) = \partial_1 \phi^{-1}(\phi(x)) \times \partial_x \phi^{-1}(\phi(x))$
+  Im Fall $n=3$:
+  $G = (G_1, G_2, G_3) : \widehat{U} \to \R^3$ $\mathcal{C}^1$, $\widehat{U} \opn \R^3$
+  Bekannt: $\d (G \cdot \d S) = \divergence (G) \d V$
+\fi
 
-\emph{1. Fundamentalform}:
+\iffalse
+  Sei $\widehat{\phi} : U \to \R^3$ eine bzgl. $C$ Rand-adaptierte, positiv orientierte Karte von $\widehat{U}$, $\phi : \partial C \cap U \to V \opn \R^2$
 
-$g = g_\phi : V \to \R^2, v \mapsto \begin{pmatrix} \scp{\partial_1 \phi^{-1}(v)}{\partial_2 \phi^{-1}(v)} & \scp{\partial_1 \phi^{-1}(v)}{\partial_1 \phi^{-1}(v)} \\ \scp{\partial_2 \phi^{-1}(v)}{\partial_1 \phi^{-1}(v)} & \scp{\partial_2 \phi^{-1}(v)}{\partial_2 \phi^{-1}(v)} \end{pmatrix}$
+  \emph{1. Fundamentalform}:
 
-Sei $\phi^{-1} = (\phi_1^{-1}, \phi_2^{-1}, \phi_3^{-1})$
+  $g = g_\phi : V \to \R^2, v \mapsto \begin{pmatrix} \scp{\partial_1 \phi^{-1}(v)}{\partial_2 \phi^{-1}(v)} & \scp{\partial_1 \phi^{-1}(v)}{\partial_1 \phi^{-1}(v)} \\ \scp{\partial_2 \phi^{-1}(v)}{\partial_1 \phi^{-1}(v)} & \scp{\partial_2 \phi^{-1}(v)}{\partial_2 \phi^{-1}(v)} \end{pmatrix}$
+
+  Sei $\phi^{-1} = (\phi_1^{-1}, \phi_2^{-1}, \phi_3^{-1})$
+\fi
 
 % Vorlesung vom 5.2.2014
 
 % Kurvenintegrale
 
-Sei $M \subset \R^n$ eine $1$-dimensionale UMF, $\omega = \sum_{j=1}^n F_j \d x_j = F \cdot \d \vec{s}$ mit $F = (F_1, ..., F_n)^T$ eine stetige $1$-Form auf $\R^n$.
+\iffalse
+  Sei $M \subset \R^n$ eine $1$-dimensionale UMF, $\omega = \sum_{j=1}^n F_j \d x_j = F \cdot \d \vec{s}$ mit $F = (F_1, ..., F_n)^T$ eine stetige $1$-Form auf $\R^n$.
 
-Sei $(\phi, U)$ eine Karte von $M$, $U$ zusammmenhängend, dann $\phi(U) =: V \opn \R^1$ ebenfalls zusammenhängend, d.\,h. $V = \left] a, b \right[$. Dann ist
-\[ \phi^{-1} : \left] a, b \right[ \to \R^n, \quad t \mapsto \left( \phi_1^{-1}(t), ..., \phi_n^{-1}(t) \right)^T \]
-eine glatte reguläre Kurve.
-\[ (\phi^{-1})^* \omega = \sum_{j=1}^n (F_j \circ \phi^{-1}) \d \phi_j^{-1} = \sum_{j=1}^n (F_j \circ \phi^{-1}) (\phi_j^{-1})' \d t \]
-\[ (\phi^{-1})^* (F \cdot \d \vec{s}) = \langle F \circ \phi^{-1}, (\phi^{-1})' \rangle \]
-Also:
-\[ \Intdf{U}{\omega} = \Intdf{\left] a, b \right[}{(\phi^{-1})^* \omega} = \Int{\left] a, b \right[}{}{\langle F \circ \phi^{-1} , (\phi^{-1})' \rangle}{\lambda_1} = \Int{a}{b}{\langle (F \circ \phi^{-1})(t) , (\phi^{-1})'(t) \rangle}{t} = \Int{a}{b}{\langle F(\phi^{-1}(t)) , \tau(t) \rangle \norm{(\phi^{-1})'(t)}}{t}, \]
-
-wobei $\tau(t) = \tfrac{(\phi^{-1})'(t)}{\norm{(\phi^{-1})'(t)}}$ ein positiv orientierter Einheitstangentialvektor
+  Sei $(\phi, U)$ eine Karte von $M$, $U$ zusammmenhängend, dann $\phi(U) =: V \opn \R^1$ ebenfalls zusammenhängend, d.\,h. $V = \left] a, b \right[$. Dann ist
+  \[ \phi^{-1} : \left] a, b \right[ \to \R^n, \quad t \mapsto \left( \phi_1^{-1}(t), ..., \phi_n^{-1}(t) \right)^T \]
+  eine glatte reguläre Kurve.
+  \[ (\phi^{-1})^* \omega = \sum_{j=1}^n (F_j \circ \phi^{-1}) \d \phi_j^{-1} = \sum_{j=1}^n (F_j \circ \phi^{-1}) (\phi_j^{-1})' \d t \]
+  \[ (\phi^{-1})^* (F \cdot \d \vec{s}) = \langle F \circ \phi^{-1}, (\phi^{-1})' \rangle \]
+  Also:
+  \[ \Intdf{U}{\omega} = \Intdf{\left] a, b \right[}{(\phi^{-1})^* \omega} = \Int{\left] a, b \right[}{}{\langle F \circ \phi^{-1} , (\phi^{-1})' \rangle}{\lambda_1} = \Int{a}{b}{\langle (F \circ \phi^{-1})(t) , (\phi^{-1})'(t) \rangle}{t} = \Int{a}{b}{\langle F(\phi^{-1}(t)) , \tau(t) \rangle \norm{(\phi^{-1})'(t)}}{t}, \]
+  wobei $\tau(t) = \tfrac{(\phi^{-1})'(t)}{\norm{(\phi^{-1})'(t)}}$ ein positiv orientierter Einheitstangentialvektor
+\fi
 
 \begin{defn}
-  Sei $f : \R^n \to \R$ stetig, $\gamma : \left[ a, b \right] \to \R^n$ eine $\mathcal{C}^1$-Kurve
-
-  \[ \Int{\gamma}{}{f}{s} \coloneqq \Int{a}{b}{f(\gamma(t)) \cdot \norm{\gamma'(t)}}{t} \]
-  \[ \Int{\gamma}{}{F {\cdot}}{\vec{s}} \coloneqq \Int{\gamma}{}{\langle F , \tau \rangle}{s} \]
+  Sei $f : \R^n {\to} \R$ stetig, $\gamma : \left[ a, b \right] \to \R^n$ eine $\mathcal{C}^1$-Kurve. Dann heißt
+  \[
+    \Int{\gamma}{}{f}{s} \coloneqq \Int{a}{b}{f(\gamma(t)) \cdot \norm{\gamma'(t)}}{t} \quad
+    \text{\emph{Kurvenintegral} von $f$ längs $\gamma$.}
+  \]
+  %\[ \Int{\gamma}{}{F {\cdot}}{\vec{s}} \coloneqq \Int{\gamma}{}{\langle F , \tau \rangle}{s} \]
 \end{defn}
 
 \begin{satz}[Stokes, klassisch]
-  Sei $\hat{U} \opn \R^3$, $M \subset \hat{U}$, eine $2$-dimensionale UMF. Sei $C \subset M$ kompakt mit glattem Rand. Sei $F : \hat{U} \to \R^3$ stetig, dann
+  Sei $\hat{U} \opn \R^3$, $M \subset \hat{U}$, eine $2$-dimensionale UMF (also eine HF) mit positiv orientierten ENF $\nu$. Sei $C \subset M$ kompakt mit glattem Rand und $\tau$ das Einheitstangentialvektorfeld von $\partial_M C$. Dann gilt für ein $\mathcal{C}^1$-Vektorfeld $F : \hat{U} \to \R^3$:
   \[ \Int{\partial_M C}{}{\langle F, \tau \rangle}{s} = \Int{C}{}{\langle \rot F, \nu \rangle}{S} \]
 \end{satz}
 
 % Der Cauchysche Integralsatz
 
-Wir identifizieren $\R^2 \cong \C$ mit $(x, y)^T \mapsto x + iy$
+\begin{bem}
+  Wir identifizieren $\R^2 \cong \C$ mit $(x, y)^T \mapsto x + iy$.
+\end{bem}
 
-$\R$-lineare Abbildung: Multiplikation mit $\left( \begin{smallmatrix} a & b \\ c & d \end{smallmatrix} \right) \in \R^{2 \times 2}$
+\begin{defn}
+  Sei $U \subset \C$ eine $\mathcal{C}^1$-Abbildung $f : U \to \C$ heißt \emph{holomorph}, wenn ihre (totalen) Ableitungen in jedem Punkt von $U$ $\C$-linear sind.
+\end{defn}
 
-$\C$-linear Abbildung: Multiplication mit $\mu \in \C^{1 \times 1} = \C$
+\begin{beob}
+  Eine $\mathcal{C}^1$-Abbildung $f = u + iv : U \to \C$ ist genau dann holomorph, wenn folgende Differentialgleichungen von Cauchy-Riemann erfüllt sind:
+  \[
+    \partial_1 u = \partial_2 v,
+    \quad \text{und} \quad
+    \partial_2 u = - \partial_1 v
+  \]
+\end{beob}
+
+% $\R$-lineare Abbildung: Multiplikation mit $\left( \begin{smallmatrix} a & b \\ c & d \end{smallmatrix} \right) \in \R^{2 \times 2}$
+% $\C$-linear Abbildung: Multiplication mit $\mu \in \C^{1 \times 1} = \C$
 
 % ...
 
 \begin{defn}
-  Sei $\gamma : \left[ a, b \right] \to \C$ stetig diff'bar und $f : \C \to \C$. Dann heißt
+  Sei $\gamma : \left[ a, b \right] \to \C$ stetig diff'bar und $f : \C \to \C$ stetig. Dann heißt
 
   \[
     \Int{\gamma}{}{f}{z} \coloneqq \Int{a}{b}{f(\gamma(t)) \cdot \gamma'(t)}{t}
@@ -1860,7 +1955,7 @@ $\C$-linear Abbildung: Multiplication mit $\mu \in \C^{1 \times 1} = \C$
 \end{defn}
 
 \begin{satz}[Cauchscher Integralsatz]
-  $V \opn \C$, $f : U \to \C$ holomorph. Sei $C \subset U$ ein Kompaktum, dessen Rand Bild einer glatten Kurve $\gamma$ ist, dann gilt:
+  Sei $V \opn \C$ und $f : U \to \C$ holomorph. Sei ferner $\gamma : \left[ a, b \right] \to \C$ eine glatte reguläre einfach geschlossene Kurve und $C \subset \C$ das Kompaktum, welches vom Bild von $\gamma$ berandet wird. Dann gilt
   \[ \Int{\gamma}{}{f}{z} = 0. \]
 \end{satz}
 
