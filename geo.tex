@@ -25,10 +25,15 @@
 
 \maketitle{Zusammenfassung Geometrie}
 
-
+% Kapitel 1
 \section{Geometrie von Kurven}
 
+% Kapitel 1.1. Erinnerung an die euklidische Geometrie
+
 % Erinnerung: Skalarprodukt, Isometrie, Winkel, Orthogonalität
+
+
+% Kapitel 1.2. Bogenlänge
 
 \begin{nota}
   Sei im Folgenden $I$ ein Intervall, d.\,h. eine zusammenhängende Teilmenge von $\R$.
@@ -84,6 +89,8 @@
   Eine stetige Kurve $c$ heißt \emph{rektifizierbar} von Länge $\hat{L}_c$, wenn gilt: Für alle $\epsilon > 0$ gibt es ein $\delta > 0$, sodass für alle Unter- teilungen $a = t_0 < t1 < ... < t_k = b$ der Feinheit mindestens $\delta$ gilt:
   \[ \norm{\hat{L}_c - \hat{L}_c(t_0, t_1, ..., t_k)} < \epsilon. \]
 \end{defn}
+
+% Kapitel 1.3. Ebene Kurven
 
 \begin{defn}
   Sei $c : I \to \R^n$ regulär und nach BL parametrisiert. Dann heißt der Vektor $c''(t)$ \emph{Krümmungsvektor} von $c$ in $t \in I$ und die Abbildung $\kappa : I \to \R, \enspace t \mapsto \norm{c''(t)}$ heißt \emph{Krümmung} von $c$. %der nach BL parametrisierten Kurve.
@@ -185,6 +192,8 @@
   Für die Absolutkrümmung einer einfach geschlossenen regulären Kurve $c : [a, b] \to \R^2$ gilt $\kappa_{\text{abs}} \geq 2 \pi$, wobei Gleichheit genau dann gilt, wenn $\kappa_c$ das Vorzeichen nicht wechselt.
 \end{satz}
 
+% Vorlesung vom 28.10.2013
+
 \begin{satz}[Whitney-Graustein]
   Für zwei glatte reguläre geschlossene ebene Kurven $c, d : \left[ 0, 1 \right] \to \R^2$ sind folgende Aussagen äquivalent:
   \begin{multicols}{2}
@@ -194,6 +203,10 @@
     \end{enumerate}
   \end{multicols}
 \end{satz}
+
+% Vorlesung vom 30.10.2013
+
+% Kapitel 1.4. Frenet-Kurven
 
 \begin{defn}
   Eine glatte reguläre Kurve $c : I \to \R^n$ ($n \geq 3$) heißt \emph{Frenet-Kurve}, wenn für alle $t \in I$ die Ableitungen $c'(t), c''(t), ..., c^{(n-1)}(t)$ linear unabhängig sind.
@@ -240,7 +253,7 @@
 \begin{bem}
   Die Frenet-Gleichungen für nach BL parametrisierte Frenet-Kurven im $\R^3$ lauten
   \[
-      b_1' = \kappa_2 b_2, \quad
+      b_1' = \kappa_c b_2, \quad
       b_2' = - \kappa_c b_1 + \tau_c b_3, \quad
       b_3' = - \tau_c b_2
   \]
@@ -258,7 +271,7 @@
   \]
 \end{bem}
 
-% TODO: Redundant?
+% Vorlesung vom 4.11.2013
 
 \begin{defn}
   Für eine glatte geschl. reguläre Kurve $c : [a, b] \to \R^n$ heißt
@@ -285,8 +298,12 @@
 mit $c(0) = c(b)$, so liegt das Bild von $v$ ganz in einer offenen Hemisphäre.
 \end{satz}
 
+% Vorlesung vom 6.11.2013
 
+% Kapitel 2.
 \section{Lokale Flächentheorie}
+
+% Kapitel 2.1. Erinnerung an die Analysis
 
 \end{samepage}
 
@@ -332,11 +349,13 @@ $\implies$ $f$ ist total differenzierbar ($\!\implies f$ ist stetig)\\
 $\implies$ $f$ ist partiell differenzierbar
 \end{bem}
 
-% TODO: Kettenregel
+% Ausgelassen: Kettenregel
 
 \begin{defn}
   Eine total differenzierbare Abbildung $f : U \to \R^n$ heißt \emph{regulär} oder \emph{Immersion}, wenn für alle $u \in U$ gilt: $\mathrm{Rang}(J_u f) = m$, d.\,h. alle partiellen Ableitungen sind in jedem Punkt linear unabhängig und $J_u f$ ist injektiv. Insbesondere muss $m \leq n$ gelten.
 \end{defn}
+
+% Kapitel 2.2. Die erste Fundamentalform
 
 \begin{defn}
   Sei $X : U \to \R^n$ eine (glatte) Immersion. Dann heißt das Bild $f(U)$ \emph{immergierte Fläche}, immersierte Fläche oder parametrisiertes Flächenstück. Sei $\tilde{U}$ offen in $\R^n$ und $\phi : \tilde{U} \to U$ ein Diffeomorphismus, dann heißt $\tilde{X} \coloneqq X \circ \phi : \tilde{U} \to \R^n$ \emph{Umparametrisierung} von $X$.
@@ -414,11 +433,14 @@ $\implies$ $f$ ist partiell differenzierbar
   Zwei Immersionen $X : U \to \R^n$ und $\tilde{X} : \tilde{U} \to \R^k$ heißen \emph{lokal isometrisch}, wenn es eine Umparametrisierung $\phi : U \to \tilde{U}$ gibt, sodass die ersten Fundamentalformen von $X$ und $\tilde{X} \circ \phi$ übereinstimmen. Ist eine Immersion $X$ isometrisch zu einer Immersion, deren Bild eine offene Teilmenge einer affinen Ebene ist, so heißt $X$ \emph{abwickelbar}.
 \end{defn}
 
+% Ausgelassen:
 % Beispiel: Zylinderfläche
 % Beispiel: flacher Torus
 % Beispiel: Kegelfläche
 % Beispiel: Katenoid und Wendelfläche
 % Beispiel: Regelfläche
+
+% Kapitel 2.3. Gaußabbildung
 
 \begin{defn}
   Sei $X : U \to \R^n$ eine Immersion mit $U \subset \R^{n-1}$ offen. Dann heißt $X$ \emph{Hyperfläche} (HF) im $\R^n$.
@@ -456,6 +478,8 @@ $\implies$ $f$ ist partiell differenzierbar
 \begin{satz}
   Die Gaußabbildung einer Hyperfläche ist invariant unter orientierungserhaltenden Umparametrisierungen, d.\,h. ist $\phi : \tilde{U} \to U$ ein Diffeo mit $\det(J_{\tilde{u}} \phi) > 0$ für alle $\tilde{u} \in \tilde{U}$, dann ist $\tilde{\nu} = \nu \circ \phi$.
 \end{satz}
+
+% Kapitel 2.4. Zweite Fundamentalform, Weingarten-Abbildung und Krümmungen
 
 \begin{nota}
   $\Bil(\R^m, \R^n) \coloneqq \Set{ B : \R^m \times \R^m \to \R^n }{ B \text{ bilinear } }$
@@ -519,6 +543,8 @@ $\implies$ $f$ ist partiell differenzierbar
   \end{itemize}
 \end{satz}
 
+% Vorlesung vom 13.11.2013
+
 \begin{satz}
   Sei $g_u = (g_{jk}(u))$ die Matrix der ersten und $h_u = (h_{jk}(u))$ die Matrix der zweiten FF einer Hyperfläche $X$, dann gilt für die Matrix $w_u = (w_{jk}(u))$ von $W_u$ bzgl. der Basis $\{ \partial_1 X(u), ..., \partial_{n-1} X(u) \}$ von $T_u X$:
   \[ w_u = g_u^{-1} \cdot h_u \]
@@ -543,7 +569,18 @@ $\implies$ $f$ ist partiell differenzierbar
   Die Hauptkrümmungen, die mittlere Krümmung und die Gauß-Kronecker-Krümmung sind invariant unter orientierungserhaltenden Umparametrisiserungen.
 \end{satz}
 
-% Beispiel: Drehfläche
+\begin{bsp}
+  Für die Drehfläche (s.\,o.) von $c = (r, z) : I {\to} \R_{>0} {\times} \R$ gilt:
+  \[
+    w = \left( \begin{smallmatrix} \kappa & 0 \\ 0 & \tfrac{z'}{\abs{c'} r} \end{smallmatrix} \right), \quad
+    \kappa_1 = \tfrac{\det(c', c'')}{\abs{c'}^3} = \tfrac{z'' r' - r'' z'}{\abs{c'}^3}, \quad
+    \kappa_2 = \tfrac{z'}{\abs{c'} r}.
+  \]
+\end{bsp}
+
+% Kapitel 2.5. Lokale Form von Hyperflächen
+
+% Vorlesung vom 18.11.2013
 
 \begin{satz}
   Sei $X : U \to \R^n$ eine Hyperfläche und $u_0 \in U$ ein Punkt. Dann gibt es eine offene Umgebung $U_0 \opn U$ von $u_0$ und eine Umparametrisierung $\phi : U_0 \to \tilde{U}$, sodass für $\tilde{X} \coloneqq X \circ \phi^{-1}$ gilt:
@@ -568,6 +605,10 @@ $\implies$ $f$ ist partiell differenzierbar
     \item Ist $K(u_0) < 0$, so trifft für jede Umgebung $U_0 \subset U$ von $u_0$ das Bild $X(U_0)$ beide Seiten von $E_{u_0}$.
   \end{itemize}
 \end{satz}
+
+% Vorlesung vom 20.11.2013
+
+% Kapitel 2.6. Normalenkrümmung und Normalenschnitte
 
 % Sei $X : U \to \R^n$ eine Hyperfläche
 
@@ -603,7 +644,7 @@ $\implies$ $f$ ist partiell differenzierbar
   \[ T_{u_0} X \supset S^1 \to \R, \quad v \mapsto \kappa_v(u_0) = \langle W_{u_0} v, v \rangle. \]
 \end{satz}
 
-
+% Kapitel 2.7.
 \subsection{Die Levi-Civita-Ableitung}
 
 \end{samepage}
@@ -660,6 +701,8 @@ $\implies$ $f$ ist partiell differenzierbar
     \item $\partial_w \langle V_w, V_2 \rangle = \langle \nabla_w V_1 , V_2 \rangle + \langle V_1 , \nabla_w V_2 \rangle$ (Metrizität)
   \end{itemize}
 \end{satz}
+
+% Vorlesung vom 25.11.2013
 
 \begin{nota}
   Sei $j \in \{1, ..., m\}$, dann betrachten wir die konstante Abbildung $e_j : U \to \R^n, u \mapsto e_j$. Wir setzen $\nabla_j V \coloneqq \nabla_{e_j} V$.
@@ -744,6 +787,8 @@ $\implies$ $f$ ist partiell differenzierbar
   \[ V' = \tfrac{\d}{\d t} V = \sum_{j=1}^m (v^j)' (\partial_j X \circ \alpha) + \sum_{j,k=1}^m v^j (\alpha^k)' (\partial_k \partial_j X \circ \alpha). \]
 \end{bem}
 
+% Vorlesung vom 27.11.2013
+
 \begin{defn}
   Sei $X : U \to \R^n$ eine Immersion und $c = X \circ \alpha$ eine reguläre glatte Kurve auf $X$. Sei $V$ ein tang. VF längs $c$, dann heißt
   \[ \tfrac{\nabla V}{\d t} \coloneqq (V')^T \]
@@ -787,7 +832,9 @@ $\implies$ $f$ ist partiell differenzierbar
   Sei $X : U \to \R^n$ eine Immersion und $c = X \circ \alpha : [a, b] \to \R^n$ eine reguläre glatte Kurve auf $X$. Für alle $t \in [a, b]$ ist die Abbildung $P_t^c : T_{\alpha(a)} X \to T_{\alpha(t)} X$ eine lineare Isometrie, d.\,h. $P_t^c$ ist linear und es gilt $\langle x, y \rangle = \langle P_t^c x, P_t^c y \rangle$ für alle $x, y \in T_{\alpha(a)} X$.
 \end{satz}
 
+% Vorlesung vom 2.12.2013
 
+% Kapitel 2.8
 \subsection{Geodäten}
 
 \end{samepage}
@@ -843,6 +890,8 @@ $\implies$ $f$ ist partiell differenzierbar
   Sei $u \in U$, dann gibt es ein $0 < \epsilon \leq \epsilon_u$, sodass $\Exp_u|B_u^\epsilon$ ein Diffeo auf sein Bild ist.
 \end{defn}
 
+% Vorlesung vom 4.12.2013
+
 \begin{defn}
   Sei $\alpha : [a, b] \to U$ eine glatte Kurve, sodass $X \circ \alpha$ nach BL parametrisiert ist. Eine zweimal stetig differenzierbare Abbildung
   \[ \ointervall{-\epsilon, \epsilon} \times [a, b] \to U, \quad (s, t) \mapsto \alpha_s(t) \]
@@ -867,6 +916,8 @@ $\implies$ $f$ ist partiell differenzierbar
   \end{align*}
 \end{satz}
 
+% Vorlesung vom 9.12.2013
+
 \begin{satz}
   Sei $\gamma : [a, b] \to B_u^\epsilon$ reguläre glatte Kurve mit $\gamma(a) = 0, \gamma(b) = v$. Dann gilt: $L(X \circ \Exp_u \circ \gamma) \geq \norm{v}$ mit $L(X \circ \Exp_u \circ \gamma) = \norm{v} \iff \gamma(t) = \rho(t)v$ mit $\rho : [a, b] \to [0, 1]$ streng monoton wachsend.
 \end{satz}
@@ -878,6 +929,7 @@ $\implies$ $f$ ist partiell differenzierbar
 \end{satz}
 
 
+% Kapitel 2.9.
 %\subsection{Krümmungstensor und Theorema egregium (Gauß)}
 
 \begin{defn}
@@ -921,6 +973,8 @@ $\implies$ $f$ ist partiell differenzierbar
   \[ R_{ijk}^l = \partial_i \Gamma_{jk}^l - \partial_j \Gamma_{ik}^l + \sum_{s=1}^m (\Gamma_{is}^l \Gamma_{jk}^s - \Gamma_{js}^l \Gamma_{ik}^s). \]
 \end{bem}
 
+% Vorlesung vom 11.12.2013
+
 \begin{satz}
   Die Abbildung
   \[
@@ -937,9 +991,13 @@ $\implies$ $f$ ist partiell differenzierbar
   $R_{ijkl} \coloneqq \I_u(R_{ij}(u) e_k, e_l)$
 \end{nota}
 
+\begin{lem}
+  Es gilt $- R_{jikl} = R_{ijkl} = - R_{ijlk}$.
+\end{lem}
+
 \begin{satz}[Gaußgleichung]
   Mit $\II_{jk}(u) = \left( \partial_j \partial_k X(u) \right)^{N_u}$ gilt
-  \[ R_{ijkl}(u) = \langle \II_{jk} (u) \II_{kl}(u) \rangle - \langle \II_{ik}(u), \II_{jl}(u) \rangle. \]
+  \[ R_{ijkl}(u) = \langle \II_{jk} (u) \II_{il}(u) \rangle - \langle \II_{ik}(u), \II_{jl}(u) \rangle. \]
 \end{satz}
 
 \begin{bem}
@@ -952,6 +1010,8 @@ $\implies$ $f$ ist partiell differenzierbar
   \[ K(u) = \frac{\det(h(u))}{\det(g(u))} = \frac{R_{1221}(u)}{\det(g(u))}. \]
   Letzter Ausdruck ist nur abh. von der 1.\,FF und ihren Ableitungen.
 \end{satz}
+
+% Vorlesung vom 16.12.2013
 
 \begin{satz}[Codazzi-Mainardi-Gleichungen]
   Sei $X : U \to \R^n$ HF, dann
@@ -969,7 +1029,7 @@ $\implies$ $f$ ist partiell differenzierbar
 \end{satz}
 
 
-% 2.10. Winkeltrue Abbildungen
+% Kapitel 2.10. Winkeltreue Abbildungen
 
 \begin{defn}
   Sei $X : U \to \R^n$ eine Hyperfläche. Ein Punkt $u \in U$ heißt \emph{Nabelpunkt}, wenn in $u$ alle Hauptkrümmungen gleich sind, also $W_u = \mu I$ für ein $\mu \in \R$. Wenn alle $u \in U$ Nabelpunkte sind, so heißt $X$ \emph{Nabelpunkthyperfläche}.
@@ -1002,6 +1062,8 @@ $\implies$ $f$ ist partiell differenzierbar
 \begin{defn}
   Sei $X : U \to \R^n$ eine HF und $c \coloneqq X \circ \alpha : I \to \R^n, I$ Intervall und $\alpha : I \to U$ glatt. Dann heißt $c$ \emph{Krümmungslinie}, wenn für alle $c'(t)$ für alle $t \in I$ eine Hauptkrümmungsrichtung von $X$ ist, d.\,h. ein Eigenvektor von $W_{\alpha(t)}$.
 \end{defn}
+
+% Vorlesung vom 18.12.2013
 
 \begin{satz}
   Ist $\Phi : O \to \R^n$ OHFS, dann sind die Koordinatenlinien
@@ -1048,6 +1110,8 @@ $\implies$ $f$ ist partiell differenzierbar
 
 % Klassifikation konformer Abbildungen in Dimension $n \geq 3$
 
+% Vorlesung vom 8.1.2014
+
 \begin{bsp} Konforme Abbildungen im $\R^n$ sind:
   \begin{itemize}
     \item Isometrien: $f(x) = Ax + b, A \in O(n), b \in \R^n$
@@ -1078,8 +1142,12 @@ $\implies$ $f$ ist partiell differenzierbar
   Für $n \geq 3$ gilt: Jeder konforme $\mathcal{C}^3$-Diffeomorphismus $f$ ist Einschränkung einer Möbius-Transformation.
 \end{kor}
 
+% Vorlesung vom 13.1.2014
 
+% Kapitel 3.
 \section{Minimalflächen}
+
+% Kapitel 3.1. Flächeninhalt von immergierten Flächen
 
 \end{samepage}
 
@@ -1107,8 +1175,8 @@ $\implies$ $f$ ist partiell differenzierbar
   \[ \Int{C}{}{\sqrt{\det(g_u)}}{\mu (u)} = \Int{\phi(C)}{}{\sqrt{\det(\widetilde{g}_u)}}{\mu (\widetilde{u})}. \]
 \end{prop}
 
-% Kapitel 3.2. Variationsformel für Flächeninhalte
 
+% Kapitel 3.2. Variationsformel für Flächeninhalte
 
 \begin{defn}
   Sei $X : U \to \R^n$ immergierte $\mathcal{C}^2$-Fläche,
@@ -1168,6 +1236,10 @@ $\implies$ $f$ ist partiell differenzierbar
   für jedes Normalenvektorfeld $\mu$ an $X$.
 \end{satz}
 
+% Vorlesung vom 20.1.2014
+
+% Zwischenüberschrift: Minimale Hyperflächen
+
 \begin{bem}
   Sei $\mu$ ein Normalenvektorfeld an eine Hyperfläche $X$. Dann gibt es eine Funktion $f : U \to \R$ mit $\mu = f \cdot \nu$, wobei $\nu$ die Gaußabbildung von $X$ ist. Dann ist $h^\mu = f \cdot h$ und $g^{-1} h^{\mu} = f \cdot g^{-1} \cdot h = f \cdot w$, wobei $w$ die Weingartenabbildung ist.
 \end{bem}
@@ -1194,14 +1266,20 @@ $\implies$ $f$ ist partiell differenzierbar
 %  \item Catalan-Fläche: $X : \R^2 \to \R^3, \quad (x, y) \mapsto \begin{pmatrix} x - \sin(x) \cosh(y) \\ 1 - \cos(x) \cosh(y) \\ y \sin(\tfrac{x}{2}) \sinh(\tfrac{y}{2}) \end{pmatrix}$
 %\end{itemize}
 
+\begin{samepage}
+
 \begin{satz}
   Für eine minimale immergierte HF $X : U \to \R^n$ gilt: Um jeden Punkt $u_0 \in U$ gibt es ein Kompaktum $C \subset U$ mit nicht leerem Inneren, dessen Rand eine Nullmenge ist und welches $u_0 \in C^\circ$ erfüllt, sodass für jede immergiere HF $\tilde{X} : U \to \R^n$ mit $X|_{U \setminus C} = \tilde{X}|_{U \setminus C}$ erfüllt gilt: $\A(X(C)) \leq \A(\tilde{X}(C))$. Gleichheit tritt genau dann ein, wenn $\tilde{X}$ eine Umparametrisierung von $X$ ist.
 \end{satz}
 
 % Verallgemeinerung von minimalen Hyperflächen:
 
+% Vorlesung vom 22.10.2014
+
 % 3.3.
 \subsection{Flächen konstanter mittlerer Krümmung}
+
+\end{samepage}
 
 \begin{situation}
   Sei $X : U \to \R^2$ immergierte $\mathcal{C}^3$-Hyperfläche und $U_0 \subset U$ offen, sodass $X|_{U_0}$ ein Homöomorphismus auf sein Bild ist. Sei $C \subset U_0$ ein Kompaktum mit glattem Rand, das Abschluss einer offenen Menge $C^\circ$ ist. Sei außerdem $D \subset \R^n$ kompakt, sodass $X(C) \subset \partial D$. Wir nennen $D$ \emph{Dose} mit \emph{Deckel} $X(C)$ und \emph{Boden} $\partial D \setminus X(C)$. Wir betrachten eine $\mathcal{C}^2$-Variation $\left] -\epsilon, \epsilon \right[ \times U \to \R^n$, $(s, u) \mapsto X^s(u)$ auf $C$ mit $X^0 = X$, sodass gilt:
