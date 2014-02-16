@@ -560,7 +560,7 @@
     %\[ F(x) \coloneqq 0 \text{ für } x < a, \quad F(x) \coloneqq \tfrac{x-a}{b-a} \text{ für } x \in \left[ a, \right], \quad F(x) \coloneqq 1 \text{ für } x > b \]
     \item \emph{Normalverteilung} (Gaußverteilung) mit EW $\mu$ und Varianz $\sigma^2$:
     \[ F_{\mu \sigma^2}(x) = \tfrac{1}{\sqrt{2 \pi \sigma^2}} \Int{-\infty}{x}{\exp\left(\tfrac{-(t-\mu)^2}{2 \sigma^2}\right)}{t} \tag*{N($\mu$, $\sigma^2$)} \]
-    erfüllt $F_{\mu \sigma^2}'(x) = \exp\left(\tfrac{-(x-\mu)^2}{2 \sigma^2}\right)$, $F_{\mu \sigma^2}(\mu-x) = 1 - F_{\mu \sigma^2}(\mu+x)$
+    besitzt die Dichte $F_{\mu \sigma^2}'(x) = \tfrac{1}{\sqrt{2 \pi \sigma^2}} \exp\left(\tfrac{-(x-\mu)^2}{2 \sigma^2}\right)$ und die Symmetrie $F_{\mu \sigma^2}(\mu{-}x) = 1 - F_{\mu \sigma^2}(\mu{+}x)$.
     \item $d$-dimensionale \emph{Normalverteilung} mit Erwartungswertvektor $m \in \R^d$ positiv definiter Kovarianzenmatrix $C \in \R^{d \times d}$:
     \[ F(x) = \tfrac{1}{\sqrt{(2 \pi)^d \det C}} \enspace \Int{\left] -\infty, x \right]}{}{\!\! \exp(- \tfrac{1}{2} (y-m)^T C^{-1} (y-m))}{y} \]
     \item \emph{$2$-dimensionale Exponentialverteilung} mit $\lambda, \mu > 0$, $\nu \geq 0$:
