@@ -79,7 +79,7 @@
 
 % Färbe \emph{} violett
 \usepackage{color,graphicx,overpic}
-\definecolor{Emph}{rgb}{0.2,0.2,0.8} % softer red for display
+\definecolor{Emph}{rgb}{0.2,0.2,0.8}
 \renewcommand{\emph}[1]{\textcolor{Emph}{\bf{#1}}}
 
 \usepackage{cclicenses}

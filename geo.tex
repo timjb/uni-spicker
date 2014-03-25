@@ -142,7 +142,7 @@
 \end{bem}
 
 \begin{satz}[Hauptsatz der lokalen ebenen Kurventheorie]
-  Sei $\kappa : I \to \R$ eine stetige Funktion und $t_0 \in I$ und $x_0, v_0 \in \R^2$ mit $\norm{v_0} = 1$. Dann gibt es ganu eine nach BL parametrisierte zweimal stetig differenzierbare Kurve $c : I \to \R^2$ mit Krümmung $\kappa$, $c(t_0) = x_0$ und $c'(t_0) = v(t_0) = v_0$.
+  Sei $\kappa : I \to \R$ eine stetige Funktion und $t_0 \in I$ und $x_0, v_0 \in \R^2$ mit $\norm{v_0} = 1$. Dann gibt es ganu eine nach BL parametrisierte $\mathcal{C}^2$-Kurve $c : I \to \R^2$ mit Krümmung $\kappa$, $c(t_0) = x_0$ und $c'(t_0) = v(t_0) = v_0$.
 \end{satz}
 
 \begin{defn}
@@ -187,6 +187,14 @@
 \begin{satz}[Umlaufsatz von Hopf]
   Die Umlaufzahl einer einfach geschlossenen regulären Kurve ist $\pm 1$.
 \end{satz}
+
+\begin{defn}
+  Für eine reg. geschlossene ebene Kurve $c : \left[ a, b \right] \to \R^2$ heißt
+  \[
+    \kappa_{\mathrm{abs}}(c) \coloneqq \Int{a}{b}{\abs{\kappa_c(t)} \cdot \norm{c'(t)}}{t}
+    \quad \text{\emph{Absolutkrümmung}.}
+  \]
+\end{defn}
 
 \begin{satz}
   Für die Absolutkrümmung einer einfach geschlossenen regulären Kurve $c : [a, b] \to \R^2$ gilt $\kappa_{\text{abs}} \geq 2 \pi$, wobei Gleichheit genau dann gilt, wenn $\kappa_c$ das Vorzeichen nicht wechselt.
@@ -561,7 +569,7 @@ $\implies$ $f$ ist partiell differenzierbar
     \item Die \emph{mittlere Krümmung} von $X$ ist definiert als
     \[ H : U \to \R, \quad u \mapsto \tfrac{1}{n-1} \, \spur(W_u) = \tfrac{1}{n-1} \sum_{j=1}^{n-1} \kappa_j(u). \]
     \item Die \emph{Gauß-(Kronecker-)Krümmung} von $X$ ist die Abbildung
-    \[ K : U \to \R, \quad u \mapsto \det(W_u) = \tfrac{\det(h_u)}{\det{g_u}} = \prod_{j=1}^{n-1} \kappa_j(u). \]
+    \[ K : U \to \R, \quad u \mapsto \det(W_u) = \tfrac{\det(h_u)}{\det(g_u)} = \prod_{j=1}^{n-1} \kappa_j(u). \]
   \end{itemize}
 \end{defn}
 
@@ -673,7 +681,7 @@ $\implies$ $f$ ist partiell differenzierbar
   Folgende Abbildung ist eine Bijektion:
 
   \begin{align*}
-     H : \chi(U) \to \chi(TU), \quad &v \mapsto v^{\wedge} \coloneqq \partial_v X, \text{ wobei}\\
+     H : \chi(U) \to \chi(TX), \quad &v \mapsto v^{\wedge} \coloneqq \partial_v X, \text{ wobei}\\
      \partial_v X : \prod_{u : U} T_u X, \quad &u \mapsto \partial_{v(u)} X(u)
    \end{align*} 
 \end{bem}
@@ -684,7 +692,7 @@ $\implies$ $f$ ist partiell differenzierbar
 \end{nota}
 
 \begin{defn}
-  $\nabla : \chi(U) \times \chi(TX) \to \chi(TX), \quad (w, V) \mapsto \nabla_w V \coloneqq (\partial_w X)^T$\\
+  $\nabla : \chi(U) \times \chi(TX) \to \chi(TX), \quad (w, V) \mapsto \nabla_w V \coloneqq (\partial_w V)^T$\\
   heißt \emph{Levi-Civita-Ableitung} von $V$ in Richtung $w$.
 \end{defn}
 
@@ -695,10 +703,10 @@ $\implies$ $f$ ist partiell differenzierbar
 \begin{satz}[Eigenschaften der Levi-Civita-Ableitung]
   Sei $f : U \to \R$ glatt, $w_1, w_2, w \in \chi(U)$, $V, V_1, V_2 \in \chi(TX)$. Dann gilt:
   \begin{itemize}
-    \item $\nabla_{f(w_1) + w_2} V = f \cdot \nabla_{w_1} V + \nabla_{w_2} V$
-    \item $\nabla_w (V_1 + V_2) = \nabla_w V_1 + \nabla_w V_2$
-    \item $\nabla_w (f \cdot V) = f (\nabla_w V) + \partial_w f \cdot V $
-    \item $\partial_w \langle V_w, V_2 \rangle = \langle \nabla_w V_1 , V_2 \rangle + \langle V_1 , \nabla_w V_2 \rangle$ (Metrizität)
+    \item $\nabla_{f(w_1) + w_2} V = f \cdot \nabla_{w_1} V + \nabla_{w_2} V$ \pright{Linearität 1}
+    \item $\nabla_w (V_1 + V_2) = \nabla_w V_1 + \nabla_w V_2$ \pright{Linearität 2}
+    \item $\nabla_w (f \cdot V) = f \cdot (\nabla_w V) + \partial_w f \cdot V $ \pright{Produktregel}
+    \item $\partial_w \langle V_1, V_2 \rangle = \langle \nabla_w V_1 , V_2 \rangle + \langle V_1 , \nabla_w V_2 \rangle$ \pright{Metrizität}
   \end{itemize}
 \end{satz}
 
@@ -735,7 +743,7 @@ $\implies$ $f$ ist partiell differenzierbar
 \end{bem}
 
 \begin{bem}
-  Schreiben wir $v = \sum_{k=1}^m v^k e_k$ für $v \in \chi(U)$, dann ist
+  Schreiben wir $V = \sum_{k=1}^m v^k \partial_k X$ für $V \in \chi(TX)$, dann ist
   \[ \nabla_j V = \sum_{l=1}^m \left( \partial_j v^l + \sum_{k=1}^m \Gamma_{jk}^l v^k \right) \partial_l X. \]
 \end{bem}
 
@@ -752,9 +760,9 @@ $\implies$ $f$ ist partiell differenzierbar
 \end{defn}
 
 \begin{bem}
-  Schreiben wir $v = \sum v^k \partial_k X$ für $V \in \chi(TX)$, dann ist
+  Schreiben wir $V = \sum v^k \partial_k X$ für $V \in \chi(TX)$, dann ist
   \begin{align*}
-    \nabla_j v =& \sum_{l=1}^m \left( \partial_j v^l + \sum_{k=1}^m \Gamma_{jk}^l v^k \right) e_l = \partial_j v + \Gamma_j v \text{ mit}\\
+    \nabla_j V =& \sum_{l=1}^m \left( \partial_j v^l + \sum_{k=1}^m \Gamma_{jk}^l v^k \right) e_l = \partial_j V + \Gamma_j V \enspace \text{mit}\\
     \Gamma_j :& \,\, U \to \R^{m \times m}, \,\, u \mapsto (\Gamma_{jk}^l(u))_{lk}.
   \end{align*}
 \end{bem}
@@ -762,10 +770,10 @@ $\implies$ $f$ ist partiell differenzierbar
 \begin{satz}
   Seien $v, v_1, v_2, w, w_1, w_2 \in \chi(U), f : U \to \R$ glatt. Dann:
   \begin{itemize}
-    \item $\nabla_{f \cdot w_1 + w_2} v = f \cdot \nabla_{w_1} v + \nabla_{w_2} v$
-    \item $\nabla_w (v_1 + v_2) = \nabla_w v_1 + \nabla_w v_2$
-    \item $\nabla_w (f \cdot v) = f (\nabla_w v) + (\nabla_w f) \cdot v$
-    \item $\partial_w \I(v_1, v_2) = \I(\nabla_w v_1, v_2) + \I(v_1, \nabla_w v_2)$ (verträglich mit 1.\,FF)
+    \item $\nabla_{f \cdot w_1 + w_2} v = f \cdot \nabla_{w_1} v + \nabla_{w_2} v$ \pright{Linearität 1}
+    \item $\nabla_w (v_1 + v_2) = \nabla_w v_1 + \nabla_w v_2$ \pright{Linearität 2}
+    \item $\nabla_w (f \cdot v) = f \cdot (\nabla_w v) + (\nabla_w f) \cdot v$ \pright{Produktregel}
+    \item $\partial_w \I(v_1, v_2) = \I(\nabla_w v_1, v_2) + \I(v_1, \nabla_w v_2)$ \pright{verträglich mit 1.\,FF}
   \end{itemize}
 \end{satz}
 
