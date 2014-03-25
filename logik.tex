@@ -1,0 +1,331 @@
+\documentclass{cheat-sheet}
+
+\pdfinfo{
+  /Title (Zusammenfassung Logik für Informatiker)
+  /Author (Tim Baumann)
+}
+
+\usepackage{MnSymbol} % \leftmodels, \rightmodels
+%\usepackage{turnstile} % \turnstile and variants
+\usepackage{bussproofs} % natural deduction type-setting
+
+\newcommand{\Ibm}{I, \beta \models}
+\newcommand{\Ibnm}{I, \beta \not\models}
+\newcommand{\Iba}[1]{(#1)_{I,\beta}} % I-Beta-Auswertung
+\newcommand{\lra}{\leftrightarrow}
+\newcommand{\For}{\mathrm{For}}
+\newcommand{\Ax}{\mathrm{Ax}}
+\newcommand{\eqmodels}{\leftmodels \rightmodels}
+
+\begin{document}
+
+\maketitle{Zusammenfassung Logik für Informatiker}
+
+\section{Prädikatenlogik erster Stufe}
+
+% Kapitel 1.1. Syntax
+
+% Ausgelassen: Definition Signatur, Definition Term
+% Ausgelassen: Herleitung, Induktion über Herleitungen
+% Ausgelassen: Definition Formel
+
+% Kapitel 1.2. Semantik
+
+% Ausgelassen: Definition Belegung und Interpretation
+
+\begin{nota}
+  Sei $\beta : \{ x_0, x_1, ... \} \to D_I$ eine Belegung zu einer Interpretation $I$, $x$ eine Variable und $d \in D_I$. Dann setze
+  \[ \beta_x^d : \{ x_0, x_1, ... \} \to D_I, \quad y \mapsto \begin{cases} d, & \text{falls } x = y \\ \beta(y), & \text{sonst} \end{cases} \]
+\end{nota}
+
+% Ausgelassen: Definition Auswertung
+
+% Ausgelassen: Erfüllung von Formeln durch Interpretation und Belegung
+
+\begin{defn}
+  Eine Interpretation $I$ und eine Belegung $\beta$ erfüllen eine eine Formel $F$, geschrieben $I, \beta \models F$, falls
+  \begin{alignat*}{3}
+    & \Ibm (t_1 = t_2) &&\coloniff&& \Iba{t_1} = \Iba{t_2}\\
+    & \Ibm P(t_1, ..., t_n) &&\coloniff&& P^I(\Iba{t_1}, ..., \Iba{t_n}) \\
+    & \Ibm \neg A &&\coloniff&& \Ibnm A \\
+    & \Ibm A \wedge B &&\coloniff&& (\Ibm A) \wedge (\Ibm B) \\
+    & \Ibm A \vee B &&\coloniff&& (\Ibm A) \vee (\Ibm B) \\
+    & \Ibm A \to B &&\coloniff&& (\Ibnm A) \vee (\Ibm B) \\
+    & \Ibm A \lra B &&\coloniff&& \quad\, ((\Ibnm A) \wedge (\Ibnm B))\\
+    & && && \vee ((\Ibm A) \wedge (\Ibm B)) \\
+    & \Ibm \fa{x} A &&\coloniff&& \fa{d \in D_I} I, \beta_x^d \models A \\
+    & \Ibm \ex{x} A &&\coloniff&& \ex{d \in D_I} I, \beta_x^d \models A
+  \end{alignat*}
+\end{defn}
+
+% Ausgelassen: Einführung von Wahrheitstafeln
+
+\begin{prop}
+  Es gilt für alle Interpretationen $I$, Belegungen $\beta$ und Formeln $A, B$:
+  \begin{alignat*}{2}
+    & \Ibm A &&\iff \Ibnm \neg A \iff \Ibm \neg\neg A\\
+    & \Ibm A \wedge B &&\iff \Ibm \neg (A \to \neg B)\\
+    & \Ibm A \vee B &&\iff \Ibm \neg A \to B\\
+    & \Ibm A \lra B &&\iff \Ibm (A \to B) \wedge (B \to A)\\
+    & \Ibm \ex{x} A &&\iff \Ibm \neg \fa{x} \neg A
+  \end{alignat*}
+\end{prop}
+
+% Kapitel 1.3. Modelle und Folgerbarkeit
+
+\begin{defn}
+  Seien $A \in \For$, $M \subset \For$ und $I$ eine Interpretation. Dann heißt $I$ ein \emph{Modell} von $A$ bzw. $M$, falls
+  \begin{align*}
+    I \models A &\coloniff \text{für alle Belegungen $\beta$ gilt } \Ibm A,\\
+    I \models M &\coloniff \fa{F \in M} I \models F.
+  \end{align*}
+\end{defn}
+
+\begin{nota}
+  Für $M \subset \For$, eine Interpretation $I$ und eine Belegung $\beta$ schreiben wir:
+  \[ \Ibm M \coloniff \fa{F \in M} \Ibm F \]
+\end{nota}
+
+\begin{defn}
+  Seien $A, B \subset \For$. Man sagt, $B$ \emph{folgt} aus $A$ (geschrieben $A \models B$), falls für alle Interpretationen $I$ und Belegungen $\beta$ gilt:
+  \[ \Ibm A \implies \Ibm B. \]
+  Falls $A \models B$ und $B \models A$ gilt, so heißen $A$ und $B$ \emph{logisch äquivalent}, geschrieben $A \eqmodels B$.
+\end{defn}
+
+\begin{nota}
+  $A_1, ..., A_n \models A \coloniff \{ A_1, ..., A_n \} \models A$
+\end{nota}
+
+\begin{satz}
+  Für alle Interpretationen $I$ und $n \in \N$ gilt:
+  \[ I \models \{ A_1, ..., A_n \} \iff I \models A_1 \wedge ... \wedge A_n \]
+\end{satz}
+
+\begin{satz}
+  Für alle $A, B \in \For$ und $M \subset \For$ gilt:
+  \[ M \models A \to B \iff M \cup \{A\} \models B \]
+\end{satz}
+
+\begin{defn}
+  Eine Formel $A \in \For$ heißt \emph{Tautologie} oder \emph{(allgemein-) gültig} (geschrieben $\models A$), falls $I \models A$ für alle Interpretationen $I$ gilt.
+\end{defn}
+
+\begin{defn}
+  Eine Formel $A \in \For$ heißt \emph{erfüllbar}, wenn es eine Interpretation $I$ und eine Belegung $\beta$ mit $\Ibm A$ gibt. Falls es dies nicht gibt, so heißt $A$ \emph{unerfüllbar}.
+\end{defn}
+
+\begin{satz}
+  Für $A \in \For$ gilt:
+  \begin{itemize}
+    \miniitem{0.45\linewidth}{$\models A \implies A \text{ ist erfüllbar}$}
+    \miniitem{0.35\linewidth}{$\models A \iff \emptyset \models A$}
+  \end{itemize}
+\end{satz}
+
+\begin{satz}
+  Sei $A \in \For$ und $M \subset \For$. Dann gilt $M \models A$ genau dann, wenn $M \cup \{ \neg A \}$ unerfüllbar ist. Insbesondere ist $A$ genau dann gültig, wenn $\{ \neg A \}$ unerfüllbar ist.
+\end{satz}
+
+% Kapitel 1.4. Teil-Interpretationen
+
+% Ausgelassen: Definition Teil-Interpretation, Teil-Modell
+
+\begin{defn}
+  \emph{Universelle Formeln} sind Formeln, die sich nach den folgenden Regeln herleiten lassen:
+
+  \begin{minipage}{0.32\linewidth}
+    \begin{prooftree}
+      \AxiomC{$A$ ist quantorenfrei}
+      \UnaryInfC{$A$}
+    \end{prooftree}
+  \end{minipage}
+  \begin{minipage}{0.21\linewidth}
+    \begin{prooftree}
+      \AxiomC{$A$}
+      \AxiomC{$B$}
+      \BinaryInfC{$A \wedge B$}
+    \end{prooftree}
+  \end{minipage}
+  \begin{minipage}{0.21\linewidth}
+    \begin{prooftree}
+      \AxiomC{$A$}
+      \AxiomC{$B$}
+      \BinaryInfC{$A \vee B$}
+    \end{prooftree}
+  \end{minipage}
+  \begin{minipage}{0.21\linewidth}
+    \begin{prooftree}
+      \AxiomC{$A$}
+      \UnaryInfC{$\fa{x} A$}
+    \end{prooftree}
+  \end{minipage}
+\end{defn}
+
+% Ausgelassen: 
+
+\section{Aussagenlogik}
+
+% Kapitel 2.1. Allgemeines, Wahrheitstafeln
+
+% Ausgelassen: Begriff Atom
+
+\begin{prop}
+  Sei $I$ eine Teil-Interpretation zu $J$, $\beta$ eine Belegung zu $I$ und $A$ eine universelle Formel. Dann gilt:
+  \[ J, \beta \models A \implies I, \beta \models A. \]
+\end{prop}
+
+% Ausgelassen: Entscheidbarkeit des Wahrheitsgehalts mit Wahrheitstafeln
+% Ausgelassen: Satz 2.3
+% Ausgelassen: Strukturelle Definition von Ersetzung von $p_0$ durch $A$
+% Ausgelassen: Lange Liste von aussagenlogischen Äquivalenzen (Kommutativität, Idempotenz, Distributivität, etc.)
+
+\begin{defn}
+  Für $p \in \mathcal{P}^0$ heißen die Ausdrücke $p$ und $\neg p$ \emph{Literale}. Eine Disjunktion von Literalen heißt \emph{Klausel}. Eine Formel ist in \emph{konjunktiver Normalform (KNF)}, wenn sie eine Konjunktion von Klauseln ist.
+\end{defn}
+
+% Ausgelassen: Disjunktive Normalform
+
+\begin{prob}[\emph{SAT}]
+  Gegeben sei eine Formel in konjunktiver Normalform. Frage: Ist diese Formel erfüllbar?
+\end{prob}
+
+\begin{defn}
+  Eine Formel ist in \emph{Negationsnormalform (NNF)}, wenn Negationen nur unmittelbar vor Atomen stehen.
+\end{defn}
+
+% Ausgelassen: Verfahren, um Formel in NNF und dann in KNF zu überführen
+
+% Kapitel 2.2. Der Hilbert-Kalkül
+
+% Ausgelassen: Definition von Korrektheit und Vollständigkeit von Kalkülen
+
+\begin{defn}
+  Der \emph{Hilbert-Kalkül} besteht aus den Axiomen
+  \begin{align*}
+    \Ax_1 &\coloneqq \Set{ A \to (B \to A) }{ A, B \in \For }\\
+    \Ax_2 &\coloneqq \Set{ (A \to (B \to C)) \to ((A \to B) \to (A \to C)) }{ A, B, C \in \For }\\
+    \Ax_3 &\coloneqq \Set{ (A \to (B \to C)) \to ((A \to B) \to (A \to C)) }{ A, B, C \in \For }
+  \end{align*}
+  und der Schlussregel \emph{Modus Ponens (MP)}
+  \begin{prooftree}
+    \AxiomC{$A$}
+    \AxiomC{$A \to B$}
+    \BinaryInfC{$B$}
+  \end{prooftree}
+\end{defn}
+
+\begin{defn}
+  Eine Formel $F \in \For$ ist aus $M \subset \For$ \emph{H-herleitbar}, notiert $M \vdash_H A$, wenn es eine Folge $A_1, ..., A_n$ in $\For$ gibt mit $A_n = A$, sodass für alle $i \in \{ 1, ..., n \}$ gilt:
+  \[
+    A_i \in \Ax_1 \cup \Ax_2 \cup \Ax_3 \cup M
+    \quad \text{oder} \quad
+    \ex{j, k < i} A_j = A_k \to A_i.
+  \]
+\end{defn}
+
+\begin{defn}
+  $A \in \For$ heißt \emph{herleitbar}, notiert $\vdash A$, falls $\emptyset \vdash A$ gilt.
+\end{defn}
+
+\begin{beob}
+  Präfixe und Verkettungen von Herleitungen sind ebenfalls Herleitungen.
+\end{beob}
+
+\begin{prop}
+  \begin{itemize}
+    \item Aus $M \vdash A$ und $M \vdash A \to B$ folgt $M \vdash B$.
+    \item Aus $M \vdash \neg A \to \neg B$ folgt $M \vdash B \to A$.
+  \end{itemize}
+\end{prop}
+
+\begin{satz}[Deduktionstheorem]
+  $M \vdash A \to B \iff M \cup \{ A \} \vdash B$
+\end{satz}
+
+% 2.9.
+\begin{satz}
+  Für alle $A, B, C \in \For$ gilt:
+  \begin{itemize}
+    \miniitem{0.65 \linewidth}{$\vdash (A \to B) \to ((B \to C) \to (A \to C))$}
+    \miniitem{0.32 \linewidth}{$\vdash \neg A \to (A \to B)$}
+    \miniitem{0.32 \linewidth}{$\vdash \neg\neg A \to A$}
+    \miniitem{0.32 \linewidth}{$\vdash A \to \neg\neg A$}
+    \miniitem{0.32 \linewidth}{$\vdash (\neg A \to A) \to A$}
+  \end{itemize}
+\end{satz}
+
+% 2.10.
+\begin{prop}
+  Es gilt:
+  
+  \begin{center}
+    \begin{minipage}{0.4\linewidth}
+      \begin{prooftree}
+        \AxiomC{$A \to B$}
+        \AxiomC{$B \to C$}
+        \BinaryInfC{$A \to C$}
+      \end{prooftree}
+    \end{minipage}
+    \begin{minipage}{0.15\linewidth}
+      \begin{prooftree}
+        \AxiomC{$\neg\neg A$}
+        \UnaryInfC{$A$}
+      \end{prooftree}
+    \end{minipage}
+  \end{center}
+\end{prop}
+
+% Kapitel 2.3. Korrektheit und Vollständigkeit
+
+% 2.11.
+\begin{satz}[Korrektheitssatz]
+  Sei $A \in \For$ und $M \subset \For$. Dann gilt
+  \[ M \vdash A \implies M \models A. \]
+\end{satz}
+
+\begin{defn}
+  $M \subset \For$ heißt \emph{konsistent}, wenn für kein $A \in \For$ zugleich $M \vdash A$ und $M \vdash \neg A$ gilt.
+\end{defn}
+
+\begin{lem}
+  \begin{itemize}
+    \item Ist $M$ inkonsistent, so gilt $M \vdash B$ für alle $B \in \For$.
+    \item Für $A \in \For$ gilt: $M \not\vdash A \implies M \cup \{ A \}$ ist konsistent.
+  \end{itemize}
+\end{lem}
+
+% 2.14.
+\begin{lem}[Modell-Lemma]
+  Jede konsistente Menge ist erfüllbar, d.\,h. sie besitzt ein Modell.
+\end{lem}
+
+% 2.15.
+\begin{satz}[Vollständigkeitssatz]
+  Sei $A \in \For$ und $M \subset \For$. Dann gilt
+  \[ M \models A \implies M \vdash A. \]
+\end{satz}
+
+% Ausgelassen: Rest von Zusammenfassung 2.16.
+\begin{prop}
+  Sei $M \subset \For$. Dann ist $M$ genau dann erfüllbar, wenn $M$ konsistent ist.
+\end{prop}
+
+% 2.17.
+\begin{satz}[Endlichkeits- bzw. Kompaktheitssatz] Sei $A \in \For$, $M \subset \For$.
+  \begin{itemize}
+    \item Dann gilt $M \models A$ genau dann, wenn es eine endliche Teilmenge $M' \subset M$ mit $M' \models A$ gibt.
+    \item Dann ist $M$ genau dann erfüllbar, wenn jede endliche Teilmenge von $M$ erfüllbar ist.
+  \end{itemize}
+\end{satz}
+
+\section{Hilbert-Kalkül für Prädikatenlogik}
+
+\section{Weitere Beweisverfahren}
+
+\section{Zusicherungskalkül}
+
+\section{Temporale Logik}
+
+\section{Modale Logik}
+
+\end{document}
