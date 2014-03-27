@@ -14,10 +14,12 @@
 \newcommand{\Ibnm}{I, \beta \not\models}
 \newcommand{\Iba}[1]{(#1)_{I,\beta}} % I-Beta-Auswertung
 \newcommand{\lra}{\leftrightarrow}
+\newcommand{\At}{\mathrm{At}} % Atomare Formeln
 \newcommand{\Term}{\mathrm{Term}} % Term
 \newcommand{\For}{\mathrm{For}} % Formel
 \newcommand{\TFor}{\mathrm{TFor}} % Formel in temporaler Logik
 \newcommand{\CTFor}{\mathrm{CTFor}} % Formel in Computation-Tree-Logic
+\newcommand{\MFor}{\mathrm{MFor}} % Formel in modaler Logik
 \newcommand{\Res}{\mathrm{Res}} % Resolvente
 \newcommand{\Ax}{\mathrm{Ax}} % Axiom
 \newcommand{\FV}{\mathrm{FV}} % Freie Variablen
@@ -50,13 +52,64 @@
 
 % Kapitel 1.1. Syntax
 
-% Ausgelassen: Definition Signatur, Definition Term
+\begin{nota}
+  Die Symbole $x_0, x_1, ...$ seien reserviert für die Verwendung als Variablennamen.
+\end{nota}
+
+\begin{defn}
+  Eine \emph{Signatur} ist ein Paar $(\mathcal{F}, \mathcal{P})$, wobei $\mathcal{F}$ und $\mathcal{P}$ disjunkte, höchstens abzählbare Zeichenmengen sind. Dabei gibt es Folgen $(\mathcal{F}^n)_{n \in \N_0}$ und $(\mathcal{P}^n)_{n \in \N_0}$, sodass gilt:
+  \[
+    \mathcal{F} = \bigsqcup_{n \in \N_0} \mathcal{F}^n, \quad
+    \mathcal{P} = \bigsqcup_{n \in \N_0} \mathcal{P}^n.
+  \]
+  Wir interpretieren $\mathcal{F}^n$ als Menge der $n$-stelligen Funktionssymbole, $\mathcal{F}^0$ als Menge von Konstanten und $\mathcal{P}^n$ als Menge der $n$-stelligen Prädikatensymbole.
+\end{defn}
+
+\begin{defn}
+  Die Menge $\emph{\Term_{\mathcal{F}, \mathcal{P}}}$ ist die kleinste Menge mit
+  \begin{itemize}
+    \item $\{ x_0, x_1, ... \} \subset \Term$
+    \item $\fa{n \in \N_0} \fa{f \in \mathcal{F}^n} \fa{t_1, ..., t_n \in \Term} f(t_1, ..., t_n) \in \Term$
+  \end{itemize}
+\end{defn}
+
+\begin{defn}
+  Die Menge der \emph{atomaren $(\mathcal{F}, \mathcal{P})$-Formeln} ist induktiv definiert als die kleinste Menge $\At_{\mathcal{F},\mathcal{P}}$ mit
+  \begin{itemize}
+    \item $\fa{t_1, t_2 \in \Term_{\mathcal{F},\mathcal{P}}} (t_1 = t_2) \in \At_{\mathcal{F},\mathcal{P}}$ \enspace (Logik mit Gleichheit)
+    \item $\fa{n \in \N_0} \fa{P \in \mathcal{P}^n} \fa{t_1, ..., t_n \in \Term_{\mathcal{F},\mathcal{P}}} P(t_1, ..., t_n) \in \At_{\mathcal{F},\mathcal{P}}$
+  \end{itemize}
+\end{defn}
+
+\begin{nota}
+  $true \coloneqq p_0 \vee \neg p_0, \quad false \coloneqq \neg true$ \quad für $p_0 \in \mathcal{P}^0$ fest.
+\end{nota}
+
+\begin{defn}
+  Die Menge der \emph{$(\mathcal{F}, \mathcal{P})$-Formeln} ist induktiv definiert als kleinste Menge $\For_{\mathcal{F},\mathcal{P}}$ mit
+  \begin{itemize}
+    \miniitem{0.29 \linewidth}{$\At_{\mathcal{F},\mathcal{P}} \subset \For_{\mathcal{F},\mathcal{P}}$}
+    \miniitem{0.69 \linewidth}{$\fa{A \in \For_{\mathcal{F},\mathcal{P}}} \{ \neg A, \fa{x}\!A, \ex{x}\!A \} \subset \For_{\mathcal{F},\mathcal{P}}$}
+    \item $\fa{A, B \in \For_{\mathcal{F},\mathcal{P}}} \{ A \wedge B, A \vee B, A \to B, A \lra B \} \subset \For_{\mathcal{F},\mathcal{P}}$
+  \end{itemize}
+\end{defn}
+
 % Ausgelassen: Herleitung, Induktion über Herleitungen
-% Ausgelassen: Definition Formel
 
 % Kapitel 1.2. Semantik
 
-% Ausgelassen: Definition Belegung und Interpretation
+\begin{defn}
+  Eine Interpretation $I$ einer Signatur $(\mathcal{F}, \mathcal{P})$ besteht aus einer Menge $D = D_I$ und Zuordnungen
+  \[
+    \blank^I : \prod_{n \in \N_0} \prod_{f \in \mathcal{F}^n} (D_I)^n \to D_I, \quad
+    \blank^I : \prod_{n \in \N_0} \prod_{P \in \mathcal{P}^n} (D_I)^n \to \{ F, T \}
+  \]
+\end{defn}
+
+\begin{defn}
+  Eine Belegung $\beta$ zu einer Interpretation $I$ ist eine Funktion
+  \[ \beta : \{ x_0, x_1, ... \} \to D_I. \]
+\end{defn}
 
 \begin{nota}
   Sei $\beta : \{ x_0, x_1, ... \} \to D_I$ eine Belegung zu einer Interpretation $I$, $x$ eine Variable und $d \in D_I$. Dann setze
@@ -65,20 +118,26 @@
 
 % Ausgelassen: Definition Auswertung
 
-% Ausgelassen: Erfüllung von Formeln durch Interpretation und Belegung
+\begin{defn}
+  Die \emph{Auswertung} eines Terms $t$ unter $I$ und $\beta$ (geschrieben $t_{I,\beta}$) ist induktiv definiert als
+  \begin{itemize}
+    \miniitem{0.3 \linewidth}{$x_{I, \beta} \coloneqq \beta(x)$}
+    \miniitem{0.6 \linewidth}{$f(t_1, ..., t_n) \coloneqq f^I((t_1)_{I, \beta}, ..., (t_n)_{I, \beta})$}
+  \end{itemize}
+\end{defn}
 
 \begin{defn}
-  Eine Interpretation $I$ und eine Belegung $\beta$ erfüllen eine eine Formel $F$, geschrieben $I, \beta \models F$, falls
+  Eine Interpretation $I$ und eine Belegung $\beta$ \emph{erfüllen} eine eine Formel $F$, geschrieben $I, \beta \models F$, falls
   \begin{alignat*}{3}
-    & \Ibm (t_1 = t_2) &&\coloniff&& \Iba{t_1} = \Iba{t_2}\\
-    & \Ibm P(t_1, ..., t_n) &&\coloniff&& P^I(\Iba{t_1}, ..., \Iba{t_n}) \\
-    & \Ibm \neg A &&\coloniff&& \Ibnm A \\
-    & \Ibm A \wedge B &&\coloniff&& (\Ibm A) \wedge (\Ibm B) \\
-    & \Ibm A \vee B &&\coloniff&& (\Ibm A) \vee (\Ibm B) \\
-    & \Ibm A \to B &&\coloniff&& (\Ibnm A) \vee (\Ibm B) \\
-    & \Ibm A \lra B &&\coloniff&& \quad\, ((\Ibnm A) \wedge (\Ibnm B))\\
-    & && && \vee ((\Ibm A) \wedge (\Ibm B)) \\
-    & \Ibm \fa{x} A &&\coloniff&& \fa{d \in D_I} I, \beta_x^d \models A \\
+    & \Ibm (t_1 = t_2) &&\coloniff&& \Iba{t_1} = \Iba{t_2}\\[-2pt]
+    & \Ibm P(t_1, ..., t_n) &&\coloniff&& P^I(\Iba{t_1}, ..., \Iba{t_n}) \\[-2pt]
+    & \Ibm \neg A &&\coloniff&& \Ibnm A \\[-2pt]
+    & \Ibm A \wedge B &&\coloniff&& (\Ibm A) \wedge (\Ibm B) \\[-2pt]
+    & \Ibm A \vee B &&\coloniff&& (\Ibm A) \vee (\Ibm B) \\[-2pt]
+    & \Ibm A \to B &&\coloniff&& (\Ibnm A) \vee (\Ibm B) \\[-2pt]
+    & \Ibm A \lra B &&\coloniff&& \quad\, ((\Ibnm A) \wedge (\Ibnm B))\\[-2pt]
+    & && && \vee ((\Ibm A) \wedge (\Ibm B)) \\[-2pt]
+    & \Ibm \fa{x} A &&\coloniff&& \fa{d \in D_I} I, \beta_x^d \models A \\[-2pt]
     & \Ibm \ex{x} A &&\coloniff&& \ex{d \in D_I} I, \beta_x^d \models A
   \end{alignat*}
 \end{defn}
@@ -88,10 +147,10 @@
 \begin{prop}
   Es gilt für alle Interpretationen $I$, Belegungen $\beta$ und Formeln $A, B$:
   \begin{alignat*}{2}
-    & \Ibm A &&\iff \Ibnm \neg A \iff \Ibm \neg\neg A\\
-    & \Ibm A \wedge B &&\iff \Ibm \neg (A \to \neg B)\\
-    & \Ibm A \vee B &&\iff \Ibm \neg A \to B\\
-    & \Ibm A \lra B &&\iff \Ibm (A \to B) \wedge (B \to A)\\
+    & \Ibm A &&\iff \Ibnm \neg A \iff \Ibm \neg\neg A\\[-2pt]
+    & \Ibm A \wedge B &&\iff \Ibm \neg (A \to \neg B)\\[-2pt]
+    & \Ibm A \vee B &&\iff \Ibm \neg A \to B\\[-2pt]
+    & \Ibm A \lra B &&\iff \Ibm (A \to B) \wedge (B \to A)\\[-2pt]
     & \Ibm \ex{x} A &&\iff \Ibm \neg \fa{x} \neg A
   \end{alignat*}
 \end{prop}
@@ -158,32 +217,34 @@
 \begin{defn}
   \emph{Universelle Formeln} sind Formeln, die sich nach den folgenden Regeln herleiten lassen:
 
-  \begin{minipage}{0.32\linewidth}
-    \begin{prooftree}
-      \AxiomC{$A$ ist quantorenfrei}
-      \UnaryInfC{$A$}
-    \end{prooftree}
-  \end{minipage}
-  \begin{minipage}{0.21\linewidth}
-    \begin{prooftree}
-      \AxiomC{$A$}
-      \AxiomC{$B$}
-      \BinaryInfC{$A \wedge B$}
-    \end{prooftree}
-  \end{minipage}
-  \begin{minipage}{0.21\linewidth}
-    \begin{prooftree}
-      \AxiomC{$A$}
-      \AxiomC{$B$}
-      \BinaryInfC{$A \vee B$}
-    \end{prooftree}
-  \end{minipage}
-  \begin{minipage}{0.21\linewidth}
-    \begin{prooftree}
-      \AxiomC{$A$}
-      \UnaryInfC{$\fa{x} A$}
-    \end{prooftree}
-  \end{minipage}
+  \begin{center}
+    \begin{minipage}{0.32\linewidth}
+      \begin{prooftree}
+        \AxiomC{$A$ ist quantorenfrei}
+        \UnaryInfC{$A$}
+      \end{prooftree}
+    \end{minipage}
+    \begin{minipage}{0.21\linewidth}
+      \begin{prooftree}
+        \AxiomC{$A\nspace{8}$}
+        \AxiomC{$B$}
+        \BinaryInfC{$A \wedge B$}
+      \end{prooftree}
+    \end{minipage}
+    \begin{minipage}{0.21\linewidth}
+      \begin{prooftree}
+        \AxiomC{$A\nspace{8}$}
+        \AxiomC{$B$}
+        \BinaryInfC{$A \vee B$}
+      \end{prooftree}
+    \end{minipage}
+    \begin{minipage}{0.21\linewidth}
+      \begin{prooftree}
+        \AxiomC{$A$}
+        \UnaryInfC{$\fa{x} A$}
+      \end{prooftree}
+    \end{minipage}
+  \end{center}
 \end{defn}
 
 \begin{samepage}
@@ -235,7 +296,7 @@
   \end{align*}
   und der Schlussregel \emph{Modus Ponens (MP)}
   \begin{prooftree}
-    \AxiomC{$A\!\!\!\!\!\!$}
+    \AxiomC{$A\nspace{10}$}
     \AxiomC{$A \to B$}
     \BinaryInfC{$B$}
   \end{prooftree}
@@ -527,6 +588,8 @@
   Das Gültigkeitsproblem der Prädikatenlogik erster Stufe ist unentscheidbar.
 \end{satz}
 
+\begin{samepage}
+
 \begin{kor}
   Es gibt kein $A \in \For$ mit
   \begin{itemize}
@@ -536,6 +599,8 @@
 \end{kor}
 
 \section{Weitere Beweisverfahren}
+
+\end{samepage}
 
 % Kapitel 4.1. Sequenzenkalkül
 
@@ -604,7 +669,7 @@
 
 \begin{defn}
   Ein \emph{Hoare-Tripel} hat die Form
-  \[ \{ A \} S \{ B \}, \]
+  \[ \HoareT{A}{S}{B}, \]
   wobei $A$ und $B$ prädikatenlogische Formeln, sogenannte \emph{Zusicherungen}, und $S$ eine Programmanweisung ist.
 \end{defn}
 
@@ -612,12 +677,14 @@
 
 \begin{defn}
   \begin{itemize}
-    \item Ein Hoare-Tripel $\{ A \} S \{ B \}$ \emph{gilt schwach}, wenn $B$ nach Ausführung von $S$ unter der Vorbedingung $A$ gilt, falls $S$ ohne Fehlerabbruch terminiert.
+    \item Ein Hoare-Tripel $\HoareT{A}{S}{B}$ \emph{gilt schwach}, wenn $B$ nach Ausführung von $S$ unter der Vorbedingung $A$ gilt, falls $S$ ohne Fehlerabbruch terminiert.
     \item Gilt das Hoare-Tripel schwach und sichert die Vorbedingung $A$ die Terminierung ohne Fehler von $S$, so gilt das Tripel \emph{streng}.
   \end{itemize}
 \end{defn}
 
 % Kapitel 5.2. Zusicherungskalkül
+
+\begin{samepage}
 
 \begin{defn}
   Im \emph{Zusicherungskalkül} (Hoare-Kalkül) gelten folgende Schlussregeln:
@@ -649,6 +716,8 @@
 
 \section{Temporale Logik}
 
+\end{samepage}
+
 % Kapitel 6.1. LTL
 
 \begin{defn}
@@ -659,30 +728,42 @@
   $\pi^j \coloneqq s_j, s_{j+1}, ...$ heißt \emph{$j$-tes Suffix} von $\pi$.
 \end{nota}
 
-% Ausgelassen: Definition der Syntax von LTL
+\begin{defn}
+  Sei $\mathcal{P}$ eine Menge von atomaren Formeln. Dann sind Formeln in (P)LTL (Propositional Linear Time Logic) über $\mathcal{P}$ definiert als kleinste Menge $\TFor_{\mathcal{P}}$ mit
+  \begin{itemize}
+    \miniitem{0.3 \linewidth}{$\mathcal{P} \subset \TFor_{\mathcal{P}}$}
+    \miniitem{0.68 \linewidth}{$\fa{A \in \TFor_{\mathcal{P}}} \{ \G A, \F A, \X A \} \subset \TFor_{\mathcal{P}}$}
+    \item $\fa{A, B \in \TFor_{\mathcal{P}}} \{ \neg A, A \wedge B, A \vee B, A \to B, A \lra B \} \subset \TFor_{\mathcal{P}}$
+    \item $\fa{A, B \in \TFor_{\mathcal{P}}} (A \U B) \in \TFor_{\mathcal{P}}$
+  \end{itemize}
+\end{defn}
+
+\begin{samepage}
 
 \begin{defn}
   Sei $\pi = s_0, s_1, ...$ ein Ablauf. Eine Formel $A \in \TFor$ gilt für $\pi$ ($\pi$ erfüllt $A$, $\pi \models A$), falls gilt:
   \begin{alignat*}{3}
-    & \pi \models p &&\coloniff p \in L(s_0)\\
-    & \pi \models \neg A &&\coloniff \pi \neg\models A\\
-    & \pi \models A \vee &&\coloniff (\pi \models A) \vee (\pi \models B)\\
-    & \pi \models \X A &&\coloniff \pi^1 \models A\\
-    & \pi \models \G A &&\coloniff \fa{j \in \N_0} \pi^j \models A\\
-    & \pi \models \F A &&\coloniff \ex{j \in \N_0} \pi^j \models A\\
+    & \pi \models p &&\coloniff p \in L(s_0)\\[-2pt]
+    & \pi \models \neg A &&\coloniff \pi \not\models A\\[-2pt]
+    & \pi \models A \vee B &&\coloniff (\pi \models A) \vee (\pi \models B)\\[-2pt]
+    & \pi \models \X A &&\coloniff \pi^1 \models A\\[-2pt]
+    & \pi \models \G A &&\coloniff \fa{j \in \N_0} \pi^j \models A\\[-2pt]
+    & \pi \models \F A &&\coloniff \ex{j \in \N_0} \pi^j \models A\\[-2pt]
     & \pi \models A \U B &&\coloniff \ex{j \in \N_0} \pi^j \models B \wedge (\fa{i < j} \pi^i \models A)
   \end{alignat*}
 \end{defn}
 
 \begin{defn}
-  Eine Formel $A \in \TFor$ heißt \emph{gültig} / \emph{erfüllbar}, falls alle Abläufe / ein Ablauf $A$ erfüllt.
+   Eine Formel $A \in \TFor$ heißt \emph{gültig} / \emph{erfüllbar}, falls alle Abläufe / ein Ablauf $A$ erfüllt.
 \end{defn}
+
+\end{samepage}
 
 % 6.5.
 \begin{prop}
   Für alle $A \in \TFor$ gilt:
   \begin{itemize}
-    \miniitem{0.35 \linewidth}{$\F A \eqmodels \neg \F \neg A$}
+    \miniitem{0.35 \linewidth}{$\G A \eqmodels \neg \F \neg A$}
     \miniitem{0.35 \linewidth}{$\F A \eqmodels true \U A$}
     \item $A \U B \eqmodels \neg ((\neg B) \U (\neg A \wedge \neg B)) \wedge \F B$
   \end{itemize}
@@ -718,28 +799,41 @@
 
 % Ausgelassen: 6.8 Syntax von CTL
 
+\begin{samepage}
+
+\begin{defn}
+  Sei $\mathcal{P}$ eine Menge von atomaren Formeln. Dann sind Formeln in CTL (Computation Tree Logic) über $\mathcal{P}$ definiert als kleinste Menge $\CTFor_{\mathcal{P}}$ mit
+  \begin{itemize}
+    \item $\fa{A, B \in \TFor_{\mathcal{P}}} \{ \neg A, A \wedge B, A \vee B, A \to B, A \lra B \} \subset \CTFor_{\mathcal{P}}$
+    \miniitem{0.23 \linewidth}{$\mathcal{P} \subset \CTFor_{\mathcal{P}}$}
+    \miniitem{0.75 \linewidth}{$\fa{A,B {\in} \TFor_{\mathcal{P}}} \{ \A (A \U B), \E (A \U B) \} \subset \TFor_{\mathcal{P}}$}
+    \item $\fa{A \in \TFor_{\mathcal{P}}} \{ \AG A, \AF A, \AX A, \EG A, \EF A, \EX A \} \subset \TFor_{\mathcal{P}}$
+  \end{itemize}
+\end{defn}
+
 % 6.9.
 \begin{defn}
   Sei $K$ eine Kripke-Struktur, $s$ ein Zustand. Eine Formel $A \in \CTFor$ \emph{gilt} für $(K, s)$, falls (koinduktive Definition)
-
   \begin{alignat*}{3}
-    & K, s \models p &&\coloniff&& p \in L(s)\\
-    & K, s \models \neg A &&\coloniff&& K, s \neg\models A\\
-    & K, s \models A \vee &&\coloniff&& (K, s \models A) \vee (K, s \models B)\\
-    & K, s \models \AX B &&\coloniff&& \fa{s' \in S} (s \to s') \implies K, s' \models B\\
-    & K, s \models \EX B &&\coloniff&& \ex{s' \in S} (s \to s') \wedge (K, s' \models B)\\
-    & K, s \models \AG B &&\coloniff&& K, s \models B \wedge \fa{s' \in S} (s \to s') \implies K, s' \models \AG B\\
-    & K, s \models \EG B &&\coloniff&& K, s \models B \wedge \ex{s' \in S} (s \to s') \wedge (K, s' \models \EG B)\\
-    & K, s \models \AF B &&\coloniff&& \fa{\text{Abläufe $\pi = s_0, s_1, s_2, ...$ von $K$ mit $s_0 = s$}} \\
-      & && && \ex{j \in \N_0} K, s_j \models B \\
-    & K, s \models \EF B &&\coloniff&& \ex{\text{Ablauf $\pi = s_0, s_1, s_2, ...$ von $K$ mit $s_0 = s$}} \\
-      & && && \ex{j \in \N_0} K, s_j \models B \\
-    & K, s \models \A (B \U C) &&\coloniff&& \fa{\text{Abläufe $\pi = s_0, s_1, s_2, ...$ von $K$ mit $s_0 = s$}} \\
-    & && && \ex{j \in \N_0} (K, s_j \models C) \wedge (\fa{i < j} K, s_i \models B)\\
-    & K, s \models \E (B \U C) &&\coloniff&& \ex{\text{Ablauf $\pi = s_0, s_1, s_2, ...$ von $K$ mit $s_0 = s$}} \\
-    & && && \ex{j \in \N_0} (K, s_j \models C) \wedge (\fa{i < j} K, s_i \models B)\\
+    & K, s \models p &&\coloniff&& p \in L(s)\\[-2pt]
+    & K, s \models \neg A &&\coloniff&& K, s \neg\models A\\[-2pt]
+    & K, s \models A \vee &&\coloniff&& (K, s \models A) \vee (K, s \models B)\\[-2pt]
+    & K, s \models \AX B &&\coloniff&& \fa{s' \in S} (s \to s') \Rightarrow K, s' \models B\\[-2pt]
+    & K, s \models \EX B &&\coloniff&& \ex{s' \in S} (s \to s') \wedge (K, s' \models B)\\[-2pt]
+    & K, s \models \AG B &&\coloniff&& K, s \models B \wedge \fa{s' \in S} (s \to s') \Rightarrow K, s' \models \AG B\\[-2pt]
+    & K, s \models \EG B &&\coloniff&& K, s \models B \wedge \ex{s' \in S} (s \to s') \wedge (K, s' \models \EG B)\\[-2pt]
+    & K, s \models \AF B &&\coloniff&& \fa{\text{Abläufe $\pi = s_0, s_1, s_2, ...$ von $K$ mit $s_0 = s$}} \\[-2pt]
+      & && && \ex{j \in \N_0} K, s_j \models B \\[-2pt]
+    & K, s \models \EF B &&\coloniff&& \ex{\text{Ablauf $\pi = s_0, s_1, s_2, ...$ von $K$ mit $s_0 = s$}} \\[-2pt]
+      & && && \ex{j \in \N_0} K, s_j \models B \\[-2pt]
+    & K, s \models \A (B \U C) &&\coloniff&& \fa{\text{Abläufe $\pi = s_0, s_1, s_2, ...$ von $K$ mit $s_0 = s$}} \\[-2pt]
+    & && && \ex{j \in \N_0} (K, s_j \models C) \wedge (\fa{i < j} K, s_i \models B)\\[-2pt]
+    & K, s \models \E (B \U C) &&\coloniff&& \ex{\text{Ablauf $\pi = s_0, s_1, s_2, ...$ von $K$ mit $s_0 = s$}} \\[-2pt]
+    & && && \ex{j \in \N_0} (K, s_j \models C) \wedge (\fa{i < j} K, s_i \models B)
   \end{alignat*}
 \end{defn}
+  
+\end{samepage}
 
 \begin{nota}
   $K \models A \coloniff K, s_0 \models A$, wobei $s_0$ Startzustand von $K$.
@@ -750,6 +844,8 @@
 \end{defn}
 
 % Ausgelassen: Satz 6.10.
+
+\begin{samepage}
 
 % 6.11.
 \begin{satz}
@@ -778,5 +874,64 @@
 % Ausgelassen: Beschreibung des Verfahrens
 
 \section{Modale Logik}
+  
+\end{samepage}
+
+\begin{defn}
+  Sei $\mathcal{P}$ eine Menge von atomaren Formeln. Dann ist die Menge der Formeln in der modalen Logik definiert als kleinste Menge $\MFor_{\mathcal{P}}$ mit
+  \begin{itemize}
+    \item $\fa{A, B \in \MFor_{\mathcal{P}}} \{ \neg A, A \wedge B, A \vee B, A \to B, A \lra B \} \subset \MFor_{\mathcal{P}}$
+    \miniitem{0.3 \linewidth}{$\mathcal{P} \subset \MFor_{\mathcal{P}}$}
+    \miniitem{0.68 \linewidth}{$\fa{A \in \MFor_{\mathcal{P}}} \{ \square A, \diamond A \} \subset \MFor_{\mathcal{P}}$}
+  \end{itemize}
+\end{defn}
+
+\begin{defn}
+  Zustände in Kripke-Strukturen dürfen in diesem Kapitel auch keine Übergänge zu nächsten Zuständen besitzen, d.\,h. es muss \textit{nicht} unbedingt gelten:
+  \[ \fa{s \in S} \ex{s' \in S} s \to s'.\]
+\end{defn}
+
+\begin{defn}
+  Für eine Kripke-Struktur mit Zustand $s$ und $A \in \MFor$ wird $K, s \models A$ analog zur CTL definiert, wobei $\square$ als $\AX$ und $\diamond$ wie $\EX$ behandelt wird.
+\end{defn}
+
+\begin{defn}
+  Für eine Kripke-Struktur $K$ und $A \in \MFor_{\mathcal{P}}$ setzen wir
+  \[ K \models A \coloniff \fa{s} K, s \models A. \]
+\end{defn}
+
+\begin{acht}
+  Obige Definition weicht ab von der Definition in CTL!
+\end{acht}
+
+\begin{bem}
+  Es gilt immer: \enspace \begin{minipage}{0.5\linewidth}\begin{itemize}\item $\models \square (A \to B) \wedge \square A \to \square B$\end{itemize}\end{minipage}
+  \begin{itemize}
+    \miniitem{0.44 \linewidth}{$\models \square (A \wedge B) \lra (\square A \wedge \square B)$}
+    \miniitem{0.44 \linewidth}{$\models \diamond (A \vee B) \lra (\diamond A \vee \diamond B)$}
+    \item $K, s \models \diamond true \iff \fa{A \in \MFor_{\mathcal{P}}} K, s \models \square A \to \diamond A$
+  \end{itemize}
+\end{bem}
+
+\begin{defn}
+  Ein \emph{Rahmen} $F = (S, \to)$ besteht aus einer Menge von Welten $S$ und einer Transitionsrelation $\to \, \subset S \times S$. Er \emph{erfüllt} eine modale Formel $A \in \MFor_{\mathcal{P}}$ genau dann, wenn jede Kripke-Struktur $K = (S, \to, L, s_0)$ mit $L : S \to \mathfrak{P}(\mathcal{P})$ beliebig $A$ erfüllt.
+\end{defn}
+
+\begin{defn}
+  Eine Relation $\to \, \subset S \times S$ heißt \emph{euklidisch}, falls gilt:
+  \[ \fa{s, s', s''} (s \to s') \wedge (s \to s'') \implies (s' \to s'') \]
+\end{defn}
+
+\begin{satz}
+  Für jeden Rahmen $F = (S, \to)$ und jedes Atom $p$ gilt:
+  \begin{itemize}
+    \item $\to$ reflexiv $\Leftrightarrow$ $\fa{A\!}\!F$ erfüllt $\square A \to A$ $\Leftrightarrow$ $F$ erfüllt $\square p \to p$
+    \item $\to$ transitiv $\Leftrightarrow$ $\fa{A\!}\!F$ erfüllt $\square A \to \square \square A$ $\Leftrightarrow$ $F$ erfüllt $\square p \to \square \square p$
+    \item $\to$ euklidisch $\Leftrightarrow$ $\fa{A\!}\!F$ erfüllt $\diamond A \to \square \diamond A$ $\Leftrightarrow$ $F$ erfüllt $\diamond p \to \square \diamond p$.
+  \end{itemize}
+  Der Allquantor bezieht sich dabei auf alle $A \in \MFor_{\mathcal{P}}$.
+\end{satz}
+
+% Ausgelassen: Anwendung auf Wissen in Multi-Agenten-Systemen
 
 \end{document}
