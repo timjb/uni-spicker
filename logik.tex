@@ -6,16 +6,41 @@
 }
 
 \usepackage{MnSymbol} % \leftmodels, \rightmodels
-%\usepackage{turnstile} % \turnstile and variants
 \usepackage{bussproofs} % natural deduction type-setting
+\usepackage{nicefrac} % Für Ersetzung, z.B. $[t/x]$
+\usepackage{pgffor} % \foreach-Schleifen
 
 \newcommand{\Ibm}{I, \beta \models}
 \newcommand{\Ibnm}{I, \beta \not\models}
 \newcommand{\Iba}[1]{(#1)_{I,\beta}} % I-Beta-Auswertung
 \newcommand{\lra}{\leftrightarrow}
-\newcommand{\For}{\mathrm{For}}
-\newcommand{\Ax}{\mathrm{Ax}}
-\newcommand{\eqmodels}{\leftmodels \rightmodels}
+\newcommand{\Term}{\mathrm{Term}} % Term
+\newcommand{\For}{\mathrm{For}} % Formel
+\newcommand{\TFor}{\mathrm{TFor}} % Formel in temporaler Logik
+\newcommand{\CTFor}{\mathrm{CTFor}} % Formel in Computation-Tree-Logic
+\newcommand{\Res}{\mathrm{Res}} % Resolvente
+\newcommand{\Ax}{\mathrm{Ax}} % Axiom
+\newcommand{\FV}{\mathrm{FV}} % Freie Variablen
+\newcommand{\BV}{\mathrm{BV}} % Gebundene Variablen
+\newcommand{\eqmodels}{\leftmodels \rightmodels} % Äquivalenz von Formeln
+\newcommand{\subst}[2]{\nicefrac{#1}{#2}} % Ersetzung
+\newcommand{\HoareT}[3]{\{ #1 \} \enspace #2 \enspace \{ #3 \}} % Hoare-Tripel
+\newcommand{\nspace}[1]{\foreach \i in {1,...,#1}{ \! }} % Negativer Abstand
+\newcommand{\X}{\mathbf{X}} % Next, im nächsten Zustand (verwendet in temporaler Logik)
+\newcommand{\G}{\mathbf{G}} % Globally, in allen Zuständen (verwendet in temporaler Logik)
+\newcommand{\F}{\mathbf{F}} % Finally, in mindestens einem der folgenden Zuständen (verwendet in temporaler Logik)
+\newcommand{\U}{\,\mathbf{U}\,} % Until (verwendet in temporaler Logik)
+
+% Für Computation-Tree-Logic:
+\newcommand{\A}{\mathbf{A}}
+\newcommand{\E}{\mathbf{E}}
+\newcommand{\AG}{\mathbf{AG}}
+\newcommand{\EG}{\mathbf{EG}}
+\newcommand{\AF}{\mathbf{AF}}
+\newcommand{\EF}{\mathbf{EF}}
+\newcommand{\AX}{\mathbf{AX}}
+\newcommand{\EX}{\mathbf{EX}}
+
 
 \begin{document}
 
@@ -161,18 +186,20 @@
   \end{minipage}
 \end{defn}
 
-% Ausgelassen: 
-
-\section{Aussagenlogik}
-
-% Kapitel 2.1. Allgemeines, Wahrheitstafeln
-
-% Ausgelassen: Begriff Atom
-
+\begin{samepage}
+  
 \begin{prop}
   Sei $I$ eine Teil-Interpretation zu $J$, $\beta$ eine Belegung zu $I$ und $A$ eine universelle Formel. Dann gilt:
   \[ J, \beta \models A \implies I, \beta \models A. \]
 \end{prop}
+
+\section{Aussagenlogik}
+
+\end{samepage}
+
+% Kapitel 2.1. Allgemeines, Wahrheitstafeln
+
+% Ausgelassen: Begriff Atom
 
 % Ausgelassen: Entscheidbarkeit des Wahrheitsgehalts mit Wahrheitstafeln
 % Ausgelassen: Satz 2.3
@@ -208,7 +235,7 @@
   \end{align*}
   und der Schlussregel \emph{Modus Ponens (MP)}
   \begin{prooftree}
-    \AxiomC{$A$}
+    \AxiomC{$A\!\!\!\!\!\!$}
     \AxiomC{$A \to B$}
     \BinaryInfC{$B$}
   \end{prooftree}
@@ -310,8 +337,11 @@
   Sei $M \subset \For$. Dann ist $M$ genau dann erfüllbar, wenn $M$ konsistent ist.
 \end{prop}
 
+\begin{samepage}
+
 % 2.17.
-\begin{satz}[Endlichkeits- bzw. Kompaktheitssatz] Sei $A \in \For$, $M \subset \For$.
+\begin{satz}[Endlichkeits- bzw. Kompaktheitssatz]
+  Sei $A \in \For$, $M \subset \For$.
   \begin{itemize}
     \item Dann gilt $M \models A$ genau dann, wenn es eine endliche Teilmenge $M' \subset M$ mit $M' \models A$ gibt.
     \item Dann ist $M$ genau dann erfüllbar, wenn jede endliche Teilmenge von $M$ erfüllbar ist.
@@ -319,12 +349,433 @@
 \end{satz}
 
 \section{Hilbert-Kalkül für Prädikatenlogik}
+  
+\end{samepage}
+
+% Kapitel 3.1. Vorbereitung
+
+\begin{prop}
+  Es gilt für alle $A \in \For$, $M \subset \For$:
+  \[ M \models A \implies (\fa{\text{Interpretationen } I} I \models M \implies I \models A) \]
+\end{prop}
+
+\begin{acht}
+  Die Umkehrung gilt nicht!
+\end{acht}
+
+% 3.2.
+\begin{prop}
+  Sei $A \in \For$. Dann gilt:
+  \begin{itemize}
+    \miniitem{0.28\linewidth}{$\fa{x} A \models A$}
+    \miniitem{0.48\linewidth}{$A \models \fa{x} A$ nicht (i.\,A.)}
+  \end{itemize}
+\end{prop}
+
+% Ausgelassen: Definition 3.2. (Rekursive Definition von freien und gebundenen Variablen)
+% Vereinfachung:
+\begin{defn}
+  Sei $A \in \For$. Dann bezeichnet $\FV(A)$ die Menge der \emph{freien} Variablen und $\BV(A)$ die Menge der \emph{gebundenen} Variablen in $A$.
+\end{defn}
+
+\begin{defn}
+  Eine Formel $A \in \For$ heißt \emph{geschlossen}, falls $\FV(A) = \emptyset$.
+\end{defn}
+
+\begin{defn}
+  \begin{itemize}
+    \item $\fa{x} A$ heißt \emph{Generalisierung} von $A \in \For$.
+    \item Ist $\FV(A) = \{ y_1, ..., y_n \}$, so heißt jede der $n!$ Formeln $\fa{y_1} \fa{y_2} ...\, \fa{y_n} A$ ein \emph{universeller Abschluss} von $A$.
+  \end{itemize}
+\end{defn}
+
+% 3.5.
+\begin{satz}[Koinzidenzlemma]
+  Seien $A, B \in \For$, $I$ eine Interpretation und $\beta_1, \beta_2$ Belegungen mit $\beta_1|_{\FV(A)} = \beta_2|_{\FV(A)}$. Dann gilt
+  \[ I, \beta_1 \models A \enspace\iff\enspace I, \beta_2 \models A. \]
+\end{satz}
+
+\begin{kor}
+  Seien $A, M$ geschlossen und $\beta_1, \beta_2$ Belegungen. Dann gilt
+  \begin{itemize}
+    \miniitem{0.48 \linewidth}{$I, \beta_1 \models M \iff I, \beta_2 \models M$}
+    \miniitem{0.48 \linewidth}{$I, \beta_1 \models M \iff I \models M$}
+    \item $M$ ist erfüllbar $\iff$ $M$ hat ein Modell
+    \item $M \models A \iff (\fa{\text{Interpretationen } I} I \models M \iff I \models A)$
+  \end{itemize}
+\end{kor}
+
+% 3.7
+\begin{prop}
+  \begin{minipage}{0.72 \linewidth}
+    \begin{itemize}
+      \miniitem{0.58 \linewidth}{$I \models A \iff I \models \fa{x} A$}
+      \miniitem{0.40 \linewidth}{$\models A \iff \models \fa{x} A$}
+    \end{itemize}
+  \end{minipage}
+\end{prop}
+
+\begin{defn}
+  Sei $x$ eine Variable und $t \in \Term$ ein Term. Dann ist die Substitution $[\subst{t}{x}]$ für Terme und Formeln folgendermaßen definiert:
+  \begin{alignat*}{2}
+    y[\subst{t}{x}] & \coloneqq \begin{cases}
+      t, & \text{falls } y = x \\
+      y, & \text{sonst}
+    \end{cases} \\
+    f(t_1, ..., t_n)[\subst{t}{x}] & \coloneqq f(t_1[\subst{t}{x}], ..., t_n[\subst{t}{x}]) \quad \text{für $f \in \mathcal{F}^n$} \\
+    P(t_1, ..., t_n)[\subst{t}{x}] & \coloneqq P(t_1[\subst{t}{x}], ..., t_n[\subst{t}{x}]) \quad \text{für $P \in \mathcal{P}^n$} \\
+    (t_1 = t_2)[\subst{t}{x}] & \coloneqq (t_1[\subst{t}{x}] = t_2[\subst{t}{x}]) \\
+    (\neg A)[\subst{t}{x}] & \coloneqq \neg (A[\subst{t}{x}]) \\
+    (A \to B)[\subst{t}{x}] & \coloneqq A[\subst{t}{x}] \to A[\subst{t}{x}] \\
+    (\fa{y} A)[\subst{t}{x}] & \coloneqq \begin{cases}
+      \fa{y} A, & \text{falls $x = y$} \\
+      \fa{y} (A[\subst{t}{x}]), & \text{sonst und falls $y \not\in \FV(t)$} \\
+      \fa{z} (A[\subst{z}{y}][\subst{t}{x}]), & \text{sonst}
+    \end{cases}
+  \end{alignat*}
+  Im letzten Fall ist $z$ eine frische Variable, d.\,h. $z \not\in \FV(t) \cup \FV(A)$.
+\end{defn}
+
+% Kapitel 3.2. Der Kalkül
+
+\begin{defn}
+  Der \emph{Hilbert-Kalkül} für Prädikatenlogik hat als Axiome für alle $A, B, C \in \For$ und $t \in \Term$ alle Generalisierungen von
+  \begin{alignat*}{3}
+    \Ax_1 :\, & A \to (B \to A) && \\
+    \Ax_2 :\, & (A \to (B \to C)) \to ((A \to B) \to (A \to C)) && \\
+    \Ax_3 :\, & (\neg B \to \neg A) \to (A \to B) && \\
+    \Ax_4 :\, & (\fa{x} A) \to A[\subst{t}{x}] && \text{(\textbf{SP}ezialisierung)} \\
+    \Ax_5 :\, & A \to \fa{x} A, \quad \text{falls $x \not\in \FV(A)$} && \text{(\textbf{GE}neralisierung)} \\
+    \Ax_6 :\, & (\fa{x} A \to B) \to ((\fa{x} A) \to (\fa{x} B)) \enspace && \text{(\textbf{D}istr. \textbf{A}llquantor)} \\
+    \Ax_7 :\, & x = x && \text{(\textbf{RE}flexivität)} \\
+    \Ax_8 :\, & (x = y) \to (A \to A') && \text{(\textbf{GL}eichheit)},
+  \end{alignat*}
+  wobei bei der letzten Regel $A$ quantorenfrei ist und $A'$ aus $A$ durch Ersetzen eines oder mehrerer Vorkommen von $x$ durch $y$ entsteht. Außerdem gilt die Schlussregel \emph{Modus Ponens}.
+\end{defn}
+
+% Ausgelassen: Satz 3.10.
+
+% 3.11.
+\begin{satz}[Deduktionstheorem]
+  Wir beim Hilbert-Kalkül der Aussagenlogik gilt für $M \subset \For$ und $A, B \in \For$:
+  \[ M \vdash A \to B \iff M \cup \{ A \} \vdash B \]
+\end{satz}
+
+% 3.12.
+\begin{satz}[Generalisierungstheorem]
+  Sei $M \subset \For$ und $A \in \For$. Angenommen, es gilt $\fa{B \in M} x \not\in \FV(B)$. Dann gilt $M \vdash \fa{x} A$.
+\end{satz}
+
+% 3.13.
+\begin{kor}
+  $\vdash A \implies \vdash \fa{x} A$
+\end{kor}
+
+% 3.14.
+\begin{prop}[$\alpha$-Konversion]
+  Sei $y \in \FV(\fa{x} A)$. Dann gilt
+  \[ \vdash (\fa{x} A) \to (\fa{y} A[\subst{y}{x}]). \]
+\end{prop}
+
+% Kapitel 3.3. Korrektheit und Vollständigkeit
+
+% 3.15.
+\begin{satz}[Korrektheit]
+  Es gilt für alle $M \subset \For$ und $A \in \For$:
+  \[ M \vdash A \implies M \models A. \]
+\end{satz}
+
+% 3.16.
+\begin{lem}
+  Für $M \subset \For$ und $A \in \For$ gilt:
+  \begin{itemize}
+    \item $M \not\vdash A \implies M \cup \{ A \}$ ist konsistent.
+    \item $M \not\vdash \fa{x} A \implies M \cup \{ \neg \fa{x} A, \neg A[\subst{c}{x}] \}$ ist konsisten für jede Variable $c$, die nicht in $M$ und $A$ vorkommt.
+  \end{itemize}
+\end{lem}
+
+% 3.17.
+\begin{lem}[Modell-Lemma]
+  konsistent $\iff$ erfüllbar
+\end{lem}
+
+% 3.18.
+\begin{satz}[Löwenheim-Skolem]
+  Jede erfüllbare Menge $M$ geschlossener Formeln hat ein höchstens abzählbares Modell bzw. im Falle von Logik ohne Gleichheit ein abzählbar unendliches Modell.
+\end{satz}
+
+% 3.19.
+\begin{satz}[Vollständigkeit]
+  Es gilt für alle $M \subset \For$ und $A \in \For$:
+  \[ M \models A \implies M \vdash A. \]
+\end{satz}
+
+% 3.20.
+\begin{satz}[Endlichkeits- bzw. Kompaktheitssatz der Prädikatenlogik]
+  Sei $A \in \For$, $M \subset \For$.
+  \begin{itemize}
+    \item Dann gilt $M \models A$ genau dann, wenn es eine endliche Teilmenge $M' \subset M$ mit $M' \models A$ gibt.
+    \item Dann ist $M$ genau dann erfüllbar, wenn jede endliche Teilmenge von $M$ erfüllbar ist.
+  \end{itemize}
+\end{satz}
+
+\begin{bem}
+  Die Menge der gültigen Formeln ist aufzählbar bzw. semi-entscheidbar.
+\end{bem}
+
+\begin{satz}[Church]
+  Das Gültigkeitsproblem der Prädikatenlogik erster Stufe ist unentscheidbar.
+\end{satz}
+
+\begin{kor}
+  Es gibt kein $A \in \For$ mit
+  \begin{itemize}
+    \item $I \models A \iff$ $D_I$ ist endlich.
+    \item Bei Logik ohne Gleichheit: $I \models A \iff \abs{D_I} = n$ für ein festes $n \in \N$.
+  \end{itemize}
+\end{kor}
 
 \section{Weitere Beweisverfahren}
 
+% Kapitel 4.1. Sequenzenkalkül
+
+\begin{defn}
+  Im \emph{Gentzen-Kalkül} ($\vdash_G$) gelten die folgenden Schlussregeln:
+
+  \begin{tabular}{ r c l}
+    rechts && links \\[8pt]
+
+    \AxiomC{$M \cup \{ A \} \vdash_G B$}\UnaryInfC{$M \vdash A \to B$}\DisplayProof &
+    Imp &
+    \AxiomC{$M \cup \{ \neg C \} \vdash_G A\nspace{10}$}\AxiomC{$M \cup \{ B \} \vdash_G C$}\BinaryInfC{$M \cup \{ A \to B \} \vdash_G C$}\DisplayProof \\[8pt]
+
+    \AxiomC{$M \cup \{ A \} \vdash_G \neg B$}\UnaryInfC{$M \cup \{ B \} \vdash_G \neg A$}\DisplayProof &
+    Neg &
+    \AxiomC{$M \cup \{ \neg B \} \vdash_G A$}\UnaryInfC{$M \cup \{ \neg A \} \vdash_G B$}\DisplayProof \\[8pt]
+
+    \AxiomC{$M \vdash_G A\nspace{10}$}\AxiomC{$M \vdash_G B$}\BinaryInfC{$M \vdash_G A \wedge B$}\DisplayProof &
+    Kon &
+    \AxiomC{$M \cup \{ A, B \} \vdash_G C$}\UnaryInfC{$M \cup \{ A \wedge B \} \vdash_G C$}\DisplayProof \\[8pt]
+
+    \AxiomC{$M \cup \{ \neg B \} \vdash_G A$}\UnaryInfC{$M \vdash_G A \vee B$}\DisplayProof &
+    Dis &
+    \AxiomC{$M \cup \{ A \} \vdash_G C\nspace{10}$}\AxiomC{$M \cup \{ B \} \vdash_G C$}\BinaryInfC{$M \cup \{ A \vee B \} \vdash_G C$}\DisplayProof
+  \end{tabular}
+
+  \begin{center}
+    \AxiomC{\phantom{a}}\UnaryInfC{$M \cup \{ A \} \vdash_G A$}\DisplayProof (Axiom)
+  \end{center}
+\end{defn}
+
+\begin{satz}[Korrektheit, Vollständigkeit]
+  Es gilt für alle $A \in \For$ und $M \subset \For$: $M \vdash_G A \iff M \models A$.
+\end{satz}
+
+% Kapitel 4.2. Resolution
+
+\begin{nota}
+  Für ein Literal $l$ bezeichnet $\overline{l}$ das \emph{negierte Literal}, also
+  \[ \overline{p} \coloneqq \neg p, \quad \overline{\neg p} \coloneqq p. \]
+\end{nota}
+
+\begin{defn}
+  Sei $A$ eine Formel in KNF mit Klauseln $K$ und $K'$, sodass ein Literal $l$ existiert mit $l \in K$ und $\overline{l} \in K'$. Dann heißt
+  \[
+    R = (K \setminus \{ l \}) \cup (K' \setminus \{ \overline{l} \})
+    \quad \text{\emph{Resolvente} von $K$ und $K'$.}
+  \]
+\end{defn}
+
+\begin{defn}
+  Ein \emph{Resolutionsschritt} fügt eine Resolvente einer Formel in KNF der Formel hinzu. Die Formel, die aus einer Formel $A$ durch mehrere Resolutionsschritte entsteht, sodass keine weiteren Resolutionsschritte möglich sind, wird mit $\Res^*(A)$ bezeichnet.
+\end{defn}
+
+% 4.1.
+\begin{lem}
+  Sei $A$ eine Formel in KNF mit Klauseln $K$ und $K'$ und einer Resolvente $R = (K \setminus \{ l \}) \cup (K' \setminus \{ \overline{l} \})$. Dann ist $A$ genau dann erfüllbar, wenn $A \cup R$ es ist.
+\end{lem}
+
+% 4.2.
+\begin{satz}[Resolutionssatz]
+  Eine KNF-Formel $A$ ist genau dann unerfüllbar, wenn $\emptyset \in \Res^*(A)$.
+\end{satz}
+
 \section{Zusicherungskalkül}
 
+\begin{defn}
+  Ein \emph{Hoare-Tripel} hat die Form
+  \[ \{ A \} S \{ B \}, \]
+  wobei $A$ und $B$ prädikatenlogische Formeln, sogenannte \emph{Zusicherungen}, und $S$ eine Programmanweisung ist.
+\end{defn}
+
+% Kapitel 5.1. Semantik
+
+\begin{defn}
+  \begin{itemize}
+    \item Ein Hoare-Tripel $\{ A \} S \{ B \}$ \emph{gilt schwach}, wenn $B$ nach Ausführung von $S$ unter der Vorbedingung $A$ gilt, falls $S$ ohne Fehlerabbruch terminiert.
+    \item Gilt das Hoare-Tripel schwach und sichert die Vorbedingung $A$ die Terminierung ohne Fehler von $S$, so gilt das Tripel \emph{streng}.
+  \end{itemize}
+\end{defn}
+
+% Kapitel 5.2. Zusicherungskalkül
+
+\begin{defn}
+  Im \emph{Zusicherungskalkül} (Hoare-Kalkül) gelten folgende Schlussregeln:
+  \begin{center}
+    % Zuweisungsaxiom
+    \scalebox{0.88}{\AxiomC{\phantom{a}}\UnaryInfC{$\HoareT{B[\subst{E}{x}]}{x = E;}{B}$}\DisplayProof} \  (=p) \enspace
+    \scalebox{0.88}{\AxiomC{\phantom{a}}\UnaryInfC{$\HoareT{D_E \wedge B[\subst{E}{x}]}{x = E;}{B}$}\DisplayProof} \  (=t)
+
+    % Konsequenzregel
+    \scalebox{0.88}{\AxiomC{$A \Rightarrow B\nspace{10}$}\AxiomC{$\HoareT{B}{S}{C}\nspace{10}$}\AxiomC{$C \Rightarrow D$}\TrinaryInfC{$\HoareT{A}{S}{D}$}\DisplayProof} (K)
+    \enspace
+    % Sequentielle Komposition
+    \scalebox{0.88}{\AxiomC{$\HoareT{A}{S}{B}\nspace{10}$}\AxiomC{$\HoareT{B}{T}{C}$}\BinaryInfC{$\HoareT{A}{S; T}{C}$}\DisplayProof} (sK)
+
+    % bedingte Anweisung
+    \scalebox{0.88}{\AxiomC{$\HoareT{A \wedge B}{S}{C}\nspace{10}$}\AxiomC{$\HoareT{A \wedge \neg B}{T}{C}$}\BinaryInfC{$\HoareT{A}{\text{if } (B) \text{ then } S \text{ else } T }{C}$}\DisplayProof} \  (if)
+
+    % while-Schleifen
+    \scalebox{0.88}{\AxiomC{$\HoareT{A \wedge B}{S}{A}$}\UnaryInfC{$\HoareT{A}{\text{while } (B) \text{ do } S}{A \wedge \neg B}$}\DisplayProof} \  (Wp)
+
+    \scalebox{0.88}{\AxiomC{$\fa{z \in \Z} \HoareT{A \wedge B \wedge t = z}{S}{A \wedge t < z}\nspace{10}$}\AxiomC{$A \wedge B \implies t \geq 0$}\BinaryInfC{$\HoareT{A}{\text{while } (B) \text{ do } S}{A \wedge \neg B}$}\DisplayProof} \  (Wt)
+  \end{center}
+\end{defn}
+
+% Ausgelassen: Abgeleitete Schlussregeln für Schleifen
+
+% Kapitel 5.3. Verwendungsmöglichkeiten des Zusicherungskalküls
+% (nichts interessantes)
+
 \section{Temporale Logik}
+
+% Kapitel 6.1. LTL
+
+\begin{defn}
+  Ein \emph{Ablauf} $\pi = s_0, s_1, ...$ ist eine unendliche Folge von Zuständen aus einer Menge $S$ mit einer Bewertung $L : S \to \mathfrak{P}(\mathcal{P})$.
+\end{defn}
+
+\begin{nota}
+  $\pi^j \coloneqq s_j, s_{j+1}, ...$ heißt \emph{$j$-tes Suffix} von $\pi$.
+\end{nota}
+
+% Ausgelassen: Definition der Syntax von LTL
+
+\begin{defn}
+  Sei $\pi = s_0, s_1, ...$ ein Ablauf. Eine Formel $A \in \TFor$ gilt für $\pi$ ($\pi$ erfüllt $A$, $\pi \models A$), falls gilt:
+  \begin{alignat*}{3}
+    & \pi \models p &&\coloniff p \in L(s_0)\\
+    & \pi \models \neg A &&\coloniff \pi \neg\models A\\
+    & \pi \models A \vee &&\coloniff (\pi \models A) \vee (\pi \models B)\\
+    & \pi \models \X A &&\coloniff \pi^1 \models A\\
+    & \pi \models \G A &&\coloniff \fa{j \in \N_0} \pi^j \models A\\
+    & \pi \models \F A &&\coloniff \ex{j \in \N_0} \pi^j \models A\\
+    & \pi \models A \U B &&\coloniff \ex{j \in \N_0} \pi^j \models B \wedge (\fa{i < j} \pi^i \models A)
+  \end{alignat*}
+\end{defn}
+
+\begin{defn}
+  Eine Formel $A \in \TFor$ heißt \emph{gültig} / \emph{erfüllbar}, falls alle Abläufe / ein Ablauf $A$ erfüllt.
+\end{defn}
+
+% 6.5.
+\begin{prop}
+  Für alle $A \in \TFor$ gilt:
+  \begin{itemize}
+    \miniitem{0.35 \linewidth}{$\F A \eqmodels \neg \F \neg A$}
+    \miniitem{0.35 \linewidth}{$\F A \eqmodels true \U A$}
+    \item $A \U B \eqmodels \neg ((\neg B) \U (\neg A \wedge \neg B)) \wedge \F B$
+  \end{itemize}
+\end{prop}
+
+% 6.6.
+\begin{satz}
+  Für alle $A, B \in \TFor$ gilt:
+  \begin{itemize}
+    \miniitem{0.5 \linewidth}{$\models \G (A \to B) \to (\G A \to \G B)$}
+    \miniitem{0.47 \linewidth}{$\models \X \G A \lra \G \X A$}
+    \miniitem{0.5 \linewidth}{$\models (A \wedge \G (A \to \X A)) \to \G A$}
+    \miniitem{0.47 \linewidth}{$\models \X \F A \to \F A$}
+  \end{itemize}
+\end{satz}
+
+% Ausgelassen: Satz: Jede Eigenschaft ist Konjunktion einer Sicherheits- und einer Lebendigkeitseigenschaft
+
+% 6.7.
+\begin{defn}
+  Eine \emph{Kripke-Struktur} $K = (S, \to, L, s_0)$ besteht aus einer Menge $S$ von Zuständen mit Startzustand $s_0$, einer Bewertung $L : S \to \mathfrak{P}(\mathcal{P})$ und einer Transitionsrelation $\to \, \subset S \times S$, sodass $\fa{s \in S} \ex{s' \in S} s \to s'$ gilt.
+\end{defn}
+
+\begin{defn}
+  Ein \emph{Ablauf} $\pi$ von $K$ ist eine unendliche Folge von Zuständen beginnend mit $s_0$, also $\pi = s_0, s_1, s_2, ...$ mit $\forall{i \in \N_0} s_i \to s_{i+1}$. Die Zustände eines solchen Ablaufs heißen \emph{erreichbar}.
+\end{defn}
+
+\begin{defn}
+  Eine Kripke-Struktur $K$ \emph{erfüllt} $A \in \TFor$, falls für alle Abläufe $\pi$ von $K$ gilt $\pi \models A$.
+\end{defn}
+
+% Kapitel 6.2. CTL
+
+% Ausgelassen: 6.8 Syntax von CTL
+
+% 6.9.
+\begin{defn}
+  Sei $K$ eine Kripke-Struktur, $s$ ein Zustand. Eine Formel $A \in \CTFor$ \emph{gilt} für $(K, s)$, falls (koinduktive Definition)
+
+  \begin{alignat*}{3}
+    & K, s \models p &&\coloniff&& p \in L(s)\\
+    & K, s \models \neg A &&\coloniff&& K, s \neg\models A\\
+    & K, s \models A \vee &&\coloniff&& (K, s \models A) \vee (K, s \models B)\\
+    & K, s \models \AX B &&\coloniff&& \fa{s' \in S} (s \to s') \implies K, s' \models B\\
+    & K, s \models \EX B &&\coloniff&& \ex{s' \in S} (s \to s') \wedge (K, s' \models B)\\
+    & K, s \models \AG B &&\coloniff&& K, s \models B \wedge \fa{s' \in S} (s \to s') \implies K, s' \models \AG B\\
+    & K, s \models \EG B &&\coloniff&& K, s \models B \wedge \ex{s' \in S} (s \to s') \wedge (K, s' \models \EG B)\\
+    & K, s \models \AF B &&\coloniff&& \fa{\text{Abläufe $\pi = s_0, s_1, s_2, ...$ von $K$ mit $s_0 = s$}} \\
+      & && && \ex{j \in \N_0} K, s_j \models B \\
+    & K, s \models \EF B &&\coloniff&& \ex{\text{Ablauf $\pi = s_0, s_1, s_2, ...$ von $K$ mit $s_0 = s$}} \\
+      & && && \ex{j \in \N_0} K, s_j \models B \\
+    & K, s \models \A (B \U C) &&\coloniff&& \fa{\text{Abläufe $\pi = s_0, s_1, s_2, ...$ von $K$ mit $s_0 = s$}} \\
+    & && && \ex{j \in \N_0} (K, s_j \models C) \wedge (\fa{i < j} K, s_i \models B)\\
+    & K, s \models \E (B \U C) &&\coloniff&& \ex{\text{Ablauf $\pi = s_0, s_1, s_2, ...$ von $K$ mit $s_0 = s$}} \\
+    & && && \ex{j \in \N_0} (K, s_j \models C) \wedge (\fa{i < j} K, s_i \models B)\\
+  \end{alignat*}
+\end{defn}
+
+\begin{nota}
+  $K \models A \coloniff K, s_0 \models A$, wobei $s_0$ Startzustand von $K$.
+\end{nota}
+
+\begin{defn}
+  Eine Formel $A \in \CTFor$ heißt \emph{gültig} / \emph{erfüllbar}, wenn alle Kripke-Strukturen / eine Kripke-Struktur $A$ erfüllen / erfüllt.
+\end{defn}
+
+% Ausgelassen: Satz 6.10.
+
+% 6.11.
+\begin{satz}
+  Für alle $B, C \in \CTFor$ gilt:
+  \begin{itemize}
+    \item $\models (B \wedge \AG (B \to \AX B)) \to \AG B$
+    \item $\models \AX (B \to C) \wedge \AX B \to \AX C$
+  \end{itemize}
+\end{satz}
+
+% 6.12.
+\begin{satz}
+  Für alle $A, B \in \CTFor$ gilt:
+  \begin{itemize}
+    \miniitem{0.40\linewidth}{$\AG B \eqmodels \neg \EF \neg B$}
+    \miniitem{0.40\linewidth}{$\EG B \eqmodels \neg \AF \neg B$}
+    \miniitem{0.40\linewidth}{$\EF B \eqmodels \E (true \U B)$}
+    \miniitem{0.40\linewidth}{$\AF B \eqmodels \A (true \U B)$}
+    \miniitem{0.34\linewidth}{$\AX B \eqmodels \neg \EX \neg B$}
+    \miniitem{0.64\linewidth}{$\A (B \U C) \eqmodels \neg \E (\neg C \U (\neg C \wedge \neg B)) \wedge \AF C$}
+  \end{itemize}
+\end{satz}
+
+% Kapitel 6.3. CTL-Model-Checking
+
+% Ausgelassen: Beschreibung des Verfahrens
 
 \section{Modale Logik}
 
