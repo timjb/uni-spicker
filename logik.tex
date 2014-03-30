@@ -502,13 +502,11 @@
 \begin{defn}
   Der \emph{Hilbert-Kalkül} für Prädikatenlogik hat als Axiome für alle $A, B, C \in \For$ und $t \in \Term$ alle Generalisierungen von
   \begin{alignat*}{3}
-    \Ax_1 :\, & A \to (B \to A) && \\
-    \Ax_2 :\, & (A \to (B \to C)) \to ((A \to B) \to (A \to C)) && \\
-    \Ax_3 :\, & (\neg B \to \neg A) \to (A \to B) && \\
-    \Ax_4 :\, & (\fa{x} A) \to A[\subst{t}{x}] && \text{(\textbf{SP}ezialisierung)} \\
-    \Ax_5 :\, & A \to \fa{x} A, \quad \text{falls $x \not\in \FV(A)$} && \text{(\textbf{GE}neralisierung)} \\
-    \Ax_6 :\, & (\fa{x} A \to B) \to ((\fa{x} A) \to (\fa{x} B)) \enspace && \text{(\textbf{D}istr. \textbf{A}llquantor)} \\
-    \Ax_7 :\, & x = x && \text{(\textbf{RE}flexivität)} \\
+    \Ax_1,\,&\Ax_2,\Ax_3 : \text{wie zuvor}\\
+    \Ax_4 :\, & (\fa{x} A) \to A[\subst{t}{x}] && \text{(\textbf{SP}ezialisierung)}\\
+    \Ax_5 :\, & A \to \fa{x} A, \quad \text{falls $x \not\in \FV(A)$} && \text{(\textbf{GE}neralisierung)}\\
+    \Ax_6 :\, & (\fa{x} A \to B) \to ((\fa{x} A) \to (\fa{x} B)) \enspace && \text{(\textbf{D}istr. \textbf{A}llquantor)}\\
+    \Ax_7 :\, & x = x && \text{(\textbf{RE}flexivität)}\\
     \Ax_8 :\, & (x = y) \to (A \to A') && \text{(\textbf{GL}eichheit)},
   \end{alignat*}
   wobei bei der letzten Regel $A$ quantorenfrei ist und $A'$ aus $A$ durch Ersetzen eines oder mehrerer Vorkommen von $x$ durch $y$ entsteht. Außerdem gilt die Schlussregel \emph{Modus Ponens}.
