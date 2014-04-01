@@ -178,7 +178,7 @@
     \item $A \subset B \implies \mu(A) \leq \mu(B)$ \pright{Monotonie}
     \item Aus $A \subset B$ und $\mu(B) < \infty$ folgt $\mu(B \setminus A) = \mu(B) - \mu(A)$
     \item Für $A_1, ..., A_n \in \Ring$ ist $\mu\left(\bigcup_{i = 1}^n A_i \right) \leq \sum_{i = 1}^n \mu(A_i)$ \pright{Subadditivität}
-    \item Ist $(A_n)_{n \in \N}$ eine Folge disjunkter Elemente aus $\Ring$, sodass $\bigsqcup_{n \in \N} A_n \in \Ring$, so gilt $\mu(\bigsqcup_{n \in \N} A_n) \geq \sum_{n=0}^\infty \mu(A_n)$.
+    \item Ist $(A_n)_{n \in \N}$ eine Folge disjunkter Elemente aus $\Ring$, sodass $\bigsqcup_{n \in \N} A_n \in \Ring$, so gilt $\mu \left( \bigsqcup_{n \in \N} A_n \right) \geq \sum_{n=0}^\infty \mu(A_n)$.
   \end{itemize}
 \end{satz}
 
@@ -305,7 +305,7 @@
 \end{satz}
 
 \begin{satz}[\emph{Fortsetzungssatz}]
-  Sei $\mu$ ein Prämaß auf einem Ring $\Ring$, dann gibt es ein Maß $\tilde{\mu}$ auf der von $\Ring$ erzeugten $\sigma$-Algebra $\Alg(\Ring)$ mit $\tilde{\mu}|_\Ring = \mu$. Falls $\mu$ $\sigma$-endlich, so ist $\tilde{\mu}$ eindeutig bestimmt.
+  Sei $\mu$ ein Prämaß auf einem Ring $\Ring$, dann gibt es ein Maß $\tilde{\mu}$ auf der von $\Ring$ erzeugten $\sigma$-Algebra $\Alg(\Ring)$ mit $\tilde{\mu}|_\Ring = \mu$. Falls $\mu$ $\sigma$-endlich ist, so ist $\tilde{\mu}$ eindeutig bestimmt.
 \end{satz}
 
 \begin{bem}
@@ -616,7 +616,7 @@
 
 \begin{satz}[Satz von der monotonen Konvergenz]
   Sei $(f_n)_{n \in \N}$ eine monoton wachsende Folge von Funktionen in $\overline{\E}(\Omega, \Alg)$, dann gilt für $f \coloneqq \lim_{n \to \infty} f_n = \sup_{n \in \N} f_n \in \overline{\E}(\Omega, \Alg)$ und jedes Maß $\mu$ auf $\Alg$:
-  \[ \lim_{n \to \infty} \IntOmu f_n = \sup_{n \in \N} \IntOmu{f_n} = \IntOmu{f} \]
+  \[ \lim_{n \to \infty} \IntOmu{f_n} = \sup_{n \in \N} \IntOmu{f_n} = \IntOmu{f} \]
 \end{satz}
 
 \begin{bem}
@@ -995,7 +995,7 @@
 %           (\omega_1, ..., \omega_n) \mapsto \omega_j
 
 \begin{defn}
-  Seien $(\Omega_j, \Alg_j, \mu_j)$ Maßräume für $j = 1, ..., n$. Die kleinste $\sigma$-Algebra $\Alg$ auf $\sigma$, sodass alle $\Pi_j, j = 1, ..., n$ $(\Alg, \Alg_j)$-messbar sind, heißt \emph{Produkt} der $\sigma$-Algebren $\Alg_1, ..., \Alg_n$, notiert $\Alg =: \Alg_1 \otimes ... \otimes \Alg_n$.
+  Seien $(\Omega_j, \Alg_j, \mu_j)$ Maßräume für $j = 1, ..., n$. Die kleinste $\sigma$-Algebra $\Alg$ auf $\sigma$, sodass alle $\pi_j, j = 1, ..., n$ $(\Alg, \Alg_j)$-messbar sind, heißt \emph{Produkt} der $\sigma$-Algebren $\Alg_1, ..., \Alg_n$, notiert $\Alg =: \Alg_1 \otimes ... \otimes \Alg_n$.
 \end{defn}
 
 \begin{satz}
@@ -1954,7 +1954,7 @@
   \]
 \end{defn}
 
-\begin{satz}[Cauchscher Integralsatz]
+\begin{satz}[Cauchyscher Integralsatz]
   Sei $V \opn \C$ und $f : U \to \C$ holomorph. Sei ferner $\gamma : \left[ a, b \right] \to \C$ eine glatte reguläre einfach geschlossene Kurve und $C \subset \C$ das Kompaktum, welches vom Bild von $\gamma$ berandet wird. Dann gilt
   \[ \Int{\gamma}{}{f}{z} = 0. \]
 \end{satz}
