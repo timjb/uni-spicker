@@ -86,17 +86,17 @@
       f(\alpha x_1 + x_2, y) &= \alpha f(x_1, y) + f(x_2, y) \tag*{(Linearität im 1. Arg)} \\
       f(x, \alpha y_1 + y_2) &= \overline{\alpha} f(x, y_1) + f(x, y_2) \tag*{(Antilinearität im 2. Arg)}
     \end{align*}
-    \item Eine \emph{Hermitische Form} $f$ ist eine Sesquilinearform, für die gilt:
+    \item Eine \emph{Hermitesche Form} $f$ ist eine Sesquilinearform, für die gilt:
     \[ \fa{x, y \in X} f(x, y) = \overline{f(y, x)} \tag*{(Symmetrie)} \]
     Für alle $x \in X$ gilt dann $f(x, x) = \overline{f(x, x)}$, also ist $f(x, x)$ reell.
     \item Eine Sesquilinearform $f$ heißt \emph{positiv semidefinit}, falls $f(x, x) \geq 0$ für alle $x \in X$ gilt. Falls zusätzlich $f(x, x) = 0$ genau dann gilt, wenn $x = 0$, dann heißt $f$ \emph{positiv definit}.
-    \item Ein \emph{Skalarprodukt} ist eine positiv definite Hermitische Form
+    \item Ein \emph{Skalarprodukt} ist eine positiv definite Hermitesche Form
     \[ \scp{\blank}{\blank} : X \times X \to \K, \quad (x, y) \mapsto \scp{x}{y}. \]
   \end{itemize}
 \end{defn}
 
 \begin{satz}
-  Für eine positiv semidefinite Hermitische Form $\scp{\blank}{\blank}$ ist durch $x \mapsto \sqrt{\scp{x}{x}}$ eine Halbnorm definiert. Ist die Form auch positiv definit, also ein Skalarprodukt, handelt es sich dabei um eine Norm, die sogenannte \emph{induzierte Norm}.
+  Für eine positiv semidefinite Hermitesche Form $\scp{\blank}{\blank}$ ist durch $x \mapsto \sqrt{\scp{x}{x}}$ eine Halbnorm definiert. Ist die Form auch positiv definit, also ein Skalarprodukt, handelt es sich dabei um eine Norm, die sogenannte \emph{induzierte Norm}.
 \end{satz}
 
 \begin{satz}
@@ -1133,7 +1133,7 @@
 
 % Korollar
 \begin{kor}
-  Sei $(X, \norm{\blank})$ ein normierter $\K$-Vektorraum und $Y$ ein Unterraum. Dann gibt es zu $y \in Y'$ ein $x' \in X'$ mit
+  Sei $(X, \norm{\blank})$ ein normierter $\K$-Vektorraum und $Y$ ein Unterraum. Dann gibt es zu $y' \in Y'$ ein $x' \in X'$ mit
   \[
     x'|_Y = y'
     \quad \text{und} \quad
@@ -1790,7 +1790,7 @@ Die Unterräume $E_n = \im(Q_n)$ erfüllen dann (3) aus dem ersten Lemma und (2)
     \item \emph{kontinuierliche Spektrum}
     \begin{align*}
       \sigma_c(T) \coloneqq \{ \lambda \in \sigma(T) \mid\, &\ker(\lambda \Id - T) = \{ 0 \} \text{ und } \im (\lambda \Id - T) \not= X,\\[-2pt]
-      &\text{ aber } \overline{\im (\lambda \Id - T) = X } \},
+      &\text{ aber } \overline{\im (\lambda \Id - T)} = X \},
     \end{align*}
     \item \emph{Restspektrum} (Residualspektrum)
     \[ \sigma_r(T) \coloneqq \Set{ \lambda \in \sigma(T) }{ \ker(\lambda \Id - T) = \{ 0 \} \text{ und } \overline{\im(\lambda \Id - T)} \not= X }. \]
