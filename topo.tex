@@ -1,0 +1,201 @@
+\documentclass{cheat-sheet}
+
+\pdfinfo{
+  /Title (Zusammenfassung Topologie)
+  /Author (Tim Baumann)
+}
+
+\newcommand{\Tau}{\mathcal{T}} % Großes Tau
+\newcommand{\inte}{\mathop{\mathrm{int}}} % Inneres (interior)
+
+% Kleinere Klammern
+\delimiterfactor=701
+
+
+\begin{document}
+
+\maketitle{Zusammenfassung Topologie}
+
+% Vorlesung vom 6.4.2014
+
+\begin{defn}
+  Ein \emph{metrischer Raum} $(X, d)$ besteht aus einer Menge $X$ und einer Abbildung $d : X \times X \to \R_{\geq 0}$, sodass f.a. $x,y,z \in X$ gilt:
+  \begin{itemize}
+    \miniitem{0.44 \linewidth}{$d(x, y) = 0 \iff x = y$}
+    \miniitem{0.54 \linewidth}{$d(x, y) = d(y, x)$ \quad (Symmetrie)}
+    \item $d(x, z) \leq d(x, y) + d(y, z)$ \pright{$\triangle$-Ungleichung}
+  \end{itemize}
+\end{defn}
+
+% Ausgelassen: Beispiel $\R^n$
+% Ausgelassen: Beispiel Funktionenraum $\mathcal{C}(\left[ 0, 1 \right], \R)$ mit Maximumsnorm
+
+\begin{defn}
+  Für einen metrischen Raum $(X, d)$ und eine Teilmenge $A \subset X$ ist $(A, d|_A)$ ein metrischer Raum und $d|_A$ heißt \emph{induzierte Metrik}.
+\end{defn}
+
+\begin{defn}
+  Seien $(X, d_X)$ und $(Y, d_Y)$ metrische Räume. Eine Abbildung $f : X \to Y$ heißt \emph{stetig}, falls für alle $x \in X$ gilt:
+  \[ \fa{\epsilon {>} 0} \ex{\delta {>} 0} \fa{x' {\in} X} d_X(x, x') < \delta \implies d_X(f(x), f(x')) < \epsilon. \]
+\end{defn}
+
+\begin{defn}
+  Die \emph{offene Kugel} von Radius $\epsilon$ um $x \in X$ ist
+  \[ B_\epsilon(x) \coloneqq \Set{ p \in X }{ d(p, x) < \epsilon }. \]
+\end{defn}
+
+\begin{defn}
+  Eine Teilmenge $U \subset X$ eines metrischen Raumes heißt \emph{offen}, falls für alle $u \in U$ ein $\epsilon > 0$ existiert mit $B_{\epsilon}(u) \subset U$.
+\end{defn}
+
+\begin{prop}
+  Eine Abbildung $f : X \to Y$ zwischen metrischen Räumen ist genau dann offen, wenn für alle offenen Teilmengen $U \subset Y$ das Urbild $f^{-1}(U) \subset X$ offen ist.
+\end{prop}
+
+\begin{defn}
+  Ein \emph{topologischer Raum} $(X, \Tau)$ besteht aus einer Menge $X$ und einer Menge $\tau \subset \mathcal{P}(X)$ mit den Eigenschaften
+  \begin{itemize}
+    \miniitem{0.16 \linewidth}{$\emptyset \in \Tau$}
+    \miniitem{0.45 \linewidth}{$\fa{U, V \in \Tau} U \cap V \in \Tau$}
+    \miniitem{0.36 \linewidth}{$\fa{S \subset \Tau} \bigcap_{\mathclap{U \in S}} U \in \Tau$}
+  \end{itemize}
+  Die Elemente von $\Tau$ werden \emph{offene Teilmengen} von $X$ genannt. Eine Teilmenge $A \subset X$ heißt \emph{abgeschlossen}, falls $X \setminus A$ offen ist.
+\end{defn}
+
+\begin{bsp}
+  Die \emph{diskrete Topologie} auf einer Menge $X$ ist $\Tau = \mathcal{P}(X)$.
+\end{bsp}
+
+\begin{bsp}
+  Die \emph{Klumpentopologie} auf einer Menge $X$ ist $\Tau = \{ \emptyset, X \}$.
+\end{bsp}
+
+\begin{defn}
+  Die Menge der offenen Teilmengen eines metrischen Raumes heißt von der Metrik \emph{induzierte Topologie}.
+\end{defn}
+
+\begin{defn}
+  Sei $(X, \Tau)$ ein topologischer Raum und $A \subset X$. Dann heißt
+  \[ \Tau|_A \coloneqq \Set{U \cap A}{U \in \Tau} \]
+  \emph{Unterraumtopologie} oder von $\Tau$ \emph{induzierte Topologie}.
+\end{defn}
+
+\begin{defn}
+  Ein topologischer Raum $(X, \Tau)$ heißt \emph{metrisierbar}, falls eine Metrik auf $X$ existiert, sodass die von der Metrik induzierte Topologie mit $\Tau$ übereinstimmt.
+\end{defn}
+
+\begin{defn}
+  Ein topologischer Raum $(X, \Tau)$ heißt \emph{Hausdorffsch}, falls gilt:
+  \[ \fa{x,y \in X} x \not= y \implies \ex{U,V \in \Tau} x \in U \wedge y \in V \wedge U \cap V = \emptyset. \]
+\end{defn}
+
+\begin{prop}
+  Metrisierbare topologische Räume sind Hausdorffsch.
+\end{prop}
+
+\begin{defn}
+  Eine Abbildung $f : X \to Y$ zwischen topologischen Räumen $(X, \Tau_X)$ und $(Y, \Tau_Y)$ heißt \emph{stetig}, falls gilt
+  \[ \fa{U \in \Tau_Y} f^{-1}(U) \in \Tau_X. \]
+\end{defn}
+
+\begin{defn}
+  Falls $f : X \to Y$ bijektiv ist und sowohl $f$ als auch $f^{-1}$ stetig sind, so heißt $f$ ein \emph{Homöomorphismus}.
+\end{defn}
+
+\begin{bem}
+  Ist $f : X \to Y$ stetig und $A \subset X$, so ist auch $f|_A : A \to Y$ stetig.
+\end{bem}
+
+\begin{satz}
+  Für $n \not= m$ sind $\R^n$ und $\R^m$ nicht homöomorph.
+\end{satz}
+
+\begin{defn}
+  Sei $X$ eine Menge und $\Tau, \Tau'$ Topologien auf $X$. Dann sagen wir
+  \[ \Tau \text{ ist \emph{gröber} als } \Tau' \coloniff \Tau' \text{ ist \emph{feiner} als } \Tau \coloniff \Tau \subset \Tau'. \]
+\end{defn}
+
+% Bemerkung: Die Klumpentopologie ist die gröbste und die diskrete Topologie die feinste Topologie auf $X$.
+
+\begin{defn}
+  Eine Menge $\mathcal{B} \subset \Tau$ offener Teilmengen eines topologischen Raumes heißt
+  \begin{itemize}
+    \item \emph{Basis} der Topologie, falls jede offene Menge $U \in \Tau$ Vereinigung von Mengen aus $\mathcal{B}$ ist.
+    \item \emph{Subbasis} der Topologie, falls jede offene Menge $U \in \Tau$ Vereinigung von Mengen ist, von denen jede Schnitt endlich vieler Mengen aus $\mathcal{B}$ ist.
+  \end{itemize}
+\end{defn}
+
+\begin{defn}
+  Jede Teilmenge $\mathcal{B} \subset \mathcal{P}(X)$ ist Subbasis von genau einer Topologie $\Tau$ von $X$, der sogenannten von $\mathcal{B}$ \emph{erzeugten Topologie}.
+\end{defn}
+
+\begin{defn}
+  Sind $(X, \Tau_X)$ und $(Y, \Tau_Y)$ topologische Räume, so ist auch $(X \times Y, \Tau_X \otimes \Tau_Y)$ ein topologischer Raum mit der \emph{Produkttopologie} $(\Tau_X \otimes \Tau_Y)$, die von
+  \[
+    \mathcal{B} \coloneqq \Set{U \times Y}{U \in \Tau_X} \cup \Set{X \times V}{V \in \Tau_Y}
+    \quad \text{erzeugt wird.}
+  \]
+  % Ausgelassen: "`Streifen"' und "`Rechtecke"'
+\end{defn}
+
+\begin{prop}
+  \begin{itemize}
+    \item Die Projektionen $\pi_X : X \times Y \to X$ und $\pi_Y : X \times Y \to Y$ sind stetig bzgl. der Produkttopologie.
+    \item Ist $\Tau$ eine echt gröbere Topologie auf $X \times Y$ als die Produkttopologie, so sind die Projektionen $\pi_X$ und $\pi_Y$ nicht beide stetig.
+  \end{itemize}
+\end{prop}
+
+% Bemerkung: Die Produkttopologie ist somit die gröbste Topologie auf $X \times Y$, sodass beide Projektionen stetig sind.
+
+\begin{defn}
+  Seien $(X, \Tau_X)$ und $(Y, \Tau_Y)$ topologische Räume. Dann erzeugt $\Tau_X \cup \Tau_Y$ die \emph{Summentopologie} auf $X \cup Y$.
+\end{defn}
+
+\begin{bem}
+  Sie ist die feinste Topologie auf $X \cup Y$, sodass die beiden Inklusionen $i_X : X \hookrightarrow X \cup Y$ und $i_Y : Y \hookrightarrow X \cup Y$ stetig sind.
+\end{bem}
+
+\begin{prop}
+  Seien $X, Y, Z$ topologische Räume.
+  \begin{itemize}
+    \item Falls $X \cap Y = \emptyset$, so ist eine Abbildung $f : X \cup Y \to Z$ genau dann stetig, falls die beiden Kompositionen $f \circ i_X : X \to Z$ und $f \circ i_Y : Y \to Z$ stetig sind.
+    \item Eine Abb. $g : Z \to X \cup Y$ ist genau dann stetig, wenn die beiden Kompositionen $\pi_X \circ g : Z \to X$ und $\pi_Y \circ g : Z \to Y$ stetig sind.
+  \end{itemize}
+\end{prop}
+
+\begin{defn}
+  Sei $X$ ein topologischer Raum und $A \subset X$. Dann ist das \emph{Innere} von $A$ (notiert $\inte(A)$) die Vereinigung aller in $A$ enthaltenen offenen Mengen.
+\end{defn}
+
+\begin{bem}
+  Als Vereinigung offener Mengen ist das Innere offen.
+\end{bem}
+
+% $\inte(A)$ ist die größte in $A$ enthaltene in $X$ offene Teilmenge.
+
+\begin{defn}
+  Der \emph{Abschluss} $\overline{A}$ einer Menge $A \subset X$ ist der Durchschnitt aller abgeschlossenen Mengen von $X$, die $A$ enthalten.
+\end{defn}
+
+\begin{bem}
+  Es gilt $\overline{A} = X \setminus (\inte(X \setminus A))$.
+\end{bem}
+
+\begin{defn}
+  Es sei $X$ ein topologischer Raum, $x \in X$ und $V \subset X$. Wir nennen $V$ eine \emph{Umgebung} von $x$, falls es eine offene Teilmenge $U \subset X$ gibt mit $x \in U$ und $U \subset V$.
+\end{defn}
+
+\begin{prop}
+  Ein Punkt $x \in X$ liegt genau dann in $\overline{A}$, falls jede Umgebung von $x$ einen Punkt aus $A$ enthält.
+\end{prop}
+
+\begin{defn}
+  Der \emph{Rand} einer Menge $A \subset X$ ist
+  \[ \partial A \coloneqq \overline{A} \setminus \inte(A). \]
+\end{defn}
+
+\begin{prop}
+  Ein Punkt $x \in X$ liegt genau dann in $\partial X$, wenn jede Umgebung von $x$ sowohl einen Punkt aus $A$ wie einen Punkt aus $X \setminus A$ enthält.
+\end{prop}
+
+\end{document}

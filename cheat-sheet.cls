@@ -37,8 +37,8 @@
 
 \newtheorem*{nota}{Notation}
 \newtheorem*{defn}{Def} % Kurzform!
-\newtheorem*{bsp}{Beispiel}
-\newtheorem*{bspe}{Beispiele}
+\newtheorem*{bsp}{Bsp}
+\newtheorem*{bspe}{Bspe}
 \newtheorem*{satz}{Satz}
 \newtheorem*{beweis}{Beweis}
 \newtheorem*{frage}{Frage}
