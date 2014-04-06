@@ -86,7 +86,7 @@
 \end{defn}
 
 \begin{defn}
-  Eine stetige Kurve $c$ heißt \emph{rektifizierbar} von Länge $\hat{L}_c$, wenn gilt: Für alle $\epsilon > 0$ gibt es ein $\delta > 0$, sodass für alle Unter- teilungen $a = t_0 < t1 < ... < t_k = b$ der Feinheit mindestens $\delta$ gilt:
+  Eine stetige Kurve $c$ heißt \emph{rektifizierbar} von Länge $\hat{L}_c$, wenn gilt: Für alle $\epsilon > 0$ gibt es ein $\delta > 0$, sodass für alle Unterteilungen $a = t_0 < t1 < ... < t_k = b$ der Feinheit mindestens $\delta$ gilt:
   \[ \norm{\hat{L}_c - \hat{L}_c(t_0, t_1, ..., t_k)} < \epsilon. \]
 \end{defn}
 
@@ -167,7 +167,7 @@
 \end{satz}
 
 \begin{satz}[\emph{Polarwinkelfunktion}]
-  Sei $\gamma = \begin{psmallmatrix} \gamma_1 \\ \gamma_2 \end{psmallmatrix} : [a, b] \to S^1$ stetig (glatt) und $\omega_a \in \R$, sodass $\gamma(a) = e^{i \omega_a}$. Dann gibt es eine eindeutige stetige (glatte) Abb. $\omega : [a, b] \to \R$, genannt Polarwinkelfunktion von $\gamma$ mit $\omega(a) = \omega_a$ und $\gamma(t) = e^{i \omega(t)} = \begin{pmatrix} \cos(\omega(t)) \\ \sin(\omega(t)) \end{pmatrix}$ für alle $t \in [a, b]$.
+  Sei $\gamma : [a, b] \to S^1$ stetig (glatt) und $\omega_a \in \R$, sodass $\gamma(a) = e^{i \omega_a}$. Dann gibt es eine eindeutige stetige (glatte) Abb. $\omega : [a, b] \to \R$, genannt Polarwinkelfunktion von $\gamma$ mit $\omega(a) = \omega_a$ und $\gamma(t) = e^{i \omega(t)} = \begin{psmallmatrix} \cos(\omega(t)) \\ \sin(\omega(t)) \end{psmallmatrix}$ für alle $t \in [a, b]$.
 \end{satz}
 
 \begin{satz}
@@ -343,7 +343,7 @@ mit $c(0) = c(b)$, so liegt das Bild von $v$ ganz in einer offenen Hemisphäre.
 \begin{defn}
   Eine Abbildung $f : U \to \R^n$ heißt in $u \in U$ \emph{total differenzierbar}, wenn gilt: Es gibt eine lineare Abbildung $D_u f = \partial f_u : \R^m \to \R^n$, genannt das \emph{totale Differential} von $f$ in $u$, sodass für genügend kleine $h \in \R^n$ gilt:
   \[ f(u + h) = f(u) + \partial f_u(h) + o(h) \]
-  für eine in einer Umgebung von $0$ definierten Funktion $o : \R^n \to \R^m$ mit $\lim_{h \to 0} \tfrac{o(h)}{\norm{h}} = 0$.
+  für eine in einer Umgebung von $0$ definierte Funktion $o : \R^n \to \R^m$ mit $\lim_{h \to 0} \tfrac{o(h)}{\norm{h}} = 0$.
 \end{defn}
 
 \begin{defn}
@@ -574,7 +574,7 @@ $\implies$ $f$ ist partiell differenzierbar
 \end{defn}
 
 \begin{satz}
-  Die Hauptkrümmungen, die mittlere Krümmung und die Gauß-Kronecker-Krümmung sind invariant unter orientierungserhaltenden Umparametrisiserungen.
+  Die Hauptkrümmungen, die mittlere Krümmung und die Gauß-Kronecker-Krümmung sind invariant unter orientierungserhaltenden Umparametrisierungen.
 \end{satz}
 
 \begin{bsp}
@@ -648,7 +648,7 @@ $\implies$ $f$ ist partiell differenzierbar
 \end{bem}
 
 \begin{satz}
-  Die Hauptkrümmungen $\kappa_1(u_0), ..., \kappa_2(u_0)$ sind die Extrema der Abbildung
+  Die Hauptkrümmungen $\kappa_1(u_0), \kappa_2(u_0)$ einer HF $X : U \to \R^3$ in $u_0 \in U$ sind die Extrema der Abbildung
   \[ T_{u_0} X \supset S^1 \to \R, \quad v \mapsto \kappa_v(u_0) = \langle W_{u_0} v, v \rangle. \]
 \end{satz}
 
@@ -666,7 +666,12 @@ $\implies$ $f$ ist partiell differenzierbar
 \end{nota}
 
 \begin{defn}
-  Sei $X : U \to \R^n$ eine immergierte Fläche, $U \opn \R^m$. Ein \emph{tangentiales Vektorfeld} längs $X$ ist eine glatte Abbildung $V : U \to \R^n$ mit $V(u) \in T_u X \, \forall u \in U$.
+  Sei $X : U \to \R^n$ eine immergierte Fläche, $U \opn \R^m$. Ein \emph{tangentiales Vektorfeld} längs $X$ ist eine glatte Abbildung
+  \[
+    V : U \to \R^n
+    \quad \text{mit} \quad
+    \fa{u \in U} V(u) \in T_u X.
+  \]
 \end{defn}
 
 \begin{bem}
@@ -895,7 +900,7 @@ $\implies$ $f$ ist partiell differenzierbar
 \end{defn}
 
 \begin{defn}
-  Sei $u \in U$, dann gibt es ein $0 < \epsilon \leq \epsilon_u$, sodass $\Exp_u|B_u^\epsilon$ ein Diffeo auf sein Bild ist.
+  Sei $u \in U$, dann gibt es ein $0 < \epsilon \leq \epsilon_u$, sodass $\Exp_u|B_u^\epsilon$ ein Diffeomorphismus auf sein Bild ist.
 \end{defn}
 
 % Vorlesung vom 4.12.2013
@@ -1472,7 +1477,7 @@ $\implies$ $f$ ist partiell differenzierbar
 \end{defn}
 
 \begin{bem}
-  Die Abbildung ist nicht positiv definit, nicht hermetisch und damit auch kein Skalarprodukt.
+  Die Abbildung ist nicht positiv definit, nicht hermitesch und damit auch kein Skalarprodukt.
 \end{bem}
 
 \begin{defn}
