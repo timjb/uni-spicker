@@ -1,0 +1,78 @@
+\documentclass{cheat-sheet}
+
+\pdfinfo{
+  /Title (Zusammenfassung Gewöhnliche Differentialgleichungen)
+  /Author (Tim Baumann)
+}
+
+% Kleinere Klammern
+\delimiterfactor=701
+
+
+\begin{document}
+
+\maketitle{Zusammenfassung Gew. Diff'gleichungen}
+
+% Kapitel 1. Einführung
+
+% Kapitel 1.1. Beispiele
+
+\begin{bsp}
+  Gesucht: Funktion $y : \R \to \R$ mit $\fa{t \in \R} \dot{y}(t) = y(t)$\\
+\end{bsp}
+
+\begin{lsg}
+  $y(t) = c \cdot e^t$ für $c \in \R$ beliebig. Wenn man als Anfangsbe- dingung $y(0) = 1$ fordert, erhält man eine eindeutige Lösung ($c = 1$).
+\end{lsg}
+
+\begin{bsp}
+  Gesucht: Lösung von $\left(\dot{y}(t)\right)^2 + \left(y(t)\right)^2 = a$ für $a \in \R$\\
+\end{bsp}
+
+\begin{lsg}
+  Anzahl der Lösungen hängt von $a$ ab:
+  \begin{itemize}
+    \miniitem{0.47\linewidth}{Falls $a < 0$: keine reelle Lsg}
+    \miniitem{0.51\linewidth}{Falls $a = 0$: Einzige Lsg $y(t) = 0$}
+    \item Falls $a > 0$: Lsgn: $y(t) = \sqrt{a} \cos(t + \phi)$ für $\phi \in \R$ bel., $y(t) = \pm \sqrt{a}$
+  \end{itemize}
+\end{lsg}
+
+% Populationsmodell aus der Biologie/Chemie
+\begin{bsp}
+  Sei $p(t)$ ist Populationsgröße zur Zeit $t$.
+  Angenommen, $\tfrac{\dot{p}(t)}{p(t)} = a$ ist konstant, also $\dot{p}(t) = p(t)$. Sei $p(t_0) = p_0$.
+\end{bsp}
+
+\begin{lsg}
+  $p(t) = p_0 e^{(t-t_0) a}$
+\end{lsg}
+
+% 1837
+\begin{bsp}[Verhulst-Modell]
+  Gesucht: Lösung zu
+  \[ \dot{p}(t) = a_0 p(t) - a_1 \left(p(t)\right)^2 \]
+\end{bsp}
+
+\begin{lsg}
+  $p(t) = \frac{a_0}{a_1 (1 - c e^{-a_0 t})}$
+\end{lsg}
+
+% Mechanik: Mathematisches Pendel
+% Skizze: Pendel der
+% * Masse $m$
+% * Länge $l$
+% * Auslenkungswinkel $\phi(t)$ zum Zeitpunkt $t$
+% * Position $l \phi(t)$ zum Zeitpunkt $t$
+% * Geschwindigkeit $v(t) = \dot{p}(t) = l \dot{\phi}(t)$
+% * $a(t) = \dotdot{p}(t) = \dot{v}(t) = l \dotdot{\phi}(t)$ Beschleunigung
+% $F_E = - mg$, $F = ma$
+% $F_T$ -- tangentiale Komponente der Gewichtskraft
+% $F_T = - mg \sin(\phi)$
+% => Gleichung $-mg \sin(\phi) = m a(t) = m l \dotdot{t}$, also $\dotdot{\phi}(t) = -\tfrac{g}{l} \sin(\phi(t))$
+
+\begin{bsp}
+  
+\end{bsp}
+
+\end{document}
