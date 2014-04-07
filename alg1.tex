@@ -1,0 +1,179 @@
+\documentclass{cheat-sheet}
+
+\pdfinfo{
+  /Title (Zusammenfassung Algebra 1)
+  /Author (Tim Baumann)
+}
+
+% Kleinere Klammern
+\delimiterfactor=701
+
+\usepackage{relsize}
+\let\myBinom\binom
+\renewcommand{\binom}[2]{\mathsmaller{\myBinom{#1}{#2}}}
+
+\begin{document}
+
+\maketitle{Zusammenfassung Algebra 1}
+
+% Buchempfehlungen:
+% * Rotman: Galois Theory
+% * H. Edwards: Galois Theory
+% * Van der Warden: Algebra 1
+
+% Kapitel 1. "`Algebra"'
+
+% t 31.5.1832 Évariste Galois (1811-1832)
+
+\begin{defn}
+  Ein \emph{Polynom} mit Unbestimmter $X$ hat die Form
+  \[ f(X) = a_0 X^n + a_1 X^{n-1} + ... + a_{n-1} X + a_n. \]
+\end{defn}
+
+\begin{defn}
+  Falls oben $a_0 \not= 0$ gilt, so ist $\partial f = n$ der \emph{Grad} des Polynoms.
+\end{defn}
+
+% Bemerkung: Polynome gibt es auch zu mehreren Unbestimmten ($X,Y,Z$ oder $X_1,X_2,X_3$)
+
+\begin{defn}
+  Eine \emph{Linearkombination} ist ein Polynom der Form
+  \[ f(X_1, ..., X_n) = a_1 X_1 + ... + a_n X_n. \]
+\end{defn}
+
+% Algebra = Studium der Polynome und ihrer Nullstellenmengen
+
+% Ausgelassen: Mitternachtsformel
+
+% Kapitel 2. Das gemeinsame Maß
+
+% Pythagoras, ca. 580-540 v. Chr.: "Alles ist Zahl"
+% Zahlen sind nicht nur zum Zählen, sondern auch zum Vergleichen da!
+
+% Hippasos von Metapont: Stimmt das? Vielleicht bricht das Verfahren niemals ab?
+
+\begin{alg}[Euklid]
+  Seien $a, b \in \R$ mit $a {>} b {>} 0$ gegeben. Schreibe
+  \[ a = k \cdot b + r \]
+  mit $k \in \N$ und $r < b$. Wiederhole diesen Schritt mit $(a, b) \coloneqq (b, r)$, falls $r \not= 0$.
+\end{alg}
+
+\begin{defn}
+  Ein \emph{gemeinsames Maß} zweier Zahlen $a, b \in \R$ ist eine Zahl $c \in \R$, sodass es $k, l \in \Z$ mit $a = k \cdot c$ und $b = l \cdot c$ gibt.
+\end{defn}
+
+\begin{bem}
+  Zwei Zahlen haben genau dann ein gemeinsames Maß, wenn der euklidische Algorithmus, angewandt auf diese Zahlen, abbricht.
+\end{bem}
+
+\begin{defn}
+  Zwei Zahlen $a, b \in \R$, die kein gemeinsames Maß besitzen, heißen \emph{inkommensurabel}. Ihr Verhältnis ist dann \emph{irrational}.
+\end{defn}
+
+\begin{satz}
+  Die Längen der Seite und der Diagonalen eines regelmäßigen Fünfecks sind zueinander inkommensurabel.
+\end{satz}
+
+\begin{defn}
+  Der \emph{goldene Schnitt} ist die Zahl
+  \[ \Phi \coloneqq \frac{1 + \sqrt{5}}{2} \approx 1.618. \]
+\end{defn}
+
+\begin{bem}
+  Der goldene Schnitt ist Lösung der Polynomgleichung
+  \[ X^2 - X - 1 = 0. \]
+\end{bem}
+
+% Ausgelassen: Archimedisches Axiom
+
+% Kapitel 3. Die binomische Formel
+
+\begin{defn}
+  Ein \emph{Binom} ist ein Ausdruck der Form $(a+b)^n$ mit $n \in \N$.
+\end{defn}
+
+\begin{defn}
+  Für $n \in \N$ und $k \leq n$ schreibe $\binom{n}{k} \coloneqq \tfrac{n!}{k! \cdot (n-k)!}$.
+\end{defn}
+
+\begin{satz}
+  Es gilt $(a+b)^n = \sum_{k=0}^n \binom{n}{k} a^k b^{n-k}$ für alle $n \in \N$.
+\end{satz}
+
+% Kapitel 4. Die Tschirnhaus-Transformation
+
+\begin{verf}[Tschirnhaus-Transformation]
+  Sei eine Polynomgleichung der Form
+  \[ x^n + a_1 x^{n-1} + ... + a_{n-1} x + a_n = 0 \]
+  gegeben. Substituiere $x \coloneqq \tilde{x} - \tfrac{a_1}{n}$. Dann hat die neue Gleichung keinen $x^{n-1}$-Term. Lösungen der der beiden Gleichungen können durch Addieren bzw. Subtrahieren von $\tfrac{a_1}{n}$ ineinander überführt werden.
+\end{verf}
+
+\begin{kor}
+  Beim Lösen von Polynomgleichungen kann man also annehmen, dass kein $x^{n-1}$-Term vorhanden ist.
+\end{kor}
+
+\begin{kor}[Mitternachtsformel]
+  Die Polynomgleichung zweiten Grades $x^2 + ax + b = 0$ wird gelöst durch
+  \[ x = - \tfrac{a}{2} \pm \tfrac{1}{2} \sqrt{a^2 - 4b}. \]
+\end{kor}
+
+% Kapitel 5. Die kubische Gleichung
+
+% Name: Cardanosche Formel
+\begin{satz}
+  Eine Nullstelle der kubischen Gleichung $x^3 + ax - b = 0$ ist gegeben durch
+  \[
+    x = \sqrt[3]{\tfrac{b}{2} + \sqrt{D}} + \sqrt[3]{\tfrac{b}{2} - \sqrt{D}}
+    \quad \text{mit } D \coloneqq \left(\tfrac{a}{3}\right)^3 + \left(\tfrac{b}{2}\right)^2.
+  \]
+\end{satz}
+
+\begin{prob}
+  Was, wenn in der Quadratwurzel eine neg. Zahl steht?
+\end{prob}
+
+% Kapitel 6. Die imaginären Zahlen
+
+% Ausgelassen: Motivation der imaginären Zahlen mittels Cardanos Formel
+
+\begin{defn}
+  Für die \emph{imaginäre Zahl} $i$ gilt: $i^2 = -1$. Die \emph{komplexen Zahlen} $\C$ sind Zahlen der Form $x + y i$ mit $x, y \in \R$.\\
+  Es gelten die Rechenregeln
+  \begin{align*}
+    (x + yi) \pm (u + vi) &= (x+u) \pm (y+v)i\\
+    (x + yi) \cdot (u + vi) &= (xu - yi) + (xv + yu)i\\
+    \frac{1}{x + yi} &= \frac{x}{x^2 + y^2} + \frac{-y}{x^2 + y^2} i
+  \end{align*}
+\end{defn}
+
+% Ausgelassen: Begriff des Körpers
+
+\begin{defn}
+  Für eine komplexe Zahl $z = x + iy$ mit $x, y \in \R$ heißen
+  \[
+    \Re(z) \coloneqq x \text{ \emph{Realteil}}
+    \quad \text{und} \quad
+    \Im(z) \coloneqq y \text{ \emph{Imaginärteil}}.
+  \]
+\end{defn}
+
+\begin{defn}
+  Die Operation $x + yi \mapsto x - yi$ heißt \emph{komplexe Konjugation}. Man notiert sie mit einem Querstrich, also $z \mapsto \overline{z}$ für $z \in \C$.
+\end{defn}
+
+\begin{defn}
+  Der \emph{Betrag} einer komplexen Zahl $z = x + yi$ ist
+  \[ \abs{z} \coloneqq \sqrt{x^2 + y^2} = \sqrt{z \overline{z}}. \]
+\end{defn}
+
+\begin{satz}
+  Für komplexe Zahlen $z, w \in \C$ gilt
+  \begin{itemize}
+    \miniitem{0.54\linewidth}{$\abs{z + w} \leq \abs{z} + \abs{w}$ \enspace ($\triangle$-Ungl)}
+    \miniitem{0.44\linewidth}{$\abs{z} \cdot \abs{w} = \abs{z \cdot w}$}
+  \end{itemize}
+\end{satz}
+
+% Kapitel 8. Die Exponentialfunktion
+
+\end{document}
