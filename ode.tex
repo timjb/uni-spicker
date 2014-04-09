@@ -8,6 +8,7 @@
 % Kleinere Klammern
 \delimiterfactor=701
 
+\newcommand{\D}{\mathcal{D}}
 
 \begin{document}
 
@@ -65,14 +66,170 @@
 % * Auslenkungswinkel $\phi(t)$ zum Zeitpunkt $t$
 % * Position $l \phi(t)$ zum Zeitpunkt $t$
 % * Geschwindigkeit $v(t) = \dot{p}(t) = l \dot{\phi}(t)$
-% * $a(t) = \dotdot{p}(t) = \dot{v}(t) = l \dotdot{\phi}(t)$ Beschleunigung
+% * $a(t) = \ddot{p}(t) = \dot{v}(t) = l \ddot{\phi}(t)$ Beschleunigung
 % $F_E = - mg$, $F = ma$
 % $F_T$ -- tangentiale Komponente der Gewichtskraft
 % $F_T = - mg \sin(\phi)$
-% => Gleichung $-mg \sin(\phi) = m a(t) = m l \dotdot{t}$, also $\dotdot{\phi}(t) = -\tfrac{g}{l} \sin(\phi(t))$
+% => Gleichung $-mg \sin(\phi) = m a(t) = m l \ddot{t}$, also $\ddot{\phi}(t) = -\tfrac{g}{l} \sin(\phi(t))$
 
 \begin{bsp}
   
 \end{bsp}
+
+% Vorlesung vom 9.4.2014
+
+% Literatur
+% Alle Bücher haben den Titel "`Gewöhnliche Differentialgleichungen"'
+% * B. Aulbach, 2004
+% * H. Henser, 2009
+% * L. Grüne, O. Junge, 2009
+% * W. Walter, 2000
+
+% Kapitel 1.2. Klassifikation von Differentialgleichungen (DGLn)
+
+% I)
+
+Unterscheidung zwischen gewöhnliche DGL und partielle DGLn
+
+Beispiele für gewöhnliche DGL
+$\dot{y}(t) = h y(t)$
+$(\dot{y}(t))^2 + (y(t))^2 = a$
+
+Beispiele für partielle DGLn:
+
+$y_t = \alpha y_{xx} + y$, wobei $y_t(t,x) = \tfrac{\partial}{\partial t} y(t, x)$, $y_{xx}(t, x) = \tfrac{\partial^2}{\partial x^2} y(t, x)$
+
+% II)
+
+Unterscheidung zwischen DGLn 1. Ordnung, DGLn 2. Ordnung und DGLn $k$-ter Ordnung
+
+Beispiel für DGL 1. Ordnung:
+$\dot{y} = \alpha y(t)$
+
+Beispiel für DGL 2. Ordnung:
+$\ddot{\phi}(t) = - \tfrac{\delta}{e} \sin(\phi(t))$
+
+Beispiel für DGL $k$-ter Ordnung:
+$F(t, y(t), \dot{y}(t), ..., y^{(k)}(t)) = 0$
+
+% III)
+
+Unterscheidung zischen expliziten und impliziten DGLn
+
+Beispiel für explizite DGLn:
+$\dot{y}(t) = \alpha y(t)$
+$\ddot{\phi}(t) = - \tfrac{g}{e} \sin(\phi(t))$
+$y^{(k)}(t) = f(t, y, \dot{y}, ..., y^{(k-1)})$
+
+Beispiele für implizite DGLn:
+$(\dot{y}(t))^2 + (y(t))^2 = a$
+$F(t, y, \dot{y}, ..., y^{(k)}(t))$
+
+Oder (Gleichungen gehören zusammen)
+$\dot{y}_2(t) + y_1(t) = f_1(t)$
+$y_2(t) = f_2(t)$
+(differentiell-algebraische Gleichung)
+
+% IV)
+Unterscheidung zwischen Skalaren DGLn und $n$-dimensionalen DGLn (Systeme von DGLn)
+
+Beispiel für Skalare DGL:
+$\dot{y}(t) = f(t, y(t))$, wobei $f : \R \times \R \to \R$ gegeben ist.
+
+Beispiel für ein System von DGLn:
+$\dot{y}(t) = f(t, y(t))$, wobei $f : \R \times \R^n \to \R^n$ gegeben und $y : \R \to \R^n$ gesucht
+
+% V)
+Unterscheidung zwischen linearen und nicht linearen DGLn
+
+Beispiele für lineare DGLn:
+$\dot{y}(t) = \alpha y(t)$
+$\dot{y}(t) = A y(t) + g(t)$, $A \in \R^{n \times n}$
+$a_k(t) y^{(k)}(t) + a_{(k-1)}(t) y^{k-1}(t) + ... + a_1(t) \dot{y}(t) + a_0(t)y(t) = 0$
+
+Beispiele für nicht lineare DGLn:
+$\ddot{\phi}(t) = - \tfrac{g}{e} \sin(\phi(t))$
+$(\dot{y}(t))^2 + (y(t))^2 = a$
+
+% VI)
+Unterscheidung zwischen autonomen und nicht autonomen DGLn
+
+Beispiele für autonome DGLn:
+\begin{itemize}
+  \item $\dot{y} = \alpha y(t)$
+  \item $(\dot{y}(t))^2 + (y(t))^2 = a$
+  \item $\dot{y}(t) = f(y(t))$
+  \item $F(y(t), \dot{y}(t), ..., y^{(k)}(t)) = 0$
+\end{itemize}
+
+Beispiele für nicht autonome DGLn:
+\begin{itemize}
+  \item $\dot{y} = \alpha y(t) + e^{t}$
+  \item $(\dot{y}(t))^2 + (y(t))^2 0= a + t^2$
+  \item $\dot{y}(t) = f(t, y(t))$
+  \item $F(t, y(t), \dot{y})(t), ..., y^{(k)}(t)) = 0$
+\end{itemize}
+
+Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
+
+\begin{defn}
+  Es sei $\D \subset \R \times \R^n$ offen, $f : \D \to \R^n$ und $(t_0, y_0) \in \D$. Das System von Gleichungen
+  \begin{align*}
+    \dot{y}(t) &= f(t, y(t))\\
+    y(t_0) &= y_0
+  \end{align*}
+  heißt \emph{Anfangswertproblem} (AWP).
+  % Ausgelassen: Obiges Gleichungssystem hat die Nummer (1.1)
+\end{defn}
+
+\begin{nota}
+  Sei im Folgenden $I$ stets ein Intervall in $\R$.
+\end{nota}
+
+\begin{defn}
+  \begin{itemize}
+    \item Es sei $\D \subset \R \times \R^n$, $f : \D \to \R^n$. Eine differenzierbare Funktion $y : I \to \R^n$ heißt \emph{Lösung} von $\dot{y} = f(t, y)$, falls für alle $t \in I$ gilt: $\dot{y}(t) = f(t, y(t))$.
+    \item Es sei $\D \subset \R \times \underbrace{\R^n \times ... \R^n}_{k \text{ mal}}$, $f : \D \to \R^n$. Eine $k$-mal differenzierbare Funktion $y : I \to \R^n$ heißt \emph{Lösung} von $y^{(k)} = f(t, y, \dot{y}, ..., y^{(k-1)})$, falls für alle $t \in I$ gilt:
+    \[ y^{(k)} = f(t, y(t), \dot{y}(t), ..., y^{(k-1)}(t)) \]
+  \end{itemize}
+\end{defn}
+
+% 1.1.
+\begin{satz}
+  \begin{itemize}
+    \item Ist $y : I \to \R^n$ eine Lösung von $y^{(k)} = f(t, y, \dot{y}, ..., y^{(k-1)})$ (1.2), dann ist
+    \begin{align*}
+      (y_1, ..., y_k) : I &\to \R^{kn}\\
+      t &\mapsto (y_1(t), ..., y_k(t)) = (y(t), \dot{y}(t), ..., y^{(k-1)}(t))
+    \end{align*}
+    eine Lösung von System (1.3)
+    \begin{align*}
+      \dot{y}_1 = y_2\\
+      \dot{y}_2 = y_3\\
+      \dot{y}_3 = y_4\\
+      \vdots\\
+      \dot{y}_{k-1} = y_k\\
+      \dot{y}_k = f(t, y_1, y_2, ..., y_{k-1}, y_k)
+    \end{align*}
+    \item Ist $(y_1, ..., y_k) : I \to \R^n$ eine Lösung von (1.3), dann ist $y = y_1 : I \to \R^n$ eine Lösung von (1.2).
+  \end{itemize}
+\end{satz}
+
+% 1.2.
+\begin{satz}
+  \begin{itemize}
+    \item Ist $y : I \to \R^n$ eine Lösung von AWP (1.1), dann ist
+    \begin{align*}
+      (y_1, y_2) : I &\to \R^{n+1}\\
+      t &\mapsto (y_1(t), y_2(t)) = (t, y(t))
+    \end{align*}
+    eine Lösung des AWP (1.4)
+    \begin{align*}
+      \dot{y}_1(t) = 1, & y_1(t_0) = t_0
+      \dot{y}_2(t) = f(y_1(t), y_2(t)), & y_2(t_0) = y_0
+    \end{align*}
+    \item Ist $(y_1, y_2) : I \to \R^{n+1}$ eine Lösung von (1.4), dann ist $y = y_2 : I \to \R^n$ eine Lösung von (1.1).
+  \end{itemize}
+\end{satz}
 
 \end{document}
