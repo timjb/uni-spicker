@@ -5,6 +5,8 @@
   /Author (Tim Baumann)
 }
 
+\newcommand{\K}{\mathbb{K}} % Körper
+
 % Kleinere Klammern
 \delimiterfactor=701
 
@@ -21,7 +23,9 @@
 % * H. Edwards: Galois Theory
 % * Van der Warden: Algebra 1
 
-% Kapitel 1. "`Algebra"'
+% Kapitel 1. Gleichungen
+
+% Kapitel 1.1. "`Algebra"'
 
 % t 31.5.1832 Évariste Galois (1811-1832)
 
@@ -45,7 +49,7 @@
 
 % Ausgelassen: Mitternachtsformel
 
-% Kapitel 2. Das gemeinsame Maß
+% Kapitel 1.2. Das gemeinsame Maß
 
 % Pythagoras, ca. 580-540 v. Chr.: "Alles ist Zahl"
 % Zahlen sind nicht nur zum Zählen, sondern auch zum Vergleichen da!
@@ -86,7 +90,7 @@
 
 % Ausgelassen: Archimedisches Axiom
 
-% Kapitel 3. Die binomische Formel
+% Kapitel 1.3. Die binomische Formel
 
 \begin{defn}
   Ein \emph{Binom} ist ein Ausdruck der Form $(a+b)^n$ mit $n \in \N$.
@@ -100,7 +104,7 @@
   Es gilt $(a+b)^n = \sum_{k=0}^n \binom{n}{k} a^k b^{n-k}$ für alle $n \in \N$.
 \end{satz}
 
-% Kapitel 4. Die Tschirnhaus-Transformation
+% Kapitel 1.4. Die Tschirnhaus-Transformation
 
 \begin{verf}[Tschirnhaus-Transformation]
   Sei eine Polynomgleichung der Form
@@ -117,7 +121,7 @@
   \[ x = - \tfrac{a}{2} \pm \tfrac{1}{2} \sqrt{a^2 - 4b}. \]
 \end{kor}
 
-% Kapitel 5. Die kubische Gleichung
+% Kapitel 1.5. Die kubische Gleichung
 
 % Name: Cardanosche Formel
 \begin{satz}
@@ -132,7 +136,7 @@
   Was, wenn in der Quadratwurzel eine neg. Zahl steht?
 \end{prob}
 
-% Kapitel 6. Die imaginären Zahlen
+% Kapitel 1.6. Die imaginären Zahlen
 
 % Ausgelassen: Motivation der imaginären Zahlen mittels Cardanos Formel
 
@@ -174,6 +178,68 @@
   \end{itemize}
 \end{satz}
 
-% Kapitel 8. Die Exponentialfunktion
+% Kapitel 1.8. Die Exponentialfunktion
+
+\begin{defn}
+  Die \emph{Exponentialfunktion} ist die Abbildung
+  \[ \exp : \C \to \C, \quad x \mapsto \sum_{k=0}^\infty \tfrac{x^k}{k!}. \]
+\end{defn}
+
+\begin{satz}
+  Für alle $x, y \in \C$ gilt $\exp(x + y) = \exp(x) \cdot \exp(y)$.
+\end{satz}
+
+\begin{defn}
+  Die \emph{Eulersche Zahl} ist die Zahl
+  \[ e \coloneqq \exp(1) = \sum_{k=0}^\infty \tfrac{1}{k!} \approx 2,718. \]
+\end{defn}
+
+\begin{nota}
+  Schreibe $e^y \coloneqq \exp(y)$ für alle $y \in \C$.
+\end{nota}
+
+\begin{prop}
+  Für alle $t \in \R$ gilt $\abs{e^{it}} = 1$.
+\end{prop}
+
+\begin{prop}
+  Es gilt für alle $t \in \R$:
+  \begin{itemize}
+    \miniitem{0.18 \linewidth}{$e^{2\pi} = 1$}
+    \miniitem{0.18 \linewidth}{$e^{\pi} = -1$}
+    \miniitem{0.28 \linewidth}{$e^{(2\pi + t)i} = e^{ti}$}
+    \miniitem{0.32 \linewidth}{$e^{it} = \cos(t) + i \sin(t)$}
+  \end{itemize}
+\end{prop}
+
+\begin{bem}
+  Jede komplexe Zahl $z \in \C$ lässt sich als $z = \abs{z} \cdot e^{is}$ mit $s \in \left[ 0, 2\pi \right[$ darstellen.
+  Mit $w = \abs{w} \cdot e^t$ gilt $z \cdot w = (\abs{z} \cdot \abs{w}) \cdot e^{i(s+t)}$.
+\end{bem}
+
+\begin{defn}
+  Für $z = \abs{z} \cdot e^{it} \in \C$ und $n \in \N$ heißen die Zahlen
+  \[ \sqrt[n]{\abs{z}} e^{i(t + k 2 \pi)/n} \]
+  für $k \in \{ 0, ..., n-1 \}$ \emph{$n$-te Wurzel} von $z$.
+\end{defn}
+
+\begin{defn}
+  Die \emph{$n$-ten Einheitswurzeln} sind die Zahlen
+  \[ \zeta_k \coloneqq e^{2 \pi ik/n} \quad \text{für $k = 0, ..., n-1$}. \]
+\end{defn}
+
+% Kapitel 1.9. Der "`Fundamentalsatz der Algebra"'
+
+\begin{satz}
+  Jedes normierte Polynom vom Grad $n \in \N$
+  \[ f(x) = x^n + a_1 x^{n-1} + ... + a_n \]
+  mit Koeffizienten $a_1, ..., a_n \in \C$ hat eine Nullstelle in $\C$.
+\end{satz}
+
+% Kapitel 1.10. Die übrigen Nullstellen
+
+\begin{nota}
+  $\K[X] \coloneqq \{ \text{Polynome mit Koeffizienten in $\K$} \}$
+\end{nota}
 
 \end{document}
