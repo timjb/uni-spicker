@@ -80,6 +80,8 @@
   \emph{Unterraumtopologie} oder von $\Tau$ \emph{induzierte Topologie}.
 \end{defn}
 
+% Vorlesung vom 9.4.2014
+
 \begin{defn}
   Ein topologischer Raum $(X, \Tau)$ heißt \emph{metrisierbar}, falls eine Metrik auf $X$ existiert, sodass die von der Metrik induzierte Topologie mit $\Tau$ übereinstimmt.
 \end{defn}
@@ -98,13 +100,17 @@
   \[ \fa{U \in \Tau_Y} f^{-1}(U) \in \Tau_X. \]
 \end{defn}
 
+\begin{bem}
+  Ist $f : X \to Y$ stetig und $A \subset X$, so ist auch $f|_A : A \to Y$ stetig.
+\end{bem}
+
 \begin{defn}
   Falls $f : X \to Y$ bijektiv ist und sowohl $f$ als auch $f^{-1}$ stetig sind, so heißt $f$ ein \emph{Homöomorphismus}.
 \end{defn}
 
-\begin{bem}
-  Ist $f : X \to Y$ stetig und $A \subset X$, so ist auch $f|_A : A \to Y$ stetig.
-\end{bem}
+\begin{defn}
+  Zwei topologische Räume $X$ und $Y$ heißen \emph{homöomorph} (notiert $X \cong Y$), wenn ein Homöomorphismus zwischen $X$ und $Y$ existiert.
+\end{defn}
 
 \begin{satz}
   Für $n \not= m$ sind $\R^n$ und $\R^m$ nicht homöomorph.
@@ -125,8 +131,19 @@
   \end{itemize}
 \end{defn}
 
+\begin{bspe}
+  \begin{itemize}
+    \item Sei $(X, d)$ ein metrischer Raum. Dann ist $\mathcal{B} \coloneqq \Set{B_\epsilon(x)}{x \in X, \epsilon > 0}$ eine Basis der induzierten Topologie auf $X$.
+    \item $\mathcal{B} \coloneqq \Set{B_\epsilon(x)}{x \in \Q^n, \epsilon \in \Q_{+}}$ ist eine abzählbare Basis von $(\R^n, \d_{\text{eukl}})$.
+  \end{itemize}
+\end{bspe}
+
+\begin{prop}
+  Jede Teilmenge $\mathcal{B} \subset \mathcal{P}(X)$ ist Subbasis von genau einer Topologie $\Tau$ von $X$.
+\end{prop}
+
 \begin{defn}
-  Jede Teilmenge $\mathcal{B} \subset \mathcal{P}(X)$ ist Subbasis von genau einer Topologie $\Tau$ von $X$, der sogenannten von $\mathcal{B}$ \emph{erzeugten Topologie}.
+  Die Topologie heißt die von $\mathcal{B}$ \emph{erzeugte Topologie}.
 \end{defn}
 
 \begin{defn}
@@ -190,12 +207,89 @@
 \end{prop}
 
 \begin{defn}
-  Der \emph{Rand} einer Menge $A \subset X$ ist
-  \[ \partial A \coloneqq \overline{A} \setminus \inte(A). \]
+  Der \emph{Rand} einer Menge $A \subset X$ ist $\partial A \coloneqq \overline{A} \setminus \inte(A)$.
 \end{defn}
 
 \begin{prop}
   Ein Punkt $x \in X$ liegt genau dann in $\partial X$, wenn jede Umgebung von $x$ sowohl einen Punkt aus $A$ wie einen Punkt aus $X \setminus A$ enthält.
+\end{prop}
+
+% Vorlesung vom 14.4.2014
+
+% Thema: Zusammenhang und Wegzusammenhang
+
+\begin{defn}
+  Ein topologischer Raum $X$ heißt \emph{wegweise zusammen- hängend}, falls es für je zwei Punkte $x, y \in X$ eine stetige Abbildung $\gamma : \left[ 0, 1 \right] \to X$ mit $\gamma(0) = x$ und $\gamma(1) = y$ gibt.
+\end{defn}
+
+\begin{bspe}
+  \begin{itemize}
+    \item $\R^n$ ist wegzusammenhängend
+    \item $(\{ p, q \}, \{ \emptyset, \{ p \}, \{ p, q \} \})$ ist wegzusammenhängend!
+    \item $\left] -\infty, 0 \right[ \cup \left] 0, \infty \right[ \subset \R$ ist nicht wegzusammenhängend.
+  \end{itemize}
+\end{bspe}
+
+\begin{defn}
+  Die Äquivalenzklassen von
+  \[ x \sim y \coloniff x, y \text{ lassen sich durch einen Weg verbinden}. \]
+  heißen \emph{Wegzusammenhangskomponenten}.
+\end{defn}
+
+\begin{prop}
+  Sei $f : X \to Y$ stetig und $X$ wegzusammenhängend. Dann ist auch $f(X)$ bzgl. der Unterraumtopologie wegzusammenhängend.
+\end{prop}
+
+\begin{defn}
+  Ein topologischer Raum $X$ heißt \emph{zusammenhängend}, falls $X$ nicht disjunkte Vereinigung zweier nichtleerer offener Teilmengen ist.
+\end{defn}
+
+\begin{bspe}
+  $\Q \subset \R$ und $\R \setminus \{ 0 \}$ sind nicht zusammenhängend.
+\end{bspe}
+
+\begin{prop}
+  Sei $X$ ein topologischer Raum. Es sind äquivalent:
+  \begin{itemize}
+    \item $X$ ist zusammenhängend.
+    \item Für jede offene und abgeschlossene Menge $A \subset X$ gilt: $A \in \{ X, \emptyset \}$.
+    \item Jede stetige Abbildung $f : X \to \{ 0, 1 \}$ in den diskreten Raum mit zwei Elementen ist konstant.
+  \end{itemize}
+\end{prop}
+
+\begin{prop}
+  \begin{itemize}
+    \item Sei $f : X \to Y$ stetig und $X$ zusammenhängend, dann ist auch $f(X)$ zusammenhängend.
+    \item Sind $A, B$ zusammenhängende Teilmengen eines topologischen Raumes $X$ und gilt $A \cap B \not= \emptyset$, dann ist auch $A \cup B$ zusammenhängend.
+  \end{itemize}
+\end{prop}
+
+\begin{kor}
+  Folgende Relation ist eine Äquivalenzrelation auf $X$:
+  \begin{align*}
+    x \sim y \coloniff \, &\text{$x$ und $y$ liegen beide in einem zusammenhängenden}\\[-2pt]
+    &\text{Unterraum von $X$.}
+  \end{align*}
+\end{kor}
+
+\begin{defn}
+  Die Äquivalenzklassen dieser Relation heißen \emph{Komponenten}. % von $X$
+\end{defn}
+
+\begin{bsp}
+  Die Komponenten von $\Q \subset \R$ sind genau die Ein-Punkt-Mengen. Trotzdem ist $\Q$ nicht diskret!
+\end{bsp}
+
+\begin{prop}
+  Die Menge $\left[ 0, 1 \right]$ ist zusammenhängend.
+\end{prop}
+
+\begin{kor}
+  Wegzusammenhängende Räume sind zusammenhängend.
+\end{kor}
+
+\begin{prop}[ZWS]
+  Sei $f : \left[ 0, 1 \right] \to \R$ stetig. Gilt $f(0) < 0$ und $f(1) > 0$, so existiert ein $t \in \left] 0, 1 \right[$ mit $f(t) = 0$.
 \end{prop}
 
 \end{document}
