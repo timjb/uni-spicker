@@ -18,6 +18,7 @@
 
 % Kapitel 1.1. Beispiele
 
+\iffalse
 \begin{bsp}
   Gesucht: Funktion $y : \R \to \R$ mit $\fa{t \in \R} \dot{y}(t) = y(t)$\\
 \end{bsp}
@@ -71,10 +72,7 @@
 % $F_T$ -- tangentiale Komponente der Gewichtskraft
 % $F_T = - mg \sin(\phi)$
 % => Gleichung $-mg \sin(\phi) = m a(t) = m l \ddot{t}$, also $\ddot{\phi}(t) = -\tfrac{g}{l} \sin(\phi(t))$
-
-\begin{bsp}
-  
-\end{bsp}
+\fi
 
 % Vorlesung vom 9.4.2014
 
@@ -87,6 +85,24 @@
 
 % Kapitel 1.2. Klassifikation von Differentialgleichungen (DGLn)
 
+\begin{defn}[Klassifikation von DGLn]\mbox{}\\
+  \begin{enumerate}[label=(\Roman*),leftmargin=2em]
+    \item \emph{Gewöhnliche} DGL: Gesucht ist Funktion in einer Variable\\
+    \emph{Partielle} DGL: Gesucht ist Funktion in mehreren Variablen
+    \item \emph{Ordnung} einer DGL: Höchste Ableitung der gesuchten Funktion, die in Gleichung vorkommt
+    \item \emph{Explizite DGL}: Gleichung der Form
+    $y^{(k)} {=} f(t, y, \dot{y}, ..., y^{(k{-}1)})$
+    \emph{Implizite DGL}: Allgemeinere Form $F(t, y, \dot{y}, ..., y^{(k)}) = 0$
+    \item \emph{Skalare} DGL: Gesucht ist Funktion mit Wert in $\R$\\
+    \emph{$n$-dimensionale} DGL: Gesuchte Funktion hat Wert in $\R^n$
+    \item \emph{Lineare} DGL: Gleichung hat die Form
+    \[ a_k(t) y^{(k)}(t) + a_{(k-1)}(t) y^{k-1}(t) + ... + a_1(t) \dot{y}(t) + a_0(t)y(t) = 0 \]
+    \item \emph{Autonome} DGL: Gleichung der Form $F(y, \dot{y}, ..., y^{(k)}) = 0$\\
+    (keine Abhängigkeit von $t$, Zeitinvarianz)
+  \end{enumerate}
+\end{defn}
+
+\iffalse
 % I)
 
 Unterscheidung zwischen gewöhnliche DGL und partielle DGLn
@@ -123,7 +139,7 @@ $y^{(k)}(t) = f(t, y, \dot{y}, ..., y^{(k-1)})$
 
 Beispiele für implizite DGLn:
 $(\dot{y}(t))^2 + (y(t))^2 = a$
-$F(t, y, \dot{y}, ..., y^{(k)}(t))$
+$F(t, y, \dot{y}, ..., y^{(k)}(t)) = 0$
 
 Oder (Gleichungen gehören zusammen)
 $\dot{y}_2(t) + y_1(t) = f_1(t)$
@@ -181,6 +197,7 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
   heißt \emph{Anfangswertproblem} (AWP).
   % Ausgelassen: Obiges Gleichungssystem hat die Nummer (1.1)
 \end{defn}
+\fi
 
 \begin{nota}
   Sei im Folgenden $I$ stets ein Intervall in $\R$.
