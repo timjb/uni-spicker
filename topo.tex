@@ -62,6 +62,10 @@
   Die Elemente von $\Tau$ werden \emph{offene Teilmengen} von $X$ genannt. Eine Teilmenge $A \subset X$ heißt \emph{abgeschlossen}, falls $X \setminus A$ offen ist.
 \end{defn}
 
+\begin{nota}
+  Seien im Folgenden $X$ und $Y$ topologische Räume.
+\end{nota}
+
 \begin{bsp}
   Die \emph{diskrete Topologie} auf einer Menge $X$ ist $\Tau = \mathcal{P}(X)$.
 \end{bsp}
@@ -133,8 +137,8 @@
 
 \begin{bspe}
   \begin{itemize}
-    \item Sei $(X, d)$ ein metrischer Raum. Dann ist $\mathcal{B} \coloneqq \Set{B_\epsilon(x)}{x \in X, \epsilon > 0}$ eine Basis der induzierten Topologie auf $X$.
-    \item $\mathcal{B} \coloneqq \Set{B_\epsilon(x)}{x \in \Q^n, \epsilon \in \Q_{+}}$ ist eine abzählbare Basis von $(\R^n, \d_{\text{eukl}})$.
+    \item Sei $(X, d)$ ein metrischer Raum. Dann ist $\mathcal{B} \coloneqq \Set{B_\epsilon(x)}{x \in X, \epsilon > 0}$ eine Basis der induz. Topologie auf $X$.
+    \item $\mathcal{B} \coloneqq \Set{B_\epsilon(x)}{x \in \Q^n, \epsilon \in \Q_{+}}$ ist eine abz. Basis von $(\R^n, \d_{\text{eukl}})$.
   \end{itemize}
 \end{bspe}
 
@@ -290,6 +294,102 @@
 
 \begin{prop}[ZWS]
   Sei $f : \left[ 0, 1 \right] \to \R$ stetig. Gilt $f(0) < 0$ und $f(1) > 0$, so existiert ein $t \in \left] 0, 1 \right[$ mit $f(t) = 0$.
+\end{prop}
+
+% Vorlesung vom 16.4.2014
+
+\begin{defn}
+  Sei $(x_n)_{n \in \N}$ eine Folge in $X$. Die Folge $(x_n)$ \emph{konvergiert gegen} $x \in X$, falls für jede Umgebung $U \subset X$ von $x$ ein $N \in \N$ existiert mit $\fa{n \geq N} x_n \in U$.
+\end{defn}
+
+\begin{nota}
+  $x = \lim_{n \to \infty} x_n$
+\end{nota}
+
+\begin{acht}
+  Das "`="' ist nicht wörtlich zu verstehen!
+\end{acht}
+
+\begin{defn}
+  Sei $f : X {\to} Y$ eine Abb. zw. topol. Räumen $X, Y$. Dann heißt $f$
+  \begin{itemize}
+    \item \emph{stetig in} $x \in X$, falls für jede Umgebung $V \subset Y$ von $f(x)$ das Urbild $f^{-1}(V) \subset X$ eine Umgebung von $x$ ist.
+    \item \emph{folgenstetig in} $x \in X$, falls für jede Folge $(x_n)_{n \in \N}$ in $X$ mit $\lim_{n\to\infty} x_n = x$ die Bildfolge $(f(x_n))$ in $Y$ gegen $f(x)$ konvergiert.
+  \end{itemize}
+\end{defn}
+
+\begin{prop}
+  Ist $f$ stetig in $x$, so ist $f$ auch folgenstetig in $x$.
+\end{prop}
+
+\begin{defn}
+  Eine \emph{Umgebungsbasis} von $x \in X$ ist eine Menge $\mathcal{B} \subset \mathcal{P}(X)$ bestehend aus Umgebungen von $x$, sodass jede Umgebung von $x$ eine der Umgebungen in $\mathcal{B}$ enthält.
+\end{defn}
+
+\begin{defn}
+  Der Raum $X$ erfüllt das \emph{erste Abzählbarkeitsaxiom}, falls jeder Punkt $x \in X$ eine abzählbare Umgebungsbasis besitzt.
+\end{defn}
+
+\begin{bem}
+  Jeder metrische Raum $X$ erfüllt das erste Abzählbarkeitsaxiom, da für jeden Punkt $x \in X$ die Menge $\mathcal{B}_x \coloneqq \Set{B_{1/n}(x)}{n\in\N}$ eine abzählbare Umgebungsbasis ist.
+\end{bem}
+
+\begin{prop}
+  Sei $x \in X$ ein Punkt mit abzählbarer Umgebungsbasis. Dann ist jede in $x$ folgenstetige Abbildung $f : X \to Y$ auch stetig in $x$.
+\end{prop}
+
+\begin{defn}
+  Eine \emph{gerichtete Menge} ist eine Menge $D$ mit einer partiellen Ordnung $(\le) \subset D \times D$, sodass es für $\alpha, \beta \in D$ immer ein $\gamma \in D$ mit $\gamma \geq \alpha$ und $\gamma \geq \beta$ gibt.
+\end{defn}
+
+\begin{defn}
+  Ein \emph{Netz} in $X$ ist eine Abbildung $\phi : D \to X$, wobei $D$ eine gerichtete Menge ist.
+\end{defn}
+
+\iffalse
+\begin{bspe}
+  \begin{itemize}
+    \item $D = (\N, \leq)$
+    \item $X$ beliebige Menge, $D = (\mathcal{P}(X), \subseteq)$ oder $D = (\mathcal{P}(X), \supseteq)$
+    \item Sei $(X, \tau)$ ein top. Raum, $x \in X$, $D \coloneqq (\Set{U \subset X}{\text{$U$ Umgebung von $x$}}, \leq)$ mit $U \leq V \coloneqq V \subset U$.
+  \end{itemize}
+\end{bspe}
+\fi
+
+\begin{defn}
+  Sei $x \in X$ und $(x_\alpha)_{\alpha \in D}$ ein Netz in $X$. Das Netz $(x_\alpha)$ \emph{konvergiert} gegen $x$, falls es für jede Umgebung $U \subset X$ von $x$ ein $\beta \in D$ gibt mit $x_\alpha \in U$ für alle $\alpha \geq \beta$.
+\end{defn}
+
+\begin{nota}
+  $\lim_{\alpha \in D} x_\alpha = x$
+\end{nota}
+
+\begin{defn}
+  Eine Abb. $f : X \to Y$ heißt \emph{netzstetig} in $x \in X$, falls für jedes Netz $(x_\alpha)_{\alpha \in D}$ in $X$ mit $\lim_{\alpha \in D} x_\alpha = x$ das Bildnetz $(f(x_\alpha))_{\alpha \in D}$ gegen $f(x)$ konvergiert.
+\end{defn}
+
+\begin{prop}
+  Eine Abbildung $f : X \to Y$ ist genau dann stetig in $x \in X$, wenn sie netzstetig in $x$ ist.
+\end{prop}
+
+\begin{prop}
+  Ist $A \subset X$ eine Teilmenge eines topologischen Raumes, so besteht $\overline{A}$ genau aus den Limiten von Netzen in $A$, die in $X$ konvergieren.
+\end{prop}
+
+\begin{defn}
+  Ein \emph{Häufungspunkt} eines Netzes $(x_\alpha)_{\alpha \in D}$ in $X$ ist ein Punkt $x \in X$, sodass für jede Umgebung $U \subset X$ von $x$ das Netz \emph{häufig} in $U$ ist, d.\,h. für alle $\alpha \in D$ existiert ein $\beta \geq \alpha$ mit $x_\beta \in U$.
+\end{defn}
+
+\begin{defn}
+  Sind $D$ und $E$ gerichtete Mengen, so nennen wir eine Abbildung $h : E \to D$ \emph{final}, falls für alle $\delta \in D$ ein $\eta \in E$ existiert mit $h(\gamma) \geq \delta$ für alle $\delta \geq \eta$.
+\end{defn}
+
+\begin{defn}
+  Ein \emph{Unternetz} eines Netzes $\phi : D \to X$ ist eine Komposition $\phi \circ h : E \to X$ wobei $h : E \to D$ eine finale Funktion ist. Wir schreiben auch $(x_{h(\gamma)})_{\gamma \in E}$
+\end{defn}
+
+\begin{prop}
+  Sei $(x_\alpha)_{\alpha \in D}$ ein Netz in $X$. Ein Punkt $x \in X$ ist genau dann Häufungspunkt von $(x_\alpha)$, falls ein Unternetz von $(x_\alpha)$ gegen $x$ konvergiert.
 \end{prop}
 
 \end{document}
