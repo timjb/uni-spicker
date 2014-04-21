@@ -90,9 +90,9 @@
     \item \emph{Gewöhnliche} DGL: Gesucht ist Funktion in einer Variable\\
     \emph{Partielle} DGL: Gesucht ist Funktion in mehreren Variablen
     \item \emph{Ordnung} einer DGL: Höchste Ableitung der gesuchten Funktion, die in Gleichung vorkommt
-    \item \emph{Explizite DGL}: Gleichung der Form
+    \item \emph{Explizite} DGL: Gleichung der Form
     $y^{(k)} {=} f(t, y, \dot{y}, ..., y^{(k{-}1)})$
-    \emph{Implizite DGL}: Allgemeinere Form $F(t, y, \dot{y}, ..., y^{(k)}) = 0$
+    \emph{Implizite} DGL: Allgemeinere Form $F(t, y, \dot{y}, ..., y^{(k)}) = 0$
     \item \emph{Skalare} DGL: Gesucht ist Funktion mit Wert in $\R$\\
     \emph{$n$-dimensionale} DGL: Gesuchte Funktion hat Wert in $\R^n$
     \item \emph{Lineare} DGL: Gleichung hat die Form
@@ -187,17 +187,15 @@ Beispiele für nicht autonome DGLn:
 \end{itemize}
 
 Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
+\fi
 
 \begin{defn}
-  Es sei $\D \subset \R \times \R^n$ offen, $f : \D \to \R^n$ und $(t_0, y_0) \in \D$. Das System von Gleichungen
-  \begin{align*}
-    \dot{y}(t) &= f(t, y(t))\\
-    y(t_0) &= y_0
-  \end{align*}
-  heißt \emph{Anfangswertproblem} (AWP).
-  % Ausgelassen: Obiges Gleichungssystem hat die Nummer (1.1)
+  Sei $\D \subset \R \times \R^n$ offen, $f : \D \to \R^n$ und $(t_0, y_0) \in \D$. Dann ist ein \emph{Anfangswertproblem} (AWP) gegeben durch die Gleichungen
+  \begin{align}
+    \dot{y}(t) = f(t, y(t)), \qquad
+    y(t_0) = y_0. \tag{1.1}
+  \end{align}
 \end{defn}
-\fi
 
 \begin{nota}
   Sei im Folgenden $I$ stets ein Intervall in $\R$.
@@ -205,30 +203,33 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
 
 \begin{defn}
   \begin{itemize}
-    \item Es sei $\D \subset \R \times \R^n$, $f : \D \to \R^n$. Eine differenzierbare Funktion $y : I \to \R^n$ heißt \emph{Lösung} von $\dot{y} = f(t, y)$, falls für alle $t \in I$ gilt: $\dot{y}(t) = f(t, y(t))$.
-    \item Es sei $\D \subset \R \times \underbrace{\R^n \times ... \R^n}_{k \text{ mal}}$, $f : \D \to \R^n$. Eine $k$-mal differenzierbare Funktion $y : I \to \R^n$ heißt \emph{Lösung} von $y^{(k)} = f(t, y, \dot{y}, ..., y^{(k-1)})$, falls für alle $t \in I$ gilt:
-    \[ y^{(k)} = f(t, y(t), \dot{y}(t), ..., y^{(k-1)}(t)) \]
+    \item Sei $\D \subset \R \times \R^n$, $f : \D \to \R^n$. Eine differenzierbare Funktion $y : I \to \R^n$ heißt \emph{Lösung} von $\dot{y} = f(t, y)$, falls für alle $t \in I$ gilt: $\dot{y}(t) = f(t, y(t))$.
+    \item Sei $\D \subset \R \times (\R^n)^k = \R \times \R^n \times ... \times \R^n$, $f : \D \to \R^n$. Eine $k$-mal differenzierbare Funktion $y : I \to \R^n$ heißt \emph{Lösung} von
+    \[ y^{(k)} = f(t, y, \dot{y}, ..., y^{(k-1)}), \tag{1.2} \]
+    falls für alle $t \in I$ gilt:
+    $y^{(k)}(t) = f(t, y(t), \dot{y}(t), ..., y^{(k-1)}(t))$
   \end{itemize}
 \end{defn}
 
 % 1.1.
 \begin{satz}
   \begin{itemize}
-    \item Ist $y : I \to \R^n$ eine Lösung von $y^{(k)} = f(t, y, \dot{y}, ..., y^{(k-1)})$ (1.2), dann ist
-    \begin{align*}
-      (y_1, ..., y_k) : I &\to \R^{kn}\\
-      t &\mapsto (y_1(t), ..., y_k(t)) = (y(t), \dot{y}(t), ..., y^{(k-1)}(t))
-    \end{align*}
-    eine Lösung von System (1.3)
-    \begin{align*}
+    \item Ist $y : I \to \R^n$ eine Lösung von (1.2), dann ist
+    \[
+      (y_1, ..., y_k) : I \to \R^{kn},\qquad
+      t \mapsto (y(t), \dot{y}(t), ..., y^{(k-1)}(t))
+    \]
+    eine Lösung des Systems von Gleichungen
+    \[
+      (1.3) \left\{ \begin{array}{ll}
       \dot{y}_1 = y_2\\
       \dot{y}_2 = y_3\\
-      \dot{y}_3 = y_4\\
-      \vdots\\
+      \quad\enspace\vdots\\
       \dot{y}_{k-1} = y_k\\
       \dot{y}_k = f(t, y_1, y_2, ..., y_{k-1}, y_k)
-    \end{align*}
-    \item Ist $(y_1, ..., y_k) : I \to \R^n$ eine Lösung von (1.3), dann ist $y = y_1 : I \to \R^n$ eine Lösung von (1.2).
+      \end{array} \right.
+    \]
+    \item Ist umgekehrt $(y_1, ..., y_k) : I \to \R^n$ eine Lösung von (1.3), dann ist $y = y_1 : I \to \R^n$ eine Lösung von (1.2).
   \end{itemize}
 \end{satz}
 
@@ -236,14 +237,16 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
 \begin{satz}
   \begin{itemize}
     \item Ist $y : I \to \R^n$ eine Lösung von AWP (1.1), dann ist
+    \[
+      (y_1, y_2) : I \to \R^{n+1},\qquad
+      t \mapsto (y_1(t), y_2(t)) = (t, y(t))
+    \]
+    eine Lösung des Anfangswertproblems
     \begin{align*}
-      (y_1, y_2) : I &\to \R^{n+1}\\
-      t &\mapsto (y_1(t), y_2(t)) = (t, y(t))
-    \end{align*}
-    eine Lösung des AWP (1.4)
-    \begin{align*}
-      \dot{y}_1(t) = 1, & y_1(t_0) = t_0
-      \dot{y}_2(t) = f(y_1(t), y_2(t)), & y_2(t_0) = y_0
+      (1.4) \left\{ \begin{array}{ll}
+        \dot{y}_1(t) = 1, & y_1(t_0) = t_0\\
+        \dot{y}_2(t) = f(y_1(t), y_2(t)), & y_2(t_0) = y_0
+      \end{array} \right.
     \end{align*}
     \item Ist $(y_1, y_2) : I \to \R^{n+1}$ eine Lösung von (1.4), dann ist $y = y_2 : I \to \R^n$ eine Lösung von (1.1).
   \end{itemize}
