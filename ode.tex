@@ -198,7 +198,7 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
 \end{defn}
 
 \begin{nota}
-  Sei im Folgenden $I$ stets ein Intervall in $\R$.
+  Seien im Folgenden $I$ und $J$ stets Intervalle in $\R$.
 \end{nota}
 
 \begin{defn}
@@ -251,5 +251,114 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
     \item Ist $(y_1, y_2) : I \to \R^{n+1}$ eine Lösung von (1.4), dann ist $y = y_2 : I \to \R^n$ eine Lösung von (1.1).
   \end{itemize}
 \end{satz}
+
+% Vorlesung vom 14.4.2014
+
+% Kapitel 1.3. Einige elementare Lösungstechniken
+
+\begin{prob}
+  Gesucht ist eine Lösung $y : I \to \R$ der linearen, skalaren, expliziten DGL 1. Ordnung (mit $a, b : I \to \R$ stetig)
+  \begin{align*}
+    \dot{y}(t) = a(t) \cdot y(t) + b(t) \tag{1.5}
+  \end{align*}
+\end{prob}
+
+% 1.3
+\begin{satz}
+  Die allgemeine Lösung der Gleichung $\dot{y}(t) = a(t) \cdot y(t)$ ist gegeben durch $y_h(t) = c \cdot \exp\left(\Int{t_0}{t}{a(s)}{s}\right)$ mit $c \in \R$.
+\end{satz}
+
+% 1.4
+\begin{satz}
+  Sei $y_p : I \to \R$ eine partikuläre Lösung von (1.5). Dann ist die Menge aller Lösungen von (1.5) gegeben durch
+  \[ \Set{ y_p + y_h }{ \text{$y_h : I \to \R$ ist Lösung von $\dot{y_h}(t) = a(t) \cdot y_h(t)$} } \]
+\end{satz}
+
+\begin{bem}
+  Der Ansatz mit \emph{Variation der Konstanten} $y_p(t) = c(t) \cdot y_h(t)$ für (1.5) führt zu
+  \begin{align*}
+    c(t) &= \frac{1}{c_0} \Int{t_0}{t}{b(\tau) \cdot \exp\left( - \Int{t_0}{\tau}{a(s)}{s} \right)}{\tau}\\
+    \Rightarrow y_p(t) &= \left( \Int{t_0}{t}{b(\tau) \cdot \exp\left( - \Int{t_0}{\tau}{a(s)}{s} \right)}{\tau} \right) \cdot \exp\left( \Int{t_0}{\tau}{a(s)}{s} \right)
+  \end{align*}
+\end{bem}
+
+\begin{kor}
+  Die Lösung des Anfangswertproblems
+  \[
+    (1.6) \left\{ \begin{array}{l}
+      \dot{y}(t) = a(t) \cdot y(t) + b(t)\\
+      y(t_0) = y_0
+    \end{array} \right.
+  \]
+  mit $a, b : I \to \R$ stetig, $t_0 \in I$ und $y_0 \in \R$ ist gegeben durch
+  \[ y(t) = \left( y_0 + \Int{t_0}{t}{b(\tau) \cdot \exp\left( - \Int{t_0}{\tau}{a(s)}{s} \right)}{\tau} \right) \cdot \exp\left( \Int{t_0}{\tau}{a(s)}{s} \right) \]
+\end{kor}
+
+\begin{prob}
+  Ges. ist Lösung der DGL mit \emph{getrennten Variablen}
+  \begin{align}
+    \dot{y}(t) = g(t) \cdot h(y) \tag{1.7}
+  \end{align}
+  mit $g : I \to \R$ und $h : J \to \R$ stetig.
+\end{prob}
+
+\begin{lsg}
+  \begin{enumerate}
+    \item Fall: $h(y_0) = 0$ für ein $y_0 \in J$. Dann ist $y(t) = y_0$ eine Lsg.
+    \item Fall: Es gibt kein $y_0 \in J$ mit $h(y_0) = 0$. Sei $H$ eine Stamm- funktion von $\tfrac{1}{h}$ und $G$ eine Stammfunktion von $g$. Da $h$ stetig und nirgends null ist, ist $h$ entweder strikt positiv oder strikt negativ. Somit ist $H$ streng monoton steigend/fallend und somit umkehrbar. Eine Lösung von (1.7) ist nun gegeben durch
+    \[ y(t) = H^{-1}(G(t) + c_0) \quad \text{mit $c_0 \in \R$.} \]
+  \end{enumerate}
+\end{lsg}
+
+\begin{prob}
+  Gesucht ist Lösung des AWP mit getrennten Variablen
+  \[
+    (1.8) \left\{ \begin{array}{l}
+      \dot{y}(t) = g(t) \cdot h(y(t))\\
+      y(t_0) = y_0
+    \end{array} \right.
+  \]
+\end{prob}
+
+\begin{lsg}
+  \begin{enumerate}
+    \item Fall: $h(y_0) = 0$. Dann ist $y(t) = y_0$ eine Lösung.
+    \item Fall: $h(y_0) \not= 0$. Dann ist $h$ in einer Umgebung von $y_0$ strikt positiv/negativ. Setze
+    \[
+      H_1(y) \coloneqq \Int{y(t_0)}{y}{\tfrac{1}{h(s)}}{s}, \quad
+      G_1(t) \coloneqq \Int{t_0}{t}{g(s)}{s}.
+    \]
+    Dann ist $H_1$ in einer Umgebung von $y_0$ invertierbar und eine Lösung von (1.8) ist gegeben durch
+    \[ y(t) = H_1^{-1}(G_1(t)). \]
+  \end{enumerate}
+\end{lsg}
+
+% Vorlesung vom 16.4.2014
+
+\begin{technik}[Transformation]
+  Manchmal lässt sich eine DGL durch \emph{Substitution} eines Termes in eine einfachere DGL überführen, deren Lösung mit bekannten Methoden gefunden werden kann. Die Lösung der ursprünglichen DGL ergibt sich durch Rücksubstitution.
+\end{technik}
+
+\begin{bsp}
+  Gegeben sei die DGL $\dot{y} = f(\alpha t + \beta y + \gamma)$ mit $\alpha, \beta, \gamma \in \R$, $\beta \not= 0$ und $f : \R \to \R$ stetig. Substituiere $z(t) = \alpha t + \beta y(t) + \gamma$. Es ergibt sich die neue DGL $\dot{z}(t) = \beta f(z(t)) + \alpha$, die sich durch Trennung der Variablen lösen lässt.
+\end{bsp}
+
+\begin{bsp}[Bernoulli-DGL]
+  Gegeben sei die DGL $\dot{y}(t) = \alpha(t) \cdot y(t) + \beta(t) \cdot (y(t))^{\delta}$ mit $\alpha, \beta : I \to \R$ stetig und $\delta \in \R \setminus \{0,1\}$. Multiplikation mit $(1-\delta) y^{-\delta}$ und Substitution mit $z(t) = (y(t))^{1-\delta}$ führt zur skalaren linearen DGL 1. Ordnung
+  \[ \dot{z}(t) = (1-\delta) \alpha(t) z(t) + (1-\delta) \beta(t). \]
+\end{bsp}
+
+% Kapitel 1.4. Richtungsfelder
+
+% Ausgelassen
+
+% Kapitel 2. Existenz- und Eindeutigkeitssätze
+
+% Ausgelassen: Betragsfunktionsbeispiel
+
+\begin{defn}
+  Sei $D \subset \R^n$. Eine Abb. $f : D {\to} \R^n$ heißt \emph{stetig} in $x_0 \in D$, falls
+  \[ \fa{\epsilon {>} 0} \ex{\delta {>} 0} \fa{x \in D} \norm{x - x_0} < \delta \implies \norm{f(x) - f(x_0)} < \epsilon. \]
+\end{defn}
 
 \end{document}
