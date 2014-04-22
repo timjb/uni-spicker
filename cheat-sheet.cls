@@ -66,6 +66,7 @@
 \newtheorem*{antwort}{Antwort}
 \newtheorem*{anmerkung}{Anmerkung}
 \newtheorem*{nomenklatur}{Nomenklatur}
+\newtheorem*{technik}{Technik}
 
 \theoremstyle{remark}
 \newtheorem*{bem}{Bemerkung}
