@@ -278,7 +278,7 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
   Der Ansatz mit \emph{Variation der Konstanten} $y_p(t) = c(t) \cdot y_h(t)$ für (1.5) führt zu
   \begin{align*}
     c(t) &= \frac{1}{c_0} \Int{t_0}{t}{b(\tau) \cdot \exp\left( - \Int{t_0}{\tau}{a(s)}{s} \right)}{\tau}\\
-    \Rightarrow y_p(t) &= \left( \Int{t_0}{t}{b(\tau) \cdot \exp\left( - \Int{t_0}{\tau}{a(s)}{s} \right)}{\tau} \right) \cdot \exp\left( \Int{t_0}{\tau}{a(s)}{s} \right)
+    \Rightarrow y_p(t) &= \left( \Int{t_0}{t}{b(\tau) \cdot \exp\left( - \Int{t_0}{\tau}{a(s)}{s} \right)}{\tau} \right) \cdot \exp\left( \Int{t_0}{t}{a(s)}{s} \right)
   \end{align*}
 \end{bem}
 
@@ -291,7 +291,7 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
     \end{array} \right.
   \]
   mit $a, b : I \to \R$ stetig, $t_0 \in I$ und $y_0 \in \R$ ist gegeben durch
-  \[ y(t) = \left( y_0 + \Int{t_0}{t}{b(\tau) \cdot \exp\left( - \Int{t_0}{\tau}{a(s)}{s} \right)}{\tau} \right) \cdot \exp\left( \Int{t_0}{\tau}{a(s)}{s} \right) \]
+  \[ y(t) = \left( y_0 + \Int{t_0}{t}{b(\tau) \cdot \exp\left( - \Int{t_0}{\tau}{a(s)}{s} \right)}{\tau} \right) \cdot \exp\left( \Int{t_0}{t}{a(s)}{s} \right) \]
 \end{kor}
 
 \begin{prob}
