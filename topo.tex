@@ -388,8 +388,63 @@
   Ein \emph{Unternetz} eines Netzes $\phi : D \to X$ ist eine Komposition $\phi \circ h : E \to X$ wobei $h : E \to D$ eine finale Funktion ist. Wir schreiben auch $(x_{h(\gamma)})_{\gamma \in E}$
 \end{defn}
 
+% Vorlesung vom 23.4.2014
+
 \begin{prop}
   Sei $(x_\alpha)_{\alpha \in D}$ ein Netz in $X$. Ein Punkt $x \in X$ ist genau dann Häufungspunkt von $(x_\alpha)$, falls ein Unternetz von $(x_\alpha)$ gegen $x$ konvergiert.
+\end{prop}
+
+\begin{defn}
+  Eine Folge $(x_n)_{n \in \N}$ in einem metrischen Raum $(X, d)$ heißt \emph{Cauchy-Folge}, falls es für jedes $\epsilon > 0$ ein $N \in \N$ gibt mit $d(x_n, x_m) < \epsilon$ für alle $n, m \geq N$.
+\end{defn}
+
+\begin{defn}
+  Der metrische Raum $(X, d)$ heißt \emph{vollständig}, wenn jede Cauchy-Folge in $X$ konvergiert.
+\end{defn}
+
+% Beispiele:
+% * Wenn $(X_1, d_1)$ und $(X_2, d_2)$ vollständig, dann auch $(X_1 \times X_2, d)$ mit $d((x_1, x_2), (y_1, y_2)) \coloneqq \sqrt{d_1(x_1, y_1)^2 + d_2(x_2, y_2)^2}$
+% * $\R^n$ ist vollständig
+% * Ist $X$ vollständig und $A \subset X$ abgeschlossen, dann ist auch $A$ mit der induzierten Metrik vollständig
+% * Ist allgemeiner $A \subset X$ ein beliebiger Unterraum, dann ist $\overline{A} \subset X$ der kleinste vollständige Unterraum, der $A$ enthält
+
+\begin{acht}
+  Vollständigkeit ist keine Homöomorphieinvariante!
+  % Gegenbeispiel: $\left] 0, 1 \right[ \cong \R$, aber $\R$ ist vollständig, $\left] 0, 1 \right[$ ist es nicht
+\end{acht}
+
+\begin{defn}
+  Sei $X$ eine Menge. Dann ist die Menge
+  \[ \mathcal{B}(X) \coloneqq \Set{ f : X \to \R }{ \sup_{x \in X} \abs{f(x)} < \infty } \]
+  der \emph{beschränkten Fktn.} $X \to \R$ ein metrischer Raum mit
+  \[ d(f, g) \coloneqq \sup_{x \in X} \abs{f(x) - g(x)}. \]
+\end{defn}
+
+\begin{prop}
+  Dieser Raum $(\mathcal{B}(X), d)$ ist vollständig.
+\end{prop}
+
+\begin{defn}
+  Sie $(X, d)$ und $(X', d')$ metrische Räume, so heißt $f : X \to X'$
+  \begin{itemize}
+    \item eine \emph{isometrische Einbettung}, falls für alle $x , y \in X$ gilt:
+    \[ d'(f(x), f(y)) = d(x, y) \]
+    \item eine \emph{Isometrie}, falls $f$ zusätzlich bijektiv ist. In diesem Fall ist auch $f^{-1}$ eine Isometrie und $f$ ein Homöomorphismus.
+  \end{itemize}
+\end{defn}
+
+\begin{prop}
+  Sei $X$ ein metrischer Raum. Dann gibt es eine isome- trische Einbettung von $X$ in einen vollständigen metrischen Raum.
+\end{prop}
+
+\begin{satz}
+  Ist $X$ ein metrischer Raum, so existiert eine Vervollständigung $X \hookrightarrow Y$.
+\end{satz}
+
+\begin{prop}
+  Es sei $X$ ein metrischer Raum und es seien
+  \[ f_1 : X \to Y_1, \quad f_2 : X \to Y_2 \]
+  Vervollständigungen von $X$. Dann existiert genau eine Isometrie $\phi_{21} : Y_1 \to Y_2$ mit $\phi_{21}|_{f_1(X)} = f_2 \circ f_1^{-1}$.
 \end{prop}
 
 \end{document}
