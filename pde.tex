@@ -1,0 +1,278 @@
+\documentclass{cheat-sheet}
+
+\pdfinfo{
+  /Title (Zusammenfassung Topologie)
+  /Author (Tim Baumann)
+}
+
+\newcommand{\Tau}{\mathcal{T}} % Großes Tau
+\newcommand{\inte}{\mathop{\mathrm{int}}} % Inneres (interior)
+\newcommand{\grad}{\mathrm{grad}} % Gradient
+\newcommand{\dive}{\mathrm{div}} % Divergenz
+\newcommand{\divergence}{\mathrm{div}} % Divergenz
+
+% Abschnittsnummerierung einschalten (entgegen cheat-sheet.cls)
+\makeatletter
+  % Abstand von Nummerierung und Titel verringern
+  \renewcommand*{\@seccntformat}[1]{\csname the#1\endcsname\hspace{0.2cm}}
+\makeatother
+\renewcommand{\thesection}{\arabic{section}.} % Punkt nach Nummer
+\setcounter{secnumdepth}{1}
+
+% Kleinere Klammern
+\delimiterfactor=701
+
+% Integral mit Strich durch, siehe
+% http://www.tex.ac.uk/cgi-bin/texfaq2html?label=prinvalint
+\def\Xint#1{\mathchoice
+   {\XXint\displaystyle\textstyle{#1}}%
+   {\XXint\textstyle\scriptstyle{#1}}%
+   {\XXint\scriptstyle\scriptscriptstyle{#1}}%
+   {\XXint\scriptscriptstyle\scriptscriptstyle{#1}}%
+   \!\int}
+\def\XXint#1#2#3{{\setbox0=\hbox{$#1{#2#3}{\int}$}
+     \vcenter{\hbox{$#2#3$}}\kern-.5\wd0}}
+%\def\ddashint{\Xint=}
+\def\dashint{\Xint-}
+
+% Mittelwerts-Integrale (mean value integrals)
+\newcommand{\mymvint}[2]{{\textstyle \dashint\limits_{#1}^{#2}}}
+\newcommand{\MVInt}[4]{\mymvint{#1}{#2} #3 \,\d #4}
+
+\begin{document}
+
+\maketitle{Zusammenfassung Partielle DGLn}
+
+% Vorlesung vom 8.4.2014
+
+% Kapitel 1.
+\section{Einleitung}
+
+% Kapitel 1.1. Partielle Differentialgleichungen und klassische Lösungen
+
+% Ausgelassen: Definition ODE
+
+\begin{defn}
+  Eine \emph{partielle Differentialgleichung} (PDGL) hat die Form
+  \begin{align*}
+    E(x, u(x), Du(x), ..., D^k u(x)) = 0 \quad \text{in $\Omega \subset \R^n$ offen}, \tag{$\star$}
+  \end{align*}
+  wobei $E : \Omega \times \R \times \R^n \times ... \times \R^{n^k} \to \R$ gegeben und $u : \Omega \to \R$ gesucht ist.
+  Die höchste Ableitungsordnung von $u$, die in $E$ vorkommt, heißt \emph{Ordnung} der PDGL.
+\end{defn}
+
+% Nicht definiert: Multiindizes
+
+\begin{defn}
+  Eine PDGL von der Ordnung $k$ heißt
+  \begin{itemize}
+    \item \emph{linear}, falls sie folgende Form besitzt:
+    \[ \sum_{\mathclap{\abs{\alpha} \leq k}} a_\alpha(x) D^{\alpha} u(x) - f(x) = 0 \]
+    \item \emph{semilinear}, falls sie linear in der höchsten Ableitungsordnung ist, man sie also schreiben kann als
+    \[ \sum_{\mathclap{\abs{\alpha} = k}} a_\alpha(x) D^{\alpha} u(x) + E_{k-1}(x, u(x), Du(x), ..., D^{k-1} u(x)) = 0. \]
+    \item \emph{quasilinear}, falls sie sich schreiben lässt als
+    \begin{align*}
+      & \sum_{\mathclap{\abs{\alpha} = k}} a_\alpha(x, u(x), D u(x), ..., D^{k-1} u(x)) D^{\alpha} u(x)\\[-3pt]
+      +\, & E_{k-1}(x, u(x), D u(x), ..., D^{k-1} u(x)) = 0.
+    \end{align*}
+    \item sonst \emph{voll nichtlinear}.
+  \end{itemize}
+\end{defn}
+
+\begin{bem}
+  $\{\text{ lineare PDGLn }\} \subsetneq \{\text{ semilineare PDGLn }\} \subsetneq \{\text{ quasilineare PDGLn }\} \subsetneq \{\text{ PDGLn }\}$
+\end{bem}
+
+% Ausgelassen: Schwierigkeitsfaustregel
+
+% Typeinteilung für lineare PDGLn 2. Ordnung
+\begin{defn}[Typeinteilung für lineare PDGLn 2. Ordnung]
+  Seien $a_{ij}, b_i$, $c, f : \Omega \to \R$ ($i, j \in \{ 1, ..., n \}$) vorgegebene Fktn. auf $\Omega \subset \R^n$ offen.
+  \begin{itemize}
+    \item Die lineare PDGL
+    \[ \sum_{1 \leq i, j \leq n} a_{ij}(x) D_i D_j u(x) + \sum_{1 \leq j \leq n} b_j(x) D_j u(x) + c(x) u(x) + f(x) = 0 \]
+    heißt \emph{elliptisch}, falls die $(n \times n)$-Matrix $(a_{ij})$ für alle $x \in \Omega$ positiv definit ist.
+    \item Die lineare PDGL
+    \[ D_1 D_1 u(x) - \sum_{\mathclap{2 \leq i, j \leq n}} a_{j}(x) D_i D_j u(x) + \sum_{\mathclap{1 \leq i \leq n}} b_i(x) D_i u(x) + c(x) u(x) + f(x) = 0 \]
+    heißt \emph{hyperbolisch}, falls die $(n{-}1) \times (n{-}1)$-Matrix $(a_{ij})_{2 \leq i, j \leq n}$ für alle $x \in \Omega$ positiv definit ist.
+    \item Die lineare PDGL
+    \[ D_1 u(x) - \sum_{\mathclap{2 \leq i, j \leq n}} a_{ij}(x) D_i D_j u(x) + \sum_{\mathclap{2 \leq i \leq n}} b_i(x) D_i u(x) + c(x) u(x) + f(x) = 0 \]
+    heißt \emph{parabolisch}, falls die $(n{-}1) \times (n{-}1)$-Matrix $(a_{ij})_{2 \leq i,j \leq n}$ für alle $x \in \Omega$ positiv definit ist.
+  \end{itemize}
+\end{defn}
+
+% Modellfälle: Laplace-Gleichung, Wellengleichung, Wärmeleitungsgleichung
+
+% Ausgelassen: Zielsetzung der Theorie der PDGLn
+
+\begin{defn}
+  Eine Funktion $u : \Omega \to \R$ heißt \emph{klassische Lösung}, falls $u \in \mathcal{C}^k(\Omega)$ und die Differentialgleichung ($\star$) überall in $\Omega$ erfüllt ist.
+\end{defn}
+
+% Kapitel 1.2. Einige Beispiele partieller Differentialgleichungen
+
+% (ausgelassen)
+
+% Vorlesung vom 10.4.2014
+
+% Kapitel 2.
+\section{Laplace- und Poisson-Gleichung}
+
+\begin{nota}
+  Seien $f : \R^n \to \R$ und $F = (F_1, ..., F_n)^T : \R^n \to \R^n$ Funktionen. Dann heißt
+  \begin{itemize}
+    \item $\dive F \coloneqq \sum_{i=1}^n D_i F_i : \R^n \to \R$ \emph{Divergenz} von $F$,
+    \item $\grad f \coloneqq \nabla f \coloneqq (\partial_1 f, ..., \partial_n f)^T : \R^n \to \R^n$ \emph{Gradient} von $f$,
+    \item $\Delta$ mit $\Delta f = \dive (\grad f) = \sum_{i=1}^n D_i D_i f$ \emph{Laplace-Operator}.
+  \end{itemize}
+\end{nota}
+
+\begin{defn}
+  Die \emph{Laplace-} bzw. \emph{Poisson-Gleichung} ist die Gleichung
+  \[ \Delta u = 0 \quad \text{bzw.} \quad \Delta u = f \qquad \text{auf $\Omega \subset \R^n$}. \]
+\end{defn}
+
+% Kapitel 2.1. Vorbereitung
+
+\begin{satz}[Transformationssatz]
+  Sei $T : \Omega \to T(\Omega)$ für $\Omega \subset \R^n$ ein $\mathcal{C}^1$-Diffeo, dann gilt für $f : T(\Omega) \to \ER$
+  \[ f \in L^1(T(\Omega)) \iff (f \circ T) \circ \abs{\det(DT)} \in L^1(\Omega) \quad \text{mit} \]
+  \[ \Int{T(\Omega)}{}{f}{x} = \Int{\Omega}{}{(f \circ T) \cdot \abs{\det(DT)}}{x}. \]
+\end{satz}
+
+\begin{bsp}[Polarkoordinaten]
+  Sei $f \in L^1(B_r(K))$. Dann ist $f$ auf fast jeder Sphäre $\partial B_\rho(K)$ für $\rho \in \left[ 0, r \right]$ integrierbar und es gilt
+  \[ \Int{B_r(x)}{}{f(x)}{x} = \Int{0}{r}{\Int{\partial B_\rho(x_0)}{}{\!\!\!f}{S}}{\rho} \] % dH^{n-1}
+\end{bsp}
+
+\begin{satz}[Gauß]
+  Sei $\Omega \subset \R^n$ beschränkt mit $\mathcal{C}^1$-Rand $\partial \Omega$. Ist $F \in \mathcal{C}^0(\overline{\Omega}, \R^n) \cap \mathcal{C}^1(\Omega, \R^n)$ mit $\dive F \in L^1(\Omega)$, so gilt
+  \[ \Int{\Omega}{}{\dive F}{x} = \Int{\partial \Omega}{}{(F \circ \nu)}{S}, \]
+  wobei $\nu$ der äußere Einheitsnormalenvektor ist.
+\end{satz}
+
+\begin{nota}
+  Bezeichne mit $\mathcal{L}^n$ das Lebesgue-Maß auf dem $\R^n$. Für messbare Teilmengen $A \subset \R^n$ schreibe $\abs{A} \coloneqq \mathcal{L}^n(A)$.
+\end{nota}
+
+\begin{bsp}
+  Zwischen dem Volumen von Kugeln und Sphären im $\R^n$ bestehen folgende Zusammenhänge:
+  \[
+    \abs{B_r(0)} = r^n \cdot \abs{B_1(0)}
+    \quad \text{und} \quad
+    \abs{B_r(0)} = \tfrac{r}{n} \cdot \enspace\Int{\mathclap{\partial B_r(0)}}{}{\enspace1}{S}
+  \]
+\end{bsp}
+\vspace{-12pt}
+\begin{nota}
+  $\omega_n \coloneqq \mathcal{L}^n(B_1(0)) = \frac{\pi^{\tfrac{n}{2}}}{\Gamma(\tfrac{n}{2} + 1)}$
+\end{nota}
+
+\begin{nota}
+  Sei $f : \Omega / M \to \R$ integrierbar für $\Omega \subset \R^n$ messbar mit $\mathcal{L}^k(\Omega) \in \left] 0, \infty \right[$ bzw. $M \subset \R^n$ eine $k$-dimensionale Untermannigfaltigkeit mit $\Int{M}{}{1}{S} \in \left] 0, \infty \right[$
+  \[
+    \MVInt{\Omega}{}{f(x)}{x} \coloneqq \tfrac{1}{\abs{\Omega}} \Int{\Omega}{}{f(x)}{x}
+    \quad \text{bzw.} \quad
+    \MVInt{M}{}{f(x)}{x} \coloneqq \tfrac{1}{\abs{M}} \Int{M}{}{f(x)}{x}
+  \]
+  heißen \emph{Mittelwerte} von $f$ auf $\Omega$ bzw. $M$.
+\end{nota}
+
+% Kapitel 2.2. Harmonische Funktionen
+
+\iffalse
+  Physikalische Motivation/Herleitung
+
+  Beschreibung von Gleichgewichtszuständen von physikalischen Zuständen $u$ (Temperatur / Konzentration)
+
+  Gleichgewicht: "`Nettofluss"' durch den Rand $V \subset \Omega$:
+  Jedes (glatt berandete) Testvolumen verschwindet.
+
+  $F \coloneqq Flussdichte von $u
+
+  $0 = \Int{\partial V}{}{F \circ \nu}{S} \overset{\text{Gauss}}{=} \Int{V}{}{\dive F}{x}$
+
+  Es folgt: $\dive F = 0$, da $V$ beliebig
+
+  Typischerweise $F = -a Du$ ($a > 0$).
+
+  Es folgt: $-a \Delta u = 0$
+
+  In der Physik: Diffusion von Feldern, 1. Ficksche Gesetz, Wärmeleitung, Fouriersches Gesetz
+
+  Definition von harmonischen Funktionen und der Fundamentallösung
+\fi
+
+\begin{defn}
+  Sei $\Omega \subset \R^n$ offen, $u \in \mathcal{C}^2(\Omega)$. Man nennt $u$
+  \begin{itemize}
+    \item \emph{harmonisch}, falls $\Delta u = 0$ in $\Omega$ gilt.
+    \item \emph{subharmonisch}, falls $\Delta u \geq 0$ in $\Omega$ gilt.
+    \item \emph{superharmonisch}, falls $\Delta u \leq 0$ in $\Omega$ gilt.
+  \end{itemize}
+\end{defn}
+
+\begin{bspe}
+  \begin{itemize}
+    \item Affine Funktionen sind harmonisch.
+    \item Sei $A \in \R^{n \times n}$. Definiere $u(x) \coloneqq x \cdot Ax$. Dann gilt $\Delta u = \spur A$, also $\Delta u = 0 \iff \spur A = 0$.
+    % Ausgelassen: Harmonische Funktionen aus Ansatz mit Trennung der Variablen
+    \item Real- und Imaginärteil von holomorphen Fktn. sind harmonisch.
+  \end{itemize}
+\end{bspe}
+
+\iffalse
+  % Herleitung der Fundamentallösung: siehe Evans, PDE, Abschnitt 2.2.1 a) oder Schmidt, Abschnitt 2.1.3
+  Konstruktion von rotationssymmetrischen harmonischen Funktionen, d.\,h.
+  \[ \Delta u = 0 \]
+  mit $u(x) = v(r)$ mit $v : \R \to \R$ und $r = \norm{x} = (x_1^2 + ... + x_n^2)^{1/2}$.
+  Beachte (für $i \in \{ 1, ..., n \}, x \not= 0$):
+  \begin{itemize}
+    \item $D_i r = \frac{x_i}{(x_1^2 + ... + x_n^2)^{1/2}}$, also $\abs{Dr}^2 = \sum_{i=1}^n (D_i r)^2 = 1$
+    \item $D_i D_i r = D_i (D_i r) = \frac{1}{r} - \frac{x_i x_i}{r^3}$
+    \item $\Delta r = \sum_{i=1}^n (\frac{1}{r} - \frac{x_i^2}{r^3}) = \frac{n-1}{r}$
+    \item $\Delta u = \sum_{i=1}^n D_i (v^i(r) D_i r) = v''(r) \sum_{i=1}^n (D_i r)^2 + v'(r) \sum_{i=1}^n D_i D_i r = v''(r) + \frac{n-1}{r} v'(r) = 0$
+  \end{itemize}
+
+  Für $v' \not= 0$ kann man diese ODE explizit lösen
+
+  \[ (\log \abs{v'(r)})' = \frac{v''(r)}{v'(r)} = \frac{1-n}{r} = (1-n)(\log r)' = (\log r^{1-n})' \]
+
+  Also (Integrieren, Exponentialfunktion anwenden): $v'(r) = c r^{1-n}$ für $c \in \R$.
+  Somit $v(r) = c_1 \cdot \log r + c_2$, wenn $n = 2$
+  Somit $v(r) = c_1 \cdot r^{2-n} + c_2$, wenn $n \geq 3$
+\fi
+
+\begin{defn}
+  Die Funktion $\Phi : \R^n \setminus \{ 0 \} \to \R$, definiert durch
+  \[
+    \Phi(x) \coloneqq \begin{cases}
+      - (2\pi)^{-1} \log \abs{x}, & \text{wenn $n = 2$}\\
+      (n (n{-}2) \, \omega_n)^{-1} \abs{x}^{2-n}, & \text{wenn $n \geq 3$}
+    \end{cases}
+  \]
+  heißt \emph{Fundamentallösung} der Laplacegleichung.
+\end{defn}
+
+\begin{bem}
+  \begin{itemize}
+    \item $\Phi$ ist radialsymmetrisch, d.\,h. für alle $x_1, x_2 \in \R^n \setminus \{ 0 \}$ mit $\norm{x_1} = \norm{x_2}$ gilt $\Phi(x_1) = \Phi(x_2)$.
+    \item $\Phi$, $\abs{D\Phi} \in L^1(B_R(0))$ für alle $R > 0$ aber $\abs{D^2 \phi} \not\in L^1(B_1(0))$.
+  \end{itemize}
+\end{bem}
+
+% 2.1. (Schmidt: Lemma 2.3)
+\begin{lem}
+  Sei $\Omega \subset \R^n$ offen, $B_R(x_0) \subset \Omega$, $u \in \mathcal{C}^2(\Omega)$. Für
+  \[
+    \phi : \left] 0, \infty \right[ \to \R, \quad
+    r \mapsto \enspace \MVInt{\mathclap{\partial B_r(x_0)}}{}{\enspace u}{S}
+    \qquad \text{gilt dann}
+  \]
+  \begin{itemize}
+    \miniitem{0.40 \linewidth}{$\lim_{r \to 0} \phi(r) = u(x_0)$}
+    \miniitem{0.48 \linewidth}{$\phi'(r) = \tfrac{r}{n} \enspace\MVInt{\mathclap{B_r(x_0)}}{}{\enspace\Delta u(x)}{x}$}
+  \end{itemize}
+\end{lem}
+
+\end{document}
