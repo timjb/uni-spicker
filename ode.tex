@@ -356,9 +356,68 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
 
 % Ausgelassen: Betragsfunktionsbeispiel
 
+% Vorlesung vom 23.4.2014
+
 \begin{defn}
-  Sei $D \subset \R^n$. Eine Abb. $f : D {\to} \R^n$ heißt \emph{stetig} in $x_0 \in D$, falls
-  \[ \fa{\epsilon {>} 0} \ex{\delta {>} 0} \fa{x \in D} \norm{x - x_0} < \delta \implies \norm{f(x) - f(x_0)} < \epsilon. \]
+  Sei $\mathcal{D} \subset \R^n$. Eine Abb. $f : \mathcal{D} {\to} \R^n$ heißt \emph{stetig in $x_0 \in \mathcal{D}$}, falls
+  \[ \fa{\epsilon {>} 0} \ex{\delta {>} 0} \fa{x \in \mathcal{D}} \norm{x - x_0} < \delta \implies \norm{f(x) - f(x_0)} < \epsilon. \]
+  Die Abb. heißt \emph{stetig} in $\mathcal{D}$, falls sie in jedem Punkt in $\mathcal{D}$ stetig ist.
 \end{defn}
+
+\begin{nota}
+  $\mathcal{C}(I, \R^n) \coloneqq \Set{ f : I \to \R^n }{ \text{$f$ stetig} }$, $\norm{f}_\infty \coloneqq \sup_{t \in I} \norm{f(t)}$
+\end{nota}
+
+% Ausgelassen: Banachraum = vollständiger normierter Vektorraum
+
+\begin{bem}
+  $(\mathcal{C}(I, \R^n), \norm{\blank}_\infty)$ ist ein Banachraum.
+\end{bem}
+
+\begin{defn}
+  Eine Teilmenge $A \subset X$ eines topologischen Raumes $X$ heißt \emph{relativ kompakt}, wenn ihr Abschluss $\overline{A}$ kompakt in $X$ ist.
+\end{defn}
+
+\begin{defn}
+  Seien $(X, \norm{\blank}_X)$ und $(Y, \norm{\blank}_Y)$ Banachräume. Sei $\mathcal{D} \subset X$. Eine Abbildung $T : \mathcal{D} \to Y$ heißt
+  \begin{itemize}
+    \item \emph{stetig in $x \in \mathcal{D}$}, falls $T x_n \xrightarrow{n \to \infty} T x$ in $Y$ für jede Folge $(x_n)_{n \in \N}$ mit $x_n \xrightarrow{n \to \infty}$ in $\mathcal{D}$ gilt.
+    \item \emph{Lipschitz-stetig} in $\mathcal{D}$, falls eine Konstante $\alpha > 0$ existiert mit
+    \[ \fa{x_1, x_2 \in \mathcal{D}} \norm{Tx_1 - Tx_2}_Y \leq \alpha \cdot \norm{x_1 - x_2}_X. \]
+    \item \emph{kontraktiv}, falls $T$ Lipschitz-stetig mit $\alpha < 1$ ist.
+    \item \emph{kompakt}, falls $T$ stetig ist und beschränkte Mengen in $X$ auf relativ kompakte Mengen in $Y$ abgebildet werden, d.\,h. für jede beschränkte Folge $(x_n)_{n \in \N}$ in $\mathcal{D}$ besitzt die Folge $(Tx_n)_{n \in \N}$ eine konvergente Teilfolge.
+  \end{itemize}
+\end{defn}
+
+\begin{bem}
+  Lipschitz-stetige Funktionen sind stetig, die Umkehrung gilt aber nicht.
+\end{bem}
+% Gegenbeispiel dafür: $f(t) = \sqrt{t}$
+
+% Ausgelassen: Beispiel $T : \mathcal{C}(I, \R) \to \mathcal{C}(I, \R)$
+
+\begin{satz}[Arzelà-Ascoli]
+  Sei $I \subset \R$ kompakt. Eine Teilmenge $\mathcal{F} \subset \mathcal{C}(I, \R^n)$ ist genau dann relativ kompakt, wenn
+  \begin{itemize}
+    \item $\mathcal{F}$ ist \emph{punktweise beschränkt}, d.\,h.
+    \[ \fa{t \in I} \ex{M} \fa{f \in \mathcal{F}} \norm{f(t)} \leq M \]
+    \item $\mathcal{F}$ ist \emph{gleichgradig stetig}, d.\,h.
+    \[ \fa{\epsilon {>} 0} \ex{\delta {>} 0} \fa{t_1, t_2 {\in} I, f {\in} \mathcal{F}} \norm{t_1 - t_2} < \delta \Rightarrow \norm{f(t_1) - f(t_2)} < \epsilon \]
+  \end{itemize}
+\end{satz}
+
+\begin{satz}[Fixpunktsatz von Banach]
+  Sei $(X, \norm{\blank}_X)$ ein Banachraum, $\mathcal{D} \subset X$ nichtleer, abgeschlossen. Sei $T : \mathcal{D} \to \mathcal{D}$ eine Kontraktion. Dann besitzt die Fixpunktgleichung $y = Ty$ genau eine Lösung in $D$.
+\end{satz}
+
+\begin{satz}[Fixpunktsatz von Schauder]
+  Sei $(X, \norm{\blank}_X)$ ein Banachraum, sei $\mathcal{D} \subset X$ nichtleer, abgeschlossen, beschränkt, konvex. Sei $T : \mathcal{D} \to \mathcal{D}$ eine kompakte Abbildung. Dann besitzt die Fixpunktgleichung $y = Ty$ mindestens eine Lösung in $\mathcal{D}$.
+\end{satz}
+
+% Kapitel 2.1. Existenzsatz von Peano
+
+\begin{satz}
+  Sei $\mathcal{D} \subset \R \times \R^n$ offen, $f : \mathcal{D} \to \R^n$ stetig, $(t_0, y_0) \in D$. Dann ist das AWP (1.1) lokal lösbar, d.\,h. es existiert ein Intervall $I \subset \R$ mit $t_0 \in I$ und eine stetig diff'bare Funktion $y : I \to \R^n$, die das AWP (1.1) erfüllt.
+\end{satz}
 
 \end{document}
