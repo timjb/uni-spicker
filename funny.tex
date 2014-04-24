@@ -1798,7 +1798,7 @@ Die Unterräume $E_n = \im(Q_n)$ erfüllen dann (3) aus dem ersten Lemma und (2)
 \end{defn}
 
 \begin{bem}
-  Sei $T \in \LSO(X)$. Offenbar ist $\lambda \in \rho(T)$ genau dann, $\lambda \Id - T : X \to X$ bijektiv ist. Nach dem Satz von der inversen Abbildung ist dies äquivalent zur Existenz von
+  Sei $T \in \LSO(X)$. Offenbar gilt $\lambda \in \rho(T)$ genau dann, wenn $\lambda \Id - T : X \to X$ bijektiv ist. Nach dem Satz von der inversen Abbildung ist dies äquivalent zur Existenz von
   \[ R(\lambda, T) \coloneqq (\lambda \Id - T)^{-1} \in \mathcal{L}(X), \]
   der sogenannten \emph{Resolvente} von $T$ in $\lambda$. Als Funktion von $\lambda$ heißt $R$ auch \emph{Resolventenfunktion}. Weiterhin ist $\lambda \in \sigma_p(T)$ offenbar äquivalent zu $\ex{x \not= 0} Tx = \lambda x$. Dann heißt $\lambda$ \emph{Eigenwert} und $x$ \emph{Eigenvektor} (oder Eigenfunktion). Der Unterraum $\ker(\Id \lambda - T)$ ist der \emph{Eigenraum} von $T$ zum Eigenwert $\lambda$. Er ist $T$-invariant.
 \end{bem}
@@ -1945,7 +1945,7 @@ Sei $X$ ein Hilbertraum über $\C$ und $T \in \mathcal{L}(X)$ \emph{normal}, d.\
   Seien $X$ ein Hilbertraum über $\C$ und $T \in \LSO(x)$ normal. Dann gilt:
   \begin{itemize}
     \item  Ist $X \not= 0$, gilt $\sup \sigma(T) \lambda = \norm{T}$
-    \item Ist $T$ \emph{selbstadjungiert}, d.\,h. $T^* = T$, so ist $\sigma_p(T) \subset \left[ -\norm{T}, \norm{T} \right]$ und, falls $T$ auch kompakt ist $\norm{T}$ oder $-\norm{T}$ ein Eigenwert.
+    \item Ist $T$ \emph{selbstadjungiert}, d.\,h. $T^* = T$, so ist $\sigma_p(T) \subset \left[ -\norm{T}, \norm{T} \right]$ und, falls $T$ auch kompakt ist, $\norm{T}$ oder $-\norm{T}$ ein Eigenwert.
     \item Ist $T$ selbstadjungiert und \emph{positiv semidefinit}, d.\,h. $\fa{x \in X} \scp{Tx}{x} \geq 0$, so gilt $\sigma_p(T) \subset \left[ 0, \norm{T} \right]$ und falls $T$ auch kompakt ist, ist $\norm{T}$ Eigenwert.
   \end{itemize}
 \end{lem}
