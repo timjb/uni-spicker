@@ -39,6 +39,8 @@
 \newcommand{\mymvint}[2]{{\textstyle \dashint\limits_{#1}^{#2}}}
 \newcommand{\MVInt}[4]{\mymvint{#1}{#2} #3 \,\d #4}
 
+\newcommand{\HM}{\mathcal{H}} % Hausdorff-Maß
+
 \begin{document}
 
 \maketitle{Zusammenfassung Partielle DGLn}
@@ -91,7 +93,7 @@
   \begin{itemize}
     \item Die lineare PDGL
     \[ \sum_{1 \leq i, j \leq n} a_{ij}(x) D_i D_j u(x) + \sum_{1 \leq j \leq n} b_j(x) D_j u(x) + c(x) u(x) + f(x) = 0 \]
-    heißt \emph{elliptisch}, falls die $(n \times n)$-Matrix $(a_{ij})$ für alle $x \in \Omega$ positiv definit ist.
+    heißt \emph{elliptisch}, falls die $(n \times n)$-Matrix $(a_{ij})_{1 \leq i,j \leq n}$ für alle $x \in \Omega$ positiv definit ist.
     \item Die lineare PDGL
     \[ D_1 D_1 u(x) - \sum_{\mathclap{2 \leq i, j \leq n}} a_{j}(x) D_i D_j u(x) + \sum_{\mathclap{1 \leq i \leq n}} b_i(x) D_i u(x) + c(x) u(x) + f(x) = 0 \]
     heißt \emph{hyperbolisch}, falls die $(n{-}1) \times (n{-}1)$-Matrix $(a_{ij})_{2 \leq i, j \leq n}$ für alle $x \in \Omega$ positiv definit ist.
@@ -141,15 +143,48 @@
 \end{satz}
 
 \begin{bsp}[Polarkoordinaten]
-  Sei $f \in L^1(B_r(K))$. Dann ist $f$ auf fast jeder Sphäre $\partial B_\rho(K)$ für $\rho \in \left[ 0, r \right]$ integrierbar und es gilt
+  Sei $f \in L^1(B_r(K))$. Dann ist $f$ auf fast jeder Sphäre $\partial B_\rho(K)$ für $\rho \in \cinterval{0}{r}$ integrierbar und es gilt
   \[ \Int{B_r(x)}{}{f(x)}{x} = \Int{0}{r}{\Int{\partial B_\rho(x_0)}{}{\!\!\!f}{S}}{\rho} \] % dH^{n-1}
 \end{bsp}
 
 \begin{satz}[Gauß]
-  Sei $\Omega \subset \R^n$ beschränkt mit $\mathcal{C}^1$-Rand $\partial \Omega$. Ist $F \in \mathcal{C}^0(\overline{\Omega}, \R^n) \cap \mathcal{C}^1(\Omega, \R^n)$ mit $\dive F \in L^1(\Omega)$, so gilt
+  Sei $\Omega \subset \R^n$ beschränkt, offen mit $\mathcal{C}^1$-Rand $\partial \Omega$. Ist $F \in \mathcal{C}^0(\overline{\Omega}, \R^n) \cap \mathcal{C}^1(\Omega, \R^n)$ mit $\dive F \in L^1(\Omega)$, so gilt
   \[ \Int{\Omega}{}{\dive F}{x} = \Int{\partial \Omega}{}{(F \circ \nu)}{S}, \]
   wobei $\nu$ der äußere Einheitsnormalenvektor ist.
 \end{satz}
+
+% 1. Übungsblatt, 1. Aufgabe
+\begin{kor}
+  Sei $\Omega \subset \R^n$ beschränkt, offen mit $\mathcal{C}^1$-Rand $\partial \Omega$. Sind $f, g \in \mathcal{C}^1(\overline{\Omega})$, dann gilt die partielle Integrationsregel
+  \[ \Int{\Omega}{}{D_i f g}{x} = - \Int{\Omega}{}{f D_i g}{x} + \Int{\partial \Omega}{}{f g \nu^i}{\HM^{n-1}} \]
+  Sind $f, g \in \mathcal{C}^2(\overline{\Omega})$, dann gelten die Greenschen Formeln
+  \begin{align*}
+    \Int{\Omega}{}{Df \cdot Dg}{x} &= - \Int{\Omega}{}{f \Delta g}{x} + \Int{\Omega}{}{f D_{\nu} g}{\HM^{n-1}}\\
+    \Int{\Omega}{}{(f \Delta g - g \Delta f)}{x} &= \Int{\partial \Omega}{}{(f D_{\nu} g - g D_{\nu} f)}{\HM^{n-1}}
+  \end{align*}
+\end{kor}
+
+% 1. Übungsblatt, 2. Aufgabe: Differentiation von parameterabhängigen Integralen
+\begin{prop}
+  Sei $\Omega \subset \R^n$ messbar mit $\abs{\Omega} < \infty$, $I = \ointerval{a}{b} \subset \R$ und $f : \Omega \times I \to \R$. Angenommen,
+  \begin{itemize}
+    \item $f(x, \blank) \in \mathcal{C}^1(I)$ für fast alle $x \in \Omega$,
+    \item $f(\blank, t) \in L^1(\Omega) \tfrac{\partial f}{\partial t}(\blank, t) \in L^1(\Omega)$ für alle $t \in I$ und
+    \item für alle $t \in I$ gibt es $\epsilon > 0$ sodass $\ointerval{t-\epsilon}{t+\epsilon} \subset I$ und
+    \[ \sup_{s \in \ointerval{t-\epsilon}{t+\epsilon}} \abs{\tfrac{\partial f}{\partial t}(\blank, s)} \in L^1(\Omega). \]
+  \end{itemize}
+  Dann ist die Abbildung
+  \[
+    g : I \to \R, \qquad
+    t \mapsto \Int{\Omega}{}{f(x, t)}{x}
+  \]
+  wohldefiniert und stetig differenzierbar mit
+  \[ \tfrac{\partial g}{\partial t}(t) = \Int{\Omega}{}{\tfrac{\partial f}{\partial t}(x,t)}{x}. \]
+\end{prop}
+
+\begin{bem}
+  Die Voraussetzungen sind erfüllt, wenn $\Omega$ offen und beschränkt ist, $f(x, \blank) \in \mathcal{C}^1(I)$ für alle $x \in \Omega$ und $f, \tfrac{\partial f}{\partial t} \in \mathcal{C}(\overline{\Omega} \times I)$.
+\end{bem}
 
 \begin{nota}
   Bezeichne mit $\mathcal{L}^n$ das Lebesgue-Maß auf dem $\R^n$. Für messbare Teilmengen $A \subset \R^n$ schreibe $\abs{A} \coloneqq \mathcal{L}^n(A)$.
@@ -169,7 +204,7 @@
 \end{nota}
 
 \begin{nota}
-  Sei $f : \Omega / M \to \R$ integrierbar für $\Omega \subset \R^n$ messbar mit $\mathcal{L}^k(\Omega) \in \left] 0, \infty \right[$ bzw. $M \subset \R^n$ eine $k$-dimensionale Untermannigfaltigkeit mit $\Int{M}{}{1}{S} \in \left] 0, \infty \right[$
+  Sei $f : \Omega / M \to \R$ integrierbar für $\Omega \subset \R^n$ messbar mit $\mathcal{L}^k(\Omega) \in \ointerval{0}{\infty}$ bzw. $M \subset \R^n$ eine $k$-dimensionale Untermannigfaltigkeit mit $\Int{M}{}{1}{S} \in \ointerval{0}{\infty}$
   \[
     \MVInt{\Omega}{}{f(x)}{x} \coloneqq \tfrac{1}{\abs{\Omega}} \Int{\Omega}{}{f(x)}{x}
     \quad \text{bzw.} \quad
@@ -182,6 +217,7 @@
 
 \iffalse
   Physikalische Motivation/Herleitung
+  % siehe auch: Skript Schmidt 
 
   Beschreibung von Gleichgewichtszuständen von physikalischen Zuständen $u$ (Temperatur / Konzentration)
 
@@ -258,6 +294,8 @@
   \begin{itemize}
     \item $\Phi$ ist radialsymmetrisch, d.\,h. für alle $x_1, x_2 \in \R^n \setminus \{ 0 \}$ mit $\norm{x_1} = \norm{x_2}$ gilt $\Phi(x_1) = \Phi(x_2)$.
     \item $\Phi$, $\abs{D\Phi} \in L^1(B_R(0))$ für alle $R > 0$ aber $\abs{D^2 \phi} \not\in L^1(B_1(0))$.
+    \item Die Konstanten wurden so gewählt, dass gilt:
+    \[ - \Int{\mathclap{\partial B_r(0)}}{}{D \Phi \cdot \nu}{\HM^{n-1}} = 1 \quad \text{für alle $r > 0$}. \]
   \end{itemize}
 \end{bem}
 
@@ -265,8 +303,8 @@
 \begin{lem}
   Sei $\Omega \subset \R^n$ offen, $B_R(x_0) \subset \Omega$, $u \in \mathcal{C}^2(\Omega)$. Für
   \[
-    \phi : \left] 0, \infty \right[ \to \R, \quad
-    r \mapsto \enspace \MVInt{\mathclap{\partial B_r(x_0)}}{}{\enspace u}{S}
+    \phi : \ointerval{0}{R} \to \R, \quad
+    r \mapsto \enspace \MVInt{\mathclap{\partial B_r(x_0)}}{}{\enspace u}{\HM^{n-1}}
     \qquad \text{gilt dann}
   \]
   \begin{itemize}
@@ -274,5 +312,79 @@
     \miniitem{0.48 \linewidth}{$\phi'(r) = \tfrac{r}{n} \enspace\MVInt{\mathclap{B_r(x_0)}}{}{\enspace\Delta u(x)}{x}$}
   \end{itemize}
 \end{lem}
+
+% Vorlesung vom 15.4.2014
+
+% 2.2.
+\begin{kor}[Mittelwertseigenschaft]
+  Sei $\Omega \subset \R^n$ offen, $B_r(x_0) \Subset \Omega$ und $u \in \mathcal{C}^2(\Omega)$. Dann gilt:
+  \[
+    0 = \Delta u \enspace\implies\enspace
+    u(x_0) = \enspace\MVInt{\mathclap{\partial B_r(x_0)}}{}{\enspace u}{\HM^{n-1}}
+    \quad \text{und} \quad
+    u(x_0) = \enspace\MVInt{\mathclap{B_r(x_0)}}{}{\enspace u}{\HM^{n-1}}
+  \]
+  In diesen Gleichungen darf man alle $=$ durch $\leq$ oder $<$ ersetzen.
+\end{kor}
+
+% 2.3.
+\begin{satz}
+  Sei $\Omega \subset \R^n$ offen. Dann sind äquivalent:
+  \begin{itemize}
+    \item $u$ ist harmonisch, d.\,h. es gilt $\Delta u = 0$ in $\Omega$.
+    \item $u$ erfüllt die sphärische Mittelwertseigenschaft, d.\,h. es gilt
+    \[
+      u(x_0) = \enspace\MVInt{\mathclap{\partial B_r(x_0)}}{}{\enspace u}{\HM^{n-1}}
+      \qquad \text{für alle Kugeln $B_r(x_0) \Subset \Omega$.}
+    \]
+    \item $u$ erfüllt die Mittelwertseigenschaft auf Kugeln, d.\,h. es gilt
+    \[
+      u(x_0) = \enspace\MVInt{\mathclap{B_r(x_0)}}{}{\enspace u}{\HM^{n-1}}
+      \qquad \text{für alle Kugeln $B_r(x_0) \Subset \Omega$.}
+    \]
+  \end{itemize}
+\end{satz}
+
+\begin{bem}
+  Die Äquivalenz gilt auch unter den schwächeren Voraussetzungen $u \in \mathcal{C}(\Omega)$ oder $u \in L^1(\Omega)$.
+\end{bem}
+
+% 2.4.
+\begin{satz}
+  Sei $\Omega \subset \R^n$ offen, beschränkt und $u \in \mathcal{C}^2(\Omega) \cap \mathcal{C}^0(\overline{\Omega})$ subharmonisch in $\Omega$. Dann gilt
+  \begin{itemize}
+    \item Das \emph{schwache Maximumsprinzip}: $\max_{\overline{\Omega}} u = \max_{\partial \Omega} u$
+    \item Das \emph{starke Maximumsprinzip}: Ist $\Omega$ zusammenhängend und existiert $x_0 \in \Omega$ mit $u(x_0) = \max_{\overline{\Omega}} u$, so ist $u$ konstant.
+  \end{itemize}
+  % Entsprechende Maximumsprinzipien für superharmonische Funktionen
+\end{satz}
+
+% Ausgelassen: Definition "`zusammenhängend"'
+
+% Ausgelassen: Bemerkung 2.33. in Skript "`Laplace"'
+
+\begin{kor}[Eindeutigkeit]
+  Sei $\Omega \subset \R^n$ offen, beschränkt und $u, v \in \mathcal{C}^2(\Omega) \cap \mathcal{C}(\overline{\Omega})$. Dann ist $u = v$, falls gilt:
+  \[
+    \left\{ \begin{array}{ll}
+      \Delta u = \Delta v & \text{in $\Omega$}\\
+      u = v & \text{auf $\partial \Omega$}
+    \end{array} \right.
+  \]
+\end{kor}
+
+% Ausgelassen: Bemerkung zur stetigen Abhängigkeit von den Randwerten
+
+% 2.6.
+\begin{satz}[Harnack-Ungleichung]
+  Sei $\Omega \subset \R^n$ offen, $V \subset\subset \Omega$ offen, zusammenhängend. Dann gibt es eine Konstante $c = c(\Omega, V)$, sodass
+  \[
+    \sup_{V} u \leq c \cdot \inf_{V} u
+    \qquad \text{für alle harmonischen Fktn. $u : \Omega \to \R_{\geq 0}$.}
+  \]
+  % Insbesondere sind alle Funktionswerte vergleichbar.
+\end{satz}
+
+% Nachzutragen: Definition Glättungskern, Faltung, Eigenschaften der Glättung
 
 \end{document}
