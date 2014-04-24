@@ -26,184 +26,186 @@
 \maketitle{Zusammenfassung Lineare Algebra \rom{2}}
 
 \begin{nota}
-Sofern nicht anders angegeben, bezeichne $K$ im folgenden einen beliebigen Körper, $V$ einen (möglicherweise unendlichdim.) $K$-Vektorraum und $f$ einen Endomorphismus $V \to V$.
+  Sofern nicht anders angegeben, bezeichne $K$ im folgenden einen beliebigen Körper, $V$ einen (möglicherweise unendlichdim.) $K$-Vektorraum und $f$ einen Endomorphismus $V \to V$.
 \end{nota}
 
 \begin{defn}
-Zwei Matrizen $A, B \in K^{n \times n}$ heißen zueinander \emph{ähnlich}, falls es eine Matrix $S \in \GL(n, K)$ gibt mit $B = SAS^{-1}$.
+  Zwei Matrizen $A, B \in K^{n \times n}$ heißen zueinander \emph{ähnlich}, falls es eine Matrix $S \in \GL(n, K)$ gibt mit $B = SAS^{-1}$.
 \end{defn}
 
 \begin{bem}
-Dies definiert eine Äquivalenzrelation auf $K^{n \times n}$.
+  Dies definiert eine Äquivalenzrelation auf $K^{n \times n}$.
 \end{bem}
 
 \begin{defn}
-Eine Matrix $A \in K^{n \times n}$
-\begin{itemize}
-  \item ist in \emph{Diagonalform}, wenn $A$ nur auf der Diagonalen von Null verschiedene Einträge besitzt.
-  \item ist in \emph{Triagonalform}, wenn $A$ nur auf und oberhalb der Diagonalen von Null verschiedene Einträge besitzt.
-  \item heißt \emph{diagonalisierbar} bzw. \emph{triagonalisierbar}, wenn $A$ ähnlich zu einer Diagonal- bzw. Triagonalmatrix ist.
-\end{itemize}
-Ein Endomorphismus $f \in \End(V)$ heißt \emph{diagonalisierbar} bzw. \emph{triagonalisierbar}, wenn es eine Basis von $V$ gibt, sodass die darstellende Matrix von $f$ bzgl. dieser Basis eine Diagonalmatrix ist.
+  Eine Matrix $A \in K^{n \times n}$
+  \begin{itemize}
+    \item ist in \emph{Diagonalform}, wenn $A$ nur auf der Diagonalen von Null verschiedene Einträge besitzt.
+    \item ist in \emph{Triagonalform}, wenn $A$ nur auf und oberhalb der Diagonalen von Null verschiedene Einträge besitzt.
+    \item heißt \emph{diagonalisierbar} bzw. \emph{triagonalisierbar}, wenn $A$ ähnlich zu einer Diagonal- bzw. Triagonalmatrix ist.
+  \end{itemize}
+  Ein Endomorphismus $f \in \End(V)$ heißt \emph{diagonalisierbar} bzw. \emph{triagonalisierbar}, wenn es eine Basis von $V$ gibt, sodass die darstellende Matrix von $f$ bzgl. dieser Basis eine Diagonalmatrix ist.
 \end{defn}
 
 \begin{satz}
-Es sei $A \in K^{n \times n}$. Dann ist $A$ als Matrix genau dann diagonalisierbar (triagonalisierbar), wenn der durch $A$ beschriebene Endomorphismus $K^n \to K^n$ diagonalisierbar (triagonalisierbar) ist.
+  Es sei $A \in K^{n \times n}$. Dann ist $A$ als Matrix genau dann diagonalisierbar (triagonalisierbar), wenn der durch $A$ beschriebene Endomorphismus $K^n \to K^n$ diagonalisierbar (triagonalisierbar) ist.
 \end{satz}
 
 \begin{defn}
-Sei $f \in \End(V)$. Falls es ein $\lambda \in K$ und einen Vektor $v \in V \backslash \{ 0 \}$ gibt, sodass $f(v) = \lambda v$, so heißt $\lambda$ \emph{Eigenwert} von $f$ zum \emph{Eigenvektor} $v$.
+  Sei $f \in \End(V)$. Falls es ein $\lambda \in K$ und einen Vektor $v \in V \backslash \{ 0 \}$ gibt, sodass $f(v) = \lambda v$, so heißt $\lambda$ \emph{Eigenwert} von $f$ zum \emph{Eigenvektor} $v$.
 \end{defn}
 
 \begin{satz}
-Sei $f \in \End(V)$ und $(v_i)_{i \in I}$ eine Familie von Eigenvektoren von $f$ zu paarweise verschiedenen Eigenwerten. Dann ist diese Familie linear unabhängig.
+  Sei $f \in \End(V)$ und $(v_i)_{i \in I}$ eine Familie von Eigenvektoren von $f$ zu paarweise verschiedenen Eigenwerten. Dann ist diese Familie linear unabhängig.
 \end{satz}
 
 \begin{defn}
-Ist $\lambda \in K$, so setzen wir
-\begin{align*}
-\Eig(f; \lambda) &\coloneqq \Set{ v \in V }{ f(v) = \lambda v }\\
-&= \ker(f - \lambda \cdot \id_V).
-\end{align*}
-Dies ist der zu $\lambda$ gehörende \emph{Eigenraum}, ein UVR von $V$.
+  Ist $\lambda \in K$, so setzen wir
+  \begin{align*}
+    \Eig(f; \lambda) &\coloneqq \Set{ v \in V }{ f(v) = \lambda v }\\
+    &= \ker(f - \lambda \cdot \id_V).
+  \end{align*}
+  Dies ist der zu $\lambda$ gehörende \emph{Eigenraum}, ein UVR von $V$.
 \end{defn}
 
 \begin{satz}
-Sei $V$ endlichdim. und $f \in \End(V)$ mit Eigenwerten $\lambda_1, ..., \lambda_k$. Dann ist $f$ genau dann diagonalisierbar, wenn
-\[ \dim \Eig(f; \lambda_1) + ... + \dim \Eig(f; \lambda_k) = \dim V. \]
+  Sei $V$ endlichdim. und $f \in \End(V)$ mit Eigenwerten $\lambda_1, ..., \lambda_k$. Dann ist $f$ genau dann diagonalisierbar, wenn
+  \[ \dim \Eig(f; \lambda_1) + ... + \dim \Eig(f; \lambda_k) = \dim V. \]
 \end{satz}
 
 \begin{satz}
-$\lambda \in K \text{ ist ein EW von } f \iff \det(f - \lambda \id_V) = 0$.
+  $\lambda \in K \text{ ist ein EW von } f \iff \det(f - \lambda \id_V) = 0$.
 \end{satz}
 
 \begin{defn}
-Sei $A \in K^{n \times n}$. Das Polynom $P_A(X) = \chi_A(X) \coloneqq \det(A - X \cdot E_n) \in K[X]$ heißt \emph{charakteristisches Polynom} von $A$. Für die darstellende Matrix $A$ von $f$ bzgl. einer beliebigen Basis von $V$ setzen wir
-\[ P_f(X) \coloneqq P_A(X) \in K[X]. \]
-Dieses Polynom ist von der gewählten Basis von $V$ unabhängig.
+  Sei $A \in K^{n \times n}$. Das Polynom $P_A(X) = \chi_A(X) \coloneqq \det(A - X \cdot E_n) \in K[X]$ heißt \emph{charakteristisches Polynom} von $A$. Für die darstellende Matrix $A$ von $f$ bzgl. einer beliebigen Basis von $V$ setzen wir
+  \[ P_f(X) \coloneqq P_A(X) \in K[X]. \]
+  Dieses Polynom ist von der gewählten Basis von $V$ unabhängig.
 \end{defn}
 
 \begin{satz}
-$\lambda \in K \text{ ist ein EW von } f \iff \lambda \text{ ist Nullstelle von } P_f \in K[X]$
+  $\lambda \in K \text{ ist ein EW von } f \iff \lambda \text{ ist Nullstelle von } P_f \in K[X]$
 \end{satz}
 
 \begin{verf}[Bestimmung von Eigenwerten und Eigenräumen]
-Sei $A \in \R^{n \times n}$ eine Matrix (oder darstellende Matrix eines Endomorphismus)
-\begin{enumerate}
-  \item Berechne das charakteristische Polynom $P_A$ und bestimme dessen Nullstellen $\lambda_1, ..., \lambda_k$.
-  \item Für jedes $\lambda_i$, berechne $\ker A - \lambda_i \cdot E_n$ mit dem Gauß-Verfahren.
-\end{enumerate}
+  Sei $A \in \R^{n \times n}$ eine (darstellende) Matrix
+  \begin{enumerate}
+    \item Berechne das charakteristische Polynom $P_A$ und bestimme dessen Nullstellen $\lambda_1, ..., \lambda_k$.
+    \item Für jedes $\lambda_i$, berechne $\ker (A - \lambda_i \cdot E_n)$ mit dem Gauß-Verfahren.
+  \end{enumerate}
 \end{verf}
 
 \begin{defn}
-Sei $A = (a_{ij}) \in K^{n \times n}$. Dann heißt
-\[ \spur(A) \coloneqq \sum_{k=1}^n a_{kk} \in K \]
-die \emph{Spur} von $A$.
+  Sei $A = (a_{ij}) \in K^{n \times n}$. Dann heißt
+  \[
+    \spur(A) \coloneqq \sum_{k=1}^n a_{kk} \in K
+    \qquad \text{\emph{Spur} von $A$.}
+  \]
 \end{defn}
 
 \begin{satz}
-Seien $A, B \in K^{n \times n}$. Dann gilt $\spur(AB) = \spur(BA)$.
+  Seien $A, B \in K^{n \times n}$. Dann gilt $\spur(AB) = \spur(BA)$.
 \end{satz}
 
 \begin{kor}
-Ähnliche Matrizen haben die gleiche Spur.
+  Ähnliche Matrizen haben die gleiche Spur.
 \end{kor}
 
 \begin{satz}
-Für diagonalisierbare $f \in \End(V)$ zerfällt $P_f$ in Linearfaktoren. Zerfalle umgekehrt $P_f$ in Linearfaktoren, wobei jede Nullstelle nur mit Vielfachheit $1$ auftrete. Dann ist $f$ diagonalisierbar.
+  Für diagonalisierbare $f \in \End(V)$ zerfällt $P_f$ in Linearfaktoren. Zerfalle umgekehrt $P_f$ in Linearfaktoren, wobei jede Nullstelle nur mit Vielfachheit $1$ auftrete. Dann ist $f$ diagonalisierbar.
 \end{satz}
 
 \begin{defn}
-Sei $\lambda$ ein EW von $f$.
-\begin{itemize}
-  \item Dann heißt die Ordnung der Nullstelle $\lambda$ von $P_f$ \emph{algebraische Vielfachheit} von $\lambda$ (wird bezeichnet mit $\mu(f; \lambda)$).
-  \item Die Dimension $d(f; \lambda) \coloneqq \dim \Eig(f; \lambda)$ heißt \emph{geometrische Vielfachheit} von $\lambda$.
-\end{itemize}
+  Sei $\lambda$ ein EW von $f$.
+  \begin{itemize}
+    \item Dann heißt die Ordnung der Nullstelle $\lambda$ von $P_f$ \emph{algebraische Vielfachheit} von $\lambda$ (wird bezeichnet mit $\mu(f; \lambda)$).
+    \item Die Dimension $d(f; \lambda) \coloneqq \dim \Eig(f; \lambda)$ heißt \emph{geometrische Vielfachheit} von $\lambda$.
+  \end{itemize}
 \end{defn}
 
 \begin{satz}
-Für alle EW $\lambda \in K$ von $f$ gilt
-\[ 1 \le \dim \Eig(f; \lambda) \le \mu(P_f; \lambda). \]
+  Für alle EW $\lambda \in K$ von $f$ gilt
+  \[ 1 \le \dim \Eig(f; \lambda) \le \mu(P_f; \lambda). \]
 \end{satz}
 
 \begin{defn}
-\[ J(\lambda, n) \coloneqq \begin{pmatrix}
-  \lambda & 1 & & 0 \\
-  & \ddots & \ddots & \\
-  & & \ddots & 1 \\
-  0 & & & \lambda
-\end{pmatrix} \]
-heißt der \emph{Jordanblock} der Größe $n$ zum EW $\lambda$.
+  Der \emph{Jordanblock} der Größe $n$ zum EW $\lambda$ ist die Matrix
+  \[ J(\lambda, n) \coloneqq \begin{pmatrix}
+    \lambda & 1 & & 0 \\
+    & \ddots & \ddots & \\
+    & & \ddots & 1 \\
+    0 & & & \lambda
+  \end{pmatrix}. \]
 \end{defn}
 
 \begin{bem}
-Es gilt $P_{J(\lambda, n)} = (\lambda - X)^n$ aber nur $\Eig(f; \lambda) = \langle e_1 \rangle$.
+  Es gilt $P_{J(\lambda, n)} = (\lambda - X)^n$ aber nur $\Eig(f; \lambda) = \langle e_1 \rangle$.
 \end{bem}
 
 \begin{satz}
-Es sind äquivalent:
-\begin{itemize}
-  \item $f$ ist diagonalisierbar
-  \item $P_f$ zerfällt in Linearfaktoren und für alle Nullstellen $\lambda$ von $P_f$ gilt $\mu(f; \lambda) = \dim \Eig(f; \lambda)$.
-  \item Sind $\lambda_1, ..., \lambda_k$ die paarweise verschiedenen EW von $f$, so gilt
-  \[ V = \Eig(f; \lambda_1) \varoplus ... \varoplus \Eig(f; \lambda_k). \]
-\end{itemize}
+  Es sind äquivalent:
+  \begin{itemize}
+    \item $f$ ist diagonalisierbar
+    \item $P_f$ zerfällt in Linearfaktoren und für alle Nullstellen $\lambda$ von $P_f$ gilt $\mu(f; \lambda) = \dim \Eig(f; \lambda)$.
+    \item Sind $\lambda_1, ..., \lambda_k$ die paarweise verschiedenen EW von $f$, so gilt
+    \[ V = \Eig(f; \lambda_1) \varoplus ... \varoplus \Eig(f; \lambda_k). \]
+  \end{itemize}
 \end{satz}
 
 % TODO: Verfahren: Bestimmung, ob $f$ diagonalisierbar ist
 \begin{verf}[Ist ein gegebener Endomorphismus diagonalisierbar?]
-\begin{enumerate}
-  \item Berechne das charakteristische Polynom, falls dieses nicht in Linearfaktoren zerfällt, so ist $f$ nicht diagonaliserbar.
-  \item Falls das char. Polynom in Linearfaktoren zerfällt, so berechne für jede Nullstelle den Eigenraum. Wenn für eine Nullstelle algebraische und geometrische Dimension nicht übereinstimmen, so ist $f$ nicht diagonaliserbar.
-\end{enumerate}
+  \begin{enumerate}
+    \item Berechne das charakteristische Polynom, falls dieses nicht in Linearfaktoren zerfällt, so ist $f$ nicht diagonaliserbar.
+    \item Falls das char. Polynom in Linearfaktoren zerfällt, so berechne für jede Nullstelle den Eigenraum. Wenn für eine Nullstelle algebraische und geometrische Dimension nicht übereinstimmen, so ist $f$ nicht diagonaliserbar.
+  \end{enumerate}
 \end{verf}
 
 \begin{satz}
-$P_f \text{ zerfällt in Linearfaktoren } \iff f \text{ ist trigonalisierbar }$
+  $P_f \text{ zerfällt in Linearfaktoren } \iff f \text{ ist trigonalisierbar }$
 \end{satz}
 
 % TODO: Verfahren "=>"
 % Bemerkung 1.13
 
 \begin{kor}
-Jeder Endomorphismus eines endlichdim. $\C$-VR ist trigonalisierbar (Fundamentalsatz der Algebra).
+  Jeder Endomorphismus eines endlichdim. $\C$-VR ist trigonalisierbar (Fundamentalsatz der Algebra).
 \end{kor}
 
 % TODO: Theorie der gewöhnlichen Differentialgleichungen
 
 \begin{satz}[Cayley-Hamilton]
-Sei $V$ endlichdim. und $f \in \End(V)$ mit charakteristischem Polynom $P_f(X) \in K[X]$. Dann gilt $P_f(f) = 0$.
+  Sei $V$ endlichdim. und $f \in \End(V)$ mit charakteristischem Polynom $P_f(X) \in K[X]$. Dann gilt $P_f(f) = 0$.
 \end{satz}
 
 \begin{defn}
-Sei $\lambda \in K$ ein EW von $f$ mit alg. Vielfachheit $\mu \coloneqq \mu(P_f, \lambda)$. Dann heißt
-\[ \VEig(f, \lambda) \coloneqq \ker(f - \lambda \cdot \id_V)^{\mu} \]
-der \emph{verallgemeinerte Eigenraum} zum EW $\lambda$.
+  Sei $\lambda \in K$ ein EW von $f$ mit alg. Vielfachheit $\mu \coloneqq \mu(P_f, \lambda)$. Dann heißt
+  \[ \VEig(f, \lambda) \coloneqq \ker(f - \lambda \cdot \id_V)^{\mu} \]
+  der \emph{verallgemeinerte Eigenraum} zum EW $\lambda$.
 \end{defn}
 
 \begin{satz}
-Es zerfalle $P_f$ in Linearfaktoren, also
-\[ P_f = \pm (X - \lambda_1)^{\mu_1} \cdot ... \cdot (X - \lambda_k)^{\mu_k}. \]
-Dann gilt
-\[ V = \VEig(f, \lambda_1) \varoplus ... \varoplus \VEig(f, \lambda_k). \]
+  Es zerfalle $P_f$ in Linearfaktoren, also
+  \[ P_f = \pm (X - \lambda_1)^{\mu_1} \cdot ... \cdot (X - \lambda_k)^{\mu_k}. \]
+  Dann gilt
+  \[ V = \VEig(f, \lambda_1) \varoplus ... \varoplus \VEig(f, \lambda_k). \]
 \end{satz}
 
 \begin{nota}
-Es bezeichne $R$ einen kommutativen Ring mit $1$.
+  Es bezeichne $R$ einen kommutativen Ring mit $1$.
 \end{nota}
 
 \begin{defn}
-Eine Teilmenge $I \subset R$ heißt \emph{Ideal}, falls $I$ eine additive Untergruppe von $R$ ist und ür alle $r \in R$ und $x \in I$ gilt, dass $r \cdot x \in I$.
+  Eine Teilmenge $I \subset R$ heißt \emph{Ideal}, falls $I$ eine additive Untergruppe von $R$ ist und ür alle $r \in R$ und $x \in I$ gilt, dass $r \cdot x \in I$.
 \end{defn}
 
 \begin{defn}
-Ist $S \subset R$ eine Teilmenge, so ist die Menge
-\[ \Set{ r_1s_1 + ... + r_ks_k }{ k \ge 0, s_1, ..., s_k \in S, r_1, ..., r_k \in R } \]
-ein Ideal in $R$ und wird \emph{von $S$ erzeugtes Ideal} genannt.
+  Ist $S \subset R$ eine Teilmenge, so ist die Menge
+  \[ \Set{ r_1s_1 + ... + r_ks_k }{ k \ge 0, s_1, ..., s_k \in S, r_1, ..., r_k \in R } \]
+  ein Ideal in $R$ und wird \emph{von $S$ erzeugtes Ideal} genannt.
 \end{defn}
 
 \begin{defn}
-Ein Ideal $I \subset R$ heißt \emph{Hauptideal}, falls $I$ von einem einzigen Element erzeugt wird. Ein Ring, in dem jedes Ideal ein Hauptideal ist, heißt \emph{Hauptidealring}.
+  Ein Ideal $I \subset R$ heißt \emph{Hauptideal}, falls $I$ von einem einzigen Element erzeugt wird. Ein Ring, in dem jedes Ideal ein Hauptideal ist, heißt \emph{Hauptidealring}.
 \end{defn}
 
 \begin{satz}
@@ -214,701 +216,701 @@ Für jeden Körper $K$ ist $K[X]$ ein Hauptidealring.
 % fehlende Eindeutigkeit
 
 \begin{satz}
-Es sei $R$ ein Hauptidealring und $a_1, ..., a_k \in R$. Dann existiert ein ggT von $a_1, ..., a_k$.
+  Es sei $R$ ein Hauptidealring und $a_1, ..., a_k \in R$. Dann existiert ein ggT von $a_1, ..., a_k$.
 \end{satz}
 
 \begin{satz}[Jordan-Chevalley-Zerlegung]
-Sei $V$ endlichdim. und zerfalle $P_f$ in Linearfaktoren. Dann gibt es einen diagonalisierbaren Endomorphismus $D : V \to V$ und einen nilpotenten Endomorphismus $N : V \to V$ mit
-\begin{itemize}
-  \item $f = N + D$
-  \item $D \circ N = N \circ D$
-\end{itemize}
+  Sei $V$ endlichdim. und zerfalle $P_f$ in Linearfaktoren. Dann gibt es einen diagonalisierbaren Endomorphismus $D : V \to V$ und einen nilpotenten Endomorphismus $N : V \to V$ mit
+  \begin{itemize}
+    \item $f = N + D$
+    \item $D \circ N = N \circ D$
+  \end{itemize}
 \end{satz}
 
 \begin{verf}
-Berechne die erweiterten Eigenräume, triagonalisiere jeweils $f$ eingeschränkt auf den erweiterten Eigenraum, und pack sie in eine Matrix.
+  Berechne die erweiterten Eigenräume, triagonalisiere jeweils $f$ eingeschränkt auf den erweiterten Eigenraum, und pack sie in eine Matrix.
 \end{verf}
 
 \begin{satz}
-Zerfalle $P_f$ in Linearfaktoren. Für alle EW $\lambda_1, ..., \lambda_k$ gilt dann:
-\[ \dim \VEig(f, \lambda_i) = \mu(f, \lambda_i). \]
+  Zerfalle $P_f$ in Linearfaktoren. Für alle EW $\lambda_1, ..., \lambda_k$ gilt dann:
+  \[ \dim \VEig(f, \lambda_i) = \mu(f, \lambda_i). \]
 \end{satz}
 
 \begin{satz}[Normalform nilpotenter Matrizen]
-Sei $N \in K^{n \times n}$ nilpotent. Dann ist $N$ ähnlich zu einer Matrix der Form
-\[ \begin{pmatrix}
-J(0, n_1) & 0 & 0 & 0 \\
-0 & J(0, n_2) & 0 & 0 \\
-& & \ddots & \\
-0 & 0 & 0 & J(0, n_r)
-\end{pmatrix} \]
+  Sei $N \in K^{n \times n}$ nilpotent. Dann ist $N$ ähnlich zu einer Matrix der Form
+  \[ \begin{pmatrix}
+  J(0, n_1) & 0 & 0 & 0 \\
+  0 & J(0, n_2) & 0 & 0 \\
+  & & \ddots & \\
+  0 & 0 & 0 & J(0, n_r)
+  \end{pmatrix} \]
 \end{satz}
 
 % TODO: Verfahren
 
 \begin{satz}[Jordansche Normalform]
-Sei $V$ endlichdim. und zerfalle $P_f$ in Linearfaktoren. Dann gibt es eine Basis von $V$, sodass die darstellende Matrix von $f$ folgende Form hat:
-\[ \begin{pmatrix}
-J(\lambda_1, m_1) & 0 & \cdots & 0 \\
-0 & J(\lambda_2, m_2) & \cdots & 0 \\
-\vdots & \vdots & \ddots & \vdots \\
-0 & 0 & \cdots & J(\lambda_q, m_q)
-\end{pmatrix} \]
-Dabei sind $m_1, ..., m_q \in \N$ mit $m_1 + ... + m_q = \dim V$ und $\lambda_1, ..., \lambda_q$ EWe von $f$ (mit Vielfachheiten).
+  Sei $V$ endlichdim. und zerfalle $P_f$ in Linearfaktoren. Dann gibt es eine Basis von $V$, sodass die darstellende Matrix von $f$ folgende Form hat:
+  \[ \begin{pmatrix}
+  J(\lambda_1, m_1) & 0 & \cdots & 0 \\
+  0 & J(\lambda_2, m_2) & \cdots & 0 \\
+  \vdots & \vdots & \ddots & \vdots \\
+  0 & 0 & \cdots & J(\lambda_q, m_q)
+  \end{pmatrix} \]
+  Dabei sind $m_1, ..., m_q \in \N$ mit $m_1 + ... + m_q = \dim V$ und $\lambda_1, ..., \lambda_q$ EWe von $f$ (mit Vielfachheiten).
 \end{satz}
 
 % TODO: verbessern
 
 \begin{verf}[JNF]
-\begin{enumerate}
-  \item Berechne das charakteristische Polynom der Matrix / des Endomorphismus.
-  \item Führe für jeden Eigenwert $\lambda_i$ folgende Schritte durch:
   \begin{enumerate}
-    \item Berechne $\ker (A - \lambda_i \cdot E_n)^l$ für $l = 1, ..., m$ bis $\dim \ker (A - \lambda_i \cdot E_n)^m = \mu(f, \lambda_i)$.
-    \item Bestimme absteigend von $m$ die Vektorräume $V_l$, sodass $V_l \varoplus \ker (A - \lambda_i \cdot E_n)^{l-1} = \ker (A - \lambda_i \cdot E_n)^{l}$ und davon eine Basis. Wende auf die Vektoren der Basis die Abbildung $(A - \lambda_i \cdot E_n)$ an und berücksichtige diese Vektoren im nächsten Schritt.
+    \item Berechne das charakteristische Polynom der Matrix / des Endomorphismus.
+    \item Führe für jeden Eigenwert $\lambda_i$ folgende Schritte durch:
+    \begin{enumerate}
+      \item Berechne $\ker (A - \lambda_i \cdot E_n)^l$ für $l = 1, ..., m$ bis $\dim \ker (A - \lambda_i \cdot E_n)^m = \mu(f, \lambda_i)$.
+      \item Bestimme absteigend von $m$ die Vektorräume $V_l$, sodass $V_l \varoplus \ker (A - \lambda_i \cdot E_n)^{l-1} = \ker (A - \lambda_i \cdot E_n)^{l}$ und davon eine Basis. Wende auf die Vektoren der Basis die Abbildung $(A - \lambda_i \cdot E_n)$ an und berücksichtige diese Vektoren im nächsten Schritt.
+    \end{enumerate}
+    \item ...
   \end{enumerate}
-  \item ...
-\end{enumerate}
 \end{verf}
 
 \begin{defn}
-\begin{itemize}
-  \item \emph{Euklidische Norm:} Für $x = (x_1, ..., x_n) \in \C^n$ setzen wir $\| x \| \coloneqq \sqrt{|x_1|^2 + ... + |x_n|^2}$
-  \item \emph{Operatornorm:} Für $A \in \C^{n \times n}$ setzen wir $\| A \| \coloneqq \max \Set{ \| Av \| }{ v \in \C^n, \| v \| = 1 }$
-\end{itemize}
+  \begin{itemize}
+    \item \emph{Euklidische Norm:} Für $x = (x_1, ..., x_n) \in \C^n$ setzen wir $\norm{x} \coloneqq \sqrt{\abs{x_1}^2 + ... + \abs{x_n}^2}$
+    \item \emph{Operatornorm:} Für $A \in \C^{n \times n}$ setzen wir $\norm{A} \coloneqq \max \Set{ \norm{Av} }{ v \in \C^n, \norm{v} = 1 }$
+  \end{itemize}
 \end{defn}
 
 % TODO: Lemma 3.1
 
 \begin{satz}
-Für alle $A \in \C^{n \times n}$ konvergiert die Reihe
-\[ \sum_{k=0}^\infty \frac{1}{k!} \cdot A^k \]
-absolut.
+  Für alle $A \in \C^{n \times n}$ konvergiert die Reihe
+  \[ \sum_{k=0}^\infty \frac{1}{k!} \cdot A^k \]
+  absolut.
 \end{satz}
 
 \begin{defn}
-Die Funktion
-\[ \exp : \C^{n \times n} \to \C^{n \times n}, \quad A \mapsto \sum_{k=0}^{\infty} \frac{1}{k!} \cdot A^k \]
-heißt \emph{Exponentialfunktion} für Matrizen.
+  Die Funktion
+  \[ \exp : \C^{n \times n} \to \C^{n \times n}, \quad A \mapsto \sum_{k=0}^{\infty} \frac{1}{k!} \cdot A^k \]
+  heißt \emph{Exponentialfunktion} für Matrizen.
 \end{defn}
 
 \begin{bem}
-Es gilt:
-\begin{itemize}
-  \item $\exp(0) = E_n$
-  \item $\exp(\lambda \cdot E_n) = e^\lambda \cdot E_n$ für $\lambda \in \C$
-  \item $\exp \begin{pmatrix} 0 & -t \\ t & 0 \end{pmatrix} = \begin{pmatrix} \cos(t) & -\sin(t) \\ \sin(t) & \cos(t) \end{pmatrix}$
-  \item $\exp$ ist stetig.
-\end{itemize}
+  Es gilt:
+  \begin{itemize}
+    \item $\exp(0) = E_n$
+    \item $\exp(\lambda \cdot E_n) = e^\lambda \cdot E_n$ für $\lambda \in \C$
+    \item $\exp \begin{pmatrix} 0 & -t \\ t & 0 \end{pmatrix} = \begin{pmatrix} \cos(t) & -\sin(t) \\ \sin(t) & \cos(t) \end{pmatrix}$
+    \item $\exp$ ist stetig.
+  \end{itemize}
 \end{bem}
 
 \begin{satz}
-Für zwei Matrizen $A, B \in \C^{n \times n}$ mit $AB = BA$ gilt
-\[ \exp(A + B) = \exp(A) \cdot \exp(B). \]
+  Für zwei Matrizen $A, B \in \C^{n \times n}$ mit $AB = BA$ gilt
+  \[ \exp(A + B) = \exp(A) \cdot \exp(B). \]
 \end{satz}
 
 \begin{defn}
-Für eine Matrix $A \in \C^{n \times n}$ sei
-\[ \phi_A : \R \to \C^{n \times n},\quad t \mapsto \exp(t \cdot A) \]
+  Für eine Matrix $A \in \C^{n \times n}$ sei
+  \[ \phi_A : \R \to \C^{n \times n},\quad t \mapsto \exp(t \cdot A) \]
 \end{defn}
 
 % Was heißt es, dass eine Funktion \R \to \C^{n \times n} differenzierbar ist?
 
 \begin{satz}
-Die Abbildung $\phi_A : \R \to \C^{n \times n}$ ist differenzierbar mit Ableitung
-\[ \phi'_A(t) = A \cdot \phi_A(t). \]
+  Die Abbildung $\phi_A : \R \to \C^{n \times n}$ ist differenzierbar mit Ableitung
+  \[ \phi'_A(t) = A \cdot \phi_A(t). \]
 \end{satz}
 
 % Proposition 3.6
 
 \begin{satz}
-Es gilt:
-\[ \exp(t \cdot J(\lambda, n)) = \exp(t \lambda) \cdot \begin{pmatrix}
-1 & t & \tfrac{t^2}{2!} & \cdots & \tfrac{t^{n-1}}{(n-1)!} \\
-0 & 1 & t & \cdots & \tfrac{t^{n-2}}{(n-2)!} \\
-\vdots & \ddots & \ddots & \ddots & \vdots \\
-0 & \cdots & 0 & 1 & t \\
-0 & \cdots & \cdots & 0 & 1
-\end{pmatrix} \]
+  Es gilt:
+  \[ \exp(t \cdot J(\lambda, n)) = \exp(t \lambda) \cdot \begin{pmatrix}
+  1 & t & \tfrac{t^2}{2!} & \cdots & \tfrac{t^{n-1}}{(n-1)!} \\
+  0 & 1 & t & \cdots & \tfrac{t^{n-2}}{(n-2)!} \\
+  \vdots & \ddots & \ddots & \ddots & \vdots \\
+  0 & \cdots & 0 & 1 & t \\
+  0 & \cdots & \cdots & 0 & 1
+  \end{pmatrix} \]
 \end{satz}
 
 % Anwendung auf Systeme linearer Differentialgleichungen
 
 \begin{defn}
-Für $x = (x_1, ..., x_n) \in \R^n$ und $y = (y_1, ..., y_n) \in \R^n$ definieren wir
-\[ \langle x , y \rangle \coloneqq x_1y_2 + ... + x_ny_n. \]
-Dies ist das \emph{Skalarprodukt} im $\R^n$.
+  Für $x = (x_1, ..., x_n) \in \R^n$ und $y = (y_1, ..., y_n) \in \R^n$ definieren wir
+  \[ \langle x , y \rangle \coloneqq x_1y_2 + ... + x_ny_n. \]
+  Dies ist das \emph{Skalarprodukt} im $\R^n$.
 \end{defn}
 
 \begin{defn}
-Für
-\[ A = \begin{pmatrix}
-a_{11} & \cdots & a_{1n} \\
-\vdots & \ddots & \vdots \\
-a_{m1} & \cdots & a_{mn}
-\end{pmatrix} \in K^{m \times n} \]
-definieren wir die \emph{transponierte Matrix} durch
-\[ A^{T} \coloneqq \begin{pmatrix}
-a_{11} & \cdots & a_{m1} \\
-\vdots & \ddots & \vdots \\
-a_{1n} & \cdots & a_{mn}
-\end{pmatrix} \in K^{m \times n}. \]
+  Für
+  \[ A = \begin{pmatrix}
+  a_{11} & \cdots & a_{1n} \\
+  \vdots & \ddots & \vdots \\
+  a_{m1} & \cdots & a_{mn}
+  \end{pmatrix} \in K^{m \times n} \]
+  definieren wir die \emph{transponierte Matrix} durch
+  \[ A^{T} \coloneqq \begin{pmatrix}
+  a_{11} & \cdots & a_{m1} \\
+  \vdots & \ddots & \vdots \\
+  a_{1n} & \cdots & a_{mn}
+  \end{pmatrix} \in K^{m \times n}. \]
 \end{defn}
 
 \begin{defn}
-Es sei $K$ ein Körper und $V$ ein $K$-VR. Eine \emph{Bilinearform} auf $V$ ist eine Abbildung
-\[ \gamma : V \times V \to K, \]
-sodass $\gamma$ linear in jedem Argument, d.\,h. die Abbildungen
-\begin{alignat*}{2}
-\gamma(v, -) &: V \to K, \quad w & \mapsto \gamma(v, w) \\
-\gamma(-, w) &: V \to K, \quad v & \mapsto \gamma(v, w)
-\end{alignat*}
-für beliebige $v, w \in V$ linear sind.
+  Es sei $K$ ein Körper und $V$ ein $K$-VR. Eine \emph{Bilinearform} auf $V$ ist eine Abbildung
+  \[ \gamma : V \times V \to K, \]
+  sodass $\gamma$ linear in jedem Argument, d.\,h. die Abbildungen
+  \begin{alignat*}{2}
+  \gamma(v, \blank) &: V \to K, \quad w & \mapsto \gamma(v, w) \\
+  \gamma(\blank, w) &: V \to K, \quad v & \mapsto \gamma(v, w)
+  \end{alignat*}
+  für beliebige $v, w \in V$ linear sind.
 \end{defn}
 
 \begin{defn}
-Für eine Bilinearform $\gamma$ auf einem Vektorraum $V$ und eine Basis $\BB = (b_1, ..., b_n)$ von $V$ definieren wir die \emph{darstellende Matrix} von $\gamma$ bzgl. $\BB$ durch
-\[ M_B(\gamma)_{ij} \coloneqq \gamma(b_i, b_j). \]
+  Für eine Bilinearform $\gamma$ auf einem Vektorraum $V$ und eine Basis $\BB = (b_1, ..., b_n)$ von $V$ definieren wir die \emph{darstellende Matrix} von $\gamma$ bzgl. $\BB$ durch
+  \[ M_B(\gamma)_{ij} \coloneqq \gamma(b_i, b_j). \]
 \end{defn}
 
 \begin{satz}
-Sei $A \in K^{n \times n}$ die darstellende Matrix einer Bilinearform $\gamma$ bezüglich einer Basis $\BB = (b_1, ..., b_n)$. Für $v, w \in V$ mit Koordinatenvektoren
-\[ x = \begin{pmatrix} x_1 \\ \vdots \\ x_n \end{pmatrix},
-y = \begin{pmatrix} y_1 \\ \vdots \\ y_n \end{pmatrix} \]
-gilt
-\[ \gamma(v, w) = x^{T}Ay. \]
+  Sei $A \in K^{n \times n}$ die darstellende Matrix einer Bilinearform $\gamma$ bezüglich einer Basis $\BB = (b_1, ..., b_n)$. Für $v, w \in V$ mit Koordinatenvektoren
+  \[ x = \begin{pmatrix} x_1 \\ \vdots \\ x_n \end{pmatrix},
+  y = \begin{pmatrix} y_1 \\ \vdots \\ y_n \end{pmatrix} \]
+  gilt
+  \[ \gamma(v, w) = x^{T}Ay. \]
 \end{satz}
 
 \begin{kor}
-Sind $\gamma$ und $\gamma'$ zwei Bilinearformen mit $M_B(\gamma) = M_B(\gamma')$, so gilt $\gamma = \gamma'$.
+  Sind $\gamma$ und $\gamma'$ zwei Bilinearformen mit $M_B(\gamma) = M_B(\gamma')$, so gilt $\gamma = \gamma'$.
 \end{kor}
 
 \begin{satz}
-Sei $\BC$ eine weitere Basis von $V$ und $T^{\BB}_{\BC}$ die Koordinatentransformations von $\BB$ nach $\BC$. Dann gilt
-\[ M_\BB(\gamma) = (T_{\BC}^{\BB})^{T} \cdot M_{\BC}(\gamma) \cdot T_{\BC}^{\BB}. \]
+  Sei $\BC$ eine weitere Basis von $V$ und $T^{\BB}_{\BC}$ die Koordinatentransformations von $\BB$ nach $\BC$. Dann gilt
+  \[ M_\BB(\gamma) = (T_{\BC}^{\BB})^{T} \cdot M_{\BC}(\gamma) \cdot T_{\BC}^{\BB}. \]
 \end{satz}
 
 \begin{defn}
-Eine Bilinearform $\gamma : V \times V \to K$ heißt symmetrisch, falls $\gamma(v, w) = \gamma(w, v)$ für alle $v, w \in V$ gilt. Äquivalent dazu ist eine Bilinearform auf einem endlichdim. VR $V$ symmetrisch, wenn $M_{\BB}(\gamma)^{T} = M_{\BB}(\gamma)$ gilt.
+  Eine Bilinearform $\gamma : V \times V \to K$ heißt symmetrisch, falls $\gamma(v, w) = \gamma(w, v)$ für alle $v, w \in V$ gilt. Äquivalent dazu ist eine Bilinearform auf einem endlichdim. VR $V$ symmetrisch, wenn $M_{\BB}(\gamma)^{T} = M_{\BB}(\gamma)$ gilt.
 \end{defn}
 
 \begin{defn}
-Sei $V$ ein $\R$-Vektorraum.
-\begin{itemize}
-  \item Eine symmetrische Bilinearform $\gamma : V \times V \to \R$ heißt \emph{positiv definit}, falls $\gamma(v, v) > 0$ für alle $v \in V \backslash \{ 0 \}$ gilt.
-  \item Eine symmetrische, positive definite Bilinearform auf einem $\R$-VR heißt \emph{(euklidisches) Skalarprodukt}.
-  \item Ein $\R$-VR, auf dem ein euklidisches Skalarprodukt definiert ist, heißt \emph{(euklidischer) Vektorraum}.
-\end{itemize}
+  Sei $V$ ein $\R$-Vektorraum.
+  \begin{itemize}
+    \item Eine symmetrische Bilinearform $\gamma : V \times V \to \R$ heißt \emph{positiv definit}, falls $\gamma(v, v) > 0$ für alle $v \in V \backslash \{ 0 \}$ gilt.
+    \item Eine symmetrische, positive definite Bilinearform auf einem $\R$-VR heißt \emph{(euklidisches) Skalarprodukt}.
+    \item Ein $\R$-VR, auf dem ein euklidisches Skalarprodukt definiert ist, heißt \emph{(euklidischer) Vektorraum}.
+  \end{itemize}
 \end{defn}
 
 \begin{defn}
-Sei $V$ ein $\C$-Vektorraum.
-\begin{itemize}
-  \item Eine Abbildung $\gamma : V \times V \to \C$ heißt \emph{Sesquilinearform}, falls $\gamma$ linear im ersten Argument, jedoch konjugiert-linear im zweiten Argument ist, d.\,h. für alle $v, w_1, w_2 \in V$ und $\lambda_1, \lambda_2 \in \C$ gilt
-  \[ \gamma(v, \lambda_1 w_1 + \lambda_2 w_2) = \overline{\lambda_1} \gamma(v, w_1) + \overline{\lambda_2} \gamma(v, w_2). \]
-  \item Eine Sesquilinearform $\gamma$ heißt \emph{hermitesch}, falls
-  \[ \gamma(v, w) = \overline{\gamma(w, v)} \]
-  für alle $v, w \in V$. Für alle $v \in V$ gilt dann $\gamma(v, v) = \overline{\gamma(v, v)}$, also $\gamma(v, v) \in \R$.
-  \item Eine hermitische Sesquilinearform $\gamma$ heißt \emph{(unitäres) Skalarprodukt}, falls $\gamma$ positiv definit ist, d.\,h. $\gamma(v, v) > 0$ für alle $v \in V$ ist.
-\end{itemize}
+  Sei $V$ ein $\C$-Vektorraum.
+  \begin{itemize}
+    \item Eine Abbildung $\gamma : V \times V \to \C$ heißt \emph{Sesquilinearform}, falls $\gamma$ linear im ersten Argument, jedoch konjugiert-linear im zweiten Argument ist, d.\,h. für alle $v, w_1, w_2 \in V$ und $\lambda_1, \lambda_2 \in \C$ gilt
+    \[ \gamma(v, \lambda_1 w_1 + \lambda_2 w_2) = \overline{\lambda_1} \gamma(v, w_1) + \overline{\lambda_2} \gamma(v, w_2). \]
+    \item Eine Sesquilinearform $\gamma$ heißt \emph{hermitesch}, falls
+    \[ \gamma(v, w) = \overline{\gamma(w, v)} \]
+    für alle $v, w \in V$. Für alle $v \in V$ gilt dann $\gamma(v, v) = \overline{\gamma(v, v)}$, also $\gamma(v, v) \in \R$.
+    \item Eine hermitesche Sesquilinearform $\gamma$ heißt \emph{(unitäres) Skalarprodukt}, falls $\gamma$ positiv definit ist, d.\,h. $\gamma(v, v) > 0$ für alle $v \in V$ ist.
+  \end{itemize}
 \end{defn}
 
 \begin{defn}
-Sei $\gamma : V \times V \to \C$ eine Sesquilinearform auf einem $\C$-VR $V$ und $\BB = (b_1, ..., b_n)$ eine Basis von $V$. Dann ist die \emph{darstellende Matrix} von $\gamma$
-\[ (M_{\BB})_{ij} \coloneqq \gamma(b_i, b_j). \]
+  Sei $\gamma : V \times V \to \C$ eine Sesquilinearform auf einem $\C$-VR $V$ und $\BB = (b_1, ..., b_n)$ eine Basis von $V$. Dann ist die \emph{darstellende Matrix} von $\gamma$
+  \[ (M_{\BB})_{ij} \coloneqq \gamma(b_i, b_j). \]
 \end{defn}
 
 \begin{bem}
-Eine Bilinearform auf einem endlichdim. $\C$-VR ist genau dann hermitisch, wenn $M_{\BB}(\gamma)^{T} = \overline{M_{\BB}(\gamma)}$ gilt. 
+  Eine Bilinearform auf einem endlichdim. $\C$-VR ist genau dann hermitesch, wenn $M_{\BB}(\gamma)^{T} = \overline{M_{\BB}(\gamma)}$ gilt. 
 \end{bem}
 
 \begin{defn}
-Für euklidische bzw. euklidische VR $V$ und $v \in V$ setzen wir
-\[ \| v \| \coloneqq \sqrt{ \langle v , v \rangle }. \]
+  Für euklidische bzw. euklidische VR $V$ und $v \in V$ setzen wir
+  \[ \norm{v} \coloneqq \sqrt{ \langle v , v \rangle }. \]
 \end{defn}
 
 \begin{defn}
-Sei $V$ ein euklidischer/unitärer VR.
-\begin{itemize}
-  \item Zwei Vektoren $v, w \in V$ heißen \emph{orthogonal} (geschrieben $v \perp w$), falls $\langle v , w \rangle = 0$ gilt.
-  \item Eine Familie $(v_i)_{i \in I}$ von Vektoren heißt \emph{orthogonal}, falls $v_i \perp v_j$ für alle $i, j \in I$ mit $ \not= j$ gilt.
-  \item Eine Familie $(v_i)_{i \in I}$ heißt \emph{orthonormal}, falls sie orthogonal ist und zusätzlich $\| v_i \| = 1$ für alle $i \in I$ erfüllt.
-  \item Eine orthogonale Familie, die eine Basis von $V$ ist, heißt \emph{Orthonormalbasis}.
-\end{itemize}
+  Sei $V$ ein euklidischer/unitärer VR.
+  \begin{itemize}
+    \item Zwei Vektoren $v, w \in V$ heißen \emph{orthogonal} (geschrieben $v \perp w$), falls $\langle v , w \rangle = 0$ gilt.
+    \item Eine Familie $(v_i)_{i \in I}$ von Vektoren heißt \emph{orthogonal}, falls $v_i \perp v_j$ für alle $i, j \in I$ mit $ \not= j$ gilt.
+    \item Eine Familie $(v_i)_{i \in I}$ heißt \emph{orthonormal}, falls sie orthogonal ist und zusätzlich $\norm{v_i} = 1$ für alle $i \in I$ erfüllt.
+    \item Eine orthogonale Familie, die eine Basis von $V$ ist, heißt \emph{Orthonormalbasis}.
+  \end{itemize}
 \end{defn}
 
 \begin{satz}
-Für $v, w \in V$ mit $v \perp w$ gilt $\| v + w \|^2 = \| v \|^2 + \| w \|^2$.
+  Für $v, w \in V$ mit $v \perp w$ gilt $\norm{v + w}^2 = {v}^2 + {w}^2$.
 \end{satz}
 
 \begin{satz}[Cauchy-Schwarzsche Ungleichung]
-Es sei $V$ ein euklidischer oder unitärer Vektorraum. Dann gilt für alle $v, w \in V$
-\[ | \langle v, w \rangle | \le \| v \| \cdot \| w \|. \]
+  Es sei $V$ ein euklidischer oder unitärer Vektorraum. Dann gilt für alle $v, w \in V$
+  \[ \abs{\langle v, w \rangle} \le \norm{v} \cdot \norm{w}. \]
 \end{satz}
 
 \begin{satz}
-Sei $V$ ein euklidischer/unitärer VR. Dann definiert die Funktion
-\[ \| - \| : V \to \R, \quad v \mapsto \sqrt{ \langle v , v \rangle } \]
-eine Norm auf $V$.
+  Sei $V$ ein euklidischer/unitärer VR. Dann definiert die Funktion
+  \[ \norm{\blank} : V \to \R, \quad v \mapsto \sqrt{ \langle v , v \rangle } \]
+  eine Norm auf $V$.
 \end{satz}
 
 \begin{satz}
-Sei $V$ ein euklidischer/unitärer VR, $(v_i)_{i \in I}$ eine orthogonale Familie und $v_i \not= 0$ für alle $i \in I$. Dann ist die Familie $(v_i)$ linear unabhängig.
+  Sei $V$ ein euklidischer/unitärer VR, $(v_i)_{i \in I}$ eine orthogonale Familie und $v_i \not= 0$ für alle $i \in I$. Dann ist die Familie $(v_i)$ linear unabhängig.
 \end{satz}
 
 \begin{defn}
-Zwei UVR $U, W \subset V$ heißen \emph{orthogonal} (geschrieben $U \perp W$), falls $u \perp w$ für alle $u \in U$ und $w \in W$ gilt.
+  Zwei UVR $U, W \subset V$ heißen \emph{orthogonal} (geschrieben $U \perp W$), falls $u \perp w$ für alle $u \in U$ und $w \in W$ gilt.
 \end{defn}
 
 \begin{defn}
-Ist $U \subset V$ ein UVR, so ist
-\[ U^{\perp} \coloneqq \Set{ v \in V }{ v \perp u \text{ für alle } u \in U } \]
-ein UVR von $V$ und heißt das \emph{orthogonale Komplement} von $U$ in $V$
+  Ist $U \subset V$ ein UVR, so ist
+  \[ U^{\perp} \coloneqq \Set{ v \in V }{ v \perp u \text{ für alle } u \in U } \]
+  ein UVR von $V$ und heißt das \emph{orthogonale Komplement} von $U$ in $V$
 \end{defn}
 
 \begin{bem}
-Es gilt: $U \perp U^{\perp}$.
+  Es gilt: $U \perp U^{\perp}$.
 \end{bem}
 
 \begin{satz}
-Jeder endlichdimensionale euklidische/unitäre VR besitzt eine Orthonormalbasis.
+  Jeder endlichdimensionale euklidische/unitäre VR besitzt eine Orthonormalbasis.
 \end{satz}
 
  % TODO: Gram-Schmidtsches Orthonormalisierungsverfahren
  % Definition: Orthogonale Projektion
 
- \begin{kor}
- Sei $V$ ein euklidischer/unitärer VR und $W \subset V$ ein endlichdim. UVR. Dann gilt
- \[ V = W \varoplus W^{\perp}. \]
- \end{kor}
-
-\begin{defn}
-Sei $V$ ein euklidischer VR und $(v_1, ..., v_k)$ eine endliche Familie von Vektoren in $V$. Dann ist
-\[ \Gram(v_1, ..., v_k) \coloneqq \det \begin{pmatrix}
-\langle v_1 , v_1 \rangle & \cdots & \langle v_1 , v_k \rangle \\
-\vdots & & \vdots \\
-\langle v_k , v_1 \rangle & \cdots & \langle v_k , v_k \rangle
-\end{pmatrix} \]
-die \emph{Gramsche Determinante} von $(v_1, ..., v_k)$.
-\end{defn}
-
-\begin{satz}
-Es gilt $\Gram(v_1, ..., v_k) \ge 0$, wobei Gleichheit genau dann gilt, wenn $(v_1, ..., v_k)$ linear abhängig sind.
-\end{satz}
-
-\begin{defn}
-Wir definieren den von der Famile $(v_1, ..., v_k)$ aufgespannten \emph{Spat} als
-\[ \Spat(v_1, ..., v_k) \coloneqq \Set{ t_1 v_1 + ... + t_k v_k }{ 0 \le t_i \le 1 \text{ für } i = 1, ..., k } \]
-und dessen $k$-dimensionales Volumen als
-\[ \Vol(\Spat(v_1, ..., v_k)) \coloneqq \sqrt{ \Gram(v_1, ..., v_k) }. \]
-\end{defn}
-
-\begin{defn}
-Es sei $V$ ein $K$-VR. Der Vektorraum $\Hom_K(V, K)$ der $K$-linearen Abbildungen $V \to K$ heißt der zu $V$ \emph{duale Vektorraum} und wird mit $V^*$ bezeichnet. Die Elemente von $V^*$ heißen \emph{Linearformen} auf $V$.
-\end{defn}
-
-\begin{bem}
-Eine Linearform ist bereits eindeutig dadurch bestimmt, was sie mit den Vektoren einer Basis von $V$ anstellt.
-\end{bem}
-
-\begin{satz}
-Sei $V$ endlichdimensional und $\BB = (v_1, ..., v_k)$ eine Basis von $V$. Wir definieren für $j \in \{ 1, ..., k \}$ die Linearform $v_j^* : V \to K$ durch
-\[ v_j^*(v_i) \coloneqq \delta_{ij}. \]
-Dann ist $(v_1^*, ..., v_n^*)$ eine Basis von $V^*$ und die Abbildung $v_i \mapsto v_i^*$ ein Isomorphismus $\phi_{\BB} : V \to V^*$.
-\end{satz}
-
 \begin{kor}
-Für endlichdim. VR $V$ gilt: $\dim V = \dim V^*$.
+  Sei $V$ ein euklidischer/unitärer VR und $W \subset V$ ein endlichdim. UVR. Dann gilt
+  \[ V = W \varoplus W^{\perp}. \]
 \end{kor}
 
 \begin{defn}
-Sei $f : V \to W$ linear. Dann heißt die lineare Abbildung
-\[ f^* : W^* \to V^*, \quad \phi \mapsto \phi \circ f \]
-zu $f$ \emph{duale Abbildung}.
+  Sei $V$ ein euklidischer VR und $(v_1, ..., v_k)$ eine endliche Familie von Vektoren in $V$. Dann ist
+  \[ \Gram(v_1, ..., v_k) \coloneqq \det \begin{pmatrix}
+  \langle v_1 , v_1 \rangle & \cdots & \langle v_1 , v_k \rangle \\
+  \vdots & & \vdots \\
+  \langle v_k , v_1 \rangle & \cdots & \langle v_k , v_k \rangle
+  \end{pmatrix} \]
+  die \emph{Gramsche Determinante} von $(v_1, ..., v_k)$.
 \end{defn}
 
 \begin{satz}
-Seien $V, W$ endlichdim. VR mit Basen $\BB$ und $\BC$ und $f : V \to W$ linear. Dann gilt
-\[ M_{\BB^*}^{\BC^*}(f^*) = M_{\BC}^{\BB}(f)^T \]
+  Es gilt $\Gram(v_1, ..., v_k) \ge 0$, wobei Gleichheit genau dann gilt, wenn $(v_1, ..., v_k)$ linear abhängig sind.
 \end{satz}
 
 \begin{defn}
-Ist $v \in V$, so definiert die Auswertung bei $v$
-\[ \iota_v : V^* \to K, \quad \phi \mapsto \phi(v) \]
-ein Element in $V^{**}$.
+  Wir definieren den von der Famile $(v_1, ..., v_k)$ aufgespannten \emph{Spat} als
+  \[ \Spat(v_1, ..., v_k) \coloneqq \Set{ t_1 v_1 + ... + t_k v_k }{ 0 \le t_i \le 1 \text{ für } i = 1, ..., k } \]
+  und dessen $k$-dimensionales Volumen als
+  \[ \Vol(\Spat(v_1, ..., v_k)) \coloneqq \sqrt{ \Gram(v_1, ..., v_k) }. \]
 \end{defn}
 
-\begin{satz}
-Sei $V$ endlichdim. Dann ist die Abbildung $\iota : V \to V^{**}, v \mapsto \iota_v$ ein (natürlicher) Isomorphismus und stimmt mit der Verknüpfung der bzgl. einer Basis $\BB$ und $\mathcal{B^*}$ definierten Isomorphismen $V \to V^*$ und $V^* \to V^{**}$ überein.
-\end{satz}
-
 \begin{defn}
-Sei $V$ ein $K$-VR. Ein Bilinearform $\gamma : V \times V \to K$ heißt \emph{nicht ausgeartet}, falls die lineare Abbildung
-\[ \Phi : V \to V^{*}, \quad w \mapsto \gamma(-, w) \]
-injektiv ist, d.\,h. für alle $w \not= 0$ existiert ein $v \in V$ mit $\gamma(v, w) \not= 0$.
+  Es sei $V$ ein $K$-VR. Der Vektorraum $\Hom_K(V, K)$ der $K$-linearen Abbildungen $V \to K$ heißt der zu $V$ \emph{duale Vektorraum} und wird mit $V^*$ bezeichnet. Die Elemente von $V^*$ heißen \emph{Linearformen} auf $V$.
 \end{defn}
 
 \begin{bem}
-Euklidische und unitäre Skalarprodukte sind immer nicht ausgeartet.
-Eine Bilinearform ist genau dann nicht ausgeartet, wenn ihre darstellende Matrix (bzgl. einer beliebigen Basis) invertierbar ist.
+  Eine Linearform ist bereits eindeutig dadurch bestimmt, was sie mit den Vektoren einer Basis von $V$ anstellt.
 \end{bem}
 
 \begin{satz}
-Sei $V$ ein endlichdim. VR und die Bilinearform $\gamma : V \times V \to K$ nicht ausgeartet. Dann sind die Abbildungen
-\[ \Phi : V \to V^*, \quad w \mapsto \gamma(-, w) \]
-\[ \Psi : V \to V^*, \quad v \mapsto \gamma(v, -) \]
-Isomorphismen.
-\end{satz}
-
-\begin{satz}
-Es gibt eine eineindeutige Entsprechung zwischen
-\begin{itemize}
-  \item Isomorphismen $V \to V^*$
-  \item nicht-ausgearteten Bilinearformen $V \times V \to K$
-\end{itemize}
-
-Dabei ordnen wir einem Isomorphismus $\Psi : V \to V^*$ die Bilinearform $(v, w) \mapsto \Psi(v)(w)$ zu.
-
-Andersrum ist für einen endlichdim. euklidischen VR $(V, \langle - , - \rangle)$ die Abbildung
-\[ \Psi : V \to V^*, \quad v \mapsto \langle v , - \rangle \]
-ein Isomorphismus.
-\end{satz}
-
-\begin{defn}
-Sei $V$ ein $K$-VR und $W \subset V$ ein UVR. Dann heißt der UVR
-\[ W^0 \coloneqq \Set{ f \in V^* }{ f\mid_W = 0 } \]
-\emph{Annulator} von $W$ in $V^*$.
-\end{defn}
-
-\begin{bem}
-Ist $\dim V < \infty$, so gilt $\dim W^0 = \dim V - \dim W$.
-\end{bem}
-
-\begin{satz}
-Sei $V$ endlichdimensional und $W \subset V$ ein UVR. Dann gilt
-\[ \Psi(W^{\perp}) = W^0. \]
-\end{satz}
-
-\begin{defn}
-Sei $W \subset V$ ein UVR. Wir definieren die Relation $\sim$ wie folgt:
-\[ v_1 \sim v_2 :\iff v_1 - v_2 \in W. \]
-Dann ist die Äquivalenzklasse $[v]$ gleich dem affinen Teilraum
-\[ v + W = \Set{ v + w }{ w \in W }. \]
-
-Durch die Setzung
-\begin{align*}
-(v_1 + W) + (v_2 + W) &\coloneqq (v_1 + v_2) + W
-\lambda \cdot (v + W) &\coloneqq \lambda v_1 + W
-\end{align*}
-
-wird $V/W$ zu einem $K$-Vektorraum, genannt \emph{Quotientenraum} von $V$ nach $W$.
-\end{defn}
-
-\begin{satz}
-Sei $(V, \langle - , - \rangle)$ ein euklidischer/unitärer VR und $W \subset V$ ein endlichdimensionaler UVR. Dann ist die Abbildung
-\[ \chi : W^{\perp} \to V/W, \quad v \mapsto [v] \]
-ein Vektorraumisomorphismus.
+  Sei $V$ endlichdimensional und $\BB = (v_1, ..., v_k)$ eine Basis von $V$. Wir definieren für $j \in \{ 1, ..., k \}$ die Linearform $v_j^* : V \to K$ durch
+  \[ v_j^*(v_i) \coloneqq \delta_{ij}. \]
+  Dann ist $(v_1^*, ..., v_n^*)$ eine Basis von $V^*$ und die Abbildung $v_i \mapsto v_i^*$ ein Isomorphismus $\phi_{\BB} : V \to V^*$.
 \end{satz}
 
 \begin{kor}
-Für endlichdimensionale $V$ gilt: $\dim V/W = \dim W^{\perp} = \dim V - \dim W$.
+  Für endlichdim. VR $V$ gilt: $\dim V = \dim V^*$.
 \end{kor}
 
 \begin{defn}
-Seien $V, W$ euklidische/unitäre VR. Eine eine $\R/$- bzw. $\C$-lineare Abbildung $f : V \to W$ heißt \emph{orthogonal} bzw. \emph{unitär}, falls für alle $v, w \in V$ gilt:
-\[ \langle f(v) , f(w) \rangle_W = \langle v , w \rangle_V. \]
+  Sei $f : V \to W$ linear. Dann heißt die lineare Abbildung
+  \[ f^* : W^* \to V^*, \quad \phi \mapsto \phi \circ f \]
+  zu $f$ \emph{duale Abbildung}.
 \end{defn}
 
-\begin{bem}
-Orthogonale/unitäre Abbildungen sind längenerhaltend (und somit injektiv) und bilden orthogonale Familien wieder auf orthogonale Familien ab. Die Umkehrung gilt auch:
-\end{bem}
-
 \begin{satz}
-Sei $f : V \to W$ linear und längenerhaltend. Dann ist $f$ orthogonal bzw. unitär.
+  Seien $V, W$ endlichdim. VR mit Basen $\BB$ und $\BC$ und $f : V \to W$ linear. Dann gilt
+  \[ M_{\BB^*}^{\BC^*}(f^*) = M_{\BC}^{\BB}(f)^T \]
 \end{satz}
 
 \begin{defn}
-Eine Matrix $A \in \R^{n \times m}$ bzw. $A \in \C^{n \times m}$ heißt \emph{orthogonal} bzw. \emph{unitär}, falls sie bzgl. der Standardskalarprodukte eine orthogonale bzw. unitäre Abbildung beschreibt. Dies ist gleichbedeutend damit, dass
-\[ (Ax)^T (Ay) = x^T A^T Ay = x^T y \]
-für alle $x, y \in \R^m$, also
-\[ A^T A = E_m \]
-im euklidischen und
-\[ A^T \overline{A} = E_m \]
-im unitären Fall.
+  Ist $v \in V$, so definiert die Auswertung bei $v$
+  \[ \iota_v : V^* \to K, \quad \phi \mapsto \phi(v) \]
+  ein Element in $V^{**}$.
 \end{defn}
 
 \begin{satz}
-Seien $V$ und $W$ endlichdim. euklidisch/unitär. Eine Abbildung $f : V \to W$ ist genau dann orthogonal/unitär, wenn gilt: Bezüglich Orthonormalbasen $\BB$ und $\BC$ von $V$ und $W$ ist die darstellende Matrix $M_C^B(f)$ orthogonal/unitär.
+  Sei $V$ endlichdim. Dann ist die Abbildung $\iota : V \to V^{**}, v \mapsto \iota_v$ ein (natürlicher) Isomorphismus und stimmt mit der Verknüpfung der bzgl. einer Basis $\BB$ und $\mathcal{B^*}$ definierten Isomorphismen $V \to V^*$ und $V^* \to V^{**}$ überein.
 \end{satz}
-
-\begin{satz}
-Sei $V$ endlichdim. euklidisch/unitär und $f : V \to V$ ein orthogonaler/unitärer Endomorphismus. Dann gilt:
-\begin{itemize}
-  \item $f$ ist ein Isomorphismus.
-  \item $f^{-1}$ ist ebenfalls orthogonal/unitär
-  \item alle EW von $f$ haben den Betrag $1$
-  \item Eigenvektoren zu unterschiedlichen EW sind orthogonal
-\end{itemize}
-\end{satz}
-
-\begin{bem}
-Für Matrizen $A \in \R^{n \times n}$ (bzw. $A \in \C^{n \times n}$) sind äquivalent:
-\begin{itemize}
-  \item $A$ ist orthogonal (unitär)
-  \item Die Spalten von $A$ bilden eine ONB.
-  \item Die Zeilen von $A$ bilden eine ONB.
-  \item $A^{-1} = A^T$ (bzw. $\overline{A}^{-1} = A^T$)
-\end{itemize}
-\end{bem}
 
 \begin{defn}
-Die Untergruppen
-\begin{align*}
-O(n) &\coloneqq \Set{ A \in \Mat(n, \R) }{ A \text{ orthogonal } } \subset \R^{n \times n} \\
-O(n) &\coloneqq \Set{ A \in \Mat(n, \C) }{ A \text{ unitär } } \subset \C^{n \times n} \\
-\end{align*}
-der multiplikativen Gruppen $\GL(n, \R)$ bzw. $\GL(n, \C)$ heißen \emph{Gruppen der orthogonalen bzw. unitären Matrizen}.
+  Sei $V$ ein $K$-VR. Ein Bilinearform $\gamma : V \times V \to K$ heißt \emph{nicht ausgeartet}, falls die lineare Abbildung
+  \[ \Phi : V \to V^{*}, \quad w \mapsto \gamma(\blank, w) \]
+  injektiv ist, d.\,h. für alle $w \not= 0$ existiert ein $v \in V$ mit $\gamma(v, w) \not= 0$.
 \end{defn}
 
 \begin{bem}
-  Für alle $A \in O(n)$ und $A \in U(n)$ gilt $| \det A | = 1$.
-\end{bem}
-
-\begin{defn}
-Sei $V$ ein endlichdim. $\R$-VR.
-\begin{itemize}
-  \item Zwei Basen $\BB$ und $\BC$ von $V$ heißen \emph{gleich orientiert}, falls gilt: $\det M_{\BC}^{\BB} > 0$.
-  \item Die Äquivalenklassen der so definierten Relation heißen \emph{Orientierungen} von $V$. Zwei Basen in derselben Äquivalenzklasse heißen \emph{positiv}, Basen in unterschiedlichen Äquivalenzklassen \emph{negativ orientiert}.
-  \item Es seien $V, W$ endlichdim. und orientierte VR, d.\,h. mit Äquivalenzklassen gleich orientierter Basen versehen. Ein Isomorphismus $V \to W$ heißt \emph{orientierungserhaltend}, falls $f$ eine positiv orientierte Basis von $V$ auf eine positiv orientierte Basis von $W$ abbildet.
-  \item Für $V = \R^n$ heißt die Orientierungsklasse der Standardbasis $(e_1, ..., e_n)$ \emph{Standardorientierung} oder \emph{kanonische Orientierung} von $\R^n$.
-\end{itemize}
-\end{defn}
-
-\begin{defn}
-Die Gruppen
-\begin{align*}
-SO(n) \coloneqq \Set{ A \in O(n) }{ \det A = 1 } \\
-SU(n) \coloneqq \Set{ A \in U(n) }{ \det A = 1 }
-\end{align*}
-heißen \emph{spezielle orthogonale/unitäre Gruppe}.
-\end{defn}
-
-\begin{bem}
-Die spezielle orthogonale Gruppe enthält genau die richtungserhaltenden, orthogonalen Endomorphismen $\R^n \to \R^n$.
+  Euklidische und unitäre Skalarprodukte sind immer nicht ausgeartet.
+  Eine Bilinearform ist genau dann nicht ausgeartet, wenn ihre darstellende Matrix (bzgl. einer beliebigen Basis) invertierbar ist.
 \end{bem}
 
 \begin{satz}
-Sei $A \in O(2)$. Dann ist $\det A \in \{ -1, 1 \}$.
-\begin{itemize}
-  \item Falls $\det A = 1$, gibt es genau ein $\phi \in [0, 2 \pi[$, sodass
-  \[ A = \begin{pmatrix} \cos(\phi) & - \sin(\phi) \\ \sin(\phi) & \cos(\phi) \end{pmatrix}. \]
-  \item Falls $\det A = -1$, gibt es genau ein $\phi \in [0, 2 \pi[$, sodass
-  \[ A = \begin{pmatrix} \cos(\phi) & \sin(\phi) \\ \sin(\phi) & - \cos(\phi) \end{pmatrix}. \]
-\end{itemize}
+  Sei $V$ ein endlichdim. VR und die Bilinearform $\gamma : V \times V \to K$ nicht ausgeartet. Dann sind die Abbildungen
+  \[ \Phi : V \to V^*, \quad w \mapsto \gamma(\blank, w) \]
+  \[ \Psi : V \to V^*, \quad v \mapsto \gamma(v, \blank) \]
+  Isomorphismen.
 \end{satz}
 
 \begin{satz}
-Sei $V$ ein endlichdim., unitärer VR und $f : V \to V$ ein unitärer Endomorphismus. Dann gilt:
-\begin{itemize}
-  \item $f$ ist diagonalisierbar
-  \item $V$ hat eine ONB aus Eigenvektoren von $f$
-\end{itemize}
+  Es gibt eine eineindeutige Entsprechung zwischen
+  \begin{itemize}
+    \item Isomorphismen $V \to V^*$
+    \item nicht-ausgearteten Bilinearformen $V \times V \to K$
+  \end{itemize}
+
+  Dabei ordnen wir einem Isomorphismus $\Psi : V \to V^*$ die Bilinearform $(v, w) \mapsto \Psi(v)(w)$ zu.
+
+  Andersrum ist für einen endlichdim. euklidischen VR $(V, \langle \blank , \blank \rangle)$ die Abbildung
+  \[ \Psi : V \to V^*, \quad v \mapsto \langle v , \blank \rangle \]
+  ein Isomorphismus.
+\end{satz}
+
+\begin{defn}
+  Sei $V$ ein $K$-VR und $W \subset V$ ein UVR. Dann heißt der UVR
+  \[ W^0 \coloneqq \Set{ f \in V^* }{ f\mid_W = 0 } \]
+  \emph{Annulator} von $W$ in $V^*$.
+\end{defn}
+
+\begin{bem}
+  Ist $\dim V < \infty$, so gilt $\dim W^0 = \dim V - \dim W$.
+\end{bem}
+
+\begin{satz}
+  Sei $V$ endlichdimensional und $W \subset V$ ein UVR. Dann gilt
+  \[ \Psi(W^{\perp}) = W^0. \]
+\end{satz}
+
+\begin{defn}
+  Sei $W \subset V$ ein UVR. Wir definieren die Relation $\sim$ wie folgt:
+  \[ v_1 \sim v_2 :\iff v_1 - v_2 \in W. \]
+  Dann ist die Äquivalenzklasse $[v]$ gleich dem affinen Teilraum
+  \[ v + W = \Set{ v + w }{ w \in W }. \]
+
+  Durch die Setzung
+  \begin{align*}
+  (v_1 + W) + (v_2 + W) &\coloneqq (v_1 + v_2) + W
+  \lambda \cdot (v + W) &\coloneqq \lambda v_1 + W
+  \end{align*}
+
+  wird $V/W$ zu einem $K$-Vektorraum, genannt \emph{Quotientenraum} von $V$ nach $W$.
+\end{defn}
+
+\begin{satz}
+  Sei $(V, \langle \blank , \blank \rangle)$ ein euklidischer/unitärer VR und $W \subset V$ ein endlichdimensionaler UVR. Dann ist die Abbildung
+  \[ \chi : W^{\perp} \to V/W, \quad v \mapsto [v] \]
+  ein Vektorraumisomorphismus.
+\end{satz}
+
+\begin{kor}
+  Für endlichdimensionale $V$ gilt: $\dim V/W = \dim W^{\perp} = \dim V - \dim W$.
+\end{kor}
+
+\begin{defn}
+  Seien $V, W$ euklidische/unitäre VR. Eine eine $\R/$- bzw. $\C$-lineare Abbildung $f : V \to W$ heißt \emph{orthogonal} bzw. \emph{unitär}, falls für alle $v, w \in V$ gilt:
+  \[ \langle f(v) , f(w) \rangle_W = \langle v , w \rangle_V. \]
+\end{defn}
+
+\begin{bem}
+  Orthogonale/unitäre Abbildungen sind längenerhaltend (und somit injektiv) und bilden orthogonale Familien wieder auf orthogonale Familien ab. Die Umkehrung gilt auch:
+\end{bem}
+
+\begin{satz}
+  Sei $f : V \to W$ linear und längenerhaltend. Dann ist $f$ orthogonal bzw. unitär.
+\end{satz}
+
+\begin{defn}
+  Eine Matrix $A \in \R^{n \times m}$ bzw. $A \in \C^{n \times m}$ heißt \emph{orthogonal} bzw. \emph{unitär}, falls sie bzgl. der Standardskalarprodukte eine orthogonale bzw. unitäre Abbildung beschreibt. Dies ist gleichbedeutend damit, dass
+  \[ (Ax)^T (Ay) = x^T A^T Ay = x^T y \]
+  für alle $x, y \in \R^m$, also
+  \[ A^T A = E_m \]
+  im euklidischen und
+  \[ A^T \overline{A} = E_m \]
+  im unitären Fall.
+\end{defn}
+
+\begin{satz}
+  Seien $V$ und $W$ endlichdim. euklidisch/unitär. Eine Abbildung $f : V \to W$ ist genau dann orthogonal/unitär, wenn gilt: Bezüglich Orthonormalbasen $\BB$ und $\BC$ von $V$ und $W$ ist die darstellende Matrix $M_C^B(f)$ orthogonal/unitär.
+\end{satz}
+
+\begin{satz}
+  Sei $V$ endlichdim. euklidisch/unitär und $f : V \to V$ ein orthogonaler/unitärer Endomorphismus. Dann gilt:
+  \begin{itemize}
+    \item $f$ ist ein Isomorphismus.
+    \item $f^{-1}$ ist ebenfalls orthogonal/unitär
+    \item alle EW von $f$ haben den Betrag $1$
+    \item Eigenvektoren zu unterschiedlichen EW sind orthogonal
+  \end{itemize}
+\end{satz}
+
+\begin{bem}
+  Für Matrizen $A \in \R^{n \times n}$ (bzw. $A \in \C^{n \times n}$) sind äquivalent:
+  \begin{itemize}
+    \item $A$ ist orthogonal (unitär)
+    \item Die Spalten von $A$ bilden eine ONB.
+    \item Die Zeilen von $A$ bilden eine ONB.
+    \item $A^{-1} = A^T$ (bzw. $\overline{A}^{-1} = A^T$)
+  \end{itemize}
+\end{bem}
+
+\begin{defn}
+  Die Untergruppen
+  \begin{align*}
+  O(n) &\coloneqq \Set{ A \in \Mat(n, \R) }{ A \text{ orthogonal } } \subset \R^{n \times n} \\
+  O(n) &\coloneqq \Set{ A \in \Mat(n, \C) }{ A \text{ unitär } } \subset \C^{n \times n} \\
+  \end{align*}
+  der multiplikativen Gruppen $\GL(n, \R)$ bzw. $\GL(n, \C)$ heißen \emph{Gruppen der orthogonalen bzw. unitären Matrizen}.
+\end{defn}
+
+\begin{bem}
+  Für alle $A \in O(n)$ und $A \in U(n)$ gilt $\abs{\det A} = 1$.
+\end{bem}
+
+\begin{defn}
+  Sei $V$ ein endlichdim. $\R$-VR.
+  \begin{itemize}
+    \item Zwei Basen $\BB$ und $\BC$ von $V$ heißen \emph{gleich orientiert}, falls gilt: $\det M_{\BC}^{\BB} > 0$.
+    \item Die Äquivalenklassen der so definierten Relation heißen \emph{Orientierungen} von $V$. Zwei Basen in derselben Äquivalenzklasse heißen \emph{positiv}, Basen in unterschiedlichen Äquivalenzklassen \emph{negativ orientiert}.
+    \item Es seien $V, W$ endlichdim. und orientierte VR, d.\,h. mit Äquivalenzklassen gleich orientierter Basen versehen. Ein Isomorphismus $V \to W$ heißt \emph{orientierungserhaltend}, falls $f$ eine positiv orientierte Basis von $V$ auf eine positiv orientierte Basis von $W$ abbildet.
+    \item Für $V = \R^n$ heißt die Orientierungsklasse der Standardbasis $(e_1, ..., e_n)$ \emph{Standardorientierung} oder \emph{kanonische Orientierung} von $\R^n$.
+  \end{itemize}
+\end{defn}
+
+\begin{defn}
+  Die Gruppen
+  \begin{align*}
+  SO(n) \coloneqq \Set{ A \in O(n) }{ \det A = 1 } \\
+  SU(n) \coloneqq \Set{ A \in U(n) }{ \det A = 1 }
+  \end{align*}
+  heißen \emph{spezielle orthogonale/unitäre Gruppe}.
+\end{defn}
+
+\begin{bem}
+  Die spezielle orthogonale Gruppe enthält genau die richtungserhaltenden, orthogonalen Endomorphismen $\R^n \to \R^n$.
+\end{bem}
+
+\begin{satz}
+  Sei $A \in O(2)$. Dann ist $\det A \in \{ -1, 1 \}$.
+  \begin{itemize}
+    \item Falls $\det A = 1$, gibt es genau ein $\phi \in \cointerval{0}{2 \pi}$, sodass
+    \[ A = \begin{pmatrix} \cos(\phi) & - \sin(\phi) \\ \sin(\phi) & \cos(\phi) \end{pmatrix}. \]
+    \item Falls $\det A = -1$, gibt es genau ein $\phi \in \cointerval{0}{2 \pi}$, sodass
+    \[ A = \begin{pmatrix} \cos(\phi) & \sin(\phi) \\ \sin(\phi) & - \cos(\phi) \end{pmatrix}. \]
+  \end{itemize}
+\end{satz}
+
+\begin{satz}
+  Sei $V$ ein endlichdim., unitärer VR und $f : V \to V$ ein unitärer Endomorphismus. Dann gilt:
+  \begin{itemize}
+    \item $f$ ist diagonalisierbar
+    \item $V$ hat eine ONB aus Eigenvektoren von $f$
+  \end{itemize}
 \end{satz}
 
 \begin{verf}
-Eine ONB aus Eigenvektoren von $f$ bestimmt man, indem man mittel Gram-Schmidt ONB von den Eigenräumen von $f$ berechnet und diese zu einer Basis zusammensetzt.
+  Eine ONB aus Eigenvektoren von $f$ bestimmt man, indem man mittel Gram-Schmidt ONB von den Eigenräumen von $f$ berechnet und diese zu einer Basis zusammensetzt.
 \end{verf}
 
 \begin{kor}
-Ist $A \in U(n)$, so gibt es ein $S \in U(n)$, sodass
-\[ SAS^{-1} = \begin{pmatrix} \lambda_1 & & 0 \\ & \ddots & \\ 0 & & \lambda_n \end{pmatrix}, \]
-wobei $\lambda_1, ..., \lambda_n \in \C$ mit Betrag $1$.
+  Ist $A \in U(n)$, so gibt es ein $S \in U(n)$, sodass
+  \[ SAS^{-1} = \begin{pmatrix} \lambda_1 & & 0 \\ & \ddots & \\ 0 & & \lambda_n \end{pmatrix}, \]
+  wobei $\lambda_1, ..., \lambda_n \in \C$ mit Betrag $1$.
 \end{kor}
 
 \begin{satz}
-Es sei $V$ ein endlichdim. euklidischer VR und $f : V \to V$ ein orthogonaler Endomorphismus. Dann existiert eine ONB von $V$, bezüglich der $f$ durch eine Matrix der Form
-\[ \begin{psmallmatrix}
-1 & & & & & & & & 0 \\
-& \ddots && \\
-&& 1 \\
-&&& -1 \\
-&&&& \ddots \\
-&&&&& -1 \\
-&&&&&& A_1 \\
-&&&&&&& \ddots \\
-0 &&&&&&&& A_k  \\
-\end{psmallmatrix} \]
-dargestellt wird, wobei $A_1, ..., A_k \in SO(2)$ Drehmatrizen der Form
-\[ A_i = \begin{pmatrix}
-\cos \theta_i & - \sin \theta_i \\
-\sin \theta_i & \cos \theta_i
-\end{pmatrix} \]
-mit $\theta_i \in ]0, \pi[ \cup ]\pi, 2 \pi[$ sind.
+  Es sei $V$ ein endlichdim. euklidischer VR und $f : V \to V$ ein orthogonaler Endomorphismus. Dann existiert eine ONB von $V$, bezüglich der $f$ durch eine Matrix der Form
+  \[ \begin{psmallmatrix}
+  1 & & & & & & & & 0 \\
+  & \ddots && \\
+  && 1 \\
+  &&& -1 \\
+  &&&& \ddots \\
+  &&&&& -1 \\
+  &&&&&& A_1 \\
+  &&&&&&& \ddots \\
+  0 &&&&&&&& A_k  \\
+  \end{psmallmatrix} \]
+  dargestellt wird, wobei $A_1, ..., A_k \in SO(2)$ Drehmatrizen der Form
+  \[ A_i = \begin{pmatrix}
+  \cos \theta_i & - \sin \theta_i \\
+  \sin \theta_i & \cos \theta_i
+  \end{pmatrix} \]
+  mit $\theta_i \in \ointerval{0}{\pi} \cup \ointerval{\pi}{2 \pi}$ sind.
 \end{satz}
 
 \begin{satz}
-Sei $A \in SO(3)$ mit $A \not= E_3$. Dann existiert eine ONB $\BB = (v_1, v_2, v_3)$ von $\R^3$, bezüglich der die Abbildung $A$ durch eine Matrix der Form
-\[ \begin{pmatrix}
-1 & 0 & 0 \\
-0 & \cos(\phi) & - \sin(\phi) \\
-0 & \sin(\phi) & cos(\phi)
-\end{pmatrix} \]
-dargestellt wird, wobei $\phi \in [0, 2 \pi]$. Wir können uns daher $A$ als Drehung mit Drehachse $\mathrm{span}(v_1) \subset \R^3$ um den Winkel $\phi$ vorstellen. Die Drehachse und der Winkel $\phi$ sind durch $A$ eindeutig bestimmt.
+  Sei $A \in SO(3)$ mit $A \not= E_3$. Dann existiert eine ONB $\BB = (v_1, v_2, v_3)$ von $\R^3$, bezüglich der die Abbildung $A$ durch eine Matrix der Form
+  \[ \begin{pmatrix}
+  1 & 0 & 0 \\
+  0 & \cos(\phi) & - \sin(\phi) \\
+  0 & \sin(\phi) & cos(\phi)
+  \end{pmatrix} \]
+  dargestellt wird, wobei $\phi \in [0, 2 \pi]$. Wir können uns daher $A$ als Drehung mit Drehachse $\mathrm{span}(v_1) \subset \R^3$ um den Winkel $\phi$ vorstellen. Die Drehachse und der Winkel $\phi$ sind durch $A$ eindeutig bestimmt.
 \end{satz}
 
 % TODO: Konkretes Verfahren
 
 \begin{satz}
-Es gilt:
-\[ SU(2) = \left\{ \begin{pmatrix}
-w & - \overline{z} \\
-z & \overline{w}
-\end{pmatrix} : w, z \in \C, |w|^2 + |z|^2 = 1 \right\} \]
+  Es gilt:
+  \[ SU(2) = \left\{ \begin{pmatrix}
+  w & - \overline{z} \\
+  z & \overline{w}
+  \end{pmatrix} : w, z \in \C, \abs{w}^2 + \abs{z}^2 = 1 \right\} \]
 \end{satz}
 
 \begin{defn}
-\[ \HH \coloneqq \mathrm{span}_{\R} SU(2) \subset \C^{2 \times 2} \]
+  \[ \HH \coloneqq \mathrm{span}_{\R} SU(2) \subset \C^{2 \times 2} \]
 \end{defn}
 
 \begin{satz}
-Die Matrizen
-\begin{align*}
-\eta_0 \coloneqq E_2, \quad & \eta_1 \coloneqq \begin{pmatrix} i & 0 \\ 0 & -i \end{pmatrix}, \\
-\eta_2 \coloneqq \begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix}, \quad & \eta_3 = \begin{pmatrix} 0 & i \\ i & 0 \end{pmatrix}
-\end{align*}
-bilden eine Basis der reellen VR $\mathbb{H}$.
+  Die Matrizen
+  \begin{align*}
+  \eta_0 \coloneqq E_2, \quad & \eta_1 \coloneqq \begin{pmatrix} i & 0 \\ 0 & -i \end{pmatrix}, \\
+  \eta_2 \coloneqq \begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix}, \quad & \eta_3 = \begin{pmatrix} 0 & i \\ i & 0 \end{pmatrix}
+  \end{align*}
+  bilden eine Basis der reellen VR $\mathbb{H}$.
 \end{satz}
 
 \begin{satz}
-$\HH$ ist ein (nicht-kommutativer) Ring mit $1 = \eta_0$. Jedes Element $x \in \HH \backslash \{ 0 \}$ besitzt ein multiplikatives Inverses. Damit ist $\HH \backslash \{ 0 \}$ bezüglich der Multiplikation eine Gruppe und $\HH$ ein Schiefkörper.
+  $\HH$ ist ein (nicht-kommutativer) Ring mit $1 = \eta_0$. Jedes Element $x \in \HH \backslash \{ 0 \}$ besitzt ein multiplikatives Inverses. Damit ist $\HH \backslash \{ 0 \}$ bezüglich der Multiplikation eine Gruppe und $\HH$ ein Schiefkörper.
 \end{satz}
 
 \begin{defn}
-Setzen wir $I \coloneqq \eta_1, J \coloneqq \eta_2, K \coloneqq \eta_3$, dann gilt
-\begin{align*}
-I^2 = J^2 = K^2 &= -1, \\
-IJ = -JI = K, \quad JK = -KJ &= I, \quad KI = -IK = J.
-\end{align*}
+  Setzen wir $I \coloneqq \eta_1, J \coloneqq \eta_2, K \coloneqq \eta_3$, dann gilt
+  \begin{align*}
+  I^2 = J^2 = K^2 &= -1, \\
+  IJ = -JI = K, \quad JK = -KJ &= I, \quad KI = -IK = J.
+  \end{align*}
 \end{defn}
 
 \begin{satz}
-Es gilt
-\[ SO(2) = \left\{ \begin{pmatrix} w & -z \\ z & w \end{pmatrix} : w, z \in \R, w^2 + z^2 = 1 \right\}. \]
+  Es gilt
+  \[ SO(2) = \left\{ \begin{pmatrix} w & -z \\ z & w \end{pmatrix} : w, z \in \R, w^2 + z^2 = 1 \right\}. \]
 \end{satz}
 
 % Konstruktion der komplexen Zahlen aus SO(2)
 
 \begin{defn}
-Sei $G \coloneqq \GL(n, \R)$ oder $G \coloneqq \GL(n, \C)$. Eine \emph{Einparametergruppe} in $G$ ist eine differenzierbare Abbildung $\phi : \R \to G$, die außerdem ein Grupenhomomorphismus $(\R, +, 0) \to (G, \cdot, E_n)$ ist. Für die Differenzierbarkeit fassen wir $G$ als offene Teilmenge von $\R^{n \times n}$ bzw. $\C^{n \times n}$ und $\phi$ als Zusammenfassung von Komponentenfunktionen auf.
+  Sei $G \coloneqq \GL(n, \R)$ oder $G \coloneqq \GL(n, \C)$. Eine \emph{Einparametergruppe} in $G$ ist eine differenzierbare Abbildung $\phi : \R \to G$, die außerdem ein Grupenhomomorphismus $(\R, +, 0) \to (G, \cdot, E_n)$ ist. Für die Differenzierbarkeit fassen wir $G$ als offene Teilmenge von $\R^{n \times n}$ bzw. $\C^{n \times n}$ und $\phi$ als Zusammenfassung von Komponentenfunktionen auf.
 \end{defn}
 
 \begin{satz}
-Für alle $A \in \Mat(n, \R)$ bzw. $A \in \Mat(n, \C)$ definiert
-\[ \phi_A : \R \to G, \quad t \mapsto \exp(t \cdot A) \]
-eine Einparametergruppe in $\GL(n, \R)$ bzw. in $\GL(n, \C)$.
+  Für alle $A \in \Mat(n, \R)$ bzw. $A \in \Mat(n, \C)$ definiert
+  \[ \phi_A : \R \to G, \quad t \mapsto \exp(t \cdot A) \]
+  eine Einparametergruppe in $\GL(n, \R)$ bzw. in $\GL(n, \C)$.
 \end{satz}
 
 \begin{satz}
-Es gilt $\im \phi_A \subset O(n) \iff A^T = -A$.
+  Es gilt $\im \phi_A \subset O(n) \iff A^T = -A$.
 \end{satz}
 
 \begin{bem}
-Es gilt für alle $A \in \R^{n \times n}$ bzw. $A \in \C^{n \times n}$
-\[ \frac{d}{dt} \phi_A(t) \mid_{t=0} = A. \]
-Daher heißt $A$ \emph{infinitesimaler Erzeuger} der Einparametergruppe $\phi_A$.
+  Es gilt für alle $A \in \R^{n \times n}$ bzw. $A \in \C^{n \times n}$
+  \[ \frac{d}{dt} \phi_A(t) \mid_{t=0} = A. \]
+  Daher heißt $A$ \emph{infinitesimaler Erzeuger} der Einparametergruppe $\phi_A$.
 \end{bem}
 
 \begin{defn}
-Der Vektorraum
-\[ \mathfrak{o}(n) \coloneqq \{ A \in \R^{n \times n} \| A^T = - A \} \]
-heißt \emph{Vektorraum der infinitesimalen Erzeuger von $O(n)$}.
+  Der Vektorraum
+  \[ \mathfrak{o}(n) \coloneqq \Set{ A \in \R^{n \times n} }{ A^T = - A } \]
+  heißt \emph{Vektorraum der infinitesimalen Erzeuger von $O(n)$}.
 \end{defn}
 
 \begin{bem}
-Wegen
-\[ \det(\exp(tA)) = \exp(t \cdot \spur(A)) \]
-gilt $(\fa{t \in \R} \det \phi_A(t) = 1) \iff \spur A = 0$.
+  Wegen
+  \[ \det(\exp(tA)) = \exp(t \cdot \spur(A)) \]
+  gilt $(\fa{t \in \R} \det \phi_A(t) = 1) \iff \spur A = 0$.
 \end{bem}
 
 \begin{defn}
-Der Vektorraum
-\[ \mathfrak{so}(n) \coloneqq \Set{ A \in \R^{n \times n} }{ A^T = - A, \spur A = 0 } \]
-heißt \emph{Vektorraum der infinitesimalen Erzeuger von $SO(n)$}.
+  Der Vektorraum
+  \[ \mathfrak{so}(n) \coloneqq \Set{ A \in \R^{n \times n} }{ A^T = - A, \spur A = 0 } \]
+  heißt \emph{Vektorraum der infinitesimalen Erzeuger von $SO(n)$}.
 \end{defn}
 
 \begin{satz}
-Es gilt $\mathfrak{so}(n) = \mathfrak{o}(n)$.
+  Es gilt $\mathfrak{so}(n) = \mathfrak{o}(n)$.
 \end{satz}
 
 
 % 7. selbstadjungierte Endomorphismen, Spektralsatz, Hauptachsentransformation
 
 \begin{defn}
-Sei $(V, \langle - , - \rangle)$ ein euklidischer/unitärer Vektorraum. ein Endomorphismus $f : V \to V$ heißt \emph{selbstadjungiert}, wenn
-\[ \langle v, f(w) \rangle = \langle f(v), w \rangle \quad \text{für alle $v, w \in V$.} \]
+  Sei $(V, \langle \blank , \blank \rangle)$ ein euklidischer/unitärer Vektorraum. ein Endomorphismus $f : V \to V$ heißt \emph{selbstadjungiert}, wenn
+  \[ \langle v, f(w) \rangle = \langle f(v), w \rangle \quad \text{für alle $v, w \in V$.} \]
 \end{defn}
 
 % Diagramm in 7.1
 
 \begin{satz}
-Sei $V$ endlichdim. euklidisch/unitär und $f \in \End(V)$. Dann ist $f$ genau dann selbstadjungiert, wenn folgendes gilt: Es sei $\BB$ eine ONB von $V$ und $A = M_\BB(f)$ die darstellende Matrix von $f$ bzgl. $\BB$. Dann ist $\overline{A}^T = A$, d.\,h. $A$ ist hermitisch bzw. symmetrisch.
+  Sei $V$ endlichdim. euklidisch/unitär und $f \in \End(V)$. Dann ist $f$ genau dann selbstadjungiert, wenn folgendes gilt: Es sei $\BB$ eine ONB von $V$ und $A = M_\BB(f)$ die darstellende Matrix von $f$ bzgl. $\BB$. Dann ist $\overline{A}^T = A$, d.\,h. $A$ ist hermitesch bzw. symmetrisch.
 \end{satz}
 
 \begin{satz}
-Sei $f : V \to V$ selbstadjungiert. Dann sind alle EW von $f$ reell und Eigenvektoren zu verschiedenen Eigenwerten sind orthogonal.
+  Sei $f : V \to V$ selbstadjungiert. Dann sind alle EW von $f$ reell und Eigenvektoren zu verschiedenen Eigenwerten sind orthogonal.
 \end{satz}
 
 \begin{satz}[Spektralsatz für selbstadjungierte Operatoren]
-Sei $V$ ein endlichdim. euklidischer/unitärer VR und $f : V \to V$ selbstadjungiert. Dann besitzt $V$ eine ONB bestehend aus Eigenvektoren von $f$.
+  Sei $V$ ein endlichdim. euklidischer/unitärer VR und $f : V \to V$ selbstadjungiert. Dann besitzt $V$ eine ONB bestehend aus Eigenvektoren von $f$.
 \end{satz}
 
 \begin{kor}
-Sei $A \in \C^{n \times n}$ hermitesch bzw. $A \in \R^{n \times n}$ symmetrisch. Dann ist $A$ diagonalisierbar. Es existiert eine ONB bestehend aus Eigenvektoren von $A$.
+  Sei $A \in \C^{n \times n}$ hermitesch bzw. $A \in \R^{n \times n}$ symmetrisch. Dann ist $A$ diagonalisierbar. Es existiert eine ONB bestehend aus Eigenvektoren von $A$.
 \end{kor}
 
 % Beispiele selbstadjungierter Operatoren
 
 \begin{defn}
-Sei ein $V$ endlichdim. euklidisch/unitärer VR und $\lambda_1, ..., \lambda_k$ die (paarweise verschiedenen) reellen EWe eines selbstadjungierten Endomorphismus $f : V \to V$. Setzen wir $W_i \coloneqq \Eig(f; \lambda_i)$, so haben wir nach den bisher bewiesenen Aussagen eine Summenzerlegung
-\[ f = \sum_{i=1}^k \lambda_i \cdot \mathrm{pr}_{W_i}^{\perp} \]
-von $f$ als Linearkombination von selbstadjungierten Projektionen. Diese Zerlegung nennt man \emph{Spektralzerlegung} von $f$.
+  Sei ein $V$ endlichdim. euklidisch/unitärer VR und $\lambda_1, ..., \lambda_k$ die (paarweise verschiedenen) reellen EWe eines selbstadjungierten Endomorphismus $f : V \to V$. Setzen wir $W_i \coloneqq \Eig(f; \lambda_i)$, so haben wir nach den bisher bewiesenen Aussagen eine Summenzerlegung
+  \[ f = \sum_{i=1}^k \lambda_i \cdot \mathrm{pr}_{W_i}^{\perp} \]
+  von $f$ als Linearkombination von selbstadjungierten Projektionen. Diese Zerlegung nennt man \emph{Spektralzerlegung} von $f$.
 \end{defn}
 
 \begin{bem}
-Es ist nicht sinnvoll, von EWen einer symmetrischen Bilinearform $\gamma : V \times V \to K$ zu sprechen!
+  Es ist nicht sinnvoll, von EWen einer symmetrischen Bilinearform $\gamma : V \times V \to K$ zu sprechen!
 \end{bem}
 
 \begin{satz}
-Sei $V$ ein endlichdim. $\R$-VR und $\gamma : V \times V \to \R$ eine symmetrische Bilinearform. Dann existiert eine Basis $\BB$ von $V$, sodass $M_{\BB}(\gamma)$ eine Diagonalmatrix ist.
+  Sei $V$ ein endlichdim. $\R$-VR und $\gamma : V \times V \to \R$ eine symmetrische Bilinearform. Dann existiert eine Basis $\BB$ von $V$, sodass $M_{\BB}(\gamma)$ eine Diagonalmatrix ist.
 \end{satz}
 
 \begin{defn}
-Eine \emph{quadratische Form} vom Rang $n$ über einem Körper $K$ ist ein Polynom $Q \in K[X_1, ..., X_n]$ der Form
-\[ Q = \sum_{1 \le i,j \le n} \alpha_{ij} X_i X_j \]
-mit $\alpha_{ij} \in K$ für alle $i, j \in \{ 1, ..., n \}$. Man sagt auch, $Q$ ist ein \emph{homogenes Polynom vom Grad 2}.
+  Eine \emph{quadratische Form} vom Rang $n$ über einem Körper $K$ ist ein Polynom $Q \in K[X_1, ..., X_n]$ der Form
+  \[ Q = \sum_{1 \le i,j \le n} \alpha_{ij} X_i X_j \]
+  mit $\alpha_{ij} \in K$ für alle $i, j \in \{ 1, ..., n \}$. Man sagt auch, $Q$ ist ein \emph{homogenes Polynom vom Grad 2}.
 \end{defn}
 
 \begin{bem}
-Ist $Q$ eine quadratische Form, so definiert $Q$ eine Abbildung $\phi_Q : K^n \to K$, gegeben durch
-\[ (x_1, ..., x_n) \mapsto Q(x_1, ..., x_n) \]
-also durh Einsetzen der Körperelemente für die Unbestimmten. Wenn wir die Koeffizienten in einer Matrix $A \coloneqq (\alpha_{ij})_{1 \le i, j \le n} \in K^{n \times n}$ zusammenfassen, so sehen wir, dass
-\[ \phi_Q(x) = x^T A x. \]
+  Ist $Q$ eine quadratische Form, so definiert $Q$ eine Abbildung $\phi_Q : K^n \to K$, gegeben durch
+  \[ (x_1, ..., x_n) \mapsto Q(x_1, ..., x_n) \]
+  also durh Einsetzen der Körperelemente für die Unbestimmten. Wenn wir die Koeffizienten in einer Matrix $A \coloneqq (\alpha_{ij})_{1 \le i, j \le n} \in K^{n \times n}$ zusammenfassen, so sehen wir, dass
+  \[ \phi_Q(x) = x^T A x. \]
 \end{bem}
 
 \begin{satz}
-Wir können aus $\phi_Q$ die Matrix $A$ zurückgewinnen (falls $0 \not= 2$ in $K$ gilt).
+  Wir können aus $\phi_Q$ die Matrix $A$ zurückgewinnen (falls $0 \not= 2$ in $K$ gilt).
 \end{satz}
 
 % TODO: Verfahren Hauptachsentransformation (üben)
 
 \begin{defn}
-Eine \emph{affine Quadrik} im $\R^n$ ist eine Teilmenge der Form
-\[ \Set{ x \in \R^n }{ x^TAx + \langle b , x \rangle + c = 0 } \subset \R^n, \]
-wobei wir $A$ ohne Einschränkung als symmetrisch annehmen dürfen, $b \in \R^n$ und $c \in \R$.
+  Eine \emph{affine Quadrik} im $\R^n$ ist eine Teilmenge der Form
+  \[ \Set{ x \in \R^n }{ x^TAx + \langle b , x \rangle + c = 0 } \subset \R^n, \]
+  wobei wir $A$ ohne Einschränkung als symmetrisch annehmen dürfen, $b \in \R^n$ und $c \in \R$.
 \end{defn}
 
 \begin{defn}
-Eine affine Quadrik im $\R^2$ nennt man einen \emph{Kegelschnitt}.
+  Eine affine Quadrik im $\R^2$ nennt man einen \emph{Kegelschnitt}.
 \end{defn}
 
 % Untersuchung einer allgemeinen affinen Quadrik:
@@ -917,52 +919,52 @@ Eine affine Quadrik im $\R^2$ nennt man einen \emph{Kegelschnitt}.
 % 3. 
 
 \begin{satz}[Trägheitssatz von Sylvester]
-Sei $V$ ein $n$-dimensionaler $\R$-Vektorraum und
-\[ \gamma : V \times V \to \R \]
-eine symmetrische Bilinearform. Es seien $\BB$ und $\BC$ zwei Basen von $V$ und $S \coloneqq M_\BB(\gamma)$ und $T \coloneqq M_{\BC}(\gamma)$ die entsprechenden darstellenden Matrizen. Es seien $s_+$ und $s_-$ die Anzahlen der positiven, bzw. negativen Eigenwerte von $S$. Entsprechend definieren wir $t_+$ und $t_-$. Dann gilt
-\[ s_+ = t_+, s_- = t_-. \]
+  Sei $V$ ein $n$-dimensionaler $\R$-Vektorraum und
+  \[ \gamma : V \times V \to \R \]
+  eine symmetrische Bilinearform. Es seien $\BB$ und $\BC$ zwei Basen von $V$ und $S \coloneqq M_\BB(\gamma)$ und $T \coloneqq M_{\BC}(\gamma)$ die entsprechenden darstellenden Matrizen. Es seien $s_+$ und $s_-$ die Anzahlen der positiven, bzw. negativen Eigenwerte von $S$. Entsprechend definieren wir $t_+$ und $t_-$. Dann gilt
+  \[ s_+ = t_+, s_- = t_-. \]
 \end{satz}
 
 \begin{kor}[Normalform für reelle symmetrische Bilinearformen]
-Sei $V$ ein endlichdim. $\R$-Vektorraum der Dimension $n$ und $\gamma : V \times V \to \R$ eine symmetrische Bilinearform der Signatur $(r_+, r_-)$. Dann existiert eine Basis $\BB$ von $V$, sodass
-\[ M_{\BB}(\gamma) = \begin{pmatrix}
-E_{r_+} && 0 \\
-& - E_{r_-} & \\
-0 && 0
-\end{pmatrix}, \]
-wobei die $0$ unten rechts die Nullmatrix in $\R^{r_0 \times r_0}$ bezeichnet.
+  Sei $V$ ein endlichdim. $\R$-Vektorraum der Dimension $n$ und $\gamma : V \times V \to \R$ eine symmetrische Bilinearform der Signatur $(r_+, r_-)$. Dann existiert eine Basis $\BB$ von $V$, sodass
+  \[ M_{\BB}(\gamma) = \begin{pmatrix}
+  E_{r_+} && 0 \\
+  & - E_{r_-} & \\
+  0 && 0
+  \end{pmatrix}, \]
+  wobei die $0$ unten rechts die Nullmatrix in $\R^{r_0 \times r_0}$ bezeichnet.
 \end{kor}
 
 \begin{defn}
-Sei $V$ ein endlichdim. $\R$-VR und $\gamma : V \times V \to \R$ eine symmetrische Bilinearform. Wir nennen $\gamma$
-\begin{itemize}
-  \item \emph{positiv definit}, falls $\gamma(v, v) > 0$ für alle $v \in V \backslash \{ 0 \}$,
-  \item \emph{positiv semidefinit}, falls $\gamma(v, v) \ge 0$ für alle $v \in V$,
-  \item \emph{negativ definit}, falls $\gamma(v, v) < 0$ für alle $v \in V \backslash \{ 0 \}$,
-  \item \emph{negativ semidefinit}, falls $\gamma(v, v) \le 0$ für alle $v \in V$,
-  \item \emph{indefinit}, falls es $v, w \in V$ gibt mit $\gamma(v, v) < 0$ und $\gamma(w, w) > 0$.
-\end{itemize}
+  Sei $V$ ein endlichdim. $\R$-VR und $\gamma : V \times V \to \R$ eine symmetrische Bilinearform. Wir nennen $\gamma$
+  \begin{itemize}
+    \item \emph{positiv definit}, falls $\gamma(v, v) > 0$ für alle $v \in V \backslash \{ 0 \}$,
+    \item \emph{positiv semidefinit}, falls $\gamma(v, v) \ge 0$ für alle $v \in V$,
+    \item \emph{negativ definit}, falls $\gamma(v, v) < 0$ für alle $v \in V \backslash \{ 0 \}$,
+    \item \emph{negativ semidefinit}, falls $\gamma(v, v) \le 0$ für alle $v \in V$,
+    \item \emph{indefinit}, falls es $v, w \in V$ gibt mit $\gamma(v, v) < 0$ und $\gamma(w, w) > 0$.
+  \end{itemize}
 \end{defn}
 
 \begin{bem}
-Positiv definite symmetrische Bilinearformen auf reellen Vektorräumen werden Skalarprodukt genannt.
+  Positiv definite symmetrische Bilinearformen auf reellen Vektorräumen werden Skalarprodukt genannt.
 \end{bem}
 
 \begin{satz}
-Sei $V$ ein endlichdim. $\R$-VR und $\gamma : V \times V \to \R$ eine symmetrische Bilinearform der Signatur $(r_+, r_-)$. Dann gilt:
-\begin{itemize}
-  \item $\gamma$ ist genau dann positiv definit, falls $r_+ = n$.
-  \item $\gamma$ ist genau dann positiv semidefinit, falls $r_- = 0$.
-  \item $\gamma$ ist genau dann indefinit, falls $r_+ > 0$ und $r_- > 0$.
-\end{itemize}
+  Sei $V$ ein endlichdim. $\R$-VR und $\gamma : V \times V \to \R$ eine symmetrische Bilinearform der Signatur $(r_+, r_-)$. Dann gilt:
+  \begin{itemize}
+    \item $\gamma$ ist genau dann positiv definit, falls $r_+ = n$.
+    \item $\gamma$ ist genau dann positiv semidefinit, falls $r_- = 0$.
+    \item $\gamma$ ist genau dann indefinit, falls $r_+ > 0$ und $r_- > 0$.
+  \end{itemize}
 \end{satz}
 
 \begin{satz}[Hauptminoren-Kriterium]
-Sei $A \in \R^{n \times n}$ eine symmetrische Matrix. Für $k = 1, ..., n$ bezeichnen wir mit $H_k \in \R$ die Determinante der linken oberen $(k \times k)$-Teilmatrix $A_k$ von $A$ (auch $k$-ter Hauptminor genannt). Dann sind äquivalent:
-\begin{itemize}
-  \item $A$ ist positiv definit.
-  \item $H_k > 0$ für alle $k = 1, ..., n$.
-\end{itemize}
+  Sei $A \in \R^{n \times n}$ eine symmetrische Matrix. Für $k = 1, ..., n$ bezeichnen wir mit $H_k \in \R$ die Determinante der linken oberen $(k \times k)$-Teilmatrix $A_k$ von $A$ (auch $k$-ter Hauptminor genannt). Dann sind äquivalent:
+  \begin{itemize}
+    \item $A$ ist positiv definit.
+    \item $H_k > 0$ für alle $k = 1, ..., n$.
+  \end{itemize}
 \end{satz}
 
 \end{document}
