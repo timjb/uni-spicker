@@ -25,102 +25,101 @@
 \maketitle{Zusammenfassung Analysis \rom{2}}
 
 \begin{nota}
-Im Folgenden seien $a, b \in \R$ mit $a < b$ und $I, J \subset \R$ offene Intervalle.
+  Im Folgenden seien $a, b \in \R$ mit $a < b$ und $I, J \subset \R$ offene Intervalle.
 \end{nota}
 
 \section{Integration}
 
 \begin{defn}
-Eine \emph{Zerlegung} eines Intervalls $\cinterval{a}{b} \subset \R, a < b$ ist eine Menge $Z = \{ a = x_{0} < x_{1} < ... < x_{n} = b \}$. Die Zahl $\mu_{Z} \coloneqq \max\Set{x_{j} - x_{j-1}}{j \in \{1, ..., n\}}$ heißt \emph{Feinheit} der Zerlegung $Z$. Wenn $Z$, $Z'$ zwei Zerlegungen von $\cinterval{a}{b}$ sind mit $Z' \subset Z$, dann heißt $Z'$ Verfeinerung von $Z$.
+  Eine \emph{Zerlegung} eines Intervalls $\cinterval{a}{b} \subset \R, a < b$ ist eine Menge $Z = \{ a = x_{0} < x_{1} < ... < x_{n} = b \}$. Die Zahl $\mu_{Z} \coloneqq \max\Set{x_{j} - x_{j-1}}{j \in \{1, ..., n\}}$ heißt \emph{Feinheit} der Zerlegung $Z$. Wenn $Z$, $Z'$ zwei Zerlegungen von $\cinterval{a}{b}$ sind mit $Z' \subset Z$, dann heißt $Z'$ Verfeinerung von $Z$.
 \end{defn}
 
 \begin{defn}
-Eine Funktion $\phi : \cinterval{a}{b} \to \R$ heißt \emph{Treppenfunktion} bezüglich einer Zerlegung $Z = \{ x_{0} < ... < x_{n} \}$ von $\cinterval{a}{b}$, wenn für alle $j \in \{ 1, ..., n \}$ die Funktion $\phi$ auf dem offenen Intervall $(x_{j-1}, x_{j})$ konstant ist. Die Menge aller Treppenfunktionen (bezüglich irgendeiner Zerlegung) eines Intervalls $\cinterval{a}{b}$ wird mit $\mathcal{T}_{\cinterval{a}{b}}$ bezeichnet.
+  Eine Funktion $\phi : \cinterval{a}{b} \to \R$ heißt \emph{Treppenfunktion} bezüglich einer Zerlegung $Z = \{ x_{0} < ... < x_{n} \}$ von $\cinterval{a}{b}$, wenn für alle $j \in \{ 1, ..., n \}$ die Funktion $\phi$ auf dem offenen Intervall $(x_{j-1}, x_{j})$ konstant ist. Die Menge aller Treppenfunktionen (bezüglich irgendeiner Zerlegung) eines Intervalls $\cinterval{a}{b}$ wird mit $\mathcal{T}_{\cinterval{a}{b}}$ bezeichnet.
 \end{defn}
 
 \begin{satz}
-$\mathcal{T}{\cinterval{a}{b}}$ ist ein UVR des reellen VR aller reellwertigen Funktionen auf $\cinterval{a}{b}$.
+  $\mathcal{T}{\cinterval{a}{b}}$ ist ein UVR des reellen VR aller reellwertigen Funktionen auf $\cinterval{a}{b}$.
 \end{satz}
 
 \begin{defn}
-Sei $\phi : \cinterval{a}{b} \to \R$ eine Treppenfunktion bezüglich einer Zerlegung $Z = \{ x_0 < ... < x_n \}$. Dann heißt
-\[ \Intabdx{\phi(x)} \coloneqq \sum_{j = 1}^{n} \phi\left(\tfrac{x_{j-1} + x_j}{2}\right)(x_j - x_{j-1}) \]
-\emph{Integral} von $\phi$.
+  Sei $\phi : \cinterval{a}{b} \to \R$ eine Treppenfunktion bezüglich einer Zerlegung $Z = \{ x_0 < ... < x_n \}$. Dann heißt
+  \[ \Intabdx{\phi(x)} \coloneqq \sum_{j = 1}^{n} \phi\left(\tfrac{x_{j-1} + x_j}{2}\right)(x_j - x_{j-1}) \]
+  \emph{Integral} von $\phi$.
 \end{defn}
 
 \begin{bem}
-Obige Definition ist unabhängig von der gewählten Zerlegung $Z$.
+  Obige Definition ist unabhängig von der gewählten Zerlegung $Z$.
 \end{bem}
 
 \begin{satz}
-Das Integral von Treppenfunktionen ist linear und monoton.
+  Das Integral von Treppenfunktionen ist linear und monoton.
 \end{satz}
 
 \begin{defn}
-Sei $f : \cinterval{a}{b} \to \R$ beschränkt. Dann heißen
+  Sei $f : \cinterval{a}{b} \to \R$ beschränkt. Dann heißen
 
-\begin{align*}
-  \Upintabdx{f(x)} &\coloneqq \inf\left\{ \Intabdx{\phi(x)} : \phi \in \mathcal{T}{\cinterval{a}{b}}, \phi \ge f \right\} \\
-  \Lowintabdx{f(x)} &\coloneqq \sup\left\{ \Intabdx{\phi(x)} : \phi \in \mathcal{T}{\cinterval{a}{b}}, \phi \le f \right\}
-\end{align*}
-\emph{Oberintegral} bzw. \emph{Unterintegral} von $f$.
+  \begin{align*}
+    \Upintabdx{f(x)} &\coloneqq \inf\left\{ \Intabdx{\phi(x)} : \phi \in \mathcal{T}{\cinterval{a}{b}}, \phi \ge f \right\} \\
+    \Lowintabdx{f(x)} &\coloneqq \sup\left\{ \Intabdx{\phi(x)} : \phi \in \mathcal{T}{\cinterval{a}{b}}, \phi \le f \right\}
+  \end{align*}
+  \emph{Oberintegral} bzw. \emph{Unterintegral} von $f$.
 \end{defn}
 
 \begin{bem}
-Da wir in der Definition vorraussetzen, dass die Funktion $f$ beschränkt ist, existieren Ober- und Unterintegral im eigentlichen Sinne.
-Für Treppenfunktionen sind Oberintegral und Unterintegral gleich dem Integral für Treppenfunktionen.
-Das Oberintegral ist immer größer gleich dem Unterintegral.
-\end{bem}
+  Da wir in der Definition vorraussetzen, dass die Funktion $f$ beschränkt ist, existieren Ober- und Unterintegral im eigentlichen Sinne.
+  Für Treppenfunktionen sind Oberintegral und Unterintegral gleich dem Integral für Treppenfunktionen.
+  Das Oberintegral ist immer größer gleich dem Unterintegral.
+  \end{bem}
 
-\begin{satz}
-Für $f, f_{1}, f_{2} : \cinterval{a}{b} \to \R$ beschränkt und $\lambda \ge 0$ gilt
+  \begin{satz}
+  Für $f, f_{1}, f_{2} : \cinterval{a}{b} \to \R$ beschränkt und $\lambda \ge 0$ gilt
 
-\begin{enumerate}
-  \item $\Lowintabdx{f(x)} = - \Upintabdx{-f(x)}$
-  \item $\Upintabdx{(f_1 + f_2)(x)} \le \Upintabdx{f_1(x)}  + \Upintabdx{f_2(x)}$
-  \item $\Lowintabdx{(f_1 + f_2)(x)} \ge \Lowintabdx{f_1(x)}  + \Lowintabdx{f_2(x)}$
-  \item $\Upintabdx{(\lambda f)(x)} = \lambda \Upintabdx{f(x)}$
-  \item $\Lowintabdx{(\lambda f)(x)} = \lambda \Lowintabdx{f(x)}$
-\end{enumerate}
+  \begin{enumerate}
+    \item $\Lowintabdx{f(x)} = - \Upintabdx{-f(x)}$
+    \item $\Upintabdx{(f_1 + f_2)(x)} \le \Upintabdx{f_1(x)}  + \Upintabdx{f_2(x)}$
+    \item $\Lowintabdx{(f_1 + f_2)(x)} \ge \Lowintabdx{f_1(x)}  + \Lowintabdx{f_2(x)}$
+    \item $\Upintabdx{(\lambda f)(x)} = \lambda \Upintabdx{f(x)}$
+    \item $\Lowintabdx{(\lambda f)(x)} = \lambda \Lowintabdx{f(x)}$
+  \end{enumerate}
 \end{satz}
 
 \begin{defn}
-Eine Abb. $f : \cinterval{a}{b} \to \R$ heißt \emph{Riemann-integrierbar}, wenn
-\[ \Lowintabdx{f(x)} = \Upintabdx{f(x)}. \]
+  Eine Abb. $f : \cinterval{a}{b} \to \R$ heißt \emph{Riemann-integrierbar}, wenn
+  \[ \Lowintabdx{f(x)} = \Upintabdx{f(x)}. \]
 \end{defn}
 
 \begin{bem}
-Für Treppenfunktionen stimmt das Riemann-Integral mit dem vorher definierten Integral für Treppenfunktionen überein.
+  Für Treppenfunktionen stimmt das Riemann-Integral mit dem vorher definierten Integral für Treppenfunktionen überein.
 \end{bem}
 
 \begin{satz}
-Die Menge aller Riemann-integrierbaren Funktionen auf einem Intervall $\cinterval{a}{b}$ ist ein UVR des $\R$-VR aller Funktionen $f : \cinterval{a}{b} \to \R$ (genannt $\mathcal{R}_{\cinterval{a}{b}}$) und das Riemann-Integral verhält sich linear, dh. es gilt für alle $f, g : \mathcal{R}_{\cinterval{a}{b}}$ und $\lambda \in \R$:
+  Die Menge aller Riemann-integrierbaren Funktionen auf einem Intervall $\cinterval{a}{b}$ ist ein UVR des $\R$-VR aller Funktionen $f : \cinterval{a}{b} \to \R$ (genannt $\mathcal{R}_{\cinterval{a}{b}}$) und das Riemann-Integral verhält sich linear, dh. es gilt für alle $f, g : \mathcal{R}_{\cinterval{a}{b}}$ und $\lambda \in \R$:
 
-\begin{enumerate}
-  \item $\Intabdx{(f + g)(x)} = \Intabdx{f(x)} + \Intabdx{g(x)}$
-  \item $\Intabdx{(\lambda f)(x)} = \lambda \Intabdx{f(x)}$
-\end{enumerate}
+  \begin{enumerate}
+    \item $\Intabdx{(f + g)(x)} = \Intabdx{f(x)} + \Intabdx{g(x)}$
+    \item $\Intabdx{(\lambda f)(x)} = \lambda \Intabdx{f(x)}$
+  \end{enumerate}
 \end{satz}
 
 \begin{satz}
-Das Riemann-Integral verhält sich monoton.
+  Das Riemann-Integral verhält sich monoton.
 \end{satz}
 
 % TODO: 5.16
 
 \begin{satz}
-Alle monotonen und alle stetigen Funktionen $f : \cinterval{a}{b} \to \R$ sind Riemann-integrierbar.
+  Alle monotonen und alle stetigen Funktionen $f : \cinterval{a}{b} \to \R$ sind Riemann-integrierbar.
 \end{satz}
 
 \begin{satz}
-Seien $f, g : R_{\cinterval{a}{b}}$, dann auch Riemann-integrierbar:
-
-\begin{enumerate}
-  \item $f_{+} : \cinterval{a}{b} \to \R,\ x \mapsto \max\{f(x), 0\}$
-  \item $f_{-} : \cinterval{a}{b} \to \R,\ x \mapsto \max\{-f(x), 0\}$
-  \item $\abs{f}^{p} : \cinterval{a}{b} \to \R,\ x \mapsto \abs{f(x)}^p, \text{ mit } p \ge 1$
-  \item $fg : \cinterval{a}{b} \to \R,\ x \mapsto f(x)g(x)$
-\end{enumerate}
+  Seien $f, g : R_{\cinterval{a}{b}}$, dann auch Riemann-integrierbar:
+  \begin{enumerate}
+    \item $f_{+} : \cinterval{a}{b} \to \R,\ x \mapsto \max\{f(x), 0\}$
+    \item $f_{-} : \cinterval{a}{b} \to \R,\ x \mapsto \max\{-f(x), 0\}$
+    \item $\abs{f}^{p} : \cinterval{a}{b} \to \R,\ x \mapsto \abs{f(x)}^p, \text{ mit } p \ge 1$
+    \item $fg : \cinterval{a}{b} \to \R,\ x \mapsto f(x)g(x)$
+  \end{enumerate}
 \end{satz}
 
 \begin{satz}[Erster MWS für das Riemann-Integral]
@@ -129,50 +128,48 @@ Seien $f, g : R_{\cinterval{a}{b}}$, dann auch Riemann-integrierbar:
 \end{satz}
 
 \begin{defn}
-Sei $f : \cinterval{a}{b} \to \R$ beschränkt und $Z = \{ x_0 < ... < x_n \}$ eine Zerlegung von $\cinterval{a}{b}$. Dann heißt
-
-\begin{enumerate}
-  \item
-    $R(f, Z, \xi_1, ..., \xi_n) \coloneqq \sum_{j=1}^{n}\,f(\xi_j)(x_j - x_{j-1})$\\
-    \emph{Riemannsche Summe} von $f$ bzgl. $Z$ und den Stützstellen $\xi_j \in \cinterval{x_{j-1}}{x_j}$ für $j \in \{ 1, ..., n \}$.
-  \item
-    $O(f, Z) \coloneqq \sum_{j=1}^{n}\,(\sup\Set{f(x)}{x \in \cinterval{x_{j-1}}{x_j}})(x_j - x_{j-1})$\\
-    \emph{(Darbouxsche) Obersumme} von $f$ bzgl. $Z$
-  \item
-    $U(f, Z) \coloneqq \sum_{j=1}^{n}\,(\inf\Set{f(x)}{x \in \cinterval{x_{j-1}}{x_j}})(x_j - x_{j-1})$\\
-    \emph{(Darbouxsche) Untersumme} von $f$ bzgl. $Z$
-\end{enumerate}
+  Sei $f : \cinterval{a}{b} \to \R$ beschränkt und $Z = \{ x_0 < ... < x_n \}$ eine Zerlegung von $\cinterval{a}{b}$. Dann heißt
+  \begin{enumerate}
+    \item
+      $R(f, Z, \xi_1, ..., \xi_n) \coloneqq \sum_{j=1}^{n}\,f(\xi_j)(x_j - x_{j-1})$\\
+      \emph{Riemannsche Summe} von $f$ bzgl. $Z$ und den Stützstellen $\xi_j \in \cinterval{x_{j-1}}{x_j}$ für $j \in \{ 1, ..., n \}$.
+    \item
+      $O(f, Z) \coloneqq \sum_{j=1}^{n}\,(\sup\Set{f(x)}{x \in \cinterval{x_{j-1}}{x_j}})(x_j - x_{j-1})$\\
+      \emph{(Darbouxsche) Obersumme} von $f$ bzgl. $Z$
+    \item
+      $U(f, Z) \coloneqq \sum_{j=1}^{n}\,(\inf\Set{f(x)}{x \in \cinterval{x_{j-1}}{x_j}})(x_j - x_{j-1})$\\
+      \emph{(Darbouxsche) Untersumme} von $f$ bzgl. $Z$
+  \end{enumerate}
 \end{defn}
 
 \begin{bem}
-Sei $Z'$ eine Verfeinerung von $Z$, dann gilt $O(f, Z') \le O(f, Z)$ und $U(f, Z') \ge U(f, Z)$.
+  Sei $Z'$ eine Verfeinerung von $Z$, dann gilt $O(f, Z') \le O(f, Z)$ und $U(f, Z') \ge U(f, Z)$.
 \end{bem}
 
 \begin{satz}
-Seien $Z_1$, und $Z_2$ Zerlegungen von $\cinterval{a}{b}$, dann gilt $U(f, Z_1) \le O(f, Z_2)$.
+  Seien $Z_1$, und $Z_2$ Zerlegungen von $\cinterval{a}{b}$, dann gilt $U(f, Z_1) \le O(f, Z_2)$.
 \end{satz}
 
 \begin{satz}[Charakterisierung des Riemann-Integrals]
-Für $f : \cinterval{a}{b} \to \R$ beschränkt sind folgende vier Aussagen äquivalent:
+  Für $f : \cinterval{a}{b} \to \R$ beschränkt sind folgende vier Aussagen äquivalent:
 
-\begin{enumerate}
-  \item $f$ ist Riemann-integrierbar.
-  \item Für alle $\epsilon > 0$ gibt es eine Zerlegung $Z$ von $\cinterval{a}{b}$, sodass
-    \[ O(f, Z) - U(f, Z) < \epsilon. \]
-  \item Es gibt eine Zahl $\iota \in \R$ mit folgender Eigenschaft: Für alle $\epsilon > 0$ gibt es ein $\delta > 0$, sodass für jede Zerlegung $Z = \{ x_0 < ... < x_n \}$ von $\cinterval{a}{b}$ der Feinheit $\mu_Z \le \delta$ und jede Wahl von Stützstellen $\xi_1, ..., \xi_n$ gilt:
-  \[ \abs{\iota - R(f, Z, \xi_1, ..., \xi_n)} < \epsilon \]
-  \item Es gibt eine Zahl $\iota \in \R$ mit folgender Eigenschaft: Für alle $\epsilon > 0$ gibt es eine Zerlegung $\widetilde{Z}_{\epsilon} = \{ \widetilde{x}_0 < ... < \widetilde{x}_m \}$ von $\cinterval{a}{b}$, sodass für jede Verfeinerung $Z = \{ x_1 < ... < x_n \}$ von $\widetilde{Z}_{\epsilon}$ und jede Wahl von Stützstellen $\xi_1, ..., \xi_n$ bzgl. $Z$ gilt:
-  \[ \abs{\iota - R(f, Z, \xi_1, ..., \xi_n)} \le \epsilon. \]
-\end{enumerate}
+  \begin{enumerate}
+    \item $f$ ist Riemann-integrierbar.
+    \item Für alle $\epsilon > 0$ gibt es eine Zerlegung $Z$ von $\cinterval{a}{b}$, sodass
+      \[ O(f, Z) - U(f, Z) < \epsilon. \]
+    \item Es gibt eine Zahl $\iota \in \R$ mit folgender Eigenschaft: Für alle $\epsilon > 0$ gibt es ein $\delta > 0$, sodass für jede Zerlegung $Z = \{ x_0 < ... < x_n \}$ von $\cinterval{a}{b}$ der Feinheit $\mu_Z \le \delta$ und jede Wahl von Stützstellen $\xi_1, ..., \xi_n$ gilt:
+    \[ \abs{\iota - R(f, Z, \xi_1, ..., \xi_n)} < \epsilon \]
+    \item Es gibt eine Zahl $\iota \in \R$ mit folgender Eigenschaft: Für alle $\epsilon > 0$ gibt es eine Zerlegung $\widetilde{Z}_{\epsilon} = \{ \widetilde{x}_0 < ... < \widetilde{x}_m \}$ von $\cinterval{a}{b}$, sodass für jede Verfeinerung $Z = \{ x_1 < ... < x_n \}$ von $\widetilde{Z}_{\epsilon}$ und jede Wahl von Stützstellen $\xi_1, ..., \xi_n$ bzgl. $Z$ gilt:
+    \[ \abs{\iota - R(f, Z, \xi_1, ..., \xi_n)} \le \epsilon. \]
+  \end{enumerate}
 \end{satz}
 
 % TODO: Bemerkung danach
 % TODO: 5.29
 
 \begin{satz}
-Sei $f : \cinterval{a}{b} \to \R$ und $c \in (a, b)$. Dann ist $f$ genau dann Riemann-integrierbar, wenn $f\mid_{\cinterval{a}{c}}$ und $f\mid_{\cinterval{c}{b}}$ Riemann-integrierbar sind und es gilt in diesem Fall
-
-\[ \Intabdx{f(x)} = \Intdx{a}{c}{f(x)} + \Intdx{c}{b}{f(x)} \]
+  Sei $f : \cinterval{a}{b} \to \R$ und $c \in (a, b)$. Dann ist $f$ genau dann Riemann-integrierbar, wenn $f\mid_{\cinterval{a}{c}}$ und $f\mid_{\cinterval{c}{b}}$ Riemann-integrierbar sind und es gilt in diesem Fall
+  \[ \Intabdx{f(x)} = \Intdx{a}{c}{f(x)} + \Intdx{c}{b}{f(x)} \]
 \end{satz}
 
 % TODO: Definition Integrationsgrenzen
@@ -190,16 +187,16 @@ Sei $f : \cinterval{a}{b} \to \R$ und $c \in (a, b)$. Dann ist $f$ genau dann Ri
 \end{satz}
 
 \begin{defn}
-Eine differenzierbare Funktion $F: I \to \R$ heißt \emph{Stammfunktion} von $f$, wenn die Ableitung von $F$ gerade $f$ ist.
+  Eine differenzierbare Funktion $F: I \to \R$ heißt \emph{Stammfunktion} von $f$, wenn die Ableitung von $F$ gerade $f$ ist.
 \end{defn}
 
 \begin{bem}
-Zwei Stammfunktionen einer Funktion $f$ unterscheiden sich nur durch eine additive Konstante.
+  Zwei Stammfunktionen einer Funktion $f$ unterscheiden sich nur durch eine additive Konstante.
 \end{bem}
 
 \begin{satz}
-Sei $f : I \to \R$ stetig. Dann ist eine Stammfunktion von $f$:
-\[ F : I \to \R, \quad x \mapsto \Int{a}{x}{f(t)}{t} \]
+  Sei $f : I \to \R$ stetig. Dann ist eine Stammfunktion von $f$:
+  \[ F : I \to \R, \quad x \mapsto \Int{a}{x}{f(t)}{t} \]
 \end{satz}
 
 % Hauptsatz der Differential- und Integralrechnung
@@ -209,7 +206,7 @@ Sei $f : I \to \R$ stetig. Dann ist eine Stammfunktion von $f$:
 \end{satz}
 
 \begin{satz}[Vertauschung von Grenzwerten und Ableitungen]
-Sei $f_n : \cinterval{a}{b} \to \R$ eine Folge stetig differenzierbarer Funktionen, welche pktw. gegen $f : \cinterval{a}{b} \to \R$ konvergiert. Wenn die Folge der Ableitungen $f_n'$ gleichmäßig gegen eine Funktion $f^{*} : \cinterval{a}{b} \to \R$ konvergiert, dann ist auch $f$ differenzierbar und es gilt $f' = f^{*}$.
+  Sei $f_n : \cinterval{a}{b} \to \R$ eine Folge stetig differenzierbarer Funktionen, welche pktw. gegen $f : \cinterval{a}{b} \to \R$ konvergiert. Wenn die Folge der Ableitungen $f_n'$ gleichmäßig gegen eine Funktion $f^{*} : \cinterval{a}{b} \to \R$ konvergiert, dann ist auch $f$ differenzierbar und es gilt $f' = f^{*}$.
 \end{satz}
 
 \center
@@ -227,40 +224,40 @@ Sei $f_n : \cinterval{a}{b} \to \R$ eine Folge stetig differenzierbarer Funktion
 \end{tabular}
 
 \begin{satz}[\emph{Substitutionsregel}]
-Sei $f : I \to \R$ stetig und sei $g : J \to I$ stetig differenzierbar. Dann gilt für $a, b \in J$:
-\[ \Intab{f(g(t))g'(t)}{t} = \Int{g(a)}{g(b)}{f(x)}{x} \]
+  Sei $f : I \to \R$ stetig und sei $g : J \to I$ stetig differenzierbar. Dann gilt für $a, b \in J$:
+  \[ \Intab{f(g(t))g'(t)}{t} = \Int{g(a)}{g(b)}{f(x)}{x} \]
 \end{satz}
 
 \begin{satz}[\emph{Partielle Integration}]
-Seien $f, g : I \to \R$ stetig differenzierbar. Dann gilt für $a, b \in I$:
-\[ \Intabdx{f(x)g'(x)} = [f(x)g(x)]_a^b - \Intabdx{f'(x)g(x)} \]
+  Seien $f, g : I \to \R$ stetig differenzierbar. Dann gilt für $a, b \in I$:
+  \[ \Intabdx{f(x)g'(x)} = [f(x)g(x)]_a^b - \Intabdx{f'(x)g(x)} \]
 \end{satz}
 
 \begin{defn}[Riemann-Integral für komplexwertige Funktionen]
-Eine komplexwertige Funktion $f : \cinterval{a}{b} \to \C$ heißt Riemann-integrierbar, wenn ihr Realteil $\Re(f)$ und ihr Imaginärteil $\Im(f)$ Riemann-integrierbar sind. Wir setzen
-\[ \Intabdx{f(x)} = \Intabdx{\Re(f)} + i \Intabdx{\Im(f)}. \]
+  Eine komplexwertige Funktion $f : \cinterval{a}{b} \to \C$ heißt Riemann-integrierbar, wenn ihr Realteil $\Re(f)$ und ihr Imaginärteil $\Im(f)$ Riemann-integrierbar sind. Wir setzen
+  \[ \Intabdx{f(x)} = \Intabdx{\Re(f)} + i \Intabdx{\Im(f)}. \]
 \end{defn}
 
 \begin{defn}[Uneigentliche Integrale]
-\begin{itemize}
-  \item Sei $a < b$ mit $b \in \R \cup \{ \infty \}$ und $f : \cointerval{a}{b} \to \R$ eine Funktion, sodass $f\mid_{\cinterval{a}{R}}$ für alle $R \in (a, b)$ Riemann-integrierbar ist. Wir setzen
-  \[ \Intabdx{f(x)} \coloneqq \lim_{R \uparrow b} \Intdx{a}{R}{f(x)} \]
-  falls der Grenzwert existiert.
-  \item Sei $a < b$ mit $a \in \R \cup \{ -\infty \}$ und $f : \ocinterval{a}{b} \to \R$ eine Funktion, sodass $f\mid_{\cinterval{R}{b}}$ für alle $R \in (a, b)$ Riemann-integrierbar ist. Wir setzen
-  \[ \Intabdx{f(x)} \coloneqq \lim_{R \downarrow a} \Intdx{R}{b}{f(x)} \]
-  falls der Grenzwert existiert.
-  \item Sei $a < b$ mit $a \in \R \cup \{ -\infty \}$ und $b \in \R \cup \{ \infty \}$ und $c \in (a, b)$. Sei $f : (a, b) \to \R$ eine Funktion, sodass für alle $a < R_1 < c < R_2 < b$ die $f\mid_{\cinterval{R_1}{c}}$ und $f\mid_{\cinterval{c}{R_2}}$ Riemann-integrierbar sind. Wir setzen
-  \[ \Intabdx{f(x)} = \lim_{R_1 \downarrow a} \Intdx{R_1}{c}{f(x)} + \lim_{R_2 \uparrow b} \Intdx{c}{R_2}{f(x)} \]
-  falls beide Grenzwerte existieren.
-\end{itemize}
+  \begin{itemize}
+    \item Sei $a < b$ mit $b \in \R \cup \{ \infty \}$ und $f : \cointerval{a}{b} \to \R$ eine Funktion, sodass $f\mid_{\cinterval{a}{R}}$ für alle $R \in (a, b)$ Riemann-integrierbar ist. Wir setzen
+    \[ \Intabdx{f(x)} \coloneqq \lim_{R \uparrow b} \Intdx{a}{R}{f(x)} \]
+    falls der Grenzwert existiert.
+    \item Sei $a < b$ mit $a \in \R \cup \{ -\infty \}$ und $f : \ocinterval{a}{b} \to \R$ eine Funktion, sodass $f\mid_{\cinterval{R}{b}}$ für alle $R \in (a, b)$ Riemann-integrierbar ist. Wir setzen
+    \[ \Intabdx{f(x)} \coloneqq \lim_{R \downarrow a} \Intdx{R}{b}{f(x)} \]
+    falls der Grenzwert existiert.
+    \item Sei $a < b$ mit $a \in \R \cup \{ -\infty \}$ und $b \in \R \cup \{ \infty \}$ und $c \in (a, b)$. Sei $f : (a, b) \to \R$ eine Funktion, sodass für alle $a < R_1 < c < R_2 < b$ die $f\mid_{\cinterval{R_1}{c}}$ und $f\mid_{\cinterval{c}{R_2}}$ Riemann-integrierbar sind. Wir setzen
+    \[ \Intabdx{f(x)} = \lim_{R_1 \downarrow a} \Intdx{R_1}{c}{f(x)} + \lim_{R_2 \uparrow b} \Intdx{c}{R_2}{f(x)} \]
+    falls beide Grenzwerte existieren.
+  \end{itemize}
 \end{defn}
 
 % TODO: Integralvergleichskriterium
 
 \begin{defn}
-Für zwei Funktionen $f, g : \cinterval{a}{b} \to \R$, eine Zerlegung $Z = \{ a = x_0 < ... < x_n = b \}$ von $\cinterval{a}{b}$ und Stützstellen $\xi_1, ..., \xi_n$ bzgl. $Z$ heißt die Summe
-\[ S(f, \d g, Z, \xi_1, ..., \xi_n) \coloneqq \sum_{j=1}^{n}\!f(\xi_j)(g(x_j) - g(x_{j{-}1})) \]
-\emph{Riemann-Stieltjes-Summe} von $f$ bzgl. $g$ und der Zerlegung $Z$ mit Stützstellen $\xi_1, ..., \xi_n$.
+  Für zwei Funktionen $f, g : \cinterval{a}{b} \to \R$, eine Zerlegung $Z = \{ a = x_0 < ... < x_n = b \}$ von $\cinterval{a}{b}$ und Stützstellen $\xi_1, ..., \xi_n$ bzgl. $Z$ heißt die Summe
+  \[ S(f, \d g, Z, \xi_1, ..., \xi_n) \coloneqq \sum_{j=1}^{n}\!f(\xi_j)(g(x_j) - g(x_{j{-}1})) \]
+  \emph{Riemann-Stieltjes-Summe} von $f$ bzgl. $g$ und der Zerlegung $Z$ mit Stützstellen $\xi_1, ..., \xi_n$.
 \end{defn}
 
 \begin{defn}
@@ -270,106 +267,105 @@ Für zwei Funktionen $f, g : \cinterval{a}{b} \to \R$, eine Zerlegung $Z = \{ a 
 \end{defn}
 
 \begin{bem}
-Für die Identitätsfunktion $g(x) = x$ stimmt das Riemann-Stieltjes-Integral mit dem Riemann-Integral überein.
+  Für die Identitätsfunktion $g(x) = x$ stimmt das Riemann-Stieltjes-Integral mit dem Riemann-Integral überein.
 \end{bem}
 
 % TODO: 5.59 Cauchy-Kriterium für Riemann-Stieltjes-Integrierbarkeit
 
 \begin{satz}[Linearität des RS-Integrals]
-\begin{itemize}
-  \item Seien $f_1, f_2 : \cinterval{a}{b} \to \R$ bzgl. $g : \cinterval{a}{b} \to \R$ RS-integrierbar und $\lambda_1, \lambda_2 \in \R$. Dann ist auch $(\lambda_1 f_1 + \lambda_2 f_2)$ bzgl. $g$ RS-integrierbar mit
-  \[ \Intab{(\lambda_1 f_1 + \lambda_2 f_2)(x)}{g(x)} = \lambda_1 \Intab{f_1(x)}{g(x)} + \lambda_2 \Intab{f_2(x)}{g(x)} \]
-  \item Sei $f : \cinterval{a}{b} \to \R$ bzgl. den Funktionen $g_1, g_2 : \cinterval{a}{b} \to \R$ RS-integrierbar und $\lambda_1, \lambda_2 \in \R$. Dann ist $f$ auch bzgl. $(\lambda_1 g_1 + \lambda_2 g_2)$ RS-integrierbar mit
-  \[ \Intab{f(x)}{(\lambda_1 g_1 + \lambda_2 g_2)} = \lambda_1 \Intab{f(x)}{g_1(x)} + \lambda_2 \Intab{f(x)}{g_2(x)} \]
-\end{itemize}
+  \begin{itemize}
+    \item Seien $f_1, f_2 : \cinterval{a}{b} \to \R$ bzgl. $g : \cinterval{a}{b} \to \R$ RS-integrierbar und $\lambda_1, \lambda_2 \in \R$. Dann ist auch $(\lambda_1 f_1 + \lambda_2 f_2)$ bzgl. $g$ RS-integrierbar mit
+    \[ \Intab{(\lambda_1 f_1 + \lambda_2 f_2)(x)}{g(x)} = \lambda_1 \Intab{f_1(x)}{g(x)} + \lambda_2 \Intab{f_2(x)}{g(x)} \]
+    \item Sei $f : \cinterval{a}{b} \to \R$ bzgl. den Funktionen $g_1, g_2 : \cinterval{a}{b} \to \R$ RS-integrierbar und $\lambda_1, \lambda_2 \in \R$. Dann ist $f$ auch bzgl. $(\lambda_1 g_1 + \lambda_2 g_2)$ RS-integrierbar mit
+    \[ \Intab{f(x)}{(\lambda_1 g_1 + \lambda_2 g_2)} = \lambda_1 \Intab{f(x)}{g_1(x)} + \lambda_2 \Intab{f(x)}{g_2(x)} \]
+  \end{itemize}
 \end{satz}
 
 \begin{satz}
-Seien $f, g : \cinterval{a}{b} \to \R$ und $c \in (a, b)$, dann ist $f$ genau dann bzgl. $g$ RS-integrierbar, wenn die Funktionen $f\mid_{\cinterval{a}{c}}$ bzgl $g\mid_{\cinterval{a}{c}}$ und $f\mid_{\cinterval{c}{b}}$ bzgl $g\mid_{\cinterval{c}{b}}$ RS-integrierbar sind und es gilt
-\[ \Intab{f(x)}{g(x)} = \Int{a}{c}{f(x)}{g(x)} + \Int{c}{b}{f(x)}{g(x)}. \]
+  Seien $f, g : \cinterval{a}{b} \to \R$ und $c \in (a, b)$, dann ist $f$ genau dann bzgl. $g$ RS-integrierbar, wenn die Funktionen $f\mid_{\cinterval{a}{c}}$ bzgl $g\mid_{\cinterval{a}{c}}$ und $f\mid_{\cinterval{c}{b}}$ bzgl $g\mid_{\cinterval{c}{b}}$ RS-integrierbar sind und es gilt
+  \[ \Intab{f(x)}{g(x)} = \Int{a}{c}{f(x)}{g(x)} + \Int{c}{b}{f(x)}{g(x)}. \]
 \end{satz}
 
 \begin{satz}[Partielle Integration beim RS-Integral]
-Sei $f : \cinterval{a}{b} \to \R$ bzgl. $g : \cinterval{a}{b} \to \R$ RS-integrierbar, dann ist auch $g$ bzgl. $f$ RS-integrierbar und es gilt
-\[ \Intab{f(x)}{g(x)} = [f(x)g(x)]_a^b - \Intab{g(x)}{f(x)} \]
+  Sei $f : \cinterval{a}{b} \to \R$ bzgl. $g : \cinterval{a}{b} \to \R$ RS-integrierbar, dann ist auch $g$ bzgl. $f$ RS-integrierbar und es gilt
+  \[ \Intab{f(x)}{g(x)} = [f(x)g(x)]_a^b - \Intab{g(x)}{f(x)} \]
 \end{satz}
 
 \begin{satz}[Riemann-Stieltjes- und Riemann-Integral]
-Sei $f \in \mathcal{R}_{\cinterval{a}{b}}$ und $g : \cinterval{a}{b} \to \R$ stetig differenzierbar, dann ist $f$ bzgl. $g$ RS-integrierbar mit
-\[ \Intab{f(x)}{g(x)} = \Intab{f(t)g'(t)}{t}. \]
+  Sei $f \in \mathcal{R}_{\cinterval{a}{b}}$ und $g : \cinterval{a}{b} \to \R$ stetig differenzierbar, dann ist $f$ bzgl. $g$ RS-integrierbar mit
+  \[ \Intab{f(x)}{g(x)} = \Intab{f(t)g'(t)}{t}. \]
 \end{satz}
 
 \begin{defn}
-Die \emph{Variation} von $g : \cinterval{a}{b} \to \R$ bzgl. einer Zerlegung $Z = \{ x_0 < ... < x_n \}$ von $\cinterval{a}{b}$ ist die nicht-negative Zahl
-\[ V(g, Z) \coloneqq \sum_{j=1}^{n} \abs{g(x_j) - g(x_{j-1})}. \]
-Die \emph{Totalvariation} von $g : \cinterval{a}{b} \to \R$ ist
-\[ V_a^b(g) \coloneqq \sup\left\{ V(g, Z) : Z \text{ Zerlegung von } \cinterval{a}{b} \right\} \in \R_{\ge 0} \cup \{ \infty \}. \]
-Falls $V_a^b(g) < \infty$, so heißt $g$ \emph{von beschränkter Variation}.
+  Die \emph{Variation} von $g : \cinterval{a}{b} \to \R$ bzgl. einer Zerlegung $Z = \{ x_0 < ... < x_n \}$ von $\cinterval{a}{b}$ ist die nicht-negative Zahl
+  \[ V(g, Z) \coloneqq \sum_{j=1}^{n} \abs{g(x_j) - g(x_{j-1})}. \]
+  Die \emph{Totalvariation} von $g : \cinterval{a}{b} \to \R$ ist
+  \[ V_a^b(g) \coloneqq \sup\left\{ V(g, Z) : Z \text{ Zerlegung von } \cinterval{a}{b} \right\} \in \R_{\ge 0} \cup \{ \infty \}. \]
+  Falls $V_a^b(g) < \infty$, so heißt $g$ \emph{von beschränkter Variation}.
 \end{defn}
 
 \begin{satz}
-Alle monotonen und alle Lipschitz-stetigen Funktionen sind von beschränkter Variation.
+  Alle monotonen und alle Lipschitz-stetigen Funktionen sind von beschränkter Variation.
 \end{satz}
 
 \begin{satz}
-Sei $g : \cinterval{a}{b} \to \R$ von beschränkter Variation und $c \in (a, b)$, dann sind auch $g\mid_{\cinterval{a}{c}}$ und $g\mid_{\cinterval{c}{b}}$ von beschränkter Variation und es gilt
-\[ V_a^c(g\mid_{\cinterval{a}{c}}) + V_c^b(g\mid_{\cinterval{c}{b}}) = V_a^b(g). \]
+  Sei $g : \cinterval{a}{b} \to \R$ von beschränkter Variation und $c \in (a, b)$, dann sind auch $g\mid_{\cinterval{a}{c}}$ und $g\mid_{\cinterval{c}{b}}$ von beschränkter Variation und es gilt
+  \[ V_a^c(g\mid_{\cinterval{a}{c}}) + V_c^b(g\mid_{\cinterval{c}{b}}) = V_a^b(g). \]
 \end{satz}
 
 \begin{satz}
-Seien $g_1, g_2 : \cinterval{a}{b} \to \R$ von beschränkter Variation, dann gilt
-\[ V_a^b(g_1 + g_2) \le V_a^b(g_1) + V_a^b(g_2). \]
+  Seien $g_1, g_2 : \cinterval{a}{b} \to \R$ von beschränkter Variation, dann gilt
+  \[ V_a^b(g_1 + g_2) \le V_a^b(g_1) + V_a^b(g_2). \]
 \end{satz}
 
 \begin{satz}
-Die Menge aller Funktionen $g : \cinterval{a}{b} \to \R$ bildet einen UVR des VR der reellwertigen Funktionen auf $\cinterval{a}{b}$.
+  Die Menge aller Funktionen $g : \cinterval{a}{b} \to \R$ bildet einen UVR des VR der reellwertigen Funktionen auf $\cinterval{a}{b}$.
 \end{satz}
 
 \begin{satz}
-Sei $g : \cinterval{a}{b} \to \R$ von beschränkter Variation, dann ist jede stetige Funktion $f : \cinterval{a}{b} \to \R$ bzgl. $g$ RS-integrierbar mit
-\[ \abs{\Intab{f(x)}{g(x)}} \le \norm{f}_{\sup} \cdot V_a^b(g). \]
+  Sei $g : \cinterval{a}{b} \to \R$ von beschränkter Variation, dann ist jede stetige Funktion $f : \cinterval{a}{b} \to \R$ bzgl. $g$ RS-integrierbar mit
+  \[ \abs{\Intab{f(x)}{g(x)}} \le \norm{f}_{\sup} \cdot V_a^b(g). \]
 \end{satz}
 
 \begin{satz}[1. MWS für RS-Integrale]
-Sei $f : \cinterval{a}{b} \to \R$ beschränkt und bzgl einer monoton wachsenden Gewichtsfunktion $g : \cinterval{a}{b} \to \R$ RS-integrierbar. Dann gibt es $\mu \in \cinterval{\inf f(\cinterval{a}{b})}{\sup f(\cinterval{a}{b})}$ mit
-\[ \Intab{f(x)}{g(x)} = \mu(g(b) - g(a)). \]
+  Sei $f : \cinterval{a}{b} \to \R$ beschränkt und bzgl einer monoton wachsenden Gewichtsfunktion $g : \cinterval{a}{b} \to \R$ RS-integrierbar. Dann gibt es $\mu \in \cinterval{\inf f(\cinterval{a}{b})}{\sup f(\cinterval{a}{b})}$ mit
+  \[ \Intab{f(x)}{g(x)} = \mu(g(b) - g(a)). \]
 \end{satz}
 
 \begin{satz}[2. MWS für RS-Integrale]
-Sei $f : \cinterval{a}{b} \to \R$ monoton und $g : \cinterval{a}{b} \to \R$ stetig, dann ist $f$ bzgl. $g$ RS-integrierbar und es gibt $c \in \cinterval{a}{b}$, sodass
-\[ \Intab{f(x)}{g(x)} = f(a)(g(c) - g(a)) + f(b)(g(b) - g(c)). \]
+  Sei $f : \cinterval{a}{b} \to \R$ monoton und $g : \cinterval{a}{b} \to \R$ stetig, dann ist $f$ bzgl. $g$ RS-integrierbar und es gibt $c \in \cinterval{a}{b}$, sodass
+  \[ \Intab{f(x)}{g(x)} = f(a)(g(c) - g(a)) + f(b)(g(b) - g(c)). \]
 \end{satz}
 
 \begin{satz}
-Sei $f_n : \cinterval{a}{b} \to \R$ eine Folge stetiger Funktionen, welche gleichmäßig gegen eine (stetige) Funktion $f : \cinterval{a}{b} \to \R$ konvergiert und $g : \cinterval{a}{b} \to \R$ von beschränkter Variation, dann gilt:
-
-\[ \Intab{f(x)}{g(x)} = \lim_{n \to \infty} \left(\Intab{f_n(x)}{g(x)}\right). \]
+  Sei $f_n : \cinterval{a}{b} \to \R$ eine Folge stetiger Funktionen, welche gleichmäßig gegen eine (stetige) Funktion $f : \cinterval{a}{b} \to \R$ konvergiert und $g : \cinterval{a}{b} \to \R$ von beschränkter Variation, dann gilt:
+  \[ \Intab{f(x)}{g(x)} = \lim_{n \to \infty} \left(\Intab{f_n(x)}{g(x)}\right). \]
 \end{satz}
 
 \begin{satz}[Helly-Bray]
-Sie $f : \cinterval{a}{b} \to \R$ stetig und $g_n : \cinterval{a}{b} \to \R$ eine Folge von Funktionen von beschränkter Variation, sodass es eine Konstante $c > 0$ mit $V_a^b(g_n) < c$ für alle $n \in \N$ gibt. Konvergiere $g_n$ pktw. gegen eine Funktion $g : \cinterval{a}{b} \to \R$, dann gilt
-\[ \Intab{f(x)}{g(x)} = \lim_{n \to \infty} \left(\Intab{f(x)}{g_n(x)}\right). \]
+  Sie $f : \cinterval{a}{b} \to \R$ stetig und $g_n : \cinterval{a}{b} \to \R$ eine Folge von Funktionen von beschränkter Variation, sodass es eine Konstante $c > 0$ mit $V_a^b(g_n) < c$ für alle $n \in \N$ gibt. Konvergiere $g_n$ pktw. gegen eine Funktion $g : \cinterval{a}{b} \to \R$, dann gilt
+  \[ \Intab{f(x)}{g(x)} = \lim_{n \to \infty} \left(\Intab{f(x)}{g_n(x)}\right). \]
 \end{satz}
 
 
 \section{Metrische und normierte Räume}
 
 \begin{defn}
-Ein \emph{metrischer Raum} $(X, d)$ ist ein Tupel bestehend aus einer Menge $X$ und einer Abbildung $d : X \times X \to \R$, genannt \emph{Metrik}, die folgende Eigenschaften erfüllt:
+  Ein \emph{metrischer Raum} $(X, d)$ ist ein Tupel bestehend aus einer Menge $X$ und einer Abbildung $d : X \times X \to \R$, genannt \emph{Metrik}, die folgende Eigenschaften erfüllt:
 
-\begin{enumerate}
-  \item $d(x, y) = 0 \iff (x = y)$
-  \item Symmetrie: $\fa{x, y \in X} d(x, y) = d(y, x)$
-  \item Dreiecksungleichung: $\fa{x, y, z \in X} d(x, y) + d(y, z) \ge d(x, z)$
-\end{enumerate}
+  \begin{enumerate}
+    \item $d(x, y) = 0 \iff (x = y)$
+    \item Symmetrie: $\fa{x, y \in X} d(x, y) = d(y, x)$
+    \item Dreiecksungleichung: $\fa{x, y, z \in X} d(x, y) + d(y, z) \ge d(x, z)$
+  \end{enumerate}
 \end{defn}
 
 \begin{bem}
-Aus den obigen Axiomen folgt: $\fa{x, y \in X} d(x, y) \ge 0$
+  Aus den obigen Axiomen folgt: $\fa{x, y \in X} d(x, y) \ge 0$
 \end{bem}
 
 \begin{nota}
-Sei im folgenden $(X, d)$ ein metrischer Raum.
+  Sei im folgenden $(X, d)$ ein metrischer Raum.
 \end{nota}
 
 % Beispiel: diskrete Metrik
@@ -388,117 +384,117 @@ Sei im folgenden $(X, d)$ ein metrischer Raum.
 \end{defn}
 
 \begin{defn}
-\begin{itemize}
-  \item Eine Menge $U \subset X$ heißt \emph{offen} in $(X, d)$ (notiert $U \opn X$), falls $U$ eine Umgebung von allen Punkten $u \in U$ ist, d.\,h.
-  \[ \fa{u \in U} \ex{\epsilon_u > 0} B_{\epsilon_u}(u) \subset U \]
-  \item Eine Menge $U \subset X$ heißt \emph{abgeschlossen} in $(X, d)$ (notiert $U \cls X$), falls $X \backslash U$ offen ist.
-  \item Ein Punkt $x \in X$ heißt \emph{Randpunkt} von $Y \subset X$, falls gilt:
-  \[ \fa{\epsilon > 0} ( B_{\epsilon}(x) \cap Y \not= \emptyset \text{ und } B_{\epsilon}(x) \cap (X \backslash Y) \not= \emptyset). \]
-  Die Menge aller Randpunkte von $Y$ wird mit \emph{$\partial Y$} bezeichnet.
-\end{itemize}
+  \begin{itemize}
+    \item Eine Menge $U \subset X$ heißt \emph{offen} in $(X, d)$ (notiert $U \opn X$), falls $U$ eine Umgebung von allen Punkten $u \in U$ ist, d.\,h.
+    \[ \fa{u \in U} \ex{\epsilon_u > 0} B_{\epsilon_u}(u) \subset U \]
+    \item Eine Menge $U \subset X$ heißt \emph{abgeschlossen} in $(X, d)$ (notiert $U \cls X$), falls $X \backslash U$ offen ist.
+    \item Ein Punkt $x \in X$ heißt \emph{Randpunkt} von $Y \subset X$, falls gilt:
+    \[ \fa{\epsilon > 0} ( B_{\epsilon}(x) \cap Y \not= \emptyset \text{ und } B_{\epsilon}(x) \cap (X \backslash Y) \not= \emptyset). \]
+    Die Menge aller Randpunkte von $Y$ wird mit \emph{$\partial Y$} bezeichnet.
+  \end{itemize}
 \end{defn}
 
 \begin{bem}
-Die Mengen $\emptyset$ und $X$ sind jeweils sowohl offen als auch abgeschlossen in $X$. Es gilt außerdem $\partial Y = \partial (X \backslash Y)$ für alle $Y \subset X$.
+  Die Mengen $\emptyset$ und $X$ sind jeweils sowohl offen als auch abgeschlossen in $X$. Es gilt außerdem $\partial Y = \partial (X \backslash Y)$ für alle $Y \subset X$.
 \end{bem}
 
 \begin{defn}
-Sei $Y \subset X$. Dann heißt
-\begin{itemize}
-  \item $Y^{\circ} \coloneqq Y \backslash \partial Y$ das \emph{Innere} oder der \emph{offene Kern} von $Y$.
-  \item $\overline{Y} \coloneqq Y \cup \partial Y$ der \emph{Abschluss} oder die \emph{abgeschl. Hülle} von $Y$.
-\end{itemize}
+  Sei $Y \subset X$. Dann heißt
+  \begin{itemize}
+    \item $Y^{\circ} \coloneqq Y \backslash \partial Y$ das \emph{Innere} oder der \emph{offene Kern} von $Y$.
+    \item $\overline{Y} \coloneqq Y \cup \partial Y$ der \emph{Abschluss} oder die \emph{abgeschl. Hülle} von $Y$.
+  \end{itemize}
 \end{defn}
 
 \begin{satz}
-Obige Definition ergeben Sinn, d.\,h. es gilt für alle $Y \subset X$: $Y^{\circ} \opn X$ und $\overline{Y} \cls X$
+  Obige Definition ergeben Sinn, d.\,h. es gilt für alle $Y \subset X$: $Y^{\circ} \opn X$ und $\overline{Y} \cls X$
 \end{satz}
 
 % Bemerkung: ! der Abschluss des offenen Balls ist nicht immer der abgeschlossene Ball
 
 \begin{satz}
-Sei $Y \subset X$. Dann gilt:
-\begin{multicols}{2}
-  \begin{itemize}
-    \item $(Y \opn X) \iff (Y \cap \partial Y) = \emptyset$
-    \item $(Y \cls X) \iff (\partial Y \subset Y)$
-  \end{itemize}
-\end{multicols}
+  Sei $Y \subset X$. Dann gilt:
+  \begin{multicols}{2}
+    \begin{itemize}
+      \item $(Y \opn X) \iff (Y \cap \partial Y) = \emptyset$
+      \item $(Y \cls X) \iff (\partial Y \subset Y)$
+    \end{itemize}
+  \end{multicols}
 \end{satz}
 
 \begin{satz}[Metrische Räume sind hausdorffsch]
-Seien $x, y \in X$ mit $x \not= y$, dann gibt es offene Teilmengen $U_x, U_y \opn X$ mit $x \in U_x$, $y \in U_y$ und $U_x \cap U_y = \emptyset$.
+  Seien $x, y \in X$ mit $x \not= y$, dann gibt es offene Teilmengen $U_x, U_y \opn X$ mit $x \in U_x$, $y \in U_y$ und $U_x \cap U_y = \emptyset$.
 \end{satz}
 
 \begin{defn}
-Sei $x_n$ eine Folge in $X$. Die Folge heißt \emph{konvergent} in $(X, d)$, wenn gilt
-\[ \ex{x \in X} \fa{\epsilon > 0} \ex{N \in \N} \fa{n \ge N} d(x_n, x) \le \epsilon. \]
-Die eindeutige Zahl $x$ heißt \emph{Grenzwert} oder \emph{Limes} von $(x_n)$, notiert $x = \lim_{n \to \infty} x_n$.
+  Sei $x_n$ eine Folge in $X$. Die Folge heißt \emph{konvergent} in $(X, d)$, wenn gilt
+  \[ \ex{x \in X} \fa{\epsilon > 0} \ex{N \in \N} \fa{n \ge N} d(x_n, x) \le \epsilon. \]
+  Die eindeutige Zahl $x$ heißt \emph{Grenzwert} oder \emph{Limes} von $(x_n)$, notiert $x = \lim_{n \to \infty} x_n$.
 \end{defn}
 
 \begin{satz}[Folgenkriterium für Abgeschlossenheit]
-Sei $A \subset X$. Dann sind folgende Aussagen äquivalent:
-\begin{enumerate}
-  \item $A$ ist abgeschlossen in $X$.
-  \item Für jede in $X$ konvergenten Folge, die vollständig in $A$ liegt, gilt $\lim_{n \to \infty} x_n \in A$.
-\end{enumerate}
+  Sei $A \subset X$. Dann sind folgende Aussagen äquivalent:
+  \begin{enumerate}
+    \item $A$ ist abgeschlossen in $X$.
+    \item Für jede in $X$ konvergenten Folge, die vollständig in $A$ liegt, gilt $\lim_{n \to \infty} x_n \in A$.
+  \end{enumerate}
 \end{satz}
 
 \begin{defn}
-Eine Folge $(x_n)$ heißt \emph{Cauchyfolge} in $(X, d)$, wenn gilt:
-\[ \fa{\epsilon > 0} \ex{N \in \N} \fa{n, m \in \N} \abs{x_n - x_m} < \epsilon \]
+  Eine Folge $(x_n)$ heißt \emph{Cauchyfolge} in $(X, d)$, wenn gilt:
+  \[ \fa{\epsilon > 0} \ex{N \in \N} \fa{n, m \in \N} \abs{x_n - x_m} < \epsilon \]
 \end{defn}
 
 \begin{satz}
-Jede konvergente Folge $(x_n)$ in einem metrischen Raum ist eine Cauchyfolge.
+  Jede konvergente Folge $(x_n)$ in einem metrischen Raum ist eine Cauchyfolge.
 \end{satz}
 
 \begin{defn}
-Ein metrischer Raum $(X, d)$ heißt \emph{vollständig}, wenn jede Cauchyfolge in $(X, d)$ auch in $(X, d)$ konvergiert.
+  Ein metrischer Raum $(X, d)$ heißt \emph{vollständig}, wenn jede Cauchyfolge in $(X, d)$ auch in $(X, d)$ konvergiert.
 \end{defn}
 
 % TODO: verallgemeinertes Intervallschachtelungsprinzip
 
 \begin{defn}
-Eine \emph{Norm} auf einem reellen VR $V$ ist eine Abbildung
-\[
-  \norm{\blank} : V \to \R, \quad
-  x \mapsto \norm{x}
-\]
-für die gilt:
-\begin{enumerate}
-  \item $(\norm{x} = 0) \iff (x = 0)$
-  \item $\fa{x \in V, \lambda \in \R} \norm{\lambda x} = \abs{\lambda} \norm{x}$
-  \item Dreiecksungleichung: $\fa{x, y \in V} \norm{x + y} \le \norm{x} + \norm{y}$
-\end{enumerate}
-Das Tupel $(V, \norm{\blank})$ heißt \emph{normierter Vektorraum}.
+  Eine \emph{Norm} auf einem reellen VR $V$ ist eine Abbildung
+  \[
+    \norm{\blank} : V \to \R, \quad
+    x \mapsto \norm{x}
+  \]
+  für die gilt:
+  \begin{enumerate}
+    \item $(\norm{x} = 0) \iff (x = 0)$
+    \item $\fa{x \in V, \lambda \in \R} \norm{\lambda x} = \abs{\lambda} \norm{x}$
+    \item Dreiecksungleichung: $\fa{x, y \in V} \norm{x + y} \le \norm{x} + \norm{y}$
+  \end{enumerate}
+  Das Tupel $(V, \norm{\blank})$ heißt \emph{normierter Vektorraum}.
 \end{defn}
 
 \begin{bem}
-In jedem normierten Raum gilt $\norm{x} \ge 0$.
+  In jedem normierten Raum gilt $\norm{x} \ge 0$.
 \end{bem}
 
 \begin{bem}[Wichtige Normen]
-\begin{itemize}
-  \item Die \emph{euklidische Norm} auf $\R^n$:
-  \[ \norm{(x_1, ..., x_n)}_{\text{eukl}} \coloneqq \sqrt{x_1^2 + ... + x_n^2} \]
-  \item Die \emph{Maximumsnorm} auf $\R^n$:
-  \[ \norm{(x_1, ..., x_n)}_{\text{max}} \coloneqq \max \left\{ \abs{x_1}, ..., \abs{x_n} \right\} \]
-  \item Sei $X$ eine nichtleere Menge. Dann ist die \emph{Supremumsnorm}
-  \[ \norm{f}_{\text{sup}} \coloneqq \sup\left\{ \abs{f(x)} : x \in X \right\} \]
-  eine Norm auf $V = \Set{ f : X \to \R }{ \sup_{x \in X} \abs{f(x)} < \infty }$.
-  \item Sei $V = \mathcal{C}(\cinterval{a}{b}, \R)$ der VR der reellwertigen stetigen Funktionen auf $\cinterval{a}{b}$ und $p \ge 1$. Dann ist die \emph{$p$-Norm}
-  \[ \norm{f}_{p} \coloneqq \left( \Intabdx{\abs{f(x)}^p} \right)^{\frac{1}{p}} \]
-  eine Norm auf $V$.
-  % TODO: Umbruch
-  \item Seien $(V, \norm{\blank}_V)$ und $(W, \norm{\blank}_W)$ zwei normierte (reelle) VR, dann ist auch $\mathrm{Hom}(V, W) \coloneqq \Set{ f : V \to W }{ f \text{ linear } }$ ein reeller VR. Die Norm
-  \begin{align*}
-    \norm{f}_{\text{op}} &\coloneqq \sup \Set{ \frac{ \norm{f(x)}_W }{ \norm{x}_V } }{ x \in V \backslash \{ 0 \} }\\
-      &= \sup \Set{ \norm{f(x)}_W }{ x \in V, \norm{x}_V = 1 }
-  \end{align*}
-  %\[ \norm{f}_{\text{op}} \coloneqq \sup\left\{ \frac{ \norm{f(x)}_W }{ \norm{x}_V } : x \in V \backslash \{ 0 \} \right\} = \sup \left\{ \norm{f(x)}_W : x \in V, \norm{x}_V = 1 \right\} \]
-  auf $\mathrm{Hom}(V, W)$ heißt \emph{Operatornorm}.
-\end{itemize}
+  \begin{itemize}
+    \item Die \emph{euklidische Norm} auf $\R^n$:
+    \[ \norm{(x_1, ..., x_n)}_{\text{eukl}} \coloneqq \sqrt{x_1^2 + ... + x_n^2} \]
+    \item Die \emph{Maximumsnorm} auf $\R^n$:
+    \[ \norm{(x_1, ..., x_n)}_{\text{max}} \coloneqq \max \left\{ \abs{x_1}, ..., \abs{x_n} \right\} \]
+    \item Sei $X$ eine nichtleere Menge. Dann ist die \emph{Supremumsnorm}
+    \[ \norm{f}_{\text{sup}} \coloneqq \sup\left\{ \abs{f(x)} : x \in X \right\} \]
+    eine Norm auf $V = \Set{ f : X \to \R }{ \sup_{x \in X} \abs{f(x)} < \infty }$.
+    \item Sei $V = \mathcal{C}(\cinterval{a}{b}, \R)$ der VR der reellwertigen stetigen Funktionen auf $\cinterval{a}{b}$ und $p \ge 1$. Dann ist die \emph{$p$-Norm}
+    \[ \norm{f}_{p} \coloneqq \left( \Intabdx{\abs{f(x)}^p} \right)^{\frac{1}{p}} \]
+    eine Norm auf $V$.
+    % TODO: Umbruch
+    \item Seien $(V, \norm{\blank}_V)$ und $(W, \norm{\blank}_W)$ zwei normierte (reelle) VR, dann ist auch $\mathrm{Hom}(V, W) \coloneqq \Set{ f : V \to W }{ f \text{ linear } }$ ein reeller VR. Die Norm
+    \begin{align*}
+      \norm{f}_{\text{op}} &\coloneqq \sup \Set{ \frac{ \norm{f(x)}_W }{ \norm{x}_V } }{ x \in V \backslash \{ 0 \} }\\
+        &= \sup \Set{ \norm{f(x)}_W }{ x \in V, \norm{x}_V = 1 }
+    \end{align*}
+    %\[ \norm{f}_{\text{op}} \coloneqq \sup\left\{ \frac{ \norm{f(x)}_W }{ \norm{x}_V } : x \in V \backslash \{ 0 \} \right\} = \sup \left\{ \norm{f(x)}_W : x \in V, \norm{x}_V = 1 \right\} \]
+    auf $\mathrm{Hom}(V, W)$ heißt \emph{Operatornorm}.
+  \end{itemize}
 \end{bem}
 
 %\begin{nota}
@@ -506,94 +502,94 @@ In jedem normierten Raum gilt $\norm{x} \ge 0$.
 %\end{nota}
 
 \begin{defn}
-Die Abbildung
-\[ d_{\norm{\blank}} : V \times V \to \R,\quad (x, y) \mapsto \norm{x - y} \]
-ist eine Metrik auf $V$ und heißt von der Norm $\norm{\blank}$ \emph{induzierte Metrik} auf $V$.
+  Die Abbildung
+  \[ d_{\norm{\blank}} : V \times V \to \R,\quad (x, y) \mapsto \norm{x - y} \]
+  ist eine Metrik auf $V$ und heißt von der Norm $\norm{\blank}$ \emph{induzierte Metrik} auf $V$.
 \end{defn}
 
 \begin{defn}
-Ein vollständiger normierter Vektorraum $(V, \norm{\blank})$ heißt \emph{Banachraum}.
+  Ein vollständiger normierter Vektorraum $(V, \norm{\blank})$ heißt \emph{Banachraum}.
 \end{defn}
 
 % Aufgabe 6.28
 % Beobachtung 6.29
 
 \begin{satz}[Bolzano-Weierstraß]
-Für eine Folge $(x_n)$ in $(\R^m, \norm{\blank}_{\text{eukl}})$ gilt:
+  Für eine Folge $(x_n)$ in $(\R^m, \norm{\blank}_{\text{eukl}})$ gilt:
 
-\begin{itemize}
-  \item Ist $(x_n)$ beschränkt, d.\,h. gibt es ein $C > 0$, sodass $\norm{x_n}_{\text{eukl}} \le C$ für alle $n \in \N$, dann hat $(x_n)$ eine konvergente Teilfolge.
-  \item Ist $(x_n)$ eine Cauchyfolge, so ist $(x_n)$ konvergent (d.\,h. $(\R^m, \norm{\blank}_{\text{eukl}})$) ist vollständig).
-\end{itemize}
+  \begin{itemize}
+    \item Ist $(x_n)$ beschränkt, d.\,h. gibt es ein $C > 0$, sodass $\norm{x_n}_{\text{eukl}} \le C$ für alle $n \in \N$, dann hat $(x_n)$ eine konvergente Teilfolge.
+    \item Ist $(x_n)$ eine Cauchyfolge, so ist $(x_n)$ konvergent (d.\,h. $(\R^m, \norm{\blank}_{\text{eukl}})$) ist vollständig).
+  \end{itemize}
 \end{satz}
 
 \begin{defn}
-Sei $V$ ein reeller VR. Zwei Normen $\norm{\blank}_1$ und $\norm{\blank}_2$ auf $V$ heißen äquivalent, wenn es $c, C > 0$ gibt, sodass für alle $x \in V$ gilt:
-\[ c \norm{x}_2 \le \norm{x}_1 \le C \norm{x}_2 \]
+  Sei $V$ ein reeller VR. Zwei Normen $\norm{\blank}_1$ und $\norm{\blank}_2$ auf $V$ heißen äquivalent, wenn es $c, C > 0$ gibt, sodass für alle $x \in V$ gilt:
+  \[ c \norm{x}_2 \le \norm{x}_1 \le C \norm{x}_2 \]
 \end{defn}
 
 % Bemerkung 6.32 Topologie
 
 \begin{satz}
-Alle Normen auf $\R^n$ (und allen anderen endlich-dimensionalen, reellen VR) sind äquivalent.
+  Alle Normen auf $\R^n$ (und allen anderen endlich-dimensionalen, reellen VR) sind äquivalent.
 \end{satz}
 
 \begin{defn}
-Seien $(X, d_X)$ und $(Y, d_Y)$ zwei metrische Räume und $f : X \to Y$.
-\begin{itemize}
-  \item Die Abbildung $f$ heißt \emph{stetig} in $a \in X$, wenn gilt:
-  \[ \fa{\epsilon > 0} \ex{\delta_a > 0} d_X(x, a) < \delta_a \implies d_Y(f(x), f(a)) < \epsilon \]
-  Wenn $f$ in allen Punkten $x \in X$ stetig ist, so heißt $f$ stetig.
-  \item Die Abbildung $f$ heißt \emph{folgenstetig} in $a \in X$, wenn gilt:
-  \[ \lim_{x \to a} f(x) = f(a), \]
-  d.\,h. für jede Folge $(x_n)$ in $X$ mit $\lim_{n \to \infty} (x_n) = a$ gilt $\lim_{n \to \infty} f(x_n) = f(a).$
-\end{itemize}
+  Seien $(X, d_X)$ und $(Y, d_Y)$ zwei metrische Räume und $f : X \to Y$.
+  \begin{itemize}
+    \item Die Abbildung $f$ heißt \emph{stetig} in $a \in X$, wenn gilt:
+    \[ \fa{\epsilon > 0} \ex{\delta_a > 0} d_X(x, a) < \delta_a \implies d_Y(f(x), f(a)) < \epsilon \]
+    Wenn $f$ in allen Punkten $x \in X$ stetig ist, so heißt $f$ stetig.
+    \item Die Abbildung $f$ heißt \emph{folgenstetig} in $a \in X$, wenn gilt:
+    \[ \lim_{x \to a} f(x) = f(a), \]
+    d.\,h. für jede Folge $(x_n)$ in $X$ mit $\lim_{n \to \infty} (x_n) = a$ gilt $\lim_{n \to \infty} f(x_n) = f(a).$
+  \end{itemize}
 \end{defn}
 
 \begin{satz}
-Für eine Funktion $f : X \to Y$ zwischen zwei metrischen Räumen und $a \in X$ gilt:
-$f \text{ stetig in } a \iff f \text{ folgenstetig in } a$
+  Für eine Funktion $f : X \to Y$ zwischen zwei metrischen Räumen und $a \in X$ gilt:
+  $f \text{ stetig in } a \iff f \text{ folgenstetig in } a$
 \end{satz}
 
 \begin{satz}
-Seien $f : X \to Y$ und $g : Y \to Z$ Abbildungen zwischen metrischen Räumen und $a \in X$. Falls $f$ in $a$ und $g$ in $f(a)$ stetig sind, so ist $(g \circ f) : X \to Z$ stetig in $a$.
+  Seien $f : X \to Y$ und $g : Y \to Z$ Abbildungen zwischen metrischen Räumen und $a \in X$. Falls $f$ in $a$ und $g$ in $f(a)$ stetig sind, so ist $(g \circ f) : X \to Z$ stetig in $a$.
 \end{satz}
 
 % Lemma 6.41
 
 \begin{satz}
-Seien $(V, \norm{\blank}_V)$ und $(W, \norm{\blank}_W)$ zwei normierte VR und $f : V \to W$ linear. Dann sind äquivalent:
-\begin{itemize}
-  \item $f$ ist stetig
-  \item $\ex{C > 0} \fa{x \in V} \norm{f(x)}_W < C \norm{x}_V$
-  \item $\norm{f}_\text{op} < \infty$
-\end{itemize}
+  Seien $(V, \norm{\blank}_V)$ und $(W, \norm{\blank}_W)$ zwei normierte VR und $f : V \to W$ linear. Dann sind äquivalent:
+  \begin{itemize}
+    \item $f$ ist stetig
+    \item $\ex{C > 0} \fa{x \in V} \norm{f(x)}_W < C \norm{x}_V$
+    \item $\norm{f}_\text{op} < \infty$
+  \end{itemize}
 \end{satz}
 
 \begin{kor}
-Jede lineare Abbildung zwischen endlich-dimensionalen normierten reellen VR ist stetig.
+  Jede lineare Abbildung zwischen endlich-dimensionalen normierten reellen VR ist stetig.
 \end{kor}
 
 \begin{defn}
-Sei $X$ eine Menge und $(Y, d_Y)$ ein metrischer Raum. Sei $f_n : X \to Y$ eine Folge von Abbildungen. Die Folge $(f_n)$ \emph{konvergiert gleichmäßig} gegen eine Funktion $f : X \to Y$, wenn gilt:
-\[ \fa{\epsilon > 0} \ex{N \in \N} \fa{n \ge N} \sup \Set{d_Y(f_n(x), f(x))}{x \in X} \le \epsilon \]
+  Sei $X$ eine Menge und $(Y, d_Y)$ ein metrischer Raum. Sei $f_n : X \to Y$ eine Folge von Abbildungen. Die Folge $(f_n)$ \emph{konvergiert gleichmäßig} gegen eine Funktion $f : X \to Y$, wenn gilt:
+  \[ \fa{\epsilon > 0} \ex{N \in \N} \fa{n \ge N} \sup \Set{d_Y(f_n(x), f(x))}{x \in X} \le \epsilon \]
 \end{defn}
 
 \begin{satz}
-Seien $(X, d_X)$ und $(Y, d_Y)$ zwei metrische Räume und sei $f_n : X \to Y$ eine Folge stetiger Abbildungen, die gleichmäßig gegen $f : X \to Y$ konvergiert. Dann ist $f$ stetig.
+  Seien $(X, d_X)$ und $(Y, d_Y)$ zwei metrische Räume und sei $f_n : X \to Y$ eine Folge stetiger Abbildungen, die gleichmäßig gegen $f : X \to Y$ konvergiert. Dann ist $f$ stetig.
 \end{satz}
 
 \begin{kor}
-Der normierte VR $(\mathcal{C}(\cinterval{a}{b}, \R), \norm{\blank}_{\sup})$ der stetigen reellen Funktionen auf $\cinterval{a}{b}$ versehen mit der Supremumsnorm ist vollständig. Allgemeiner ist für jeden metrischen Raum $(X, d)$ der Vektorraum $\mathcal{C}(X, \R)$ bezüglich der Supremumsnorm vollständig.
+  Der normierte VR $(\mathcal{C}(\cinterval{a}{b}, \R), \norm{\blank}_{\sup})$ der stetigen reellen Funktionen auf $\cinterval{a}{b}$ versehen mit der Supremumsnorm ist vollständig. Allgemeiner ist für jeden metrischen Raum $(X, d)$ der Vektorraum $\mathcal{C}(X, \R)$ bezüglich der Supremumsnorm vollständig.
 \end{kor}
 
 \begin{defn}
-Sei $W \subset X$ eine Teilmenge eines metrischen Raumes $(X, d)$. Eine Familie offener Teilmengen $\{ U_i \opn X : i \in I \}$ heißt \emph{offene Überdeckung} von $W$, wenn gilt:
-\[ W \subseteq \bigcup_{i \in I} U_i \]
+  Sei $W \subset X$ eine Teilmenge eines metrischen Raumes $(X, d)$. Eine Familie offener Teilmengen $\{ U_i \opn X : i \in I \}$ heißt \emph{offene Überdeckung} von $W$, wenn gilt:
+  \[ W \subseteq \bigcup_{i \in I} U_i \]
 \end{defn}
 
 \begin{defn}
-Sei $(X, d)$ ein metrischer Raum. Eine Teilmenge $K \subset X$ heißt \emph{kompakt} in $(X, d)$, wenn gilt: Jede offene Überdeckung $\{ U_i \opn X : i \in I \}$ besitzt eine endliche offene Teilüberdeckung, d.\,h. es gibt eine endliche Teilmenge $J \subset I$, sodass $K \subseteq \bigcup_{j \in J} U_j$ gilt.
+  Sei $(X, d)$ ein metrischer Raum. Eine Teilmenge $K \subset X$ heißt \emph{kompakt} in $(X, d)$, wenn gilt: Jede offene Überdeckung $\{ U_i \opn X : i \in I \}$ besitzt eine endliche offene Teilüberdeckung, d.\,h. es gibt eine endliche Teilmenge $J \subset I$, sodass $K \subseteq \bigcup_{j \in J} U_j$ gilt.
 \end{defn}
 
 % TODO: Beispiele und Gegenbeispiele für kompakte Mengen
@@ -713,15 +709,15 @@ Der Vektor $\iota \in \R^n$ heißt \emph{Riemann-Integral} von $f$.
 \end{defn}
 
 \begin{bem}
-Eine Funktion $f = (f_1, ..., f_n) : \cinterval{a}{b} \to \R^n$ ist genau dann \emph{Riemann-integrierbar}, wenn jede Komponentenfunktion $f_j, j = 1, ..., n$ Riemann-integrierbar ist. Es gilt in diesem Fall:
-\[ \Intab{f(t)}{t} = \left( \Intab{f_1(t)}{t}, ..., \Intab{f_n(t)}{t} \right) \]
-Insbesondere sind stetige Funktionen $f : \cinterval{a}{b} \to \R^n$ stets Riemann-integrierbar.
+  Eine Funktion $f = (f_1, ..., f_n) : \cinterval{a}{b} \to \R^n$ ist genau dann \emph{Riemann-integrierbar}, wenn jede Komponentenfunktion $f_j, j = 1, ..., n$ Riemann-integrierbar ist. Es gilt in diesem Fall:
+  \[ \Intab{f(t)}{t} = \left( \Intab{f_1(t)}{t}, ..., \Intab{f_n(t)}{t} \right) \]
+  Insbesondere sind stetige Funktionen $f : \cinterval{a}{b} \to \R^n$ stets Riemann-integrierbar.
 \end{bem}
 
 \begin{satz}
-Sei $f : \cinterval{a}{b} \to \R^n$ stetig, dann gilt:
-\[ \left\| \Intab{f(t)}{t} \right\| \le \Intab{\norm{f(t)}}{t}. \]
-Es gilt Gleichheit, wenn alle f(t) gleichgerichtet sind, d.\,h. für alle $x_1, x_2 \in \cinterval{a}{b}$ mit $f(x_1) \not= 0$ gibt es ein $\lambda \ge 0$, sodass $f(x_2) = \lambda f(x_1)$.
+  Sei $f : \cinterval{a}{b} \to \R^n$ stetig, dann gilt:
+  \[ \left\| \Intab{f(t)}{t} \right\| \le \Intab{\norm{f(t)}}{t}. \]
+  Es gilt Gleichheit, wenn alle f(t) gleichgerichtet sind, d.\,h. für alle $x_1, x_2 \in \cinterval{a}{b}$ mit $f(x_1) \not= 0$ gibt es ein $\lambda \ge 0$, sodass $f(x_2) = \lambda f(x_1)$.
 \end{satz}
 
 \begin{defn}
