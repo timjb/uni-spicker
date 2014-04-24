@@ -228,11 +228,11 @@ Sei $f_n : [a, b] \to \R$ eine Folge stetig differenzierbarer Funktionen, welche
 
 \begin{satz}[\emph{Substitutionsregel}]
 Sei $f : I \to \R$ stetig und sei $g : J \to I$ stetig differenzierbar. Dann gilt für $a, b \in J$:
-%\[ \Intab{f(g(t))g'(t)}{t} = \Int{g(a)}{g(b)}{f(x)} \]
+\[ \Intab{f(g(t))g'(t)}{t} = \Int{g(a)}{g(b)}{f(x)}{x} \]
 \end{satz}
 
 \begin{satz}[\emph{Partielle Integration}]
-Seien $f, g : [a, b] \to \R$ stetig differenzierbar. Dann gilt für $a, b \in I$:
+Seien $f, g : I \to \R$ stetig differenzierbar. Dann gilt für $a, b \in I$:
 \[ \Intabdx{f(x)g'(x)} = [f(x)g(x)]_a^b - \Intabdx{f'(x)g(x)} \]
 \end{satz}
 
@@ -243,10 +243,10 @@ Eine komplexwertige Funktion $f : [a, b] \to \C$ heißt Riemann-integrierbar, we
 
 \begin{defn}[Uneigentliche Integrale]
 \begin{itemize}
-  \item Sei $a < b$ mit $b \in \R \cup \{ \infty \}$ und $f : [a, b) \to \R$ eine Funktion, sodass $f\mid_[a, R]$ für alle $R \in (a, b)$ Riemann-integrierbar ist. Wir setzen
+  \item Sei $a < b$ mit $b \in \R \cup \{ \infty \}$ und $f : [a, b) \to \R$ eine Funktion, sodass $f\mid_{[a, R]}$ für alle $R \in (a, b)$ Riemann-integrierbar ist. Wir setzen
   \[ \Intabdx{f(x)} \coloneqq \lim_{R \uparrow b} \Intdx{a}{R}{f(x)} \]
   falls der Grenzwert existiert.
-  \item Sei $a < b$ mit $a \in \R \cup \{ -\infty \}$ und $f : (a, b] \to \R$ eine Funktion, sodass $f\mid_[R, b]$ für alle $R \in (a, b)$ Riemann-integrierbar ist. Wir setzen
+  \item Sei $a < b$ mit $a \in \R \cup \{ -\infty \}$ und $f : (a, b] \to \R$ eine Funktion, sodass $f\mid_{[R, b]}$ für alle $R \in (a, b)$ Riemann-integrierbar ist. Wir setzen
   \[ \Intabdx{f(x)} \coloneqq \lim_{R \downarrow a} \Intdx{R}{b}{f(x)} \]
   falls der Grenzwert existiert.
   \item Sei $a < b$ mit $a \in \R \cup \{ -\infty \}$ und $b \in \R \cup \{ \infty \}$ und $c \in (a, b)$. Sei $f : (a, b) \to \R$ eine Funktion, sodass für alle $a < R_1 < c < R_2 < b$ die $f\mid_{[R_1, c]}$ und $f\mid_{[c, R_2]}$ Riemann-integrierbar sind. Wir setzen
