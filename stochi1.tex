@@ -243,11 +243,11 @@
 \begin{defn}
   Die \emph{Borel-Mengen} in $\R^1$ sind $\Bor(\R^1) \coloneqq \sigma(\mathcal{E})$, wobei wir $\mathcal{E}$ aus folgenden äquivalenten Optionen wählen dürfen:
   \begin{itemize}
-    \miniitem{0.26\linewidth}{$\Set{ \left] a, b \right] }{ a \leq b }$}
-    \miniitem{0.26\linewidth}{$\Set{ \left] a, b \right[ }{ a \leq b }$}
+    \miniitem{0.26\linewidth}{$\Set{ \ocinterval{a}{b} }{ a \leq b }$}
+    \miniitem{0.26\linewidth}{$\Set{ \ointerval{a}{b} }{ a \leq b }$}
     \miniitem{0.45\linewidth}{$\Set{ G \subset \R^1 }{\text{$G$ abgeschl.}}$}
-    \miniitem{0.26\linewidth}{$\Set{ \left[ a, b \right] }{ a \leq b }$}
-    \miniitem{0.26\linewidth}{$\Set{ \left[ a, b \right[ }{ a \leq b }$}
+    \miniitem{0.26\linewidth}{$\Set{ \cinterval{a}{b} }{ a \leq b }$}
+    \miniitem{0.26\linewidth}{$\Set{ \cointerval{a}{b} }{ a \leq b }$}
     \miniitem{0.45\linewidth}{$\Set{ F \subset \R^1 }{\text{$F$ offen}}$}
   \end{itemize}
 \end{defn}
@@ -256,7 +256,7 @@
 \iffalse
 \begin{defn}
   Allgemeiner ist für $d \in \N$ die $\sigma$-Algebra der Borel-Mengen in $\R^d$ gleich $\Bor(\R^d) \coloneqq \sigma(\mathcal{E})$, wobei
-  \[ \mathcal{E} \coloneqq \Set{ \vartimes_{i=1}^d \left] a_i, b_i \right] }{ \fa{i \in \{1, ..., d\}} a_i \leq b_i }. \]
+  \[ \mathcal{E} \coloneqq \Set{ \vartimes_{i=1}^d \ocinterval{a_i}{b_i} }{ \fa{i \in \{1, ..., d\}} a_i \leq b_i }. \]
   % Ausgelassen: Äquivalent offene Mengen oder geschlossene Mengen
 \end{defn}
 \fi
@@ -264,7 +264,7 @@
 % Kapitel 1.3. Mengenfunktionen (Inhalt, Prämaß, Maß)
 
 \begin{nota}
-  $\ER \coloneqq \R \cup \{-\infty, +\infty\} = \left[ -\infty, \infty \right]$
+  $\ER \coloneqq \R \cup \{-\infty, +\infty\} = \cinterval{-\infty}{\infty}$
 \end{nota}
 
 \begin{defn}
@@ -272,7 +272,7 @@
 \end{defn}
 
 \begin{defn}
-  Sei $\Ring$ ein Ring über $\Omega$. Eine Fkt. $\mu : \Ring \to \left[ 0, \infty \right]$ heißt
+  Sei $\Ring$ ein Ring über $\Omega$. Eine Fkt. $\mu : \Ring \to \cinterval{0}{\infty}$ heißt
   \begin{itemize}
     \item \emph{Inhalt} auf $\Ring$, falls $\mu(\emptyset) = 0$ und $\mu(A \cup B) = \mu(A) + \mu(B)$ für alle $A, B \in \Ring$ mit $A \cap B = \emptyset$ gilt.
     \item \emph{Prämaß} auf $\Ring$, wenn $\mu$ ein Inhalt ist und für alle Folgen $(A_n)_{n \in \N}$ in $\Ring$ mit $A_i \cap A_j = \emptyset$ für $i \not= j$ und $\bigcup_{n=1}^\infty A_n \in \Ring$ gilt:
@@ -304,7 +304,7 @@
 
 \begin{bsp}
   Sei $\Ring$ ein Ring über $\Omega$ und $\omega \in \Omega$. Die Abbildung
-  \[ \delta_{\omega} : \Ring \to \left[ 0, \infty \right], \quad A \mapsto \ind_A(\omega) \]
+  \[ \delta_{\omega} : \Ring \to \cinterval{0}{\infty}, \quad A \mapsto \ind_A(\omega) \]
   ist dann ein Prämaß auf $\Ring$, genannt \emph{Dirac-(Prä)-Maß}.
 \end{bsp}
 
@@ -344,14 +344,14 @@
 
 \begin{defn}
   Seien $a = (a_1, ..., a_d), b = (b_1, ..., b_d) \in \R^d$. Wir schreiben $a \leq b$, falls $a_i \leq b_i$ für alle $i \in \{ 1, ..., d \}$ gilt. Dann heißt
-  \[ \left] a, b \right] \coloneqq \Set{ (x_1, ..., x_d) \in \R^d }{ a_i < x_i \leq b_i \text{ für alle } i \in \{ 1, ..., d \} } \]
+  \[ \ocinterval{a}{b} \coloneqq \Set{ (x_1, ..., x_d) \in \R^d }{ a_i < x_i \leq b_i \text{ für alle } i \in \{ 1, ..., d \} } \]
   von $a$ und $b$ aufgespannter \emph{Elementarquader} in $\R^d$.
 \end{defn}
 
 \begin{defn}
   Sei $f : \R^d \to \R^1$ eine Funktion, $x = (x_1, ..., x_d) \in \R^d$ und $h = (h_1, ..., h_d) \in \R_{\geq 0}^d$. Dann heißt
-  \[ (\triangle f)(\left] x, x + h \right]) \coloneqq \sum_{\mathclap{\delta_1, ..., \delta_d \in \{0,1\}}} \, (-1)^{d-(\delta_1 + ... + \delta_k)} f(x_1 + \delta_1 h_1, ..., x_d + \delta_d h_d) \]
-  \emph{Zuwachs} von $f$ im Elementarquader $\left] x, x+h \right]$.
+  \[ (\triangle f)(\ocinterval{x}{x + h}) \coloneqq \sum_{\mathclap{\delta_1, ..., \delta_d \in \{0,1\}}} \, (-1)^{d-(\delta_1 + ... + \delta_k)} f(x_1 + \delta_1 h_1, ..., x_d + \delta_d h_d) \]
+  \emph{Zuwachs} von $f$ im Elementarquader $\ocinterval{x}{x+h}$.
 \end{defn}
 % Ausgelassen: Alternative, rekursive Definition der Zuwächse
 
@@ -361,7 +361,7 @@
     \item $G$ ist nicht-fallend in jedem Argument, d.\,h. für alle $k \in \{ 1, ..., d \}$ und $x_1, ..., x_d \in \R$ ist $f(x_1, ..., x_{k-1}, -, x_{k+1}, ..., x_d)$ nicht-fallend.
     \item $G$ ist rechtsseitig stetig in jedem Argument, d.\,h. für alle $k \in \{ 1, ..., d \}$ und $x_1, ..., x_d \in \R$ gilt
     \[ \lim_{h \downarrow 0} f(x_1, ..., x_{k-1}, x_k + h, x_{k+1}, ..., x_d) = f(x_1, ..., x_d). \]
-    \item Für alle $x \in \R^d$ und $h \in \R_{\geq 0}^d$ ist der Zuwachs $(\triangle G)(\left] x, x + h \right]) \geq 0$.
+    \item Für alle $x \in \R^d$ und $h \in \R_{\geq 0}^d$ ist der Zuwachs $(\triangle G)(\ocinterval{x}{x + h}) \geq 0$.
   \end{itemize}
 \end{defn}
 
@@ -380,19 +380,19 @@
 \begin{bem}
   Sei $G_i : \R^1 \to \R_{> 0}^1$ für $i \in \{ 1, ..., d \}$ maßerzeugende Funktion im $\R^1$, dann ist
   \[ G : \R^d \to \R_{>0}^1, \quad (x_1, ..., x_d) \mapsto G_1(x_1) \cdot ... \cdot G_d(x_d) \]
-  eine maßerzeugende Funktion in $\R^d$ und es gilt für jeden Elementarquader $\left] a, b \right] \subset \R^d$ mit $a = (a_1, ..., a_d)$, $b = (b_1, ..., b_d)$:
-  \[ (\triangle G)(\left] a, b \right]) = \prod_{i=1}^d \left( G_i(b_i) - G_i(a_i) \right). \]
+  eine maßerzeugende Funktion in $\R^d$ und es gilt für jeden Elementarquader $\ocinterval{a}{b} \subset \R^d$ mit $a = (a_1, ..., a_d)$, $b = (b_1, ..., b_d)$:
+  \[ (\triangle G)(\ocinterval{a}{b}) = \prod_{i=1}^d \left( G_i(b_i) - G_i(a_i) \right). \]
 \end{bem}
 % Ausgelassen: Spezialfall $G_1 = ... = G_d = \max(0, \id)$
 
 \begin{satz}
   Der Ring aller Elementarquader im $\R^d$ ist
   \begin{align*}
-     \Ring \coloneqq \{ \bigsqcup_{i=1}^m \left] a_i, b_i \right] \,\mid\,\, & m \in \N \text{ und } \left] a_1, b_1 \right], ..., \left] a_m, b_m \right] \\[-8pt]
+     \Ring \coloneqq \{ \bigsqcup_{i=1}^m \ocinterval{a_i}{b_i} \,\mid\,\, & m \in \N \text{ und } \ocinterval{a_1}{b_1}, ..., \ocinterval{a_m}{b_m} \\[-8pt]
      & \text{disjunkte Elementarquader im } \R^d \}
   \end{align*}
   und für jede maßerzeugende Funktion $G : \R^d \to \R^1$ definiert
-  \[ \mu_G : \Ring \to \left[ 0, \infty \right[, \quad \bigsqcup_{i=1}^m \left] a_i, b_i \right] \mapsto \sum_{i=1}^m (\triangle G)(\left] a_i, b_i \right]) \]
+  \[ \mu_G : \Ring \to \cointerval{0}{\infty}, \quad \bigsqcup_{i=1}^m \ocinterval{a_i}{b_i} \mapsto \sum_{i=1}^m (\triangle G)(\ocinterval{a_i}{b_i}) \]
   einen Inhalt auf $\Ring$, der sogar ein Prämaß ist.
 \end{satz}
 
@@ -408,7 +408,7 @@
 \end{defn}
 
 \begin{bem}
-  Wegen $\mu^*(\emptyset) = 0$ und der Monotonie nimmt ein äußeres Maß nur Werte in $[0, \infty]$ an.
+  Wegen $\mu^*(\emptyset) = 0$ und der Monotonie nimmt ein äußeres Maß nur Werte in $\cinterval{0}{\infty}$ an.
 \end{bem}
 
 \begin{defn}
@@ -417,7 +417,7 @@
 \end{defn}
 
 \begin{satz}[Carathéodory]
-  Für ein äußeres Maß $\mu^* : \mathcal{P}(\Omega) \to [0, \infty]$ ist
+  Für ein äußeres Maß $\mu^* : \mathcal{P}(\Omega) \to \cinterval{0}{\infty}$ ist
   \begin{itemize}
     \item $\Alg^* \coloneqq \Set{ A \subset \Omega }{ A \text{ ist $\mu^*$-messbar } }$ eine $\sigma$-Algebra und
     \item $\mu^*|_{\Alg^*}$ ein Maß auf $\Alg^*$.
@@ -542,7 +542,7 @@
 % Vorlesung 9
 
 \begin{bem}
-  Sei $\mu$ ein W-Maß auf $\LebAlg(\R^1)$. Dann definiert $x \mapsto F_{\mu}(x) \coloneqq \mu(\left] -\infty, x \right])$ eine VF. Für eine VF $F : \R \to [0,1]$ definiert umgekehrt $\mu_F(\left] a, b \right]) \coloneqq F(b) - F(a)$ ein W-Maß auf $\LebAlg(\R^1)$. Analog funktioniert dies auf dem $\R^d$.
+  Sei $\mu$ ein W-Maß auf $\LebAlg(\R^1)$. Dann definiert $x \mapsto F_{\mu}(x) \coloneqq \mu(\ocinterval{-\infty}{x})$ eine VF. Für eine VF $F : \R \to \cinterval{0}{1}$ definiert umgekehrt $\mu_F(\ocinterval{a}{b}) \coloneqq F(b) - F(a)$ ein W-Maß auf $\LebAlg(\R^1)$. Analog funktioniert dies auf dem $\R^d$.
 \end{bem}
 
 % Wichtige Verteilungsfunktionen:
@@ -556,13 +556,13 @@
     %\end{cases} \]
     \item \emph{Poisson-Verteilung} mit Parameter $\lambda > 0$:
     \[ F_{\lambda}(x) = \sum_{0 \leq n \leq x} \tfrac{\lambda^n}{n!} \exp(-\lambda) \tag*{Poi($\lambda$)} \]
-    \item \emph{Gleichverteilung} auf $\left] a, b \right]$: $F(x) = \min(1, \max(0, \tfrac{x - a}{b - a}))$
-    %\[ F(x) \coloneqq 0 \text{ für } x < a, \quad F(x) \coloneqq \tfrac{x-a}{b-a} \text{ für } x \in \left[ a, \right], \quad F(x) \coloneqq 1 \text{ für } x > b \]
+    \item \emph{Gleichverteilung} auf $\ocinterval{a}{b}$: $F(x) = \min(1, \max(0, \tfrac{x - a}{b - a}))$
+    %\[ F(x) \coloneqq 0 \text{ für } x < a, \quad F(x) \coloneqq \tfrac{x-a}{b-a} \text{ für } x \in \cinterval{a}{b}, \quad F(x) \coloneqq 1 \text{ für } x > b \]
     \item \emph{Normalverteilung} (Gaußverteilung) mit EW $\mu$ und Varianz $\sigma^2$:
     \[ F_{\mu \sigma^2}(x) = \tfrac{1}{\sqrt{2 \pi \sigma^2}} \Int{-\infty}{x}{\exp\left(\tfrac{-(t-\mu)^2}{2 \sigma^2}\right)}{t} \tag*{N($\mu$, $\sigma^2$)} \]
     besitzt die Dichte $F_{\mu \sigma^2}'(x) = \tfrac{1}{\sqrt{2 \pi \sigma^2}} \exp\left(\tfrac{-(x-\mu)^2}{2 \sigma^2}\right)$ und die Symmetrie $F_{\mu \sigma^2}(\mu{-}x) = 1 - F_{\mu \sigma^2}(\mu{+}x)$.
     \item $d$-dimensionale \emph{Normalverteilung} mit Erwartungswertvektor $m \in \R^d$ positiv definiter Kovarianzenmatrix $C \in \R^{d \times d}$:
-    \[ F(x) = \tfrac{1}{\sqrt{(2 \pi)^d \det C}} \enspace \Int{\left] -\infty, x \right]}{}{\!\! \exp(- \tfrac{1}{2} (y-m)^T C^{-1} (y-m))}{y} \]
+    \[ F(x) = \tfrac{1}{\sqrt{(2 \pi)^d \det C}} \enspace \Int{\ocinterval{-\infty}{x}}{}{\!\! \exp(- \tfrac{1}{2} (y-m)^T C^{-1} (y-m))}{y} \]
     \item \emph{$2$-dimensionale Exponentialverteilung} mit $\lambda, \mu > 0$, $\nu \geq 0$:
     \[ F(x, y) = \begin{cases} 0, \text{ falls $x < 0$ oder $y < 0$, ansonsten:} \\ 1 - e^{-(\lambda {+} \nu) x} - e^{-(\mu {+} \nu) y} + e^{-(\lambda x {+} \mu y {+} \nu \max(x, y))} \end{cases} \]
   \end{itemize}
@@ -588,7 +588,7 @@
 \begin{bem}
   Unmittelbar klar:
   \begin{itemize}
-    \miniitem{0.35\linewidth}{$H_n(A) \in [0,1]$}
+    \miniitem{0.35\linewidth}{$H_n(A) \in \cinterval{0}{1}$}
     \miniitem{0.60\linewidth}{$H_n(A) \leq H_n(B)$ für $A \subset B$}
     \item $H_n(A \sqcup B) = H_n(A) + H_n(B)$ für $A \cap B = \emptyset$
   \end{itemize}
@@ -610,7 +610,7 @@
 \begin{bem}
   Offenbar gilt:
   \begin{itemize}
-    \miniitem{0.35\linewidth}{$H_n(A \mid B) \in [0,1]$}
+    \miniitem{0.35\linewidth}{$H_n(A \mid B) \in \cinterval{0}{1}$}
     \miniitem{0.60\linewidth}{$H_n(A_1 \mid B) \leq H_n(A_2 \mid B)$ für $A_1 \subset A_2$}
     \item $H_n(A_1 \sqcup A_2 \mid B) = H_n(A_1 \mid B) + H_n(A_2 \mid B)$ für $A_1 \cap A_2 = \emptyset$
   \end{itemize}
@@ -620,12 +620,12 @@
 
 \begin{defn}
   Sei $\Omega \in \LebAlg(\R^d)$ mit $\lambda_d(\Omega) > 0$. Dann heißt das W-Maß
-  \[ \P : \LebAlg(\Omega) \to [0, 1], \quad A \mapsto \tfrac{\lambda_d(A)}{\lambda_d(\Omega)} \quad \text{\emph{Gleichverteilung}.} \]
+  \[ \P : \LebAlg(\Omega) \to \cinterval{0}{1}, \quad A \mapsto \tfrac{\lambda_d(A)}{\lambda_d(\Omega)} \quad \text{\emph{Gleichverteilung}.} \]
 \end{defn}
 
 \begin{defn}
   Sei $\Omega$ eine endliche Menge. Dann definiert
-  \[ \P : \mathcal{P} \to [0, 1], \quad A \mapsto \tfrac{|A|}{|\Omega|} = \tfrac{\text{\# günstige Fälle}}{\text{\# mögliche Fälle}} \]
+  \[ \P : \mathcal{P} \to \cinterval{0}{1}, \quad A \mapsto \tfrac{|A|}{|\Omega|} = \tfrac{\text{\# günstige Fälle}}{\text{\# mögliche Fälle}} \]
   ein W-Maß auf $(\Omega, \mathcal{P}(\Omega))$, genannt \emph{Laplace'sche Wkt}.
 \end{defn}
 
@@ -823,7 +823,7 @@
 % Kapitel 2.11. Grenzwertsatz von Poisson -- Gesetz der kleinen Zahlen
 
 \begin{satz}
-  Für $0 \leq m \leq n$, $p \in [0, 1]$ gilt
+  Für $0 \leq m \leq n$, $p \in \cinterval{0}{1}$ gilt
   \[ \frac{\binom{M}{m} \binom{N-M}{n-m}}{\binom{N}{n}} \enspace \xrightarrow[M/N \to p]{M, N \to \infty} \enspace \binom{n}{m} \, p^m \, (1-p)^{n-m}. \]
 \end{satz}
 
@@ -849,7 +849,7 @@
 \end{satz}
 
 \begin{lem}
-  Für $n, k \in \N$, $p \in \left[0,1\right]$ und $\P_1$ und $\P_2$ wie eben definiert durch $p_i \coloneqq \binom{n}{k} p^k (1-p)^{n-k}$, $q_i \coloneqq \tfrac{(np)^k}{k!} \exp(-np)$ gilt
+  Für $n, k \in \N$, $p \in \cinterval{0}{1}$ und $\P_1$ und $\P_2$ wie eben definiert durch $p_i \coloneqq \binom{n}{k} p^k (1-p)^{n-k}$, $q_i \coloneqq \tfrac{(np)^k}{k!} \exp(-np)$ gilt
   \[ \mathrm{d}_\infty(\P_1, \P_2) \leq 2 n p^2. \]
 \end{lem}
 
@@ -948,7 +948,7 @@
 
 \begin{defn}
   Sei $(\Omega', \Alg', \mu')$ ein Maßraum, $(\Omega, \Alg)$ ein messbarer Raum, $f : (\Omega', \Alg) \to (\Omega, \Alg)$. Dann ist durch
-  \[ \mu'_f \coloneqq \mu' \circ f^{-1} : \Alg \to [0, \infty], \quad A \mapsto \mu'(f^{-1}(A)) \]
+  \[ \mu'_f \coloneqq \mu' \circ f^{-1} : \Alg \to \cinterval{0}{\infty}, \quad A \mapsto \mu'(f^{-1}(A)) \]
   ein Maß auf $(\Omega, \Alg)$, das sog. \emph{Bildmaß} von $\mu'$ unter $f$, definiert.
 \end{defn}
 
@@ -996,14 +996,14 @@
 \begin{defn}
   Für $f : \Omega \to \ER$ heißen die Funktionen
   \begin{itemize}
-    \item $\left|f\right| \coloneqq \max(f, -f) : \Omega \to [0, \infty]$ \emph{Betrag} von $f$
-    \item $f^+ \coloneqq \,\,\,\, \max(f, 0) : \Omega \to [0, \infty]$ \emph{Positivteil} von $f$
-    \item $f^- \coloneqq -\min(f, 0) : \Omega \to [0, \infty]$ \emph{Negativteil} von $f$
+    \item $\abs{f} \coloneqq \max(f, -f) : \Omega \to \cinterval{0}{\infty}$ \emph{Betrag} von $f$
+    \item $f^+ \coloneqq \,\,\,\, \max(f, 0) : \Omega \to \cinterval{0}{\infty}$ \emph{Positivteil} von $f$
+    \item $f^- \coloneqq -\min(f, 0) : \Omega \to \cinterval{0}{\infty}$ \emph{Negativteil} von $f$
   \end{itemize}
 \end{defn}
 
 \begin{satz}
-  Falls $f : (\Omega, \Alg) \to (\ER, \overline\Bor)$ messbar, dann auch $\left|f\right|$, $f^+$ und $f^-$.
+  Falls $f : (\Omega, \Alg) \to (\ER, \overline\Bor)$ messbar, dann auch $\abs{f}$, $f^+$ und $f^-$.
 \end{satz}
 
 
@@ -1031,10 +1031,10 @@
 \end{beobachtung}
 
 \begin{defn}
-  Die \emph{Variation} von $g : [a, b] \to \R$ bzgl. einer Zerlegung $Z = \{ a = x_0 < ... < x_n = b \}$ von $[a, b]$ ist die nicht-negative Zahl
+  Die \emph{Variation} von $g : \cinterval{a}{b} \to \R$ bzgl. einer Zerlegung $Z = \{ a = x_0 < ... < x_n = b \}$ von $\cinterval{a}{b}$ ist die nicht-negative Zahl
   \[ V(g, Z) \coloneqq \sum_{j=1}^{n} |g(x_j) - g(x_{j-1})|. \]
-  Die \emph{Totalvariation} von $g : [a, b] \to \R$ ist
-  \[ V_a^b(g) \coloneqq \sup\left\{ V(g, Z) : Z \text{ Zerlegung von } [a, b] \right\} \in \R_{\ge 0} \cup \{ \infty \}. \]
+  Die \emph{Totalvariation} von $g : \cinterval{a}{b} \to \R$ ist
+  \[ V_a^b(g) \coloneqq \sup\left\{ V(g, Z) : Z \text{ Zerlegung von } \cinterval{a}{b} \right\} \in \R_{\ge 0} \cup \{ \infty \}. \]
   Falls $V_a^b(g) < \infty$, so heißt $g$ \emph{von beschränkter Variation}.
 \end{defn}
 
@@ -1066,9 +1066,9 @@
 
 \begin{defn}
   Das durch die ZG $X$ induzierte Bildmaß
-  \[ P_X : \LebAlg(\R^1) \to [0,1], \quad B \mapsto \P(\{ X \in B \}) = \P(X^{-1}(B)) \]
+  \[ P_X : \LebAlg(\R^1) \to \cinterval{0}{1}, \quad B \mapsto \P(\{ X \in B \}) = \P(X^{-1}(B)) \]
   heißt \emph{Verteilungsgesetz} der ZG $X$ und
-  \[ F_X : \R \to \R, \quad x \mapsto P_X(\left]-\infty, x\right]) = \P(\{ X \leq x \}) \]
+  \[ F_X : \R \to \R, \quad x \mapsto P_X(\ocinterval{-\infty}{x}) = \P(\{ X \leq x \}) \]
   heißt \emph{Verteilungsfunktion} (VF) der ZG $X$.
 \end{defn}
 
@@ -1081,7 +1081,7 @@
 \begin{beweis}
   \begin{enumerate}
     \item Möglichkeit: Wähle $\Omega \coloneqq \R^1$, $\Alg \coloneqq \LebAlg(\R^1)$ und $\P \coloneqq \mu_F$ als das von von $F$ erzeugte Maß und setze $X \coloneqq \id$.
-    \item Möglichkeit: Wähle $\Omega \coloneqq [0,1]$, $\Alg \coloneqq \Leb([0,1])$, $\P \coloneqq \lambda_1$. Setze
+    \item Möglichkeit: Wähle $\Omega \coloneqq \cinterval{0}{1}$, $\Alg \coloneqq \Leb(\cinterval{0}{1})$, $\P \coloneqq \lambda_1$. Setze
     \[
       X(w) \coloneqq F^{-}(w) \coloneqq \inf \{ F \geq w \} \enspace \text{ für } w > 0, \quad
       X(0) \coloneqq \lim_{w \downarrow 0} F^{-}(w)
@@ -1110,7 +1110,7 @@
   \begin{multicols}{3}
     \begin{itemize}
       \item $f$ ist messbar
-      \item $f(\Omega) \subset \left[0, \infty\right[$
+      \item $f(\Omega) \subset \cointerval{0}{\infty}$
       \item $f(\Omega)$ ist endlich
     \end{itemize}
   \end{multicols}
@@ -1224,7 +1224,7 @@
 \end{acht}
 
 \begin{defn}
-  Sei $(\Omega, \Alg, \mu)$ ein Maßraum und $f : (\Omega, \Alg) \to (\ER, \mathcal{L}(\ER))$. Für $p \in \left[1, \infty\right[$ heißt $f$ \emph{$p$-integrierbar}, falls $\abs{f}^p$ $\mu$-integrierbar ist.
+  Sei $(\Omega, \Alg, \mu)$ ein Maßraum und $f : (\Omega, \Alg) \to (\ER, \mathcal{L}(\ER))$. Für $p \in \cointerval{1}{\infty}$ heißt $f$ \emph{$p$-integrierbar}, falls $\abs{f}^p$ $\mu$-integrierbar ist.
   \begin{align*}
     L^p(\Omega, \Alg, \mu) &\coloneqq \Set{ f : \Omega \to \ER }{\text{$f$ $p$-integrierbar, also } \IntOmu{\abs{f}^p} < \infty}, \\
     L^\infty(\Omega, \Alg, \mu) &\coloneqq \Set{ f : \Omega \to \ER }{\exists \, C > 0 \,:\, \abs{f} \leq C \text{ fast überall}}
@@ -1275,7 +1275,7 @@
 % TODO: Namen dieses Maßes?
 \begin{satz}
   Sei $(\Omega, \Alg, \mu)$ ein Maßraum und $f : (\Omega, \Alg) \to (\ER, \Leb(\ER))$ nichtnegativ und $\mu$-integrierbar. Dann definiert
-  \[ \nu : \Alg \to \left[0, \infty \right], \quad A \mapsto \Int{A}{}{f}{\mu} = \IntOmu{f \cdot \chi_A} \]
+  \[ \nu : \Alg \to \cinterval{0}{\infty}, \quad A \mapsto \Int{A}{}{f}{\mu} = \IntOmu{f \cdot \chi_A} \]
   ein zu $\mu$ absolut stetiges, endliches Maß auf $(\Omega, \Alg)$.
 \end{satz}
 
@@ -1323,8 +1323,8 @@
 % TODO: Klare Abtrennung Borel-Mengen und Lebesgue-Mengen
 % TODO: Einführung des Symbols $\lambda_d$ für das Lebesgue-Maß auf $\R^d$
 \begin{satz}[Transformationssatz]
-  Sei $U, \widetilde{U} \opn \R^d$ und sei $\phi : U \to \widetilde{U}$ ein $\mathcal{C}^1$-Diffeomorphismus. Dann ist eine Funktion $f : \widetilde{U} \to \ER$ genau dann auf $\widetilde{U}$ Lebesgue-Borel-integrierbar, wenn $(f \circ \phi) \cdot \left|\det(D\phi)\right| : U \to \ER$ auf $U$ Lebesgue-Borel-interierbar ist. In diesem Fall gilt
-  \[ \Int{U}{}{(f \circ \phi) \cdot \left|\det(D\phi)\right|}{\lambda_d} = \Int{\phi(U)}{}{f}{\lambda_d} = \Int{\widetilde{U}}{}{f}{\lambda_d}. \]
+  Sei $U, \widetilde{U} \opn \R^d$ und sei $\phi : U \to \widetilde{U}$ ein $\mathcal{C}^1$-Diffeomorphismus. Dann ist eine Funktion $f : \widetilde{U} \to \ER$ genau dann auf $\widetilde{U}$ Lebesgue-Borel-integrierbar, wenn $(f \circ \phi) \cdot \abs{\det(D\phi)} : U \to \ER$ auf $U$ Lebesgue-Borel-interierbar ist. In diesem Fall gilt
+  \[ \Int{U}{}{(f \circ \phi) \cdot \abs{\det(D\phi)}}{\lambda_d} = \Int{\phi(U)}{}{f}{\lambda_d} = \Int{\widetilde{U}}{}{f}{\lambda_d}. \]
   Obige Gleichung ist auch erfüllt, wenn lediglich $f \geq 0$ gilt.
 \end{satz}
 
@@ -1383,7 +1383,7 @@
   \end{itemize}
   Für stetige Verteilungen ergibt sich eine weitere Unterteilung:
   \begin{itemize}
-    \item $F_X$ heißt \emph{absolutstetig} (totalstetig), wenn es für alle $\epsilon > 0$ ein $\delta > 0$ gibt, sodass für höchstens abzählbar viele, disjunkte Intervalle $I_k = \left]a_k, b_k\right]$ mit $k \in J \subset \N$ gilt:
+    \item $F_X$ heißt \emph{absolutstetig} (totalstetig), wenn es für alle $\epsilon > 0$ ein $\delta > 0$ gibt, sodass für höchstens abzählbar viele, disjunkte Intervalle $I_k = \ocinterval{a_k}{b_k}$ mit $k \in J \subset \N$ gilt:
     \[ \sum_{k \in J} (b_k - a_k) < \delta \enspace \implies \enspace \sum_{k \in J} (F_X(b_k) - F_X(a_k)) < \epsilon. \]
     % Ausgelassen: Beispiel: Lipschitz-stetige Funktionen
     \item $F_X$ heißt \emph{singulärstetig} (stetig, aber nicht absolutstetig), wenn die Wachstumspunkte von $F_X$ eine Nullmenge bilden, also
@@ -1451,13 +1451,13 @@
 
 \begin{defn}
   Seien $X_1, ..., X_d : (\Omega, \Alg, \P) \to (\R^1, \Bor(\R^1))$ ZGn,
-  \[ F = F_{(X_1, ..., X_d)} : \R^d \to \left[ 0, 1 \right], \quad (x_1, ..., x_d) \mapsto \P(X_1 {\leq} x_1, ..., X_k {\leq} x_k) \]
+  \[ F = F_{(X_1, ..., X_d)} : \R^d \to \cinterval{0}{1}, \quad (x_1, ..., x_d) \mapsto \P(X_1 {\leq} x_1, ..., X_k {\leq} x_k) \]
   die dazugehörige VF und $P = P_{(X_1, ..., X_d)}$ das von der VF induzierte Maß auf $\Bor(\R^d)$.
   \begin{itemize}
     \item $F$ heißt \emph{diskret}, falls es eine höchstens abzählbare Menge $\Set{ y_i \in \R^d }{ i \in I }$ mit $I \subset \N$ gibt, sodass
     \[ \fa{i \in I} P(\{ y_i \}) > 0 \quad \text{und} \quad \sum_{i \in I} P(\{ y_i \}) = 0. \]
     \item $F$ heißt \emph{stetig}, wenn $P(\{ y \}) = 0$ für alle $y \in \R^1$.
-    \item $F$ heißt \emph{absolut stetig}, falls das Maß $P$ absolut stetig bzgl. dem Lebesgue-Maß ist, also $P \ll \lambda_d$ gilt. Dazu äquivalent: Für alle $\epsilon > 0$ gibt es ein $\delta > 0$, sodass für höchstens abzählbar viele, disjunkte Elementarquader $Q_{j} = \left] a_j, b_j \right]$ mit $j \in J \subset \N$  gilt:
+    \item $F$ heißt \emph{absolut stetig}, falls das Maß $P$ absolut stetig bzgl. dem Lebesgue-Maß ist, also $P \ll \lambda_d$ gilt. Dazu äquivalent: Für alle $\epsilon > 0$ gibt es ein $\delta > 0$, sodass für höchstens abzählbar viele, disjunkte Elementarquader $Q_{j} = \ocinterval{a_j}{b_j}$ mit $j \in J \subset \N$  gilt:
     \[ \sum_{j \in J} \lambda_d(Q_j) \leq \delta \implies \sum_{j \in J} P(Q_j) = \sum_{j \geq J} (\triangle F) Q_j \leq \epsilon. \]
     \item $F$ heißt \emph{singulär stetig}, wenn $F$ stetig ist und eine Lebesgue-Menge $S$ mit $\lambda_d(S) = 0$ und $P(S) = 1$ existiert.
   \end{itemize}
@@ -1466,7 +1466,7 @@
 \begin{bem}
   Falls $F$ absolut stetig, ex. die W-Dichte, die f.\,ü. durch
   \[ f = f_{(X_1, ..., X_d)} : \R^d \to \R_{\geq 0}, \quad (x_1, ..., x_d) \mapsto \tfrac{\partial^d}{\partial x_1 \cdots \partial x_d} F(x_1, ..., x_d) \]
-  gegeben ist und $\Int{\mathclap{\left] -\infty, x \right]}}{}{f(y)}{y} = F(x)$ für alle $x \in \R^d$ erfüllt.
+  gegeben ist und $\Int{\mathclap{\ocinterval{-\infty}{x}}}{}{f(y)}{y} = F(x)$ für alle $x \in \R^d$ erfüllt.
 \end{bem}
 
 % Ausgelassen: Obiges $f$ wird auch als Radon-Nikodym-Ableitung bezeichnet
@@ -1488,25 +1488,25 @@
 % Riemann-Stieltjes-Integral
 
 \begin{defn}
-  Eine \emph{Zerlegung} eines Intervalls $[a, b]$ ist eine geordnete endliche Menge $Z = \{ a = x_0 < x_1 < ... < x_k = b\} \subset [a, b]$. Eine weitere Zerlegung $\widetilde{Z}$ desselben Intervalls heißt \emph{Verfeinerung} von $Z$, falls $\widetilde{Z} \supset Z$.
+  Eine \emph{Zerlegung} eines Intervalls $\cinterval{a}{b}$ ist eine geordnete endliche Menge $Z = \{ a = x_0 < x_1 < ... < x_k = b\} \subset \cinterval{a}{b}$. Eine weitere Zerlegung $\widetilde{Z}$ desselben Intervalls heißt \emph{Verfeinerung} von $Z$, falls $\widetilde{Z} \supset Z$.
 \end{defn}
 
 \begin{nota}
-  Die Menge aller Zerlegungen von $[a, b]$ ist $\mathcal{Z}([a, b])$.
+  Die Menge aller Zerlegungen von $\cinterval{a}{b}$ ist $\mathcal{Z}(\cinterval{a}{b})$.
 \end{nota}
 
 \begin{defn}
-  Eine Menge von Stützstellen bzgl. einer Zerlegung $\{ x_0 < ... < x_k \}$ von $\left[ a, b \right]$ ist eine Menge $\{ \xi_1, ..., \xi_k \}$ mit $\xi_i \in \left] x_{i{-}1}, x_i \right[$ für $i \in \{ 1, ..., k \}$.
+  Eine Menge von Stützstellen bzgl. einer Zerlegung $\{ x_0 < ... < x_k \}$ von $\cinterval{a}{b}$ ist eine Menge $\{ \xi_1, ..., \xi_k \}$ mit $\xi_i \in \ointerval{x_{i{-}1}}{x_i}$ für $i \in \{ 1, ..., k \}$.
 \end{defn}
 
 \begin{defn}
-  Für zwei Funktionen $f, g : [a, b] \to \R$, eine Zerlegung $Z = \{ a = x_0 < ... < x_n = b \}$ von $[a, b]$ und Stützstellen $\xi_1, ..., \xi_n$ bzgl. $Z$ heißt die Summe
+  Für zwei Funktionen $f, g : \cinterval{a}{b} \to \R$, eine Zerlegung $Z = \{ a = x_0 < ... < x_n = b \}$ von $\cinterval{a}{b}$ und Stützstellen $\xi_1, ..., \xi_n$ bzgl. $Z$ heißt die Summe
   \[ S(f, \d g, Z, \xi_1, ..., \xi_n) \coloneqq \sum_{j=1}^{n}\!f(\xi_j)(g(x_j) - g(x_{j{-}1})) \]
   \emph{Riemann-Stieltjes-Summe} von $f$ bzgl. $g$ und der Zerlegung $Z$ mit Stützstellen $\xi_1, ..., \xi_n$.
 \end{defn}
 
 \begin{defn}
-  Seien $f, G : \left[ a, b \right] \to \R$. Die Funktion $f$ heißt \emph{Riemann-Stieltjes-integrierbar} (RS-integrierbar) bzgl. der \emph{Gewichtsfunktion} $G$, wenn gilt: Es gibt ein $\iota \in \R$, sodass für alle $\epsilon > 0$ eine Zerlegung $Z_{\epsilon}$ von $\left[ a, b \right]$ existiert, sodass für alle Verfeinerungen $Z \supset Z_{\epsilon}$ und Wahlen von Stützstellen $\xi_1, ..., \xi_n$ gilt:
+  Seien $f, G : \cinterval{a}{b} \to \R$. Die Funktion $f$ heißt \emph{Riemann-Stieltjes-integrierbar} (RS-integrierbar) bzgl. der \emph{Gewichtsfunktion} $G$, wenn gilt: Es gibt ein $\iota \in \R$, sodass für alle $\epsilon > 0$ eine Zerlegung $Z_{\epsilon}$ von $\cinterval{a}{b}$ existiert, sodass für alle Verfeinerungen $Z \supset Z_{\epsilon}$ und Wahlen von Stützstellen $\xi_1, ..., \xi_n$ gilt:
   \[ \abs{\iota - S(f, \d G, Z, \xi_1, ..., \xi_n)} \le \epsilon. \]
   Dieses (eindeutig bestimmte) $\iota$ heißt \emph{Riemann-Stieltjes-Integral} (RS-Integral) von $f$ bzgl. $G$, geschrieben
   \[ \Int{a}{b}{f(x)}{G(x)} \coloneqq \iota. \]
@@ -1522,14 +1522,14 @@
 % Ausgelassen: Genaue Formulierung davon (siehe Ana2-Zusammenfassung)
 
 \begin{satz}
-  Für $f$ bzgl. $G$ auf $\left[ a, b \right]$ RS-int'bar und $G$ stetig diff'bar gilt
+  Für $f$ bzgl. $G$ auf $\cinterval{a}{b}$ RS-int'bar und $G$ stetig diff'bar gilt
   \[ \Int{a}{b}{f(x)}{G(x)} = \Int{a}{b}{f(x) \cdot G'(x)}{x}. \]
 \end{satz}
 
 % Ausgelassen: Lemmas für RS-Integral über halboffene Intervalle
 
 \begin{satz}[Partielle Integration] % für RS-Integrale
-  Sei $f : \left[ a, b \right] \to \R$ bzgl. $G : \left[ a, b \right] \to \R$ RS-integrierbar. Dann ist auch $G$ bzgl. $f$ RS-integrierbar und es gilt
+  Sei $f : \cinterval{a}{b} \to \R$ bzgl. $G : \cinterval{a}{b} \to \R$ RS-integrierbar. Dann ist auch $G$ bzgl. $f$ RS-integrierbar und es gilt
   \[ \Int{a}{b}{f(x)}{G(x)} = \left[ G(x) \cdot f(x) \right]_a^b - \Int{a}{b}{G(x)}{f(x)}. \]
 \end{satz}
 
@@ -1615,7 +1615,7 @@
 % TODO: Kumulanten, kumulantenerzeugende Funktion, Med (?)
 
 \begin{satz}[Verallgemeinerte Tschebyschow-Ungleichung]
-  Sei $X$ sei eine ZG und $g : \left[ 0, \infty \right[ \to \left[ 0, \infty \right[$ nicht fallend. Dann gilt für alle $\epsilon > 0$:
+  Sei $X$ sei eine ZG und $g : \cointerval{0}{\infty} \to \cointerval{0}{\infty}$ nicht fallend. Dann gilt für alle $\epsilon > 0$:
   \[ \P(\abs{X} \geq \epsilon) \leq \frac{\E g(\abs{X})}{g(\epsilon)} \]
 \end{satz}
 
@@ -1645,7 +1645,7 @@
 \end{bsp}
 
 \begin{satz}
-  Für $p, q \in \left] 1, \infty \right[$ mit $\tfrac{1}{p} + \tfrac{1}{q} = 1$ und ZGen $X, Y$ gilt
+  Für $p, q \in \ointerval{1}{\infty}$ mit $\tfrac{1}{p} + \tfrac{1}{q} = 1$ und ZGen $X, Y$ gilt
   \[
     \abs{\E X Y} \leq \E \abs{XY} \leq (\E \abs{X}^p)^{\tfrac{1}{p}} \cdot (\E \abs{X}^q)^{\tfrac{1}{q}}
     \quad \text{\emph{(Hölder-Ungl).}}
@@ -1664,11 +1664,11 @@
 
 \begin{defn}
   Eine Funktion $g : J \to \R$ heißt \emph{konvex}, falls gilt:
-  \[ \fa{x, y \in J} \fa{t \in \left[ 0, 1 \right]} g(t a + (1{-}t)b) \leq t g(a) + (1{-}t) g(b) \]
+  \[ \fa{x, y \in J} \fa{t \in \cinterval{0}{1}} g(t a + (1{-}t)b) \leq t g(a) + (1{-}t) g(b) \]
 \end{defn}
 
 \begin{satz}
-  Sei $g : \R^1 \to \R^1$ konvex auf einem Intervall $J$ und $X$ eine ZG mit $\P(X \in J) = 1$ und $\P \abs{X} < \infty$. Dann gilt für $x, y \in I$, $t \in \left[0,1\right]$:
+  Sei $g : \R^1 \to \R^1$ konvex auf einem Intervall $J$ und $X$ eine ZG mit $\P(X \in J) = 1$ und $\P \abs{X} < \infty$. Dann gilt für $x, y \in I$, $t \in \cinterval{0}{1}$:
   \[
     g(\E X) \leq \E g(X)
     \quad \text{(\emph{Jensen-Ungleichung}).}
@@ -1903,11 +1903,11 @@
 
 \begin{satz}
   Sei $Y \coloneqq g(X)$, wobei $g : \R^1 \to \R^1$ mb und $X$ eine ZG. Dann:
-  \[ F_Y(y) = \P(Y \leq y) = \P(X \in g^{-1}(\left] -\infty, y \right])). \]
+  \[ F_Y(y) = \P(Y \leq y) = \P(X \in g^{-1}(\ocinterval{-\infty}{y})). \]
 \end{satz}
 
 \iffalse
-  \[ F_Y(y) = \P(Y \leq y) = \P(Y \in \left] -\infty, y \right[) = \P(X \in g^{-1}(\left] -\infty, y \right])) \]
+  \[ F_Y(y) = \P(Y \leq y) = \P(Y \in \ointerval{-\infty}{y}) = \P(X \in g^{-1}(\ocinterval{-\infty}{y})) \]
 
   Beispiel: $Y = X^2$, $y \geq 0$
 
@@ -1954,9 +1954,9 @@
   % * Schadenshöhenverteilung
 
   Die Funktion
-  \[ f_a(y) \coloneqq f_Y(y) \cdot (1 + a \cdot \sin(2 \pi \log y)), y \in \R_{>0}^1, a \in [0,1] \]
+  \[ f_a(y) \coloneqq f_Y(y) \cdot (1 + a \cdot \sin(2 \pi \log y)), y \in \R_{>0}^1, a \in \cinterval{0}{1} \]
 
-  Für $a \in [0,1]$ ist dann $\Int{-\infty}{\infty}{f_a(y)}{y} = 1$
+  Für $a \in \cinterval{0}{1}$ ist dann $\Int{-\infty}{\infty}{f_a(y)}{y} = 1$
 
   \[ \E Y^n = \Int{0}{\infty}{y^n f_Y(y)}{y} = ... = \exp(- \frac{n^2}{2}) \]
 
@@ -1996,9 +1996,9 @@
       Y_1 &= g_1(X_1, X_2) = \sqrt{- 2 \log (X_1)} \sin(2 \pi X_2) \\
       Y_2 &= g_2(X_1, X_2) = \sqrt{- 2 \log (X_1)} \cos(2 \pi X_2)
     \end{align*}
-    mit $X_1$ und $X_2$ gleichverteilt auf $[0,1]$.
+    mit $X_1$ und $X_2$ gleichverteilt auf $\cinterval{0}{1}$.
 
-    \[ f_{(X_1)}(x_1, x_2) = \ind_{\left] 0,1 \right[} \]
+    \[ f_{(X_1)}(x_1, x_2) = \ind_{\ointerval{0}{1}} \]
 
     Behauptung: Dann ist $f_{(Y_1, Y_2)} = \phi(y_1) \cdot \phi(y_2)$, wobei $\phi(y) = \frac{1}{\sqrt{2 \pi}} \exp(- \frac{y^2}{2})$ oder $Y_1, Y_2 \sim N(0, 1)$ und unabhängig.
   \end{bsp}
@@ -2011,7 +2011,7 @@
 
     Wenn $X_1, X_2 \sim N(0, \sigma^2)$, unabhängig $\implies$ $f_{(X_1, X_2)}(x_1, x_2) = \phi(\frac{x_1}{\sigma}) \phi(\frac{x_2}{\sigma})$
 
-    Ergebnis: $f_{(Y_1, Y_2)}(y_1, y_2) = \frac{1}{2 \pi} \cdot \underbrace{\frac{y_1}{\sigma^2} \exp(- \frac{y_1^2}{\sigma^2})}_{\text{Dichte der Rayleigh-Verteilung}}$ für $(y_1, y_2) \in \left] 0, \infty \right[ \times \left] 0, 2\pi \right]$
+    Ergebnis: $f_{(Y_1, Y_2)}(y_1, y_2) = \frac{1}{2 \pi} \cdot \underbrace{\frac{y_1}{\sigma^2} \exp(- \frac{y_1^2}{\sigma^2})}_{\text{Dichte der Rayleigh-Verteilung}}$ für $(y_1, y_2) \in \ointerval{0}{\infty} \times \ocinterval{0}{2\pi}$
 
     \[ F_{Y_1}(y) = ... = 1 - \exp(- \frac{y^2}{2 \sigma^2}) \]
   \end{bsp}
@@ -2229,7 +2229,7 @@
 % Kapitel 4.4.4. Beispiele zu Fubini-Tonelli
 
 \iffalse
-  $\Omega_1 = \Omega_2 = \left[ 0, 1 \right]$, $\mu_1 = \mu_2 = \lambda_1$
+  $\Omega_1 = \Omega_2 = \cinterval{0}{1}$, $\mu_1 = \mu_2 = \lambda_1$
   \begin{itemize}
     \item $f(x, y) \coloneqq \tfrac{x^2 - y^2}{(x^2 + y^2)^2}$
     \item $f(x, y) \coloneqq \begin{cases} (x - \tfrac{1}{2})^{-3} & \text{für } 0 < y < \abs{x - \tfrac{1}{2}} \\ 0, & \text{sonst}$
@@ -2239,7 +2239,7 @@
 
   Beispiel: Gaußsches weißes Rauschen
 
-  Sei $T = \left[ 0, 1 \right]$, $(X_t)_{t \in T}$ eine Familie unabhängiger, $N(0, 1)$-vertielter ZGn über eiem W-Raum $(\Omega, \Alg, \P)$.
+  Sei $T = \cinterval{0}{1}$, $(X_t)_{t \in T}$ eine Familie unabhängiger, $N(0, 1)$-vertielter ZGn über eiem W-Raum $(\Omega, \Alg, \P)$.
 
   Produktraum: $(T \times \Omega, \Leb(T) \otimes \Alg, \lambda_1 \times \P)$
 

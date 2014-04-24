@@ -28,7 +28,7 @@
 \end{defn}
 
 % Ausgelassen: Beispiel $\R^n$
-% Ausgelassen: Beispiel Funktionenraum $\mathcal{C}(\left[ 0, 1 \right], \R)$ mit Maximumsnorm
+% Ausgelassen: Beispiel Funktionenraum $\mathcal{C}(\cinterval{0}{1}, \R)$ mit Maximumsnorm
 
 \begin{defn}
   Für einen metrischen Raum $(X, d)$ und eine Teilmenge $A \subset X$ ist $(A, d|_A)$ ein metrischer Raum und $d|_A$ heißt \emph{induzierte Metrik}.
@@ -223,14 +223,14 @@
 % Thema: Zusammenhang und Wegzusammenhang
 
 \begin{defn}
-  Ein topologischer Raum $X$ heißt \emph{wegweise zusammen- hängend}, falls es für je zwei Punkte $x, y \in X$ eine stetige Abbildung $\gamma : \left[ 0, 1 \right] \to X$ mit $\gamma(0) = x$ und $\gamma(1) = y$ gibt.
+  Ein topologischer Raum $X$ heißt \emph{wegweise zusammen- hängend}, falls es für je zwei Punkte $x, y \in X$ eine stetige Abbildung $\gamma : \cinterval{0}{1} \to X$ mit $\gamma(0) = x$ und $\gamma(1) = y$ gibt.
 \end{defn}
 
 \begin{bspe}
   \begin{itemize}
     \item $\R^n$ ist wegzusammenhängend
     \item $(\{ p, q \}, \{ \emptyset, \{ p \}, \{ p, q \} \})$ ist wegzusammenhängend!
-    \item $\left] -\infty, 0 \right[ \cup \left] 0, \infty \right[ \subset \R$ ist nicht wegzusammenhängend.
+    \item $\ointerval{-\infty}{0} \cup \ointerval{0}{\infty} \subset \R$ ist nicht wegzusammenhängend.
   \end{itemize}
 \end{bspe}
 
@@ -285,7 +285,7 @@
 \end{bsp}
 
 \begin{prop}
-  Die Menge $\left[ 0, 1 \right]$ ist zusammenhängend.
+  Die Menge $\cinterval{0}{1}$ ist zusammenhängend.
 \end{prop}
 
 \begin{kor}
@@ -293,7 +293,7 @@
 \end{kor}
 
 \begin{prop}[ZWS]
-  Sei $f : \left[ 0, 1 \right] \to \R$ stetig. Gilt $f(0) < 0$ und $f(1) > 0$, so existiert ein $t \in \left] 0, 1 \right[$ mit $f(t) = 0$.
+  Sei $f : \cinterval{0}{1} \to \R$ stetig. Gilt $f(0) < 0$ und $f(1) > 0$, so existiert ein $t \in \ointerval{0}{1}$ mit $f(t) = 0$.
 \end{prop}
 
 % Vorlesung vom 16.4.2014
@@ -410,7 +410,7 @@
 
 \begin{acht}
   Vollständigkeit ist keine Homöomorphieinvariante!
-  % Gegenbeispiel: $\left] 0, 1 \right[ \cong \R$, aber $\R$ ist vollständig, $\left] 0, 1 \right[$ ist es nicht
+  % Gegenbeispiel: $\ointerval{0}{1} \cong \R$, aber $\R$ ist vollständig, $\ointerval{0}{1}$ ist es nicht
 \end{acht}
 
 \begin{defn}
