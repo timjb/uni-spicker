@@ -56,7 +56,7 @@
 \begin{prob}[Schwaches Maßproblem]
   Gesucht ist eine Abbildung $\mu : \PS(\R^n) \to [\R, \infty]$ mit folgenden Eigenschaften:
   \begin{itemize}
-    \item Normierung: $\mu([0, 1]^n) = 1$
+    \item Normierung: $\mu(\cinterval{0}{1}^n) = 1$
     \item Endliche Additivität: Sind $A, B \subset \R^n$ disjunkt, so gilt $\mu(A \cup B) = \mu(A) + \mu(B)$.
     \item Bewegungsinvarianz: Für eine euklidische Bewegung $f : \R^n \to \R^n$ und $A \subset \R^n$ gilt $\mu(f(A)) = \mu(A)$.
   \end{itemize}
@@ -73,7 +73,7 @@
 % Ausgelassen: Zusammenhang mit dem Banach-Tarski-Paradox
 
 \begin{prob}[Starkes Maßproblem]
-  Gesucht ist eine Abbildung $\mu : \PS(\R^n) \to [0, \infty]$ wie im schwachen Maßproblem, die anstelle der endlichen Additivität die Eigenschaft der $\sigma$-Additivität besitzt:
+  Gesucht ist eine Abbildung $\mu : \PS(\R^n) \to \cinterval{0}{\infty}$ wie im schwachen Maßproblem, die anstelle der endlichen Additivität die Eigenschaft der $\sigma$-Additivität besitzt:
   \begin{itemize}
     \item Für eine Folge $(A_n)_{n \in \N}$ pw. disjunkter Teilmengen des $\R^n$ ist
       \[ \mu\left(\bigcup_{n \in \N} A_n\right) = \sum_{n=0}^\infty \mu(A_n). \]
@@ -153,7 +153,7 @@
 % Kapitel 1.3. Inhalte, Prämaße, Maße
 
 \begin{defn}
-  Eine Funktion $\mu : \Ring \to [0, \infty]$ heißt \emph{Inhalt} auf $\Ring$, falls
+  Eine Funktion $\mu : \Ring \to \cinterval{0}{\infty}$ heißt \emph{Inhalt} auf $\Ring$, falls
   \begin{itemize}
     \miniitem{0.2 \linewidth}{$\mu(\emptyset) = 0$}
     \miniitem{0.75 \linewidth}{$\mu(A \sqcup B) = \mu(A) + \mu(B)$ für disjunkte $A, B \in \Ring$.}
@@ -161,7 +161,7 @@
 \end{defn}
 
 \begin{defn}
-  Ein Inhalt $\mu : \Ring \to [0, \infty]$ heißt \emph{Prämaß} auf $\Ring$, wenn $\mu$ $\sigma$-additiv ist, d.\,h. wenn für jede Folge $(A_n)_{n \in \N}$ paarweise disjunkter Elemente von $\Ring$ mit $\bigsqcup_{n \in \N} A_n \in \Ring$ gilt:
+  Ein Inhalt $\mu : \Ring \to \cinterval{0}{\infty}$ heißt \emph{Prämaß} auf $\Ring$, wenn $\mu$ $\sigma$-additiv ist, d.\,h. wenn für jede Folge $(A_n)_{n \in \N}$ paarweise disjunkter Elemente von $\Ring$ mit $\bigsqcup_{n \in \N} A_n \in \Ring$ gilt:
   \[ \mu\left(\bigsqcup_{n \in \N} A_n\right) = \sum_{n=0}^\infty \mu(A_n) \]
 \end{defn}
 
@@ -288,7 +288,7 @@
 \end{defn}
 
 \begin{bem}
-  Wegen $\mu^*(\emptyset) = 0$ und der Monotonie nimmt ein äußeres Maß nur Werte in $[0, \infty]$ an.
+  Wegen $\mu^*(\emptyset) = 0$ und der Monotonie nimmt ein äußeres Maß nur Werte in $\cinterval{0}{\infty}$ an.
 \end{bem}
 
 \begin{defn}
@@ -297,7 +297,7 @@
 \end{defn}
 
 \begin{satz}[Carathéodory]
-  Für ein äußeres Maß $\mu^* : \PSO \to [0, \infty]$ ist
+  Für ein äußeres Maß $\mu^* : \PSO \to \cinterval{0}{\infty}$ ist
   \begin{itemize}
     \item $\Alg^* \coloneqq \Set{ A \subset \Omega }{ A \text{ ist $\mu^*$-messbar } }$ eine $\sigma$-Algebra und
     \item $\mu^*|_{\Alg^*}$ ein Maß auf $\Alg^*$.
@@ -341,8 +341,8 @@
 \begin{defn}
   Für $a, b \in \R^n$ heißen
   \[
-    \left]a, b\right[\,\coloneqq \Set{ x \in \R^n }{ a \lhd x \lhd b }, \quad
-    \mu(\left]a, b\right[) \coloneqq \prod_{j = 1}^{n} (b_j - a_j)
+    \ointerval{a}{b}\,\coloneqq \Set{ x \in \R^n }{ a \lhd x \lhd b }, \quad
+    \mu(\ointerval{a}{b}) \coloneqq \prod_{j = 1}^{n} (b_j - a_j)
   \]
   \emph{Elementarquader} und \emph{Elementarinhalt}. Sei im Folgenden $\mathcal{E}$ die Menge aller Elementarquader.
 \end{defn}
@@ -432,7 +432,7 @@
 
 \begin{satz}
   Sei $(\Omega, \Alg, \mu)$ ein Maßraum und $(\Omega', \Alg')$ ein messbarer Raum und $f : \Omega \to \Omega'$ eine messbare Abbildung, dann ist
-  \[ \mu' = f_*(\mu) = \mu \circ f^{-1} : \Alg' \to [0, \infty], \quad A' \mapsto \mu(f^{-1}(A')) \]
+  \[ \mu' = f_*(\mu) = \mu \circ f^{-1} : \Alg' \to \cinterval{0}{\infty}, \quad A' \mapsto \mu(f^{-1}(A')) \]
   ein Maß auf $(\Omega', \Alg')$, genannt das \emph{Bildmaß} von $f$.
 \end{satz}
 
@@ -446,7 +446,7 @@
 \end{defn}
 
 \begin{satz}
-  $\Bor(\ER) = \Alg(\Set{ [a, \infty] }{ a \in \R })$
+  $\Bor(\ER) = \Alg(\Set{ \cinterval{a}{\infty} }{ a \in \R })$
 \end{satz}
 
 \begin{nota}
@@ -461,7 +461,7 @@
   Für eine numerische Fkt. $f : (\Omega, \Alg) \to (\ER, \overline{\Bor})$ sind äquivalent:
   \begin{itemize}
     \miniitem{0.27 \linewidth}{$f$ ist messbar}
-    \miniitem{0.7 \linewidth}{$\fa{a \in \R} \{ f \geq a \} = f^{-1}([a, \infty]) \in \Alg$}
+    \miniitem{0.7 \linewidth}{$\fa{a \in \R} \{ f \geq a \} = f^{-1}(\cinterval{a}{\infty}) \in \Alg$}
     \begin{multicols}{2}
       \item $\fa{a \in \R} \{ f > a \} \in \Alg$
       \item $\fa{a \in \R} \{ f \leq a \} \in \Alg$
@@ -518,18 +518,18 @@
 \begin{defn}
   Für $f : \Omega \to \ER$ heißen die Funktionen
   \begin{itemize}
-    \item $\left|f\right| \coloneqq \max(f, -f) : \Omega \to [0, \infty]$ \emph{Betrag} von $f$
-    \item $f^+ \coloneqq \,\,\,\, \max(f, 0) : \Omega \to [0, \infty]$ \emph{Positivteil} von $f$
-    \item $f^- \coloneqq -\min(f, 0) : \Omega \to [0, \infty]$ \emph{Negativteil} von $f$
+    \item $\abs{f} \coloneqq \max(f, -f) : \Omega \to \cinterval{0}{\infty}$ \emph{Betrag} von $f$
+    \item $f^+ \coloneqq \,\,\,\, \max(f, 0) : \Omega \to \cinterval{0}{\infty}$ \emph{Positivteil} von $f$
+    \item $f^- \coloneqq -\min(f, 0) : \Omega \to \cinterval{0}{\infty}$ \emph{Negativteil} von $f$
   \end{itemize}
 \end{defn}
 
 \begin{bem}
-  $f = f^+ - f^-$ und $\left|f\right| = f^+ + f^-$
+  $f = f^+ - f^-$ und $\abs{f} = f^+ + f^-$
 \end{bem}
 
 \begin{satz}
-  Falls $f : (\Omega, \Alg) \to (\ER, \overline\Bor)$ messbar, dann auch $\left|f\right|$, $f^+$ und $f^-$.
+  Falls $f : (\Omega, \Alg) \to (\ER, \overline\Bor)$ messbar, dann auch $\abs{f}$, $f^+$ und $f^-$.
 \end{satz}
 
 % Kapitel 1.7.
@@ -540,7 +540,7 @@
   \begin{multicols}{3}
     \begin{itemize}
       \item $f$ ist messbar
-      \item $f(\Omega) \subset \left[0, \infty\right[$
+      \item $f(\Omega) \subset \cointerval{0}{\infty}$
       \item $f(\Omega)$ ist endlich
     \end{itemize}
   \end{multicols}
@@ -642,8 +642,8 @@
     \begin{multicols}{2}
       \item $f \in \Leb^1(\Omega, \Alg, \mu)$.
       \item $f^+, f^- \in \Leb^1(\Omega, \Alg, \mu)$.
-      \item $\left|f\right| \in \Leb^1(\Omega, \Alg, \mu)$.
-      \item $\exists\,g \in \Leb^1(\Omega, \Alg, \mu)$ mit $\left|f\right| \leq g$.
+      \item $\abs{f} \in \Leb^1(\Omega, \Alg, \mu)$.
+      \item $\exists\,g \in \Leb^1(\Omega, \Alg, \mu)$ mit $\abs{f} \leq g$.
     \end{multicols}
     \item Es gibt nicht negative $u, v \in \Leb^1(\Omega, \Alg, \mu)$ mit $f = u - v$.
   \end{itemize}
@@ -691,7 +691,7 @@
 % Vorlesung vom 20.11.2013
 
 \begin{bem}
-  Das Cantorsche Diskontinuum ist eine Menge $C \subset [0, 1]$, $C \in \Bor$, welche die bemerkenswerte Eigenschaft hat, dass sie gleichzeitig überabzählbar ist und Maß $0$ besitzt. Da außerdem $\Bor \cong \R$ gilt, folgt $\PS(C) \cong \PS(\R) \not\cong \R \cong \Bor$. Somit gibt es eine Nullmenge $N \subset C$, die nicht in $\Bor$ liegt. Es folgt:
+  Das Cantorsche Diskontinuum ist eine Menge $C \subset \cinterval{0}{1}$, $C \in \Bor$, welche die bemerkenswerte Eigenschaft hat, dass sie gleichzeitig überabzählbar ist und Maß $0$ besitzt. Da außerdem $\Bor \cong \R$ gilt, folgt $\PS(C) \cong \PS(\R) \not\cong \R \cong \Bor$. Somit gibt es eine Nullmenge $N \subset C$, die nicht in $\Bor$ liegt. Es folgt:
 \end{bem}
 
 \begin{satz}
@@ -745,7 +745,7 @@
 \end{satz}
 
 \begin{satz}[von der majorisierten Konvergenz]\begin{doublespace}
-  Sei $g \in \Leb^1(\Omega, \Alg, \mu), g \geq 0$. Sei $(f_n)_{n \in \N}$ Folge messbarer Fkt. $f_n : (\Omega, \Alg, \mu) \to (\ER, \overline{\Bor})$ mit $\left|f_n\right| \overset{\text{f.ü.}}\leq g$ (Majorisierung).
+  Sei $g \in \Leb^1(\Omega, \Alg, \mu), g \geq 0$. Sei $(f_n)_{n \in \N}$ Folge messbarer Fkt. $f_n : (\Omega, \Alg, \mu) \to (\ER, \overline{\Bor})$ mit $\abs{f_n} \overset{\text{f.ü.}}\leq g$ (Majorisierung).
   Sei ferner $f : \Omega \to \ER$ $(\Alg, \overline{\Bor})$-messbar mit $f_n \xrightarrow[n \to \infty]{\text{f.ü.}} f$, d.\,h. $\Set{ \omega \in \Omega }{ \lim_{n \to \infty} f_n(\omega) = f(\omega) \text{ falsch} }$ ist Nullmenge. Dann ist $f$ integrierbar mit $\IntOmu{f} = \lim_{n \to \infty} \IntOmu{f_n}$.
 \end{doublespace}\end{satz}
 
@@ -759,20 +759,20 @@
 \end{satz}
 
 \begin{satz}\begin{doublespace}
-  Seien $f, f_j : (\Omega, \Alg, \mu) \to (\R, \Bor), j \in \N$ messbare Funktionen, $g : (\Omega, \Alg, \mu) \to (\R, \Bor)$ integrierbar, sodass $\left|\sum_{j=1}^n f_j\right| \overset{\text{f.ü.}}\leq g \, \forall n \in \N$ und\\[-5pt]
+  Seien $f, f_j : (\Omega, \Alg, \mu) \to (\R, \Bor), j \in \N$ messbare Funktionen, $g : (\Omega, \Alg, \mu) \to (\R, \Bor)$ integrierbar, sodass $\abs{\sum_{j=1}^n f_j} \overset{\text{f.ü.}}\leq g \, \forall n \in \N$ und\\[-5pt]
   $f \fue= \sum_{n=1}^\infty f_j$. Dann sind $f, f_j$ integrierbar mit $\IntOmu{f} = \sum_{j=1}^\infty \IntOmu{f_j}$.
 \end{doublespace}\end{satz}
 
 \vspace{-20pt}
 
 \begin{satz}[Ableiten unter Integral]
-  Seien $a, b \in \R$ mit $a < b$, $(\Omega, \Alg, \mu)$ ein Maßraum und sei $f : \left]a, b\right[ \times \Omega \to (\R, \Bor)$ eine Funktion, sodass:
+  Seien $a, b \in \R$ mit $a < b$, $(\Omega, \Alg, \mu)$ ein Maßraum und sei $f : \ointerval{a}{b} \times \Omega \to (\R, \Bor)$ eine Funktion, sodass:
   \begin{itemize}
-    \item Für alle $t \in \left]a, b\right[$ ist die Abbildung $f(t, -) : \Omega \to \R$ $\mu$-integrierbar.
-    \item Für alle $\omega \in \Omega$ ist die Abbildung $f(-, \omega) : \left]a, b\right[ \to \R$ diff'bar.
-    \item Es gibt eine Funktion $g \in \Leb^1(\Omega, \Alg, \mu)$ mit $g \geq 0$, sodass für alle $t \in \left]a, b\right[$ und fast alle $\omega \in \Omega$ gilt: $\left|f(-, \omega)'(t)\right| \leq g(\omega)$.
+    \item Für alle $t \in \ointerval{a}{b}$ ist die Abbildung $f(t, \blank) : \Omega \to \R$ $\mu$-integrierbar.
+    \item Für alle $\omega \in \Omega$ ist die Abbildung $f(\blank, \omega) : \ointerval{a}{b} \to \R$ diff'bar.
+    \item Es gibt eine Funktion $g \in \Leb^1(\Omega, \Alg, \mu)$ mit $g \geq 0$, sodass für alle $t \in \ointerval{a}{b}$ und fast alle $\omega \in \Omega$ gilt: $\abs{f(\blank, \omega)'(t)} \leq g(\omega)$.
   \end{itemize}
-  Dann ist die Funktion $F : \left]a, b\right[ \to \R, t \mapsto \IntOmu{f_t}$ differenzierbar mit\\[-3pt]
+  Dann ist die Funktion $F : \ointerval{a}{b} \to \R, t \mapsto \IntOmu{f_t}$ differenzierbar mit\\[-3pt]
   $F'(t) = \IntOmu{h_t}$, wobei $h_t : \Omega \to \R, \, \omega \mapsto f(-, \omega)'(t)$.
 \end{satz}
 
@@ -780,7 +780,7 @@
 
 \begin{satz}
   Sei $f \in \overline{\E}(\Omega, \Alg, \mu)$. Dann ist die Abbildung
-  \[ f \mu : \Alg \to [0, \infty], \quad A \mapsto \Int{A}{}{f}{\mu} \]
+  \[ f \mu : \Alg \to \cinterval{0}{\infty}, \quad A \mapsto \Int{A}{}{f}{\mu} \]
   ein Maß, genannt \emph{Maß mit der Dichte $f$ bzgl. $\mu$} oder \emph{Stieltjes-Maß} zu $f$.
 \end{satz}
 
@@ -790,20 +790,20 @@
 \end{samepage}
 
 \begin{defn}
-  Eine \emph{Zerlegung} eines Intervalls $[a, b]$ ist eine geordnete endliche Teilmenge $\{ a = x_0 < x_1 < ... < x_k = b\} \subset [a, b]$.
+  Eine \emph{Zerlegung} eines Intervalls $\cinterval{a}{b}$ ist eine geordnete endliche Teilmenge $\{ a = x_0 < x_1 < ... < x_k = b\} \subset \cinterval{a}{b}$.
 \end{defn}
 
 \begin{nota}
-  Die Menge aller Zerlegungen von $[a, b]$ ist $\mathcal{Z}([a, b])$.
+  Die Menge aller Zerlegungen von $\cinterval{a}{b}$ ist $\mathcal{Z}(\cinterval{a}{b})$.
 \end{nota}
 
 \begin{defn}
-  Die \emph{Feinheit} einer Zerlegung $\{ x_0 < ... < x_k \} \in \mathcal{Z}([a, b])$ ist
+  Die \emph{Feinheit} einer Zerlegung $\{ x_0 < ... < x_k \} \in \mathcal{Z}(\cinterval{a}{b})$ ist
   \[ \abs{Z} \coloneqq \max \Set{ x_j - x_{j-1} }{ j \in \{ 1, ..., n \} }. \]
 \end{defn}
 
 \begin{defn}
-  Für eine beschränkte Funktion $f : [a, b] \to \R$ und eine Zerlegung $Z = \{ a_0, ..., a_n \} \in \mathcal{Z}([a, b])$ bezeichnen
+  Für eine beschränkte Funktion $f : \cinterval{a}{b} \to \R$ und eine Zerlegung $Z = \{ a_0, ..., a_n \} \in \mathcal{Z}(\cinterval{a}{b})$ bezeichnen
   \begin{align*}
     O(f, Z) &\coloneqq \sum_{j=1}^n (\sup \Set{ f(x) }{ x \in [x_{j-1}, x_j] })(x_j - x_{j-1}),\\
     U(f, Z) &\coloneqq \sum_{j=1}^n (\inf \Set{ f(x) }{ x \in [x_{j-1}, x_j] })(x_j - x_{j-1})
@@ -813,46 +813,46 @@
 
 \begin{nota}
   \begin{align*}\\[-24pt]
-    O_*(f) &\coloneqq \inf \Set{ O(f, Z) }{ Z \in \mathcal{Z}([a, b]) }\\
-    U^*(f) &\coloneqq \sup \Set{ U(f, Z) }{ Z \in \mathcal{Z}([a, b]) }\\
+    O_*(f) &\coloneqq \inf \Set{ O(f, Z) }{ Z \in \mathcal{Z}(\cinterval{a}{b}) }\\
+    U^*(f) &\coloneqq \sup \Set{ U(f, Z) }{ Z \in \mathcal{Z}(\cinterval{a}{b}) }\\
   \end{align*}
 \end{nota}
 
 \begin{defn}
-  Eine beschränkte Funktion $f : [a, b] \to \R$ heißt \emph{Riemann-integrierbar}, wenn $O_*(f) = U^*(f)$. In diesem Fall heißt
+  Eine beschränkte Funktion $f : \cinterval{a}{b} \to \R$ heißt \emph{Riemann-integrierbar}, wenn $O_*(f) = U^*(f)$. In diesem Fall heißt
   \[ \Int{a}{b}{f(x)}{x} \coloneqq O_*(f) = U^*(f) \quad \text{\emph{Riemann-Integral} von $f$.} \]
 \end{defn}
 
 \begin{nota}
-  Sei $(Z_k)_{k \in \N}$ eine Folge in $\mathcal{Z}([a, b])$ mit $Z_k = \{ a_0^k, a_1^k, ..., a^k_{n_k} \}$. Für eine beschränkte Funktion $f : [a, b] \to \R$ definieren wir $f^k, f_k, f^*, f_* : [a, b] \to \R$ durch
+  Sei $(Z_k)_{k \in \N}$ eine Folge in $\mathcal{Z}(\cinterval{a}{b})$ mit $Z_k = \{ a_0^k, a_1^k, ..., a^k_{n_k} \}$. Für eine beschränkte Funktion $f : \cinterval{a}{b} \to \R$ definieren wir $f^k, f_k, f^*, f_* : \cinterval{a}{b} \to \R$ durch
   \begin{align*}
-    f^k &= \sup f([a, a_1^k]) \cdot \ind_{[a, a_1^k]} + \sum_{j=2}^{n_k} \sup f([a_{j-1}^k, a_j^k]) \cdot \ind_{]a_{j-1}^k, a_j^k]},\\
-    f_k &= \inf \, f([a, a_1^k]) \cdot \ind_{[a, a_1^k]} + \sum_{j=2}^{n_k} \inf \, f([a_{j-1}^k, a_j^k]) \cdot \ind_{]a_{j-1}^k, a_j^k]}\\
-    f^*(x) &= \liminf_{y \to x}\,\, f(y) = \lim_{\epsilon \downarrow 0} \inf\,\, \Set{ f(y) }{ y \in [x-\epsilon, x+\epsilon] \cap [a, b]}\\
-    f^*(x) &= \limsup_{y \to x} f(y) = \lim_{\epsilon \downarrow 0} \sup \, \Set{ f(y) }{ y \in [x-\epsilon, x+\epsilon] \cap [a, b]}
+    f^k &= \sup f(\cinterval{a}{a_1^k}) \cdot \ind_{\cinterval{a}{a_1^k}} + \sum_{j=2}^{n_k} \sup f(\cinterval{a_{j-1}^k}{a_j^k}) \cdot \ind_{\ocinterval{a_{j-1}^k}{a_j^k}},\\
+    f_k &= \inf \, f(\cinterval{a}{a_1^k}) \cdot \ind_{\cinterval{a}{a_1^k}} + \sum_{j=2}^{n_k} \inf \, f(\cinterval{a_{j-1}^k}{a_j^k}) \cdot \ind_{\ocinterval{a_{j-1}^k}{a_j^k}}\\
+    f^*(x) &= \liminf_{y \to x}\,\, f(y) = \lim_{\epsilon \downarrow 0} \inf\,\, \Set{ f(y) }{ y \in [x-\epsilon, x+\epsilon] \cap \cinterval{a}{b}}\\
+    f^*(x) &= \limsup_{y \to x} f(y) = \lim_{\epsilon \downarrow 0} \sup \, \Set{ f(y) }{ y \in [x-\epsilon, x+\epsilon] \cap \cinterval{a}{b}}
   \end{align*}
 \end{nota}
 
 \begin{bem}
-  Es gilt: $f_* \leq f \leq f^*$ und $f_*(x_0) = f(x_0) = f^*(x_0)$ für $x_0 \in [a, b]$ genau dann, wenn $f$ in $x_0$ stetig ist.
+  Es gilt: $f_* \leq f \leq f^*$ und $f_*(x_0) = f(x_0) = f^*(x_0)$ für $x_0 \in \cinterval{a}{b}$ genau dann, wenn $f$ in $x_0$ stetig ist.
 \end{bem}
 
 \begin{satz}
-  Sei $f : [a, b] \to \R$ beschränkt und $(Z_k)_{k \in \N}$ eine Folge in $\mathcal{Z}([a, b])$ mit $\lim_{n \to \infty} \left|Z_k\right| = 0$. Dann gilt:
+  Sei $f : \cinterval{a}{b} \to \R$ beschränkt und $(Z_k)_{k \in \N}$ eine Folge in $\mathcal{Z}(\cinterval{a}{b})$ mit $\lim_{n \to \infty} \abs{Z_k} = 0$. Dann gilt:
   \begin{itemize}
-    \item Sei $R = \bigcup_{k=1}^\infty \bigcup_{j=1}^{n_k} \{ a_j^k \}$ die Vereinigung aller Zerlegungen $Z_k, k \in \N$. Für alle $x \in [a, b] \setminus R$ gilt dann
+    \item Sei $R = \bigcup_{k=1}^\infty \bigcup_{j=1}^{n_k} \{ a_j^k \}$ die Vereinigung aller Zerlegungen $Z_k, k \in \N$. Für alle $x \in \cinterval{a}{b} \setminus R$ gilt dann
     \[
       \lim_{k \to \infty} f^k(x) = f^*(x)
       \quad \text{und} \quad
       \lim_{k \to \infty} f_k(x) = f_*(x).
     \]
     \item Die Funktionen $f^*$ und $f_*$ sind Borel-messbar und integrierbar bzgl. des Borel-Maßes $\mu$ mit
-    \[ \Int{[a, b]}{}{f^*}{\mu} = O_*(f) \quad \text{und} \quad \Int{[a, b]}{}{f_*}{\mu} = O^*(f). \]
+    \[ \Int{\cinterval{a}{b}}{}{f^*}{\mu} = O_*(f) \quad \text{und} \quad \Int{\cinterval{a}{b}}{}{f_*}{\mu} = O^*(f). \]
   \end{itemize}
 \end{satz}
 
 \begin{satz}
-  Sei $f : [a, b] \to \R$ beschränkt. Dann sind äquivalent:
+  Sei $f : \cinterval{a}{b} \to \R$ beschränkt. Dann sind äquivalent:
   \begin{itemize}
     \item $f$ ist Riemann-integrierbar.
     \item $f$ ist fast-überall stetig (im Sinne des Lebesgue-Borel-Maßes).
@@ -860,15 +860,15 @@
 \end{satz}
 
 \begin{satz}
-  Ist eine beschränkte Funktion $f : [a, b] \to \R$ Riemann-integrierbar, so ist sie auch auf $[a, b]$ Lebesgue-integrierbar bzgl. dem Lebesgue-Maß $\lambda$ und es gilt
-  \[ \Int{a}{b}{f(x)}{x} = \Int{[a, b]}{}{f}{\lambda}. \]
+  Ist eine beschränkte Funktion $f : \cinterval{a}{b} \to \R$ Riemann-integrierbar, so ist sie auch auf $\cinterval{a}{b}$ Lebesgue-integrierbar bzgl. dem Lebesgue-Maß $\lambda$ und es gilt
+  \[ \Int{a}{b}{f(x)}{x} = \Int{\cinterval{a}{b}}{}{f}{\lambda}. \]
 \end{satz}
 
 \begin{samepage}
 \begin{satz}
   Sei $I$ ein Intervall und $f : I \to \R$ über jedem kompakten Teilintervall von $I$ Riemann-integrierbar. Dann sind äquivalent:
   \begin{itemize}
-    \item $\left|f\right|$ ist auf $I$ uneigentlich Riemann-integrierbar.
+    \item $\abs{f}$ ist auf $I$ uneigentlich Riemann-integrierbar.
     \item $f$ ist auf $I$ Lebesgue-integrierbar.
   \end{itemize}
   Falls eine der Bedingungen erfüllt ist, so stimmt das Riemann- Integral von $f$ auf $I$ mit dem Lebesgue-Integral von $f$ auf $I$ überein.
@@ -879,11 +879,11 @@
 \end{samepage}
 
 \begin{satz}
-  Sei $f : [a, b] \to \R$ Lebesgue-integrierbar. Dann ist $F : [a, b] \to \R, t \mapsto \Int{[a, t]}{}{f}{\lambda}$ stetig.
+  Sei $f : \cinterval{a}{b} \to \R$ Lebesgue-integrierbar. Dann ist $F : \cinterval{a}{b} \to \R, t \mapsto \Int{\cinterval{a}{t}}{}{f}{\lambda}$ stetig.
 \end{satz}
 
 \begin{satz}
-  Sei $f : [a, b] \to \R$ Lebesgue-integrierbar. Wenn $\forall \, t \in [a, b]$ gilt: $\Int{[a, t]}{}{f}{\lambda} = F(t) = 0$, dann $f \fue= 0$.
+  Sei $f : \cinterval{a}{b} \to \R$ Lebesgue-integrierbar. Wenn $\forall \, t \in \cinterval{a}{b}$ gilt: $\Int{\cinterval{a}{t}}{}{f}{\lambda} = F(t) = 0$, dann $f \fue= 0$.
 \end{satz}
 
 \begin{nota}
@@ -925,7 +925,7 @@
 \end{nota}
 
 \begin{nota}
-  Der Einheitswürfel im $\R^d$ ist $W_1 \coloneqq \left](0, ..., 0), (1, ..., 1)\right]$.
+  Der Einheitswürfel im $\R^d$ ist $W_1 \coloneqq \ocinterval{(0, ..., 0)}{(1, ..., 1)}$.
 \end{nota}
 
 \begin{satz}
@@ -934,7 +934,7 @@
 
 \begin{satz}
   Sei $A \in \mathrm{GL}_d(\R) = \Set{ A \in \R^{d \times d} }{ \det A \not= 0 }$, dann gilt
-  \[ A_* \mu_{LB} = \tfrac{1}{\left|\det(A)\right|} \cdot \mu_{LB}. \]
+  \[ A_* \mu_{LB} = \tfrac{1}{\abs{\det(A)}} \cdot \mu_{LB}. \]
 \end{satz}
 
 \begin{satz}
@@ -961,20 +961,20 @@
 
 \begin{satz}
   Sei $U, \widetilde{U} \opn \R^d$, $\phi : U \to \widetilde{u}$ ein $\mathcal{C}^1$-Diffeomorphismus, dann gilt:
-    \[ \phi_*^{-1} \mu_{LB}|_{\widetilde{U}} = \underbrace{\left|\det(D \phi)\right|}_{U \to \R_{> 0} \text{ stetig}} \mu_{LB}|_U \]
+    \[ \phi_*^{-1} \mu_{LB}|_{\widetilde{U}} = \underbrace{\abs{\det(D \phi)}}_{U \to \R_{> 0} \text{ stetig}} \mu_{LB}|_U \]
 \end{satz}
 
 % Lemma
 \begin{satz}
-  Sei $U, \widetilde{U} \opn \R^d$, $\phi : U \to \widetilde{u}$ ein $\mathcal{C}^1$-Diffeomorphismus und $Q = \left]a, b\right[ \subset U$ Elementarquader mit $a \lhd b$, dann gilt
-  \[ \mu_{LB}(Q) \cdot \inf_{q \in Q} \left|\det D \phi(q)\right| \leq \mu_{LB}(\phi(Q)) \leq \mu_{LB}(Q) \cdot \sup_{q \in Q} \left|\det(D(\phi(q)))\right|. \]
+  Sei $U, \widetilde{U} \opn \R^d$, $\phi : U \to \widetilde{u}$ ein $\mathcal{C}^1$-Diffeomorphismus und $Q = \ointerval{a}{b} \subset U$ Elementarquader mit $a \lhd b$, dann gilt
+  \[ \mu_{LB}(Q) \cdot \inf_{q \in Q} \abs{\det D \phi(q)} \leq \mu_{LB}(\phi(Q)) \leq \mu_{LB}(Q) \cdot \sup_{q \in Q} \abs{\det(D(\phi(q)))}. \]
 \end{satz}
 
 % Vorlesung vom 11.2.2013
 
 \begin{satz}[Transformationssatz]
-  Sei $U, \widetilde{U} \opn \R^d$ und sei $\phi : U \to \widetilde{U}$ ein $\mathcal{C}^1$-Diffeomorphismus. Dann ist eine Funktion $f : \widetilde{U} \to \ER$ genau dann auf $\widetilde{U}$ Lebesgue-Borel-integrierbar, wenn $(f \circ \phi) \cdot \left|\det(D\phi)\right| : U \to \ER$ auf $U$ Lebesgue-Borel-interierbar ist. In diesem Fall gilt
-  \[ \Int{U}{}{(f \circ \phi) \cdot \left|\det(D\phi)\right|}{\mu_{LB}} = \Int{\phi(U)}{}{f}{\mu_{LB}} = \Int{\widetilde{U}}{}{f}{\mu_{LB}}. \]
+  Sei $U, \widetilde{U} \opn \R^d$ und sei $\phi : U \to \widetilde{U}$ ein $\mathcal{C}^1$-Diffeomorphismus. Dann ist eine Funktion $f : \widetilde{U} \to \ER$ genau dann auf $\widetilde{U}$ Lebesgue-Borel-integrierbar, wenn $(f \circ \phi) \cdot \abs{\det(D\phi)} : U \to \ER$ auf $U$ Lebesgue-Borel-interierbar ist. In diesem Fall gilt
+  \[ \Int{U}{}{(f \circ \phi) \cdot \abs{\det(D\phi)}}{\mu_{LB}} = \Int{\phi(U)}{}{f}{\mu_{LB}} = \Int{\widetilde{U}}{}{f}{\mu_{LB}}. \]
   Obige Gleichung ist auch erfüllt, wenn lediglich $f \in \overline{\E}(\widetilde{U}, \Bor(\widetilde{U}))$ gilt.
 \end{satz}
 
@@ -1018,7 +1018,7 @@
 
 \begin{satz}[Eindeutigkeit von Produktmaßen]
   Seien $(\Omega_j, \Alg_j, \mu_j)$ Maßräume und $E_j$ ein Erzeugendensystem von $\Alg_j$ für $j = 1, ..., n$. Angenommen, $E_j$ ist stabil unter Schnitten und $\exists (E_k^{(j)})_{k \in \N} \uparrow \Omega_j$ mit $\mu_j(E_k^{(j)}) < \infty$ für alle $j$.
-  Dann gibt es höchstens ein Maß $\nu : \Alg_1 \otimes ... \otimes \Alg_n \to [0, \infty]$, sodass für alle $E_j \in \mathcal{E}_j, j \in \{ 1, ..., n \}$ gilt:
+  Dann gibt es höchstens ein Maß $\nu : \Alg_1 \otimes ... \otimes \Alg_n \to \cinterval{0}{\infty}$, sodass für alle $E_j \in \mathcal{E}_j, j \in \{ 1, ..., n \}$ gilt:
   \[ \nu(E_1 \times ... \times E_n) = \mu_1(E_1) \cdot ... \cdot \mu_n(E_n). \]
 \end{satz}
 
@@ -1063,8 +1063,8 @@
 \begin{satz}(Cavalieri 1) % Proposition
   Seien $(\Omega_1, \Alg_1, \mu_1)$ und $(\Omega_2, \Alg_2, \mu_2)$ $\sigma$-endliche Maßräume, $Q \in \Alg_1 \otimes \Alg_2$. Dann:
   \begin{itemize}
-    \item $h_Q^1 : \Omega_1 \to [0, \infty], \enspace \omega_1 \mapsto \mu_2(Q_{\omega_1})$ \enspace ist $(\Alg_1, \overline{\Bor})$-messbar.
-    \item $h_Q^2 : \Omega_2 \to [0, \infty], \enspace \omega_2 \mapsto \mu_1(Q_{\omega_2})$ \enspace ist $(\Alg_2, \overline{\Bor})$-messbar.
+    \item $h_Q^1 : \Omega_1 \to \cinterval{0}{\infty}, \enspace \omega_1 \mapsto \mu_2(Q_{\omega_1})$ \enspace ist $(\Alg_1, \overline{\Bor})$-messbar.
+    \item $h_Q^2 : \Omega_2 \to \cinterval{0}{\infty}, \enspace \omega_2 \mapsto \mu_1(Q_{\omega_2})$ \enspace ist $(\Alg_2, \overline{\Bor})$-messbar.
   \end{itemize}
 \end{satz}
 
@@ -1073,8 +1073,8 @@
 \begin{satz}[Existenz von Produktmaßen]
   Die Abbildungen
   \begin{align*}
-    \nu_1 : \Alg_1 \otimes \Alg_2 \to [0, \infty], \quad & Q \mapsto \Int{\Omega_1}{}{\mu_2(Q \omega_1)}{\mu_1} \\
-    \nu_2 : \Alg_2 \otimes \Alg_1 \to [0, \infty], \quad & Q \mapsto \Int{\Omega_2}{}{\mu_1(Q \omega_2)}{\mu_2}
+    \nu_1 : \Alg_1 \otimes \Alg_2 \to \cinterval{0}{\infty}, \quad & Q \mapsto \Int{\Omega_1}{}{\mu_2(Q \omega_1)}{\mu_1} \\
+    \nu_2 : \Alg_2 \otimes \Alg_1 \to \cinterval{0}{\infty}, \quad & Q \mapsto \Int{\Omega_2}{}{\mu_1(Q \omega_2)}{\mu_2}
   \end{align*}
   sind Maße und es gilt für alle $A_1 \in \Alg_1$ und $A_2 \in \Alg_2$
   \[ \nu_1(A_1 \times A_2) = \mu_1(A_1) \cdot \mu_2(A_2) = \nu_2(A_1 \times A_2) \]
@@ -1097,8 +1097,8 @@
 \begin{satz}[Tonelli]
   Sei $f \in \overline{\E}(\Omega_1 \times \Omega_2, \Alg_1 \otimes \Alg_2)$, dann:
   \begin{itemize}
-    \item $\Omega_2 \to [0, \infty], \enspace \omega_2 \mapsto \Int{\Omega_1}{}{f_{\omega_2}}{\mu_1}$ \enspace ist $(\Alg_2, \overline{\Bor})$-messbar,
-    \item $\Omega_1 \to [0, \infty], \enspace \omega_1 \mapsto \Int{\Omega_2}{}{f_{\omega_1}}{\mu_2}$ \enspace ist $(\Alg_1, \overline{\Bor})$-messbar,
+    \item $\Omega_2 \to \cinterval{0}{\infty}, \enspace \omega_2 \mapsto \Int{\Omega_1}{}{f_{\omega_2}}{\mu_1}$ \enspace ist $(\Alg_2, \overline{\Bor})$-messbar,
+    \item $\Omega_1 \to \cinterval{0}{\infty}, \enspace \omega_1 \mapsto \Int{\Omega_2}{}{f_{\omega_1}}{\mu_2}$ \enspace ist $(\Alg_1, \overline{\Bor})$-messbar,
     \item \quad $\Int{\mathclap{\Omega_1 \otimes \Omega_2}}{}{f}{(\mu_1 \otimes \mu_2)} = \Int{\Omega_1}{}{(\Int{\Omega_2}{}{f_{\omega_1}}{\mu_2})}{\mu_1} = \Int{\Omega_2}{}{(\Int{\Omega_1}{}{f_{\omega_2}}{\mu_1})}{\mu_2}$.
   \end{itemize}
 \end{satz}
@@ -1400,8 +1400,8 @@
 \begin{samepage}
 
 \begin{lem}
-  Sei $U \opn \R^n$ und $V \opn R^{n{+}1} = \R \times \R^n$, sodass der Zylinder $[0,1] \times U$ in $V$ liegt. Sei $\sigma$ eine geschlossene stetig diff'bare $k$-Form auf $V$ mit $k \geq 1$ und sei $\varphi_r : U \to V, \enspace u \mapsto (r, u)$ für $r \in \{ 0, 1 \}$.
-  %die Abbildungen, welche $U$ mit den "`Deckeln des Zylinders"' $[0,1] \times U \subet V$ identifizieren.
+  Sei $U \opn \R^n$ und $V \opn R^{n{+}1} = \R \times \R^n$, sodass der Zylinder $\cinterval{0}{1} \times U$ in $V$ liegt. Sei $\sigma$ eine geschlossene stetig diff'bare $k$-Form auf $V$ mit $k \geq 1$ und sei $\varphi_r : U \to V, \enspace u \mapsto (r, u)$ für $r \in \{ 0, 1 \}$.
+  %die Abbildungen, welche $U$ mit den "`Deckeln des Zylinders"' $\cinterval{0}{1} \times U \subet V$ identifizieren.
   Dann gibt es eine stetig diff'bare $(k{-}1)$-Form $\eta$ auf $U$ mit $\varphi_1^* \sigma - \varphi_2^* \sigma = \d \eta$.
 \end{lem}
 
@@ -1545,7 +1545,7 @@
     h_k : \R \to \R, \quad x &\mapsto \tfrac{g(x-k)}{G(x)} \qquad \text{für alle $k \in \Z$.}
   \end{align*}
 
-  Dann gilt $h_k \in \mathcal{C}^\infty(\R, \R)$ und $\supp(h_k) = \left[ k{-}1, k{+}1 \right]$ für alle $k \in \Z$.
+  Dann gilt $h_k \in \mathcal{C}^\infty(\R, \R)$ und $\supp(h_k) = \cinterval{k{-}1}{k{+}1}$ für alle $k \in \Z$.
   Die Menge $\Set{h_k}{k \in \Z}$ bildet eine \emph{Teilung der Eins}, da
   \[ \fa{x \in \R} \sum_{k \in \Z} h_k(x) = \sum_{k \in \Z} \tfrac{g(x-k)}{G(x)} = \tfrac{1}{G(x)} \sum_{k \in \Z} g(x-k) = 1. \]
 \end{bem}
@@ -1796,7 +1796,7 @@
 % Notation: $\partial_j f = \tfrac{\partial f}{\partial x_j}$
 
 \begin{defn}
-  Sei $M \subset \R^n$ eine UMF und $c : \left] -\epsilon, \epsilon \right[ \to \R^n$ $\mathcal{C}^\infty$ mit $\im(c) \subset M$, dann heißt der Vektor $(c(0), c'(0)) \in T_{c(0)} \R^n$ \emph{Tangentialvektor} an $M$ in $c(0) = x$.
+  Sei $M \subset \R^n$ eine UMF und $c : \ointerval{-\epsilon}{\epsilon} \to \R^n$ $\mathcal{C}^\infty$ mit $\im(c) \subset M$, dann heißt der Vektor $(c(0), c'(0)) \in T_{c(0)} \R^n$ \emph{Tangentialvektor} an $M$ in $c(0) = x$.
 \end{defn}
 
 \begin{defn}
@@ -1897,18 +1897,18 @@
 \iffalse
   Sei $M \subset \R^n$ eine $1$-dimensionale UMF, $\omega = \sum_{j=1}^n F_j \d x_j = F \cdot \d \vec{s}$ mit $F = (F_1, ..., F_n)^T$ eine stetige $1$-Form auf $\R^n$.
 
-  Sei $(\phi, U)$ eine Karte von $M$, $U$ zusammmenhängend, dann $\phi(U) =: V \opn \R^1$ ebenfalls zusammenhängend, d.\,h. $V = \left] a, b \right[$. Dann ist
-  \[ \phi^{-1} : \left] a, b \right[ \to \R^n, \quad t \mapsto \left( \phi_1^{-1}(t), ..., \phi_n^{-1}(t) \right)^T \]
+  Sei $(\phi, U)$ eine Karte von $M$, $U$ zusammmenhängend, dann $\phi(U) =: V \opn \R^1$ ebenfalls zusammenhängend, d.\,h. $V = \ointerval{a}{b}$. Dann ist
+  \[ \phi^{-1} : \ointerval{a}{b} \to \R^n, \quad t \mapsto \left( \phi_1^{-1}(t), ..., \phi_n^{-1}(t) \right)^T \]
   eine glatte reguläre Kurve.
   \[ (\phi^{-1})^* \omega = \sum_{j=1}^n (F_j \circ \phi^{-1}) \d \phi_j^{-1} = \sum_{j=1}^n (F_j \circ \phi^{-1}) (\phi_j^{-1})' \d t \]
   \[ (\phi^{-1})^* (F \cdot \d \vec{s}) = \langle F \circ \phi^{-1}, (\phi^{-1})' \rangle \]
   Also:
-  \[ \Intdf{U}{\omega} = \Intdf{\left] a, b \right[}{(\phi^{-1})^* \omega} = \Int{\left] a, b \right[}{}{\langle F \circ \phi^{-1} , (\phi^{-1})' \rangle}{\lambda_1} = \Int{a}{b}{\langle (F \circ \phi^{-1})(t) , (\phi^{-1})'(t) \rangle}{t} = \Int{a}{b}{\langle F(\phi^{-1}(t)) , \tau(t) \rangle \norm{(\phi^{-1})'(t)}}{t}, \]
+  \[ \Intdf{U}{\omega} = \Intdf{\ointerval{a}{b}}{(\phi^{-1})^* \omega} = \Int{\ointerval{a}{b}}{}{\langle F \circ \phi^{-1} , (\phi^{-1})' \rangle}{\lambda_1} = \Int{a}{b}{\langle (F \circ \phi^{-1})(t) , (\phi^{-1})'(t) \rangle}{t} = \Int{a}{b}{\langle F(\phi^{-1}(t)) , \tau(t) \rangle \norm{(\phi^{-1})'(t)}}{t}, \]
   wobei $\tau(t) = \tfrac{(\phi^{-1})'(t)}{\norm{(\phi^{-1})'(t)}}$ ein positiv orientierter Einheitstangentialvektor
 \fi
 
 \begin{defn}
-  Sei $f : \R^n {\to} \R$ stetig, $\gamma : \left[ a, b \right] \to \R^n$ eine $\mathcal{C}^1$-Kurve. Dann heißt
+  Sei $f : \R^n {\to} \R$ stetig, $\gamma : \cinterval{a}{b} \to \R^n$ eine $\mathcal{C}^1$-Kurve. Dann heißt
   \[
     \Int{\gamma}{}{f}{s} \coloneqq \Int{a}{b}{f(\gamma(t)) \cdot \norm{\gamma'(t)}}{t} \quad
     \text{\emph{Kurvenintegral} von $f$ längs $\gamma$.}
@@ -1946,7 +1946,7 @@
 % ...
 
 \begin{defn}
-  Sei $\gamma : \left[ a, b \right] \to \C$ stetig diff'bar und $f : \C \to \C$ stetig. Dann heißt
+  Sei $\gamma : \cinterval{a}{b} \to \C$ stetig diff'bar und $f : \C \to \C$ stetig. Dann heißt
 
   \[
     \Int{\gamma}{}{f}{z} \coloneqq \Int{a}{b}{f(\gamma(t)) \cdot \gamma'(t)}{t}
@@ -1955,7 +1955,7 @@
 \end{defn}
 
 \begin{satz}[Cauchyscher Integralsatz]
-  Sei $V \opn \C$ und $f : U \to \C$ holomorph. Sei ferner $\gamma : \left[ a, b \right] \to \C$ eine glatte reguläre einfach geschlossene Kurve und $C \subset \C$ das Kompaktum, welches vom Bild von $\gamma$ berandet wird. Dann gilt
+  Sei $V \opn \C$ und $f : U \to \C$ holomorph. Sei ferner $\gamma : \cinterval{a}{b} \to \C$ eine glatte reguläre einfach geschlossene Kurve und $C \subset \C$ das Kompaktum, welches vom Bild von $\gamma$ berandet wird. Dann gilt
   \[ \Int{\gamma}{}{f}{z} = 0. \]
 \end{satz}
 

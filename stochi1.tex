@@ -926,7 +926,7 @@
   Für eine Funktion $f : (\Omega, \Alg) \to (\ER, \overline{\Bor})$ sind äquivalent:
   \begin{itemize}
     \miniitem{0.27 \linewidth}{$f$ ist messbar}
-    \miniitem{0.7 \linewidth}{$\forall \, a \in \R \,:\, \{ f \geq a \} = f^{-1}([a, \infty]) \in \Alg$}
+    \miniitem{0.7 \linewidth}{$\forall \, a \in \R \,:\, \{ f \geq a \} = f^{-1}(\cinterval{a}{\infty}) \in \Alg$}
     \begin{multicols}{2}
       \item $\fa{a \in \R} \{ f > a \} \in \Alg$
       \item $\fa{a \in \R} \{ f \leq a \} \in \Alg$
@@ -1850,7 +1850,7 @@
 
   $\E (X \cdot Y) = \Int{\R^2}{}{x y \cdot f_{(X,Y)}(x,y)}{(x, y)} = \mu_1 \cdot \mu_2 + \sigma_1 \cdot \sigma_2 \cdot \rho$
 
-  Also: $\Cov(X, Y) = \sigma_1 \cdot \sigma_2 \cdot \rho$ und $\cor(X, Y) = \rho \in [-1, 1]$.
+  Also: $\Cov(X, Y) = \sigma_1 \cdot \sigma_2 \cdot \rho$ und $\cor(X, Y) = \rho \in \cinterval{-1}{1}$.
 
   Randverteilungen:
 
