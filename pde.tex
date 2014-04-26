@@ -254,7 +254,7 @@
     \item Falls $f \in \mathcal{C}(\Omega)$, so konvergiert $f_\epsilon$ gleichmäßig gegen $f$ für $\epsilon \to 0$ auf kompakten Teilmengen von $\Omega$,
     \item Falls $f \in L_{\text{loc}}^p(\Omega)$ für $p \in \cointerval{1}{\infty}$, so gilt $f_\epsilon \xrightarrow{\epsilon \to 0} f$ in $L_{\text{loc}}^p(\Omega)$.
     \item Abschätzung der Approximationsgüte: Ist $Du \in L^p(\Omega)$, so gilt
-    \[ \norm{f - f_\epsilon}_{L^p(\Omega_\epsilon)} \leq \epsilon \cdot \norm{Df}_{L^p{\Omega}} \]
+    \[ \norm{f - f_\epsilon}_{L^p(\Omega_\epsilon)} \leq \epsilon \cdot \norm{Df}_{L^p{\Omega}}. \]
   \end{itemize}
 \end{satz}
 
@@ -438,6 +438,78 @@
   % Insbesondere sind alle Funktionswerte vergleichbar.
 \end{satz}
 
+% Vorlesung vom 24.4.2014
+
 % Thema: Regularität
+
+% 2.8.
+\begin{satz}
+  Sei $\Omega \subset \R^n$ offen und erfülle $u \in \mathcal{C}(\Omega)$ die Mittelwert- Eigenschaft auf Sphären, d.\,h.
+  \[
+    u(x_0) = \enspace\MVInt{\mathclap{\partial B_r(x_0)}}{}{\enspace u}{\HM^{n-1}}
+    \quad \text{für alle Kugeln $B_r(x_0) \Subset \Omega$.}
+  \]
+  Dann gilt $u(x) = u_\epsilon(x)$ für alle $x \in \Omega$ und $\epsilon < \dist(x, \partial \Omega)$.\\
+  Insbesondere ist $u \in \mathcal{C}^\infty(\Omega)$ und harmonisch.
+\end{satz}
+% Achtung: Keine Aussage des Satzes über Stetigkeit der Randwerte!
+
+\begin{kor}
+  Obiger Satz gilt auch, wenn $u \in \mathcal{C}(\Omega)$ die Mittelwert-Eigenschaft auf Kugeln erfüllt, d.\,h.
+  \[
+    u(x_0) = \enspace\MVInt{\mathclap{B_r(x_0)}}{}{\enspace u}{\HM^{n-1}}
+    \quad \text{für alle Kugeln $B_r(x_0) \Subset \Omega$.}
+  \]
+\end{kor}
+
+\begin{defn}
+  Eine Folge von Funktionen $(f_n)_{n \in \N}$ auf einem topologischen Raum $X$ \emph{konvergiert lokal gleichmäßig} gegen $f : X \to \R$, falls es zu jedem Punkt $x \in X$ eine Umgebung $U_x$ von $x$ gibt, sodass $f_n$ auf $U_x$ gleichmäßig gegen $f$ konvergiert.
+\end{defn}
+
+\begin{kor}[Konvergenzsatz von Weierstraß]
+  Sei $\Omega \subset \R^n$ offen, zusammenhängend und $(u_k)_{k \in \N}$ eine Folge harmonischer Funktionen auf $\Omega$, die lokal gleichmäßig gegen eine Funktion $u$ konvergiert.\\
+  Dann ist $u$ harmonisch auf $\Omega$.
+\end{kor}
+
+\begin{kor}[Harnackscher Konvergenzsatz]
+  Sei $\Omega \subset \R^n$ offen und $(u_k)_{k \in \N}$ eine monoton wachsende Folge harmonischer Funktionen auf $\Omega$. Gibt es ein $x_0 \in \Omega$, sodass $(u_k(x_0))_{k \in \N}$ beschränkt (und damit konvergent) ist, so konvergiert $(u_k)$ lokal gleichmäßig gegen eine harmonische Funktion auf $\Omega$.
+\end{kor}
+
+\begin{satz}[von Hermann Weyl]
+  Sei $\Omega \subset \R^n$ offen und $u \in L_{\text{loc}}^1(\Omega)$ mit
+  \[
+    \Int{\Omega}{}{u \cdot \Delta \phi}{x} = 0
+    \quad \text{für alle $\phi \in \mathcal{C}_0^\infty(\Omega)$.}
+  \]
+  Dann gibt es eine harmonische Funktion $\tilde{u} : \Omega \to \R$ mit $u(x) = \tilde{u}(x)$ für fast alle $x \in \Omega$.
+\end{satz}
+
+\begin{satz}[Innere Abschätzung für Ableitungen harmonischer Fktn]\mbox{}\\
+  Sei $\Omega \subset \R^n$ offen und $u \in \mathcal{C}^2(\Omega)$ harmonisch. Dann gilt für jeden Multiindex $\alpha$ mit $\abs{\alpha} = k \in \N_0$ und jede Kugel $B_r(x_0) \Subset \Omega$:
+  \[
+    \abs{D^\alpha u(x_0)} \leq C(n, k) r^{-n-k} \norm{u}_{L^1(B_r(x_0))}
+    \quad \text{mit } C(n, k) \coloneqq \tfrac{(2^{n+1} nk)^k}{\omega_n}.
+  \]
+\end{satz}
+
+\begin{satz}[Liouville]
+  Sei $u \in \mathcal{C}^2(\Omega)$ harmonisch.
+  \begin{itemize}
+    \item Ist $u$ beschränkt, so ist $u$ konstant.
+    \item Gilt $\limsup_{\abs{x} \to \infty} \tfrac{\abs{u(x)}}{\abs{x}^{k+1}}$, so ist $u$ ein Polynom, dessen Grad $\leq k$ ist.
+  \end{itemize}
+\end{satz}
+
+\begin{defn}
+  Sei $\Omega \subset \R^n$ offen. Eine Funktion $f : \Omega \to \R$ heißt \emph{analytisch} in $x \in \Omega$, falls $f$ sich lokal durch seine Taylorreihe darstellen lässt, also ein $r \in \ointerval{0}{\dist(x, \partial \Omega)}$ existiert mit
+  \[
+    f(y) = \sum_{\alpha \in \N^n} \tfrac{1}{\alpha!} D^\alpha f(x) (y-x)^\alpha
+    \qquad \text{für alle $y \in B_r(x)$.}
+  \]
+\end{defn}
+
+\begin{satz}
+  Sei $\Omega \subset \R^n$ offen und $u \in \mathcal{C}^2(\Omega)$. Wenn $u$ harmonisch ist, dann auch analytisch.
+\end{satz}
 
 \end{document}
