@@ -36,7 +36,7 @@
 
 \begin{defn}
   Falls oben $a_0 \not= 0$ gilt, so ist $\partial f = n$ der \emph{Grad} des Polynoms.
-\end{defn}/
+\end{defn}
 
 % Bemerkung: Polynome gibt es auch zu mehreren Unbestimmten ($X,Y,Z$ oder $X_1,X_2,X_3$)
 
@@ -109,7 +109,7 @@
 \begin{verf}[Tschirnhaus-Transformation]
   Sei eine Polynomgleichung der Form
   \[ x^n + a_1 x^{n-1} + ... + a_{n-1} x + a_n = 0 \]
-  gegeben. Substituiere $x \coloneqq \tilde{x} - \tfrac{a_1}{n}$. Dann hat die neue Gleichung keinen $x^{n-1}$-Term. Lösungen der der beiden Gleichungen können durch Addieren bzw. Subtrahieren von $\tfrac{a_1}{n}$ ineinander überführt werden.
+  gegeben. Substituiere $x \coloneqq \tilde{x} - \tfrac{a_1}{n}$. Dann hat die neue Gleichung keinen $x^{n-1}$-Term. Lösungen der beiden Gleichungen können durch Addieren bzw. Subtrahieren von $\tfrac{a_1}{n}$ ineinander überführt werden.
 \end{verf}
 
 \begin{kor}
@@ -145,7 +145,7 @@
   Es gelten die Rechenregeln
   \begin{align*}
     (x + yi) \pm (u + vi) &= (x+u) \pm (y+v)i\\
-    (x + yi) \cdot (u + vi) &= (xu - yi) + (xv + yu)i\\
+    (x + yi) \cdot (u + vi) &= (xu - yv) + (xv + yu)i\\
     \frac{1}{x + yi} &= \frac{x}{x^2 + y^2} + \frac{-y}{x^2 + y^2} i
   \end{align*}
 \end{defn}
@@ -153,7 +153,7 @@
 % Ausgelassen: Begriff des Körpers
 
 \begin{defn}
-  Für eine komplexe Zahl $z = x + iy$ mit $x, y \in \R$ heißen
+  Für eine komplexe Zahl $z = x + yi$ mit $x, y \in \R$ heißen
   \[
     \Re(z) \coloneqq x \text{ \emph{Realteil}}
     \quad \text{und} \quad
@@ -199,27 +199,27 @@
 \end{nota}
 
 \begin{prop}
-  Für alle $t \in \R$ gilt $\abs{e^{it}} = 1$.
+  Für alle $t \in \R$ gilt $\abs{e^{ti}} = 1$.
 \end{prop}
 
 \begin{prop}
   Es gilt für alle $t \in \R$:
   \begin{itemize}
-    \miniitem{0.18 \linewidth}{$e^{2\pi} = 1$}
-    \miniitem{0.18 \linewidth}{$e^{\pi} = -1$}
+    \miniitem{0.18 \linewidth}{$e^{2\pi i} = 1$}
+    \miniitem{0.18 \linewidth}{$e^{\pi i} = -1$}
     \miniitem{0.28 \linewidth}{$e^{(2\pi + t)i} = e^{ti}$}
-    \miniitem{0.32 \linewidth}{$e^{it} = \cos(t) + i \sin(t)$}
+    \miniitem{0.32 \linewidth}{$e^{ti} = \cos(t) + i \sin(t)$}
   \end{itemize}
 \end{prop}
 
 \begin{bem}
-  Jede komplexe Zahl $z \in \C$ lässt sich als $z = \abs{z} \cdot e^{is}$ mit $s \in \cointerval{0}{2\pi}$ darstellen.
-  Mit $w = \abs{w} \cdot e^t$ gilt $z \cdot w = (\abs{z} \cdot \abs{w}) \cdot e^{i(s+t)}$.
+  Jede komplexe Zahl $z \in \C$ lässt sich als $z = \abs{z} \cdot e^{si}$ mit $s \in \cointerval{0}{2\pi}$ darstellen.
+  Mit $w = \abs{w} \cdot e^{ti}$ gilt $z \cdot w = (\abs{z} \cdot \abs{w}) \cdot e^{i(s+t)}$.
 \end{bem}
 
 \begin{defn}
-  Für $z = \abs{z} \cdot e^{it} \in \C$ und $n \in \N$ heißen die Zahlen
-  \[ \sqrt[n]{\abs{z}} e^{i(t + k 2 \pi)/n} \]
+  Für $z = \abs{z} \cdot e^{ti} \in \C$ und $n \in \N$ heißen die Zahlen
+  \[ \sqrt[n]{\abs{z}} e^{(t + k 2 \pi)i/n} \]
   für $k \in \{ 0, ..., n-1 \}$ \emph{$n$-te Wurzel} von $z$.
 \end{defn}
 
