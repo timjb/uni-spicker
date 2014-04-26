@@ -40,6 +40,9 @@
 \newcommand{\MVInt}[4]{\mymvint{#1}{#2} #3 \,\d #4}
 
 \newcommand{\HM}{\mathcal{H}} % Hausdorff-Maß
+\usepackage{bbm} % Für 1 mit Doppelstrich (Indikatorfunktion)
+\newcommand{\ind}{\mathbbm{1}} % Indikatorfunktion
+\newcommand{\dist}{\mathrm{dist}} % Entfernung (distance)
 
 \begin{document}
 
@@ -213,6 +216,48 @@
   heißen \emph{Mittelwerte} von $f$ auf $\Omega$ bzw. $M$.
 \end{nota}
 
+\begin{defn}
+  Ein \emph{Glättungskern} auf $\R^n$ ist eine nicht-negative, radialsym- metrische Funktion $\eta \in \mathcal{C}_0^\infty(B_1(0))$ mit $\Int{\R^n}{}{\eta}{x} = 1$.
+\end{defn}
+
+\begin{defn}
+  Der \emph{Standardglättungskern} ist die Funktion
+  \[ \eta(x) \coloneqq C \cdot \exp \left(\tfrac{1}{\abs{x}^2 - 1}\right) \cdot \ind_{B_1(0)}(x) \]
+  mit Normierungskonstante $C$. Für $\epsilon > 0$ ist der dazugehörige skalierte Glättungskern gegeben durch
+  \[ \eta_{\epsilon}(x) \coloneqq \epsilon^{-n} \eta(x/\eta). \]
+  Alle Glättungskern-Eigenschaften bleiben bei Skalierung erhalten.
+\end{defn}
+
+\begin{nota}
+  $\Omega_{\epsilon} \coloneqq \Set{ x \in \Omega }{ \dist(x, \partial \Omega) > \epsilon }$
+\end{nota}
+
+\begin{defn}
+  Sei $\Omega \subset \R^n$ offen, $\epsilon > 0$. Für $f \in L_{\text{loc}}^1$ heißt die Funktion
+  \[
+    f_\epsilon : \Omega_{\epsilon} \to \R, \quad
+    x \mapsto \eta_\epsilon * f(x) \coloneqq \Int{\mathclap{B_{\epsilon}(x)}}{}{\enspace\eta_{\epsilon}(x-y) f(y)}{y}
+    \quad \text{\emph{$\epsilon$-Glättung} von $f$}
+  \]
+\end{defn}
+
+\begin{satz}[Eigenschaften von Glättungen]
+  Sei $\Omega \subset \R^n$ offen, $\epsilon > 0$ und $f \in L_{\text{loc}}^1(\Omega)$. Dann gilt
+  \begin{itemize}
+    \item Regularität: $f_{\epsilon} \in \mathcal{C}^\infty(\Omega_\epsilon)$ mit $D^{\alpha} f_\epsilon = (D^\alpha \eta_\epsilon) * f$ für beliebige Multiindizes $\alpha \in \N^n$.
+    \item Ist $D_i f$ stetig auf $\Omega$, so gilt $D_i (f_\epsilon) = (D_i f)_\epsilon$ auf $\Omega_\epsilon$. % Vertauschbarkeit mit Ableitungen
+    % Nächsten zwei Punkte: Erhaltung von Normen
+    \item Falls $f \in \mathcal{C}^\alpha(\Omega)$ für ein $\alpha \in \ocinterval{0}{1}$, so gilt $f_\epsilon \in \mathcal{C}^\alpha(\Omega_\epsilon)$ mit derselben Hölderkonstante.
+    \item Falls $f \in L^p(\Omega)$ für $p \in \cinterval{0}{\infty}$, so gilt $\norm{f_\epsilon}_{L^p(\Omega_\epsilon)} \leq \norm{f}_{L^p(\Omega)}$.
+    % Nächste drei Punkte: Approximation
+    \item $f_\epsilon \xrightarrow{\epsilon \to 0} f$ fast-überall in $\Omega$.
+    \item Falls $f \in \mathcal{C}(\Omega)$, so konvergiert $f_\epsilon$ gleichmäßig gegen $f$ für $\epsilon \to 0$ auf kompakten Teilmengen von $\Omega$,
+    \item Falls $f \in L_{\text{loc}}^p(\Omega)$ für $p \in \cointerval{1}{\infty}$, so gilt $f_\epsilon \xrightarrow{\epsilon \to 0} f$ in $L_{\text{loc}}^p(\Omega)$.
+    \item Abschätzung der Approximationsgüte: Ist $Du \in L^p(\Omega)$, so gilt
+    \[ \norm{f - f_\epsilon}_{L^p(\Omega_\epsilon)} \leq \epsilon \cdot \norm{Df}_{L^p{\Omega}} \]
+  \end{itemize}
+\end{satz}
+
 % Kapitel 2.2. Harmonische Funktionen
 
 \iffalse
@@ -324,7 +369,7 @@
     \quad \text{und} \quad
     u(x_0) = \enspace\MVInt{\mathclap{B_r(x_0)}}{}{\enspace u}{\HM^{n-1}}
   \]
-  In diesen Gleichungen darf man alle $=$ durch $\leq$ oder $<$ ersetzen.
+  In diesen Gleichungen darf man $=$ durch $\leq$, $<$, $\geq$ oder $>$ ersetzen.
 \end{kor}
 
 % 2.3.
@@ -351,7 +396,7 @@
 
 % 2.4.
 \begin{satz}
-  Sei $\Omega \subset \R^n$ offen, beschränkt und $u \in \mathcal{C}^2(\Omega) \cap \mathcal{C}^0(\overline{\Omega})$ subharmonisch in $\Omega$. Dann gilt
+  Sei $\Omega \subset \R^n$ offen, beschränkt und $u \in \mathcal{C}^2(\Omega) \cap \mathcal{C}^0(\overline{\Omega})$ subharmonisch in $\Omega$, d.\,h. $\Delta u \geq 0$ in $\Omega$. Dann gilt
   \begin{itemize}
     \item Das \emph{schwache Maximumsprinzip}: $\max_{\overline{\Omega}} u = \max_{\partial \Omega} u$
     \item Das \emph{starke Maximumsprinzip}: Ist $\Omega$ zusammenhängend und existiert $x_0 \in \Omega$ mit $u(x_0) = \max_{\overline{\Omega}} u$, so ist $u$ konstant.
@@ -361,7 +406,10 @@
 
 % Ausgelassen: Definition "`zusammenhängend"'
 
-% Ausgelassen: Bemerkung 2.33. in Skript "`Laplace"'
+\begin{bem}
+  Sei $\Omega \subset \R^n$ beschränkt, offen, zusammenhängend und $u \in \mathcal{C}^2(\Omega) \cap \mathcal{C}(\overline{\Omega})$ harmonisch. Dann gilt
+  \[ \min_{\partial \Omega} u < \max_{\partial \Omega} u \enspace\implies\enspace \min_{\partial \Omega} u < u < \max_{\partial \Omega} u \text{ auf $\Omega$}. \]
+\end{bem}
 
 \begin{kor}[Eindeutigkeit]
   Sei $\Omega \subset \R^n$ offen, beschränkt und $u, v \in \mathcal{C}^2(\Omega) \cap \mathcal{C}(\overline{\Omega})$. Dann ist $u = v$, falls gilt:
@@ -372,6 +420,11 @@
     \end{array} \right.
   \]
 \end{kor}
+
+\begin{bem}[Stetige Abhängigkeit von Randwerten]
+  Gilt lediglich $\Delta u = \Delta v$ in $\Omega$, aber nicht $u = v$ auf $\partial \Omega$, so gilt immerhin
+  \[ \max_{\overline{\Omega}} \abs{u - v} = \max_{\partial \Omega} \abs{u - v}. \]
+\end{bem}
 
 % Ausgelassen: Bemerkung zur stetigen Abhängigkeit von den Randwerten
 
@@ -385,6 +438,6 @@
   % Insbesondere sind alle Funktionswerte vergleichbar.
 \end{satz}
 
-% Nachzutragen: Definition Glättungskern, Faltung, Eigenschaften der Glättung
+% Thema: Regularität
 
 \end{document}
