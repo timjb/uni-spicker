@@ -359,9 +359,9 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
 % Vorlesung vom 23.4.2014
 
 \begin{defn}
-  Sei $\mathcal{D} \subset \R^n$. Eine Abb. $f : \mathcal{D} {\to} \R^n$ heißt \emph{stetig in $x_0 \in \mathcal{D}$}, falls
-  \[ \fa{\epsilon {>} 0} \ex{\delta {>} 0} \fa{x \in \mathcal{D}} \norm{x - x_0} < \delta \implies \norm{f(x) - f(x_0)} < \epsilon. \]
-  Die Abb. heißt \emph{stetig} in $\mathcal{D}$, falls sie in jedem Punkt in $\mathcal{D}$ stetig ist.
+  Sei $\D \subset \R^n$. Eine Abb. $f : \D {\to} \R^n$ heißt \emph{stetig in $x_0 \in \D$}, falls
+  \[ \fa{\epsilon {>} 0} \ex{\delta {>} 0} \fa{x \in \D} \norm{x - x_0} < \delta \implies \norm{f(x) - f(x_0)} < \epsilon. \]
+  Die Abb. heißt \emph{stetig} in $\D$, falls sie in jedem Punkt in $\D$ stetig ist.
 \end{defn}
 
 \begin{nota}
@@ -379,13 +379,13 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
 \end{defn}
 
 \begin{defn}
-  Seien $(X, \norm{\blank}_X)$ und $(Y, \norm{\blank}_Y)$ Banachräume. Sei $\mathcal{D} \subset X$. Eine Abbildung $T : \mathcal{D} \to Y$ heißt
+  Seien $(X, \norm{\blank}_X)$ und $(Y, \norm{\blank}_Y)$ Banachräume. Sei $\D \subset X$. Eine Abbildung $T : \D \to Y$ heißt
   \begin{itemize}
-    \item \emph{stetig in $x \in \mathcal{D}$}, falls $T x_n \xrightarrow{n \to \infty} T x$ in $Y$ für jede Folge $(x_n)_{n \in \N}$ mit $x_n \xrightarrow{n \to \infty} x$ in $\mathcal{D}$ gilt.
-    \item \emph{Lipschitz-stetig} in $\mathcal{D}$, falls eine Konstante $\alpha > 0$ existiert mit
-    \[ \fa{x_1, x_2 \in \mathcal{D}} \norm{Tx_1 - Tx_2}_Y \leq \alpha \cdot \norm{x_1 - x_2}_X. \]
+    \item \emph{stetig in $x \in \D$}, falls $T x_n \xrightarrow{n \to \infty} T x$ in $Y$ für jede Folge $(x_n)_{n \in \N}$ mit $x_n \xrightarrow{n \to \infty} x$ in $\D$ gilt.
+    \item \emph{Lipschitz-stetig} in $\D$, falls eine Konstante $\alpha > 0$ existiert mit
+    \[ \fa{x_1, x_2 \in \D} \norm{Tx_1 - Tx_2}_Y \leq \alpha \cdot \norm{x_1 - x_2}_X. \]
     \item \emph{kontraktiv}, falls $T$ Lipschitz-stetig mit $\alpha < 1$ ist.
-    \item \emph{kompakt}, falls $T$ stetig ist und beschränkte Mengen in $X$ auf relativ kompakte Mengen in $Y$ abgebildet werden, d.\,h. für jede beschränkte Folge $(x_n)_{n \in \N}$ in $\mathcal{D}$ besitzt die Folge $(Tx_n)_{n \in \N}$ eine konvergente Teilfolge.
+    \item \emph{kompakt}, falls $T$ stetig ist und beschränkte Mengen in $X$ auf relativ kompakte Mengen in $Y$ abgebildet werden, d.\,h. für jede beschränkte Folge $(x_n)_{n \in \N}$ in $\D$ besitzt die Folge $(Tx_n)_{n \in \N}$ eine konvergente Teilfolge.
   \end{itemize}
 \end{defn}
 
@@ -407,17 +407,55 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
 \end{satz}
 
 \begin{satz}[Fixpunktsatz von Banach]
-  Sei $(X, \norm{\blank}_X)$ ein Banachraum, $\mathcal{D} \subset X$ nichtleer, abgeschlossen. Sei $T : \mathcal{D} \to \mathcal{D}$ eine Kontraktion. Dann besitzt die Fixpunktgleichung $y = Ty$ genau eine Lösung in $D$.
+  Sei $(X, \norm{\blank}_X)$ ein Banachraum, $\D \subset X$ nichtleer, abgeschlossen. Sei $T : \D \to \D$ eine Kontraktion. Dann besitzt die Fixpunktgleichung $y = Ty$ genau eine Lösung in $D$.
 \end{satz}
 
 \begin{satz}[Fixpunktsatz von Schauder]
-  Sei $(X, \norm{\blank}_X)$ ein Banachraum, sei $\mathcal{D} \subset X$ nichtleer, abgeschlossen, beschränkt, konvex. Sei $T : \mathcal{D} \to \mathcal{D}$ eine kompakte Abbildung. Dann besitzt die Fixpunktgleichung $y = Ty$ mindestens eine Lösung in $\mathcal{D}$.
+  Sei $(X, \norm{\blank}_X)$ ein Banachraum, sei $\D \subset X$ nichtleer, abgeschlossen, beschränkt, konvex. Sei $T : \D \to \D$ eine kompakte Abbildung. Dann besitzt die Fixpunktgleichung $y = Ty$ mindestens eine Lösung in $\D$.
 \end{satz}
 
 % Kapitel 2.1. Existenzsatz von Peano
 
 \begin{satz}
-  Sei $\mathcal{D} \subset \R \times \R^n$ offen, $f : \mathcal{D} \to \R^n$ stetig, $(t_0, y_0) \in D$. Dann ist das AWP (1.1) lokal lösbar, d.\,h. es existiert ein Intervall $I \subset \R$ mit $t_0 \in I$ und eine stetig diff'bare Funktion $y : I \to \R^n$, die das AWP (1.1) erfüllt.
+  Sei $\D \subset \R \times \R^n$ offen, $f : \D \to \R^n$ stetig, $(t_0, y_0) \in D$. Dann ist das AWP (1.1) lokal lösbar, d.\,h. es existiert ein Intervall $I \subset \R$ mit $t_0 \in I$ und eine stetig diff'bare Funktion $y : I \to \R^n$, die das AWP (1.1) erfüllt.
 \end{satz}
+
+% Vorlesung vom 28.4.2014
+
+% Ausgelassen: Beispiel Differentialgleichung mit nicht eindeutiger Lösung
+
+\begin{defn}
+  Sei $\D \subset \R \times \R^N$ offen, $f : \D \to \R^N$, $(t_0, y_0) \in \D$. Sei $y : I \to \R^N$ eine Lösung des AWP (1.1).
+  \begin{itemize}
+    \item Eine Lösung $u : J \to \R^N$ heißt \emph{Fortsetzung} (bzw. \emph{echte Fortsetzung}) der Lösung $y$, falls $I \subset J$ (bzw. $I \subsetneq J$) und $u|_I = y$.
+    \item Die Lösung $y$ heißt \emph{maximale Lösung} des AWP (1.1), falls keine echte Fortsetzung von $y$ existiert. Das Intervall $I$ heißt dann \emph{maximales Existenzintervall}.
+  \end{itemize}
+\end{defn}
+
+% Ausgelassen: Formulierung des Zornschen Lemmas
+
+% 2.5.
+\begin{satz}
+  Sei $\D \subset \R \times \R^N$ offen, $f : \D \to \R^N$ stetig und $(t_0, y_0) \in \D$.
+  \begin{itemize}
+    \item Jede lokale Lösung des AWP (1.1) kann zu einer maximalen Lösung fortgesetzt werden.
+    \item Sei $y : I \to \R^N$ eine max. Lsg. des AWP (1.1). Dann ist $I$ offen.
+  \end{itemize}
+\end{satz}
+
+% Kapitel 2.2. Eindeutigkeitssätze
+
+\begin{defn}
+  Sei $\D \subset \R \times \R^N$ und $f : \D \to \R^n$.
+  \begin{itemize}
+    \item Die Funktion $f $ heißt \emph{Lipschitz-stetig bzgl. $y$} auf $\D$, falls eine Konstante $\mathcal{L} > 0$ existiert, sodass
+    \[ \fa{(t, y_1), (t, y_2) \in \D} \norm{f(t, y_1) - f(t, y_2)} \leq \mathcal{L} \cdot \norm{y_1 - y_2}. \]
+    \item Wenn für alle $(t, y) \in \D$ eine Umgebung $U_{(t, y)} \subset \D$ existiert, sodass $f|_{U_{(t,y)}}$ Lipschitz-stetig bzgl. $y$ ist, so heißt $f$ \emph{lokal Lipschitz-stetig bzgl. $y$} auf $\D$.
+  \end{itemize}
+\end{defn}
+
+\begin{lem}
+  Sei $\D \subset \R \times \R^N$, $f : \D \to \R^N$ stetig und stetig diff'bar nach $y$ in $\D$. Dann ist $f$ lokal Lipschitz-stetig bzgl. $y$.
+\end{lem}
 
 \end{document}
