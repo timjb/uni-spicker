@@ -5,6 +5,7 @@
   /Author (Tim Baumann)
 }
 
+\usepackage{mathabx} % \divides
 \newcommand{\K}{\mathbb{K}} % Körper
 
 % Kleinere Klammern
@@ -165,6 +166,10 @@
   Die Operation $x + yi \mapsto x - yi$ heißt \emph{komplexe Konjugation}. Man notiert sie mit einem Querstrich, also $z \mapsto \overline{z}$ für $z \in \C$.
 \end{defn}
 
+\begin{bem}
+  Die komplexe Konjugation ist verträglich mit Addition und Multiplikation und sogar ein Körperautomorphismus.
+\end{bem}
+
 \begin{defn}
   Der \emph{Betrag} einer komplexen Zahl $z = x + yi$ ist
   \[ \abs{z} \coloneqq \sqrt{x^2 + y^2} = \sqrt{z \overline{z}}. \]
@@ -236,10 +241,120 @@
   mit Koeffizienten $a_1, ..., a_n \in \C$ hat eine Nullstelle in $\C$.
 \end{satz}
 
-% Kapitel 1.10. Die übrigen Nullstellen
+% Kapitel 1.10. Alle Nullstellen
+
+\begin{defn}
+  Ein \emph{Monoid} ist ein Tupel $(M, \cdot, e)$ bestehend aus einer Menge $M$ mit einer Verknüpfung $\cdot : M \times M \to M$ und einem \emph{neutralen Element} $e \in M$, sodass gilt:
+  \begin{itemize}
+    \item $\fa{x, y, z \in G} (x \cdot y) \cdot z = x \cdot (y \cdot z)$ \pright{Assoziativität}
+    \item $\fa{g \in G} e \cdot g = g = g \cdot e$ \pright{Neutralität}
+  \end{itemize}
+\end{defn}
+
+\begin{defn}
+  Eine \emph{Gruppe} ist ein Tupel $(G, \cdot, e)$ bestehend aus einer Menge $G$ mit einer Verknüpfung $\cdot : G \times G \to G$ und einem \emph{neutralen Element} $e \in G$ zusammen mit einer Inversion $\blank^{-1} : G \to G$, sodass:
+  \begin{itemize}
+    \item $\fa{x, y, z \in G} (x \cdot y) \cdot z = x \cdot (y \cdot z)$ \pright{Assoziativität}
+    \item $\fa{g \in G} e \cdot g = g = g \cdot e$ \pright{Neutralität}
+    \item $\fa{g \in G} g \cdot g^{-1} = g^{-1} \cdot g = e$
+  \end{itemize}
+\end{defn}
+
+\begin{defn}
+  Ein \emph{Ring} ist ein Tupel $(R, +, \cdot, 0, 1)$ bestehend aus einer Menge $R$, zwei Verknüpfungen $+, \cdot : R \times R \to R$ und zwei Elementen $0, 1 \in R$, sodass
+  \begin{itemize}
+    \item $(R, +, 0)$ eine Gruppe bildet,
+    \item $(R, \cdot, 1)$ einen Monoid bildet und
+    \item folgende Distributivgesetze für alle $a, b, c \in R$ erfüllt sind:
+    \[
+      (a + b) \cdot c = a \cdot c + b \cdot c, \qquad
+      a \cdot (b + c) = a \cdot b + a \cdot c.
+    \]
+  \end{itemize}
+\end{defn}
+
+\begin{defn}
+  Ein \emph{Körper} ist ein Tupel $(\K, +, \cdot, 0, 1)$ bestehend aus einer Menge $\K$, zwei Verknüpfungen $+, \cdot : \K \times \K \to \K$ und zwei Elementen $0, 1 \in \K$, sodass
+  \begin{itemize}
+    \item $(\K, +, 0)$ eine Gruppe bildet,
+    \item $(\K \setminus \{ 0 \}, \cdot, 1)$ eine Gruppe bildet und
+    \item folgende Distributivgesetze für alle $a, b, c \in R$ erfüllt sind:
+    \[
+      (a + b) \cdot c = a \cdot c + b \cdot c, \qquad
+      a \cdot (b + c) = a \cdot b + a \cdot c.
+    \]
+  \end{itemize}
+\end{defn}
+
+\begin{bem}
+  Jeder Körper ist auch ein Ring.
+\end{bem}
 
 \begin{nota}
-  $\K[X] \coloneqq \{ \text{Polynome mit Koeffizienten in $\K$} \}$
+  $\K[x] \coloneqq \{ \text{Polynome mit Koeffizienten in $\K$} \}$
 \end{nota}
+
+\begin{bem}
+  Die Menge aller Polynome über $\K$ bildet einen Ring.
+\end{bem}
+
+\begin{defn}
+  In einem Ring $R$ teilt ein Element $g \in R$ ein anderes Element $f \in R$, geschrieben $g \divides f$, falls es ein $h \in R$ mit $g \cdot h = f$ gibt.
+\end{defn}
+
+\begin{bem}
+  Ein Ring, in dem Division mit Rest möglich ist (z.\,B. der Polynomring oder $\Z$), wird \emph{euklidischer Ring} genannt. In solchen Ringen kann man den euklidischen Algorithmus ausführen.
+\end{bem}
+
+\begin{satz}
+  Ist $x_0 \in \K$ eine Nullstelle des Polynoms $f \in \K[x]$, dann gilt $(X - x_0) \divides f$, genauer $f = (x{-}x_0) \cdot g$ für ein $g {\in} \K[x]$ mit $\partial g = \partial f {-} 1$.
+\end{satz}
+
+\begin{kor}
+  Ein Polynom $f \in \K[x]$ vom Grad $n \geq 1$ hat höchstens $n$ Nullstellen.
+\end{kor}
+
+\begin{kor}
+  Wenn $\K$ unendlich viele Elemente hat, sind die Koeffi- zienten von jedem $f \in \K[x]$ durch die Fkt. $f$ eindeutig bestimmt.
+\end{kor}
+
+\begin{satz}
+  Jedes Polynom $f \in \C[x]$ ist ein Produkt von Polynomen vom Grad $1$, sogenannten Linearfaktoren, also
+  \[
+    f = a \cdot (x - x_1) \cdot ... \cdot (x - x_n)
+    \quad \text{mit $a, x_1, ..., x_n \in \C$}.
+  \]
+\end{satz}
+
+\begin{bem}
+  Die Zahlen $x_1, ..., x_n$ müssen nicht alle verschieden sein.
+\end{bem}
+
+\begin{defn}
+  Die Anzahl der Vorkommen einer Nullstelle $x_i$ in obiger Produktdarstellung heißt \emph{Vielfachheit} der Nullstelle.
+\end{defn}
+
+\begin{defn}
+  Die \emph{Ableitung} des Polynoms
+  \[ f(x) = a_0 x^n + a_1 x^{n-1} + ... + a_{n-1} x + a_0 \in \K[x] \]
+  ist das Polynom
+  \[ f'(x) = n a_0 x^{n-1} + (n{-}1) a1 x^{n-2} + ... + a_{n-1}. \]
+\end{defn}
+
+\begin{bem}
+  Sei $x_i$ eine $k$-fache Nullstelle von $f \in \C[x]$. Dann ist $x_i$ auch eine $(k{-}1)$-fache Nullstelle von $f'$.
+\end{bem}
+
+\begin{defn}
+  Ein Körper $\K$ mit der Eigenschaft, dass jedes Polynom $f \in \K[x]$ in Linearfaktoren zerfällt, heißt \emph{algebraisch abgeschlossen}.
+\end{defn}
+
+\begin{defn}
+  Eine Zahl $c \in \C$ heißt \emph{algebraisch}, wenn es ein Polynom $f \in \Q[x]$, $f \not= 0$ mit $f(c) = 0$ gibt.
+\end{defn}
+
+\begin{bem}
+  Man kann zeigen, dass die Menge der algebraischen Zahlen ein abzählbarer, algebraisch abgeschlossener Körper ist.
+\end{bem}
 
 \end{document}
