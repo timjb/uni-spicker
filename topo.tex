@@ -437,6 +437,12 @@
   Sei $X$ ein metrischer Raum. Dann gibt es eine isome- trische Einbettung von $X$ in einen vollständigen metrischen Raum.
 \end{prop}
 
+% Ausgelassen: Konstruktion der Kuratowski-Einbettung im Beweis.
+
+\begin{defn}
+  Eine \emph{Vervollständigung} eines metrischen Raumes $X$ ist ein vollständiger metrischer Raum $Y$ zusammen mit einer isometrischen Einbettung $f : X \to Y$, sodass $f(X)$ \emph{dicht}  in $Y$ liegt, d.\,h. $\overline{f(X)} = Y$.
+\end{defn}
+
 \begin{satz}
   Ist $X$ ein metrischer Raum, so existiert eine Vervollständigung $X \hookrightarrow Y$.
 \end{satz}
@@ -445,6 +451,47 @@
   Es sei $X$ ein metrischer Raum und es seien
   \[ f_1 : X \to Y_1, \quad f_2 : X \to Y_2 \]
   Vervollständigungen von $X$. Dann existiert genau eine Isometrie $\phi_{21} : Y_1 \to Y_2$ mit $\phi_{21}|_{f_1(X)} = f_2 \circ f_1^{-1}$.
+\end{prop}
+
+\begin{bsp}
+  Die kanonische Inklusion $C_c^{\infty}(U) \hookrightarrow L^p(U)$ ist eine Vervollständigung von $(C_c^{\infty}, d_p)$ mit
+  \[ d_p(f, g) \coloneqq \left( \Int{U}{}{\abs{f(x) - g(x)}^p}{x} \right)^{1/p}. \]
+\end{bsp}
+
+\begin{defn}
+  Es sei $X$ ein topologischer Raum. Eine \emph{offene Überdeckung} von $X$ ist eine Familie $(U_i)_{i \in I}$ offener Teilmengen von $X$ mit $\bigcup_{i \in I} U_i = X$.
+\end{defn}
+
+\begin{defn}
+  Der Raum $X$ heißt \emph{kompakt}, falls jede offene Überdeckung von $X$ eine endliche Teilüberdeckung besitzt, also eine endliche Teilmenge $I_0 \subset I$ mit $\bigcup_{i \in I_0} U_i = X$.
+\end{defn}
+
+\begin{defn}
+  Eine Familie $\mathcal{C}$ von Teilmengen von $X$ habe die \emph{endliche Schnitteigenschaft}, falls der Schnitt je endlich vieler Mengen aus $\mathcal{C}$ nichtleer ist.
+\end{defn}
+
+\begin{prop}
+  Ein Raum $X$ ist genau dann kompakt, falls jede Familie $(C_i)_{i \in I}$ von abgeschlossenen Teilmengen von $X$, die die endliche Schnitteigenschaft besitzt, einen nichtleeren Schnitt hat. %, d.\,h. $\bigcap_{i \in I} C_i \not= \emptyset$.
+\end{prop}
+
+\begin{bem}
+  Kompaktheit ist eine Homöomorphieinvariante.
+\end{bem}
+
+\begin{prop}
+  Jede kompakte Teilmenge eines Hausdorffraumes ist abgeschlossen.
+\end{prop}
+
+\begin{prop}
+  Ist $X$ kompakt und $f : X \to Y$ stetig, so ist auch $f(X) \subset Y$ kompakt.
+\end{prop}
+
+\begin{prop}
+  Jeder abgeschlossene Teilraum eines kompakten Raumes ist kompakt.
+\end{prop}
+
+\begin{prop}
+  Sei $f : X \to Y$ eine bijektive stetige Abbildung von einem kompakten Raum in einen Hausdorffraum. Dann ist $f$ ein Homöomorphismus.
 \end{prop}
 
 \end{document}
