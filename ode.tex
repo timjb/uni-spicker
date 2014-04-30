@@ -458,4 +458,10 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
   Sei $\D \subset \R \times \R^N$, $f : \D \to \R^N$ stetig und stetig diff'bar nach $y$ in $\D$. Dann ist $f$ lokal Lipschitz-stetig bzgl. $y$.
 \end{lem}
 
+% Vorlesung vom 30.4.2014
+
+\begin{satz}[Picard-Lindelöf] % ,lokal qualitative Version
+  Seien $\D \subset \R \times \R^n$ offen, $f : \D \to \R^n$ stetig, $(t_0, y_0) \in \D$ und $R_{a,b} = \cinterval{ t_0 - a }{ t_0 + a } \times \overline{B_b}(y_0) \subset \D$. Sei $f$ Lipschitz-stetig bzgl. $y$ auf $R_{a,b}$. Dann besitzt das AWP (2.1) im Rechteck $R_{a,b}$ genau eine Lösung $y : I_y \to \R^n$ auf $I_{\gamma} \coloneqq \cinterval{t_0 - y}{t_0 + y}$ mit $\gamma = \min(a, \tfrac{b}{M})$ und $M = \sup_{\mathclap{(t,y) \in R_{a,b}}} \norm{f(t, y)}$.
+\end{satz}
+
 \end{document}
