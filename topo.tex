@@ -494,4 +494,42 @@
   Sei $f : X \to Y$ eine bijektive stetige Abbildung von einem kompakten Raum in einen Hausdorffraum. Dann ist $f$ ein Homöomorphismus.
 \end{prop}
 
+% Vorlesung vom 30.4.2014
+
+\begin{prop}
+  Das Einheitsintervall $\cinterval{0}{1} \subset \R$ ist kompakt.
+\end{prop}
+
+\begin{prop}
+  Seien $X$, $Y$ kompakt. Dann ist auch $(X \times Y)$ kompakt.
+\end{prop}
+
+\begin{satz}[Heine-Borel]
+  Eine Teilmenge von $\R$ ist genau dann kompakt, wenn sie beschränkt und abgeschlossen ist.
+\end{satz}
+
+\begin{satz}
+  Sei $(X_i)_{i \in I}$ eine Familie kompakter Räume. Dann ist das topologische Produkt $\prod_{i \in I} X_i$ ebenfalls kompakt.
+\end{satz}
+
+\begin{defn}
+  Ein topologischer Raum $X$ heißt \emph{folgenkompakt}, wenn jede Folge $(x_n)_{n \in \N}$ in $X$ eine konvergente Teilfolge besitzt.
+\end{defn}
+
+\begin{prop}
+  Es sei $X$ ein metrischer Raum. Dann ist $X$ genau dann kompakt, wenn $X$ folgenkompakt ist.
+\end{prop}
+
+\begin{prop}
+  Sei $X$ ein topologischer Raum. Dann sind äquivalent:
+  \begin{itemize}
+    \item $X$ ist kompakt.
+    \item $X$ ist \emph{netzkompakt}, d.\,h. jedes (nichtleere) Netz $(x_\alpha)_{\alpha \in D}$ in $X$ besitzt ein konvergentes Unternetz.
+  \end{itemize}
+\end{prop}
+
+\begin{defn}
+  Sei $(x_\alpha)_{\alpha \in D}$ ein Netz in einem topologischen Raum $X$ und $A \subset X$. Dann ist $(x_\alpha)_{\alpha \in D}$ \emph{schließlich} in $A$, falls es ein $\beta \in D$ gibt mit $x_\alpha \in A$ für alle $\alpha \geq \beta$.
+\end{defn}
+
 \end{document}
