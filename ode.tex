@@ -464,4 +464,13 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
   Seien $\D \subset \R \times \R^n$ offen, $f : \D \to \R^n$ stetig, $(t_0, y_0) \in \D$ und $R_{a,b} = \cinterval{ t_0 - a }{ t_0 + a } \times \overline{B_b}(y_0) \subset \D$. Sei $f$ Lipschitz-stetig bzgl. $y$ auf $R_{a,b}$. Dann besitzt das AWP (2.1) im Rechteck $R_{a,b}$ genau eine Lösung $y : I_y \to \R^n$ auf $I_{\gamma} \coloneqq \cinterval{t_0 - y}{t_0 + y}$ mit $\gamma = \min(a, \tfrac{b}{M})$ und $M = \sup_{\mathclap{(t,y) \in R_{a,b}}} \norm{f(t, y)}$.
 \end{satz}
 
+\begin{bem}
+  Im Beweis des Satzes definiert man die Picard-Iterierten $u_n : I_\gamma \to \R$ für $n \in \N$ durch
+  \[
+    u_0(t) \coloneqq y_0, \qquad
+    u_{n+1}(t) \coloneqq y_0 + \Int{t_0}{t}{f(\tau, y_n(\tau))}{\tau}.
+  \]
+  Man zeigt: Die Funktionenfolge $(u_n)_{n \in \N}$ konvergiert gleichmäßig gegen eine Lösung $u_\infty : I_\gamma \to \R$ des AWP.
+\end{bem}
+
 \end{document}
