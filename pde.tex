@@ -132,6 +132,15 @@
   \end{itemize}
 \end{nota}
 
+\begin{nota}
+  Für $\Omega \subset \R^n$ schreibe
+  \[
+    V \Subset \Omega
+    \quad \text{für} \quad
+    \text{$V \subset \R^n$ mit $\overline{V}$ kompakt und $\overline{V} \subset \Omega^{\circ} $.}
+  \]
+\end{nota}
+
 \begin{defn}
   Die \emph{Laplace-} bzw. \emph{Poisson-Gleichung} ist die Gleichung
   \[ \Delta u = 0 \quad \text{bzw.} \quad \Delta u = f \qquad \text{auf $\Omega \subset \R^n$}. \]
@@ -430,7 +439,7 @@
 
 % 2.6.
 \begin{satz}[Harnack-Ungleichung]
-  Sei $\Omega \subset \R^n$ offen, $V \subset\subset \Omega$ offen, zusammenhängend. Dann gibt es eine Konstante $c = c(\Omega, V)$, sodass
+  Sei $\Omega \subset \R^n$ offen, $V \Subset \Omega$ offen, zusammenhängend. Dann gibt es eine Konstante $c = c(\Omega, V)$, sodass
   \[
     \sup_{V} u \leq c \cdot \inf_{V} u
     \qquad \text{für alle harmonischen Fktn. $u : \Omega \to \R_{\geq 0}$.}
@@ -510,6 +519,78 @@
 
 \begin{satz}
   Sei $\Omega \subset \R^n$ offen und $u \in \mathcal{C}^2(\Omega)$. Wenn $u$ harmonisch ist, dann auch analytisch.
+\end{satz}
+
+% Vorlesung vom 29.4.2014
+
+\begin{prob}
+  Sei $\Omega \subset \R^n$ offen, (beschränkt), regulär und $f : \Omega \to \R$ und $g : \partial \Omega \to \R$ stetig. Gesucht ist $u : \overline{\Omega} \to \R$ mit
+  \[
+    (2.1) \left\{ \begin{array}{lll}
+      - \Delta u &= f &\quad \text{in $\Omega \subset \R^n$}\\
+      u &= g &\quad \text{auf $\partial \Omega$}
+    \end{array} \right.
+  \]
+\end{prob}
+
+% Bekannt: Lösungen dazu sind eindeutig
+
+% 2.15.
+\begin{satz}[Greensche Darstellungsformel]
+  Sei $\Omega \subset \R^n$ beschränkt, offen mit $\mathcal{C}^1$-Rand und $h \in \mathcal{C}^2(\Omega) \cap \mathcal{C}^1(\overline{\Omega})$ mit $\Delta h {\in} L^1(\Omega)$. Es gilt für $x {\in} \Omega$:
+  \begin{align*}
+    h(x) = - \Int{\Omega}{}{\Phi(x-y) \Delta h(y)}{y} &+ \Int{\mathclap{\partial \Omega}}{}{\Phi(x {-} y) \cdot Dh(y) \cdot \nu}{S(y)}\\
+    &- \Int{\mathclap{\partial \Omega}}{}{h(y) D_y \Phi(x{-}y) \cdot \nu}{S(y)}
+  \end{align*}
+\end{satz}
+
+\begin{bem}
+  Für Randpunkte $x \in \partial \Omega$ gilt:
+  \begin{align*}
+    \tfrac{1}{2} h(x) = - \Int{\Omega}{}{\Phi(x-y) \Delta h(y)}{y} &+ \Int{\mathclap{\partial \Omega}}{}{\Phi(x {-} y) \cdot Dh(y) \cdot \nu}{S(y)}\\
+    &- \Int{\mathclap{\partial \Omega}}{}{h(y) D_y \Phi(x{-}y) \cdot \nu}{S(y)}
+  \end{align*}
+\end{bem}
+
+% Ausgelassen: Physikalische Interpretation, Merkregel
+
+\begin{kor}[Darstellungsformel für Lsgn in $\R^n$]
+  Sei $f {\in} \mathcal{C}_0^2(\R^n)$, setze
+  \[ u : \R^n \to \R, \qquad x \mapsto (\Phi * f)(x) \coloneqq \Int{\R^n}{}{\Phi(x-y) f(y)}{y}. \]
+  Dann gilt: $u \in \mathcal{C}^2(\R^n)$ und $- \Delta u = f$ in $\R^n$.
+\end{kor}
+
+\begin{bem}
+  \begin{itemize}
+    \item Für $n = 2$ ist die Lösung potentiell unbeschränkt.
+    \item Für $n \geq 3$ ist diese Lsg beschränkt und erfüllt $\enspace\lim_{\mathclap{\abs{x} \to \infty}} u(x) = 0$.
+  \end{itemize}
+\end{bem}
+
+\begin{prop}
+  Jede andere beschränkte Lösung von $- \Delta u = f$ auf $\R^n$ unterscheidet sich nur durch eine additive Konstante.
+\end{prop}
+
+\begin{defn}
+  %Sei $\Omega \subset \R^n$ offen. Eine Funktion $G : \Set{ (x, y) \in \Omega \times \Omega }{ x \not= y } \to \R$ heißt \emph{Greensche Funktion} für das Gebiet $\Omega$, falls für alle $x \in \Omega$ gilt:
+  Sei $\Omega \subset \R^n$ offen. Eine \emph{Greensche Funktion} für $\Omega$ ist eine Funktion
+  $G : \Set{ (x, y) \in \Omega \times \Omega }{ x \not= y } \to \R$, falls für alle $x \in \Omega$ gilt:
+  \begin{itemize}
+    \item Die \emph{Korrektorfunktion} $y \mapsto G(x, y) - \Phi(x - y)$ ist von der Klasse $\mathcal{C}^2(\Omega) \cap \mathcal{C}^1(\overline{\Omega})$ und ist harmonisch in $\Omega$. % (für $x=y$ forsetzbar)
+    \item Die Funktion $G(x, \blank)$ hat Nullrandwerte auf $\partial \Omega$, d.\,h. es gilt $\lim_{y \to y_0} G(x, y) = 0$ für alle $y_0 \in \partial \Omega \cup \{ \infty \}$.
+  \end{itemize}
+\end{defn}
+
+\begin{bem}
+  Die Funktion $G(x, \blank)$ ist in $\mathcal{C}^2(\Omega \setminus \{ x \}) \cap \mathcal{C}^(\overline{\Omega} \setminus \{ x \})$ und hat die gleiche Singularität wie $y \mapsto \Phi(x - y)$.
+\end{bem}
+
+% TODO: 2. Bemerkung zur Korrektorfunktion verstehen und ergänzen
+
+\begin{satz}
+  Sei $\Omega \subset \R^n$ offen, beschränkt, mit $\mathcal{C}^1$-Rand $\partial \Omega$. Ist $u \in \mathcal{C}^2(\Omega) \cap \mathcal{C}^1(\overline{\Omega})$ eine Lösung von (2.1) und ist $G$ die Greensche Funktion für $\Omega$ (falls existent), dann gilt für alle $x \in \Omega$:
+  \[ u(x) = \Int{\Omega}{}{G(x,y) f(y)}{y} - \Int{\partial \Omega}{}{g(y) \cdot D_y G(x,y) \cdot \nu}{S(y)}. \]
+
 \end{satz}
 
 \end{document}
