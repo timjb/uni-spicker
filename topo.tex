@@ -532,4 +532,33 @@
   Sei $(x_\alpha)_{\alpha \in D}$ ein Netz in einem topologischen Raum $X$ und $A \subset X$. Dann ist $(x_\alpha)_{\alpha \in D}$ \emph{schließlich} in $A$, falls es ein $\beta \in D$ gibt mit $x_\alpha \in A$ für alle $\alpha \geq \beta$.
 \end{defn}
 
+% Vorlesung vom 5.5.2014
+
+\begin{defn}
+  Ein Netz $(x_\alpha)_{\alpha \in D}$ heißt \emph{universell}, falls für jede Teilmenge $A \subset X$ das Netz entweder schließlich in $A$ oder in $X \setminus A$ ist.
+\end{defn}
+
+% Ausgelassen: Formulierung des Zornschen Lemmas
+
+\begin{prop}
+  Jedes nichtleere Netz in $X$ besitzt ein universelles Unternetz.
+\end{prop}
+
+\begin{bem}
+  Der Beweis der Prop. verwendet das Lemma von Zorn.
+\end{bem}
+
+\begin{satz}
+  Sei $X$ ein topologischer Raum. Dann sind äquivalent:
+  \begin{itemize}
+    \item $X$ ist kompakt.
+    \item Jedes nichtleere universelle Netz konvergiert in $X$.
+    \item Jedes nichtleere Netz in $X$ hat ein konvergentes Unternetz.
+  \end{itemize}
+\end{satz}
+
+\begin{satz}[Tychonoff]
+  Sei $(X_i)_{i \in I}$ eine Familie kompakter Räume. Dann ist das topologische Produkt $\prod_{i \in I} X_i$ ebenfalls kompakt.
+\end{satz}
+
 \end{document}
