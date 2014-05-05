@@ -460,17 +460,31 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
 
 % Vorlesung vom 30.4.2014
 
-\begin{satz}[Picard-Lindelöf] % ,lokal qualitative Version
-  Seien $\D \subset \R \times \R^n$ offen, $f : \D \to \R^n$ stetig, $(t_0, y_0) \in \D$ und $R_{a,b} = \cinterval{ t_0 - a }{ t_0 + a } \times \overline{B_b}(y_0) \subset \D$. Sei $f$ Lipschitz-stetig bzgl. $y$ auf $R_{a,b}$. Dann besitzt das AWP (2.1) im Rechteck $R_{a,b}$ genau eine Lösung $y : I_y \to \R^n$ auf $I_{\gamma} \coloneqq \cinterval{t_0 - y}{t_0 + y}$ mit $\gamma = \min(a, \tfrac{b}{M})$ und $M = \sup_{\mathclap{(t,y) \in R_{a,b}}} \norm{f(t, y)}$.
+\begin{satz}[Picard-Lindelöf, lokal quantitativ]
+  Seien $\D \subset \R \times \R^n$ offen, $f : \D \to \R^n$ stetig, $(t_0, y_0) {\in} \D$ und $R_{a,b} {\coloneqq} \cinterval{ t_0 {-} a }{ t_0 {+} a } \times \overline{B_b}(y_0) \subset \D$. Sei $f$ Lipschitz-stetig bzgl. $y$ auf $R_{a,b}$. Dann besitzt das AWP (2.1) im Rechteck $R_{a,b}$ genau eine Lösung $y : I_y \to \R^n$ auf $I_{\gamma} \coloneqq \cinterval{t_0 - y}{t_0 + y}$ mit $\gamma = \min(a, \tfrac{b}{M})$ und $M = \sup_{\mathclap{(t,y) \in R_{a,b}}} \norm{f(t, y)}$.
 \end{satz}
 
 \begin{bem}
-  Im Beweis des Satzes definiert man die Picard-Iterierten $u_n : I_\gamma \to \R$ für $n \in \N$ durch
+  Im Beweis des Satzes definiert man die Picard-Iterierten $u_j : I_\gamma \to \R^n$ für $j \in \N$ durch
   \[
     u_0(t) \coloneqq y_0, \qquad
-    u_{n+1}(t) \coloneqq y_0 + \Int{t_0}{t}{f(\tau, y_n(\tau))}{\tau}.
+    u_{j+1}(t) \coloneqq y_0 + \Int{t_0}{t}{f(\tau, y_j(\tau))}{\tau}.
   \]
-  Man zeigt: Die Funktionenfolge $(u_n)_{n \in \N}$ konvergiert gleichmäßig gegen eine Lösung $u_\infty : I_\gamma \to \R$ des AWP.
+  Man zeigt: Die Funktionenfolge $(u_j)_{j \in \N}$ konvergiert gleichmäßig gegen eine Lösung $u_\infty : I_\gamma \to \R^n$ des AWP.
 \end{bem}
+
+% Vorlesung vom 5.5.2014
+
+\begin{satz}[Picard-Lindelöf, lokal qualitativ]
+  Seien $\D \subset \R \times \R^n$ offen, $f : \D \to \R^n$ stetig, lokal Lipschitz-stetig bzgl. $y$ auf $\D$, $(t_0, y_0) \in \D$. Dann besitzt das AWP (2.1) eine eindeutige lokale Lösung, d.\,h. es existiert $\gamma = \gamma(t_0, y_0) > 0$, sodass das AWP (2.1) auf $I_\gamma \coloneqq \cinterval{t_0 - \gamma}{t_0 + \gamma}$ genau eine Lösung besitzt.
+\end{satz}
+
+\begin{satz}[Picard-Lindelöf, global]
+  Seien $\D \subset \R \times \R^n$ offen, $f : \D \to \R^n$ stetig, lokal Lipschitz-stetig bzgl. $y$ auf $\D$, $(t_0, y_0) \in \D$. Dann gibt es ein eindeutig bestimmtes offenes Intervall $I = \ointerval{a_-}{a_+}$ mit $t_0 {\in} I$ und
+  \begin{itemize}
+    \item Das AWP (2.1) besitzt genau eine Lösung $\gamma$ auf $I$.
+    \item Ist $\tilde{z} : \tilde{I} \to \R^n$ eine beliebige Lösung von (2.1) mit $t_0 \in \tilde{I}$, so gilt $\tilde{I} \subseteq I$ und $z = y|_{\tilde{I}}$.
+  \end{itemize}
+\end{satz}
 
 \end{document}
