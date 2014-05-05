@@ -42,8 +42,11 @@
 % Bemerkung: Polynome gibt es auch zu mehreren Unbestimmten ($X,Y,Z$ oder $X_1,X_2,X_3$)
 
 \begin{defn}
-  Eine \emph{Linearkombination} ist ein Polynom der Form
-  \[ f(X_1, ..., X_n) = a_1 X_1 + ... + a_n X_n. \]
+  \begin{itemize}
+    \item Eine \emph{Linearkombination} ist ein Polynom der Form
+    \[ f(X_1, ..., X_n) = a_1 X_1 + ... + a_n X_n. \]
+    \item Ein \emph{Monom} hat die Gestalt $f(x) = b x^k$.
+  \end{itemize}
 \end{defn}
 
 % Algebra = Studium der Polynome und ihrer Nullstellenmengen
@@ -318,8 +321,8 @@
   Wenn $\K$ unendlich viele Elemente hat, sind die Koeffi- zienten von jedem $f \in \K[x]$ durch die Fkt. $f$ eindeutig bestimmt.
 \end{kor}
 
-\begin{satz}
-  Jedes Polynom $f \in \C[x]$ ist ein Produkt von Polynomen vom Grad $1$, sogenannten Linearfaktoren, also
+\begin{satz}[Hauptsatz der Algebra]
+  Jedes Polynom $f \in \C[x]$ ist Produkt von Polynomen vom Grad $1$, sogenannten Linearfaktoren, also
   \[
     f = a \cdot (x - x_1) \cdot ... \cdot (x - x_n)
     \quad \text{mit $a, x_1, ..., x_n \in \C$}.
@@ -356,5 +359,62 @@
 \begin{bem}
   Man kann zeigen, dass die Menge der algebraischen Zahlen ein abzählbarer, algebraisch abgeschlossener Körper ist.
 \end{bem}
+
+% Kapitel 1.11. Der Wurzelsatz von Vieta
+
+\begin{defn}
+  Die \emph{elementarsymmetrischen Funktionen} in $x_1, ..., x_n$ sind die Polynome
+  \[
+    e_k(x_1, ..., x_n) \coloneqq \sum_{\mathclap{j_1 < ... < j_n}} x_{j_1} \cdot ... \cdot x_{j_n}
+    \quad \text{für $1 \leq k \leq n$.}
+  \]
+\end{defn}
+
+\begin{bem}
+  Bezeichne mit $e_j$ für $1 \leq j \leq n$ die elementarsymmetrischen Funktionen in den Variablen $x_1, ..., x_n$, mit $\tilde{e}_i$ für $1 \leq i < n$ die elementarsymmetrischen Funktionen in den Variablen $x_1, ..., x_{n-1}$. Dann gelten die Rekursionsgleichungen
+  \[
+    e_1 = x^n + \tilde{e}_1, \qquad
+    e_i = \tilde{e}_i + x_n \cdot \tilde{e}_{i-1}, \qquad
+    e_n = x_n \cdot \tilde{e}_{n-1}.
+  \]
+\end{bem}
+
+\begin{satz}[Vieta]
+  Sei $f \in \K[X]$ ein normiertes Polynom, das über $\K$ in Linearfaktoren zerfällt, also
+  \[ f(x) = x^n + a_1 x^{n-1} + ... + a_n = (x-x_1) \cdot ... \cdot (x-x_n), \]
+  dann gilt $a_j = (-1)^j e_j(x_1, ..., x_n)$ für alle $1 \leq j \leq n$.
+\end{satz}
+
+\begin{defn}
+  Eine \emph{Permutation} der Zahlen $\{ 1, ..., n \}$ ist eine Bijektion
+  \[ \sigma : \{ 1, ..., n \} \to \{ 1, ..., n \}. \]
+\end{defn}
+
+\begin{defn}
+  Ein Polynom $f \in \K[x_1, ..., x_n]$ heißt \emph{symmetrisch}, falls für alle $x_1, ..., x_n \in \K$ und Permutationen $\sigma$ gilt:
+  \[ f(x_1, ..., x_n) = (\sigma f)(x_1, ..., x_n) \coloneqq f(x_{\sigma(1)}, ...., x_{\sigma(n)}) \]
+\end{defn}
+
+% Ausgelassen: Definition Umkehrabbildung
+
+\begin{satz}[Hauptsatz über symmetrische Polynome]
+  Jedes symme- trische Polynom $f(\vec{x})$ mit $\vec{x} = (x_1, ..., x_n)$ lässt sich als Polynom in den elementarsymmetrischen Polynomen $e_1(\vec{x}), ..., e_n(\vec{x})$ darstellen.
+\end{satz}
+
+\begin{kor}
+  Sind $x_1, ..., x_n$ die Wurzeln eines normierten Polynoms $f(x) = x^n + a_1 x^{n-1} + ... + a_n$, dann gilt für jedes symmetrische Polynom $s \in \K[y_1, ..., y_n]$: $s(x_1, ..., x_n)$ ist ein Polynomausdruck in den Koeffizienten $a_1 ..., a_n$ und damit aus diesen Zahlen berechenbar.
+\end{kor}
+
+\begin{defn}
+  Die \emph{Diskriminante} eines Polynoms $f = (x - x_1) \cdot ... \cdot (x - x_n)$ ist der Ausdruck
+  \[ \Delta (\vec{x}) \coloneqq \pm \prod_{i \not= j} (x_i - x_j). \]
+  Da dieser Polynomausdruck symmetrisch ist, lässt er sich in den Koeffizienten des Polynoms $f$ darstellen.
+\end{defn}
+
+\begin{bsp}
+  Die Diskriminante des quadratischen Polynoms $f(x) = x^2 - ax + b$ ist $- \Delta = a^2 - 4 b$, die des kubischen Polynoms $g(x) = x^3 - a x^2 + b x - c$ ist $\Delta = a^2 b^2 - 4 a^3 c - 4 b^3 + 18 abc - 27 c^3$.
+\end{bsp}
+
+% Kapitel 1.13. Lagrangesche Resolventen
 
 \end{document}
