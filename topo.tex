@@ -561,4 +561,38 @@
   Sei $(X_i)_{i \in I}$ eine Familie kompakter Räume. Dann ist das topologische Produkt $\prod_{i \in I} X_i$ ebenfalls kompakt.
 \end{satz}
 
+% Vorlesung vom 7.5.2014
+
+\begin{lem}
+  Alle Normen auf $\R^n$ sind äquivalent, d.\,h. für je zwei Normen $\norm{\blank}_1$ und $\norm{\blank}_2$ existieren Zahlen $\lambda, \Lambda \in \R_{> 0}$ mit
+  \[ \fa{v \in \R^n} \lambda \norm{v}_1 \leq \norm{v}_2 \leq \Lambda \norm{v}_1. \]
+\end{lem}
+
+\begin{lem}[Riesz]
+  Sei $(V, \norm{\blank})$ ein normierter reeller VR und $C \subset V$ ein echter Untervektorraum, der abgeschlossen bzgl. $\norm{\blank}$ ist. Sei $0 < \delta < 1$. Dann existiert ein $v \in V \setminus C$ mit $\norm{v} = 1$ und
+  \[ d(v, C) \coloneqq \inf_{c \in C} \norm{v - c} > 1 - \delta. \]
+\end{lem}
+
+\begin{lem}
+  Sei $(V, \norm{\blank})$ ein normierter VR und $C \subset V$ ein endlichdim. UVR. Dann ist $C$ abgeschlossen bzgl. $\norm{\blank}$.
+\end{lem}
+
+\begin{prop}
+  Sei $(V, \norm{\blank})$ ein normierter Vektorraum über $\R$. Die abgeschlossene Einheitskugel $B \coloneqq \Set{ v \in V }{ \norm{v} \leq 1 }$ ist genau dann kompakt, wenn $\dim(V) < \infty$.
+\end{prop}
+
+\begin{defn}
+  Sei $(V, \norm{\blank})$ ein normierter VR über $\R$. Der VR der \emph{beschränkten Funktionale} ist der normierte VR
+  \[ V^* \coloneqq \Set{ f : V \to \R }{ \text{$f$ ist linear und stetig} } \]
+  versehen mit der Norm $\norm{f} \coloneqq \sup_{\norm{v} \leq 1} \abs{f(v)}$.
+\end{defn}
+
+\begin{defn}
+  Die \emph{Schwach-*-Topologie} auf $V^*$ ist die gröbste Topologie, sodass alle Abbildungen $\phi_v : V^* \to \R, \enspace f \mapsto f(v)$ stetig sind.
+\end{defn}
+
+\begin{satz}
+  $B \subset (V^*, \norm{\blank})$ ist kompakt, bzgl. der Schwach-*-Topologie.
+\end{satz}
+
 \end{document}
