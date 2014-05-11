@@ -388,6 +388,7 @@
 \begin{defn}
   Eine \emph{Permutation} der Zahlen $\{ 1, ..., n \}$ ist eine Bijektion
   \[ \sigma : \{ 1, ..., n \} \to \{ 1, ..., n \}. \]
+  Die Menge dieser Permutationen heißt \emph{symmetrische Gruppe} $S_n$.
 \end{defn}
 
 \begin{defn}
@@ -416,5 +417,105 @@
 \end{bsp}
 
 % Kapitel 1.13. Lagrangesche Resolventen
+
+% Ausgelassen: Ausführliche Erklärung, Rechnung
+
+\begin{defn}
+  Seien $\omega$ eine $n$-te Einheitswurzel, d.\,h. $\omega^n = 1$ und $x_1, ..., x_n$ die Nullstellen von $x^n + a_1 x^{n-1} + ... + a_n = 0$, dann heißt
+  \[
+    u_{\omega} \coloneqq x_n + \omega x_{n-1} + ... + \omega^{n-1} x_1 \quad
+    \text{\emph{Lagrangesche Resolvente}.}
+  \]
+\end{defn}
+
+\begin{bem}
+  Es gilt $\sigma u_{\omega} = \omega u_{\omega}$ für $\sigma = (123 \cdots n)$.
+\end{bem}
+
+% Kapitel 1.14. Die Lösung der quartischen Gleichung
+
+% Ausgelassen
+
+% Kapitel 1.15. Gruppen
+
+\begin{defn}
+  Ein \emph{Gruppen-Homomorphismus} zwischen $(G, *_G)$ und $(H, *_H)$ ist eine Abbildung $\phi : G \to H$, sodass für alle $g, h \in G$ gilt:
+  \begin{itemize}
+    \miniitem{0.6 \linewidth}{$\phi(g *_G h) = \phi(g) *_{H} \phi(h)$}
+    \miniitem{0.37 \linewidth}{$\phi(g)^{-1} = \phi(g^{-1})$}
+  \end{itemize}
+\end{defn}
+
+\begin{defn}
+  Ein \emph{Gruppen-Isomorphismus} ist ein bijektiver Gruppen-Homomorphismus. Die Umkehrabbildung ist automatisch ebenfalls ein Gruppen-Isomorphismus.
+\end{defn}
+
+\begin{defn}
+  Zwei Gruppen $G$ und $H$ heißen \emph{isomorph} (notiert $G \cong H$), wenn es einen Gruppenisomorphismus zwischen ihnen gibt. Dann ist die Umkehrabbildung ebenfalls ein Gruppenisomorphismus.
+\end{defn}
+
+\begin{bspe}
+  \begin{itemize}
+    \item $(\Z, +, 0)$ ist eine kommutative Gruppe.
+    \item Die Menge der $n$-ten Einheitswurzeln bilden eine Gruppe $(\Omega_n, \cdot, 1)$ mit $\Omega_n \coloneqq \Set{ e^{2i \pi k/n} }{ 0 \leq k \leq n - 1 }$
+  \end{itemize}
+\end{bspe}
+
+\begin{defn}
+  Eine \emph{Untergruppe} einer Gruppe $(G, *, e)$ ist eine Teilmenge $H \subset G$, für die $(H, *|_{H \times H}, e)$ selbst eine Gruppe ist, d.\,h. es gilt
+  \begin{itemize}
+    \miniitem{0.15 \linewidth}{$e \in H$}
+    \miniitem{0.45 \linewidth}{$\fa{h, h' \in H} h * h' \in H$}
+    \miniitem{0.35 \linewidth}{$\fa{h \in H} h^{-1} \in H$.}
+  \end{itemize}
+\end{defn}
+
+% Ausgelassen: Beispiel: Symmetriegruppe einer Figur
+
+% Kapitel 1.16. Gruppenwirkungen
+
+\begin{defn}
+  Eine \emph{Wirkung (Operation)} einer Gruppe $(G, *, e)$ auf einer Menge $X$ ist ein Gruppenhomomorphismus $\phi : G \to \mathrm{Aut}(X)$, wobei $\mathrm{Aut}(X)$ die Menge der Bijektionen von $X$ nach $X$ bezeichnet bzw. äquiv. eine Abb. $\phi : G \times X \to X, (g, x) \mapsto gx \coloneqq \phi(g, x)$, für die gilt:
+  \begin{itemize}
+    \miniitem{0.3 \linewidth}{$\phi(e, \blank) = \id_{X}$,}
+    \miniitem{0.6 \linewidth}{$\fa{g, h \in G} \phi(g, \blank) \circ \phi(h, \blank) = \phi(g * h, \blank)$.}
+  \end{itemize}
+\end{defn}
+
+\begin{defn}
+  Für jede Gruppenwirkung $\phi$ von $G$ auf $X$ und jedes Element $x \in X$ ist $G_x \coloneqq \Set{ g \in G }{ gx = x }$ eine Untergruppe von $G$, die \emph{Standgruppe} oder \emph{Stabilisator} von $x$ unter $\phi$.
+\end{defn}
+
+\begin{defn}
+  Für $x \in X$ heißt $Gx \coloneqq \Set{ gx }{ g \in G }$ \emph{Orbit} oder \emph{Bahn} von $x$.
+\end{defn}
+
+\begin{bem}
+  Für alle $g \in G$ und $x \in X$ gilt: $Gx = G(gx)$.
+\end{bem}
+
+\begin{bem}
+  Für alle $x' = gx \in Gx$ für ein $g \in G$ gilt $G_x \cong G_{x'}$, genauer
+  $G_{x'} = g G_x g^{-1}$.
+\end{bem}
+
+\begin{defn}
+  Für eine Untergruppe $H \subset G$ und $g \in G$ heißt
+  \begin{itemize}
+    \item $gH \coloneqq \Set{ gh }{ h \in H }$ \emph{Linksnebenklasse} von $H$,
+    \item $Hg \coloneqq \Set{ hg }{ h \in H }$ \emph{Rechtsnebenklasse} von $H$.
+  \end{itemize}
+\end{defn}
+
+\begin{defn}
+  Ein \emph{Normalteiler} einer Gruppe $(G, *, e)$ ist eine Untergruppe $H$, die die folgenden äquivalenten Bedingungen erfüllt:
+  \begin{itemize}
+    \miniitem{0.99 \linewidth}{Links- und Rechtsnebenklassen sind gleich: $\fa{g \in G\!}\!gH = Hg$}
+    \miniitem{0.48 \linewidth}{$\fa{g \in G} g H g^{-1} = H$}
+    \miniitem{0.48 \linewidth}{$\fa{g \in G, h \in H} ghg^{-1} \in H$}
+  \end{itemize}
+\end{defn}
+
+% Kapitel 1.17. Die alternierende Gruppe
 
 \end{document}
