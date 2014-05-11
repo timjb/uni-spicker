@@ -681,4 +681,74 @@
 % * Punkt 1 ist für $a=x$ die MW-Eigenschaft undermöglicht Herleitung einer speziellen Harnack-Ungleichung
 % * Punkt 2 ist Satz mit expliziter Lösungsformel und wird als Satz von Schwarz bezeichnet.
 
+% Vorlesung vom 8.5.2014
+
+\begin{nota}
+  $\R^n_+ \coloneqq \Set{ (x_1, ..., x_n) \in \R^n }{ x_n > 0 }$ heißt \emph{Halbraum}.
+\end{nota}
+
+\begin{defn}
+  Für $x = (x_1, ..., x_n) \in \R^n$ heißt $\overline{x} \coloneqq (x_1, ..., x_{n-1}, - x_n)$ \emph{Spiegelpunkt} von $x$ bzgl. $\partial \R^n_+$.
+\end{defn}
+
+\begin{satz}
+  Die Greensche Funktion für $\R^n_+$ lautet
+  \[
+    G_{\R^n_+}(x, y) \coloneqq \Phi(x - y) - \Phi(x^* - y) \quad
+    \text{für $x, y \in \R^n_+$ mit $x \not= y$.}
+  \]
+\end{satz}
+
+\begin{defn}
+  Der \emph{Poisson-Kern für den Halbraum} $\R^n_+$ ist definiert als
+  \[
+    K_{\R^n_+}(x, y) \coloneqq \tfrac{1}{n \omega_n} \cdot \tfrac{2 x_n}{\abs{x-y}^n} \quad
+    \text{für $x \in \R^n_+$ und $y \in \partial \R^n_+$.}
+  \]
+\end{defn}
+
+\begin{satz}[Poisson-Integralformel für den Halbraum]
+  Sei $g \in \mathcal{C}(\R^{n-1}) \cap L^\infty(\R^{n-1})$. Dann definiert
+  \[
+    u(x) \coloneqq \Int{\partial \R^n_+}{}{K_{\R^n_+}(x, y) g(y)}{\HM^{n-1}(y)} \quad
+    \text{für $x \in \R^n_+$}
+  \]
+  eine beschränkte, harmonische Funktion $u \in \mathcal{C}(\R^n_+) \cap \mathcal{C}^1(\overline{\R^n_+})$ mit $u = g$ auf $\partial \R^n_+$.
+\end{satz}
+
+\begin{nota}
+  Für $\Omega \subset \R^n$ schreibe
+  \begin{itemize}
+    \item $\Omega^+ \coloneqq \Set{(x_1, ..., x_n) \in \Omega}{x_n > 0} = \Omega \cap \R^n_+$
+    \item $\Omega^0 \coloneqq \Set{(x_1, ..., x_n) \in \Omega}{x_n = 0} = \Omega \cap \partial \R^n_+$
+    \item $\Omega^- \coloneqq \Set{(x_1, ..., x_n) \in \Omega}{x_n < 0} = \Omega \setminus \overline{\R^n_+}$
+  \end{itemize}
+\end{nota}
+
+\begin{satz}
+  Sei $\Omega \subset \R^n$ offen und symmetrisch bzgl. $\partial \R^n_+$, d.\,h. für alle $x \in \R^n$ gilt $x \in \Omega \iff \overline{x} \in \Omega$.
+  \begin{itemize}
+    \item Ungerades Spiegelungsprinzip: Ist $u \in \mathcal{C}^2(\Omega^+) \cap \mathcal{C}(\Omega^+ \cup \Omega^0)$ harmonisch auf $\Omega^+$ mit $u = 0$ auf $\Omega^0$, so ist die ungerade Fortsetzung
+    \[
+      \overline{u}(x) \coloneqq \begin{cases}
+        u(x) & \text{für $x \in \Omega^+ \cup \Omega^0$,}\\
+        -u(\overline{x}) = -u(x_1, ..., -x_n) & \text{für $x \in \Omega^-$}
+      \end{cases}
+    \]
+    harmonisch auf $\Omega$.
+    \item Gerades Spiegelungsprinzip: Ist $u \in \mathcal{C}^2(\Omega^+) \cap \mathcal{C}^1(\Omega^+ \cup \Omega^0)$ mit $D_n u = 0$ auf $\Omega^0$, so ist die gerade Fortsetzung
+    \[
+      \overline{u}(x) \coloneqq \begin{cases}
+        u(x) & \text{für $x \in \Omega^+ \cup \Omega^0$,}\\
+        u(\overline{x}) = u(x_1, ..., x_{n-1}, -x_n) & \text{für $x \in \Omega^-$}
+      \end{cases}
+    \]
+    harmonisch auf $\Omega$.
+  \end{itemize}
+\end{satz}
+
+% Kapitel 2.4. Die Perron-Methode
+
+% TODO
+
 \end{document}
