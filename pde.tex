@@ -572,7 +572,6 @@
 \end{prop}
 
 \begin{defn}
-  %Sei $\Omega \subset \R^n$ offen. Eine Funktion $G : \Set{ (x, y) \in \Omega \times \Omega }{ x \not= y } \to \R$ heißt \emph{Greensche Funktion} für das Gebiet $\Omega$, falls für alle $x \in \Omega$ gilt:
   Sei $\Omega \subset \R^n$ offen. Eine \emph{Greensche Funktion} für $\Omega$ ist eine Funktion
   $G : \Set{ (x, y) \in \Omega \times \Omega }{ x \not= y } \to \R$, falls für alle $x \in \Omega$ gilt:
   \begin{itemize}
@@ -581,8 +580,10 @@
   \end{itemize}
 \end{defn}
 
+% Ausgelassen: Bemerkung zum Neumann-RWP und der Greenschen Funktion zweiter Art (mit verschwindender Normalenableitung)
+
 \begin{bem}
-  Die Funktion $G(x, \blank)$ ist in $\mathcal{C}^2(\Omega \setminus \{ x \}) \cap \mathcal{C}^(\overline{\Omega} \setminus \{ x \})$ und hat die gleiche Singularität wie $y \mapsto \Phi(x - y)$.
+  Die Funktion $G(x, \blank)$ ist in $\mathcal{C}^2(\Omega \setminus \{ x \}) \cap \mathcal{C}(\overline{\Omega} \setminus \{ x \})$ und hat die gleiche Singularität wie $y \mapsto \Phi(x - y)$.
 \end{bem}
 
 % TODO: 2. Bemerkung zur Korrektorfunktion verstehen und ergänzen
@@ -590,7 +591,94 @@
 \begin{satz}
   Sei $\Omega \subset \R^n$ offen, beschränkt, mit $\mathcal{C}^1$-Rand $\partial \Omega$. Ist $u \in \mathcal{C}^2(\Omega) \cap \mathcal{C}^1(\overline{\Omega})$ eine Lösung von (2.1) und ist $G$ die Greensche Funktion für $\Omega$ (falls existent), dann gilt für alle $x \in \Omega$:
   \[ u(x) = \Int{\Omega}{}{G(x,y) f(y)}{y} - \Int{\partial \Omega}{}{g(y) \cdot D_y G(x,y) \cdot \nu}{S(y)}. \]
-
 \end{satz}
+
+% Vorlesung vom 6.5.2014
+
+% 2.18
+\begin{lem}
+  Sei $\Omega \subset \R^n$ offen, $G$ die Greensche Funktion für $\Omega$ und $B_r(x) \Subset \Omega$. Für $f \in \mathcal{C}^2(\Omega) \cap \mathcal{C}^1(\overline{\Omega})$ gilt dann:
+  \[ \lim_{\epsilon \to 0} \quad\enspace \Int{\mathclap{\partial B_{\epsilon}(x)}}{}{\left( G(x, y) Df(y) - f(y) D_y G(x, y) \right) \cdot \nu(y) }{\HM^{n-1}(y)} = f(x). \]
+\end{lem}
+
+% 2.19
+\begin{satz} % Symmetrie der Greenschen Funktion
+  Ist $G$ die Greensche Funktion zu $\Omega \subset \R^n$ offen, beschränkt mit $\mathcal{C}^1$-Rand $\partial \Omega$, so gilt $G(x, y) = G(y, x)$ für alle $x, y \in \Omega$ mit $x \not= y$.
+\end{satz}
+
+\begin{kor}
+  Sei $G$ die Greensche Funktion zu $\Omega \subset \R^n$ offen, beschränkt mit $\mathcal{C}^1$-Rand $\partial \Omega$, so ist die Funktion $x \mapsto G(x, y)$ harmonisch auf $\Omega \setminus \{ y \}$.
+\end{kor}
+
+\begin{defn}
+  Sei $B_r(a) \subset \R^n$ eine Kugel, $x \in \R^n \setminus \partial B_r(a)$. Dann heißt
+  \[
+    x^* \coloneqq a + r^2 \frac{x - a}{\norm{x - a}^2} \in \R^n \setminus \partial B_r(a) \quad
+    \text{\emph{Spiegelungspunkt} von $x$.}
+  \]
+\end{defn}
+
+\begin{bem}
+  \begin{minipage}{0.12 \linewidth}Es gilt:\end{minipage}
+  \begin{minipage}{0.63 \linewidth}
+    \begin{itemize}
+      \miniitem{0.65 \linewidth}{$\norm{x - a} \cdot \norm{x^* - a} = r^2$}
+      \miniitem{0.3 \linewidth}{$(x^*)^* = x$}
+    \end{itemize}
+  \end{minipage}
+  \begin{itemize}
+    \item $\fa{y \in \partial B_r(a)} \norm{x^* - y}^2 = r^2 \norm{x - a}^{-2} \norm{y - x}^2$.
+  \end{itemize}
+\end{bem}
+
+\begin{nota}
+  %Sei $g : B_r(a) \times B_r(a) \setminus \Set{ (x, x) }{ x \in B_r(a) }$ def. durch
+  Für $B_r(a) \subset \R$ sei $g : B_r(a) \times B_r(a) \to \R$ definiert durch
+  \[ g(x, y) \coloneqq \begin{cases}
+      - \Phi\left( \tfrac{\abs{x-a}}{r} (y - x^*) \right) & \text{für $x \in B_r(a) \setminus \{ a \}$}\\
+      - \Phi(r e_1) & \text{für $x = a$.}
+    \end{cases}
+  \]
+\end{nota}
+
+\begin{prop}
+  Für die Funktion $g$ gilt:
+  \begin{itemize}
+    \item $g(x, y) - \Phi(x - y) = 0$ für alle $y \in \partial B_r(a)$ und $x \in B_r(a)$.
+    \item $y \mapsto g(x, y)$ ist glatt und harmonisch in $B_r(a)$ für alle $x \in B_r(a)$.
+  \end{itemize}
+\end{prop}
+
+\begin{kor}
+  Die Greensche Funktion für $B_r(a) \subset \R^n$ lautet
+  \begin{align*}
+    G_{B_r(a)}(x, y) &\coloneqq \Phi(x - y) + g(x, y)\\
+    &= \begin{cases}
+      \Phi(x - y) - \Phi\left(\tfrac{\abs{x-a}}{r} (y - x^*)\right) & \text{für $x \in B_r(a) \setminus \{ a \}$}\\
+      \Phi(a - y) - \Phi(r e_1) & \text{für $x = a$.}
+    \end{cases}
+  \end{align*}
+\end{kor}
+
+\begin{defn}
+  Der \emph{Poisson-Kern für die Kugel} $B_r(a) \subset \R^n$ ist
+  \[ K_{B_r(a)}(x, y) \coloneqq \tfrac{1}{n \omega_n} \cdot \tfrac{r^2 - \abs{x - a}^2}{r \abs{x - y}^n}. \]
+\end{defn}
+
+\begin{satz}[Poisson-Integralformel für Kugeln]
+  Sei $B_r(a) \subset \R^n$ und $g : \partial B_r(a)$ stetig.
+  \begin{itemize}
+    \item Für $u {\in} \mathcal{C}^2(B_r(a)) \cap \mathcal{C}(\overline{B_r(a)})$ harmonisch mit $u {=} g$ auf $\partial B_r(a)$ gilt
+    \[
+      u(x) = \Int{\mathclap{\partial B_r(a)}}{}{K_{B_r(a)}(x,y) g(y)}{\HM^{n-1}(y)}
+      \quad \text{für alle $x \in B_r(a)$.} \tag{2.8}
+    \]
+    \item Umgekehrt definiert (2.8) die eindeutige harmonische Funktion $u \in \mathcal{C}^2(B_r(a)) \cap \mathcal{C}^1(\overline{B_r(a)})$ mit $u = g$ auf $\partial B_r(a)$.
+  \end{itemize}
+\end{satz}
+
+% Ausgelassen: Bemerkung
+% * Punkt 1 ist für $a=x$ die MW-Eigenschaft undermöglicht Herleitung einer speziellen Harnack-Ungleichung
+% * Punkt 2 ist Satz mit expliziter Lösungsformel und wird als Satz von Schwarz bezeichnet.
 
 \end{document}
