@@ -595,4 +595,38 @@
   $B \subset (V^*, \norm{\blank})$ ist kompakt, bzgl. der Schwach-*-Topologie.
 \end{satz}
 
+% Vorlesung vom 12.5.2014
+
+\begin{defn}
+  Ein topol. Raum $X$ heißt \emph{normal}, falls gilt: Für alle disjunkte abgeschlossene Mengen $A, B \subset X$ gibt es offene Teilmengen $U_A, U_B \subset X$ mit $A \subset U_A$, $B \subset U_B$ und $U_A \cap U_B = \emptyset$.
+\end{defn}
+
+\begin{bspe}
+  \begin{itemize}
+    \item Metrische Räume sind normal.
+    \item Kompakte Hausdorffräume sind normal.
+  \end{itemize}
+\end{bspe}
+
+\begin{lem}[Urysohn]
+  Sei $X$ ein normaler topologischer Raum, $F, G \subset X$ disjunkte abgeschlossene Teilmengen. Dann gibt es eine stetige Funktion $f : X \to \cinterval{0}{1}$, die auf $F$ konstant gleich $0$ und auf $G$ konstant gleich $1$ ist.
+\end{lem}
+
+\begin{defn}
+  Ein topologischer Raum erfüllt das \emph{zweite Abzählbarkeitsaxiom}, falls er eine abzählbare Basis besitzt.
+\end{defn}
+
+\begin{satz}[Metrisierbarkeitssatz von Urysohn]
+  Ein topologischer Raum, der das zweite Abzählbarkeitsaxiom erfüllt, ist genau dann metrisierbar, wenn er normal und Hausdorffsch ist.
+\end{satz}
+
+\begin{satz}
+  Sei $X$ ein normaler Raum, $F \subset X$ abgeschlossen. Ist $f : F \to \R$ stetig, so existiert eine stetige Fortsetzung $g : X \to \R$ von $f$ auf $X$, d.\,h. $g|_F = f$, für die außerdem gilt:
+  \[
+    \sup_{x \in F} f(x) = \sup_{x \in X} g(x)
+    \quad \text{und} \quad
+    \inf_{x \in F} f(x) = \inf_{x \in X} g(x).
+  \]
+\end{satz}
+
 \end{document}
