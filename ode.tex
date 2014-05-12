@@ -9,6 +9,7 @@
 \delimiterfactor=701
 
 \newcommand{\D}{\mathcal{D}}
+\newcommand{\dist}{\mathrm{dist}} % Entfernung (distance)
 
 \begin{document}
 
@@ -497,6 +498,20 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
 % 2.10.
 \begin{satz}
   Sei $I \subset \R$ offen, $f : I \times \R^n \to \R^n$ stetig, lokal Lipschitz-stetig bzgl. $y$ auf $I \times \R^n$, $(t_0, y_0) \in I \times \R^n$. Ist das Wachstum von $f$ linear beschränkt in $y$ auf $I \times \R^n$, d.\,h. gibt es stetige Funktionen $a, b : I \to \cointerval{0}{\infty}$ mit $\norm{f(t, y)} \leq a(t) \norm{y} + b(t)$ für alle $(t, y) \in I \times \R^n$, dann besitzt das AWP (2.1) eine eindeutige Lösung auf $I$.
+\end{satz}
+
+% Vorlesung vom 12.5.2014
+
+% Ausgelassen: Beispiele zum Randverhalten
+
+\begin{satz}[Randverhalten maximaler Lösungen]
+  Sei $\D \subset \R \times \R^n$ offen, $(t_0, y_0) \in \D$ und $f : \D \to \R^n$ stetig und lokal Lipschitz-stetig bzgl. $y$. Sei $y : \ointerval{a_-}{a_+} \to \R^n$ eine maximale Lösung des AWP (2.1).
+  \begin{itemize}
+    \item Ist $a_+ < \infty$, so ist $y$ auf $\cointerval{t_0}{a_+}$ unbeschränkt
+    oder der Rand $\partial \D$ ist nicht
+    leer und $\lim_{t \uparrow a_+} \dist((t, y(t)), \partial \D) = 0$.
+    \item Ist $a_+ > -\infty$, so ist $y$ auf $\ocinterval{a_-}{t_0}$ unbeschränkt oder der Rand $\partial \D$ ist nicht leer und $\lim_{t \downarrow a_-} \dist((t, y(t)), \partial \D) = 0$.
+  \end{itemize}
 \end{satz}
 
 \end{document}
