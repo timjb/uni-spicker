@@ -747,8 +747,126 @@
   \end{itemize}
 \end{satz}
 
+\begin{bem}
+  Aus dem Spiegelungsprinzip und dem Satz von Liouville folgt die Eindeutigkeit beschränkter harmonischer Funktionen auf dem Halbraum mit vorgegebenen Randwerten.
+\end{bem}
+
 % Kapitel 2.4. Die Perron-Methode
 
-% TODO
+\begin{prob}[Dirichlet-RWP]
+  Für $\Omega \subset \R^n$ und $g \in \mathcal{C}(\partial \Omega)$ ist $u \in \mathcal{C}^2(\Omega) \cap \mathcal{C}(\overline{\Omega})$ gesucht mit
+  \[
+    (2.9) \left\{ \begin{array}{rlll}
+      \Delta u &=& 0 &\text{ in $\Omega$,}\\
+      u &=& g &\text{ in $\partial \Omega$.}
+    \end{array} \right.
+  \]
+\end{prob}
+
+\begin{defn}
+  Sei $\Omega \subset \R^n$ offen. Eine Funktion $u \in \mathcal{C}(\Omega)$ heißt \emph{$\mathcal{C}^0$-sub- harmonisch}, falls die MW-Ungleichung auf Sphären erfüllt ist, d.\,h.
+  \[
+    u(x_0) \leq \enspace \MVInt{\mathclap{\partial B_r(x_0)}}{}{\enspace u}{\HM^{n-1}} \quad
+    \text{für alle $x_0 \in \Omega$ und $r \in \ointerval{0}{\dist(x_0, \partial \Omega)}$.}
+  \]
+  Die Funktion heißt \emph{$\mathcal{C}^0$-superharmonisch}, falls $-u$ $\mathcal{C}^0$-subharmonisch ist und \emph{$\mathcal{C}^0$-harmonisch}, falls $u$ sowohl subharmonisch als auch harmonisch ist.
+\end{defn}
+
+\begin{nota}
+  \begin{minipage}[t]{0.8 \linewidth}
+    \vspace{-15pt}
+    \begin{align*}
+      H^-(\Omega) &\coloneqq \Set{u \in \mathcal{C}(\Omega)}{ \text{$u$ ist subharmonisch auf $\Omega$} }\\
+      H^+(\Omega) &\coloneqq \Set{u \in \mathcal{C}(\Omega)}{ \text{$u$ ist superharmonisch auf $\Omega$} }\\
+      H^0(\Omega) &\coloneqq \Set{u \in \mathcal{C}(\Omega)}{ \text{$u$ ist harmonisch auf $\Omega$} }
+    \end{align*}
+  \end{minipage}
+\end{nota}
+
+\begin{bem}
+  $\mathcal{C}^0$-harmonische Funktionen sind glatt und harmonisch.
+\end{bem}
+
+\begin{lem}
+  Sei $\Omega \subset \R^n$ offen. Für $u \in \mathcal{C}(\Omega)$ sind äquivalent:
+  \begin{itemize}
+    \item $u$ ist $\mathcal{C}^0$-subharmonisch auf $\Omega$.
+    \item $u$ erfüllt die MW-Ungleichung auf Kugeln, d.\,h. für alle $x_0 \in \Omega$ gilt
+    \[
+      u(x_0) \leq \enspace\MVInt{\mathclap{B_r(x_0)}}{}{\enspace u(x)}{x} \quad
+      \text{für alle $r \in \ointerval{0}{\dist(x_0, \partial \Omega)}$.}
+    \]
+    \item $u$ erfüllt die MW-Ungleichung auf kleinen Kugeln, d.\,h. für alle $x_0 \in \Omega$ gibt es ein $R(x_0) \in \ointerval{0}{\dist(x_0, \partial \Omega)}$ mit
+    \[
+      u(x_0) \leq \enspace\MVInt{\mathclap{B_r(x_0)}}{}{\enspace u(x)}{x} \quad
+      \text{für alle $r \in \ointerval{0}{R(x_0)}$.}
+    \]
+    \item Für alle Kugeln $B_r(x_0) \Subset \Omega$ gilt das Vergleichsprinzip mit harmonischen Funktionen, d.\,h. für jede harmonische Funktion $h \in \mathcal{C}(\overline{B_r(x_0)})$ gilt: $u \leq h \text{ auf $\partial B_r(x_0)$} \implies u \leq h \text{ in $B_r(x_0)$.}$
+  \end{itemize}
+\end{lem}
+
+\begin{defn}
+  Sei $\Omega \subset \R^n$ offen und $B_r(x_0) \Subset \Omega$. Der \emph{Perron-Projektor} $P_{x_0,r} : \mathcal{C}(\Omega) \to \mathcal{C}(\Omega)$ ist definiert durch
+  \[
+    (P_{x_0,r} u)(x) \coloneqq \begin{cases}
+      \enspace u(x) & \text{für $x \in \Omega \setminus B_r(x_0)$,}\\
+      \qquad \Int{\mathclap{\partial B_r(x_0)}}{}{\enspace K_{B_r(x_0)}(x,y) u(y)}{\HM^{n-1}(y)} & \text{für $x \in B_r(x_0)$.}
+    \end{cases}
+  \]
+\end{defn}
+
+\begin{bem}
+  Die Funktion $P_{x_0,r}(u)$ wird \emph{harmonische Fortsetzung} von $u$ auf $B_r(x_0)$ genannt.
+\end{bem}
+
+\begin{lem}
+  Sei $\Omega \subset \R^n$ offen. Dann gilt:
+  \begin{itemize}
+    \item Sind $v \in H^-(\Omega)$ und $w \in H^+(\Omega)$, so gilt $v - w \in H^-(\Omega)$.
+    \item Sind $v_1, v_2 \in H^-(\Omega)$, $w_1, w_2 \in H^+(\Omega)$ und $\lambda_1, \lambda_2 \geq 0$, so ist
+    \begin{align*}
+      \{ \max(v_1, v_2), \lambda_1 v_1 + \lambda_2 v_2 \} &\subset H^-(\Omega),\\
+      \{ \min(w_1, w_2), \lambda_1 w_1 + \lambda_2 w_2 \} &\subset H^+(\Omega).
+    \end{align*}
+    \item Sind $v \in H^-(\Omega), w \in H^+(\Omega)$ und $B_r(x_0) \Subset \Omega$, so gelten
+    \begin{align*}
+      P_{x_0,r} v \geq v \text{ in $\Omega$} \quad &\text{und} \quad P_{x_0,r} v \in H^-(\Omega),\\
+      P_{x_0,r} w \leq w \text{ in $\Omega$} \quad &\text{und} \quad P_{x_0,r} w \in H^+(\Omega).
+    \end{align*}
+  \end{itemize}
+\end{lem}
+
+\begin{defn}
+  Sei $\Omega \subset \R^n$ offen, beschränkt und $g \in \mathcal{C}(\partial \Omega)$. Dann heißt $u \in \mathcal{C}(\overline{\Omega})$ \emph{Sublösung} des Dirichletproblems (2.9), falls $u \leq g$ auf $\partial \Omega$ gilt und \emph{Superlösung} von (2.9), falls $u \geq g$ auf $\partial \Omega$ gilt.
+\end{defn}
+
+\begin{nota}
+  \begin{minipage}[t]{0.7 \linewidth}
+    \vspace{-15pt}
+    \begin{align*}
+      H_g^-(\Omega) &\coloneqq \Set{ u \in \mathcal{C}(\overline{\Omega}) \cap H^-(\Omega) }{ u \leq g \text{ auf $\partial \Omega$} },\\
+      H_g^+(\Omega) &\coloneqq \Set{ u \in \mathcal{C}(\overline{\Omega}) \cap H^+(\Omega) }{ u \geq g \text{ auf $\partial \Omega$} },\\
+      u^-(x) &\coloneqq \sup\,\Set{ v(x) }{ v \in H_g^-(\Omega) },\\
+      u^+(x) &\coloneqq \sup\,\Set{ v(x) }{ v \in H_g^+(\Omega) }.
+    \end{align*}
+  \end{minipage}
+\end{nota}
+
+\begin{methode}[Perron]
+  Zeige zunächst, das $u^-$ und $u^+$ harmonisch sind. Zeige dann unter gewissen Regularitätsvoraussetzungen an $\Omega$, dass $u^- = u^+$ gilt und die vorgegebenen Randwerte annimmt.
+\end{methode}
+
+\begin{lem}
+  Sei $\Omega \subset \R^n$ offen, beschränkt, $g \in \mathcal{C}(\partial \Omega)$. Dann sind $u^-$ und $u^+$ wohldefiniert und es gilt
+  \[ \inf_{\partial \Omega} g \leq u^- \leq u^+ \leq \sup_{\partial \Omega} g. \]
+\end{lem}
+
+\begin{bem}
+  Falls eine Lösung $u$ des Dirichlet-Problems existiert, so gilt $u = u^- = u^+$.
+\end{bem}
+
+\begin{satz}
+  Sei $\Omega \subset \R^n$ offen, beschränkt und $g \in \mathcal{C}(\partial \Omega)$. Dann sind $u^-$ und $u^+$ harmonisch in $\Omega$.
+\end{satz}
 
 \end{document}
