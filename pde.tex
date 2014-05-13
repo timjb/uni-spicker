@@ -10,6 +10,10 @@
 \newcommand{\grad}{\mathrm{grad}} % Gradient
 \newcommand{\dive}{\mathrm{div}} % Divergenz
 \newcommand{\divergence}{\mathrm{div}} % Divergenz
+\newcommand{\HM}{\mathcal{H}} % Hausdorff-Maß
+\usepackage{bbm} % Für 1 mit Doppelstrich (Indikatorfunktion)
+\newcommand{\ind}{\mathbbm{1}} % Indikatorfunktion
+\newcommand{\dist}{\mathrm{dist}} % Entfernung (distance)
 
 % Abschnittsnummerierung einschalten (entgegen cheat-sheet.cls)
 \makeatletter
@@ -38,11 +42,6 @@
 % Mittelwerts-Integrale (mean value integrals)
 \newcommand{\mymvint}[2]{{\textstyle \dashint\limits_{#1}^{#2}}}
 \newcommand{\MVInt}[4]{\mymvint{#1}{#2} #3 \,\d #4}
-
-\newcommand{\HM}{\mathcal{H}} % Hausdorff-Maß
-\usepackage{bbm} % Für 1 mit Doppelstrich (Indikatorfunktion)
-\newcommand{\ind}{\mathbbm{1}} % Indikatorfunktion
-\newcommand{\dist}{\mathrm{dist}} % Entfernung (distance)
 
 \begin{document}
 
@@ -865,8 +864,68 @@
   Falls eine Lösung $u$ des Dirichlet-Problems existiert, so gilt $u = u^- = u^+$.
 \end{bem}
 
+% Vorlesung vom 13.5.2014
+
 \begin{satz}
   Sei $\Omega \subset \R^n$ offen, beschränkt und $g \in \mathcal{C}(\partial \Omega)$. Dann sind $u^-$ und $u^+$ harmonisch in $\Omega$.
 \end{satz}
+
+\begin{defn}
+  Sei $\Omega \subset \R^n$ offen, beschränkt, $x_0 \in \partial \Omega$. Eine Funktion $b : \overline{\Omega} \to \R_0^+$ heißt (obere) \emph{Barriere} zu $\Omega$ in $x_0$, falls
+  \begin{itemize}
+    \item $b \in \mathcal{C}(\overline{\Omega}) \cap H^+(\Omega)$
+    \item $b(x_0) = 0$ und $b(x) > 0$ für alle $x \in \overline{\Omega} \setminus \{ x_0 \}$
+  \end{itemize}
+  Falls eine solche Barriere existiert, so heißt $x_0$ \emph{regulärer Randpunkt}.
+  %Der Rand $\partial \Omega$ heißt \emph{regulär}, falls jeder Randpunkt $x_0 \in \partial \Omega$ regulär ist.
+\end{defn}
+
+\begin{bem}
+  Eine Funktion $b : \overline{\Omega} \to \R_0^-$ heißt untere Barriere, falls $(-b) : \overline{\Omega} \to \R_0^+$ eine obere Barriere ist.
+\end{bem}
+
+\begin{defn}
+  Eine \emph{lokale Barriere} zu $\Omega$ in $x_0 \in \partial \Omega$ ist eine Barriere $\tilde{b} : B_r(x_0) \cap \Omega \to \R^+_0$ zu $B_r(x_0) \cap \Omega$ in $x_0$.
+\end{defn}
+
+\begin{bem}
+  Aus jeder lokalen Barriere lässt sich eine globale Barriere konstruieren.
+\end{bem}
+
+% 2.27
+\begin{lem}
+  Sei $\Omega \subset \R^n$ offen, beschränkt. Falls das Dirichlet-Problem (2.9) für jede Funktion $g \in \mathcal{C}(\partial \Omega)$ eine Lösung $u \in \mathcal{C}^2(\Omega) \cap \mathcal{C}(\overline{\Omega})$ besitzt, so sind alle Randpunkte $x_0 \in \partial \Omega$ regulär.
+\end{lem}
+
+% 2.28
+\begin{lem}
+  Sei $\Omega \subset \R^n$ offen, beschränkt, $x_0 \in \partial \Omega$. Ist $x_0$ regulär, dann gilt für jede stetige Funktion $g \in \mathcal{C}(\partial \Omega)$:
+  \[ \lim_{\Omega \ni x \to x_0} u^-(x) = g(x_0) = \lim_{\Omega \ni x \to x_0} u^+(x). \]
+\end{lem}
+
+% 2.29
+\begin{satz}[Perron]
+  Sei $\Omega \subset \R^n$ offen, beschränkt. Dann sind äquivalent:
+  \begin{itemize}
+    \item Der Rand $\partial \Omega$ ist regulär.
+    \item Das Dirichlet-Problem (2.9) besitzt eine eindeutige Lösung $u \in \mathcal{C}^2(\Omega) \cap \mathcal{C}(\overline{\Omega})$ für alle $g \in \mathcal{C}(\partial \Omega)$.
+  \end{itemize}
+\end{satz}
+
+\begin{defn}
+  Eine offene Menge $\Omega \subset \R^n$ erfüllt die \emph{äußere Kugel- bedingung} in $x_0 \in \partial \Omega$ an $\Omega$, falls ein Ball $B_r(a) \subset \R^n \setminus \Omega$ mit $\overline{\Omega} \cap \overline{B_r(a)} = \{ x_0 \}$ existiert.
+\end{defn}
+
+\begin{lem}
+  Sei $\Omega \subset \R^n$ offen. Erfüllt $\Omega$ die äußere Kugelbedingung in $x_0 \in \partial \Omega$ an $\Omega$, dann ist $x_0$ ein regulärer Randpunkt.
+\end{lem}
+
+\begin{bem}
+  Beschränkte Gebiete mit $\mathcal{C}^2$-Rand und strikt konvexe Gebiete erfüllen die äußere Kugelbedingung.
+\end{bem}
+
+% Ausgelassen: Bemerkung Kegelbedingung
+% Ausgelassen: Bemerkung zur Balayage-Methode
+% Ausgelassen: Überblick, weiteres Vorgehen
 
 \end{document}
