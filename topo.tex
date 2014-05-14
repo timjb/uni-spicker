@@ -642,18 +642,25 @@
 \begin{bspe}
   \begin{itemize}
     \item Jeder diskrete topologische Raum ist lokalkompakt.
-    \item Ein normierter Vektorraum $V$ ist genau dann lokalkompakt, wenn $\dim V < \infty$.
+    \item Ein normierter Vektorraum ist genau dann lokalkompakt, wenn er endlichdimensional ist.
   \end{itemize}
 \end{bspe}
 
 \begin{defn}
-  Sei $X$ ein Hausdorffraum. Setze $X^+ \coloneqq X \coprod \{ \infty \}$. Eine Menge $U \subset X^+$ heißt offen, wenn
+  Sei $X$ ein Hausdorffraum. Setze $X^+ \coloneqq X \sqcup \{ \infty \}$. Eine Menge $U \subset X^+$ heißt offen, wenn
   \begin{itemize}
     \item $U \subset X$ und $U$ ist offen in $X$ oder
     \item $\infty \in U$ und $X \setminus U \subset X$ kompakt ist.
   \end{itemize}
-  Dies definiert eine Topologie auf $X^+$, der sogenannten \emph{Einpunktkompaktifizierung} von $X$. Wenn $X$ lokalkompakt ist, dann ist $X^+$ Hausdorffsch. Falls $X$ selbst kompakt ist, so trägt $x+$ die Summentopologie von $X$ und $\{ \infty \}$.
+  Dies definiert eine Topologie auf $X^+$, der sogenannten \emph{Einpunktkompaktifizierung} von $X$.
 \end{defn}
+
+\begin{bem}
+  \begin{itemize}
+    \item Wenn $X$ lokalkompakt, dann ist $X^+$ Hausdorffsch.
+    \item Falls $X$ selbst kompakt ist, so trägt $X^+$ die Summentopologie von $X$ und $\{ \infty \}$.
+  \end{itemize}
+\end{bem}
 
 \begin{prop}
   Sei $X$ ein lokalkompakter Hausdorffraum, $Y$ ein kompakter Hausdorffraum, $p \in Y$ und $X$ homöomorph zu $Y \setminus \{ p \}$. Dann ist $X^+ \cong Y$.
@@ -669,7 +676,7 @@
 \end{nota}
 
 \begin{bem}
-  Die Abbildung $f^+$ ist nicht automatisch stetig, z.\,B. nicht für
+  Die Abbildung $f^+$ ist nicht i.\,A. stetig, z.\,B. nicht für
   \[ f : \cointerval{0}{1} \to \cinterval{0}{1}, \quad x \mapsto x. \]
 \end{bem}
 
@@ -678,7 +685,7 @@
 \end{defn}
 
 \begin{prop}
-  Ist $f : X \to Y$ eine stetige Abbildung, so ist die induzierte Abbildung $f^+ : X^+ \to Y^+$ genau dann stetig, wenn $f$ eigentlich ist.
+  Ist $f : X \to Y$ eine stetige Abbildung, so ist die induz. Abb. $f^+ : X^+ \to Y^+$ genau dann stetig, wenn $f$ eigentlich ist.
 \end{prop}
 
 \end{document}
