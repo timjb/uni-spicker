@@ -629,4 +629,56 @@
   \]
 \end{satz}
 
+% Vorlesung vom 14.5.2014
+
+\begin{defn}
+  Eine \emph{Kompaktifizierung} eines topol. Raumes $X$ ist ein kompakter topologischer Raum $Y$ zusammen mit einer topologischen Einbettung $f : X \to Y$, sodass $f(X)$ dicht in $Y$ liegt, d.\,h. $\overline{f(X)} = Y$.
+\end{defn}
+
+\begin{defn}
+  Ein topologischer Raum $X$ heißt \emph{lokalkompakt}, falls jeder Punkt $x \in X$ eine kompakte Umgebung besitzt.
+\end{defn}
+
+\begin{bspe}
+  \begin{itemize}
+    \item Jeder diskrete topologische Raum ist lokalkompakt.
+    \item Ein normierter Vektorraum $V$ ist genau dann lokalkompakt, wenn $\dim V < \infty$.
+  \end{itemize}
+\end{bspe}
+
+\begin{defn}
+  Sei $X$ ein Hausdorffraum. Setze $X^+ \coloneqq X \coprod \{ \infty \}$. Eine Menge $U \subset X^+$ heißt offen, wenn
+  \begin{itemize}
+    \item $U \subset X$ und $U$ ist offen in $X$ oder
+    \item $\infty \in U$ und $X \setminus U \subset X$ kompakt ist.
+  \end{itemize}
+  Dies definiert eine Topologie auf $X^+$, der sogenannten \emph{Einpunktkompaktifizierung} von $X$. Wenn $X$ lokalkompakt ist, dann ist $X^+$ Hausdorffsch. Falls $X$ selbst kompakt ist, so trägt $x+$ die Summentopologie von $X$ und $\{ \infty \}$.
+\end{defn}
+
+\begin{prop}
+  Sei $X$ ein lokalkompakter Hausdorffraum, $Y$ ein kompakter Hausdorffraum, $p \in Y$ und $X$ homöomorph zu $Y \setminus \{ p \}$. Dann ist $X^+ \cong Y$.
+\end{prop}
+
+\begin{kor}
+  $S^n \cong \left(\R^n\right)^+$
+\end{kor}
+
+\begin{nota}
+  Ist $f : X \to Y$ stetig, so definieren wir
+  \[ f^+ : X^+ \to Y^+, \quad f^+|_X \coloneqq f, \quad f^+(\infty) \coloneqq \infty. \]
+\end{nota}
+
+\begin{bem}
+  Die Abbildung $f^+$ ist nicht automatisch stetig, z.\,B. nicht für
+  \[ f : \cointerval{0}{1} \to \cinterval{0}{1}, \quad x \mapsto x. \]
+\end{bem}
+
+\begin{defn}
+  Eine Abbildung $f : X \to Y$ heißt \emph{eigentlich}, falls das Urbild jeder kompakten Menge in $Y$ unter $f$ kompakt in $X$ ist.
+\end{defn}
+
+\begin{prop}
+  Ist $f : X \to Y$ eine stetige Abbildung, so ist die induzierte Abbildung $f^+ : X^+ \to Y^+$ genau dann stetig, wenn $f$ eigentlich ist.
+\end{prop}
+
 \end{document}
