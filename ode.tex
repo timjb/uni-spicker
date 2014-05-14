@@ -514,4 +514,46 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
   \end{itemize}
 \end{satz}
 
+% Beispiel: Graph nähert sich an Rand an, allerdings muss er nicht gegen einen Randpunkt konvergieren
+
+% Kapitel 3. Lineare Differentialgleichungen
+
+% TODO: AWP (3.1) definieren
+
+\begin{prob}
+  Sei $I \subset \R$ und $A : I \to \R^{n \times n}$, $f : I \to \R^n$ stetig. Für $(t_0, y_0) \in I \times \R^n$ betrachten wir das AWP
+  \[
+    (3.1) \left\{ \begin{array}{l}
+    \dot{y}(t) = A(t) \cdot y + f(t)\\
+    y(t_0) = y_0
+    \end{array} \right.
+  \]
+\end{prob}
+
+\begin{satz}
+  Sei $I \subset \R$, $A : I \to \R^{n \times n}$, $f : I \to \R^n$ stetig, $(t_0, y_0) \in I \times \R^n$. Dann besitzt das AWP (3.1) eine eindeutige (globale) Lösung auf $I$.
+\end{satz}
+
+\begin{nota}
+  $\mathcal{C}(I, \R^n) \coloneqq \Set{ u : I \to \R^n }{ u \text{ stetig} }$
+\end{nota}
+
+% Ausgelassen: Definition Untervektorraum
+
+\begin{defn}
+  Eine Teilmenge $M \subset V$ eines Vektorraums $V$ heißt \emph{affiner Teilraum}, wenn es ein $y \in V$ und einen Unterraum $U \subset V$ mit $M = y + U \coloneqq \Set{ y + U }{ u \in U }$ gibt.
+\end{defn}
+
+% 3.2
+\begin{satz}
+  Seien $I \subset \R$ offen, $A : I \to \R^{n \times n}$ stetig. Setze
+  \[ U_h \coloneqq \Set{ y \in \mathcal{C}^1(I, \R^n) }{ \dot{y}(t) = A(t) \cdot y \text{ auf $I$} }. \]
+  Dann ist $U_h$ ein $n$-dimensionaler UVR von $\mathcal{C}^1(I, \R^n)$ und für Funktionen $y_1, ..., y_m \in U_h$ sind äquivalent:
+  \begin{itemize}
+    \item $y_1, ..., y_m$ sind linear unabhängig in $\mathcal{C}^1(I, \R^n)$.
+    \item Es gibt $t^* \in I$, sodass $y_1(t^*), ..., y_m(t^*)$ linear unabh. in $\R^n$ sind.
+    \item Für alle $t \in I$ sind $y_1(t), ..., y_m(t)$ linear unabhängig in $\R^n$.
+  \end{itemize}
+\end{satz}
+
 \end{document}
