@@ -104,6 +104,10 @@
   \[ \fa{U \in \Tau_Y} f^{-1}(U) \in \Tau_X. \]
 \end{defn}
 
+\begin{nota}
+  $\mathcal{C}(X, Y) \coloneqq \Set{ f : X \to Y }{\text{$f$ stetig}}$
+\end{nota}
+
 \begin{bem}
   Ist $f : X \to Y$ stetig und $A \subset X$, so ist auch $f|_A : A \to Y$ stetig.
 \end{bem}
@@ -620,8 +624,8 @@
   Ein topologischer Raum, der das zweite Abzählbarkeitsaxiom erfüllt, ist genau dann metrisierbar, wenn er normal und Hausdorffsch ist.
 \end{satz}
 
-\begin{satz}
-  Sei $X$ ein normaler Raum, $F \subset X$ abgeschlossen. Ist $f : F \to \R$ stetig, so existiert eine stetige Fortsetzung $g : X \to \R$ von $f$ auf $X$, d.\,h. $g|_F = f$, für die außerdem gilt:
+\begin{satz}[Fortsetzungssatz von Tietze]
+  Sei $X$ ein normaler Raum, $F \subset X$ abgeschlossen. Ist $f : F \to \R$ stetig, so existiert eine stetige Fortsetzung $g : X \to \R$ von $f$ auf $X$, d.\,h. $g|_F = f$, für die gilt:
   \[
     \sup_{x \in F} f(x) = \sup_{x \in X} g(x)
     \quad \text{und} \quad
@@ -686,6 +690,58 @@
 
 \begin{prop}
   Ist $f : X \to Y$ eine stetige Abbildung, so ist die induz. Abb. $f^+ : X^+ \to Y^+$ genau dann stetig, wenn $f$ eigentlich ist.
+\end{prop}
+
+% Vorlesung vom 19.5.2014
+
+\begin{defn}
+  Sei $X$ ein normaler Hausdorffraum. Dann ist
+  \[
+    f : X \to \prod_{\phi \in \mathcal{C}} \cinterval{0}{1}, \quad x \mapsto (\phi(x))_{\phi \in \mathcal{C}}
+    \qquad \text{mit } \mathcal{C} \coloneqq \mathcal{C}(X, \cinterval{0}{1})
+  \]
+  eine topologische Einbettung. Dann ist $\beta X \coloneqq \overline{f(X)}$ kompakt. Die Abb. $\beta : X \to \beta X$ heißt \emph{Stone-Čech-Kompaktifizierung} von $X$.
+\end{defn}
+
+\begin{prop}
+  Sei $X$ ein normaler Hausdorffraum und $K$ ein kompakter Hausdorffraum. Dann faktorisiert jede stetige Abbildung $\phi : X \to K$ in eindeutiger Weise über die Stone-Čech-Kompakti- fizierung von $X$, d.\,h. es gibt eine eindeutig bestimmte Abbildung $\pi : \beta X \to K$ mit $\pi \circ \beta = \phi$.
+\end{prop}
+
+\begin{defn}
+  Sei $X$ ein topologischer Raum, $Y$ eine Menge und $f : X \to Y$ surjektiv. Dann ist die \emph{Finaltopologie} auf $Y$ bzgl. $f$ die feinste Topologie, bezüglich der $f$ stetig ist, also
+  \[ U \subset Y \text{ offen} \coloniff f^{-1}(U) \subset X \text{ offen}. \]
+\end{defn}
+
+\begin{defn}
+  Eine surjektive Abbildung $f : X \to Y$ zwischen topologischen Räumen heißt \emph{Identifizierung}, falls die Topologie auf $Y$ genau die Finaltopologie bzgl. $f$ ist.
+\end{defn}
+
+\begin{prop}
+  \begin{itemize}
+    \item Die Verkettung von Identifizierungen ist wieder eine Identifizierung.
+    \item Eine surjektive Abbildung $f : X  \to Y$ ist genau dann eine Identifizierung, falls gilt: Für alle topologischen Räume $Z$ und Abbildungen $g : Y \to X$ ist $g$ genau dann stetig, wenn $g \circ f : X \to Z$ stetig ist.
+  \end{itemize}
+\end{prop}
+
+\begin{defn}
+  Sei $\sim$ eine Äquivalenzrelation auf einem topol. Raum $X$. Dann heißt die Menge $X/\sim$ versehen mit der Finaltopologie bzgl. der Abbildung $p : X \to X/\sim, x \mapsto [x]$ (der \emph{Quotientopologie}) \emph{Quotientenraum}.
+\end{defn}
+
+\begin{bem}
+  Bei der Quotientenbildung bleiben erhalten: Kompaktheit, Zusammenhang, Wegzusammenhang.
+\end{bem}
+
+\begin{acht}
+  Der Quotientenraum von Hausdorffräumen ist nicht unbedingt Hausdorffsch!
+\end{acht}
+
+\begin{nota}
+  Für $\emptyset \not= A \subset X$ ist $X/A \coloneqq X/\sim$ mit
+  \[ x \sim y \enspace \coloniff \enspace (x = y) \vee (\{ x, y \} \subset A) \]
+\end{nota}
+
+\begin{prop}
+  Ist $X$ ein normaler Hausdorffraum und $A \subset X$ abgeschlossen, so ist $X/A$ ebenfalls normal und Hausdorffsch.
 \end{prop}
 
 \end{document}
