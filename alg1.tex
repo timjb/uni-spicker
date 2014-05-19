@@ -499,6 +499,10 @@
   $G_{x'} = g G_x g^{-1}$.
 \end{bem}
 
+\begin{satz}
+  Für eine endliche Gruppe $G$, eine Menge $X$ mit Gruppenwirkung $\phi : G \times X \to X$ gilt: $\abs{Gx} = \frac{\abs{G}}{\abs{G_x}}$.
+\end{satz}
+
 \begin{defn}
   Für eine Untergruppe $H \subset G$ und $g \in G$ heißt
   \begin{itemize}
@@ -517,5 +521,41 @@
 \end{defn}
 
 % Kapitel 1.17. Die alternierende Gruppe
+
+\begin{defn}
+  Seien $i, j \in \{ 1, ..., n \}$ mit $i \not= j$. Dann ist die \emph{Transposition} von $i$ und $j$ die Abbildung, die $i$ und $j$ vertauscht, also
+  \[
+    (ij) : \{ 1, ..., n \} \to \{ 1, ..., n \}, \quad k \mapsto \begin{cases}
+      j, & \text{falls $k = i$,}\\
+      i, & \text{falls $k = j$,}\\
+      k, & \text{sonst}
+    \end{cases}
+  \]
+\end{defn}
+
+\begin{bem}
+  Jede Permutation kann als Komposition von Transpositionen geschrieben werden.
+\end{bem}
+
+\begin{defn}
+  Ein \emph{Fehlstand} einer Permutation $\sigma$ auf $\{ 1, ..., n \}$ ist ein Zahlenpaar $(i, j)$ mit $i < j$ und $\sigma(i) > \sigma(j)$.
+\end{defn}
+
+\begin{defn}
+  Zwei Zahlen $a, b \in \Z$ haben gleiche \emph{Parität}, falls $a \equiv b \pmod{2}$, also $a - b$ gerade ist.
+\end{defn}
+
+\begin{prop}
+  Die Anzahl der Fehlstände einer Permutation $\sigma$ hat die gleiche Parität wie die Anzahl der Transpositionen in einer Darstellung von $\sigma$ als Komposition von Transpositionen.
+\end{prop}
+
+\begin{defn}
+  Die Untergruppe $A_n \subset S_n$ der symmetrischen Gruppe besteht aus allen Transpositionen mit gerader Anzahl an Fehlstellungen und heißt \emph{Alternierende Gruppe}.
+\end{defn}
+
+% TODO: Schlechte Definition ("uns bekannte"). Verbessern!
+\begin{defn}
+  Die \emph{Galoisgruppe} eines Polynoms $f$ ist die Untergruppe von $G \subset S_n$, die alle uns bekannten algebraischen Relationen zwischen den Wurzeln von $f$ enthält.
+\end{defn}
 
 \end{document}
