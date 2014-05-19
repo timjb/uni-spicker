@@ -556,4 +556,50 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
   \end{itemize}
 \end{satz}
 
+% Vorlesung vom 19.5.2014
+
+\begin{defn}
+  Sei $I \subseteq \R$ offen, $A : I \to \R^{n \times n}$ stetig. Eine Menge $y_1, ..., y_n$ von linear unabhängigen Lösungen von $\dot{y} = A(t) \cdot y$ heißt ein \emph{Fundamentalsystem} und $(y_1, ..., y_n)$ \emph{Fundamentalmatrix} der DGL.
+\end{defn}
+
+% 3.3.
+\begin{satz}
+  Seien $I \subseteq \R$ offen, $A : I \to \R^{n \times n}$ stetig.
+  \begin{itemize}
+    \item Jede Fundamentalmatrix von $\dot{y} = A(t) y$ ist invertierbar f.\,a. $t \in I$.
+    \item Jede Fundamentalmatrix $Y : I \to \R^{n \times n}$ ist stetig differenzierbar.
+    \item Die globale eindeutige Lösung von
+    \[
+      \left\{ \begin{array}{l}
+        \dot{y}(t) = A(t) \cdot y\\
+        y(t_0) = y_0
+        \end{array} 
+      \right.
+    \]
+    ist gegeben durch $y(t) = y(t) \left( Y(t_0) \right)^{-1} y_0$.
+  \end{itemize}
+\end{satz}
+
+% 3.4.
+\begin{satz}%[Struktur des Lösungsraums]
+  Seien $I \subseteq \R$, $A : \R^{n \times n}$, $f : I \to \R^n$ stetig, $U_h$ wie oben und $U \coloneqq \Set{ y \in \mathcal{C}^1(I, \R^n) }{ \dot{y} = A(t) y + f }$. Dann gilt:
+  \begin{itemize}
+    \item $U$ ist nicht leer.
+    \item Ist $y_p \in U$ eine partikuläre Lösung, dann ist $U = y_p + U_h$, d.\,h. $U$ ist affiner Unterraum von $\mathcal{C}^1(I, \R^n)$.
+    \item Sei $y_p, \tilde{y}_p \in U$, dann ist $y_p - \tilde{y}_p \in U_h$.
+  \end{itemize}
+\end{satz}
+
+% 3.5.
+\begin{satz}[Variation der Konstanten]
+  Sei $I \subseteq \R$ offen, $A : I \to \R^{n \times n}$, $f : I \to \R^n$ stetig. Sei $Y(t)$ die Fundamentalmatrix. Dann gilt:
+  \begin{itemize}
+    \item Eine partikuläre Lösung von $\dot{y} = A(t) y + f(t)$ ist gegeben durch
+    \[ y_p(t) \coloneqq \Int{t_0}{t}{Y(t) (Y(s))^{-1} f(s)}{s} \quad t_0 \in I. \]
+    \item Es gilt $U = \Set{ \Int{t_0}{t}{Y(t) (Y(s))^{-1} f(s)}{s} + Y(t) c }{ c \in \R^n }$
+    \item Die globale eindeutige Lsg vom AWP (3.1) ist gegeben durch
+    \[ y(t) \coloneqq Y(t) (Y(t_0))^{-1} y_0 + \Int{t_0}{t}{Y(t) (Y(s))^{-1} f(s)}{s}, \quad t \in I. \]
+  \end{itemize}
+\end{satz}
+
 \end{document}
