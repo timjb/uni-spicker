@@ -724,7 +724,7 @@
 \end{prop}
 
 \begin{defn}
-  Sei $\sim$ eine Äquivalenzrelation auf einem topol. Raum $X$. Dann heißt die Menge $X/\sim$ versehen mit der Finaltopologie bzgl. der Abbildung $p : X \to X/\sim, x \mapsto [x]$ (der \emph{Quotientopologie}) \emph{Quotientenraum}.
+  Sei ${\sim}$ eine Äquivalenzrelation auf einem topol. Raum $X$. Dann heißt die Menge $X/{\sim}$ versehen mit der Finaltopologie bzgl. der Abbildung $p : X \to X/{\sim}, x \mapsto [x]$ (der \emph{Quotientopologie}) \emph{Quotientenraum}.
 \end{defn}
 
 \begin{bem}
@@ -736,12 +736,116 @@
 \end{acht}
 
 \begin{nota}
-  Für $\emptyset \not= A \subset X$ ist $X/A \coloneqq X/\sim$ mit
+  Für $\emptyset \not= A \subset X$ ist $X/A \coloneqq X/{\sim}$ mit
   \[ x \sim y \enspace \coloniff \enspace (x = y) \vee (\{ x, y \} \subset A) \]
 \end{nota}
 
 \begin{prop}
   Ist $X$ ein normaler Hausdorffraum und $A \subset X$ abgeschlossen, so ist $X/A$ ebenfalls normal und Hausdorffsch.
+\end{prop}
+
+% Vorlesung vom 21.5.2014
+
+\begin{defn}
+  Die \emph{reellen projektiven Räume} sind definiert als
+  \[ \R P^n \coloneqq S^n/{\sim} \qquad \text{mit } x \sim y \coloniff x = \pm y. \]
+\end{defn}
+
+\begin{prop}
+  $\R P^n$ ist kompakt und Hausdorffsch.
+\end{prop}
+
+\begin{bem}
+  Mit $D^n \coloneqq \overline{B_1(0)} \subset \R^n$ gilt
+  \[ D^n / {\sim} = \R P^n \qquad \text{mit } x \sim y \coloniff (\{ x, y \} \subset \partial D) \wedge (x = \pm y). \]
+\end{bem}
+
+% $\R P^n = \R P^{n-1} \cup_{\phi} D^n$: $D^n$ an $\R P^{n-1}$ "`angeklebt"' vermöge $S^{n-1} \to \R P^{n-1}, x \mapsto [x]$
+
+\begin{bsp}
+  Möbiusband: $M \coloneqq \cinterval{0}{1} \times \cinterval{-1}{1} / (0, t) \sim (1, -t)$
+\end{bsp}
+
+% Ausgelassen: $M \cong \R P^2 \setminus p(A)$, wobei $A \subset S^2$ eine offene Kappe um den Nordpol und $p : S^2 \to \R P^2$ ist. Begründung: $\R P^2 \setminus p(A) \cong S^1 \times \cinterval{-1}{1} / (x, t) \sim (-x, -t)$. Betrachte $\phi : \cinterval{0}{1} \times \cinterval{-1}{1} \to S^1 \times \cinterval{-1}{1} / {\sim}, \quad (x, t) \mapsto (e^{i \pi x}, t)$. Die Abb. $\phi$ faktorisiert über M
+
+\begin{defn}
+  Seien $X, Y$ topologische Räume, $A \subset X$ und $f : A \to Y$ stetig. Sei ${\sim}$ die kleinste Äquivalenzrelation auf $X \sqcup Y$, für die $a \sim f(a)$ für alle $a \in A$ gilt. Dann heißt
+  \[
+    Y \cup_f X \coloneqq (X \sqcup Y) / {\sim}
+    \qquad \text{\emph{Anheftung von $X$ entlang $f$.}}
+  \]
+\end{defn}
+
+\begin{prop}
+  Ist $Y \cup_f X$ ein Anhefungsraum und $A \subset X$ abgeschlossen, so ist $Y \hookrightarrow Y \cup_f X, y \mapsto [y]$ ein Homöomorphismus auf einen abgeschlossenen Teilraum und $X \setminus A \hookrightarrow Y \cup_f X, x \mapsto [x]$ ist ein Homöomorphismus auf einen offenen Teilraum.
+\end{prop}
+
+\begin{defn}
+  Für $f : X \to Y$ stetig und $f_0 : X \times \{ 0 \} \to Y, (x, \_) \mapsto f(x)$ heißt
+  \[
+    Z_f = Y \cup_{f_0} (X \times \cinterval{0}{1})
+    \qquad \text{\emph{Abbildungszylinder} $Z_f$ von $f$.}
+  \]
+  Man identifiziert $X$ mit $X \times \{ 1 \} \subset Z_f$.
+\end{defn}
+
+\begin{defn}
+  $C_f \coloneqq Z_f / (X \times \{ 1 \})$ heißt \emph{Abbildungskegel}.
+\end{defn}
+
+\begin{defn}
+  Ein \emph{abstrakter Simplizialkomplex} ist ein Paar $(X, \Sigma)$ bestehend aus einer total geordneten Menge $X$ und einer Teilmengen $\Sigma \subset \mathcal{P}(X)$ (genannt Menge der \emph{abstrakten Simplizes}), sodass gilt:
+  \begin{itemize}
+    \item Jedes Simplex $\sigma \in \Sigma$ ist nichtleer und endlich.
+    \item Für jede nichtleere Teilmenge $\tilde{\sigma} \subset \sigma \in \Sigma$ gilt $\tilde{\sigma} \in \Sigma$.
+    \item Jedes Element von $X$ ist in mindestens einem Simplex enthalten, also $\bigcup_{\sigma \in \Sigma} \sigma = X$.
+  \end{itemize}
+\end{defn}
+
+\begin{defn}
+  \begin{itemize}
+    \item Für $\sigma \in \Sigma$ heißt $\dim(\sigma) \coloneqq \abs{\sigma} - 1$ die \emph{Dimension} von $\sigma$.
+    \item Teilmengen von $\sigma$ heißen \emph{Seiten} von $\sigma$.
+    \item Nulldimensionale Simplizes heißen \emph{Ecken}, eindimensionale Simplizes \emph{Kanten}.
+    \item Der Simplizialkomplex $(X, \Sigma)$ heißt \emph{endlich}, wenn $X$ endlich ist.
+  \end{itemize}
+\end{defn}
+
+\begin{nota}
+  $[n] \coloneqq \{ 0, 1, ..., n \}$ für $n \in \N$
+\end{nota}
+
+\begin{defn}
+  $\Delta^n_{\text{abstr}} \coloneqq ([n], \mathcal{P}([n]))$ heißt \emph{volles $n$-dim. Simplex}
+\end{defn}
+
+\begin{defn}
+  Für $v_0, ..., v_k \in \R^n$ heißt
+  \[ \langle v_0, ..., v_n \rangle \coloneqq \Set{ t_0 v_0 + ... + t_n v_n }{ 0 \leq t_0, ..., t_n \text{ und } t_0 + ... + t_n = 1 } \]
+  von den Vektoren $v_0, ... v_k$ \emph{aufgespanntes $k$-Simplex}. Falls $v_0, ..., v_k$ nicht affin unabhängig, so ist der $k$-Simplex degeneriert. Ist dies nicht der Fall, so ist jeder Punkt eindeutig durch die \emph{baryzentrischen Koordinaten} $t_0, ..., t_n$ identifiziert.
+\end{defn}
+
+\begin{defn}
+  $\Delta^n \coloneqq \langle e_0, ..., e_n \rangle \subset \R^{n+1}$ heißt \emph{Standard-$n$-Simplex}, wobei $e_0, ..., e_n$ die Einheitsvektoren in $\R^{n+1}$ bezeichnen.
+\end{defn}
+
+\begin{bem}
+  Für $k \leq n$ induziert jede ordnungserhaltende Abbildung $\phi : [k] \to [n]$ eine Einbettung durch
+  \[ i_\phi : \Delta^k \to \Delta^n, \quad \sum_{i=0}^k t_i e_i \mapsto \sum_{i=0}^k t_{\phi(i)} e_{\phi(i)}. \]
+\end{bem}
+
+\begin{defn}
+  Für einen abstrakten Simplizialkomplex $(X, \Sigma)$ heißt
+  \[ \abs{\Sigma} \coloneqq T / {\sim} \coloneqq \left( \coprod_{\sigma \in \Sigma} \Delta_\sigma \right) / {\sim} \]
+  mit $\Delta_\sigma \coloneqq \Delta^{\dim \sigma} = \Delta^{\abs{\sigma} - 1}$ und der Äquivalenzrelation ${\sim}$, die für alle Simplizes $\tau \subseteq \sigma \in \Sigma$ und der durch die Totalordnung auf $X$ induzierten ordnungserhaltenden Abbildung $\phi : [ \dim \tau ] \to [ \dim \sigma ]$ alle Punkte $x \in \Delta_\tau$ mit $i_\phi(x) \in \Delta_{\sigma}$ identifiziert, \emph{geometrische Realisierung} von $\Sigma$.
+\end{defn}
+
+\begin{bem}
+  Offensichtlich ist $\abs{\Sigma}$ immer normal und kompakt genau dann, wenn der abstrakte Komplex $\Sigma$ endlich ist.
+\end{bem}
+
+\begin{prop}
+  $\abs{\Delta^n_{\text{abstr}}} = \Delta^n$.
 \end{prop}
 
 \end{document}
