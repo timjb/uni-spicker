@@ -602,4 +602,39 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
   \end{itemize}
 \end{satz}
 
+% Vorlesungvom 21.5.2014
+
+\begin{defn}
+  Die Matrix-Expontentialfunktion ist definiert als
+  \[ \exp : \R^{n \times n} \to \R^{n \times n}, \qquad A \mapsto e^A \coloneqq \sum_{k=0}^\infty \frac{A^k}{k!}. \]
+\end{defn}
+
+% 3.6.
+\begin{satz}
+  Seien $A, B \in \R^{n \times n}$. Dann gilt:
+  \begin{itemize}
+    \item Falls $A$ und $B$ kommutieren, d.\,h. $AB = BA$, dann gilt
+    \[ e^{A+B} = e^A \cdot e^B = e^B \cdot e^A. \]
+    \item Aus $e^{t(A + B)} = e^{tA} \cdot e^{tB}$ für alle $t \in \R$ folgt $AB = BA$.
+    \item $e^{A}$ ist invertierbar mit $(e^A)^{-1} = e^{-A}$.
+    \item Wenn $B$ invertierbar ist, dann gilt $e^{B^{-1}AB} = B^{-1} e^A B$.
+    \item Ist $A$ eine Diagonalmatrix mit Einträgen $\lambda_1, ..., \lambda_n$, so gilt
+    \[ e^A = \begin{pmatrix} e^{\lambda_1} & \cdots & 0 \\ \vdots & \ddots & \vdots \\ 0 & \cdots & e^{\lambda_n} \end{pmatrix} \]
+    \miniitem{0.38 \linewidth}{$e^{(t+s)A} = e^{tA} \cdot e^{sA}$}
+    \miniitem{0.48 \linewidth}{$e^{t(A + \lambda I)} = e^{\lambda t} \cdot e^{t A}$}
+  \end{itemize}
+\end{satz}
+
+% 3.7.
+\begin{satz}
+  Sei $A \in \R^{n \times n}$ diagonalisierbar, d.\,h. es existiere eine Basis aus Eigenvektoren $s_1, ..., s_n \in \C^n$ zu den Eigenwerten $\lambda_1, ..., \lambda_n \in \C$ sodass $S^{-1} A S =: D$ mit $S \coloneqq (s_1, ..., s_n)$ diagonal mit Einträgen $\lambda_1, ..., \lambda_n$ ist. Dann gilt
+  \[ e^{tA} = S e^{tD} S^{-1} = S \begin{pmatrix} e^{\lambda_1} & \cdots & 0 \\ \vdots & \ddots & \vdots \\ 0 & \cdots & e^{\lambda_n} \end{pmatrix} S^{-1} \]
+\end{satz}
+
+\begin{bem}
+  Wenn $e^{tA}$ eine Fundamentalmatrix ist, dann ist auch $e^{tA} S = S e^{tD}$ eine Fundamentalmatrix.
+\end{bem}
+
+% Ausgelassen: Zwei Beispiele
+
 \end{document}
