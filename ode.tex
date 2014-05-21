@@ -192,10 +192,12 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
 
 \begin{defn}
   Sei $\D \subset \R \times \R^n$ offen, $f : \D \to \R^n$ und $(t_0, y_0) \in \D$. Dann ist ein \emph{Anfangswertproblem} (AWP) gegeben durch die Gleichungen
-  \begin{align}
-    \dot{y}(t) = f(t, y(t)), \qquad
-    y(t_0) = y_0. \tag{1.1}
-  \end{align}
+  \[
+    (1.1) \left\{ \begin{array}{ll}
+      \dot{y}(t) = f(t, y(t)), \\
+      y(t_0) = y_0.
+    \end{array} \right.
+  \]
 \end{defn}
 
 \begin{nota}
@@ -462,7 +464,7 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
 % Vorlesung vom 30.4.2014
 
 \begin{satz}[Picard-Lindelöf, lokal quantitativ]
-  Seien $\D \subset \R \times \R^n$ offen, $f : \D \to \R^n$ stetig, $(t_0, y_0) {\in} \D$ und $R_{a,b} {\coloneqq} \cinterval{ t_0 {-} a }{ t_0 {+} a } \times \overline{B_b}(y_0) \subset \D$. Sei $f$ Lipschitz-stetig bzgl. $y$ auf $R_{a,b}$. Dann besitzt das AWP (2.1) im Rechteck $R_{a,b}$ genau eine Lösung $y : I_y \to \R^n$ auf $I_{\gamma} \coloneqq \cinterval{t_0 - y}{t_0 + y}$ mit $\gamma = \min(a, \tfrac{b}{M})$ und $M = \sup_{\mathclap{(t,y) \in R_{a,b}}} \norm{f(t, y)}$.
+  Seien $\D \subset \R \times \R^n$ offen, $f : \D \to \R^n$ stetig, $(t_0, y_0) {\in} \D$ und $R_{a,b} {\coloneqq} \cinterval{ t_0 {-} a }{ t_0 {+} a } \times \overline{B_b}(y_0) \subset \D$. Sei $f$ Lipschitz-stetig bzgl. $y$ auf $R_{a,b}$. Dann besitzt das AWP (1.1) im Rechteck $R_{a,b}$ genau eine Lösung $y : I_y \to \R^n$ auf $I_{\gamma} \coloneqq \cinterval{t_0 - y}{t_0 + y}$ mit $\gamma = \min(a, \tfrac{b}{M})$ und $M = \sup_{\mathclap{(t,y) \in R_{a,b}}} \norm{f(t, y)}$.
 \end{satz}
 
 \begin{bem}
@@ -477,14 +479,14 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
 % Vorlesung vom 5.5.2014
 
 \begin{satz}[Picard-Lindelöf, lokal qualitativ]
-  Seien $\D \subset \R \times \R^n$ offen, $f : \D \to \R^n$ stetig, lokal Lipschitz-stetig bzgl. $y$ auf $\D$, $(t_0, y_0) \in \D$. Dann besitzt das AWP (2.1) eine eindeutige lokale Lösung, d.\,h. es existiert $\gamma = \gamma(t_0, y_0) > 0$, sodass das AWP (2.1) auf $I_\gamma \coloneqq \cinterval{t_0 - \gamma}{t_0 + \gamma}$ genau eine Lösung besitzt.
+  Seien $\D \subset \R \times \R^n$ offen, $f : \D \to \R^n$ stetig, lokal Lipschitz-stetig bzgl. $y$ auf $\D$, $(t_0, y_0) \in \D$. Dann besitzt das AWP (1.1) eine eindeutige lokale Lösung, d.\,h. es existiert $\gamma = \gamma(t_0, y_0) > 0$, sodass das AWP (1.1) auf $I_\gamma \coloneqq \cinterval{t_0 - \gamma}{t_0 + \gamma}$ genau eine Lösung besitzt.
 \end{satz}
 
 \begin{satz}[Picard-Lindelöf, global]
   Seien $\D \subset \R \times \R^n$ offen, $f : \D \to \R^n$ stetig, lokal Lipschitz-stetig bzgl. $y$ auf $\D$, $(t_0, y_0) \in \D$. Dann gibt es ein eindeutig bestimmtes offenes Intervall $I = \ointerval{a_-}{a_+}$ mit $t_0 {\in} I$ und
   \begin{itemize}
-    \item Das AWP (2.1) besitzt genau eine Lösung $\gamma$ auf $I$.
-    \item Ist $\tilde{z} : \tilde{I} \to \R^n$ eine beliebige Lösung von (2.1) mit $t_0 \in \tilde{I}$, so gilt $\tilde{I} \subseteq I$ und $z = y|_{\tilde{I}}$.
+    \item Das AWP (1.1) besitzt genau eine Lösung $\gamma$ auf $I$.
+    \item Ist $\tilde{z} : \tilde{I} \to \R^n$ eine beliebige Lösung von (1.1) mit $t_0 \in \tilde{I}$, so gilt $\tilde{I} \subseteq I$ und $z = y|_{\tilde{I}}$.
   \end{itemize}
 \end{satz}
 
@@ -492,12 +494,12 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
 
 % 2.9.
 \begin{satz}
-  Sei $I \subset \R$ ein offenes Intervall, $f : I \times \R^n \to \R^n$ stetig, $(t_0, y_0) \in I \times \R^n$. Falls $f$ für jedes kompaktes Intervall $\tilde{I} \subset I$ global Lipschitz-stetig bzgl. $y$ auf $\tilde{I} \times \R^n$ ist, dann hat das AWP (2.1) genau eine globale Lösung $y$ auf $I$.
+  Sei $I \subset \R$ ein offenes Intervall, $f : I \times \R^n \to \R^n$ stetig, $(t_0, y_0) \in I \times \R^n$. Falls $f$ für jedes kompaktes Intervall $\tilde{I} \subset I$ global Lipschitz-stetig bzgl. $y$ auf $\tilde{I} \times \R^n$ ist, dann hat das AWP (1.1) genau eine globale Lösung $y$ auf $I$.
 \end{satz}
 
 % 2.10.
 \begin{satz}
-  Sei $I \subset \R$ offen, $f : I \times \R^n \to \R^n$ stetig, lokal Lipschitz-stetig bzgl. $y$ auf $I \times \R^n$, $(t_0, y_0) \in I \times \R^n$. Ist das Wachstum von $f$ linear beschränkt in $y$ auf $I \times \R^n$, d.\,h. gibt es stetige Funktionen $a, b : I \to \cointerval{0}{\infty}$ mit $\norm{f(t, y)} \leq a(t) \norm{y} + b(t)$ für alle $(t, y) \in I \times \R^n$, dann besitzt das AWP (2.1) eine eindeutige Lösung auf $I$.
+  Sei $I \subset \R$ offen, $f : I \times \R^n \to \R^n$ stetig, lokal Lipschitz-stetig bzgl. $y$ auf $I \times \R^n$, $(t_0, y_0) \in I \times \R^n$. Ist das Wachstum von $f$ linear beschränkt in $y$ auf $I \times \R^n$, d.\,h. gibt es stetige Funktionen $a, b : I \to \cointerval{0}{\infty}$ mit $\norm{f(t, y)} \leq a(t) \norm{y} + b(t)$ für alle $(t, y) \in I \times \R^n$, dann besitzt das AWP (1.1) eine eindeutige Lösung auf $I$.
 \end{satz}
 
 % Vorlesung vom 12.5.2014
@@ -505,7 +507,7 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
 % Ausgelassen: Beispiele zum Randverhalten
 
 \begin{satz}[Randverhalten maximaler Lösungen]
-  Sei $\D \subset \R \times \R^n$ offen, $(t_0, y_0) \in \D$ und $f : \D \to \R^n$ stetig und lokal Lipschitz-stetig bzgl. $y$. Sei $y : \ointerval{a_-}{a_+} \to \R^n$ eine maximale Lösung des AWP (2.1).
+  Sei $\D \subset \R \times \R^n$ offen, $(t_0, y_0) \in \D$ und $f : \D \to \R^n$ stetig und lokal Lipschitz-stetig bzgl. $y$. Sei $y : \ointerval{a_-}{a_+} \to \R^n$ eine maximale Lösung des AWP (1.1).
   \begin{itemize}
     \item Ist $a_+ < \infty$, so ist $y$ auf $\cointerval{t_0}{a_+}$ unbeschränkt
     oder der Rand $\partial \D$ ist nicht
