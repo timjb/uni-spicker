@@ -7,6 +7,7 @@
 
 \newcommand{\Tau}{\mathcal{T}} % Großes Tau
 \newcommand{\inte}{\mathop{\mathrm{int}}} % Inneres (interior)
+\newcommand{\conv}{\mathop{\mathrm{conv}}} % Konvexe Hülle
 
 % Kleinere Klammern
 \delimiterfactor=701
@@ -847,5 +848,71 @@
 \begin{prop}
   $\abs{\Delta^n_{\text{abstr}}} = \Delta^n$.
 \end{prop}
+
+% Vorlesung vom 26.05.2014
+
+\begin{defn}
+  $\partial \Delta^n \coloneqq \Set{ \sum_{i=0}^n t_i e_i }{ 0 \leq t_i, \sum_{i=0}^n t_i = 1, t_j = 0 \text{ für ein } j } \subset \R^{n+1}$
+\end{defn}
+
+\begin{prop}
+  $\abs{([n], \mathcal{P}([n]) \setminus \{ [n] \})} \cong \partial \Delta^n$.
+\end{prop}
+
+\begin{defn}
+  Ein topologischer Raum heißt \emph{triangulierbar}, wenn er homöomorph zu einem geometrischen Simpliziealkomplex ist.\\
+  Den Homöomorphismus bezeichnet man als \emph{Triangulierung}.
+\end{defn}
+
+\begin{bsp}
+  $S^n \cong \partial \Delta^{n+1}$
+\end{bsp}
+
+\begin{defn}
+  Eine Teilmenge $K \subset \R^n$ heißt \emph{konvex}, falls mit je zwei Punkten $x, y \in K$ auch die Verbindungsstrecke $\Set{tx + (1-t)y}{ 0 \leq t \leq 1 }$ in $K$ liegt. Ist $K$ außerdem abgeschlossen, so heißt $K$ \emph{konvexer Körper} im $\R^n$.
+\end{defn}
+
+\begin{defn}
+  Für $A \subset \R^n$ ist die \emph{konvexe Hülle} von $A$ definiert durch
+  \[ \conv A \coloneqq \bigcap \enspace \Set{X \subset \R^n}{X \text{ konvex und } A \subset X}. \]
+\end{defn}
+
+\begin{prop}
+  Sei $K \subset \R^n$ ein konvexer Körper und $0 \in \inte(K)$. Dann schneidet jeder Strahl im $\R^n$ mit Anfangspunkt $0$ den Rand von $K$ in höchstens einem Punkt. Ist $K$ zusätzlich beschränkt (also kompakt und ein konvexer Körper), dann schneidet jeder Strahl den Rand von $K$ in genau einem Punkt.
+\end{prop}
+
+\begin{prop}
+  Jeder beschränkte konvexe Körper $K \subset \R^n$ mit $0 \in \inte(K)$ ist homöomorph zu $S^{n-1}$ vermöge
+  \[ f : \partial K \to S^{n-1}, \quad x \mapsto \frac{x}{\norm{x}}. \]
+\end{prop}
+
+\begin{nota}
+  $D^n \coloneqq \overline{B_1(0)} \subset \R^n$.
+\end{nota}
+
+\begin{prop}
+  Sei $K \subset \R^n$ ein kompakter konvexer Körper mit $\inte(K) \not= \emptyset$. Dann gilt $\partial K \cong \partial D^n$ und $K \cong D^n$.
+\end{prop}
+
+\begin{kor}
+  $\Delta^n \cong D^n$ und $\partial \Delta^n \cong S^{n-1}$.
+\end{kor}
+
+\begin{prop}
+  Sei $S = (X, \Sigma)$ ein endlicher abstrakter Simplizialkomplex, also $X = \{ 1, 2, 3, ..., n \}$ und seien $x_1, ..., x_n \in \R^n$ affin unabhängig. Dann ist die Vereinigung all jener affinen Simplizes
+  \[
+    \langle x_{i_1}, ..., x_{i_k} \rangle \subset \R^n \quad
+    \text{mit $\{ i_1, ..., i_k \} \in \Sigma$} \qquad
+    \text{homöomorph zu $\abs{S}$.}
+  \]
+\end{prop}
+
+\begin{defn}
+  Eine Teilmenge $T \subset \R^n$ heißt \emph{(geometrischer) Simplizialkomplex}, falls $T$ Vereinigung von affinen Simplizes $\sigma_i \subset \R^n$, $i \in I$ mit der folgenden Eigenschaft ist: Der Schnitt $\sigma_i \cap \sigma_j$ zweier dieser Simplizes ist entweder leer oder eine gemeinsame Seite von $\sigma_i$ und $\sigma_j$.
+\end{defn}
+
+\begin{bem}
+  In diesem Fall ist $T$ homöomorph zur geometrischen Realisierung eines abstrakten Simplizialkomplexes.
+\end{bem}
 
 \end{document}
