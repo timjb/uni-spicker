@@ -118,7 +118,7 @@
 \end{defn}
 
 \begin{defn}
-  Zwei topologische Räume $X$ und $Y$ heißen \emph{homöomorph} (notiert $X \cong Y$), wenn ein Homöomorphismus zwischen $X$ und $Y$ existiert.
+  Zwei topologische Räume $X$ und $Y$ heißen \emph{homöomorph} (notiert $X \approx Y$), wenn ein Homöomorphismus zwischen $X$ und $Y$ existiert.
 \end{defn}
 
 \begin{satz}
@@ -415,7 +415,7 @@
 
 \begin{acht}
   Vollständigkeit ist keine Homöomorphieinvariante!
-  % Gegenbeispiel: $\ointerval{0}{1} \cong \R$, aber $\R$ ist vollständig, $\ointerval{0}{1}$ ist es nicht
+  % Gegenbeispiel: $\ointerval{0}{1} \approx \R$, aber $\R$ ist vollständig, $\ointerval{0}{1}$ ist es nicht
 \end{acht}
 
 \begin{defn}
@@ -668,11 +668,11 @@
 \end{bem}
 
 \begin{prop}
-  Sei $X$ ein lokalkompakter Hausdorffraum, $Y$ ein kompakter Hausdorffraum, $p \in Y$ und $X$ homöomorph zu $Y \setminus \{ p \}$. Dann ist $X^+ \cong Y$.
+  Sei $X$ ein lokalkompakter Hausdorffraum, $Y$ ein kompakter Hausdorffraum, $p \in Y$ und $X$ homöomorph zu $Y \setminus \{ p \}$. Dann ist $X^+ \approx Y$.
 \end{prop}
 
 \begin{kor}
-  $S^n \cong \left(\R^n\right)^+$
+  $S^n \approx \left(\R^n\right)^+$
 \end{kor}
 
 \begin{nota}
@@ -767,7 +767,7 @@
   Möbiusband: $M \coloneqq \cinterval{0}{1} \times \cinterval{-1}{1} / (0, t) \sim (1, -t)$
 \end{bsp}
 
-% Ausgelassen: $M \cong \R P^2 \setminus p(A)$, wobei $A \subset S^2$ eine offene Kappe um den Nordpol und $p : S^2 \to \R P^2$ ist. Begründung: $\R P^2 \setminus p(A) \cong S^1 \times \cinterval{-1}{1} / (x, t) \sim (-x, -t)$. Betrachte $\phi : \cinterval{0}{1} \times \cinterval{-1}{1} \to S^1 \times \cinterval{-1}{1} / {\sim}, \quad (x, t) \mapsto (e^{i \pi x}, t)$. Die Abb. $\phi$ faktorisiert über M
+% Ausgelassen: $M \approx \R P^2 \setminus p(A)$, wobei $A \subset S^2$ eine offene Kappe um den Nordpol und $p : S^2 \to \R P^2$ ist. Begründung: $\R P^2 \setminus p(A) \approx S^1 \times \cinterval{-1}{1} / (x, t) \sim (-x, -t)$. Betrachte $\phi : \cinterval{0}{1} \times \cinterval{-1}{1} \to S^1 \times \cinterval{-1}{1} / {\sim}, \quad (x, t) \mapsto (e^{i \pi x}, t)$. Die Abb. $\phi$ faktorisiert über M
 
 \begin{defn}
   Seien $X, Y$ topologische Räume, $A \subset X$ und $f : A \to Y$ stetig. Sei ${\sim}$ die kleinste Äquivalenzrelation auf $X \sqcup Y$, für die $a \sim f(a)$ für alle $a \in A$ gilt. Dann heißt
@@ -856,7 +856,7 @@
 \end{defn}
 
 \begin{prop}
-  $\abs{([n], \mathcal{P}([n]) \setminus \{ [n] \})} \cong \partial \Delta^n$.
+  $\abs{([n], \mathcal{P}([n]) \setminus \{ [n] \})} \approx \partial \Delta^n$.
 \end{prop}
 
 \begin{defn}
@@ -865,7 +865,7 @@
 \end{defn}
 
 \begin{bsp}
-  $S^n \cong \partial \Delta^{n+1}$
+  $S^n \approx \partial \Delta^{n+1}$
 \end{bsp}
 
 \begin{defn}
@@ -891,11 +891,11 @@
 \end{nota}
 
 \begin{prop}
-  Sei $K \subset \R^n$ ein kompakter konvexer Körper mit $\inte(K) \not= \emptyset$. Dann gilt $\partial K \cong \partial D^n$ und $K \cong D^n$.
+  Sei $K \subset \R^n$ ein kompakter konvexer Körper mit $\inte(K) \not= \emptyset$. Dann gilt $\partial K \approx \partial D^n$ und $K \approx D^n$.
 \end{prop}
 
 \begin{kor}
-  $\Delta^n \cong D^n$ und $\partial \Delta^n \cong S^{n-1}$.
+  $\Delta^n \approx D^n$ und $\partial \Delta^n \approx S^{n-1}$.
 \end{kor}
 
 \begin{prop}
@@ -914,5 +914,80 @@
 \begin{bem}
   In diesem Fall ist $T$ homöomorph zur geometrischen Realisierung eines abstrakten Simplizialkomplexes.
 \end{bem}
+
+% Vorlesung vom 28.5.2014
+
+\begin{defn}
+  Zwei stetige Abbildungen $f, g : X \to Y$ heißen zueinander \emph{homotop} (geschrieben $f \simeq g$), falls es eine stetige Abbildung
+  \[ H : X \times \cinterval{0}{1} \to Y \]
+  mit $H(\blank, 0) = f$ und $H(\blank, 1) = g$ gibt.
+\end{defn}
+
+% "`Stückelungslemma"'
+\begin{lem}
+  Sei $X$ ein topologischer Raum, $X = C_1 \cup ... \cup C_n$ wobei $C_i \subset X$ abgeschlossen, seien $f_i : C_i \to Y$ stetig mit
+  \[ \fa{i, j \in \{ 1, ..., n \}} f_i|_{C_i \cap C_j} = f_j|_{C_i \cap C_j}. \]
+  Dann ist $F : X \to Y, x \mapsto f_i(x), x \in C_i$ stetig.
+\end{lem}
+
+\begin{prop}
+  \begin{itemize}
+    \item Homotopie ist eine Äquivalenzrelation.
+    \item Seien $f, g : X \to Y$, $h : X' \to X$, $k : Y \to Y'$ stetige Abbildungen. Gilt $f \simeq g$, so auch $k \circ f \circ h \simeq k \circ g \circ h$.
+  \end{itemize}
+\end{prop}
+
+\begin{bsp}
+  \begin{itemize}
+    \item Für $Y \subset \R^n$ konvex sind je zwei Abbildungen $f, g : X \to Y$ zueinander homotop mittels der \emph{linearen Homotopie}
+    \[ H : X \times \cinterval{0}{1} \to Y, \quad (x, t) \mapsto t g(x) + (1-t) f(x). \]
+    \item Für $X = \{ p \}$ einpunktig sind Homtopien $H : X \times \cinterval{0}{1} \to Y$ nichts anderes als Wege in $Y$. % Wege können hintereinander durchlaufen werden.
+  \end{itemize}
+\end{bsp}
+
+\begin{defn}
+  Eine stetige Abbildung $f : X \to Y$ ist eine \emph{Homotopie- äquivalenz}, falls ein stetiges $g : Y \to X$ existiert mit $g \circ f \simeq \id_X$ und $f \circ g \simeq \id_Y$. Dieses $g$ heißt \emph{Homotopieinverses} zu $f$.
+\end{defn}
+
+\begin{defn}
+  Existiert eine Homotopieäquivalenz $f : X \to Y$, so heißen $X$ und $Y$ \emph{homotopieäquivalent}, geschrieben $X \simeq Y$.
+\end{defn}
+
+\begin{bem}
+  Dies definiert eine Äquivalenzrelation auf der Klasse der topologischen Räume. Ihre Äquivalenzklassen heißen \emph{Homotopietypen}.
+\end{bem}
+
+\begin{defn}
+  Ein topologischer Raum heißt \emph{kontrahierbar}, wenn er homotopieäquivalent zum einpunktigen Raum ist.
+\end{defn}
+
+\begin{lem}
+  Sei $X, Y$ topologische Räume und $Y$ kontrahierbar. Dann sind alle stetigen Abbildungen $X \to Y$ homotop.
+\end{lem}
+
+\begin{kor}
+  Kontrahierbare Räume sind wegzusammenhängend.
+\end{kor}
+
+\begin{prop}
+  Die Sphären $S^n \subset \R^{n+1}$ sind nicht kontrahierbar.
+\end{prop}
+
+\begin{defn}
+  Sei $X$ ein topologischer Raum und $A \subset X$. Dann heißt $A$
+  \begin{itemize}
+    \item \emph{Retrakt} von $X$, falls es eine \emph{Retraktion} $r : X \to A$ gibt, d.\,h. $r$ ist stetig und $r|_A = \id_A$.
+    \item \emph{Deformationsretrakt} von $X$, falls es eine Retraktion $r : X \to A$ gibt, sodass $i \circ r \simeq \id_X$. Dabei ist $i : A \to X$ die Inklusion.
+    \item \emph{starken Deformationsretrakt} von $X$, falls es eine Retraktion $r : X \to A$ gibt, sodass $i \circ r \simeq \id_X$ mittels einer Homotopie, die die Punkte in $A$ nicht bewegt.
+  \end{itemize}
+\end{defn}
+
+\begin{bem}
+  Ist $A \subset X$ ein Deformationsretrakt, so sind $A$ und $X$ homotopieäquivalent.
+\end{bem}
+
+\begin{bsp}
+  Sei $f : X \to Y$ stetig. Dann ist $Y$ ein starker Deformationsretrakt des Abbildungszylinders $Z_f$
+\end{bsp}
 
 \end{document}
