@@ -167,12 +167,12 @@
   \hidewidth\raise.1ex\hbox{$\bullet\mkern.5mu$}\cr}}}
 
 % Offene, geschlossene, halboffene Intervalle
-\newcommand{\ointerval}[2]{\left] #1, #2 \right[} % open interval
+\newcommand{\ointerval}[2]{\left( #1, #2 \right)} % open interval
 \newcommand{\oointerval}[2]{\ointerval{#1}{#2}} % open interval (synonym)
 \newcommand{\cinterval}[2]{\left[ #1, #2 \right]} % closed interval
 \newcommand{\ccinterval}[2]{\cinterval{#1}{#2}} % closed interval (synonym)
-\newcommand{\ocinterval}[2]{\left] #1, #2 \right]} % left open interval
-\newcommand{\cointerval}[2]{\left[ #1, #2 \right[} % right open interval
+\newcommand{\ocinterval}[2]{\left( #1, #2 \right]} % left open interval
+\newcommand{\cointerval}[2]{\left[ #1, #2 \right)} % right open interval
 
 % Kleinere Vereinigungs-, Schnitt-, Summen- und Produktsymbole
 \let\myBigcup\bigcup
