@@ -71,6 +71,7 @@
 
 \theoremstyle{remark}
 \newtheorem*{bem}{Bemerkung}
+\newtheorem*{bemn}{Bemerkungen}
 \newtheorem*{beweisidee}{Beweisidee}
 \newtheorem*{umformulierung}{Umformulierung}
 

@@ -928,4 +928,123 @@
 % Ausgelassen: Bemerkung zur Balayage-Methode
 % Ausgelassen: Überblick, weiteres Vorgehen
 
+% Vorlesung vom 15.5.2014
+
+% Kapitel 2.5. Das Newtonpotential und Lösung der Poissongleichung
+
+\begin{problem}
+  Seien $\Omega \subset \R^n$, $f : \Omega \to \R$, $g : \partial \Omega \to \R$ gegeben. Gesucht ist eine Lösung $u \in \mathcal{C}^2(\Omega) \cap \mathcal{C}(\overline{\Omega})$ der Poissongleichung
+  \[
+    (2.10) \left\{ \begin{array}{ll}
+      - \Delta u = f & \text{in $\Omega$}\\
+      u = g & \text{auf $\partial \Omega$.}
+    \end{array} \right.
+  \]
+\end{problem}
+
+% 2.31.
+\begin{prop}
+  Sei $\Omega \subset \R^n$ beschränkt, offen und $\partial \Omega$ regulär. Sind $f \in \mathcal{C}^2_0(\R^n)$, $g \in \mathcal{C}(\partial \Omega)$, so besitzt (2.10) eine eindeutige Lösung $u \in \mathcal{C}^2(\Omega) \cap \mathcal{C}(\overline{\Omega})$.
+\end{prop}
+
+\begin{bem}
+  Die Behauptung folgt leicht aus den vorherigen Sätzen, aber die Voraussetzung $f \in \mathcal{C}^2_0(\Omega)$ ist zu stark.
+\end{bem}
+
+\begin{defn}
+  Sei $\Omega \subset \R^n$ offen und beschränkt. Das \emph{Newton-Potential} $N_f : \Omega \to \R$ einer Funktion $f \in L^\infty(\Omega)$ ist die Faltung
+  \[ N_f(x) \coloneqq \Int{\Omega}{}{\Phi(x-y) f(y)}{y}. \]
+\end{defn}
+
+% 2.32.
+\begin{lem}
+  Sei $\Omega \subset \R^n$ offen, beschränkt und $f \in L^\infty(\Omega)$. Dann gilt $N_f \in \mathcal{C}^1(\Omega)$ mit $D N_f(x) = \Int{\Omega}{}{D_x \Phi(x-y) f(y)}{y}$ für alle $x \in \Omega$.
+\end{lem}
+
+% Einschub: Funktionenräume Hölder-stetiger Funktionen
+
+\begin{defn}
+  Eine Funktion $f : S \to \R$, $S \subset \R^n$ heißt (lokal) \emph{Hölder-stetig} in $x_0 \in S$ zum Exponenten $\alpha \in \ocinterval{0}{1}$ mit Hölderkonstante $C_{x_0} \in \R_{\geq 0}$, falls für alle $x \in S$ (bzw. $x \in K$ für ein $K \Subset S$) gilt:
+  \[ \abs{f(x) - f(x_0)} \leq C_{x_0} \abs{x - x_0}^\alpha \]
+\end{defn}
+
+\begin{defn}
+  Die \emph{Hölder-Seminorm} von $f : S \to \R$ ist
+  \[ [f]_{\mathcal{C}^{0,\alpha}(S)} \coloneqq \sup_{x,x_0 \in S} \frac{\abs{f(x_0) - f(x)}}{\abs{x-x_0}^\alpha}. \]
+\end{defn}
+
+\begin{defn}
+  Sei $\Omega \subset \R^n$ offen, $\alpha \in \ocinterval{0}{1}$.
+  \begin{itemize}
+    \item $\mathcal{C}^{0,\alpha}(\Omega) \coloneqq \Set{ f \in \mathcal{C}(\Omega) }{ [f]_{\mathcal{C}^{0,\alpha}(K)} < \infty \text{ für alle komp. } K \Subset S }$
+    \item $\mathcal{C}^{0,\alpha}(\overline{\Omega}) \coloneqq \Set{f \in \mathcal{C}(\overline{\Omega})}{[f]_{\mathcal{C}^{0,\alpha}(\overline{\Omega})} < \infty}$.
+    \item $\mathcal{C}^{k,\alpha}(\Omega) \coloneqq \{ f \in \mathcal{C}^k(\Omega) \mid f$ ist beschränkt und $[D^\beta f]_{\mathcal{C}^{0,\alpha}(K)} < \infty$\\für alle kompakten $K \Subset \Omega$ und Multiindizes $\beta$ mit $\abs{\beta} = k \}$
+    \item $\mathcal{C}^{k,\alpha}(\overline{\Omega}) \coloneqq \{ f \in \mathcal{C}^k(\overline{\Omega}) \mid$ alle Ableitungen bis zur Ordnung $k$ von $f$ sind beschränkt und $[D^\beta f]_{\mathcal{C}^{0,\alpha}(\overline{\Omega})} < \infty$ für alle Multiindizes $\beta$ mit $\abs{\beta} = k \}$
+  \end{itemize}
+\end{defn}
+
+\begin{bem}
+  Es gelten die Inklusionen $\mathcal{C}(\Omega) \supsetneq \mathcal{C}^{0,\alpha}(\Omega) \supsetneq \mathcal{C}^1(\Omega)$, aber i.\,A. $\mathcal{C}^1(\overline{\Omega}) \not\subset \mathcal{C}^{0,1}(\overline{\Omega})$.
+\end{bem}
+
+\begin{bem}
+  Die Räume $\mathcal{C}^k(\overline{\Omega})$ und $\mathcal{C}^{k,\alpha}$ sind Banachräume bzgl.
+  \begin{align*}
+    \norm{f}_{\mathcal{C}^k(\overline{\Omega})} &\coloneqq \sum_{0 \leq \abs{\beta} \leq k} \sup_{\overline{\Omega}} \abs{D^\beta f},\\
+    \norm{f}_{\mathcal{C}^{k,\alpha}(\overline{\Omega})} &\coloneqq \norm{f}_{\mathcal{C}^{k}(\overline{\Omega})} + \sum_{\abs{\beta} = k} [D^\beta f]_{\mathcal{C}^{0,\alpha}(\overline{\Omega})}.
+  \end{align*}
+\end{bem}
+
+% 2.33.
+\begin{kor}
+  Sei $\Omega \subset \R^n$ offen, beschränkt und $f \in L^\infty(\Omega)$. Dann gilt $N_f \in \mathcal{C}^{1,\alpha}(\Omega)$ für alle $\alpha \in \ointerval{0}{1}$.
+\end{kor}
+
+% Vorlesung vom 20.5.2014
+
+% 2.34.
+\begin{satz}[Hölder] % 1882
+  Sei $\Omega \subset \R^n$ offen, beschränkt und $f \in \mathcal{C}^{0,\alpha}(\Omega) \cap L^\infty(\Omega)$ für ein beliebiges $\alpha \in \ointerval{0}{1}$. Dann gilt $N_f \in \mathcal{C}^2(\Omega)$ mit $- \Delta N_f = f$ in $\Omega$.
+  % TODO: Zweite Aussage über $D_i D_j N_f$
+\end{satz}
+
+% 2.35.
+\begin{satz}
+  Sei $\Omega \subset \R^n$ offen, beschränkt und $\partial \Omega$ regulär. Sind $f \in \mathcal{C}^{0,\alpha}(\Omega) \cap L^\infty(\Omega)$ für ein $\alpha \in \ointerval{0}{1}$ und $g \in \mathcal{C}(\partial \Omega)$, so besitzt (2.10) eine eindeutige Lösung $u \in \mathcal{C}^2(\Omega) \cap \mathcal{C}(\overline{\Omega})$.
+\end{satz}
+
+\begin{bem}
+  Für das Newtonpotential überträgt sich die Regularität von $f$ wie folgt: Ist $\alpha \in \ointerval{0}{1}$ und $f \in \mathcal{C}^{k,\alpha}(\overline{B_{2R}})$, so ist $N_f \in \mathcal{C}^{k+2,\alpha}(\overline{B_R})$ für alle $R > 0$. Im Allgemeinen gilt:
+  \[
+    f {\in} L^\infty \not\Rightarrow N_f \in \mathcal{C}^2, \quad
+    f {\in} \mathcal{C}^k \not\Rightarrow N_f \in \mathcal{C}^{k+2}, \quad
+    f {\in} \mathcal{C}^{k,1} \not\Rightarrow N_f \in \mathcal{C}^{k+2,1}
+  \]
+\end{bem}
+
+% Vorlesung vom 22.5.2014
+
+% Ausgelassen: Optimalität der Voraussetzung, Hebung von Punktsingularitäten
+
+\begin{problem}
+  Gesucht sind Lösungen des Eigenwertproblems mit Dirichlet-Randwert $0$ für den Laplaceoperator, also Eigenwerte $\lambda \in \R$ und Eigenfunktionen $u_\lambda \in \mathcal{C}^2(\Omega)$ mit
+  \[
+    \left\{ \begin{array}{ll}
+      - \Delta u_\lambda = \lambda u_\lambda & \text{in $\Omega$}\\
+      u_\lambda = 0 & \text{auf $\partial \Omega$.}
+    \end{array} \right.
+  \]
+\end{problem}
+
+\begin{bemn}
+  \begin{itemize}
+    \item Es sind nur nichtnegative EWe möglich.
+    \item Es gibt höchstens abzählbar viele EWe.
+    \item Die zugehörigen Eigenräume sind endlich-dimensional.
+    \item Eigenfunktionen zu unterschiedlichen EWen sind orthogonal bzgl.
+    \[ \langle u, v \rangle_{L^2} \coloneqq \Int{\Omega}{}{u \cdot v}{x}. \]
+    \item Eigenfunktionen sind glatt.
+  \end{itemize}
+\end{bemn}
+
 \end{document}
