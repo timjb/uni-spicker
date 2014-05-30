@@ -1047,4 +1047,219 @@
   \end{itemize}
 \end{bemn}
 
+\section{Wärmeleitungsgleichung}
+
+\begin{nota}
+  Sei $I \subset \R$ ein Intervall, $\Omega \subset \R^n$. Wir suchen $u : I \times \Omega \to \R, (t, x) \mapsto u(t, x)$ und schreiben $u_t \coloneqq \tfrac{\partial u}{\partial t}$ für die Zeitableitung, $D u(t, x) \coloneqq D_x u(t, x)$ für die Ortsableitung und $\Delta u(t,x) \coloneqq \Delta_x u(t,x)$.
+\end{nota}
+
+\begin{defn}
+  Sei $\Omega \subset \R^n$ und $T > 0$.
+  \begin{itemize}
+    \item Der \emph{parabolische Zylinder} ist $\Omega_T \coloneqq \ocinterval{0}{T} \times \Omega \subset \R^{n+1}$.
+    \item Der \emph{parabolische Rand} von $\Omega_T$ ist
+    \[ \partial_p \Omega_T \coloneqq (\{ 0 \} \times \Omega) \cup (\cinterval{0}{T} \times \partial \Omega) \subset \partial \Omega_T. \]
+  \end{itemize}
+\end{defn}
+
+\begin{nota}
+  Wir benötigen untersch. Regularitäten in Ort und Zeit:
+  \[ \mathcal{C}_1^2(\Omega_T) \coloneqq \Set{f \in \mathcal{C}^1(\Omega_T)}{f \text{ ist zweimal stetig nach $x$ ableitbar}} \]
+\end{nota}
+
+\begin{prob}
+  Wärmeleitungsgleichung (WLG): $u_t - \Delta u = 0$
+\end{prob}
+
+% Ausgelassen: Physikalische Motivation
+
+\begin{defn}
+  Sei $\Omega \subset \R^n$ offen, $T > 0$ und $u \in \mathcal{C}^2_1(\Omega_T)$. Dann heißt $u$
+  \begin{align*}
+    \left. \begin{array}{l}
+      \text{subkalorisch}\\
+      \text{kalorisch}\\
+      \text{superkalorisch}\\
+    \end{array} \right\}
+    \text{ falls }
+    \left\{ \begin{array}{l}
+      u_t - \Delta u \leq 0\\
+      u_t - \Delta u = 0\\
+      u_t - \Delta u \geq 0
+    \end{array} \right\}
+    \text{ in $\Omega_T$ gilt.}
+  \end{align*}
+\end{defn}
+
+\begin{bem}[Invarianzen der Lösungseigenschaft]
+  Wenn $u \in \mathcal{C}^2_t(\Omega_T)$ kalorisch, dann auch (auf geeigneten Zylindern):
+  \begin{align*}
+    u_{0,x_0}(t,x) &\coloneqq u(t, x-x_0) \text{ für } x_0 \in \R^n\\
+    u_{\Tau, 0}(t,x) &\coloneqq u(t-\Tau, x) \text{ für } \Tau \in \R\\
+    u_R(t,x) &\coloneqq u(t, Rx) \text{ für $R \in SO(n)$}\\
+    u_\lambda(t,x) &\coloneqq \lambda^{-1} u(\lambda^2 t, \lambda x) \text{ für } \lambda > 0
+  \end{align*}
+\end{bem}
+
+\begin{bspe}
+  \begin{itemize}
+    \item Sei $v$ harmonisch auf $\Omega \subset \R^n$. Dann ist $(t, x) \mapsto v(x)$ kalorisch auf $\Omega_T$.
+    \item Für $n=1$ und $c_1, c_2, a \in \R$ sind kalorisch:
+    \begin{align*}
+      (t, x) &\mapsto \exp(a^2 t) \cdot (c_1 \sinh(a x) + c_2 \cosh(a x))\\
+      (t, x) &\mapsto \exp(-a^2 t) \cdot (c_1 \sin(a x) + c_2 \cos(a x))\\
+      (t, x) &\mapsto c_1 x + c_2
+    \end{align*}
+  \end{itemize}
+\end{bspe}
+
+% Vorlesung vom 27.5.2014
+
+% Ausgelassen: Herleitung der Fundamentallösung (invariant und Rotationen und Dilationen)
+
+\begin{defn}
+  Die \emph{Fundamentallösung der WLG} ist die Funktion
+  \[ \Psi : \ointerval{0}{\infty} \times \R^n \to \R, \quad (t, x) \mapsto \frac{1}{(4 \pi t)^{n/2}} \exp\left(- \frac{\abs{x}^2}{4t}\right). \]
+\end{defn}
+
+\begin{bemn}
+  \begin{itemize}
+    \item $\Psi$ besitzt eine Singularität bei $(0, 0)$.
+    \item $\Psi(t, x) \xrightarrow{t \to 0} 0$ bei $x \not= 0$ fest.
+    \item Für alle $t \in \R$ gilt
+    \[ \Int{\R^n}{}{\Psi(t, x)}{x} = 1. \]
+    % TODO: Ableitung (irgendwelche Polynomfunktionen) verstehen!
+    % \[ \partial_t^k D_x^{\alpha} \Psi(t, x) = P_{\alpha,t}(x, t^{-1/2}) e^{-\abs{x}^2 / 4t} \]
+    % Ausgelassen: Eigenschaften legen Fundamentallösung eindeutig fest
+    \item $\Psi(t, \blank) * \Psi(s, \blank) = \Psi(t+s, \blank)$
+  \end{itemize}
+\end{bemn}
+
+\begin{bem}
+  Für die Fundamentallösung der Laplace-Gleichung gilt:
+  \[
+    \fa{x_0 \in \R^n} B_1(x_0) = \Set{ x \in \R^n }{ \Phi(x_0 - x) > \Phi(r e_1) }
+  \] % "`Superniveaumenge"'
+\end{bem}
+
+\begin{defn}
+  Die \emph{Wärmeleitungskugel} um $(t_0, x_0) \in \R \times \R^n$ mit $r > 0$ ist
+  \begin{align*}
+    W_r(t_0, x_0) &\coloneqq \Set{(t, x) \in \R^{n+1}}{t < t_0 \text{ und } \Psi(t_0-t,x_0-x) > r^{-n}}\\
+    &\subseteq \ointerval{-\infty}{t_0} \times \R^n
+  \end{align*}
+\end{defn}
+
+\begin{nota}
+  $W_r \coloneqq W_r(0, 0)$
+\end{nota}
+
+\begin{bemn}
+  \begin{itemize}
+    \item Monotonie: Für $r \leq \tilde{r}$ gilt $W_r(x_0) \subseteq W_{\tilde{r}}(x_0)$
+    \item Translationsinvarianz: $W_r(t_0, x_0) = (t_0, x_0) + W_r(0, 0)$
+    \item Parabolische Reskalierung: $(t, x) \in W_r \iff (r^{-2}t, r^{-1}x) \in W_1$
+    \item Explizite Darstellung: $W_r = \{ (t, x) \in \R^{n+1} \mid - \frac{r^2}{4 \pi} < t < 0$ und $\abs{x}^2 < 4t (-u \log r + \tfrac{n}{2} \log (-4 \pi t))\}$
+  \end{itemize}
+\end{bemn}
+
+\begin{nota}
+  $b(t, x) \coloneqq \frac{\abs{x}^2}{4t} + n \log r - \tfrac{n}{2} \log (-4 \pi t)$ für $r > 0$ fest
+\end{nota}
+
+\begin{bem}
+  Es gilt: $b(t, x) > 0$ in $W_r$ und $b(t, x) = 0$ auf $\partial W_r$.
+\end{bem}
+
+% 3.1.
+\begin{lem}
+  Sei $R > 0$ und $u \in \mathcal{C}^2_1(W_R)$. Für
+  \[
+    \phi : \ointerval{0}{R} \to \R, \quad
+    r \mapsto \frac{1}{4 r^n} \Int{W_r}{}{u(t,x) \tfrac{\abs{x}^2}{t^2}}{(t,x)}
+    \qquad \text{gilt dann}
+  \]
+  \begin{itemize}
+    \item $\lim_{r \to 0} \phi(r) = u(0,0)$
+    \item $\phi'(r) = \frac{n}{r^{n+1}} \Int{W_r}{}{\left( -u_t(t,x) + \Delta u(t,x) \right) \cdot b(t, x)}{(t,x)}$
+  \end{itemize}
+\end{lem}
+
+% TODO: Hier fehlt eine Seite, insbesondere Lemmas 3.2 und 3.4.
+
+\begin{bem}
+  Sei $u \in \mathcal{C}^2_1(\Omega_r) \cap \mathcal{C}(\overline{\Omega_r})$ für $\Omega \subset \R^n$ offen, beschränkt und zusammenhängend und
+  \[
+    \left\{ \begin{array}{ll}
+      u_t - \Delta u = 0 & \text{in } \Omega_r,\\
+      u = 0 & \text{auf } \partial \Omega \times \cinterval{0}{T}\\
+      u = g & \text{auf } \{ 0 \} \times \Omega.
+    \end{array} \right.
+  \]
+  Dann gilt: $g \geq 0 \wedge \max_{\Omega} g > 0 \implies u > 0$ in $\Omega_T$
+  ("`unendliche Ausbreitungsgeschwindigkeit"')
+\end{bem}
+
+% 3.4.
+\begin{kor}
+  Sei $\Omega \subset \R^n$ offen, beschränkt, $T > 0$, $u, v \in \mathcal{C}^2_1(\Omega_T) \cap \mathcal{C}(\overline{\Omega_T})$ mit
+  \[
+    \left\{ \begin{array}{ll}
+      u_t - \Delta u = v_t - \Delta v & \text{in } \Omega_T\\
+      u = v & \text{auf } \partial_p \Omega_T
+    \end{array} \right.
+  \]
+  Dann gilt $u \equiv v$ in $\Omega_T$.
+\end{kor}
+
+% Exkurs: Hausdorff-Maß
+
+\begin{defn}
+  Sei $A \subset \R^n$, $k \in \cointerval{0}{\infty}$, $\delta > 0$. Das \emph{approximierende Maß} $H_\delta^k$ von $A$ ist definiert als
+  \[
+    \HM_\delta^k(A) \coloneqq \inf \Set{ \sum_{i=1}^\infty \omega_k r_i^k }{ A \subset \bigcup_{i=1}^\infty \overline{B_{r_i}(x_i)}, r_i < \delta }
+  \]
+\end{defn}
+
+\begin{bem}
+  $\HM_\delta^k(A)$ ist monoton fallend in $\delta$.
+\end{bem}
+
+\begin{defn}
+  Das \emph{$k$-dimensionale Hausdorff-Maß} $\HM^k$ von $A$ ist
+  \[ \HM^k(A) \coloneqq \lim_{\delta \to 0} \HM_\delta^k(A). \]
+\end{defn}
+
+\begin{prop}
+  \begin{itemize}
+    \item Für $\delta > 0$ ist $\HM_\delta^k$ ein Maß auf $\R^n$.
+    \item $\HM^k$ ist ein Maß auf $\R^n$
+    \item Bewegungsinvarianz: $\HM^k(x + T(A)) = \HM^k(A)$ für $x {\in} \R^n$, $T {\in} O(n)$.
+    \item Ist $f : A \to \R^m$ Lipschitz-stetig mit Konstante $L_f$, so gilt
+    \[ \HM^k(f(A)) \leq L_f^k \HM^k(A). \]
+    \item Skalierungsverhalten: $\HM^k(\lambda A) = \lambda^k \HM^k(A)$
+    \item Spezialfälle: $\HM^0$ ist ein Zählmaß, $\HM^n = \mathcal{L}^n$ und $\HM^k \equiv 0$.
+  \end{itemize}
+\end{prop}
+
+\begin{lem}
+  Sei $A \subset \R^n$ und $0 \leq k < k' < \infty$.
+  \begin{itemize}
+    \item Ist $\HM^k(A) < \infty$, so gilt $\HM^{k'}(A) = 0$.
+    \item Ist $\HM^{k'}(A) > 0$, so gilt $\HM^k(A) = \infty$.
+  \end{itemize}
+\end{lem}
+
+\begin{defn}
+  Die \emph{Hausdorff-Dimension} von $A \subset \R^n$ ist
+  \begin{align*}
+    \dim_H(A) &\coloneqq \inf \Set{k \in \R_{\geq 0}}{\HM^k(A) = 0}\\
+    &= \sup \Set{k \in \R_{\geq 0}}{\HM^k(A) = \infty}.
+  \end{align*}
+\end{defn}
+
+\begin{prop}
+  Für die Cantor-Menge $C \subset \R$ gilt $\dim_H(C) = \frac{\log 2}{\log 3}$
+\end{prop}
+
 \end{document}
