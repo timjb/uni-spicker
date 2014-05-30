@@ -639,4 +639,185 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
 
 % Ausgelassen: Zwei Beispiele
 
+% Vorlesung vom 26.5.2014
+
+\begin{defn}
+  Der \emph{Jordanblock} der Größe $n$ zum EW $\lambda$ ist die Matrix
+  \[ J(\lambda, n) \coloneqq \begin{pmatrix}
+    \lambda & 1 & & 0 \\
+    & \ddots & \ddots & \\
+    & & \ddots & 1 \\
+    0 & & & \lambda
+  \end{pmatrix}. \]
+\end{defn}
+
+\begin{bem}[Jordan-Normalform]
+  Aus der Linearen Algebra ist bekannt: Sei $A \in \R^{n \times n}$ eine Matrix, für die gilt:
+  \[ P_A(\lambda) = (-1)^N (\lambda - \lambda_1)^{a_1} \cdot ... \cdot (\lambda - \lambda_k)^{a_k}, \]
+  wobei $\lambda_1, ..., \lambda_k \in \C$ paarweise verschiedene komplexe Eigenwerte mit algebraischen Vielfachheiten $a_1, ..., a_k$ sind. Dann gibt es eine Matrix $S \in GL_n(\C)$ mit
+  \begin{align*}
+    S^{-1} A S = J_A :=& \begin{pmatrix}
+      A_1 & \cdots & 0\\
+      \vdots & \ddots & \vdots\\
+      0 & \cdots & A_k
+    \end{pmatrix},
+    \quad \text{wobei}\\
+    A_j =& \begin{pmatrix}
+      J(\lambda_j, p_{j1}) & \cdots & 0\\
+      \vdots & \ddots & \vdots\\
+      0 & \cdots & J(\lambda_j, p_{j g_j})
+    \end{pmatrix}
+  \end{align*}
+\end{bem}
+
+\begin{prop}
+  Für $\lambda \in \C$, $p \in \N$ gilt:
+  \[
+    e^{t \cdot J(\lambda, p)} = e^{t \lambda} \cdot \begin{pmatrix}
+      1 & t & \tfrac{t^2}{2!} & \cdots & \tfrac{t^{p-1}}{(p-1)!} \\
+      0 & 1 & t & \cdots & \tfrac{t^{p-2}}{(p-2)!} \\
+      \vdots & \ddots & \ddots & \ddots & \vdots \\
+      0 & \cdots & 0 & 1 & t \\
+      0 & \cdots & \cdots & 0 & 1
+    \end{pmatrix}
+  \]
+\end{prop}
+
+% 3.8.
+\begin{satz}
+  Sei $S^{-1} A S = J_A$ in Jordan-NF. Dann gilt:
+  \begin{align*}
+    e^{At} &= S e^{J_A t} S^{-1} \text{ mit } e^{J_A} = \begin{pmatrix}
+      e^{A_1 t} & \cdots & 0\\
+      \vdots & \ddots & \vdots\\
+      0 & \cdots & e^{A_k t}
+    \end{pmatrix}
+    \quad \text{wobei}\\
+    A_j &= \begin{pmatrix}
+      e^{t J(\lambda_j, p_{j1})} & \cdots & 0\\
+      \vdots & \ddots & \vdots\\
+      0 & \cdots & e^{t J(\lambda_j, p_{j g_j})}
+    \end{pmatrix}.
+  \end{align*}
+\end{satz}
+
+% Ausgelassen: Berechnung der Jordan-NF
+
+% 3.9.
+\begin{satz}
+  Kommutieren die Matrizen $(A(t))_{t \in I}$ miteinander, d.\,h.
+  \[ A(t) \cdot A(s) = A(s) \cdot A(t) \quad \text{für alle $t, s \in I$}, \]
+  so ist eine Fundamentalmatrix von $\dot{y} = A(t) y + f(t)$ gegeben durch
+  \[
+    Y(t) \coloneqq \exp(\Int{t_0}{t}{A(s)}{s})
+    \qquad \text{für alle $t \in I$.}
+  \]
+\end{satz}
+
+% Vorlesung vom 28.5.2014
+
+% Kapitel 3.3. Lineare skalare DGLn höherer Ordnung
+
+\begin{prob}
+  Gegeben seien $f, a_0, ..., a_{n-1} \in \mathcal{I}$, $t_0 \in I$ und $z_0, ..., z_{n-1} \in \R$. Betrachte die lineare skalare DGL höherer Ordnung
+  \[
+    (3.1) \left\{ \begin{array}{l}
+      y^{(n)}(t) + a_{n-1}(t) y^{(n-1)}(t) + ... + a_1(t) \dot{y}(t) + a_0(t) y(t) = f(t)\\
+      y(t_0) = z_0, \enspace \dot{y}(t_0) = z_1, ..., y^{(n-1)}(t_0) = z_{n-1}.
+    \end{array} \right.
+  \]
+\end{prob}
+
+\begin{bem}
+  Nach Satz 1.1 ist dieses Problem äquivalent zum AWP
+  \[
+    \frac{\partial}{\partial y} \begin{pmatrix}
+      y_1 \\ \vdots \\ y_n
+    \end{pmatrix} = \begin{pmatrix}
+      0 & 1 && \\
+      & \ddots & \ddots & \\
+      && 0 & 1\\
+      - a_0(t) & \cdots & \cdots & -a_{n-1}(t)
+    \end{pmatrix} \cdot \begin{pmatrix}
+      y_1 \\ \vdots \\ y_n
+    \end{pmatrix} + \begin{pmatrix}
+      0 \\ \vdots \\ 0 \\ f(t)
+    \end{pmatrix}
+  \]
+  \[
+    \text{mit } \begin{pmatrix}
+      y_1(t_0) \\ \vdots \\ y_n(t_0)
+    \end{pmatrix} = \begin{pmatrix}
+      z_0 \\ \vdots \\ z_{n-1}
+    \end{pmatrix}.
+    \quad \text{Korresp. der Lsgn: }
+    \begin{pmatrix}
+      y \\ \dot{y} \\ \vdots \\ y^{(n-1)}
+    \end{pmatrix} = \begin{pmatrix}
+      y_1 \\ \vdots \\ y_n
+    \end{pmatrix}.
+  \]
+\end{bem}
+
+% 3.10.
+\begin{satz}
+  Sei $I \subseteq \R$ offen, $a_0, ..., a_{n-1} : I \to \R$, $f : I \to \R$ stetig, $t_0 \in I$, $z = (z_0, ..., z_{n-1})^T \in \R^n$. Dann besitzt das AWP (3.1) eine eindeutige globale Lösung $y : I \to \R$.
+\end{satz}
+
+% 3.11.
+\begin{satz}
+  Sei $I \subseteq \R$ offen, $a_0, ..., a_{n-1} : I \to \R$, $f : I \to \R$ stetig. Setze
+  \begin{align*}
+    U_{h,n} &\coloneqq \Set{ y \in \mathcal{C}^n(I, \R) }{ y^{(n)} + a_{n-1}(t) y^{(n-1)} + ... + a_0(t) y = 0 },\\
+    U_{n} &\coloneqq \Set{ y \in \mathcal{C}^n(I, \R) }{ y^{(n)} + a_{n-1}(t) y^{(n-1)} + ... + a_0(t) y = f(t) }.
+  \end{align*}
+  Dann ist $U_{h,n}$ ein $n$-dimensionaler UVR von $\mathcal{C}^n(I, \R)$ und für Funktionen $x_1, ..., x_m \in U_{h_m}$ sind äquivalent:
+  \begin{itemize}
+    \item $x_1, ..., x_n$ sind linear unabhängig in $\mathcal{C}^n(I, \R)$.
+    \item $(x_1, \dot{x_1}, ..., x_1^{(n-1)}), ..., (x_m, \dot{x_m}, ..., x_m^{(n-1)})$ sind linear unabhängig in $\mathcal{C}^1(I, \R^n)$.
+    \item $(x_1(t^*), \dot{x_1}(t^*), ..., x_1^{(n-1)}(t^*)), ..., (x_m(t^*), \dot{x_m}(t^*), ..., x_m^{(n-1)}(t^*))$ sind linear unabhängig in $\R^n$ für ein $t^* \in I$.
+    \item $(x_1(t), \dot{x_1}(t), ..., x_1^{(n-1)}(t)), ..., (x_m(t), \dot{x_m}(t), ..., x_m^{(n-1)}(t))$ sind linear unabhängig in $\R^n$ für alle $t \in I$.
+  \end{itemize}
+  Bezeichnen wir als Fundamentalsystem der DGL in (3.1) eine Menge von $n$ global linear unabhängigen Lösungen der DGL in (3.1) mit $f(t) \equiv 0$, dann gilt:
+  \begin{itemize}
+    \item Ist $\{ x_1, ..., x_n \}$ ein Fundamentalsystem, so ist
+    \[ U_{h,n} = \Set{c_1 x_1 + ... + c_n x_n}{c_1, ..., c_n \in \R}. \]
+    \item $U_n \not= \emptyset$ und für eine partikuläre Lösung $y_p \in U_n$ der DGL (3.1) ist $U_n = y_p + U_{h,n}$ ein affiner Unterraum von $\mathcal{C}^n(I, \R)$.
+  \end{itemize}
+\end{satz}
+
+\begin{bem}
+  Funktionen $x_1, ..., x_n \in U_{h_n}$ bilden ein Fundamentalsystem genau dann, wenn
+  \[
+    W(t) \coloneqq \det \begin{pmatrix}
+      x_1(t) & \cdots & x_n(t) \\
+      \dot{x_1}(t) & \cdots & \dot{x_n}(t) \\
+      \vdots & \ddots & \vdots \\
+      x^{(n-1)}(t) & \cdots & x^{(n-1)}(t)
+    \end{pmatrix} \not= 0.
+  \]
+\end{bem}
+
+\begin{bem}
+  Seien die Funktionen $a_j(t) \equiv a_j \in \R$, $j = 0, ..., n-1$ konstant. Dann heißt die Matrix
+  \[
+    A = \begin{pmatrix}
+      0 & 1 && \\
+      & \ddots & \ddots & \\
+      && 0 & 1\\
+      - a_0 & \cdots & \cdots & -a_{n-1}
+    \end{pmatrix}
+  \]
+  Begleitmatrix und es gilt
+  \[ P_A(\lambda) = (-1)^n (\lambda^n + a_{n-1} \lambda^{n-1} + ... + a_1 \lambda + a_0). \]
+  Angenommen, es zerfällt $P_A(\lambda) = (\lambda - \lambda_1)^{\alpha_1} \cdot ... \cdot (\lambda - \lambda_k)^{\alpha_k}$ wobei $\lambda_1, ..., \lambda_k$ verschiedene Nullstellen mit algebraischen Vielfachheiten $\alpha_1, ..., \alpha_k$.
+  Falls $k = n$ (bzw. $\alpha_1 = ... = \alpha_k = 1$), so ist $\{ e^{\lambda_1 t}, ..., e^{\lambda_k t} \}$ ein Fundamentalsystem von (3.1). Ansonsten ist
+  \[
+    \tilde{F} \coloneqq \tilde{F}_1 \cup ... \cup \tilde{F}_k
+    \quad \text{mit} \quad
+    \tilde{F}_j \coloneqq \{ e^{\lambda_j t}, e^{\lambda_j t} t, ..., e^{\lambda_j t} \frac{t^{\alpha_j - 1}}{(\alpha_j - 1)!} \}
+  \]
+  ein Fundamentalsystem von (3.1).
+\end{bem}
+
 \end{document}
