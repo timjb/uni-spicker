@@ -8,6 +8,7 @@
 \newcommand{\Tau}{\mathcal{T}} % Großes Tau
 \newcommand{\inte}{\mathop{\mathrm{int}}} % Inneres (interior)
 \newcommand{\conv}{\mathop{\mathrm{conv}}} % Konvexe Hülle
+\newcommand{\rel}{\text{ rel }} % = relativ (Homotopie)
 
 % Kleinere Klammern
 \delimiterfactor=701
@@ -989,5 +990,103 @@
 \begin{bsp}
   Sei $f : X \to Y$ stetig. Dann ist $Y$ ein starker Deformationsretrakt des Abbildungszylinders $Z_f$
 \end{bsp}
+
+% Vorlesung vom 2.6.2014
+
+\begin{defn}
+  Zwei stetige Abbildungen $f, g : X \to Y$ heißen \emph{homotop relativ zu} $A \subset X$ (geschrieben $f \simeq g \rel A$), falls es eine Homotopie $H : X \times \cinterval{0}{1} \to Y$ von $f$ nach $g$ gibt mit $Ha(t) = Ha,0)$ für alle $a \in A$ und $t \in \I$.
+\end{defn}
+
+\begin{bem}
+  $A \subset X$ ist genau dann ein starker Deformationsretrakt, wenn $\id_X : X \to X$ homotop relativ $A$ zu einer Abbildung $f : X \to X$ mit $f(X) = A$ ist.
+\end{bem}
+
+\begin{lem}[Reparametrisierungslemma]
+  Seien $\phi_1, \phi_2 : \I \to \I$ stetig und auf $\{ 0, 1 \}$ gleich. Sei $F : P \times \I \to Y$ eine Homotopie, $G_i(p, t) \coloneqq F(p, \phi_i(t))$ für $i = 1,2$. Dann sind $G_1, G_2 : P \times \I \to Y$ homotop relativ zu $P \times \{ 0, 1 \}$.
+\end{lem}
+
+\begin{defn}
+  Sei $X$ ein topologischer Raum und $x_0 \in X$ fest. Dann wird $(X, x_0)$ ein \emph{punktierter Raum} mit Basispunkt $x_0$ genannt.
+\end{defn}
+
+\begin{defn}
+  Sei $(X, x_0)$ ein punktierter Raum. Definiere
+  \begin{align*}
+    \pi_1(X, x_0) &\coloneqq \Set{ \gamma : \I \to X }{ \text{geschl. Weg mit } \gamma(0) = \gamma(1) = x_0 } / {\sim}\\
+    & \text{mit} \quad \gamma_1 \sim \gamma_2 \coloniff \gamma_1 \simeq \gamma_2 \rel \{0,1\}.
+  \end{align*}
+\end{defn}
+
+\begin{prop}
+  Die Verknüfung $(\gamma_1, \gamma_2) \mapsto \gamma_1 \cdot \gamma_2$ induziert eine Gruppenstruktur auf $\pi(X, x_0)$.
+\end{prop}
+
+\begin{nota}
+  $\eta^{-1}(t) \coloneqq \eta(1-t)$ für jeden Weg $\eta : \I \to X$.
+\end{nota}
+
+\begin{defn}
+  $\pi_1(X, x_0)$ heißt \emph{Fundamentalgruppe} von $(X, x_0)$.
+\end{defn}
+
+% Ausgelassen: Beispiel $\pi_1(\{ pt \}, pt) = 1$.
+
+\begin{bem}
+  $\pi_1(X, x_0)$ hängt nur von der Wegkomponente von $x_0$ ab, die $x_0$ enthält.
+\end{bem}
+
+\begin{prop}
+  Seien $x_0, x_1 \in X$. Jeder Weg $\eta : \I \to X$ von $x_0$ nach $x_1$ induziert einen Isomorphismus
+  \[ \Psi_\eta : \pi_1(X, x_0) \cong \pi_1(X, x_1), \quad [\gamma] \mapsto [\eta^{-1} \cdot \gamma \cdot \eta]. \]
+  Falls $\eta \simeq \eta'$, dann gilt $\Psi_\eta = \Psi_{\eta'}$.\\
+  Ist $\eta'$ ein zweiter Weg von $x_0$ nach $x_1$, so ist
+  \[ \kappa \coloneqq [(\eta')^{-1} \cdot \eta] \in \pi_1(X, x_1) \]
+  und für alle $g \in \pi_1(X, x_0)$ gilt
+  \[ \Psi_{\eta'}(g) = \kappa \cdot \Psi_{\eta}(g) \cdot \kappa^{-1} \in \pi(X, x_1) \]
+  und somit i.\,A. $\Psi_\eta \not= \Psi_{\eta'}$, falls $\pi_1(X,x_1)$ nicht abelsch ist.
+\end{prop}
+
+\begin{bspe}
+  \begin{itemize}
+    \item $\pi_1(S^1, 1) \cong \Z$
+    \item $\pi_1(\R P^2, x_0) \cong \Z \sim 2 \Z$ (mit $x_0 \in \R P^2$ beliebig)
+    \item Sei $G$ eine beliebige Gruppe. Es gibt einen Simplizialkomplex $X$ mit Basispunkt $x_0 \in X$, sodass $\pi_1(X, x_0) \cong G$.
+  \end{itemize}
+\end{bspe}
+
+\begin{defn}
+  Seien $(X, x_0)$ und $(Y, y_0)$ punktierte Räume. eine stetige Abbildung $f : X \to Y$ heißt \emph{basispunkterhaltend} oder \emph{punktiert}, falls $f(x_0) = y_0$.
+\end{defn}
+
+\begin{defn}
+  Eine punktierte Abbildung $f : (X, x_0) \to (Y, y_0)$ induziert einen Morphismen der Fundamentalgruppen vermöge
+  \[
+    f_* : \pi_1(X, x_0) \to \pi_1(Y, y_0), \quad [\gamma] \mapsto [f \circ \gamma].
+  \]
+\end{defn}
+
+\begin{prop}
+  \begin{itemize}
+    \item $(\blank)_*$ besitzt die Funktor-Eigenschaften, d.\,h.
+    \[
+      (g \circ f)_* = g_* \circ f_*
+      \quad \text{und} \quad
+      (\id_X)_* = \id_{\pi_1(X, x_0)}
+    \]
+    \item Sind $f, g : X \to Y$ punktierte stetige Abbildungen und $f \simeq g$, so gilt $f_* = g_*$.
+  \end{itemize}
+\end{prop}
+
+\begin{defn}
+  Ein topologischer Raum $X$ heißt \emph{einfach zusammenhängend}, falls $X$ wegzusammenhängend ist und $\pi_1(X, x_0) = 1$ für ein (und damit alle) $x_0 \in X$.
+\end{defn}
+
+\begin{bsp}
+  $S^1$ ist nicht einfach zusammenhängend.
+\end{bsp}
+
+\begin{prop}
+  Ist $X$ zusammenziehbar, so ist $X$ einfach zusammenhängend.
+\end{prop}
 
 \end{document}
