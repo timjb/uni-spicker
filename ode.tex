@@ -520,8 +520,6 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
 
 % Kapitel 3. Lineare Differentialgleichungen
 
-% TODO: AWP (3.1) definieren
-
 \begin{prob}
   Sei $I \subset \R$ und $A : I \to \R^{n \times n}$, $f : I \to \R^n$ stetig. Für $(t_0, y_0) \in I \times \R^n$ betrachten wir das AWP
   \[
@@ -597,7 +595,7 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
   Sei $I \subseteq \R$ offen, $A : I \to \R^{n \times n}$, $f : I \to \R^n$ stetig. Sei $Y(t)$ die Fundamentalmatrix. Dann gilt:
   \begin{itemize}
     \item Eine partikuläre Lösung von $\dot{y} = A(t) y + f(t)$ ist gegeben durch
-    \[ y_p(t) \coloneqq \Int{t_0}{t}{Y(t) (Y(s))^{-1} f(s)}{s} \quad t_0 \in I. \]
+    \[ y_p(t) \coloneqq \Int{t_0}{t}{Y(t) (Y(s))^{-1} f(s)}{s}, \quad t_0 \in I. \]
     \item Es gilt $U = \Set{ \Int{t_0}{t}{Y(t) (Y(s))^{-1} f(s)}{s} + Y(t) c }{ c \in \R^n }$
     \item Die globale eindeutige Lsg vom AWP (3.1) ist gegeben durch
     \[ y(t) \coloneqq Y(t) (Y(t_0))^{-1} y_0 + \Int{t_0}{t}{Y(t) (Y(s))^{-1} f(s)}{s}, \quad t \in I. \]
@@ -815,9 +813,125 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
   \[
     \tilde{F} \coloneqq \tilde{F}_1 \cup ... \cup \tilde{F}_k
     \quad \text{mit} \quad
-    \tilde{F}_j \coloneqq \{ e^{\lambda_j t}, e^{\lambda_j t} t, ..., e^{\lambda_j t} \frac{t^{\alpha_j - 1}}{(\alpha_j - 1)!} \}
+    \tilde{F}_j \coloneqq \{ e^{\lambda_j t}, e^{\lambda_j t} t, ..., e^{\lambda_j t} t^{\alpha_j - 1} \}
   \]
   ein Fundamentalsystem von (3.1).
+\end{bem}
+
+% Vorlesung vom 2.6.2014
+
+\begin{bem}
+  Um den Lösungsraum von (3.1) zu bestimmen, benötigen wir noch eine partikuläre Lösung $y_p$. Diese kann zum einen durch den Ansatz
+  \[
+    \begin{pmatrix}
+      y_{1,p}(t)\\
+      \vdots\\
+      y_{n,p}(t)
+    \end{pmatrix} \coloneqq \Int{t}{t_0}{Y(t) \cdot Y(s)^{-1} \begin{pmatrix}
+      0\\ \vdots \\ 0 \\ f(s)
+    \end{pmatrix}}{s}, \qquad
+    y_p \coloneqq y_{1,p}.
+  \]
+  bestimmt werden. Falls $f$ elementaransatzfähig ist, d.\,h.
+  \[ f(t) = g(t) \cdot e^{\mu t} \cos(\omega t) + q(t) \cdot e^{\mu t} \sin(\omega t) \]
+  für Polynome $g(t), q(t) \in \R[t]$ und $\omega, \mu \in \R$ gilt, dann gibt es eine Lösung der Form
+  \begin{align*}
+    y_p(t) &= t^{\nu} (\gamma_0 + \gamma_1 t + ... + \gamma_m t^m) e^{\mu t} \cos(\omega t)\\
+    & + t^{\nu} (\beta_0 + \beta_1 t + ... + \beta_m t^m) e^{\mu t} \sin(\omega t).
+  \end{align*}
+  Dabei ist $m \coloneqq \max(\deg g, \deg q)$ und
+  \[
+    \nu \coloneqq \begin{cases}
+      0, & \text{falls $\mu + i \omega$ keine Nullstelle von $P_A(\lambda)$ ist,}\\
+      k, & \text{falls $\mu + i \omega$ eine $k$-fache Nullstelle von $P_A(\lambda)$ ist}.
+    \end{cases}
+  \]
+  Die Zahlen $\gamma_0, ..., \gamma_m, \beta_0, ..., \beta_m \in \R$ sind noch zu bestimmen.
+\end{bem}
+
+\begin{bsp}
+  Das AWP
+  \[
+    \left\{ \begin{array}{ll}
+      \ddot{y} + \Theta^2 y = \cos(\omega t)\\
+      y(0) = 0, \dot{y}(0) = 0
+    \end{array} \right.
+  \]
+  besitzt die Lösung
+  \[
+    y(t) = \begin{cases}
+      \tfrac{1}{\omega^2 - \Theta^2} \cos(\Theta t) + \tfrac{1}{\Theta^2 - \omega^2} \cos(\omega t), &\text{falls $\omega^2 \not= \Theta^2$,}\\
+      \tfrac{t}{2 \omega} \sin(\omega t), &\text{falls $\omega^2 = \Theta^2$.}
+    \end{cases}
+  \]
+\end{bsp}
+
+% Kapitel 4. Asymptotik und Stabilität
+
+% Ausgelassen: Drei Beispiele am Anfang des Kapitels
+
+% Vorlesung vom 4.6.2014
+
+% Kapitel 4.1. Stabilitätstheorie
+
+\begin{defn}
+  Sei $\D \subset \R^{n+1}$ offen, $f : \D \to \R^n$ stetig, lokal Lipschitz-stetig bzgl. $y$ auf $\D$. Eine Lösung $y : I \to \R^n$ von $\dot{y} = f(t, y)$ und $y(t_0) = y_0$ auf einem Intervall $\cointerval{t_0}{\infty}$ für ein $t_0 \in \R$ heißt
+  \begin{itemize}
+    \item \emph{(Lyapunov-) stabil} auf $\cointerval{t_0}{\infty}$, wenn es für alle $\epsilon > 0$ ein $\delta > 0$ gibt, sodass für alle $(t_0, z_0) \in \D$ und $\norm{y_0 - z_0} < \delta$ das AWP
+    \[
+      (\dagger) \left\{ \begin{array}{ll}
+        \dot{z} = f(t, z),\\
+        z(t_0) = z_0
+      \end{array} \right.
+    \]
+    eine Lösung $z$ auf $\cointerval{t_0}{\infty}$ besitzt, welche die Ungleichung $\norm{y(t) - z(t)} < \epsilon$ für alle $t \geq t_0$ erfüllt.
+    \item \emph{attraktiv}, wenn es ein $\delta > 0$ gibt, sodass für alle $(t_0, z_0) \in \D$ mit $\norm{y_0 - z_0} < \delta$ das AWP ($\dagger$) eine Lösung $z$ auf $\cointerval{t_0}{\infty}$ besitzt mit
+    \[ \lim_{t \to \infty} \norm{y(t) - z(t)} = 0. \]
+    \item \emph{asymptotisch stabil}, falls $y$ stabil und attraktiv ist.
+    \item \emph{exponentiell stabil}, wenn $\delta, \alpha, \omega > 0$ existieren, sodass für alle $(t_0, z_0) \in \D$ mit $\norm{y_0 - z_0} < \delta$ das AWP ($\dagger$) eine Lsg $z$ besitzt mit
+    \[ \norm{y(t) - z(t)} \leq \alpha \norm{y_0 - z_0} e^{-\omega (t-t_0)}. \]
+  \end{itemize}
+\end{defn}
+
+\begin{bem}
+  exponentiell stabil $\Rightarrow$ asymptotisch stabil
+\end{bem}
+
+\begin{bsp}
+  Eine Lösung $y$ des AWP $\dot{y} = \alpha y$, $y(t_0) = y_0$ ist
+  \begin{itemize}
+    \miniitem{0.53 \linewidth}{exponentiell stabil, falls $\alpha < 0$,}
+    \miniitem{0.44 \linewidth}{stabil, falls $\alpha = 0$ und}
+    \item instabil (d.\,h. weder stabil noch attraktiv), falls $\alpha > 0$.
+  \end{itemize}
+\end{bsp}
+
+% Kapitel 4.2. Autonome DGLn
+
+% 4.1.
+\begin{satz}
+  Seien $\D \subset \R^{n+1}$ offen, $f : \D \to \R^n$ stetig, lokal Lipschitz stetig.
+  \begin{itemize}
+    \item Die DGL $\dot{y} = f(y)$ ist translationsinvariant, d.\,h. ist $y$ eine Lösung von $\dot{y} = f(y)$ auf $\cointerval{t_0}{\infty}$, dann ist $z(t) \coloneqq y(t_0 + t)$ eine Lösung von $\dot{z} = f(z)$ auf $\cointerval{0}{\infty}$.
+    \item Die Lösung $y$ ist genau dann (exponentiell/asymptotisch) stabil, wenn $z$ (exponentiell/asymptotisch) stabil ist.
+    \item Eine Lösung von $\dot{y} = f(y)$ ist genau dann konstant, also $y(t) \equiv c \in \R^n$, wenn $f(c) = 0$.
+  \end{itemize}
+\end{satz}
+
+\begin{sprech}
+  Konstante Lösungen werden auch stationäre Lösungen oder zeitinvariante Lösungen genannt.
+\end{sprech}
+
+\begin{defn}
+  Seien $\D \subset \R^n$, $f : \D \to \R^n$ stetig, lokal Lipschitz-stetig auf $\D$. Jede Nullstelle von $f$ heißt \emph{Ruhelage} (Gleichgewichtspunkt, kritischer Punkt) von $f$.
+\end{defn}
+
+% Kapitel 4.2.1. Lineare autonome DGLn
+
+\begin{bem}
+  Eine Lösung $y : \cointerval{0}{\infty}$ der Gleichung
+  \[ \dot{y} = A y, \quad A \in \R^{n \times n} \]
+  ist genau dann (exponentiell/asymptotisch) stabil, wenn es die konstante Lösung $y(t) \equiv 0$ ist.
 \end{bem}
 
 \end{document}
