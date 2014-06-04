@@ -9,6 +9,10 @@
 \newcommand{\inte}{\mathop{\mathrm{int}}} % Inneres (interior)
 \newcommand{\conv}{\mathop{\mathrm{conv}}} % Konvexe Hülle
 \newcommand{\rel}{\text{ rel }} % = relativ (Homotopie)
+\newcommand{\Ob}{\mathrm{Ob}} % Objects (of a category)
+\newcommand{\Hom}{\mathrm{Hom}} % Homomorphisms
+\newcommand{\dom}{\mathrm{dom}} % Domain
+\newcommand{\codom}{\mathrm{codom}} % Codomain
 
 % Kleinere Klammern
 \delimiterfactor=701
@@ -128,7 +132,7 @@
 
 \begin{defn}
   Sei $X$ eine Menge und $\Tau, \Tau'$ Topologien auf $X$. Dann sagen wir
-  \[ \Tau \text{ ist \emph{gröber} als } \Tau' \coloniff \Tau' \text{ ist \emph{feiner} als } \Tau \coloniff \Tau \subset \Tau'. \]
+  \[ \Tau \text{ ist \emph{gröber} als } \Tau' \coloniff \Tau' \text{ ist \emph{feiner} als } \Tau \coloniff \Tau \subseteq \Tau'. \]
 \end{defn}
 
 % Bemerkung: Die Klumpentopologie ist die gröbste und die diskrete Topologie die feinste Topologie auf $X$.
@@ -861,7 +865,7 @@
 \end{prop}
 
 \begin{defn}
-  Ein topologischer Raum heißt \emph{triangulierbar}, wenn er homöomorph zu einem geometrischen Simpliziealkomplex ist.\\
+  Ein topologischer Raum heißt \emph{triangulierbar}, wenn er homöomorph zu einem geometrischen Simplizialkomplex ist.\\
   Den Homöomorphismus bezeichnet man als \emph{Triangulierung}.
 \end{defn}
 
@@ -959,11 +963,11 @@
 \end{bem}
 
 \begin{defn}
-  Ein topologischer Raum heißt \emph{kontrahierbar}, wenn er homotopieäquivalent zum einpunktigen Raum ist.
+  Ein topol. Raum heißt \emph{kontrahierbar} (zusammenziehbar), wenn er homotopieäquivalent zum einpunktigen Raum ist.
 \end{defn}
 
 \begin{lem}
-  Sei $X, Y$ topologische Räume und $Y$ kontrahierbar. Dann sind alle stetigen Abbildungen $X \to Y$ homotop.
+  Seien $X, Y$ topologische Räume und $Y$ kontrahierbar. Dann sind alle stetigen Abbildungen $X \to Y$ homotop.
 \end{lem}
 
 \begin{kor}
@@ -994,7 +998,11 @@
 % Vorlesung vom 2.6.2014
 
 \begin{defn}
-  Zwei stetige Abbildungen $f, g : X \to Y$ heißen \emph{homotop relativ zu} $A \subset X$ (geschrieben $f \simeq g \rel A$), falls es eine Homotopie $H : X \times \cinterval{0}{1} \to Y$ von $f$ nach $g$ gibt mit $Ha(t) = Ha,0)$ für alle $a \in A$ und $t \in \I$.
+  Zwei stetige Abbildungen $f, g : X \to Y$ heißen \emph{homotop relativ zu} $A \subset X$ (geschrieben $f \simeq g \rel A$), falls es eine Homotopie $H : X \times \cinterval{0}{1} \to Y$ von $f$ nach $g$ gibt mit
+  \[
+    H(a,t) = H(a,0) \quad
+    \text{für alle $a \in A$ und $t \in \I$.}
+  \]
 \end{defn}
 
 \begin{bem}
@@ -1088,5 +1096,132 @@
 \begin{prop}
   Ist $X$ zusammenziehbar, so ist $X$ einfach zusammenhängend.
 \end{prop}
+
+% Vorlesung vom 4.6.2014
+
+\begin{prop}
+  Seien $X$ und $Y$ wegzusammenhängend und $x_0 \in X$. Ist $f : X \to Y$ eine Homotopieäquivalenz, dann induziert, dann ist $f_* : \pi_1(X, x_0) \to \pi_1(Y, f(x_0))$ ein Isomorphismus.
+\end{prop}
+
+\begin{bsp}
+  $\R^n$ ist zusammenziehbar, also einfach zusammenhängend.
+\end{bsp}
+
+\begin{prop}
+  Für $n \geq 2$ ist $S^n$ einfach zusammenhängend.
+\end{prop}
+
+\begin{defn}
+  Für einen punktierten Raum $(X, x_0)$ heißt
+  \begin{align*}
+    \pi_n(X, x_0) &\coloneqq \Set{ \gamma : (S^n, p) \to (X, x_0) }{ \gamma \text{ stetig}} / {\sim}\\
+    & \text{mit} \quad \gamma_1 \sim \gamma_2 \coloniff \gamma_1 \simeq \gamma_2 \rel \{p\}.
+  \end{align*}
+  Dabei ist $p \in S^n$ fest.
+\end{defn}
+
+\begin{defn}
+  Eine \emph{Kategorie} $\mathcal{C}$ besteht aus
+  \begin{itemize}
+    \item einer Klasse $\Ob(\mathcal{C})$ von \emph{Objekten},
+    \item für je zwei Objekte $A, B \in \Ob(\mathcal{C})$ eine Menge $\Hom(A, B)$ von \emph{Morphismen} von $A$ nach $B$. Für $f \in \Hom(A, B)$ schreibt man auch $f : A \to B$ oder $A \xrightarrow{f} B$. Dabei heißt $\dom(f) \coloneqq A$ \emph{Quelle} (Domain), $\codom{f} \coloneqq B$ \emph{Ziel} (Codomain) von $f$. Die Klasse aller Morphismen wird mit $\Hom(\mathcal{C})$ bezeichnet.
+    \item einer assoziativen Kompositionsoperation, d.\,h. einer Abbildung
+    \begin{align*}
+      \quad \prod_{\mathclap{A, B, C \in \Ob(\mathcal{C})}} \enspace \Hom(B, C) \times \Hom(A, B) \to \Hom(A, C), \quad
+      (f, g) \mapsto f \circ g,\\
+      \text{mit } (h \circ g) \circ f = h \circ (g \circ f)
+      \text{ für alle } A \xrightarrow{f} B \xrightarrow{g} C \xrightarrow{h} D \in \mathcal{D}.
+    \end{align*}
+    \item für jedes $A \in \Ob(\mathcal{C})$ einem Identitätsmorphismus $\id_A : A \to A$ mit $\id_A \circ f = f$ und $g \circ \id_A = g$ für alle $f : B \to A$ und $g : A \to B$.
+  \end{itemize}
+\end{defn}
+
+\begin{bem}
+  Die Einheitsmorphismen sind eindeutig bestimmt, da
+  \[ \id_A = \id_A \circ \id'_A = \id'_A. \]
+\end{bem}
+
+\begin{defn}
+  Ein Morphismus $A \xrightarrow{f} B \in \mathcal{C}$ heißt \emph{Isomorphismus}, falls es einen Morphismus $B \xrightarrow{g} A \in \mathcal{C}$ gibt mit $f \circ g = \id_B$ und $g \circ f = \id_A$. Dieses $g$ heißt dann \emph{Inverses} von $f$, geschrieben $f^{-1} \coloneqq g$.
+\end{defn}
+
+\begin{bspe}
+  Es gibt die Kategorien
+  \begin{itemize}
+    \item $\mathbf{Set}$ der Mengen und Abbildungen,
+    \item $\mathbf{Grp}$ ($\mathbf{AbGrp}$) der (abelschen) Gruppen, $\mathbf{Rng}$ der Ringe, $\mathbf{Mod_R}$ der $R$-Moduln, $\mathbf{Vect}_k$ der $k$-VRe mit den jeweils strukturerhaltenden Abbildungen,
+    \item $\mathbf{Top}$ der topologischen Räume, $\mathbf{Met}$ der metrischen Räumen $\mathbf{KompHaus}$ der kompakten Hausdorffräume, $\mathbf{Top^*}$ der punktierten topologischen Räume mit den jeweils stetigen (und basispunkterhaltenden) Abbildungen,
+    \item Jede Partialordnung $\leq$ auf einer Menge $X$ definiert eine Kategorie $\mathcal{E}$ mit $\Ob(\mathcal{E}) \coloneqq X$ und $\Hom(a, b) \coloneqq \Set{ {\leq}_{a,b} }{ a \leq b }$.
+    \item der Relationen $\mathbf{Rel}$ mit Mengen als Objekten, $\Hom(A, B) \coloneqq \mathcal{P}(A \times B)$ und, für $S \subseteq B \times C$ und $R \subseteq A \times B$,
+    \[ S \circ R \coloneqq \Set{ (a, c) \in A \times C }{ \ex{b \in B} aRb \wedge bSc }. \]
+  \end{itemize}
+\end{bspe}
+
+\begin{bem}
+  Eine Kategorie mit nur einem Objekt ist eine Gruppe.
+\end{bem}
+
+\begin{defn}
+  Ein \emph{Gruppoid} ist eine Kategorie, in der alle Morphismen Isomorphismen sind.
+\end{defn}
+
+\begin{defn}
+  Das \emph{Fundamentalgruppoid} $\pi(X)$ eines topologischen Raumes $X$ ist die Kategorie
+  \begin{align*}
+    \Ob(\pi(X)) & \coloneqq X,\\
+    \Hom(a, b) & \coloneqq \Set{ \gamma : \I \to X \text{ stetig} }{ \gamma(0) = a, \gamma(1) = b }/{\sim}\\
+    & \text{mit } \gamma_0 \sim \gamma_1 \coloniff \gamma_0 \simeq \gamma_1 \rel \{ 0, 1\}.
+  \end{align*}
+\end{defn}
+
+\begin{bem}
+  Sei $\mathcal{C}$ eine Kategorie, ${\sim}$ eine Äquivalenzrelation auf $\Hom(\mathcal{C})$ für die gilt:
+  \begin{itemize}
+    \item Falls $f, g \in \Hom(\mathcal{C})$ mit $f \sim g$, so ist $\dom(f) = \dom(g)$ und $\codom(f) = \codom(g)$.
+    \item Ist $f \sim g \in \Hom(A, B)$ und $h \sim k \in \Hom(B, C)$, so gilt auch $h \circ f \sim k \circ g \in \Hom(A, C)$.
+  \end{itemize}
+  Dann gibt es eine Kategorie $\mathcal{C}/{\sim}$ mit $\Ob(\mathcal{C}/{\sim}) \coloneqq \Ob(\mathcal{C})$ und $\Hom(\mathcal{C}/{\sim}) \coloneqq \Hom(\mathcal{C})/{\sim}$.
+\end{bem}
+
+\begin{defn}
+  Die \emph{Homotopiekategorie} ist $\mathbf{HTop} \coloneqq \mathbf{Top}/\simeq$.
+  Die Kategorie $\mathbf{HTop^*}$ besteht aus basispunkterhaltenden Homotopieklassen von basispunkterhaltenden Abbildungen zwischen punktierten topologischen Räumen.
+\end{defn}
+
+\begin{defn}
+  Ein \emph{Funktor} $F : \mathcal{C} \to \mathcal{D}$ zw. Kategorien $\mathcal{C}$ und $\mathcal{D}$ besteht aus einer Abb.
+  von Objekten $F : \Ob(\mathcal{C}) \to \Ob(\mathcal{D})$ und einem Morphismus
+  \[
+    F(f) : F(A) \to F(B) \quad
+    \text{für jeden Morphismus $f : A \to B$,}
+  \]
+  sodass gilt:
+  \begin{itemize}
+    \item $F(\id_A) = \id_{F(A)}$ für alle $A \in \Ob(\mathcal{C})$,
+    \item $F(g \circ f) = F(g) \circ F(f)$ für alle $f : A \to B$ und $g : B \to C$ aus $\mathcal{C}$.
+  \end{itemize}
+\end{defn}
+
+\begin{defn}
+  Die Kategorie $\mathbf{Gpd}$ ist die Kategorie der Gruppoide mit Funktoren als Morphismen.
+\end{defn}
+
+\begin{bspe}
+  \begin{itemize}
+    \item Für $\mathcal{C} = \mathbf{Grp}, \mathbf{AbGrp}, \mathbf{Rng}, \mathbf{Top}, ...$ gibt es den \emph{Vergissfunktor} $U : \mathcal{C} \to \mathbf{Set}$.
+    \item Besitzen $\mathcal{C}$ und $\mathcal{D}$ nur je ein Objekt (sind also Gruppen), so ist ein Funktor $F : \mathcal{C} \to \mathcal{D}$ nichts anderes als ein Gruppenhomomorphismus.
+    \item Der \emph{Potenzmengenfunktor} $P : \mathbf{Set} \to \mathbf{Set}$ ist definiert durch
+    \[ P(X) \coloneqq \mathcal{A}, \quad P(f : A \to B)(A \subseteq X) \coloneqq f(A) \subseteq B. \]
+    \item Sind $P$ und $Q$ partiell geordnete Mengen, so ist ein Funktor $P \to Q$ nichts anderes als eine ordnungserhaltende Abbildung.
+  \end{itemize}
+\end{bspe}
+
+\begin{bem}
+  \begin{itemize}
+    \item $\pi$ definiert einen Funktor $\mathbf{Top} \to \mathbf{Gpd}$.
+    \item $\pi_0$ definiert Funktoren $\mathbf{Top} \to \mathbf{Set}$ und $\mathbf{HTop} \to \mathbf{Set}$.
+    \item $\pi_1$ definiert Funktoren $\mathbf{Top^*} \to \mathbf{Grp}$ und $\mathbf{HTop^*} \to \mathbf{Grp}$.
+  \end{itemize}
+\end{bem}
 
 \end{document}
