@@ -1093,12 +1093,13 @@
 
 \begin{bem}[Invarianzen der Lösungseigenschaft]
   Wenn $u \in \mathcal{C}^2_t(\Omega_T)$ kalorisch, dann auch (auf geeigneten Zylindern):
-  \begin{align*}
-    u_{0,x_0}(t,x) &\coloneqq u(t, x-x_0) \text{ für } x_0 \in \R^n\\
-    u_{\Tau, 0}(t,x) &\coloneqq u(t-\Tau, x) \text{ für } \Tau \in \R\\
-    u_R(t,x) &\coloneqq u(t, Rx) \text{ für $R \in SO(n)$}\\
-    u_\lambda(t,x) &\coloneqq \lambda^{-1} u(\lambda^2 t, \lambda x) \text{ für } \lambda > 0
-  \end{align*}
+  \begin{alignat*}{3}
+    u_{0,x_0}(t,x) &\coloneqq u(t, x-x_0) &&\text{ für } x_0 \in \R^n\\
+    u_{\Tau, 0}(t,x) &\coloneqq u(t-\Tau, x) &&\text{ für } \Tau \in \R\\
+    u_R(t,x) &\coloneqq u(t, Rx) &&\text{ für } R \in SO(n)\\
+    u_\lambda(t,x) &\coloneqq \lambda^{n} u(\lambda^2 t, \lambda x) &&\text{ für } \lambda > 0
+  \end{alignat*}
+  Es gilt $\Int{\R^n}{}{u_\lambda(t, y)}{y} = \Int{\R^n}{}{u(\lambda^2 t, y)}{y}$.
 \end{bem}
 
 \begin{bspe}
@@ -1124,10 +1125,13 @@
 
 \begin{bemn}
   \begin{itemize}
-    \item $\Psi$ besitzt eine Singularität bei $(0, 0)$.
-    \item $\Psi(t, x) \xrightarrow{t \to 0} 0$ bei $x \not= 0$ fest.
-    \item Für alle $t \in \R$ gilt
-    \[ \Int{\R^n}{}{\Psi(t, x)}{x} = 1. \]
+    \item $\Psi_t(t, x) - \Delta_x \Psi(t, x) = 0$ für alle $t > 0$ und $x \in \R^n$.
+    \miniitem{0.40 \linewidth}{$\Psi(t, 0) \xrightarrow{t \to 0} \infty$,}
+    \miniitem{0.48 \linewidth}{$\Psi(t, x) \xrightarrow{t \to 0} 0$ bei $x \not= 0$ fest.}
+    \item Für alle $t \in \R$ gilt $\Int{\R^n}{}{\Psi(t, x)}{x} = 1$.
+    \item Raum- und Zeitableitungen lassen sich explizit berechnen.
+    \item $\norm{\Psi(t, \blank)}_{L^\infty(\R^n)} \xrightarrow{t \to \infty} 0,$
+    \item $\norm{D \Psi(t, \blank)}_{L^1(\R^n)} + \norm{\Psi_t(t, \blank)}_{L^1(\R^n)} \xrightarrow{t \to \infty} 0,$
     % TODO: Ableitung (irgendwelche Polynomfunktionen) verstehen!
     % \[ \partial_t^k D_x^{\alpha} \Psi(t, x) = P_{\alpha,t}(x, t^{-1/2}) e^{-\abs{x}^2 / 4t} \]
     % Ausgelassen: Eigenschaften legen Fundamentallösung eindeutig fest
@@ -1154,38 +1158,78 @@
   $W_r \coloneqq W_r(0, 0)$
 \end{nota}
 
+\begin{nota}
+  Für $r > 0$ setze
+  \[
+    b_r : \R^{-} \times \R^n \to \R, \quad
+    (t, x) \mapsto \tfrac{\abs{x}^2}{4t} + n \log r - \tfrac{n}{2} \log(-4 \pi t).
+  \]
+\end{nota}
+
 \begin{bemn}
   \begin{itemize}
     \item Monotonie: Für $r \leq \tilde{r}$ gilt $W_r(x_0) \subseteq W_{\tilde{r}}(x_0)$
     \item Translationsinvarianz: $W_r(t_0, x_0) = (t_0, x_0) + W_r(0, 0)$
     \item Parabolische Reskalierung: $(t, x) \in W_r \iff (r^{-2}t, r^{-1}x) \in W_1$
-    \item Explizite Darstellung: $W_r = \{ (t, x) \in \R^{n+1} \mid - \frac{r^2}{4 \pi} < t < 0$ und $\abs{x}^2 < 4t (-u \log r + \tfrac{n}{2} \log (-4 \pi t))\}$
+    \item Explizite Darstellung: Für $r > 0$ gilt
+    \begin{align*}
+      W_r(0, 0) &= \Set{(t, x) \in \R^{-} \times \R^n}{b_r(t, x) > 0}\\
+      \partial W_r(0, 0) &= \{ (0, 0) \} \cup \Set{(t, x) \in \R^{-} \times \R^n}{b_r(t,x) = 0}\\
+      W_r(0, 0) &= \{ (t, x) \in \R^{-} \times \R^n \mid - \tfrac{r^2}{4 \pi} < t < 0 \text{ und }\\
+      & \qquad \abs{x}^2 < 4t (-n \log r + \tfrac{n}{2} \log (-4 \pi t)) \}
+    \end{align*}
+    \item Es gilt $\Int{W_r}{}{\tfrac{\abs{x}^2}{t^2}}{(t,x)} = 4 r^n$
   \end{itemize}
 \end{bemn}
-
-\begin{nota}
-  $b(t, x) \coloneqq \frac{\abs{x}^2}{4t} + n \log r - \tfrac{n}{2} \log (-4 \pi t)$ für $r > 0$ fest
-\end{nota}
-
-\begin{bem}
-  Es gilt: $b(t, x) > 0$ in $W_r$ und $b(t, x) = 0$ auf $\partial W_r$.
-\end{bem}
 
 % 3.1.
 \begin{lem}
   Sei $R > 0$ und $u \in \mathcal{C}^2_1(W_R)$. Für
   \[
     \phi : \ointerval{0}{R} \to \R, \quad
-    r \mapsto \frac{1}{4 r^n} \Int{W_r}{}{u(t,x) \tfrac{\abs{x}^2}{t^2}}{(t,x)}
+    r \mapsto \frac{1}{4 r^n} \enspace \Int{W_r}{}{u(t,x) \frac{\abs{x}^2}{t^2}}{(t,x)}
     \qquad \text{gilt dann}
   \]
   \begin{itemize}
     \item $\lim_{r \to 0} \phi(r) = u(0,0)$
-    \item $\phi'(r) = \frac{n}{r^{n+1}} \Int{W_r}{}{\left( -u_t(t,x) + \Delta u(t,x) \right) \cdot b(t, x)}{(t,x)}$
+    \item $\phi'(r) = \frac{n}{r^{n+1}} \enspace \Int{W_r}{}{\left( -u_t(t,x) + \Delta u(t,x) \right) \cdot b_r(t, x)}{(t,x)}$
   \end{itemize}
 \end{lem}
 
-% TODO: Hier fehlt eine Seite, insbesondere Lemmas 3.2 und 3.4.
+% 3.2.
+\begin{satz}[MWE]
+  Sei $\Omega \subset \R^n$, $T > 0$, $u \in \mathcal{C}^2_1(\Omega_T)$ und $W_r(t_0, x_0) \Subset \Omega_T$. Dann gilt:
+  \begin{align*}
+    u_t - \Delta u &= 0 \text{ in } \Omega_T\\
+    \implies u(t_0, x_0) &= \frac{1}{4 r^n} \qquad \Int{\mathclap{W_r(t_0, x_0)}}{}{\quad u(t,x) \cdot \frac{\abs{x-x_0}^2}{(t-t_0)^2}}{(t,x)}
+  \end{align*}
+  In diesen Gleichungen darf man $=$ durch $\leq$, $<$, $\geq$ oder $>$ ersetzen.
+\end{satz}
+
+% 3.3.
+\begin{kor}
+  Für $\Omega \subset \R^n$ offen, $T {>} 0$ und $u \in \mathcal{C}_1^2(\Omega_T)$ sind äquivalent:
+  \begin{itemize}
+    \item $u$ ist kalorisch
+    \item $u$ erfüllt die MWE auf WL-Kugeln, d.\,h. f.\,a. $W_r(t_0, x_0) \Subset \Omega_T$ gilt
+    \[
+      u(t_0, x_0) = \frac{1}{4 r^n} \qquad \Int{\mathclap{W_r(t_0, x_0)}}{}{\quad u(t,x) \cdot \frac{\abs{x-x_0}^2}{(t-t_0)^2}}{(t,x)}
+    \]
+  \end{itemize}
+\end{kor}
+
+% 3.3. (versehentliche Verdoppelung)
+\begin{satz}
+  Sei $\Omega \subset \R^n$ beschränkt, offen, $T > 0$ und $u \in \mathcal{C}^2_1(\Omega_T) \cap \mathcal{C}(\overline{\Omega_T})$ subkalorisch. Dann gilt:
+  \begin{itemize}
+    \item Das \emph{schwache Maximumsprinzip}: $\max_{\overline{\Omega_T}} u = \max_{\partial_p \Omega_T} u$
+    \item Das \emph{starke Maximumsprinzip}: Ist $\Omega$ zshgd und gibt es $(t_0, x_0) \in \Omega_T$ mit $u(t_0, x_0) = \max_{\overline{\Omega_T}} u$, so ist $u$ konstant auf $\Omega_{t_0}$.
+  \end{itemize}
+\end{satz}
+
+\begin{bem}
+  Es gelten auch entsprechende Minimumsprinzipien für superkalorische Funktionen.
+\end{bem}
 
 \begin{bem}
   Sei $u \in \mathcal{C}^2_1(\Omega_r) \cap \mathcal{C}(\overline{\Omega_r})$ für $\Omega \subset \R^n$ offen, beschränkt und zusammenhängend und
@@ -1259,7 +1303,7 @@
 \end{defn}
 
 \begin{prop}
-  Für die Cantor-Menge $C \subset \R$ gilt $\dim_H(C) = \frac{\log 2}{\log 3}$
+  Für die Cantor-Menge $C \subset \R$ gilt $\dim_H(C) = \frac{\log 2}{\log 3}$.
 \end{prop}
 
 \end{document}
