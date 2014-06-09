@@ -11,6 +11,7 @@
 \newcommand{\rel}{\text{ rel }} % = relativ (Homotopie)
 \newcommand{\Ob}{\mathrm{Ob}} % Objects (of a category)
 \newcommand{\Hom}{\mathrm{Hom}} % Homomorphisms
+\newcommand{\Mor}{\mathrm{Mor}} % Morphisms
 \newcommand{\dom}{\mathrm{dom}} % Domain
 \newcommand{\codom}{\mathrm{codom}} % Codomain
 
@@ -1100,7 +1101,7 @@
 % Vorlesung vom 4.6.2014
 
 \begin{prop}
-  Seien $X$ und $Y$ wegzusammenhängend und $x_0 \in X$. Ist $f : X \to Y$ eine Homotopieäquivalenz, dann induziert, dann ist $f_* : \pi_1(X, x_0) \to \pi_1(Y, f(x_0))$ ein Isomorphismus.
+  Seien $X$ und $Y$ wegzusammenhängend und $x_0 \in X$. Ist $f : X \to Y$ eine Homotopieäquivalenz, dann ist $f_* : \pi_1(X, x_0) \to \pi_1(Y, f(x_0))$ ein Isomorphismus.
 \end{prop}
 
 \begin{bsp}
@@ -1124,7 +1125,7 @@
   Eine \emph{Kategorie} $\mathcal{C}$ besteht aus
   \begin{itemize}
     \item einer Klasse $\Ob(\mathcal{C})$ von \emph{Objekten},
-    \item für je zwei Objekte $A, B \in \Ob(\mathcal{C})$ eine Menge $\Hom(A, B)$ von \emph{Morphismen} von $A$ nach $B$. Für $f \in \Hom(A, B)$ schreibt man auch $f : A \to B$ oder $A \xrightarrow{f} B$. Dabei heißt $\dom(f) \coloneqq A$ \emph{Quelle} (Domain), $\codom{f} \coloneqq B$ \emph{Ziel} (Codomain) von $f$. Die Klasse aller Morphismen wird mit $\Hom(\mathcal{C})$ bezeichnet.
+    \item für je zwei Objekte $A, B \in \Ob(\mathcal{C})$ eine Menge $\Hom(A, B)$ von \emph{Morphismen} von $A$ nach $B$. Für $f \in \Hom(A, B)$ schreibt man auch $f : A \to B$ oder $A \xrightarrow{f} B$. Dabei heißt $\dom(f) \coloneqq A$ \emph{Quelle} (Domain), $\codom{f} \coloneqq B$ \emph{Ziel} (Codomain) von $f$. Die Klasse aller Morphismen wird mit $\Mor(\mathcal{C})$ bezeichnet.
     \item einer assoziativen Kompositionsoperation, d.\,h. einer Abbildung
     \begin{align*}
       \quad \prod_{\mathclap{A, B, C \in \Ob(\mathcal{C})}} \enspace \Hom(B, C) \times \Hom(A, B) \to \Hom(A, C), \quad
@@ -1175,16 +1176,16 @@
 \end{defn}
 
 \begin{bem}
-  Sei $\mathcal{C}$ eine Kategorie, ${\sim}$ eine Äquivalenzrelation auf $\Hom(\mathcal{C})$ für die gilt:
+  Sei $\mathcal{C}$ eine Kategorie, ${\sim}$ eine Äquivalenzrelation auf $\Mor(\mathcal{C})$ für die gilt:
   \begin{itemize}
-    \item Falls $f, g \in \Hom(\mathcal{C})$ mit $f \sim g$, so ist $\dom(f) = \dom(g)$ und $\codom(f) = \codom(g)$.
+    \item Falls $f, g \in \Mor(\mathcal{C})$ mit $f \sim g$, so ist $\dom(f) = \dom(g)$ und $\codom(f) = \codom(g)$.
     \item Ist $f \sim g \in \Hom(A, B)$ und $h \sim k \in \Hom(B, C)$, so gilt auch $h \circ f \sim k \circ g \in \Hom(A, C)$.
   \end{itemize}
-  Dann gibt es eine Kategorie $\mathcal{C}/{\sim}$ mit $\Ob(\mathcal{C}/{\sim}) \coloneqq \Ob(\mathcal{C})$ und $\Hom(\mathcal{C}/{\sim}) \coloneqq \Hom(\mathcal{C})/{\sim}$.
+  Dann gibt es eine Kategorie $\mathcal{C}/{\sim}$ mit $\Ob(\mathcal{C}/{\sim}) \coloneqq \Ob(\mathcal{C})$ und $\Mor(\mathcal{C}/{\sim}) \coloneqq \Mor(\mathcal{C})/{\sim}$.
 \end{bem}
 
 \begin{defn}
-  Die \emph{Homotopiekategorie} ist $\mathbf{HTop} \coloneqq \mathbf{Top}/\simeq$.
+  Die \emph{Homotopiekategorie} ist $\mathbf{HTop} \coloneqq \mathbf{Top} / {\simeq}$.
   Die Kategorie $\mathbf{HTop^*}$ besteht aus basispunkterhaltenden Homotopieklassen von basispunkterhaltenden Abbildungen zwischen punktierten topologischen Räumen.
 \end{defn}
 

@@ -173,6 +173,7 @@
 \newcommand{\ccinterval}[2]{\cinterval{#1}{#2}} % closed interval (synonym)
 \newcommand{\ocinterval}[2]{\left( #1, #2 \right]} % left open interval
 \newcommand{\cointerval}[2]{\left[ #1, #2 \right)} % right open interval
+\newcommand{\I}{\cinterval{0}{1}} % Kompaktes Einheitsinterval [0,1]
 
 % Kleinere Vereinigungs-, Schnitt-, Summen- und Produktsymbole
 \let\myBigcup\bigcup
