@@ -14,6 +14,7 @@
 \usepackage{bbm} % Für 1 mit Doppelstrich (Indikatorfunktion)
 \newcommand{\ind}{\mathbbm{1}} % Indikatorfunktion
 \newcommand{\dist}{\mathrm{dist}} % Entfernung (distance)
+\DeclareMathOperator*{\esssup}{ess\,sup} % Essentielles Supremum
 
 % Abschnittsnummerierung einschalten (entgegen cheat-sheet.cls)
 \makeatletter
@@ -119,17 +120,7 @@
 
 % Vorlesung vom 10.4.2014
 
-% Kapitel 2.
-\section{Laplace- und Poisson-Gleichung}
-
-\begin{nota}
-  Seien $f : \R^n \to \R$ und $F = (F_1, ..., F_n)^T : \R^n \to \R^n$ Funktionen. Dann heißt
-  \begin{itemize}
-    \item $\dive F \coloneqq \sum_{i=1}^n D_i F_i : \R^n \to \R$ \emph{Divergenz} von $F$,
-    \item $\grad f \coloneqq \nabla f \coloneqq (\partial_1 f, ..., \partial_n f)^T : \R^n \to \R^n$ \emph{Gradient} von $f$,
-    \item $\Delta$ mit $\Delta f = \dive (\grad f) = \sum_{i=1}^n D_i D_i f$ \emph{Laplace-Operator}.
-  \end{itemize}
-\end{nota}
+\subsection{Grundlagen}
 
 \begin{nota}
   Für $\Omega \subset \R^n$ schreibe
@@ -140,10 +131,14 @@
   \]
 \end{nota}
 
-\begin{defn}
-  Die \emph{Laplace-} bzw. \emph{Poisson-Gleichung} ist die Gleichung
-  \[ \Delta u = 0 \quad \text{bzw.} \quad \Delta u = f \qquad \text{auf $\Omega \subset \R^n$}. \]
-\end{defn}
+\begin{nota}
+  Seien $f : \R^n \to \R$ und $F = (F_1, ..., F_n)^T : \R^n \to \R^n$ Funktionen. Dann heißt
+  \begin{itemize}
+    \item $\dive F \coloneqq \sum_{i=1}^n D_i F_i : \R^n \to \R$ \emph{Divergenz} von $F$,
+    \item $\grad f \coloneqq \nabla f \coloneqq (\partial_1 f, ..., \partial_n f)^T : \R^n \to \R^n$ \emph{Gradient} von $f$,
+    \item $\Delta$ mit $\Delta f = \dive (\grad f) = \sum_{i=1}^n D_i D_i f$ \emph{Laplace-Operator}.
+  \end{itemize}
+\end{nota}
 
 % Kapitel 2.1. Vorbereitung
 
@@ -176,7 +171,7 @@
 \end{kor}
 
 % 1. Übungsblatt, 2. Aufgabe: Differentiation von parameterabhängigen Integralen
-\begin{prop}
+\begin{prop}[Diff. parameterabh. Integrale]
   Sei $\Omega \subset \R^n$ messbar mit $\abs{\Omega} < \infty$, $I = \ointerval{a}{b} \subset \R$ und $f : \Omega \times I \to \R$. Angenommen,
   \begin{itemize}
     \item $f(x, \blank) \in \mathcal{C}^1(I)$ für fast alle $x \in \Omega$,
@@ -214,6 +209,8 @@
   $\omega_n \coloneqq \mathcal{L}^n(B_1(0)) = \frac{\pi^{\tfrac{n}{2}}}{\Gamma(\tfrac{n}{2} + 1)}$
 \end{nota}
 
+\begin{samepage}
+
 \begin{nota}
   Sei $f : \Omega / M \to \R$ integrierbar für $\Omega \subset \R^n$ messbar mit $\mathcal{L}^k(\Omega) \in \ointerval{0}{\infty}$ bzw. $M \subset \R^n$ eine $k$-dimensionale Untermannigfaltigkeit mit $\Int{M}{}{1}{S} \in \ointerval{0}{\infty}$
   \[
@@ -223,6 +220,65 @@
   \]
   heißen \emph{Mittelwerte} von $f$ auf $\Omega$ bzw. $M$.
 \end{nota}
+
+
+\subsection{Funktionenräume}
+
+% Ausgelassen: Funktionenräume $k$-fach stetiger Funktionen / mit kompaktem Träger / stetig auf den Rand fortsetzbar, etc.
+
+\begin{defn}
+  Eine Funktion $f : S \to \R$, $S \subset \R^n$ heißt (lokal) \emph{Hölder-stetig} in $x_0 \in S$ zum Exponenten $\alpha \in \ocinterval{0}{1}$ mit Hölderkonstante $C_{x_0} \in \R_{\geq 0}$, falls für alle $x \in S$ (bzw. $x \in K$ für ein $K \Subset S$) gilt:
+  \[ \abs{f(x) - f(x_0)} \leq C_{x_0} \abs{x - x_0}^\alpha \]
+\end{defn}
+
+\end{samepage}
+
+\begin{defn}
+  Die \emph{Hölder-Seminorm} von $f : S \to \R$ ist
+  \[ [f]_{\mathcal{C}^{0,\alpha}(S)} \coloneqq \sup_{x,x_0 \in S} \frac{\abs{f(x_0) - f(x)}}{\abs{x-x_0}^\alpha}. \]
+\end{defn}
+
+\begin{defn}[\emph{Hölder-Räume}]
+  Sei $\Omega \subset \R^n$ offen, $\alpha \in \ocinterval{0}{1}$.
+  \begin{itemize}
+    \item $\mathcal{C}^{0,\alpha}(\Omega) \coloneqq \Set{ f \in \mathcal{C}(\Omega) }{ [f]_{\mathcal{C}^{0,\alpha}(K)} < \infty \text{ für alle komp. } K \Subset S }$
+    \item $\mathcal{C}^{0,\alpha}(\overline{\Omega}) \coloneqq \Set{f \in \mathcal{C}(\overline{\Omega})}{[f]_{\mathcal{C}^{0,\alpha}(\overline{\Omega})} < \infty}$.
+    \item $\mathcal{C}^{k,\alpha}(\Omega) \coloneqq \{ f \in \mathcal{C}^k(\Omega) \mid [D^\beta f]_{\mathcal{C}^{0,\alpha}(K)} < \infty$\\für alle kompakten $K \Subset \Omega$ und Multiindizes $\beta$ mit $\abs{\beta} = k \}$
+    \item $\mathcal{C}^{k,\alpha}(\overline{\Omega}) \coloneqq \{ f \in \mathcal{C}^k(\overline{\Omega}) \mid$ alle Ableitungen bis zur Ordnung $k$ von $f$ sind beschränkt und $[D^\beta f]_{\mathcal{C}^{0,\alpha}(\overline{\Omega})} < \infty$ für alle Multiindizes $\beta$ mit $\abs{\beta} = k \}$
+  \end{itemize}
+\end{defn}
+
+% Ausgelassen: Bemerkung über unterschiedliche Konventionen
+
+\begin{bem}
+  Es gelten die Inklusionen $\mathcal{C}(\Omega) \supsetneq \mathcal{C}^{0,\alpha}(\Omega) \supsetneq \mathcal{C}^1(\Omega)$, aber i.\,A. $\mathcal{C}^1(\overline{\Omega}) \not\subset \mathcal{C}^{0,1}(\overline{\Omega})$.
+\end{bem}
+
+\begin{bem}
+  Die Räume $\mathcal{C}^k(\overline{\Omega})$ und $\mathcal{C}^{k,\alpha}$ sind Banachräume bzgl.
+  \begin{align*}
+    \norm{f}_{\mathcal{C}^k(\overline{\Omega})} &\coloneqq \sum_{0 \leq \abs{\beta} \leq k} \sup_{\overline{\Omega}} \abs{D^\beta f},\\
+    \norm{f}_{\mathcal{C}^{k,\alpha}(\overline{\Omega})} &\coloneqq \norm{f}_{\mathcal{C}^{k}(\overline{\Omega})} + \sum_{\abs{\beta} = k} [D^\beta f]_{\mathcal{C}^{0,\alpha}(\overline{\Omega})}.
+  \end{align*}
+\end{bem}
+
+\begin{defn}
+  Sei $A \subseteq \R^n$ messbar und $p \in \cinterval{1}{\infty}$. Für $f : A \to I$ messbar sei
+  \[
+    \norm{f}_{L^p(A)} \coloneqq \begin{cases}
+      \left( \Int{A}{}{\abs{f}^p} \right)^{1/p} & \text{falls } p < \infty,\\
+      \esssup_A \abs{f} & \text{falls } p = \infty.
+    \end{cases}
+  \]
+  Der \emph{Lebesgue-Raum} $L^p(A)$ ist der Raum aller Äquivalenzklassen von fast-überall übereinstimmenden Funktionen, für die $\norm{\blank}_{L^p(A)}$ endlich ist. Der Raum $L_{\text{loc}}^p(A)$ ist der Raum aller Funktionen $A \to \R^n$, die für alle offenen $O \Subset A$ zu $L^p(O)$ gehören.
+\end{defn}
+
+\begin{bem}
+  $L^p(A)$ ist ein Banachraum mit der Norm $\norm{\blank}_{L^p(A)}$.
+\end{bem}
+
+
+\subsection{Glättungen}
 
 \begin{defn}
   Ein \emph{Glättungskern} auf $\R^n$ ist eine nicht-negative, radialsym- metrische Funktion $\eta \in \mathcal{C}_0^\infty(B_1(0))$ mit $\Int{\R^n}{}{\eta}{x} = 1$.
@@ -265,6 +321,70 @@
     \[ \norm{f - f_\epsilon}_{L^p(\Omega_\epsilon)} \leq \epsilon \cdot \norm{Df}_{L^p{\Omega}}. \]
   \end{itemize}
 \end{satz}
+
+
+\subsection{Hausdorff-Maß}
+
+\begin{defn}
+  Sei $A \subset \R^n$, $k \in \cointerval{0}{\infty}$, $\delta > 0$. Das \emph{approximierende Maß} $H_\delta^k$ von $A$ ist definiert als
+  \[
+    \HM_\delta^k(A) \coloneqq \inf \Set{ \sum_{i=1}^\infty \omega_k r_i^k }{ A \subset \bigcup_{i=1}^\infty \overline{B_{r_i}(x_i)}, r_i < \delta }
+  \]
+\end{defn}
+
+\begin{bem}
+  $\HM_\delta^k(A)$ ist monoton fallend in $\delta$.
+\end{bem}
+
+\begin{defn}
+  Das \emph{$k$-dimensionale Hausdorff-Maß} $\HM^k$ von $A$ ist
+  \[ \HM^k(A) \coloneqq \lim_{\delta \to 0} \HM_\delta^k(A). \]
+\end{defn}
+
+\begin{prop}
+  \begin{itemize}
+    \item Für $\delta > 0$ ist $\HM_\delta^k$ ein Maß auf $\R^n$.
+    \item $\HM^k$ ist ein Maß auf $\R^n$
+    \item Bewegungsinvarianz: $\HM^k(x + T(A)) = \HM^k(A)$ für $x {\in} \R^n$, $T {\in} O(n)$.
+    \item Ist $f : A \to \R^m$ Lipschitz-stetig mit Konstante $L_f$, so gilt
+    \[ \HM^k(f(A)) \leq L_f^k \HM^k(A). \]
+    \item Skalierungsverhalten: $\HM^k(\lambda A) = \lambda^k \HM^k(A)$
+    \item Spezialfälle: $\HM^0$ ist ein Zählmaß, $\HM^n = \mathcal{L}^n$ und $\HM^k \equiv 0$.
+  \end{itemize}
+\end{prop}
+
+\begin{lem}
+  Sei $A \subset \R^n$ und $0 \leq k < k' < \infty$.
+  \begin{itemize}
+    \item Ist $\HM^k(A) < \infty$, so gilt $\HM^{k'}(A) = 0$.
+    \item Ist $\HM^{k'}(A) > 0$, so gilt $\HM^k(A) = \infty$.
+  \end{itemize}
+\end{lem}
+
+\begin{defn}
+  Die \emph{Hausdorff-Dimension} von $A \subset \R^n$ ist
+  \begin{align*}
+    \dim_H(A) &\coloneqq \inf \Set{k \in \R_{\geq 0}}{\HM^k(A) = 0}\\
+    &= \sup \Set{k \in \R_{\geq 0}}{\HM^k(A) = \infty}.
+  \end{align*}
+\end{defn}
+
+\begin{samepage}
+
+\begin{prop}
+  Für die Cantor-Menge $C \subset \R$ gilt $\dim_H(C) = \frac{\log 2}{\log 3}$.
+\end{prop}
+
+
+% Kapitel 2.
+\section{Laplace- und Poisson-Gleichung}
+
+\end{samepage}
+
+\begin{defn}
+  Die \emph{Laplace-} bzw. \emph{Poisson-Gleichung} ist die Gleichung
+  \[ \Delta u = 0 \quad \text{bzw.} \quad \Delta u = f \qquad \text{auf $\Omega \subset \R^n$}. \]
+\end{defn}
 
 % Kapitel 2.2. Harmonische Funktionen
 
@@ -525,9 +645,9 @@
 \begin{prob}
   Sei $\Omega \subset \R^n$ offen, (beschränkt), regulär und $f : \Omega \to \R$ und $g : \partial \Omega \to \R$ stetig. Gesucht ist $u : \overline{\Omega} \to \R$ mit
   \[
-    (2.1) \left\{ \begin{array}{lll}
-      - \Delta u &= f &\quad \text{in $\Omega \subset \R^n$}\\
-      u &= g &\quad \text{auf $\partial \Omega$}
+    (2.1) \left\{ \begin{array}{rlll}
+      - \Delta u &=& f &\quad \text{in $\Omega \subset \R^n$,}\\
+      u &=& g &\quad \text{auf $\partial \Omega$.}
     \end{array} \right.
   \]
 \end{prob}
@@ -582,10 +702,11 @@
 % Ausgelassen: Bemerkung zum Neumann-RWP und der Greenschen Funktion zweiter Art (mit verschwindender Normalenableitung)
 
 \begin{bem}
-  Die Funktion $G(x, \blank)$ ist in $\mathcal{C}^2(\Omega \setminus \{ x \}) \cap \mathcal{C}(\overline{\Omega} \setminus \{ x \})$ und hat die gleiche Singularität wie $y \mapsto \Phi(x - y)$.
+  \begin{itemize}
+    \item Ist $\Omega$ beschränkt, so ist die Greensche Funktion eindeutig.
+    \item Die Funktion $G(x, \blank)$ ist in $\mathcal{C}^2(\Omega \setminus \{ x \}) \cap \mathcal{C}(\overline{\Omega} \setminus \{ x \})$ und hat die gleiche Singularität wie $y \mapsto \Phi(x - y)$.
+  \end{itemize}
 \end{bem}
-
-% TODO: 2. Bemerkung zur Korrektorfunktion verstehen und ergänzen
 
 \begin{satz}
   Sei $\Omega \subset \R^n$ offen, beschränkt, mit $\mathcal{C}^1$-Rand $\partial \Omega$. Ist $u \in \mathcal{C}^2(\Omega) \cap \mathcal{C}^1(\overline{\Omega})$ eine Lösung von (2.1) und ist $G$ die Greensche Funktion für $\Omega$ (falls existent), dann gilt für alle $x \in \Omega$:
@@ -808,8 +929,8 @@
   Sei $\Omega \subset \R^n$ offen und $B_r(x_0) \Subset \Omega$. Der \emph{Perron-Projektor} $P_{x_0,r} : \mathcal{C}(\Omega) \to \mathcal{C}(\Omega)$ ist definiert durch
   \[
     (P_{x_0,r} u)(x) \coloneqq \begin{cases}
-      \enspace u(x) & \text{für $x \in \Omega \setminus B_r(x_0)$,}\\
-      \qquad \Int{\mathclap{\partial B_r(x_0)}}{}{\enspace K_{B_r(x_0)}(x,y) u(y)}{\HM^{n-1}(y)} & \text{für $x \in B_r(x_0)$.}
+      \enspace u(x), & x \in \Omega \setminus B_r(x_0)\\
+      \qquad \Int{\mathclap{\partial B_r(x_0)}}{}{\enspace K_{B_r(x_0)}(x,y) u(y)}{\HM^{n-1}(y)}, & x \in B_r(x_0).
     \end{cases}
   \]
 \end{defn}
@@ -930,14 +1051,14 @@
 
 % Vorlesung vom 15.5.2014
 
-% Kapitel 2.5. Das Newtonpotential und Lösung der Poissongleichung
+% Kapitel 2.5. Das Newtonpotential und Lösung der Poisson-Gleichung
 
 \begin{problem}
-  Seien $\Omega \subset \R^n$, $f : \Omega \to \R$, $g : \partial \Omega \to \R$ gegeben. Gesucht ist eine Lösung $u \in \mathcal{C}^2(\Omega) \cap \mathcal{C}(\overline{\Omega})$ der Poissongleichung
+  Seien $\Omega \subset \R^n$, $f : \Omega \to \R$, $g : \partial \Omega \to \R$ gegeben. Gesucht ist eine Lösung $u \in \mathcal{C}^2(\Omega) \cap \mathcal{C}(\overline{\Omega})$ der Poisson-Gleichung
   \[
-    (2.10) \left\{ \begin{array}{ll}
-      - \Delta u = f & \text{in $\Omega$}\\
-      u = g & \text{auf $\partial \Omega$.}
+    (2.10) \left\{ \begin{array}{rlll}
+      - \Delta u &=& f & \text{in $\Omega$}\\
+      u &=& g & \text{auf $\partial \Omega$.}
     \end{array} \right.
   \]
 \end{problem}
@@ -956,44 +1077,14 @@
   \[ N_f(x) \coloneqq \Int{\Omega}{}{\Phi(x-y) f(y)}{y}. \]
 \end{defn}
 
+\begin{bem}
+  Die Fktn $f$ wird außerhalb von $\Omega$ durch $0$ fortgesetzt.
+\end{bem}
+
 % 2.32.
 \begin{lem}
   Sei $\Omega \subset \R^n$ offen, beschränkt und $f \in L^\infty(\Omega)$. Dann gilt $N_f \in \mathcal{C}^1(\Omega)$ mit $D N_f(x) = \Int{\Omega}{}{D_x \Phi(x-y) f(y)}{y}$ für alle $x \in \Omega$.
 \end{lem}
-
-% Einschub: Funktionenräume Hölder-stetiger Funktionen
-
-\begin{defn}
-  Eine Funktion $f : S \to \R$, $S \subset \R^n$ heißt (lokal) \emph{Hölder-stetig} in $x_0 \in S$ zum Exponenten $\alpha \in \ocinterval{0}{1}$ mit Hölderkonstante $C_{x_0} \in \R_{\geq 0}$, falls für alle $x \in S$ (bzw. $x \in K$ für ein $K \Subset S$) gilt:
-  \[ \abs{f(x) - f(x_0)} \leq C_{x_0} \abs{x - x_0}^\alpha \]
-\end{defn}
-
-\begin{defn}
-  Die \emph{Hölder-Seminorm} von $f : S \to \R$ ist
-  \[ [f]_{\mathcal{C}^{0,\alpha}(S)} \coloneqq \sup_{x,x_0 \in S} \frac{\abs{f(x_0) - f(x)}}{\abs{x-x_0}^\alpha}. \]
-\end{defn}
-
-\begin{defn}
-  Sei $\Omega \subset \R^n$ offen, $\alpha \in \ocinterval{0}{1}$.
-  \begin{itemize}
-    \item $\mathcal{C}^{0,\alpha}(\Omega) \coloneqq \Set{ f \in \mathcal{C}(\Omega) }{ [f]_{\mathcal{C}^{0,\alpha}(K)} < \infty \text{ für alle komp. } K \Subset S }$
-    \item $\mathcal{C}^{0,\alpha}(\overline{\Omega}) \coloneqq \Set{f \in \mathcal{C}(\overline{\Omega})}{[f]_{\mathcal{C}^{0,\alpha}(\overline{\Omega})} < \infty}$.
-    \item $\mathcal{C}^{k,\alpha}(\Omega) \coloneqq \{ f \in \mathcal{C}^k(\Omega) \mid f$ ist beschränkt und $[D^\beta f]_{\mathcal{C}^{0,\alpha}(K)} < \infty$\\für alle kompakten $K \Subset \Omega$ und Multiindizes $\beta$ mit $\abs{\beta} = k \}$
-    \item $\mathcal{C}^{k,\alpha}(\overline{\Omega}) \coloneqq \{ f \in \mathcal{C}^k(\overline{\Omega}) \mid$ alle Ableitungen bis zur Ordnung $k$ von $f$ sind beschränkt und $[D^\beta f]_{\mathcal{C}^{0,\alpha}(\overline{\Omega})} < \infty$ für alle Multiindizes $\beta$ mit $\abs{\beta} = k \}$
-  \end{itemize}
-\end{defn}
-
-\begin{bem}
-  Es gelten die Inklusionen $\mathcal{C}(\Omega) \supsetneq \mathcal{C}^{0,\alpha}(\Omega) \supsetneq \mathcal{C}^1(\Omega)$, aber i.\,A. $\mathcal{C}^1(\overline{\Omega}) \not\subset \mathcal{C}^{0,1}(\overline{\Omega})$.
-\end{bem}
-
-\begin{bem}
-  Die Räume $\mathcal{C}^k(\overline{\Omega})$ und $\mathcal{C}^{k,\alpha}$ sind Banachräume bzgl.
-  \begin{align*}
-    \norm{f}_{\mathcal{C}^k(\overline{\Omega})} &\coloneqq \sum_{0 \leq \abs{\beta} \leq k} \sup_{\overline{\Omega}} \abs{D^\beta f},\\
-    \norm{f}_{\mathcal{C}^{k,\alpha}(\overline{\Omega})} &\coloneqq \norm{f}_{\mathcal{C}^{k}(\overline{\Omega})} + \sum_{\abs{\beta} = k} [D^\beta f]_{\mathcal{C}^{0,\alpha}(\overline{\Omega})}.
-  \end{align*}
-\end{bem}
 
 % 2.33.
 \begin{kor}
@@ -1003,9 +1094,12 @@
 % Vorlesung vom 20.5.2014
 
 % 2.34.
-\begin{satz}[Hölder] % 1882
-  Sei $\Omega \subset \R^n$ offen, beschränkt und $f \in \mathcal{C}^{0,\alpha}(\Omega) \cap L^\infty(\Omega)$ für ein beliebiges $\alpha \in \ointerval{0}{1}$. Dann gilt $N_f \in \mathcal{C}^2(\Omega)$ mit $- \Delta N_f = f$ in $\Omega$.
-  % TODO: Zweite Aussage über $D_i D_j N_f$
+\begin{satz}[Hölder] % Dissertation, 1882
+  Sei $\Omega \subset \R^n$ offen, beschr. und $f \in \mathcal{C}^{0,\alpha}(\Omega) \cap L^\infty(\Omega)$ für ein bel. $\alpha \in \ointerval{0}{1}$. Dann gilt $N_f \in \mathcal{C}^2(\Omega)$ mit $- \Delta N_f = f$ in $\Omega$ und für jede Kugel $B$ mit $\Omega \Subset B$ gilt die Darstellung
+  \begin{align*}
+    D_i D_j N_f(x) = &\Int{B}{}{D_{x_i} D_{x_j} \Phi(x-y) (f(y) - f(x))}{y}\\
+    & - f(x) \cdot \Int{\partial B}{}{D_{x_j} \Phi(x-y) \nu_i(y)}{\HM^{n-1}(y)}.
+  \end{align*}
 \end{satz}
 
 % 2.35.
@@ -1029,9 +1123,9 @@
 \begin{problem}
   Gesucht sind Lösungen des Eigenwertproblems mit Dirichlet-Randwert $0$ für den Laplaceoperator, also Eigenwerte $\lambda \in \R$ und Eigenfunktionen $u_\lambda \in \mathcal{C}^2(\Omega)$ mit
   \[
-    \left\{ \begin{array}{ll}
-      - \Delta u_\lambda = \lambda u_\lambda & \text{in $\Omega$}\\
-      u_\lambda = 0 & \text{auf $\partial \Omega$.}
+    \left\{ \begin{array}{rlll}
+      - \Delta u_\lambda &=& \lambda u_\lambda & \text{in $\Omega$}\\
+      u_\lambda &=& 0 & \text{auf $\partial \Omega$.}
     \end{array} \right.
   \]
 \end{problem}
@@ -1231,21 +1325,13 @@
   Es gelten auch entsprechende Minimumsprinzipien für superkalorische Funktionen.
 \end{bem}
 
-\begin{bem}
-  Sei $u \in \mathcal{C}^2_1(\Omega_r) \cap \mathcal{C}(\overline{\Omega_r})$ für $\Omega \subset \R^n$ offen, beschränkt und zusammenhängend und
-  \[
-    \left\{ \begin{array}{ll}
-      u_t - \Delta u = 0 & \text{in } \Omega_r,\\
-      u = 0 & \text{auf } \partial \Omega \times \cinterval{0}{T}\\
-      u = g & \text{auf } \{ 0 \} \times \Omega.
-    \end{array} \right.
-  \]
-  Dann gilt: $g \geq 0 \wedge \max_{\Omega} g > 0 \implies u > 0$ in $\Omega_T$
-  ("`unendliche Ausbreitungsgeschwindigkeit"')
+\begin{bem}["`unendliche Ausbreitungsgeschwindigkeit"']\mbox{}\\
+  Sei $\Omega \subset \R^n$ beschränkt, offen, zusammenhängend, $T > 0$ und $u \in \mathcal{C}_1^2(\Omega_T) \cap \mathcal{C}(\overline{\Omega_T})$ eine kalorische Funktion, die auf $\cinterval{0}{T} \times \partial \Omega$ verschwindet. Dann gilt
+  \[ \min_{\{ 0 \} \times \partial \Omega} u < \max_{\{ 0 \} \times \partial \Omega} u \enspace\implies\enspace \min_{\partial \{ 0 \} \times \Omega} u < u < \max_{\{ 0 \} \times \partial \Omega} u \text{ in $\Omega_T$}. \]
 \end{bem}
 
 % 3.4.
-\begin{kor}
+\begin{kor}[Eindeutigkeit]
   Sei $\Omega \subset \R^n$ offen, beschränkt, $T > 0$, $u, v \in \mathcal{C}^2_1(\Omega_T) \cap \mathcal{C}(\overline{\Omega_T})$ mit
   \[
     \left\{ \begin{array}{ll}
@@ -1256,54 +1342,187 @@
   Dann gilt $u \equiv v$ in $\Omega_T$.
 \end{kor}
 
-% Exkurs: Hausdorff-Maß
-
-\begin{defn}
-  Sei $A \subset \R^n$, $k \in \cointerval{0}{\infty}$, $\delta > 0$. Das \emph{approximierende Maß} $H_\delta^k$ von $A$ ist definiert als
+\begin{prop}
+  Sei $\Omega \subset \R^n$ beschränkt, offen mit regulären Rand- punkten und $f \in \mathcal{C}^{0,\alpha}(\Omega) \cap L^\infty(\Omega)$ für ein $\alpha \in \ointerval{0}{1}$ und $g \in \mathcal{C}(\partial \Omega)$. Dann gilt für jede Lösung $u \in \mathcal{C}_1^2(\Omega \times \ointerval{0}{\infty}) \cap \mathcal{C}(\Omega \times \cointerval{0}{\infty})$ von
   \[
-    \HM_\delta^k(A) \coloneqq \inf \Set{ \sum_{i=1}^\infty \omega_k r_i^k }{ A \subset \bigcup_{i=1}^\infty \overline{B_{r_i}(x_i)}, r_i < \delta }
+    \left\{ \begin{array}{ll}
+      u_t - \Delta u = f & \text{in } \ointerval{0}{\infty} \times \Omega\\
+      u = g & \text{auf } \partial_p \Omega_T
+    \end{array} \right.
   \]
-\end{defn}
+  mit beliebigen Anfangswerten auf $\{ 0 \} \times \Omega$:
+  \[
+    \lim_{t \to \infty} u(t, \blank) = v,
+  \]
+  wobei $v \in \mathcal{C}^2(\Omega) \cap \mathcal{C}(\overline{\Omega})$ die eindeutige Lösung der folgender Poisson-Gleichung ist:
+  \[
+    \left\{ \begin{array}{ll}
+      \Delta u = f & \text{in } \Omega,\\
+      u = g & \text{auf } \partial \Omega.
+    \end{array} \right.
+  \]
+\end{prop}
+
+% Kapitel 3.2. Darstellungsformeln für Lösungen im Ganzraumfall
+
+% Skript, 3.17
+\begin{satz}
+  Sei $g \in L^p(\R^n)$ für ein $p \in \cinterval{1}{\infty}$. Dann ist die Funktion $u : \ointerval{0}{\infty} \times \R^n \to \R$ definiert durch
+  \[ u(t, x) \coloneqq (\Psi(t, \blank) * g)(x) = \Int{\R^n}{}{\Psi(t, x-y) \cdot g(y)}{y} \]
+  in $\mathcal{C}^\infty(\ointerval{0}{\infty} \times \R^n)$ und erfüllt
+  \[
+    \left\{ \begin{array}{rlll}
+      u_t - \Delta u &=& 0 & \text{in $\ointerval{0}{\infty} \times \R^n$},\\
+      u &=& g & \text{auf $\{ 0 \} \times \R^n$}.
+    \end{array} \right.
+  \]
+\end{satz}
+
+% Skript, 3.18
+\begin{satz}
+  Für die Funktion $u$ aus dem vorherigen Satz gilt:
+  \begin{itemize}
+    \item Ist $g \in \mathcal{C}(\R^n) \cap L^\infty(\R^n)$, so konvergiert
+    \[
+      u(t, x) \xrightarrow{t \to 0, x \to x_0} g(x_0)
+      \quad \text{für alle $x_0 \in \R^n$.}
+    \]
+    Die Konvergenz ist gleichmäßig auf kompakten Mengen.
+    \item Ist $g \in L^p(\R^n)$ für ein $p \in \cinterval{1}{\infty}$, so ist $\norm{u(t, \blank)}_{L^p(\R^n)} \leq \norm{g}_{L^p(\R^n)}$ für alle $t > 0$. Ist $p < \infty$, so gilt
+    \[ \norm{u(t, \blank) - g}_{L^p(\R^n)} \xrightarrow{t \to 0} 0. \]
+  \end{itemize}
+\end{satz}
+
+% Übungsaufgabe
+\begin{prop}
+  Es gilt außerdem
+  \[
+    \Int{\R^n}{}{u(t, x)}{x} = \Int{\R^n}{}{g(x)}{x}
+    \quad \text{für alle $t > 0$.}
+  \]
+\end{prop}
+
+% Skript, 3.20
+\begin{satz}
+  Sei $f \in \mathcal{C}_1^2(\cinterval{0}{\infty} \times \R^n)$ mit $\supp(f) \Subset \cinterval{0}{\infty} \times \R^n$. Dann ist die Funktion $u : \ointerval{0}{\infty} \times \R^n \to \R$ definiert durch
+  \[ u(t, x) \coloneqq \Int{0}{t}{\Int{\R^n}{}{\Psi(t-s,x-y) \cdot f(s,y)}{y}}{s} \]
+  in $\mathcal{C}_1^2(\ointerval{0}{\infty} \times \R^n) \cap \mathcal{C}(\cointerval{0}{\infty} \times \R^n)$ und erfüllt die inhomogene WLG
+  \[
+    \left\{ \begin{array}{rlll}
+      u_t - \Delta u &=& f & \text{in $\ointerval{0}{\infty} \times \R^n$},\\
+      u &=& 0 & \text{auf $\{ 0 \} \times \R^n$}.
+    \end{array} \right.
+  \]
+\end{satz}
+
+% Skript, 3.22
+\begin{satz}[Allgemeine Lösungsformel]
+  Sei $g \in \mathcal{C}(\R^n) \cap L^\infty(\R^n)$ und $f \in \mathcal{C}_1^2(\cointerval{0}{\infty} \times \R^n)$ mit $\supp(f) \Subset \cointerval{0}{\infty} \times \R^n$. Dann ist die Funktion $u : \ointerval{0}{\infty} \times \R^n \to \R$ definiert durch
+  \[
+    u(t, x) \coloneqq \Int{\R^n}{}{\Psi(t, x-y) \cdot g(y)}{y} + \Int{0}{t}{\Int{\R^n}{}{\Psi(t-s,x-y) \cdot f(s, y)}{y}}{s}
+  \]
+  in $\mathcal{C}_1^2(\ointerval{0}{\infty} \times \R^n) \cap \mathcal{C}(\cointerval{0}{\infty} \times \R^n)$ und erfüllt
+  \[
+    \left\{ \begin{array}{rlll}
+      u_t - \Delta u &=& f & \text{in $\ointerval{0}{\infty} \times \R^n$},\\
+      u &=& g & \text{auf $\{ 0 \} \times \R^n$}.
+    \end{array} \right.
+  \]
+\end{satz}
+
+
+% Vorlesung vom 5.6.2014
+
+\section{Die Wellengleichung}
+
+% Ausgelassen: Physikalische Motivation
+
+% Kapitel 4.1. Darstellungsformeln für Lösungen im Ganzraumfall
+
+% Kapitel 4.1.1. Die d'Alembertsche Formel für $n = 1$
+
+\begin{nota}
+  $u_{tt} \coloneqq \partial_t^2 u$
+\end{nota}
+
+\begin{prob}
+  Seien $g \in \mathcal{C}^2(\R^n)$, $f \in \mathcal{C}^1(\R^n)$. Gesucht ist eine Lösung der homogenen \emph{Wellengleichung} (WG)
+  \[
+    (4.1) \left\{ \begin{array}{ll}
+      u_{tt} - \Delta u = 0 & \text{in } \ointerval{0}{\infty} \times \R^n\\
+      u = g, u_t = h & \text{auf } \{ 0 \} \times \R^n
+    \end{array} \right.
+  \]
+\end{prob}
+
+\begin{satz}
+  Seien $b \in \R^n$, $\tilde{f} \in \mathcal{C}^1(\cointerval{0}{\infty} \times \R^n)$ und $\tilde{g} \in \mathcal{C}(\cointerval{0}{\infty} \times \R^n)$. Dann besitzt das AWP für die Transportgleichung
+  \[
+    \left\{ \begin{array}{rlll}
+      \partial_t u + b \cdot Du &=& \tilde{f} & \text{in $\ointerval{0}{\infty} \times \R^n$},\\
+      u &=& \tilde{g} & \text{auf $\{ 0 \} \times \R^n$}.
+    \end{array} \right.
+  \]
+  eine eindeutige Lösung $u \in \mathcal{C}^1(\ointerval{0}{\infty} \times \R^n) \cap \mathcal{C}(\cointerval{0}{\infty} \times \R^n)$, die gegeben ist durch
+  \[ u(t, x) \coloneqq \tilde{g}(x - tb) + \Int{0}{t}{\tilde{f}(s, x + (s - t) b)}{s}. \]
+\end{satz}
+
+\begin{satz}
+  Seien $g \in \mathcal{C}^2(\R)$, $h \in \mathcal{C}^1(\R)$ und
+  \[
+    u : \cointerval{0}{\infty} \times \R \to \R \quad
+    (t, x) \mapsto \tfrac{1}{2} \left( g(x+t) + g(x-t) \right) + \tfrac{1}{2} \Int{x-t}{x+t}{h(s)}{s}.
+  \]
+  Dann ist $u \in \mathcal{C}^2(\cointerval{0}{\infty} \times \R)$ die eindt. Lsg von (4.1) auf $\ointerval{0}{\infty} \times \R$.
+\end{satz}
 
 \begin{bem}
-  $\HM_\delta^k(A)$ ist monoton fallend in $\delta$.
+  \begin{itemize}
+    \item Es gibt keinen Regularisierungseffekt, d.\,h. im Allgemeinen ist $u$ nur in $\mathcal{C}^2$, nicht besser.
+    \item "`Endliche Ausbreitungsgeschwindigkeit"': Ist $\supp(g) \cup \supp(f) \subset \cinterval{x_0 - r}{x_0 + r}$ für $x_0 \in \R$, $r > 0$, so gilt $\supp(t, \blank) \subset \cinterval{x_0 - (t + r)}{x_0 + t + r}$.
+  \end{itemize}
 \end{bem}
 
-\begin{defn}
-  Das \emph{$k$-dimensionale Hausdorff-Maß} $\HM^k$ von $A$ ist
-  \[ \HM^k(A) \coloneqq \lim_{\delta \to 0} \HM_\delta^k(A). \]
-\end{defn}
+\begin{kor}
+  Seien $g \in \mathcal{C}^2(\cointerval{0}{\infty})$ mit $\lim_{x \to 0} g''(x) = g(0) = 0$ und $h \in \mathcal{C}(\cointerval{0}{\infty})$ mit $h(0) = 0$. Dann ist die Funktion $u : \cointerval{0}{\infty} \times \cointerval{0}{\infty} \to \R$, definiert durch
+  \[
+    u(t, x) \coloneqq \begin{cases}
+      \tfrac{1}{2} \left( g(x + t) + g(x - t) \right) + \tfrac{1}{2} \Int{x-t}{x+t}{h(s)}{s} & \text{für } x \geq t \geq 0,\\
+      \tfrac{1}{2} \left( g(x + t) - g(t - x) \right) + \tfrac{1}{2} \Int{t-x}{x+t}{h(s)}{s} & \text{für } t \geq x \geq 0
+    \end{cases}
+  \]
+  die $\mathcal{C}^2$-Lösung des AWP der homogenen Wellengleichung
+  \[
+    \left\{ \begin{array}{rlll}
+      u_{tt} - \Delta u = 0 & \text{in } \ointerval{0}{\infty} \times \ointerval{0}{\infty},\\
+      u = g, u_t = h & \text{auf } \{ 0 \} \times \ointerval{0}{\infty},\\
+      u = 0 & \text{auf } \ointerval{0}{\infty} \times \{ 0 \}.
+    \end{array} \right.
+  \]
+\end{kor}
 
-\begin{prop}
-  \begin{itemize}
-    \item Für $\delta > 0$ ist $\HM_\delta^k$ ein Maß auf $\R^n$.
-    \item $\HM^k$ ist ein Maß auf $\R^n$
-    \item Bewegungsinvarianz: $\HM^k(x + T(A)) = \HM^k(A)$ für $x {\in} \R^n$, $T {\in} O(n)$.
-    \item Ist $f : A \to \R^m$ Lipschitz-stetig mit Konstante $L_f$, so gilt
-    \[ \HM^k(f(A)) \leq L_f^k \HM^k(A). \]
-    \item Skalierungsverhalten: $\HM^k(\lambda A) = \lambda^k \HM^k(A)$
-    \item Spezialfälle: $\HM^0$ ist ein Zählmaß, $\HM^n = \mathcal{L}^n$ und $\HM^k \equiv 0$.
-  \end{itemize}
-\end{prop}
+% Kapitel 4.1.2. Die Methode der sphärischen Mittelwerte für $n \geq 2$
 
-\begin{lem}
-  Sei $A \subset \R^n$ und $0 \leq k < k' < \infty$.
-  \begin{itemize}
-    \item Ist $\HM^k(A) < \infty$, so gilt $\HM^{k'}(A) = 0$.
-    \item Ist $\HM^{k'}(A) > 0$, so gilt $\HM^k(A) = \infty$.
-  \end{itemize}
+\begin{nota}
+  Für $u : \cointerval{0}{\infty} \times \R^n \to \R$ und $g, h : \R^n \to \R$ definiere
+  \[
+    U_x(t, r) \coloneqq \quad \MVInt{\mathclap{\partial B_r(x)}}{}{\enspace u(t, y)}{\HM^{n-1}(y)},
+  \]
+  \[
+    G_x(r) \coloneqq \quad \MVInt{\mathclap{\partial B_r(x)}}{}{\enspace g(y)}{\HM^{n-1}(y)},
+    \qquad
+    H_x(r) \coloneqq \quad \MVInt{\mathclap{\partial B_r(x)}}{}{\enspace h(y)}{\HM^{n-1}(y)}
+  \]
+\end{nota}
+
+\begin{lem}[Euler-Lagrange-Darboux-Gleichung]\mbox{}\\
+  Sei $u \in \mathcal{C}^m(\cointerval{0}{\infty} \times \R^n)$ mit $m \geq 2$ eine Lsg von (4.1). Dann gilt $U_x \in \mathcal{C}^m(\cointerval{0}{\infty} \times \cointerval{0}{\infty})$ für alle $x \in \R^n$ und $U_x$ erfüllt das AWP
+  \[
+    \left\{ \begin{array}{ll}
+      \partial_t^2 U_x - \partial_r^2 U_x - \tfrac{n-1}{r} \partial_r U_x = 0 & \text{in } \ointerval{0}{\infty} \times \ointerval{0}{\infty},\\
+      U_x = G_x, \partial_t U_x = H_x & \text{auf } \{ 0 \} \times \R^n.
+    \end{array} \right.
+  \]
 \end{lem}
-
-\begin{defn}
-  Die \emph{Hausdorff-Dimension} von $A \subset \R^n$ ist
-  \begin{align*}
-    \dim_H(A) &\coloneqq \inf \Set{k \in \R_{\geq 0}}{\HM^k(A) = 0}\\
-    &= \sup \Set{k \in \R_{\geq 0}}{\HM^k(A) = \infty}.
-  \end{align*}
-\end{defn}
-
-\begin{prop}
-  Für die Cantor-Menge $C \subset \R$ gilt $\dim_H(C) = \frac{\log 2}{\log 3}$.
-\end{prop}
 
 \end{document}
