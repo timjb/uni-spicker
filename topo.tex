@@ -1190,7 +1190,7 @@
 \end{defn}
 
 \begin{defn}
-  Ein \emph{Funktor} $F : \mathcal{C} \to \mathcal{D}$ zw. Kategorien $\mathcal{C}$ und $\mathcal{D}$ besteht aus einer Abb.
+  Ein (kovarianter) \emph{Funktor} $F : \mathcal{C} \to \mathcal{D}$ zw. Kategorien $\mathcal{C}$ und $\mathcal{D}$ besteht aus einer Abb.
   von Objekten $F : \Ob(\mathcal{C}) \to \Ob(\mathcal{D})$ und einem Morphismus
   \[
     F(f) : F(A) \to F(B) \quad
@@ -1224,5 +1224,71 @@
     \item $\pi_1$ definiert Funktoren $\mathbf{Top^*} \to \mathbf{Grp}$ und $\mathbf{HTop^*} \to \mathbf{Grp}$.
   \end{itemize}
 \end{bem}
+
+\begin{defn}
+  Die \emph{duale Kategorie} einer gegebenen Kategorie $\mathcal{C}$ ist die Kategorie $\mathcal{D} \coloneqq \mathcal{C}^{op}$ gegeben durch
+  \[
+    \Ob(\mathcal{D}) \coloneqq \Ob(\mathcal{C}), \quad
+    \Hom_{\mathcal{D}}(A, B) \coloneqq \Hom_{\mathcal{C}}(B, A), \quad
+    f \circ_{\mathcal{D}} g \coloneqq g \circ_{\mathcal{C}} f.
+  \]
+\end{defn}
+
+\begin{defn}
+  
+\end{defn}
+
+\begin{defn}
+  Ein \emph{kontravarianter Funktor} zwischen Kategorien $\mathcal{C}$ und $\mathcal{D}$ ist ein Funktor $F : \mathcal{C}^{\text{op}} \to \mathcal{D}$.
+\end{defn}
+
+% Beispiele
+% * kontravarianter Potenzmengenfunktor
+% * Abbildung \mapsto duale Abbildung
+% * C^*-Algebren-Zeugs
+
+\begin{defn}
+  Seien $F, G : \mathcal{C} \to \mathcal{D}$ Funktoren. Eine \emph{natürliche Transformation} $\alpha : F \to G$ ordnet jedem $X \in \Ob(\mathcal{C})$ einen Morphismus $\alpha_X \in \Hom_{\mathcal{D}}(F(X), G(X))$ zu, sodass für jeden Morphismus $f : A \to B$ in $\mathcal{C}$ das Diagramm
+  % TODO: Natürlichkeits-Diagramm
+  kommutiert.
+\end{defn}
+
+\begin{bem}
+  Ist $H : \mathcal{C} \to \mathcal{D}$ ein weiterer Funktor und $\beta : G \to H$ eine weitere natürliche Transformation, so ist auch $\beta \alpha : F \to H$ definiert durch
+  \[ (\beta \alpha)_X \coloneqq \beta_X \circ \alpha_X \]
+  eine natürliche Transformation.
+\end{bem}
+
+Trafo-Kategorie $\left[F, G\right]$
+
+\begin{bsp}
+  kovarianter Funktor $** : Vect_k \to Vect_k$, natürliche Transformation
+\end{bsp}
+
+% Kapitel: Überlagerungen
+
+\begin{defn}
+  Seien $X, Y$ topologische Räume.
+  \begin{itemize}
+    \item Eine Teilmenge $Y \subset Y$ wird durch eine stetige Abbildung $p : X \to Y$ \emph{gleichmäßig überlagert}, falls es einen diskreten Raum $D$ und einen Homöomorphismus $\phi : p^{-1}(U) \approx U \times D$ gibt, sodass $p = \pi_1 \circ \phi$ gilt, wobei $\pi_1 : X \times D \to X$ die Projektion ist.
+    \item Die Abbildung $p$ heißt \emph{Überlagerung}, falls jeder Punkt in $Y$ eine durch $p$ gleichmäßig überlagerte Umgebung besitzt.
+  \end{itemize}
+  % TODO: Diagramm
+\end{defn}
+
+\begin{bsp}
+  $\R \to S^1, \quad t \mapsto e^{2 \pi it}$ ist eine Überlagerung.
+\end{bsp}
+
+\begin{bem}
+  Sei $p : X \to Y$ eine Überlagerung, $Y$ zshgd. Dann ist
+  \[ y \mapsto \text{\#} (p^{-1}(yy)) \]
+  konstant, da lokalkonstant.
+  Falls $d = \text{\#} (p^{-1}(y))$ endlich ist, heißt $p$ eine \emph{$d$-blättrige} Überlagerung. Ansonsten heißt $p$ eine \emph{unendliche Überlagerung}.
+\end{bem}
+
+\begin{prop}
+  Sei $p : X \to Y$ eine Überlagerung, $\gamma : \I \to Y$ ein Weg und $x \in X$ mit $p(x) = \gamma(0)$. Dann gibt es einen eindeutig bestimmten Weg $\tilde{\gamma} : \I \to X$ mit $\tilde{\gamma}(0) = x$ und $p \circ \tilde{\gamma} = \gamma$.
+\end{prop}
 
 \end{document}
