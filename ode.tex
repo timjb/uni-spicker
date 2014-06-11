@@ -806,7 +806,7 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
       - a_0 & \cdots & \cdots & -a_{n-1}
     \end{pmatrix}
   \]
-  Begleitmatrix und es gilt
+  \emph{Begleitmatrix} und es gilt
   \[ P_A(\lambda) = (-1)^n (\lambda^n + a_{n-1} \lambda^{n-1} + ... + a_1 \lambda + a_0). \]
   Angenommen, es zerfällt $P_A(\lambda) = (\lambda - \lambda_1)^{\alpha_1} \cdot ... \cdot (\lambda - \lambda_k)^{\alpha_k}$ wobei $\lambda_1, ..., \lambda_k$ verschiedene Nullstellen mit algebraischen Vielfachheiten $\alpha_1, ..., \alpha_k$.
   Falls $k = n$ (bzw. $\alpha_1 = ... = \alpha_k = 1$), so ist $\{ e^{\lambda_1 t}, ..., e^{\lambda_k t} \}$ ein Fundamentalsystem von (3.1). Ansonsten ist
@@ -929,9 +929,26 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
 % Kapitel 4.2.1. Lineare autonome DGLn
 
 \begin{bem}
-  Eine Lösung $y : \cointerval{0}{\infty}$ der Gleichung
+  Eine Lösung $y : \cointerval{0}{\infty} \to \R$ der Gleichung
   \[ \dot{y} = A y, \quad A \in \R^{n \times n} \]
   ist genau dann (exponentiell/asymptotisch) stabil, wenn es die konstante Lösung $y(t) \equiv 0$ ist.
 \end{bem}
+
+% Vorlesung vom 11.6.2014
+
+% 4.2.
+\begin{satz}
+  Sei $A \in \R^{n \times n}$ und $S \in \C^{n \times n}$ invertierbar. Das GGW $y_* \equiv 0$ der DGL $\dot{y} = Ay$ ist genau dann (exp/asympt) stabil, wenn das GGW $z_* \equiv 0$ der DGL $\dot{z} = S^{-1} A S$ (exp/asympt) stabil ist.
+\end{satz}
+
+% 4.3.
+\begin{satz}[Stabilität von linearen, autonomen DGLn]
+  Sei $A \in \R^{n \times n}$ und $\lambda_j = \alpha_j + i \beta_j \in \C$ für die Eigenwerte von $A$. Das GGW $y_* \equiv 0$ von $\dot{y} = Ay$ ist genau dann
+  \begin{itemize}
+    \item stabil, wenn für alle EWe $\Re(\lambda_j) = \alpha_j \leq 0$ gilt und alle EWe mit $\Re(\lambda_j) = 0$ halbeinfach sind, d,\,h. die geometrische Vielfachheit mit der algebraischen übereinstimmt,
+    \item asymptotisch stabil, wenn für alle EWe $\Re(\lambda_j) = \alpha_j < 0$ gilt,
+    \item ansonsten instabil.
+  \end{itemize}
+\end{satz}
 
 \end{document}
