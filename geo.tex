@@ -6,15 +6,15 @@
 }
 
 \newcommand{\Intabdt}[1]{\Int{a}{b}{#1}{t}}
-\newcommand{\Bil}{\mathrm{Bil}}
-\newcommand{\SymBil}{\mathrm{SymBil}}
-\newcommand{\I}{\mathrm{I}}
-\newcommand{\II}{\mathrm{I\!I}}
+\newcommand{\Bil}{\mathrm{Bil}} % Menge der Bilinearformen
+\newcommand{\SymBil}{\mathrm{SymBil}} % Menge der symmetrischen Bilinearformen
+\newcommand{\FFI}{\mathrm{I}} % Erste Fundamentalform
+\newcommand{\FFII}{\mathrm{I\!I}} % Zweite Fundamentalform
 \newcommand{\Graph}{\mathrm{Graph}}
-\newcommand{\Span}{\mathrm{span}}
-\newcommand{\Bild}{\mathrm{Bild}}
+\newcommand{\Span}{\mathrm{span}} % Spann
+\newcommand{\Bild}{\mathrm{Bild}} % Bild
 \newcommand{\Exp}{\mathrm{Exp}} % geodätische Exponentialabbildung
-\newcommand{\A}{\mathcal{A}}
+\newcommand{\A}{\mathcal{A}} % Fläche (area)
 
 % Kleinere Klammern
 \delimiterfactor=701
@@ -390,7 +390,7 @@ $\implies$ $f$ ist partiell differenzierbar
 
 \begin{defn}
   Die \emph{erste Fundamentalform} (1.\,FF) einer Immersion $X$ ist
-  \[ \I : U \to \mathrm{SymBil(\R^m)}, \quad u \mapsto \I_u \coloneqq \langle \cdot , \cdot \rangle_u. \]
+  \[ \FFI : U \to \mathrm{SymBil(\R^m)}, \quad u \mapsto \FFI_u \coloneqq \langle \cdot , \cdot \rangle_u. \]
   Äquivalent dazu wird auch die Abbildung
   \[ g : U \to \R^{m \times m}, \quad u \mapsto g_u \coloneqq (J_u X)^T (J_u X) \]
   manchmal als erste Fundamentalform bezeichnet.
@@ -495,23 +495,23 @@ $\implies$ $f$ ist partiell differenzierbar
 \begin{defn}
   Die \emph{vektorwertige zweite Fundamentalform} ist die Abbildung einer Immersion $X$ ist die Abbildung
   \begin{align*}
-    \II : U \to \Bil(\R^m, \R^n), \quad & u \mapsto \II(u) = \II_u, \text { mit } \\
-    \II_u : \R^m \times \R^m \to \R^n, \quad & (v, w) \mapsto \II_u(v, w) \coloneqq (\partial_v \partial_w X(u))^{N_u},
+    \FFII : U \to \Bil(\R^m, \R^n), \quad & u \mapsto \FFII(u) = \FFII_u, \text { mit } \\
+    \FFII_u : \R^m \times \R^m \to \R^n, \quad & (v, w) \mapsto \FFII_u(v, w) \coloneqq (\partial_v \partial_w X(u))^{N_u},
   \end{align*}
   wobei $(\cdot)^{N_u}$ die orth. Projektion auf den Normalenraum bezeichnet.
 \end{defn}
 
 \begin{bem}
-  Nach dem Satz von Amandus Schwarz ist $\II_u$ eine symmetrische Bilinearform.
+  Nach dem Satz von Amandus Schwarz ist $\FFII_u$ eine symmetrische Bilinearform.
 \end{bem}
 
 \begin{bem}
   Für eine Hyperfläche $X : U \to \R^n, \, (U \opn \R^{n-1})$ gilt
-  \[ \II_u(v, w) = h_u(v, w) \nu_u \quad \text{ mit } \quad h_u(v, w) = \langle \II_u(v, w) , \nu_u \rangle. \]
+  \[ \FFII_u(v, w) = h_u(v, w) \nu_u \quad \text{ mit } \quad h_u(v, w) = \langle \FFII_u(v, w) , \nu_u \rangle. \]
 \end{bem}
 
 \begin{defn} Die Abbildung \enspace $h : U \to \SymBil(\R^{n-1}), \enspace u \mapsto h_u = h(u)$
-  mit $h_u(v, w) = \langle \II_u(v, w), \nu_u \rangle = \langle \partial_v \partial_w X(u), \nu_u \rangle$ heißt \emph{zweite Fundamentalform} (2.\,FF) der Hyperfläche $X$.
+  mit $h_u(v, w) = \langle \FFII_u(v, w), \nu_u \rangle = \langle \partial_v \partial_w X(u), \nu_u \rangle$ heißt \emph{zweite Fundamentalform} (2.\,FF) der Hyperfläche $X$.
 \end{defn}
 
 \begin{bem}
@@ -777,7 +777,7 @@ $\implies$ $f$ ist partiell differenzierbar
     \item $\nabla_{f \cdot w_1 + w_2} v = f \cdot \nabla_{w_1} v + \nabla_{w_2} v$ \pright{Linearität 1}
     \item $\nabla_w (v_1 + v_2) = \nabla_w v_1 + \nabla_w v_2$ \pright{Linearität 2}
     \item $\nabla_w (f \cdot v) = f \cdot (\nabla_w v) + (\nabla_w f) \cdot v$ \pright{Produktregel}
-    \item $\partial_w \I(v_1, v_2) = \I(\nabla_w v_1, v_2) + \I(v_1, \nabla_w v_2)$ \pright{verträglich mit 1.\,FF}
+    \item $\partial_w \FFI(v_1, v_2) = \FFI(\nabla_w v_1, v_2) + \FFI(v_1, \nabla_w v_2)$ \pright{verträglich mit 1.\,FF}
   \end{itemize}
 \end{satz}
 
@@ -936,7 +936,7 @@ $\implies$ $f$ ist partiell differenzierbar
 
 \begin{satz}
   Sei $X : U \to \R^n$ eine Fläche, $u_0 \in U$, $\epsilon > 0$, sodass $\Exp_{u_0} : B_{u_0}^{\epsilon} \to U$ Diffeomorphismus. Sei $u \in \Exp_{u_0}(B_{u_0}^{\epsilon})$. Dann gibt es (bis auf Umparametrisierung) genau eine bzgl. der Länge
-  \[ L_\I(\alpha) \coloneqq \Int{a}{b}{\I_{\alpha(t)}(\alpha'(t), \alpha'(t))}{t} \]
+  \[ L_\FFI(\alpha) \coloneqq \Int{a}{b}{\FFI_{\alpha(t)}(\alpha'(t), \alpha'(t))}{t} \]
   kürzeste reguläre glatte Kurve $\alpha : \cinterval{a}{b} \to U$ mit $\alpha(a) = u_0$ und $\alpha(b) = u$, nämlich $\alpha : \cinterval{0}{1} \to U, \  t \mapsto \Exp_{u_0}(t \cdot \Exp_{u_0}^{-1}(u))$.
 \end{satz}
 
@@ -990,8 +990,8 @@ $\implies$ $f$ ist partiell differenzierbar
 \begin{satz}
   Die Abbildung
   \[
-    \I_{R_{ij}} : \chi(U) \times \chi(U) \to \mathcal{C}^\infty(U, \R), \quad
-    (v, w) \mapsto \underbrace{\I(R_{ij}, v, w)}_{\mathclap{u \mapsto \I_u((R_{ij} v)(u), w(u))}}
+    \FFI_{R_{ij}} : \chi(U) \times \chi(U) \to \mathcal{C}^\infty(U, \R), \quad
+    (v, w) \mapsto \underbrace{\FFI(R_{ij}, v, w)}_{\mathclap{u \mapsto \FFI_u((R_{ij} v)(u), w(u))}}
   \]
 
   \vspace{-12pt}
@@ -1000,7 +1000,7 @@ $\implies$ $f$ ist partiell differenzierbar
 \end{satz}
 
 \begin{nota}
-  $R_{ijkl} \coloneqq \I_u(R_{ij}(u) e_k, e_l)$
+  $R_{ijkl} \coloneqq \FFI_u(R_{ij}(u) e_k, e_l)$
 \end{nota}
 
 \begin{lem}
@@ -1008,12 +1008,12 @@ $\implies$ $f$ ist partiell differenzierbar
 \end{lem}
 
 \begin{satz}[Gaußgleichung]
-  Mit $\II_{jk}(u) = \left( \partial_j \partial_k X(u) \right)^{N_u}$ gilt
-  \[ R_{ijkl}(u) = \langle \II_{jk} (u) \II_{il}(u) \rangle - \langle \II_{ik}(u), \II_{jl}(u) \rangle. \]
+  Mit $\FFII_{jk}(u) = \left( \partial_j \partial_k X(u) \right)^{N_u}$ gilt
+  \[ R_{ijkl}(u) = \langle \FFII_{jk} (u) \FFII_{il}(u) \rangle - \langle \FFII_{ik}(u), \FFII_{jl}(u) \rangle. \]
 \end{satz}
 
 \begin{bem}
-  Im Spezialfall, dass $X$ eine HF ist, gilt $\II_{jk} = h_{jk} \nu$.\\
+  Im Spezialfall, dass $X$ eine HF ist, gilt $\FFII_{jk} = h_{jk} \nu$.\\
   Da $\langle \nu, \nu \rangle = 1$, folgt $R_{ijkl} = h_{jk} h_{ie} - h_{ik} h_{jl}$.
 \end{bem}
 
@@ -1224,8 +1224,8 @@ $\implies$ $f$ ist partiell differenzierbar
 \end{defn}
 
 \begin{defn}
-  In dieser Situation schreiben wir mit der 2. FF $\II$ von $X$
-  \[ h^\xi : U \to \R^{m \times m}, \quad u \mapsto (\langle \II(e_j, e_k), \xi \rangle)_{jk}. \]
+  In dieser Situation schreiben wir mit der 2. FF $\FFII$ von $X$
+  \[ h^\xi : U \to \R^{m \times m}, \quad u \mapsto (\langle \FFII(e_j, e_k), \xi \rangle)_{jk}. \]
 \end{defn}
 
 \begin{lem}

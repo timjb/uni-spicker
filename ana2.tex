@@ -727,8 +727,8 @@ Eine Kurve $f : \cinterval{a}{b} \to \R$ heißt \emph{regulär}, wenn sie stetig
 \begin{kor}
 Sei $f : \cinterval{a}{b} \to \R^n$ eine reguläre Kurve, $x \coloneqq f(a)$ und $y \coloneqq f(b)$. Dann gilt für die Länge $L_f$ von $f$:
 \[ L_f \ge \norm{x - y}. \]
-Falls hier Gleichheit gilt, dann gibt es eine stetig differenzierbare bijektive Abbildung $\phi : \cinterval{a}{b} \to \cinterval{0}{1}$, sodass $f = c_{xy} \circ \phi$ wobei
-\[ c_{xy} : \cinterval{0}{1} \to \R^n,\quad t \mapsto x + t(y - x) \]
+Falls hier Gleichheit gilt, dann gibt es eine stetig differenzierbare bijektive Abbildung $\phi : \cinterval{a}{b} \to \I$, sodass $f = c_{xy} \circ \phi$ wobei
+\[ c_{xy} : \I \to \R^n,\quad t \mapsto x + t(y - x) \]
 die Strecke von $x$ nach $y$ ist.\\
 \textit{Motto:} Die Gerade ist die kürzeste Verbindung zweier Punkte.
 \end{kor}
@@ -845,13 +845,13 @@ Sei $U \opn \R^n$ und $V \opn \R^m$ sowie $g : U \to V$ und $f : V \to \R^l$ Abb
 % Produktregel
 
 \begin{satz}[MWS]
-Sei $U \opn \R^n$, $u \in U$ und $f = (f_1, ..., f_m) : U \to \R^m$ stetig differenzierbar. Sei außerdem $\xi \in \R^n$, sodass das Bild der Strecke $\cinterval{0}{1} \to \R^n, t \mapsto u + t \xi$ ganz in $U$ liegt. Dann gilt
+Sei $U \opn \R^n$, $u \in U$ und $f = (f_1, ..., f_m) : U \to \R^m$ stetig differenzierbar. Sei außerdem $\xi \in \R^n$, sodass das Bild der Strecke $\I \to \R^n, t \mapsto u + t \xi$ ganz in $U$ liegt. Dann gilt
 \[ f(u + \xi) - f(u) = \left( \Int{0}{1}{(J_{u + t \xi} f)}{t} \right) \cdot \xi = \Int{0}{1}{((J_{u + t \xi} f) \cdot \xi)}{t} \]
 \end{satz}
 
 \begin{kor}[Schrankensatz]
 Sei $U \opn \R^n$, $u \in U$, $f = (f_1, ..., f_m) : U \to \R^m$ und $\xi \in \R^n$ wie eben. Sei
-\[ M \coloneqq \sup \left\{ \norm{J_{u + t \xi} f}_{\text{op}} : t \in \cinterval{0}{1} \right\}, \]
+\[ M \coloneqq \sup \left\{ \norm{J_{u + t \xi} f}_{\text{op}} : t \in \I \right\}, \]
 dann gilt
 \[ \norm{f(u + \xi) - f(u)} \le M \norm{\xi} \]
 \end{kor}
@@ -864,7 +864,7 @@ und
 \end{nota}
 
 \begin{satz}[\emph{Taylorformel} in mehreren Veränderlichen]
-Sei $U \opn \R^n$ und $f : U \to \R$ eine $(p + 1)$-mal stetig differenzierbare Funktion. Ferner sei $u \in U$ und $\xi \in \R^n$, sodass für alle $t \in \cinterval{0}{1}$ gilt $h(t) \coloneqq u + t \xi \in U$. Dann gibt es ein $\tau \in \cinterval{0}{1}$, sodass
+Sei $U \opn \R^n$ und $f : U \to \R$ eine $(p + 1)$-mal stetig differenzierbare Funktion. Ferner sei $u \in U$ und $\xi \in \R^n$, sodass für alle $t \in \I$ gilt $h(t) \coloneqq u + t \xi \in U$. Dann gibt es ein $\tau \in \I$, sodass
 \[ f(u + \xi) = F(1) = \left( \sum_{k=0}^{p} \frac{1}{k!}\,d^k f(u)\,\xi^k \right) + \frac{1}{(p + 1)!}\,d^{p+1} f(u + \tau \xi)\,\xi^{p+1}. \]
 \end{satz}
 

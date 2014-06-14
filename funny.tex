@@ -635,7 +635,7 @@
 \end{defn}
 
 \begin{defn}
-  Ist $A \subset X$ konvex, so heißt $f : A \to \R \cup \{ \pm\infty \}$ \emph{konvexe Funktion}, falls für alle $x, y \in A$ und $t \in \cinterval{0}{1}$ gilt:
+  Ist $A \subset X$ konvex, so heißt $f : A \to \R \cup \{ \pm\infty \}$ \emph{konvexe Funktion}, falls für alle $x, y \in A$ und $t \in \I$ gilt:
   \[ f((1{-}t)x + t y) \leq (1-t) f(x) + t f(y) \]
   Eine Funktion $g : A \to \R \cup \{ \pm \infty \}$ heißt konkav, falls $-g$ konvex ist.
 \end{defn}
@@ -1693,7 +1693,7 @@ Die Unterräume $E_n = \im(Q_n)$ erfüllen dann (3) aus dem ersten Lemma und (2)
     \item Ist $X$ Hilbertraum und $X = \overline{\bigcup_{n \in \N} X_n}$ mit $\mathrm{dim} X_n < \infty$, $X_n \subset X_{n+1}$, so sei $P_n$ die orthogonale Projektion auf $X_n$ und mit $X_{n+1} = X_n \perp E_n$ sei $Q_n$ die orthogonale Projektion auf $E_n$. Ist speziell $X_n = \mathrm{span} \Set{ e_i }{ 0 \leq i \leq n }$ mit einer ONB $(e_i)_{i \in \N}$, so ist
     \[ Q_n x = \scp{x}{e_n} e_n \quad \text{und} \quad P_n x = \sum_{i=0}^n \scp{x}{e_i} e_i \]
     % 2. Beispiel: Definition der Dualbasis eines Banachraums mit Schauderbasis
-    \item Zerlege $\cinterval{0}{1}$ in Punkte $M_n = \Set{ x_{n,i} }{ i = 0, ...., m_n }$ mit $0 = x_{n,0} < ... < x_{n,m} = 1$ und $h_n = \max_{i} \abs{x_{n_i,i} - x_{n_i,i-1}} \xrightarrow{n \to \infty} 0$ sowie $\fa{n \in \N} M_n \subset M_{n+1}$. Sei $A_{n_i,i} = (x_{n_i,i}, x_{n_i,i})$, $h_{n_i,i} = x_{n_i,i} - x_{n_i,i-1}$. Dann ist der Raum der stückweise konstanten Funktionen bzgl. dieser Zerlegung auf Level $n$:
+    \item Zerlege $\I$ in Punkte $M_n = \Set{ x_{n,i} }{ i = 0, ...., m_n }$ mit $0 = x_{n,0} < ... < x_{n,m} = 1$ und $h_n = \max_{i} \abs{x_{n_i,i} - x_{n_i,i-1}} \xrightarrow{n \to \infty} 0$ sowie $\fa{n \in \N} M_n \subset M_{n+1}$. Sei $A_{n_i,i} = (x_{n_i,i}, x_{n_i,i})$, $h_{n_i,i} = x_{n_i,i} - x_{n_i,i-1}$. Dann ist der Raum der stückweise konstanten Funktionen bzgl. dieser Zerlegung auf Level $n$:
     \[ X_n = \Set{ \sum_{i=1}^m \alpha_i \chi_{A_{n_i,i}} }{ \alpha_i \in \K }, \mathrm{dim}(X_n) = m_n \]
     Für $f \in L^1(\ointerval{0}{1})$ definiere $P_n f = \sum_{i=1}^{m_n} (\frac{1}{n_{n_i,i}} \Int{A_{n_i,i}}{}{f(s)}{s}) \chi_{A_{n_i,i}}$.
     Es ist $\mathrm{im}(P_1) = X_n$ und für die Standardzerlegung $x_{n_i,i} = i 2^{-n}$ ist $E_n = \mathrm{span} \Set{ e_{n_i} }{  1 \leq i \leq 2^{n-1} }$ mit $e_0 = \chi_{\ointerval{0}{1}}, e_{n,i} = \chi_{A_{n,2i-1}} - \chi_{A_{n,2i}}$.

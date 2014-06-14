@@ -39,7 +39,7 @@
 \end{defn}
 
 % Ausgelassen: Beispiel $\R^n$
-% Ausgelassen: Beispiel Funktionenraum $\mathcal{C}(\cinterval{0}{1}, \R)$ mit Maximumsnorm
+% Ausgelassen: Beispiel Funktionenraum $\mathcal{C}(\I, \R)$ mit Maximumsnorm
 
 \begin{defn}
   Für einen metrischen Raum $(X, d)$ und eine Teilmenge $A \subset X$ ist $(A, d|_A)$ ein metrischer Raum und $d|_A$ heißt \emph{induzierte Metrik}.
@@ -238,7 +238,7 @@
 % Thema: Zusammenhang und Wegzusammenhang
 
 \begin{defn}
-  Ein topologischer Raum $X$ heißt \emph{wegweise zusammen- hängend}, falls es für je zwei Punkte $x, y \in X$ eine stetige Abbildung $\gamma : \cinterval{0}{1} \to X$ mit $\gamma(0) = x$ und $\gamma(1) = y$ gibt.
+  Ein topologischer Raum $X$ heißt \emph{wegweise zusammen- hängend}, falls es für je zwei Punkte $x, y \in X$ eine stetige Abbildung $\gamma : \I \to X$ mit $\gamma(0) = x$ und $\gamma(1) = y$ gibt.
 \end{defn}
 
 \begin{bspe}
@@ -300,7 +300,7 @@
 \end{bsp}
 
 \begin{prop}
-  Die Menge $\cinterval{0}{1}$ ist zusammenhängend.
+  Die Menge $\I$ ist zusammenhängend.
 \end{prop}
 
 \begin{kor}
@@ -308,7 +308,7 @@
 \end{kor}
 
 \begin{prop}[ZWS]
-  Sei $f : \cinterval{0}{1} \to \R$ stetig. Gilt $f(0) < 0$ und $f(1) > 0$, so existiert ein $t \in \ointerval{0}{1}$ mit $f(t) = 0$.
+  Sei $f : \I \to \R$ stetig. Gilt $f(0) < 0$ und $f(1) > 0$, so existiert ein $t \in \ointerval{0}{1}$ mit $f(t) = 0$.
 \end{prop}
 
 % Vorlesung vom 16.4.2014
@@ -512,7 +512,7 @@
 % Vorlesung vom 30.4.2014
 
 \begin{prop}
-  Das Einheitsintervall $\cinterval{0}{1} \subset \R$ ist kompakt.
+  Das Einheitsintervall $\I \subset \R$ ist kompakt.
 \end{prop}
 
 \begin{prop}
@@ -624,7 +624,7 @@
 \end{bspe}
 
 \begin{lem}[Urysohn]
-  Sei $X$ ein normaler topologischer Raum, $F, G \subset X$ disjunkte abgeschlossene Teilmengen. Dann gibt es eine stetige Funktion $f : X \to \cinterval{0}{1}$, die auf $F$ konstant gleich $0$ und auf $G$ konstant gleich $1$ ist.
+  Sei $X$ ein normaler topologischer Raum, $F, G \subset X$ disjunkte abgeschlossene Teilmengen. Dann gibt es eine stetige Funktion $f : X \to \I$, die auf $F$ konstant gleich $0$ und auf $G$ konstant gleich $1$ ist.
 \end{lem}
 
 \begin{defn}
@@ -692,7 +692,7 @@
 
 \begin{bem}
   Die Abbildung $f^+$ ist nicht i.\,A. stetig, z.\,B. nicht für
-  \[ f : \cointerval{0}{1} \to \cinterval{0}{1}, \quad x \mapsto x. \]
+  \[ f : \cointerval{0}{1} \to \I, \quad x \mapsto x. \]
 \end{bem}
 
 \begin{defn}
@@ -708,8 +708,8 @@
 \begin{defn}
   Sei $X$ ein normaler Hausdorffraum. Dann ist
   \[
-    f : X \to \prod_{\phi \in \mathcal{C}} \cinterval{0}{1}, \quad x \mapsto (\phi(x))_{\phi \in \mathcal{C}}
-    \qquad \text{mit } \mathcal{C} \coloneqq \mathcal{C}(X, \cinterval{0}{1})
+    f : X \to \prod_{\phi \in \mathcal{C}} \I, \quad x \mapsto (\phi(x))_{\phi \in \mathcal{C}}
+    \qquad \text{mit } \mathcal{C} \coloneqq \mathcal{C}(X, \I)
   \]
   eine topologische Einbettung. Dann ist $\beta X \coloneqq \overline{f(X)}$ kompakt. Die Abb. $\beta : X \to \beta X$ heißt \emph{Stone-Čech-Kompaktifizierung} von $X$.
 \end{defn}
@@ -774,10 +774,10 @@
 % $\R P^n = \R P^{n-1} \cup_{\phi} D^n$: $D^n$ an $\R P^{n-1}$ "`angeklebt"' vermöge $S^{n-1} \to \R P^{n-1}, x \mapsto [x]$
 
 \begin{bsp}
-  Möbiusband: $M \coloneqq \cinterval{0}{1} \times \cinterval{-1}{1} / (0, t) \sim (1, -t)$
+  Möbiusband: $M \coloneqq \I \times \cinterval{-1}{1} / (0, t) \sim (1, -t)$
 \end{bsp}
 
-% Ausgelassen: $M \approx \R P^2 \setminus p(A)$, wobei $A \subset S^2$ eine offene Kappe um den Nordpol und $p : S^2 \to \R P^2$ ist. Begründung: $\R P^2 \setminus p(A) \approx S^1 \times \cinterval{-1}{1} / (x, t) \sim (-x, -t)$. Betrachte $\phi : \cinterval{0}{1} \times \cinterval{-1}{1} \to S^1 \times \cinterval{-1}{1} / {\sim}, \quad (x, t) \mapsto (e^{i \pi x}, t)$. Die Abb. $\phi$ faktorisiert über M
+% Ausgelassen: $M \approx \R P^2 \setminus p(A)$, wobei $A \subset S^2$ eine offene Kappe um den Nordpol und $p : S^2 \to \R P^2$ ist. Begründung: $\R P^2 \setminus p(A) \approx S^1 \times \cinterval{-1}{1} / (x, t) \sim (-x, -t)$. Betrachte $\phi : \I \times \cinterval{-1}{1} \to S^1 \times \cinterval{-1}{1} / {\sim}, \quad (x, t) \mapsto (e^{i \pi x}, t)$. Die Abb. $\phi$ faktorisiert über M
 
 \begin{defn}
   Seien $X, Y$ topologische Räume, $A \subset X$ und $f : A \to Y$ stetig. Sei ${\sim}$ die kleinste Äquivalenzrelation auf $X \sqcup Y$, für die $a \sim f(a)$ für alle $a \in A$ gilt. Dann heißt
@@ -794,7 +794,7 @@
 \begin{defn}
   Für $f : X \to Y$ stetig und $f_0 : X \times \{ 0 \} \to Y, (x, \_) \mapsto f(x)$ heißt
   \[
-    Z_f = Y \cup_{f_0} (X \times \cinterval{0}{1})
+    Z_f = Y \cup_{f_0} (X \times \I)
     \qquad \text{\emph{Abbildungszylinder} $Z_f$ von $f$.}
   \]
   Man identifiziert $X$ mit $X \times \{ 1 \} \subset Z_f$.
@@ -929,7 +929,7 @@
 
 \begin{defn}
   Zwei stetige Abbildungen $f, g : X \to Y$ heißen zueinander \emph{homotop} (geschrieben $f \simeq g$), falls es eine stetige Abbildung
-  \[ H : X \times \cinterval{0}{1} \to Y \]
+  \[ H : X \times \I \to Y \]
   mit $H(\blank, 0) = f$ und $H(\blank, 1) = g$ gibt.
 \end{defn}
 
@@ -950,8 +950,8 @@
 \begin{bsp}
   \begin{itemize}
     \item Für $Y \subset \R^n$ konvex sind je zwei Abbildungen $f, g : X \to Y$ zueinander homotop mittels der \emph{linearen Homotopie}
-    \[ H : X \times \cinterval{0}{1} \to Y, \quad (x, t) \mapsto t g(x) + (1-t) f(x). \]
-    \item Für $X = \{ p \}$ einpunktig sind Homtopien $H : X \times \cinterval{0}{1} \to Y$ nichts anderes als Wege in $Y$. % Wege können hintereinander durchlaufen werden.
+    \[ H : X \times \I \to Y, \quad (x, t) \mapsto t g(x) + (1-t) f(x). \]
+    \item Für $X = \{ p \}$ einpunktig sind Homtopien $H : X \times \I \to Y$ nichts anderes als Wege in $Y$. % Wege können hintereinander durchlaufen werden.
   \end{itemize}
 \end{bsp}
 
@@ -1003,7 +1003,7 @@
 % Vorlesung vom 2.6.2014
 
 \begin{defn}
-  Zwei stetige Abbildungen $f, g : X \to Y$ heißen \emph{homotop relativ zu} $A \subset X$ (geschrieben $f \simeq g \rel A$), falls es eine Homotopie $H : X \times \cinterval{0}{1} \to Y$ von $f$ nach $g$ gibt mit
+  Zwei stetige Abbildungen $f, g : X \to Y$ heißen \emph{homotop relativ zu} $A \subset X$ (geschrieben $f \simeq g \rel A$), falls es eine Homotopie $H : X \times \I \to Y$ von $f$ nach $g$ gibt mit
   \[
     H(a,t) = H(a,0) \quad
     \text{für alle $a \in A$ und $t \in \I$.}

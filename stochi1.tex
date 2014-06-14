@@ -542,7 +542,7 @@
 % Vorlesung 9
 
 \begin{bem}
-  Sei $\mu$ ein W-Maß auf $\LebAlg(\R^1)$. Dann definiert $x \mapsto F_{\mu}(x) \coloneqq \mu(\ocinterval{-\infty}{x})$ eine VF. Für eine VF $F : \R \to \cinterval{0}{1}$ definiert umgekehrt $\mu_F(\ocinterval{a}{b}) \coloneqq F(b) - F(a)$ ein W-Maß auf $\LebAlg(\R^1)$. Analog funktioniert dies auf dem $\R^d$.
+  Sei $\mu$ ein W-Maß auf $\LebAlg(\R^1)$. Dann definiert $x \mapsto F_{\mu}(x) \coloneqq \mu(\ocinterval{-\infty}{x})$ eine VF. Für eine VF $F : \R \to \I$ definiert umgekehrt $\mu_F(\ocinterval{a}{b}) \coloneqq F(b) - F(a)$ ein W-Maß auf $\LebAlg(\R^1)$. Analog funktioniert dies auf dem $\R^d$.
 \end{bem}
 
 % Wichtige Verteilungsfunktionen:
@@ -588,7 +588,7 @@
 \begin{bem}
   Unmittelbar klar:
   \begin{itemize}
-    \miniitem{0.35\linewidth}{$H_n(A) \in \cinterval{0}{1}$}
+    \miniitem{0.35\linewidth}{$H_n(A) \in \I$}
     \miniitem{0.60\linewidth}{$H_n(A) \leq H_n(B)$ für $A \subset B$}
     \item $H_n(A \sqcup B) = H_n(A) + H_n(B)$ für $A \cap B = \emptyset$
   \end{itemize}
@@ -610,7 +610,7 @@
 \begin{bem}
   Offenbar gilt:
   \begin{itemize}
-    \miniitem{0.35\linewidth}{$H_n(A \mid B) \in \cinterval{0}{1}$}
+    \miniitem{0.35\linewidth}{$H_n(A \mid B) \in \I$}
     \miniitem{0.60\linewidth}{$H_n(A_1 \mid B) \leq H_n(A_2 \mid B)$ für $A_1 \subset A_2$}
     \item $H_n(A_1 \sqcup A_2 \mid B) = H_n(A_1 \mid B) + H_n(A_2 \mid B)$ für $A_1 \cap A_2 = \emptyset$
   \end{itemize}
@@ -620,12 +620,12 @@
 
 \begin{defn}
   Sei $\Omega \in \LebAlg(\R^d)$ mit $\lambda_d(\Omega) > 0$. Dann heißt das W-Maß
-  \[ \P : \LebAlg(\Omega) \to \cinterval{0}{1}, \quad A \mapsto \tfrac{\lambda_d(A)}{\lambda_d(\Omega)} \quad \text{\emph{Gleichverteilung}.} \]
+  \[ \P : \LebAlg(\Omega) \to \I, \quad A \mapsto \tfrac{\lambda_d(A)}{\lambda_d(\Omega)} \quad \text{\emph{Gleichverteilung}.} \]
 \end{defn}
 
 \begin{defn}
   Sei $\Omega$ eine endliche Menge. Dann definiert
-  \[ \P : \mathcal{P} \to \cinterval{0}{1}, \quad A \mapsto \tfrac{|A|}{|\Omega|} = \tfrac{\text{\# günstige Fälle}}{\text{\# mögliche Fälle}} \]
+  \[ \P : \mathcal{P} \to \I, \quad A \mapsto \tfrac{|A|}{|\Omega|} = \tfrac{\text{\# günstige Fälle}}{\text{\# mögliche Fälle}} \]
   ein W-Maß auf $(\Omega, \mathcal{P}(\Omega))$, genannt \emph{Laplace'sche Wkt}.
 \end{defn}
 
@@ -823,7 +823,7 @@
 % Kapitel 2.11. Grenzwertsatz von Poisson -- Gesetz der kleinen Zahlen
 
 \begin{satz}
-  Für $0 \leq m \leq n$, $p \in \cinterval{0}{1}$ gilt
+  Für $0 \leq m \leq n$, $p \in \I$ gilt
   \[ \frac{\binom{M}{m} \binom{N-M}{n-m}}{\binom{N}{n}} \enspace \xrightarrow[M/N \to p]{M, N \to \infty} \enspace \binom{n}{m} \, p^m \, (1-p)^{n-m}. \]
 \end{satz}
 
@@ -849,7 +849,7 @@
 \end{satz}
 
 \begin{lem}
-  Für $n, k \in \N$, $p \in \cinterval{0}{1}$ und $\P_1$ und $\P_2$ wie eben definiert durch $p_i \coloneqq \binom{n}{k} p^k (1-p)^{n-k}$, $q_i \coloneqq \tfrac{(np)^k}{k!} \exp(-np)$ gilt
+  Für $n, k \in \N$, $p \in \I$ und $\P_1$ und $\P_2$ wie eben definiert durch $p_i \coloneqq \binom{n}{k} p^k (1-p)^{n-k}$, $q_i \coloneqq \tfrac{(np)^k}{k!} \exp(-np)$ gilt
   \[ \mathrm{d}_\infty(\P_1, \P_2) \leq 2 n p^2. \]
 \end{lem}
 
@@ -1066,7 +1066,7 @@
 
 \begin{defn}
   Das durch die ZG $X$ induzierte Bildmaß
-  \[ P_X : \LebAlg(\R^1) \to \cinterval{0}{1}, \quad B \mapsto \P(\{ X \in B \}) = \P(X^{-1}(B)) \]
+  \[ P_X : \LebAlg(\R^1) \to \I, \quad B \mapsto \P(\{ X \in B \}) = \P(X^{-1}(B)) \]
   heißt \emph{Verteilungsgesetz} der ZG $X$ und
   \[ F_X : \R \to \R, \quad x \mapsto P_X(\ocinterval{-\infty}{x}) = \P(\{ X \leq x \}) \]
   heißt \emph{Verteilungsfunktion} (VF) der ZG $X$.
@@ -1081,7 +1081,7 @@
 \begin{beweis}
   \begin{enumerate}
     \item Möglichkeit: Wähle $\Omega \coloneqq \R^1$, $\Alg \coloneqq \LebAlg(\R^1)$ und $\P \coloneqq \mu_F$ als das von von $F$ erzeugte Maß und setze $X \coloneqq \id$.
-    \item Möglichkeit: Wähle $\Omega \coloneqq \cinterval{0}{1}$, $\Alg \coloneqq \Leb(\cinterval{0}{1})$, $\P \coloneqq \lambda_1$. Setze
+    \item Möglichkeit: Wähle $\Omega \coloneqq \I$, $\Alg \coloneqq \Leb(\I)$, $\P \coloneqq \lambda_1$. Setze
     \[
       X(w) \coloneqq F^{-}(w) \coloneqq \inf \{ F \geq w \} \enspace \text{ für } w > 0, \quad
       X(0) \coloneqq \lim_{w \downarrow 0} F^{-}(w)
@@ -1451,7 +1451,7 @@
 
 \begin{defn}
   Seien $X_1, ..., X_d : (\Omega, \Alg, \P) \to (\R^1, \Bor(\R^1))$ ZGn,
-  \[ F = F_{(X_1, ..., X_d)} : \R^d \to \cinterval{0}{1}, \quad (x_1, ..., x_d) \mapsto \P(X_1 {\leq} x_1, ..., X_k {\leq} x_k) \]
+  \[ F = F_{(X_1, ..., X_d)} : \R^d \to \I, \quad (x_1, ..., x_d) \mapsto \P(X_1 {\leq} x_1, ..., X_k {\leq} x_k) \]
   die dazugehörige VF und $P = P_{(X_1, ..., X_d)}$ das von der VF induzierte Maß auf $\Bor(\R^d)$.
   \begin{itemize}
     \item $F$ heißt \emph{diskret}, falls es eine höchstens abzählbare Menge $\Set{ y_i \in \R^d }{ i \in I }$ mit $I \subset \N$ gibt, sodass
@@ -1664,11 +1664,11 @@
 
 \begin{defn}
   Eine Funktion $g : J \to \R$ heißt \emph{konvex}, falls gilt:
-  \[ \fa{x, y \in J} \fa{t \in \cinterval{0}{1}} g(t a + (1{-}t)b) \leq t g(a) + (1{-}t) g(b) \]
+  \[ \fa{x, y \in J} \fa{t \in \I} g(t a + (1{-}t)b) \leq t g(a) + (1{-}t) g(b) \]
 \end{defn}
 
 \begin{satz}
-  Sei $g : \R^1 \to \R^1$ konvex auf einem Intervall $J$ und $X$ eine ZG mit $\P(X \in J) = 1$ und $\P \abs{X} < \infty$. Dann gilt für $x, y \in I$, $t \in \cinterval{0}{1}$:
+  Sei $g : \R^1 \to \R^1$ konvex auf einem Intervall $J$ und $X$ eine ZG mit $\P(X \in J) = 1$ und $\P \abs{X} < \infty$. Dann gilt für $x, y \in I$, $t \in \I$:
   \[
     g(\E X) \leq \E g(X)
     \quad \text{(\emph{Jensen-Ungleichung}).}
@@ -1954,9 +1954,9 @@
   % * Schadenshöhenverteilung
 
   Die Funktion
-  \[ f_a(y) \coloneqq f_Y(y) \cdot (1 + a \cdot \sin(2 \pi \log y)), y \in \R_{>0}^1, a \in \cinterval{0}{1} \]
+  \[ f_a(y) \coloneqq f_Y(y) \cdot (1 + a \cdot \sin(2 \pi \log y)), y \in \R_{>0}^1, a \in \I \]
 
-  Für $a \in \cinterval{0}{1}$ ist dann $\Int{-\infty}{\infty}{f_a(y)}{y} = 1$
+  Für $a \in \I$ ist dann $\Int{-\infty}{\infty}{f_a(y)}{y} = 1$
 
   \[ \E Y^n = \Int{0}{\infty}{y^n f_Y(y)}{y} = ... = \exp(- \frac{n^2}{2}) \]
 
@@ -1996,7 +1996,7 @@
       Y_1 &= g_1(X_1, X_2) = \sqrt{- 2 \log (X_1)} \sin(2 \pi X_2) \\
       Y_2 &= g_2(X_1, X_2) = \sqrt{- 2 \log (X_1)} \cos(2 \pi X_2)
     \end{align*}
-    mit $X_1$ und $X_2$ gleichverteilt auf $\cinterval{0}{1}$.
+    mit $X_1$ und $X_2$ gleichverteilt auf $\I$.
 
     \[ f_{(X_1)}(x_1, x_2) = \ind_{\ointerval{0}{1}} \]
 
@@ -2229,7 +2229,7 @@
 % Kapitel 4.4.4. Beispiele zu Fubini-Tonelli
 
 \iffalse
-  $\Omega_1 = \Omega_2 = \cinterval{0}{1}$, $\mu_1 = \mu_2 = \lambda_1$
+  $\Omega_1 = \Omega_2 = \I$, $\mu_1 = \mu_2 = \lambda_1$
   \begin{itemize}
     \item $f(x, y) \coloneqq \tfrac{x^2 - y^2}{(x^2 + y^2)^2}$
     \item $f(x, y) \coloneqq \begin{cases} (x - \tfrac{1}{2})^{-3} & \text{für } 0 < y < \abs{x - \tfrac{1}{2}} \\ 0, & \text{sonst}$
@@ -2239,7 +2239,7 @@
 
   Beispiel: Gaußsches weißes Rauschen
 
-  Sei $T = \cinterval{0}{1}$, $(X_t)_{t \in T}$ eine Familie unabhängiger, $N(0, 1)$-vertielter ZGn über eiem W-Raum $(\Omega, \Alg, \P)$.
+  Sei $T = \I$, $(X_t)_{t \in T}$ eine Familie unabhängiger, $N(0, 1)$-vertielter ZGn über eiem W-Raum $(\Omega, \Alg, \P)$.
 
   Produktraum: $(T \times \Omega, \Leb(T) \otimes \Alg, \lambda_1 \times \P)$
 

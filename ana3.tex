@@ -56,7 +56,7 @@
 \begin{prob}[Schwaches Maßproblem]
   Gesucht ist eine Abbildung $\mu : \PS(\R^n) \to [\R, \infty]$ mit folgenden Eigenschaften:
   \begin{itemize}
-    \item Normierung: $\mu(\cinterval{0}{1}^n) = 1$
+    \item Normierung: $\mu(\I^n) = 1$
     \item Endliche Additivität: Sind $A, B \subset \R^n$ disjunkt, so gilt $\mu(A \cup B) = \mu(A) + \mu(B)$.
     \item Bewegungsinvarianz: Für eine euklidische Bewegung $f : \R^n \to \R^n$ und $A \subset \R^n$ gilt $\mu(f(A)) = \mu(A)$.
   \end{itemize}
@@ -691,7 +691,7 @@
 % Vorlesung vom 20.11.2013
 
 \begin{bem}
-  Das Cantorsche Diskontinuum ist eine Menge $C \subset \cinterval{0}{1}$, $C \in \Bor$, welche die bemerkenswerte Eigenschaft hat, dass sie gleichzeitig überabzählbar ist und Maß $0$ besitzt. Da außerdem $\Bor \cong \R$ gilt, folgt $\PS(C) \cong \PS(\R) \not\cong \R \cong \Bor$. Somit gibt es eine Nullmenge $N \subset C$, die nicht in $\Bor$ liegt. Es folgt:
+  Das Cantorsche Diskontinuum ist eine Menge $C \subset \I$, $C \in \Bor$, welche die bemerkenswerte Eigenschaft hat, dass sie gleichzeitig überabzählbar ist und Maß $0$ besitzt. Da außerdem $\Bor \cong \R$ gilt, folgt $\PS(C) \cong \PS(\R) \not\cong \R \cong \Bor$. Somit gibt es eine Nullmenge $N \subset C$, die nicht in $\Bor$ liegt. Es folgt:
 \end{bem}
 
 \begin{satz}
@@ -1400,8 +1400,8 @@
 \begin{samepage}
 
 \begin{lem}
-  Sei $U \opn \R^n$ und $V \opn R^{n{+}1} = \R \times \R^n$, sodass der Zylinder $\cinterval{0}{1} \times U$ in $V$ liegt. Sei $\sigma$ eine geschlossene stetig diff'bare $k$-Form auf $V$ mit $k \geq 1$ und sei $\varphi_r : U \to V, \enspace u \mapsto (r, u)$ für $r \in \{ 0, 1 \}$.
-  %die Abbildungen, welche $U$ mit den "`Deckeln des Zylinders"' $\cinterval{0}{1} \times U \subet V$ identifizieren.
+  Sei $U \opn \R^n$ und $V \opn R^{n{+}1} = \R \times \R^n$, sodass der Zylinder $\I \times U$ in $V$ liegt. Sei $\sigma$ eine geschlossene stetig diff'bare $k$-Form auf $V$ mit $k \geq 1$ und sei $\varphi_r : U \to V, \enspace u \mapsto (r, u)$ für $r \in \{ 0, 1 \}$.
+  %die Abbildungen, welche $U$ mit den "`Deckeln des Zylinders"' $\I \times U \subet V$ identifizieren.
   Dann gibt es eine stetig diff'bare $(k{-}1)$-Form $\eta$ auf $U$ mit $\varphi_1^* \sigma - \varphi_2^* \sigma = \d \eta$.
 \end{lem}
 
