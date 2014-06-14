@@ -5,6 +5,9 @@
   /Author (Tim Baumann)
 }
 
+\usepackage{tikz}
+\usetikzlibrary{matrix,shapes,arrows,positioning}
+
 \newcommand{\Tau}{\mathcal{T}} % Großes Tau
 \newcommand{\inte}{\mathop{\mathrm{int}}} % Inneres (interior)
 \newcommand{\conv}{\mathop{\mathrm{conv}}} % Konvexe Hülle
@@ -14,6 +17,7 @@
 \newcommand{\Mor}{\mathrm{Mor}} % Morphisms
 \newcommand{\dom}{\mathrm{dom}} % Domain
 \newcommand{\codom}{\mathrm{codom}} % Codomain
+\newcommand{\op}{\text{op}} % Duale Kategorie
 
 % Kleinere Klammern
 \delimiterfactor=701
@@ -1138,7 +1142,7 @@
 \end{defn}
 
 \begin{bem}
-  Die Einheitsmorphismen sind eindeutig bestimmt, da
+  Die Identitätsmorphismen sind eindeutig bestimmt, da
   \[ \id_A = \id_A \circ \id'_A = \id'_A. \]
 \end{bem}
 
@@ -1189,14 +1193,10 @@
   Die Kategorie $\mathbf{HTop^*}$ besteht aus basispunkterhaltenden Homotopieklassen von basispunkterhaltenden Abbildungen zwischen punktierten topologischen Räumen.
 \end{defn}
 
+% Vorlesung vom 11.6.2014
+
 \begin{defn}
-  Ein (kovarianter) \emph{Funktor} $F : \mathcal{C} \to \mathcal{D}$ zw. Kategorien $\mathcal{C}$ und $\mathcal{D}$ besteht aus einer Abb.
-  von Objekten $F : \Ob(\mathcal{C}) \to \Ob(\mathcal{D})$ und einem Morphismus
-  \[
-    F(f) : F(A) \to F(B) \quad
-    \text{für jeden Morphismus $f : A \to B$,}
-  \]
-  sodass gilt:
+  Ein (kovarianter) \emph{Funktor} $F : \mathcal{C} \to \mathcal{D}$ zw. Kategorien $\mathcal{C}$ und $\mathcal{D}$ besteht aus einer Abb. von Objekten $F : \Ob(\mathcal{C}) \to \Ob(\mathcal{D})$ und einem Morphismus $F(f) \in \Hom_{\mathcal{D}}(F(A), F(B))$ für jeden Morphismus $f \in \Hom_{\mathcal{C}}(A, B)$, sodass gilt:
   \begin{itemize}
     \item $F(\id_A) = \id_{F(A)}$ für alle $A \in \Ob(\mathcal{C})$,
     \item $F(g \circ f) = F(g) \circ F(f)$ für alle $f : A \to B$ und $g : B \to C$ aus $\mathcal{C}$.
@@ -1212,7 +1212,7 @@
     \item Für $\mathcal{C} = \mathbf{Grp}, \mathbf{AbGrp}, \mathbf{Rng}, \mathbf{Top}, ...$ gibt es den \emph{Vergissfunktor} $U : \mathcal{C} \to \mathbf{Set}$.
     \item Besitzen $\mathcal{C}$ und $\mathcal{D}$ nur je ein Objekt (sind also Gruppen), so ist ein Funktor $F : \mathcal{C} \to \mathcal{D}$ nichts anderes als ein Gruppenhomomorphismus.
     \item Der \emph{Potenzmengenfunktor} $P : \mathbf{Set} \to \mathbf{Set}$ ist definiert durch
-    \[ P(X) \coloneqq \mathcal{A}, \quad P(f : A \to B)(A \subseteq X) \coloneqq f(A) \subseteq B. \]
+    \[ P(A) \coloneqq \mathcal{P}(A), \quad P(f : A \to B)(X \subseteq A) \coloneqq f(X) \subseteq B. \]
     \item Sind $P$ und $Q$ partiell geordnete Mengen, so ist ein Funktor $P \to Q$ nichts anderes als eine ordnungserhaltende Abbildung.
   \end{itemize}
 \end{bspe}
@@ -1226,7 +1226,7 @@
 \end{bem}
 
 \begin{defn}
-  Die \emph{duale Kategorie} einer gegebenen Kategorie $\mathcal{C}$ ist die Kategorie $\mathcal{D} \coloneqq \mathcal{C}^{op}$ gegeben durch
+  Die \emph{duale Kategorie} einer gegebenen Kategorie $\mathcal{C}$ ist die Kategorie $\mathcal{D} \coloneqq \mathcal{C}^\op$ gegeben durch
   \[
     \Ob(\mathcal{D}) \coloneqq \Ob(\mathcal{C}), \quad
     \Hom_{\mathcal{D}}(A, B) \coloneqq \Hom_{\mathcal{C}}(B, A), \quad
@@ -1235,57 +1235,121 @@
 \end{defn}
 
 \begin{defn}
-  
+  Ein \emph{kontravarianter Funktor} zwischen Kategorien $\mathcal{C}$ und $\mathcal{D}$ ist ein Funktor $F : \mathcal{C}^\op \to \mathcal{D}$.
 \end{defn}
 
-\begin{defn}
-  Ein \emph{kontravarianter Funktor} zwischen Kategorien $\mathcal{C}$ und $\mathcal{D}$ ist ein Funktor $F : \mathcal{C}^{\text{op}} \to \mathcal{D}$.
-\end{defn}
+\begin{bspe}
+  \begin{itemize}
+    \item Der \emph{kontravariante Potenzmengenfunktor}
+    \[
+      P^* : \mathbf{Set}^\op \to \mathbf{Set}, \quad
+      P(A) \coloneqq \mathcal{P}(A), \quad
+      P(f : A \to B)(Y) \coloneqq f^{-1}(Y)
+    \]
+    \item Sei $k$ ein Körper, dann ist der \emph{Dualisierungsfunktor}
+    \[
+      * : \mathbf{Vect}_k^\op \to \mathbf{Vect}_k, \qquad *(V) \coloneqq \Hom_{\mathbf{Vect}_k}(V, k),
+    \]
+    \[
+      *(f : V \to W) \coloneqq (f^* : W^* \to V^*) \coloneqq \phi \mapsto \phi \circ f
+    \]
+    % Ausgelassen: Kontravarianter Funktor $C$ von der Kategorie der kompakten Hausdorffräume in die Kategorie der $C^*$-Algebren.
+  \end{itemize}
+\end{bspe}
 
-% Beispiele
-% * kontravarianter Potenzmengenfunktor
-% * Abbildung \mapsto duale Abbildung
-% * C^*-Algebren-Zeugs
-
 \begin{defn}
-  Seien $F, G : \mathcal{C} \to \mathcal{D}$ Funktoren. Eine \emph{natürliche Transformation} $\alpha : F \to G$ ordnet jedem $X \in \Ob(\mathcal{C})$ einen Morphismus $\alpha_X \in \Hom_{\mathcal{D}}(F(X), G(X))$ zu, sodass für jeden Morphismus $f : A \to B$ in $\mathcal{C}$ das Diagramm
-  % TODO: Natürlichkeits-Diagramm
-  kommutiert.
+  Seien $F, G : \mathcal{C} \to \mathcal{D}$ Funktoren. Eine \emph{natürliche Transformation} $\alpha : F \to G$ ordnet jedem $X \in \Ob(\mathcal{C})$ einen Morphismus $\alpha_X \in \Hom_{\mathcal{D}}(F(X), G(X))$ zu, sodass für jeden Morphismus $f : A \to B$ in $\mathcal{C}$ folgendes Diagramm kommutiert:
+
+  \begin{center}
+    \iffalse
+    \begin{tikzpicture}[node distance=1cm,auto]
+      \node (FA) {$F(A)$};
+      \node (GA) [below of=FA] {$G(A)$};
+      \node (FB) [right of=FA] {$G(B)$};
+      \node (GB) [below of=FB] {$G(B)$};
+      \draw[->] (FA) to node {$F(f)$} (FB);
+      \draw[->] (GA) to node {$G(f)$} (GB);
+      \draw[->] (FA) to node {$\alpha_A$} (GA);
+      \draw[->] (FB) to node {$\alpha_B$} (GB);
+    \end{tikzpicture}
+    \fi
+
+    \begin{tikzpicture}
+      \matrix (mat) [matrix of nodes, column sep=1.5cm, row sep=0.75cm]{
+        \node (FA) {$F(A)$}; &
+        \node (FB) {$G(B)$}; \\
+        \node (GA) {$G(A)$}; &
+        \node (GB) {$G(B)$}; \\
+      };
+      \draw[->] (FA) to node [above] {$F(f)$} (FB);
+      \draw[->] (GA) to node [above] {$G(f)$} (GB);
+      \draw[->] (FA) to node [left] {$\alpha_A$} (GA);
+      \draw[->] (FB) to node [right] {$\alpha_B$} (GB);
+    \end{tikzpicture}
+  \end{center}
 \end{defn}
 
 \begin{bem}
-  Ist $H : \mathcal{C} \to \mathcal{D}$ ein weiterer Funktor und $\beta : G \to H$ eine weitere natürliche Transformation, so ist auch $\beta \alpha : F \to H$ definiert durch
-  \[ (\beta \alpha)_X \coloneqq \beta_X \circ \alpha_X \]
-  eine natürliche Transformation.
+  Ist $H : \mathcal{C} \to \mathcal{D}$ ein weiterer Funktor und $\beta : G \to H$ eine weitere natürliche Transformation, so ist $\beta \alpha : F \to H$ definiert durch
+  \[ (\beta \alpha)_X \coloneqq \beta_X \circ \alpha_X : F(X) \to H(X) \]
+  eine natürliche Transformation zwischen $F$ und $H$.
 \end{bem}
 
-Trafo-Kategorie $\left[F, G\right]$
+\begin{bem}
+  Für zwei Kategorien $\mathcal{C}$ und $\mathcal{D}$ gibt es die \emph{Funktorkategorie} $\left[\mathcal{C}, \mathcal{D}\right]$ der Funktoren zwischen $\mathcal{C}$ und $\mathcal{D}$ mit natürlichen Transformation als Morphismen.
+\end{bem}
+
+\begin{defn}
+  Die Isomorphismen in $\left[\mathcal{C}, \mathcal{D}\right]$ heißen \emph{natürliche Isomorphismen}.
+\end{defn}
+
+\begin{lem}
+  Eine natürliche Transformation $\eta : F \to G$ ist genau dann ein natürlicher Isomorphismus, wenn alle Komponenten $(\eta_X : F(X) \to G(X))_{X \in \Ob \mathcal{C}}$ Isomorphismen sind.
+\end{lem}
 
 \begin{bsp}
-  kovarianter Funktor $** : Vect_k \to Vect_k$, natürliche Transformation
+  Sei $** \coloneqq * \circ * : \mathbf{Vect}_k \to \mathbf{Vect}_k$ der Bidualisierungsfunktor. Es gibt eine nat. Transformation $\eta : \Id_{\mathbf{Vect}_k} \to **$ gegeben durch
+  \[ \eta_V(v \in V) \coloneqq (\phi \mapsto \phi(v)). \]
+  Für endlichdimensionale VR $V$ ist $\eta_V$ ein Isomorphismus, also ist $\eta|\mathbf{FinVect}_k : \Id_{\mathbf{FinVect}_k} \to **$ ein natürlicher Isomorphismus.
 \end{bsp}
+
+% Ausgelassen: Beispiel Kategorienäquivalenz: Kategorie der lokalkompakten Hausdorffräume ist äquivalent zur Kategorie der punktierten kompakten Hausdorffräume mittels des Einpunktkompaktifizierungs-Funktors
 
 % Kapitel: Überlagerungen
 
 \begin{defn}
   Seien $X, Y$ topologische Räume.
   \begin{itemize}
-    \item Eine Teilmenge $Y \subset Y$ wird durch eine stetige Abbildung $p : X \to Y$ \emph{gleichmäßig überlagert}, falls es einen diskreten Raum $D$ und einen Homöomorphismus $\phi : p^{-1}(U) \approx U \times D$ gibt, sodass $p = \pi_1 \circ \phi$ gilt, wobei $\pi_1 : X \times D \to X$ die Projektion ist.
+    \item Eine Teilmenge $Y \subset Y$ wird durch eine stetige Abbildung $p : X \to Y$ \emph{gleichmäßig überlagert}, falls es einen diskreten Raum $D$ und einen Homöomorphismus
+    \[
+      \phi : p^{-1}(U) \xrightarrow{\approx} U \times D
+      \quad \text{mit} \quad
+      p = \pi_1 \circ \phi
+    \]
+    gibt, wobei $\pi_1 : X \times D \to X$ die Projektion ist.
+    % Ausgelassen: Kommutatives Diagramm
     \item Die Abbildung $p$ heißt \emph{Überlagerung}, falls jeder Punkt in $Y$ eine durch $p$ gleichmäßig überlagerte Umgebung besitzt.
   \end{itemize}
-  % TODO: Diagramm
 \end{defn}
 
 \begin{bsp}
-  $\R \to S^1, \quad t \mapsto e^{2 \pi it}$ ist eine Überlagerung.
+  $\R \to S^1, \enspace t \mapsto e^{2 \pi it}$ ist eine Überlagerung.
 \end{bsp}
 
 \begin{bem}
   Sei $p : X \to Y$ eine Überlagerung, $Y$ zshgd. Dann ist
-  \[ y \mapsto \text{\#} (p^{-1}(yy)) \]
+  \[ Y \to \N_{\geq 1} \cup \{ \infty \}, \quad y \mapsto \text{\#} (p^{-1}(y)) \]
   konstant, da lokalkonstant.
   Falls $d = \text{\#} (p^{-1}(y))$ endlich ist, heißt $p$ eine \emph{$d$-blättrige} Überlagerung. Ansonsten heißt $p$ eine \emph{unendliche Überlagerung}.
 \end{bem}
+
+\begin{defn}
+  Eine stetige Abbildung $p : X \to Y$ heißt \emph{lokaler Homöomorphismus}, falls für alle $x \in X$ eine offene Umgebung $U_x$ von $x$ existiert, sodass $p|_{U_x} : U_x \to p(U_x)$ ein Homöomorphismus ist.
+\end{defn}
+
+\begin{lem}
+  Jede Überlagerung ist ein lokaler Homöomorphismus.
+\end{lem}
 
 \begin{prop}
   Sei $p : X \to Y$ eine Überlagerung, $\gamma : \I \to Y$ ein Weg und $x \in X$ mit $p(x) = \gamma(0)$. Dann gibt es einen eindeutig bestimmten Weg $\tilde{\gamma} : \I \to X$ mit $\tilde{\gamma}(0) = x$ und $p \circ \tilde{\gamma} = \gamma$.
