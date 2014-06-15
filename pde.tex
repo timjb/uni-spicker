@@ -1525,4 +1525,108 @@
   \]
 \end{lem}
 
+% Vorlesung vom 12.6.2014
+
+% Unterkapitel: Spezialfall $n=3$ und die Kirchhoffsche Formel
+
+\begin{nota}
+  $\widetilde{U}_x(t, r) \coloneqq r U_x(t, r)$, $\widetilde{G}_x(r) \coloneqq r G_x(r)$, $\widetilde{H}_x(r) \coloneqq r H_x(r)$
+\end{nota}
+
+% 4.3.
+\begin{lem}
+  Sei $u \in \mathcal{C}^m(\cointerval{0}{\infty} \times \R^3)$ für $m \geq 3$ eine Lösung der Wellengleichung (4.1). Dann gilt
+  \[
+    \left\{ \begin{array}{ll}
+      \partial_t^2 \widetilde{U}_x - \partial_r^2 \widetilde{U}_x = 0 & \text{in } \ointerval{0}{\infty} \times \ointerval{0}{\infty} \\
+      \widetilde{U}_x(0, r) = \widetilde{G}_x(r), \partial_r \widetilde{U}_x(0, r) = \widetilde{H}_x(r) & \text{in } \{ 0 \} \times \ointerval{0}{\infty} \\
+      \widetilde{U}_x(t, 0) = 0 & \text{für } t > 0
+    \end{array} \right.
+  \]
+\end{lem}
+
+\begin{bem}
+  Mit der Darstellungsformel für $\tilde{U}_x : \cointerval{0}{\infty} \times \cointerval{0}{\infty} \to \R$ folgt die \emph{Kirchhoffsche Formel} für $u : \ointerval{0}{\infty} \times \R^3 \to \R$:
+  \begin{align*}
+    u(t, x) &= \lim_{r \to 0} U_x(t, r) = \lim_{r \to 0} \frac{\widetilde{U}_x(t, r)}{r} \\
+    &= \partial_t \left( t \quad \MVInt{\mathclap{\partial B_t(x)}}{}{\enspace g(y)}{S(y)} \right) + t \quad \MVInt{\mathclap{\partial B_t(x)}}{}{\enspace h(y)}{S(y)} \\
+    &= \quad \MVInt{\mathclap{\partial B_t(x)}}{}{\enspace \left( g(y) + D g(y) \cdot (y-x) + t h(y) \right)}{S(y)}
+  \end{align*}
+\end{bem}
+
+% 4.4.
+\begin{satz}
+  Seien $g \in \mathcal{C}^3(\R^3)$, $h \in \mathcal{C}^2(\R^3)$ und $u : \ointerval{0}{\infty} \times \R^3 \to \R$ und $u : \ointerval{0}{\infty} \times \R^3 \to \R$ definiert durch die Kirchhoffsche Formel. Es gilt
+  \begin{itemize}
+    \item $u \in \mathcal{C}^2(\cointerval{0}{\infty} \times \R^3)$
+    \item $u$ ist die eindeutige Lösung der dreidimensionalen Wellengleichung mit Anfangswerten wie in (4.1)
+  \end{itemize}
+\end{satz}
+
+\begin{bemn}
+  \begin{itemize}
+    \item Regularitätsverlust: $u$ nur in $\mathcal{C}^2$, obwohl $g \in \mathcal{C}^3$
+    \item $u(t, x)$ hängt nur von den Werten von $g$ und $h$ auf $\partial B_t(x)$ ab.
+    \item Somit gilt das \emph{Huygensche Prinzip}: Störungen der Anfangsdaten in der Umgebung eines Punktes ändern für große Zeiten die Lösung in dieser Umgebung nicht.
+    \item Für ungerade Dimensionen $n$ funktioniert die Strategie der Transformation auf eine Lösung der eindim. Wellengleichung mit
+    \[ \widetilde{U}_x(t, r) \coloneqq (r^{-1} \partial_r)^{(n-3)/2} (r^{n-2} U_x(t, r)). \]
+    % Ausgelassen: Regularitätsanforderung $\mathcal{C}^{(n+3)/2}$ von $g$, $\mathcal{C}^{(n+1)/2}$ von $h$ für $\mathcal{C}^2$-Lösung
+  \end{itemize}
+\end{bemn}
+
+% Alternativer Zugang für ungerade Dimensionen und Zusammenhang WG/WLG
+\begin{bem}(Zusammenhang von WG und WLG)
+  Sei $\Psi_{(n=1)}$ die Fundamentallösung der WLG in $\ointerval{0}{\infty} \times \R^1$. Sei $u$ eine glatte, beschränkte Lsg der Wellengleichung (4.1) mit $h \equiv 0$. Sei
+  \[
+    v(t, x) \coloneqq \Int{-\infty}{\infty}{\Psi_{(n=1)}(t, s) \cdot \overline{u}(s, x)}{s}
+    \quad \text{mit} \enspace \overline{u}(s, x) \coloneqq u(\abs{s}, x).
+  \]
+  Dann erfüllt $v$ die homogene WLG
+  \[
+    \left\{ \begin{array}{rlll}
+      u_t - \Delta u &=& 0 & \text{in $\ointerval{0}{\infty} \times \R^n$},\\
+      u &=& g & \text{auf $\{ 0 \} \times \R^n$}.
+    \end{array} \right.
+  \]
+\end{bem}
+% TODO: Weitere Folgerungen?
+
+% Überschrift: Spezialfall $n=2$ und die Poissonsche Formel
+
+\begin{bem}
+  Für ungerade Dimensionen $n$ können wir Lsgen der WG herleiten. Sei nun $u : \cointerval{0}{\infty} \times \R^n \to \R$ eine Lösung von (4.1) mit $n$ gerade. Dann definiert
+  \[
+    \overline{u} : \cointerval{0}{\infty} \times \R^{n+1} \to \R, \quad (t, (x, \underline{\,\,\,})) \mapsto u(t, x)
+  \]
+  eine Lsg der homogenen WG mit Startwerten $\overline{u} = \overline{g}$, $\partial_t \overline{u} = \overline{h}$ auf $\{ 0 \} \times \R^{n+1}$ (wobei $\overline{g}$ und $\overline{h}$ analog definiert zu $\overline{u}$ sind). Mit der Darstellung von $\overline{u}$ und passenden Transformationen ergibt sich eine Formel für $u$. Speziell für $n=2$:
+\end{bem}
+
+% 4.5.
+\begin{satz}
+  Seien $g \in \mathcal{C}^3(\R^2)$, $h \in \mathcal{C}^2(\R^2)$ und $u : \ointerval{0}{\infty} \times \R^2 \to \R$ definiert durch
+  \[
+    u(t, x) \coloneqq \tfrac{1}{2} \partial_t \left( t^2 \enspace \MVInt{\mathclap{B_t(x)}}{}{\enspace \tfrac{g(y)}{\sqrt{t^2 - \abs{y-x}^2}}}{y} \right) + \tfrac{1}{2} t^2 \enspace \MVInt{\mathclap{B_t(x)}}{}{\enspace \tfrac{g(y)}{\sqrt{t^2 - \abs{y-x}^2}}}{y}
+  \]
+  Dann ist $u \in \mathcal{C}^2(\cointerval{0}{\infty} \times \R^2)$ die eindt. Lsg von (4.1) auf $\ointerval{0}{\infty} \times \R^2$.
+\end{satz}
+
+\begin{bem}
+  Bei geraden Dimensionen hängt $u(t, x)$ von allen Anfangsdaten in $B_t(x)$ ab, d.\,h. es gilt kein Huygensches Prinzip.
+\end{bem}
+
+% Ausgelassen: Es wird $g \in \mathcal{C}^{\tfrac{n+4}{2}}$, $h \in \mathcal{C}^{\tfrac{n+2}{2}}$ für $u \in \mathcal{C}^2$ benötigt
+
+% Kapitel 4.1.3. Die inhomogene Gleichung
+
+Sei $f : \ointerval{0}{\infty} \times \R^n$. Sei $v_s$ für $s \in \ointerval{0}{\infty}$ die Lösung von
+% TODO: Muss hier 0 statt $g$ stehen?
+\[
+  \left\{ \begin{array}{rlll}
+    \partial_t^2 v_s - \Delta v_s = 0 & \text{in } \ointerval{s}{\infty} \times \R^n, \\
+    v_s = g, \enspace \partial_t v_s = f & \text{auf } \{ s \} \times \R^n.
+  \end{array} \right.
+\]
+
+Setze $u_1(t, x) \coloneqq \Int{0}{t}{v_s(t, x)}{s}$.
+
 \end{document}
