@@ -1340,7 +1340,7 @@
   Sei $p : X \to Y$ eine Überlagerung, $Y$ zshgd. Dann ist
   \[ Y \to \N_{\geq 1} \cup \{ \infty \}, \quad y \mapsto \text{\#} (p^{-1}(y)) \]
   konstant, da lokalkonstant.
-  Falls $d = \text{\#} (p^{-1}(y))$ endlich ist, heißt $p$ eine \emph{$d$-blättrige} Überlagerung. Ansonsten heißt $p$ eine \emph{unendliche Überlagerung}.
+  Falls $d = \text{\#} (p^{-1}(y))$ endlich ist, heißt $p$ eine \emph{$d$-blättrige} Überlagerung. Ansonsten heißt $p$ eine \emph{unendliche Überlagerung}. Eine Überlagerung mit mehr als einem Blatt heißt \emph{nichttriviale Überlagerung}.
 \end{bem}
 
 \begin{defn}
@@ -1353,6 +1353,42 @@
 
 \begin{prop}
   Sei $p : X \to Y$ eine Überlagerung, $\gamma : \I \to Y$ ein Weg und $x \in X$ mit $p(x) = \gamma(0)$. Dann gibt es einen eindeutig bestimmten Weg $\tilde{\gamma} : \I \to X$ mit $\tilde{\gamma}(0) = x$ und $p \circ \tilde{\gamma} = \gamma$.
+\end{prop}
+
+% Vorlesung vom 16.6.2014
+
+\begin{satz}[Homotopie-Liftungstheorem]
+  Sei $p : X \to Y$ eine Überlagerung und $F : W \times \I \to Y$ eine Homotopie. Sei $\tilde{f} : W \to X$ eine Liftung von $F(\blank, 0)$, d.\,h. $p \circ \tilde{f} = F(\blank, 0)$. Dann existiert eine Homotopie $\widetilde{F} : W \times \I \to X$ mit $\widetilde{F}(\blank, 0) = \widetilde{f}$ und $p \circ \widetilde{F} = F$.
+\end{satz}
+
+\begin{kor}
+  Seien $\gamma_0, \gamma_1$ Wege in $Y$ mit $\gamma_0 \simeq \gamma_1 \rel \{ 0, 1 \}$ und $\widetilde{\gamma_0}, \widetilde{\gamma_1} : \I \to X$ Liftungen von $\gamma_0$ und $\gamma_1$ mit dem gleichen Anfangspunkt $\widetilde{\gamma_0}(0) = \widetilde{\gamma_1}(0) = x_0 \in X$. Dann gilt $\widetilde{\gamma_0}(1) = \widetilde{\gamma_1}(1)$ und $\widetilde{\gamma_0} \simeq \widetilde{\gamma_1} \rel \{ 0, 1 \}$.
+\end{kor}
+
+\begin{kor}
+  Sei $\gamma : \I \to Y$ ein geschlossener Weg homotop zu einem konstanten Weg $\rel \{ 0, 1 \}$. Dann ist jeder Lift $\widetilde{\gamma} : \I \to X$ auch ein geschlossener Weg und homotop zu einem konstanten Weg $\rel \{ 0, 1 \}$.
+\end{kor}
+
+\begin{kor}
+  Sei $Y$ ein wegzusammenhängender Raum, $p : X \to Y$ eine wegzusammenhängende nichttriviale Überlagerung. Ist $y_0 \in Y$, so gilt $\pi_1(Y, y_0) \not= 1$.
+\end{kor}
+
+\begin{kor}
+  $\R P^2 \not\approx S^2$, da die Quotientenabbildung $S^2 \to S^2/{\sim} = \R P^2$ eine nichttriviale Überlagerung und $S^2$ einfach zusammenhängend ist.
+\end{kor}
+
+\begin{prop}
+  Die Abbildung $p : \R \to S^1, t \mapsto e^{2 \pi i t}$ ist eine Überlagerung von $S^1$. Bezeichne für geschl. Wege $f : \I \to S^1$ mit $f(0) = f(1) = 0$ mit $\tilde{f}$ die Liftung von $f$ mit $\tilde{f}(0) = 0$. Dann ist
+  \[ \mathrm{deg} : \pi_1(S^1, 0) \to \Z, \quad [f] \mapsto \tilde{f}(1) \in \Z \]
+  ein Gruppenisomorphismus.
+\end{prop}
+
+\begin{defn}
+  Stetig Abbildungen $f : S^1 \to S^1$ mit $f(1) = 1$ können als geschlossene Wege $\I \to S^1$ aufgefasst werden. Dann heißt $\deg f \in \Z$ der \emph{Abbildungsgrad} von $f$.
+\end{defn}
+
+\begin{prop}
+  $\deg(z \mapsto z^n : S^1 \to S^1) = n$ für alle $n \in \Z$.
 \end{prop}
 
 \end{document}
