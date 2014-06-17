@@ -951,4 +951,33 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
   \end{itemize}
 \end{satz}
 
+% Vorlesung vom 16.6.2014
+
+\begin{bem}
+  Falls $A(t) \in \R^{n \times n}$ von $t$ abhängig, so gibt es kein Kriterium mit Eigenwerten von $A(t)$, um Stabilität der Lösung $y \equiv 0$ von $\dot{y} = A(t) \cdot y$ zu überprüfen.
+\end{bem}
+
+% Kapitel 4.2.2. Nichtlineare autonome DGLn
+
+\begin{lem}
+  Sei $\D \subset \R^n$ offen, $f : \D \to \R^n$ stetig, lokal Lipschitz-stetig. Ist $y$ eine Lsg von $\dot{y} = f(y)$ auf $\cointerval{0}{\infty}$ mit $y_{\infty} = \lim_{t \to \infty} y(t)$, dann ist $y_{\infty}$ eine Ruhelage von $f$, d.\,h. $f(y_{\infty}) = 0$.
+\end{lem}
+
+% 4.4.
+\begin{satz}
+  Sei $\D \subset \R^n$ offen, $f : \D \to \R^n$ stetig differenzierbar. Sei $y_s(t) \equiv y_{*} \in \R^n$ eine stationäre Lsg von $\dot{y} = f(y)$, d.\,h. $f(y_{*}) = 0$. Sei
+  \[
+    J_f(y_{*}) = \begin{pmatrix}
+      \frac{\partial f_1}{\partial y_1}(y_{*}) & \cdots & \frac{\partial f_1}{\partial y_n} (y_{*}) \\
+      \vdots & & \vdots \\
+      \frac{\partial f_n}{\partial y_1} (y_{*}) & \cdots & \frac{\partial f_n}{\partial y_n} (y_{*})
+    \end{pmatrix}
+  \]
+  die Jacobi-Matrix von $f$ in $y_{*}$. Dann gilt:
+  \begin{itemize}
+    \item Wenn jeder EW von $J_f(y_{*})$ Realteil $< 0$ besitzt, dann ist $y_s \equiv y_{*}$ asymptotisch stabil.
+    \item Hat $J_f(y_{*})$ mind. einen EW mit Realteil $> 0$, dann ist $y_s$ instabil.
+  \end{itemize}
+\end{satz}
+
 \end{document}
