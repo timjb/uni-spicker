@@ -18,6 +18,7 @@
 \newcommand{\dom}{\mathrm{dom}} % Domain
 \newcommand{\codom}{\mathrm{codom}} % Codomain
 \newcommand{\op}{\text{op}} % Duale Kategorie
+\newcommand{\Deck}{\mathrm{Deck}} % Gruppe der Decktransformationen
 
 % Kleinere Klammern
 \delimiterfactor=701
@@ -1390,5 +1391,33 @@
 \begin{prop}
   $\deg(z \mapsto z^n : S^1 \to S^1) = n$ für alle $n \in \Z$.
 \end{prop}
+
+% Vorlesung vom 18.6.2014
+
+% TODO: Abbildungsgrad für beliebige Abbildungen $S^1 \to S^1$
+
+\begin{kor}[Fundamentalsatz der Algebra]
+  Jedes nicht-konstantes Polynom mit komplexen Koeffizienten besitzt eine Nullstelle in $\C$.
+\end{kor}
+
+% Ausgelassen: Liftungsproblem
+
+\begin{defn}
+  Ein topol. Raum $X$ heißt \emph{lokal wegzusammenhängend}, falls für alle $x \in X$ und Umgebungen $U_x \subseteq X$ von $x$ eine wegzshgde Umgebung $V_x \subseteq U_x$ von $x$ existiert.
+\end{defn}
+
+\begin{satz}[Liftungstheorem]
+  Sei $p : X \to Y$ eine Überlagerung, $W$ wegzshgd und lokal wegzshgd, $f : W \to Y$ stetig, $x_0 \in X$, $w_0 \in W$ mit $y_0 \coloneqq p(x_0) = f(w_0)$. Dann existiert eine stetige Abbildung $\tilde{f} : W \to X$ mit $p \circ \tilde{f} = f$ und $\tilde{f}(w_0) = x_0$ genau dann, wenn
+  \[ f_*(\pi_1(W, w_0)) \subseteq \im (p_* : \pi_1(X, x_0) \to \pi_1(Y, y_0)). \]
+  In diesem Fall ist die Liftung $\tilde{f}$ eindeutig.
+\end{satz}
+
+\begin{defn}
+  Eine \emph{Decktransformation} einer Überlagerung $p : X \to Y$ ist ein Homöomorphismus $\phi : X \to X$ mit $p \circ \phi = p$. Ihre Menge bildet mit der Abbildungs-Komposition eine Gruppe $\Deck(p)$.
+\end{defn}
+
+\begin{kor}
+  Seien $p : X \to Y$ eine Überlagerung, $x_0, x_1 \in X$ mit $p(x_0) = p(x_1)$. Ist $X$ einfach zshgd und lokal wegzshgd, so gibt es genau eine Decktransformation $\phi : X \to X$ mit $\phi(x_0) = x_1$.
+\end{kor}
 
 \end{document}
