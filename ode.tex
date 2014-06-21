@@ -9,7 +9,9 @@
 \delimiterfactor=701
 
 \newcommand{\D}{\mathcal{D}}
+\newcommand{\E}{\mathcal{E}}
 \newcommand{\dist}{\mathrm{dist}} % Entfernung (distance)
+\newcommand{\scp}[2]{\left( #1 \!\mid\! #2 \right)} % Skalarprodukt
 
 \begin{document}
 
@@ -946,7 +948,7 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
   Sei $A \in \R^{n \times n}$ und $\lambda_j = \alpha_j + i \beta_j \in \C$ für die Eigenwerte von $A$. Das GGW $y_* \equiv 0$ von $\dot{y} = Ay$ ist genau dann
   \begin{itemize}
     \item stabil, wenn für alle EWe $\Re(\lambda_j) = \alpha_j \leq 0$ gilt und alle EWe mit $\Re(\lambda_j) = 0$ halbeinfach sind, d,\,h. die geometrische Vielfachheit mit der algebraischen übereinstimmt,
-    \item asymptotisch stabil, wenn für alle EWe $\Re(\lambda_j) = \alpha_j < 0$ gilt,
+    \item exponentiell stabil, wenn für alle EWe $\Re(\lambda_j) = \alpha_j < 0$ gilt,
     \item ansonsten instabil.
   \end{itemize}
 \end{satz}
@@ -979,5 +981,28 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
     \item Hat $J_f(y_{*})$ mind. einen EW mit Realteil $> 0$, dann ist $y_s$ instabil.
   \end{itemize}
 \end{satz}
+
+% Vorlesung vom 18.6.2014
+
+\begin{bem}
+  Im Fall von EWen $< 0$ und mind. einem EW $= 0$ ist keine Aussage möglich.
+\end{bem}
+
+% Ausgelassen: Beispiel: Mathematisches Pendel ohne Reibung
+
+\begin{defn}
+  Sei $\D \subset \R^n$ offen, $f : \D \to \R^n$ stetig, lokal Lipschitz-stetig. eine stetig differenzierbare Funktion $\E : \D \to \R$ heißt \emph{erstes Integral} von $\dot{y} = f(y)$, wenn gilt: $\fa{y \in \D} \scp{\nabla \E(y)}{f(y)} = 0$.
+\end{defn}
+
+\begin{bsp}
+  Sei $H : \D \to \R$ eine Hamiltonische Funktion. Das zugehörige Hamiltonische System ist
+  \[
+    \left\{ \begin{array}{lll}
+      \dot{y} &= & \tfrac{\partial}{\partial z} H(y, z) \\
+      \dot{z} &= & - \tfrac{\partial}{\partial y} H(y, z).
+    \end{array} \right.
+  \]
+  Dann ist $\E(y, z) \coloneqq H(y, z)$ ein erstes Integral.
+\end{bsp}
 
 \end{document}
