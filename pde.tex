@@ -1172,7 +1172,7 @@
   \begin{align*}
     \left. \begin{array}{l}
       \text{subkalorisch}\\
-      \text{kalorisch}\\
+      \text{\emph{kalorisch}}\\
       \text{superkalorisch}\\
     \end{array} \right\}
     \text{ falls }
@@ -1433,7 +1433,7 @@
 
 % Vorlesung vom 5.6.2014
 
-\section{Die Wellengleichung}
+\section{Wellengleichung}
 
 % Ausgelassen: Physikalische Motivation
 
@@ -1556,7 +1556,7 @@
 
 % 4.4.
 \begin{satz}
-  Seien $g \in \mathcal{C}^3(\R^3)$, $h \in \mathcal{C}^2(\R^3)$ und $u : \ointerval{0}{\infty} \times \R^3 \to \R$ und $u : \ointerval{0}{\infty} \times \R^3 \to \R$ definiert durch die Kirchhoffsche Formel. Es gilt
+  Seien $g \in \mathcal{C}^3(\R^3)$, $h \in \mathcal{C}^2(\R^3)$ und $u : \ointerval{0}{\infty} \times \R^3 \to \R$ definiert durch die Kirchhoffsche Formel. Es gilt
   \begin{itemize}
     \item $u \in \mathcal{C}^2(\cointerval{0}{\infty} \times \R^3)$
     \item $u$ ist die eindeutige Lösung der dreidimensionalen Wellengleichung mit Anfangswerten wie in (4.1)
@@ -1573,6 +1573,15 @@
     % Ausgelassen: Regularitätsanforderung $\mathcal{C}^{(n+3)/2}$ von $g$, $\mathcal{C}^{(n+1)/2}$ von $h$ für $\mathcal{C}^2$-Lösung
   \end{itemize}
 \end{bemn}
+
+\begin{satz}
+  Sei $n \geq 3$ ungerade, $g \in \mathcal{C}^{\tfrac{n+3}{2}}(\R^n)$, $h \in \mathcal{C}^{\tfrac{n+1}{2}}$ und $u : \ointerval{0}{\infty} \times \R^n \to \R$ definiert durch
+  \begin{align*}
+    u(t, x) \coloneqq & \left( \prod_{k=1}^{(n-1)/2} (2k - 1) \right)^{-1} \left[ \partial_t \left( t^{-1} \partial_t \right)^{\tfrac{n-3}{2}} \left( t^{n-2} \enspace \MVInt{\mathclap{\partial B_t(x)}}{}{\enspace g}{\HM^{n-1}} \right) \right. \\
+    & + \left. \left( t^{-1} \partial_t \right)^{\tfrac{n-3}{2}} \left( t^{n-2} \enspace \MVInt{\mathclap{\partial B_t(x)}}{}{\enspace h}{\HM^{n-1}} \right) \right]
+  \end{align*}
+  Dann ist $u \in \mathcal{C}^2(\cointerval{0}{\infty}) \times \R^n$ und die eindeutige Lösung der homogenen WG auf $\cointerval{0}{\infty} \times \R^n$ mit $u = g$ und $\partial_t u = h$ auf $\{ 0 \} \times \R^n$.
+\end{satz}
 
 % Alternativer Zugang für ungerade Dimensionen und Zusammenhang WG/WLG
 \begin{bem}(Zusammenhang von WG und WLG)
@@ -1610,23 +1619,84 @@
   Dann ist $u \in \mathcal{C}^2(\cointerval{0}{\infty} \times \R^2)$ die eindt. Lsg von (4.1) auf $\ointerval{0}{\infty} \times \R^2$.
 \end{satz}
 
+% Ausgelassen: Allgemeine Lösung für gerade Dimensionen
+
 \begin{bem}
   Bei geraden Dimensionen hängt $u(t, x)$ von allen Anfangsdaten in $B_t(x)$ ab, d.\,h. es gilt kein Huygensches Prinzip.
 \end{bem}
 
+\begin{satz}
+  Sei $n$ gerade, $g \in \mathcal{C}^{\tfrac{n+4}{2}}(\R^n)$, $h \in \mathcal{C}^{\tfrac{n+2}{2}}(\R^n)$ und $u : \ointerval{0}{\infty} \times \R^n \to \R$ definiert durch
+  \begin{align*}
+    u(t, x) \coloneqq & \left( \prod_{k=1}^{n/2} 2k \right)^{-1} \left[ \partial_t \left( t^{-1} \partial_t \right)^{\tfrac{n-2}{2}} \left( t^n \enspace \MVInt{\mathclap{B_t(x)}}{}{\enspace \frac{g(y)}{(t^2 - \abs{x-y}^2)^{1/2}}}{y} \right) \right. \\
+    & \left. + \left( t^{-1} \partial_t \right)^{\tfrac{n-2}{2}} \left( t^n \enspace \MVInt{\mathclap{B_t(x)}}{}{ \enspace \frac{h(y)}{(t^2 - \abs{x-y}^2)^{1/2}}}{y} \right) \right]
+  \end{align*}
+  Dann ist $u \in \mathcal{C}^2(\cointerval{0}{\infty}) \times \R^n$ und die eindeutige Lösung der homogenen WG auf $\cointerval{0}{\infty} \times \R^n$ mit $u = g$ und $\partial_t u = h$ auf $\{ 0 \} \times \R^n$.
+\end{satz}
 % Ausgelassen: Es wird $g \in \mathcal{C}^{\tfrac{n+4}{2}}$, $h \in \mathcal{C}^{\tfrac{n+2}{2}}$ für $u \in \mathcal{C}^2$ benötigt
 
 % Kapitel 4.1.3. Die inhomogene Gleichung
 
-Sei $f : \ointerval{0}{\infty} \times \R^n$. Sei $v_s$ für $s \in \ointerval{0}{\infty}$ die Lösung von
-% TODO: Muss hier 0 statt $g$ stehen?
-\[
-  \left\{ \begin{array}{rlll}
-    \partial_t^2 v_s - \Delta v_s = 0 & \text{in } \ointerval{s}{\infty} \times \R^n, \\
-    v_s = g, \enspace \partial_t v_s = f & \text{auf } \{ s \} \times \R^n.
-  \end{array} \right.
-\]
+\begin{satz}
+  Sei $f \in \mathcal{C}^{\lfloor n/2 \rfloor - 1}(\ointerval{0}{\infty} \times \R^n)$. Sei $v_s : \ointerval{s}{\infty} \times \R^n \to \R$ für $s \in \ointerval{0}{\infty}$ die Lösung von
+  % TODO: Muss hier 0 statt $g$ stehen?
+  \[
+    \left\{ \begin{array}{rlll}
+      \partial_t^2 v_s - \Delta v_s = 0 & \text{in } \ointerval{s}{\infty} \times \R^n, \\
+      v_s = g, \enspace \partial_t v_s = f & \text{auf } \{ s \} \times \R^n.
+    \end{array} \right.
+  \]
+  Setze $u(t, x) \coloneqq \Int{0}{t}{v_s(t, x)}{s}$. Dann ist $u \in \mathcal{C}^2(\cointerval{0}{\infty} \times \R^n)$ und $u$ löst die inhomogene Wellengleichung mit Nullanfangsdaten
+  \[
+    \left\{ \begin{array}{ll}
+      \partial_t^2 u - \Delta u = f & \text{in } \ointerval{0}{\infty} \times \R^n, \\
+      u = 0, \partial_t u = 0 & \text{auf } \{ 0 \} \times \R^n.
+    \end{array} \right.
+  \]
+\end{satz}
 
-Setze $u_1(t, x) \coloneqq \Int{0}{t}{v_s(t, x)}{s}$.
+\begin{bem}
+  Aus den Darstellungsformeln für $n=1,3$ ergibt sich:
+  \begin{align*}
+    u_{n=1}(t, x) &= \tfrac{1}{2} \enspace \Int{0}{t}{\enspace \Int{x - \tilde{s}}{x + \tilde{s}}{f(t - \tilde{s}, y)}{y}}{\tilde{s}} \\
+    u_{n=3}(t, x) &= \tfrac{1}{4 \pi} \quad \Int{\mathclap{\partial B_t(x)}}{}{\enspace \frac{f(t - \abs{y-x}, y)}{\abs{y-x}}}{y}
+  \end{align*}
+\end{bem}
+
+% Ausgelassen: Bemerkung: "`Endliche Ausbreitungsgeschwindigkeit"' der Inhomogenität
+
+% Kapitel 4.2. Die Wellengleichung auf allgemeineren Gebieten
+
+\begin{lem}
+  Sei $\Omega \subset \R^n$ offen, beschränkt mit $\mathcal{C}^1$-Rand $\partial \Omega$, $T > 0$ und $u \in \mathcal{C}^2(\overline{\Omega_T})$ eine Lösung der homogenen Wellengleichung $\partial_t^2 u - \Delta u = 0$ in $\Omega_T$ mit $u = 0$ auf $\cinterval{0}{T} \times \partial \Omega$. Sei
+  \[
+    e(t) \coloneqq \tfrac{1}{2} \enspace \Int{\Omega}{}{(\partial_t u(t,x))^2 + \abs{D u(t,x)}^2}{x} \quad \text{für } t \in \cinterval{0}{T}.
+  \]
+  Dann ist $e$ konstant auf $\cinterval{0}{T}$.
+\end{lem}
+
+\begin{satz}
+  Sei $\Omega \subset \R^n$ offen, beschränkt mit $\mathcal{C}^1$-Rand $\partial \Omega$, $T > 0$, $g \in \mathcal{C}^2(\partial_p \Omega_T)$, $h \in \mathcal{C}^1(\Omega)$ und $f \in \mathcal{C}(\overline{\Omega})$. Seien $u, v$ Lösungen von
+  \[
+    \left\{ \begin{array}{ll}
+      \partial_t^2 u - \Delta u = f & \text{in } \Omega_T, \\
+      u = g & \text{auf } \partial_p \Omega_T, \\
+      \partial_t u = h & \text{auf } \{ 0 \} \times \Omega.
+    \end{array} \right.
+  \]
+  Dann gilt $u \equiv v$.
+\end{satz}
+
+\begin{defn}
+  Sei $(t_0, x_0) \in \ointerval{0}{\infty} \times \R^n$. Dann heißt
+  \[
+    C(t_0, x_0) \coloneqq \Set{(t, x) \in \ointerval{0}{t_0} \times \R^n}{ \abs{x-x_0} < t_0 - t }
+  \]
+  \emph{Vergangenheitskegel} mit Spitze $(t_0, x_0)$.
+\end{defn}
+
+\begin{satz}
+  Sei $(t_0, x_0) \in \ointerval{0}{\infty} \times \R^n$ und löse $u \in \mathcal{C}^2(\overline{C(t_0, x_0)})$ die homogene Wellengleichung in $C(t_0, x_0)$ mit Anfangsbedingung $u = 0$, $\partial_t u = 0$ auf $\{ 0 \} \times B_{t_0}(x_0)$. Dann gilt $u \equiv 0$ in $C(t_0, x_0)$.
+\end{satz}
 
 \end{document}
