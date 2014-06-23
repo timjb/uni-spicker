@@ -14,6 +14,7 @@
 \newcommand{\rel}{\text{ rel }} % = relativ (Homotopie)
 \newcommand{\Ob}{\mathrm{Ob}} % Objects (of a category)
 \newcommand{\Hom}{\mathrm{Hom}} % Homomorphisms
+\newcommand{\Aut}{\mathrm{Aut}} % Automorphisms
 \newcommand{\Mor}{\mathrm{Mor}} % Morphisms
 \newcommand{\dom}{\mathrm{dom}} % Domain
 \newcommand{\codom}{\mathrm{codom}} % Codomain
@@ -1419,5 +1420,66 @@
 \begin{kor}
   Seien $p : X \to Y$ eine Überlagerung, $x_0, x_1 \in X$ mit $p(x_0) = p(x_1)$. Ist $X$ einfach zshgd und lokal wegzshgd, so gibt es genau eine Decktransformation $\phi : X \to X$ mit $\phi(x_0) = x_1$.
 \end{kor}
+
+% Vorlesung vom 23.6.2014
+
+\begin{defn}
+  Eine Überlagerung $p : X \to Y$ heißt \emph{universell}, falls $p$ surjektiv, $X$ einfach zshgd und lokal wegzshgd ist.
+\end{defn}
+
+\begin{prop}
+  Seien $p : X \to Y$ und $p' : X' \to Y$ universelle Überlagerungen.Dann gibt es einen Homöomorphismus $\phi : X \to X'$ mit $p' \circ \phi = p$.
+\end{prop}
+
+Für $p : (X, x_0) \to (Y, y_0)$ eine universelle Überlagerung und $g = [\gamma] \in \pi_1(Y, y_0)$ sei $\tilde{\gamma}$ der Lift von $\gamma$ mit $\gamma(0) = x_0$. Sei $\psi_g \in \Deck(p)$ die eindeutige Decktransformation mit $\psi_g(x_0) = \tilde{\gamma}(1)$.
+
+\begin{prop}
+  Die Abbildung $\Psi : \pi_1(Y, y_0) \to \Deck(p)$, $g \mapsto \psi_g$ ist ein Gruppenisomorphismus.
+\end{prop}
+
+% TODO: Hilfsdefinition: Transitive Gruppenwirkung
+
+\begin{prop}
+  Sei $p : X \to Y$ eine Überlagerung, $X$ wegzshgd und lokal wegzshgd und $G \subset \Deck(p)$ eine Untergruppe. Angenommen, für alle $y \in Y$ und $x_0, x_1 \in p^{-1}(y)$ existiert $g \in G$ mit $g(x_0) = x_1$. Dann gilt $G = \Deck(p)$.
+\end{prop}
+
+\begin{defn}
+  Eine \emph{Wirkung} oder \emph{Operation} einer Gruppe $G$ auf einem Raum $X$ ist ein Gruppenhomomorphismus $\phi : G \to \Aut_{\mathbf{Top}}{X}$.
+\end{defn}
+
+\begin{nota}
+  Statt $\phi(g)$ schreibt man auch $\phi_g$ oder $g$.
+\end{nota}
+
+\begin{defn}
+  Der \emph{Orbitraum} der Gruppenwirkung von $G$ auf $X$ ist
+  \[
+    X / G \coloneqq X / {\sim}
+    \quad \text{mit} \quad
+    x \sim y \coloniff \ex{g \in G} g(x) = y.
+  \]
+\end{defn}
+
+% Ausgelassen: Beispiel: $S^2 / (\Z/2) = \R P^2$
+
+\begin{defn}
+  Eine Gruppenwirkung $\phi : G \to \Aut(X)$ heißt \emph{eigentlich diskontinuierlich}, falls jeder Punkt $x \in X$ eine Umgebung $U$ besitzt, so dass $\phi_g(U) \cap U \not= \emptyset \implies g = e$.
+\end{defn}
+
+\begin{prop}
+  Sei $X$ zshgd, lokal wegzshgd, $G \to \Aut(X)$ eine eigentlich diskontinuierliche Wirkung. Dann ist $p : X \to X/G$ eine Überlagerung mit Decktransformationsgruppe $G$.
+\end{prop}
+
+\begin{satz}
+  Sei $X$ einfach zshgd und lokal wegzshgd. Die Gruppe $G$ wirke eigentlich diskontinuierlich auf $X$. Dann gilt für jeden Basispunkt $y_0 \in Y \coloneqq X / G$: $\pi_1(Y, y_0) \cong G$.
+\end{satz}
+
+\begin{bspe}
+  \begin{itemize}
+    \item $\pi_1(S^1) = \pi_1(\R / \Z) \cong \Z$
+    \item $\pi_1(S^1 \times S^1) = \pi_1(\R^2 / \Z^2) \cong \Z^2$
+    \item $\pi_1(\R P^2) = \pi_1(S^2 / (\Z/2)) \cong \Z/2$
+  \end{itemize}
+\end{bspe}
 
 \end{document}
