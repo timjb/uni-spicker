@@ -912,7 +912,7 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
 
 % 4.1.
 \begin{satz}
-  Seien $\D \subset \R^{n+1}$ offen, $f : \D \to \R^n$ stetig, lokal Lipschitz stetig.
+  Sei $\D \subset \R^{n+1}$ offen, $f : \D \to \R^n$ stetig, lokal Lipschitz-stetig.
   \begin{itemize}
     \item Die DGL $\dot{y} = f(y)$ ist translationsinvariant, d.\,h. ist $y$ eine Lösung von $\dot{y} = f(y)$ auf $\cointerval{t_0}{\infty}$, dann ist $z(t) \coloneqq y(t_0 + t)$ eine Lösung von $\dot{z} = f(z)$ auf $\cointerval{0}{\infty}$.
     \item Die Lösung $y$ ist genau dann (exponentiell/asymptotisch) stabil, wenn $z$ (exponentiell/asymptotisch) stabil ist.
@@ -1004,5 +1004,53 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
   \]
   Dann ist $\E(y, z) \coloneqq H(y, z)$ ein erstes Integral.
 \end{bsp}
+
+% Vorlesung vom 23.6.2014
+
+\begin{bsp}
+  Das Räuber-Beute-Modell mit Parametern $\alpha, \beta, \gamma, \delta > 0$
+  \[
+    \left\{ \begin{array}{lll}
+      \dot{y} &= & y (\alpha - \beta z) \\
+      \dot{z} &= & z (\delta y - \gamma)
+    \end{array} \right.
+  \]
+  ist nicht hamiltonisch, aber besitzt das erste Integral
+  \[
+    E(y, z) \coloneqq \alpha \ln \abs{z} - \beta z + \gamma \ln \abs{y} - \delta y
+    \quad \text{auf } \R_{>0} \times \R_{>0}.
+  \]
+\end{bsp}
+
+\begin{defn}
+  Seien $h, g : \D \to \R$ stetig auf $\D \subset \R^2$. Die DGL $\dot{y} g(t, y) - h(t, y) = 0$ heißt \emph{exakt}, falls es eine Stammfunktion $S : \D \to \R$ gibt, d.\,h. $S \in \mathcal{C}^1(\D)$ und
+  \[
+    \tfrac{\partial S}{\partial t} (t, y) = h(t, y)
+    \quad \text{und} \quad
+    \tfrac{\partial S}{\partial y} (t, y) = g(t, y).
+  \]
+\end{defn}
+
+\begin{bem}
+  Dann gilt für jede Lösung $y : \I \to \D$ der DGL:
+  \[
+    \tfrac{\d}{\d t} E(t, y(t)) = \tfrac{\partial E}{\partial t} (t, y(t)) + \tfrac{\partial E}{\partial y} (t, y(t)) \cdot \dot{y}(t) = 0 % = h(t,y(t)) + g(t, y(t)) \cdot \dot{y}(t) = 0.
+  \]
+\end{bem}
+
+% Ausgelassen: Nicht jede DGL besitzt nicht-triviale erste Integrale
+
+\begin{defn}
+  Sei $\D \subset \R^n$ offen, $f : \D \to \R$ stetig, lokal Lipschitz-stetig auf $\D$, $y_{*}$ eine Ruhelage von $f$, $y_s(t) \equiv y_{*}$ die zugeh. stationäre Lösung, $U_{y_{*}}$ eine offene Umgebung von $y_{*}$. Eine stetig diff'bare Funktion $V : U_{y_{*}} \to \R$ heißt
+  \begin{itemize}
+    \item \emph{schwache Lyapunov-Funktion} der DGL $\dot{y} = f(y)$ für $y_{*}$, wenn $\scp{\nabla V(y)}{f(y)} \leq 0$ für alle $y \in U_{y_{*}}$.
+    \item \emph{starke Lyapunov-Funktion} der DGL $\dot{y} = f(y)$ für $y_{*}$, wenn $\scp{\nabla V(y)}{f(y)} < 0$ für alle $y \in U_{y_{*}} \setminus \{ y_{*} \}$.
+  \end{itemize}
+\end{defn}
+
+% 4.5.
+\begin{satz}
+  Sei $\D \subset \R^n$ offen, $f : \D \to \R^n$ stetig, lokal Lipschitz-stetig auf $\D$, $y_{*}$ eine Ruhelage von $f$, $y_{*}(t) \equiv y_{*}$ die zugeh. stationäre Lösung. Sei $V : U_{y_{*}} \to \R$ eine schwache Lyapunov-Funktion der DGL $\dot{y} = f(y)$ für $y_{*} \in U_{y_{*}}$ und es gelte $\fa{y \in U_{y_{*}} \setminus \{ y_{*} \}} V(y_{*}) < V(y)$, d.\,h. $V$ hat in $y_{*}$ ein isoliertes lokales Minimum. Dann ist $y_s(t)$ stabil.
+\end{satz}
 
 \end{document}
