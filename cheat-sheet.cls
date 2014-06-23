@@ -57,7 +57,7 @@
 \newtheorem*{verf}{Verfahren}
 \newtheorem*{eig}{Eigenschaft}
 \newtheorem*{eign}{Eigenschaften}
-\newtheorem*{prop}{Proposition}
+\newtheorem*{prop}{Prop}
 \newtheorem*{modell}{Modell}
 \newtheorem*{sprech}{Sprechweise}
 \newtheorem*{sprechweise}{Sprechweise}
