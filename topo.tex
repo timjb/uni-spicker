@@ -457,11 +457,11 @@
 % Ausgelassen: Konstruktion der Kuratowski-Einbettung im Beweis.
 
 \begin{defn}
-  Eine \emph{Vervollständigung} eines metrischen Raumes $X$ ist ein vollständiger metrischer Raum $Y$ zusammen mit einer isometrischen Einbettung $f : X \to Y$, sodass $f(X)$ \emph{dicht}  in $Y$ liegt, d.\,h. $\overline{f(X)} = Y$.
+  Eine \emph{Vervollständigung} eines metrischen Raumes $X$ ist ein vollständiger metrischer Raum $Y$ mit einer isometrischen Einbettung $f : X \to Y$, sodass $f(X)$ \emph{dicht} in $Y$ liegt, d.\,h. $\overline{f(X)} = Y$.
 \end{defn}
 
 \begin{satz}
-  Ist $X$ ein metrischer Raum, so existiert eine Vervollständigung $X \hookrightarrow Y$.
+  Für jeden metrischen Raum existiert eine Vervollständigung. % $X \hookrightarrow Y$.
 \end{satz}
 
 \begin{prop}
@@ -1093,7 +1093,7 @@
 \end{prop}
 
 \begin{defn}
-  Ein topologischer Raum $X$ heißt \emph{einfach zusammenhängend}, falls $X$ wegzusammenhängend ist und $\pi_1(X, x_0) = 1$ für ein (und damit alle) $x_0 \in X$.
+  Ein topol. Raum $X$ heißt \emph{einfach zusammenhängend}, falls $X$ wegzshgd ist und $\pi_1(X, x_0) = 1$ für ein (und damit alle) $x_0 \in X$.
 \end{defn}
 
 \begin{bsp}
@@ -1101,7 +1101,7 @@
 \end{bsp}
 
 \begin{prop}
-  Ist $X$ zusammenziehbar, so ist $X$ einfach zusammenhängend.
+  Ist $X$ zusammenziehbar, so ist $X$ einfach zshgd.
 \end{prop}
 
 % Vorlesung vom 4.6.2014
@@ -1302,7 +1302,7 @@
 \end{bem}
 
 \begin{defn}
-  Die Isomorphismen in $\left[\mathcal{C}, \mathcal{D}\right]$ heißen \emph{natürliche Isomorphismen}.
+  Die Isomorphismen der Funktorkategorie $\left[\mathcal{C}, \mathcal{D}\right]$ heißen \emph{natürliche Isomorphismen}.
 \end{defn}
 
 \begin{lem}
@@ -1359,7 +1359,7 @@
 
 % Vorlesung vom 16.6.2014
 
-\begin{satz}[Homotopie-Liftungstheorem]
+\begin{satz}[Homotopie-Liftungsthm]
   Sei $p : X \to Y$ eine Überlagerung und $F : W \times \I \to Y$ eine Homotopie. Sei $\tilde{f} : W \to X$ eine Liftung von $F(\blank, 0)$, d.\,h. $p \circ \tilde{f} = F(\blank, 0)$. Dann existiert eine Homotopie $\widetilde{F} : W \times \I \to X$ mit $\widetilde{F}(\blank, 0) = \widetilde{f}$ und $p \circ \widetilde{F} = F$.
 \end{satz}
 
@@ -1368,15 +1368,15 @@
 \end{kor}
 
 \begin{kor}
-  Sei $\gamma : \I \to Y$ ein geschlossener Weg homotop zu einem konstanten Weg $\rel \{ 0, 1 \}$. Dann ist jeder Lift $\widetilde{\gamma} : \I \to X$ auch ein geschlossener Weg und homotop zu einem konstanten Weg $\rel \{ 0, 1 \}$.
+  Sei $\gamma : \I \to Y$ ein geschl. Weg homotop zu einem konstanten Weg $\rel \{ 0, 1 \}$. Dann ist jeder Lift $\widetilde{\gamma} : \I \to X$ auch ein geschl. Weg und homotop zu einem konstanten Weg $\rel \{ 0, 1 \}$.
 \end{kor}
 
 \begin{kor}
-  Sei $Y$ ein wegzusammenhängender Raum, $p : X \to Y$ eine wegzusammenhängende nichttriviale Überlagerung. Ist $y_0 \in Y$, so gilt $\pi_1(Y, y_0) \not= 1$.
+  Sei $Y$ ein wegzshgder Raum, $p : X \to Y$ eine wegzshgde nichttriviale Überlagerung. Ist $y_0 \in Y$, so gilt $\pi_1(Y, y_0) \not= 1$.
 \end{kor}
 
 \begin{kor}
-  $\R P^2 \not\approx S^2$, da die Quotientenabbildung $S^2 \to S^2/{\sim} = \R P^2$ eine nichttriviale Überlagerung und $S^2$ einfach zusammenhängend ist.
+  $\R P^2 \not\approx S^2$, da die Quotientenabb. $S^2 \to S^2/{\sim} = \R P^2$ eine nichttriviale Überlagerung und $S^2$ einfach zshgd ist.
 \end{kor}
 
 \begin{prop}
@@ -1428,7 +1428,7 @@
 \end{defn}
 
 \begin{prop}
-  Seien $p : X \to Y$ und $p' : X' \to Y$ universelle Überlagerungen.Dann gibt es einen Homöomorphismus $\phi : X \to X'$ mit $p' \circ \phi = p$.
+  Seien $p : X \to Y$ und $p' : X' \to Y$ universelle Überlagerungen. Dann gibt es einen Homöomorphismus $\phi : X \to X'$ mit $p' \circ \phi = p$.
 \end{prop}
 
 Für $p : (X, x_0) \to (Y, y_0)$ eine universelle Überlagerung und $g = [\gamma] \in \pi_1(Y, y_0)$ sei $\tilde{\gamma}$ der Lift von $\gamma$ mit $\gamma(0) = x_0$. Sei $\psi_g \in \Deck(p)$ die eindeutige Decktransformation mit $\psi_g(x_0) = \tilde{\gamma}(1)$.
@@ -1463,7 +1463,7 @@ Für $p : (X, x_0) \to (Y, y_0)$ eine universelle Überlagerung und $g = [\gamma
 % Ausgelassen: Beispiel: $S^2 / (\Z/2) = \R P^2$
 
 \begin{defn}
-  Eine Gruppenwirkung $\phi : G \to \Aut(X)$ heißt \emph{eigentlich diskontinuierlich}, falls jeder Punkt $x \in X$ eine Umgebung $U$ besitzt, so dass $\phi_g(U) \cap U \not= \emptyset \implies g = e$.
+  Eine Gruppenwirkung $\phi : G \to \Aut(X)$ heißt \emph{eigentlich diskontinuierlich}, falls jeder Punkt $x \in X$ eine Umgebung $U$ besitzt, so dass gilt: $\fa{g \in G} \phi_g(U) \cap U \not= \emptyset \implies g = e$.
 \end{defn}
 
 \begin{prop}
