@@ -10,8 +10,6 @@
   /Author (Tim Baumann)
 }
 
-\newtheorem*{definition}{Definition}
-
 % Define BibTeX command
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
@@ -23,7 +21,7 @@
 
 \section{Reguläre Sprachen}
 
-\begin{definition}
+\begin{defn}
 Ein \emph{DFA} ist ein Tupel $(Q, \Sigma, \delta, q_{0}, F)$ mit
 
 \begin{itemize}{\leftmargin=0em}
@@ -34,11 +32,11 @@ Ein \emph{DFA} ist ein Tupel $(Q, \Sigma, \delta, q_{0}, F)$ mit
   \item Einem \emph{Startzustand} $q_{0} \in Q$
   \item Einer Menge von \emph{akzeptierenden Zuständen} $F \subset Q$
 \end{itemize}
-\end{definition}
+\end{defn}
 
-\begin{definition}
+\begin{defn}
 Ein \emph{NFA} ist ein Tupel $(Q, \Sigma, \delta, q_{0}, F)$ mit den gleichen Komponenten wie ein DFA, aber die Übergangsfunktion hat eine andere Quellmenge: $\delta : Q \times (\Sigma \cup \{ \epsilon \}) \to Q$.
-\end{definition}
+\end{defn}
 
 \begin{alg}
 Umformung eines NFA $(Q, \Sigma, \delta, q_{0}, F)$ zu einem äquivalenten DFA
@@ -53,7 +51,7 @@ Bezeichne mit $E(P)$ für $P \subset Q$ die Menge der durch $\epsilon$-Übergän
   \item Akzeptierte Zustände: alle Teilmengen $A \subset Q$ mit $A \cap F \neq \emptyset$
 \end{itemize}
 
-\begin{definition}
+\begin{defn}
 \emph{Reguläre Ausdrücke} sind induktiv wie folgt definiert:
 
 \begin{center}
@@ -69,7 +67,7 @@ Bezeichne mit $E(P)$ für $P \subset Q$ die Menge der durch $\epsilon$-Übergän
 \end{tabular}
 \end{center}
 
-\end{definition}
+\end{defn}
 
 \begin{satz}
 Der Wert jedes regulären Ausdrucks ist eine reguläre Sprache. (Beweis durch Induktion)
@@ -85,11 +83,11 @@ Induktionsanfang: $L_{0}(p, q) = \{ a \in \Sigma | \delta(p, a) = q \} \cup \Set
 Induktionsschritt: $L_{k}(p, q) = L_{k-1}(p, k) \cdot L_{k-1}(k, k)^{*} \cdot L_{k-1}(k, q)$
 \end{proof}
 
-\begin{definition}
+\begin{defn}
 Sei $L$ eine Sprache über einem Alphabet $\Sigma$. Dann ist die \emph{Nerode-Relation} für $L$ wie folgt definiert: $(u \equiv_{L} v) :\Leftrightarrow (\fa{z \in \Sigma^{*}} uz \in L \Leftrightarrow vz \in L)$.
 
 Die Anzahl der Äquivalenzklassen dieser Relation wird der \emph{Nerode-Index} von $L$ genannt.
-\end{definition}
+\end{defn}
 
 \begin{alg}
 Konstruktion des \emph{Nerode-Automaten} zu einer Sprache $L$ mit endlichem Nerode-Index:
@@ -107,21 +105,21 @@ Der Nerode-Automat für eine Sprache $L$ ist minimal. Eine Sprache ist genau dan
 \end{bem}
 
 \begin{satz}[\emph{Pumping-Lemma}]
-Sei $L$ eine reguläre Sprache. Dann gibt es ein $t \in N$, sodass jedes Wort $w \in L$ mit Länge mindestens $t$ als $w = uvx$ geschrieben werden kann, wobei gilt:
-\end{satz}
+  Sei $L$ eine reguläre Sprache. Dann gibt es ein $t \in N$, sodass jedes Wort $w \in L$ mit Länge mindestens $t$ als $w = uvx$ geschrieben werden kann, wobei gilt:
 
-\begin{itemize}
-  \item $uv^{i}x \in L$ für alle $i \in \N$
-  \item $v \neq \epsilon$
-  \item $|uv| \le t$
-\end{itemize}
+  \begin{itemize}
+    \miniitem{0.4 \linewidth}{$uv^{i}x \in L$ für alle $i \in \N$}
+    \miniitem{0.15 \linewidth}{$v \neq \epsilon$}
+    \miniitem{0.4 \linewidth}{$|uv| \le t$}
+  \end{itemize}
+\end{satz}
 
 % TODO: Minimierung von DFAs
 
 
 \section{Kontextfreie Sprachen}
 
-\begin{definition}
+\begin{defn}
 Eine \emph{kontextfreie Grammatik} (CFG) ist ein Tupel $(V, \Sigma, P, S)$ mit
 
 \begin{itemize}
@@ -130,39 +128,33 @@ Eine \emph{kontextfreie Grammatik} (CFG) ist ein Tupel $(V, \Sigma, P, S)$ mit
   \item Einer endlichen Menge von Produktionen $P$. Eine Produktion hat die Form $A \longrightarrow \alpha$, wobei $\alpha \in (V \cup \Sigma)^{*}$
   \item Einem Startsymbol $S \in V$
 \end{itemize}
-\end{definition}
+\end{defn}
 
-\begin{definition}
+\begin{defn}
 Falls in einer Grammatik $G = (V, \Sigma, P, S)$ die Produktion $(A \longrightarrow \beta)$ vorkommt, so sagt man, dass sich $\alpha \beta \gamma$ aus $\alpha S \gamma$ \emph{ableiten} lässt (geschrieben: $\alpha \beta \gamma \Rightarrow \alpha S \gamma $). Wenn sich ein Wort $v$ aus einem Wort $w$ in einem oder mehr, beliebig vielen oder genau $m$ vielen Schritten ableiten lässt, so schreibt man $w \xRightarrow{+} v$, $w \xRightarrow{*} v$ bzw. $w \xRightarrow{m} v$.
-\end{definition}
+\end{defn}
 
-\begin{definition}
+\begin{defn}
 Ein Wort $\alpha$ über $V \cup \Sigma$ mit $S \xRightarrow{*} \alpha$ nennt man eine \emph{Satzform}.
-\end{definition}
+\end{defn}
 
-\begin{definition}
+\begin{defn}
 Ein Wort $w \in \Sigma^{*}$ wird von $G$ \emph{generiert}, wenn $S \xRightarrow[]{*} w$. Die Sprache aller Wörter über $\Sigma$, die von $G$ generiert werden, heißt die von $G$ erzeugte Sprache. Eine Sprache heißt \emph{kontextfrei}, wenn sie von einer kontextfreien Grammatik erzeugt wird.
-\end{definition}
+\end{defn}
 
 % TODO: Syntaxbaum, Ertrag, Beispiel
 
-\begin{definition}
+\begin{defn}
   Eine CFG $G$ heißt \emph{mehrdeutig}, wenn es eine Wort in $L(G)$ gibt, das der Ertrag von zwei verschiedenen Syntaxbäumen ist. Wenn dies nicht der Fall ist, so heißt die CFG \emph{eindeutig}.
-\end{definition}
+\end{defn}
 
-\fbox{
-  \begin{minipage}{8.5cm}
-    \hfill\vspace{2.5cm}
-  \end{minipage}
-}
-
-\begin{definition}
+\begin{defn}
   Eine CFG ist in \emph{Chomsky-NF}, wenn jede Produktion eine der folgenden Formen hat:
   \begin{itemize}
-    \item $A \longrightarrow a$ mit $a \in \Sigma$
-    \item $A \longrightarrow BC$ mit $B, C \in V$
+    \miniitem{0.49 \linewidth}{$A \longrightarrow a$ mit $a \in \Sigma$}
+    \miniitem{0.49 \linewidth}{$A \longrightarrow BC$ mit $B, C \in V$}
   \end{itemize}
-\end{definition}
+\end{defn}
 
 \begin{alg}
 Sei $G$ eine CFG und $L = L(G)$. Dann gibt es eine CFG $G'$ in Chomsky-NF, die $L \backslash \{ \epsilon \}$ erzeugt. Ändere dafür $G$ schrittweise wie folgt:
@@ -177,23 +169,23 @@ Sei $G$ eine CFG und $L = L(G)$. Dann gibt es eine CFG $G'$ in Chomsky-NF, die $
 
 % TODO: Wortproblem, CYK-Algorithmus
 
-\begin{definition}
+\begin{defn}
 Eine CFG ist in \emph{Greibach-NF}, wenn jede Produktion in $P$ die Form $A \longrightarrow a \alpha$ hat, mit $a \in \Sigma$ und $\alpha \in V^{*}$.
-\end{definition}
+\end{defn}
 
 \begin{satz}
 Sei $L$ eine kontextfreie Sprache. Dann wird $L \backslash \{ \epsilon \}$ von einer Grammatik in Greibach-NF erzeugt.
 \end{satz}
 
-\begin{definition}
-Ein \emph{Kellerautomat} ist ein Tupel $(Q, \Sigma, \Gamma, \delta, q_{0}, F)$ für das gilt:
+\begin{defn}
+Ein \emph{Kellerautomat} ist ein Tupel $(Q, \Sigma, \Gamma, \delta, q_{0}, F)$ mit
 
 \begin{itemize}
-  \item $Q$, $\Sigma$, $\Gamma$, $q_{0}$ und $F$ haben die gleiche Bedeutung und Definition wie beim DFA.
-  \item $\Gamma$ ist eine endliche Menge, das \emph{Kelleralphabet}.
-  \item Die Übergangsfunktion $\delta$ verläuft von $Q \times (\Sigma \cup \{ \epsilon \}) \times (\Gamma \cup \{ \epsilon \})$ nach $\mathcal{P}(Q \times (\Gamma \cup \{ \epsilon \}))$.
+  \item $Q$, $\Sigma$, $q_{0}$ und $F$ definiert wie beim DFA,
+  \item einer endl. Menge $\Gamma$, dem \emph{Kelleralphabet}, und einer
+  \item Übergangsfunktion $\delta : Q {\times} (\Sigma \cup \{ \epsilon \}) {\times} (\Gamma \cup \{ \epsilon \}) \to \mathcal{P}(Q {\times} (\Gamma \cup \{ \epsilon \}))$.
 \end{itemize}
-\end{definition}
+\end{defn}
 
 \begin{bem}
 Kellerautomaten arbeiten nichtdeterministisch und müssen nicht auf jeder Eingabe halten.
@@ -222,7 +214,7 @@ Sei $L$ eine kontextfreie Sprache. Dann gibt es ein $t \in N$, sodass jedes Wort
 
 \section{Turing-Maschinen}
 
-\begin{definition}
+\begin{defn}
 Eine \emph{Turing-Maschine} (TM) ist ein Tupel $(Q, \Sigma, \Gamma, \delta, q_{0}, q_{a}, q_{r}, \textvisiblespace)$ mit
 
 \begin{itemize}{\leftmargin=0em}
@@ -236,19 +228,19 @@ Eine \emph{Turing-Maschine} (TM) ist ein Tupel $(Q, \Sigma, \Gamma, \delta, q_{0
   \item Einem \emph{verwerfenden Zustand} $q_{r} \in Q$
   \item Einem Symbol $\textvisiblespace \in \Gamma \backslash \Sigma$
 \end{itemize}
-\end{definition}
+\end{defn}
 
-\begin{definition}
+\begin{defn}
 Eine \emph{Konfiguration} einer Turing-Maschine ist ein Wort der Form $\alpha q \beta$ mit $\alpha, \beta \in \Gamma^{*}$, wobei $\beta$ nicht auf $\textvisiblespace$ endet, und $q \in Q$.
-\end{definition}
+\end{defn}
 
-\begin{definition}
+\begin{defn}
 Seien $\phi = \alpha q b \beta$ und $\phi' = \alpha ' q' \beta '$ Konfigurationen einer Turing-Maschine $M$. Man schreibt $\phi \xrightarrow{M} \phi'$ (gesprochen: $\phi'$ ergibt sich aus $\phi$), falls $\delta(q, b) = (q', b', D)$ und $\alpha b' \beta = \alpha' \beta'$ und der Kopf der Turing-Maschine in $\phi'$ gegenüber $\phi$ nur um eins verrückt ist gemäß der Richtung $D$.
-\end{definition}
+\end{defn}
 
-\begin{definition}
+\begin{defn}
 Eine Turingmaschine \emph{akzeptiert} eine Eingabe $w \in \Sigma*$, wenn es eine abbrechende Folge von Konfigurationen $C_{0}, ..., C_{t}$ gibt, wobei $C_{0} = q_{0}w$ die Anfangskonfiguration ist, jede weiter Konfiguration sich aus der vorherigen ergibt und der Zustand in der letzten Konfiguration der akzeptierende Zustand $q_{a}$ ist.
-\end{definition}
+\end{defn}
 
 % TODO: Zustandsdiagramme von Turingmaschinen
 
@@ -261,7 +253,7 @@ Zur Turingmaschine sind folgende Maschinen äquivalent, d.h. sie können auf TMs
   \end{itemize}
 \end{bem}
 
-\begin{definition}
+\begin{defn}
   Folgende (partiellen) Funktionen sind \emph{$\mu$-rekursiv}:
   \begin{enumerate}
     \item Die \it{Nachfolgerfunktion} $\sigma : \mathbb{N} \to \mathbb{N},\ x \mapsto x + 1$
@@ -278,7 +270,7 @@ Zur Turingmaschine sind folgende Maschinen äquivalent, d.h. sie können auf TMs
       \[ M \coloneqq \Set{ y \in \mathbb{N} }{ f(y, x_1, ..., x_k) = 0 \text{ und } f(z, x_1, ..., x_k) \text{ def. } \forall z < y } \]
       }
   \end{enumerate}
-\end{definition}
+\end{defn}
 
 \begin{bem}
 Aus der obigen Definition ergibt sich, dass folgende Funktionen $\mu$-rekursiv sind:
@@ -296,13 +288,13 @@ Aus der obigen Definition ergibt sich, dass folgende Funktionen $\mu$-rekursiv s
 Die Klasse der $\mu$-rekursiven Funktionen stimmt mit den von RAMs berechenbaren Funktionen überein.
 \end{bem}
 
-\begin{definition}
+\begin{defn}
 Eine Sprache heißt \emph{entscheidbar}, wenn sie von einer TM akzeptiert wird und die TM auf jeder Eingabe hält.
-\end{definition}
+\end{defn}
 
-\begin{definition}
+\begin{defn}
 Eine Sprache heißt \emph{semi-entscheidbar} oder rekursiv aufzählbar, wenn sie von einer TM akzeptiert wird.
-\end{definition}
+\end{defn}
 
 \begin{satz}
 Eine Sprache $L$ ist genau dann entscheidbar, wenn $L$ und $\overline{L}$ semi-entscheidbar sind.
@@ -312,28 +304,22 @@ Eine Sprache $L$ ist genau dann entscheidbar, wenn $L$ und $\overline{L}$ semi-e
 Sei $S$ eine Teilmenge aller Sprachen über $\Sigma^{*}$. Gibt es TMs $M_{1}$ und $M_{2}$ mit $L(M_{1}) \in S$ und $L(M_{2}) \not\in S$, dann ist $\Set{ \langle M \rangle }{ L(M) \in S }$ unentscheidbar.
 \end{satz}
 
-\begin{definition}
+\begin{defn}
 Eine \emph{uneingeschränkte/allgemeine Grammatik} $G$ ist ein Tupel $(V, \Sigma, P, S)$ wie bei bei kontextfreien Grammatiken mit dem Unterschied, dass die Produktion die allgemeinere Form $\alpha \longrightarrow \beta$ mit $\alpha \in (V \cup \Sigma)^{+}$ und $\beta \in (V \cup \Sigma)^{*}$ besitzen.
-\end{definition}
+\end{defn}
 
 \begin{bem}
 Ein unerwartet unentscheidbares Problem ist das sogenannte \emph{Postsche Korrespondenzproblem} (Domino-Problem).
 \end{bem}
 
-\begin{definition}
+\begin{defn}
 Sei $M$ eine TM, die auf allen Eingaben hält. Die Funktion $f$, die jedem $w \in \Sigma^{*}$ den Bandinhalt bis zum Kopf der TM nach Halten der TM zuordnet, heißt die von $M$ \emph{berechnete Funktion}.
-\end{definition}
+\end{defn}
 
-\begin{definition}
+\begin{defn}
 Seien $L_{1}$ und $L_{2}$ Sprachen über $\Sigma_{1}$ bzw. $\Sigma_{2}$. Man sagt, dass $L_{1}$ auf $L_{2}$ \emph{abbildungsreduzierbar} ist (notiert $L_{1} \le_{m} L_{2}$) wenn es eine berechenbare Funktion $f : \Sigma_{1}^{*} \to \Sigma_{2}^{*}$ gibt, sodass für all $x \in \Sigma^{*}$ gilt:
   \[ x \in L_{1} \Leftrightarrow f(x) \in L_{2} \]
-\end{definition}
-
-\fbox{
-  \begin{minipage}{8.5cm}
-    \hfill\vspace{2.5cm}
-  \end{minipage}
-}
+\end{defn}
 
 \begin{satz}
 Gilt $L_{1} \le_{m} L_{2}$ für zwei Sprachen $L_{1}$ und $L_{2}$ und ist $L_{2}$ (semi-)entscheidbar, so ist auch $L_{1}$ (semi-)entscheidbar.
@@ -347,9 +333,9 @@ Eine Sprache $L$ ist genau dann semi-entscheidbar, wenn sie von einer uneingesch
 
 \section{Die Chomsky-Hierarchie}
 
-\begin{definition}
+\begin{defn}
 Eine \emph{kontextsensitive Grammatik} ist eine allgemeine Grammatik mit der Einschränkung, dass in jeder Produktion die Länge der rechten Seite mindestens so groß ist wie die Länge der linken Seite.
-\end{definition}
+\end{defn}
 
 \begin{satz}
 Kontextsensitive Sprachen sind entscheidbar.
