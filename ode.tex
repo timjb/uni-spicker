@@ -12,6 +12,7 @@
 \newcommand{\E}{\mathcal{E}}
 \newcommand{\dist}{\mathrm{dist}} % Entfernung (distance)
 \newcommand{\scp}[2]{\left( #1 \!\mid\! #2 \right)} % Skalarprodukt
+\DeclareMathOperator{\Hess}{Hess}
 
 \begin{document}
 
@@ -1048,9 +1049,22 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
   \end{itemize}
 \end{defn}
 
-% 4.5.
+% Sätze 4.5. und 4.6. kombiniert
 \begin{satz}
-  Sei $\D \subset \R^n$ offen, $f : \D \to \R^n$ stetig, lokal Lipschitz-stetig auf $\D$, $y_{*}$ eine Ruhelage von $f$, $y_{*}(t) \equiv y_{*}$ die zugeh. stationäre Lösung. Sei $V : U_{y_{*}} \to \R$ eine schwache Lyapunov-Funktion der DGL $\dot{y} = f(y)$ für $y_{*} \in U_{y_{*}}$ und es gelte $\fa{y \in U_{y_{*}} \setminus \{ y_{*} \}} V(y_{*}) < V(y)$, d.\,h. $V$ hat in $y_{*}$ ein isoliertes lokales Minimum. Dann ist $y_s(t)$ stabil.
+  Sei $\D \subset \R^n$ offen, $f : \D \to \R^n$ stetig, lokal Lipschitz-stetig auf $\D$, $y_{*}$ eine Ruhelage von $f$, $y_{*}(t) \equiv y_{*}$ die zugeh. stationäre Lösung.
+  \begin{itemize}
+    \item Sei $V : U_{y_{*}} \to \R$ eine \textit{schwache} Lyapunov-Funktion der DGL $\dot{y} = f(y)$ für $y_{*} \in U_{y_{*}}$ und es gelte $\fa{y \in U_{y_{*}} \setminus \{ y_{*} \}} V(y_{*}) < V(y)$, d.\,h. $V$ hat in $y_{*}$ ein isoliertes lokales Minimum. Dann ist $y_s(t)$ stabil.
+    % Vorlesung vom 25.6.2014
+    \item Wenn $V$ sogar eine \textit{starke} Lyapunov-Funktion ist, so ist $y_s(t)$ asymptotisch stabil.
+  \end{itemize}
 \end{satz}
+
+\begin{bem}
+  Die Funktion $V$ hat in $y_{*}$ ein isoliertes lokales Minimum, wenn die Hesse-Matrix $H \coloneqq (\Hess f)(y_{*})$ positiv definit ist, d.\,h. $\fa{v \not= 0} v^T H v > 0$.
+\end{bem}
+
+% Ausgelassen: Beispiel: GDGL $\dot{y} = - z - y^3$, $\dot{z} = y - z^3$ -- Stabilität der Nulllösung mit Lyapunov-Methode
+
+% Ausgelassen: Beispiel: mathematisches Beispiel mit Reibung
 
 \end{document}
