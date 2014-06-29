@@ -19,6 +19,10 @@
 \newcommand{\Upint}[4]{{\textstyle \upint\limits_{#1}^{#2}} #3 \,\d #4}
 \newcommand{\Upintabdx}[1]{\Upint{a}{b}{#1}{x}}
 
+\DeclareMathOperator{\Hess}{Hess} % Hesse-Matrix
+\DeclareMathOperator{\Graph}{Graph} % Hesse-Matrix
+\DeclareMathOperator{\Hom}{Hom} % Hesse-Matrix
+
 
 \begin{document}
 
@@ -487,13 +491,13 @@
     \[ \norm{f}_{p} \coloneqq \left( \Intabdx{\abs{f(x)}^p} \right)^{\frac{1}{p}} \]
     eine Norm auf $V$.
     % TODO: Umbruch
-    \item Seien $(V, \norm{\blank}_V)$ und $(W, \norm{\blank}_W)$ zwei normierte (reelle) VR, dann ist auch $\mathrm{Hom}(V, W) \coloneqq \Set{ f : V \to W }{ f \text{ linear } }$ ein reeller VR. Die Norm
+    \item Seien $(V, \norm{\blank}_V)$ und $(W, \norm{\blank}_W)$ zwei normierte (reelle) VR, dann ist auch $\Hom(V, W) \coloneqq \Set{ f : V \to W }{ f \text{ linear } }$ ein reeller VR. Die Norm
     \begin{align*}
       \norm{f}_{\text{op}} &\coloneqq \sup \Set{ \frac{ \norm{f(x)}_W }{ \norm{x}_V } }{ x \in V \backslash \{ 0 \} }\\
         &= \sup \Set{ \norm{f(x)}_W }{ x \in V, \norm{x}_V = 1 }
     \end{align*}
     %\[ \norm{f}_{\text{op}} \coloneqq \sup\left\{ \frac{ \norm{f(x)}_W }{ \norm{x}_V } : x \in V \backslash \{ 0 \} \right\} = \sup \left\{ \norm{f(x)}_W : x \in V, \norm{x}_V = 1 \right\} \]
-    auf $\mathrm{Hom}(V, W)$ heißt \emph{Operatornorm}.
+    auf $\Hom(V, W)$ heißt \emph{Operatornorm}.
   \end{itemize}
 \end{bem}
 
@@ -595,70 +599,70 @@
 % TODO: Beispiele und Gegenbeispiele für kompakte Mengen
 
 \begin{satz}
-Eine kompakte Teilmenge $K$ eines metrischen Raumes $(X, d)$ ist beschränkt und abgeschlossen.
+  Eine kompakte Teilmenge $K$ eines metrischen Raumes $(X, d)$ ist beschränkt und abgeschlossen.
 \end{satz}
 
 \begin{acht}
-Die Umkehrung gilt im Allgemeinen nicht.
+  Die Umkehrung gilt im Allgemeinen nicht.
 \end{acht}
 
 \begin{satz}[Heine-Borel]
-Im $\R^n$ gilt auch die Umkehrung: Eine beschränkte und abgeschlossene Teilmenge $K \subset (\R^n, \norm{\blank}_\text{eukl})$ ist kompakt. Allgemeiner ist jede beschränkte und abgeschlossene Teilmenge eines endlich-dimensionalen, normierten, reellen VR kompakt.
+  Im $\R^n$ gilt auch die Umkehrung: Eine beschränkte und abgeschlossene Teilmenge $K \subset (\R^n, \norm{\blank}_\text{eukl})$ ist kompakt. Allgemeiner ist jede beschränkte und abgeschlossene Teilmenge eines endlich-dimensionalen, normierten, reellen VR kompakt.
 \end{satz}
 
 \begin{acht}
-Obige Aussage gilt nicht für unendlichdimensionale, reelle, normierte VR.
+  Obige Aussage gilt nicht für unendlichdimensionale, reelle, normierte VR.
 \end{acht}
 
 % Korollar 6.58
 
 \begin{satz}
-Sei $K$ eine kompakte Teilmenge eines metrischen Raumes $(X, d)$ und $A \subset K$ abgeschlossen in $X$. Dann ist auch $A$ kompakt.
+  Sei $K$ eine kompakte Teilmenge eines metrischen Raumes $(X, d)$ und $A \subset K$ abgeschlossen in $X$. Dann ist auch $A$ kompakt.
 \end{satz}
 
 \begin{defn}
-Seien $\cinterval{a_j}{b_j}, a_j < b_j, j = 1, ..., n$ kompakte Intervalle in $\R$, dann ist
-\begin{align*}
-  Q &\coloneqq \cinterval{a_1}{b_1} \times \cdots \times \cinterval{a_n}{b_n}\\
-  &= \Set{ (x_1, ..., x_n) \in \R^n }{ \fa{j \in \{ 1, ..., n \}} a_j \le x_j \le b_j }
-\end{align*}
-ein \emph{abgeschlossener Quader} im $\R^n$.
+  Seien $\cinterval{a_j}{b_j}, a_j < b_j, j = 1, ..., n$ kompakte Intervalle in $\R$, dann ist
+  \begin{align*}
+    Q &\coloneqq \cinterval{a_1}{b_1} \times \cdots \times \cinterval{a_n}{b_n}\\
+    &= \Set{ (x_1, ..., x_n) \in \R^n }{ \fa{j \in \{ 1, ..., n \}} a_j \le x_j \le b_j }
+  \end{align*}
+  ein \emph{abgeschlossener Quader} im $\R^n$.
 \end{defn}
 
 \begin{satz}
-Abgeschlossene Quader im $\R^n$ sind kompakt.
+  Abgeschlossene Quader im $\R^n$ sind kompakt.
 \end{satz}
 
 \begin{defn}
-Eine Teilmenge $A \subset X$ eines metrischen Raumes $(X, d)$ heißt \emph{folgenkompakt}, wenn jede Folge $(x_n)$ in $A$ eine konvergente Teilfolge besitzt, deren Grenzwert in $A$ liegt.
+  Eine Teilmenge $A \subset X$ eines metrischen Raumes $(X, d)$ heißt \emph{folgenkompakt}, wenn jede Folge $(x_n)$ in $A$ eine konvergente Teilfolge besitzt, deren Grenzwert in $A$ liegt.
 \end{defn}
 
 \begin{satz}[Bolzano-Weierstraß]
-Jede kompakte Teilmenge eines metrischen Raums ist folgenkompakt.
+  Jede kompakte Teilmenge eines metrischen Raums ist folgenkompakt.
 \end{satz}
 
 \begin{bem}
-Es gilt auch die Umkehrung: Jede folgenkompakte Teilmenge eines metrischen Raums ist kompakt.
+  Es gilt auch die Umkehrung: Jede folgenkompakte Teilmenge eines metrischen Raums ist kompakt.
 \end{bem}
 
 \begin{satz}
-Seien $(X, d_X)$ und $(Y, d_Y)$ zwei metrische Räume und $f : X \to Y$ eine stetige Abbildung. Sei $K \subset X$ kompakt. Dann ist $f(K) \subset Y$ kompakt.
+  Seien $(X, d_X)$ und $(Y, d_Y)$ zwei metrische Räume und $f : X \to Y$ eine stetige Abbildung. Sei $K \subset X$ kompakt. Dann ist $f(K) \subset Y$ kompakt.
 \end{satz}
 
 \begin{satz}[Weierstraßscher Satz vom Extremum]
-Sei $(X, d)$ ein metrischer Raum und $K \subset X$ eine nichtleere kompakte Teilmenge. Sei $f : X \to \R$ stetig. Dann gibt es $m, M \in K$, sodass gilt:
-\[ f(m) = \inf\left\{ f(x) : x \in K \right\},\quad f(M) = \sup\left\{ f(x) : x \in K \right\} \]
+  Sei $(X, d)$ ein metrischer Raum und $K \subset X$ eine nichtleere kompakte Teilmenge. Sei $f : X \to \R$ stetig. Dann gibt es $m, M \in K$, sodass gilt:
+  \[ f(m) = \inf\left\{ f(x) : x \in K \right\},\quad f(M) = \sup\left\{ f(x) : x \in K \right\} \]
 \end{satz}
 
 \begin{defn}
-Seien $(X, d_X)$ und $(Y, d_Y)$ zwei metrische Räume. Eine Abbildung $f : X \to Y$ heißt \emph{gleichmäßig stetig}, wenn gilt:
-\[ \fa{\epsilon > 0} \ex{\delta > 0} \fa{x, y \in X} \left(d_X(x, y) < \delta\right) \implies \left( d_Y(f(x), f(y)) < \epsilon \right) \]
+  Seien $(X, d_X)$ und $(Y, d_Y)$ zwei metrische Räume. Eine Abbildung $f : X \to Y$ heißt \emph{gleichmäßig stetig}, wenn gilt:
+  \[ \fa{\epsilon > 0} \ex{\delta > 0} \fa{x, y \in X} \left(d_X(x, y) < \delta\right) \implies \left( d_Y(f(x), f(y)) < \epsilon \right) \]
 \end{defn}
 
 \begin{samepage} % Hack
 
 \begin{satz}
-Seien $(X, d_X)$ und $(Y, d_Y)$ zwei metrische Räume wobei $X$ kompakt ist und $f : X \to Y$ stetig. Dann ist $f$ gleichmäßig stetig.
+  Seien $(X, d_X)$ und $(Y, d_Y)$ zwei metrische Räume wobei $X$ kompakt ist und $f : X \to Y$ stetig. Dann ist $f$ gleichmäßig stetig.
 \end{satz}
 
 \section{Kurven}
@@ -666,46 +670,47 @@ Seien $(X, d_X)$ und $(Y, d_Y)$ zwei metrische Räume wobei $X$ kompakt ist und 
 \end{samepage}
 
 \begin{nota}
-Sei nun $I \subset \R$ ein Intervall, das mindestens zwei Punkte enthält. Wir verwenden in diesem Abschnitt die euklidische Norm.
+  Sei nun $I \subset \R$ ein Intervall, das mindestens zwei Punkte enthält. Wir verwenden in diesem Abschnitt die euklidische Norm.
 \end{nota}
 
 \begin{defn}
-Eine stetige Abbildung $f : I \to \R^n$ heißt \emph{Kurve} im $\R^n$.\\
+  Eine stetige Abbildung $f : I \to \R^n$ heißt \emph{Kurve} im $\R^n$.\\
 \end{defn}
 
 \begin{defn}
-Sei $I = \cinterval{a}{b} \subset \R$ mit Zerlegung $Z = \{ a = t_0 < ... < t_m = b \}$ und $f : I \to \R^n$ eine Kurve. Dann hat der \emph{Polygonzug} $P_f(Z)$ die Länge
-\[ L(P_f(Z)) = \sum_{j = 1}^{m} \norm{f(t_j) - f(t_{j-1})}. \]
+  Sei $I = \cinterval{a}{b} \subset \R$ mit Zerlegung $Z = \{ a = t_0 < ... < t_m = b \}$ und $f : I \to \R^n$ eine Kurve. Dann hat der \emph{Polygonzug} $P_f(Z)$ die Länge
+  \[ L(P_f(Z)) = \sum_{j = 1}^{m} \norm{f(t_j) - f(t_{j-1})}. \]
 \end{defn}
 
 \begin{defn}
-Eine Kurve $f : \cinterval{a}{b} \to \R^n$ heißt \emph{rektifizierbar}, wenn gilt: Es gibt ein $L \in \R$, sodass es für alle $\epsilon > 0$ ein $\delta > 0$ gibt, sodass für jede Zerlegung $Z$ von $\cinterval{a}{b}$ der Feinheit $\mu_Z \le \delta$ gilt:
-\[ \abs{L - L(P_f(Z))} \le \epsilon \]
+  Eine Kurve $f : \cinterval{a}{b} \to \R^n$ heißt \emph{rektifizierbar}, wenn gilt: Es gibt ein $L \in \R$, sodass es für alle $\epsilon > 0$ ein $\delta > 0$ gibt, sodass für jede Zerlegung $Z$ von $\cinterval{a}{b}$ der Feinheit $\mu_Z \le \delta$ gilt:
+  \[ \abs{L - L(P_f(Z))} \le \epsilon \]
 \end{defn}
 
 % Beispiel: nicht rektifizierbare Kurve
 
 \begin{defn}
-Sei $I = (a, b) \subset \R$ ein offenes Intervall. Eine Kurve $f : I \to \R^n$ heißt in $t_0 \in I$ \emph{differenzierbar}, wenn der Limes
-\[ f'(t_0) = \lim_{t \to t_0} \frac{f(t) - f(t_0)}{t - t_0} \]
-existiert. Wenn $f$ in jedem Punkt $t \in I$ differenzierbar ist, so heißt $f$ differenzierbar.
-Falls $I$ kein offenes Intervall ist, so heißt die Kurve $f : I \to \R^n$ differenzierbar, wenn es ein offenes Intervall $J \supset I$ in $\R$ und eine differenzierbare Kurve $F : J \to \R^n$ gibt, sodass $F\mid_{I} = f$ gilt.
+  Sei $I = (a, b) \subset \R$ ein offenes Intervall. Eine Kurve $f : I \to \R^n$ heißt in $t_0 \in I$ \emph{differenzierbar}, wenn der Limes
+  \[ f'(t_0) = \lim_{t \to t_0} \frac{f(t) - f(t_0)}{t - t_0} \]
+  existiert. Wenn $f$ in jedem Punkt $t \in I$ differenzierbar ist, so heißt $f$ differenzierbar.
+  Falls $I$ kein offenes Intervall ist, so heißt die Kurve $f : I \to \R^n$ differenzierbar, wenn es ein offenes Intervall $J \supset I$ in $\R$ und eine differenzierbare Kurve $F : J \to \R^n$ gibt, sodass $F\mid_{I} = f$ gilt.
 \end{defn}
 
 \begin{bem}
-Eine Kurve $f = (f_1, ..., f_n) : I \to \R^n$ ist genau dann in $t \in I$ differenzierbar, wenn alle Komponentenfunktionen $f_1, ..., f_n$ in $t$ differenzierbar sind.
+  Eine Kurve $f = (f_1, ..., f_n) : I \to \R^n$ ist genau dann in $t \in I$ differenzierbar, wenn alle Komponentenfunktionen $f_1, ..., f_n$ in $t$ differenzierbar sind.
 \end{bem}
 
 \begin{satz}
-Jede stetig differenzierbare Kurve $f : \cinterval{a}{b} \to \R$ ist rektifizierbar mit Länge
-\[ L = \Intab{\norm{f'(t)}}{t}. \]
+  Jede stetig differenzierbare Kurve $f : \cinterval{a}{b} \to \R$ ist rektifizierbar mit Länge
+  \[ L = \Intab{\norm{f'(t)}}{t}. \]
 \end{satz}
 
 % Aufgabe 6.77
 
-\begin{defn}[Riemann-Integral für Funktionen nach $\R^n$] Eine beschränkte Funktion $f : \cinterval{a}{b} \to \R$ heißt \emph{Riemann-integrierbar}, wenn gilt: Es gibt ein $\iota \in \R^n$, sodass es für alle $\epsilon > 0$ ein $\delta > 0$ gibt, sodass für jede Zerlegung $Z = \{ a = t_0 < ... < t_m = b \}$ der Feinheit $\mu_Z \le \delta$ und Wahl von Stützstellen $\xi_1, ..., \xi_m$ bzgl. $Z$ gilt:
-\[ \norm{\iota - R(f, Z, \xi_1, ..., \xi_m)} \le \epsilon. \]
-Der Vektor $\iota \in \R^n$ heißt \emph{Riemann-Integral} von $f$.
+\begin{defn}[Riemann-Integral für Funktionen nach $\R^n$]
+  Eine beschränkte Funktion $f : \cinterval{a}{b} \to \R$ heißt \emph{Riemann-integrierbar}, wenn gilt: Es gibt ein $\iota \in \R^n$, sodass es für alle $\epsilon > 0$ ein $\delta > 0$ gibt, sodass für jede Zerlegung $Z = \{ a = t_0 < ... < t_m = b \}$ der Feinheit $\mu_Z \le \delta$ und Wahl von Stützstellen $\xi_1, ..., \xi_m$ bzgl. $Z$ gilt:
+  \[ \norm{\iota - R(f, Z, \xi_1, ..., \xi_m)} \le \epsilon. \]
+  Der Vektor $\iota \in \R^n$ heißt \emph{Riemann-Integral} von $f$.
 \end{defn}
 
 \begin{bem}
@@ -721,60 +726,60 @@ Der Vektor $\iota \in \R^n$ heißt \emph{Riemann-Integral} von $f$.
 \end{satz}
 
 \begin{defn}
-Eine Kurve $f : \cinterval{a}{b} \to \R$ heißt \emph{regulär}, wenn sie stetig differenzierbar ist und die Ableitung $f'$ keine Nullstelle hat.
+  Eine Kurve $f : \cinterval{a}{b} \to \R$ heißt \emph{regulär}, wenn sie stetig differenzierbar ist und die Ableitung $f'$ keine Nullstelle hat.
 \end{defn}
 
 \begin{kor}
-Sei $f : \cinterval{a}{b} \to \R^n$ eine reguläre Kurve, $x \coloneqq f(a)$ und $y \coloneqq f(b)$. Dann gilt für die Länge $L_f$ von $f$:
-\[ L_f \ge \norm{x - y}. \]
-Falls hier Gleichheit gilt, dann gibt es eine stetig differenzierbare bijektive Abbildung $\phi : \cinterval{a}{b} \to \I$, sodass $f = c_{xy} \circ \phi$ wobei
-\[ c_{xy} : \I \to \R^n,\quad t \mapsto x + t(y - x) \]
-die Strecke von $x$ nach $y$ ist.\\
-\textit{Motto:} Die Gerade ist die kürzeste Verbindung zweier Punkte.
+  Sei $f : \cinterval{a}{b} \to \R^n$ eine reguläre Kurve, $x \coloneqq f(a)$ und $y \coloneqq f(b)$. Dann gilt für die Länge $L_f$ von $f$:
+  \[ L_f \ge \norm{x - y}. \]
+  Falls hier Gleichheit gilt, dann gibt es eine stetig differenzierbare bijektive Abbildung $\phi : \cinterval{a}{b} \to \I$, sodass $f = c_{xy} \circ \phi$ wobei
+  \[ c_{xy} : \I \to \R^n,\quad t \mapsto x + t(y - x) \]
+  die Strecke von $x$ nach $y$ ist.\\
+  \textit{Motto:} Die Gerade ist die kürzeste Verbindung zweier Punkte.
 \end{kor}
 
 
 \section{Partielle Ableitungen}
 
 \begin{defn}
-Sei $U \opn \R^n$ und $v \in \R^n$ mit $\norm{v} = 1$. Eine Funktion $f : U \to \R^m$ heißt in einem Punkt $u \in U$ \emph{in Richtung $v$ differenzierbar}, wenn der Grenzwert
-\[ D_v f(u) \coloneqq \lim_{\substack{h \to 0\\h \not= 0}} \frac{f(u + hv) - f(u)}{h} \]
-existiert. In diesem Fall heißt $D_v f(u)$ die \emph{Richtungsableitung} von $f$ im Punkt $u \in U$ in Richtung $v \in \R^n$.
+  Sei $U \opn \R^n$ und $v \in \R^n$ mit $\norm{v} = 1$. Eine Funktion $f : U \to \R^m$ heißt in einem Punkt $u \in U$ \emph{in Richtung $v$ differenzierbar}, wenn der Grenzwert
+  \[ D_v f(u) \coloneqq \lim_{\substack{h \to 0\\h \not= 0}} \frac{f(u + hv) - f(u)}{h} \]
+  existiert. In diesem Fall heißt $D_v f(u)$ die \emph{Richtungsableitung} von $f$ im Punkt $u \in U$ in Richtung $v \in \R^n$.
 \end{defn}
 
 \begin{defn}
-Sei $U \opn \R^n$ und $j \in \{ 1, ..., n \}$. Eine Abbildung $f : U \to \R^m$ heißt
-\begin{itemize}
-  \item im Punkt $u \in U$ bzgl. der $j$-ten Koordinatenrichtung \emph{partiell differenzierbar}, falls die Richtungsableitung
-  \[ D_j f(u) = \frac{\partial f}{\partial x_j}(u) \coloneqq D_{e_j} f \in \R^m \]
-  existiert. In diesem Fall heißt $D_j f(u)$ die \emph{$j$-te partielle Ableitung} von $f$ in $u$.
-  \item (auf U) bzgl. der $j$-ten Koordinatenrichtung partiell differenzierbar, wenn $f$ in jedem Punkt $u \in U$ bzgl. der $j$-ten Koordinatenrichtung partiell differenzierbar ist.
-  \item im Punkt $u \in U$ partiell differenzierbar, wenn $f$ für alle $j \in \{ 1, ..., n \}$ in $u$ bzgl. der $j$-ten Koordinatenrichtung partiell differenzierbar ist.
-  \item (auf U) partiell differenzierbar, wenn $f$ in jedem Punkt $u \in U$ partiell differenzierbar ist.
-\end{itemize}
+  Sei $U \opn \R^n$ und $j \in \{ 1, ..., n \}$. Eine Abbildung $f : U \to \R^m$ heißt
+  \begin{itemize}
+    \item im Punkt $u \in U$ bzgl. der $j$-ten Koordinatenrichtung \emph{partiell differenzierbar}, falls die Richtungsableitung
+    \[ D_j f(u) = \frac{\partial f}{\partial x_j}(u) \coloneqq D_{e_j} f \in \R^m \]
+    existiert. In diesem Fall heißt $D_j f(u)$ die \emph{$j$-te partielle Ableitung} von $f$ in $u$.
+    \item (auf U) bzgl. der $j$-ten Koordinatenrichtung partiell differenzierbar, wenn $f$ in jedem Punkt $u \in U$ bzgl. der $j$-ten Koordinatenrichtung partiell differenzierbar ist.
+    \item im Punkt $u \in U$ partiell differenzierbar, wenn $f$ für alle $j \in \{ 1, ..., n \}$ in $u$ bzgl. der $j$-ten Koordinatenrichtung partiell differenzierbar ist.
+    \item (auf U) partiell differenzierbar, wenn $f$ in jedem Punkt $u \in U$ partiell differenzierbar ist.
+  \end{itemize}
 \end{defn}
 
 \begin{acht}
-Eine Funktion $f : U \to \R^m$, die in $u \in U$ partiell differenzierbar ist, muss noch lange nicht in $u$ stetig sein!
+  Eine Funktion $f : U \to \R^m$, die in $u \in U$ partiell differenzierbar ist, muss noch lange nicht in $u$ stetig sein!
 \end{acht}
 
 \begin{defn}
-Ist $f : U \to \R^m, U \opn \R^n,$ partiell differenzierbar, so setzen wir
-\[ D_j f = \frac{\partial f}{\partial x_j} : U \to \R^m,\quad x \mapsto D_j f(x) = \frac{\partial f}{\partial x_j}(x) \]
-Falls die Abbildungen $D_j f$ für alle $j \in \{ 1, ..., n \}$ wieder partiell differenzierbar sind, also für alle $j, k \in \{ 1, ..., n \}$ die Abbildungen
-\[ D_k D_j f \coloneqq D_k (D_j f) : U \to \R^m \]
-existieren, so nennen wir $f$ \emph{zweimal partiell differenzierbar}. Alternative Schreibweise:
-\[ D_k D_j f = \frac{\partial^2 f}{\partial x_k \partial x_j}. \]
-Analog definiert man für $l \in \N$ rekursiv die \emph{$l$-te partielle Ableitung}
-\[ D_{j_l} D_{j_{l-1}} \cdots D_{j_1} f = \frac{\partial^l f}{\partial x_{j_l} \partial x_{j_{l-1}} \cdots \partial x_{j_1}}. \]
-Falls jede $l$-te partielle Ableitung stetig ist, so heißt $f$ \emph{$l$-mal stetig partiell differenzierbar}.
+  Ist $f : U \to \R^m, U \opn \R^n,$ partiell differenzierbar, so setzen wir
+  \[ D_j f = \frac{\partial f}{\partial x_j} : U \to \R^m,\quad x \mapsto D_j f(x) = \frac{\partial f}{\partial x_j}(x) \]
+  Falls die Abbildungen $D_j f$ für alle $j \in \{ 1, ..., n \}$ wieder partiell differenzierbar sind, also für alle $j, k \in \{ 1, ..., n \}$ die Abbildungen
+  \[ D_k D_j f \coloneqq D_k (D_j f) : U \to \R^m \]
+  existieren, so nennen wir $f$ \emph{zweimal partiell differenzierbar}. Alternative Schreibweise:
+  \[ D_k D_j f = \frac{\partial^2 f}{\partial x_k \partial x_j}. \]
+  Analog definiert man für $l \in \N$ rekursiv die \emph{$l$-te partielle Ableitung}
+  \[ D_{j_l} D_{j_{l-1}} \cdots D_{j_1} f = \frac{\partial^l f}{\partial x_{j_l} \partial x_{j_{l-1}} \cdots \partial x_{j_1}}. \]
+  Falls jede $l$-te partielle Ableitung stetig ist, so heißt $f$ \emph{$l$-mal stetig partiell differenzierbar}.
 \end{defn}
 
 \begin{samepage}
 
 \begin{satz}[Schwarz / Clairaut]
-Sei $U \opn \R^n$, $u \in U$ und $f : U \to \R^m$ sowie $j, k \in \{ 1, ..., n \}$. Wenn die ersten partiellen Ableitungen $D_j f$, $D_k f$ und die zweiten partiellen Ableitungen $D_j D_k f$ und $D_k D_j f$ im Punkt $u$ stetig sind, dann gilt
-\[ D_j D_k f(u) = D_k D_j f(u). \]
+  Sei $U \opn \R^n$, $u \in U$ und $f : U \to \R^m$ sowie $j, k \in \{ 1, ..., n \}$. Wenn die ersten partiellen Ableitungen $D_j f$, $D_k f$ und die zweiten partiellen Ableitungen $D_j D_k f$ und $D_k D_j f$ im Punkt $u$ stetig sind, dann gilt
+  \[ D_j D_k f(u) = D_k D_j f(u). \]
 \end{satz}
 
 % Verallgemeinerung
@@ -785,148 +790,148 @@ Sei $U \opn \R^n$, $u \in U$ und $f : U \to \R^m$ sowie $j, k \in \{ 1, ..., n \
 \end{samepage}
 
 \begin{defn}
-Sei $U \opn \R^n$ und $u \in U$. Eine Abbildung $f : U \to \R^m$ heißt \emph{in $u$ (total) differenzierbar}, wenn gilt: Es gibt eine $\R$-lineare Abbildung $A_u : \R^n \to \R^m$ und eine Abbildung $\phi_u : B_{r_u}(0) \to \R^m$ für ein hinreichend kleines $r_u > 0$, sodass gilt
-\begin{enumerate}
-  \item $\lim_{\eta \to 0} \tfrac{ \phi_u(\eta) }{ \norm{\eta} } = 0$
-  \item für alle $\xi \in B_{r_u}(0)$ gilt $u + \xi \in U$ und
-  \item $f(u + \xi) = f(u) + A_u(\xi) + \phi_u(\xi)$
-\end{enumerate}
-Die $\R$-lineare Abbildung $A_u$ heißt das \emph{totale Differential} von $f$ in $u$. Man schreibt
-\[ A_u = D f(u). \]
-Wenn $f$ in jedem $u \in U$ total differenzierbar ist, dann heißt $f$ \emph{total differenzierbar}.
+  Sei $U \opn \R^n$ und $u \in U$. Eine Abbildung $f : U \to \R^m$ heißt \emph{in $u$ (total) differenzierbar}, wenn gilt: Es gibt eine $\R$-lineare Abbildung $A_u : \R^n \to \R^m$ und eine Abbildung $\phi_u : B_{r_u}(0) \to \R^m$ für ein hinreichend kleines $r_u > 0$, sodass gilt
+  \begin{enumerate}
+    \item $\lim_{\eta \to 0} \tfrac{ \phi_u(\eta) }{ \norm{\eta} } = 0$
+    \item für alle $\xi \in B_{r_u}(0)$ gilt $u + \xi \in U$ und
+    \item $f(u + \xi) = f(u) + A_u(\xi) + \phi_u(\xi)$
+  \end{enumerate}
+  Die $\R$-lineare Abbildung $A_u$ heißt das \emph{totale Differential} von $f$ in $u$. Man schreibt
+  \[ A_u = D f(u). \]
+  Wenn $f$ in jedem $u \in U$ total differenzierbar ist, dann heißt $f$ \emph{total differenzierbar}.
 \end{defn}
 
 \begin{bem}
-Seien $f_1, f_2 : U \to \R^m$ in $u \in U$ total differenzierbar. Dann ist auch $(f_1 + f_2)$ in $u$ total differenzierbar und es gilt
-\[ D (f_1 + f_2)(u) = D f_1(u) + D f_2(u) \]
+  Seien $f_1, f_2 : U \to \R^m$ in $u \in U$ total differenzierbar. Dann ist auch $(f_1 + f_2)$ in $u$ total differenzierbar und es gilt
+  \[ D (f_1 + f_2)(u) = D f_1(u) + D f_2(u) \]
 \end{bem}
 
 \begin{satz}
-Ist $f : U \to \R^m$ in $u \in U$ total differenzierbar, so ist $f$ in diesem Punkt $u$ stetig.
+  Ist $f : U \to \R^m$ in $u \in U$ total differenzierbar, so ist $f$ in diesem Punkt $u$ stetig.
 \end{satz}
 
 \begin{acht}
-Wenn $f$ in einem Punkt $u$ partiell differenzierbar ist, so folgt daraus nicht, dass $f$ in diesem $u$ total differenzierbar ist. Selbst wenn in $u$ alle Richtungsableitungen existieren, muss $f$ in $u$ nicht total differenzierbar sein.
+  Wenn $f$ in einem Punkt $u$ partiell differenzierbar ist, so folgt daraus nicht, dass $f$ in diesem $u$ total differenzierbar ist. Selbst wenn in $u$ alle Richtungsableitungen existieren, muss $f$ in $u$ nicht total differenzierbar sein.
 \end{acht}
 
 \begin{satz}
-Sei $f : U \to \R^m$ in $u \in U$ total differenzierbar und $v \in \R^n$ mit $\norm{v} = 1$. Dann ist $f$ in $u$ in Richtung $v$ ableitbar mit
-\[ D f(u) (v) = D_v f(u). \]
+  Sei $f : U \to \R^m$ in $u \in U$ total differenzierbar und $v \in \R^n$ mit $\norm{v} = 1$. Dann ist $f$ in $u$ in Richtung $v$ ableitbar mit
+  \[ D f(u) (v) = D_v f(u). \]
 \end{satz}
 
 \begin{defn}
-Sei $f : U \to \R^m$ in $u \in U$ total differenzierbar. Dann ist
-\[ D f(u) = J_u f \coloneqq \left( \frac{\partial f}{\partial x_1}(u), ..., \frac{\partial f}{\partial x_n}(u) \right) \in \R^{m \times n}. \]
-Die Matrix $J_u f$ heißt \emph{Jacobimatrix} von $f$ im Punkt $u$.
+  Sei $f : U \to \R^m$ in $u \in U$ total differenzierbar. Dann ist
+  \[ D f(u) = J_u f \coloneqq \left( \frac{\partial f}{\partial x_1}(u), ..., \frac{\partial f}{\partial x_n}(u) \right) \in \R^{m \times n}. \]
+  Die Matrix $J_u f$ heißt \emph{Jacobimatrix} von $f$ im Punkt $u$.
 \end{defn}
 
 % 6.99
 
 \begin{satz}
-Sei $f : U \to \R^m$ partiell diffbar und alle partiellen Ableitungen in $u \in U$ stetig. Dann ist $f$ in $u$ total differenzierbar.
+  Sei $f : U \to \R^m$ partiell diffbar und alle partiellen Ableitungen in $u \in U$ stetig. Dann ist $f$ in $u$ total differenzierbar.
 \end{satz}
 
 \begin{bem}
-Es gelten folgende Implikationen:\\
-$\quad\quad\,\,\, f$ ist stetig partiell differenzierbar\\
-$\implies$ $f$ ist total differenzierbar ($\!\implies f$ ist stetig)\\
-$\implies$ $f$ ist partiell differenzierbar
+  Es gelten folgende Implikationen:\\
+  $\quad\quad\,\,\, f$ ist stetig partiell differenzierbar\\
+  $\implies$ $f$ ist total differenzierbar ($\!\implies f$ ist stetig)\\
+  $\implies$ $f$ ist partiell differenzierbar
 \end{bem}
 
 \begin{satz}
-Sie $f : U \to \R^m$ $k$-mal stetig partiell differenzierbar mit $k \in \N$. Sei $1 \le l \le k$, dann sind alle $l$-ten partiellen Ableitungen von $f$ stetig.
+  Sie $f : U \to \R^m$ $k$-mal stetig partiell differenzierbar mit $k \in \N$. Sei $1 \le l \le k$, dann sind alle $l$-ten partiellen Ableitungen von $f$ stetig.
 \end{satz}
 
 \begin{satz}[Kettenregel]
-Sei $U \opn \R^n$ und $V \opn \R^m$ sowie $g : U \to V$ und $f : V \to \R^l$ Abbildungen. Wenn g in $u \in U$ und $f$ in $g(u)$ total differenzierbar ist, dann ist $(f \circ g) : U \to \R^l$ in $u$ total differenzierbar mit
-\[ D(f \circ g)(u) = D f(g(u)) \circ D g(u). \]
+  Sei $U \opn \R^n$ und $V \opn \R^m$ sowie $g : U \to V$ und $f : V \to \R^l$ Abbildungen. Wenn g in $u \in U$ und $f$ in $g(u)$ total differenzierbar ist, dann ist $(f \circ g) : U \to \R^l$ in $u$ total differenzierbar mit
+  \[ D(f \circ g)(u) = D f(g(u)) \circ D g(u). \]
 \end{satz}
 
 % Produktregel
 
 \begin{satz}[MWS]
-Sei $U \opn \R^n$, $u \in U$ und $f = (f_1, ..., f_m) : U \to \R^m$ stetig differenzierbar. Sei außerdem $\xi \in \R^n$, sodass das Bild der Strecke $\I \to \R^n, t \mapsto u + t \xi$ ganz in $U$ liegt. Dann gilt
-\[ f(u + \xi) - f(u) = \left( \Int{0}{1}{(J_{u + t \xi} f)}{t} \right) \cdot \xi = \Int{0}{1}{((J_{u + t \xi} f) \cdot \xi)}{t} \]
+  Sei $U \opn \R^n$, $u \in U$ und $f = (f_1, ..., f_m) : U \to \R^m$ stetig differenzierbar. Sei außerdem $\xi \in \R^n$, sodass das Bild der Strecke $\I \to \R^n, t \mapsto u + t \xi$ ganz in $U$ liegt. Dann gilt
+  \[ f(u + \xi) - f(u) = \left( \Int{0}{1}{(J_{u + t \xi} f)}{t} \right) \cdot \xi = \Int{0}{1}{((J_{u + t \xi} f) \cdot \xi)}{t} \]
 \end{satz}
 
 \begin{kor}[Schrankensatz]
-Sei $U \opn \R^n$, $u \in U$, $f = (f_1, ..., f_m) : U \to \R^m$ und $\xi \in \R^n$ wie eben. Sei
-\[ M \coloneqq \sup \left\{ \norm{J_{u + t \xi} f}_{\text{op}} : t \in \I \right\}, \]
-dann gilt
-\[ \norm{f(u + \xi) - f(u)} \le M \norm{\xi} \]
+  Sei $U \opn \R^n$, $u \in U$, $f = (f_1, ..., f_m) : U \to \R^m$ und $\xi \in \R^n$ wie eben. Sei
+  \[ M \coloneqq \sup \left\{ \norm{J_{u + t \xi} f}_{\text{op}} : t \in \I \right\}, \]
+  dann gilt
+  \[ \norm{f(u + \xi) - f(u)} \le M \norm{\xi} \]
 \end{kor}
 
 \begin{nota}
-Sei $f : U \to \R$ $k$-mal stetig differenzierbar, $u \in U$ und $\xi = (\xi_1, ..., \xi_n) \in \R^n$. Dann setzen wir
-\[ d^k f(u)\,\xi^k \coloneqq \sum_{j_1=1}^n \cdots \sum_{j_k=1}^n (D_{j_k} \cdots D_{j_1} f(u))\,\xi_{j_1}\cdots\xi_{j_k} \]
-und
-\[ d^0 f(u) \xi^0 \coloneqq f(u). \]
+  Sei $f : U \to \R$ $k$-mal stetig differenzierbar, $u \in U$ und $\xi = (\xi_1, ..., \xi_n) \in \R^n$. Dann setzen wir
+  \[ d^k f(u)\,\xi^k \coloneqq \sum_{j_1=1}^n \cdots \sum_{j_k=1}^n (D_{j_k} \cdots D_{j_1} f(u))\,\xi_{j_1}\cdots\xi_{j_k} \]
+  und
+  \[ d^0 f(u) \xi^0 \coloneqq f(u). \]
 \end{nota}
 
 \begin{satz}[\emph{Taylorformel} in mehreren Veränderlichen]
-Sei $U \opn \R^n$ und $f : U \to \R$ eine $(p + 1)$-mal stetig differenzierbare Funktion. Ferner sei $u \in U$ und $\xi \in \R^n$, sodass für alle $t \in \I$ gilt $h(t) \coloneqq u + t \xi \in U$. Dann gibt es ein $\tau \in \I$, sodass
-\[ f(u + \xi) = F(1) = \left( \sum_{k=0}^{p} \frac{1}{k!}\,d^k f(u)\,\xi^k \right) + \frac{1}{(p + 1)!}\,d^{p+1} f(u + \tau \xi)\,\xi^{p+1}. \]
+  Sei $U \opn \R^n$ und $f : U \to \R$ eine $(p + 1)$-mal stetig differenzierbare Funktion. Ferner sei $u \in U$ und $\xi \in \R^n$, sodass für alle $t \in \I$ gilt $h(t) \coloneqq u + t \xi \in U$. Dann gibt es ein $\tau \in \I$, sodass
+  \[ f(u + \xi) = F(1) = \left( \sum_{k=0}^{p} \frac{1}{k!}\,d^k f(u)\,\xi^k \right) + \frac{1}{(p + 1)!}\,d^{p+1} f(u + \tau \xi)\,\xi^{p+1}. \]
 \end{satz}
 
 \begin{bem}[Taylorformel für $p = 2$]
-Sei $f : U \to \R$ zweimal stetig differenzierbar. Wir nennen
-\begin{align*}
-  (\mathrm{Hess} f)(u) &\coloneqq (D_j D_k f(u))_{j,k}\\
-  &= \begin{pmatrix} D_1 D_1 f(u) & \cdots & D_1 D_n f(u) \\ D_2 D_1 f(u) & \cdots & D_2 D_n f(u) \\ \vdots & \ddots & \vdots \\ D_n D_1 f(u) & \cdots & D_n D_n f(u) \end{pmatrix} \in \R^{n \times n}
-\end{align*}
-die \emph{Hesse-Matrix} von $f$ in $u$. Mit der Taylorformel für $p = 2$ folgt
-\[ f(u + \xi) = f(u) + \sum_{j=1}^{n} D f(u)\,\xi + \tfrac{1}{2} \cdot \xi^{\text{T}} \cdot (\mathrm{Hess} f)(u) \cdot \xi + R_2^{f,u}(u + \xi). \]
+  Sei $f : U \to \R$ zweimal stetig differenzierbar. Wir nennen
+  \begin{align*}
+    (\Hess f)(u) &\coloneqq (D_j D_k f(u))_{j,k}\\
+    &= \begin{pmatrix} D_1 D_1 f(u) & \cdots & D_1 D_n f(u) \\ D_2 D_1 f(u) & \cdots & D_2 D_n f(u) \\ \vdots & \ddots & \vdots \\ D_n D_1 f(u) & \cdots & D_n D_n f(u) \end{pmatrix} \in \R^{n \times n}
+  \end{align*}
+  die \emph{Hesse-Matrix} von $f$ in $u$. Mit der Taylorformel für $p = 2$ folgt
+  \[ f(u + \xi) = f(u) + \sum_{j=1}^{n} D f(u)\,\xi + \tfrac{1}{2} \cdot \xi^{\text{T}} \cdot (\Hess f)(u) \cdot \xi + R_2^{f,u}(u + \xi). \]
 \end{bem}
 
 \begin{defn}
-Sei $U \opn \R^n$ und $f : U \to \R$ partiell differenzierbar. Ein Punkt $u \in U$ heißt \emph{kritischer Punkt} von $f$, wenn
-\[ D_j f(u) = 0 \in \R^{1 \times n}\quad \forall\,j \in \{ 1, ..., n \}. \]
+  Sei $U \opn \R^n$ und $f : U \to \R$ partiell differenzierbar. Ein Punkt $u \in U$ heißt \emph{kritischer Punkt} von $f$, wenn
+  \[ D_j f(u) = 0 \in \R^{1 \times n}\quad \forall\,j \in \{ 1, ..., n \}. \]
 \end{defn}
 
 \begin{satz}
-Sei $U \opn \R^n$ und $f : U \to \R$ partiell differenzierbar. Hat $f$ in $u \in U$ ein lokales Extremum, dann ist $u$ ein kritischer Punkt von $f$.
+  Sei $U \opn \R^n$ und $f : U \to \R$ partiell differenzierbar. Hat $f$ in $u \in U$ ein lokales Extremum, dann ist $u$ ein kritischer Punkt von $f$.
 \end{satz}
 
 \begin{defn}
-Eine reelle symmetrische Matrix $A \in \R^{n \times n}$ heißt
-\begin{itemize}
-  \item \emph{degeneriert}, wenn $\det(A) = 0$ gilt.
-  \item \emph{positiv definit}, wenn für alle $\xi \in \R^n \backslash \{ 0 \}$ gilt: $\xi^{\text{T}}A\xi > 0.$ Äquivalent ist $A$ positiv definit, wenn alle Eigenwerte von $A$ positiv sind.
-  \item \emph{negativ definit}, wenn $-A$ positiv definit ist (bzw. alle Eigenwerte von $A$ negativ sind).
-  \item \emph{indefinit}, wenn $A$ weder degeneriert, noch positiv, noch negativ definit ist (d.\,h. $A$ besitzt sowohl negative als auch positive Eigenwerte).
-\end{itemize}
+  Eine reelle symmetrische Matrix $A \in \R^{n \times n}$ heißt
+  \begin{itemize}
+    \item \emph{degeneriert}, wenn $\det(A) = 0$ gilt.
+    \item \emph{positiv definit}, wenn für alle $\xi \in \R^n \backslash \{ 0 \}$ gilt: $\xi^{\text{T}}A\xi > 0.$ Äquivalent ist $A$ positiv definit, wenn alle Eigenwerte von $A$ positiv sind.
+    \item \emph{negativ definit}, wenn $-A$ positiv definit ist (bzw. alle Eigenwerte von $A$ negativ sind).
+    \item \emph{indefinit}, wenn $A$ weder degeneriert, noch positiv, noch negativ definit ist (d.\,h. $A$ besitzt sowohl negative als auch positive Eigenwerte).
+  \end{itemize}
 \end{defn}
 
 \begin{satz}[Hinreichende Bedingung für lokale Extrema]
-Sei $U \opn \R^n$, die Funktion $f : U \to \R$ zweimal stetig differenzierbar und $u \in U$ ein kritischer Punkt von $f$. Dann gilt
-\begin{enumerate}
-  \item Ist $(\mathrm{Hess} f)(u)$ positiv definit, so hat $f$ in $u$ ein isoliertes lokales Minimum.
-  \item Ist $(\mathrm{Hess} f)(u)$ negativ definit, so hat $f$ in $u$ ein isoliertes lokales Minimum.
-  \item Ist $(\mathrm{Hess} f)(u)$ indefinit, so hat $f$ in $u$ kein lokales Extremum (also einen Sattelpunkt).
-\end{enumerate}
+  Sei $U \opn \R^n$, die Funktion $f : U \to \R$ zweimal stetig differenzierbar und $u \in U$ ein kritischer Punkt von $f$. Setze $H \coloneqq (\Hess f)(u)$ Dann gilt
+  \begin{enumerate}
+    \item Ist $H$ positiv definit, so hat $f$ in $u$ ein isoliertes lokales Minimum.
+    \item Ist $H$ negativ definit, so hat $f$ in $u$ ein isoliertes lokales Minimum.
+    \item Ist $H$ indefinit, so hat $f$ in $u$ kein lokales Extremum (also einen Sattelpunkt).
+  \end{enumerate}
 \end{satz}
 
 \begin{acht}
-Ist $(\mathrm{Hess} f)(u)$ degeneriert, so ist keine Aussage möglich.
+  Ist $(\Hess f)(u)$ degeneriert, so ist keine Aussage möglich.
 \end{acht}
 
 \begin{strat}[Bestimmung globaler Extrema auf Kompakta]
-Sei $K \subset \R^n$ ein Kompaktum mit $K^{\circ} \not= \emptyset$ und $f : K \to \R$ eine stetige und auf $K^{\circ}$ partiell differenzierbare Funktion. Als stetige Funktion auf einem Kompaktum nimmt $f$ auf $K$ ein Maximum und Minimum an. So kann man Maximum und Minimum bestimmen:
-\begin{enumerate}
-  \item Bestimme alle kritischen Stellen von $f\mid_{K^{\circ}}$.
-  \item Bestimme alle Extrema von $f$ auf dem Rand $\partial K$.
-  \item Vergleiche die Funktionswerte von $f$ an den kritischen Stellen in $f\mid_{K^{\circ}}$ und $f\mid_{\partial K}$.
-\end{enumerate}
+  Sei $K \subset \R^n$ ein Kompaktum mit $K^{\circ} \not= \emptyset$ und $f : K \to \R$ eine stetige und auf $K^{\circ}$ partiell differenzierbare Funktion. Als stetige Funktion auf einem Kompaktum nimmt $f$ auf $K$ ein Maximum und Minimum an. So kann man Maximum und Minimum bestimmen:
+  \begin{enumerate}
+    \item Bestimme alle kritischen Stellen von $f\mid_{K^{\circ}}$.
+    \item Bestimme alle Extrema von $f$ auf dem Rand $\partial K$.
+    \item Vergleiche die Funktionswerte von $f$ an den kritischen Stellen in $f\mid_{K^{\circ}}$ und $f\mid_{\partial K}$.
+  \end{enumerate}
 \end{strat}
 
 \begin{samepage}
 
 \begin{strat}[Bestimmung globaler Extrema]
-Sei $f : \R^n \to \R^m$ partiell differenzierbar.
-\begin{enumerate}
-  \item Bestimme alle Funktionswerte von $f$ in allen kritischen Stellen. Sei $M$ der größte und $m$ der kleinste Funktionswert an einer kritischen Stelle.
-  \item Wenn es ein $R > 0$ gibt, sodass $f\mid_{\R^n \backslash B_R(0)}$ nur Werte kleiner als $M$ bzw. Werte größer als $m$ annimmt, dann ist $M$ das globale Maximum bzw. $m$ das globale Minimum.
-\end{enumerate}
+  Sei $f : \R^n \to \R^m$ partiell differenzierbar.
+  \begin{enumerate}
+    \item Bestimme alle Funktionswerte von $f$ in allen kritischen Stellen. Sei $M$ der größte und $m$ der kleinste Funktionswert an einer kritischen Stelle.
+    \item Wenn es ein $R > 0$ gibt, sodass $f\mid_{\R^n \backslash B_R(0)}$ nur Werte kleiner als $M$ bzw. Werte größer als $m$ annimmt, dann ist $M$ das globale Maximum bzw. $m$ das globale Minimum.
+  \end{enumerate}
 \end{strat}
 
 
@@ -935,36 +940,36 @@ Sei $f : \R^n \to \R^m$ partiell differenzierbar.
 \end{samepage}
 
 \begin{defn}
-Sei $U \opn \R^n$ und $V \opn \R^m$. Eine Abbildung $f : U \to V$ heißt \emph{($\mathcal{C}^1$-)Diffeomorphismus}, wenn $f$ invertierbar ist und sowohl $f$ als auch $f^{-1}$ stetig partiell differenzierbar sind.
+  Sei $U \opn \R^n$ und $V \opn \R^m$. Eine Abbildung $f : U \to V$ heißt \emph{($\mathcal{C}^1$-)Diffeomorphismus}, wenn $f$ invertierbar ist und sowohl $f$ als auch $f^{-1}$ stetig partiell differenzierbar sind.
 \end{defn}
 
 \begin{bem}
-Sei $f : U \to V$ ein Diffeomorphismus, wobei $U \opn \R^n$ und $V \opn \R^m$. Aus der Kettenregel folgt für $u \in U$:
-\[ (J_u f)^{-1} = J_{f(u)}(f^{-1}). \]
+  Sei $f : U \to V$ ein Diffeomorphismus, wobei $U \opn \R^n$ und $V \opn \R^m$. Aus der Kettenregel folgt für $u \in U$:
+  \[ (J_u f)^{-1} = J_{f(u)}(f^{-1}). \]
 \end{bem}
 
 \begin{satz}[Banachscher Fixpunktsatz]
-Sei $K \subset \R^n$ kompakt und $\psi : K \to K$ eine Kontraktion, d.\,h. es gibt eine Konstante $\kappa$ mit $0 < \kappa < 1$, sodass für alle $x, y \in K$ gilt
-\[ \norm{\psi(x) - \psi(y)} \le \kappa\, \norm{x - y}. \]
-Dann hat $\psi$ genau einen Fixpunkt in $K$.
+  Sei $K \subset \R^n$ kompakt und $\psi : K \to K$ eine Kontraktion, d.\,h. es gibt eine Konstante $\kappa$ mit $0 < \kappa < 1$, sodass für alle $x, y \in K$ gilt
+  \[ \norm{\psi(x) - \psi(y)} \le \kappa\, \norm{x - y}. \]
+  Dann hat $\psi$ genau einen Fixpunkt in $K$.
 \end{satz}
 
 \begin{satz}[\emph{Satz von der lokalen Umkehrfunktion}]
-Sei $U \opn \R^n$ und $u \in U$ sowie $f : U \to \R^n$ stetig partiell differenzierbar. Wenn $D f(u)$ invertierbar ist, so gibt es offene Umgebungen $X, Y \opn \R^n$ mit $u \in X \subset U$, sodass $f(X) = Y$ gilt und $f\mid_X : X \to Y$ ein Diffeomorphismus ist.
+  Sei $U \opn \R^n$ und $u \in U$ sowie $f : U \to \R^n$ stetig partiell differenzierbar. Wenn $D f(u)$ invertierbar ist, so gibt es offene Umgebungen $X, Y \opn \R^n$ mit $u \in X \subset U$, sodass $f(X) = Y$ gilt und $f\mid_X : X \to Y$ ein Diffeomorphismus ist.
 \end{satz}
 
 \begin{bem}
-Es ist wichtig, dass $f$ stetig partiell differenzierbar ist. Für Funktionen, die lediglich total differenzierbar sind, gilt der Satz von der lokalen Umkehrabbildungen im Allgemeinen nicht.
+  Es ist wichtig, dass $f$ stetig partiell differenzierbar ist. Für Funktionen, die lediglich total differenzierbar sind, gilt der Satz von der lokalen Umkehrabbildungen im Allgemeinen nicht.
 \end{bem}
 
 \begin{kor}[Offenheitssatz]
-Sei $U \opn \R^n$ und $f : U \to \R^n$ stetig partiell differenzierbar. Wenn für alle $u \in U$ die Differentiale $D f(u)$ invertierbar sind, dann ist $f(U)$ eine offene Teilmenge von $\R^n$.
+  Sei $U \opn \R^n$ und $f : U \to \R^n$ stetig partiell differenzierbar. Wenn für alle $u \in U$ die Differentiale $D f(u)$ invertierbar sind, dann ist $f(U)$ eine offene Teilmenge von $\R^n$.
 \end{kor}
 
 \begin{samepage}
 
 \begin{kor}
-Sei $U \opn \R^n$ und $f : U \to \R^n$ eine injektive stetig partiell differenzierbare Abbildung, sodass für alle $u \in U$ die Differentiale $D f(u)$ invertierbar sind. Dann ist $f$ ein Diffeomorphismus auf sein Bild, d.\,h. $f\mid_{f(U)}$ ist ein Diffeomorphismus.
+  Sei $U \opn \R^n$ und $f : U \to \R^n$ eine injektive stetig partiell differenzierbare Abbildung, sodass für alle $u \in U$ die Differentiale $D f(u)$ invertierbar sind. Dann ist $f$ ein Diffeomorphismus auf sein Bild, d.\,h. $f\mid_{f(U)}$ ist ein Diffeomorphismus.
 \end{kor}
 
 
@@ -973,45 +978,44 @@ Sei $U \opn \R^n$ und $f : U \to \R^n$ eine injektive stetig partiell differenzi
 \end{samepage}
 
 \begin{nota}
-Seien $U \opn \R^n$ und $V \opn \R^p$ offene Teilmengen, dann ist $U \times V$ eine offene Teilmenge von $\R^n \times \R^p = \R^{n + p}$. Sei $f : U \times V \to \R^q$ stetig differenzierbar. Für ein festes $u \in U$ sei
-\[ f_u : V \to \R^q,\quad v \mapsto f(u, v). \]
-Wir definieren
-\[ D_V f(u, v) \coloneqq D(f_u)(v) : \R^p \to \R^q \]
-bzw. als Matrix
-\[ J_V f(u, v) \coloneqq J_v(f_u) \in \R^{q \times p}. \]
-Analog definieren wir $f^v : U \to \R^q$ und $D_U f(u, v)$ bzw. $J_U f(u, v)$.
+  Seien $U \opn \R^n$ und $V \opn \R^p$ offene Teilmengen, dann ist $U \times V$ eine offene Teilmenge von $\R^n \times \R^p = \R^{n + p}$. Sei $f : U \times V \to \R^q$ stetig differenzierbar. Für ein festes $u \in U$ sei
+  \[ f_u : V \to \R^q,\quad v \mapsto f(u, v). \]
+  Wir definieren
+  \[ D_V f(u, v) \coloneqq D(f_u)(v) : \R^p \to \R^q \]
+  bzw. als Matrix
+  \[ J_V f(u, v) \coloneqq J_v(f_u) \in \R^{q \times p}. \]
+  Analog definieren wir $f^v : U \to \R^q$ und $D_U f(u, v)$ bzw. $J_U f(u, v)$.
 \end{nota}
 
 \begin{bem}
-Offenbar gilt für $u \in U$ und $v \in V$:
-\[ J_{(u, v)} f = \left( J_U f(u, v), J_V f(u, v) \right) \in \R^{q \times (n + p)}. \]
+  Offenbar gilt für $u \in U$ und $v \in V$:
+  \[ J_{(u, v)} f = \left( J_U f(u, v), J_V f(u, v) \right) \in \R^{q \times (n + p)}. \]
 \end{bem}
 
 \begin{satz}
-Seien $U \opn \R^n$ und $V \opn \R^p$ und $f : U \times V \to \R^p$ stetig partiell differenzierbar, welche in einem Punkt $(u_0, v_0) \in U \times V$ eine Nullstelle habe, d.\,h. $f(u_0, v_0) = 0$. Wenn in diesem Punkt $J_V f(u_0, v_0) \in \R^{p \times p}$ invertierbar ist, dann gibt es
-\begin{itemize}
-  \item eine offene Menge $X \opn U \times V$ mit $(u_0, v_0) \in X$,
-  \item eine offene Menge $Y \opn \R^n \times \R^p$ mit $(u_0, 0) \in Y$,
-  \item einen Diffeomorphismus $G : Y \to X$ mit $G(u_0, 0) = (u_0, v_0)$,
-\end{itemize}
-sodass $f \circ G = \pi_2.$
+  Seien $U \opn \R^n$ und $V \opn \R^p$ und $f : U \times V \to \R^p$ stetig partiell differenzierbar, welche in einem Punkt $(u_0, v_0) \in U \times V$ eine Nullstelle habe, d.\,h. $f(u_0, v_0) = 0$. Wenn in diesem Punkt $J_V f(u_0, v_0) \in \R^{p \times p}$ invertierbar ist, dann gibt es
+  \begin{itemize}
+    \item eine offene Menge $X \opn U \times V$ mit $(u_0, v_0) \in X$,
+    \item eine offene Menge $Y \opn \R^n \times \R^p$ mit $(u_0, 0) \in Y$,
+    \item einen Diffeomorphismus $G : Y \to X$ mit $G(u_0, 0) = (u_0, v_0)$,
+  \end{itemize}
+  sodass $f \circ G = \pi_2.$
 \end{satz}
 
 \begin{samepage}
 
 \begin{satz}[\emph{Satz über implizite Funktionen}]
-Seien $U \opn \R^n$ und $V \opn \R^p$ und $f : U \times V \to \R^p$ stetig partiell differenzierbar, welche in $(u_0, v_0) \in U \times V$ eine Nullstelle hat, d.\,h. $f(u_0, v_0) = 0 \in \R^p$. Wenn in diesem Punkt $J_V f(u_0, v_0) \in \R^{p \times p}$ invertierbar ist, dann gibt es
-\begin{itemize}
-  \item eine offene Menge $X \opn U \times V$ mit $(u_0, v_0) \in X$,
-  \item eine offene Menge $\widetilde{U} \opn U$ mit $u_0 \in \widetilde{U}$,
-  \item eine stetig partiell differenzierbare Abbildung $g : \widetilde{U} \to \R^p$,
-\end{itemize}
-sodass
-\[ f^{-1}(0) \cap X = \mathrm{Graph}(g) = \{ (u, g(u)) : u \in \widetilde{U}. \} \]
-In anderen Worten: Für alle $(u, v) \in X$ gilt
-\[ f(u, v) = 0 \iff v = g(u). \]
-Die Funktion $g$ erfüllt dabei
-\[ g(u_0) = v_0\quad\text{und}\quad J_{u_0} g = - \left(J_V f(u_0, v_0)\right)^{-1} \cdot J_U f(u_0, v_0). \]
+  Seien $U \opn \R^n$ und $V \opn \R^p$ und $f : U \times V \to \R^p$ stetig partiell differenzierbar, welche in $(u_0, v_0) \in U \times V$ eine Nullstelle hat, d.\,h. $f(u_0, v_0) = 0 \in \R^p$. Wenn in diesem Punkt $J_V f(u_0, v_0) \in \R^{p \times p}$ invertierbar ist, dann gibt es
+  \begin{itemize}
+    \item eine offene Menge $X \opn U \times V$ mit $(u_0, v_0) \in X$,
+    \item eine offene Menge $\widetilde{U} \opn U$ mit $u_0 \in \widetilde{U}$,
+    \item eine stetig partiell differenzierbare Abbildung $g : \widetilde{U} \to \R^p$ mit
+  \end{itemize}
+  \[ f^{-1}(0) \cap X = \Graph(g) = \Set{ (u, g(u)) }{ u \in \widetilde{U} }. \]
+  In anderen Worten: Für alle $(u, v) \in X$ gilt
+  \[ f(u, v) = 0 \iff v = g(u). \]
+  Die Funktion $g$ erfüllt dabei
+  \[ g(u_0) = v_0\quad\text{und}\quad J_{u_0} g = - \left(J_V f(u_0, v_0)\right)^{-1} \cdot J_U f(u_0, v_0). \]
 \end{satz}
 
 
@@ -1020,54 +1024,53 @@ Die Funktion $g$ erfüllt dabei
 \end{samepage}
 
 \begin{defn}
-Eine Teilmenge $M \subset \R^n$ heißt $m$-dimensionale \emph{Untermannigfaltigkeit} von $\R^n$, wenn gilt: Für alle $u \in M$ gibt es eine offene Teilmenge $U \opn \R^n$ mit $u \in U$ und eine offene Teilmenge $V \opn \R^n$ mit $0 \in V$, sowie einen Diffeomorphismus $\Phi : U \to V$ mit $\Phi(u) = 0$, sodass gilt:
-  \[ \Phi(M \cap U) = V \cap \{ (x_1, ..., x_m, 0, ..., 0) \in \R^n \} \cong V \cap \R^m. \]
-Die Abbildung $\Phi$ heißt \emph{Karte} von $M$ um den Punkt $u$.
+  Eine Teilmenge $M \subset \R^n$ heißt $m$-dimensionale \emph{Untermannigfaltigkeit} von $\R^n$, wenn gilt: Für alle $u \in M$ gibt es eine offene Teilmenge $U \opn \R^n$ mit $u \in U$ und eine offene Teilmenge $V \opn \R^n$ mit $0 \in V$, sowie einen Diffeomorphismus $\Phi : U \to V$ mit $\Phi(u) = 0$, sodass gilt:
+    \[ \Phi(M \cap U) = V \cap \{ (x_1, ..., x_m, 0, ..., 0) \in \R^n \} \cong V \cap \R^m. \]
+  Die Abbildung $\Phi$ heißt \emph{Karte} von $M$ um den Punkt $u$.
 \end{defn}
 
 \begin{defn}
-Sei $c : (-\epsilon, \epsilon) \to M \subset \R^n$ eine differenzierbare Kurve mit $c(0) = u \in M$, deren Bild ganz in $M$ liegt, dann heißt der Vektor $c'(0) \in \R^n$ \emph{Tangentialvektor} an $M$ in $u \in M$. Für $u \in M$ setzen wir
-\[ T_u M \coloneqq \{ v \in \R^n : v \text{ Tangentialvektor an } M \text{ in } u \}. \]
-Die Menge $T_u M$ heißt \emph{Tangentialraum} von $M$ im Punkt $u$.
+  Sei $c : \ointerval{-\epsilon}{\epsilon} \to M \subset \R^n$ eine differenzierbare Kurve mit $c(0) = u \in M$, deren Bild ganz in $M$ liegt, dann heißt der Vektor $c'(0) \in \R^n$ \emph{Tangentialvektor} an $M$ in $u \in M$. Für $u \in M$ setzen wir
+  \[ T_u M \coloneqq \{ v \in \R^n : v \text{ Tangentialvektor an } M \text{ in } u \}. \]
+  Die Menge $T_u M$ heißt \emph{Tangentialraum} von $M$ im Punkt $u$.
 \end{defn}
 
 \begin{satz}
-Ist $M \subset \R^n$ eine $m$-dimensionale Untermannigfaltigkeit von $\R^n$ und $u \in M$, dann ist $T_u M$ ein $m$-dimensionaler UVR von $\R^n$.
+  Ist $M \subset \R^n$ eine $m$-dimensionale Untermannigfaltigkeit von $\R^n$ und $u \in M$, dann ist $T_u M$ ein $m$-dimensionaler UVR von $\R^n$.
 \end{satz}
 
 \begin{defn}
-Sei $M \subset \R^n$ eine $m$-dimensionale Untermannigfaltigkeit und $u \in M$. Das orthogonale Komplement (bzgl. des Standardskalarprodukts $\langle \blank, \blank \rangle$)
-\[ N_u M = (T_u M)^\perp \]
-von $T_u M$ in $\R^n$ heißt \emph{Normalraum} von $M$ im Punkt $u$.
+  Sei $M \subset \R^n$ eine $m$-dimensionale Untermannigfaltigkeit und $u \in M$. Das orthogonale Komplement (bzgl. des Standardskalarprodukts $\langle \blank, \blank \rangle$)
+  \[ N_u M = (T_u M)^\perp \]
+  von $T_u M$ in $\R^n$ heißt \emph{Normalraum} von $M$ im Punkt $u$.
 \end{defn}
 
 \begin{defn}
-Sei $U \opn \R^n$ und $f : U \to \R^p$ mit $p \le n$ stetig partiell differenzierbar. Ein Punkt $u \in U$ wird \emph{regulärer Punkt} von $f$ genannt, wenn die lineare Abbildung $D f(u) : \R^n \to \R^p$ Rang $p$ hat (also surjektiv ist). Sei $Y \in \R^p$, dann heißt sein Urbild
-\[ f^{-1}(\{y\}) = \{ u \in U : f(u) = y \} \]
-\emph{reguläres Urbild} oder \emph{reguläre Niveaumenge}, wenn alle Punkte in $f^{-1}(\{ y \})$ reguläre Punkte von $f$ sind.
+  Sei $U \opn \R^n$ und $f : U \to \R^p$ mit $p \le n$ stetig partiell differenzierbar. Ein Punkt $u \in U$ wird \emph{regulärer Punkt} von $f$ genannt, wenn die lineare Abbildung $D f(u) : \R^n \to \R^p$ Rang $p$ hat (also surjektiv ist). Sei $Y \in \R^p$, dann heißt sein Urbild
+  \[ f^{-1}(\{y\}) = \{ u \in U : f(u) = y \} \]
+  \emph{reguläres Urbild} oder \emph{reguläre Niveaumenge}, wenn alle Punkte in $f^{-1}(\{ y \})$ reguläre Punkte von $f$ sind.
 \end{defn}
 
 \begin{defn}
-Sei $U \opn \R^n$ und $f : U \to \R^p$ mit $p \le n$ stetig partiell differenzierbar. Ist $y \in \mathrm{Bild}(f)$ und $M \coloneqq f^{-1}(\{ y \})$ ein reguläres Urbild, dann ist $M$ eine $m$-dimensionale Untermannigfaltigkeit des $\R^n$, wobei $m = n - p$.
+  Sei $U \opn \R^n$ und $f : U \to \R^p$ mit $p \le n$ stetig partiell differenzierbar. Ist $y \in \mathrm{Bild}(f)$ und $M \coloneqq f^{-1}(\{ y \})$ ein reguläres Urbild, dann ist $M$ eine $m$-dimensionale Untermannigfaltigkeit des $\R^n$, wobei $m = n - p$.
 \end{defn}
 
 \begin{defn}
-Sei $U \opn \R^n$ und $g : U \to \R$ partiell differenzierbar. Dann heißt die Abbildung
-\[ \nabla g : U \to \R^m,\quad u \mapsto \begin{pmatrix} D_1 g(u) \\ \vdots \\ D_n g(u) \end{pmatrix} \]
-\emph{Gradient} von $g$. Ist $g$ in $u$ differenzierbar, so gilt
-\[ \nabla g(u) = (J_u g)^\perp. \]
+  Sei $U \opn \R^n$ und $g : U {\to} \R$ partiell diff'bar. Dann heißt die Abb.
+  \[ \nabla g : U \to \R^m,\quad u \mapsto \begin{pmatrix} D_1 g(u) \\ \vdots \\ D_n g(u) \end{pmatrix} \]
+  \emph{Gradient} von $g$. Ist $g$ in $u$ differenzierbar, so gilt $\nabla g(u) = (J_u g)^T$.
 \end{defn}
 
 \begin{satz}
-Sei $U \opn \R^n$ und $f = (f_1, ..., f_p) : U \to \R^p, p \le n$ stetig partiell differenzierbar. Ist $y = (y_1, ..., y_p) \in \mathrm{Bild}(f)$ und $M \coloneqq f^{-1}(\{ y \})$ ein reguläres Urbild sowie $u \in M$, dann ist $\{ \nabla f_1(u), ..., \nabla f_p(u) \}$ eine Basis von $N_u M$.
+  Sei $U \opn \R^n$ und $f = (f_1, ..., f_p) : U \to \R^p, p \le n$ stetig partiell differenzierbar. Ist $y = (y_1, ..., y_p) \in \mathrm{Bild}(f)$ und $M \coloneqq f^{-1}(\{ y \})$ ein reguläres Urbild sowie $u \in M$, dann ist $\{ \nabla f_1(u), ..., \nabla f_p(u) \}$ eine Basis von $N_u M$.
 \end{satz}
 
 \begin{satz}[Lokale Extrema unter Nebenbedinungen]
-Sei $U \opn \R^n$ offen und $f : U \to \R$ differenzierbar. Ferner sei $M \subset U \opn \R^n$ eine Untermannigfaltigkeit des $\R^n$ und $u_0 \in M$ ein Punkt, an welchem $f\mid_M$ ein lokales Extremum annimmt. Dann gilt $\nabla f(u_0) \in N_{u_0} M$.
+  Sei $U \opn \R^n$ offen und $f : U \to \R$ differenzierbar. Ferner sei $M \subset U \opn \R^n$ eine Untermannigfaltigkeit des $\R^n$ und $u_0 \in M$ ein Punkt, an welchem $f\mid_M$ ein lokales Extremum annimmt. Dann gilt $\nabla f(u_0) \in N_{u_0} M$.
 
-Ist $M$ sogar ein reguläres Urbild einer stetig partiell differenzierbaren Abbildung $ g = (g_1, ..., g_p) : U \to \R^p$, dann gibt es eindeutig bestimmte Zahlen $\lambda_1, ..., \lambda_p \in \R$, sodass
-\[ \nabla f(u_0) = \sum_{j = 1}^{p} \lambda_j \nabla g_j(u_0). \]
-Die Zahlen $\lambda_1, ..., \lambda_p \in \R$ heißen \emph{Lagrange-Multiplikatoren}.
+  Ist $M$ sogar ein reguläres Urbild einer stetig partiell differenzierbaren Abbildung $ g = (g_1, ..., g_p) : U \to \R^p$, dann gibt es eindeutig bestimmte Zahlen $\lambda_1, ..., \lambda_p \in \R$, sodass
+  \[ \nabla f(u_0) = \sum_{j = 1}^{p} \lambda_j \nabla g_j(u_0). \]
+  Die Zahlen $\lambda_1, ..., \lambda_p \in \R$ heißen \emph{Lagrange-Multiplikatoren}.
 \end{satz}
 
 \end{document}
