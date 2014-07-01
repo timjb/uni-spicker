@@ -14,6 +14,12 @@
 \usepackage{relsize}
 \let\myBinom\binom
 \renewcommand{\binom}[2]{\mathsmaller{\myBinom{#1}{#2}}}
+\DeclareMathOperator{\ggT}{ggT} % größter gemeinsamer Teiler
+\newcommand{\Mod}[1]{\ (\text{mod}\ #1)} % http://tex.stackexchange.com/questions/137073/writing-mod-in-congruence-problems-without-leading-space
+\newcommand{\F}{\mathbb{F}} % Symbol für Restklassenkörper
+\renewcommand{\L}{\mathbb{L}} % Variable (für Körper verwendet)
+\DeclareMathOperator{\Aut}{Aut} % Automorphismengruppe
+\DeclareMathOperator{\Gal}{Gal} % Galoisgruppe
 
 \begin{document}
 
@@ -487,6 +493,10 @@
 \end{defn}
 
 \begin{defn}
+  Eine Gruppenwirkung $\phi$ von $G$ auf $X$ heißt \emph{transitiv}, falls es für alle $x_1, x_2 \in X$ ein $g \in G$ mit $\phi(g, x_1) = x_2$ gibt.
+\end{defn}
+
+\begin{defn}
   Für $x \in X$ heißt $Gx \coloneqq \Set{ gx }{ g \in G }$ \emph{Orbit} oder \emph{Bahn} von $x$.
 \end{defn}
 
@@ -550,12 +560,290 @@
 \end{prop}
 
 \begin{defn}
-  Die Untergruppe $A_n \subset S_n$ der symmetrischen Gruppe besteht aus allen Transpositionen mit gerader Anzahl an Fehlstellungen und heißt \emph{Alternierende Gruppe}.
+  Die Untergruppe $A_n \subset S_n$ der symmetrischen Gruppe, die aus allen Transpositionen mit gerader Anzahl an Fehlstellungen besteht, heißt \emph{Alternierende Gruppe}.
 \end{defn}
 
-% TODO: Schlechte Definition ("uns bekannte"). Verbessern!
+% Kapitel 1.18. Die Galoisgruppe
+
 \begin{defn}
-  Die \emph{Galoisgruppe} eines Polynoms $f$ ist die Untergruppe von $G \subset S_n$, die alle uns bekannten algebraischen Relationen zwischen den Wurzeln von $f$ enthält.
+  Ein Polynom $f \in \K[x]$ heißt \emph{separabel}, falls alle Nullstellen voneinander verschieden sind.
 \end{defn}
+
+\begin{bem}
+  Ein Polynom vom Grad $\geq 1$ ist genau dann separabel, falls seine Diskriminante ungleich $0$ ist.
+\end{bem}
+
+\begin{defn}
+  Sei $f \in \K[x]$ ein separables Polynom mit Nullstellen $x_1, ..., x_n$.
+  \begin{itemize}
+    \item Eine \emph{algebraische Relation} zwischen den Nullstellen über $\K$ ist ein Polynom $f \in \K[x_1, ..., x_n]$ mit $f(\alpha_1, ..., \alpha_n) = 0$.
+    \item Die \emph{Galoisgruppe} $G$ von $f$ ist die Gruppe aller $n$-stelligen Permutationen, die alle algebraischen Relationen erhalten, d.\,h.
+    \begin{align*}
+      G \coloneqq \{ \sigma \in S_n \mid & \, \fa{f \in \K[x_1, ..., x_n]} f(\alpha_1, ..., \alpha_n) = 0 \\
+      & \implies (\sigma f)(\alpha_1, ..., \alpha_n) = 0 \}.
+    \end{align*}
+  \end{itemize}
+\end{defn}
+
+\begin{lem}
+  Sei $f \in \K[x]$ reduzibel, d.\,h. $f = gh$ für zwei nicht-konstante Polynome $g, h \in \K[x]$. Dann wirkt die Galois nicht transitiv.
+\end{lem}
+
+\begin{bsp}
+  Sei $f \in \K[x]$ separabel mit Diskriminante $\Delta$. Angenommen,
+  \[ D = \sqrt{\Delta} = \prod_{i < j} (x_i - x_j) \in \K. \]
+  Dann gilt $G \subset A_n$ für die Galoisgruppe $G$ von $f$, da Transpositionen gerade das Vorzeichen von $\sqrt{\Delta}$ vertauschen.
+\end{bsp}
+
+\begin{bsp}
+  Die Galoisgruppe des Polynoms $f(x) = x^n - 1$, dessen Nullstellen \emph{$n$-te Einheitswurzeln} genannt werden, ist
+  \[ G = \Set{ m \mapsto k \cdot m \Mod{n} }{ k \in \{ 1, ..., n{-}1 \}, \ggT(k, n) = 1 }. \]
+\end{bsp}
+
+% Ausgelassen: Galoisgruppe von $f(x) = x^n - 1$
+
+% Kapitel 1.19. Die Lösung der quintischen Gleichung
+
+\begin{bem}
+  Der \emph{Ikosaeder} ist der platonische Körper, der $20$ gleichseitige Dreiecke als Seitenflächen, $12$ Eckpunkte und $30$ Kanten besitzt. Seine Drehgruppe ist die $A_5$.
+\end{bem}
+
+% Kapitel 2. Körpererweiterungen
+\section{Körpererweiterungen}
+
+% Kapitel 2.20. Körper
+
+\begin{lem}
+  Sei $p$ eine Primzahl. Dann ist jedes Element $n \not\equiv 0 \Mod{p}$ invertierbar, d.\,h. es gibt $m \in \Z$ mit $n \cdot m \equiv 1 \Mod{p}$.
+\end{lem}
+
+\begin{defn}
+  Sei $p \in \N$ eine Primzahl. Dann bilden die Restklassen modulo $p$ einen Körper $\F_p \coloneqq \Z / (p \Z)$.
+\end{defn}
+
+\begin{defn}
+  Ein Körper $\K$ hat \emph{Charakteristik} $p \in \N \setminus \{ 0 \}$, falls $1 + ... + 1 = 0$ ($p$-Mal die $1$) in $\K$ gilt. Falls es kein solches $p$ gibt, so hat der Körper Charakteristik $0$.
+\end{defn}
+
+\begin{defn}
+  Sei $R$ ein Ring. Ein \emph{Ideal} in $R$ ist eine Teilmenge $I \subset R$, für die gilt: $\fa{r \in R, i \in I} ri = i$ ("`Magneteigenschaft"').
+\end{defn}
+
+\begin{defn}
+  Ein Ideal $I \subset R$ heißt \emph{maximal}, falls es kein Ideal $J \subsetneq R$ mit $I \subsetneq J$ gibt.
+\end{defn}
+
+\begin{bem}
+  Für jede Primzahl $p$ ist $p \Z \coloneqq \Set{ pz }{ z \in \Z }$ ein maximales Ideal.
+\end{bem}
+
+% Kapitel 2.21. Körpererweiterungen
+
+\begin{defn}
+  Ein \emph{Teilkörper} eines Körpers $\L$ ist eine Teilmenge $\K \subset \L$ mit $\{ 0, 1 \} \subset \K$, die unter Multiplikation, Addition und multiplikativer und additiver Inversenbildung abgeschlossen ist.
+\end{defn}
+
+\begin{defn}
+  Sei $\K \subset \C$ ein Teilkörper und $\alpha_1, ..., \alpha_n \in \C$. Dann ist die Körpererweiterung $\K(\alpha_1, ..., \alpha_n)$ der Körper, der aus $\K$ durch Hinzufügen ("`Adjungieren"') von $\alpha_1, ..., \alpha_n$ und allen durch Multiplikation, Addition und Inversenbildung entstehenden Zahlen besteht.
+\end{defn}
+
+\begin{defn}
+  Eine Körpererweiterung $\L \supset \K$ heißt \emph{endlich}, falls es Elemente $\alpha_1, ..., \alpha_k \in \L$ gibt, sodass jede Zahl $y \in \K$ eindeutig als Linearkombination $y = \lambda_1 \alpha_1 + ... + \lambda_k \alpha_k$ mit $\lambda_1, ..., \lambda_k \in \K$ geschrieben werden kann. Die Zahl $[\L : \K] \coloneqq k$ wird \emph{Grad} der Körpererweiterung genannt.
+\end{defn}
+
+\begin{bem}
+  Der Schnitt von beliebig vielen Teilkörpern ist ein Teilkörper. Man kann also $\K(\alpha_1, ..., \alpha_n)$ auch als kleinsten Teilkörper von $\C$, der die Menge $\K \cup \{ \alpha_1, ...., \alpha_n \}$ enthält, beschreiben.
+\end{bem}
+
+\begin{defn}
+  Sei $f \in \K[x]$ und $\alpha$ eine Nullstelle von $f$. Das Polynom $f$ heißt \emph{Minimalpolynom} von $\alpha$, falls für alle Polynome $g \in \K[x]$ gilt: $g(\alpha) = 0 \implies f \divides g$ (insbesondere).
+\end{defn}
+
+\begin{defn}
+  Ein normiertes Polynom $f \in \K[x]$ heißt \emph{irreduzibel} über $\K$, falls es keine Zerlegung von $f$ als $f = gh$ mit normierten $g, h \in \K[x]$ und $g \not= 1$, $h \not= 1$ gibt.
+\end{defn}
+
+\begin{defn}
+  Sei $f \in \K[x]$ normiert, irreduzibel und $\alpha$ eine Nullstelle von $f$. Dann heißt $f$ \emph{Minimalpolynom} von $\alpha$.
+\end{defn}
+
+% Selbst formuliert.
+\begin{bem}
+  Sei $\alpha$ eine Nullstelle eines Polynoms $f \in \Q[x]$. Dann existiert ein eindeutiges, irreduzibles Polynom $g \in \K[x]$ mit $g(\alpha) = 0$.
+\end{bem}
+
+\begin{satz}
+  Sei $\alpha$ eine Nullstelle eines irreduziblen Polynoms $f \in \K[x]$. Dann ist $\{ 1, \alpha, ..., \alpha^{n-1} \}$ eine Basis von $\K(\alpha)$.
+\end{satz}
+
+\begin{kor}
+  $\K(\alpha) = \K[\alpha]$ und $[\K(\alpha) : \K] = n$.
+\end{kor}
+
+% Kapitel 2.22. Konstruktionen mit Zirkel und Lineal
+
+\begin{defn}
+  Wir betrachten die Zahlenebene $\C$. Eine Zahl $z \in \C$ heißt aus vorgegebenen Zahlen $\alpha_1, ... \alpha_k$ \emph{konstruierbar}, wenn $z$ der Schnitt zweier Kreise, zweier Geraden oder einer Geraden und eines Kreises ist, wobei wir nur solche Geraden betrachten, die durch zwei vor- gegebenen Zahlen laufen und solche Kreise, die als Mittelpunkt eine vorgegebene Zahl haben und durch eine vorgegebene Zahl laufen.
+\end{defn}
+
+\begin{defn}
+  Eine Zahl $z \in \C$ heißt (in $k-2$ Schritten) \emph{konstruierbar}, falls es eine Zahlenfolge $z_0 = 0, z_1 = 1, z_2, ..., z_k = k$ gibt, sodass $z_m$ aus $z_0, ..., z_{m-1}$ für alle $m \geq 3$ konstruierbar ist.
+\end{defn}
+
+\begin{defn}
+  Sei $x$ aus $0, 1, \alpha_1, ..., \alpha_k$ konstruierbar. Dann gilt
+  \[ [ \Q(\alpha_1, ..., \alpha_k, x) : \Q(\alpha_1, ..., \alpha_k) ] \in \{ 1, 2 \}. \]
+\end{defn}
+
+\begin{lem}
+  Sind $\K \subset \K' \subset \K''$ endliche Körpererweiterungen, so gilt
+  \[ [ \K'' : \K ] = [ \K'' : \K' ] \cdot [ \K' : \K ]. \]
+\end{lem}
+
+\begin{satz}
+  Sei $\alpha \in \C$ in $n$ Schritten konstruierbar. Dann gilt
+  \[
+    [ \Q(\alpha) : \Q ] = 2^k
+    \enspace \text{für ein } k \leq n.
+  \]
+\end{satz}
+
+% Kapitel 2.23. Würfelverdopplung und Winkeldreiteilung
+
+\begin{satz}
+  $\sqrt[3]{2}$ ist keine konstruierbare Zahl.
+\end{satz}
+
+\begin{satz}
+  Die Zahl $e^{\pi/9 i}$ ist nicht konstruierbar. Folglich kann der Winkel $\pi / 3 = 60^{\circ}$ nicht gedrittelt werden.
+\end{satz}
+
+% Kapitel 2.24. Konstruktion regelmäßiger Vielecke
+
+\begin{lem}
+  Ist $p = qr$ ein Produkt teilerfremder Zahlen. Dann ist das regelmäßige $p$-Eck genau dann konstruierbar, wenn das regelmäßige $q$-Eck und das regelmäßige $r$-Eck konstruierbar ist.
+\end{lem}
+
+\begin{lem}
+  Sei $p \in \N$ prim. Dann ist das $p$-te Kreisteilungspolynom
+  \[ f(x) = \frac{x^p - 1}{x-1} = x^{p-1} + x^{p-2} + ... + x + 1 \]
+  irreduzibel. Sei $\zeta \in \C$ mit $f(\zeta) = 0$. Dann gilt $[ \Q(\zeta) : Q ] = p-1$.
+\end{lem}
+
+\begin{lem}
+  Sei $2^s + 1$ eine Primzahl. Dann ist $s$ eine Zweierpotenz.
+\end{lem}
+
+\begin{bem}
+  Zahlen der Form $2^{2^r} + 1$ heißen \emph{Fermatzahlen}. Die ersten $5$ Fermatzahlen
+  $3$, $5$, $17$, $257$, $65537$ sind Primzahlen, die sechste nicht.
+\end{bem}
+
+\begin{satz}
+  Sei $p$ eine Primzahl. Wenn das $p$-Eck konstruierbar ist, dann ist $p$ eine Fermatzahl.
+\end{satz}
+
+\begin{satz}[Gauß]
+  Das $17$-Eck ist konstruierbar.
+\end{satz}
+
+% Kapitel 2.25. Irreduzibilität über $\Z$
+
+\begin{defn}
+  Ein Polynom $f \in \Z[x]$ heißt \emph{reduzibel} über $\Z$, falls es Polynome $g, h \in \Z[x]$ mit $g \not= 1$, $h \not= 1$ und $f = gh$ gibt.
+\end{defn}
+
+\begin{defn}
+  Sei $p$ eine Primzahl. Ein Polynom $f \in \F_p[x]$ heißt \emph{reduzibel} über $\F_p$, wenn es nichtkonstante $g, h \in \F_p[x]$ mit $f = gh$ gibt.
+\end{defn}
+
+\begin{defn}
+  Angenommen, ein normiertes Polynom $f \in \Z[x]$ ist reduzibel über $\Z$. Dann ist auch $f$ aufgefasst als $f \in \F_p[x]$ reduzibel.
+\end{defn}
+
+\begin{satz}[Eisenstein]
+  Sei $p$ eine Primzahl und $f = a_0 x^n + a_1 x^{n-1} + ... + a_n \in \Z[x]$ mit $p \divides a_i$ für $i \in \{ 1, ..., n \}$, aber $p \not\divides a_0$ und $p^2 \not\divides a_n$. Dann ist $f$ irreduzibel über $\Z$.
+\end{satz}
+
+\begin{bem}
+  Oft kann man das Eisenstein-Kriterium für $f \in \Z[x]$ nicht direkt anwenden. Dann kann man $g(x) \coloneqq f(x + k)$ für eine Zahl $k \in \Z$ betrachten. Dann ist $f$ genau dann über $\Z$ irreduzibel, wenn $g$ es auch ist. Man kann also versuchen, $k$ so zu wählen, dass man das Eisenstein-Kriterium auf $g$ anwenden kann.
+\end{bem}
+
+% Kapitel 2.26. Irreduzibilität über $\Q$
+
+\begin{defn}
+  Ein Polynom $f = a_0 x^n + ... + a_n \in \Z[x]$ heißt \emph{primitiv}, falls $\ggT(a_0, ..., a_n) = 1$.
+\end{defn}
+
+\begin{lem}
+  % Das Produkt primitiver Polynome ist primitiv.
+  Sind $g, h \in \Z[x]$ primitiv, dann ist es auch $gh$.
+\end{lem}
+
+\begin{satz}
+  Wenn $f \in \Z[x] \subset \Q[x]$ über $\Q$ reduzibel ist, also $f = gh$ mit $g, h \in \Q[x]$, dann auch über $\Z$, genauer $f = g_0 h_0$ für $g_0, h_0 \in \Z[x]$, wobei $g_0$ und $h_0$ rationale Vielfache von $g$ bzw. $h$ sind.
+\end{satz}
+
+\begin{kor}
+  Die Nullstellen von normierten ganzzahligen Polynomen sind ganzzahlig oder irrational.
+\end{kor}
+
+% Kapitel 2.27. Die Galoisgruppe einer Körpererweiterung
+
+\begin{defn}
+  Ein Homomorphismus zwischen Körpern $\K$ und $\K'$ ist eine Abbildung $f : \K \to \K'$, sodass für alle $a, b \in \K$ gilt:
+  \[
+    f(0) = 0, \quad f(1) = 1, \quad f(a + b) = f(a) + f(b), \quad f(a \cdot b) = f(a) \cdot f(b).
+  \]
+\end{defn}
+
+\begin{bem}
+  Die Verknüpfung von Körperhomomorphismen ist ein Körperhomomorphismus. Falls $f$ bijektiv ist, dann ist auch $f^{-1}$ ein Körperautomorphismus und $f$ heißt Körperisomorphismus.  Wenn zusätzlich $\K = \K'$ ist, so heißt $f$ Körperautomorphismus.
+\end{bem}
+
+\begin{nota}
+  $\Aut(\K) \coloneqq \Set{ \sigma : \K \to \K }{ \sigma \text{ Körperautomorphismus} }$
+\end{nota}
+
+\begin{defn}
+  Die \emph{Galoisgruppe} einer Körpererweiterung $\L \supset \K$ ist
+  \[ G = \Gal(\L, \K) \coloneqq \Set{\sigma \in \Aut(\L) }{ \sigma|_\K = \id_{\K}. } \]
+\end{defn}
+
+\begin{defn}
+  Sei $f \in \K[x]$ separabel mit Nullstellen $x_1, ..., x_n$. Dann heißt $\L = \K(x_1, ..., x_n)$ \emph{Zerfällungskörper} von $f$ über $\K$.
+\end{defn}
+
+\begin{lem}
+  Sei $f \in \K[x]$ und $N(f, \L) \coloneqq \Set{ x \in \L }{ f(x) = 0 }$.\\
+  Dann gilt für alle $\sigma \in \Gal(\L, \K)$:
+  \begin{itemize}
+    \miniitem{0.52 \linewidth}{$f(\sigma x) = \sigma f(x)$ für jedes $x \in \L$}
+    \miniitem{0.46 \linewidth}{$\sigma N(f, \L) = N(f, \L)$}
+  \end{itemize}
+\end{lem}
+
+\begin{bem}
+  Sei $f \in \K[x]$ separabel mit Nullstellen $N(f) \coloneqq x_1, ..., x_n$ und $\L = \K(x_1, ..., x_n)$. Wegen Punkt 2 wirkt die Galoisgruppe $\Gal(\L, \K)$ auf der Nullstellenmenge $N(f) = N(f, \L)$. Wenn man die Nullstellen durchnummeriert, erhält man eine Abbildung $\phi : \Gal(\L, \K) \to S_n$, sodass $\fa{j} x_{\phi(\sigma)(j)} = \sigma(x_j)$.
+\end{bem}
+
+\begin{lem}
+  Sei $\L = \K(x_1, ..., x_n)$ wie in der Bemerkung. Dann ist $\phi : G {\to} S_n$ injektiv und identifiziert $G$ mit einer Untergruppe von $S_n$.
+\end{lem}
+
+\begin{satz}
+  Sei $f \in \K[x]$ separabel mit Nullstellen $x_1, ..., x_n$ und $\L \coloneqq \K(x_1, ..., x_n)$ der Zerfällungskörper von $f$. Sei
+  \[ R \coloneqq \Set{ h \in \K[x_1, ..., x_n] }{ h(x_1, ..., x_n) = 0 } \]
+  die Menge der algebraischen Relationen zwischen $x_1, ..., x_n$. Dann ist
+  \[
+    \phi(G) = \Set{ \sigma \in S_n }{ \fa{H \in R} \sigma H \in R }.
+  \]
+\end{satz}
+
+\begin{bem}
+  Folglich entspricht die Galoisgruppe des Zerfällungskörpers von $f$ über dem Grundkörper der vorher definierten Galoisgruppe von $f$.
+\end{bem}
+
+% Kapitel 2.18. Fortsetzung von Körper-Isomorphismen
 
 \end{document}
