@@ -1446,7 +1446,7 @@
 \end{nota}
 
 \begin{prob}
-  Seien $g \in \mathcal{C}^2(\R^n)$, $f \in \mathcal{C}^1(\R^n)$. Gesucht ist eine Lösung der homogenen \emph{Wellengleichung} (WG)
+  Seien $g \in \mathcal{C}^2(\R^n)$, $h \in \mathcal{C}^1(\R^n)$, $f \in \mathcal{C}^1(\R^n)$. Gesucht ist eine Lösung der homogenen \emph{Wellengleichung} (WG)
   \[
     (4.1) \left\{ \begin{array}{ll}
       u_{tt} - \Delta u = 0 & \text{in } \ointerval{0}{\infty} \times \R^n\\
@@ -1695,8 +1695,179 @@
   \emph{Vergangenheitskegel} mit Spitze $(t_0, x_0)$.
 \end{defn}
 
+\begin{samepage}
+
 \begin{satz}
   Sei $(t_0, x_0) \in \ointerval{0}{\infty} \times \R^n$ und löse $u \in \mathcal{C}^2(\overline{C(t_0, x_0)})$ die homogene Wellengleichung in $C(t_0, x_0)$ mit Anfangsbedingung $u = 0$, $\partial_t u = 0$ auf $\{ 0 \} \times B_{t_0}(x_0)$. Dann gilt $u \equiv 0$ in $C(t_0, x_0)$.
 \end{satz}
+
+% Vorlesung vom 17. und 24.06.2014
+
+\section{PDGLn erster Ordnung}
+
+\end{samepage}
+
+\begin{prob}
+  Sei $\Omega \subset \R^n$ offen, mit hinreichend regulären Rand und $g : \partial \Omega \to \R$ und $E : \overline{\Omega} \times \R \times \R^n \to \R$ hinreichend regulär (zumindest einmal stetig diff'bar). Gesucht ist eine Lösung $u$ von
+  \[
+    (5.1) \left\{ \begin{array}{llll}
+      E(x, u(x), D u(x)) & = & 0 & \text{in } \Omega, \\
+      u & = & g & \text{auf } \partial \Omega.
+    \end{array} \right.
+  \]
+\end{prob}
+
+\begin{nota}
+  Bezeichnungen der Argumente: $E(x, v, z)$
+\end{nota}
+
+% Ausgelassen:
+% * Satz 5.1 von Picard-Lindelöf
+% * Satz 5.2 über implizite Funktionen
+% * Satz 5.3 von der lokalen Umkehrbarkeit
+
+% Kapitel 5.2. Lokale Existenz mittels Charakteristiken
+
+\begin{satz}[Charakteristische GLn]
+  Sei $E \in \mathcal{C}^1(\Omega \times \R \times \R^n)$ und $u \in \mathcal{C}^2(\Omega)$ eine Lösung von $E(x, u(x), D u(x)) = 0$ in $\Omega$. Sei $I \subset \R$ ein Intervall, $\gamma \in \mathcal{C}^1(I, \Omega)$, $v \coloneqq u \circ \gamma$ und $z \coloneqq D u \circ \gamma$.\\
+  Ist $\gamma$ eine Lösung der DGL $\gamma' = D_z E(\gamma, v, z)$ in $I$, so gilt in $I$:
+  \[
+    v' = D_z(\gamma, v, z) \cdot z, \qquad
+    z' = - D_x(\gamma, v, z) - D_v E(\gamma, v, z) \cdot z.
+  \]
+\end{satz}
+
+\begin{defn}
+  Die Fktn $\gamma$, $v$ und $z$ heißen \emph{Charakteristiken} von (5.1).
+\end{defn}
+
+\begin{nota}
+  Sei im Folgenden $\Omega \coloneqq \R^n_{+} = \R^{n-1} \times \R_{+}$.
+\end{nota}
+
+\begin{defn}
+  Ein Vektor $(x_0, v_0, z_0) \in \partial \Omega \times \R \times \R^n$ heißt \emph{zulässig} für das AWP (5.1), falls folgende Kompatibilitätsbedingungen erfüllt sind:
+  \[
+    g(x_0) = v_0, \quad
+    (z_0)_i = D_i g(x_0) \text{ für } i \in \{ 1, ..., n{-}1 \}, \quad
+    E(x_0, v_0, z_0) = 0.
+  \]
+\end{defn}
+
+\begin{bem}
+  Alle Werte bis auf $(z_0)_n$ sind eindt. durch $x_0$ bestimmt.
+\end{bem}
+
+\begin{defn}
+  Der Vektor $(x_0, v_0, z_0)$ heißt \emph{nichtcharakteristisch}, falls $D_{z_n} E(x_0, v_0, z_0) \not= 0$.
+\end{defn}
+
+\begin{lem}
+  Sei $(x_0, v_0, z_0)$ ein zulässiger, nichtcharakteristischer Vektor für das AWP (5.1). Dann existiert $\delta > 0$, sodass für alle $y \in B_{\delta}(x_0) \cap \partial \R^n_{+}$ eine eindeutige Lösung $\overline{z}(y)$ gibt für
+  \[
+    \overline{z_i}(y) = D_i g(y) \text{ für } i \in \{ 1, ..., n{-}1 \}
+    \quad \text{und} \quad
+    E(y, g(y), \overline{z}(y)) = 0.
+  \]
+\end{lem}
+
+\begin{bem}
+  Sei $(x_0, v_0, z_0) \in \partial \Omega \times \R \times \R^n$ ein zulässiger, nichtcharakteristischer Vektor. Dann existiert nach dem Satz von Picard-Lindelöf eine lokale Lösung $(\gamma(x_0, \blank), v(x_0, \blank), z(x_0, \blank))$ des Systems mit Anfangswerten
+  \[
+    \left\{ \begin{array}{rl}
+      \gamma'(x_0, s) & = D_z E(\gamma, v, z), \\
+      v'(x_0, s) & = D_z E(\gamma, v, z) \cdot z(x_0, s), \\
+      z'(x_0, s) & = - D_x E(\gamma, v, z) - D_v E(\gamma, v, z) \cdot z(x_0, s), \\
+      \gamma(x_0, 0) = x_0, & v(x_0, 0) = g(x_0), \enspace\,\, z(x_0, 0) = z_0
+    \end{array} \right.
+  \]
+\end{bem}
+
+% Ausgelassen: Homogene Transportgleichung
+
+\begin{bsp}
+  Die charakteristischen Gleichungen der allgemeinen quasilinearen Gleichung $a(\blank, u) \cdot D u + E_0(\blank, u) = 0$ sind
+  \[ \gamma' = a(\gamma, v), \quad v' = a(\gamma, v) \cdot z = - E_0(\gamma, v). \]
+  Die Gleichung für $z'$ wird nicht benötigt.
+\end{bsp}
+
+\begin{lem}
+  Sei $(x_0, v_0, z_0)$ ein zulässiger, nichtcharakteristischer Vektor für das AWP (5.1). Dann existiert ein offenes Intervall $I \subset \R$ mit $0 \in I$ und Umgebungen $W \subset \partial \R^n_{+}$ und $V \subset \R^n_+$ von $x_0$, sodass für alle $x \in V$ eindeutige $s = s(x) \in I \cap \ointerval{0}{\infty}$ und $y = y(x) \in W$ existieren mit $x = \gamma(y, s)$ und die Abbildung $x \mapsto (y(x), s(x))$ von der Klasse $\mathcal{C}^2$ ist.
+\end{lem}
+
+\begin{defn}
+  Seien $V, \Omega \subset \R^n$ offen mit $V \subset \Omega$. Eine Funktion $u \in \mathcal{C}^1(V) \cap \mathcal{C}^0(V \cup (\partial \Omega \cap \overline{V}))$ heißt \emph{lokale Lösung} von (5.1) in $V$, falls gilt:
+  \[
+    \left\{ \begin{array}{rlll}
+      E(x, u(x), D u(x)) & = & 0 & \text{in } V, \\
+      u & = & g & \text{auf } \partial \Omega \cap \overline{V}.
+    \end{array} \right.
+  \]
+\end{defn}
+
+\begin{satz}
+  Sei $(x_0, v_0, z_0)$ ein zulässiger, nichtcharakteristischer Vektor für (5.1) und $V$ die Umgebung von $x_0$ in $\R^n_{+}$ aus dem letzten Lemma. Dann ist
+  \[ u : V \to \R, \quad x \mapsto v(y(x), s(x)) \]
+  wohldefiniert, von der Klasse $\mathcal{C}^1$ und eine lokale Lsg von (5.1) in $V$.
+\end{satz}
+
+% Vorlesung vom 26.6.2014
+
+% Ausgelassen: Zwei Beispiele zur Bedeutung der Bedingung $D_{z_n} E(x_0, y_0, z_0) \not= 0$
+
+% Kapitel 5.3. Skalare Erhaltungsgleichungen
+
+\begin{prob}
+  Die \emph{Erhaltungsgleichung} mit $F \in \mathcal{C}(\R, \R^n)$ ist
+  \[
+    \partial t u + \dive_x F(u) = \partial_t u + F'(u) \cdot Du = 0
+    \quad \text{in } \ointerval{0}{\infty} \times \R^n.
+  \]
+\end{prob}
+
+\begin{bsp}
+  Mit $n=1$ und $F(u) \coloneqq \tfrac{u^2}{2}$ ergibt sich \emph{Burgers Gleichung}
+  \[
+    \partial t u + \dive_x \left( \frac{u^2}{2} \right) = \partial_t u + u \partial_x u = 0
+    \quad \text{in } \ointerval{0}{\infty} \times \R.
+  \]
+  Die (wichtigen) charakteristischen Gleichungen sind
+  \[
+    \gamma' = (1, F'(v)) = (1, v), \quad
+    v' = (1, F'(v)) \cdot z = 0.
+  \]
+  Die Charakteristiken sind also gerade Wege, auf denen $u$ konstant ist und deren Richtung von den Anfangswerten abhängt. Damit hängt die Lösbarkeit von den Anfangswerten ab. Es kann vorkommen, dass sich verschiedene Charakteristiken in einem Punkt treffen oder Punkte von keiner Charakteristik getroffen wird.
+\end{bsp}
+
+\begin{defn}
+  Seien $F \in \mathcal{C}^1(\R, \R^n)$ und $g \in L^\infty(\R)$. Eine Funktion $u \in L^\infty(\ointerval{0}{\infty} \times \R)$ heißt \emph{schwache Lösung} des AWPs
+  \[
+    (5.10) \left\{ \begin{array}{rlll}
+      \partial_t u + \dive_x(F(u)) & = & 0 & \text{in } \ointerval{0}{\infty} \times \R, \\
+      u & = & g & \text{auf } \{ 0 \} \times \R,
+    \end{array} \right.
+  \]
+  falls für alle Funktionen $v \in \mathcal{C}_0^\infty(\cointerval{0}{\infty} \times \R)$ gilt:
+  \[
+    \Int{0}{\infty}{\Int{\R}{}{\left( u \partial_t v + F(u) \cdot D v \right)}{x}}{t} + \Int{\R}{}{g(x) v(0, x)}{x} = 0.
+  \]
+\end{defn}
+
+\begin{lem}
+  Ist $u \in L^\infty(\ointerval{0}{\infty} \times \R)$ eine schwache Lösung von (5.10) mit $u \in \mathcal{C}^1(O)$ für eine offene Menge $O \subset \cointerval{0}{\infty} \times \R$, so gilt
+  \[ \partial_t u + \dive F(u) = 0 \enspace \text{in } O. \]
+\end{lem}
+
+\begin{lem}[Rankine-Hugeniot-Bedingung]
+  Ist $u \in L^\infty(\ointerval{0}{\infty} \times \R)$ eine schwache Lösung von (5.10) und $O \subset \ointerval{0}{\infty} \times \R$ eine offene Menge, die durch eine $\mathcal{C}^1$-Kurve $C$ in zwei disjunkte, offene Mengen $O_l$ und $O_r$ geteilt wird. Sei $u_l \in \mathcal{C}^1(O_l) \cap \mathcal{C}^0(O_l \cup C)$ mit $u = u_l$ in $O_l$ und $u_r \in \mathcal{C}^1(O_r) \cap \mathcal{C}^0(U_r \cup C)$ mit $u = u_r$ in $O_r$. Dann gilt
+  \[
+    \begin{pmatrix}
+      u_l - u_r \\
+      F(u_l) - F(u_r)
+    \end{pmatrix} \cdot \nu = 0
+    \quad \text{in } C,
+  \]
+  wobei $\nu$ den äußeren Normalvektor an $O_l$ bezeichnet.
+\end{lem}
 
 \end{document}
