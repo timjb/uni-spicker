@@ -1059,12 +1059,48 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
   \end{itemize}
 \end{satz}
 
+\begin{defn}
+  Eine Matrix $A \in \R^n$ heißt
+  \[
+    \left\{ \begin{array}{rlll}
+      \text{\emph{positiv}} \\
+      \text{\emph{negativ}}
+    \end{array} \right\}
+    \text{ \emph{definit}, falls }
+    v^T A v
+    \left\{ \begin{array}{rlll}
+      > 0 \\
+      < 0
+    \end{array} \right\}
+    \text{ für alle }
+    v \in \R^n \setminus \{ 0 \}.
+  \]
+\end{defn}
+
 \begin{bem}
   Die Funktion $V$ hat in $y_{*}$ ein isoliertes lokales Minimum, wenn die Hesse-Matrix $H \coloneqq (\Hess f)(y_{*})$ positiv definit ist, d.\,h. $\fa{v \not= 0} v^T H v > 0$.
 \end{bem}
 
 % Ausgelassen: Beispiel: GDGL $\dot{y} = - z - y^3$, $\dot{z} = y - z^3$ -- Stabilität der Nulllösung mit Lyapunov-Methode
 
-% Ausgelassen: Beispiel: mathematisches Beispiel mit Reibung
+% Ausgelassen: Beispiel: mathematisches Pendel mit Reibung
+
+% Vorlesung vom 30.6.2014
+
+\begin{satz}
+  Seien $\D \subset \R^n$ offen, $f : \D \to \R^n$ stetig, lokal Lipschitz-stetig, $y_{*}$ eine Ruhelage von $f$, $y_s(t) \equiv y_{*}$. Sei $v : U_{y_{*}} \to \R$ eine starke Lyapunov-Funktion von $\dot{y} = f(y)$ für $y_{*} \in U_{y_{*}}$. Gibt es in jeder Umgebung $\widehat{U}_{y_{*}} \subset U_{y_{*}}$ von $y_{*}$ einen Punkt $\hat{y} \in \widehat{U}_{y_*}$ mit $V(\hat{y}) < V(y_*)$, so ist $y_s(t)$ instabil.
+\end{satz}
+
+% Kapitel 4.2.3. Existenz von Lyapunov-Funktionen für lineare DGLn
+
+% 4.8.
+\begin{satz}
+  Sei $A \in \R^{n \times n}$. Falls eine positiv definite Matrix $P \in \R^{n \times n}$ gibt, sodass die Matrix $A^T P + PA$ negativ definit ist. Dann ist $V(y) \coloneqq y^T P y$ eine starke Lyapunov-Funktion von $\dot{y} = Ay$ für $y_{*} = 0$ mit der Eigenschaft $\fa{y \in \R^n \setminus \{ 0 \}} 0 = V(y_*) < V(y)$.
+\end{satz}
+
+% 4.9.
+\begin{satz}
+  Für eine Matrix $A \in \R^{n \times n}$ und eine positiv definite Matrix $Q$ hat die Lyapunov-Gleichung $A^T P + PA = Q$ genau dann eine eindt. positiv definite Lsg, wenn alle EWe von $A$ negativen Realteil haben.
+\end{satz}
 
 \end{document}
