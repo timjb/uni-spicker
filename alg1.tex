@@ -6,7 +6,15 @@
 }
 
 \usepackage{mathabx} % \divides
-\newcommand{\K}{\mathbb{K}} % Körper
+
+
+%\usepackage{extpfeil} % Für diesen Pfeil:
+%\newextarrow{\xmapsfrom}{0900}{{\leftarrow\relbar}\relbar\mapstochar}
+\makeatletter
+\newcommand{\xmapsfrom}[2][]{%
+  \ext@arrow3095\leftarrowfill@{#1}{#2}\mapsfromchar
+}
+\makeatother
 
 % Kleinere Klammern
 \delimiterfactor=701
@@ -14,6 +22,7 @@
 \usepackage{relsize}
 \let\myBinom\binom
 \renewcommand{\binom}[2]{\mathsmaller{\myBinom{#1}{#2}}}
+\newcommand{\K}{\mathbb{K}} % Körper
 \DeclareMathOperator{\ggT}{ggT} % größter gemeinsamer Teiler
 \newcommand{\Mod}[1]{\ (\text{mod}\ #1)} % http://tex.stackexchange.com/questions/137073/writing-mod-in-congruence-problems-without-leading-space
 \newcommand{\F}{\mathbb{F}} % Symbol für Restklassenkörper
@@ -906,5 +915,34 @@
 \begin{bem}
   Man kann auf die Voraussetzung verzichten, dass die $n_j$-ten Einheitswurzeln in $\K$ enthalten sind.
 \end{bem}
+
+% Kapitel 2.30. Nicht-Auflösbarkeit bei Grad $\geq 5$
+
+\begin{satz}
+  Die Gruppe $A_n$ ist einfach für alle $n \geq 5$.
+\end{satz}
+
+% Kapitel 2.31. Der Hauptsatz der Galoistheorie
+
+\begin{lem}
+  Sei $\L \supset \K$ eine Galoiserweiterung, $G = \Gal(\L, \K)$ und $G_1 \subseteq G$ eine Untergruppe. Dann ist $\L$ der Zerfällungskörper eines irreduziblen Polynoms $g \in \L^{G_1}[x]$ und $G_1 = \Gal(\L, \L^{G_1})$.
+\end{lem}
+
+\begin{satz}[Hauptsatz der Galoistheorie]
+  Sei $f \in \K[x]$ ein separables Polynom mit Zerfällungskörper $\L_f$ und $G \coloneqq \Gal(\L, \K)$.\\
+  Dann gibt es eine 1--1-Beziehung
+
+  \begin{alignat*}{3}
+    \{ \text{ Untergruppen } G_1 \subseteq G \enspace \} & \enspace \xleftrightarrow{\quad} \enspace && \{ \text{ Zwischenkörper } \K \subseteq \K_1 \subseteq \L \enspace \} \\
+    G_1 & \enspace \xmapsto{\quad} \enspace && L^{G_1} \coloneqq \Set{ \alpha \in \L }{ \fa{\sigma \in G_1} \sigma \alpha = \alpha } \\
+    \Gal(\L, \K_1) & \enspace \xmapsfrom{\quad} \enspace && \K_1
+  \end{alignat*}
+\end{satz}
+
+% Satz 2.32. Der Satz von primitiven Element
+
+\begin{satz}
+  Ist $\L = \K(\alpha_1, ..., \alpha_k)$ eine endliche Körpererweiterung, so gibt es ein \emph{primitives Element} $\alpha \in \L$ mit $\L = \K(\alpha)$.
+\end{satz}
 
 \end{document}
