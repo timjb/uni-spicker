@@ -19,6 +19,7 @@
 \newcommand{\F}{\mathbb{F}} % Symbol für Restklassenkörper
 \renewcommand{\L}{\mathbb{L}} % Variable (für Körper verwendet)
 \DeclareMathOperator{\Aut}{Aut} % Automorphismengruppe
+\DeclareMathOperator{\Iso}{Iso} % Isomorphismenmenge
 \DeclareMathOperator{\Gal}{Gal} % Galoisgruppe
 
 \begin{document}
@@ -267,6 +268,10 @@
     \item $\fa{g \in G} e \cdot g = g = g \cdot e$ \pright{Neutralität}
     \item $\fa{g \in G} g \cdot g^{-1} = g^{-1} \cdot g = e$
   \end{itemize}
+\end{defn}
+
+\begin{defn}
+  Eine Gruppe $G$ heißt \emph{abelsch}, wenn sie kommutativ ist, d.\,h. es gilt $ab = ba$ für alle $a, b \in G$.
 \end{defn}
 
 \begin{defn}
@@ -595,6 +600,8 @@
   Dann gilt $G \subset A_n$ für die Galoisgruppe $G$ von $f$, da Transpositionen gerade das Vorzeichen von $\sqrt{\Delta}$ vertauschen.
 \end{bsp}
 
+\begin{samepage}
+
 \begin{bsp}
   Die Galoisgruppe des Polynoms $f(x) = x^n - 1$, dessen Nullstellen \emph{$n$-te Einheitswurzeln} genannt werden, ist
   \[ G = \Set{ m \mapsto k \cdot m \Mod{n} }{ k \in \{ 1, ..., n{-}1 \}, \ggT(k, n) = 1 }. \]
@@ -610,6 +617,8 @@
 
 % Kapitel 2. Körpererweiterungen
 \section{Körpererweiterungen}
+
+\end{samepage}
 
 % Kapitel 2.20. Körper
 
@@ -811,7 +820,7 @@
 \end{defn}
 
 \begin{defn}
-  Sei $f \in \K[x]$ separabel mit Nullstellen $x_1, ..., x_n$. Dann heißt $\L = \K(x_1, ..., x_n)$ \emph{Zerfällungskörper} von $f$ über $\K$.
+  Sei $f \in \K[x]$ separabel mit Nullstellen $x_1, ..., x_n$. Dann heißt $\L = \K(x_1, ..., x_n)$ \emph{Zerfällungskörper} von $f$ über $\K$. Die Körpererweiterung $\L$ wird dann \emph{normal} genannt.
 \end{defn}
 
 \begin{lem}
@@ -845,5 +854,57 @@
 \end{bem}
 
 % Kapitel 2.18. Fortsetzung von Körper-Isomorphismen
+
+\begin{satz}
+  Sei $\sigma : \K \to \tilde{\K}$ ein Körperisomorphismus, das Polynom $f \in \K[x]$ separabel mit Zerfällungskörper $\L$ sowie $\tilde{f} = \sigma f$ mit Zerfällungskörper $\tilde{\L}$. Dann gilt
+  \[ \abs{\Set{ \hat{\sigma} \in \Iso(\L, \tilde{L}) }{ \hat{\sigma}|_{\K} = \sigma }} = [\L : \K]. \]
+\end{satz}
+
+\begin{kor}
+  Ist $\L \supset \K$ der Zerfällungskörper eines separablen Polynoms $f \in \K[x]$, so gilt
+  \[ \abs{\Gal(\L, \K)} = [\L : \K]. \]
+\end{kor}
+
+% Kapitel 2.29. Auflösbarkeit durch Radikale
+
+% Ausgelassen: Motivation Turm von Radikalerweiterungen
+
+\begin{bem}
+  Angenommen, die Nullstellen eines separablen Polynoms $f \in \K[x]$ lassen sich durch einen Wurzelausdruck angeben. Dann muss es Reihen von Zahlen $\alpha_1, ..., \alpha_s \in \L$ und $n_1, ..., n_s \in \N$ und Körpererweiterungen $\K_0 \subset ... \subset \K_s$ geben mit
+  \[
+    \K_0 = \Q, \quad
+    \K_{j+1} = \K_j(\alpha_j) \text{ mit } \alpha_j^{n_j} \in \K_j, \quad
+    \K_s = \L.
+  \]
+  Wir sagen, $\L$ komme durch Adjunktion von Wurzeln zustande.
+\end{bem}
+
+\begin{lem}
+  Sind $\K \subset \K' \subset \L$ endliche Körpererweiterungen, so ist $\Gal(\L, \K')$ eine Untergruppe von $\Gal(\L, \K)$. Sei $\K'$ der Zerfällungs- körper des separablen Polynoms $g \in \K[x]$. Dann lassen die Elemente von $\Gal(\L, \K)$ den Körper $\K$ invariant (d.\,h. $\sigma(\K') \subset \K'$ für alle $\sigma \in \Gal(\L, \K)$) und $\Gal(\L, \K')$ ist ein Normalteiler von $\Gal(\L, \K)$.
+\end{lem}
+
+\begin{lem}
+  Seien $\K \subset \K'$ und $\K' \subset \L$ endliche, normale Körper- erweiterungen. Dann gilt
+  \[ \Gal(\K', \K) = \Gal(\L, \K) / \Gal(\L, \K'). \]
+\end{lem}
+
+\begin{lem}
+  Sei $\rho : G \to H$ ein Gruppenhomomorphismus. Dann ist $K \coloneqq \ker(\rho) \subset G$ ein Normalteiler von $G$. Wenn $\rho$ surjektiv ist, dann definiert $\rho$ einen Isomorphismus
+  \[ \overline{\rho} : G / K \to H, \quad gK \mapsto \rho(g) \]
+\end{lem}
+
+\begin{defn}
+  Eine Gruppe $G$ heißt \emph{auflösbar}, wenn es eine absteigende Reihe von Untergruppen
+  \[ G = G_0 \supset G_1 \supset \supset ... \supset G_r = \{ \id \} \]
+  gibt, sodass $G_{j+1}$ ein Normalteiler in $G_j$ und $G_{j} / G_{j+1}$ für alle $j = 1, ..., r$ abelsch ist.
+\end{defn}
+
+\begin{satz}
+  Sei $f \in \K[x]$ separabel mit Zerfällungskörper $\L$. Dieser komme durch Adjunktion von $r$ Wurzeln der Grade $n_1, ..., n_r$ zustande. Der Grundkörper $\K$ möge alle $n_j$-ten Einheitswurzeln für $j = 1, ..., n$ enthalten. Dann ist die Gruppe $\Gal(\L, \K)$ auflösbar.
+\end{satz}
+
+\begin{bem}
+  Man kann auf die Voraussetzung verzichten, dass die $n_j$-ten Einheitswurzeln in $\K$ enthalten sind.
+\end{bem}
 
 \end{document}
