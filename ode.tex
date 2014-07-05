@@ -12,7 +12,8 @@
 \newcommand{\E}{\mathcal{E}}
 \newcommand{\dist}{\mathrm{dist}} % Entfernung (distance)
 \newcommand{\scp}[2]{\left( #1 \!\mid\! #2 \right)} % Skalarprodukt
-\DeclareMathOperator{\Hess}{Hess}
+\DeclareMathOperator{\Hess}{Hess} % Hesse-Matrix
+\DeclareMathOperator{\Spec}{Spec} % Spektrum (Menge der Eigenwerte)
 
 \begin{document}
 
@@ -946,10 +947,10 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
 
 % 4.3.
 \begin{satz}[Stabilität von linearen, autonomen DGLn]
-  Sei $A \in \R^{n \times n}$ und $\lambda_j = \alpha_j + i \beta_j \in \C$ für die Eigenwerte von $A$. Das GGW $y_* \equiv 0$ von $\dot{y} = Ay$ ist genau dann
+  Sei $A \in \R^{n \times n}$ und $\lambda_1, ..., \lambda_n \in \C$ die Eigenwerte von $A$. Das GGW $y_* \equiv 0$ von $\dot{y} = Ay$ ist genau dann
   \begin{itemize}
-    \item stabil, wenn für alle EWe $\Re(\lambda_j) = \alpha_j \leq 0$ gilt und alle EWe mit $\Re(\lambda_j) = 0$ halbeinfach sind, d,\,h. die geometrische Vielfachheit mit der algebraischen übereinstimmt,
-    \item exponentiell stabil, wenn für alle EWe $\Re(\lambda_j) = \alpha_j < 0$ gilt,
+    \item stabil, wenn für alle EWe $\Re(\lambda_j) \leq 0$ gilt und alle EWe mit $\Re(\lambda_j) = 0$ halbeinfach sind, d,\,h. die geometrische Vielfachheit mit der algebraischen übereinstimmt,
+    \item exponentiell stabil, wenn für alle EWe $\Re(\lambda_j) < 0$ gilt,
     \item ansonsten instabil.
   \end{itemize}
 \end{satz}
@@ -1078,6 +1079,10 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
 \end{defn}
 
 \begin{bem}
+  Eine $(2 \times 2)$-Matrix ist genau dann positiv definit, wenn ihre Determinante und ihre Spur positiv sind.
+\end{bem}
+
+\begin{bem}
   Die Funktion $V$ hat in $y_{*}$ ein isoliertes lokales Minimum, wenn die Hesse-Matrix $H \coloneqq (\Hess f)(y_{*})$ positiv definit ist, d.\,h. $\fa{v \not= 0} v^T H v > 0$.
 \end{bem}
 
@@ -1102,5 +1107,45 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
 \begin{satz}
   Für eine Matrix $A \in \R^{n \times n}$ und eine positiv definite Matrix $Q$ hat die Lyapunov-Gleichung $A^T P + PA = Q$ genau dann eine eindt. positiv definite Lsg, wenn alle EWe von $A$ negativen Realteil haben.
 \end{satz}
+
+\begin{kor}
+  Sei $A \in \R^{n \times n}$. Die stationäre Lsg $y_s(t) \equiv 0$ von $\dot{y} = Ay$ ist genau dann asymptotisch stabil, wenn die Lyapunov-Gleichung $A^T P + PA = - Q$ mit einer pos. definiten Matrix $Q \in \R^{n \times n}$ eine (eindeutige) Lösung $P \in \R^{n \times n}$ besitzt.
+\end{kor}
+
+% 4.11.
+\begin{satz}
+  Sei $P \in \R^{n \times n}$ eine pos. definite Lsg von $A^T P + PA = -I$. Dann gilt
+  \[ \Spec(A) = \{ \text{ Eigenwerte von $A$ } \} \subset \Set{s \in \C}{\Re(s) \leq - \tfrac{1}{2 \norm{P}}}. \]
+\end{satz}
+
+% Kapitel 5. Exakte Differentialgleichungen
+
+\begin{prob}
+  Sei $\D \subset \R^2$, $p, q : \D \to \R$ stetig. Betrachte
+  \begin{align*}
+    \dot{y} p(t, y) + q(t, y) = 0 \tag{5.1}
+  \end{align*}
+\end{prob}
+
+\begin{defn}
+  Die DGL (5.1) heißt \emph{exakt} auf $\D$, falls es eine stetig diff'bare Funktion $S : \D \to \R$ gibt mit
+  \[
+    \tfrac{\partial S}{\partial t}(t, y) = q(t, y)
+    \quad \text{und} \quad
+    \tfrac{\partial S}{\partial y}(t, y) = p(t, y).
+  \]
+\end{defn}
+
+% 5.1.
+\begin{satz}
+  Die DGL (5.1) sei exakt mit Stammfunktion $S$. Dann erfüllt die Lösung $y$ von (5.1) mit Anfangswert $y(t_0) = y_0$ die Gleichung
+  \[ S(t, y(t)) \equiv S(t_0, y_0). \]
+\end{satz}
+
+\begin{bem}
+  Falls $\tfrac{\partial S}{\partial y}(t_0, y_0) = p(t_0, y_0) \not= 0$, so kann man nach dem Satz über implizite Funktionen die Gleichung $S(t, y) = S(t_0, y_0)$ nach $y$ auflösen und erhält so eine lokale Lösung von (5.1).
+\end{bem}
+
+% Ausgelassen: Beispiel
 
 \end{document}
