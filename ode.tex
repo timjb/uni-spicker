@@ -1148,4 +1148,29 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
 
 % Ausgelassen: Beispiel
 
+% Vorlesung vom 7.7.2014
+
+\begin{satz}
+  Sei $\D = \ointerval{a}{b} \times \ointerval{c}{d} \subseteq \R^2$ mit $-\infty \leq a < b \leq \infty$ und $-\infty \leq c < d \leq \infty$. Dann ist die Gleichung (5.1) genau dann exakt, wenn die Integrabilitätsbedingung
+  \[ \tfrac{\partial p}{\partial t}(t, y) = \tfrac{\partial q}{\partial y}(t, y) \]
+  für alle $(t, y) \in \D$ erfüllt ist. Die Stammfunktion ist dann
+  \[ S(t, y) \coloneqq \Int{t_0}{t}{q(s, y)}{s} + \Int{y_0}{y}{p(t_0, z)}{z}. \]
+\end{satz}
+
+% Ausgelassen: Rechnung: Trennung der Variablen ist Spezialfall von exakten DGLn
+
+\begin{defn}
+  Sei die DGL (5.1) gegeben. Eine stetige und bzgl. $y$ Lipschitz-stetige Funktion $m : \D \to \R$ heißt \emph{integrierender Faktor}, falls $m(t, y) \not= 0$ auf $\D$ und die DGL
+  \begin{align*}
+    \dot{y} \cdot (p(t, y) \cdot m(t, y)) + (q(t, y) \cdot m(t, y)) = 0 \tag{5.2}
+  \end{align*}
+  exakt ist.
+\end{defn}
+
+\begin{bem}
+  Da $m \not\equiv 0$ auf $\D$ nach Definition, hat (5.2) dieselben Lösungen wie (5.1).
+\end{bem}
+
+% Ausgelassen: Beispiel
+
 \end{document}
