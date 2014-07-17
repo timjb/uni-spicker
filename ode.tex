@@ -276,9 +276,9 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
 \end{satz}
 
 % 1.4
-\begin{satz}
-  Sei $y_p : I \to \R$ eine partikuläre Lösung von (1.5). Dann ist die Menge aller Lösungen von (1.5) gegeben durch
-  \[ \Set{ y_p + y_h }{ \text{$y_h : I \to \R$ ist Lösung von $\dot{y_h}(t) = a(t) \cdot y_h(t)$} } \]
+\begin{satz}[Superpositionsprinzip]
+  Sei $y_p : I \to \R$ eine partikuläre Lösung von (1.5). Dann ist die Menge aller Lösungen von (1.5)
+  \[ \Set{ y_p + y_h }{ \text{$y_h : I \to \R$ ist Lösung von $\dot{y_h}(t) = a(t) \cdot y_h(t)$} }. \]
 \end{satz}
 
 \begin{bem}
@@ -423,7 +423,7 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
 
 % Kapitel 2.1. Existenzsatz von Peano
 
-\begin{satz}
+\begin{satz}[Peano]
   Sei $\D \subset \R \times \R^n$ offen, $f : \D \to \R^n$ stetig, $(t_0, y_0) \in D$. Dann ist das AWP (1.1) lokal lösbar, d.\,h. es existiert ein Intervall $I \subset \R$ mit $t_0 \in I$ und eine stetig diff'bare Funktion $y : I \to \R^n$, die das AWP (1.1) erfüllt.
 \end{satz}
 
@@ -586,7 +586,7 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
 
 % 3.4.
 \begin{satz}%[Struktur des Lösungsraums]
-  Seien $I \subseteq \R$, $A : \R^{n \times n}$, $f : I \to \R^n$ stetig, $U_h$ wie oben und $U \coloneqq \Set{ y \in \mathcal{C}^1(I, \R^n) }{ \dot{y} = A(t) y + f }$. Dann gilt:
+  Seien $I \subseteq \R$, $A : I \to \R^{n \times n}$, $f : I \to \R^n$ stetig, $U_h$ wie oben und $U \coloneqq \Set{ y \in \mathcal{C}^1(I, \R^n) }{ \dot{y} = A(t) y + f }$. Dann gilt:
   \begin{itemize}
     \item $U$ ist nicht leer.
     \item Ist $y_p \in U$ eine partikuläre Lösung, dann ist $U = y_p + U_h$, d.\,h. $U$ ist affiner Unterraum von $\mathcal{C}^1(I, \R^n)$.
@@ -609,7 +609,7 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
 % Vorlesungvom 21.5.2014
 
 \begin{defn}
-  Die Matrix-Expontentialfunktion ist definiert als
+  Die \emph{Matrix-Exponentialfunktion} ist definiert als
   \[ \exp : \R^{n \times n} \to \R^{n \times n}, \qquad A \mapsto e^A \coloneqq \sum_{k=0}^\infty \frac{A^k}{k!}. \]
 \end{defn}
 
@@ -632,7 +632,7 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
 % 3.7.
 \begin{satz}
   Sei $A \in \R^{n \times n}$ diagonalisierbar, d.\,h. es existiere eine Basis aus Eigenvektoren $s_1, ..., s_n \in \C^n$ zu den Eigenwerten $\lambda_1, ..., \lambda_n \in \C$ sodass $S^{-1} A S =: D$ mit $S \coloneqq (s_1, ..., s_n)$ diagonal mit Einträgen $\lambda_1, ..., \lambda_n$ ist. Dann gilt
-  \[ e^{tA} = S e^{tD} S^{-1} = S \begin{pmatrix} e^{\lambda_1} & \cdots & 0 \\ \vdots & \ddots & \vdots \\ 0 & \cdots & e^{\lambda_n} \end{pmatrix} S^{-1} \]
+  \[ e^{tA} = S e^{tD} S^{-1} = S \begin{pmatrix} e^{\lambda_1 t} & \cdots & 0 \\ \vdots & \ddots & \vdots \\ 0 & \cdots & e^{\lambda_n t} \end{pmatrix} S^{-1} \]
 \end{satz}
 
 \begin{bem}
@@ -695,7 +695,7 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
       0 & \cdots & e^{A_k t}
     \end{pmatrix}
     \quad \text{wobei}\\
-    A_j &= \begin{pmatrix}
+    A_j t &= \begin{pmatrix}
       e^{t J(\lambda_j, p_{j1})} & \cdots & 0\\
       \vdots & \ddots & \vdots\\
       0 & \cdots & e^{t J(\lambda_j, p_{j g_j})}
@@ -811,9 +811,9 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
     \end{pmatrix}
   \]
   \emph{Begleitmatrix} und es gilt
-  \[ P_A(\lambda) = (-1)^n (\lambda^n + a_{n-1} \lambda^{n-1} + ... + a_1 \lambda + a_0). \]
-  Angenommen, es zerfällt $P_A(\lambda) = (\lambda - \lambda_1)^{\alpha_1} \cdot ... \cdot (\lambda - \lambda_k)^{\alpha_k}$ wobei $\lambda_1, ..., \lambda_k$ verschiedene Nullstellen mit algebraischen Vielfachheiten $\alpha_1, ..., \alpha_k$.
-  Falls $k = n$ (bzw. $\alpha_1 = ... = \alpha_k = 1$), so ist $\{ e^{\lambda_1 t}, ..., e^{\lambda_k t} \}$ ein Fundamentalsystem von (3.1). Ansonsten ist
+  \[ P_A(\lambda) = (-1)^n \cdot (\lambda^n + a_{n-1} \lambda^{n-1} + ... + a_1 \lambda + a_0). \]
+  Angenommen, es gilt $P_A(\lambda) = (-1)^n \cdot (\lambda - \lambda_1)^{\alpha_1} \cdot ... \cdot (\lambda - \lambda_k)^{\alpha_k}$, wobei $\lambda_1, ..., \lambda_k$ verschiedene Nullstellen mit algebraischen Vielfachheiten $\alpha_1, ..., \alpha_k$ sind.
+  Falls $k = n$ (bzw. $\alpha_1 = ... = \alpha_k = 1$), so ist $\{ e^{\lambda_1 t}, ..., e^{\lambda_k t} \}$ ein Fundamentalsystem von (3.1). Sonst ist
   \[
     \tilde{F} \coloneqq \tilde{F}_1 \cup ... \cup \tilde{F}_k
     \quad \text{mit} \quad
@@ -1100,12 +1100,12 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
 
 % 4.8.
 \begin{satz}
-  Sei $A \in \R^{n \times n}$. Falls eine positiv definite Matrix $P \in \R^{n \times n}$ gibt, sodass die Matrix $A^T P + PA$ negativ definit ist. Dann ist $V(y) \coloneqq y^T P y$ eine starke Lyapunov-Funktion von $\dot{y} = Ay$ für $y_{*} = 0$ mit der Eigenschaft $\fa{y \in \R^n \setminus \{ 0 \}} 0 = V(y_*) < V(y)$.
+  Sei $A \in \R^{n \times n}$. Angenommen, es gibt eine positiv definite Matrix $P \in \R^{n \times n}$, sodass die Matrix $A^T P + PA$ negativ definit ist. Dann ist $V(y) \coloneqq y^T P y$ eine starke Lyapunov-Funktion von $\dot{y} = Ay$ für $y_{*} = 0$ mit der Eigenschaft $\fa{y \in \R^n \setminus \{ 0 \}} 0 = V(y_*) < V(y)$.
 \end{satz}
 
 % 4.9.
 \begin{satz}
-  Für eine Matrix $A \in \R^{n \times n}$ und eine positiv definite Matrix $Q$ hat die Lyapunov-Gleichung $A^T P + PA = Q$ genau dann eine eindt. positiv definite Lsg, wenn alle EWe von $A$ negativen Realteil haben.
+  Für eine Matrix $A \in \R^{n \times n}$ und eine positiv definite Matrix $Q$ hat die \emph{Lyapunov-Gleichung} $A^T P + PA = -Q$ genau dann eine eindeutige positiv definite Lösung, wenn alle Eigenwerte von $A$ negativen Realteil haben.
 \end{satz}
 
 \begin{kor}
