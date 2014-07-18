@@ -498,7 +498,7 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
 
 % 2.9.
 \begin{satz}
-  Sei $I \subset \R$ ein offenes Intervall, $f : I \times \R^n \to \R^n$ stetig, $(t_0, y_0) \in I \times \R^n$. Falls $f$ für jedes kompaktes Intervall $\tilde{I} \subset I$ global Lipschitz-stetig bzgl. $y$ auf $\tilde{I} \times \R^n$ ist, dann hat das AWP (1.1) genau eine globale Lösung $y$ auf $I$.
+  Sei $I \subset \R$ ein offenes Intervall, $f : I \times \R^n \to \R^n$ stetig, $(t_0, y_0) \in I \times \R^n$. Falls $f$ für jedes kompakte Intervall $\tilde{I} \subset I$ global Lipschitz-stetig bzgl. $y$ auf $\tilde{I} \times \R^n$ ist, dann hat das AWP (1.1) genau eine globale Lösung $y$ auf $I$.
 \end{satz}
 
 % 2.10.
@@ -716,6 +716,10 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
   \]
 \end{satz}
 
+\begin{bem}
+  Insbesondere ist eine Fundamentalmatrix von $\dot{y} = Ay + f$ gegeben durch $Y(t) \coloneqq e^{A (t - t_0)}$.
+\end{bem}
+
 % Vorlesung vom 28.5.2014
 
 % Kapitel 3.3. Lineare skalare DGLn höherer Ordnung
@@ -914,7 +918,7 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
 
 % 4.1.
 \begin{satz}
-  Sei $\D \subset \R^{n+1}$ offen, $f : \D \to \R^n$ stetig, lokal Lipschitz-stetig.
+  Sei $\D \subset \R^{n}$ offen, $f : \D \to \R^n$ stetig, lokal Lipschitz-stetig.
   \begin{itemize}
     \item Die DGL $\dot{y} = f(y)$ ist translationsinvariant, d.\,h. ist $y$ eine Lösung von $\dot{y} = f(y)$ auf $\cointerval{t_0}{\infty}$, dann ist $z(t) \coloneqq y(t_0 + t)$ eine Lösung von $\dot{z} = f(z)$ auf $\cointerval{0}{\infty}$.
     \item Die Lösung $y$ ist genau dann (exponentiell/asymptotisch) stabil, wenn $z$ (exponentiell/asymptotisch) stabil ist.
@@ -987,13 +991,13 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
 % Vorlesung vom 18.6.2014
 
 \begin{bem}
-  Im Fall von EWen $< 0$ und mind. einem EW $= 0$ ist keine Aussage möglich.
+  Im Fall von EWen mit Realteil $\leq 0$ und mind. einem EW mit Realteil $= 0$ ist keine Aussage möglich.
 \end{bem}
 
 % Ausgelassen: Beispiel: Mathematisches Pendel ohne Reibung
 
 \begin{defn}
-  Sei $\D \subset \R^n$ offen, $f : \D \to \R^n$ stetig, lokal Lipschitz-stetig. eine stetig differenzierbare Funktion $\E : \D \to \R$ heißt \emph{erstes Integral} von $\dot{y} = f(y)$, wenn gilt: $\fa{y \in \D} \scp{\nabla \E(y)}{f(y)} = 0$.
+  Sei $\D \subset \R^n$ offen, $f : \D \to \R^n$ stetig, lokal Lipschitz-stetig. Eine stetig differenzierbare Funktion $\E : \D \to \R$ heißt \emph{erstes Integral} von $\dot{y} = f(y)$, wenn gilt: $\fa{y \in \D} \scp{\nabla \E(y)}{f(y)} = 0$.
 \end{defn}
 
 \begin{bsp}
@@ -1019,7 +1023,7 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
   \]
   ist nicht hamiltonisch, aber besitzt das erste Integral
   \[
-    E(y, z) \coloneqq \alpha \ln \abs{z} - \beta z + \gamma \ln \abs{y} - \delta y
+    \E(y, z) \coloneqq \alpha \ln \abs{z} - \beta z + \gamma \ln \abs{y} - \delta y
     \quad \text{auf } \R_{>0} \times \R_{>0}.
   \]
 \end{bsp}
@@ -1036,7 +1040,7 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
 \begin{bem}
   Dann gilt für jede Lösung $y : \I \to \D$ der DGL:
   \[
-    \tfrac{\d}{\d t} E(t, y(t)) = \tfrac{\partial E}{\partial t} (t, y(t)) + \tfrac{\partial E}{\partial y} (t, y(t)) \cdot \dot{y}(t) = 0 % = h(t,y(t)) + g(t, y(t)) \cdot \dot{y}(t) = 0.
+    \tfrac{\d}{\d t} S(t, y(t)) = \tfrac{\partial S}{\partial t} (t, y(t)) + \tfrac{\partial S}{\partial y} (t, y(t)) \cdot \dot{y}(t) = 0. % = h(t,y(t)) + g(t, y(t)) \cdot \dot{y}(t) = 0.
   \]
 \end{bem}
 
