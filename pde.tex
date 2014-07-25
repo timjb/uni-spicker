@@ -166,7 +166,7 @@
   \[ \Int{\Omega}{}{D_i f g}{x} = - \Int{\Omega}{}{f D_i g}{x} + \Int{\partial \Omega}{}{f g \nu^i}{\HM^{n-1}} \]
   Sind $f, g \in \mathcal{C}^2(\overline{\Omega})$, dann gelten die Greenschen Formeln
   \begin{align*}
-    \Int{\Omega}{}{Df \cdot Dg}{x} &= - \Int{\Omega}{}{f \Delta g}{x} + \Int{\Omega}{}{f D_{\nu} g}{\HM^{n-1}}\\
+    \Int{\Omega}{}{Df \cdot Dg}{x} &= - \Int{\Omega}{}{f \Delta g}{x} + \Int{\partial \Omega}{}{f D_{\nu} g}{\HM^{n-1}}\\
     \Int{\Omega}{}{(f \Delta g - g \Delta f)}{x} &= \Int{\partial \Omega}{}{(f D_{\nu} g - g D_{\nu} f)}{\HM^{n-1}}
   \end{align*}
 \end{kor}
@@ -787,7 +787,7 @@
 \end{defn}
 
 \begin{satz}[Poisson-Integralformel für Kugeln]
-  Sei $B_r(a) \subset \R^n$ und $g : \partial B_r(a)$ stetig.
+  Sei $B_r(a) \subset \R^n$ und $g : \partial B_r(a) \to \R$ stetig.
   \begin{itemize}
     \item Für $u {\in} \mathcal{C}^2(B_r(a)) \cap \mathcal{C}(\overline{B_r(a)})$ harmonisch mit $u {=} g$ auf $\partial B_r(a)$ gilt
     \[
