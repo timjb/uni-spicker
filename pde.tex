@@ -14,6 +14,7 @@
 \usepackage{bbm} % Für 1 mit Doppelstrich (Indikatorfunktion)
 \newcommand{\ind}{\mathbbm{1}} % Indikatorfunktion
 \newcommand{\dist}{\mathrm{dist}} % Entfernung (distance)
+\newcommand{\scp}[2]{\langle #1 , #2 \rangle} % Skalarprodukt
 \DeclareMathOperator*{\esssup}{ess\,sup} % Essentielles Supremum
 
 % Abschnittsnummerierung einschalten (entgegen cheat-sheet.cls)
@@ -175,7 +176,7 @@
   Sei $\Omega \subset \R^n$ messbar mit $\abs{\Omega} < \infty$, $I = \ointerval{a}{b} \subset \R$ und $f : \Omega \times I \to \R$. Angenommen,
   \begin{itemize}
     \item $f(x, \blank) \in \mathcal{C}^1(I)$ für fast alle $x \in \Omega$,
-    \item $f(\blank, t) \in L^1(\Omega) \tfrac{\partial f}{\partial t}(\blank, t) \in L^1(\Omega)$ für alle $t \in I$ und
+    \item $f(\blank, t) \in L^1(\Omega)$, $\tfrac{\partial f}{\partial t}(\blank, t) \in L^1(\Omega)$ für alle $t \in I$ und
     \item für alle $t \in I$ gibt es $\epsilon > 0$ sodass $\ointerval{t-\epsilon}{t+\epsilon} \subset I$ und
     \[ \sup_{s \in \ointerval{t-\epsilon}{t+\epsilon}} \abs{\tfrac{\partial f}{\partial t}(\blank, s)} \in L^1(\Omega). \]
   \end{itemize}
@@ -1869,5 +1870,259 @@
   \]
   wobei $\nu$ den äußeren Normalvektor an $O_l$ bezeichnet.
 \end{lem}
+
+% Ausgelassen: Beispiele für schwache Lösungen von Burger's Gleichung
+
+
+\section{Elliptische PDGLn zweiter Ordnung}
+
+\begin{prob}
+  Gesucht ist eine Lösung der PDGL in Divergenzform
+  \begin{align*}
+    Lu(x) \coloneqq & \sum_{1 \leq i, j \leq n} D_j (a_{ij}(x) D_{i} u(x)) + \sum_{1 \leq i \leq n} b_i(x) D_i u(x) \\
+      & + c(x) u(x) = f(x) \tag{6.1}
+  \end{align*}
+  in einem beschränkten Gebiet $\Omega \subset \R^n$. Dabei sollen die Koeffizientenfunktionen $(a_{ij})_{1 \leq i, j \leq n}$, $(b_i)_{1 \leq i \leq n}$ und $c$ beschränkt und $f \in L^2(\Omega)$ sein.
+\end{prob}
+
+\begin{defn}
+  Der Differentialoperator $L$ heißt \emph{gleichmäßig elliptisch}, falls eine Konstante $\theta > 0$ existiert mit
+  \[ \fa{x \in \Omega, \xi \in \R^n} a(x) \xi \cdot \xi \coloneqq \sum_{1 \leq i, j \leq n} a_{ij}(x) \xi_i \xi_j \geq \theta \abs{\xi}. \]
+\end{defn}
+
+% Kapitel 6.1. Funktionalanalytische Vorbereitungen
+
+% Ausgelassen: Definitionen von metrischer Raum, Cauchy-Folge, Konvergenz, Vollständigkeit, Normen, normierter Raum, Banachraum, Skalarprodukt
+
+\begin{defn}
+  Ein \emph{Hilbertraum} ist ein vollständiger normierter Vektorraum, dessen Norm von einem Skalarprodukt induziert wird.
+\end{defn}
+
+\begin{defn}
+  Seien $(X, \norm{\blank}_X)$ und $(Y, \norm{\blank}_Y)$ zwei normierte Räume. Setze
+  \begin{align*}
+    \mathcal{L}(X, Y) & \coloneqq \Set{ T : X \to Y }{ T \text{ linear und stetig.} } \\
+    \norm{T}_{\mathcal{L}(X, Y)} & \coloneqq \sup_{x \in X \setminus \{ 0 \}} \frac{\norm{Tx}_Y}{\norm{x}_X}.
+  \end{align*}
+\end{defn}
+
+\begin{defn}
+  Sei $(X, \norm{\blank}_X)$ ein normierter Raum. Der Raum $X^{*} \coloneqq \mathcal{L}(X, \R)$ heißt \emph{Dualraum}, seine Elemente \emph{beschränkte lineare Funktionale} auf $X$.
+\end{defn}
+
+\begin{satz}[Projektionssatz]
+  Sei $H$ ein reeller Hilbertraum und $K \subset H$ nichtleer, abgeschlossen und konvex. Dann gibt es eine eindeutige Abbildung $P : H \to K$ mit
+  \[ \fa{x \in H} \norm{x - P(x)}_H = \dist(x, K) \coloneqq \inf_{y \in K} \norm{x - y}_H. \]
+\end{satz}
+
+\begin{bem}
+  Alternative Charakterisierungen der Projektion $P$:
+  \begin{itemize}
+    \item $\fa{x \in H, y \in K} \scp{x - P(x)}{y - P(x)}_H \leq 0$
+    \item Falls $K \subset H$ ein Unterraum: $\fa{x \in H, y \in K} \scp{x - P(x)}{y}_H = 0$.
+  \end{itemize}
+\end{bem}
+
+\begin{satz}[Darstellungssatz von Riesz]
+  Sei $(H, \scp{\blank}{\blank}_H)$ ein reeller Hilbertraum. Dann ist die Abbildung
+  \[
+    J : H \to H^*, \quad
+    x \mapsto y \mapsto \scp{x}{y}_H
+  \]
+  ein linearer isometrischer Isomorphismus, d.\,h. es gilt $\norm{J(x)}_{H^*} = \norm{x}_H$ und $J$ ist bijektiv.
+\end{satz}
+
+\begin{satz}[Lax-Milgram]
+  Sei $H$ ein reeller Hilbertraum und $B : H \times H \to \R$ eine Bilinearform, für die gilt:
+  \begin{itemize}
+    \item Beschränktheit: $\ex{L > 0} \fa{x, y \in H} B(x, y) \leq L \cdot \norm{x}_H \cdot \norm{y}_H$
+    \item Koerzivität: $\ex{\theta > 0} B(x, x) \geq \theta \cdot \norm{x}_H^2$
+  \end{itemize}
+  Dann existiert eine lineare Bijektion $\Lambda : H^* \to H$, sodass
+  \[ \fa{x^* \in H^*} x^* = B(\Lambda(x^*), \blank). \]
+  Außerdem sind $\Lambda$ wie auch $\Lambda^{-1}$ beschränkt.
+\end{satz}
+
+% Kapitel 6.2. Schwache Ableitungen und Sobolevräume
+
+\begin{defn}
+  Sei $f \in L^1_{\text{loc}}(\Omega)$ und $\beta \in \N_0^n$ ein Multiindex. Eine Funktion $g_\beta \in L^1_{\text{loc}}(\Omega)$ heißt \emph{schwache Ableitung} von $f$ nach $\beta$, falls gilt:
+  \[
+    \fa{\phi \in \mathcal{C}_0^\infty(\Omega)}
+    \Int{\Omega}{}{f D^\beta \phi}{x} = (-1)^{\abs{\beta}} \Int{\Omega}{}{g_\beta \cdot \phi}{x}.
+  \]
+  Falls für alle Multiindizes $\beta$ mit $\abs{\beta} \leq k$ eine schwache Ableitung existiert, so heißt $f$ \emph{schwach differenzierbar} bis zur Ordnung $k$.
+\end{defn}
+
+\begin{bem}
+  \begin{itemize}
+    \item Die schwache Ableitung ist eindeutig in $L^1_{\text{loc}}(\Omega)$.
+    \item Falls eine starke Ableitung existiert, so stimmt sie mit der schwachen Ableitung überein.
+    \item Alternative, äquivalente Definition: $\overline{D}^\beta f$ heißt schwache Ableitung von $f$ nach $\beta$, falls eine Folge $(f_k)_{k \in \N}$ existiert mit
+    \[
+      f_k \xrightarrow{k \to \infty} f \text{ stark in } L^1_{\text{loc}}(\Omega)
+      \quad \text{und} \quad
+      D^\beta f \xrightarrow{k \to \infty} \overline{D}^\beta f \text{ in } L^1_{\text{loc}}(\Omega).
+    \]
+  \end{itemize}
+\end{bem}
+
+\begin{nota}
+  $D^\beta f \coloneqq g_\beta$ (wegen Eindeutigkeit)
+\end{nota}
+
+\begin{bsp}
+  Die schwache Ableitung der Betragsfktn. ist die Signumsfktn. Die Signumsfunktion besitzt keine schwache Ableitung.
+\end{bsp}
+
+% Ausgelassen: Schwache Ableitung von $f(x) = \abs{x}^{- \gamma}$.
+
+\begin{defn}
+  Sei $k \in \N$ und $p \in \cinterval{1}{\infty}$. Der \emph{Sobolevraum} $W^{k,p}_{(\text{loc})}(\Omega)$ ist
+  \begin{align*}
+    W^{k,p}_{(\text{loc})}(\Omega) & \coloneqq \Set{ f : \Omega \to \R }{ \text{$D^\beta$ ex. in $L^p_{(\text{loc})}(\Omega)$ f.\,a. $\beta \in \N_0^n$ mit $\abs{\beta} \leq k$} } \\
+    \norm{f}_{W^{k,p}(\Omega)} & \coloneqq \begin{cases}
+      \left( \sum_{\abs{\beta} \leq k} \norm{D^\beta f}^p_{L^p(\Omega)} \right)^{1/p}, & \text{für } p < \infty \\
+      \sum_{\abs{\beta} \leq k} \norm{D^\beta u}_{L^\infty(\Omega)}, & \text{für } p = \infty.
+    \end{cases}
+  \end{align*}
+\end{defn}
+
+\begin{bem}
+  Alternativ können die Sobolevräume definiert werden durch Vervollständigung aller glatten Funktionen unter der $W^{k,p}(\Omega)$-Norm als
+  \begin{align*}
+    & H^{k,p}(\Omega) \coloneqq \overline{\mathcal{C}^\infty(\Omega) \cap W^{k,p}(\Omega)}^{\norm{\blank}_{W^{k,p}(\Omega)}} \\
+    & = \Set{ f \in W^{k,p}(\Omega) }{ \ex{(f_m)_{m \in \N} \text{ in } \mathcal{C}^\infty(\Omega) \cap W^{k,p}(\Omega)} f_m \to f \text{ in } W^{k,p}(\Omega)}.
+  \end{align*}
+\end{bem}
+
+% Ausgelassen: Kriterien für schwache Ableitungen in $L^p$
+
+% 6.19
+\begin{satz}
+  Sei $f \in W^{k,p}(\Omega)$ für $k \in \N$, $p \in \cinterval{1}{\infty}$ und $\alpha \in \N_0^n$ mit $\abs{\alpha} \leq k$. Dann gelten:
+  \begin{itemize}
+    \item $D^\alpha f \in W^{k - \abs{\alpha},p}(\Omega)$ mit $D^\beta (D^\alpha f) = D^{\alpha + \beta} f$ für $\beta \in \N_0^n$ mit $\abs{\beta} \leq k - \abs{\alpha}$.
+    \item $W^{k,p}(\Omega)$ ist ein Vektorraum und $D^\alpha : W^{k,p}(\Omega) \to W^{k - \abs{\alpha},p}(\Omega)$ linear.
+    \item Ist $\Omega' \subset \Omega$ offen, so gilt $f|_{\Omega'} \in W^{k,p}(\Omega')$.
+    \item Ist $\eta \in \mathcal{C}_0^\infty(\Omega)$, so gilt $\eta f \in W^{k,p}(\Omega)$ mit Leibnizformel
+    \[
+      D^\alpha(\eta f) = \sum_{\beta \leq \alpha} \binom{\alpha}{\beta} D^\beta \eta D^{\alpha - \beta} f
+      \quad \text{mit} \quad
+      \binom{\alpha}{\beta} \coloneqq \frac{\alpha!}{\beta! (\alpha - \beta)!}.
+    \]
+  \end{itemize}
+\end{satz}
+
+% 6.20
+\begin{satz}
+  Die Sobolevräume $W^{k,p}(\Omega)$ sind vollständig, also Banachräume für $k \in \N$ und $p \in \cinterval{1}{\infty}$.
+\end{satz}
+
+\begin{bem}
+  $W^{k,2}(\Omega)$ ist ein Hilbertraum mit Skalarprodukt
+  \[
+    \scp{f}{g}_{W^{k,p}(\Omega)} \coloneqq \sum_{\abs{\beta} \leq k} \Int{\Omega}{}{D^\beta f D^\beta g}{x}.
+  \]
+\end{bem}
+
+% 6.22
+\begin{satz}[Eigenschaften von Glättungen]
+  Sei $\Omega \subset \R^n$ offen, $\epsilon > 0$ und $f \in W^{k,p}_{\text{loc}}(\Omega)$ für $k \in \N_0$ und $p \in \cointerval{1}{\infty}$. Dann gilt:
+  \begin{itemize}
+    \item Vertauschbarkeit mit schwachen Ableitungen: Für alle Multiindizes $\beta \in \N_0^n$ mit $\abs{\beta} \leq k$:
+    \[
+      D^\beta (f_{\epsilon}) = (D^\beta f)_{\epsilon}
+      \quad \text{in } \Omega_{\epsilon} \coloneqq \Set{x \in \Omega}{ \dist(x, \partial \Omega) > \epsilon }.
+    \]
+    \item Erhaltung der Norm: $\norm{f_\epsilon}_{W^{k,p}(\Omega_\epsilon)} \leq \norm{f}_{W^{k,p}(\Omega)}$.
+    \item Approximation: $f_\epsilon \xrightarrow{\epsilon \to 0} f$ in $W^{k,p}_{\text{loc}}(\Omega)$.
+  \end{itemize}
+\end{satz}
+
+% 6.23.
+\begin{satz}
+  Sei $\Omega \subset \R^n$ offen und beschränkt, $f \in W^{k,p}_{\text{loc}}(\Omega)$ für $k \in \N$ und $p \in \cointerval{1}{\infty}$. Dann gibt es eine Folge $(f_m)_{m \in \N}$ in $\mathcal{C}^\infty(\Omega) \cap W^{k,p}(\Omega)$ mit $f_m \to f$ in $W^{k,p}(\Omega)$.
+\end{satz}
+
+\begin{kor}
+  $\mathcal{C}^\infty(\Omega) \cap W^{k,p}(\Omega)$ liegt dicht in $W^{k,p}(\Omega)$.
+\end{kor}
+
+% Ausgelassen: Bemerkung über Verbesserung des vorhergehenden Satzes bei glattem Rand
+
+% Ausgelassen: Ausblick: Einbettungssätze, Fortsetzungssätze, Spursätze über Approximation mit glatten Funktionen
+
+\begin{defn}
+  Sei $k \in \N$ und $p \in \cointerval{1}{\infty}$. Wir setzen
+  \[
+    W^{k,p}_0(\Omega) \coloneqq \overline{\mathcal{C}_0^\infty(\Omega) \cap W^{k,p}(\Omega)}^{\norm{\blank}_{W^{k,p}(\Omega)}}.
+  \]
+\end{defn}
+
+\begin{satz}[Poincaré-Ungleichung]
+  Sei $\Omega \subset \R^n$ offen, die in einem Streifen der Breite $d > 0$ zwischen zwei parallelen Hyperebenen enthalten ist. Ist $p \in \cointerval{1}{\infty}$, so gilt für alle $f \in W_0^{1,p}(\Omega)$
+  \[
+    \Int{\Omega}{}{\abs{f}^p}{x} \leq \tfrac{d^p}{p} \Int{\Omega}{}{\abs{D f}^p}{x}.
+  \]
+\end{satz}
+
+\begin{bem}
+  Die Poincaré-Ungleichung gilt auch für Funktionen $f \in W^{1,p}(\Omega)$ mit verschwindendem Mittelwert auf $\Omega$ und $\Omega$ beschränkt und zusammenhängend.
+\end{bem}
+
+\begin{bem}
+  Als abgeschlossener Unterraum von $W^{1,p}(\Omega)$ ist $W^{1,p}_0(\Omega)$ vollständig und nach der Poincaré-Ungleichung definiert
+  \[ \norm{f}_{W_0^{1,p}(\Omega)} \coloneqq \norm{Df}_{L^p(\Omega, \R^n)} \]
+  eine zu $\norm{\blank}_{W^{1,p}(\Omega)}$ äquivalente Norm auf $W^{1,p}_0(\Omega)$.
+\end{bem}
+
+% Kapitel 6.3. Existenz schwacher Lösungen
+
+\begin{defn}
+  Eine Fktn $u \in W^{1,2}(\Omega)$ heißt \emph{schwache Lsg} von (6.1), falls
+  \begin{align*}
+    & \Int{\Omega}{}{a(x) Du(x) \cdot D \phi(x)}{x} + \Int{\Omega}{}{b(x) \cdot Du(x) \phi(x)}{x} \\
+    & + \Int{\Omega}{}{c(x) u(x) \phi(x)}{x} = \Int{\Omega}{}{f(x) \phi(x)}{x}
+  \end{align*}
+  für alle $\phi \in \mathcal{C}_0^\infty(\Omega)$ gilt. Verwendete Notation dabei:
+  \[
+    a Du \cdot D \phi \coloneqq \sum_{1 \leq i, j \leq n} a_{ij} D_i u D_j \phi
+    \quad \text{und} \quad
+    b \cdot D_u \phi \coloneqq \sum_{1 \leq i \leq n} b_i D_i u \phi.
+  \]
+\end{defn}
+
+% Ausgelassen: Bemerkung, dass Gleichheit für größere Klasse von Test-Funktionen $W_0^{1,2}(\Omega)$ gilt
+
+\begin{defn}
+  Ist $L$ der lineare Operator aus der partiellen DGL (6.1), so ist die mit $L$ assoziierte Bilinearform $B_L : W_0^{1,2}(\Omega) \times W_0^{1,2}(\Omega) \to \R$ gegeben durch
+  \[
+    B_L(v, w) \coloneqq \Int{\Omega}{}{a(x) Dv(x) \cdot Dw(x)}{x} + \Int{\Omega}{}{b(x) \cdot Dv(x) w(x)}{x} + \Int{\Omega}{}{c(x) v(x) w(x)}{x}.
+  \]
+\end{defn}
+
+% 6.34
+\begin{lem}
+  Sei $L$ ein gleichmäßig elliptischer Differentialoperator mit Elliptizitätskonstante $\theta$. Dann existieren Konstanten $C_1, C_2 > 0$ und $C_3 \geq 0$ (in Abhängigkeit von $a$, $b$, $c$, $n$, $\Omega$, $\theta$) mit
+  \begin{align*}
+    B_L(v,v) & \geq C_1 \norm{v}^2_{W_0^{1,2}(\Omega)} - C_3 \norm{v}^2_{L^2(\Omega)}, \\
+    \abs{B_L(v,w)} & \leq C_2 \norm{v}_{W_0^{1,2}(\Omega)} \norm{w}_{W_0^{1,2}(\Omega)}.
+  \end{align*}
+\end{lem}
+
+% 6.35.
+\begin{satz}
+  Sei $L$ ein glm. elliptischer Differentialoperator. Dann existiert eine Konstante $\gamma \geq 0$, sodass für alle $\mu \geq \gamma$ das Randwertproblem
+  \[
+    \left\{ \begin{array}{rlll}
+      Lu + \mu u & = & f & \text{in } \Omega \\
+      u & = & 0 & \text{auf } \partial \Omega
+    \end{array} \right.
+  \]
+  für jedes $f \in L^2(\Omega)$ eine eindeutige schwache Lösung $u \in W_0^{1,2}(\Omega)$ besitzt. Im Fall $b = 0$, $c \geq 0$ kann $\gamma = 0$ gewählt werden.
+\end{satz}
+
+% Ausgelassen: Bemerkungen
 
 \end{document}
