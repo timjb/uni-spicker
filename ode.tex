@@ -101,7 +101,7 @@
     \item \emph{Skalare} DGL: Gesucht ist Funktion mit Wert in $\R$\\
     \emph{$n$-dimensionale} DGL: Gesuchte Funktion hat Wert in $\R^n$
     \item \emph{Lineare} DGL: Gleichung hat die Form
-    \[ a_k(t) y^{(k)}(t) + a_{(k-1)}(t) y^{k-1}(t) + ... + a_1(t) \dot{y}(t) + a_0(t)y(t) = 0 \]
+    \[ a_k(t) y^{(k)}(t) + ... + a_1(t) \dot{y}(t) + a_0(t)y(t) + c(t) = 0 \]
     \item \emph{Autonome} DGL: Gleichung der Form $F(y, \dot{y}, ..., y^{(k)}) = 0$\\
     (keine Abhängigkeit von $t$, Zeitinvarianz)
   \end{enumerate}
@@ -332,7 +332,7 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
     \item Fall: $h(y_0) = 0$. Dann ist $y(t) = y_0$ eine Lösung.
     \item Fall: $h(y_0) \not= 0$. Dann ist $h$ in einer Umgebung von $y_0$ strikt positiv/negativ. Setze
     \[
-      H_1(y) \coloneqq \Int{y(t_0)}{y}{\tfrac{1}{h(s)}}{s}, \quad
+      H_1(y) \coloneqq \Int{y_0}{y}{\tfrac{1}{h(s)}}{s}, \quad
       G_1(t) \coloneqq \Int{t_0}{t}{g(s)}{s}.
     \]
     Dann ist $H_1$ in einer Umgebung von $y_0$ invertierbar und eine Lösung von (1.8) ist gegeben durch
@@ -468,7 +468,7 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
 % Vorlesung vom 30.4.2014
 
 \begin{satz}[Picard-Lindelöf, lokal quantitativ]
-  Seien $\D \subset \R \times \R^n$ offen, $f : \D \to \R^n$ stetig, $(t_0, y_0) {\in} \D$ und $R_{a,b} {\coloneqq} \cinterval{ t_0 {-} a }{ t_0 {+} a } \times \overline{B_b}(y_0) \subset \D$. Sei $f$ Lipschitz-stetig bzgl. $y$ auf $R_{a,b}$. Dann besitzt das AWP (1.1) im Rechteck $R_{a,b}$ genau eine Lösung $y : I_y \to \R^n$ auf $I_{\gamma} \coloneqq \cinterval{t_0 - y}{t_0 + y}$ mit $\gamma = \min(a, \tfrac{b}{M})$ und $M = \sup_{\mathclap{(t,y) \in R_{a,b}}} \norm{f(t, y)}$.
+  Seien $\D \subset \R \times \R^n$ offen, $f : \D \to \R^n$ stetig, $(t_0, y_0) {\in} \D$ und $R_{a,b} {\coloneqq} \cinterval{ t_0 {-} a }{ t_0 {+} a } \times \overline{B_b}(y_0) \subset \D$. Sei $f$ Lipschitz-stetig bzgl. $y$ auf $R_{a,b}$. Dann besitzt das AWP (1.1) im Rechteck $R_{a,b}$ genau eine Lösung $y : I_{\gamma} \to \R^n$ auf $I_{\gamma} \coloneqq \cinterval{t_0 - \gamma}{t_0 + \gamma}$ mit $\gamma = \min(a, \tfrac{b}{M})$ und $M = \sup_{\mathclap{(t,y) \in R_{a,b}}} \norm{f(t, y)}$.
 \end{satz}
 
 \begin{bem}
@@ -545,7 +545,7 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
 % Ausgelassen: Definition Untervektorraum
 
 \begin{defn}
-  Eine Teilmenge $M \subset V$ eines Vektorraums $V$ heißt \emph{affiner Teilraum}, wenn es ein $y \in V$ und einen Unterraum $U \subset V$ mit $M = y + U \coloneqq \Set{ y + U }{ u \in U }$ gibt.
+  Eine Teilmenge $M \subset V$ eines Vektorraums $V$ heißt \emph{affiner Teilraum}, wenn es ein $y \in V$ und einen Unterraum $U \subset V$ mit $M = y + U \coloneqq \Set{ y + u }{ u \in U }$ gibt.
 \end{defn}
 
 % 3.2
@@ -650,7 +650,7 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
     & \ddots & \ddots & \\
     & & \ddots & 1 \\
     0 & & & \lambda
-  \end{pmatrix}. \]
+  \end{pmatrix} \in \C^{n \times n}. \]
 \end{defn}
 
 \begin{bem}[Jordan-Normalform]
@@ -689,13 +689,13 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
 \begin{satz}
   Sei $S^{-1} A S = J_A$ in Jordan-NF. Dann gilt:
   \begin{align*}
-    e^{At} &= S e^{J_A t} S^{-1} \text{ mit } e^{J_A} = \begin{pmatrix}
+    e^{At} &= S e^{J_A t} S^{-1} \text{ mit } e^{J_A t} = \begin{pmatrix}
       e^{A_1 t} & \cdots & 0\\
       \vdots & \ddots & \vdots\\
       0 & \cdots & e^{A_k t}
     \end{pmatrix}
     \quad \text{wobei}\\
-    A_j t &= \begin{pmatrix}
+    e^{A_j t} &= \begin{pmatrix}
       e^{t J(\lambda_j, p_{j1})} & \cdots & 0\\
       \vdots & \ddots & \vdots\\
       0 & \cdots & e^{t J(\lambda_j, p_{j g_j})}
@@ -727,7 +727,7 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
 \begin{prob}
   Gegeben seien $f, a_0, ..., a_{n-1} \in \mathcal{I}$, $t_0 \in I$ und $z_0, ..., z_{n-1} \in \R$. Betrachte die lineare skalare DGL höherer Ordnung
   \[
-    (3.1) \left\{ \begin{array}{l}
+    (3.1') \left\{ \begin{array}{l}
       y^{(n)}(t) + a_{n-1}(t) y^{(n-1)}(t) + ... + a_1(t) \dot{y}(t) + a_0(t) y(t) = f(t)\\
       y(t_0) = z_0, \enspace \dot{y}(t_0) = z_1, ..., y^{(n-1)}(t_0) = z_{n-1}.
     \end{array} \right.
@@ -767,7 +767,7 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
 
 % 3.10.
 \begin{satz}
-  Sei $I \subseteq \R$ offen, $a_0, ..., a_{n-1} : I \to \R$, $f : I \to \R$ stetig, $t_0 \in I$, $z = (z_0, ..., z_{n-1})^T \in \R^n$. Dann besitzt das AWP (3.1) eine eindeutige globale Lösung $y : I \to \R$.
+  Sei $I \subseteq \R$ offen, $a_0, ..., a_{n-1} : I \to \R$, $f : I \to \R$ stetig, $t_0 \in I$, $z = (z_0, ..., z_{n-1})^T \in \R^n$. Dann besitzt das AWP (3.1') eine eindeutige globale Lösung $y : I \to \R$.
 \end{satz}
 
 % 3.11.
@@ -784,11 +784,11 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
     \item $(x_1(t^*), \dot{x_1}(t^*), ..., x_1^{(n-1)}(t^*)), ..., (x_m(t^*), \dot{x_m}(t^*), ..., x_m^{(n-1)}(t^*))$ sind linear unabhängig in $\R^n$ für ein $t^* \in I$.
     \item $(x_1(t), \dot{x_1}(t), ..., x_1^{(n-1)}(t)), ..., (x_m(t), \dot{x_m}(t), ..., x_m^{(n-1)}(t))$ sind linear unabhängig in $\R^n$ für alle $t \in I$.
   \end{itemize}
-  Bezeichnen wir als Fundamentalsystem der DGL in (3.1) eine Menge von $n$ global linear unabhängigen Lösungen der DGL in (3.1) mit $f(t) \equiv 0$, dann gilt:
+  Bezeichnen wir als Fundamentalsystem der DGL in (3.1') eine Menge von $n$ global linear unabhängigen Lösungen der DGL in (3.1') mit $f(t) \equiv 0$, dann gilt:
   \begin{itemize}
     \item Ist $\{ x_1, ..., x_n \}$ ein Fundamentalsystem, so ist
     \[ U_{h,n} = \Set{c_1 x_1 + ... + c_n x_n}{c_1, ..., c_n \in \R}. \]
-    \item $U_n \not= \emptyset$ und für eine partikuläre Lösung $y_p \in U_n$ der DGL (3.1) ist $U_n = y_p + U_{h,n}$ ein affiner Unterraum von $\mathcal{C}^n(I, \R)$.
+    \item $U_n \not= \emptyset$ und für eine partikuläre Lösung $y_p \in U_n$ der DGL (3.1') ist $U_n = y_p + U_{h,n}$ ein affiner Unterraum von $\mathcal{C}^n(I, \R)$.
   \end{itemize}
 \end{satz}
 
@@ -817,19 +817,19 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
   \emph{Begleitmatrix} und es gilt
   \[ P_A(\lambda) = (-1)^n \cdot (\lambda^n + a_{n-1} \lambda^{n-1} + ... + a_1 \lambda + a_0). \]
   Angenommen, es gilt $P_A(\lambda) = (-1)^n \cdot (\lambda - \lambda_1)^{\alpha_1} \cdot ... \cdot (\lambda - \lambda_k)^{\alpha_k}$, wobei $\lambda_1, ..., \lambda_k$ verschiedene Nullstellen mit algebraischen Vielfachheiten $\alpha_1, ..., \alpha_k$ sind.
-  Falls $k = n$ (bzw. $\alpha_1 = ... = \alpha_k = 1$), so ist $\{ e^{\lambda_1 t}, ..., e^{\lambda_k t} \}$ ein Fundamentalsystem von (3.1). Sonst ist
+  Falls $k = n$ (bzw. $\alpha_1 = ... = \alpha_k = 1$), so ist $\{ e^{\lambda_1 t}, ..., e^{\lambda_k t} \}$ ein Fundamentalsystem von (3.1'). Sonst ist
   \[
     \tilde{F} \coloneqq \tilde{F}_1 \cup ... \cup \tilde{F}_k
     \quad \text{mit} \quad
     \tilde{F}_j \coloneqq \{ e^{\lambda_j t}, e^{\lambda_j t} t, ..., e^{\lambda_j t} t^{\alpha_j - 1} \}
   \]
-  ein Fundamentalsystem von (3.1).
+  ein Fundamentalsystem von (3.1').
 \end{bem}
 
 % Vorlesung vom 2.6.2014
 
 \begin{bem}
-  Um den Lösungsraum von (3.1) zu bestimmen, benötigen wir noch eine partikuläre Lösung $y_p$. Diese kann zum einen durch den Ansatz
+  Um den Lösungsraum von (3.1') zu bestimmen, benötigen wir noch eine partikuläre Lösung $y_p$. Diese kann zum einen durch den Ansatz
   \[
     \begin{pmatrix}
       y_{1,p}(t)\\
@@ -946,7 +946,7 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
 
 % 4.2.
 \begin{satz}
-  Sei $A \in \R^{n \times n}$ und $S \in \C^{n \times n}$ invertierbar. Das GGW $y_* \equiv 0$ der DGL $\dot{y} = Ay$ ist genau dann (exp/asympt) stabil, wenn das GGW $z_* \equiv 0$ der DGL $\dot{z} = S^{-1} A S$ (exp/asympt) stabil ist.
+  Sei $A \in \R^{n \times n}$ und $S \in \C^{n \times n}$ invertierbar. Das GGW $y_* \equiv 0$ der DGL $\dot{y} = Ay$ ist genau dann (exp/asympt) stabil, wenn das GGW $z_* \equiv 0$ der DGL $\dot{z} = S^{-1} A S z$ (exp/asympt) stabil ist.
 \end{satz}
 
 % 4.3.
@@ -991,7 +991,7 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
 % Vorlesung vom 18.6.2014
 
 \begin{bem}
-  Im Fall von EWen mit Realteil $\leq 0$ und mind. einem EW mit Realteil $= 0$ ist keine Aussage möglich.
+  Im Fall von EWen mit Realteil $\leq 0$ und mindestens einem EW mit Realteil $= 0$ ist keine Aussage möglich.
 \end{bem}
 
 % Ausgelassen: Beispiel: Mathematisches Pendel ohne Reibung
@@ -1109,7 +1109,7 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
 
 % 4.9.
 \begin{satz}
-  Für eine Matrix $A \in \R^{n \times n}$ und eine positiv definite Matrix $Q$ hat die \emph{Lyapunov-Gleichung} $A^T P + PA = -Q$ genau dann eine eindeutige positiv definite Lösung, wenn alle Eigenwerte von $A$ negativen Realteil haben.
+  Für eine Matrix $A \in \R^{n \times n}$ und eine positiv definite Matrix $Q$ hat die \emph{Lyapunov-Gleichung} $A^T P + PA = -Q$ genau dann eine eindeutige positiv definite Lösung $P$, wenn alle Eigenwerte von $A$ negativen Realteil haben.
 \end{satz}
 
 \begin{kor}
