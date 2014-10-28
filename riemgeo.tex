@@ -1,0 +1,313 @@
+\documentclass{cheat-sheet}
+
+\pdfinfo{
+  /Title (Zusammenfassung Riemannsche Geometrie)
+  /Author (Tim Baumann)
+}
+
+\usepackage{tikz}
+\usetikzlibrary{matrix,shapes,arrows,positioning}
+
+\newcommand{\Tau}{\mathcal{T}} % Großes Tau
+\newcommand{\angles}[1]{\langle #1 \rangle}
+\renewcommand{\O}{\mathcal{O}} % Offene Mengen im $\R^n$
+\newcommand{\A}{\mathcal{A}} % Atlanten
+\newcommand{\K}{\mathbb{K}} % Körper
+
+% Kleinere Klammern
+\delimiterfactor=701
+
+
+\begin{document}
+
+\maketitle{Kurzfassung Riemannsche Geometrie}
+
+% §1. Mannigfaltigkeiten
+
+\begin{defn}
+  Eine \emph{topologische Mannigfaltigkeit} (Mft) ist ein topologischer Raum $M^m$ mit folgenden Eigenschaften:
+  \begin{itemize}
+    \item $M^m$ ist \emph{hausdorffsch}, d.\,h.
+    \begin{align*}
+      \fa{x, y \in M^m} &x \not= y \implies \ex{U_x \opn M^m} \ex{U_y \opn M^m}\\
+      &x \in U_x \wedge y \in U_y \wedge U_x \cap U_y = \emptyset.
+    \end{align*}
+    \item $M^m$ erfüllt das \emph{zweite Abzählbarkeitsaxiom}, d.\,h. es gibt eine abzählbare Menge $\Set{ U_i }{ i \in \N } \subset \Tau$, sodass
+    \[ \fa{A \opn M^m} \ex{K \subset \N} A = \bigcup_{k \in K} U_k. \]
+    \item $M^m$ ist \emph{lokal euklidisch}, d.\,h. für alle $x \in M^m$ gibt es eine offene Umgebung $U_x$ von $x$ und einen Homöomorphismus $\phi : U_x \to \O$ mit $\O \subset \R^m$ offen.
+  \end{itemize}
+\end{defn}
+
+\begin{bem}
+  lokal euklidisch $\not\Rightarrow$ hausdorffsch
+\end{bem}
+
+\begin{prop}
+  Sei $M$ eine topologische Mannigfaltigkeit. Dann gilt
+  \[ \text{$M$ zusammenhängend} \iff \text{$M$ wegzusammenhängend.} \]
+\end{prop}
+
+\begin{defn}
+  \begin{itemize}
+    \item Sei $M$ eine $m$-dim. topol. Mft. Ein \emph{Atlas} ist eine Menge $\A = \Set{(U_j, \phi_j : U_j \to \O_j)}{j \in J}$ mit $U_j \opn M$ und $\O_j \subset \R^n$ offen und Homöomorphismen $\phi_j$, für die gilt $\bigcup_{j \in J} U_j = M$.
+    \item Die Paare $(U_j, \phi_j)$ werden \emph{Karten} genannt.
+    \item Für je zwei Karten $(U_j, \phi_j)$ und $(U_k, \phi_k)$ gibt es eine \emph{Kartenwechselabbildung}
+    \[ \phi_{kj} \coloneqq \phi_k \circ \phi_j^{-1} |_{\phi_j(U_j \cap U_k)} : \phi_j(U_j \cap U_k) \to \phi_k(U_j \cap U_k). \]
+    \item Ein Atlas heißt \emph{differenzierbar}, wenn alle Kartenwechselabbildungen $\mathcal{C}^\infty$-Abbildungen sind.
+    \item Ein Atlas $\A$ heißt \emph{differenzierbare Struktur} von $M$, wen gilt: Ist $(\tilde{U}, \tilde{\phi_j})$ eine Karte von $M$ und $\tilde{\A} \coloneqq \A \cup \{ (\tilde{U}, \tilde{\phi_j}) \}$ ein differenzierbarer Atlas, dann gilt $\A = \tilde{A}$.
+    \item Eine topol. Mft versehen mit einer differenzierbaren Struktur heißt \emph{differenzierbare Mannigfaltigkeit}.
+  \end{itemize}
+\end{defn}
+
+% §2. Differenzierbare Abbildungen
+
+\begin{nota}
+  Seien ab jetzt $M^m$ und $N^n$ differenzierbare Mften der Dimensionen $m$ und $n$
+\end{nota}
+
+\begin{defn}
+  \begin{itemize}
+    \item Eine Abbildung $f : M \to N$ heißt in $x \in M$ \emph{differenzierbar}, wenn es eine Karte $(U_x, \phi : U_x \to \O) \in \A_M$ und eine Karte $(\tilde{U}_{f(x)}, \tilde{\phi} : \tilde{U}_{f(x)} \to \tilde\O) \in \A_N$ gibt, sodass
+    \[
+      \tilde{\phi} \circ f|_{U_x} \circ \phi^{-1} : \O \to \tilde\O
+      \quad \text{differenzierbar ($\mathcal{C}^\infty$) ist.}
+    \]
+    \item Die Abbildung $f$ heißt \emph{differenzierbar}, falls sie in jedem Punkt $x \in M$ differenzierbar ist.
+  \end{itemize}
+\end{defn}
+
+\begin{nota}
+  $\mathcal{C}^\infty(M, N) \coloneqq \Set{f : M \to N}{\text{$f$ ist differenzierbar}}$
+\end{nota}
+
+\begin{bem}
+  Die Definition ist unabhängig von Wahl der Karten um $x$ und $f(x)$.
+\end{bem}
+
+\begin{defn}
+  Eine Abbildung $f : M \to N$ heißt \emph{Diffeomorphismus}, wenn $f$ ein Homöo ist und $f$ und $f^{-1}$ differenzierbar sind.
+\end{defn}
+
+% §3. Tangentialvektoren
+
+\begin{defn}
+  Sei $p \in M$. Zwei Funktionen $f : U_p \to \R$ und $g : V_p \to \R$ mit $U_p, V_p \opn M$ heißen äquivalent, falls es eine offene Umgebung $W \subset U_p \cap V_p$ mit $f|_W = g|_W$ gibt. Die Äquivalenzklasse $[f]$ bezüglich der so definierten Äq'relation heißt \emph{Funktionskeim} in $p$.
+\end{defn}
+
+\begin{nota}
+  $\mathcal{C}^\infty(M, p) \coloneqq \Set{ [f] }{ \text{$[f]$ Funktionskeim in $p$} }$
+\end{nota}
+
+\begin{bem}
+  Die Menge der Funktionskeime ist eine $\R$-Algebra.
+\end{bem}
+
+\begin{defn}
+  Eine lineare Abb. $\delta : \mathcal{C}^\infty(M, p) \to \R$ heißt \emph{Derivation}, falls
+  \[ \fa{[f], [g] \in \mathcal{C}^\infty(M, p)} \delta[f \cdot g] = \delta[f] \cdot g(p) + f(p) \cdot \delta[g]. \]
+\end{defn}
+
+\begin{defn}
+  Der gewöhnliche Tangentialraum des $\R^n$ im Punkt $p$ ist
+  \[ \tilde{T}_p \R^n \coloneqq \Set{(p, v)}{v \in \R^n} \]
+  mit $(p, v) + (p, w) \coloneqq (p, v + w)$ und $\lambda \cdot (p, v) \coloneqq (p, \lambda \cdot v)$.
+\end{defn}
+
+\begin{defn}
+  Der \emph{Tangentialraum} von $M$ im Punkt $p \in M$ ist
+  \[ T_p M \coloneqq \Set{ \partial : \mathcal{C}^\infty(\R^n, p) \to \R }{ \text{$\partial$ linear, derivativ} } \]
+  Ein Element $v \in T_p M$ heißt \emph{Tangentialvektor} an $M$ in $p$.
+\end{defn}
+
+\begin{bem}
+  Wir erhalten eine Abbildung
+  \[
+    T_p M \times \mathcal{C}^\infty(M, p) \to \R, \quad
+    (v, [f]) \mapsto v.f \coloneqq v[f].
+  \]
+\end{bem}
+
+\begin{bem}
+  $T_p M$ ist ein $\R$-Vektorraum.
+\end{bem}
+
+\begin{satz}
+  Die Vektorräume $T_p \R^n$ und $\tilde{T}_p \R^n$ sind isomorph. Insbesondere gilt $\dim(T_p \R^n) = n$.
+\end{satz}
+
+\begin{kor}
+  Für eine $m$-dimensionale diff'bare Mft $M$ gilt: $\dim(T_p M) = m$.
+\end{kor}
+
+\begin{bem}
+  Sei $c : \ointerval{-\epsilon}{\epsilon} \to M$ eine differenzierbare Kurve. Dann kann man $\dot{c}(0)$ auffassen als Tangentialvektor an $M$ in $c(0)$ mittels
+  \[ \dot{c}(0)[f] \coloneqq \tfrac{\d}{\d t}|_{t=0} (f \circ c). \]
+\end{bem}
+
+\begin{bem}
+  Sei $(U, \phi)$ eine Karte von $M$. Wir setzen
+  \begin{align*}
+    \tfrac{\partial^{\phi}}{\partial x_i}|_p [f] & \coloneqq (\phi^{-1} \circ \alpha_i)^{{\cdot}} (0) [f] = \tfrac{\d}{\d t}|_{t=0} (f \circ \phi^{-1} \circ \alpha_i)\\
+    & \text{mit } \alpha_i : \ointerval{-\epsilon}{\epsilon} \to U, \enspace t \mapsto \phi(p) + t e_i.
+  \end{align*}
+  Wir erhalten $\tfrac{\partial^{\phi}}{\partial x_i}|_p \in T_p M$.
+\end{bem}
+
+\begin{defn}
+  Sei $f : M \to N$ diff'bar. Die \emph{Ableitung} von $f$ in $p \in M$ ist die Abbildung
+  \begin{align*}
+    T_p f = f_{*p} &: T_p M \to T_{f(p)} N, \enspace v \mapsto f_{*p} v\\
+    & \text{wobei } f_{*p}(v).[g] \coloneqq v.[g \circ f].
+  \end{align*}
+\end{defn}
+
+\begin{lem}
+  Sei $M$ eine diff'bare Mft, $p \in M$. Dann gilt
+  \begin{itemize}
+    \miniitem{0.3 \linewidth}{$f_{*p}$ ist linear}
+    \miniitem{0.3 \linewidth}{$(\id_M)_{*p} = \id_{T_p M}$}
+    \item Kettenregel: Seien $N$, $P$ diff'bare Mften. Dann gilt
+    \[ \fa{p \in M} (f \circ g)_{*p} = f_{* g(p)} \circ g_{*p}. \]
+  \end{itemize}
+\end{lem}
+
+\begin{kor}
+  Wenn $f : M \to N$ ein Diffeomorphismus ist, dann ist $f_{*p} : T_p M \to T_{f(p)} N$ ein VR-Isomorphismus für alle $p \in M$.
+\end{kor}
+
+\begin{satz}
+  Sei $M$ eine $m$-dimensionale Mft, $p \in M$ und $(U, \phi)$ eine Karte.
+  \begin{itemize}
+    \item Es gilt $T_p M = \Set{ \dot{c}(0) }{ c : \ointerval{-\epsilon}{\epsilon} \to M \text{ diff'bar}, c(0) = p }$
+    \item $\Set{\tfrac{\partial^\phi}{\partial x_i}|_p}{i=1,...,n}$ ist eine Basis von $T_p M$.
+  \end{itemize}
+\end{satz}
+
+\begin{defn}
+  $TM \coloneqq \bigcup_{p \in M} T_p M$ heißt \emph{Tangentialbündel} von $M$. Die \emph{Fußpunktabbildung} ist die Projektion
+  \[ \pi : TM \to M, v \in T_p M \mapsto p. \]
+\end{defn}
+
+% Ausgelassen: Bemerkung, dass es sich dabei um eine disjunkte Vereinigung handelt (weil $M$ hausdorffsch)
+
+\begin{defn}
+  Ein \emph{Vektorfeld} auf $M$ ist eine Abbildung $X : M \to TM$, sodass $\pi \circ X = \id_M$. Dies ist äquivalent zu $\fa{p \in M} X(p) \in T_p(M)$.
+\end{defn}
+
+\begin{bem}
+  Sei $X : M \to TM$ ein Vektorfeld, $(U, \phi)$ eine Karte. Dann gibt es Funktionen $\xi^j : U \to \R$, $j = 1, ..., n$ mit $X(p) = \sum_{j=1}^n \xi^j(p) \tfrac{\partial^\phi}{\partial x^j}|_p$ für alle $p \in M$.
+\end{bem}
+
+\begin{defn}
+  \begin{itemize}
+    \item Ein Vektorfeld $X$ auf $M$ heißt in $p \in M$ \emph{diff'bar} ($\mathcal{C}^\infty$), wenn es eine Karte $(U, \phi)$ um $p$ gibt, sodass die Funktionen $\xi_1, ..., \xi^m$ diff'bar ($\mathcal{C}^\infty$) sind.
+    \item $X$ heißt \emph{differenzierbar}, wenn $X$ in allen $p \in M$ diff'bar ist.
+  \end{itemize}
+\end{defn}
+
+\begin{lem}
+  Wenn die Koordinatenfunktionen $\xi^1, ..., \xi^n$ für eine bestimmte Karte $(U, \phi : U \to \O)$ differenzierbar sind, dann sind sie es für jede andere Karte $(\tilde{U}, \psi : \tilde{U} \to \tilde{O})$ mit $\tilde{U} \subseteq U$.
+\end{lem}
+
+\begin{defn}
+  Sei $M$ eine $m$-dimensionale diff'bare Mft mit diff'barer Struktur $\A = \Set{(U_j, \phi_j)}{j \in J}$. Dann ist $TM$ eine $2m$-dimensionale Mft mit Atlas $\tilde{\A} \coloneqq \Set{(\tilde{U}_j \coloneqq \pi^{-1}(U_j), \tilde{\Phi}_j)}{j \in J}$, wobei
+  \[
+    \tilde{\Phi}_j : \pi^{-1}(U_j) \to \phi_j(U_j) \times \R^m, \quad
+    \sum_{k=1}^m \xi^k(p) \tfrac{\partial^{\phi_j}}{\partial x^k}|_p \mapsto (\phi_j(p), \xi^1(p), ..., \xi^n(p)).
+  \]
+  Eine Menge $V \subseteq TM$ heißt offen, wenn $\tilde{\Phi}_j(V \cap \pi^{-1}(U_j)) \opn \R^{2n}$ offen ist für alle $j \in J$.
+\end{defn}
+
+\begin{nota}
+  $\chi(M) \coloneqq \{\text{ diff'bare Vektorfelder auf $M$ }\}$
+\end{nota}
+
+\begin{bem}
+  $\chi(M)$ ist ein $\R$-VR und ein $\mathcal{C}^\infty(M)$-Modul.
+\end{bem}
+
+\begin{lem}
+  Jedes $X \in \chi(M)$ induziert eine Abbildung
+  \[
+    X : \mathcal{C}^\infty(M) \to \mathcal{C}^\infty(M), \quad
+    \phi \mapsto X(\phi) \coloneqq p \mapsto X(p) . [\phi].
+  \]
+  Die Abbildung $X$ ist linear und derivativ.
+\end{lem}
+
+\begin{lem}
+  Seien $X, Y \in \chi(M)$ mit $\fa{f \in \mathcal{C}^\infty(M)} X(f) = Y(f)$. Dann gilt $X = Y$.
+\end{lem}
+
+\begin{lem}
+  Seien $X, Y \in \chi(M)$. Dann definiert
+  \[
+    Z : \mathcal{C}^\infty(M) \to \mathcal{C}^\infty(M), \enspace
+    f \mapsto X(Y(f)) - Y(X(f))
+  \]
+  ein Vektorfeld auf $M$.
+\end{lem}
+
+\begin{defn}
+  Dieses Vektorfeld $[X, Y] \coloneqq Z$ wird als \emph{Kommutator} oder \emph{Lie-Klammer} von $X$ und $Y$ bezeichnet.
+\end{defn}
+
+% TODO: Dingsda-Identität nachrechnen?
+
+\begin{defn}
+  Sei $X \in \chi(M)$. Eine diff'bare Kurve $c : \ointerval{-\epsilon}{\epsilon} \to M$ heißt \emph{Integralkurve} von $X$, falls
+  \[ \fa{t \in \ointerval{-\epsilon}{\epsilon}} \dot{c}(t) = X_{c(t)}. \]
+\end{defn}
+
+\begin{lem}
+  Sei $X \in \chi(M)$, $p \in M$ und $v \in T_p M$. Dann hat das Anfangswertproblem
+  \[ \dot{c}(t) = X_{c(t)}, \enspace c(0) = p \]
+  eine eindeutige lokale Lösung $c = c_p^X : \ointerval{-\epsilon}{\epsilon} \to M$.
+\end{lem}
+
+\begin{defn}
+  Die Abbildung $\Phi_X : U \times \ointerval{-\epsilon}{\epsilon} \to M, \enspace (p, t) \mapsto c_p^X(t)$ heißt \emph{Fluss} von $X$.
+\end{defn}
+
+% §5. Lie-Algebren und Lie-Gruppen
+
+\begin{defn}
+  Ein Vektorraum $V$ mit einer bilinearen Abbildung $[\blank,\blank] : V \times V \to V, \enspace (v, w) \mapsto [v,w]$ heißt \emph{Lie-Algebra}, falls die Abbildung
+  \begin{itemize}
+    \item antisymmetrisch ist, d.\,h. $\fa{v, w \in V} [v, w] = - [w, v]$
+    \item die \emph{Jacobi-Identität} erfüllt, d.\,h.
+    \[ \fa{v,w,z \in V} [v, [w, z]] + [z, [v, w]] + [w, [z, v]] = 0. \]
+  \end{itemize}
+\end{defn}
+
+\begin{bspe}
+  \begin{itemize}
+    \item $(\chi(M), [\blank,\blank])$ ist eine Lie-Algebra.
+    \item $\K^{n \times n}$ ist eine Lie-Algebra mit $[A, B] \coloneqq AB - BA$.
+  \end{itemize}
+\end{bspe}
+
+\begin{defn}
+  Eine Gruppe $G$, welche ebenfalls eine diff'bare Mft ist, heißt \emph{Lie-Gruppe}, wenn gilt:
+  \begin{itemize}
+    \item $\mu : G \times G \to G, \enspace (g_1, g_2) \mapsto g_1 \cdot g_2$ ist diff'bar.
+    \item $\iota : G \to G, \enspace g \mapsto g^{-1}$ ist diff'bar.
+  \end{itemize}
+\end{defn}
+
+\begin{bsp}
+  Die allgemeine lineare Gruppe $\mathrm{GL}(n, \R) \subset \R^{n \times n} \approx \R^{(n^2)}$ ist eine Lie-Gruppe. Die Differenzierbarkeit der Inversion folgt aus der Cramerschen Regel.
+\end{bsp}
+
+\begin{defn}
+  Sei $G$ eine Lie-Gruppe und $g \in G$. Dann sind
+  \begin{align*}
+    lg : G \to G, &\quad x \mapsto g \cdot x = \mu(g, x)\\
+    rg : G \to G, &\quad x \mapsto x \cdot g = \mu(x, g)
+  \end{align*}
+  Diffeomorphismen mit Umkehrabbildung $l(g^{-1})$ bzw. $r(g^{-1})$.
+\end{defn}
+
+% Vorlesung vom 24.10.2014
+
+\end{document}
