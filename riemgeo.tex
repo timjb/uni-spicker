@@ -13,6 +13,10 @@
 \renewcommand{\O}{\mathcal{O}} % Offene Mengen im $\R^n$
 \newcommand{\A}{\mathcal{A}} % Atlanten
 \newcommand{\K}{\mathbb{K}} % Körper
+\newcommand{\GL}{\mathrm{GL}} % General Linear Group
+\newcommand{\coord}[1]{\tfrac{\partial^\phi}{\partial x^{#1}}} % Standard-Koordinaten
+\newcommand{\Coord}[1]{\frac{\partial^\phi}{\partial x^{#1}}} % Standard-Koordinaten (größerer Bruch)
+\newcommand{\lie}[2]{\left[ {#1}, {#2} \right]} % Lie-Klammer
 
 % Kleinere Klammern
 \delimiterfactor=701
@@ -179,7 +183,7 @@
   Sei $M$ eine $m$-dimensionale Mft, $p \in M$ und $(U, \phi)$ eine Karte.
   \begin{itemize}
     \item Es gilt $T_p M = \Set{ \dot{c}(0) }{ c : \ointerval{-\epsilon}{\epsilon} \to M \text{ diff'bar}, c(0) = p }$
-    \item $\Set{\tfrac{\partial^\phi}{\partial x_i}|_p}{i=1,...,n}$ ist eine Basis von $T_p M$.
+    \item $\Set{\coord{i}|_p}{i=1,...,n}$ ist eine Basis von $T_p M$.
   \end{itemize}
 \end{satz}
 
@@ -195,7 +199,7 @@
 \end{defn}
 
 \begin{bem}
-  Sei $X : M \to TM$ ein Vektorfeld, $(U, \phi)$ eine Karte. Dann gibt es Funktionen $\xi^j : U \to \R$, $j = 1, ..., n$ mit $X(p) = \sum_{j=1}^n \xi^j(p) \tfrac{\partial^\phi}{\partial x^j}|_p$ für alle $p \in M$.
+  Sei $X : M \to TM$ ein Vektorfeld, $(U, \phi)$ eine Karte. Dann gibt es Funktionen $\xi^j : U \to \R$, $j = 1, ..., n$ mit $X(p) = \sum_{j=1}^n \xi^j(p) \coord{j}|_p$ für alle $p \in M$.
 \end{bem}
 
 \begin{defn}
@@ -272,10 +276,10 @@
 % §5. Lie-Algebren und Lie-Gruppen
 
 \begin{defn}
-  Ein Vektorraum $V$ mit einer bilinearen Abbildung $[\blank,\blank] : V \times V \to V, \enspace (v, w) \mapsto [v,w]$ heißt \emph{Lie-Algebra}, falls die Abbildung
+  Ein Vektorraum $V$ mit einer bilinearen Abbildung $[\blank,\blank] : V \times V \to V, \enspace (v, w) \mapsto [v,w]$ heißt \emph{Lie-Algebra}, falls
   \begin{itemize}
-    \item antisymmetrisch ist, d.\,h. $\fa{v, w \in V} [v, w] = - [w, v]$
-    \item die \emph{Jacobi-Identität} erfüllt, d.\,h.
+    \item die Abb. antisymmetrisch ist, d.\,h. $\fa{v, w \in V} [v, w] = - [w, v]$
+    \item die \emph{Jacobi-Identität} erfüllt ist, d.\,h.
     \[ \fa{v,w,z \in V} [v, [w, z]] + [z, [v, w]] + [w, [z, v]] = 0. \]
   \end{itemize}
 \end{defn}
@@ -296,7 +300,7 @@
 \end{defn}
 
 \begin{bsp}
-  Die allgemeine lineare Gruppe $\mathrm{GL}(n, \R) \subset \R^{n \times n} \approx \R^{(n^2)}$ ist eine Lie-Gruppe. Die Differenzierbarkeit der Inversion folgt aus der Cramerschen Regel.
+  Die allgemeine lineare Gruppe $\GL(n, \R) \subset \R^{n \times n} \approx \R^{(n^2)}$ ist eine Lie-Gruppe. Die Differenzierbarkeit der Inversion folgt aus der Cramerschen Regel.
 \end{bsp}
 
 \begin{defn}
@@ -309,5 +313,244 @@
 \end{defn}
 
 % Vorlesung vom 24.10.2014
+
+\begin{bsp}
+  Abgeschlossene Untergruppen von $\GL(n, \R)$ sind Lie-Gruppen, z.\,B.
+  \begin{itemize}
+    \miniitem{0.40 \linewidth}{$\GL(n, \C) \subset \GL(2n, \R)$}
+    \miniitem{0.29 \linewidth}{$O_n \subset \GL(n, \R)$}
+    \miniitem{0.27 \linewidth}{$U_n \subset \GL(2n, \R)$}
+  \end{itemize}
+\end{bsp}
+
+\begin{defn}
+  Sei $f : M \to N$ ein Diffeomorphismus und $X \in \chi(M)$. Dann ist
+  \[
+    f_* X : N \to TN, \enspace
+    x \mapsto f_{*f^{-1}(x)} X(f^{-1}(x))
+  \]
+\end{defn}
+
+\begin{defn}
+  Ein Vektorfeld $X \in \chi(G)$ heißt \emph{linksinvariant}, wenn gilt:
+  \[ \fa{g, h \in G} X(g \cdot h) = lg_{*h} X(h). \]
+  Kürzer: $\fa{g \in G} lg_* X = X$.
+\end{defn}
+
+\begin{nota}
+  $\mathcal{L}(G) \coloneqq \Set{ X \in \chi(G) }{\text{$X$ ist linksinvariant}} \subset \chi(G)$
+\end{nota}
+
+\begin{bem}
+  Ein linksinvariantes VF $X \in \chi(G)$ ist eindeutig bestimmt durch $X(e)$.
+  Andererseits: Ist $x \in T_e G$, dann gibt es ein linksinvariantes VF $X \in \chi(G)$ mit $X(e) = x$.
+  Somit ist die Abbildung
+  \[
+    i : \mathcal{L}(G) \to T_e G, \enspace
+    X \mapsto X(e)
+  \]
+  ein Vektorraum-Isomorphismus.
+\end{bem}
+
+\begin{lem}
+  Seien $X, Y \in \mathcal{L}(G)$. Dann ist $[X, Y] \in \mathcal{L}(G)$.
+\end{lem}
+
+\begin{kor}
+  $(\mathcal{L}(G), [\blank,\blank])$ ist eine $\dim(G)$-dimensionale Unter-Lie-Algebra von $(\chi(G), [\blank,\blank])$.
+\end{kor}
+
+\begin{nota}
+  $OJ \coloneqq T_e G \cong \mathcal{L}(G)$
+\end{nota}
+
+% §6. Riemannsche Mannigfaltigkeiten
+
+\begin{defn}
+  Ein Skalarprodukt auf einem Vektorraum $V$ ist eine symmetrische, positiv definite Bilinearform $\langle \blank, \blank \rangle$. Die davon induzierte Norm ist $\norm{v} \coloneqq \sqrt{\abs{\langle v, v \rangle}}$.
+\end{defn}
+
+\begin{defn}
+  Eine \emph{Riemannsche Metrik} auf einer diff. Mft $M$ ist eine Familie $g = (g_p)_{p \in M}$ von Skalarprodukten $g_p : T_p M \times T_p M \to \R$, die differenzierbar von $p$ abhängt, d.\,h. für alle $X, Y \in \chi(M)$ ist $g(X, Y) : M \to \R, p \mapsto g_p(X(p), Y(p))$ differenzierbar ($\mathcal{C}^\infty$).\\
+  Das Tupel $(M, g)$ heißt \emph{Riemannsche Mannigfaltigkeit}.
+\end{defn}
+
+\begin{bem}
+  Sei $(U, \phi)$ eine Karte von $M$. Setze
+  \[
+    g_{ij}^{\phi} : U \to \R, \enspace
+    p \mapsto g(\coord{i}|_p, \coord{j}|_p).
+  \]
+  Seien $X = \sum_{i=1}^n v^i \coord{i}$ und $Y = \sum_{j=1}^n w^j \coord{j}$ zwei VF in $U$. Dann gilt
+  \[
+    g(X, Y)(p) = g_p(X(p), Y(p)) = \sum_{i,j=1}^n v^i(p) w^j(p) g_{ij}(p).
+  \]
+\end{bem}
+
+\begin{defn}
+  Seien $(M, g_M)$, $(N, g_N)$ Riemannsche Mannigfaltigkeiten. Eine Abbildung $f : M \to N$ heißt Isometrie, wenn gilt:
+  \begin{itemize}
+    \item $f$ ist ein Diffeomorphismus
+    \item $f$ erhält Riemannsche Metriken, d.\,h. für alle $X, Y \in \chi(M)$ gilt:
+    \[ g_M(X, Y) = g_N(f_* X, f_* Y) \circ f, \]
+    also $\fa{p {\in} M} \fa{v, w {\in} T_p M} g_{M,p} (v, w) = g_{N,f(p)}(f_{*p}(v), f_{*p}(w))$.
+  \end{itemize}
+\end{defn}
+
+\begin{defn}
+  Sei $(M, g)$ eine Riemannsche Mannigfaltigkeit. Dann ist
+  \[ I(M, g) \coloneqq \Set{ f : M \to M }{ \text{$f$ Isometrie} } \]
+  in kanonischer Weise eine Lie-Gruppe (Myers-Steenrod).
+\end{defn}
+
+% 6.1.
+\begin{satz}
+  Jede diff'bare Mannigfaltigkeit hat eine Riemannsche Metrik.
+\end{satz}
+
+\begin{bsp}
+  Das Oberer-Halbraum-Modell des hyperbolischen Raum ist
+  \[ H^n \coloneqq \Set{x \in \R^n}{\langle x, e_n \rangle_{\text{eukl}} > 0} \opn \R^n \]
+  mit dem offensichtlichen Atlas und der Riemannschen Metrik
+  \[ g_p^{\text{Hyp}} ((p, \tilde{v}), (p, \tilde{w})) \coloneqq \frac{\langle \tilde{v}, \tilde{w} \rangle_{\text{eukl}}}{\langle p, e_n \rangle^2}. \]
+\end{bsp}
+
+\begin{defn}
+  Eine diffbare Abbildung $f : M \to N$ zwischen diff'baren Mften heißt \emph{Immersion}, falls $f_{*p} : T_p M \to T_{f(p)} N$ für alle $p \in M$ injektiv ist.
+\end{defn}
+
+\begin{defn}
+  Angenommen, $N$ ist sogar eine Riemannsche Mft mit Metrik $g_N$. Dann erhalten wir eine Riemannsche Metrik auf $M$, die mit $f$ \emph{zurückgeholte Metrik}, durch
+  \[ (f^* g_N)_p (v, w) \coloneqq g_{N,f(p)}(f_{*p}(v), f_{*p}(w)). \]
+\end{defn}
+
+\begin{defn}
+  Eine Immersion $f : (M, g^M) \to (N, g^N)$ heißt \emph{isometrisch}, falls $g^M = f^* g^N$.
+\end{defn}
+
+\begin{prop}
+  Sei $M$ eine zusammenhängende Mannigfaltigkeit. Dann gibt es für alle Punkte $p, q \in M$ einen stückweise differenzierbaren Weg $\gamma : \cinterval{0}{1} \to M$ mit $\gamma(0) = p$ und $\gamma(1) = q$.
+\end{prop}
+
+\begin{defn}
+  Für $\gamma : \cinterval{a}{b} \to M$ stückweise $\mathcal{C}^1$ heißt
+  \[
+    L(\gamma) \coloneqq \Int{a}{b}{\norm{\dot{\gamma}(\tau)}}{\tau}
+    \quad \text{\emph{Länge} von $\gamma$.}
+  \]
+\end{defn}
+
+\begin{defn}
+  Sei $(M, g)$ eine Riemannsche Mft. Dann ist der \emph{Riemannsche Abstand} gegeben durch die Metrik
+  \begin{align*}
+    d_g : M \times M \to \R, \quad
+    (p, q) \mapsto \inf \{\, L(\gamma) \,\,|\,\, & \gamma : \cinterval{a}{b} \to M \text{ stückweise } \mathcal{C}^{1}\\
+    & \left. \text{mit $\gamma(a) = p$ und $\gamma(b) = q$} \, \right\}.
+  \end{align*}
+\end{defn}
+
+\begin{bem}
+  Nach dem Satz von Hopf-Rinow stimmt die von $d_g$ induzierte Topologie mit der von $M$ überein.
+\end{bem}
+
+% §7. Kovariante Ableitungen
+
+\begin{defn}
+  Ein \emph{Zusammenhang} (kov. Ableitung) ist eine Abb.
+  \[
+    \nabla : \chi(M) \times \chi(M) \to \chi(M), \quad
+    (X, Y) \mapsto \nabla_X Y
+  \]
+  sodass für $X, X_1, X_2, Y, Y_1, Y_2 \in \chi(M)$ und $f \in \mathcal{C}^\infty(M)$ gilt:
+  \begin{itemize}
+    \item $\nabla_{X_1 + f X_2} Y = \nabla_{X_1} Y + f \nabla_{X_2} Y$
+    \item $\nabla_X (Y_1 + Y_2) = \nabla_X Y_1 + \nabla_X Y_2$
+    \item $\nabla_X (f Y) = f \left( \nabla_X Y \right) + (X(f)) \cdot Y$ (Leibniz-Regel)
+  \end{itemize}
+\end{defn}
+
+\begin{defn}
+  Sei $\nabla$ ein Zusammenhang auf $M$. Dann heißt
+  \[
+    T^\nabla(X, Y) \coloneqq \nabla_X Y - \nabla_Y X - [X, Y],
+    \qquad \text{\emph{Torsion} von $\nabla$.}
+  \]
+  Wen $T^\nabla = 0$, dann heißt $\nabla$ \emph{torsionsfrei}.
+\end{defn}
+
+\begin{defn}
+  Ein Zusammenhang $\nabla$ auf einer riemannschen Mft. $(M, g)$ heißt \emph{metrisch}, wenn gilt:
+  \[ g(\nabla_X Y, Z) + g(Y, \nabla_X Z) = X g(Y, Z) \]
+\end{defn}
+
+\begin{thm}
+  Auf jeder Riem. Mft. $(M, g)$ gibt es genau einen torisionsfreien, metrischen Zusammenhang. Für diesen gilt:
+  \begin{align*}
+    2 g(\nabla_X Y, Z) = & X g(Y, Z) + Y g(X, Z) - Z g(X, Y)\\
+    & + g([X, Y], Z) + g([Z, X], Y) + g([Z, Y], X)
+  \end{align*}
+\end{thm}
+
+\begin{defn}
+  Der eindeutige torsionsfreie und metrische Zusammenhang auf $(M, g)$ heißt \emph{Levi-Civita-Zusammenhang} auf $(M, g)$.
+\end{defn}
+
+\begin{bem}
+  Sei $(M, g)$ eine riemannsche Mft., $(U, \phi)$ eine Karte von $M$. Dann gibt es diff'bare Funktionen $\Gamma_{ij}^k : U \to \R$ für $i,j,k \in \{ 1, ..., n \}$, sodass gilt
+  \[
+    \nabla_{\left( \coord{i} \right)} \left( \coord{j} \right) = \sum_{k=1}^n \Gamma_{ij}^k \coord{k}.
+  \]
+  Die Funktionen $\Gamma_{ij}^k$ heißen \emph{Christoffel-Symbole} von $\nabla$.
+\end{bem}
+
+% Vorlesung vom 5.11.2014
+
+% 7.2
+\begin{lem}
+  $\lie{\coord{j}}{\coord{k}} = 0$
+\end{lem}
+
+% 7.3
+\begin{satz}
+  Für die Christoffel-Symbole gilt
+  \[ \Gamma_{ij}^k = \tfrac{1}{2} \sum_{l=1}^n g^{kl} \left( \Coord{j} g_{il} + \Coord{i} g_{jl} - \Coord{l} g_{ij} \right), \]
+  wobei
+  \begin{align*}
+    g_{ij} : U \to \R, & \enspace p \mapsto g_p \left( \coord{i} (p), \coord{j} (p) \right) \\
+    g^{kl} : U \to \R & \enspace \text{definiert ist durch} \enspace \sum_{r=1}^n g^{jr} g_{rk} = \delta_k^j.
+  \end{align*}
+\end{satz}
+
+\begin{defn}
+  Sei $\nabla$ ein Zusammenhang auf $M$. Dann heißt $X \in \chi(M)$ parallel, falls
+  \[ \nabla X : \chi(M) \to \chi(M), \enspace Y \mapsto \nabla_Y X \]
+  gleich Null ist.
+\end{defn}
+
+\begin{defn}
+  Ein \emph{Tensorfeld} vom Typ $(j, k)$ mit $k \in \N$ und $j \in \{ 0, 1 \}$ ist eine Abbildung
+  \[
+    T : \chi(M) \times ... \times \chi(M) \to
+    \begin{cases}
+      \mathcal{C}^\infty(M), & \text{falls } j = 0,\\
+      \chi(M), & \text{falls } j = 1,
+    \end{cases}
+  \]
+  die in jedem Argument linear ist.
+\end{defn}
+
+\begin{bspe}
+  \begin{itemize}
+    \item $T^\nabla : \chi(M) \times \chi(M) \to \chi(M)$ ist Tensor vom Typ $(1, 2)$.
+    \item $\nabla Y : \chi(M) \to \chi(M), \enspace X \mapsto \nabla_X Y$ ist Tensor vom Typ $(1, 1)$.
+    \item Alternierende $k$-Formen auf $\R^n$ sind Tensoren vom Typ $(0, k)$.
+    \item Riemannsche Metriken sind Tensorfelder vom Typ $(0, 2)$.
+  \end{itemize}
+\end{bspe}
+
+% 8.1
+\begin{satz}
+  Sei $T$ ein Tensorfeld auf $M$ vom Typ $(j, k)$. Sei $p \in M$. Seien $X_1, ..., X_k \in \chi(M)$. Dann hängt $T(X_1, ..., X_k)(p)$ nur von $X_1(p)$, ..., $X_k(p)$ ab.
+\end{satz}
 
 \end{document}
