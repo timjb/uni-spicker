@@ -553,4 +553,68 @@
   Sei $T$ ein Tensorfeld auf $M$ vom Typ $(j, k)$. Sei $p \in M$. Seien $X_1, ..., X_k \in \chi(M)$. Dann hängt $T(X_1, ..., X_k)(p)$ nur von $X_1(p)$, ..., $X_k(p)$ ab.
 \end{satz}
 
+% Vorlesung vom 7.11.2014
+
+\begin{bem}
+  Sei $(U, \phi)$ eine Karte von $M$ und $T$ ein Tensorfeld vom Typ $(1, k)$ auf $M$. Dann gibt es Funktionen $T_{i_1,...,i_k}^l$, sodass
+  \[ T(\coord{i_1}, ..., \coord{i_k}) = \sum_{l=1}^n T_{i_1,...,i_k}^l \coord{l}. \]
+\end{bem}
+
+\begin{nota}
+  $\nabla_v Y \coloneqq (\nabla_X Y)(p)$ für $v \in T_p M$ und $X$ ein VF mit $X_p = v$ (wohldefiniert).
+\end{nota}
+
+\begin{satz}
+  Sei $\nabla$ ein Zusammenhang auf $M$. Sei $p \in M$, $v \in T_p M$ und $Y, \tilde{Y} \in \chi(M)$. Falls für eine diff'bare Kurve $c : \ointerval{-\epsilon}{\epsilon} \to M$ gilt
+  \[
+    c(0) = p, \enspace
+    \dot{c}(0) = 0 \enspace \text{und} \enspace
+    \fa{t \in \ointerval{-\epsilon}{\epsilon}} Y(c(t)) = \tilde{Y}(c(t)),
+  \]
+  dann gilt $\nabla_v Y = \nabla_v \tilde{Y}$.
+\end{satz}
+
+% §9. Kovariante Ableitung längs Kurven
+
+\begin{defn}
+  Ein \emph{VF längs einer Kurve} $c : I \to M$ ist eine Abbildung
+  \[
+    X : I \to TM
+    \quad \text{mit} \quad
+    X(t) = X_t \in T_{c(t)} M,
+  \]
+  welche diff'bar ist, d.\,h. für alle $t_0 \in I$ existiert eine Karte $(U, \phi)$ um $c(t_0)$, sodass man schreiben kann
+  \[
+    X(t) = \sum_{i=1}^n \xi^i(t) \coord{j}|_{c(t)} \quad \text{für alle } t \in c^{-1}(U)
+  \]
+  mit diff'baren Funktionen $\xi^i : c^{-1}(U) \to \R$.
+\end{defn}
+
+\begin{bem}
+  $X_t$ muss nicht Einschränkung eines VF auf $M$ sein.
+\end{bem}
+
+\begin{nota}
+  $\chi_c \coloneqq \{ \text{ Vektorfelder längs $c$ } \}$
+\end{nota}
+
+\begin{bem}
+  $\chi_c$ ist ein Modul über $\mathcal{C}^\infty(I, \R)$.
+\end{bem}
+
+\begin{satz}
+  Sei $\nabla$ ein Zusammenhang auf $M$, sei $c : I \to M$ eine diff'bare Kurve. Dann gibt es eine eindeutige Abbildung
+  \[ \frac{\nabla}{\d t} = \frac{D}{\d t} = \frac{D^\nabla}{\d t} : \chi_c \to \chi_c, \]
+  sodass für $X, \tilde{X} \in \chi_c$, $Y \in \chi(M)$ und $f \in \mathcal{C}^\infty(I, \R)$ gilt:
+  \begin{itemize}
+    \item $\tfrac{D}{\d t} (X + \tilde X) = \tfrac{D}{\d t} X + \tfrac{D}{\d t} \tilde{X}$,
+    \item $\tfrac{D}{\d t} (f \cdot X) = f \cdot \tfrac{D}{\d t} X + f' X$,
+    \item $\tfrac{D (Y \circ c)}{\d t} = \nabla_{\dot{c}} Y$.
+  \end{itemize}
+\end{satz}
+
+\begin{defn}
+  Die Abbildung $\tfrac{D}{\d t}$ heißt von $\nabla$ \emph{induzierte kovariante Ableitung längs $c$}.
+\end{defn}
+
 \end{document}
