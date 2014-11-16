@@ -617,4 +617,154 @@
   Die Abbildung $\tfrac{D}{\d t}$ heißt von $\nabla$ \emph{induzierte kovariante Ableitung längs $c$}.
 \end{defn}
 
+% Vorlesung vom 11.11.2014
+
+% 9.2.
+\begin{satz}
+  Sei $(M, g)$ eine Riem. Mft, $\nabla$ der Levi-Civita-Zusammenhang und $c : I \to M$ diff'bar. Dann gilt
+  \[ \fa{X, Y \in \chi_c} g(X, Y)' = g(\tfrac{D X}{\d t}, Y) + g(X, \tfrac{D Y}{\d t}). \]
+\end{satz}
+
+% §10. Parallelverschiebung
+
+\begin{defn}
+  Sei $\nabla$ ein Zusammenhang auf $M$. Dann heißt $X \in \chi_C$ \emph{parallel (längs $c$)}, wenn $\tfrac{D X}{\d t} = 0$.
+\end{defn}
+
+\begin{bem}
+  Sei $(U, \phi)$ eine Karte, $\tilde{I} \subset I$ mit $c(\tilde{I}) \subset U$.
+  %und $X = \sum_{k=1}^n \xi^k (\coord{k} \circ c)$
+  In lokalen Koordinaten lässt sich Parallelität ausdrücken durch
+  \[
+    (\xi^{k})' + \sum_{i,j=1}^n \dot{c}^i(t) \xi^j (t) \Gamma_{ij}^k(c(t)) = 0
+    \quad \text{für $k = 1, ..., n$ und alle $t \in \tilde{I}$.}
+  \]
+  Für die Funktionen $\xi^k$ ist das ein System linearer DGL mit nichtkonstanten Koeffizienten
+  \[
+    \begin{pmatrix}
+      \xi^1 \\
+      \vdots \\
+      \xi^n
+    \end{pmatrix}' = A(t) \cdot
+    \begin{pmatrix}
+      \xi^1 \\
+      \vdots \\
+      \xi_n
+    \end{pmatrix}
+  \]
+  Dieses System ist linear beschränkt, es folgt daher die Existenz von parallelen Vektorfeldern in Kartenumgebungen.
+\end{bem}
+
+% 10.1
+\begin{satz}
+  Sei $t_0 \in I = \ointerval{a}{b}$ und $v \in T_{c(t_0)} M$ vorgegeben. Dann gibt es genau ein VF $X \in \chi_X$ mit
+  \[
+    \tfrac{D X}{\d t} \equiv 0
+    \quad \text{und} \quad
+    X(t_0) = v.
+  \]
+\end{satz}
+
+\begin{defn}
+  Sei $ : \cinterval{a}{b} \to M$ diff'bar. Die Abbildung
+  \[
+    P_c : T_{c(a)} M \to T_{c(b)} M, \enspace v \mapsto X^{v}(b),
+    \enspace \text{wobei} \enspace \tfrac{D X^v}{\d t} \equiv 0 \text{ und } X^{v}(a) = v,
+  \]
+  heißt \emph{Parallelverschiebung} längs $c$ bzgl. $\nabla$.
+\end{defn}
+
+% 10.1 bis
+\begin{satz}
+  $P_c$ ist linear.
+\end{satz}
+
+% 10.2
+\begin{satz}
+  Ist $(M, g)$ Riem. Mft und $\nabla$ der LC-Zshg, dann gilt
+  \[ g_{c(b)}(P_c(v), P_c(w)) = g_{c(a)}(v, w). \]
+  Mit anderen Worten: $P_c$ ist eine lineare Isometrie.
+\end{satz}
+
+\begin{bem}
+  Wir können nun die Definition der Ableitung als Limes des Differenzenquotienten auf Mannigfaltigkeiten übertragen: Sei $v \in T_x M$, $X \in \chi(M)$ und $c : \ointerval{-\epsilon}{\epsilon} \to M$ mit $c(0) = x$ und $\dot{c}(0) = v$. Dann ist
+  \[ \nabla_v X = \lim_{t \to 0} \frac{P_{c(t)}^{-1}(X(c(t))) - X(c(0))}{t} \]
+\end{bem}
+
+\begin{bem}
+  Parallelverschiebung ist auch möglich und sinnvoll entlang stückweise glatter Kurven.
+\end{bem}
+
+\begin{defn}
+  Die \emph{Holonomiegruppe} von $M$ in $x \in M$ bzgl. $\nabla$ ist
+  \[ \mathrm{Hol}_x^\nabla \coloneqq \Set{ P_c : T_x M \to T_x M }{ \text{$c$ stückweise glatt mit $c(0) = c(1) = x$.} } \]
+  Dabei ist $P_{c} \circ P_{\tilde{c}} = P_{c \circ \tilde{c}}$ und $(P_c)^{-1} = P_{c^{-1}}$.
+\end{defn}
+
+\begin{bem}
+  $\mathrm{Hol}_x^\nabla$ ist sogar eine Lie-Gruppe und eine Untergruppe von $O(T_x M, g_x)$.
+\end{bem}
+
+% §11. Geodäten
+
+\begin{defn}
+  Eine glatte Kurve $c : I \to M$ heißt \emph{Geodäte} bzgl. $\nabla$, falls
+  \[
+    \frac{D^\nabla \dot{c}}{\d t} \equiv 0, \quad
+    \text{d.\,h. das Tangential-VF $\dot{c}$ ist parallel längs $c$.}
+  \]
+\end{defn}
+
+\begin{bem}
+  Sei $(U, \phi)$ eine Karte, $\tilde{I} \subset I$ mit $c(\tilde{I}) \subset U$.
+  In lokalen Koordinaten lässt sich diese Bedingung ausdrücken durch die \emph{Geodätengleichung}
+  \[
+    (\ddot{c}^{k})'(t) + \sum_{i,j=1}^n \dot{c}^i(t) \dot{c}^j(t) \Gamma_{ij}^k(c(t)) = 0
+    \quad \text{für $k = 1, ..., n$ und alle $t \in \tilde{I}$.}
+  \]
+\end{bem}
+
+% 11.1
+\begin{satz}
+  Zu jedem $p \in M$ und $v \in T_p M$ gibt es ein $\epsilon > 0$ und genau eine Geodäte $c : \ointerval{-\epsilon}{\epsilon} \to M$ mit $c(0) = p$ und $\dot{c}(0) = v$.
+\end{satz}
+
+% 11.2
+\begin{satz}
+  Seien $c_{1,2} : I_{1,2} \to M$ zwei Geodäten bzgl $\nabla$ mit $0 \in I_1 \cap I_2$. Falls $c_1(0) = c_2(0)$ und $\dot{c}_1(0) = \dot{c}_2(0)$, dann gilt $c_1|_{I_1 \cap I_2} \equiv c_1|_{I_1 \cap I_2}$.
+\end{satz}
+
+% 11.3
+\begin{satz}
+  Gegeben $p \in M$ und $v \in T_p M$, dann gibt es genau ein Intervall $I_v \opn \R$ mit $0 \in I_v$ und eine Geodäte
+  \[
+    c_v : I_v \to M
+    \quad \text{mit} \quad
+    c(0) = p, \enspace \dot{c}_v(0) = v,
+  \]
+  die maximal im folgenden Sinn ist: Für jede Geodäte $c : I \to M$ mit $\dot{c}(0) = v$ gilt: $I \subseteq I_v$ und $c = c_v|_I$.
+\end{satz}
+
+\begin{nota}
+  Für $v \in T_p M$ sei $c_v : I_v \to M$ die zugehörige maximale Geodäte.
+\end{nota}
+
+\begin{defn}
+  Ein Zusammenhang $\delta$ auf $M$ heißt \emph{vollständig}, wenn $I_v = \R$ für alle $v \in TM$.
+\end{defn}
+
+% §12. Die Exponentialabbildung
+
+% 12.1
+\begin{lem}[Spray-Eigenschaft]
+  Ist $v \in T_p M$, $c_v : I_v \to M$ die maximale Geodäte mit $\dot{c_v}(0) = v$.
+  Sei $\lambda \not= 0$, dann ist
+  \[
+    c_{\lambda v} : I_{\lambda v} \to M, \enspace
+    t \mapsto c_v(\lambda t) \quad \text{wobei} \quad
+    I_{\lambda v} \coloneqq \tfrac{1}{\lambda} I_v
+  \]
+  die maximale Geodäte mit $\dot{c_{\lambda v}}(0) = \lambda v$.
+\end{lem}
+
 \end{document}
