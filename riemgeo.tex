@@ -17,6 +17,7 @@
 \newcommand{\coord}[1]{\tfrac{\partial^\phi}{\partial x^{#1}}} % Standard-Koordinaten
 \newcommand{\Coord}[1]{\frac{\partial^\phi}{\partial x^{#1}}} % Standard-Koordinaten (größerer Bruch)
 \newcommand{\lie}[2]{\left[ {#1}, {#2} \right]} % Lie-Klammer
+\newcommand{\Exp}{\mathrm{Exp}} % Exponentialabbildung
 
 % Kleinere Klammern
 \delimiterfactor=701
@@ -472,10 +473,10 @@
 \begin{defn}
   Sei $\nabla$ ein Zusammenhang auf $M$. Dann heißt
   \[
-    T^\nabla(X, Y) \coloneqq \nabla_X Y - \nabla_Y X - [X, Y],
+    T^\nabla(X, Y) \coloneqq \nabla_X Y - \nabla_Y X - [X, Y]
     \qquad \text{\emph{Torsion} von $\nabla$.}
   \]
-  Wen $T^\nabla = 0$, dann heißt $\nabla$ \emph{torsionsfrei}.
+  Wenn $T^\nabla = 0$, dann heißt $\nabla$ \emph{torsionsfrei}.
 \end{defn}
 
 \begin{defn}
@@ -750,7 +751,7 @@
 \end{nota}
 
 \begin{defn}
-  Ein Zusammenhang $\delta$ auf $M$ heißt \emph{vollständig}, wenn $I_v = \R$ für alle $v \in TM$.
+  Ein Zusammenhang $\nabla$ auf $M$ heißt \emph{vollständig}, wenn $I_v = \R$ für alle $v \in TM$.
 \end{defn}
 
 % §12. Die Exponentialabbildung
@@ -766,5 +767,42 @@
   \]
   die maximale Geodäte mit $\dot{c_{\lambda v}}(0) = \lambda v$.
 \end{lem}
+
+% Vorlesung vom 18.11.2014
+
+\begin{defn}
+  Sei $M$ eine Mft mit Zshg $\nabla$ und $p \in M$. Dann heißt
+  \[
+    \Exp_p : \widetilde{T_p M} \to M, \enspace
+    v \mapsto c_v(1), \quad
+    \widetilde{T_p M} \coloneqq \Set{ v \in T_p M }{ 1 \in I_v }
+  \]
+  \emph{Exponentialabbildung} von $\nabla$ in $p$.
+\end{defn}
+
+% 12.2
+\begin{lem}
+  \begin{itemize}
+    \item $\widetilde{T_p M}$ ist sternförmig bzgl. $0$
+    \item $\fa{v \in \widetilde{T_p M}} \fa{t \in \cinterval{0}{1}} \Exp_p(tv) = c_v(t)$
+  \end{itemize}
+\end{lem}
+
+% 12.3 und 12.4.
+\begin{satz}
+  \begin{itemize}
+    \item Es gibt eine offene Umgebung $\hat{U} \opn T_p M$ mit $0 \in \hat{U} \subseteq \widetilde{T_p M}$, sodass $\Exp_p|_{\hat{U}} : \hat{U} \to M$ eine $\mathcal{C}^\infty$-Abbildung ist.
+    \item Wir können $\hat{U}$ so wählen, dass $\Exp_p|_{\hat{U}} : \hat{U} \to \Exp_p(\hat{U})$ ein Diffeomorphismus ist.
+  \end{itemize}
+\end{satz}
+
+\begin{bem}
+  Man kann zeigen:
+  \begin{itemize}
+    \item $\widetilde{T_p M} \opn T_p M$
+    \item $\Exp_p : \widetilde{T_p M} \to M$ ist überall $\mathcal{C}^\infty$, aber nicht überall ein lokaler Diffeomorphismus (Schnittpunkt-Phänomen)
+    \item Ist $(M, \nabla)$ geodätisch vollständig, dann gilt $\widetilde{T_p M} = T_p M$.
+  \end{itemize}
+\end{bem}
 
 \end{document}
