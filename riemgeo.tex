@@ -18,6 +18,7 @@
 \newcommand{\Coord}[1]{\frac{\partial^\phi}{\partial x^{#1}}} % Standard-Koordinaten (größerer Bruch)
 \newcommand{\lie}[2]{\left[ {#1}, {#2} \right]} % Lie-Klammer
 \newcommand{\Exp}{\mathrm{Exp}} % Exponentialabbildung
+\newcommand{\vinterval}{\ointerval{-\epsilon}{\epsilon}} % Variationsintervall
 
 % Kleinere Klammern
 \delimiterfactor=701
@@ -804,5 +805,113 @@
     \item Ist $(M, \nabla)$ geodätisch vollständig, dann gilt $\widetilde{T_p M} = T_p M$.
   \end{itemize}
 \end{bem}
+
+% Vorlesung vom 21.11.2014
+
+% §13. Erste Variationsformel
+
+\begin{defn}
+  Eine Kurve $c : I \to M$ heißt \emph{nach} / \emph{proportional zur BL parametrisiert}, wenn gilt:
+  \[
+    \norm{\dot{c}(t)} \equiv 1
+    \quad / \quad
+    \norm{\dot{c}(t)} \equiv \text{konst}.
+  \]
+\end{defn}
+
+\begin{bem}
+  \begin{itemize}
+    \item Jede Geodäte ist proportional zur BL parametrisiert.
+    \item Eine Kurve ist genau dann prop. zur BL parametrisiert, wenn es $\alpha \geq 0$ gibt mit $L(c|_{\cinterval{a}{b}}) = \alpha \cdot (b - a)$.
+  \end{itemize}
+\end{bem}
+
+\begin{defn}
+  Eine \emph{Variation} von $c : \cinterval{a}{b} \to M$ ist eine $\mathcal{C}^\infty$-Abbildung
+  \[
+    \vinterval \times \cinterval{a}{b} \to M, \quad
+    (s, t) \mapsto \alpha(s, t)
+    \quad \text{mit} \enspace
+    \fa{t \in \cinterval{a}{b}} \alpha(0, t) = c(t).
+  \]
+  Sie heißt \emph{Variation mit festen Endpunkten}, wenn zudem gilt:
+  \[
+    \fa{s \in \ointerval{-\epsilon}{\epsilon}}
+    \alpha(s, a) = c(a) \wedge \alpha(s, b) = c(b)
+  \]
+\end{defn}
+
+\begin{sprech}
+  $s$ heißt \emph{Variationsparameter}
+\end{sprech}
+
+\begin{defn}
+  Eine Variation einer stückweise glatten Kurve $c : \cinterval{a}{b} \to M$ (mit $c$ glatt auf den Teilintervallen $\cinterval{t_{i-1}}{t_i}$) ist eine stetige Abb.
+  \[
+    \alpha : \vinterval \times \cinterval{a}{b} \to M,
+    \enspace (s, t) \mapsto \alpha_s(t)
+    \quad \text{mit }
+    \alpha|_{\vinterval \times \cinterval{t_{i-1}}{t_i}} \text{ ist } \mathcal{C}^\infty.
+  \]
+\end{defn}
+
+\begin{nota}
+  \begin{itemize}
+    \item $\tfrac{\partial \alpha}{\partial s} (s_0, t_0)$ ist der Tang.-Vektor an $s {\mapsto} \alpha(s, t_0)$ in $s_0$.
+    \item $\tfrac{\partial \alpha}{\partial t} (s_0, t_0)$ ist der Tangentialvektor an $s \mapsto \alpha(s_0, t)$ in $t_0$.
+  \end{itemize}
+\end{nota}
+
+\begin{defn}
+  Eine Abbildung $X : \vinterval \times \cinterval{a}{b} \to TM$ mit $X(s, t) \in T_{\alpha(s, t)} M$ heißt \emph{Vektorfeld längs $\alpha$}, wenn $X$ differenzierbar (bzw. stückweise diff'bar) ist.
+\end{defn}
+
+\begin{nota}
+  Sei $X$ ein VF längs $\alpha(s, t)$. Dann
+  \begin{align*}
+    \tfrac{D X}{\partial s} (s_0, t_0) & \coloneqq \tfrac{D}{\d s} |_{s=s_0} (s \mapsto X(s, t_0)) \\
+    \tfrac{D X}{\partial t} (s_0, t_0) & \coloneqq \tfrac{D}{\d t} |_{t=t_0} (s \mapsto X(s_0, t))
+  \end{align*}
+\end{nota}
+
+% 13.1
+\begin{lem}
+  $\frac{D}{\partial s} \frac{\partial \alpha}{\partial t} = \frac{D}{\partial t} \frac{\partial \alpha}{\partial s}$
+\end{lem}
+
+% 13.2
+\begin{satz}[\emph{1. Variationsformel}]
+  Sei $\alpha : \vinterval \times \cinterval{a}{b} \to M$ eine $\mathcal{C}^\infty$-Variation von einer $\mathcal{C}^\infty$-Kurve $c = \alpha_0 : \cinterval{a}{b} \to M$. Sei $\norm{\dot{c}(t)} = \text{konst} \not= 0$. Dann gilt mit $X(t) \coloneqq \tfrac{\partial \alpha}{\partial s} (0, t)$ (\emph{Variationsvektorfeld}):
+  \[ \frac{\d}{\d s} |_{s=0} L(\alpha_s) = \tfrac{1}{\norm{\dot{c}(t)}} \left( g(X, \dot{c})|_a^b - \Int{a}{b}{g(X(\tau), \tfrac{D \dot{c}}{\d t})}{\tau} \right) \]
+\end{satz}
+
+% Satz 13.2bis
+
+\begin{satz}[1. Variationsformel für stückweise glattes $c$]
+  Sei $\alpha : \vinterval \times \cinterval{a}{b} \to M$ eine stückweise glatte Variation, glatt auf $\vinterval \times \cinterval{t_{i-1}}{t_i}$ mit $a = t_0 < ... < t_k = b$. Dann ist
+  \begin{align*}
+    \frac{\d \alpha_s}{\d s} |_{s=0} = & \frac{1}{\norm{\dot{c}}} \left( g(X, \dot{c})|_a^b + \sum_{i=1}^{k-1} g(X(t_i), \nabla_i \dot{c}) - \Int{a}{b}{g(X, \frac{D \dot{c}}{\d t})}{t} \right) \\
+    \text{mit } \nabla_i \dot{c} = \dot{c}(t_i^-) - \dot{c}(t_i^+)
+  \end{align*}
+\end{satz}
+
+\begin{nota}
+  $\dot{c}(t_i^+) = \lim_{t \downarrow t_i} \dot{c}(t)$, \enspace
+  $\dot{c}(t_i^-) = \lim_{t \uparrow t_i} \dot{c}(t)$
+\end{nota}
+
+% 13.3
+\begin{satz}
+  Zu jedem (stückweise) glatten $X \in \chi_c$ gibt es eine (stückweise) glatte Variation $\alpha$ von $c$ mit $X = \frac{\partial \alpha}{\partial s} (0, t)$. Wenn $X(a) = X(b) = 0$, so kann man $\alpha$ als Variation mit festen Endpunkten wählen.
+\end{satz}
+
+% 13.4
+\begin{satz}
+  Für eine stückweise glatte Kurve $c : \cinterval{a}{b} \to M$ mit $\norm{\dot{c}} = \text{konst}$ sind äquivalent:
+  \begin{itemize}
+    \item $c$ ist eine Geodäte
+    \item $\tfrac{\d}{\d s}|_{s=0} L(\alpha_s) = 0$ für jede stückweise glatte Variation $\alpha$ von $c$ mit festen Endpunkten.
+  \end{itemize}
+\end{satz}
 
 \end{document}
