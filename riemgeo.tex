@@ -881,9 +881,13 @@
 
 % 13.2
 \begin{satz}[\emph{1. Variationsformel}]
-  Sei $\alpha : \vinterval \times \cinterval{a}{b} \to M$ eine $\mathcal{C}^\infty$-Variation von einer $\mathcal{C}^\infty$-Kurve $c = \alpha_0 : \cinterval{a}{b} \to M$. Sei $\norm{\dot{c}(t)} = \text{konst} \not= 0$. Dann gilt mit $X(t) \coloneqq \tfrac{\partial \alpha}{\partial s} (0, t)$ (\emph{Variationsvektorfeld}):
-  \[ \frac{\d}{\d s} |_{s=0} L(\alpha_s) = \tfrac{1}{\norm{\dot{c}(t)}} \left( g(X, \dot{c})|_a^b - \Int{a}{b}{g(X(\tau), \tfrac{D \dot{c}}{\d t})}{\tau} \right) \]
+  Sei $\alpha : \vinterval \times \cinterval{a}{b} \to M$ eine $\mathcal{C}^\infty$-Variation von einer $\mathcal{C}^\infty$-Kurve $c = \alpha_0 : \cinterval{a}{b} \to M$. Sei $\norm{\dot{c}(t)} = \text{konst} \not= 0$. Dann gilt mit $X(t) \coloneqq \tfrac{\partial \alpha}{\partial s} (0, t)$
+  \[ \frac{\d}{\d s} |_{s=0} L(\alpha_s) = \frac{1}{\norm{\dot{c}}} \left( g(X, \dot{c})|_a^b - \Int{a}{b}{g(X(\tau), \tfrac{D \dot{c}}{\d t})}{\tau} \right) \]
 \end{satz}
+
+\begin{sprech}
+  $X(t) \coloneqq \tfrac{\partial \alpha}{\partial s} (0, t)$ heißt \emph{Variationsvektorfeld}
+\end{sprech}
 
 % Satz 13.2bis
 
@@ -891,7 +895,7 @@
   Sei $\alpha : \vinterval \times \cinterval{a}{b} \to M$ eine stückweise glatte Variation, glatt auf $\vinterval \times \cinterval{t_{i-1}}{t_i}$ mit $a = t_0 < ... < t_k = b$. Dann ist
   \begin{align*}
     \frac{\d \alpha_s}{\d s} |_{s=0} = & \frac{1}{\norm{\dot{c}}} \left( g(X, \dot{c})|_a^b + \sum_{i=1}^{k-1} g(X(t_i), \nabla_i \dot{c}) - \Int{a}{b}{g(X, \frac{D \dot{c}}{\d t})}{t} \right) \\
-    \text{mit } \nabla_i \dot{c} = \dot{c}(t_i^-) - \dot{c}(t_i^+)
+    & \text{mit } \nabla_i \dot{c} = \dot{c}(t_i^-) - \dot{c}(t_i^+)
   \end{align*}
 \end{satz}
 
@@ -902,7 +906,7 @@
 
 % 13.3
 \begin{satz}
-  Zu jedem (stückweise) glatten $X \in \chi_c$ gibt es eine (stückweise) glatte Variation $\alpha$ von $c$ mit $X = \frac{\partial \alpha}{\partial s} (0, t)$. Wenn $X(a) = X(b) = 0$, so kann man $\alpha$ als Variation mit festen Endpunkten wählen.
+  Zu jedem (stückweise) glatten $X \in \chi_c$ gibt es eine (stückweise) glatte Variation $\alpha$ von $c$ mit $X = \tfrac{\partial \alpha}{\partial s} (0, t)$. Wenn $X(a) = X(b) = 0$, so kann man $\alpha$ als Variation mit festen Endpunkten wählen.
 \end{satz}
 
 % 13.4
@@ -912,6 +916,52 @@
     \item $c$ ist eine Geodäte
     \item $\tfrac{\d}{\d s}|_{s=0} L(\alpha_s) = 0$ für jede stückweise glatte Variation $\alpha$ von $c$ mit festen Endpunkten.
   \end{itemize}
+\end{satz}
+
+% Vorlesung vom 28.11.2014
+
+\begin{kor}
+  Sei $c : \cinterval{a}{b} \to M$ stückweise glatt und kürzeste stückweise Verbindung ihrer Endpunkte (d.\,h. für alle $\tilde{c} : \cinterval{a}{b} \to M$ stückweise glatt mit $c(a) = \tilde{c}(a)$ und $c(b) = \tilde{c}(b)$ ist $L(c) \leq L(\tilde{c})$). Dann ist $c$ eine glatte Geodäte.
+\end{kor}
+
+\begin{acht}
+  Geodäten sind nicht global kürzeste Verbindungen, die Umkehrung gilt also nicht!
+\end{acht}
+
+\begin{nota}
+  $\Omega_{p,q} \coloneqq \Set{ c : \cinterval{0}{1} \to M }{ c(0) {=} p, c(1) {=} q, \text{$c$ stückw. glatt } }$
+\end{nota}
+
+\begin{bem}
+  Geodäten sind "`kritische Punkte"' von $L : \Omega_{p,q} \to \R$ unter der Nebenbedingung $\norm{\dot{c}} = \text{konst}$. Ersetzt man das Längenfunktional durch die Energie, so ist diese NB unnötig.
+\end{bem}
+
+% §14. Geodäten sind lokal kürzeste
+
+\begin{nota}
+  $S_\rho(0) = \Set{ x \in T_p M }{ \norm{x} = \rho }$
+\end{nota}
+
+% 14.1
+\begin{satz}[Gaußlemma] % 1827
+  Sei $(M, g)$ eine zshgde Riem. Mft, $\nabla = \nabla^{LC}$. Sei $p \in M$ und $\epsilon > 0$, sodass
+  \[ \Exp_p|_{B_{\epsilon}(0)} : B_{\epsilon}(0) \to \Exp_p(B_{\epsilon}(0)) \]
+  ein Diffeo ist. Dann schneiden die radialen Geodäten
+  \[ t \mapsto \Exp_p(tv) = v_v(t), \quad v \in T_p M \setminus \{ 0 \},  \]
+  die Hyperflächen $\Exp_p(S_\rho(0))$, $\rho \in \ointerval{0}{\epsilon}$ orthogonal.
+\end{satz}
+
+% 14.2
+\begin{satz}
+  Seien $p \in M$, $\epsilon > 0$, $\rho \in \cointerval{0}{\epsilon}$ wie eben. Dann ist
+  \[
+    c_v|_{\cinterval{0}{\delta}} : \cinterval{0}{\delta} \to M, \quad
+    t \mapsto c_v(t) = \Exp_p(t v) \qquad
+    (v \in T_p M, \norm{v} = 1)
+  \]
+  die kürzeste Verbindung ihrer Endpunkte, genauer: \\
+  Es gitl $\delta = L(c_v|_{\cinterval{0}{\delta}}) \leq L(\gamma)$ für jedes $\gamma : \cinterval{a}{b} \to M$ stückweise glatt mit $\gamma(a) = p$, $\gamma(b) = c_v(\delta)$.
+  Gleichheit gilt genau dann, wenn $\gamma(t) = c_v(r(t))$ mit $r : \cinterval{a}{b} \to \cinterval{0}{\delta}$ monoton wachsend.
 \end{satz}
 
 \end{document}
