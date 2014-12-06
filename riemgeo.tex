@@ -964,4 +964,43 @@
   Gleichheit gilt genau dann, wenn $\gamma(t) = c_v(r(t))$ mit $r : \cinterval{a}{b} \to \cinterval{0}{\delta}$ monoton wachsend.
 \end{satz}
 
+% Vorlesung vom 2.12.2014
+
+\begin{defn}
+  $i(p) \coloneqq \sup \Set{ \epsilon > 0 }{ \Exp_p|B_{\epsilon}(0) \text{ ist Diffeo aufs Bild } }$
+  heißt \emph{Injektivitätsradius} von $M$ in $p$.
+\end{defn}
+
+% 14.3
+\begin{satz}
+  Sei $M$ eine zshgde Riem. Mft.
+  \begin{itemize}
+    \item Ist $p \in M$, $\epsilon \in \ointerval{0}{i(p)}$, dann ist
+    \begin{align*}
+      \Exp_p(B_\epsilon(p)) & = B_\epsilon(p) \coloneqq \Set{q \in M}{d(p, q) < \epsilon},\\
+      \Exp_p(S_\epsilon(p)) & = S_\epsilon(p) \coloneqq \Set{q \in M}{d(p, q) = \epsilon}.
+    \end{align*}
+    \item $d : M \times M \to \R_{\geq 0}$ ist eine Metrik.
+    \item Die durch $d$ induzierte Topologie stimmt mit der gegebenen überein.
+  \end{itemize}
+\end{satz}
+
+% Vorlesung vom 5.12.2014
+
+% 15.1
+\begin{satz}[Hopf-Rinow 1]
+  Sei $M$ eine zshgde Riem. Mft, $p \in M$. Angenommen, alle Geodäten $\gamma$ auf $M$ mit $\gamma(0) = p$ sind auf ganz $\R$ definiert (m.a.W: $\Exp_p$ ist auf ganz $T_p M$ definiert). Dann gibt es für alle $q \in M$ eine kürzeste Geodäte von $p$ nach $q$.
+\end{satz}
+
+% 15.2
+\begin{satz}[Hopf-Rinow 2]
+  Für eine zusammenhängende Riemannsche Mannigfaltigkeit $M$ sind äquivalent:
+  \begin{itemize}
+    \item $M$ ist geodätisch vollständig.
+    \item $\fa{p \in M}$ $Exp_p$ ist auf ganz $T_p M$ definiert.
+    \item Jede beschränkte und abgeschlossene Teilmenge von $M$ ist kompakt.
+    \item $M$ ist eine vollständiger metrischer Raum.
+  \end{itemize}
+\end{satz}
+
 \end{document}
