@@ -246,21 +246,22 @@
 \end{lem}
 
 \begin{lem}
-  Seien $X, Y \in \chi(M)$ mit $\fa{f \in \mathcal{C}^\infty(M)} X(f) = Y(f)$. Dann gilt $X = Y$.
-\end{lem}
-
-\begin{lem}
-  Seien $X, Y \in \chi(M)$. Dann definiert
-  \[
-    Z : \mathcal{C}^\infty(M) \to \mathcal{C}^\infty(M), \enspace
-    f \mapsto X(Y(f)) - Y(X(f))
-  \]
-  ein Vektorfeld auf $M$.
+  Seien $X, Y \in \chi(M)$ mit $\fa{f \in \mathcal{C}^\infty(M)} X(f) = Y(f)$. Dann gilt $X \equiv Y$.
 \end{lem}
 
 \begin{defn}
-  Dieses Vektorfeld $[X, Y] \coloneqq Z$ wird als \emph{Kommutator} oder \emph{Lie-Klammer} von $X$ und $Y$ bezeichnet.
+  Seien $X, Y \in \chi(M)$. Dann heißt das Vektorfeld
+  \[
+    [X, Y] : \mathcal{C}^\infty(M) \to \mathcal{C}^\infty(M), \enspace
+    f \mapsto X(Y(f)) - Y(X(f))
+  \]
+  \emph{Kommutator} oder \emph{Lie-Klammer} von $X$ und $Y$.
 \end{defn}
+
+\begin{satz}
+  Für $X, Y_1, Y_2 \in \chi(M)$ und $f \in \mathcal{C}^\infty(M)$ gilt
+  \[ [X, Y_1 + f Y_2] = [X, Y_1] + X(f) \cdot Y_2 + f \cdot [X, Y_2]. \]
+\end{satz}
 
 % TODO: Dingsda-Identität nachrechnen?
 
@@ -282,7 +283,7 @@
 % §5. Lie-Algebren und Lie-Gruppen
 
 \begin{defn}
-  Ein Vektorraum $V$ mit einer bilinearen Abbildung $[\blank,\blank] : V \times V \to V, \enspace (v, w) \mapsto [v,w]$ heißt \emph{Lie-Algebra}, falls
+  Ein $\K$-Vektorraum $V$ mit einer $\K$-bilinearen Abbildung $[\blank,\blank] : V \times V \to V, \enspace (v, w) \mapsto [v,w]$ heißt \emph{Lie-Algebra}, falls
   \begin{itemize}
     \item die Abb. antisymmetrisch ist, d.\,h. $\fa{v, w \in V} [v, w] = - [w, v]$
     \item die \emph{Jacobi-Identität} erfüllt ist, d.\,h.
@@ -422,7 +423,7 @@
 \end{bsp}
 
 \begin{defn}
-  Eine diffbare Abbildung $f : M \to N$ zwischen diff'baren Mften heißt \emph{Immersion}, falls $f_{*p} : T_p M \to T_{f(p)} N$ für alle $p \in M$ injektiv ist.
+  Eine diffbare Abbildung $f : M \to N$ zwischen diff'baren Mften heißt \emph{Immersion}, falls $f_{*p} : T_p M \to T_{f(p)} N$ f.\,a. $p \in M$ injektiv ist.
 \end{defn}
 
 \begin{defn}
@@ -471,7 +472,7 @@
   \begin{itemize}
     \item $\nabla_{X_1 + f X_2} Y = \nabla_{X_1} Y + f \nabla_{X_2} Y$
     \item $\nabla_X (Y_1 + Y_2) = \nabla_X Y_1 + \nabla_X Y_2$
-    \item $\nabla_X (f Y) = f \left( \nabla_X Y \right) + (X(f)) \cdot Y$ (Leibniz-Regel)
+    \item $\nabla_X (f Y) = f \left( \nabla_X Y \right) + (X(f)) \cdot Y$ \enspace (Leibniz-Regel)
   \end{itemize}
 \end{defn}
 
@@ -481,7 +482,7 @@
     T^\nabla(X, Y) \coloneqq \nabla_X Y - \nabla_Y X - [X, Y]
     \qquad \text{\emph{Torsion} von $\nabla$.}
   \]
-  Wenn $T^\nabla = 0$, dann heißt $\nabla$ \emph{torsionsfrei}.
+  Wenn $T^\nabla \equiv 0$, dann heißt $\nabla$ \emph{torsionsfrei}.
 \end{defn}
 
 \begin{defn}
@@ -663,7 +664,8 @@
 
 % 10.1
 \begin{satz}
-  Sei $t_0 \in I = \ointerval{a}{b}$ und $v \in T_{c(t_0)} M$ vorgegeben. Dann gibt es genau ein VF $X \in \chi_X$ mit
+  Sei $t_0 \in I = \ointerval{a}{b}$ und $v \in T_{c(t_0)} M$ vorgegeben. \\
+  Dann gibt es genau ein VF $X \in \chi_X$ mit
   \[
     \tfrac{D X}{\d t} \equiv 0
     \quad \text{und} \quad
@@ -752,11 +754,11 @@
 \end{satz}
 
 \begin{nota}
-  Für $v \in T_p M$ sei $c_v : I_v \to M$ die zugehörige maximale Geodäte.
+  Für $v \in T_p M$ sei $c_v : I_v \to M$ die zugeh. max. Geodäte.
 \end{nota}
 
 \begin{defn}
-  Ein Zusammenhang $\nabla$ auf $M$ heißt \emph{vollständig}, wenn $I_v = \R$ für alle $v \in TM$.
+  Ein Zshg $\nabla$ auf $M$ heißt \emph{vollständig}, wenn $\fa{v \in TM} I_v {=} \R$.
 \end{defn}
 
 % §12. Die Exponentialabbildung
@@ -929,7 +931,7 @@
 \end{kor}
 
 \begin{acht}
-  Geodäten sind nicht global kürzeste Verbindungen, die Umkehrung gilt also nicht!
+  Geodäten sind i.\,A. nicht global kürzeste Verbindungen, die Umkehrung gilt also nicht!
 \end{acht}
 
 \begin{nota}
@@ -947,7 +949,7 @@
 \end{nota}
 
 % 14.1
-\begin{satz}[Gaußlemma] % 1827
+\begin{satz}[\emph{Gaußlemma}] % 1827
   Sei $(M, g)$ eine zshgde Riem. Mft, $\nabla = \nabla^{LC}$. Sei $p \in M$ und $\epsilon > 0$, sodass
   \[ \Exp_p|_{B_{\epsilon}(0)} : B_{\epsilon}(0) \to \Exp_p(B_{\epsilon}(0)) \]
   ein Diffeo ist. Dann schneiden die radialen Geodäten
@@ -1001,8 +1003,8 @@
   Für eine zusammenhängende Riemannsche Mannigfaltigkeit $M$ sind äquivalent:
   \begin{itemize}
     \item $M$ ist geodätisch vollständig.
-    \item $\fa{p \in M}$ $Exp_p$ ist auf ganz $T_p M$ definiert.
-    \item Jede beschränkte und abgeschlossene Teilmenge von $M$ ist kompakt.
+    \item $\fa{p \in M} \Exp_p$ ist auf ganz $T_p M$ definiert.
+    \item Beschränkte und abgeschlossene Teilmengen von $M$ sind kompakt.
     \item $M$ ist eine vollständiger metrischer Raum.
   \end{itemize}
 \end{satz}
@@ -1018,10 +1020,10 @@
 % §16. Krümmung
 
 \begin{defn}
-  Sei $\nabla$ ein Zshg auf $M$, dann heißt
+  Sei $\nabla$ ein Zusammenhang auf $M$, dann heißt
   \begin{align*}
-    R^{\nabla} = R : \chi(M) \times \chi(M) \times \chi(M) \to \chi(M) \\
-    (X, Y, Z) \mapsto R(X, Y)Z \coloneqq \nabla_X (\nabla_Y Z) - \nabla_Y (\nabla_X Z) - \nabla_{[X, Y]} Z
+    R^{\nabla} & = R : \chi(M) \times \chi(M) \times \chi(M) \to \chi(M) \\
+    (X, Y, Z) & \mapsto R(X, Y)Z \coloneqq \nabla_X (\nabla_Y Z) - \nabla_Y (\nabla_X Z) - \nabla_{[X, Y]} Z
   \end{align*}
   \emph{Krümmungstensor} von $\nabla$.
 \end{defn}
