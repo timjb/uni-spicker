@@ -19,6 +19,10 @@
 \newcommand{\lie}[2]{\left[ {#1}, {#2} \right]} % Lie-Klammer
 \newcommand{\Exp}{\mathrm{Exp}} % Exponentialabbildung
 \newcommand{\vinterval}{\ointerval{-\epsilon}{\epsilon}} % Variationsintervall
+\newcommand{\Span}{\mathrm{span}} % Spann
+\newcommand{\diam}{\mathrm{diam}} % Diameter
+\newcommand{\Ric}{\mathrm{Ric}} % Ricci-Tensor
+\newcommand{\abinterval}{\cinterval{a}{b}} % [a,b]
 
 % Kleinere Klammern
 \delimiterfactor=701
@@ -435,7 +439,7 @@
 \end{prop}
 
 \begin{defn}
-  Für $\gamma : \cinterval{a}{b} \to M$ stückweise $\mathcal{C}^1$ heißt
+  Für $\gamma : \abinterval \to M$ stückweise $\mathcal{C}^1$ heißt
   \[
     L(\gamma) \coloneqq \Int{a}{b}{\norm{\dot{\gamma}(\tau)}}{\tau}
     \quad \text{\emph{Länge} von $\gamma$.}
@@ -446,7 +450,7 @@
   Sei $(M, g)$ eine Riemannsche Mft. Dann ist der \emph{Riemannsche Abstand} gegeben durch die Metrik
   \begin{align*}
     d_g : M \times M \to \R, \quad
-    (p, q) \mapsto \inf \{\, L(\gamma) \,\,|\,\, & \gamma : \cinterval{a}{b} \to M \text{ stückweise } \mathcal{C}^{1}\\
+    (p, q) \mapsto \inf \{\, L(\gamma) \,\,|\,\, & \gamma : \abinterval \to M \text{ stückweise } \mathcal{C}^{1}\\
     & \left. \text{mit $\gamma(a) = p$ und $\gamma(b) = q$} \, \right\}.
   \end{align*}
 \end{defn}
@@ -668,7 +672,7 @@
 \end{satz}
 
 \begin{defn}
-  Sei $ : \cinterval{a}{b} \to M$ diff'bar. Die Abbildung
+  Sei $ : \abinterval \to M$ diff'bar. Die Abbildung
   \[
     P_c : T_{c(a)} M \to T_{c(b)} M, \enspace v \mapsto X^{v}(b),
     \enspace \text{wobei} \enspace \tfrac{D X^v}{\d t} \equiv 0 \text{ und } X^{v}(a) = v,
@@ -822,17 +826,17 @@
 \begin{bem}
   \begin{itemize}
     \item Jede Geodäte ist proportional zur BL parametrisiert.
-    \item Eine Kurve ist genau dann prop. zur BL parametrisiert, wenn es $\alpha \geq 0$ gibt mit $L(c|_{\cinterval{a}{b}}) = \alpha \cdot (b - a)$.
+    \item Eine Kurve ist genau dann prop. zur BL parametrisiert, wenn es $\alpha \geq 0$ gibt mit $L(c|_{\abinterval}) = \alpha \cdot (b - a)$.
   \end{itemize}
 \end{bem}
 
 \begin{defn}
-  Eine \emph{Variation} von $c : \cinterval{a}{b} \to M$ ist eine $\mathcal{C}^\infty$-Abbildung
+  Eine \emph{Variation} von $c : \abinterval \to M$ ist eine $\mathcal{C}^\infty$-Abbildung
   \[
-    \vinterval \times \cinterval{a}{b} \to M, \quad
+    \vinterval \times \abinterval \to M, \quad
     (s, t) \mapsto \alpha(s, t)
     \quad \text{mit} \enspace
-    \fa{t \in \cinterval{a}{b}} \alpha(0, t) = c(t).
+    \fa{t \in \abinterval} \alpha(0, t) = c(t).
   \]
   Sie heißt \emph{Variation mit festen Endpunkten}, wenn zudem gilt:
   \[
@@ -846,9 +850,9 @@
 \end{sprech}
 
 \begin{defn}
-  Eine Variation einer stückweise glatten Kurve $c : \cinterval{a}{b} \to M$ (mit $c$ glatt auf den Teilintervallen $\cinterval{t_{i-1}}{t_i}$) ist eine stetige Abb.
+  Eine Variation einer stückweise glatten Kurve $c : \abinterval \to M$ (mit $c$ glatt auf den Teilintervallen $\cinterval{t_{i-1}}{t_i}$) ist eine stetige Abb.
   \[
-    \alpha : \vinterval \times \cinterval{a}{b} \to M,
+    \alpha : \vinterval \times \abinterval \to M,
     \enspace (s, t) \mapsto \alpha_s(t)
     \quad \text{mit }
     \alpha|_{\vinterval \times \cinterval{t_{i-1}}{t_i}} \text{ ist } \mathcal{C}^\infty.
@@ -863,7 +867,7 @@
 \end{nota}
 
 \begin{defn}
-  Eine Abbildung $X : \vinterval \times \cinterval{a}{b} \to TM$ mit $X(s, t) \in T_{\alpha(s, t)} M$ heißt \emph{Vektorfeld längs $\alpha$}, wenn $X$ differenzierbar (bzw. stückweise diff'bar) ist.
+  Eine Abbildung $X : \vinterval \times \abinterval \to TM$ mit $X(s, t) \in T_{\alpha(s, t)} M$ heißt \emph{Vektorfeld längs $\alpha$}, wenn $X$ differenzierbar (bzw. stückweise diff'bar) ist.
 \end{defn}
 
 \begin{nota}
@@ -881,18 +885,18 @@
 
 % 13.2
 \begin{satz}[\emph{1. Variationsformel}]
-  Sei $\alpha : \vinterval \times \cinterval{a}{b} \to M$ eine $\mathcal{C}^\infty$-Variation von einer $\mathcal{C}^\infty$-Kurve $c = \alpha_0 : \cinterval{a}{b} \to M$. Sei $\norm{\dot{c}(t)} = \text{konst} \not= 0$. Dann gilt mit $X(t) \coloneqq \tfrac{\partial \alpha}{\partial s} (0, t)$
+  Sei $\alpha : \vinterval \times \abinterval \to M$ eine $\mathcal{C}^\infty$-Variation von einer $\mathcal{C}^\infty$-Kurve $c = \alpha_0 : \abinterval \to M$. Sei $\norm{\dot{c}(t)} = \text{konst} \not= 0$. Dann gilt mit $X(t) \coloneqq \tfrac{\partial \alpha}{\partial s} (0, t)$
   \[ \frac{\d}{\d s} |_{s=0} L(\alpha_s) = \frac{1}{\norm{\dot{c}}} \left( g(X, \dot{c})|_a^b - \Int{a}{b}{g(X(\tau), \tfrac{D \dot{c}}{\d t})}{\tau} \right) \]
 \end{satz}
 
 \begin{sprech}
-  $X(t) \coloneqq \tfrac{\partial \alpha}{\partial s} (0, t)$ heißt \emph{Variationsvektorfeld}
+  $X(t) \coloneqq \tfrac{\partial \alpha}{\partial s} (0, t)$ heißt \emph{Variationsvektorfeld} (VVF).
 \end{sprech}
 
 % Satz 13.2bis
 
-\begin{satz}[1. Variationsformel für stückweise glattes $c$]
-  Sei $\alpha : \vinterval \times \cinterval{a}{b} \to M$ eine stückweise glatte Variation, glatt auf $\vinterval \times \cinterval{t_{i-1}}{t_i}$ mit $a = t_0 < ... < t_k = b$. Dann ist
+\begin{satz}[\emph{1. Variationsformel} für stückweise glattes $c$]
+  Sei $\alpha : \vinterval \times \abinterval \to M$ eine stückweise glatte Variation, glatt auf $\vinterval \times \cinterval{t_{i-1}}{t_i}$ mit $a = t_0 < ... < t_k = b$. Dann ist
   \begin{align*}
     \frac{\d \alpha_s}{\d s} |_{s=0} = & \frac{1}{\norm{\dot{c}}} \left( g(X, \dot{c})|_a^b + \sum_{i=1}^{k-1} g(X(t_i), \nabla_i \dot{c}) - \Int{a}{b}{g(X, \frac{D \dot{c}}{\d t})}{t} \right) \\
     & \text{mit } \nabla_i \dot{c} = \dot{c}(t_i^-) - \dot{c}(t_i^+)
@@ -911,7 +915,7 @@
 
 % 13.4
 \begin{satz}
-  Für eine stückweise glatte Kurve $c : \cinterval{a}{b} \to M$ mit $\norm{\dot{c}} = \text{konst}$ sind äquivalent:
+  Für eine stückweise glatte Kurve $c : \abinterval \to M$ mit $\norm{\dot{c}} = \text{konst}$ sind äquivalent:
   \begin{itemize}
     \item $c$ ist eine Geodäte
     \item $\tfrac{\d}{\d s}|_{s=0} L(\alpha_s) = 0$ für jede stückweise glatte Variation $\alpha$ von $c$ mit festen Endpunkten.
@@ -921,7 +925,7 @@
 % Vorlesung vom 28.11.2014
 
 \begin{kor}
-  Sei $c : \cinterval{a}{b} \to M$ stückweise glatt und kürzeste stückweise Verbindung ihrer Endpunkte (d.\,h. für alle $\tilde{c} : \cinterval{a}{b} \to M$ stückweise glatt mit $c(a) = \tilde{c}(a)$ und $c(b) = \tilde{c}(b)$ ist $L(c) \leq L(\tilde{c})$). Dann ist $c$ eine glatte Geodäte.
+  Sei $c : \abinterval \to M$ stückweise glatt und kürzeste stückweise Verbindung ihrer Endpunkte (d.\,h. für alle $\tilde{c} : \abinterval \to M$ stückweise glatt mit $c(a) = \tilde{c}(a)$ und $c(b) = \tilde{c}(b)$ ist $L(c) \leq L(\tilde{c})$). Dann ist $c$ eine glatte Geodäte.
 \end{kor}
 
 \begin{acht}
@@ -960,8 +964,8 @@
     (v \in T_p M, \norm{v} = 1)
   \]
   die kürzeste Verbindung ihrer Endpunkte, genauer: \\
-  Es gitl $\delta = L(c_v|_{\cinterval{0}{\delta}}) \leq L(\gamma)$ für jedes $\gamma : \cinterval{a}{b} \to M$ stückweise glatt mit $\gamma(a) = p$, $\gamma(b) = c_v(\delta)$.
-  Gleichheit gilt genau dann, wenn $\gamma(t) = c_v(r(t))$ mit $r : \cinterval{a}{b} \to \cinterval{0}{\delta}$ monoton wachsend.
+  Es gitl $\delta = L(c_v|_{\cinterval{0}{\delta}}) \leq L(\gamma)$ für jedes $\gamma : \abinterval \to M$ stückweise glatt mit $\gamma(a) = p$, $\gamma(b) = c_v(\delta)$.
+  Gleichheit gilt genau dann, wenn $\gamma(t) = c_v(r(t))$ mit $r : \abinterval \to \cinterval{0}{\delta}$ monoton wachsend.
 \end{satz}
 
 % Vorlesung vom 2.12.2014
@@ -988,12 +992,12 @@
 % Vorlesung vom 5.12.2014
 
 % 15.1
-\begin{satz}[Hopf-Rinow 1]
+\begin{satz}[\emph{Hopf-Rinow} 1]
   Sei $M$ eine zshgde Riem. Mft, $p \in M$. Angenommen, alle Geodäten $\gamma$ auf $M$ mit $\gamma(0) = p$ sind auf ganz $\R$ definiert (m.a.W: $\Exp_p$ ist auf ganz $T_p M$ definiert). Dann gibt es für alle $q \in M$ eine kürzeste Geodäte von $p$ nach $q$.
 \end{satz}
 
 % 15.2
-\begin{satz}[Hopf-Rinow 2]
+\begin{satz}[\emph{Hopf-Rinow} 2]
   Für eine zusammenhängende Riemannsche Mannigfaltigkeit $M$ sind äquivalent:
   \begin{itemize}
     \item $M$ ist geodätisch vollständig.
@@ -1010,5 +1014,232 @@
 \begin{kor}
   Unter-Mften des $\R^n$ sind geodätisch vollständig.
 \end{kor}
+
+% §16. Krümmung
+
+\begin{defn}
+  Sei $\nabla$ ein Zshg auf $M$, dann heißt
+  \begin{align*}
+    R^{\nabla} = R : \chi(M) \times \chi(M) \times \chi(M) \to \chi(M) \\
+    (X, Y, Z) \mapsto R(X, Y)Z \coloneqq \nabla_X (\nabla_Y Z) - \nabla_Y (\nabla_X Z) - \nabla_{[X, Y]} Z
+  \end{align*}
+  \emph{Krümmungstensor} von $\nabla$.
+\end{defn}
+
+\begin{bem}
+  $R^\nabla$ ist ein (1,3)-Tensor.
+\end{bem}
+
+\begin{nota}
+  $R(u, v)w \coloneqq (R(X, Y)Z)(p)$, wobei $X, Y, Z \in \chi(M)$ mit $X(p) = u$, $Y(p) = u$, $Z(p) = w$.
+\end{nota}
+
+% 16.1
+\begin{satz}
+  Es gilt für $X,Y,Z,W \in \chi(M)$:
+  \begin{itemize}
+    \item $- R(X, Y)Z = R(Y, X)Z$
+    \item Ist $\nabla$ torsionsfrei, dann gilt die \\
+    \emph{1. Bianchi-Identität} / \emph{Jacobi-Identität}:
+    \[ R(X,Y)Z + R(Z,X)Y + R(Y,Z)X = 0. \]
+    \item Ist $(M, g)$ Riemannsch und $\nabla$ metrisch, dann gilt
+    \[ g(R(X,Y)Z, W) = -g(R(X,Y)W, Z). \]
+    \item Ist $\nabla$ der LC-Zshg von $(M, g)$ Riemannsch, dann ist
+    \[ g(R(X, Y)Z, W) = g(R(Z,W)X,Y). \]
+  \end{itemize}
+\end{satz}
+
+% Übung: Durch Polarisation genügt es, $\fa{X,Y \in \chi(M)} g(R(X,Y)X, Y)$ zu kennen
+
+\begin{defn}
+  Sei $p \in M$, $\sigma = \Span(v,w) \in T_p M$ ein 2-dim UVR. Dann heißt
+  \[ \sec(\sigma) = \kappa(\sigma) \coloneqq \frac{g(R(v,w)w,v)}{\norm{v}^2 \cdot \norm{w}^2 - g(v,w)^2} \]
+  \emph{Riemannsche Schnittkrümmung} von $\sigma$.
+\end{defn}
+
+% 16.2
+\begin{lem}
+  $\sec(\sigma)$ ist unabhängig von der Basiswahl.
+\end{lem}
+
+% §17. 2. Variation der Länge
+
+% 17.1
+\begin{satz}
+  Sei $\alpha : \vinterval \times \abinterval \to M$ eine glatte Variation einer Kurve $\alpha_0 : \abinterval \to M, t \mapsto \alpha(0, t)$.
+  Sei $X : \ointerval{-\epsilon,\epsilon} \times \abinterval \to TM$ ein VF längs $\alpha$. Dann gilt:
+  \[
+    \frac{D}{\partial s} \frac{DX}{\partial t} - \frac{D}{\partial t} \frac{DX}{\partial s} = R\left(\frac{\partial \alpha}{\partial s}, \frac{\partial \alpha}{\partial t}\right) X
+  \]
+\end{satz}
+
+% 17.2
+\begin{satz}[\emph{2. Variationsformel} für die Länge]
+  Sei $c: \abinterval \to M$ eine Geodäte, $\alpha : \vinterval \times \abinterval \to M$ eine glatte Variation von $c$ mit festen Endpunkten, $X(t) \coloneqq \tfrac{\partial \alpha}{\partial s}(0, t) \in \chi_c$ das VVF mit $X^\perp \coloneqq X - g(X, \tfrac{\dot{c}}{\norm{\dot{c}}}) \tfrac{\dot{c}}{\norm{\dot{c}}}$ senkrechtem Anteil zu $\dot{c}$. Dann gilt
+  \[
+    \frac{\d^2}{\d s^2} |_{s=0} L(\alpha_s) = \tfrac{1}{\norm{\dot{c}}} \Int{a}{b}{\norm{\tfrac{D X^\perp}{\d t}}^2 - g(R(X,\dot{c})\dot{c},X)}{t}.
+  \]
+\end{satz}
+
+% §18. Satz von Myers
+
+\begin{defn}
+  Der \emph{Durchmesser} einer Riemannschen Mft $(M, g)$ ist
+  \[ \diam(M) \coloneqq \sup \Set{d(p,q)}{ p,q \in M }. \]
+\end{defn}
+
+% 18.1
+\begin{satz}[\emph{Myers} 1935]
+  Sei $M$ eine vollständige zshgde Riem Mft mit $\sec \geq \delta > 0$. Dann ist $M$ kompakt mit Durchmesser $\diam(M) \leq \tfrac{\pi}{\delta}$.
+\end{satz}
+
+\begin{bem}
+  Das Bsp der Sphären zeigt: Die Schranke ist optimal.
+\end{bem}
+
+% 18.2
+\begin{kor}
+  Sei $M$ eine vollständige zshge Mft, $\dim(M) \geq 2$ mit $\sec \geq \delta > 0$. Dann ist $\pi_1(M)$ endlich.
+\end{kor}
+
+\begin{defn}
+  Sei $p \in M$, $v \in T_p M$ mit $\norm{v} = 1$, $v = e_1, e_2, ..., e_n$ eine ONB von $T_p M$. Die \emph{Ricci-Krümmung} von $M$ in Richtung $v$ ist dann
+  \[ \Ric(v) \coloneqq \sum_{j=2}^n \sec(\Span(v, e_j)). \]
+\end{defn}
+
+\begin{bem}
+  $\Ric(v)$ ist unabhängig von der Wahl der ONB:
+  \begin{align*}
+    \Ric(v) & = \sum_{j=2}^n \sec(v,e_j) = \sum_{j=2}^n g(R(e_j,v)v, e_j) =\\
+    & = \sum_{j=1}^n g(R(e_j,v)v, e_j) = \spur(x \mapsto R(x,v)v)
+  \end{align*}
+\end{bem}
+
+\begin{defn}
+  $\Ric_p : T_p M \times T_p M \to \R, \enspace (v,w) \mapsto \spur(x \mapsto R(x,v)w)$\\
+  heißt \emph{Ricci-Tensor}.
+\end{defn}
+
+\begin{bem}
+  Der Ricci-Tensor ist ein (2,0)-Tensor und es gilt: $\Ric_p(v,w) = \Ric_p(w,v)$ und $\Ric(v) = \Ric(v,v)$.
+\end{bem}
+
+\begin{defn}
+  $(M, g)$ heißt \emph{Einstein-Mft}, wenn die Ricci-Krümmung konstant ist, d.\,h.
+  \[ \fa{p \in M} \fa{x,y \in T_p M} \Ric(x,y) = c \cdot g(x,y) \]
+\end{defn}
+
+\begin{beob}
+  \begin{itemize}
+    \item $\sec \geq \delta \implies \Ric(v) \geq (n{-}1) \delta$
+    \item Mften mit konstanter Schnittkrümmung sind Einstein.
+  \end{itemize}
+\end{beob}
+
+% 18.3
+\begin{satz}[\emph{Myers}]
+  Sei $(M, g)$ eine vollständige zshgde Riem Mft mit $\Ric \geq (n{-}1)\delta$, dann ist $M$ kompakt mit Durchmesser $\diam(M) \leq \tfrac{\pi}{\sqrt{\delta}}$
+\end{satz}
+
+% §19. Jacobi-Felder
+
+\begin{defn}
+  Sei $(M, g)$ eine Riem Mft, $c : I \to M$ glatt, $Y \in \chi_c$ heißt \emph{Jacobi-Feld}, wenn die \emph{Jacobi-Gleichung} gilt:
+  \[
+    Y'' + R(Y, \dot{c}) \dot{c} = 0 \quad
+    \left( Y'' \coloneqq \tfrac{D}{\d t} \left( \tfrac{D Y}{\d t} \right) \right).
+  \]
+\end{defn}
+
+\begin{bem}
+  Die Jacobi-Gleichung ist linear in $Y$, somit ist $\Set{ X \in \chi_c }{ X \text{ ist ein Jacobi-Feld} }$ ein UVR von $\chi_c$.
+\end{bem}
+
+% 19.1
+\begin{satz}
+  Sei $c : \abinterval \to M$ eine Geodäte, $\alpha : \vinterval \times \abinterval \to M$ eine glatte Variation von $c = \alpha_0$ durch Geodäten (d.\,h. $\alpha_s$ ist Geodäte für alle $s \in \vinterval$). Dann ist das VVF $X = \tfrac{\partial \alpha}{\partial s}(0,t)$ ein Jacobi-Feld.
+\end{satz}
+
+% 19.2
+\begin{satz}
+  Sei $c_0 : I \to M$ eine Kurve, $t_0 \in I$. Dann gibt es für alle $v, w \in T_{c(t_0)}$ genau ein Jacobi-Feld $Y \in \chi_c$ mit
+  \[
+    Y(t_0) = v
+    \quad \text{und} \quad
+    Y'(t_0) = w.
+  \]
+\end{satz}
+
+% 19.3
+\begin{satz}
+  Sei $v \in T_p M$, $w \in Tp M \cong T_v \left( T_p M \right)$. Dann gilt $(\Exp_p)_{*v}(w) = Y(1)$, wobei $Y \in \chi_c$ ein Jacobi-Feld längs $c_v(t) = \Exp_p(tv)$ mit $Y(0) = 0$ und $Y'(0) = w$.
+\end{satz}
+
+% Vorlesung vom 9.1.2015
+
+% §20. Satz von Hadamard-Cartan
+
+% 20.1
+\begin{satz}
+  Sei $Y$ ein Jacobifeld längs Geodäten $c$ in $(M, g)$. Wenn $\sec \leq 0$, dann gilt
+  \begin{itemize}
+    \item $(t \mapsto \norm{Y(t)}^2)$ ist konvex.
+    \item Wenn $Y$ zwei verschiedene Nullstellen hat, dann $Y \equiv 0$.
+    \item Es gibt keine konjugierten Punkte längs $c$.
+  \end{itemize}
+\end{satz}
+
+% 20.2
+\begin{kor}
+  Falls $(M, g)$ vollständig mit $\sec \leq 0$, dann ist $\Exp_p$ für alle $p$ ein lokaler Diffeomorphismus, d.\,h.
+  \[
+    \fa{v \in M} \ex{U_v \opn T_p M} \Exp_p |_{U_v} : U_v \to \Exp_p(U_v)
+    \enspace \text{ist Diffeo.}
+  \]
+\end{kor}
+
+% 20.3
+\begin{satz}
+  Sei $X$ wegzshgd, $Y$ einfach zshgd, $\pi : X \to Y$ eine Überlagerung. Dann ist $\pi$ ein Homöomorphismus.
+\end{satz}
+
+\begin{defn}
+  Eine Abbildung $\pi : (M_1, g_1) \to (M_2, g_2)$ zwischen Riemannsche Mften heißt \emph{Riemannsche Überlagerung}, wenn gilt:
+  \begin{itemize}
+    \miniitem{0.66 \linewidth}{$\pi$ ist eine topologische Überlagerung}
+    \miniitem{0.27 \linewidth}{$\pi$ ist diffbar}
+    \item $\pi_{*p} : T_p M_1 \to T_{\pi(p)} M_2$ ist eine orthogonale Abb f.\,a. $p \in M_1$.
+  \end{itemize}
+\end{defn}
+
+% 20.4
+\begin{satz}
+  Sei $\pi : (M_1, g_1) \to (M_2, g_2)$ eine surjektive lokale Isometrie zw. Riem Mften. Wenn $M_1$ vollständig ist, dann ist $\pi$ eine Überlagerung.
+\end{satz}
+
+% 20.5
+\begin{satz}[\emph{Cartan-Hadamard}]
+  Sei $(M, g)$ eine vollständige, zshgde Riem Mft mit Schnittkrümmung $\sec \leq 0$, $p \in M$. Dann ist $\Exp_p : T_p M \to M$ eine Überlagerung.
+\end{satz}
+
+% Vorlesung vom 13.1.2015
+
+% 20.6
+\begin{kor}
+  Falls $(M^n, g)$ zusätzlich einfach zshgd ist, dann gilt $M \cong \R^n$.
+  Je zwei Punkte in $M$ lassen sich durch genau eine nach BL param. Geodäte verbinden (bis auf Umkehrung, Parametershift).
+\end{kor}
+
+% §21. Satz von Synge
+
+% 21.1
+\begin{satz}[\emph{Synge} 1936]
+  Jede zshgde kompakte orientierte Riem Mft gerader Dimension mit $\sec > 0$ ist einfach zshgd.
+\end{satz}
+
+% 21.2
+\begin{satz}[\emph{Weinstein} 1968, \emph{Synge} 1936]
+  Sei $M^n$ kompakte, zshgde, orientierte Riem Mft, $\sec > 0$, $n$ gerade. Sei $f : M^n \to M^n$ eine orientierungstreue Isometrie. Dann hat $f$ einen Fixpunkt.
+\end{satz}
 
 \end{document}
