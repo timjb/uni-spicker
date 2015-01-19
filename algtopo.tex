@@ -1,0 +1,94 @@
+\documentclass{cheat-sheet}
+
+\pdfinfo{
+  /Title (Zusammenfassung Algebraische Topologie)
+  /Author (Tim Baumann)
+}
+
+\usepackage{tikz}
+\usetikzlibrary{matrix,shapes,arrows,positioning}
+
+\newcommand{\Tau}{\mathcal{T}} % Großes Tau
+%\newcommand{\inte}{\mathop{\mathrm{int}}} % Inneres (interior)
+%\newcommand{\conv}{\mathop{\mathrm{conv}}} % Konvexe Hülle
+%\newcommand{\rel}{\text{ rel }} % = relativ (Homotopie)
+%\newcommand{\Ob}{\mathrm{Ob}} % Objects (of a category)
+%\newcommand{\Hom}{\mathrm{Hom}} % Homomorphisms
+%\newcommand{\Aut}{\mathrm{Aut}} % Automorphisms
+%\newcommand{\Mor}{\mathrm{Mor}} % Morphisms
+%\newcommand{\dom}{\mathrm{dom}} % Domain
+%\newcommand{\codom}{\mathrm{codom}} % Codomain
+%\newcommand{\op}{\text{op}} % Duale Kategorie
+%\newcommand{\Deck}{\mathrm{Deck}} % Gruppe der Decktransformationen
+
+\newcommand{\angles}[1]{\langle #1 \rangle}
+\newcommand{\Simpl}{\mathcal{S}} % Simplizialkomplex
+\newcommand{\Real}[1]{\abs{#1}} % geometrische Realisierung
+
+% Kleinere Klammern
+\delimiterfactor=701
+
+
+\begin{document}
+
+\maketitle{Zusammenfassung Algebr. Topologie}
+
+% Vorlesung vom 8.10.2014
+
+% TODO: Definition $C_n$
+
+%\[ \partial \angles{p_0, ..., p_n} \coloneqq \sum_{i=0}^n (-1)^{i} \angles{p_0, ..., \hat{p_i}, ..., p_n} \]
+%\[ \partial_n : C_n \to C_{n-1} \]
+%\[ Z_n(S) \coloneqq \ker \partial_n \subset C_n(S) \]
+%\[ B_n(S) \coloneqq \im \partial_{n+1} \subset C_n(S) \]
+
+
+% §2. Simpliziale und singuläre Homologie
+
+\begin{defn}
+  Ein \emph{affines $n$-Simplex} ist die konvexe Hülle von $n+1$ affin unabhängigen Punkten $p_0, ..., p_{n+1} \in \R^N$. Die konvexe Hülle von einer Teilmenge dieser Eckpunkte wird \emph{Seite} genannt.
+\end{defn}
+
+\begin{defn}
+  Ein (endlicher) \emph{geometrischer Simplizialkomplex} ist eine (endliche) Menge $\mathcal{S}$ endlich vieler affiner Simplizes im $\R^N$, sodass:
+  \begin{itemize}
+    \item Ist $K \in \Simpl$ und $T \subset K$ eine Seite von $K$, dann ist auch $T \in \Simpl$.
+    \item Für alle $K_1, K_2 \in \Simpl$ ist $K_1 \cap K_2$ entweder eine Seite von $K_1$ und $K_2$ oder leer.
+  \end{itemize}
+\end{defn}
+
+\begin{defn}|
+  Die $\Real{S} \coloneqq \bigcup_{K \in \Simpl} K$ heißt zu $\Simpl$ gehörender \emph{Polyeder} und $\Simpl$ Triangulierung von $\Real{\Simpl}$.
+\end{defn}
+
+\begin{defn}
+  Ein geometrischer Simplizialkomplex mit einer Totalordnung auf der Menge der Eckpunkte heißt \emph{geordnet}.
+\end{defn}
+
+\begin{nota}
+  Ein $n$-Simplex mit Eckpunkten $v_0, ..., v_n$ in einem geordneten geom. Simplizialkomplex wird mit $\angles{v_0, ..., v_n}$ bezeichnet, falls $v_0 < v_1 < ... < v_n$.
+\end{nota}
+
+\begin{nota}
+  $\Simpl_n \coloneqq \Set{\sigma \in \Simpl}{\text{$\sigma$ ist geordneter $n$-Simplex}}$
+\end{nota}
+
+\begin{defn}
+  Eine \emph{simpliziale $n$-Kette} in einem geordneten geom. Simplizialkomplex ist eine endliche formale Linearkombination
+  \[ \sum_{\sigma \in \Simpl_n} \lambda_\sigma \cdot \sigma, \]
+  wobei $\lambda_\sigma \in \Z$. Die Menge solcher Linearkombinationen ist $C_n(\Simpl)$.
+\end{defn}
+
+\begin{bem}
+  $C_n(\Simpl)$ ist eine Gruppe.
+\end{bem}
+
+\begin{defn}
+  Der Rand eines orientierten $n$-Simplex $\angles{v_0, ..., v_n} \in \Simpl$ ist
+  \[ \delta \angles{v_0, ..., v_n} \coloneqq \sum_{i=0}^n (-1)^i \angles{v_0, ..., \hat{v_i}, ..., v_n}. \]
+  Durch lineare Fortsetzung erhalten wir einen Gruppenhomo $\delta_n : C_n(\Simpl) \to C_{n-1}(\Simpl)$.
+\end{defn}
+
+% Vorlesung vom 8.10.2014
+
+\end{document}
