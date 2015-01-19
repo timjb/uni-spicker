@@ -23,6 +23,7 @@
 \newcommand{\diam}{\mathrm{diam}} % Diameter
 \newcommand{\Ric}{\mathrm{Ric}} % Ricci-Tensor
 \newcommand{\abinterval}{\cinterval{a}{b}} % [a,b]
+\newcommand{\Iso}{\mathrm{Iso}} % Isometriegruppe
 
 % Kleinere Klammern
 \delimiterfactor=701
@@ -1243,5 +1244,91 @@
 \begin{satz}[\emph{Weinstein} 1968, \emph{Synge} 1936]
   Sei $M^n$ kompakte, zshgde, orientierte Riem Mft, $\sec > 0$, $n$ gerade. Sei $f : M^n \to M^n$ eine orientierungstreue Isometrie. Dann hat $f$ einen Fixpunkt.
 \end{satz}
+
+% Vorlesung vom 16.1.2015
+
+% §22. Symmetrische Räume
+
+\begin{nota}
+  $\Iso(M) \coloneqq \Set{ \tau : M \to M }{ \tau \text{ Isometrie} }$ heißt Isometriegruppe.
+\end{nota}
+
+% 22.1.
+\begin{prop}
+  Sei $(M, g)$ eine vollständige Riem Mft, $p \in M$. Seien $f, g \in \Iso(M)$. Wenn $f(p) = g(p)$ und $f_{*p} = g_{*p}$, dann gilt $f \equiv g$.
+\end{prop}
+
+\begin{defn}
+  Eine zshgde Riem Mft $P$ heißt \emph{Symmetrischer Raum}, wenn
+  \[
+    \fa{p \in P} \ex{s_p \in \Iso(P)}
+    s_p(p) = ß \enspace \wedge \enspace (s_p)_{*p} = - \id_{T_p M}.
+  \]
+\end{defn}
+
+\begin{sprech}
+  $s_p$ heißt \emph{(geodätische) Spiegelung} in $p$.
+\end{sprech}
+
+% 22.2
+\begin{lem}
+  Sei $P$ ein symmetrischer Raum, $\gamma : \vinterval \to P$ eine Geodäte, $p = \gamma(0)$. Dann gilt
+  $\fa{t \in \vinterval} (s_p \circ \gamma)(t) = \gamma(-t)$.
+\end{lem}
+
+% 22.3
+\begin{lem}
+  Sei $P$ ein symm. Raum, $\gamma : \vinterval \to P$ eine Geodäte, $\gamma(0) = p$, $\tau \in \vinterval$, $q \coloneqq \gamma(\tau)$. Dann gilt $(s_q \circ s_p)(\gamma(t)) = \gamma(t + 2 \tau)$, wenn $t + 2 \tau \in \vinterval$.
+\end{lem}
+
+\begin{kor}
+  Symmetrische Räume sind geodätisch vollständig.
+\end{kor}
+
+\begin{defn}
+  Eine Riem Mft heißt \emph{homogen} (homogener Raum), wenn
+  \[ \fa{p, q \in P} \ex{f \in \Iso(M, g)} f(p) = q. \]
+\end{defn}
+
+% 22.5
+\begin{lem}
+  Symmetrische Räume sind homogen.
+\end{lem}
+
+% 22.6
+\begin{lem}
+  Sei $P$ ein symm Raum, $p, q \in P$, $f \in \Iso(P)$ mit $f(p) = q$. Dann gilt $s_q = f \circ s_p \circ f^{-1}$.
+\end{lem}
+
+% 22.7
+\begin{kor}
+  Ist $(M, g)$ eine homogene zshgde Riem Mft, sodass
+  \[ \ex{m \in M} \ex{s_m \in \Iso(M)} s_m(m) = m \enspace \wedge \enspace (s_m)_{*m} = - \id_{T_p M}. \]
+  Dann ist $M$ ein symmetrischer Raum.
+\end{kor}
+
+\begin{defn}
+  Sei $M$ eine Mft mit Zshg $\nabla$. Sei $T$ ein Tensorfeld auf $M$ vom Typ $(1,k)$. Dann ist $\nabla T$ das durch
+  \[
+    (\nabla T)(X_1, ..., X_k, Y) \coloneqq \nabla_Y(T(X_1, ..., X_k)) - \sum_{i=1}^k T(X_1, ..., \nabla_Y X_i, ..., X_k)
+  \]
+  definierte Tensorfeld vom Typ $(1, k+1)$.
+\end{defn}
+
+\begin{bsp}
+  Sei $(M, g)$ Riem, $\nabla = \nabla^{LC}$. Dann gilt $\nabla g = 0$ ($\nabla$ metrisch).
+\end{bsp}
+
+\begin{defn}
+  $T$ heißt \emph{parallel}, wenn $\nabla T = 0$.
+\end{defn}
+
+\begin{satz}
+  $P$ symmetrisch $\implies$ $\nabla^{LC} R = 0$
+\end{satz}
+
+\begin{bem}
+  Die Umkehrung gilt nur lokal.
+\end{bem}
 
 \end{document}
