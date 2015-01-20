@@ -24,6 +24,9 @@
 \newcommand{\angles}[1]{\langle #1 \rangle}
 \newcommand{\Simpl}{\mathcal{S}} % Simplizialkomplex
 \newcommand{\Real}[1]{\abs{#1}} % geometrische Realisierung
+\newcommand{\CC}[1]{{#1}_{\bullet}} % Kettenkomplex (chain complex)
+\newcommand{\Top}{\mathbf{Top}} % Kategorie der topologischen Räume
+\newcommand{\AbGrp}{\mathbf{AbGrp}} % Kategorie der abelschen Gruppen
 
 % Kleinere Klammern
 \delimiterfactor=701
@@ -46,7 +49,8 @@
 % §2. Simpliziale und singuläre Homologie
 
 \begin{defn}
-  Ein \emph{affines $n$-Simplex} ist die konvexe Hülle von $n+1$ affin unabhängigen Punkten $p_0, ..., p_{n+1} \in \R^N$. Die konvexe Hülle von einer Teilmenge dieser Eckpunkte wird \emph{Seite} genannt.
+  Ein \emph{affines $n$-Simplex} ist die konvexe Hülle von $n+1$ affin unabhängigen Punkten $p_0, ..., p_{n+1} \in \R^N$. Die konvexe Hülle von einer Teilmenge dieser Eckpunkte wird \emph{Seite} genannt.\\
+  Das \emph{Standard-$n$-Simplex} $\Delta_n$ ist das von den $n+1$ Standard-Basisvektoren im $\R^{n+1}$ aufgespannte Simplex.
 \end{defn}
 
 \begin{defn}
@@ -76,7 +80,8 @@
 \begin{defn}
   Eine \emph{simpliziale $n$-Kette} in einem geordneten geom. Simplizialkomplex ist eine endliche formale Linearkombination
   \[ \sum_{\sigma \in \Simpl_n} \lambda_\sigma \cdot \sigma, \]
-  wobei $\lambda_\sigma \in \Z$. Die Menge solcher Linearkombinationen ist $C_n(\Simpl)$.
+  wobei $\lambda_\sigma \in \Z$. Die Menge solcher Linearkombinationen ist $C_n(\Simpl)$.\\
+  Sie ist die freie abelsche Gruppen über der Menge der Simplizes.
 \end{defn}
 
 \begin{bem}
@@ -86,9 +91,54 @@
 \begin{defn}
   Der Rand eines orientierten $n$-Simplex $\angles{v_0, ..., v_n} \in \Simpl$ ist
   \[ \delta \angles{v_0, ..., v_n} \coloneqq \sum_{i=0}^n (-1)^i \angles{v_0, ..., \hat{v_i}, ..., v_n}. \]
-  Durch lineare Fortsetzung erhalten wir einen Gruppenhomo $\delta_n : C_n(\Simpl) \to C_{n-1}(\Simpl)$.
+  Durch lineare Fortsetzung erhalten wir einen Gruppenhomo $\partial_n : C_n(\Simpl) \to C_{n-1}(\Simpl)$.
 \end{defn}
 
 % Vorlesung vom 8.10.2014
+
+\begin{defn}
+  Ein \emph{Kettenkomplex} $\CC{C}$ ist eine Folge $(C_n)_{n \in \N}$ und Gruppenhomomorphismen $\partial_n : C_n \to C_{n-1}$ mit der Eigenschaft $\partial_{n-1} \circ \partial_n = 0$.
+\end{defn}
+
+\begin{defn}
+  Sei $\CC{C}$ ein Kettenkomplex.
+  \begin{itemize}
+    \item $Z_n(\CC{C}) \coloneqq \ker \partial_n \subset C_n(\CC{C})$ heißt Gruppe der \emph{$n$-Zykel},
+    \item $B_n(\CC{C}) \coloneqq \im \partial_{n+1} \subset Z_n(\CC{C})$ heißt Gruppe der \emph{$n$-Ränder},
+    \item $H_n(\CC{C}) \coloneqq Z_n(\CC{C}) / B_n(\CC{C})$ heißt \emph{$n$-te Homologiegruppe}.
+  \end{itemize}
+\end{defn}
+
+% 2.1
+\begin{prop}
+  Für $n \geq 1$ gilt $\partial_{n-1} \circ \partial_n = 0$. Die simplizialen $n$-Ketten bilden also einen Kettenkomplex.
+\end{prop}
+
+\begin{defn}
+  Ein \emph{singuläres $n$-Simplex} in einem topologischen Raum $X$ ist eine stetige Abbildung $\sigma : \Delta^n \to X$. Wir bezeichnen mit $\Delta_n(X)$ die Menge der singulären $n$-Simplizes in $X$ und mit $C_n(X)$ die freie abelsche Gruppe über $\Delta_n(X)$. Wir definieren
+  \[
+    \partial_n : C_n(X) \to C_{n-1}(X), \quad
+    \sigma \mapsto \sum_{i=0}^n (-1)^i \sigma_{\angles{e_o,...,\hat{e_i},...,e_n}}.
+  \]
+  Analog zu oben gilt $\partial_{n-1} \circ \partial_n = 0$, man erhält also einen Komplex $\CC{C}(X)$ der singulären Ketten in $X$. Die Homologie dieses Komplexes bezeichnet man mit $H_n(X)$.
+\end{defn}
+
+\begin{defn}
+  Eine \emph{Kettenabbildung} zwischen Kettenkomplexen $\CC{C}$ und $\CC{D}$ ist eine Familie $(f_n : C_n \to D_n)_{n \in \N}$ von Gruppenhomomor- phismen, welche mit dem Differential verträglich sind, d.\,h.
+  \[ \fa{n \in \N} \partial_n^{(D)} \circ f_n = f_{n-1} \circ \partial_n^{(C)}. \]
+  Aus einer solchen Abbildung erhält man wiederum eine Abbildung $H_n(f) : H_n(\CC{C}) \to H_n(\CC{C})$ für alle $n \in \N$. Somit definiert $H_n$ einen Funktor von der Kategorie der Kettenkomplexe in die Kategorie der abelschen Gruppen.
+\end{defn}
+
+% Ausgelassen: Kettenisomorphismus
+
+\begin{defn}
+  Für eine Abbildung $f : X \to Y$ von topologischen Räumen erhalten wir eine Abbildung $f_* : \CC{C}(X) \to \CC{C}(Y)$ definiert durch $f_*(\sigma) \coloneqq f \circ \sigma$ für ein $n$-Simplex $\sigma : \Delta_n \to X$. Die Zuordnung $f \mapsto f_*$ erfüllt die Funktiorialitätsaxiome. Somit definiert $H_n$ für alle $n \in \N$ einen Funktor $\Top \to \AbGrp$.
+\end{defn}
+
+\begin{kor}
+  Homöomorphe Räume haben isomorphe singuläre Homologiegruppen.
+\end{kor}
+
+% Vorlesung vom 23.10.2014
 
 \end{document}
