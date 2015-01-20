@@ -24,6 +24,7 @@
 \newcommand{\Ric}{\mathrm{Ric}} % Ricci-Tensor
 \newcommand{\abinterval}{\cinterval{a}{b}} % [a,b]
 \newcommand{\Iso}{\mathrm{Iso}} % Isometriegruppe
+\newcommand{\Trans}{\mathrm{Trans}} % Transvektionsgruppe
 
 % Kleinere Klammern
 \delimiterfactor=701
@@ -1330,5 +1331,82 @@
 \begin{bem}
   Die Umkehrung gilt nur lokal.
 \end{bem}
+
+% Vorlesung vom 20.1.2015
+
+% §23. Transvektionen und Holonomie
+
+\begin{nota}
+  Sei $P$ im Folgenden ein symmetrischer Raum.
+\end{nota}
+
+\begin{defn}
+  Eine \emph{Transvektion} von $P$ ist eine Isometrie der Form
+  \[ t_{pq} = s_p \circ s_q \quad \text{mit } p, q \in P, \]
+  d.\,h. ein Produkt geodätischer Spiegelungen.
+\end{defn}
+
+\begin{bsp}
+  Im $\R^n$ sind Transvektionen genau die Translationen.
+\end{bsp}
+
+\begin{defn}
+  Die von den Transvektionen erzeugte abgeschl. Untergruppe
+  \[ \Trans(P) \coloneqq \langle t_{pq} \,|\, p, q \in P \rangle_{c} \]
+  heißt \emph{Transvektionsgruppe} von $P$.
+\end{defn}
+
+% 23.1
+\begin{lem}
+  Sei $\gamma : \R \to P$ eine Geodäte, $p = \gamma(0)$, $X \in \chi_c$ parallel. Sei
+  \[
+    Y \coloneqq (s_p)_* X : \R \to TP, \quad
+    t \mapsto (s_p)_{*c(t)} X(t)
+  \]
+  Dann gilt $Y(t) = -X(-t)$.
+\end{lem}
+
+% 23.2
+\begin{lem}
+  Sei $\gamma : \R \to P$ eine Geodäte. Dann gilt f.\,a. $\tau \in \R$:
+  \begin{itemize}
+    \item $(t_{\gamma(\tau)\gamma(0)} \circ \gamma)(t) = \gamma(t + 2\tau)$
+    \item $(t_{\gamma(\tau)\gamma(0)*} X)(t) = X(t + 2 \tau)$ für $X \in \chi_\gamma$ parallel.
+  \end{itemize}
+\end{lem}
+
+% 23.3
+\begin{lem}
+  Sei $\gamma : \R \to P$ eine Geodäte. Dann ist die Abbildung
+  \[
+    t^\gamma : \R \to \Iso(P), \quad
+    \tau \mapsto t_{\gamma(\tau)\gamma(0)}
+  \]
+  eine Ein-Parameter-Untergruppe.
+\end{lem}
+
+\begin{defn}
+  Sei $\gamma$ eine Geodäte. Die Ein-Parameter-UG $t^\gamma$ von $\Iso(P)$ heißt \emph{Transvektion} längs $\gamma$.
+\end{defn}
+
+% 23.4
+\begin{satz}
+  Jede maximale Geodäte in $P$ ist Bahn einer Ein-Parameter-Untergruppe von Isometrien, nämlich von $\gamma(\tau) \coloneqq (t^\gamma(\tau))(c(0))$.
+\end{satz}
+
+\begin{defn}
+  $\lambda \in \R_{\geq 0}$ heißt \emph{Periode} einer Geodäten $\gamma$, wenn f.\,a. $t \in \R$ gilt: $\gamma(t) = \gamma(t + \gamma)$. Die Menge aller Perioden wird mit $P_\gamma$ bezeichnet.
+\end{defn}
+
+% Ausgelassen: Hilfslemma
+
+% 23.5
+\begin{lem}
+  Sei $b > a$ und $c(a) = c(b)$. Dann ist $\lambda \coloneqq b - a \in P_\gamma$.
+\end{lem}
+
+\begin{kor}
+  Hat eine Geodäte $\gamma$ in $P$ einen Selbstschnitt, so ist $\gamma$ periodisch. Sei $\lambda_0$ die minimale nichttriviale Periode einer nichttrivialen Geodäten $\gamma$ in $P$. Dann ist $c|_{\cointerval{t}{t+\lambda_0}}$ injektiv für alle $t$.
+\end{kor}
 
 \end{document}
