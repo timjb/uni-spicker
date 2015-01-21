@@ -141,4 +141,39 @@
 
 % Vorlesung vom 23.10.2014
 
+\begin{prop}
+  Sei $\pi_0(X)$ die Menge der Wegekomponenten von $X$. Die Inklusionen $A \hookrightarrow X$ (für $A \in \pi_0(X)$) induzieren einen Isomorphismus
+  \[ \bigoplus_{A \in \pi_0(X)} H_*(A) \cong H_*(X). \]
+\end{prop}
+
+\begin{prop}
+  Sei $X \not= \emptyset$ wegzusammenhängend. Dann ist $H_0(X) \cong \Z$.
+\end{prop}
+
+\begin{defn}
+  Eine \emph{Kettenhomotopie} zw. Kettenabb. $\phi_*, \psi_* : \CC{C} \to \CC{D}$ ist eine Folge von Homomorphismen $P_n : C_n \to D_{n+1}$ mit
+  \[ \fa{n \in \N} \partial_{n+1} \circ P_n + P_{n-1} \circ \partial_n = \phi_n - \psi_n. \]
+\end{defn}
+
+\begin{prop}
+  Seien $\phi_*, \psi_* : \CC{C} \to \CC{D}$ kettenhomotop. Dann gilt
+  \[ H_*(\phi_*) = H_*(\psi_*) : H(\CC{C}) \to H(\CC{D}). \]
+\end{prop}
+
+\begin{satz}
+  Seien $f, g : X \to Y$ homotope Abbildungen. Dann sind $f_*, g_* : \CC{X} \to \CC{Y}$ kettenhomotop.
+\end{satz}
+
+\begin{kor}
+  \begin{itemize}
+    \item Seien $f, g : X \to Y$ homotope Abbildungen. Dann gilt
+    \[ f_* = g_* : H_*(X) \to H_*(Y). \]
+    \item Homotopieäquivalente Räume haben isomorphe Homologiegruppen.
+  \end{itemize}
+\end{kor}
+
+% Vorlesung vom 15.10.2014
+
+% §3. Relative Homologie und Ausschneidung
+
 \end{document}
