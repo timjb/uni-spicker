@@ -27,6 +27,9 @@
 \newcommand{\CC}[1]{{#1}_{\bullet}} % Kettenkomplex (chain complex)
 \newcommand{\Top}{\mathbf{Top}} % Kategorie der topologischen Räume
 \newcommand{\AbGrp}{\mathbf{AbGrp}} % Kategorie der abelschen Gruppen
+\newcommand{\RH}{\tilde{H}} % Reduzierte Homologie
+\newcommand{\inte}{\mathop{\mathrm{int}}} % Inneres (interior)
+\newcommand{\clos}[1]{\overline{#1}} % Abschluss
 
 % Kleinere Klammern
 \delimiterfactor=701
@@ -61,8 +64,8 @@
   \end{itemize}
 \end{defn}
 
-\begin{defn}|
-  Die $\Real{S} \coloneqq \bigcup_{K \in \Simpl} K$ heißt zu $\Simpl$ gehörender \emph{Polyeder} und $\Simpl$ Triangulierung von $\Real{\Simpl}$.
+\begin{defn}
+  Jeder Simplizialkomplex $\Simpl$ ist eine \emph{Triangulierung} seines \emph{Polyeders}, dem topologischen Raum $\Real{S} \coloneqq \bigcup_{K \in \Simpl} K$.
 \end{defn}
 
 \begin{defn}
@@ -175,6 +178,140 @@
 % Vorlesung vom 15.10.2014
 
 % §3. Relative Homologie und Ausschneidung
+
+\begin{defn}
+  Ein \emph{Unterkomplex} $\CC{D}$ von $\CC{C}$ ist eine Folge von Untergruppen $D_n \subset C_n$, sodass gilt: $\partial D_n \subset D_{n-1}$ für alle $n \geq 1$.
+\end{defn}
+
+\begin{defn}
+  Ist $\CC{D} \subset \CC{C}$ ein Unterkomplex, so ist der \emph{Quotientenkomplex} $\CC{C}/\CC{D}$ definiert durch
+  \[
+    (\CC{C}/\CC{D})_n \coloneqq C_n/D_n, \quad
+    \partial^{C/D}_n[c] \coloneqq [\partial^C_n(c)].
+  \]
+\end{defn}
+
+\begin{defn}
+  Sei $(X, A)$ ein Raumpaar. Der \emph{relative singuläre Ketten- komplex} $\CC{C}(X, A)$ ist definiert als Quotientenkomplex $\CC{X}/\CC{A}$.\\
+  Dessen Homologiegruppen heißen \emph{relative singuläre Homologiegruppen} $H_n(X, A)$.
+\end{defn}
+
+\begin{bem}
+  $H_n$ ist ein Funktor $\Top(2) \to \AbGrp$.
+\end{bem}
+
+\begin{defn}
+  Eine Homotopie zwischen Abbildungen von Raumpaaren $f, g : (X, A) \to (Y, B)$ ist eine Homotopie $H : \cinterval{0}{1} \times X \to Y$ zwischen $f$ und $g$ mit $H([0,1] \times A) \subset Y$.
+\end{defn}
+
+\begin{prop}
+  Homotope Abbildungen von Raumpaaren induzieren dieselbe Abbildung in relativer Homologie.
+\end{prop}
+
+\begin{defn}
+  Ein Kettenkomplex heißt \emph{exakt} (oder \emph{azyklisch}), falls seine Homologiegruppen alle Null sind, d.\,h. $\fa{n \in \N} \im \partial_{n+1} = \ker \partial_n$.
+\end{defn}
+
+\begin{defn}
+  Eine \emph{kurze exakte Sequenz} (keS) ist ein exakter Kettenkomplex der Gestalt
+  \[ 0 \to A \to B \to C \to 0. \]
+\end{defn}
+
+\begin{defn}
+  Eine \emph{kurze exakte Sequenz von Kettenkomplexen} ist ein Diagramm der Form
+  \[ 0 \to \CC{A} \to \CC{B} \to \CC{C} \to 0, \]
+  in jedem Grad eine kurze exakte Sequenz
+  \[ 0 \to A_n \to B_n \to C_n \to 0. \]
+\end{defn}
+
+\begin{bem}
+  Ist $(X, A)$ ein Raumpaar, so erhält man eine kurze exakte Sequenz
+  \[ 0 \to \CC{C}(A) \to \CC{C}(X) \to \CC{C}(X, A) \to 0. \]
+\end{bem}
+
+% 3.2
+\begin{prop}[Schlangenlemma]
+  Die ex. Sequenz $0 \to \CC{A} \to \CC{B} \to \CC{C} \to 0$ induziert in jedem Grad einen sogenannten \emph{verbindenden Homomorphismus} $\partial_n : H_n(C) \to H_{n-1}(A)$, sodass die Sequenz
+  \[ ... \to H_n(A) \to H_n(B) \to H_n(C) \xrightarrow{\partial_n} H_{n-1}(A) \to H_{n-1}(B) \to ... \]
+  exakt ist. Diese Sequenz wird \emph{lange exakte Sequenz} genannt.
+\end{prop}
+
+\begin{kor}
+  Sei $(X, A)$ ein Raumpaar. Dann gibt es Homomorphis- men $\partial_n : H_n(X, A) \to H_{n-1}(A)$, sodass die Sequenz
+  \[
+    ... \to H_n(A) \to H_n(B) \to H_n(X, A) \to H_{n-1}(A) \to ...
+    \quad \text{exakt ist.}
+  \]
+\end{kor}
+
+\begin{defn}
+  Die \emph{reduzierte Homologie} $\RH_*(X)$ eines topologischen Raumes $X$ ist die Homologie des Kettenkomplexes
+  \[ ... \to C_2(X) \xrightarrow{\partial_n} C_1(X) \xrightarrow{\partial_1} C_0(X) \xrightarrow{\epsilon} \to \Z \to 0, \]
+  wobei $\epsilon$ der sogenannte \emph{Augmentierungshomomorphismus} ist:
+  \[ \epsilon : \sum_{\sigma \in \Delta_0(X)} \lambda_\sigma \cdot \sigma \mapsto \sum_{\sigma} \lambda_\sigma \in \Z. \]
+\end{defn}
+
+\begin{prop}
+  \begin{itemize}
+    \item $\RH_n(X) = H_n(X)$ für $n \geq 1$
+    \item Ist $X = \emptyset$, so ist $\RH_n(X) = 0$ für $n \geq 0$ und $\RH_{-1}(X) = \Z$.
+    \item Ist $X \not= \emptyset$, so ist $H_n(X) \cong \RH_n(X) \oplus \Z$, jedoch nicht kanonisch.
+    \item Ist $X$ kontrahierbar, so gilt $\RH_n(X) = 0$ für alle $n \in \N$.
+    \item Ist $(X, A)$ ein Raumpaar, so gibt es eine lange exakte Sequenz
+    \[ ... \to \RH_0(A) \to \RH_0(X) \to \RH_0(X,A) \to \RH_{-1}(A) \to \RH_{-1}(X) \to 0 \]
+  \end{itemize}
+\end{prop}
+
+% Vorlesung vom 20.10.2014
+
+% 3.5
+\begin{satz}
+  Sei $(X, R)$ ein Raumpaar, $U \subset R$ mit $\clos{U} \subset \inte R$. Dann induziert die Inklusion $(X - U, R - U) \hookrightarrow (X, R)$ Isomorphismen
+  \[ H_n(X - U, R - U) \to H_n(X, R) \quad \text{für alle $n \geq 0$.} \]
+\end{satz}
+
+\begin{bem}
+  Eine äquivalente Aussage zum Ausschneidungssatz ist:\\
+  Seien $A, B \subset X$ mit $X = \inte A \cup \inte B$. Dann induziert die Inklusion $(B, A \cap B) \to (X, A)$ Isomorphismen in Homologie.
+\end{bem}
+
+% Vorlesung vom 22.10.2014
+
+% Ausgelassen: Hilfspropositionen zum Beweis des Ausschneidungssatzes, U-feine Ketten etc.
+
+% Vorlesung vom 27.10.2014
+
+\begin{defn}[\emph{Eilenberg-Steenrod-Axiome}]
+  Eine \emph{Homologietheorie} ist eine Folge von Funktoren
+  \[ H_n : \Top(2) \to \AbGrp, \]
+  und natürlichen Transformationen
+  \[ \delta_n : H_n(X, A) \to H_{n-1}(A, \emptyset) \]
+  mit den folgenden Eigenschaften:
+  \begin{itemize}
+    \item \emph{Homotopieinvarianz}: Seien $f, g : (X, A) \to (B, Y)$ homotop als Abbildungen von Raumpaaren. Dann gilt $f_* = g_* : H_n(X, A) \to H_n(Y, B)$.
+    \item \emph{Lange exakte Sequenz}: Die Inklusionen $A \hookrightarrow X$ und $(X, \emptyset) \hookrightarrow (X, A)$ induzieren eine l.e.S.
+    \[ ... \to H_n(A) \to H_n(X) \to H_n(X, A) \xrightarrow{\partial_n} H_{n-1}(A) \to ... \]
+    \item \emph{Ausschneidung}: Ist $U \subset A$ mit $\clos{A} \subset \inte(A)$, dann induziert die Inklusion $(X - U, A - U) \hookrightarrow (X, A)$ Isomorphismen
+    \[ H_n(X-U, A-U) \to H_n(X,A). \]
+  \end{itemize}
+\end{defn}
+
+\begin{defn}
+  Die \emph{Koeffizienten} einer Homologietheorie sind die Homologiegruppen $H_n(pt)$ des einpunktigen Raums.
+  Eine Homologietheorie heißt \emph{gewöhnlich}, falls $H_n(pt) = 0$ für $n > 0$.
+\end{defn}
+
+\begin{bem}
+  Manchmal fordert man auch das Summenaxiom: Für eine Familie $(X_i)_{i \in I}$ von topologischen Räumen induzieren die Inklusionen $X_i \hookrightarrow X$ in die disjunkte Summe $X$ aller $X_i$ einen Iso
+  \[ \bigoplus_{i \in I} H_n(X_i) \xrightarrow{\cong} H_n(X). \]
+\end{bem}
+
+\begin{bem}
+  Die singuläre Homologie ist eine gewöhnliche Homologietheorie, die das Summenaxiom erfüllt.
+\end{bem}
+
+% §4. Erste Berechnungen und Anwendungen
+
 
 \begin{bsp}[Homologie von wichtigen Räumen]
   \[
