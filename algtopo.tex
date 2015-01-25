@@ -227,6 +227,8 @@
 \begin{bem}
   Ist $(X, A)$ ein Raumpaar, so erhält man eine kurze exakte Sequenz
   \[ 0 \to \CC{C}(A) \to \CC{C}(X) \to \CC{C}(X, A) \to 0. \]
+  Für ein Raumtripel $(X, A, U)$ erhält man eine k.\,e.\,S.
+  \[ 0 \to \CC{C}(A, U) \to \CC{C}(X, U) \to \CC{C}(X, A) \to 0. \]
 \end{bem}
 
 % 3.2
@@ -239,8 +241,12 @@
 \begin{kor}
   Sei $(X, A)$ ein Raumpaar. Dann gibt es Homomorphis- men $\partial_n : H_n(X, A) \to H_{n-1}(A)$, sodass die Sequenz
   \[
-    ... \to H_n(A) \to H_n(B) \to H_n(X, A) \to H_{n-1}(A) \to ...
+    ... \to H_n(A) \to H_n(X) \to H_n(X, A) \xrightarrow{\partial_n} H_{n-1}(A) \to ...
     \quad \text{exakt ist.}
+  \]
+  Für ein Raumtripel $(X, A, U)$ erhält man eine l.\,e.\,S.
+  \[
+    ... \to H_n(A, U) \to H_n(X, U) \to H_n(X, A) \xrightarrow{\partial_n} H_{n-1}(A, U) \to ...
   \]
 \end{kor}
 
@@ -312,10 +318,346 @@
 
 % §4. Erste Berechnungen und Anwendungen
 
+\begin{defn}
+  Ein Raumpaar $(X, A)$ heißt \emph{gut}, falls $A$ nicht leer, abgeschlossen und starker Deformationsretrakt einer offenen Umgebung ist.
+\end{defn}
+
+\begin{prop}
+  Sei $(X, A)$ ein gutes Raumpaar. Dann induziert $q : (X, A) \to (X/A, A/A)$ Isomorphismen
+  \[ H_n(X, A) \to H_n(X/A, A/A) = \RH_n(X/A) \quad \text{für alle $n \in \N$.} \]
+\end{prop}
+
+% 4.3
+\begin{satz}
+  Für $n \geq 0$ ist $S^n$ kein Retrakt von $D^{n+1}$.
+\end{satz}
+
+% 4.4
+\begin{kor}[\emph{Brouwerscher Fixpunktsatz}]\mbox{}\\
+  Jede stetige Abbildung $f : D^n \to D^n$ hat einen Fixpunkt.
+\end{kor}
+
+% 4.5
+\begin{satz}[Topologische Invarianz der Dimension]\mbox{}\\
+  Seien $U \opn R^n$ und $V \opn \R^m$ homöomorph. Dann gilt $n = m$.
+\end{satz}
+
+% Vorlesung vom 29.10.2014
+
+\begin{defn}
+  Sei $f : S^n \to S^n$ stetig. In Homologie induziert $f$ eine Abbildung $H_n(f) : \Z \to \Z$, die durch Multiplikation mit einer ganzen Zahl gegeben ist. Diese Zahl heißt \emph{Abbildungsgrad} $\deg f$ von $f$.
+\end{defn}
+
+\begin{lem}
+  \begin{itemize}
+    \item $\deg (f \circ g) = (\deg f) \cdot (\deg g)$.
+    \item $H_n(f)$ ist genau dann ein Isomorphismus, wenn $\deg(f) = \pm 1$.
+  \end{itemize}
+\end{lem}
+
+\begin{prop}
+  Sei $f : S^n \to S^n$ die Spiegelung an einer Hyperebene $H \subset \R^{n+1}$. Dann gilt $\deg f = -1$.
+\end{prop}
+
+\begin{defn}
+  Ein \emph{Vektorfeld} über $S^n$ ist eine stetige Abbildung $v : S^n \to \R^{n+1}$, sodass $v(x) \perp x$ für alle $x \in S^n$.
+\end{defn}
+
+% 4.7
+\begin{satz}
+  Die Sphäre $S^n$, $n \geq 1$ hat genau dann ein nirgends verschwindendes Vektorfeld, wenn $n$ ungerade ist.
+\end{satz}
+
+% 4.8
+\begin{satz}
+  Sei $n$ gerade und wirke eine Gruppe $G$ frei auf $S^n$. Dann ist entweder $G = \{ e \}$ oder $G \cong \Z_2$.
+\end{satz}
+
+% Vorlesung vom 3.11.2014
+
+\begin{defn}
+  Sei $f : S^n \to S^n$ stetig, $x \in S^n$, sodass eine Umgebung $U$ von $x$ existiert mit $U \cap f^{-1}(f(x)) = \{ x \}$. Mit Ausschneidung und der l.e.S. erhält man Isomorphismen
+  \[ H_k(U, U - \{ x \}) \cong H_k(S^n, S^n - \{ x \}) \cong \RH_k(S^n) \cong \Z. \]
+  Die induzierte Abb. $f_* : H_n(U, U - \{ x \}) \to H_n(S^n, S^n - \{ f(x) \})$ ist gegeben durch Multiplikation mit einer ganzen Zahl. Diese heißt \emph{lokaler Abbildungsgrad} ($\deg f|x$) von $f$ bei $x$.
+  %(und hängt nicht von $U$ ab).
+\end{defn}
+
+% 4.9
+\begin{prop}
+  Sei $f : S^n \to S^n$ stetig und $y {\in} S^n$ mit $f^{-1}(y) = \{ x_1, ..., x_n \}$.\\
+  Dann ist $\deg f|x_i$ definiert für $i = 1, ..., n$ und es gilt
+  \[ \deg f = \sum_{i=1}^n \deg f|x_i. \]
+\end{prop}
+
+\begin{prop}
+  Sei $f : S^n \to S^n$ stetig. Dann gilt
+  \[ \deg f = \deg (\Sigma f : \Sigma S^n \to \Sigma S^n). \]
+\end{prop}
+
+% 4.11
+\begin{prop}
+  Seien $A, B \subset X$ mit $X = A \cup B$. Angenommen, es gibt Umgebungen $U$ von $A$ und $V$ von $B$, sodass die Inklusionen $A \hookrightarrow U$, $B \hookrightarrow V$ und $A \cap B \hookrightarrow U \cap V$ Homotopieäquivalenzen sind. Dann existiert die \emph{Mayer-Vietoris-Sequenz}
+  \[ ... \to H_*(A \cap B) \to H_*(A) \oplus H_*(B) \to H_*(X, A \cap B) \to H_{*-1}(A \cap B) \to ... \]
+\end{prop}
+
+% 4.12
+\begin{prop}[Verallg. Jordanscher Kurvensatz]
+  % Weggelassen: Teil 1
+  Sei $S \subset S^n$ ein Teilraum, der zu einer Sphäre $S^k \subset \R^{k+1}$ homöomorph ist. Dann ist $k \leq n$ und
+  \[ \RH_i(S^n - S) = \begin{cases}
+    \Z, & \text{falls $i = n - k - 1$,} \\
+    0, & \text{sonst.}
+  \end{cases} \]
+\end{prop}
+
+\begin{kor}[Jordanscher Kurvensatz]
+  Sei $\phi : S^1 \to \R^2$ eine stetige Einbettung. Dann besteht $\R^2 - \phi(S^1)$ aus zwei Komponenten, von denen genau eine beschränkt ist.
+\end{kor}
+
+% Ausgelassen: Lemma 4.14 und 4.15 über (Wege-)komponenten
+% Ausgelassen: Proposition 4.16 (Verschärfung des Jordanschen Kurvensatzes)
+
+% 4.17
+\begin{satz}[Invarianz des Gebietes]
+  Sei $U \subset \R^n$ offen und $\phi : U \to \R^n$ stetig und ein Homöomorphismus auf das Bild. Dann ist $\phi(U)$ offen. %in $\R^n$
+\end{satz}
+
+% Vorlesung vom 12.11.2014
+
+% §5. $\Delta$-Komplexe, CW-Komplexe und ihre Homologie
+
+\begin{defn}
+  Ein $\Delta$-Komplex ist ein topologischer Raum $X$ zusammen mit einer Familie $(\sigma_\alpha : \Delta^{n(\alpha)} \to X)_{\alpha \in I}$ von stetigen Abbildungen (genannt \emph{charakteristische Abbildungen}), sodass:
+  \begin{itemize}
+    \item Die Restriktionen $\sigma_\alpha|\inte(\Delta^{n(\alpha)}) : \inte(\Delta^{n(\alpha)}) \to X$ sind injektiv und jeder Punkt $x \in X$ liegt im Bild (genannt \emph{offenes Simplex}) von genau einer solchen Restriktion.
+    \item Ist $\sigma_\alpha : \Delta^{n(\alpha)} \to X$ eine char. Abb. und $\tau \subset \Delta^{n(\alpha)}$ eine ($n(\alpha)-1$)-dimensionale Seite, dann ist $\sigma_\alpha|\tau : \Delta^{n(\alpha)-1} \to X$ wieder eine charakteristische Abbildung.
+    \item $A \subset X$ ist offen $\iff$ alle $\sigma_\alpha^{-1}(A)$ sind offen in $\Delta^{n(\alpha)}$.
+  \end{itemize}
+\end{defn}
+
+\begin{bem}
+  Jeder endliche geordnete Simplizialkomplex trägt die Struktur eines $\Delta$-Komplexes.
+\end{bem}
+
+\begin{bem}
+  Alternativ ist ein $\Delta$-Komplex ein kontravarianter Funktor von der Kategorie $\Delta$ der endlichen total geordneten Mengen mit streng monotonen Abbildungen in die Kategorie der Mengen.
+\end{bem}
+
+\begin{defn}
+  Für einen $\Delta$-Komplex $X$ sei $C_n^\Delta(X)$, die freie abelsche Gruppe erzeugt von den Abbildungen $\sigma_\alpha : \Delta^{n(\alpha)} \to X$ mit $n(\alpha) = n$. Diese Gruppen bilden einen Simplizialkomplex. Die Homologiegruppen dieses Komplexes heißen \emph{singuläre Homologiegruppen} $H^\Delta_*(X)$.
+\end{defn}
+
+\begin{defn}
+  Ein \emph{Teilkomplex} eines $\Delta$-Komplexes ist eine Teilmenge der charakteristischen Abbildungen (zusammen mit der Vereinigung der Bilder dieser Abbildungen als topologischer Raum), die selbst die Axiome für einen Delta-Komplex erfüllt.
+\end{defn}
+
+\begin{defn}
+  Das \emph{$k$-Skelett} eine $\Delta$-Komplexes ist der Teilkomplex, der aus den Bildern aller $i$-Simplizes besteht, wobei $i \leq k$.
+\end{defn}
+
+\begin{defn}
+  Die \emph{relative singuläre Homologie} $H_n^\Delta(X, A)$ des $\Delta$-Komplexes $X$ bzgl. eines Teilkomplexes $A$ ist die Homologie des Quotientenkomplexes $C_n^\Delta(X)/C_n^\Delta(A)$.
+\end{defn}
+
+% 5.1
+\begin{satz}
+  Sei $X$ ein $\Delta$-Komplex und $A \subset X$ ein Unterkomplex. Dann induziert die Inklusion $C_*^\Delta(X) \hookrightarrow C_*(X)$ Isomorphismen von Homologiegruppen.
+\end{satz}
+
+% 5.2
+\begin{lem}
+  Für $n \geq 0$ gilt
+  \[
+    H^\Delta_i(\Delta^n, \partial \Delta^n) \cong
+    H_i(\Delta^n, \partial \Delta^n) =
+    \begin{cases}
+      \Z, & \text{für $i=n$} \\
+      0, & \text{sonst}
+    \end{cases}
+  \]
+  und die Homologieklasse von $\id : \Delta^n \to \Delta^n$ erzeugt sowohl $H^\Delta_n(\Delta^n, \partial \Delta^n)$ als auch $H_n(\Delta^n, \partial \Delta^n)$
+\end{lem}
+
+\begin{lem}[\emph{Fünferlemma}]
+  Sei folgendes kommutatives Diagramm von $R$-Modulen mit exakten Zeilen gegeben:
+  \begin{center}
+    \begin{tikzpicture}
+      \matrix (mat) [matrix of nodes, column sep=1cm, row sep=0.65cm]{
+        \node (A) {$A$}; &
+        \node (B) {$B$}; &
+        \node (C) {$C$}; &
+        \node (D) {$D$}; &
+        \node (E) {$E$}; \\
+        \node (A') {$A'$}; &
+        \node (B') {$B'$}; &
+        \node (C') {$C'$}; &
+        \node (D') {$D'$}; &
+        \node (E') {$E'$}; \\
+      };
+      \draw[->] (A) to node {} (B);
+      \draw[->] (B) to node {} (C);
+      \draw[->] (C) to node {} (D);
+      \draw[->] (D) to node {} (E);
+      \draw[->] (A') to node {} (B');
+      \draw[->] (B') to node {} (C');
+      \draw[->] (C') to node {} (D');
+      \draw[->] (D') to node {} (E');
+      \draw[->] (A) to node [right] {$\alpha$} (A');
+      \draw[->] (B) to node [right] {$\beta$} (B');
+      \draw[->] (C) to node [right] {$\gamma$} (C');
+      \draw[->] (D) to node [right] {$\delta$} (D');
+      \draw[->] (E) to node [right] {$\epsilon$} (E');
+    \end{tikzpicture}
+  \end{center}
+  Angenommen, $\alpha$, $\beta$, $\delta$ und $\epsilon$ sind Isomorphismen. Dann ist auch $\gamma$ ein Isomorphismus.
+\end{lem}
+
+% Vorlesung vom 17.11.2014
+
+\begin{defn}
+  Ein \emph{CW-Komplex} ist ein topologischer Raum $X$ mit einer Folge von abgeschlossenen Unterräumen
+  \[
+    X^0 \subset X^1 \subset X^2 \subset ... \subset X, \quad
+    \bigcup_{i \geq 0} X^i = X,
+  \]
+  genannt \emph{$i$-Skelette} $X^i$, sodass gilt:
+  \begin{itemize}
+    \item $X^0$ ist eine diskrete Menge von Punkten.
+    \item Für alle $n \geq 1$ gibt es eine Familie von \emph{Anheftungsabb'en} $(\phi_\alpha : \partial D^n_\alpha \to X^{n-1})_{\alpha \in I(n)}$ (dabei ist $D^n_\alpha$ eine Kopie von $D^n$), sodass
+    \[ X^n = X^{n-1} \cup_{(\phi_\alpha)_{\alpha \in I(n)}} \coprod_{\alpha \in I(n)} D^n_\alpha. \]
+    \item $X$ trägt die Finaltopologie bzgl. obiger Filtrierung, d.\,h. \\
+    $A \subset X$ ist abgeschlossen $\iff$ alle $A \cap X^i$ sind abgeschlossen.
+  \end{itemize}
+\end{defn}
+
+\begin{defn}
+  Ein CW-Komplex heißt \emph{endlich-dimensional}, falls $X^i = X$ für ein $i \in \N$. Er heißt \emph{endlich}, falls er insgesamt nur endlich viele Anheftungsabb'en besitzt (dann ist er insbesondere endlich-dim).
+\end{defn}
+
+\begin{prop}
+  CW-Komplexe sind normal (und damit Hausdorffsch).
+\end{prop}
+
+\begin{defn}
+  Die Anheftungsabb'en $\phi_\alpha : \partial D^{n}_\alpha \to X^{n-1}$ lassen sich kanonisch fortsetzen zu \emph{charakteristischen Abb'en} $\Phi_\alpha : D^n_\alpha \to X^n \subset X$.\\
+  Die Bilder dieser Abb'en werden \emph{abgeschlossene Zellen} genannt.\\
+  Die Bilder der Einschränkungen $\Phi_\alpha|\inte(D^n_\alpha)$ heißen \emph{Zellen} von $X$ und werden mit $e^n_\alpha$ bezeichnet.
+\end{defn}
+
+\begin{prop}
+  \begin{itemize}
+    \item $\Phi_\alpha|\inte(D^n_\alpha) : \inte(D^n_\alpha) \to X^n$  ist eine topologische Einbettung (d.\,h. ein Homöo auf das Bild).
+    \item Jeder Punkt aus $X$ liegt in genau einer Zelle.
+    \item Der Abschluss einer Zelle ist eine abgeschlossene Zelle.
+    \item Jede abgeschlossene Zelle trifft nur endlich viele Zellen.
+  \end{itemize}
+\end{prop}
+
+% Vorlesung vom 19.11.2014
+
+\begin{defn}
+  Ein \emph{Unterkomplex} eines CW-Komplexes ist eine Teilmenge $A \subset X$, die selbst ein CW-Komplex ist, und zwar so, dass alle anheftenden Abb'en von $A$ auch anheftende Abb'en von $X$ sind.
+\end{defn}
+
+\begin{defn}
+  Ein \emph{CW-Paar} ist ein Raumpaar $(X, A)$, wobei $X$ ein CW-Komplex und $A$ ein Unterkomplex von $X$ ist.
+\end{defn}
+
+% 5.6
+\begin{prop}
+  \begin{itemize}
+    \item $X^n$ ist ein Unterkomplex von $X$ und von $X^m$ für $m \geq n$.
+    \item CW-Raumpaare sind gute Raumpaare.
+    \item Jede Zelle eines CW-Komplexes ist in einem endlichen Unterkomplex enthalten.
+  \end{itemize}
+\end{prop}
+
+\begin{defn}
+  Die \emph{Einpunktvereinigung} einer Familie $(X_i, x_i)_{i \in I}$ von punktierten Räumen ist
+  \[ \bigvee_{i \in I} X_i \coloneqq \left( \bigsqcup_{i \in I} X_i \right) / \Set{x_i}{i \in I}. \]
+  Man erhält Projektionen $q_j : \vee_i X_i \to X_j$ durch Abbilden aller Punkte aus $X_i$, $i \not= j$. auf den Basispunkt $x_j$.
+\end{defn}
+
+% 5.7
+\begin{prop}
+  Sei $(X_i, x_i)_{i \in I}$ eine Familie von punktierten Räumen, sodass alle Raumpaare $(X_i, \{ x_i \})$ gut sind. Dann induzieren die Inklusionen $X_i \hookrightarrow \vee_i X_i$ einen Isomorphismus
+  \[
+    \bigoplus_{i \in I} \RH_n(X_i) \cong \RH_n\left( \vee_i X_i \right) \quad
+    \text{für alle $n \geq 0$.}
+  \]
+\end{prop}
+
+% 5.8
+\begin{lem}
+  Sei $X$ ein CW-Komplex. Dann gilt
+  \[ X^n/X^{n-1} \approx \vee_{i \in I(n)} S^n. \]
+\end{lem}
+
+\begin{kor}
+  $H_i(X^n/X^{n-1}) = \begin{cases}
+    \oplus_{i \in I(n)} \Z, & \text{falls } i = n, \\
+    0, & \text{sonst.}
+  \end{cases}$
+\end{kor}
+
+% 5.9
+\begin{prop}
+  \begin{itemize}
+    \item $H^k(X^n) = 0$ für $k > n$.
+    \item Für $k < n$ induziert die Inklusion $X^n \hookrightarrow X$ Isomorphismen $H_k(X^n) \cong H_k(X)$.
+  \end{itemize}
+\end{prop}
+
+\begin{defn}
+  Der \emph{zelluläre Kettenkomplex} eines CW-Komplexes $X$ ist definiert durch
+  \[ C^\text{cell}_n(X) \coloneqq H_n(X^n, X^{n-1}) \]
+  mit dem verbindenden Homomorphismus
+  \[ \partial_n : H_n(X^n, X^{n-1}) \to H_{n-1}(X^{n-1}, X^{n-2}) \]
+  aus der l.\,e.\,S. des Raumtripels $(X^n, X^{n-1}, X^{n-2})$ als Randabb.\\
+  Dabei setzt man $X^{n-2} \coloneqq \emptyset$ und $\partial_0 = 0$.\\
+  Die Homologiegruppen dieses Komplexes werden mit $H_*^\text{cell}(X)$ bezeichnet.
+\end{defn}
+
+\begin{prop}
+  % Ausgelassen: Erster Teil
+  Für jeden CW-Komplex $X$ gilt $H_*^\text{cell}(X) \cong H_*(X)$.
+\end{prop}
+
+\begin{kor}
+  Hat der CW-Komplex $X$ keine $n$-Zellen so ist $H_n(X) = 0$. Wenn $X$ $k$-viele $n$-Zellen besitzt, dann wird $H_n(X)$ von höchstens $k$ Elementen erzeugt.
+\end{kor}
+
+\begin{bem}
+  Wir wählen Erzeuger $t_n$ von $H_n(D^n, \partial D^n)$ und $s_n$ von $\RH_n(S^n)$ wie folgt:
+  Für $n=0$ wählen wir einen beliebigen Erzeuger von $H_0(S^0)$. Angenommen, wir haben einen Erzeuger von $s_i \in H_i(S^i)$ bereits definiert. Der verbindende Homomorphismus $\partial_i : H_{i+1}(D^{i+1}, S^i) \to H_i(S^i)$ aus der l.\,e.\,S. des Raumpaares $(D^{i+1}, S^i)$ ist ein Isomorphismus. Sei der Erzeuger $t_{i+1}$ von $H_{i+1}(S^{i+1})$ das Urbild von $s_i$ unter $\partial_i$. Wir wählen $s_{i+1}$ als das Bild von $t_{i+1}$ unter dem Isomorphismus
+  \[ H_{i+1}(D^{i+1}, S^i) \cong H_{i+1}(D^{i+1}/S^i) \cong H_{i+1}(S^{i+1}) \]
+  Dabei seien die Homöomorphismen $D^{i+1}/S^i \approx S^{i+1}$ fest gewählt.\\
+  Wir erhalten Isomorphismen
+  \[ C^{\text{cell}}_n(X) = H_n(X^n, X^{n-1}) \cong \bigoplus_{I(n)} H_n(D^n, S^{n-1}) \cong \bigoplus_{I(n)} \Z. \]
+  Sei nun $e^n_\alpha$ eine $n$-Zelle mit anheftender Abb. $\phi_\alpha : S^{n-1} \to X^{n-1}$ und $e^{n-1}_\beta$ eine $(n{-}1)$-Zelle von $X$. Sei $d_{\alpha \beta}$ der Abbildungsgrad von
+  \[ S^{n-1} \xrightarrow{\phi_\alpha} X^{n-1} \to X^{n-1} / X^{n-2} \cong \vee_{i \in I(n)} S^{n-1} \xrightarrow{q_\beta} S^{n-1}. \]
+  Wir bezeichnen den $\alpha$-ten Erzeuger von $C^{\text{cell}}_n(X)$ (mit $\alpha \in I(n)$) mit $e^n_\alpha$. Dann haben wir:
+\end{bem}
+
+\begin{prop}
+  Der zelluläre Randoperator ist gegeben durch
+  \[ \partial_n(e^n_\alpha) = \sum_{\beta \in I(n-1)} d_{\alpha \beta} e^{n-1}_\beta. \]
+  Die Summe ist dabei endlich.
+\end{prop}
+
+% Vorlesung vom 26.11.2014
+
+% §6. Homologie mit Koeffizienten, der Satz von Borsuk-Ulam
+
+
+
+
+
+
 
 \begin{bsp}[Homologie von wichtigen Räumen]
   \[
-    H_i(S^n) = H_i(\R^n, \R^n - \{0\}; R) = \begin{cases}
+    \RH_i(S^n) = \RH_i(\R^n, \R^n - \{0\}; R) = \begin{cases}
       R, & \text{wenn $i=0,n$} \\
       0, & \text{sonst}
     \end{cases}
@@ -339,6 +681,9 @@
       \Z, & \text{wenn $i \leq 2n$ und $i$ gerade} \\
       0, & \text{sonst}
     \end{cases}
+  \]
+  \[
+    H_i(T^n) = H_i(S^{n-1}) = \Z^{n \choose i}
   \]
 \end{bsp}
 
