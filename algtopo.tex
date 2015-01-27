@@ -123,7 +123,7 @@
     \partial_n : C_n(X) \to C_{n-1}(X), \quad
     \sigma \mapsto \sum_{i=0}^n (-1)^i \sigma_{\angles{e_o,...,\hat{e_i},...,e_n}}.
   \]
-  Analog zu oben gilt $\partial_{n-1} \circ \partial_n = 0$, man erhält also einen Komplex $\CC{C}(X)$ der singulären Ketten in $X$. Die Homologie dieses Komplexes bezeichnet man mit $H_n(X)$.
+  Analog zu oben gilt $\partial_{n-1} \circ \partial_n = 0$, man erhält also einen Komplex $\CC{C}(X)$ der singulären Ketten in $X$. Dessen Homologiegruppen heißen \emph{singuläre Homologiegruppen} $H_n(X)$.
 \end{defn}
 
 \begin{defn}
@@ -444,7 +444,7 @@
 \end{bem}
 
 \begin{defn}
-  Für einen $\Delta$-Komplex $X$ sei $C_n^\Delta(X)$, die freie abelsche Gruppe erzeugt von den Abbildungen $\sigma_\alpha : \Delta^{n(\alpha)} \to X$ mit $n(\alpha) = n$. Diese Gruppen bilden einen Simplizialkomplex. Die Homologiegruppen dieses Komplexes heißen \emph{singuläre Homologiegruppen} $H^\Delta_*(X)$.
+  Für einen $\Delta$-Komplex $X$ sei $C_n^\Delta(X)$, die freie abelsche Gruppe erzeugt von den Abbildungen $\sigma_\alpha : \Delta^{n(\alpha)} \to X$ mit $n(\alpha) = n$. Diese Gruppen bilden einen Simplizialkomplex. Die Homologiegruppen dieses Komplexes heißen \emph{simpliziale Homologiegruppen} $H^\Delta_*(X)$.
 \end{defn}
 
 \begin{defn}
@@ -641,13 +641,75 @@
 
 \begin{prop}
   Der zelluläre Randoperator ist gegeben durch
-  \[ \partial_n(e^n_\alpha) = \sum_{\beta \in I(n-1)} d_{\alpha \beta} e^{n-1}_\beta. \]
+  \[ \partial_n(e^n_\alpha) = \!\!\! \sum_{\beta \in I(n-1)} \!\!\! d_{\alpha \beta} e^{n-1}_\beta. \]
   Die Summe ist dabei endlich.
 \end{prop}
 
 % Vorlesung vom 26.11.2014
 
 % §6. Homologie mit Koeffizienten, der Satz von Borsuk-Ulam
+
+
+\begin{defn}
+  Der singuläre Kettenkomplex mit Koeffizienten in einer abelschen Gruppe $G$ eines topologischen Raumes $X$ ist def. durch
+  \[ C_n(X) \coloneqq \{ \text{ formale endl. Linearkomb. } \sum_{\sigma \in \Delta_n} \lambda_\sigma \cdot \sigma \text{ mit $\lambda_\sigma \in G$} \} \]
+  Die Randabbildung ist ganz wie beim gewöhnlichen Kettenkomplex ($G = \Z$) definiert. Die Homologie dieses Komplexes heißt \emph{singuläre Homologie mit Koeffizienten in $G$}. Sie ist eine gewöhnliche Homologietheorie im Sinne von Eilenberg und Steenrod. Man erhält \emph{reduzierte Homologie mit Koeffizienten in $G$}, indem man die Komplex von dem mit dem Augmentierungshomomorphismus
+  \[ \epsilon : C_0(X; G) \to G, \quad \sum_{\sigma \in \Delta_0(X)} \lambda_\sigma \cdot \sigma \mapsto \!\!\! \sum_{\sigma \in \Delta_0(X)} \lambda_\sigma \]
+  erweiterten Kettenkomplex mit Koeffizienten in $G$ nimmt.
+\end{defn}
+
+% 6.1
+\begin{prop}
+  Ist $f : S^n \to S^n$ stetig vom Grad $n$, so ist %die induzierte Abbildung
+  \[ f_* : \RH_n(S^n; G) \to \RH_n(S^n; G) \]
+  durch Multiplikation mit $n$ gegeben.
+\end{prop}
+
+\begin{defn}
+  Ist $X$ ein CW-Komplex, so ist der zelluläre Kettenkomplex mit Koeffizienten in $G$ definiert durch
+  \[ C_n^\text{cell}(X) \coloneqq H_n(X^n, X^{n-1}; G). \]
+  Die Randabbildung $\partial^\text{cell}_n$ ist der verbindende Homomorphismus in der l.\,e.\,S. zum Raumtripel $(X^n, X^{n-1}, X^{n-2})$ mit Koeffizienten in $G$. Es gilt nach Wahl von passenden Erzeugern:
+  \[ \partial^\text{cell}_n (e_\alpha^n) = \sum_\beta d_{\alpha \beta} e_\beta^{n-1}. \]
+\end{defn}
+
+\begin{defn}
+  Sei $p : \tilde{X} \to X$ eine endliche Überlagerung mit Blätterzahl $k$. Sei $\tau_n : C_n(X) \to C_n(\tilde{X})$ die Abbildung, die jedes $n$-Simplex auf die Summe seiner $k$ möglichen Lifte abbildet. Dann bildet $\tau_*$ eine Kettenabbildung und $p_* \circ \tau_* : C_*(X) \to C_*(X)$ ist durch Multiplikation mit $k$ gegeben.
+  % Ausgelassen: Dritte Eigenschaft
+  Die von $\tau$ induzierte Abbildung $\tau_* : H_n(X) \to H_n(\tilde{X})$ heißt \emph{Transferhomomorphismus}.
+\end{defn}
+
+\begin{defn}
+  Ist nun $k=2$ so gibt es eine kurze exakte Sequenz
+  \[ 0 \to C_*(X; \Z/2) \xrightarrow{\tau_*} C_*(\tilde{X}, \Z/2) \xrightarrow{p_*} C_*(X, \Z/2) \to 0. \]
+  Die davon induzierte lange exakte Sequenz
+  \[ ... \to H_*(X; \Z/2) \xrightarrow{\tau_*} H_*(\tilde{X}, \Z/2) \xrightarrow{p_*} H_*(X, \Z/2) \to H_{*-1}(X; \Z/2) \to ... \]
+  heißt \emph{Transfersequenz}.
+\end{defn}
+
+% Vorlesung vom 1.12.2014
+
+\begin{defn}
+  Eine Abbildung $f : S^n \to S^n$ heißt \emph{ungerade}, falls
+  \[ \fa{x \in S^n} f(-x) = -f(x). \]
+\end{defn}
+
+% 6.2
+\begin{prop}
+  Jede ungerade Abbildung hat ungeraden Abbildungsgrad.
+\end{prop}
+
+% 6.3
+\begin{satz}[\emph{Borsuk-Ulam}]
+  Sei $f : S^n \to \R^n$ stetig. Dann gibt es $x \in S^n$ mit $f(x) = f(-x)$.
+\end{satz}
+
+% 6.4
+\begin{satz}[Ham-Sandwich-Theorem]
+  Seien $K_1, ..., K_n \subset \R^n$ Lebesgue- messbar und beschränkt. Dann gibt es eine Hyperebene $H \subset \R^n$, die jeden Teilraum genau halbiert.
+\end{satz}
+
+% §7. Euler-Charakteristik und Lefschetzer Fixpunktsatz
+
 
 
 
