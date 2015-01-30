@@ -30,6 +30,9 @@
 \newcommand{\RH}{\tilde{H}} % Reduzierte Homologie
 \newcommand{\inte}{\mathop{\mathrm{int}}} % Inneres (interior)
 \newcommand{\clos}[1]{\overline{#1}} % Abschluss
+\newcommand{\Tor}{\mathrm{Torsion}} % Torsion
+\newcommand{\tr}{\mathop{\mathrm{tr}}} % Spur (trace)
+\newcommand{\rk}{\mathop{\mathrm{rk}}} % Rang (rank)
 
 % Kleinere Klammern
 \delimiterfactor=701
@@ -710,7 +713,215 @@
 
 % §7. Euler-Charakteristik und Lefschetzer Fixpunktsatz
 
+\begin{defn}
+  Die $n$-te \emph{Bettizahl} $b_n(X)$ eines topologischen Raumes $X$ ist der Rang von $H_n(X)$ (falls dieser endlich ist).
+\end{defn}
 
+\begin{defn}
+  Sei $X$ ein CW-Komplex. Für $n \geq 0$ sei $c_n$ die Anzahl der $n$-Zellen in $X$. Dann heißt
+  \[
+    \chi(X) \coloneqq \sum_{n=0}^\infty (-1)^n c_n
+    \quad \text{\emph{Eulercharakteristik} von $X$.}
+  \]
+\end{defn}
+
+\begin{satz}
+  Es gilt $\chi(X) = \sum_{n=0}^\infty (-1)^n b_n(X)$.
+\end{satz}
+
+\begin{bsp}
+  Die \emph{orientierte Fläche vom Geschlecht $g$}, $\Sigma_g$, entsteht durch Verkleben der Randsegmente
+  \[ \alpha_1, \beta_1, \alpha_1^{-1}, \beta_1^{-1}, ...., \alpha_g, \beta_g, \alpha_g^{-1}, \beta_g^{-1} \]
+  eines $4g$-Eckes. Es gilt $\chi(\Sigma_g) = 2 - 2g$.
+\end{bsp}
+
+% 7.2
+\begin{kor}[Eulersche Polyederformel]
+  Sei $P \subset \R^3$ ein konvexes Polyeder. Sei $e$ die Anzahl der Ecken, $k$ die Anzahl der Kanten und $f$ die Anzahl der Flächen. Dann ist $e - k + f = 2$.
+\end{kor}
+
+% Vorlesung vom 3.12.2014
+
+\begin{bem}
+  Sind $X$ und $Y$ endlich-dim. CW-Komplexe. Dann ist auch $X \times Y$ ein endlich-dimensionaler CW-Komplex. Ist $X$ oder $Y$ $\infty$-dimensional, so gibt es auch einen Produktkomplex, doch dieser trägt eine i.\,A. feinere Topologie als der Produktraum $X \times Y$.
+\end{bem}
+
+% 7.3
+\begin{prop}
+  Seien $X$ und $Y$ endliche CW-Komplexe. Dann gilt
+  \[ \chi(X \times Y) = \chi(X) \cdot \chi(Y). \]
+\end{prop}
+
+\begin{defn}
+  Sei $X$ ein endlicher Simplizialkomplex und $f : X \to X$ stetig. Wir erhalten für alle $n \geq 0$ eine induzierte Abbildung
+  \[ f_n : H_n(X)/\Tor \to H_n(X)/\Tor. \]
+  Die \emph{Lefschetzzahl} von $f$ ist definiert als Summe
+  \[ L(f) \coloneqq \sum (-1)^n \tr f_n. \]
+\end{defn}
+
+\begin{bsp}
+  $L(\id_X) = \chi(X)$
+\end{bsp}
+
+% 7.4
+\begin{satz}[\emph{Lefschetzer Fixpunktsatz}]\mbox{}\\
+  Wenn $L(f) \not= 0$, dann hat $f$ einen Fixpunkt.
+\end{satz}
+
+% §8. Mannigfaltigkeiten und Orientierung
+
+\begin{defn}
+  Eine $n$-dimensionale topologische \emph{Mannigfaltigkeit} ist ein Hausdorffraum $M$, sodass jeder Punkt in $M$ eine offene Umgebung besitzt, die homöomorph zum $\R^n$ ist.
+\end{defn}
+
+\begin{bem}
+  Man fordert oft zusätzlich, dass $M$ das zweite Abzählbarkeitsaxiom erfüllt.
+\end{bem}
+
+\begin{defn}
+  Sei $X$ ein topologischer Raum und $A \subset X$. Dann heißt
+  \[ H_n(X|A) \coloneqq H_n(X, X-A) \]
+  \emph{lokale Homologie} von $X$ bei $A$.
+\end{defn}
+
+\begin{defn}
+  Sei $M$ eine $n$-Mannigfaltigkeit. Eine \emph{lokale Orientierung} von $M$ bei $x \in M$ ist gegeben durch Wahl eines Erzeugers
+  \[ \mu_x \in H_n(M|x) \cong \Z. \]
+\end{defn}
+
+\begin{lem}
+  Eine Wahl einer lokalen Orientierung bei $x \in \R^n$ legt eindeutig eine lokale Orientierung für alle $y \in \R^n$ fest.
+\end{lem}
+
+% Vorlesung vom 8.12.2014
+
+\begin{defn}
+  Sei $M$ eine Mft. Eine \emph{Orientierung} von $M$ ist eine Abbildung
+  \[ x \in M \enspace\mapsto\enspace \mu_x \in H_n(M|x), \]
+  sodass für alle $x \in M$ eine offene Kugel $U$ um $x$ und ein Erzeuger $\mu_U \in H_n(X|U)$ existiert, sodass für alle $y \in U$ die lokale Orientierung $\mu_y$ durch Einschränkung von $\mu_U$ gegeben ist.
+\end{defn}
+
+\begin{defn}
+  Falls eine Orientierung von $M$ existiert, so heißt $M$ \emph{orientierbar}.
+\end{defn}
+
+% 8.2
+\begin{prop}
+  Sei $M$ eine zshgde orientierbare Mft. Dann existieren genau zwei Orientierungen von $M$.
+\end{prop}
+
+
+\begin{defn}
+  Sei $M$ eine $n$-Mft. Setze
+  \[ \tilde{M} \coloneqq \Set{ \mu_x }{ x \in M \text{ und } \mu_x \in H_n(M|x) \text{ ist lokale Orientierung an $x$}. } \]
+  Die Topologie auf $M$ wird erzeugt von folgenden Mengen:
+  Sei $U \subset M$ offen, $\mu_U \in H_n(M|U)$. Dann ist die Menge
+  \[ \Set{ \mu_U|_y }{ y \in U } \subset \tilde{M} \]
+  offen. Dies definiert eine zweiblättrige Überlagerung $\tilde{M}$ von $M$.
+\end{defn}
+
+% 8.3
+\begin{prop}
+  $\tilde{M}$ ist orientierbar.
+\end{prop}
+
+% 8.4
+\begin{prop}
+  Sei $M$ eine Mft. Dann ist $M$ genau dann orientierbar, wenn $\tilde{M} \to M$ eine triviale Überlagerung ist.
+\end{prop}
+
+% 8.5
+\begin{kor}
+  Ist $M$ eine zshgde Mft und besitzt $\pi_1(M)$ keine Untergruppe vom Index $2$, so ist $M$ orientierbar.
+\end{kor}
+
+% 8.6
+\begin{prop}
+  Sei $M$ eine kompakte zshgde $n$-Mft.
+  \begin{itemize}
+    \item Falls $M$ orientierbar ist, dann ist für alle $x \in M$ die kanonische Abbildung $H_n(M) \to H_n(M|x)$ ein Isomorphismus. Insbesondere gilt $H_n(M) \cong \Z$.
+    \item Falls $M$ nicht orientierbar ist, gilt $H_n(M) = 0$.
+    \item $H_n(M, \Z/2) = \Z/2$ unabhängig von Orientierbarkeit.
+    \item $H_i(M) = 0$ für $i > n$.
+  \end{itemize}
+\end{prop}
+
+\begin{defn}
+  Sei $M$ ein $n$-Mft und $G$ eine abelsche Gruppe. Eine \emph{verallgemeinerte $G$-Orientierung} ist eine Zuordnung
+  \[ x \in M \enspace\mapsto\enspace \mu_x \in H_n(M|x; G), \]
+  sodass für alle $x \in M$ eine offene Kugel $U$ um $x$ und ein Element $\mu_U \in H_n(X|U)$ existiert, sodass für alle $y \in U$ die lokale Orientierung $\mu_y$ durch Einschränkung von $\mu_U$ gegeben ist.
+\end{defn}
+
+% 7.8
+\begin{prop}
+  Sei $M$ eine zshgde $n$-Mft. Dann ist $M$ genau dann orientierbar, wenn es eine verallgemeinerte $\Z$-Orientierung von $M$ gibt, die an einem Punkt von $0$ verschieden ist.
+\end{prop}
+
+% 8.8
+\begin{lem}
+  Sei $M$ eine $n$-Mft, $G$ eine ab. Gruppe und $A {\subset} M$ kompakt.
+  \begin{itemize}
+    \item Ist $x \mapsto \mu_x$ eine verallgemeinerte $G$-Orientierung von $M$, so gibt es genau eine Klasse $\alpha_A \in H_n(M|A; G)$, deren Bild in $H_n(M|x; G)$ für alle $x \in M$ mit $\mu_x$ übereinstimmt.
+    \item $H_i(M|A; G) = 0$ für $i > n$.
+  \end{itemize}
+\end{lem}
+
+% Vorlesung vom 10.12.2014
+
+% 8.9
+\begin{kor}
+  Sei $M$ eine zshgde kompakte $n$-Mft. Dann ist $M$ genau dann orientierbar, wenn $H_n(M) \cong \Z$. Dann entspricht jeder Erzeuger von $H_n(M)$ einer Orientierung von $M$. Andernfalls gilt $H_n(M) = 0$.
+\end{kor}
+
+% 8.10
+\begin{prop}
+  Sei $M$ eine zshgde nichtkompakte $n$-Mft. Dann ist $H_{\geq n}(M; G) = 0$ für beliebige Koeffizienten $G$.
+\end{prop}
+
+% Vorlesung vom 15.12.2014
+
+% 8.11
+\begin{satz}
+  Sei $M$ eine kompakte $n$-Mft. Dann ist $H_*(M;\Z)$ in allen Graden endlich erzeugt und $H_{>n}(M; \Z) = 0$.
+\end{satz}
+
+\begin{defn}
+  Die \emph{Eulercharakteristik} einer kompakten $n$-Mft ist
+  \[ \chi(M) \coloneqq \sum_{i=0}^n \rk H_i(M; \Z) = \sum_{i=0}^n b_i. \]
+\end{defn}
+
+\begin{defn}
+  Ein topol. Raum $X$ heißt \emph{lokal zusammenziehbar}, falls für jede Umgebung $U \subset X$ eines beliebigen Punktes $x \in U$ eine weitere Umgebung $V \subset U$ von $x$ existiert, sodass die Inklusion $V \hookrightarrow U$ homotop zu einer konstanten Abbildung ist.
+\end{defn}
+
+\begin{lem}
+  Mannigfaltigkeiten sind lokal zusammenziehbar.
+\end{lem}
+
+% 8.12
+\begin{satz}
+  Sei $K \subset \R^n$ lokal zusammenziehbar und abgeschlossen. Dann gibt es eine Umgebung $U \supset K$ von $K$, sodass die Inklusion $K \hookrightarrow U$ ein Retrakt ist.
+\end{satz}
+
+\begin{defn}
+  Ein topol. Raum $X$ ist ein \emph{Euklidischer Umgebungs- retrakt}, falls eine topol. Einbettung $X \hookrightarrow \R^n$ existiert und für jede solche Einbettung das Bild Retrakt einer offenen Umgebung ist.
+\end{defn}
+
+% 8.13
+\begin{kor}
+  Kompakte topologische Mften sind Euklidische Umgebungsretrakte.
+\end{kor}
+
+% 8.14
+\begin{prop}
+  Sei $X$ ein CW-Komplex und $Y$ ein topologischer Raum. Sei $f : X^{n-1} \to Y$ stetig. Dann sind äquivalent:
+  \begin{itemize}
+    \item $f$ lässt sich zu einer stetigen Abbildung $X^n \to Y$ fortsetzen.
+    \item Alle Kompositionen $f \circ \phi_\alpha : \partial D_\alpha^n \to Y$ sind homotop zu konstanten Abbildungen. Hierbei sind $\phi_\alpha : \partial D_\alpha \to X^{n-1}$ die anklebenden Abbildung der $n$-Zellen.
+  \end{itemize}
+\end{prop}
+
+% Vorlesung vom 17.12.2014
 
 
 
