@@ -13,7 +13,6 @@
 %\newcommand{\conv}{\mathop{\mathrm{conv}}} % Konvexe Hülle
 %\newcommand{\rel}{\text{ rel }} % = relativ (Homotopie)
 %\newcommand{\Ob}{\mathrm{Ob}} % Objects (of a category)
-%\newcommand{\Hom}{\mathrm{Hom}} % Homomorphisms
 %\newcommand{\Aut}{\mathrm{Aut}} % Automorphisms
 %\newcommand{\Mor}{\mathrm{Mor}} % Morphisms
 %\newcommand{\dom}{\mathrm{dom}} % Domain
@@ -33,6 +32,8 @@
 \newcommand{\Tor}{\mathrm{Torsion}} % Torsion
 \newcommand{\tr}{\mathop{\mathrm{tr}}} % Spur (trace)
 \newcommand{\rk}{\mathop{\mathrm{rk}}} % Rang (rank)
+\newcommand{\Hom}{\mathop{\mathrm{Hom}}} % Homomorphisms
+\newcommand{\cell}{\text{cell}} % zellulär
 
 % Kleinere Klammern
 \delimiterfactor=701
@@ -103,7 +104,7 @@
 % Vorlesung vom 8.10.2014
 
 \begin{defn}
-  Ein \emph{Kettenkomplex} $\CC{C}$ ist eine Folge $(C_n)_{n \in \N}$ und Gruppenhomomorphismen $\partial_n : C_n \to C_{n-1}$ mit der Eigenschaft $\partial_{n-1} \circ \partial_n = 0$.
+  Ein \emph{Kettenkomplex} $\CC{C}$ ist eine Folge $(C_n)_{n \in \N}$ von abelschen Gruppen und Gruppenhomomorphismen $\partial_n : C_n \to C_{n-1}$ mit der Eigenschaft $\partial_{n-1} \circ \partial_n = 0$.
 \end{defn}
 
 \begin{defn}
@@ -204,7 +205,7 @@
 \end{bem}
 
 \begin{defn}
-  Eine Homotopie zwischen Abbildungen von Raumpaaren $f, g : (X, A) \to (Y, B)$ ist eine Homotopie $H : \cinterval{0}{1} \times X \to Y$ zwischen $f$ und $g$ mit $H([0,1] \times A) \subset Y$.
+  Eine Homotopie zwischen Abbildungen von Raumpaaren $f, g : (X, A) \to (Y, B)$ ist eine Homotopie $H : \cinterval{0}{1} \times X \to Y$ zwischen $f$ und $g$ mit $H(\cinterval{0}{1} \times A) \subset Y$.
 \end{defn}
 
 \begin{prop}
@@ -275,8 +276,8 @@
 
 % 3.5
 \begin{satz}
-  Sei $(X, R)$ ein Raumpaar, $U \subset R$ mit $\clos{U} \subset \inte R$. Dann induziert die Inklusion $(X - U, R - U) \hookrightarrow (X, R)$ Isomorphismen
-  \[ H_n(X - U, R - U) \to H_n(X, R) \quad \text{für alle $n \geq 0$.} \]
+  Sei $(X, A)$ ein Raumpaar, $U \subset A$ mit $\clos{U} \subset \inte A$. Dann induziert die Inklusion $(X - U, A - U) \hookrightarrow (X, A)$ Isomorphismen
+  \[ H_n(X - U, A - U) \to H_n(X, A) \quad \text{für alle $n \geq 0$.} \]
 \end{satz}
 
 \begin{bem}
@@ -613,17 +614,17 @@
 
 \begin{defn}
   Der \emph{zelluläre Kettenkomplex} eines CW-Komplexes $X$ ist definiert durch
-  \[ C^\text{cell}_n(X) \coloneqq H_n(X^n, X^{n-1}) \]
+  \[ C^\cell_n(X) \coloneqq H_n(X^n, X^{n-1}) \]
   mit dem verbindenden Homomorphismus
   \[ \partial_n : H_n(X^n, X^{n-1}) \to H_{n-1}(X^{n-1}, X^{n-2}) \]
   aus der l.\,e.\,S. des Raumtripels $(X^n, X^{n-1}, X^{n-2})$ als Randabb.\\
   Dabei setzt man $X^{n-2} \coloneqq \emptyset$ und $\partial_0 = 0$.\\
-  Die Homologiegruppen dieses Komplexes werden mit $H_*^\text{cell}(X)$ bezeichnet.
+  Die Homologiegruppen dieses Komplexes werden mit $H_*^\cell(X)$ bezeichnet.
 \end{defn}
 
 \begin{prop}
   % Ausgelassen: Erster Teil
-  Für jeden CW-Komplex $X$ gilt $H_*^\text{cell}(X) \cong H_*(X)$.
+  Für jeden CW-Komplex $X$ gilt $H_*^\cell(X) \cong H_*(X)$.
 \end{prop}
 
 \begin{kor}
@@ -636,10 +637,10 @@
   \[ H_{i+1}(D^{i+1}, S^i) \cong H_{i+1}(D^{i+1}/S^i) \cong H_{i+1}(S^{i+1}) \]
   Dabei seien die Homöomorphismen $D^{i+1}/S^i \approx S^{i+1}$ fest gewählt.\\
   Wir erhalten Isomorphismen
-  \[ C^{\text{cell}}_n(X) = H_n(X^n, X^{n-1}) \cong \bigoplus_{I(n)} H_n(D^n, S^{n-1}) \cong \bigoplus_{I(n)} \Z. \]
+  \[ C^{\cell}_n(X) = H_n(X^n, X^{n-1}) \cong \bigoplus_{I(n)} H_n(D^n, S^{n-1}) \cong \bigoplus_{I(n)} \Z. \]
   Sei nun $e^n_\alpha$ eine $n$-Zelle mit anheftender Abb. $\phi_\alpha : S^{n-1} \to X^{n-1}$ und $e^{n-1}_\beta$ eine $(n{-}1)$-Zelle von $X$. Sei $d_{\alpha \beta}$ der Abbildungsgrad von
   \[ S^{n-1} \xrightarrow{\phi_\alpha} X^{n-1} \to X^{n-1} / X^{n-2} \cong \vee_{i \in I(n)} S^{n-1} \xrightarrow{q_\beta} S^{n-1}. \]
-  Wir bezeichnen den $\alpha$-ten Erzeuger von $C^{\text{cell}}_n(X)$ (mit $\alpha \in I(n)$) mit $e^n_\alpha$. Dann haben wir:
+  Wir bezeichnen den $\alpha$-ten Erzeuger von $C^{\cell}_n(X)$ (mit $\alpha \in I(n)$) mit $e^n_\alpha$. Dann haben wir:
 \end{bem}
 
 \begin{prop}
@@ -670,9 +671,9 @@
 
 \begin{defn}
   Ist $X$ ein CW-Komplex, so ist der zelluläre Kettenkomplex mit Koeffizienten in $G$ definiert durch
-  \[ C_n^\text{cell}(X) \coloneqq H_n(X^n, X^{n-1}; G). \]
-  Die Randabbildung $\partial^\text{cell}_n$ ist der verbindende Homomorphismus in der l.\,e.\,S. zum Raumtripel $(X^n, X^{n-1}, X^{n-2})$ mit Koeffizienten in $G$. Es gilt nach Wahl von passenden Erzeugern:
-  \[ \partial^\text{cell}_n (e_\alpha^n) = \sum_\beta d_{\alpha \beta} e_\beta^{n-1}. \]
+  \[ C_n^\cell(X) \coloneqq H_n(X^n, X^{n-1}; G). \]
+  Die Randabbildung $\partial^\cell_n$ ist der verbindende Homomorphismus in der l.\,e.\,S. zum Raumtripel $(X^n, X^{n-1}, X^{n-2})$ mit Koeffizienten in $G$. Es gilt nach Wahl von passenden Erzeugern:
+  \[ \partial^\cell_n (e_\alpha^n) = \sum_\beta d_{\alpha \beta} e_\beta^{n-1}. \]
 \end{defn}
 
 \begin{defn}
@@ -923,8 +924,142 @@
 
 % Vorlesung vom 17.12.2014
 
+% Hatcher, Algebraic Topology, Thm 2A.1
+\begin{prop}
+  Es gibt einen kanonischen Homomorphismus $h : \pi_1(X, x_0) \to H_1(X)$. Wenn $X$ wegzusammenhängend ist, so ist $X$ surjektiv und der Kern von $h$ ist die Kommutator-Untergruppe $K(\pi_1(X, x_0))$. Wir erhalten dann einen Iso $\pi_1(X)_{\text{ab}} \to H_1(X)$.
+\end{prop}
 
+% Vorlesung vom 7.1.2015
 
+% §10. Singuläre Kohomologie
+
+\begin{defn}
+  Ein \emph{Kokettenkomplex} $C^*$ ist eine Folge $(C^n)_{n \in \N}$ von abelschen Gruppen und Gruppenhomomorphismen $\delta^n : C^n \to C^{n+1}$ mit der Eigenschaft $\delta^{n+1} \circ \delta^n = 0$. Analog zu Kettenkomplexen sind \emph{Kozykel}, \emph{Koränder} und \emph{Kohomologiegruppen} $H^n(C^*) \coloneqq \ker \delta_n / \im \delta_{n-1}$ des Kokettenkomplex definiert.
+\end{defn}
+
+\begin{defn}
+  Sei $(X, A)$ ein Raumpaar und $G$ eine abelsche Gruppe. Dann heißt $(C^*(X, A; G), \delta^*)$ mit
+  \[
+    C^n(X, A; G) \coloneqq \Hom(C_n(X, A), G), \quad
+    \delta^n \coloneqq \Hom(\partial_{n+1}, G)
+  \]
+  \emph{singulärer (rel.) Kokettenkomplex} von $X$ mit Koeffizienten in $G$. Die $n$-te \emph{singuläre Kohomologie} mit Koeffizienten in $G$ ist
+  \[ H^n(X, A; G) \coloneqq H^n(C^*(X, A; G)). \]
+\end{defn}
+
+\begin{nota}
+  \begin{itemize}
+    \item $H^n(X; G) \coloneqq H^n(X, \emptyset; G)$
+    \item $H^n(X, A) \coloneqq H^n(X, A; \Z)$
+  \end{itemize}
+\end{nota}
+
+\begin{bem}
+  $H^n(\blank; G)$ ist ein kontravarianter Funktor von der Kategorie der Raumpaare in die Kategorie der abelschen Gruppen.
+\end{bem}
+
+\begin{lem}
+  Sei $0 \to A \to B \to C \to 0$ eine k.\,e.\,S. von abelschen Gruppen. Dann ist auch
+  \[
+    0 \to \Hom(C, G) \to \Hom(B, G) \to \Hom(A, G)
+    \qquad \text{exakt.}
+  \]
+\end{lem}
+
+\begin{defn}
+  Sei $0 \to A \to B \to C \to 0$ eine k.\,e.\,S. in einer abelschen Kategorie $\mathcal{A}$. Die Sequenz heißt \emph{spaltend}, falls sie isomorph zur k.\,e.S. $0 \to A \to A \oplus C \to C$ ist.
+\end{defn}
+
+\begin{prop}
+  Für eine Sequenz $0 \to A \xrightarrow{f} B \to \xrightarrow{g} C \to 0$ sind äquivalent:
+  \begin{itemize}
+    \item Die Sequenz spaltet.
+    \item Es existiert eine Retraktion $r : B \to A$ mit $r \circ f = \id_A$.
+    \item Es existiert ein Schnitt $s : C \to B$ mit $g \circ s = \id_C$.
+  \end{itemize}
+\end{prop}
+
+\begin{prop}
+  Seien $\mathcal{A}$ und $\mathcal{B}$ abelsche Kategorien, $F : \mathcal{A} \to \mathcal{B}$ ein additiver Funktor und $0 \to A \to B \to C \to 0$ eine spaltende k.\,e.\,S. in $\mathcal{A}$.\\
+  Dann ist auch $0 \to F(A) \to F(B) \to F(C) \to 0$ spaltend exakt.
+\end{prop}
+
+\begin{bem}
+  Sei $(X, A)$ ein Raumpaar.
+  Man erhält aus der k.\,e. Sequenz
+  \[ 0 \to C^n(A) \to C^n(X) \to C^n(X, A) \to 0 \]
+  durch Anwenden von $\Hom(\blank, G)$ eine kurze exakte Sequenz
+  \[ 0 \to C^n(X, A; G) \to C^n(X; G) \to C^n(A; G) \to 0. \]
+  Daraus erhält man wiederum eine lange exakte Sequenz
+  \[ ... \to H^*(X, A; G) \to H^*(X; G) \to H^*(A; G) \to H^{*+1}(X, A; G) \to ... \]
+\end{bem}
+
+% 10.3
+\begin{prop}
+  Seien $f, g : (X, A) \to (Y, B)$ homotope Abbildungen von Raumpaaren. Dann gilt
+  $f^* = g^* : H^*(Y, B; G) \to H^*(X, A; G)$.
+\end{prop}
+
+% 10.4
+\begin{satz}
+  Sei $(X, A)$ ein Raumpaar, $U \subset A$ mit $\clos{U} \subset \inte A$. Dann induziert die Inklusion $(X - U, A - U) \hookrightarrow (X, A)$ Isomorphismen
+  \[ H^n(X, A; G) \to H^n(X - U, A - U; G) \quad \text{für alle $n \geq 0$.} \]
+\end{satz}
+
+\begin{bem}
+  Die kontravarianten Funktoren $H^n(\blank; G) : \Top(2) \to \AbGrp$, $n \in \Z$ definieren eine \emph{Kohomologietheorie} im Sinne von Eilenberg und Steenrod.
+\end{bem}
+
+\begin{defn}
+  Die \emph{reduzierte Kohomologie} $\RH^n(X; G)$ mit Koeff. in $G$ eines topol. Raumes $X$ ist die Homologie des Kokettenkomplexes, der durch Anwenden von $\Hom(\blank, G)$ aus dem augmentierten Komplex
+  \[
+    ... \to C_2(X) \to C_1(X) \to C_0(X) \to \Z \to 0
+    \quad \text{entsteht.}
+  \]
+\end{defn}
+
+% Vorlesung vom 8.1.2015
+
+% 10.5
+\begin{prop}
+  Sei $X = \cup_{i \in I} U_i$ die Zerlegung von $X$ in Wegzshgskmpnnten. Dann induzieren die Inklusionen $U_i \hookrightarrow X$ einen kanonischen Iso
+  \[ G^*(X; G) \cong \prod_{i \in I} H^*(X; G). \]
+\end{prop}
+
+\begin{satz}
+  Seien $A, B \subset X$ mit $\inte(A) \cup \inte(B) = X$. Dann gibt es in Kohomologie eine Mayer-Vietoris-Sequenz
+  \[ ... \to H^*(X; G) \to H^*(A; G) \oplus H^*(B; G) \to H^*(A \cap B; G) \to H^{*+1}(X; G) \to ... \]
+\end{satz}
+
+\begin{defn}
+  Sei $X$ ein $\Delta$-Komplex und $A \subset X$ ein Unterkomplex. Dann ist $(C^*_\Delta(X, A; G), \delta^*)$ der Unterkomplex von $C^*(X, A; G)$ mit
+  \[ C^n_\Delta(X, A; G) \coloneqq \Hom(C^\Delta_n(X, A), G). \]
+  Die Homologie dieses Komplexes wird mit $H^*_\Delta(X, A; G)$ bezeichnet.
+\end{defn}
+
+% 10.6
+\begin{prop}
+  Die Inklusion $C_*^\Delta(X, A) \hookrightarrow C_*(X, A)$ induziert einen Iso
+  \[ H^*(X, A; G) \to H^*_\Delta(X, A; G). \]
+\end{prop}
+
+% Ausgelassen: Lemma 10.7
+
+\begin{defn}
+  Sei $X$ ein CW-Komplex. Der \emph{zelluläre Kokettenkomplex} $(C^*_\cell(X; G), \delta_\cell)$ ist definiert durch
+  \[ C^n_\cell(X, G) \coloneqq H^n(X^n, X^{n-1}; G) \]
+  mit $\delta_n$ dem verbindenden Homomorphismus in der l.\,e. Kohomologiesequenz des Raumtripels $(X^{n+1}, X^n, X^{n-1})$.
+\end{defn}
+
+% 10.8
+\begin{prop}
+  %Die Kohomologie des zellulären Kokettenkomplexes ist isomorph zur singulären Kohomologie.
+  $H^*(C^*_\cell(X; G)) \cong H^*(X; G)$
+\end{prop}
+
+% Ausgelassen: Berechnung mittels Abbildungsgraden
+
+% §11. Universelle Koeffizientenformeln
 
 
 
