@@ -71,7 +71,7 @@
 \newtheorem*{methode}{Methode}
 
 \theoremstyle{remark}
-\newtheorem*{bem}{Bemerkung}
+\newtheorem*{bem}{Bem}
 \newtheorem*{bemn}{Bemerkungen}
 \newtheorem*{beweisidee}{Beweisidee}
 \newtheorem*{umformulierung}{Umformulierung}
@@ -148,6 +148,8 @@
 
 % :<=> (Definitionsdoppelpfeil)
 \newcommand{\coloniff}{\enspace:\!\iff}
+
+\renewcommand{\dh}{d.\,h.} % das heißt
 
 % Schöne Mengen { #1 | #2 }
 % siehe http://tex.stackexchange.com/questions/13634/define-pretty-sets-in-latex-esp-how-to-do-the-condition-separator

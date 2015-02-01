@@ -20,20 +20,25 @@
 %\newcommand{\op}{\text{op}} % Duale Kategorie
 %\newcommand{\Deck}{\mathrm{Deck}} % Gruppe der Decktransformationen
 
-\newcommand{\angles}[1]{\langle #1 \rangle}
+\newcommand{\angles}[1]{{\langle #1 \rangle}}
 \newcommand{\Simpl}{\mathcal{S}} % Simplizialkomplex
 \newcommand{\Real}[1]{\abs{#1}} % geometrische Realisierung
 \newcommand{\CC}[1]{{#1}_{\bullet}} % Kettenkomplex (chain complex)
 \newcommand{\Top}{\mathbf{Top}} % Kategorie der topologischen Räume
 \newcommand{\AbGrp}{\mathbf{AbGrp}} % Kategorie der abelschen Gruppen
 \newcommand{\RH}{\tilde{H}} % Reduzierte Homologie
-\newcommand{\inte}{\mathop{\mathrm{int}}} % Inneres (interior)
+\DeclareMathOperator{\inte}{int} % Inneres (interior)
 \newcommand{\clos}[1]{\overline{#1}} % Abschluss
-\newcommand{\Tor}{\mathrm{Torsion}} % Torsion
-\newcommand{\tr}{\mathop{\mathrm{tr}}} % Spur (trace)
-\newcommand{\rk}{\mathop{\mathrm{rk}}} % Rang (rank)
-\newcommand{\Hom}{\mathop{\mathrm{Hom}}} % Homomorphisms
+\newcommand{\Torsion}{\mathrm{Torsion}} % Torsion
+\DeclareMathOperator{\tr}{tr} % Spur (trace)
+\DeclareMathOperator{\rk}{rk} % Rang (rank)
+\DeclareMathOperator{\Hom}{Hom} % Homomorphisms
 \newcommand{\cell}{\text{cell}} % zellulär
+\DeclareMathOperator{\Tor}{Tor}
+\DeclareMathOperator{\Ext}{Ext}
+\newcommand{\op}{\mathrm{op}} % opposite category
+\newcommand{\keS}{k.\,e.\,S.} % kurze exakte Sequenz
+\newcommand{\leS}{l.\,e.\,S.} % lange exakte Sequenz
 
 % Kleinere Klammern
 \delimiterfactor=701
@@ -231,7 +236,7 @@
 \begin{bem}
   Ist $(X, A)$ ein Raumpaar, so erhält man eine kurze exakte Sequenz
   \[ 0 \to \CC{C}(A) \to \CC{C}(X) \to \CC{C}(X, A) \to 0. \]
-  Für ein Raumtripel $(X, A, U)$ erhält man eine k.\,e.\,S.
+  Für ein Raumtripel $(X, A, U)$ erhält man eine \keS{}
   \[ 0 \to \CC{C}(A, U) \to \CC{C}(X, U) \to \CC{C}(X, A) \to 0. \]
 \end{bem}
 
@@ -248,7 +253,7 @@
     ... \to H_n(A) \to H_n(X) \to H_n(X, A) \xrightarrow{\partial_n} H_{n-1}(A) \to ...
     \quad \text{exakt ist.}
   \]
-  Für ein Raumtripel $(X, A, U)$ erhält man eine l.\,e.\,S.
+  Für ein Raumtripel $(X, A, U)$ erhält man eine \leS{}
   \[
     ... \to H_n(A, U) \to H_n(X, U) \to H_n(X, A) \xrightarrow{\partial_n} H_{n-1}(A, U) \to ...
   \]
@@ -617,7 +622,7 @@
   \[ C^\cell_n(X) \coloneqq H_n(X^n, X^{n-1}) \]
   mit dem verbindenden Homomorphismus
   \[ \partial_n : H_n(X^n, X^{n-1}) \to H_{n-1}(X^{n-1}, X^{n-2}) \]
-  aus der l.\,e.\,S. des Raumtripels $(X^n, X^{n-1}, X^{n-2})$ als Randabb.\\
+  aus der \leS{} des Raumtripels $(X^n, X^{n-1}, X^{n-2})$ als Randabb.\\
   Dabei setzt man $X^{n-2} \coloneqq \emptyset$ und $\partial_0 = 0$.\\
   Die Homologiegruppen dieses Komplexes werden mit $H_*^\cell(X)$ bezeichnet.
 \end{defn}
@@ -633,7 +638,7 @@
 
 \begin{bem}
   Wir wählen Erzeuger $t_n$ von $H_n(D^n, \partial D^n)$ und $s_n$ von $\RH_n(S^n)$ wie folgt:
-  Für $n=0$ wählen wir einen beliebigen Erzeuger von $H_0(S^0)$. Angenommen, wir haben einen Erzeuger von $s_i \in H_i(S^i)$ bereits definiert. Der verbindende Homomorphismus $\partial_i : H_{i+1}(D^{i+1}, S^i) \to H_i(S^i)$ aus der l.\,e.\,S. des Raumpaares $(D^{i+1}, S^i)$ ist ein Isomorphismus. Sei der Erzeuger $t_{i+1}$ von $H_{i+1}(S^{i+1})$ das Urbild von $s_i$ unter $\partial_i$. Wir wählen $s_{i+1}$ als das Bild von $t_{i+1}$ unter dem Isomorphismus
+  Für $n=0$ wählen wir einen beliebigen Erzeuger von $H_0(S^0)$. Angenommen, wir haben einen Erzeuger von $s_i \in H_i(S^i)$ bereits definiert. Der verbindende Homomorphismus $\partial_i : H_{i+1}(D^{i+1}, S^i) \to H_i(S^i)$ aus der \leS{} des Raumpaares $(D^{i+1}, S^i)$ ist ein Isomorphismus. Sei der Erzeuger $t_{i+1}$ von $H_{i+1}(S^{i+1})$ das Urbild von $s_i$ unter $\partial_i$. Wir wählen $s_{i+1}$ als das Bild von $t_{i+1}$ unter dem Isomorphismus
   \[ H_{i+1}(D^{i+1}, S^i) \cong H_{i+1}(D^{i+1}/S^i) \cong H_{i+1}(S^{i+1}) \]
   Dabei seien die Homöomorphismen $D^{i+1}/S^i \approx S^{i+1}$ fest gewählt.\\
   Wir erhalten Isomorphismen
@@ -656,7 +661,7 @@
 
 \begin{defn}
   Der singuläre Kettenkomplex mit Koeffizienten in einer abelschen Gruppe $G$ eines topologischen Raumes $X$ ist def. durch
-  \[ C_n(X) \coloneqq \{ \text{ formale endl. Linearkomb. } \sum_{\sigma \in \Delta_n} \lambda_\sigma \cdot \sigma \text{ mit $\lambda_\sigma \in G$} \} \]
+  \[ C_n(X; G) \coloneqq \{ \text{ formale endl. Linearkomb. } \sum_{\sigma \in \Delta_n} \lambda_\sigma \cdot \sigma \text{ mit $\lambda_\sigma \in G$} \} \]
   Die Randabbildung ist ganz wie beim gewöhnlichen Kettenkomplex ($G = \Z$) definiert. Die Homologie dieses Komplexes heißt \emph{singuläre Homologie mit Koeffizienten in $G$}. Sie ist eine gewöhnliche Homologietheorie im Sinne von Eilenberg und Steenrod. Man erhält \emph{reduzierte Homologie mit Koeffizienten in $G$}, indem man die Komplex von dem mit dem Augmentierungshomomorphismus
   \[ \epsilon : C_0(X; G) \to G, \quad \sum_{\sigma \in \Delta_0(X)} \lambda_\sigma \cdot \sigma \mapsto \!\!\! \sum_{\sigma \in \Delta_0(X)} \lambda_\sigma \]
   erweiterten Kettenkomplex mit Koeffizienten in $G$ nimmt.
@@ -672,7 +677,7 @@
 \begin{defn}
   Ist $X$ ein CW-Komplex, so ist der zelluläre Kettenkomplex mit Koeffizienten in $G$ definiert durch
   \[ C_n^\cell(X) \coloneqq H_n(X^n, X^{n-1}; G). \]
-  Die Randabbildung $\partial^\cell_n$ ist der verbindende Homomorphismus in der l.\,e.\,S. zum Raumtripel $(X^n, X^{n-1}, X^{n-2})$ mit Koeffizienten in $G$. Es gilt nach Wahl von passenden Erzeugern:
+  Die Randabbildung $\partial^\cell_n$ ist der verbindende Homomorphismus in der \leS{} zum Raumtripel $(X^n, X^{n-1}, X^{n-2})$ mit Koeffizienten in $G$. Es gilt nach Wahl von passenden Erzeugern:
   \[ \partial^\cell_n (e_\alpha^n) = \sum_\beta d_{\alpha \beta} e_\beta^{n-1}. \]
 \end{defn}
 
@@ -755,7 +760,7 @@
 
 \begin{defn}
   Sei $X$ ein endlicher Simplizialkomplex und $f : X \to X$ stetig. Wir erhalten für alle $n \geq 0$ eine induzierte Abbildung
-  \[ f_n : H_n(X)/\Tor \to H_n(X)/\Tor. \]
+  \[ f_n : H_n(X)/\Torsion \to H_n(X)/\Torsion. \]
   Die \emph{Lefschetzzahl} von $f$ ist definiert als Summe
   \[ L(f) \coloneqq \sum (-1)^n \tr f_n. \]
 \end{defn}
@@ -926,7 +931,7 @@
 
 % Hatcher, Algebraic Topology, Thm 2A.1
 \begin{prop}
-  Es gibt einen kanonischen Homomorphismus $h : \pi_1(X, x_0) \to H_1(X)$. Wenn $X$ wegzusammenhängend ist, so ist $X$ surjektiv und der Kern von $h$ ist die Kommutator-Untergruppe $K(\pi_1(X, x_0))$. Wir erhalten dann einen Iso $\pi_1(X)_{\text{ab}} \to H_1(X)$.
+  Es gibt einen kanonischen Morphismus $h : \pi_1(X) \to H_1(X)$. Wenn $X$ wegzusammenhängend ist, so ist $X$ surjektiv und der Kern von $h$ ist die Kommutator-Untergruppe $K(\pi_1(X, x_0))$. Wir erhalten dann einen Iso $\pi_1(X)_{\text{ab}} \to H_1(X)$.
 \end{prop}
 
 % Vorlesung vom 7.1.2015
@@ -959,7 +964,8 @@
 \end{bem}
 
 \begin{lem}
-  Sei $0 \to A \to B \to C \to 0$ eine k.\,e.\,S. von abelschen Gruppen. Dann ist auch
+  Für jede abelsche Gruppe $G$ ist $\Hom(\blank, G)$ linksexakt:
+  Sei $0 \to A \to B \to C \to 0$ eine \keS{} von abelschen Gruppen. Dann ist
   \[
     0 \to \Hom(C, G) \to \Hom(B, G) \to \Hom(A, G)
     \qquad \text{exakt.}
@@ -967,7 +973,7 @@
 \end{lem}
 
 \begin{defn}
-  Sei $0 \to A \to B \to C \to 0$ eine k.\,e.\,S. in einer abelschen Kategorie $\mathcal{A}$. Die Sequenz heißt \emph{spaltend}, falls sie isomorph zur k.\,e.S. $0 \to A \to A \oplus C \to C$ ist.
+  Sei $0 \to A \to B \to C \to 0$ eine \keS{} in einer abelschen Kategorie $\mathcal{A}$. Die Sequenz heißt \emph{spaltend}, falls sie isomorph zur \keS{} $0 \to A \to A \oplus C \to C$ ist.
 \end{defn}
 
 \begin{prop}
@@ -980,7 +986,7 @@
 \end{prop}
 
 \begin{prop}
-  Seien $\mathcal{A}$ und $\mathcal{B}$ abelsche Kategorien, $F : \mathcal{A} \to \mathcal{B}$ ein additiver Funktor und $0 \to A \to B \to C \to 0$ eine spaltende k.\,e.\,S. in $\mathcal{A}$.\\
+  Seien $\mathcal{A}$ und $\mathcal{B}$ abelsche Kategorien, $F : \mathcal{A} \to \mathcal{B}$ ein additiver Funktor und $0 \to A \to B \to C \to 0$ eine spaltende \keS{} in $\mathcal{A}$.\\
   Dann ist auch $0 \to F(A) \to F(B) \to F(C) \to 0$ spaltend exakt.
 \end{prop}
 
@@ -1028,7 +1034,10 @@
 
 \begin{satz}
   Seien $A, B \subset X$ mit $\inte(A) \cup \inte(B) = X$. Dann gibt es in Kohomologie eine Mayer-Vietoris-Sequenz
-  \[ ... \to H^*(X; G) \to H^*(A; G) \oplus H^*(B; G) \to H^*(A \cap B; G) \to H^{*+1}(X; G) \to ... \]
+  \begin{align*}
+    ... & \to H^*(X; G) \to H^*(A; G) \oplus H^*(B; G) \to H^*(A \cap B; G) \to \\
+    & \to H^{*+1}(X; G) \to ...
+  \end{align*}
 \end{satz}
 
 \begin{defn}
@@ -1060,6 +1069,207 @@
 % Ausgelassen: Berechnung mittels Abbildungsgraden
 
 % §11. Universelle Koeffizientenformeln
+
+% Ausgelassen: Definition des Tensorproduktes
+
+\begin{bem}
+  $C_n(X; G) \cong C_n(X) \otimes G$
+\end{bem}
+
+% Vorlesung vom 12.1.2015
+
+% 11.1
+\begin{prop}
+  Für jede ab. Gruppe $G$ ist der Funktor $\blank \otimes G$ rechtsexakt:
+  Sei $0 \to A \to B \to C \to$ eine \keS{} abelscher Gruppen. Dann ist
+  \[
+    A \otimes G \to B \otimes G \to C \otimes G \to 0
+    \qquad \text{exakt.}
+  \]
+\end{prop}
+
+\begin{defn}
+  Sei $H$ eine ab. Gruppe. Eine \emph{freie Auflösung} von $H$ ist ein azyklischer Kettenkomplex
+  \[
+    ... \to F_3 \to F_2 \to F_1 \to F_1 \to H \to H
+    \quad \text{(kurz: $F_* \to H$),}
+  \]
+  bestehend aus freien abelschen Gruppen $F_i$, $i \geq 0$.
+\end{defn}
+
+% 11.3
+\begin{prop}
+  Seien $F_* \to J$ und $G_* \to K$ freie Auflösungen. Dann existiert zu jedem Homomorphismus $\alpha : J \to K$ eine Kettenabbildung $\alpha_* : F_* \to K_*$, sodass
+  $(F_0 \to K \xrightarrow{\alpha} J) = (F_0 \xrightarrow{\alpha_0} G_0 \to K)$.\\
+  Die Kettenabbildung $\alpha_*$ ist eindeutig bis auf Kettenhomotopie.
+\end{prop}
+
+\begin{defn}
+  Seien $G$ und $H$ ab. Gruppen und $F_* \to H$ eine freie Auflösung.
+  %Wir setzen
+  \[
+    \Tor_n(H, G) \coloneqq H_n(F_* \otimes G), \quad
+    \Ext^n(H, G) \coloneqq H^n(\Hom(F_*, G)).
+  \]
+\end{defn}
+
+\begin{prop}
+  Die Definition von $\Tor_n$ und $\Ext^n$ hängt nicht von der Wahl der Auflösung ab (bis auf Isomorphie).
+\end{prop}
+
+% 11.5
+\begin{prop}
+  $\Tor_n$ und $\Ext^n$ definieren Funktoren
+  \begin{align*}
+    \Tor_n &: \AbGrp \times \AbGrp \to \AbGrp, \\
+    \Ext^n &: \AbGrp^\op \times \AbGrp \to \AbGrp.
+  \end{align*}
+\end{prop}
+
+% 11.6
+\begin{prop}
+  Jede abelsche Gruppe besitzt eine Auflösung der Länge $\leq 2$.
+  %Form
+  %\[ 0 \to F_1 \to F_0 \to H \to 0. \]
+\end{prop}
+
+% 11.7
+\begin{kor}
+  $\Tor_{\geq 2}(G, H) = 0 = \Ext^{\geq 2}(G, H)$ für ab. Gruppen $G$, $H$
+\end{kor}
+
+\begin{nota}
+  $\Tor(G, H) \coloneqq \Tor_1(G, H)$, $\Ext(G, H) \coloneqq \Ext^1(G, H)$
+\end{nota}
+
+% 11.8 (erweitert)
+\begin{prop}[$\Ext$-Rechenregeln]
+  \begin{itemize}
+    \item $\Ext^0(G, H) \cong \Hom(G, H)$
+  \end{itemize}
+  \begin{itemize}
+    \miniitem{0.54 \linewidth}{$\Ext(\oplus_i H_i, G) \cong \prod\!_i \Ext(H_i, G)$}
+    \miniitem{0.42 \linewidth}{$\Ext(\Z/n, G) = G/nG$}
+    \item Ist $0 \to A \to B \to C \to 0$ eine \keS{} ab. Gruppen und $H$ eine ab. Gruppe, so erhalten wir eine induzierte exakte Sequenz
+    \begin{align*}
+      0 & \to \Hom(H, A) \to \Hom(H, B) \to \Hom(H, C) \to \\
+      & \to \Ext(H, A) \to \Ext(H, B) \to \Ext(H, C) \to 0.
+    \end{align*}
+  \end{itemize}
+\end{prop}
+
+\begin{prop}[$\Tor$-Rechenregeln]
+  \begin{itemize}
+    \item $\Tor_0(A, B) \cong A \otimes B$
+  \end{itemize}
+  \begin{itemize}
+    \miniitem{0.40 \linewidth}{$\Tor_0(A, B) \cong A \otimes B$}
+    \miniitem{0.48 \linewidth}{$\Tor(A, B) \cong \Tor(B, A)$}
+    \item $\Tor(\oplus_i A_i, B) \cong \oplus_i \Tor(A_i, B)$
+    \item $\Tor(A, B) \cong \Tor(T(A), B)$ mit $T(A) < A$ Torsionsuntergruppe
+  \end{itemize}
+  \begin{itemize}
+    \miniitem{0.58 \linewidth}{$\Tor(A, B) = 0$, falls $A$ torsionsfrei}
+    \miniitem{0.39 \linewidth}{$\Tor(\Z/n) \cong \ker(A \xrightarrow{\cdot n} A)$}
+    \item Ist $0 \to A \to B \to C \to 0$ eine \keS{} ab. Gruppen und $H$ eine ab. Gruppe, so erhalten wir eine induzierte exakte Sequenz
+    \begin{align*}
+      0 & \to A \otimes D \to B \otimes D \to C \otimes D \to \\
+      & \to \Tor(A, D) \to \Tor(B, D) \to \Tor(C, D) \to 0.
+    \end{align*}
+  \end{itemize}
+\end{prop}
+
+
+
+% Vorlesung vom 14.1.2015
+
+\begin{satz}[\emph{Universelles Koeffiziententheorem für Homologie}]\mbox{}\\
+  Für jeden Raum $X$ und für jede ab. Gruppe $G$ existiert eine \keS{}
+  \[ 0 \to H_n(X) \otimes G \to H_n(X; G) \to \Tor(H_{n-1}(X), G) \to 0. \]
+  Diese ist natürlich in $X$ und $G$. Die Sequenz spaltet, der Spalt ist allerdings nur natürlich in $G$, nicht in $X$.
+\end{satz}
+
+\begin{satz}[\emph{Universelles Koeffiziententheorem für Kohomologie}]\mbox{}\\
+  Für jeden Raum $X$ und für jede ab. Gruppe $G$ existiert eine \keS{}
+  \[ 0 \to \Ext(H_{n-1}(X), G) \to H^n(X; G) \to \Hom(H_n(X), G) \to 0. \]
+  Diese ist natürlich in $X$ und $G$. Die Sequenz spaltet, der Spalt ist allerdings nur natürlich in $G$, nicht in $X$.
+\end{satz}
+
+% 11.10 (erweitert)
+\begin{kor}
+  Sei $f : X \to Y$ eine stetige Abbildung, die in Homologie mit $\Z$-Koeffizienten in jedem Grad Isomorphismen induziert. Dann gilt Gleiches für Homologie und Kohomologie mit beliebigen Koeffizienten $G$.
+\end{kor}
+
+\begin{satz}
+  Für jeden Raum $X$ und für jede endlich erzeugte abelsche Gruppe $G$ existiert eine kurze exakte Sequenz
+  \[ 0 \to H^n(X; \Z) \otimes G \to H^n(X; G) \to \Tor(H^{n+1}(X; \Z), G) \to 0. \]
+\end{satz}
+
+% Vorlesungen vom 19.1.2015 und 21.1.2015
+
+% §12. Produktstrukturen
+
+\begin{defn}
+  Sei $R$ ein kommutativer Ring mit Eins und $X$ ein topol. Raum. Das \emph{Cup-Produkt} $\phi \cup \psi \in H^{k+l}(X; R)$ von Koketten $\phi \in H^k(X; R)$ und $\psi \in H^l(X; R)$ ist definiert durch
+  \[ (\phi \cup \psi)(\sigma) \coloneqq \phi(\sigma|_\angles{v_0, ..., v_k}) \cdot \psi(\sigma|_\angles{v_k, ..., v_{k+l}}). \]
+\end{defn}
+
+% 12.1
+\begin{lem}
+  \begin{itemize}
+    \item $\partial (\phi \cup \psi) = (\partial \phi) \cup \psi + (-1)^k \phi \cup (\partial \psi)$
+    \item Assoziativität: $(\phi \cup \psi) \cup \omega = \phi \cup (\psi \cup \omega)$
+    \item Natürlichkeit: $f^*(\phi \cup \psi) = f^*(\phi) \cup f^*(\psi)$ für $f : X \to Y$ stetig
+    \item Das Tensorprodukt induziert eine $R$-bilineare Abbildung
+    \[ C^k(X; R) \times C^l(X; R) \to C^{k+l}(X; R) \]
+    und somit eine Kettenabbildung ausgehend von dem Tensorproduktkomplex
+    $C^*(X; R) \otimes_R C^*(X; R) \to C^*(X; R)$.
+  \end{itemize}
+\end{lem}
+
+\begin{kor}
+  Das Cup-Produkt induziert eine bilineare Abbildung
+  \[ \cup : H^k(X; R) \times H^l(X; R) \to H^{k+l}(X; R). \]
+  Diese macht $H^*(X; R)$ zu einer graduierten, assoziativen $R$-Algebra mit Einselement $[\sum\!_\sigma \lambda_\sigma \sigma \mapsto \sum\!_\sigma \lambda_\sigma] \in H^0(X; R)$
+\end{kor}
+
+\begin{bem}
+  Seien $A, B \subset X$ offene Teilmengen oder Unterkomplexe. Dann gibt es ein \emph{relatives Cup-Produkt}
+  \[ C^k(X, A; R) \times C^l(X, B; R) \to C^{k+l}(X, A + B; R). \]
+\end{bem}
+
+% 12.6
+\begin{satz}
+  Sei $R$ kommutativ. Dann ist $H^*(X; R)$ graduiert kommutativ, \dh{}
+  $\fa{\alpha \in H^k(X; R)} \fa{\beta \in H^l(X; R)} \alpha \cup \beta = (-1)^{kl} \beta \cup \alpha$.
+\end{satz}
+
+\begin{defn}
+  Seien $X$ und $Y$ topol. Räume.
+  Das \emph{Kreuzprodukt} (auch: externes Cup-Produkt) ist die Abbildung
+  \begin{align*}
+    \times : H^k(X; R) \times H^l(Y; R) & \to H^{k+l}(X \times Y; R), \\
+    ([c], [d]) & \mapsto [p_X^*(c) \cup p_Y^*(d)].
+  \end{align*}
+  Für offene Teilmengen oder Unterkomplexe $A \subset X$ und $B \subset X$ gibt es ein relatives Kreuzprodukt
+  \[ \times : H^k(X, A; R) \times H^l(Y, B; R) \to H^{k+l}(X \times Y, A \times Y \cup X \times B; R). \]
+\end{defn}
+
+
+\begin{defn}
+  Seien $A$ und $B$ graduierte kommutative $R$-Algebra, $R$ ein kommutativer Ring. Dann ist die graduiert kommutative Tensoralgebra $A \otimes_R B$ definiert durch
+  \[
+    (A \times B)_n = \bigoplus_{k+l=n} A_k \otimes B_l, \quad
+    (a \otimes b)(c \otimes d) \coloneqq (-1)^{\abs{b} \abs{c}} ac \otimes bd.
+  \]
+\end{defn}
+
+% Nicht im Skript, aber im Hatcher, Thm 3.16 und wichtig
+\begin{satz}
+  Seien $X$ und $Y$ CW-Komplexe und $H^k(Y; R)$ ein endlich erzeugtes $R$-Modul für alle $k \geq 0$.
+  Dann ist das Kreuzprodukt $H^*(X; R) \otimes_R H^*(Y; R) \to H^*(X \times Y; R)$ ein Isomorphismus.
+\end{satz}
+
 
 
 
