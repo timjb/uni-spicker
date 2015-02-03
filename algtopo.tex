@@ -39,6 +39,7 @@
 \newcommand{\op}{\mathrm{op}} % opposite category
 \newcommand{\keS}{k.\,e.\,S.} % kurze exakte Sequenz
 \newcommand{\leS}{l.\,e.\,S.} % lange exakte Sequenz
+\newcommand{\ZM}[1]{\Z_{#1}} % \Z modulo n
 
 % Kleinere Klammern
 \delimiterfactor=701
@@ -689,9 +690,9 @@
 
 \begin{defn}
   Ist nun $k=2$ so gibt es eine kurze exakte Sequenz
-  \[ 0 \to C_*(X; \Z/2) \xrightarrow{\tau_*} C_*(\tilde{X}, \Z/2) \xrightarrow{p_*} C_*(X, \Z/2) \to 0. \]
+  \[ 0 \to C_*(X; \ZM{2}) \xrightarrow{\tau_*} C_*(\tilde{X}, \ZM{2}) \xrightarrow{p_*} C_*(X, \ZM{2}) \to 0. \]
   Die davon induzierte lange exakte Sequenz
-  \[ ... \to H_*(X; \Z/2) \xrightarrow{\tau_*} H_*(\tilde{X}, \Z/2) \xrightarrow{p_*} H_*(X, \Z/2) \to H_{*-1}(X; \Z/2) \to ... \]
+  \[ ... \to H_*(X; \ZM{2}) \xrightarrow{\tau_*} H_*(\tilde{X}, \ZM{2}) \xrightarrow{p_*} H_*(X, \ZM{2}) \to H_{*-1}(X; \ZM{2}) \to ... \]
   heißt \emph{Transfersequenz}.
 \end{defn}
 
@@ -851,7 +852,7 @@
   \begin{itemize}
     \item Falls $M$ orientierbar ist, dann ist für alle $x \in M$ die kanonische Abbildung $H_n(M) \to H_n(M|x)$ ein Isomorphismus. Insbesondere gilt $H_n(M) \cong \Z$.
     \item Falls $M$ nicht orientierbar ist, gilt $H_n(M) = 0$.
-    \item $H_n(M, \Z/2) = \Z/2$ unabhängig von Orientierbarkeit.
+    \item $H_n(M, \ZM{2}) = \ZM{2}$ unabhängig von Orientierbarkeit.
     \item $H_i(M) = 0$ für $i > n$.
   \end{itemize}
 \end{prop}
@@ -1153,7 +1154,7 @@
   \end{itemize}
   \begin{itemize}
     \miniitem{0.54 \linewidth}{$\Ext(\oplus_i H_i, G) \cong \prod\!_i \Ext(H_i, G)$}
-    \miniitem{0.42 \linewidth}{$\Ext(\Z/n, G) = G/nG$}
+    \miniitem{0.42 \linewidth}{$\Ext(\ZM{n}, G) = G/nG$}
     \item Ist $0 \to A \to B \to C \to 0$ eine \keS{} ab. Gruppen und $H$ eine ab. Gruppe, so erhalten wir eine induzierte exakte Sequenz
     \begin{align*}
       0 & \to \Hom(H, A) \to \Hom(H, B) \to \Hom(H, C) \to \\
@@ -1174,7 +1175,7 @@
   \end{itemize}
   \begin{itemize}
     \miniitem{0.58 \linewidth}{$\Tor(A, B) = 0$, falls $A$ torsionsfrei}
-    \miniitem{0.39 \linewidth}{$\Tor(\Z/n) \cong \ker(A \xrightarrow{\cdot n} A)$}
+    \miniitem{0.39 \linewidth}{$\Tor(\ZM{n}) \cong \ker(A \xrightarrow{\cdot n} A)$}
     \item Ist $0 \to A \to B \to C \to 0$ eine \keS{} ab. Gruppen und $H$ eine ab. Gruppe, so erhalten wir eine induzierte exakte Sequenz
     \begin{align*}
       0 & \to A \otimes D \to B \otimes D \to C \otimes D \to \\
@@ -1282,9 +1283,9 @@
 \end{satz}
 
 \begin{satz}
-  Sei $\alpha \in H^1(\R P^n; \Z/2)$ (bzw. $\alpha \in H^2(\C P^n; \Z)$) ein Erzeuger. Da $H^{n+1}(\R P^n; \Z/2) = 0$ (bzw. $H^{2n+2}(\C P^n; \Z) = 0$), erhalten wir eine induzierte Abbildung
+  Sei $\alpha \in H^1(\R P^n; \ZM{2})$ (bzw. $\alpha \in H^2(\C P^n; \Z)$) ein Erzeuger. Da $H^{n+1}(\R P^n; \ZM{2}) = 0$ (bzw. $H^{2n+2}(\C P^n; \Z) = 0$), erhalten wir eine induzierte Abbildung
   \[
-    (\Z/2)[\alpha]/(\alpha^{n+1}) \to H^*(\R P^n; \Z/2)
+    \ZM{2}[\alpha]/(\alpha^{n+1}) \to H^*(\R P^n; \ZM{2})
     \enspace \,/\, \enspace
     \Z[\alpha]/(\alpha^{n+1}) \to H^*(\C P^n; \Z).
   \]
@@ -1366,14 +1367,14 @@
   \[
     H_i(\R P^n) = \begin{cases}
       \Z, & \text{wenn $i=0$} \\
-      \Z/2, & \text{wenn $i < n$ ungerade} \\
+      \ZM{2}, & \text{wenn $i < n$ ungerade} \\
       \Z, & \text{wenn $i=n$ ungerade} \\
       0, & \text{sonst}
     \end{cases}
   \]
   \[
-    H_i(\R P^n; \Z/2) = \begin{cases}
-      \Z/2, & \text{wenn $i \leq n$} \\
+    H_i(\R P^n; \ZM{2}) = \begin{cases}
+      \ZM{2}, & \text{wenn $i \leq n$} \\
       0, & \text{sonst}
     \end{cases}
   \]
@@ -1388,7 +1389,7 @@
   \]
   \[
     \RH_i(\text{Kleinsche Flasche}) = \begin{cases}
-      \Z \oplus \Z/2, & \text{wenn $i=1$} \\
+      \Z \oplus \ZM{2}, & \text{wenn $i=1$} \\
       0, & \text{sonst}
     \end{cases}
   \]
