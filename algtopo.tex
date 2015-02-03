@@ -218,11 +218,11 @@
 \end{prop}
 
 \begin{defn}
-  Ein Kettenkomplex heißt \emph{exakt} (oder \emph{azyklisch}), falls seine Homologiegruppen alle Null sind, d.\,h. $\fa{n \in \N} \im \partial_{n+1} = \ker \partial_n$.
+  Ein Kettenkomplex heißt \emph{exakt} (oder \emph{azyklisch}), falls seine Homologiegruppen alle Null sind, \dh{} $\fa{n \in \N} \im \partial_{n+1} = \ker \partial_n$.
 \end{defn}
 
 \begin{defn}
-  Eine \emph{kurze exakte Sequenz} (keS) ist ein exakter Kettenkomplex der Gestalt
+  Eine \emph{kurze exakte Sequenz} (\keS{}) ist ein exakter Kettenkomplex der Gestalt
   \[ 0 \to A \to B \to C \to 0. \]
 \end{defn}
 
@@ -785,6 +785,10 @@
 \end{bem}
 
 \begin{defn}
+  Eine kompakte (randlose) Mft heißt \emph{geschlossen}.
+\end{defn}
+
+\begin{defn}
   Sei $X$ ein topologischer Raum und $A \subset X$. Dann heißt
   \[ H_n(X|A) \coloneqq H_n(X, X-A) \]
   \emph{lokale Homologie} von $X$ bei $A$.
@@ -1264,10 +1268,89 @@
   \]
 \end{defn}
 
-% Nicht im Skript, aber im Hatcher, Thm 3.16 und wichtig
+% 12.3
 \begin{satz}
-  Seien $X$ und $Y$ CW-Komplexe und $H^k(Y; R)$ ein endlich erzeugtes $R$-Modul für alle $k \geq 0$.
-  Dann ist das Kreuzprodukt $H^*(X; R) \otimes_R H^*(Y; R) \to H^*(X \times Y; R)$ ein Isomorphismus.
+  Seien $k, l \geq 0$, $I^n \coloneqq \cinterval{0}{1}^n$ der $n$-dimensionale Würfel. Seien $c^k \in H^k(I^k, \partial I^k; R) \cong R$ und $c^l \in H^l(I^l, \partial I^l; R) \cong R$ Erzeuger (als $R$-Modul). Dann bildet das Kreuzprodukt
+  \[ \times : H^k(I^k, \partial I^k; R) \times H^l(I^l, \partial I^l; R) \to H^{k+l}(I^{k+l}, \partial I^{k+l}; R) \]
+  das Element $(c^k, c^l)$ auf einen Erzeuger ab.
+\end{satz}
+
+% 12.4
+\begin{satz}
+  Seien $c \in H^k(\R^k|0; R)$ und $d \in H^l(\R^l|0; R)$ Erzeuger.\\
+  Dann ist $c \times d$ ein Erzeuger von $H^{k+l}(\R^{k+l}|0; R)$.
+\end{satz}
+
+\begin{satz}
+  Sei $\alpha \in H^1(\R P^n; \Z/2)$ (bzw. $\alpha \in H^2(\C P^n; \Z)$) ein Erzeuger. Da $H^{n+1}(\R P^n; \Z/2) = 0$ (bzw. $H^{2n+2}(\C P^n; \Z) = 0$), erhalten wir eine induzierte Abbildung
+  \[
+    (\Z/2)[\alpha]/(\alpha^{n+1}) \to H^*(\R P^n; \Z/2)
+    \enspace \,/\, \enspace
+    \Z[\alpha]/(\alpha^{n+1}) \to H^*(\C P^n; \Z).
+  \]
+  Diese ist ein Isomorphismus von graduierten Ringen.
+\end{satz}
+
+\begin{defn}
+  Sei $X$ ein topol. Raum und $R$ ein kommutativer Ring. Für $k \geq l$ ist das \emph{Cap-Produkt} die $R$-bilineare Abbildung
+  \begin{align*}
+    \cap : C_k(X; R) \times C^l(X; R) & \to C_{k-l}(X; R) \\
+    (\sigma, \phi) & \mapsto \phi(\sigma_\angles{v_0, ..., v_l}) \cdot \sigma_\angles{v_l, ..., v_{l+k}}.
+  \end{align*}
+  Diese induziert in (Ko-)Homologie eine Abbildung
+  \[ \cap : H_k(X; R) \otimes H^l(X; R) \to H_k(X; R). \]
+  Relative Version: Seien $A, B \subset X$ offen, dann gibt es
+  \[ \cap : H_k(X, A \cup B; R) \times H^l(X, A; R) \to H_{k-l}(X, B; R). \]
+\end{defn}
+
+% 12.7
+\begin{satz}[Eilenberg-Zilber]
+  Seien $X$ und $Y$ topologische Räume. Es existiert eine natürliche (in $X$ und $Y$) Kettenhomotopieäquivalenz
+  \[ C_*(X) \otimes C_*(Y) \enspace \mathop{\rightleftarrows}^\times_\theta \enspace C_*(X \times Y). \]
+  Die Abbildungen $\times$ und $\theta$ sind im Grad $0$ die kanonischen Abben.
+\end{satz}
+
+% 12.8
+\begin{satz}[Künneth-Thm für Homologie]
+  Es gibt eine natürliche \keS{}
+  \[ 0 \to (H_*(X) \otimes H_*(Y))_n \to H_n(X \times Y) \to (\Tor(H_*(X), H_*(Y)))_{n-1} \to 0 \]
+  Die zweite Abbildung wird durch das Kreuzprodukt induziert. Die Sequenz spaltet, aber nicht natürlich.
+\end{satz}
+
+% 12.9
+\begin{satz}[Künneth-Thm für Kohomologie]
+  Sei $R$ ein kommutativer Hauptidealring mit 1. Falls $H_*(X; R)$ oder $H_*(Y; R)$ in jedem Grad ein endlich erzeugter $R$-Modul ist, so gibt es eine natürliche \keS{}
+  \[ 0 \to (H^*(X; R) \otimes H^*(Y; R))^n \to H^n(X \times Y; R) \to \Tor(H^*(X; R), H^*(Y; r))^{n+1} \to 0. \]
+  Dabei ist die zweite Abbildung das kohomologische Kreuzprodukt.
+\end{satz}
+
+% Nicht im Skript, aber im Hatcher, Thm 3.16 und wichtig
+%\begin{satz}
+%  Seien $X$ und $Y$ CW-Komplexe und $H^k(Y; R)$ ein endlich erzeugtes freies $R$-Modul für alle $k \geq 0$.
+%  Dann ist das Kreuzprodukt $H^*(X; R) \otimes_R H^*(Y; R) \to H^*(X \times Y; R)$ ein Isomorphismus.
+%\end{satz}
+
+\begin{defn}
+  Die \emph{Kohomologie mit kompakten Träger} $H_c^*(X)$ mit Koeffizienten $R$ eines topologischen Raumes $X$ ist die Kohomologie des Kokettenkomplexes $(C_c^*, \delta_c^*)$ mit
+  \begin{align*}
+    C_c^i(X) & \coloneqq \varinjlim_{K \subset X} C^i(X, X - K; R), \\
+    \delta_c^i & \coloneqq \varinjlim_{K \subset X} (\delta^i : C^i(X, X - K; R) \to C^{i+1}(X, X - K; R))
+  \end{align*}
+  Der direkte Limes läuft dabei über alle kompakten Teilmengen $K$.
+\end{defn}
+
+\begin{satz}[\emph{Poincaré-Dualität}]
+  Sei $R$ ein kommutativer Ring mit Eins und $M$ eine geschlossene orientierte $n$-Mft mit Orientierungsklasse $[M] \in H_n(M; R)$. Dann ist die Abbildung
+  \[ D : H^k(M; R) \to H_{n-k}(M; R), \enspace \alpha \mapsto [M] \cap \alpha \]
+  ein Isomorphismus für alle $k$.
+\end{satz}
+
+\begin{satz}[Poincaré-Dualität, allg]
+  Sei $R$ ein komm. Ring mit $1$ und $M$ eine orientierte $n$-Mft. Dann gibt es für alle kompakten Teilmengen $K \subset X$ einen Erzeuger $\mu_K \in H_n(M, M-K; R)$ der lokal zur gewählten Orientierung einschränkt. Die Abbildungen
+  \[ H^k(M, M - K; R) \to H_{n-k}(M, M; R), x \mapsto \mu_k \cap x \]
+  induzieren im direkten Limes eine Dualitäts-Abbildung
+  \[ D_M : H^k_c(M; R) \to H_{n-k}(M; R). \]
+  Diese ist ein Isomorphismus für alle $k$.
 \end{satz}
 
 
@@ -1304,8 +1387,7 @@
     H_i(T^n) = H_i(S^{n-1}) = \Z^{n \choose i}
   \]
   \[
-    H_i(\text{Kleinsche Flasche}) = \begin{cases}
-      \Z, & \text{wenn $i=0$} \\
+    \RH_i(\text{Kleinsche Flasche}) = \begin{cases}
       \Z \oplus \Z/2, & \text{wenn $i=1$} \\
       0, & \text{sonst}
     \end{cases}
