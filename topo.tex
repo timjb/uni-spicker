@@ -9,17 +9,17 @@
 \usetikzlibrary{matrix,shapes,arrows,positioning}
 
 \newcommand{\Tau}{\mathcal{T}} % Großes Tau
-\newcommand{\inte}{\mathop{\mathrm{int}}} % Inneres (interior)
-\newcommand{\conv}{\mathop{\mathrm{conv}}} % Konvexe Hülle
+\DeclareMathOperator{\inte}{int} % Inneres (interior)
+\DeclareMathOperator{\conv}{conv} % Konvexe Hülle
 \newcommand{\rel}{\text{ rel }} % = relativ (Homotopie)
-\newcommand{\Ob}{\mathrm{Ob}} % Objects (of a category)
-\newcommand{\Hom}{\mathrm{Hom}} % Homomorphisms
-\newcommand{\Aut}{\mathrm{Aut}} % Automorphisms
-\newcommand{\Mor}{\mathrm{Mor}} % Morphisms
-\newcommand{\dom}{\mathrm{dom}} % Domain
-\newcommand{\codom}{\mathrm{codom}} % Codomain
-\newcommand{\op}{\text{op}} % Duale Kategorie
-\newcommand{\Deck}{\mathrm{Deck}} % Gruppe der Decktransformationen
+\DeclareMathOperator{\Ob}{Ob} % Objects (of a category)
+\DeclareMathOperator{\Hom}{Hom} % Homomorphisms
+\DeclareMathOperator{\Aut}{Aut} % Automorphisms
+\DeclareMathOperator{\Mor}{Mor} % Morphisms
+\DeclareMathOperator{\dom}{dom} % Domain
+\DeclareMathOperator{\codom}{codom} % Codomain
+\newcommand{\op}{\mathrm{op}} % Duale Kategorie
+\DeclareMathOperator{\Deck}{Deck} % Gruppe der Decktransformationen
 
 % Kleinere Klammern
 \delimiterfactor=701
@@ -130,11 +130,15 @@
 \end{defn}
 
 \begin{defn}
-  Zwei topologische Räume $X$ und $Y$ heißen \emph{homöomorph} (notiert $X \approx Y$), wenn ein Homöomorphismus zwischen $X$ und $Y$ existiert.
+  Zwei topologische Räume $X$ und $Y$ heißen \emph{homöomorph}, wenn ein Homöomorphismus zwischen $X$ und $Y$ existiert.
 \end{defn}
 
+\begin{nota}
+  $X \approx Y \coloniff X \text{ und } Y$ sind homöomorph
+\end{nota}
+
 \begin{satz}
-  Für $n \not= m$ sind $\R^n$ und $\R^m$ nicht homöomorph.
+  $\R^n \approx \R^m \iff n = m$
 \end{satz}
 
 \begin{defn}
