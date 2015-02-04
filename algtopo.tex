@@ -127,7 +127,7 @@
 \end{defn}
 
 \begin{defn}
-  Eine \emph{Kettenabbildung} zwischen Kettenkomplexen $\CC{C}$ und $\CC{D}$ ist eine Familie $(f_n : C_n \to D_n)_{n \in \N}$ von Gruppenhomomor- phismen, welche mit dem Differential verträglich sind, d.\,h.
+  Eine \emph{Kettenabbildung} zwischen Kettenkomplexen $\CC{C}$ und $\CC{D}$ ist eine Familie $(f_n : C_n \to D_n)_{n \in \N}$ von Gruppenhomomor- phismen, welche mit dem Differential verträglich sind, \dh{}
   \[ \fa{n \in \N} \partial_n^{(D)} \circ f_n = f_{n-1} \circ \partial_n^{(C)}. \]
   Aus einer solchen Abbildung erhält man wiederum eine Abbildung $H_n(f) : H_n(\CC{C}) \to H_n(\CC{C})$ für alle $n \in \N$. Somit definiert $H_n$ einen Funktor von der Kategorie der Kettenkomplexe in die Kategorie der abelschen Gruppen.
 \end{defn}
@@ -509,7 +509,8 @@
       \draw[->] (E) to node [right] {$\epsilon$} (E');
     \end{tikzpicture}
   \end{center}
-  Angenommen, $\alpha$, $\beta$, $\delta$ und $\epsilon$ sind Isomorphismen. Dann ist auch $\gamma$ ein Isomorphismus.
+  Angenommen, $\alpha$, $\beta$, $\delta$ und $\epsilon$ sind Isomorphismen.\\
+  Dann ist auch $\gamma$ ein Isomorphismus.
 \end{lem}
 
 % Vorlesung vom 17.11.2014
@@ -525,7 +526,7 @@
     \item $X^0$ ist eine diskrete Menge von Punkten.
     \item Für alle $n \geq 1$ gibt es eine Familie von \emph{Anheftungsabb'en} $(\phi_\alpha : \partial D^n_\alpha \to X^{n-1})_{\alpha \in I(n)}$ (dabei ist $D^n_\alpha$ eine Kopie von $D^n$), sodass
     \[ X^n = X^{n-1} \cup_{(\phi_\alpha)_{\alpha \in I(n)}} \coprod_{\alpha \in I(n)} D^n_\alpha. \]
-    \item $X$ trägt die Finaltopologie bzgl. obiger Filtrierung, d.\,h. \\
+    \item $X$ trägt die Finaltopologie bzgl. obiger Filtrierung, \dh{} \\
     $A \subset X$ ist abgeschlossen $\iff$ alle $A \cap X^i$ sind abgeschlossen.
   \end{itemize}
 \end{defn}
@@ -546,7 +547,7 @@
 
 \begin{prop}
   \begin{itemize}
-    \item $\Phi_\alpha|\inte(D^n_\alpha) : \inte(D^n_\alpha) \to X^n$  ist eine topologische Einbettung (d.\,h. ein Homöo auf das Bild).
+    \item $\Phi_\alpha|\inte(D^n_\alpha) : \inte(D^n_\alpha) \to X^n$  ist eine topologische Einbettung (\dh{} ein Homöo auf das Bild).
     \item Jeder Punkt aus $X$ liegt in genau einer Zelle.
     \item Der Abschluss einer Zelle ist eine abgeschlossene Zelle.
     \item Jede abgeschlossene Zelle trifft nur endlich viele Zellen.
@@ -1103,8 +1104,8 @@
   Seien $G$ und $H$ ab. Gruppen und $F_* \to H$ eine freie Auflösung.
   %Wir setzen
   \[
-    \Tor_n(H, G) \coloneqq H_n(F_* \otimes G), \quad
-    \Ext^n(H, G) \coloneqq H^n(\Hom(F_*, G)).
+    \text{\emph{$\mathrm{\mathbf{Tor}}_n$}}(H, G) \coloneqq H_n(F_* \otimes G), \quad
+    \text{\emph{$\mathrm{\mathbf{Ext}}^n$}}(H, G) \coloneqq H^n(\Hom(F_*, G)).
   \]
 \end{defn}
 
@@ -1168,8 +1169,8 @@
     \miniitem{0.39 \linewidth}{$\Tor(\ZM{n}) \cong \ker(A \xrightarrow{\cdot n} A)$}
     \item Ist $0 \to A \to B \to C \to 0$ eine \keS{} ab. Gruppen und $H$ eine ab. Gruppe, so erhalten wir eine induzierte exakte Sequenz
     \begin{align*}
-      0 & \to A \otimes D \to B \otimes D \to C \otimes D \to \\
-      & \to \Tor(A, D) \to \Tor(B, D) \to \Tor(C, D) \to 0.
+      0 & \to \Tor(A, D) \to \Tor(B, D) \to \Tor(C, D) \to \\
+      & \to A \otimes D \to B \otimes D \to C \otimes D \to 0.
     \end{align*}
   \end{itemize}
 \end{prop}
@@ -1250,15 +1251,6 @@
   \[ \times : H^k(X, A; R) \times H^l(Y, B; R) \to H^{k+l}(X \times Y, A \times Y \cup X \times B; R). \]
 \end{defn}
 
-
-\begin{defn}
-  Seien $A$ und $B$ graduierte kommutative $R$-Algebra, $R$ ein kommutativer Ring. Dann ist die graduiert kommutative Tensoralgebra $A \otimes_R B$ definiert durch
-  \[
-    (A \times B)_n = \bigoplus_{k+l=n} A_k \otimes B_l, \quad
-    (a \otimes b)(c \otimes d) \coloneqq (-1)^{\abs{b} \abs{c}} ac \otimes bd.
-  \]
-\end{defn}
-
 % 12.3
 \begin{satz}
   Seien $k, l \geq 0$, $I^n \coloneqq \cinterval{0}{1}^n$ der $n$-dimensionale Würfel. Seien $c^k \in H^k(I^k, \partial I^k; R) \cong R$ und $c^l \in H^l(I^l, \partial I^l; R) \cong R$ Erzeuger (als $R$-Modul). Dann bildet das Kreuzprodukt
@@ -1294,12 +1286,28 @@
   \[ \cap : H_k(X, A \cup B; R) \times H^l(X, A; R) \to H_{k-l}(X, B; R). \]
 \end{defn}
 
+\begin{defn}
+  Das Tensorprodukt zweier Kettenkomplexe $(C_*, \partial^C_*)$ und $(D_*, \partial^D_*)$ ist definiert durch
+  \begin{align*}
+    (C \otimes D)_n & \coloneqq \bigoplus_{k+l=n} C_k \otimes D_l \\
+    \delta^{C \otimes C'}_n & \coloneqq \bigoplus_{k+l=n} (\partial^C_k \otimes \id_{D_l} + (-1)^k \id_{C_k} \oplus \partial^D_l)
+  \end{align*}
+\end{defn}
+
 % 12.7
 \begin{satz}[Eilenberg-Zilber]
   Seien $X$ und $Y$ topologische Räume. Es existiert eine natürliche (in $X$ und $Y$) Kettenhomotopieäquivalenz
   \[ C_*(X) \otimes C_*(Y) \enspace \mathop{\rightleftarrows}^\times_\theta \enspace C_*(X \times Y). \]
   Die Abbildungen $\times$ und $\theta$ sind im Grad $0$ die kanonischen Abben.
 \end{satz}
+
+\begin{defn}
+  Seien $A$ und $B$ graduierte kommutative $R$-Algebren, $R$ ein kommutativer Ring. Dann ist die graduiert kommutative Tensoralgebra $A \otimes_R B$ definiert durch
+  \[
+    (A \otimes B)_n = \bigoplus_{k+l=n} A_k \otimes B_l, \quad
+    (a \otimes b)(c \otimes d) \coloneqq (-1)^{\abs{b} \abs{c}} ac \otimes bd.
+  \]
+\end{defn}
 
 % 12.8
 \begin{satz}[Künneth-Thm für Homologie]
