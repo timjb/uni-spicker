@@ -1,0 +1,239 @@
+\documentclass{cheat-sheet}
+
+\pdfinfo{
+  /Title (Zusammenfassung Homologische Algebra)
+  /Author (Tim Baumann)
+}
+
+\usepackage{pgffor} % \foreach-Schleifen
+
+\newcommand{\nspace}[1]{\foreach \i in {1,...,#1}{ \! }} % Negativer Abstand
+\newcommand{\SetC}{\mathbf{Set}} % Kategorie der Mengen
+\newcommand{\Top}{\mathbf{Top}} % Kategorie der topologischen Räume
+%\newcommand{\AbGrp}{\mathbf{AbGrp}} % Kategorie der abelschen Gruppen
+\newcommand{\op}{\mathrm{op}} % opposite category
+\DeclareMathOperator{\sk}{sk} % Skelett
+
+
+% Kleinere Klammern
+\delimiterfactor=701
+
+
+\begin{document}
+
+\maketitle{Zusammenfassung Homologische Algebra}
+
+% Basierend auf dem Buch "Methods of Homological Algebra" von Gelfand und Manin
+
+% §I.2 Triangulierte Räume
+
+\begin{defn}
+  \emph{Verklebedaten} sind gegeben durch einen Funktor
+  \[ X : \Delta_{\text{strikt}}^\op \to \SetC. \]
+  Dabei ist $\Delta_{\text{strikt}}$ die Kategorie mit den Mengen
+  $[n] \coloneqq \{ 0, 1, ..., n \}$ für $n \in \N$ als Objekten und streng monotonen Abbildungen.
+\end{defn}
+
+\begin{nota}
+  $X_{(n)} \coloneqq X([n])$
+\end{nota}
+
+\begin{defn}
+  Das \emph{Standard-$n$-Simplex} $\Delta_n \subset \R^{n+1}$ ist die von den $(n{+}1)$ Standardbasisvektoren aufgespannte lineare Hülle. Eine streng monotone Abb $f : [n] \to [m]$ induziert durch Abbilden des $i$-ten Basisvektors auf den $f(i)$-ten eine Inklusion $\Delta_f : \Delta_n \to \Delta_m$, 
+\end{defn}
+
+\begin{defn}
+  Die \emph{geometrische Realisierung} von Verklebedaten $X$ ist der topologische Raum
+  \[ \abs{X} \coloneqq \left( \coprod_{n \in \N} (\Delta_n \times X_{(n)}) \right) / R \]
+  Dabei ist $X_{(n)}$ diskret. Die Äquivalenzrelation $R$ wird erzeugt von
+  \[
+    (\Delta_f(t), x) \sim (t, X(f)(x)) \enspace
+    \text{mit $t \in \Delta_m$, $x \in X_{(n)}$, $f : [m] {\to} [n]$ s.m.s.}
+  \]
+\end{defn}
+
+% Ausgelassen: Proposition I.1.3
+
+\begin{defn}
+  Das \emph{$k$-Skelett} $\sk_k X$ von Verklebedaten $X$ ist definiert durch
+  \[
+    (\sk_k X)_{(n)} \coloneqq
+    \Set{ x \in X_{(n)} }{ n \leq k }, \enspace
+    %\begin{cases}
+    %  X_{(n)}, & \text{falls $n \leq k$,} \\
+    %  \emptyset, & \text{sonst.}
+    %\end{cases}, \quad
+    (\sk_k X)(f) \coloneqq X(f) \enspace \text{sofern möglich}
+  \]
+\end{defn}
+
+% Ausgelassen: I.1.4 (Triangulierung des Produktes zweier Simplizes)
+
+% §I.2 Simpliziale Mengen
+
+\begin{defn}
+  Eine \emph{simpliziale Menge} ist ein Funktor
+  \[ X : \Delta^\op \to \SetC. \]
+  Dabei ist $\Delta$ die Kategorie mit den Mengen
+  $[n] \coloneqq \{ 0, 1, ..., n \}$ für $n \in \N$ als Objekten und monotonen Abbildungen.
+\end{defn}
+
+\begin{nota}
+  $X_n \coloneqq X([n])$
+\end{nota}
+
+\begin{defn}
+  Die \emph{geometrische Realisierung} einer simplizialen Menge $X$ ist der topologische Raum
+  \[ \abs{X} \coloneqq \left( \coprod_{n \in \N} (\Delta_n \times X_{n}) \right) / R \]
+  %Dabei ist $\Delta_n \subset \R^{n+1}$ das Standard-$n$-Simplex und $X_{n}$ trägt die diskrete Topologie.
+  Die Äquivalenzrelation $R$ wird dabei erzeugt von
+  \[
+    (\Delta_f(t), x) \sim (t, X(f)(x)) \enspace
+    \text{mit $t \in \Delta_m$, $x \in X_n$ und $f : [m] {\to} [n]$ monot.}
+  \]
+\end{defn}
+
+\begin{defn}
+  Ein topologischer Raum heißt \emph{trianguliert}, wenn er die Realisierung von Verklebedaten ist.
+\end{defn}
+
+\begin{defn}
+  Der \emph{Nerv} einer Überdeckung $X = \cup_{\alpha \in A} U_\alpha$ eines topologischen Raumes ist die simpliziale Menge
+  \begin{align*}
+    X_n & \coloneqq \Set{(\alpha_0, ..., \alpha_n) \in A^{n+1}}{ U_{\alpha_0} \cap ... \cap U_{\alpha_n} \not= \emptyset } \\
+    X(f)(\alpha_0, ..., \alpha_n) & \coloneqq (\alpha_{f(0)}, ..., \alpha_{f(m)}) \quad \text{für } f : [m] \to [n].
+  \end{align*}
+\end{defn}
+
+\begin{bem}
+  Falls die Überdeckung lokal endlich ist und alle nichtleeren, endlichen Schnitte $U_{\alpha_1} \cap ... \cap U_{\alpha_n}$ zusammenziehbar sind, so ist die geom. Realisierung des Nerves der Überdeckung homotopieäq. zu $X$.
+\end{bem}
+
+% Ausgelassen: I.2.4 (Singuläre Simplizes)
+
+% I.2.5
+\begin{defn}
+  $\Delta[p]_n \coloneqq \{ \, g : [n] \to [p] \text{ monoton steigend} \, \}$, $\Delta[p](f)(g) \coloneqq g \circ f$
+\end{defn}
+
+% I.2.8
+\begin{defn}
+  Der \emph{klassifizierende Raum} einer Gruppe $G$ ist gegeben durch die Realisierung der simpl. Menge $BG$ mit $(BG)_n \coloneqq G^n$ und
+  \begin{align*}
+    BG(f : [m] \to [n])(g_1, ..., g_n) \coloneqq
+    (h_1, ..., h_m), \quad h_i = \nspace{3} \prod_{j=f(i-1)+1}^{f(i)} \nspace{3} g_j
+    %(g_{f(0)+1} \cdot ... \cdot g_{f(1)}, g_{f(1)+1} \cdot ... \cdot g_{f(2)}, ..., g_{f(m-1)+1} \cdot ... \cdot g_{f(m)})
+  \end{align*}
+\end{defn}
+
+% I.2.9
+\begin{defn}
+  Ein $n$-Simplex $x \in X_n$ heißt \emph{degeneriert}, falls eine monotone surjektive Abbildung $f : [n] \to [m]$, $n > m$ und ein Element $y \in X_m$ existiert mit $x = X(f)(y)$.
+\end{defn}
+
+% I.2.6
+\begin{defn}
+  Seien $X$ Verklebedaten. Wir konstruieren eine dazugehörende simpliziale Menge $\tilde{X}$ wie folgt:
+  \[ \tilde{X}_n \coloneqq \Set{ (x, g) }{ x \in X_{(k)}, g : [n] \to [k] \text{ monoton und surjektiv} }, \]
+  Für eine monotone Abbildung $f : [m] \to [n]$ und $(x, g) \in \tilde{X}_n$ schreiben wir zunächst $g \circ f = f_1 \circ f_2$ mit einer Injektion $f_1$ und einer Surjektion $f_2$ und setzen
+  $\tilde{X}(f)(x, g) \coloneqq (X(f)(x), f_2)$.
+\end{defn}
+
+% I.2.7
+\begin{prop}
+  Eine simpliziale Menge $\tilde{X}$ kann genau dann aus (eindeutigen) Verklebedaten gewonnen werden, falls für alle nicht-degenerierten Simplizes $x \in \tilde{X}_n$ und streng monotonen Abbildungen $f : [m] \to [n]$ auch $\tilde{X}(f)(x) \in \tilde{X}_m$ nicht degeneriert ist.
+\end{prop}
+
+% Ausgelassen: I.2.10-12
+
+% I.2.13
+\begin{prop}
+  Seien $X$ Verklebedaten, $\tilde{X}$ die entsprechende simpliziale Menge. Dann gilt $\abs{X} \approx \abs{\tilde{X}}$.
+\end{prop}
+
+% I.2.14
+\begin{defn}
+  Das \emph{$k$-Skelett} $\sk_k X$ einer simplizialen Menge $X$ ist geg. durch
+  \[ (\sk_k X)_n \coloneqq \Set{ X(f)(x) }{ p \leq k, f : [n] \to [p] \text{ monoton}, x \in X_p }. \]
+\end{defn}
+
+\begin{defn}
+  Eine simpliziale Menge $X$ hat \emph{Dimension} $n$, falls $X = \sk_n X$.
+\end{defn}
+
+% I.2.15
+\begin{defn}
+  Eine \emph{simpliziale Abbildung} zwischen simplizialen Mengen $X$ und $Y$ ist eine natürliche Transformation zwischen den beiden Funktoren $\Delta^\op \to \SetC$.
+\end{defn}
+
+\begin{defn}
+  Die Kategorie der simplizialen Mengen ist die Funktorkategorie $[\Delta^\op, \SetC]$.
+\end{defn}
+
+\begin{prop}
+  Geom. Realisierung ist ein Funktor $\abs{\blank} : [\Delta^\op, \SetC] \to \Top$.
+\end{prop}
+
+\begin{bspe}
+  \begin{itemize}
+    \item Eine Überdeckung $(U_\alpha)_{\alpha \in A}$ eines topologischen Raumes ist Verfeinerung von $(V_\beta)_{\beta \in B}$, wenn es eine Abbildung $\psi : A \to B$ gibt, sodass $U_\alpha \subset V_{\psi(\alpha)}$ für alle $\alpha \in A$. Dies induziert eine simpliziale Abb. zwischen den Nerven der Überdeckungen durch
+    \[ F_n(\alpha_0, ..., \alpha_n) \coloneqq (\psi(\alpha_0), ..., \psi(\alpha_n)). \]
+    % Ausgelassen: I.2.17
+    \item Ein Gruppenhomomorphismus $\phi : G \to H$ stiftet eine Abbildung $BG \to BH$ zwischen den klassifizierenden Räumen durch
+    \[ F(g_1, ..., g_n) \coloneqq (\phi(g_1), ..., \phi(g_n)). \]
+  \end{itemize}
+\end{bspe}
+
+% §1.3 Simpliziale topologische Räume und das Eilenberg-Zilber-Theorem
+
+% I.3.2
+\begin{defn}
+  Ein \emph{simplizialer topologischer Raum} ist ein Funktor
+  \[ X : \Delta^\op \to \Top. \]
+  Die geometrische Realisierung eines simplizialen topologischen Raumes definiert wie bei simplizialen Mengen mit dem Unterschied, dass $X_n$ im Allgemeinen nicht die diskrete Topologie trägt.
+\end{defn}
+
+% I.3.3
+\begin{defn}
+  Eine \emph{bisimpliziale Menge} ist ein Funktor
+  \[ X : \Delta^\op \times \Delta^\op \to \SetC. \]
+\end{defn}
+
+\begin{nota}
+  $X_{nm} \coloneqq X([n],[m])$
+\end{nota}
+
+% I.3.4
+\begin{bsp}
+  Das \emph{direkte Produkt} von simplizialen Mengen $X$ und $Y$ ist die bisimpliziale Menge
+  \[
+    (X \times Y)_n \coloneqq X_n \times Y_n, \quad
+    (X \times Y)(f, g)(x, y) \coloneqq (f(x), g(y)).
+  \]
+\end{bsp}
+
+% I.3.5
+\begin{defn}
+  Die \emph{Diagonale} $DX$ einer bisimplizialen Menge $X$ ist die simpliziale Menge mit
+  $(DX)_n \coloneqq X_{nn}$ und $DX(f) \coloneqq X(f, f)$.
+\end{defn}
+
+% I.3.6
+\begin{defn}
+  Sei $X$ eine bisimpliziale Menge.
+  \begin{itemize}
+    \item Setze $\abs{X}^D \coloneqq \abs{DX}$.
+    \item Definiere einen simplizialen topologischen Raum $X^I$ durch
+    \[ X^I_n \coloneqq \abs{X_{\bullet n}}, \quad X^I(g) \coloneqq \abs{X(\id, g)}. \]
+    Setze $\abs{X}^{I,II} \coloneqq \abs{II,I}$.
+    \item Definiere Analog $\abs{X}^{II,I}$.
+  \end{itemize}
+\end{defn}
+
+\begin{satz}[\emph{Eilenberg-Zilber}]
+  $\abs{X}^D \cong \abs{X}^{I,II} \cong \abs{X}^{II,I}$ kanonisch.
+\end{satz}
+
+% I.4 Homologie und Kohomologie
+
+\end{document}
