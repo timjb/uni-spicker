@@ -433,7 +433,7 @@
 
 \iffalse
   % Herleitung der Fundamentallösung: siehe Evans, PDE, Abschnitt 2.2.1 a) oder Schmidt, Abschnitt 2.1.3
-  Konstruktion von rotationssymmetrischen harmonischen Funktionen, d.\,h.
+  Konstruktion von rotationssymmetrischen harmonischen Funktionen, \dh{}
   \[ \Delta u = 0 \]
   mit $u(x) = v(r)$ mit $v : \R \to \R$ und $r = \norm{x} = (x_1^2 + ... + x_n^2)^{1/2}$.
   Beachte (für $i \in \{ 1, ..., n \}, x \not= 0$):
@@ -466,7 +466,7 @@
 
 \begin{bem}
   \begin{itemize}
-    \item $\Phi$ ist radialsymmetrisch, d.\,h. für alle $x_1, x_2 \in \R^n \setminus \{ 0 \}$ mit $\norm{x_1} = \norm{x_2}$ gilt $\Phi(x_1) = \Phi(x_2)$.
+    \item $\Phi$ ist radialsymmetrisch, \dh{} für alle $x_1, x_2 \in \R^n \setminus \{ 0 \}$ mit $\norm{x_1} = \norm{x_2}$ gilt $\Phi(x_1) = \Phi(x_2)$.
     \item $\Phi$, $\abs{D\Phi} \in L^1(B_R(0))$ für alle $R > 0$ aber $\abs{D^2 \phi} \not\in L^1(B_1(0))$.
     \item Die Konstanten wurden so gewählt, dass gilt:
     \[ - \Int{\mathclap{\partial B_r(0)}}{}{D \Phi \cdot \nu}{\HM^{n-1}} = 1 \quad \text{für alle $r > 0$}. \]
@@ -505,13 +505,13 @@
 \begin{satz}
   Sei $\Omega \subset \R^n$ offen. Dann sind äquivalent:
   \begin{itemize}
-    \item $u$ ist harmonisch, d.\,h. es gilt $\Delta u = 0$ in $\Omega$.
-    \item $u$ erfüllt die sphärische Mittelwertseigenschaft, d.\,h. es gilt
+    \item $u$ ist harmonisch, \dh{} es gilt $\Delta u = 0$ in $\Omega$.
+    \item $u$ erfüllt die sphärische Mittelwertseigenschaft, \dh{} es gilt
     \[
       u(x_0) = \enspace\MVInt{\mathclap{\partial B_r(x_0)}}{}{\enspace u}{\HM^{n-1}}
       \qquad \text{für alle Kugeln $B_r(x_0) \Subset \Omega$.}
     \]
-    \item $u$ erfüllt die Mittelwertseigenschaft auf Kugeln, d.\,h. es gilt
+    \item $u$ erfüllt die Mittelwertseigenschaft auf Kugeln, \dh{} es gilt
     \[
       u(x_0) = \enspace\MVInt{\mathclap{B_r(x_0)}}{}{\enspace u}{\HM^{n-1}}
       \qquad \text{für alle Kugeln $B_r(x_0) \Subset \Omega$.}
@@ -525,7 +525,7 @@
 
 % 2.4.
 \begin{satz}
-  Sei $\Omega \subset \R^n$ offen, beschränkt und $u \in \mathcal{C}^2(\Omega) \cap \mathcal{C}^0(\overline{\Omega})$ subharmonisch in $\Omega$, d.\,h. $\Delta u \geq 0$ in $\Omega$. Dann gilt
+  Sei $\Omega \subset \R^n$ offen, beschränkt und $u \in \mathcal{C}^2(\Omega) \cap \mathcal{C}^0(\overline{\Omega})$ subharmonisch in $\Omega$, \dh{} $\Delta u \geq 0$ in $\Omega$. Dann gilt
   \begin{itemize}
     \item Das \emph{schwache Maximumsprinzip}: $\max_{\overline{\Omega}} u = \max_{\partial \Omega} u$
     \item Das \emph{starke Maximumsprinzip}: Ist $\Omega$ zusammenhängend und existiert $x_0 \in \Omega$ mit $u(x_0) = \max_{\overline{\Omega}} u$, so ist $u$ konstant.
@@ -573,7 +573,7 @@
 
 % 2.8.
 \begin{satz}
-  Sei $\Omega \subset \R^n$ offen und erfülle $u \in \mathcal{C}(\Omega)$ die Mittelwert- Eigenschaft auf Sphären, d.\,h.
+  Sei $\Omega \subset \R^n$ offen und erfülle $u \in \mathcal{C}(\Omega)$ die Mittelwert- Eigenschaft auf Sphären, \dh{}
   \[
     u(x_0) = \enspace\MVInt{\mathclap{\partial B_r(x_0)}}{}{\enspace u}{\HM^{n-1}}
     \quad \text{für alle Kugeln $B_r(x_0) \Subset \Omega$.}
@@ -584,7 +584,7 @@
 % Achtung: Keine Aussage des Satzes über Stetigkeit der Randwerte!
 
 \begin{kor}
-  Obiger Satz gilt auch, wenn $u \in \mathcal{C}(\Omega)$ die Mittelwert-Eigenschaft auf Kugeln erfüllt, d.\,h.
+  Obiger Satz gilt auch, wenn $u \in \mathcal{C}(\Omega)$ die Mittelwert-Eigenschaft auf Kugeln erfüllt, \dh{}
   \[
     u(x_0) = \enspace\MVInt{\mathclap{B_r(x_0)}}{}{\enspace u}{\HM^{n-1}}
     \quad \text{für alle Kugeln $B_r(x_0) \Subset \Omega$.}
@@ -696,7 +696,7 @@
   $G : \Set{ (x, y) \in \Omega \times \Omega }{ x \not= y } \to \R$, falls für alle $x \in \Omega$ gilt:
   \begin{itemize}
     \item Die \emph{Korrektorfunktion} $y \mapsto G(x, y) - \Phi(x - y)$ ist von der Klasse $\mathcal{C}^2(\Omega) \cap \mathcal{C}^1(\overline{\Omega})$ und ist harmonisch in $\Omega$. % (für $x=y$ forsetzbar)
-    \item Die Funktion $G(x, \blank)$ hat Nullrandwerte auf $\partial \Omega$, d.\,h. es gilt $\lim_{y \to y_0} G(x, y) = 0$ für alle $y_0 \in \partial \Omega \cup \{ \infty \}$.
+    \item Die Funktion $G(x, \blank)$ hat Nullrandwerte auf $\partial \Omega$, \dh{} es gilt $\lim_{y \to y_0} G(x, y) = 0$ für alle $y_0 \in \partial \Omega \cup \{ \infty \}$.
   \end{itemize}
 \end{defn}
 
@@ -847,7 +847,7 @@
 \end{nota}
 
 \begin{satz}
-  Sei $\Omega \subset \R^n$ offen und symmetrisch bzgl. $\partial \R^n_+$, d.\,h. für alle $x \in \R^n$ gilt $x \in \Omega \iff \overline{x} \in \Omega$.
+  Sei $\Omega \subset \R^n$ offen und symmetrisch bzgl. $\partial \R^n_+$, \dh{} für alle $x \in \R^n$ gilt $x \in \Omega \iff \overline{x} \in \Omega$.
   \begin{itemize}
     \item Ungerades Spiegelungsprinzip: Ist $u \in \mathcal{C}^2(\Omega^+) \cap \mathcal{C}(\Omega^+ \cup \Omega^0)$ harmonisch auf $\Omega^+$ mit $u = 0$ auf $\Omega^0$, so ist die ungerade Fortsetzung
     \[
@@ -885,7 +885,7 @@
 \end{prob}
 
 \begin{defn}
-  Sei $\Omega \subset \R^n$ offen. Eine Funktion $u \in \mathcal{C}(\Omega)$ heißt \emph{$\mathcal{C}^0$-sub- harmonisch}, falls die MW-Ungleichung auf Sphären erfüllt ist, d.\,h.
+  Sei $\Omega \subset \R^n$ offen. Eine Funktion $u \in \mathcal{C}(\Omega)$ heißt \emph{$\mathcal{C}^0$-sub- harmonisch}, falls die MW-Ungleichung auf Sphären erfüllt ist, \dh{}
   \[
     u(x_0) \leq \enspace \MVInt{\mathclap{\partial B_r(x_0)}}{}{\enspace u}{\HM^{n-1}} \quad
     \text{für alle $x_0 \in \Omega$ und $r \in \ointerval{0}{\dist(x_0, \partial \Omega)}$.}
@@ -912,17 +912,17 @@
   Sei $\Omega \subset \R^n$ offen. Für $u \in \mathcal{C}(\Omega)$ sind äquivalent:
   \begin{itemize}
     \item $u$ ist $\mathcal{C}^0$-subharmonisch auf $\Omega$.
-    \item $u$ erfüllt die MW-Ungleichung auf Kugeln, d.\,h. für alle $x_0 \in \Omega$ gilt
+    \item $u$ erfüllt die MW-Ungleichung auf Kugeln, \dh{} für alle $x_0 \in \Omega$ gilt
     \[
       u(x_0) \leq \enspace\MVInt{\mathclap{B_r(x_0)}}{}{\enspace u(x)}{x} \quad
       \text{für alle $r \in \ointerval{0}{\dist(x_0, \partial \Omega)}$.}
     \]
-    \item $u$ erfüllt die MW-Ungleichung auf kleinen Kugeln, d.\,h. für alle $x_0 \in \Omega$ gibt es ein $R(x_0) \in \ointerval{0}{\dist(x_0, \partial \Omega)}$ mit
+    \item $u$ erfüllt die MW-Ungleichung auf kleinen Kugeln, \dh{} für alle $x_0 \in \Omega$ gibt es ein $R(x_0) \in \ointerval{0}{\dist(x_0, \partial \Omega)}$ mit
     \[
       u(x_0) \leq \enspace\MVInt{\mathclap{B_r(x_0)}}{}{\enspace u(x)}{x} \quad
       \text{für alle $r \in \ointerval{0}{R(x_0)}$.}
     \]
-    \item Für alle Kugeln $B_r(x_0) \Subset \Omega$ gilt das Vergleichsprinzip mit harmonischen Funktionen, d.\,h. für jede harmonische Funktion $h \in \mathcal{C}(\overline{B_r(x_0)})$ gilt: $u \leq h \text{ auf $\partial B_r(x_0)$} \implies u \leq h \text{ in $B_r(x_0)$.}$
+    \item Für alle Kugeln $B_r(x_0) \Subset \Omega$ gilt das Vergleichsprinzip mit harmonischen Funktionen, \dh{} für jede harmonische Funktion $h \in \mathcal{C}(\overline{B_r(x_0)})$ gilt: $u \leq h \text{ auf $\partial B_r(x_0)$} \implies u \leq h \text{ in $B_r(x_0)$.}$
   \end{itemize}
 \end{lem}
 
@@ -1306,7 +1306,7 @@
   Für $\Omega \subset \R^n$ offen, $T {>} 0$ und $u \in \mathcal{C}_1^2(\Omega_T)$ sind äquivalent:
   \begin{itemize}
     \item $u$ ist kalorisch
-    \item $u$ erfüllt die MWE auf WL-Kugeln, d.\,h. f.\,a. $W_r(t_0, x_0) \Subset \Omega_T$ gilt
+    \item $u$ erfüllt die MWE auf WL-Kugeln, \dh{} f.\,a. $W_r(t_0, x_0) \Subset \Omega_T$ gilt
     \[
       u(t_0, x_0) = \frac{1}{4 r^n} \qquad \Int{\mathclap{W_r(t_0, x_0)}}{}{\quad u(t,x) \cdot \frac{\abs{x-x_0}^2}{(t-t_0)^2}}{(t,x)}
     \]
@@ -1479,7 +1479,7 @@
 
 \begin{bem}
   \begin{itemize}
-    \item Es gibt keinen Regularisierungseffekt, d.\,h. im Allgemeinen ist $u$ nur in $\mathcal{C}^2$, nicht besser.
+    \item Es gibt keinen Regularisierungseffekt, \dh{} im Allgemeinen ist $u$ nur in $\mathcal{C}^2$, nicht besser.
     \item "`Endliche Ausbreitungsgeschwindigkeit"': Ist $\supp(g) \cup \supp(f) \subset \cinterval{x_0 - r}{x_0 + r}$ für $x_0 \in \R$, $r > 0$, so gilt $\supp(t, \blank) \subset \cinterval{x_0 - (t + r)}{x_0 + t + r}$.
   \end{itemize}
 \end{bem}
@@ -1623,7 +1623,7 @@
 % Ausgelassen: Allgemeine Lösung für gerade Dimensionen
 
 \begin{bem}
-  Bei geraden Dimensionen hängt $u(t, x)$ von allen Anfangsdaten in $B_t(x)$ ab, d.\,h. es gilt kein Huygensches Prinzip.
+  Bei geraden Dimensionen hängt $u(t, x)$ von allen Anfangsdaten in $B_t(x)$ ab, \dh{} es gilt kein Huygensches Prinzip.
 \end{bem}
 
 \begin{satz}
@@ -1929,7 +1929,7 @@
     J : H \to H^*, \quad
     x \mapsto y \mapsto \scp{x}{y}_H
   \]
-  ein linearer isometrischer Isomorphismus, d.\,h. es gilt $\norm{J(x)}_{H^*} = \norm{x}_H$ und $J$ ist bijektiv.
+  ein linearer isometrischer Isomorphismus, \dh{} es gilt $\norm{J(x)}_{H^*} = \norm{x}_H$ und $J$ ist bijektiv.
 \end{satz}
 
 \begin{satz}[Lax-Milgram]

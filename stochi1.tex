@@ -136,7 +136,7 @@
 % Ausgelassen: De Morgan für unendliche Mengen
 
 \begin{defn}
-  Eine \emph{Algebra} (Mengenalgebra) über $\Omega$ ist ein System von Teilmengen $\Alg \subset \mathcal{P}(\Omega)$ mit $\Omega \in \Alg$, das unter endl. Vereinigungen und Komplementen stabil ist, d.\,h. für alle $A, B \in \Alg$ gilt:
+  Eine \emph{Algebra} (Mengenalgebra) über $\Omega$ ist ein System von Teilmengen $\Alg \subset \mathcal{P}(\Omega)$ mit $\Omega \in \Alg$, das unter endl. Vereinigungen und Komplementen stabil ist, \dh{} für alle $A, B \in \Alg$ gilt:
   \begin{itemize}
     \begin{multicols}{3}
       \item $\Omega \in \Alg$
@@ -160,7 +160,7 @@
 \end{nota}
 
 \begin{defn}
-  Eine \emph{$\sigma$-Algebra} über $\Omega$ ist eine Algebra $\Alg \subset \mathcal{P}(\Omega)$ über $\Omega$, die auch unter abzählbaren Vereinigungen stabil ist, d.\,h.
+  Eine \emph{$\sigma$-Algebra} über $\Omega$ ist eine Algebra $\Alg \subset \mathcal{P}(\Omega)$ über $\Omega$, die auch unter abzählbaren Vereinigungen stabil ist, \dh{}
   \[ \bigcup_{n = 0}^{\infty} A_n \in \Alg \quad \text{für alle Folgen $(A_n)_{n \in \N}$ in $\Alg$}. \]
 \end{defn}
 
@@ -198,7 +198,7 @@
 \end{satz}
 
 \begin{defn}
-  Ein \emph{Ring} (Mengenring) über $\Omega$ ist ein System von Teilmengen $\Ring \subset \mathcal{P}(\Omega)$ mit $\emptyset \in \Ring$, das unter endlichen Vereinigungen und Differenzen stabil ist, d.\,h. für alle $A, B \in \Ring$ gilt:
+  Ein \emph{Ring} (Mengenring) über $\Omega$ ist ein System von Teilmengen $\Ring \subset \mathcal{P}(\Omega)$ mit $\emptyset \in \Ring$, das unter endlichen Vereinigungen und Differenzen stabil ist, \dh{} für alle $A, B \in \Ring$ gilt:
   \begin{itemize}
     \begin{multicols}{3}
       \item $\emptyset \in \Ring$
@@ -214,7 +214,7 @@
 \end{bem}
 
 \begin{defn}
-  Ein \emph{$\sigma$-Ring} über $\Omega$ ist ein Ring $\Ring \subset \mathcal{P}(\Omega)$ über $\Omega$, der auch unter abzählbaren Vereinigungen stabil ist, d.\,h.
+  Ein \emph{$\sigma$-Ring} über $\Omega$ ist ein Ring $\Ring \subset \mathcal{P}(\Omega)$ über $\Omega$, der auch unter abzählbaren Vereinigungen stabil ist, \dh{}
   \[ \bigcup_{n = 0}^{\infty} A_n \in \Alg \quad \text{für alle Folgen $(A_n)_{n \in \N}$ in $\Alg$}. \]
 \end{defn}
 
@@ -358,8 +358,8 @@
 \begin{defn}
   $G : \R^d \to \R$ heißt \emph{maßerzeugende Funktion}, falls
   \begin{itemize}
-    \item $G$ ist nicht-fallend in jedem Argument, d.\,h. für alle $k \in \{ 1, ..., d \}$ und $x_1, ..., x_d \in \R$ ist $f(x_1, ..., x_{k-1}, -, x_{k+1}, ..., x_d)$ nicht-fallend.
-    \item $G$ ist rechtsseitig stetig in jedem Argument, d.\,h. für alle $k \in \{ 1, ..., d \}$ und $x_1, ..., x_d \in \R$ gilt
+    \item $G$ ist nicht-fallend in jedem Argument, \dh{} für alle $k \in \{ 1, ..., d \}$ und $x_1, ..., x_d \in \R$ ist $f(x_1, ..., x_{k-1}, -, x_{k+1}, ..., x_d)$ nicht-fallend.
+    \item $G$ ist rechtsseitig stetig in jedem Argument, \dh{} für alle $k \in \{ 1, ..., d \}$ und $x_1, ..., x_d \in \R$ gilt
     \[ \lim_{h \downarrow 0} f(x_1, ..., x_{k-1}, x_k + h, x_{k+1}, ..., x_d) = f(x_1, ..., x_d). \]
     \item Für alle $x \in \R^d$ und $h \in \R_{\geq 0}^d$ ist der Zuwachs $(\triangle G)(\ocinterval{x}{x + h}) \geq 0$.
   \end{itemize}
@@ -513,7 +513,7 @@
 \end{defn}
 
 \begin{satz}
-  Das Lebesgue-Maß auf dem $\R^d$ ist bewegungsinvariant, d.\,h.
+  Das Lebesgue-Maß auf dem $\R^d$ ist bewegungsinvariant, \dh{}
   \[ \fa{A \in \Bor(\R^d), \, O \in \mathrm{SO}_d, \, x \in \R^d} \lambda_d(O \cdot A + x) = \lambda_d(A). \]
   Das Lebesgue-Maß ist bis auf einen multiplikativen Faktor das einzige verschiebungsinvariante Maß auf $(\R^d, \Bor(\R^d))$.
 \end{satz}
@@ -727,7 +727,7 @@
 % Vorlesung 13
 
 \begin{satz}
-  Sei $(\Omega, \Alg, \P)$ ein W-Raum und $A_1, ... \in \Alg$ ein vollständiges Ereignissystem, d.\,h. paarweise disjunkt mit
+  Sei $(\Omega, \Alg, \P)$ ein W-Raum und $A_1, ... \in \Alg$ ein vollständiges Ereignissystem, \dh{} paarweise disjunkt mit
   \[ \Omega = \bigsqcup_{i = 1}^\infty A_i. \]
   Dann gilt für jedes $B \in \Alg$ mit $\P(B) > 0$
   \begin{align*}
@@ -903,7 +903,7 @@
 % Vorlesung 16
 
 \begin{lem}
-  Die Verkettung messbarer Abbildungen ist messbar, d.\,h. für $f : (\Omega_1, \Alg_1) \to (\Omega_2, \Alg_2)$ und $g : (\Omega_2, \Alg_2) \to (\Omega_3, \Alg_3)$ gilt $g \circ f : (\Omega_1, \Alg_1) \to (\Omega_3, \Alg_3)$.
+  Die Verkettung messbarer Abbildungen ist messbar, \dh{} für $f : (\Omega_1, \Alg_1) \to (\Omega_2, \Alg_2)$ und $g : (\Omega_2, \Alg_2) \to (\Omega_3, \Alg_3)$ gilt $g \circ f : (\Omega_1, \Alg_1) \to (\Omega_3, \Alg_3)$.
 \end{lem}
 
 \begin{lem}
@@ -1238,7 +1238,7 @@
 \end{defn}
 
 \begin{satz}
-  Der $L^p(\mu)$ ist ein vollständiger normierter Raum, d.\,h. jede Cauchy-Folge bzgl. der Norm $\norm{\blank}_p$ ist auch konvergent.
+  Der $L^p(\mu)$ ist ein vollständiger normierter Raum, \dh{} jede Cauchy-Folge bzgl. der Norm $\norm{\blank}_p$ ist auch konvergent.
 \end{satz}
 
 \begin{satz}
@@ -1340,7 +1340,7 @@
 \end{bem}
 
 \begin{satz}
-  Der Erwartungswert ist linear, d.\,h. für ZGn $X$ und $Y$ und $\lambda \in \R$ gilt $\E (\lambda X + Y) = \lambda \E X + \E Y$.
+  Der Erwartungswert ist linear, \dh{} für ZGn $X$ und $Y$ und $\lambda \in \R$ gilt $\E (\lambda X + Y) = \lambda \E X + \E Y$.
 \end{satz}
 
 \begin{satz}
@@ -1685,7 +1685,7 @@
 \end{kor}
 
 \begin{frage}[Momentenproblem (MP)]
-  Unter welchen Bedingungen ist eine Folge $(c_i)_{i \in \N}$ eine Momentenfolge einer ZG $X$ d.\,h. $c_i = \E X^i$?
+  Unter welchen Bedingungen ist eine Folge $(c_i)_{i \in \N}$ eine Momentenfolge einer ZG $X$ \dh{} $c_i = \E X^i$?
 \end{frage}
 
 \begin{antwort}
@@ -2068,7 +2068,7 @@
 \end{prop}
 
 \iffalse
-  % Gewisse Verteilungen sind "`faltungsstabil"', d.\,h. bei der Faltung bleibt der Verteilungstyp erhalten
+  % Gewisse Verteilungen sind "`faltungsstabil"', \dh{} bei der Faltung bleibt der Verteilungstyp erhalten
   \begin{bsp}
     $X_i$ sei Poisson-verteilt mit Paramter $\lambda_i > 0$, $i = 1, 2$. Dann ist $X_1 + X_2$ Poisson-verteilt mit Parameter $\lambda_1 + \lambda_2$, falls $X_1$ und $X_2$ unabhängig sind.
   \end{bsp}

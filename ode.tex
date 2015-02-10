@@ -392,7 +392,7 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
     \item \emph{Lipschitz-stetig} in $\D$, falls eine Konstante $\alpha > 0$ existiert mit
     \[ \fa{x_1, x_2 \in \D} \norm{Tx_1 - Tx_2}_Y \leq \alpha \cdot \norm{x_1 - x_2}_X. \]
     \item \emph{kontraktiv}, falls $T$ Lipschitz-stetig mit $\alpha < 1$ ist.
-    \item \emph{kompakt}, falls $T$ stetig ist und beschränkte Mengen in $X$ auf relativ kompakte Mengen in $Y$ abgebildet werden, d.\,h. für jede beschränkte Folge $(x_n)_{n \in \N}$ in $\D$ besitzt die Folge $(Tx_n)_{n \in \N}$ eine konvergente Teilfolge.
+    \item \emph{kompakt}, falls $T$ stetig ist und beschränkte Mengen in $X$ auf relativ kompakte Mengen in $Y$ abgebildet werden, \dh{} für jede beschränkte Folge $(x_n)_{n \in \N}$ in $\D$ besitzt die Folge $(Tx_n)_{n \in \N}$ eine konvergente Teilfolge.
   \end{itemize}
 \end{defn}
 
@@ -406,9 +406,9 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
 \begin{satz}[Arzelà-Ascoli]
   Sei $I \subset \R$ kompakt. Eine Teilmenge $\mathcal{F} \subset \mathcal{C}(I, \R^n)$ ist genau dann relativ kompakt, wenn
   \begin{itemize}
-    \item $\mathcal{F}$ ist \emph{punktweise beschränkt}, d.\,h.
+    \item $\mathcal{F}$ ist \emph{punktweise beschränkt}, \dh{}
     \[ \fa{t \in I} \ex{M} \fa{f \in \mathcal{F}} \norm{f(t)} \leq M \]
-    \item $\mathcal{F}$ ist \emph{gleichgradig stetig}, d.\,h.
+    \item $\mathcal{F}$ ist \emph{gleichgradig stetig}, \dh{}
     \[ \fa{\epsilon {>} 0} \ex{\delta {>} 0} \fa{t_1, t_2 {\in} I, f {\in} \mathcal{F}} \norm{t_1 - t_2} < \delta \Rightarrow \norm{f(t_1) - f(t_2)} < \epsilon \]
   \end{itemize}
 \end{satz}
@@ -424,7 +424,7 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
 % Kapitel 2.1. Existenzsatz von Peano
 
 \begin{satz}[Peano]
-  Sei $\D \subset \R \times \R^n$ offen, $f : \D \to \R^n$ stetig, $(t_0, y_0) \in D$. Dann ist das AWP (1.1) lokal lösbar, d.\,h. es existiert ein Intervall $I \subset \R$ mit $t_0 \in I$ und eine stetig diff'bare Funktion $y : I \to \R^n$, die das AWP (1.1) erfüllt.
+  Sei $\D \subset \R \times \R^n$ offen, $f : \D \to \R^n$ stetig, $(t_0, y_0) \in D$. Dann ist das AWP (1.1) lokal lösbar, \dh{} es existiert ein Intervall $I \subset \R$ mit $t_0 \in I$ und eine stetig diff'bare Funktion $y : I \to \R^n$, die das AWP (1.1) erfüllt.
 \end{satz}
 
 % Vorlesung vom 28.4.2014
@@ -483,7 +483,7 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
 % Vorlesung vom 5.5.2014
 
 \begin{satz}[Picard-Lindelöf, lokal qualitativ]
-  Seien $\D \subset \R \times \R^n$ offen, $f : \D \to \R^n$ stetig, lokal Lipschitz-stetig bzgl. $y$ auf $\D$, $(t_0, y_0) \in \D$. Dann besitzt das AWP (1.1) eine eindeutige lokale Lösung, d.\,h. es existiert $\gamma = \gamma(t_0, y_0) > 0$, sodass das AWP (1.1) auf $I_\gamma \coloneqq \cinterval{t_0 - \gamma}{t_0 + \gamma}$ genau eine Lösung besitzt.
+  Seien $\D \subset \R \times \R^n$ offen, $f : \D \to \R^n$ stetig, lokal Lipschitz-stetig bzgl. $y$ auf $\D$, $(t_0, y_0) \in \D$. Dann besitzt das AWP (1.1) eine eindeutige lokale Lösung, \dh{} es existiert $\gamma = \gamma(t_0, y_0) > 0$, sodass das AWP (1.1) auf $I_\gamma \coloneqq \cinterval{t_0 - \gamma}{t_0 + \gamma}$ genau eine Lösung besitzt.
 \end{satz}
 
 \begin{satz}[Picard-Lindelöf, global]
@@ -503,7 +503,7 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
 
 % 2.10.
 \begin{satz}
-  Sei $I \subset \R$ offen, $f : I \times \R^n \to \R^n$ stetig, lokal Lipschitz-stetig bzgl. $y$ auf $I \times \R^n$, $(t_0, y_0) \in I \times \R^n$. Ist das Wachstum von $f$ linear beschränkt in $y$ auf $I \times \R^n$, d.\,h. gibt es stetige Funktionen $a, b : I \to \cointerval{0}{\infty}$ mit $\norm{f(t, y)} \leq a(t) \norm{y} + b(t)$ für alle $(t, y) \in I \times \R^n$, dann besitzt das AWP (1.1) eine eindeutige Lösung auf $I$.
+  Sei $I \subset \R$ offen, $f : I \times \R^n \to \R^n$ stetig, lokal Lipschitz-stetig bzgl. $y$ auf $I \times \R^n$, $(t_0, y_0) \in I \times \R^n$. Ist das Wachstum von $f$ linear beschränkt in $y$ auf $I \times \R^n$, \dh{} gibt es stetige Funktionen $a, b : I \to \cointerval{0}{\infty}$ mit $\norm{f(t, y)} \leq a(t) \norm{y} + b(t)$ für alle $(t, y) \in I \times \R^n$, dann besitzt das AWP (1.1) eine eindeutige Lösung auf $I$.
 \end{satz}
 
 % Vorlesung vom 12.5.2014
@@ -589,7 +589,7 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
   Seien $I \subseteq \R$, $A : I \to \R^{n \times n}$, $f : I \to \R^n$ stetig, $U_h$ wie oben und $U \coloneqq \Set{ y \in \mathcal{C}^1(I, \R^n) }{ \dot{y} = A(t) y + f }$. Dann gilt:
   \begin{itemize}
     \item $U$ ist nicht leer.
-    \item Ist $y_p \in U$ eine partikuläre Lösung, dann ist $U = y_p + U_h$, d.\,h. $U$ ist affiner Unterraum von $\mathcal{C}^1(I, \R^n)$.
+    \item Ist $y_p \in U$ eine partikuläre Lösung, dann ist $U = y_p + U_h$, \dh{} $U$ ist affiner Unterraum von $\mathcal{C}^1(I, \R^n)$.
     \item Sei $y_p, \tilde{y}_p \in U$, dann ist $y_p - \tilde{y}_p \in U_h$.
   \end{itemize}
 \end{satz}
@@ -617,7 +617,7 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
 \begin{satz}
   Seien $A, B \in \R^{n \times n}$. Dann gilt:
   \begin{itemize}
-    \item Falls $A$ und $B$ kommutieren, d.\,h. $AB = BA$, dann gilt
+    \item Falls $A$ und $B$ kommutieren, \dh{} $AB = BA$, dann gilt
     \[ e^{A+B} = e^A \cdot e^B = e^B \cdot e^A. \]
     \item Aus $e^{t(A + B)} = e^{tA} \cdot e^{tB}$ für alle $t \in \R$ folgt $AB = BA$.
     \item $e^{A}$ ist invertierbar mit $(e^A)^{-1} = e^{-A}$.
@@ -631,7 +631,7 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
 
 % 3.7.
 \begin{satz}
-  Sei $A \in \R^{n \times n}$ diagonalisierbar, d.\,h. es existiere eine Basis aus Eigenvektoren $s_1, ..., s_n \in \C^n$ zu den Eigenwerten $\lambda_1, ..., \lambda_n \in \C$ sodass $S^{-1} A S =: D$ mit $S \coloneqq (s_1, ..., s_n)$ diagonal mit Einträgen $\lambda_1, ..., \lambda_n$ ist. Dann gilt
+  Sei $A \in \R^{n \times n}$ diagonalisierbar, \dh{} es existiere eine Basis aus Eigenvektoren $s_1, ..., s_n \in \C^n$ zu den Eigenwerten $\lambda_1, ..., \lambda_n \in \C$ sodass $S^{-1} A S =: D$ mit $S \coloneqq (s_1, ..., s_n)$ diagonal mit Einträgen $\lambda_1, ..., \lambda_n$ ist. Dann gilt
   \[ e^{tA} = S e^{tD} S^{-1} = S \begin{pmatrix} e^{\lambda_1 t} & \cdots & 0 \\ \vdots & \ddots & \vdots \\ 0 & \cdots & e^{\lambda_n t} \end{pmatrix} S^{-1} \]
 \end{satz}
 
@@ -707,7 +707,7 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
 
 % 3.9.
 \begin{satz}
-  Kommutieren die Matrizen $(A(t))_{t \in I}$ miteinander, d.\,h.
+  Kommutieren die Matrizen $(A(t))_{t \in I}$ miteinander, \dh{}
   \[ A(t) \cdot A(s) = A(s) \cdot A(t) \quad \text{für alle $t, s \in I$}, \]
   so ist eine Fundamentalmatrix von $\dot{y} = A(t) y + f(t)$ gegeben durch
   \[
@@ -840,7 +840,7 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
     \end{pmatrix}}{s}, \qquad
     y_p \coloneqq y_{1,p}.
   \]
-  bestimmt werden. Falls $f$ elementaransatzfähig ist, d.\,h.
+  bestimmt werden. Falls $f$ elementaransatzfähig ist, \dh{}
   \[ f(t) = g(t) \cdot e^{\mu t} \cos(\omega t) + q(t) \cdot e^{\mu t} \sin(\omega t) \]
   für Polynome $g(t), q(t) \in \R[t]$ und $\omega, \mu \in \R$ gilt, dann gibt es eine Lösung der Form
   \begin{align*}
@@ -910,7 +910,7 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
   \begin{itemize}
     \miniitem{0.53 \linewidth}{exponentiell stabil, falls $\alpha < 0$,}
     \miniitem{0.44 \linewidth}{stabil, falls $\alpha = 0$ und}
-    \item instabil (d.\,h. weder stabil noch attraktiv), falls $\alpha > 0$.
+    \item instabil (\dh{} weder stabil noch attraktiv), falls $\alpha > 0$.
   \end{itemize}
 \end{bsp}
 
@@ -920,7 +920,7 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
 \begin{satz}
   Sei $\D \subset \R^{n}$ offen, $f : \D \to \R^n$ stetig, lokal Lipschitz-stetig.
   \begin{itemize}
-    \item Die DGL $\dot{y} = f(y)$ ist translationsinvariant, d.\,h. ist $y$ eine Lösung von $\dot{y} = f(y)$ auf $\cointerval{t_0}{\infty}$, dann ist $z(t) \coloneqq y(t_0 + t)$ eine Lösung von $\dot{z} = f(z)$ auf $\cointerval{0}{\infty}$.
+    \item Die DGL $\dot{y} = f(y)$ ist translationsinvariant, \dh{} ist $y$ eine Lösung von $\dot{y} = f(y)$ auf $\cointerval{t_0}{\infty}$, dann ist $z(t) \coloneqq y(t_0 + t)$ eine Lösung von $\dot{z} = f(z)$ auf $\cointerval{0}{\infty}$.
     \item Die Lösung $y$ ist genau dann (exponentiell/asymptotisch) stabil, wenn $z$ (exponentiell/asymptotisch) stabil ist.
     \item Eine Lösung von $\dot{y} = f(y)$ ist genau dann konstant, also $y(t) \equiv c \in \R^n$, wenn $f(c) = 0$.
   \end{itemize}
@@ -968,12 +968,12 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
 % Kapitel 4.2.2. Nichtlineare autonome DGLn
 
 \begin{lem}
-  Sei $\D \subset \R^n$ offen, $f : \D \to \R^n$ stetig, lokal Lipschitz-stetig. Ist $y$ eine Lsg von $\dot{y} = f(y)$ auf $\cointerval{0}{\infty}$ mit $y_{\infty} = \lim_{t \to \infty} y(t)$, dann ist $y_{\infty}$ eine Ruhelage von $f$, d.\,h. $f(y_{\infty}) = 0$.
+  Sei $\D \subset \R^n$ offen, $f : \D \to \R^n$ stetig, lokal Lipschitz-stetig. Ist $y$ eine Lsg von $\dot{y} = f(y)$ auf $\cointerval{0}{\infty}$ mit $y_{\infty} = \lim_{t \to \infty} y(t)$, dann ist $y_{\infty}$ eine Ruhelage von $f$, \dh{} $f(y_{\infty}) = 0$.
 \end{lem}
 
 % 4.4.
 \begin{satz}
-  Sei $\D \subset \R^n$ offen, $f : \D \to \R^n$ stetig differenzierbar. Sei $y_s(t) \equiv y_{*} \in \R^n$ eine stationäre Lsg von $\dot{y} = f(y)$, d.\,h. $f(y_{*}) = 0$. Sei
+  Sei $\D \subset \R^n$ offen, $f : \D \to \R^n$ stetig differenzierbar. Sei $y_s(t) \equiv y_{*} \in \R^n$ eine stationäre Lsg von $\dot{y} = f(y)$, \dh{} $f(y_{*}) = 0$. Sei
   \[
     J_f(y_{*}) = \begin{pmatrix}
       \frac{\partial f_1}{\partial y_1}(y_{*}) & \cdots & \frac{\partial f_1}{\partial y_n} (y_{*}) \\
@@ -1029,7 +1029,7 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
 \end{bsp}
 
 \begin{defn}
-  Seien $h, g : \D \to \R$ stetig auf $\D \subset \R^2$. Die DGL $\dot{y} g(t, y) - h(t, y) = 0$ heißt \emph{exakt}, falls es eine Stammfunktion $S : \D \to \R$ gibt, d.\,h. $S \in \mathcal{C}^1(\D)$ und
+  Seien $h, g : \D \to \R$ stetig auf $\D \subset \R^2$. Die DGL $\dot{y} g(t, y) - h(t, y) = 0$ heißt \emph{exakt}, falls es eine Stammfunktion $S : \D \to \R$ gibt, \dh{} $S \in \mathcal{C}^1(\D)$ und
   \[
     \tfrac{\partial S}{\partial t} (t, y) = h(t, y)
     \quad \text{und} \quad
@@ -1058,7 +1058,7 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
 \begin{satz}
   Sei $\D \subset \R^n$ offen, $f : \D \to \R^n$ stetig, lokal Lipschitz-stetig auf $\D$, $y_{*}$ eine Ruhelage von $f$, $y_{*}(t) \equiv y_{*}$ die zugeh. stationäre Lösung.
   \begin{itemize}
-    \item Sei $V : U_{y_{*}} \to \R$ eine \textit{schwache} Lyapunov-Funktion der DGL $\dot{y} = f(y)$ für $y_{*} \in U_{y_{*}}$ und es gelte $\fa{y \in U_{y_{*}} \setminus \{ y_{*} \}} V(y_{*}) < V(y)$, d.\,h. $V$ hat in $y_{*}$ ein isoliertes lokales Minimum. Dann ist $y_s(t)$ stabil.
+    \item Sei $V : U_{y_{*}} \to \R$ eine \textit{schwache} Lyapunov-Funktion der DGL $\dot{y} = f(y)$ für $y_{*} \in U_{y_{*}}$ und es gelte $\fa{y \in U_{y_{*}} \setminus \{ y_{*} \}} V(y_{*}) < V(y)$, \dh{} $V$ hat in $y_{*}$ ein isoliertes lokales Minimum. Dann ist $y_s(t)$ stabil.
     % Vorlesung vom 25.6.2014
     \item Wenn $V$ sogar eine \textit{starke} Lyapunov-Funktion ist, so ist $y_s(t)$ asymptotisch stabil.
   \end{itemize}
@@ -1087,7 +1087,7 @@ Unterschied: Autonome DGLn hängen nicht explizit von der Zeit $t$ ab
 \end{bem}
 
 \begin{bem}
-  Die Funktion $V$ hat in $y_{*}$ ein isoliertes lokales Minimum, wenn die Hesse-Matrix $H \coloneqq (\Hess f)(y_{*})$ positiv definit ist, d.\,h. $\fa{v \not= 0} v^T H v > 0$.
+  Die Funktion $V$ hat in $y_{*}$ ein isoliertes lokales Minimum, wenn die Hesse-Matrix $H \coloneqq (\Hess f)(y_{*})$ positiv definit ist, \dh{} $\fa{v \not= 0} v^T H v > 0$.
 \end{bem}
 
 % Ausgelassen: Beispiel: GDGL $\dot{y} = - z - y^3$, $\dot{z} = y - z^3$ -- Stabilität der Nulllösung mit Lyapunov-Methode

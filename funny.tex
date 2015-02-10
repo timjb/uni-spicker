@@ -51,7 +51,7 @@
 % Kurz gesagt: Um unendlich-dimensionale Vektorräume und (lineare und stetige) Abbildungen zwischen solchen
 
 % Beispiele:
-% * Sei $\Omega \subset \R^n$ offen und beschränkt. Dann ist $\mathcal{C}(\overline{\Omega}) = \Set{ f : \Omega \to \R }{ f \text{ stetig} }$ mit der Norm $\norm{f}_\infty = \sup_{\omega \in \Omega} \abs{f(\omega)}$ ein Banachraum, d.\,h. ein vollständiger, normierter Vektorraum. Er ist allerdings nicht endlich-dimensional (ausgelassen: Begründung dafür).
+% * Sei $\Omega \subset \R^n$ offen und beschränkt. Dann ist $\mathcal{C}(\overline{\Omega}) = \Set{ f : \Omega \to \R }{ f \text{ stetig} }$ mit der Norm $\norm{f}_\infty = \sup_{\omega \in \Omega} \abs{f(\omega)}$ ein Banachraum, \dh{} ein vollständiger, normierter Vektorraum. Er ist allerdings nicht endlich-dimensional (ausgelassen: Begründung dafür).
 % * Für eine lineare Abbildung zwischen endlich-dimensionalen Vektorräumen ist aus der linearen Algebra bekannt, dass sie injektiv genau dann sind, wenn sie surjektiv sind. Sind diese Vektorräume unendlich-dimensional ist dies i.\,A. falsch. Z.B. sei $C_* \coloneqq \Set{ (x_k)_{k \in \N} \text{ Folge in } \R }{ \ex{N \in \N} \fa{n \geq N} x_n = 0 }$ der Vektorraum der irgendwann abbrechenden Folgen. Der Shiftoperator
 %   \[ T : C_* \to C_*, (x_0, x_1, x_2, ...) \mapsto (0, x_0, x_1, x_2, ...) \]
 %   ist offensichtlich linear und injektiv, aber nicht surjektiv.
@@ -146,7 +146,7 @@
 % Ausgelassen: Restklassenbildung über Halbnorm
 
 \begin{defn}
-  Ein \emph{metrischer Raum} ist ein Paar $(X, d)$ mit einer Mange $X$ und einer \emph{Metrik} $d : X {\times} X \to \R$, d.\,h. für $x, y, z \in X$ gilt:
+  Ein \emph{metrischer Raum} ist ein Paar $(X, d)$ mit einer Mange $X$ und einer \emph{Metrik} $d : X {\times} X \to \R$, \dh{} für $x, y, z \in X$ gilt:
   \begin{itemize}
     \item $d(x, y) \geq 0$ \enspace und \enspace $d(x, y) = 0 \iff x = y$ \pright{Positivität}
     \miniitem{0.44 \linewidth}{$d(x, y) = d(y, x)$ (Symm.)}
@@ -304,7 +304,7 @@
 \begin{defn}
   Seien $(X, \tau_X)$ und $(Y, \tau_Y)$ Hausdorff-Räume, $S \subset X$, sowie $x_0 \in S$. Eine Funktion $f : S \to Y$ heißt \emph{stetig} in $x_0$, falls gilt:
   \[ \fa{V \in \tau_Y} f(x_0) \in V \implies \ex{U \in \tau_X \text{ mit } x_0 \in U} f(U \cap S) \subset V \]
-  Ist $X = S$, so heißt $f : X \to Y$ stetige Abbildung, falls $f$ stetig in allen Punkten $x_0 \in X$ ist. Das ist genau dann der Fall, wenn das Urbild offener Mengen offen ist, d.\,h. $\fa{V \in \tau_Y} f^{-1}(V) \in \tau_X$.
+  Ist $X = S$, so heißt $f : X \to Y$ stetige Abbildung, falls $f$ stetig in allen Punkten $x_0 \in X$ ist. Das ist genau dann der Fall, wenn das Urbild offener Mengen offen ist, \dh{} $\fa{V \in \tau_Y} f^{-1}(V) \in \tau_X$.
 \end{defn}
 
 \begin{bem}
@@ -383,7 +383,7 @@
   mit der Äquivalenzrelation $x \sim y \text{ in } \widetilde{X} \!\coloniff\! d(x_j, y_j) \convWith{j} 0$.
   Diese Menge wird mit der Metrik
   \[ \widetilde{d}(x, y) \coloneqq \lim_{\mathclap{i \to \infty}} d(x_i, y_i) \]
-  zu einem vollständigen metrischen Raum. Die injektive Abbildung $J : X \to \tilde{X}$, welche $x \in X$ auf die konstante Folge $(x)_{i \in \N}$ abbildet, ist isometrisch, d.\,h.
+  zu einem vollständigen metrischen Raum. Die injektive Abbildung $J : X \to \tilde{X}$, welche $x \in X$ auf die konstante Folge $(x)_{i \in \N}$ abbildet, ist isometrisch, \dh{}
   $\fa{x, y \in X} \widetilde{d}(J(x), J(y)) = d(x, y)$.
   Wir können also $X$ als einen dichten Unterraum von $\widetilde{X}$ auffassen.
 \end{satz}
@@ -655,7 +655,7 @@
 \end{defn}
 
 \begin{satz}
-  Ist im vorherigen Satz $A$ nicht leer, abgeschlossen und affiner Unterraum von $X$, dann ist $P$ affin linear, d.\,h.
+  Ist im vorherigen Satz $A$ nicht leer, abgeschlossen und affiner Unterraum von $X$, dann ist $P$ affin linear, \dh{}
   \[ P\left( (1{-}\alpha) x + \alpha y \right) = P \left( (1{-}\alpha) x \right) + P \left( \alpha y \right) \quad \text{für alle $x, y \in A$, $\alpha \in \K$.} \]
 \end{satz}
 
@@ -1021,7 +1021,7 @@
 
 % Kommt im Skript hinter dem Satz von Lax-Milgram, als Reformulierung für den Operator $A$.
 \begin{lem}
-  Sei $X$ ein Hilbertraum und $A \in \LSO(X)$ koerziv, d.\,h.
+  Sei $X$ ein Hilbertraum und $A \in \LSO(X)$ koerziv, \dh{}
   \[ \ex{c_0 > 0} \fa{x \in X} \Re \scp{x}{Ax}_X \geq c_0 \cdot \norm{x}_X^2. \]
   Dann ist $A$ invertierbar in $\LSO(X)$ und $\norm{A^{-1}} \leq \tfrac{1}{c_0}$.
 \end{lem}
@@ -1058,7 +1058,7 @@
   \[ - \sum_{i=1}^n \partial_i \left( \sum_{j=1}^n a_{ij} \partial_j u + h_i \right) + bu + f = 0, \]
 
   wobei $a_{ij}, h_i \in \mathcal{C}^1(\Omega)$ und $f, b \in \mathcal{C}^0(\Omega)$ gegeben sind.
-  Es sei $a = (a_{ij})$ gleichmäßig elliptisch, d.\,h. es gibt $c_0 > 0$, sodass
+  Es sei $a = (a_{ij})$ gleichmäßig elliptisch, \dh{} es gibt $c_0 > 0$, sodass
 
   \[ \fa{x \in \Omega} \fa{\xi \in \R^n} \xi^T a(x) \xi = \sum_{i,j}^n \xi_i a_{ij}(x) \xi_j \geq c_0 \norm{\xi}^2. \]
 
@@ -1115,7 +1115,7 @@
 \begin{satz}[Hahn-Banach]
   Sei $X$ ein $\R$-VR und
   \begin{itemize}
-    \item $p : X \to \R$ sublinear, d.\,h. für alle $x, y \in X$ und $\alpha \in \R_{\geq 0}$ gelte
+    \item $p : X \to \R$ sublinear, \dh{} für alle $x, y \in X$ und $\alpha \in \R_{\geq 0}$ gelte
     \[ p(x+y) \leq p(x) + p(y) \quad \text{und} \quad p(\alpha x) = \alpha p(x), \]
     \item $f : Y \to \R$ linear auf einem Unterraum $Y \subset X$ und
     \item $f(x) \leq p(x)$ für $x \in Y$.
@@ -1384,7 +1384,7 @@
 % Vorlesung vom 14.1.2014
 
 \begin{satz}
-  Sei $X$ ein normierter Raum, $M \subset X$ abgeschlossen und konvex. Dann ist $M$ schwach folgenabgeschlossen, d.\,h. für jede Folge $(x_k)_{k \in N}$ in $M$ und $x \in X$ gilt:
+  Sei $X$ ein normierter Raum, $M \subset X$ abgeschlossen und konvex. Dann ist $M$ schwach folgenabgeschlossen, \dh{} für jede Folge $(x_k)_{k \in N}$ in $M$ und $x \in X$ gilt:
   \[ x_k \convWeaklyWith{k} x \text{ in } X \enspace \implies \enspace x \in M. \]
 \end{satz}
 
@@ -1645,7 +1645,7 @@
 \begin{lem}
   Sei $X$ Hilbertraum und $P : X {\to} X$ linear. Dann äquivalent:
   \begin{itemize}
-    \item $P$ ist die orthogonale Projektion auf $\im(P)$, d.\,h.
+    \item $P$ ist die orthogonale Projektion auf $\im(P)$, \dh{}
     \[ \fa{x,y \in X} \norm{x-Px} \leq \norm{x - Py}. \]
     \item $P^2 = P$ und $\fa{x,y \in X} \scp{Px}{y} = \scp{x}{Py}$
     \miniitem{0.52 \linewidth}{$\fa{x,y \in X} \scp{x-Px}{Py} = 0$}
@@ -1904,7 +1904,7 @@ Die Unterräume $E_n = \im(Q_n)$ erfüllen dann (3) aus dem ersten Lemma und (2)
 % Erste Stunde der Vorlesung: Wiederholung, Beweis des Spektralsatzes
 
 \begin{kor}
-  Ist $T \in \mathcal{K}$ und $\lambda \in \sigma(T) \setminus \{ 0 \}$, so hat die Resolventenfunktion $\mu \mapsto R(\mu, T)$ in $\lambda$ einen isolierten \emph{Pol} der Ordnung $n_{\lambda}$, d.\,h.
+  Ist $T \in \mathcal{K}$ und $\lambda \in \sigma(T) \setminus \{ 0 \}$, so hat die Resolventenfunktion $\mu \mapsto R(\mu, T)$ in $\lambda$ einen isolierten \emph{Pol} der Ordnung $n_{\lambda}$, \dh{}
   \[ \mu \mapsto (\mu - \lambda)^{n_\lambda} R_{\lambda} R_{\lambda}(\mu, T) \]
   kann im Punkt $\lambda$ komplex analytisch fortgesetzt werden. Der Wert in $\lambda$ ist von Null verschieden.
 \end{kor}
@@ -1922,7 +1922,7 @@ Die Unterräume $E_n = \im(Q_n)$ erfüllen dann (3) aus dem ersten Lemma und (2)
 
 % Vorlesung vom 6.2.2014
 
-Sei $X$ ein Hilbertraum über $\C$ und $T \in \mathcal{L}(X)$ \emph{normal}, d.\,h. $T^* T - T T^* = 0$, wobei $T^* \coloneqq R_{X}^{-1} T' R_X$ mit $R_X$ die Isometrie aus dem Rieszschen Darstellungssatz bzw. $\fa{x, y \in X} \scp{x}{T^* y} = \scp{Tx}{y}$, lassen sich die Aussagen noch konkretisieren. Es gilt:
+Sei $X$ ein Hilbertraum über $\C$ und $T \in \mathcal{L}(X)$ \emph{normal}, \dh{} $T^* T - T T^* = 0$, wobei $T^* \coloneqq R_{X}^{-1} T' R_X$ mit $R_X$ die Isometrie aus dem Rieszschen Darstellungssatz bzw. $\fa{x, y \in X} \scp{x}{T^* y} = \scp{Tx}{y}$, lassen sich die Aussagen noch konkretisieren. Es gilt:
 
 \begin{satz}[Spektralsatz für kompakte normale Operatoren]
   Sei $X$ ein Hilbertraum über $\C$ und $0 \not= T \in \mathcal{K}(X)$ normal. Dann gilt:
@@ -1942,8 +1942,8 @@ Sei $X$ ein Hilbertraum über $\C$ und $T \in \mathcal{L}(X)$ \emph{normal}, d.\
   Seien $X$ ein Hilbertraum über $\C$ und $T \in \LSO(x)$ normal. Dann gilt:
   \begin{itemize}
     \item  Ist $X \not= 0$, gilt $\sup \sigma(T) \lambda = \norm{T}$
-    \item Ist $T$ \emph{selbstadjungiert}, d.\,h. $T^* = T$, so ist $\sigma_p(T) \subset \cinterval{-\norm{T}}{\norm{T}}$ und, falls $T$ auch kompakt ist, $\norm{T}$ oder $-\norm{T}$ ein Eigenwert.
-    \item Ist $T$ selbstadjungiert und \emph{positiv semidefinit}, d.\,h. $\fa{x \in X} \scp{Tx}{x} \geq 0$, so gilt $\sigma_p(T) \subset \cinterval{0}{\norm{T}}$ und falls $T$ auch kompakt ist, ist $\norm{T}$ Eigenwert.
+    \item Ist $T$ \emph{selbstadjungiert}, \dh{} $T^* = T$, so ist $\sigma_p(T) \subset \cinterval{-\norm{T}}{\norm{T}}$ und, falls $T$ auch kompakt ist, $\norm{T}$ oder $-\norm{T}$ ein Eigenwert.
+    \item Ist $T$ selbstadjungiert und \emph{positiv semidefinit}, \dh{} $\fa{x \in X} \scp{Tx}{x} \geq 0$, so gilt $\sigma_p(T) \subset \cinterval{0}{\norm{T}}$ und falls $T$ auch kompakt ist, ist $\norm{T}$ Eigenwert.
   \end{itemize}
 \end{lem}
 

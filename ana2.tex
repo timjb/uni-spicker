@@ -389,7 +389,7 @@
 
 \begin{defn}
   \begin{itemize}
-    \item Eine Menge $U \subset X$ heißt \emph{offen} in $(X, d)$ (notiert $U \opn X$), falls $U$ eine Umgebung von allen Punkten $u \in U$ ist, d.\,h.
+    \item Eine Menge $U \subset X$ heißt \emph{offen} in $(X, d)$ (notiert $U \opn X$), falls $U$ eine Umgebung von allen Punkten $u \in U$ ist, \dh{}
     \[ \fa{u \in U} \ex{\epsilon_u > 0} B_{\epsilon_u}(u) \subset U \]
     \item Eine Menge $U \subset X$ heißt \emph{abgeschlossen} in $(X, d)$ (notiert $U \cls X$), falls $X \backslash U$ offen ist.
     \item Ein Punkt $x \in X$ heißt \emph{Randpunkt} von $Y \subset X$, falls gilt:
@@ -411,7 +411,7 @@
 \end{defn}
 
 \begin{satz}
-  Obige Definition ergeben Sinn, d.\,h. es gilt für alle $Y \subset X$: $Y^{\circ} \opn X$ und $\overline{Y} \cls X$
+  Obige Definition ergeben Sinn, \dh{} es gilt für alle $Y \subset X$: $Y^{\circ} \opn X$ und $\overline{Y} \cls X$
 \end{satz}
 
 % Bemerkung: ! der Abschluss des offenen Balls ist nicht immer der abgeschlossene Ball
@@ -522,8 +522,8 @@
   Für eine Folge $(x_n)$ in $(\R^m, \norm{\blank}_{\text{eukl}})$ gilt:
 
   \begin{itemize}
-    \item Ist $(x_n)$ beschränkt, d.\,h. gibt es ein $C > 0$, sodass $\norm{x_n}_{\text{eukl}} \le C$ für alle $n \in \N$, dann hat $(x_n)$ eine konvergente Teilfolge.
-    \item Ist $(x_n)$ eine Cauchyfolge, so ist $(x_n)$ konvergent (d.\,h. $(\R^m, \norm{\blank}_{\text{eukl}})$) ist vollständig).
+    \item Ist $(x_n)$ beschränkt, \dh{} gibt es ein $C > 0$, sodass $\norm{x_n}_{\text{eukl}} \le C$ für alle $n \in \N$, dann hat $(x_n)$ eine konvergente Teilfolge.
+    \item Ist $(x_n)$ eine Cauchyfolge, so ist $(x_n)$ konvergent (\dh{} $(\R^m, \norm{\blank}_{\text{eukl}})$) ist vollständig).
   \end{itemize}
 \end{satz}
 
@@ -546,7 +546,7 @@
     Wenn $f$ in allen Punkten $x \in X$ stetig ist, so heißt $f$ stetig.
     \item Die Abbildung $f$ heißt \emph{folgenstetig} in $a \in X$, wenn gilt:
     \[ \lim_{x \to a} f(x) = f(a), \]
-    d.\,h. für jede Folge $(x_n)$ in $X$ mit $\lim_{n \to \infty} (x_n) = a$ gilt $\lim_{n \to \infty} f(x_n) = f(a).$
+    \dh{} für jede Folge $(x_n)$ in $X$ mit $\lim_{n \to \infty} (x_n) = a$ gilt $\lim_{n \to \infty} f(x_n) = f(a).$
   \end{itemize}
 \end{defn}
 
@@ -593,7 +593,7 @@
 \end{defn}
 
 \begin{defn}
-  Sei $(X, d)$ ein metrischer Raum. Eine Teilmenge $K \subset X$ heißt \emph{kompakt} in $(X, d)$, wenn gilt: Jede offene Überdeckung $\{ U_i \opn X : i \in I \}$ besitzt eine endliche offene Teilüberdeckung, d.\,h. es gibt eine endliche Teilmenge $J \subset I$, sodass $K \subseteq \bigcup_{j \in J} U_j$ gilt.
+  Sei $(X, d)$ ein metrischer Raum. Eine Teilmenge $K \subset X$ heißt \emph{kompakt} in $(X, d)$, wenn gilt: Jede offene Überdeckung $\{ U_i \opn X : i \in I \}$ besitzt eine endliche offene Teilüberdeckung, \dh{} es gibt eine endliche Teilmenge $J \subset I$, sodass $K \subseteq \bigcup_{j \in J} U_j$ gilt.
 \end{defn}
 
 % TODO: Beispiele und Gegenbeispiele für kompakte Mengen
@@ -722,7 +722,7 @@
 \begin{satz}
   Sei $f : \cinterval{a}{b} \to \R^n$ stetig, dann gilt:
   \[ \left\| \Intab{f(t)}{t} \right\| \le \Intab{\norm{f(t)}}{t}. \]
-  Es gilt Gleichheit, wenn alle f(t) gleichgerichtet sind, d.\,h. für alle $x_1, x_2 \in \cinterval{a}{b}$ mit $f(x_1) \not= 0$ gibt es ein $\lambda \ge 0$, sodass $f(x_2) = \lambda f(x_1)$.
+  Es gilt Gleichheit, wenn alle f(t) gleichgerichtet sind, \dh{} für alle $x_1, x_2 \in \cinterval{a}{b}$ mit $f(x_1) \not= 0$ gibt es ein $\lambda \ge 0$, sodass $f(x_2) = \lambda f(x_1)$.
 \end{satz}
 
 \begin{defn}
@@ -898,7 +898,7 @@
     \item \emph{degeneriert}, wenn $\det(A) = 0$ gilt.
     \item \emph{positiv definit}, wenn für alle $\xi \in \R^n \backslash \{ 0 \}$ gilt: $\xi^{\text{T}}A\xi > 0.$ Äquivalent ist $A$ positiv definit, wenn alle Eigenwerte von $A$ positiv sind.
     \item \emph{negativ definit}, wenn $-A$ positiv definit ist (bzw. alle Eigenwerte von $A$ negativ sind).
-    \item \emph{indefinit}, wenn $A$ weder degeneriert, noch positiv, noch negativ definit ist (d.\,h. $A$ besitzt sowohl negative als auch positive Eigenwerte).
+    \item \emph{indefinit}, wenn $A$ weder degeneriert, noch positiv, noch negativ definit ist (\dh{} $A$ besitzt sowohl negative als auch positive Eigenwerte).
   \end{itemize}
 \end{defn}
 
@@ -949,7 +949,7 @@
 \end{bem}
 
 \begin{satz}[Banachscher Fixpunktsatz]
-  Sei $K \subset \R^n$ kompakt und $\psi : K \to K$ eine Kontraktion, d.\,h. es gibt eine Konstante $\kappa$ mit $0 < \kappa < 1$, sodass für alle $x, y \in K$ gilt
+  Sei $K \subset \R^n$ kompakt und $\psi : K \to K$ eine Kontraktion, \dh{} es gibt eine Konstante $\kappa$ mit $0 < \kappa < 1$, sodass für alle $x, y \in K$ gilt
   \[ \norm{\psi(x) - \psi(y)} \le \kappa\, \norm{x - y}. \]
   Dann hat $\psi$ genau einen Fixpunkt in $K$.
 \end{satz}
@@ -969,7 +969,7 @@
 \begin{samepage}
 
 \begin{kor}
-  Sei $U \opn \R^n$ und $f : U \to \R^n$ eine injektive stetig partiell differenzierbare Abbildung, sodass für alle $u \in U$ die Differentiale $D f(u)$ invertierbar sind. Dann ist $f$ ein Diffeomorphismus auf sein Bild, d.\,h. $f\mid_{f(U)}$ ist ein Diffeomorphismus.
+  Sei $U \opn \R^n$ und $f : U \to \R^n$ eine injektive stetig partiell differenzierbare Abbildung, sodass für alle $u \in U$ die Differentiale $D f(u)$ invertierbar sind. Dann ist $f$ ein Diffeomorphismus auf sein Bild, \dh{} $f\mid_{f(U)}$ ist ein Diffeomorphismus.
 \end{kor}
 
 
@@ -993,7 +993,7 @@
 \end{bem}
 
 \begin{satz}
-  Seien $U \opn \R^n$ und $V \opn \R^p$ und $f : U \times V \to \R^p$ stetig partiell differenzierbar, welche in einem Punkt $(u_0, v_0) \in U \times V$ eine Nullstelle habe, d.\,h. $f(u_0, v_0) = 0$. Wenn in diesem Punkt $J_V f(u_0, v_0) \in \R^{p \times p}$ invertierbar ist, dann gibt es
+  Seien $U \opn \R^n$ und $V \opn \R^p$ und $f : U \times V \to \R^p$ stetig partiell differenzierbar, welche in einem Punkt $(u_0, v_0) \in U \times V$ eine Nullstelle habe, \dh{} $f(u_0, v_0) = 0$. Wenn in diesem Punkt $J_V f(u_0, v_0) \in \R^{p \times p}$ invertierbar ist, dann gibt es
   \begin{itemize}
     \item eine offene Menge $X \opn U \times V$ mit $(u_0, v_0) \in X$,
     \item eine offene Menge $Y \opn \R^n \times \R^p$ mit $(u_0, 0) \in Y$,
@@ -1005,7 +1005,7 @@
 \begin{samepage}
 
 \begin{satz}[\emph{Satz über implizite Funktionen}]
-  Seien $U \opn \R^n$ und $V \opn \R^p$ und $f : U \times V \to \R^p$ stetig partiell differenzierbar, welche in $(u_0, v_0) \in U \times V$ eine Nullstelle hat, d.\,h. $f(u_0, v_0) = 0 \in \R^p$. Wenn in diesem Punkt $J_V f(u_0, v_0) \in \R^{p \times p}$ invertierbar ist, dann gibt es
+  Seien $U \opn \R^n$ und $V \opn \R^p$ und $f : U \times V \to \R^p$ stetig partiell differenzierbar, welche in $(u_0, v_0) \in U \times V$ eine Nullstelle hat, \dh{} $f(u_0, v_0) = 0 \in \R^p$. Wenn in diesem Punkt $J_V f(u_0, v_0) \in \R^{p \times p}$ invertierbar ist, dann gibt es
   \begin{itemize}
     \item eine offene Menge $X \opn U \times V$ mit $(u_0, v_0) \in X$,
     \item eine offene Menge $\widetilde{U} \opn U$ mit $u_0 \in \widetilde{U}$,

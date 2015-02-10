@@ -109,7 +109,7 @@
 \end{defn}
 
 \begin{defn}
-  Eine Algebra $\Alg \subset \PSO)$ heißt \emph{$\sigma$-Algebra}, wenn $\Alg$ unter abzählbaren Vereinigungen abgeschlossen ist, d.\,h. für jede Folge $(A_n)_{n \in \N}$ in $\Alg$ gilt $\bigcup_{n \in \N} A_n \in \Alg$.
+  Eine Algebra $\Alg \subset \PSO)$ heißt \emph{$\sigma$-Algebra}, wenn $\Alg$ unter abzählbaren Vereinigungen abgeschlossen ist, \dh{} für jede Folge $(A_n)_{n \in \N}$ in $\Alg$ gilt $\bigcup_{n \in \N} A_n \in \Alg$.
 \end{defn}
 
 \begin{bem}
@@ -161,7 +161,7 @@
 \end{defn}
 
 \begin{defn}
-  Ein Inhalt $\mu : \Ring \to \cinterval{0}{\infty}$ heißt \emph{Prämaß} auf $\Ring$, wenn $\mu$ $\sigma$-additiv ist, d.\,h. wenn für jede Folge $(A_n)_{n \in \N}$ paarweise disjunkter Elemente von $\Ring$ mit $\bigsqcup_{n \in \N} A_n \in \Ring$ gilt:
+  Ein Inhalt $\mu : \Ring \to \cinterval{0}{\infty}$ heißt \emph{Prämaß} auf $\Ring$, wenn $\mu$ $\sigma$-additiv ist, \dh{} wenn für jede Folge $(A_n)_{n \in \N}$ paarweise disjunkter Elemente von $\Ring$ mit $\bigsqcup_{n \in \N} A_n \in \Ring$ gilt:
   \[ \mu\left(\bigsqcup_{n \in \N} A_n\right) = \sum_{n=0}^\infty \mu(A_n) \]
 \end{defn}
 
@@ -187,7 +187,7 @@
 \end{defn}
 
 \begin{satz}
-  Ein Maß auf einer $\sigma$-Algebra~$\Alg$ ist $\sigma$-subadditiv, d.\,h. es gilt
+  Ein Maß auf einer $\sigma$-Algebra~$\Alg$ ist $\sigma$-subadditiv, \dh{} es gilt
   \[ \mu(\bigcup_{n \in \N} A_n) \leq \sum_{n=0}^\infty \mu(A_n) \quad \text{für alle Folgen $(A_n)_{n \in \N}$ in $\Alg$}. \]
 \end{satz}
 
@@ -390,7 +390,7 @@
 \end{defn}
 
 \begin{bem}
-  Die messbaren Räume bilden eine Kategorie mit messbaren Abbildungen als Morphismen, d.\,h. die Identitäts- abbildung von einem messbaren Raum zu sich selbst ist messbar und die Verkettung zweier messbarer Abbildungen ist messbar.
+  Die messbaren Räume bilden eine Kategorie mit messbaren Abbildungen als Morphismen, \dh{} die Identitäts- abbildung von einem messbaren Raum zu sich selbst ist messbar und die Verkettung zweier messbarer Abbildungen ist messbar.
 \end{bem}
 
 % Vorlesung vom 4.11.2013
@@ -575,7 +575,7 @@
 \end{defn}
 
 \begin{bem}
-  Obige Größe ist wohldefiniert, d.\,h. unabhängig von der kanonischen Darstellung.
+  Obige Größe ist wohldefiniert, \dh{} unabhängig von der kanonischen Darstellung.
 \end{bem}
 
 \begin{satz}
@@ -600,7 +600,7 @@
 \end{defn}
 
 \begin{defn}
-  Für eine Funktion $f \in \overline{\E}(\Omega, \Alg)$ (d.\,h. es existiert eine Folge $(g_n)_{n \in \N}$ in $\E(\Omega, \Alg)$ mit $f = \sup_{n \in \N} g_n$) und ein Maß $\mu$ auf $\Alg$ heißt
+  Für eine Funktion $f \in \overline{\E}(\Omega, \Alg)$ (\dh{} es existiert eine Folge $(g_n)_{n \in \N}$ in $\E(\Omega, \Alg)$ mit $f = \sup_{n \in \N} g_n$) und ein Maß $\mu$ auf $\Alg$ heißt
   \[ \IntOmu{f} \coloneqq \sup_{n \in \N} \IntOmu{g_n} \quad \text{\emph{Lebesgue-Integral} von $f$ bzgl. $\mu$.} \]
 \end{defn}
 
@@ -746,7 +746,7 @@
 
 \begin{satz}[von der majorisierten Konvergenz]\begin{doublespace}
   Sei $g \in \Leb^1(\Omega, \Alg, \mu), g \geq 0$. Sei $(f_n)_{n \in \N}$ Folge messbarer Fkt. $f_n : (\Omega, \Alg, \mu) \to (\ER, \overline{\Bor})$ mit $\abs{f_n} \overset{\text{f.ü.}}\leq g$ (Majorisierung).
-  Sei ferner $f : \Omega \to \ER$ $(\Alg, \overline{\Bor})$-messbar mit $f_n \xrightarrow[n \to \infty]{\text{f.ü.}} f$, d.\,h. $\Set{ \omega \in \Omega }{ \lim_{n \to \infty} f_n(\omega) = f(\omega) \text{ falsch} }$ ist Nullmenge. Dann ist $f$ integrierbar mit $\IntOmu{f} = \lim_{n \to \infty} \IntOmu{f_n}$.
+  Sei ferner $f : \Omega \to \ER$ $(\Alg, \overline{\Bor})$-messbar mit $f_n \xrightarrow[n \to \infty]{\text{f.ü.}} f$, \dh{} $\Set{ \omega \in \Omega }{ \lim_{n \to \infty} f_n(\omega) = f(\omega) \text{ falsch} }$ ist Nullmenge. Dann ist $f$ integrierbar mit $\IntOmu{f} = \lim_{n \to \infty} \IntOmu{f_n}$.
 \end{doublespace}\end{satz}
 
 \vspace{-20pt}
@@ -999,7 +999,7 @@
 \end{defn}
 
 \begin{satz}
-  Sei $\mathcal{E}_j$ Erzeugendensystem von $\Alg_j, j = 1, ..., n$, d.\,h. $\Alg(\mathcal{E}_j) = \Alg_j$. Annahme: Für alle $j \in \{ 1, ..., n \}$ gibt es eine monoton gegen $\Omega_j$ wachsende Folge $(E^j_k)_{k \in \N}$ in $\mathcal{E}_j$. Dann ist
+  Sei $\mathcal{E}_j$ Erzeugendensystem von $\Alg_j, j = 1, ..., n$, \dh{} $\Alg(\mathcal{E}_j) = \Alg_j$. Annahme: Für alle $j \in \{ 1, ..., n \}$ gibt es eine monoton gegen $\Omega_j$ wachsende Folge $(E^j_k)_{k \in \N}$ in $\mathcal{E}_j$. Dann ist
   \begin{align*}
     \Alg_1 \otimes ... \otimes \Alg_n &= \Alg(\mathcal{E}_1 \times ... \times \mathcal{E}_n) \text{ mit }\\
     \mathcal{E}_1 \times ... \times \mathcal{E}_n &= \Set{ E_1 \times ... \times E_n }{ E_j \in \mathcal{E}_j, j = 1, ..., n }.
@@ -1125,7 +1125,7 @@
   Eine \emph{alternierende $k$-Form} auf $V$ ist eine Abb.
   \[ \omega : \underbrace{V \times ... \times V}_{\text{$k$-fach}} \to \R \quad \text{mit} \]
   \begin{itemize}
-    \item $\omega$ ist \emph{multilinear}, d.\,h. linear in jedem Argument, d.\,h. für alle $l \in \{ 1, ..., k \}$ und $v_1, ..., v_{l-1}, v_{l+1}, ..., v_k \in V$ ist
+    \item $\omega$ ist \emph{multilinear}, \dh{} linear in jedem Argument, \dh{} für alle $l \in \{ 1, ..., k \}$ und $v_1, ..., v_{l-1}, v_{l+1}, ..., v_k \in V$ ist
     \[ \omega(v_1, ..., v_{l-1}, -, v_{l+1}, ..., v_k) \in \mathrm{Hom}(V, \R). \]
     \item Falls $v_j = v_l$ für $j < l$, dann ist $\omega(v_1, ..., v_j, ..., v_l, ..., v_k) = 0$.
   \end{itemize}
@@ -1897,7 +1897,7 @@
 \iffalse
   Sei $M \subset \R^n$ eine $1$-dimensionale UMF, $\omega = \sum_{j=1}^n F_j \d x_j = F \cdot \d \vec{s}$ mit $F = (F_1, ..., F_n)^T$ eine stetige $1$-Form auf $\R^n$.
 
-  Sei $(\phi, U)$ eine Karte von $M$, $U$ zusammmenhängend, dann $\phi(U) =: V \opn \R^1$ ebenfalls zusammenhängend, d.\,h. $V = \ointerval{a}{b}$. Dann ist
+  Sei $(\phi, U)$ eine Karte von $M$, $U$ zusammmenhängend, dann $\phi(U) =: V \opn \R^1$ ebenfalls zusammenhängend, \dh{} $V = \ointerval{a}{b}$. Dann ist
   \[ \phi^{-1} : \ointerval{a}{b} \to \R^n, \quad t \mapsto \left( \phi_1^{-1}(t), ..., \phi_n^{-1}(t) \right)^T \]
   eine glatte reguläre Kurve.
   \[ (\phi^{-1})^* \omega = \sum_{j=1}^n (F_j \circ \phi^{-1}) \d \phi_j^{-1} = \sum_{j=1}^n (F_j \circ \phi^{-1}) (\phi_j^{-1})' \d t \]
