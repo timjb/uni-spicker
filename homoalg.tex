@@ -10,9 +10,12 @@
 \newcommand{\nspace}[1]{\foreach \i in {1,...,#1}{ \! }} % Negativer Abstand
 \newcommand{\SetC}{\mathbf{Set}} % Kategorie der Mengen
 \newcommand{\Top}{\mathbf{Top}} % Kategorie der topologischen Räume
-%\newcommand{\AbGrp}{\mathbf{AbGrp}} % Kategorie der abelschen Gruppen
+\newcommand{\AbGrp}{\mathbf{AbGrp}} % Kategorie der abelschen Gruppen
 \newcommand{\op}{\mathrm{op}} % opposite category
 \DeclareMathOperator{\sk}{sk} % Skelett
+\newcommand{\CC}[1]{{#1}_{\bullet}} % Kettenkomplex (chain complex)
+\newcommand{\CCC}[1]{{#1}^{\bullet}} % Ko-Kettenkomplex (cochain complex)
+\DeclareMathOperator{\Hom}{Hom} % Homomorphisms
 
 
 % Kleinere Klammern
@@ -35,7 +38,7 @@
 \end{defn}
 
 \begin{nota}
-  $X_{(n)} \coloneqq X([n])$
+  $X_{(n)} \coloneqq X([n])$ heißt Menge der $n$-Simplizes.
 \end{nota}
 
 \begin{defn}
@@ -79,7 +82,7 @@
 \end{defn}
 
 \begin{nota}
-  $X_n \coloneqq X([n])$
+  $X_n \coloneqq X([n])$ heißt Menge der $n$-Simplizes.
 \end{nota}
 
 \begin{defn}
@@ -226,7 +229,7 @@
     \item Definiere einen simplizialen topologischen Raum $X^I$ durch
     \[ X^I_n \coloneqq \abs{X_{\bullet n}}, \quad X^I(g) \coloneqq \abs{X(\id, g)}. \]
     Setze $\abs{X}^{I,II} \coloneqq \abs{II,I}$.
-    \item Definiere Analog $\abs{X}^{II,I}$.
+    \item Definiere analog $\abs{X}^{II,I}$.
   \end{itemize}
 \end{defn}
 
@@ -235,5 +238,163 @@
 \end{satz}
 
 % I.4 Homologie und Kohomologie
+
+% I.4.3
+\begin{defn}
+  \begin{itemize}
+    \item Ein \emph{Kettenkomplex} $\CC{C}$ ist eine Folge $(C_n)_{n \in \N}$ von abelschen Gruppen und Gruppenhomomorphismen $\partial_n : C_n \to C_{n-1}$ mit der Eigenschaft $\partial_{n-1} \circ \partial_n = 0$.
+    \item Ein \emph{Kokettenkomplex} $\CCC{C}$ ist eine Folge $(C^n)_{n \in \N}$ von abelschen Gruppen und Gruppenhomomorphismen $\delta^n : C^n \to C^{n+1}$ mit der Eigenschaft $\delta^{n+1} \circ \delta^n = 0$.
+  \end{itemize}
+\end{defn}
+
+% I.4.4
+\begin{defn}
+  Sei $\CC{C}$ ein Kettenkomplex.
+  \begin{itemize}
+    \item $C_n$ heißt Gruppe der \emph{$n$-Ketten},
+    \item $\partial : C_n \to C_{n-1}$ heißt \emph{Randabbildung},
+    \item $Z_n(\CC{C}) \coloneqq \ker \partial_n \subset C_n(\CC{C})$ heißt Gruppe der \emph{$n$-Zykel},
+    \item $B_n(\CC{C}) \coloneqq \im \partial_{n+1} \subset Z_n(\CC{C})$ heißt Gruppe der \emph{$n$-Ränder},
+    \item $H_n(\CC{C}) \coloneqq Z_n(\CC{C}) / B_n(\CC{C})$ heißt \emph{$n$-te Homologiegruppe}.
+  \end{itemize}
+  Analog nennt man für einen Kokettenkomplex $\CCC{C}$
+  \begin{itemize}
+    \miniitem{0.46 \linewidth}{$\delta^n$ \emph{Korandabbildung},}
+    \miniitem{0.41 \linewidth}{$C^n$ \emph{$n$-Koketten},}
+    \miniitem{0.46 \linewidth}{$Z^n \coloneqq \ker \delta^n$ \emph{$n$-Kozykel},}
+    \miniitem{0.45 \linewidth}{$B^n \coloneqq \im \delta^{n-1}$ \emph{$n$-Koränder},}
+    \item $H^n(\CCC{C}) \coloneqq Z^n(\CCC{C}) / B^n(\CCC{C})$ $n$-te \emph{Kohomologiegruppe}.
+  \end{itemize}
+\end{defn}
+
+% I.4.1
+\begin{defn}
+  Sei $X$ eine simpl. Menge. Sei $C_n(X)$ die von den $n$-Simplizes $X_n$ erzeugte abelsche Gruppe (\dh{} die Gruppe der endl. formalen Linearkombinationen mit Koeffizienten in $\Z$). Sei $\delta_n^i : [n-1] \to [n]$ diejenige streng monotone Abb. mit $i \not\in \im \delta_n^i$. Definiere
+  \[
+    \partial_n : C_n(X) \to C_{n-1}(X), \quad
+    \sum_{\sigma \in X_n} \lambda_\sigma \cdot \sigma \enspace \mapsto \sum_{\sigma \in X_n} \lambda_\sigma \sum_{i=0}^n (-1)^i X(\partial_n^i)(\sigma).
+  \]
+\end{defn}
+
+% I.4.2
+\begin{prop}
+  $(C_\bullet(X),\partial_\bullet)$ ist ein Kettenkomplex (\dh{} $\partial_{n-1} \circ \partial_n = 0$)
+\end{prop}
+
+\begin{defn}
+  Sei $X$ eine simpl. Menge und $A$ eine ab. Gruppe. Dann ist ...
+  \begin{itemize}
+    \item ... der \emph{Kettenkomplex} $(C_\bullet(X; A), \partial_\bullet)$ von $X$ \emph{mit Koeffizienten} in $A$ definiert durch
+    \[
+      C_n(X; A) \coloneqq C_n(X) \otimes_{\Z} A, \quad
+      \partial_n \coloneqq \partial_n \otimes \id : C_n(X; A) \to C_{n-1}(X; A).
+    \]
+    \item ... der \emph{Kokettenkomplex} $(C^\bullet(X; A), \delta^\bullet)$ von $X$ mit \emph{Koeffizienten} in $A$ definiert durch
+    \begin{align*}
+      & C^n(X; A) \coloneqq \Hom(C^n(X), A), \\
+      \delta^n : \,\, & C^n(X; A) \to C^{n+1}(X; A), \enspace f \mapsto f \circ \delta_{n+1}.
+    \end{align*}
+  \end{itemize}
+\end{defn}
+
+\begin{beob}
+  $C_n(X; \Z) = C_n(X)$
+\end{beob}
+
+\begin{nota}
+  Sei $X$ eine simpliziale Menge. Setze
+  \begin{itemize}
+    \miniitem{0.48 \linewidth}{$H_n(X) \coloneqq H_n(C_\bullet(X))$,}
+    \miniitem{0.48 \linewidth}{$H^n(X) \coloneqq H^n(C^\bullet(X; \Z))$,}
+    \miniitem{0.48 \linewidth}{$H_n(X; A) \coloneqq H_n(C_\bullet(X; A))$,}
+    \miniitem{0.48 \linewidth}{$H^n(X; A) \coloneqq H^n(C^\bullet(X; A))$.}
+  \end{itemize}
+\end{nota}
+
+% I.4.5 (Geometrie von Ketten)
+\begin{prop}
+  Für jede simpl. Menge $X$ ex. ein kanonischer Isomorphismus
+  \[ H_0(X, \Z) \cong \text{freie ab. Gr. erzeugt von Zshgskomponenten von $\abs{X}$}. \]
+\end{prop}
+
+\begin{defn}
+  Der \emph{Kegel} $CX$ über Verklebedaten $X$ ist definiert durch
+  \begin{align*}
+    (CX)_{(0)} & \coloneqq X_{(0)} \amalg \{ \star \}, \quad (CX)_{(n)} \coloneqq X_{(n)} \amalg (X_{(n-1)} \times \{ \star \}) \\
+    (CX)(f)(x) & \coloneqq X(f)(x) \\
+    (CX)(f)(x,*) &  \coloneqq \begin{cases}
+      X(i \mapsto f(i) - 1)(x), & \text{wenn $f(0) > 0$,} \\
+      (X(i \mapsto f(i{+}1) - 1)(x), *), & \text{wenn $f(0) = 0$.}
+    \end{cases}
+  \end{align*}
+\end{defn}
+
+\begin{defn}
+  Für Verklebedaten sind die (Ko-)Kettenkomplex (mit Koeffizienten) genauso definiert wie für simpliziale Mengen.
+\end{defn}
+
+\begin{prop}
+  $H_0(CX) = \Z$, $H_{>0}(CX) = 0$
+\end{prop}
+
+% Ausgelassen: I.4.6 Geometrie von Koketten :-)
+
+% I.4.7 Koeffizientensysteme
+
+% I.4.8
+\begin{defn}
+  Sei $X$ eine simpliziale Menge.
+  \begin{itemize}
+    \item Ein \emph{homol. Koeffizientensystem} $\mathcal{A}$ auf $X$ ist ein Funktor
+    \[ \mathcal{A} : (1 \downarrow X) \to \AbGrp. \]
+    Dabei ist $1 : \Delta \to \SetC$ der Funktor, der konstant $\{ \star \}$ ist.\\
+    Expliziter besteht ein Koeffizientensystem aus einer abelschen Gruppe $\mathcal{A}_\sigma$ für jedes $n$-Simplex $\sigma \in X_n$ und Abbildungen $\mathcal{A}(f, \sigma) : \mathcal{A}_\sigma \to \mathcal{A}_{X(f)(\sigma)}$ für alle $\sigma \in X_n$, $f \in \Hom_{\Delta}([m], [n])$ mit
+    \[
+      \mathcal{A}(\id, \sigma) = \id, \quad
+      \mathcal{A}(f \circ g, \sigma) = \mathcal{A}(g, X(f)(\sigma)) \circ \mathcal{A}(f, \sigma).
+    \]
+    \item Ein \emph{kohomol. Koeffizientensystem} $\mathcal{B}$ auf $X$ ist ein Funktor
+    \[ \mathcal{B} : (1 \downarrow X)^\op \to \AbGrp. \]
+  \end{itemize}
+\end{defn}
+
+% I.4.9 (Bemerkungen und Beispiele)
+
+% Ausgelassen: a) Konstante Koeffizientensysteme, c) Koeffizientensystem auf BG
+\begin{bsp}
+  Sei $Y$ ein topol. Raum, $(U_\alpha)_{\alpha \in A}$ eine offene Überdeckung und $X$ deren Nerv. Dann definiert
+  \begin{align*}
+    \mathcal{F}_{\alpha_0, ..., \alpha_n} & \coloneqq \{ U_{\alpha_0} \cap ... \cap U_{\alpha_n} \to \R \text{ stetig} \}, \\
+    \mathcal{F}(f, (\alpha_0, ..., \alpha_n))(\phi) & \coloneqq \text{passende Einschränkung von $\phi$}.
+  \end{align*}
+  ein kohomologisches Koeffizientensystem auf $X$.
+\end{bsp}
+
+% I.4.10 (Homologie und Kohomologie mit einem Koeffizientensystem)
+
+\begin{defn}
+  Sei $\mathcal{A}$ ein homologisches Koeffizientensystem auf einer simplizialen Menge $X$. Wir setzen
+  \[ C_n(X; \mathcal{A}) \coloneqq \{ \text{ formale endl. Linearkomb. } \sum_{\sigma \in X_n} \lambda_\sigma \cdot \sigma \text{ mit } \lambda_\sigma \in \mathcal{A}_\sigma \, \} \]
+  und definieren $\partial_n : C_n(X; \mathcal{A}) \to C_{n-1}(X; \mathcal{A})$ durch
+  \[ \sum_{\sigma \in X_n} \lambda_\sigma \cdot \sigma \enspace \mapsto \sum_{\sigma \in X_n} \sum_{i=0}^n \enspace (-1)^i \mathcal{A}(\partial_n^i, \sigma)(\lambda_\sigma) \cdot X(\partial_n^i)(\sigma). \]
+  Die Homologiegruppen des so def. Kettenkomplexes $C_\bullet(X; \mathcal{A})$ heißen \emph{Homologiegruppen} von $X$ \emph{mit Koeffizienten in $\mathcal{A}$}.
+\end{defn}
+
+\begin{defn}
+  Sei $\mathcal{B}$ ein kohomologisches Koeffizientensystem auf einer simplizialen Menge $X$. Wir setzen
+  \[ C^n(X; \mathcal{B}) \coloneqq \{ \text{ Funktionen } f : (\sigma \in X_n) \to \mathcal{B}_\sigma \, \} \]
+  und definieren $\delta_n : C^n(X; \mathcal{B}) \to C_{n+1}(X; \mathcal{B})$ durch
+  \[ \delta^n(f)(\sigma) \coloneqq \sum_{i=0}^{n+1} (-1)^i \mathcal{B}(\partial_{n+1}^i, \sigma)(f(X(\partial_{n+1}^i)(\sigma))). \]
+  Die Kohomologiegruppen des so def. Kokettenkomplexes $C^\bullet(X; \mathcal{B})$ heißen \emph{Kohomologiegruppen} von $X$ \emph{mit Koeffizienten in $\mathcal{B}$}.
+\end{defn}
+
+% I.4.11
+
+\begin{bsp}
+  Sei $Y$ ein topol. Raum, $U = (U_\alpha)_{\alpha \in A}$, $X$ und $\mathcal{F}$ wie im letzten Beispiel. Die Homologiegruppen $H^n(X, \mathcal{F})$ werden Čech-Kohomologiegruppen der Garbe der stetigen Funktionen auf $Y$ bzgl. der Überdeckung $U$ genannt.
+\end{bsp}
+% Ausgelassen: Beispiel c)
+
+% I.5 (Garben)
 
 \end{document}
