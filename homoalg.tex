@@ -11,11 +11,16 @@
 \newcommand{\SetC}{\mathbf{Set}} % Kategorie der Mengen
 \newcommand{\Top}{\mathbf{Top}} % Kategorie der topologischen Räume
 \newcommand{\AbGrp}{\mathbf{AbGrp}} % Kategorie der abelschen Gruppen
+\newcommand{\RMod}{\mathbf{R\text{-}Mod}} % Kategorie der R-Moduln
+\newcommand{\Ouv}{\mathbf{Ouv}} % Kategorie der offenene Mengen eines topol. Raumes
 \newcommand{\op}{\mathrm{op}} % opposite category
 \DeclareMathOperator{\sk}{sk} % Skelett
 \newcommand{\CC}[1]{{#1}_{\bullet}} % Kettenkomplex (chain complex)
 \newcommand{\CCC}[1]{{#1}^{\bullet}} % Ko-Kettenkomplex (cochain complex)
 \DeclareMathOperator{\Hom}{Hom} % Homomorphisms
+\newcommand{\Fais}{\mathcal{F}} % Faisceau-F (Garbe auf französisch)
+\newcommand{\Garb}{\mathcal{G}} % Garben-G
+\newcommand{\Harb}{\mathcal{H}} % Garben-H
 
 
 % Kleinere Klammern
@@ -92,7 +97,7 @@
   Die Äquivalenzrelation $R$ wird dabei erzeugt von
   \[
     (\Delta_f(t), x) \sim (t, X(f)(x)) \enspace
-    \text{mit $t \in \Delta_m$, $x \in X_n$ und $f : [m] {\to} [n]$ monot.}
+    \text{mit $t \in \Delta_m$, $x \in X_n$ u. $f \in \Hom_\Delta([m], [n])$.}
   \]
 \end{defn}
 
@@ -144,7 +149,7 @@
 
 % I.2.7
 \begin{prop}
-  Eine simpliziale Menge $\tilde{X}$ kann genau dann aus (eindeutigen) Verklebedaten gewonnen werden, falls für alle nicht-degenerierten Simplizes $x \in \tilde{X}_n$ und streng monotonen Abbildungen $f : [m] \to [n]$ auch $\tilde{X}(f)(x) \in \tilde{X}_m$ nicht degeneriert ist.
+  Eine simpliziale Menge $\tilde{X}$ kann genau dann aus (dann eindeutigen) Verklebedaten gewonnen werden, falls für alle nicht-degenerierten Simplizes $x \in \tilde{X}_n$ und streng monotonen Abbildungen $f : [m] \to [n]$ auch $\tilde{X}(f)(x) \in \tilde{X}_m$ nicht degeneriert ist.
 \end{prop}
 
 % Ausgelassen: I.2.10-12
@@ -396,5 +401,153 @@
 % Ausgelassen: Beispiel c)
 
 % I.5 (Garben)
+
+% Ausgelassen: I.5.1 (Beispiele von Garben)
+
+\begin{defn}
+  \begin{itemize}
+    \item Eine mengenwertige \emph{Prägarbe} $\Fais$ auf einem topol. Raum $X$ ist ein Funktor
+    $\Fais : \Ouv(X)^\op \to \SetC$.
+    Dabei ist $\Ouv(X)$ die Präordnungs-Kategorie der offenen Teilmengen von $X$ geordnet durch Inklusion.
+    \item Allgemeiner ist eine $\mathcal{C}$-wertige Prägarbe ein Funktor $\Fais : \Ouv(X)^\op \to \mathcal{C}$ (z.\,B. $\mathcal{C} = \AbGrp, \RMod, \Top$).
+    \item Ein Morphismus zwischen Prägarben $\Fais$ und $\Garb$ auf demselben topol. Raum ist eine natürliche Transformation zwischen $\Fais$ und $\Garb$.
+  \end{itemize}
+\end{defn}
+
+\begin{nota}
+  Sei $\Fais$ eine Prägarbe
+  \begin{itemize}
+    \item $\Gamma(U, \Fais) \coloneqq \Fais(U)$ heißt Menge der \emph{Schnitte} von $\Fais$ über $U$.
+    \item $r_{UV} \coloneqq \Fais(V \subseteq U) : \Fais(U) \to \Fais(V)$ heißt \emph{Restriktionsabb}.
+    \item $x|_V \coloneqq r_{UV}(x)$ für $V \subseteq U$ und $x \in \Fais(U)$ heißt \emph{Einschränkung} von $x$ auf $V$.
+  \end{itemize}
+\end{nota}
+
+\begin{defn}
+  Eine \emph{Garbe} auf einem topol. Raum $X$ ist eine Prägarbe $\Fais$, für die gilt:
+  Für alle Familien $(U_i)_{i \in I}$ von offenen Teilmengen und Schnitten $(s_i \in \Fais(U_i))_{i \in I}$, die miteinander verträglich sind, \dh{}
+  \[ \fa{i, j \in I} s_i|_{U_i \cap U_j} = s_j|_{U_i \cap U_j}, \]
+  gibt es genau einen Schnitt $s \in \Fais(\cup_{i \in I} U_i)$ mit $\fa{i \in I} s_i = s|_{U_i}$.\\
+  Ein Morphismus zw. Garben ist ein Morphismen zw. den Prägarben.
+\end{defn}
+
+\begin{bem}
+  Sei $\Fais$ eine (Prä-)Garbe auf $X$ und $U \subseteq X$ offen. Dann definiert $(\Fais|U)(V) \coloneqq \Fais(U \cap V)$ eine (Prä-)Garbe auf $U$.
+\end{bem}
+
+% I.5.3 (Prägarben und Garben von strukturierten Mengen)
+
+% Ausgelassen: Garbe von $O(U)$-Modulen, wobei $O$ selbst eine Ringprägarbe auf $X$ ist.
+
+\begin{defn}
+  Eine Sequenz $\Fais \to \Garb \to \Harb$ von (Prä-)Garben abelscher Gruppen auf $X$ heißt \emph{exakt} bei $\Garb$, falls für alle offenen $U \subset X$ die Sequenz $\Fais(U) \to \Garb(U) \to \Harb(U)$ exakt bei $\Garb(U)$ ist.
+\end{defn}
+
+\begin{defn}
+  Sei $f : \Fais \to \Garb$ ein Morphismus von Prägarben auf $X$. Definiere Prägarben $\mathcal{K}$ und $\mathcal{C}$ auf $X$ durch
+  \[
+    \mathcal{K}(U) \coloneqq \ker (f_U : \Fais(U) \to \Garb(U)), \quad
+    \mathcal{C}(U) \coloneqq \Garb(U) / \im (f_U).
+  \]
+\end{defn}
+
+\begin{prop}
+  Sei $f : \Fais \to \Garb$ sogar ein Morphismus von Garben. \\
+  Dann ist auch $\mathcal{K}$ eine Garbe.
+\end{prop}
+
+\begin{acht}
+  Aber $\mathcal{C}$ ist im Allgemeinen keine Garbe!
+\end{acht}
+
+% I.5.5 (Keime und Halme)
+
+\begin{defn}
+  Sei $\Fais$ eine Garbe auf $Y$. Der \emph{Halm} von $\Fais$ in $y \in Y$ ist
+  \begin{align*}
+    \Fais_y & \coloneqq \Set{(U, s)}{U \subseteq Y \text{offen}, y \in U, s \in \Fais(U)} / {\sim}, \\
+    (U, s) \sim (V, t) & \coloniff \ex{W \subset U \cap V \text{ offen}, y \in W} s|_W = t|_W.
+  \end{align*}
+\end{defn}
+
+\begin{nota}
+  $s_y \coloneqq [(U, s)]$ für $s \in \Fais(U)$ mit $y \in U$.
+\end{nota}
+
+\begin{sprech}
+  Elemente $[t] \in \Fais_y$ heißen \emph{Keime} in $y$.
+\end{sprech}
+
+\begin{defn}
+  Sei $\Fais$ eine Garbe auf $Y$, $Z \subseteq Y$ beliebig. Definiere
+  \[ \Gamma(Z, \Fais) \coloneqq \varinjlim \Gamma(U, \Fais), \]
+  wobei der Limes über alle offenen $U \subset X$ mit $Z \subseteq U$ läuft.
+\end{defn}
+
+\begin{beob}
+  $\Fais_y = \Gamma(\{y\}, \Fais)$
+\end{beob}
+
+\begin{defn}
+  Der \emph{Totalraum} $F$ einer Prägarbe $\Fais$ auf $Y$ ist
+  \[ F \coloneqq \coprod_{y \in Y} \Fais_y \]
+  mit der Topologie erzeugt durch die Mengen
+  \[
+    \Set{s_y}{ y \in U } \quad
+    \text{für $U \subseteq X$ offen, $s \in \Fais(U)$.}
+  \]
+\end{defn}
+
+\begin{bem}
+  Mit dieser Topologie ist die Projektion $\pi : F \to Y$ stetig und ein lokaler Homöomorphismus.
+\end{bem}
+
+\begin{defn}
+  Sei $\Fais$ eine Prägarbe auf $Y$. Die \emph{Garbifizierung} $\Fais^+$ von $\Fais$ ist die Garbe der lokal stetigen Schnitte von $\pi : F \to Y$, also
+  \[ \Fais^+(U) \coloneqq \Set{f : U \to F}{\pi \circ f = (i : U \hookrightarrow Y)}. \]
+\end{defn}
+
+\begin{prop}
+  Es ex. ein kanonischer Morphismus $f : F \to F^+$ def. durch
+  \[ s \in \Fais(U) \enspace \mapsto \enspace (y \mapsto s_y : Y \to F). \]
+  Wenn $\Fais$ schon eine Garbe ist, dann ist $f$ ein Isomorphismus.
+\end{prop}
+
+% Ausgelassen: I.5.7 (Hauptklassen von Garben)
+
+% I.5.8
+\begin{defn}
+  Sei $A$ eine Menge (oder ab. Gruppe, ...), $Y$ ein topol. Raum.
+  \begin{itemize}
+    \item Die \emph{konstante Prägarbe} $\mathbf{A}$ mit Faser $A$ auf $Y$ ist definiert durch
+    \[
+      \mathbf{A}(U) \coloneqq A, \quad
+      r_{UV} \coloneqq \id_A \quad
+      \text{für alle $V \subseteq U \subseteq Y$.}
+    \]
+    \item Die \emph{konstante Garbe} mit Faser $A$ ist die Garbifizierung $\mathcal{A} = \mathbf{A}^+$ von $\mathbf{A}$.
+  \end{itemize}
+\end{defn}
+
+% I.5.9
+\begin{defn}
+  Eine Garbe $\Fais$ auf $Y$ heißt \emph{lokal konstant}, falls jeder offene Punkt in $Y$ eine offene Umgebung $U$ besitzt, sodass $F|U$ isomorph zu einer konstanten Garbe ist.
+\end{defn}
+
+\begin{defn}
+   Eine Garbe $\Fais$ auf einem topol. Raum $Y$ heißt ...
+  \begin{itemize}
+    \item ... \emph{welk} (flabby, flasque), wenn die Einschränkungsabbildungen
+    \[ \Gamma(Y, \Fais) \to \Gamma(U, \Fais) \]
+    für alle offenenen $U \subseteq Y$ surjektiv sind.
+    \item ... \emph{weich} (soft, mou), wenn die Einschränkungsabbildungen
+    \[ \Gamma(Y, \Fais) \to \Gamma(A, \Fais) \]
+    für alle abgeschlossenen $A \subseteq Y$ surjektiv sind.
+  \end{itemize}
+\end{defn}
+
+\begin{defn}
+   Eine Garbe $\Fais$ ab. Gruppen auf einem topol. Raum $Y$ heißt \emph{fein} (fine, fin), wenn für je zwei disjunkte, abgeschlossene Teilmengen $A_1, A_2 \subseteq Y$ ein Garbenmorphismus $\alpha : \Fais \to \Fais$ existiert, sodass $\alpha$ auf einer offenen Umgebung von $A_1$ Null und auf einer offenen Umgebung von $A_2$ die Identität ist.
+\end{defn}
 
 \end{document}
