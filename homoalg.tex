@@ -21,6 +21,8 @@
 \newcommand{\Fais}{\mathcal{F}} % Faisceau-F (Garbe auf französisch)
 \newcommand{\Garb}{\mathcal{G}} % Garben-G
 \newcommand{\Harb}{\mathcal{H}} % Garben-H
+\newcommand{\keS}{k.\,e.\,S.} % kurze exakte Sequenz
+\newcommand{\leS}{l.\,e.\,S.} % lange exakte Sequenz
 
 
 % Kleinere Klammern
@@ -272,6 +274,25 @@
   \end{itemize}
 \end{defn}
 
+% Vorgezogen: I.6.5 (Morphismen von Komplexen)
+\begin{defn}
+  Eine Morphismus $f : \CC{C} \to \CC{D}$ (bzw. $f : \CCC{C} \to \CCC{D}$) zwischen (Ko-)Kettenkomplexen ist eine Familie von Abbildungen
+  \[
+    (f_n : C_n \to D_n)_{n \in \N} \quad
+    \text{(bzw. $(f^n : C^n \to D^n)_{n \in \N}$),}
+  \]
+  die mit den Randabbildungen verträglich sind, \dh{}
+  \[
+    f_{n-1} \circ \partial^C_n = \partial^D_n \circ f_n \quad
+    \text{(bzw. $f^{n+1} \circ \delta_C^n = \delta_D^n \circ f^n$)} \quad
+    \text{für alle $n$.}
+  \]
+\end{defn}
+
+\begin{prop}
+  $H_n$ (bzw. $H^n$) ist ein Funktor von der Kategorie der (Ko-)Kettenkomplexe in die Kategorie der abelschen Gruppen.
+\end{prop}
+
 % I.4.1
 \begin{defn}
   Sei $X$ eine simpl. Menge. Sei $C_n(X)$ die von den $n$-Simplizes $X_n$ erzeugte abelsche Gruppe (\dh{} die Gruppe der endl. formalen Linearkombinationen mit Koeffizienten in $\Z$). Sei $\delta_n^i : [n-1] \to [n]$ diejenige streng monotone Abb. mit $i \not\in \im \delta_n^i$. Definiere
@@ -360,6 +381,8 @@
     \]
     \item Ein \emph{kohomol. Koeffizientensystem} $\mathcal{B}$ auf $X$ ist ein Funktor
     \[ \mathcal{B} : (1 \downarrow X)^\op \to \AbGrp. \]
+    % I.7.9
+    \item Ein Morphismus zw. (ko-)homologischen Koeffizientensystemen auf derselben simpl. Menge ist eine natürliche Transformation.
   \end{itemize}
 \end{defn}
 
@@ -519,7 +542,7 @@
 \begin{defn}
   Sei $A$ eine Menge (oder ab. Gruppe, ...), $Y$ ein topol. Raum.
   \begin{itemize}
-    \item Die \emph{konstante Prägarbe} $\mathbf{A}$ mit Faser $A$ auf $Y$ ist definiert durch
+    \item Die \emph{konstante Prägarbe} $\mathbf{A}$ mit Faser $A$ auf $Y$ ist def. durch
     \[
       \mathbf{A}(U) \coloneqq A, \quad
       r_{UV} \coloneqq \id_A \quad
@@ -535,19 +558,105 @@
 \end{defn}
 
 \begin{defn}
-   Eine Garbe $\Fais$ auf einem topol. Raum $Y$ heißt ...
+   Eine Garbe $\Fais$ auf einem topologischen Raum $Y$ heißt ...
   \begin{itemize}
     \item ... \emph{welk} (flabby, flasque), wenn die Einschränkungsabbildungen
     \[ \Gamma(Y, \Fais) \to \Gamma(U, \Fais) \]
-    für alle offenenen $U \subseteq Y$ surjektiv sind.
+    für alle {\em offenenen} $U \subseteq Y$ surjektiv sind.
     \item ... \emph{weich} (soft, mou), wenn die Einschränkungsabbildungen
     \[ \Gamma(Y, \Fais) \to \Gamma(A, \Fais) \]
-    für alle abgeschlossenen $A \subseteq Y$ surjektiv sind.
+    für alle {\em abgeschlossenen} $A \subseteq Y$ surjektiv sind.
   \end{itemize}
 \end{defn}
 
 \begin{defn}
    Eine Garbe $\Fais$ ab. Gruppen auf einem topol. Raum $Y$ heißt \emph{fein} (fine, fin), wenn für je zwei disjunkte, abgeschlossene Teilmengen $A_1, A_2 \subseteq Y$ ein Garbenmorphismus $\alpha : \Fais \to \Fais$ existiert, sodass $\alpha$ auf einer offenen Umgebung von $A_1$ Null und auf einer offenen Umgebung von $A_2$ die Identität ist.
 \end{defn}
+
+% Ausgelassen: I.6.1 (Homologie als Funktion in zwei Variablen)
+
+% I.6.2 (Exakte Sequenzen)
+
+\begin{defn}
+  Eine (lange) \emph{exakte Sequenz} ab. Gruppen ist ein (Ko-)Ketten- komplex mit verschwindenden Homologiegruppen, \dh{}
+  \[ \im \partial_n = \ker \partial_{n-1} \quad \text{für alle $n$.} \]
+\end{defn}
+
+\begin{defn}
+  Eine \emph{kurze ex. Sequenz} (\keS{}) ist eine ex. Seq. der Form
+  \[ 0 \to A \to B \to C \to 0. \]
+\end{defn}
+
+\begin{defn}
+  Sei $0 \to A \to B \to C \to 0$ eine \keS{} in einer abelschen Kategorie $\mathcal{A}$. Die Sequenz heißt \emph{spaltend}, falls sie isomorph zur \keS{} $0 \to A \to A \oplus C \to C$ ist.
+\end{defn}
+
+\begin{prop}
+  Für eine Sequenz $0 \to A \xrightarrow{f} B \to \xrightarrow{g} C \to 0$ sind äquivalent:
+  \begin{itemize}
+    \item Die Sequenz spaltet.
+    \item Es existiert eine Retraktion $r : B \to A$ mit $r \circ f = \id_A$.
+    \item Es existiert ein Schnitt $s : C \to B$ mit $g \circ s = \id_C$.
+  \end{itemize}
+\end{prop}
+
+% I.6.5
+\begin{defn}
+  Eine Sequenz $0 \to \CCC{A} \to \CCC{B} \to \CCC{C} \to 0$ von Komplexen heißt \emph{exakt}, wenn für alle $n$ die Seq. $0 \to A_n \to B_n \to C_n \to 0$ exakt ist.
+\end{defn}
+
+% Ausgelassen: I.6.7 (Konstruktion der Randabbildung)
+
+% 1.6.8
+\begin{prop}
+  Eine kurze exakte Sequenz
+  $0 \to \CCC{A} \xrightarrow{i^\bullet} \CCC{B} \xrightarrow{p^\bullet} \CCC{C} \to 0$
+  von Kokettenkomplexen induziert eine lange exakte Sequenz
+  \[ ... \to H^n(\CCC{A}) \xrightarrow{H^n(i^\bullet)} H^n(\CCC{B}) \xrightarrow{H^n(p^\bullet)} H^n(\CCC{C}) \xrightarrow{\delta^n} H^{n+1}(\CCC{A}) \to ... \]
+\end{prop}
+
+% I.6.6
+\begin{lem}
+  Sei $0 \to A \to B \to C \to 0$ eine \keS{} ab. Gruppen und $X$ eine simpl. Menge.
+  Dann sind ebenfalls exakt:
+  \begin{align*}
+    0 \to \CC{C}(X; A) \to \CC{C}(X; B) \to \CC{C}(X; C) \to 0, \\
+    0 \to \CCC{C}(X; A) \to \CCC{C}(X; B) \to \CCC{C}(X; C) \to 0.
+  \end{align*}
+\end{lem}
+
+% I.6.3
+\begin{kor}
+  Sei $0 \to A \to B \to C \to 0$ eine \keS{} ab. Gruppen und $X$ eine simpl. Menge. Dann existieren lange exakte Sequenzen
+  \begin{align*}
+    ... \to H_n(X; A) \to H_n(X; B) \to H_n(C) \to H_{n-1}(X; A) \to ... \\
+    ... \to H^n(X; A) \to H^n(X; B) \to H^n(C) \to H^{n+1}(X; A) \to ...
+  \end{align*}
+\end{kor}
+
+% Ausgelassen: I.6.4 (Bemerkungen)
+
+% I.6.9 (Verallgemeinerung auf ein Koeffizientensystem)
+
+\begin{defn}
+  Eine Sequenz $0 \to \mathcal{B}' \to \mathcal{B} \to \mathcal{B}'' \to 0$ von (ko-)homologischen Koeffizientensystemen auf einer simpl. Menge $X$ heißt \emph{exakt}, falls
+  \[
+    0 \to \mathcal{B}'_\sigma \to \mathcal{B}_\sigma \to \mathcal{B}''_\sigma \to 0 \qquad
+    \text{für alle $\sigma \in X_n$ exakt ist.}
+  \]
+\end{defn}
+
+\begin{lem}
+  Eine kurze exakte Sequenz $0 \to \mathcal{B}' \to \mathcal{B} \to \mathcal{B}'' \to 0$ von (ko-)homologischen Koeff'systemen induziert kurze ex. Sequenzen
+  \begin{align*}
+    0 \to \CC{C}(X; \mathcal{B}') \to \CC{C}(X; \mathcal{B}) \to \CC{C}(X; \mathcal{B}'') \to 0, \\
+    0 \to \CCC{C}(X; \mathcal{B}') \to \CCC{C}(X; \mathcal{B}) \to \CCC{C}(X; \mathcal{B}'') \to 0
+  \end{align*}
+  und damit auch entsprechende lange exakte Sequenzen.
+\end{lem}
+
+% I.7 (Komplexe)
+
+% I.7.1 (Wo kommmen Komplexe her?)
 
 \end{document}
