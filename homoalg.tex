@@ -23,6 +23,7 @@
 \newcommand{\Harb}{\mathcal{H}} % Garben-H
 \newcommand{\keS}{k.\,e.\,S.} % kurze exakte Sequenz
 \newcommand{\leS}{l.\,e.\,S.} % lange exakte Sequenz
+\newcommand{\Lg}{\mathfrak{g}} % Lie-g
 
 
 % Kleinere Klammern
@@ -119,7 +120,14 @@
   Falls die Überdeckung lokal endlich ist und alle nichtleeren, endlichen Schnitte $U_{\alpha_1} \cap ... \cap U_{\alpha_n}$ zusammenziehbar sind, so ist die geom. Realisierung des Nerves der Überdeckung homotopieäq. zu $X$.
 \end{bem}
 
-% Ausgelassen: I.2.4 (Singuläre Simplizes)
+% I.2.4
+\begin{defn}
+  Sei $Y$ ein topol. Raum. Die simpliziale Menge $X$ der \emph{singulären Simplizes} in $Y$ ist
+  \[
+    X_n \coloneqq \{ \, \text{stetige Abbn. } \sigma : \Delta_n \to Y \, \}, \quad
+    X_n(f)(\sigma) \coloneqq \sigma \circ \Delta_f.
+  \]
+\end{defn}
 
 % I.2.5
 \begin{defn}
@@ -657,6 +665,110 @@
 
 % I.7 (Komplexe)
 
-% I.7.1 (Wo kommmen Komplexe her?)
+% I.7.1 (Wo kommen Komplexe her?)
+
+% I.7.2
+\begin{defn}
+  Eine \emph{simpl. ab. Gruppe} ist ein Funktor
+  $A : \Delta^\op \to \AbGrp$.
+\end{defn}
+
+% I.7.3
+\begin{defn}
+  Sei $A$ eine simpliziale abelsche Gruppe. \\
+  Dann ist $(A_\bullet, \partial)$ ein Kettenkomplex mit
+  \[
+    \partial_n : A_n \to A_{n-1}, \quad
+    a \mapsto \sum_{i=0}^n (-1)^i A(\partial_n^i)(a).
+  \]
+\end{defn}
+
+\begin{defn}
+  Eine \emph{kosimpl. ab. Gruppe} ist ein Funktor
+  $A : \Delta \to \AbGrp$.
+\end{defn}
+
+\begin{defn}
+  Sei $A$ eine kosimpliziale abelsche Gruppe. \\
+  Dann ist $(A^\bullet, \delta)$ ein Kokettenkomplex mit
+  \[
+    \delta^n : A^n \to A^{n+1}, \quad
+    a \mapsto \sum_{i=0}^n (-1)^i A(\partial_{n+1}^i)(a).
+  \]
+\end{defn}
+
+% I.7.4 (Der Čech-Komplex)
+
+\begin{defn}
+  Sei $Y$ ein topol. Raum, $(U_\alpha)_{\alpha \in A}$ eine (nicht unbedingt offene) Überdeckung von $Y$ und $\Fais$ eine Garbe ab. Gruppen auf $Y$. Die kosimpliziale abelsche Gruppe $\check{C}(U, \Fais)$ der \emph{Čech-Koketten} ist
+  \begin{align*}
+    \check{C}^m(U, \Fais) \coloneqq \nspace{4} \prod_{\alpha_0,...,\alpha_m \in A} \nspace{4} \Fais(U_{\alpha_0} \cap ... \cap U_{\alpha_m}), \\
+    \check{C}(U, \Fais)(f : [m] \to [n])((f_{\alpha_0,...,\alpha_m})_{\alpha_0,...,\alpha_m}) \coloneqq \\
+    (f_{g(0),...,g(m)}|U_{\alpha_0} \cap ...\cap U_{\alpha_n})_{\alpha_0,...,\alpha_n}.
+  \end{align*}
+\end{defn}
+
+\begin{bem}
+  Die Randabb. im zugeh. Kokettenkomplex ist gegeben durch
+  \[ (\delta^n \phi)_{\alpha_0,...,\alpha_{n+1}} \coloneqq \sum_{i=0}^{n+1} (-1)^i \phi_{\alpha_0,...,\hat{\alpha_i},...,\alpha_{n+1}}. \]
+\end{bem}
+
+\begin{defn}
+  Die Kohomologiegruppen dieses Komplexes heißen \emph{Čech-Homologiegruppen} von $\Fais$ bzgl. der Überdeckung $(U_\alpha)_{\alpha \in A}$.
+\end{defn}
+
+\begin{bem}
+  $\check{H}(U, \Fais) \cong \Gamma(X, \Fais)$ hängt nicht von der Überdeckung ab.
+\end{bem}
+
+\begin{defn}
+  Sei $Y$ ein topol. Raum und $X$ dessen simpl. Menge der singulären Simplizes.
+  Die Homologiegruppen von $\CC{C}(X; A)$ heißen \emph{singuläre Homologiegruppen} $H_n(Y; A)$ von $Y$ mit Koeff. $A$.
+\end{defn}
+
+% Ausgelassen: I.7.6 (Homologie und Kohomologie von Gruppen)
+
+% I.7.7 (Der de-Rham-Komplex)
+\begin{defn}
+  Sei $M$ eine $\mathcal{C}^\infty$-Mft, $\Omega^k(M)$ das $C^\infty(M)$-Modul der $k$-Formen auf $M$. Die \emph{äußere Ableitung} $\d : \Omega^k(M) \to \Omega^{k+1}(M)$ ist in lokalen Koordinaten $(x^1, ..., x^n)$ definiert durch
+  \[ \d \left( \sum_{\abs{I} = k} f_I \d x^I \right) = \sum_{\abs{I} = k} \sum_{i=1}^n \frac{\partial f_I}{\partial x^i} \d x^i \wedge \d x^I. \]
+  Die Kohomologiegruppen des so definierten Komplexes $\Omega^\bullet(M)$ heißen \emph{De-Rham-Kohomologiegruppen}.
+\end{defn}
+
+% I.7.8 (Homologie und Kohomologie einer Lie-Algebra)
+
+\begin{defn}
+  Sei $\Lg$ eine Lie-Algebra und $A$ ein $\Lg$-Modul. Setze $C^k(\Lg, A) \coloneqq L(\wedge^k \Lg, A)$ und definiere $\d : C^k(\Lg, A) \to C^{k+1}(\Lg, A)$ durch eine allgemeine Cartan-Formel
+  \begin{align*}
+    (\d c)(g_1, ..., g_{k+1}) \coloneqq & \nspace{4} \sum_{1 \leq j < l \leq k+1} \nspace{4} (-1)^{j+l-1} c([g_j, g_l], g_1, ..., \hat{g_j}, ..., \hat{g_l}, ..., g_{k+1}) \\
+    & + \sum_{j=1}^{k+1} (-1)^j g_j c(g_1, ..., \hat{g_j}, ..., g_{k+1}).
+  \end{align*}
+  Die Kohomologiegruppen des so definierten Kokettenkomplexes werden mit $H^\bullet(\Lg, A)$ bezeichnet.
+\end{defn}
+
+% I.7.9 (Homotope Abbildungen von Komplexen)
+\begin{defn}
+  Eine \emph{Kettenhomotopie} zw. Morphismen $f, g : \CC{C} \to \CC{D}$ von Kettenkomplexen ist eine Folge von Homomorphismen $k_n : C_n \to D_{n+1}$ mit
+  $\fa{n \in \N} \partial^D_{n+1} \circ k_n + k_{n-1} \circ \partial^C_n = f_n - g_n$.
+\end{defn}
+
+% I.7.10
+\begin{lem}
+  Seien $f, g : \CC{C} \to \CC{D}$ kettenhomotop. Dann gilt
+  \[ H_n(f) = H_n(g) \quad \text{für alle $n \in \N$.} \]
+\end{lem}
+
+% I.7.11
+\begin{prop}
+  \begin{itemize}
+    \item Seien $\phi, \psi : X \to Y$ homotope Abbildungen zwischen topologischen Räumen. Dann sind die induzierten Abbildungen $\phi_*, \psi_* : \CC{C}(X; A) \to \CC{C}(Y; A)$ kettenhomotop.
+    \item Seien $\phi, \psi : M \to N$ zwei glatt homotope Abbildungen von $\mathcal{C}^\infty$-Mften. Dann sind $\phi^*, \psi^* : \Omega^\bullet(N) \to \Omega^\bullet(M)$.
+  \end{itemize}
+\end{prop}
+
+% I.7.12
+\begin{kor}
+  Homotopieäquivalente Räume haben isomorphe singuläre Homologiegruppen.
+\end{kor}
 
 \end{document}
