@@ -139,7 +139,7 @@
   Der \emph{klassifizierende Raum} einer Gruppe $G$ ist gegeben durch die Realisierung der simpl. Menge $BG$ mit $(BG)_n \coloneqq G^n$ und
   \begin{align*}
     BG(f : [m] \to [n])(g_1, ..., g_n) \coloneqq
-    (h_1, ..., h_m), \quad h_i = \nspace{3} \prod_{j=f(i-1)+1}^{f(i)} \nspace{3} g_j
+    (h_1, ..., h_m), \quad h_i = \nspace{3} \prod_{j=f(i-1)+1}^{f(i)} \nspace{3} g_j.
     %(g_{f(0)+1} \cdot ... \cdot g_{f(1)}, g_{f(1)+1} \cdot ... \cdot g_{f(2)}, ..., g_{f(m-1)+1} \cdot ... \cdot g_{f(m)})
   \end{align*}
 \end{defn}
@@ -303,10 +303,10 @@
 
 % I.4.1
 \begin{defn}
-  Sei $X$ eine simpl. Menge. Sei $C_n(X)$ die von den $n$-Simplizes $X_n$ erzeugte abelsche Gruppe (\dh{} die Gruppe der endl. formalen Linearkombinationen mit Koeffizienten in $\Z$). Sei $\delta_n^i : [n-1] \to [n]$ diejenige streng monotone Abb. mit $i \not\in \im \delta_n^i$. Definiere
+  Sei $X$ eine simpl. Menge. Sei $C_n(X)$ die von den $n$-Simplizes $X_n$ erzeugte abelsche Gruppe (\dh{} die Gruppe der endl. formalen Linearkombinationen mit Koeffizienten in $\Z$). Sei $\delta_n^i : [n{-}1] \to [n]$ diejenige streng monotone Abb. mit $i \not\in \im \delta_n^i$. Definiere
   \[
     \partial_n : C_n(X) \to C_{n-1}(X), \quad
-    \sum_{\sigma \in X_n} \lambda_\sigma \cdot \sigma \enspace \mapsto \sum_{\sigma \in X_n} \lambda_\sigma \sum_{i=0}^n (-1)^i X(\partial_n^i)(\sigma).
+    \sum_{\sigma \in X_n} \lambda_\sigma \cdot \sigma \, \mapsto \nspace{3} \sum_{\sigma \in X_n} \lambda_\sigma \sum_{i=0}^n (-1)^i X(\partial_n^i)(\sigma).
   \]
 \end{defn}
 
@@ -320,7 +320,7 @@
   \begin{itemize}
     \item ... der \emph{Kettenkomplex} $(C_\bullet(X; A), \partial_\bullet)$ von $X$ \emph{mit Koeffizienten} in $A$ definiert durch
     \[
-      C_n(X; A) \coloneqq C_n(X) \otimes_{\Z} A, \quad
+      C_n(X; A) \coloneqq C_n(X) \otimes_{\Z} A, \enspace
       \partial_n \coloneqq \partial_n \otimes \id : C_n(X; A) \to C_{n-1}(X; A).
     \]
     \item ... der \emph{Kokettenkomplex} $(C^\bullet(X; A), \delta^\bullet)$ von $X$ mit \emph{Koeffizienten} in $A$ definiert durch
@@ -354,8 +354,8 @@
 \begin{defn}
   Der \emph{Kegel} $CX$ über Verklebedaten $X$ ist definiert durch
   \begin{align*}
-    (CX)_{(0)} & \coloneqq X_{(0)} \amalg \{ \star \}, \quad (CX)_{(n)} \coloneqq X_{(n)} \amalg (X_{(n-1)} \times \{ \star \}) \\
-    (CX)(f)(x) & \coloneqq X(f)(x) \\
+    (CX)_{(0)} & \coloneqq X_{(0)} \amalg \{ \star \}, \quad (CX)_{(n)} \coloneqq X_{(n)} \amalg (X_{(n-1)} \times \{ \star \}), \\
+    (CX)(f)(x) & \coloneqq X(f)(x), \\
     (CX)(f)(x,*) &  \coloneqq \begin{cases}
       X(i \mapsto f(i) - 1)(x), & \text{wenn $f(0) > 0$,} \\
       (X(i \mapsto f(i{+}1) - 1)(x), *), & \text{wenn $f(0) = 0$.}
@@ -364,7 +364,7 @@
 \end{defn}
 
 \begin{defn}
-  Für Verklebedaten sind die (Ko-)Kettenkomplex (mit Koeffizienten) genauso definiert wie für simpliziale Mengen.
+  Für Verklebedaten ist der zugeh. (Ko-)Kettenkomplex (mit Koeffizienten) genauso definiert wie für simpliziale Mengen.
 \end{defn}
 
 \begin{prop}
@@ -381,7 +381,7 @@
   \begin{itemize}
     \item Ein \emph{homol. Koeffizientensystem} $\mathcal{A}$ auf $X$ ist ein Funktor
     \[ \mathcal{A} : (1 \downarrow X) \to \AbGrp. \]
-    Dabei ist $1 : \Delta \to \SetC$ der Funktor, der konstant $\{ \star \}$ ist.\\
+    Dabei ist $1 : \mathbf{1} \to \SetC$ der Funktor, der konstant $\{ \star \}$ ist (und $\mathbf{1}$ die Kategorie mit einem Objekt und einem Morphismus).\\
     Expliziter besteht ein Koeffizientensystem aus einer abelschen Gruppe $\mathcal{A}_\sigma$ für jedes $n$-Simplex $\sigma \in X_n$ und Abbildungen $\mathcal{A}(f, \sigma) : \mathcal{A}_\sigma \to \mathcal{A}_{X(f)(\sigma)}$ für alle $\sigma \in X_n$, $f \in \Hom_{\Delta}([m], [n])$ mit
     \[
       \mathcal{A}(\id, \sigma) = \id, \quad
@@ -410,7 +410,7 @@
 
 \begin{defn}
   Sei $\mathcal{A}$ ein homologisches Koeffizientensystem auf einer simplizialen Menge $X$. Wir setzen
-  \[ C_n(X; \mathcal{A}) \coloneqq \{ \text{ formale endl. Linearkomb. } \sum_{\sigma \in X_n} \lambda_\sigma \cdot \sigma \text{ mit } \lambda_\sigma \in \mathcal{A}_\sigma \, \} \]
+  \[ C_n(X; \mathcal{A}) \coloneqq \{ \text{ formale endl. Linearkomb. } \nspace{3} \sum_{\sigma \in X_n} \lambda_\sigma \cdot \sigma \text{ mit } \lambda_\sigma \in \mathcal{A}_\sigma \, \} \]
   und definieren $\partial_n : C_n(X; \mathcal{A}) \to C_{n-1}(X; \mathcal{A})$ durch
   \[ \sum_{\sigma \in X_n} \lambda_\sigma \cdot \sigma \enspace \mapsto \sum_{\sigma \in X_n} \sum_{i=0}^n \enspace (-1)^i \mathcal{A}(\partial_n^i, \sigma)(\lambda_\sigma) \cdot X(\partial_n^i)(\sigma). \]
   Die Homologiegruppen des so def. Kettenkomplexes $C_\bullet(X; \mathcal{A})$ heißen \emph{Homologiegruppen} von $X$ \emph{mit Koeffizienten in $\mathcal{A}$}.
@@ -586,7 +586,7 @@
 % I.6.2 (Exakte Sequenzen)
 
 \begin{defn}
-  Eine (lange) \emph{exakte Sequenz} ab. Gruppen ist ein (Ko-)Ketten- komplex mit verschwindenden Homologiegruppen, \dh{}
+  Eine (lange) \emph{exakte Sequenz} ab. Gruppen ist ein (Ko-)Kettenkomplex mit verschwindenden Homologiegruppen, \dh{}
   \[ \im \partial_n = \ker \partial_{n-1} \quad \text{für alle $n$.} \]
 \end{defn}
 
