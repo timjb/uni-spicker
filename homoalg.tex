@@ -53,7 +53,7 @@
 \end{nota}
 
 \begin{defn}
-  Das \emph{Standard-$n$-Simplex} $\Delta_n \subset \R^{n+1}$ ist die von den $(n{+}1)$ Standardbasisvektoren aufgespannte lineare Hülle. Eine streng monotone Abb $f : [n] \to [m]$ induziert durch Abbilden des $i$-ten Basisvektors auf den $f(i)$-ten eine Inklusion $\Delta_f : \Delta_n \to \Delta_m$, 
+  Das \emph{Standard-$n$-Simplex} $\Delta_n \subset \R^{n+1}$ ist die von den $(n{+}1)$ Standardbasisvektoren aufgespannte affinlineare Hülle. Eine streng monotone Abb $f : [n] \to [m]$ induziert durch Abbilden des $i$-ten Basisvektors auf den $f(i)$-ten eine Inklusion $\Delta_f : \Delta_n \to \Delta_m$, 
 \end{defn}
 
 \begin{defn}
@@ -127,7 +127,7 @@
 \begin{defn}
   Sei $Y$ ein topol. Raum. Die simpliziale Menge $X$ der \emph{singulären Simplizes} in $Y$ ist
   \[
-    X_n \coloneqq \{ \, \text{stetige Abbn. } \sigma : \Delta_n \to Y \, \}, \quad
+    X_n \coloneqq \{ \, \text{stetige Abb. } \sigma : \Delta_n \to Y \, \}, \quad
     X_n(f)(\sigma) \coloneqq \sigma \circ \Delta_f.
   \]
 \end{defn}
@@ -367,7 +367,7 @@
 \end{bem}
 
 \begin{defn}
-  Sei $\Fais$ eine Prägarbe auf $Y$. Die \emph{Garbifizierung} $\Fais^+$ von $\Fais$ ist die Garbe der lokal stetigen Schnitte von $\pi : F \to Y$, also
+  Sei $\Fais$ eine Prägarbe auf $Y$. Die \emph{Garbifizierung} $\Fais^+$ von $\Fais$ ist die Garbe der stetigen Schnitte von $\pi : F \to Y$, also
   \[ \Fais^+(U) \coloneqq \Set{f : U \to F}{\pi \circ f = (i : U \hookrightarrow Y)}. \]
 \end{defn}
 
@@ -620,7 +620,7 @@
 \end{defn}
 
 \begin{prop}
-  Für eine Sequenz $0 \to A \xrightarrow{f} B \to \xrightarrow{g} C \to 0$ sind äquivalent:
+  Für eine Sequenz $0 \to A \xrightarrow{f} B \xrightarrow{g} C \to 0$ sind äquivalent:
   \begin{itemize}
     \item Die Sequenz spaltet.
     \item Es existiert eine Retraktion $r : B \to A$ mit $r \circ f = \id_A$.
