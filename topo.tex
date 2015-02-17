@@ -122,7 +122,7 @@
 \end{nota}
 
 \begin{bem}
-  Ist $f : X \to Y$ stetig und $A \subset X$, so ist auch $f|_A : A \to Y$ stetig.
+  Ist $f : X \to Y$ stetig und $A \!\subset\! X$, so ist $f|_A : A \to Y$ stetig.
 \end{bem}
 
 \begin{defn}
@@ -236,7 +236,7 @@
 \end{defn}
 
 \begin{prop}
-  Ein Punkt $x \in X$ liegt genau dann in $\partial X$, wenn jede Umgebung von $x$ sowohl einen Punkt aus $A$ wie einen Punkt aus $X \setminus A$ enthält.
+  Ein Punkt $x \in X$ liegt genau dann in $\partial X$, wenn jede Umgebung von $x$ einen Punkt aus $A$ wie auch aus $X \setminus A$ enthält.
 \end{prop}
 
 % Vorlesung vom 14.4.2014
@@ -249,7 +249,7 @@
 
 \begin{bspe}
   \begin{itemize}
-    \item $\R^n$ ist wegzusammenhängend
+    \item $\R^n$ ist wegzusammenhängend.
     \item $(\{ p, q \}, \{ \emptyset, \{ p \}, \{ p, q \} \})$ ist wegzusammenhängend!
     \item $\ointerval{-\infty}{0} \cup \ointerval{0}{\infty} \subset \R$ ist nicht wegzusammenhängend.
   \end{itemize}
@@ -360,7 +360,9 @@
 \end{prop}
 
 \begin{defn}
-  Eine \emph{gerichtete Menge} ist eine Menge $D$ mit einer partiellen Ordnung $(\le) \subset D \times D$, sodass es für $\alpha, \beta \in D$ immer ein $\gamma \in D$ mit $\gamma \geq \alpha$ und $\gamma \geq \beta$ gibt.
+  Eine \emph{gerichtete Menge} ist eine Menge $D$ mit einer partiellen Ordnung $(\le) \subset D \times D$, sodass
+  $\fa{\alpha, \beta \in D} \ex{\gamma \in D} \gamma \geq \alpha \wedge \gamma \geq \beta$.
+  %es für $\alpha, \beta \in D$ immer ein $\gamma \in D$ mit $\gamma \geq \alpha$ und $\gamma \geq \beta$ gibt.
 \end{defn}
 
 \begin{defn}
@@ -402,7 +404,9 @@
 \end{defn}
 
 \begin{defn}
-  Sind $D$ und $E$ gerichtete Mengen, so nennen wir eine Abbildung $h : E \to D$ \emph{final}, falls für alle $\delta \in D$ ein $\eta \in E$ existiert mit $h(\gamma) \geq \delta$ für alle $\gamma \geq \eta$.
+  Sind $D$ und $E$ gerichtete Mengen, so nennen wir eine Abb. $h : E \to D$ \emph{final}, falls
+  $\fa{\delta \in D} \ex{\eta \in E} \fa{\gamma \geq \eta} h(\gamma) \geq \delta$.
+  %für alle $\delta \in D$ ein $\eta \in E$ existiert mit $h(\gamma) \geq \delta$ für alle $\gamma \geq \eta$.
 \end{defn}
 
 \begin{defn}
@@ -412,11 +416,13 @@
 % Vorlesung vom 23.4.2014
 
 \begin{prop}
-  Sei $(x_\alpha)_{\alpha \in D}$ ein Netz in $X$. Ein Punkt $x \in X$ ist genau dann Häufungspunkt von $(x_\alpha)$, falls ein Unternetz von $(x_\alpha)$ gegen $x$ konvergiert.
+  Sei $(x_\alpha)_{\alpha \in D}$ ein Netz in $X$. Ein Punkt $x \in X$ ist genau dann Häufungspunkt von $(x_\alpha)$, falls ein Unternetz von $(x_\alpha)$ gegen $x$ konv.
 \end{prop}
 
 \begin{defn}
-  Eine Folge $(x_n)_{n \in \N}$ in einem metrischen Raum $(X, d)$ heißt \emph{Cauchy-Folge}, falls es für jedes $\epsilon > 0$ ein $N \in \N$ gibt mit $d(x_n, x_m) < \epsilon$ für alle $n, m \geq N$.
+  Eine Folge $(x_n)_{n \in \N}$ in einem metrischen Raum $(X, d)$ heißt \emph{Cauchy-Folge}, falls
+  $\fa{\epsilon \!>\! 0} \ex{N \!\in\! \N} \fa{n, m \!\geq\! N} d(x_n, x_m) \!<\! \epsilon$.
+  %es für jedes $\epsilon > 0$ ein $N \in \N$ gibt mit $d(x_n, x_m) < \epsilon$ für alle $n, m \geq N$.
 \end{defn}
 
 \begin{defn}
@@ -446,11 +452,11 @@
 \end{prop}
 
 \begin{defn}
-  Sie $(X, d)$ und $(X', d')$ metrische Räume, so heißt $f : X \to X'$
+  Eine Abb. $f : (X, d) \to (X', d')$ zw. metr. Räumen heißt \ldots
   \begin{itemize}
-    \item eine \emph{isometrische Einbettung}, falls für alle $x , y \in X$ gilt:
+    \item \ldots{} \emph{isometrische Einbettung}, falls für alle $x , y \in X$ gilt:
     \[ d'(f(x), f(y)) = d(x, y) \]
-    \item eine \emph{Isometrie}, falls $f$ zusätzlich bijektiv ist. In diesem Fall ist auch $f^{-1}$ eine Isometrie und $f$ ein Homöomorphismus.
+    \item \ldots{} \emph{Isometrie}, falls $f$ zusätzlich bijektiv ist. In diesem Fall ist auch $f^{-1}$ eine Isometrie und $f$ ein Homöomorphismus.
   \end{itemize}
 \end{defn}
 
@@ -469,9 +475,7 @@
 \end{satz}
 
 \begin{prop}
-  Es sei $X$ ein metrischer Raum und es seien
-  \[ f_1 : X \to Y_1, \quad f_2 : X \to Y_2 \]
-  Vervollständigungen von $X$. Dann existiert genau eine Isometrie $\phi_{21} : Y_1 \to Y_2$ mit $\phi_{21}|_{f_1(X)} = f_2 \circ f_1^{-1}$.
+  Sei $X$ ein metrischer Raum und $f_{1,2} : X \to Y_{1,2}$ Vervollständigungen von $X$. Dann existiert genau eine Isometrie $\phi_{21} : Y_1 \to Y_2$ mit $\phi_{21}|_{f_1(X)} = f_2 \circ f_1^{-1}$.
 \end{prop}
 
 \begin{bsp}
@@ -480,7 +484,7 @@
 \end{bsp}
 
 \begin{defn}
-  Es sei $X$ ein topologischer Raum. Eine \emph{offene Überdeckung} von $X$ ist eine Familie $(U_i)_{i \in I}$ offener Teilmengen von $X$ mit $\bigcup_{i \in I} U_i = X$.
+  Es sei $X$ ein topologischer Raum. Eine \emph{offene Überdeckung} von $X$ ist eine Familie $(U_i)_{i \in I}$ offener Teilmengen mit $\bigcup_{i \in I} U_i = X$.
 \end{defn}
 
 \begin{defn}
@@ -488,7 +492,7 @@
 \end{defn}
 
 \begin{defn}
-  Eine Familie $\mathcal{C}$ von Teilmengen von $X$ habe die \emph{endliche Schnitteigenschaft}, falls der Schnitt je endlich vieler Mengen aus $\mathcal{C}$ nichtleer ist.
+  Eine Familie $\mathcal{C}$ von Teilmengen von $X$ hat die \emph{endliche Schnitteigenschaft}, falls der Schnitt je endlich vieler Mengen aus $\mathcal{C}$ nichtleer ist.
 \end{defn}
 
 \begin{prop}
@@ -500,19 +504,19 @@
 \end{bem}
 
 \begin{prop}
-  Jede kompakte Teilmenge eines Hausdorffraumes ist abgeschlossen.
+  Jede kompakte Teilmenge eines Hausdorffraumes ist abg.
 \end{prop}
 
 \begin{prop}
-  Ist $X$ kompakt und $f : X \to Y$ stetig, so ist auch $f(X) \subset Y$ kompakt.
+  Ist $X$ kompakt und $f : X \to Y$ stetig, so ist $f(X)$ kompakt.
 \end{prop}
 
 \begin{prop}
-  Jeder abgeschlossene Teilraum eines kompakten Raumes ist kompakt.
+  Ein abg. Teilraum eines kompakten Raumes ist kompakt.
 \end{prop}
 
 \begin{prop}
-  Sei $f : X \to Y$ eine bijektive stetige Abbildung von einem kompakten Raum in einen Hausdorffraum. Dann ist $f$ ein Homöomorphismus.
+  Sei $f : X \to Y$ eine bij. stetige Abb. von einem kompakten Raum in einen Hausdorffraum. Dann ist $f$ ein Homöomorphismus.
 \end{prop}
 
 % Vorlesung vom 30.4.2014
@@ -525,7 +529,7 @@
   Seien $X$, $Y$ kompakt. Dann ist auch $(X \times Y)$ kompakt.
 \end{prop}
 
-\begin{satz}[Heine-Borel]
+\begin{satz}[\emph{Heine-Borel}]
   Eine Teilmenge von $\R$ ist genau dann kompakt, wenn sie beschränkt und abgeschlossen ist.
 \end{satz}
 
@@ -538,15 +542,7 @@
 \end{defn}
 
 \begin{prop}
-  Es sei $X$ ein metrischer Raum. Dann ist $X$ genau dann kompakt, wenn $X$ folgenkompakt ist.
-\end{prop}
-
-\begin{prop}
-  Sei $X$ ein topologischer Raum. Dann sind äquivalent:
-  \begin{itemize}
-    \item $X$ ist kompakt.
-    \item $X$ ist \emph{netzkompakt}, \dh{} jedes (nichtleere) Netz $(x_\alpha)_{\alpha \in D}$ in $X$ besitzt ein konvergentes Unternetz.
-  \end{itemize}
+  Ein metrischer Raum ist genau dann kompakt, wenn er folgenkompakt ist.
 \end{prop}
 
 \begin{defn}
@@ -569,16 +565,20 @@
   Der Beweis der Prop. verwendet das Lemma von Zorn.
 \end{bem}
 
+\begin{defn}
+  Ein topol. Raum $X$ heißt \emph{netzkompakt}, falls jedes nichtleere Netz $(x_\alpha)_{\alpha \in D}$ in $X$ ein konvergentes Unternetz besitzt.
+\end{defn}
+
 \begin{satz}
   Sei $X$ ein topologischer Raum. Dann sind äquivalent:
   \begin{itemize}
-    \item $X$ ist kompakt.
-    \item Jedes nichtleere universelle Netz konvergiert in $X$.
+    \miniitem{0.4 \linewidth}{$X$ ist kompakt.}
+    \miniitem{0.4 \linewidth}{$X$ ist netzkompakt.}
     \item Jedes nichtleere Netz in $X$ hat ein konvergentes Unternetz.
   \end{itemize}
 \end{satz}
 
-\begin{satz}[Tychonoff]
+\begin{satz}[\emph{Tychonoff}]
   Sei $(X_i)_{i \in I}$ eine Familie kompakter Räume. Dann ist das topologische Produkt $\prod_{i \in I} X_i$ ebenfalls kompakt.
 \end{satz}
 
@@ -634,15 +634,16 @@
 \end{lem}
 
 \begin{defn}
-  Ein topologischer Raum erfüllt das \emph{zweite Abzählbarkeitsaxiom}, falls er eine abzählbare Basis besitzt.
+  Ein topol. Raum erfüllt das \emph{zweite Abzählbarkeitsaxiom}, falls er eine abzählbare Basis besitzt.
 \end{defn}
 
-\begin{satz}[Metrisierbarkeitssatz von Urysohn]
-  Ein topologischer Raum, der das zweite Abzählbarkeitsaxiom erfüllt, ist genau dann metrisierbar, wenn er normal und Hausdorffsch ist.
+\begin{satz}[\emph{Metrisierbarkeitssatz von Urysohn}]\mbox{}\\
+  Erfülle $X$ das zweite Abzählbarkeitsaxiom. Dann gilt:
+  \[ \text{$X$ metrisierbar} \iff \text{$X$ normal und Hausdorffsch} \]
 \end{satz}
 
-\begin{satz}[Fortsetzungssatz von Tietze]
-  Sei $X$ ein normaler Raum, $F \subset X$ abgeschlossen. Ist $f : F \to \R$ stetig, so existiert eine stetige Fortsetzung $g : X \to \R$ von $f$ auf $X$, \dh{} $g|_F = f$, für die gilt:
+\begin{satz}[\emph{Fortsetzungssatz von Tietze}]\mbox{}\\
+  Sei $X$ normal, $F \subset X$ abgeschlossen. Ist $f : F \to \R$ stetig, so ex. eine stetige Fortsetzung $g : X \to \R$ von $f$ (\dh{} $g|_F = f$), für die gilt:
   \[
     \sup_{x \in F} f(x) = \sup_{x \in X} g(x)
     \quad \text{und} \quad
@@ -684,7 +685,7 @@
 \end{bem}
 
 \begin{prop}
-  Sei $X$ ein lokalkompakter Hausdorffraum, $Y$ ein kompakter Hausdorffraum, $p \in Y$ und $X$ homöomorph zu $Y \setminus \{ p \}$. Dann ist $X^+ \approx Y$.
+  Sei $X$ ein lokalkompakter Hausdorffraum, $Y$ ein kompakter Hausdorffraum, $p \in Y$ und $X \approx Y \setminus \{ p \}$. Dann gilt $X^+ \approx Y$.
 \end{prop}
 
 \begin{kor}
@@ -721,7 +722,7 @@
 \end{defn}
 
 \begin{prop}
-  Sei $X$ ein normaler Hausdorffraum und $K$ ein kompakter Hausdorffraum. Dann faktorisiert jede stetige Abbildung $\phi : X \to K$ in eindeutiger Weise über die Stone-Čech-Kompakti- fizierung von $X$, \dh{} es gibt eine eindeutig bestimmte Abbildung $\pi : \beta X \to K$ mit $\pi \circ \beta = \phi$.
+  Sei $X$ ein normaler Hausdorffraum und $K$ ein kompakter Hausdorffraum. Dann faktorisiert jede stetige Abbildung $\phi : X \to K$ in eindeutiger Weise über die Stone-Čech-Kompaktifizierung von $X$, \dh{} es gibt eine eindeutige Abb. $\pi : \beta X \to K$ mit $\pi \circ \beta = \phi$.
 \end{prop}
 
 \begin{defn}
@@ -736,12 +737,14 @@
 \begin{prop}
   \begin{itemize}
     \item Die Verkettung von Identifizierungen ist wieder eine Identifizierung.
-    \item Eine surjektive Abbildung $f : X  \to Y$ ist genau dann eine Identifizierung, falls gilt: Für alle topologischen Räume $Z$ und Abbildungen $g : Y \to X$ ist $g$ genau dann stetig, wenn $g \circ f : X \to Z$ stetig ist.
+    \item Eine surjektive Abbildung $f : X  \to Y$ ist genau dann eine Identifizierung, falls gilt: Für alle topol. Räume $Z$ und Abb. $g : Y \to Z$ ist $g$ genau dann stetig, wenn $g \circ f : X \to Z$ stetig ist.
   \end{itemize}
 \end{prop}
 
 \begin{defn}
-  Sei ${\sim}$ eine Äquivalenzrelation auf einem topol. Raum $X$. Dann heißt die Menge $X/{\sim}$ versehen mit der Finaltopologie bzgl. der Abbildung $p : X \to X/{\sim}, x \mapsto [x]$ (der \emph{Quotientopologie}) \emph{Quotientenraum}.
+  Sei ${\sim}$ eine Äquivalenzrelation auf einem topol. Raum $X$. Dann heißt die Menge $X/{\sim}$ versehen mit der Finaltopologie bzgl. der Abb.
+  \[ p : X \to X/{\sim}, \quad x \mapsto [x]. \]
+   \emph{Quotientenraum} (mit \emph{Quotientopologie}).
 \end{defn}
 
 \begin{bem}
@@ -815,7 +818,7 @@
   \begin{itemize}
     \item Jedes Simplex $\sigma \in \Sigma$ ist nichtleer und endlich.
     \item Für jede nichtleere Teilmenge $\tilde{\sigma} \subset \sigma \in \Sigma$ gilt $\tilde{\sigma} \in \Sigma$.
-    \item Jedes Element von $X$ ist in mindestens einem Simplex enthalten, also $\bigcup_{\sigma \in \Sigma} \sigma = X$.
+    \item Jedes $x \!\in\! X$ ist in mind. einem Simplex enthalten, also $\bigcup_{\sigma \in \Sigma} \! \sigma = X$.
   \end{itemize}
 \end{defn}
 
@@ -823,13 +826,13 @@
   \begin{itemize}
     \item Für $\sigma \in \Sigma$ heißt $\dim(\sigma) \coloneqq \abs{\sigma} - 1$ die \emph{Dimension} von $\sigma$.
     \item Teilmengen von $\sigma$ heißen \emph{Seiten} von $\sigma$.
-    \item Nulldimensionale Simplizes heißen \emph{Ecken}, eindimensionale Simplizes \emph{Kanten}.
+    \item Nulldim. Simplizes heißen \emph{Ecken}, eindim. Simplizes \emph{Kanten}.
     \item Der Simplizialkomplex $(X, \Sigma)$ heißt \emph{endlich}, wenn $X$ endlich ist.
   \end{itemize}
 \end{defn}
 
 \begin{nota}
-  $[n] \coloneqq \{ 0, 1, ..., n \}$ für $n \in \N$
+  $[n] \coloneqq \{ 0, 1, \ldots, n \}$ für $n \in \N$
 \end{nota}
 
 \begin{defn}
@@ -837,13 +840,13 @@
 \end{defn}
 
 \begin{defn}
-  Für $v_0, ..., v_k \in \R^n$ heißt
-  \[ \langle v_0, ..., v_n \rangle \coloneqq \Set{ t_0 v_0 + ... + t_n v_n }{ 0 \leq t_0, ..., t_n \text{ und } t_0 + ... + t_n = 1 } \]
-  von den Vektoren $v_0, ... v_k$ \emph{aufgespanntes $k$-Simplex}. Falls $v_0, ..., v_k$ nicht affin unabhängig, so ist der $k$-Simplex degeneriert. Ist dies nicht der Fall, so ist jeder Punkt eindeutig durch die \emph{baryzentrischen Koordinaten} $t_0, ..., t_n$ identifiziert.
+  Für $v_0, \ldots, v_k \in \R^n$ heißt
+  \[ \langle v_0, \ldots, v_n \rangle \coloneqq \Set{ t_0 v_0 + \ldots + t_n v_n }{ 0 \leq t_0, \ldots, t_n \text{ und } t_0 + \ldots + t_n = 1 } \]
+  von den Vektoren $v_0, \ldots v_k$ \emph{aufgespanntes $k$-Simplex}. Falls $v_0, \ldots, v_k$ nicht affin unabhängig, so ist der $k$-Simplex degeneriert. Ist dies nicht der Fall, so ist jeder Punkt eindeutig durch die \emph{baryzentrischen Koordinaten} $t_0, \ldots, t_n$ identifiziert.
 \end{defn}
 
 \begin{defn}
-  $\Delta^n \coloneqq \langle e_0, ..., e_n \rangle \subset \R^{n+1}$ heißt \emph{Standard-$n$-Simplex}, wobei $e_0, ..., e_n$ die Einheitsvektoren in $\R^{n+1}$ bezeichnen.
+  $\Delta^n \coloneqq \langle e_0, \ldots, e_n \rangle \subset \R^{n+1}$ heißt \emph{Standard-$n$-Simplex}, wobei $e_0, \ldots, e_n$ die Einheitsvektoren in $\R^{n+1}$ bezeichnen.
 \end{defn}
 
 \begin{bem}
@@ -899,7 +902,7 @@
 
 \begin{prop}
   Jeder beschränkte konvexe Körper $K \subset \R^n$ mit $0 \in \inte(K)$ ist homöomorph zu $S^{n-1}$ vermöge
-  \[ f : \partial K \to S^{n-1}, \quad x \mapsto \frac{x}{\norm{x}}. \]
+  $f : \partial K \to S^{n-1}, \enspace x \mapsto x / \norm{x}$.
 \end{prop}
 
 \begin{nota}
@@ -915,16 +918,16 @@
 \end{kor}
 
 \begin{prop}
-  Sei $S = (X, \Sigma)$ ein endlicher abstrakter Simplizialkomplex, also $X = \{ 1, 2, 3, ..., n \}$ und seien $x_1, ..., x_n \in \R^n$ affin unabhängig. Dann ist die Vereinigung all jener affinen Simplizes
+  Sei $S = (X, \Sigma)$ ein endlicher abstrakter Simplizialkomplex, also $X = \{ 1, 2, 3, \ldots, n \}$ und seien $x_1, \ldots, x_n \in \R^n$ affin unabhängig. Dann ist die Vereinigung all jener affinen Simplizes
   \[
-    \langle x_{i_1}, ..., x_{i_k} \rangle \subset \R^n \quad
-    \text{mit $\{ i_1, ..., i_k \} \in \Sigma$} \qquad
+    \langle x_{i_1}, \ldots, x_{i_k} \rangle \subset \R^n \quad
+    \text{mit $\{ i_1, \ldots, i_k \} \in \Sigma$} \qquad
     \text{homöomorph zu $\abs{S}$.}
   \]
 \end{prop}
 
 \begin{defn}
-  Eine Teilmenge $T \subset \R^n$ heißt \emph{(geometrischer) Simplizialkomplex}, falls $T$ Vereinigung von affinen Simplizes $\sigma_i \subset \R^n$, $i \in I$ mit der folgenden Eigenschaft ist: Der Schnitt $\sigma_i \cap \sigma_j$ zweier dieser Simplizes ist entweder leer oder eine gemeinsame Seite von $\sigma_i$ und $\sigma_j$.
+  Eine Teilmenge $T \subset \R^n$ heißt \emph{(geom.) Simplizialkomplex}, falls $T$ Vereinigung von affinen Simplizes $\sigma_i \subset \R^n$, $i \in I$ mit der folgenden Eigenschaft ist: Der Schnitt $\sigma_i \cap \sigma_j$ zweier dieser Simplizes ist entweder leer oder eine gemeinsame Seite von $\sigma_i$ und $\sigma_j$.
 \end{defn}
 
 \begin{bem}
@@ -941,8 +944,8 @@
 
 % "`Stückelungslemma"'
 \begin{lem}
-  Sei $X$ ein topologischer Raum, $X = C_1 \cup ... \cup C_n$ wobei $C_i \subset X$ abgeschlossen, seien $f_i : C_i \to Y$ stetig mit
-  \[ \fa{i, j \in \{ 1, ..., n \}} f_i|_{C_i \cap C_j} = f_j|_{C_i \cap C_j}. \]
+  Sei $X$ ein topologischer Raum, $X = C_1 \cup \ldots \cup C_n$ wobei $C_i \subset X$ abgeschlossen, seien $f_i : C_i \to Y$ stetig mit
+  \[ \fa{i, j \in \{ 1, \ldots, n \}} f_i|_{C_i \cap C_j} = f_j|_{C_i \cap C_j}. \]
   Dann ist $F : X \to Y, x \mapsto f_i(x), x \in C_i$ stetig.
 \end{lem}
 
@@ -970,7 +973,7 @@
 \end{defn}
 
 \begin{bem}
-  Dies definiert eine Äquivalenzrelation auf der Klasse der topologischen Räume. Ihre Äquivalenzklassen heißen \emph{Homotopietypen}.
+  Dies definiert eine Äquivalenzrelation auf der Klasse der topol. Räume. Ihre Äquivalenzklassen heißen \emph{Homotopietypen}.
 \end{bem}
 
 \begin{defn}
@@ -1017,10 +1020,10 @@
 \end{defn}
 
 \begin{bem}
-  $A \subset X$ ist genau dann ein starker Deformationsretrakt, wenn $\id_X : X \to X$ homotop relativ $A$ zu einer Abbildung $f : X \to X$ mit $f(X) = A$ ist.
+  $A \subset X$ ist genau dann starker Deformationsretrakt, wenn $\id_X$ homotop rel. $A$ zu einer st. Abb. $f : X \to X$ mit $f(X) = A$ ist.
 \end{bem}
 
-\begin{lem}[Reparametrisierungslemma]
+\begin{lem}[Reparametrisierungslemma]\mbox{}\\
   Seien $\phi_1, \phi_2 : \I \to \I$ stetig und auf $\{ 0, 1 \}$ gleich. Sei $F : P \times \I \to Y$ eine Homotopie, $G_i(p, t) \coloneqq F(p, \phi_i(t))$ für $i = 1,2$. Dann sind $G_1, G_2 : P \times \I \to Y$ homotop relativ zu $P \times \{ 0, 1 \}$.
 \end{lem}
 
@@ -1051,7 +1054,7 @@
 % Ausgelassen: Beispiel $\pi_1(\{ pt \}, pt) = 1$.
 
 \begin{bem}
-  $\pi_1(X, x_0)$ hängt nur von der Wegkomponente von $x_0$ ab, die $x_0$ enthält.
+  $\pi_1(X, x_0)$ hängt nur von der Wegkomponente von $x_0$ ab.
 \end{bem}
 
 \begin{prop}
@@ -1111,7 +1114,8 @@
 % Vorlesung vom 4.6.2014
 
 \begin{prop}
-  Seien $X$ und $Y$ wegzusammenhängend und $x_0 \in X$. Ist $f : X \to Y$ eine Homotopieäquivalenz, dann ist $f_* : \pi_1(X, x_0) \to \pi_1(Y, f(x_0))$ ein Isomorphismus.
+  Seien $X$ und $Y$ wegzusammenhängend und $x_0 \in X$. \\
+  Ist $f : X \to Y$ eine Homotopieäquivalenz, dann ist $f_* : \pi_1(X, x_0) \to \pi_1(Y, f(x_0))$ ein Isomorphismus.
 \end{prop}
 
 \begin{bsp}
@@ -1125,12 +1129,13 @@
 \begin{defn}
   Für einen punktierten Raum $(X, x_0)$ heißt
   \begin{align*}
-    \pi_n(X, x_0) &\coloneqq \Set{ \gamma : (S^n, p) \to (X, x_0) }{ \gamma \text{ stetig}} / {\sim}\\
-    & \text{mit} \quad \gamma_1 \sim \gamma_2 \coloniff \gamma_1 \simeq \gamma_2 \rel \{p\}.
+    \pi_n(X, x_0) &\coloneqq \Set{ \gamma : (S^n, s_0) \to (X, x_0) }{ \gamma \text{ stetig}} / {\sim}\\
+    & \text{mit} \quad \gamma_1 \sim \gamma_2 \coloniff \gamma_1 \simeq \gamma_2 \rel \{ s_0 \}.
   \end{align*}
-  Dabei ist $p \in S^n$ fest.
+  \emph{$n$-te Homotopiegruppe}. Dabei ist $s_0 \in S^n$ fest.
 \end{defn}
 
+\begin{samepage}
 \begin{defn}
   Eine \emph{Kategorie} $\mathcal{C}$ besteht aus
   \begin{itemize}
@@ -1146,6 +1151,7 @@
     \item für jedes $A \in \Ob(\mathcal{C})$ einem Identitätsmorphismus $\id_A : A \to A$ mit $\id_A \circ f = f$ und $g \circ \id_A = g$ für alle $f : B \to A$ und $g : A \to B$.
   \end{itemize}
 \end{defn}
+\end{samepage}
 
 \begin{bem}
   Die Identitätsmorphismen sind eindeutig bestimmt, da
@@ -1186,7 +1192,7 @@
 \end{defn}
 
 \begin{bem}
-  Sei $\mathcal{C}$ eine Kategorie, ${\sim}$ eine Äquivalenzrelation auf $\Mor(\mathcal{C})$ für die gilt:
+  Sei $\mathcal{C}$ eine Kategorie, ${\sim}$ eine Äq'relation auf $\Mor(\mathcal{C})$, sodass:
   \begin{itemize}
     \item Falls $f, g \in \Mor(\mathcal{C})$ mit $f \sim g$, so ist $\dom(f) = \dom(g)$ und $\codom(f) = \codom(g)$.
     \item Ist $f \sim g \in \Hom(A, B)$ und $h \sim k \in \Hom(B, C)$, so gilt auch $h \circ f \sim k \circ g \in \Hom(A, C)$.
@@ -1215,7 +1221,7 @@
 
 \begin{bspe}
   \begin{itemize}
-    \item Für $\mathcal{C} = \mathbf{Grp}, \mathbf{AbGrp}, \mathbf{Rng}, \mathbf{Top}, ...$ gibt es den \emph{Vergissfunktor} $U : \mathcal{C} \to \mathbf{Set}$.
+    \item Für $\mathcal{C} = \mathbf{Grp}, \mathbf{AbGrp}, \mathbf{Rng}, \mathbf{Top}, \ldots$ gibt es den \emph{Vergissfunktor} $U : \mathcal{C} \to \mathbf{Set}$.
     \item Besitzen $\mathcal{C}$ und $\mathcal{D}$ nur je ein Objekt (sind also Gruppen), so ist ein Funktor $F : \mathcal{C} \to \mathcal{D}$ nichts anderes als ein Gruppenhomomorphismus.
     \item Der \emph{Potenzmengenfunktor} $P : \mathbf{Set} \to \mathbf{Set}$ ist definiert durch
     \[ P(A) \coloneqq \mathcal{P}(A), \quad P(f : A \to B)(X \subseteq A) \coloneqq f(X) \subseteq B. \]
@@ -1265,7 +1271,6 @@
 
 \begin{defn}
   Seien $F, G : \mathcal{C} \to \mathcal{D}$ Funktoren. Eine \emph{natürliche Transformation} $\alpha : F \to G$ ordnet jedem $X \in \Ob(\mathcal{C})$ einen Morphismus $\alpha_X \in \Hom_{\mathcal{D}}(F(X), G(X))$ zu, sodass für jeden Morphismus $f : A \to B$ in $\mathcal{C}$ folgendes Diagramm kommutiert:
-
   \begin{center}
     \iffalse
     \begin{tikzpicture}[node distance=1cm,auto]
@@ -1279,7 +1284,6 @@
       \draw[->] (FB) to node {$\alpha_B$} (GB);
     \end{tikzpicture}
     \fi
-
     \begin{tikzpicture}
       \matrix (mat) [matrix of nodes, column sep=1.5cm, row sep=0.75cm]{
         \node (FA) {$F(A)$}; &
@@ -1302,7 +1306,7 @@
 \end{bem}
 
 \begin{bem}
-  Für zwei Kategorien $\mathcal{C}$ und $\mathcal{D}$ gibt es die \emph{Funktorkategorie} $\left[\mathcal{C}, \mathcal{D}\right]$ der Funktoren zwischen $\mathcal{C}$ und $\mathcal{D}$ mit natürlichen Transformation als Morphismen.
+  Für Kategorien $\mathcal{C}$ und $\mathcal{D}$ gibt es die \emph{Funktorkat.} $\left[\mathcal{C}, \mathcal{D}\right]$ der Funktoren von $\mathcal{C}$ nach $\mathcal{D}$ mit nat. Transformationen als Morphismen.
 \end{bem}
 
 \begin{defn}
@@ -1368,7 +1372,8 @@
 \end{satz}
 
 \begin{kor}
-  Seien $\gamma_0, \gamma_1$ Wege in $Y$ mit $\gamma_0 \simeq \gamma_1 \rel \{ 0, 1 \}$ und $\widetilde{\gamma_0}, \widetilde{\gamma_1} : \I \to X$ Liftungen von $\gamma_0$ und $\gamma_1$ mit dem gleichen Anfangspunkt $\widetilde{\gamma_0}(0) = \widetilde{\gamma_1}(0) = x_0 \in X$. Dann gilt $\widetilde{\gamma_0}(1) = \widetilde{\gamma_1}(1)$ und $\widetilde{\gamma_0} \simeq \widetilde{\gamma_1} \rel \{ 0, 1 \}$.
+  Seien $\gamma_0, \gamma_1$ Wege in $Y$ mit $\gamma_0 \simeq \gamma_1 \rel \{ 0, 1 \}$ und $\widetilde{\gamma_0}, \widetilde{\gamma_1} : \I \to X$ Liftungen von $\gamma_0$ und $\gamma_1$ mit dem gleichen Anfangspunkt $\widetilde{\gamma_0}(0) = \widetilde{\gamma_1}(0) = x_0 \in X$. \\
+  Dann gilt $\widetilde{\gamma_0}(1) = \widetilde{\gamma_1}(1)$ und $\widetilde{\gamma_0} \simeq \widetilde{\gamma_1} \rel \{ 0, 1 \}$.
 \end{kor}
 
 \begin{kor}
@@ -1402,7 +1407,7 @@
 % TODO: Abbildungsgrad für beliebige Abbildungen $S^1 \to S^1$
 
 \begin{kor}[Fundamentalsatz der Algebra]
-  Jedes nicht-konstantes Polynom mit komplexen Koeffizienten besitzt eine Nullstelle in $\C$.
+  Jedes nicht-konstante Polynom mit komplexen Koeffizienten besitzt eine Nullstelle in $\C$.
 \end{kor}
 
 % Ausgelassen: Liftungsproblem
@@ -1411,8 +1416,8 @@
   Ein topol. Raum $X$ heißt \emph{lokal wegzusammenhängend}, falls für alle $x \in X$ und Umgebungen $U_x \subseteq X$ von $x$ eine wegzshgde Umgebung $V_x \subseteq U_x$ von $x$ existiert.
 \end{defn}
 
-\begin{satz}[Liftungstheorem]
-  Sei $p : X \to Y$ eine Überlagerung, $W$ wegzshgd und lokal wegzshgd, $f : W \to Y$ stetig, $x_0 \in X$, $w_0 \in W$ mit $y_0 \coloneqq p(x_0) = f(w_0)$. Dann existiert eine stetige Abbildung $\tilde{f} : W \to X$ mit $p \circ \tilde{f} = f$ und $\tilde{f}(w_0) = x_0$ genau dann, wenn
+\begin{satz}[\emph{Liftungstheorem}]
+  Sei $p : X \to Y$ eine Überlagerung, $W$~wegzshgd und lokal wegzshgd, $f : W \to Y$ stetig, $x_0 \in X$, $w_0 \in W$ mit $y_0 \coloneqq p(x_0) = f(w_0)$. Dann existiert eine stetige Abbildung $\tilde{f} : W \to X$ mit $p \circ \tilde{f} = f$ und $\tilde{f}(w_0) = x_0$ genau dann, wenn
   \[ f_*(\pi_1(W, w_0)) \subseteq \im (p_* : \pi_1(X, x_0) \to \pi_1(Y, y_0)). \]
   In diesem Fall ist die Liftung $\tilde{f}$ eindeutig.
 \end{satz}
@@ -1432,19 +1437,20 @@
 \end{defn}
 
 \begin{prop}
-  Seien $p : X \to Y$ und $p' : X' \to Y$ universelle Überlagerungen. Dann gibt es einen Homöomorphismus $\phi : X \to X'$ mit $p' \circ \phi = p$.
+  Seien $p : X \to Y$ und $p' : X' \to Y$ univ. Überlagerungen. \\
+  Dann gibt es einen Homöomorphismus $\phi : X \to X'$ mit $p' \circ \phi = p$.
 \end{prop}
 
 Für $p : (X, x_0) \to (Y, y_0)$ eine universelle Überlagerung und $g = [\gamma] \in \pi_1(Y, y_0)$ sei $\tilde{\gamma}$ der Lift von $\gamma$ mit $\gamma(0) = x_0$. Sei $\psi_g \in \Deck(p)$ die eindeutige Decktransformation mit $\psi_g(x_0) = \tilde{\gamma}(1)$.
 
 \begin{prop}
-  Die Abbildung $\Psi : \pi_1(Y, y_0) \to \Deck(p)$, $g \mapsto \psi_g$ ist ein Gruppenisomorphismus.
+  $\Psi : \pi_1(Y, y_0) \to \Deck(p)$, $g \mapsto \psi_g$ ist ein Gruppeniso.
 \end{prop}
 
 % TODO: Hilfsdefinition: Transitive Gruppenwirkung
 
 \begin{prop}
-  Sei $p : X \to Y$ eine Überlagerung, $X$ wegzshgd und lokal wegzshgd und $G \subset \Deck(p)$ eine Untergruppe. Angenommen, für alle $y \in Y$ und $x_0, x_1 \in p^{-1}(y)$ existiert $g \in G$ mit $g(x_0) = x_1$. Dann gilt $G = \Deck(p)$.
+  Sei $p : X \to Y$ eine Überlagerung, $X$ wegzshgd und lokal wegzshgd und $G < \Deck(p)$ eine Untergruppe. Angenommen, für alle $y \in Y$ und $x_0, x_1 \in p^{-1}(y)$ existiert $g \in G$ mit $g(x_0) = x_1$. Dann gilt $G = \Deck(p)$.
 \end{prop}
 
 \begin{defn}
@@ -1492,7 +1498,7 @@ Für $p : (X, x_0) \to (Y, y_0)$ eine universelle Überlagerung und $g = [\gamma
 
 \begin{bspe}
   \begin{itemize}
-    \item Simplizialkomplexe und Mannigfaltigkeiten sind semilokal einfach zusammenhängend.
+    \item Simplizialkomplexe und Mftn sind semilokal einfach zshgd.
     \item Nicht semilokal einfach zshgd sind die Hawaiianischen Ohrringe.
   \end{itemize}
 \end{bspe}
@@ -1501,13 +1507,14 @@ Für $p : (X, x_0) \to (Y, y_0)$ eine universelle Überlagerung und $g = [\gamma
   Sei $Y$ wegzshgd und lokal wegzshgd. Dann besitzt $Y$ genau dann eine universelle Überlagerung, wenn $Y$ semilokal einfach zusammenhängend ist.
 \end{satz}
 
-\begin{satz}[Jordanscher Kurvensatz]
-  Sei $f : S^1 \to \R^2$ stetig und injektiv und $C \coloneqq f(S^1) \subset \R^2$. Dann besteht $\R^2 \setminus C$ aus zwei Zusammen- hangskomponenten, einer beschränkten und einer unbeschränkten. Der Rand beider Zusammenhangkomponenten ist jeweils $C$.
+\begin{satz}[\emph{Jordanscher Kurvensatz}]
+  Sei $f : S^1 \to \R^2$ stetig und injektiv und $C \coloneqq f(S^1) \subset \R^2$. Dann besteht $\R^2 \setminus C$ aus zwei Zshgskomponenten, einer beschränkten und einer unbeschränkten. \\
+  Der Rand beider Zusammenhangkomponenten ist jeweils $C$.
 \end{satz}
 
 % Vorlesung vom 7.7.2014
 
-\begin{satz}[Borsuk-Ulam]
+\begin{satz}[\emph{Borsuk-Ulam}]
   Sei $f : S^n \to \R^n$ stetig. Dann gibt es antipodale Punkte $x, -x$ mit $f(x) = f(-x)$.
 \end{satz}
 
