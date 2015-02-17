@@ -128,6 +128,8 @@
 % Name einer Eigenschaft rechts ausgerichtet in Klammern
 \newcommand{\pright}[1]{\hfill ({#1}) \,}
 
+\newcommand{\nldots}{...} % narrow ...
+
 % Integrale
 \newcommand{\myint}[2]{{\textstyle \int\limits_{#1}^{#2}}}
 \newcommand{\Int}[4]{\myint{#1}{#2} #3 \,\d #4}
