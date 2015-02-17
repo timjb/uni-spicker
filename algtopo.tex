@@ -10,6 +10,7 @@
 
 \newcommand{\Tau}{\mathcal{T}} % Großes Tau
 
+\newcommand{\nspace}[1]{\foreach \i in {1,...,#1}{ \! }} % Negativer Abstand
 \newcommand{\angles}[1]{{\langle #1 \rangle}}
 \newcommand{\Simpl}{\mathcal{S}} % Simplizialkomplex
 \newcommand{\Real}[1]{\abs{#1}} % geometrische Realisierung
@@ -43,7 +44,7 @@
 
 % TODO: Definition $C_n$
 
-%\[ \partial \angles{p_0, ..., p_n} \coloneqq \sum_{i=0}^n (-1)^{i} \angles{p_0, ..., \hat{p_i}, ..., p_n} \]
+%\[ \partial \angles{p_0, \ldots, p_n} \coloneqq \sum_{i=0}^n (-1)^{i} \angles{p_0, \ldots, \hat{p_i}, \ldots, p_n} \]
 %\[ \partial_n : C_n \to C_{n-1} \]
 %\[ Z_n(S) \coloneqq \ker \partial_n \subset C_n(S) \]
 %\[ B_n(S) \coloneqq \im \partial_{n+1} \subset C_n(S) \]
@@ -52,7 +53,7 @@
 % §2. Simpliziale und singuläre Homologie
 
 \begin{defn}
-  Ein \emph{affines $n$-Simplex} ist die konvexe Hülle von $n+1$ affin unabhängigen Punkten $p_0, ..., p_{n+1} \in \R^N$. Die konvexe Hülle von einer Teilmenge dieser Eckpunkte wird \emph{Seite} genannt.\\
+  Ein \emph{affines $n$-Simplex} ist die konvexe Hülle von $n+1$ affin unabhängigen Punkten $p_0, \ldots, p_{n+1} \in \R^N$. Die konvexe Hülle von einer Teilmenge dieser Eckpunkte wird \emph{Seite} genannt.\\
   Das \emph{Standard-$n$-Simplex} $\Delta_n$ ist das von den $n+1$ Standard-Basisvektoren im $\R^{n+1}$ aufgespannte Simplex.
 \end{defn}
 
@@ -73,7 +74,7 @@
 \end{defn}
 
 \begin{nota}
-  Ein $n$-Simplex mit Eckpunkten $v_0, ..., v_n$ in einem geordneten geom. Simplizialkomplex wird mit $\angles{v_0, ..., v_n}$ bezeichnet, falls $v_0 < v_1 < ... < v_n$.
+  Ein $n$-Simplex mit Eckpunkten $v_0, \ldots, v_n$ in einem geordneten geom. Simplizialkomplex wird mit $\angles{v_0, \ldots, v_n}$ bezeichnet, falls $v_0 < v_1 < \ldots < v_n$.
 \end{nota}
 
 \begin{nota}
@@ -92,8 +93,8 @@
 \end{bem}
 
 \begin{defn}
-  Der Rand eines orientierten $n$-Simplex $\angles{v_0, ..., v_n} \in \Simpl$ ist
-  \[ \delta \angles{v_0, ..., v_n} \coloneqq \sum_{i=0}^n (-1)^i \angles{v_0, ..., \hat{v_i}, ..., v_n}. \]
+  Der Rand eines orientierten $n$-Simplex $\angles{v_0, \ldots, v_n} \in \Simpl$ ist
+  \[ \delta \angles{v_0, \ldots, v_n} \coloneqq \sum_{i=0}^n (-1)^i \angles{v_0, \ldots, \hat{v_i}, \ldots, v_n}. \]
   Durch lineare Fortsetzung erhalten wir einen Gruppenhomo $\partial_n : C_n(\Simpl) \to C_{n-1}(\Simpl)$.
 \end{defn}
 
@@ -122,7 +123,7 @@
   Ein \emph{singuläres $n$-Simplex} in einem topologischen Raum $X$ ist eine stetige Abbildung $\sigma : \Delta^n \to X$. Wir bezeichnen mit $\Delta_n(X)$ die Menge der singulären $n$-Simplizes in $X$ und mit $C_n(X)$ die freie abelsche Gruppe über $\Delta_n(X)$. Wir definieren
   \[
     \partial_n : C_n(X) \to C_{n-1}(X), \quad
-    \sigma \mapsto \sum_{i=0}^n (-1)^i \sigma_{\angles{e_o,...,\hat{e_i},...,e_n}}.
+    \sigma \mapsto \sum_{i=0}^n (-1)^i \sigma_{\angles{e_o,\ldots,\hat{e_i},\ldots,e_n}}.
   \]
   Analog zu oben gilt $\partial_{n-1} \circ \partial_n = 0$, man erhält also einen Komplex $\CC{C}(X)$ der singulären Ketten in $X$. Dessen Homologiegruppen heißen \emph{singuläre Homologiegruppen} $H_n(X)$.
 \end{defn}
@@ -140,7 +141,7 @@
 \end{defn}
 
 \begin{kor}
-  Homöomorphe Räume haben isomorphe singuläre Homologiegruppen.
+  Homöomorphe Räume besitzen isomorphe singuläre Homologiegruppen.
 \end{kor}
 
 % Vorlesung vom 23.10.2014
@@ -172,7 +173,7 @@
   \begin{itemize}
     \item Seien $f, g : X \to Y$ homotope Abbildungen. Dann gilt
     \[ f_* = g_* : H_*(X) \to H_*(Y). \]
-    \item Homotopieäquivalente Räume haben isomorphe Homologiegruppen.
+    \item Homotopieäquivalente Räume besitzen isomorphe Homologiegruppen.
   \end{itemize}
 \end{kor}
 
@@ -235,25 +236,25 @@
 % 3.2
 \begin{prop}
   Die ex. Sequenz $0 \to \CC{A} \to \CC{B} \to \CC{C} \to 0$ induziert in jedem Grad einen sogenannten \emph{verbindenden Homomorphismus} $\partial_n : H_n(C) \to H_{n-1}(A)$, sodass die Sequenz
-  \[ ... \to H_n(A) \to H_n(B) \to H_n(C) \xrightarrow{\partial_n} H_{n-1}(A) \to H_{n-1}(B) \to ... \]
+  \[ \ldots \to H_n(A) \to H_n(B) \to H_n(C) \xrightarrow{\partial_n} H_{n-1}(A) \to H_{n-1}(B) \to \ldots \]
   exakt ist. Diese Sequenz wird \emph{lange exakte Sequenz} genannt.
 \end{prop}
 
 \begin{kor}
   Sei $(X, A)$ ein Raumpaar. Dann gibt es Homomorphis- men $\partial_n : H_n(X, A) \to H_{n-1}(A)$, sodass die Sequenz
   \[
-    ... \to H_n(A) \to H_n(X) \to H_n(X, A) \xrightarrow{\partial_n} H_{n-1}(A) \to ...
+    \ldots \to H_n(A) \to H_n(X) \to H_n(X, A) \xrightarrow{\partial_n} H_{n-1}(A) \to \ldots
     \quad \text{exakt ist.}
   \]
   Für ein Raumtripel $(X, A, U)$ erhält man eine \leS{}
   \[
-    ... \to H_n(A, U) \to H_n(X, U) \to H_n(X, A) \xrightarrow{\partial_n} H_{n-1}(A, U) \to ...
+    \ldots \to H_n(A, U) \to H_n(X, U) \to H_n(X, A) \xrightarrow{\partial_n} H_{n-1}(A, U) \to \ldots
   \]
 \end{kor}
 
 \begin{defn}
   Die \emph{reduzierte Homologie} $\RH_*(X)$ eines topologischen Raumes $X$ ist die Homologie des Kettenkomplexes
-  \[ ... \to C_2(X) \xrightarrow{\partial_n} C_1(X) \xrightarrow{\partial_1} C_0(X) \xrightarrow{\epsilon} \to \Z \to 0, \]
+  \[ \ldots \to C_2(X) \xrightarrow{\partial_n} C_1(X) \xrightarrow{\partial_1} C_0(X) \xrightarrow{\epsilon} \to \Z \to 0, \]
   wobei $\epsilon$ der sogenannte \emph{Augmentierungshomomorphismus} ist:
   \[ \epsilon : \sum_{\sigma \in \Delta_0(X)} \lambda_\sigma \cdot \sigma \mapsto \sum_{\sigma} \lambda_\sigma \in \Z. \]
 \end{defn}
@@ -265,7 +266,7 @@
     \item Ist $X \not= \emptyset$, so ist $H_n(X) \cong \RH_n(X) \oplus \Z$, jedoch nicht kanonisch.
     \item Ist $X$ kontrahierbar, so gilt $\RH_n(X) = 0$ für alle $n \in \N$.
     \item Ist $(X, A)$ ein Raumpaar, so gibt es eine lange exakte Sequenz
-    \[ ... \to \RH_0(A) \to \RH_0(X) \to \RH_0(X,A) \to \RH_{-1}(A) \to \RH_{-1}(X) \to 0 \]
+    \[ \ldots \to \RH_0(A) \to \RH_0(X) \to \RH_0(X,A) \to \RH_{-1}(A) \to \RH_{-1}(X) \to 0 \]
   \end{itemize}
 \end{prop}
 
@@ -297,7 +298,7 @@
   \begin{itemize}
     \item \emph{Homotopieinvarianz}: Seien $f, g : (X, A) \to (B, Y)$ homotop als Abbildungen von Raumpaaren. Dann gilt $f_* = g_* : H_n(X, A) \to H_n(Y, B)$.
     \item \emph{Lange exakte Sequenz}: Die Inklusionen $A \hookrightarrow X$ und $(X, \emptyset) \hookrightarrow (X, A)$ induzieren eine l.e.S.
-    \[ ... \to H_n(A) \to H_n(X) \to H_n(X, A) \xrightarrow{\partial_n} H_{n-1}(A) \to ... \]
+    \[ \ldots \to H_n(A) \to H_n(X) \to H_n(X, A) \xrightarrow{\partial_n} H_{n-1}(A) \to \ldots \]
     \item \emph{Ausschneidung}: Ist $U \subset A$ mit $\clos{A} \subset \inte(A)$, dann induziert die Inklusion $(X - U, A - U) \hookrightarrow (X, A)$ Isomorphismen
     \[ H_n(X-U, A-U) \to H_n(X,A). \]
   \end{itemize}
@@ -385,8 +386,8 @@
 
 % 4.9
 \begin{prop}
-  Sei $f : S^n \to S^n$ stetig und $y {\in} S^n$ mit $f^{-1}(y) = \{ x_1, ..., x_n \}$.\\
-  Dann ist $\deg f|x_i$ definiert für $i = 1, ..., n$ und es gilt
+  Sei $f : S^n \to S^n$ stetig und $y {\in} S^n$ mit $f^{-1}(y) = \{ x_1, \ldots, x_n \}$.\\
+  Dann ist $\deg f|x_i$ definiert für $i = 1, \ldots, n$ und es gilt
   \[ \deg f = \sum_{i=1}^n \deg f|x_i. \]
 \end{prop}
 
@@ -398,7 +399,7 @@
 % 4.11
 \begin{prop}
   Seien $A, B \subset X$ mit $X = A \cup B$. Angenommen, es gibt Umgebungen $U$ von $A$ und $V$ von $B$, sodass die Inklusionen $A \hookrightarrow U$, $B \hookrightarrow V$ und $A \cap B \hookrightarrow U \cap V$ Homotopieäquivalenzen sind. Dann existiert die \emph{Mayer-Vietoris-Sequenz}
-  \[ ... \to H_*(A \cap B) \to H_*(A) \oplus H_*(B) \to H_*(X, A \cap B) \to H_{*-1}(A \cap B) \to ... \]
+  \[ \nldots \to H_*(A \cap B) \to H_*(A) \oplus H_*(B) \to H_*(X, A \cap B) \to H_{*-1}(A \cap B) \to \nldots \]
 \end{prop}
 
 % 4.12
@@ -457,12 +458,12 @@
 \end{defn}
 
 \begin{defn}
-  Die \emph{relative singuläre Homologie} $H_n^\Delta(X, A)$ des $\Delta$-Komplexes $X$ bzgl. eines Teilkomplexes $A$ ist die Homologie des Quotientenkomplexes $C_n^\Delta(X)/C_n^\Delta(A)$.
+  Die \emph{relative Homologie} $H_n^\Delta(X, A)$ des $\Delta$-Komplexes $X$ bezüglich eines Teilkomplexes $A$ ist die Homologie des Quotientenkomplexes $C_n^\Delta(X)/C_n^\Delta(A)$.
 \end{defn}
 
 % 5.1
 \begin{satz}
-  Sei $X$ ein $\Delta$-Komplex und $A \subset X$ ein Unterkomplex. Dann induziert die Inklusion $C_*^\Delta(X) \hookrightarrow C_*(X)$ Isomorphismen von Homologiegruppen.
+  Sei $X$ ein $\Delta$-Komplex und $A \subset X$ ein Unterkomplex. Dann induziert die Inklusion $C_*^\Delta(X, A) \hookrightarrow C_*(X, A)$ Isomorphismen von Homologiegruppen.
 \end{satz}
 
 % 5.2
@@ -519,7 +520,7 @@
 \begin{defn}
   Ein \emph{CW-Komplex} ist ein topologischer Raum $X$ mit einer Folge von abgeschlossenen Unterräumen
   \[
-    X^0 \subset X^1 \subset X^2 \subset ... \subset X, \quad
+    X^0 \subset X^1 \subset X^2 \subset \ldots \subset X, \quad
     \bigcup_{i \geq 0} X^i = X,
   \]
   genannt \emph{$i$-Skelette} $X^i$, sodass gilt:
@@ -656,7 +657,7 @@
   Der singuläre Kettenkomplex mit Koeffizienten in einer abelschen Gruppe $G$ eines topologischen Raumes $X$ ist def. durch
   \[ C_n(X; G) \coloneqq \{ \text{ formale endl. Linearkomb. } \sum_{\sigma \in \Delta_n} \lambda_\sigma \cdot \sigma \text{ mit $\lambda_\sigma \in G$} \} \]
   Die Randabbildung ist ganz wie beim gewöhnlichen Kettenkomplex ($G = \Z$) definiert. Die Homologie dieses Komplexes heißt \emph{singuläre Homologie mit Koeffizienten in $G$}. Sie ist eine gewöhnliche Homologietheorie im Sinne von Eilenberg und Steenrod. Man erhält \emph{reduzierte Homologie mit Koeffizienten in $G$}, indem man die Komplex von dem mit dem Augmentierungshomomorphismus
-  \[ \epsilon : C_0(X; G) \to G, \quad \sum_{\sigma \in \Delta_0(X)} \lambda_\sigma \cdot \sigma \mapsto \!\!\! \sum_{\sigma \in \Delta_0(X)} \lambda_\sigma \]
+  \[ \epsilon : C_0(X; G) \to G, \quad \sum_{\sigma \in \Delta_0(X)} \nspace{4} \lambda_\sigma \cdot \sigma \mapsto \!\!\! \sum_{\sigma \in \Delta_0(X)} \lambda_\sigma \]
   erweiterten Kettenkomplex mit Koeffizienten in $G$ nimmt.
 \end{defn}
 
@@ -684,7 +685,7 @@
   Ist nun $k=2$ so gibt es eine kurze exakte Sequenz
   \[ 0 \to C_*(X; \ZM{2}) \xrightarrow{\tau_*} C_*(\tilde{X}, \ZM{2}) \xrightarrow{p_*} C_*(X, \ZM{2}) \to 0. \]
   Die davon induzierte lange exakte Sequenz
-  \[ ... \to H_*(X; \ZM{2}) \xrightarrow{\tau_*} H_*(\tilde{X}, \ZM{2}) \xrightarrow{p_*} H_*(X, \ZM{2}) \to H_{*-1}(X; \ZM{2}) \to ... \]
+  \[ \ldots \to H_*(X; \ZM{2}) \xrightarrow{\tau_*} H_*(\tilde{X}, \ZM{2}) \xrightarrow{p_*} H_*(X, \ZM{2}) \to H_{*-1}(X; \ZM{2}) \to \ldots \]
   heißt \emph{Transfersequenz}.
 \end{defn}
 
@@ -707,7 +708,7 @@
 
 % 6.4
 \begin{satz}[Ham-Sandwich-Theorem]
-  Seien $K_1, ..., K_n \subset \R^n$ Lebesgue- messbar und beschränkt. Dann gibt es eine Hyperebene $H \subset \R^n$, die jeden Teilraum genau halbiert.
+  Seien $K_1, \ldots, K_n \subset \R^n$ Lebesgue- messbar und beschränkt. Dann gibt es eine Hyperebene $H \subset \R^n$, die jeden Teilraum genau halbiert.
 \end{satz}
 
 % §7. Euler-Charakteristik und Lefschetzer Fixpunktsatz
@@ -730,7 +731,7 @@
 
 \begin{bsp}
   Die \emph{orientierte Fläche vom Geschlecht $g$}, $\Sigma_g$, entsteht durch Verkleben der Randsegmente
-  \[ \alpha_1, \beta_1, \alpha_1^{-1}, \beta_1^{-1}, ...., \alpha_g, \beta_g, \alpha_g^{-1}, \beta_g^{-1} \]
+  \[ \alpha_1, \beta_1, \alpha_1^{-1}, \beta_1^{-1}, \ldots., \alpha_g, \beta_g, \alpha_g^{-1}, \beta_g^{-1} \]
   eines $4g$-Eckes. Es gilt $\chi(\Sigma_g) = 2 - 2g$.
 \end{bsp}
 
@@ -994,7 +995,7 @@
   durch Anwenden von $\Hom(\blank, G)$ eine kurze exakte Sequenz
   \[ 0 \to C^n(X, A; G) \to C^n(X; G) \to C^n(A; G) \to 0. \]
   Daraus erhält man wiederum eine lange exakte Sequenz
-  \[ ... \to H^*(X, A; G) \to H^*(X; G) \to H^*(A; G) \to H^{*+1}(X, A; G) \to ... \]
+  \[ \nldots \to H^*(X, A; G) \to H^*(X; G) \to H^*(A; G) \to H^{*+1}(X, A; G) \to \nldots \]
 \end{bem}
 
 % 10.3
@@ -1016,7 +1017,7 @@
 \begin{defn}
   Die \emph{reduzierte Kohomologie} $\RH^n(X; G)$ mit Koeff. in $G$ eines topol. Raumes $X$ ist die Homologie des Kokettenkomplexes, der durch Anwenden von $\Hom(\blank, G)$ aus dem augmentierten Komplex
   \[
-    ... \to C_2(X) \to C_1(X) \to C_0(X) \to \Z \to 0
+    \ldots \to C_2(X) \to C_1(X) \to C_0(X) \to \Z \to 0
     \quad \text{entsteht.}
   \]
 \end{defn}
@@ -1032,8 +1033,8 @@
 \begin{satz}
   Seien $A, B \subset X$ mit $\inte(A) \cup \inte(B) = X$. Dann gibt es in Kohomologie eine Mayer-Vietoris-Sequenz
   \begin{align*}
-    ... & \to H^*(X; G) \to H^*(A; G) \oplus H^*(B; G) \to H^*(A \cap B; G) \to \\
-    & \to H^{*+1}(X; G) \to ...
+    \ldots & \to H^*(X; G) \to H^*(A; G) \oplus H^*(B; G) \to H^*(A \cap B; G) \to \\
+    & \to H^{*+1}(X; G) \to \ldots
   \end{align*}
 \end{satz}
 
@@ -1088,7 +1089,7 @@
 \begin{defn}
   Sei $H$ eine ab. Gruppe. Eine \emph{freie Auflösung} von $H$ ist ein azyklischer Kettenkomplex
   \[
-    ... \to F_3 \to F_2 \to F_1 \to F_1 \to H \to 0
+    \ldots \to F_3 \to F_2 \to F_1 \to F_1 \to H \to 0
     \quad \text{(kurz: $F_* \to H$),}
   \]
   bestehend aus freien abelschen Gruppen $F_i$, $i \geq 0$.
@@ -1208,7 +1209,7 @@
 
 \begin{defn}
   Sei $R$ ein kommutativer Ring mit Eins und $X$ ein topol. Raum. Das \emph{Cup-Produkt} $\phi \cup \psi \in H^{k+l}(X; R)$ von Koketten $\phi \in H^k(X; R)$ und $\psi \in H^l(X; R)$ ist definiert durch
-  \[ (\phi \cup \psi)(\sigma) \coloneqq \phi(\sigma|_\angles{v_0, ..., v_k}) \cdot \psi(\sigma|_\angles{v_k, ..., v_{k+l}}). \]
+  \[ (\phi \cup \psi)(\sigma) \coloneqq \phi(\sigma|_\angles{v_0, \ldots, v_k}) \cdot \psi(\sigma|_\angles{v_k, \ldots, v_{k+l}}). \]
 \end{defn}
 
 % 12.1
@@ -1279,7 +1280,7 @@
   Sei $X$ ein topol. Raum und $R$ ein kommutativer Ring. Für $k \geq l$ ist das \emph{Cap-Produkt} die $R$-bilineare Abbildung
   \begin{align*}
     \cap : C_k(X; R) \times C^l(X; R) & \to C_{k-l}(X; R) \\
-    (\sigma, \phi) & \mapsto \phi(\sigma_\angles{v_0, ..., v_l}) \cdot \sigma_\angles{v_l, ..., v_{l+k}}.
+    (\sigma, \phi) & \mapsto \phi(\sigma_\angles{v_0, \ldots, v_l}) \cdot \sigma_\angles{v_l, \ldots, v_{l+k}}.
   \end{align*}
   Diese induziert in (Ko-)Homologie eine Abbildung
   \[ \cap : H_k(X; R) \otimes H^l(X; R) \to H_k(X; R). \]
@@ -1290,7 +1291,7 @@
 \begin{defn}
   Das Tensorprodukt zweier Kettenkomplexe $(C_*, \partial^C_*)$ und $(D_*, \partial^D_*)$ ist definiert durch
   \begin{align*}
-    (C \otimes D)_n & \coloneqq \bigoplus_{k+l=n} C_k \otimes D_l \\
+    (C \otimes D)_n & \coloneqq \bigoplus_{k+l=n} C_k \otimes D_l, \\
     \delta^{C \otimes C'}_n & \coloneqq \bigoplus_{k+l=n} (\partial^C_k \otimes \id_{D_l} + (-1)^k \id_{C_k} \oplus \partial^D_l)
   \end{align*}
 \end{defn}
