@@ -20,6 +20,7 @@
 \DeclareMathOperator{\codom}{codom} % Codomain
 \newcommand{\op}{\mathrm{op}} % Duale Kategorie
 \DeclareMathOperator{\Deck}{Deck} % Gruppe der Decktransformationen
+\newcommand{\inlineitem}[1]{\textbullet \enspace #1} % List-Item im Fließtext
 
 % Kleinere Klammern
 \delimiterfactor=701
@@ -31,13 +32,13 @@
 
 % Vorlesung vom 6.4.2014
 
+% Kapitel 1: Metrische Räume und topologische Räume
+
 \begin{defn}
-  Ein \emph{metrischer Raum} $(X, d)$ besteht aus einer Menge $X$ und einer Abbildung $d : X \times X \to \R_{\geq 0}$, sodass f.\,a. $x,y,z \in X$ gilt:
-  \begin{itemize}
-    \miniitem{0.44 \linewidth}{$d(x, y) = 0 \iff x = y$}
-    \miniitem{0.54 \linewidth}{$d(x, y) = d(y, x)$ \quad (Symmetrie)}
-    \item $d(x, z) \leq d(x, y) + d(y, z)$ \pright{$\triangle$-Ungleichung}
-  \end{itemize}
+  Ein \emph{metrischer Raum} $(X, d)$ besteht aus einer Menge $X$ und einer Abbildung $d : X \times X \to \R_{\geq 0}$, sodass f.\,a. $x,y,z \in X$ gilt: \\
+  \inlineitem{$d(x, y) = 0 \iff x = y$} \qquad
+  \inlineitem{$d(x, y) = d(y, x)$} \pright{Symmetrie} \\
+  \inlineitem{$d(x, z) \leq d(x, y) + d(y, z)$} \pright{$\triangle$-Ungleichung}
 \end{defn}
 
 % Ausgelassen: Beispiel $\R^n$
@@ -66,18 +67,12 @@
 \end{prop}
 
 \begin{defn}
-  Ein \emph{topologischer Raum} $(X, \Tau)$ besteht aus einer Menge $X$ und einer Menge $\tau \subset \mathcal{P}(X)$ mit den Eigenschaften
-  \begin{itemize}
-    \miniitem{0.16 \linewidth}{$\emptyset \in \Tau$}
-    \miniitem{0.45 \linewidth}{$\fa{U, V \in \Tau} U \cap V \in \Tau$}
-    \miniitem{0.36 \linewidth}{$\fa{S \subset \Tau} \bigcap_{\mathclap{U \in S}} U \in \Tau$}
-  \end{itemize}
+  Ein \emph{topologischer Raum} $(X, \Tau)$ besteht aus einer Menge $X$ und einer Menge $\tau \subset \mathcal{P}(X)$ mit den Eigenschaften \\
+  \inlineitem{$\emptyset \in \Tau$,} \quad
+  \inlineitem{$\fa{U, V \in \Tau} U \cap V \in \Tau$,} \quad
+  \inlineitem{$\fa{S \subset \Tau} \bigcap_{\mathclap{U \in S}} U \in \Tau$} \\
   Die Elemente von $\Tau$ werden \emph{offene Teilmengen} von $X$ genannt. Eine Teilmenge $A \subset X$ heißt \emph{abgeschlossen}, falls $X \setminus A$ offen ist.
 \end{defn}
-
-\begin{nota}
-  Seien im Folgenden $X$ und $Y$ topologische Räume.
-\end{nota}
 
 \begin{bsp}
   Die \emph{diskrete Topologie} auf einer Menge $X$ ist $\Tau = \mathcal{P}(X)$.
@@ -149,10 +144,12 @@
 % Bemerkung: Die Klumpentopologie ist die gröbste und die diskrete Topologie die feinste Topologie auf $X$.
 
 \begin{defn}
-  Eine Menge $\mathcal{B} \subset \Tau$ offener Teilmengen eines topologischen Raumes heißt
+  Eine Menge $\mathcal{B} \subset \Tau$ offener Teilmengen eines Raumes heißt
   \begin{itemize}
     \item \emph{Basis} der Topologie, falls jede offene Menge $U \in \Tau$ Vereinigung von Mengen aus $\mathcal{B}$ ist.
-    \item \emph{Subbasis} der Topologie, falls jede offene Menge $U \in \Tau$ Vereinigung von Mengen ist, von denen jede Schnitt endlich vieler Mengen aus $\mathcal{B}$ ist.
+    \item \emph{Subbasis} der Topologie, falls jede offene Menge $U \in \Tau$ Vereinigung
+    von endlichen Schnitten von Mengen aus $\mathcal{B}$ ist.
+    %von Mengen ist, von denen jede Schnitt endlich vieler Mengen aus $\mathcal{B}$ ist.
   \end{itemize}
 \end{defn}
 
@@ -164,7 +161,8 @@
 \end{bspe}
 
 \begin{prop}
-  Jede Teilmenge $\mathcal{B} \subset \mathcal{P}(X)$ ist Subbasis von genau einer Topologie $\Tau$ von $X$.
+  %Jede Teilmenge $\mathcal{B} \subset \mathcal{P}(X)$ ist Subbasis von genau einer Topologie $\Tau$ auf $X$.
+  Jedes $\mathcal{B} \!\subset\! \mathcal{P}(X)$ ist Subbasis genau einer Topologie $\Tau$ auf $X$.
 \end{prop}
 
 \begin{defn}
@@ -183,20 +181,22 @@
 \begin{prop}
   \begin{itemize}
     \item Die Projektionen $\pi_X : X \times Y \to X$ und $\pi_Y : X \times Y \to Y$ sind stetig bzgl. der Produkttopologie.
-    \item Ist $\Tau$ eine echt gröbere Topologie auf $X \times Y$ als die Produkttopologie, so sind die Projektionen $\pi_X$ und $\pi_Y$ nicht beide stetig.
+    \item Ist $\Tau$ eine echt gröbere Topologie auf $X \times Y$ als die Produkt- topologie, so sind die Projektionen $\pi_X$ und $\pi_Y$ nicht beide stetig.
   \end{itemize}
 \end{prop}
 
 % Bemerkung: Die Produkttopologie ist somit die gröbste Topologie auf $X \times Y$, sodass beide Projektionen stetig sind.
 
 \begin{defn}
-  Seien $(X, \Tau_X)$ und $(Y, \Tau_Y)$ topologische Räume. Dann erzeugt $\Tau_X \cup \Tau_Y$ die \emph{Summentopologie} auf $X \cup Y$.
+  Seien $(X, \Tau_X)$ und $(Y, \Tau_Y)$ topologische Räume. \\
+  Dann erzeugt $\Tau_X \cup \Tau_Y$ die \emph{Summentopologie} auf $X \cup Y$.
 \end{defn}
 
 \begin{bem}
   Sie ist die feinste Topologie auf $X \cup Y$, sodass die beiden Inklusionen $i_X : X \hookrightarrow X \cup Y$ und $i_Y : Y \hookrightarrow X \cup Y$ stetig sind.
 \end{bem}
 
+\begin{samepage}
 \begin{prop}
   Seien $X, Y, Z$ topologische Räume.
   \begin{itemize}
@@ -204,9 +204,10 @@
     \item Eine Abb. $g : Z \to X \cup Y$ ist genau dann stetig, wenn die beiden Kompositionen $\pi_X \circ g : Z \to X$ und $\pi_Y \circ g : Z \to Y$ stetig sind.
   \end{itemize}
 \end{prop}
+\end{samepage}
 
 \begin{defn}
-  Sei $X$ ein topologischer Raum und $A \subset X$. Dann ist das \emph{Innere} von $A$ (notiert $\inte(A)$) die Vereinigung aller in $A$ enthaltenen offenen Mengen.
+  Sei $X$ ein topol. Raum. Das \emph{Innere} $\inte(A)$ von $A \subset X$ ist die Vereinigung aller offenen Mengen in $X$, die in $A$ enthaltenen sind.
 \end{defn}
 
 \begin{bem}
@@ -231,6 +232,8 @@
   Ein Punkt $x \in X$ liegt genau dann in $\overline{A}$, falls jede Umgebung von $x$ einen Punkt aus $A$ enthält.
 \end{prop}
 
+\begin{samepage}
+
 \begin{defn}
   Der \emph{Rand} einer Menge $A \subset X$ ist $\partial A \coloneqq \overline{A} \setminus \inte(A)$.
 \end{defn}
@@ -241,24 +244,28 @@
 
 % Vorlesung vom 14.4.2014
 
-% Thema: Zusammenhang und Wegzusammenhang
+% Kapitel 2: Zusammenhang und Wegzusammenhang
+\section{(Weg-)Zusammenhang}
+
+\end{samepage}
 
 \begin{defn}
-  Ein topologischer Raum $X$ heißt \emph{wegweise zusammen- hängend}, falls es für je zwei Punkte $x, y \in X$ eine stetige Abbildung $\gamma : \I \to X$ mit $\gamma(0) = x$ und $\gamma(1) = y$ gibt.
+  Ein topol. Raum $X$ heißt \emph{wegweise zusammenhängend}, falls
+  $\fa{x, y \in X} \ex{\gamma : \I \to X \text{ stetig}} \gamma(0) = x \wedge \gamma(1) = y$.
+  %es für je zwei Punkte $x, y \in X$ eine stetige Abbildung $\gamma : \I \to X$ mit $\gamma(0) = x$ und $\gamma(1) = y$ gibt.
 \end{defn}
 
 \begin{bspe}
-  \begin{itemize}
-    \item $\R^n$ ist wegzusammenhängend.
-    \item $(\{ p, q \}, \{ \emptyset, \{ p \}, \{ p, q \} \})$ ist wegzusammenhängend!
-    \item $\ointerval{-\infty}{0} \cup \ointerval{0}{\infty} \subset \R$ ist nicht wegzusammenhängend.
-  \end{itemize}
+  Wegzusammenhängend: \enspace
+  \inlineitem{$\R^n$} \enspace
+  \inlineitem{$(\{ p, q \}, \{ \emptyset, \{ p \}, \{ p, q \} \})$} \\
+  Nicht wegzusammenhängend: \enspace
+  \inlineitem{$\ointerval{-\infty}{0} \cup \ointerval{0}{\infty} \subset \R$}
 \end{bspe}
 
 \begin{defn}
-  Die Äquivalenzklassen von
+  \emph{Wegzshgskomponenten} sind die Äq'klassen von
   \[ x \sim y \coloniff x, y \text{ lassen sich durch einen Weg verbinden}. \]
-  heißen \emph{Wegzusammenhangskomponenten}.
 \end{defn}
 
 \begin{prop}
@@ -276,29 +283,26 @@
 \begin{prop}
   Sei $X$ ein topologischer Raum. Es sind äquivalent:
   \begin{itemize}
-    \item $X$ ist zusammenhängend.
+    \miniitem{0.25 \linewidth}{$X$ ist zshgd.}
+    \miniitem{0.73 \linewidth}{Jede stetige Abb. $f : X \to \{ 0, 1 \}$ ist konstant.}
+    %in den diskreten Raum mit zwei Elementen ist konstant.
     \item Für jede offene und abgeschlossene Menge $A \subset X$ gilt: $A \in \{ X, \emptyset \}$.
-    \item Jede stetige Abbildung $f : X \to \{ 0, 1 \}$ in den diskreten Raum mit zwei Elementen ist konstant.
   \end{itemize}
 \end{prop}
 
 \begin{prop}
   \begin{itemize}
-    \item Sei $f : X \to Y$ stetig und $X$ zusammenhängend, dann ist auch $f(X)$ zusammenhängend.
-    \item Sind $A, B$ zusammenhängende Teilmengen eines topologischen Raumes $X$ und gilt $A \cap B \not= \emptyset$, dann ist auch $A \cup B$ zusammenhängend.
+    \item Ist $f : X \to Y$ stetig und $X$ zshgd, dann auch $f(X)$.
+    \item Sind $A, B$ zusammenhängende Teilmengen eines topologischen Raumes $X$ und gilt $A \cap B \not= \emptyset$, dann ist auch $A \cup B$ zshgd.
   \end{itemize}
 \end{prop}
 
-\begin{kor}
-  Folgende Relation ist eine Äquivalenzrelation auf $X$:
+\begin{defn}
+  \emph{Komponenten} von $X$ sind die Äq'klassen von
   \begin{align*}
     x \sim y \coloniff \, &\text{$x$ und $y$ liegen beide in einem zusammenhängenden}\\[-2pt]
     &\text{Unterraum von $X$.}
   \end{align*}
-\end{kor}
-
-\begin{defn}
-  Die Äquivalenzklassen dieser Relation heißen \emph{Komponenten}. % von $X$
 \end{defn}
 
 \begin{bsp}
@@ -317,6 +321,8 @@
   Sei $f : \I \to \R$ stetig. Gilt $f(0) < 0$ und $f(1) > 0$, so existiert ein $t \in \ointerval{0}{1}$ mit $f(t) = 0$.
 \end{prop}
 
+% Kapitel 3: Konvergenz
+\section{Konvergenz}
 % Vorlesung vom 16.4.2014
 
 \begin{defn}
@@ -324,18 +330,18 @@
 \end{defn}
 
 \begin{nota}
-  $x = \lim_{n \to \infty} x_n$
+  $x_n \xrightarrow{n \to \infty} x$
 \end{nota}
 
-\begin{acht}
-  Das "`="' ist nicht wörtlich zu verstehen!
-\end{acht}
+\begin{bem}
+  Die Notation $\!\lim_{n \to \infty} \! x_n = x$ ist nur in Hausdorffräumen zulässig!
+\end{bem}
 
 \begin{defn}
   Sei $f : X {\to} Y$ eine Abb. zw. topol. Räumen $X, Y$. Dann heißt $f$
   \begin{itemize}
     \item \emph{stetig in} $x \in X$, falls für jede Umgebung $V \subset Y$ von $f(x)$ das Urbild $f^{-1}(V) \subset X$ eine Umgebung von $x$ ist.
-    \item \emph{folgenstetig in} $x \in X$, falls für jede Folge $(x_n)_{n \in \N}$ in $X$ mit $\lim_{n\to\infty} x_n = x$ die Bildfolge $(f(x_n))$ in $Y$ gegen $f(x)$ konvergiert.
+    \item \emph{folgenstetig in} $x \in X$, falls für jede Folge $(x_n)_{n \in \N}$ in $X$ mit $x_n \to x$ für $n \to \infty$ die Bildfolge $(f(x_n))$ in $Y$ gegen $f(x)$ konv.
   \end{itemize}
 \end{defn}
 
@@ -419,6 +425,8 @@
   Sei $(x_\alpha)_{\alpha \in D}$ ein Netz in $X$. Ein Punkt $x \in X$ ist genau dann Häufungspunkt von $(x_\alpha)$, falls ein Unternetz von $(x_\alpha)$ gegen $x$ konv.
 \end{prop}
 
+% Kapitel 4: Vollständige metrische Räume
+
 \begin{defn}
   Eine Folge $(x_n)_{n \in \N}$ in einem metrischen Raum $(X, d)$ heißt \emph{Cauchy-Folge}, falls
   $\fa{\epsilon \!>\! 0} \ex{N \!\in\! \N} \fa{n, m \!\geq\! N} d(x_n, x_m) \!<\! \epsilon$.
@@ -483,6 +491,11 @@
   \[ d_p(f, g) \coloneqq \left( \Int{U}{}{\abs{f(x) - g(x)}^p}{x} \right)^{1/p}. \]
 \end{bsp}
 
+\begin{samepage}
+
+% Kapitel 5: Kompaktheit
+\section{Kompaktheit}
+
 \begin{defn}
   Es sei $X$ ein topologischer Raum. Eine \emph{offene Überdeckung} von $X$ ist eine Familie $(U_i)_{i \in I}$ offener Teilmengen mit $\bigcup_{i \in I} U_i = X$.
 \end{defn}
@@ -494,6 +507,8 @@
 \begin{defn}
   Eine Familie $\mathcal{C}$ von Teilmengen von $X$ hat die \emph{endliche Schnitteigenschaft}, falls der Schnitt je endlich vieler Mengen aus $\mathcal{C}$ nichtleer ist.
 \end{defn}
+
+\end{samepage}
 
 \begin{prop}
   Ein Raum $X$ ist genau dann kompakt, falls jede Familie $(C_i)_{i \in I}$ von abgeschlossenen Teilmengen von $X$, die die endliche Schnitteigenschaft besitzt, einen nichtleeren Schnitt hat. %, \dh{} $\bigcap_{i \in I} C_i \not= \emptyset$.
@@ -530,7 +545,7 @@
 \end{prop}
 
 \begin{satz}[\emph{Heine-Borel}]
-  Eine Teilmenge von $\R$ ist genau dann kompakt, wenn sie beschränkt und abgeschlossen ist.
+  Eine Teilmenge von $\R^n$ ist genau dann kompakt, wenn sie beschränkt und abgeschlossen ist.
 \end{satz}
 
 \begin{satz}
@@ -546,7 +561,7 @@
 \end{prop}
 
 \begin{defn}
-  Sei $(x_\alpha)_{\alpha \in D}$ ein Netz in einem topologischen Raum $X$ und $A \subset X$. Dann ist $(x_\alpha)_{\alpha \in D}$ \emph{schließlich} in $A$, falls es ein $\beta \in D$ gibt mit $x_\alpha \in A$ für alle $\alpha \geq \beta$.
+  Sei $(x_\alpha)_{\alpha \in D}$ ein Netz in einem topol. Raum $X$ und $A \subset X$. Dann ist $(x_\alpha)_{\alpha \in D}$ \emph{schließlich} in $A$, falls es ein $\beta \in D$ gibt mit $x_\alpha \in A$ für alle $\alpha \geq \beta$.
 \end{defn}
 
 % Vorlesung vom 5.5.2014
@@ -582,7 +597,85 @@
   Sei $(X_i)_{i \in I}$ eine Familie kompakter Räume. Dann ist das topologische Produkt $\prod_{i \in I} X_i$ ebenfalls kompakt.
 \end{satz}
 
+% Vorlesung vom 14.5.2014
+% vorgezogen: Kapitel 8: Kompaktifizierung
+
+\begin{defn}
+  Eine \emph{Kompaktifizierung} eines topol. Raumes $X$ ist ein kompakter topologischer Raum $Y$ zusammen mit einer topologischen Einbettung $f : X \to Y$, sodass $f(X)$ dicht in $Y$ liegt, \dh{} $\overline{f(X)} = Y$.
+\end{defn}
+
+\begin{defn}
+  Ein topologischer Raum $X$ heißt \emph{lokalkompakt}, falls jeder Punkt $x \in X$ eine kompakte Umgebung besitzt.
+\end{defn}
+
+\begin{bspe}
+  \begin{itemize}
+    \item Jeder diskrete topologische Raum ist lokalkompakt.
+    \item Ein normierter Vektorraum ist genau dann lokalkompakt, wenn er endlichdimensional ist.
+  \end{itemize}
+\end{bspe}
+
+\begin{defn}
+  Sei $X$ ein Hausdorffraum. Setze $X^+ \coloneqq X \sqcup \{ \infty \}$. Eine Menge $U \subset X^+$ heißt offen, wenn
+  \begin{itemize}
+    \item $U \subset X$ und $U$ ist offen in $X$ oder
+    \item $\infty \in U$ und $X \setminus U \subset X$ kompakt ist.
+  \end{itemize}
+  Dies definiert eine Topologie auf $X^+$, der sogenannten \emph{Einpunktkompaktifizierung} von $X$.
+\end{defn}
+
+\begin{bem}
+  \begin{itemize}
+    \item Ist $X$ lokalkompakt, dann ist $X^+$ Hausdorffsch.
+    \item Ist $X$ selbst kompakt, so trägt $X^+ = X \cup \{ \infty \}$ die Summentopol.
+  \end{itemize}
+\end{bem}
+
+\begin{prop}
+  Sei $X$ ein lokalkompakter Hausdorffraum, $Y$ ein kompakter Hausdorffraum, $p \in Y$ und $X \approx Y \setminus \{ p \}$. Dann gilt $X^+ \approx Y$.
+\end{prop}
+
+\begin{kor}
+  $S^n \approx \left(\R^n\right)^+$
+\end{kor}
+
+\begin{nota}
+  Ist $f : X \to Y$ stetig, so definieren wir
+  \[ f^+ : X^+ \to Y^+, \quad f^+|_X \coloneqq f, \quad f^+(\infty) \coloneqq \infty. \]
+\end{nota}
+
+\begin{bem}
+  $f^+$ ist i.\,A. nicht stetig, z.\,B. nicht für $f = i : \cointerval{0}{1} \to \I$.
+  %\[ f : \cointerval{0}{1} \to \I, \quad x \mapsto x. \]
+\end{bem}
+
+\begin{defn}
+  Eine Abbildung $f : X \to Y$ heißt \emph{eigentlich}, falls das Urbild jeder kompakten Menge in $Y$ unter $f$ kompakt in $X$ ist.
+\end{defn}
+
+\begin{prop}
+  Ist $f : X \to Y$ eine stetige Abbildung, so ist die induz. Abb. $f^+ : X^+ \to Y^+$ genau dann stetig, wenn $f$ eigentlich ist.
+\end{prop}
+
+% Vorlesung vom 19.5.2014
+
+\begin{defn}
+  Sei $X$ ein normaler Hausdorffraum. Dann ist
+  \[
+    f : X \to \prod_{\phi \in \mathcal{C}} \I, \quad x \mapsto (\phi(x))_{\phi \in \mathcal{C}}
+    \qquad \text{mit } \mathcal{C} \coloneqq \mathcal{C}(X, \I)
+  \]
+  eine topologische Einbettung. Dann ist $\beta X \coloneqq \overline{f(X)}$ kompakt. Die Abb. $\beta : X \to \beta X$ heißt \emph{Stone-Čech-Kompaktifizierung} von $X$.
+\end{defn}
+
+\begin{prop}
+  Sei $X$ ein normaler Hausdorffraum und $K$ ein kompakter Hausdorffraum. Dann faktorisiert jede stetige Abbildung $\phi : X \to K$ in eindeutiger Weise über die Stone-Čech-Kompaktifizierung von $X$, \dh{} es gibt eine eindeutige Abb. $\pi : \beta X \to K$ mit $\pi \circ \beta = \phi$.
+\end{prop}
+
+\section{Miscellanea}
+
 % Vorlesung vom 7.5.2014
+% Kapitel 6: Anwendung/Ausblick: Normierte Räume und der Satz von Banach-Alaoglu
 
 \begin{lem}
   Alle Normen auf $\R^n$ sind äquivalent, \dh{} für je zwei Normen $\norm{\blank}_1$ und $\norm{\blank}_2$ existieren Zahlen $\lambda, \Lambda \in \R_{> 0}$ mit
@@ -617,20 +710,24 @@
 \end{satz}
 
 % Vorlesung vom 12.5.2014
+% Kapitel 7: Existenz reeller Funktionen, Metrisierbarkeit
 
 \begin{defn}
   Ein topol. Raum $X$ heißt \emph{normal}, falls gilt: Für alle disjunkte abgeschlossene Mengen $A, B \subset X$ gibt es offene Teilmengen $U_A, U_B \subset X$ mit $A \subset U_A$, $B \subset U_B$ und $U_A \cap U_B = \emptyset$.
 \end{defn}
 
 \begin{bspe}
-  \begin{itemize}
-    \item Metrische Räume sind normal.
-    \item Kompakte Hausdorffräume sind normal.
-  \end{itemize}
+  \inlineitem{Metrische Räume} \quad
+  \inlineitem{Kompakte Hausdorffräume}
+  %\begin{itemize}
+  %  \miniitem{0.3 \linewidth}{Metrische Räume}
+  %  \miniitem{0.4 \linewidth}{Kompakte Hausdorffräume}
+  %\end{itemize}
 \end{bspe}
 
-\begin{lem}[Urysohn]
-  Sei $X$ ein normaler topologischer Raum, $F, G \subset X$ disjunkte abgeschlossene Teilmengen. Dann gibt es eine stetige Funktion $f : X \to \I$, die auf $F$ konstant gleich $0$ und auf $G$ konstant gleich $1$ ist.
+\begin{lem}[\emph{Urysohn}]
+  Sei $X$ ein normaler topologischer Raum, $F, G \subset X$ disjunkte abgeschlossene Teilmengen. Dann gibt es eine stetige Funktion $f : X \to \I$ mit $f|_F \equiv 0$ und $f|_G \equiv 1$.
+  %die auf $F$ konstant gleich $0$ und auf $G$ konstant gleich $1$ ist.
 \end{lem}
 
 \begin{defn}
@@ -651,79 +748,27 @@
   \]
 \end{satz}
 
-% Vorlesung vom 14.5.2014
+% Kapitel 14: Der Jordansche Kurvensatz
 
-\begin{defn}
-  Eine \emph{Kompaktifizierung} eines topol. Raumes $X$ ist ein kompakter topologischer Raum $Y$ zusammen mit einer topologischen Einbettung $f : X \to Y$, sodass $f(X)$ dicht in $Y$ liegt, \dh{} $\overline{f(X)} = Y$.
-\end{defn}
+% vorgezogen: Teil der Vorlesung vom 23.6.2014
 
-\begin{defn}
-  Ein topologischer Raum $X$ heißt \emph{lokalkompakt}, falls jeder Punkt $x \in X$ eine kompakte Umgebung besitzt.
-\end{defn}
+\begin{satz}[\emph{Jordanscher Kurvensatz}]
+  Sei $f : S^1 \to \R^2$ stetig und injektiv und $C \coloneqq f(S^1) \subset \R^2$. Dann besteht $\R^2 \setminus C$ aus zwei Zshgskomponenten, einer beschränkten und einer unbeschränkten. \\
+  Der Rand beider Zusammenhangkomponenten ist jeweils $C$.
+\end{satz}
 
-\begin{bspe}
-  \begin{itemize}
-    \item Jeder diskrete topologische Raum ist lokalkompakt.
-    \item Ein normierter Vektorraum ist genau dann lokalkompakt, wenn er endlichdimensional ist.
-  \end{itemize}
-\end{bspe}
+% vorgezogen: Vorlesung vom 7.7.2014
 
-\begin{defn}
-  Sei $X$ ein Hausdorffraum. Setze $X^+ \coloneqq X \sqcup \{ \infty \}$. Eine Menge $U \subset X^+$ heißt offen, wenn
-  \begin{itemize}
-    \item $U \subset X$ und $U$ ist offen in $X$ oder
-    \item $\infty \in U$ und $X \setminus U \subset X$ kompakt ist.
-  \end{itemize}
-  Dies definiert eine Topologie auf $X^+$, der sogenannten \emph{Einpunktkompaktifizierung} von $X$.
-\end{defn}
+\begin{satz}[\emph{Borsuk-Ulam}]
+  Sei $f : S^n \to \R^n$ stetig. Dann gibt es antipodale Punkte $x, -x$ mit $f(x) = f(-x)$.
+\end{satz}
 
-\begin{bem}
-  \begin{itemize}
-    \item Wenn $X$ lokalkompakt, dann ist $X^+$ Hausdorffsch.
-    \item Falls $X$ selbst kompakt ist, so trägt $X^+$ die Summentopologie von $X$ und $\{ \infty \}$.
-  \end{itemize}
-\end{bem}
+\begin{satz}[Ham-Sandwich-Theorem]
+  Seien $A_1, A_2, A_3 \in \R^3$ offen, beschränkt. Dann gibt es eine Ebene $E \subset \R^3$, die alle drei Teilmengen simultan halbiert.
+\end{satz}
 
-\begin{prop}
-  Sei $X$ ein lokalkompakter Hausdorffraum, $Y$ ein kompakter Hausdorffraum, $p \in Y$ und $X \approx Y \setminus \{ p \}$. Dann gilt $X^+ \approx Y$.
-\end{prop}
-
-\begin{kor}
-  $S^n \approx \left(\R^n\right)^+$
-\end{kor}
-
-\begin{nota}
-  Ist $f : X \to Y$ stetig, so definieren wir
-  \[ f^+ : X^+ \to Y^+, \quad f^+|_X \coloneqq f, \quad f^+(\infty) \coloneqq \infty. \]
-\end{nota}
-
-\begin{bem}
-  Die Abbildung $f^+$ ist nicht i.\,A. stetig, z.\,B. nicht für
-  \[ f : \cointerval{0}{1} \to \I, \quad x \mapsto x. \]
-\end{bem}
-
-\begin{defn}
-  Eine Abbildung $f : X \to Y$ heißt \emph{eigentlich}, falls das Urbild jeder kompakten Menge in $Y$ unter $f$ kompakt in $X$ ist.
-\end{defn}
-
-\begin{prop}
-  Ist $f : X \to Y$ eine stetige Abbildung, so ist die induz. Abb. $f^+ : X^+ \to Y^+$ genau dann stetig, wenn $f$ eigentlich ist.
-\end{prop}
-
-% Vorlesung vom 19.5.2014
-
-\begin{defn}
-  Sei $X$ ein normaler Hausdorffraum. Dann ist
-  \[
-    f : X \to \prod_{\phi \in \mathcal{C}} \I, \quad x \mapsto (\phi(x))_{\phi \in \mathcal{C}}
-    \qquad \text{mit } \mathcal{C} \coloneqq \mathcal{C}(X, \I)
-  \]
-  eine topologische Einbettung. Dann ist $\beta X \coloneqq \overline{f(X)}$ kompakt. Die Abb. $\beta : X \to \beta X$ heißt \emph{Stone-Čech-Kompaktifizierung} von $X$.
-\end{defn}
-
-\begin{prop}
-  Sei $X$ ein normaler Hausdorffraum und $K$ ein kompakter Hausdorffraum. Dann faktorisiert jede stetige Abbildung $\phi : X \to K$ in eindeutiger Weise über die Stone-Čech-Kompaktifizierung von $X$, \dh{} es gibt eine eindeutige Abb. $\pi : \beta X \to K$ mit $\pi \circ \beta = \phi$.
-\end{prop}
+% Kapitel 9: Quotientenräume (Verkleben von Räumen), Simplizialkomplexe
+\section{Quotientenräume}
 
 \begin{defn}
   Sei $X$ ein topologischer Raum, $Y$ eine Menge und $f : X \to Y$ surjektiv. Dann ist die \emph{Finaltopologie} auf $Y$ bzgl. $f$ die feinste Topologie, bezüglich der $f$ stetig ist, also
@@ -731,7 +776,9 @@
 \end{defn}
 
 \begin{defn}
-  Eine surjektive Abbildung $f : X \to Y$ zwischen topologischen Räumen heißt \emph{Identifizierung}, falls die Topologie auf $Y$ genau die Finaltopologie bzgl. $f$ ist.
+  Eine surj. Abb. $f \!:\! X \!\to\! Y$ zw. topologischen Räumen heißt \emph{Identifizierung}, falls
+  $Y$ die Finaltopologie bzgl. $f$ trägt.
+  %die Topologie auf $Y$ genau die Finaltopologie bzgl. $f$ ist.
 \end{defn}
 
 \begin{prop}
@@ -748,7 +795,10 @@
 \end{defn}
 
 \begin{bem}
-  Bei der Quotientenbildung bleiben erhalten: Kompaktheit, Zusammenhang, Wegzusammenhang.
+  Bei der Quotientenbildung bleiben erhalten: \\
+  \inlineitem{Kompaktheit,} \enspace
+  \inlineitem{Zusammenhang,} \enspace
+  \inlineitem{Wegzusammenhang.}
 \end{bem}
 
 \begin{acht}
@@ -813,6 +863,8 @@
   $C_f \coloneqq Z_f / (X \times \{ 1 \})$ heißt \emph{Abbildungskegel}.
 \end{defn}
 
+\section{Simplizialkomplexe}
+
 \begin{defn}
   Ein \emph{abstrakter Simplizialkomplex} ist ein Paar $(X, \Sigma)$ bestehend aus einer total geordneten Menge $X$ und einer Teilmengen $\Sigma \subset \mathcal{P}(X)$ (genannt Menge der \emph{abstrakten Simplizes}), sodass gilt:
   \begin{itemize}
@@ -857,7 +909,7 @@
 \begin{defn}
   Für einen abstrakten Simplizialkomplex $(X, \Sigma)$ heißt
   \[ \abs{\Sigma} \coloneqq T / {\sim} \coloneqq \left( \coprod_{\sigma \in \Sigma} \Delta_\sigma \right) / {\sim} \]
-  mit $\Delta_\sigma \coloneqq \Delta^{\dim \sigma} = \Delta^{\abs{\sigma} - 1}$ und der Äquivalenzrelation ${\sim}$, die für alle Simplizes $\tau \subseteq \sigma \in \Sigma$ und der durch die Totalordnung auf $X$ induzierten ordnungserhaltenden Abbildung $\phi : [ \dim \tau ] \to [ \dim \sigma ]$ alle Punkte $x \in \Delta_\tau$ mit $i_\phi(x) \in \Delta_{\sigma}$ identifiziert, \emph{geometrische Realisierung} von $\Sigma$.
+  mit $\Delta_\sigma \coloneqq \Delta^{\dim \sigma} = \Delta^{\abs{\sigma} - 1}$ und der Äq'relation ${\sim}$, die für alle Simplizes $\tau \subseteq \sigma \in \Sigma$ und der durch die Totalordnung auf $X$ ind. ordnungserhaltenden Abb. $\phi : [ \dim \tau ] \to [ \dim \sigma ]$ alle Punkte $x \in \Delta_\tau$ mit $i_\phi(x) \in \Delta_{\sigma}$ identifiziert, \emph{geom. Realisierung} von $\Sigma$.
 \end{defn}
 
 \begin{bem}
@@ -930,17 +982,24 @@
   Eine Teilmenge $T \subset \R^n$ heißt \emph{(geom.) Simplizialkomplex}, falls $T$ Vereinigung von affinen Simplizes $\sigma_i \subset \R^n$, $i \in I$ mit der folgenden Eigenschaft ist: Der Schnitt $\sigma_i \cap \sigma_j$ zweier dieser Simplizes ist entweder leer oder eine gemeinsame Seite von $\sigma_i$ und $\sigma_j$.
 \end{defn}
 
+\begin{samepage}
+
 \begin{bem}
   In diesem Fall ist $T$ homöomorph zur geometrischen Realisierung eines abstrakten Simplizialkomplexes.
 \end{bem}
 
+\section{Homotopie und Fundamentalgruppe}
+
 % Vorlesung vom 28.5.2014
+% Kapitel 10: Homotopie
 
 \begin{defn}
   Zwei stetige Abbildungen $f, g : X \to Y$ heißen zueinander \emph{homotop} (geschrieben $f \simeq g$), falls es eine stetige Abbildung
   \[ H : X \times \I \to Y \]
   mit $H(\blank, 0) = f$ und $H(\blank, 1) = g$ gibt.
 \end{defn}
+
+\end{samepage}
 
 % "`Stückelungslemma"'
 \begin{lem}
@@ -1010,6 +1069,7 @@
 \end{bsp}
 
 % Vorlesung vom 2.6.2014
+% Kapitel 11: Die Fundamentalgruppe
 
 \begin{defn}
   Zwei stetige Abbildungen $f, g : X \to Y$ heißen \emph{homotop relativ zu} $A \subset X$ (geschrieben $f \simeq g \rel A$), falls es eine Homotopie $H : X \times \I \to Y$ von $f$ nach $g$ gibt mit
@@ -1077,7 +1137,7 @@
 \end{bspe}
 
 \begin{defn}
-  Seien $(X, x_0)$ und $(Y, y_0)$ punktierte Räume. eine stetige Abbildung $f : X \to Y$ heißt \emph{basispunkterhaltend} oder \emph{punktiert}, falls $f(x_0) = y_0$.
+  Seien $(X, x_0)$ und $(Y, y_0)$ punktierte Räume. Eine stetige Abbildung $f : X \to Y$ heißt \emph{basispunkterhaltend} oder \emph{punktiert}, falls $f(x_0) = y_0$.
 \end{defn}
 
 \begin{defn}
@@ -1108,7 +1168,7 @@
 \end{bsp}
 
 \begin{prop}
-  Ist $X$ zusammenziehbar, so ist $X$ einfach zshgd.
+  Zusammenziehbare Räume sind einfach zusammenhängend.
 \end{prop}
 
 % Vorlesung vom 4.6.2014
@@ -1136,6 +1196,9 @@
 \end{defn}
 
 \begin{samepage}
+% Kapitel 12: Die Sprache der Kategorientheorie
+\section{Kategorientheorie}
+
 \begin{defn}
   Eine \emph{Kategorie} $\mathcal{C}$ besteht aus
   \begin{itemize}
@@ -1154,8 +1217,8 @@
 \end{samepage}
 
 \begin{bem}
-  Die Identitätsmorphismen sind eindeutig bestimmt, da
-  \[ \id_A = \id_A \circ \id'_A = \id'_A. \]
+  Die Identitätsmorphismen sind eindeutig bestimmt.
+  %\[ \id_A = \id_A \circ \id'_A = \id'_A. \]
 \end{bem}
 
 \begin{defn}
@@ -1317,6 +1380,8 @@
   Eine natürliche Transformation $\eta : F \to G$ ist genau dann ein natürlicher Isomorphismus, wenn alle Komponenten $(\eta_X : F(X) \to G(X))_{X \in \Ob \mathcal{C}}$ Isomorphismen sind.
 \end{lem}
 
+\begin{samepage}
+
 \begin{bsp}
   Sei $** \coloneqq * \circ * : \mathbf{Vect}_k \to \mathbf{Vect}_k$ der Bidualisierungsfunktor. Es gibt eine nat. Transformation $\eta : \Id_{\mathbf{Vect}_k} \to **$ gegeben durch
   \[ \eta_V(v \in V) \coloneqq (\phi \mapsto \phi(v)). \]
@@ -1325,7 +1390,9 @@
 
 % Ausgelassen: Beispiel Kategorienäquivalenz: Kategorie der lokalkompakten Hausdorffräume ist äquivalent zur Kategorie der punktierten kompakten Hausdorffräume mittels des Einpunktkompaktifizierungs-Funktors
 
-% Kapitel: Überlagerungen
+\section{Überlagerungen}
+
+% Kapitel 13: Überlagerungen
 
 \begin{defn}
   Seien $X, Y$ topologische Räume.
@@ -1341,6 +1408,8 @@
     \item Die Abbildung $p$ heißt \emph{Überlagerung}, falls jeder Punkt in $Y$ eine durch $p$ gleichmäßig überlagerte Umgebung besitzt.
   \end{itemize}
 \end{defn}
+
+\end{samepage}
 
 \begin{bsp}
   $\R \to S^1, \enspace t \mapsto e^{2 \pi it}$ ist eine Überlagerung.
@@ -1450,7 +1519,8 @@ Für $p : (X, x_0) \to (Y, y_0)$ eine universelle Überlagerung und $g = [\gamma
 % TODO: Hilfsdefinition: Transitive Gruppenwirkung
 
 \begin{prop}
-  Sei $p : X \to Y$ eine Überlagerung, $X$ wegzshgd und lokal wegzshgd und $G < \Deck(p)$ eine Untergruppe. Angenommen, für alle $y \in Y$ und $x_0, x_1 \in p^{-1}(y)$ existiert $g \in G$ mit $g(x_0) = x_1$. Dann gilt $G = \Deck(p)$.
+  Sei $p : X \to Y$ eine Überlagerung, $X$ wegzshgd und lokal wegzshgd und $G < \Deck(p)$ eine Untergruppe. Angenommen, für alle $y \in Y$ und $x_0, x_1 \in p^{-1}(y)$ existiert $g \in G$ mit $g(x_0) = x_1$. \\
+  Dann gilt $G = \Deck(p)$.
 \end{prop}
 
 \begin{defn}
@@ -1497,29 +1567,15 @@ Für $p : (X, x_0) \to (Y, y_0)$ eine universelle Überlagerung und $g = [\gamma
 \end{defn}
 
 \begin{bspe}
-  \begin{itemize}
-    \item Simplizialkomplexe und Mftn sind semilokal einfach zshgd.
-    \item Nicht semilokal einfach zshgd sind die Hawaiianischen Ohrringe.
-  \end{itemize}
+  Semilokal einfach zshgd: \enspace
+  \inlineitem{Simplizialkomplexe,} \enspace
+  \inlineitem{Mften} \\
+  Nicht semilokal einfach zshgd: \enspace
+  \inlineitem{Hawaiianischen Ohrringe}
 \end{bspe}
 
 \begin{satz}
   Sei $Y$ wegzshgd und lokal wegzshgd. Dann besitzt $Y$ genau dann eine universelle Überlagerung, wenn $Y$ semilokal einfach zusammenhängend ist.
-\end{satz}
-
-\begin{satz}[\emph{Jordanscher Kurvensatz}]
-  Sei $f : S^1 \to \R^2$ stetig und injektiv und $C \coloneqq f(S^1) \subset \R^2$. Dann besteht $\R^2 \setminus C$ aus zwei Zshgskomponenten, einer beschränkten und einer unbeschränkten. \\
-  Der Rand beider Zusammenhangkomponenten ist jeweils $C$.
-\end{satz}
-
-% Vorlesung vom 7.7.2014
-
-\begin{satz}[\emph{Borsuk-Ulam}]
-  Sei $f : S^n \to \R^n$ stetig. Dann gibt es antipodale Punkte $x, -x$ mit $f(x) = f(-x)$.
-\end{satz}
-
-\begin{satz}[Ham-Sandwich-Theorem]
-  Seien $A_1, A_2, A_3 \in \R^3$ offen, beschränkt. Dann gibt es eine Ebene $E \subset \R^3$, die alle drei Teilmengen simultan halbiert.
 \end{satz}
 
 \end{document}
