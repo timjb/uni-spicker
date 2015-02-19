@@ -31,6 +31,7 @@
 \newcommand{\keS}{k.\,e.\,S.} % kurze exakte Sequenz
 \newcommand{\leS}{l.\,e.\,S.} % lange exakte Sequenz
 \newcommand{\ZM}[1]{\Z_{#1}} % \Z modulo n
+\newcommand{\inlineitem}[1]{\textbullet \enspace #1} % List-Item im Fließtext
 
 % Kleinere Klammern
 \delimiterfactor=701
@@ -131,7 +132,7 @@
 \begin{defn}
   Eine \emph{Kettenabbildung} zwischen Kettenkomplexen $\CC{C}$ und $\CC{D}$ ist eine Familie $(f_n : C_n \to D_n)_{n \in \N}$ von Gruppenhomomor- phismen, welche mit dem Differential verträglich sind, \dh{}
   \[ \fa{n \in \N} \partial_n^{(D)} \circ f_n = f_{n-1} \circ \partial_n^{(C)}. \]
-  Aus einer solchen Abbildung erhält man wiederum eine Abbildung $H_n(f) : H_n(\CC{C}) \to H_n(\CC{C})$ für alle $n \in \N$. Somit definiert $H_n$ einen Funktor von der Kategorie der Kettenkomplexe in die Kategorie der abelschen Gruppen.
+  Aus einer solchen Abbildung erhält man wiederum eine Abbildung $H_n(f) : H_n(\CC{C}) \to H_n(\CC{C})$ für alle $n \in \N$. Somit definiert $H_n$ einen Funktor von der Kategorie der Kettenkomplexe nach $\AbGrp$.
 \end{defn}
 
 % Ausgelassen: Kettenisomorphismus
@@ -166,7 +167,8 @@
 \end{prop}
 
 \begin{satz}
-  Seien $f, g : X \to Y$ homotope Abbildungen. Dann sind $f_*, g_* : \CC{X} \to \CC{Y}$ kettenhomotop.
+  Seien $f, g : X \to Y$ homotope Abbildungen. \\
+  Dann sind $f_*, g_* : \CC{X} \to \CC{Y}$ kettenhomotop.
 \end{satz}
 
 \begin{kor}
@@ -221,13 +223,14 @@
 
 \begin{defn}
   Eine \emph{kurze exakte Sequenz von Kettenkomplexen} ist ein Diagramm der Form
-  \[ 0 \to \CC{A} \to \CC{B} \to \CC{C} \to 0, \]
+  $0 \to \CC{A} \to \CC{B} \to \CC{C} \to 0$, welche
   in jedem Grad eine kurze exakte Sequenz
-  \[ 0 \to A_n \to B_n \to C_n \to 0. \]
+  $0 \to A_n \to B_n \to C_n \to 0$
+  ist.
 \end{defn}
 
 \begin{bem}
-  Ist $(X, A)$ ein Raumpaar, so erhält man eine kurze exakte Sequenz
+  Ist $(X, A)$ ein Raumpaar, so erhält man eine kurze ex. Sequenz
   \[ 0 \to \CC{C}(A) \to \CC{C}(X) \to \CC{C}(X, A) \to 0. \]
   Für ein Raumtripel $(X, A, U)$ erhält man eine \keS{}
   \[ 0 \to \CC{C}(A, U) \to \CC{C}(X, U) \to \CC{C}(X, A) \to 0. \]
@@ -289,14 +292,14 @@
 
 % Vorlesung vom 27.10.2014
 
-\begin{defn}[\emph{Eilenberg-Steenrod-Axiome}]
+\begin{defn}[\emph{Eilenberg-Steenrod-Axiome}]\mbox{}\\
   Eine \emph{Homologietheorie} ist eine Folge von Funktoren
   \[ H_n : \Top(2) \to \AbGrp, \]
   und natürlichen Transformationen
   \[ \delta_n : H_n(X, A) \to H_{n-1}(A, \emptyset) \]
   mit den folgenden Eigenschaften:
   \begin{itemize}
-    \item \emph{Homotopieinvarianz}: Seien $f, g : (X, A) \to (B, Y)$ homotop als Abbildungen von Raumpaaren. Dann gilt $f_* = g_* : H_n(X, A) \to H_n(Y, B)$.
+    \item \emph{Homotopieinvarianz}: Seien $f, g : (X, A) \to (B, Y)$ homotop als Abb. von Raumpaaren. Dann gilt $f_* \!=\! g_* : H_n(X, A) \to H_n(Y, B)$.
     \item \emph{Lange exakte Sequenz}: Die Inklusionen $A \hookrightarrow X$ und $(X, \emptyset) \hookrightarrow (X, A)$ induzieren eine l.e.S.
     \[ \ldots \to H_n(A) \to H_n(X) \to H_n(X, A) \xrightarrow{\partial_n} H_{n-1}(A) \to \ldots \]
     \item \emph{Ausschneidung}: Ist $U \subset A$ mit $\clos{A} \subset \inte(A)$, dann induziert die Inklusion $(X - U, A - U) \hookrightarrow (X, A)$ Isomorphismen
@@ -392,14 +395,17 @@
 \end{prop}
 
 \begin{prop}
-  Sei $f : S^n \to S^n$ stetig. Dann gilt
-  \[ \deg f = \deg (\Sigma f : \Sigma S^n \to \Sigma S^n). \]
+  Für $f : S^n \to S^n$ stetig gilt 
+  $\deg f = \deg (\Sigma f : \Sigma S^n \to \Sigma S^n)$.
 \end{prop}
 
 % 4.11
 \begin{prop}
   Seien $A, B \subset X$ mit $X = A \cup B$. Angenommen, es gibt Umgebungen $U$ von $A$ und $V$ von $B$, sodass die Inklusionen $A \hookrightarrow U$, $B \hookrightarrow V$ und $A \cap B \hookrightarrow U \cap V$ Homotopieäquivalenzen sind. Dann existiert die \emph{Mayer-Vietoris-Sequenz}
-  \[ \nldots \to H_*(A \cap B) \to H_*(A) \oplus H_*(B) \to H_*(X, A \cap B) \to H_{*-1}(A \cap B) \to \nldots \]
+  \begin{align*}
+    \ldots & \to H_*(A \cap B) \to H_*(A) \oplus H_*(B) \to H_*(X, A \cap B) \to \\
+    & \to H_{*-1}(A \cap B) \to \ldots
+  \end{align*}
 \end{prop}
 
 % 4.12
@@ -412,7 +418,7 @@
   \end{cases} \]
 \end{prop}
 
-\begin{kor}[Jordanscher Kurvensatz]
+\begin{kor}[Jordanscher Kurvensatz]\mbox{}\\
   Sei $\phi : S^1 \to \R^2$ eine stetige Einbettung. Dann besteht $\R^2 - \phi(S^1)$ aus zwei Komponenten, von denen genau eine beschränkt ist.
 \end{kor}
 
@@ -463,7 +469,8 @@
 
 % 5.1
 \begin{satz}
-  Sei $X$ ein $\Delta$-Komplex und $A \subset X$ ein Unterkomplex. Dann induziert die Inklusion $C_*^\Delta(X, A) \hookrightarrow C_*(X, A)$ Isomorphismen von Homologiegruppen.
+  Sei $X$ ein $\Delta$-Komplex und $A \subset X$ ein Unterkomplex. Dann induziert die Inklusion $C_*^\Delta(X, A) \hookrightarrow C_*(X, A)$ Isos in Homologie.
+  %Isomorphismen von Homologiegruppen.
 \end{satz}
 
 % 5.2
@@ -542,7 +549,7 @@
 \end{prop}
 
 \begin{defn}
-  Die Anheftungsabb'en $\phi_\alpha : \partial D^{n}_\alpha \to X^{n-1}$ lassen sich kanonisch fortsetzen zu \emph{charakteristischen Abb'en} $\Phi_\alpha : D^n_\alpha \to X^n \subset X$.\\
+  Die Anheftungsabb'en $\phi_\alpha : \partial D^{n}_\alpha \to X^{n-1}$ lassen sich kan. fortsetzen zu \emph{charakteristischen Abb'en} $\Phi_\alpha : D^n_\alpha \to X^n \subset X$.\\
   Die Bilder dieser Abb'en werden \emph{abgeschlossene Zellen} genannt.\\
   Die Bilder der Einschränkungen $\Phi_\alpha|\inte(D^n_\alpha)$ heißen \emph{Zellen} von $X$ und werden mit $e^n_\alpha$ bezeichnet.
 \end{defn}
@@ -597,28 +604,24 @@
 \end{lem}
 
 \begin{kor}
-  $H_i(X^n/X^{n-1}) = \begin{cases}
-    \oplus_{i \in I(n)} \Z, & \text{falls } i = n, \\
-    0, & \text{sonst.}
-  \end{cases}$
+  \inlineitem{$H_n(X^n/X^{n-1}) = \oplus_{i \in I(n)} \Z$,} \quad
+  \inlineitem{$H_{\not= n}(X^n/X^{n-1}) = 0$}
 \end{kor}
 
 % 5.9
 \begin{prop}
-  \begin{itemize}
-    \item $H^k(X^n) = 0$ für $k > n$.
-    \item Für $k < n$ induziert die Inklusion $X^n \hookrightarrow X$ Isomorphismen $H_k(X^n) \cong H_k(X)$.
-  \end{itemize}
+  \inlineitem{$H^{>n}(X^n) = 0$,} \quad
+  \inlineitem{Für $k < n$ induziert die Inklusion $X^n \hookrightarrow X$ Isomorphismen $H_k(X^n) \cong H_k(X)$.}
 \end{prop}
 
 \begin{defn}
-  Der \emph{zelluläre Kettenkomplex} eines CW-Komplexes $X$ ist definiert durch
+  Der \emph{zelluläre Kettenkomplex} eines CW-Komplexes $X$ ist
   \[ C^\cell_n(X) \coloneqq H_n(X^n, X^{n-1}) \]
   mit dem verbindenden Homomorphismus
   \[ \partial_n : H_n(X^n, X^{n-1}) \to H_{n-1}(X^{n-1}, X^{n-2}) \]
   aus der \leS{} des Raumtripels $(X^n, X^{n-1}, X^{n-2})$ als Randabb.\\
   Dabei setzt man $X^{n-2} \coloneqq \emptyset$ und $\partial_0 = 0$.\\
-  Die Homologiegruppen dieses Komplexes werden mit $H_*^\cell(X)$ bezeichnet.
+  Die Homologiegr. dieses Komplexes werden mit $H_*^\cell(X)$ bezeichnet.
 \end{defn}
 
 \begin{prop}
@@ -639,7 +642,7 @@
   \[ C^{\cell}_n(X) = H_n(X^n, X^{n-1}) \cong \bigoplus_{I(n)} H_n(D^n, S^{n-1}) \cong \bigoplus_{I(n)} \Z. \]
   Sei nun $e^n_\alpha$ eine $n$-Zelle mit anheftender Abb. $\phi_\alpha : S^{n-1} \to X^{n-1}$ und $e^{n-1}_\beta$ eine $(n{-}1)$-Zelle von $X$. Sei $d_{\alpha \beta}$ der Abbildungsgrad von
   \[ S^{n-1} \xrightarrow{\phi_\alpha} X^{n-1} \to X^{n-1} / X^{n-2} \cong \vee_{i \in I(n)} S^{n-1} \xrightarrow{q_\beta} S^{n-1}. \]
-  Wir bezeichnen den $\alpha$-ten Erzeuger von $C^{\cell}_n(X)$ (mit $\alpha \in I(n)$) mit $e^n_\alpha$. Dann haben wir:
+  Bezeichne mit $e^n_\alpha$ den $\alpha$-ten Erzeuger von $C^{\cell}_n(X)$ (mit $\alpha \in I(n)$). Dann haben wir:
 \end{bem}
 
 \begin{prop}
@@ -671,7 +674,8 @@
 \begin{defn}
   Ist $X$ ein CW-Komplex, so ist der zelluläre Kettenkomplex mit Koeffizienten in $G$ definiert durch
   \[ C_n^\cell(X) \coloneqq H_n(X^n, X^{n-1}; G). \]
-  Die Randabbildung $\partial^\cell_n$ ist der verbindende Homomorphismus in der \leS{} zum Raumtripel $(X^n, X^{n-1}, X^{n-2})$ mit Koeffizienten in $G$. Es gilt nach Wahl von passenden Erzeugern:
+  Die Randabbildung $\partial^\cell_n$ ist der verbindende Homomorphismus in der \leS{} zum Raumtripel $(X^n, X^{n-1}, X^{n-2})$ mit Koeff. in $G$. \\
+  Es gilt nach Wahl von passenden Erzeugern:
   \[ \partial^\cell_n (e_\alpha^n) = \sum_\beta d_{\alpha \beta} e_\beta^{n-1}. \]
 \end{defn}
 
@@ -684,16 +688,15 @@
 \begin{defn}
   Ist nun $k=2$ so gibt es eine kurze exakte Sequenz
   \[ 0 \to C_*(X; \ZM{2}) \xrightarrow{\tau_*} C_*(\tilde{X}, \ZM{2}) \xrightarrow{p_*} C_*(X, \ZM{2}) \to 0. \]
-  Die davon induzierte lange exakte Sequenz
+  Die davon induzierte lange exakte Sequenz ist die \emph{Transfersequenz}
   \[ \ldots \to H_*(X; \ZM{2}) \xrightarrow{\tau_*} H_*(\tilde{X}, \ZM{2}) \xrightarrow{p_*} H_*(X, \ZM{2}) \to H_{*-1}(X; \ZM{2}) \to \ldots \]
-  heißt \emph{Transfersequenz}.
 \end{defn}
 
 % Vorlesung vom 1.12.2014
 
 \begin{defn}
-  Eine Abbildung $f : S^n \to S^n$ heißt \emph{ungerade}, falls
-  \[ \fa{x \in S^n} f(-x) = -f(x). \]
+  $f : S^n \to S^n$ heißt \emph{ungerade}, falls
+  $\fa{x \!\in\! S^n} f(-x) \!=\! -f(x)$.
 \end{defn}
 
 % 6.2
@@ -707,8 +710,8 @@
 \end{satz}
 
 % 6.4
-\begin{satz}[Ham-Sandwich-Theorem]
-  Seien $K_1, \ldots, K_n \subset \R^n$ Lebesgue- messbar und beschränkt. Dann gibt es eine Hyperebene $H \subset \R^n$, die jeden Teilraum genau halbiert.
+\begin{satz}[Ham-Sandwich-Theorem]\mbox{}\\
+  Seien $K_1, \ldots, K_n \subset \R^n$ Lebesguemessbar und beschränkt. Dann gibt es eine Hyperebene $H \subset \R^n$, die jeden Teilraum genau halbiert.
 \end{satz}
 
 % §7. Euler-Charakteristik und Lefschetzer Fixpunktsatz
@@ -806,12 +809,12 @@
 \end{defn}
 
 \begin{defn}
-  Falls eine Orientierung von $M$ existiert, so heißt $M$ \emph{orientierbar}.
+  Eine Mft heißt \emph{orientierbar}, wenn eine Orientierung existiert.
 \end{defn}
 
 % 8.2
 \begin{prop}
-  Sei $M$ eine zshgde orientierbare Mft. Dann existieren genau zwei Orientierungen von $M$.
+Eine zshgde orientierbare Mft hat genau zwei Orientierungen.
 \end{prop}
 
 
@@ -819,9 +822,11 @@
   Sei $M$ eine $n$-Mft. Setze
   \[ \tilde{M} \coloneqq \Set{ \mu_x }{ x \in M \text{ und } \mu_x \in H_n(M|x) \text{ ist lokale Orientierung an $x$}. } \]
   Die Topologie auf $M$ wird erzeugt von folgenden Mengen:
-  Sei $U \subset M$ offen, $\mu_U \in H_n(M|U)$. Dann ist die Menge
-  \[ \Set{ \mu_U|_y }{ y \in U } \subset \tilde{M} \]
-  offen. Dies definiert eine zweiblättrige Überlagerung $\tilde{M}$ von $M$.
+  \[
+    \Set{ \mu_U|_y }{ y \in U } \subset \tilde{M}
+    \quad \text{mit $U \subset M$ offen, $\mu_U \in H_n(M|U)$}
+  \]
+  ist offen. Dies definiert eine zweiblättrige Überlagerung $\tilde{M}$ von $M$.
 \end{defn}
 
 % 8.3
@@ -843,7 +848,7 @@
 \begin{prop}
   Sei $M$ eine kompakte zshgde $n$-Mft.
   \begin{itemize}
-    \item Falls $M$ orientierbar ist, dann ist für alle $x \in M$ die kanonische Abbildung $H_n(M) \to H_n(M|x)$ ein Isomorphismus. Insbesondere gilt $H_n(M) \cong \Z$.
+    \item Falls $M$ orientierbar ist, dann ist für alle $x \in M$ die kanonische Abb. $H_n(M) \to H_n(M|x)$ ein Iso. Insbesondere gilt $H_n(M) \cong \Z$.
     \item Falls $M$ nicht orientierbar ist, gilt $H_n(M) = 0$.
     \item $H_n(M, \ZM{2}) = \ZM{2}$ unabhängig von Orientierbarkeit.
     \item $H_i(M) = 0$ für $i > n$.
@@ -851,7 +856,8 @@
 \end{prop}
 
 \begin{defn}
-  Sei $M$ ein $n$-Mft und $G$ eine abelsche Gruppe. Eine \emph{verallgemeinerte $G$-Orientierung} ist eine Zuordnung
+  Sei $M$ ein $n$-Mft und $G$ eine abelsche Gruppe. \\
+  Eine \emph{verallgemeinerte $G$-Orientierung} ist eine Zuordnung
   \[ x \in M \enspace\mapsto\enspace \mu_x \in H_n(M|x; G), \]
   sodass für alle $x \in M$ eine offene Kugel $U$ um $x$ und ein Element $\mu_U \in H_n(X|U)$ existiert, sodass für alle $y \in U$ die lokale Orientierung $\mu_y$ durch Einschränkung von $\mu_U$ gegeben ist.
 \end{defn}
@@ -951,14 +957,12 @@
 \end{defn}
 
 \begin{nota}
-  \begin{itemize}
-    \item $H^n(X; G) \coloneqq H^n(X, \emptyset; G)$
-    \item $H^n(X, A) \coloneqq H^n(X, A; \Z)$
-  \end{itemize}
+  \inlineitem{$H^n(X; G) \coloneqq H^n(X, \emptyset; G)$,} \quad
+  \inlineitem{$H^n(X, A) \coloneqq H^n(X, A; \Z)$}
 \end{nota}
 
 \begin{bem}
-  $H^n(\blank; G)$ ist ein kontravarianter Funktor von der Kategorie der Raumpaare in die Kategorie der abelschen Gruppen.
+  $H^n(\blank; G)$ ist ein kontravarianter Funktor von der Kategorie der Raumpaare nach $\AbGrp$.
 \end{bem}
 
 \begin{lem}
@@ -1011,7 +1015,7 @@
 \end{satz}
 
 \begin{bem}
-  Die kontravarianten Funktoren $H^n(\blank; G) : \Top(2) \to \AbGrp$, $n \in \Z$ definieren eine \emph{Kohomologietheorie} im Sinne von Eilenberg und Steenrod.
+  Die kontrav. Funktoren $H^n(\blank; G) : \Top(2) \to \AbGrp$, $n \in \Z$ sind eine \emph{Kohomologietheorie} im Sinne von Eilenberg \& Steenrod.
 \end{bem}
 
 \begin{defn}
@@ -1137,7 +1141,8 @@
 \end{kor}
 
 \begin{nota}
-  $\Tor(G, H) \coloneqq \Tor_1(G, H)$, $\Ext(G, H) \coloneqq \Ext^1(G, H)$
+  \inlineitem{$\Tor(G, H) \coloneqq \Tor_1(G, H)$,} \enspace
+  \inlineitem{$\Ext(G, H) \coloneqq \Ext^1(G, H)$}
 \end{nota}
 
 % 11.8 (erweitert)
@@ -1161,9 +1166,8 @@
     \item $\Tor_0(A, B) \cong A \otimes B$
   \end{itemize}
   \begin{itemize}
-    \miniitem{0.40 \linewidth}{$\Tor_0(A, B) \cong A \otimes B$}
     \miniitem{0.48 \linewidth}{$\Tor(A, B) \cong \Tor(B, A)$}
-    \item $\Tor(\oplus_i A_i, B) \cong \oplus_i \Tor(A_i, B)$
+    \miniitem{0.49 \linewidth}{$\Tor(\oplus_i A_i, B) \cong \oplus_i \Tor(A_i, B)$}
     \item $\Tor(A, B) \cong \Tor(T(A), B)$ mit $T(A) < A$ Torsionsuntergruppe
   \end{itemize}
   \begin{itemize}
@@ -1195,7 +1199,7 @@
 
 % 11.10 (erweitert)
 \begin{kor}
-  Sei $f : X \to Y$ eine stetige Abbildung, die in Homologie mit $\Z$-Koeffizienten in jedem Grad Isomorphismen induziert. Dann gilt Gleiches für Homologie und Kohomologie mit beliebigen Koeffizienten $G$.
+  Sei $f : X \to Y$ eine stetige Abbildung, die in Homologie mit $\Z$-Koeffizienten in jedem Grad Isomorphismen induziert. Dann gilt Gleiches für Homologie und Kohomol. mit bel. Koeffizienten $G$.
 \end{kor}
 
 \begin{satz}
@@ -1277,7 +1281,8 @@
 \end{satz}
 
 \begin{defn}
-  Sei $X$ ein topol. Raum und $R$ ein kommutativer Ring. Für $k \geq l$ ist das \emph{Cap-Produkt} die $R$-bilineare Abbildung
+  Sei $X$ ein topol. Raum und $R$ ein kommutativer Ring. \\
+  Für $k \geq l$ ist das \emph{Cap-Produkt} die $R$-bilineare Abbildung
   \begin{align*}
     \cap : C_k(X; R) \times C^l(X; R) & \to C_{k-l}(X; R) \\
     (\sigma, \phi) & \mapsto \phi(\sigma_\angles{v_0, \ldots, v_l}) \cdot \sigma_\angles{v_l, \ldots, v_{l+k}}.
@@ -1297,8 +1302,9 @@
 \end{defn}
 
 % 12.7
-\begin{satz}[Eilenberg-Zilber]
-  Seien $X$ und $Y$ topologische Räume. Es existiert eine natürliche (in $X$ und $Y$) Kettenhomotopieäquivalenz
+\begin{satz}[\emph{Eilenberg-Zilber}]
+  Seien $X$ und $Y$ topologische Räume. \\
+  Es ex. eine natürliche (in $X$ und $Y$) Kettenhomotopieäquivalenz
   \[ C_*(X) \otimes C_*(Y) \enspace \mathop{\rightleftarrows}^\times_\theta \enspace C_*(X \times Y). \]
   Die Abbildungen $\times$ und $\theta$ sind im Grad $0$ die kanonischen Abben.
 \end{satz}
@@ -1312,16 +1318,23 @@
 \end{defn}
 
 % 12.8
-\begin{satz}[Künneth-Thm für Homologie]
-  Es gibt eine natürliche \keS{}
-  \[ 0 \to (H_*(X) \otimes H_*(Y))_n \to H_n(X \times Y) \to (\Tor(H_*(X), H_*(Y)))_{n-1} \to 0 \]
-  Die zweite Abbildung wird durch das Kreuzprodukt induziert. Die Sequenz spaltet, aber nicht natürlich.
+\begin{satz}[\emph{Künneth-Thm} für Homologie]
+  Es gibt eine nat. \keS{}
+  \begin{align*}
+    0 & \to (H_*(X) \otimes H_*(Y))_n \to H_n(X \times Y) \to \\
+    & \to (\Tor(H_*(X), H_*(Y)))_{n-1} \to 0
+  \end{align*}
+  Die zweite Abbildung wird durch das Kreuzprodukt induziert. \\
+  Die Sequenz spaltet, aber nicht natürlich.
 \end{satz}
 
 % 12.9
-\begin{satz}[Künneth-Thm für Kohomologie]
+\begin{satz}[\emph{Künneth-Thm} für Kohomologie]
   Sei $R$ ein kommutativer Hauptidealring mit 1. Falls $H_*(X; R)$ oder $H_*(Y; R)$ in jedem Grad ein endlich erzeugter $R$-Modul ist, so gibt es eine natürliche \keS{}
-  \[ 0 \to (H^*(X; R) \otimes H^*(Y; R))^n \to H^n(X \times Y; R) \to \Tor(H^*(X; R), H^*(Y; r))^{n+1} \to 0. \]
+  \begin{align*}
+     0 & \to (H^*(X; R) \otimes H^*(Y; R))^n \to H^n(X \times Y; R) \to \\
+     & \to \Tor(H^*(X; R), H^*(Y; r))^{n+1} \to 0.
+  \end{align*}
   Dabei ist die zweite Abbildung das kohomologische Kreuzprodukt.
 \end{satz}
 
@@ -1341,9 +1354,8 @@
 \end{defn}
 
 \begin{satz}[\emph{Poincaré-Dualität}]
-  Sei $R$ ein kommutativer Ring mit Eins und $M$ eine geschlossene orientierte $n$-Mft mit Orientierungsklasse $[M] \in H_n(M; R)$. Dann ist die Abbildung
-  \[ D : H^k(M; R) \to H_{n-k}(M; R), \enspace \alpha \mapsto [M] \cap \alpha \]
-  ein Isomorphismus für alle $k$.
+  Sei $R$ ein kommutativer Ring mit Eins und $M$ eine geschlossene orientierte $n$-Mft mit Orientierungsklasse $[M] \in H_n(M; R)$. Dann ist folgende Abb. ein Isomorphismus f.\,a. $k$:
+  \[ D : H^k(M; R) \to H_{n-k}(M; R), \enspace \alpha \mapsto [M] \cap \alpha. \]
 \end{satz}
 
 \begin{satz}[Poincaré-Dualität, allg]
