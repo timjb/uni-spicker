@@ -90,6 +90,30 @@
   Ein \emph{Graph} ist ein Tupel $(V, E)$, wobei $V$ eine endliche Mengen von \emph{Knoten} und $E \subset V \times V$ die Menge der \emph{Kanten} ist.
 \end{defn}
 
+% Kapitel 2.4. Stochastik
+
+% * Grundlegende Axiome von W-Räumen, W-Maßen
+% * Definition bedingte Wahrscheinlichkeit, Satz von der totalen Wkt
+% * Unabhängigkeit
+
+\begin{defn}
+  Eine Zufallsvariable auf einem Wahrscheinlichkeitsraum $(\Omega, \Alg, \P)$ ist eine Borel-messbare Funktion $X : \Omega \to \R$.
+\end{defn}
+
+\begin{defn}
+  Der Erwartungswert einer Zufallsvariable $X$ auf einem (diskreten) Wahrscheinlichkeitsraum $(\Omega, \Alg, \P)$ ist
+  \[ \E \coloneqq \Int{\Omega}{}{X}{\P} = \sum_{\omega \in \Omega} \P(\{ \omega \}) \cdot X(\omega). \]
+\end{defn}
+
+% Ausgelassen: Einschub zu unendlichen Summen, Integralvergleichskriterium
+
+\begin{bem}
+  Es gilt für $\abs{x} < 1$: $\sum_{k=1}^\infty k x^{k{-}1} = \tfrac{1}{(1-x)^2}$.
+\end{bem}
+
+% Ausgelassen: Eigenschaften des Erwartungswerts (Linearität etc.)
+% Ausgelassen: Defintion des bedingten Erwartungswertes
+
 % Ausgelassen: Einführung Bäume / gerichtete Graphen
 
 % Kapitel 3. Sortieren und Verwandtes
