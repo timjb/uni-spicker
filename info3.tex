@@ -21,7 +21,7 @@
 \newtheorem*{datenstruktur}{Datenstruktur}
 
 \begin{abk}
-  \textbf{WC}/\textbf{BC}/\textbf{AC} steht für Worst/Average/Best Case.
+  \textbf{WC}/\textbf{BC}/\textbf{AC} steht für Worst/Best/Average Case.
 \end{abk}
 
 
@@ -56,7 +56,7 @@
       \item $f_3(n) \coloneqq (\log n)^\beta$
       \item $f_4(n) \coloneqq n^a$
       \item $f_5(n) \coloneqq n^a (\log n)^\alpha$
-      \item $f_6(n) \coloneqq n^b (\log n)^\alpha$
+      \item $f_6(n) \coloneqq n^a (\log n)^\beta$
       \item $f_7(n) \coloneqq n^b$
       \item $f_8(n) \coloneqq A^n$
       \item $f_9(n) \coloneqq A^n \cdot n^a$
@@ -69,10 +69,8 @@
 
 % Kapitel 2.2. Die Random-Access-Maschine
 
-% TODO: Definition RAM
-
 \begin{defn}[RAM]
-  Die Random Access Access Machine besitzt eine unendlich lange Liste von aufsteigend nummerierten Speicherzellen R[0], R[1], ..., die jeweils eine ganze Zahl beinhalten und einen Programmzähler. Sie kann mittels der folgenden Sprache programmiert werden:
+  Die Random Access Machine besitzt eine unendlich lange Liste von aufsteigend nummerierten Speicherzellen R[0], R[1], ..., die jeweils eine ganze Zahl beinhalten, und einen Programmzähler. Sie kann mittels der folgenden Sprache programmiert werden:
   \begin{grammar}
     <Zieladresse> ::= <Adresse> | R[<Adresse>]
 
@@ -93,31 +91,6 @@
 \end{defn}
 
 % Ausgelassen: Einführung Bäume / gerichtete Graphen
-
-% Kapitel 2.4. Stochastik
-
-% * Grundlegende Axiome von W-Räumen, W-Maßen
-% * Definition bedingte Wahrscheinlichkeit, Satz von der totalen Wkt
-% * Unabhängigkeit
-
-\begin{defn}
-  Eine Zufallsvariable auf einem Wahrscheinlichkeitsraum $(\Omega, \Alg, \P)$ ist eine Borel-messbare Funktion $X : \Omega \to \R$.
-\end{defn}
-
-\begin{defn}
-  Der Erwartungswert einer Zufallsvariable $X$ auf einem (diskreten) Wahrscheinlichkeitsraum $(\Omega, \Alg, \P)$ ist
-  \[ \E \coloneqq \Int{\Omega}{}{X}{\P} = \sum_{\omega \in \Omega} \P(\{ \omega \}) \cdot X(\omega). \]
-\end{defn}
-
-% Ausgelassen: Einschub zu unendlichen Summen, Integralvergleichskriterium
-
-\begin{bem}
-  Es gilt für $\abs{x} < 1$: $\sum_{k=1}^\infty k x^{k{-}1} = \tfrac{1}{(1-x)^2}$.
-\end{bem}
-
-% Ausgelassen: Eigenschaften des Erwartungswerts (Linearität etc.)
-% Ausgelassen: Defintion des bedingten Erwartungswertes
-
 
 % Kapitel 3. Sortieren und Verwandtes
 
@@ -140,7 +113,7 @@
     c n^k + a T(\lceil n / b \rceil), & \text{ für } n > N
   \end{cases} \]
   Sei ferner $\lambda := \log_b a$. Dann gilt
-  \[ T(n) = \begin{cases}
+  \[ T(n) \in \begin{cases}
     O(n^k), & \text{ falls } \lambda < k \\
     O(n^k \log n), & \text{ falls } \lambda = k \\
     O(n^\lambda), & \text{ falls } \lambda > k.
@@ -154,7 +127,7 @@
     c n^k + a T(\lceil n / b \rceil), & \text{ für } n > N
   \end{cases} \]
   Sei ferner $\lambda := \log_b a$. Dann gilt
-  \[ T(n) = \begin{cases}
+  \[ T(n) \in \begin{cases}
     \Omega(n^k), & \text{ falls } \lambda < k \\
     \Omega(n^k \log n), & \text{ falls } \lambda = k \\
     \Omega(n^\lambda), & \text{ falls } \lambda > k.
@@ -206,7 +179,7 @@
 % Kapitel 3.7. Untere Schranken für Sortieren
 
 \begin{satz}
-  Jeder deterministische vergleichsbasierte Sortieralgorithmus hat im RAM-Modell eine Worst-Case-Laufzeit von $O(n \log n)$. Wenn alle Permutation mit gleicher Wkt. auftreten, gilt dies auch für die mittlere Laufzeit.
+  Jeder deterministische vergleichsbasierte Sortieralgorithmus hat im RAM-Modell eine Worst-Case-Laufzeit von $\Omega(n \log n)$. Wenn alle Permutationen mit gleicher Wkt. auftreten, gilt dies auch für die mittlere Laufzeit.
 \end{satz}
 
 \begin{satz}
@@ -467,13 +440,13 @@
 % Kapitel 12.2. Der Kruskal-Algorithmus
 
 \begin{alg}[Kruskal]
-  Für immer diejenige Kante zum Spannbaum hinzu, die die geringsten Kosten hat und durch die kein Zirkel entsteht. Laufzeit: $O(m \log n)$
+  Füge immer diejenige Kante zum Spannbaum hinzu, die die geringsten Kosten hat und durch die kein Zirkel entsteht. Laufzeit: $O(m \log n)$
 \end{alg}
 
 % Kapitel 12.3. Der Prim-Algorithmus
 
 \begin{alg}[Prim]
-  Wir lassen einen minimalen Baum zwischen einer Gruppe durch Knoten durch Hinzunahme der jeweils günstigsten Kante nach "`draußen"' wachsen.
+  Wir lassen einen minimalen Baum einer Gruppe von Knoten durch Hinzunahme der jeweils günstigsten Kante nach "`draußen"' wachsen.
 \end{alg}
 
 \begin{satz}
@@ -514,7 +487,7 @@
 \end{nota}
 
 \begin{frage}
-  $\mathrm{N} = \mathrm{NP}$?
+  $\mathrm{P} = \mathrm{NP}$?
 \end{frage}
 
 \begin{prob}[Independent Set]
