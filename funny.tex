@@ -373,7 +373,11 @@
 \end{satz}
 
 \begin{bem}
-  Im Fall $p {=} 2$ ist $\ell^2(\K)$ ein Hilbertraum mit Skalar- produkt $\scp{x}{y}_{\ell^2} \coloneqq \sum_{i = 0}^\infty x_i \overline{y_i}$ für $x = (x_i)_{i \in \N}, \, y = (y_i)_{i \in \N} \in \ell^2(\K)$.
+  Im Fall $p {=} 2$ ist $\ell^2(\K)$ ein Hilbertraum mit Skalarprodukt
+  \[
+    \scp{x}{y}_{\ell^2} \coloneqq \sum_{i = 0}^\infty x_i \overline{y_i} \quad
+    \text{für $x = (x_i)_{i \in \N}, \, y = (y_i)_{i \in \N} \in \ell^2(\K)$.}
+  \]
 \end{bem}
 
 % Thema: Vervollständigung
@@ -536,7 +540,7 @@
   \[ f \in L(\mu, Y) \iff f \text{ ist $\mu$-messbar und } \abs{f} \in L(\mu, \R). \]
 \end{satz}
 
-\begin{satz}[Majoranten-Kriterium]
+\begin{satz}[\emph{Majoranten-Kriterium}]
   Sei $f : \Omega \to Y$ $\mu$-messbar und $g \in L(\mu, \R)$ mit $\norm{f} \leq g$ $\mu$-fast-überall. Dann ist $f \in L(\mu, Y)$.
 \end{satz}
 
@@ -664,7 +668,7 @@
   Ist im vorherigen Satz $A$ nicht leer und abgeschlossener Unterraum von $X$, dann ist $P$ linear und $\fa{x \in X} x - P(x) \perp A$.
 \end{satz}
 
-\begin{satz}[vom fast orthogonalen Komplement]
+\begin{satz}[\emph{vom fast orthogonalen Komplement}]\mbox{}\\
   Sei $X$ ein normierter Raum, $Y \subset X$ ein abgeschlossener echter Teilraum und $\theta \in \ointerval{0}{1}$ (bzw. $\theta \in \ocinterval{0}{1}$, falls $X$ ein Hilbertraum). Dann gibt es ein $x_0 \in X$ mit $\norm{x_0} = 1$ und $\theta \leq \dist(x_0, Y) \leq 1$.
 \end{satz}
 
@@ -688,7 +692,7 @@
 \end{defn}
 
 \begin{acht}
-  In topologischen Räumen sind die obigen Begriffe i.\,A. nicht äquivalent.
+  In topol. Räumen gilt die Äquivalenz i.\,A. nicht.
 \end{acht}
 
 \begin{satz}
@@ -734,7 +738,7 @@
   $A$ heißt \emph{gleichgradig stetig}, falls $\sup_{f \in A} \norm{f(x) - f(y)} \xrightarrow[\norm{x - y} \to 0]{} 0$.
 \end{defn}
 
-\begin{satz}[Arzelà-Ascoli]
+\begin{satz}[\emph{Arzelà-Ascoli}]
   Sei $S \subset \R^n$ kompakt, $Y$ ein endlich- dimensionaler Banachraum und $A \subset \mathcal{C}^0(S, Y)$. Dann gilt
   \[ A \text{ präkompakt } \iff A \text{ ist pktw. beschränkt und gleichgradig stetig. } \]
 \end{satz}
@@ -804,7 +808,7 @@
 
 % Ausgelassen: Beweis-Idee: Approximation durch Faltung mit Dirac-Folge
 
-\begin{satz}[M. Riesz]
+\begin{satz}[\emph{M. Riesz}]
   Sei $p \in \cointerval{1}{\infty}$ und $Y$ ein endlich-dimensionaler Banachraum. Dann ist $A {\subset} L^p(\lambda_n, Y)$ präkompakt genau dann, wenn
   \begin{itemize}
     \begin{multicols}{2}
@@ -819,8 +823,8 @@
 
 \begin{samepage}
 
-\begin{satz}[Fundamentallemma der Variationsrechnung]
-  Sei $\Omega \subset \R^n$ und $Y$ ein Banachraum. Für $g \in L^1(\Omega, Y)$ sind dann äquivalent:
+\begin{satz}[\emph{Fundamentallemma der Variationsrechnung}]\mbox{}\\
+  Sei $\Omega \subset \R^n$ u. $Y$ ein Banachraum. Für $g \!\in\! L^1(\Omega, Y)$ sind äquivalent:
   \begin{itemize}
     % (Phantome, damit Zeilen auf gleicher Höhe stehen)
     \miniitem{0.6 \linewidth}{Für alle $\xi \in \mathcal{C}_0^\infty$ gilt $\Int{\Omega}{\phantom{\Omega}}{(\xi \cdot g)}{x} = 0$.}
@@ -998,12 +1002,12 @@
 % Kapitel 4.
 \section{Lineare Funktionale}
 
-\begin{satz}[Rieszscher Darstellungssatz]
-  Ist $X$ ein Hilbertraum, so ist
+\begin{satz}[\emph{Rieszscher Darstellungssatz}]
+  Sei $X$ ein Hilbertraum,
   \begin{align*}
-    J : X \to X', \quad x \mapsto y \mapsto \langle J(x), y \rangle_{X' {\times} X} \coloneqq \scp{y}{x}_X
+    J : X \to X', \quad x \mapsto y \mapsto \langle J(x), y \rangle_{X' {\times} X} \coloneqq \scp{y}{x}_X.
   \end{align*}
-  ein isometrischer konjugiert lin. Isomorphismus, d\,h. für $x, y \in X$ gilt:
+  Dann ist $J$ ein isometrischer konjugiert linearer Isomorphismus, \dh{} für alle $x, y \in X$ gilt:
   \begin{itemize}
     \miniitem{0.56 \linewidth}{$\fa{\alpha \in \K} J(\alpha x + y) = \overline{\alpha} Jx + Jy$}
     \miniitem{0.41 \linewidth}{$\norm{Jx}_{X'} = \norm{x}_X$}
@@ -1027,7 +1031,7 @@
   Dann ist $A$ invertierbar in $\LSO(X)$ und $\norm{A^{-1}} \leq \tfrac{1}{c_0}$.
 \end{lem}
 
-\begin{satz}[Lax-Milgram]
+\begin{satz}[\emph{Lax-Milgram}]
   Sei $X$ ein Hilbertraum über $\K$ und $a : X \times X \to \K$ sesquilinear. Es gebe Konstanten $c_0$ und $C_0$ mit $0 < c_0 \leq C_0 < \infty$, sodass für alle $x, y \in X$ gilt:
   \begin{itemize}
     \item $\abs{a(x, y)} \leq C_0 \cdot \norm{x}_X \cdot \norm{y}_X$ \pright{Stetigkeit}
@@ -1086,7 +1090,7 @@
   \[ \norm{u}_{W^{1,2}(\Omega)} \leq C (\norm{h}_{L^2} + \norm{f}_{L^2}). \]
 \end{satz}
 
-\begin{lem}[Poincaré-Ungleichung]
+\begin{lem}[\emph{Poincaré-Ungleichung}]
   Ist $\Omega \subset \R^n$ offen und beschränkt, so gibt es eine Konstante $C_p$ (abhängig von $\Omega$), sodass
   \[ \fa{u \in W_0^{1,2}(\Omega)} \norm{u}_{L^2(\Omega)}^2 \leq C_p \norm{\nabla u}_{L^2(\Omega)} \]
 \end{lem}
@@ -1113,7 +1117,7 @@
 % Ausgelassen: Formulierung des Lemmas von Zorn
 
 \begin{samepage}
-\begin{satz}[Hahn-Banach]
+\begin{satz}[\emph{Hahn-Banach}]
   Sei $X$ ein $\R$-VR und
   \begin{itemize}
     \item $p : X \to \R$ sublinear, \dh{} für alle $x, y \in X$ und $\alpha \in \R_{\geq 0}$ gelte
@@ -1128,7 +1132,7 @@
 
 % Dieser Satz steht so nicht im Skript! Keine Ahnung, wo ich den herhab.
 \iffalse
-\begin{satz}(Hahn-Banach für lineare Funktionale)
+\begin{satz}[Hahn-Banach für lineare Funktionale]
   Sei $X$ ein $\R$-VR, $Y \subset X$ ein Unterraum, $p : X \to \R$ linear und $f : Y \to \R$ linear, sodass $f(x) \leq p(x)$ für alle $x \in Y$. Dann existiert eine lineare Abbildung $F : X \to \R$ mit $f = F|_Y \text{ und } F \leq p$.
 \end{satz}
 \fi
@@ -1194,16 +1198,17 @@
 
 \end{samepage}
 
-\begin{satz}[Baire'scher Kategoriensatz]
-  Es sei $X \not= \emptyset$ ein vollständiger metrischer Raum und $(A_k)_{k \in \N}$ eine Folge abgeschlossener Mengen $A_k \cls X$, sodass $X = \bigcup_{\mathclap{k \in \N}} A_k$. Dann gibt es $k_0 \in \N$ mit $\inte(A_{k_0}) \not= \emptyset$.
+\begin{satz}[\emph{Baire'scher Kategoriensatz}]\mbox{}\\
+  Sei $X \not= \emptyset$ ein vollständiger metrischer Raum und $(A_k)_{k \in \N}$ eine Folge abgeschlossener Mengen $A_k \cls X$, sodass $X = \bigcup_{\mathclap{k \in \N}} A_k$. \\
+  Dann gibt es $k_0 \in \N$ mit $\inte(A_{k_0}) \not= \emptyset$.
 \end{satz}
 
 \begin{kor}
   Jede Basis eines $\infty$-dim. Banachraumes ist überabzählb.
 \end{kor}
 
-\begin{satz}[Prinzip der gleichmäßigen Beschränktheit]
-  Es sei $X \not= \emptyset$ ein vollständiger metrischer Raum, $Y$ ein normierter Raum und $F \subset \mathcal{C}^0(X, Y)$ eine Menge von Funktionen. Dann gilt:
+\begin{satz}[\emph{Prinzip der gleichmäßigen Beschränktheit}]\mbox{}\\
+  Sei $X \not= \emptyset$ ein vollständiger metrischer Raum, $Y$ ein normierter Raum und $F \subset \mathcal{C}^0(X, Y)$ eine Menge von Funktionen. Dann gilt:
   \[
     \fa{x {\in} X} \! \sup_{f \in F} \norm{f(x)}_Y {<} \infty
     \implies
@@ -1211,7 +1216,7 @@
   \]
 \end{satz}
 
-\begin{satz}[Banach-Steinhaus]
+\begin{satz}[\emph{Banach-Steinhaus}]
   Es sei $X$ ein Banachraum, $Y$ ein normierter Raum und $\mathcal{T} \subset \LSO(X, Y)$. Dann gilt:
   \[
     \fa{x \in X} \sup_{T \in \mathcal{T}} \norm{Tx}_Y < \infty
@@ -1228,17 +1233,17 @@
   Ist $f$ bijektiv, so ist $f$ genau dann offen, wenn $f^{-1}$ stetig ist. Sind $X, Y$ normierte Räume und ist $T : X \to Y$ linear, so gilt: $T$ ist offen $\iff$ $\ex{\delta > 0} B_{\delta}(0) \subset T(B_1(0))$.
 \end{bem}
 
-\begin{satz}[von der offenen Abbildung]
+\begin{satz}[\emph{von der offenen Abbildung}]
   Seien $X, Y$ Banachräume und $T \in \LSO(X, Y)$. Dann ist $T$ genau dann surjektiv, wenn $T$ offen ist.
 \end{satz}
 
 \begin{samepage}
 
-\begin{satz}[von der inversen Abbildung]
+\begin{satz}[\emph{von der inversen Abbildung}]
   Seien $X, Y$ Banachräume und $T \in \LSO(X, Y)$ bijektiv, so ist $T^{-1}$ stetig, also $T^{-1} \in \LSO(Y, X)$.
 \end{satz}
 
-\begin{satz}[vom abgeschlossenen Graphen]
+\begin{satz}[\emph{vom abgeschlossenen Graphen}]
   Seien $X, Y$ Banachräume und $T : X \to Y$ linear. Dann ist $\Graph(T) = \Set{ (x, Tx) }{ x \in X }$ genau dann abgeschlossen, wenn $T$ stetig ist. Dabei ist $\Graph(T) \subset X \times Y$ mit der \emph{Graphennorm} $\norm{(x,y)}_{X \times Y} = \norm{x}_X + \norm{y}_Y$.
 \end{satz}
 
@@ -1300,7 +1305,7 @@
   \[ u_k \xrightharpoonup{\phantom{A}} u \text{ in } W^{m,p}(\Omega) \iff \fa{s, \abs{s} \leq m} \partial^s u_k \xrightharpoonup{\phantom{A}} \partial^s u \text{ in } L^p(\Omega) \]
 \end{bsp}
 
-\begin{satz}[Banach-Alaoglu]
+\begin{satz}[\emph{Banach-Alaoglu}]
   Sei $X$ ein separabler Banachraum. Dann ist die abgeschl. Einheitskugel $\overline{B_1(0)} \subset X'$ schwach* folgenkompakt.
 \end{satz}
 
@@ -1341,8 +1346,8 @@
   Die Umkehrung gilt i.\,A. nicht! Gegenbeispiel: $X \coloneqq L^1$.
 \end{bem}
 
-\begin{satz}[Eberlein-Shmulyan]
-  Sei $X$ reflexiver Banachraum. Dann ist die abgeschlossene Einheitskugel $\overline{B_1(0)} \subset X$ schwach folgenkompakt.
+\begin{satz}[\emph{Eberlein-Shmulyan}]
+  Sei $X$ reflexiver Banachraum. Dann ist die abgeschl. Einheitskugel $\overline{B_1(0)} \subset X$ schwach folgenkompakt.
 \end{satz}
 
 % Bemerkung: Dies gilt dann auch für jede andere abgeschlossene Kugel $\overline{B_R(x)}$.
@@ -1367,7 +1372,7 @@
 
 % Kapitel 6.1. Minkowski-Funktional
 
-\begin{satz}[Trennungssatz]
+\begin{satz}[\emph{Trennungssatz}]
   Sei $X$ ein normierter Raum, $M \subset X$ nicht leer, abgeschlossen, konvex und $x_0 \in X \setminus M$. Dann gibt es ein $x' \in X'$ und ein $\alpha \in \R$ mit
   \[
     \Re \langle x', x_0 \rangle_{X' {\times} X} > \alpha
@@ -1389,7 +1394,7 @@
   \[ x_k \convWeaklyWith{k} x \text{ in } X \enspace \implies \enspace x \in M. \]
 \end{satz}
 
-\begin{lem}[Mazur]
+\begin{lem}[\emph{Mazur}]
   Sei $X$ ein normierter Raum und $(x_k)_{k \in \N}$ eine Folge in $X$ mit $x_k \convWeaklyWith{k} x$. Dann gilt $x \in \overline{\conv \Set{ x_k }{ k \in \N }}$.
 \end{lem}
 
@@ -1400,7 +1405,6 @@
 % Der Satz über die schwache Folgenabgeschlossenheit konvexer abgeschlossener Mengen spielt eine wichtige Rolle für Existenzaussagen für partielle Differentialgleichungen mit Nebenbedingungen
 
 \begin{satz}
-
   Sei $\Omega \subset \R^n$ offen, beschränkt, zusammenhängend mit $\mathcal{C}^{0,1}$-Rand sowie $\K = \R$. Sei $a_{ij} = a_{ji} \in L^\infty(\Omega)$ für $i,j = 1, \ldots, n$, sodass $a = (a_{ij})$ gleichmäßig elliptisch ist und $f \in L^2(\Omega)$. Betrachte $E \in W^{1,2}(\Omega) \to \R$ gegeben durch
   \[
     E(u) = \Int{\Omega}{}{ \tfrac{1}{2} \sum_{i,j=1}^n \partial_i u a_{ij} \partial_j u + f u }{x}
@@ -1490,7 +1494,7 @@
   \end{itemize}
 \end{defn}
 
-\begin{lem}[Besselsche Ungleichung]
+\begin{lem}[\emph{Besselsche Ungleichung}]
   Sei $(e_k)_{k \in \N}$ ein (endliches) ONS des Prähilbertraumes $X$. Dann gilt für alle $x \in X$ und $n \in N$:
   \begin{align*}
     0 \leq \norm{x}^2 - \sum_{k=0}^n \abs{\scp{x}{e_k}}^2 &= \norm{x - \sum_{k=0}^\infty \scp{x}{e_k} e_k}^2\\
@@ -1604,7 +1608,7 @@
   \end{itemize}
 \end{lem}
 
-\begin{satz}[vom abgeschlossenen Komplement]
+\begin{satz}[\emph{vom abgeschlossenen Komplement}]
   Sei $X$ ein Banachraum, $Y$ abgeschlossener Unterraum sowie $Z$ ein Unterraum mit $X = Y \oplus Z$.
   Dann ist $Z$ genau dann abgeschlossen, wenn es eine stetige Projektion $P \in \mathcal{P}(X)$ auf $Y$ mit $\ker(P) = Z$ gibt.
 \end{satz}
@@ -1878,7 +1882,7 @@ Die Unterräume $E_n = \im(Q_n)$ erfüllen dann (3) aus dem ersten Lemma und (2)
 \end{satz}
 
 % Ausgelassen: Namen: Riesz-Schauder
-\begin{satz}[Spektralsatz für kompakte Operatoren]
+\begin{satz}[\emph{Spektralsatz} für kompakte Operatoren]\mbox{}\\
   Für $T \in K(X)$ gilt:
   \begin{itemize}
     \item Die Menge $\sigma(T) \setminus \{ 0 \}$ besteht aus höchstens abzählbar vielen Elementen mit $0$ als einzig möglichem Häufungspunkt. Es gilt:
@@ -1912,7 +1916,7 @@ Die Unterräume $E_n = \im(Q_n)$ erfüllen dann (3) aus dem ersten Lemma und (2)
 % Beweisidee: Nutze die Zerlegung (3) des Spektralsatzes $X = \ker((\lambda \Id - T)^{n_\lambda}) \oplus \im((\lambda \Id - T)^{n_\lambda})$.
 % Schreibe $R(\lambda+\mu, T) = R(\lambda + \mu, T|_{\im(E_\lambda)}) E_\lambda + R(\lambda + \mu, T|_{\ker(E_\lambda)}) (\Id - E_{\lambda})$ (komplex analytisch nach dem ersten Satz)
 
-\begin{kor}[Fredholmsche Alternative]
+\begin{kor}[\emph{Fredholmsche Alternative}]
   Ist $T \in \mathcal{K}(X)$ und $\lambda \not= 0$, so gilt: Entweder ist die Gleichung $Tx - \lambda x = y$ eindeutig lösbar für jedes $y \in X$ oder die Gleichung $Tx - \lambda x = 0$ hat nichttriviale Lsgen.
 \end{kor}
 
@@ -1926,7 +1930,7 @@ Die Unterräume $E_n = \im(Q_n)$ erfüllen dann (3) aus dem ersten Lemma und (2)
   Sei $X$ ein Hilbertraum über $\C$ und $T \in \mathcal{L}(X)$ \emph{normal}, \dh{} $T^* T - T T^* = 0$, wobei $T^* \coloneqq R_{X}^{-1} T' R_X$ mit $R_X$ die Isometrie aus dem Rieszschen Darstellungssatz bzw. $\fa{x, y \in X\!} \!\scp{x}{T^* y} \!=\! \scp{Tx}{y}$, lassen sich die Aussagen noch konkretisieren. Es gilt:
 \end{bem}
 
-\begin{satz}[Spektralsatz für kompakte normale Operatoren]\mbox{}\\
+\begin{satz}[\emph{Spektralsatz} für kompakte normale Operatoren]\mbox{}\\
   Sei $X$ ein Hilbertraum über $\C$ und $0 \not= T \in \mathcal{K}(X)$ normal. Dann gilt:
   \begin{itemize}
     \item Es existiert eine ONS $(e_k)_{k \in N}$ in $X$ und Folge $(\lambda_k)_{k \in N}$ in $\C$, wobei $N \subset \N$, sodass $\lambda_k \not= 0$ und $T_{e_k} = \lambda_k e_k$ für $k \in N$ sowie $\sigma(T) \setminus \{ 0 \} = \Set{ \lambda_k }{ k \in N }$. Falls $\abs{N} = \infty$, gilt $\lambda_k \convWith{k} 0$.
