@@ -25,6 +25,11 @@
 \newcommand{\keS}{k.\,e.\,S.} % kurze exakte Sequenz
 \newcommand{\leS}{l.\,e.\,S.} % lange exakte Sequenz
 \newcommand{\Lg}{\mathfrak{g}} % Lie-g
+\DeclareMathOperator{\Sing}{Sing} % Homomorphisms
+\newcommand{\Cat}{\mathcal{C}} % Category-C
+\newcommand{\Dat}{\mathcal{D}} % Category-D
+\DeclareMathOperator{\Ob}{Ob} % Objects (of a category)
+\newcommand{\inlineitem}[1]{\textbullet \enspace #1} % List-Item im Fließtext
 
 
 % Kleinere Klammern
@@ -36,6 +41,97 @@
 \maketitle{Zusammenfassung Homologische Algebra}
 
 % Basierend auf dem Buch "Methods of Homological Algebra" von Gelfand und Manin
+
+% Vorgezogen:
+% II. Hauptbegriffe der Kategorientheorie
+
+% II.1 Die Sprache der Kategorien und Funktoren
+
+\section{Kategorientheorie}
+
+\begin{bem}
+  Die \href{http://timbaumann.info/uni-spicker/topo.pdf}{Topologie-Zusammenfassung} bietet eine Übersicht über Grundbegriffe der Kategorientheorie.
+\end{bem}
+
+% Ausgelassen: II.1.1-II.1.7
+
+% Aus II.1.8
+\begin{defn}
+  Sei $\Cat$ eine Kategorie, $X \in \Ob(\Cat)$. Der \emph{kovariante Hom-Funktor} $h_X : \Cat \to \SetC$ ist definiert durch
+  \[
+    h_X(Y) \coloneqq \Hom(X, Y), \quad
+    h_X(f : Y \to Y')(g : X \to Y) \coloneqq f \circ g.
+  \]
+  Allgemeiner gibt es den Funktor $\Hom : \Cat^\op \times \Cat \to \SetC$ mit
+  \[
+    \Hom(h : X' \to X, f : Y \to Y')(g : X \to Y) \coloneqq f \circ g \circ h.
+  \]
+\end{defn}
+
+% Ausgelassen: II.1.9-II.1.11
+
+% II.1.12
+\begin{defn}
+  Eine Kategorie $\Dat$ heißt \emph{Unterkategorie} einer Kategorie $\Cat$ (notiert $\Dat \subseteq \Cat$), wenn für alle geeigneten $X$, $Y$, $f$, $g$ gilt:
+  \[
+    \Ob(\Dat) \subseteq \Ob(\Cat), \enspace
+    \Hom_\Dat(X, Y) \subseteq \Hom_\Cat(X, Y) \enspace \text{und} \enspace
+    f \circ_\Dat g = f \circ_\Cat g.
+  \]
+\end{defn}
+
+\begin{defn}
+  Eine Unterkategorie $\Dat \subseteq \Cat$ heißt \emph{voll}, wenn
+  \[ \fa{X, Y \in \Ob(\Dat)} \Hom_\Dat(X, Y) = \Hom_\Cat(X, Y). \]
+\end{defn}
+
+\begin{defn}
+  Ein Funktor $F : \Cat \to \Dat$ heißt \ldots
+  \begin{itemize}
+    \item \ldots{} \emph{treu}, wenn für alle $X, Y \in \Ob(\Cat)$ die Abbildung
+    \[ F : \Hom_\Cat(X, Y) \to \Hom_\Dat(FX, FY) \]
+    injektiv ist.
+    \item \ldots{} \emph{voll}, wenn diese Abb. für alle $X, Y \in \Ob(\Cat)$ surjektiv ist.
+  \end{itemize}
+\end{defn}
+
+\begin{bem}
+  Die Einbettung einer Unterkategorie ist ein volltreuer Funktor.
+\end{bem}
+
+\begin{defn}
+  \begin{itemize}
+    \item Ein Objekt $X \in \Ob(\Cat)$ heißt \emph{initiales Objekt}, falls für alle $Y \in \Ob(Y)$ genau ein Morphismus $f \in \Hom_\Cat(X, Y)$ existiert.
+    \item Ein Objekt $Z \in \Ob(\Cat)$ heißt \emph{terminales Objekt}, falls für alle $Y \in \Ob(Y)$ genau ein Morphismus $f \in \Hom_\Cat(Y, Z)$ existiert.
+  \end{itemize}
+\end{defn}
+
+% Ausgelassen: II.1.13
+
+% II.2 (Kategorien und Strukturen, Äquivalenz von Kategorien)
+
+% Ausgelassen: II.2.1-II.2.4
+
+\begin{defn}
+  Ein Funktor $F : \Cat \to \Dat$ ist ein \emph{Kategorienäquivalenz}, falls es einen Funktor $G : \Dat \to \Cat$ mit $F \circ G \simeq \Id_\Dat$ und $G \circ F \simeq \Id_\Cat$ gibt. \\
+  Die Funktoren $F$ und $G$ heißen dann zueinander \emph{quasiinvers}.
+\end{defn}
+
+\begin{defn}
+  Zwei Kategorien $\Cat$, $\Dat$ heißen zueinander \emph{äquivalent}, wenn es eine Kategorienäquivalenz $F : \Cat \to \Dat$ gibt.
+\end{defn}
+
+% Ausgelassen: II.2.6
+
+% II.2.7
+\begin{prop}
+  $F : \Cat \to \Dat$ ist genau dann eine Kategorienäquivalenz, wenn:
+  \inlineitem{$F$ ist volltreu,} \quad
+  %\item Jedes Objekt $X \in \Ob(\Dat)$ ist isomorph zu einem Objekt $F(X)$, $X \in \Ob(\Cat)$.
+  \inlineitem{$\fa{Y \in \Ob(\Dat)} \ex{X \in \Ob(\Cat)} Y \cong F(X)$}
+\end{prop}
+
+% Ausgelassen: II.2.8 (Galois-Theorie)
 
 \section{Simpliziale Mengen}
 
@@ -96,6 +192,16 @@
   $X_n \coloneqq X([n])$ heißt Menge der $n$-Simplizes.
 \end{nota}
 
+% vorgezogen: aus I.2.15
+\begin{defn}
+  Eine \emph{simpliziale Abbildung} zwischen simplizialen Mengen $X$ und $Y$ ist eine natürliche Transformation zwischen den beiden Funktoren $X, Y : \Delta^\op \to \SetC$.
+\end{defn}
+
+% vorgezogen: aus I.2.15
+\begin{defn}
+  Die Kategorie der simplizialen Mengen ist die Funktorkategorie $\sSet \coloneqq [\Delta^\op, \SetC]$.
+\end{defn}
+
 \begin{defn}
   Die \emph{geometrische Realisierung} einer simplizialen Menge $X$ ist der topologische Raum
   \[ \abs{X} \coloneqq \left( \coprod_{n \in \N} (\Delta_n \times X_{n}) \right) / R \]
@@ -131,6 +237,10 @@
     X_n(f)(\sigma) \coloneqq \sigma \circ \Delta_f.
   \]
 \end{defn}
+
+\begin{bem}
+  Diese Konstruktion stiftet eine Funktor $\Sing : \Top \to \sSet$.
+\end{bem}
 
 % I.2.5
 \begin{defn}
@@ -180,15 +290,6 @@
 
 \begin{defn}
   Eine simpliziale Menge $X$ hat \emph{Dimension} $n$, falls $X = \sk_n X$.
-\end{defn}
-
-% I.2.15
-\begin{defn}
-  Eine \emph{simpliziale Abbildung} zwischen simplizialen Mengen $X$ und $Y$ ist eine natürliche Transformation zwischen den beiden Funktoren $X, Y : \Delta^\op \to \SetC$.
-\end{defn}
-
-\begin{defn}
-  Die Kategorie der simplizialen Mengen ist die Funktorkategorie $\sSet \coloneqq [\Delta^\op, \SetC]$.
 \end{defn}
 
 \begin{prop}
