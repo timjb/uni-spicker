@@ -53,7 +53,7 @@
 % Beispiele:
 % * Sei $\Omega \subset \R^n$ offen und beschränkt. Dann ist $\mathcal{C}(\overline{\Omega}) = \Set{ f : \Omega \to \R }{ f \text{ stetig} }$ mit der Norm $\norm{f}_\infty = \sup_{\omega \in \Omega} \abs{f(\omega)}$ ein Banachraum, \dh{} ein vollständiger, normierter Vektorraum. Er ist allerdings nicht endlich-dimensional (ausgelassen: Begründung dafür).
 % * Für eine lineare Abbildung zwischen endlich-dimensionalen Vektorräumen ist aus der linearen Algebra bekannt, dass sie injektiv genau dann sind, wenn sie surjektiv sind. Sind diese Vektorräume unendlich-dimensional ist dies i.\,A. falsch. Z.B. sei $C_* \coloneqq \Set{ (x_k)_{k \in \N} \text{ Folge in } \R }{ \ex{N \in \N} \fa{n \geq N} x_n = 0 }$ der Vektorraum der irgendwann abbrechenden Folgen. Der Shiftoperator
-%   \[ T : C_* \to C_*, (x_0, x_1, x_2, ...) \mapsto (0, x_0, x_1, x_2, ...) \]
+%   \[ T : C_* \to C_*, (x_0, x_1, x_2, \ldots) \mapsto (0, x_0, x_1, x_2, \ldots) \]
 %   ist offensichtlich linear und injektiv, aber nicht surjektiv.
 % * Sturm-Liouville-Problem (Details ausgelassen)
 
@@ -231,7 +231,7 @@
 \end{defn}
 
 \begin{defn}
-  Ist $(X, \tau)$ ein topologischer Raum und $A \subset X$, dann ist auch $(A, \tau_A)$ ein topologischer Raum mit der sogenannten \emph{Relativtopologie} $\tau_A \coloneqq \{ U \cap A \,|\,U \in \tau \}$.
+  Ist $(X, \tau)$ ein topol. Raum und $A \subset X$, dann ist auch $(A, \tau_A)$ ein topol. Raum mit der \emph{Relativtopologie} $\tau_A \coloneqq \{ U \!\cap\! A \,|\, U \in \tau \}$.
 \end{defn}
 
 \begin{defn}
@@ -262,7 +262,8 @@
 \end{defn}
 
 \begin{defn}
-  Seien $\tau_1, \tau_2$ zwei Topologien auf einer Menge $X$. Dann heißt $\tau_2$ \emph{stärker} (oder feiner) als $\tau_1$ bzw. $\tau_1$ \emph{schwächer} (oder gröber) als $\tau_2$, falls $\tau_1 \subset \tau_2$.
+  Sei $X$ eine Menge und $\tau_1, \tau_2$ Topologien auf $X$. Dann sagen wir
+  \[ \tau_1 \text{ ist \emph{gröber} als } \tau_2 \coloniff \tau_2 \text{ ist \emph{feiner} als } \tau_1 \coloniff \tau_1 \subseteq \tau_2. \]
 \end{defn}
 
 \begin{defn}
@@ -434,7 +435,7 @@
 \end{bem}
 
 \begin{defn}
-  Es sei $S \subset \R^n$ so, dass eine Ausschöpfung $(K_i)_{i \in \N}$ von $S$ existiert. Dann ist
+  Sei $(K_i)_{i \in \N}$ eine Ausschöpfung von $S \subset \R^n$. Dann ist
   \[ C^0(S; Y) \coloneqq \Set{ f : S \to Y }{ f \text{ ist stetig auf } S } \]
   der \emph{Raum der stetigen Funktionen} von $S$ nach $Y$. Er ist ein vollständiger metrischer Raum mit der Fréchet-Norm
   \[ \varrho(f) \coloneqq \sum_{i \in \N} 2^{-i} \tfrac{ \norm{f}_{C^0(K_i)} }{ 1 + \norm{f}_{C^0(K_i)} }. \]
@@ -463,7 +464,7 @@
   Sei $\Omega \subset \R^n$ offen und beschränkt und $m \in \N$. Dann ist
   \begin{align*}
     \mathcal{C}^m(\overline\Omega, Y) \coloneqq \{ f : \Omega \to Y \,|\, & f \text{ ist $m$-mal stetig differenzierbar in $\Omega$ } \\[-2pt]
-    & \text{ und für $k \leq m$ und } s_1, ..., s_k \in \{ 1, ..., n \} \\[-2pt]
+    & \text{ und für $k \leq m$ und } s_1, \ldots, s_k \in \{ 1, \ldots, n \} \\[-2pt]
     & \text{ ist $\partial_{s_1} \cdots \partial_{s_k} f$ auf $\overline\Omega$ stetig fortsetzbar } \}
   \end{align*}
   der \emph{Raum der differenzierbaren Funktionen} von $\Omega$ nach $Y$ und mit folgender Norm ein Banachraum:
@@ -507,8 +508,8 @@
 
 \begin{defn}
   Sei $(\Omega, \Alg, \mu)$ ein Maßraum und $Y$ ein Banachraum. Eine Funktion $f : \Omega \to Y$ heißt \emph{elementare Funktion}, wenn $f$ die Form
-  \[ f = \sum_{i=1}^n \ind_{E_i} b_i \quad \text{mit $n \in \N$, $E_1, ..., E_n \in \Alg$, $b_1, ..., b_n \in Y$} \]
-  und $\mu(E_i) < \infty$ für $i = 1, ..., n$ besitzt. Für eine solche Funktion heißt
+  \[ f = \sum_{i=1}^n \ind_{E_i} b_i \quad \text{mit $n \in \N$, $E_1, \ldots, E_n \in \Alg$, $b_1, \ldots, b_n \in Y$} \]
+  und $\mu(E_i) < \infty$ für $i = 1, \ldots, n$ besitzt. Für eine solche Fkt. heißt
   \[ \Int{\Omega}{}{f}{\mu} = \sum_{i=1}^n \mu(E_i) b_i \quad \text{Bochner-Integral.} \]
   Eine messbare Funktion $f : \Omega \to Y$ heißt \emph{Bochner-integrierbar}, wenn es eine Folge $(f_n)_{n \in \N}$ elementarer Funktionen gibt, sodass
   \[ \Int{\Omega}{}{\norm{f - f_n}}{\mu} \convWith{n} 0, \]
@@ -572,7 +573,7 @@
 \end{bem}
 
 \begin{satz}
-  Sei $n \in \N$, $q, p_1, ..., p_n \in \cinterval{1}{\infty}$ mit $\tfrac{1}{p_1} + ... + \tfrac{1}{p_n} = \tfrac{1}{q}$ und $f_i \in L^{p_i}(\mu, \K)$ für $i \in \{ 1, ..., n \}$. Dann ist $f_1 \cdot ... \cdot f_n \in L^q(\mu, \K)$ und es gilt die Hölder-Ungleichung $\norm{f_1 \cdot ... \cdot f_n}_{L^q} \leq \norm{f_1}_{L^{p_1}} \cdot ... \cdot \norm{f_n}_{L^{p_n}}$.
+  Sei $n \in \N$, $q, p_1, \nldots, p_n \in \cinterval{1}{\infty}$ mit $\tfrac{1}{p_1} + \nldots + \tfrac{1}{p_n} = \tfrac{1}{q}$ und $f_i \in L^{p_i}(\mu, \K)$ für $i \in \{ 1, \ldots, n \}$. Dann ist $f_1 \cdot \nldots \cdot f_n \in L^q(\mu, \K)$ und es gilt die Hölder-Ungleichung $\norm{f_1 \cdot \nldots \cdot f_n}_{L^q} \!\leq\! \norm{f_1}_{L^{p_1}} \cdot \nldots \cdot \norm{f_n}_{L^{p_n}}$.
 \end{satz}
 
 \begin{bem}
@@ -631,7 +632,7 @@
 
 \begin{defn}
   Sei $X$ ein $\K$-VR. Die \emph{konvexe Hülle} von $A \subset X$ ist
-  \[ \conv(A) \coloneqq \Set{ \sum_{i=0}^k a_i x_i }{ k {\in} \N, x_1, ..., x_k {\in} A, a_1, ..., a_k {\in} \R_{> 0}, \sum_{i=1}^k a_i = 1 }. \]
+  \[ \conv(A) \coloneqq \Set{ \sum_{i=0}^k a_i x_i }{ k {\in} \N, x_1, \nldots, x_k {\in} A, a_1, \nldots, a_k {\in} \R_{> 0}, \sum_{i=1}^k a_i = 1 }. \]
   Die Menge $A$ heißt \emph{konvex}, wenn $A = \conv(A)$.
 \end{defn}
 
@@ -670,7 +671,7 @@
 % Kapitel 2.2. Kompakte Teilmengen
 
 \begin{defn}
-  Eine Teilmenge $A \subset X$ heißt \emph{präkompakt}, falls es für jedes $\epsilon > 0$ eine Überdeckung von $A$ mit endlich vielen $\epsilon$-Kugeln $A \subset B_{\epsilon}(x_1) \cup ... \cup B_{\epsilon}(x_{n_\epsilon})$ mit $x_1, ..., x_{n_\epsilon} \in X$ gibt.
+  Eine Teilmenge $A \subset X$ heißt \emph{präkompakt}, falls es für jedes $\epsilon > 0$ eine Überdeckung von $A$ mit endlich vielen $\epsilon$-Kugeln $A \subset B_{\epsilon}(x_1) \cup \ldots \cup B_{\epsilon}(x_{n_\epsilon})$ mit $x_1, \ldots, x_{n_\epsilon} \in X$ gibt.
 \end{defn}
 
 \begin{defn}
@@ -1068,7 +1069,7 @@
     \item \emph{Dirichlet-Randbedingung}: $u|_{\partial \Omega} = g$ für gegebenes $g \in \mathcal{C}^0(\partial \Omega)$. Gesucht ist dann $u \in \mathcal{C}^2(\Omega) \cap \mathcal{C}^0(\overline{\Omega})$.
     \item \emph{Neumann-Randbedingung}: Auf $\partial \Omega$ gilt für geg. $g \in \mathcal{C}^0(\overline{\Omega})$
     \[ - \sum_{i=1}^n \nu_i \left( \sum_{j=1}^n a_{ij} \partial_j u + h_i \right) = g, \]
-    wobei $\partial \Omega$ ein $\mathcal{C}^1$-Rand mit äußerer Normalen $\nu = (\nu_1, ..., \nu_n)$ und $a_{ij}, h_i \in \mathcal{C}^0(\overline{\Omega})$. Gesucht ist dann $u \in \mathcal{C}^2(\Omega) \cap \mathcal{C}^1(\overline{\Omega})$.
+    wobei $\partial \Omega$ ein $\mathcal{C}^1$-Rand mit äußerer Normalen $\nu = (\nu_1, \ldots, \nu_n)$ und $a_{ij}, h_i \in \mathcal{C}^0(\overline{\Omega})$. Gesucht ist dann $u \in \mathcal{C}^2(\Omega) \cap \mathcal{C}^1(\overline{\Omega})$.
   \end{itemize}
 \end{prob}
 
@@ -1163,7 +1164,7 @@
 \end{satz}
 
 \begin{bem}
-  Der Satz kann als Verallgemeinerung des Projektions- satzes für Hilberträume im linearen Fall aufgefasst werden: Ist $X$ Hilbertraum mit abgeschlossenem Unterraum $Y$, so definiere
+  Der Satz kann als Verallgemeinerung des Projektionssatzes für Hilberträume im linearen Fall aufgefasst werden: Ist $X$ Hilbertraum mit abgeschlossenem Unterraum $Y$, so definiere
   \[ \langle x', x \rangle_{X' {\times} X} \coloneqq \scp{x}{\tfrac{x_0 - Px_0}{\norm{x_0 - Px_0}_X}}_X, \]
   wobei $P$ die orthogonale Projektion auf $Y$ sei. Dann gilt:
   \[
@@ -1400,7 +1401,7 @@
 
 \begin{satz}
 
-  Sei $\Omega \subset \R^n$ offen, beschränkt, zusammenhängend mit $\mathcal{C}^{0,1}$-Rand sowie $\K = \R$. Sei $a_{ij} = a_{ji} \in L^\infty(\Omega)$ für $i,j = 1, ..., n$, sodass $a = (a_{ij})$ gleichmäßig elliptisch ist und $f \in L^2(\Omega)$. Betrachte $E \in W^{1,2}(\Omega) \to \R$ gegeben durch
+  Sei $\Omega \subset \R^n$ offen, beschränkt, zusammenhängend mit $\mathcal{C}^{0,1}$-Rand sowie $\K = \R$. Sei $a_{ij} = a_{ji} \in L^\infty(\Omega)$ für $i,j = 1, \ldots, n$, sodass $a = (a_{ij})$ gleichmäßig elliptisch ist und $f \in L^2(\Omega)$. Betrachte $E \in W^{1,2}(\Omega) \to \R$ gegeben durch
   \[
     E(u) = \Int{\Omega}{}{ \tfrac{1}{2} \sum_{i,j=1}^n \partial_i u a_{ij} \partial_j u + f u }{x}
   \]
@@ -1412,9 +1413,8 @@
     \item Die absoluten Minima von $E$ auf $M$ sind genau die Lösungen der Variationsungleichung: Finde $u \in M$, sodass
     \[ \fa{v \in M} \Int{\Omega}{}{\sum_{i,j=1}^n \partial_i (u-v) a_{ij} \partial_j u + (u-v) f}{x} \leq 0. \]
     \item Ist $M$ ein abgeschlossener affiner Unterraum $M = u_0 + M_0$ mit $M_0$ Unterraum, so ist die Variationsungleichung äquivalent zu: Finde $u \in M$, sodass $\Int{\Omega}{}{\sum_{i,j=1}^n \partial_i v a_{ij} u + v f}{x} = 0$ für alle $v \in M_0$.
-    \item Hat $M$ die Eigenschaft
-    \[ \fa{v \in M} \fa{\xi \in \R} v + \xi \in M \implies \xi = 0, \]
-    so ist die Lösung eindeutig.
+    \item Die Lösung ist eindeutig, wenn $M$ folgende Eigenschaft besitzt:
+    \[ \fa{v \in M} \fa{\xi \in \R} v + \xi \in M \implies \xi = 0. \]
   \end{itemize}
 \end{satz}
 
@@ -1448,14 +1448,14 @@
     \[
       \fa{n \not= m} E_n \cap E_m = \{0\}
       \quad \text{und} \quad
-      \bigcup_{\mathclap{n \in \N}} \, (E_0 \oplus ... \oplus E_n) \text{ dicht in $X$.}
+      \bigcup_{\mathclap{n \in \N}} \, (E_0 \oplus \ldots \oplus E_n) \text{ dicht in $X$.}
     \]
     \item Es gibt eine linear unabhängige Menge $\Set{ e_n }{ n \in \N }$, sodass $\mathrm{span}\Set{e_n}{ n \in \N }$ dicht in $X$ liegt.
   \end{itemize}
 \end{lem}
 
 % Aussage (1) bedeutet, dass es zu $x \in X$ Punkte $x_n \in X$ gibt mit $x_n \convWith{n} x$
-% Aussage (4) bedeutet, dass es zu $x \in X$ und $n \in \N$ f+r $k = 0, ...., n$ Zahlen $\alpha_{n,k}$ gibt mit $\norm{x - \sum_{k=0}^n \alpha_{n,k}}_X \convWith{n} 0$
+% Aussage (4) bedeutet, dass es zu $x \in X$ und $n \in \N$ f+r $k = 0, \ldots, n$ Zahlen $\alpha_{n,k}$ gibt mit $\norm{x - \sum_{k=0}^n \alpha_{n,k}}_X \convWith{n} 0$
 % Falls die $\alpha_{n,k}$ unabhängig von $u$ gewählt werden können:
 
 \begin{defn}
@@ -1494,7 +1494,7 @@
   Sei $(e_k)_{k \in \N}$ ein (endliches) ONS des Prähilbertraumes $X$. Dann gilt für alle $x \in X$ und $n \in N$:
   \begin{align*}
     0 \leq \norm{x}^2 - \sum_{k=0}^n \abs{\scp{x}{e_k}}^2 &= \norm{x - \sum_{k=0}^\infty \scp{x}{e_k} e_k}^2\\
-    &= \dist(x, \mathrm{span} \{ e_0, ..., e_n \})^2.
+    &= \dist(x, \mathrm{span} \{ e_0, \ldots, e_n \})^2.
   \end{align*}
 \end{lem}
 
@@ -1619,9 +1619,9 @@
 % Vorlesung vom 23.1.2014
 
 \begin{satz}
-  Sei $X$ ein normierter Vektorraum, $E$ ein $n$-dimensionaler Unterraum mit Basis $e_1, ..., e_n$ und $Y$ ein abgeschlossener Unterraum mit $Y \cap E = \{ 0 \}$. Dann gilt:
+  Sei $X$ ein normierter Vektorraum, $E$ ein $n$-dimensionaler Unterraum mit Basis $e_1, \ldots, e_n$ und $Y$ ein abgeschlossener Unterraum mit $Y \cap E = \{ 0 \}$. Dann gilt:
   \begin{itemize}
-    \item $\ex{e_1', ..., e_n' \in X'} e_j'|_Y = 0$ und $\langle e_j', e_i \rangle = \delta_{ij}$.
+    \item $\ex{e_1', \ldots, e_n' \in X'} e_j'|_Y = 0$ und $\langle e_j', e_i \rangle = \delta_{ij}$.
     \item Es gibt eine stetige Projektion $P$ auf $E$ mit $Y = \ker(P)$, nämlich
     \[ P(x) \coloneqq \sum_{j=1}^n \langle e_j', x \rangle e_j. \]
   \end{itemize}
@@ -1684,7 +1684,7 @@ Man rechnet leicht nach, dass zu einer Folge $(P_n)_{n \in \N}$ mit (P1), (P2) m
 (Q1) $\fa{x \in X} \sum_{i=0}^n Q_i x \xrightarrow{n \to \infty} x$
 (Q2) $\fa{m,n} Q_n \circ Q_m = \delta_{mn} Q_n$
 
-Die Unterräume $E_n = \im(Q_n)$ erfüllen dann (3) aus dem ersten Lemma und (2) mit $X_n = E_0 \oplus ... \oplus E_n$.
+Die Unterräume $E_n = \im(Q_n)$ erfüllen dann (3) aus dem ersten Lemma und (2) mit $X_n = E_0 \oplus \ldots \oplus E_n$.
 \fi
 
 % Ausgelassene Beispiele
@@ -1694,7 +1694,7 @@ Die Unterräume $E_n = \im(Q_n)$ erfüllen dann (3) aus dem ersten Lemma und (2)
     \item Ist $X$ Hilbertraum und $X = \overline{\bigcup_{n \in \N} X_n}$ mit $\mathrm{dim} X_n < \infty$, $X_n \subset X_{n+1}$, so sei $P_n$ die orthogonale Projektion auf $X_n$ und mit $X_{n+1} = X_n \perp E_n$ sei $Q_n$ die orthogonale Projektion auf $E_n$. Ist speziell $X_n = \mathrm{span} \Set{ e_i }{ 0 \leq i \leq n }$ mit einer ONB $(e_i)_{i \in \N}$, so ist
     \[ Q_n x = \scp{x}{e_n} e_n \quad \text{und} \quad P_n x = \sum_{i=0}^n \scp{x}{e_i} e_i \]
     % 2. Beispiel: Definition der Dualbasis eines Banachraums mit Schauderbasis
-    \item Zerlege $\I$ in Punkte $M_n = \Set{ x_{n,i} }{ i = 0, ...., m_n }$ mit $0 = x_{n,0} < ... < x_{n,m} = 1$ und $h_n = \max_{i} \abs{x_{n_i,i} - x_{n_i,i-1}} \xrightarrow{n \to \infty} 0$ sowie $\fa{n \in \N} M_n \subset M_{n+1}$. Sei $A_{n_i,i} = (x_{n_i,i}, x_{n_i,i})$, $h_{n_i,i} = x_{n_i,i} - x_{n_i,i-1}$. Dann ist der Raum der stückweise konstanten Funktionen bzgl. dieser Zerlegung auf Level $n$:
+    \item Zerlege $\I$ in Punkte $M_n = \Set{ x_{n,i} }{ i = 0, \ldots, m_n }$ mit $0 = x_{n,0} < \ldots < x_{n,m} = 1$ und $h_n = \max_{i} \abs{x_{n_i,i} - x_{n_i,i-1}} \xrightarrow{n \to \infty} 0$ sowie $\fa{n \in \N} M_n \subset M_{n+1}$. Sei $A_{n_i,i} = (x_{n_i,i}, x_{n_i,i})$, $h_{n_i,i} = x_{n_i,i} - x_{n_i,i-1}$. Dann ist der Raum der stückweise konstanten Funktionen bzgl. dieser Zerlegung auf Level $n$:
     \[ X_n = \Set{ \sum_{i=1}^m \alpha_i \chi_{A_{n_i,i}} }{ \alpha_i \in \K }, \mathrm{dim}(X_n) = m_n \]
     Für $f \in L^1(\ointerval{0}{1})$ definiere $P_n f = \sum_{i=1}^{m_n} (\frac{1}{n_{n_i,i}} \Int{A_{n_i,i}}{}{f(s)}{s}) \chi_{A_{n_i,i}}$.
     Es ist $\mathrm{im}(P_1) = X_n$ und für die Standardzerlegung $x_{n_i,i} = i 2^{-n}$ ist $E_n = \mathrm{span} \Set{ e_{n_i} }{  1 \leq i \leq 2^{n-1} }$ mit $e_0 = \chi_{\ointerval{0}{1}}, e_{n,i} = \chi_{A_{n,2i-1}} - \chi_{A_{n,2i}}$.
@@ -1917,14 +1917,16 @@ Die Unterräume $E_n = \im(Q_n)$ erfüllen dann (3) aus dem ersten Lemma und (2)
 \end{kor}
 
 \begin{kor}
-  Sei $X$ ein endlich-dimensionaler VR über $\C$ und $T : X {\to} X$ linear. Dann gibt es paarwise verschiedene $\lambda_1, ..., \lambda_m \in \C$, wobei $1 \leq m \leq \dim X$, sodass $\sigma(T) = \sigma_p(T) = \{ \lambda_1, ..., \lambda_m \}$ und Ordnungen $n_{\lambda_j}$ mit $X = \ker \left( (\lambda \Id {-} T)^{n_{\lambda_1}} \right) \oplus ... \oplus \ker \left( (\lambda \Id {-} T)^{n_{\lambda_1}} \right)$.
+  Sei $X$ ein endlich-dim. VR über $\C$ und $T : X {\to} X$ linear. Dann gibt es paarwise verschiedene $\lambda_1, \ldots, \lambda_m \in \C$, wobei $1 \leq m \leq \dim X$, sodass $\sigma(T) = \sigma_p(T) = \{ \lambda_1, \ldots, \lambda_m \}$ und Ordnungen $n_{\lambda_j}$ mit $X = \ker \left( (\lambda \Id {-} T)^{n_{\lambda_1}} \right) \oplus \ldots \oplus \ker \left( (\lambda \Id {-} T)^{n_{\lambda_1}} \right)$.
 \end{kor}
 
 % Vorlesung vom 6.2.2014
 
-Sei $X$ ein Hilbertraum über $\C$ und $T \in \mathcal{L}(X)$ \emph{normal}, \dh{} $T^* T - T T^* = 0$, wobei $T^* \coloneqq R_{X}^{-1} T' R_X$ mit $R_X$ die Isometrie aus dem Rieszschen Darstellungssatz bzw. $\fa{x, y \in X} \scp{x}{T^* y} = \scp{Tx}{y}$, lassen sich die Aussagen noch konkretisieren. Es gilt:
+\begin{bem}
+  Sei $X$ ein Hilbertraum über $\C$ und $T \in \mathcal{L}(X)$ \emph{normal}, \dh{} $T^* T - T T^* = 0$, wobei $T^* \coloneqq R_{X}^{-1} T' R_X$ mit $R_X$ die Isometrie aus dem Rieszschen Darstellungssatz bzw. $\fa{x, y \in X\!} \!\scp{x}{T^* y} \!=\! \scp{Tx}{y}$, lassen sich die Aussagen noch konkretisieren. Es gilt:
+\end{bem}
 
-\begin{satz}[Spektralsatz für kompakte normale Operatoren]
+\begin{satz}[Spektralsatz für kompakte normale Operatoren]\mbox{}\\
   Sei $X$ ein Hilbertraum über $\C$ und $0 \not= T \in \mathcal{K}(X)$ normal. Dann gilt:
   \begin{itemize}
     \item Es existiert eine ONS $(e_k)_{k \in N}$ in $X$ und Folge $(\lambda_k)_{k \in N}$ in $\C$, wobei $N \subset \N$, sodass $\lambda_k \not= 0$ und $T_{e_k} = \lambda_k e_k$ für $k \in N$ sowie $\sigma(T) \setminus \{ 0 \} = \Set{ \lambda_k }{ k \in N }$. Falls $\abs{N} = \infty$, gilt $\lambda_k \convWith{k} 0$.
@@ -1939,7 +1941,7 @@ Sei $X$ ein Hilbertraum über $\C$ und $T \in \mathcal{L}(X)$ \emph{normal}, \dh
 \end{bem}
 
 \begin{lem}
-  Seien $X$ ein Hilbertraum über $\C$ und $T \in \LSO(x)$ normal. Dann gilt:
+  Seien $X$ ein Hilbertraum über $\C$ und $T \in \LSO(x)$ normal.
   \begin{itemize}
     \item  Ist $X \not= 0$, gilt $\sup \sigma(T) \lambda = \norm{T}$
     \item Ist $T$ \emph{selbstadjungiert}, \dh{} $T^* = T$, so ist $\sigma_p(T) \subset \cinterval{-\norm{T}}{\norm{T}}$ und, falls $T$ auch kompakt ist, $\norm{T}$ oder $-\norm{T}$ ein Eigenwert.
