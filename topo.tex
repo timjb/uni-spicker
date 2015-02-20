@@ -1260,8 +1260,16 @@
     \item Falls $f, g \in \Mor(\mathcal{C})$ mit $f \sim g$, so ist $\dom(f) = \dom(g)$ und $\codom(f) = \codom(g)$.
     \item Ist $f \sim g \in \Hom(A, B)$ und $h \sim k \in \Hom(B, C)$, so gilt auch $h \circ f \sim k \circ g \in \Hom(A, C)$.
   \end{itemize}
-  Dann gibt es eine Kategorie $\mathcal{C}/{\sim}$ mit $\Ob(\mathcal{C}/{\sim}) \coloneqq \Ob(\mathcal{C})$ und $\Mor(\mathcal{C}/{\sim}) \coloneqq \Mor(\mathcal{C})/{\sim}$.
+  Dann gibt es eine Kategorie $\mathcal{C}/{\sim}$ mit $\Ob(\mathcal{C}/{\sim}) \coloneqq \Ob(\mathcal{C})$, $\Mor(\mathcal{C}/{\sim}) \coloneqq \Mor(\mathcal{C})/{\sim}$ und $[f] \circ [g] = [f \circ g]$.
 \end{bem}
+
+\begin{defn}
+  Die \emph{Produktkategorie} $\mathcal{C} \times \mathcal{D}$ von Kat. $\mathcal{C}$ und $\mathcal{D}$ ist def. durch
+  \begin{align*}
+    \Ob(\mathcal{C} \times \mathcal{D}) & \coloneqq \Ob(\mathcal{C}) \times \Ob(\mathcal{D}), \\
+    \Hom_{\mathcal{C} \times \mathcal{D}}((A_1, A_2), (B_1, B_2)) & \coloneqq \Hom_{\mathcal{C}}(A_1, B_1) \times \Hom_{\mathcal{D}}(A_2, B_2).
+  \end{align*}
+\end{defn}
 
 \begin{defn}
   Die \emph{Homotopiekategorie} ist $\mathbf{HTop} \coloneqq \mathbf{Top} / {\simeq}$.
@@ -1285,7 +1293,7 @@
 \begin{bspe}
   \begin{itemize}
     \item Für $\mathcal{C} = \mathbf{Grp}, \mathbf{AbGrp}, \mathbf{Rng}, \mathbf{Top}, \ldots$ gibt es den \emph{Vergissfunktor} $U : \mathcal{C} \to \mathbf{Set}$.
-    \item Besitzen $\mathcal{C}$ und $\mathcal{D}$ nur je ein Objekt (sind also Gruppen), so ist ein Funktor $F : \mathcal{C} \to \mathcal{D}$ nichts anderes als ein Gruppenhomomorphismus.
+    \item Besitzen $\mathcal{C}$ und $\mathcal{D}$ nur je ein Objekt (sind also Gruppen), so ist ein Funktor $F : \mathcal{C} \to \mathcal{D}$ nichts anderes als ein Gruppenhomo.
     \item Der \emph{Potenzmengenfunktor} $P : \mathbf{Set} \to \mathbf{Set}$ ist definiert durch
     \[ P(A) \coloneqq \mathcal{P}(A), \quad P(f : A \to B)(X \subseteq A) \coloneqq f(X) \subseteq B. \]
     \item Sind $P$ und $Q$ partiell geordnete Mengen, so ist ein Funktor $P \to Q$ nichts anderes als eine ordnungserhaltende Abbildung.
@@ -1310,7 +1318,7 @@
 \end{defn}
 
 \begin{defn}
-  Ein \emph{kontravarianter Funktor} zwischen Kategorien $\mathcal{C}$ und $\mathcal{D}$ ist ein Funktor $F : \mathcal{C}^\op \to \mathcal{D}$.
+  Ein \emph{kontravarianter Funktor} zwischen Kategorien $\mathcal{C}$ und $\mathcal{D}$ ist ein kovarianter Funktor $F : \mathcal{C}^\op \to \mathcal{D}$.
 \end{defn}
 
 \begin{bspe}
@@ -1375,6 +1383,10 @@
 \begin{defn}
   Die Isomorphismen der Funktorkategorie $\left[\mathcal{C}, \mathcal{D}\right]$ heißen \emph{natürliche Isomorphismen}.
 \end{defn}
+
+\begin{nota}
+  $F \simeq G \coloniff \exists \text{ nat. Isomorphismus zwischen $F$ und $G$}$
+\end{nota}
 
 \begin{lem}
   Eine natürliche Transformation $\eta : F \to G$ ist genau dann ein natürlicher Isomorphismus, wenn alle Komponenten $(\eta_X : F(X) \to G(X))_{X \in \Ob \mathcal{C}}$ Isomorphismen sind.
@@ -1458,13 +1470,13 @@
 \end{kor}
 
 \begin{prop}
-  Die Abbildung $p : \R \to S^1, t \mapsto e^{2 \pi i t}$ ist eine Überlagerung von $S^1$. Bezeichne für geschl. Wege $f : \I \to S^1$ mit $f(0) = f(1) = 0$ mit $\tilde{f}$ die Liftung von $f$ mit $\tilde{f}(0) = 0$. Dann ist
+  Die Abbildung $p : \R \to S^1, t \mapsto e^{2 \pi i t}$ ist eine Überlagerung von $S^1$. Bezeichne für geschl. Wege $f : \I \to S^1$ mit $f(0) = f(1) = e^0$ mit $\tilde{f}$ die Liftung von $f$ mit $\tilde{f}(0) = 0$. Dann ist
   \[ \mathrm{deg} : \pi_1(S^1, 0) \to \Z, \quad [f] \mapsto \tilde{f}(1) \in \Z \]
   ein Gruppenisomorphismus.
 \end{prop}
 
 \begin{defn}
-  Stetig Abbildungen $f : S^1 \to S^1$ mit $f(1) = 1$ können als geschlossene Wege $\I \to S^1$ aufgefasst werden. Dann heißt $\deg f \in \Z$ der \emph{Abbildungsgrad} von $f$.
+  Jede stetige Abbildung $f : S^1 \to S^1$ ist homotop zu einer Abbildung $\hat{f} : S^1 \to S^1$ mit $f(e^0) = e^0$. Diese kann als geschl. Weg in $S^1$ aufgefasst werden. Der \emph{Abbildungsgrad} von $f$ ist $\deg \hat{f} \in \Z$.
 \end{defn}
 
 \begin{prop}
@@ -1555,11 +1567,9 @@ Für $p : (X, x_0) \to (Y, y_0)$ eine universelle Überlagerung und $g = [\gamma
 \end{satz}
 
 \begin{bspe}
-  \begin{itemize}
-    \item $\pi_1(S^1) = \pi_1(\R / \Z) \cong \Z$
-    \item $\pi_1(S^1 \times S^1) = \pi_1(\R^2 / \Z^2) \cong \Z^2$
-    \item $\pi_1(\R P^2) = \pi_1(S^2 / (\Z/2)) \cong \Z/2$
-  \end{itemize}
+  \inlineitem{$\pi_1(S^1) \!=\! \pi_1(\R / \Z) \!\cong\! \Z$,} \enspace
+  \inlineitem{$\pi_1(S^1 \times S^1) \!=\! \pi_1(\R^2 / \Z^2) \!\cong\! \Z \oplus \Z$,} \\
+  \inlineitem{$\pi_1(\R P^2) = \pi_1(S^2 / (\Z/2)) \cong \Z/2$}
 \end{bspe}
 
 \begin{defn}
@@ -1575,7 +1585,7 @@ Für $p : (X, x_0) \to (Y, y_0)$ eine universelle Überlagerung und $g = [\gamma
 \end{bspe}
 
 \begin{satz}
-  Sei $Y$ wegzshgd und lokal wegzshgd. Dann besitzt $Y$ genau dann eine universelle Überlagerung, wenn $Y$ semilokal einfach zusammenhängend ist.
+  Sei $Y$ wegzshgd und lokal wegzshgd. Dann besitzt $Y$ genau dann eine univ. Überlagerung, wenn $Y$ semilokal einfach zshgd ist.
 \end{satz}
 
 \end{document}
