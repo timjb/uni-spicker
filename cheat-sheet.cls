@@ -121,9 +121,9 @@
 \newcommand{\Q}{\mathbb{Q}} % Rationale Zahlen
 \renewcommand{\d}{\mathrm{d}} % Differentiator
 
-\newcommand{\spur}{\mathrm{spur}} % Spur
-\newcommand{\id}{\mathrm{id}} % Identität
-\newcommand{\Id}{\mathrm{Id}} % Identität
+\DeclareMathOperator{\spur}{spur} % Spur
+\DeclareMathOperator{\id}{id} % Identität
+\DeclareMathOperator{\Id}{Id} % Identität
 
 % Name einer Eigenschaft rechts ausgerichtet in Klammern
 \newcommand{\pright}[1]{\hfill ({#1}) \,}
@@ -137,8 +137,8 @@
 \newcommand{\Intab}[2]{\Int{a}{b}{#1}{#2}} % Integral über [a, b]
 \newcommand{\Intabdx}[1]{\Intdx{a}{b}{#1}} % Integral über [a, b] mit dx
 
-\newcommand{\im}{\mathop{\mathrm{im}}} % Bild (image)
-\newcommand{\supp}{\mathop{\mathrm{supp}}} % Träger (support)
+\DeclareMathOperator{\im}{im} % Bild (image)
+\DeclareMathOperator{\supp}{supp} % Träger (support)
 
 % Schöne Fürall- und Existenzquantoren
 \newcommand{\fa}[1]{\forall \, {#1} \,:\,}
@@ -151,6 +151,8 @@
 % :<=> (Definitionsdoppelpfeil)
 \newcommand{\coloniff}{\enspace:\!\iff}
 
+% Abkürzungen
+\newcommand{\zB}{z.\,B.}
 \renewcommand{\dh}{d.\,h.} % das heißt
 
 % Schöne Mengen { #1 | #2 }
@@ -204,6 +206,9 @@
 % siehe http://tex.stackexchange.com/questions/30526/two-column-list-different-column-widths
 \newcommand{\miniitem}[2]{%
   \begin{minipage}{#1} {\item #2} \end{minipage}}
+
+% List-Item im Fließtext
+\newcommand{\inlineitem}[1]{\textbullet \enspace #1}
 
 \usepackage{ragged2e} % Flattersatz mit Silbentrennung
 
