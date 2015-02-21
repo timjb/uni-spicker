@@ -30,6 +30,7 @@
 \newcommand{\Dat}{\mathcal{D}} % Category-D
 \DeclareMathOperator{\Ob}{Ob} % Objects (of a category)
 \newcommand{\inlineitem}[1]{\textbullet \enspace #1} % List-Item im Fließtext
+\DeclareMathOperator{\Cov}{Cov} % Überlagerungen (coverings)
 
 
 % Kleinere Klammern
@@ -96,7 +97,7 @@
 \end{defn}
 
 \begin{bem}
-  Die Einbettung einer Unterkategorie ist ein volltreuer Funktor.
+  Die Einbettung einer (vollen) Unterkategorie ist ein (voll-)treuer Funktor.
 \end{bem}
 
 \begin{defn}
@@ -131,7 +132,27 @@
   \inlineitem{$\fa{Y \in \Ob(\Dat)} \ex{X \in \Ob(\Cat)} Y \cong F(X)$}
 \end{prop}
 
-% Ausgelassen: II.2.8 (Galois-Theorie)
+% Ausgelassen: II.2.8 (Bsp. Galois-Theorie)
+
+% II.2.9
+\begin{bsp}
+  Sei $B$ ein lokal wegzshgder, semi-lokal einfach zshgder topol. Raum. Dann ist die Kategorie $\Cov(B)$ der Überlagerungen von $B$ äquivalent zur Kategorie $[\pi(B), \SetC]$ der Mengen-wertigen Funktoren auf dem Fundamentalgruppoid von $B$. Dabei ist
+  \begin{align*}
+    F : \Cov(B) & \to [\pi(B), \SetC], \quad F(p : \tilde{B} \to B) \coloneqq G_{\tilde{B},p}, \\
+    G_{\tilde{B},p}(b \in B) & \coloneqq p^{-1}(b), \quad G_{\tilde{B},p}(\gamma : \I \to B)(\tilde{b} \in p^{-1}(\gamma(0))) \coloneqq \tilde{\gamma}(1), \\
+    & \text{mit $\tilde{\gamma}$ Liftung von $\gamma$ mit $\tilde{\gamma}(0) = \tilde{b}$}.
+  \end{align*}
+\end{bsp}
+
+% Ausgelassen: II.2.10 (Bsp. Kommutative Banach-Algebren)
+
+% Ausgelassen: II.2.11 (Bsp. Pontryagin-Dualität)
+% Ausgelassen: II.2.12 (Bemerkungen)
+
+% II.2, exercises
+\begin{defn}
+  Zwei Ringe $A$ und $B$ heißen \emph{Morita-äquivalent}, wenn ihre Kategorien der (Links/Rechts)-Moduln äquivalent sind.
+\end{defn}
 
 \section{Simpliziale Mengen}
 
