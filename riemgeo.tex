@@ -1419,7 +1419,73 @@
 
 % Vorlesung vom 23.1.2015
 
-% TODO
+\begin{satz}[\emph{Sphärensatz}]
+  Sei $M^n$ eine kompakte, einfach zsghde Riem. Mft. mit $\tfrac{1}{4} < \sec \leq 1$. Dann ist $M$ diffeomorph zur $n$-Sphäre.
+\end{satz}
+
+\begin{defn}
+  Sei $M$ eine Riem. Mft, $p \in M$.
+  \[
+    \Iso_p(M) \coloneqq \Set{ f \in \Iso(M) }{ f(p) = p } \quad
+    \text{heißt \emph{Isotropiegruppe} von $p$.}
+  \]
+\end{defn}
+
+% 23.7
+\begin{lem}
+  Seien $p, q \in M$, $f \in \Iso(M)$ mit $f(p) = q$. Dann ist
+  \[ \Iso_q(M) = \Set{ f \circ g \circ f^{-1} }{ g \in \Iso_p(M) }. \]
+\end{lem}
+
+\begin{bem}
+  Ist $M$ homogen, so sind alle Isotropiegruppen isomorph.
+\end{bem}
+
+\begin{bem}
+  Sei $M$ zshgd, vollständig. Dann ist
+  \[
+    \phi : \Iso_p(M) \to O(T_p M), \quad
+    f \mapsto f_{*p}
+  \]
+  ein injektiver Gruppenhomomorphismus.
+\end{bem}
+
+% 23.8
+\begin{satz}
+  $\phi(\Iso_p(M))$ ist abgeschlossen in $O(T_p M)$, also kompakt.
+\end{satz}
+
+\begin{defn}
+  Sei $M$ eine Riem. Mft, $p \in M$. Dann heißt
+  \[
+    \Hol_p(M) \coloneqq \Set{ P_c }{ c : \I \to M \text{ stückw. reg. Kurve, } c(0) \!=\! c(1) \!=\! p }
+  \]
+  \emph{Holonomiegruppe} von $p$ ($\Hol_p(M) \subseteq O(T_p M)$).
+\end{defn}
+
+% 23.9
+\begin{satz}
+  Sei $P$ ein sym. Raum. Dann ist $\Hol_p(P) \subseteq \phi(\Iso_p(P))$.
+\end{satz}
+
+\begin{bem}
+  \begin{itemize}
+    \item Umkehrung: Sei $M$ einfach zshgde, Riem. Mft. mit $\Hol_p(M) \subseteq \phi(\Iso_p(M))$. Dann ist $P$ ein symmetrischer Raum. % Berger/Simons/Olmos
+    \item Für $P = \R^n$, $p = 0$ gilt $\Hol_p(P) \subsetneq \phi(\Iso_p(P))$.
+    \item Für eine zshgde, vollst. Riem. Mft. $M$ gilt:
+    \begin{align*}
+      \phi(\Iso_p(M)) & = \text{Normalisator von $\Hol_p(M)$ in $O(T_p M)$} \\
+      & = \Set{ g \in O(T_p M) }{ g \Hol_p(M) g^{-1} = \Hol_p(M) }.
+    \end{align*}
+  \end{itemize}
+\end{bem}
+
+% 23.10
+\begin{satz}
+  Sei $P$ ein kompakter sym. Raum. Dann ist $\pi_1(P)$ abelsch.
+\end{satz}
+
+% Ausgelassen: Hilfslemma: Ist $G \to G, g \mapsto g^{-1}$ ein Gruppenhomo, dann ist $G$ abelsch.
 
 % Vorlesung vom 27.1.2015
 
