@@ -20,6 +20,13 @@
 \DeclareMathOperator{\codom}{codom} % Codomain
 \newcommand{\op}{\mathrm{op}} % Duale Kategorie
 \DeclareMathOperator{\Deck}{Deck} % Gruppe der Decktransformationen
+\newcommand{\Aat}{\mathcal{A}} % Category-A
+\newcommand{\Bat}{\mathcal{B}} % Category-B
+\newcommand{\Cat}{\mathcal{C}} % Category-C
+\newcommand{\Dat}{\mathcal{D}} % Category-D
+\newcommand{\Eat}{\mathcal{E}} % Category-E
+\newcommand{\Cont}{\mathcal{C}} % Menge der stetigen Funktionen
+\newcommand{\Pow}{\mathcal{P}} % Potenzmenge (powerset)
 
 % Kleinere Klammern
 \delimiterfactor=701
@@ -41,7 +48,7 @@
 \end{defn}
 
 % Ausgelassen: Beispiel $\R^n$
-% Ausgelassen: Beispiel Funktionenraum $\mathcal{C}(\I, \R)$ mit Maximumsnorm
+% Ausgelassen: Beispiel Funktionenraum $\Cont(\I, \R)$ mit Maximumsnorm
 
 \begin{defn}
   Für einen metrischen Raum $(X, d)$ und eine Teilmenge $A \subset X$ ist $(A, d|_A)$ ein metrischer Raum und $d|_A$ heißt \emph{induzierte Metrik}.
@@ -66,7 +73,7 @@
 \end{prop}
 
 \begin{defn}
-  Ein \emph{topologischer Raum} $(X, \Tau)$ besteht aus einer Menge $X$ und einer Menge $\tau \subset \mathcal{P}(X)$ mit den Eigenschaften \\
+  Ein \emph{topologischer Raum} $(X, \Tau)$ besteht aus einer Menge $X$ und einer Menge $\tau \subset \Pow(X)$ mit den Eigenschaften \\
   \inlineitem{$\emptyset \in \Tau$,} \quad
   \inlineitem{$\fa{U, V \in \Tau} U \cap V \in \Tau$,} \quad
   \inlineitem{$\fa{S \subset \Tau} \bigcap_{\mathclap{U \in S}} U \in \Tau$} \\
@@ -74,7 +81,7 @@
 \end{defn}
 
 \begin{bsp}
-  Die \emph{diskrete Topologie} auf einer Menge $X$ ist $\Tau = \mathcal{P}(X)$.
+  Die \emph{diskrete Topologie} auf einer Menge $X$ ist $\Tau = \Pow(X)$.
 \end{bsp}
 
 \begin{bsp}
@@ -112,7 +119,7 @@
 \end{defn}
 
 \begin{nota}
-  $\mathcal{C}(X, Y) \coloneqq \Set{ f : X \to Y }{\text{$f$ stetig}}$
+  $\Cont(X, Y) \coloneqq \Set{ f : X \to Y }{\text{$f$ stetig}}$
 \end{nota}
 
 \begin{bem}
@@ -160,8 +167,8 @@
 \end{bspe}
 
 \begin{prop}
-  %Jede Teilmenge $\mathcal{B} \subset \mathcal{P}(X)$ ist Subbasis von genau einer Topologie $\Tau$ auf $X$.
-  Jedes $\mathcal{B} \!\subset\! \mathcal{P}(X)$ ist Subbasis genau einer Topologie $\Tau$ auf $X$.
+  %Jede Teilmenge $\mathcal{B} \subset \Pow(X)$ ist Subbasis von genau einer Topologie $\Tau$ auf $X$.
+  Jedes $\mathcal{B} \!\subset\! \Pow(X)$ ist Subbasis genau einer Topologie $\Tau$ auf $X$.
 \end{prop}
 
 \begin{defn}
@@ -349,7 +356,7 @@
 \end{prop}
 
 \begin{defn}
-  Eine \emph{Umgebungsbasis} von $x \in X$ ist eine Menge $\mathcal{B} \subset \mathcal{P}(X)$ bestehend aus Umgebungen von $x$, sodass jede Umgebung von $x$ eine der Umgebungen in $\mathcal{B}$ enthält.
+  Eine \emph{Umgebungsbasis} von $x \in X$ ist eine Menge $\mathcal{B} \subset \Pow(X)$ bestehend aus Umgebungen von $x$, sodass jede Umgebung von $x$ eine der Umgebungen in $\mathcal{B}$ enthält.
 \end{defn}
 
 \begin{defn}
@@ -378,7 +385,7 @@
 \begin{bspe}
   \begin{itemize}
     \item $D = (\N, \leq)$
-    \item $X$ beliebige Menge, $D = (\mathcal{P}(X), \subseteq)$ oder $D = (\mathcal{P}(X), \supseteq)$
+    \item $X$ beliebige Menge, $D = (\Pow(X), \subseteq)$ oder $D = (\Pow(X), \supseteq)$
     \item Sei $(X, \tau)$ ein top. Raum, $x \in X$, $D \coloneqq (\Set{U \subset X}{\text{$U$ Umgebung von $x$}}, \leq)$ mit $U \leq V \coloneqq V \subset U$.
   \end{itemize}
 \end{bspe}
@@ -661,8 +668,8 @@
 \begin{defn}
   Sei $X$ ein normaler Hausdorffraum. Dann ist
   \[
-    f : X \to \prod_{\phi \in \mathcal{C}} \I, \quad x \mapsto (\phi(x))_{\phi \in \mathcal{C}}
-    \qquad \text{mit } \mathcal{C} \coloneqq \mathcal{C}(X, \I)
+    f : X \to \prod_{\phi \in \Cont} \I, \quad x \mapsto (\phi(x))_{\phi \in \Cont}
+    \qquad \text{mit } \Cont \coloneqq \Cont(X, \I)
   \]
   eine topologische Einbettung. Dann ist $\beta X \coloneqq \overline{f(X)}$ kompakt. Die Abb. $\beta : X \to \beta X$ heißt \emph{Stone-Čech-Kompaktifizierung} von $X$.
 \end{defn}
@@ -865,7 +872,7 @@
 \section{Simplizialkomplexe}
 
 \begin{defn}
-  Ein \emph{abstrakter Simplizialkomplex} ist ein Paar $(X, \Sigma)$ bestehend aus einer total geordneten Menge $X$ und einer Teilmengen $\Sigma \subset \mathcal{P}(X)$ (genannt Menge der \emph{abstrakten Simplizes}), sodass gilt:
+  Ein \emph{abstrakter Simplizialkomplex} ist ein Paar $(X, \Sigma)$ bestehend aus einer total geordneten Menge $X$ und einer Teilmengen $\Sigma \subset \Pow(X)$ (genannt Menge der \emph{abstrakten Simplizes}), sodass gilt:
   \begin{itemize}
     \item Jedes Simplex $\sigma \in \Sigma$ ist nichtleer und endlich.
     \item Für jede nichtleere Teilmenge $\tilde{\sigma} \subset \sigma \in \Sigma$ gilt $\tilde{\sigma} \in \Sigma$.
@@ -887,7 +894,7 @@
 \end{nota}
 
 \begin{defn}
-  $\Delta^n_{\text{abstr}} \coloneqq ([n], \mathcal{P}([n]))$ heißt \emph{volles $n$-dim. Simplex}
+  $\Delta^n_{\text{abstr}} \coloneqq ([n], \Pow([n]))$ heißt \emph{volles $n$-dim. Simplex}
 \end{defn}
 
 \begin{defn}
@@ -926,7 +933,7 @@
 \end{defn}
 
 \begin{prop}
-  $\abs{([n], \mathcal{P}([n]) \setminus \{ [n] \})} \approx \partial \Delta^n$.
+  $\abs{([n], \Pow([n]) \setminus \{ [n] \})} \approx \partial \Delta^n$.
 \end{prop}
 
 \begin{defn}
@@ -1199,18 +1206,18 @@
 \section{Kategorientheorie}
 
 \begin{defn}
-  Eine \emph{Kategorie} $\mathcal{C}$ besteht aus
+  Eine \emph{Kategorie} $\Cat$ besteht aus
   \begin{itemize}
-    \item einer Klasse $\Ob(\mathcal{C})$ von \emph{Objekten},
-    \item für je zwei Objekte $A, B \in \Ob(\mathcal{C})$ eine Menge $\Hom(A, B)$ von \emph{Morphismen} von $A$ nach $B$. Für $f \in \Hom(A, B)$ schreibt man auch $f : A \to B$ oder $A \xrightarrow{f} B$. Dabei heißt $\dom(f) \coloneqq A$ \emph{Quelle} (Domain), $\codom{f} \coloneqq B$ \emph{Ziel} (Codomain) von $f$. Die Klasse aller Morphismen wird mit $\Mor(\mathcal{C})$ bezeichnet.
+    \item einer Klasse $\Ob(\Cat)$ von \emph{Objekten},
+    \item für je zwei Objekte $A, B \in \Ob(\Cat)$ eine Menge $\Hom(A, B)$ von \emph{Morphismen} von $A$ nach $B$. Für $f \in \Hom(A, B)$ schreibt man auch $f : A \to B$ oder $A \xrightarrow{f} B$. Dabei heißt $\dom(f) \coloneqq A$ \emph{Quelle} (Domain), $\codom{f} \coloneqq B$ \emph{Ziel} (Codomain) von $f$. Die Klasse aller Morphismen wird mit $\Mor(\Cat)$ bezeichnet.
     \item einer assoziativen Kompositionsoperation, \dh{} einer Abbildung
     \begin{align*}
-      \quad \prod_{\mathclap{A, B, C \in \Ob(\mathcal{C})}} \enspace \Hom(B, C) \times \Hom(A, B) \to \Hom(A, C), \quad
+      \quad \prod_{\mathclap{A, B, C \in \Ob(\Cat)}} \enspace \Hom(B, C) \times \Hom(A, B) \to \Hom(A, C), \quad
       (f, g) \mapsto f \circ g,\\
       \text{mit } (h \circ g) \circ f = h \circ (g \circ f)
-      \text{ für alle } A \xrightarrow{f} B \xrightarrow{g} C \xrightarrow{h} D \in \mathcal{D}.
+      \text{ für alle } A \xrightarrow{f} B \xrightarrow{g} C \xrightarrow{h} D \in \Dat.
     \end{align*}
-    \item für jedes $A \in \Ob(\mathcal{C})$ einem Identitätsmorphismus $\id_A : A \to A$ mit $\id_A \circ f = f$ und $g \circ \id_A = g$ für alle $f : B \to A$ und $g : A \to B$.
+    \item für jedes $A \in \Ob(\Cat)$ einem Identitätsmorphismus $\id_A : A \to A$ mit $\id_A \circ f = f$ und $g \circ \id_A = g$ für alle $f : B \to A$ und $g : A \to B$.
   \end{itemize}
 \end{defn}
 \end{samepage}
@@ -1221,7 +1228,7 @@
 \end{bem}
 
 \begin{defn}
-  Ein Morphismus $A \xrightarrow{f} B \in \mathcal{C}$ heißt \emph{Isomorphismus}, falls es einen Morphismus $B \xrightarrow{g} A \in \mathcal{C}$ gibt mit $f \circ g = \id_B$ und $g \circ f = \id_A$. Dieses $g$ heißt dann \emph{Inverses} von $f$, geschrieben $f^{-1} \coloneqq g$.
+  Ein Morphismus $A \xrightarrow{f} B \in \Cat$ heißt \emph{Isomorphismus}, falls es einen Morphismus $B \xrightarrow{g} A \in \Cat$ gibt mit $f \circ g = \id_B$ und $g \circ f = \id_A$. Dieses $g$ heißt dann \emph{Inverses} von $f$, geschrieben $f^{-1} \coloneqq g$.
 \end{defn}
 
 \begin{bspe}
@@ -1230,58 +1237,96 @@
     \item $\mathbf{Set}$ der Mengen und Abbildungen,
     \item $\mathbf{Grp}$ ($\mathbf{AbGrp}$) der (abelschen) Gruppen, $\mathbf{Rng}$ der Ringe, $\mathbf{Mod_R}$ der $R$-Moduln, $\mathbf{Vect}_k$ der $k$-VRe mit den jeweils strukturerhaltenden Abbildungen,
     \item $\mathbf{Top}$ der topologischen Räume, $\mathbf{Met}$ der metrischen Räumen $\mathbf{KompHaus}$ der kompakten Hausdorffräume, $\mathbf{Top^*}$ der punktierten topologischen Räume mit den jeweils stetigen (und basispunkterhaltenden) Abbildungen,
-    \item Jede Partialordnung $\leq$ auf einer Menge $X$ definiert eine Kategorie $\mathcal{E}$ mit $\Ob(\mathcal{E}) \coloneqq X$ und $\Hom(a, b) \coloneqq \Set{ {\leq}_{a,b} }{ a \leq b }$.
-    \item der Relationen $\mathbf{Rel}$ mit Mengen als Objekten, $\Hom(A, B) \coloneqq \mathcal{P}(A \times B)$ und, für $S \subseteq B \times C$ und $R \subseteq A \times B$,
+    \item Jede Partialordnung $\leq$ auf einer Menge $X$ definiert eine Kategorie $\Eat$ mit $\Ob(\Eat) \coloneqq X$ und $\Hom(a, b) \coloneqq \Set{ {\leq}_{a,b} }{ a \leq b }$.
+    \item der Relationen $\mathbf{Rel}$ mit Mengen als Objekten, $\Hom(A, B) \coloneqq \Pow(A \times B)$ und, für $S \subseteq B \times C$ und $R \subseteq A \times B$,
     \[ S \circ R \coloneqq \Set{ (a, c) \in A \times C }{ \ex{b \in B} aRb \wedge bSc }. \]
   \end{itemize}
 \end{bspe}
 
 \begin{bem}
-  Eine Kategorie mit nur einem Objekt ist eine Gruppe.
+  Eine Kategorie mit nur einem Objekt ist ein Monoid.
 \end{bem}
 
 \begin{defn}
   Ein \emph{Gruppoid} ist eine Kategorie, in der alle Morphismen Isomorphismen sind.
 \end{defn}
 
+\begin{bem}
+  Eine Gruppoid mit nur einem Objekt ist eine Gruppe.
+\end{bem}
+
 \begin{defn}
-  Das \emph{Fundamentalgruppoid} $\pi(X)$ eines topologischen Raumes $X$ ist die Kategorie
+  Das \emph{Fundamentalgruppoid} $\pi(X)$ eines topologischen Raumes $X$ ist die Kategorie mit 
+  $\Ob(\pi(X)) \coloneqq X$ und
   \begin{align*}
-    \Ob(\pi(X)) & \coloneqq X,\\
     \Hom(a, b) & \coloneqq \Set{ \gamma : \I \to X \text{ stetig} }{ \gamma(0) = a, \gamma(1) = b }/{\sim}\\
     & \text{mit } \gamma_0 \sim \gamma_1 \coloniff \gamma_0 \simeq \gamma_1 \rel \{ 0, 1\}.
   \end{align*}
 \end{defn}
 
 \begin{bem}
-  Sei $\mathcal{C}$ eine Kategorie, ${\sim}$ eine Äq'relation auf $\Mor(\mathcal{C})$, sodass:
+  Sei $\Cat$ eine Kategorie, ${\sim}$ eine Äq'relation auf $\Mor(\Cat)$, sodass:
   \begin{itemize}
-    \item Falls $f, g \in \Mor(\mathcal{C})$ mit $f \sim g$, so ist $\dom(f) = \dom(g)$ und $\codom(f) = \codom(g)$.
+    \item Falls $f, g \in \Mor(\Cat)$ mit $f \sim g$, so ist $\dom(f) = \dom(g)$ und $\codom(f) = \codom(g)$.
     \item Ist $f \sim g \in \Hom(A, B)$ und $h \sim k \in \Hom(B, C)$, so gilt auch $h \circ f \sim k \circ g \in \Hom(A, C)$.
   \end{itemize}
-  Dann gibt es eine Kategorie $\mathcal{C}/{\sim}$ mit $\Ob(\mathcal{C}/{\sim}) \coloneqq \Ob(\mathcal{C})$, $\Mor(\mathcal{C}/{\sim}) \coloneqq \Mor(\mathcal{C})/{\sim}$ und $[f] \circ [g] = [f \circ g]$.
+  Dann gibt es eine Kategorie $\Cat/{\sim}$ mit $\Ob(\Cat/{\sim}) \coloneqq \Ob(\Cat)$, $\Mor(\Cat/{\sim}) \coloneqq \Mor(\Cat)/{\sim}$ und $[f] \circ [g] = [f \circ g]$.
 \end{bem}
 
 \begin{defn}
-  Die \emph{Produktkategorie} $\mathcal{C} \times \mathcal{D}$ von Kat. $\mathcal{C}$ und $\mathcal{D}$ ist def. durch
+  Die \emph{Produktkategorie} $\Cat \times \Dat$ von Kat. $\Cat$ und $\Dat$ ist def. durch
   \begin{align*}
-    \Ob(\mathcal{C} \times \mathcal{D}) & \coloneqq \Ob(\mathcal{C}) \times \Ob(\mathcal{D}), \\
-    \Hom_{\mathcal{C} \times \mathcal{D}}((A_1, A_2), (B_1, B_2)) & \coloneqq \Hom_{\mathcal{C}}(A_1, B_1) \times \Hom_{\mathcal{D}}(A_2, B_2).
+    \Ob(\Cat \times \Dat) & \coloneqq \Ob(\Cat) \times \Ob(\Dat), \\
+    \Hom_{\Cat \times \Dat}((A_1, A_2), (B_1, B_2)) & \coloneqq \Hom_\Cat(A_1, B_1) \times \Hom_\Dat(A_2, B_2).
   \end{align*}
 \end{defn}
 
+% Nicht im Skript
 \begin{defn}
-  Die \emph{Homotopiekategorie} ist $\mathbf{HTop} \coloneqq \mathbf{Top} / {\simeq}$.
-  Die Kategorie $\mathbf{HTop^*}$ besteht aus basispunkterhaltenden Homotopieklassen von basispunkterhaltenden Abbildungen zwischen punktierten topologischen Räumen.
+  Seien $F : \Aat \to \Cat$ und $G : \Bat \to \Cat$ Funktoren. Dann ist \emph{$F \downarrow G$} die Kategorie mit
+  $\Ob(F \downarrow G) \coloneqq \text{Morphismen } f : F(A) \to G(B)$
+  und als Morphismen den kommutativen Quadraten
+  %($\alpha \in \Hom_\Aat(A, A')$, $\beta \in \Hom_\Bat(B, B')$)
+  \begin{center}
+    \vspace{-4pt}
+    \begin{tikzpicture}
+      \matrix (mat) [matrix of nodes, column sep=1.5cm, row sep=0.75cm]{
+        \node (FA) {$F(A)$}; &
+        \node (GB) {$G(B)$}; \\
+        \node (FA') {$F(A')$}; &
+        \node (GB') {$G(B')$}; \\
+      };
+      \draw[->] (FA) to node [left] {$F(\alpha)$} (FA');
+      \draw[->] (GB) to node [right] {$G(\beta)$} (GB');
+      \draw[->] (FA) to node [below] {$f$} (GB);
+      \draw[->] (FA') to node [above] {$f'$} (GB');
+    \end{tikzpicture}
+    \vspace{-4pt}
+  \end{center}
+\end{defn}
+
+% Nicht im Skript
+\begin{defn}
+  Die \emph{terminale Kategorie} $\mathbf{1}$ besteht aus dem Objekt $\star$ und dem Identitätsmorphismus $\id_\star$.
+\end{defn}
+
+% Nicht im Skript
+\begin{defn}
+  Sei $\Cat$ eine Kategorie, $X \in \Ob(\Cat)$ und $F_X : \mathbf{1} \to \Cat$ der Funktor mit $F_X(\star) = X$. Dann heißt $\Cat/X \coloneqq F_X \downarrow \Id_\Cat$ \emph{Scheibenkategorie}.
+\end{defn}
+
+\begin{defn}
+  Die \emph{Homotopiekategorie} ist $\mathbf{HTop} \coloneqq \mathbf{Top} / {\simeq}$. \\
+  Die Kategorie $\mathbf{HTop^*}$ besteht aus basispunkterh. Abb. zw. punktierten topol. Räumen. modulo basispunkterh. Homotopie.
 \end{defn}
 
 % Vorlesung vom 11.6.2014
 
 \begin{defn}
-  Ein (kovarianter) \emph{Funktor} $F : \mathcal{C} \to \mathcal{D}$ zw. Kategorien $\mathcal{C}$ und $\mathcal{D}$ besteht aus einer Abb. von Objekten $F : \Ob(\mathcal{C}) \to \Ob(\mathcal{D})$ und einem Morphismus $F(f) \in \Hom_{\mathcal{D}}(F(A), F(B))$ für jeden Morphismus $f \in \Hom_{\mathcal{C}}(A, B)$, sodass gilt:
+  Ein (kovarianter) \emph{Funktor} $F : \Cat \to \Dat$ zw. Kategorien $\Cat$ und $\Dat$ ist gegeben durch eine Abb. von Objekten $F : \Ob(\Cat) \to \Ob(\Dat)$ und einem Morphismus $F(f) \in \Hom_\Dat(F(A), F(B))$ für jeden Morphismus $f \in \Hom_\Cat(A, B)$, sodass gilt:
   \begin{itemize}
-    \item $F(\id_A) = \id_{F(A)}$ für alle $A \in \Ob(\mathcal{C})$,
-    \item $F(g \circ f) = F(g) \circ F(f)$ für alle $f : A \to B$ und $g : B \to C$ aus $\mathcal{C}$.
+    \item $F(\id_A) = \id_{F(A)}$ für alle $A \in \Ob(\Cat)$,
+    \item $F(g \circ f) = F(g) \circ F(f)$ für alle $f : A \to B$ und $g : B \to C$ aus $\Cat$.
   \end{itemize}
 \end{defn}
 
@@ -1291,10 +1336,10 @@
 
 \begin{bspe}
   \begin{itemize}
-    \item Für $\mathcal{C} = \mathbf{Grp}, \mathbf{AbGrp}, \mathbf{Rng}, \mathbf{Top}, \ldots$ gibt es den \emph{Vergissfunktor} $U : \mathcal{C} \to \mathbf{Set}$.
-    \item Besitzen $\mathcal{C}$ und $\mathcal{D}$ nur je ein Objekt (sind also Gruppen), so ist ein Funktor $F : \mathcal{C} \to \mathcal{D}$ nichts anderes als ein Gruppenhomo.
+    \item Für $\Cat = \mathbf{Grp}, \mathbf{AbGrp}, \mathbf{Rng}, \mathbf{Top}, \ldots$ gibt es den \emph{Vergissfunktor} $U : \Cat \to \mathbf{Set}$.
+    \item Besitzen $\Cat$ und $\Dat$ nur je ein Objekt (sind also Gruppen), so ist ein Funktor $F : \Cat \to \Dat$ nichts anderes als ein Gruppenhomo.
     \item Der \emph{Potenzmengenfunktor} $P : \mathbf{Set} \to \mathbf{Set}$ ist definiert durch
-    \[ P(A) \coloneqq \mathcal{P}(A), \quad P(f : A \to B)(X \subseteq A) \coloneqq f(X) \subseteq B. \]
+    \[ P(A) \coloneqq \Pow(A), \quad P(f : A \to B)(X \subseteq A) \coloneqq f(X) \subseteq B. \]
     \item Sind $P$ und $Q$ partiell geordnete Mengen, so ist ein Funktor $P \to Q$ nichts anderes als eine ordnungserhaltende Abbildung.
   \end{itemize}
 \end{bspe}
@@ -1308,16 +1353,16 @@
 \end{bem}
 
 \begin{defn}
-  Die \emph{duale Kategorie} einer gegebenen Kategorie $\mathcal{C}$ ist die Kategorie $\mathcal{D} \coloneqq \mathcal{C}^\op$ gegeben durch
+  Die \emph{duale Kategorie} einer gegebenen Kategorie $\Cat$ ist die Kategorie $\Dat \coloneqq \Cat^\op$ gegeben durch
   \[
-    \Ob(\mathcal{D}) \coloneqq \Ob(\mathcal{C}), \quad
-    \Hom_{\mathcal{D}}(A, B) \coloneqq \Hom_{\mathcal{C}}(B, A), \quad
-    f \circ_{\mathcal{D}} g \coloneqq g \circ_{\mathcal{C}} f.
+    \Ob(\Dat) \coloneqq \Ob(\C), \quad
+    \Hom_\Dat(A, B) \coloneqq \Hom_\Cat(B, A), \quad
+    f \circ_\Dat g \coloneqq g \circ_\Cat f.
   \]
 \end{defn}
 
 \begin{defn}
-  Ein \emph{kontravarianter Funktor} zwischen Kategorien $\mathcal{C}$ und $\mathcal{D}$ ist ein kovarianter Funktor $F : \mathcal{C}^\op \to \mathcal{D}$.
+  Ein \emph{kontravarianter Funktor} zwischen Kategorien $\Cat$ und $\Dat$ ist ein kovarianter Funktor $F : \Cat^\op \to \Dat$.
 \end{defn}
 
 \begin{bspe}
@@ -1325,7 +1370,7 @@
     \item Der \emph{kontravariante Potenzmengenfunktor}
     \[
       P^* : \mathbf{Set}^\op \to \mathbf{Set}, \quad
-      P(A) \coloneqq \mathcal{P}(A), \quad
+      P(A) \coloneqq \Pow(A), \quad
       P(f : A \to B)(Y) \coloneqq f^{-1}(Y)
     \]
     \item Sei $k$ ein Körper, dann ist der \emph{Dualisierungsfunktor}
@@ -1340,20 +1385,9 @@
 \end{bspe}
 
 \begin{defn}
-  Seien $F, G : \mathcal{C} \to \mathcal{D}$ Funktoren. Eine \emph{natürliche Transformation} $\alpha : F \to G$ ordnet jedem $X \in \Ob(\mathcal{C})$ einen Morphismus $\alpha_X \in \Hom_{\mathcal{D}}(F(X), G(X))$ zu, sodass für jeden Morphismus $f : A \to B$ in $\mathcal{C}$ folgendes Diagramm kommutiert:
+  Seien $F, G : \Cat \to \Dat$ Funktoren. Eine \emph{natürliche Transformation} $\alpha : F \to G$ ordnet jedem $X \in \Ob(\Cat)$ einen Morphismus $\alpha_X \in \Hom_\Dat(F(X), G(X))$ zu, sodass für jeden Morphismus $f : A \to B$ in $\Cat$ folgendes Diagramm kommutiert:
   \begin{center}
-    \iffalse
-    \begin{tikzpicture}[node distance=1cm,auto]
-      \node (FA) {$F(A)$};
-      \node (GA) [below of=FA] {$G(A)$};
-      \node (FB) [right of=FA] {$G(B)$};
-      \node (GB) [below of=FB] {$G(B)$};
-      \draw[->] (FA) to node {$F(f)$} (FB);
-      \draw[->] (GA) to node {$G(f)$} (GB);
-      \draw[->] (FA) to node {$\alpha_A$} (GA);
-      \draw[->] (FB) to node {$\alpha_B$} (GB);
-    \end{tikzpicture}
-    \fi
+    \vspace{-4pt}
     \begin{tikzpicture}
       \matrix (mat) [matrix of nodes, column sep=1.5cm, row sep=0.75cm]{
         \node (FA) {$F(A)$}; &
@@ -1361,26 +1395,27 @@
         \node (GA) {$G(A)$}; &
         \node (GB) {$G(B)$}; \\
       };
-      \draw[->] (FA) to node [above] {$F(f)$} (FB);
+      \draw[->] (FA) to node [below] {$F(f)$} (FB);
       \draw[->] (GA) to node [above] {$G(f)$} (GB);
       \draw[->] (FA) to node [left] {$\alpha_A$} (GA);
       \draw[->] (FB) to node [right] {$\alpha_B$} (GB);
     \end{tikzpicture}
+    \vspace{-4pt}
   \end{center}
 \end{defn}
 
 \begin{bem}
-  Ist $H : \mathcal{C} \to \mathcal{D}$ ein weiterer Funktor und $\beta : G \to H$ eine weitere natürliche Transformation, so ist $\beta \alpha : F \to H$ definiert durch
+  Ist $H : \Cat \to \Dat$ ein weiterer Funktor und $\beta : G \to H$ eine weitere natürliche Transformation, so ist $\beta \alpha : F \to H$ definiert durch
   \[ (\beta \alpha)_X \coloneqq \beta_X \circ \alpha_X : F(X) \to H(X) \]
   eine natürliche Transformation zwischen $F$ und $H$.
 \end{bem}
 
 \begin{bem}
-  Für Kategorien $\mathcal{C}$ und $\mathcal{D}$ gibt es die \emph{Funktorkat.} $\left[\mathcal{C}, \mathcal{D}\right]$ der Funktoren von $\mathcal{C}$ nach $\mathcal{D}$ mit nat. Transformationen als Morphismen.
+  Für Kategorien $\Cat$ und $\Dat$ gibt es die \emph{Funktorkat.} $\left[\Cat, \Dat\right]$ der Funktoren von $\Cat$ nach $\Dat$ mit nat. Transformationen als Morphismen.
 \end{bem}
 
 \begin{defn}
-  Die Isomorphismen der Funktorkategorie $\left[\mathcal{C}, \mathcal{D}\right]$ heißen \emph{natürliche Isomorphismen}.
+  Die Isomorphismen der Funktorkategorie $\left[\Cat, \Dat\right]$ heißen \emph{natürliche Isomorphismen}.
 \end{defn}
 
 \begin{nota}
@@ -1388,7 +1423,7 @@
 \end{nota}
 
 \begin{lem}
-  Eine natürliche Transformation $\eta : F \to G$ ist genau dann ein natürlicher Isomorphismus, wenn alle Komponenten $(\eta_X : F(X) \to G(X))_{X \in \Ob \mathcal{C}}$ Isomorphismen sind.
+  Eine natürliche Transformation $\eta : F \to G$ ist genau dann ein natürlicher Isomorphismus, wenn alle Komponenten $(\eta_X : F(X) \to G(X))_{X \in \Ob \Cat}$ Isomorphismen sind.
 \end{lem}
 
 \begin{samepage}
@@ -1430,7 +1465,7 @@
   Sei $p : X \to Y$ eine Überlagerung, $Y$ zshgd. Dann ist
   \[ Y \to \N_{\geq 1} \cup \{ \infty \}, \quad y \mapsto \text{\#} (p^{-1}(y)) \]
   konstant, da lokalkonstant.
-  Falls $d = \text{\#} (p^{-1}(y))$ endlich ist, heißt $p$ eine \emph{$d$-blättrige} Überlagerung. Ansonsten heißt $p$ eine \emph{unendliche Überlagerung}. Eine Überlagerung mit mehr als einem Blatt heißt \emph{nichttriviale Überlagerung}.
+  Falls $d = \text{\#} (p^{-1}(y))$ endlich ist, heißt $p$ eine \emph{$d$-blättrige} Überlagerung. Ansonsten heißt $p$ eine \emph{unendliche Überlagerung}. Eine Überlagerung mit $d > 1$ heißt \emph{nichttrivial}.
 \end{bem}
 
 \begin{defn}
@@ -1447,8 +1482,8 @@
 
 % Vorlesung vom 16.6.2014
 
-\begin{satz}[Homotopie-Liftungsthm]
-  Sei $p : X \to Y$ eine Überlagerung und $F : W \times \I \to Y$ eine Homotopie. Sei $\tilde{f} : W \to X$ eine Liftung von $F(\blank, 0)$, \dh{} $p \circ \tilde{f} = F(\blank, 0)$. Dann existiert eine Homotopie $\widetilde{F} : W \times \I \to X$ mit $\widetilde{F}(\blank, 0) = \widetilde{f}$ und $p \circ \widetilde{F} = F$.
+\begin{satz}[\emph{Homotopie-Liftungsthm}]
+  Sei $p \!:\! X \!\to\! Y$ eine Überlagerung und $F : W \times \I \to Y$ eine Homotopie. Sei $\tilde{f} : W \to X$ eine Liftung von $F(\blank, 0)$, \dh{} $p \circ \tilde{f} = F(\blank, 0)$. Dann existiert eine Homotopie $\widetilde{F} : W \times \I \to X$ mit $\widetilde{F}(\blank, 0) = \widetilde{f}$ und $p \circ \widetilde{F} = F$.
 \end{satz}
 
 \begin{kor}
