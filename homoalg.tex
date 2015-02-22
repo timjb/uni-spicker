@@ -55,19 +55,6 @@
 
 % Ausgelassen: II.1.1-II.1.7
 
-% Aus II.1.8
-\begin{defn}
-  Sei $\Cat$ eine Kategorie, $X \in \Ob(\Cat)$. Der \emph{kovariante Hom-Funktor} $h_X : \Cat \to \SetC$ ist definiert durch
-  \[
-    h_X(Y) \coloneqq \Hom(X, Y), \quad
-    h_X(f : Y \to Y')(g : X \to Y) \coloneqq f \circ g.
-  \]
-  Allgemeiner gibt es den Funktor $\Hom : \Cat^\op \times \Cat \to \SetC$ mit
-  \[
-    \Hom(h : X' \to X, f : Y \to Y')(g : X \to Y) \coloneqq f \circ g \circ h.
-  \]
-\end{defn}
-
 % Ausgelassen: II.1.9-II.1.11
 
 % II.1.12
@@ -152,6 +139,109 @@
 \begin{defn}
   Zwei Ringe $A$ und $B$ heißen \emph{Morita-äquivalent}, wenn ihre Kategorien der (Links/Rechts)-Moduln äquivalent sind.
 \end{defn}
+
+% II.3: Strukturen und Kategorien: Darstellbare Funktoren
+
+% Aus II.1.8
+\begin{defn}
+  Sei $\Cat$ eine Kategorie, $X \in \Ob(\Cat)$. Der \emph{kontravariante Hom-Funktor} $h_X : \Cat^\op \to \SetC$ ist definiert durch
+  \[
+    h_X(Y) \coloneqq \Hom(Y, X), \quad
+    h_X(h : Y' \to Y)(g : Y \to X) \coloneqq g \circ h.
+  \]
+  Allgemeiner gibt es den Funktor $\Hom : \Cat^\op \times \Cat \to \SetC$ mit
+  \[
+    \Hom(h : Y' \to Y, f : X \to X')(g : Y \to X) \coloneqq f \circ g \circ h.
+  \]
+\end{defn}
+
+% Aus II.3.1
+\begin{nota}
+  $\hat{\Cat} \coloneqq [\Cat^\op, \SetC]$
+\end{nota}
+
+% Aus II.3.1
+\begin{defn}
+  Ein Element $x \in X(Y) \!\coloneqq\! \Hom(Y, X)$ heißt \emph{$Y$-Element} von $X$.
+\end{defn}
+
+% II.3.2
+\begin{defn}
+  Ein Funktor $F \in \Ob(\hat\Cat)$ wird \emph{dargestellt} durch $X \in \Ob(\Cat)$, falls $F \cong h_X$.
+  Der Funktor $F$ heißt \emph{darstellbar}, falls ein solches $X \in \Ob(\Cat)$ existiert.
+\end{defn}
+
+\begin{defn}
+  Die \emph{Yoneda-Einbettung} ist der Funktor
+  \[ Y : \Cat \to \hat\Cat, \enspace X \mapsto h_X, \enspace \phi \mapsto (\phi \circ \blank : X(Y) \to X'(Y))_{Y \in \Ob(\Cat)}. \]
+\end{defn}
+
+\begin{lem}[\emph{Yoneda}]
+  Sei $\Cat$ eine Kategorie. Es gibt es eine nat. Bij.
+  \[
+    \Hom_{\hat\Cat}(h_X, F) \cong F(X) \quad
+    \text{für alle $X \in \Ob(\Cat)$, $F \in \hat{C}$.}
+  \]
+\end{lem}
+
+\begin{kor}
+  Die Yoneda-Einbettung ist volltreu und liefert eine Kategorienäquivalenz von $\Cat$ und der vollen Unterkategorie der darstellbaren Funktoren in $\hat\Cat$.
+\end{kor}
+
+\begin{kor}
+  Ein darstellbarer Funktor wird von genau einem Objekt dargestellt (bis auf Isomorphie).
+\end{kor}
+
+\begin{defn}
+  Das \emph{Produkt} von $X, Y \in \Ob(\Cat)$ ist ein Obj. $Z \in \Ob(\Cat)$, das
+  %den Funktor
+  $F : \Cat^\op \to \SetC, \enspace U \mapsto X(U) \times Y(U), \enspace \phi \mapsto ((\blank \circ \phi) \times (\blank \circ \phi))$ darstellt.
+\end{defn}
+
+\begin{bem}
+  Diese Definition ist äquivalent zur folgenden: \\
+  Das Produkt von $X, Y$ ist $Z \in \Ob(\Cat)$ zusammen mit Morphismen
+  \[ X \xleftarrow{p_X} Z \xrightarrow{p_Y} Y, \]
+  wenn für alle $Z' \in \Ob(\Cat)$ mit Morphismen 
+  \[ X \xleftarrow{p_X'} Z' \xrightarrow{p_Y'} Y \]
+  genau ein $f : Z' \to Z$ mit $p_X' = p_X \circ f$ und $p_Y' = p_Y \circ f$ existiert.
+\end{bem}
+
+\begin{defn}
+  Seien $\phi : X \to S$ und $\psi : Y \to S$ Abb. von Mengen. \\
+  Das Faserprodukt von $X$ und $Y$ über $S$ ist
+  \[ X \times_S Y \coloneqq \Set{ (x, y) \in X \times Y }{ \phi(x) = \psi(y) }. \]
+\end{defn}
+
+\begin{defn}
+  Sei $\phi \in \Hom_\Cat(X, S)$ und $\psi \in \Hom_\Cat(Y, S)$. \\
+  Das \emph{Faserprodukt} von $X$ und $Y$ über $S$ ist ein Obj. in $\Cat$, das den Funktor
+  $F : \Cat^\op \to \SetC, \enspace U \mapsto X(U) \times_{S(U)} Y(U)$ darstellt.
+\end{defn}
+
+\begin{bem}
+  % TODO: Slash-Richtung überprüfen
+  Das Faserprodukt von $X$ und $Y$ über $S$ ist das Produkt von $X \xrightarrow{\phi} S$ und $Y \xrightarrow{\psi} S$ in der Scheibenkategorie $\Cat/S$.
+\end{bem}
+
+% Ausgelassen: II.3.6 (Pfeilumkehrung ~> Koprodukt, amalgamierte Summe)
+% Ausgelassen: II.3.7 (Bsp: Tensor-Produkt von $A$-Algebren)
+
+\begin{defn}
+  Eine \emph{Gruppenstruktur} auf einem Objekt $X \in \Ob(\Cat)$ ist gegeben durch Gruppenstrukturen auf $\Hom(Y, X)$ für alle $Y \in \Ob(\Cat)$ und Gruppenmorphismen $\Hom(Y, X) \to \Hom(Y', X)$ für jeden Morphismus $\phi : Y' \to Y$ (die die offensichtlichen Axiome erfüllen).
+\end{defn}
+
+\begin{bem}
+  Falls $\Cat$ ein term. Obj. $1$ und die Produkte $X \!\times\! X$ und $X \!\times\! X \!\times\! X$ besitzt, dann ist eine Gruppenstr. auf $X$ geg. durch Morphismen
+  \[
+    m : X \times X \to X \text{ (Mult.)}, \enspace
+    i : X \to X \text{ (Inv.)}, \enspace
+    e : 1 \to X \text{ (Einheit)},
+  \]
+  die die offensichtlichen Axiome erfüllen.
+\end{bem}
+
+
 
 \section{Simpliziale Mengen}
 
