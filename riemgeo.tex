@@ -26,6 +26,9 @@
 \DeclareMathOperator{\Iso}{Iso} % Isometriegruppe
 \DeclareMathOperator{\Trans}{Trans} % Transvektionsgruppe
 \DeclareMathOperator{\Hol}{Hol} % Holonomiegruppe
+\DeclareMathOperator{\Diff}{Diff}
+\newcommand{\Gie}{\mathfrak{G}} % Lie-G
+\newcommand{\KF}{KF} % Killing-Fields
 
 % Kleinere Klammern
 \delimiterfactor=701
@@ -547,7 +550,7 @@
     T : \chi(M) \times \ldots \times \chi(M) \to
     \begin{cases}
       \mathcal{C}^\infty(M), & \text{falls } j = 0,\\
-      \chi(M), & \text{falls } j = 1,
+      \chi(M), & \text{falls } j = 1.
     \end{cases}
   \]
 \end{defn}
@@ -711,7 +714,7 @@
 
 \begin{defn}
   Die \emph{Holonomiegruppe} von $M$ in $x \in M$ bzgl. $\nabla$ ist
-  \[ \mathrm{Hol}_x^\nabla \coloneqq \Set{ P_c : T_x M \to T_x M }{ \text{$c$ stückweise glatt mit $c(0) = c(1) = x$.} } \]
+  \[ \Hol_x^\nabla \coloneqq \Set{ P_c : T_x M \to T_x M }{ \text{$c$ stückweise glatt mit $c(0) = c(1) = x$.} } \]
   Dabei ist $P_{c} \circ P_{\tilde{c}} = P_{c \circ \tilde{c}}$ und $(P_c)^{-1} = P_{c^{-1}}$.
 \end{defn}
 
@@ -1455,6 +1458,8 @@
   $\phi(\Iso_p(M))$ ist abgeschlossen in $O(T_p M)$, also kompakt.
 \end{satz}
 
+% Ist vorher schon definiert
+\iffalse
 \begin{defn}
   Sei $M$ eine Riem. Mft, $p \in M$. Dann heißt
   \[
@@ -1462,6 +1467,7 @@
   \]
   \emph{Holonomiegruppe} von $p$ ($\Hol_p(M) \subseteq O(T_p M)$).
 \end{defn}
+\fi
 
 % 23.9
 \begin{satz}
@@ -1523,18 +1529,130 @@
 \begin{lem}
   Sei $(M, g)$ ein Isotropie-irreduzibler homogener Raum und $B : TM \times TM \to \R$ ein symmetrischer $(0,2)$-Tensor.
   Angenommen, $B$ ist Isometrie-invariant, \dh{}
-  \[ \fa{f \in \Iso(P)} \fa{p \in M} \fa{x, y \in T_p M} B_{f(p)}(f_{*p}x, f_{*p}y) = B_p(x, y). \]
+  \[ \fa{f \!\in\! \Iso(P)} \fa{p \!\in\! M} \fa{x, y \!\in\! T_p M} B_{f(p)}(f_{*p}x, f_{*p}y) = B_p(x, y). \]
   Dann gilt $\ex{\lambda \in \R} B = \lambda \cdot g$.
 \end{lem}
 
 % 23.13
 \begin{satz}
-  Sei $M$ ein zshgder Isotropie-irred. homogener Raum. Dann ist $M$ Einsteinsch.
+  Zshgde Isotropie-irred. homogene Räume sind Einsteinsch.
 \end{satz}
 
 % Bsp: Einfach zshgde de-Rham-unzerlegbare sym. Räume
 
 % §24. Killing-Felder
+
+\begin{defn}
+  Eine \emph{Wirkung} einer eine Lie-Gruppe $G$ auf einer diff'bar Mft $M$ ist ein Gruppenhomomorphismus $\phi : G \to \Diff(M)$, sodass $G \times M \to M, \enspace (g, m) \mapsto \phi(g)(m)$ glatt ist.
+\end{defn}
+
+\begin{defn}
+  Das \emph{Wirkungsvektorfeld} von $\phi$ zu $x \in \Gie \cong T_e G$ ist
+  \[
+    X^\phi : M \to TM, \quad
+    p \mapsto \tfrac{\d}{\d t}|_{t=0} \phi_{g_x(t)}(p).
+  \]
+  Dabei ist $g_x : \vinterval \to G$ glatt mit $g_x(0) = e$, $\dot{g_x}(0) = x$.
+\end{defn}
+
+% Ausgelassen: Beispiele von Wirkungen
+
+% 24.1
+\begin{lem}
+  Sei $G$ eine Lie-Gruppe, $X \in \chi(G)$ ein linksinvariantes VF. \\
+  Dann ist die Integralkurve $c_e$ eine 1-Parameter-Untergruppe von $G$.
+\end{lem}
+
+% 24.2
+\begin{lem}
+  Sei $X \in \chi(G)$ linksinvariant. Dann ist $c_g = L_g \circ c_e$.
+\end{lem}
+
+% 24.3
+\begin{lem}
+  Jede 1-Param-UG $\phi : \R \to G$ definiert ein links-inv. VF $X \in \chi(G)$, dessen Integralkurve durch $e$ gerade $\phi$ ist: $c_e = \phi$.
+\end{lem}
+
+\begin{fazit}
+  $\fa{x \in T_e G} \exu{\text{1-Param-UG $\phi_x$ mit $\dot{\phi_x}(0) = x$}}$
+\end{fazit}
+
+\begin{defn}
+  Die \emph{Exponentialabbildung} der Lie-Gruppe $G$ ist
+  \[
+    \exp : T_e G \cong \Gie \to G, \quad
+    x \mapsto \phi_x(1).
+  \]
+\end{defn}
+
+\begin{bem}
+  Wenn $G$ eine bi-inv. Metrik hat, dann ist $\exp = \Exp_e$.
+\end{bem}
+
+% Vorlesung vom 28.1.2015
+
+\begin{defn}
+  Sei $(M, g)$ eine Riem. Mft. Ein VF $X \in \chi(M)$ heißt \emph{Killing-Feld}, wenn die lokalen Flüsse $\Phi_t$ von $X$ aus lokalen Isometrien bestehen, \dh{}
+  \[
+    \fa{x \in U} \fa{v, w \in T_x M}
+    g_{\Phi_t(x)}(\Phi_{t*} v, \Phi_{t*} w) = g_x(v, w)
+  \]
+\end{defn}
+
+\begin{nota}
+  $\KF(M) \coloneqq \Set{X \in \chi(M)}{X \text{ Killing}}$
+\end{nota}
+
+% 24.4
+\begin{lem}
+  Ein Vektorfeld $X \in \chi(M)$ ist genau dann ein Killing-VF, wenn $\nabla X$ schiefsymmetrisch ist, \dh{}
+  \[ \fa{X, Y, Z \in \chi(M)} g(\nabla_Y X, Z) = - g(\nabla_Z X, Y) \]
+\end{lem}
+
+\begin{facts}
+  Sei $X \in \KF(M)$.
+  \begin{itemize}
+    \item $\KF(M)$ ist eine Unter-Lie-Algebra von $\chi(M)$.
+    \item Für jede Geodäte $\gamma$ ist $X \circ \gamma \in \chi_\gamma$ ein Jacobi-Feld längs $\gamma$.
+    \item $\fa{A, B \!\in\! \chi(M)} L_X(A, B) \!\coloneqq\! \nabla_A \nabla_B X - \nabla_{\nabla_A B} X + R(X, A)B = 0$
+    \item Ist $(M, g)$ vollständig, dann ist $\Phi_t : M \!\to\! M$ für alle $t \!\in\! \R$ definiert.
+  \end{itemize}
+\end{facts}
+
+% Killing-Felder auf symmetrischen Räumen
+
+% 24.5
+\begin{satz}
+  Sei $P$ ein sym. Raum, $G \coloneqq \Iso(P)$, $\Gie \cong T_e G$ die Lie-Algebra von $G$. Dann ist die Abbildung
+  \[
+    \iota : \Gie \to \KF(P), \quad
+    x \mapsto (X : p \mapsto \tfrac{\d}{\d t}|_0 \exp(tx).p)
+  \]
+  ist ein $\R$-VR-Isomorphismus.
+\end{satz}
+
+\begin{acht}
+  Es gilt $\iota([x, y]_\Gie) = - [\iota(x), \iota(y)]_{\chi(P)}$, es ist $\iota$ also fast (bis auf Vorzeichen) ein Lie-Algebra-Isomorphismus.
+\end{acht}
+
+\begin{defn}
+  Sei $P$ ein symmetrischer Raum, $p \in P$. Setze
+  \begin{align*}
+    k_p \coloneqq \iota^{-1}(\Set{X \in \KF(P)}{X(p) = 0}) \subset \Gie, \\
+    \mathcal{P}_p \coloneqq \iota^{-1}(\Set{X \in \KF(P)}{\nabla X(p) = 0}).
+  \end{align*}
+\end{defn}
+
+% Ziel: $\Gie = k_p \oplus \mathcal{F}_p$ als direkte Summe von UVRen
+
+% 24.6
+\begin{lem}
+  Sei $P$ ein symmetrischer Raum, $p \in P$. Dann gilt
+  \[ \fa{v \in T_p P} \exu{\tilde{v} \in \mathcal{P}_p} \fa{s \in \R} \exp(s \tilde{v}) = t^{\gamma_v}(s). \]
+\end{lem}
+
+% TODO:
+% Vorlesung vom 30.1.2015
 
 
 

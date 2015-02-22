@@ -69,6 +69,8 @@
 \newtheorem*{nomenklatur}{Nomenklatur}
 \newtheorem*{technik}{Technik}
 \newtheorem*{methode}{Methode}
+\newtheorem*{fazit}{Fazit}
+\newtheorem*{facts}{Facts}
 
 \theoremstyle{remark}
 \newtheorem*{bem}{Bem}
