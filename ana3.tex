@@ -18,6 +18,7 @@
 \DeclareMathOperator{\grad}{grad} % Gradient
 \DeclareMathOperator{\divergence}{div} % Divergenz
 \DeclareMathOperator{\rot}{rot} % Rotation
+\newcommand{\Cont}{\mathcal{C}} % Menge der stetigen/diffbaren Funktionen
 
 \theoremstyle{definition}
 \newtheorem*{phnota}{Physiker-Notation}
@@ -53,7 +54,7 @@
 
 % Kapitel 1.1. Das Maßproblem
 
-\begin{prob}[Schwaches Maßproblem]
+\begin{prob}[\emph{Schwaches Maßproblem}]
   Gesucht ist eine Abbildung $\mu : \PS(\R^n) \to [\R, \infty]$ mit folgenden Eigenschaften:
   \begin{itemize}
     \item Normierung: $\mu(\I^n) = 1$
@@ -72,7 +73,7 @@
 
 % Ausgelassen: Zusammenhang mit dem Banach-Tarski-Paradox
 
-\begin{prob}[Starkes Maßproblem]
+\begin{prob}[\emph{Starkes Maßproblem}]
   Gesucht ist eine Abbildung $\mu : \PS(\R^n) \to \cinterval{0}{\infty}$ wie im schwachen Maßproblem, die anstelle der endlichen Additivität die Eigenschaft der $\sigma$-Additivität besitzt:
   \begin{itemize}
     \item Für eine Folge $(A_n)_{n \in \N}$ pw. disjunkter Teilmengen des $\R^n$ ist
@@ -115,10 +116,10 @@
 \begin{bem}
   \begin{itemize}
     \item Jede Algebra ist auch ein Ring.
-    \item Ein Ring $\Ring \subset \PSO$ ist auch unter endlichen Schnitten abgeschlossen, da $A \cap B = A \setminus (B \setminus A) \in \Ring$
-    \item Ein Ring $\Ring \subset \PSO$ ist genau dann eine Algebra, wenn $\Omega \in \Ring$
+    \item Ein Ring $\Ring \subset \PSO$ ist auch unter endlichen Schnitten abgeschlossen, da $A \cap B = A \setminus (B \setminus A) \in \Ring$.
+    \item Ein Ring $\Ring \subset \PSO$ ist genau dann eine Algebra, wenn $\Omega \in \Ring$.
     \item Eine $\sigma$-Algebra $\Alg \subset \PSO$ ist auch unter abzählbaren Schnitten abgeschlossen: Sei $(A_n)_{n \in \N}$ eine Folge in $\Alg$, dann gilt
-      \[ \bigcap_{n \in \N} A_n = \left( \bigcup_{n \in \N} (A_n)^c \right)^c \in \Alg \]
+      \[ \bigcap_{n \in \N} A_n = \left( \bigcup_{n \in \N} (A_n)^c \right)^c \in \Alg. \]
   \end{itemize}
 \end{bem}
 
@@ -177,7 +178,7 @@
     \item $\mu(A \cup B) + \mu(A \cap B) = \mu(A) + \mu(B)$
     \item $A \subset B \implies \mu(A) \leq \mu(B)$ \pright{Monotonie}
     \item Aus $A \subset B$ und $\mu(B) < \infty$ folgt $\mu(B \setminus A) = \mu(B) - \mu(A)$
-    \item Für $A_1, ..., A_n \in \Ring$ ist $\mu\left(\bigcup_{i = 1}^n A_i \right) \leq \sum_{i = 1}^n \mu(A_i)$ \pright{Subadditivität}
+    \item Für $A_1, \ldots, A_n \in \Ring$ ist $\mu\left(\bigcup_{i = 1}^n A_i \right) \leq \sum_{i = 1}^n \mu(A_i)$ \pright{Subadditivität}
     \item Ist $(A_n)_{n \in \N}$ eine Folge disjunkter Elemente aus $\Ring$, sodass $\bigsqcup_{n \in \N} A_n \in \Ring$, so gilt $\mu \left( \bigsqcup_{n \in \N} A_n \right) \geq \sum_{n=0}^\infty \mu(A_n)$.
   \end{itemize}
 \end{satz}
@@ -192,9 +193,16 @@
 \end{satz}
 
 \begin{defn}
-  Sei $A \subset \Omega$. Dann heißt die Abbildung
-  \[ \chi_A = \ind_A : \Omega \to \R, \quad \omega \mapsto \abs{\Set{ \star }{ \omega \in A }} = \begin{cases} 1, & \text{ falls } \omega \in A \\ 0, & \text{ falls } \omega \not\in A \end{cases} \]
-  \emph{Indikatorfunktion} oder \emph{charakteristische Funktion} von $A$.
+  Die \emph{Indikatorfunktion} oder \emph{char. Funktion} von $A \subset \Omega$ ist
+  %Sei $A \subset \Omega$. Dann heißt die Abbildung
+  \[
+    \chi_A = \ind_A : \Omega \to \R, \quad
+    \omega \mapsto \abs{\Set{ \star }{ \omega \in A }} =
+    \begin{cases}
+      1, & \text{ falls } \omega \in A, \\
+      0, & \text{ falls } \omega \not\in A.
+    \end{cases}
+  \]
 \end{defn}
 
 \begin{defn}
@@ -279,7 +287,7 @@
 \end{defn}
 
 \begin{defn}
-  Eine numerische Funktion $\mu^* : \PSO \to \overline{\R}$ heißt \emph{äußeres Maß} auf $\Omega$, wenn gilt:
+  Eine num. Fkt. $\mu^* \!:\! \PSO \!\to\! \overline{\R}$ heißt \emph{äußeres Maß} auf $\Omega$, wenn
   \begin{itemize}
     \miniitem{0.3 \linewidth}{$\mu^*(\emptyset) = 0$}
     \miniitem{0.68 \linewidth}{$A \subset B \implies \mu^*(A) \leq \mu^*(B)$ \pright{Monotonie}}
@@ -296,7 +304,7 @@
   \[ \mu^*(Q) = \mu^*(Q \cap A) + \mu^*(Q \setminus A) \quad \text{für alle } Q \subset \Omega. \]
 \end{defn}
 
-\begin{satz}[Carathéodory]
+\begin{satz}[\emph{Carathéodory}]
   Für ein äußeres Maß $\mu^* : \PSO \to \cinterval{0}{\infty}$ ist
   \begin{itemize}
     \item $\Alg^* \coloneqq \Set{ A \subset \Omega }{ A \text{ ist $\mu^*$-messbar } }$ eine $\sigma$-Algebra und
@@ -329,10 +337,10 @@
 \subsection{Das Lebesgue-Borel-Maß}
 
 \begin{nota}
-  Für $a = (a_1, ..., a_n)$ und $b = (b_1, ..., b_n)$ schreibe
+  Für $a = (a_1, \ldots, a_n)$ und $b = (b_1, \ldots, b_n)$ schreibe
   \begin{itemize}
-    \item $a \lhd b$, falls $a_j < b_j$ für alle $j = 1, ..., n$.
-    \item $a \unlhd b$, falls $a_j \leq b_j$ für alle $j = 1, ..., n$.
+    \item $a \lhd b$, falls $a_j < b_j$ für alle $j = 1, \ldots, n$.
+    \item $a \unlhd b$, falls $a_j \leq b_j$ für alle $j = 1, \ldots, n$.
   \end{itemize}
 \end{nota}
 
@@ -348,11 +356,11 @@
 \end{defn}
 
 \begin{satz}
-  Für alle $A \in \Ring(\mathcal{E})$ gibt es paarweise disjunkte Elementarquader $Q_1, ..., Q_p \in \mathcal{E}$ sodass $A = Q_1 \sqcup ... \sqcup Q_p$.
+  Für alle $A \in \Ring(\mathcal{E})$ gibt es paarweise disjunkte Elementarquader $Q_1, \ldots Q_p \in \mathcal{E}$ sodass $A = Q_1 \sqcup \ldots \sqcup Q_p$.
 \end{satz}
 
 \begin{defn}
-  Für $A \in \Ring(\mathcal{E})$ setze $\mu(A) \coloneqq \textstyle\sum_{i = 1}^p \mu(Q_i)$, wenn $A = Q_1 \sqcup ... \sqcup Q_p$ für paarweise disjunkte $Q_1, ..., Q_p$.
+  Für $A \in \Ring(\mathcal{E})$ setze $\mu(A) \coloneqq \textstyle\sum_{i = 1}^p \mu(Q_i)$, wenn $A = Q_1 \sqcup \ldots \sqcup Q_p$ für paarweise disjunkte $Q_1, \ldots, Q_p$.
 \end{defn}
 
 \begin{satz}
@@ -417,7 +425,7 @@
 \end{satz}
 
 \begin{satz}
-  Seien $(\Omega, \mathcal{O})$ und $(\Omega', \mathcal{O}')$ zwei topologische Räume und $\Alg \coloneqq \Alg(\mathcal{O})$ bzw. $\Alg' \coloneqq \Alg(\mathcal{O}')$ die dazugehörigen Borelschen $\sigma$-Algebren. Dann ist jede stetige Abbildung $f : \Omega \to \Omega'$ $(\Alg, \Alg')$-messbar.
+  Seien $(\Omega, \mathcal{O})$ und $(\Omega', \mathcal{O}')$ zwei topol. Räume und $\Alg \coloneqq \Alg(\mathcal{O})$ bzw. $\Alg' \coloneqq \Alg(\mathcal{O}')$ die dazugehörigen Borelschen $\sigma$-Algebren. Dann ist jede stetige Abbildung $f : \Omega \to \Omega'$ $(\Alg, \Alg')$-messbar.
 \end{satz}
 
 % Bildchen zum Projektionssatz?
@@ -512,7 +520,7 @@
 \end{satz}
 
 \begin{satz}
-  Seien $f_1, ..., f_n : (\Omega, \Alg) \to (\ER, \overline{\Bor})$ messbare numerische Fktn., dann sind auch $\max(f_1, ..., f_n)$ und $\min(f_1, ..., f_n)$ messbar.
+  Seien $f_1, \ldots, f_n : (\Omega, \Alg) \to (\ER, \overline{\Bor})$ messbare numerische Fkt., dann sind auch $\max(f_1, \ldots, f_n)$ und $\min(f_1, \ldots, f_n)$ messbar.
 \end{satz}
 
 \begin{defn}
@@ -548,7 +556,7 @@
 \end{defn}
 
 \begin{defn}
-  Sei $f \in \E(\Omega, \Alg)$ und $\Omega = A_1 \sqcup ... \sqcup A_k$ eine disjunkte Vereinigung von Mengen mit $A_j \in \Alg$ für alle $j = 1, ..., k$, sodass $f(A_j) = \{ y_j \}$, dann heißt die Darstellung
+  Sei $f \in \E(\Omega, \Alg)$ und $\Omega = A_1 \sqcup \ldots \sqcup A_k$ eine disjunkte Vereinigung von Mengen mit $A_j \in \Alg$ für alle $j = 1, \ldots, k$, sodass $f(A_j) = \{ y_j \}$, dann heißt die Darstellung
   \[ f = \sum_{j=1}^k y_j \cdot \ind_{A_j} \quad \text{\emph{kanonische Darstellung}.} \]
 \end{defn}
 
@@ -614,8 +622,8 @@
   Die Eigenschaften des Integrals für einfache Funktionen (Linearität, Monotonie) übertragen sich auf das Lebesgue-Integral.
 \end{satz}
 
-\begin{satz}[Satz von der monotonen Konvergenz]
-  Sei $(f_n)_{n \in \N}$ eine monoton wachsende Folge von Funktionen in $\overline{\E}(\Omega, \Alg)$, dann gilt für $f \coloneqq \lim_{n \to \infty} f_n = \sup_{n \in \N} f_n \in \overline{\E}(\Omega, \Alg)$ und jedes Maß $\mu$ auf $\Alg$:
+\begin{satz}[\emph{von der monotonen Konvergenz}]\mbox{}\\
+  Sei $(f_n)_{n \in \N}$ eine monoton wachsende Folge von Fkt. in $\overline{\E}(\Omega, \Alg)$, dann gilt für $f \coloneqq \lim_{n \to \infty} f_n = \sup_{n \in \N} f_n \in \overline{\E}(\Omega, \Alg)$ und jedes Maß $\mu$ auf $\Alg$:
   \[ \lim_{n \to \infty} \IntOmu{f_n} = \sup_{n \in \N} \IntOmu{f_n} = \IntOmu{f} \]
 \end{satz}
 
@@ -724,9 +732,9 @@
 
 % \begin{doublespace} ... \end{doublespace} für einheitlichen Zeilenabstand.
 % Sonst Kraut und Rüben mit den ganzen Inline-Integralen.
-\begin{satz}[Lemma von Fatou]\begin{doublespace}
+\begin{lem}[\emph{von Fatou}]\begin{doublespace}
   Sei $(f_n)_{n \in \N}$ eine Funktionenfolge mit $f_n$ $\mu$-integrierbar und $f_n \overset{\text{f.ü.}}\geq 0$. Dann $\IntOmu{(\liminf_{n \to \infty} f_n)} \leq \liminf_{n \to \infty} \IntOmu{fn}$.
-\end{doublespace}\end{satz}
+\end{doublespace}\end{lem}
 
 % Vorlesung vom 25.11.2013
 
@@ -744,7 +752,7 @@
   \end{align*}
 \end{satz}
 
-\begin{satz}[von der majorisierten Konvergenz]\begin{doublespace}
+\begin{satz}[\emph{von der major. Konvergenz}]\begin{doublespace}
   Sei $g \in \Leb^1(\Omega, \Alg, \mu), g \geq 0$. Sei $(f_n)_{n \in \N}$ Folge messbarer Fkt. $f_n : (\Omega, \Alg, \mu) \to (\ER, \overline{\Bor})$ mit $\abs{f_n} \overset{\text{f.ü.}}\leq g$ (Majorisierung).
   Sei ferner $f : \Omega \to \ER$ $(\Alg, \overline{\Bor})$-messbar mit $f_n \xrightarrow[n \to \infty]{\text{f.ü.}} f$, \dh{} $\Set{ \omega \in \Omega }{ \lim_{n \to \infty} f_n(\omega) = f(\omega) \text{ falsch} }$ ist Nullmenge. Dann ist $f$ integrierbar mit $\IntOmu{f} = \lim_{n \to \infty} \IntOmu{f_n}$.
 \end{doublespace}\end{satz}
@@ -765,8 +773,8 @@
 
 \vspace{-20pt}
 
-\begin{satz}[Ableiten unter Integral]
-  Seien $a, b \in \R$ mit $a < b$, $(\Omega, \Alg, \mu)$ ein Maßraum und sei $f : \ointerval{a}{b} \times \Omega \to (\R, \Bor)$ eine Funktion, sodass:
+\begin{satz}[\emph{Ableiten unter Integral}]
+  Seien $a, b \in \R$ mit $a \!<\! b$, $(\Omega, \Alg, \mu)$ ein Maßraum und sei $f : \ointerval{a}{b} \times \Omega \to (\R, \Bor)$ eine Funktion, sodass:
   \begin{itemize}
     \item Für alle $t \in \ointerval{a}{b}$ ist die Abbildung $f(t, \blank) : \Omega \to \R$ $\mu$-integrierbar.
     \item Für alle $\omega \in \Omega$ ist die Abbildung $f(\blank, \omega) : \ointerval{a}{b} \to \R$ diff'bar.
@@ -790,7 +798,7 @@
 \end{samepage}
 
 \begin{defn}
-  Eine \emph{Zerlegung} eines Intervalls $\cinterval{a}{b}$ ist eine geordnete endliche Teilmenge $\{ a = x_0 < x_1 < ... < x_k = b\} \subset \cinterval{a}{b}$.
+  Eine \emph{Zerlegung} eines Intervalls $\cinterval{a}{b}$ ist eine geordnete endliche Teilmenge $\{ a = x_0 < x_1 < \ldots < x_k = b\} \subset \cinterval{a}{b}$.
 \end{defn}
 
 \begin{nota}
@@ -798,12 +806,12 @@
 \end{nota}
 
 \begin{defn}
-  Die \emph{Feinheit} einer Zerlegung $\{ x_0 < ... < x_k \} \in \mathcal{Z}(\cinterval{a}{b})$ ist
-  \[ \abs{Z} \coloneqq \max \Set{ x_j - x_{j-1} }{ j \in \{ 1, ..., n \} }. \]
+  Die \emph{Feinheit} einer Zerlegung $\{ x_0 < \ldots < x_k \} \in \mathcal{Z}(\cinterval{a}{b})$ ist
+  \[ \abs{Z} \coloneqq \max \Set{ x_j - x_{j-1} }{ j \in \{ 1, \ldots, n \} }. \]
 \end{defn}
 
 \begin{defn}
-  Für eine beschränkte Funktion $f : \cinterval{a}{b} \to \R$ und eine Zerlegung $Z = \{ a_0, ..., a_n \} \in \mathcal{Z}(\cinterval{a}{b})$ bezeichnen
+  Für eine beschränkte Funktion $f : \cinterval{a}{b} \to \R$ und eine Zerlegung $Z = \{ a_0, \ldots, a_n \} \in \mathcal{Z}(\cinterval{a}{b})$ bezeichnen
   \begin{align*}
     O(f, Z) &\coloneqq \sum_{j=1}^n (\sup \Set{ f(x) }{ x \in [x_{j-1}, x_j] })(x_j - x_{j-1}),\\
     U(f, Z) &\coloneqq \sum_{j=1}^n (\inf \Set{ f(x) }{ x \in [x_{j-1}, x_j] })(x_j - x_{j-1})
@@ -824,7 +832,7 @@
 \end{defn}
 
 \begin{nota}
-  Sei $(Z_k)_{k \in \N}$ eine Folge in $\mathcal{Z}(\cinterval{a}{b})$ mit $Z_k = \{ a_0^k, a_1^k, ..., a^k_{n_k} \}$. Für eine beschränkte Funktion $f : \cinterval{a}{b} \to \R$ definieren wir $f^k, f_k, f^*, f_* : \cinterval{a}{b} \to \R$ durch
+  Sei $(Z_k)_{k \in \N}$ eine Folge in $\mathcal{Z}(\cinterval{a}{b})$ mit $Z_k = \{ a_0^k, a_1^k, \ldots, a^k_{n_k} \}$. Für eine beschränkte Funktion $f : \cinterval{a}{b} \to \R$ definieren wir $f^k, f_k, f^*, f_* : \cinterval{a}{b} \to \R$ durch
   \begin{align*}
     f^k &= \sup f(\cinterval{a}{a_1^k}) \cdot \ind_{\cinterval{a}{a_1^k}} + \sum_{j=2}^{n_k} \sup f(\cinterval{a_{j-1}^k}{a_j^k}) \cdot \ind_{\ocinterval{a_{j-1}^k}{a_j^k}},\\
     f_k &= \inf \, f(\cinterval{a}{a_1^k}) \cdot \ind_{\cinterval{a}{a_1^k}} + \sum_{j=2}^{n_k} \inf \, f(\cinterval{a_{j-1}^k}{a_j^k}) \cdot \ind_{\ocinterval{a_{j-1}^k}{a_j^k}}\\
@@ -860,7 +868,7 @@
 \end{satz}
 
 \begin{satz}
-  Ist eine beschränkte Funktion $f : \cinterval{a}{b} \to \R$ Riemann-integrierbar, so ist sie auch auf $\cinterval{a}{b}$ Lebesgue-integrierbar bzgl. dem Lebesgue-Maß $\lambda$ und es gilt
+  Ist eine beschränkte Fkt. $f : \cinterval{a}{b} \to \R$ Riemann-integrierbar, so ist sie auch auf $\cinterval{a}{b}$ Lebesgue-integrierbar bzgl. $\lambda$ und es gilt
   \[ \Int{a}{b}{f(x)}{x} = \Int{\cinterval{a}{b}}{}{f}{\lambda}. \]
 \end{satz}
 
@@ -889,8 +897,8 @@
 \begin{nota}
   Sei $f : \R \to \R$ eine Abbildung, dann setzen wir
   \begin{align*}
-    C(f) &= \Set{ x \in \R }{ f \text{ stetig in } x } \text{ und}\\
-    D(f) &= \Set{ x \in \R }{ f \text{ unstetig in } x } = \R \setminus C(f).
+    C(f) & \coloneqq \Set{ x \in \R }{ f \text{ stetig in } x } \text{ und}\\
+    D(f) & \coloneqq \Set{ x \in \R }{ f \text{ unstetig in } x } = \R \setminus C(f).
   \end{align*}
 \end{nota}
 
@@ -906,8 +914,9 @@
   $A $ ist $G_\delta$-Menge $\iff$ $A^C$ ist $F_\sigma$-Menge.
 \end{bem}
 
-\begin{satz}[Young]
-  Sei $f : \R \to \R$ eine beliebige Abbildung. Dann ist $C(f)$ eine $G_\delta$-Menge (und somit $D(f)$ eine $F_\sigma$-Menge).
+\begin{satz}[\emph{Young}]
+  Sei $f : \R \to \R$ eine beliebige Abbildung. \\
+  Dann ist $C(f)$ eine $G_\delta$-Menge (und somit $D(f)$ eine $F_\sigma$-Menge).
 \end{satz}
 
 \begin{kor}
@@ -925,7 +934,7 @@
 \end{nota}
 
 \begin{nota}
-  Der Einheitswürfel im $\R^d$ ist $W_1 \coloneqq \ocinterval{(0, ..., 0)}{(1, ..., 1)}$.
+  Der Einheitswürfel im $\R^d$ ist $W_1 \coloneqq \ocinterval{(0, \nldots, 0)}{(1, \nldots, 1)}$.
 \end{nota}
 
 \begin{satz}
@@ -960,20 +969,20 @@
 \end{bem}
 
 \begin{satz}
-  Sei $U, \widetilde{U} \opn \R^d$, $\phi : U \to \widetilde{u}$ ein $\mathcal{C}^1$-Diffeomorphismus, dann gilt:
+  Sei $U, \widetilde{U} \opn \R^d$, $\phi : U \to \widetilde{u}$ ein $\Cont^1$-Diffeomorphismus, dann gilt:
     \[ \phi_*^{-1} \mu_{LB}|_{\widetilde{U}} = \underbrace{\abs{\det(D \phi)}}_{U \to \R_{> 0} \text{ stetig}} \mu_{LB}|_U \]
 \end{satz}
 
 % Lemma
 \begin{satz}
-  Sei $U, \widetilde{U} \opn \R^d$, $\phi : U \to \widetilde{u}$ ein $\mathcal{C}^1$-Diffeomorphismus und $Q = \ointerval{a}{b} \subset U$ Elementarquader mit $a \lhd b$, dann gilt
+  Sei $U, \widetilde{U} \opn \R^d$, $\phi : U \to \widetilde{u}$ ein $\Cont^1$-Diffeomorphismus und $Q = \ointerval{a}{b} \subset U$ Elementarquader mit $a \lhd b$, dann gilt
   \[ \mu_{LB}(Q) \cdot \inf_{q \in Q} \abs{\det D \phi(q)} \leq \mu_{LB}(\phi(Q)) \leq \mu_{LB}(Q) \cdot \sup_{q \in Q} \abs{\det(D(\phi(q)))}. \]
 \end{satz}
 
 % Vorlesung vom 11.2.2013
 
-\begin{satz}[Transformationssatz]
-  Sei $U, \widetilde{U} \opn \R^d$ und sei $\phi : U \to \widetilde{U}$ ein $\mathcal{C}^1$-Diffeomorphismus. Dann ist eine Funktion $f : \widetilde{U} \to \ER$ genau dann auf $\widetilde{U}$ Lebesgue-Borel-integrierbar, wenn $(f \circ \phi) \cdot \abs{\det(D\phi)} : U \to \ER$ auf $U$ Lebesgue-Borel-interierbar ist. In diesem Fall gilt
+\begin{satz}[\emph{Transformationssatz}]
+  Sei $U, \widetilde{U} \opn \R^d$ und sei $\phi : U \to \widetilde{U}$ ein $\Cont^1$-Diffeomorphismus. Dann ist eine Funktion $f : \widetilde{U} \to \ER$ genau dann auf $\widetilde{U}$ Lebesgue-Borel-integrierbar, wenn $(f \circ \phi) \cdot \abs{\det(D\phi)} : U \to \ER$ auf $U$ Lebesgue-Borel-interierbar ist. In diesem Fall gilt
   \[ \Int{U}{}{(f \circ \phi) \cdot \abs{\det(D\phi)}}{\mu_{LB}} = \Int{\phi(U)}{}{f}{\mu_{LB}} = \Int{\widetilde{U}}{}{f}{\mu_{LB}}. \]
   Obige Gleichung ist auch erfüllt, wenn lediglich $f \in \overline{\E}(\widetilde{U}, \Bor(\widetilde{U}))$ gilt.
 \end{satz}
@@ -984,42 +993,42 @@
 
 % Kapitel 1.13. Produktstrukturen
 
-% Ziel: $(\Omega_j, \Alg_j, \mu_j)$ Maßräume $j = 1, ..., n$.
-% Betrachte: \Omega_1 \times ... \times \Omega_n = \Omega
+% Ziel: $(\Omega_j, \Alg_j, \mu_j)$ Maßräume $j = 1, \ldots, n$.
+% Betrachte: \Omega_1 \times \ldots \times \Omega_n = \Omega
 % 1. Definiere $\sigma$-Algebra auf $\omega$, die die $\Alg_j$ "`respektiert"'.
 % 2. Definiere Maß auf $\widetilde{A}$, welches von $\mu_j$ "`induziert"' wird.
 % 
 % Genauer:
 % Zu 1.: Wir haben kanonische Projektionen
-%   \Pi_j : \Omega = \Omega_1 \times ... \times \Omega_n \to \Omega_j
-%           (\omega_1, ..., \omega_n) \mapsto \omega_j
+%   \Pi_j : \Omega = \Omega_1 \times \ldots \times \Omega_n \to \Omega_j
+%           (\omega_1, \ldots, \omega_n) \mapsto \omega_j
 
 \begin{defn}
-  Seien $(\Omega_j, \Alg_j, \mu_j)$ Maßräume für $j = 1, ..., n$. Die kleinste $\sigma$-Algebra $\Alg$ auf $\sigma$, sodass alle $\pi_j, j = 1, ..., n$ $(\Alg, \Alg_j)$-messbar sind, heißt \emph{Produkt} der $\sigma$-Algebren $\Alg_1, ..., \Alg_n$, notiert $\Alg =: \Alg_1 \otimes ... \otimes \Alg_n$.
+  Seien $(\Omega_j, \Alg_j, \mu_j)$ Maßräume für $j = 1, \ldots, n$. Die kleinste $\sigma$-Algebra $\Alg$ auf $\sigma$, sodass alle $\pi_j, j = 1, \ldots, n$ $(\Alg, \Alg_j)$-messbar sind, heißt \emph{Produkt} der $\sigma$-Algebren $\Alg_1, \ldots, \Alg_n$, notiert $\Alg =: \Alg_1 \otimes \ldots \otimes \Alg_n$.
 \end{defn}
 
 \begin{satz}
-  Sei $\mathcal{E}_j$ Erzeugendensystem von $\Alg_j, j = 1, ..., n$, \dh{} $\Alg(\mathcal{E}_j) = \Alg_j$. Annahme: Für alle $j \in \{ 1, ..., n \}$ gibt es eine monoton gegen $\Omega_j$ wachsende Folge $(E^j_k)_{k \in \N}$ in $\mathcal{E}_j$. Dann ist
+  Sei $\mathcal{E}_j$ Erzeugendensystem von $\Alg_j, j = 1, \ldots, n$, \dh{} $\Alg(\mathcal{E}_j) = \Alg_j$. Annahme: Für alle $j \in \{ 1, \ldots, n \}$ gibt es eine monoton gegen $\Omega_j$ wachsende Folge $(E^j_k)_{k \in \N}$ in $\mathcal{E}_j$. Dann ist
   \begin{align*}
-    \Alg_1 \otimes ... \otimes \Alg_n &= \Alg(\mathcal{E}_1 \times ... \times \mathcal{E}_n) \text{ mit }\\
-    \mathcal{E}_1 \times ... \times \mathcal{E}_n &= \Set{ E_1 \times ... \times E_n }{ E_j \in \mathcal{E}_j, j = 1, ..., n }.
+    \Alg_1 \otimes \ldots \otimes \Alg_n &= \Alg(\mathcal{E}_1 \times \ldots \times \mathcal{E}_n) \text{ mit }\\
+    \mathcal{E}_1 \times \ldots \times \mathcal{E}_n &= \Set{ E_1 \times \ldots \times E_n }{ E_j \in \mathcal{E}_j, j = 1, \ldots, n }.
   \end{align*}
 \end{satz}
 
 % Korollar
 \begin{satz}
-  $\Bor(\R^n) = \underbrace{\Bor(\R) \otimes ... \otimes \Bor(\R)}_{\text{$n$-mal}}$.
+  $\Bor(\R^n) = \underbrace{\Bor(\R) \otimes \ldots \otimes \Bor(\R)}_{\text{$n$-mal}}$.
 \end{satz}
 
 % Vorlesung vom 16.12.2013
 
 % Ziel: Maß \mu auf \Omega mit
-% $\mu(E_1 \times ... \times E_n) = \mu_1(E_1) \cdot ... \cdot \mu_n(E_n)$ für alle $E_j \in \mathcal{E}_j$.
+% $\mu(E_1 \times \ldots \times E_n) = \mu_1(E_1) \cdot \ldots \cdot \mu_n(E_n)$ für alle $E_j \in \mathcal{E}_j$.
 
 \begin{satz}[Eindeutigkeit von Produktmaßen]
-  Seien $(\Omega_j, \Alg_j, \mu_j)$ Maßräume und $E_j$ ein Erzeugendensystem von $\Alg_j$ für $j = 1, ..., n$. Angenommen, $E_j$ ist stabil unter Schnitten und $\exists (E_k^{(j)})_{k \in \N} \uparrow \Omega_j$ mit $\mu_j(E_k^{(j)}) < \infty$ für alle $j$.
-  Dann gibt es höchstens ein Maß $\nu : \Alg_1 \otimes ... \otimes \Alg_n \to \cinterval{0}{\infty}$, sodass für alle $E_j \in \mathcal{E}_j, j \in \{ 1, ..., n \}$ gilt:
-  \[ \nu(E_1 \times ... \times E_n) = \mu_1(E_1) \cdot ... \cdot \mu_n(E_n). \]
+  Seien $(\Omega_j, \Alg_j, \mu_j)$ Maßräume und $E_j$ ein Erzeugendensystem von $\Alg_j$ für $j = 1, \ldots, n$. Angenommen, $E_j$ ist stabil unter Schnitten und $\exists (E_k^{(j)})_{k \in \N} \uparrow \Omega_j$ mit $\mu_j(E_k^{(j)}) < \infty$ für alle $j$.
+  Dann gibt es höchstens ein Maß $\nu : \Alg_1 \otimes \ldots \otimes \Alg_n \to \cinterval{0}{\infty}$, sodass für alle $E_j \in \mathcal{E}_j, j \in \{ 1, \ldots, n \}$ gilt:
+  \[ \nu(E_1 \times \ldots \times E_n) = \mu_1(E_1) \cdot \ldots \cdot \mu_n(E_n). \]
 \end{satz}
 
 \begin{defn}
@@ -1094,7 +1103,7 @@
   Angenommen, $f : \Omega_1 \times \Omega_2 \to \ER$ ist $(\Alg_1 \otimes \Alg_2, \overline{\Bor})$-messbar. Dann ist auch für alle $\omega_1 \in \Omega_1$ die Abbildung $f_{\omega_1}$ $(\Alg_2, \overline{\Bor})$-messbar und für alle $\omega_2 \in \Omega_2$ die Abbildung $f_{\omega_2}$ $(\Alg_1, \overline{\Bor})$-messbar.
 \end{lem}
 
-\begin{satz}[Tonelli]
+\begin{satz}[\emph{Tonelli}]
   Sei $f \in \overline{\E}(\Omega_1 \times \Omega_2, \Alg_1 \otimes \Alg_2)$, dann:
   \begin{itemize}
     \item $\Omega_2 \to \cinterval{0}{\infty}, \enspace \omega_2 \mapsto \Int{\Omega_1}{}{f_{\omega_2}}{\mu_1}$ \enspace ist $(\Alg_2, \overline{\Bor})$-messbar,
@@ -1103,7 +1112,7 @@
   \end{itemize}
 \end{satz}
 
-\begin{satz}[Fubini]
+\begin{satz}[\emph{Fubini}]
   Sei $f : \Omega_1 \times \Omega_2 \to \ER$ $(\mu_1 \otimes \mu_2)$-integrierbar. Dann ist für $\mu_1$-fast-alle $\omega_1 \in \Omega_1$ der Schnitt $f_{\omega_1}$ $\mu_2$-integrierbar, und die $\mu_1$-fast-überall definierte Funktion $\omega_1 \mapsto \Int{\Omega_2}{}{f_{\omega_1}}{\mu_2}$ ist $\mu_1$-integrierbar. Analoges gilt mit $1$ und $2$ vertauscht. Es gilt:
   \[ \Int{\mathclap{\Omega_1 \otimes \Omega_2}}{}{f}{(\mu_1 \otimes \mu_2)} = \Int{\Omega_1}{}{(\Int{\Omega_2}{}{f_{\omega_1}}{\mu_2})}{\mu_1} = \Int{\Omega_2}{}{(\Int{\Omega_1}{}{f_{\omega_2}}{\mu_1})}{\mu_2}. \]
 \end{satz}
@@ -1123,11 +1132,11 @@
 
 \begin{defn}
   Eine \emph{alternierende $k$-Form} auf $V$ ist eine Abb.
-  \[ \omega : \underbrace{V \times ... \times V}_{\text{$k$-fach}} \to \R \quad \text{mit} \]
+  \[ \omega : \underbrace{V \times \ldots \times V}_{\text{$k$-fach}} \to \R \quad \text{mit} \]
   \begin{itemize}
-    \item $\omega$ ist \emph{multilinear}, \dh{} linear in jedem Argument, \dh{} für alle $l \in \{ 1, ..., k \}$ und $v_1, ..., v_{l-1}, v_{l+1}, ..., v_k \in V$ ist
-    \[ \omega(v_1, ..., v_{l-1}, -, v_{l+1}, ..., v_k) \in \mathrm{Hom}(V, \R). \]
-    \item Falls $v_j = v_l$ für $j < l$, dann ist $\omega(v_1, ..., v_j, ..., v_l, ..., v_k) = 0$.
+    \item $\omega$ ist \emph{multilinear}, \dh{} linear in jedem Argument, \dh{} für alle $l \in \{ 1, \ldots, k \}$ und $v_1, \ldots, v_{l-1}, v_{l+1}, \ldots, v_k \in V$ ist
+    \[ \omega(v_1, \ldots, v_{l-1}, -, v_{l+1}, \ldots, v_k) \in \mathrm{Hom}(V, \R). \]
+    \item Falls $v_j = v_l$ für $j < l$, dann ist $\omega(v_1, \ldots, v_j, \ldots, v_l, \ldots, v_k) = 0$.
   \end{itemize}
 \end{defn}
 
@@ -1145,7 +1154,7 @@
 
 \begin{lem}
   Sei $\omega \in \Lambda V^*, \sigma \in S_k$, dann gilt:
-  \[ \omega(v_{\sigma(1)}, ..., v_{\sigma(k)}) = \mathrm{sgn}(\sigma) \cdot \omega(v_1, ..., v_k). \]
+  \[ \omega(v_{\sigma(1)}, \ldots, v_{\sigma(k)}) = \mathrm{sgn}(\sigma) \cdot \omega(v_1, \ldots, v_k). \]
 \end{lem}
 
 \end{samepage}
@@ -1159,14 +1168,14 @@
 \fi
 
 \begin{defn}
-  Für $\phi_1, ..., \phi_k \in \Lambda^1 V^* = V^*$ ist das \emph{Dachprodukt} $\phi_1 \wedge ... \wedge \phi_k \in \Lambda^k V^*$ definiert durch
+  Für $\phi_1, \ldots, \phi_k \in \Lambda^1 V^* = V^*$ ist das \emph{Dachprodukt} $\phi_1 \wedge \ldots \wedge \phi_k \in \Lambda^k V^*$ definiert durch
   \begin{align*}
-    \phi_1 \wedge ... \wedge \phi_k &: V \times ... \times V \to \R \\
-    (v_1, ..., v_k) &\mapsto \det \begin{pmatrix}
-      \phi_1(v_1) & \phi_1(v_2) & ... & \phi_1(v_k) \\
-      \phi_2(v_1) & \phi_2(v_2) & ... & \phi_2(v_k) \\
+    \phi_1 \wedge \ldots \wedge \phi_k &: V \times \ldots \times V \to \R \\
+    (v_1, \ldots, v_k) &\mapsto \det \begin{pmatrix}
+      \phi_1(v_1) & \phi_1(v_2) & \ldots & \phi_1(v_k) \\
+      \phi_2(v_1) & \phi_2(v_2) & \ldots & \phi_2(v_k) \\
       \vdots & \vdots & \ddots & \vdots \\
-      \phi_k(v_1) & \phi_k(v_2) & ... & \phi_k(v_k)
+      \phi_k(v_1) & \phi_k(v_2) & \ldots & \phi_k(v_k)
     \end{pmatrix}
   \end{align*}
 \end{defn}
@@ -1174,13 +1183,13 @@
 \begin{eign}
   \begin{itemize}
     \item Das Dachprodukt von Elementen aus $V^*$ ist in jedem Argument linear.
-    \item Für $\sigma \in S_k$ gilt $\phi_{\sigma(1)} \wedge ... \wedge \phi_{\sigma(k)} = \mathrm{sgn}(\sigma) \cdot (\phi_1 \wedge ... \wedge \phi_k)$.
+    \item Für $\sigma \in S_k$ gilt $\phi_{\sigma(1)} \wedge \ldots \wedge \phi_{\sigma(k)} = \mathrm{sgn}(\sigma) \cdot (\phi_1 \wedge \ldots \wedge \phi_k)$.
   \end{itemize}
 \end{eign}
 
 \begin{prop}
   \begin{itemize}
-    \item Ist $\{ \phi_1, ..., \phi_n \}$ eine Basis von $V^*$, dann ist $\Set{ \phi_{j_1} \wedge ... \wedge \phi_{j_k} }{ 1 \leq j_1 < j_2 < ... < j_k \leq n }$ eine Basis von $\Lambda^k V^*$.
+    \item Ist $\{ \phi_1, \ldots, \phi_n \}$ eine Basis von $V^*$, dann ist $\Set{ \phi_{j_1} \wedge \ldots \wedge \phi_{j_k} }{ 1 \leq j_1 < j_2 < \ldots < j_k \leq n }$ eine Basis von $\Lambda^k V^*$.
 
     \vspace{4pt}
 
@@ -1194,9 +1203,9 @@
 \begin{samepage}
 
 \begin{prop}
-  Seien $\phi_1, ..., \phi_k \in V^*$ und $A = (a_{jl}) \in \R^{k \times k}$ gegeben.
-  Dann gilt für $\varphi_j \coloneqq \sum_{l=1}^k a_{jl} \phi_l \in V^*, j = 1, ..., k$:
-  \[ \varphi_1 \wedge ... \wedge \varphi_k = \det(A) \cdot (\phi_1 \wedge ... \wedge \phi_k). \]
+  Seien $\phi_1, \ldots, \phi_k \in V^*$ und $A = (a_{jl}) \in \R^{k \times k}$ gegeben.
+  Dann gilt für $\varphi_j \coloneqq \sum_{l=1}^k a_{jl} \phi_l \in V^*, j = 1, \ldots, k$:
+  \[ \varphi_1 \wedge \ldots \wedge \varphi_k = \det(A) \cdot (\phi_1 \wedge \ldots \wedge \phi_k). \]
 \end{prop}
 
 \begin{satz}
@@ -1204,10 +1213,10 @@
   \begin{itemize}
     \item Es gibt eine eindeutig bestimmte bilineare Abbildung
     \[ (\Lambda^k V^*) \times (\Lambda^l V^*) \to \Lambda^{k+l} V^*, \quad (\omega, \widetilde{\omega}) \mapsto \omega \wedge \widetilde{\omega}, \]
-    sodass für $\omega = \phi_1 \wedge ... \wedge \phi_k$ und $\widetilde{\omega} = \widetilde{\phi}_1 \wedge ... \wedge \widetilde{\phi}_l$ ($\phi_j, \widetilde{\phi}_i \in V^*$) gilt:
-    \[ (\phi_1 \wedge \cdots \wedge \phi_k) \wedge (\widetilde{\phi}_1 \wedge ... \wedge \widetilde{\phi}_l) = \phi_1 \wedge ... \wedge \phi_k \wedge \widetilde{\phi}_1 \wedge ... \wedge \widetilde{\phi}_l. \]
-    \item Sei $\{ \phi_1 , ..., \phi_k \}$ eine Basis von $V^*$, dann gilt für $\omega = \sum_{\mathclap{i_1 < ... < i_k}} \, a_{i_1 \cdots i_k} (\phi_{i_1} \wedge ... \wedge \phi_{i_k})$ und $\widetilde{\omega} = \sum_{\mathclap{j_1 < ... < j_k}} \, \widetilde{a}_{j_1 ... j_k} (\phi_{j_1} \wedge ... \wedge \phi_{j_k})$:
-    \[ \omega \wedge \widetilde{\omega} = \sum_{\mathclap{\substack{i_1 < ... < i_k \\ j_1 < ... < j_l}}} \, (a_{i_1 \cdots i_k} \cdot \widetilde{a}_{j_1 \cdots j_l}) \cdot (\phi_{i_1} \wedge ... \wedge \phi_{i_k} \wedge \phi_{j_1} \wedge ... \wedge \phi_{j_l}) \]
+    sodass für $\omega = \phi_1 \wedge \nldots \wedge \phi_k$ und $\widetilde{\omega} = \widetilde{\phi}_1 \wedge \nldots \wedge \widetilde{\phi}_l$ ($\phi_j, \widetilde{\phi}_i \in V^*$) gilt:
+    \[ (\phi_1 \wedge \cdots \wedge \phi_k) \wedge (\widetilde{\phi}_1 \wedge \ldots \wedge \widetilde{\phi}_l) = \phi_1 \wedge \ldots \wedge \phi_k \wedge \widetilde{\phi}_1 \wedge \ldots \wedge \widetilde{\phi}_l. \]
+    \item Sei $\{ \phi_1 , \ldots, \phi_k \}$ eine Basis von $V^*$, dann gilt für $\omega = \sum_{\mathclap{i_1 < \ldots < i_k}} \, a_{i_1 \cdots i_k} (\phi_{i_1} \wedge \nldots \wedge \phi_{i_k})$ und $\widetilde{\omega} = \sum_{\mathclap{j_1 < \ldots < j_k}} \, \widetilde{a}_{j_1 \ldots j_k} (\phi_{j_1} \wedge \nldots \wedge \phi_{j_k})$:
+    \[ \omega \wedge \widetilde{\omega} = \sum_{\mathclap{\substack{i_1 < \ldots < i_k \\ j_1 < \ldots < j_l}}} \, (a_{i_1 \cdots i_k} \cdot \widetilde{a}_{j_1 \cdots j_l}) \cdot (\phi_{i_1} \wedge \ldots \wedge \phi_{i_k} \wedge \phi_{j_1} \wedge \ldots \wedge \phi_{j_l}) \]
   \end{itemize}
 \end{satz}
 
@@ -1255,22 +1264,22 @@
 \end{bsp}
 
 \begin{nota}
-  $x_j : U \to \R, \quad (u_1, ..., u_n) \mapsto u_j$ % (Projektion auf $j$-te Koordinate)
+  $x_j : U \to \R, \quad (u_1, \ldots, u_n) \mapsto u_j$ % (Projektion auf $j$-te Koordinate)
 \end{nota}
 
 \begin{bem}
-  $\d x_j (v_1, ..., v_n) = v_j$
+  $\d x_j (v_1, \ldots, v_n) = v_j$
 \end{bem}
 
-% Damit ist $(\d x_1(u), ..., \d x_j(u))$ eine Dualbasis von $((u, e_1), ..., (u, e_n))$
+% Damit ist $(\d x_1(u), \ldots, \d x_j(u))$ eine Dualbasis von $((u, e_1), \ldots, (u, e_n))$
 
 \iffalse % Allgemeiner aufgeschrieben für $k$-Formen
 \begin{beobachtung}
-  Für jede Einsform $\omega$ auf $U$ gibt es $n$ Abbildungen $a_j : U \to \R$, $j = 1, ..., n$, sodass $\omega = \sum_{j=1}^n a_j \d x_j$.
+  Für jede Einsform $\omega$ auf $U$ gibt es $n$ Abbildungen $a_j : U \to \R$, $j = 1, \ldots, n$, sodass $\omega = \sum_{j=1}^n a_j \d x_j$.
 \end{beobachtung}
 
 \begin{defn}
-  Eine Einsform $\omega = \sum_{j=1}^n a_j \d x_j$ heißt stetig/diff'bar/$\mathcal{C}^k$, wenn für alle $j \in \{ 1, ..., n \}$: $a_j$ ist stetig/total diff'bar/$\mathcal{C}^k$.
+  Eine Einsform $\omega = \sum_{j=1}^n a_j \d x_j$ heißt stetig/diff'bar/$\Cont^k$, wenn für alle $j \in \{ 1, \ldots, n \}$: $a_j$ ist stetig/total diff'bar/$\Cont^k$.
 \end{defn}
 \fi
 
@@ -1282,16 +1291,16 @@
   Eine \emph{$0$-Form} ist eine Abbildung $\omega : U \to \R$.
 \end{defn}
 
-% $\{ \d x_{j_1}(u) \wedge ... \wedge \d x_{j_k}(u) \mid 1 \leq j_1 < ... < j_k \leq n \}$
+% $\{ \d x_{j_1}(u) \wedge \ldots \wedge \d x_{j_k}(u) \mid 1 \leq j_1 < \ldots < j_k \leq n \}$
 % Basis von $\Lambda^k T_u^* U$
 
 \begin{beobachtung}
-  Sei $\omega$ eine $k$-Form auf $U$, dann gibt es $\binom{n}{k}$ Funktionen $f_{j_1 \cdots j_k} : U \to \R$, $1 \leq j_1 < ... < j_k \leq n$, sodass
-  \[ \omega = \sum_{\mathclap{j_1 < ... < j_k}} f_{j_1 \cdots j_k} \d x_{j_1} \wedge ... \wedge \d x_{j_k}. \]
+  Sei $\omega$ eine $k$-Form auf $U$, dann gibt es $\binom{n}{k}$ Funktionen $f_{j_1 \cdots j_k} : U \to \R$, $1 \leq j_1 < \ldots < j_k \leq n$, sodass
+  \[ \omega = \sum_{\mathclap{j_1 < \ldots < j_k}} f_{j_1 \cdots j_k} \d x_{j_1} \wedge \ldots \wedge \d x_{j_k}. \]
 \end{beobachtung}
 
 \begin{defn}
-  Die $k$-Form $\omega$ auf $U$ heißt stetig/diff'bar/$\mathcal{C}^k$, wenn alle $\binom{n}{k}$ Abbildungen $f_{j_1 \cdots j_k} : U \to \R$ stetig/total diff'bar/$\mathcal{C}^k$ sind.
+  Die $k$-Form $\omega$ auf $U$ heißt stetig/diff'bar/$\Cont^k$, wenn alle $\binom{n}{k}$ Abbildungen $f_{j_1 \cdots j_k} : U \to \R$ stetig/total diff'bar/$\Cont^k$ sind.
 \end{defn}
 
 \begin{beobachtung}
@@ -1304,8 +1313,8 @@
 \end{beobachtung}
 
 \begin{defn}
-  Sei $\omega = \sum_{\mathclap{j_1 < ... < j_k}} f_{j_1 \cdots j_k} (\d x_{j_1} \wedge ... \wedge \d x_{j_k})$ eine diff'bare $k$-Form auf $U$, dann heißt die $(k{+}1)$-Form
-  \[ \d \omega \coloneqq \sum_{\mathclap{j_1 < ... < j_k}} \d f_{j_1 \cdots j_k} \wedge \d x_{j_1} \wedge ... \wedge \d x_{j_k} \quad \text{\emph{äußere Ableitung}}. \]
+  Sei $\omega = \sum_{\mathclap{j_1 < \ldots < j_k}} f_{j_1 \cdots j_k} (\d x_{j_1} \wedge \ldots \wedge \d x_{j_k})$ eine diff'bare $k$-Form auf $U$, dann heißt die $(k{+}1)$-Form
+  \[ \d \omega \coloneqq \sum_{\mathclap{j_1 < \ldots < j_k}} \d f_{j_1 \cdots j_k} \wedge \d x_{j_1} \wedge \ldots \wedge \d x_{j_k} \quad \text{\emph{äußere Ableitung}}. \]
 \end{defn}
 
 % Herleitung:
@@ -1315,10 +1324,10 @@
   $\d \omega = \sum_{j=1}^n \d f_j \wedge \d x_j = \sum_{j=1}^n (\sum_{k=1}^n \frac{\partial f_j}{\partial x_k} \d x_k) \wedge \d x_j = \sum_{j=1}^k (\frac{\partial f_j}{\partial x_k} - \frac{\partial f_k}{\partial x_j}) \d x_k \wedge \d x_j$.
 
   $k = n -1$: $\mathrm{dim}(\Lambda^{n-1} V^*) = \binom{n}{n-1} = n = \mathrm{dim}(V)$
-  $\Set{ (-1)^{j-1} \d x_1(u) \wedge ... \wedge \widehat{\d x_j(u)} \wedge ... \wedge \d x_n(u) }{ 1 \leq j \leq n }$ ist für alle $u \in U$ eine Basis von $\Lambda^{n-1} T_u^* U$.
+  $\Set{ (-1)^{j-1} \d x_1(u) \wedge \ldots \wedge \widehat{\d x_j(u)} \wedge \ldots \wedge \d x_n(u) }{ 1 \leq j \leq n }$ ist für alle $u \in U$ eine Basis von $\Lambda^{n-1} T_u^* U$.
 
-  $\omega = \sum_{j=1}^n (-1)^{j-1} f_j \d x_1 \wedge ... \wedge \widehat{\d x_j} \wedge ... \wedge \d x_n$
-  $\d \omega = \sum_{j=1}^n (-1)^{j-1} \d f_j \wedge \d x_1 \wedge ... \wedge \widehat{\d x_j} \wedge ... \wedge \d x_n = \begin{cases} 0, & \text{falls} j \not= k \\ \d x_1 \wedge ... \wedge \d x_n & j = k \end{cases}$
+  $\omega = \sum_{j=1}^n (-1)^{j-1} f_j \d x_1 \wedge \ldots \wedge \widehat{\d x_j} \wedge \ldots \wedge \d x_n$
+  $\d \omega = \sum_{j=1}^n (-1)^{j-1} \d f_j \wedge \d x_1 \wedge \ldots \wedge \widehat{\d x_j} \wedge \ldots \wedge \d x_n = \begin{cases} 0, & \text{falls} j \not= k \\ \d x_1 \wedge \ldots \wedge \d x_n & j = k \end{cases}$
 \end{bsp}
 \fi
 
@@ -1327,9 +1336,9 @@
     \item Für eine diff'bare Einsform $\omega = \sum_{j=1}^n f_j dx_j$ auf $U$ gilt
     \[ \d \omega = \sum_{j<l} \left( \frac{\partial f_l}{\partial x_j} - \frac{\partial f_j}{\partial x_l} \right) \d x_j \wedge \d x_l. \]
     \item Eine diff'bare $(n{-}1)$-Form $\omega$ auf $U$ können wir schreiben als
-    \[ \omega = \sum_{j=1}^n (-1)^{j-1} f_j \d x_1 \wedge ... \wedge \widehat{\d x_j} \wedge ... \wedge x_n \]
+    \[ \omega = \sum_{j=1}^n (-1)^{j-1} f_j \d x_1 \wedge \ldots \wedge \widehat{\d x_j} \wedge \ldots \wedge x_n \]
     mit total diff'baren Funktionen $f_j : U \to \R$. Dann ist
-    \[ \d \omega = \left( \sum_{j=1}^n \frac{\partial f_j}{\partial x_j} \right) \d x_1 \wedge ... \wedge \d x_n. \]
+    \[ \d \omega = \left( \sum_{j=1}^n \frac{\partial f_j}{\partial x_j} \right) \d x_1 \wedge \ldots \wedge \d x_n. \]
   \end{itemize}
 \end{bem}
 
@@ -1338,15 +1347,15 @@
     \item $\d (\omega \wedge \eta) = \d \omega \wedge \eta + (-1)^k \omega \wedge \d \eta$
     \begin{multicols}{2}
       \item $\d(\lambda \omega_1 + \omega_2) = \lambda \d \omega_1 + \d \omega_2$
-      \item $\d (\d \omega) = 0$, falls $\omega$ $\mathcal{C}^2$ ist
+      \item $\d (\d \omega) = 0$, falls $\omega$ $\Cont^2$ ist
     \end{multicols}
   \end{itemize}
 \end{satz}
 
 \begin{defn}
   Sei $U \opn \R^n$, $\widetilde{U} \opn \R^m$, $\phi : \widetilde{U} \to U$ total diff'bar und $\omega$ eine $k$-Form auf $U$. Die $k$-Form $\phi^* \omega$ auf $\widetilde{U}$, welche durch
-  \[ (\phi^* \omega (\widetilde{u})) (X_1, ..., X_k) = (\omega (\phi(\widetilde{u})))(D_{\widetilde{u}} \phi (X_1), ..., D_{\widetilde{u}} \phi (X_k))  \]
-  für alle $\widetilde{u} \in \widetilde{U}$, $X_1, ..., X_k \in T_{\widetilde{u}} \widetilde{U}$ definiert ist, heißt \emph{Rücktransport} von $\omega$ über $\phi$.
+  \[ (\phi^* \omega (\widetilde{u})) (X_1, \ldots, X_k) = (\omega (\phi(\widetilde{u})))(D_{\widetilde{u}} \phi (X_1), \ldots, D_{\widetilde{u}} \phi (X_k))  \]
+  für alle $\widetilde{u} \in \widetilde{U}$, $X_1, \ldots, X_k \in T_{\widetilde{u}} \widetilde{U}$ definiert ist, heißt \emph{Rücktransport} von $\omega$ über $\phi$.
 \end{defn}
 
 \begin{anmerkung}
@@ -1364,9 +1373,9 @@
     \item $\phi^*(\lambda \omega_1 + \omega_2) = \lambda \phi^*(\omega_1) + \phi^*(\omega_2)$ \pright{Linearität}
     \item $\phi^*(\omega \wedge \eta) = (\phi^* \omega) \wedge (\phi^* \eta)$ \pright{Verträglichkeit mit $\wedge$}
     \item $\psi^*(\phi^* \omega) = (\phi \circ \psi)^* \omega$ \pright{Funktorialität}
-    \item $\d (\varphi^* \omega) = \phi^* (\d \omega)$, falls $\omega$ diff'bar und $\phi$ eine $\mathcal{C}^2$-Abb. ist
-    \item Wenn $\omega = \sum_{j_1 < ... < j_k} f_{j_1 \cdots f_k} \d x_{j_1} \wedge ... \wedge \d x_{j_k} : U \to \R$, dann gilt:
-    \[ \phi^* \omega = \sum_{j_1 < ... < j_k} (f_{j_1 \cdots j_k} \circ \phi) \d \phi_{j_1} \wedge ... \wedge \d \phi_{j_k} \]
+    \item $\d (\varphi^* \omega) = \phi^* (\d \omega)$, falls $\omega$ diff'bar und $\phi$ eine $\Cont^2$-Abb. ist
+    \item Wenn $\omega = \sum_{j_1 < \ldots < j_k} f_{j_1 \cdots f_k} \d x_{j_1} \wedge \ldots \wedge \d x_{j_k} : U \to \R$, dann gilt:
+    \[ \phi^* \omega = \sum_{j_1 < \ldots < j_k} (f_{j_1 \cdots j_k} \circ \phi) \d \phi_{j_1} \wedge \ldots \wedge \d \phi_{j_k} \]
   \end{itemize}
 \end{satz}
 
@@ -1387,7 +1396,7 @@
   Eine Teilmenge $U \subset \R^n$ heißt \emph{sternförmig}, falls es einen Punkt $u_0 \in U$ gibt, sodass für alle anderen Punkte $u \in U$ die Verbindungsstrecke von $u_0$ nach $u$ in $U$ liegt.
 \end{defn}
 
-\begin{lem}[Poincaré]
+\begin{lem}[\emph{Poincaré}]
   Ist $U$ sternförmig, dann ist jede geschlossene, stetig diff'bare $k$-Form mit $k \geq 1$ auch exakt.
 \end{lem}
 
@@ -1417,13 +1426,13 @@
   Sei $f : U \to \R$ stetig diff'bar, dann heißt das stetige Vektorfeld
   \[
     \grad f : U \to \R^n, \quad
-    u \mapsto \left( \tfrac{\partial f}{\partial x_1} (u), ..., \tfrac{\partial f}{\partial x_n} (u) \right)^T
+    u \mapsto \left( \tfrac{\partial f}{\partial x_1} (u), \ldots, \tfrac{\partial f}{\partial x_n} (u) \right)^T
     \quad \text{\emph{Gradient} von $f$.}
   \]
 \end{defn}
 
 \begin{defn}
-  Sei $F = (F_1, ..., F_n)^T : U \to \R^n$ ein $\mathcal{C}^1$-VF, dann heißt
+  Sei $F = (F_1, \ldots, F_n)^T : U \to \R^n$ ein $\Cont^1$-VF, dann heißt
   \[
     \divergence F : U \to \R, \quad u \mapsto \sum_{j=1}^n \tfrac{\partial F_j}{\partial x_j}
     \qquad \text{\emph{Divergenz} von $F$.}
@@ -1431,7 +1440,7 @@
 \end{defn}
 
 \begin{defn}
-  Ist $n {=} 3$ und $F = (F_1, F_2, F_3)^T : U \to \R^3$ ein $\mathcal{C}^1$-VF, dann ist die \emph{Rotation} von $f$ definiert als folgendes VF:
+  Ist $n {=} 3$ und $F = (F_1, F_2, F_3)^T : U \to \R^3$ ein $\Cont^1$-VF, dann ist die \emph{Rotation} von $f$ definiert als folgendes Vektorfeld:
   \[
     \rot F : U \to \R^3, \quad
     u \mapsto \left(
@@ -1444,7 +1453,7 @@
 
 % Physiker-Notation:
 \begin{phnota}
-  \emph{Nabla-Operator}: $\vec{\nabla} \coloneqq \left( \tfrac{\partial}{\partial x_1}, ..., \tfrac{\partial}{\partial x_n} \right)^T$\\
+  \emph{Nabla-Operator}: $\vec{\nabla} \coloneqq \left( \tfrac{\partial}{\partial x_1}, \ldots, \tfrac{\partial}{\partial x_n} \right)^T$\\
   Damit schreibt man auch:
   \[
     \grad f = \vec{\nabla} f, \quad
@@ -1495,7 +1504,7 @@
   Sei $U \opn \R^n$ sternförmig und $F, G : U \to \R^3$ stetig diffbar.
   \begin{itemize}
     \item Wenn $\rot F = 0$, dann ex. $f : U {\to} \R$ stetig diff'bar mit $F = \grad f$.
-    \item Wenn $\divergence G = 0$, dann ex. $F : U {\to} \R^3$ stetig diff'bar mit $G = \rot F$.
+    \item Wenn $\divergence G = 0$, dann ex. $F \!:\! U \!\to\! \R^3$ stetig diff'bar mit $G \!=\! \rot F$.
   \end{itemize}
 \end{lem}
 
@@ -1505,7 +1514,7 @@
 \end{samepage}
 
 \begin{defn}
-  Sei $U \opn \R^n$, $\omega = f \d x_1 \wedge ... \wedge \d x_n$ eine $n$-Form, wobei $f : U {\to} \R$ Lebesgue-integrierbar sei. Für eine Borel-Menge $C \subset U$ heißt dann
+  Sei $U \opn \R^n$, $\omega = f \d x_1 \wedge \ldots \wedge \d x_n$ eine $n$-Form, wobei $f : U {\to} \R$ Lebesgue-integrierbar sei. Für eine Borel-Menge $C \subset U$ heißt dann
   \[
     \Int{C}{}{\omega}{} \coloneqq \Int{C}{}{f}{\lambda_n} \in \R
     \qquad \text{\emph{Integral} von $\omega$ über $C$.}
@@ -1513,7 +1522,7 @@
 \end{defn}
 
 \begin{defn}
-  Seien $U, \tilde{U} \opn \R^n$. Ein $\mathcal{C}^1$-Diffeomorphismus $\phi : \tilde{U} \to U$ heißt
+  Seien $U, \tilde{U} \opn \R^n$. Ein $\Cont^1$-Diffeomorphismus $\phi : \tilde{U} \to U$ heißt
   \begin{itemize}
     \item \emph{orientierungserhaltend}, wenn $\det (J_{\tilde{u}} \phi) > 0$ für alle $\tilde{u} \in \tilde{U}$,
     \item \emph{orientierungsumkehrend}, wenn $\det (J_{\tilde{u}} \phi) < 0$ für alle $\tilde{u} \in \tilde{U}$.
@@ -1522,13 +1531,13 @@
 
 % Übungsaufgabe:
 \begin{lem}
-  Seien $U, \tilde{U} \opn \R^n$ offen und $\phi : \widetilde{U} \to U$ total diff'bar. Dann gilt für eine $n$-Form $\omega = f \d x_1 \wedge ... \wedge x_n$ auf $U$:
-  \[ \phi^* \omega = ((f \circ \phi) \cdot \det(D\phi)) \, \d x_1 \wedge ... \wedge \d x_n \]
+  Seien $U, \tilde{U} \opn \R^n$ offen und $\phi : \widetilde{U} \to U$ total diff'bar. Dann gilt für eine $n$-Form $\omega = f \d x_1 \wedge \ldots \wedge x_n$ auf $U$:
+  \[ \phi^* \omega = ((f \circ \phi) \cdot \det(D\phi)) \, \d x_1 \wedge \ldots \wedge \d x_n \]
 \end{lem}
 
 % Transformationsverhalten von Integralen von Differentialformen
 \begin{satz}
-  Seien $U, \tilde{U} \opn \R^n$, $C \subset \tilde{U}$ kompakt, $\phi : \tilde{U} \to U$ ein $\mathcal{C}^1$-Diffeo und $\omega = f \, \d x_1 \wedge ... \wedge \d x_n$ eine stetige $n$-Form auf $U$. Dann gilt:
+  Seien $U, \tilde{U} \opn \R^n$, $C \subset \tilde{U}$ kompakt, $\phi : \tilde{U} \to U$ ein $\Cont^1$-Diffeo und $\omega = f \, \d x_1 \wedge \ldots \wedge \d x_n$ eine stetige $n$-Form auf $U$. Dann gilt:
   \begin{itemize}
     \item Wenn $\phi$ orientierungserhaltend: \quad\, $\Int{\mathclap{\phi(C)}}{}{f}{\lambda_n} = \Intdf{\mathclap{\phi(C)}}{\omega} = \Intdf{C}{\phi^* \omega}$
     \item Wenn $\phi$ orientierungsumkehrend: \enspace $\Int{\mathclap{\phi(C)}}{}{f}{\lambda_n} = \Intdf{\mathclap{\phi(C)}}{\omega} = -\Intdf{C}{\phi^* \omega}$
@@ -1545,22 +1554,22 @@
     h_k : \R \to \R, \quad x &\mapsto \tfrac{g(x-k)}{G(x)} \qquad \text{für alle $k \in \Z$.}
   \end{align*}
 
-  Dann gilt $h_k \in \mathcal{C}^\infty(\R, \R)$ und $\supp(h_k) = \cinterval{k{-}1}{k{+}1}$ für alle $k \in \Z$.
+  Dann gilt $h_k \in \Cont^\infty(\R, \R)$ und $\supp(h_k) = \cinterval{k{-}1}{k{+}1}$ für alle $k \in \Z$.
   Die Menge $\Set{h_k}{k \in \Z}$ bildet eine \emph{Teilung der Eins}, da
   \[ \fa{x \in \R} \sum_{k \in \Z} h_k(x) = \sum_{k \in \Z} \tfrac{g(x-k)}{G(x)} = \tfrac{1}{G(x)} \sum_{k \in \Z} g(x-k) = 1. \]
 \end{bem}
 
 % Ausgelassen: Teilung der $1$ in $\R^n$
 \iffalse
-  Sei $q = (q_1, ..., q_n) \in \Z^n$, $\epsilon > 0$
+  Sei $q = (q_1, \ldots, q_n) \in \Z^n$, $\epsilon > 0$
 
-  $\d \alpha_{q,\epsilon} : \R^n \to \R, (x_1, ..., x_n) \mapsto \prod_{j=1}^{n} h_{q_j} \cdot (\frac{x_j}{\epsilon})$
+  $\d \alpha_{q,\epsilon} : \R^n \to \R, (x_1, \ldots, x_n) \mapsto \prod_{j=1}^{n} h_{q_j} \cdot (\frac{x_j}{\epsilon})$
 
   Es gilt:
 
   \begin{itemize}
-    \item $\d \alpha_{q, \epsilon}$ ist $\mathcal{C}^\infty$
-    \item $\mathrm{supp} \alpha_{q,\epsilon} = \Set{ (x_1, ..., x_n) \in \R^n }{ \abs{x_j - \epsilon q_j} \leq \epsilon \text{ für alle } j \in \{ 1, ..., n \} }$
+    \item $\d \alpha_{q, \epsilon}$ ist $\Cont^\infty$
+    \item $\mathrm{supp} \alpha_{q,\epsilon} = \Set{ (x_1, \ldots, x_n) \in \R^n }{ \abs{x_j - \epsilon q_j} \leq \epsilon \text{ für alle } j \in \{ 1, \ldots, n \} }$
     \item $\sum_{q \in \Z^n} \alpha_{q, \epsilon} = 1$ (Übung)
   \end{itemize}
 \fi
@@ -1576,7 +1585,7 @@
   Eine $k$-dimensionale \emph{Untermannigfaltigkeit} (UMF) des $\R^n$ ist eine nichtleere Teilmenge $M \subset \R^n$, sodass für alle $x \in M$ gilt:
   \begin{align*}
     & \ex{\text{Umgebung $\widetilde{U}$ von $x$}} \ex{\widetilde{V} \opn \R^n} \ex{\widetilde{\phi} : \widetilde{U} \to \widetilde{V} \text{ Diffeo}} \\
-    & \widetilde{\phi}(M \cap \widetilde{U}) = \widetilde{V} \cap \Set{ (x_1, ..., x_k, 0, ..., 0) }{ x_1, ..., x_k \in \R } \cong \widetilde{V} \cap \R^k
+    & \widetilde{\phi}(M \cap \widetilde{U}) = \widetilde{V} \cap \Set{ (x_1, \ldots, x_k, 0, \ldots, 0) }{ x_1, \ldots, x_k \in \R } \cong \widetilde{V} \cap \R^k
   \end{align*}
 \end{defn}
 
@@ -1585,7 +1594,7 @@
 \end{nomenklatur}
 
 \begin{nota}
-  Für $n \geq k$: $\pi_k : \R^n \to \R^k, \enspace (x_1, ..., x_n) \mapsto (x_1, ..., x_k)$.
+  Für $n \geq k$: $\pi_k : \R^n \to \R^k, \enspace (x_1, \ldots, x_n) \mapsto (x_1, \ldots, x_k)$.
 \end{nota}
 
 \begin{nota}
@@ -1631,7 +1640,7 @@
 
 \begin{nota}
   Folgender Diffeomorphismus ist orientierungsumkehrend:
-  \[ \tau : \R^m \to \R^m, \quad (x_1, ..., x_m) \mapsto (x_1, ..., x_{m-1}, - x_m) \]
+  \[ \tau : \R^m \to \R^m, \quad (x_1, \ldots, x_m) \mapsto (x_1, \ldots, x_{m-1}, - x_m) \]
 \end{nota}
 
 \begin{defn}
@@ -1657,12 +1666,12 @@
     \[ \Intdf{C}{\omega} \coloneqq \,\, \Intdf{\mathclap{(C, [\Atlas])}}{\,\omega} \coloneqq \, \Intdf{\mathclap{\phi(C)}}{\, (\phi^{-1})^* \omega}. \]
     \item Angenommen, es gibt keine solche Karte. Dann wählen wir eine passende Teilung der Eins, also eine endliche Familie
     \[
-      \Set{\alpha_j : C \to \R \text{ stetig}}{j \in \{ 1, ..., r \}}
+      \Set{\alpha_j : C \to \R \text{ stetig}}{j \in \{ 1, \ldots, r \}}
       \enspace \text{mit} \enspace
       \fa{x \in C} \sum_{i=1}^r \alpha_j(x) = 1,
     \]
-    sodass es für jedes $j \in \{ 1, ..., r \}$ eine Karte $\phi_j : U_j \to V_j$ aus einem positiv orientierten Atlas von $(M, [\Atlas])$ mit $\supp(\alpha_j) \subset U_j$ gibt.\\
-    Setze $C_j \coloneqq \supp(\alpha_j) \cap C$ für $j \in \{ 1, ..., r \}$ und definiere
+    sodass es für jedes $j \in \{ 1, \nldots, r \}$ eine Karte $\phi_j : U_j \to V_j$ aus einem positiv orientierten Atlas von $(M, [\Atlas])$ mit $\supp(\alpha_j) \subset U_j$ gibt.\\
+    Setze $C_j \coloneqq \supp(\alpha_j) \cap C$ für $j \in \{ 1, \ldots, r \}$ und definiere
     \[
       \Intdf{C}{\omega} \coloneqq \Intdf{\mathclap{(C, [\Atlas])}}{\omega} \coloneqq \sum_{j=1}^r \Intdf{\,\phi_j(C_j)}{(\alpha_j \circ \phi_j^{-1}) \cdot (\phi_j^{-1})^* \omega}.
     \]
@@ -1674,23 +1683,23 @@
 % Kapitel 2.5. Satz von Stokes
 
 \begin{nota}
-  $H_k \coloneqq \Set{ (x_1, ..., x_k) \subset \R^k }{ x_1 \leq 0 }$ heißt Halbraum.
+  $H_k \coloneqq \Set{ (x_1, \ldots, x_k) \subset \R^k }{ x_1 \leq 0 }$ heißt Halbraum.
 \end{nota}
 
 \begin{bem}
-  $\partial H_k = \Set{ (0, x_2, ..., x_k) \in \R^k }{ x_2, ..., x_k \in \R }$
+  $\partial H_k = \Set{ (0, x_2, \ldots, x_k) \in \R^k }{ x_2, \ldots, x_k \in \R }$
 \end{bem}
 
 \begin{beob}
   $\partial H_k$ ist eine $(k{-}1)$-dimensionale UMF von $\R^k$ mit Atlas $\Atlas = \{ (\beta, \partial H_k) \}$, wobei die Karte $\beta$ definiert ist durch
   \begin{align*}
-    \tilde{\beta} : \R^k \to \R^k, \quad &(x_1, ..., x_k) \mapsto (x_2, ..., x_k, x_1), \\
-    \beta : \R^k \to \R^{k-1}, \quad &(0, x_2, ..., x_k) \mapsto (x_2, ..., x_k).
+    \tilde{\beta} : \R^k \to \R^k, \quad &(x_1, \ldots, x_k) \mapsto (x_2, \ldots, x_k, x_1), \\
+    \beta : \R^k \to \R^{k-1}, \quad &(0, x_2, \ldots, x_k) \mapsto (x_2, \ldots, x_k).
   \end{align*}
 \end{beob}
 
 % Bemerkung:
-% \[ \phi^{-1} : \R^{k{-}1} \to \R^k, \quad (t_1, ..., x_{k-1}) \mapsto (0, t_1, ..., t_{k-1}) \]
+% \[ \phi^{-1} : \R^{k{-}1} \to \R^k, \quad (t_1, \ldots, x_{k-1}) \mapsto (0, t_1, \ldots, t_{k-1}) \]
 
 \begin{defn}
   Sei $C \subset M \subset \R^n$, wobei $C$ kompakt und $M$ eine $k$-dim. UMF.\\
@@ -1720,7 +1729,7 @@
 \end{defn}
 
 \begin{nota}
-  $\rho : \R^n \to \R^n, \enspace (x_1, ..., x_n) \mapsto (x_2, ..., x_k, x_1, x_{k+1}, ..., x_n)$
+  $\rho : \R^n \to \R^n, \enspace (x_1, \nldots, x_n) \mapsto (x_2, \nldots, x_k, x_1, x_{k+1}, \nldots, x_n)$
 \end{nota}
 
 % Übungsaufgabe:
@@ -1750,7 +1759,7 @@
   \[ \Intdf{H_k}{\d \omega} = \, \Intdf{\mathclap{\partial H_k}}{\, \omega}. \]
 \end{lem}
 
-\begin{satz}[Stokes]
+\begin{satz}[\emph{Stokes}]
   Sei $M \subset \R^n$ eine orientierte $k$-dim. UMF von $\R^n$ und $C \subset M$ kompakt mit glattem Rand $\partial_M C$. Sei $U \opn \R^n$ mit $M \subset U$ sowie $\omega$ eine stetig diff'bare $(k{-}1)$-Form auf $U$. Dann gilt (bzgl. der induzierten Orientierung auf $\partial_M C$):
   \[ \Intdf{C}{\d \omega} = \, \Intdf{\mathclap{\partial_M C}}{\,\omega} \]
 \end{satz}
@@ -1780,8 +1789,8 @@
 % Kapitel 2.6. Klassische Integralsätze der Vektoranalysis
 
 
-\begin{satz}[Divergenzsatz]
-  Sei $C \subset \hat{U} \opn \R^n$ kompakt mit glattem Rand, $C^\circ \not= \emptyset$, $C = \overline{C^\circ}$, $G : \hat{U} \to \R^n$ ein $\mathcal{C}^1$-Vektorfeld, dann gilt:
+\begin{satz}[\emph{Divergenzsatz}]
+  Sei $C \subset \hat{U} \opn \R^n$ kompakt mit glattem Rand, $C^\circ \not= \emptyset$, $C = \overline{C^\circ}$, $G : \hat{U} \to \R^n$ ein $\Cont^1$-Vektorfeld, dann gilt:
   \[ \Int{C}{}{(\mathrm{div} G)}{\lambda_n} = \Int{\partial_C}{}{\langle G, \nu \rangle}{\mathcal{A}}. \]
 \end{satz}
 
@@ -1796,7 +1805,7 @@
 % Notation: $\partial_j f = \tfrac{\partial f}{\partial x_j}$
 
 \begin{defn}
-  Sei $M \subset \R^n$ eine UMF und $c : \ointerval{-\epsilon}{\epsilon} \to \R^n$ $\mathcal{C}^\infty$ mit $\im(c) \subset M$, dann heißt der Vektor $(c(0), c'(0)) \in T_{c(0)} \R^n$ \emph{Tangentialvektor} an $M$ in $c(0) = x$.
+  Sei $M \subset \R^n$ eine UMF und $c : \ointerval{-\epsilon}{\epsilon} \to \R^n$ $\Cont^\infty$ mit $\im(c) \subset M$, dann heißt der Vektor $(c(0), c'(0)) \in T_{c(0)} \R^n$ \emph{Tangentialvektor} an $M$ in $c(0) = x$.
 \end{defn}
 
 \begin{defn}
@@ -1808,8 +1817,8 @@
 \begin{prop}
   Sei $\widetilde{\phi} : \widetilde{U} \to \widetilde{V}$ (mit $U, V \opn \R^n$, $\phi$ ein Diffeomorphismus) eine UMF-Karte von $M$ um $x$ und $\phi$ sei die induzierte Karte. Dann gilt
   \begin{align*}
-    T_x M &= \{ x \} \times D (\widetilde{\phi}^{-1}) (\phi(x)) \Set{ y \in \R^n }{ y_{k+1} = ... = y_n = 0 } \\
-    &= \{ x \} \times \mathrm{span} \{ \partial_1 \phi^{-1} (\phi(x)), ..., \partial_k \phi^{-1} (\phi(x)) \}.
+    T_x M &= \{ x \} \times D (\widetilde{\phi}^{-1}) (\phi(x)) \Set{ y \in \R^n }{ y_{k+1} = \ldots = y_n = 0 } \\
+    &= \{ x \} \times \mathrm{span} \{ \partial_1 \phi^{-1} (\phi(x)), \ldots, \partial_k \phi^{-1} (\phi(x)) \}.
   \end{align*}
 \end{prop}
 
@@ -1824,12 +1833,13 @@
 % Spezialfall: Hyperfläche ($(n {-} 1)$-dimensionale Untermannigfaltigkeit von $\R^n$)
 
 \begin{defn}
-  Sei $M \subset \R^n$ eine Hyperfläche. Eine stetige Abbildung $\nu : M \to \S^{n {-} 1}$ heißt \emph{Einheitsnormalenvektorfeld} (ENF) auf $M$, wenn $\fa{x \in X} \scp{x}{\nu(x)} \in N_x M$.
+  Sei $M \subset \R^n$ eine Hyperfläche. Eine stetige Abb. $\nu : M \!\to\! S^{n {-} 1}$ heißt \emph{Einheitsnormalenvektorfeld} (ENF) auf $M$, wenn
+  \[ \fa{x \in X} \scp{x}{\nu(x)} \in N_x M. \]
 \end{defn}
 
 \begin{defn}
   Sei $(M, [\Atlas])$ eine orientierte HF in $\R^n$. Ein ENF $\nu : M \to S^{n {-} 1}$ heißt \emph{positiv orientiert}, wenn
-  \[ \fa{x \in U} \det(\nu(x), \partial_1 \phi^{-1}(\phi(x)), ..., \partial_{n {-} 1} \phi^{-1} (\phi(x))) > 0, \]
+  \[ \fa{x \in U} \det(\nu(x), \partial_1 \phi^{-1}(\phi(x)), \ldots, \partial_{n {-} 1} \phi^{-1} (\phi(x))) > 0, \]
   wobei $(\phi, U)$ eine positiv orientierte Karte von $M$.
 \end{defn}
 
@@ -1857,13 +1867,13 @@
 \end{defn}
 
 \begin{defn}
-  Sei $M \subset \R^n$ eine $k$-dimensionale UMF mit endlichen UMF-Atlas und $\Set{(\tilde{\phi}_j, U_j)}{j=1, ..., m}$ der davon induzierte Atlas. Ist nun $\Set{\alpha_j}{j = 1,...,m}$ eine stetige Teilung der Eins auf $\bigcup_{j=1}^m \tilde{U}_j$ mit $\alpha_j(x) = 0$ für $x \in (\bigcup_{l=1}^m \hat{U}_l) \setminus U_j$
+  Sei $M \subset \R^n$ eine $k$-dimensionale UMF mit endlichen UMF-Atlas und $\Set{(\tilde{\phi}_j, U_j)}{j=1, \ldots, m}$ der davon induzierte Atlas. Ist nun $\Set{\alpha_j}{j = 1, \ldots ,m}$ eine stetige Teilung der Eins auf $\bigcup_{j=1}^m \tilde{U}_j$ mit $\alpha_j(x) = 0$ für $x \in (\bigcup_{l=1}^m \hat{U}_l) \setminus U_j$.
   Das \emph{Oberflächenintegral} einer stetigen Funktion $f : M \to \R$ ist
   \[ \Int{M}{}{f}{S} \coloneqq \sum_{j=1}^m \Int{\phi_j(U_j)}{}{((\alpha_j \cdot f) \circ \phi_j^{-1}) \sqrt{\det(g_{\phi_j})}}{\lambda_k} \]
 \end{defn}
 
 \begin{satz}[Gauß-Ostrogradski]
-  Sei $\hat{U} \opn \R^3$, $G = (G_1, ..., G_3)^T : \hat{U} \to \R^3$ ein $\mathcal{C}^1$-Vektorfeld und $C \subset \hat{U}$ kompakt. Dann gilt
+  Sei $\hat{U} \opn \R^3$, $G = (G_1, \nldots, G_3)^T : \hat{U} \to \R^3$ ein $\Cont^1$-Vektorfeld und $C \subset \hat{U}$ kompakt. Dann gilt
   \[
     \Int{C}{}{(\divergence G)}{V} = \Int{\partial C}{}{G \cdot}{\vec{S}}, \qquad
     \Int{C}{}{(\divergence G)}{\lambda_3} = \Int{\partial C}{}{\langle G, \nu \rangle}{S}
@@ -1872,11 +1882,11 @@
 
 \iffalse
   Gegeben durch:
-  $u(x) \coloneqq \sum_{j=1}^n \det(e_j, \partial_1 \phi^{-1}(\phi(x)), ..., \partial_{n {-} 1} \phi^{-1} (\phi(x))) e_j$
+  $u(x) \coloneqq \sum_{j=1}^n \det(e_j, \partial_1 \phi^{-1}(\phi(x)), \ldots, \partial_{n {-} 1} \phi^{-1} (\phi(x))) e_j$
   $\nu(x) \coloneqq \tfrac{u(x)}{\norm{u(x)}}$ (unabhängig von pos. orientierter Karte)
   Im Fall $n = 3$ ist $u(x) = \partial_1 \phi^{-1}(\phi(x)) \times \partial_x \phi^{-1}(\phi(x))$
   Im Fall $n=3$:
-  $G = (G_1, G_2, G_3) : \widehat{U} \to \R^3$ $\mathcal{C}^1$, $\widehat{U} \opn \R^3$
+  $G = (G_1, G_2, G_3) : \widehat{U} \to \R^3$ $\Cont^1$, $\widehat{U} \opn \R^3$
   Bekannt: $\d (G \cdot \d S) = \divergence (G) \d V$
 \fi
 
@@ -1895,10 +1905,10 @@
 % Kurvenintegrale
 
 \iffalse
-  Sei $M \subset \R^n$ eine $1$-dimensionale UMF, $\omega = \sum_{j=1}^n F_j \d x_j = F \cdot \d \vec{s}$ mit $F = (F_1, ..., F_n)^T$ eine stetige $1$-Form auf $\R^n$.
+  Sei $M \subset \R^n$ eine $1$-dimensionale UMF, $\omega = \sum_{j=1}^n F_j \d x_j = F \cdot \d \vec{s}$ mit $F = (F_1, \ldots, F_n)^T$ eine stetige $1$-Form auf $\R^n$.
 
   Sei $(\phi, U)$ eine Karte von $M$, $U$ zusammmenhängend, dann $\phi(U) =: V \opn \R^1$ ebenfalls zusammenhängend, \dh{} $V = \ointerval{a}{b}$. Dann ist
-  \[ \phi^{-1} : \ointerval{a}{b} \to \R^n, \quad t \mapsto \left( \phi_1^{-1}(t), ..., \phi_n^{-1}(t) \right)^T \]
+  \[ \phi^{-1} : \ointerval{a}{b} \to \R^n, \quad t \mapsto \left( \phi_1^{-1}(t), \ldots, \phi_n^{-1}(t) \right)^T \]
   eine glatte reguläre Kurve.
   \[ (\phi^{-1})^* \omega = \sum_{j=1}^n (F_j \circ \phi^{-1}) \d \phi_j^{-1} = \sum_{j=1}^n (F_j \circ \phi^{-1}) (\phi_j^{-1})' \d t \]
   \[ (\phi^{-1})^* (F \cdot \d \vec{s}) = \langle F \circ \phi^{-1}, (\phi^{-1})' \rangle \]
@@ -1908,7 +1918,7 @@
 \fi
 
 \begin{defn}
-  Sei $f : \R^n {\to} \R$ stetig, $\gamma : \cinterval{a}{b} \to \R^n$ eine $\mathcal{C}^1$-Kurve. Dann heißt
+  Sei $f : \R^n {\to} \R$ stetig, $\gamma : \cinterval{a}{b} \to \R^n$ eine $\Cont^1$-Kurve. Dann heißt
   \[
     \Int{\gamma}{}{f}{s} \coloneqq \Int{a}{b}{f(\gamma(t)) \cdot \norm{\gamma'(t)}}{t} \quad
     \text{\emph{Kurvenintegral} von $f$ längs $\gamma$.}
@@ -1916,8 +1926,8 @@
   %\[ \Int{\gamma}{}{F {\cdot}}{\vec{s}} \coloneqq \Int{\gamma}{}{\langle F , \tau \rangle}{s} \]
 \end{defn}
 
-\begin{satz}[Stokes, klassisch]
-  Sei $\hat{U} \opn \R^3$, $M \subset \hat{U}$, eine $2$-dimensionale UMF (also eine HF) mit positiv orientierten ENF $\nu$. Sei $C \subset M$ kompakt mit glattem Rand und $\tau$ das Einheitstangentialvektorfeld von $\partial_M C$. Dann gilt für ein $\mathcal{C}^1$-Vektorfeld $F : \hat{U} \to \R^3$:
+\begin{satz}[\emph{Stokes}, klassisch]
+  Sei $\hat{U} \opn \R^3$, $M \subset \hat{U}$, eine $2$-dimensionale UMF (also eine HF) mit positiv orientierten ENF $\nu$. Sei $C \subset M$ kompakt mit glattem Rand und $\tau$ das Einheitstangentialvektorfeld von $\partial_M C$. Dann gilt für ein $\Cont^1$-Vektorfeld $F : \hat{U} \to \R^3$:
   \[ \Int{\partial_M C}{}{\langle F, \tau \rangle}{s} = \Int{C}{}{\langle \rot F, \nu \rangle}{S} \]
 \end{satz}
 
@@ -1928,11 +1938,11 @@
 \end{bem}
 
 \begin{defn}
-  Sei $U \subset \C$ eine $\mathcal{C}^1$-Abbildung $f : U \to \C$ heißt \emph{holomorph}, wenn ihre (totalen) Ableitungen in jedem Punkt von $U$ $\C$-linear sind.
+  Sei $U \subset \C$ eine $\Cont^1$-Abbildung $f : U \to \C$ heißt \emph{holomorph}, wenn ihre (totalen) Ableitungen in jedem Punkt von $U$ $\C$-linear sind.
 \end{defn}
 
 \begin{beob}
-  Eine $\mathcal{C}^1$-Abbildung $f = u + iv : U \to \C$ ist genau dann holomorph, wenn folgende Differentialgleichungen von Cauchy-Riemann erfüllt sind:
+  Eine $\Cont^1$-Abbildung $f = u + iv : U \to \C$ ist genau dann holomorph, wenn folgende Differentialgleichungen von Cauchy-Riemann erfüllt sind:
   \[
     \partial_1 u = \partial_2 v,
     \quad \text{und} \quad
@@ -1946,7 +1956,7 @@
 % ...
 
 \begin{defn}
-  Sei $\gamma : \cinterval{a}{b} \to \C$ stetig diff'bar und $f : \C \to \C$ stetig. Dann heißt
+  Sei $\gamma \!:\! \cinterval{a}{b} \!\to\! \C$ stetig diff'bar und $f \!:\! \C \!\to \C$ stetig. Dann heißt
 
   \[
     \Int{\gamma}{}{f}{z} \coloneqq \Int{a}{b}{f(\gamma(t)) \cdot \gamma'(t)}{t}
@@ -1954,7 +1964,7 @@
   \]
 \end{defn}
 
-\begin{satz}[Cauchyscher Integralsatz]
+\begin{satz}[\emph{Cauchyscher Integralsatz}]
   Sei $V \opn \C$ und $f : U \to \C$ holomorph. Sei ferner $\gamma : \cinterval{a}{b} \to \C$ eine glatte reguläre einfach geschlossene Kurve und $C \subset \C$ das Kompaktum, welches vom Bild von $\gamma$ berandet wird. Dann gilt
   \[ \Int{\gamma}{}{f}{z} = 0. \]
 \end{satz}
