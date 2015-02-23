@@ -29,6 +29,8 @@
 \DeclareMathOperator{\Diff}{Diff}
 \newcommand{\Gie}{\mathfrak{G}} % Lie-G
 \newcommand{\KF}{KF} % Killing-Fields
+\DeclareMathOperator{\Lie}{Lie} % Transvektionsgruppe
+\newcommand{\Cont}{\mathcal{C}} % Menge der stetigen/diffbaren Funktionen
 
 % Kleinere Klammern
 \delimiterfactor=701
@@ -69,7 +71,7 @@
     \item Die Paare $(U_j, \phi_j)$ werden \emph{Karten} genannt.
     \item Für je zwei Karten $(U_j, \phi_j)$ und $(U_k, \phi_k)$ gibt es eine \emph{Kartenwechselabbildung}
     \[ \phi_{kj} \coloneqq \phi_k \circ \phi_j^{-1} |_{\phi_j(U_j \cap U_k)} : \phi_j(U_j \cap U_k) \to \phi_k(U_j \cap U_k). \]
-    \item Ein Atlas heißt \emph{differenzierbar}, wenn alle Kartenwechselabbildungen $\mathcal{C}^\infty$-Abbildungen sind.
+    \item Ein Atlas heißt \emph{differenzierbar}, wenn alle Kartenwechselabbildungen $\Cont^\infty$-Abbildungen sind.
     \item Ein Atlas $\A$ heißt \emph{differenzierbare Struktur} von $M$, wen gilt: Ist $(\tilde{U}, \tilde{\phi_j})$ eine Karte von $M$ und $\tilde{\A} \coloneqq \A \cup \{ (\tilde{U}, \tilde{\phi_j}) \}$ ein differenzierbarer Atlas, dann gilt $\A = \tilde{A}$.
     \item Eine topol. Mft versehen mit einer differenzierbaren Struktur heißt \emph{differenzierbare Mannigfaltigkeit}.
   \end{itemize}
@@ -86,14 +88,14 @@
     \item Eine Abbildung $f : M \to N$ heißt in $x \in M$ \emph{differenzierbar}, wenn es eine Karte $(U_x, \phi : U_x \to \O) \in \A_M$ und eine Karte $(\tilde{U}_{f(x)}, \tilde{\phi} : \tilde{U}_{f(x)} \to \tilde\O) \in \A_N$ gibt, sodass
     \[
       \tilde{\phi} \circ f|_{U_x} \circ \phi^{-1} : \O \to \tilde\O
-      \quad \text{differenzierbar ($\mathcal{C}^\infty$) ist.}
+      \quad \text{differenzierbar ($\Cont^\infty$) ist.}
     \]
     \item Die Abbildung $f$ heißt \emph{differenzierbar}, falls sie in jedem Punkt $x \in M$ differenzierbar ist.
   \end{itemize}
 \end{defn}
 
 \begin{nota}
-  $\mathcal{C}^\infty(M, N) \coloneqq \Set{f : M \to N}{\text{$f$ ist differenzierbar}}$
+  $\Cont^\infty(M, N) \coloneqq \Set{f : M \to N}{\text{$f$ ist differenzierbar}}$
 \end{nota}
 
 \begin{bem}
@@ -111,7 +113,7 @@
 \end{defn}
 
 \begin{nota}
-  $\mathcal{C}^\infty(M, p) \coloneqq \Set{ [f] }{ \text{$[f]$ Funktionskeim in $p$} }$
+  $\Cont^\infty(M, p) \coloneqq \Set{ [f] }{ \text{$[f]$ Funktionskeim in $p$} }$
 \end{nota}
 
 \begin{bem}
@@ -119,8 +121,8 @@
 \end{bem}
 
 \begin{defn}
-  Eine lineare Abb. $\delta : \mathcal{C}^\infty(M, p) \to \R$ heißt \emph{Derivation}, falls
-  \[ \fa{[f], [g] \in \mathcal{C}^\infty(M, p)} \delta[f \cdot g] = \delta[f] \cdot g(p) + f(p) \cdot \delta[g]. \]
+  Eine lineare Abb. $\delta : \Cont^\infty(M, p) \to \R$ heißt \emph{Derivation}, falls
+  \[ \fa{[f], [g] \in \Cont^\infty(M, p)} \delta[f \cdot g] = \delta[f] \cdot g(p) + f(p) \cdot \delta[g]. \]
 \end{defn}
 
 \begin{defn}
@@ -131,14 +133,14 @@
 
 \begin{defn}
   Der \emph{Tangentialraum} von $M$ im Punkt $p \in M$ ist
-  \[ T_p M \coloneqq \Set{ \partial : \mathcal{C}^\infty(\R^n, p) \to \R }{ \text{$\partial$ linear, derivativ} } \]
+  \[ T_p M \coloneqq \Set{ \partial : \Cont^\infty(\R^n, p) \to \R }{ \text{$\partial$ linear, derivativ} } \]
   Ein Element $v \in T_p M$ heißt \emph{Tangentialvektor} an $M$ in $p$.
 \end{defn}
 
 \begin{bem}
   Wir erhalten eine Abbildung
   \[
-    T_p M \times \mathcal{C}^\infty(M, p) \to \R, \quad
+    T_p M \times \Cont^\infty(M, p) \to \R, \quad
     (v, [f]) \mapsto v.f \coloneqq v[f].
   \]
 \end{bem}
@@ -218,7 +220,7 @@
 
 \begin{defn}
   \begin{itemize}
-    \item Ein Vektorfeld $X$ auf $M$ heißt in $p \in M$ \emph{diff'bar} ($\mathcal{C}^\infty$), wenn es eine Karte $(U, \phi)$ um $p$ gibt, sodass die Funktionen $\xi_1, \ldots, \xi^m$ diff'bar ($\mathcal{C}^\infty$) sind.
+    \item Ein Vektorfeld $X$ auf $M$ heißt in $p \in M$ \emph{diff'bar} ($\Cont^\infty$), wenn es eine Karte $(U, \phi)$ um $p$ gibt, sodass die Funktionen $\xi_1, \ldots, \xi^m$ diff'bar ($\Cont^\infty$) sind.
     \item $X$ heißt \emph{differenzierbar}, wenn $X$ in allen $p \in M$ diff'bar ist.
   \end{itemize}
 \end{defn}
@@ -241,33 +243,33 @@
 \end{nota}
 
 \begin{bem}
-  $\chi(M)$ ist ein $\R$-VR und ein $\mathcal{C}^\infty(M)$-Modul.
+  $\chi(M)$ ist ein $\R$-VR und ein $\Cont^\infty(M)$-Modul.
 \end{bem}
 
 \begin{lem}
   Jedes $X \in \chi(M)$ induziert eine Abbildung
   \[
-    X : \mathcal{C}^\infty(M) \to \mathcal{C}^\infty(M), \quad
+    X : \Cont^\infty(M) \to \Cont^\infty(M), \quad
     \phi \mapsto X(\phi) \coloneqq p \mapsto X(p) . [\phi].
   \]
   Die Abbildung $X$ ist linear und derivativ.
 \end{lem}
 
 \begin{lem}
-  Seien $X, Y \in \chi(M)$ mit $\fa{f \in \mathcal{C}^\infty(M)} X(f) = Y(f)$. Dann gilt $X \equiv Y$.
+  Seien $X, Y \in \chi(M)$ mit $\fa{f \in \Cont^\infty(M)} X(f) = Y(f)$. Dann gilt $X \equiv Y$.
 \end{lem}
 
 \begin{defn}
   Seien $X, Y \in \chi(M)$. Dann heißt das Vektorfeld
   \[
-    [X, Y] : \mathcal{C}^\infty(M) \to \mathcal{C}^\infty(M), \enspace
+    [X, Y] : \Cont^\infty(M) \to \Cont^\infty(M), \enspace
     f \mapsto X(Y(f)) - Y(X(f))
   \]
   \emph{Kommutator} oder \emph{Lie-Klammer} von $X$ und $Y$.
 \end{defn}
 
 \begin{satz}
-  Für $X, Y_1, Y_2 \in \chi(M)$ und $f \in \mathcal{C}^\infty(M)$ gilt
+  Für $X, Y_1, Y_2 \in \chi(M)$ und $f \in \Cont^\infty(M)$ gilt
   \[ [X, Y_1 + f Y_2] = [X, Y_1] + X(f) \cdot Y_2 + f \cdot [X, Y_2]. \]
 \end{satz}
 
@@ -387,7 +389,7 @@
 \end{defn}
 
 \begin{defn}
-  Eine \emph{Riemannsche Metrik} auf einer diff. Mft $M$ ist eine Familie $g = (g_p)_{p \in M}$ von Skalarprodukten $g_p : T_p M \times T_p M \to \R$, die differenzierbar von $p$ abhängt, \dh{} für alle $X, Y \in \chi(M)$ ist $g(X, Y) : M \to \R, p \mapsto g_p(X(p), Y(p))$ differenzierbar ($\mathcal{C}^\infty$).\\
+  Eine \emph{Riemannsche Metrik} auf einer diff. Mft $M$ ist eine Familie $g = (g_p)_{p \in M}$ von Skalarprodukten $g_p : T_p M \times T_p M \to \R$, die differenzierbar von $p$ abhängt, \dh{} für alle $X, Y \in \chi(M)$ ist $g(X, Y) : M \to \R, p \mapsto g_p(X(p), Y(p))$ differenzierbar ($\Cont^\infty$).\\
   Das Tupel $(M, g)$ heißt \emph{Riemannsche Mannigfaltigkeit}.
 \end{defn}
 
@@ -415,9 +417,16 @@
 \end{defn}
 
 \begin{defn}
+  $\Iso(M) \!\coloneqq\! \Set{ \tau : M \!\to\! M }{ \tau \text{ Isometrie} }$ heißt \emph{Isometriegruppe}.
+\end{defn}
+
+\begin{bem}
+  $\Iso(M)$ ist in kan. Weise eine Lie-Gruppe (Myers-Steenrod).
+\end{bem}
+
+\begin{defn}
   Sei $(M, g)$ eine Riemannsche Mannigfaltigkeit. Dann ist
-  \[ I(M, g) \coloneqq \Set{ f : M \to M }{ \text{$f$ Isometrie} } \]
-  in kanonischer Weise eine Lie-Gruppe (Myers-Steenrod).
+  \[ \Iso(M, g) \coloneqq \Set{ f : M \to M }{ \text{$f$ Isometrie} } \]
 \end{defn}
 
 % 6.1.
@@ -450,7 +459,7 @@
 \end{prop}
 
 \begin{defn}
-  Für $\gamma : \abinterval \to M$ stückweise $\mathcal{C}^1$ heißt
+  Für $\gamma : \abinterval \to M$ stückweise $\Cont^1$ heißt
   \[
     L(\gamma) \coloneqq \Int{a}{b}{\norm{\dot{\gamma}(\tau)}}{\tau}
     \quad \text{\emph{Länge} von $\gamma$.}
@@ -461,7 +470,7 @@
   Sei $(M, g)$ eine Riemannsche Mft. Dann ist der \emph{Riemannsche Abstand} gegeben durch die Metrik
   \begin{align*}
     d_g : M \times M \to \R, \quad
-    (p, q) \mapsto \inf \{\, L(\gamma) \,\,|\,\, & \gamma : \abinterval \to M \text{ stückweise } \mathcal{C}^{1}\\
+    (p, q) \mapsto \inf \{\, L(\gamma) \,\,|\,\, & \gamma : \abinterval \to M \text{ stückweise } \Cont^{1}\\
     & \left. \text{mit $\gamma(a) = p$ und $\gamma(b) = q$} \, \right\}.
   \end{align*}
 \end{defn}
@@ -478,7 +487,7 @@
     \nabla : \chi(M) \times \chi(M) \to \chi(M), \quad
     (X, Y) \mapsto \nabla_X Y
   \]
-  sodass für $X, X_1, X_2, Y, Y_1, Y_2 \in \chi(M)$ und $f \in \mathcal{C}^\infty(M)$ gilt:
+  sodass für $X, X_1, X_2, Y, Y_1, Y_2 \in \chi(M)$ und $f \in \Cont^\infty(M)$ gilt:
   \begin{itemize}
     \item $\nabla_{X_1 + f X_2} Y = \nabla_{X_1} Y + f \nabla_{X_2} Y$
     \item $\nabla_X (Y_1 + Y_2) = \nabla_X Y_1 + \nabla_X Y_2$
@@ -549,7 +558,7 @@
   \[
     T : \chi(M) \times \ldots \times \chi(M) \to
     \begin{cases}
-      \mathcal{C}^\infty(M), & \text{falls } j = 0,\\
+      \Cont^\infty(M), & \text{falls } j = 0,\\
       \chi(M), & \text{falls } j = 1.
     \end{cases}
   \]
@@ -615,13 +624,13 @@
 \end{nota}
 
 \begin{bem}
-  $\chi_c$ ist ein Modul über $\mathcal{C}^\infty(I, \R)$.
+  $\chi_c$ ist ein Modul über $\Cont^\infty(I, \R)$.
 \end{bem}
 
 \begin{satz}
   Sei $\nabla$ ein Zusammenhang auf $M$, sei $c : I \to M$ eine diff'bare Kurve. Dann gibt es eine eindeutige Abbildung
   \[ \frac{\nabla}{\d t} = \frac{D}{\d t} = \frac{D^\nabla}{\d t} : \chi_c \to \chi_c, \]
-  sodass für $X, \tilde{X} \in \chi_c$, $Y \in \chi(M)$ und $f \in \mathcal{C}^\infty(I, \R)$ gilt:
+  sodass für $X, \tilde{X} \in \chi_c$, $Y \in \chi(M)$ und $f \in \Cont^\infty(I, \R)$ gilt:
   \begin{itemize}
     \miniitem{0.48 \linewidth}{$\tfrac{D}{\d t} (X + \tilde X) = \tfrac{D}{\d t} X + \tfrac{D}{\d t} \tilde{X}$,}
     \miniitem{0.49 \linewidth}{$\tfrac{D}{\d t} (f \cdot X) = f \cdot \tfrac{D}{\d t} X + f' X$,}
@@ -807,7 +816,7 @@
 % 12.3 und 12.4.
 \begin{satz}
   \begin{itemize}
-    \item Es gibt eine offene Umgebung $\hat{U} \opn T_p M$ mit $0 \in \hat{U} \subseteq \widetilde{T_p M}$, sodass $\Exp_p|_{\hat{U}} : \hat{U} \to M$ eine $\mathcal{C}^\infty$-Abbildung ist.
+    \item Es gibt eine offene Umgebung $\hat{U} \opn T_p M$ mit $0 \in \hat{U} \subseteq \widetilde{T_p M}$, sodass $\Exp_p|_{\hat{U}} : \hat{U} \to M$ eine $\Cont^\infty$-Abbildung ist.
     \item Wir können $\hat{U}$ so wählen, dass $\Exp_p|_{\hat{U}} : \hat{U} \to \Exp_p(\hat{U})$ ein Diffeomorphismus ist.
   \end{itemize}
 \end{satz}
@@ -816,7 +825,7 @@
   Man kann zeigen: \enspace
   \inlineitem{$\widetilde{T_p M} \opn T_p M$}
   \begin{itemize}
-    \item $\Exp_p : \widetilde{T_p M} \to M$ ist überall $\mathcal{C}^\infty$, aber nicht überall ein lokaler Diffeomorphismus (Schnittpunkt-Phänomen)
+    \item $\Exp_p : \widetilde{T_p M} \to M$ ist überall $\Cont^\infty$, aber nicht überall ein lokaler Diffeomorphismus (Schnittpunkt-Phänomen)
     \item Ist $(M, \nabla)$ geodätisch vollständig, dann gilt $\widetilde{T_p M} = T_p M$.
   \end{itemize}
 \end{bem}
@@ -842,7 +851,7 @@
 \end{bem}
 
 \begin{defn}
-  Eine \emph{Variation} von $c : \abinterval \to M$ ist eine $\mathcal{C}^\infty$-Abbildung
+  Eine \emph{Variation} von $c : \abinterval \to M$ ist eine $\Cont^\infty$-Abbildung
   \[
     \vinterval \times \abinterval \to M, \quad
     (s, t) \mapsto \alpha(s, t)
@@ -866,7 +875,7 @@
     \alpha : \vinterval \times \abinterval \to M,
     \enspace (s, t) \mapsto \alpha_s(t)
     \quad \text{mit }
-    \alpha|_{\vinterval \times \cinterval{t_{i-1}}{t_i}} \text{ ist } \mathcal{C}^\infty.
+    \alpha|_{\vinterval \times \cinterval{t_{i-1}}{t_i}} \text{ ist } \Cont^\infty.
   \]
 \end{defn}
 
@@ -896,7 +905,7 @@
 
 % 13.2
 \begin{satz}[\emph{1. Variationsformel}]
-  Sei $\alpha : \vinterval \times \abinterval \to M$ eine $\mathcal{C}^\infty$-Variation von einer $\mathcal{C}^\infty$-Kurve $c = \alpha_0 : \abinterval \to M$. Sei $\norm{\dot{c}(t)} = \text{konst} \not= 0$. Dann gilt mit $X(t) \coloneqq \tfrac{\partial \alpha}{\partial s} (0, t)$
+  Sei $\alpha : \vinterval \times \abinterval \to M$ eine $\Cont^\infty$-Variation von einer $\Cont^\infty$-Kurve $c = \alpha_0 : \abinterval \to M$. Sei $\norm{\dot{c}(t)} = \text{konst} \not= 0$. Dann gilt mit $X(t) \coloneqq \tfrac{\partial \alpha}{\partial s} (0, t)$
   \[ \frac{\d}{\d s} |_{s=0} L(\alpha_s) = \frac{1}{\norm{\dot{c}}} \left( g(X, \dot{c})|_a^b - \Int{a}{b}{g(X(\tau), \tfrac{D \dot{c}}{\d t})}{\tau} \right) \]
 \end{satz}
 
@@ -1261,10 +1270,6 @@
 
 % §22. Symmetrische Räume
 
-\begin{defn}
-  $\Iso(M) \!\coloneqq\! \Set{ \tau : M \!\to\! M }{ \tau \text{ Isometrie} }$ heißt \emph{Isometriegruppe}.
-\end{defn}
-
 % 22.1.
 \begin{prop}
   Sei $(M, g)$ eine vollständige Riem Mft, $p \in M$. Seien $f, g \in \Iso(M)$. Wenn $f(p) = g(p)$ und $f_{*p} = g_{*p}$, dann gilt $f \equiv g$.
@@ -1358,7 +1363,7 @@
 \end{defn}
 
 \begin{bsp}
-  Im $\R^n$ sind Transvektionen genau die Translationen.
+  Im $\R^n$ sind die Transvektionen genau die Translationen.
 \end{bsp}
 
 \begin{defn}
@@ -1402,7 +1407,7 @@
 
 % 23.4
 \begin{satz}
-  Jede maximale Geodäte in $P$ ist Bahn einer Ein-Parameter-Untergruppe von Isometrien, nämlich von $\gamma(\tau) \coloneqq (t^\gamma(\tau))(c(0))$.
+  Jede maximale Geodäte in $P$ ist Bahn einer 1-Parameter-UG von Isometrien, nämlich von $\gamma(\tau) \coloneqq (t^\gamma(\tau))(c(0))$.
 \end{satz}
 
 \begin{defn}
@@ -1574,7 +1579,7 @@
 \end{lem}
 
 \begin{fazit}
-  $\fa{x \in T_e G} \exu{\text{1-Param-UG $\phi_x$ mit $\dot{\phi_x}(0) = x$}}$
+  $\fa{x \in T_e G} \exu{\text{1-Param-UG } \phi_x : \R \to G} \dot{\phi_x}(0) = x$
 \end{fazit}
 
 \begin{defn}
@@ -1638,8 +1643,8 @@
 \begin{defn}
   Sei $P$ ein symmetrischer Raum, $p \in P$. Setze
   \begin{align*}
-    k_p \coloneqq \iota^{-1}(\Set{X \in \KF(P)}{X(p) = 0}) \subset \Gie, \\
-    \mathcal{P}_p \coloneqq \iota^{-1}(\Set{X \in \KF(P)}{\nabla X(p) = 0}).
+    k_p & \coloneqq \iota^{-1}(\Set{X \in \KF(P)}{X(p) = 0}) \subset \Gie, \\
+    p_p & \coloneqq \iota^{-1}(\Set{X \in \KF(P)}{\nabla X(p) = 0}) \subset \Gie.
   \end{align*}
 \end{defn}
 
@@ -1651,9 +1656,62 @@
   \[ \fa{v \in T_p P} \exu{\tilde{v} \in \mathcal{P}_p} \fa{s \in \R} \exp(s \tilde{v}) = t^{\gamma_v}(s). \]
 \end{lem}
 
-% TODO:
 % Vorlesung vom 30.1.2015
 
+% 24.7
+\begin{prop}
+  $k_p = \mathfrak{G}_p \coloneqq$ Lie-Algebra von $\Iso_p(P)$.
+\end{prop}
 
+% 24.8
+\begin{lem}
+  $p_p \cap k_p = \{ 0 \}$
+\end{lem}
+
+% 24.9
+\begin{prop}
+  $\Gie = p_p \oplus k_p$ (direkte Summe von UVR)
+\end{prop}
+
+% 24.10
+\begin{prop}[\emph{Cartan-Relationen}]\mbox{}\\
+  \begin{itemize}
+    \miniitem{0.32 \linewidth}{$[k_p, k_p]_\Gie \subseteq k_p$}
+    \miniitem{0.32 \linewidth}{$[k_p, p_p]_\Gie \subseteq p_p$}
+    \miniitem{0.32 \linewidth}{$[p_p, p_p]_\Gie \subseteq k_p$}
+  \end{itemize}
+\end{prop}
+
+% 24.11
+\begin{prop}
+  Sei $\Gie = k \oplus p$ eine Zerlegung einer reellen Lie-Algebra. \\
+  Es gelten die Cartan-Relationen genau dann, wenn es eine Involution $\nabla : \Gie \to \Gie$ (\dh{} ein Lie-Algebra-Autom. mit $\nabla^2 = \id$) gibt, sodass $k$ der ER zum EW $+1$ und $p$ der ER zum EW $-1$ von $\nabla$ ist.
+\end{prop}
+
+% 24.12
+\begin{prop}
+  Sei $P$ ein symm. Raum, $p \in P$. Dann ist
+  \[
+    \tau_p : p_p \to T_p P, \quad
+    x \mapsto \iota(x)(p)
+  \]
+  ein VR-Isomorphismus und es gilt
+  \[ (R(\iota(v), \iota(w)) \iota(u))(p) = \iota([u, [v, w]_\Gie]_\Gie)(p). \]
+\end{prop}
+
+\begin{kor}
+  Sei $P$ ein symm. Raum. Dann ist
+  \[
+    R_p(a, b) : T_p P \to T_p P, \quad
+    x \mapsto R_p(a, b) x
+  \]
+  eine Derivation von $R_p$, \dh{} $\forall \, A, B, X, Y, Z \in \chi(P)$ gilt
+  \begin{align*}
+    R(A, B)(R(X, Y)Z) = \, & R(R(A, B)X, Y)Z + R(X, R(A, B)Y)Z \\
+    & + R(X, Y)(R(A, B)Z).
+  \end{align*}
+\end{kor}
+
+% TODO: Konstruktion symm. Räume
 
 \end{document}
