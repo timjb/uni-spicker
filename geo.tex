@@ -15,6 +15,7 @@
 \DeclareMathOperator{\Bild}{Bild} % Bild
 \DeclareMathOperator{\Exp}{Exp} % geodätische Exponentialabbildung
 \newcommand{\A}{\mathcal{A}} % Fläche (area)
+\newcommand{\Cont}{\mathcal{C}} % Menge der stetigen/diff'baren Funktionen
 
 % Kleinere Klammern
 \delimiterfactor=701
@@ -64,7 +65,7 @@
 \end{satz}
 
 \begin{defn}
-  Zwei Vektoren $a, b \in \R^n$ heißen \emph{gleichgerichtet}, falls $a = \lambda b$ für ein $\lambda \geq 0$.
+  Zwei Vektoren $a, b \in \R^n$ heißen \emph{gleichgerichtet}, falls $\lambda \geq 0$ mit $a = \lambda b$ existiert.
 \end{defn}
 
 \begin{satz}
@@ -80,13 +81,13 @@
 % TODO: Definition Feinheit
 
 \begin{defn}
-  Sei $c : \cinterval{a}{b} \to \R^n$ eine stetige Kurve und $a = t_0 < t_1 < ... < t_k = b$ eine Zerteilung von $\cinterval{a}{b}$. Dann ist die Länge des \emph{Polygonzugs} durch die Punkte $c(t_i)$ gegeben durch
-  \[ \hat{L}_c(t_0, ..., t_k) = \sum_{j=1}^k \norm{c(t_j) - c(t_{j-1})}. \]
+  Sei $c : \cinterval{a}{b} \to \R^n$ eine stetige Kurve und $a = t_0 < t_1 < \ldots < t_k = b$ eine Zerteilung von $\cinterval{a}{b}$. Dann ist die Länge des \emph{Polygonzugs} durch die Punkte $c(t_i)$ gegeben durch
+  \[ \hat{L}_c(t_0, \ldots, t_k) = \sum_{j=1}^k \norm{c(t_j) - c(t_{j-1})}. \]
 \end{defn}
 
 \begin{defn}
-  Eine stetige Kurve $c$ heißt \emph{rektifizierbar} von Länge $\hat{L}_c$, wenn gilt: Für alle $\epsilon > 0$ gibt es ein $\delta > 0$, sodass für alle Unterteilungen $a = t_0 < t1 < ... < t_k = b$ der Feinheit mindestens $\delta$ gilt:
-  \[ \norm{\hat{L}_c - \hat{L}_c(t_0, t_1, ..., t_k)} < \epsilon. \]
+  Eine stetige Kurve $c$ heißt \emph{rektifizierbar} von Länge $\hat{L}_c$, wenn gilt: Für alle $\epsilon > 0$ gibt es ein $\delta > 0$, sodass für alle Unterteilungen $a = t_0 < t1 < \ldots < t_k = b$ der Feinheit mindestens $\delta$ gilt:
+  \[ \norm{\hat{L}_c - \hat{L}_c(t_0, t_1, \ldots, t_k)} < \epsilon. \]
 \end{defn}
 
 % Kapitel 1.3. Ebene Kurven
@@ -128,7 +129,7 @@
 \end{bsp}
 
 \begin{satz}
-  Sei $c : I \to \R^2$ glatte, nach BL parametrisiert mit konstanter Krümmung $\kappa(t) = R \not= 0$. Dann ist $c$ Teil eines Kreisbogens mit Radius $\tfrac{1}{|R|}$.
+  Sei $c : I \to \R^2$ glatt, nach BL param. mit konst. Krümmung $\kappa(t) = R \not= 0$. Dann ist $c$ Teil eines Kreisbogens mit Radius $\tfrac{1}{|R|}$.
 \end{satz}
 
 \begin{defn}
@@ -137,11 +138,11 @@
 \end{defn}
 
 \begin{bem}
-  Obige Definition ist invariant unter orientierungs- erhaltenden Umparametrisierungen, und stimmt für nach BL parametrisierte Kurven mit der vorhergehenden Definition überein.
+  Obige Definition ist invariant unter orientierungserhaltenden Umparametrisierungen, und stimmt für nach BL parametrisierte Kurven mit der vorhergehenden Definition überein.
 \end{bem}
 
-\begin{satz}[Hauptsatz der lokalen ebenen Kurventheorie]
-  Sei $\kappa : I \to \R$ eine stetige Funktion und $t_0 \in I$ und $x_0, v_0 \in \R^2$ mit $\norm{v_0} = 1$. Dann gibt es ganu eine nach BL parametrisierte $\mathcal{C}^2$-Kurve $c : I \to \R^2$ mit Krümmung $\kappa$, $c(t_0) = x_0$ und $c'(t_0) = v(t_0) = v_0$.
+\begin{satz}[\emph{Hauptsatz der lokalen ebenen Kurventheorie}]\mbox{}\\
+  Sei $\kappa : I \to \R$ eine stetige Funktion und $t_0 \in I$ und $x_0, v_0 \in \R^2$ mit $\norm{v_0} = 1$. Dann gibt es ganu eine nach BL parametrisierte $\Cont^2$-Kurve $c : I \to \R^2$ mit Krümmung $\kappa$, $c(t_0) = x_0$ und $c'(t_0) = v(t_0) = v_0$.
 \end{satz}
 
 \begin{defn}
@@ -162,7 +163,7 @@
 \end{bem}
 
 \begin{satz}
-  Die Totalkrümmung ist invariant unter orientierungserhaltenden Umparametrisierungen, \dh{} ist $c : [a_2, b_2] \to \R^2$ eine reguläre Kurve und $\phi : [a_1, b_1] \to [a_2, b_2]$ eine Diffeomorphismus mit $\phi' > 0$, dann gilt $\overline\kappa(c) = \overline\kappa(c \circ \phi)$.
+  Die Totalkrümmung ist invar. unter orientierungserhaltenden Umparam., \dh{} ist $c : [a_2, b_2] \to \R^2$ regulär und $\phi : [a_1, b_1] \to [a_2, b_2]$ ein Diffeomorphismus mit $\phi' > 0$, dann gilt $\overline\kappa(c) = \overline\kappa(c \circ \phi)$.
 \end{satz}
 
 \begin{satz}[\emph{Polarwinkelfunktion}]
@@ -183,7 +184,7 @@
   \]
 \end{satz}
 
-\begin{satz}[Umlaufsatz von Hopf]
+\begin{satz}[\emph{Umlaufsatz von Hopf}]
   Die Umlaufzahl einer einfach geschlossenen regulären Kurve ist $\pm 1$.
 \end{satz}
 
@@ -201,7 +202,7 @@
 
 % Vorlesung vom 28.10.2013
 
-\begin{satz}[Whitney-Graustein]
+\begin{satz}[\emph{Whitney-Graustein}]
   Für zwei glatte reguläre geschlossene ebene Kurven $c, d : \cinterval{0}{1} \to \R^2$ sind folgende Aussagen äquivalent:
   \begin{multicols}{2}
     \begin{enumerate}[label=(\roman*),leftmargin=2em]
@@ -216,15 +217,15 @@
 % Kapitel 1.4. Frenet-Kurven
 
 \begin{defn}
-  Eine glatte reguläre Kurve $c : I \to \R^n$ ($n \geq 3$) heißt \emph{Frenet-Kurve}, wenn für alle $t \in I$ die Ableitungen $c'(t), c''(t), ..., c^{(n-1)}(t)$ linear unabhängig sind.
+  Eine glatte reguläre Kurve $c : I \to \R^n$ ($n \geq 3$) heißt \emph{Frenet-Kurve}, wenn für alle $t \in I$ die Ableitungen $c'(t), c''(t), \ldots, c^{(n-1)}(t)$ linear unabhängig sind.
 \end{defn}
 
 \begin{defn}
-  Sei $c : I \to \R^n$ eine Frenet-Kurve und $t \in I$. Wende das Gram-Schmidtsche Orthogonalisierungsverfahren auf $\{ c'(t), c''(t), ..., c^{(n-1)}(t) \}$ an und ergänze das resultierende Orthonormalsystem $(b_1(t), ..., b_{n-1}(t))$ mit einem passenden Vektor $b_n(t)$ zu einer Orthonormalbasis, die positiv orientiert ist. Die so definierten Funktionen $b_1, ..., b_n : I \to \R^n$ sind stetig und werden zusammen das \emph{Frenet-$n$-Bein} von $c$ genannt.
+  Sei $c : I \to \R^n$ eine Frenet-Kurve und $t \in I$. Wende das Gram- Schmidt-Verfahren auf $\{ c'(t), c''(t), \ldots, c^{(n-1)}(t) \}$ an und ergänze das resultierende ONS $(b_1(t), \ldots, b_{n-1}(t))$ mit einem passenden Vektor $b_n(t)$ zu einer Orthonormalbasis, die positiv orientiert ist. Die so definierten Funktionen $b_1, \ldots, b_n : I \to \R^n$ sind stetig und werden zusammen das \emph{Frenet-$n$-Bein} von $c$ genannt.
 \end{defn}
 
 \begin{defn}
-  Sei $(b_1, ..., b_n)$ das Frenet-$n$-Bein einer Frenet-Kurve $c$. Dann:
+  Sei $(b_1, \ldots, b_n)$ das Frenet-$n$-Bein einer Frenet-Kurve $c$. Dann:
   \[ A \coloneqq (\langle b_j' , b_k \rangle)_{jk} = \begin{pmatrix}
     0 & \kappa_1 &&& 0 \\
     - \kappa_1 & 0 & \kappa_2 \\
@@ -232,16 +233,16 @@
     && - \kappa_{n-2} & 0 & \kappa_{n-1} \\
     0 &&& - \kappa_{n-1} & 0
   \end{pmatrix} \]
-  Die Funktion $\kappa_j : I \to \R, t \mapsto \langle b_j'(t) , b_{j+1}(t) \rangle, j = 1, ..., n - 1$ heißt $j$-te \emph{Frenet-Krümmung} von $c$.
+  Die Funktion $\kappa_j : I \to \R, \enspace t \mapsto \langle b_j'(t) , b_{j+1}(t) \rangle$, $j = 1, \ldots, n - 1$ heißt $j$-te \emph{Frenet-Krümmung} von $c$.
 \end{defn}
 
 % Aufgabe 1.23
 
-\begin{satz}[Hauptsatz der lokalen Raumkurventheorie]
-  Seien $\kappa_1, ..., \kappa_{n-1} : I \to \R$ glatte Funktionen mit $\kappa_1, ..., \kappa_{n-2} > 0$ und $t_0 \in I$ und $\{ v_1, ..., v_n \}$ eine positiv orientierte Orthonormalbasis, sowie $x_0 \in \R^n$. Dann gibt es genau eine nach BL parametrisierte Frenet-Kurve $c : I \to \R^n$, sodass gilt
+\begin{satz}[\emph{Hauptsatz der lokalen Raumkurventheorie}]\mbox{}\\
+  Seien $\kappa_1, \ldots, \kappa_{n-1} : I \to \R$ glatt mit $\kappa_1, \ldots, \kappa_{n-2} > 0$ und $t_0 \in I$ und $\{ v_1, \ldots, v_n \}$ eine pos. orientierte ONB, sowie $x_0 \in \R^n$. Dann gibt es genau eine nach BL param. Frenet-Kurve $c : I \to \R^n$ mit
   \begin{itemize}
     \miniitem{0.24 \linewidth}{$c(t_0) = x_0$,}
-    \miniitem{0.73 \linewidth}{das Frenet-$n$-Bein von $c$ in $t_0$ ist $\{ v_1, ..., v_n \}$ und}
+    \miniitem{0.73 \linewidth}{das Frenet-$n$-Bein von $c$ in $t_0$ ist $\{ v_1, \ldots, v_n \}$ und}
     \item die $j$-te Frenet-Krümmung von $c$ ist $\kappa_j$.
   \end{itemize}
 \end{satz}
@@ -294,8 +295,8 @@
   BL parametrisiert ist, dann definieren wir $\kappa_c(t) \coloneqq \kappa_{\tilde{c}}(\phi(t))$.
 \end{defn}
 
-\begin{satz}[Fenchel]
-  Für eine geschlossene reguläre glatte (oder $\mathcal{C}^2$) Kurve $c : \cinterval{a}{b} \to \R^3$ gilt $\overline\kappa(c) \geq 2 \pi$. Gleichheit tritt genau dann ein, wenn $c$ eine einfach geschlossene konvexe reguläre glatte (oder $\mathcal{C}^2$) Kurve ist, die in einer affinen Ebene des $\R^3$ liegt.
+\begin{satz}[\emph{Fenchel}]
+  Für eine geschlossene reguläre glatte (oder $\Cont^2$) Kurve $c : \cinterval{a}{b} \to \R^3$ gilt $\overline\kappa(c) \geq 2 \pi$. Gleichheit tritt genau dann ein, wenn $c$ eine einfach geschlossene konvexe reguläre glatte (oder $\Cont^2$) Kurve ist, die in einer affinen Ebene des $\R^3$ liegt.
 \end{satz}
 
 \begin{samepage}
@@ -328,25 +329,28 @@ mit $c(0) = c(b)$, so liegt das Bild von $v$ ganz in einer offenen Hemisphäre.
 \end{defn}
 
 \begin{nota}
-  $\partial_{j_1, j_2, ..., j_k} f \coloneqq \partial_{j_1} ( \partial_{j_2} ( ... ( \partial_{j_k} f) ) )$
+  $\partial_{j_1, j_2, \ldots, j_k} f \coloneqq \partial_{j_1} ( \partial_{j_2} ( \ldots ( \partial_{j_k} f) ) )$
 \end{nota}
 
 \begin{defn}
-  Eine Abbildung $f : U \to \R^n$ heißt $\mathcal{C}^k$-Abbildung, wenn alle $k$-ten partiellen Ableitungen von $f$ existieren und stetig sind. Wenn $f \in \mathcal{C}^k$ für beliebiges $k \in \N$, so heißt $f$ \emph{glatt}.
+  Eine Abbildung $f : U \to \R^n$ heißt $\Cont^k$-Abbildung, wenn alle $k$-ten partiellen Ableitungen von $f$ existieren und stetig sind. \\
+  Wenn $f \in \Cont^k$ für beliebiges $k \in \N$, so heißt $f$ \emph{glatt}.
 \end{defn}
 
-\begin{satz}[Schwarz]
-  Ist $f$ eine $\mathcal{C}^k$-Abbildung, so kommt es bei allen $l$-ten partiellen Ableitungen mit $l \leq k$ nicht auf die Reihenfolge der partiellen Ableitungen an.
+\begin{satz}[\emph{Schwarz}]
+  Ist $f$ eine $\Cont^k$-Abbildung, so kommt es bei allen $l$-ten partiellen Ableitungen mit $l \leq k$ nicht auf die Reihenfolge der partiellen Ableitungen an.
 \end{satz}
 
 \begin{defn}
-  Eine Abbildung $f : U \to \R^n$ heißt in $u \in U$ \emph{total differenzierbar}, wenn gilt: Es gibt eine lineare Abbildung $D_u f = \partial f_u : \R^m \to \R^n$, genannt das \emph{totale Differential} von $f$ in $u$, sodass für genügend kleine $h \in \R^n$ gilt:
-  \[ f(u + h) = f(u) + \partial f_u(h) + o(h) \]
-  für eine in einer Umgebung von $0$ definierte Funktion $o : \R^n \to \R^m$ mit $\lim_{h \to 0} \tfrac{o(h)}{\norm{h}} = 0$.
+  Eine Abbildung $f : U \to \R^n$ heißt in $u \in U$ \emph{total diff'bar}, wenn gilt: Es gibt eine lineare Abbildung $D_u f = \partial f_u : \R^m \to \R^n$, genannt das \emph{totale Differential} von $f$ in $u$, sodass
+  \[
+    f(u + h) = f(u) + \partial f_u(h) + o(h)
+  \]
+  für genügend kleine $h \in \R^n$ und eine in einer Umgebung von $0$ definierte Funktion $o : \R^n \to \R^m$ mit $\lim_{h \to 0} \tfrac{o(h)}{\norm{h}} = 0$ gilt.
 \end{defn}
 
 \begin{defn}
-  Für eine total differenzierbare Funktion $f$ heißt die Matrix $J_u f = (D_u f(e_1), ..., D_u f(e_n))$ \emph{Jacobi-Matrix} von $f$ in $u$.
+  Für eine total differenzierbare Funktion $f$ heißt die Matrix $J_u f = (D_u f(e_1), \ldots, D_u f(e_n))$ \emph{Jacobi-Matrix} von $f$ in $u$.
 \end{defn}
 
 \begin{bem}
@@ -365,17 +369,17 @@ $\implies$ $f$ ist partiell differenzierbar
 % Kapitel 2.2. Die erste Fundamentalform
 
 \begin{defn}
-  Sei $X : U \to \R^n$ eine (glatte) Immersion. Dann heißt das Bild $f(U)$ \emph{immergierte Fläche}, immersierte Fläche oder parametrisiertes Flächenstück. Sei $\tilde{U}$ offen in $\R^n$ und $\phi : \tilde{U} \to U$ ein Diffeomorphismus, dann heißt $\tilde{X} \coloneqq X \circ \phi : \tilde{U} \to \R^n$ \emph{Umparametrisierung} von $X$.
+  Sei $X : U \to \R^n$ eine (glatte) Immersion. Dann heißt das Bild $f(U)$ \emph{immergierte Fläche}, \emph{immersierte Fläche} oder \emph{param. Flächenstück}. Sei $\tilde{U}$ offen in $\R^n$ und $\phi : \tilde{U} \to U$ ein Diffeo, dann heißt $\tilde{X} \coloneqq X \circ \phi : \tilde{U} \to \R^n$ \emph{Umparametrisierung} von $X$.
 \end{defn}
 
 \begin{nota}
-  Sei im folgenden $X : U \to \R^n$ eine Immersion.
+  Sei im Folgenden $X : U \to \R^n$ eine Immersion.
 \end{nota}
 
 \begin{defn}
-  Für $u \in U$ heißt der Untervektorraum
-  \[ T_u X \coloneqq \Span(\partial_1 X(u), ..., \partial_m X(u)) = \mathrm{Bild}(D_u X) \subset \R^n \]
-  \emph{Tangentialraum} von $X$ in $u$ und sein orthogonales Komplement $N_u X \coloneqq (T_u X)^\perp \subset \R^n$ \emph{Normalraum} an $X$ in $u$.
+  Der \emph{Tangentialraum} von $X$ in $u \in X$ ist
+  \[ T_u X \coloneqq \Span(\partial_1 X(u), \ldots, \partial_m X(u)) = \mathrm{Bild}(D_u X) \subset \R^n. \]
+  Das Kompl. $N_u X \coloneqq (T_u X)^\perp \subset \R^n$ heißt \emph{Normalraum} an $X$ in $u$.
 \end{defn}
 
 \begin{bem}
@@ -385,19 +389,19 @@ $\implies$ $f$ ist partiell differenzierbar
 \end{bem}
 
 \begin{nota}
-  Bezeichne mit $\mathrm{SymBil}(\R^m)$ die Menge der symmetrischen Bilinearformen auf $\R^m$.
+  $\SymBil(\R^m) \coloneqq \{ \text{symm. Bilinearformen auf $\R^m$} \}$
 \end{nota}
 
 \begin{defn}
   Die \emph{erste Fundamentalform} (1.\,FF) einer Immersion $X$ ist
-  \[ \FFI : U \to \mathrm{SymBil(\R^m)}, \quad u \mapsto \FFI_u \coloneqq \langle \cdot , \cdot \rangle_u. \]
+  \[ \FFI : U \to \SymBil(\R^m), \quad u \mapsto \FFI_u \coloneqq \langle \cdot , \cdot \rangle_u. \]
   Äquivalent dazu wird auch die Abbildung
   \[ g : U \to \R^{m \times m}, \quad u \mapsto g_u \coloneqq (J_u X)^T (J_u X) \]
   manchmal als erste Fundamentalform bezeichnet.
 \end{defn}
 
 \begin{defn}
-  Sei $c : \cinterval{a}{b} \to \R^n$ eine glatte Kurve. Wir nennen $c$ eine \emph{Kurve auf X}, wenn es eine glatte Kurve $\alpha : \cinterval{a}{b} \to U$ mit $c = X \circ \alpha$ gibt.
+  Sei $c : \cinterval{a}{b} \to \R^n$ eine glatte Kurve. Wir nennen $c$ eine \emph{Kurve auf $X$}, wenn es eine glatte Kurve $\alpha : \cinterval{a}{b} \to U$ mit $c = X \circ \alpha$ gibt.
 \end{defn}
 
 \begin{bem}
@@ -405,7 +409,7 @@ $\implies$ $f$ ist partiell differenzierbar
 \end{bem}
 
 \begin{bem}
-  Seien $c_1 = X \circ \alpha_1$ und $c_2 = X \circ \alpha_2$ zwei reguläre Kurven auf $X$, die sich in einem Punkt schneiden, \dh{} $\alpha_1(t_1) = \alpha_2(t_2) =: u$. Dann ist der Schnittwinkel $\measuredangle(c_1'(t), c_2'(t))$ von $c_1$ und $c_2$ in $X(u)$ gegeben durch:
+  Seien $c_1 = X \circ \alpha_1$ und $c_2 = X \circ \alpha_2$ zwei reguläre Kurven auf $X$, die sich in einem Punkt schneiden, \dh{} $\alpha_1(t_1) = \alpha_2(t_2) =: u$. Dann ist der Schnittwinkel $\measuredangle(c_1'(t), c_2'(t))$ gegeben durch:
   \begin{align*}
     \cos(\measuredangle(c_1'(t), c_2'(t))) &= \tfrac{\langle c_1'(t_1) , c_2'(t_2) \rangle}{\norm{c_1'(t_1)} \cdot \norm{c_2'(t_2)}} \\
     &= \tfrac{I_u(\alpha_1'(t_1), \alpha_2'(t_2))}{\sqrt{I_u(\alpha_1'(t_1), \alpha_1'(t_1)) \cdot I_u(\alpha_2'(t_2), \alpha_2'(t_2))}}
@@ -425,8 +429,8 @@ $\implies$ $f$ ist partiell differenzierbar
   \[ \fa{\tilde{u} \in \tilde{U}} \tilde{g}_{\tilde{u}} = (J_{\tilde{u}} \tilde{X})^T (J_{\tilde{u}} \tilde{X}) = (J_{\tilde{u}}(\phi))^T \cdot g_{\phi(\tilde{u})} \cdot (J_{\tilde{u}}(\phi)). \]
 \end{satz}
 
-\begin{bsp}[Drehfläche]
-  Sei $c : I \to \R_{> 0} \times \R, t \mapsto (r(t), z(t))$ eine reguläre glatte Kurve. Dann heißt
+\begin{bsp}
+  Sei $c : I \to \R_{> 0} \times \R, \enspace t \mapsto (r(t), z(t))$ regulär, glatt. Dann heißt
   \[ X : I \times \R \to \R^3, \quad (t, s) \mapsto (r(t) \cos(s), r(t) \sin(s), z(t)) \]
   \emph{Drehfläche} mit Profilkurve $c$. Es gilt:
   \[ g_{(t, s)} = \begin{pmatrix} \norm{c'(t)}^2 & 0 \\ 0 & r(t)^2 \end{pmatrix} \]
@@ -437,7 +441,8 @@ $\implies$ $f$ ist partiell differenzierbar
 \end{bsp}
 
 \begin{defn}
-  Zwei Immersionen $X : U \to \R^n$ und $\tilde{X} : \tilde{U} \to \R^k$ heißen \emph{lokal isometrisch}, wenn es eine Umparametrisierung $\phi : U \to \tilde{U}$ gibt, sodass die ersten Fundamentalformen von $X$ und $\tilde{X} \circ \phi$ übereinstimmen. Ist eine Immersion $X$ isometrisch zu einer Immersion, deren Bild eine offene Teilmenge einer affinen Ebene ist, so heißt $X$ \emph{abwickelbar}.
+  Zwei Immersionen $X : U \to \R^n$ und $\tilde{X} : \tilde{U} \to \R^k$ heißen \emph{lokal isometrisch}, wenn es eine Umparam. $\phi : U \to \tilde{U}$ gibt, sodass die ersten Fundamentalformen von $X$ und $\tilde{X} \circ \phi$ übereinstimmen. \\
+  Ist eine Immersion $X$ isometrisch zu einer Immersion, deren Bild eine offene Teilmenge einer affinen Ebene ist, so heißt $X$ \emph{abwickelbar}.
 \end{defn}
 
 % Ausgelassen:
@@ -458,14 +463,13 @@ $\implies$ $f$ ist partiell differenzierbar
 \end{bem}
 
 \begin{defn}
-  $v_u \coloneqq \sum_{j=1}^{n} \det(\partial_1 X(u), ..., \partial_{n-1} X(u), e_j) e_j$
+  $v_u \coloneqq \sum_{j=1}^{n} \det(\partial_1 X(u), \ldots, \partial_{n-1} X(u), e_j) e_j$
 \end{defn}
 
 \begin{bem}
-  Es gilt:
+  \inlineitem{$v_u \in N_u X \setminus \{ 0 \}$,} \enspace
+  \inlineitem{$\det(\partial_1 X(u), \ldots, \partial_{n-1} X(u), v_u) > 0$,}
   \begin{itemize}
-    \miniitem{0.34 \linewidth}{$v_u \in N_u X \setminus \{ 0 \}$}
-    \miniitem{0.64 \linewidth}{$\det(\partial_1 X(u), ..., \partial_{n-1} X(u), v_u) > 0$}
     \item Für $n = 3$ und $m = 2$ ist $v_u = \partial_1 X(u) \times \partial_2 X(u)$.
   \end{itemize}
 \end{bem}
@@ -475,10 +479,9 @@ $\implies$ $f$ ist partiell differenzierbar
 \end{nota}
 
 \begin{defn}
-  Für eine Hyperfläche $X : U \to \R^n$ heißt
+  Die \emph{Gaußabbildung} einer Hyperfläche $X : U \to \R^n$ ist
   \[
-    \nu : U \to S^{n-1}, \quad u \mapsto \nu_u \coloneqq \tfrac{v_u}{\norm{v_u}}
-    \quad \text{\emph{Gaußabbildung}.}
+    \nu : U \to S^{n-1}, \quad u \mapsto \nu_u \coloneqq \tfrac{v_u}{\norm{v_u}}.
   \]
 \end{defn}
 
@@ -502,7 +505,7 @@ $\implies$ $f$ ist partiell differenzierbar
 \end{defn}
 
 \begin{bem}
-  Nach dem Satz von Amandus Schwarz ist $\FFII_u$ eine symmetrische Bilinearform.
+  Nach dem Satz von Schwarz ist $\FFII_u$ eine symm. Bilinearform.
 \end{bem}
 
 \begin{bem}
@@ -525,7 +528,7 @@ $\implies$ $f$ ist partiell differenzierbar
     \langle \partial_j \nu , \partial_k X \rangle = - h_{jk}
     \quad \text{und} \quad
     \langle \partial_j \nu, \nu \rangle = 0
-    \quad \text{für alle } j, k \in \{ 1, ..., m \}.
+    \quad \text{für alle } j, k \in \{ 1, \ldots, m \}.
   \]
 \end{satz}
 
@@ -546,14 +549,15 @@ $\implies$ $f$ ist partiell differenzierbar
   \begin{itemize}
     \item $W_u$ ist selbstadjungiert bzgl. der Einschränkung $\langle \cdot , \cdot \rangle_{T_u}$.
     \item $h_{jk}(u) = \langle W_u(\partial_j X(u)), \partial_k X(u) \rangle$
-    \item Die Weingartenabbildung ist invariant unter orientierungserhaltenden Umparametrisierungen, \dh{} ist $\phi : \tilde{U} \to U$ ein Diffeo mit $\det(J\phi) > 0$, dann gilt für $\tilde{X} \coloneqq X \circ \phi$ und alle $\tilde{u} \in \tilde{U}$: $W_{\phi(\tilde{u})} = \tilde{W}_{\tilde{u}}$.
+    \item Die Weingartenabb. ist invariant unter orientierungserhaltenden Umparam., \dh{} ist $\phi : \tilde{U} \to U$ ein Diffeo mit $\det(J\phi) > 0$, dann gilt für $\tilde{X} \coloneqq X \circ \phi$ und alle $\tilde{u} \in \tilde{U}$: $W_{\phi(\tilde{u})} = \tilde{W}_{\tilde{u}}$.
   \end{itemize}
 \end{satz}
 
 % Vorlesung vom 13.11.2013
 
 \begin{satz}
-  Sei $g_u = (g_{jk}(u))$ die Matrix der ersten und $h_u = (h_{jk}(u))$ die Matrix der zweiten FF einer Hyperfläche $X$, dann gilt für die Matrix $w_u = (w_{jk}(u))$ von $W_u$ bzgl. der Basis $\{ \partial_1 X(u), ..., \partial_{n-1} X(u) \}$ von $T_u X$:
+  Sei $g_u = (g_{jk}(u))$ die Matrix der ersten und $h_u = (h_{jk}(u))$ die Matrix der zweiten FF einer Hyperfläche $X$. \\
+  Dann gilt für die Matrix $w_u = (w_{jk}(u))$ von $W_u$ bzgl. der Basis $\{ \partial_1 X(u), \ldots, \partial_{n-1} X(u) \}$ von $T_u X$:
   \[ w_u = g_u^{-1} \cdot h_u \]
 \end{satz}
 
@@ -564,7 +568,7 @@ $\implies$ $f$ ist partiell differenzierbar
 \begin{defn}
   Sei $X : U \to \R^n$ eine Hyperfläche.
   \begin{itemize}
-    \item Die Eigenwerte $\kappa_1(u), ..., \kappa_{n-1}(u)$ mit Vielfachheiten von $W_u$ heißen \emph{Hauptkrümmungen} von $X$ in $u$ und die dazugehörigen Eigenvektoren \emph{Hauptkrümmungsrichtungen} von $X$ in $u$.
+    \item Die Eigenwerte $\kappa_1(u), \ldots, \kappa_{n-1}(u)$ mit Vielfachheiten von $W_u$ heißen \emph{Hauptkrümmungen} von $X$ in $u$ und die dazugehörigen Eigenvektoren \emph{Hauptkrümmungsrichtungen} von $X$ in $u$.
     \item Die \emph{mittlere Krümmung} von $X$ ist definiert als
     \[ H : U \to \R, \quad u \mapsto \tfrac{1}{n-1} \, \spur(W_u) = \tfrac{1}{n-1} \sum_{j=1}^{n-1} \kappa_j(u). \]
     \item Die \emph{Gauß-(Kronecker-)Krümmung} von $X$ ist die Abbildung
@@ -592,12 +596,12 @@ $\implies$ $f$ ist partiell differenzierbar
 \begin{satz}
   Sei $X : U \to \R^n$ eine Hyperfläche und $u_0 \in U$ ein Punkt. Dann gibt es eine offene Umgebung $U_0 \opn U$ von $u_0$ und eine Umparametrisierung $\phi : U_0 \to \tilde{U}$, sodass für $\tilde{X} \coloneqq X \circ \phi^{-1}$ gilt:
 
-  Es gibt eine glatte (bzw. $\mathcal{C}^2$) Funktion $f : \tilde{U} \to \R$ mit $D_{\phi(u_0)} f = 0$, sodass $\tilde{X} = \Graph(f)$, \dh{} es gilt für alle $\tilde{u} \in \tilde{U}$:
+  Es gibt eine glatte (bzw. $\Cont^2$) Funktion $f : \tilde{U} \to \R$ mit $D_{\phi(u_0)} f = 0$, sodass $\tilde{X} = \Graph(f)$, \dh{} es gilt für alle $\tilde{u} \in \tilde{U}$:
   \[ \tilde{X}(\tilde{u}) = (\tilde{u}, f(\tilde{u})). \]
 \end{satz}
 
 \begin{nota}
-  $\nabla f = (\partial_1 f, ..., \partial_k f)$ heißt \emph{Gradient} von $f : \R^k \to \R^m$.
+  $\nabla f = (\partial_1 f, \ldots, \partial_k f)$ heißt \emph{Gradient} von $f : \R^k \to \R^m$.
 \end{nota}
 
 \begin{satz}
@@ -640,8 +644,6 @@ $\implies$ $f$ ist partiell differenzierbar
   \]
 \end{defn}
 
-\begin{samepage}
-
 \begin{bem}
   Sei $\norm{v} = 1$. Sei $c : I \to P_v \tilde{=} \R^2$ nach BL parametrisiert, sodass $\Bild(c) = P_v \cap X(U_0)$, und $c(0) = X(u_0)$ und $c'(0) = v$. Dann: $\kappa_v(u) = \kappa_c(0)$
 \end{bem}
@@ -651,10 +653,10 @@ $\implies$ $f$ ist partiell differenzierbar
   \[ T_{u_0} X \supset S^1 \to \R, \quad v \mapsto \kappa_v(u_0) = \langle W_{u_0} v, v \rangle. \]
 \end{satz}
 
+\begin{samepage}
+
 % Kapitel 2.7.
 \subsection{Die Levi-Civita-Ableitung}
-
-\end{samepage}
 
 \begin{defn}
   Ein \emph{Vektorfeld} (VF) auf einer offenen Menge $U \opn \R^m$ ist eine Abbildung $v : U \to \R^m$.
@@ -676,6 +678,8 @@ $\implies$ $f$ ist partiell differenzierbar
 \begin{bem}
   Mit typtheoretischer Syntax ist ein tangentiales Vektorfeld längs $X$ eine glatte Abbildung $V : \prod_{u : U} T_u X$.
 \end{bem}
+
+\end{samepage}
 
 \begin{nota}
   $\chi(TX) = \Set{ V : U \to \R^n }{ \text{$V$ ist tang. VF längs $X$} }$
@@ -704,7 +708,7 @@ $\implies$ $f$ ist partiell differenzierbar
   Gradient $\not=$ Levi-Civita-Ableitung (trotz Symbol $\nabla$)!
 \end{acht}
 
-\begin{satz}[Eigenschaften der Levi-Civita-Ableitung]
+\begin{satz}[Eigenschaften der Levi-Civita-Ableitung]\mbox{}\\
   Sei $f : U \to \R$ glatt, $w_1, w_2, w \in \chi(U)$, $V, V_1, V_2 \in \chi(TX)$. Dann gilt:
   \begin{itemize}
     \item $\nabla_{f(w_1) + w_2} V = f \cdot \nabla_{w_1} V + \nabla_{w_2} V$ \pright{Linearität 1}
@@ -717,12 +721,12 @@ $\implies$ $f$ ist partiell differenzierbar
 % Vorlesung vom 25.11.2013
 
 \begin{nota}
-  Sei $j \in \{1, ..., m\}$, dann betrachten wir die konstante Abbildung $e_j : U \to \R^n, u \mapsto e_j$. Wir setzen $\nabla_j V \coloneqq \nabla_{e_j} V$.
+  Sei $j \in \{1, \ldots, m\}$, dann betrachten wir die konstante Abbildung $e_j : U \to \R^n, u \mapsto e_j$. Wir setzen $\nabla_j V \coloneqq \nabla_{e_j} V$.
 \end{nota}
 
 \begin{defn}
   Sei $X : U \to \R^n$ eine Immersion, so schreiben wir:
-  \[ \nabla_j (\partial_k X) = \sum_{l=1}^m \Gamma_{jk}^l \partial_l (X)  \qquad \text{für $j,k \in \{ 1, ..., m \}$.} \]
+  \[ \nabla_j (\partial_k X) = \sum_{l=1}^m \Gamma_{jk}^l \partial_l (X)  \qquad \text{für $j,k \in \{ 1, \ldots, m \}$.} \]
   Dabei heißen die Funktionen $\Gamma_{jk}^l : U \to \R$ \emph{Christoffel-Symbole}.
 \end{defn}
 
@@ -742,7 +746,7 @@ $\implies$ $f$ ist partiell differenzierbar
   Die Christoffelsymbole kann man aus der 1.\,FF berechnen (hier sind $g^{lh}$ die Komponenten von $g^{-1}$):
   \[
     \Gamma_{jk}^l = \sum_{h=1}^m g^{lh} \cdot \Gamma_{jkh} 
-    = \tfrac{1}{2} \sum_{h=1}^m g^{lh} \cdot (\partial_j \cdot g_{kh} + \partial_k \cdot g_{jh} + \partial_h \cdot g_{jk}),
+    = \tfrac{1}{2} \sum_{h=1}^m g^{lh} \cdot (\partial_j \cdot g_{kh} + \partial_k \cdot g_{jh} + \partial_h \cdot g_{jk}).
   \]
 \end{bem}
 
@@ -754,7 +758,7 @@ $\implies$ $f$ ist partiell differenzierbar
 
 % \subsection{Levi-Civita-Ableitung für Vektorfelder auf $U$}
 
-\begin{defn}[Levi-Civita-Ableitung für Vektorfelder auf $U$]
+\begin{defn}[Levi-Civita-Ableitung für Vektorfelder auf $U$]\mbox{}\\
   Sei $X : U \to \R^n$ eine immergierte Fläche, so heißt
   \begin{align*}
     \nabla_ : \chi(U) \times \chi(U) &\to \chi(U) \\[-12pt]
@@ -825,7 +829,7 @@ $\implies$ $f$ ist partiell differenzierbar
 
 \begin{satz}
   Es gilt dann $\tfrac{\nabla (v^\wedge)}{\d t} = \left( \tfrac{\nabla v}{\d t} \right)^\wedge$. Ein VF $V = v^\wedge$ ist also genau dann parallel, wenn $v' + \hat{\Gamma}_\alpha v = 0$ bzw.
-  \[ (v^l)' + \sum_{j,k=1}^m v^j (\alpha^k)' (\Gamma_{jk}^l \circ \alpha) = 0 \quad \text{für alle $l = 1, ..., m$.} \]
+  \[ (v^l)' + \sum_{j,k=1}^m v^j (\alpha^k)' (\Gamma_{jk}^l \circ \alpha) = 0 \quad \text{für alle $l = 1, \ldots, m$.} \]
 \end{satz}
 
 \begin{bem}
@@ -852,19 +856,19 @@ $\implies$ $f$ ist partiell differenzierbar
 \end{samepage}
 
 \begin{defn}
-  Eine reguläre glatte Kurve $c = X \circ \alpha$ auf $X$ heißt \emph{Geodäte} auf $X$, wenn gilt
+  Eine reg. glatte Kurve $c = X \!\circ\! \alpha$ auf $X$ heißt \emph{Geodäte}, wenn
   \[ (c'')^T = \tfrac{\nabla c'}{\d t} = 0 \quad\text{bzw.}\quad \tfrac{\nabla \alpha'}{\d t} = 0. \]
 \end{defn}
 
 \begin{satz}
-  Eine Geodäte ist immer proportional zur BL parametrisiert, \dh{} $\norm{c'}$ ist konstant.
+  Jede Geodäte ist prop. zur BL param., \dh{} $\norm{c'}$ ist konstant.
 \end{satz}
 
 \begin{bem}
   Sei $c = X \circ \alpha$ mit $\alpha = \sum \alpha^j e_j$ mit glatten Abb. $\alpha^j$. Dann gilt
   \[ \frac{\nabla c'}{\d t} = \sum_{l=1}^m \left( (\alpha^l)'' + \sum_{j,k=1}^m (\alpha^j)' (\alpha^k)' (\Gamma_{jk}^l \circ \alpha) \right) (\partial_l X \circ \alpha). \]
   Somit ist $c$ genau dann eine Geodäte, wenn gilt
-  \[ (\alpha^l)'' + \sum_{j,k=1}^m (\alpha^j)' (\alpha^k)' (\Gamma_{jk}^l \circ \alpha) = 0 \quad \text{für alle $l = 1, ..., m$} \]
+  \[ (\alpha^l)'' + \sum_{j,k=1}^m (\alpha^j)' (\alpha^k)' (\Gamma_{jk}^l \circ \alpha) = 0 \quad \text{für alle $l = 1, \ldots, m$} \]
   oder $\alpha'' + \Gamma_{\alpha}(\alpha', \alpha') = 0$ (i.\,F. \emph{Geodätengleichung}), wobei
   \begin{align*}
     \Gamma_{\alpha} : \cinterval{a}{b} &\to \Bil(\R^m, \R^m), \  t \mapsto \Gamma_{\alpha(t)} \text{ mit }\\
@@ -873,16 +877,16 @@ $\implies$ $f$ ist partiell differenzierbar
 \end{bem}
 
 \begin{bem}
-  Es handelt sich hierbei um ein System nichtlinearer gew. DG zweiter Ordnung, welches nach dem Satz von Picard- Lindelöf bei gegebenen Anfangswerten immer eine eindeutige lokale Lösung besitzt. Es folgt:
+  Es handelt sich hierbei um ein System nichtlinearer gew. DG zweiter Ordnung, welches nach dem Satz von Picard-Lindelöf bei geg. Anfangswerten eine eindeutige lokale Lsg besitzt. Es folgt:
 \end{bem}
 
 \begin{satz}[Lokale Existenz von Geodäten]
-  Sei $X : U \to \R^n$ eine Immersion, sei $u \in U$ und $w \in \R^m$. Dann gibt es eine offene Umgebung $U_w \opn \R^m$ von $w$ und eine $\epsilon > 0$, sodass gilt: Für jedes $v \in U_w$ gibt es eine eindeutige Lösung $\alpha_v : \ointerval{-\epsilon}{\epsilon} \to U$ der Geodätengleichung mit $\alpha_v(0) = u$ und $\alpha_v'(0) = v$.
-
+  Sei $X : U \to \R^n$ eine Immersion, sei $u \in U$ und $w \in \R^m$. Dann gibt es eine offene Umgebung $U_w \opn \R^m$ von $w$ und eine $\epsilon > 0$, sodass gilt: \\
+  Für jedes $v \in U_w$ gibt es eine eindeutige Lösung $\alpha_v : \ointerval{-\epsilon}{\epsilon} \to U$ der Geodätengleichung mit $\alpha_v(0) = u$ und $\alpha_v'(0) = v$. \\
   Anders ausgedrückt: Zu jedem $u \in U$ und zu jedem $W \in T_u X$ gibt es eine offene Umgebung $U_W \opn T_u X$ von $W$ sowie ein $\epsilon > 0$, sodass es für jedes $V \in U_W$ eine eindeutige Geodäte $c_v : \ointerval{-\epsilon}{\epsilon} \to \R^n$ auf $X$ gibt mit $c_v(0) = X(u)$ und $c_v'(0) = V$.
 \end{satz}
 
-\begin{satz}[Spray-Eigenschaft]
+\begin{satz}[\emph{Spray-Eigenschaft}]
   Sei $\alpha_v : \ointerval{-\epsilon}{\epsilon} \to U$ die eindeutige Lsg. der Geodätengleichung mit $\alpha_v(0) = u$ und $\alpha_v'(0) = v$ und $r > 0$. Dann ist die eindeutige Lösung der Geodätengleichung $\alpha_{rv}$ mit $\alpha_{rv}(0) = rv$ und $\alpha_{rv}'(0) = rv$ auf dem Intervall $\ointerval{-\tfrac{\epsilon}{r}}{\tfrac{\epsilon}{r}}$ definiert und es gilt
   $\alpha_{rv}(t) = \alpha_v(rt)$ für alle $t \in \ointerval{-\tfrac{\epsilon}{r}}{\tfrac{\epsilon}{r}}$.
 \end{satz}
@@ -893,9 +897,8 @@ $\implies$ $f$ ist partiell differenzierbar
 \end{satz}
 
 \begin{defn}
-  Sei $u \in U$, dann heißt die Abbildung
-  \[ \Exp_u : B_u^{\epsilon_u} \to U, \quad v \mapsto \alpha_v(1) \]
-  \emph{(geodätische) Exponentialabbildung} von $X$ in $u$.
+  Die \emph{(geodätische) Exponentialabb.} von $X$ in $u \in X$ ist
+  \[ \Exp_u : B_u^{\epsilon_u} \to U, \quad v \mapsto \alpha_v(1). \]
 \end{defn}
 
 \begin{defn}
@@ -914,13 +917,14 @@ $\implies$ $f$ ist partiell differenzierbar
   $\delta \coloneqq \tfrac{\partial}{\partial s}|_{s=0}$.
 \end{nota}
 
-\begin{satz}[Variationsformel der Länge]
-  Unter obigen Annahmen gilt
+\begin{satz}[\emph{Variationsformel der Länge}]
+  Unter o.\,g. Annahmen gilt
   \[ \delta L(c_s) = \langle c'(b), \delta c_s(b) \rangle - \langle c'(a), \delta c_s(a) \rangle - \Int{a}{b}{\langle (c''(t))^T, \delta c_s(t) \rangle}{t}. \]
 \end{satz}
 
-\begin{satz}[Gaußlemma]
-  Die Parametrisierung $\widetilde{X} \coloneqq X \circ \Exp_u : B_u^\epsilon \to \R^n$ durch Exponentialkoordinaten ist eine radiale Isometrie: Seien $v \in B_u^{\epsilon_u} \setminus \{0\}$ und $w \in \R^m$ und zerlegen wir $w$ in $w = w_{\|} + w_\perp$ mit $w_{\|} \in \R v$ und $\langle w_\perp, v \rangle = 0$, dann gilt
+\begin{satz}[\emph{Gaußlemma}]
+  Die Param. $\widetilde{X} \coloneqq X \circ \Exp_u : B_u^\epsilon \to \R^n$ durch Exponentialkoordinaten ist eine radiale Isometrie: \\
+  Seien $v \in B_u^{\epsilon_u} \setminus \{0\}$ und $w \in \R^m$ und zerlegen wir $w$ in $w = w_{\|} + w_\perp$ mit $w_{\|} \in \R v$ und $\langle w_\perp, v \rangle = 0$, dann gilt
   \begin{align*}
     \norm{D_v \widetilde{X}(w_{\|})} &= \norm{w_{\|}}\\
     D_v \widetilde{X}(w) &\perp D_v \widetilde{X}(v), \quad \text{wenn $w \perp v$  und somit }\\
@@ -931,7 +935,8 @@ $\implies$ $f$ ist partiell differenzierbar
 % Vorlesung vom 9.12.2013
 
 \begin{satz}
-  Sei $\gamma : \cinterval{a}{b} \to B_u^\epsilon$ reguläre glatte Kurve mit $\gamma(a) = 0, \gamma(b) = v$. Dann gilt: $L(X \circ \Exp_u \circ \gamma) \geq \norm{v}$ mit $L(X \circ \Exp_u \circ \gamma) = \norm{v} \iff \gamma(t) = \rho(t)v$ mit $\rho : \cinterval{a}{b} \to \cinterval{0}{1}$ streng monoton wachsend.
+  Sei $\gamma : \cinterval{a}{b} \to B_u^\epsilon$ regulär, glatt mit $\gamma(a) = 0$, $\gamma(b) = v$. \\
+  Dann ist $L(X \circ \Exp_u \circ \gamma) \geq \norm{v}$ und es gilt $L(X \circ \Exp_u \circ \gamma) = \norm{v}$ genau dann, wenn $\gamma(t) = \rho(t)v$ mit $\rho : \cinterval{a}{b} \to \cinterval{0}{1}$ s.\,m.\,s.
 \end{satz}
 
 \begin{satz}
@@ -960,12 +965,11 @@ $\implies$ $f$ ist partiell differenzierbar
 % in Koordinaten: $[v, w] = \sum_{j,k=1}^m v^j \partial_j w^k e_k - \sum_{j,k=1}^m w^j \partial_j v^k e_k$
 
 \begin{defn}
-  Die Abbildung
+  Der \emph{Krümmungstensor} ist die Abbildung
   \begin{align*}
     R : \chi(U) \times \chi(U) &\times \chi(U) \to \chi(U), \quad (v, w, z) \mapsto R(v, w) z \\
-    \text{ mit } R(v, w) z &= \nabla_v (\nabla_w z) - \nabla_w (\nabla_v z) - \nabla_{[v, w]} z
+    \text{ mit } R(v, w) z &= \nabla_v (\nabla_w z) - \nabla_w (\nabla_v z) - \nabla_{[v, w]} z.
   \end{align*}
-  heißt \emph{Krümmungstensor}.
 \end{defn}
 
 % TODO: Trilinearität
@@ -988,15 +992,12 @@ $\implies$ $f$ ist partiell differenzierbar
 % Vorlesung vom 11.12.2013
 
 \begin{satz}
-  Die Abbildung
+  Folgende Abb. ist eine antisymmetrische Bilinearform:
   \[
-    \FFI_{R_{ij}} : \chi(U) \times \chi(U) \to \mathcal{C}^\infty(U, \R), \quad
+    \FFI_{R_{ij}} : \chi(U) \times \chi(U) \to \Cont^\infty(U, \R), \quad
     (v, w) \mapsto \underbrace{\FFI(R_{ij}, v, w)}_{\mathclap{u \mapsto \FFI_u((R_{ij} v)(u), w(u))}}
   \]
-
-  \vspace{-12pt}
-
-  ist eine antisymmetrische Bilinearform.
+  \vspace{-8pt}
 \end{satz}
 
 \begin{nota}
@@ -1007,7 +1008,7 @@ $\implies$ $f$ ist partiell differenzierbar
   Es gilt $- R_{jikl} = R_{ijkl} = - R_{ijlk}$.
 \end{lem}
 
-\begin{satz}[Gaußgleichung]
+\begin{satz}[\emph{Gaußgleichung}]
   Mit $\FFII_{jk}(u) = \left( \partial_j \partial_k X(u) \right)^{N_u}$ gilt
   \[ R_{ijkl}(u) = \langle \FFII_{jk} (u) \FFII_{il}(u) \rangle - \langle \FFII_{ik}(u), \FFII_{jl}(u) \rangle. \]
 \end{satz}
@@ -1017,7 +1018,7 @@ $\implies$ $f$ ist partiell differenzierbar
   Da $\langle \nu, \nu \rangle = 1$, folgt $R_{ijkl} = h_{jk} h_{ie} - h_{ik} h_{jl}$.
 \end{bem}
 
-\begin{satz}[Theorema egregium (Gauß)]
+\begin{satz}[\emph{Theorema egregium}, Gauß]
   Für eine HF $X : U \to \R^3$ gilt
   \[ K(u) = \frac{\det(h(u))}{\det(g(u))} = \frac{R_{1221}(u)}{\det(g(u))}. \]
   Letzter Ausdruck ist nur abh. von der 1.\,FF und ihren Ableitungen.
@@ -1025,12 +1026,12 @@ $\implies$ $f$ ist partiell differenzierbar
 
 % Vorlesung vom 16.12.2013
 
-\begin{satz}[Codazzi-Mainardi-Gleichungen]
-  Sei $X : U \to \R^n$ HF, dann
+\begin{satz}[\emph{Codazzi-Mainardi-Gl.}]
+  Für eine HF $X : U \to \R^n$ gilt
   \[ \partial_i h_{jk}(u) - \sum_{l=1}^{n-1} \Gamma_{ik}^l(u) h_{e_j}(u) = \partial_j h_{ik}(u) - \sum_{l=1}^{n-1} \Gamma_{jk}^l(u) h_{e_i}(u). \]
 \end{satz}
 
-\begin{satz}[Hauptsatz der lokalen Flächentheorie (Bonnet)]
+\begin{satz}[\emph{Hauptsatz der lokalen Flächentheorie (Bonnet)}]\mbox{}\\
   Sei $U \opn \R^m$ einfach zusammenhängend und
   \[ g, h : U \to \Set{ A \in \R^{m \times m} }{ A^T = A, \, A \text{ positiv definit } } \]
   glatt. Dann sind äquivalent:
@@ -1048,27 +1049,27 @@ $\implies$ $f$ ist partiell differenzierbar
 \end{defn}
 
 \begin{satz}
-  Sei $n \geq 3$ und $X : U \to \R^n$ eine Nabelpunkt-HF in $\mathcal{C}^3$, dann ist $X(U)$ Teilmenge einer Hyperebene oder einer Hypersphäre im $\R^n$.
+  Sei $n \geq 3$ und $X : U \to \R^n$ eine Nabelpunkt-HF in $\Cont^3$, dann ist $X(U)$ Teilmenge einer Hyperebene oder einer Hypersphäre im $\R^n$.
 \end{satz}
 
 \begin{defn}
-  Sei $O \opn \R^n$. Eine $\mathcal{C}^2$-Abbildung $\Phi : O \to \R^n$ heißt \emph{orthogonales Hyperflächensystem} (OHFS), wenn für alle $x \in O$ und alle $j, k \in \{ 1, ..., n \}, j \not= k$ gilt:
+  Sei $O \opn \R^n$. Eine $\Cont^2$-Abbildung $\Phi : O \to \R^n$ heißt \emph{orth. Hyperflächensystem} (OHFS), wenn $\fa{x \!\in\! O\!} \! \fa{j \not= k \!\in\! \{ 1, \nldots, n \}}\!$
   \[
     \langle \partial_j \Phi(x), \partial_k \Phi(x) \rangle = 0
     \quad \text{und} \quad
-    \langle \partial_j \Phi(x), \partial_j \Phi(x) \rangle \not= 0
+    \langle \partial_j \Phi(x), \partial_j \Phi(x) \rangle \not= 0.
   \]
 \end{defn}
 
 \begin{nota}
-  Für $t \in \R$ ist $U^{j,t} \coloneqq \Set{ (x_1, ..., x_n) \in O }{ x_j = t }$.
+  Für $t \in \R$ ist $U^{j,t} \coloneqq \Set{ (x_1, \ldots, x_n) \in O }{ x_j = t }$.
 \end{nota}
 
 \begin{bem}
-  Falls $U^{j,t}$ offen ist in $\Set{ (x_1, ..., x_n) \in \R^n }{ x_j = t }$, ist
+  Falls $U^{j,t}$ offen ist in $\Set{ (x_1, \ldots, x_n) \in \R^n }{ x_j = t }$, ist
   \[ X^{j,t} \coloneqq \Phi|_{U^{j,t}} : U^{j,t} \to \R^n \]
   eine Hyperfläche und für alle $x \in U^{j,t}$ gilt
-  \[ \partial_j \Phi(x) \perp T_x X^{j,t} = \mathrm{Spann} \Set{ \partial_k \Phi(x) }{ k \in \{ 1, ..., n \} \setminus \{ j \} }. \]
+  \[ \partial_j \Phi(x) \perp T_x X^{j,t} = \mathrm{Spann} \Set{ \partial_k \Phi(x) }{ k \in \{ 1, \ldots, n \} \setminus \{ j \} }. \]
 \end{bem}
 
 \begin{defn}
@@ -1079,7 +1080,7 @@ $\implies$ $f$ ist partiell differenzierbar
 
 \begin{satz}
   Ist $\Phi : O \to \R^n$ OHFS, dann sind die Koordinatenlinien
-  \[ h \mapsto \Phi(t_1, ..., t_{j-1}, t_j + h, t_{j+1}, ..., t_n) \quad \text{ mit } (t_1, ..., t_n) \in O \text{ fest} \]
+  \[ h \mapsto \Phi(t_1, \ldots, t_{j-1}, t_j + h, t_{j+1}, \ldots, t_n) \quad \text{ mit } (t_1, \ldots, t_n) \in O \text{ fest} \]
   Krümmungslinien von $X^{k, t_k}$ mit $k \not= j$.
 \end{satz}
 
@@ -1095,7 +1096,7 @@ $\implies$ $f$ ist partiell differenzierbar
 \end{bem}
 
 \begin{defn}
-  Seien $O, \widetilde{O} \opn \R^n$. Ein $\mathcal{C}^1$-Diffeomorphismus $f : O \to \widetilde{O}$ heißt \emph{konform}, wenn für alle $x \in O$ die Abbildung $D_x f$ konform ist.
+  Seien $O, \widetilde{O} \opn \R^n$. Ein $\Cont^1$-Diffeomorphismus $f : O \to \widetilde{O}$ heißt \emph{konform}, wenn für alle $x \in O$ die Abbildung $D_x f$ konform ist.
 \end{defn}
 
 % Konforme Abbildungen im $\R^2$
@@ -1116,15 +1117,16 @@ $\implies$ $f$ ist partiell differenzierbar
   Eine Abbildung $f : O \to \widetilde{O}$ heißt \emph{kugeltreu}, wenn sie offene Teilmengen von Sphären auf offene Teilmengen von Sphären abbildet. Dabei gelten Hyperebenen als Sphären mit Radius $\infty$.
 \end{defn}
 
-\begin{satz}[Liouville]
-  Wenn $n \geq 3$, dann ist jede konforme $\mathcal{C}^3$-Abb. $f : O \to \widetilde{O}$ kugeltreu, \dh{} falls $X : U \to O$ eine Nabelpunkt-HF ist, dann ist $f \circ X : U \to \widetilde{O}$ auch eine Nabelpunkt-HF.
+\begin{satz}[\emph{Liouville}]
+  Wenn $n \geq 3$, dann ist jede konforme $\Cont^3$-Abb. $f : O \to \widetilde{O}$ kugeltreu, \dh{} falls $X : U \to O$ eine Nabelpunkt-HF ist, dann ist $f \circ X : U \to \widetilde{O}$ auch eine Nabelpunkt-HF.
 \end{satz}
 
 % Klassifikation konformer Abbildungen in Dimension $n \geq 3$
 
 % Vorlesung vom 8.1.2014
 
-\begin{bsp} Konforme Abbildungen im $\R^n$ sind:
+\begin{bsp}
+  Konforme Abbildungen im $\R^n$ sind:
   \begin{itemize}
     \item Isometrien: $f(x) = Ax + b, A \in O(n), b \in \R^n$
     \item Zentrische Streckungen: $f(x) = rx, r > 0$
@@ -1148,10 +1150,8 @@ $\implies$ $f$ ist partiell differenzierbar
   Seien $O, \widetilde{O} \opn \R^n$, $n \geq 2$ und $f : O \to \widetilde{O}$ winkel- und kugeltreu. Dann ist $f$ Einschränkung einer Möbius-Transformation.
 \end{satz}
 
-\begin{samepage}
-
 \begin{kor}
-  Für $n \geq 3$ gilt: Jeder konforme $\mathcal{C}^3$-Diffeomorphismus $f$ ist Einschränkung einer Möbius-Transformation.
+  Für $n \geq 3$ gilt: Jeder konforme $\Cont^3$-Diffeomorphismus $f$ ist Einschränkung einer Möbius-Transformation.
 \end{kor}
 
 % Vorlesung vom 13.1.2014
@@ -1160,8 +1160,6 @@ $\implies$ $f$ ist partiell differenzierbar
 \section{Minimalflächen}
 
 % Kapitel 3.1. Flächeninhalt von immergierten Flächen
-
-\end{samepage}
 
 \begin{lem}
   Sei $A \in \R^{n \times n}$, $B \in \R^{n \times (n-m)}$, $C = (A, B) \in \R^{n \times n}$. Wenn jeder Spaltenvektor von $B$ senkrecht auf allen anderen Spaltenvektoren von $C$ steht und normiert ist, dann gilt
@@ -1183,7 +1181,7 @@ $\implies$ $f$ ist partiell differenzierbar
 \end{defn}
 
 \begin{prop}
-  Der Flächeninhalt ist invariant unter Umparametrisierungen: Sei $X = \widetilde{X} \circ \phi$, $\phi : U \to \widetilde{U}$ ein Diffeomorphismus, $C \subset U$ kompakt, dann gilt
+  Der Flächeninhalt ist invariant unter Umparametrisierungen: Sei $X = \widetilde{X} \circ \phi$, $\phi : U \to \widetilde{U}$ ein Diffeo, $C \subset U$ kompakt, dann gilt
   \[ \Int{C}{}{\sqrt{\det(g_u)}}{\mu (u)} = \Int{\phi(C)}{}{\sqrt{\det(\widetilde{g}_u)}}{\mu (\widetilde{u})}. \]
 \end{prop}
 
@@ -1191,15 +1189,15 @@ $\implies$ $f$ ist partiell differenzierbar
 % Kapitel 3.2. Variationsformel für Flächeninhalte
 
 \begin{defn}
-  Sei $X : U \to \R^n$ immergierte $\mathcal{C}^2$-Fläche,
+  Sei $X : U \to \R^n$ immergierte $\Cont^2$-Fläche,
   $C \subset U \subset \R^m$ ein Kompaktum mit nichtleerem Inneren, dessen Rand eine Nullmenge ist.
   Dann ist eine Variation von $X$ auf $C$ eine Abbildung
   \[
-    \ointerval{-\epsilon}{\epsilon} \times U \xrightarrow{\mathcal{C}^2} \R^n, \quad
+    \ointerval{-\epsilon}{\epsilon} \times U \xrightarrow{\Cont^2} \R^n, \quad
     (x, u) \mapsto X^s(u) \quad \text{mit}
   \]
   \begin{itemize}
-    \miniitem{0.48 \linewidth}{$X^s : U \to \R^n$ $\mathcal{C}^2$-Immersion\vphantom{$|_{U \setminus C}$},}
+    \miniitem{0.48 \linewidth}{$X^s : U \to \R^n$ $\Cont^2$-Immersion\vphantom{$|_{U \setminus C}$},}
     \miniitem{0.19 \linewidth}{$X^0 = X_{\,}$\vphantom{$|_{U \setminus C}$},}
     \miniitem{0.30 \linewidth}{$X^s|_{U \setminus C} = X|_{U \setminus C}$.}
   \end{itemize}
@@ -1220,7 +1218,7 @@ $\implies$ $f$ ist partiell differenzierbar
 \end{lem}
 
 \begin{defn}
-  Eine kompakte $\mathcal{C}^2$-Variation $X^s$ einer Immersion $X$ heißt \emph{normal}, wenn $\delta X^s$ ein Normalenvektorfeld längs $X$ ist.
+  Eine kompakte $\Cont^2$-Variation $X^s$ einer Immersion $X$ heißt \emph{normal}, wenn $\delta X^s$ ein Normalenvektorfeld längs $X$ ist.
 \end{defn}
 
 \begin{defn}
@@ -1233,7 +1231,7 @@ $\implies$ $f$ ist partiell differenzierbar
   \[ (\det(A))' = \det(A(t)) \cdot \spur(A^{-1}(t) \cdot A'(t)). \]
 \end{lem}
 
-\begin{satz}[1. Variation]
+\begin{satz}[\emph{1. Variation}]
   Es gilt $\delta \A(s) = - \Int{C}{}{\spur(g^{-1} h^\xi)}{\A}$.
 \end{satz}
 
@@ -1253,7 +1251,8 @@ $\implies$ $f$ ist partiell differenzierbar
 % Zwischenüberschrift: Minimale Hyperflächen
 
 \begin{bem}
-  Sei $\mu$ ein Normalenvektorfeld an eine Hyperfläche $X$. Dann gibt es eine Funktion $f : U \to \R$ mit $\mu = f \cdot \nu$, wobei $\nu$ die Gaußabbildung von $X$ ist. Dann ist $h^\mu = f \cdot h$ und $g^{-1} h^{\mu} = f \cdot g^{-1} \cdot h = f \cdot w$, wobei $w$ die Weingartenabbildung ist.
+  Sei $\mu$ ein Normalenvektorfeld an eine Hyperfläche $X$. \\
+  Dann gibt es eine Funktion $f : U \to \R$ mit $\mu = f \cdot \nu$, wobei $\nu$ die Gaußabbildung von $X$ ist. Dann ist $h^\mu = f \cdot h$ und $g^{-1} h^{\mu} = f \cdot g^{-1} \cdot h = f \cdot w$, wobei $w$ die Weingartenabbildung ist.
 \end{bem}
 
 \begin{satz}[1. Variation für HF]
@@ -1263,7 +1262,7 @@ $\implies$ $f$ ist partiell differenzierbar
 
 \begin{satz}
   Eine Hyperfläche $X : U \to \R^n$ ist genau dann minimal, wenn
-  \[ H \equiv \tfrac{\kappa_1 + ... + \kappa_{n{-}1}}{n-1} \equiv \tfrac{\spur(w)}{n-1} \equiv 0. \]
+  \[ H \equiv \tfrac{\kappa_1 + \ldots + \kappa_{n{-}1}}{n-1} \equiv \tfrac{\spur(w)}{n-1} \equiv 0. \]
 \end{satz}
 
 % Beispiele für minimale Hyperflächen
@@ -1281,7 +1280,8 @@ $\implies$ $f$ ist partiell differenzierbar
 \begin{samepage}
 
 \begin{satz}
-  Für eine minimale immergierte HF $X : U \to \R^n$ gilt: Um jeden Punkt $u_0 \in U$ gibt es ein Kompaktum $C \subset U$ mit nicht leerem Inneren, dessen Rand eine Nullmenge ist und welches $u_0 \in C^\circ$ erfüllt, sodass für jede immergiere HF $\tilde{X} : U \to \R^n$ mit $X|_{U \setminus C} = \tilde{X}|_{U \setminus C}$ erfüllt gilt: $\A(X(C)) \leq \A(\tilde{X}(C))$. Gleichheit tritt genau dann ein, wenn $\tilde{X}$ eine Umparametrisierung von $X$ ist.
+  Für eine minimale immergierte HF $X : U \to \R^n$ gilt: Um jeden Punkt $u_0 \in U$ gibt es ein Kompaktum $C \subset U$ mit nicht leerem Inneren, dessen Rand eine Nullmenge ist und welches $u_0 \in C^\circ$ erfüllt, sodass für jede immergiere HF $\tilde{X} : U \to \R^n$ mit $X|_{U \setminus C} = \tilde{X}|_{U \setminus C}$ erfüllt gilt: $\A(X(C)) \leq \A(\tilde{X}(C))$. \\
+  Gleichheit tritt genau dann ein, wenn $\tilde{X}$ eine Umparam. von $X$ ist.
 \end{satz}
 
 % Verallgemeinerung von minimalen Hyperflächen:
@@ -1294,11 +1294,11 @@ $\implies$ $f$ ist partiell differenzierbar
 \end{samepage}
 
 \begin{situation}
-  Sei $X : U \to \R^2$ immergierte $\mathcal{C}^3$-Hyperfläche und $U_0 \subset U$ offen, sodass $X|_{U_0}$ ein Homöomorphismus auf sein Bild ist. Sei $C \subset U_0$ ein Kompaktum mit glattem Rand, das Abschluss einer offenen Menge $C^\circ$ ist. Sei außerdem $D \subset \R^n$ kompakt, sodass $X(C) \subset \partial D$. Wir nennen $D$ \emph{Dose} mit \emph{Deckel} $X(C)$ und \emph{Boden} $\partial D \setminus X(C)$. Wir betrachten eine $\mathcal{C}^2$-Variation $\ointerval{-\epsilon}{\epsilon} \times U \to \R^n$, $(s, u) \mapsto X^s(u)$ auf $C$ mit $X^0 = X$, sodass gilt:
+  Sei $X : U \to \R^2$ immergierte $\Cont^3$-Hyperfläche und $U_0 \subset U$ offen, sodass $X|_{U_0}$ ein Homöomorphismus auf sein Bild ist. Sei $C \subset U_0$ ein Kompaktum mit glattem Rand, das Abschluss einer offenen Menge $C^\circ$ ist. Sei außerdem $D \subset \R^n$ kompakt, sodass $X(C) \subset \partial D$. Wir nennen $D$ \emph{Dose} mit \emph{Deckel} $X(C)$ und \emph{Boden} $\partial D \setminus X(C)$. Wir betrachten eine $\Cont^2$-Variation $\ointerval{-\epsilon}{\epsilon} \times U \to \R^n$, $(s, u) \mapsto X^s(u)$ auf $C$ mit $X^0 = X$, sodass gilt:
 
   \begin{itemize}
-    \miniitem{0.37 \linewidth}{$X^s|_{U \setminus C} = X|_{U \setminus C}$}
-    \miniitem{0.6 \linewidth}{$\fa{s \in \ointerval{-\epsilon}{\epsilon}} X^s|_{U_0}$ ist eine Einbettung}
+    \miniitem{0.35 \linewidth}{$X^s|_{U \setminus C} = X|_{U \setminus C}$}
+    \miniitem{0.62 \linewidth}{$\fa{s \in \ointerval{-\epsilon}{\epsilon}} X^s|_{U_0}$ ist eine Einbettung}
   \end{itemize}
 
   Dann ist $X^s(C)$ Flächenstück einer Dose $D^s$, wobei der Boden von $D^s$ mit dem von $D$ übereinstimmt, \dh{} $\partial D^s \setminus X^s(C) = \partial D \setminus X(C)$.
@@ -1349,15 +1349,15 @@ $\implies$ $f$ ist partiell differenzierbar
 \end{prop}
 
 \begin{nota}
-  $\mathcal{C}^0_C(U, \R) = \Set{ f : U \to \R }{ \text{stetig mit } \supp f \text{ kompakt} }$
+  $\Cont^0_C(U, \R) \coloneqq \Set{ f : U \to \R }{ \text{stetig mit } \supp f \text{ kompakt} }$
 \end{nota}
 
 \iffalse
-  $V = \mathcal{C}^0(C, \R) = \Set{ f : C \to \R }{ \text{stetig} }$
+  $V = \Cont^0(C, \R) = \Set{ f : C \to \R }{ \text{stetig} }$
 
   Skalarprodukt:
   \begin{align*}
-    \mathcal{C}^0(C, \R) \times \mathcal{C}^0(C, \R) &\to \R
+    \Cont^0(C, \R) \times \Cont^0(C, \R) &\to \R
     (f_1, f_2) &\mapsto \Int{C}{}{f_1 \cdot f_2}{\A} =: \langle f_1 , f_2 \rangle_{L^2}
   \end{align*}
 \fi
@@ -1365,7 +1365,7 @@ $\implies$ $f$ ist partiell differenzierbar
 \begin{defn}
   Sei $X : U \to \R^n$ eine HF. Dann ist folgende Abbildung ein Skalarprodukt, genannt \emph{$L^2$-Skalarprodukt bzgl. $\d \A$}:
   \[
-    \mathcal{C}^0_C(U, \R) \times \mathcal{C}^0_C(U, \R) \to \R, \quad
+    \Cont^0_C(U, \R) \times \Cont^0_C(U, \R) \to \R, \quad
     (f_1, f_2) \mapsto \Int{C}{}{f_1 \cdot f_2}{\A} =: \langle f_1 , f_2 \rangle_{L^2}
   \]
 \end{defn}
@@ -1383,7 +1383,7 @@ $\implies$ $f$ ist partiell differenzierbar
 % Situation: $C \subset U$ kompakt mit $C = \overline{\C^\circ}$ mit $\C^\circ \opn \R^n$, $\partial C$ glatt
 
 \begin{lem}
-  Sei $f : U \to \R$ eine $\mathcal{C}^2$-Abbildung mit $\supp(f) \subset C$. Wenn $\Int{C}{}{f}{\A} = 0$, dann gibt es eine normale Variation $X^s = X + \tau_s \nu$ mit konstantem Volumen, sodass $f = \delta \tau_s = \langle \delta X^s , \nu \rangle$.
+  Sei $f : U \to \R$ eine $\Cont^2$-Abbildung mit $\supp(f) \subset C$. Wenn $\Int{C}{}{f}{\A} = 0$, dann gibt es eine normale Variation $X^s = X + \tau_s \nu$ mit konstantem Volumen, sodass $f = \delta \tau_s = \langle \delta X^s , \nu \rangle$.
 \end{lem}
 
 \begin{prop}
@@ -1403,7 +1403,7 @@ $\implies$ $f$ ist partiell differenzierbar
 \begin{samepage}
 
 \begin{satz}
-  Sei $X : U \to \R^n$ eine $\mathcal{C}^3$-Hyperfläche mit $U \opn \R^{n-1}$ zusammenhängend, dann sind äquivalent:
+  Sei $X : U \to \R^n$ eine $\Cont^3$-Hyperfläche mit $U \opn \R^{n-1}$ zusammenhängend, dann sind äquivalent:
   \begin{itemize}
     \miniitem{0.59 \linewidth}{$X$ ist minimal bei konst. Volumen.}
     \miniitem{0.36 \linewidth}{$X$ ist eine CMC-Fläche.}
@@ -1417,14 +1417,14 @@ $\implies$ $f$ ist partiell differenzierbar
 
 % Unterkapitel: Etwas Funktionentheorie
 
-% Sei $F : \C \to \C$ eine $\mathcal{C}^1$-Abbildung, $F = u + i v$ mit $u, v : \R \to \R$
+% Sei $F : \C \to \C$ eine $\Cont^1$-Abbildung, $F = u + i v$ mit $u, v : \R \to \R$
 
 % $J_{x+iy} F = \begin{pmatrix} \tfrac{\partial u}{\partial x}(x+iy) & \tfrac{\partial u}{\partial y}(x+iy) \\ \tfrac{\partial v}{\partial x}(x+iy) \tfrac{\partial v}{\partial y}(x+iy) \end{pmatrix}$
 
 % $F$ komplex diff'bar, wenn gilt: $\frac{\partial u}{\partial x} = \frac{\partial v}{\partial y}$ und $\frac{\partial u}{\partial y} = -\frac{\partial v}{\partial x}$ (Cauchy-Riemann-DGL)
 
 \begin{situation}
-  Sei $U \opn \C$, $F : U \to \C$ eine $\mathcal{C}^1$-Funktion. Identifiziere $\C \cong \R^2$ mittels $\left( \begin{smallmatrix} a \\ b \end{smallmatrix} \right) \mapsto a + ib$.
+  Sei $U \opn \C$, $F : U \to \C$ eine $\Cont^1$-Funktion. Identifiziere $\C \cong \R^2$ mittels $\left( \begin{smallmatrix} a \\ b \end{smallmatrix} \right) \mapsto a + ib$.
 \end{situation}
 
 \begin{defn}
@@ -1432,7 +1432,7 @@ $\implies$ $f$ ist partiell differenzierbar
   \[ F'(z_0) \coloneqq \lim_{z \to z_0} \tfrac{F(z) - F(z_0)}{z - z_0} \quad \text{existiert.} \]
 \end{defn}
 
-\begin{nota}[Wirtinger]
+\begin{nota}[\emph{Wirtinger}]
   \begin{minipage}[t]{0.5 \linewidth}
     \begin{itemize}
       \item $\partial_{z} F = \tfrac{1}{2} (\partial_1 F - i \partial_2 F)$
@@ -1450,13 +1450,13 @@ $\implies$ $f$ ist partiell differenzierbar
 \end{nota}
 
 \begin{lem}
-  Sei $F : U \to \C$ eine $\mathcal{C}^2$-Funktion, dann gilt
+  Sei $F : U \to \C$ eine $\Cont^2$-Funktion, dann gilt
   \[ \partial_z \partial_{\overline{z}} F = \tfrac{1}{4} \triangle F = \tfrac{1}{4} (\partial_1 \partial_1 F + \partial_2 \partial_2 F). \]
 \end{lem}
 
 % Vorlesung vom 29.1.2014
 
-% Für $\mathcal{C}^1$-Funktionen $F = (F_1, ..., F_n) : U \to \C^n$
+% Für $\Cont^1$-Funktionen $F = (F_1, \ldots, F_n) : U \to \C^n$
 % machen Definition von komplexer Diff'barkeit, Wirtinger-Notation und obiges Lemma Sinn (komponentenweise)
 
 % Für eine Funktion $F : U \to \R^n$, wobei $U \opn \C$:
@@ -1468,7 +1468,7 @@ $\implies$ $f$ ist partiell differenzierbar
 % \[ \langle \begin{pmatrix} z_1 \\ \vdots \\ z_n \end{pmatrix} , \begin{pmatrix} w_1 \\ \vdots \\ w_n \end{pmatrix} \langle \coloneqq \sum_{j=1}^n z_j w_j \]
 
 \begin{defn}
-  Folgene Abbildung ist symmetrisch und über $\C$ bilinear:
+  Folgende Abbildung ist symmetrisch und über $\C$ bilinear:
   \[
     \langle \blank , \blank \rangle : \C^n \times \C^n \to \C, \quad
     (z, w) \mapsto \langle z, w \rangle \coloneqq \sum_{j=1}^n z_j w_j
@@ -1493,7 +1493,7 @@ $\implies$ $f$ ist partiell differenzierbar
 % Unterkapitel: Konforme Parametrisierungen
 
 \begin{defn}
-  Eine $\mathcal{C}^2$-HF $X : U \to \R^3$ heißt \emph{konform parametrisiert}, wenn es eine $\mathcal{C}^1$-Funktion $\lambda : U \to \R_{>0}$, genannt \emph{konformer Faktor}, gibt, sodass $g = \lambda^2 I_2$, wobei $g$ die 1.\,FF von $X$ ist.
+  Eine $\Cont^2$-HF $X : U \to \R^3$ heißt \emph{konform parametrisiert}, wenn es eine $\Cont^1$-Funktion $\lambda : U \to \R_{>0}$, genannt \emph{konformer Faktor}, gibt, sodass $g = \lambda^2 I_2$, wobei $g$ die 1.\,FF von $X$ ist.
 \end{defn}
 
 \begin{bem}
@@ -1501,7 +1501,7 @@ $\implies$ $f$ ist partiell differenzierbar
 \end{bem}
 
 \begin{lem}
-  Sei $X : U \to \R^3 \subset \C^3$ eine $\mathcal{C}^2$-Hyperfläche. Dann gilt
+  Sei $X : U \to \R^3 \subset \C^3$ eine $\Cont^2$-Hyperfläche. Dann gilt
   \[
     \text{$X$ ist konform parametrisiert}
     \enspace \iff \enspace
@@ -1511,7 +1511,7 @@ $\implies$ $f$ ist partiell differenzierbar
 \end{lem}
 
 \begin{lem}
-  Sei $X : U \to \R^3 \subset \C^3$ eine konform param. $\mathcal{C}^2$-HF. Dann:
+  Sei $X : U \to \R^3 \subset \C^3$ eine konform param. $\Cont^2$-HF. Dann:
   \[ \triangle X = 2 \lambda^2 H \nu. \]
 \end{lem}
 
@@ -1539,7 +1539,7 @@ $\implies$ $f$ ist partiell differenzierbar
 \end{bem}
 
 \begin{defn}
-  Sei $f = (f_1, ..., f_n) : U \to \C^n$. Eine holomorphe Funktion $F = (F_1, ..., F_n) : U \to \C^n$ heißt \emph{Stammfunktion} von $f$, wenn $F_j' = f_j$ für $j = 1, ..., n$.
+  Sei $f = (f_1, \ldots, f_n) : U \to \C^n$. Eine holomorphe Funktion $F = (F_1, \ldots, F_n) : U \to \C^n$ heißt \emph{Stammfunktion} von $f$, wenn $F_j' = f_j$ für $j = 1, \ldots, n$.
 \end{defn}
 
 \begin{nota}
@@ -1562,7 +1562,7 @@ $\implies$ $f$ ist partiell differenzierbar
 
 % Unterkapitel: Assoziierte Familien
 
-% Gegeben: $X : U \to \R^3 \subset \C^3$ eine konform parametrisierte minimale $\mathcal{C}^2$-Hyperfläche, $U$ zusammenhängend
+% Gegeben: $X : U \to \R^3 \subset \C^3$ eine konform parametrisierte minimale $\Cont^2$-Hyperfläche, $U$ zusammenhängend
 % $Y \coloneqq 2 \partial_z X$
 % $X_\Theta \coloneqq \Re(\int Y_\Theta = \Re(\exp(i \Theta) \int Y)) : U \to \R^3$
 % Annahme (Wahl der Translation):
@@ -1574,7 +1574,8 @@ $\implies$ $f$ ist partiell differenzierbar
 % $X_{\Theta + \pi} = - X_{\Theta}$
 
 \begin{defn}
-  Sei $X : U \to \R^3 \subset \C^3$ eine konform parametrisierte minimale $\mathcal{C}^2$-HF und $Y \coloneqq 2 \partial_z X : U \to \C^3 \setminus \{ 0 \}$ (isotrop, holomorph). Sei $\Theta \in \R$, dann ist auch
+  Sei $X : U \to \R^3 \subset \C^3$ eine konform parametrisierte minimale $\Cont^2$-HF und $Y \coloneqq 2 \partial_z X : U \to \C^3 \setminus \{ 0 \}$ (isotrop, holomorph). \\
+  Sei $\Theta \in \R$, dann ist auch
   \[ Y_\Theta : U \to \C^3 \setminus \{ 0 \}, \quad u \mapsto \exp(i \Theta) Y(u) \]
   holomorph und isotrop. Wir erhalten dann eine $2 \pi$-periodische Schar von Minimalflächen durch
   \[ X_{\Theta} = \Re ({\textstyle \int} Y_{\Theta}) = \Re (\exp(i \Theta) {\textstyle \int} Y) : U \to \R^3, \Theta \in \R. \]
@@ -1627,8 +1628,8 @@ $\implies$ $f$ ist partiell differenzierbar
   $Y_1 = \tfrac{1}{2} (Y_{+} + Y_{-}) = \tfrac{h}{2} (\tfrac{1}{g} - g)$, $Y_2 = i \tfrac{h}{2} (\tfrac{1}{g} + g)$
 \fi
 
-\begin{satz}[Weierstraß-Darstellung]
-  Eine konform param. minimale $\mathcal{C}^2$-HF $X : U \to \R^3$ hat (bis auf Translation) die Gestalt
+\begin{satz}[\emph{Weierstraß-Darstellung}]
+  Eine konform param. minimale $\Cont^2$-HF $X : U \to \R^3$ hat (bis auf Translation) die Gestalt
   \[
     X = \Re \left( {\textstyle \int} Y \right)
     \quad \text{mit} \quad
@@ -1644,14 +1645,14 @@ $\implies$ $f$ ist partiell differenzierbar
 \end{beob}
 
 \begin{satz}
-  Sei $U \opn \C$ zusammenhängend, $X : U \to \R^3$ eine konform param. $\mathcal{C}^2$-HF, die durch $h$ und $g$ gegeben ist. Dann gilt $\nu = \Phi \circ g$ für die Gaußabb. $\nu$ von $X$ mit der stereographischen Projektion
+  Sei $U \opn \C$ zusammenhängend, $X : U \to \R^3$ eine konform param. $\Cont^2$-HF, die durch $h$ und $g$ gegeben ist. Dann gilt $\nu = \Phi \circ g$ für die Gaußabb. $\nu$ von $X$ mit der stereographischen Projektion
   \[
     \Phi : \C \to S^2 \subset \R^3 \cong \C \times \R, \quad z \mapsto \tfrac{1}{\abs{z}^2 + 1} (2z, \abs{z}^2 + 1).
   \]
 \end{satz}
 
 \begin{kor}
-  Sei $X$ eine zusammenhängende konform param. minimale $\mathcal{C}^2$-HF im $\R^3$ mit Gaußabb. $\nu$, dann gilt für die Gaußabbildung $\nu_{\Theta}$ der assoziierten Familie $X_{\Theta}$
+  Sei $X$ eine zusammenhängende konform param. minimale $\Cont^2$-HF im $\R^3$ mit Gaußabb. $\nu$, dann gilt für die Gaußabbildung $\nu_{\Theta}$ der assoziierten Familie $X_{\Theta}$
   \[ \nu_{\Theta} = \nu. \]
 \end{kor}
 
