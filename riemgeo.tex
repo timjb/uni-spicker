@@ -28,9 +28,10 @@
 \DeclareMathOperator{\Hol}{Hol} % Holonomiegruppe
 \DeclareMathOperator{\Diff}{Diff}
 \newcommand{\Gie}{\mathfrak{G}} % Lie-G
-\newcommand{\KF}{KF} % Killing-Fields
+\newcommand{\KF}{K\!F} % Killing-Fields
 \DeclareMathOperator{\Lie}{Lie} % Transvektionsgruppe
-\newcommand{\Cont}{\mathcal{C}} % Menge der stetigen/diffbaren Funktionen
+\newcommand{\Cont}{\mathcal{C}} % Menge der stetigen/diff'baren Funktionen
+\newcommand{\LC}{\nabla^{\mathrm{LC}}} % Levi-Civita-Zusammenhang
 
 % Kleinere Klammern
 \delimiterfactor=701
@@ -43,7 +44,7 @@
 % §1. Mannigfaltigkeiten
 
 \begin{defn}
-  Eine \emph{topologische Mannigfaltigkeit} (Mft) ist ein topologischer Raum $M^m$ mit folgenden Eigenschaften:
+  Eine \emph{topologische Mannigfaltigkeit} (Mft) der Dim. $m$ ist ein topologischer Raum $M^m$ mit folgenden Eigenschaften:
   \begin{itemize}
     \item $M^m$ ist \emph{hausdorffsch}, \dh{}
     \begin{align*}
@@ -72,7 +73,7 @@
     \item Für je zwei Karten $(U_j, \phi_j)$ und $(U_k, \phi_k)$ gibt es eine \emph{Kartenwechselabbildung}
     \[ \phi_{kj} \coloneqq \phi_k \circ \phi_j^{-1} |_{\phi_j(U_j \cap U_k)} : \phi_j(U_j \cap U_k) \to \phi_k(U_j \cap U_k). \]
     \item Ein Atlas heißt \emph{differenzierbar}, wenn alle Kartenwechselabbildungen $\Cont^\infty$-Abbildungen sind.
-    \item Ein Atlas $\A$ heißt \emph{differenzierbare Struktur} von $M$, wen gilt: Ist $(\tilde{U}, \tilde{\phi_j})$ eine Karte von $M$ und $\tilde{\A} \coloneqq \A \cup \{ (\tilde{U}, \tilde{\phi_j}) \}$ ein differenzierbarer Atlas, dann gilt $\A = \tilde{A}$.
+    \item Ein Atlas $\A$ heißt \emph{differenzierbare Struktur} von $M$, wenn gilt: Ist $(\tilde{U}, \tilde{\phi_j})$ eine Karte von $M$ und $\tilde{\A} \coloneqq \A \cup \{ (\tilde{U}, \tilde{\phi_j}) \}$ ein differenzierbarer Atlas, dann gilt $\A = \tilde{A}$.
     \item Eine topol. Mft versehen mit einer differenzierbaren Struktur heißt \emph{differenzierbare Mannigfaltigkeit}.
   \end{itemize}
 \end{defn}
@@ -85,12 +86,12 @@
 
 \begin{defn}
   \begin{itemize}
-    \item Eine Abbildung $f : M \to N$ heißt in $x \in M$ \emph{differenzierbar}, wenn es eine Karte $(U_x, \phi : U_x \to \O) \in \A_M$ und eine Karte $(\tilde{U}_{f(x)}, \tilde{\phi} : \tilde{U}_{f(x)} \to \tilde\O) \in \A_N$ gibt, sodass
+    \item Eine Abb. $f : M \to N$ heißt in $x \in M$ \emph{differenzierbar}, wenn es eine Karte $(U_x, \phi : U_x \to \O) \in \A_M$ und eine Karte $(\tilde{U}_{f(x)}, \tilde{\phi} : \tilde{U}_{f(x)} \to \tilde\O) \in \A_N$ gibt, sodass
     \[
       \tilde{\phi} \circ f|_{U_x} \circ \phi^{-1} : \O \to \tilde\O
       \quad \text{differenzierbar ($\Cont^\infty$) ist.}
     \]
-    \item Die Abbildung $f$ heißt \emph{differenzierbar}, falls sie in jedem Punkt $x \in M$ differenzierbar ist.
+    \item Die Abb. $f$ heißt \emph{diff'bar}, wenn sie in allen $x \in M$ diff'bar ist.
   \end{itemize}
 \end{defn}
 
@@ -158,7 +159,7 @@
 \end{kor}
 
 \begin{bem}
-  Sei $c : \ointerval{-\epsilon}{\epsilon} \to M$ eine differenzierbare Kurve. Dann kann man $\dot{c}(0)$ auffassen als Tangentialvektor an $M$ in $c(0)$ mittels
+  Sei $c : \vinterval \to M$ eine differenzierbare Kurve. Dann kann man $\dot{c}(0)$ auffassen als Tangentialvektor an $M$ in $c(0)$ mittels
   \[ \dot{c}(0)[f] \coloneqq \tfrac{\d}{\d t}|_{t=0} (f \circ c). \]
 \end{bem}
 
@@ -173,10 +174,10 @@
 
 \begin{defn}
   Sei $f : M \to N$ diff'bar. Die \emph{Ableitung} von $f$ in $p \in M$ ist %die Abbildung
-  \begin{align*}
-    T_p f = f_{*p} &: T_p M \to T_{f(p)} N, \enspace v \mapsto f_{*p} v\\
-    & \text{wobei } f_{*p}(v).[g] \coloneqq v.[g \circ f].
-  \end{align*}
+  \[
+    T_p f \!=\! f_{*p} : T_p M \to T_{f(p)} N, \enspace v \mapsto f_{*p}, \quad
+     \text{wobei } f_{*p}(v).[g] \coloneqq v.[g \circ f].
+  \]
 \end{defn}
 
 \begin{lem}
@@ -196,17 +197,21 @@
 \begin{satz}
   Sei $M$ eine $m$-dimensionale Mft, $p \in M$ und $(U, \phi)$ eine Karte.
   \begin{itemize}
-    \item Es gilt $T_p M = \Set{ \dot{c}(0) }{ c : \ointerval{-\epsilon}{\epsilon} \to M \text{ diff'bar}, c(0) = p }$
+    \item Es gilt $T_p M = \Set{ \dot{c}(0) }{ c : \ointerval{-\epsilon}{\epsilon} \to M \text{ diff'bar}, \, c(0) = p }$
     \item $\Set{\coord{i}|_p}{i=1, \ldots, n}$ ist eine Basis von $T_p M$.
   \end{itemize}
 \end{satz}
 
 \begin{defn}
-  $TM \coloneqq \bigcup_{p \in M} T_p M$ heißt \emph{Tangentialbündel} von $M$. Die \emph{Fußpunktabbildung} ist die Projektion
-  \[ \pi : TM \to M, v \in T_p M \mapsto p. \]
+  $TM \coloneqq \!\! \bigsqcup_{p \in M} \!\! T_p M$ heißt \emph{Tangentialbündel} von $M$.
 \end{defn}
 
 % Ausgelassen: Bemerkung, dass es sich dabei um eine disjunkte Vereinigung handelt (weil $M$ hausdorffsch)
+
+\begin{defn}
+  Die \emph{Fußpunktabb.} ist die Proj.
+  $\pi : TM \to M, \enspace v \in T_p M \mapsto p$.
+\end{defn}
 
 \begin{defn}
   Ein \emph{Vektorfeld} auf $M$ ist eine Abbildung $X : M \to TM$, sodass $\pi \circ X = \id_M$. Dies ist äquivalent zu $\fa{p \in M} X(p) \in T_p(M)$.
@@ -220,13 +225,13 @@
 
 \begin{defn}
   \begin{itemize}
-    \item Ein Vektorfeld $X$ auf $M$ heißt in $p \in M$ \emph{diff'bar} ($\Cont^\infty$), wenn es eine Karte $(U, \phi)$ um $p$ gibt, sodass die Funktionen $\xi_1, \ldots, \xi^m$ diff'bar ($\Cont^\infty$) sind.
+    \item Ein VF $X$ auf $M$ heißt in $p \in M$ \emph{diff'bar} (bzw. $\Cont^\infty$), wenn es eine Karte $(U, \phi)$ um $p$ gibt, sodass die Funktionen $\xi_1, \ldots, \xi^m$ diff'bar (bzw. $\Cont^\infty$) sind.
     \item $X$ heißt \emph{differenzierbar}, wenn $X$ in allen $p \in M$ diff'bar ist.
   \end{itemize}
 \end{defn}
 
 \begin{lem}
-  Wenn die Koordinatenfunktionen $\xi^1, \ldots, \xi^n$ für eine bestimmte Karte $(U, \phi : U \to \O)$ differenzierbar sind, dann sind sie es für jede andere Karte $(\tilde{U}, \psi : \tilde{U} \to \tilde{O})$ mit $\tilde{U} \subseteq U$.
+  Wenn die Koordinatenfunktionen $\xi^1, \ldots, \xi^n$ für eine bestimmte Karte $(U, \phi : U \to \O)$ differenzierbar sind, dann sind sie es für jede andere Karte $(\tilde{U}, \psi : \tilde{U} \to \tilde{\O})$ mit $\tilde{U} \subseteq U$.
 \end{lem}
 
 \begin{defn}
@@ -247,25 +252,24 @@
 \end{bem}
 
 \begin{lem}
-  Jedes $X \in \chi(M)$ induziert eine Abbildung
+  Jedes $X \in \chi(M)$ induziert eine lineare, derivative Abb.
   \[
     X : \Cont^\infty(M) \to \Cont^\infty(M), \quad
     \phi \mapsto X(\phi) \coloneqq p \mapsto X(p) . [\phi].
   \]
-  Die Abbildung $X$ ist linear und derivativ.
 \end{lem}
 
 \begin{lem}
-  Seien $X, Y \in \chi(M)$ mit $\fa{f \in \Cont^\infty(M)} X(f) = Y(f)$. Dann gilt $X \equiv Y$.
+  %Seien $X, Y \in \chi(M)$ mit $\fa{f \in \Cont^\infty(M)} X(f) = Y(f)$. Dann gilt $X \equiv Y$.
+  $\fa{X, Y \!\in\! \chi(M)\!}\! (\fa{f \!\in\! \Cont^\infty(M)\!}\! X(f) \!=\! Y(f)) \!\iff\! X \equiv Y$
 \end{lem}
 
 \begin{defn}
-  Seien $X, Y \in \chi(M)$. Dann heißt das Vektorfeld
+  Der \emph{Kommutator} (o. \emph{Lie-Klammer}) von $X, Y \in \chi(M)$ ist das Vektorfeld $[X, Y] \in \chi(M)$ definiert durch
   \[
     [X, Y] : \Cont^\infty(M) \to \Cont^\infty(M), \enspace
-    f \mapsto X(Y(f)) - Y(X(f))
+    f \mapsto X(Y(f)) - Y(X(f)).
   \]
-  \emph{Kommutator} oder \emph{Lie-Klammer} von $X$ und $Y$.
 \end{defn}
 
 \begin{satz}
@@ -276,18 +280,18 @@
 % TODO: Dingsda-Identität nachrechnen?
 
 \begin{defn}
-  Sei $X \in \chi(M)$. Eine diff'bare Kurve $c : \ointerval{-\epsilon}{\epsilon} \to M$ heißt \emph{Integralkurve} von $X$, falls
-  \[ \fa{t \in \ointerval{-\epsilon}{\epsilon}} \dot{c}(t) = X_{c(t)}. \]
+  Eine diff'bare Kurve $c : \ointerval{a}{b} \to M$ heißt \emph{Integralkurve} von einem VF $X \in \chi(M)$, falls
+  $\fa{t \in \ointerval{a}{b}} \dot{c}(t) = X_{c(t)}$.
 \end{defn}
 
 \begin{lem}
   Sei $X \in \chi(M)$, $p \in M$ und $v \in T_p M$. Dann hat das AWP
   \[ \dot{c}(t) = X_{c(t)}, \enspace c(0) = p \]
-  eine eindeutige lokale Lösung $c = c_p^X : \ointerval{-\epsilon}{\epsilon} \to M$.
+  eine eindeutige lokale Lösung $c = c_p^X : \vinterval \to M$.
 \end{lem}
 
 \begin{defn}
-  $\Phi_X : U \times \ointerval{-\epsilon}{\epsilon} \to M, \enspace (p, t) \mapsto c_p^X(t)$ heißt \emph{Fluss} von $X$.
+  $\Phi_X : U \times \vinterval \to M, \enspace (p, t) \mapsto c_p^X(t)$ heißt \emph{Fluss} von $X$.
 \end{defn}
 
 % §5. Lie-Algebren und Lie-Gruppen
@@ -351,8 +355,10 @@
 
 \begin{defn}
   Ein Vektorfeld $X \in \chi(G)$ heißt \emph{linksinvariant}, wenn gilt:
-  \[ \fa{g, h \in G} X(g \cdot h) = lg_{*h} X(h). \]
-  Kürzer: $\fa{g \in G} lg_* X = X$.
+  \[
+    \fa{g, h \in G} X(g \cdot h) = lg_{*h} X(h) \quad
+    \text{(kürzer: $\fa{g \in G} lg_* X = X$).}
+  \]
 \end{defn}
 
 \begin{nota}
@@ -360,14 +366,13 @@
 \end{nota}
 
 \begin{bem}
-  Ein linksinvariantes VF $X \in \chi(G)$ ist eindeutig bestimmt durch $X(e)$.
-  Andererseits: Ist $x \in T_e G$, dann gibt es ein linksinvariantes VF $X \in \chi(G)$ mit $X(e) = x$.
-  Somit ist die Abbildung
+  Ein linksinv. VF $X \!\in\! \chi(G)$ ist eindeutig bestimmt durch $X(e)$.
+  Andererseits: Ist $x \in T_e G$, dann gibt es ein linksinv. VF $X \in \chi(G)$ mit $X(e) = x$.
+  Somit gibt es einen VR-Isomorphismus
   \[
     i : \mathcal{L}(G) \to T_e G, \enspace
-    X \mapsto X(e)
+    X \mapsto X(e).
   \]
-  ein Vektorraum-Isomorphismus.
 \end{bem}
 
 \begin{lem}
@@ -379,13 +384,14 @@
 \end{kor}
 
 \begin{nota}
-  $OJ \coloneqq T_e G \cong \mathcal{L}(G)$
+  $\Gie \coloneqq \Lie(G) \coloneqq \mathcal{L}(G) \cong T_e G$
 \end{nota}
 
 % §6. Riemannsche Mannigfaltigkeiten
 
 \begin{defn}
-  Ein Skalarprodukt auf einem Vektorraum $V$ ist eine symmetrische, positiv definite Bilinearform $\langle \blank, \blank \rangle$. Die davon induzierte Norm ist $\norm{v} \coloneqq \sqrt{\abs{\langle v, v \rangle}}$.
+  Ein Skalarprodukt auf einem Vektorraum $V$ ist eine symmetrische, positiv definite Bilinearform $\langle \blank, \blank \rangle$. \\
+  Die davon induzierte Norm ist $\norm{v} \coloneqq \sqrt{\abs{\langle v, v \rangle}}$.
 \end{defn}
 
 \begin{defn}
@@ -424,11 +430,6 @@
   $\Iso(M)$ ist in kan. Weise eine Lie-Gruppe (Myers-Steenrod).
 \end{bem}
 
-\begin{defn}
-  Sei $(M, g)$ eine Riemannsche Mannigfaltigkeit. Dann ist
-  \[ \Iso(M, g) \coloneqq \Set{ f : M \to M }{ \text{$f$ Isometrie} } \]
-\end{defn}
-
 % 6.1.
 \begin{satz}
   Jede diff'bare Mannigfaltigkeit hat eine Riemannsche Metrik.
@@ -442,11 +443,11 @@
 \end{bsp}
 
 \begin{defn}
-  Eine diffbare Abbildung $f : M \to N$ zwischen diff'baren Mften heißt \emph{Immersion}, falls $f_{*p} : T_p M \to T_{f(p)} N$ f.\,a. $p \in M$ injektiv ist.
+  Eine diff'bare Abb. $f : M \to N$ zwischen diff'baren Mften heißt \emph{Immersion}, falls $f_{*p} : T_p M \to T_{f(p)} N$ f.\,a. $p \in M$ injektiv ist.
 \end{defn}
 
 \begin{defn}
-  Angenommen, $N$ ist sogar eine Riemannsche Mft mit Metrik $g_N$. Dann erhalten wir eine Riemannsche Metrik auf $M$, die mit $f$ \emph{zurückgeholte Metrik}, durch
+  Angenommen, $N$ ist sogar eine Riem. Mft mit Metrik $g_N$. Dann erhalten wir eine Riem. Metrik auf $M$, die mit $f$ \emph{zurückgeholte Metrik}, durch
   \[ (f^* g_N)_p (v, w) \coloneqq g_{N,f(p)}(f_{*p}(v), f_{*p}(w)). \]
 \end{defn}
 
@@ -467,11 +468,11 @@
 \end{defn}
 
 \begin{defn}
-  Sei $(M, g)$ eine Riemannsche Mft. Dann ist der \emph{Riemannsche Abstand} gegeben durch die Metrik
+  Der \emph{Riem. Abstand} auf $(M, g)$ ist geg. durch die Metrik
   \begin{align*}
     d_g : M \times M \to \R, \quad
     (p, q) \mapsto \inf \{\, L(\gamma) \,\,|\,\, & \gamma : \abinterval \to M \text{ stückweise } \Cont^{1}\\
-    & \left. \text{mit $\gamma(a) = p$ und $\gamma(b) = q$} \, \right\}.
+    & \left. \text{mit $\gamma(a) \!=\! p$ und $\gamma(b) \!=\! q$} \, \right\}.
   \end{align*}
 \end{defn}
 
@@ -482,7 +483,7 @@
 % §7. Kovariante Ableitungen
 
 \begin{defn}
-  Ein \emph{Zusammenhang} (kov. Ableitung) ist eine Abb.
+  Ein \emph{Zusammenhang} (kov. Ableitung) ist eine Abbildung
   \[
     \nabla : \chi(M) \times \chi(M) \to \chi(M), \quad
     (X, Y) \mapsto \nabla_X Y
@@ -505,14 +506,14 @@
 \end{defn}
 
 \begin{defn}
-  Ein Zusammenhang $\nabla$ auf einer Riemannschen Mft. $(M, g)$ heißt \emph{metrisch}, wenn gilt:
-  \[ g(\nabla_X Y, Z) + g(Y, \nabla_X Z) = X g(Y, Z) \]
+  Ein Zshg $\nabla$ auf einer Riem. Mft. heißt \emph{metrisch}, wenn
+  \[ \fa{X, Y, Z \in \chi(M)} g(\nabla_X Y, Z) + g(Y, \nabla_X Z) = X g(Y, Z). \]
 \end{defn}
 
 \begin{thm}
-  Auf jeder Riem. Mft. $(M, g)$ gibt es genau einen torisionsfreien, metrischen Zusammenhang. Für diesen gilt:
+  Auf jeder Riem. Mft. $(M, g)$ gibt es genau einen torsionsfreien, metrischen Zusammenhang. Für diesen gilt:
   \begin{align*}
-    2 g(\nabla_X Y, Z) = & X g(Y, Z) + Y g(X, Z) - Z g(X, Y)\\
+    2 g(\nabla_X Y, Z) = \, & X g(Y, Z) + Y g(X, Z) - Z g(X, Y)\\
     & + g([X, Y], Z) + g([Z, X], Y) + g([Z, Y], X)
   \end{align*}
 \end{thm}
@@ -594,7 +595,7 @@
   \[
     c(0) = p, \enspace
     \dot{c}(0) = 0 \enspace \text{und} \enspace
-    \fa{t \in \ointerval{-\epsilon}{\epsilon}} Y(c(t)) = \tilde{Y}(c(t)),
+    \fa{t \in \vinterval} Y(c(t)) = \tilde{Y}(c(t)),
   \]
   dann gilt $\nabla_v Y = \nabla_v \tilde{Y}$.
 \end{satz}
@@ -653,7 +654,7 @@
 % §10. Parallelverschiebung
 
 \begin{defn}
-  Sei $\nabla$ ein Zusammenhang auf $M$. Dann heißt $X \in \chi_C$ \emph{parallel (längs $c$)}, wenn $\tfrac{D X}{\d t} = 0$.
+  $X \in \chi_C$ heißt \emph{parallel} längs $c$ (bzgl. $\nabla$), wenn $\tfrac{D X}{\d t} = 0$.
 \end{defn}
 
 \begin{bem}
@@ -692,12 +693,11 @@
 \end{satz}
 
 \begin{defn}
-  Sei $ : \abinterval \to M$ diff'bar. Die Abbildung
+  Die \emph{Parallelverschiebung} längs einer diff'baren Kurve $c : \abinterval \to M$ bzgl. eines Zshg $\nabla$ ist
   \[
     P_c : T_{c(a)} M \to T_{c(b)} M, \enspace v \mapsto X^{v}(b),
-    \enspace \text{wobei} \enspace \tfrac{D X^v}{\d t} \equiv 0 \text{ und } X^{v}(a) = v,
+    \enspace \text{wobei} \enspace \tfrac{D X^v}{\d t} \!\equiv\! 0 \text{ und } X^{v}(a) \!=\! v.
   \]
-  heißt \emph{Parallelverschiebung} längs $c$ bzgl. $\nabla$.
 \end{defn}
 
 % 10.1 bis
@@ -713,7 +713,7 @@
 \end{satz}
 
 \begin{bem}
-  Wir können nun die Definition der Ableitung als Limes des Differenzenquotienten auf Mften übertragen: Sei $v \in T_x M$, $X \in \chi(M)$ und $c : \ointerval{-\epsilon}{\epsilon} \to M$ mit $c(0) = x$ und $\dot{c}(0) = v$. Dann ist
+  Wir können nun die Definition der Ableitung als Limes des Differenzenquotienten auf Mften übertragen: Sei $v \in T_x M$, $X \in \chi(M)$ und $c : \vinterval \to M$ mit $c(0) = x$ und $\dot{c}(0) = v$. Dann ist
   \[ \nabla_v X = \lim_{t \to 0} \frac{P_{c(t)}^{-1}(X(c(t))) - X(c(0))}{t} \]
 \end{bem}
 
@@ -752,7 +752,7 @@
 
 % 11.1
 \begin{satz}
-  Zu jedem $p \in M$ und $v \in T_p M$ gibt es ein $\epsilon > 0$ und genau eine Geodäte $c : \ointerval{-\epsilon}{\epsilon} \to M$ mit $c(0) = p$ und $\dot{c}(0) = v$.
+  Zu jedem $p \in M$ und $v \in T_p M$ gibt es ein $\epsilon > 0$ und genau eine Geodäte $c : \vinterval \to M$ mit $c(0) = p$ und $\dot{c}(0) = v$.
 \end{satz}
 
 % 11.2
@@ -860,7 +860,7 @@
   \]
   Sie heißt \emph{Variation mit festen Endpunkten}, wenn zudem gilt:
   \[
-    \fa{s \in \ointerval{-\epsilon}{\epsilon}}
+    \fa{s \in \vinterval}
     \alpha(s, a) = c(a) \wedge \alpha(s, b) = c(b)
   \]
 \end{defn}
@@ -969,7 +969,7 @@
 
 % 14.1
 \begin{satz}[\emph{Gaußlemma}] % 1827
-  Sei $(M, g)$ eine zshgde Riem. Mft, $\nabla = \nabla^{LC}$. Sei $p \in M$ und $\epsilon > 0$, sodass
+  Sei $(M, g)$ eine zshgde Riem. Mft, $\nabla = \LC$. Sei $p \in M$ und $\epsilon > 0$, sodass
   \[ \Exp_p|_{B_{\epsilon}(0)} : B_{\epsilon}(0) \to \Exp_p(B_{\epsilon}(0)) \]
   ein Diffeo ist. Dann schneiden die radialen Geodäten
   \[ t \mapsto \Exp_p(tv) = v_v(t), \quad v \in T_p M \setminus \{ 0 \},  \]
@@ -1039,12 +1039,11 @@
 % §16. Krümmung
 
 \begin{defn}
-  Sei $\nabla$ ein Zusammenhang auf $M$, dann heißt
+  Der \emph{Krümmungstensor} von einem Zshg $\nabla$ auf $M$ ist
   \begin{align*}
     R^{\nabla} & = R : \chi(M) \times \chi(M) \times \chi(M) \to \chi(M) \\
-    (X, Y, Z) & \mapsto R(X, Y)Z \coloneqq \nabla_X (\nabla_Y Z) - \nabla_Y (\nabla_X Z) - \nabla_{[X, Y]} Z
+    (X, Y, Z) & \mapsto R(X, Y)Z \coloneqq \nabla_X (\nabla_Y Z) - \nabla_Y (\nabla_X Z) - \nabla_{[X, Y]} Z.
   \end{align*}
-  \emph{Krümmungstensor} von $\nabla$.
 \end{defn}
 
 \begin{bem}
@@ -1052,7 +1051,7 @@
 \end{bem}
 
 \begin{nota}
-  $R(u, v)w \coloneqq (R(X, Y)Z)(p)$, wobei $X, Y, Z \in \chi(M)$ mit $X(p) = u$, $Y(p) = u$, $Z(p) = w$.
+  $R_p(u, v)w \coloneqq (R(X, Y)Z)(p)$ für $u, v, w \in T_p M$, wobei $X, Y, Z \in \chi(M)$ mit $X(p) \!=\! u$, $Y(p) \!=\! u$, $Z(p) \!=\! w$.
 \end{nota}
 
 % 16.1
@@ -1087,7 +1086,7 @@
 % 17.1
 \begin{satz}
   Sei $\alpha : \vinterval \times \abinterval \to M$ eine glatte Variation einer Kurve $\alpha_0 : \abinterval \to M, t \mapsto \alpha(0, t)$.
-  Sei $X : \ointerval{-\epsilon,\epsilon} \times \abinterval \to TM$ ein VF längs $\alpha$. Dann gilt:
+  Sei $X : \vinterval \times \abinterval \to TM$ ein VF längs $\alpha$. Dann gilt:
   \[
     \frac{D}{\partial s} \frac{DX}{\partial t} - \frac{D}{\partial t} \frac{DX}{\partial s} = R\left(\frac{\partial \alpha}{\partial s}, \frac{\partial \alpha}{\partial t}\right) X
   \]
@@ -1166,7 +1165,7 @@
 % §19. Jacobi-Felder
 
 \begin{defn}
-  Sei $(M, g)$ eine Riem Mft, $c : I \to M$ glatt, $Y \in \chi_c$ heißt \emph{Jacobi-Feld}, wenn die \emph{Jacobi-Gleichung} gilt:
+  Sei $(M, g)$ eine Riem. Mft, $c : I \to M$ glatt, $Y \in \chi_c$ heißt \emph{Jacobi-Feld}, wenn die \emph{Jacobi-Gleichung} gilt:
   \[
     Y'' + R(Y, \dot{c}) \dot{c} = 0 \quad
     \left( Y'' \coloneqq \tfrac{D}{\d t} \left( \tfrac{D Y}{\d t} \right) \right).
@@ -1203,7 +1202,7 @@
 
 % 20.1
 \begin{satz}
-  Sei $Y$ ein Jacobifeld längs Geodäten $c$ in $(M, g)$. \\
+  Sei $Y$ ein Jacobifeld längs einer Geodäten $c$ in $(M, g)$. \\
   Wenn $\sec \leq 0$, dann gilt
   \begin{itemize}
     \item $(t \mapsto \norm{Y(t)}^2)$ ist konvex.
@@ -1237,7 +1236,7 @@
 
 % 20.4
 \begin{satz}
-  Sei $\pi : (M_1, g_1) \to (M_2, g_2)$ eine surj. lokale Isometrie zw. Riem Mften. Wenn $M_1$ vollständig ist, dann ist $\pi$ eine Überlagerung.
+  Sei $\pi : (M_1, g_1) \to (M_2, g_2)$ eine surjektive lokale Isometrie zwischen Riem. Mften. Wenn $M_1$ vollständig ist, dann ist $\pi$ eine Riemannsche Überlagerung.
 \end{satz}
 
 % 20.5
@@ -1258,12 +1257,12 @@
 
 % 21.1
 \begin{satz}[\emph{Synge} 1936]
-  Jede zshgde kompakte orientierte Riem Mft gerader Dimension mit $\sec > 0$ ist einfach zshgd.
+  Jede zshgde kompakte orientierte Riem. Mft gerader Dimension mit $\sec > 0$ ist einfach zshgd.
 \end{satz}
 
 % 21.2
 \begin{satz}[\emph{Weinstein} 1968, \emph{Synge} 1936]
-  Sei $M^n$ kompakte, zshgde, orientierte Riem Mft, $\sec > 0$, $n$ gerade. Sei $f : M^n \to M^n$ eine orientierungstreue Isometrie. Dann hat $f$ einen Fixpunkt.
+  Sei $M^n$ kompakte, zshgde, orientierte Riem. Mft, $\sec > 0$, $n$ gerade. Sei $f : M^n \to M^n$ eine orientierungstreue Isometrie. Dann hat $f$ einen Fixpunkt.
 \end{satz}
 
 % Vorlesung vom 16.1.2015
@@ -1272,11 +1271,11 @@
 
 % 22.1.
 \begin{prop}
-  Sei $(M, g)$ eine vollständige Riem Mft, $p \in M$. Seien $f, g \in \Iso(M)$. Wenn $f(p) = g(p)$ und $f_{*p} = g_{*p}$, dann gilt $f \equiv g$.
+  Sei $(M, g)$ eine vollständige Riem. Mft, $p \in M$. Seien $f, g \in \Iso(M)$. Wenn $f(p) = g(p)$ und $f_{*p} = g_{*p}$, dann gilt $f \equiv g$.
 \end{prop}
 
 \begin{defn}
-  Eine zshgde Riem Mft $P$ heißt \emph{Symmetrischer Raum}, wenn
+  Eine zshgde Riem. Mft $P$ heißt \emph{Symmetrischer Raum}, wenn
   \[
     \fa{p \in P} \ex{s_p \in \Iso(P)}
     s_p(p) = ß \enspace \wedge \enspace (s_p)_{*p} = - \id_{T_p M}.
@@ -1295,7 +1294,7 @@
 
 % 22.3
 \begin{lem}
-  Sei $P$ ein symm. Raum, $\gamma : \vinterval \to P$ eine Geodäte, $\gamma(0) = p$, $\tau \in \vinterval$, $q \coloneqq \gamma(\tau)$. Dann gilt $(s_q \circ s_p)(\gamma(t)) = \gamma(t + 2 \tau)$, wenn $t + 2 \tau \in \vinterval$.
+  Sei $P$ ein sym. Raum, $\gamma : \vinterval \to P$ eine Geodäte, $\gamma(0) = p$, $\tau \in \vinterval$, $q \coloneqq \gamma(\tau)$. Dann gilt $(s_q \circ s_p)(\gamma(t)) = \gamma(t + 2 \tau)$, wenn $t + 2 \tau \in \vinterval$.
 \end{lem}
 
 \begin{kor}
@@ -1303,7 +1302,7 @@
 \end{kor}
 
 \begin{defn}
-  Eine Riem Mft heißt \emph{homogen} (homogener Raum), wenn
+  Eine Riem. Mft heißt \emph{homogen} (homogener Raum), wenn
   \[ \fa{p, q \in P} \ex{f \in \Iso(M, g)} f(p) = q. \]
 \end{defn}
 
@@ -1314,13 +1313,17 @@
 
 % 22.6
 \begin{lem}
-  Sei $P$ ein symm Raum, $p, q \in P$, $f \in \Iso(P)$ mit $f(p) = q$. Dann gilt $s_q = f \circ s_p \circ f^{-1}$.
+  Sei $P$ ein symm. Raum, $p, q \in P$, $f \in \Iso(P)$ mit $f(p) = q$. Dann gilt $s_q = f \circ s_p \circ f^{-1}$.
 \end{lem}
 
 % 22.7
 \begin{kor}
-  Ist $(M, g)$ eine homogene zshgde Riem Mft, sodass
-  \[ \ex{m \in M} \ex{s_m \in \Iso(M)} s_m(m) = m \enspace \wedge \enspace (s_m)_{*m} = - \id_{T_p M}. \]
+  Ist $(M, g)$ eine homogene zshgde Riem. Mft, sodass
+  \[
+    \ex{m \!\in\! M} \ex{s_m \!\in\! \Iso(M)} s_m(m) = m
+    \enspace \text{und} \enspace
+    (s_m)_{*m} = - \id_{T_p M}.
+  \]
   Dann ist $M$ ein symmetrischer Raum.
 \end{kor}
 
@@ -1333,7 +1336,7 @@
 \end{defn}
 
 \begin{bsp}
-  Sei $(M, g)$ Riem, $\nabla = \nabla^{LC}$. Dann gilt $\nabla g = 0$ ($\nabla$ metrisch).
+  Sei $(M, g)$ Riem, $\nabla = \LC$. Dann gilt $\nabla g = 0$ ($\nabla$ metrisch).
 \end{bsp}
 
 \begin{defn}
@@ -1341,7 +1344,7 @@
 \end{defn}
 
 \begin{satz}
-  $P$ symmetrisch $\implies$ $\nabla^{LC} R = 0$
+  $P$ symmetrisch $\implies$ $\LC R = 0$
 \end{satz}
 
 \begin{bem}
@@ -1402,7 +1405,7 @@
 \end{lem}
 
 \begin{defn}
-  Sei $\gamma$ eine Geodäte. Die Ein-Parameter-UG $t^\gamma$ von $\Iso(P)$ heißt \emph{Transvektion} längs $\gamma$.
+  $t^\gamma : \R \to \Iso(P)$ heißt \emph{Transvektion} längs $\gamma$.
 \end{defn}
 
 % 23.4
@@ -1445,9 +1448,9 @@
   \[ \Iso_q(M) = \Set{ f \circ g \circ f^{-1} }{ g \in \Iso_p(M) }. \]
 \end{lem}
 
-\begin{bem}
+\begin{kor}
   Ist $M$ homogen, so sind alle Isotropiegruppen isomorph.
-\end{bem}
+\end{kor}
 
 \begin{bem}
   Sei $M$ zshgd, vollständig. Dann ist
@@ -1505,7 +1508,7 @@
 \end{defn}
 
 \begin{defn}
-  Eine Darstellung $\rho : G \to \GL(V)$ einer Gruppe heißt \emph{irreduzibel}, wenn gilt:
+  Eine Darstellung $\rho : G \to \GL(V)$ heißt \emph{irreduzibel}, wenn
   \[ \fa{U \subset V \text{ UVR}} (\fa{g \in G} \rho(g)(U) = U) \implies U \in \{ \{ 0 \}, V \}. \]
 \end{defn}
 
@@ -1514,7 +1517,7 @@
   \[ M \cong M_0 \times M_1 \times \ldots \times M_k \quad \text{mit} \]
   \begin{itemize}
     \item $M_0$ ist ein euklidischer VR (evtl. $\{ 0 \}$)
-    \item $M_1, \ldots, M_k$ sind vollständige, einfach zshgde, unzerlegbare (im Sinne dieses Satzes) Riem Mft, für die gilt:
+    \item $M_1, \ldots, M_k$ sind vollständige, einfach zshgde, unzerlegbare (im Sinne dieses Satzes) Riem. Mft, für die gilt:
     $\Hol_{p_j}(M_j)$ wirkt irreduzibel auf $T_{p_j} M_j$.
   \end{itemize}
 \end{satz}
@@ -1532,7 +1535,7 @@
 
 % 23.12
 \begin{lem}
-  Sei $(M, g)$ ein Isotropie-irreduzibler homogener Raum und $B : TM \times TM \to \R$ ein symmetrischer $(0,2)$-Tensor.
+  Sei $(M, g)$ ein Isotropie-irreduzibler homogener Raum und $B : TM \times TM \to \R$ ein symmetrischer $(0,2)$-Tensor. \\
   Angenommen, $B$ ist Isometrie-invariant, \dh{}
   \[ \fa{f \!\in\! \Iso(P)} \fa{p \!\in\! M} \fa{x, y \!\in\! T_p M} B_{f(p)}(f_{*p}x, f_{*p}y) = B_p(x, y). \]
   Dann gilt $\ex{\lambda \in \R} B = \lambda \cdot g$.
@@ -1548,7 +1551,7 @@
 % §24. Killing-Felder
 
 \begin{defn}
-  Eine \emph{Wirkung} einer eine Lie-Gruppe $G$ auf einer diff'bar Mft $M$ ist ein Gruppenhomomorphismus $\phi : G \to \Diff(M)$, sodass $G \times M \to M, \enspace (g, m) \mapsto \phi(g)(m)$ glatt ist.
+  Eine \emph{Wirkung} einer eine Lie-Gruppe $G$ auf einer diff'baren Mft $M$ ist ein Gruppenhomomorphismus $\phi : G \to \Diff(M)$, sodass $G \times M \to M, \enspace (g, m) \mapsto \phi(g)(m)$ glatt ist.
 \end{defn}
 
 \begin{defn}
@@ -1575,7 +1578,7 @@
 
 % 24.3
 \begin{lem}
-  Jede 1-Param-UG $\phi : \R \to G$ definiert ein links-inv. VF $X \in \chi(G)$, dessen Integralkurve durch $e$ gerade $\phi$ ist: $c_e = \phi$.
+  Jede 1-Param-UG $\phi : \R \to G$ definiert ein linksinv. VF $X \in \chi(G)$, dessen Integralkurve durch $e$ gerade $\phi$ ist: $c_e = \phi$.
 \end{lem}
 
 \begin{fazit}
@@ -1597,10 +1600,10 @@
 % Vorlesung vom 28.1.2015
 
 \begin{defn}
-  Sei $(M, g)$ eine Riem. Mft. Ein VF $X \in \chi(M)$ heißt \emph{Killing-Feld}, wenn die lokalen Flüsse $\Phi_t$ von $X$ aus lokalen Isometrien bestehen, \dh{}
+  Ein VF $X \in \chi(M)$ heißt \emph{Killing-Feld}, wenn die lokalen Flüsse $\Phi_t$ von $X$ aus lokalen Isometrien bestehen, \dh{}
   \[
     \fa{x \in U} \fa{v, w \in T_x M}
-    g_{\Phi_t(x)}(\Phi_{t*} v, \Phi_{t*} w) = g_x(v, w)
+    g_{\Phi_t(x)}(\Phi_{t*} v, \Phi_{t*} w) = g_x(v, w).
   \]
 \end{defn}
 
@@ -1628,7 +1631,7 @@
 
 % 24.5
 \begin{satz}
-  Sei $P$ ein sym. Raum, $G \coloneqq \Iso(P)$, $\Gie \cong T_e G$ die Lie-Algebra von $G$. Dann ist die Abbildung
+  Sei $P$ ein sym. Raum, $G \coloneqq \Iso(P)$, $\Gie \coloneqq \mathcal{L}(G) \cong T_e G$ die Lie-Algebra von $G$. Dann ist die Abbildung
   \[
     \iota : \Gie \to \KF(P), \quad
     x \mapsto (X : p \mapsto \tfrac{\d}{\d t}|_0 \exp(tx).p)
@@ -1648,25 +1651,25 @@
   \end{align*}
 \end{defn}
 
-% Ziel: $\Gie = k_p \oplus \mathcal{F}_p$ als direkte Summe von UVRen
-
 % 24.6
 \begin{lem}
   Sei $P$ ein symmetrischer Raum, $p \in P$. Dann gilt
-  \[ \fa{v \in T_p P} \exu{\tilde{v} \in \mathcal{P}_p} \fa{s \in \R} \exp(s \tilde{v}) = t^{\gamma_v}(s). \]
+  \[ \fa{v \in T_p P} \exu{\tilde{v} \in p_p} \fa{s \in \R} \exp(s \tilde{v}) = t^{\gamma_v}(s). \]
 \end{lem}
 
 % Vorlesung vom 30.1.2015
 
 % 24.7
 \begin{prop}
-  $k_p = \mathfrak{G}_p \coloneqq$ Lie-Algebra von $\Iso_p(P)$.
+  $k_p = \mathfrak{G}_p \coloneqq \mathcal{L}(\Iso_p(P)) \cong T_e \Iso_p(P)$
 \end{prop}
 
-% 24.8
+% 24.8 (ausgelassen, da Teil der nächsten Proposition)
+\iffalse
 \begin{lem}
   $p_p \cap k_p = \{ 0 \}$
 \end{lem}
+\fi
 
 % 24.9
 \begin{prop}
@@ -1675,11 +1678,9 @@
 
 % 24.10
 \begin{prop}[\emph{Cartan-Relationen}]\mbox{}\\
-  \begin{itemize}
-    \miniitem{0.32 \linewidth}{$[k_p, k_p]_\Gie \subseteq k_p$}
-    \miniitem{0.32 \linewidth}{$[k_p, p_p]_\Gie \subseteq p_p$}
-    \miniitem{0.32 \linewidth}{$[p_p, p_p]_\Gie \subseteq k_p$}
-  \end{itemize}
+  \inlineitem{$[k_p, k_p]_\Gie \subseteq k_p$} \quad
+  \inlineitem{$[k_p, p_p]_\Gie \subseteq p_p$} \quad
+  \inlineitem{$[p_p, p_p]_\Gie \subseteq k_p$}
 \end{prop}
 
 % 24.11
@@ -1690,9 +1691,9 @@
 
 % 24.12
 \begin{prop}
-  Sei $P$ ein symm. Raum, $p \in P$. Dann ist
+  Sei $P$ ein symmetrischer Raum, $p \in P$. Dann ist
   \[
-    \tau_p : p_p \to T_p P, \quad
+    R_p : p_p \to T_p P, \quad
     x \mapsto \iota(x)(p)
   \]
   ein VR-Isomorphismus und es gilt
@@ -1700,18 +1701,20 @@
 \end{prop}
 
 \begin{kor}
-  Sei $P$ ein symm. Raum. Dann ist
+  Sei $P$ ein symmetrischer Raum. Dann ist
   \[
     R_p(a, b) : T_p P \to T_p P, \quad
     x \mapsto R_p(a, b) x
   \]
-  eine Derivation von $R_p$, \dh{} $\forall \, A, B, X, Y, Z \in \chi(P)$ gilt
+  eine Derivation von $R_p$, \dh{} für alle $A, B, X, Y, Z \in \chi(P)$ gilt
   \begin{align*}
     R(A, B)(R(X, Y)Z) = \, & R(R(A, B)X, Y)Z + R(X, R(A, B)Y)Z \\
     & + R(X, Y)(R(A, B)Z).
   \end{align*}
 \end{kor}
 
-% TODO: Konstruktion symm. Räume
+% §25. Konstruktion symmetrischer Räume
+
+
 
 \end{document}
