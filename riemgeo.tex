@@ -73,7 +73,7 @@
     \item Für je zwei Karten $(U_j, \phi_j)$ und $(U_k, \phi_k)$ gibt es eine \emph{Kartenwechselabbildung}
     \[ \phi_{kj} \coloneqq \phi_k \circ \phi_j^{-1} |_{\phi_j(U_j \cap U_k)} : \phi_j(U_j \cap U_k) \to \phi_k(U_j \cap U_k). \]
     \item Ein Atlas heißt \emph{differenzierbar}, wenn alle Kartenwechselabbildungen $\Cont^\infty$-Abbildungen sind.
-    \item Ein Atlas $\A$ heißt \emph{differenzierbare Struktur} von $M$, wenn gilt: Ist $(\tilde{U}, \tilde{\phi_j})$ eine Karte von $M$ und $\tilde{\A} \coloneqq \A \cup \{ (\tilde{U}, \tilde{\phi_j}) \}$ ein differenzierbarer Atlas, dann gilt $\A = \tilde{A}$.
+    \item Ein Atlas $\A$ heißt \emph{differenzierbare Struktur} von $M$, wenn gilt: Ist $(\tilde{U}, \tilde{\phi_j})$ eine Karte von $M$ und $\tilde{\A} \coloneqq \A \cup \{ (\tilde{U}, \tilde{\phi_j}) \}$ ein differenzierbarer Atlas, dann gilt $\A = \tilde{\A}$.
     \item Eine topol. Mft versehen mit einer differenzierbaren Struktur heißt \emph{differenzierbare Mannigfaltigkeit}.
   \end{itemize}
 \end{defn}
@@ -81,7 +81,7 @@
 % §2. Differenzierbare Abbildungen
 
 \begin{nota}
-  Seien ab jetzt $M^m$ und $N^n$ differenzierbare Mften der Dimensionen $m$ und $n$
+  Seien ab jetzt $M^m$ und $N^n$ differenzierbare Mften der Dimensionen $m$ und $n$.
 \end{nota}
 
 \begin{defn}
@@ -225,7 +225,7 @@
 
 \begin{defn}
   \begin{itemize}
-    \item Ein VF $X$ auf $M$ heißt in $p \in M$ \emph{diff'bar} (bzw. $\Cont^\infty$), wenn es eine Karte $(U, \phi)$ um $p$ gibt, sodass die Funktionen $\xi_1, \ldots, \xi^m$ diff'bar (bzw. $\Cont^\infty$) sind.
+    \item Ein VF $X$ auf $M$ heißt in $p \in M$ \emph{diff'bar} (bzw. $\Cont^\infty$), wenn es eine Karte $(U, \phi)$ um $p$ gibt, sodass die Funktionen $\xi^1, \ldots, \xi^n$ diff'bar (bzw. $\Cont^\infty$) sind.
     \item $X$ heißt \emph{differenzierbar}, wenn $X$ in allen $p \in M$ diff'bar ist.
   \end{itemize}
 \end{defn}
@@ -591,10 +591,10 @@
 \end{nota}
 
 \begin{satz}
-  Sei $\nabla$ ein Zusammenhang auf $M$. Sei $p \in M$, $v \in T_p M$ und $Y, \tilde{Y} \in \chi(M)$. Falls für eine diff'bare Kurve $c : \ointerval{-\epsilon}{\epsilon} \to M$ gilt
+  Sei $\nabla$ ein Zusammenhang auf $M$. Sei $p \in M$, $v \in T_p M$ und $Y, \tilde{Y} \in \chi(M)$. Falls für eine diff'bare Kurve $c : \vinterval \to M$ gilt
   \[
     c(0) = p, \enspace
-    \dot{c}(0) = 0 \enspace \text{und} \enspace
+    \dot{c}(0) = v \enspace \text{und} \enspace
     \fa{t \in \vinterval} Y(c(t)) = \tilde{Y}(c(t)),
   \]
   dann gilt $\nabla_v Y = \nabla_v \tilde{Y}$.
@@ -654,7 +654,7 @@
 % §10. Parallelverschiebung
 
 \begin{defn}
-  $X \in \chi_C$ heißt \emph{parallel} längs $c$ (bzgl. $\nabla$), wenn $\tfrac{D X}{\d t} = 0$.
+  $X \in \chi_c$ heißt \emph{parallel} längs $c$ (bzgl. $\nabla$), wenn $\tfrac{D X}{\d t} = 0$.
 \end{defn}
 
 \begin{bem}
@@ -684,7 +684,7 @@
 % 10.1
 \begin{satz}
   Sei $t_0 \in I = \ointerval{a}{b}$ und $v \in T_{c(t_0)} M$ vorgegeben. \\
-  Dann gibt es genau ein VF $X \in \chi_X$ mit
+  Dann gibt es genau ein VF $X \in \chi_c$ mit
   \[
     \tfrac{D X}{\d t} \equiv 0
     \quad \text{und} \quad
@@ -757,7 +757,7 @@
 
 % 11.2
 \begin{satz}
-  Seien $c_{1,2} : I_{1,2} \to M$ zwei Geodäten bzgl $\nabla$ mit $0 \in I_1 \cap I_2$. Falls $c_1(0) = c_2(0)$ und $\dot{c}_1(0) = \dot{c}_2(0)$, dann gilt $c_1|_{I_1 \cap I_2} \equiv c_1|_{I_1 \cap I_2}$.
+  Seien $c_{1,2} : I_{1,2} \to M$ zwei Geodäten bzgl $\nabla$ mit $0 \in I_1 \cap I_2$. Falls $c_1(0) = c_2(0)$ und $\dot{c}_1(0) = \dot{c}_2(0)$, dann gilt $c_1|_{I_1 \cap I_2} \equiv c_2|_{I_1 \cap I_2}$.
 \end{satz}
 
 % 11.3
@@ -766,7 +766,7 @@
   \[
     c_v : I_v \to M
     \quad \text{mit} \quad
-    c(0) = p, \enspace \dot{c}_v(0) = v,
+    c_v(0) = p, \enspace \dot{c}_v(0) = v,
   \]
   die maximal im folgenden Sinn ist: Für jede Geodäte $c : I \to M$ mit $\dot{c}(0) = v$ gilt: $I \subseteq I_v$ und $c = c_v|_I$.
 \end{satz}
@@ -972,7 +972,7 @@
   Sei $(M, g)$ eine zshgde Riem. Mft, $\nabla = \LC$. Sei $p \in M$ und $\epsilon > 0$, sodass
   \[ \Exp_p|_{B_{\epsilon}(0)} : B_{\epsilon}(0) \to \Exp_p(B_{\epsilon}(0)) \]
   ein Diffeo ist. Dann schneiden die radialen Geodäten
-  \[ t \mapsto \Exp_p(tv) = v_v(t), \quad v \in T_p M \setminus \{ 0 \},  \]
+  \[ t \mapsto \Exp_p(tv) = c_v(t), \quad v \in T_p M \setminus \{ 0 \},  \]
   die Hyperflächen $\Exp_p(S_\rho(0))$, $\rho \in \ointerval{0}{\epsilon}$ orthogonal.
 \end{satz}
 
@@ -980,13 +980,13 @@
 \begin{satz}
   Seien $p \in M$, $\epsilon > 0$, $\rho \in \cointerval{0}{\epsilon}$ wie eben. Dann ist
   \[
-    c_v|_{\cinterval{0}{\delta}} : \cinterval{0}{\delta} \to M, \quad
+    c_v|_{\cinterval{0}{\rho}} : \cinterval{0}{\rho} \to M, \quad
     t \mapsto c_v(t) = \Exp_p(t v) \qquad
     (v \in T_p M, \norm{v} = 1)
   \]
   die kürzeste Verbindung ihrer Endpunkte, genauer: \\
-  Es gilt $\delta = L(c_v|_{\cinterval{0}{\delta}}) \leq L(\gamma)$ für jedes $\gamma : \abinterval \to M$ stückweise glatt mit $\gamma(a) = p$, $\gamma(b) = c_v(\delta)$.
-  Gleichheit gilt genau dann, wenn $\gamma(t) = c_v(r(t))$ mit $r : \abinterval \to \cinterval{0}{\delta}$ monoton wachsend.
+  Es gilt $\rho = L(c_v|_{\cinterval{0}{\rho}}) \leq L(\gamma)$ für jedes $\gamma : \abinterval \to M$ stückweise glatt mit $\gamma(a) = p$, $\gamma(b) = c_v(\rho)$.
+  Gleichheit gilt genau dann, wenn $\gamma(t) = c_v(r(t))$ mit $r : \abinterval \to \cinterval{0}{\rho}$ monoton wachsend.
 \end{satz}
 
 % Vorlesung vom 2.12.2014
@@ -1002,8 +1002,8 @@
   \begin{itemize}
     \item Ist $p \in M$, $\epsilon \in \ointerval{0}{i(p)}$, dann ist
     \begin{align*}
-      \Exp_p(B_\epsilon(p)) & = B_\epsilon(p) \coloneqq \Set{q \in M}{d(p, q) < \epsilon},\\
-      \Exp_p(S_\epsilon(p)) & = S_\epsilon(p) \coloneqq \Set{q \in M}{d(p, q) = \epsilon}.
+      \Exp_p(B_\epsilon(0)) & = B_\epsilon(p) \coloneqq \Set{q \in M}{d(p, q) < \epsilon},\\
+      \Exp_p(S_\epsilon(0)) & = S_\epsilon(p) \coloneqq \Set{q \in M}{d(p, q) = \epsilon}.
     \end{align*}
     \item $d : M \times M \to \R_{\geq 0}$ ist eine Metrik.
     \item Die durch $d$ ind. Topologie stimmt mit der gegebenen überein.
@@ -1024,7 +1024,7 @@
     \item $M$ ist geodätisch vollständig.
     \item $\fa{p \in M} \Exp_p$ ist auf ganz $T_p M$ definiert.
     \item Beschränkte und abgeschlossene Teilmengen von $M$ sind kompakt.
-    \item $M$ ist eine vollständiger metrischer Raum.
+    \item $M$ ist ein vollständiger metrischer Raum.
   \end{itemize}
 \end{satz}
 
@@ -1051,7 +1051,7 @@
 \end{bem}
 
 \begin{nota}
-  $R_p(u, v)w \coloneqq (R(X, Y)Z)(p)$ für $u, v, w \in T_p M$, wobei $X, Y, Z \in \chi(M)$ mit $X(p) \!=\! u$, $Y(p) \!=\! u$, $Z(p) \!=\! w$.
+  $R_p(u, v)w \coloneqq (R(X, Y)Z)(p)$ für $u, v, w \in T_p M$, wobei $X, Y, Z \in \chi(M)$ mit $X(p) \!=\! u$, $Y(p) \!=\! v$, $Z(p) \!=\! w$.
 \end{nota}
 
 % 16.1
@@ -1109,7 +1109,7 @@
 
 % 18.1
 \begin{satz}[\emph{Myers} 1935]
-  Jede vollständige zshgde Riem. Mft. mit $\sec \geq \delta > 0$ ist kompakt mit Durchmesser $\diam(M) \leq \tfrac{\pi}{\delta}$.
+  Jede vollständige zshgde Riem. Mft. mit $\sec \geq \delta > 0$ ist kompakt mit Durchmesser $\diam(M) \leq \tfrac{\pi}{\sqrt{\delta}}$.
 \end{satz}
 
 \begin{bem}
