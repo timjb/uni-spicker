@@ -32,6 +32,7 @@
 \DeclareMathOperator{\Lie}{Lie} % Transvektionsgruppe
 \newcommand{\Cont}{\mathcal{C}} % Menge der stetigen/diff'baren Funktionen
 \newcommand{\LC}{\nabla^{\mathrm{LC}}} % Levi-Civita-Zusammenhang
+\newcommand{\VF}{\mathcal{X}} % Menge der Vektorfelder
 
 % Kleinere Klammern
 \delimiterfactor=701
@@ -244,15 +245,15 @@
 \end{defn}
 
 \begin{nota}
-  $\chi(M) \coloneqq \{\text{ diff'bare Vektorfelder auf $M$ }\}$
+  $\VF(M) \coloneqq \{\text{ diff'bare Vektorfelder auf $M$ }\}$
 \end{nota}
 
 \begin{bem}
-  $\chi(M)$ ist ein $\R$-VR und ein $\Cont^\infty(M)$-Modul.
+  $\VF(M)$ ist ein $\R$-VR und ein $\Cont^\infty(M)$-Modul.
 \end{bem}
 
 \begin{lem}
-  Jedes $X \in \chi(M)$ induziert eine lineare, derivative Abb.
+  Jedes $X \in \VF(M)$ induziert eine lineare, derivative Abb.
   \[
     X : \Cont^\infty(M) \to \Cont^\infty(M), \quad
     \phi \mapsto X(\phi) \coloneqq p \mapsto X(p) . [\phi].
@@ -260,12 +261,12 @@
 \end{lem}
 
 \begin{lem}
-  %Seien $X, Y \in \chi(M)$ mit $\fa{f \in \Cont^\infty(M)} X(f) = Y(f)$. Dann gilt $X \equiv Y$.
-  $\fa{X, Y \!\in\! \chi(M)\!}\! (\fa{f \!\in\! \Cont^\infty(M)\!}\! X(f) \!=\! Y(f)) \!\iff\! X \equiv Y$
+  %Seien $X, Y \in \VF(M)$ mit $\fa{f \in \Cont^\infty(M)} X(f) = Y(f)$. Dann gilt $X \equiv Y$.
+  $\fa{X, Y \!\in\! \VF(M)\!}\! (\fa{f \!\in\! \Cont^\infty(M)\!}\! X(f) \!=\! Y(f)) \!\iff\! X \equiv Y$
 \end{lem}
 
 \begin{defn}
-  Der \emph{Kommutator} (o. \emph{Lie-Klammer}) von $X, Y \in \chi(M)$ ist das Vektorfeld $[X, Y] \in \chi(M)$ definiert durch
+  Der \emph{Kommutator} (o. \emph{Lie-Klammer}) von $X, Y \in \VF(M)$ ist das Vektorfeld $[X, Y] \in \VF(M)$ definiert durch
   \[
     [X, Y] : \Cont^\infty(M) \to \Cont^\infty(M), \enspace
     f \mapsto X(Y(f)) - Y(X(f)).
@@ -273,19 +274,19 @@
 \end{defn}
 
 \begin{satz}
-  Für $X, Y_1, Y_2 \in \chi(M)$ und $f \in \Cont^\infty(M)$ gilt
+  Für $X, Y_1, Y_2 \in \VF(M)$ und $f \in \Cont^\infty(M)$ gilt
   \[ [X, Y_1 + f Y_2] = [X, Y_1] + X(f) \cdot Y_2 + f \cdot [X, Y_2]. \]
 \end{satz}
 
 % TODO: Dingsda-Identität nachrechnen?
 
 \begin{defn}
-  Eine diff'bare Kurve $c : \ointerval{a}{b} \to M$ heißt \emph{Integralkurve} von einem VF $X \in \chi(M)$, falls
+  Eine diff'bare Kurve $c : \ointerval{a}{b} \to M$ heißt \emph{Integralkurve} von einem VF $X \in \VF(M)$, falls
   $\fa{t \in \ointerval{a}{b}} \dot{c}(t) = X_{c(t)}$.
 \end{defn}
 
 \begin{lem}
-  Sei $X \in \chi(M)$, $p \in M$ und $v \in T_p M$. Dann hat das AWP
+  Sei $X \in \VF(M)$, $p \in M$ und $v \in T_p M$. Dann hat das AWP
   \[ \dot{c}(t) = X_{c(t)}, \enspace c(0) = p \]
   eine eindeutige lokale Lösung $c = c_p^X : \vinterval \to M$.
 \end{lem}
@@ -307,7 +308,7 @@
 
 \begin{bspe}
   \begin{itemize}
-    \item $(\chi(M), [\blank,\blank])$ ist eine Lie-Algebra.
+    \item $(\VF(M), [\blank,\blank])$ ist eine Lie-Algebra.
     \item $\K^{n \times n}$ ist eine Lie-Algebra mit $[A, B] \coloneqq AB - BA$.
   \end{itemize}
 \end{bspe}
@@ -346,7 +347,7 @@
 \end{bsp}
 
 \begin{defn}
-  Sei $f : M \to N$ ein Diffeomorphismus und $X \in \chi(M)$. Dann ist
+  Sei $f : M \to N$ ein Diffeomorphismus und $X \in \VF(M)$. Dann ist
   \[
     f_* X : N \to TN, \enspace
     x \mapsto f_{*f^{-1}(x)} X(f^{-1}(x))
@@ -354,7 +355,7 @@
 \end{defn}
 
 \begin{defn}
-  Ein Vektorfeld $X \in \chi(G)$ heißt \emph{linksinvariant}, wenn gilt:
+  Ein Vektorfeld $X \in \VF(G)$ heißt \emph{linksinvariant}, wenn gilt:
   \[
     \fa{g, h \in G} X(g \cdot h) = lg_{*h} X(h) \quad
     \text{(kürzer: $\fa{g \in G} lg_* X = X$).}
@@ -362,12 +363,12 @@
 \end{defn}
 
 \begin{nota}
-  $\mathcal{L}(G) \coloneqq \Set{ X \in \chi(G) }{\text{$X$ ist linksinvariant}} \subset \chi(G)$
+  $\mathcal{L}(G) \coloneqq \Set{ X \in \VF(G) }{\text{$X$ ist linksinvariant}} \subset \VF(G)$
 \end{nota}
 
 \begin{bem}
-  Ein linksinv. VF $X \!\in\! \chi(G)$ ist eindeutig bestimmt durch $X(e)$.
-  Andererseits: Ist $x \in T_e G$, dann gibt es ein linksinv. VF $X \in \chi(G)$ mit $X(e) = x$.
+  Ein linksinv. VF $X \!\in\! \VF(G)$ ist eindeutig bestimmt durch $X(e)$.
+  Andererseits: Ist $x \in T_e G$, dann gibt es ein linksinv. VF $X \in \VF(G)$ mit $X(e) = x$.
   Somit gibt es einen VR-Isomorphismus
   \[
     i : \mathcal{L}(G) \to T_e G, \enspace
@@ -380,7 +381,7 @@
 \end{lem}
 
 \begin{kor}
-  $(\mathcal{L}(G), [\blank,\blank])$ ist eine $\dim(G)$-dimensionale Unter-Lie-Algebra von $(\chi(G), [\blank,\blank])$.
+  $(\mathcal{L}(G), [\blank,\blank])$ ist eine $\dim(G)$-dimensionale Unter-Lie-Algebra von $(\VF(G), [\blank,\blank])$.
 \end{kor}
 
 \begin{nota}
@@ -395,7 +396,7 @@
 \end{defn}
 
 \begin{defn}
-  Eine \emph{Riemannsche Metrik} auf einer diff. Mft $M$ ist eine Familie $g = (g_p)_{p \in M}$ von Skalarprodukten $g_p : T_p M \times T_p M \to \R$, die differenzierbar von $p$ abhängt, \dh{} für alle $X, Y \in \chi(M)$ ist $g(X, Y) : M \to \R, p \mapsto g_p(X(p), Y(p))$ differenzierbar ($\Cont^\infty$).\\
+  Eine \emph{Riemannsche Metrik} auf einer diff. Mft $M$ ist eine Familie $g = (g_p)_{p \in M}$ von Skalarprodukten $g_p : T_p M \times T_p M \to \R$, die differenzierbar von $p$ abhängt, \dh{} für alle $X, Y \in \VF(M)$ ist $g(X, Y) : M \to \R, p \mapsto g_p(X(p), Y(p))$ differenzierbar ($\Cont^\infty$).\\
   Das Tupel $(M, g)$ heißt \emph{Riemannsche Mannigfaltigkeit}.
 \end{defn}
 
@@ -416,7 +417,7 @@
   Eine Abbildung $f : M \to N$ heißt \emph{Isometrie}, wenn gilt:
   \begin{itemize}
     \item $f$ ist ein Diffeomorphismus
-    \item $f$ erhält Riemannsche Metriken, \dh{} für alle $X, Y \in \chi(M)$ gilt:
+    \item $f$ erhält Riemannsche Metriken, \dh{} für alle $X, Y \in \VF(M)$ gilt:
     \[ g_M(X, Y) = g_N(f_* X, f_* Y) \circ f, \]
     also $\fa{p {\in} M} \fa{v, w {\in} T_p M} g_{M,p} (v, w) = g_{N,f(p)}(f_{*p}(v), f_{*p}(w))$.
   \end{itemize}
@@ -485,10 +486,10 @@
 \begin{defn}
   Ein \emph{Zusammenhang} (kov. Ableitung) ist eine Abbildung
   \[
-    \nabla : \chi(M) \times \chi(M) \to \chi(M), \quad
+    \nabla : \VF(M) \times \VF(M) \to \VF(M), \quad
     (X, Y) \mapsto \nabla_X Y
   \]
-  sodass für $X, X_1, X_2, Y, Y_1, Y_2 \in \chi(M)$ und $f \in \Cont^\infty(M)$ gilt:
+  sodass für $X, X_1, X_2, Y, Y_1, Y_2 \in \VF(M)$ und $f \in \Cont^\infty(M)$ gilt:
   \begin{itemize}
     \item $\nabla_{X_1 + f X_2} Y = \nabla_{X_1} Y + f \nabla_{X_2} Y$
     \item $\nabla_X (Y_1 + Y_2) = \nabla_X Y_1 + \nabla_X Y_2$
@@ -507,7 +508,7 @@
 
 \begin{defn}
   Ein Zshg $\nabla$ auf einer Riem. Mft. heißt \emph{metrisch}, wenn
-  \[ \fa{X, Y, Z \in \chi(M)} g(\nabla_X Y, Z) + g(Y, \nabla_X Z) = X g(Y, Z). \]
+  \[ \fa{X, Y, Z \in \VF(M)} g(\nabla_X Y, Z) + g(Y, \nabla_X Z) = X g(Y, Z). \]
 \end{defn}
 
 \begin{thm}
@@ -549,26 +550,26 @@
 \end{satz}
 
 \begin{defn}
-  Sei $\nabla$ ein Zusammenhang auf $M$. Dann heißt $X \in \chi(M)$ \emph{parallel}, falls
-  $\nabla X : \chi(M) \to \chi(M), \enspace Y \mapsto \nabla_Y X$
+  Sei $\nabla$ ein Zusammenhang auf $M$. Dann heißt $X \in \VF(M)$ \emph{parallel}, falls
+  $\nabla X : \VF(M) \to \VF(M), \enspace Y \mapsto \nabla_Y X$
   verschwindet.
 \end{defn}
 
 \begin{defn}
   Ein \emph{Tensorfeld} vom Typ $(j, k)$ mit $k \in \N$ und $j \in \{ 0, 1 \}$ ist eine multilineare Abbildung
   \[
-    T : \chi(M) \times \ldots \times \chi(M) \to
+    T : \VF(M) \times \ldots \times \VF(M) \to
     \begin{cases}
       \Cont^\infty(M), & \text{falls } j = 0,\\
-      \chi(M), & \text{falls } j = 1.
+      \VF(M), & \text{falls } j = 1.
     \end{cases}
   \]
 \end{defn}
 
 \begin{bspe}
   \begin{itemize}
-    \item $T^\nabla : \chi(M) \times \chi(M) \to \chi(M)$ ist Tensor vom Typ $(1, 2)$.
-    \item $\nabla Y : \chi(M) \to \chi(M), \enspace X \mapsto \nabla_X Y$ ist Tensor vom Typ $(1, 1)$.
+    \item $T^\nabla : \VF(M) \times \VF(M) \to \VF(M)$ ist Tensor vom Typ $(1, 2)$.
+    \item $\nabla Y : \VF(M) \to \VF(M), \enspace X \mapsto \nabla_X Y$ ist Tensor vom Typ $(1, 1)$.
     \item Alternierende $k$-Formen auf $\R^n$ sind Tensoren vom Typ $(0, k)$.
     \item Riemannsche Metriken sind Tensorfelder vom Typ $(0, 2)$.
   \end{itemize}
@@ -576,7 +577,7 @@
 
 % 8.1
 \begin{satz}
-  Sei $T$ ein Tensorfeld auf $M$ vom Typ $(j, k)$. Sei $p \in M$. Seien $X_1, \ldots, X_k \in \chi(M)$. Dann hängt $T(X_1, \ldots, X_k)(p)$ nur von $X_1(p), \ldots, X_k(p)$ ab.
+  Sei $T$ ein Tensorfeld auf $M$ vom Typ $(j, k)$. Sei $p \in M$. Seien $X_1, \ldots, X_k \in \VF(M)$. Dann hängt $T(X_1, \ldots, X_k)(p)$ nur von $X_1(p), \ldots, X_k(p)$ ab.
 \end{satz}
 
 % Vorlesung vom 7.11.2014
@@ -591,7 +592,7 @@
 \end{nota}
 
 \begin{satz}
-  Sei $\nabla$ ein Zusammenhang auf $M$. Sei $p \in M$, $v \in T_p M$ und $Y, \tilde{Y} \in \chi(M)$. Falls für eine diff'bare Kurve $c : \vinterval \to M$ gilt
+  Sei $\nabla$ ein Zusammenhang auf $M$. Sei $p \in M$, $v \in T_p M$ und $Y, \tilde{Y} \in \VF(M)$. Falls für eine diff'bare Kurve $c : \vinterval \to M$ gilt
   \[
     c(0) = p, \enspace
     \dot{c}(0) = v \enspace \text{und} \enspace
@@ -621,17 +622,17 @@
 \end{bem}
 
 \begin{nota}
-  $\chi_c \coloneqq \{ \text{ Vektorfelder längs $c$ } \}$
+  $\VF_c \coloneqq \{ \text{ Vektorfelder längs $c$ } \}$
 \end{nota}
 
 \begin{bem}
-  $\chi_c$ ist ein Modul über $\Cont^\infty(I, \R)$.
+  $\VF_c$ ist ein Modul über $\Cont^\infty(I, \R)$.
 \end{bem}
 
 \begin{satz}
   Sei $\nabla$ ein Zusammenhang auf $M$, sei $c : I \to M$ eine diff'bare Kurve. Dann gibt es eine eindeutige Abbildung
-  \[ \frac{\nabla}{\d t} = \frac{D}{\d t} = \frac{D^\nabla}{\d t} : \chi_c \to \chi_c, \]
-  sodass für $X, \tilde{X} \in \chi_c$, $Y \in \chi(M)$ und $f \in \Cont^\infty(I, \R)$ gilt:
+  \[ \frac{\nabla}{\d t} = \frac{D}{\d t} = \frac{D^\nabla}{\d t} : \VF_c \to \VF_c, \]
+  sodass für $X, \tilde{X} \in \VF_c$, $Y \in \VF(M)$ und $f \in \Cont^\infty(I, \R)$ gilt:
   \begin{itemize}
     \miniitem{0.48 \linewidth}{$\tfrac{D}{\d t} (X + \tilde X) = \tfrac{D}{\d t} X + \tfrac{D}{\d t} \tilde{X}$,}
     \miniitem{0.49 \linewidth}{$\tfrac{D}{\d t} (f \cdot X) = f \cdot \tfrac{D}{\d t} X + f' X$,}
@@ -648,13 +649,13 @@
 % 9.2.
 \begin{satz}
   Sei $(M, g)$ eine Riem. Mft, $\nabla$ der Levi-Civita-Zusammenhang und $c : I \to M$ diff'bar. Dann gilt
-  \[ \fa{X, Y \in \chi_c} g(X, Y)' = g(\tfrac{D X}{\d t}, Y) + g(X, \tfrac{D Y}{\d t}). \]
+  \[ \fa{X, Y \in \VF_c} g(X, Y)' = g(\tfrac{D X}{\d t}, Y) + g(X, \tfrac{D Y}{\d t}). \]
 \end{satz}
 
 % §10. Parallelverschiebung
 
 \begin{defn}
-  $X \in \chi_c$ heißt \emph{parallel} längs $c$ (bzgl. $\nabla$), wenn $\tfrac{D X}{\d t} = 0$.
+  $X \in \VF_c$ heißt \emph{parallel} längs $c$ (bzgl. $\nabla$), wenn $\tfrac{D X}{\d t} = 0$.
 \end{defn}
 
 \begin{bem}
@@ -684,7 +685,7 @@
 % 10.1
 \begin{satz}
   Sei $t_0 \in I = \ointerval{a}{b}$ und $v \in T_{c(t_0)} M$ vorgegeben. \\
-  Dann gibt es genau ein VF $X \in \chi_c$ mit
+  Dann gibt es genau ein VF $X \in \VF_c$ mit
   \[
     \tfrac{D X}{\d t} \equiv 0
     \quad \text{und} \quad
@@ -713,7 +714,7 @@
 \end{satz}
 
 \begin{bem}
-  Wir können nun die Definition der Ableitung als Limes des Differenzenquotienten auf Mften übertragen: Sei $v \in T_x M$, $X \in \chi(M)$ und $c : \vinterval \to M$ mit $c(0) = x$ und $\dot{c}(0) = v$. Dann ist
+  Wir können nun die Definition der Ableitung als Limes des Differenzenquotienten auf Mften übertragen: Sei $v \in T_x M$, $X \in \VF(M)$ und $c : \vinterval \to M$ mit $c(0) = x$ und $\dot{c}(0) = v$. Dann ist
   \[ \nabla_v X = \lim_{t \to 0} \frac{P_{c(t)}^{-1}(X(c(t))) - X(c(0))}{t} \]
 \end{bem}
 
@@ -930,7 +931,7 @@
 
 % 13.3
 \begin{satz}
-  Zu jedem (stückw.) glatten $X \in \chi_c$ gibt es eine (stückw.) glatte Variation $\alpha$ von $c$ mit $X = \tfrac{\partial \alpha}{\partial s} (0, t)$. Wenn $X(a) = X(b) = 0$, so kann man $\alpha$ als Variation mit festen Endpunkten wählen.
+  Zu jedem (stückw.) glatten $X \in \VF_c$ gibt es eine (stückw.) glatte Variation $\alpha$ von $c$ mit $X = \tfrac{\partial \alpha}{\partial s} (0, t)$. Wenn $X(a) = X(b) = 0$, so kann man $\alpha$ als Variation mit festen Endpunkten wählen.
 \end{satz}
 
 % 13.4
@@ -1041,7 +1042,7 @@
 \begin{defn}
   Der \emph{Krümmungstensor} von einem Zshg $\nabla$ auf $M$ ist
   \begin{align*}
-    R^{\nabla} & = R : \chi(M) \times \chi(M) \times \chi(M) \to \chi(M) \\
+    R^{\nabla} & = R : \VF(M) \times \VF(M) \times \VF(M) \to \VF(M) \\
     (X, Y, Z) & \mapsto R(X, Y)Z \coloneqq \nabla_X (\nabla_Y Z) - \nabla_Y (\nabla_X Z) - \nabla_{[X, Y]} Z.
   \end{align*}
 \end{defn}
@@ -1051,12 +1052,12 @@
 \end{bem}
 
 \begin{nota}
-  $R_p(u, v)w \coloneqq (R(X, Y)Z)(p)$ für $u, v, w \in T_p M$, wobei $X, Y, Z \in \chi(M)$ mit $X(p) \!=\! u$, $Y(p) \!=\! v$, $Z(p) \!=\! w$.
+  $R_p(u, v)w \coloneqq (R(X, Y)Z)(p)$ für $u, v, w \in T_p M$, wobei $X, Y, Z \in \VF(M)$ mit $X(p) \!=\! u$, $Y(p) \!=\! v$, $Z(p) \!=\! w$.
 \end{nota}
 
 % 16.1
 \begin{satz}
-  Es gilt für $X,Y,Z,W \in \chi(M)$:
+  Es gilt für $X,Y,Z,W \in \VF(M)$:
   \begin{itemize}
     \item $- R(X, Y)Z = R(Y, X)Z$
     \item Falls $\nabla$ torsionsfrei: \emph{1. Bianchi-Identität} / \emph{Jacobi-Identität}:
@@ -1068,7 +1069,7 @@
   \end{itemize}
 \end{satz}
 
-% Übung: Durch Polarisation genügt es, $\fa{X,Y \in \chi(M)} g(R(X,Y)X, Y)$ zu kennen
+% Übung: Durch Polarisation genügt es, $\fa{X,Y \in \VF(M)} g(R(X,Y)X, Y)$ zu kennen
 
 \begin{defn}
   Sei $p \in M$, $\sigma = \Span(v,w) \in T_p M$ ein 2-dim UVR. Dann heißt
@@ -1094,7 +1095,7 @@
 
 % 17.2
 \begin{satz}[\emph{2. Variationsformel} für die Länge]
-  Sei $c: \abinterval \to M$ eine Geodäte, $\alpha : \vinterval \times \abinterval \to M$ eine glatte Variation von $c$ mit festen Endpunkten, $X(t) \coloneqq \tfrac{\partial \alpha}{\partial s}(0, t) \in \chi_c$ das VVF mit $X^\perp \coloneqq X - g(X, \tfrac{\dot{c}}{\norm{\dot{c}}}) \tfrac{\dot{c}}{\norm{\dot{c}}}$ senkrechtem Anteil zu $\dot{c}$. Dann gilt
+  Sei $c: \abinterval \to M$ eine Geodäte, $\alpha : \vinterval \times \abinterval \to M$ eine glatte Variation von $c$ mit festen Endpunkten, $X(t) \coloneqq \tfrac{\partial \alpha}{\partial s}(0, t) \in \VF_c$ das VVF mit $X^\perp \coloneqq X - g(X, \tfrac{\dot{c}}{\norm{\dot{c}}}) \tfrac{\dot{c}}{\norm{\dot{c}}}$ senkrechtem Anteil zu $\dot{c}$. Dann gilt
   \[
     \frac{\d^2}{\d s^2} |_{s=0} L(\alpha_s) = \tfrac{1}{\norm{\dot{c}}} \Int{a}{b}{\norm{\tfrac{D X^\perp}{\d t}}^2 - g(R(X,\dot{c})\dot{c},X)}{t}.
   \]
@@ -1165,7 +1166,7 @@
 % §19. Jacobi-Felder
 
 \begin{defn}
-  Sei $(M, g)$ eine Riem. Mft, $c : I \to M$ glatt, $Y \in \chi_c$ heißt \emph{Jacobi-Feld}, wenn die \emph{Jacobi-Gleichung} gilt:
+  Sei $(M, g)$ eine Riem. Mft, $c : I \to M$ glatt, $Y \in \VF_c$ heißt \emph{Jacobi-Feld}, wenn die \emph{Jacobi-Gleichung} gilt:
   \[
     Y'' + R(Y, \dot{c}) \dot{c} = 0 \quad
     \left( Y'' \coloneqq \tfrac{D}{\d t} \left( \tfrac{D Y}{\d t} \right) \right).
@@ -1173,7 +1174,7 @@
 \end{defn}
 
 \begin{bem}
-  Die Jacobi-Gleichung ist linear in $Y$, somit ist $\Set{ X \in \chi_c }{ X \text{ ist ein Jacobi-Feld} }$ ein UVR von $\chi_c$.
+  Die Jacobi-Gleichung ist linear in $Y$, somit ist $\Set{ X \in \VF_c }{ X \text{ ist ein Jacobi-Feld} }$ ein UVR von $\VF_c$.
 \end{bem}
 
 % 19.1
@@ -1183,7 +1184,7 @@
 
 % 19.2
 \begin{satz}
-  Sei $c_0 : I \to M$ eine Kurve, $t_0 \in I$. Dann gibt es für alle $v, w \in T_{c(t_0)}$ genau ein Jacobi-Feld $Y \in \chi_c$ mit
+  Sei $c_0 : I \to M$ eine Kurve, $t_0 \in I$. Dann gibt es für alle $v, w \in T_{c(t_0)}$ genau ein Jacobi-Feld $Y \in \VF_c$ mit
   \[
     Y(t_0) = v
     \quad \text{und} \quad
@@ -1193,7 +1194,7 @@
 
 % 19.3
 \begin{satz}
-  Sei $v \in T_p M$, $w \in Tp M \cong T_v \left( T_p M \right)$. Dann gilt $(\Exp_p)_{*v}(w) = Y(1)$, wobei $Y \in \chi_c$ ein Jacobi-Feld längs $c_v(t) = \Exp_p(tv)$ mit $Y(0) = 0$ und $Y'(0) = w$.
+  Sei $v \in T_p M$, $w \in Tp M \cong T_v \left( T_p M \right)$. Dann gilt $(\Exp_p)_{*v}(w) = Y(1)$, wobei $Y \in \VF_c$ ein Jacobi-Feld längs $c_v(t) = \Exp_p(tv)$ mit $Y(0) = 0$ und $Y'(0) = w$.
 \end{satz}
 
 % Vorlesung vom 9.1.2015
@@ -1377,7 +1378,7 @@
 
 % 23.1
 \begin{lem}
-  Sei $\gamma : \R \to P$ eine Geodäte, $p = \gamma(0)$, $X \in \chi_c$ parallel. Sei
+  Sei $\gamma : \R \to P$ eine Geodäte, $p = \gamma(0)$, $X \in \VF_c$ parallel. Sei
   \[
     Y \coloneqq (s_p)_* X : \R \to TP, \quad
     t \mapsto (s_p)_{*c(t)} X(t)
@@ -1390,7 +1391,7 @@
   Sei $\gamma : \R \to P$ eine Geodäte. Dann gilt f.\,a. $\tau \in \R$:
   \begin{itemize}
     \item $(t_{\gamma(\tau)\gamma(0)} \circ \gamma)(t) = \gamma(t + 2\tau)$
-    \item $(t_{\gamma(\tau)\gamma(0)*} X)(t) = X(t + 2 \tau)$ für $X \in \chi_\gamma$ parallel.
+    \item $(t_{\gamma(\tau)\gamma(0)*} X)(t) = X(t + 2 \tau)$ für $X \in \VF_\gamma$ parallel.
   \end{itemize}
 \end{lem}
 
@@ -1567,18 +1568,18 @@
 
 % 24.1
 \begin{lem}
-  Sei $G$ eine Lie-Gruppe, $X \in \chi(G)$ ein linksinvariantes VF. \\
+  Sei $G$ eine Lie-Gruppe, $X \in \VF(G)$ ein linksinvariantes VF. \\
   Dann ist die Integralkurve $c_e$ eine 1-Parameter-Untergruppe von $G$.
 \end{lem}
 
 % 24.2
 \begin{lem}
-  Sei $X \in \chi(G)$ linksinvariant. Dann ist $c_g = L_g \circ c_e$.
+  Sei $X \in \VF(G)$ linksinvariant. Dann ist $c_g = L_g \circ c_e$.
 \end{lem}
 
 % 24.3
 \begin{lem}
-  Jede 1-Param-UG $\phi : \R \to G$ definiert ein linksinv. VF $X \in \chi(G)$, dessen Integralkurve durch $e$ gerade $\phi$ ist: $c_e = \phi$.
+  Jede 1-Param-UG $\phi : \R \to G$ definiert ein linksinv. VF $X \in \VF(G)$, dessen Integralkurve durch $e$ gerade $\phi$ ist: $c_e = \phi$.
 \end{lem}
 
 \begin{fazit}
@@ -1600,7 +1601,7 @@
 % Vorlesung vom 28.1.2015
 
 \begin{defn}
-  Ein VF $X \in \chi(M)$ heißt \emph{Killing-Feld}, wenn die lokalen Flüsse $\Phi_t$ von $X$ aus lokalen Isometrien bestehen, \dh{}
+  Ein VF $X \in \VF(M)$ heißt \emph{Killing-Feld}, wenn die lokalen Flüsse $\Phi_t$ von $X$ aus lokalen Isometrien bestehen, \dh{}
   \[
     \fa{x \in U} \fa{v, w \in T_x M}
     g_{\Phi_t(x)}(\Phi_{t*} v, \Phi_{t*} w) = g_x(v, w).
@@ -1608,21 +1609,21 @@
 \end{defn}
 
 \begin{nota}
-  $\KF(M) \coloneqq \Set{X \in \chi(M)}{X \text{ Killing}}$
+  $\KF(M) \coloneqq \Set{X \in \VF(M)}{X \text{ Killing}}$
 \end{nota}
 
 % 24.4
 \begin{lem}
-  Ein Vektorfeld $X \in \chi(M)$ ist genau dann ein Killing-VF, wenn $\nabla X$ schiefsymmetrisch ist, \dh{}
-  \[ \fa{X, Y, Z \in \chi(M)} g(\nabla_Y X, Z) = - g(\nabla_Z X, Y) \]
+  Ein Vektorfeld $X \in \VF(M)$ ist genau dann ein Killing-VF, wenn $\nabla X$ schiefsymmetrisch ist, \dh{}
+  \[ \fa{X, Y, Z \in \VF(M)} g(\nabla_Y X, Z) = - g(\nabla_Z X, Y) \]
 \end{lem}
 
 \begin{facts}
   Sei $X \in \KF(M)$.
   \begin{itemize}
-    \item $\KF(M)$ ist eine Unter-Lie-Algebra von $\chi(M)$.
-    \item Für jede Geodäte $\gamma$ ist $X \circ \gamma \in \chi_\gamma$ ein Jacobi-Feld längs $\gamma$.
-    \item $\fa{A, B \!\in\! \chi(M)} L_X(A, B) \!\coloneqq\! \nabla_A \nabla_B X - \nabla_{\nabla_A B} X + R(X, A)B = 0$
+    \item $\KF(M)$ ist eine Unter-Lie-Algebra von $\VF(M)$.
+    \item Für jede Geodäte $\gamma$ ist $X \circ \gamma \in \VF_\gamma$ ein Jacobi-Feld längs $\gamma$.
+    \item $\fa{A, B \!\in\! \VF(M)} L_X(A, B) \!\coloneqq\! \nabla_A \nabla_B X - \nabla_{\nabla_A B} X + R(X, A)B = 0$
     \item Ist $(M, g)$ vollständig, dann ist $\Phi_t : M \!\to\! M$ für alle $t \!\in\! \R$ definiert.
   \end{itemize}
 \end{facts}
@@ -1640,7 +1641,7 @@
 \end{satz}
 
 \begin{acht}
-  Es gilt $\iota([x, y]_\Gie) = - [\iota(x), \iota(y)]_{\chi(P)}$, es ist $\iota$ also fast (bis auf Vorzeichen) ein Lie-Algebra-Isomorphismus.
+  Es gilt $\iota([x, y]_\Gie) = - [\iota(x), \iota(y)]_{\VF(P)}$, es ist $\iota$ also fast (bis auf Vorzeichen) ein Lie-Algebra-Isomorphismus.
 \end{acht}
 
 \begin{defn}
@@ -1706,7 +1707,7 @@
     R_p(a, b) : T_p P \to T_p P, \quad
     x \mapsto R_p(a, b) x
   \]
-  eine Derivation von $R_p$, \dh{} für alle $A, B, X, Y, Z \in \chi(P)$ gilt
+  eine Derivation von $R_p$, \dh{} für alle $A, B, X, Y, Z \in \VF(P)$ gilt
   \begin{align*}
     R(A, B)(R(X, Y)Z) = \, & R(R(A, B)X, Y)Z + R(X, R(A, B)Y)Z \\
     & + R(X, Y)(R(A, B)Z).
