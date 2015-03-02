@@ -6,6 +6,7 @@
 }
 
 \usepackage{pgffor} % \foreach-Schleifen
+%\usepackage{amssymb} % Doppelpfeil $\rightarrows$
 
 \newcommand{\nspace}[1]{\foreach \i in {1,...,#1}{ \! }} % Negativer Abstand
 \newcommand{\SetC}{\mathbf{Set}} % Kategorie der Mengen
@@ -28,6 +29,8 @@
 \DeclareMathOperator{\Sing}{Sing} % Homomorphisms
 \newcommand{\Cat}{\mathcal{C}} % Category-C
 \newcommand{\Dat}{\mathcal{D}} % Category-D
+\newcommand{\Iat}{\mathcal{I}} % Category-I (Indexkategorie)
+\newcommand{\Jat}{\mathcal{J}} % Category-J (Indexkategorie)
 \DeclareMathOperator{\Ob}{Ob} % Objects (of a category)
 \DeclareMathOperator{\Cov}{Cov} % Überlagerungen (coverings)
 
@@ -52,6 +55,10 @@
 \begin{bem}
   Die \href{http://timbaumann.info/uni-spicker/topo.pdf}{Topologie-Zusammenfassung} bietet eine Übersicht über Grundbegriffe der Kategorientheorie.
 \end{bem}
+
+\begin{defn}
+  Eine Kategorie heißt \emph{endlich}, wenn sie nur endlich viele Objekte und Morphismen besitzt.
+\end{defn}
 
 % Ausgelassen: II.1.1-II.1.7
 
@@ -241,6 +248,105 @@
   die die offensichtlichen Axiome erfüllen.
 \end{bem}
 
+% Ausgelassen: II.3.11,II.3.12 (Affine Gruppen-Schemata)
+% Ausgelassen: II.3.13 (Cartier-Dualität)
+% Ausgelassen: II.3.14 (Relative Gruppen-Schemata)
+
+% II.3.15 (Limiten)
+
+\begin{defn}
+  Seien $\Jat$, $\Cat$ Kategorien.
+  Der \emph{Diagonal-Funktor} $\Delta \!:\! \Cat \!\to\! [\Jat, \Cat]$ ist definiert durch
+  \[
+    (\Delta X)(J \in \Ob(\Jat)) \coloneqq X, \quad
+    (\Delta X)(\phi) \coloneqq \id_X, \quad
+    (\Delta f)_{J \in \Ob(\Jat)} \coloneqq f.
+  \]
+\end{defn}
+
+% II.3.16
+\begin{defn}
+  Seien $\Jat$, $\Cat$ Kategorien, $\Jat$ klein. Der \emph{(projekte) Limes} eines Funktors $F : \Jat \to \Cat$ ist ein Objekt $X \in \Ob(\Cat)$, das den Funktor
+  \[
+    G \in \hat\Cat, \quad
+    G(Y) \coloneqq \Hom_{[\Jat, \Cat]}(\Delta Y, F), \quad
+    G(f)(\eta) \coloneqq \eta \circ \Delta f
+  \]
+  darstellt. Man notiert $X = \varprojlim F$.
+\end{defn}
+
+% Ausgelassen: Gleichung (II.5)
+
+% II.3.17 (Die univ. Eigenschaft des Limes)
+\begin{defn}
+  Ein \emph{Möchtegern-Limes} eines Funktors $F : \Jat \to \Cat$ ist ein Objekt $X \in \Ob(\Cat)$ mit 
+  Projektionsabbildungen $f_J : X \to F(J)$ für alle $J \in \Ob(\Jat)$, sodass
+  $\fa{h \in \Hom_\Jat(J, I)} f_I = F(h) \circ f_J$.
+\end{defn}
+
+\begin{bem}
+  Der Limes $X$ ist durch folgende \emph{universelle Eigenschaft} charakterisiert:
+  Er ist ein terminales Objekt in der Kategorie der Möchtegern-Limiten, \dh{} er ist ein Möchtegern-Limes und für jeden weiteren Möchtegern-Limes $X'$ gibt es genau einen Morphismus $g \in \Hom_\Cat(X', X)$ mit
+  $\fa{J \in \Ob(\Jat)} f'_J = f_J \circ g$.
+\end{bem}
+
+% II.3.18
+\begin{bem}
+  Folgende Konzepte lassen sich als Spezialfall des Limes über eine spezielle Indexkategorie $\Jat$ auffassen:
+  \begin{center}
+    \begin{tabular}{ | r | l | }
+      \hline
+      Konzept & Indexkategorie $\Jat$ \\ \hline
+      Terminales Objekt & $\emptyset$ (leere Kategorie) \\
+      Produkt & $\mathbf{2} \coloneqq \{ 0, 1 \}$ (kein nichttrivialer Morphismus) \\
+      Faserprodukt & $1 \to 0 \leftarrow 2$ (zwei nichttriviale Morphismen) \\
+      \emph{Differenzkern} &  $0 \rightrightarrows 1$ (zwei nichttriviale Morphismen) \\ \hline
+    \end{tabular}
+  \end{center}
+\end{bem}
+
+% II.3.19 (Das duale Konzept: Kolimiten)
+
+\begin{defn}
+  Sei $\Jat$ klein.
+  Der \emph{Kolimes} / \emph{induktive Limes} eines Funktors $F : \Jat \to \Cat$ ist ein Objekt $X \in \Ob(\Cat^\op) = \Ob(\Cat)$, das den Funktor
+  \[
+    G \in \hat{\Cat^\op} = [\Cat, \SetC], \enspace
+    G(Y) \coloneqq \Hom_{[\Jat, \Cat]}(F, \Delta Y), \enspace
+    G(f)(\eta) \coloneqq \Delta f \circ \eta
+  \]
+  darstellt. Man notiert $X = \varinjlim F$.
+\end{defn}
+
+\begin{bem}
+  Der Kolimes von $F \!:\! \Jat \!\to\! \Cat$ ist der Limes von $F^\op \!:\! \Jat^\op \!\to\! \Cat^\op$.
+\end{bem}
+
+% II.3.19
+\begin{bem}
+  Folgende Konzepte sind ein Spezialfall des Kolimes:
+  \begin{center}
+    \begin{tabular}{ | r | l | }
+      \hline
+      Konzept & Indexkategorie $\Jat$ \\ \hline
+      Initiales Objekt & $\emptyset$ (leere Kategorie) \\
+      \emph{Koprodukt} & $\mathbf{2} \coloneqq \{ 0, 1 \}$ (kein nichttrivialer Morphismus) \\
+      \emph{Kofaserprodukt} & $1 \to 0 \leftarrow 2$ (zwei nichttriviale Morphismen) \\
+      \emph{Kodifferenzkern} &  $0 \rightrightarrows 1$ (zwei nichttriviale Morphismen) \\ \hline
+    \end{tabular}
+  \end{center}
+\end{bem}
+
+% II.3.20
+\begin{satz}
+  Angenommen, eine Kategorie $\Cat$ enthält ein term. Objekt, den Kodifferenzkern von allen parallelen Morphismen $f, g \in \Hom_\Cat(X, Y)$ und das Produkt $X \times Y$ von allen Paaren von Objekten. \\
+  Dann existieren alle endlichen Limiten in $\Cat$, \dh{} der Limes von jedem Funktor $F : \Jat \to \Cat$, wobei $\Jat$ endlich ist.
+\end{satz}
+
+% II.3.21
+\begin{kor}
+  In $\SetC$ existieren alle endlichen Limiten.
+\end{kor}
 
 
 \section{Simpliziale Mengen}
