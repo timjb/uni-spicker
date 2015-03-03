@@ -1184,7 +1184,7 @@
 
 % 19.2
 \begin{satz}
-  Sei $c_0 : I \to M$ eine Kurve, $t_0 \in I$. Dann gibt es für alle $v, w \in T_{c(t_0)}$ genau ein Jacobi-Feld $Y \in \VF_c$ mit
+  Sei $c : I \to M$ eine Kurve, $t_0 \in I$. Dann gibt es für alle $v, w \in T_{c(t_0)} M$ genau ein Jacobi-Feld $Y \in \VF_c$ mit
   \[
     Y(t_0) = v
     \quad \text{und} \quad
@@ -1194,7 +1194,7 @@
 
 % 19.3
 \begin{satz}
-  Sei $v \in T_p M$, $w \in Tp M \cong T_v \left( T_p M \right)$. Dann gilt $(\Exp_p)_{*v}(w) = Y(1)$, wobei $Y \in \VF_c$ ein Jacobi-Feld längs $c_v(t) = \Exp_p(tv)$ mit $Y(0) = 0$ und $Y'(0) = w$.
+  Sei $v \in T_p M$, $w \in T_p M \cong T_v \left( T_p M \right)$. Dann gilt $(\Exp_p)_{*v}(w) = Y(1)$, wobei $Y \in \VF_c$ ein Jacobi-Feld längs $c_v(t) = \Exp_p(tv)$ mit $Y(0) = 0$ und $Y'(0) = w$.
 \end{satz}
 
 % Vorlesung vom 9.1.2015
@@ -1216,7 +1216,7 @@
 \begin{kor}
   Falls $(M, g)$ vollständig mit $\sec \leq 0$, dann ist $\Exp_p$ für alle $p$ ein lokaler Diffeomorphismus, \dh{}
   \[
-    \fa{v \in M} \ex{U_v \opn T_p M} \Exp_p |_{U_v} : U_v \to \Exp_p(U_v)
+    \fa{v \in T_p M} \ex{U_v \opn T_p M} \Exp_p |_{U_v} : U_v \to \Exp_p(U_v)
     \enspace \text{ist Diffeo.}
   \]
 \end{kor}
@@ -1279,7 +1279,7 @@
   Eine zshgde Riem. Mft $P$ heißt \emph{Symmetrischer Raum}, wenn
   \[
     \fa{p \in P} \ex{s_p \in \Iso(P)}
-    s_p(p) = ß \enspace \wedge \enspace (s_p)_{*p} = - \id_{T_p M}.
+    s_p(p) = p \enspace \wedge \enspace (s_p)_{*p} = - \id_{T_p P}.
   \]
 \end{defn}
 
@@ -1303,8 +1303,8 @@
 \end{kor}
 
 \begin{defn}
-  Eine Riem. Mft heißt \emph{homogen} (homogener Raum), wenn
-  \[ \fa{p, q \in P} \ex{f \in \Iso(M, g)} f(p) = q. \]
+  Eine Riem. Mft $M$ heißt \emph{homogen} (homogener Raum), wenn
+  \[ \fa{p, q \in M} \ex{f \in \Iso(M, g)} f(p) = q. \]
 \end{defn}
 
 % 22.5
@@ -1323,7 +1323,7 @@
   \[
     \ex{m \!\in\! M} \ex{s_m \!\in\! \Iso(M)} s_m(m) = m
     \enspace \text{und} \enspace
-    (s_m)_{*m} = - \id_{T_p M}.
+    (s_m)_{*m} = - \id_{T_m M}.
   \]
   Dann ist $M$ ein symmetrischer Raum.
 \end{kor}
@@ -1378,10 +1378,10 @@
 
 % 23.1
 \begin{lem}
-  Sei $\gamma : \R \to P$ eine Geodäte, $p = \gamma(0)$, $X \in \VF_c$ parallel. Sei
+  Sei $\gamma : \R \to P$ eine Geodäte, $p = \gamma(0)$, $X \in \VF_\gamma$ parallel. Sei
   \[
     Y \coloneqq (s_p)_* X : \R \to TP, \quad
-    t \mapsto (s_p)_{*c(t)} X(t)
+    t \mapsto (s_p)_{*\gamma(t)} X(t)
   \]
   Dann gilt $Y(t) = -X(-t)$.
 \end{lem}
@@ -1415,7 +1415,7 @@
 \end{satz}
 
 \begin{defn}
-  $\lambda \in \R_{\geq 0}$ heißt \emph{Periode} einer Geodäten $\gamma$, wenn f.\,a. $t \in \R$ gilt: $\gamma(t) = \gamma(t + \gamma)$. Die Menge aller Perioden wird mit $P_\gamma$ bezeichnet.
+  $\lambda \in \R_{\geq 0}$ heißt \emph{Periode} einer Geodäten $\gamma$, wenn f.\,a. $t \in \R$ gilt: $\gamma(t) = \gamma(t + \lambda)$. Die Menge aller Perioden wird mit $P_\gamma$ bezeichnet.
 \end{defn}
 
 % Ausgelassen: Hilfslemma
@@ -1426,7 +1426,7 @@
 \end{lem}
 
 \begin{kor}
-  Hat eine Geodäte $\gamma$ in $P$ einen Selbstschnitt, so ist $\gamma$ periodisch. Sei $\lambda_0$ die minimale nichttriviale Periode einer nichttrivialen Geodäten $\gamma$ in $P$. Dann ist $c|_{\cointerval{t}{t+\lambda_0}}$ injektiv für alle $t$.
+  Hat eine Geodäte $\gamma$ in $P$ einen Selbstschnitt, so ist $\gamma$ periodisch. Sei $\lambda_0$ die minimale nichttriviale Periode einer nichttrivialen Geodäten $\gamma$ in $P$. Dann ist $\gamma|_{\cointerval{t}{t+\lambda_0}}$ injektiv für alle $t$.
 \end{kor}
 
 % Vorlesung vom 23.1.2015
