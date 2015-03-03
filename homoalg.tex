@@ -29,10 +29,12 @@
 \DeclareMathOperator{\Sing}{Sing} % Homomorphisms
 \newcommand{\Cat}{\mathcal{C}} % Category-C
 \newcommand{\Dat}{\mathcal{D}} % Category-D
+\newcommand{\Eat}{\mathcal{E}} % Category-E
 \newcommand{\Iat}{\mathcal{I}} % Category-I (Indexkategorie)
 \newcommand{\Jat}{\mathcal{J}} % Category-J (Indexkategorie)
 \DeclareMathOperator{\Ob}{Ob} % Objects (of a category)
 \DeclareMathOperator{\Cov}{Cov} % Überlagerungen (coverings)
+\newcommand{\ladj}{\dashv} % Links-adjungiert (left-adjoint)
 
 
 % Kleinere Klammern
@@ -175,7 +177,7 @@
 % II.3.2
 \begin{defn}
   Ein Funktor $F \in \Ob(\hat\Cat)$ wird \emph{dargestellt} durch $X \in \Ob(\Cat)$, falls $F \cong h_X$.
-  Der Funktor $F$ heißt \emph{darstellbar}, falls ein solches $X \in \Ob(\Cat)$ existiert.
+  Er heißt \emph{darstellbar}, falls ein solches $X$ existiert.
 \end{defn}
 
 \begin{defn}
@@ -348,6 +350,69 @@
   In $\SetC$ existieren alle endlichen Limiten.
 \end{kor}
 
+\subsection{Adjunktionen}
+
+\begin{defn}
+  Ein Funktor $F : \Cat \to \Dat$ heißt \emph{linksadjungiert} zum Funktor $G : \Cat \to \Dat$, wenn es einen natürlichen Isomorphismus
+  \[
+    \Hom_\Dat(F(\blank), \blank) \cong \Hom_\Cat(\blank, G(\blank))
+  \]
+  gibt (dabei sind beide Seiten Funktoren $\Cat^\op \times \Dat \to \SetC$). \\
+  Dann heißt $G$ auch \emph{rechtsadjungiert} zu $F$. Man notiert $F \ladj G$.
+\end{defn}
+
+\begin{bem}
+  Sei $F : \Cat \to \Dat$ ein Funktor.
+  Dann besitzt $F$ genau dann einen Rechtsadjungierten $G : \Dat \to \Cat$, wenn für alle $Y \in \Ob(\Dat)$ der Funktor
+  \[
+    \Cat^\op \to \SetC, \quad
+    X \mapsto \Hom_\Dat(FX, Y), \quad
+    f \mapsto (\blank \circ F(f))
+  \]
+  darstellbar ist, \dh{} es existiert $GY \in \Ob(\Cat)$ und Isomorphismen
+  \[ a^Y_X : \Hom_\Dat(FX, Y) \xrightarrow{\cong} \Hom_\Cat(X, GY) \]
+  mit $\fa{\phi \in \Hom(X', X)} a^Y_{X'}(\blank \circ F(\phi)) = a^Y_X(\blank) \circ \phi$. \\
+  Dann ist $G$ auf Morphismen definiert durch
+  \[ G(f \in \Hom_\Dat(Y, Y')) \coloneqq a^{Y'}_{GY} \left( f \circ \left( a^Y_{GY} \right)^{-1} (\id_{GY}) \right). \]
+\end{bem}
+
+% TODO: Unit, counit
+
+\begin{bem}
+  Sei $F : \Cat \to \Dat$ linksadjungiert zu $G : \Dat \to \Cat$. Setze
+  \begin{align*}
+    \eta_X & \coloneqq a_X^{FX}(\id_{FX}) : X \to GFX, \\
+    \epsilon_Y & \coloneqq (a_{GY}^Y)^{-1}(\id_{GY}) : FGY \to Y.
+  \end{align*}
+  Dann sind $\eta : \Id_{\Cat} \to G \circ F$ (genannt \emph{Einheit}) und $\epsilon : F \circ G \to \Id_\Cat$ (genannt \emph{Koeinheit}) natürliche Transformationen und es gilt
+  \[
+    (G \xrightarrow{\eta G} GFG \xrightarrow{G \epsilon} G) = \id_G, \quad
+    (F \xrightarrow{\epsilon F} FGF \xrightarrow{F \eta} F) = \id_F.
+  \]
+  Umgekehrt definieren zwei solche natürliche Transformationen $\eta$ und $\epsilon$, die diese Gleichungen erfüllen, eine Adjunktion zwischen $F$ und $G$.
+\end{bem}
+
+\begin{lem}[Verknüpfung von Adjunktionen]\mbox{}\\
+  Sei $F_1 \!:\! \Cat \to \Dat$ zu $G_1 \!:\! \Dat \to \Cat$ und $F_2 \!:\! \Dat \to \Eat$ zu $G_2 \!:\! \Eat \to \Dat$ linksadj. \\
+  Dann ist $F_2 \circ F_1 : \Cat \to \Eat$ zu $G_1 \circ G_2 : \Eat \to \Cat$ linksadjungiert.
+\end{lem}
+
+\begin{lem}[Eindeutigkeit des adjungierten Funktors]\mbox{}\\
+  \begin{itemize}
+    \item Gelte $F \ladj G_1$ und $F \ladj G_2$. Dann sind $G_1$ und $G_2$ nat. isomorph.
+    \item Gelte $F_1 \ladj G$ und $F_2 \ladj G$. Dann sind $F_1$ und $F_2$ nat. isomorph.
+  \end{itemize}
+\end{lem}
+
+\begin{defn}
+  Im Spezialfall, dass $\Cat$ und $\Dat$ Präordnungskategorien sind, wird ein Paar von adjungierten Funktoren (\dh{} monotonen Abbildungen) zwischen $\Cat$ und $\Dat$ auch \emph{Galoisverbindung} genannt.
+\end{defn}
+
+% TODO: RAPL, LAPC?
+% TODO: SAFT, GAFT?
+% TODO: Beispiele
+
+
 
 \section{Simpliziale Mengen}
 
@@ -410,12 +475,12 @@
 
 % vorgezogen: aus I.2.15
 \begin{defn}
-  Eine \emph{simpliziale Abbildung} zwischen simplizialen Mengen $X$ und $Y$ ist eine natürliche Transformation zwischen den beiden Funktoren $X, Y : \Delta^\op \to \SetC$.
+  Eine \emph{simpliziale Abbildung} zw. simpl. Mengen $X$ und $Y$ ist eine nat. Transformation zwischen den Funktoren $X, Y : \Delta^\op \to \SetC$.
 \end{defn}
 
 % vorgezogen: aus I.2.15
 \begin{defn}
-  Die Kategorie der simplizialen Mengen ist die Funktorkategorie $\sSet \coloneqq [\Delta^\op, \SetC]$.
+  Die Kategorie der simplizialen Mengen ist $\sSet \coloneqq [\Delta^\op, \SetC]$.
 \end{defn}
 
 \begin{defn}
