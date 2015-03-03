@@ -13,8 +13,10 @@
 \newcommand{\sSet}{\mathbf{sSet}} % Kategorie der simplizialen Mengen
 \newcommand{\Top}{\mathbf{Top}} % Kategorie der topologischen Räume
 \newcommand{\AbGrp}{\mathbf{AbGrp}} % Kategorie der abelschen Gruppen
+\newcommand{\Grp}{\mathbf{Grp}} % Kategorie der Gruppen
 \newcommand{\RMod}{\mathbf{R\text{-}Mod}} % Kategorie der R-Moduln
 \newcommand{\Ouv}{\mathbf{Ouv}} % Kategorie der offenene Mengen eines topol. Raumes
+\newcommand{\KHaus}{\mathbf{KHaus}} % Kategorie der kompakten Hausdorffräume
 \newcommand{\op}{\mathrm{op}} % opposite category
 \DeclareMathOperator{\sk}{sk} % Skelett
 \newcommand{\CC}[1]{{#1}_{\bullet}} % Kettenkomplex (chain complex)
@@ -59,7 +61,9 @@
 \end{bem}
 
 \begin{defn}
-  Eine Kategorie heißt \emph{endlich}, wenn sie nur endlich viele Objekte und Morphismen besitzt.
+  Eine Kategorie $\Cat$ heißt \emph{lokal klein}, wenn $\Hom(X, Y)$ für alle $X, Y \in \Ob(\Cat)$ eine Menge (keine echte Klasse) ist.
+  Sie heißt \emph{klein}, wenn auch die Klasse ihrer Objekte eine Menge ist.
+  Sie heißt \emph{endlich}, wenn Objekt- und Hom-Mengen sogar nur endlich sind.
 \end{defn}
 
 % Ausgelassen: II.1.1-II.1.7
@@ -85,7 +89,7 @@
   Ein Funktor $F : \Cat \to \Dat$ heißt \ldots
   \begin{itemize}
     \item \ldots{} \emph{treu}, wenn für alle $X, Y \in \Ob(\Cat)$ die Abbildung
-    \[ F : \Hom_\Cat(X, Y) \to \Hom_\Dat(FX, FY) \]
+    $F : \Hom_\Cat(X, Y) \to \Hom_\Dat(FX, FY)$
     injektiv ist.
     \item \ldots{} \emph{voll}, wenn diese Abb. für alle $X, Y \in \Ob(\Cat)$ surjektiv ist.
   \end{itemize}
@@ -210,9 +214,9 @@
 \begin{bem}
   Diese Definition ist äquivalent zur folgenden: \\
   Das Produkt von $X, Y$ ist $Z \in \Ob(\Cat)$ zusammen mit Morphismen
-  \[ X \xleftarrow{p_X} Z \xrightarrow{p_Y} Y, \]
+  $p_X : Z \to X$ und $p_Y : Z \to Y$,
   wenn für alle $Z' \in \Ob(\Cat)$ mit Morphismen 
-  \[ X \xleftarrow{p_X'} Z' \xrightarrow{p_Y'} Y \]
+  $p_X' : Z' \to X$ und $p_Y' : Z' \to Y$
   genau ein $f : Z' \to Z$ mit $p_X' = p_X \circ f$ und $p_Y' = p_Y \circ f$ existiert.
 \end{bem}
 
@@ -254,6 +258,8 @@
 % Ausgelassen: II.3.13 (Cartier-Dualität)
 % Ausgelassen: II.3.14 (Relative Gruppen-Schemata)
 
+\subsection{(Ko-)Limiten}
+
 % II.3.15 (Limiten)
 
 \begin{defn}
@@ -292,6 +298,10 @@
   $\fa{J \in \Ob(\Jat)} f'_J = f_J \circ g$.
 \end{bem}
 
+\begin{bem}
+  Die univ. Eigenschaft zeigt: Der Limes ist funktoriell, \dh{} wenn in $\Cat$ alle $\Jat$-Limiten (\dh{} Limiten von Funktoren $\Jat \to \Cat$) existieren, dann gibt es einen Funktor $\varprojlim : [\Jat, \Cat] \to \Cat$.
+\end{bem}
+
 % II.3.18
 \begin{bem}
   Folgende Konzepte lassen sich als Spezialfall des Limes über eine spezielle Indexkategorie $\Jat$ auffassen:
@@ -324,6 +334,10 @@
   Der Kolimes von $F \!:\! \Jat \!\to\! \Cat$ ist der Limes von $F^\op \!:\! \Jat^\op \!\to\! \Cat^\op$.
 \end{bem}
 
+\begin{bem}
+  Wenn in $\Cat$ alle $\Jat$-Kolimiten existieren, dann gibt es einen Funktor $\varinjlim : [\Jat, \Cat] \to \Cat$.
+\end{bem}
+
 % II.3.19
 \begin{bem}
   Folgende Konzepte sind ein Spezialfall des Kolimes:
@@ -341,14 +355,17 @@
 
 % II.3.20
 \begin{satz}
-  Angenommen, eine Kategorie $\Cat$ enthält ein term. Objekt, den Kodifferenzkern von allen parallelen Morphismen $f, g \in \Hom_\Cat(X, Y)$ und das Produkt $X \times Y$ von allen Paaren von Objekten. \\
+  Angenommen, eine Kategorie $\Cat$ enthält ein term. Objekt, den Differenzkern von allen parallelen Morphismen $f, g \in \Hom_\Cat(X, Y)$ und das Produkt $X \times Y$ von allen Paaren von Objekten. \\
   Dann existieren alle endlichen Limiten in $\Cat$, \dh{} der Limes von jedem Funktor $F : \Jat \to \Cat$, wobei $\Jat$ endlich ist.
+  Duales gilt für endl. Kolimiten mit initialem Obj., Kodifferenzkern und Koprodukten.
 \end{satz}
 
 % II.3.21
 \begin{kor}
-  In $\SetC$ existieren alle endlichen Limiten.
+  In $\SetC$ existieren alle endlichen Limiten und Kolimiten.
 \end{kor}
+
+% TODO: Kommutativität von Limiten
 
 \subsection{Adjunktionen}
 
@@ -376,8 +393,6 @@
   \[ G(f \in \Hom_\Dat(Y, Y')) \coloneqq a^{Y'}_{GY} \left( f \circ \left( a^Y_{GY} \right)^{-1} (\id_{GY}) \right). \]
 \end{bem}
 
-% TODO: Unit, counit
-
 \begin{bem}
   Sei $F : \Cat \to \Dat$ linksadjungiert zu $G : \Dat \to \Cat$. Setze
   \begin{align*}
@@ -389,7 +404,9 @@
     (G \xrightarrow{\eta G} GFG \xrightarrow{G \epsilon} G) = \id_G, \quad
     (F \xrightarrow{\epsilon F} FGF \xrightarrow{F \eta} F) = \id_F.
   \]
-  Umgekehrt definieren zwei solche natürliche Transformationen $\eta$ und $\epsilon$, die diese Gleichungen erfüllen, eine Adjunktion zwischen $F$ und $G$.
+  Umgekehrt definieren zwei solche natürliche Transformationen $\eta$ und $\epsilon$, die diese Gleichungen erfüllen, eine Adjunktion zwischen $F$ und $G$. \\
+  Dabei ist $\eta_X$ universell unter den Morphismen von $X \in \Ob(\Dat)$ zu einem Objekt der Form $GY$:
+  Für alle $f \in \Hom_\Dat(X, GY)$ gibt es genau ein $h \in \Hom(FX, Y)$ mit $f = G(h) \circ \eta_X$, und zwar $h = (a_X^Y)^{-1}(f)$. Duales gilt für $\epsilon_Y$.
 \end{bem}
 
 \begin{lem}[Verknüpfung von Adjunktionen]\mbox{}\\
@@ -408,9 +425,19 @@
   Im Spezialfall, dass $\Cat$ und $\Dat$ Präordnungskategorien sind, wird ein Paar von adjungierten Funktoren (\dh{} monotonen Abbildungen) zwischen $\Cat$ und $\Dat$ auch \emph{Galoisverbindung} genannt.
 \end{defn}
 
+\begin{bspe}
+  \begin{itemize}
+    \item Angenommen, in $\Cat$ existieren $\Jat$-Limiten bzw. $\Jat$-Kolimiten. Dann gibt es eine Adjunktion
+    $\Delta \ladj \varprojlim$
+    bzw.
+    $\varinjlim \ladj \Delta$.
+    \item Sei $F : \SetC \to \Grp$ der Funktor, der die freie Gruppe über einer Menge bastelt und $V : \Grp \to \SetC$ der Vergiss- funktor. Dann gilt $F \ladj V$. Gleiches gilt für viele weitere "`freie"' Konstruktionen.
+    \item Sei $\KHaus$ die Kat. der kompakten Hausdorffräume und $K : \Top \to \KHaus$ die Stone-Čech-Kompaktifizierung und $I : \KHaus \to \Top$ die Inklusion. Dann gilt $K \ladj I$.
+  \end{itemize}
+\end{bspe}
+
 % TODO: RAPL, LAPC?
 % TODO: SAFT, GAFT?
-% TODO: Beispiele
 
 
 
