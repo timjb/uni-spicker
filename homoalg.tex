@@ -6,7 +6,7 @@
 }
 
 \usepackage{pgffor} % \foreach-Schleifen
-%\usepackage{amssymb} % Doppelpfeil $\rightarrows$
+\usepackage{stmaryrd} % liefert \mapsfrom
 
 \newcommand{\nspace}[1]{\foreach \i in {1,...,#1}{ \! }} % Negativer Abstand
 \newcommand{\SetC}{\mathbf{Set}} % Kategorie der Mengen
@@ -37,6 +37,10 @@
 \DeclareMathOperator{\Ob}{Ob} % Objects (of a category)
 \DeclareMathOperator{\Cov}{Cov} % Überlagerungen (coverings)
 \newcommand{\ladj}{\dashv} % Links-adjungiert (left-adjoint)
+\DeclareMathOperator{\Gal}{Gal} % Galois-Gruppe
+\DeclareMathOperator{\Aut}{Aut} % Automorphismengruppe
+\newcommand{\ceil}[1]{\lceil #1 \rceil} % Aufrunden
+\newcommand{\floor}[1]{\lfloor #1 \rfloor} % Abrunden
 
 
 % Kleinere Klammern
@@ -462,6 +466,22 @@
 \begin{defn}
   Im Spezialfall, dass $\Cat$ und $\Dat$ Präordnungskategorien sind, wird ein Paar von adjungierten Funktoren (\dh{} monotonen Abbildungen) zwischen $\Cat$ und $\Dat$ auch \emph{Galoisverbindung} genannt.
 \end{defn}
+
+\begin{bspe}
+  \begin{itemize}
+    \item $(\ceil{\blank} : \R \to \Z) \ladj (i : \Z \hookrightarrow \R) \ladj (\floor{\blank} : \R \to \Z)$
+    \item Sei $L \supset K$ eine endl. Körpererweiterung.
+    Für eine Zwischenerw. $L \!\supseteq\! M \!\supseteq\! K$ sei
+    $\Gal(L, M) \!\coloneqq\! \{ f \!\in\! \Aut(L) | f|_M \!=\! \id_M \}$ die Galoisgruppe von $L$ über $M$.
+    Dann ist
+    \begin{align*}
+      \{ \, \text{Untergruppen von } \Gal(L, K) \, \} & \leftrightarrow \{ \, \text{Zwischenerw. } L \!\supseteq\! M \!\supseteq\! K \, \} \\
+      \sigma & \mapsto \Set{x \in L}{\sigma(x) = x} \\
+      \Gal(L, M) & \mapsfrom M
+    \end{align*}
+    eine Galoisverbindung (dabei sind Untergruppen durch Inklusion und Zwischenerweiterungen umgekehrt durch Inklusion geordnet).
+  \end{itemize}
+\end{bspe}
 
 \begin{lem}
   Sei $F \ladj G$ eine Adjunktion. Dann gilt:
