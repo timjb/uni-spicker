@@ -258,13 +258,15 @@
 % Ausgelassen: II.3.13 (Cartier-Dualität)
 % Ausgelassen: II.3.14 (Relative Gruppen-Schemata)
 
+\begin{samepage}
+
 \subsection{(Ko-)Limiten}
 
 % II.3.15 (Limiten)
 
 \begin{defn}
-  Seien $\Jat$, $\Cat$ Kategorien.
-  Der \emph{Diagonal-Funktor} $\Delta \!:\! \Cat \!\to\! [\Jat, \Cat]$ ist definiert durch
+  Seien $\Jat$, $\Cat$ Kat'en.
+  Der \emph{Diagonal-Funktor} $\Delta \!:\! \Cat \!\to\! [\Jat, \Cat]$ ist
   \[
     (\Delta X)(J \in \Ob(\Jat)) \coloneqq X, \quad
     (\Delta X)(\phi) \coloneqq \id_X, \quad
@@ -282,6 +284,8 @@
   \]
   darstellt. Man notiert $X = \varprojlim F$.
 \end{defn}
+
+\end{samepage}
 
 % Ausgelassen: Gleichung (II.5)
 
@@ -365,6 +369,24 @@
   In $\SetC$ existieren alle endlichen Limiten und Kolimiten.
 \end{kor}
 
+% Nicht (dort) im Buch
+\begin{bem}
+  Angenommen, in $\Cat$ existieren alle $\Jat$-Limiten.
+  Sei $\Iat$ eine bel. Kategorie.
+  Dann ex. alle $\Jat$-Limiten in $[\Iat, \Cat]$ und die Limiten werden objektweise berechnet:
+  Sei $F : \Jat \to [\Iat, \Cat]$ ein Funktor, dann ist
+  \[
+    (\varprojlim F)(I) = \varprojlim (F(\blank)(I)), \quad
+    (\varprojlim F)(f) = \varprojlim (F(\blank)(f)).
+  \]
+\end{bem}
+
+\begin{defn}
+  Ein Funktor $F : \Cat \to \Dat$ heißt \emph{stetig}, wenn er \emph{Limiten bewahrt}, \dh{} für alle Funktoren $D : \Jat \to \Dat$ (mit $\Jat$ klein) mit $\varprojlim D \in \Ob(\Cat)$ ex. auch der Limes von $F \circ G$ in $\Dat$ und es gilt
+  \[ \varprojlim (F \circ D) \cong F(\varprojlim D). \]
+  Ein Funktor $F$ heißt \emph{kostetig}, wenn er \emph{Kolimiten bewahrt}.
+\end{defn}
+
 % TODO: Kommutativität von Limiten
 
 \subsection{Adjunktionen}
@@ -421,9 +443,10 @@
   \end{itemize}
 \end{lem}
 
-\begin{defn}
-  Im Spezialfall, dass $\Cat$ und $\Dat$ Präordnungskategorien sind, wird ein Paar von adjungierten Funktoren (\dh{} monotonen Abbildungen) zwischen $\Cat$ und $\Dat$ auch \emph{Galoisverbindung} genannt.
-\end{defn}
+\begin{bem}
+  Sei $(F : \Cat \to \Dat) \ladj (G : \Dat \to \Cat)$ eine Adjunktion und $\Jat$ klein. \\
+  Dann gibt es eine ind. Adjunktion $(F \circ \blank : [\Jat, \Cat] \to [\Jat, \Dat]) \ladj (G \circ \blank)$.
+\end{bem}
 
 \begin{bspe}
   \begin{itemize}
@@ -436,7 +459,30 @@
   \end{itemize}
 \end{bspe}
 
-% TODO: RAPL, LAPC?
+\begin{defn}
+  Im Spezialfall, dass $\Cat$ und $\Dat$ Präordnungskategorien sind, wird ein Paar von adjungierten Funktoren (\dh{} monotonen Abbildungen) zwischen $\Cat$ und $\Dat$ auch \emph{Galoisverbindung} genannt.
+\end{defn}
+
+\begin{lem}
+  Sei $F \ladj G$ eine Adjunktion. Dann gilt:
+  \begin{itemize}
+    \item $F$ bewahrt Kolimiten (\emph{LAPC}, left-adjoints preserve colimits).
+    \item $G$ bewahrt Limiten (\emph{RAPL}, right-adjoints preserve limits).
+  \end{itemize}
+\end{lem}
+
+\begin{beweis}[RAPL]
+  Sei $\Jat$ eine kleine Indexkategorie.
+  %Wir haben folgende Adjunktionen:
+  Es gilt:
+  \begin{align*}
+    (F \circ \blank) \circ (\Delta : \Cat \to [\Jat, \Cat]) & \ladj (\varprojlim : [\Jat, \Cat] \to \Cat) \circ (G \circ \blank), \\
+    (\Delta : \Dat \to [\Jat, \Dat]) \circ F & \ladj G \circ (\varprojlim : [\Jat, \Dat] \to \Dat).
+  \end{align*}
+  Da $(F \circ \blank) \circ \Delta \equiv \Delta \circ F$, folgt aus der Eindeutigkeit des Rechtsadjungierten
+  $\varprojlim (G \circ D) \cong G(\varprojlim D)$ natürlich in $D$.
+\end{beweis}
+
 % TODO: SAFT, GAFT?
 
 
