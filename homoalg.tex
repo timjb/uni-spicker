@@ -29,11 +29,13 @@
 \newcommand{\leS}{l.\,e.\,S.} % lange exakte Sequenz
 \newcommand{\Lg}{\mathfrak{g}} % Lie-g
 \DeclareMathOperator{\Sing}{Sing} % Homomorphisms
+\newcommand{\Aat}{\mathcal{A}} % Category-A
 \newcommand{\Cat}{\mathcal{C}} % Category-C
 \newcommand{\Dat}{\mathcal{D}} % Category-D
 \newcommand{\Eat}{\mathcal{E}} % Category-E
 \newcommand{\Iat}{\mathcal{I}} % Category-I (Indexkategorie)
 \newcommand{\Jat}{\mathcal{J}} % Category-J (Indexkategorie)
+\newcommand{\Sit}{\mathcal{S}} % Situs-S
 \DeclareMathOperator{\Ob}{Ob} % Objects (of a category)
 \DeclareMathOperator{\Cov}{Cov} % Überlagerungen (coverings)
 \newcommand{\ladj}{\dashv} % Links-adjungiert (left-adjoint)
@@ -45,6 +47,7 @@
 \newcommand{\Tau}{\mathcal{T}} % Großes Tau
 \DeclareMathOperator{\Spec}{Spec} % Spektrum (eines Ringes)
 \newcommand{\Pow}{\mathcal{P}} % Potenzmenge (powerset)
+\newcommand{\Cont}{\mathcal{C}} % Menge der stetigen/diff'baren Funktionen
 
 
 % Kleinere Klammern
@@ -1024,12 +1027,78 @@
   % XXX: Gegenbeispiel
 \end{bspe}
 
+% Ausgelassen: II.4.8 (Superkommutativität)
+% Ausgelassen: II.4.9 (Definition: lokal geringte Superräume)
+
+% II.4.10
 \begin{defn}
   Ein \emph{Schema} ist ein lokal geringter Raum $(S, \O_S)$, der lokal isomorph zum affinen Spektrum eines Ringes ist, \dh{} jedes $x \in S$ besitzt eine offene Umgebung $U$, sodass $(U, \O_S|U)$ als lokal geringter Raum isomorph zum affinen Schema eines komm. Ringes ist.
 \end{defn}
 
-% Ausgelassen: II.4.8 (Superkommutativität)
-% Ausgelassen: II.4.9 (Definition: lokal geringte Superräume)
+% Ausgelassen: II.4.11 (Definition: Differentierbare Supermannigfaltigkeiten)
+
+
+% II.4.12 (Wie können wir Topologie in der Sprache der Kategorien beschreiben?)
+
+\begin{samepage}
+
+\subsection{Garben auf Siten}
+
+\end{samepage}
+
+% II.4.13 (Teile ausgelassen)
+\begin{defn}
+  Sei $\Sit$ eine Kategorie. Ein \emph{Sieb} auf $U \in \Ob(\Sit)$ ist eine Menge $\Phi = \Set{\varphi_i \in \Hom_\Sit(U_i, U)}{i \in I}$ von Morphismen nach $U$, sodass gilt:
+  \[ \fa{V \in \Ob(\Sit), \, i \in I, \, \psi \in \Hom_\Sit(V, U_i)} \varphi_i \circ \psi \in \Phi. \]
+\end{defn}
+
+\begin{bem}
+  Sei $\Phi$ ein Sieb auf $U$, $f \in \Hom(V, U)$. Dann ist
+  \[ f^*(\Phi) \coloneqq \Set{\varphi \in \Hom_\Sit(W, V)}{W \in \Ob(\Sit), f \circ \varphi \in \Phi} \]
+  ein Sieb auf $V$, die \emph{Einschränkung} von $\Phi$ auf $V$ (über $f$).
+\end{bem}
+
+% II.4.14
+\begin{defn}
+  Eine \emph{Grothendieck-Topologie} auf einer Kategorie $\Sit$ ist gegeben durch eine Menge $C(U)$ von Sieben auf $U$ für jedes $U \in \Ob(\Sit)$ (den sogenannten \emph{überdeckenden Sieben}), sodass gilt:
+  \begin{itemize}
+    \item Für alle $U \in \Ob(\Sit)$ ist das Sieb aller Abb. nach $U$ in $C(U)$.
+    \item Die Einschränkung $f^*(\Phi)$ eines Siebes $\Phi \in C(U)$ über $f \in \Hom_\Sit(V, U)$ ist in $C(U)$.
+    \item Die Überdeckungseigenschaft lässt sich lokal testen: \\
+    Für $\Psi$ ein bel. Sieb auf $U$ und $\Phi \in C(U)$ überdeckend. Angenom- men, für alle $(\varphi_i : U_i \to U) \in \Phi$ ist die Einschränkung von $\Psi$ über $\varphi_i$ überdeckend, also $\varphi_i^*(\Psi) \in C(U_i)$. Dann ist auch $\Psi \in C(U)$.
+  \end{itemize}
+\end{defn}
+
+% II.4.15 (Garben)
+
+\begin{defn}
+  Ein \emph{Situs} ist eine Kategorie $\Sit$ mit Grothendieck-Topologie.
+\end{defn}
+
+\begin{defn}
+  \begin{itemize}
+    \item Eine \emph{Prägarbe} von Mengen auf einem Situs $\Sit$ ist ein kontravarianter Funktor $\Garb : \Sit^\op \to \SetC$.
+    \item Allgemeiner ist eine $\mathcal{C}$-wertige Prägarbe ein Funktor $\Fais : \Sit^\op \to \Cat$ (z.\,B. $\Cat = \AbGrp, \RMod, \Top$).
+    \item Ein Morphismus zwischen Prägarben $\Fais$ und $\Garb$ auf demselben Situs ist eine natürliche Transformation zwischen $\Fais$ und $\Garb$.
+  \end{itemize}
+\end{defn}
+
+\begin{defn}
+  Eine \emph{Garbe} auf einem Situs $\Sit$ ist eine Prägarbe $\Fais$, für die gilt:
+  Für alle überdeckenden Siebe $\Phi \in C(U)$ und Familien von Schnitten $(s_\varphi \in \Fais(V))_{(\varphi : V \to U) \in \Phi}$, die miteinander vertr. sind, \dh{}
+  \[ \fa{(\varphi : V \to U) \in \Phi} \fa{\psi : W \to V} s_{\varphi \circ \psi} = s_\varphi|_W \coloneqq \Fais(\psi)(s_\varphi), \]
+  gibt es genau einen Schnitt $s \in \Fais(U)$ mit
+  \[ \fa{(\varphi : V \to U) \in \Phi} s_\varphi = s|_V \coloneqq \Fais(\varphi)(s). \]
+  Ein Morphismus zw. Garben ist ein Morphismen zw. den Prägarben.
+\end{defn}
+
+\begin{bem}
+  Die Notationen und Sprechweisen für (Prä-)Garben auf gew. topol. Räumen werden auch für Garben auf Siten angewendet. \\
+  Man notiert weiterhin $s|_V \coloneqq \Garb(f)(s)$ für für die Einschränkung eines Schnittes $s \in \Garb(U)$ über $f \in \Hom_\Sit(V, U)$ (wohlwissend, dass die Einschränkung auch von $f$ abhängt).
+\end{bem}
+
+% II.4.16 (Beispiel)
+% TODO
 
 
 \begin{samepage}
@@ -1234,7 +1303,7 @@
 \end{defn}
 
 \begin{defn}
-  Sei $0 \to A \to B \to C \to 0$ eine \keS{} in einer abelschen Kategorie $\mathcal{A}$. Die Sequenz heißt \emph{spaltend}, falls sie isomorph zur \keS{} $0 \to A \to A \oplus C \to C$ ist.
+  Sei $0 \to A \to B \to C \to 0$ eine \keS{} in einer abelschen Kategorie $\Aat$. Die Sequenz heißt \emph{spaltend}, falls sie isomorph zur \keS{} $0 \to A \to A \oplus C \to C$ ist.
 \end{defn}
 
 \begin{prop}
@@ -1368,7 +1437,7 @@
 
 % I.7.7 (Der de-Rham-Komplex)
 \begin{defn}
-  Sei $M$ eine $\mathcal{C}^\infty$-Mft, $\Omega^k(M)$ das $C^\infty(M)$-Modul der $k$-Formen auf $M$. Die \emph{äußere Ableitung} $\d : \Omega^k(M) \to \Omega^{k+1}(M)$ ist in lokalen Koordinaten $(x^1, \ldots, x^n)$ definiert durch
+  Sei $M$ eine $\Cont^\infty$-Mft, $\Omega^k(M)$ das $C^\infty(M)$-Modul der $k$-Formen auf $M$. Die \emph{äußere Ableitung} $\d : \Omega^k(M) \to \Omega^{k+1}(M)$ ist in lokalen Koordinaten $(x^1, \ldots, x^n)$ definiert durch
   \[ \d \left( \sum_{\abs{I} = k} f_I \d x^I \right) = \sum_{\abs{I} = k} \sum_{i=1}^n \frac{\partial f_I}{\partial x^i} \d x^i \wedge \d x^I. \]
   Die Kohomologiegruppen des so definierten Komplexes $\Omega^\bullet(M)$ heißen \emph{De-Rham-Kohomologiegruppen}.
 \end{defn}
@@ -1400,7 +1469,7 @@
 \begin{prop}
   \begin{itemize}
     \item Seien $\phi, \psi : X \to Y$ homotope Abbildungen zwischen topologischen Räumen. Dann sind die induzierten Abbildungen $\phi_*, \psi_* : \CC{C}(X; A) \to \CC{C}(Y; A)$ kettenhomotop.
-    \item Seien $\phi, \psi : M \to N$ zwei glatt homotope Abbildungen von $\mathcal{C}^\infty$-Mften. Dann sind $\phi^*, \psi^* : \Omega^\bullet(N) \to \Omega^\bullet(M)$.
+    \item Seien $\phi, \psi : M \to N$ zwei glatt homotope Abbildungen von $\Cont^\infty$-Mften. Dann sind $\phi^*, \psi^* : \Omega^\bullet(N) \to \Omega^\bullet(M)$.
   \end{itemize}
 \end{prop}
 
