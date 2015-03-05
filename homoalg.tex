@@ -41,6 +41,10 @@
 \DeclareMathOperator{\Aut}{Aut} % Automorphismengruppe
 \newcommand{\ceil}[1]{\lceil #1 \rceil} % Aufrunden
 \newcommand{\floor}[1]{\lfloor #1 \rfloor} % Abrunden
+\renewcommand{\O}{\mathcal{O}} % Strukturgarbe der stetigen Funktionen
+\newcommand{\Tau}{\mathcal{T}} % Großes Tau
+\DeclareMathOperator{\Spec}{Spec} % Spektrum (eines Ringes)
+\newcommand{\Pow}{\mathcal{P}} % Potenzmenge (powerset)
 
 
 % Kleinere Klammern
@@ -476,7 +480,7 @@
     Dann ist
     \begin{align*}
       \{ \, \text{Untergruppen von } \Gal(L, K) \, \} & \leftrightarrow \{ \, \text{Zwischenerw. } L \!\supseteq\! M \!\supseteq\! K \, \} \\
-      \sigma & \mapsto \Set{x \in L}{\sigma(x) = x} \\
+      G & \mapsto \Set{x \in L}{\fa{\sigma \in G} \sigma(x) = x} \\
       \Gal(L, M) & \mapsfrom M
     \end{align*}
     eine Galoisverbindung (dabei sind Untergruppen durch Inklusion und Zwischenerweiterungen umgekehrt durch Inklusion geordnet).
@@ -507,7 +511,11 @@
 
 
 
+\begin{samepage}
+
 \section{Simpliziale Mengen}
+
+\end{samepage}
 
 % §I.1 Triangulierte Räume
 
@@ -868,12 +876,12 @@
   \end{itemize}
 \end{defn}
 
-\begin{samepage}
-
 % I.5.9
 \begin{defn}
   Eine Garbe $\Fais$ auf $Y$ heißt \emph{lokal konstant}, falls jeder offene Punkt in $Y$ eine offene Umgebung $U$ besitzt, sodass $F|U$ isomorph zu einer konstanten Garbe ist.
 \end{defn}
+
+\begin{samepage}
 
 \begin{defn}
    Eine Garbe $\Fais$ auf einem topologischen Raum $Y$ heißt \ldots{}
@@ -890,6 +898,141 @@
 \begin{defn}
    Eine Garbe $\Fais$ ab. Gruppen auf einem topol. Raum $Y$ heißt \emph{fein} (fine, fin), wenn für je zwei disjunkte, abgeschlossene Teilmengen $A_1, A_2 \subseteq Y$ ein Garbenmorphismus $\alpha : \Fais \to \Fais$ existiert, sodass $\alpha$ auf einer offenen Umgebung von $A_1$ Null und auf einer offenen Umgebung von $A_2$ die Identität ist.
 \end{defn}
+
+\subsection{(Lokal) geringte Räume}
+
+\end{samepage}
+
+% II.4 Ein kategorieller Ansatz für die Konstruktion geometrischer Objekte
+
+% II.4.1 (Drei geometrische Kategorien)
+% (hier nur zwei)
+\begin{defn}
+  Eine topol. / glatte \emph{Mannigfaltigkeit} ist ein Paar $(M, \O_M)$, wobei $M$ ein Hausdorffraum und $\O_M$ eine Garbe auf $M$ ist, sodass jeder Punkt $x \in M$ eine offene Umgebung $U$ besitzt, sodass $\O_M|U$ isomorph zu einer Garbe von stetigen / glatten Funktionen auf einer offenen Teilmenge des $\R^n$ ist.
+\end{defn}
+
+% II.4.3 (Morphismen)
+\begin{defn}
+  Ein Morphismus $\Phi : (M, \O_M) \to (N, \O_N)$ zwischen topol. / glatten Mften. ist geg. durch eine stetige Abb. $\phi : M \to N$, sodass
+  %für alle offenen $U \subset N$ und $f \in \Gamma(U, \O_N)$ auch $f \circ \phi \in \Gamma(\phi^{-1}(U), \O_M)$ ist.
+  \[
+    \fa{U \subseteq N \text{ offen}} \fa{f \in \Gamma(U, \O_N)} f \circ \phi \in \Gamma(\phi^{-1}(U), \O_M).
+  \]
+\end{defn}
+
+% II.4.2 (Atlanten)
+\begin{bem}
+  Diese Definitionen sind äquivalent zu den üblichen Alte-Römer-Definitionen von Mannigfaltigkeiten über Atlanten.
+\end{bem}
+
+% II.4.5
+\begin{defn}
+  Ein \emph{geringter Raum} ist ein Paar $(M, \O_M)$, wobei $M$ ein topol. Raum und $\O_M$ eine Ringgarbe auf $M$ ist. \\
+  Ein Morphismus $\Phi : (M, \O_M) \to (N, \O_N)$ zwischen geringten Räumen ist ein Paar $(\varphi, \theta)$, wobei $\varphi : M \to N$ stetig und
+  \[ \theta = (\theta_U : \Gamma(U, \O_N) \to \Gamma(\varphi^{-1}(U), \O_M))_{U \opn N \text{ offen}} \]
+  eine Familie von Ringhomomorphismen ist, sodass
+  \[ \fa{V \opn U \opn N} \theta_U(\blank)|_{\varphi^{-1}(V)} = \theta_V(\blank|_V). \]
+\end{defn}
+
+\begin{sprech}
+  $\O_M$ heißt \emph{Strukturgarbe}.
+\end{sprech}
+
+% TODO: Pushforward (?) von Garben vor dieser Stelle definieren!
+
+\begin{bem}
+  Man kann $\theta$ als Garbenmorph. $\theta : \O_N \to \varphi_\bullet(\O_M)$ auffassen.
+\end{bem}
+
+\begin{bsp}
+  Sei $(M, \O_M)$ eine glatte Mft. Sei $\mathcal{D}_M$ die Garbe der linearen, derivativen Operatoren, also
+  \[ \mathcal{D}_M(U) \!\coloneqq\! \{ \, P \!:\! \O_M(U) \!\to\! \O_M(U), \, P \!=\! \sum f_I(z) \tfrac{\partial^I}{\partial z^I} \text{ in lok. Koord.} \, \}. \]
+  Dann ist $(M, \mathcal{D}_M)$ ein geringter Raum. % TODO: ist er lokal geringt?
+\end{bsp}
+
+% II.4.4 (Strukturgarben vs. Garben von Funktionen)
+
+% Ausgelassen: II.4.4 a) ("Super-regions in $\R^{m|n}$")
+
+% II.4.4 b) (Affine Schemata)
+% XXX: In eine noch zu erstellende Algebra/AG-Zusammenfassung auslagern?
+\begin{defn}
+  Sei $A$ ein komm. Ring. Das \emph{Spektrum} von $A$ ist
+  \[ \Spec(A) \coloneqq \{ \, \text{Primideale $\mathfrak{p} \subsetneq A$} \, \} \]
+  mit der sogenannten \emph{Zariski-Topologie} mit offenen Mengen
+  \[
+    \Tau \coloneqq \Set{D(S)}{S \subseteq A} \subset \Pow(\Spec(A)), \enspace
+    D(S) \coloneqq \Set{\mathfrak{p} \in \Spec(A)}{S \not\subseteq \mathfrak{p}}.
+  \]
+  Die abgeschlossenen Mengen sind von der Form $V(S)$ für $S \subseteq A$ mit
+  \[
+    V(S) \coloneqq \Spec(A) \setminus D(S) = \Set{\mathfrak{p} \in \Spec(A)}{S \subseteq \mathfrak{p}}.
+  \]
+  Für $U \subseteq \Spec(A)$ offen sei $\Delta(U)$ das Komplement der Vereinigung der Ideale in $U$.
+  Da $\Delta(U)$ multiplikativ abgeschlossen ist und $V \subseteq U \!\implies\! \Delta(V) \subseteq \Delta(U)$ gilt, können wir eine Prägarbe komm. Ringe $\O'$ auf $\Spec(A)$ wie folgt definieren:
+  \[
+    \O'(U) \coloneqq (\Delta(U))^{-1} A, \quad
+    r_{UV}(\left[\tfrac{s}{t}\right]) \coloneqq \left[\tfrac{s}{t}\right].
+  \]
+  Sei $\O \coloneqq \O_{\Spec(A)} \coloneqq (\O')^+$ die Garbifizierung von $\O'$. \\
+  Der geringte Raum $(\Spec(A), \O)$ heißt \emph{affines Schema} von $A$.
+\end{defn}
+
+\begin{bem}
+  Sei $A$ ein Integritätsbereich. Dann ist das Nullideal $(0) \in \Spec(A)$ ein generischer Punkt, \dh{} der topologische Abschluss von $(0)$ ist ganz $\Spec(A)$.
+\end{bem}
+
+% Nicht im Buch
+\begin{lem}
+  $(\O_{\Spec(A)})_{\mathfrak{p}} \cong A_{\mathfrak{p}} \coloneqq \Delta(\mathfrak{p})^{-1} A$ für alle $\mathfrak{p} \in \Spec(A)$
+\end{lem}
+
+% TODO: Morphismen zwischen Schemata
+
+% XXX: In eine noch zu erstellende Algebra-Zusammenfassung auslagern?
+\begin{defn}
+  Ein Ring $R$ heißt \emph{lokal}, wenn er eine der folgenden äquivalenten Bedingungen erfüllt:
+  \begin{itemize}
+    \item Er besitzt genau ein maximales Linksideal.
+    \item Er besitzt genau ein maximales Rechtsideal.
+    %\item $\sum_{i=0}^n x_i$ ist eine Einheit $\implies$ ein $x_i$ ist eine Einheit.
+    \item Wenn eine endliche (evtl. leere) Summe von Ringelementen eine Einheit ist, dann auch einer der Summanden (insb. gilt $0 \not= 1$).
+    \item $\Spec(R)$ hat genau einen abgeschl. Punkt (das maximale Ideal).
+  \end{itemize}
+\end{defn}
+
+\begin{bem}
+  In lok. Ringen stimmen max. Links- und Rechtsideal überein.
+\end{bem}
+
+\begin{defn}
+  Seien $R$ und $S$ lokale Ringe mit max. Idealen $\mathfrak{m} \!\subset\! R$ und $\mathfrak{n} \!\subset\! S$. \\
+  Ein \emph{lokaler Ringhomomorphismus} zwischen $R$ und $S$ ist ein Ringhomomorphismus $f : R \to S$ mit $f(\mathfrak{m}) \subseteq \mathfrak{n}$.
+\end{defn}
+
+% II.4.6
+\begin{defn}
+  Ein geringter Raum $(M, \O_M)$ heißt \emph{lokal geringt}, wenn die Fasern $\O_{M,x}$ für alle $x \in M$ lokale Ringe sind. \\
+  Ein Morphismus $\Phi = (\varphi, \theta) \!:\! (M, \O_M) \to (N, \O_N)$ heißt \emph{Morph. von lokal geringten Räumen}, wenn für alle $x \in M$ die ind. Abb.
+  \[ \theta_x : \O_{N,y} \to \O_{M,x} \]
+  ein lokaler Homomorphismus von lokalen Ringen ist.
+\end{defn}
+
+% II.4.7 (Bemerkungen)
+\begin{bspe}
+  Affine Schemata und Mften sind lokal geringte Räume.
+  % XXX: Gegenbeispiel
+\end{bspe}
+
+\begin{defn}
+  Ein \emph{Schema} ist ein lokal geringter Raum $(S, \O_S)$, der lokal isomorph zum affinen Spektrum eines Ringes ist, \dh{} jedes $x \in S$ besitzt eine offene Umgebung $U$, sodass $(U, \O_S|U)$ als lokal geringter Raum isomorph zum affinen Schema eines komm. Ringes ist.
+\end{defn}
+
+% Ausgelassen: II.4.8 (Superkommutativität)
+% Ausgelassen: II.4.9 (Definition: lokal geringte Superräume)
+
+
+\begin{samepage}
 
 \section{Komplexe und (Ko-)Homologie}
 
