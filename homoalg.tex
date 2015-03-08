@@ -17,6 +17,8 @@
 \newcommand{\RMod}{\mathbf{R\text{-}Mod}} % Kategorie der R-Moduln
 \newcommand{\Ouv}{\mathbf{Ouv}} % Kategorie der offenene Mengen eines topol. Raumes
 \newcommand{\KHaus}{\mathbf{KHaus}} % Kategorie der kompakten Hausdorffräume
+\newcommand{\Sh}{\mathbf{Sh}} % Kategorie der Garben (sheaves)
+\newcommand{\CatC}{\mathbf{Cat}} % Kategorie der kleinen Kategorien
 \newcommand{\op}{\mathrm{op}} % opposite category
 \DeclareMathOperator{\sk}{sk} % Skelett
 \newcommand{\CC}[1]{{#1}_{\bullet}} % Kettenkomplex (chain complex)
@@ -48,6 +50,8 @@
 \DeclareMathOperator{\Spec}{Spec} % Spektrum (eines Ringes)
 \newcommand{\Pow}{\mathcal{P}} % Potenzmenge (powerset)
 \newcommand{\Cont}{\mathcal{C}} % Menge der stetigen/diff'baren Funktionen
+\newcommand{\NCat}{\mathcal{NC}} % Nerv der Kategorie C
+\newcommand{\Nerve}{\mathcal{N}} % Nerv einer Kategorie
 
 
 % Kleinere Klammern
@@ -75,6 +79,10 @@
   Eine Kategorie $\Cat$ heißt \emph{lokal klein}, wenn $\Hom(X, Y)$ für alle $X, Y \in \Ob(\Cat)$ eine Menge (keine echte Klasse) ist.
   Sie heißt \emph{klein}, wenn auch die Klasse ihrer Objekte eine Menge ist.
   Sie heißt \emph{endlich}, wenn Objekt- und Hom-Mengen sogar nur endlich sind.
+\end{defn}
+
+\begin{defn}
+  Sei $\CatC$ die Kategorie mit kleinen Kategorien als Objekten und Funktoren als Morphismen.
 \end{defn}
 
 % Ausgelassen: II.1.1-II.1.7
@@ -125,11 +133,7 @@
 
 \begin{defn}
   Ein Funktor $F : \Cat \to \Dat$ ist ein \emph{Kategorienäquivalenz}, falls es einen Funktor $G : \Dat \to \Cat$ mit $F \circ G \simeq \Id_\Dat$ und $G \circ F \simeq \Id_\Cat$ gibt. \\
-  Die Funktoren $F$ und $G$ heißen dann zueinander \emph{quasiinvers}.
-\end{defn}
-
-\begin{defn}
-  Zwei Kategorien $\Cat$, $\Dat$ heißen zueinander \emph{äquivalent}, wenn es eine Kategorienäquivalenz $F : \Cat \to \Dat$ gibt.
+  Die Funktoren $F$ und $G$ heißen dann zueinander \emph{quasiinvers} und die Kategorien $\Cat$ und $\Dat$ äquivalent.
 \end{defn}
 
 % Ausgelassen: II.2.6
@@ -265,11 +269,11 @@
   die die offensichtlichen Axiome erfüllen.
 \end{bem}
 
+\columnbreak
+
 % Ausgelassen: II.3.11,II.3.12 (Affine Gruppen-Schemata)
 % Ausgelassen: II.3.13 (Cartier-Dualität)
 % Ausgelassen: II.3.14 (Relative Gruppen-Schemata)
-
-\begin{samepage}
 
 \subsection{(Ko-)Limiten}
 
@@ -295,8 +299,6 @@
   \]
   darstellt. Man notiert $X = \varprojlim F$.
 \end{defn}
-
-\end{samepage}
 
 % Ausgelassen: Gleichung (II.5)
 
@@ -746,6 +748,33 @@
   $\abs{X}^D \cong \abs{X}^{I,II} \cong \abs{X}^{II,I}$ kanonisch.
 \end{satz}
 
+% II.4.20a)
+\begin{defn}
+  Der \emph{Nerv} $\NCat$ einer kleinen Kategorie $\Cat$ ist die simpl. Menge
+  \begin{align*}
+    & \NCat_n \coloneqq \left\{ \, \text{Diagramme } X_0 \xrightarrow{\varphi_1} X_1 \xrightarrow{\varphi_2} \ldots \xrightarrow{\varphi_n} X_n \text{ in $\Cat$} \, \right\} \\
+    & \NCat(f : [m] \to [n])(X_0 \xrightarrow{\varphi_1} \ldots \xrightarrow{\varphi_n} X_n) \coloneqq 
+    ( Y_0 \xrightarrow{\psi_1} \ldots \xrightarrow{\psi_m} Y_m) \\
+    & \quad \text{mit} \enspace Y_i \coloneqq X_{f(i)}, \enspace \psi_i \coloneqq \varphi_{f(i)} \circ \nldots \circ \varphi_{f(i-1)+1}
+    %& \left( X_{f(0)} \to \ldots \to X_{f(i)} \xrightarrow{\varphi_{f(i+1)} \ldots \circ \varphi_{f(i)+1}} X_{f(i+1)} \to \ldots \to X_{f(m)} \right)
+  \end{align*}
+\end{defn}
+
+% II.4.21
+\begin{bsp}
+ % Der Nerv der Präordnungskat. mit Objekten $\{ 0, \ldots, n \}$ ist $\Delta[n]$.
+ $\Delta[n] = \NCat(\text{Präordnungskategorie mit Objekten } \{ 0, \ldots, n \})$
+\end{bsp}
+
+% II.4.20b), II.4.22
+\begin{bem}
+  \begin{itemize}
+    \item Der Nerv ist volltreuer Funktor $\NCat : \CatC \to \sSet$.
+    \item Jede kleine Kat. kann aus ihrem Nerv zurückgewonnen werden.
+    \item $\Nerve(\Cat \times \Dat) = D(\Nerve\Cat \times \Nerve\Dat)$
+  \end{itemize}
+\end{bem}
+
 \section{Garben}
 
 \end{samepage}
@@ -1097,8 +1126,23 @@
   Man notiert weiterhin $s|_V \coloneqq \Garb(f)(s)$ für für die Einschränkung eines Schnittes $s \in \Garb(U)$ über $f \in \Hom_\Sit(V, U)$ (wohlwissend, dass die Einschränkung auch von $f$ abhängt).
 \end{bem}
 
-% II.4.16 (Beispiel)
-% TODO
+% II.4.16
+\begin{bsp}
+  Sei $G$ eine Gruppe und $\Sit_G$ die Kategorie der Mengen mit $G$-Wirkung und äquivarianten Abbildungen. Man nennt ein Sieb $\Phi$ über $U \in \Ob(\Sit_G)$ überdeckend, wenn
+  $U = \cup_{(\varphi : V \to U) \in \Phi} \,\, \varphi(V)$. \\
+  %\[ U = \bigcup_{(\varphi : V \to U) \in \Phi} \varphi(V). \]
+  Sei $\Sh_G$ die Kategorie der Garben über dem Situs $\Sit_G$. \\
+  Sei $G_l \coloneqq G \in \Ob(\Sit_G)$ mit der Linkswirkung $g.h \coloneqq gh$. \\
+  Es gibt einen Funktor $\alpha : \Sh_G \to \Sit_G$ mit $\alpha(F) \coloneqq F(G_l) \in \Ob(\Sit_G)$, wobei $G$ auf $F(G_l)$ durch $g.x \coloneqq F(h \mapsto hg)(x)$ für $x \in F(G_l)$ wirkt.
+\end{bsp}
+
+% II.4.17
+\begin{prop}
+  $\alpha : \Sh_G \to \Sit_G$ ist eine Kategorienäquivalenz.
+\end{prop}
+
+% Ausgelassen: II.4.18 (Lemma)
+% Ausgelassen: II.4.19 (Bemerkungen)
 
 
 \begin{samepage}
