@@ -19,6 +19,7 @@
 \newcommand{\KHaus}{\mathbf{KHaus}} % Kategorie der kompakten Hausdorffräume
 \newcommand{\Sh}{\mathbf{Sh}} % Kategorie der Garben (sheaves)
 \newcommand{\CatC}{\mathbf{Cat}} % Kategorie der kleinen Kategorien
+\newcommand{\Vect}{\mathbf{Vect}} % Kategorie der Vektorräume über einem Körper
 \newcommand{\op}{\mathrm{op}} % opposite category
 \DeclareMathOperator{\sk}{sk} % Skelett
 \newcommand{\CC}[1]{{#1}_{\bullet}} % Kettenkomplex (chain complex)
@@ -514,6 +515,33 @@
 
 % TODO: SAFT, GAFT?
 
+% nicht im Buch
+\begin{defn}
+  Eine \emph{monoidale Kategorie} $\Cat$ besitzt einen Funktor $\otimes : \Cat \times \Cat \to \Cat$ (genannt Tensorprodukt), ein Objekt $1 \in \Ob(\Cat)$ und natürliche Isomorphismen
+  (die zwei Kohärenzbedingungen erfüllen)
+  \[
+    a_{X,Y,Z} : (X \otimes Y) \otimes Z \cong X \otimes (Y \otimes Z), \enspace
+    \lambda_X : 1 \otimes X \cong X, \enspace
+    \rho_X : X \otimes 1 \cong X.
+  \]
+\end{defn}
+
+% II.4.23
+\begin{defn}
+  Sei $(\Cat, \otimes)$ eine monoidale Kategorie. Ein \emph{interner Hom-Funktor} ist ein Funktor $[\blank,\blank] : \Cat^\op \times \Cat \to \Cat$, der sodass für alle $X \in \Ob(\Cat)$ der Funktor $\blank \otimes X$ linksadjungiert zu $[X, \blank]$ ist, \dh{}
+  \[ \Hom_\Cat(Y \otimes X, Z) \cong \Hom_\Cat(Y, [X, Z]). \]
+  $[X, Y] =: Y^X$ heißt auch \emph{Exponentialobjekt}.
+\end{defn}
+
+% nicht im Buch
+\begin{defn}
+  Eine monoidale Kategorie heißt \emph{kartesisch abgeschlossen}, wenn sie einen internen Hom-Funktor besitzt.
+\end{defn}
+
+\begin{bspe}
+  $\SetC$, $\AbGrp$, $k-\Vect$ und $\CatC$ sind kartesisch abgeschl.
+\end{bspe}
+
 
 
 \begin{samepage}
@@ -775,6 +803,23 @@
   \end{itemize}
 \end{bem}
 
+\begin{bem}
+  Mit $X * Y \coloneqq D(X \times Y)$ wird $\sSet$ zu einer monoidalen Kategorie.
+\end{bem}
+
+% II.4.24a)
+\begin{prop}
+  $\sSet$ ist kartesisch abgeschlossen. Dabei ist
+  \[ [X, Y]_n = (Y^X)_n \coloneqq \Hom_\sSet(\Delta[n] * X, Y). \]
+\end{prop}
+
+% II.4.24b)
+\begin{prop}
+  Der Nervfunktor ist verträglich mit dem internen Hom: \\
+  Seien $\Cat$, $\Dat$ kleine Kategorien. Dann ist
+  \[ \Nerve([\Cat, \Dat]_{\CatC}) \!\cong\! [\Nerve\Cat, \Nerve\Dat]_{\sSet}. \]
+\end{prop}
+
 \section{Garben}
 
 \end{samepage}
@@ -788,7 +833,7 @@
     \item Eine mengenwertige \emph{Prägarbe} $\Fais$ auf einem topol. Raum $X$ ist ein Funktor
     $\Fais : \Ouv(X)^\op \to \SetC$.
     Dabei ist $\Ouv(X)$ die Präordnungs-Kategorie der offenen Teilmengen von $X$ geordnet durch Inklusion.
-    \item Allgemeiner ist eine $\mathcal{C}$-wertige Prägarbe ein Funktor $\Fais : \Ouv(X)^\op \to \mathcal{C}$ (z.\,B. $\mathcal{C} = \AbGrp, \RMod, \Top$).
+    \item Allgemeiner ist eine $\Cat$-wertige Prägarbe ein Funktor $\Fais : \Ouv(X)^\op \to \Cat$ (z.\,B. $\Cat = \AbGrp, \RMod, \Top$).
     \item Ein Morphismus zwischen Prägarben $\Fais$ und $\Garb$ auf demselben topol. Raum ist eine natürliche Transformation zwischen $\Fais$ und $\Garb$.
   \end{itemize}
 \end{defn}
