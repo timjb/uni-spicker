@@ -18,8 +18,10 @@
 \newcommand{\Ouv}{\mathbf{Ouv}} % Kategorie der offenene Mengen eines topol. Raumes
 \newcommand{\KHaus}{\mathbf{KHaus}} % Kategorie der kompakten Hausdorffräume
 \newcommand{\Sh}{\mathbf{Sh}} % Kategorie der Garben (sheaves)
+\newcommand{\PSh}{\mathbf{PSh}} % Kategorie der Prägarben (abelscher Gruppen)
 \newcommand{\CatC}{\mathbf{Cat}} % Kategorie der kleinen Kategorien
 \newcommand{\Vect}{\mathbf{Vect}} % Kategorie der Vektorräume über einem Körper
+\newcommand{\Mod}{\mathbf{Mod}} % Kategorie der Moduln über einem Ring
 \newcommand{\op}{\mathrm{op}} % opposite category
 \DeclareMathOperator{\sk}{sk} % Skelett
 \newcommand{\CC}[1]{{#1}_{\bullet}} % Kettenkomplex (chain complex)
@@ -53,11 +55,11 @@
 \newcommand{\Cont}{\mathcal{C}} % Menge der stetigen/diff'baren Funktionen
 \newcommand{\NCat}{\mathcal{NC}} % Nerv der Kategorie C
 \newcommand{\Nerve}{\mathcal{N}} % Nerv einer Kategorie
-
+\DeclareMathOperator{\coker}{coker} % Kokern
+\DeclareMathOperator{\coim}{coim} % Kobild
 
 % Kleinere Klammern
 \delimiterfactor=701
-
 
 \begin{document}
 
@@ -528,10 +530,13 @@
 
 % II.4.23
 \begin{defn}
-  Sei $(\Cat, \otimes)$ eine monoidale Kategorie. Ein \emph{interner Hom-Funktor} ist ein Funktor $[\blank,\blank] : \Cat^\op \times \Cat \to \Cat$, der sodass für alle $X \in \Ob(\Cat)$ der Funktor $\blank \otimes X$ linksadjungiert zu $[X, \blank]$ ist, \dh{}
+  Sei $(\Cat, \otimes)$ eine monoidale Kategorie. Ein \emph{interner Hom-Funktor} ist ein Funktor $[\blank,\blank] : \Cat^\op \times \Cat \to \Cat$, für den gilt: für alle $X \in \Ob(\Cat)$ der Funktor $\blank \otimes X$ linksadjungiert zu $[X, \blank]$ ist, \dh{}
   \[ \Hom_\Cat(Y \otimes X, Z) \cong \Hom_\Cat(Y, [X, Z]). \]
-  $[X, Y] =: Y^X$ heißt auch \emph{Exponentialobjekt}.
 \end{defn}
+
+\begin{nota}
+  $[X, Y] =: Y^X$ heißt auch \emph{Exponentialobjekt}.
+\end{nota}
 
 % nicht im Buch
 \begin{defn}
@@ -804,7 +809,7 @@
 \end{bem}
 
 \begin{bem}
-  Mit $X * Y \coloneqq D(X \times Y)$ wird $\sSet$ zu einer monoidalen Kategorie.
+  Mit $X \!*\! Y \coloneqq D(X \!\times\! Y)$ ist $\sSet$ eine monoidale Kategorie.
 \end{bem}
 
 % II.4.24a)
@@ -858,6 +863,10 @@
 \begin{bem}
   Sei $\Fais$ eine (Prä-)Garbe auf $X$ und $U \subseteq X$ offen. Dann definiert $(\Fais|U)(V) \coloneqq \Fais(U \cap V)$ eine (Prä-)Garbe auf $U$.
 \end{bem}
+
+\begin{nota}
+  Sei $\PSh(X) \coloneqq [\Ouv(X)^\op, \AbGrp]$ die Kategorie der Prägarben abelscher Gruppen auf einem topologischen Raum $X$ und $\Sh(X) \subset \PSh(X)$ die volle Unterkategorie der Garben.
+\end{nota}
 
 % I.5.3 (Prägarben und Garben von strukturierten Mengen)
 
@@ -1536,7 +1545,7 @@
 \begin{defn}
   Sei $\Lg$ eine Lie-Algebra und $A$ ein $\Lg$-Modul. Setze $C^k(\Lg, A) \coloneqq L(\wedge^k \Lg, A)$ und definiere $\d : C^k(\Lg, A) \to C^{k+1}(\Lg, A)$ durch eine allgemeine Cartan-Formel
   \begin{align*}
-    (\d c)(g_1, \nldots, g_{k+1}) \coloneqq & \nspace{4} \sum_{1 \leq j < l \leq k+1} \nspace{4} (-1)^{j+l-1} c([g_j, g_l], g_1, \nldots, \hat{g_j}, \nldots, \hat{g_l}, \nldots, g_{k+1}) \\
+    (\d c)(g_1, \nldots, g_{k+1}) \coloneqq & \nspace{7} \sum_{1 \leq j < l \leq k+1} \nspace{7} (-1)^{j+l-1} c([g_j, g_l], g_1, \nldots, \hat{g_j}, \nldots, \hat{g_l}, \nldots, g_{k+1}) \\
     & + \sum_{j=1}^{k+1} (-1)^j g_j c(g_1, \nldots, \hat{g_j}, \ldots, g_{k+1}).
   \end{align*}
   Die Kohomologiegruppen des so definierten Kokettenkomplexes werden mit $H^\bullet(\Lg, A)$ bezeichnet.
@@ -1566,5 +1575,203 @@
 \begin{kor}
   Homotopieäquivalente Räume besitzen isomorphe singuläre Homologiegruppen.
 \end{kor}
+
+\section{Abelsche und additive Kategorien}
+
+Sei $\Cat$ eine Kategorie.
+
+% II.5.2
+\begin{axiom}
+  $\Cat$ ist erfüllt \textbf{A1}, wenn sie über $\AbGrp$ angereichtert ist, \dh{} die Morphismenmengen sind ab. Gruppen und die Verknüpfung
+  \[ \circ : \Hom_\Cat(Y, Z) \times \Hom_\Cat(X, Y) \to \Hom_\Cat(X, Z) \]
+  ist für alle $X, Y, Z \in \Ob(\Cat)$ bilinear.
+\end{axiom}
+
+% II.5.3
+\begin{axiom}
+  $\Cat$ erfüllt \textbf{A2}, wenn es ein \emph{Nullobjekt} $0 \in \Ob(\Cat)$ gibt mit
+  \[ \Hom_\Cat(0, 0) = \text{Nullgruppe} = \{ \id_0 \}. \]
+\end{axiom}
+
+\begin{bem}
+  Dann ist auch $\Hom_\Cat(X, 0) \!=\! \Hom(0, X) \!=\! 0$ für alle $X \!\in\! \Ob(\Cat)$.
+\end{bem}
+
+% II.5.4
+\begin{axiom}
+  $\Cat$ erfüllt \textbf{A3}, wenn es für alle $X, Y \in \Ob(\Cat)$ ein Objekt $X \oplus Y \in \Ob(\Cat)$ (genannt \emph{direkte Summe}) und Morphismen
+  \[ X \stackrel[i_x]{p_X}{\leftrightarrows} X \oplus Y \stackrel[i_Y]{p_Y}{\rightleftarrows} Y \]
+  gibt mit
+  \inlineitem{$p_X \circ i_X = \id_X$}, \enspace
+  \inlineitem{$p_Y \circ i_Y = \id_Y$}, \enspace
+  \inlineitem{$p_Y \circ i_X = 0$}, \enspace
+  \inlineitem{$p_X \circ i_Y = 0$}, \enspace
+  \inlineitem{$(i_X \circ p_X) + (i_Y \circ p_Y) = \id_{X \oplus Y}.$}
+\end{axiom}
+
+% II.5.5
+\begin{bem}
+  $X \oplus Y$ ist sowohl Produkt als auch Koprodukt von $X$ und $Y$.
+\end{bem}
+
+% II.5.6
+
+% II.5.6
+\begin{defn}
+  Der \emph{Kern} $\ker \varphi$ eines Morphismus $\varphi \in \Hom_\Cat(X, Y)$ ist
+  ein Paar $(K \in \Ob(\Cat), k \in \Hom_\Cat(K, X))$ mit
+  sodass $\varphi \circ k = 0$, sodass es für alle $k' \in \Hom(K', X)$ mit $\varphi \circ k'$ einen eindeutigen Morphismus $h \in \Hom_\Cat(K', K)$ mit $k' = k \circ h$ gibt.
+\end{defn}
+
+\begin{bem}
+  Die Definition des Kerns ist äquivalent zur folgenden: \\
+  Der Kern von $\varphi$ ist das darstellende Obj. $K \!\in\! \Ob(\AbGrp)$ des Funktors
+  \[
+    \Cat^\op \to \AbGrp, \enspace
+    Z \mapsto \ker(\varphi \circ \blank : X(Z) \to Y(Z)), \enspace
+    f \mapsto (\blank \circ f).
+  \]
+\end{bem}
+
+% Ausgelassen: II.5.7
+
+% II.5.7
+\begin{defn}
+  Der \emph{Kokern} $\coker \varphi$ eines Morphismus $\varphi \in \Hom_\Cat(X, Y)$ ist ein Paar $(C \in \Ob(\Cat), c \in \Hom_\Cat(Y, C))$ mit $c \circ \varphi = 0$, sodass es für alle $c' \in \Hom_\Cat(Y, C')$ mit $c' \circ \varphi = 0$ einen eindeutigen Morphismus $h \in \Hom_\Cat(C, C')$ mit $c' = h \circ c$ gibt.
+\end{defn}
+
+% Ausgelassen: Definition über Doppeldualisierung
+
+\begin{bem}
+  Die Definition des Kokerns ist äquivalent zur folgenden: \\
+  Der Kern von $\varphi$ ist ein Morphismus $c \in \Hom_\Cat(Y, C)$, sodass
+  \[ 0 \to \Hom_\Cat(C, Z) \xrightarrow{c \circ \blank} \Hom_\Cat(Y, Z) \xrightarrow{\varphi \circ \blank} \Hom_\Cat(X, Z) \to 0 \]
+  für alle $Z \in \Ob(\Cat)$ exakt ist.
+\end{bem}
+
+\begin{acht}
+  Der Kokern ist \textit{nicht} das darstellende Obj. des Funktors
+  \[
+    \Cat^\op \to \AbGrp, \enspace
+    Z \mapsto \coker(\varphi \circ \blank : X(Z) \to Y(Z)), \enspace
+    f \mapsto (\blank \circ f).
+  \]
+\end{acht}
+
+\begin{bem}
+  Kern und Kokern sind eindeutig bis auf Isomorphismus.
+\end{bem}
+
+\begin{defn}
+  Sei $\varphi \in \Hom_\Cat(X, Y)$. Dann heißt
+  \begin{itemize}
+    \item $\im \varphi \coloneqq \ker(\coker \varphi)$ \emph{Bild} von $\varphi$,
+    \item $\coim \varphi \coloneqq \coker(\ker \varphi)$ \emph{Kobild} von $\varphi$.
+  \end{itemize}
+\end{defn}
+
+% II.5.11e)
+\begin{defn}
+  Sei $\Cat$ eine Kategorie, $f \in \Hom_\Cat(X, Y)$ ein Morphismus.
+  \begin{itemize}
+    \item $f$ heißt \emph{Monomorphismus}, wenn $f$ linkskürzbar ist, \dh{}
+    \[
+      \fa{X' \in \Ob(\Cat)} \fa{g, h \in \Hom_\Cat(X', X)}
+      f \circ g = f \circ h \implies g = h.
+    \]
+    \item $f$ heißt \emph{Epimorphismus}, wenn $f$ rechtskürzbar ist, \dh{}
+    \[
+      \fa{Y' \in \Ob(\Cat)} \fa{g, h \in \Hom_\Cat(Y, Y')}
+      g \circ f = h \circ f \implies g = h.
+    \]
+  \end{itemize}
+\end{defn}
+
+\begin{lem}
+  Kerne sind Monomorphismen, Kokerne Epimorphismen.
+\end{lem}
+
+\begin{lem}
+  \begin{itemize}
+    \item Sei $(K, k)$ der Kern von $\varphi$. Dann gilt
+    \[ \varphi \text{ ist ein Monomorphismus} \iff K \cong 0. \]
+    \item Sei $(C, c)$ der Kokern von $\varphi$. Dann gilt
+    \[ \varphi \text{ ist ein Epimorphismus} \iff C \cong 0. \]
+  \end{itemize}
+\end{lem}
+
+% II.5.9
+\begin{axiom}
+  $\Cat$ erfüllt \textbf{A4}, wenn für alle $\varphi \in \Hom_\Cat(X, Y)$ eine Sequenz
+  \[ K \xrightarrow{k} X \xrightarrow{i} I \xrightarrow{j} Y \xrightarrow{c} C \]
+  existiert mit folgenden Eigenschaften: \inlineitem{$\varphi = j \circ i$}
+  \begin{itemize}
+    \item $(K, k)$ ist der Kern, $(C, c)$ der Kokern von $\varphi$,
+    \item $(I, i)$ ist der Kokern von $k$, $(I, j)$ der Kern von $c$.
+  \end{itemize}
+  Diese Sequenz heißt \emph{kanonische Zerlegung} von $\varphi$.
+\end{axiom}
+
+% II.5.11a)
+\begin{bem}
+  Die kanonische Zerlegung ist eindeutig bis auf eindeutigen Iso.
+\end{bem}
+
+% II.5.11b)
+\begin{bem}
+  Angenommen, $\Cat$ besitzt Kerne und Kokerne. \\
+  Dann gibt es für alle $\varphi \in \Hom_\Cat(X, Y)$ die Diagramme
+  \[
+    \ker \varphi \xrightarrow{k} X \xrightarrow{i} \coim \varphi, \quad
+    \im \varphi \xrightarrow{j} Y \xrightarrow{c} \coker \varphi.
+  \]
+  Aus den univ. Eigenschaften von Kern u. Kokern folgt die Existenz eines Morphismus $l \in \Hom(\coim \varphi, \im \varphi)$ mit $j \circ l \circ i = \varphi$. \\
+  Das Ax. \textbf{A4} gilt genau dann, wenn $l$ für alle $\varphi$ ein Isomorphismus ist.
+\end{bem}
+
+% Achtung: Anders als im Buch behauptet, ist $l$ i.A. nicht Epi- und Monomorphismus.
+% Insbesondere ist die Aussage
+%   "eine präabelsche Kategorie ist genau dann abelsch, wenn sie balanciert ist"
+% falsch. Siehe dazu
+%   http://mathoverflow.net/questions/41722/is-every-balanced-pre-abelian-category-abelian
+
+% II.5.10
+\begin{defn}
+  \begin{itemize}
+    \item Eine \emph{präadditive} Kategorie erfüllt das Axiom \textbf{A1}. \\
+    \item Eine \emph{additive} Kategorie erfüllt die Axiome \textbf{A1}-\textbf{A3}. \\
+    \item Eine \emph{präab.} Kategorie ist additiv und besitzt Kerne und Kokerne.
+    \item Eine \emph{abelsche} Kategorie erfüllt die Axiome \textbf{A1}-\textbf{A4}.
+  \end{itemize}
+\end{defn}
+
+\begin{bem}
+  Die Axiome \textbf{A1}-\textbf{A4} sind selbstdual, \dh{} eine Kategorie $\Cat$ ist genau (prä-)additiv / (prä-)abelsch, wenn $\Cat^\op$ es auch ist.
+\end{bem}
+
+\begin{bspe}
+  Ab. Kategorien sind: \enspace
+  \inlineitem{$\AbGrp$,} \enspace
+  \inlineitem{$R$-$\Mod$,} \enspace
+  \inlineitem{$\PSh(X)$.}
+  % Ausgelassen: Kategorie der Koeffizientensysteme
+\end{bspe}
+
+\begin{defn}
+  Eine Kategorie $\Cat$ heißt \emph{balanciert}, falls gilt:
+  \[
+    \fa{(f \!:\! X \!\to\! Y) \in \Cat}
+    f \text{ ist epi und mono} \iff f \text{ ist ein Isomorphismus.}
+  \]
+\end{defn}
+
+% II.5.11d)
+\begin{prop}
+  Abelsche Kategorien sind balanciert.
+\end{prop}
+
+% II.5.12 (Garben und Prägarben)
+
+% TODO
 
 \end{document}
