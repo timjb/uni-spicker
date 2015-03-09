@@ -8,44 +8,21 @@
 \usepackage{pgffor} % \foreach-Schleifen
 \usepackage{stmaryrd} % liefert \mapsfrom
 
+\include{cats} % Kategorientheorie-Makros
+
 \newcommand{\nspace}[1]{\foreach \i in {1,...,#1}{ \! }} % Negativer Abstand
-\newcommand{\SetC}{\mathbf{Set}} % Kategorie der Mengen
-\newcommand{\sSet}{\mathbf{sSet}} % Kategorie der simplizialen Mengen
-\newcommand{\Top}{\mathbf{Top}} % Kategorie der topologischen Räume
-\newcommand{\AbGrp}{\mathbf{AbGrp}} % Kategorie der abelschen Gruppen
-\newcommand{\Grp}{\mathbf{Grp}} % Kategorie der Gruppen
-\newcommand{\RMod}{\mathbf{R\text{-}Mod}} % Kategorie der R-Moduln
-\newcommand{\Ouv}{\mathbf{Ouv}} % Kategorie der offenene Mengen eines topol. Raumes
-\newcommand{\KHaus}{\mathbf{KHaus}} % Kategorie der kompakten Hausdorffräume
-\newcommand{\Sh}{\mathbf{Sh}} % Kategorie der Garben (sheaves)
-\newcommand{\PSh}{\mathbf{PSh}} % Kategorie der Prägarben (abelscher Gruppen)
-\newcommand{\CatC}{\mathbf{Cat}} % Kategorie der kleinen Kategorien
-\newcommand{\Vect}{\mathbf{Vect}} % Kategorie der Vektorräume über einem Körper
-\newcommand{\Mod}{\mathbf{Mod}} % Kategorie der Moduln über einem Ring
-\newcommand{\op}{\mathrm{op}} % opposite category
 \DeclareMathOperator{\sk}{sk} % Skelett
 \newcommand{\CC}[1]{{#1}_{\bullet}} % Kettenkomplex (chain complex)
 \newcommand{\CCC}[1]{{#1}^{\bullet}} % Ko-Kettenkomplex (cochain complex)
-\DeclareMathOperator{\Hom}{Hom} % Homomorphisms
 \newcommand{\Fais}{\mathcal{F}} % Faisceau-F (Garbe auf französisch)
 \newcommand{\Garb}{\mathcal{G}} % Garben-G
 \newcommand{\Harb}{\mathcal{H}} % Garben-H
 \newcommand{\keS}{k.\,e.\,S.} % kurze exakte Sequenz
 \newcommand{\leS}{l.\,e.\,S.} % lange exakte Sequenz
 \newcommand{\Lg}{\mathfrak{g}} % Lie-g
-\DeclareMathOperator{\Sing}{Sing} % Homomorphisms
-\newcommand{\Aat}{\mathcal{A}} % Category-A
-\newcommand{\Cat}{\mathcal{C}} % Category-C
-\newcommand{\Dat}{\mathcal{D}} % Category-D
-\newcommand{\Eat}{\mathcal{E}} % Category-E
-\newcommand{\Iat}{\mathcal{I}} % Category-I (Indexkategorie)
-\newcommand{\Jat}{\mathcal{J}} % Category-J (Indexkategorie)
-\newcommand{\Sit}{\mathcal{S}} % Situs-S
-\DeclareMathOperator{\Ob}{Ob} % Objects (of a category)
+\DeclareMathOperator{\Sing}{Sing} % Singuläre-Homologie-Funktor
 \DeclareMathOperator{\Cov}{Cov} % Überlagerungen (coverings)
-\newcommand{\ladj}{\dashv} % Links-adjungiert (left-adjoint)
 \DeclareMathOperator{\Gal}{Gal} % Galois-Gruppe
-\DeclareMathOperator{\Aut}{Aut} % Automorphismengruppe
 \newcommand{\ceil}[1]{\lceil #1 \rceil} % Aufrunden
 \newcommand{\floor}[1]{\lfloor #1 \rfloor} % Abrunden
 \renewcommand{\O}{\mathcal{O}} % Strukturgarbe der stetigen Funktionen

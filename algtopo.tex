@@ -8,26 +8,23 @@
 \usepackage{tikz}
 \usetikzlibrary{matrix,shapes,arrows,positioning}
 
-\newcommand{\Tau}{\mathcal{T}} % Großes Tau
+\input{cats} % Kategorientheorie-Makros
 
 \newcommand{\nspace}[1]{\foreach \i in {1,...,#1}{ \! }} % Negativer Abstand
+\newcommand{\Tau}{\mathcal{T}} % Großes Tau
 \newcommand{\angles}[1]{{\langle #1 \rangle}}
 \newcommand{\Simpl}{\mathcal{S}} % Simplizialkomplex
 \newcommand{\Real}[1]{\abs{#1}} % geometrische Realisierung
 \newcommand{\CC}[1]{{#1}_{\bullet}} % Kettenkomplex (chain complex)
-\newcommand{\Top}{\mathbf{Top}} % Kategorie der topologischen Räume
-\newcommand{\AbGrp}{\mathbf{AbGrp}} % Kategorie der abelschen Gruppen
 \newcommand{\RH}{\tilde{H}} % Reduzierte Homologie
 \DeclareMathOperator{\inte}{int} % Inneres (interior)
 \newcommand{\clos}[1]{\overline{#1}} % Abschluss
 \newcommand{\Torsion}{\mathrm{Torsion}} % Torsion
 \DeclareMathOperator{\tr}{tr} % Spur (trace)
 \DeclareMathOperator{\rk}{rk} % Rang (rank)
-\DeclareMathOperator{\Hom}{Hom} % Homomorphisms
 \newcommand{\cell}{\text{cell}} % zellulär
 \DeclareMathOperator{\Tor}{Tor}
 \DeclareMathOperator{\Ext}{Ext}
-\newcommand{\op}{\mathrm{op}} % opposite category
 \newcommand{\keS}{k.\,e.\,S.} % kurze exakte Sequenz
 \newcommand{\leS}{l.\,e.\,S.} % lange exakte Sequenz
 \newcommand{\ZM}[1]{\Z_{#1}} % \Z modulo n
@@ -974,7 +971,7 @@ Eine zshgde orientierbare Mft hat genau zwei Orientierungen.
 \end{lem}
 
 \begin{defn}
-  Sei $0 \to A \to B \to C \to 0$ eine \keS{} in einer abelschen Kategorie $\mathcal{A}$. Die Sequenz heißt \emph{spaltend}, falls sie isomorph zur \keS{} $0 \to A \to A \oplus C \to C$ ist.
+  Sei $0 \to A \to B \to C \to 0$ eine \keS{} in einer abelschen Kategorie $\Aat$. Die Sequenz heißt \emph{spaltend}, falls sie isomorph zur \keS{} $0 \to A \to A \oplus C \to C$ ist.
 \end{defn}
 
 \begin{prop}
@@ -987,7 +984,7 @@ Eine zshgde orientierbare Mft hat genau zwei Orientierungen.
 \end{prop}
 
 \begin{prop}
-  Seien $\mathcal{A}$ und $\mathcal{B}$ abelsche Kategorien, $F : \mathcal{A} \to \mathcal{B}$ ein additiver Funktor und $0 \to A \to B \to C \to 0$ eine spaltende \keS{} in $\mathcal{A}$.\\
+  Seien $\Aat$ und $\Bat$ abelsche Kategorien, $F : \Aat \to \Bat$ ein additiver Funktor und $0 \to A \to B \to C \to 0$ eine spaltende \keS{} in $\Aat$.\\
   Dann ist auch $0 \to F(A) \to F(B) \to F(C) \to 0$ spaltend exakt.
 \end{prop}
 
