@@ -250,13 +250,42 @@
   die die offensichtlichen Axiome erfüllen.
 \end{bem}
 
-\columnbreak
+% II.5.11e)
+\begin{defn}
+  Sei $\Cat$ eine Kategorie, $f \in \Hom_\Cat(X, Y)$ ein Morphismus.
+  \begin{itemize}
+    \item $f$ heißt \emph{Monomorphismus}, wenn $f$ linkskürzbar ist, \dh{}
+    \[
+      \fa{X' \in \Ob(\Cat)} \fa{g, h \in \Hom_\Cat(X', X)}
+      f \circ g = f \circ h \implies g = h.
+    \]
+    \item $f$ heißt \emph{Epimorphismus}, wenn $f$ rechtskürzbar ist, \dh{}
+    \[
+      \fa{Y' \in \Ob(\Cat)} \fa{g, h \in \Hom_\Cat(Y, Y')}
+      g \circ f = h \circ f \implies g = h.
+    \]
+  \end{itemize}
+\end{defn}
+
+\begin{defn}
+  Sei $X \in \Ob(\Cat)$ ein Objekt. Auf der Klasse der Monomorphis- men $(i : U \to X) \in \Cat$ von einem Objekt $U \in \Ob(\Cat)$ nach $X$ ist durch
+  \[ (U, i) \leq (U', i') \coloniff \ex{f : U' \to U} i' = i \circ f \]
+  eine Präordnung definiert. Ein \emph{Unterobjekt} von $X$ ist eine Äquivalenzklasse dieser Präordnung, also von der Äq'relation
+  \[ x \sim y \coloniff x \leq y \wedge y \leq x. \]
+\end{defn}
+
+% XXX: Gibt es dafür eine vernünftige deutsche Übersetzung?
+\begin{defn}
+  Eine Kategorie heißt \emph{well-powered}, wenn die Präordnung der Unterobjekte von jedem Obj. eine Menge (nicht nur eine Klasse) ist.
+\end{defn}
 
 % Ausgelassen: II.3.11,II.3.12 (Affine Gruppen-Schemata)
 % Ausgelassen: II.3.13 (Cartier-Dualität)
 % Ausgelassen: II.3.14 (Relative Gruppen-Schemata)
 
-\subsection{(Ko-)Limiten}
+\begin{samepage}
+  \subsection{(Ko-)Limiten}
+\end{samepage}
 
 % II.3.15 (Limiten)
 
@@ -381,6 +410,21 @@
   Ein Funktor $F$ heißt \emph{kostetig}, wenn er \emph{Kolimiten bewahrt}.
 \end{defn}
 
+% nicht im Buch
+\begin{defn}
+  Eine Kategorie $\Cat$ heißt \emph{(ko-)vollständig}, wenn alle kleinen (Ko-)Limiten (\dh{} (Ko-)Limiten von Funktoren $F : \Jat \to \Cat$ mit einer kleinen Kategorie $\Jat$) in $\Cat$ existieren.
+\end{defn}
+
+\begin{bspe}
+  Vollständig sind: \enspace
+  \inlineitem{$\SetC$,}
+  \inlineitem{$\Grp$,}
+  \inlineitem{$\AbGrp$,}
+  \inlineitem{$\Top$,}
+  \inlineitem{$k$-$\Vect$.}
+\end{bspe}
+% XXX: Beispiele für kovollständige Kategorien?
+
 % TODO: Kommutativität von Limiten
 
 \subsection{Adjunktionen}
@@ -493,7 +537,31 @@
   $\varprojlim (G \circ D) \cong G(\varprojlim D)$ natürlich in $D$.
 \end{beweis}
 
-% TODO: SAFT, GAFT?
+\begin{bem}
+  Sei umgekehrt $G : \Dat \to \Cat$ ein stetiger Funktor. \\
+  Unter gewissen Bedingungen an die Größe der Kategorien $\Cat$ und $\Dat$ besitzt dann $G$ einen Linksadjungierten:
+\end{bem}
+
+\begin{defn}
+  \begin{itemize}
+    \item Ein \emph{Koerzeuger} einer Kategorie $\Cat$ ist ein Objekt $S \in \Ob(\Cat)$, für das der Funktor $h_S : \Cat^\op \to \SetC$ treu ist.
+    \item Eine \emph{koerzeugende Menge} von $\Cat$ ist eine Teil\textit{menge} $\mathcal{S}$ von $\Ob(\Cat)$, für die der Funktor $h_{\mathcal{S}} \coloneqq \prod_{S \in \mathcal{S}} h_S$ treu ist.
+  \end{itemize}
+\end{defn}
+
+% nicht im Buch, Quelle: http://ncatlab.org/nlab/show/adjoint+functor+theorem
+\begin{lem}
+  Ein stetiger Funktor $G : \Dat \to \Cat$ hat einen Linksadj, wenn:
+  \begin{itemize}
+    \item General Adjoint Functor Theorem: $\Dat$ ist vollständig und lokal klein und $G$ erfüllt die Lösungsmengen-Bedingung:
+    \begin{align*}
+      & \fa{X \in \Ob(\Cat)} \ex{I \text{ Menge}} \ex{(f_i : X \to G(Y_i))_{i \in I}} \\
+      & \fa{(g : X \to Z) \in \Cat} \ex{i \in I, \, h : G(Y_i) \to Z} g = h \circ f_i.
+    \end{align*}
+    \item Special Adjoint Functor Theorem (\emph{SAFT}): \\
+    $\Dat$ ist vollständig, well-powered (damit automatisch lokal klein), besitzt eine kleine koerzeugende Menge und $\Cat$ ist lokal klein.
+  \end{itemize}
+\end{lem}
 
 % nicht im Buch
 \begin{defn}
@@ -522,7 +590,7 @@
 \end{defn}
 
 \begin{bspe}
-  $\SetC$, $\AbGrp$, $k-\Vect$ und $\CatC$ sind kartesisch abgeschl.
+  $\SetC$, $\AbGrp$, $k$-$\Vect$ und $\CatC$ sind kartesisch abgeschl.
 \end{bspe}
 
 
@@ -1645,23 +1713,6 @@ Sei $\Cat$ eine Kategorie.
   \begin{itemize}
     \item $\im \varphi \coloneqq \ker(\coker \varphi)$ \emph{Bild} von $\varphi$,
     \item $\coim \varphi \coloneqq \coker(\ker \varphi)$ \emph{Kobild} von $\varphi$.
-  \end{itemize}
-\end{defn}
-
-% II.5.11e)
-\begin{defn}
-  Sei $\Cat$ eine Kategorie, $f \in \Hom_\Cat(X, Y)$ ein Morphismus.
-  \begin{itemize}
-    \item $f$ heißt \emph{Monomorphismus}, wenn $f$ linkskürzbar ist, \dh{}
-    \[
-      \fa{X' \in \Ob(\Cat)} \fa{g, h \in \Hom_\Cat(X', X)}
-      f \circ g = f \circ h \implies g = h.
-    \]
-    \item $f$ heißt \emph{Epimorphismus}, wenn $f$ rechtskürzbar ist, \dh{}
-    \[
-      \fa{Y' \in \Ob(\Cat)} \fa{g, h \in \Hom_\Cat(Y, Y')}
-      g \circ f = h \circ f \implies g = h.
-    \]
   \end{itemize}
 \end{defn}
 
