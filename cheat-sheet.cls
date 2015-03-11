@@ -71,6 +71,7 @@
 \newtheorem*{methode}{Methode}
 \newtheorem*{fazit}{Fazit}
 \newtheorem*{facts}{Facts}
+\newtheorem*{axiom}{Axiom}
 
 \theoremstyle{remark}
 \newtheorem*{bem}{Bem}
