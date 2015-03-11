@@ -1,0 +1,94 @@
+\documentclass{cheat-sheet}
+
+\pdfinfo{
+  /Title (Dynamische Systeme und Zahlentheorie)
+  /Author (Tim Baumann)
+}
+
+\DeclareMathOperator{\Aut}{Aut} % Automorphismengruppe
+\DeclareMathOperator{\End}{End} % Endomorphismenmonoid
+
+\begin{document}
+
+\maketitle{Dyn. Systeme in der Zahlentheorie}
+
+% TODO:
+% Van der Waerdens Theorem
+% Szemerédis Theorem
+% Poincarés Wiederkehrsatz
+% Rados Theorem
+% "Fast-Periodizität"
+% gleichförmig wiederkehrend
+% "proximality"
+% Schur und Brauers Resultat (SB)
+% Hindmans Resultat (NH)
+% Grünwalds Resultat (G)
+% Hilberts Resultat (DH)
+% Theorem (MBR = "multiple Birkhoff Recurrence")
+% Stabilität:
+%   * Im Sinne von Poisson
+%   * Im Sinne von Lagrange
+%   * Im Sinne von Lyapunov
+
+% Kapitel 1. Wiederkehr und gleichmäßige Wiederkehr in kompakten Räumen
+
+% 1.1. Dynamische Systeme und wiederkehrende Punkte
+
+\begin{defn}
+  Ein \emph{dynamisches System} ist ein kompakter metrischer Raum $X$ mit einer Gruppen-Wirkung $\varphi : G \to \Aut(X), \, g \mapsto T_g$ oder einer Monoid-Wirkung $\rho : M \to \End(X), \, m \mapsto T_m$.
+\end{defn}
+
+\begin{bem}
+  Falls $G = \Z$ oder $M = \N$, dann bezeichnen wir mit $T \coloneqq T_1$ den Erzeuger der Aktion und nennen $(X, T)$ ein \emph{zykl. System}.
+\end{bem}
+
+% Def 1.1
+\begin{defn}
+  Sei $X$ ein topol. Raum, $T : X \to X$ stetig.
+  Ein Punkt $x \in X$ heißt \emph{wiederkehrend}, falls für für alle Umgebungen $V \subset X$ von $x$ ein $n \geq 1$ existiert mit $T^n(x) \in V$.
+\end{defn}
+
+\begin{bem}
+  Sei $X$ sogar ein metrischer Raum, $x \in X$ wiederkehrend. \\
+  Dann gibt es eine Folge $(n_k)$ mit $d(T^{n_k}(x), x) \to 0$ für $k \to \infty$.
+\end{bem}
+
+\begin{thm}
+  Sei $X$ ein kompakter topol. Raum, $T : X \to X$ stetig. \\
+  Dann gibt es einen wiederkehrenden Punkt.
+\end{thm}
+% XXX: Bemerkung: Beweis benutzt Auswahlaxiom?
+
+% Defn 1.2
+\begin{defn}
+  Sei $K$ eine kompakte Gruppe, $a \in K$ und $T(x) \coloneqq ax$. Dann heißt $(K, T)$ ein \emph{Kronecker-System}.
+\end{defn}
+
+% Thm 1.2
+\begin{thm}
+  Jeder Punkt $x \in K$ in einem Kronecker-System ist wiederkehrend.
+\end{thm}
+
+% 1.2 Automorphismen und Homomorphismen von Dynamischen Systemen, Faktoren und Erweiterungen
+
+\begin{defn}
+  Ein Homomorphismus zwischen zwei dyn. Systemen $(X, G)$ und $(X', G)$ (zweimal die gleiche Gruppe oder Monoid $G$) ist eine $G$-äquivariante stetige Abbildung $\phi : X \to X'$.
+\end{defn}
+
+% Defn 1.3
+\begin{defn}
+  Ein dyn. System $(Y, G)$ ist \emph{Faktor} eines dyn. System $(X, G)$, wenn es einen surjektiven Homomorphismus $(X, G) \to (Y, G)$ gibt. \\
+  Man nennt $(X, G)$ dann eine \emph{Erweiterung} von $(Y, G)$.
+\end{defn}
+
+% XXX: Auslassen?
+\begin{bem}
+  Sei $\phi : X \to Y$ surjektiv. Dann kann man $Y$ mit der Menge der Fasern von $\phi$ identifizieren.
+\end{bem}
+
+% Thm 1.3
+\begin{thm}
+  Sei $\phi : (X, T) \to (Y, T)$ ein Homomorphismus von zykl. Systemen und $x \in X$ wiederkehrend. Dann ist auch $\phi(x)$ wiederkehrend.
+\end{thm}
+
+\end{document}
