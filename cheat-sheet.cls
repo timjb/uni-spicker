@@ -43,7 +43,7 @@
 \newtheorem*{beweis}{Beweis}
 \newtheorem*{frage}{Frage}
 \newtheorem*{situation}{Situation}
-\newtheorem*{thm}{Theorem}
+\newtheorem*{thm}{Thm}
 \newtheorem*{lem}{Lemma}
 \newtheorem*{kor}{Korollar}
 \newtheorem*{voraussetzung}{Voraussetzung}
