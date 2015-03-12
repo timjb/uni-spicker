@@ -7,6 +7,8 @@
 
 \DeclareMathOperator{\Aut}{Aut} % Automorphismengruppe
 \DeclareMathOperator{\End}{End} % Endomorphismenmonoid
+\newcommand{\AutEnd}{\Aut\!/\!\End} % Automorphismengruppe bzw. Endomorphismenmonoid
+\DeclareMathOperator{\Iso}{Iso} % Isometriegruppe
 \newcommand{\clos}[1]{\overline{#1}} % topologischer Abschluss
 
 \begin{document}
@@ -36,7 +38,12 @@
 % 1.1. Dynamische Systeme und wiederkehrende Punkte
 
 \begin{defn}
-  Ein \emph{dynamisches System} ist ein kompakter metrischer Raum $X$ mit einer Gruppen-Wirkung $\varphi : G \to \Aut(X), \, g \mapsto T_g$ oder einer Monoid-Wirkung $\rho : M \to \End(X), \, m \mapsto T_m$.
+  Ein \emph{dynamisches System} ist ein Paar $(X, G)$ bestehend aus einem kompakten metrischen Raum $X$ und einer Gruppe oder einem Monoid $G$ mit Wirkung
+  $\varphi : G \to \AutEnd(X), \, g \mapsto T_g$.
+\end{defn}
+
+\begin{defn}
+  Ein \emph{Untersystem} eines dynamischen Systems $(X, G)$ ist eine Teilmenge $Z \subseteq X$ mit $T_g(Z) \subseteq Z$ für alle $g \in G$.
 \end{defn}
 
 \begin{bem}
@@ -134,6 +141,145 @@
   Sei $(X \!=\! Y \!\times\! K, T)$ eine Gruppenerw. von $(Y, T)$ und $y_0 \in Y$ wiederkehrend. Dann sind die Pkte $\Set{(y_0, k)}{k \in K}$ wiederkehrend.
 \end{thm}
 
-% XXX: "forward orbit (closure)"
+% Fußnote 1 Seite 22
+\begin{bem}
+  Durch Erweiterung mit der zykl. Gr. $\Z_m$ kann man zeigen:
+\end{bem}
+
+% Fußnote 1 Seite 22
+\begin{prop}
+  Ist $x \in X$ in $(X, T)$ wiederkehrend, dann auch in $(X, T^m)$.
+\end{prop}
+
+\begin{bsp}
+  Sei $T \coloneqq \R / \Z$ und $\alpha \in \R$. Dann ist das System
+  \[ (T^2, (\theta, \phi) \mapsto (\theta + \alpha, \phi + 2 \theta + \alpha)) \]
+  eine Gruppenerweiterung des Kronecker-Systems $(T, \theta \mapsto \theta + \alpha)$. \\
+  Somit sind alle Punkte des Torus $T^2$ wiederkehrend. \\
+  Aus der Wiederkehr des Punktes $(0, 0)$ erhält man:
+\end{bsp}
+
+% Thm 1.5
+\begin{prop}
+  Für jedes $\alpha \in \R$ und $\epsilon > 0$ gibt es eine ganzzahlige Lsg der diophantinischen Ungleichung
+  $\abs{\alpha n^2 - m} < \epsilon$.
+\end{prop}
+
+\begin{bem}
+  Durch Verallgemeinerung auf den $d$-dim Torus zeigt man:
+\end{bem}
+
+% Thm 1.6
+\begin{prop}
+  Sei $p(X) \in \R[X]$ mit $p(0) = 0$. Dann gibt es für alle $\epsilon > 0$ eine Lsg der diophantinischen Ungleichung
+  $\abs{p(n) - m} < \epsilon$, $n > 0$.
+\end{prop}
+
+% Defn
+\begin{defn}
+  Sei $M$ ein topol. Raum und $K \subseteq \Iso(M)$ kompakt. \\
+  Sei $(Y, T)$ ein zykl. System und $\psi : Y \to K$ stetig. Setze
+  \[
+    X \coloneqq Y \!\times\! M, \quad
+    T : X \to X, \enspace (y, u) \mapsto (Ty, \psi(y)u).
+  \]
+  Das System $(X, T)$ heißt \emph{isometrische Erweiterung} von $(Y, T)$.
+\end{defn}
+
+% Thm 1.8
+\begin{prop}
+  Sei $(X, T)$ eine isom. Erweiterung von $(Y, T)$ und $y_0 \in Y$ wiederkehrend.
+  Dann sind die Pkte $\Set{(y, m)}{m \in M}$ wiederkehrend.
+\end{prop}
+
+% 1.3. Wiederkehrende Punkte von Bebutov-Systemen
+
+% Defn 1.6
+\begin{defn}
+  Sei $G$ eine abz. Gruppe/Monoid und $\Lambda$ ein kompakter metr. Raum.
+  Sei $\Omega \coloneqq \Lambda^G \cong \prod \Lambda$ der kompakte metrisierbare Raum der Funktionen von $G$ nach $\Lambda$. Die \emph{reguläre Wirkung} von $G$ auf $\Omega$ ist
+  \[
+    G \mapsto \AutEnd(\Omega), \enspace g \mapsto T_g, \quad
+    T_g(\omega)(g') \coloneqq \omega(g'g).
+  \]
+  Ein \emph{Bebutov-System} ist ein Untersystem von $(\Omega, G)$.
+\end{defn}
+
+\begin{bem}
+  Sei $\{ g_1, g_2, \ldots \} = G$ eine Abzählung von $G$. \\
+  Dann ist eine Metrik auf $\Omega$ definiert durch
+  \[ d(\omega, \omega') \coloneqq \sum 2^{-n} d(\omega(g_n), \omega'(g_n)). \]
+\end{bem}
+
+\begin{defn}
+  Für $\omega_0 \in \Omega$ ist der Abschluss des Orbits von $\omega_0$,
+  \[ X_{\omega_0} \coloneqq \clos{\Set{T_g(\omega_0)}{g \in G}}, \]
+  $G$-invariant. Das dynamische System $(X_{\omega_0}, G)$ wird das von $\omega_0$ \emph{erzeugte Bebutov-System} genannt.
+\end{defn}
+
+\begin{defn}
+  Ein \emph{symbolischer Fluss} ist ein Bebutov-System mit endlichem $\Lambda$ und $G \in \{ \N, \Z \}$.
+  Die Elemente von $\Omega$ sind dann unendliche/doppelt-unendliche Folgen von Elementen von $\Lambda$. \\
+  Man bezeichnet $\Lambda$ dann als \emph{Alphabet}.
+\end{defn}
+
+% Ausgelassen: Theorem 1.9 über die Beziehung von fast-periodischen Funktionen (im Sinne von Bohr) mit der Theorie der Kronecker-Systeme
+
+\begin{defn}
+  Ein \emph{Wort} über $\Lambda$ ist eine endl. Sequenz von Elementen aus $\Lambda$. \\
+  Die Länge $\abs{w}$ eines Wortes ist die Länge der Sequenz.
+\end{defn}
+
+% Prop 1.10
+\begin{prop}
+  Für eine Sequenz $\omega \in \Lambda^\N$ sind äquivalent:
+  \begin{itemize}
+    \item $\omega$ ist wiederkehrend.
+    \item Jedes Wort in $\omega$ kommt ein 2.\,Mal an einer anderen Pos. in $\omega$ vor.
+    \item Jedes Wort aus $\omega$ kommt an unendlich oft in $\omega$ vor.
+  \end{itemize}
+\end{prop}
+
+\begin{bem}
+  Ein wiederkehrendes Wort $\omega \in \Lambda^\N$ hat die allgemeine Form
+  \[ \omega = [(aw^{(1)}a)w^{(2)}(aw^{(1)}a)]w^{(3)}[(aw^{(1)}a)w^{(2)}(aw^{(1)}a)]\ldots \]
+  mit $a \in \Lambda$ und Wörtern $w^{(1)}, w^{(2)}, \ldots$.
+  Damit kann man zeigen:
+\end{bem}
+
+\begin{lem}[Hilbert]
+  Sei $\N = B_1 \cup B_2 \cup \ldots \cup B_q$ eine Partition von $\N$ und $l \in \N_{>0}$ beliebig.
+  Schreibe
+  \[ P(x_1, \ldots, x_l) \coloneqq \Set{ x_{i_1} + \ldots + x_{i_k} }{0 \leq k \leq l, \, 1 \leq i_1 < \ldots i_k \leq l}. \]
+  Dann gibt es $m_1 \leq m_2 \leq \ldots \leq m_l$, sodass unendlich viele Translationen von $P(m_1, \ldots, m_l)$ in demselben $B_j$ enthalten sind.
+\end{lem}
+
+\begin{bem}
+  Sei $(X, T)$ ein zykl. System und $f : X \to \Lambda$ stetig. Dann ist
+  \[
+    (X, T) \to (\Lambda^\N, T), \quad
+    x \mapsto (f(x), f(Tx), f(T^2x), \ldots)
+  \]
+  ein Homomorphismus zyklischer Systeme.
+
+\end{bem}
+
+% Thm 1.11
+\begin{thm}
+  Seien $\Lambda_1$, $\Lambda_2$ komp. Räume und $\phi : \Lambda_1 \to \Lambda_2$ eine Abbildung. \\
+  Für $\omega \in \Lambda_1^\N$ definiere $\omega' \in \Lambda_2^\N$ durch $\omega'(n) \coloneqq f(\omega(n))$. \\
+  Falls $\omega$ wiederkehrend ist und zusätzlich $f$ in allen Punkten $\omega(n)$ stetig ist, dann ist auch $\omega'$ wiederkehrend.
+\end{thm}
+
+% Ausgelassen: Beispiel
+
+% Prop 1.12
+\begin{prop}
+  Sei $K$ eine komp. Gruppe und $\xi \in K^\N$ wiederkehrend. Dann ist $\eta \!\in\! K^\N$ definiert durch $\eta(n) \coloneqq \xi(n) \xi(n-1) \cdots \xi(1)$ wiederkehrend.
+\end{prop}
+
+% Ausgelassen: Beispiel
+
+% 1.4. Gleichmäßige Wiederkehr und minimale Systeme
 
 \end{document}
