@@ -7,6 +7,7 @@
 
 \DeclareMathOperator{\Aut}{Aut} % Automorphismengruppe
 \DeclareMathOperator{\End}{End} % Endomorphismenmonoid
+\newcommand{\clos}[1]{\overline{#1}} % topologischer Abschluss
 
 \begin{document}
 
@@ -39,7 +40,7 @@
 \end{defn}
 
 \begin{bem}
-  Falls $G = \Z$ oder $M = \N$, dann bezeichnen wir mit $T \coloneqq T_1$ den Erzeuger der Aktion und nennen $(X, T)$ ein \emph{zykl. System}.
+  Falls $G \!=\! \Z$ oder $M \!=\! \N$, dann bezeichnen wir mit $T \coloneqq T_1$ den Erzeuger der Aktion und nennen $(X, T)$ ein \emph{zykl. System}.
 \end{bem}
 
 % Def 1.1
@@ -53,9 +54,25 @@
   Dann gibt es eine Folge $(n_k)$ mit $d(T^{n_k}(x), x) \to 0$ für $k \to \infty$.
 \end{bem}
 
+% nicht dort im Buch
+\begin{defn}
+  Sei $X$ ein topol. Raum, $T : X \to X$ stetig. Dann heißt
+  \[ Q(x) \coloneqq \clos{\Set{T^n x}{n \geq 1}} \subseteq X \]
+  \emph{abgeschlossener Vorwärtsorbit} von $x \in X$.
+\end{defn}
+
+% nicht explizit im Buch
+\begin{lem}
+  \begin{itemize}
+    \item $x \in X$ ist wiederkehrend $\iff$ $x \in Q(x)$
+    \item $x \in Q(y) \implies T(x) \in Q(y) \iff Q(x) \subseteq Q(y)$
+    \item Die Relation $xRy \!\!\coloniff\!\! x \in Q(y)$ ist transitiv.
+  \end{itemize}
+\end{lem}
+
 \begin{thm}
   Sei $X$ ein kompakter topol. Raum, $T : X \to X$ stetig. \\
-  Dann gibt es einen wiederkehrenden Punkt.
+  Dann gibt es einen wiederkehrenden Punkt $x \in X$.
 \end{thm}
 % XXX: Bemerkung: Beweis benutzt Auswahlaxiom?
 
@@ -66,7 +83,7 @@
 
 % Thm 1.2
 \begin{thm}
-  Jeder Punkt $x \in K$ in einem Kronecker-System ist wiederkehrend.
+  In einem Kronecker-System sind alle $x \in K$ wiederkehrend.
 \end{thm}
 
 % 1.2 Automorphismen und Homomorphismen von Dynamischen Systemen, Faktoren und Erweiterungen
@@ -89,7 +106,34 @@
 % Thm 1.3
 \begin{thm}
   Sei $\phi : (X, T) \to (Y, T)$ ein Morphismus von zyklischen Systemen.
-  Wenn $x \in X$ wiederkehrend ist, dann auch $\phi(x)$.
+  Wenn $x \in X$ wiederkehrend ist, dann auch $\phi(x)$. \\
+  Allgemeiner: $x \in Q(y) \implies \phi(x) \in Q(\phi(y))$
 \end{thm}
+
+% Defn 1.4
+\begin{defn}
+  Sei $(Y, T : Y \to Y)$ ein zyklisches System, $K$ eine kompakte Gruppe und $\psi : Y \to K$ stetig. Setze
+  \[
+    X \coloneqq Y \times K, \quad
+    T : X \to X, \enspace (y, k) \mapsto (Ty, \psi(y)k).
+  \]
+  Das System $(X, T)$ wird \emph{Gruppenerweiterung} von $(Y, T)$ mit $K$ oder \emph{Schiefprodukt} von $(Y, T)$ mit $K$ genannt.
+\end{defn}
+
+\begin{bem}
+  Die Gr. $K$ wirkt auf $(X, T) = (Y \!\times\! K, T)$ durch Rechtstransl.:
+  \[
+    R : K \to \Aut(X), \enspace k \mapsto R_k, \quad
+    R_k(y,k') \coloneqq (y,k'k).
+  \]
+  Die Homöomorphismen $R_k$ kommutieren mit $T$, sind also Automorphismen des dyn. Systems $(X, T)$.
+\end{bem}
+
+% Thm 1.4
+\begin{thm}
+  Sei $(X \!=\! Y \!\times\! K, T)$ eine Gruppenerw. von $(Y, T)$ und $y_0 \in Y$ wiederkehrend. Dann sind die Pkte $\Set{(y_0, k)}{k \in K}$ wiederkehrend.
+\end{thm}
+
+% XXX: "forward orbit (closure)"
 
 \end{document}
