@@ -33,13 +33,15 @@
 %   * Im Sinne von Lagrange
 %   * Im Sinne von Lyapunov
 
+Dies ist eine übersetzte Zusammenfassung der ersten Kapitel des Buches "`Recurrence in Ergodic Theory and Combinatorial Number Theory"' von Harry Furstenberg.
+
 % Kapitel 1. Wiederkehr und gleichmäßige Wiederkehr in kompakten Räumen
 
 % 1.1. Dynamische Systeme und wiederkehrende Punkte
 
 \begin{defn}
   Ein \emph{dynamisches System} ist ein Paar $(X, G)$ bestehend aus einem kompakten metrischen Raum $X$ und einer Gruppe oder einem Monoid $G$ mit Wirkung
-  $\varphi : G \to \AutEnd(X), \, g \mapsto T_g$.
+  $\varphi : G \to \AutEnd(X), \, g \mapsto T_g, \, T_g(x) \coloneqq g.x$.
 \end{defn}
 
 \begin{defn}
@@ -138,7 +140,8 @@
 
 % Thm 1.4
 \begin{thm}
-  Sei $(X \!=\! Y \!\times\! K, T)$ eine Gruppenerw. von $(Y, T)$ und $y_0 \in Y$ wiederkehrend. Dann sind die Pkte $\Set{(y_0, k)}{k \in K}$ wiederkehrend.
+  Sei $(X \!=\! Y \!\times\! K, T)$ eine Gruppenerw. von $(Y, T)$ und $y_0 \in Y$ wiederkehrend.
+  Dann sind die Pkte $\Set{(y_0, k)}{k \in K}$ wiederkehrend.
 \end{thm}
 
 % Fußnote 1 Seite 22
@@ -185,6 +188,12 @@
   \]
   Das System $(X, T)$ heißt \emph{isometrische Erweiterung} von $(Y, T)$.
 \end{defn}
+
+% Prop 1.7
+\begin{prop}
+  Sei $(X, T)$ eine isom. Erweiterung von $(Y, T)$. \\
+  Dann ist $X = \cup X_\alpha$, wobei $X_\alpha$ abgeschlossene $T$-invariante Teilmengen von $X$ sind, sodass das System $(X_\alpha, T|_{X_\alpha})$ Faktor einer Gruppenerweiterung von $(Y, T)$ ist.
+\end{prop}
 
 % Thm 1.8
 \begin{prop}
@@ -281,5 +290,88 @@
 % Ausgelassen: Beispiel
 
 % 1.4. Gleichmäßige Wiederkehr und minimale Systeme
+
+% Defn 1.7
+\begin{defn}
+  Eine Teilmenge $S$ einer abelschen topologischen Gruppe / eines Monoids heißt $G$ \emph{"`syndetic"'}, wenn eine kompakte Menge $K \subset G$ existiert, sodass $\fa{g \in G} \ex{k \in K} gk \in S$.
+\end{defn}
+
+% TODO: gute deutsche Übersetzung
+\begin{bem}
+  Eine Teilmenge $\{ s_1 < s_2 < \ldots \} = S \subset \N$ ist genau dann "`syndetic"', wenn die Größe $s_i - s_{i-1}$ der "`Lücken"' zw. Elementen aus $S$ beschränkt ist.
+  Solche Mengen heißen auch \emph{relativ dicht}.
+\end{bem}
+
+% Defn 1.8
+\begin{defn}
+  Sei $(X, G)$ ein dyn. System. Ein Punkt $x \in X$ heißt \emph{gleichmäßig wiederkehrend}, falls für alle Umgebungen $V \subset X$ von $x$ die Menge $\Set{g \in G}{g.x \in V}$ syndetisch ist.
+\end{defn}
+
+% Defn 1.9
+\begin{defn}
+  Ein dyn. System $(X, G)$ heißt \emph{minimal}, wenn es keine echte abgeschl. Teilmenge von $X$ gibt, die inv. unter der $G$-Wirkung ist.
+\end{defn}
+
+% Lem 1.13 und 1.14
+\begin{lem}
+  Sei $(X, G)$ ein dyn System. Es sind äquivalent: \\
+  \inlineitem{$(X, G)$ ist minimal} \quad
+  \inlineitem{$\fa{x \in X}$ der Orbit $Gx$ ist dicht in $X$} \\
+  \inlineitem{$\fa{\emptyset \not= V \subset X \text{ offen}} \ex{\text{endlich viele Elemente } g_1, \ldots, g_n \in G}$}
+  \[ g_1^{-1} V \cup \ldots \cup g_n^{-1} V = X. \]
+\end{lem}
+
+% Thm 1.15
+\begin{thm}
+  Sei $(X, G)$ ein minimales dynamisches System. \\
+  Dann sind alle $x \in X$ gleichmäßig wiederkehrend.
+\end{thm}
+
+\begin{bem}
+  Aus Zorns Lemma folgt: Jedes dyn. System besitzt ein minimales Untersystem. Es folgt:
+  % XXX: Warum wird im Buch extra erwähnt, dass $X$ kompakt ist? Das ist doch in der Definition eines dyn. Systems enthalten?
+\end{bem}
+
+% Thm 1.16
+\begin{thm}
+  Jedes dyn. System hat einen gleichm. wiederkehrenden Pkt.
+\end{thm}
+
+% Thm 1.17, etwas erweitert
+\begin{thm}
+  Sei $(X, G)$ ein dyn. System, $x \in X$. Dann sind äquivalent: \\
+  \inlineitem{$x$ ist glm. wiederkehrend.} \enspace
+  \inlineitem{Das Untersystem $\clos{Gx}$ ist minimal.}
+\end{thm}
+
+% Thm 1.18
+\begin{thm}
+  In einem Kronecker-System ist jeder Pkt glm. wiederkehrend.
+\end{thm}
+
+% Thm 1.19 und 1.20
+\begin{thm}
+  Sei $(X, T)$ eine Gruppenerw. oder isometrische Erweiterung von $(Y, T)$ mit Projektion $\pi : (X, T) \to (Y, T)$ und $y_0 \in Y$ glm. wiederkehrend.
+  Dann sind die Pkte $\pi^{-1}(y_0)$ glm. wiederkehrend.
+\end{thm}
+
+\begin{bem}
+  Es folgt durch Betr. eines dyn. Systems auf dem $k$-dim Torus:
+\end{bem}
+
+% Thm 1.21
+\begin{thm}
+  Seien $p_1(X), \ldots, p_k(X) \in \R[X]$ Polynome. \\
+  Für alle $\epsilon > 0$ ist die Teilmenge der nat. Zahlen, die
+  \[
+    \abs{e^{2 \pi i p_1(n) - e^{2 \pi i p_1(0)}}} < \epsilon, \ldots,
+    \abs{e^{2 \pi i p_k(n) - e^{2 \pi i p_k(0)}}} < \epsilon
+  \]
+  gleichzeitig erfüllen, syndetic.
+\end{thm}
+
+% 1.5 "Substitution Minimal Sets and Uniform Recurrence in Bebutov Systems"
+
+% TODO
 
 \end{document}
