@@ -5,6 +5,8 @@
   /Author (Tim Baumann)
 }
 
+\usepackage{mathabx} % \divides
+
 \DeclareMathOperator{\Aut}{Aut} % Automorphismengruppe
 \DeclareMathOperator{\End}{End} % Endomorphismenmonoid
 \newcommand{\AutEnd}{\Aut\!/\!\End} % Automorphismengruppe bzw. Endomorphismenmonoid
@@ -293,12 +295,12 @@ Dies ist eine übersetzte Zusammenfassung der ersten Kapitel des Buches "`Recurr
 
 % Defn 1.7
 \begin{defn}
-  Eine Teilmenge $S$ einer abelschen topologischen Gruppe / eines Monoids heißt $G$ \emph{"`syndetic"'}, wenn eine kompakte Menge $K \subset G$ existiert, sodass $\fa{g \in G} \ex{k \in K} gk \in S$.
+  Eine Teilmenge $S$ einer abelschen topologischen Gruppe / eines Monoids heißt $G$ \emph{syndetisch}, wenn eine kompakte Menge $K \subset G$ existiert, sodass $\fa{g \in G} \ex{k \in K} gk \in S$.
 \end{defn}
 
 % TODO: gute deutsche Übersetzung
 \begin{bem}
-  Eine Teilmenge $\{ s_1 < s_2 < \ldots \} = S \subset \N$ ist genau dann "`syndetic"', wenn die Größe $s_i - s_{i-1}$ der "`Lücken"' zw. Elementen aus $S$ beschränkt ist.
+  Eine Teilmenge $\{ s_1 < s_2 < \ldots \} = S \subset \N$ ist genau dann syndetisch, wenn die Größe $s_i - s_{i-1}$ der "`Lücken"' zw. Elementen aus $S$ beschränkt ist.
   Solche Mengen heißen auch \emph{relativ dicht}.
 \end{bem}
 
@@ -367,11 +369,81 @@ Dies ist eine übersetzte Zusammenfassung der ersten Kapitel des Buches "`Recurr
     \abs{e^{2 \pi i p_1(n) - e^{2 \pi i p_1(0)}}} < \epsilon, \ldots,
     \abs{e^{2 \pi i p_k(n) - e^{2 \pi i p_k(0)}}} < \epsilon
   \]
-  gleichzeitig erfüllen, syndetic.
+  gleichzeitig erfüllen, syndetisch.
 \end{thm}
 
 % 1.5 "Substitution Minimal Sets and Uniform Recurrence in Bebutov Systems"
 
-% TODO
+% Prop 1.22
+\begin{prop}
+  Sei $\Lambda$ ein endl. Alphabet. Ein Punkt $\omega \in \Lambda^\N$ oder $\omega \in \Lambda^\Z$ ist genau dann glm. wiederkehrend, wenn für jedes Wort in $\omega$ die Menge der Positionen, an denen dieses Wort auftaucht, syndetisch ist.
+\end{prop}
+
+\begin{bem}
+  Eine wiederkehrende Sequenz $\omega$ in der allgemeinen Form
+  \[ \omega = [(aw^{(1)}a)w^{(2)}(aw^{(1)}a)]w^{(3)}[(aw^{(1)}a)w^{(2)}(aw^{(1)}a)]\ldots \]
+  ist glm. wiederkehrend, wenn die Länge der $w^{(n)}$ beschränkt ist. \\
+  Es existieren also nichtperiodische, glm. wiederkehrende Sequenzen.
+\end{bem}
+
+\begin{defn}
+  Ein \emph{Vokabular} ist eine Teilmenge $V$ aller Wörter über einem Alphabet $\Lambda$, für die gilt:
+  \begin{itemize}
+    \item Jedes Teilwort eines Wortes aus $V$ ist ebenfalls in $V$.
+    \item Jedes Wort in $V$ ist Teilwort eines längeren Wortes aus $V$.
+  \end{itemize}
+\end{defn}
+
+\begin{defn}
+  Sei $V$ ein Vokabular. Sei dann $S(V) \subset \Lambda^\N$ die abgeschl., trans- lations-inv. Menge aller Sequenzen, die nur Wörter aus $V$ enthalten.
+\end{defn}
+
+\begin{lem}
+  Sei $V$ ein Vokabular, das folgende Bedingung erfüllt: Für alle $l \in \N$ gibt es ein $L \in \N$, sodass für alle Wörter $w \in V$ der Länge $\abs{w} = l$ gilt: $w$ ist in jedem Wort $v \in V$ der Länge $\abs{v} = L$ enthalten. \\
+  Dann sind alle Sequenzen in $S(V)$ glm. wiederkehrend.
+\end{lem}
+
+\begin{bem}
+  Sei $\Lambda = \{ a_1, \ldots, a_r \}$ und $w_1, \ldots, w_r$ Wörter über $\Lambda$, die jeweils alle Buchstaben aus $\Lambda$ enthalten. Sei $V_1 \coloneqq \Lambda$ die Menge der Wörter der Länge 1 über $\Lambda$ und induktiv $V_n$ die Menge der Wörter, die aus einem Wort $w \in V_{n-1}$ durch simultane Substitution
+  \[ a_1 \to w_1, \ldots, a_r \to w_r \]
+  hervorgehen und deren Teilwörter. Das Vokabular $V \coloneqq \cup_{n \in \N} V_n$ heißt dann \emph{substitution minimal set}. Alle Sequenzen in $S(V)$ sind gleichmäßig wiederkehrend.
+\end{bem}
+
+\begin{bem}
+  Seien $d_1, d_2, \ldots \in \N$ mit $d_n \divides d_{n+1}$ für alle $n$.
+  Schreibe nun $\Z$ als disjunkte Vereinigung
+  \[
+    \Z = \bigsqcup_{k=1}^\infty (d_k \Z + a_k) \quad
+    \text{mit $a_1, a_2, \ldots \in \Z$.}
+  \]
+  Sei $\Lambda$ kompakt und $(\lambda_i)_{i \in \N}$ eine Folge in $\Lambda$. Setze
+  $\omega(n) \coloneqq \lambda_k$, falls $n \in d_k \Z + a_k$.
+  Wenn nun $[-N, N] \subset \sqcup_{k=1}^l (d_k \Z + a_k)$, dann gilt für alle $n \in [-N, N], q \in \Z$: $\omega(n) = \omega(n + q \cdot d_l)$. Somit tritt jedes Wort in $\omega$ periodisch auf und $\omega$ ist glm. wiederkehrend.
+\end{bem}
+
+% 1.6. Kombinatorische Anwendungen
+
+% Defn 1.10
+\begin{defn}
+  Eine Teilmenge $R \subset \N$ oder $R \subset \Z$ heißt \emph{dick}, wenn sie Intervalle $\cinterval{a_n}{a_n + n}$ beliebiger Länge enthält.
+\end{defn}
+
+\begin{bem}
+  Eine Menge ist genau dann syndetisch, wenn ihr Schnitt mit jeder dicken Menge nichtleer ist.
+  Eine Menge ist genau dann dick, wenn ihr Schnitt mit jeder syndetischen Menge nichtleer ist.
+\end{bem}
+
+% Defn 1.11
+\begin{defn}
+  Eine Teilmenge $A \subset \N$ oder $A \subset \Z$ heißt \emph{stückw. syndetisch}, wenn sie Schnitt einer dicken und einer syndetischen Menge ist.
+\end{defn}
+
+% Ausgelassen: Thm 1.23, da nur Spezialfall von 1.24
+
+% Thm 1.24
+\begin{thm}
+  Sei $B \subseteq \N$ oder $B \subseteq \Z$ stückw. syndetisch, $B = B_1 \cup \nldots \cup B_q$ eine Partition.
+  Dann ist auch eine Menge $B_i$ stückweise syndetisch.
+\end{thm}
 
 \end{document}
