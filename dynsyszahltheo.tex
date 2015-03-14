@@ -12,6 +12,7 @@
 \newcommand{\AutEnd}{\Aut\!/\!\End} % Automorphismengruppe bzw. Endomorphismenmonoid
 \DeclareMathOperator{\Iso}{Iso} % Isometriegruppe
 \newcommand{\clos}[1]{\overline{#1}} % topologischer Abschluss
+\DeclareMathOperator{\inte}{int} % Inneres (interior)
 
 \begin{document}
 
@@ -445,5 +446,56 @@ Dies ist eine übersetzte Zusammenfassung der ersten Kapitel des Buches "`Recurr
   Sei $B \subseteq \N$ oder $B \subseteq \Z$ stückw. syndetisch, $B = B_1 \cup \nldots \cup B_q$ eine Partition.
   Dann ist auch eine Menge $B_i$ stückweise syndetisch.
 \end{thm}
+
+% 1.7. Mehr diophantische Approximation
+
+\begin{bem}
+  Seien $\tau_1, \ldots, \tau_n$ die kanonischen Erzeuger von $H_1(T^n) \cong \Z^n$.
+\end{bem}
+
+% Lem 1.25
+\begin{lem}
+  Habe $T : T^d \to T^d$ die Form
+  \[
+    T(\theta_1, \ldots, \theta_d) \coloneqq
+    (\theta_1 + \alpha, \theta_2 + f_1(\theta_1), \ldots, \theta_d + f_{d-1}(\theta_1, \ldots, \theta_{d-1}))
+  \]
+  mit $\alpha$ irrational, $f_i : T^i \!\to\! T$ stetig mit $(f_i)_*(\tau_i) \!\not=\! 0$ für $i \!=\! 1, \nldots, d{-}1$. \\
+  Dann ist $(T^d, T)$ ein minimales dynamisches System.
+\end{lem}
+
+% Thm 1.26
+\begin{thm}
+  Sei $p(X) \in \R[X]$ mit mind. einem irrationalen Koeffizienten. \\
+  Dann gibt es $\forall \, \epsilon > 0$ eine Lsg der Ungleichung $\abs{p(n) - m} < \epsilon$.
+\end{thm}
+
+% 1.8 Nicht wandernde Transformationen und Wiederkehr
+
+\begin{defn}
+  Sei $X$ ein kompakter metrischer Raum und $T : X \to X$ stetig. \\
+  Eine Teilmenge $A \subset X$ heißt \emph{wandernd}, wenn die Urbilder $T^{-1}(A)$, \nldots{}, $T^{-n}(A)$, \nldots{} disjunkt von $A$ (und damit auch voneinander) sind.
+\end{defn}
+
+\begin{defn}
+  Ein dyn. System $(X, T)$ heißt \emph{nicht wandernd}, wenn keine offene, nichtleere Menge $A \subset X$ wandernd ist.
+\end{defn}
+
+% Ausgelassen: Hinreichende Bedingung: $X$ ist Support eines inv. endl. Maßes
+
+\begin{defn}
+  Eine Teilmenge $A \!\subset\! X$  heißt \emph{nirgends dicht}, falls $\inte(\clos{A}) = \emptyset$.
+\end{defn}
+
+\begin{defn}
+  Eine Teilmenge $A \!\subset\! X$ heißt \emph{mager}, wenn sie Vereinigung abzählbar vieler nirgends dichter Mengen ist.
+\end{defn}
+
+% Thm 1.27
+\begin{thm}
+  Sei $(X, T)$ nicht wandernd. Dann ist die Menge der nicht wiederkehrenden Punkte in $X$ mager.
+\end{thm}
+
+% Ausgelassen: Lem 1.28 über halbstetige Funktionen
 
 \end{document}
