@@ -19,18 +19,14 @@
 \maketitle{Dyn. Systeme in der Zahlentheorie}
 
 % TODO:
-% Van der Waerdens Theorem
 % Szemerédis Theorem
 % Poincarés Wiederkehrsatz
 % Rados Theorem
 % "Fast-Periodizität"
-% gleichförmig wiederkehrend
 % "proximality"
 % Schur und Brauers Resultat (SB)
 % Hindmans Resultat (NH)
-% Grünwalds Resultat (G)
 % Hilberts Resultat (DH)
-% Theorem (MBR = "multiple Birkhoff Recurrence")
 % Stabilität:
 %   * Im Sinne von Poisson
 %   * Im Sinne von Lagrange
@@ -39,6 +35,7 @@
 Dies ist eine übersetzte Zusammenfassung der ersten Kapitel des Buches "`Recurrence in Ergodic Theory and Combinatorial Number Theory"' von Harry Furstenberg.
 
 % Kapitel 1. Wiederkehr und gleichmäßige Wiederkehr in kompakten Räumen
+\section{1. (Gleichmäßige) Wiederkehr}
 
 % 1.1. Dynamische Systeme und wiederkehrende Punkte
 
@@ -57,18 +54,18 @@ Dies ist eine übersetzte Zusammenfassung der ersten Kapitel des Buches "`Recurr
 
 % Def 1.1
 \begin{defn}
-  Sei $X$ ein topol. Raum, $T : X \to X$ stetig.
+  Sei $X$ ein topologischer Raum, $T : X \to X$ stetig. \\
   Ein Punkt $x \in X$ heißt \emph{wiederkehrend}, falls für für alle Umgebungen $V \subset X$ von $x$ ein $n \geq 1$ existiert mit $T^n(x) \in V$.
 \end{defn}
 
 \begin{bem}
   Sei $X$ sogar ein metrischer Raum, $x \in X$ wiederkehrend. \\
-  Dann gibt es eine Folge $(n_k)$ mit $d(T^{n_k}(x), x) \to 0$ für $k \to \infty$.
+  Dann gibt es eine Folge $(n_k)_{k \in \N}$ mit $d(T^{n_k}(x), x) \to 0$ für $k \to \infty$.
 \end{bem}
 
 % nicht dort im Buch
 \begin{defn}
-  Sei $X$ ein topol. Raum, $T : X \to X$ stetig. Dann heißt
+  Sei $X$ ein topologischer Raum, $T : X \to X$ stetig. Dann heißt
   \[ Q(x) \coloneqq \clos{\Set{T^n x}{n \geq 1}} \subseteq X \]
   \emph{abgeschlossener Vorwärtsorbit} von $x \in X$.
 \end{defn}
@@ -82,8 +79,8 @@ Dies ist eine übersetzte Zusammenfassung der ersten Kapitel des Buches "`Recurr
   \end{itemize}
 \end{lem}
 
-\begin{thm}
-  Sei $X$ ein kompakter topol. Raum, $T : X \to X$ stetig. \\
+\begin{thm}[\emph{Birkhoff}]
+  Sei $X$ ein kompakter topologischer Raum und $T : X \to X$ stetig.
   Dann gibt es einen wiederkehrenden Punkt $x \in X$.
 \end{thm}
 % XXX: Bemerkung: Beweis benutzt Auswahlaxiom?
@@ -497,5 +494,90 @@ Dies ist eine übersetzte Zusammenfassung der ersten Kapitel des Buches "`Recurr
 \end{thm}
 
 % Ausgelassen: Lem 1.28 über halbstetige Funktionen
+
+
+% Kapitel 2. Van der Waerden's Theorem
+\section{2. Van der Waerdens Theorem}
+
+% Ausgelassen: Gegenbeispiele: Was kann schief laufen, wenn die Abbildungen nicht kommutieren?
+
+% 2.1. Bowen's Lemma und homogene Mengen
+
+% Lem 2.1
+\begin{lem} %[Bowen]
+  Sei $X$ ein komp. metr. Raum, $T \!:\! X \!\to\! X$ stetig und $A \!\subset\! X$. \\
+  Angenommen, $\fa{\epsilon > 0} \fa{x \in A} \ex{y \in Y} \ex{n \geq 1} d(T^n y, x) < \epsilon$. \\
+  Dann $\fa{\epsilon > 0} \ex{z \in A} \ex{n \geq 1} d(T^n z, z) < \epsilon$.
+  %Sei $A \!\subset\! X$, sodass für alle $x \in A$ und $\epsilon > 0$ ein $y \in A$ und $n \geq 1$ existiert mit $d(T^n y, x) < \epsilon$.
+  %Dann gibt es für alle $\epsilon > 0$ ein $z \in A$ und $n \geq 1$ mit $d(z, T^n z) < \epsilon$.
+\end{lem}
+
+% Defn 2.1
+\begin{defn}
+  Sei $X$ ein komp. Raum, $T : X \to X$ stetig. \\
+  Eine abgeschlossene Teilmenge $A \subseteq X$ heißt \emph{homogen} bzgl. $T$, wenn es eine Untergruppe $G \!<\! \Aut(X)$ gibt mit $\fa{S \in G} ST \!=\! TS$ und $S(A) \!=\! A$, sodass das dyn. System $(A, G)$ minimal ist.
+\end{defn}
+
+\begin{bsp}
+  Sei $(X, T) = (Y \!\times\! K, T)$ eine Gruppenerweiterung von $(Y, T)$. \\
+  Dann sind die Fasern $\Set{(y_0, k)}{k \in K}$ für alle $y_0 \in Y$ homogen.
+\end{bsp}
+
+% Defn 2.2
+\begin{defn}
+  Eine abgeschl. Teilmenge $A \subset X$ eines komp. metr. Raumes heißt \emph{wiederkehrend} für eine Transformation $T : X \to X$, falls für alle $\epsilon \!>\! 0$ und $x \!\in\! A$ ein $y \!\in\! A$ und $n \!\geq\! 1$ existiert, sodass $d(T^n y, x) \!<\! \epsilon$.
+\end{defn}
+
+% Lem 2.2
+\begin{lem}
+  Sei $A \subset X$ homogen bzgl. $T : X \to X$.
+  Angenommen, $\fa{\epsilon \!>\! 0} \ex{x, y \!\in\! A, \, n \!\geq\! 1} d(T^n y, x) \!<\! \epsilon$. 
+  Dann ist $A$ wiederkehrend.
+\end{lem}
+
+\begin{bsp}
+  Sei $(X, T) \!=\! (Y \!\times\! K, T)$ eine Gruppenerw. von $(Y, T)$ und $y_0 \in Y$ wiederkehrend.
+  Dann ist die Faser $\{ y_0 \} \times K$ wiederkehrend.
+\end{bsp}
+
+% Lem 2.3
+\begin{lem}
+  Sei $A \subset X$ homogen und wiederkehrend bzgl. $T : X \to X$. \\
+  Dann enthält $A$ einen wiederkehrenden Punkt von $(X, T)$.
+\end{lem}
+
+% Ausgelassen: Lem 2.3 angewandt auf Gruppenerweiterungen
+% Ausgelassen: Prop 2.4 da nur Kombination der Lemmata 2.2 und 2.3
+
+% 2.2 "The Multiple Birkhoff Recurrence Theorem"
+
+% Ausgelassen: Prop 2.5, da nur Spezialfall und Zwischenschritt zum Beweis von 2.6
+
+% Thm 2.6
+\begin{thm}[Multiple Birkhoff Recurrence, \emph{MBR}]\mbox{}\\
+  Sei $X$ ein komp. metr. Raum und $T_1, \ldots, T_l : X \to X$ komm. stetige Abbildungen.
+  Dann gibt es einen Punkt $x \!\in\! X$ und eine Folge $(n_k)_{k \in \N}$ mit $n_k \to \infty$ und $T_i^{n_k} x \to x$ simultan für alle $i = 1, \ldots, l$ bei $k \to \infty$.
+\end{thm}
+
+% 2.3. Das mehrdimensionale van-der-Waerden-Theorem
+
+\begin{defn}
+  Eine \emph{arithmetische Sequenz} der Länge $N \in \N$ ist eine Teilmenge $A \subset \N$ der Form $A = \Set{a + ib}{i = 1, \nldots, N}$ mit $a \!\in\! \N$, $b \!\geq\! 1$.
+\end{defn}
+
+% Thm 2.7
+\begin{thm}[\emph{Grünwald}]
+  Sei $\N^m = B_1 \cup \ldots \cup B_q$ eine Partition von $\N^m$. \\
+  Dann hat eine Menge $B_j$ die Eigenschaft, dass für alle endl. Teil- mengen $F \subset \N^m$ ein $a \in \N^m$ und ein $b \in \N$ existiert mit $bF + a \subset B_j$.
+\end{thm}
+
+\begin{bem}
+  Dieses Thm ist eine Verallgemeinerung auf $>\!1$ Dim. von:
+\end{bem}
+
+\begin{thm}[\emph{van der Waerden}]
+  Sei $\N = B_1 \cup \ldots \cup B_q$ eine Partition. \\
+  Dann enthält ein $B_j$ arithmetische Sequenzen beliebiger Länge.
+\end{thm}
 
 \end{document}
