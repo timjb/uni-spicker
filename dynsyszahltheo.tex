@@ -19,6 +19,10 @@
 \newcommand{\meS}{m.\,e.\,S.} % maßerhaltendes System
 \newcommand{\meST}{$(X, \Bor, \mu, T)$} % maßerhaltendes-System-Tupel
 \newcommand{\ind}{\mathbbm{1}} % Indikatorfunktion
+\newcommand{\Lin}{\mathcal{L}} % lineare Funktionale
+\newcommand{\Cont}{\mathcal{C}} % Menge der stetigen/diff'baren Funktionen
+\newcommand{\Alg}{\mathfrak{A}} % (Mengen-)Algebra
+\newcommand{\Meas}{\mathcal{M}} % Menge der Maße
 
 \begin{document}
 
@@ -595,68 +599,13 @@ Dies ist eine übersetzte Zusammenfassung der ersten Kapitel des Buches "`Recurr
 % Ausgelassen: 2.4 Umformulierungen und Anwendungen: Diophantinische Approximation
 % Ausgelassen: 2.5 Verfeinerung: IP-Mengen
 
-% Nicht im Buch, aber für Frühlingsschule wichtig
-\begin{samepage}
-  \section{Einschub: Etwas Funktionalanalysis}
-\end{samepage}
-
-\begin{defn}
-  Sei $k \in \{ \R, \C \}$.
-  Ein \emph{topologischer $k$-Vektorraum} $V$ ist ein $k$-VR mit einer Topologie bzgl. der die Addition $+ : V \times V \to V$ und die Skalarmultiplikation $\cdot : k \times V \to V$ stetig sind.
-\end{defn}
-
-\begin{defn}
-  Sei $k \in \{ \R, \C \}$ und $V$ ein $k$-VR.
-  Eine Teilmenge $A \subset V$ heißt
-  \begin{itemize}
-    \item \emph{absorbierend}, wenn
-    $\fa{v \!\in\! V\!}\! \ex{r \!>\! 0\!}\! \fa{\alpha \!\in\! k\!}\! \abs{\alpha} \!<\! r \!\implies\! \alpha v \!\in\! A$.
-    \item \emph{ausgewogen}, wenn $\fa{v \in A} \fa{\alpha \in k} \abs{\alpha} \leq 1 \implies \alpha v \in A$.
-    \item \emph{absolutkonvex}, wenn $A$ ausgewogen und konvex ist.
-  \end{itemize}
-\end{defn}
-
-\begin{lem}
-  Eine Teilmenge $A \!\subset\! V$ ist genau dann absolutkonvex, wenn
-  \[ \fa{v, w \in A} \fa{\lambda, \mu \in k} \abs{\lambda} + \abs{\mu} \leq 1 \implies \lambda v + \mu w \in A. \]
-\end{lem}
-
-\begin{defn}
-  Ein topol. $k$-VR $V$ heißt \emph{lokalkonvex}, wenn jede Umgebung von $0 \!\in\! V$ eine offene, absorbierende, absolutkonv. Teilmenge besitzt.
-\end{defn}
-
-\begin{bsp}
-  Normierte Räume sind lokalkonvex.
-\end{bsp}
-
-\begin{defn}
-  Sei $V$ ein $k$-VR, $K \subset V$ konvex. \\
-  Ein Punkt $x \in K$ heißt \emph{Extremalpunkt}, wenn
-  \begin{align*}
-    & \fa{y_i, \ldots, y_k \in K, \, \lambda_1, \ldots, \lambda_k \in \cinterval{0}{1}} \\
-    & \lambda_1 + \nldots + \lambda_k = 1 \,\wedge\, \lambda_1 y_1 + \nldots + \lambda_k y_k = x \implies y_1 \!=\! \nldots \!=\! y_k = x.
-  \end{align*}
-\end{defn}
-
-\begin{lem}
-  Sei $V$ ein topol. VR, $A \subset V$. Ist $A$ konvex, dann auch $\clos{A}$.
-  %Der Abschluss einer konvexen Teilmenge eines topol. VR ist ebenfalls konvex.
-\end{lem}
-
-\begin{satz}[\emph{Krein-Milman}]
-  Sei $V$ ein lokalkonvexer Raum, $K \subset V$ kompakt und konvex. Dann ist $K$ gleich dem Abschluss der von den Extremalpunkten von $K$ aufgespannten konvexen Hülle.
-\end{satz}
-
-% TODO: Rieszscher Darstellungssatz
-% TODO: Radon-Nikodym (?)
-
 
 % Teil II. Wiederkehr in maßerhaltenden Systemen
 
 % Kapitel 3. Invariante Maße auf auf kompakten Räumen
 
 % 3.1 Maßerhaltende Systeme und Poincaré-Wiederkehr
-\section{3. Invariante Maße auf kompakten Räumen}
+\section{3.1. Dynamische Systeme auf Maßräumen}
 
 \begin{bem}
   Sei im Folgenden $(X, \Bor, \mu)$ ein Maßraum mit einem topol. Raum $X$, einer $\sigma$-Algebra $\Bor$ auf $X$ und einem endlichen normierten Maß $\mu : \Bor \to \cinterval{0}{1}$ mit $\mu(X) = 1$.
@@ -729,7 +678,55 @@ Dies ist eine übersetzte Zusammenfassung der ersten Kapitel des Buches "`Recurr
   Dann sind fast-alle Punkte in $X$ wiederkehrend.
 \end{thm}
 
-% 3.2 Invariante Maße auf kompakten Räumen
+% Nicht im Buch, aber für Frühlingsschule wichtig
+\section{Etwas Maßtheorie \& Funktionalanalysis}
+
+\begin{defn}
+  Sei $k \in \{ \R, \C \}$.
+  Ein \emph{topologischer $k$-Vektorraum} $V$ ist ein $k$-VR mit einer Topologie bzgl. der die Addition $+ : V \times V \to V$ und die Skalarmultiplikation $\cdot : k \times V \to V$ stetig sind.
+\end{defn}
+
+\begin{defn}
+  Sei $k \in \{ \R, \C \}$ und $V$ ein $k$-VR.
+  Eine Teilmenge $A \subset V$ heißt
+  \begin{itemize}
+    \item \emph{absorbierend}, wenn
+    $\fa{v \!\in\! V\!}\! \ex{r \!>\! 0\!}\! \fa{\alpha \!\in\! k\!}\! \abs{\alpha} \!<\! r \!\implies\! \alpha v \!\in\! A$.
+    \item \emph{ausgewogen}, wenn $\fa{v \in A} \fa{\alpha \in k} \abs{\alpha} \leq 1 \implies \alpha v \in A$.
+    \item \emph{absolutkonvex}, wenn $A$ ausgewogen und konvex ist.
+  \end{itemize}
+\end{defn}
+
+\begin{lem}
+  Eine Teilmenge $A \!\subset\! V$ ist genau dann absolutkonvex, wenn
+  \[ \fa{v, w \in A} \fa{\lambda, \mu \in k} \abs{\lambda} + \abs{\mu} \leq 1 \implies \lambda v + \mu w \in A. \]
+\end{lem}
+
+\begin{defn}
+  Ein topol. $k$-VR $V$ heißt \emph{lokalkonvex}, wenn jede Umgebung von $0 \!\in\! V$ eine offene, absorbierende, absolutkonv. Teilmenge besitzt.
+\end{defn}
+
+\begin{bsp}
+  Normierte Räume sind lokalkonvex.
+\end{bsp}
+
+\begin{defn}
+  Sei $V$ ein $k$-VR, $K \subset V$ konvex. \\
+  Ein Punkt $x \in K$ heißt \emph{Extremalpunkt}, wenn
+  \begin{align*}
+    & \fa{y_i, \ldots, y_k \in K, \, \lambda_1, \ldots, \lambda_k \in \cinterval{0}{1}} \\
+    & \lambda_1 + \nldots + \lambda_k = 1 \,\wedge\, \lambda_1 y_1 + \nldots + \lambda_k y_k = x \implies y_1 \!=\! \nldots \!=\! y_k = x.
+  \end{align*}
+\end{defn}
+
+\begin{lem}
+  Sei $V$ ein topol. VR, $A \subset V$. Ist $A$ konvex, dann auch $\clos{A}$.
+  %Der Abschluss einer konvexen Teilmenge eines topol. VR ist ebenfalls konvex.
+\end{lem}
+
+\begin{satz}[\emph{Krein-Milman}]
+  Sei $V$ ein lokalkonvexer Raum, $K \subset V$ kompakt und konvex. Dann ist $K$ gleich dem Abschluss der von den Extremalpunkten von $K$ aufgespannten konvexen Hülle.
+\end{satz}
 
 \begin{defn}
   Sei $X$ ein topologischer Raum, $\Bor$ eine $\sigma$-Algebra auf $X$. \\
@@ -742,5 +739,164 @@ Dies ist eine übersetzte Zusammenfassung der ersten Kapitel des Buches "`Recurr
     \item \emph{regulär}, wenn es von innen und außen regulär ist.
   \end{itemize}
 \end{defn}
+
+\begin{defn}
+  Ein topol. Raum $X$ heißt \emph{$\sigma$-kompakt}, wenn $X$ Vereinigung höchstens abzählbar vieler kompakter Teilmengen ist.
+\end{defn}
+
+% TODO: Muss man hier noch Stetigkeit der Funktionale voraussetzen? Oder wird das schon irgendwie durch die Monotonie impliziert?
+% Thm 2.14 in "Complex and Real Analyisis" von Walter Rudin
+\begin{thm}[\emph{Riesz}]
+  Sei $X$ ein lokalkompakter Hausdorffraum, dessen offene Teilmengen $\sigma$-kompakt sind, $\Bor$ die Borel-$\sigma$-Algebra von $X$,
+  \begin{align*}
+    \Cont_0(X) \coloneqq \{ \, & \text{stetige Funktionen $X \to \R$ mit kompaktem Träger} \, \}, \\
+    \Lin \coloneqq \{ \, & \text{lineare Funktionale $L : \Cont_0(X) \to \R$} \, \}, \\
+    \Lin' \coloneqq \{ \, & L \in \Lin \enspace|\enspace \fa{f \in C_0(X)} f \geq 0 \implies L(f) \geq 0 \, \} \\
+    \Meas' \coloneqq \{ \, & \text{reguläre Maße $\mu : \Bor \to \cinterval{0}{\infty}$ auf $(X, \Bor)$ mit} \\
+    & \text{$\mu(K) < \infty$ für alle kompakten $K \subset X$} \, \}
+  \end{align*}
+  Dann ist folgende Abbildung eine Bijektion:
+  \[ R : \Meas' \to \Lin', \quad \mu \mapsto \left( L_\mu : C_0(X) \to \R, \enspace f \mapsto \Int{X}{}{f}{\mu} \right) \]
+\end{thm}
+
+% Thm 2.18 in "Complex and Real Analyisis" von Walter Rudin
+\begin{thm}
+  Sei $X$ ein lokalkompakter Hausdorffraum, dessen offene Teilmengen $\sigma$-kompakt sind.
+  Sei $\mu$ ein Maß auf der Borel-$\sigma$-Algebra von $X$ mit $\mu(K) \!<\! \infty$ für alle kompakten $K \!\subset\! X$. Dann ist $\mu$ regulär.
+\end{thm}
+
+% Aus der Stochi-Zusammenfassung, abgeändert
+\begin{defn}
+  Seien $\mu$ und $\nu$ Maße auf dem messbaren Raum $(\Omega, \Alg)$. \\
+  Dann heißt $\nu$ heißt \emph{absolut stetig} bezüglich $\mu$ (notiert $\nu \ll \mu$), falls
+  \[ \mu(A) = 0 \implies \nu(A) = 0 \quad \text{ für alle } A \in \Alg. \]
+\end{defn}
+
+\begin{defn}
+  Ein Maß $\mu$ auf einem messb. Raum $(\Omega, \Alg)$ heißt \emph{$\sigma$-endlich}, wenn es eine Folge $(A_n)$ in $\Alg$ mit $\mu(A_n) < \infty$ und $\Omega = \cup_{n \in \N} A_n$ gibt.
+\end{defn}
+
+\begin{thm}[\emph{Radon-Nikodým}]
+  Seien $\mu$ und $\nu$ Maße auf dem messbaren Raum $(\Omega, \Alg)$, $\mu$ $\sigma$-endlich und $\nu$ absolut stetig bzgl. $\mu$ ($\nu \ll \mu$).
+  Dann gibt es eine fast-überall eindeutige messb. Funktion $f : \Omega \to \R_{\geq 0}$ mit
+  \[
+    \nu(A) = \Int{\Omega}{}{f}{\mu} \quad
+    \text{für alle $A \in \Alg$}.
+  \]
+  Ist $\nu$ endlich, so ist $f \in L^1(\Omega, \Alg, \mu)$.
+\end{thm}
+
+% 3.2 Invariante Maße auf kompakten Räumen
+\begin{samepage}
+  \section{3.2 Invariante Maße auf komp. Räumen}
+\end{samepage}
+
+\begin{bem}
+  Sei im Folgenden $X$ ein kompakter metrischer Raum und $\Bor$ die Borel-$\sigma$-Algebra auf $X$ und $T : X \to X$ stetig.
+\end{bem}
+
+% Aus Ana3-Zusammenfassung
+\begin{defn}
+  Sei $(\Omega, \Alg, \mu)$ ein Maßraum und $(\Omega', \Alg')$ ein messbarer Raum und $f : \Omega \to \Omega'$ eine messbare Abbildung, dann ist
+  \[ \mu' = f_*(\mu) = \mu \circ f^{-1} : \Alg' \to \cinterval{0}{\infty}, \quad A' \mapsto \mu(f^{-1}(A')) \]
+  ein Maß auf $(\Omega', \Alg')$, genannt das \emph{Bildmaß} von $f$.
+\end{defn}
+
+\begin{defn}
+  Setze $\Meas \coloneqq \{ \, \text{Maße $\mu$ auf $(X, \Bor)$ mit $\mu(X) = 1$} \, \}$.
+  Sei $\mathcal{S} \subset \Meas$ die Menge der Maße $\mu$, die unter $T$ \emph{invariant} sind, \dh{} $T_* \mu = \mu$.
+\end{defn}
+
+\begin{kor}
+  Die Abb. $R$ aus dem Satz von Riesz liefert eine Bij.
+  \[ \Meas \xleftrightarrow{1:1} \Set{L \in \Lin'}{L(x \mapsto 1) = 1} \]
+\end{kor}
+
+\begin{bem}
+  Man kann $\Meas$ also als Teilmenge von $\mathcal{L}$ auffassen.
+  Wenn $\Lin'$ die Schwach-*-Topologie trägt, dann trägt $\Meas$ die Teilmengentopol. mit
+  \[
+    \mu_n \xrightarrow{n \to \infty} \mu \text{ in $\Meas$} \coloniff
+    \fa{f \in C_0(X)} \Int{}{}{f}{\mu_n} \xrightarrow{n \to \infty} \Int{}{}{f}{\mu}.
+  \]
+  Mit dieser Topologie ist $\Meas \subset \Lin'$ kompakt und konvex.
+\end{bem}
+
+\begin{bem}
+  Die Menge $\mathcal{S}$ ist nicht leer: Sei $\nu \in \Meas$ beliebig. Setze
+  \[ \mu_n \coloneqq \tfrac{1}{n+1} \left( \nu + T_* \nu + T^2_* \nu + \ldots + T^n_* \nu \right). \]
+  Der Grenzwert von $(\mu_n)_{n \in \N}$ in $\Meas$ ist dann in $\mathcal{S}$.
+\end{bem}
+
+\begin{bem}
+  $\mathcal{S} \subset \Lin$ ist kompakt und konvex. Aus dem Satz von Krein- Milman folgt: $\mathcal{S}$ ist der Abschluss der konvexen Hülle seiner Extre- malpkte (die insb. existieren). Diese sind wie folgt charakterisiert:
+\end{bem}
+
+\begin{prop}
+  Ein Maß $\mu \in \mathcal{S}$ ist genau dann ein Extremalpunkt von $\mathcal{S}$, wenn \meST{} ein ergodisches System ist.
+\end{prop}
+
+\begin{bem}
+  Folglich heißen Extremalpunkte von $\mathcal{S}$ \emph{ergodische Maße}.
+\end{bem}
+
+% Defn 3.2
+\begin{defn}
+  Das dynamische System $(X, T)$ heißt \emph{eindeutig ergodisch}, wenn es genau ein invariantes Maß $\mu \in \mathcal{S}$ gibt.
+\end{defn}
+
+\begin{bem}
+  Aus der Prop. folgt, dass dieses eind. Maß dann ergodisch ist.
+\end{bem}
+
+% Thm 3.5
+\begin{thm}
+  Sei $(X, T)$ ein eind. ergodisches System, $\mu \!\in\! \mathcal{S}$ das $T$-inv. Maß. \\
+  Dann gilt für alle $f \in \Cont(X)$: $f_n \xrightarrow{n \to \infty} \Int{}{}{f}{\mu}$ glm. in $X$.
+\end{thm}
+
+% Defn 3.3
+\begin{defn}
+  Sei $X$ ein separabler metrischer Raum, $\Bor$ die Borel-$\sigma$-Algebra. \\
+  Der \emph{Träger} eines Maßes auf $(X, \Bor)$ ist das Komplement aller offenen Mengen mit Maß Null.
+\end{defn}
+
+\begin{bem}
+  Der Träger eines $T$-invarianten Maßes ist $T$-invariant.
+\end{bem}
+
+% Prop 3.6
+\begin{prop}
+  Sei $T$ eindeutig ergodisch auf $X$ ist und $X' \subset X$ der Träger des inv. Maßes. Dann ist $(X', T)$ minimal.
+\end{prop}
+
+% Defn 3.4
+\begin{defn}
+  $x_0 \!\in\! X$ heißt \emph{generischer Pkt} des \meS{} \meST{}, wenn
+  \[ \fa{f \in \Cont(X)} f_n(x_0) \xrightarrow{n \to \infty} \Int{X}{}{f}{\mu}. \]
+\end{defn}
+
+% Prop 3.7
+\begin{prop}
+  Sei $\mu$ ein ergodisches Maß auf $(X, T)$. Dann sind $\mu$-fast-alle Punkte von $X$ generische Punkte von $\mu$.
+\end{prop}
+
+% Prop 3.8
+\begin{prop}
+  Das System $(X, T)$ ist eindeutig ergodisch, wenn jeder Punkt $x \in X$ generisch für ein inv. Maß $\mu_x \in \mathcal{S}$ ist.
+\end{prop}
+
+% Ausgelassen: Sei $(X, T)$ eindeutig ergodisch, $X'$ der Träger des eindeutig ergodischen Maßes, dann ist jeder Punkt in $X'$ glm. wiederkehrend (Beweis mit Techniken dieses Kapitels)
+
+% Defn 3.5
+\begin{defn}
+  Sei $\mu$ ein invariantes Maß von $(X, T)$. Ein Punkt $x_0 \in X$ heißt \emph{quasi-generischer Punkt} von $\mu$, falls Folgen $(a_k)_{k \in \N}$ und $(b_k)_{k \in \N}$ natürlicher Zahlen existieren mit $a_k \leq b_k$, \enspace $b_k - a_k \xrightarrow{k \to \infty} \infty$ und
+  \[ \fa{f \in \Cont(X)} \frac{1}{b_k - a_k + 1} \sum_{n=a_k}^{b_k} f(T^n x_0) \xrightarrow{k \to \infty} \Int{X}{}{f}{\mu}. \]
+\end{defn}
+
+% Prop 3.9
+\begin{prop}
+  Sei $(X, T)$ ein zykl. System, $x_0 \!\in\! X$ und $X' \coloneqq \clos{\Set{T^n x_0}{n \geq 0}}$. Wenn $\mu \in \mathcal{M}(X')$ ein ergodisches Maß bzgl. $T_{X'}$ ist, dann ist $x_0$ quasi-generisch für $\mu$.
+\end{prop}
 
 \end{document}
