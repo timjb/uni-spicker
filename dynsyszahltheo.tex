@@ -713,10 +713,13 @@ Dies ist eine übersetzte Zusammenfassung der ersten Kapitel des Buches "`Recurr
 \begin{defn}
   Sei $V$ ein $k$-VR, $K \subset V$ konvex. \\
   Ein Punkt $x \in K$ heißt \emph{Extremalpunkt}, wenn
+  \[ \fa{\lambda, \mu \in \overline{B_1(0)} \!\subset\! k, \, y, z \in V} \lambda \!+\! \mu \!=\! 1 \wedge \lambda y \!+\! \mu z \!=\! x \implies x \!=\! y \!=\! z. \]
+  \iffalse
   \begin{align*}
     & \fa{y_i, \ldots, y_k \in K, \, \lambda_1, \ldots, \lambda_k \in \cinterval{0}{1}} \\
     & \lambda_1 + \nldots + \lambda_k = 1 \,\wedge\, \lambda_1 y_1 + \nldots + \lambda_k y_k = x \implies y_1 \!=\! \nldots \!=\! y_k = x.
   \end{align*}
+  \fi
 \end{defn}
 
 \begin{lem}
@@ -784,6 +787,26 @@ Dies ist eine übersetzte Zusammenfassung der ersten Kapitel des Buches "`Recurr
     \text{für alle $A \in \Alg$}.
   \]
   Ist $\nu$ endlich, so ist $f \in L^1(\Omega, \Alg, \mu)$.
+\end{thm}
+
+\begin{defn}
+  Sei $X$ ein topol. Raum, $\Bor$ die Borel-$\sigma$-Algebra.
+  Ein Maß $\mu$ auf $(X, \Bor)$ heißt \emph{Borelmaß}, wenn für alle $x \in X$ eine offene Umgebung $U$ von $x$ existiert mit $\mu(U) < \infty$.
+\end{defn}
+
+\begin{bem}
+  Falls $X$ lokalkompakt ist, dann ist $\mu$ genau dann ein Borelmaß, wenn $\mu(K) < \infty$ für alle Kompakta $K \subseteq X$.
+\end{bem}
+
+% Von http://de.wikipedia.org/wiki/Haarsches_Ma%C3%9F
+% XXX: Wird hier noch Hausdorff benötigt?
+\begin{defn}
+  Ein \emph{Haar-Maß} auf einer topol. Gr. $G$ ist ein reguläres Borel- maß auf $(G, \Bor)$, das linksinv. ist, d.h. $\fa{g \!\in\! G, \, B \!\in\! \Bor\!}\! \mu(B) \!=\! \mu(gB)$.
+\end{defn}
+
+\begin{thm}
+  Sei $G$ eine lokalkompakte topol. Gruppe.
+  Dann gibt es bis auf multiplikative Konstante genau ein nichttriviales Haar-Maß.
 \end{thm}
 
 % 3.2 Invariante Maße auf kompakten Räumen
@@ -898,5 +921,57 @@ Dies ist eine übersetzte Zusammenfassung der ersten Kapitel des Buches "`Recurr
 \begin{prop}
   Sei $(X, T)$ ein zykl. System, $x_0 \!\in\! X$ und $X' \coloneqq \clos{\Set{T^n x_0}{n \geq 0}}$. Wenn $\mu \in \mathcal{M}(X')$ ein ergodisches Maß bzgl. $T_{X'}$ ist, dann ist $x_0$ quasi-generisch für $\mu$.
 \end{prop}
+
+% 3.3. Gruppenerweiterungen, eindeutige Ergodizität und Gleichverteilung
+
+\begin{defn}
+  Sei $(Y, T)$ ein dyn. System, $\nu$ ein $T$-inv. Maß auf $(Y, \Bor)$, $G$ eine kompakte Gruppe und $\phi : Y \!\to\! G$ stetig.
+  Sei $\mu_G$ ein Haar-Maß auf $G$. \\
+  Dann ist das Produktmaß $\nu \!\times\! \mu_G$ ein inv. Maß auf der Gruppener- weiterung $(Y \!\times\! G, T)$, es ist also $(Y \!\times\! G, \Bor_{Y \times G}, \nu \!\times\! \mu_G, T)$ ein \meS{}.
+\end{defn}
+
+% Prop 3.10
+\begin{prop}
+  Sei $(Y, T)$ eind. ergodisch und $(Y \!\times\! G, \Bor_{Y \times G}, \nu \!\times\! \mu_G, T)$ ergodisch. Dann ist auch $(Y \!\times\! G, T)$ eindeutig ergodisch.
+\end{prop}
+
+% XXX: Ein bisschen was zu Fourier-Analysis
+
+% Prop 3.11 und 3.12 kombiniert
+\begin{prop}
+  Sei $\alpha \in \R$ irrational und $(b_{ij})_{1 \leq j < i \leq d}$ ganze Zahlen mit $b_{j+1}{j} \not= 0$ für $d > j \geq 1$ und $T : T^d \to T^d$ definiert durch
+  \[
+    T(\theta_1, \nldots, \theta_d) \coloneqq (\theta_1 + \alpha, \theta_2 + b_{21} \theta_1, \nldots, \theta_d + b_{d1} \theta_1 + \nldots + b_{d,d-1} \theta_{d-1}).
+  \]
+  Dann ist $(T^d, T)$ eind. ergodisch bzgl. dem Haar-Maß auf $T^d$.
+\end{prop}
+
+% Aus http://de.wikipedia.org/wiki/Gleichverteilung_modulo_1
+\begin{defn}
+  Sei $(x_n)_{n \in \N}$ eine Folge reeller Zahlen, $p : \R \to S^1, \, z \mapsto e^{2i\pi z}$ und $\mu$ das Haar-Maß auf $S^1$.
+  Die Folge heißt \emph{gleichverteilt modulo 1}, falls für alle offenen $U \subset S^1$ gilt:
+  \[ \frac{\abs{U \cap \Set{p(x_i)}{i=1,\nldots,n}}}{\abs{n}} \xrightarrow{n \to \infty} \frac{\mu(U)}{\mu(S^1)}. \]
+\end{defn}
+
+\begin{lem}
+  Die Folge $(x_n)$ ist genau dann gleichverteilt, wenn
+  \[
+    \tfrac{1}{n} \sum_{i=1}^n f(p(x_i)) \xrightarrow{n \to \infty} \tfrac{1}{\mu(S^1)} \Int{S^1}{}{f}{\mu} \qquad
+    \text{$\forall$ stetige $f : S^1 \to \R$.}
+  \]
+\end{lem}
+
+% XXX: bessere Übersetzung
+\begin{defn}
+  Die Folge $(x_n)$ heißt \emph{wohlverteilt modulo 1}, wenn
+  \[ \frac{\abs{U \cap \Set{p(x_i)}{i=1+M,\nldots,n+M}}}{\abs{n}} \xrightarrow{n \to \infty} \frac{\mu(U)}{\mu(S^1)}. \]
+  gleichmäßig für alle $M \in \N$ gilt.
+\end{defn}
+
+% Thm 3.13, verschärft von gleichverteilt zu wohlverteilt (siehe Bemerkungen nach dem Theorem)
+\begin{thm}[\emph{Weyl}]
+  Sei $p(X) \in \R[X]$ ein Polynom mit mind. einem irrationalen Koeffizienten, der nicht der konstante Term ist. \\
+  Dann ist die Folge $(p(n))_{n \in \N}$ wohlverteilt modulo 1.
+\end{thm}
 
 \end{document}
