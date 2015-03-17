@@ -8,7 +8,9 @@
 \usepackage{mathabx} % \divides
 \usepackage{bbm} % Für 1 mit Doppelstrich (Indikatorfunktion)
 \usepackage{stmaryrd} % \lightning
+\usepackage{pgffor} % \foreach-Schleifen
 
+\newcommand{\nspace}[1]{\foreach \i in {1,...,#1}{ \! }} % Negativer Abstand
 \DeclareMathOperator{\Aut}{Aut} % Automorphismengruppe
 \DeclareMathOperator{\End}{End} % Endomorphismenmonoid
 \newcommand{\AutEnd}{\Aut\!/\!\End} % Automorphismengruppe bzw. Endomorphismenmonoid
@@ -23,6 +25,8 @@
 \newcommand{\Cont}{\mathcal{C}} % Menge der stetigen/diff'baren Funktionen
 \newcommand{\Alg}{\mathfrak{A}} % (Mengen-)Algebra
 \newcommand{\Meas}{\mathcal{M}} % Menge der Maße
+\newcommand{\Boun}{\mathcal{B}} % Menge der beschränkten (bounded) Operatoren
+\newcommand{\scp}[2]{\langle #1 , #2 \rangle} % Skalarprodukt
 
 \begin{document}
 
@@ -923,6 +927,9 @@ Dies ist eine übersetzte Zusammenfassung der ersten Kapitel des Buches "`Recurr
 \end{prop}
 
 % 3.3. Gruppenerweiterungen, eindeutige Ergodizität und Gleichverteilung
+\begin{samepage}
+  \section{3.3. Gruppenerweiterungen, eindeutige Ergodizität und Gleichverteilung}
+\end{samepage}
 
 \begin{defn}
   Sei $(Y, T)$ ein dyn. System, $\nu$ ein $T$-inv. Maß auf $(Y, \Bor)$, $G$ eine kompakte Gruppe und $\phi : Y \!\to\! G$ stetig.
@@ -973,5 +980,78 @@ Dies ist eine übersetzte Zusammenfassung der ersten Kapitel des Buches "`Recurr
   Sei $p(X) \in \R[X]$ ein Polynom mit mind. einem irrationalen Koeffizienten, der nicht der konstante Term ist. \\
   Dann ist die Folge $(p(n))_{n \in \N}$ wohlverteilt modulo 1.
 \end{thm}
+
+\begin{samepage}
+  \section{3.4. Unitäre Op'en und Poincaré-Folgen}
+\end{samepage}
+
+\begin{defn}
+  Ein $\C$-VR mit Skalarprodukt $\scp{\blank}{\blank}$ heißt Prähilbertraum. \\
+  Er heißt \emph{Hilbertraum}, wenn er vollständig bzgl. der ind. Norm ist.
+\end{defn}
+
+\begin{defn}
+  Ein \emph{linearer beschränkter Operator} auf einem Hilbertraum $H$ ist eine lineare Abbildung $T : H \to H$ mit
+  \[ \sup_{\norm{x} \leq 1} \norm{Tx} < \infty \]
+\end{defn}
+
+\begin{nota}
+  $\Boun(H) \coloneqq \{ \, \text{lineare, beschränkte Operatoren auf $H$} \, \}$
+\end{nota}
+
+\begin{thm}
+  Für jeden Operator $T \!\in\! \Boun(H)$ gibt es genau ein $T^* \!\in\! \Boun(H)$ mit
+  \[ \fa{x, y \in H} \scp{Tx}{y} = \scp{x}{T^* y}. \]
+\end{thm}
+
+\begin{defn}
+  Der Operator $T^*$ heißt \emph{adjungierter Operator} von $T$.
+\end{defn}
+
+\begin{defn}
+  Sei $H$ ein Hilbertraum.
+  Ein Operator $T \in \Boun(H)$ heißt \\
+  \inlineitem{\emph{normal}, wenn $T^* T \!=\! T T^*$,} \enspace
+  \inlineitem{\emph{unitär}, wenn $T^* T \!=\! T T^* \!=\! \Id_H$.}
+\end{defn}
+
+% TODO: Spektrum, Maß auf Spektrum, Spektralsatz
+
+% Lem 3.14
+\begin{lem}
+  Sei $H$ ein Hilbertraum, $T \in \Boun(H)$ ein unitärer Operator, $p(X) \in \Q[X]$ ein Polynom mit $\fa{n \in \Z} p(n) \in \Z$. Setze
+  \begin{align*}
+    H_\theta & \coloneqq \Set{x \in H}{Tx = e^{2 \pi i \theta}} \quad
+    \text{für $\theta \in \cointerval{0}{1}$,} \\
+    H_{\text{rat}} & \coloneqq \nspace{3} \bigoplus_{q \in \Q \cap \cointerval{0}{1}} \nspace{3} H_q.
+  \end{align*}
+  Sei $P_{\text{rat}} : H \to H_{\text{rat}}$ die orth. Projektion. Wenn $P_{\text{rat}} x = 0$, dann
+  \[ \tfrac{1}{N + 1} \sum_{n=0}^N T^{p(n)} x \xrightarrow{N \to \infty} 0. \]
+\end{lem}
+
+% Prop 3.15
+\begin{prop}
+  Sei $p(X) \in \Q[X]$ mit $\fa{n \in \Z} p(n) \in \Z$ und $p(0) = 0$.
+  Sei $T \in \Boun(H)$ ein unitärer Operator auf einem Hilbertraum $H$ und $x \in H$ mit $\scp{T^{p(n)}}{x} = 0$ für alle $n \geq 1$. Dann ist $x$ orthogonal zu allen Eigenvektoren deren zugeh. Eigenwert eine Einheitswurzel ist.
+\end{prop}
+
+% XXX: "Poincaré sequence = Poincaré-Folge" ?
+% Defn 3.6
+\begin{defn}
+  Eine Teilmenge $W \subset \Z$ heißt \emph{Poincaré-Folge}, wenn für alle maßerhaltenden Systeme \meST{} und $A \in \Bor$ mit $\mu(A) > 0$ gilt:
+  \[ \ex{n \in W \setminus \{ 0 \}} \mu(T^{-n} A \cap A) > 0. \]
+\end{defn}
+
+% Thm 3.16
+\begin{thm}
+  Sei $p(X) \in \Q[X]$ mit $\fa{n \in \Z} p(n) \in \Z$ und $p(0) = 0$. \\
+  Dann ist $\Set{p(n)}{n \geq 1}$ eine Poincaré-Folge.
+\end{thm}
+
+\begin{bem}
+  Ist $W \!\subset\! \Z$ eine Poincaré-Folge, dann ist $(W \cap m \Z) \setminus \{ 0 \} \not= \emptyset$ für alle $m \geq 1$.
+  Denn: Wenn \meST{} ein maßerhaltendes System ist, dann auch $(X, \Bor, \mu, T^m)$.
+  % XXX: Wenn $p(X) \in \Q[X]$ mit $p(\Z) \subset \Z$, dann ist $p(\Z)$ nur dann eine Poincaré-Folge, wenn $0 \in p(\Z)$.
+\end{bem}
 
 \end{document}
