@@ -52,7 +52,7 @@
 \end{defn}
 
 \begin{defn}
-  Falls oben $a_0 \not= 0$ gilt, so ist $\partial f = n$ der \emph{Grad} des Polynoms.
+  Falls oben $a_0 \neq 0$ gilt, so ist $\partial f = n$ der \emph{Grad} des Polynoms.
 \end{defn}
 
 % Bemerkung: Polynome gibt es auch zu mehreren Unbestimmten ($X,Y,Z$ oder $X_1,X_2,X_3$)
@@ -79,7 +79,7 @@
 \begin{alg}[Euklid]
   Seien $a, b \in \R$ mit $a {>} b {>} 0$ gegeben. Schreibe
   \[ a = k \cdot b + r \]
-  mit $k \in \N$ und $r < b$. Wiederhole diesen Schritt mit $(a, b) \coloneqq (b, r)$, falls $r \not= 0$.
+  mit $k \in \N$ und $r < b$. Wiederhole diesen Schritt mit $(a, b) \coloneqq (b, r)$, falls $r \neq 0$.
 \end{alg}
 
 \begin{defn}
@@ -373,7 +373,7 @@
 \end{defn}
 
 \begin{defn}
-  Eine Zahl $c \in \C$ heißt \emph{algebraisch}, wenn es ein Polynom $f \in \Q[x]$, $f \not= 0$ mit $f(c) = 0$ gibt.
+  Eine Zahl $c \in \C$ heißt \emph{algebraisch}, wenn es ein Polynom $f \in \Q[x]$, $f \neq 0$ mit $f(c) = 0$ gibt.
 \end{defn}
 
 \begin{bem}
@@ -428,7 +428,7 @@
 
 \begin{defn}
   Die \emph{Diskriminante} eines Polynoms $f = (x - x_1) \cdot ... \cdot (x - x_n)$ ist der Ausdruck
-  \[ \Delta (\vec{x}) \coloneqq \pm \prod_{i \not= j} (x_i - x_j). \]
+  \[ \Delta (\vec{x}) \coloneqq \pm \prod_{i \neq j} (x_i - x_j). \]
   Da dieser Polynomausdruck symmetrisch ist, lässt er sich in den Koeffizienten des Polynoms $f$ darstellen.
 \end{defn}
 
@@ -547,7 +547,7 @@
 % Kapitel 1.17. Die alternierende Gruppe
 
 \begin{defn}
-  Seien $i, j \in \{ 1, ..., n \}$ mit $i \not= j$. Dann ist die \emph{Transposition} von $i$ und $j$ die Abbildung, die $i$ und $j$ vertauscht, also
+  Seien $i, j \in \{ 1, ..., n \}$ mit $i \neq j$. Dann ist die \emph{Transposition} von $i$ und $j$ die Abbildung, die $i$ und $j$ vertauscht, also
   \[
     (ij) : \{ 1, ..., n \} \to \{ 1, ..., n \}, \quad k \mapsto \begin{cases}
       j, & \text{falls $k = i$,}\\
