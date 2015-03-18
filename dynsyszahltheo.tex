@@ -149,7 +149,7 @@ Dies ist eine übersetzte Zusammenfassung der ersten Kapitel des Buches "`Recurr
     R : K \to \Aut(X), \enspace k \mapsto R_k, \quad
     R_k(y,k') \coloneqq (y,k'k).
   \]
-  Die Homöomorphismen $R_k$ kommutieren mit $T$, sind also Automorphismen des dyn. Systems $(X, T)$.
+  Die Homöomorphismen $R_k$ kommutieren mit $T$, sind also Automorphismen des dynamischen Systems $(X, T)$.
 \end{bem}
 
 % Thm 1.4
@@ -335,7 +335,7 @@ Dies ist eine übersetzte Zusammenfassung der ersten Kapitel des Buches "`Recurr
   Sei $(X, G)$ ein dyn System. Es sind äquivalent: \\
   \inlineitem{$(X, G)$ ist minimal} \quad
   \inlineitem{$\fa{x \in X}$ der Orbit $Gx$ ist dicht in $X$} \\
-  \inlineitem{$\fa{\emptyset \not= V \subset X \text{ offen}} \ex{\text{endlich viele Elemente } g_1, \ldots, g_n \in G}$}
+  \inlineitem{$\fa{\emptyset \neq V \subset X \text{ offen}} \ex{\text{endlich viele Elemente } g_1, \ldots, g_n \in G}$}
   \[ g_1^{-1} V \cup \ldots \cup g_n^{-1} V = X. \]
 \end{lem}
 
@@ -475,7 +475,7 @@ Dies ist eine übersetzte Zusammenfassung der ersten Kapitel des Buches "`Recurr
     T(\theta_1, \ldots, \theta_d) \coloneqq
     (\theta_1 + \alpha, \theta_2 + f_1(\theta_1), \ldots, \theta_d + f_{d-1}(\theta_1, \ldots, \theta_{d-1}))
   \]
-  mit $\alpha$ irrational, $f_i : T^i \!\to\! T$ stetig mit $(f_i)_*(\tau_i) \!\not=\! 0$ für $i \!=\! 1, \nldots, d{-}1$. \\
+  mit $\alpha$ irrational, $f_i : T^i \!\to\! T$ stetig mit $(f_i)_*(\tau_i) \!\neq\! 0$ für $i \!=\! 1, \nldots, d{-}1$. \\
   Dann ist $(T^d, T)$ ein minimales dynamisches System.
 \end{lem}
 
@@ -670,7 +670,7 @@ Dies ist eine übersetzte Zusammenfassung der ersten Kapitel des Buches "`Recurr
   Angenommen, die Behauptung ist falsch. Dann gilt
   \[
     \Int{}{}{f(T^n x)f(T^m x)}{\mu(x)} = 0 \quad
-    \text{für $n \not= m$.}
+    \text{für $n \neq m$.}
   \]
   Es folgt durch $2 \times$ Übergang zum Grenzwert $E(\overline{f}^2) = 0$, also
   \[ 0 = E(\overline{f}) = E(f) = \mu(A) > 0 \enspace \lightning \]
@@ -946,7 +946,7 @@ Dies ist eine übersetzte Zusammenfassung der ersten Kapitel des Buches "`Recurr
 
 % Prop 3.11 und 3.12 kombiniert
 \begin{prop}
-  Sei $\alpha \in \R$ irrational und $(b_{ij})_{1 \leq j < i \leq d}$ ganze Zahlen mit $b_{j+1}{j} \not= 0$ für $d > j \geq 1$ und $T : T^d \to T^d$ definiert durch
+  Sei $\alpha \in \R$ irrational und $(b_{ij})_{1 \leq j < i \leq d}$ ganze Zahlen mit $b_{j+1}{j} \neq 0$ für $d > j \geq 1$ und $T : T^d \to T^d$ definiert durch
   \[
     T(\theta_1, \nldots, \theta_d) \coloneqq (\theta_1 + \alpha, \theta_2 + b_{21} \theta_1, \nldots, \theta_d + b_{d1} \theta_1 + \nldots + b_{d,d-1} \theta_{d-1}).
   \]
@@ -1042,6 +1042,10 @@ Dies ist eine übersetzte Zusammenfassung der ersten Kapitel des Buches "`Recurr
   \[ \ex{n \in W \setminus \{ 0 \}} \mu(T^{-n} A \cap A) > 0. \]
 \end{defn}
 
+\begin{bsp}
+  Dicke Mengen sind Poincaré-Folgen.
+\end{bsp}
+
 % Thm 3.16
 \begin{thm}
   Sei $p(X) \in \Q[X]$ mit $\fa{n \in \Z} p(n) \in \Z$ und $p(0) = 0$. \\
@@ -1049,9 +1053,63 @@ Dies ist eine übersetzte Zusammenfassung der ersten Kapitel des Buches "`Recurr
 \end{thm}
 
 \begin{bem}
-  Ist $W \!\subset\! \Z$ eine Poincaré-Folge, dann ist $(W \cap m \Z) \setminus \{ 0 \} \not= \emptyset$ für alle $m \geq 1$.
+  Ist $W \!\subset\! \Z$ eine Poincaré-Folge, dann ist $(W \cap m \Z) \setminus \{ 0 \} \neq \emptyset$ für alle $m \geq 1$.
   Denn: Wenn \meST{} ein maßerhaltendes System ist, dann auch $(X, \Bor, \mu, T^m)$.
   % XXX: Wenn $p(X) \in \Q[X]$ mit $p(\Z) \subset \Z$, dann ist $p(\Z)$ nur dann eine Poincaré-Folge, wenn $0 \in p(\Z)$.
 \end{bem}
+
+\begin{samepage}
+  \section{3.5. Invariante Maße auf symb. Flüssen}
+\end{samepage}
+
+\begin{bem}
+  Sei im Folgenden $\Lambda$ ein endliches Alphabet und $T : \Lambda^\Z \to \Lambda^\Z$ der Verschiebeoperator.
+\end{bem}
+
+% Defn 3.7
+\begin{defn}
+  Sei $S \subset \N$ bzw. $S \subset \Z$. Die \emph{obere Banach-Dichte} von $S$ ist
+  \[ BD^*(S) \coloneqq \limsup_{n \to \infty} \enspace \tfrac{1}{n+1} \cdot \max_{m \in \Z} \, \abs{S \cap \cinterval{m}{m+n}}. \]
+\end{defn}
+
+% Ausgelassen: untere Banach-Dichte; obere, untere Dichte
+
+\begin{defn}
+  Man sagt, ein Symbol $a \in \Lambda$ trete in $\xi \!\in\! \Lambda^\Z$ mit positiver oberer Banach-Dichte auf, wenn $BD^*(\xi^{-1}(a)) > 0$.
+\end{defn}
+
+% Lem 3.17
+\begin{lem}
+  Sei $\xi \in \Lambda^\Z$ und $X \coloneqq \Set{T^n \xi}{n \in \Z}$ dessen Orbit.
+  Sei $a \in \Lambda$ ein Symbol und $A(a) \coloneqq \Set{\omega \in X}{\omega(0) = a}$.
+  Dann tritt $a$ genau dann mit positiver Banach-Dichte in $\xi$ auf, wenn ein $T$-inv. Maß $\mu$ auf $X$ mit $\mu(A(a)) > 0$ existiert.
+\end{lem}
+
+\begin{nota}
+  $S_{\text{diff}} \coloneqq \Set{x - y}{x, y \in S}$ für $S \subset \Z$.
+\end{nota}
+
+% Thm 3.18
+\begin{thm}
+  Sei $W \!\subset\! \Z$ eine Poincaré-Folge und habe $S \!\subset\! \Z$ positive obere Banach-Dichte.
+  Dann gilt
+  $W \cap S_{\text{diff}} \setminus \{ 0 \} \neq \emptyset$.
+\end{thm}
+
+% Thm 3.19 a)
+\begin{kor}
+  $S_{\text{diff}}$ ist syndetisch.
+\end{kor}
+
+% Bemerkung am Ende des Kapitels
+\begin{bem}
+  Man kann zeigen: Wenn $S_1, \ldots, S_k \subset \Z$ alle positive obere Banach-Dichte besitzen, dann ist $S_{1,\text{diff}} \cap \ldots \cap S_{k,\text{diff}}$ syndetisch.
+\end{bem}
+
+% Thm 3.19 b)
+\begin{thm}[\emph{Sárközy}]
+  Habe $S \subset \Z$ positive obere Banach-Dichte, sei $p[X] \in \Q[X]$ mit $\fa{n \in \Z} p(n) \in \Z$ und $0 \in p(\Z)$.
+  Dann existiert eine Lsg der Gleichung $x - y = p(z)$ in Variablen $x, y \in S$, $x \neq y$, $z \in \Z$.
+\end{thm}
 
 \end{document}
