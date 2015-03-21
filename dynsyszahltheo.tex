@@ -1112,4 +1112,66 @@ Dies ist eine übersetzte Zusammenfassung der ersten Kapitel des Buches "`Recurr
   Dann existiert eine Lsg der Gleichung $x - y = p(z)$ in Variablen $x, y \in S$, $x \neq y$, $z \in \Z$.
 \end{thm}
 
+\begin{samepage}
+  \section{4.3. Von Neumannscher Ergodensatz und generische Maße}
+\end{samepage}
+
+\begin{defn}
+  Sei $H$ ein Hilbertraum. Eine Folge $(T_n)_{n \in \N}$ von Operatoren in $\Boun(H)$ konvergiert gegen $T \in \Boun(H)$
+  \begin{itemize}
+    \item in der \emph{schwachen Operatortopologie} (WOT), wenn
+    \[ \fa{x, y \in H} \scp{T_n x}{y} \xrightarrow{n \to \infty} \scp{T x}{y}. \]
+    \item in der \emph{starken Operatortopologie} (SOT), wenn
+    \[ \fa{x \in H} T_n x \xrightarrow{n \to \infty} T x. \]
+  \end{itemize}
+\end{defn}
+
+% Thm 4.13.
+\begin{thm}
+  Sei $H$ ein Hilbertraum, $T \!\in\! \Boun(H)$ unitär, $H_T \!\coloneqq\! \{ x {\in} H | Tx \!=\! x \}$. Sei $P_T : H \to H$ die orth. Projektion auf $H_T$. Dann konvergiert
+  \[
+    \tfrac{1}{n+1} (\Id + T + T^2 + \ldots + T^n) \xrightarrow{n \to \infty} P_T \quad
+    \text{in der starken Operatortopol.}
+  \]
+\end{thm}
+
+\begin{bem}
+  Sei $T$ eine maßerh. Transformation auf einem Maßraum $(X, \Bor, \mu)$. Dann induziert $T$ einen unitären Operator $T$ auf dem Hilbertraum $L^2(X, \Bor, \mu)$ durch $T(f) \coloneqq f \circ T$. Aus dem Theorem folgt, dass für jede Funktion $f \in L^2(X, \Bor, \mu)$ die Folge der ergodischen Mittel $f_n$ in $L^2$ gegen $P_T f$ konvergiert.
+\end{bem}
+
+% Defn 4.4
+\begin{defn}
+  Sei $\nu$ ein Maß auf $(X, \Bor)$ und $\Alg$ eine Algebra von beschränkten $\Bor$-messbaren Funktionen $X \to \C$, die abgeschlossen unter komplexer Konjugation ist. Das Maß $\nu$ heißt \emph{generisches Maß} von \meST{} bzgl. $\Alg$, wenn für alle $f \in \Alg$ gilt:
+  \[ \Int{X}{}{f_n}{\nu} \xrightarrow{n \to \infty} \Int{X}{}{f}{\mu}. \]
+\end{defn}
+
+\begin{bem}
+  Aus dem Ergodensatz folgt: $\mu$ ist selbst ein generisches Maß von \meST{} bzgl. $\Alg \coloneqq \{\, \text{beschränkte $\Bor$-messb. Fktn $X \to \C$} \,\}$.
+\end{bem}
+
+\begin{bem}
+  Sei $X$ ein komp. metr. Raum und $T : X \to X$ stetig.
+  Sei $x_0$ ein generischer Punkt eines Maßes $\mu$ auf $X$.
+  Dann ist das Punktmaß $\delta_{x_0}$ ein generisches Maß von \meST{} bzgl. $\Alg \coloneqq \Cont(X)$.
+\end{bem}
+
+\begin{bem}
+  Angenommen, es gibt eine Teilmenge $B \subset \Alg$ von $T$-inv. Fktn, die dicht in $L^2(X, \Bor, \mu)_T \coloneqq \Set{f \in L^2(X, \Bor, \mu)}{f \!=\! f \!\circ\! T}$ liegt. Es gilt
+  \[
+    \fa{f \in B}
+    \Int{X}{}{\abs{f}^2}{\mu} = \lim_{N \to \infty} \tfrac{1}{N+1} \Int{X}{}{T^n \abs{f}^2}{\nu} = \Int{X}{}{\abs{f}^2}{\nu}.
+  \]
+  Man kann also eine dichte Teilmenge von $L^2(X, \Bor, \mu)_T$ isometrisch mit einer Teilmenge in $L^2(X, \Bor, \nu)$ identifizieren und so $L^2(X, \Bor, \mu)$ als Teilmenge von $L^2(X, \Bor, \nu)$ auffassen.
+\end{bem}
+
+% Thm 4.14
+\begin{thm}
+  Sei $\nu$ ein generisches Maß von \meST{} bzgl. $\Alg$. Enthalte $\Alg$ eine Teilmenge von $T$-invarianten Funktionen, die dicht in $L^2(X, \Bor, \mu)_T$ liegt. Dann gilt
+  \[
+    \fa{f \in \Alg}
+    \frac{1}{N+1} \sum_{n=0}^N T^n f \xrightarrow{N \to \infty} P_T f \quad
+    \text{in } L^2(X, \Bor, \nu).
+  \]
+\end{thm}
+
 \end{document}
