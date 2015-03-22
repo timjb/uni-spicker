@@ -10,6 +10,7 @@
 \usepackage{stmaryrd} % \lightning
 \usepackage{pgffor} % \foreach-Schleifen
 
+\newcommand{\K}{\mathbb{K}} % Körper (\C oder \R)
 \newcommand{\nspace}[1]{\foreach \i in {1,...,#1}{ \! }} % Negativer Abstand
 \DeclareMathOperator{\Aut}{Aut} % Automorphismengruppe
 \DeclareMathOperator{\End}{End} % Endomorphismenmonoid
@@ -1015,7 +1016,82 @@ Dies ist eine übersetzte Zusammenfassung der ersten Kapitel des Buches "`Recurr
   \inlineitem{\emph{unitär}, wenn $T^* T \!=\! T T^* \!=\! \Id_H$.}
 \end{defn}
 
-% TODO: Spektrum, Maß auf Spektrum, Spektralsatz
+% http://de.wikipedia.org/wiki/Spektralma%C3%9F
+\begin{defn}
+  Sei $(X, \Alg)$ ein messbarer Raum, $H$ ein reeller oder komplexer Hilbertraum. Sei $P(H) \subset \Boun(H)$ die Menge der orth. Projektionen. Ein \emph{Spektralmaß} für $(X, \Alg, H)$ ist eine Abbildung $E : \Alg \to P(H)$ mit $E(X) = \Id_H$ und folgender Eigenschaft:
+  Für alle $x, y \in H$ ist
+  \[
+    E_{x,y} : \Alg \to \K, \quad
+    \Omega \mapsto \scp{E(\Omega)x}{y}.
+  \]
+  ein komplexes bzw. signiertes Maß auf $(X, \Alg)$.
+\end{defn}
+
+\begin{bem}
+  Sei $E$ ein Spektralmaß auf $(X, \Alg, H)$. Dann gilt $\forall \, \Omega_1, \Omega_2 \in \Alg$:
+  \begin{itemize}
+    \item $E(\emptyset) = 0$
+    \item $E(\Omega_1 \cup \Omega_2) + E(\Omega_1 \cap \Omega_2) = E(\Omega_1) + E(\Omega_2)$ \pright{Modularität}
+    \item $E(\Omega_1) E(\Omega_2) = E(\Omega_1 \!\cap\! \Omega_2) = E(\Omega_2) E(\Omega_1)$ \pright{Multiplikativität}
+  \end{itemize}
+\end{bem}
+
+\begin{bem}
+  Für alle $x \in H$ ist $E_{x,x}$ ein positives Maß:
+  \[ E_{x,x}(\Omega) = \scp{E(\Omega)x}{x} = \scp{E(\Omega) E(\Omega) x}{x} = \scp{E(\Omega) x}{E(\Omega) x} \in \R_{\geq 0}. \]
+\end{bem}
+
+% 12.18 in "Functional Analysis" von Walter Rudin
+\begin{prop}
+  Sei $E$ ein Spektralmaß auf $(X, \Alg, H)$ und $x \in H$. \\
+  Dann ist $\Omega \mapsto E(\Omega)x$ ein $\sigma$-additives $H$-wertiges Maß auf $(X, \Alg)$.
+\end{prop}
+
+\begin{defn}
+  Sei $X$ ein Banachraum, $\Boun(X)$ die Menge der beschränkten Operatoren auf $X$.
+  Das \emph{Spektrum} eines Operators $T \in \Boun(X)$ ist
+  \[ \sigma(T) \coloneqq \Set{\lambda \in \K}{T - \lambda \cdot \Id_X \text{ ist nicht invertierbar}}. \]
+\end{defn}
+
+% 12.23 in "Functional Analysis" von Walter Rudin
+\begin{thm}[\emph{Spektralsatz}]
+  Sei $H$ ein Hilbertraum, $T \in \Boun(H)$ ein normaler Operator und $\Bor$ die Borel-$\sigma$-Algebra auf $\sigma(T)$. \\
+  Dann gibt es genau ein Spektralmaß $E$ auf $(\sigma(T), \Bor, H)$ mit
+  \[
+    \fa{x, y \in H}
+    \scp{Tx}{y} = \Int{\sigma(T)}{}{\lambda}{E_{x,y}(\lambda)}.
+  \]
+  Außerdem gilt für alle $S \in \Boun(H)$ mit $T \circ S = S \circ T$:
+  \[ \fa{\Omega \in \Bor} E(\Omega) \circ S = S \circ E(\Omega). \]
+  Das Spektralmaß $E$ wird auch \emph{Spektralzerlegung} von $T$ genannt.
+\end{thm}
+
+\begin{bem}
+  Die Aussage wird auch häufig ausgedrückt durch:
+  \[ T = \Int{\sigma(T)}{}{\lambda}{E(\lambda)}. \]
+\end{bem}
+
+% 12.26 in "Functional Analysis" von Walter Rudin
+\begin{thm}
+  Sei $X$ ein komplexer Hilbertraum, $T \!\in\! \Boun(X)$ normal. Es gilt:
+  \begin{itemize}
+    \item $T$ ist unitär $\iff$ $\sigma(T) \subseteq \Set{x \in \C}{\norm{x} = 1}$.
+    \item $T$ ist selbstadjungiert $\iff$ $\sigma(T) \subseteq \R \subset \C$.
+  \end{itemize}
+\end{thm}
+
+% 12.29 in "Functional Analysis" von Walter Rudin
+\begin{thm}
+  Sei $E$ die Spektralzerlegung eines normalen Operators $T \in \Boun(H)$, $\lambda_0 \in \K$ und $E_0 \coloneqq E(\{ \lambda_0 \})$. Dann gilt:
+  \begin{itemize}
+    \item $\{\, \text{EVen von $T$ zu $\lambda_0$} \,\} = \ker (T - \lambda_0 \Id_H) = \Set{x \in H}{E_0(x) = x}$
+    \item $\lambda_0$ ist EW von $T$ $\iff$ $E_0 \neq 0$.
+    \item Jeder isolierte Punkt von $\sigma(T)$ ist ein EW von $T$.
+    % Ausgelassen: (d)
+  \end{itemize}
+\end{thm}
+
+% TODO: Was hat das Spektralmaß mit Punktspektrum etc. zu tun?
 
 % Lem 3.14
 \begin{lem}
