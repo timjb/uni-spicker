@@ -28,6 +28,7 @@
 \newcommand{\Meas}{\mathcal{M}} % Menge der Maße
 \newcommand{\Boun}{\mathcal{B}} % Menge der beschränkten (bounded) Operatoren
 \newcommand{\scp}[2]{\langle #1 , #2 \rangle} % Skalarprodukt
+\DeclareMathOperator*{\esssup}{ess\,sup} % Essentielles Supremum
 
 \begin{document}
 
@@ -70,12 +71,12 @@ Dies ist eine übersetzte Zusammenfassung der ersten Kapitel des Buches "`Recurr
 % Def 1.1
 \begin{defn}
   Sei $X$ ein topologischer Raum, $T : X \to X$ stetig. \\
-  Ein Punkt $x \in X$ heißt \emph{wiederkehrend}, falls für für alle Umgebungen $V \subset X$ von $x$ ein $n \geq 1$ existiert mit $T^n(x) \in V$.
+  Ein Punkt $x \in X$ heißt \emph{wiederkehrend}, falls für alle Umgebungen $V \subset X$ von $x$ ein $n \geq 1$ existiert mit $T^n(x) \in V$.
 \end{defn}
 
 \begin{bem}
-  Sei $X$ sogar ein metrischer Raum, $x \in X$ wiederkehrend. \\
-  Dann gibt es eine Folge $(n_k)_{k \in \N}$ mit $d(T^{n_k}(x), x) \to 0$ für $k \to \infty$.
+  Sei $X$ sogar ein metrischer Raum, $x \in X$ wiederkehrend.
+  Dann gibt es eine s.m.s. Folge $(n_k)_{k \in \N}$ mit $d(T^{n_k}(x), x) \to 0$ für $k \to \infty$.
 \end{bem}
 
 % nicht dort im Buch
@@ -1048,6 +1049,28 @@ Dies ist eine übersetzte Zusammenfassung der ersten Kapitel des Buches "`Recurr
 \end{prop}
 
 \begin{defn}
+  Sei $E$ ein Spektralmaß auf $(X, \Alg, H)$.
+  Es gibt für jede $\Alg$-messb. Fkt $f : X \to \K$ eine max. offene Menge $V \subset \K$ mit $E(f^{-1}(V)) = 0$. \\
+  Die Funktion $f$ heißt \emph{wesentlich beschränkt}, wenn
+  \[ \norm{f}_\infty \coloneqq \esssup \abs{f} \coloneqq \sup \Set{\abs{x}}{x \in \K \setminus V} < \infty. \]
+  Dann ist $B \!\coloneqq\! \{\, \text{beschränkte, $\Alg$-messb. Fkt $X \!\to\! \K$} \,\}$ mit Norm $\norm{\blank}_\text{sup}$ eine Banachalgebra und $N \coloneqq \Set{f \in B}{\norm{f}_\infty = 0}$ ein Ideal in $B$. \\
+  Dann ist auch $L^\infty(E) \coloneqq B / N$ mit Norm $\norm{\blank}_\infty$ eine Banachalgebra.
+\end{defn}
+
+% 12.21 in "Functional Analysis" von Walter Rudin
+\begin{thm}
+  Sei $E$ ein Spektralmaß auf $(X, \Alg, H)$. Dann gibt es genau einen injektiven, isom. Homomorphismus $\Psi : L^\infty(E) \to \Boun(H)$ von Algebren mit $\fa{f \in L^\infty(E)} \Psi(\overline{f}) = (\Psi(f))^*$ und
+  \[
+    \fa{x, y \in H \, f \in L^\infty(E)} \scp{\Psi x}{y} = \Int{X}{}{f}{E_{x,y}}.
+  \]
+  % Ausgelassen: Weitere Eigenschaften
+\end{thm}
+
+\begin{nota}
+  $\Int{X}{}{f}{E} \coloneqq \Psi(f)$
+\end{nota}
+
+\begin{defn}
   Sei $X$ ein Banachraum, $\Boun(X)$ die Menge der beschränkten Operatoren auf $X$.
   Das \emph{Spektrum} eines Operators $T \in \Boun(X)$ ist
   \[ \sigma(T) \coloneqq \Set{\lambda \in \K}{T - \lambda \cdot \Id_X \text{ ist nicht invertierbar}}. \]
@@ -1058,18 +1081,14 @@ Dies ist eine übersetzte Zusammenfassung der ersten Kapitel des Buches "`Recurr
   Sei $H$ ein Hilbertraum, $T \in \Boun(H)$ ein normaler Operator und $\Bor$ die Borel-$\sigma$-Algebra auf $\sigma(T)$. \\
   Dann gibt es genau ein Spektralmaß $E$ auf $(\sigma(T), \Bor, H)$ mit
   \[
-    \fa{x, y \in H}
-    \scp{Tx}{y} = \Int{\sigma(T)}{}{\lambda}{E_{x,y}(\lambda)}.
+    %\fa{x, y \in H}
+    %\scp{Tx}{y} = \Int{\sigma(T)}{}{\lambda}{E_{x,y}(\lambda)}.
+    T = \Int{\sigma(T)}{}{\lambda}{E(\lambda)} = \Int{\sigma(T)}{}{\id_{\sigma(T)}}{E}.
   \]
   Außerdem gilt für alle $S \in \Boun(H)$ mit $T \circ S = S \circ T$:
   \[ \fa{\Omega \in \Bor} E(\Omega) \circ S = S \circ E(\Omega). \]
   Das Spektralmaß $E$ wird auch \emph{Spektralzerlegung} von $T$ genannt.
 \end{thm}
-
-\begin{bem}
-  Die Aussage wird auch häufig ausgedrückt durch:
-  \[ T = \Int{\sigma(T)}{}{\lambda}{E(\lambda)}. \]
-\end{bem}
 
 % 12.26 in "Functional Analysis" von Walter Rudin
 \begin{thm}
@@ -1090,8 +1109,6 @@ Dies ist eine übersetzte Zusammenfassung der ersten Kapitel des Buches "`Recurr
     % Ausgelassen: (d)
   \end{itemize}
 \end{thm}
-
-% TODO: Was hat das Spektralmaß mit Punktspektrum etc. zu tun?
 
 % Lem 3.14
 \begin{lem}
