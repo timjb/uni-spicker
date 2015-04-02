@@ -18,6 +18,9 @@
 \newcommand{\Fais}{\mathcal{F}} % Faisceau-F (Garbe auf französisch)
 \newcommand{\Garb}{\mathcal{G}} % Garben-G
 \newcommand{\Harb}{\mathcal{H}} % Garben-H
+\newcommand{\Karb}{\mathcal{H}} % Garben-K (Kern)
+\newcommand{\Carb}{\mathcal{H}} % Garben-C (Kokern)
+\newcommand{\Iarb}{\mathcal{H}} % Garben-I (Image)
 \newcommand{\keS}{k.\,e.\,S.} % kurze exakte Sequenz
 \newcommand{\leS}{l.\,e.\,S.} % lange exakte Sequenz
 \newcommand{\Lg}{\mathfrak{g}} % Lie-g
@@ -1795,6 +1798,53 @@ Sei $\Cat$ eine Kategorie.
 
 % II.5.12 (Garben und Prägarben)
 
-% TODO
+% II.5.13
+\begin{thm}
+  Der Inklusionsfunktor $i : \Sh(X) \to \PSh(X)$ besitzt einen Linksadjungierten $s : \PSh(X) \to \Sh(X)$. Für jede Garbe $\Fais$ gilt $si \Fais \cong \Fais$.
+\end{thm}
+
+\begin{bem}
+  Dabei ist für $\Fais \in \PSh(X)$ und $U \subset X$ offen
+  \begin{align*}
+    s(\Fais)(U) \coloneqq \{ \, & \text{Paare $(U_i, s_i)_{i \in I}$, wobei $(U_i)_{i \in I}$ eine offene Überdeckung} \\
+     & \text{ist und $(s_i \in \Fais(U_i))_{i \in I}$ kompatible Schnitte sind} \, \} / {\sim}
+  \end{align*}\vspace{-16pt}
+  \begin{align*}
+    (U_i, s_i) \sim (V_j, s_j) \!\! \coloniff \, & \ex{\text{offene Überdeckung $(W_k)_{k \in K}$ von U}} \\
+    & \fa{i, j, k} s_i|(U_i \cap V_j \cap W_k) = s_j|(U_i \cap V_j \cap W_k).
+  \end{align*}
+\end{bem}
+
+\begin{defn}
+  $s : \PSh(X) \to \Sh(X)$ \enspace heißt \emph{Garbifizierungsfunktor}.
+\end{defn}
+
+% Ausgelassen: Bsp II.5.14
+
+% II.5.16
+\begin{lem}
+  Sei $\varphi : \Fais \to \Garb$ ein Morphismus von Prägarben,
+  $(K, k)$ dessen Kern und $(C, c)$ dessen Kokern.
+  Dann ist $(sK, sk)$ der Kern und $(sC, sc)$ der Kokern von $s \varphi : s \Fais \to s \Garb$.
+\end{lem}
+
+% II.5.15
+\begin{prop}
+  Seien $\Fais$ und $\Garb$ Garben über einem topologischen Raum $X$, $\varphi : \Fais \to \Garb$ ein Morphismus von Garben und
+  \[ \Karb \xrightarrow{k} i \Fais \xrightarrow{i} \Iarb \xrightarrow{j} i \Garb \xrightarrow{c} \Carb \ \]
+  dessen kanonische Zerlegung von $i \varphi$ in $\PSh(X)$. Dann ist
+  \[ s \Karb \xrightarrow{s(k)} si \Fais \cong \Fais \xrightarrow{s(i)} s \Iarb \xrightarrow{s(j)} \Garb \cong si \Garb \xrightarrow{s(c)} s \Carb \ \]
+  eine kanonische Zerlegung von $si \varphi \cong \varphi$.
+\end{prop}
+
+\begin{kor}
+  $\Sh(X)$ ist eine abelsche Kategorie.
+\end{kor}
+
+% Ausgelassen: Gegenbeispiele für A4
+% II.5.17: Filtrierte abelsche Gruppen
+% II.5.18: Topologische abelsche Gruppen
+
+% TODO: Schlangenlemma, Fünferlemma
 
 \end{document}
