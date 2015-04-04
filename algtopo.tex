@@ -253,7 +253,7 @@
 
 \begin{defn}
   Die \emph{reduzierte Homologie} $\RH_*(X)$ eines topologischen Raumes $X$ ist die Homologie des Kettenkomplexes
-  \[ \ldots \to C_2(X) \xrightarrow{\partial_n} C_1(X) \xrightarrow{\partial_1} C_0(X) \xrightarrow{\epsilon} \to \Z \to 0, \]
+  \[ \ldots \to C_2(X) \xrightarrow{\partial_2} C_1(X) \xrightarrow{\partial_1} C_0(X) \xrightarrow{\epsilon} \Z \to 0, \]
   wobei $\epsilon$ der sogenannte \emph{Augmentierungshomomorphismus} ist:
   \[ \epsilon : \sum_{\sigma \in \Delta_0(X)} \lambda_\sigma \cdot \sigma \mapsto \sum_{\sigma} \lambda_\sigma \in \Z. \]
 \end{defn}
@@ -298,7 +298,7 @@
     \item \emph{Homotopieinvarianz}: Seien $f, g : (X, A) \to (Y, B)$ homotop als Abb. von Raumpaaren. Dann gilt $f_* \!=\! g_* : H_n(X, A) \to H_n(Y, B)$.
     \item \emph{Lange exakte Sequenz}: Die Inklusionen $A \hookrightarrow X$ und $(X, \emptyset) \hookrightarrow (X, A)$ induzieren eine l.e.S.
     \[ \ldots \to H_n(A) \to H_n(X) \to H_n(X, A) \xrightarrow{\partial_n} H_{n-1}(A) \to \ldots \]
-    \item \emph{Ausschneidung}: Ist $U \subset A$ mit $\clos{A} \subset \inte(A)$, dann induziert die Inklusion $(X - U, A - U) \hookrightarrow (X, A)$ Isomorphismen
+    \item \emph{Ausschneidung}: Ist $U \subset A$ mit $\clos{U} \subset \inte(A)$, dann induziert die Inklusion $(X - U, A - U) \hookrightarrow (X, A)$ Isomorphismen
     \[ H_n(X-U, A-U) \to H_n(X,A). \]
   \end{itemize}
 \end{defn}
@@ -349,12 +349,12 @@
   Sei $f : S^n \to S^n$ stetig. In Homologie induziert $f$ eine Abbildung $H_n(f) : \Z \to \Z$, die durch Multiplikation mit einer ganzen Zahl gegeben ist. Diese Zahl heißt \emph{Abbildungsgrad} $\deg f$ von $f$.
 \end{defn}
 
-\begin{lem}
+\begin{beob}
   \begin{itemize}
     \item $\deg (f \circ g) = (\deg f) \cdot (\deg g)$.
-    \item $H_n(f)$ ist genau dann ein Isomorphismus, wenn $\deg(f) = \pm 1$.
+    \item $H_n(f : S^n \to S^n)$ ist genau dann ein Iso, wenn $\deg(f) = \pm 1$.
   \end{itemize}
-\end{lem}
+\end{beob}
 
 \begin{prop}
   Sei $f : S^n \to S^n$ die Spiegelung an einer Hyperebene $H \subset \R^{n+1}$. Dann gilt $\deg f = -1$.
@@ -399,7 +399,7 @@
 \begin{prop}
   Seien $A, B \subset X$ mit $X = A \cup B$. Angenommen, es gibt Umgebungen $U$ von $A$ und $V$ von $B$, sodass die Inklusionen $A \hookrightarrow U$, $B \hookrightarrow V$ und $A \cap B \hookrightarrow U \cap V$ Homotopieäquivalenzen sind. Dann existiert die \emph{Mayer-Vietoris-Sequenz}
   \begin{align*}
-    \ldots & \to H_*(A \cap B) \to H_*(A) \oplus H_*(B) \to H_*(X, A \cap B) \to \\
+    \ldots & \to H_*(A \cap B) \to H_*(A) \oplus H_*(B) \to H_*(X) \to \\
     & \to H_{*-1}(A \cap B) \to \ldots
   \end{align*}
 \end{prop}
@@ -606,7 +606,7 @@
 
 % 5.9
 \begin{prop}
-  \inlineitem{$H^{>n}(X^n) = 0$,} \quad
+  \inlineitem{$H_{>n}(X^n) = 0$,} \quad
   \inlineitem{Für $k < n$ induziert die Inklusion $X^n \hookrightarrow X$ Isomorphismen $H_k(X^n) \cong H_k(X)$.}
 \end{prop}
 
@@ -683,21 +683,26 @@
 
 \begin{defn}
   Ist nun $k=2$ so gibt es eine kurze exakte Sequenz
-  \[ 0 \to C_*(X; \ZM{2}) \xrightarrow{\tau_*} C_*(\tilde{X}, \ZM{2}) \xrightarrow{p_*} C_*(X, \ZM{2}) \to 0. \]
+  \[ 0 \to C_*(X; \ZM{2}) \xrightarrow{\tau_*} C_*(\tilde{X}; \ZM{2}) \xrightarrow{p_*} C_*(X; \ZM{2}) \to 0. \]
   Die davon induzierte lange exakte Sequenz ist die \emph{Transfersequenz}
-  \[ \ldots \to H_*(X; \ZM{2}) \xrightarrow{\tau_*} H_*(\tilde{X}, \ZM{2}) \xrightarrow{p_*} H_*(X, \ZM{2}) \to H_{*-1}(X; \ZM{2}) \to \ldots \]
+  \[ \ldots \to H_*(X; \ZM{2}) \xrightarrow{\tau_*} H_*(\tilde{X}; \ZM{2}) \xrightarrow{p_*} H_*(X; \ZM{2}) \to H_{*-1}(X; \ZM{2}) \to \ldots \]
 \end{defn}
 
 % Vorlesung vom 1.12.2014
 
 \begin{defn}
-  $f : S^n \to S^n$ heißt \emph{ungerade}, falls
-  $\fa{x \!\in\! S^n} f(-x) \!=\! -f(x)$.
+  Eine Abbildung $f : S^n \to S^n$ heißt \emph{gerade} \,/\, \emph{ungerade}, falls
+  \[
+    \fa{x \!\in\! S^n}
+    f(-x) = f(x)
+    \enspace / \enspace
+    f(-x) = -f(x).
+  \]
 \end{defn}
 
-% 6.2
+% 6.2 (die Aussage "gerade Abb. haben gerade Abbildungsgrad" wurde in der Übung behandelt)
 \begin{prop}
-  Jede ungerade Abbildung hat ungeraden Abbildungsgrad.
+  Jede (un)gerade Abbildung hat (un)geraden Abbildungsgrad.
 \end{prop}
 
 % 6.3
@@ -742,7 +747,7 @@
 % Vorlesung vom 3.12.2014
 
 \begin{bem}
-  Sind $X$ und $Y$ endlich-dim. CW-Komplexe. Dann ist auch $X \times Y$ ein endlich-dimensionaler CW-Komplex. Ist $X$ oder $Y$ $\infty$-dimensional, so gibt es auch einen Produktkomplex, doch dieser trägt eine i.\,A. feinere Topologie als der Produktraum $X \times Y$.
+  Sind $X$ und $Y$ endlich-dim. CW-Komplexe. Dann ist auch $X \times Y$ ein endlich-dimensionaler CW-Komplex. Ist $X$ oder $Y$ $\infty$-dimensional, so gibt es auch einen Produktkomplex, doch dieser eine i.\,A. feinere Topologie als der Produktraum $X \times Y$.
 \end{bem}
 
 % 7.3
@@ -810,14 +815,14 @@
 
 % 8.2
 \begin{prop}
-Eine zshgde orientierbare Mft hat genau zwei Orientierungen.
+  Eine zshgde orientierbare Mft hat genau zwei Orientierungen.
 \end{prop}
 
 
 \begin{defn}
   Sei $M$ eine $n$-Mft. Setze
   \[ \tilde{M} \coloneqq \Set{ \mu_x }{ x \in M \text{ und } \mu_x \in H_n(M|x) \text{ ist lokale Orientierung an $x$}. } \]
-  Die Topologie auf $M$ wird erzeugt von folgenden Mengen:
+  Die Topologie auf $\tilde{M}$ wird erzeugt von folgenden Mengen:
   \[
     \Set{ \mu_U|_y }{ y \in U } \subset \tilde{M}
     \quad \text{mit $U \subset M$ offen, $\mu_U \in H_n(M|U)$}
@@ -879,6 +884,10 @@ Eine zshgde orientierbare Mft hat genau zwei Orientierungen.
   Sei $M$ eine zshgde kompakte $n$-Mft. Dann ist $M$ genau dann orientierbar, wenn $H_n(M) \cong \Z$. Dann entspricht jeder Erzeuger von $H_n(M)$ einer Orientierung von $M$. Andernfalls gilt $H_n(M) = 0$.
 \end{kor}
 
+\begin{defn}
+  Sei $M$ eine zshgde, kompakte, orientierte $n$-Mft. Dann wird der gewählte Erzeuger $[M] \in H_n(M)$ \emph{Fundamentalklasse} genannt.
+\end{defn}
+
 % 8.10
 \begin{prop}
   Sei $M$ eine zshgde nichtkompakte $n$-Mft. Dann ist $H_{\geq n}(M; G) = 0$ für beliebige Koeffizienten $G$.
@@ -931,7 +940,7 @@ Eine zshgde orientierbare Mft hat genau zwei Orientierungen.
 
 % Hatcher, Algebraic Topology, Thm 2A.1
 \begin{prop}
-  Es gibt einen kanonischen Morphismus $h : \pi_1(X) \to H_1(X)$. Wenn $X$ wegzusammenhängend ist, so ist $X$ surjektiv und der Kern von $h$ ist die Kommutator-Untergruppe $K(\pi_1(X, x_0))$. Wir erhalten dann einen Iso $\pi_1(X)_{\text{ab}} \to H_1(X)$.
+  Es gibt einen kanonischen Morphismus $h : \pi_1(X) \to H_1(X)$. Wenn $X$ wegzusammenhängend ist, so ist $h$ surjektiv und der Kern von $h$ ist die Kommutator-Untergruppe $K(\pi_1(X, x_0))$. Wir erhalten dann einen Iso $\pi_1(X)_{\text{ab}} \to H_1(X)$.
 \end{prop}
 
 % Vorlesung vom 7.1.2015
@@ -1027,7 +1036,7 @@ Eine zshgde orientierbare Mft hat genau zwei Orientierungen.
 % 10.5
 \begin{prop}
   Sei $X = \cup_{i \in I} U_i$ die Zerlegung von $X$ in Wegzshgskmpnnten. Dann induzieren die Inklusionen $U_i \hookrightarrow X$ einen kanonischen Iso
-  \[ G^*(X; G) \cong \prod_{i \in I} H^*(X; G). \]
+  \[ H^*(X; G) \cong \prod_{i \in I} H^*(U_i; G). \]
 \end{prop}
 
 \begin{satz}
@@ -1163,7 +1172,7 @@ Eine zshgde orientierbare Mft hat genau zwei Orientierungen.
   \inlineitem{$\Tor(\oplus_i A_i, B) \cong \oplus_i \Tor(A_i, B)$} \\
   \inlineitem{$\Tor(A, B) \cong \Tor(T(A), B)$ mit $T(A) < A$ Torsionsuntergruppe} \\
   \inlineitem{$\Tor(A, B) = 0$, falls $A$ torsionsfrei} \quad
-  \inlineitem{$\Tor(\ZM{n}) \cong \ker(A \xrightarrow{\cdot n} A)$}
+  \inlineitem{$\Tor(\ZM{n}, A) \cong \ker(A \xrightarrow{\cdot n} A)$}
   \begin{itemize}
     \item Ist $0 \to A \to B \to C \to 0$ eine \keS{} ab. Gruppen und $H$ eine ab. Gruppe, so erhalten wir eine induzierte exakte Sequenz
     \begin{align*}
@@ -1281,13 +1290,13 @@ Eine zshgde orientierbare Mft hat genau zwei Orientierungen.
     (\sigma, \phi) & \mapsto \phi(\sigma_\angles{v_0, \ldots, v_l}) \cdot \sigma_\angles{v_l, \ldots, v_{l+k}}.
   \end{align*}
   Diese induziert in (Ko-)Homologie eine Abbildung
-  \[ \cap : H_k(X; R) \otimes H^l(X; R) \to H_k(X; R). \]
+  \[ \cap : H_k(X; R) \otimes H^l(X; R) \to H_{k-l}(X; R). \]
   Relative Version: Seien $A, B \subset X$ offen, dann gibt es
   \[ \cap : H_k(X, A \cup B; R) \times H^l(X, A; R) \to H_{k-l}(X, B; R). \]
 \end{defn}
 
 \begin{defn}
-  Das Tensorprodukt zweier Kettenkomplexe $(C_*, \partial^C_*)$ und $(D_*, \partial^D_*)$ ist definiert durch
+  Das \emph{Tensorprodukt} zweier Kettenkomplexe $(C_*, \partial^C_*)$ und $(D_*, \partial^D_*)$ ist definiert durch
   \begin{align*}
     (C \otimes D)_n & \coloneqq \bigoplus_{k+l=n} C_k \otimes D_l, \\
     \delta^{C \otimes C'}_n & \coloneqq \bigoplus_{k+l=n} (\partial^C_k \otimes \id_{D_l} + (-1)^k \id_{C_k} \oplus \partial^D_l)
