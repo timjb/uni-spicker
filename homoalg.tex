@@ -5,6 +5,9 @@
   /Author (Tim Baumann)
 }
 
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows}
+
 \usepackage{pgffor} % \foreach-Schleifen
 \usepackage{stmaryrd} % liefert \mapsfrom
 \usepackage{stackrel}
@@ -257,12 +260,12 @@
 \begin{defn}
   Sei $\Cat$ eine Kategorie, $f \in \Hom_\Cat(X, Y)$ ein Morphismus.
   \begin{itemize}
-    \item $f$ heißt \emph{Monomorphismus}, wenn $f$ linkskürzbar ist, \dh{}
+    \item $f$ heißt \emph{Monomorphismus} (${\hookrightarrow}$), wenn $f$ linkskürzbar ist, \dh{}
     \[
       \fa{X' \in \Ob(\Cat)} \fa{g, h \in \Hom_\Cat(X', X)}
       f \circ g = f \circ h \implies g = h.
     \]
-    \item $f$ heißt \emph{Epimorphismus}, wenn $f$ rechtskürzbar ist, \dh{}
+    \item $f$ heißt \emph{Epimorphismus} (${\twoheadrightarrow}$), wenn $f$ rechtskürzbar ist, \dh{}
     \[
       \fa{Y' \in \Ob(\Cat)} \fa{g, h \in \Hom_\Cat(Y, Y')}
       g \circ f = h \circ f \implies g = h.
@@ -1800,7 +1803,7 @@ Sei $\Cat$ eine Kategorie.
 
 % II.5.13
 \begin{thm}
-  Der Inklusionsfunktor $i : \Sh(X) \to \PSh(X)$ besitzt einen Linksadjungierten $s : \PSh(X) \to \Sh(X)$. Für jede Garbe $\Fais$ gilt $si \Fais \cong \Fais$.
+  Der Inklusionsfunktor $i : \Sh(X) \to \PSh(X)$ besitzt einen Linksadj. $s : \PSh(X) \to \Sh(X)$. Für jede Garbe $\Fais$ gilt $si \Fais \cong \Fais$.
 \end{thm}
 
 \begin{bem}
@@ -1811,7 +1814,7 @@ Sei $\Cat$ eine Kategorie.
   \end{align*}\vspace{-16pt}
   \begin{align*}
     (U_i, s_i) \sim (V_j, s_j) \!\! \coloniff \, & \ex{\text{offene Überdeckung $(W_k)_{k \in K}$ von U}} \\
-    & \fa{i, j, k} s_i|(U_i \cap V_j \cap W_k) = s_j|(U_i \cap V_j \cap W_k).
+    & \fa{i, j, k\!}\! s_i|(U_i \!\cap\! V_j \!\cap\! W_k) = s_j|(U_i \!\cap\! V_j \!\cap\! W_k).
   \end{align*}
 \end{bem}
 
@@ -1845,6 +1848,104 @@ Sei $\Cat$ eine Kategorie.
 % II.5.17: Filtrierte abelsche Gruppen
 % II.5.18: Topologische abelsche Gruppen
 
-% TODO: Schlangenlemma, Fünferlemma
+\begin{lem}[Viererlemmata]
+  Sei folgendes kommutatives Diagramm in einer abelschen Kategorie mit exakten Zeilen gegeben:
+  \begin{center}
+    \begin{tikzpicture}
+      \matrix (mat) [matrix of nodes, column sep=1cm, row sep=0.65cm]{
+        \node (A) {$A$}; &
+        \node (B) {$B$}; &
+        \node (C) {$C$}; &
+        \node (D) {$D$}; \\
+        \node (A') {$A'$}; &
+        \node (B') {$B'$}; &
+        \node (C') {$C'$}; &
+        \node (D') {$D'$}; \\
+      };
+      \draw[->] (A) to node {} (B);
+      \draw[->] (B) to node {} (C);
+      \draw[->] (C) to node {} (D);
+      \draw[->] (A') to node {} (B');
+      \draw[->] (B') to node {} (C');
+      \draw[->] (C') to node {} (D');
+      \draw[->>] (A) to node [right] {$\alpha$} (A');
+      \draw[->] (B) to node [right] {$\beta$} (B');
+      \draw[->] (C) to node [right] {$\gamma$} (C');
+      \draw[right hook->] (D) to node [right] {$\delta$} (D');
+    \end{tikzpicture}
+  \end{center}
+  Sei $\alpha$ epimorph und $\delta$ monomorph.\\
+  \inlineitem{Ist $\gamma$ epimorph, so auch $\beta$.} \enspace
+  \inlineitem{Ist $\beta$ monomorph, so auch $\gamma$.}
+\end{lem}
+
+\begin{bem}
+  Die Aussagen der beiden Viererlemmata sind zueinander dual.
+\end{bem}
+
+% aus AlgTopo-Zusammenfassung
+\begin{kor}[\emph{Fünferlemma}]
+  Sei folgendes kommutatives Diagramm in einer abelschen Kategorie mit exakten Zeilen gegeben:
+  \begin{center}
+    \begin{tikzpicture}
+      \matrix (mat) [matrix of nodes, column sep=1cm, row sep=0.65cm]{
+        \node (A) {$A$}; &
+        \node (B) {$B$}; &
+        \node (C) {$C$}; &
+        \node (D) {$D$}; &
+        \node (E) {$E$}; \\
+        \node (A') {$A'$}; &
+        \node (B') {$B'$}; &
+        \node (C') {$C'$}; &
+        \node (D') {$D'$}; &
+        \node (E') {$E'$}; \\
+      };
+      \draw[->] (A) to node {} (B);
+      \draw[->] (B) to node {} (C);
+      \draw[->] (C) to node {} (D);
+      \draw[->] (D) to node {} (E);
+      \draw[->] (A') to node {} (B');
+      \draw[->] (B') to node {} (C');
+      \draw[->] (C') to node {} (D');
+      \draw[->] (D') to node {} (E');
+      \draw[->] (A) to node [right] {$\alpha$} (A');
+      \draw[->] (B) to node [right] {$\beta$} (B');
+      \draw[->] (C) to node [right] {$\gamma$} (C');
+      \draw[->] (D) to node [right] {$\delta$} (D');
+      \draw[->] (E) to node [right] {$\epsilon$} (E');
+    \end{tikzpicture}
+  \end{center}
+  Sind $\alpha$, $\beta$, $\delta$ und $\epsilon$ isomorph, so auch $\gamma$.
+\end{kor}
+
+\begin{lem}[\emph{Schlangenlemma}]
+  Sei folgendes kommutatives Diagramm in einer abelschen Kategorie mit exakten Zeilen gegeben:
+  \begin{center}
+    \begin{tikzpicture}
+      \matrix (mat) [matrix of nodes, column sep=1cm, row sep=0.65cm]{
+        &
+        \node (A) {$A$}; &
+        \node (B) {$B$}; &
+        \node (C) {$C$}; &
+        \node (O) {$0$}; \\
+        \node (O') {$0$}; &
+        \node (A') {$A'$}; &
+        \node (B') {$B'$}; &
+        \node (C') {$C'$}; \\
+      };
+      \draw[->] (A) to node {} (B);
+      \draw[->] (B) to node {} (C);
+      \draw[->] (C) to node {} (O);
+      \draw[->] (O') to node {} (A');
+      \draw[->] (A') to node {} (B');
+      \draw[->] (B') to node {} (C');
+      \draw[->] (A) to node [right] {$\alpha$} (A');
+      \draw[->] (B) to node [right] {$\beta$} (B');
+      \draw[->] (C) to node [right] {$\gamma$} (C');
+    \end{tikzpicture}
+  \end{center}
+  Dann gibt es einen Verbindungshomomorphismus $\delta : \ker \gamma \to \coker \alpha$, mit dem folgende Sequenz exakt ist:
+  \[ \ker \alpha \to \ker \beta \to \ker \gamma \xrightarrow{\delta} \coker \alpha \to \coker \beta \to \coker \gamma. \]
+\end{lem}
 
 \end{document}
