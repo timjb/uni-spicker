@@ -908,6 +908,15 @@
   Ein Morphismus zw. Garben ist ein Morphismen zw. den Prägarben.
 \end{defn}
 
+\begin{defn}
+  Eine Prägarbe $\Fais$ auf einem topol. Raum $X$ heißt \emph{separiert}, wenn zwei Schnitte $s, t \in \Fais(U)$ auf einer offenen Teilmenge $U \subset X$ genau dann übereinstimmen, wenn sie lokal übereinstimmen, \dh{}
+  \[ s = t \iff \fa{x \!\in\! U\!}\! \ex{V_x \subset U \text{ offene Umgebung von $x$}\!}\! s|_{V_x} = t|_{V_x}. \]
+\end{defn}
+
+\begin{bem}
+  Das entspricht dem Eindeutigkeitsteil im Garbenaxiom.
+\end{bem}
+
 \begin{bem}
   Sei $\Fais$ eine (Prä-)Garbe auf $X$ und $U \subseteq X$ offen. Dann definiert $(\Fais|U)(V) \coloneqq \Fais(U \cap V)$ eine (Prä-)Garbe auf $U$.
 \end{bem}
@@ -1948,5 +1957,12 @@ Sei $\Cat$ eine Kategorie.
   Dann gibt es einen Verbindungshomomorphismus $\delta : \ker \gamma \to \coker \alpha$, mit dem folgende Sequenz exakt ist:
   \[ \ker \alpha \to \ker \beta \to \ker \gamma \xrightarrow{\delta} \coker \alpha \to \coker \beta \to \coker \gamma. \]
 \end{lem}
+
+% Kapitel II.6 Funktoren zw. abelschen Kategorien
+
+% II.6.1
+\begin{defn}
+  Ein Funktor $F \!:\! \Aat \!\to\! \Bat$ zw. additiven Kategorien heißt \emph{additiv}, falls für alle $X, Y \!\in\! \Ob(\Aat)$ die Abb. $F \!:\! \Hom(X, Y) \to \Hom(FX, FY)$ ein Morphismus von abelschen Gruppen ist.
+\end{defn}
 
 \end{document}
