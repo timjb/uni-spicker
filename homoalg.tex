@@ -1960,9 +1960,74 @@ Sei $\Cat$ eine Kategorie.
 
 % Kapitel II.6 Funktoren zw. abelschen Kategorien
 
+% II.6.3a)
+\begin{lem}
+  Sei $\Aat$ eine abelsche Kategorie.
+  \begin{itemize}
+    \item Sei $X \xrightarrow{\varphi} Y \in \Aat$ ein Monomorphismus und $(C, c)$ dessen Kokern. \\
+    Dann ist $(X, \varphi)$ der Kern von $c$.
+    \item Sei $X \xrightarrow{\varphi} Y \in \Aat$ ein Epimorphismus und $(K, k)$ dessen Kern. \\
+    Dann ist $(Y, \varphi)$ der Kokern von $k$.
+  \end{itemize}
+\end{lem}
+
+
+% II.6.3: Äquivalenz zweier Definitionen von $H^n(\CC{C})$
+\begin{lem}
+  Sei $\Aat$ eine abelsche Kategorie, $X \xrightarrow{f} Y \xrightarrow{g} Z \in \Aat$ mit $g \circ f = 0$. Sei $(K, k)$ der Kern von $g$ und $(C, c)$ der Kokern von $f$. Deren univ. Eigenschaften induzieren Morphismen $a$, $b$ wie folgt:
+  \begin{center}
+    \begin{tikzpicture}
+      \matrix (mat) [matrix of nodes, column sep=1cm, row sep=0.65cm]{
+        & \node (C) {$C$}; \\
+        \node (X) {$X$}; &
+        \node (Y) {$Y$}; &
+        \node (Z) {$Z$}; \\
+        & \node (K) {$K$}; \\
+      };
+      \draw[->] (C) to node [above] {$b$} (Z);
+      \draw[->] (Y) to node [right] {$c$} (C);
+      \draw[->] (X) to node [above] {$f$} (Y);
+      \draw[->] (Y) to node [above] {$g$} (Z);
+      \draw[->] (X) to node [below] {$a$} (K);
+      \draw[->] (K) to node [right] {$k$} (Y);
+    \end{tikzpicture}
+  \end{center}
+  Es gibt es einen kanonischen Isomorphismus $\coker a \cong \ker b$.
+\end{lem}
+
 % II.6.1
 \begin{defn}
   Ein Funktor $F \!:\! \Aat \!\to\! \Bat$ zw. additiven Kategorien heißt \emph{additiv}, falls für alle $X, Y \!\in\! \Ob(\Aat)$ die Abb. $F \!:\! \Hom(X, Y) \to \Hom(FX, FY)$ ein Morphismus von abelschen Gruppen ist.
 \end{defn}
+
+% Ausgelassen: Beispiel
+
+% II.6.2
+\begin{defn}
+  \begin{itemize}
+    \item Sei $\Aat$ eine additive Kategorie. Indem man abelsche Gruppen durch Objekte aus $A$ und Gruppenmorphismen durch Morphismen in $\Aat$ ersetzt, kann man verallgemeinern: \\
+    \emph{(Ko-)Kettenkomplex}, \emph{Morphismus von (Ko-)Komplexen}
+    \item Sei $\Aat$ sogar abelsch. Die \emph{$n$-te Homologie} $H_n(\CC{C})$ eines Ketten- komplexes $\CC{C}$ aus $\Aat$ ist der Kokern der Abb. $\delta_n : C_n \to \ker \partial_{n-1}$, die durch die universelle Eigenschaft des Kerns induziert wird.
+    \item Ein Kettenkomplex heißt \emph{exakt} oder \emph{azyklisch}, wenn
+    \[ \fa{n \in \Z} H_n(\CC{C}) \cong 0. \]
+  \end{itemize}
+\end{defn}
+
+% II.6.3d)
+\begin{lem}
+  Sei $\Aat$ eine abelsche Kategorie und $0 \to X \xrightarrow{f} Y \xrightarrow{g} Z \to 0 \in \Aat$ eine \keS{}. Dann ist die Sequenz kanonisch isomorph zur Sequenz
+  \[ 0 \to \ker g \to Y \to \coker f \to 0. \]
+\end{lem}
+
+% II.6.4
+\begin{defn}
+  Ein additiver Funktor $F : \Aat \to \Bat$ zwischen abelschen Kategorien heißt \emph{exakt}, falls für alle exakten Sequenzen
+  \[ 0 \to X \xrightarrow{f} Y \xrightarrow{g} Z \to 0 \enspace \text{in $\Aat$.} \]
+  auch die Bildsequenz
+  \[ 0 \to FX \xrightarrow{Ff} FY \xrightarrow{Fg} FZ \to 0 \enspace \text{in $\Bat$.} \]
+  exakt ist.
+\end{defn}
+
+% TODO: links-, rechtsexakt, Beispiele
 
 \end{document}
