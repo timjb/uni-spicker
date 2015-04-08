@@ -41,6 +41,8 @@
 \newcommand{\Nerve}{\mathcal{N}} % Nerv einer Kategorie
 \DeclareMathOperator{\coker}{coker} % Kokern
 \DeclareMathOperator{\coim}{coim} % Kobild
+\newcommand{\AMod}{\text{$A$-$\Mod$}} % Kategorie der A-Linksmoduln
+\newcommand{\ModA}{\text{$\Mod$-$A$}} % Kategorie der A-Rechtsmoduln
 
 % Kleinere Klammern
 \delimiterfactor=701
@@ -2015,19 +2017,55 @@ Sei $\Cat$ eine Kategorie.
 
 % II.6.3d)
 \begin{lem}
-  Sei $\Aat$ eine abelsche Kategorie und $0 \to X \xrightarrow{f} Y \xrightarrow{g} Z \to 0 \in \Aat$ eine \keS{}. Dann ist die Sequenz kanonisch isomorph zur Sequenz
+  Jede \keS{} $0 \to X \xrightarrow{f} Y \xrightarrow{g} Z \to 0$ in einer abelschen Kategorie ist kanonisch isomorph zur Sequenz
   \[ 0 \to \ker g \to Y \to \coker f \to 0. \]
 \end{lem}
 
 % II.6.4
 \begin{defn}
-  Ein additiver Funktor $F : \Aat \to \Bat$ zwischen abelschen Kategorien heißt \emph{exakt}, falls für alle exakten Sequenzen
-  \[ 0 \to X \xrightarrow{f} Y \xrightarrow{g} Z \to 0 \enspace \text{in $\Aat$.} \]
-  auch die Bildsequenz
-  \[ 0 \to FX \xrightarrow{Ff} FY \xrightarrow{Fg} FZ \to 0 \enspace \text{in $\Bat$.} \]
-  exakt ist.
+  Ein additiver Funktor $F : \Aat \to \Bat$ zw. ab. Kategorien heißt \\
+  a) \emph{exakt}, b) \emph{links-exakt}, c) \emph{rechts-exakt}, falls für alle \keS{}
+  $0 \to X \xrightarrow{f} Y \xrightarrow{g} Z \to 0$
+  aus $\Aat$ auch folgende Seq. in $\Bat$ exakt ist:
+  \begin{alignat*}{3}
+    \text{a)} \enspace & 0 \to &&\, FX \xrightarrow{Ff} FY \xrightarrow{Fg} FZ \to 0 \\[-5pt]
+    \text{b)} \enspace & 0 \to &&\, FX \xrightarrow{\phantom{Ff}} FY \xrightarrow{\phantom{Fg}} FZ \\[-5pt]
+    \text{c)} \enspace & &&\, FX \xrightarrow{\phantom{Ff}} FY \xrightarrow{\phantom{Fg}} FZ \to 0.
+  \end{alignat*}
 \end{defn}
 
-% TODO: links-, rechtsexakt, Beispiele
+% II.6.5
+\begin{prop}
+  Sei $\Aat$ eine ab. Kategorie. Dann sind die Funktoren
+  \begin{align*}
+    \Aat \to \AbGrp, \enspace & Y \mapsto \Hom_\Aat(X, Y) \qquad \text{($X \in \Ob(\Aat)$ fest)}, \\
+    \Aat^\op \to \AbGrp, \enspace & X \mapsto \Hom_\Aat(X, Y) \qquad \text{($Y \in \Ob(\Aat)$ fest)}
+  \end{align*}
+  beide links-exakt.
+\end{prop}
+
+% II.6.6
+\begin{prop}
+  Sei $A$ ein Ring, $\AMod$ und $\ModA$ die Kategorien der $A$-Links- bzw. $A$-Rechtsmoduln.
+  Dann sind die Funktoren
+  \begin{align*}
+    \AMod \to \AbGrp, \enspace & Y \mapsto X \otimes_A Y \qquad \text{($X \in \Ob(\ModA)$ fest)}, \\
+    \ModA \to \AbGrp, \enspace & X \mapsto X \otimes_A Y \qquad \text{($Y \in \Ob(\AMod)$ fest)}
+  \end{align*}
+  beide rechts-exakt.
+\end{prop}
+
+% II.6.6
+\begin{prop}
+  Sei $X$ ein topol. Raum, $U \subseteq X$ offen. Der Funktor
+  \[ \Sh(X) \to \AbGrp, \enspace \Fais \mapsto \Gamma(U, \Fais) \]
+  ist links-exakt.
+\end{prop}
+
+\begin{bem}
+  Die Prop gilt auch für Garben ab. Gruppen auf Siten.
+\end{bem}
+
+% TODO: injektive, projektive, flache Objekte
 
 \end{document}
