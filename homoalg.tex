@@ -333,13 +333,13 @@
 
 % II.3.16
 \begin{defn}
-  Seien $\Jat$, $\Cat$ Kategorien, $\Jat$ klein. Der \emph{(projekte) Limes} eines Funktors $F : \Jat \to \Cat$ ist ein Objekt $X \in \Ob(\Cat)$, das den Funktor
+  Seien $\Jat$, $\Cat$ Kategorien, $\Jat$ klein. Der \emph{Limes} eines Funktors $F : \Jat \to \Cat$ ist ein Objekt $X \in \Ob(\Cat)$, das den Funktor
   \[
     G \in \hat\Cat, \quad
     G(Y) \coloneqq \Hom_{[\Jat, \Cat]}(\Delta Y, F), \quad
     G(f)(\eta) \coloneqq \eta \circ \Delta f
   \]
-  darstellt. Man notiert $X = \varprojlim F$.
+  darstellt. Man notiert $X = \Lim F$.
 \end{defn}
 
 % Ausgelassen: Gleichung (II.5)
@@ -358,7 +358,7 @@
 \end{bem}
 
 \begin{bem}
-  Die univ. Eigenschaft zeigt: Der Limes ist funktoriell, \dh{} wenn in $\Cat$ alle $\Jat$-Limiten (\dh{} Limiten von Funktoren $\Jat \to \Cat$) existieren, dann gibt es einen Funktor $\varprojlim : [\Jat, \Cat] \to \Cat$.
+  Die univ. Eigenschaft zeigt: Der Limes ist funktoriell, \dh{} wenn in $\Cat$ alle $\Jat$-Limiten (\dh{} Limiten von Funktoren $\Jat \to \Cat$) existieren, dann gibt es einen Funktor $\Lim : [\Jat, \Cat] \to \Cat$.
 \end{bem}
 
 % II.3.18
@@ -376,17 +376,25 @@
   \end{center}
 \end{bem}
 
+\begin{defn}
+  Eine \emph{gerichtete Menge} ist eine Menge $X \not= \emptyset$ mit einer Präordnung $\leq$, sodass $\fa{x, y \in X} \ex{z \in X} x \leq z \wedge y \leq z$.
+\end{defn}
+
+\begin{defn}
+  Ein \emph{projektiver} oder \emph{inverser Limes} ist ein Limes eines Funktors $F$, dessen Quellkategorie die duale Kategorie einer Präordnungskategorie einer gerichteten Menge ist. Notation: $\varprojlim F$
+\end{defn}
+
 % II.3.19 (Das duale Konzept: Kolimiten)
 
 \begin{defn}
   Sei $\Jat$ klein.
-  Der \emph{Kolimes} / \emph{induktive Limes} eines Funktors $F : \Jat \to \Cat$ ist ein Objekt $X \in \Ob(\Cat^\op) = \Ob(\Cat)$, das den Funktor
+  Der \emph{Kolimes} eines Funktors $F : \Jat \to \Cat$ ist ein Objekt $X \in \Ob(\Cat^\op) = \Ob(\Cat)$, das den Funktor
   \[
     G \in \hat{\Cat^\op} = [\Cat, \SetC], \enspace
     G(Y) \coloneqq \Hom_{[\Jat, \Cat]}(F, \Delta Y), \enspace
     G(f)(\eta) \coloneqq \Delta f \circ \eta
   \]
-  darstellt. Man notiert $X = \varinjlim F$.
+  darstellt. Man notiert $X = \Colim F$.
 \end{defn}
 
 \begin{bem}
@@ -394,7 +402,7 @@
 \end{bem}
 
 \begin{bem}
-  Wenn in $\Cat$ alle $\Jat$-Kolimiten existieren, dann gibt es einen Funktor $\varinjlim : [\Jat, \Cat] \to \Cat$.
+  Wenn in $\Cat$ alle $\Jat$-Kolimiten existieren, dann gibt es einen Funktor $\Colim : [\Jat, \Cat] \to \Cat$.
 \end{bem}
 
 % II.3.19
@@ -411,6 +419,10 @@
     \end{tabular}
   \end{center}
 \end{bem}
+
+\begin{defn}
+  Ein \emph{induktiver} oder \emph{direkter Limes} ist ein Kolimes eines Funktors $F$, dessen Quellkategorie die Präordnungskategorie einer gerichteten Menge ist. Notation: $\varinjlim F$
+\end{defn}
 
 % II.3.20
 \begin{satz}
@@ -431,14 +443,14 @@
   Dann ex. alle $\Jat$-Limiten in $[\Iat, \Cat]$ und die Limiten werden objektweise berechnet:
   Sei $F : \Jat \to [\Iat, \Cat]$ ein Funktor, dann ist
   \[
-    (\varprojlim F)(I) = \varprojlim (F(\blank)(I)), \quad
-    (\varprojlim F)(f) = \varprojlim (F(\blank)(f)).
+    (\Lim F)(I) = \Lim (F(\blank)(I)), \quad
+    (\Lim F)(f) = \Lim (F(\blank)(f)).
   \]
 \end{bem}
 
 \begin{defn}
-  Ein Funktor $F : \Cat \to \Dat$ heißt \emph{stetig}, wenn er \emph{Limiten bewahrt}, \dh{} für alle Funktoren $D : \Jat \to \Dat$ (mit $\Jat$ klein) mit $\varprojlim D \in \Ob(\Cat)$ ex. auch der Limes von $F \circ G$ in $\Dat$ und es gilt
-  \[ \varprojlim (F \circ D) \cong F(\varprojlim D). \]
+  Ein Funktor $F : \Cat \to \Dat$ heißt \emph{stetig}, wenn er \emph{Limiten bewahrt}, \dh{} für alle Funktoren $D : \Jat \to \Dat$ (mit $\Jat$ klein) mit $\Lim D \in \Ob(\Cat)$ ex. auch der Limes von $F \circ G$ in $\Dat$ und es gilt
+  \[ \Lim (F \circ D) \cong F(\Lim D). \]
   Ein Funktor $F$ heißt \emph{kostetig}, wenn er \emph{Kolimiten bewahrt}.
 \end{defn}
 
@@ -459,9 +471,7 @@
 
 % TODO: Kommutativität von Limiten
 
-\begin{samepage}
-  \subsection{Adjunktionen}
-\end{samepage}
+\subsection{Adjunktionen}
 
 \begin{defn}
   Ein Funktor $F : \Cat \to \Dat$ heißt \emph{linksadjungiert} zum Funktor $G : \Cat \to \Dat$, wenn es einen natürlichen Isomorphismus
@@ -523,9 +533,9 @@
 \begin{bspe}
   \begin{itemize}
     \item Angenommen, in $\Cat$ existieren $\Jat$-Limiten bzw. $\Jat$-Kolimiten. Dann gibt es eine Adjunktion
-    $\Delta \ladj \varprojlim$
+    $\Delta \ladj \Lim$
     bzw.
-    $\varinjlim \ladj \Delta$.
+    $\Colim \ladj \Delta$.
     \item Sei $F : \SetC \to \Grp$ der Funktor, der die freie Gruppe über einer Menge bastelt und $V : \Grp \to \SetC$ der Vergiss- funktor. Dann gilt $F \ladj V$. Gleiches gilt für viele weitere "`freie"' Konstruktionen.
     \item Sei $\KHaus$ die Kat. der kompakten Hausdorffräume und $K : \Top \to \KHaus$ die Stone-Čech-Kompaktifizierung und $I : \KHaus \to \Top$ die Inklusion. Dann gilt $K \ladj I$.
   \end{itemize}
@@ -564,11 +574,11 @@
   %Wir haben folgende Adjunktionen:
   Es gilt:
   \begin{align*}
-    (F \circ \blank) \circ (\Delta : \Cat \to [\Jat, \Cat]) & \ladj (\varprojlim : [\Jat, \Cat] \to \Cat) \circ (G \circ \blank), \\
-    (\Delta : \Dat \to [\Jat, \Dat]) \circ F & \ladj G \circ (\varprojlim : [\Jat, \Dat] \to \Dat).
+    (F \circ \blank) \circ (\Delta : \Cat \to [\Jat, \Cat]) & \ladj (\Lim : [\Jat, \Cat] \to \Cat) \circ (G \circ \blank), \\
+    (\Delta : \Dat \to [\Jat, \Dat]) \circ F & \ladj G \circ (\Lim : [\Jat, \Dat] \to \Dat).
   \end{align*}
   Da $(F \circ \blank) \circ \Delta \equiv \Delta \circ F$, folgt aus der Eindeutigkeit des Rechtsadjungierten
-  $\varprojlim (G \circ D) \cong G(\varprojlim D)$ natürlich in $D$.
+  $\Lim (G \circ D) \cong G(\Lim D)$ natürlich in $D$.
 \end{beweis}
 
 \begin{bem}
@@ -996,7 +1006,7 @@
 
 \begin{defn}
   Sei $\Fais$ eine Garbe auf $Y$, $Z \subseteq Y$ beliebig. Definiere
-  \[ \Gamma(Z, \Fais) \coloneqq \varinjlim \Gamma(U, \Fais), \]
+  \[ \Gamma(Z, \Fais) \coloneqq \Colim \Gamma(U, \Fais), \]
   wobei der Limes über alle offenen $U \subset X$ mit $Z \subseteq U$ läuft.
 \end{defn}
 
