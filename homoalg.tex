@@ -55,6 +55,8 @@
 
 \maketitle{Zusammenfassung Homologische Algebra}
 
+Dies ist eine übersetzte, korrigierte Zusammenfassung des Buches "`Methods of Homological Algebra"' von S.\,I.\,Gelfand und Y.\,I.\,Manin.
+
 % Basierend auf dem Buch "Methods of Homological Algebra" von Gelfand und Manin
 
 % Vorgezogen:
@@ -150,7 +152,7 @@
 
 % II.2.9
 \begin{bsp}
-  Sei $B$ ein lokal wegzshgder, semi-lokal einfach zshgder topol. Raum. Dann ist die Kategorie $\Cov(B)$ der Überlagerungen von $B$ äquivalent zur Kategorie $[\pi(B), \SetC]$ der Mengen-wertigen Funktoren auf dem Fundamentalgruppoid von $B$. Dabei ist
+  Sei $B$ ein lokal wegzshgder, semi-lokal einfach zshgder topol. Raum. Dann ist die Kategorie $\Cov(B)$ der Überlagerungen von $B$ äquivalent zur Kategorie $[\pi(B), \SetC]$ der mengenwertigen Funktoren auf dem Fundamentalgruppoid von $B$. Dabei ist
   \begin{align*}
     F : \Cov(B) & \to [\pi(B), \SetC], \quad F(p : \tilde{B} \to B) \coloneqq G_{\tilde{B},p}, \\
     G_{\tilde{B},p}(b \in B) & \coloneqq p^{-1}(b), \quad G_{\tilde{B},p}(\gamma : \I \to B)(\tilde{b} \in p^{-1}(\gamma(0))) \coloneqq \tilde{\gamma}(1), \\
@@ -299,6 +301,8 @@
   \end{itemize}
 \end{defn}
 
+\begin{samepage}
+
 \begin{defn}
   Sei $X \in \Ob(\Cat)$ ein Objekt. Auf der Klasse der Monomorphis- men $(i : U \to X) \in \Cat$ von einem Objekt $U \in \Ob(\Cat)$ nach $X$ ist durch
   \[ (U, i) \leq (U', i') \coloniff \ex{f : U' \to U} i' = i \circ f \]
@@ -349,7 +353,8 @@
   Ein \emph{Kegel} o. \emph{Möchtegern-Limes} eines Funktors $F : \Jat \to \Cat$
   ist ein Objekt $X \in \Ob(\Cat)$ mit Projektionsabb. $f_J : X \to F(J)$
   für alle $J \in \Ob(\Jat)$, sodass
-  $\fa{h \in \Hom_\Jat(J, I)} f_I = F(h) \circ f_J$.
+  $\fa{h \in \Hom_\Jat(J, I)} f_I = F(h) \circ f_J$. \\
+  Ein Kokegel von $F$ ist ein Kegel von $F^\op : \Jat^\op \to \Cat^\op$.
 \end{defn}
 
 \begin{bem}
@@ -363,13 +368,15 @@
 \end{bem}
 
 \begin{defn}
-  Eine Kategorie $\Cat$ heißt \emph{filtriert}, falls für alle Funktoren $F : \Iat \to \Cat$ mit endlicher Quellkategorie $\Iat$ ein Kokegel von $F$ existiert. \\
+  Eine Kategorie $\Cat$ heißt \emph{filtriert}, falls für alle Funktoren $F : \Iat \to \Cat$ mit endl. Quellkat. $\Iat$ ein Kokegel von $F$ existiert. \\
   Eine Kategorie $\Cat$ heißt \emph{kofiltriert}, falls $\Cat^\op$ filtriert ist.
 \end{defn}
 
 \begin{defn}
   Eine \emph{(ko-)gerichtete Menge} ist eine Menge mit einer Präordnung, deren Präordnungskategorie (ko-)filtriert ist.
 \end{defn}
+
+\end{samepage}
 
 \begin{defn}
   Der Limes eines Funktors $F : \Cat \to \Dat$ heißt
