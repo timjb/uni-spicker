@@ -14,6 +14,10 @@
 
 \input{include/cats} % Kategorientheorie-Makros
 
+\newenvironment{centertikz}
+  {\begin{center}\begin{tikzpicture}}
+  {\end{tikzpicture}\end{center}}
+
 \newcommand{\nspace}[1]{\foreach \i in {1,...,#1}{ \! }} % Negativer Abstand
 \DeclareMathOperator{\sk}{sk} % Skelett
 \newcommand{\CC}[1]{{#1}_{\bullet}} % Kettenkomplex (chain complex)
@@ -63,6 +67,13 @@
 \begin{bem}
   Die \href{http://timbaumann.info/uni-spicker/topo.pdf}{Topologie-Zusammenfassung} bietet eine Übersicht über Grundbegriffe der Kategorientheorie.
 \end{bem}
+
+% Bemerkung in II.6.9
+\begin{konv}
+  Man übersetzt ein Diagramm folgendermaßen in eine Proposition:
+  Es wird über Objekte und über Morphismen, die als durchgezogener Pfeil dargestellt werden, allquantifiziert, sofern das Obj. oder der Morph. noch nicht eingeführt wurde.
+  Die Behauptung ist dann die Existenz der gestrichelten Morphismen, die das Diagramm kommutativ machen. Wenn der Morphismus mit einem Ausrufezeichen markiert ist, so wird eindeutige Existenz gefordert.
+\end{konv}
 
 \begin{defn}
   Eine Kategorie $\Cat$ heißt \emph{lokal klein}, wenn $\Hom(X, Y)$ für alle $X, Y \in \Ob(\Cat)$ eine Menge (keine echte Klasse) ist.
@@ -217,11 +228,24 @@
 
 \begin{bem}
   Diese Definition ist äquivalent zur folgenden: \\
-  Das Produkt von $X, Y$ ist $Z \in \Ob(\Cat)$ zusammen mit Morphismen
+  Das Produkt von $X, Y$ ist ein Objekt $Z \in \Ob(\Cat)$ zusammen mit Morphismen
   $p_X : Z \to X$ und $p_Y : Z \to Y$,
-  wenn für alle $Z' \in \Ob(\Cat)$ mit Morphismen 
-  $p_X' : Z' \to X$ und $p_Y' : Z' \to Y$
-  genau ein $f : Z' \to Z$ mit $p_X' = p_X \circ f$ und $p_Y' = p_Y \circ f$ existiert.
+  falls
+  \vspace{-10pt}
+  \begin{centertikz}
+    \matrix (mat) [matrix of nodes, column sep=1cm, row sep=0.45cm]{
+      & \node (Z') {$Z'$}; \\
+      \node (X) {$X$}; &
+      \node (Z) {$Z$}; &
+      \node (Y) {$Y$.}; \\
+    };
+    \draw[->] (Z) to node [below] {$p_X$} (X);
+    \draw[->] (Z) to node [below] {$p_Y$} (Y);
+    \draw[->] (Z') to node [left] {} (X);
+    \draw[->] (Z') to node [right] {} (Y);
+    \draw[->,dashed] (Z') to node [right] {!} (Z);
+  \end{centertikz}
+  \vspace{-12pt}
 \end{bem}
 
 \begin{defn}
@@ -260,14 +284,14 @@
 
 % II.5.11e)
 \begin{defn}
-  Sei $\Cat$ eine Kategorie, $f \in \Hom_\Cat(X, Y)$ ein Morphismus.
+  Sei $\Cat$ eine Kategorie. Ein Morphismus $f \in \Hom_\Cat(X, Y)$ heißt
   \begin{itemize}
-    \item $f$ heißt \emph{Monomorphismus} (${\hookrightarrow}$), wenn $f$ linkskürzbar ist, \dh{}
+    \item \emph{Monomorphismus} ($f : X \hookrightarrow Y$), wenn $f$ linkskürzbar ist, \dh{}
     \[
       \fa{X' \in \Ob(\Cat)} \fa{g, h \in \Hom_\Cat(X', X)}
       f \circ g = f \circ h \implies g = h.
     \]
-    \item $f$ heißt \emph{Epimorphismus} (${\twoheadrightarrow}$), wenn $f$ rechtskürzbar ist, \dh{}
+    \item \emph{Epimorphismus} ($f : Y \twoheadrightarrow Y$), wenn $f$ rechtskürzbar ist, \dh{}
     \[
       \fa{Y' \in \Ob(\Cat)} \fa{g, h \in \Hom_\Cat(Y, Y')}
       g \circ f = h \circ f \implies g = h.
@@ -1862,30 +1886,30 @@ Sei $\Cat$ eine Kategorie.
 
 \begin{lem}[Viererlemmata]
   Sei folgendes kommutatives Diagramm in einer abelschen Kategorie mit exakten Zeilen gegeben:
-  \begin{center}
-    \begin{tikzpicture}
-      \matrix (mat) [matrix of nodes, column sep=1cm, row sep=0.65cm]{
-        \node (A) {$A$}; &
-        \node (B) {$B$}; &
-        \node (C) {$C$}; &
-        \node (D) {$D$}; \\
-        \node (A') {$A'$}; &
-        \node (B') {$B'$}; &
-        \node (C') {$C'$}; &
-        \node (D') {$D'$}; \\
-      };
-      \draw[->] (A) to node {} (B);
-      \draw[->] (B) to node {} (C);
-      \draw[->] (C) to node {} (D);
-      \draw[->] (A') to node {} (B');
-      \draw[->] (B') to node {} (C');
-      \draw[->] (C') to node {} (D');
-      \draw[->>] (A) to node [right] {$\alpha$} (A');
-      \draw[->] (B) to node [right] {$\beta$} (B');
-      \draw[->] (C) to node [right] {$\gamma$} (C');
-      \draw[right hook->] (D) to node [right] {$\delta$} (D');
-    \end{tikzpicture}
-  \end{center}
+  \vspace{-8pt}
+  \begin{centertikz}
+    \matrix (mat) [matrix of nodes, column sep=1cm, row sep=0.45cm]{
+      \node (A) {$A$}; &
+      \node (B) {$B$}; &
+      \node (C) {$C$}; &
+      \node (D) {$D$}; \\
+      \node (A') {$A'$}; &
+      \node (B') {$B'$}; &
+      \node (C') {$C'$}; &
+      \node (D') {$D'$}; \\
+    };
+    \draw[->] (A) to node {} (B);
+    \draw[->] (B) to node {} (C);
+    \draw[->] (C) to node {} (D);
+    \draw[->] (A') to node {} (B');
+    \draw[->] (B') to node {} (C');
+    \draw[->] (C') to node {} (D');
+    \draw[->>] (A) to node [right] {$\alpha$} (A');
+    \draw[->] (B) to node [right] {$\beta$} (B');
+    \draw[->] (C) to node [right] {$\gamma$} (C');
+    \draw[right hook->] (D) to node [right] {$\delta$} (D');
+  \end{centertikz}
+  \vspace{-10pt}
   Sei $\alpha$ epimorph und $\delta$ monomorph.\\
   \inlineitem{Ist $\gamma$ epimorph, so auch $\beta$.} \enspace
   \inlineitem{Ist $\beta$ monomorph, so auch $\gamma$.}
@@ -1898,67 +1922,68 @@ Sei $\Cat$ eine Kategorie.
 % aus AlgTopo-Zusammenfassung
 \begin{kor}[\emph{Fünferlemma}]
   Sei folgendes kommutatives Diagramm in einer abelschen Kategorie mit exakten Zeilen gegeben:
-  \begin{center}
-    \begin{tikzpicture}
-      \matrix (mat) [matrix of nodes, column sep=1cm, row sep=0.65cm]{
-        \node (A) {$A$}; &
-        \node (B) {$B$}; &
-        \node (C) {$C$}; &
-        \node (D) {$D$}; &
-        \node (E) {$E$}; \\
-        \node (A') {$A'$}; &
-        \node (B') {$B'$}; &
-        \node (C') {$C'$}; &
-        \node (D') {$D'$}; &
-        \node (E') {$E'$}; \\
-      };
-      \draw[->] (A) to node {} (B);
-      \draw[->] (B) to node {} (C);
-      \draw[->] (C) to node {} (D);
-      \draw[->] (D) to node {} (E);
-      \draw[->] (A') to node {} (B');
-      \draw[->] (B') to node {} (C');
-      \draw[->] (C') to node {} (D');
-      \draw[->] (D') to node {} (E');
-      \draw[->] (A) to node [right] {$\alpha$} (A');
-      \draw[->] (B) to node [right] {$\beta$} (B');
-      \draw[->] (C) to node [right] {$\gamma$} (C');
-      \draw[->] (D) to node [right] {$\delta$} (D');
-      \draw[->] (E) to node [right] {$\epsilon$} (E');
-    \end{tikzpicture}
-  \end{center}
+  \vspace{-8pt}
+  \begin{centertikz}
+    \matrix (mat) [matrix of nodes, column sep=1cm, row sep=0.45cm]{
+      \node (A) {$A$}; &
+      \node (B) {$B$}; &
+      \node (C) {$C$}; &
+      \node (D) {$D$}; &
+      \node (E) {$E$}; \\
+      \node (A') {$A'$}; &
+      \node (B') {$B'$}; &
+      \node (C') {$C'$}; &
+      \node (D') {$D'$}; &
+      \node (E') {$E'$}; \\
+    };
+    \draw[->] (A) to node {} (B);
+    \draw[->] (B) to node {} (C);
+    \draw[->] (C) to node {} (D);
+    \draw[->] (D) to node {} (E);
+    \draw[->] (A') to node {} (B');
+    \draw[->] (B') to node {} (C');
+    \draw[->] (C') to node {} (D');
+    \draw[->] (D') to node {} (E');
+    \draw[->] (A) to node [right] {$\alpha$} (A');
+    \draw[->] (B) to node [right] {$\beta$} (B');
+    \draw[->] (C) to node [right] {$\gamma$} (C');
+    \draw[->] (D) to node [right] {$\delta$} (D');
+    \draw[->] (E) to node [right] {$\epsilon$} (E');
+  \end{centertikz}
+  \vspace{-10pt}
   Sind $\alpha$, $\beta$, $\delta$ und $\epsilon$ isomorph, so auch $\gamma$.
 \end{kor}
 
 \begin{lem}[\emph{Schlangenlemma}]
   Sei folgendes kommutatives Diagramm in einer abelschen Kategorie mit exakten Zeilen gegeben:
-  \begin{center}
-    \begin{tikzpicture}
-      \matrix (mat) [matrix of nodes, column sep=1cm, row sep=0.65cm]{
-        &
-        \node (A) {$A$}; &
-        \node (B) {$B$}; &
-        \node (C) {$C$}; &
-        \node (O) {$0$}; \\
-        \node (O') {$0$}; &
-        \node (A') {$A'$}; &
-        \node (B') {$B'$}; &
-        \node (C') {$C'$}; \\
-      };
-      \draw[->] (A) to node {} (B);
-      \draw[->] (B) to node {} (C);
-      \draw[->] (C) to node {} (O);
-      \draw[->] (O') to node {} (A');
-      \draw[->] (A') to node {} (B');
-      \draw[->] (B') to node {} (C');
-      \draw[->] (A) to node [right] {$\alpha$} (A');
-      \draw[->] (B) to node [right] {$\beta$} (B');
-      \draw[->] (C) to node [right] {$\gamma$} (C');
-    \end{tikzpicture}
-  \end{center}
+  \vspace{-8pt}
+  \begin{centertikz}
+    \matrix (mat) [matrix of nodes, column sep=1cm, row sep=0.45cm]{
+      &
+      \node (A) {$A$}; &
+      \node (B) {$B$}; &
+      \node (C) {$C$}; &
+      \node (O) {$0$}; \\
+      \node (O') {$0$}; &
+      \node (A') {$A'$}; &
+      \node (B') {$B'$}; &
+      \node (C') {$C'$}; \\
+    };
+    \draw[->] (A) to node {} (B);
+    \draw[->] (B) to node {} (C);
+    \draw[->] (C) to node {} (O);
+    \draw[->] (O') to node {} (A');
+    \draw[->] (A') to node {} (B');
+    \draw[->] (B') to node {} (C');
+    \draw[->] (A) to node [right] {$\alpha$} (A');
+    \draw[->] (B) to node [right] {$\beta$} (B');
+    \draw[->] (C) to node [right] {$\gamma$} (C');
+  \end{centertikz}
+  \vspace{-10pt}
   Dann gibt es einen Verbindungshomomorphismus $\delta : \ker \gamma \to \coker \alpha$, mit dem folgende Sequenz exakt ist:
   \[ \ker \alpha \to \ker \beta \to \ker \gamma \xrightarrow{\delta} \coker \alpha \to \coker \beta \to \coker \gamma. \]
 \end{lem}
+
 
 % Kapitel II.6 Funktoren zw. abelschen Kategorien
 
@@ -1975,27 +2000,31 @@ Sei $\Cat$ eine Kategorie.
 
 
 % II.6.3: Äquivalenz zweier Definitionen von $H^n(\CC{C})$
+% Dies sollte das letzte Lemma vor II.6.2 bleiben!
 \begin{lem}
   Sei $\Aat$ eine abelsche Kategorie, $X \xrightarrow{f} Y \xrightarrow{g} Z \in \Aat$ mit $g \circ f = 0$. Sei $(K, k)$ der Kern von $g$ und $(C, c)$ der Kokern von $f$. Deren univ. Eigenschaften induzieren Morphismen $a$, $b$ wie folgt:
-  \begin{center}
-    \begin{tikzpicture}
-      \matrix (mat) [matrix of nodes, column sep=1cm, row sep=0.65cm]{
-        & \node (C) {$C$}; \\
-        \node (X) {$X$}; &
-        \node (Y) {$Y$}; &
-        \node (Z) {$Z$}; \\
-        & \node (K) {$K$}; \\
-      };
-      \draw[->] (C) to node [above] {$b$} (Z);
-      \draw[->] (Y) to node [right] {$c$} (C);
-      \draw[->] (X) to node [above] {$f$} (Y);
-      \draw[->] (Y) to node [above] {$g$} (Z);
-      \draw[->] (X) to node [below] {$a$} (K);
-      \draw[->] (K) to node [right] {$k$} (Y);
-    \end{tikzpicture}
-  \end{center}
+  \vspace{-8pt}
+  \begin{centertikz}
+    \matrix (mat) [matrix of nodes, column sep=1cm, row sep=0.45cm]{
+      & \node (C) {$C$}; \\
+      \node (X) {$X$}; &
+      \node (Y) {$Y$}; &
+      \node (Z) {$Z$}; \\
+      & \node (K) {$K$}; \\
+    };
+    \draw[->] (C) to node [above] {$b$} (Z);
+    \draw[->] (Y) to node [right] {$c$} (C);
+    \draw[->] (X) to node [above] {$f$} (Y);
+    \draw[->] (Y) to node [above] {$g$} (Z);
+    \draw[->] (X) to node [below] {$a$} (K);
+    \draw[->] (K) to node [right] {$k$} (Y);
+  \end{centertikz}
+  \vspace{-10pt}
   Es gibt es einen kanonischen Isomorphismus $\coker a \cong \ker b$.
 \end{lem}
+
+% (etwas später als im Buch)
+\section{Funktoren zwischen abelschen Kategorien}
 
 % II.6.1
 \begin{defn}
@@ -2009,11 +2038,15 @@ Sei $\Cat$ eine Kategorie.
   \begin{itemize}
     \item Sei $\Aat$ eine additive Kategorie. Indem man abelsche Gruppen durch Objekte aus $A$ und Gruppenmorphismen durch Morphismen in $\Aat$ ersetzt, kann man verallgemeinern: \\
     \emph{(Ko-)Kettenkomplex}, \emph{Morphismus von (Ko-)Komplexen}
-    \item Sei $\Aat$ sogar abelsch. Die \emph{$n$-te Homologie} $H_n(\CC{C})$ eines Ketten- komplexes $\CC{C}$ aus $\Aat$ ist der Kokern der Abb. $\delta_n : C_n \to \ker \partial_{n-1}$, die durch die universelle Eigenschaft des Kerns induziert wird.
+    \item Sei $\Aat$ sogar abelsch. Die \emph{$n$-te Homologie} $H_n(\CC{C})$ eines Ketten- komplexes $\CC{C}$ aus $\Aat$ ist der Kokern der Abb. $a_n : C_n \to \ker \partial_{n-1}$, die durch die universelle Eigenschaft des Kerns induziert wird. \\
     \item Ein Kettenkomplex heißt \emph{exakt} oder \emph{azyklisch}, wenn
     \[ \fa{n \in \Z} H_n(\CC{C}) \cong 0. \]
   \end{itemize}
 \end{defn}
+
+\begin{bem}
+  Das letzte Lemma besagt, dass $H_n(\CC{C})$ isomorph zum Kern der Abbildung $b_n : \coker \partial_n \to C_{n-1}$, die durch die universelle Eigenschaft des Kokerns induziert wird, ist.
+\end{bem}
 
 % II.6.3d)
 \begin{lem}
@@ -2034,15 +2067,35 @@ Sei $\Cat$ eine Kategorie.
   \end{alignat*}
 \end{defn}
 
+% II.6.7
+\begin{prop}
+  Sei $X$ ein topologischer Raum, $U \subseteq X$ offen. Der Funktor
+  \[ \Sh(X) \to \AbGrp, \enspace \Fais \mapsto \Gamma(U, \Fais) \]
+  ist links-exakt.
+\end{prop}
+
+\begin{bem}
+  Die Prop gilt auch für Garben abelscher Gruppen auf Siten.
+\end{bem}
+
 % II.6.5
 \begin{prop}
-  Sei $\Aat$ eine ab. Kategorie. Dann sind die Funktoren
-  \begin{align*}
-    \Aat \to \AbGrp, \enspace & Y \mapsto \Hom_\Aat(X, Y) \qquad \text{($X \in \Ob(\Aat)$ fest)}, \\
-    \Aat^\op \to \AbGrp, \enspace & X \mapsto \Hom_\Aat(X, Y) \qquad \text{($Y \in \Ob(\Aat)$ fest)}
-  \end{align*}
+  Sei $\Aat$ eine abelsche Kategorie. Dann sind die Funktoren
+  \begin{alignat*}{5}
+    & \Hom_\Aat(X, \blank) : \Aat \to \AbGrp, \enspace && Y \mapsto \Hom_\Aat(X, Y) \qquad && \text{($X \in \Ob(\Aat)$ fest)}, \\
+    & \Hom_\Aat(\blank, Y) : \Aat^\op \to \AbGrp, \enspace && X \mapsto \Hom_\Aat(X, Y) \qquad && \text{($Y \in \Ob(\Aat)$ fest)}
+  \end{alignat*}
   beide links-exakt.
 \end{prop}
+
+% II.6.8
+\begin{defn}
+  Sei $\Aat$ eine abelsche Kategorie. Ein Objekt
+  \begin{itemize}
+    \item $X \in \Ob(\Aat)$ heißt \emph{projektiv}, falls $\Hom_\Aat(X, \blank)$ exakt ist.
+    \item $Y \in \Ob(\Aat)$ heißt \emph{injektiv}, falls $\Hom_\Aat(\blank, Y)$ exakt ist.
+  \end{itemize}
+\end{defn}
 
 % II.6.6
 \begin{prop}
@@ -2055,17 +2108,110 @@ Sei $\Cat$ eine Kategorie.
   beide rechts-exakt.
 \end{prop}
 
-% II.6.6
-\begin{prop}
-  Sei $X$ ein topol. Raum, $U \subseteq X$ offen. Der Funktor
-  \[ \Sh(X) \to \AbGrp, \enspace \Fais \mapsto \Gamma(U, \Fais) \]
-  ist links-exakt.
-\end{prop}
+% II.6.8
+\begin{defn}
+  Sei $A$ ein Ring. Ein Modul $X \!\in\! \Ob \ModA$ / $Y \!\in\! \Ob \AMod$
+  heißt \emph{flach}, falls der Funktor $Y \mapsto X \otimes_A Y$ / $X \mapsto X \otimes_A Y$ exakt ist.
+\end{defn}
 
+\begin{konv}
+  Falls in einem Diagramm in einer Zeile das Nullobjekt vorkommt, so wird diese Zeile als exakt angenommen.
+\end{konv}
+
+% II.6.9
 \begin{bem}
-  Die Prop gilt auch für Garben ab. Gruppen auf Siten.
+  Sei $\Aat$ eine abelsche Kategorie. Ein Objekt $X \in \Ob(\Aat)$ bzw. $Y \in \Ob(\Aat)$ ist genau dann projektiv bzw. injektiv, wenn
+  \vspace{-10pt}
+  \begin{center}
+    \begin{minipage}{100pt}
+      \begin{center}
+        \begin{tikzpicture}
+          \matrix (mat) [matrix of nodes, column sep=1cm, row sep=0.45cm]{
+            \node (X) {$X$}; \\
+            \node (Y) {$Y$}; &
+            \node (Y') {$Y'$}; &
+            \node (O) {$0$}; \\
+          };
+          \draw[->] (X) to node [above] {$\varphi$} (Y');
+          \draw[->,dashed] (X) to node [left] {$\psi$} (Y);
+          \draw[->>] (Y) to node [above] {$\pi$} (Y');
+          \draw[->] (Y') to node {} (O);
+        \end{tikzpicture} \\
+        (Projektivitätsdiagramm)
+      \end{center}
+    \end{minipage}
+    \hspace{8pt}
+    \begin{minipage}[t]{10pt}
+      \vspace{-10pt}
+      bzw.
+    \end{minipage}
+    \hspace{12pt}
+    \begin{minipage}{100pt}
+      \begin{center}
+        \begin{tikzpicture}
+          \matrix (mat) [matrix of nodes, column sep=1cm, row sep=0.45cm]{
+            \node (Y) {$Y$}; \\
+            \node (X) {$X$}; &
+            \node (X') {$X'$}; &
+            \node (O) {$0$.}; \\
+          };
+          \draw[->] (X') to node [above] {$\varphi$} (Y);
+          \draw[->,dashed] (X) to node [left] {$\psi$} (Y);
+          \draw[left hook->] (X') to node [above] {$i$} (X);
+          \draw[->] (O) to node {} (X');
+        \end{tikzpicture} \\
+        (Injektivitätsdiagramm)
+      \end{center}
+    \end{minipage}
+  \end{center}
 \end{bem}
 
-% TODO: injektive, projektive, flache Objekte
+% II.6.10 (Projektive und freie Moduln)
+\begin{lem}
+  Ein $A$-Modul $X$ ist genau dann projektiv, wenn er ein direkter Summand eines freien $A$-Moduls ist, \dh{} wenn ein \\
+  $A$-Modul $Y$ existiert, sodass $X \oplus Y$ frei ist.
+\end{lem}
+
+% II.6.11 (Injektive Moduln und Teilbarkeit), http://ncatlab.org/nlab/show/Baer%27s+criterion
+\begin{lem}[Baer-Kriterium]
+  Ein $A$-Linksmodul $X$ ist genau dann injektiv, wenn für alle $A$-Linksideale $I \subset X$ und Modul-Morphismen $q : I \to Q$ eine Fortsetzung $\tilde{q} : Q \to Q$ mit $q = \tilde{q}|_I$ existiert.
+\end{lem}
+
+% II.6.11, http://ncatlab.org/nlab/show/injective+module#injective_modules__abelian_groups
+\begin{lem}
+  Eine ab. Gruppe $X$ ist genau dann als $\Z$-Modul injektiv, wenn man in $A$ durch ganze Zahlen teilen kann, \dh{}
+  \[ \fa{a \in X, n \in \Z \setminus \{ 0 \}} \ex{b \in X} nb = a. \]
+\end{lem}
+
+\begin{bspe}
+  Es sind injektive abelsche Gruppen: $\R$, $\Q$, $\Q/\Z$, $\Q_{(p)}/\Z$
+\end{bspe}
+
+% II.6.12 (Flache Moduln und Relationen)
+\begin{defn}
+  Sei $X$ ein $A$-Rechtsmodul. Eine \emph{Relation in $A$} von Elementen $x_1, \ldots, x_n \in X$ ist ein Tupel $(a_1, \ldots, a_n) \in A^n$ mit $\sum x_i a_i = 0 \in X$. \\
+  Allgemeiner ist eine \emph{Relation in einem $A$-Linksmodul $Y$} von $x_1, \nldots, x_n \in X$ ein Tupel $(y_1, \nldots, y_n) \in Y^n$ mit $\sum x_i \otimes y_i \!=\! 0 \in X \!\otimes\! Y$.
+\end{defn}
+
+\begin{bem}
+  Sei $X$ ein $A$-Rechts-, $Y$ ein $A$-Linksmodul und $x_1, \nldots, x_n \in X$. \\
+  Für $j = 1, \ldots, m$ sei $y^{(j)} \in Y$ beliebig und $(a_1^{(j)}, \nldots, a_n^{(j)}) \in A^n$ eine Relation von den $x_i$ in $A$.
+  Dann ist $(y_1, \nldots, y_n) \in Y^n$ mit $y_i \coloneqq \sum a_i^{(j)} y^{(j)}$ eine Relation von den $x_i$ in $Y$.
+\end{bem}
+
+% II.6.12 & II.6.13 (Flache und projektive Moduln)
+\begin{lem}
+  Für ein $A$-Rechtsmodul $X$ sind äquivalent:
+  \begin{itemize}
+    \item $X$ ist flach.
+    \item Alle Relationen von Elementen $x_1, \ldots, x_n \in X$ in einem $A$-Links- modul $Y$ erhält man durch die eben beschriebene Konstruktion.
+    \item $X$ ist direkter Limes einer gerichteten Familie von proj. Moduln.
+  \end{itemize}
+\end{lem}
+
+% II.6.13
+\begin{bem}
+  Insbesondere sind freie und projektive Moduln (also direkte Summanden von freien Moduln) flach.
+\end{bem}
 
 \end{document}

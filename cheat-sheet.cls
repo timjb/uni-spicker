@@ -72,6 +72,7 @@
 \newtheorem*{fazit}{Fazit}
 \newtheorem*{facts}{Facts}
 \newtheorem*{axiom}{Axiom}
+\newtheorem*{konv}{Konvention}
 
 \theoremstyle{remark}
 \newtheorem*{bem}{Bem}
