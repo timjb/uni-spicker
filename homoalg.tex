@@ -213,7 +213,7 @@
 \end{lem}
 
 \begin{kor}
-  Die Yoneda-Einbettung ist volltreu und liefert eine Kategorienäquivalenz von $\Cat$ und der vollen Unterkategorie der darstellbaren Funktoren in $\hat\Cat$.
+  Die Yoneda-Einbettung ist volltreu und liefert eine Kat.- Äquivalenz von $\Cat$ und der vollen Unterkat. der darstellb. Funkt. in $\hat\Cat$.
 \end{kor}
 
 \begin{kor}
@@ -239,8 +239,8 @@
       \node (Z) {$Z$}; &
       \node (Y) {$Y$.}; \\
     };
-    \draw[->] (Z) to node [below] {$p_X$} (X);
-    \draw[->] (Z) to node [below] {$p_Y$} (Y);
+    \draw[->] (Z) to node [above] {$\,\,\,p_X$} (X);
+    \draw[->] (Z) to node [above] {$p_Y\,\,\,$} (Y);
     \draw[->] (Z') to node [left] {} (X);
     \draw[->] (Z') to node [right] {} (Y);
     \draw[->,dashed] (Z') to node [right] {!} (Z);
@@ -361,6 +361,24 @@
   Die univ. Eigenschaft zeigt: Der Limes ist funktoriell, \dh{} wenn in $\Cat$ alle $\Jat$-Limiten (\dh{} Limiten von Funktoren $\Jat \to \Cat$) existieren, dann gibt es einen Funktor $\Lim : [\Jat, \Cat] \to \Cat$.
 \end{bem}
 
+\begin{defn}
+  Eine Kategorie $\Cat$ heißt \emph{filtriert}, falls $\exists \, A \in \Ob(\Cat)$ und
+  \[ \fa{X, Y \in \Ob(\Cat)} \exists \, Z \in \Ob(\Cat), f \in \Hom(X, Z), g \in \Hom(Y, Z). \]
+  Eine Kategorie $\Cat$ heißt \emph{kofiltriert}, falls $\Cat^\op$ filtriert ist.
+\end{defn}
+
+\begin{defn}
+  Eine \emph{(ko-)gerichtete Menge} ist eine Menge mit einer Präordnung, deren Präordnungskategorie (ko-)filtriert ist.
+\end{defn}
+
+\begin{defn}
+  Der Limes eines Funktors $F : \Cat \to \Dat$ heißt
+  \begin{itemize}
+    \item \emph{projektiver} oder \emph{inverser Limes}, wenn $\Cat$ die Präordnungs- kategorie einer kogerichteten Menge ist. Man notiert $\varprojlim F$.
+    \item \emph{filtriert}, wenn $\Cat$ kofiltriert ist.
+  \end{itemize}
+\end{defn}
+
 % II.3.18
 \begin{bem}
   Folgende Konzepte lassen sich als Spezialfall des Limes über eine spezielle Indexkategorie $\Jat$ auffassen:
@@ -375,14 +393,6 @@
     \end{tabular}
   \end{center}
 \end{bem}
-
-\begin{defn}
-  Eine \emph{gerichtete Menge} ist eine Menge $X \not= \emptyset$ mit einer Präordnung $\leq$, sodass $\fa{x, y \in X} \ex{z \in X} x \leq z \wedge y \leq z$.
-\end{defn}
-
-\begin{defn}
-  Ein \emph{projektiver} oder \emph{inverser Limes} ist ein Limes eines Funktors $F$, dessen Quellkategorie die duale Kategorie einer Präordnungskategorie einer gerichteten Menge ist. Notation: $\varprojlim F$
-\end{defn}
 
 % II.3.19 (Das duale Konzept: Kolimiten)
 
@@ -421,7 +431,11 @@
 \end{bem}
 
 \begin{defn}
-  Ein \emph{induktiver} oder \emph{direkter Limes} ist ein Kolimes eines Funktors $F$, dessen Quellkategorie die Präordnungskategorie einer gerichteten Menge ist. Notation: $\varinjlim F$
+  Der Kolimes eines Funktors $F : \Cat \to \Dat$ heißt
+  \begin{itemize}
+    \item \emph{induktiver} oder \emph{direkter Limes}, wenn $\Cat$ die Präordnungs- kategorie einer gerichteten Menge ist. Man notiert $\varinjlim F$.
+    \item \emph{filtrierter Kolimes}, wenn $\Cat$ filtriert ist.
+  \end{itemize}
 \end{defn}
 
 % II.3.20
@@ -508,8 +522,8 @@
     (G \xrightarrow{\eta G} GFG \xrightarrow{G \epsilon} G) = \id_G, \quad
     (F \xrightarrow{\epsilon F} FGF \xrightarrow{F \eta} F) = \id_F.
   \]
-  Umgekehrt definieren zwei solche natürliche Transformationen $\eta$ und $\epsilon$, die diese Gleichungen erfüllen, eine Adjunktion zwischen $F$ und $G$. \\
-  Dabei ist $\eta_X$ universell unter den Morphismen von $X \in \Ob(\Dat)$ zu einem Objekt der Form $GY$:
+  Umgekehrt definieren zwei solche nat. Transf. $\eta$ und $\epsilon$, die diese Glei- chungen erfüllen, eine Adj. zwischen $F$ und $G$.
+  Dabei ist $\eta_X$ univ. unter den Morphismen von $X \in \Ob(\Dat)$ zu einem Obj. der Form $GY$:
   Für alle $f \in \Hom_\Dat(X, GY)$ gibt es genau ein $h \in \Hom(FX, Y)$ mit $f = G(h) \circ \eta_X$, und zwar $h = (a_X^Y)^{-1}(f)$. Duales gilt für $\epsilon_Y$.
 \end{bem}
 
@@ -532,7 +546,7 @@
 
 \begin{bspe}
   \begin{itemize}
-    \item Angenommen, in $\Cat$ existieren $\Jat$-Limiten bzw. $\Jat$-Kolimiten. Dann gibt es eine Adjunktion
+    \item Angenommen, in $\Cat$ existieren $\Jat$-Limiten bzw. $\Jat$-Kolimiten. Dann gibt es eine Adj.
     $\Delta \ladj \Lim$
     bzw.
     $\Colim \ladj \Delta$.
@@ -2215,13 +2229,17 @@ Sei $\Cat$ eine Kategorie.
   \begin{itemize}
     \item $Y$ ist flach (\dh{} $X \mapsto X \otimes_A Y$ ist exakt).
     \item Alle Relationen von Elementen $x_1, \ldots, x_n \in X$ in einem $A$-Rechts- modul $X$ erhält man durch die eben beschriebene Konstruktion.
-    \item $Y$ ist direkter Limes einer gerichteten Familie von proj. Moduln.
+    \item $Y$ ist filtrierter Kolimes von freien Moduln (Lazards Kriterium).
   \end{itemize}
 \end{lem}
 
 % II.6.13
-\begin{bem}
-  Insbesondere sind freie und projektive Moduln (also direkte Summanden von freien Moduln) flach.
-\end{bem}
+\begin{lem}
+  \begin{itemize}
+    \item Freie Moduln sind flach.
+    \item Direkte Summanden von flachen Moduln sind flach.
+    \item Induktive Limiten von flachen Moduln sind flach.
+  \end{itemize}
+\end{lem}
 
 \end{document}
