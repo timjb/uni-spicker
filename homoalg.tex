@@ -346,14 +346,15 @@
 
 % II.3.17 (Die univ. Eigenschaft des Limes)
 \begin{defn}
-  Ein \emph{Möchtegern-Limes} eines Funktors $F : \Jat \to \Cat$ ist ein Objekt $X \in \Ob(\Cat)$ mit 
-  Projektionsabbildungen $f_J : X \to F(J)$ für alle $J \in \Ob(\Jat)$, sodass
+  Ein \emph{Kegel} o. \emph{Möchtegern-Limes} eines Funktors $F : \Jat \to \Cat$
+  ist ein Objekt $X \in \Ob(\Cat)$ mit Projektionsabb. $f_J : X \to F(J)$
+  für alle $J \in \Ob(\Jat)$, sodass
   $\fa{h \in \Hom_\Jat(J, I)} f_I = F(h) \circ f_J$.
 \end{defn}
 
 \begin{bem}
   Der Limes $X$ ist durch folgende \emph{universelle Eigenschaft} charakterisiert:
-  Er ist ein terminales Objekt in der Kategorie der Möchtegern-Limiten, \dh{} er ist ein Möchtegern-Limes und für jeden weiteren Möchtegern-Limes $X'$ gibt es genau einen Morphismus $g \in \Hom_\Cat(X', X)$ mit
+  Er ist ein terminales Objekt in der Kategorie der Kegel über $F$, \dh{} er ist ein Kegel und für jeden weiteren Kegel $X'$ gibt es genau ein $g \in \Hom_\Cat(X', X)$ mit
   $\fa{J \in \Ob(\Jat)} f'_J = f_J \circ g$.
 \end{bem}
 
@@ -362,8 +363,7 @@
 \end{bem}
 
 \begin{defn}
-  Eine Kategorie $\Cat$ heißt \emph{filtriert}, falls $\exists \, A \in \Ob(\Cat)$ und
-  \[ \fa{X, Y \in \Ob(\Cat)} \exists \, Z \in \Ob(\Cat), f \in \Hom(X, Z), g \in \Hom(Y, Z). \]
+  Eine Kategorie $\Cat$ heißt \emph{filtriert}, falls für alle Funktoren $F : \Iat \to \Cat$ mit endlicher Quellkategorie $\Iat$ ein Kokegel von $F$ existiert. \\
   Eine Kategorie $\Cat$ heißt \emph{kofiltriert}, falls $\Cat^\op$ filtriert ist.
 \end{defn}
 
