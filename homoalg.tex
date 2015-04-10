@@ -51,13 +51,16 @@
 % Kleinere Klammern
 \delimiterfactor=701
 
+% TODO:
+% * Diagrammjadgregeln
+% * ÜB6, Aufgabe 3 über exakte Sequenzen von Garben ist /sehr/ wichtig
+% * Serresche Quotientenkategorien
+
 \begin{document}
 
 \maketitle{Zusammenfassung Homologische Algebra}
 
 Dies ist eine übersetzte, korrigierte Zusammenfassung des Buches "`Methods of Homological Algebra"' von S.\,I.\,Gelfand und Y.\,I.\,Manin.
-
-% Basierend auf dem Buch "Methods of Homological Algebra" von Gelfand und Manin
 
 % Vorgezogen:
 % II. Hauptbegriffe der Kategorientheorie
@@ -2054,16 +2057,6 @@ Sei $\Cat$ eine Kategorie.
   Es gibt es einen kanonischen Isomorphismus $\coker a \cong \ker b$.
 \end{lem}
 
-% (etwas später als im Buch)
-\section{Funktoren zwischen abelschen Kategorien}
-
-% II.6.1
-\begin{defn}
-  Ein Funktor $F \!:\! \Aat \!\to\! \Bat$ zw. additiven Kategorien heißt \emph{additiv}, falls für alle $X, Y \!\in\! \Ob(\Aat)$ die Abb. $F \!:\! \Hom(X, Y) \to \Hom(FX, FY)$ ein Morphismus von abelschen Gruppen ist.
-\end{defn}
-
-% Ausgelassen: Beispiel
-
 % II.6.2
 \begin{defn}
   \begin{itemize}
@@ -2078,6 +2071,35 @@ Sei $\Cat$ eine Kategorie.
 \begin{bem}
   Das letzte Lemma besagt, dass $H_n(\CC{C})$ isomorph zum Kern der Abbildung $b_n : \coker \partial_n \to C_{n-1}$, die durch die universelle Eigenschaft des Kokerns induziert wird, ist.
 \end{bem}
+
+% Übungsblatt 6, Aufgabe 3
+\begin{bem}
+  Sei $\Fais \xrightarrow{f} \Garb \xrightarrow{g} \Harb$ eine Sequenz von Prägarben abelscher Gruppen auf einem topologischen Raum $X$.
+  \begin{itemize}
+    \item Die Sequenz ist eine exakte Sequenz von Prägarben, wenn für alle offenen $U \subseteq X$ gilt: $\im f_U = \ker g_U$.
+    \item Seien $\Fais$, $\Garb$, $\Harb$ sogar Garben. Dann ist die Seq. eine ex. Seq. von Garben, wenn für alle offenen $U \subseteq X$ gilt, dass $\im f_U \subseteq \ker g_U$ und jeder Schnitt $t \in \ker g_U$ lokal Urbilder besitzt, \dh{} es existiert eine offene Überdeckung $U = {\bigcup}_{i \in I} U_i$ und eine Familie von Schnitten $(s_i \in \Fais(U_i))_{i \in I}$ mit 
+    $\fa{i \in I} f_{U_i}(s_i) = t|_{U_i}$.
+  \end{itemize}
+\end{bem}
+
+% Übungsblatt 6, Aufgabe 3a)-d)
+\begin{lem}
+  \begin{itemize}
+    \item Eine Sequenz $\Fais \to \Garb \to \Harb$ von Garben ab. Gruppen ist genau dann exakt, wenn sie halmweise exakt ist, \dh{} für alle $x \in X$ ist die induzierte Sequenz $\Fais_x \to \Garb_x \to \Harb_x$ exakt.
+    \item Wenn eine Sequenz von Garben aufgefasst als Sequenz von Prägarben exakt ist, dann ist sie es auch als Sequenz von Garben.
+    \item Sei $0 \to \Fais \to \Garb \to \Harb \to 0$ eine $\keS{}$ von Prägarben auf einem topol. Raum und $\Fais$, $\Harb$ sogar Garben. Dann ist auch $\Garb$ eine Garbe.
+  \end{itemize}
+\end{lem}
+
+% (etwas später als im Buch)
+\section{Funktoren zwischen abelschen Kategorien}
+
+% II.6.1
+\begin{defn}
+  Ein Funktor $F \!:\! \Aat \!\to\! \Bat$ zw. additiven Kategorien heißt \emph{additiv}, falls für alle $X, Y \!\in\! \Ob(\Aat)$ die Abb. $F \!:\! \Hom(X, Y) \to \Hom(FX, FY)$ ein Morphismus von abelschen Gruppen ist.
+\end{defn}
+
+% Ausgelassen: Beispiel
 
 % II.6.3d)
 \begin{lem}
