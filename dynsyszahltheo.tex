@@ -48,12 +48,12 @@
 
 Dies ist eine übersetzte Zusammenfassung der ersten Kapitel des Buches "`Recurrence in Ergodic Theory and Combinatorial Number Theory"' von Harry Furstenberg.
 
-% Teil I. Wiederkehr in dynamischen Systemen
+% Teil I. Rekurrenz in dynamischen Systemen
 
-% Kapitel 1. Wiederkehr und gleichmäßige Wiederkehr in kompakten Räumen
-\section{1. (Gleichmäßige) Wiederkehr}
+% Kapitel 1. Rekurrenz und gleichmäßige Rekurrenz in kompakten Räumen
+\section{1. (Gleichmäßige) Rekurrenz}
 
-% 1.1. Dynamische Systeme und wiederkehrende Punkte
+% 1.1. Dynamische Systeme und rekurrente Punkte
 
 \begin{defn}
   Ein \emph{dynamisches System} ist ein Paar $(X, G)$ bestehend aus einem kompakten metrischen Raum $X$ und einer Gruppe oder einem Monoid $G$ mit Wirkung
@@ -65,17 +65,17 @@ Dies ist eine übersetzte Zusammenfassung der ersten Kapitel des Buches "`Recurr
 \end{defn}
 
 \begin{bem}
-  Falls $G \!=\! \Z$ oder $M \!=\! \N$, dann bezeichnen wir mit $T \coloneqq T_1$ den Erzeuger der Aktion und nennen $(X, T)$ ein \emph{zykl. System}.
+  Falls $G \!=\! \Z$ oder $M \!=\! \N$, dann bezeichnen wir mit $T \coloneqq T_1$ den Erzeuger der Aktion und nennen $(X, T)$ ein \emph{zyklisches System}.
 \end{bem}
 
 % Def 1.1
 \begin{defn}
   Sei $X$ ein topologischer Raum, $T : X \to X$ stetig. \\
-  Ein Punkt $x \in X$ heißt \emph{wiederkehrend}, falls für alle Umgebungen $V \subset X$ von $x$ ein $n \geq 1$ existiert mit $T^n(x) \in V$.
+  Ein Punkt $x \in X$ heißt \emph{rekurrent}, falls für alle Umgebungen $V \subset X$ von $x$ ein $n \geq 1$ existiert mit $T^n(x) \in V$.
 \end{defn}
 
 \begin{bem}
-  Sei $X$ sogar ein metrischer Raum, $x \in X$ wiederkehrend.
+  Sei $X$ sogar ein metrischer Raum, $x \in X$ rekurrent.
   Dann gibt es eine s.m.s. Folge $(n_k)_{k \in \N}$ mit $d(T^{n_k}(x), x) \to 0$ für $k \to \infty$.
 \end{bem}
 
@@ -89,7 +89,7 @@ Dies ist eine übersetzte Zusammenfassung der ersten Kapitel des Buches "`Recurr
 % nicht explizit im Buch
 \begin{lem}
   \begin{itemize}
-    \item $x \in X$ ist wiederkehrend $\iff$ $x \in Q(x)$
+    \item $x \in X$ ist rekurrent $\iff$ $x \in Q(x)$
     \item $x \in Q(y) \implies T(x) \in Q(y) \iff Q(x) \subseteq Q(y)$
     \item Die Relation $xRy \!\!\coloniff\!\! x \in Q(y)$ ist transitiv.
   \end{itemize}
@@ -97,7 +97,7 @@ Dies ist eine übersetzte Zusammenfassung der ersten Kapitel des Buches "`Recurr
 
 \begin{thm}[\emph{Birkhoff}]
   Sei $X$ ein kompakter topologischer Raum und $T : X \to X$ stetig.
-  Dann gibt es einen wiederkehrenden Punkt $x \in X$.
+  Dann gibt es einen rekurrenten Punkt $x \in X$.
 \end{thm}
 % XXX: Bemerkung: Beweis benutzt Auswahlaxiom?
 
@@ -108,7 +108,7 @@ Dies ist eine übersetzte Zusammenfassung der ersten Kapitel des Buches "`Recurr
 
 % Thm 1.2
 \begin{thm}
-  In einem Kronecker-System sind alle $x \in K$ wiederkehrend.
+  In einem Kronecker-System sind alle $x \in K$ rekurrent.
 \end{thm}
 
 % 1.2 Automorphismen und Homomorphismen von Dynamischen Systemen, Faktoren und Erweiterungen
@@ -131,7 +131,7 @@ Dies ist eine übersetzte Zusammenfassung der ersten Kapitel des Buches "`Recurr
 % Thm 1.3
 \begin{thm}
   Sei $\phi : (X, T) \to (Y, T)$ ein Morphismus von zyklischen Systemen.
-  Wenn $x \in X$ wiederkehrend ist, dann auch $\phi(x)$. \\
+  Wenn $x \in X$ rekurrent ist, dann auch $\phi(x)$. \\
   Allgemeiner: $x \in Q(y) \implies \phi(x) \in Q(\phi(y))$
 \end{thm}
 
@@ -156,8 +156,8 @@ Dies ist eine übersetzte Zusammenfassung der ersten Kapitel des Buches "`Recurr
 
 % Thm 1.4
 \begin{thm}
-  Sei $(X \!=\! Y \!\times\! K, T)$ eine Gruppenerw. von $(Y, T)$ und $y_0 \in Y$ wiederkehrend.
-  Dann sind die Pkte $\Set{(y_0, k)}{k \in K}$ wiederkehrend.
+  Sei $(X \!=\! Y \!\times\! K, T)$ eine Gruppenerw. von $(Y, T)$ und $y_0 \in Y$ rekurrent.
+  Dann sind die Punkte $\Set{(y_0, k)}{k \in K}$ rekurrent.
 \end{thm}
 
 % Fußnote 1 Seite 22
@@ -167,15 +167,15 @@ Dies ist eine übersetzte Zusammenfassung der ersten Kapitel des Buches "`Recurr
 
 % Fußnote 1 Seite 22
 \begin{prop}
-  Ist $x \in X$ in $(X, T)$ wiederkehrend, dann auch in $(X, T^m)$.
+  Ist $x \in X$ in $(X, T)$ rekurrent, dann auch in $(X, T^m)$.
 \end{prop}
 
 \begin{bsp}
   Sei $T \coloneqq \R / \Z$ und $\alpha \in \R$. Dann ist das System
   \[ (T^2, (\theta, \phi) \mapsto (\theta + \alpha, \phi + 2 \theta + \alpha)) \]
   eine Gruppenerweiterung des Kronecker-Systems $(T, \theta \mapsto \theta + \alpha)$. \\
-  Somit sind alle Punkte des Torus $T^2$ wiederkehrend. \\
-  Aus der Wiederkehr des Punktes $(0, 0)$ erhält man:
+  Somit sind alle Punkte des Torus $T^2$ rekurrent. \\
+  Aus der Rekurrenz des Punktes $(0, 0)$ erhält man:
 \end{bsp}
 
 % Thm 1.5
@@ -213,11 +213,11 @@ Dies ist eine übersetzte Zusammenfassung der ersten Kapitel des Buches "`Recurr
 
 % Thm 1.8
 \begin{prop}
-  Sei $(X, T)$ eine isom. Erweiterung von $(Y, T)$ und $y_0 \in Y$ wiederkehrend.
-  Dann sind die Pkte $\Set{(y, m)}{m \in M}$ wiederkehrend.
+  Sei $(X, T)$ eine isom. Erweiterung von $(Y, T)$ und $y_0 \in Y$ rekurrent.
+  Dann sind die Pkte $\Set{(y, m)}{m \in M}$ rekurrent.
 \end{prop}
 
-% 1.3. Wiederkehrende Punkte von Bebutov-Systemen
+% 1.3. Rekurrente Punkte von Bebutov-Systemen
 
 % Defn 1.6
 \begin{defn}
@@ -259,14 +259,14 @@ Dies ist eine übersetzte Zusammenfassung der ersten Kapitel des Buches "`Recurr
 \begin{prop}
   Für eine Sequenz $\omega \in \Lambda^\N$ sind äquivalent:
   \begin{itemize}
-    \item $\omega$ ist wiederkehrend.
+    \item $\omega$ ist rekurrent.
     \item Jedes Wort in $\omega$ kommt ein 2.\,Mal an einer anderen Pos. in $\omega$ vor.
     \item Jedes Wort aus $\omega$ kommt an unendlich oft in $\omega$ vor.
   \end{itemize}
 \end{prop}
 
 \begin{bem}
-  Ein wiederkehrendes Wort $\omega \in \Lambda^\N$ hat die allgemeine Form
+  Ein rekurrentes Wort $\omega \in \Lambda^\N$ hat die allgemeine Form
   \[ \omega = [(aw^{(1)}a)w^{(2)}(aw^{(1)}a)]w^{(3)}[(aw^{(1)}a)w^{(2)}(aw^{(1)}a)]\ldots \]
   mit $a \in \Lambda$ und Wörtern $w^{(1)}, w^{(2)}, \ldots$.
   Damit kann man zeigen:
@@ -297,23 +297,23 @@ Dies ist eine übersetzte Zusammenfassung der ersten Kapitel des Buches "`Recurr
 \begin{thm}
   Seien $\Lambda_1$, $\Lambda_2$ komp. Räume und $\phi : \Lambda_1 \to \Lambda_2$ eine Abbildung. \\
   Für $\omega \in \Lambda_1^\N$ definiere $\omega' \in \Lambda_2^\N$ durch $\omega'(n) \coloneqq f(\omega(n))$. \\
-  Falls $\omega$ wiederkehrend ist und zusätzlich $f$ in allen Punkten $\omega(n)$ stetig ist, dann ist auch $\omega'$ wiederkehrend.
+  Falls $\omega$ rekurrent ist und zusätzlich $f$ in allen Punkten $\omega(n)$ stetig ist, dann ist auch $\omega'$ rekurrent.
 \end{thm}
 
 % Ausgelassen: Beispiel
 
 % Prop 1.12
 \begin{prop}
-  Sei $K$ eine komp. Gruppe und $\xi \in K^\N$ wiederkehrend. Dann ist $\eta \!\in\! K^\N$ definiert durch $\eta(n) \coloneqq \xi(n) \xi(n-1) \cdots \xi(1)$ wiederkehrend.
+  Sei $K$ eine komp. Gruppe und $\xi \in K^\N$ rekurrent. Dann ist $\eta \!\in\! K^\N$ definiert durch $\eta(n) \coloneqq \xi(n) \xi(n-1) \cdots \xi(1)$ rekurrent.
 \end{prop}
 
 % Ausgelassen: Beispiel
 
-% 1.4. Gleichmäßige Wiederkehr und minimale Systeme
+% 1.4. Gleichmäßige Rekurrenz und minimale Systeme
 
 % Defn 1.7
 \begin{defn}
-  Eine Teilmenge $S$ einer abelschen topologischen Gruppe / eines Monoids heißt $G$ \emph{syndetisch}, wenn eine kompakte Menge $K \subset G$ existiert, sodass $\fa{g \in G} \ex{k \in K} gk \in S$.
+  Eine Teilmenge $S$ einer abelschen topologischen Gruppe / eines Monoids $G$ heißt \emph{syndetisch}, wenn eine kompakte Menge $K \subset G$ existiert, sodass $\fa{g \in G} \ex{k \in K} gk \in S$.
 \end{defn}
 
 % TODO: gute deutsche Übersetzung
@@ -324,7 +324,7 @@ Dies ist eine übersetzte Zusammenfassung der ersten Kapitel des Buches "`Recurr
 
 % Defn 1.8
 \begin{defn}
-  Sei $(X, G)$ ein dyn. System. Ein Punkt $x \in X$ heißt \emph{gleichmäßig wiederkehrend}, falls für alle Umgebungen $V \subset X$ von $x$ die Menge $\Set{g \in G}{g.x \in V}$ syndetisch ist.
+  Sei $(X, G)$ ein dyn. System. Ein Punkt $x \in X$ heißt \emph{gleichmäßig rekurrent}, falls für alle Umgebungen $V \subset X$ von $x$ die Menge $\Set{g \in G}{g.x \in V}$ syndetisch ist.
 \end{defn}
 
 % Defn 1.9
@@ -344,7 +344,7 @@ Dies ist eine übersetzte Zusammenfassung der ersten Kapitel des Buches "`Recurr
 % Thm 1.15
 \begin{thm}
   Sei $(X, G)$ ein minimales dynamisches System. \\
-  Dann sind alle $x \in X$ gleichmäßig wiederkehrend.
+  Dann sind alle $x \in X$ gleichmäßig rekurrent.
 \end{thm}
 
 \begin{bem}
@@ -354,25 +354,25 @@ Dies ist eine übersetzte Zusammenfassung der ersten Kapitel des Buches "`Recurr
 
 % Thm 1.16
 \begin{thm}
-  Jedes dyn. System hat einen gleichm. wiederkehrenden Pkt.
+  Jedes dyn. System hat einen gleichm. rekurrenten Pkt.
 \end{thm}
 
 % Thm 1.17, etwas erweitert
 \begin{thm}
   Sei $(X, G)$ ein dyn. System, $x \in X$. Dann sind äquivalent: \\
-  \inlineitem{$x$ ist glm. wiederkehrend.} \enspace
+  \inlineitem{$x$ ist glm. rekurrent.} \enspace
   \inlineitem{Das Untersystem $\clos{Gx}$ ist minimal.}
 \end{thm}
 
 % Thm 1.18
 \begin{thm}
-  In einem Kronecker-System ist jeder Pkt glm. wiederkehrend.
+  In einem Kronecker-System ist jeder Pkt glm. rekurrent.
 \end{thm}
 
 % Thm 1.19 und 1.20
 \begin{thm}
-  Sei $(X, T)$ eine Gruppenerw. oder isometrische Erweiterung von $(Y, T)$ mit Projektion $\pi : (X, T) \to (Y, T)$ und $y_0 \in Y$ glm. wiederkehrend.
-  Dann sind die Pkte $\pi^{-1}(y_0)$ glm. wiederkehrend.
+  Sei $(X, T)$ eine Gruppenerw. oder isometrische Erweiterung von $(Y, T)$ mit Projektion $\pi : (X, T) \to (Y, T)$ und $y_0 \in Y$ glm. rekurrent.
+  Dann sind die Pkte $\pi^{-1}(y_0)$ glm. rekurrent.
 \end{thm}
 
 \begin{bem}
@@ -394,14 +394,14 @@ Dies ist eine übersetzte Zusammenfassung der ersten Kapitel des Buches "`Recurr
 
 % Prop 1.22
 \begin{prop}
-  Sei $\Lambda$ ein endl. Alphabet. Ein Punkt $\omega \in \Lambda^\N$ oder $\omega \in \Lambda^\Z$ ist genau dann glm. wiederkehrend, wenn für jedes Wort in $\omega$ die Menge der Positionen, an denen dieses Wort auftaucht, syndetisch ist.
+  Sei $\Lambda$ ein endl. Alphabet. Ein Punkt $\omega \in \Lambda^\N$ oder $\omega \in \Lambda^\Z$ ist genau dann glm. rekurrent, wenn für jedes Wort in $\omega$ die Menge der Positionen, an denen dieses Wort auftaucht, syndetisch ist.
 \end{prop}
 
 \begin{bem}
-  Eine wiederkehrende Sequenz $\omega$ in der allgemeinen Form
+  Eine rekurrente Sequenz $\omega$ in der allgemeinen Form
   \[ \omega = [(aw^{(1)}a)w^{(2)}(aw^{(1)}a)]w^{(3)}[(aw^{(1)}a)w^{(2)}(aw^{(1)}a)]\ldots \]
-  ist glm. wiederkehrend, wenn die Länge der $w^{(n)}$ beschränkt ist. \\
-  Es existieren also nichtperiodische, glm. wiederkehrende Sequenzen.
+  ist glm. rekurrent, wenn die Länge der $w^{(n)}$ beschränkt ist. \\
+  Es existieren also nichtperiodische, glm. rekurrente Sequenzen.
 \end{bem}
 
 \begin{defn}
@@ -418,13 +418,13 @@ Dies ist eine übersetzte Zusammenfassung der ersten Kapitel des Buches "`Recurr
 
 \begin{lem}
   Sei $V$ ein Vokabular, das folgende Bedingung erfüllt: Für alle $l \in \N$ gibt es ein $L \in \N$, sodass für alle Wörter $w \in V$ der Länge $\abs{w} = l$ gilt: $w$ ist in jedem Wort $v \in V$ der Länge $\abs{v} = L$ enthalten. \\
-  Dann sind alle Sequenzen in $S(V)$ glm. wiederkehrend.
+  Dann sind alle Sequenzen in $S(V)$ glm. rekurrent.
 \end{lem}
 
 \begin{bem}
   Sei $\Lambda = \{ a_1, \ldots, a_r \}$ und $w_1, \ldots, w_r$ Wörter über $\Lambda$, die jeweils alle Buchstaben aus $\Lambda$ enthalten. Sei $V_1 \coloneqq \Lambda$ die Menge der Wörter der Länge 1 über $\Lambda$ und induktiv $V_n$ die Menge der Wörter, die aus einem Wort $w \in V_{n-1}$ durch simultane Substitution
   \[ a_1 \to w_1, \ldots, a_r \to w_r \]
-  hervorgehen und deren Teilwörter. Das Vokabular $V \coloneqq \cup_{n \in \N} V_n$ heißt dann \emph{substitution minimal set}. Alle Sequenzen in $S(V)$ sind gleichmäßig wiederkehrend.
+  hervorgehen und deren Teilwörter. Das Vokabular $V \coloneqq \cup_{n \in \N} V_n$ heißt dann \emph{substitution minimal set}. Alle Sequenzen in $S(V)$ sind gleichmäßig rekurrent.
 \end{bem}
 
 \begin{bem}
@@ -436,7 +436,7 @@ Dies ist eine übersetzte Zusammenfassung der ersten Kapitel des Buches "`Recurr
   \]
   Sei $\Lambda$ kompakt und $(\lambda_i)_{i \in \N}$ eine Folge in $\Lambda$. Setze
   $\omega(n) \coloneqq \lambda_k$, falls $n \in d_k \Z + a_k$.
-  Wenn nun $[-N, N] \subset \sqcup_{k=1}^l (d_k \Z + a_k)$, dann gilt für alle $n \in [-N, N], q \in \Z$: $\omega(n) = \omega(n + q \cdot d_l)$. Somit tritt jedes Wort in $\omega$ periodisch auf und $\omega$ ist glm. wiederkehrend.
+  Wenn nun $[-N, N] \subset \sqcup_{k=1}^l (d_k \Z + a_k)$, dann gilt für alle $n \in [-N, N], q \in \Z$: $\omega(n) = \omega(n + q \cdot d_l)$. Somit tritt jedes Wort in $\omega$ periodisch auf und $\omega$ ist glm. rekurrent.
 \end{bem}
 
 % 1.6. Kombinatorische Anwendungen
@@ -487,7 +487,7 @@ Dies ist eine übersetzte Zusammenfassung der ersten Kapitel des Buches "`Recurr
   Dann gibt es $\forall \, \epsilon > 0$ eine Lsg der Ungleichung $\abs{p(n) - m} < \epsilon$.
 \end{thm}
 
-% 1.8 Nicht wandernde Transformationen und Wiederkehr
+% 1.8 Nicht wandernde Transformationen und Rekurrenz
 
 \begin{defn}
   Sei $X$ ein kompakter metrischer Raum und $T : X \to X$ stetig. \\
@@ -510,7 +510,7 @@ Dies ist eine übersetzte Zusammenfassung der ersten Kapitel des Buches "`Recurr
 
 % Thm 1.27
 \begin{thm}
-  Sei $(X, T)$ nicht wandernd. Dann ist die Menge der nicht wiederkehrenden Punkte in $X$ mager.
+  Sei $(X, T)$ nicht wandernd. Dann ist die Menge der nicht rekurrenten Punkte in $X$ mager.
 \end{thm}
 
 % Ausgelassen: Lem 1.28 über halbstetige Funktionen
@@ -547,25 +547,25 @@ Dies ist eine übersetzte Zusammenfassung der ersten Kapitel des Buches "`Recurr
 
 % Defn 2.2
 \begin{defn}
-  Eine abgeschl. Teilmenge $A \subset X$ eines komp. metr. Raumes heißt \emph{wiederkehrend} für eine Transformation $T : X \to X$, falls für alle $\epsilon \!>\! 0$ und $x \!\in\! A$ ein $y \!\in\! A$ und $n \!\geq\! 1$ existiert, sodass $d(T^n y, x) \!<\! \epsilon$.
+  Eine abgeschl. Teilmenge $A \subset X$ eines komp. metr. Raumes heißt \emph{rekurrent} für eine Transformation $T : X \to X$, falls für alle $\epsilon \!>\! 0$ und $x \!\in\! A$ ein $y \!\in\! A$ und $n \!\geq\! 1$ existiert, sodass $d(T^n y, x) \!<\! \epsilon$.
 \end{defn}
 
 % Lem 2.2
 \begin{lem}
   Sei $A \subset X$ homogen bzgl. $T : X \to X$.
   Angenommen, $\fa{\epsilon \!>\! 0} \ex{x, y \!\in\! A, \, n \!\geq\! 1} d(T^n y, x) \!<\! \epsilon$. 
-  Dann ist $A$ wiederkehrend.
+  Dann ist $A$ rekurrent.
 \end{lem}
 
 \begin{bsp}
-  Sei $(X, T) \!=\! (Y \!\times\! K, T)$ eine Gruppenerw. von $(Y, T)$ und $y_0 \in Y$ wiederkehrend.
-  Dann ist die Faser $\{ y_0 \} \times K$ wiederkehrend.
+  Sei $(X, T) \!=\! (Y \!\times\! K, T)$ eine Gruppenerw. von $(Y, T)$ und $y_0 \in Y$ rekurrent.
+  Dann ist die Faser $\{ y_0 \} \times K$ rekurrent.
 \end{bsp}
 
 % Lem 2.3
 \begin{lem}
-  Sei $A \subset X$ homogen und wiederkehrend bzgl. $T : X \to X$. \\
-  Dann enthält $A$ einen wiederkehrenden Punkt von $(X, T)$.
+  Sei $A \subset X$ homogen und rekurrent bzgl. $T : X \to X$. \\
+  Dann enthält $A$ einen rekurrenten Punkt von $(X, T)$.
 \end{lem}
 
 % Ausgelassen: Lem 2.3 angewandt auf Gruppenerweiterungen
@@ -606,11 +606,11 @@ Dies ist eine übersetzte Zusammenfassung der ersten Kapitel des Buches "`Recurr
 % Ausgelassen: 2.5 Verfeinerung: IP-Mengen
 
 
-% Teil II. Wiederkehr in maßerhaltenden Systemen
+% Teil II. Rekurrenz in maßerhaltenden Systemen
 
 % Kapitel 3. Invariante Maße auf auf kompakten Räumen
 
-% 3.1 Maßerhaltende Systeme und Poincaré-Wiederkehr
+% 3.1 Maßerhaltende Systeme und Poincaré-Rekurrenz
 \section{3.1. Dynamische Systeme auf Maßräumen}
 
 \begin{bem}
@@ -681,7 +681,7 @@ Dies ist eine übersetzte Zusammenfassung der ersten Kapitel des Buches "`Recurr
 % Thm 3.3
 \begin{thm}
   Sei \meST{} ein \meS{}, wobei $X$ ein separabler metrischer Raum ist, dessen offenen Mengen messbar sind. \\
-  Dann sind fast-alle Punkte in $X$ wiederkehrend.
+  Dann sind fast-alle Punkte in $X$ rekurrent.
 \end{thm}
 
 % Nicht im Buch, aber für Frühlingsschule wichtig
@@ -915,7 +915,7 @@ Dies ist eine übersetzte Zusammenfassung der ersten Kapitel des Buches "`Recurr
   Das System $(X, T)$ ist eindeutig ergodisch, wenn jeder Punkt $x \in X$ generisch für ein inv. Maß $\mu_x \in \mathcal{S}$ ist.
 \end{prop}
 
-% Ausgelassen: Sei $(X, T)$ eindeutig ergodisch, $X'$ der Träger des eindeutig ergodischen Maßes, dann ist jeder Punkt in $X'$ glm. wiederkehrend (Beweis mit Techniken dieses Kapitels)
+% Ausgelassen: Sei $(X, T)$ eindeutig ergodisch, $X'$ der Träger des eindeutig ergodischen Maßes, dann ist jeder Punkt in $X'$ glm. rekurrent (Beweis mit Techniken dieses Kapitels)
 
 % Defn 3.5
 \begin{defn}
@@ -1146,8 +1146,8 @@ Dies ist eine übersetzte Zusammenfassung der ersten Kapitel des Buches "`Recurr
 \end{thm}
 
 \begin{bem}
-  Ist $W \!\subset\! \Z$ eine Poincaré-Folge, dann ist $(W \cap m \Z) \setminus \{ 0 \} \neq \emptyset$ für alle $m \geq 1$.
-  Denn: Wenn \meST{} ein maßerhaltendes System ist, dann auch $(X, \Bor, \mu, T^m)$.
+  Ist $W \!\subset\! \Z$ eine Poincaré-Folge, dann ist $(W \cap m \Z) \setminus \{ 0 \} \neq \emptyset$ für $m \geq 1$.
+  Denn: Ist \meST{} ein m.e.S., dann auch $(X, \Bor, \mu, T^m)$.
   % XXX: Wenn $p(X) \in \Q[X]$ mit $p(\Z) \subset \Z$, dann ist $p(\Z)$ nur dann eine Poincaré-Folge, wenn $0 \in p(\Z)$.
 \end{bem}
 
