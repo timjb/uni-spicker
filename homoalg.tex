@@ -1095,7 +1095,7 @@ Dies ist eine übersetzte, korrigierte Zusammenfassung des Buches "`Methods of H
 \end{defn}
 
 \begin{defn}
-  Der \emph{Garbifizierungsfunktor} $s : \PShAb(X) \to \ShAb(X)$ ist def. auf Prägarben abelscher Gruppen $\Fais$ und $U \subset X$ offen durch
+  Der \emph{Garbifizierungsfunktor} $s : \PShAb(X) \!\to\! \ShAb(X), \, \Fais \!\mapsto\! \Fais^+$ ist def. auf Prägarben abelscher Gruppen $\Fais$ und $U \subset X$ offen durch
   \begin{align*}
     s(\Fais)(U) \coloneqq \{ \, & \text{Familien $(s_i \in \Fais(U_i))_{i \in I}$ von lokal kompatiblen} \\
      & \text{Schnitten auf offenen Teilmengen mit $U = {\bigcup}_{i \in I} \, U_i$} \, \} / {\sim}
@@ -1111,6 +1111,11 @@ Dies ist eine übersetzte, korrigierte Zusammenfassung des Buches "`Methods of H
   Es besteht die Adjunktion \enspace $s : \PShAb(X) \rightleftarrows \ShAb(X) : i$. \\
   Die Koeinheit $\epsilon : s \circ i \to \Id_{\ShAb(X)}$ ist ein Isomorphismus.
 \end{thm}
+
+% Übungsblatt 16, Aufgabe 1
+\begin{bem}[Universelle Eigenschaft der Garbifizierung]
+  Sei $\alpha : \Fais \to \Garb$ ein Morphismus von Prägarben. Sei $\Garb$ sogar eine Garbe. Dann gibt es einen einen eindeutigen Morphismus $\alpha^+ : \Fais^+ \to \Garb$ mit $\alpha = \alpha^+ \circ \eta_\Fais$.
+\end{bem}
 
 % Ausgelassen: I.5.7 (Hauptklassen von Garben)
 
