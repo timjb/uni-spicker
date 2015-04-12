@@ -43,11 +43,10 @@
 \newtheorem*{beweis}{Beweis}
 \newtheorem*{frage}{Frage}
 \newtheorem*{situation}{Situation}
-\newtheorem*{thm}{Thm}
-\newtheorem*{lem}{Lemma}
-\newtheorem*{kor}{Korollar}
+\newtheorem*{thm}{Thm} % Theorem
+\newtheorem*{lem}{Lem} % Lemma
+\newtheorem*{kor}{Kor} % Korollar
 \newtheorem*{voraussetzung}{Voraussetzung}
-\newtheorem*{korollar}{Korollar}
 \newtheorem*{acht}{Achtung}
 \newtheorem*{strat}{Strategie}
 \newtheorem*{prob}{Problem}
@@ -62,8 +61,7 @@
 \newtheorem*{modell}{Modell}
 \newtheorem*{sprech}{Sprechweise}
 \newtheorem*{sprechweise}{Sprechweise}
-\newtheorem*{beob}{Beobachtung}
-\newtheorem*{beobachtung}{Beobachtung}
+\newtheorem*{beob}{Beob} % Beobachtung
 \newtheorem*{antwort}{Antwort}
 \newtheorem*{anmerkung}{Anmerkung}
 \newtheorem*{nomenklatur}{Nomenklatur}

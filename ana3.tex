@@ -1274,9 +1274,9 @@
 % Damit ist $(\d x_1(u), \ldots, \d x_j(u))$ eine Dualbasis von $((u, e_1), \ldots, (u, e_n))$
 
 \iffalse % Allgemeiner aufgeschrieben für $k$-Formen
-\begin{beobachtung}
+\begin{beob}
   Für jede Einsform $\omega$ auf $U$ gibt es $n$ Abbildungen $a_j : U \to \R$, $j = 1, \ldots, n$, sodass $\omega = \sum_{j=1}^n a_j \d x_j$.
-\end{beobachtung}
+\end{beob}
 
 \begin{defn}
   Eine Einsform $\omega = \sum_{j=1}^n a_j \d x_j$ heißt stetig/diff'bar/$\Cont^k$, wenn für alle $j \in \{ 1, \ldots, n \}$: $a_j$ ist stetig/total diff'bar/$\Cont^k$.
@@ -1294,23 +1294,23 @@
 % $\{ \d x_{j_1}(u) \wedge \ldots \wedge \d x_{j_k}(u) \mid 1 \leq j_1 < \ldots < j_k \leq n \}$
 % Basis von $\Lambda^k T_u^* U$
 
-\begin{beobachtung}
+\begin{beob}
   Sei $\omega$ eine $k$-Form auf $U$, dann gibt es $\binom{n}{k}$ Funktionen $f_{j_1 \cdots j_k} : U \to \R$, $1 \leq j_1 < \ldots < j_k \leq n$, sodass
   \[ \omega = \sum_{\mathclap{j_1 < \ldots < j_k}} f_{j_1 \cdots j_k} \d x_{j_1} \wedge \ldots \wedge \d x_{j_k}. \]
-\end{beobachtung}
+\end{beob}
 
 \begin{defn}
   Die $k$-Form $\omega$ auf $U$ heißt stetig/diff'bar/$\Cont^k$, wenn alle $\binom{n}{k}$ Abbildungen $f_{j_1 \cdots j_k} : U \to \R$ stetig/total diff'bar/$\Cont^k$ sind.
 \end{defn}
 
-\begin{beobachtung}
+\begin{beob}
   \begin{itemize}
     \item $\{ k\text{-Form auf } U \}$ ist Modul über $\{ f : U \to \R \}$
     % $(\omega_1 + \omega_2)(u) = \omega_1(u) + \omega_2(u)$
     % $(f \cdot \omega)(u) = f(u) \cdot \omega(u)$
     \item Für eine $k$-Form $\omega$ und eine $l$-Form $\eta$ ist $\omega \wedge \eta$ definiert durch $(\omega \wedge \eta)(u) \coloneqq \omega(u) \wedge \eta(u)$ für $u \in U$ eine $(k{+}l)$-Form auf $U$.
   \end{itemize}
-\end{beobachtung}
+\end{beob}
 
 \begin{defn}
   Sei $\omega = \sum_{\mathclap{j_1 < \ldots < j_k}} f_{j_1 \cdots j_k} (\d x_{j_1} \wedge \ldots \wedge \d x_{j_k})$ eine diff'bare $k$-Form auf $U$, dann heißt die $(k{+}1)$-Form
@@ -1386,9 +1386,9 @@
   \end{itemize}
 \end{defn}
 
-\begin{beobachtung}
+\begin{beob}
   Jede diff'bare exakte $k$-Form auf $U$ ist geschlossen.
-\end{beobachtung}
+\end{beob}
 
 % Frage: Gilt auch die Umkehrung?
 
