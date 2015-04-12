@@ -584,7 +584,7 @@ Dies ist eine übersetzte Zusammenfassung der ersten Kapitel des Buches "`Recurr
 % 2.3. Das mehrdimensionale van-der-Waerden-Theorem
 
 \begin{defn}
-  Eine \emph{arithmetische Sequenz} der Länge $N \in \N$ ist eine Teilmenge $A \subset \N$ der Form $A = \Set{a + ib}{i = 1, \nldots, N}$ mit $a \!\in\! \N$, $b \!\geq\! 1$.
+  Eine \emph{arithmetische Progression} der Länge $N \in \N$ ist eine Teilmenge $A \subset \N$ der Form $A = \Set{a + ib}{i = 0, \nldots, N}$ mit $a \!\in\! \N$, $b \!\geq\! 1$.
 \end{defn}
 
 % Thm 2.7
@@ -599,7 +599,7 @@ Dies ist eine übersetzte Zusammenfassung der ersten Kapitel des Buches "`Recurr
 
 \begin{thm}[\emph{van der Waerden}]
   Sei $\N = B_1 \cup \ldots \cup B_q$ eine Partition. \\
-  Dann enthält ein $B_j$ arithmetische Sequenzen beliebiger Länge.
+  Dann enthält ein $B_j$ arithmetische Progressionen beliebiger Länge.
 \end{thm}
 
 % Ausgelassen: 2.4 Umformulierungen und Anwendungen: Diophantinische Approximation
@@ -1266,5 +1266,43 @@ Dies ist eine übersetzte Zusammenfassung der ersten Kapitel des Buches "`Recurr
     \text{in } L^2(X, \Bor, \nu).
   \]
 \end{thm}
+
+\begin{samepage}
+  \section{4.4. Satz von Roth}
+\end{samepage}
+
+% Thm 3.21
+\begin{thm}[\emph{Szemerédi}]
+  Habe $S \subset \Z$ positive obere Banachdichte. Dann enthält $S$ arithmetische Progressionen beliebiger Länge.
+\end{thm}
+
+% Thm 7.15
+\begin{prop}[Multiple Poincaré-Recurrenz, MPR]
+  Sei $(X, \Bor, \mu)$ ein W-Raum und $T_1, \ldots, T_l : X \to X$ kommutierende maßerherhaltende Abbildungen. Dann gibt es für alle $A \in \Bor$ mit $\mu(A) > 0$ ein $n \geq 1$ mit
+  \[ \mu(A \cap T_1^{-n} \cap \ldots \cap T_l^{-n}) > 0. \]
+\end{prop}
+
+% nach Thm 3.21
+\begin{lem}
+  Angenommen, MPR gilt für alle erg. \meS{} \meST{} im Spezialfall $T_1 = T$, $T_2 = T^2$, \ldots, $T_l = T^l$ mit $l \in \N$ fest. \\
+  Habe $S \subset \Z$ positive obere Banachdichte. \\
+  Dann enthält $S$ arithmetische Progressionen der Länge $l$.
+\end{lem}
+
+% Thm 4.27
+\begin{thm}
+  Sei \meST{} ein ergodisches \meS{}, $f : X \to \R_{\geq 0}$ beschränkt und messbar mit $\Int{}{}{f}{\mu} > 0$. Dann gilt
+  \[ \lim_{N \to \infty} \tfrac{1}{N+1} \sum_{n=0}^N \Int{}{}{f(x) f(T^n x) f(T^{2n} x)}{\mu(x)} > 0. \]
+\end{thm}
+
+% Thm 4.27
+\begin{kor}
+  MPR gilt für alle ergodischen \meS{} \meST{} im Spezialfall $T_1 = T$, $T_2 = T^2$.
+\end{kor}
+
+\begin{kor}[\emph{Satz von Roth}]
+  Habe $S \subset \Z$ positive obere Banachdichte. \\
+  Dann enthält $S$ arithmetische der Länge 2.
+\end{kor}
 
 \end{document}
