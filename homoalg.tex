@@ -972,7 +972,7 @@ Dies ist eine übersetzte, korrigierte Zusammenfassung des Buches "`Methods of H
 
 \begin{defn}
   Eine \emph{Garbe} auf einem topol. Raum $X$ ist eine Prägarbe $\Fais$, für die gilt:
-  Für alle Familien $(U_i)_{i \in I}$ von offenen Teilmengen und Schnitten $(s_i \in \Fais(U_i))_{i \in I}$, die miteinander verträglich sind, \dh{}
+  Für alle Familien $(U_i)_{i \in I}$ von offenen Teilmengen und Schnitten $(s_i \in \Fais(U_i))_{i \in I}$, die miteinander kompatibel sind, \dh{}
   \[ \fa{i, j \in I} s_i|_{U_i \cap U_j} = s_j|_{U_i \cap U_j}, \]
   gibt es genau einen Schnitt $s \in \Fais(\cup_{i \in I} U_i)$ mit $\fa{i \in I} s_i = s|_{U_i}$.\\
   Ein Morphismus zw. Garben ist ein Morphismen zw. den Prägarben.
@@ -1089,25 +1089,22 @@ Dies ist eine übersetzte, korrigierte Zusammenfassung des Buches "`Methods of H
   Wenn $\Fais$ schon eine Garbe ist, dann ist $f$ ein Isomorphismus.
 \end{prop}
 
-\begin{bem}
+\begin{defn}
+  Sei $\Fais$ eine Prägarbe auf einem topologischen Raum $X$. \\
+  Eine Familie $(s_i \in \Fais(U_i))_{i \in I}$ von Schnitten auf offenen Teilmengen von $X$ heißt \emph{lokal kompatibel}, falls für alle $i, j \in I$ und $x \in U_i \cap U_j$ eine Umgebung $V \subset U_i \cap U_j$ von $x$ mit $s_i|_V = s_j|_V$ existiert.
+\end{defn}
+
+\begin{defn}
   Der \emph{Garbifizierungsfunktor} $s : \PShAb(X) \to \ShAb(X)$ ist def. auf Prägarben abelscher Gruppen $\Fais$ und $U \subset X$ offen durch
-  \iffalse
   \begin{align*}
-    s(\Fais)(U) \coloneqq \{ \, & \text{Paare $(U_i, s_i)_{i \in I}$, wobei $(U_i)_{i \in I}$ eine offene Überdeckung} \\
-     & \text{ist und $(s_i \!\in\! \Fais(U_i))_{i \in I}$ lokal kompatibel sind, \dh{}} \\
-     & \fa{i, j\!}\! \fa{x \!\in\! U_i \!\cap\! U_j\!}\! \ex{V \!\subset\! U_i \!\cap\! U_j \text{ offen}} s_i|_V \!=\! s_j|_V \, \} / {\sim}
-  \end{align*}\vspace{-16pt}
-  \fi
-  \begin{align*}
-    s(\Fais)(U) \coloneqq \{ \, & \text{Paare $(U_i, s_i)_{i \in I}$, wobei $U = {\bigcup}_{i \in I} U_i$ und $U_i \subset U$ offen} \\
-     & \text{ist und $(s_i \!\in\! \Fais(U_i))_{i \in I}$ lokal kompatibel sind, \dh{}} \\
-     & \fa{i, j\!}\! \fa{x \!\in\! U_i \!\cap\! U_j\!}\! \ex{V \!\subset\! U_i \!\cap\! U_j \text{ offen}} s_i|_V \!=\! s_j|_V \, \} / {\sim}
+    s(\Fais)(U) \coloneqq \{ \, & \text{Familien $(s_i \in \Fais(U_i))_{i \in I}$ von lokal kompatiblen} \\
+     & \text{Schnitten auf offenen Teilmengen mit $U = {\bigcup}_{i \in I} \, U_i$} \, \} / {\sim}
   \end{align*}\vspace{-16pt}
   \begin{align*}
-    (U_i, s_i) \sim (V_j, s_j) \!\! \coloniff \, & \ex{\text{offene Überdeckung $(W_k)_{k \in K}$ von U}} \\
-    & \fa{i, j, k\!}\! s_i|(U_i \!\cap\! V_j \!\cap\! W_k) = s_j|(U_i \!\cap\! V_j \!\cap\! W_k).
+    (s_i)_{i \in I} \sim (t_j)_{j \in J} \!\! \coloniff \, & \ex{\text{offene Überdeckung $(W_k)_{k \in K}$ von U}} \\
+    & \fa{i, j, k\!}\! s_i|(U_i \!\cap\! V_j \!\cap\! W_k) = t_j|(U_i \!\cap\! V_j \!\cap\! W_k).
   \end{align*}
-\end{bem}
+\end{defn}
 
 % II.5.13
 \begin{thm}
