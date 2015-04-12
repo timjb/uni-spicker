@@ -50,7 +50,8 @@
 % TODO:
 % * Diagrammjadgregeln
 % * Propositionen über welke/weiche/feine Garben von ÜB 6
-% * Serresche Quotientenkategorien
+% * Das Bild eines Garbenmorphismus ist die Garbifizierung des Bildes des Morphismus aufgefasst als Prägarbenmorphismus
+% * Serresche Quotientenkategorien (?)
 
 \begin{document}
 
@@ -499,7 +500,7 @@ Dies ist eine übersetzte, korrigierte Zusammenfassung des Buches "`Methods of H
     \Hom_\Dat(F(\blank), \blank) \cong \Hom_\Cat(\blank, G(\blank))
   \]
   gibt (dabei sind beide Seiten Funktoren $\Cat^\op \times \Dat \to \SetC$). \\
-  Dann heißt $G$ auch \emph{rechtsadjungiert} zu $F$. Man notiert $F \ladj G$.
+  Dann heißt $G$ auch \emph{rechtsadjungiert} zu $F$. Man notiert $F \ladj G$ oder sagt, es bestehe eine Adjunktion \enspace $F : \Cat \rightleftarrows \Dat : G$.
 \end{defn}
 
 \begin{bem}
@@ -546,8 +547,8 @@ Dies ist eine übersetzte, korrigierte Zusammenfassung des Buches "`Methods of H
 \end{lem}
 
 \begin{bem}
-  Sei $(F : \Cat \to \Dat) \ladj (G : \Dat \to \Cat)$ eine Adjunktion und $\Jat$ klein. \\
-  Dann gibt es eine ind. Adjunktion $(F \circ \blank : [\Jat, \Cat] \to [\Jat, \Dat]) \ladj (G \circ \blank)$.
+  Sei $F : \Cat \rightleftarrows \Dat : G$ eine Adjunktion und $\Jat$ klein. \\
+  Dann gibt es eine ind. Adjunktion $(F \circ \blank) : [\Jat, \Cat] \rightleftarrows [\Jat, \Dat] : (G \circ \blank)$.
 \end{bem}
 
 \begin{bspe}
@@ -1325,9 +1326,15 @@ Dies ist eine übersetzte, korrigierte Zusammenfassung des Buches "`Methods of H
 \end{defn}
 
 \begin{defn}
+  Sei $X$ ein topol. Raum. Dann ist $\Ouv(X)$ ein Situs mit
+  \[ C(U) \coloneqq \{ \, \text{von offenen Überdeckungen von $U$ erzeugte Siebe} \, \}. \]
+\end{defn}
+
+\begin{defn}
   \begin{itemize}
-    \item Eine \emph{Prägarbe} von Mengen auf einem Situs $\Sit$ ist ein kontravarianter Funktor $\Garb : \Sit^\op \to \SetC$.
-    \item Allgemeiner ist eine $\mathcal{C}$-wertige Prägarbe ein Funktor $\Fais : \Sit^\op \to \Cat$ (z.\,B. $\Cat = \AbGrp, \RMod, \Top$).
+    %\item Eine \emph{Prägarbe} von Mengen auf einem Situs $\Sit$ ist ein kontravarianter Funktor $\Garb : \Sit^\op \to \SetC$.
+    \item Eine $\mathcal{C}$-wertige Prägarbe ist ein Funktor $\Fais : \Sit^\op \to \Cat$ \\
+    (z.\,B. $\Cat = \SetC, \AbGrp, \RMod, \Top$).
     \item Ein Morphismus zwischen Prägarben $\Fais$ und $\Garb$ auf demselben Situs ist eine natürliche Transformation zwischen $\Fais$ und $\Garb$.
   \end{itemize}
 \end{defn}
@@ -1342,8 +1349,8 @@ Dies ist eine übersetzte, korrigierte Zusammenfassung des Buches "`Methods of H
 \end{defn}
 
 \begin{bem}
-  Die Notationen und Sprechweisen für (Prä-)Garben auf gew. topol. Räumen werden auch für Garben auf Siten angewendet. \\
-  Man notiert weiterhin $s|_V \coloneqq \Garb(f)(s)$ für für die Einschränkung eines Schnittes $s \in \Garb(U)$ über $f \in \Hom_\Sit(V, U)$ (wohlwissend, dass die Einschränkung auch von $f$ abhängt).
+  Die Notationen und Sprechw. für (Prä-)Garben auf topol. Räumen werden auch für Garben auf Siten verwendet.
+  Man notiert auch $s|_V \coloneqq \Garb(f)(s)$ für die Einschränkung eines Schnittes $s \in \Garb(U)$ über $f \in \Hom_\Sit(V, U)$, wohlwissend, dass sie auch von $f$ abhängt.
 \end{bem}
 
 % II.4.16
@@ -1366,9 +1373,7 @@ Dies ist eine übersetzte, korrigierte Zusammenfassung des Buches "`Methods of H
 
 
 \begin{samepage}
-
-\section{Komplexe und (Ko-)Homologie}
-
+  \section{Komplexe und (Ko-)Homologie}
 \end{samepage}
 
 % I.4 Homologie und Kohomologie
