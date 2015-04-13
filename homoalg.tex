@@ -39,6 +39,7 @@
 \newcommand{\Nerve}{\mathcal{N}} % Nerv einer Kategorie
 \DeclareMathOperator{\coker}{coker} % Kokern
 \DeclareMathOperator{\coim}{coim} % Kobild
+\newcommand{\clos}[1]{\overline{#1}} % topologischer Abschluss
 
 % TODO
 \newcommand{\AMod}{\text{$A$-$\Mod$}} % Kategorie der A-Linksmoduln
@@ -1199,6 +1200,11 @@ Dies ist eine übersetzte, korrigierte Zusammenfassung des Buches "`Methods of H
   Man kann $\theta$ als Garbenmorph. $\theta : \O_N \to \varphi_\bullet(\O_M)$ auffassen.
 \end{bem}
 
+\begin{defn}
+  Sei $(M, \O_M)$ ein geringter Raum. Eine \emph{(Prä-)Garbe von $\O_M$-Moduln} ist eine mengenwertige (Prä-)Garbe $\Fais$ auf $M$, sodass $\Fais(U)$ ein $\O_M(U)$-Modul für alle offenen $U \subset M$ ist. Desweiteren soll die Skalarmultiplikation mit Einschränkungen verträglich sein:
+  \[ \fa{V \opn U \opn M} \fa{z \in \O_M(U), \, r \in \Fais(U)} (z \cdot r)|_V = (z|_V) \cdot (r|_V). \]
+\end{defn}
+
 \begin{bsp}
   Sei $(M, \O_M)$ eine glatte Mft. Sei $\mathcal{D}_M$ die Garbe der linearen, derivativen Operatoren, also
   \[ \mathcal{D}_M(U) \!\coloneqq\! \{ \, P \!:\! \O_M(U) \!\to\! \O_M(U), \, P \!=\! \sum f_I(z) \tfrac{\partial^I}{\partial z^I} \text{ in lok. Koord.} \, \}. \]
@@ -1234,7 +1240,7 @@ Dies ist eine übersetzte, korrigierte Zusammenfassung des Buches "`Methods of H
 \end{defn}
 
 \begin{bem}
-  Sei $A$ ein Integritätsbereich. Dann ist das Nullideal $(0) \in \Spec(A)$ ein generischer Punkt, \dh{} der topologische Abschluss von $(0)$ ist ganz $\Spec(A)$.
+  Sei $A$ ein Integritätsbereich. Dann ist das Nullideal $(0) \in \Spec(A)$ ein generischer Punkt, \dh{} $\clos{(0)} = \Spec(A)$.
 \end{bem}
 
 % Nicht im Buch
@@ -1247,13 +1253,12 @@ Dies ist eine übersetzte, korrigierte Zusammenfassung des Buches "`Methods of H
 % XXX: In eine noch zu erstellende Algebra-Zusammenfassung auslagern?
 \begin{defn}
   Ein Ring $R$ heißt \emph{lokal}, wenn er eine der folgenden äquivalenten Bedingungen erfüllt:
-  \begin{itemize}
-    \item Er besitzt genau ein maximales Linksideal.
-    \item Er besitzt genau ein maximales Rechtsideal.
+  \begin{enumerate}
+    \item Er besitzt genau ein maximales \enspace a) Linksideal \enspace b) Rechtsideal.
     %\item $\sum_{i=0}^n x_i$ ist eine Einheit $\implies$ ein $x_i$ ist eine Einheit.
     \item Wenn eine endliche (evtl. leere) Summe von Ringelementen eine Einheit ist, dann auch einer der Summanden (insb. gilt $0 \not= 1$).
     \item $\Spec(R)$ hat genau einen abgeschl. Punkt (das maximale Ideal).
-  \end{itemize}
+  \end{enumerate}
 \end{defn}
 
 \begin{bem}
@@ -2163,7 +2168,7 @@ Sei $\Cat$ eine Kategorie.
 % II.6.7
 \begin{prop}
   Sei $X$ ein topologischer Raum, $U \subseteq X$ offen. Der Funktor
-  \[ \ShAb(X) \to \AbGrp, \enspace \Fais \mapsto \Gamma(U, \Fais) \]
+  \[ \Gamma(U, \blank) : \ShAb(X) \to \AbGrp, \enspace \Fais \mapsto \Gamma(U, \Fais) \]
   ist links-exakt.
 \end{prop}
 
@@ -2310,5 +2315,28 @@ Sei $\Cat$ eine Kategorie.
     \item Induktive Limiten von flachen Moduln sind flach.
   \end{itemize}
 \end{lem}
+
+% TODO: Abschnitt II.6.14 "Azyklische Objekte eines Situs"
+
+% TODO: Verschieben in Garbenabschnitt?
+% II.6.15
+\begin{defn}
+  Sei $f : X \to Y$ eine stetige Abbildung zwischen topol. Räumen. \\
+  Das \emph{direkte Bild} $f_\bullet(\Fais)$ einer (Prä-)Garbe $\Fais$ auf $X$ ist die durch
+  \[
+    f_\bullet(\Fais)(U) \coloneqq \Fais(f^{-1}(U)) \quad
+    \text{für $U \subset Y$ offen}
+  \]
+  definierte (Prä-)Garbe auf $Y$.
+\end{defn}
+
+% II.6.16, ausgelassen b)
+\begin{bem}
+  \begin{itemize}
+    \item Die Konstruktion funkt. für (Prä-)Garben von Mengen, ab. Gruppen, $A$-Linksmoduln und auch für $\O_X$-Modulgarben, wenn $f : (X, \O_X) \!\to\! (Y, \O_Y)$ ein Morphismus von geringten Räumen ist.
+    \item $f_\bullet$ ist ein Funktor $f_\bullet : \MShSet(X) \to \MShSet(Y)$.
+    \item $(\blank)_\bullet$ ist selbst funktoriell: $f_\bullet \circ g_\bullet = (f \circ g)_\bullet$, $\id_\bullet = \Id$.
+  \end{itemize}
+\end{bem}
 
 \end{document}
