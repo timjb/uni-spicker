@@ -56,6 +56,7 @@
 % * Das Bild eines Garbenmorphismus ist die Garbifizierung des Bildes des Morphismus aufgefasst als Prägarbenmorphismus
 % * Serresche Quotientenkategorien (?)
 % * "Direct image with compact support" und Adjungierter
+% K-Theorie einer abelschen Kategorie
 
 \begin{document}
 
@@ -449,17 +450,38 @@ Dies ist eine übersetzte, korrigierte Zusammenfassung des Buches "`Methods of H
   \end{itemize}
 \end{defn}
 
+% nicht im Buch
+\begin{defn}
+  \begin{itemize}
+    \item Eine Kategorie $\Cat$ heißt \emph{(ko-)vollständig}, wenn alle kleinen (Ko-)Limiten (\dh{} (Ko-)Limiten von Funktoren $F : \Jat \to \Cat$ mit einer kleinen Kategorie $\Jat$) in $\Cat$ existieren.
+    \item Eine Kategorie $\Cat$ heißt \emph{endlich (ko-)vollständig}, wenn alle endlichen (Ko-)Limiten in $\Cat$ existieren.
+  \end{itemize}
+\end{defn}
+
+\begin{bspe}
+  Vollständig sind: \enspace
+  \inlineitem{$\SetC$,}
+  \inlineitem{$\Grp$,}
+  \inlineitem{$\AbGrp$,}
+  \inlineitem{$\Top$,}
+  \inlineitem{$k$-$\Vect$.}
+\end{bspe}
+% XXX: Beispiele für kovollständige Kategorien?
+
 % II.3.20
 \begin{satz}
   Angenommen, eine Kategorie $\Cat$ enthält ein term. Objekt, den Differenzkern von allen parallelen Morphismen $f, g \in \Hom_\Cat(X, Y)$ und das Produkt $X \times Y$ von allen Paaren von Objekten. \\
-  Dann existieren alle endlichen Limiten in $\Cat$, \dh{} der Limes von jedem Funktor $F : \Jat \to \Cat$, wobei $\Jat$ endlich ist.
-  Duales gilt für endl. Kolimiten mit initialem Obj., Kodifferenzkern und Koprodukten.
+  Dann ist $\Cat$ endlich vollständig.
+  Duales gilt für endliche Kolimiten mit initialem Objekt, Kodifferenzkern und Koprodukten.
 \end{satz}
 
-% II.3.21
-\begin{kor}
-  In $\SetC$ existieren alle endlichen Limiten und Kolimiten.
-\end{kor}
+% Ausgelassen, da später sogar die Vollständigkeit von $\SetC$ erwähnt wird
+\iffalse
+  % II.3.21
+  \begin{kor}
+    In $\SetC$ existieren alle endlichen Limiten und Kolimiten.
+  \end{kor}
+\fi
 
 % Nicht (dort) im Buch
 \begin{bem}
@@ -478,21 +500,6 @@ Dies ist eine übersetzte, korrigierte Zusammenfassung des Buches "`Methods of H
   \[ \Lim (F \circ D) \cong F(\Lim D). \]
   Ein Funktor $F$ heißt \emph{kostetig}, wenn er \emph{Kolimiten bewahrt}.
 \end{defn}
-
-% nicht im Buch
-\begin{defn}
-  Eine Kategorie $\Cat$ heißt \emph{(ko-)vollständig}, wenn alle kleinen (Ko-)Limiten (\dh{} (Ko-)Limiten von Funktoren $F : \Jat \to \Cat$ mit einer kleinen Kategorie $\Jat$) in $\Cat$ existieren.
-\end{defn}
-
-\begin{bspe}
-  Vollständig sind: \enspace
-  \inlineitem{$\SetC$,}
-  \inlineitem{$\Grp$,}
-  \inlineitem{$\AbGrp$,}
-  \inlineitem{$\Top$,}
-  \inlineitem{$k$-$\Vect$.}
-\end{bspe}
-% XXX: Beispiele für kovollständige Kategorien?
 
 % TODO: Kommutativität von Limiten
 
@@ -1820,7 +1827,7 @@ Sei $\Cat$ eine Kategorie.
 \end{bem}
 
 \begin{acht}
-  Der Kokern ist \textit{nicht} das darstellende Obj. des Funktors
+  Der Kokern ist {\em nicht} das darstellende Obj. des Funktors
   \[
     \Cat^\op \to \AbGrp, \enspace
     Z \mapsto \coker(\varphi \circ \blank : X(Z) \to Y(Z)), \enspace
@@ -1941,6 +1948,14 @@ Sei $\Cat$ eine Kategorie.
 
 \begin{kor}
   Ab. Kategorien sind binormal, \dh{} normal u. konormal.
+\end{kor}
+
+\begin{bem}
+  Der (Ko-)Differenzkern von Morphismen $f, g \in \Hom_\Aat(X, Y)$ ist der (Ko-)Kern von $f - g \in \Hom(X, Y)$.
+\end{bem}
+
+\begin{kor}
+  Abelsche Kategorien sind endlich vollständig.
 \end{kor}
 
 % II.6.3d)
@@ -2377,5 +2392,28 @@ Sei $\Cat$ eine Kategorie.
 
 % TODO: gilt $f^\bullet = (f^{-1})_\bullet$ für Homöomorphismen $f$?
 % TODO: Konstruktion von $f^*$ für Modulgarben verstehen, aufschreiben
+
+% Übungsblatt 17, Aufgabe 2
+\begin{lem}
+  Sei $F : \Aat \to \Cat$ ein add. Funktor zw. ab. Kategorien. Dann gilt:
+  \begin{align*}
+    \text{$F$ ist linksexakt} & \, \iff \text{$F$ bewahrt endliche Limiten} \\
+    \text{$F$ ist rechtsexakt} & \, \iff \text{$F$ bewahrt endliche Kolimiten}
+  \end{align*}
+\end{lem}
+
+% II.6.20
+\begin{kor}
+  Mit RAPL bzw. LAPC folgt: Rechtsadjungierte additive Funktoren sind linksexakt, linksadjungierte rechtsexakt.
+\end{kor}
+
+\begin{bem}
+  %Es folgt die Rechtsexaktheit von $f_\bullet$ und die Linksexaktheit von $f^\bullet$. Es gilt sogar:
+  Es folgt: $f_\bullet$ ist rechts- und $f^\bullet$ linksexakt. Es gilt sogar:
+\end{bem}
+
+\begin{lem}
+  $f^\bullet$ ist exakt.
+\end{lem}
 
 \end{document}
