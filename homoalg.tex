@@ -40,6 +40,7 @@
 \DeclareMathOperator{\coker}{coker} % Kokern
 \DeclareMathOperator{\coim}{coim} % Kobild
 \newcommand{\clos}[1]{\overline{#1}} % topologischer Abschluss
+\newcommand{\pt}{\{ \, \mathrm{pt} \, \}} % Einpunktiger Raum
 
 % TODO
 \newcommand{\AMod}{\text{$A$-$\Mod$}} % Kategorie der A-Linksmoduln
@@ -49,10 +50,12 @@
 \delimiterfactor=701
 
 % TODO:
+% * Abschnitt über (Ko-) Homologie verallgemeinern, hinter dem Abschnitt über abelsche Kategorien stellen (?)
 % * Diagrammjadgregeln
 % * Propositionen über welke/weiche/feine Garben von ÜB 6
 % * Das Bild eines Garbenmorphismus ist die Garbifizierung des Bildes des Morphismus aufgefasst als Prägarbenmorphismus
 % * Serresche Quotientenkategorien (?)
+% * "Direct image with compact support" und Adjungierter
 
 \begin{document}
 
@@ -1098,7 +1101,7 @@ Dies ist eine übersetzte, korrigierte Zusammenfassung des Buches "`Methods of H
 \begin{defn}
   Der \emph{Garbifizierungsfunktor} $s : \PShAb(X) \!\to\! \ShAb(X), \, \Fais \!\mapsto\! \Fais^+$ ist def. auf Prägarben abelscher Gruppen $\Fais$ und $U \subset X$ offen durch
   \begin{align*}
-    s(\Fais)(U) \coloneqq \{ \, & \text{Familien $(s_i \in \Fais(U_i))_{i \in I}$ von lokal kompatiblen} \\
+    s(\Fais)(U) \coloneqq \{ \, & \text{Familien $(s_i \in \Fais(U_i))_{i \in I}$ von lokal kompatiblen} \\[-2pt]
      & \text{Schnitten auf offenen Teilmengen mit $U = {\bigcup}_{i \in I} \, U_i$} \, \} / {\sim}
   \end{align*}\vspace{-16pt}
   \begin{align*}
@@ -1389,7 +1392,7 @@ Dies ist eine übersetzte, korrigierte Zusammenfassung des Buches "`Methods of H
 \begin{defn}
   \begin{itemize}
     \item Ein \emph{Kettenkomplex} $\CC{C}$ ist eine Folge $(C_n)_{n \in \N}$ von abelschen Gruppen und Gruppenhomomorphismen $\partial_n : C_n \to C_{n-1}$ mit der Eigenschaft $\partial_{n-1} \circ \partial_n = 0$.
-    \item Ein \emph{Kokettenkomplex} $\CCC{C}$ ist eine Folge $(C^n)_{n \in \N}$ von abelschen Gruppen und Gruppenhomomorphismen $\delta^n : C^n \to C^{n+1}$ mit der Eigenschaft $\delta^{n+1} \circ \delta^n = 0$.
+    \item Ein \emph{Kokettenkomplex} $\CCC{C}$ ist eine Folge $(C^n)_{n \in \N}$ von ab. Gr. und Gruppenhomom. $\delta^n : C^n \to C^{n+1}$ mit $\delta^{n+1} \circ \delta^n = 0$.
   \end{itemize}
 \end{defn}
 
@@ -2333,10 +2336,46 @@ Sei $\Cat$ eine Kategorie.
 % II.6.16, ausgelassen b)
 \begin{bem}
   \begin{itemize}
-    \item Die Konstruktion funkt. für (Prä-)Garben von Mengen, ab. Gruppen, $A$-Linksmoduln und auch für $\O_X$-Modulgarben, wenn $f : (X, \O_X) \!\to\! (Y, \O_Y)$ ein Morphismus von geringten Räumen ist.
     \item $f_\bullet$ ist ein Funktor $f_\bullet : \MShSet(X) \to \MShSet(Y)$.
     \item $(\blank)_\bullet$ ist selbst funktoriell: $f_\bullet \circ g_\bullet = (f \circ g)_\bullet$, $\id_\bullet = \Id$.
+    \item Die Konstruktion funktioniert für (Prä-)Garben von Mengen, ab. Gruppen, $A$-Linksmoduln und auch für $\O_X$-Modulgarben, wenn $f : (X, \O_X) \!\to\! (Y, \O_Y)$ ein Morphismus von geringten Räumen ist.
   \end{itemize}
 \end{bem}
+
+% TODO: funktioniert das inverse Bild auch für Prägarben
+
+% II.6.17
+\begin{defn}
+  Sei $f : X \to Y$ eine stetige Abbildung zwischen topol. Räumen. \\
+  Das \emph{inverse Bild} ist der Funktor $f^\bullet : \ShSet(Y) \to \ShSet(X)$, der für Garben $\Fais \in \ShSet(Y)$ und $U \subset X$ offen definiert ist durch
+  \begin{align*}
+    f^\bullet(\Fais)(U) \coloneqq \{ \, & \text{Familien $(s_x \in \Fais_{f(x)})_{x \in U}$ von Keimen, für die gilt:} \\[-2pt]
+    & \text{Für alle $x \in X$ gibt es eine Umgebung $V \subset X$ von $f(x)$,} \\[-2pt]
+    & \text{eine Umgebung $W \subset U \cap f^{-1}(V)$ von $x$ und einen} \\[-2pt]
+    & \text{Schnitt $t \in \Fais(V)$ mit $\fa{x \in W} t_x = s_x$} \, \}.
+  \end{align*}
+\end{defn}
+
+% II.6.17
+\begin{prop}
+  Sei $f : X \to Y$ eine stetige Abb. zwischen topol. Räumen. \\
+  Dann besteht die Adjunktion \enspace $f^\bullet : \ShSet(Y) \rightleftarrows \ShSet(X) : f_\bullet$.
+\end{prop}
+
+% II.6.18 (Eigenschaften des inversen Bildes)
+\begin{bem}
+  \begin{itemize}
+    \item $(\blank)^\bullet$ ist kontravar. funktoriell: $g^\bullet \circ f^\bullet = (f \circ g)^\bullet$, $\id^\bullet = \Id$.
+    \item Alternative Definition: $f^\bullet(\Fais) \coloneqq (U \mapsto \Gamma(f(U), \Fais))^+$
+    % Ausgelassen: Zweite alternative Definition
+    \item Es gilt $f^\bullet(\Fais)_x = \Fais_{f(x)}$ für alle $x \in X$.
+    \item Die Konstruktion funktioniert für (Prä-)Garben von Mengen, ab. Gruppen, $A$-Linksmoduln, aber {\em nicht} für $\O_X$-Modulgarben, wenn $f : (X, \O_X) \!\to\! (Y, \O_Y)$ ein Morphismus von geringten Räumen ist.
+    \item Sei $f : X \to \pt$ und $\Fais$ die Garbe auf $\pt$ mit $\Fais(\pt) = A$. \\
+    Dann ist $f^\bullet(A) \cong \constSh{A}$ die konstante Garbe auf $X$ mit Faser $A$.
+  \end{itemize}
+\end{bem}
+
+% TODO: gilt $f^\bullet = (f^{-1})_\bullet$ für Homöomorphismen $f$?
+% TODO: Konstruktion von $f^*$ für Modulgarben verstehen, aufschreiben
 
 \end{document}
