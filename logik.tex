@@ -378,7 +378,7 @@
 \begin{lem}
   \begin{itemize}
     \item Ist $M$ inkonsistent, so gilt $M \vdash B$ für alle $B \in \For$.
-    \item Für $A \in \For$ gilt: $M \not\vdash A \implies M \cup \{ A \}$ ist konsistent.
+    \item Für $A \in \For$ gilt: $M \not\vdash A \implies M \cup \{ \neg A \}$ ist konsistent.
   \end{itemize}
 \end{lem}
 
@@ -548,7 +548,7 @@
 \begin{lem}
   Für $M \subset \For$ und $A \in \For$ gilt:
   \begin{itemize}
-    \item $M \not\vdash A \implies M \cup \{ A \}$ ist konsistent.
+    \item $M \not\vdash A \implies M \cup \{ \neg A \}$ ist konsistent.
     \item $M \not\vdash \fa{x} A \implies M \cup \{ \neg \fa{x} A, \neg A[\subst{c}{x}] \}$ ist konsisten für jede Variable $c$, die nicht in $M$ und $A$ vorkommt.
   \end{itemize}
 \end{lem}
