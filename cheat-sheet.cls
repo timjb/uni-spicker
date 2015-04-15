@@ -57,8 +57,9 @@
 \newtheorem*{verf}{Verfahren}
 \newtheorem*{eig}{Eigenschaft}
 \newtheorem*{eign}{Eigenschaften}
-\newtheorem*{prop}{Prop}
 \newtheorem*{modell}{Modell}
+\newtheorem*{prop}{Prop}
+\newtheorem*{prinzip}{Prinzip}
 \newtheorem*{sprech}{Sprechweise}
 \newtheorem*{sprechweise}{Sprechweise}
 \newtheorem*{beob}{Beob} % Beobachtung
