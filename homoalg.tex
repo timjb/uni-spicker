@@ -56,7 +56,6 @@
 % * Das Bild eines Garbenmorphismus ist die Garbifizierung des Bildes des Morphismus aufgefasst als Prägarbenmorphismus
 % * Serresche Quotientenkategorien (?)
 % * "Direct image with compact support" und Adjungierter
-% K-Theorie einer abelschen Kategorie
 
 \begin{document}
 
@@ -1954,8 +1953,9 @@ Sei $\Cat$ eine Kategorie.
   Der (Ko-)Differenzkern von Morphismen $f, g \in \Hom_\Aat(X, Y)$ ist der (Ko-)Kern von $f - g \in \Hom(X, Y)$.
 \end{bem}
 
+% II.6, exercise 1
 \begin{kor}
-  Abelsche Kategorien sind endlich vollständig.
+  Abelsche Kategorien sind endlich bivollständig.
 \end{kor}
 
 % II.6.3d)
@@ -2067,6 +2067,17 @@ Sei $\Cat$ eine Kategorie.
   Dann gibt es einen Verbindungshomomorphismus $\delta : \ker \gamma \to \coker \alpha$, mit dem folgende Sequenz exakt ist:
   \[ \ker \alpha \to \ker \beta \to \ker \gamma \xrightarrow{\delta} \coker \alpha \to \coker \beta \to \coker \gamma. \]
 \end{lem}
+
+% Übungsblatt 18, Aufgabe 3
+\begin{defn}
+  Die \emph{K-Theorie} $K(\Aat)$ einer abelschen Kategorie $\Aat$ ist die abelsche Gruppe (bzw. das Klassen-Äquivalent einer ab. Gruppe) erzeugt von $\Ob(\Aat)$ modulo der Äquivalenzrelation erzeugt von $X + Z = Y$ für alle kurzen ex. Seq. $0 \to X \to Y \to Z \to 0$ in $\Aat$.
+\end{defn}
+
+% Übungsblatt 18, Aufgabe 3b), c)
+\begin{bspe}
+  \inlineitem{$K(\kVectFin) \cong \Z$} \quad
+  \inlineitem{$K(\kVect) \cong 0$}
+\end{bspe}
 
 
 % Kapitel II.6 Funktoren zw. abelschen Kategorien
@@ -2357,7 +2368,7 @@ Sei $\Cat$ eine Kategorie.
   \end{itemize}
 \end{bem}
 
-% TODO: funktioniert das inverse Bild auch für Prägarben
+% TODO: funktioniert das inverse Bild auch für Prägarben? Gilt dann eine Adjunktionsbeziehung?
 
 % II.6.17
 \begin{defn}
@@ -2413,7 +2424,13 @@ Sei $\Cat$ eine Kategorie.
 \end{bem}
 
 \begin{lem}
-  $f^\bullet$ ist exakt.
+  Das inverse Bild $f^\bullet$ ist exakt.
 \end{lem}
+
+% III. Abgeleitete Kategorien und abgeleitete Funktoren
+
+% III.2 Komplexe als verallgemeinerte Objekte
+
+% TODO
 
 \end{document}
