@@ -50,7 +50,6 @@
 \delimiterfactor=701
 
 % TODO:
-% * Abschnitt über (Ko-) Homologie verallgemeinern, hinter dem Abschnitt über abelsche Kategorien stellen (?)
 % * Diagrammjadgregeln
 % * Propositionen über welke/weiche/feine Garben von ÜB 6
 % * Das Bild eines Garbenmorphismus ist die Garbifizierung des Bildes des Morphismus aufgefasst als Prägarbenmorphismus
@@ -1303,6 +1302,65 @@ Dies ist eine übersetzte, korrigierte Zusammenfassung des Buches "`Methods of H
 
 % Ausgelassen: II.4.11 (Definition: Differentierbare Supermannigfaltigkeiten)
 
+% Weiter vor gezogen
+\subsection{Direktes und inverses Bild}
+
+% II.6.15
+\begin{defn}
+  Sei $f : X \to Y$ eine stetige Abbildung zwischen topol. Räumen. \\
+  Das \emph{direkte Bild} $f_\bullet(\Fais)$ einer (Prä-)Garbe $\Fais$ auf $X$ ist die durch
+  \[
+    f_\bullet(\Fais)(U) \coloneqq \Fais(f^{-1}(U)) \quad
+    \text{für $U \subset Y$ offen}
+  \]
+  definierte (Prä-)Garbe auf $Y$.
+\end{defn}
+
+% II.6.16, ausgelassen b)
+\begin{bem}
+  \begin{itemize}
+    \item $f_\bullet$ ist ein Funktor $f_\bullet : \MShSet(X) \to \MShSet(Y)$.
+    \item $(\blank)_\bullet$ ist selbst funktoriell: $f_\bullet \circ g_\bullet = (f \circ g)_\bullet$, $\id_\bullet = \Id$.
+    \item Die Konstruktion funktioniert für (Prä-)Garben von Mengen, ab. Gruppen, $A$-Linksmoduln und auch für $\O_X$-Modulgarben, wenn $f : (X, \O_X) \!\to\! (Y, \O_Y)$ ein Morphismus von geringten Räumen ist.
+  \end{itemize}
+\end{bem}
+
+% TODO: funktioniert das inverse Bild auch für Prägarben? Gilt dann eine Adjunktionsbeziehung?
+
+% II.6.17
+\begin{defn}
+  Sei $f : X \to Y$ eine stetige Abbildung zwischen topol. Räumen. \\
+  Das \emph{inverse Bild} ist der Funktor $f^\bullet : \ShSet(Y) \to \ShSet(X)$, der für Garben $\Fais \in \ShSet(Y)$ und $U \subset X$ offen definiert ist durch
+  \begin{align*}
+    f^\bullet(\Fais)(U) \coloneqq \{ \, & \text{Familien $(s_x \in \Fais_{f(x)})_{x \in U}$ von Keimen, für die gilt:} \\[-2pt]
+    & \text{Für alle $x \in X$ gibt es eine Umgebung $V \subset X$ von $f(x)$,} \\[-2pt]
+    & \text{eine Umgebung $W \subset U \cap f^{-1}(V)$ von $x$ und einen} \\[-2pt]
+    & \text{Schnitt $t \in \Fais(V)$ mit $\fa{x \in W} t_x = s_x$} \, \}.
+  \end{align*}
+\end{defn}
+
+% II.6.17
+\begin{prop}
+  Sei $f : X \to Y$ eine stetige Abb. zwischen topol. Räumen. \\
+  Dann besteht die Adjunktion \enspace $f^\bullet : \ShSet(Y) \rightleftarrows \ShSet(X) : f_\bullet$.
+\end{prop}
+
+% II.6.18 (Eigenschaften des inversen Bildes)
+\begin{bem}
+  \begin{itemize}
+    \item $(\blank)^\bullet$ ist kontravar. funktoriell: $g^\bullet \circ f^\bullet = (f \circ g)^\bullet$, $\id^\bullet = \Id$.
+    \item Alternative Definition: $f^\bullet(\Fais) \coloneqq (U \mapsto \Gamma(f(U), \Fais))^+$
+    % Ausgelassen: Zweite alternative Definition
+    \item Es gilt $f^\bullet(\Fais)_x = \Fais_{f(x)}$ für alle $x \in X$.
+    \item Die Konstruktion funktioniert für (Prä-)Garben von Mengen, ab. Gruppen, $A$-Linksmoduln, aber {\em nicht} für $\O_X$-Modulgarben, wenn $f : (X, \O_X) \!\to\! (Y, \O_Y)$ ein Morphismus von geringten Räumen ist.
+    \item Sei $f : X \to \pt$ und $\Fais$ die Garbe auf $\pt$ mit $\Fais(\pt) = A$. \\
+    Dann ist $f^\bullet(A) \cong \constSh{A}$ die konstante Garbe auf $X$ mit Faser $A$.
+  \end{itemize}
+\end{bem}
+
+% TODO: gilt $f^\bullet = (f^{-1})_\bullet$ für Homöomorphismen $f$?
+% TODO: Konstruktion von $f^*$ für Modulgarben verstehen, aufschreiben
+
 
 % II.4.12 (Wie können wir Topologie in der Sprache der Kategorien beschreiben?)
 
@@ -1387,370 +1445,6 @@ Dies ist eine übersetzte, korrigierte Zusammenfassung des Buches "`Methods of H
 % Ausgelassen: II.4.18 (Lemma)
 % Ausgelassen: II.4.19 (Bemerkungen)
 
-
-\begin{samepage}
-  \section{Komplexe und (Ko-)Homologie}
-\end{samepage}
-
-% I.4 Homologie und Kohomologie
-
-% I.4.3
-\begin{defn}
-  \begin{itemize}
-    \item Ein \emph{Kettenkomplex} $\CC{C}$ ist eine Folge $(C_n)_{n \in \N}$ von abelschen Gruppen und Gruppenhomomorphismen $\partial_n : C_n \to C_{n-1}$ mit der Eigenschaft $\partial_{n-1} \circ \partial_n = 0$.
-    \item Ein \emph{Kokettenkomplex} $\CCC{C}$ ist eine Folge $(C^n)_{n \in \N}$ von ab. Gr. und Gruppenhomom. $\delta^n : C^n \to C^{n+1}$ mit $\delta^{n+1} \circ \delta^n = 0$.
-  \end{itemize}
-\end{defn}
-
-% I.4.4
-\begin{defn}
-  Sei $\CC{C}$ ein Kettenkomplex.
-  \begin{itemize}
-    \item $C_n$ heißt Gruppe der \emph{$n$-Ketten},
-    \item $\partial : C_n \to C_{n-1}$ heißt \emph{Randabbildung},
-    \item $Z_n(\CC{C}) \coloneqq \ker \partial_n \subset C_n(\CC{C})$ heißt Gruppe der \emph{$n$-Zykel},
-    \item $B_n(\CC{C}) \coloneqq \im \partial_{n+1} \subset Z_n(\CC{C})$ heißt Gruppe der \emph{$n$-Ränder},
-    \item $H_n(\CC{C}) \coloneqq Z_n(\CC{C}) / B_n(\CC{C})$ heißt \emph{$n$-te Homologiegruppe}.
-  \end{itemize}
-  Analog nennt man für einen Kokettenkomplex $\CCC{C}$
-  \begin{itemize}
-    \miniitem{0.46 \linewidth}{$\delta^n$ \emph{Korandabbildung},}
-    \miniitem{0.41 \linewidth}{$C^n$ \emph{$n$-Koketten},}
-    \miniitem{0.46 \linewidth}{$Z^n \coloneqq \ker \delta^n$ \emph{$n$-Kozykel},}
-    \miniitem{0.45 \linewidth}{$B^n \coloneqq \im \delta^{n-1}$ \emph{$n$-Koränder},}
-    \item $H^n(\CCC{C}) \coloneqq Z^n(\CCC{C}) / B^n(\CCC{C})$ $n$-te \emph{Kohomologiegruppe}.
-  \end{itemize}
-\end{defn}
-
-% Vorgezogen: I.6.5 (Morphismen von Komplexen)
-\begin{defn}
-  Eine Morphismus $f : \CC{C} \to \CC{D}$ (bzw. $f : \CCC{C} \to \CCC{D}$) zwischen (Ko-)Kettenkomplexen ist eine Familie von Abbildungen
-  \[
-    (f_n : C_n \to D_n)_{n \in \N} \quad
-    \text{(bzw. $(f^n : C^n \to D^n)_{n \in \N}$),}
-  \]
-  die mit den Randabbildungen verträglich sind, \dh{}
-  \[
-    f_{n-1} \circ \partial^C_n = \partial^D_n \circ f_n \quad
-    \text{(bzw. $f^{n+1} \circ \delta_C^n = \delta_D^n \circ f^n$)} \quad
-    \text{für alle $n$.}
-  \]
-\end{defn}
-
-\begin{prop}
-  $H_n$ (bzw. $H^n$) ist ein Funktor von der Kategorie der (Ko-)Kettenkomplexe in die Kategorie der abelschen Gruppen.
-\end{prop}
-
-% I.4.1
-\begin{defn}
-  Sei $X$ eine simpl. Menge. Sei $C_n(X)$ die von den $n$-Simplizes $X_n$ erzeugte abelsche Gruppe (\dh{} die Gruppe der endl. formalen Linearkombinationen mit Koeffizienten in $\Z$). Sei $\delta_n^i : [n{-}1] \to [n]$ diejenige streng monotone Abb. mit $i \not\in \im \delta_n^i$. Definiere
-  \[
-    \partial_n : C_n(X) \to C_{n-1}(X), \quad
-    \sum_{\sigma \in X_n} \lambda_\sigma \cdot \sigma \, \mapsto \nspace{3} \sum_{\sigma \in X_n} \lambda_\sigma \sum_{i=0}^n (-1)^i X(\partial_n^i)(\sigma).
-  \]
-\end{defn}
-
-% I.4.2
-\begin{prop}
-  $(C_\bullet(X),\partial_\bullet)$ ist ein Kettenkomplex (\dh{} $\partial_{n-1} \circ \partial_n = 0$)
-\end{prop}
-
-\begin{defn}
-  Sei $X$ eine simpl. Menge und $A$ eine ab. Gruppe. Dann ist \ldots
-  \begin{itemize}
-    \item \ldots{} der \emph{Kettenkomplex} $(C_\bullet(X; A), \partial_\bullet)$ von $X$ \emph{mit Koeffizienten} in $A$ definiert durch
-    \[
-      C_n(X; A) \coloneqq C_n(X) \otimes_{\Z} A, \enspace
-      \partial_n \coloneqq \partial_n \otimes \id : C_n(X; A) \to C_{n-1}(X; A).
-    \]
-    \item \ldots{} der \emph{Kokettenkomplex} $(C^\bullet(X; A), \delta^\bullet)$ von $X$ mit \emph{Koeffizienten} in $A$ definiert durch
-    \begin{align*}
-      & C^n(X; A) \coloneqq \Hom(C^n(X), A), \\
-      \delta^n : \,\, & C^n(X; A) \to C^{n+1}(X; A), \enspace f \mapsto f \circ \delta_{n+1}.
-    \end{align*}
-  \end{itemize}
-\end{defn}
-
-\begin{defn}
-  Für Verklebedaten $X$ ist der zugeh. (Ko-)Kettenkomplex (mit Koeffizienten) genauso definiert wie für simpliziale Mengen.
-\end{defn}
-
-\begin{beob}
-  $C_n(X; \Z) = C_n(X)$
-\end{beob}
-
-\begin{nota}
-  Sei $X$ eine simpliziale Menge. Setze
-  \begin{itemize}
-    \miniitem{0.48 \linewidth}{$H_n(X) \coloneqq H_n(C_\bullet(X))$,}
-    \miniitem{0.48 \linewidth}{$H^n(X) \coloneqq H^n(C^\bullet(X; \Z))$,}
-    \miniitem{0.48 \linewidth}{$H_n(X; A) \coloneqq H_n(C_\bullet(X; A))$,}
-    \miniitem{0.48 \linewidth}{$H^n(X; A) \coloneqq H^n(C^\bullet(X; A))$.}
-  \end{itemize}
-\end{nota}
-
-% I.4.5 (Geometrie von Ketten)
-\begin{prop}
-  Für jede simpl. Menge $X$ ex. ein kanonischer Isomorphismus
-  \[ H_0(X, \Z) \cong \text{freie ab. Gr. erzeugt von Zshgskomponenten von $\abs{X}$}. \]
-\end{prop}
-
-\begin{prop}
-  Sei $CX$ der Kegel über Verklebedaten $X$. Es gilt
-  \[ H_0(CX) = \Z, \enspace H_{>0}(CX) = 0. \]
-\end{prop}
-
-% Ausgelassen: I.4.6 Geometrie von Koketten :-)
-
-% I.4.7 Koeffizientensysteme
-
-% I.4.8
-\begin{defn}
-  Sei $X$ eine simpliziale Menge.
-  \begin{itemize}
-    \item Ein \emph{homol. Koeffizientensystem} $\mathcal{A}$ auf $X$ ist ein Funktor
-    \[ \mathcal{A} : (1 \downarrow X) \to \AbGrp. \]
-    Dabei ist $1 : \mathbf{1} \to \SetC$ der Funktor, der konstant $\{ \star \}$ ist (und $\mathbf{1}$ die Kategorie mit einem Objekt und einem Morphismus).\\
-    Expliziter besteht ein Koeffizientensystem aus einer abelschen Gruppe $\mathcal{A}_\sigma$ für jedes $n$-Simplex $\sigma \in X_n$ und Abbildungen $\mathcal{A}(f, \sigma) : \mathcal{A}_\sigma \to \mathcal{A}_{X(f)(\sigma)}$ für alle $\sigma \in X_n$, $f \in \Hom_{\Delta}([m], [n])$ mit
-    \[
-      \mathcal{A}(\id, \sigma) = \id, \quad
-      \mathcal{A}(f \circ g, \sigma) = \mathcal{A}(g, X(f)(\sigma)) \circ \mathcal{A}(f, \sigma).
-    \]
-    \item Ein \emph{kohomol. Koeffizientensystem} $\mathcal{B}$ auf $X$ ist ein Funktor
-    \[ \mathcal{B} : (1 \downarrow X)^\op \to \AbGrp. \]
-    % I.7.9
-    \item Ein Morphismus zw. (ko-)homologischen Koeffizientensystemen auf derselben simpl. Menge ist eine natürliche Transformation.
-  \end{itemize}
-\end{defn}
-
-% I.4.9 (Bemerkungen und Beispiele)
-
-% Ausgelassen: a) Konstante Koeffizientensysteme, c) Koeffizientensystem auf BG
-\begin{bsp}
-  Sei $Y$ ein topol. Raum, $(U_\alpha)_{\alpha \in A}$ eine offene Überdeckung und $X$ deren Nerv. Dann definiert
-  \begin{align*}
-    \mathcal{F}_{\alpha_0, \ldots, \alpha_n} & \coloneqq \{ U_{\alpha_0} \cap \ldots \cap U_{\alpha_n} \to \R \text{ stetig} \}, \\
-    \mathcal{F}(f, (\alpha_0, \ldots, \alpha_n))(\phi) & \coloneqq \text{passende Einschränkung von $\phi$}.
-  \end{align*}
-  ein kohomologisches Koeffizientensystem auf $X$.
-\end{bsp}
-
-% I.4.10 (Homologie und Kohomologie mit einem Koeffizientensystem)
-
-\begin{defn}
-  Sei $\mathcal{A}$ ein homologisches Koeffizientensystem auf einer simplizialen Menge $X$. Wir setzen
-  \[ C_n(X; \mathcal{A}) \coloneqq \{ \text{ formale endl. Linearkomb. } \nspace{3} \sum_{\sigma \in X_n} \lambda_\sigma \cdot \sigma \text{ mit } \lambda_\sigma \in \mathcal{A}_\sigma \, \} \]
-  und definieren $\partial_n : C_n(X; \mathcal{A}) \to C_{n-1}(X; \mathcal{A})$ durch
-  \[ \sum_{\sigma \in X_n} \lambda_\sigma \cdot \sigma \enspace \mapsto \sum_{\sigma \in X_n} \sum_{i=0}^n \enspace (-1)^i \mathcal{A}(\partial_n^i, \sigma)(\lambda_\sigma) \cdot X(\partial_n^i)(\sigma). \]
-  Die Homologiegruppen des so def. Kettenkomplexes $C_\bullet(X; \mathcal{A})$ heißen \emph{Homologiegruppen} von $X$ \emph{mit Koeffizienten in $\mathcal{A}$}.
-\end{defn}
-
-\begin{defn}
-  Sei $\mathcal{B}$ ein kohomologisches Koeffizientensystem auf einer simplizialen Menge $X$. Wir setzen
-  \[ C^n(X; \mathcal{B}) \coloneqq \{ \text{ Funktionen } f : (\sigma \in X_n) \to \mathcal{B}_\sigma \, \} \]
-  und definieren $\delta_n : C^n(X; \mathcal{B}) \to C_{n+1}(X; \mathcal{B})$ durch
-  \[ \delta^n(f)(\sigma) \coloneqq \sum_{i=0}^{n+1} (-1)^i \mathcal{B}(\partial_{n+1}^i, \sigma)(f(X(\partial_{n+1}^i)(\sigma))). \]
-  Die Kohomologiegruppen des so def. Kokettenkomplexes $C^\bullet(X; \mathcal{B})$ heißen \emph{Kohomologiegruppen} von $X$ \emph{mit Koeffizienten in $\mathcal{B}$}.
-\end{defn}
-
-% I.4.11
-
-\begin{bsp}
-  Sei $Y$ ein topol. Raum, $U = (U_\alpha)_{\alpha \in A}$, $X$ und $\mathcal{F}$ wie im letzten Beispiel. Die Homologiegruppen $H^n(X, \mathcal{F})$ werden Čech-Kohomologiegruppen der Garbe der stetigen Funktionen auf $Y$ bzgl. der Überdeckung $U$ genannt.
-\end{bsp}
-% Ausgelassen: Beispiel c)
-
-% I.6 (Die lange Sequenz)
-
-% Ausgelassen: I.6.1 (Homologie als Funktion in zwei Variablen)
-
-% I.6.2 (Exakte Sequenzen)
-
-\begin{defn}
-  Eine (lange) \emph{exakte Sequenz} ab. Gruppen ist ein (Ko-)Kettenkomplex mit verschwindenden Homologiegruppen, \dh{}
-  \[ \im \partial_n = \ker \partial_{n-1} \quad \text{für alle $n$.} \]
-\end{defn}
-
-\begin{defn}
-  Eine \emph{kurze ex. Sequenz} (\keS{}) ist eine ex. Seq. der Form
-  \[ 0 \to A \to B \to C \to 0. \]
-\end{defn}
-
-\begin{defn}
-  Sei $0 \to A \to B \to C \to 0$ eine \keS{} in einer abelschen Kategorie $\Aat$. Die Sequenz heißt \emph{spaltend}, falls sie isomorph zur \keS{} $0 \to A \to A \oplus C \to C$ ist.
-\end{defn}
-
-\begin{prop}
-  Für eine Sequenz $0 \to A \xrightarrow{f} B \xrightarrow{g} C \to 0$ sind äquivalent:
-  \begin{itemize}
-    \item Die Sequenz spaltet.
-    \item Es existiert eine Retraktion $r : B \to A$ mit $r \circ f = \id_A$.
-    \item Es existiert ein Schnitt $s : C \to B$ mit $g \circ s = \id_C$.
-  \end{itemize}
-\end{prop}
-
-% I.6.5
-\begin{defn}
-  Eine Sequenz $0 \to \CCC{A} \to \CCC{B} \to \CCC{C} \to 0$ von Komplexen heißt \emph{exakt}, wenn für alle $n$ die Seq. $0 \to A_n \to B_n \to C_n \to 0$ exakt ist.
-\end{defn}
-
-% Ausgelassen: I.6.7 (Konstruktion der Randabbildung)
-
-% 1.6.8
-\begin{prop}
-  Eine kurze exakte Sequenz
-  $0 \to \CCC{A} \xrightarrow{i^\bullet} \CCC{B} \xrightarrow{p^\bullet} \CCC{C} \to 0$
-  von Kokettenkomplexen induziert eine lange exakte Sequenz
-  \[ \nldots \to H^n(\CCC{A}) \xrightarrow{H^n(i^\bullet)} H^n(\CCC{B}) \xrightarrow{H^n(p^\bullet)} H^n(\CCC{C}) \xrightarrow{\delta^n} H^{n+1}(\CCC{A}) \to \nldots \]
-\end{prop}
-
-% I.6.6
-\begin{lem}
-  Sei $0 \to A \to B \to C \to 0$ eine \keS{} ab. Gruppen und $X$ eine simpl. Menge.
-  Dann sind ebenfalls exakt:
-  \begin{align*}
-    0 \to \CC{C}(X; A) \to \CC{C}(X; B) \to \CC{C}(X; C) \to 0, \\
-    0 \to \CCC{C}(X; A) \to \CCC{C}(X; B) \to \CCC{C}(X; C) \to 0.
-  \end{align*}
-\end{lem}
-
-% I.6.3
-\begin{kor}
-  Sei $0 \to A \to B \to C \to 0$ eine \keS{} ab. Gruppen und $X$ eine simpl. Menge. Dann existieren lange exakte Sequenzen
-  \begin{align*}
-    \ldots \to H_n(X; A) \to H_n(X; B) \to H_n(C) \to H_{n-1}(X; A) \to \ldots \\
-    \ldots \to H^n(X; A) \to H^n(X; B) \to H^n(C) \to H^{n+1}(X; A) \to \ldots
-  \end{align*}
-\end{kor}
-
-% Ausgelassen: I.6.4 (Bemerkungen)
-
-% I.6.9 (Verallgemeinerung auf ein Koeffizientensystem)
-
-\begin{defn}
-  Eine Sequenz $0 \to \mathcal{B}' \to \mathcal{B} \to \mathcal{B}'' \to 0$ von (ko-)homologischen Koeffizientensystemen auf einer simpl. Menge $X$ heißt \emph{exakt}, falls
-  \[
-    0 \to \mathcal{B}'_\sigma \to \mathcal{B}_\sigma \to \mathcal{B}''_\sigma \to 0 \qquad
-    \text{für alle $\sigma \in X_n$ exakt ist.}
-  \]
-\end{defn}
-
-\begin{lem}
-  Eine kurze exakte Sequenz $0 \to \mathcal{B}' \to \mathcal{B} \to \mathcal{B}'' \to 0$ von (ko-)homologischen Koeff'systemen induziert kurze ex. Sequenzen
-  \begin{align*}
-    0 \to \CC{C}(X; \mathcal{B}') \to \CC{C}(X; \mathcal{B}) \to \CC{C}(X; \mathcal{B}'') \to 0, \\
-    0 \to \CCC{C}(X; \mathcal{B}') \to \CCC{C}(X; \mathcal{B}) \to \CCC{C}(X; \mathcal{B}'') \to 0
-  \end{align*}
-  und damit auch entsprechende lange exakte Sequenzen.
-\end{lem}
-
-% I.7 (Komplexe)
-
-% I.7.1 (Wo kommen Komplexe her?)
-
-% I.7.2
-\begin{defn}
-  Eine \emph{simpl. ab. Gruppe} ist ein Funktor
-  $A : \Delta^\op \to \AbGrp$.
-\end{defn}
-
-% I.7.3
-\begin{defn}
-  Sei $A$ eine simpliziale abelsche Gruppe. \\
-  Dann ist $(A_\bullet, \partial)$ ein Kettenkomplex mit
-  \[
-    \partial_n : A_n \to A_{n-1}, \quad
-    a \mapsto \sum_{i=0}^n (-1)^i A(\partial_n^i)(a).
-  \]
-\end{defn}
-
-\begin{defn}
-  Eine \emph{kosimpl. ab. Gruppe} ist ein Funktor
-  $A : \Delta \to \AbGrp$.
-\end{defn}
-
-\begin{defn}
-  Sei $A$ eine kosimpliziale abelsche Gruppe. \\
-  Dann ist $(A^\bullet, \delta)$ ein Kokettenkomplex mit
-  \[
-    \delta^n : A^n \to A^{n+1}, \quad
-    a \mapsto \sum_{i=0}^n (-1)^i A(\partial_{n+1}^i)(a).
-  \]
-\end{defn}
-
-% I.7.4 (Der Čech-Komplex)
-
-\begin{defn}
-  Sei $Y$ ein topol. Raum, $(U_\alpha)_{\alpha \in A}$ eine (nicht unbedingt offene) Überdeckung von $Y$ und $\Fais$ eine Garbe ab. Gruppen auf $Y$. Die kosimpliziale abelsche Gruppe $\check{C}(U, \Fais)$ der \emph{Čech-Koketten} ist
-  \begin{align*}
-    \check{C}^m(U, \Fais) \coloneqq \nspace{4} \prod_{\alpha_0, \ldots, \alpha_m \in A} \nspace{4} \Fais(U_{\alpha_0} \cap \ldots \cap U_{\alpha_m}), \\
-    \check{C}(U, \Fais)(f : [m] \to [n])((f_{\alpha_0, \ldots ,\alpha_m})_{\alpha_0, \ldots, \alpha_m}) \coloneqq \\
-    (f_{g(0), \ldots, g(m)}|U_{\alpha_0} \cap \ldots \cap U_{\alpha_n})_{\alpha_0, \nldots, \alpha_n}.
-  \end{align*}
-\end{defn}
-
-\begin{bem}
-  Die Randabb. im zugeh. Kokettenkomplex ist gegeben durch
-  \[ (\delta^n \phi)_{\alpha_0, \ldots, \alpha_{n+1}} \coloneqq \sum_{i=0}^{n+1} (-1)^i \phi_{\alpha_0, \ldots, \hat{\alpha_i}, \ldots, \alpha_{n+1}}. \]
-\end{bem}
-
-\begin{defn}
-  Die Kohomologiegruppen dieses Komplexes heißen \emph{Čech-Homologiegruppen} von $\Fais$ bzgl. der Überdeckung $(U_\alpha)_{\alpha \in A}$.
-\end{defn}
-
-\begin{bem}
-  $\check{H}(U, \Fais) \cong \Gamma(X, \Fais)$ hängt nicht von der Überdeckung ab.
-\end{bem}
-
-\begin{defn}
-  Sei $Y$ ein topol. Raum und $X$ dessen simpl. Menge der singulären Simplizes.
-  Die Homologiegruppen von $\CC{C}(X; A)$ heißen \emph{singuläre Homologiegruppen} $H_n(Y; A)$ von $Y$ mit Koeff. $A$.
-\end{defn}
-
-% Ausgelassen: I.7.6 (Homologie und Kohomologie von Gruppen)
-
-% I.7.7 (Der de-Rham-Komplex)
-\begin{defn}
-  Sei $M$ eine $\Cont^\infty$-Mft, $\Omega^k(M)$ das $C^\infty(M)$-Modul der $k$-Formen auf $M$. Die \emph{äußere Ableitung} $\d : \Omega^k(M) \to \Omega^{k+1}(M)$ ist in lokalen Koordinaten $(x^1, \ldots, x^n)$ definiert durch
-  \[ \d \left( \sum_{\abs{I} = k} f_I \d x^I \right) = \sum_{\abs{I} = k} \sum_{i=1}^n \frac{\partial f_I}{\partial x^i} \d x^i \wedge \d x^I. \]
-  Die Kohomologiegruppen des so definierten Komplexes $\Omega^\bullet(M)$ heißen \emph{De-Rham-Kohomologiegruppen}.
-\end{defn}
-
-% I.7.8 (Homologie und Kohomologie einer Lie-Algebra)
-
-\begin{defn}
-  Sei $\Lg$ eine Lie-Algebra und $A$ ein $\Lg$-Modul. Setze $C^k(\Lg, A) \coloneqq L(\wedge^k \Lg, A)$ und definiere $\d : C^k(\Lg, A) \to C^{k+1}(\Lg, A)$ durch eine allgemeine Cartan-Formel
-  \begin{align*}
-    (\d c)(g_1, \nldots, g_{k+1}) \coloneqq & \nspace{7} \sum_{1 \leq j < l \leq k+1} \nspace{7} (-1)^{j+l-1} c([g_j, g_l], g_1, \nldots, \hat{g_j}, \nldots, \hat{g_l}, \nldots, g_{k+1}) \\
-    & + \sum_{j=1}^{k+1} (-1)^j g_j c(g_1, \nldots, \hat{g_j}, \ldots, g_{k+1}).
-  \end{align*}
-  Die Kohomologiegruppen des so definierten Kokettenkomplexes werden mit $H^\bullet(\Lg, A)$ bezeichnet.
-\end{defn}
-
-% I.7.9 (Homotope Abbildungen von Komplexen)
-\begin{defn}
-  Eine \emph{Kettenhomotopie} zw. Morphismen $f, g : \CC{C} \to \CC{D}$ von Kettenkomplexen ist eine Folge von Homomorphismen $k_n : C_n \to D_{n+1}$ mit
-  $\fa{n \in \N} \partial^D_{n+1} \circ k_n + k_{n-1} \circ \partial^C_n = f_n - g_n$.
-\end{defn}
-
-% I.7.10
-\begin{lem}
-  Seien $f, g : \CC{C} \to \CC{D}$ kettenhomotop. Dann gilt
-  \[ H_n(f) = H_n(g) \quad \text{für alle $n \in \N$.} \]
-\end{lem}
-
-% I.7.11
-\begin{prop}
-  \begin{itemize}
-    \item Seien $\phi, \psi : X \to Y$ homotope Abbildungen zwischen topologischen Räumen. Dann sind die induzierten Abbildungen $\phi_*, \psi_* : \CC{C}(X; A) \to \CC{C}(Y; A)$ kettenhomotop.
-    \item Seien $\phi, \psi : M \to N$ zwei glatt homotope Abbildungen von $\Cont^\infty$-Mften. Dann sind $\phi^*, \psi^* : \Omega^\bullet(N) \to \Omega^\bullet(M)$.
-  \end{itemize}
-\end{prop}
-
-% I.7.12
-\begin{kor}
-  Homotopieäquivalente Räume besitzen isomorphe singuläre Homologiegruppen.
-\end{kor}
 
 \section{Abelsche und additive Kategorien}
 
@@ -1851,12 +1545,11 @@ Sei $\Cat$ eine Kategorie.
 \end{lem}
 
 \begin{lem}
-  \begin{itemize}
-    \item Sei $(K, k)$ der Kern von $\varphi$. Dann gilt
-    \[ \varphi \text{ ist ein Monomorphismus} \iff K \cong 0. \]
-    \item Sei $(C, c)$ der Kokern von $\varphi$. Dann gilt
-    \[ \varphi \text{ ist ein Epimorphismus} \iff C \cong 0. \]
-  \end{itemize}
+  Sei $(K, k)$ der Kern, $(C, c)$ der Kokern von $\varphi$. Dann gilt
+  \begin{align*}
+    \varphi \text{ ist ein Monomorphismus} & \iff K \cong 0, \\
+    \varphi \text{ ist ein Epimorphismus} & \iff C \cong 0.
+  \end{align*}
 \end{lem}
 
 % II.5.9
@@ -1946,11 +1639,11 @@ Sei $\Cat$ eine Kategorie.
 \end{lem}
 
 \begin{kor}
-  Ab. Kategorien sind binormal, \dh{} normal u. konormal.
+  Ab. Kategorien sind binormal, \dh{} normal und konormal.
 \end{kor}
 
 \begin{bem}
-  Der (Ko-)Differenzkern von Morphismen $f, g \in \Hom_\Aat(X, Y)$ ist der (Ko-)Kern von $f - g \in \Hom(X, Y)$.
+  Der (Ko-)Differenzkern von Morphismen $f, g \in \Hom_\Aat(X, Y)$ ist der (Ko-)Kern der Differenz $f - g \in \Hom(X, Y)$.
 \end{bem}
 
 % II.6, exercise 1
@@ -1958,10 +1651,451 @@ Sei $\Cat$ eine Kategorie.
   Abelsche Kategorien sind endlich bivollständig.
 \end{kor}
 
+
+% Kapitel II.6 Funktoren zw. abelschen Kategorien
+
+
+% I.4 Homologie und Kohomologie
+% (gleich auf abelsche Kategorien verallgemeinert)
+
+\begin{samepage}
+  \section{Komplexe und (Ko-)Homologie}
+\end{samepage}
+
+Sei $\Aat$ eine abelsche Kategorie.
+
+% I.4.3
+\begin{defn}
+  \begin{itemize}
+    \item Ein \emph{Kettenkomplex} $\CC{C}$ ist eine Folge $(C_n)_{n \in \N}$ von Obj. aus $\Aat$ und Morphismen $\partial_n : C_n \to C_{n-1}$ mit $\partial_{n-1} \circ \partial_n = 0$.
+    \item Ein \emph{Kokettenkomplex} $\CCC{C}$ ist eine Folge $(C^n)_{n \in \N}$ von Objekten aus $\Aat$ und Morphismen $\delta^n : C^n \to C^{n+1}$ mit $\delta^{n+1} \circ \delta^n = 0$.
+  \end{itemize}
+\end{defn}
+
+% I.4.4
+\begin{defn}
+  Sei $\CC{C}$ ein Kettenkomplex.
+  \begin{itemize}
+    \item $C_n$ heißt Objekt der \emph{$n$-Ketten},
+    \item $\partial_n : C_n \to C_{n-1}$ heißt \emph{Randabbildung},
+    \item $Z_n(\CC{C}) \coloneqq \ker \partial_n \hookrightarrow C_n(\CC{C})$ heißt Objekt der \emph{$n$-Zykel},
+    \item $B_n(\CC{C}) \coloneqq \im \partial_{n+1} \hookrightarrow Z_n(\CC{C})$ heißt Objekt der \emph{$n$-Ränder}.
+    %\item $H_n(\CC{C}) \coloneqq Z_n(\CC{C}) / B_n(\CC{C})$ heißt \emph{$n$-te Homologiegruppe}.
+  \end{itemize}
+  Analog nennt man für einen Kokettenkomplex $\CCC{C}$
+  \begin{itemize}
+    \miniitem{0.46 \linewidth}{$\delta^n$ \emph{Korandabbildung},}
+    \miniitem{0.41 \linewidth}{$C^n$ \emph{$n$-Koketten},}
+    \miniitem{0.46 \linewidth}{$Z^n \coloneqq \ker \delta^n$ \emph{$n$-Kozykel},}
+    \miniitem{0.45 \linewidth}{$B^n \coloneqq \im \delta^{n-1}$ \emph{$n$-Koränder}.}
+    %\item $H^n(\CCC{C}) \coloneqq Z^n(\CCC{C}) / B^n(\CCC{C})$ $n$-te \emph{Kohomologiegruppe}.
+  \end{itemize}
+\end{defn}
+
+
+% II.6.3: Äquivalenz zweier Definitionen von $H^n(\CC{C})$
+% Dies sollte das letzte Lemma vor II.6.2 bleiben!
+\begin{lem}
+  Sei $X \xrightarrow{f} Y \xrightarrow{g} Z \in \Aat$ mit $g \circ f = 0$. Sei $(K, k)$ der Kern von $g$ und $(C, c)$ der Kokern von $f$. Deren universelle Eigenschaften induzieren Morphismen $a : X \to K$ und $b : C \to Z$ wie folgt:
+  \vspace{-8pt}
+  \begin{centertikz}
+    \matrix (mat) [matrix of nodes, column sep=1cm, row sep=0.45cm]{
+      & \node (C) {$C$}; \\
+      \node (X) {$X$}; &
+      \node (Y) {$Y$}; &
+      \node (Z) {$Z$}; \\
+      & \node (K) {$K$}; \\
+    };
+    \draw[->] (C) to node [above] {$b$} (Z);
+    \draw[->] (Y) to node [right] {$c$} (C);
+    \draw[->] (X) to node [above] {$f$} (Y);
+    \draw[->] (Y) to node [above] {$g$} (Z);
+    \draw[->] (X) to node [below] {$a$} (K);
+    \draw[->] (K) to node [right] {$k$} (Y);
+  \end{centertikz}
+  \vspace{-10pt}
+  Dann gibt es einen kanonischen Isomorphismus $\coker a \cong \ker b$.
+\end{lem}
+
+% II.6.2
+\begin{defn}
+  Die \emph{$n$-te Homologie} $H_n(\CC{C})$ eines Kettenkomplexes $\CC{C}$ aus $\Aat$ ist der Kokern der Abbildung $a_n : C_{n+1} \to \ker \partial_n$, die durch die universelle Eigenschaft des Kerns induziert wird. \\
+\end{defn}
+
+\begin{bem}
+  \begin{itemize}
+    \item Das letzte Lemma besagt, dass $H_n(\CC{C})$ isomorph zum Kern der Abbildung $b_n : \coker \partial_{n+1} \to C_{n-1}$, die durch die universelle Eigenschaft des Kokerns induziert wird, ist.
+    \item Äquivalent ist $H_n(\CC{C})$ der Kokern der induzierten Abbildung $B_n(\CC{C}) \hookrightarrow Z_n(\CC{C})$, kurz geschrieben $H_n(\CC{C}) \cong Z_n(\CC{C}) / B_n(\CC{C})$.
+  \end{itemize}
+\end{bem}
+
+\begin{defn}
+  Analog ist die \emph{$n$-te Kohomologie} eines Kokomplexes $\CCC{C}$
+  \begin{align*}
+  H^n(\CCC{C}) \coloneqq & \coker (a^n : C^{n-1} \to \ker \delta^n) \\
+  \cong & \ker (b^n : \coker \delta^{n-1} \to C^{n+1}) \cong Z^n / B^n.
+  \end{align*}
+\end{defn}
+
+% II.6.2
+\begin{defn}
+  Ein (Ko-)Kettenkomplex heißt \emph{exakt} oder \emph{azyklisch}, wenn
+  \[
+    \fa{n \in \Z} H_n(\CC{C}) \cong 0 \quad
+    (\text{bzw. } H^n(\CC{C}) \cong 0).
+  \]
+\end{defn}
+
+% Vorgezogen: I.6.5 (Morphismen von Komplexen)
+\begin{defn}
+  Eine Morphismus $f : \CC{C} \to \CC{D}$ (bzw. $f : \CCC{C} \to \CCC{D}$) zwischen (Ko-)Kettenkomplexen ist eine Familie von Homomorphismen
+  \[
+    (f_n : C_n \to D_n)_{n \in \N} \quad
+    \text{(bzw. $(f^n : C^n \to D^n)_{n \in \N}$),}
+  \]
+  die mit den Randabbildungen verträglich sind, \dh{}
+  \[
+    f_{n-1} \circ \partial^C_n = \partial^D_n \circ f_n \quad
+    \text{(bzw. $f^{n+1} \circ \delta_C^n = \delta_D^n \circ f^n$)} \quad
+    \text{für alle $n$.}
+  \]
+\end{defn}
+
+% Aus III.1.1
+\begin{defn}
+  Die \emph{Kategorie der (Ko-)Komplexe} in $\Aat$ ist $\Kom(\Aat)$.
+\end{defn}
+
+\begin{prop}
+  (Ko-)Homologie ist ein Funktor $H_n, H^n : \Kom(\Aat) \to \Aat$.
+\end{prop}
+
+% I.7.9 (Homotope Abbildungen von Komplexen)
+\begin{defn}
+  Eine \emph{Kettenhomotopie} zw. Morphismen $f, g : \CC{C} \to \CC{D}$ von Kettenkomplexen ist eine Folge von Homomorphismen $k_n : C_n \to D_{n+1}$ mit
+  $\fa{n \in \N} \partial^D_{n+1} \circ k_n + k_{n-1} \circ \partial^C_n = f_n - g_n$.
+\end{defn}
+
+% I.7.10
+\begin{lem}
+  Seien $f, g : \CC{C} \to \CC{D}$ kettenhomotop. Dann gilt
+  \[ H_n(f) = H_n(g) \quad \text{für alle $n \in \N$.} \]
+\end{lem}
+
+\subsection{(Ko-)Homologie von simplizialen Mengen und topologischen Räumen}
+
+% I.4.1
+\begin{defn}
+  Sei $X$ eine simpl. Menge. Sei $C_n(X)$ die von den $n$-Simplizes $X_n$ erzeugte abelsche Gruppe (\dh{} die Gruppe der endl. formalen Linearkombinationen mit Koeffizienten in $\Z$). Sei $\delta_n^i : [n{-}1] \to [n]$ diejenige streng monotone Abb. mit $i \not\in \im \delta_n^i$. Definiere
+  \[
+    \partial_n : C_n(X) \to C_{n-1}(X), \quad
+    \sum_{\sigma \in X_n} \lambda_\sigma \cdot \sigma \, \mapsto \nspace{3} \sum_{\sigma \in X_n} \lambda_\sigma \sum_{i=0}^n (-1)^i X(\partial_n^i)(\sigma).
+  \]
+\end{defn}
+
+% I.4.2
+\begin{prop}
+  $(C_\bullet(X),\partial_\bullet)$ ist ein Kettenkomplex (\dh{} $\partial_{n-1} \circ \partial_n = 0$)
+\end{prop}
+
+\begin{defn}
+  Sei $X$ eine simpliziale Menge und $A$ eine abelsche Gruppe.
+  \begin{itemize}
+    \item Der \emph{Komplex} $(C_\bullet(X; A), \partial_\bullet)$ von $X$ \emph{mit Koeff.} in $A$ ist
+    \[
+      C_n(X; A) \coloneqq C_n(X) \otimes_{\Z} A, \enspace
+      \partial_n \coloneqq \partial_n \otimes \id : C_n(X; A) \to C_{n-1}(X; A).
+    \]
+    \item Der \emph{Kokomplex} $(C^\bullet(X; A), \delta^\bullet)$ von $X$ mit \emph{Koeff.} in $A$ ist
+    \begin{align*}
+      & C^n(X; A) \coloneqq \Hom(C^n(X), A), \\
+      \delta^n : \,\, & C^n(X; A) \to C^{n+1}(X; A), \enspace f \mapsto f \circ \delta_{n+1}.
+    \end{align*}
+  \end{itemize}
+\end{defn}
+
+\begin{defn}
+  Für Verklebedaten $X$ ist der zugeh. (Ko-)Kettenkomplex (mit Koeffizienten) genauso definiert wie für simpliziale Mengen.
+\end{defn}
+
+\begin{beob}
+  $C_n(X; \Z) = C_n(X)$
+\end{beob}
+
+\begin{nota}
+  Sei $X$ eine simpliziale Menge. Setze
+  \begin{itemize}
+    \miniitem{0.48 \linewidth}{$H_n(X) \coloneqq H_n(C_\bullet(X))$,}
+    \miniitem{0.48 \linewidth}{$H^n(X) \coloneqq H^n(C^\bullet(X; \Z))$,}
+    \miniitem{0.48 \linewidth}{$H_n(X; A) \coloneqq H_n(C_\bullet(X; A))$,}
+    \miniitem{0.48 \linewidth}{$H^n(X; A) \coloneqq H^n(C^\bullet(X; A))$.}
+  \end{itemize}
+\end{nota}
+
+% I.4.5 (Geometrie von Ketten)
+\begin{prop}
+  Für jede simpl. Menge $X$ ex. ein kanonischer Isomorphismus
+  \[ H_0(X, \Z) \cong \text{freie ab. Gr. erzeugt von Zshgskomponenten von $\abs{X}$}. \]
+\end{prop}
+
+\begin{prop}
+  Sei $CX$ der Kegel über Verklebedaten $X$. Es gilt
+  \[ H_0(CX) = \Z, \enspace H_{>0}(CX) = 0. \]
+\end{prop}
+
+% Ausgelassen: I.4.6 Geometrie von Koketten :-)
+
+% I.4.7 Koeffizientensysteme
+
+% I.4.8
+\begin{defn}
+  Sei $X$ eine simpliziale Menge.
+  \begin{itemize}
+    \item Ein \emph{homol. Koeffizientensystem} $\mathcal{A}$ auf $X$ ist ein Funktor
+    \[ \mathcal{A} : (1 \downarrow X) \to \AbGrp. \]
+    Dabei ist $1 : \mathbf{1} \to \SetC$ der Funktor, der konstant $\{ \star \}$ ist (und $\mathbf{1}$ die Kategorie mit einem Objekt und einem Morphismus).\\
+    Expliziter besteht ein Koeffizientensystem aus einer abelschen Gruppe $\mathcal{A}_\sigma$ für jedes $n$-Simplex $\sigma \in X_n$ und Abbildungen $\mathcal{A}(f, \sigma) : \mathcal{A}_\sigma \to \mathcal{A}_{X(f)(\sigma)}$ für alle $\sigma \in X_n$, $f \in \Hom_{\Delta}([m], [n])$ mit
+    \[
+      \mathcal{A}(\id, \sigma) = \id, \quad
+      \mathcal{A}(f \circ g, \sigma) = \mathcal{A}(g, X(f)(\sigma)) \circ \mathcal{A}(f, \sigma).
+    \]
+    \item Ein \emph{kohomol. Koeffizientensystem} $\mathcal{B}$ auf $X$ ist ein Funktor
+    \[ \mathcal{B} : (1 \downarrow X)^\op \to \AbGrp. \]
+    % I.7.9
+    \item Ein Morphismus zw. (ko-)homologischen Koeffizientensystemen auf derselben simpl. Menge ist eine natürliche Transformation.
+  \end{itemize}
+\end{defn}
+
+% I.4.9 (Bemerkungen und Beispiele)
+
+% Ausgelassen: a) Konstante Koeffizientensysteme, c) Koeffizientensystem auf BG
+\begin{bsp}
+  Sei $Y$ ein topologischer Raum, $(U_\alpha)_{\alpha \in A}$ eine offene Überdeckung und $X$ deren Nerv. Dann definiert
+  \begin{align*}
+    \mathcal{F}_{\alpha_0, \ldots, \alpha_n} & \coloneqq \{ U_{\alpha_0} \cap \ldots \cap U_{\alpha_n} \to \R \text{ stetig} \}, \\
+    \mathcal{F}(f, (\alpha_0, \ldots, \alpha_n))(\phi) & \coloneqq \text{passende Einschränkung von $\phi$}.
+  \end{align*}
+  ein kohomologisches Koeffizientensystem auf $X$.
+\end{bsp}
+
+% I.4.10 (Homologie und Kohomologie mit einem Koeffizientensystem)
+
+\begin{defn}
+  Sei $\mathcal{A}$ ein homologisches Koeffizientensystem auf einer simplizialen Menge $X$. Wir setzen
+  \[ C_n(X; \mathcal{A}) \coloneqq \{ \text{ formale endl. Linearkomb. } \nspace{3} \sum_{\sigma \in X_n} \lambda_\sigma \cdot \sigma \text{ mit } \lambda_\sigma \in \mathcal{A}_\sigma \, \} \]
+  und definieren $\partial_n : C_n(X; \mathcal{A}) \to C_{n-1}(X; \mathcal{A})$ durch
+  \[ \sum_{\sigma \in X_n} \lambda_\sigma \cdot \sigma \enspace \mapsto \sum_{\sigma \in X_n} \sum_{i=0}^n \enspace (-1)^i \mathcal{A}(\partial_n^i, \sigma)(\lambda_\sigma) \cdot X(\partial_n^i)(\sigma). \]
+  Die Homologiegruppen des so def. Kettenkomplexes $C_\bullet(X; \mathcal{A})$ heißen \emph{Homologiegruppen} von $X$ \emph{mit Koeffizienten in $\mathcal{A}$}.
+\end{defn}
+
+\begin{defn}
+  Sei $\mathcal{B}$ ein kohomologisches Koeffizientensystem auf einer simplizialen Menge $X$. Wir setzen
+  \[ C^n(X; \mathcal{B}) \coloneqq \{ \text{ Funktionen } f : (\sigma \in X_n) \to \mathcal{B}_\sigma \, \} \]
+  und definieren $\delta_n : C^n(X; \mathcal{B}) \to C_{n+1}(X; \mathcal{B})$ durch
+  \[ \delta^n(f)(\sigma) \coloneqq \sum_{i=0}^{n+1} (-1)^i \mathcal{B}(\partial_{n+1}^i, \sigma)(f(X(\partial_{n+1}^i)(\sigma))). \]
+  Die Kohomologiegruppen des so def. Kokettenkomplexes $C^\bullet(X; \mathcal{B})$ heißen \emph{Kohomologiegruppen} von $X$ \emph{mit Koeffizienten in $\mathcal{B}$}.
+\end{defn}
+
+% I.4.11
+
+\begin{bsp}
+  Sei $Y$ ein topologischer Raum, $U = (U_\alpha)_{\alpha \in A}$, $X$ und $\mathcal{F}$ wie im letzten Beispiel. Die Homologiegruppen $H^n(X, \mathcal{F})$ werden \emph{Čech-Kohomologiegruppen} der Garbe der stetigen Funktionen auf $Y$ bzgl. der Überdeckung $U$ genannt.
+\end{bsp}
+% Ausgelassen: Beispiel c)
+
+\begin{defn}
+  Sei $Y$ ein topol. Raum und $X$ dessen simpl. Menge der singulären Simplizes.
+  Die Homologiegruppen von $\CC{C}(X; A)$ heißen \emph{singuläre Homologiegruppen} $H_n(Y; A)$ von $Y$ mit Koeff. $A$.
+\end{defn}
+
+% I.7.11a)
+\begin{prop}
+  Seien $\phi, \psi : X \to Y$ homotope Abbildungen zwischen topologischen Räumen. Dann sind die induzierten Abbildungen $\phi_*, \psi_* : \CC{C}(X; A) \to \CC{C}(Y; A)$ kettenhomotop.
+\end{prop}
+
+% I.7.12
+\begin{kor}
+  Homotopieäquivalente Räume besitzen isomorphe singuläre Homologiegruppen.
+\end{kor}
+
+
+\subsection{Weitere Beispiele für (Ko-)Homologie}
+
+% I.7 (Komplexe)
+
+% I.7.1 (Wo kommen Komplexe her?)
+
+% I.7.2
+\begin{defn}
+  Eine \emph{simpl. ab. Gruppe} ist ein Funktor
+  $A : \Delta^\op \to \AbGrp$.
+\end{defn}
+
+% I.7.3
+\begin{defn}
+  Sei $A$ eine simpliziale abelsche Gruppe. \\
+  Dann ist $(A_\bullet, \partial)$ ein Kettenkomplex mit
+  \[
+    \partial_n : A_n \to A_{n-1}, \quad
+    a \mapsto \sum_{i=0}^n (-1)^i A(\partial_n^i)(a).
+  \]
+\end{defn}
+
+\begin{defn}
+  Eine \emph{kosimpl. ab. Gruppe} ist ein Funktor
+  $A : \Delta \to \AbGrp$.
+\end{defn}
+
+\begin{defn}
+  Sei $A$ eine kosimpliziale abelsche Gruppe. \\
+  Dann ist $(A^\bullet, \delta)$ ein Kokettenkomplex mit
+  \[
+    \delta^n : A^n \to A^{n+1}, \quad
+    a \mapsto \sum_{i=0}^n (-1)^i A(\partial_{n+1}^i)(a).
+  \]
+\end{defn}
+
+% I.7.4 (Der Čech-Komplex)
+
+\begin{defn}
+  Sei $Y$ ein topol. Raum, $(U_\alpha)_{\alpha \in A}$ eine (nicht unbedingt offene) Überdeckung von $Y$ und $\Fais$ eine Garbe ab. Gruppen auf $Y$. Die kosimpliziale abelsche Gruppe $\check{C}(U, \Fais)$ der \emph{Čech-Koketten} ist
+  \begin{align*}
+    \check{C}^m(U, \Fais) \coloneqq \nspace{4} \prod_{\alpha_0, \ldots, \alpha_m \in A} \nspace{4} \Fais(U_{\alpha_0} \cap \ldots \cap U_{\alpha_m}), \\
+    \check{C}(U, \Fais)(f : [m] \to [n])((f_{\alpha_0, \ldots ,\alpha_m})_{\alpha_0, \ldots, \alpha_m}) \coloneqq \\
+    (f_{g(0), \ldots, g(m)}|U_{\alpha_0} \cap \ldots \cap U_{\alpha_n})_{\alpha_0, \nldots, \alpha_n}.
+  \end{align*}
+\end{defn}
+
+\begin{bem}
+  Die Randabb. im zugeh. Kokettenkomplex ist gegeben durch
+  \[ (\delta^n \phi)_{\alpha_0, \ldots, \alpha_{n+1}} \coloneqq \sum_{i=0}^{n+1} (-1)^i \phi_{\alpha_0, \ldots, \hat{\alpha_i}, \ldots, \alpha_{n+1}}. \]
+\end{bem}
+
+\begin{defn}
+  Die Kohomologiegruppen dieses Komplexes heißen \emph{Čech-Homologiegruppen} von $\Fais$ bzgl. der Überdeckung $(U_\alpha)_{\alpha \in A}$.
+\end{defn}
+
+\begin{bem}
+  $\check{H}(U, \Fais) \cong \Gamma(X, \Fais)$ hängt nicht von der Überdeckung ab.
+\end{bem}
+
+% Ausgelassen: I.7.6 (Homologie und Kohomologie von Gruppen)
+
+% I.7.7 (Der de-Rham-Komplex)
+\begin{defn}
+  Sei $M$ eine $\Cont^\infty$-Mft, $\Omega^k(M)$ das $C^\infty(M)$-Modul der $k$-Formen auf $M$. Die \emph{äußere Ableitung} $\d : \Omega^k(M) \to \Omega^{k+1}(M)$ ist in lokalen Koordinaten $(x^1, \ldots, x^n)$ definiert durch
+  \[ \d \left( \sum_{\abs{I} = k} f_I \d x^I \right) = \sum_{\abs{I} = k} \sum_{i=1}^n \frac{\partial f_I}{\partial x^i} \d x^i \wedge \d x^I. \]
+  Die Kohomologiegruppen des so definierten Komplexes $\Omega^\bullet(M)$ heißen \emph{De-Rham-Kohomologiegruppen}.
+\end{defn}
+
+% I.7.11b)
+\begin{prop}
+  Seien $\phi, \psi : M \to N$ zwei glatt homotope Abbildungen von $\Cont^\infty$-Mften. Dann sind $\phi^*, \psi^* : \Omega^\bullet(N) \to \Omega^\bullet(M)$ kettenhomotop.
+\end{prop}
+
+% I.7.8 (Homologie und Kohomologie einer Lie-Algebra)
+
+\begin{defn}
+  Sei $\Lg$ eine Lie-Algebra und $A$ ein $\Lg$-Modul. Setze $C^k(\Lg, A) \coloneqq L(\wedge^k \Lg, A)$ und definiere $\d : C^k(\Lg, A) \to C^{k+1}(\Lg, A)$ durch eine allgemeine Cartan-Formel
+  \begin{align*}
+    (\d c)(g_1, \nldots, g_{k+1}) \coloneqq & \nspace{7} \sum_{1 \leq j < l \leq k+1} \nspace{7} (-1)^{j+l-1} c([g_j, g_l], g_1, \nldots, \hat{g_j}, \nldots, \hat{g_l}, \nldots, g_{k+1}) \\
+    & + \sum_{j=1}^{k+1} (-1)^j g_j c(g_1, \nldots, \hat{g_j}, \ldots, g_{k+1}).
+  \end{align*}
+  Die Kohomologiegruppen des so definierten Kokettenkomplexes werden mit $H^\bullet(\Lg, A)$ bezeichnet.
+\end{defn}
+
+
+\subsection{Exakte Sequenzen}
+
+% I.6 (Die lange Sequenz)
+
+% Ausgelassen: I.6.1 (Homologie als Funktion in zwei Variablen)
+
+% I.6.2 (Exakte Sequenzen)
+
+\begin{defn}
+  Eine (lange) \emph{exakte Sequenz} ab. Gruppen ist ein (Ko-)Kettenkomplex mit verschwindenden Homologiegruppen, \dh{}
+  \[ \im \partial_n = \ker \partial_{n-1} \quad \text{für alle $n$.} \]
+\end{defn}
+
+\begin{defn}
+  Eine \emph{kurze ex. Sequenz} (\keS{}) ist eine ex. Seq. der Form
+  \[ 0 \to A \to B \to C \to 0. \]
+\end{defn}
+
 % II.6.3d)
 \begin{lem}
   Jede \keS{} $0 \to X \xrightarrow{f} Y \xrightarrow{g} Z \to 0$ in einer abelschen Kategorie ist kanonisch isomorph zur Sequenz
   \[ 0 \to \ker g \to Y \to \coker f \to 0. \]
+\end{lem}
+
+\begin{defn}
+  Sei $0 \to A \to B \to C \to 0 \in \Aat$ eine \keS{}
+  Die Sequenz heißt \emph{spaltend}, falls sie isomorph zur \keS{} $0 \to A \to A \oplus C \to C$ ist.
+\end{defn}
+
+\begin{prop}
+  Für eine \keS{} $0 \to A \xrightarrow{f} B \xrightarrow{g} C \to 0 \in \Aat$ sind äquivalent:
+  \begin{itemize}
+    \item Die Sequenz spaltet.
+    \item Es existiert eine Retraktion $r : B \to A$ mit $r \circ f = \id_A$.
+    \item Es existiert ein Schnitt $s : C \to B$ mit $g \circ s = \id_C$.
+  \end{itemize}
+\end{prop}
+
+% I.6.5
+\begin{defn}
+  Eine Sequenz $0 \to \CCC{A} \to \CCC{B} \to \CCC{C} \to 0$ von Komplexen heißt \emph{exakt}, wenn für alle $n$ die Seq. $0 \to A_n \to B_n \to C_n \to 0$ exakt ist.
+\end{defn}
+
+% Ausgelassen: I.6.7 (Konstruktion der Randabbildung)
+
+% 1.6.8
+\begin{prop}
+  Eine kurze exakte Sequenz
+  $0 \to \CCC{A} \xrightarrow{i^\bullet} \CCC{B} \xrightarrow{p^\bullet} \CCC{C} \to 0$
+  von Kokettenkomplexen induziert eine lange exakte Sequenz
+  \[ \nldots \to H^n(\CCC{A}) \xrightarrow{H^n(i^\bullet)} H^n(\CCC{B}) \xrightarrow{H^n(p^\bullet)} H^n(\CCC{C}) \xrightarrow{\delta^n} H^{n+1}(\CCC{A}) \to \nldots \]
+\end{prop}
+
+% I.6.6
+\begin{lem}
+  Sei $0 \to A \to B \to C \to 0$ eine \keS{} ab. Gruppen und $X$ eine simpl. Menge.
+  Dann sind ebenfalls exakt:
+  \begin{align*}
+    0 \to \CC{C}(X; A) \to \CC{C}(X; B) \to \CC{C}(X; C) \to 0, \\
+    0 \to \CCC{C}(X; A) \to \CCC{C}(X; B) \to \CCC{C}(X; C) \to 0.
+  \end{align*}
+\end{lem}
+
+% I.6.3
+\begin{kor}
+  Sei $0 \to A \to B \to C \to 0$ eine \keS{} ab. Gruppen und $X$ eine simpl. Menge. Dann existieren lange exakte Sequenzen
+  \begin{align*}
+    \ldots \to H_n(X; A) \to H_n(X; B) \to H_n(C) \to H_{n-1}(X; A) \to \ldots \\
+    \ldots \to H^n(X; A) \to H^n(X; B) \to H^n(C) \to H^{n+1}(X; A) \to \ldots
+  \end{align*}
+\end{kor}
+
+% Ausgelassen: I.6.4 (Bemerkungen)
+
+% I.6.9 (Verallgemeinerung auf ein Koeffizientensystem)
+
+\begin{defn}
+  Eine Sequenz $0 \to \mathcal{B}' \to \mathcal{B} \to \mathcal{B}'' \to 0$ von (ko-)homologischen Koeffizientensystemen auf einer simpl. Menge $X$ heißt \emph{exakt}, falls
+  \[
+    0 \to \mathcal{B}'_\sigma \to \mathcal{B}_\sigma \to \mathcal{B}''_\sigma \to 0 \qquad
+    \text{für alle $\sigma \in X_n$ exakt ist.}
+  \]
+\end{defn}
+
+\begin{lem}
+  Eine kurze exakte Sequenz $0 \to \mathcal{B}' \to \mathcal{B} \to \mathcal{B}'' \to 0$ von (ko-)homologischen Koeff'systemen induziert kurze ex. Sequenzen
+  \begin{align*}
+    0 \to \CC{C}(X; \mathcal{B}') \to \CC{C}(X; \mathcal{B}) \to \CC{C}(X; \mathcal{B}'') \to 0, \\
+    0 \to \CCC{C}(X; \mathcal{B}') \to \CCC{C}(X; \mathcal{B}) \to \CCC{C}(X; \mathcal{B}'') \to 0
+  \end{align*}
+  und damit auch entsprechende lange exakte Sequenzen.
 \end{lem}
 
 % Ausgelassen: Gegenbeispiele für A4
@@ -2078,49 +2212,6 @@ Sei $\Cat$ eine Kategorie.
   \inlineitem{$K(\kVectFin) \cong \Z$} \quad
   \inlineitem{$K(\kVect) \cong 0$}
 \end{bspe}
-
-
-% Kapitel II.6 Funktoren zw. abelschen Kategorien
-
-
-% II.6.3: Äquivalenz zweier Definitionen von $H^n(\CC{C})$
-% Dies sollte das letzte Lemma vor II.6.2 bleiben!
-\begin{lem}
-  Sei $\Aat$ eine abelsche Kategorie, $X \xrightarrow{f} Y \xrightarrow{g} Z \in \Aat$ mit $g \circ f = 0$. Sei $(K, k)$ der Kern von $g$ und $(C, c)$ der Kokern von $f$. Deren univ. Eigenschaften induzieren Morphismen $a$, $b$ wie folgt:
-  \vspace{-8pt}
-  \begin{centertikz}
-    \matrix (mat) [matrix of nodes, column sep=1cm, row sep=0.45cm]{
-      & \node (C) {$C$}; \\
-      \node (X) {$X$}; &
-      \node (Y) {$Y$}; &
-      \node (Z) {$Z$}; \\
-      & \node (K) {$K$}; \\
-    };
-    \draw[->] (C) to node [above] {$b$} (Z);
-    \draw[->] (Y) to node [right] {$c$} (C);
-    \draw[->] (X) to node [above] {$f$} (Y);
-    \draw[->] (Y) to node [above] {$g$} (Z);
-    \draw[->] (X) to node [below] {$a$} (K);
-    \draw[->] (K) to node [right] {$k$} (Y);
-  \end{centertikz}
-  \vspace{-10pt}
-  Es gibt es einen kanonischen Isomorphismus $\coker a \cong \ker b$.
-\end{lem}
-
-% II.6.2
-\begin{defn}
-  \begin{itemize}
-    \item Sei $\Aat$ eine additive Kategorie. Indem man abelsche Gruppen durch Objekte aus $A$ und Gruppenmorphismen durch Morphismen in $\Aat$ ersetzt, kann man verallgemeinern: \\
-    \emph{(Ko-)Kettenkomplex}, \emph{Morphismus von (Ko-)Komplexen}
-    \item Sei $\Aat$ sogar abelsch. Die \emph{$n$-te Homologie} $H_n(\CC{C})$ eines Ketten- komplexes $\CC{C}$ aus $\Aat$ ist der Kokern der Abb. $a_n : C_n \to \ker \partial_{n-1}$, die durch die universelle Eigenschaft des Kerns induziert wird. \\
-    \item Ein Kettenkomplex heißt \emph{exakt} oder \emph{azyklisch}, wenn
-    \[ \fa{n \in \Z} H_n(\CC{C}) \cong 0. \]
-  \end{itemize}
-\end{defn}
-
-\begin{bem}
-  Das letzte Lemma besagt, dass $H_n(\CC{C})$ isomorph zum Kern der Abbildung $b_n : \coker \partial_n \to C_{n-1}$, die durch die universelle Eigenschaft des Kokerns induziert wird, ist.
-\end{bem}
 
 \subsection{Exakte Sequenzen von Garben}
 % II.5.12 (Garben und Prägarben)
@@ -2346,63 +2437,6 @@ Sei $\Cat$ eine Kategorie.
 \end{lem}
 
 % TODO: Abschnitt II.6.14 "Azyklische Objekte eines Situs"
-
-% TODO: Verschieben in Garbenabschnitt?
-% II.6.15
-\begin{defn}
-  Sei $f : X \to Y$ eine stetige Abbildung zwischen topol. Räumen. \\
-  Das \emph{direkte Bild} $f_\bullet(\Fais)$ einer (Prä-)Garbe $\Fais$ auf $X$ ist die durch
-  \[
-    f_\bullet(\Fais)(U) \coloneqq \Fais(f^{-1}(U)) \quad
-    \text{für $U \subset Y$ offen}
-  \]
-  definierte (Prä-)Garbe auf $Y$.
-\end{defn}
-
-% II.6.16, ausgelassen b)
-\begin{bem}
-  \begin{itemize}
-    \item $f_\bullet$ ist ein Funktor $f_\bullet : \MShSet(X) \to \MShSet(Y)$.
-    \item $(\blank)_\bullet$ ist selbst funktoriell: $f_\bullet \circ g_\bullet = (f \circ g)_\bullet$, $\id_\bullet = \Id$.
-    \item Die Konstruktion funktioniert für (Prä-)Garben von Mengen, ab. Gruppen, $A$-Linksmoduln und auch für $\O_X$-Modulgarben, wenn $f : (X, \O_X) \!\to\! (Y, \O_Y)$ ein Morphismus von geringten Räumen ist.
-  \end{itemize}
-\end{bem}
-
-% TODO: funktioniert das inverse Bild auch für Prägarben? Gilt dann eine Adjunktionsbeziehung?
-
-% II.6.17
-\begin{defn}
-  Sei $f : X \to Y$ eine stetige Abbildung zwischen topol. Räumen. \\
-  Das \emph{inverse Bild} ist der Funktor $f^\bullet : \ShSet(Y) \to \ShSet(X)$, der für Garben $\Fais \in \ShSet(Y)$ und $U \subset X$ offen definiert ist durch
-  \begin{align*}
-    f^\bullet(\Fais)(U) \coloneqq \{ \, & \text{Familien $(s_x \in \Fais_{f(x)})_{x \in U}$ von Keimen, für die gilt:} \\[-2pt]
-    & \text{Für alle $x \in X$ gibt es eine Umgebung $V \subset X$ von $f(x)$,} \\[-2pt]
-    & \text{eine Umgebung $W \subset U \cap f^{-1}(V)$ von $x$ und einen} \\[-2pt]
-    & \text{Schnitt $t \in \Fais(V)$ mit $\fa{x \in W} t_x = s_x$} \, \}.
-  \end{align*}
-\end{defn}
-
-% II.6.17
-\begin{prop}
-  Sei $f : X \to Y$ eine stetige Abb. zwischen topol. Räumen. \\
-  Dann besteht die Adjunktion \enspace $f^\bullet : \ShSet(Y) \rightleftarrows \ShSet(X) : f_\bullet$.
-\end{prop}
-
-% II.6.18 (Eigenschaften des inversen Bildes)
-\begin{bem}
-  \begin{itemize}
-    \item $(\blank)^\bullet$ ist kontravar. funktoriell: $g^\bullet \circ f^\bullet = (f \circ g)^\bullet$, $\id^\bullet = \Id$.
-    \item Alternative Definition: $f^\bullet(\Fais) \coloneqq (U \mapsto \Gamma(f(U), \Fais))^+$
-    % Ausgelassen: Zweite alternative Definition
-    \item Es gilt $f^\bullet(\Fais)_x = \Fais_{f(x)}$ für alle $x \in X$.
-    \item Die Konstruktion funktioniert für (Prä-)Garben von Mengen, ab. Gruppen, $A$-Linksmoduln, aber {\em nicht} für $\O_X$-Modulgarben, wenn $f : (X, \O_X) \!\to\! (Y, \O_Y)$ ein Morphismus von geringten Räumen ist.
-    \item Sei $f : X \to \pt$ und $\Fais$ die Garbe auf $\pt$ mit $\Fais(\pt) = A$. \\
-    Dann ist $f^\bullet(A) \cong \constSh{A}$ die konstante Garbe auf $X$ mit Faser $A$.
-  \end{itemize}
-\end{bem}
-
-% TODO: gilt $f^\bullet = (f^{-1})_\bullet$ für Homöomorphismen $f$?
-% TODO: Konstruktion von $f^*$ für Modulgarben verstehen, aufschreiben
 
 % Übungsblatt 17, Aufgabe 2
 \begin{lem}
