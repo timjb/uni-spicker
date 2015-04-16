@@ -51,7 +51,6 @@
 
 % TODO:
 % * Diagrammjadgregeln
-% * Propositionen über welke/weiche/feine Garben von ÜB 6
 % * Das Bild eines Garbenmorphismus ist die Garbifizierung des Bildes des Morphismus aufgefasst als Prägarbenmorphismus
 % * Serresche Quotientenkategorien (?)
 % * "Direct image with compact support" und Adjungierter
@@ -562,6 +561,7 @@ Dies ist eine übersetzte, korrigierte Zusammenfassung des Buches "`Methods of H
 
 \begin{bspe}
   \begin{itemize}
+    % Übungsblatt 12, Aufgabe 4
     \item Angenommen, in $\Cat$ existieren $\Jat$-Limiten bzw. $\Jat$-Kolimiten. Dann gibt es eine Adj.
     $\Delta \ladj \Lim$
     bzw.
@@ -577,6 +577,7 @@ Dies ist eine übersetzte, korrigierte Zusammenfassung des Buches "`Methods of H
 
 \begin{bspe}
   \begin{itemize}
+    % Übungsblatt 12, Aufgabe 5
     \item $(\ceil{\blank} : \R \to \Z) \ladj (i : \Z \hookrightarrow \R) \ladj (\floor{\blank} : \R \to \Z)$
     \item Sei $L \supset K$ eine endl. Körpererweiterung.
     Für eine Zwischenerw. $L \!\supseteq\! M \!\supseteq\! K$ sei
@@ -1144,7 +1145,13 @@ Dies ist eine übersetzte, korrigierte Zusammenfassung des Buches "`Methods of H
 
 % I.5.9
 \begin{defn}
-  Eine Garbe $\Fais$ auf $X$ heißt \emph{lokal konstant}, falls jeder Punkt in $X$ eine offene Umgebung $U$ besitzt, sodass $F|U$ isomorph zu einer konstanten Garbe ist.
+  Eine Garbe $\Fais$ auf $X$ heißt \emph{lokal konstant}, falls jeder Punkt in $X$ eine offene Umgebung $U$ besitzt, sodass $F|_U$ isomorph zu einer konstanten Garbe ist.
+\end{defn}
+
+\begin{defn}
+  Seien $\Fais, \Garb$ (Prä-)Garben auf $X$. Dann ist auch
+  \[ \Hom(\Fais, \Garb) : U \mapsto \Hom(\Fais|_U, \Garb|_U) \]
+  eine (Prä-)Garbe auf $X$, die sogenannte \emph{Hom-(Prä-)Garbe}.
 \end{defn}
 
 \begin{defn}
@@ -1159,9 +1166,21 @@ Dies ist eine übersetzte, korrigierte Zusammenfassung des Buches "`Methods of H
   \end{itemize}
 \end{defn}
 
+% Übungsblatt 6, Aufgabe 6b)
+\begin{lem}
+  Welke Garben sind immer auch weich.
+\end{lem}
+
 \begin{defn}
    Eine Garbe $\Fais$ ab. Gruppen auf einem topol. Raum $X$ heißt \emph{fein} (fine, fin), wenn für je zwei disjunkte, abgeschlossene Teilmengen $A_1, A_2 \subseteq X$ ein Garbenmorphismus $\alpha : \Fais \to \Fais$ existiert, sodass $\alpha$ auf einer offenen Umgebung von $A_1$ Null und auf einer offenen Umgebung von $A_2$ die Identität ist.
 \end{defn}
+
+\begin{lem}
+  \begin{itemize}
+    \item Eine Garbe $\Fais$ ab. Gruppen auf einem parakompakten Hausdorffraum ist genau dann fein, wenn $\Hom(\Fais, \Fais)$ welk ist.
+    \item Feine Garben auf parakompakten Hausdorffräumen sind weich.
+  \end{itemize}
+\end{lem}
 
 \begin{samepage}
   \subsection{(Lokal) geringte Räume}
@@ -2254,6 +2273,32 @@ Sei $\Aat$ eine abelsche Kategorie.
     \item Eine Sequenz $\Fais \to \Garb \to \Harb$ von Garben ab. Gruppen ist genau dann exakt, wenn sie halmweise exakt ist, \dh{} für alle $x \in X$ ist die induzierte Sequenz $\Fais_x \to \Garb_x \to \Harb_x$ exakt.
     \item Wenn eine Sequenz von Garben aufgefasst als Sequenz von Prägarben exakt ist, dann ist sie es auch als Sequenz von Garben.
     \item Sei $0 \to \Fais \to \Garb \to \Harb \to 0$ eine $\keS{}$ von Prägarben auf einem topol. Raum und $\Fais$, $\Harb$ sogar Garben. Dann ist auch $\Garb$ eine Garbe.
+  \end{itemize}
+\end{lem}
+
+% Übungsblatt 6, Aufgabe 5b),5c)
+\begin{lem}
+  Sei $0 \to \Fais \to \Garb \to \Harb \to \O \in \ShAb(X)$ eine \keS{} von Garben abelscher Gruppen auf einem topologischen Raum $X$.
+  \begin{itemize}
+    \item Sei $\Fais$ welk und $U \subseteq X$ offen. Dann ist auch
+    \[
+      0 \to \Gamma(U, \Fais) \to \Gamma(U, \Garb) \to \Gamma(U, \Harb) \to 0
+      \quad \text{exakt.}
+    \]
+    \item Sind $\Fais$ und $\Garb$ welk, dann auch $\Harb$.
+  \end{itemize}
+\end{lem}
+
+% Übungsblatt 6, Aufgabe 6c),6d)
+\begin{lem}
+  Sei $0 \to \Fais \to \Garb \to \Harb \to \O \in \ShAb(X)$ eine \keS{} von Garben abelscher Gruppen auf einem parakompakten Hausdorffraum $X$.
+  \begin{itemize}
+    \item Sei $\Fais$ weich und $A \subseteq X$ abgeschlossen. Dann ist auch
+    \[
+      0 \to \Gamma(A, \Fais) \to \Gamma(A, \Garb) \to \Gamma(A, \Harb) \to 0
+      \quad \text{exakt.}
+    \]
+    \item Sind $\Fais$ und $\Garb$ weich, dann auch $\Harb$.
   \end{itemize}
 \end{lem}
 
