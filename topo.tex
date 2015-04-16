@@ -17,6 +17,7 @@
 \DeclareMathOperator{\Deck}{Deck} % Gruppe der Decktransformationen
 \newcommand{\Cont}{\mathcal{C}} % Menge der stetigen/diff'baren Funktionen
 \newcommand{\Pow}{\mathcal{P}} % Potenzmenge (powerset)
+\newcommand{\clos}[1]{\overline{#1}} % topologischer Abschluss
 
 % Kleinere Klammern
 \delimiterfactor=701
@@ -650,7 +651,7 @@
 \end{defn}
 
 \begin{prop}
-  Ist $f : X \to Y$ eine stetige Abbildung, so ist die induz. Abb. $f^+ : X^+ \to Y^+$ genau dann stetig, wenn $f$ eigentlich ist.
+  Ist $f : X \to Y$ eine stetige Abbildung, so ist die induzierte Abbildung $f^+ : X^+ \to Y^+$ genau dann stetig, wenn $f$ eigentlich ist.
 \end{prop}
 
 % Vorlesung vom 19.5.2014
@@ -667,6 +668,19 @@
 \begin{prop}
   Sei $X$ ein normaler Hausdorffraum und $K$ ein kompakter Hausdorffraum. Dann faktorisiert jede stetige Abbildung $\phi : X \to K$ in eindeutiger Weise über die Stone-Čech-Kompaktifizierung von $X$, \dh{} es gibt eine eindeutige Abb. $\pi : \beta X \to K$ mit $\pi \circ \beta = \phi$.
 \end{prop}
+
+% Für HomoAlg: Aus HomoAlg-Übungsblatt 6, Aufgabe 6
+\begin{defn}
+  Ein topol. Raum $X$ heißt \emph{parakompakt}, wenn jede offene Überdeckung $X = {\bigcup}_{i \in I} U_i$ eine lokal endl. Verfeinerung besitzt, \dh{} es eine offene Überdeckung $X = {\bigcup}_{j \in J} V_j$ gibt, sodass jedes $V_j$ in einem $U_i$ enthalten ist und jedes $x \!\in\! X$ nur in endlich vielen $V_j$ liegt.
+\end{defn}
+
+% Für HomoAlg: Aus HomoAlg-Übungsblatt 6, Aufgabe 6
+\begin{lem}
+  \begin{itemize}
+    \item Parakompakte Hausdorffräume sind normal.
+    \item Sei $X$ ein parakompakter Hausdorffraum, $X = {\bigcup}_{i \in I} U_i$ eine offene Überdeckung. Dann existieren offene Mengen $(V_i)_{i \in I}$ mit $\clos{V_i} \leq U_i$, die $X$ immer noch überdecken: $X = {\bigcup}_{i \in I} V_i$.
+  \end{itemize}
+\end{lem}
 
 \section{Miscellanea}
 
@@ -763,6 +777,8 @@
   Seien $A_1, A_2, A_3 \in \R^3$ offen, beschränkt. Dann gibt es eine Ebene $E \subset \R^3$, die alle drei Teilmengen simultan halbiert.
 \end{satz}
 
+\columnbreak % LaTeX-Voodoo
+
 % Kapitel 9: Quotientenräume (Verkleben von Räumen), Simplizialkomplexe
 \section{Quotientenräume}
 
@@ -779,15 +795,15 @@
 
 \begin{prop}
   \begin{itemize}
-    \item Die Verkettung von Identifizierungen ist wieder eine Identifizierung.
+    \item Die Verkettung von Identifizierungen ist wieder eine.
     \item Eine surjektive Abbildung $f : X  \to Y$ ist genau dann eine Identifizierung, falls gilt: Für alle topol. Räume $Z$ und Abb. $g : Y \to Z$ ist $g$ genau dann stetig, wenn $g \circ f : X \to Z$ stetig ist.
   \end{itemize}
 \end{prop}
 
 \begin{defn}
   Sei ${\sim}$ eine Äquivalenzrelation auf einem topol. Raum $X$. Dann heißt die Menge $X/{\sim}$ versehen mit der Finaltopologie bzgl. der Abb.
-  \[ p : X \to X/{\sim}, \quad x \mapsto [x]. \]
-   \emph{Quotientenraum} (mit \emph{Quotientopologie}).
+  $p : X \to X/{\sim}, \quad x \mapsto [x]$ \enspace
+  \emph{Quotientenraum} (mit \emph{Quotientopol.})
 \end{defn}
 
 \begin{bem}
@@ -835,7 +851,7 @@
 % Ausgelassen: $M \approx \R P^2 \setminus p(A)$, wobei $A \subset S^2$ eine offene Kappe um den Nordpol und $p : S^2 \to \R P^2$ ist. Begründung: $\R P^2 \setminus p(A) \approx S^1 \times \cinterval{-1}{1} / (x, t) \sim (-x, -t)$. Betrachte $\phi : \I \times \cinterval{-1}{1} \to S^1 \times \cinterval{-1}{1} / {\sim}, \quad (x, t) \mapsto (e^{i \pi x}, t)$. Die Abb. $\phi$ faktorisiert über M
 
 \begin{defn}
-  Seien $X, Y$ topologische Räume, $A \subset X$ und $f : A \to Y$ stetig. Sei ${\sim}$ die kleinste Äquivalenzrelation auf $X \sqcup Y$, für die $a \sim f(a)$ für alle $a \in A$ gilt. Dann heißt
+  Seien $X, Y$ topol. Räume, $A \!\subset\! X$ und $f : A \!\to\! Y$ stetig. Sei ${\sim}$ die kleinste Äq'relation auf $X \sqcup Y$ mit $\fa{a \!\in\! A} a \sim f(a)$. Dann heißt
   \[
     Y \cup_f X \coloneqq (X \sqcup Y) / {\sim}
     \qquad \text{\emph{Anheftung von $X$ entlang $f$.}}
