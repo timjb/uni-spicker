@@ -2560,7 +2560,7 @@ Sei $\Aat$ eine abelsche Kategorie.
 
 % III.1.4a)
 \begin{kor}
-  Seien $\CC{P} \to X$ und $\CC{P} \to X$ projektive Auflösungen desselben Obj. $X \in \Ob(\Aat)$. Dann gibt es einen Morphismen von Auflösungen $f : \CC{P} \to \CC{Q}$ und $g : \CC{Q} \to \CC{P}$ mit $f \circ g \simeq \id$ und $g \circ f \simeq \id$.
+  Seien $\CC{P} \to X$ und $\CC{P} \to X$ projektive Auflösungen desselben Obj. $X \in \Ob(\Aat)$. Dann gibt es Morphismen von Auflösungen $f : \CC{P} \to \CC{Q}$ und $g : \CC{Q} \to \CC{P}$ mit $f \circ g \simeq \id$ und $g \circ f \simeq \id$.
 \end{kor}
 
 % Ausgelassen: III.1.4b)
@@ -2620,6 +2620,40 @@ Sei $\Aat$ eine abelsche Kategorie.
 % Ausgelassen: Großer Ausblick in III.1.6 (Was is die abgeleitete Kategorie?)
 
 % III.2 Abgeleitete Kategorien und Lokalisierung
+
+% III.2.2
+\begin{defn}
+  Die \emph{Lokalisierung} einer Kat. $\Cat$ an einer Klasse $S \subset \Mor(\Cat)$ von Morphismen ist die Kat. $\Cat[S^{-1}]$ mit $\Ob(\Cat[S^{-1}]) \coloneqq \Ob(\Cat)$ und
+  \begin{align*}
+    \Hom_{\Cat[S^{-1}]}(X, Y) \coloneqq \{ \, & \text{Ketten in $\Cat$, bestehend aus Morphismen aus $\Cat$} \\[-4pt]
+    & \text{und formalen Inversen von Morphismen in $S$,} \\[-2pt]
+    & \text{die bei $X$ beginnen und bei $Y$ enden} \, \} / \sim.
+  \end{align*}
+  Dabei wird die Kongruenzrelation ${\sim}$ erzeugt von
+  \begin{align*}
+    (X \xrightarrow{f} Y \xrightarrow{g} Z) \sim (X \xrightarrow{g \circ f} Z), \quad
+    & (X \xrightarrow{\id} X) \sim \text{leere Kette}, \\
+    (S \xrightarrow{s} T \xleftarrow{s} S) \sim (S \xrightarrow{\id} S), \quad
+    & (T \xleftarrow{s} S \xrightarrow{s} T) \sim (T \xrightarrow{\id} T)
+  \end{align*}
+  für Morphismen $(X \xrightarrow{f} Y), (Y \xrightarrow{g} Z) \in \Mor(\Cat)$ und $(S \xrightarrow{s} T) \in S$.
+\end{defn}
+
+% III.2.2
+\begin{bem}
+  Es gibt einen kanonischen Funktor $Q : \Cat \to \Cat[S^{-1}]$, der die Morphismen aus $S$ auf Isomorphismen abbildet.
+\end{bem}
+
+% III.2.2
+\begin{lem}
+  Die Lokalisierung erfüllt folgende universelle Eigenschaft: \\
+  Jeder andere Funktor $F : \Cat \to \Dat$, der die Morphismen aus $S$ auf Isomorphismen abbildet, faktorisiert eindeutig über $Q$, \dh{} es gibt gibt genau einen Funktor $G : \Cat[S^{-1}] \to \Dat$ mit $F = G \circ Q$.
+\end{lem}
+
+% III.2.1
+\begin{defn}
+  Die \emph{abgeleitete Kategorie} $\Der(\Aat)$ der abelschen Kategorie $\Aat$ ist die Lokalisierung $\Kom(\Aat)[S^{-1}]$ von $\Kom(\Aat)$ an der Klasse $S \subset \Mor(\Kom(\Aat))$ der Quasiisomorphismen.
+\end{defn}
 
 % TODO
 
