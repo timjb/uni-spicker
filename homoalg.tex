@@ -1696,7 +1696,7 @@ Sei $\Aat$ eine abelsche Kategorie.
   Sei $\CC{C}$ ein Kettenkomplex.
   \begin{itemize}
     \item $C_n$ heißt Objekt der \emph{$n$-Ketten},
-    \item $\partial_n : C_n \to C_{n-1}$ heißt \emph{Randabbildung},
+    \item $\partial_n : C_n \to C_{n-1}$ heißt \emph{Randabbildung} oder \emph{Differential},
     \item $Z_n(\CC{C}) \coloneqq \ker \partial_n \hookrightarrow C_n(\CC{C})$ heißt Objekt der \emph{$n$-Zykel},
     \item $B_n(\CC{C}) \coloneqq \im \partial_{n+1} \hookrightarrow Z_n(\CC{C})$ heißt Objekt der \emph{$n$-Ränder}.
     %\item $H_n(\CC{C}) \coloneqq Z_n(\CC{C}) / B_n(\CC{C})$ heißt \emph{$n$-te Homologiegruppe}.
@@ -1765,6 +1765,11 @@ Sei $\Aat$ eine abelsche Kategorie.
   \]
 \end{defn}
 
+% III.2.3
+\begin{defn}
+  Ein (Ko-)Kettenkomplex heißt \emph{zyklisch} wenn seine Differentiale alle Null sind.
+\end{defn}
+
 % Vorgezogen: I.6.5 (Morphismen von Komplexen)
 \begin{defn}
   Eine Morphismus $f : \CC{C} \to \CC{D}$ (bzw. $f : \CCC{C} \to \CCC{D}$) zwischen (Ko-)Kettenkomplexen ist eine Familie von Homomorphismen
@@ -1780,13 +1785,15 @@ Sei $\Aat$ eine abelsche Kategorie.
   \]
 \end{defn}
 
-% Aus III.1.1
+% Aus III.1.1, III.2.3
 \begin{defn}
-  Die \emph{Kategorie der (Ko-)Komplexe} in $\Aat$ ist $\Kom(\Aat)$.
+  Die \emph{Kategorie der (Ko-)Komplexe} in $\Aat$ ist $\Kom(\Aat)$. \\
+  Die Unterkat. der zyklischen Komplexe ist $\Kom_0(\Aat) \subset \Kom(\Aat)$.
 \end{defn}
 
 \begin{prop}
-  (Ko-)Homologie ist ein Funktor $H_n, H^n : \Kom(\Aat) \to \Aat$.
+  (Ko-)Homologie ist ein Funktor $H_n, H^n : \Kom(\Aat) \to \Aat$
+  beziehungsweise $H_\bullet, H^\bullet : \Kom(\Aat) \to \Kom_0(\Aat)$.
 \end{prop}
 
 % I.7.9 (Homotope Abbildungen von Komplexen)
@@ -1795,13 +1802,27 @@ Sei $\Aat$ eine abelsche Kategorie.
   $\fa{n \in \N} \partial^D_{n+1} \circ k_n + k_{n-1} \circ \partial^C_n = f_n - g_n$.
 \end{defn}
 
-% I.7.10
+\begin{nota}
+  $f \simeq g$ für kettenhomotope $f, g : \CC{C} \to \CC{D}$
+\end{nota}
+
+% III.1.2b) (verallgemeinert)
+\begin{bem}
+  Kettenhomotopien lassen sich verknüpfen:
+  \[ f_1 \simeq f_2, \enspace g_1 \simeq g_2 \implies g_1 \circ f_1 \simeq g_2 \circ f_2 \]
+\end{bem}
+
+% I.7.10, III.1.2c)
 \begin{lem}
+  Kettenhomotope Abb. ind. dieselbe Abb. in (Ko-)Homologie:
   Seien $f, g : \CC{C} \to \CC{D}$ kettenhomotop. Dann gilt
-  \[ H_n(f) = H_n(g) \quad \text{für alle $n \in \N$.} \]
+  $H_\bullet(f) = H_\bullet(g)$.
+  %\[ H_n(f) = H_n(g) \quad \text{für alle $n \in \N$.} \]
 \end{lem}
 
-\subsection{(Ko-)Homologie von simplizialen Mengen und topologischen Räumen}
+\begin{samepage}
+  \subsection{(Ko-)Homologie von simplizialen Mengen und topologischen Räumen}
+\end{samepage}
 
 % I.4.1
 \begin{defn}
@@ -2360,6 +2381,10 @@ Sei $\Aat$ eine abelsche Kategorie.
   \end{itemize}
 \end{defn}
 
+\begin{bem}
+  Ein Objekt $X \in \Ob(\Aat)$ ist genau dann projektiv, wenn $X \in \Ob(\Aat^\op)$ injektiv ist und umgekehrt.
+\end{bem}
+
 % II.6.6
 \begin{prop}
   Sei $A$ ein Ring, $\AMod$ und $\ModA$ die Kategorien der $A$-Links- bzw. $A$-Rechtsmoduln.
@@ -2518,12 +2543,83 @@ Sei $\Aat$ eine abelsche Kategorie.
 
 % III.1.1
 \begin{defn}
-  Eine \emph{projektive Auflösung} eines Objektes $E \in \Ob(\Aat)$ ist ein Kettenkomplex $\CC{F}$ bestehend aus projektiven Objekten in $E$ und ein Augmentierungsmorphismus $\epsilon : F_0 \to E$, sodass
+  Eine \emph{projektive Auflösung} $\CC{F} \xrightarrow{\epsilon} E$ eines Obj. $E \in \Ob(\Aat)$ ist ein Kettenkomplex $\CC{F}$ bestehend aus projektiven Objekten in $\Aat$ und ein Augmentierungsmorphismus $\epsilon : F_0 \to E$, sodass
   \[ \ldots \to F_3 \to F_2 \to F_1 \to F_0 \xrightarrow{\epsilon} E \to 0 \]
-  azyklisch ist. Entsprechend besteht bei einer \emph{freien Auflösung} eines Obj. aus $\Aat \!=\! \AMod$ der Komplex $\CC{F}$ aus freien $A$-Moduln.
+  azyklisch ist. Entsprechend besteht bei einer \emph{freien Auflösung} eines Obj. aus $\Aat \!=\! \AMod$ der Komplex $\CC{F}$ aus freien $A$-Moduln. \\
+  Eine \emph{injektive Auflösung} von $E$ ist eine proj. Auflösung in $\Aat^\op$.
 \end{defn}
 
+% III.1.3
+\begin{lem}
+  Seien $\CC{P} \xrightarrow{\epsilon_X} X$ und $\CC{Q} \xrightarrow{\epsilon_Y} Y$ projektive Auflösungen von Objekten $X, Y \in \Ob(\Aat)$ und $f \in \Hom_\Aat(X, Y)$ ein Morphismus.
+  \begin{itemize}
+    \item Dann existiert ein Morphismus von Auflösungen $R(f) : \CC{P} \to \CC{Q}$ der $f$ fortsetzt, \dh{} $R(f)$ ist ein Morphismen von Komplexen und es gilt $\epsilon_Y \circ R(f)_0 = f \circ \epsilon_X$.
+    \item Die Fortsetzung ist eindeutig bis auf Kettenhomotopie.
+  \end{itemize}
+\end{lem}
 
+% III.1.4a)
+\begin{kor}
+  Seien $\CC{P} \to X$ und $\CC{P} \to X$ projektive Auflösungen desselben Obj. $X \in \Ob(\Aat)$. Dann gibt es einen Morphismen von Auflösungen $f : \CC{P} \to \CC{Q}$ und $g : \CC{Q} \to \CC{P}$ mit $f \circ g \simeq \id$ und $g \circ f \simeq \id$.
+\end{kor}
+
+% Ausgelassen: III.1.4b)
+
+% III.1.4c)
+\begin{bem}
+  Duale Aussagen gelten für injektive Auflösungen.
+\end{bem}
+
+% III.1.5
+\begin{defn}
+  Ein Morphismus $f : \CC{K} \to \CC{L}$ zwischen Kettenkomplexen heißt \emph{Quasiisomorphismus} (Qis), falls $H_\bullet(f) : H_\bullet(K) \to H_\bullet(L)$ ein Isomorphismus ist.
+\end{defn}
+
+% III.1.6
+\begin{bem}
+  \begin{itemize}
+    \item Zwei proj. Auflösungen desselben Obj. sind quasiisomorph.
+    \item Ein Komplex $\CC{K}$ ist genau dann azyklisch, wenn $\CC{K} \to \CC{0}$ ($\CC{0}$ ist der Nullkomplex) ein Quasiisomorphismus ist.
+    \item Jede projektive Auflösung $\CC{P} \xrightarrow{\epsilon} X$ induziert einen Qis
+    \vspace{-8pt}
+    \begin{centertikz}
+      \matrix (mat) [matrix of nodes, column sep=1cm, row sep=0.45cm]{
+        \node (A) {$\phantom{A}\ldots$}; &
+        \node (B) {$P_2$}; &
+        \node (C) {$P_1$}; &
+        \node (D) {$P_0$}; &
+        \node (E) {$0$}; &
+        \node (F) {$\ldots\phantom{A}$}; \\
+        \node (A') {$\phantom{A}\ldots$}; &
+        \node (B') {$0$}; &
+        \node (C') {$0$}; &
+        \node (D') {$X$}; &
+        \node (E') {$0$}; &
+        \node (F') {$\ldots\phantom{A}$}; \\
+      };
+      \draw[->] (A) to node {} (B);
+      \draw[->] (B) to node {} (C);
+      \draw[->] (C) to node {} (D);
+      \draw[->] (D) to node {} (E);
+      \draw[->] (E) to node {} (F);
+      \draw[->] (A') to node {} (B');
+      \draw[->] (B') to node {} (C');
+      \draw[->] (C') to node {} (D');
+      \draw[->] (D') to node {} (E');
+      \draw[->] (E') to node {} (F');
+      %\draw[->] (A) to node [right] {$\alpha$} (A');
+      \draw[->] (B) to node {} (B');
+      \draw[->] (C) to node {} (C');
+      \draw[->] (D) to node [right] {$\epsilon$} (D');
+      \draw[->] (E) to node {} (E');
+    \end{centertikz}
+    %\vspace{-10pt}
+  \end{itemize}
+\end{bem}
+
+% Ausgelassen: Großer Ausblick in III.1.6 (Was is die abgeleitete Kategorie?)
+
+% III.2 Abgeleitete Kategorien und Lokalisierung
 
 % TODO
 
