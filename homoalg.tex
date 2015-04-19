@@ -6,7 +6,17 @@
 }
 
 \usepackage{tikz}
-\usetikzlibrary{matrix,arrows}
+%\usetikzlibrary{babel}
+\usetikzlibrary{matrix,arrows,cd}
+%\usepackage{tikz-cd}
+
+% http://tex.stackexchange.com/questions/117732/tikz-and-babel-error
+% Es ist schierer Wahnsinn, welche Hacks LaTeX benötigt!
+\tikzset{
+  every picture/.prefix style={
+    execute at begin picture=\shorthandoff{"}
+  }
+}
 
 \usepackage{pgffor} % \foreach-Schleifen
 \usepackage{stmaryrd} % liefert \mapsfrom
@@ -2054,8 +2064,7 @@ Sei $\Aat$ eine abelsche Kategorie.
 % I.6.2 (Exakte Sequenzen)
 
 \begin{defn}
-  Eine (lange) \emph{exakte Sequenz} ab. Gruppen ist ein (Ko-)Kettenkomplex mit verschwindenden Homologiegruppen, \dh{}
-  \[ \im \partial_n = \ker \partial_{n-1} \quad \text{für alle $n$.} \]
+  Eine (lange) \emph{exakte Sequenz} ist ein (Ko-)Kettenkomplex mit verschwindender Homologie.
 \end{defn}
 
 \begin{defn}
@@ -2082,6 +2091,37 @@ Sei $\Aat$ eine abelsche Kategorie.
     \item Es existiert ein Schnitt $s : C \to B$ mit $g \circ s = \id_C$.
   \end{itemize}
 \end{prop}
+
+% III.2.3
+\begin{defn}
+  Die abelsche Kategorie $\Aat$ heißt \emph{halbeinfach}, wenn alle kurzen exakten Sequenzen in $\Aat$ spalten.
+\end{defn}
+
+% III.2.3
+\begin{bsp}
+  Die Kategorie der VR über einem Körper ist halbeinfach.
+\end{bsp}
+
+\begin{bem}
+  Jede (lange) exakte Sequenz lässt sich in \keS{} zerlegen:
+  % Mit der neuesten Version von tikz-cd (in Entwicklung) sind die Pfeile
+  % angeblich nicht mehr so windschief: siehe Kommentar auf
+  % http://tex.stackexchange.com/questions/130780/tikz-cd-how-can-i-arrange-diagonal-arrows-parallel
+  % --> TODO: auf neue Version warten, rekompilieren, diesen Kommentar entfernen
+  \begin{center}
+    \begin{tikzcd}[column sep=0.2cm, row sep=0.3cm]
+      0 \arrow[rd] && 0 && 0 \arrow[rd] && 0 \\
+      & C_{n+1} \arrow[rd] \arrow[ru] &&&& C_{n-1} \arrow[rd] \arrow[ru] \\
+      \nldots \to L_{n+1} \arrow[ru] \arrow[rr, "\partial_{n+1}"] &&
+      L_n \arrow[rd] \arrow[rr, "\partial_{n}"] &&
+      L_{n-1} \arrow[ru] \arrow[rr, "\partial_{n-1}"] &&
+      L_{n-2} \to \nldots \\
+      &&& C_n \arrow[ru] \arrow[rd] \\
+      && 0 \arrow[ru] && 0
+    \end{tikzcd}
+  \end{center}
+  Dabei ist $C_i \coloneqq \ker \partial_{i-1} \cong \coker \partial_{i+1}$. Umgekehrt lässt sich aus solch diagonal verknüpften kurzen exakten Sequenzen eine \leS{} bauen.
+\end{bem}
 
 % I.6.5
 \begin{defn}
@@ -2655,6 +2695,51 @@ Sei $\Aat$ eine abelsche Kategorie.
   Die \emph{abgeleitete Kategorie} $\Der(\Aat)$ der abelschen Kategorie $\Aat$ ist die Lokalisierung $\Kom(\Aat)[S^{-1}]$ von $\Kom(\Aat)$ an der Klasse $S \subset \Mor(\Kom(\Aat))$ der Quasiisomorphismen.
 \end{defn}
 
-% TODO
+% III.2.3
+\begin{bem}
+  Der Homologiefunktor $H_\bullet : \Kom(\Aat) \to \Kom_0(\Aat)$ bildet Quasiisomorphismen auf Isomorphismen ab. Somit gibt es einen Funktor $k : \Der(\Aat) \to \Kom_0(\Aat)$ mit $H_\bullet = k \circ Q$.
+\end{bem}
+
+% III.2.4
+\begin{prop}
+  Wenn die abelsche Kategorie $\Aat$ halbeinfach ist, dann ist $k : \Der(\Aat) \to \Kom_0(\Aat)$ eine Kategorienäquivalenz.
+\end{prop}
+
+% III.2.5 (Varianten)
+\begin{defn}
+  Die Kategorien der (nach links/rechts) beschränkten Ketten- komplexe sind die vollen Unterkategorien von $\Kom(\Aat)$ mit
+  \begin{align*}
+    \Ob(\Kom^+(\Aat)) & \coloneqq \Set{K_\bullet \in \Ob(\Kom(\Aat))}{\ex{i_0 \!\in\! \Z\!}\! \fa{i \leq i_0\!}\! K_i \!=\! 0}, \\
+    \Ob(\Kom^-(\Aat)) & \coloneqq \Set{K_\bullet \in \Ob(\Kom(\Aat))}{\ex{i_0 \!\in\! \Z\!}\! \fa{i \geq i_0\!}\! K_i \!=\! 0}, \\
+    \Ob(\Kom^b(\Aat)) & \coloneqq \Ob(\Kom^+(\Aat)) \cap \Ob(\Kom^+(\Aat)).
+  \end{align*}
+\end{defn}
+
+% III.2.5 (Varianten)
+\begin{defn}
+  Die Lokalisierung dieser Kategorien an der Klasse der Quasi- isomorphismen wird mit $\Der^+(\Aat)$, $\Der^-(\Aat)$ bzw. $\Der^b(\Aat)$ bezeichnet.
+\end{defn}
+
+% III.2.5 (Varianten)
+\begin{bem}
+  Das Problem mit der bisherigen Definition der abgeleiteten Kategorie ist, dass es schwierig ist, sie gut zu verstehen, da ihre Morphismenmengen schwer zu begreifen sind.
+\end{bem}
+
+% III.2.6
+\begin{defn}
+  Sei $\Cat$ eine beliebige Kategorie.
+  Eine Klasse $S \subset \Mor(\Cat)$ von Morphismen heißt \emph{lokalisierend}, wenn
+  \begin{itemize}
+    \item $S$ ist abgeschlossen unter Kompositionen: $\id_X \in S$ für alle $X \in \Ob(\Cat)$ und $s \circ t \in S$ für alle passenden $s, t \in S$.
+    \item Erweiterungsbedingungen: a) Für alle $(X \xrightarrow{f} Y \xleftarrow{s \in S} Z) \in \Cat$ gibt es $W \!\in\! \Ob(\Cat)$, $(W \xrightarrow{t \in S} X) \in \Cat$ und $(W \xrightarrow{g} Z) \in \Cat$ mit $f \circ t \!=\! s \circ g$. \\[4pt]
+    b) Die duale Bedingung zu a)
+    \item Für parallele Morphismen $f, g \in \Hom_\Cat(X, Y)$ gilt
+    \[ \ex{s \in S} s \circ f = s \circ g \iff \ex{t \in S} f \circ t = g \circ t. \]
+  \end{itemize}
+\end{defn}
+
+
+
+% TODO: III.2.7 (Dächer!!!)
 
 \end{document}
