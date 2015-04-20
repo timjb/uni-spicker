@@ -28,6 +28,9 @@
 \newenvironment{centertikz}
   {\begin{center}\begin{tikzpicture}}
   {\end{tikzpicture}\end{center}}
+\newenvironment{centertikzcd}
+  {\begin{center}\begin{tikzcd}}
+  {\end{tikzcd}\end{center}}
 
 \newcommand{\nspace}[1]{\foreach \i in {1,...,#1}{ \! }} % Negativer Abstand
 \DeclareMathOperator{\sk}{sk} % Skelett
@@ -2108,18 +2111,16 @@ Sei $\Aat$ eine abelsche Kategorie.
   % angeblich nicht mehr so windschief: siehe Kommentar auf
   % http://tex.stackexchange.com/questions/130780/tikz-cd-how-can-i-arrange-diagonal-arrows-parallel
   % --> TODO: auf neue Version warten, rekompilieren, diesen Kommentar entfernen
-  \begin{center}
-    \begin{tikzcd}[column sep=0.2cm, row sep=0.3cm]
-      0 \arrow[rd] && 0 && 0 \arrow[rd] && 0 \\
-      & C_{n+1} \arrow[rd] \arrow[ru] &&&& C_{n-1} \arrow[rd] \arrow[ru] \\
-      \nldots \to L_{n+1} \arrow[ru] \arrow[rr, "\partial_{n+1}"] &&
-      L_n \arrow[rd] \arrow[rr, "\partial_{n}"] &&
-      L_{n-1} \arrow[ru] \arrow[rr, "\partial_{n-1}"] &&
-      L_{n-2} \to \nldots \\
-      &&& C_n \arrow[ru] \arrow[rd] \\
-      && 0 \arrow[ru] && 0
-    \end{tikzcd}
-  \end{center}
+  \begin{centertikzcd}[column sep=0.2cm, row sep=0.3cm]
+    0 \arrow[rd] && 0 && 0 \arrow[rd] && 0 \\
+    & C_{n+1} \arrow[rd] \arrow[ru] &&&& C_{n-1} \arrow[rd] \arrow[ru] \\
+    \nldots \to L_{n+1} \arrow[ru] \arrow[rr, "\partial_{n+1}"] &&
+    L_n \arrow[rd] \arrow[rr, "\partial_{n}"] &&
+    L_{n-1} \arrow[ru] \arrow[rr, "\partial_{n-1}"] &&
+    L_{n-2} \to \nldots \\
+    &&& C_n \arrow[ru] \arrow[rd] \\
+    && 0 \arrow[ru] && 0
+  \end{centertikzcd}
   Dabei ist $C_i \coloneqq \ker \partial_{i-1} \cong \coker \partial_{i+1}$. Umgekehrt lässt sich aus solch diagonal verknüpften kurzen exakten Sequenzen eine \leS{} bauen.
 \end{bem}
 
@@ -2729,17 +2730,66 @@ Sei $\Aat$ eine abelsche Kategorie.
 \begin{defn}
   Sei $\Cat$ eine beliebige Kategorie.
   Eine Klasse $S \subset \Mor(\Cat)$ von Morphismen heißt \emph{lokalisierend}, wenn
-  \begin{itemize}
+  \begin{enumerate}
     \item $S$ ist abgeschlossen unter Kompositionen: $\id_X \in S$ für alle $X \in \Ob(\Cat)$ und $s \circ t \in S$ für alle passenden $s, t \in S$.
     \item Erweiterungsbedingungen: a) Für alle $(X \xrightarrow{f} Y \xleftarrow{s \in S} Z) \in \Cat$ gibt es $W \!\in\! \Ob(\Cat)$, $(W \xrightarrow{t \in S} X) \in \Cat$ und $(W \xrightarrow{g} Z) \in \Cat$ mit $f \circ t \!=\! s \circ g$. \\[4pt]
     b) Die duale Bedingung zu a)
     \item Für parallele Morphismen $f, g \in \Hom_\Cat(X, Y)$ gilt
     \[ \ex{s \in S} s \circ f = s \circ g \iff \ex{t \in S} f \circ t = g \circ t. \]
-  \end{itemize}
+  \end{enumerate}
 \end{defn}
 
+% III.2.7a)
+\begin{bem}
+  Aus der Bedingung 2a (oder b) ergibt sich eine vereinfachte Darstellung der Elemente von $\Hom_{\Cat[S^{-1}]}(X, Y)$, wenn $S$ lokalisierend ist: Nämlich kann man in den formalen Ketten alle künstlichen Inversen auf die linke (bzw. rechte) Seite verfrachten. \\
+  Die Bedingung 1 erlaubt das Zusammenfassen von künstl. Inversen.
+\end{bem}
 
+% III.2.7b)
+\begin{bem}
+  Die Klasse der Qis ist i.\,A. (leider) nicht lokalisierend. :-(
+\end{bem}
 
-% TODO: III.2.7 (Dächer!!!)
+% III.2.8
+\begin{lem}
+  Sei $\Cat$ eine beliebige Kategorie, $S \subset \Mor(\Cat)$ lokalisierend. \\
+  Dann gibt es folgende äquivalente Konstruktion von $\Cat[S^{-1}]$:
+  \begin{itemize}
+    \item $\Ob(\Cat[S^{-1}]) \coloneqq \Ob(\Cat)$
+    \item Morphismen von $X$ nach $Y$ in $\Cat[S^{-1}]$ sind Äquivalenzklassen von \emph{Dächern}, das sind Diagramme der Form
+    \iffalse
+    \begin{centertikz}
+      \matrix (mat) [matrix of nodes, column sep=1.4cm, row sep=0.3cm]{
+        & \node (X') {$X'$}; \\
+        \node (X) {$X$}; &&
+        \node (Y) {$Y$}; \\
+      };
+      \draw[->] (X') to node [above] {$s \!\in\! S\quad$} (X);
+      \draw[->] (X') to node [above] {$f$} (Y);
+    \end{centertikz}
+    \fi
+    \begin{centertikzcd}[column sep=1.4cm, row sep=0.3cm]
+      & \arrow{ld}[swap]{s \in S} X' \arrow{rd}{f} \\
+      X && Y
+    \end{centertikzcd}
+    \item Zwei Dächer (mit Spitzen $X'$ und $X''$) heißen äquivalent, wenn es ein kommutatives Diagramm von folgender Form gibt:
+    \begin{centertikzcd}[column sep=1.4cm, row sep=0.3cm]
+      && \arrow{ld}[swap]{r \in S} X''' \arrow{rd}{h} \\
+      & |[alias=XP]| X' \arrow[rrrd, swap, "f"] &&
+      \arrow[llld, crossing over, "t \in S"] X'' \arrow{rd}{g} \\
+      X \arrow[from=XP, swap, "s \in S"] &&&& Y
+    \end{centertikzcd}
+    \item Der Identitätsmorphismus auf $X$ ist das Dach $X \xleftarrow{\id_X} X \xrightarrow{\id_X} X$.
+    \item Mit Bedingung 2a kann man Morphismen verknüpfen:
+    \begin{centertikzcd}[column sep=1.4cm, row sep=0.3cm]
+      && X'' \arrow[ld, dashed, swap, "t' \in S"] \arrow[rd, dashed, "f'"] \\
+      & X' \arrow[ld, swap, "s \in S"] \arrow[rd, "f"] &&
+      Y' \arrow[ld, swap, "t \in S"] \arrow[rd, "g"] \\
+      X && Y && Z
+    \end{centertikzcd}
+  \end{itemize}
+\end{lem}
+
+% TODO: III.2.9 (Bemerkungen zu Dächern!!!)
 
 \end{document}
