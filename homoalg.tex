@@ -2729,19 +2729,23 @@ Sei $\Aat$ eine abelsche Kategorie.
 % III.2.6
 \begin{defn}
   Sei $\Cat$ eine beliebige Kategorie.
-  Eine Klasse $S \subset \Mor(\Cat)$ von Morphismen heißt \emph{lokalisierend}, wenn
+  Eine Klasse $S \subset \Mor(\Cat)$ von Morphismen heißt \emph{(links-)lokalisierend}, wenn
   \begin{enumerate}
     \item $S$ ist abgeschlossen unter Kompositionen: $\id_X \in S$ für alle $X \in \Ob(\Cat)$ und $s \circ t \in S$ für alle passenden $s, t \in S$.
-    \item Erweiterungsbedingungen: a) Für alle $(X \xrightarrow{f} Y \xleftarrow{s \in S} Z) \in \Cat$ gibt es $W \!\in\! \Ob(\Cat)$, $(W \xrightarrow{t \in S} X) \in \Cat$ und $(W \xrightarrow{g} Z) \in \Cat$ mit $f \circ t \!=\! s \circ g$. \\[4pt]
-    b) Die duale Bedingung zu a)
+    \item Erweiterungsbedingung: Für alle $(X \xrightarrow{f} Y \xleftarrow{s \in S} Z) \in \Cat$ gibt es $W \!\in\! \Ob(\Cat)$, $(W \xrightarrow{s' \in S} X)$ und $(W \xrightarrow{f'} Z) \in \Cat$ mit $f \circ s' \!=\! s \circ f'$.
     \item Für parallele Morphismen $f, g \in \Hom_\Cat(X, Y)$ gilt
-    \[ \ex{s \in S} s \circ f = s \circ g \iff \ex{t \in S} f \circ t = g \circ t. \]
+    \[ \ex{s \in S} s \circ f = s \circ g \implies \ex{t \in S} f \circ t = g \circ t. \]
   \end{enumerate}
 \end{defn}
 
+% selbst bewiesen
+\begin{bem}
+  Man kann zeigen: Wenn in Bedingung 2 auch $f \in S$ gilt, dann findet man ein passendes $f'$ auch in $S$.
+\end{bem}
+
 % III.2.7a)
 \begin{bem}
-  Aus der Bedingung 2a (oder b) ergibt sich eine vereinfachte Darstellung der Elemente von $\Hom_{\Cat[S^{-1}]}(X, Y)$, wenn $S$ lokalisierend ist: Nämlich kann man in den formalen Ketten alle künstlichen Inversen auf die linke (bzw. rechte) Seite verfrachten. \\
+  Aus der Bedingung 2 ergibt sich eine vereinfachte Darstellung der Elemente von $\Hom_{\Cat[S^{-1}]}(X, Y)$, wenn $S$ lokalisierend ist: Nämlich kann man in den formalen Ketten alle künstlichen Inversen auf die linke Seite verfrachten. \\
   Die Bedingung 1 erlaubt das Zusammenfassen von künstl. Inversen.
 \end{bem}
 
@@ -2757,17 +2761,6 @@ Sei $\Aat$ eine abelsche Kategorie.
   \begin{itemize}
     \item $\Ob(\Cat[S^{-1}]) \coloneqq \Ob(\Cat)$
     \item Morphismen von $X$ nach $Y$ in $\Cat[S^{-1}]$ sind Äquivalenzklassen von \emph{Dächern}, das sind Diagramme der Form
-    \iffalse
-    \begin{centertikz}
-      \matrix (mat) [matrix of nodes, column sep=1.4cm, row sep=0.3cm]{
-        & \node (X') {$X'$}; \\
-        \node (X) {$X$}; &&
-        \node (Y) {$Y$}; \\
-      };
-      \draw[->] (X') to node [above] {$s \!\in\! S\quad$} (X);
-      \draw[->] (X') to node [above] {$f$} (Y);
-    \end{centertikz}
-    \fi
     \begin{centertikzcd}[column sep=1.4cm, row sep=0.3cm]
       & \arrow{ld}[swap]{s \in S} X' \arrow{rd}{f} \\
       X && Y
@@ -2779,6 +2772,7 @@ Sei $\Aat$ eine abelsche Kategorie.
       \arrow[llld, crossing over, "t \in S"] X'' \arrow{rd}{g} \\
       X \arrow[from=XP, swap, "s \in S"] &&&& Y
     \end{centertikzcd}
+    Man kann Dächer auch als Brüche mit Nenner $s \in S$ und Zähler $f$ auffassen. Die Äquivalenzrelation macht es möglich, parallele Dächer auf einen gemeinsamen Nenner zu bringen.
     \item Der Identitätsmorphismus auf $X$ ist das Dach $X \xleftarrow{\id_X} X \xrightarrow{\id_X} X$.
     \item Mit Bedingung 2a kann man Morphismen verknüpfen:
     \begin{centertikzcd}[column sep=1.4cm, row sep=0.3cm]
@@ -2787,9 +2781,32 @@ Sei $\Aat$ eine abelsche Kategorie.
       Y' \arrow[ld, swap, "t \in S"] \arrow[rd, "g"] \\
       X && Y && Z
     \end{centertikzcd}
+    \item Der Funktor $Q : \Cat \to \Cat[S^{-1}]$ ist gegeben durch
+    \[ (X \xrightarrow{f} Y) \mapsto [ X \xleftarrow{\id_X} X \xrightarrow{f} Y ]. \]
+    \item Diese Definition der Lokalisierung erfüllt dieselbe universelle Eigenschaft und ist daher äquivalent zur bisherigen.
   \end{itemize}
 \end{lem}
 
-% TODO: III.2.9 (Bemerkungen zu Dächern!!!)
+% Übungsblatt 18, Aufgabe 5b)
+\begin{bem}
+  Wenn $\Cat$ präadditiv ist, dann auch $\Cat[S^{-1}]$: Man addiert Dächer, indem man sie zunächst auf einen gemeinsamen Nenner bringt und dann die Zähler (die rechten Morphismen) addiert.
+\end{bem}
+
+% III.2.9
+\begin{bem}
+  Statt Linksdächern kann man auch Rechtsdächer der Form $(X \xrightarrow{f} X' \xleftarrow{s \in S} Y)$ verwenden. Dazu muss $S$ rechtslokalisierend sein, \dh{} die dualen Bedingungen zu 1-3 erfüllen.
+\end{bem}
+
+% III.2.10
+\begin{prop}
+  Sei $\Cat$ eine beliebige Kategorie, $S \subset \Mor(\Cat)$ lokalisierend und $\Bat \subset \Cat$ eine volle Unterkategorie, sodass $S_\Bat \coloneqq S \cap \Mor(\Bat)$ lokalisierend in $\Bat$ ist.
+  Der kanonische Funktor $\Bat[S_\Bat^{-1}] \to \Cat[S^{-1}]$ ist volltreu, wenn eine der folgenden Bedingungen erfüllt ist:
+  \begin{itemize}
+    \item Für alle $(X' \xrightarrow{s \in S} X)$ mit $X \in \Ob(\Bat)$ gibt es einen Morphismus $(X'' \xrightarrow{f} X') \in \Cat$ mit $s \circ f \in S$ und $X'' \in \Ob(\Bat)$.
+    \item Die duale Bedingung.
+  \end{itemize}
+\end{prop}
+
+% TODO: III.3 (Dreiecke als verallgemeinerte exakte Tripel)
 
 \end{document}
