@@ -4,6 +4,7 @@
 \DeclareMathOperator{\Ob}{Ob} % Objekte (einer Kategorie)
 \DeclareMathOperator{\Mor}{Mor} % Morphismenmenge / -klasse
 \DeclareMathOperator{\Hom}{Hom} % Homomorphisms
+\DeclareMathOperator{\Nat}{Nat} % Natürliche Transformationen
 \DeclareMathOperator{\dom}{dom} % Domain
 \DeclareMathOperator{\codom}{codom} % Codomain
 \newcommand{\op}{\mathrm{op}} % opposite category
@@ -12,6 +13,9 @@
 \newcommand{\Lim}{\lim} % Limes
 \DeclareMathOperator{\colim}{colim} % Kolimes
 \newcommand{\Colim}{\colim} % Kolimes
+%\newcommand{\myint}[2]{{\textstyle \int\limits_{#1}^{#2}}}
+\newcommand{\EndC}[2]{\myint{#1}{} #2} % Ende
+\newcommand{\CoEndC}[2]{\myint{}{#1} #2} % Koende
 
 % Konkrete Kategorien
 \newcommand{\SetC}{\mathbf{Set}} % Kategorie der Mengen
@@ -24,6 +28,7 @@
 \newcommand{\KHaus}{\mathbf{KHaus}} % Kategorie der kompakten Hausdorffräume
 \newcommand{\CatC}{\mathbf{Cat}} % Kategorie der kleinen Kategorien
 \newcommand{\Vect}{\mathbf{Vect}} % Kategorie der Vektorräume über einem Körper
+\newcommand{\Alg}{\mathbf{Alg}} % Kategorie der Algebren über einem Körper/Ring
 \newcommand{\VectFin}{\mathbf{Vect}_{\mathrm{fin}}} % Kategorie der endlichen Vektorräume über einem Körper
 \newcommand{\kVect}{\text{$k$-$\Vect$}} % Kategorie der k-Vektorräume über einem Körper k
 \newcommand{\kVectFin}{\text{$k$-$\VectFin$}} % Kategorie der endlichen k-Vektorräume über einem Körper k
@@ -37,6 +42,8 @@
 \newcommand{\Cat}{\mathcal{C}} % Category-C
 \newcommand{\Dat}{\mathcal{D}} % Category-D
 \newcommand{\Eat}{\mathcal{E}} % Category-E
+\newcommand{\Fat}{\mathcal{F}} % Category-F
+\newcommand{\Gat}{\mathcal{G}} % Category-G
 \newcommand{\Iat}{\mathcal{I}} % Category-I (Indexkategorie)
 \newcommand{\Jat}{\mathcal{J}} % Category-J (Indexkategorie)
 \newcommand{\Sit}{\mathcal{S}} % Situs-S

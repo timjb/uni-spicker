@@ -5,10 +5,28 @@
   /Author (Tim Baumann)
 }
 
+\usepackage{tikz}
+\usetikzlibrary{arrows,cd}
+
+% http://tex.stackexchange.com/questions/117732/tikz-and-babel-error
+% Es ist schierer Wahnsinn, welche Hacks LaTeX benötigt!
+\tikzset{
+  every picture/.prefix style={
+    execute at begin picture=\shorthandoff{"}
+  }
+}
+
 \input{include/cats} % Kategorientheorie-Makros
 
 \newcommand{\Ord}{\mathcal{O}_n} % Menge der Ordinalzahlen
 \newcommand{\Prop}{\mathbf{Prop}} % Typ der Propositionen
+\newcommand{\kAlg}{k\text{-}\Alg} % Kategorie der k-Algebren
+
+\newcommand{\DiaTodo}{TODO: Diagramm einfügen!}
+
+\newenvironment{centertikzcd}
+  {\begin{center}\begin{tikzcd}}
+  {\end{tikzcd}\end{center}}
 
 % Kleinere Klammern
 \delimiterfactor=701
@@ -110,6 +128,7 @@
 % http://en.wikipedia.org/wiki/Ordinal_arithmetic
 \begin{bem}
   Die Rechenop. können auch rekursiv definiert werden durch
+  \tabcolsep=0.11cm
   \begin{tabular}{ l l l }
     a) & b) & c) \\[2pt]
     $\alpha + 0 \coloneqq \alpha$
@@ -117,7 +136,7 @@
     & $\alpha \!+\! \lim A \coloneqq \lim \, \Set{\alpha \!+\! \gamma}{\gamma \!\in\! A}$ \\
 
     $\alpha \cdot 0 \coloneqq 0$
-    & $\alpha \cdot (\beta + 1) \coloneqq (\alpha \cdot \beta) + \alpha$
+    & $\alpha \cdot (\beta \!+\! 1) \coloneqq (\alpha \cdot \beta) + \alpha$
     & $\alpha \cdot \lim A \coloneqq \lim \, \Set{\alpha \cdot \gamma}{\gamma \in A}$ \\
 
     $\alpha^0 \coloneqq 1$
@@ -178,5 +197,159 @@
 \end{lem}
 
 % TODO: Verbindungen zu Kardinalzahlen
+
+\section{Kategorientheorie}
+
+% Vorlesung vom 22.4.2015
+
+\begin{defn}
+  Eine \emph{(schwache) 2-Kategorie} $\C$ besteht aus
+  \begin{itemize}
+    \item einer Ansammlung $\Ob(\C)$ von Objekten,
+    \item für jedes Paar $(\Cat, \Dat)$ von Objekten einer Kategorie
+    \[
+      \Hom_{\C}(\Cat, \Dat) = \left\{\,
+      \begin{tikzcd}
+        A \arrow[r, bend left=50, "F"{above}, ""{name=U, below}]
+        \arrow[r, bend right=50, "G"{below}, ""{name=D, above}]
+        & B
+        \arrow[Rightarrow, from=U, to=D]
+      \end{tikzcd}
+      \,\right\},
+    \]
+    % TODO: Bild: natürliche Transformation zwischen zwei Funktoren $\Cat \to \Dat$
+    \item für jedes Tripel $(\Cat, \Dat, \Eat)$ von Objekten einem Funktor
+    \[
+      \Hom_\C(\Cat, \Dat) \times \Hom_\C(\Dat, \Eat) \to \Hom_\C(\Cat, \Eat), \enspace
+      (F, G) \mapsto G \circ F,
+    \]
+    \item für jedes Objekt $\Cat \in \Ob(\C)$ einem Objekt $\Id_\Cat \in \Hom_\C(\Cat, \Cat)$,
+    \item für alle $\Cat, \Dat, \Eat, \Fat \in \Ob(\C)$ einem natürlichen Isomorphismus
+    %\[ \alpha_{\Cat, \Dat, \Eat, \Fat} : \Rightarrow ((F, G, H) \mapsto (H \circ (G \circ F))) \Rightarrow ((F, G, H) \mapsto ((H \circ G) \circ F)), \]
+    \[ \alpha_{\Cat, \Dat, \Eat, \Fat} : \enspace \blank \circ (\blank \circ \blank) \Longrightarrow (\blank \circ \blank) \circ \blank, \]
+    wobei beide Seiten Funktoren sind vom Typ
+    \[ \Hom(\Cat, \Dat) \times \Hom(\Dat, \Eat) \times \Hom(\Eat, \Fat) \to \Hom(\Cat, \Fat), \]
+    \iffalse
+    \begin{centertikzcd}[column sep=1cm, row sep=0.5cm]
+      & \Hom(\Cat, \Eat) \times \Hom(\Eat, \Fat) \arrow[rd] \\
+      \Hom(\Cat, \Dat) \times \Hom(\Dat, \Eat) \times \Hom(\Eat, \Fat) \arrow[ru] \arrow[rd] & \Hom(\Cat, \Fat) \\
+      & \Hom(\Cat, \Dat) \times \Hom(\Dat, \Fat)
+    \end{centertikzcd}
+    \fi
+    \item und für jedes Paar $(\Cat, \Dat)$ von Objekten natürlichen Isomorphismen $\lambda_{\Eat, \Dat} : (\Id_\Dat \circ \blank) \Rightarrow \Id_{\Hom{\Cat, \Dat}}$ und $\lambda_{\Eat, \Dat} : (\blank \circ \Id_\Dat) \Rightarrow \Id_{\Hom{\Cat, \Dat}}$
+  \end{itemize}
+  sodass gilt
+  \begin{itemize}
+    \item für alle $(\Cat \xrightarrow{F} \Dat \xrightarrow{G} \Eat \xrightarrow{H} \Fat \xrightarrow{K} \Gat) \in \Cat$ kommutiert
+    \begin{centertikzcd}[column sep=1cm, row sep=0.5cm]
+      K \circ (H \circ (G \circ F)) \arrow[r, "\alpha_{\Cat, \Dat, \Eat, \Fat}"] \arrow[d, "K \circ \alpha_{\Dat, \Eat, \Fat, \Gat}"] &
+      (K \circ H) \circ (G \circ F) \arrow[r, "\alpha_{\Cat, \Dat, \Eat, \Gat}"] &
+      ((K \circ H) \circ G) \circ H \\
+      K \circ ((H \circ G) \circ F) \arrow[rr, "\alpha_{\Cat, \Dat, \Fat, \Gat}"] &&
+      (K \circ (H \circ G)) \circ F \arrow[u, "\alpha_{\Dat,\Eat,\Fat,\Gat} \circ F"]
+    \end{centertikzcd}
+    \item TODO: Diagramme: Verträglichkeit Identität und Assoziativität
+  \end{itemize}
+\end{defn}
+
+% TODO: Bemerkung: Es gibt drei assoziierte "duale" Kategorien
+
+\begin{bspe}
+  \begin{itemize}
+    \item Die Kategorie $\CatC$ der Kategorien ist eine 2-Kategorie.
+    \item Jede Kategorie $\Cat$ ist natürlich eine 2-Kategorie.
+    \item Die Kategorie der Ringe $\R$ mit $\Ob(\R) \coloneqq \{ \, \text{Ringe mit Eins} \, \}$ und $\Hom_\R(A, B) \coloneqq \text{Kat. der $B$-$A$-Bimoduln}$ mit $N \circ M \coloneqq N \otimes_B M$ für $M \in \Hom(A, B)$ und $N \in \Hom(B, C)$. Dabei ist $\Id_A \coloneqq A$. %als $A$-$A$-Bimodul.
+  \end{itemize}
+\end{bspe}
+
+\begin{defn}
+  Eine \emph{monoidale Kategorie} ist eine 2-Kategorien mit genau einem Objekt.
+  In der Regel wird dann $\otimes$ anstelle von $\circ$ geschrieben.
+\end{defn}
+
+% §2. Universelle Eigenschaften
+
+% Motto: Interessante Objekte einer mathematischen Theorie werden durch universelle Eigenschaften definiert
+
+% Ausgelassen: Definition "darstellen"
+
+% TODO: In HomoAlg-Zusammenfassung verschieben, vor das Yoneda-Lemma
+\begin{satz}
+  Sei $F \in \hat{\Cat}$, $Y \in \Cat$. Ist dann $s \in F(Y)$, so existiert höchstens eine nat. Transformation $\eta : \Hom_\Cat(\blank, Y) \to F$ mit $\eta(Y)(\id_Y) = s$. \\
+  Ist $\eta$ ein Isomorphismus, stellt also $Y$ den Funktor $F$ vermöge $\eta$ dar, so heißt $s$ die \emph{universelle Familie}.
+\end{satz}
+
+% Ausgelassen: Yoneda-Lemma
+
+% TODO: nach HomoAlg?
+\begin{prop}
+  Stellen $Y$ und $Y'$ beide den Funktor $F$ dar (mittels natürlichen Transformationen $\alpha$, $\beta$), so existiert genau ein Isomorphismus $\varphi \in \Hom(Y, Y')$, sodass $\alpha = \beta \circ \Hom(\blank, \varphi)$.
+\end{prop}
+
+\begin{bsp}
+  Sei $k$ ein Körper. Für jede $k$-Algebra $A$ ist dann
+  \[ \Hom_{\SetC}(\Hom_{\kAlg}(k[X], A), A), \quad \varphi \mapsto \varphi(X) \]
+  eine in $A$ natürliche Bijektion. Somit stellt $k[X] \in \Ob(\kAlg)$ den Vergissfunktor $V : \kAlg \to \SetC$ (ko-)dar.
+\end{bsp}
+
+% Ausgelassen: Limiten, terminales/initiales Objekt
+
+\begin{defn}
+  Eine Kategorie $\Cat$ heißt \emph{punktiert}, falls initiales und terminales Objekt in $\Cat$ existieren und zusammenfallen.
+\end{defn}
+
+\begin{bspe}
+  $\AbGrp$ und die Kat. der punktierten top. Räume sind punktiert.
+\end{bspe}
+
+% Ausgelassen: Produkt, Koprodukt, Differenzkern, Kodifferenzkern
+
+% TODO: nach HomoAlg
+\begin{satz}
+  Eine Kategorie $\Cat$ ist genau dann vollständig, wenn sie Produkte und Differenzkerne besitzt.
+\end{satz}
+
+% TODO: nach HomoAlg
+\begin{satz}
+  Sei $F : I \times J \to \Cat$ ein Funktor. Dann existiert ein nat. Isomorphismus $\lim_i \lim_j F(i, j) = \lim_j \lim_i F(i, j) = \lim_{i,j} F(i, j)$, wenn die Limiten existieren.
+\end{satz}
+
+\begin{defn}
+  Sei $S : \Cat^\op \times \Cat \to \Aat$ ein Funktor. Ein \emph{Ende} $\EndC{c}{S(c,c)} \in \Ob(\Aat)$ von $S$ ist eine Familie $\alpha_d : \EndC{c}{S(c, c)} \to S(c, c)$, $d \in \Mor(\Cat)$ von Morphismen in $\Aat$, sodass für alle $(c \xrightarrow{f} c') \in \Cat$ das Diagramm
+
+  \DiaTodo
+
+  kommutiert und $\EndC{c}{S(c,c)}$ universell mit dieser Eigenschaft ist.
+\end{defn}
+
+\begin{bem}
+  Enden sind spezielle Limiten.
+\end{bem}
+
+\begin{bem}
+  Das duale Konzept ist das eines Koendes $\CoEndC{c} S(c, c)$.
+\end{bem}
+
+\begin{bsp}
+  Seien $F, G : \Cat \to \Aat$ zwei Funktoren. Dann ist $\Hom_\Aat(F(\blank), G(\blank)) : \Cat^\op \times \Cat \to \SetC$ ein Funktor mit Ende $\EndC{c}{\Hom_\Aat(F(c), G(c))} = \Nat(F, G)$.
+\end{bsp}
+
+\begin{satz}[Fubini]
+  Sei $S : \Dat^\op \!\times\! \Dat \!\times\! \Cat^\op \!\times\! \Cat \to \Aat$ ein Funktor. Dann gilt
+  \[ \EndC{(d,c)}{S(d,d,c,c)} \cong \EndC{d}{\EndC{c}{S(d,d,c,c)}}, \]
+  falls die rechte Seite und $\EndC{c}{S(d,d',c,c)}$ für alle $d, d' \in \Dat$ existieren.
+\end{satz}
+
+\begin{bsp}
+  Sei $R$ ein Ring, aufgefasst als präadditive Kategorie mit einem Objekt.
+  Ein additiver Funktor $R^{(\op)} \to \AbGrp$ ist nichts anderes als ein $R$-Linksmodul (bzw. $R$-Rechtsmodul). Dann ist $\CoEndC{* \in R}{A \otimes_Z B} \cong A \otimes_R B$.
+\end{bsp}
+
+\begin{defn}
+  Sei $\C$ eine 2-Kategorie. Seien $\Cat, \Dat \in \C$. Eine \emph{Adjunktion} von $F \in \Hom_\C(\Cat, \Dat)$ und $G \in \Hom_\C{\Dat, \Cat}$ ist ein nat. Isomorphismus
+  \[ \Hom(F \circ \blank, \blank) \cong \Hom(\blank, G \circ \blank), \]
+  \dh{} Morphismen $\eta : \Id_\Cat \Rightarrow G \circ F$ und $\epsilon : F \circ G \Rightarrow \Id_\Dat$, sodass $G \epsilon \circ \eta G = \Id_G$ und $\epsilon F \circ F \eta = \Id_F$.
+  Man notiert $F \ladj G$.
+\end{defn}
 
 \end{document}
