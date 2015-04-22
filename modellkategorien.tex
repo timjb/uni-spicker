@@ -6,6 +6,7 @@
 }
 
 \usepackage{tikz}
+%\usepackage{xcolor}
 \usetikzlibrary{arrows,cd}
 
 % http://tex.stackexchange.com/questions/117732/tikz-and-babel-error
@@ -21,8 +22,6 @@
 \newcommand{\Ord}{\mathcal{O}_n} % Menge der Ordinalzahlen
 \newcommand{\Prop}{\mathbf{Prop}} % Typ der Propositionen
 \newcommand{\kAlg}{k\text{-}\Alg} % Kategorie der k-Algebren
-
-\newcommand{\DiaTodo}{TODO: Diagramm einfügen!}
 
 \newenvironment{centertikzcd}
   {\begin{center}\begin{tikzcd}}
@@ -248,7 +247,7 @@
       K \circ ((H \circ G) \circ F) \arrow[rr, "\alpha_{\Cat, \Dat, \Fat, \Gat}"] &&
       (K \circ (H \circ G)) \circ F \arrow[u, "\alpha_{\Dat,\Eat,\Fat,\Gat} \circ F"]
     \end{centertikzcd}
-    \item TODO: Diagramme: Verträglichkeit Identität und Assoziativität
+    \item \DiaTodo{} (Verträglichkeit Identität und Assoziativität)
   \end{itemize}
 \end{defn}
 
