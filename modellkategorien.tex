@@ -21,7 +21,6 @@
 
 \newcommand{\Ord}{\mathcal{O}_n} % Menge der Ordinalzahlen
 \newcommand{\Prop}{\mathbf{Prop}} % Typ der Propositionen
-\newcommand{\kAlg}{k\text{-}\Alg} % Kategorie der k-Algebren
 
 \newenvironment{centertikzcd}
   {\begin{center}\begin{tikzcd}}
@@ -197,7 +196,9 @@
 
 % TODO: Verbindungen zu Kardinalzahlen
 
-\section{Kategorientheorie}
+\begin{samepage}
+  \section{Kategorientheorie}
+\end{samepage}
 
 % Vorlesung vom 22.4.2015
 
@@ -216,7 +217,6 @@
       \end{tikzcd}
       \,\right\},
     \]
-    % TODO: Bild: natürliche Transformation zwischen zwei Funktoren $\Cat \to \Dat$
     \item für jedes Tripel $(\Cat, \Dat, \Eat)$ von Objekten einem Funktor
     \[
       \Hom_\C(\Cat, \Dat) \times \Hom_\C(\Dat, \Eat) \to \Hom_\C(\Cat, \Eat), \enspace
@@ -224,10 +224,9 @@
     \]
     \item für jedes Objekt $\Cat \in \Ob(\C)$ einem Objekt $\Id_\Cat \in \Hom_\C(\Cat, \Cat)$,
     \item für alle $\Cat, \Dat, \Eat, \Fat \in \Ob(\C)$ einem natürlichen Isomorphismus
-    %\[ \alpha_{\Cat, \Dat, \Eat, \Fat} : \Rightarrow ((F, G, H) \mapsto (H \circ (G \circ F))) \Rightarrow ((F, G, H) \mapsto ((H \circ G) \circ F)), \]
     \[ \alpha_{\Cat, \Dat, \Eat, \Fat} : \enspace \blank \circ (\blank \circ \blank) \Longrightarrow (\blank \circ \blank) \circ \blank, \]
     wobei beide Seiten Funktoren sind vom Typ
-    \[ \Hom(\Cat, \Dat) \times \Hom(\Dat, \Eat) \times \Hom(\Eat, \Fat) \to \Hom(\Cat, \Fat), \]
+    \[ \Hom(\Eat, \Fat) \times \Hom(\Dat, \Eat) \times \Hom(\Cat, \Dat) \to \Hom(\Cat, \Fat), \]
     \iffalse
     \begin{centertikzcd}[column sep=1cm, row sep=0.5cm]
       & \Hom(\Cat, \Eat) \times \Hom(\Eat, \Fat) \arrow[rd] \\
@@ -235,19 +234,28 @@
       & \Hom(\Cat, \Dat) \times \Hom(\Dat, \Fat)
     \end{centertikzcd}
     \fi
-    \item und für jedes Paar $(\Cat, \Dat)$ von Objekten natürlichen Isomorphismen $\lambda_{\Eat, \Dat} : (\Id_\Dat \circ \blank) \Rightarrow \Id_{\Hom{\Cat, \Dat}}$ und $\lambda_{\Eat, \Dat} : (\blank \circ \Id_\Dat) \Rightarrow \Id_{\Hom{\Cat, \Dat}}$
+    \item und für alle $\Cat, \Dat \in \Ob(\C)$ natürlichen Isomorphismen
+    \[
+      \lambda_{\Cat, \Dat} : (\Id_\Dat \circ \, \blank) \Rightarrow \Id_{\Hom(\Cat, \Dat)}, \enspace
+      \rho_{\Cat, \Dat} : (\blank \circ \Id_\Cat) \Rightarrow \Id_{\Hom(\Cat, \Dat)},
+    \]
   \end{itemize}
-  sodass gilt
+  sodass folgende \emph{Kohärenzbedingungen} erfüllt sind:
   \begin{itemize}
-    \item für alle $(\Cat \xrightarrow{F} \Dat \xrightarrow{G} \Eat \xrightarrow{H} \Fat \xrightarrow{K} \Gat) \in \Cat$ kommutiert
+    \item Für alle $(\Cat \xrightarrow{F} \Dat \xrightarrow{G} \Eat \xrightarrow{H} \Fat \xrightarrow{K} \Gat) \in \Cat$ kommutiert
     \begin{centertikzcd}[column sep=1cm, row sep=0.5cm]
-      K \circ (H \circ (G \circ F)) \arrow[r, "\alpha_{\Cat, \Dat, \Eat, \Fat}"] \arrow[d, "K \circ \alpha_{\Dat, \Eat, \Fat, \Gat}"] &
-      (K \circ H) \circ (G \circ F) \arrow[r, "\alpha_{\Cat, \Dat, \Eat, \Gat}"] &
-      ((K \circ H) \circ G) \circ H \\
-      K \circ ((H \circ G) \circ F) \arrow[rr, "\alpha_{\Cat, \Dat, \Fat, \Gat}"] &&
-      (K \circ (H \circ G)) \circ F \arrow[u, "\alpha_{\Dat,\Eat,\Fat,\Gat} \circ F"]
+      K (H (G F)) \arrow[r, "\alpha_{\Cat, \Eat, \Fat, \Gat}"] \arrow[d, "K \alpha_{\Cat, \Dat, \Eat, \Fat}"] &
+      (K H) (G F) \arrow[r, "\alpha_{\Cat, \Dat, \Eat, \Gat}"] &
+      ((K H) G) H \\
+      K ((H G) F) \arrow[rr, "\alpha_{\Cat, \Dat, \Fat, \Gat}"] &&
+      (K (H G)) F \arrow[u, "\alpha_{\Dat,\Eat,\Fat,\Gat} F"]
     \end{centertikzcd}
-    \item \DiaTodo{} (Verträglichkeit Identität und Assoziativität)
+    \item Für alle $(\Cat \xrightarrow{F} \Dat \xrightarrow{G} \Eat) \in \Cat$ kommutiert
+    \begin{centertikzcd}[column sep=1cm, row sep=0.5cm]
+      G \circ (\Id_\Dat \circ F) \arrow[rr, "\alpha_{\Cat,\Dat,\Dat,\Eat}"] \arrow[rd, "G \lambda_{\Cat, \Dat}"] &&
+      (G \circ \Id_\Dat) \circ F \arrow[ld, "\rho_{\Dat, \Eat} F"] \\
+      & G \circ F
+    \end{centertikzcd}
   \end{itemize}
 \end{defn}
 
@@ -272,46 +280,9 @@
 
 % Ausgelassen: Definition "darstellen"
 
-% TODO: In HomoAlg-Zusammenfassung verschieben, vor das Yoneda-Lemma
-\begin{satz}
-  Sei $F \in \hat{\Cat}$, $Y \in \Cat$. Ist dann $s \in F(Y)$, so existiert höchstens eine nat. Transformation $\eta : \Hom_\Cat(\blank, Y) \to F$ mit $\eta(Y)(\id_Y) = s$. \\
-  Ist $\eta$ ein Isomorphismus, stellt also $Y$ den Funktor $F$ vermöge $\eta$ dar, so heißt $s$ die \emph{universelle Familie}.
-\end{satz}
-
-% Ausgelassen: Yoneda-Lemma
-
-% TODO: nach HomoAlg?
-\begin{prop}
-  Stellen $Y$ und $Y'$ beide den Funktor $F$ dar (mittels natürlichen Transformationen $\alpha$, $\beta$), so existiert genau ein Isomorphismus $\varphi \in \Hom(Y, Y')$, sodass $\alpha = \beta \circ \Hom(\blank, \varphi)$.
-\end{prop}
-
-\begin{bsp}
-  Sei $k$ ein Körper. Für jede $k$-Algebra $A$ ist dann
-  \[ \Hom_{\SetC}(\Hom_{\kAlg}(k[X], A), A), \quad \varphi \mapsto \varphi(X) \]
-  eine in $A$ natürliche Bijektion. Somit stellt $k[X] \in \Ob(\kAlg)$ den Vergissfunktor $V : \kAlg \to \SetC$ (ko-)dar.
-\end{bsp}
-
 % Ausgelassen: Limiten, terminales/initiales Objekt
 
-\begin{defn}
-  Eine Kategorie $\Cat$ heißt \emph{punktiert}, falls initiales und terminales Objekt in $\Cat$ existieren und zusammenfallen.
-\end{defn}
-
-\begin{bspe}
-  $\AbGrp$ und die Kat. der punktierten top. Räume sind punktiert.
-\end{bspe}
-
 % Ausgelassen: Produkt, Koprodukt, Differenzkern, Kodifferenzkern
-
-% TODO: nach HomoAlg
-\begin{satz}
-  Eine Kategorie $\Cat$ ist genau dann vollständig, wenn sie Produkte und Differenzkerne besitzt.
-\end{satz}
-
-% TODO: nach HomoAlg
-\begin{satz}
-  Sei $F : I \times J \to \Cat$ ein Funktor. Dann existiert ein nat. Isomorphismus $\lim_i \lim_j F(i, j) = \lim_j \lim_i F(i, j) = \lim_{i,j} F(i, j)$, wenn die Limiten existieren.
-\end{satz}
 
 \begin{defn}
   Sei $S : \Cat^\op \times \Cat \to \Aat$ ein Funktor. Ein \emph{Ende} $\EndC{c}{S(c,c)} \in \Ob(\Aat)$ von $S$ ist eine Familie $\alpha_d : \EndC{c}{S(c, c)} \to S(c, c)$, $d \in \Mor(\Cat)$ von Morphismen in $\Aat$, sodass für alle $(c \xrightarrow{f} c') \in \Cat$ das Diagramm

@@ -99,6 +99,10 @@ Dies ist eine übersetzte, korrigierte Zusammenfassung des Buches "`Methods of H
 \end{defn}
 
 \begin{defn}
+  Funktoren $F : \Jat \to \Cat$ mit $\Jat$ klein heißen \emph{Diagramme} in $\Cat$.
+\end{defn}
+
+\begin{defn}
   Sei $\CatC$ die Kategorie mit kleinen Kategorien als Objekten und Funktoren als Morphismen.
 \end{defn}
 
@@ -141,6 +145,14 @@ Dies ist eine übersetzte, korrigierte Zusammenfassung des Buches "`Methods of H
     \item Ein Objekt $Z \in \Ob(\Cat)$ heißt \emph{terminales Objekt}, falls für alle $Y \in \Ob(Y)$ genau ein Morphismus $f \in \Hom_\Cat(Y, Z)$ existiert.
   \end{itemize}
 \end{defn}
+
+\begin{defn}
+  Eine Kategorie $\Cat$ heißt \emph{punktiert}, falls initiales und terminales Objekt in $\Cat$ existieren und zusammenfallen.
+\end{defn}
+
+\begin{bspe}
+  $\AbGrp$ und die Kat. der punktierten top. Räume sind punktiert.
+\end{bspe}
 
 % Ausgelassen: II.1.13
 
@@ -216,25 +228,36 @@ Dies ist eine übersetzte, korrigierte Zusammenfassung des Buches "`Methods of H
   Er heißt \emph{darstellbar}, falls ein solches $X$ existiert.
 \end{defn}
 
+\begin{bsp}
+  Sei $k$ ein Körper. Für jede $k$-Algebra $A$ ist dann
+  \[ \Hom_{\SetC}(\Hom_{\kAlg}(k[X], A), A), \quad \varphi \mapsto \varphi(X) \]
+  eine in $A$ natürliche Bijektion. Somit stellt $k[X] \in \Ob(\kAlg)$ den Vergissfunktor $V : \kAlg \to \SetC$ (ko-)dar.
+\end{bsp}
+
 \begin{defn}
   Die \emph{Yoneda-Einbettung} ist der Funktor
   \[ Y : \Cat \to \hat\Cat, \enspace X \mapsto h_X, \enspace \phi \mapsto (\phi \circ \blank : X(Y) \to X'(Y))_{Y \in \Ob(\Cat)}. \]
 \end{defn}
 
-\begin{lem}[\emph{Yoneda}]
-  Sei $\Cat$ eine Kategorie. Es gibt es eine nat. Bij.
+\begin{lem}
+  Sei $F \in \hat{\Cat}$, $Y \in \Cat$. Ist dann $s \in F(Y)$, so existiert genau eine natürliche Transformation $\eta : \Hom_\Cat(\blank, Y) \to F$ mit $\eta(Y)(\id_Y) = s$. \\
+  Ist $\eta$ ein Isomorphismus, stellt also $Y$ den Funktor $F$ vermöge $\eta$ dar, so heißt $s$ die \emph{universelle Familie}.
+\end{lem}
+
+\begin{kor}[\emph{Yoneda-Lemma}]
+  Es gibt es eine natürliche Bijektion
   \[
     \Hom_{\hat\Cat}(h_X, F) \cong F(X) \quad
     \text{für alle $X \in \Ob(\Cat)$, $F \in \hat{C}$.}
   \]
-\end{lem}
-
-\begin{kor}
-  Die Yoneda-Einbettung ist volltreu und liefert eine Kat.- Äquivalenz von $\Cat$ und der vollen Unterkat. der darstellb. Funkt. in $\hat\Cat$.
 \end{kor}
 
 \begin{kor}
-  Ein darstellbarer Funktor wird von genau einem Objekt dargestellt (bis auf Isomorphie).
+  Die Yoneda-Einbettung ist volltreu und liefert eine Kat'en- Äquivalenz von $\Cat$ und der vollen Unterkat. der darstellb. Funkt. in $\hat\Cat$.
+\end{kor}
+
+\begin{kor}
+  Stellen $Y$ und $Y'$ beide den Funktor $F$ dar (mittels natürlichen Transformationen $\alpha$, $\beta$), so existiert genau ein Isomorphismus $\varphi \in \Hom(Y, Y')$, sodass $\alpha = \beta \circ \Hom(\blank, \varphi)$.
 \end{kor}
 
 \begin{defn}
@@ -316,8 +339,6 @@ Dies ist eine übersetzte, korrigierte Zusammenfassung des Buches "`Methods of H
   \end{itemize}
 \end{defn}
 
-\begin{samepage}
-
 \begin{defn}
   Sei $X \in \Ob(\Cat)$ ein Objekt. Auf der Klasse der Monomorphis- men $(i : U \to X) \in \Cat$ von einem Objekt $U \in \Ob(\Cat)$ nach $X$ ist durch
   \[ (U, i) \leq (U', i') \coloniff \ex{f : U' \to U} i' = i \circ f \]
@@ -334,9 +355,7 @@ Dies ist eine übersetzte, korrigierte Zusammenfassung des Buches "`Methods of H
 % Ausgelassen: II.3.13 (Cartier-Dualität)
 % Ausgelassen: II.3.14 (Relative Gruppen-Schemata)
 
-\begin{samepage}
-  \subsection{(Ko-)Limiten}
-\end{samepage}
+\subsection{(Ko-)Limiten}
 
 % II.3.15 (Limiten)
 
@@ -358,7 +377,7 @@ Dies ist eine übersetzte, korrigierte Zusammenfassung des Buches "`Methods of H
     G(Y) \coloneqq \Hom_{[\Jat, \Cat]}(\Delta Y, F), \quad
     G(f)(\eta) \coloneqq \eta \circ \Delta f
   \]
-  darstellt. Man notiert $X = \Lim F$.
+  darstellt. Man notiert $X = \Lim F = \Lim_{j \in \Jat} F(j)$.
 \end{defn}
 
 % Ausgelassen: Gleichung (II.5)
@@ -391,8 +410,6 @@ Dies ist eine übersetzte, korrigierte Zusammenfassung des Buches "`Methods of H
   Eine \emph{(ko-)gerichtete Menge} ist eine Menge mit einer Präordnung, deren Präordnungskategorie (ko-)filtriert ist.
 \end{defn}
 
-\end{samepage}
-
 \begin{defn}
   Der Limes eines Funktors $F : \Cat \to \Dat$ heißt
   \begin{itemize}
@@ -409,12 +426,22 @@ Dies ist eine übersetzte, korrigierte Zusammenfassung des Buches "`Methods of H
       \hline
       Konzept & Indexkategorie $\Jat$ \\ \hline
       Terminales Objekt & $\emptyset$ (leere Kategorie) \\
-      Produkt & $\mathbf{2} \coloneqq \{ 0, 1 \}$ (kein nichttrivialer Morphismus) \\
+      (binäres) Produkt & $\mathbf{2} \coloneqq \{ 0, 1 \}$ (kein nichttrivialer Morphismus) \\
+      (endl.) \emph{Produkt} & (endliche) Menge, aufgefasst als Kategorie \\
       Faserprodukt & $1 \to 0 \leftarrow 2$ (zwei nichttriviale Morphismen) \\
       \emph{Differenzkern} &  $0 \rightrightarrows 1$ (zwei nichttriviale Morphismen) \\ \hline
     \end{tabular}
   \end{center}
 \end{bem}
+
+\begin{bem}
+  Insbesondere sind terminale Objekte leere Produkte.
+\end{bem}
+
+\begin{lem}
+  Sei $K$ ein Differenzkern von $(X \rightrightarrows Y) \in \Cat$. \\
+  Dann ist der Morphismus $i : K \to X$ ein Monomorphismus.
+\end{lem}
 
 % II.3.19 (Das duale Konzept: Kolimiten)
 
@@ -426,7 +453,7 @@ Dies ist eine übersetzte, korrigierte Zusammenfassung des Buches "`Methods of H
     G(Y) \coloneqq \Hom_{[\Jat, \Cat]}(F, \Delta Y), \enspace
     G(f)(\eta) \coloneqq \Delta f \circ \eta
   \]
-  darstellt. Man notiert $X = \Colim F$.
+  darstellt. Man notiert $X = \Colim F = \Colim_{j \in \Jat} F(j)$.
 \end{defn}
 
 \begin{bem}
@@ -445,11 +472,16 @@ Dies ist eine übersetzte, korrigierte Zusammenfassung des Buches "`Methods of H
       \hline
       Konzept & Indexkategorie $\Jat$ \\ \hline
       Initiales Objekt & $\emptyset$ (leere Kategorie) \\
-      \emph{Koprodukt} & $\mathbf{2} \coloneqq \{ 0, 1 \}$ (kein nichttrivialer Morphismus) \\
+      (bin.) \emph{Koprodukt} & $\mathbf{2} \coloneqq \{ 0, 1 \}$ (kein nichttrivialer Morphismus) \\
+      (endl.) Koprodukt & (endliche) Menge, aufgefasst als Kategorie \\
       \emph{Kofaserprodukt} & $1 \to 0 \leftarrow 2$ (zwei nichttriviale Morphismen) \\
       \emph{Kodifferenzkern} &  $0 \rightrightarrows 1$ (zwei nichttriviale Morphismen) \\ \hline
     \end{tabular}
   \end{center}
+\end{bem}
+
+\begin{bem}
+  Initiale Objekte sind leere Koprodukte.
 \end{bem}
 
 \begin{defn}
@@ -463,7 +495,7 @@ Dies ist eine übersetzte, korrigierte Zusammenfassung des Buches "`Methods of H
 % nicht im Buch
 \begin{defn}
   \begin{itemize}
-    \item Eine Kategorie $\Cat$ heißt \emph{(ko-)vollständig}, wenn alle kleinen (Ko-)Limiten (\dh{} (Ko-)Limiten von Funktoren $F : \Jat \to \Cat$ mit einer kleinen Kategorie $\Jat$) in $\Cat$ existieren.
+    \item Eine Kategorie $\Cat$ heißt \emph{(ko-)vollständig}, wenn alle Diagramme $F : \Jat \to \Cat$ einen (Ko-)Limes in $\Cat$ besitzen.
     \item Eine Kategorie $\Cat$ heißt \emph{endlich (ko-)vollständig}, wenn alle endlichen (Ko-)Limiten in $\Cat$ existieren.
   \end{itemize}
 \end{defn}
@@ -478,11 +510,15 @@ Dies ist eine übersetzte, korrigierte Zusammenfassung des Buches "`Methods of H
 \end{bspe}
 % XXX: Beispiele für kovollständige Kategorien?
 
+\begin{lem}
+  Eine Kategorie enthält endliche Produkte, wenn sie ein terminales Objekt und binäre Produkte besitzt.
+  Duales gilt für Koprodukte mit initialem statt terminalen Objekt.
+\end{lem}
+
 % II.3.20
 \begin{satz}
-  Angenommen, eine Kategorie $\Cat$ enthält ein term. Objekt, den Differenzkern von allen parallelen Morphismen $f, g \in \Hom_\Cat(X, Y)$ und das Produkt $X \times Y$ von allen Paaren von Objekten. \\
-  Dann ist $\Cat$ endlich vollständig.
-  Duales gilt für endliche Kolimiten mit initialem Objekt, Kodifferenzkern und Koprodukten.
+  Angenommen, eine Kategorie $\Cat$ enthält (Ko-)Differenzkerne und (endliche) Produkte.
+  Dann ist $\Cat$ (endlich) (ko-)vollständig.
 \end{satz}
 
 % Ausgelassen, da später sogar die Vollständigkeit von $\SetC$ erwähnt wird
@@ -511,9 +547,14 @@ Dies ist eine übersetzte, korrigierte Zusammenfassung des Buches "`Methods of H
   Ein Funktor $F$ heißt \emph{kostetig}, wenn er \emph{Kolimiten bewahrt}.
 \end{defn}
 
-% TODO: Kommutativität von Limiten
+\begin{satz}
+  Sei $F : I \times J \to \Cat$ ein Diagramm. Wenn einer der folgenden Limiten existiert, dann alle, und sie sind natürlich isomorph:
+  \[ \lim_i \lim_j F(i, j) \cong \lim_j \lim_i F(i, j) \cong \lim_{i,j} F(i, j). \]
+\end{satz}
 
-\subsection{Adjunktionen}
+\begin{samepage}
+  \subsection{Adjunktionen}
+\end{samepage}
 
 \begin{defn}
   Ein Funktor $F : \Cat \to \Dat$ heißt \emph{linksadjungiert} zum Funktor $G : \Cat \to \Dat$, wenn es einen natürlichen Isomorphismus
@@ -701,6 +742,7 @@ Sei $\Cat$ eine Kategorie.
 
 \begin{bem}
   Dann ist auch $\Hom_\Cat(X, 0) \!=\! \Hom(0, X) \!=\! 0$ für alle $X \!\in\! \Ob(\Cat)$.
+  Somit ist $0$ initiales und terminales Objekt, und folglich $\Cat$ punktiert.
 \end{bem}
 
 % II.5.4
