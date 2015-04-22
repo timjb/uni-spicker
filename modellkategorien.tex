@@ -8,6 +8,7 @@
 \usepackage{tikz}
 %\usepackage{xcolor}
 \usetikzlibrary{arrows,cd}
+\usepackage{cancel} % für durchgestrichenen Text
 
 % http://tex.stackexchange.com/questions/117732/tikz-and-babel-error
 % Es ist schierer Wahnsinn, welche Hacks LaTeX benötigt!
@@ -270,7 +271,7 @@
 \end{bspe}
 
 \begin{defn}
-  Eine \emph{monoidale Kategorie} ist eine 2-Kategorien mit genau einem Objekt.
+  Eine \emph{monoidale Kategorie} ist eine 2-Kategorie mit genau einem Objekt.
   In der Regel wird dann $\otimes$ anstelle von $\circ$ geschrieben.
 \end{defn}
 
@@ -285,34 +286,43 @@
 % Ausgelassen: Produkt, Koprodukt, Differenzkern, Kodifferenzkern
 
 \begin{defn}
-  Sei $S : \Cat^\op \times \Cat \to \Aat$ ein Funktor. Ein \emph{Ende} $\EndC{c}{S(c,c)} \in \Ob(\Aat)$ von $S$ ist eine Familie $\alpha_d : \EndC{c}{S(c, c)} \to S(c, c)$, $d \in \Mor(\Cat)$ von Morphismen in $\Aat$, sodass für alle $(c \xrightarrow{f} c') \in \Cat$ das Diagramm
-
-  \DiaTodo
-
-  kommutiert und $\EndC{c}{S(c,c)}$ universell mit dieser Eigenschaft ist.
+  Sei $S : \Cat^\op \times \Cat \to \Aat$ ein Funktor. Ein \emph{Ende} $E \in \Ob(\Aat)$ von $S$ ist eine Familie $\alpha_c : E \to S(c, c)$, $c \in \Ob(\Cat)$ von Morphismen in $\Aat$, sodass für alle $(f : c \to c') \in \Cat$ das Diagramm
+  \begin{centertikzcd}[column sep=1.4cm, row sep=0.05cm]
+    & S(c, c) \arrow[rd, "{S(\id_c, f)}"] \\
+    E \arrow[ru, "\alpha_c"] \arrow[rd, "\alpha_{c'}"{below}] && S(c, c') \\
+    & S(c', c') \arrow[ru, "{S(f, \id_{c'})}"{below}]
+  \end{centertikzcd}
+  kommutiert und $E$ universell mit dieser Eigenschaft ist.
 \end{defn}
+
+\begin{nota}
+  $E = \EndC{c}{S(c,c)}$.
+\end{nota}
 
 \begin{bem}
   Enden sind spezielle Limiten.
 \end{bem}
 
 \begin{bem}
-  Das duale Konzept ist das eines Koendes $\CoEndC{c} S(c, c)$.
+  Das duale Konzept ist das eines \cancel{Anfangs} Koendes $\CoEndC{c} S(c, c)$.
 \end{bem}
 
 \begin{bsp}
-  Seien $F, G : \Cat \to \Aat$ zwei Funktoren. Dann ist $\Hom_\Aat(F(\blank), G(\blank)) : \Cat^\op \times \Cat \to \SetC$ ein Funktor mit Ende $\EndC{c}{\Hom_\Aat(F(c), G(c))} = \Nat(F, G)$.
+  Seien $F, G : \Cat \to \Aat$ zwei Funktoren. Dann ist
+  %$\Hom_\Aat(F(\blank), G(\blank)) : \Cat^\op \times \Cat \to \SetC$ ein Funktor mit Ende
+  \[ \EndC{c}{\Hom_\Aat(F(c), G(c))} \enspace\cong\enspace \Nat(F, G). \]
 \end{bsp}
 
 \begin{satz}[Fubini]
   Sei $S : \Dat^\op \!\times\! \Dat \!\times\! \Cat^\op \!\times\! \Cat \to \Aat$ ein Funktor. Dann gilt
-  \[ \EndC{(d,c)}{S(d,d,c,c)} \cong \EndC{d}{\EndC{c}{S(d,d,c,c)}}, \]
+  \[ \EndC{(d,c)}{S(d,d,c,c)} \enspace\cong\enspace \EndC{d}{\EndC{c}{S(d,d,c,c)}}, \]
   falls die rechte Seite und $\EndC{c}{S(d,d',c,c)}$ für alle $d, d' \in \Dat$ existieren.
 \end{satz}
 
 \begin{bsp}
-  Sei $R$ ein Ring, aufgefasst als präadditive Kategorie mit einem Objekt.
-  Ein additiver Funktor $R^{(\op)} \to \AbGrp$ ist nichts anderes als ein $R$-Linksmodul (bzw. $R$-Rechtsmodul). Dann ist $\CoEndC{* \in R}{A \otimes_Z B} \cong A \otimes_R B$.
+  Sei $R$ ein Ring, aufgefasst als präadditive Kategorie mit einem Objekt $*$.
+  Ein additiver Funktor $R^{(\op)} \to \AbGrp$ ist nichts anderes als ein $R$-Linksmodul (bzw. $R$-Rechtsmodul). Dann ist
+  \[ \CoEndC{* \in R}{A \otimes_{\Z} B} \cong A \otimes_R B. \]
 \end{bsp}
 
 \begin{defn}
