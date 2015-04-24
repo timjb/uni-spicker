@@ -1587,13 +1587,12 @@ Sei $\Cat$ eine Kategorie.
 
 % II.6.15
 \begin{defn}
-  Sei $f : X \to Y$ eine stetige Abbildung zwischen topol. Räumen. \\
-  Das \emph{direkte Bild} $f_\bullet(\Fais)$ einer (Prä-)Garbe $\Fais$ auf $X$ ist die durch
+  Sei $f : X \to Y$ eine stetige Abbildung zwischen topologischen Räumen.
+  Das \emph{direkte Bild} (oder Pushforward) einer (Prä-)Garbe $\Fais$ auf $X$ ist die (Prä-)Garbe $f_\bullet(\Fais)$ auf $Y$ mit
   \[
     f_\bullet(\Fais)(U) \coloneqq \Fais(f^{-1}(U)) \quad
-    \text{für $U \subset Y$ offen}
+    \text{für $U \subset Y$ offen}.
   \]
-  definierte (Prä-)Garbe auf $Y$.
 \end{defn}
 
 % II.6.16, ausgelassen b)
@@ -1610,7 +1609,7 @@ Sei $\Cat$ eine Kategorie.
 % II.6.17
 \begin{defn}
   Sei $f : X \to Y$ eine stetige Abbildung zwischen topol. Räumen. \\
-  Das \emph{inverse Bild} ist der Funktor $f^\bullet : \ShSet(Y) \to \ShSet(X)$, der für Garben $\Fais \in \ShSet(Y)$ und $U \subset X$ offen definiert ist durch
+  Das \emph{inverse Bild} (Pullback) ist der Funktor $f^\bullet : \ShSet(Y) \to \ShSet(X)$, der für Garben $\Fais \in \ShSet(Y)$ und $U \subset X$ offen definiert ist durch
   \begin{align*}
     f^\bullet(\Fais)(U) \coloneqq \{ \, & \text{Familien $(s_x \in \Fais_{f(x)})_{x \in U}$ von Keimen, für die gilt:} \\[-2pt]
     & \text{Für alle $x \in X$ gibt es eine Umgebung $V \subset X$ von $f(x)$,} \\[-2pt]
