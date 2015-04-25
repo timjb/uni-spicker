@@ -1278,6 +1278,17 @@ Sei $\Cat$ eine Kategorie.
   \]
 \end{nota}
 
+% The Geometry of schemes, proposition I-12
+\begin{lem}
+  Sei $\mathcal{B}$ eine Basis der Topologie von $X$.
+  \begin{itemize}
+    \item Sei $(\Fais(U))_{U \in \mathcal{B}}$ eine Familie von Mengen bzw. ab. Gruppen und $r_{UV} : \Fais(U) \to \Fais(V)$ Einschränkungsabb. mit $r_{VW} \circ r_{UV} = r_{UW}$ für alle $U, V, W \in \mathcal{B}$ mit $W \subseteq V \subseteq U$.
+    Angenommen, für alle Familien $(s_U \in \Fais(U))_{U \in \mathcal{C}}$ mit $\mathcal{C} \subset \mathcal{B}$ und $A \coloneqq {\bigcup}_{U \in \mathcal{C}} U \in \mathcal{B}$, sodass $r_{UW}(s_U) = r_{VW}(s_V)$ für alle $W \in \mathcal{B}$, $W \subset U \cap V$, gibt es genau ein $s_A \in \Fais(A)$ mit $r_{AU}(s_A) = s_U$ für alle $U \in \mathcal{C}$. \\
+    Dann lässt sich $\Fais$ eindeutig zu einer Garbe auf $X$ fortsetzen.
+    \item Seien $\Fais$ und $\Garb$ Garben auf $X$ und $(\varphi_U : \Fais(U) \to \Garb(U))_{U \in \mathcal{B}}$ eine Fam. von mit Einschränkung vertr. Abbildungen. Dann gibt es genau einen Garbenmorphismus $\varphi : \Fais \to \Garb$ mit $\varphi(U) = \varphi_U$.
+  \end{itemize}
+\end{lem}
+
 % I.5.3 (Prägarben und Garben von strukturierten Mengen)
 
 % Ausgelassen: Garbe von $O(U)$-Modulen, wobei $O$ selbst eine Ringprägarbe auf $X$ ist.
