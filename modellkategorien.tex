@@ -322,7 +322,13 @@
 \begin{bsp}
   Sei $R$ ein Ring, aufgefasst als präadditive Kategorie mit einem Objekt $*$.
   Ein additiver Funktor $R^{(\op)} \to \AbGrp$ ist nichts anderes als ein $R$-Linksmodul (bzw. $R$-Rechtsmodul). Dann ist
-  \[ \CoEndC{* \in R}{A \otimes_{\Z} B} \cong A \otimes_R B. \]
+  \[ A \otimes_R B \cong \CoEndC{* \in R}{A \otimes_{\Z} B}. \]
+\end{bsp}
+
+% Übungsblatt 2, Aufgabe 4
+\begin{bsp}[Ninja-Yoneda-Lemma]
+  Für jede Prägarbe $F : \Cat^\op \to \SetC$ gilt
+  \[ F \cong \CoEndC{c}{F(c) \times \Hom_\Cat(\blank, c)}. \]
 \end{bsp}
 
 \begin{defn}
