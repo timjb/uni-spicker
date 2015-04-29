@@ -10,6 +10,9 @@
 \usetikzlibrary{arrows,cd}
 \usepackage{cancel} % für durchgestrichenen Text
 
+\usepackage{mathabx} % für \boxslash
+\usepackage{stmaryrd} % für \leftarrowtriangle
+
 % http://tex.stackexchange.com/questions/117732/tikz-and-babel-error
 % Es ist schierer Wahnsinn, welche Hacks LaTeX benötigt!
 \tikzset{
@@ -357,7 +360,7 @@
   Sind $\eta$ und $\epsilon$ in $F \ladj G$ sogar Isomorphismen, so heißt $F \ladj G$ auch \emph{adjungierte Äquivalenz}. Jede beliebige Äquivalenz lässt sich stets (unter Beibehaltung von $F$ und $G$ sowie einem der Morphismen $\epsilon$, $\eta$) zu einer adj. Äquivalenz verfeinern.
 \end{bem}
 
-% Kan-Erweiterungen
+\subsection{Kan-Erweiterungen}
 
 \begin{defn}
   Sei $A \xleftarrow{T} M \xrightarrow{K} C$ ein Ausschnitt einer 2-Kategorie. Eine \emph{Rechts-Kan-Erw.} (RKE) $(R, \epsilon)$ von $T$ längs $K$ besteht aus
@@ -431,5 +434,143 @@
 \begin{kor}
   Rechtsadjungierte bewahren Limiten (RAPL)
 \end{kor}
+
+% §. Algebraische Strukturen in Kategorien
+\subsection{Algebraische Strukturen in Kategorien}
+
+\begin{defn}
+  Eine \emph{Retrakt} ist ein Morphismus $r : Y \to X$, sodass ein Morphismus $i : X \to Y$ mit $r \circ i = \id_X$ existiert.
+  Sprechweise: $X$ ist ein Retrakt von $Y$ (vermöge $i$).
+\end{defn}
+
+% Ausgelassen: $S^1 \hookrightarrow \R^2$ besitzt kein Linksinverses, $S^1 \hookrightarrow \R^2 \setminus \{ 0 \}$ schon.
+
+\begin{bsp}
+  Ein Modul $U$ ist genau dann Retrakt von einem Modul $M$, wenn $U$ ein direkter Summand von $M$ ist.
+\end{bsp}
+
+\begin{prop}
+  "`$\blank$ ist Retrakt von $\blank$\,"' ist eine reflexive und trans. Relation.
+\end{prop}
+
+\begin{defn}
+  Ein \emph{Retrakt eines Morphismus} $(A \xrightarrow{f} B) \!\in\! \Cat$ ist ein Morph. $g : X \to Y$, sodass es ein komm. Diagramm folgender Form gibt:
+  \begin{centertikzcd}
+    A \arrow[r, "i"] \arrow[d, "f"] &
+    X \arrow[r, "r"] \arrow[d, "g"] &
+    A \arrow[d, "f"] \\
+    B \arrow[r, "j"] &
+    Y \arrow[r, "s"] &
+    B
+  \end{centertikzcd}
+\end{defn}
+
+% TODO: Definition von 
+
+\begin{bem}
+  Ein Retrakt von $f \in \Mor(\Cat)$ ist ein Retrakt von $f \in \Ob(\Cat^{\to})$.
+\end{bem}
+
+\begin{prop}
+  Retrakte von Isos sind Isos.
+\end{prop}
+
+% Ausgelassen: Retrakte sind abgeschlossen unter Komposition mit Isos
+
+\begin{prop}
+  Sei $F : \Cat \to \Dat$ ein Funktor. Dann ist die Klasse $\Set{f \in \Cat^{\to}}{F(f) \text{ ist ein Iso}}$ abgeschlossen unter Retrakten.
+\end{prop}
+
+\begin{defn}
+  Sei $i : A \to X$ und $p : E \to B$. Dann werden als äq. definiert:
+  \begin{itemize}
+    \miniitem{0.3 \linewidth}{$p$ ist \emph{$i$-injektiv}}
+    \miniitem{0.35 \linewidth}{$i$ ist \emph{$p$-projektiv}}
+    \miniitem{0.3 \linewidth}{$i \boxslash p$}
+    \item $i$ hat die Linkshochhebungseigenschaft (LHHE) bzgl. $p$
+    \item Für alle $f$, $g$ wie unten, sodass das Quadrat kommutiert, gibt es ein diagonales $\lambda$, sodass die Dreiecke kommutieren:
+    \begin{centertikzcd}
+      A \arrow[r, "g"] \arrow[d, "i"] &
+      E \arrow[d, "p"] \\
+      X \arrow[r, "f"] \arrow[ur, "\exists\, \lambda", dashed] &
+      B
+    \end{centertikzcd}
+  \end{itemize}
+\end{defn}
+
+\begin{bsp}
+  Sei $P$ ein Objekt einer abelschen Kategorie $\Aat$. Dann ist $P$ genau dann \emph{projektiv}, wenn $(0 \to P)$ die LHHE bzgl. aller Epimorphismen in $\Aat$ hat.
+  Dual ist $I$ injektiv, wenn alle Monos in $\Aat$ die LHHE bzgl. $(I \to 0)$ besitzen.
+\end{bsp}
+
+\begin{bsp}
+  In der Kategorie der Mengen gilt: Alle Injektionen haben die LHHE bzgl. aller Surjektionen.
+\end{bsp}
+
+\begin{lem}[\emph{Retrakt-Argument}]
+  Sei $f \!=\! q \circ j$. Ist $f$ $q$-projektiv ($f \boxslash q$), so ist $f$ ein Retrakt von $j$.
+\end{lem}
+
+\subsection{Zellenkomplexe}
+
+\begin{defn}
+  Sei $\lambda$ eine Ordinalzahl. Eine \emph{$\lambda$-Sequenz} in einer Kategorie $\Cat$ ist ein kolimesbewahrender Funktor $X : \lambda \to \Cat$ (wobei man $\lambda$ als Präordnungskategorie aller $\beta < \lambda$ auffasst).
+  Ihre \emph{transfinite Komposition} ist der induzierte Morphismus $X_0 \to \colim_{\beta < \lambda} X_\beta$.
+\end{defn}
+
+\begin{bem}
+  Kolimesbewahrung bedeutet: $\colim_{\alpha < \beta} X_\alpha \!=\! X_\beta$ für alle $\beta \!<\! \lambda$.
+\end{bem}
+
+% Ausgelassen: Bsp $n$-Sequenz ($n \in \N$)
+
+% Ausgelassen: Verklebung von zwei Halbsphären entlang $S^1$ zu einer $S^2$
+% Verklebung von $[0, 1]$ an den Endpunkten zur $S^1$
+
+\begin{defn}
+  Sei $\Cat$ eine kovollständige Kategorie, $I \subset \Mor(\Cat)$ eine Menge.
+  %Sei $I$ eine Menge von Morphismen in einer kovollständigen Kategorie $\Cat$.
+  \begin{itemize}
+    \item Ein \emph{relativer $I$-Zellenkomplex} ist eine transf. Komp. einer $\lambda$-Sequenz $Z$, sodass $\forall \, \alpha \!\in\! \Ord$ mit $\alpha \!+\! 1 \!<\! \lambda$ ein Pushoutdiagramm
+    % TODO: Pushout-Winkel
+    \begin{centertikzcd}
+      C \arrow[r] \arrow[d, "f"] &
+      Z_\alpha \arrow[d] &
+      \text{$\leftarrowtriangle$ \emph{Anklebeabbildung}} \\
+      B \arrow[r] &
+      Z_{\alpha + 1} &
+      \text{$\leftarrowtriangle$ \emph{Zelle}}
+    \end{centertikzcd}
+    mit $f \in I$ existiert. Sprechweise: \\
+    "`$Z_{\alpha+1}$ entsteht aus $Z_\alpha$, indem wir $B$ längs $C$ ankleben"'
+    \item Ein Objekt $A \in \Ob(\Cat)$ heißt \emph{$I$-Zellenkomplex}, wenn der Morph. $0 \to A$ aus dem initialen Obj. ein relativer $I$-Zellenkomplex ist.
+  \end{itemize}
+\end{defn}
+
+\begin{bsp}
+  CW-Komplexe aus der algebraischen Topologie sind $I$-Zellenkomplexe mit 
+  $I \coloneqq \Set{S^{n-1} \hookrightarrow B^n}{n \geq 0}$
+  (und $\Cat = \Top$).
+\end{bsp}
+
+\begin{bspe}
+  \begin{itemize}
+    \item Identitäten $A \to A$ sind relative $I$-Zellenkomplexe.
+    \item Das initiale Objekt ist ein absoluter $I$-Zellenkomplex.
+  \end{itemize}
+\end{bspe}
+
+\begin{lem}
+  Sei $Z : \lambda \to \Cat$ eine $\lambda$-Sequenz.
+  Sei jeder Morphismus $Z_\beta \to Z_{\beta + 1}$ ($\beta + 1 < \lambda$) ein Pushout eines Morphismus aus $I$. \\
+  Dann ist die transfinite Komposition von $Z$ ein $I$-Zellenkomplex.
+\end{lem}
+
+\begin{thm}
+  Die Klasse der relativen $I$-Zellenkomplex ist abgeschl. unter: \\
+  \inlineitem{transfinite Kompositionen} \enspace
+  \inlineitem{Isomorphismen} \enspace
+  \inlineitem{Koprodukt}
+\end{thm}
 
 \end{document}
