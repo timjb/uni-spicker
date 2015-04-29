@@ -332,10 +332,104 @@
 \end{bsp}
 
 \begin{defn}
-  Sei $\C$ eine 2-Kategorie. Seien $\Cat, \Dat \in \C$. Eine \emph{Adjunktion} von $F \in \Hom_\C(\Cat, \Dat)$ und $G \in \Hom_\C{\Dat, \Cat}$ ist ein nat. Isomorphismus
-  \[ \Hom(F \circ \blank, \blank) \cong \Hom(\blank, G \circ \blank), \]
-  \dh{} Morphismen $\eta : \Id_\Cat \Rightarrow G \circ F$ und $\epsilon : F \circ G \Rightarrow \Id_\Dat$, sodass $G \epsilon \circ \eta G = \Id_G$ und $\epsilon F \circ F \eta = \Id_F$.
+  Sei $\C$ eine 2-Kategorie. Seien $\Cat, \Dat \in \C$. Eine \emph{Adjunktion} von $F \in \Hom_\C(\Cat, \Dat)$ und $G \in \Hom_\C(\Dat, \Cat)$ ist geg. durch Morphismen $\eta : \Id_\Cat \Rightarrow G \circ F$ (genannt \emph{Eins}) und $\epsilon : F \circ G \Rightarrow \Id_\Dat$ (\emph{Koeins}) mit $G \epsilon \circ \eta G = \Id_G$ und $\epsilon F \circ F \eta = \Id_F$.
   Man notiert $F \ladj G$.
 \end{defn}
+
+\begin{lem}
+  R/L-Adjungierte sind eindeutig bis auf eindeutige Isomorphie.
+\end{lem}
+
+\begin{bem}
+  Seien $F : \Cat \to \Dat$ und $G : \Dat \to \Cat$ Funktoren. Dann gilt $F \ladj G$ genau dann, wenn es einen nat. Iso zwischen den Hom-Mengen gibt:
+  \[ \Hom(F \circ \blank, \blank) \cong \Hom(\blank, G \circ \blank) \]
+\end{bem}
+
+\begin{bsp}
+  $\exists \,_f \ladj f^* \ladj \forall \,_f$
+\end{bsp}
+
+\begin{bsp}
+  Betrachte die 2-Kat. der Ringe. Dann gilt: Ein $B$-$A$-Modul $M$ ist genau dann ein Linksadjungierter, wenn $M$ als Rechts-$A$-Modul endlich erzeugt und projektiv ist.
+\end{bsp}
+
+\begin{bem}
+  Sind $\eta$ und $\epsilon$ in $F \ladj G$ sogar Isomorphismen, so heißt $F \ladj G$ auch \emph{adjungierte Äquivalenz}. Jede beliebige Äquivalenz lässt sich stets (unter Beibehaltung von $F$ und $G$ sowie einem der Morphismen $\epsilon$, $\eta$) zu einer adj. Äquivalenz verfeinern.
+\end{bem}
+
+% Kan-Erweiterungen
+
+\begin{defn}
+  Sei $A \xleftarrow{T} M \xrightarrow{K} C$ ein Ausschnitt einer 2-Kategorie. Eine \emph{Rechts-Kan-Erw.} (RKE) $(R, \epsilon)$ von $T$ längs $K$ besteht aus
+  \begin{itemize}
+    \item einem Morphismus $R : C \to A$
+    \item einem 2-Morphismus $\epsilon : R \circ K \Rightarrow T$,
+  \end{itemize}
+  sodass gilt:
+  % $(R, \epsilon)$ unter diesen Daten terminal ist:
+  Für alle Möchtegern-RKE $(\tilde{R} : C \to A, \epsilon : \tilde{R} \circ K \Rightarrow T)$ gibt es genau ein $\sigma : \tilde{R} \Rightarrow R$ mit $\epsilon \circ \sigma K = \tilde{\epsilon}$.
+  Notation: $R = \Ran_K(T)$
+\end{defn}
+
+\begin{bem}
+  $(R, \epsilon)$ ist RKE von $T$ längs $K$ $\iff$ $\Hom(\tilde{R}, R) \to \Hom(\tilde{R} \circ K, T)$ ist bijektiv für alle $\tilde{R} : C \to A$.
+\end{bem}
+
+\begin{prop}
+  RKE sind eindeutig bis auf eindeutige Isomorphie.
+\end{prop}
+
+\begin{bsp}
+  Die RKE eines bel. Morphismus $T : M \to A$ längs $\Id_M$ existiert stets und ist gegeben durch $(T, T \circ \Id_M \Rightarrow T)$.
+\end{bsp}
+
+\begin{bsp}
+  In der 2-Kategorie der Ringe existieren alle RKE:
+  \[ \Ran_K(T) = (\Hom_M(K, T), \enspace ev : \Hom_M(K, T) \otimes_C K \Rightarrow T). \]
+\end{bsp}
+
+\begin{bsp}
+  Sei $K : \MatC \to \mathbf{1}$ der eindeutig best. Funktor. Sei $T : \MatC \to \Aat$ irgendein Funktor. Dann ist eine RKE von $T$ längs $K$ dasselbe wie ein Limes von $T$.
+\end{bsp}
+
+\begin{thm}
+  Seien $K : \MatC \to \Cat$ und $T : \MatC \to \Aat$ Funktoren.
+  Existiere für alle Objekte $c \in \Cat$ der Limes
+  \[ R(c) \coloneqq \Lim_{f : c \to Km} T(m). \]
+  Dann lässt sich diese Setzung zu einem Funktor $\Cat \to \Aat$ ausdehnen und zwar zu einer RKE von $T$ längs $K$.
+\end{thm}
+
+\begin{bem}
+  Ist $\MatC$ klein und $\Cat$ lokal klein und ist $\Aat$ vollständig, so sind die Voraussetzungen des Theorems für jeden Funktor $K : \MatC \to \Cat$, $T : \MatC \to \Aat$ erfüllt. Insbesondere ist dann jede solche RKE von der Form im Theorem. Solche RKE heißen auch \emph{punktweise RKE}.
+\end{bem}
+
+\begin{lem}
+  Eine RKE ist genau dann punktweise, wenn sie für alle $a \in \Aat$ unter dem Funktor $\Hom_\Aat(a, \blank)$ erhalten bleibt.
+\end{lem}
+
+\begin{thm}
+  Sei $K : M \to C$ ein Funktor. Betrachte $K^* : [C, A] \to [M, A]$.
+  \begin{itemize}
+    \item Wenn ein Funktor $\Ran_K : [M,A] \to [C, A]$ mit $K^* \ladj \Ran_K$ existiert, so ist für alle $T : M \to A$ $\Ran_K(T)$ eine RKE von $T$ längs $K$.
+    \item Existiere für alle $T : M \to A$ eine RKE $\Ran_K(T)$. Dann kann man die Zuordnung $T \mapsto \Ran_K(T)$ zu einem Rechtsadjungierten von $K^*$ ausdehnen.
+  \end{itemize}
+\end{thm}
+
+\begin{thm}
+  Sei $G : A \to X$ in einer 2-Kategorie. Dann sind äquivalent:
+  \begin{itemize}
+    \item $G$ besitzt einen Linksadjungierten.
+    \item $\Ran_G(\Id_A)$ existiert und bleibt von $G$ erhalten, \dh{} $G \circ \Ran_G(\Id_A) = \Ran_G(G \circ \Id_A)$.
+  \end{itemize}
+  In diesem Fall gilt $\Ran_G(\Id_A) \ladj G$ und $\Ran_G(\Id_A)$ wird sogar von allen Morphismen $H : A \to Y$ bewahrt.
+\end{thm}
+
+\begin{thm}
+  Rechtsadjungierte bewahren RKE.
+\end{thm}
+
+\begin{kor}
+  Rechtsadjungierte bewahren Limiten (RAPL)
+\end{kor}
 
 \end{document}
