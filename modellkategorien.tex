@@ -472,7 +472,10 @@
 \end{bem}
 
 \begin{prop}
-  Retrakte von Isos sind Isos.
+  \begin{itemize}
+    \item Retrakte von Isomorphismen sind Isomorphismen.
+    \item Sei $f \circ g = \id$. Dann ist $f$ ein Retrakt von $g \circ f$.
+  \end{itemize}
 \end{prop}
 
 % Ausgelassen: Retrakte sind abgeschlossen unter Komposition mit Isos
@@ -497,6 +500,10 @@
     \end{centertikzcd}
   \end{itemize}
 \end{defn}
+
+\begin{bsp}
+  Wegeliftung aus der Topologie: $i : \{ 0 \} \to \cinterval{0}{1}$ erfüllt die LHHE bezüglich allen Überlagerungen $\pi : E \to B$.
+\end{bsp}
 
 \begin{bsp}
   Sei $P$ ein Objekt einer abelschen Kategorie $\Aat$. Dann ist $P$ genau dann \emph{projektiv}, wenn $(0 \to P)$ die LHHE bzgl. aller Epimorphismen in $\Aat$ hat.
