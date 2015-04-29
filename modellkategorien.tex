@@ -25,6 +25,7 @@
 
 \newcommand{\Ord}{\mathcal{O}_n} % Menge der Ordinalzahlen
 \newcommand{\Prop}{\mathbf{Prop}} % Typ der Propositionen
+\DeclareMathOperator{\Quot}{Quot} % Quotientenkörper
 
 \newenvironment{centertikzcd}
   {\begin{center}\begin{tikzcd}}
@@ -434,6 +435,11 @@
 \begin{kor}
   Rechtsadjungierte bewahren Limiten (RAPL)
 \end{kor}
+
+\begin{bsp}
+  Sei $G : \Field \to \Ring$ der Vergissfunktor. Dann ist
+  \[ (\Ran_G(G))(R) = \prod_{\mathfrak{p} \subset R} \Quot(R/{\mathfrak{p}}). \]
+\end{bsp}
 
 % §. Algebraische Strukturen in Kategorien
 \subsection{Algebraische Strukturen in Kategorien}
