@@ -414,7 +414,7 @@
 \begin{thm}
   Sei $K : M \to C$ ein Funktor. Betrachte $K^* : [C, A] \to [M, A]$.
   \begin{itemize}
-    \item Wenn ein Funktor $\Ran_K : [M,A] \to [C, A]$ mit $K^* \ladj \Ran_K$ existiert, so ist für alle $T : M \to A$ $\Ran_K(T)$ eine RKE von $T$ längs $K$.
+    \item Wenn ein Funktor $\Ran_K : [M,A] \to [C, A]$ mit $K^* \ladj \Ran_K$ ex., so ist $\Ran_K(T)$ für alle $T : M \!\to\! A$ eine RKE von $T$ längs $K$.
     \item Existiere für alle $T : M \to A$ eine RKE $\Ran_K(T)$. Dann kann man die Zuordnung $T \mapsto \Ran_K(T)$ zu einem Rechtsadjungierten von $K^*$ ausdehnen.
   \end{itemize}
 \end{thm}
@@ -470,8 +470,6 @@
     B
   \end{centertikzcd}
 \end{defn}
-
-% TODO: Definition von 
 
 \begin{bem}
   Ein Retrakt von $f \in \Mor(\Cat)$ ist ein Retrakt von $f \in \Ob(\Cat^{\to})$.
@@ -545,14 +543,14 @@
   %Sei $I$ eine Menge von Morphismen in einer kovollständigen Kategorie $\Cat$.
   \begin{itemize}
     \item Ein \emph{relativer $I$-Zellenkomplex} ist eine transf. Komp. einer $\lambda$-Sequenz $Z$, sodass $\forall \, \alpha \!\in\! \Ord$ mit $\alpha \!+\! 1 \!<\! \lambda$ ein Pushoutdiagramm
-    % TODO: Pushout-Winkel
     \begin{centertikzcd}
-      C \arrow[r] \arrow[d, "f"] &
+      C \arrow[r] \arrow[d, "f"] \arrow[rd, phantom, "\ulcorner", very near end] &
       Z_\alpha \arrow[d] &
       \text{$\leftarrowtriangle$ \emph{Anklebeabbildung}} \\
       B \arrow[r] &
       Z_{\alpha + 1} &
-      \text{$\leftarrowtriangle$ \emph{Zelle}}
+      \mathrlap{\text{$\leftarrowtriangle$ \emph{Zelle}}}
+      \phantom{\text{$\leftarrowtriangle$ \emph{Anklebeabbildung}}}
     \end{centertikzcd}
     mit $f \in I$ existiert. Sprechweise: \\
     "`$Z_{\alpha+1}$ entsteht aus $Z_\alpha$, indem wir $B$ längs $C$ ankleben"'
