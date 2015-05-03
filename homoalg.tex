@@ -54,6 +54,7 @@
 \DeclareMathOperator{\coim}{coim} % Kobild
 \newcommand{\clos}[1]{\overline{#1}} % topologischer Abschluss
 \newcommand{\pt}{\{ \, \mathrm{pt} \, \}} % Einpunktiger Raum
+\DeclareMathOperator{\Cyl}{Cyl} % Zylinder
 
 % TODO
 \newcommand{\AMod}{\text{$A$-$\Mod$}} % Kategorie der A-Linksmoduln
@@ -947,7 +948,7 @@ Sei $\Cat$ eine Kategorie.
 \end{nota}
 
 \begin{defn}
-  Das \emph{Standard-$n$-Simplex} $\Delta_n \subset \R^{n+1}$ ist die von den $(n{+}1)$ Standardbasisvektoren aufgespannte affinlineare Hülle. Eine streng monotone Abb $f : [n] \to [m]$ induziert durch Abbilden des $i$-ten Basisvektors auf den $f(i)$-ten eine Inklusion $\Delta_f : \Delta_n \to \Delta_m$, 
+  Das \emph{Standard-$n$-Simplex} $\Delta_n \subset \R^{n+1}$ ist die von den $(n{+}1)$ Standardbasisvektoren aufgespannte affinlineare Hülle. Eine streng monotone Abb $f : [n] \to [m]$ induziert durch Abbilden des $i$-ten Basisvektors auf den $f(i)$-ten eine Inklusion $\Delta_f : \Delta_n \to \Delta_m$,
 \end{defn}
 
 \begin{defn}
@@ -1177,7 +1178,7 @@ Sei $\Cat$ eine Kategorie.
   Der \emph{Nerv} $\NCat$ einer kleinen Kategorie $\Cat$ ist die simpl. Menge
   \begin{align*}
     & \NCat_n \coloneqq \left\{ \, \text{Diagramme } X_0 \xrightarrow{\varphi_1} X_1 \xrightarrow{\varphi_2} \ldots \xrightarrow{\varphi_n} X_n \text{ in $\Cat$} \, \right\} \\
-    & \NCat(f : [m] \to [n])(X_0 \xrightarrow{\varphi_1} \ldots \xrightarrow{\varphi_n} X_n) \coloneqq 
+    & \NCat(f : [m] \to [n])(X_0 \xrightarrow{\varphi_1} \ldots \xrightarrow{\varphi_n} X_n) \coloneqq
     ( Y_0 \xrightarrow{\psi_1} \ldots \xrightarrow{\psi_m} Y_m) \\
     & \quad \text{mit} \enspace Y_i \coloneqq X_{f(i)}, \enspace \psi_i \coloneqq \varphi_{f(i)} \circ \nldots \circ \varphi_{f(i-1)+1}
     %& \left( X_{f(0)} \to \ldots \to X_{f(i)} \xrightarrow{\varphi_{f(i+1)} \ldots \circ \varphi_{f(i)+1}} X_{f(i+1)} \to \ldots \to X_{f(m)} \right)
@@ -1771,6 +1772,9 @@ Sei $\Aat$ eine abelsche Kategorie.
   \end{itemize}
 \end{defn}
 
+\begin{bem}
+  Kettenkomplexe und Kokettenkomplexe unterscheiden sich nur in Notation und Terminologie.
+\end{bem}
 
 % II.6.3: Äquivalenz zweier Definitionen von $H^n(\CC{C})$
 % Dies sollte das letzte Lemma vor II.6.2 bleiben!
@@ -1849,6 +1853,16 @@ Sei $\Aat$ eine abelsche Kategorie.
 \begin{defn}
   Die \emph{Kategorie der (Ko-)Komplexe} in $\Aat$ ist $\Kom(\Aat)$. \\
   Die Unterkat. der zyklischen Komplexe ist $\Kom_0(\Aat) \subset \Kom(\Aat)$.
+\end{defn}
+
+% III.2.5 (Varianten)
+\begin{defn}
+  Die Kategorien der (nach links/rechts) beschränkten Ketten- komplexe sind die vollen Unterkategorien von $\Kom(\Aat)$ mit
+  \begin{align*}
+    \Ob(\Kom^+(\Aat)) & \coloneqq \Set{K_\bullet \in \Ob(\Kom(\Aat))}{\ex{i_0 \!\in\! \Z\!}\! \fa{i \leq i_0\!}\! K_i \!=\! 0}, \\
+    \Ob(\Kom^-(\Aat)) & \coloneqq \Set{K_\bullet \in \Ob(\Kom(\Aat))}{\ex{i_0 \!\in\! \Z\!}\! \fa{i \geq i_0\!}\! K_i \!=\! 0}, \\
+    \Ob(\Kom^b(\Aat)) & \coloneqq \Ob(\Kom^+(\Aat)) \cap \Ob(\Kom^+(\Aat)).
+  \end{align*}
 \end{defn}
 
 \begin{prop}
@@ -2371,7 +2385,7 @@ Sei $\Aat$ eine abelsche Kategorie.
   Sei $\Fais \xrightarrow{f} \Garb \xrightarrow{g} \Harb$ eine Sequenz von Prägarben abelscher Gruppen auf einem topologischen Raum $X$.
   \begin{itemize}
     \item Die Sequenz ist eine exakte Sequenz von Prägarben, wenn für alle offenen $U \subseteq X$ gilt: $\im f_U = \ker g_U$.
-    \item Seien $\Fais$, $\Garb$, $\Harb$ sogar Garben. Dann ist die Seq. eine ex. Seq. von Garben, wenn für alle offenen $U \subseteq X$ gilt, dass $\im f_U \subseteq \ker g_U$ und jeder Schnitt $t \in \ker g_U$ lokal Urbilder besitzt, \dh{} es existiert eine offene Überdeckung $U = {\bigcup}_{i \in I} U_i$ und eine Familie von Schnitten $(s_i \in \Fais(U_i))_{i \in I}$ mit 
+    \item Seien $\Fais$, $\Garb$, $\Harb$ sogar Garben. Dann ist die Seq. eine ex. Seq. von Garben, wenn für alle offenen $U \subseteq X$ gilt, dass $\im f_U \subseteq \ker g_U$ und jeder Schnitt $t \in \ker g_U$ lokal Urbilder besitzt, \dh{} es existiert eine offene Überdeckung $U = {\bigcup}_{i \in I} U_i$ und eine Familie von Schnitten $(s_i \in \Fais(U_i))_{i \in I}$ mit
     $\fa{i \in I} f_{U_i}(s_i) = t|_{U_i}$.
   \end{itemize}
 \end{bem}
@@ -2765,17 +2779,7 @@ Sei $\Aat$ eine abelsche Kategorie.
 
 % III.2.5 (Varianten)
 \begin{defn}
-  Die Kategorien der (nach links/rechts) beschränkten Ketten- komplexe sind die vollen Unterkategorien von $\Kom(\Aat)$ mit
-  \begin{align*}
-    \Ob(\Kom^+(\Aat)) & \coloneqq \Set{K_\bullet \in \Ob(\Kom(\Aat))}{\ex{i_0 \!\in\! \Z\!}\! \fa{i \leq i_0\!}\! K_i \!=\! 0}, \\
-    \Ob(\Kom^-(\Aat)) & \coloneqq \Set{K_\bullet \in \Ob(\Kom(\Aat))}{\ex{i_0 \!\in\! \Z\!}\! \fa{i \geq i_0\!}\! K_i \!=\! 0}, \\
-    \Ob(\Kom^b(\Aat)) & \coloneqq \Ob(\Kom^+(\Aat)) \cap \Ob(\Kom^+(\Aat)).
-  \end{align*}
-\end{defn}
-
-% III.2.5 (Varianten)
-\begin{defn}
-  Die Lokalisierung dieser Kategorien an der Klasse der Quasi- isomorphismen wird mit $\Der^+(\Aat)$, $\Der^-(\Aat)$ bzw. $\Der^b(\Aat)$ bezeichnet.
+  Die Lokalisierungen der Kategorien der (nach links/rechts) beschränkten Komplexe an der Klasse der Quasiisomorphismen werden mit $\Der^+(\Aat)$, $\Der^-(\Aat)$ bzw. $\Der^b(\Aat)$ bezeichnet.
 \end{defn}
 
 % III.2.5 (Varianten)
@@ -2802,7 +2806,7 @@ Sei $\Aat$ eine abelsche Kategorie.
 
 % III.2.7a)
 \begin{bem}
-  Aus der Bedingung 2 ergibt sich eine vereinfachte Darstellung der Elemente von $\Hom_{\Cat[S^{-1}]}(X, Y)$, wenn $S$ lokalisierend ist: Nämlich kann man in den formalen Ketten alle künstlichen Inversen auf die linke Seite verfrachten. \\
+  Die Bedingung 2 ermöglicht eine vereinfachte Darstellung der Elemente von $\Hom_{\Cat[S^{-1}]}(X, Y)$: Nämlich kann man in den formalen Ketten alle künstlichen Inversen auf die linke Seite verfrachten. \\
   Die Bedingung 1 erlaubt das Zusammenfassen von künstl. Inversen.
 \end{bem}
 
@@ -2864,6 +2868,119 @@ Sei $\Aat$ eine abelsche Kategorie.
   \end{itemize}
 \end{prop}
 
-% TODO: III.3 (Dreiecke als verallgemeinerte exakte Tripel)
+% III.3 (Dreiecke als verallgemeinerte exakte Tripel)
+
+% III.3.1 (Das Problem)
+
+% III.3.2 (Verschiebung, Zylinder, Kegel)
+
+\begin{defn}
+  Sei $\CCC{K} \in \Kom(\Aat)$ ein Kokettenkomplex. \\
+  Die \emph{Verschiebung} $\CCC{K[n]}$ von $\CCC{K}$ um $n \in \Z$ ist der Kokomplex mit
+  \[
+    K[n]^i \coloneqq K^{n+i}, \quad
+    \delta_{K[n]}^i \coloneqq (-1)^i \delta_K^{n+i}.
+  \]
+\end{defn}
+
+\begin{bem}
+  Verschiebung um $n$ ist eine Autoäquivalenz
+  \[
+    T^n : \Kom^?(\Aat) \to \Kom^?(\Aat), \quad
+    \CCC{K} \mapsto \CCC{K[n]}.
+  \]
+\end{bem}
+
+\begin{defn}
+  Sei $f : \CCC{K} \to \CCC{L}$ ein Morphismus von Komplexen.
+  \begin{itemize}
+    \item Der \emph{Kegel} von $f$ ist der Komplex $C(f)$ mit
+    \[
+      C(f)^i \coloneqq K[1]^i \oplus L^i, \quad
+      \delta_{C(f)}(k^{i+1}, l^i) \coloneqq (- \delta_K k^{i+1}, f(k^{i+1}) + \delta_L l^i).
+    \]
+    % Ausgelassen: Bemerkung über den Kegel von Morphismen von 0-Komplexen
+    \item Der \emph{Zylinder} von $f$ ist der Komplex $\Cyl(f)$ mit
+    \begin{align*}
+      \Cyl(f)^i & \coloneqq K^i \oplus K[1]^i \oplus L^i, \\
+      \delta_{\Cyl(f)}^i (k^i, k^{i+1}, l^i) & \coloneqq (\delta_K k^i - k^{i+1}, - \delta_K k^{i+1}, f(k^{i+1}) + \delta_L l^i).
+    \end{align*}
+  \end{itemize}
+\end{defn}
+
+% XXX: Mir selbst aufgefallen. Ist das überhaupt wichtig/interessant?
+\begin{bem}
+  Der Zylinder von $f$ ist der Kegel $C(g)$ von
+  \[ g : C(-\id_K)[-1] \to L, \quad (k^{i+1}, k^i) \mapsto f(k^{i+1}). \]
+\end{bem}
+
+% III.3.3
+\begin{lem}
+  Sei $f : \CCC{K} \to \CCC{L}$ ein Morphismus von Kokomplexen. \\
+  Dann existiert das kommutative Diagramm mit exakten Zeilen
+  \begin{centertikzcd}
+    & 0 \arrow[r] &
+    \CCC{L} \arrow[r, "\overline{\pi}"] \arrow[d, "\alpha"] &
+    C(f) \arrow[r, "\delta = \delta(f)"] \arrow[d, equal] &
+    \CCC{K[1]} \arrow[r] &
+    0 \\
+    0 \arrow[r] &
+    \CCC{K} \arrow[r, "\overline{f}"] \arrow[d, equal] &
+    \Cyl(f) \arrow[r, "\pi"] \arrow[d, "\beta"] &
+    C(f) \arrow[r] &
+    0 \\
+    & \CCC{K} \arrow[r, "f"] &
+    \CCC{L}
+  \end{centertikzcd}
+  Dabei sind $\alpha$ und $\beta$ Quasiisomorphismen mit $\beta \circ \alpha = \id_L$ und $\alpha \circ \beta \simeq \id_{\Cyl(f)}$.
+  Desweiteren ist die Konstruktion funktoriell in $f$.
+\end{lem}
+
+% III.3.4
+\begin{defn}
+  \begin{itemize}
+    \item Ein \emph{Dreieck} ($\Delta$) in einer Kategorie von Komplexen \\
+    (\zB{} $\Kom$, $D$, $D^+$, etc.) ist ein Diagramm der Form
+    \[ \CCC{K} \xrightarrow{u} \CCC{L} \xrightarrow{v} \CCC{M} \xrightarrow{w} \CCC{K[1]} \]
+    \item Es heißt \emph{ausgezeichnet}, wenn es isomorph zur mittleren Zeile
+    \[ \CCC{K} \xrightarrow{\overline{f}} \Cyl(f) \xrightarrow{\pi} C(f) \xrightarrow{\delta} \CCC{K[1]} \]
+    eines Diagramms mit der Form wie im letzten Lemma ist.
+    \item Ein Morphismus von Dreiecken ist dabei ein komm. Diagramm
+    \begin{centertikzcd}
+      \CCC{K} \arrow[r, "u"] \arrow[d, "f"] &
+      \CCC{L} \arrow[r, "v"] \arrow[d, "g"] &
+      \CCC{M} \arrow[r, "w"] \arrow{d}{h} &
+      \CCC{K[1]} \arrow{d}{f[1]} \\
+      \CCC{\tilde{K}} \arrow[r, "\tilde{u}"] &
+      \CCC{\tilde{L}} \arrow[r, "\tilde{v}"] &
+      \CCC{\tilde{M}} \arrow[r, "\tilde{w}"] &
+      \CCC{\tilde{K}[1]}
+    \end{centertikzcd}
+    Er heißt (Quasi-)Isomorphismus, wenn $f$, $g$ und $h$ (Quasi-) Isomorphismen in der entsprechenden Kategorie sind.
+  \end{itemize}
+\end{defn}
+
+% TODO: Notation für Dreiecke
+
+% III.3.5
+\begin{prop}
+  %Jede \keS{} von Komplexen in $\Kom(\Aat)$ ist quasiisomorph zu einem ausgezeichneten Dreieck.
+  Jede kurze exakte Sequenz $0 \to \CCC{K} \xrightarrow{f} \CCC{L} \to \CCC{M} \to 0$ von Komplexen in $\Kom(\Aat)$ ist isomorph zur mittleren Zeile
+  \[ 0 \to \CCC{K} \xrightarrow{\overline{f}} \Cyl(f) \xrightarrow{\pi} C(f) \to 0 \]
+  des Diagramms aus dem letzten Lemma.
+\end{prop}
+
+% III.3.6
+\begin{thm}
+  Sei $\CCC{K} \to \CCC{L} \to \CCC{M} \to \CCC{K[1]}$ ein ausgezeichnetes Dreieck. \\
+  Dann ist die induzierte lange Sequenz exakt:
+  \[ \nldots \to H^i(\CCC{K}) \to H^i(\CCC{L}) \to H^i(\CCC{M}) \to H^i(\CCC{K[1]}) \!=\! H^{i+1}(\CCC{K}) \to \nldots \]
+\end{thm}
+
+\begin{beweisidee}
+  Die Kohomologiesequenz, die vom ausgezeichneten $\Delta$ induziert wird, ist genau die \leS{} zur mittleren Zeile im Lemma.
+\end{beweisidee}
+
+% TODO: eventuelle Übungsaufgaben zu Dreiecken hier einfügen
 
 \end{document}
