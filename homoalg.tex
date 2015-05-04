@@ -2983,4 +2983,39 @@ Sei $\Aat$ eine abelsche Kategorie.
 
 % TODO: eventuelle Übungsaufgaben zu Dreiecken hier einfügen
 
+% III.4. Die abgeleitete Kategorie als Lokalisierung der Homotopie-Kategorie
+
+% III.4.1
+\begin{defn}
+  Sei $\Aat$ eine ab. Kategorie. Die \emph{Homotopie-Kategorie} $K(\Aat)$ der Komplexe in $\Aat$ ist $\Kom(\Aat)/{\simeq}$ (\dh{} Objekte sind Komplexe, homotope Morphismen von Komplexen werden identifiziert). \\
+  Die vollen Unterkategorien der (nach links/rechts) beschränkten Komplexe sind $K^+(\Aat)$, $K^-(\Aat)$ bzw. $K^b(\Aat)$.
+\end{defn}
+
+\begin{bem}
+  Da homotope Abbildungen auf Kohomologie identisch werden, ist $H^\bullet : K(\Aat) \to \Kom_0(\Aat), \enspace [f] \mapsto H^*(f)$ wohldefiniert. \\
+  Somit kann man auch in $K(\Aat)$ von Quasiisomorphismen sprechen.
+\end{bem}
+
+% III.4.3
+\begin{lem}
+  Seien $f, g : \CCC{K} \to \CCC{L}$ homotop. Dann ist $Q(f) \!=\! Q(g)$ in $\Der(\Aat)$.
+\end{lem}
+
+% III.4.2
+\begin{prop}
+  Sei $S \subset \Mor(K(\Aat))$ die Klasse der Quasiisomorphismen. \\
+  Dann gilt $K(\Aat)[S^{-1}] \simeq \Der(\Aat)$ kanonisch.
+\end{prop}
+
+\begin{bem}
+  Analoges gilt für $K^*(\Aat)$ und $D^*(\Aat)$ mit $* \in \{ {+}, {-}, b \}$.
+\end{bem}
+
+% III.4.4
+\begin{thm}
+  Die Klasse $S \subset \Mor(K^{(*)}(\Aat))$ der Qis ist lokalisierend.
+\end{thm}
+
+% Ausgelassen: III.4.5 (Additivität von $\Der(\Aat)$, da schon im Abschnitt über Dächer)
+
 \end{document}
