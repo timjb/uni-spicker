@@ -1,0 +1,111 @@
+\documentclass{cheat-sheet}
+
+\pdfinfo{
+  /Title (Zusammenfassung Spektralsequenzen)
+  /Author (Tim Baumann)
+}
+
+\usepackage{tikz}
+%\usetikzlibrary{calc}
+%\usetikzlibrary{matrix,shapes,arrows,positioning}
+
+\input{include/cats} % Kategorientheorie-Makros
+
+%\newcommand{\keS}{k.\,e.\,S.} % kurze exakte Sequenz
+%\newcommand{\leS}{l.\,e.\,S.} % lange exakte Sequenz
+%\newcommand{\ZM}[1]{\Z_{#1}} % \Z modulo n
+
+% Kleinere Klammern
+\delimiterfactor=701
+
+
+\begin{document}
+
+\maketitle{Spektralsequenzen}
+
+% TODO: Definition Spektralsequenz
+
+Sei $\Aat$ im Folgenden eine abelsche Kategorie.
+
+\begin{defn}
+  Eine (homologische) \emph{Spektralsequenz} besteht aus
+  \begin{itemize}
+    \item Objekten $E^r_{p,q} \in \Ob(\Aat)$ für alle $p, q \in \Z$ und $r \geq 1$,
+    \item Morphismen $d^r_{p,q} : E^r_{p,q} \to E^r_{p-r,q+r-1}$ mit $d^r_{p-r,q+r-1} \circ d^r_{p,q} = 0$,
+    \item und Isos $\alpha : H_{p,q}(E^r) \!\coloneqq\! \ker(d^r_{p,q}) / \im(d^r_{p+r,q-r+1}) \xrightarrow{\cong} E^{r+1}_{p,q}$.
+  \end{itemize}
+\end{defn}
+
+% XXX: Morphismus von Spektralsequenzen
+
+\begin{sprech}
+  \begin{itemize}
+    \item Die Morphismen $d^r_{p,q}$ heißen \emph{Differentiale}.
+    \item Die Gesamtheit aller $E^r_{p,q}$ mit $r \in \N$ fest heißt $r$-te \emph{Seite}.
+  \end{itemize}
+\end{sprech}
+
+\begin{bem}
+  Bei einer kohomologischen Spektralsequenz sind die Indizes vertauscht und die Differentiale laufen $d_r^{p,q} : E_r^{p,q} \to E_r^{p+r,q-r+1}$.
+\end{bem}
+
+\begin{tikzpicture}[x=10pt,y=10pt]
+  \begin{scope}[shift={(0,0)}]
+    \foreach \x in {-1,...,4}{
+      \foreach \y in {-2,-1,...,3}{
+        \node[draw,circle,inner sep=0.5pt,fill] at (\x,\y) {};
+      }
+    }
+    \foreach \x in {-1,...,5}{
+      \foreach \y in {-2,-1,...,3}{
+        \draw[->,gray] (\x-0.2,\y) -- (\x-0.8,\y);
+      }
+    }
+    \draw[->] (-0.35,-0.35) -- (5.35,-0.35) node[below] {p};
+    \draw[->] (-0.35,-0.35) -- (-0.35,4) node[left] {q};
+    \node at (5.65,4.5) {$E^1$};
+  \end{scope}
+  \begin{scope}[shift={(9,0)}]
+    \foreach \x in {-1,...,4}{
+      \foreach \y in {-2,-1,...,3}{
+        \node[draw,circle,inner sep=0.5pt,fill] at (\x,\y) {};
+      }
+    }
+    \foreach \x in {0,...,5}{
+      \foreach \y in {-2,-1,...,3}{
+        \draw[->,gray] (\x-0.2,\y+0.1) -- (\x-1.8,\y+0.9);
+      }
+    }
+    \draw[->] (-0.35,-0.35) -- (5.35,-0.35) node[below] {p};
+    \draw[->] (-0.35,-0.35) -- (-0.35,4) node[left] {q};
+    \node at (5.65,4.5) {$E^2$};
+  \end{scope}
+  \begin{scope}[shift={(18,0)}]
+    \foreach \x in {-1,...,4}{
+      \foreach \y in {-2,-1,...,3}{
+        \node[draw,circle,inner sep=0.5pt,fill] at (\x,\y) {};
+      }
+    }
+    \foreach \x in {1,...,5}{
+      \foreach \y in {-2,-1,...,2}{
+        \draw[->,gray] (\x-0.2,\y+0.1) -- (\x-2.8,\y+1.9);
+      }
+    }
+    \draw[->] (-0.35,-0.35) -- (5.35,-0.35) node[below] {p};
+    \draw[->] (-0.35,-0.35) -- (-0.35,4) node[left] {q};
+    \node at (5.65,4.5) {$E^3$};
+  \end{scope}
+\end{tikzpicture}
+
+% TODO: Zeichnung
+
+% TODO: links/rechts
+
+% TODO: Exakte Paare
+
+% TODO: Serre Spectral Sequence
+% TODO: Leray Spectral Sequence
+% TODO: May Spectral Sequence
+% TODO: Spektralsequenz eines Doppelkomplexes
+
+\end{document}
