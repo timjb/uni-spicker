@@ -6,6 +6,7 @@
 }
 
 \usepackage{tikz}
+%\usepackage{extpfeil} %
 %\usepackage{xcolor}
 \usetikzlibrary{arrows,cd}
 \usepackage{cancel} % für durchgestrichenen Text
@@ -23,8 +24,10 @@
 
 \input{include/cats} % Kategorientheorie-Makros
 
+\newcommand{\nspace}[1]{\foreach \i in {1,...,#1}{ \! }} % Negativer Abstand
 \newcommand{\Ord}{\mathcal{O}_n} % Menge der Ordinalzahlen
 \newcommand{\Prop}{\mathbf{Prop}} % Typ der Propositionen
+\newcommand{\xtwoheadrightarrow}[1]{\xrightarrow{#1}\nspace{8}\to\,\,} % Pfeil mit zwei Spitzen (HACK!!!)
 \DeclareMathOperator{\Quot}{Quot} % Quotientenkörper
 
 \newenvironment{centertikzcd}
@@ -661,5 +664,123 @@
 \begin{bsp}
   Sei $F : \Cat \to \Dat$ ein Funktor. Dann ist $\Wat \coloneqq F^{-1}(\{ \, \text{Isos in $\Dat$} \, \})$ eine Unterkategorie schwacher Äquivalenzen.
 \end{bsp}
+
+\begin{defn}
+  Ein Tripel $(\Wat, \Cat, \Fat)$ von Unterkategorien einer Kategorie $\MatC$ heißt \emph{Modellstruktur} auf $\MatC$, falls sowohl $(\Cat, \Fat \cap \Wat)$ und $(\Cat \cap \Wat, \Fat)$ schwache Faktorisierungssysteme sind und $\Wat$ die 2-aus-3-Eigenschaft erfüllt.
+\end{defn}
+
+\begin{defn}
+  Eine bivollständige Kategorie $\MatC$ zusammen mit einer Modellstruktur $(\Wat, \Cat, \Fat)$ heißt eine \emph{Modellkategorie}.
+\end{defn}
+
+\begin{sprech}
+  Man verwendet folgende Bezeichnungen und Pfeile:
+  \begin{center}
+    \begin{tabular}{r l l}
+      $\Wat$ & $\xrightarrow{{\sim}}$ & schwache Äquivalenz \\
+      $\Cat$ & $\xhookrightarrow{\phantom{{\sim}}}$ & Kofaserungen \\
+      $\Cat \cap \Wat$ & $\xhookrightarrow{{\sim}}$ & azyklische Kofaserungen \\
+      $\Fat$ & $\xtwoheadrightarrow{\phantom{{\sim}}}$ & Faserungen \\
+      $\Fat \cap \Wat$ & $\xtwoheadrightarrow{{\sim}}$ & azyklische Faserungen
+    \end{tabular}
+  \end{center}
+\end{sprech}
+
+\begin{bem}
+  Ist $(\Wat, \Cat, \Fat)$ eine Modellstruktur auf $\MatC$, so ist $(\Wat^\op, \Cat^\op, \Fat^\op)$ eine Modellstruktur auf $\Cat^\op$.
+\end{bem}
+
+\begin{bem}
+  Wegen $\Cat = \prescript{\boxslash}{} (\Fat \cap \Wat)$ bzw. $\Fat = (\Cat \cap \Wat)^\boxslash$ ist das Datum $(\Wat, \Cat, \Fat)$ überbestimmt.
+\end{bem}
+
+\begin{bsp}
+  Sei $\MatC$ bivollständig. Sei $\Wat = \{ \, \text{Iso} \, \} = \Cat$. Dann wird $\MatC$ mit $\Fat = \MatC$ eine Modellkategorie.
+\end{bsp}
+
+\begin{prop}
+  In einer Modellkategorie sind $\Cat$ und $\Cat \cap \Wat$ links-saturiert.
+\end{prop}
+
+\begin{lem}
+  $\Wat$ enthält alle Isomorphismen und ist unter Retrakten abgeschlossen, bildet also eine Unterkat. schwacher Äquivalenzen.
+\end{lem}
+
+\begin{nota}
+  Das initiale Objekt von $\MatC$ wird mit $\emptyset$, das terminale Objekt mit $*$ bezeichnet.
+  %Mit $\emptyset$ wird das initiale Objekt und mit $*$ das terminale Objekt von $\MatC$ bezeichnet.
+\end{nota}
+
+\begin{defn}
+  \begin{itemize}
+    \item Ein Objekt $X \in \Ob(\MatC)$ heißt \emph{kofasernd}, falls $\emptyset \to X$ eine Kofaserung ist.
+    Eine azyklische Faserung $q : QX \xrightarrow{{\sim}} X$ mit $QX$ kofasernd heißt \emph{kofasernder Ersatz} (oder Approx.) von $X$. \\
+    \item Dual heißt $X \in \Ob(\MatC)$ \emph{fasernd}, falls $X$ in $\MatC^\op$ kofasernd ist und $X \xhookrightarrow{{\simeq}} RX$ mit $RX$ fasernd heißt \emph{fasernder Ersatz} von $X$.
+  \end{itemize}
+\end{defn}
+
+\begin{bsp}
+  Sei $X \in \Ob(\MatC)$ beliebig. Dann faktorisiere $\emptyset \to X$ wie folgt:
+  \begin{centertikzcd}
+    \emptyset \arrow[rr] \arrow[rd, hook] && X \\
+    & QX \arrow[ru, twoheadrightarrow, "\sim"]
+  \end{centertikzcd}
+  Man erhält also immer einen kofasernden Ersatz $QX$ für $X$. \\
+  Dual gibt es immer einen fasernden Ersatz $RX$ für $X$.
+\end{bsp}
+
+\begin{prop}
+  Seien $q : QX \xtwoheadrightarrow{{\sim}} X$ und $q' : Q' X \xtwoheadrightarrow{{\sim}} X$ zwei kofasernde Approximationen von $X$. Dann existiert eine schwache Äquivalenz $\xi : QX \xrightarrow{{\sim}} Q' X$ mit $q' \circ \xi = q$.
+\end{prop}
+
+\begin{defn}
+  Ein Obj. $X$ heißt \emph{bifasernd}, falls es fasernd und kofasernd ist.
+\end{defn}
+
+\begin{prop}
+  Für alle $X \in \Ob(\MatC)$ sind $RQX$ und $QRX$ schwach äquivalent und beide bifasernd.
+\end{prop}
+
+\begin{lem}[Ken Brown]
+  Sei $F : \MatC \to \NatC$ ein Funktor, $\MatC$ eine Modell- kategorie, $\NatC$ besitze eine Unterkat. $\Wat'$ schwacher Äquivalenzen. \\
+  Wenn $F$ azyklische Kofaserungen zwischen kofasernden Objekten nach $\Wat'$ abbildet, so bildet $F$ alle schwachen Äquivalenzen zwischen kofasernden Objekten nach $\Wat'$ ab.
+\end{lem}
+
+% Homotopien in Modellkategorien
+
+% TODO: Dieses Diagramm muss schöner werden!
+
+\begin{defn}
+  Ein \emph{Zylinderobjekt} $X \times I$ zu einem $X \in \Ob(\MatC)$, $\MatC$ Modellkategorie ist ein Objekt zusammen mit Morphismen wie folgt:
+  %X \times I \xrightarrow[{\sim}]{p} X
+  \begin{centertikzcd}
+    X \arrow[rd, "i_0 {\sim}"] \arrow[rrd, "\id"] \\
+    & X \times I \arrow[r, "p {\sim}"] & X \\
+    X \arrow[ru, "i_1 {\sim}"] \arrow[rru, "\id"]
+  \end{centertikzcd}
+  Das Zylinderobjekt $X \times I$ heißt \emph{gut}, falls $X \amalg X \to X \times I$ eine Kofaserung ist.
+  Ein guter Zylinder heißt \emph{sehr gut}, falls $X \times I \xrightarrow{p} X$ eine azyklische Faserung ist.
+\end{defn}
+
+\begin{bsp}
+  Sei $\nabla : X \coprod X \to X$ die Kodiagonale. Faktorisieren wir diese wie folgt:
+  % TODO: nabla einfügen
+  \begin{centertikzcd}
+    X \arrow[rd, hook] \\
+    & X \amalg X \arrow[r, hook] & X \times I \arrow[r, twoheadrightarrow, "\sim"] & X \\
+    X \arrow[ru, hook]
+  \end{centertikzcd}
+  Dann erhalten wir ein Zylinderobjekt $X \times I$ für $X$. Dieses ist sehr gut, wenn $X$ kofasernd ist.
+\end{bsp}
+
+\begin{defn}
+  Zwei Morphismen $f, g : X \to Y$ in $\MatC$ heißen \emph{links-homotop} (geschrieben $f \sim^l g$), falls ein Zylinder $X \times I$ und ein Diagramm der Form
+  \begin{centertikzcd}
+    X \arrow[rd, "\sim"] \arrow[rrd, "f"] \\
+    & X \times I \arrow[r, dashed, "h"] & Y \\
+    X \arrow[ru, "\sim"] \arrow[rru, "g"]
+  \end{centertikzcd}
+  existiert. Wir definieren $\pi^l(X, Y) \coloneqq \Hom_\MatC(X, Y) / \langle {\sim^l} \rangle$.
+\end{defn}
 
 \end{document}
