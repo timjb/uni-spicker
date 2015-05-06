@@ -397,9 +397,10 @@
 \end{bsp}
 
 \begin{thm}
-  Seien $K : \MatC \to \Cat$ und $T : \MatC \to \Aat$ Funktoren.
+  Seien $K : \MatC \to \Cat$ und $T : \MatC \to \Aat$ Funktoren. \\
   Existiere für alle Objekte $c \in \Cat$ der Limes
   \[ R(c) \coloneqq \Lim_{f : c \to Km} T(m). \]
+  Dabei ist die Indexkategore des Limes die Kommakat. $\Delta(c) \downarrow K$. \\
   Dann lässt sich diese Setzung zu einem Funktor $\Cat \to \Aat$ ausdehnen und zwar zu einer RKE von $T$ längs $K$.
 \end{thm}
 
@@ -559,7 +560,7 @@
 \end{defn}
 
 \begin{bsp}
-  CW-Komplexe aus der algebraischen Topologie sind $I$-Zellenkomplexe mit 
+  CW-Komplexe aus der algebraischen Topologie sind $I$-Zellenkomplexe mit
   $I \coloneqq \Set{S^{n-1} \hookrightarrow B^n}{n \geq 0}$
   (und $\Cat = \Top$).
 \end{bsp}
@@ -583,5 +584,82 @@
   \inlineitem{Isomorphismen} \enspace
   \inlineitem{Koprodukt}
 \end{thm}
+
+% Vorlesung vom 6.5.2015
+
+\begin{defn}
+  Eine Unterkategorie $\Lat \subseteq \Cat$ heißt \emph{links-saturiert}, falls $\Lat$ abgeschlossen ist unter Pushouts, transfiniten Kompositionen und Retrakten.
+\end{defn}
+
+\begin{lem}
+  Sei $\Lat \subseteq \Cat$ links-saturiert. Dann ist $\Lat$ unter Koprodukten abgeschlossen und enthält alle Isomorphismen.
+\end{lem}
+
+\begin{bsp}
+  Sei $R \subset \Mor(\Cat)$ eine Klasse von Morphismen in einer Kat. $\Cat$.
+  Sei $\Lat$ die Unterkat. mit $\Mor(\Lat) \coloneqq \prescript{\boxslash}{} R \coloneqq \Set{i \!\in\! \Mor(\Cat)}{\fa{r \in R\!}\! i \boxslash r}$.
+  Dann ist $\Lat$ schon links-saturiert.
+\end{bsp}
+
+% Schwache Faktorisierungssysteme
+
+\begin{prop}
+  Für $L_1 \subseteq L_2 \subseteq \Mor(\Cat)$ gilt $L_1^\boxslash \leq L_2^\boxslash$.
+\end{prop}
+
+\begin{defn}
+  \begin{itemize}
+    \item $L \subseteq \Mor(\Cat)$ heißt \emph{proj. abgeschlossen}, falls $L \supseteq \prescript{\boxslash}{} (L^\boxslash)$.
+    \item $R \subseteq \Mor(\Cat)$ heißt \emph{injektiv abgeschlossen}, falls $R \supseteq (\prescript{\boxslash}{} L)^\boxslash$.
+  \end{itemize}
+\end{defn}
+
+\begin{prop}
+  $\prescript{\boxslash}{}(L^\boxslash)$ ist die projektive Hülle von $L$, \dh{} die kleinste Klasse von Morphismen, die projektiv abgeschlossen ist und $L$ umfasst.
+\end{prop}
+
+\begin{prop}
+  Die projektive Hülle von $L$ ist links-saturiert. Ist $L$ schon projektiv abgeschlossen, so ist $L$ insbesondere links-saturiert.
+\end{prop}
+
+\begin{defn}
+  Ein Paar $(L, R)$ von Klassen von Morphismen von $\Cat$ \emph{faktorisiert} $\Cat$, falls
+  $\fa{f \in \Mor(\Cat)} \ex{i \in L, p \in R} f = p \circ i$.
+\end{defn}
+
+\begin{defn}
+  Ein faktorisierendes Paar $(L, R)$ heißt \emph{schwaches Faktorisierungssystem} (SFS), falls $L = \prescript{\boxslash}{} R$ und $R = L^\boxslash$.
+\end{defn}
+
+\begin{prop}
+  Sei $(L, R)$ faktorisierend. Dann ist $(L, R)$ genau dann ein SFS, wenn $L \boxslash R$ und $L$ und $R$ unter Retrakten abgeschlossen sind.
+  % L \boxslash R \coloniff \fa{i \in L} \fa{p \in R} i \boxslash p
+\end{prop}
+
+\begin{bsp}
+  $(\{ \, \text{Surjektionen} \, \}, \{ \, \text{Injektionen} \, \})$ ist ein (S)FS in $\SetC$
+\end{bsp}
+
+% TODO: Begriff "untypisch"
+% TODO: Starker Faktorisierungssystem
+
+% §4. Modellkategorien
+\subsection{Modellkategorien}
+
+\begin{motto}
+  Modellkat. sind ein Werkzeug, math. Theorien zu studieren.
+\end{motto}
+
+\begin{defn}
+  Eine Klasse $W \subseteq \Mor(\Cat)$ von Morphismen erfüllt die \emph{2-aus-3-Eigenschaft}, falls für jede Komposition $h = g \circ f$ in $\Cat$ gilt: Liegen zwei der drei Morphismen $f$, $g$, $h$ in $W$, so auch der dritte.
+\end{defn}
+
+\begin{defn}
+  $\Wat \subseteq \Cat$ wie eben heißt \emph{Unterkat. schwacher Äquivalenzen}, falls $\Wat$ die 2-aus-3-Eig. erfüllt und abgeschl. unter Retrakten ist.
+\end{defn}
+
+\begin{bsp}
+  Sei $F : \Cat \to \Dat$ ein Funktor. Dann ist $\Wat \coloneqq F^{-1}(\{ \, \text{Isos in $\Dat$} \, \})$ eine Unterkategorie schwacher Äquivalenzen.
+\end{bsp}
 
 \end{document}

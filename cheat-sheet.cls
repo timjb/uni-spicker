@@ -72,6 +72,7 @@
 \newtheorem*{facts}{Facts}
 \newtheorem*{axiom}{Axiom}
 \newtheorem*{konv}{Konvention}
+\newtheorem*{motto}{Motto}
 
 \theoremstyle{remark}
 \newtheorem*{bem}{Bem}
@@ -233,4 +234,3 @@
 \AtEndDocument{
   \end{multicols}
 }
-
