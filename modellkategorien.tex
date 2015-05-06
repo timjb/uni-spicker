@@ -29,6 +29,8 @@
 \newcommand{\Prop}{\mathbf{Prop}} % Typ der Propositionen
 \newcommand{\xtwoheadrightarrow}[1]{\xrightarrow{#1}\nspace{8}\to\,\,} % Pfeil mit zwei Spitzen (HACK!!!)
 \DeclareMathOperator{\Quot}{Quot} % Quotientenkörper
+\newcommand{\Cyl}[1]{#1 \!\times\! I} % Zylinderobjekt
+\newcommand{\lhhe}{\boxslash} % Linkshochhebungseigenschaftsdiagramm-im-Miniaturformat-Symbol
 
 \newenvironment{centertikzcd}
   {\begin{center}\begin{tikzcd}}
@@ -497,7 +499,7 @@
   \begin{itemize}
     \miniitem{0.3 \linewidth}{$p$ ist \emph{$i$-injektiv}}
     \miniitem{0.35 \linewidth}{$i$ ist \emph{$p$-projektiv}}
-    \miniitem{0.3 \linewidth}{$i \boxslash p$}
+    \miniitem{0.3 \linewidth}{$i \lhhe p$}
     \item $i$ hat die Linkshochhebungseigenschaft (LHHE) bzgl. $p$
     \item Für alle $f$, $g$ wie unten, sodass das Quadrat kommutiert, gibt es ein diagonales $\lambda$, sodass die Dreiecke kommutieren:
     \begin{centertikzcd}
@@ -523,7 +525,7 @@
 \end{bsp}
 
 \begin{lem}[\emph{Retrakt-Argument}]
-  Sei $f \!=\! q \circ j$. Ist $f$ $q$-projektiv ($f \boxslash q$), so ist $f$ ein Retrakt von $j$.
+  Sei $f \!=\! q \circ j$. Ist $f$ $q$-projektiv ($f \lhhe q$), so ist $f$ ein Retrakt von $j$.
 \end{lem}
 
 \subsection{Zellenkomplexe}
@@ -591,7 +593,7 @@
 % Vorlesung vom 6.5.2015
 
 \begin{defn}
-  Eine Unterkategorie $\Lat \subseteq \Cat$ heißt \emph{links-saturiert}, falls $\Lat$ abgeschlossen ist unter Pushouts, transfiniten Kompositionen und Retrakten.
+  Eine Unterkat. $\Lat \subseteq \Cat$ heißt \emph{links-saturiert}, falls $\Lat$ abgeschl. ist unter Pushouts, transfiniten Kompositionen und Retrakten.
 \end{defn}
 
 \begin{lem}
@@ -600,25 +602,25 @@
 
 \begin{bsp}
   Sei $R \subset \Mor(\Cat)$ eine Klasse von Morphismen in einer Kat. $\Cat$.
-  Sei $\Lat$ die Unterkat. mit $\Mor(\Lat) \coloneqq \prescript{\boxslash}{} R \coloneqq \Set{i \!\in\! \Mor(\Cat)}{\fa{r \in R\!}\! i \boxslash r}$.
+  Sei $\Lat$ die Unterkat. mit $\Mor(\Lat) \coloneqq \prescript{\lhhe}{} R \coloneqq \Set{i \!\in\! \Mor(\Cat)}{\fa{r \in R\!}\! i \lhhe r}$.
   Dann ist $\Lat$ schon links-saturiert.
 \end{bsp}
 
 % Schwache Faktorisierungssysteme
 
 \begin{prop}
-  Für $L_1 \subseteq L_2 \subseteq \Mor(\Cat)$ gilt $L_1^\boxslash \leq L_2^\boxslash$.
+  Für $L_1 \subseteq L_2 \subseteq \Mor(\Cat)$ gilt $L_1^\lhhe \leq L_2^\lhhe$.
 \end{prop}
 
 \begin{defn}
   \begin{itemize}
-    \item $L \subseteq \Mor(\Cat)$ heißt \emph{proj. abgeschlossen}, falls $L \supseteq \prescript{\boxslash}{} (L^\boxslash)$.
-    \item $R \subseteq \Mor(\Cat)$ heißt \emph{injektiv abgeschlossen}, falls $R \supseteq (\prescript{\boxslash}{} L)^\boxslash$.
+    \item $L \subseteq \Mor(\Cat)$ heißt \emph{proj. abgeschlossen}, falls $L \supseteq \prescript{\lhhe}{} (L^\lhhe)$.
+    \item $R \subseteq \Mor(\Cat)$ heißt \emph{injektiv abgeschlossen}, falls $R \supseteq (\prescript{\lhhe}{} L)^\lhhe$.
   \end{itemize}
 \end{defn}
 
 \begin{prop}
-  $\prescript{\boxslash}{}(L^\boxslash)$ ist die projektive Hülle von $L$, \dh{} die kleinste Klasse von Morphismen, die projektiv abgeschlossen ist und $L$ umfasst.
+  $\prescript{\lhhe}{}(L^\lhhe)$ ist die projektive Hülle von $L$, \dh{} die kleinste Klasse von Morphismen, die projektiv abgeschlossen ist und $L$ umfasst.
 \end{prop}
 
 \begin{prop}
@@ -631,12 +633,12 @@
 \end{defn}
 
 \begin{defn}
-  Ein faktorisierendes Paar $(L, R)$ heißt \emph{schwaches Faktorisierungssystem} (SFS), falls $L = \prescript{\boxslash}{} R$ und $R = L^\boxslash$.
+  Ein faktorisierendes Paar $(L, R)$ heißt \emph{schwaches Faktorisierungssystem} (SFS), falls $L = \prescript{\lhhe}{} R$ und $R = L^\lhhe$.
 \end{defn}
 
 \begin{prop}
-  Sei $(L, R)$ faktorisierend. Dann ist $(L, R)$ genau dann ein SFS, wenn $L \boxslash R$ und $L$ und $R$ unter Retrakten abgeschlossen sind.
-  % L \boxslash R \coloniff \fa{i \in L} \fa{p \in R} i \boxslash p
+  Sei $(L, R)$ faktorisierend. Dann ist $(L, R)$ genau dann ein SFS, wenn $L \lhhe R$ und $L$ und $R$ unter Retrakten abgeschlossen sind.
+  % L \lhhe R \coloniff \fa{i \in L} \fa{p \in R} i \lhhe p
 \end{prop}
 
 \begin{bsp}
@@ -666,7 +668,7 @@
 \end{bsp}
 
 \begin{defn}
-  Ein Tripel $(\Wat, \Cat, \Fat)$ von Unterkategorien einer Kategorie $\MatC$ heißt \emph{Modellstruktur} auf $\MatC$, falls sowohl $(\Cat, \Fat \cap \Wat)$ und $(\Cat \cap \Wat, \Fat)$ schwache Faktorisierungssysteme sind und $\Wat$ die 2-aus-3-Eigenschaft erfüllt.
+  Ein Tripel $(\Wat, \Cat, \Fat)$ von Unterkategorien einer Kategorie $\MatC$ heißt \emph{Modellstruktur} auf $\MatC$, falls sowohl $(\Cat, \Fat \cap \Wat)$ als auch $(\Cat \cap \Wat, \Fat)$ schwache Faktorisierungssysteme sind und $\Wat$ die 2-aus-3-Eigenschaft erfüllt.
 \end{defn}
 
 \begin{defn}
@@ -691,11 +693,12 @@
 \end{bem}
 
 \begin{bem}
-  Wegen $\Cat = \prescript{\boxslash}{} (\Fat \cap \Wat)$ bzw. $\Fat = (\Cat \cap \Wat)^\boxslash$ ist das Datum $(\Wat, \Cat, \Fat)$ überbestimmt.
+  Wegen $\Cat = \prescript{\lhhe}{} (\Fat \cap \Wat)$ bzw. $\Fat = (\Cat \cap \Wat)^\lhhe$ ist das Datum $(\Wat, \Cat, \Fat)$ überbestimmt.
 \end{bem}
 
 \begin{bsp}
-  Sei $\MatC$ bivollständig. Sei $\Wat = \{ \, \text{Iso} \, \} = \Cat$. Dann wird $\MatC$ mit $\Fat = \MatC$ eine Modellkategorie.
+  Sei $\MatC$ bivollständig. Sei $\Wat \coloneqq \Cat \coloneqq \{ \, \text{Isos in $\MatC$} \, \}$. \\
+  Dann wird $\MatC$ mit $\Fat \coloneqq \MatC$ eine Modellkategorie.
 \end{bsp}
 
 \begin{prop}
@@ -721,9 +724,9 @@
 
 \begin{bsp}
   Sei $X \in \Ob(\MatC)$ beliebig. Dann faktorisiere $\emptyset \to X$ wie folgt:
-  \begin{centertikzcd}
+  \begin{centertikzcd}[row sep=0.2cm]
     \emptyset \arrow[rr] \arrow[rd, hook] && X \\
-    & QX \arrow[ru, twoheadrightarrow, "\sim"]
+    & QX \arrow[ru, twoheadrightarrow, swap, "\sim"]
   \end{centertikzcd}
   Man erhält also immer einen kofasernden Ersatz $QX$ für $X$. \\
   Dual gibt es immer einen fasernden Ersatz $RX$ für $X$.
@@ -748,39 +751,37 @@
 
 % Homotopien in Modellkategorien
 
-% TODO: Dieses Diagramm muss schöner werden!
-
 \begin{defn}
-  Ein \emph{Zylinderobjekt} $X \times I$ zu einem $X \in \Ob(\MatC)$, $\MatC$ Modellkategorie ist ein Objekt zusammen mit Morphismen wie folgt:
-  %X \times I \xrightarrow[{\sim}]{p} X
-  \begin{centertikzcd}
-    X \arrow[rd, "i_0 {\sim}"] \arrow[rrd, "\id"] \\
-    & X \times I \arrow[r, "p {\sim}"] & X \\
-    X \arrow[ru, "i_1 {\sim}"] \arrow[rru, "\id"]
+  Sei $\MatC$ eine Modellkategorie.
+  Ein \emph{Zylinderobjekt} $\Cyl{X}$ zu einem $X \!\in\! \Ob(\MatC)$ ist ein Obj. zusammen mit Morphismen wie folgt:
+  \begin{centertikzcd}[row sep=0.2cm]
+    X \arrow{rd}{i_0}[swap]{{\sim}} \arrow[rrd, bend left, "\id"] \\
+    & \Cyl{X} \arrow{r}{p}[swap]{{\sim}} & X \\
+    X \arrow{ru}{{\sim}}[swap]{i_1} \arrow[rru, bend right, swap, "\id"]
   \end{centertikzcd}
-  Das Zylinderobjekt $X \times I$ heißt \emph{gut}, falls $X \amalg X \to X \times I$ eine Kofaserung ist.
-  Ein guter Zylinder heißt \emph{sehr gut}, falls $X \times I \xrightarrow{p} X$ eine azyklische Faserung ist.
+  Der Zylinder $\Cyl{X}$ heißt \emph{gut}, falls $X \amalg X \to \Cyl{X}$ eine Kofaserung ist.
+  Ein guter Zylinder heißt \emph{sehr gut}, falls $p : \Cyl{X} \to X$ eine azyklische Faserung ist.
 \end{defn}
 
 \begin{bsp}
-  Sei $\nabla : X \coprod X \to X$ die Kodiagonale. Faktorisieren wir diese wie folgt:
-  % TODO: nabla einfügen
-  \begin{centertikzcd}
+  Sei die Kodiagonale $\nabla : X \amalg X \to X$ wie folgt faktorisiert:
+  \begin{centertikzcd}[row sep=0.2cm]
     X \arrow[rd, hook] \\
-    & X \amalg X \arrow[r, hook] & X \times I \arrow[r, twoheadrightarrow, "\sim"] & X \\
+    & X \amalg X \arrow[r, hook] \arrow[rr, bend left, "\nabla"] & \Cyl{X} \arrow[r, twoheadrightarrow, "\sim"] & X \\
     X \arrow[ru, hook]
   \end{centertikzcd}
-  Dann erhalten wir ein Zylinderobjekt $X \times I$ für $X$. Dieses ist sehr gut, wenn $X$ kofasernd ist.
+  Dann erhalten wir ein Zylinderobjekt $\Cyl{X}$ für $X$. \\
+  Dieses ist sehr gut, wenn $X$ kofasernd ist.
 \end{bsp}
 
 \begin{defn}
-  Zwei Morphismen $f, g : X \to Y$ in $\MatC$ heißen \emph{links-homotop} (geschrieben $f \sim^l g$), falls ein Zylinder $X \times I$ und ein Diagramm der Form
-  \begin{centertikzcd}
-    X \arrow[rd, "\sim"] \arrow[rrd, "f"] \\
-    & X \times I \arrow[r, dashed, "h"] & Y \\
-    X \arrow[ru, "\sim"] \arrow[rru, "g"]
+  Zwei Morphismen $f, g : X \to Y$ in $\MatC$ heißen \emph{links-homotop} (notiert $f \sim^l g$), falls ein Zylinder $\Cyl{X}$ und ein Diagramm der Form
+  \begin{centertikzcd}[row sep=0.2cm]
+    X \arrow{rd}[swap]{\sim} \arrow[rrd, bend left, "f"] \\
+    & \Cyl{X} \arrow[r, dashed, "h"] & Y \\
+    X \arrow{ru}{\sim} \arrow[rru, bend right, swap, "g"]
   \end{centertikzcd}
-  existiert. Wir definieren $\pi^l(X, Y) \coloneqq \Hom_\MatC(X, Y) / \langle {\sim^l} \rangle$.
+  existiert. Wir definieren $\pi^l(X, Y) \coloneqq \Hom_\MatC(X, Y) / \langle {\sim^l} \rangle$, wobei $\langle {\sim^l} \rangle$ die von der symmetrischen, refl. Relation ${\sim^l}$ erzeugte Äq'relation ist.
 \end{defn}
 
 \end{document}
