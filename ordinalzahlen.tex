@@ -1,0 +1,158 @@
+% Übung vom 15.4.2015
+
+\section{Anhang: Die Ordinalzahlen}
+
+\begin{defn}
+  Eine \emph{Wohlordnung} auf einer Menge $S$ ist eine Totalordnung auf $S$ bezüglich der jede nichtleere Teilmenge $A \subseteq S$ ein kleinstes Element besitzt. Eine wohlgeordnete Menge ist ein Tupel $(S, \leq)$ bestehend aus einer Menge $S$ und einer Wohlordnung $\leq$ auf $S$.
+\end{defn}
+
+\begin{bem}
+  Eine äquivalente Bedingung lautet: Es gibt in $S$ keine nach rechts unendlichen absteigenden Folgen
+  $\ldots > a_i > a_{i+1} > a_{i+2} > \ldots$
+\end{bem}
+
+\begin{bem}
+  Äquivalent zum Auswahlaxiom ist:
+\end{bem}
+
+\begin{axiom}[Wohlordnungssatz]
+  Auf jeder Menge ex. eine Wohlord.
+\end{axiom}
+
+\begin{defn}
+  Zwei wohlgeordnete Mengen heißen isomorph, wenn es eine monotone Bijektion zwischen ihnen gibt.
+\end{defn}
+
+% Ausgelassen: Intuition
+
+\begin{defn}
+  Eine \emph{Ordinalzahl} ist eine Isomorphieklasse von wohlgeordneten Mengen.
+\end{defn}
+
+\begin{bem}
+  Die Klasse aller Ordinalzahlen wird mit $\Ord$ bezeichnet und ist eine echte Klasse, keine Menge.
+  Sie ist selbst wohlgeordnet mittels
+  \[ [(S, \leq_S)] \leq [(T, \leq_T)] \coloniff \exists \, \text{inj. monotone Abb. $(S, \leq_S) \to (T, \leq_T)$}. \]
+\end{bem}
+
+\begin{nota}
+  \inlineitem{$0 \coloneqq [\emptyset]$,} \enspace
+  \inlineitem{$n \coloneqq [\{ 1, \ldots, n \}]$ für $n \in \N$,} \enspace
+  \inlineitem{$\omega \coloneqq [\N]$} \\
+  mit der jeweils kanonischen Ordnungsrelation.
+\end{nota}
+
+\begin{bem}
+  Die ersten Ordinalzahlen sind
+  \[
+    0, 1, 2, \ldots, \omega, \omega + 1, \omega + 2, \ldots, \omega \cdot 2, \omega \cdot 2 + 1, \ldots, \omega \cdot 3, \ldots, \omega^\omega, \ldots
+  \]
+\end{bem}
+
+\begin{prinzip}[\emph{Transfinite Induktion}]\mbox{}\\
+  Sei $P : \Ord \to \Prop$ eine Aussage über Ordinalzahlen. Dann gilt:
+  \[ \left( \fa{\beta \in \Ord} (\fa{\gamma < \beta} P(\gamma)) \implies P(\beta) \right) \implies \fa{\alpha \in \Ord} P(\alpha) \]
+\end{prinzip}
+
+\begin{defn}
+  Arithmetik von Ordinalzahlen ist folgendermaßen definiert: \\
+  Für $\alpha = [(S, \leq_S)]$ und $\beta = [(T, \leq_T)] \in \Ord$ ist
+  \begin{itemize}
+    \item $\alpha + \beta \coloneqq [(S \amalg T, \leq_{S \amalg T})]$, wobei gilt:
+    \[
+      \leq_{S \amalg T}|_{S \times S} \,\coloneqq\, \leq_S, \quad
+      \leq_{S \amalg T}|_{T \times T} \,\coloneqq\, \leq_T, \quad
+      %s_1 \leq_{S \amalg T} s_2 \coloniff s_1 \leq_S s_2, \quad
+      %t_1 \leq_{S \amalg T} t_2 \coloniff t_1 \leq_T t_2, \quad
+      S <_{S \amalg T} T.
+    \]
+    \item $\alpha \cdot \beta \coloneqq [(S \times T, \leq_{S \rtimes T})]$ mit der lexikogr. Ordnung
+    \[ (s_1, t_1) \leq_{S \rtimes T} (s_2, t_2) \coloneqq t_1 < t_2 \,\vee\, (t_1 = t_2 \wedge s_1 \leq_S s_2) \]
+    \item $\alpha^\beta \coloneqq [(\{ \text{Abb. $f : S \to T$ mit $f(s) = 0$ für fast alle $s \in S$} \}, \leq)]$ mit
+    \[ f < g \coloniff \ex{t \in T} f(t) < g(t) \wedge \left( \fa{t_2 >_T t} f(t_2) = g(t_2) \right) \]
+  \end{itemize}
+  %\begin{align*}
+  %\end{align*}
+\end{defn}
+
+\begin{bem}
+  Es gibt drei Typen von Ordinalzahlen:
+  \begin{enumerate}[label=\alph*),leftmargin=1.6em]
+    \item Die Null $0 \coloneqq [(\emptyset, \leq)] \in \Ord$.
+    \item Die Nachfolgerzahl $\alpha + 1$ einer Zahl $\alpha \in \Ord$.
+    \item Die Limeszahl $\lim A \coloneqq \sup A$ einer Teil{\em menge} $A \subset \Ord$.
+  \end{enumerate}
+\end{bem}
+
+% http://en.wikipedia.org/wiki/Ordinal_arithmetic
+\begin{bem}
+  Die Rechenop. können auch rekursiv definiert werden durch
+  \tabcolsep=0.11cm
+  \begin{tabular}{ l l l }
+    a) & b) & c) \\[2pt]
+    $\alpha + 0 \coloneqq \alpha$
+    & $\alpha \!+\! (\beta \!+\! 1) \coloneqq (\alpha \!+\! \beta) \!+\! 1$
+    & $\alpha \!+\! \lim A \coloneqq \lim \, \Set{\alpha \!+\! \gamma}{\gamma \!\in\! A}$ \\
+
+    $\alpha \cdot 0 \coloneqq 0$
+    & $\alpha \cdot (\beta \!+\! 1) \coloneqq (\alpha \cdot \beta) + \alpha$
+    & $\alpha \cdot \lim A \coloneqq \lim \, \Set{\alpha \cdot \gamma}{\gamma \in A}$ \\
+
+    $\alpha^0 \coloneqq 1$
+    & $\alpha^{\beta + 1} \coloneqq \alpha^\beta \cdot \alpha$
+    & $\alpha^{\lim A} \coloneqq \lim \, \Set{\alpha^\gamma}{\gamma \in A}$
+  \end{tabular}
+  \iffalse
+  \begin{align*}
+    \text{a) } \alpha + 0 \coloneqq \alpha, \qquad
+    & \text{b) } \alpha + (\beta + 1) \coloneqq (\alpha + \beta) + 1, \\
+    \text{c) } \alpha + \lim A &\coloneqq \lim \, \Set{\alpha + \gamma}{\gamma \in A}, \\[2pt]
+    \text{a) } \alpha \cdot 0 \coloneqq 0, \qquad
+    & \text{b) } \alpha \cdot (\beta + 1) \coloneqq (\alpha \cdot \beta) + \alpha, \\
+    \text{c) } \alpha \cdot \lim A &\coloneqq \lim \, \Set{\alpha \cdot \gamma}{\gamma \in A}, \\[2pt]
+    \text{a) } \alpha^0 \coloneqq 1, \qquad
+    & \text{b) } \alpha^{\beta + 1} \coloneqq \alpha^\beta + 1, \\
+    \text{c) } \alpha^{\lim A} &\coloneqq \lim \, \Set{\alpha^\gamma}{\gamma \in A}.
+  \end{align*}
+  \fi
+\end{bem}
+
+\begin{defn}
+  Ein \emph{Fast-Halbring} ist ein Tupel $(S, +, \cdot, 0)$, sodass $(S, +, 0)$ ein Monoid und $(S, \cdot)$ eine Halbgruppe ist mit \\
+  \inlineitem{$a \cdot (b+c) = a \cdot b + a \cdot c$,} \quad
+  \inlineitem{$a \cdot 0 = 0$.}
+\end{defn}
+
+\begin{lem}[Rechenregeln in $\Ord$]
+  \inlineitem{$\alpha \cdot 0 = 0 = 0 \cdot \alpha$} \enspace
+  \inlineitem{$\alpha \cdot 1 = \alpha = 1 \cdot \alpha$} \\
+  \inlineitem{$\alpha^0 = 1$} \quad
+  \inlineitem{$0^\alpha = 0$ für $\alpha > 0$} \quad
+  \inlineitem{$1^\alpha = 1$} \quad
+  \inlineitem{$\alpha^1 = \alpha$} \\
+  \inlineitem{$\alpha^\beta \cdot \alpha^\gamma = \alpha^{\beta+\gamma}$} \enspace
+  \inlineitem{$(\alpha^\beta)^\gamma = \alpha^{\beta \cdot \gamma}$} \enspace
+  %\inlineitem{$$} \enspace
+  \begin{itemize}
+    \item $\Ord$ ist ein Fast-Halbring (mit einer Klasse statt Menge)
+    \item Das andere Distributivgesetz stimmt {\em nicht}!
+    \item Weder Addition noch Multiplikation sind kommutativ.
+    \item Addition und Mult. erlauben das Kürzen von Elementen nur links.
+    \item Addition, Multiplikation und Potenzieren sind in beiden Argu- menten monoton, allerdings nur im zweiten strikt monoton:
+    \[
+      \forall \, \beta < \gamma: \quad
+      \alpha + \beta < \alpha + \gamma, \quad
+      \alpha \cdot \beta < \alpha \cdot \gamma \enspace (\alpha \!>\! 0), \quad
+      \alpha^\beta < \alpha^\gamma \enspace (\alpha \!>\! 1).
+    \]
+  \end{itemize}
+\end{lem}
+
+% http://en.wikipedia.org/wiki/Ordinal_arithmetic
+\begin{lem}
+  Jedes $\alpha \in \Ord$ kann geschrieben werden in \emph{Cantor-NF}:
+  \[ \alpha = \omega^{\beta_1} c_1 + \omega^{\beta_2} c_2 + \ldots + \omega^{\beta_k} c_k \]
+  mit $k \in \N$, $c_1, \ldots, c_k \in \N_{> 0}$ und $\beta_1 > \ldots > \beta_k \in \Ord$.
+\end{lem}
+
+% TODO: Verbindungen zu Kardinalzahlen

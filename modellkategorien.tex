@@ -6,8 +6,6 @@
 }
 
 \usepackage{tikz}
-%\usepackage{extpfeil} %
-%\usepackage{xcolor}
 \usetikzlibrary{arrows,cd}
 \usepackage{cancel} % für durchgestrichenen Text
 
@@ -43,172 +41,11 @@
 
 \maketitle{Zusammenfassung Modellkategorien}
 
+\section{Kategorientheorie}
+
 \begin{bem}
   Die \href{http://timbaumann.info/uni-spicker/topo.pdf}{Topologie-Zusammenfassung} bietet eine Übersicht über Grundbegriffe der Kategorientheorie. Weiterführende Begriffe werden in der \href{http://timbaumann.info/uni-spicker/homoalg.pdf}{Homologische-Algebra-Zusammenfassung} behandelt.
 \end{bem}
-
-% Übung vom 15.4.2015
-
-\section{Die Ordinalzahlen}
-
-\begin{defn}
-  Eine \emph{Wohlordnung} auf einer Menge $S$ ist eine Totalordnung auf $S$ bezüglich der jede nichtleere Teilmenge $A \subseteq S$ ein kleinstes Element besitzt. Eine wohlgeordnete Menge ist ein Tupel $(S, \leq)$ bestehend aus einer Menge $S$ und einer Wohlordnung $\leq$ auf $S$.
-\end{defn}
-
-\begin{bem}
-  Eine äquivalente Bedingung lautet: Es gibt in $S$ keine nach rechts unendlichen absteigenden Folgen
-  $\ldots > a_i > a_{i+1} > a_{i+2} > \ldots$
-\end{bem}
-
-\begin{bem}
-  Äquivalent zum Auswahlaxiom ist:
-\end{bem}
-
-\begin{axiom}[Wohlordnungssatz]
-  Auf jeder Menge ex. eine Wohlord.
-\end{axiom}
-
-\begin{defn}
-  Zwei wohlgeordnete Mengen heißen isomorph, wenn es eine monotone Bijektion zwischen ihnen gibt.
-\end{defn}
-
-% Ausgelassen: Intuition
-
-\begin{defn}
-  Eine \emph{Ordinalzahl} ist eine Isomorphieklasse von wohlgeordneten Mengen.
-\end{defn}
-
-\begin{bem}
-  Die Klasse aller Ordinalzahlen wird mit $\Ord$ bezeichnet und ist eine echte Klasse, keine Menge.
-  Sie ist selbst wohlgeordnet mittels
-  \[ [(S, \leq_S)] \leq [(T, \leq_T)] \coloniff \exists \, \text{inj. monotone Abb. $(S, \leq_S) \to (T, \leq_T)$}. \]
-\end{bem}
-
-\begin{nota}
-  \inlineitem{$0 \coloneqq [\emptyset]$,} \enspace
-  \inlineitem{$n \coloneqq [\{ 1, \ldots, n \}]$ für $n \in \N$,} \enspace
-  \inlineitem{$\omega \coloneqq [\N]$} \\
-  mit der jeweils kanonischen Ordnungsrelation.
-\end{nota}
-
-\begin{bem}
-  Die ersten Ordinalzahlen sind
-  \[
-    0, 1, 2, \ldots, \omega, \omega + 1, \omega + 2, \ldots, \omega \cdot 2, \omega \cdot 2 + 1, \ldots, \omega \cdot 3, \ldots, \omega^\omega, \ldots
-  \]
-\end{bem}
-
-\begin{prinzip}[\emph{Transfinite Induktion}]\mbox{}\\
-  Sei $P : \Ord \to \Prop$ eine Aussage über Ordinalzahlen. Dann gilt:
-  \[ \left( \fa{\beta \in \Ord} (\fa{\gamma < \beta} P(\gamma)) \implies P(\beta) \right) \implies \fa{\alpha \in \Ord} P(\alpha) \]
-\end{prinzip}
-
-\begin{defn}
-  Arithmetik von Ordinalzahlen ist folgendermaßen definiert: \\
-  Für $\alpha = [(S, \leq_S)]$ und $\beta = [(T, \leq_T)] \in \Ord$ ist
-  \begin{itemize}
-    \item $\alpha + \beta \coloneqq [(S \amalg T, \leq_{S \amalg T})]$, wobei gilt:
-    \[
-      \leq_{S \amalg T}|_{S \times S} \,\coloneqq\, \leq_S, \quad
-      \leq_{S \amalg T}|_{T \times T} \,\coloneqq\, \leq_T, \quad
-      %s_1 \leq_{S \amalg T} s_2 \coloniff s_1 \leq_S s_2, \quad
-      %t_1 \leq_{S \amalg T} t_2 \coloniff t_1 \leq_T t_2, \quad
-      S <_{S \amalg T} T.
-    \]
-    \item $\alpha \cdot \beta \coloneqq [(S \times T, \leq_{S \rtimes T})]$ mit der lexikogr. Ordnung
-    \[ (s_1, t_1) \leq_{S \rtimes T} (s_2, t_2) \coloneqq t_1 < t_2 \,\vee\, (t_1 = t_2 \wedge s_1 \leq_S s_2) \]
-    \item $\alpha^\beta \coloneqq [(\{ \text{Abb. $f : S \to T$ mit $f(s) = 0$ für fast alle $s \in S$} \}, \leq)]$ mit
-    \[ f < g \coloniff \ex{t \in T} f(t) < g(t) \wedge \left( \fa{t_2 >_T t} f(t_2) = g(t_2) \right) \]
-  \end{itemize}
-  %\begin{align*}
-  %\end{align*}
-\end{defn}
-
-\begin{bem}
-  Es gibt drei Typen von Ordinalzahlen:
-  \begin{enumerate}[label=\alph*),leftmargin=1.6em]
-    \item Die Null $0 \coloneqq [(\emptyset, \leq)] \in \Ord$.
-    \item Die Nachfolgerzahl $\alpha + 1$ einer Zahl $\alpha \in \Ord$.
-    \item Die Limeszahl $\lim A \coloneqq \sup A$ einer Teil{\em menge} $A \subset \Ord$.
-  \end{enumerate}
-\end{bem}
-
-% http://en.wikipedia.org/wiki/Ordinal_arithmetic
-\begin{bem}
-  Die Rechenop. können auch rekursiv definiert werden durch
-  \tabcolsep=0.11cm
-  \begin{tabular}{ l l l }
-    a) & b) & c) \\[2pt]
-    $\alpha + 0 \coloneqq \alpha$
-    & $\alpha \!+\! (\beta \!+\! 1) \coloneqq (\alpha \!+\! \beta) \!+\! 1$
-    & $\alpha \!+\! \lim A \coloneqq \lim \, \Set{\alpha \!+\! \gamma}{\gamma \!\in\! A}$ \\
-
-    $\alpha \cdot 0 \coloneqq 0$
-    & $\alpha \cdot (\beta \!+\! 1) \coloneqq (\alpha \cdot \beta) + \alpha$
-    & $\alpha \cdot \lim A \coloneqq \lim \, \Set{\alpha \cdot \gamma}{\gamma \in A}$ \\
-
-    $\alpha^0 \coloneqq 1$
-    & $\alpha^{\beta + 1} \coloneqq \alpha^\beta \cdot \alpha$
-    & $\alpha^{\lim A} \coloneqq \lim \, \Set{\alpha^\gamma}{\gamma \in A}$
-  \end{tabular}
-  \iffalse
-  \begin{align*}
-    \text{a) } \alpha + 0 \coloneqq \alpha, \qquad
-    & \text{b) } \alpha + (\beta + 1) \coloneqq (\alpha + \beta) + 1, \\
-    \text{c) } \alpha + \lim A &\coloneqq \lim \, \Set{\alpha + \gamma}{\gamma \in A}, \\[2pt]
-    \text{a) } \alpha \cdot 0 \coloneqq 0, \qquad
-    & \text{b) } \alpha \cdot (\beta + 1) \coloneqq (\alpha \cdot \beta) + \alpha, \\
-    \text{c) } \alpha \cdot \lim A &\coloneqq \lim \, \Set{\alpha \cdot \gamma}{\gamma \in A}, \\[2pt]
-    \text{a) } \alpha^0 \coloneqq 1, \qquad
-    & \text{b) } \alpha^{\beta + 1} \coloneqq \alpha^\beta + 1, \\
-    \text{c) } \alpha^{\lim A} &\coloneqq \lim \, \Set{\alpha^\gamma}{\gamma \in A}.
-  \end{align*}
-  \fi
-\end{bem}
-
-\begin{defn}
-  Ein \emph{Fast-Halbring} ist ein Tupel $(S, +, \cdot, 0)$, sodass $(S, +, 0)$ ein Monoid und $(S, \cdot)$ eine Halbgruppe ist mit \\
-  \inlineitem{$a \cdot (b+c) = a \cdot b + a \cdot c$,} \quad
-  \inlineitem{$a \cdot 0 = 0$.}
-\end{defn}
-
-\begin{lem}[Rechenregeln in $\Ord$]
-  \inlineitem{$\alpha \cdot 0 = 0 = 0 \cdot \alpha$} \enspace
-  \inlineitem{$\alpha \cdot 1 = \alpha = 1 \cdot \alpha$} \\
-  \inlineitem{$\alpha^0 = 1$} \quad
-  \inlineitem{$0^\alpha = 0$ für $\alpha > 0$} \quad
-  \inlineitem{$1^\alpha = 1$} \quad
-  \inlineitem{$\alpha^1 = \alpha$} \\
-  \inlineitem{$\alpha^\beta \cdot \alpha^\gamma = \alpha^{\beta+\gamma}$} \enspace
-  \inlineitem{$(\alpha^\beta)^\gamma = \alpha^{\beta \cdot \gamma}$} \enspace
-  %\inlineitem{$$} \enspace
-  \begin{itemize}
-    \item $\Ord$ ist ein Fast-Halbring (mit einer Klasse statt Menge)
-    \item Das andere Distributivgesetz stimmt {\em nicht}!
-    \item Weder Addition noch Multiplikation sind kommutativ.
-    \item Addition und Mult. erlauben das Kürzen von Elementen nur links.
-    \item Addition, Multiplikation und Potenzieren sind in beiden Argu- menten monoton, allerdings nur im zweiten strikt monoton:
-    \[
-      \forall \, \beta < \gamma: \quad
-      \alpha + \beta < \alpha + \gamma, \quad
-      \alpha \cdot \beta < \alpha \cdot \gamma \enspace (\alpha \!>\! 0), \quad
-      \alpha^\beta < \alpha^\gamma \enspace (\alpha \!>\! 1).
-    \]
-  \end{itemize}
-\end{lem}
-
-% http://en.wikipedia.org/wiki/Ordinal_arithmetic
-\begin{lem}
-  Jedes $\alpha \in \Ord$ kann geschrieben werden in \emph{Cantor-NF}:
-  \[ \alpha = \omega^{\beta_1} c_1 + \omega^{\beta_2} c_2 + \ldots + \omega^{\beta_k} c_k \]
-  mit $k \in \N$, $c_1, \ldots, c_k \in \N_{> 0}$ und $\beta_1 > \ldots > \beta_k \in \Ord$.
-\end{lem}
-
-% TODO: Verbindungen zu Kardinalzahlen
-
-\begin{samepage}
-  \section{Kategorientheorie}
-\end{samepage}
 
 % Vorlesung vom 22.4.2015
 
@@ -335,10 +172,10 @@
 \end{bsp}
 
 % Übungsblatt 2, Aufgabe 4
-\begin{bsp}[Ninja-Yoneda-Lemma]
+\begin{lem}[Ninja-Yoneda-Lemma]
   Für jede Prägarbe $F : \Cat^\op \to \SetC$ gilt
   \[ F \cong \CoEndC{c}{F(c) \times \Hom_\Cat(\blank, c)}. \]
-\end{bsp}
+\end{lem}
 
 \begin{defn}
   Sei $\C$ eine 2-Kategorie. Seien $\Cat, \Dat \in \C$. Eine \emph{Adjunktion} von $F \in \Hom_\C(\Cat, \Dat)$ und $G \in \Hom_\C(\Dat, \Cat)$ ist geg. durch Morphismen $\eta : \Id_\Cat \Rightarrow G \circ F$ (genannt \emph{Eins}) und $\epsilon : F \circ G \Rightarrow \Id_\Dat$ (\emph{Koeins}) mit $G \epsilon \circ \eta G = \Id_G$ und $\epsilon F \circ F \eta = \Id_F$.
@@ -366,46 +203,56 @@
   Sind $\eta$ und $\epsilon$ in $F \ladj G$ sogar Isomorphismen, so heißt $F \ladj G$ auch \emph{adjungierte Äquivalenz}. Jede beliebige Äquivalenz lässt sich stets (unter Beibehaltung von $F$ und $G$ sowie einem der Morphismen $\epsilon$, $\eta$) zu einer adj. Äquivalenz verfeinern.
 \end{bem}
 
+\vfill
+\columnbreak
+
 \subsection{Kan-Erweiterungen}
 
 \begin{defn}
-  Sei $A \xleftarrow{T} M \xrightarrow{K} C$ ein Ausschnitt einer 2-Kategorie. Eine \emph{Rechts-Kan-Erw.} (RKE) $(R, \epsilon)$ von $T$ längs $K$ besteht aus
+  Sei $\Aat \xleftarrow{T} \MatC \xrightarrow{K} \Cat$ ein Ausschnitt einer 2-Kategorie. Eine \emph{Rechts-Kan-Erw.} (RKE) $(R, \epsilon)$ von $T$ längs $K$ besteht aus
   \begin{itemize}
-    \item einem Morphismus $R : C \to A$
-    \item einem 2-Morphismus $\epsilon : R \circ K \Rightarrow T$,
+    \miniitem{0.45 \linewidth}{einem Morph. $R : \Cat \to \Aat$}
+    \miniitem{0.48 \linewidth}{einem 2-Morph. $\epsilon : R \circ K \Rightarrow T$,}
   \end{itemize}
   sodass gilt:
   % $(R, \epsilon)$ unter diesen Daten terminal ist:
-  Für alle Möchtegern-RKE $(\tilde{R} : C \to A, \epsilon : \tilde{R} \circ K \Rightarrow T)$ gibt es genau ein $\sigma : \tilde{R} \Rightarrow R$ mit $\epsilon \circ \sigma K = \tilde{\epsilon}$.
+  Für alle Möchtegern-RKE $(S : \Cat \to \Aat, \eta : S \circ K \Rightarrow T)$ gibt es genau ein $\sigma : S \Rightarrow R$ mit $\epsilon \circ \sigma K = \eta$.
   Notation: $R = \Ran_K(T)$
 \end{defn}
 
 \begin{bem}
-  $(R, \epsilon)$ ist RKE von $T$ längs $K$ $\iff$ $\Hom(\tilde{R}, R) \to \Hom(\tilde{R} \circ K, T)$ ist bijektiv für alle $\tilde{R} : C \to A$.
+  Es sind äquivalent: \enspace
+  \inlineitem{$(R, \epsilon)$ ist RKE von $T$ längs $K$} \\
+  \inlineitem{$\eta \mapsto \epsilon \circ \eta K : \Nat(S, R) \to \Nat(S \circ K, T)$ ist bij. $\forall \, S : \Cat \to \Aat$}
+\end{bem}
+
+% Bemerkung vom Guide zum dritten Übungsblatt
+\begin{bem}
+  Es gilt $R = \Ran_K(T)$ genau dann, wenn es in $S \in [\Cat, \Aat]$ natürliche Isomorphismen
+  $\Nat(S, R) \cong \Nat(S \circ K, T)$ gibt.
 \end{bem}
 
 \begin{prop}
-  RKE sind eindeutig bis auf eindeutige Isomorphie.
+  RKEs sind eindeutig bis auf eindeutige Isomorphie.
 \end{prop}
 
-\begin{bsp}
-  Die RKE eines bel. Morphismus $T : M \to A$ längs $\Id_M$ existiert stets und ist gegeben durch $(T, T \circ \Id_M \Rightarrow T)$.
-\end{bsp}
+\begin{bspe}
+  \begin{itemize}
+    \item Die RKE eines bel. Morphismus $T : \MatC \to \Aat$ längs $\Id_\MatC$ existiert stets und ist gegeben durch $(T, T \circ \Id_M \Rightarrow T)$.
+    \item In der 2-Kategorie der Ringe existieren alle RKE:
+    \[ \Ran_K(T) = (\Hom_M(K, T), \enspace ev : \Hom_\MatC(K, T) \otimes_C K \Rightarrow T). \]
+  \end{itemize}
+\end{bspe}
 
 \begin{bsp}
-  In der 2-Kategorie der Ringe existieren alle RKE:
-  \[ \Ran_K(T) = (\Hom_M(K, T), \enspace ev : \Hom_M(K, T) \otimes_C K \Rightarrow T). \]
-\end{bsp}
-
-\begin{bsp}
-  Sei $K : \MatC \to \mathbf{1}$ der eindeutig best. Funktor. Sei $T : \MatC \to \Aat$ irgendein Funktor. Dann ist eine RKE von $T$ längs $K$ dasselbe wie ein Limes von $T$.
+  Sei $K : \MatC \to \mathbf{1}, \enspace * \mapsto 1$ und $T : \MatC \to \Aat$ irgendein Funktor. Dann ist eine RKE von $T$ längs $K$ dasselbe wie ein Limes von $T$.
 \end{bsp}
 
 \begin{thm}
-  Seien $K : \MatC \to \Cat$ und $T : \MatC \to \Aat$ Funktoren. \\
-  Existiere für alle Objekte $c \in \Cat$ der Limes
-  \[ R(c) \coloneqq \Lim_{f : c \to Km} T(m). \]
-  Dabei ist die Indexkategore des Limes die Kommakat. $\Delta(c) \downarrow K$. \\
+  Seien $K : \MatC \to \Cat$ und $T : \MatC \to \Aat$ Funktoren.
+  Existiere für alle $c \in \Ob(\Cat)$ der Limes
+  $R(c) \coloneqq \Lim ((f : c \to Km) \mapsto Tm)$. \\
+  Dabei ist die Indexkategorie des Limes die Kommakat. $\Delta(c) \downarrow K$. \\
   Dann lässt sich diese Setzung zu einem Funktor $\Cat \to \Aat$ ausdehnen und zwar zu einer RKE von $T$ längs $K$.
 \end{thm}
 
@@ -414,24 +261,24 @@
 \end{bem}
 
 \begin{lem}
-  Eine RKE ist genau dann punktweise, wenn sie für alle $a \in \Aat$ unter dem Funktor $\Hom_\Aat(a, \blank)$ erhalten bleibt.
+  Eine RKE ist genau dann punktweise, wenn sie für alle $a \in \Ob(\Aat)$ unter dem Funktor $\Hom_\Aat(a, \blank)$ erhalten bleibt.
 \end{lem}
 
 \begin{thm}
-  Sei $K : M \to C$ ein Funktor. Betrachte $K^* : [C, A] \to [M, A]$.
+  Sei $K \!:\! M \to C$ ein Funktor. Betrachte $K^* \!:\! [\Cat, \Aat] \to [\MatC, \Aat]$.
   \begin{itemize}
-    \item Wenn ein Funktor $\Ran_K : [M,A] \to [C, A]$ mit $K^* \ladj \Ran_K$ ex., so ist $\Ran_K(T)$ für alle $T : M \!\to\! A$ eine RKE von $T$ längs $K$.
-    \item Existiere für alle $T : M \to A$ eine RKE $\Ran_K(T)$. Dann kann man die Zuordnung $T \mapsto \Ran_K(T)$ zu einem Rechtsadjungierten von $K^*$ ausdehnen.
+    \item Wenn ein Funktor $\Ran_K : [\MatC,\Aat] \to [\Cat, \Aat]$ mit $K^* \ladj \Ran_K$ ex., so ist $\Ran_K(T)$ für alle $T : \MatC \!\to\! \Aat$ eine RKE von $T$ längs $K$.
+    \item Existiere für alle $T : \MatC \to \Aat$ eine RKE $\Ran_K(T)$. Dann kann man die Zuordnung $T \mapsto \Ran_K(T)$ zu einem Rechtsadjungierten von $K^*$ ausdehnen.
   \end{itemize}
 \end{thm}
 
 \begin{thm}
-  Sei $G : A \to X$ in einer 2-Kategorie. Dann sind äquivalent:
+  Sei $G : \Aat \to \Xat$ in einer 2-Kategorie. Dann sind äquivalent:
   \begin{itemize}
     \item $G$ besitzt einen Linksadjungierten.
-    \item $\Ran_G(\Id_A)$ existiert und bleibt von $G$ erhalten, \dh{} $G \circ \Ran_G(\Id_A) = \Ran_G(G \circ \Id_A)$.
+    \item $\Ran_G(\Id_\Aat)$ existiert und $G \circ \Ran_G(\Id_\Aat) = \Ran_G(G \circ \Id_\Aat)$.
   \end{itemize}
-  In diesem Fall gilt $\Ran_G(\Id_A) \ladj G$ und $\Ran_G(\Id_A)$ wird sogar von allen Morphismen $H : A \to Y$ bewahrt.
+  In diesem Fall gilt $\Ran_G(\Id_\Aat) \ladj G$ und $\Ran_G(\Id_\Aat)$ wird sogar von allen Morphismen $H : \Aat \to \Yat$ bewahrt.
 \end{thm}
 
 \begin{thm}
@@ -442,10 +289,12 @@
   Rechtsadjungierte bewahren Limiten (RAPL)
 \end{kor}
 
+\iffalse
 \begin{bsp}
   Sei $G : \Field \to \Ring$ der Vergissfunktor. Dann ist
   \[ (\Ran_G(G))(R) = \prod_{\mathfrak{p} \subset R} \Quot(R/{\mathfrak{p}}). \]
 \end{bsp}
+\fi
 
 % §. Algebraische Strukturen in Kategorien
 \subsection{Algebraische Strukturen in Kategorien}
@@ -467,6 +316,7 @@
 
 \begin{defn}
   Ein \emph{Retrakt eines Morphismus} $(A \xrightarrow{f} B) \!\in\! \Cat$ ist ein Morph. $g : X \to Y$, sodass es ein komm. Diagramm folgender Form gibt:
+  \vspace{-8pt}
   \begin{centertikzcd}
     A \arrow[r, "i"] \arrow[d, "f"] &
     X \arrow[r, "r"] \arrow[d, "g"] &
@@ -475,6 +325,7 @@
     Y \arrow[r, "s"] &
     B
   \end{centertikzcd}
+  \vspace{-8pt}
 \end{defn}
 
 \begin{bem}
@@ -491,7 +342,7 @@
 % Ausgelassen: Retrakte sind abgeschlossen unter Komposition mit Isos
 
 \begin{prop}
-  Sei $F : \Cat \to \Dat$ ein Funktor. Dann ist die Klasse $\Set{f \in \Cat^{\to}}{F(f) \text{ ist ein Iso}}$ abgeschlossen unter Retrakten.
+  Sei $F : \Cat \to \Dat$ ein Funktor. Dann ist die Klasse $\Set{f \in \Mor(\Cat)}{F(f) \text{ ist ein Iso}}$ abgeschlossen unter Retrakten.
 \end{prop}
 
 \begin{defn}
@@ -515,20 +366,23 @@
   Wegeliftung aus der Topologie: $i : \{ 0 \} \to \cinterval{0}{1}$ erfüllt die LHHE bezüglich allen Überlagerungen $\pi : E \to B$.
 \end{bsp}
 
+\begin{samepage}
 \begin{bsp}
-  Sei $P$ ein Objekt einer abelschen Kategorie $\Aat$. Dann ist $P$ genau dann \emph{projektiv}, wenn $(0 \to P)$ die LHHE bzgl. aller Epimorphismen in $\Aat$ hat.
-  Dual ist $I$ injektiv, wenn alle Monos in $\Aat$ die LHHE bzgl. $(I \to 0)$ besitzen.
+  Ein Objekt $P$ einer ab. Kat. $\Aat$ ist genau dann \emph{projektiv}, wenn $(0 \to P)$ die LHHE bzgl. aller Epis in $\Aat$ hat.
+  Dual ist $I \!\in\! \Ob(\Aat)$ injektiv g.d.w. alle Monos in $\Aat$ die LHHE bzgl. $(I \to 0)$ besitzen.
 \end{bsp}
 
 \begin{bsp}
-  In der Kategorie der Mengen gilt: Alle Injektionen haben die LHHE bzgl. aller Surjektionen.
+  In $\SetC$ gilt: Alle Inj. haben die LHHE bzgl. aller Surjektionen.
 \end{bsp}
 
-\begin{lem}[\emph{Retrakt-Argument}]
+\begin{lem}[\emph{Retrakt-Argument}]\mbox{}\\
   Sei $f \!=\! q \circ j$. Ist $f$ $q$-projektiv ($f \lhhe q$), so ist $f$ ein Retrakt von $j$.
 \end{lem}
 
 \subsection{Zellenkomplexe}
+
+\end{samepage}
 
 \begin{defn}
   Sei $\lambda$ eine Ordinalzahl. Eine \emph{$\lambda$-Sequenz} in einer Kategorie $\Cat$ ist ein kolimesbewahrender Funktor $X : \lambda \to \Cat$ (wobei man $\lambda$ als Präordnungskategorie aller $\beta < \lambda$ auffasst).
@@ -549,7 +403,7 @@
   %Sei $I$ eine Menge von Morphismen in einer kovollständigen Kategorie $\Cat$.
   \begin{itemize}
     \item Ein \emph{relativer $I$-Zellenkomplex} ist eine transf. Komp. einer $\lambda$-Sequenz $Z$, sodass $\forall \, \alpha \!\in\! \Ord$ mit $\alpha \!+\! 1 \!<\! \lambda$ ein Pushoutdiagramm
-    \begin{centertikzcd}
+    \begin{centertikzcd}[row sep=0.3cm]
       C \arrow[r] \arrow[d, "f"] \arrow[rd, phantom, "\ulcorner", very near end] &
       Z_\alpha \arrow[d] &
       \text{$\leftarrowtriangle$ \emph{Anklebeabbildung}} \\
@@ -577,6 +431,7 @@
   \end{itemize}
 \end{bspe}
 
+\begin{samepage}
 \begin{lem}
   Sei $Z : \lambda \to \Cat$ eine $\lambda$-Sequenz.
   Sei jeder Morphismus $Z_\beta \to Z_{\beta + 1}$ ($\beta + 1 < \lambda$) ein Pushout eines Morphismus aus $I$. \\
@@ -585,12 +440,14 @@
 
 \begin{thm}
   Die Klasse der relativen $I$-Zellenkomplex ist abgeschl. unter: \\
-  \inlineitem{transfinite Kompositionen} \enspace
+  \inlineitem{transfiniten Kompositionen} \enspace
   \inlineitem{Isomorphismen} \enspace
-  \inlineitem{Koprodukt}
+  \inlineitem{Koprodukten}
 \end{thm}
 
 % Vorlesung vom 6.5.2015
+\subsection{Faktorisierungssysteme}
+\end{samepage}
 
 \begin{defn}
   Eine Unterkat. $\Lat \subseteq \Cat$ heißt \emph{links-saturiert}, falls $\Lat$ abgeschl. ist unter Pushouts, transfiniten Kompositionen und Retrakten.
@@ -601,16 +458,19 @@
 \end{lem}
 
 \begin{bsp}
-  Sei $R \subset \Mor(\Cat)$ eine Klasse von Morphismen in einer Kat. $\Cat$.
-  Sei $\Lat$ die Unterkat. mit $\Mor(\Lat) \coloneqq \prescript{\lhhe}{} R \coloneqq \Set{i \!\in\! \Mor(\Cat)}{\fa{r \in R\!}\! i \lhhe r}$.
-  Dann ist $\Lat$ schon links-saturiert.
+  Sei $R \subset \Mor(\Cat)$. Dann ist die Unterkategorie $\Lat \subseteq \Cat$ mit
+  $\Mor(\Lat) \coloneqq \prescript{\lhhe}{} R \coloneqq \Set{i \!\in\! \Mor(\Cat)}{\fa{r \!\in\! R\!}\! i \lhhe r}$
+  links-saturiert.
 \end{bsp}
 
 % Schwache Faktorisierungssysteme
 
+% Ausgelassen, da trivial
+\iffalse
 \begin{prop}
   Für $L_1 \subseteq L_2 \subseteq \Mor(\Cat)$ gilt $L_1^\lhhe \leq L_2^\lhhe$.
 \end{prop}
+\fi
 
 \begin{defn}
   \begin{itemize}
@@ -636,6 +496,10 @@
   Ein faktorisierendes Paar $(L, R)$ heißt \emph{schwaches Faktorisierungssystem} (SFS), falls $L = \prescript{\lhhe}{} R$ und $R = L^\lhhe$.
 \end{defn}
 
+\begin{defn}
+  Ein SFS $(L, R)$ heißt \emph{orth. Faktorisierungssystem}, falls jedes $i \!\in\! L$ die eindeutige LHHE bzgl. allen $p \in R$ erfüllt.
+\end{defn}
+
 \begin{prop}
   Sei $(L, R)$ faktorisierend. Dann ist $(L, R)$ genau dann ein SFS, wenn $L \lhhe R$ und $L$ und $R$ unter Retrakten abgeschlossen sind.
   % L \lhhe R \coloniff \fa{i \in L} \fa{p \in R} i \lhhe p
@@ -645,11 +509,11 @@
   $(\{ \, \text{Surjektionen} \, \}, \{ \, \text{Injektionen} \, \})$ ist ein (S)FS in $\SetC$
 \end{bsp}
 
-% TODO: Begriff "untypisch"
-% TODO: Starker Faktorisierungssystem
+\vfill
+\columnbreak
 
 % §4. Modellkategorien
-\subsection{Modellkategorien}
+\section{Modellkategorien}
 
 \begin{motto}
   Modellkat. sind ein Werkzeug, math. Theorien zu studieren.
@@ -783,5 +647,9 @@
   \end{centertikzcd}
   existiert. Wir definieren $\pi^l(X, Y) \coloneqq \Hom_\MatC(X, Y) / \langle {\sim^l} \rangle$, wobei $\langle {\sim^l} \rangle$ die von der symmetrischen, refl. Relation ${\sim^l}$ erzeugte Äq'relation ist.
 \end{defn}
+
+\pagebreak
+
+\input{ordinalzahlen} % Ordinalzahlen-Anhang
 
 \end{document}
