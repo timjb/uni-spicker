@@ -2884,9 +2884,9 @@ Sei $\Aat$ eine abelsche Kategorie.
 \end{defn}
 
 \begin{bem}
-  Verschiebung um $n$ ist eine Autoäquivalenz
+  Verschiebung um $n$ ist eine Autoäquivalenz ($* \in \{ {+}, {-}, b \}$)
   \[
-    T^n : \Kom^?(\Aat) \to \Kom^?(\Aat), \quad
+    T^n : \Kom^{(*)}(\Aat) \to \Kom^{(*)}(\Aat), \quad
     \CCC{K} \mapsto \CCC{K[n]}.
   \]
 \end{bem}
@@ -2935,6 +2935,11 @@ Sei $\Aat$ eine abelsche Kategorie.
   Dabei sind $\alpha$ und $\beta$ Quasiisomorphismen mit $\beta \circ \alpha = \id_L$ und $\alpha \circ \beta \simeq \id_{\Cyl(f)}$.
   Desweiteren ist die Konstruktion funktoriell in $f$.
 \end{lem}
+
+% nicht dort im Buch, hoffentlich richtig (folgt aus der langen exakten Sequenz der zweiten Zeile)
+\begin{kor}
+  $C(f)$ ist genau dann azyklisch, wenn $f$ ein Quasiisomorphismus ist.
+\end{kor}
 
 % III.3.4
 \begin{defn}
@@ -3017,5 +3022,37 @@ Sei $\Aat$ eine abelsche Kategorie.
 \end{thm}
 
 % Ausgelassen: III.4.5 (Additivität von $\Der(\Aat)$, da schon im Abschnitt über Dächer)
+
+% III.5. Die Struktur der abgeleiteten Kategorie
+
+% III.5.1 Betrachtung von Objekten als Komplexe
+% schon etwas verallgemeinert, siehe S.165 unten
+\begin{defn}
+  Ein Komplex $\CCC{K}$ heißt \emph{$i$-Komplex} falls $K^k = 0$ und \emph{$H^i$-Komplex}, falls $H^k(\CCC{K}) = 0$ für $i \neq k$.
+\end{defn}
+
+% Übungsblatt 19, Aufgabe 5
+\begin{defn}
+  Die \emph{gute Abschneidung} eines Komplexes $\CCC{K}$ ist
+  \[
+    (\tau_{\leq n} \CCC{K})^i \coloneqq \begin{cases}
+      K^i & \text{für $i < n$,} \\
+      \ker(\delta^n : K^n \to K^{n+1}) & \text{für $i = n$,} \\
+      0 & \text{für $i > n$.}
+    \end{cases}
+  \]
+\end{defn}
+
+\begin{bem}
+  Jeder $H^0$-Kompl. $\CCC{K}$ ist in $\Der^*(\Aat)$ isom. zu einem $0$-Komplex:
+  \[ \CCC{K} \xleftarrow{\enspace Qis \enspace} \tau_{\leq 0} \CCC{K} \xrightarrow{\enspace Qis \enspace} H^0(\CCC{K})[0] \]
+\end{bem}
+
+% III.5.2
+\begin{prop}
+  Der Funktor $Q : \Aat \to \Der^*(\Aat)$ liefert eine Kategorienäquiva- lenz von $\Aat$ mit der vollen Unterkat. der $H^0$-Komplexe in $\Der^*(\Aat)$.
+\end{prop}
+
+% TODO: Ext
 
 \end{document}
