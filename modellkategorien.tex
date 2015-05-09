@@ -97,7 +97,7 @@
       K ((H G) F) \arrow[rr, "\alpha_{\Cat, \Dat, \Fat, \Gat}"] &&
       (K (H G)) F \arrow[u, "\alpha_{\Dat,\Eat,\Fat,\Gat} F"]
     \end{centertikzcd}
-    \item Für alle $(\Cat \xrightarrow{F} \Dat \xrightarrow{G} \Eat) \in \Cat$ kommutiert
+    \item Für alle $(\Cat \xrightarrow{F} \Dat \xrightarrow{G} \Eat) \in \C$ kommutiert
     \begin{centertikzcd}[column sep=1cm, row sep=0.5cm]
       G \circ (\Id_\Dat \circ F) \arrow[rr, "\alpha_{\Cat,\Dat,\Dat,\Eat}"] \arrow[rd, "G \lambda_{\Cat, \Dat}"] &&
       (G \circ \Id_\Dat) \circ F \arrow[ld, "\rho_{\Dat, \Eat} F"] \\
@@ -138,7 +138,8 @@
     E \arrow[ru, "\alpha_c"] \arrow[rd, "\alpha_{c'}"{below}] && S(c, c') \\
     & S(c', c') \arrow[ru, "{S(f, \id_{c'})}"{below}]
   \end{centertikzcd}
-  kommutiert, und $E$ universell (terminal) mit dieser Eigenschaft ist. Sprechweise: Ein Ende ist ein terminaler $S$-\emph{Keil}.
+  kommutiert, und $E$ universell (terminal) mit dieser Eigenschaft ist. \\
+  Sprechweise: Ein Ende ist ein terminaler $S$-\emph{Keil}.
 \end{defn}
 
 \begin{nota}
@@ -352,6 +353,7 @@
     \miniitem{0.35 \linewidth}{$i$ ist \emph{$p$-projektiv}}
     \miniitem{0.3 \linewidth}{$i \lhhe p$}
     \item $i$ hat die Linkshochhebungseigenschaft (LHHE) bzgl. $p$
+    \item $p$ hat die Rechtshochhebungseigenschaft (RHHE) bzgl. $i$
     \item Für alle $f$, $g$ wie unten, sodass das Quadrat kommutiert, gibt es ein diagonales $\lambda$, sodass die Dreiecke kommutieren:
     \begin{centertikzcd}
       A \arrow[r, "g"] \arrow[d, "i"] &
@@ -480,24 +482,20 @@
 \end{defn}
 
 \begin{prop}
-  $\prescript{\lhhe}{}(L^\lhhe)$ ist die projektive Hülle von $L$, \dh{} die kleinste Klasse von Morphismen, die projektiv abgeschlossen ist und $L$ umfasst.
+  \begin{itemize}
+    \item $\prescript{\lhhe}{}(L^\lhhe)$ ist die projektive Hülle von $L$, \dh{} die kleinste Klasse von Morphismen, die projektiv abgeschl. ist und $L$ umfasst.
+    \item Die projektive Hülle von $L$ ist links-saturiert.
+    Ist $L$ schon projektiv abgeschlossen, so ist $L$ insbesondere links-saturiert.
+  \end{itemize}
 \end{prop}
 
-\begin{prop}
-  Die projektive Hülle von $L$ ist links-saturiert. Ist $L$ schon projektiv abgeschlossen, so ist $L$ insbesondere links-saturiert.
-\end{prop}
-
 \begin{defn}
-  Ein Paar $(L, R)$ von Klassen von Morphismen von $\Cat$ \emph{faktorisiert} $\Cat$, falls
-  $\fa{f \in \Mor(\Cat)} \ex{i \in L, p \in R} f = p \circ i$.
-\end{defn}
-
-\begin{defn}
-  Ein faktorisierendes Paar $(L, R)$ heißt \emph{schwaches Faktorisierungssystem} (SFS), falls $L = \prescript{\lhhe}{} R$ und $R = L^\lhhe$.
-\end{defn}
-
-\begin{defn}
-  Ein SFS $(L, R)$ heißt \emph{orth. Faktorisierungssystem}, falls jedes $i \!\in\! L$ die eindeutige LHHE bzgl. allen $p \in R$ erfüllt.
+  \begin{itemize}
+    \item Ein Paar $(L, R)$ von Klassen von Morphismen von $\Cat$ \emph{faktorisiert} $\Cat$, falls
+    $\fa{f \in \Mor(\Cat)} \ex{i \in L, p \in R} f = p \circ i$.
+    \item Ein faktorisierendes Paar $(L, R)$ heißt \emph{schwaches Faktorisierungssystem} (SFS), falls $L = \prescript{\lhhe}{} R$ und $R = L^\lhhe$.
+    \item Ein SFS $(L, R)$ heißt \emph{orth. Faktorisierungssystem}, falls jedes $i \!\in\! L$ die eindeutige LHHE bzgl. allen $p \in R$ erfüllt.
+  \end{itemize}
 \end{defn}
 
 \begin{prop}
@@ -581,8 +579,8 @@
 \begin{defn}
   \begin{itemize}
     \item Ein Objekt $X \in \Ob(\MatC)$ heißt \emph{kofasernd}, falls $\emptyset \to X$ eine Kofaserung ist.
-    Eine azyklische Faserung $q : QX \xrightarrow{{\sim}} X$ mit $QX$ kofasernd heißt \emph{kofasernder Ersatz} (oder Approx.) von $X$. \\
-    \item Dual heißt $X \in \Ob(\MatC)$ \emph{fasernd}, falls $X$ in $\MatC^\op$ kofasernd ist und $X \xhookrightarrow{{\simeq}} RX$ mit $RX$ fasernd heißt \emph{fasernder Ersatz} von $X$.
+    Eine azyklische Faserung $q : QX \xtwoheadrightarrow{{\sim}} X$ mit $QX$ kofasernd heißt \emph{kofasernder Ersatz} (oder Approx.) von $X$. \\
+    \item Dual heißt $X \in \Ob(\MatC)$ \emph{fasernd}, falls $X$ in $\MatC^\op$ kofasernd ist und $X \xhookrightarrow{{\sim}} RX$ mit $RX$ fasernd heißt \emph{fasernder Ersatz} von $X$.
   \end{itemize}
 \end{defn}
 
@@ -645,7 +643,8 @@
     & \Cyl{X} \arrow[r, dashed, "h"] & Y \\
     X \arrow{ru}{\sim} \arrow[rru, bend right, swap, "g"]
   \end{centertikzcd}
-  existiert. Wir definieren $\pi^l(X, Y) \coloneqq \Hom_\MatC(X, Y) / \langle {\sim^l} \rangle$, wobei $\langle {\sim^l} \rangle$ die von der symmetrischen, refl. Relation ${\sim^l}$ erzeugte Äq'relation ist.
+  existiert. Wir definieren $\pi^l(X, Y) \coloneqq \Hom_\MatC(X, Y) / \langle {\sim^l} \rangle$, wobei $\langle {\sim^l} \rangle$ die von der symmetrischen, refl. Relation ${\sim^l}$ erzeugte Äq'relation ist. \\
+  Die Homotopie heißt (sehr) gut, wenn der Zylinder $\Cyl{X}$ es ist.
 \end{defn}
 
 \pagebreak
