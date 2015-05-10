@@ -6,14 +6,27 @@
 }
 
 \usepackage{tikz}
+\usetikzlibrary{cd}
 %\usetikzlibrary{calc}
 %\usetikzlibrary{matrix,shapes,arrows,positioning}
+
+% http://tex.stackexchange.com/questions/117732/tikz-and-babel-error
+% Es ist schierer Wahnsinn, welche Hacks LaTeX benötigt!
+\tikzset{
+  every picture/.prefix style={
+    execute at begin picture=\shorthandoff{"}
+  }
+}
 
 \input{include/cats} % Kategorientheorie-Makros
 
 %\newcommand{\keS}{k.\,e.\,S.} % kurze exakte Sequenz
 %\newcommand{\leS}{l.\,e.\,S.} % lange exakte Sequenz
 %\newcommand{\ZM}[1]{\Z_{#1}} % \Z modulo n
+
+\newenvironment{centertikzcd}
+  {\begin{center}\begin{tikzcd}}
+  {\end{tikzcd}\end{center}}
 
 % Kleinere Klammern
 \delimiterfactor=701
@@ -23,15 +36,13 @@
 
 \maketitle{Spektralsequenzen}
 
-% TODO: Definition Spektralsequenz
-
 Sei $\Aat$ im Folgenden eine abelsche Kategorie.
 
 \begin{defn}
-  Eine (homologische) \emph{Spektralsequenz} besteht aus
+  Eine (homologische) \emph{Spektralsequenz} (SS) besteht aus
   \begin{itemize}
     \item Objekten $E^r_{p,q} \in \Ob(\Aat)$ für alle $p, q \in \Z$ und $r \geq 1$,
-    \item Morphismen $d^r_{p,q} : E^r_{p,q} \to E^r_{p-r,q+r-1}$ mit $d^r_{p-r,q+r-1} \circ d^r_{p,q} = 0$,
+    \item Morphismen $d^r_{p,q} : E^r_{p,q} \to E^r_{p-r,q+r-1}$ mit $d^r_{p-r,q+r-1} \circ d^r_{p,q} = 0$
     \item und Isos $\alpha : H_{p,q}(E^r) \!\coloneqq\! \ker(d^r_{p,q}) / \im(d^r_{p+r,q-r+1}) \xrightarrow{\cong} E^{r+1}_{p,q}$.
   \end{itemize}
 \end{defn}
@@ -41,12 +52,12 @@ Sei $\Aat$ im Folgenden eine abelsche Kategorie.
 \begin{sprech}
   \begin{itemize}
     \item Die Morphismen $d^r_{p,q}$ heißen \emph{Differentiale}.
-    \item Die Gesamtheit aller $E^r_{p,q}$ mit $r \in \N$ fest heißt $r$-te \emph{Seite}.
+    \item Die Gesamtheit $E^r \coloneqq \{ E^r_{p,q} \}_{p,q}$ mit $r \in \N$ fest heißt $r$-te \emph{Seite}.
   \end{itemize}
 \end{sprech}
 
 \begin{bem}
-  Bei einer kohomologischen Spektralsequenz sind die Indizes vertauscht und die Differentiale laufen $d_r^{p,q} : E_r^{p,q} \to E_r^{p+r,q-r+1}$.
+  Man stellt Seiten in einem 2-dim Raster dar:
 \end{bem}
 
 \begin{tikzpicture}[x=10pt,y=10pt]
@@ -97,11 +108,80 @@ Sei $\Aat$ im Folgenden eine abelsche Kategorie.
   \end{scope}
 \end{tikzpicture}
 
-% TODO: Zeichnung
+\begin{bem}
+  Bei einer kohomologischen Spektralsequenz sind die Indizes vertauscht und die Differentiale laufen $d_r^{p,q} : E_r^{p,q} \to E_r^{p+r,q-r+1}$.
+\end{bem}
 
-% TODO: links/rechts
+\begin{defn}
+  Eine Spektralsequenz \emph{konvergiert}, falls für alle $p, q \in \Z$ ein $R \in \N$ existiert, sodass für alle $r \geq R$ die Differentiale von und nach $E^r_{p,q}$ null sind und damit $E^\infty_{p,q} \coloneqq E^R_{p,q} \cong E^{R+1}_{p,q} \cong E^{R+2}_{p,q} \ldots$ \\
+  Der \emph{Grenzwert} der SS ist die Unendlich-Seite $E^\infty \coloneqq \{ E^\infty_{p,q} \}_{p,q}$.
+\end{defn}
 
-% TODO: Exakte Paare
+\begin{nota}
+  $E^r \Rightarrow E^\infty$
+\end{nota}
+
+\begin{defn}
+  Eine SS \emph{degeneriert} auf Seite $R$, wenn $d^r_{p,q} \!=\! 0$ für alle $r \!\geq\! R$.
+\end{defn}
+
+\begin{bem}
+  Das entspricht der gleichmäßigen Konv. aus der Analysis.
+\end{bem}
+
+\begin{bem}
+  Viele Spektralsequenzen leben im ersten Quadranten, \dh{} $E^r_{p,q} = 0$ wenn $p < 0$ oder $q < 0$. Das impliziert, dass für $p$, $q$ fest und $r$ groß alle Differentiale von und nach $E^r_{p,q}$ aus dem ersten Quadranten heraus- oder hineinführen und damit Null sind.
+  %Somit konvergieren solche Spektralsequenzen immer.
+\end{bem}
+
+\begin{defn}
+  Ein \emph{exaktes Pärchen} in $\Aat$ ist gegeben durch Objekte $A, E \in \Ob(\Aat)$ und Morphismen wie folgt
+  \begin{centertikzcd}
+    A \arrow[rr, "i"] &&
+    A \arrow[ld, "j"] \\
+    & E \arrow[lu, "k"]
+  \end{centertikzcd}
+  sodass das Dreieck an jeder Ecke exakt ist.
+\end{defn}
+
+\begin{bem}
+  Für das Differential $d \coloneqq j \circ k : E \to E$ gilt $d^2 = 0$.
+\end{bem}
+
+\begin{defn}
+  Sei ein exaktes Pärchen wie oben gegeben. \\
+  Dann gibt es ein \emph{abgeleitetes Pärchen}
+  \begin{centertikzcd}
+    A' \arrow[rr, "i'"] &&
+    A' \arrow[ld, "j'"] \\
+    & E' \arrow[lu, "k'"]
+  \end{centertikzcd}
+  mit \quad
+  \inlineitem{$E' \coloneqq \ker(d) / \im(d)$,} \quad
+  \inlineitem{$A' \coloneqq i(A) \subset A$,} \\
+  \inlineitem{$i' \coloneqq i|_{A'}$} \quad
+  \inlineitem{$j'(i(a)) \coloneqq [j(a)] \in E'$} \quad
+  \inlineitem{$k'([e]) \coloneqq k(e)$}
+\end{defn}
+
+% 1.1 im Hatcher
+\begin{lem}
+  Das abgeleitete Pärchen eines exakten Pärchens ist exakt.
+\end{lem}
+
+\begin{bem}
+  Man erhält nun aus einem exakten Pärchen eine Spektralsequenz (im nachfolgenden Sinne) durch iteriertes Ableiten.
+\end{bem}
+
+\begin{bem}
+  Man kann auch die $r$-te Seite als einzelnes Obj. $E^r$ auffassen. Dann ist eine \emph{Spektralsequenz} gegeben durch Objekte $E^r$, $r \geq 1$, Differentiale $d^r : E^r \to E_r$ mit $d^r \circ d^r = 0$ und Isomorphismen $\alpha^r : H(E^r) \coloneqq \ker(d^r) / \im(d^r) \to E^{r+1}$.
+\end{bem}
+
+\begin{defn}
+  Eine \emph{Filtrierung} eines $A$-Moduls $M$ ist eine aufsteigende Folge $\nldots \subseteq F_p M \subseteq F_{p+1} M \subseteq \nldots$ von Untermodulen von $M$ mit $p \in \Z$, sodass $0 = \cap_p F_p M$ und $M = \cup_p F_p M$.
+\end{defn}
+% XXX: beschränkte Filtrierungen
+
 
 % TODO: Serre Spectral Sequence
 % TODO: Leray Spectral Sequence
