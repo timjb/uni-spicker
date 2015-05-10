@@ -378,8 +378,12 @@
   In $\SetC$ gilt: Alle Inj. haben die LHHE bzgl. aller Surjektionen.
 \end{bsp}
 
-\begin{lem}[\emph{Retrakt-Argument}]\mbox{}\\
-  Sei $f \!=\! q \circ j$. Ist $f$ $q$-projektiv ($f \lhhe q$), so ist $f$ ein Retrakt von $j$.
+\begin{lem}[\emph{Retrakt-Argument}]\mbox{}
+  Sei $f \!=\! q \circ j$.
+  \begin{itemize}
+    \item Ist $f$ $q$-projektiv ($f \lhhe q$), so ist $f$ ein Retrakt von $j$.
+    \item Ist $f$ $j$-injektiv ($j \lhhe f$), so ist $f$ ein Retrakt von $q$.
+  \end{itemize}
 \end{lem}
 
 \subsection{Zellenkomplexe}
@@ -541,17 +545,17 @@
   Man verwendet folgende Bezeichnungen und Pfeile:
   \begin{center}
     \begin{tabular}{r l l}
-      $\Wat$ & $\xrightarrow{{\sim}}$ & schwache Äquivalenz \\
-      $\Cat$ & $\xhookrightarrow{\phantom{{\sim}}}$ & Kofaserungen \\
-      $\Cat \cap \Wat$ & $\xhookrightarrow{{\sim}}$ & azyklische Kofaserungen \\
-      $\Fat$ & $\xtwoheadrightarrow{\phantom{{\sim}}}$ & Faserungen \\
-      $\Fat \cap \Wat$ & $\xtwoheadrightarrow{{\sim}}$ & azyklische Faserungen
+      $\Wat$ & $\xrightarrow{{\sim}}$ & \emph{schwache Äquivalenz} \\
+      $\Cat$ & $\xhookrightarrow{\phantom{{\sim}}}$ & \emph{Kofaserung} \\
+      $\Cat \cap \Wat$ & $\xhookrightarrow{{\sim}}$ & \emph{azyklische Kofaserung} \\
+      $\Fat$ & $\xtwoheadrightarrow{\phantom{{\sim}}}$ & \emph{Faserung} \\
+      $\Fat \cap \Wat$ & $\xtwoheadrightarrow{{\sim}}$ & \emph{azyklische Faserung}
     \end{tabular}
   \end{center}
 \end{sprech}
 
 \begin{bem}
-  Ist $(\Wat, \Cat, \Fat)$ eine Modellstruktur auf $\MatC$, so ist $(\Wat^\op, \Cat^\op, \Fat^\op)$ eine Modellstruktur auf $\MatC^\op$.
+  Ist $(\Wat, \Cat, \Fat)$ eine Modellstruktur auf $\MatC$, so ist $(\Wat^\op, \Fat^\op, \Cat^\op)$ eine Modellstruktur auf $\MatC^\op$.
 \end{bem}
 
 \begin{bem}
