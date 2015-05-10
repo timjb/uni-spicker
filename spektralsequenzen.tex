@@ -182,8 +182,54 @@ Sei $\Aat$ im Folgenden eine abelsche Kategorie.
 \end{defn}
 % XXX: beschränkte Filtrierungen
 
+\subsection{Die Leray-Serre-Spektralsequenz}
 
-% TODO: Serre Spectral Sequence
+\begin{defn}
+  Eine \emph{Serre-Faserung} ist eine stetige Abb. $p : E \to B$, die die Homotopieliftungseigenschaft für alle CW-Komplexe $A$ erfüllt, \dh{}
+  für alle $H$, $H_0$ wie unten, sodass das Quadrat kommutiert, gibt es ein diagonales $\tilde{H}$, sodass die Dreiecke kommutieren:
+  \begin{centertikzcd}[row sep=0.8cm, column sep=1cm]
+    A \arrow[r, "H_0"] \arrow[d, hook, "i_0"] &
+    E \arrow[d, "p"] \\
+    A \times \I \arrow[r, "H"] \arrow[ur, "\exists\, \tilde{H}", dashed] &
+    B
+  \end{centertikzcd}
+\end{defn}
+
+\begin{lem}
+  Die Homotopieliftungseig. ist genau dann für alle CW-Kom- plexe erfüllt, wenn sie für die Kuben $A = \I^n$ erfüllt ist.
+\end{lem}
+
+\begin{bem}
+  Jeder stetige Weg $\gamma : \I \to B$ in $B$ induziert eine Homoto- pieäquivalenz $\gamma_* : p^{-1}(\gamma(0)) \to p^{-1}(\gamma(1))$ zwischen den Fasern über Anfangs- und Endpunkt.
+  Wenn $B$ wegzshgd ist, so sind alle Fasern homotopieäquivalent und man notiert $F \to E \to B$ für die Faserung, wobei $F$ die Faser über einem beliebigen Punkt ist. Man erhält eine Wirkung der Fundamentalgr. $\pi_1(B)$ auf der Homologie $H_k(F)$ durch
+  \[ \pi_1(B) \to \Aut(H_k(F)), \quad [(\gamma : \I \to B)] \mapsto (\gamma_* : F \to F)_* \]
+\end{bem}
+
+% 1.3 im Hatcher
+\begin{thm}
+  Sei $F \to E \to B$ eine Serre-Faserung, $B$ wegzshgd und $G$ eine ab. Gruppe. Angenommen, $\pi_1(B)$ wirkt trivial auf $H_*(F; G)$. \\
+  Dann gibt es die \emph{(Leray-)Serre-Spektralsequenz} mit
+  \[ E^2_{p,q} = H_p(B; H_q(F; G)), \]
+  deren Eintrag $E^\infty_{p,n-p}$ der Quotient $F^p_n/F^{p-1}_n$ in einer Filtration
+  $0 \subseteq F_n^0 \subseteq \ldots \subseteq F_n^n = H_n(X; G)$ von $H_n(X; G)$ ist.
+\end{thm}
+% XXX: Verallgemeinerung auf lokale Koeffizienten?
+
+\begin{bem}
+  Wenn $G$ ein Vektorraum ist, so folgt $H_n(X; G) \cong \oplus_p E^\infty_{p,n-p}$.
+\end{bem}
+
+% 1.14 im Hatcher
+\begin{thm}
+  Sei $F \to E \to B$ eine Serre-Faserung, $B$ wegzshgd und $G$ eine ab. Gruppe. Angenommen, $\pi_1(B)$ wirkt trivial auf $H^*(F; G)$.
+  Dann ex. die \emph{(Leray-)Serre-Spektralsequenz} für Kohomologie mit
+  \[ E_2^{p,q} = H^p(B; H^q(F; G)), \]
+  deren Eintrag $E_\infty^{p,n-p}$ der Quotient $F_p^n/F_{p+1}^n$ in einer Filtration
+  $0 \subseteq F_n^n \subseteq \ldots \subseteq F_0^n = H^n(X; G)$ von $H^n(X; G)$ ist.
+\end{thm}
+
+% TODO: Multiplikative Struktur auf der Serre-Spektralsequenz
+
 % TODO: Leray Spectral Sequence
 % TODO: May Spectral Sequence
 % TODO: Spektralsequenz eines Doppelkomplexes
