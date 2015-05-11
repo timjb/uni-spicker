@@ -21,7 +21,7 @@
 \input{include/cats} % Kategorientheorie-Makros
 
 %\newcommand{\keS}{k.\,e.\,S.} % kurze exakte Sequenz
-%\newcommand{\leS}{l.\,e.\,S.} % lange exakte Sequenz
+\newcommand{\leS}{l.\,e.\,S.} % lange exakte Sequenz
 %\newcommand{\ZM}[1]{\Z_{#1}} % \Z modulo n
 
 \newenvironment{centertikzcd}
@@ -181,6 +181,17 @@ Sei $\Aat$ im Folgenden eine abelsche Kategorie.
   Eine \emph{Filtrierung} eines $A$-Moduls $M$ ist eine aufsteigende Folge $\nldots \subseteq F_p M \subseteq F_{p+1} M \subseteq \nldots$ von Untermodulen von $M$ mit $p \in \Z$, sodass $0 = \cap_p F_p M$ und $M = \cup_p F_p M$.
 \end{defn}
 % XXX: beschränkte Filtrierungen
+
+\begin{bem}
+  Sei $\ldots \subseteq X_p \subseteq X_{p+1} \subseteq \ldots$ eine aufsteigende Filtrierung eines topologischen Raumes $X$. Man kann dann die Homologiegruppen schön übersichtlich in ein Raster schreiben:
+  \begin{centertikzcd}[row sep=0.4cm, column sep=0.25cm, font=\scriptsize]
+    \Emph{H_{n\!+\!1}(X_p)} \arrow[r, Emph] \arrow[d] & \Emph{H_{n\!+\!1}(X_p, X_{p\!-\!1})} \arrow[r, Emph] \arrow[d] & \Emph{H_n(X_{p\!-\!1})} \arrow[r] \arrow[d, Emph] & H_n(X_{p\!-\!1}, X_{p\!-\!2}) \arrow[r] \arrow[d] & \nldots \\
+    H_{n\!+\!1}(X_{p\!+\!1}) \arrow[r] \arrow[d] & H_{n\!+\!1}(X_{p\!+\!1}, X_p) \arrow[r] \arrow[d] & \Emph{H_n(X_p)} \arrow[r, Emph] \arrow[d] & \Emph{H_n(X_p, X_{p\!-\!1})} \arrow[r, Emph] \arrow[d] & \nldots \\
+    H_{n\!+\!1}(X_{p\!+\!2}) \arrow[r] & H_{n\!+\!1}(X_{p\!+\!2}, X_{p\!+\!1}) \arrow[r] & H_n(X_{p\!+\!1}) \arrow[r] & H_n(X_{p\!+\!1}, X_{p}) \arrow [r] & \nldots
+  \end{centertikzcd}
+  Die langen exakten Sequenzen von Raumpaaren liegen treppenstu- fenartig in diesem Raster.
+  Man erhält aus den langen Morphismen wie in den $\leS{}$ (rechts, rechts, runter) exaktes Pärchen $(A, E)$ mit $A_{n+1,p} \coloneqq H_n(X_p)$ und $E_{n,p}^1 \coloneqq H_n(X_p, X_{p-1})$.
+\end{bem}
 
 \subsection{Die Leray-Serre-Spektralsequenz}
 
