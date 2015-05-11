@@ -22,6 +22,7 @@
 
 %\newcommand{\keS}{k.\,e.\,S.} % kurze exakte Sequenz
 \newcommand{\leS}{l.\,e.\,S.} % lange exakte Sequenz
+\newcommand{\nacong}{\!\cong\!} % narrow cong
 %\newcommand{\ZM}[1]{\Z_{#1}} % \Z modulo n
 
 \newenvironment{centertikzcd}
@@ -58,59 +59,66 @@ Sei $\Aat$ im Folgenden eine abelsche Kategorie.
 
 \begin{bem}
   Man stellt Seiten in einem 2-dim Raster dar:
-\end{bem}
+  \begin{tikzpicture}[x=10pt,y=10pt]
+    \begin{scope}[shift={(0,0)}]
+      \foreach \x in {-1,...,4}{
+        \foreach \y in {-2,-1,...,3}{
+          \node[draw,circle,inner sep=0.5pt,fill] at (\x,\y) {};
+        }
+      }
+      \foreach \x in {-1,...,5}{
+        \foreach \y in {-2,-1,...,3}{
+          \draw[->,gray] (\x-0.2,\y) -- (\x-0.8,\y);
+        }
+      }
+      \draw[->] (-0.35,-0.35) -- (5.35,-0.35) node[below] {p};
+      \draw[->] (-0.35,-0.35) -- (-0.35,4) node[left] {q};
+      \node at (5,4.5) {$E^1$};
+    \end{scope}
+    \begin{scope}[shift={(8.5,0)}]
+      \foreach \x in {-1,...,4}{
+        \foreach \y in {-2,-1,...,3}{
+          \node[draw,circle,inner sep=0.5pt,fill] at (\x,\y) {};
+        }
+      }
+      \foreach \x in {0,...,5}{
+        \foreach \y in {-2,-1,...,3}{
+          \draw[->,gray] (\x-0.2,\y+0.1) -- (\x-1.8,\y+0.9);
+        }
+      }
+      \draw[->] (-0.35,-0.35) -- (5.35,-0.35) node[below] {p};
+      \draw[->] (-0.35,-0.35) -- (-0.35,4) node[left] {q};
+      \node at (5,4.5) {$E^2$};
+    \end{scope}
+    \begin{scope}[shift={(17,0)}]
+      \foreach \x in {-1,...,4}{
+        \foreach \y in {-2,-1,...,3}{
+          \node[draw,circle,inner sep=0.5pt,fill] at (\x,\y) {};
+        }
+      }
+      \foreach \x in {1,...,5}{
+        \foreach \y in {-2,-1,...,2}{
+          \draw[->,gray] (\x-0.2,\y+0.1) -- (\x-2.8,\y+1.9);
+        }
+      }
+      \draw[->] (-0.35,-0.35) -- (5.35,-0.35) node[below] {p};
+      \draw[->] (-0.35,-0.35) -- (-0.35,4) node[left] {q};
+      \node at (5,4.5) {$E^3$};
+    \end{scope}
+  \end{tikzpicture}
+  \vspace{4pt}
 
-\begin{tikzpicture}[x=10pt,y=10pt]
-  \begin{scope}[shift={(0,0)}]
-    \foreach \x in {-1,...,4}{
-      \foreach \y in {-2,-1,...,3}{
-        \node[draw,circle,inner sep=0.5pt,fill] at (\x,\y) {};
-      }
-    }
-    \foreach \x in {-1,...,5}{
-      \foreach \y in {-2,-1,...,3}{
-        \draw[->,gray] (\x-0.2,\y) -- (\x-0.8,\y);
-      }
-    }
-    \draw[->] (-0.35,-0.35) -- (5.35,-0.35) node[below] {p};
-    \draw[->] (-0.35,-0.35) -- (-0.35,4) node[left] {q};
-    \node at (5.65,4.5) {$E^1$};
-  \end{scope}
-  \begin{scope}[shift={(9,0)}]
-    \foreach \x in {-1,...,4}{
-      \foreach \y in {-2,-1,...,3}{
-        \node[draw,circle,inner sep=0.5pt,fill] at (\x,\y) {};
-      }
-    }
-    \foreach \x in {0,...,5}{
-      \foreach \y in {-2,-1,...,3}{
-        \draw[->,gray] (\x-0.2,\y+0.1) -- (\x-1.8,\y+0.9);
-      }
-    }
-    \draw[->] (-0.35,-0.35) -- (5.35,-0.35) node[below] {p};
-    \draw[->] (-0.35,-0.35) -- (-0.35,4) node[left] {q};
-    \node at (5.65,4.5) {$E^2$};
-  \end{scope}
-  \begin{scope}[shift={(18,0)}]
-    \foreach \x in {-1,...,4}{
-      \foreach \y in {-2,-1,...,3}{
-        \node[draw,circle,inner sep=0.5pt,fill] at (\x,\y) {};
-      }
-    }
-    \foreach \x in {1,...,5}{
-      \foreach \y in {-2,-1,...,2}{
-        \draw[->,gray] (\x-0.2,\y+0.1) -- (\x-2.8,\y+1.9);
-      }
-    }
-    \draw[->] (-0.35,-0.35) -- (5.35,-0.35) node[below] {p};
-    \draw[->] (-0.35,-0.35) -- (-0.35,4) node[left] {q};
-    \node at (5.65,4.5) {$E^3$};
-  \end{scope}
-\end{tikzpicture}
+  Die Differentiale in $E^2$ laufen wie Springer-Züge beim Schach.
+\end{bem}
 
 \begin{bem}
   Bei einer kohomologischen Spektralsequenz sind die Indizes vertauscht und die Differentiale laufen $d_r^{p,q} : E_r^{p,q} \to E_r^{p+r,q-r+1}$.
 \end{bem}
+
+\begin{nota}
+  Man verwendet auch eine zweite, alternative Indizierung:
+  $E^*_{n,p} :=: E^*_{p,q}$ mit $n = p + q$.
+\end{nota}
 
 \begin{defn}
   Eine Spektralsequenz \emph{konvergiert}, falls für alle $p, q \in \Z$ ein $R \in \N$ existiert, sodass für alle $r \geq R$ die Differentiale von und nach $E^r_{p,q}$ null sind und damit $E^\infty_{p,q} \coloneqq E^R_{p,q} \cong E^{R+1}_{p,q} \cong E^{R+2}_{p,q} \ldots$ \\
@@ -126,7 +134,7 @@ Sei $\Aat$ im Folgenden eine abelsche Kategorie.
 \end{defn}
 
 \begin{bem}
-  Das entspricht der gleichmäßigen Konv. aus der Analysis.
+  Das entspricht einer Art gleichmäßigen Konvergenz.
 \end{bem}
 
 \begin{bem}
@@ -135,7 +143,7 @@ Sei $\Aat$ im Folgenden eine abelsche Kategorie.
 \end{bem}
 
 \begin{defn}
-  Ein \emph{exaktes Pärchen} in $\Aat$ ist gegeben durch Objekte $A, E \in \Ob(\Aat)$ und Morphismen wie folgt
+  Ein \emph{exaktes Pärchen} $(A, E)$ in $\Aat$ ist gegeben durch Objekte $A, E \in \Ob(\Aat)$ und Morphismen wie folgt
   \begin{centertikzcd}
     A \arrow[rr, "i"] &&
     A \arrow[ld, "j"] \\
@@ -149,8 +157,8 @@ Sei $\Aat$ im Folgenden eine abelsche Kategorie.
 \end{bem}
 
 \begin{defn}
-  Sei ein exaktes Pärchen wie oben gegeben. \\
-  Dann gibt es ein \emph{abgeleitetes Pärchen}
+  Sei ein exaktes Pärchen $(A, E)$ gegeben. \\
+  Dann gibt es ein \emph{abgeleitetes Pärchen} $(A', E')$
   \begin{centertikzcd}
     A' \arrow[rr, "i'"] &&
     A' \arrow[ld, "j'"] \\
@@ -170,11 +178,33 @@ Sei $\Aat$ im Folgenden eine abelsche Kategorie.
 \end{lem}
 
 \begin{bem}
-  Man erhält nun aus einem exakten Pärchen eine Spektralsequenz (im nachfolgenden Sinne) durch iteriertes Ableiten.
+  Man erhält nun aus einem exakten Pärchen $(A^1, E^1)$ durch wiederholtes Ableiten eine Folge von exakten Pärchen $(A^r, E^r)_{r \in \N}$. Die $E^r$ bilden mit $d^r \!:\! E^r \!\to\! E^r$ eine Spektralseq. im folgenden Sinne:
 \end{bem}
 
 \begin{bem}
   Man kann auch die $r$-te Seite als einzelnes Obj. $E^r$ auffassen. Dann ist eine \emph{Spektralsequenz} gegeben durch Objekte $E^r$, $r \geq 1$, Differentiale $d^r : E^r \to E_r$ mit $d^r \circ d^r = 0$ und Isomorphismen $\alpha^r : H(E^r) \coloneqq \ker(d^r) / \im(d^r) \to E^{r+1}$.
+\end{bem}
+
+\begin{bem}
+  Sei $\ldots \subseteq X_p \subseteq X_{p+1} \subseteq \ldots$ eine aufsteigende Filtrierung eines topologischen Raumes $X$. Man kann dann die Homologiegruppen schön übersichtlich in ein Raster schreiben:
+  \begin{tikzcd}[row sep=0.2cm, column sep=0.25cm, font=\scriptsize]
+    \arrow[d] && \arrow[d] \\
+    \Emph{H_{n\!+\!1}(X_p)} \arrow[r] \arrow[d, Emph] & H_{n\!+\!1}(X_p, X_{p\!-\!1}) \arrow[r] & H_n(X_{p\!-\!1}) \arrow[r] \arrow[d] & H_n(X_{p\!-\!1}, X_{p\!-\!2}) \arrow[r] & \, \\
+    \Emph{H_{n\!+\!1}(X_{p\!+\!1})} \arrow[r, Emph] \arrow[d] & \Emph{H_{n\!+\!1}(X_{p\!+\!1}, X_p)} \arrow[r, Emph] & \Emph{H_n(X_p)} \arrow[r] \arrow[d, Emph] & H_n(X_p, X_{p\!-\!1}) \arrow[r] & \, \\
+    H_{n\!+\!1}(X_{p\!+\!2}) \arrow[r] \arrow[d] & H_{n\!+\!1}(X_{p\!+\!2}, X_{p\!+\!1}) \arrow[r] & \Emph{H_n(X_{p\!+\!1})} \arrow[r, Emph] \arrow[d] & \Emph{H_n(X_{p\!+\!1}, X_{p})} \arrow [r, Emph] & \, \\
+    \, & \, & \, & \,
+  \end{tikzcd}
+  Die langen exakten Sequenzen von Raumpaaren liegen treppenstu- fenartig in diesem Raster.
+  Man erhält aus den langen Morphismen wie in den \leS{} (rechts, rechts, runter) ein exaktes Pärchen $(A, E)$ mit $A^1_{n,p} \coloneqq H_n(X_p)$ und $E_{n,p}^1 \coloneqq H_n(X_p, X_{p-1})$.
+  Beim Bilden des abgeleiteten Pärchens verschieben sich die exakten Sequenzen:
+  \vspace{-8pt}
+  \begin{centertikzcd}[row sep=0.2cm, column sep=0.45cm, font=\scriptsize]
+    & \, \arrow[d] & \phantom{E^2_{n+1,p-1}} & \, \arrow[d] & \phantom{E^2_{n,p-2}} \\
+    \arrow[r, Emph] & \Emph{A^2_{n+1,p}} \arrow[ru] \arrow[d, Emph] & \Emph{E^2_{n+1,p}} \arrow[r, Emph] & \Emph{A^2_{n,p-1}} \arrow[ru] \arrow[d, Emph] & \Emph{E^2_{n,p-1}} \arrow[r, Emph] & \, \\
+    \arrow[r] & \Emph{A^2_{n+1,p+1}} \arrow[ru, Emph] \arrow[d] & E^2_{n+1,p+1} \arrow[r] & \Emph{A^2_{n,p}} \arrow[ru, Emph] \arrow[d] & E^2_{n,p} \arrow[r] & \, \\
+    \arrow[r] & A^2_{n+1,p+2} \arrow[ru] \arrow[d] & E^2_{n+1,p+2} \arrow[r] & A^2_{n,p+1} \arrow[ru]  \arrow[d] & E^2_{n,p+1} \arrow[r] & \, \\
+    & \phantom{A^2_{n+1,p+3}} \arrow[ru] & \, & \phantom{A^2_{n,p+1}} \arrow[ru] & \, & \, &
+  \end{centertikzcd}
 \end{bem}
 
 \begin{defn}
@@ -182,15 +212,31 @@ Sei $\Aat$ im Folgenden eine abelsche Kategorie.
 \end{defn}
 % XXX: beschränkte Filtrierungen
 
+% 1.2 im Hatcher
+\begin{prop}
+  Angenommen, in jeder $A^1$-Spalte sind alle bis auf endlich viele Morphismen Isomorphismen. Dann hat man in jeder Spalte stabile obere und untere Werte $A^1_{n, \mp \infty}$. Außerdem konvergiert dann die Spektralsequenz der $E^r_{n,p}$.
+  \begin{itemize}
+    \item Falls $A^1_{n,-\infty} = 0$ für alle $n$, dann ist $E^\infty_{n,p} \cong F^p_n / F^{p-1}_n$, wobei
+    \[ F^p_n \coloneqq \im(A^1_{n,p} \to A^1_{n,\infty}) \subseteq A^1_{n,\infty} \]
+    eine Filtrierung $\ldots \subseteq F^{p-1}_n \subseteq F^p_n \subseteq \ldots$ von $A^1_{n,\infty}$ ist.
+    \item Falls $A^1_{n,\infty} = 0$ für alle $n$, dann ist $E^\infty_{n,p} \cong F^{n-1}_p / F^{n-1}_{p-1}$ mit
+    \[ F^p_{n-1} \coloneqq \ker(A^1_{n-1,-\infty} \to A^1_{n-1,p}) \subseteq A^1_{n-1,-\infty}. \]
+  \end{itemize}
+\end{prop}
+
 \begin{bem}
-  Sei $\ldots \subseteq X_p \subseteq X_{p+1} \subseteq \ldots$ eine aufsteigende Filtrierung eines topologischen Raumes $X$. Man kann dann die Homologiegruppen schön übersichtlich in ein Raster schreiben:
-  \begin{centertikzcd}[row sep=0.4cm, column sep=0.25cm, font=\scriptsize]
-    \Emph{H_{n\!+\!1}(X_p)} \arrow[r, Emph] \arrow[d] & \Emph{H_{n\!+\!1}(X_p, X_{p\!-\!1})} \arrow[r, Emph] \arrow[d] & \Emph{H_n(X_{p\!-\!1})} \arrow[r] \arrow[d, Emph] & H_n(X_{p\!-\!1}, X_{p\!-\!2}) \arrow[r] \arrow[d] & \nldots \\
-    H_{n\!+\!1}(X_{p\!+\!1}) \arrow[r] \arrow[d] & H_{n\!+\!1}(X_{p\!+\!1}, X_p) \arrow[r] \arrow[d] & \Emph{H_n(X_p)} \arrow[r, Emph] \arrow[d] & \Emph{H_n(X_p, X_{p\!-\!1})} \arrow[r, Emph] \arrow[d] & \nldots \\
-    H_{n\!+\!1}(X_{p\!+\!2}) \arrow[r] & H_{n\!+\!1}(X_{p\!+\!2}, X_{p\!+\!1}) \arrow[r] & H_n(X_{p\!+\!1}) \arrow[r] & H_n(X_{p\!+\!1}, X_{p}) \arrow [r] & \nldots
-  \end{centertikzcd}
-  Die langen exakten Sequenzen von Raumpaaren liegen treppenstu- fenartig in diesem Raster.
-  Man erhält aus den langen Morphismen wie in den $\leS{}$ (rechts, rechts, runter) exaktes Pärchen $(A, E)$ mit $A_{n+1,p} \coloneqq H_n(X_p)$ und $E_{n,p}^1 \coloneqq H_n(X_p, X_{p-1})$.
+  Die erste Bedingung ist äquivalent dazu, dass in jeder $E^1$-Spalte nur endlich viele Objekte ungleich Null sind. \\
+  Angenommen, die Filtrierung des Raums $X$ erfüllt $X_p = \emptyset$ für $p < 0$.
+  Im Homologiesetting ist die Bed. erfüllt, wenn es für alle $n$ ein $p$ gibt, sodass $H_n(X_p) \nacong H_n(X_{p+1}) \nacong \ldots \nacong H_n(X)$ induziert durch Inklusion.
+  Dann gilt $F^p_n = \im(H_n(X_p) \to H_n(X))$ und $A^1_{n,\infty} = H_n(X)$. \\
+\end{bem}
+
+\begin{bem}
+  Oft ist $X$ ein CW-Komplex und die Filtrierung $X_p$ gegeben durch die $p$-Skelette von $X$. Dann ist $E^1_{n,p} \coloneqq H_n(X_p, X_{p-1}; G) = 0$ für $n < p$, da $(X_p, X_{p-1})$ $(p\!-\!1)$-zusammenhängend ist. Das ist der Grund für die zwei alternativen Notationen $E^*_{n,p}$ und $E^*_{p,q}$.
+\end{bem}
+
+\begin{bem}
+  In Kohomologie gibt es eine SS mit $A^{n,p}_1 \coloneqq H^n(X_p)$ und $E^{n,p}_1 = H^n(X_p, X_{p-1})$. Für die Proposition benötigt man dann $H^n(X) \nacong \ldots \nacong H^n(X_{p+1}) \nacong H^n(X_p)$ durch Inklusion für alle $n$ und $p$ groß. Dann ist $E^{n,p}_\infty \cong F^n_p / F^n_{p+1}$ mit $F^n_p \!=\! \ker(H^n(X) \!\to\! H^n(X_{p-1}))$.
 \end{bem}
 
 \subsection{Die Leray-Serre-Spektralsequenz}
@@ -221,13 +267,19 @@ Sei $\Aat$ im Folgenden eine abelsche Kategorie.
   Sei $F \to E \to B$ eine Serre-Faserung, $B$ wegzshgd und $G$ eine ab. Gruppe. Angenommen, $\pi_1(B)$ wirkt trivial auf $H_*(F; G)$. \\
   Dann gibt es die \emph{(Leray-)Serre-Spektralsequenz} mit
   \[ E^2_{p,q} = H_p(B; H_q(F; G)), \]
-  deren Eintrag $E^\infty_{p,n-p}$ der Quotient $F^p_n/F^{p-1}_n$ in einer Filtration
+  deren Eintrag $E^\infty_{p,q} = E^\infty_{p,n-p}$ der Quotient $F^p_n/F^{p-1}_n$ in einer Filtration
   $0 \subseteq F_n^0 \subseteq \ldots \subseteq F_n^n = H_n(X; G)$ von $H_n(X; G)$ ist.
 \end{thm}
 % XXX: Verallgemeinerung auf lokale Koeffizienten?
 
+\begin{konstr}
+  Für einen CW-Komplex $B$ und Faserung $p : X \to B$ mit Faser $F$ sei $X_p \coloneqq p^{-1}(B_p)$ das Urbild des $p$-Skeletts von $B$. \\
+  Da $(X, X_p)$ $p$-zshgd ist, induziert $X_p \hookrightarrow X$ einen Isomorphismus $H_n(X_p; G) \cong H_n(X; G)$ für $n < p$.
+  Man zeigt, dass für die von dieser Faserung von $X$ induzierte SS gilt: $E^2_{p,q} \cong H_p(B; H_q(F; G))$.
+\end{konstr}
+
 \begin{bem}
-  Wenn $G$ ein Vektorraum ist, so folgt $H_n(X; G) \cong \oplus_p E^\infty_{p,n-p}$.
+  Wenn $G$ ein Körper ist, so folgt $H_n(X; G) \cong \oplus_p E^\infty_{p,n-p}$.
 \end{bem}
 
 % 1.14 im Hatcher
