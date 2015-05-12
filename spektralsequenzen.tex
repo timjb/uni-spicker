@@ -121,6 +121,14 @@ Sei $\Aat$ im Folgenden eine abelsche Kategorie.
 \end{nota}
 
 \begin{defn}
+  Ein Morphismus $E \to E'$ von (homol.) Spektralsequenzen ist gegeben durch Abbildungen $f^r_{p,q} : E^r_{p,q} \to E'^r_{p,q}$ mit
+  \begin{itemize}
+    \miniitem{0.6 \linewidth}{$d'^r_{p,q} \circ f^r_{p,q} = f^r_{p-r,q+r-1} \circ d^r_{p,q}$,}
+    \miniitem{0.37 \linewidth}{$f^{r+1}_{p,q} = H_{p,q}(f^r_{p,q})$.}
+  \end{itemize}
+\end{defn}
+
+\begin{defn}
   Eine Spektralsequenz \emph{konvergiert}, falls für alle $p, q \in \Z$ ein $R \in \N$ existiert, sodass für alle $r \geq R$ die Differentiale von und nach $E^r_{p,q}$ null sind und damit $E^\infty_{p,q} \coloneqq E^R_{p,q} \cong E^{R+1}_{p,q} \cong E^{R+2}_{p,q} \ldots$ \\
   Der \emph{Grenzwert} der SS ist die Unendlich-Seite $E^\infty \coloneqq \{ E^\infty_{p,q} \}_{p,q}$.
 \end{defn}
@@ -186,7 +194,7 @@ Sei $\Aat$ im Folgenden eine abelsche Kategorie.
 \end{bem}
 
 \begin{bem}
-  Sei $\ldots \subseteq X_p \subseteq X_{p+1} \subseteq \ldots$ eine aufsteigende Filtrierung eines topologischen Raumes $X$. Man kann dann die Homologiegruppen schön übersichtlich in ein Raster schreiben:
+  Sei $\ldots \subseteq X_p \subseteq X_{p+1} \subseteq \ldots$ eine aufsteigende Filtrierung eines topologischen Raumes $X$. Man kann dann die Homologiegruppen (mit Koeffizienten implizit) übersichtlich in ein Raster schreiben:
   \begin{tikzcd}[row sep=0.2cm, column sep=0.25cm, font=\scriptsize]
     \arrow[d] && \arrow[d] \\
     \Emph{H_{n\!+\!1}(X_p)} \arrow[r] \arrow[d, Emph] & H_{n\!+\!1}(X_p, X_{p\!-\!1}) \arrow[r] & H_n(X_{p\!-\!1}) \arrow[r] \arrow[d] & H_n(X_{p\!-\!1}, X_{p\!-\!2}) \arrow[r] & \, \\
@@ -228,7 +236,8 @@ Sei $\Aat$ im Folgenden eine abelsche Kategorie.
   Die erste Bedingung ist äquivalent dazu, dass in jeder $E^1$-Spalte nur endlich viele Objekte ungleich Null sind. \\
   Angenommen, die Filtrierung des Raums $X$ erfüllt $X_p = \emptyset$ für $p < 0$.
   Im Homologiesetting ist die Bed. erfüllt, wenn es für alle $n$ ein $p$ gibt, sodass $H_n(X_p) \nacong H_n(X_{p+1}) \nacong \ldots \nacong H_n(X)$ induziert durch Inklusion.
-  Dann gilt $F^p_n = \im(H_n(X_p) \to H_n(X))$ und $A^1_{n,\infty} = H_n(X)$. \\
+  Dann gilt $A^1_{n,\infty} \!=\! H_n(X; G)$ und $F^p_n \!=\! \im(H_n(X_p; G) \to H_n(X; G))$. \\
+  Man sagt, die SS konvergiere gegen $H_*(X; G)$.
 \end{bem}
 
 \begin{bem}
@@ -282,6 +291,23 @@ Sei $\Aat$ im Folgenden eine abelsche Kategorie.
   Wenn $G$ ein Körper ist, so folgt $H_n(X; G) \cong \oplus_p E^\infty_{p,n-p}$.
 \end{bem}
 
+\begin{bem}
+  Sei eine Abbildung $(f, \tilde{f})$ von Faserungen wie folgt gegeben:
+  \vspace{-4pt}
+  \begin{centertikzcd}[row sep=0.35cm, column sep=0.6cm]
+    F \arrow[r] \arrow[d] & X \arrow[r, "p"] \arrow[d, "\tilde{f}"] & B \arrow[d, "f"] \\
+    F' \arrow[r] & X' \arrow[r, "p'"] & B'
+  \end{centertikzcd}
+  \vspace{-4pt}
+  Dann gibt es ind. Morphismus $f_* : E \to E'$ der zugeh. Serre-SS, der für $r \to \infty$ gegen die Abb. $\tilde{f}_* : H_*(X; G) \to H_*(X'; G)$ konvergiert, welche mit den Filtrierungen $F^p_n$ und $F'^p_n$ verträglich ist. Außerdem entspricht der Morphismus bei $E^2_{p,q}$ der von $B \to B'$ und $F \to F'$ induzierten Abbildung $H_p(B; H_q(F, G)) \to H_p(B'; H_q(F', G))$. \\
+  Die Zuordnung $(f, \tilde{f}) \mapsto f_*$ ist funktoriell.
+\end{bem}
+
+% Ausgelassen: Bei Faserbündeln: "pathspace construction"
+% Ausgelassen: Relative Version
+
+% TODO: Lokale Koeffizienten
+
 % 1.14 im Hatcher
 \begin{thm}
   Sei $F \to E \to B$ eine Serre-Faserung, $B$ wegzshgd und $G$ eine ab. Gruppe. Angenommen, $\pi_1(B)$ wirkt trivial auf $H^*(F; G)$.
@@ -292,6 +318,9 @@ Sei $\Aat$ im Folgenden eine abelsche Kategorie.
 \end{thm}
 
 % TODO: Multiplikative Struktur auf der Serre-Spektralsequenz
+% TODO: Transgression
+% TODO: "Spectral Sequence Comparison Theorem" und topol. Spezialfall
+% TODO: Transgression
 
 % TODO: Leray Spectral Sequence
 % TODO: May Spectral Sequence
