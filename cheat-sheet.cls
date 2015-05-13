@@ -73,6 +73,7 @@
 \newtheorem*{axiom}{Axiom}
 \newtheorem*{konv}{Konvention}
 \newtheorem*{motto}{Motto}
+\newtheorem*{fun}{Fun Fact}
 
 \theoremstyle{remark}
 \newtheorem*{bem}{Bem}

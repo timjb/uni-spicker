@@ -21,6 +21,7 @@
 }
 
 \input{include/cats} % Kategorientheorie-Makros
+\input{include/sheaves} % Garbentheorie-Makros (für Beispiele)
 
 \newcommand{\nspace}[1]{\foreach \i in {1,...,#1}{ \! }} % Negativer Abstand
 \newcommand{\Ord}{\mathcal{O}_n} % Menge der Ordinalzahlen
@@ -877,21 +878,40 @@
 \end{idee}
 \fi
 
-\begin{bsp}
+% TODO: Was sind die interessantesten Beispiele?
+\begin{bspe}
   \begin{itemize}
     \item Jede endliche Menge ist $\aleph_0$-kompakt in $\SetC$.
     \item Jeder endlich-dim. VR ist $\aleph_0$-kompakt in $\Vect(\R)$.
     \item Jeder endlich-präsentierte Modul ist $\aleph_0$-kompakt in $\Mod(R)$.
     \item Unendliche Mengen sind nicht $\aleph_0$-kompakt in $\SetC$.
     \item Jeder nicht diskrete topologische Raum ist nicht $\aleph_0$-kompakt.
+    %\item $\SetC$ ist lokal $\aleph_0$-präsentierbar mit $S = \{ \heart \}$.
+    \item $\Mod(R)$ ist lokal $\aleph_0$-präsentierbar mit $S = \Set{R^n/\im(A)}{n \geq 0, A \in R^{n \times m}, m \geq 0}$
   \end{itemize}
-\end{bsp}
+\end{bspe}
 
 \begin{defn}
   Eine \emph{lokal $\kappa$-präsentierbare Kategorie} ist eine lokal kleine und kovollständige Kategorie, sodass eine Menge $S \subseteq \Ob(\Cat)$ von $\kappa$-kompakten Objekten existiert, sodass jedes Objekt aus $\Cat$ kleiner Kolimes von Objekten aus $S$ ist.
 \end{defn}
 
 % Ausgelassen: Intuition
+
+\begin{defn}
+  Eine Kategorie heißt genau dann \emph{lokal präsentierbar}, wenn sie lokal $\kappa$-präasentierbar für eine reguläre Kardinalzahl $\kappa$ ist.
+\end{defn}
+
+\begin{bspe}
+  \begin{itemize}
+    \item $\sSet$ ist lokal präsentierbar.
+    \item Sei $\Cat$ klein. Dann ist $\PShSet(\Cat) \!=\! [\Cat^\op, \SetC]$ lokal präsentierbar.
+    \item $\FinSetC$ ist nicht lokal präsentierbar (weil nicht kovollständig)
+  \end{itemize}
+\end{bspe}
+
+\begin{fun}
+  Sei $\Cat$ lokal präsentierbar. Wenn auch $\Cat^\op$ lokal präsen- tierbar ist, dann ist $\Cat$ die zu einer Quasiordnung gehörige Kategorie!
+\end{fun}
 
 \pagebreak
 
