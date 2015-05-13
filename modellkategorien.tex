@@ -28,7 +28,15 @@
 \newcommand{\xtwoheadrightarrow}[1]{\xrightarrow{#1}\nspace{8}\to\,\,} % Pfeil mit zwei Spitzen (HACK!!!)
 \DeclareMathOperator{\Quot}{Quot} % Quotientenkörper
 \newcommand{\Cyl}[1]{#1 \!\times\! I} % Zylinderobjekt
+\newcommand{\PO}[1]{{#1}^I} % Pfadobjekt
 \newcommand{\lhhe}{\boxslash} % Linkshochhebungseigenschaftsdiagramm-im-Miniaturformat-Symbol
+\newcommand{\Weak}{\mathcal{W}} % weak equivalences
+\newcommand{\Cof}{\mathcal{C}} % cofibrations
+\newcommand{\Fib}{\mathcal{F}} % fibrations
+\newcommand{\ModC}{\mathcal{M}} % model category
+\newcommand{\gut}{\text{gut}}
+\newcommand{\sg}{\text{sehr gut}}
+\DeclareMathOperator{\Ho}{Ho} % Homotopiekategorie
 
 \newenvironment{centertikzcd}
   {\begin{center}\begin{tikzcd}}
@@ -210,7 +218,7 @@
 \subsection{Kan-Erweiterungen}
 
 \begin{defn}
-  Sei $\Aat \xleftarrow{T} \MatC \xrightarrow{K} \Cat$ ein Ausschnitt einer 2-Kategorie. Eine \emph{Rechts-Kan-Erw.} (RKE) $(R, \epsilon)$ von $T$ längs $K$ besteht aus
+  Sei $\Aat \xleftarrow{T} \ModC \xrightarrow{K} \Cat$ ein Ausschnitt einer 2-Kategorie. Eine \emph{Rechts-Kan-Erw.} (RKE) $(R, \epsilon)$ von $T$ längs $K$ besteht aus
   \begin{itemize}
     \miniitem{0.45 \linewidth}{einem Morph. $R : \Cat \to \Aat$}
     \miniitem{0.48 \linewidth}{einem 2-Morph. $\epsilon : R \circ K \Rightarrow T$,}
@@ -239,18 +247,18 @@
 
 \begin{bspe}
   \begin{itemize}
-    \item Die RKE eines bel. Morphismus $T : \MatC \to \Aat$ längs $\Id_\MatC$ existiert stets und ist gegeben durch $(T, T \circ \Id_M \Rightarrow T)$.
+    \item Die RKE eines bel. Morphismus $T : \ModC \to \Aat$ längs $\Id_\ModC$ existiert stets und ist gegeben durch $(T, T \circ \Id_M \Rightarrow T)$.
     \item In der 2-Kategorie der Ringe existieren alle RKE:
-    \[ \Ran_K(T) = (\Hom_M(K, T), \enspace ev : \Hom_\MatC(K, T) \otimes_C K \Rightarrow T). \]
+    \[ \Ran_K(T) = (\Hom_M(K, T), \enspace ev : \Hom_\ModC(K, T) \otimes_C K \Rightarrow T). \]
   \end{itemize}
 \end{bspe}
 
 \begin{bsp}
-  Sei $K : \MatC \to \mathbf{1}, \enspace * \mapsto 1$ und $T : \MatC \to \Aat$ irgendein Funktor. Dann ist eine RKE von $T$ längs $K$ dasselbe wie ein Limes von $T$.
+  Sei $K : \ModC \to \mathbf{1}, \enspace * \mapsto 1$ und $T : \ModC \to \Aat$ irgendein Funktor. Dann ist eine RKE von $T$ längs $K$ dasselbe wie ein Limes von $T$.
 \end{bsp}
 
 \begin{thm}
-  Seien $K : \MatC \to \Cat$ und $T : \MatC \to \Aat$ Funktoren.
+  Seien $K : \ModC \to \Cat$ und $T : \ModC \to \Aat$ Funktoren.
   Existiere für alle $c \in \Ob(\Cat)$ der Limes
   $R(c) \coloneqq \Lim ((f : c \to Km) \mapsto Tm)$. \\
   Dabei ist die Indexkategorie des Limes die Kommakat. $\Delta(c) \downarrow K$. \\
@@ -258,7 +266,7 @@
 \end{thm}
 
 \begin{bem}
-  Ist $\MatC$ klein und $\Cat$ lokal klein und ist $\Aat$ vollständig, so sind die Voraussetzungen des Theorems für jeden Funktor $K : \MatC \to \Cat$, $T : \MatC \to \Aat$ erfüllt. Insbesondere ist dann jede solche RKE von der Form im Theorem. Solche RKE heißen auch \emph{punktweise RKE}.
+  Ist $\ModC$ klein und $\Cat$ lokal klein und ist $\Aat$ vollständig, so sind die Voraussetzungen des Theorems für jeden Funktor $K : \ModC \to \Cat$, $T : \ModC \to \Aat$ erfüllt. Insbesondere ist dann jede solche RKE von der Form im Theorem. Solche RKE heißen auch \emph{punktweise RKE}.
 \end{bem}
 
 \begin{lem}
@@ -266,10 +274,10 @@
 \end{lem}
 
 \begin{thm}
-  Sei $K \!:\! M \to C$ ein Funktor. Betrachte $K^* \!:\! [\Cat, \Aat] \to [\MatC, \Aat]$.
+  Sei $K \!:\! M \to C$ ein Funktor. Betrachte $K^* \!:\! [\Cat, \Aat] \to [\ModC, \Aat]$.
   \begin{itemize}
-    \item Wenn ein Funktor $\Ran_K : [\MatC,\Aat] \to [\Cat, \Aat]$ mit $K^* \ladj \Ran_K$ ex., so ist $\Ran_K(T)$ für alle $T : \MatC \!\to\! \Aat$ eine RKE von $T$ längs $K$.
-    \item Existiere für alle $T : \MatC \to \Aat$ eine RKE $\Ran_K(T)$. Dann kann man die Zuordnung $T \mapsto \Ran_K(T)$ zu einem Rechtsadjungierten von $K^*$ ausdehnen.
+    \item Wenn ein Funktor $\Ran_K : [\ModC,\Aat] \to [\Cat, \Aat]$ mit $K^* \ladj \Ran_K$ ex., so ist $\Ran_K(T)$ für alle $T : \ModC \!\to\! \Aat$ eine RKE von $T$ längs $K$.
+    \item Existiere für alle $T : \ModC \to \Aat$ eine RKE $\Ran_K(T)$. Dann kann man die Zuordnung $T \mapsto \Ran_K(T)$ zu einem Rechtsadjungierten von $K^*$ ausdehnen.
   \end{itemize}
 \end{thm}
 
@@ -526,70 +534,70 @@
 \end{defn}
 
 \begin{defn}
-  $\Wat \subseteq \Cat$ wie eben heißt \emph{Unterkat. schwacher Äquivalenzen}, falls $\Wat$ die 2-aus-3-Eig. erfüllt und abgeschl. unter Retrakten ist.
+  $\Weak \subseteq \Cat$ wie eben heißt \emph{Unterkat. schwacher Äquivalenzen}, falls $\Weak$ die 2-aus-3-Eig. erfüllt und abgeschl. unter Retrakten ist.
 \end{defn}
 
 \begin{bsp}
-  Sei $F : \Cat \to \Dat$ ein Funktor. Dann ist $\Wat \coloneqq F^{-1}(\{ \, \text{Isos in $\Dat$} \, \})$ eine Unterkategorie schwacher Äquivalenzen.
+  Sei $F : \Cat \to \Dat$ ein Funktor. Dann ist $\Weak \coloneqq F^{-1}(\{ \, \text{Isos in $\Dat$} \, \})$ eine Unterkategorie schwacher Äquivalenzen.
 \end{bsp}
 
 \begin{defn}
-  Ein Tripel $(\Wat, \Cat, \Fat)$ von Unterkategorien einer Kategorie $\MatC$ heißt \emph{Modellstruktur} auf $\MatC$, falls sowohl $(\Cat, \Fat \cap \Wat)$ als auch $(\Cat \cap \Wat, \Fat)$ schwache Faktorisierungssysteme sind und $\Wat$ die 2-aus-3-Eigenschaft erfüllt.
+  Ein Tripel $(\Weak, \Cof, \Fib)$ von Unterkategorien einer Kategorie $\ModC$ heißt \emph{Modellstruktur} auf $\ModC$, falls sowohl $(\Cof, \Fib \cap \Weak)$ als auch $(\Cof \cap \Weak, \Fib)$ schwache Faktorisierungssysteme sind und $\Weak$ die 2-aus-3-Eigenschaft erfüllt.
 \end{defn}
 
 \begin{defn}
-  Eine bivollständige Kategorie $\MatC$ zusammen mit einer Modellstruktur $(\Wat, \Cat, \Fat)$ heißt eine \emph{Modellkategorie}.
+  Eine bivollständige Kategorie $\ModC$ zusammen mit einer Modellstruktur $(\Weak, \Cof, \Fib)$ heißt eine \emph{Modellkategorie}.
 \end{defn}
 
 \begin{sprech}
   Man verwendet folgende Bezeichnungen und Pfeile:
   \begin{center}
     \begin{tabular}{r l l}
-      $\Wat$ & $\xrightarrow{{\sim}}$ & \emph{schwache Äquivalenz} \\
-      $\Cat$ & $\xhookrightarrow{\phantom{{\sim}}}$ & \emph{Kofaserung} \\
-      $\Cat \cap \Wat$ & $\xhookrightarrow{{\sim}}$ & \emph{azyklische Kofaserung} \\
-      $\Fat$ & $\xtwoheadrightarrow{\phantom{{\sim}}}$ & \emph{Faserung} \\
-      $\Fat \cap \Wat$ & $\xtwoheadrightarrow{{\sim}}$ & \emph{azyklische Faserung}
+      $\Weak$ & $\xrightarrow{{\sim}}$ & \emph{schwache Äquivalenz} \\
+      $\Cof$ & $\xhookrightarrow{\phantom{{\sim}}}$ & \emph{Kofaserung} \\
+      $\Cof \cap \Weak$ & $\xhookrightarrow{{\sim}}$ & \emph{azyklische Kofaserung} \\
+      $\Fib$ & $\xtwoheadrightarrow{\phantom{{\sim}}}$ & \emph{Faserung} \\
+      $\Fib \cap \Weak$ & $\xtwoheadrightarrow{{\sim}}$ & \emph{azyklische Faserung}
     \end{tabular}
   \end{center}
 \end{sprech}
 
 \begin{bem}
-  Ist $(\Wat, \Cat, \Fat)$ eine Modellstruktur auf $\MatC$, so ist $(\Wat^\op, \Fat^\op, \Cat^\op)$ eine Modellstruktur auf $\MatC^\op$.
+  Ist $(\Weak, \Cof, \Fib)$ eine Modellstruktur auf $\ModC$, so ist $(\Weak^\op, \Fib^\op, \Cof^\op)$ eine Modellstruktur auf $\ModC^\op$.
 \end{bem}
 
 \begin{bem}
-  Wegen $\Cat = \prescript{\lhhe}{} (\Fat \cap \Wat)$ bzw. $\Fat = (\Cat \cap \Wat)^\lhhe$ ist das Datum $(\Wat, \Cat, \Fat)$ überbestimmt.
+  Wegen $\Cof = \prescript{\lhhe}{} (\Fib \cap \Weak)$ bzw. $\Fib = (\Cof \cap \Weak)^\lhhe$ ist das Datum $(\Weak, \Cof, \Fib)$ überbestimmt.
 \end{bem}
 
 \begin{bsp}
-  Sei $\MatC$ bivollständig. Sei $\Wat \coloneqq \Cat \coloneqq \{ \, \text{Isos in $\MatC$} \, \}$. \\
-  Dann wird $\MatC$ mit $\Fat \coloneqq \MatC$ eine Modellkategorie.
+  Sei $\ModC$ bivollständig. Sei $\Weak \coloneqq \Cof \coloneqq \{ \, \text{Isos in $\ModC$} \, \}$. \\
+  Dann wird $\ModC$ mit $\Fib \coloneqq \ModC$ eine Modellkategorie.
 \end{bsp}
 
 \begin{prop}
-  In einer Modellkategorie sind $\Cat$ und $\Cat \cap \Wat$ links-saturiert.
+  In einer Modellkategorie sind $\Cof$ und $\Cof \cap \Weak$ links-saturiert.
 \end{prop}
 
 \begin{lem}
-  $\Wat$ enthält alle Isomorphismen und ist unter Retrakten abgeschlossen, bildet also eine Unterkat. schwacher Äquivalenzen.
+  $\Weak$ enthält alle Isomorphismen und ist unter Retrakten abgeschlossen, bildet also eine Unterkat. schwacher Äquivalenzen.
 \end{lem}
 
 \begin{nota}
-  Das initiale Objekt von $\MatC$ wird mit $\emptyset$, das terminale Objekt mit $*$ bezeichnet.
-  %Mit $\emptyset$ wird das initiale Objekt und mit $*$ das terminale Objekt von $\MatC$ bezeichnet.
+  Das initiale Objekt von $\ModC$ wird mit $\emptyset$, das terminale Objekt mit $*$ bezeichnet.
+  %Mit $\emptyset$ wird das initiale Objekt und mit $*$ das terminale Objekt von $\ModC$ bezeichnet.
 \end{nota}
 
 \begin{defn}
   \begin{itemize}
-    \item Ein Objekt $X \in \Ob(\MatC)$ heißt \emph{kofasernd}, falls $\emptyset \to X$ eine Kofaserung ist.
+    \item Ein Objekt $X \in \Ob(\ModC)$ heißt \emph{kofasernd}, falls $\emptyset \to X$ eine Kofaserung ist.
     Eine azyklische Faserung $q : QX \xtwoheadrightarrow{{\sim}} X$ mit $QX$ kofasernd heißt \emph{kofasernder Ersatz} (oder Approx.) von $X$. \\
-    \item Dual heißt $X \in \Ob(\MatC)$ \emph{fasernd}, falls $X$ in $\MatC^\op$ kofasernd ist und $X \xhookrightarrow{{\sim}} RX$ mit $RX$ fasernd heißt \emph{fasernder Ersatz} von $X$.
+    \item Dual heißt $X \in \Ob(\ModC)$ \emph{fasernd}, falls $X$ in $\ModC^\op$ kofasernd ist und $X \xhookrightarrow{{\sim}} RX$ mit $RX$ fasernd heißt \emph{fasernder Ersatz} von $X$.
   \end{itemize}
 \end{defn}
 
 \begin{bsp}
-  Sei $X \in \Ob(\MatC)$ beliebig. Dann faktorisiere $\emptyset \to X$ wie folgt:
+  Sei $X \in \Ob(\ModC)$ beliebig. Dann faktorisiere $\emptyset \to X$ wie folgt:
   \begin{centertikzcd}[row sep=0.2cm]
     \emptyset \arrow[rr] \arrow[rd, hook] && X \\
     & QX \arrow[ru, twoheadrightarrow, swap, "\sim"]
@@ -607,19 +615,19 @@
 \end{defn}
 
 \begin{prop}
-  Für alle $X \in \Ob(\MatC)$ sind $RQX$ und $QRX$ schwach äquivalent und beide bifasernd.
+  Für alle $X \in \Ob(\ModC)$ sind $RQX$ und $QRX$ schwach äquivalent und beide bifasernd.
 \end{prop}
 
 \begin{lem}[Ken Brown]
-  Sei $F : \MatC \to \NatC$ ein Funktor, $\MatC$ eine Modell- kategorie, $\NatC$ besitze eine Unterkat. $\Wat'$ schwacher Äquivalenzen. \\
-  Wenn $F$ azyklische Kofaserungen zwischen kofasernden Objekten nach $\Wat'$ abbildet, so bildet $F$ alle schwachen Äquivalenzen zwischen kofasernden Objekten nach $\Wat'$ ab.
+  Sei $F : \ModC \to \NatC$ ein Funktor, $\ModC$ eine Modell- kategorie, $\NatC$ besitze eine Unterkat. $\Weak'$ schwacher Äquivalenzen. \\
+  Wenn $F$ azyklische Kofaserungen zwischen kofasernden Objekten nach $\Weak'$ abbildet, so bildet $F$ alle schwachen Äquivalenzen zwischen kofasernden Objekten nach $\Weak'$ ab.
 \end{lem}
 
 % Homotopien in Modellkategorien
 
 \begin{defn}
-  Sei $\MatC$ eine Modellkategorie.
-  Ein \emph{Zylinderobjekt} $\Cyl{X}$ zu einem $X \!\in\! \Ob(\MatC)$ ist ein Obj. zusammen mit Morphismen wie folgt:
+  Sei $\ModC$ eine Modellkategorie.
+  Ein \emph{Zylinderobjekt} $\Cyl{X}$ zu einem $X \!\in\! \Ob(\ModC)$ ist ein Obj. zusammen mit Morphismen wie folgt:
   \begin{centertikzcd}[row sep=0.2cm]
     X \arrow{rd}{i_0}[swap]{{\sim}} \arrow[rrd, bend left, "\id"] \\
     & \Cyl{X} \arrow{r}{p}[swap]{{\sim}} & X \\
@@ -640,15 +648,250 @@
 \end{bem}
 
 \begin{defn}
-  Zwei Morphismen $f, g : X \to Y$ in $\MatC$ heißen \emph{links-homotop} (notiert $f \sim^l g$), falls ein Zylinder $\Cyl{X}$ und ein Diagramm der Form
+  Zwei Morphismen $f, g : X \to Y$ in $\ModC$ heißen \emph{links-homotop} (notiert $f \sim^l g$), falls ein Zylinder $\Cyl{X}$ und ein Diagramm der Form
   \begin{centertikzcd}[row sep=0.2cm]
     X \arrow{rd}[swap]{\sim} \arrow[rrd, bend left, "f"] \\
     & \Cyl{X} \arrow[r, dashed, "h"] & Y \\
     X \arrow{ru}{\sim} \arrow[rru, bend right, swap, "g"]
   \end{centertikzcd}
-  existiert. Wir definieren $\pi^l(X, Y) \coloneqq \Hom_\MatC(X, Y) / \langle {\sim^l} \rangle$, wobei $\langle {\sim^l} \rangle$ die von der symmetrischen, refl. Relation ${\sim^l}$ erzeugte Äq'relation ist. \\
+  existiert. Wir definieren $\pi^l(X, Y) \coloneqq \Hom_\ModC(X, Y) / \langle {\sim^l} \rangle$, wobei $\langle {\sim^l} \rangle$ die von der symmetrischen, refl. Relation ${\sim^l}$ erzeugte Äq'relation ist. \\
   Die Homotopie heißt (sehr) gut, wenn der Zylinder $\Cyl{X}$ es ist.
 \end{defn}
+
+\begin{beob}
+  Sei $X \amalg X \xrightarrow{i} C \xrightarrow{p \enspace ~} X$ irgendein Zylinderobjekt.
+  Faktorisiere $i = q \circ i'$ in Kofaserung und azyklische Faserung. Dann ist auch
+  \[ X \amalg X \xhookrightarrow{i'} X' \xrightarrow{pq \enspace ~} X \]
+  ein Zylinderobjekt, sogar ein gutes.
+  Ebenso kann man $p$ faktorisieren und ein ein anderes Zylinderobjekt erhalten.
+\end{beob}
+
+\begin{lem}
+  Sei $X$ kofasernd, $X \amalg X \to \Cyl{X} \to X$ ein gutes Zylinderobj. \\
+  Dann sind $i_{0,1} : X \to X \amalg X \to \Cyl{X}$ azyklische Kofaserungen.
+\end{lem}
+
+\begin{lem}
+  Sei $h : f \simeq^l g$. Dann: $f \in \Weak \iff g \in \Weak$.
+\end{lem}
+
+\begin{defn}
+  Ein \emph{Pfadobjekt} $\PO{X}$ ist eine Faktorisierung
+  \[ X \xrightarrow[\sim]{i} \PO{X} \xrightarrow{p} X \times X \]
+  des Diagonalmorph. $\Delta : X \to X \times X$.
+  Das Pfadobjekt $\PO{X}$ heißt gut, wenn $p$ eine Faserung und sehr gut, wenn zus. $i$ eine Kofaserung ist.
+\end{defn}
+
+\begin{defn}
+  Eine Rechtshomotopie $h : f \simeq^r g$ ist ein Diagramm der Form
+  \begin{centertikzcd}[row sep=0.2cm]
+    && Y \\
+    X \arrow[r, "h"] \arrow[rru, bend left, "f"] \arrow[rrd, bend right, "g"] & Y^I \arrow[ru, "p_0"] \arrow[rd, "p_1"] \\
+    && Y
+  \end{centertikzcd}
+\end{defn}
+
+\begin{bem}
+  Ein Pfadobjekt in $\ModC$ ist dasselbe wie ein Zylinderobj. in $\ModC^\op$
+\end{bem}
+
+% Ausgelassen: Dualisierte Versionen der techn. Lemmate über Zylinderobjekte
+
+\begin{lem}
+  Seien $f, g : X \to Y$ und $e : W \to X$, $d : Y \to Z$.
+  \begin{itemize}
+    \item $\exists \, h : f \simeq^l g \iff \exists \, h' : f \simeq^{l,\gut} g$.
+    \item Sei $Y$ fasernd. Dann: $\exists \, h : f \simeq^{l,\gut} g \iff \exists \, h' : f \simeq^{l,\sg} g$
+    \item $\exists \, h : f \simeq^l g \implies \exists \, h' : d \circ f \simeq^l d \circ g$
+    \item $\exists \, h : f \simeq^{l,\sg} g \implies \exists \, h' : f \circ e \simeq^{l,\sg} g \circ e$
+    \item Sei $X$ kofasernd. Dann ist $\simeq^l$ eine Äq'relation auf $\Hom_\ModC(X, Y)$.
+  \end{itemize}
+\end{lem}
+
+\begin{kor}
+  Sei $Y$ fasernd. Dann induziert Komposition eine Abbildung
+  \[
+    \pi^l(X, Y) \times \pi^l(W, X) \to \pi^l(W, Y), \quad
+    ([g], [f]) \mapsto [g \circ f].
+  \]
+\end{kor}
+
+\begin{prop}
+  Seien $f, g : X \to Y$.
+  \begin{itemize}
+    \item Sei $X$ kofasernd. Dann: $f \simeq^l g \implies f \simeq^r g$
+    \item Sei $Y$ fasernd.\phantom{ko} Dann: $f \simeq^l g \impliedby f \simeq^r g$
+  \end{itemize}
+\end{prop}
+
+\begin{nota}
+  Wenn $X$ kofasernd und $Y$ fasernd ist, schreibt man
+  \[ \pi(X, Y) \coloneqq \pi^l(X, Y) = \pi^r(X, Y). \]
+\end{nota}
+
+\begin{thm}
+  Sei $X$ kofasernd. Sei $p : Z \xtwoheadrightarrow{\sim} Y$ eine azyklische Faserung. \\
+  Dann ist $p_* : \pi^l(X, Z) \to \pi^l(X, Y), \, [f] \mapsto [p \circ f]$ eine Bijektion.
+\end{thm}
+
+\begin{thm}[Whitehead]
+  Sei $f : X \to Y$ ein Morphismus zwischen bifasernden Objekten. Dann gilt
+  \[ f \in \Weak \iff \text{$f$ ist eine Homotopieäquivalenz.} \]
+\end{thm}
+
+\begin{lem}
+  Sei $f : X \to Y$. Seien $RX$ und $RY$ fixierte fasernde Approx. an $X$ bzw. $Y$.
+  Dann hängt $Rf : RX \to RY$ bis auf Rechts- und auch Linkshomotopie nur von der R-/Linkshomotopieklasse von $r \circ f$ ab.
+\end{lem}
+
+\begin{acht}
+  I.\,A. ist $f \mapsto R(f)$ nicht funktoriell.
+\end{acht}
+
+\subsection{Die Homotopiekategorie einer Modellkategorie}
+
+% Ausgelassen: Erinnerung an die Lokalisierung von Ringen
+
+% Aufgabenstellung: Sei $\ModC$ eine Modellkategorie. Gibt es eine Kategorie $\Ho \ModC$ zusammen mit einem Funktor $\gamma : \ModC \to \Ho \ModC$, sodass gilt:
+% 1. $\gamma$ schickt schwache Äquivalenzen auf Isos
+% 2. $\gamma$ ist initial unter dieser Voraussetzung
+
+\begin{defn}
+  Sei $\Cat$ ein Kategorie, $S \subset \Mor(\Cat)$ eine Klasse von Morphismen. Die \emph{Lokalisierung} $\Cat[S^-1]$ von $\Cat$ ist eine Kategorie, die folgende 2-universelle Eigenschaft erfüllt:
+  \begin{itemize}
+    \item $\gamma : \Cat \to \Cat[S^{-1}]$ schickt Morphismen aus $S$ aus Isos
+    \item Für jede Kategorie $\Dat$ ist $\gamma^* : [\Cat[S^{-1}], \Dat] \to [\Cat, \Dat]_{S \mapsto \text{Isos}}$ eine Kategorienäquivalenz.
+  \end{itemize}
+\end{defn}
+
+\begin{bem}
+  Die \href{http://timbaumann.info/uni-spicker/homoalg.pdf}{Homologische-Algebra-Zusammenfassung} behandelt Lokalisierung von Kategorien.
+\end{bem}
+
+\begin{defn}
+  Die \emph{Homotopiekategorie} $\Ho \ModC$ einer Modellkategorie $\ModC$ ist die Lokalisierung von $\ModC$ an der Klasse der schwachen Äquivalenzen.
+\end{defn}
+
+\begin{konstr}
+  Ganz explizit:
+  \begin{align*}
+    \Ob(\Ho \ModC) & \coloneqq \Ob(\ModC) \\
+    \Hom_{\Ho \ModC}(X, Y) & \coloneqq \pi(RQX, RQY)
+  \end{align*}
+  Nach einem früheren Lemma ist die Komposition $([f], [g]) \mapsto [f \circ g]$ wohldefiniert.
+  Der Funktor $\gamma : \ModC \to \Ho \ModC$ ist gegeben durch
+  \[
+    X \mapsto X, \quad
+    f \mapsto [RQf].
+  \]
+\end{konstr}
+
+\begin{lem}
+  Sei $f : X \to Y$ in $\ModC$. Dann gilt $f \!\in\! \Weak \Leftrightarrow Qf \!\in\! \Weak \Leftrightarrow RQf \!\in\! \Weak$.
+\end{lem}
+
+\begin{lem}
+  $\gamma$ wie definiert ist ein Funktor.
+\end{lem}
+
+% Probleme der Lokalisierung:
+% 1. Das ist keine Kategorie im Marc'schen Sinne (da Hom-Mengen keine Mengen)
+% 2. Man hat keine explizite Beschreibung für die Morphismen in der lokalisierten Kategorie
+
+\begin{lem}
+  $f \in \Weak \iff \gamma(f)$ ist ein Iso.
+\end{lem}
+
+\begin{bem}
+  Sei $X$ kofasernd und $Y$ fasernd. Dann ist die Abbildung
+  \[
+    \pi(X, Y) \to \Hom_{\Ho \ModC}(X, Y), \quad
+    [f] \mapsto [f]
+  \]
+  eine Bijektion.
+\end{bem}
+
+\begin{lem}
+  Jeder Morphismus in $\Ho \ModC$ ist Komposition von Morphismen der Form $\gamma(f)$, $f \in \Mor(\ModC)$ und der Form $\gamma(f)^{-1}$, $f \in \Weak$.
+\end{lem}
+
+\begin{lem}
+  Ist $F : \ModC \to \Cat$ ein Funktor, der schwache Äq. auf Isos schickt, dann identifiziert $F$ links- bzw. rechtshomotope Morphismen.
+\end{lem}
+
+\begin{lem}
+  Sei $\ModC_c \subset \ModC$ die volle Unterkategorie der kofasernden Objekte und $F : \ModC_c \to \Cat$ ein Funktor, der schwache Äquivalenzen auf Isos schickt. Dann identifiziert $F$ rechtshomotope Morphismen.
+\end{lem}
+
+\begin{thm}
+  Ein Morphismus $p : Z \to Y$ zw. fasernden Objekten ist genau dann eine schwache Äquivalenz, wenn $p_* : \pi(X, Z) \to \pi(X, Y)$ bijektiv ist für alle kofasernden Objekte $X \in \ModC$.
+\end{thm}
+
+\subsection{Lokal präsentierbare Kategorien}
+
+% soll andeuten: Die Objekte einer lokal präsentierbareen Kategorien sind präsentierbar, nicht die Kategorie als solche
+
+\begin{motto}
+  Eine lokal präsentierare Kategorie ist eine große Kategorie, welche erzeugt wird von kleinen Objekten unter kleinen Kolimiten.
+\end{motto}
+
+\begin{defn}
+  Eine $\infty$-große Kardinalzahl $\kappa$ heißt genau dann \emph{regulär}, wenn die Vereinigung von weniger als $\kappa$ vielen Mengen, die alle weniger als $\kappa$-viele Elem. enthalten, selbst weniger als $\kappa$-viele Elemente enthält.
+\end{defn}
+
+\begin{bem}
+  Zu jeder Kardinalzahl $\lambda$ existiert ein reguläres $\kappa$ mit $\lambda \leq \kappa$.
+\end{bem}
+
+\begin{defn}
+  Sei $\kappa$ eine Kardinalzahl. Eine Kategorie heißt $\kappa$-klein, falls sie nur $\kappa$-viele Morphismen besitzt.
+\end{defn}
+
+\begin{bem}
+  Sei $\kappa$ regulär. Dann ist eine Kat. bereits dann $\kappa$-klein, falls sie nur $\kappa$-viele Objekte besitzt und alle Hom-Mengen $\kappa$-klein sind.
+\end{bem}
+
+\begin{defn}
+  Eine Kategorie heißt genau dann $\kappa$-filtriert, wobei $\kappa$ eine reguläre Kardinalzahl ist, wenn jedes $\kappa$-kleine Diagramm in der Kategorie einen Kokegel besitzt.
+\end{defn}
+
+\begin{bem}
+  Sei $\lambda \geq \kappa$. Dann ist jede $\lambda$-filtrierte Kategorie auch $\kappa$-filtriert.
+\end{bem}
+
+\begin{defn}
+  Ein Objekt $X$ einer Kat. $\Cat$ heißt genau dann \emph{$\kappa$-kompakt}, wenn $\Hom(X, \blank) : \Cat \to \SetC$ mit $\kappa$-filtrierten Kolimiten vertauscht:
+  \[
+    \Colim_i \Hom_\Cat(X, T_i) \xrightarrow{\cong} \Hom_\Cat(X, \Colim_i T_i)
+  \]
+  für alle $\kappa$-filtrierte Diagramme $T_i$.
+\end{defn}
+
+\begin{defn}
+  Ein Objekt heißt genau dann \emph{klein}, wenn es $\kappa$-kompakt ist für irgendeine reguläre Kardinalzahl $\kappa$.
+\end{defn}
+
+\iffalse
+\begin{idee}
+  Sei $X$ eine endliche Menge. Sei $X \subset \cup_{i \in \N} T_i$, $T_i \subseteq T_{i+1}$. Dann liegt $X$ schon vollständig in einem der $T_i$.
+\end{idee}
+\fi
+
+\begin{bsp}
+  \begin{itemize}
+    \item Jede endliche Menge ist $\aleph_0$-kompakt in $\SetC$.
+    \item Jeder endlich-dim. VR ist $\aleph_0$-kompakt in $\Vect(\R)$.
+    \item Jeder endlich-präsentierte Modul ist $\aleph_0$-kompakt in $\Mod(R)$.
+    \item Unendliche Mengen sind nicht $\aleph_0$-kompakt in $\SetC$.
+    \item Jeder nicht diskrete topologische Raum ist nicht $\aleph_0$-kompakt.
+  \end{itemize}
+\end{bsp}
+
+\begin{defn}
+  Eine \emph{lokal $\kappa$-präsentierbare Kategorie} ist eine lokal kleine und kovollständige Kategorie, sodass eine Menge $S \subseteq \Ob(\Cat)$ von $\kappa$-kompakten Objekten existiert, sodass jedes Objekt aus $\Cat$ kleiner Kolimes von Objekten aus $S$ ist.
+\end{defn}
+
+% Ausgelassen: Intuition
 
 \pagebreak
 
