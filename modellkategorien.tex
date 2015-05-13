@@ -693,7 +693,7 @@
 \end{defn}
 
 \begin{bem}
-  Ein Pfadobjekt in $\ModC$ ist dasselbe wie ein Zylinderobj. in $\ModC^\op$
+  Ein Pfadobjekt in $\ModC$ ist dasselbe wie ein Zylinderobj. in $\ModC^\op$.
 \end{bem}
 
 % Ausgelassen: Dualisierte Versionen der techn. Lemmate über Zylinderobjekte
@@ -742,7 +742,7 @@
 
 \begin{lem}
   Sei $f : X \to Y$. Seien $RX$ und $RY$ fixierte fasernde Approx. an $X$ bzw. $Y$.
-  Dann hängt $Rf : RX \to RY$ bis auf Rechts- und auch Linkshomotopie nur von der R-/Linkshomotopieklasse von $r \circ f$ ab.
+  Dann hängt $Rf : RX \to RY$ bis auf Rechts- und auch Linkshomotopie nur von der Rechtshomotopieklasse von $r \circ f$ ab.
 \end{lem}
 
 \begin{acht}
@@ -760,7 +760,7 @@
 \begin{defn}
   Sei $\Cat$ ein Kategorie, $S \subset \Mor(\Cat)$ eine Klasse von Morphismen. Die \emph{Lokalisierung} $\Cat[S^-1]$ von $\Cat$ ist eine Kategorie, die folgende 2-universelle Eigenschaft erfüllt:
   \begin{itemize}
-    \item $\gamma : \Cat \to \Cat[S^{-1}]$ schickt Morphismen aus $S$ aus Isos
+    \item $\gamma : \Cat \to \Cat[S^{-1}]$ schickt Morphismen aus $S$ aus Isos.
     \item Für jede Kategorie $\Dat$ ist $\gamma^* : [\Cat[S^{-1}], \Dat] \to [\Cat, \Dat]_{S \mapsto \text{Isos}}$ eine Kategorienäquivalenz.
   \end{itemize}
 \end{defn}
@@ -807,21 +807,21 @@
   Sei $X$ kofasernd und $Y$ fasernd. Dann ist die Abbildung
   \[
     \pi(X, Y) \to \Hom_{\Ho \ModC}(X, Y), \quad
-    [f] \mapsto [f]
+    [f] \mapsto [RQf]
   \]
   eine Bijektion.
 \end{bem}
-
-\begin{lem}
-  Jeder Morphismus in $\Ho \ModC$ ist Komposition von Morphismen der Form $\gamma(f)$, $f \in \Mor(\ModC)$ und der Form $\gamma(f)^{-1}$, $f \in \Weak$.
-\end{lem}
 
 \begin{lem}
   Ist $F : \ModC \to \Cat$ ein Funktor, der schwache Äq. auf Isos schickt, dann identifiziert $F$ links- bzw. rechtshomotope Morphismen.
 \end{lem}
 
 \begin{lem}
-  Sei $\ModC_c \subset \ModC$ die volle Unterkategorie der kofasernden Objekte und $F : \ModC_c \to \Cat$ ein Funktor, der schwache Äquivalenzen auf Isos schickt. Dann identifiziert $F$ rechtshomotope Morphismen.
+  Jeder Morphismus in $\Ho \ModC$ ist Komposition von Morphismen der Form $\gamma(f)$, $f \in \Mor(\ModC)$ und der Form $\gamma(f)^{-1}$, $f \in \Weak$.
+\end{lem}
+
+\begin{lem}
+  Sei $\ModC_c \subset \ModC$ die volle Unterkategorie der kofasernden Objekte und $F : \ModC_c \to \Cat$ ein Funktor, der azyklische Kofaserungen auf Isos schickt. Dann identifiziert $F$ rechtshomotope Morphismen.
 \end{lem}
 
 \begin{thm}
