@@ -55,6 +55,8 @@
 \newcommand{\clos}[1]{\overline{#1}} % topologischer Abschluss
 \newcommand{\pt}{\{ \, \mathrm{pt} \, \}} % Einpunktiger Raum
 \DeclareMathOperator{\Cyl}{Cyl} % Zylinder
+\DeclareMathOperator{\Tor}{Tor} % Tor-Gruppen
+\DeclareMathOperator{\Ext}{Ext} % Ext-Gruppen
 
 % TODO
 \newcommand{\AMod}{\text{$A$-$\Mod$}} % Kategorie der A-Linksmoduln
@@ -2938,7 +2940,7 @@ Sei $\Aat$ eine abelsche Kategorie.
 
 % nicht dort im Buch, hoffentlich richtig (folgt aus der langen exakten Sequenz der zweiten Zeile)
 \begin{kor}
-  $C(f)$ ist genau dann azyklisch, wenn $f$ ein Quasiisomorphismus ist.
+  $C(f)$ ist genau dann azyklisch, wenn $f$ ein Qis ist.
 \end{kor}
 
 % III.3.4
@@ -3053,6 +3055,60 @@ Sei $\Aat$ eine abelsche Kategorie.
   Der Funktor $Q : \Aat \to \Der^*(\Aat)$ liefert eine Kategorienäquiva- lenz von $\Aat$ mit der vollen Unterkat. der $H^0$-Komplexe in $\Der^*(\Aat)$.
 \end{prop}
 
-% TODO: Ext
+% III.5.3
+\begin{defn}
+  $\Ext^i_\Aat(X, Y) \coloneqq \Hom_{\Der(\Aat)}(X[0], Y[i])$ heißt \emph{Ext-Gruppe}.
+\end{defn}
+
+\begin{bem}
+  \begin{itemize}
+    \item $\Ext^i_\Aat(X, Y) \cong \Hom_{\Der(\Aat)}(X[k], Y[i+k])$ für alle $i \in \Z$
+    \item Komposition von Morphismen zwischen passend verschobenen Komplexen liefert eine bilineare Multiplikation
+    \[ \Ext^i_\Aat(X, Y) \times \Ext^j_\Aat(Y, Z) \to \Ext^{i+j}_\Aat(X, Z). \]
+    \item Funktorialität: $\Ext^i_\Aat : \Aat^\op \times \Aat \to \AbGrp$
+    \item Eine k.\,e.\,S. $0 \to X' \to X \to X'' \to 0$ in $\Aat$ ind. l.\,e. Sequenzen
+    \begin{align*}
+      \ldots & \to \Ext^i_\Aat(X'', Y) \to \Ext^i_\Aat(X,Y) \to \Ext^i_\Aat(X', Y) \to \\
+      & \to \Ext^{i+1}_\Aat(X'', Y) \to \ldots \\
+      \ldots & \to \Ext^i_\Aat(Y, X') \to \Ext^i_\Aat(Y, X) \to \Ext^i_\Aat(Y, X'') \to \\
+      & \to \Ext^{i+1}_\Aat(Y, X') \to \ldots
+    \end{align*}
+  \end{itemize}
+\end{bem}
+
+% III.5.5 a,b)
+\begin{lem}
+  \inlineitem{$\Ext^i_\Aat(X, Y) = 0$ für $i < 0$} \quad
+  \inlineitem{$\Ext^0_\Aat(X, Y) \cong \Hom(X, Y)$}
+\end{lem}
+
+\begin{konstr}[\emph{Yoneda}]
+  Man kann Elemente von $\Ext^i_\Aat(X, Y)$ wie folgt konstruieren: Sei $\CCC{K}$ ein azyklischer Komplex der Form
+  \[ \CCC{K} : \enspace \nldots \to 0 \to K^{-i} \!=\! Y \to K^{-i\!+\!1} \to \ldots \to K^0 \to K^1 \!=\! X \to 0 \to \nldots \]
+  Sei dann $y(\CCC{K}) \in \Ext^i_\Aat(X, Y)$ die Äquivalenzklasse des Daches
+  \begin{centertikzcd}[column sep=1.4cm, row sep=0.3cm]
+    & \arrow{ld}[swap]{s} \tilde{K} \arrow{rd}{f} \\
+    X[0] && Y[i]
+  \end{centertikzcd}
+  wobei $\tilde{K}^j = K^j$ für $-i \leq j \leq 0$ und $0$ sonst ist und $s$ und $f$ die kanonischen Abb. sind. Sei $\CCC{L}$ ein azyklischer Komplex der Form
+  \[ \CCC{L} : \enspace \nldots \to 0 \to L^{-j} \!=\! Z \to K^{-j\!+\!1} \to \ldots \to L^0 \to L^1 \!=\! Y \to 0 \to \nldots \]
+  Dann kann man $\CCC{K}$ und $\CCC{L}$ zu einem azyklischen Komplex $\CCC{L} \circ \CCC{K} := \CCC{M}$ zusammenfügen:
+  \begin{centertikzcd}[column sep=0.25cm, row sep=0.3cm]
+    && Z \arrow[d, equal] & L^{-j+1} \arrow[d, equal] && L^0 \arrow[d, equal] & \nspace{5}L^1 \!=\! Y \!=\! K^{-i}\nspace{5} \arrow[rd] & K^{-\!i\!+\!1} \arrow[d, equal] \\
+    \nldots \arrow[r] & 0 \arrow[r] & M^{-\!i\!-\!j} \arrow[r] & M^{-\!i\!-\!j\!+\!1}  \arrow[r] & \nldots \arrow[r] & M^{-\!i} \arrow[rr] \arrow[ru] && M^{-\!i\!+\!1} \arrow[r] & \, \\
+    & \, \arrow[r] & M^{-\!i\!+\!2} \arrow[r] & \nldots \arrow[r] & M^0 \arrow[r] & M^1 \arrow[r] & 0 \to \nldots \\
+    && K^{-i+2} \arrow[u, equal] && K^0 \arrow[u, equal] & X \arrow[u, equal]
+  \end{centertikzcd}
+\end{konstr}
+
+% III.5.5 c)
+\begin{lem}
+  \begin{itemize}
+    \item Die Yoneda-Konstruktion ist surjektiv: Jedes Element aus $\Ext^i_\Aat(X, Y)$ ist von der Form $y(\CCC{K})$ für einen azyk. Komplex $\CCC{K}$.
+    \item Es gilt $y(\CCC{L} \circ \CCC{K}) = y(\CCC{L}) \cdot y(\CCC{K})$
+  \end{itemize}
+\end{lem}
+
+% TODO: Homologische Dimension
 
 \end{document}
