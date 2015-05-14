@@ -141,9 +141,11 @@ Sei $\Aat$ im Folgenden eine abelsche Kategorie.
   Eine SS \emph{degeneriert} auf Seite $R$, wenn $d^r_{p,q} \!=\! 0$ für alle $r \!\geq\! R$.
 \end{defn}
 
+\iffalse
 \begin{bem}
   Das entspricht einer Art gleichmäßigen Konvergenz.
 \end{bem}
+\fi
 
 \begin{bem}
   Viele Spektralsequenzen leben im ersten Quadranten, \dh{} $E^r_{p,q} = 0$ wenn $p < 0$ oder $q < 0$. Das impliziert, dass für $p$, $q$ fest und $r$ groß alle Differentiale von und nach $E^r_{p,q}$ aus dem ersten Quadranten heraus- oder hineinführen und damit Null sind.
@@ -273,7 +275,7 @@ Sei $\Aat$ im Folgenden eine abelsche Kategorie.
 
 % 1.3 im Hatcher
 \begin{thm}
-  Sei $F \to E \to B$ eine Serre-Faserung, $B$ wegzshgd und $G$ eine ab. Gruppe. Angenommen, $\pi_1(B)$ wirkt trivial auf $H_*(F; G)$. \\
+  Sei $F \to X \to B$ eine Serre-Faserung, $B$ wegzshgd und $G$ eine ab. Gruppe. Angenommen, $\pi_1(B)$ wirkt trivial auf $H_*(F; G)$. \\
   Dann gibt es die \emph{(Leray-)Serre-Spektralsequenz} mit
   \[ E^2_{p,q} = H_p(B; H_q(F; G)), \]
   deren Eintrag $E^\infty_{p,q} = E^\infty_{p,n-p}$ der Quotient $F^p_n/F^{p-1}_n$ in einer Filtration
@@ -291,20 +293,53 @@ Sei $\Aat$ im Folgenden eine abelsche Kategorie.
   Wenn $G$ ein Körper ist, so folgt $H_n(X; G) \cong \oplus_p E^\infty_{p,n-p}$.
 \end{bem}
 
+% Ausgelassen: Bei Faserbündeln: "pathspace construction"
+
+\begin{thm}
+  Sei $F \to X \xrightarrow{p} B$ eine Serre-Faserung, die die Bedingungen für Ex. der Serre-SS erfüllt, $B' \!\subset\! B$ ein Unterraum, $X' \!\coloneqq\! p^{-1}(B')$. \\
+  Dann gibt es eine \emph{relative (Leray-)Serre-Spektralsequenz} mit
+  \[ E^2_{p,q} = H_p(B, B'; H_q(F; G)), \]
+  welche gegen $H_*(X, X'; G)$ konvergiert.
+\end{thm}
+
 \begin{bem}
-  Sei eine Abbildung $(f, \tilde{f})$ von Faserungen wie folgt gegeben:
+  Sei eine Abbildung $(f, \tilde{f})$ von Faserungen, die die Voraus- setzungen für Existenz der Serre-SS erfüllen, wie folgt gegeben:
   \vspace{-4pt}
   \begin{centertikzcd}[row sep=0.35cm, column sep=0.6cm]
     F \arrow[r] \arrow[d] & X \arrow[r, "p"] \arrow[d, "\tilde{f}"] & B \arrow[d, "f"] \\
     F' \arrow[r] & X' \arrow[r, "p'"] & B'
   \end{centertikzcd}
   \vspace{-4pt}
-  Dann gibt es ind. Morphismus $f_* : E \to E'$ der zugeh. Serre-SS, der für $r \to \infty$ gegen die Abb. $\tilde{f}_* : H_*(X; G) \to H_*(X'; G)$ konvergiert, welche mit den Filtrierungen $F^p_n$ und $F'^p_n$ verträglich ist. Außerdem entspricht der Morphismus bei $E^2_{p,q}$ der von $B \to B'$ und $F \to F'$ induzierten Abbildung $H_p(B; H_q(F, G)) \to H_p(B'; H_q(F', G))$. \\
+  Dann gibt es ind. Morphismus $f_* : E \to E'$ der zugeh. Serre-SS, der für $r \to \infty$ gegen die Abb. $\tilde{f}_* : H_*(X; G) \to H_*(X'; G)$ konvergiert, welche mit den Filtrierungen $F^p_n$ und $F'^p_n$ verträglich ist.
+  Außerdem entspricht der Morphismus bei $E^2_{p,q}$ der von $B \to B'$ und $F \to F'$ induzierten Abbildung $H_p(B; H_q(F, G)) \to H_p(B'; H_q(F', G))$. \\
   Die Zuordnung $(f, \tilde{f}) \mapsto f_*$ ist funktoriell.
 \end{bem}
 
-% Ausgelassen: Bei Faserbündeln: "pathspace construction"
-% Ausgelassen: Relative Version
+% 1.12 im Hatcher
+\begin{prop}
+  Sei eine Abbildung $(f, \tilde{f})$ von Faserungen wie oben, $R$ ein Hauptidealbereich.
+  Wenn zwei der Abbildungen $F \to F'$, $B \to B'$ und $X \to X'$ Isomorphismen in Homologie mit $R$-Koeffizienten induzieren, so auch die dritte.
+\end{prop}
+% TODO: Algebraische Variante des "SS Comparison Theorems"
+
+\begin{defn}
+  Sei $F \to X \xrightarrow{p} B$ eine Serre-Faserung. Betrachte
+  \[ H_n(B) \xrightarrow{i_*} H_n(B, b_0) \xleftarrow{p_*} H_n(X, F) \xrightarrow{\partial} H_{n-1}(F) \]
+  Dabei ist $i_*$ ein Iso für $n > 0$, $p_*$ aber im Allgemeinen nicht. \\
+  Die \emph{Transgression} ist die induzierte Abbildung
+  \[ t_n : i_*^{-1}(\im(p_*)) \to H_{n-1}(F) / \partial(\ker(p_*)). \]
+\end{defn}
+
+\begin{bem}
+  Die Transgression entspricht dem Verbindungsmorphismus $\pi_n(B) \to \pi_{n-1}(F)$ in der \leS{} von Homotopiegr. einer Faserung.
+  Manchmal wird auch die additive Relation $R \subseteq H_n(B) \times H_{n-1}(F)$ als Transgression bezeichnet.
+\end{bem}
+
+% 1.13 im Hatcher
+\begin{prop}
+  Die Transgression ist gleich einem Differential der Serre-SS:
+  \[ t_n = d_n : E^{n}_{n,0} \to E^n_{0,n-1}. \]
+\end{prop}
 
 % TODO: Lokale Koeffizienten
 
@@ -317,10 +352,26 @@ Sei $\Aat$ im Folgenden eine abelsche Kategorie.
   $0 \subseteq F_n^n \subseteq \ldots \subseteq F_0^n = H^n(X; G)$ von $H^n(X; G)$ ist.
 \end{thm}
 
-% TODO: Multiplikative Struktur auf der Serre-Spektralsequenz
-% TODO: Transgression
-% TODO: "Spectral Sequence Comparison Theorem" und topol. Spezialfall
-% TODO: Transgression
+\begin{lem}
+  Sei $F \!\to\! E \!\to\! B$ eine Serre-Faserung, die die Bed. für Existenz der Serre-SS erfüllt und  $R$ ein Ring.
+  Dann gibt bilineare Abbildungen
+  \[ d^{(p,q,s,t)}_r : E^{p,q}_r \times E^{s,t}_r \to E^{p+s,q+t}_r, \enspace (x, y) \mapsto xy \]
+  mit folgenden Eigenschaften:
+  \begin{itemize}
+    \item $d_r$ ist derivativ: $d_r(xy) = (d_r x) y + (-1)^{p+q} x (d_r y)$
+    \item Die Abbildung $d_{r+1}$ ist gegeben durch
+    \[
+      d_{r+1} : E^{p,q}_{r+1} \times E^{s,t}_{r+1} \to E^{p+s,q+t}_{r+1}, \quad
+      ([x], [y]) \mapsto [xy].
+    \]
+    Diese ist wohldefiniert wegen Derivativität.
+    \item $d_2 : E_2^{p,q} \!\times\! E_2^{r,s} \!\to\! E_2^{p+s,q+t}$ ist das $(-1)^{qs}$-fache des Cup-Produkts
+    \[ H^p(B; H^q(F; R)) \times H^s(B; H^t(F; R)) \to H^{p+s}(B; H^{q+t}(F; R)), \]
+    wobei Koeffizienten mit dem Cup-Produkt von $H^*(F; R)$, $H^q(F; R) \times H^q(F; R) \to H^{q+t}(F; R)$, multipliziert werden.
+    \item Das Cup-Produkt in $H^*(X; R)$ respektiert die Faserungen von $H^n(X; R)$ und schränkt daher ein zu Abb. $F_p^m \times F_s^n \to F_{p+s}^{m+n}$.
+    Die induzierte Abbildung auf dem Quotienten $F^m_p/F^m_{p+1} \times F^n_s/F^n_{s+1} \to F^{m+n}_{p+s} / F^{m+n}_{p+s+1}$ entspricht $d_\infty : E_\infty^{p,m-p} \times E_\infty^{s,n-s} \to E_\infty^{p+s,m+n-p-s}$.
+  \end{itemize}
+\end{lem}
 
 % TODO: Leray Spectral Sequence
 % TODO: May Spectral Sequence
