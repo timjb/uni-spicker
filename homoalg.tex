@@ -57,6 +57,9 @@
 \DeclareMathOperator{\Cyl}{Cyl} % Zylinder
 \DeclareMathOperator{\Tor}{Tor} % Tor-Gruppen
 \DeclareMathOperator{\Ext}{Ext} % Ext-Gruppen
+\DeclareMathOperator{\dimh}{dh} % homologische Dimension
+\DeclareMathOperator{\dhp}{dhp} % projektive homologische Dimension
+\DeclareMathOperator{\dhi}{dhi} % injektive homologische Dimension
 
 % TODO
 \newcommand{\AMod}{\text{$A$-$\Mod$}} % Kategorie der A-Linksmoduln
@@ -3109,6 +3112,115 @@ Sei $\Aat$ eine abelsche Kategorie.
   \end{itemize}
 \end{lem}
 
-% TODO: Homologische Dimension
+% III.5.6 (Homologische Dimension)
+
+\begin{defn}
+  Die \emph{homologische Dimension} einer ab. Kategorie $\Aat$ ist
+  \[ \dimh(\Aat) \coloneqq \sup \Set{p \in \N}{\ex{X, Y \in \Aat} \Ext^p_\Aat(X, Y) \neq 0} \in \N \cup \{ \infty \}. \]
+\end{defn}
+
+% III.5.8 (Kategorien von Dimension 1)
+\begin{bspe}
+  $\dimh(\AbGrp) = \dimh(\text{$k[x]$-$\Mod$}) = 1$ \enspace ($k$ ein Körper)
+\end{bspe}
+
+% III.5.7
+\begin{prop}
+  Es sind äquivalent: \quad
+  \inlineitem{$\Aat$ ist halbeinfach} \quad
+  \inlineitem{$\dimh(\Aat) = 0$} \\
+  \inlineitem{$\Ext^1_\Aat(X, Y) = 0$ für alle $X, Y \in \Ob(\Aat)$}
+\end{prop}
+
+% III.5.9 (Homologische Dimension eines Objektes)
+\begin{defn}
+  Die \emph{projektive} bzw. \emph{injektive Dim.} von $X \!\in\! \Ob(\Aat)$ ist
+  \begin{align*}
+    \dhp(X) & \coloneqq \sup \Set{n \in \N}{\ex{Y \in \Ob(\Aat)} \Ext^n_\Aat(X, Y) \neq 0}, \\
+    \dhi(X) & \coloneqq \sup \Set{n \in \N}{\ex{Y \in \Ob(\Aat)} \Ext^n_\Aat(Y, X) \neq 0}.
+  \end{align*}
+\end{defn}
+
+% III.5.10
+\begin{lem}
+  p) \enspace Für $X \in \Ob(\Aat)$ sind äquivalent: \enspace
+  \inlineitem{$X$ ist projektiv} \\
+  \inlineitem{$\Ext^1(X, Y) = 0$ für alle $Y \in \Ob(\Aat)$} \quad
+  \inlineitem{$\dhp(X) = 0$} \\[2pt]
+  i) \enspace Für $X \in \Ob(\Aat)$ sind äquivalent: \enspace
+  \inlineitem{$X$ ist injektiv} \\
+  \inlineitem{$\Ext^1(Y, X) = 0$ für alle $Y \in \Ob(\Aat)$} \quad
+  \inlineitem{$\dhi(X) = 0$}
+\end{lem}
+
+% III.5.11
+\begin{prop}
+  Sei ein azyklischer Komplex von folgender Form gegeben:
+  \[ \ldots \to 0 \to X' \to L^0 \to L^1 \to \ldots \to L^k \to X \to 0 \to \ldots \]
+  p) \enspace Angenommen, alle $L^i$ sind projektiv. Dann ist
+  \[ \dhp X' = \max(\dhp X - k - 1, 0). \]
+  i) \enspace Angenommen, alle $L^i$ sind injektiv. Dann ist
+  \[ \dhi X = \max(\dhp X' - k - 1, 0). \]
+\end{prop}
+
+\begin{defn}
+  Man sagt, eine ab. Kat. besitze \emph{genug projektive Objekte}, wenn jedes Objekt Quotient eines projektiven Objektes ist. \\
+  Man sagt, sie besitze \emph{genug injektive Objekte}, falls jedes Objekt ein Unterobjekt eines injektiven Objektes ist.
+\end{defn}
+
+\begin{kor}
+  p) \enspace Wenn $\Aat$ genug proj. Obj. besitzt, dann sind äquivalent: %für $X \in \Ob(\Aat)$: \\
+  \inlineitem{$\dhp(X) \leq k$} \enspace
+  \inlineitem{$\exists$ projektive Auflösung von $X$ der Länge $\leq k + 1$} \\[2pt]
+  i) \enspace Wenn $\Aat$ genug inj. Obj. besitzt, dann sind äquivalent: %für $X \in \Ob(\Aat)$: \\
+  \inlineitem{$\dhi(X) \leq k$} \enspace
+  \inlineitem{$\exists$ injektive Auflösung von $X$ der Länge $\leq k + 1$} \\[2pt]
+\end{kor}
+
+% Ausgelassen: III.5.13
+% Ausgelassen: III.5.14 (Moduln über Hauptidealbereichen)
+
+% III.5.15 (Hilberts Theorem)
+\begin{defn}
+  Sei $\Aat$ eine abelsche Kategorie. Dann ist $\Aat[T]$ die Kategorie mit
+  \begin{align*}
+    \Ob(\Aat[T]) & \coloneqq \{\, \text{Paare $(X, t)$ mit $X \in \Ob(\Aat)$ und $t \in \End_\Aat(X)$.} \,\}, \\
+    \Hom_{\Aat[T]}((X, t), (X', t')) & \coloneqq \Set{f \in \Hom_\Aat(X, X')}{t' \circ f = f \circ t}.
+  \end{align*}
+\end{defn}
+
+% III.5.16
+\begin{thm}
+  $\Aat[T]$ ist eine abelsche Kategorie.
+\end{thm}
+
+% III.5.16
+\begin{lem}
+  Besitze $\Aat$ genug projektive Objekte.
+  \begin{itemize}
+    \item Dann besitzt $\Aat[T]$ ebenfalls genug projektive Objekte.
+    \item Angenommen, $\Aat$ enthält unendliche direkte Summen.
+    Dann gilt für alle $(X, t) \in \Ob(\Aat[T])$: \enspace
+    $\dhp_{\Aat[T]}(X, t) \leq \dhp_\Aat(X) + 1$.
+    Außerdem gilt $\dhp_{\Aat[T]}(X, 0) = \dhp_\Aat(X) + 1$.
+  \end{itemize}
+\end{lem}
+
+% III.5.17 (Das klassische Theorem von Hilbert)
+\begin{thm}[Hilbert]
+  Sei $k$ ein Körper. Es ist $\dimh(\text{$k[t_1, \nldots, t_n]$-$\Mod$}) = n$.
+\end{thm}
+
+\begin{beweisidee}
+  Sei $\Aat_r$ die Kategorie der $k[t_1, \nldots, t_r]$-Moduln. \\
+  Es gibt eine Kategorienäquivalenz zwischen $\Aat_r[T]$ und $\Aat_{r+1}$. \\
+  Die Aussage folgt dann induktiv mit $\dimh(\Aat_0) \!=\! \dimh(\text{$k$-$\Mod$}) \!=\! 0$ und
+  \[ \dimh(\Aat_{r+1}) = \dimh(\Aat_r[T]) = \dimh(\Aat_r) + 1 = r + 1. \]
+\end{beweisidee}
+
+% Ausgelassen: III.5.18 ($\Aat[T]$ ist eine abelsche Kategorie)
+% Ausgelassen: III.5.19 (Projektive Objekte in $\Aat[T]$)
+
+% TODO: III.5.20 (Die abgeleitete Kategorie und injektive Auflösungen)
 
 \end{document}
