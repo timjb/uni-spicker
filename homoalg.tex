@@ -6,9 +6,7 @@
 }
 
 \usepackage{tikz}
-%\usetikzlibrary{babel}
 \usetikzlibrary{matrix,arrows,cd}
-%\usepackage{tikz-cd}
 
 % http://tex.stackexchange.com/questions/117732/tikz-and-babel-error
 % Es ist schierer Wahnsinn, welche Hacks LaTeX benötigt!
@@ -60,6 +58,8 @@
 \DeclareMathOperator{\dimh}{dh} % homologische Dimension
 \DeclareMathOperator{\dhp}{dhp} % projektive homologische Dimension
 \DeclareMathOperator{\dhi}{dhi} % injektive homologische Dimension
+\newcommand{\Inj}{\mathcal{I}} % Klasse der injektiven Objekte
+\newcommand{\Proj}{\mathcal{P}} % Klasse der projektiven Objekte
 
 % TODO
 \newcommand{\AMod}{\text{$A$-$\Mod$}} % Kategorie der A-Linksmoduln
@@ -3164,8 +3164,8 @@ Sei $\Aat$ eine abelsche Kategorie.
 \end{prop}
 
 \begin{defn}
-  Man sagt, eine ab. Kat. besitze \emph{genug projektive Objekte}, wenn jedes Objekt Quotient eines projektiven Objektes ist. \\
-  Man sagt, sie besitze \emph{genug injektive Objekte}, falls jedes Objekt ein Unterobjekt eines injektiven Objektes ist.
+  p) \enspace Eine ab. Kat. besitzt \emph{genug projektive Objekte}, wenn jedes Objekt Quotient eines projektiven Objektes ist. \\
+  i) \enspace Sie besitzt \emph{genug injektive Objekte}, falls jedes Objekt ein Unterobjekt eines injektiven Objektes ist.
 \end{defn}
 
 \begin{kor}
@@ -3184,8 +3184,8 @@ Sei $\Aat$ eine abelsche Kategorie.
 \begin{defn}
   Sei $\Aat$ eine abelsche Kategorie. Dann ist $\Aat[T]$ die Kategorie mit
   \begin{align*}
-    \Ob(\Aat[T]) & \coloneqq \{\, \text{Paare $(X, t)$ mit $X \in \Ob(\Aat)$ und $t \in \End_\Aat(X)$.} \,\}, \\
-    \Hom_{\Aat[T]}((X, t), (X', t')) & \coloneqq \Set{f \in \Hom_\Aat(X, X')}{t' \circ f = f \circ t}.
+    & \Ob(\Aat[T]) \coloneqq \{\, \text{Paare $(X, t)$ mit $X \in \Ob(\Aat)$ u. $t \in \End_\Aat(X)$} \,\}, \\
+    & \Hom_{\Aat[T]}((X, t), (X', t')) \coloneqq \Set{f \in \Hom_\Aat(X, X')}{t' \circ f = f \circ t}.
   \end{align*}
 \end{defn}
 
@@ -3221,6 +3221,53 @@ Sei $\Aat$ eine abelsche Kategorie.
 % Ausgelassen: III.5.18 ($\Aat[T]$ ist eine abelsche Kategorie)
 % Ausgelassen: III.5.19 (Projektive Objekte in $\Aat[T]$)
 
-% TODO: III.5.20 (Die abgeleitete Kategorie und injektive Auflösungen)
+% III.5.20 (Die abgeleitete Kategorie und injektive Auflösungen)
+
+% III.5.21
+\begin{thm}
+  Sei $\Aat$ eine abelsche Kategorie. \\
+  p) \enspace Sei $\Proj \!\subset\! \Aat$ die volle Unterkategorie der projektiven Objekte und $K^-(\Proj) \!\subset\! K^-(\Aat)$ die Homotopie-Kategorie der nach rechts beschränkten Komplexe bestehend aus projektiven Objekten.
+  \begin{itemize}
+    \item Der kanonische Funktor $F : K^-(\Proj) \to \Der^-(\Aat)$ ist eine Äquivalenz von $K^-(\Proj)$ und einer vollen Unterkategorie von $\Der^-(\Aat)$.
+    \item Wenn $\Aat$ genug projektive Objekte besitzt, dann ist $F$ wesentlich surjektiv und somit eine Kategorienäquivalenz.
+  \end{itemize}
+  i) \enspace Sei $\Inj \!\subset\! \Aat$ die volle Unterkategorie der injektiven Objekte und $K^+(\Inj) \!\subset\! K^+(\Aat)$ die Homotopie-Kategorie der nach links beschränkten Komplexe bestehend aus injektiven Objekten.
+  \begin{itemize}
+    \item Der kanonische Funktor $F : K^+(\Inj) \to \Der^+(\Aat)$ ist eine Äquivalenz von $K^+(\Inj)$ und einer vollen Unterkategorie von $\Der^+(\Aat)$.
+    \item Wenn $\Aat$ genug injektive Objekte besitzt, dann ist $F$ wesentlich surjektiv und somit eine Kategorienäquivalenz.
+  \end{itemize}
+\end{thm}
+
+\begin{beweisidee}
+  \begin{itemize}
+    \item Qis bilden ein lokal. System $S_\Inj \subset \Mor(K^+(\Inj))$.
+    \item $K^+(\Inj)[S_\Inj^{-1}]$ ist eine volle Unterkat. von $K^+(\Aat)[S^{-1}] = \Der^+(\Aat)$.
+    Verwende dazu die Proposition über Lokalisierung von Unter- kategorien und folgendes Lemma.
+    \item $S_\Inj$ besteht nur aus Isomorphismen. Somit $K^+(\Inj)[S_\Inj^{-1}] = K^+(\Inj)$.
+  \end{itemize}
+\end{beweisidee}
+
+% III.5.24
+\begin{lem}
+  Sei $s \!:\! \CCC{I} \!\to\! \CCC{K}$ ein Qis zwischen $\CCC{I} \in \Kom^+(\Inj)$ und $\CCC{K} \in \Kom^+(\Aat)$.
+  Dann gibt es $t : \CCC{K} \to \CCC{I}$ mit $t \circ s \simeq \id_{\CCC{I}}$.
+\end{lem}
+
+% Übungsblatt 21, Aufgabe 1
+\begin{kor}
+  Der Morphismus \enspace $\Hom_{K(\Aat)}(\CCC{X}, \CCC{Y}) \to \Hom_{\Der(\Aat)}(\CCC{X}, \CCC{Y})$ ist ein Isomorphismus, wenn \\[2pt]
+  p) \enspace $\CCC{X} \in \Ob(\Kom^-(\Proj))$ oder \quad
+  i) \enspace $\CCC{Y} \in \Ob(\Kom^+(\Inj))$
+\end{kor}
+
+\begin{bem}
+  Mit dem Korollar lassen sich folgende Verfahren zur Berechnung von Ext-Gruppen herleiten: \\[2pt]
+  p) \enspace Sei $\nldots \to\! P^{-1} \!\to\! P^0 \!\to X \to 0$ eine proj. Auflösung von $X$. Dann:
+  \[ \Ext^n_\Aat(X, Y) \cong H^n(0 \to \Hom(P^0, Y) \to \Hom(P^{-1}, Y) \to \ldots). \]
+  i) \enspace Sei $0 \to Y \to I^0 \to I^1 \to \ldots$ eine inj. Auflösung von $Y$. Dann:
+  \[ \Ext^n_\Aat(X, Y) \cong H^n(0 \to \Hom(X, I^0) \to \Hom(X, I^1) \to \ldots). \]
+\end{bem}
+
+% TODO: Abgeleitete Funktoren
 
 \end{document}
