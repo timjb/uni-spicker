@@ -74,6 +74,7 @@
 \newtheorem*{konv}{Konvention}
 \newtheorem*{motto}{Motto}
 \newtheorem*{fun}{Fun Fact}
+\newtheorem*{ziel}{Ziel}
 
 \theoremstyle{remark}
 \newtheorem*{bem}{Bem}

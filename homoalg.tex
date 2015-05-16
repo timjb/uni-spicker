@@ -60,6 +60,7 @@
 \DeclareMathOperator{\dhi}{dhi} % injektive homologische Dimension
 \newcommand{\Inj}{\mathcal{I}} % Klasse der injektiven Objekte
 \newcommand{\Proj}{\mathcal{P}} % Klasse der projektiven Objekte
+\newcommand{\Ada}{\mathcal{R}} % Klasse von angepassten (adapted) Objekten
 
 % TODO
 \newcommand{\AMod}{\text{$A$-$\Mod$}} % Kategorie der A-Linksmoduln
@@ -3002,6 +3003,10 @@ Sei $\Aat$ eine abelsche Kategorie.
 \end{defn}
 
 \begin{bem}
+  Jeder additive Funktor $F : \Aat \to \Bat$ bewahrt Homotopie und ind. daher einen Funktor $K^*(F) : K^*(\Aat) \to K^*(\Bat)$, $* \in \{ \emptyset, {+}, {-}, b \}$.
+\end{bem}
+
+\begin{bem}
   Da homotope Abbildungen auf Kohomologie identisch werden, ist $H^\bullet : K(\Aat) \to \Kom_0(\Aat), \enspace [f] \mapsto H^*(f)$ wohldefiniert. \\
   Somit kann man auch in $K(\Aat)$ von Quasiisomorphismen sprechen.
 \end{bem}
@@ -3268,6 +3273,105 @@ Sei $\Aat$ eine abelsche Kategorie.
   \[ \Ext^n_\Aat(X, Y) \cong H^n(0 \to \Hom(X, I^0) \to \Hom(X, I^1) \to \ldots). \]
 \end{bem}
 
-% TODO: Abgeleitete Funktoren
+% III.6
+\subsection{Abgeleitete Funktoren}
+
+% III.6.1 (Motivationen)
+
+\begin{ziel}
+  Viele wichtige Funktoren (\zB{} $\Hom$, $\otimes$ und $\Gamma$) sind nicht exakt.
+  Um Exaktheit herzustellen, müssen sie abgeleitet werden: \\
+  Sei $F : \Aat \to \Bat$ ein linksexakter Funktor zw. abelschen Kategorien. \\
+  Wir definieren dann einen Funktor $RF : \Der^+(\Aat) \to \Der^+(\Bat)$, die \emph{Rechtsableitung} von $F$, der exakt in folgendem Sinne ist:
+\end{ziel}
+
+\begin{defn}
+  Ein add. Funktor zw. triangulierten Kat. heißt \emph{exakt}, wenn:
+  \begin{itemize}
+    \item Er vertauscht mit Verschiebung
+    % TODO: genauer
+    \item Er bildet ausgezeichnete Dreiecke auf ausgezeichnete Dreiecke ab.
+  \end{itemize}
+\end{defn}
+
+\begin{bem}
+  Für rechtsexakte Funktoren $G : \Aat \to \Bat$ definiert man die \emph{Linksableitung} $LF : \Der^-(\Aat) \to \Der^-(\Bat)$.
+\end{bem}
+
+\begin{defn}
+  Die \emph{klassischen abgeleiteten Funktoren} sind
+  \[
+    R^i F \coloneqq H^i \circ RF
+    \quad \text{bzw.} \quad
+    L^i G \coloneqq H^i \circ LG.
+  \]
+\end{defn}
+
+\begin{bem}
+  Aus einer k.e.S. $0 \!\to\! A \!\to\! B \!\to\! C \!\to\! 0$ in $\Aat$ erhält man eine l.e.S.
+  \begin{align*}
+    & \ldots \to R^i F(A) \to R^i F(B) \to R^i F(C) \to R^{i+1} F(A) \to \ldots \quad \text{bzw.} \\
+    & \ldots \to L^i G(A) \to L^i G(B) \to L^i G(C) \to L^{i+1} G(A) \to \ldots
+  \end{align*}
+\end{bem}
+
+% III.6.2
+\begin{prop}
+  Sei $F : \Aat \to \Bat$ ein exakter Funktor.
+  \begin{itemize}
+    \item $K^*(F)$ erhält Quasiisomorphismen (\dh{} Qis werden auf Qis abgebildet) und induziert daher einen Funktor
+    \[ D^*(F) : D^*(\Aat) \to D^*(\Bat), \quad * \in \{ \emptyset, {+}, {-}, b \}. \]
+    \item $K^*(F)$ ist exakt in obigem Sinne.
+  \end{itemize}
+\end{prop}
+
+\begin{beweisidee}
+  $f$ ist Qis $\iff$ $\Cyl(f)$ ist azyklisch $\implies$ $F(\Cyl(f)) = \Cyl(F(f))$ ist azyklisch $\iff$ $F(f)$ ist Qis
+\end{beweisidee}
+
+% III.6.3 (Angepasste Klassen von Objekten)
+\begin{defn}
+  Sei $\Ada \subset \Ob(\Aat)$ eine Klasse, die unter $\oplus$ abgeschlossen ist.
+  \begin{itemize}
+    \item $\Ada$ heißt \emph{angepasst} an einen linksex. Funktor $F : \Aat \to \Bat$, falls \\
+    \vspace{-4pt}
+    \begin{enumerate}[label=\alph*),leftmargin=1.6em]
+      \item $F$ azyklische Komplexe aus $\Kom^+(\Ada)$ auf azyklische Komplexe abbildet und \\
+      \item jedes Objekt in $\Aat$ Unterobjekt eines Objekts aus $\Ada$ ist.
+    \end{enumerate}
+    \item $\Ada$ heißt \emph{angepasst} an einen rechtsex. Funktor $G : \Aat \to \Bat$, falls
+    \vspace{-4pt}
+    \begin{enumerate}[label=\alph*),leftmargin=1.6em]
+      \item $G$ azyklische Komplexe aus $\Kom^-(\Ada)$ auf azyklische Komplexe abbildet und
+      \item jedes Objekt in $\Aat$ Quotient eines Objekts aus $\Ada$ ist.
+    \end{enumerate}
+  \end{itemize}
+\end{defn}
+
+% TODO: Beispiele
+
+% III.6.4
+\begin{prop}
+  Sei $\Ada \subset \Ob(\Aat)$ angepasst an irgendeinen linksexakten Funktor $F : \Aat \to \Bat$ (bzw. einen bel. rechtsex. Funktor $G : \Aat \to \Bat$) und $S_\Ada \subset \Mor(K^+(\Ada))$ (bzw. $S_\Ada \subset \Mor(K^-(\Ada))$) die Klasse der Quasiisomorphismen. Dann ist $S_\Ada$ lokalisierend und der Funktor
+  \[
+    K^+(\Ada)[S_\Ada^{-1}] \to \Der^+(\Aat)
+    \quad (\text{bzw. } K^-(\Ada)[S_\Ada^{-1}] \to \Der^-(\Aat))
+  \]
+  eine Kategorienäquivalenz.
+\end{prop}
+
+% III.6.5 (Konstruktion des abgeleiteten Funktors)
+
+\begin{konstr}
+  Der \emph{abgeleitete Funktor} eines linksexakten Funktors $F : \Aat \to \Bat$ mit angepassten Objekten $\Ada \subset \Ob(\Aat)$ ist
+  \begin{align*}
+    RF : \qquad \quad \Der^+(\Aat) \simeq K^+(\Ada)[S_\Ada^{-1}] & \enspace \to \enspace \Der^+(\Bat) \\
+    \CCC{K} \!=\! (K^i)_{i \in \Z} \!\in\! \Ob(K^+(\Ada)[S_\Ada^{-1}]) & \enspace \mapsto \enspace F(\CCC{K}) \coloneqq (F(K^i))_{i \in \Z} \\
+    [f = (f^i : K^i \to L^i)_{i \in \Z}] & \enspace \mapsto \enspace [F(f) \coloneqq (F(f^i))_{i \in \Z}]
+  \end{align*}
+  Analog ist der abgel. Funktor $LG : \Der^-(\Aat) \simeq K^-(\Ada)[S_\Ada^{-1}] \to \Der^-(\Bat)$ eines rechtsex. Funkt. $G : \Aat \to \Bat$ mit $\Ada \!\subset\! \Ob(\Aat)$ angepasst definiert.
+\end{konstr}
+
+% TODO: Universelle Eigenschaft des abgeleiteten Funktors (verwende dabei das Wort Kan-Erweiterung)
 
 \end{document}
