@@ -660,9 +660,9 @@
 \end{defn}
 
 \begin{beob}
-  Sei $X \amalg X \xrightarrow{i} C \xrightarrow{p \enspace ~} X$ irgendein Zylinderobjekt.
+  Sei $X \amalg X \xrightarrow{i} C \xrightarrow{p \, \sim} X$ irgendein Zylinderobjekt.
   Faktorisiere $i = q \circ i'$ in Kofaserung und azyklische Faserung. Dann ist auch
-  \[ X \amalg X \xhookrightarrow{i'} X' \xrightarrow{pq \enspace ~} X \]
+  \[ X \amalg X \xhookrightarrow{i'} X' \xrightarrow{pq \, \sim} X \]
   ein Zylinderobjekt, sogar ein gutes.
   Ebenso kann man $p$ faktorisieren und ein ein anderes Zylinderobjekt erhalten.
 \end{beob}
@@ -693,7 +693,7 @@
 \end{defn}
 
 \begin{bem}
-  Ein Pfadobjekt in $\ModC$ ist dasselbe wie ein Zylinderobj. in $\ModC^\op$.
+  Ein Pfadobj. in $\ModC$ ist dasselbe wie ein Zylinderobj. in $\ModC^\op$.
 \end{bem}
 
 % Ausgelassen: Dualisierte Versionen der techn. Lemmate über Zylinderobjekte
@@ -736,8 +736,11 @@
 \end{thm}
 
 \begin{thm}[Whitehead]
-  Sei $f : X \to Y$ ein Morphismus zwischen bifasernden Objekten. Dann gilt
-  \[ f \in \Weak \iff \text{$f$ ist eine Homotopieäquivalenz.} \]
+  Für einen Morphismus $f : X \to Y$ zwischen bifasernden Objekten gilt
+  \begin{align*}
+    f \in \Weak \iff & \text{$f$ ist eine Homotopieäquivalenz} \\
+    \coloniff & \ex{g : Y \to X} g \circ f \simeq \id_X \wedge f \circ g \simeq \id_Y.
+  \end{align*}
 \end{thm}
 
 \begin{lem}
@@ -758,7 +761,7 @@
 % 2. $\gamma$ ist initial unter dieser Voraussetzung
 
 \begin{defn}
-  Sei $\Cat$ ein Kategorie, $S \subset \Mor(\Cat)$ eine Klasse von Morphismen. Die \emph{Lokalisierung} $\Cat[S^-1]$ von $\Cat$ ist eine Kategorie, die folgende 2-universelle Eigenschaft erfüllt:
+  Sei $\Cat$ ein Kategorie, $S \subset \Mor(\Cat)$ eine Klasse von Morphismen. Die \emph{Lokalisierung} $\Cat[S^{-1}]$ von $\Cat$ ist eine Kategorie, die folgende 2-universelle Eigenschaft erfüllt:
   \begin{itemize}
     \item $\gamma : \Cat \to \Cat[S^{-1}]$ schickt Morphismen aus $S$ aus Isos.
     \item Für jede Kategorie $\Dat$ ist $\gamma^* : [\Cat[S^{-1}], \Dat] \to [\Cat, \Dat]_{S \mapsto \text{Isos}}$ eine Kategorienäquivalenz.
@@ -886,7 +889,7 @@
     \item Jeder endlich-präsentierte Modul ist $\aleph_0$-kompakt in $\Mod(R)$.
     \item Unendliche Mengen sind nicht $\aleph_0$-kompakt in $\SetC$.
     \item Jeder nicht diskrete topologische Raum ist nicht $\aleph_0$-kompakt.
-    %\item $\SetC$ ist lokal $\aleph_0$-präsentierbar mit $S = \{ \heart \}$.
+    \item $\SetC$ ist lokal $\aleph_0$-präsentierbar mit $S = \{ \heartsuit \}$.
     \item $\Mod(R)$ ist lokal $\aleph_0$-präsentierbar mit $S = \Set{R^n/\im(A)}{n \geq 0, A \in R^{n \times m}, m \geq 0}$
   \end{itemize}
 \end{bspe}
@@ -898,7 +901,7 @@
 % Ausgelassen: Intuition
 
 \begin{defn}
-  Eine Kategorie heißt genau dann \emph{lokal präsentierbar}, wenn sie lokal $\kappa$-präasentierbar für eine reguläre Kardinalzahl $\kappa$ ist.
+  Eine Kategorie heißt genau dann \emph{lokal präsentierbar}, wenn sie lokal $\kappa$-präsentierbar für eine reguläre Kardinalzahl $\kappa$ ist.
 \end{defn}
 
 \begin{bspe}
