@@ -3298,23 +3298,6 @@ Sei $\Aat$ eine abelsche Kategorie.
   Für rechtsexakte Funktoren $G : \Aat \to \Bat$ definiert man die \emph{Linksableitung} $LF : \Der^-(\Aat) \to \Der^-(\Bat)$.
 \end{bem}
 
-\begin{defn}
-  Die \emph{klassischen abgeleiteten Funktoren} sind
-  \[
-    R^i F \coloneqq H^i \circ RF
-    \quad \text{bzw.} \quad
-    L^i G \coloneqq H^i \circ LG.
-  \]
-\end{defn}
-
-\begin{bem}
-  Aus einer k.e.S. $0 \!\to\! A \!\to\! B \!\to\! C \!\to\! 0$ in $\Aat$ erhält man eine l.e.S.
-  \begin{align*}
-    & \ldots \to R^i F(A) \to R^i F(B) \to R^i F(C) \to R^{i+1} F(A) \to \ldots \quad \text{bzw.} \\
-    & \ldots \to L^i G(A) \to L^i G(B) \to L^i G(C) \to L^{i+1} G(A) \to \ldots
-  \end{align*}
-\end{bem}
-
 % III.6.2
 \begin{prop}
   Sei $F : \Aat \to \Bat$ ein exakter Funktor.
@@ -3360,8 +3343,31 @@ Sei $\Aat$ eine abelsche Kategorie.
   eine Kategorienäquivalenz.
 \end{prop}
 
-% III.6.5 (Konstruktion des abgeleiteten Funktors)
+% III.6.6
+\begin{defn}
+  Der \emph{abgeleitete Funktor} eines linksexakten Funktors $F : \Aat \to \Bat$ ist ein Paar $(RF, \epsilon_F)$ bestehend aus einem exakten Funktor $RF : \Der^+(\Aat) \to \Der^+(\Bat)$ und einer natürlichen Transformation $\epsilon_F : Q_\Bat \circ K^+(F) \Rightarrow RF \circ Q_\Aat$:
+  \begin{centertikzcd}[column sep=1cm, row sep=0.5cm]
+    K^+(\Aat) \arrow[r, "K^+(F)"] \arrow[d, swap, "Q_\Aat"] & K^+(\Bat) \arrow[d, "Q_\Bat"] \arrow[ld, Rightarrow, "\epsilon"] \\
+    \Der^+(\Aat) \arrow[r, swap, "RF"] & \Der^+(\Bat)
+  \end{centertikzcd}
+  der folgende univ. Eigenschaft erfüllt: Für jeden exakten Funktor $F : \Der^+(\Aat) \to \Der^+(\Bat)$ und alle $\epsilon : Q_\Bat \circ K^+(F) \Rightarrow G \circ Q_\Aat$ gibt es ein eindeutiges $\eta : RF \Rightarrow G$, sodass folgendes Diagramm kommutiert:
+  \begin{centertikzcd}
+    & Q_\Bat \circ K^+(F) \arrow[ld, "\epsilon_F"] \arrow[rd, "\epsilon"] \\
+    RF \circ Q_\Aat \arrow[rr, "\eta Q_\Aat"] && G \circ Q_\Aat
+  \end{centertikzcd}
+  Dual ist der abgeleitete Funktor eines rechtsex. Funktors $F : \Aat \to \Bat$ ein Paar $(LF, \epsilon_F)$ mit einem exakten Funktor $F : \Der^-(\Aat) \to \Der^-(\Bat)$ und einer nat. Transformation $\epsilon_F : LF \circ Q_\Aat \Rightarrow Q_\Bat \circ K^-(F)$, die eine duale universelle Eigenschaft erfüllt.
+\end{defn}
 
+\begin{bem}
+  Wenn das zweite "`exakt"' in der Def. nicht wäre, so wäre eine Rechtsableitung eine Links-Kan-Erw. von $Q_\Bat \circ K^+(F)$ längs $Q_\Aat$.
+\end{bem}
+
+% III.6.7
+\begin{bem}
+  Abgeleitete Funktoren sind eindeutig bis auf eindeutige Isomorphie (sofern sie existieren).
+\end{bem}
+
+% III.6.5 (Konstruktion des abgeleiteten Funktors)
 \begin{konstr}
   Der \emph{abgeleitete Funktor} eines linksexakten Funktors $F : \Aat \to \Bat$ mit angepassten Objekten $\Ada \subset \Ob(\Aat)$ ist
   \begin{align*}
@@ -3372,6 +3378,102 @@ Sei $\Aat$ eine abelsche Kategorie.
   Analog ist der abgel. Funktor $LG : \Der^-(\Aat) \simeq K^-(\Ada)[S_\Ada^{-1}] \to \Der^-(\Bat)$ eines rechtsex. Funkt. $G : \Aat \to \Bat$ mit $\Ada \!\subset\! \Ob(\Aat)$ angepasst definiert.
 \end{konstr}
 
-% TODO: Universelle Eigenschaft des abgeleiteten Funktors (verwende dabei das Wort Kan-Erweiterung)
+% III.6.8-III.6.11
+\begin{thm}
+  Die Konstruktion erfüllt die Definition von exakter Funktor.
+\end{thm}
+
+% III.6.12
+\begin{thm}
+  p) \enspace Wenn $\Aat$ genug projektive Objekte enthält, dann ist deren Klasse $\Proj$ angepasst an jeden rechts-exakten Funktor $G : \Aat \to \Bat$. \\
+  i) \enspace Wenn $\Aat$ genug injektive Objekte enthält, dann ist deren Klasse $\Inj$ angepasst an jeden links-exakten Funktor $F : \Aat \to \Bat$.
+\end{thm}
+
+% III.6.13
+\begin{defn}
+  Ein Funktor $H$ von einer abgeleiteten Kat. oder Homotopie- Kategorie in eine abelsche Kategorie heißt \emph{kohomologisch}, falls für jedes ausgezeichnete Dreieck $X \to Y \to Z \to X[1]$ die Sequenz
+  \[ \ldots \to H(T^i X) \to H(T^i Y) \to H(T^i Z) \to H(T^{i+1} X) \to \ldots \]
+  exakt ist.
+\end{defn}
+
+\begin{bsp}
+  $H^j$ ist ein ein kohomologischer Funktor.
+\end{bsp}
+
+% III.6.13
+\begin{defn}
+  Die \emph{klassischen abgeleiteten Funktoren} sind
+  \[
+    R^i F \coloneqq H^i \circ RF = H^0 \circ T^i \circ RF
+    \quad \text{bzw.} \quad
+    L^i G \coloneqq H^i \circ LG = H^0 \circ T^i \circ LG.
+  \]
+\end{defn}
+
+\begin{bem}
+  Es gilt $R^i F = 0$ für $i < 0$ und $R^0 F = F$.
+\end{bem}
+
+\begin{bem}
+  Aus einer k.e.S. $0 \!\to\! A \!\to\! B \!\to\! C \!\to\! 0$ in $\Aat$ erhält man eine l.e.S.
+  \begin{align*}
+    & \ldots \to R^i F(A) \to R^i F(B) \to R^i F(C) \to R^{i+1} F(A) \to \ldots \quad \text{bzw.} \\
+    & \ldots \to L^i G(A) \to L^i G(B) \to L^i G(C) \to L^{i+1} G(A) \to \ldots
+  \end{align*}
+\end{bem}
+
+% III.6.14 ($\Ext^i$ als abgeleiteter Funktor)
+\begin{defn}
+  Seien $\CCC{A}, \CCC{B} \in \Ob(\Kom(\Aat))$. Das \emph{innere Hom-Objekt} $\CCC{\Hom}(\CCC{A}, \CCC{B}) \in \Kom(\Aat)$ ist definiert durch
+  \begin{align*}
+    \Hom^n(\CCC{A}, \CCC{B}) & \coloneqq \prod_{i \in \Z} \Hom_\Aat(A^i, B^{i+n}) \\
+    \partial^n (f_i)_{i \in \Z} & \coloneqq (\partial_B^{i+n} \circ f_i - (-1)^n f_{i+1} \circ \partial_A^i)_{i \in \Z}
+  \end{align*}
+\end{defn}
+
+\begin{bem}
+  Zykel, Ränder und Kohomologie sind wie folgt:
+  \begin{align*}
+    Z^j \CCC{\Hom}(\CCC{A}, \CCC{B}) & \cong \Hom_{\Kom(\Aat)}(\CCC{A}, \CCC{B}[j]), \\
+    B^j \CCC{\Hom}(\CCC{A}, \CCC{B}) & \cong \Set{f \in \Hom_{\Kom(\Aat)}(\CCC{A}, \CCC{B}[j])}{f \simeq 0}, \\
+    H^j \CCC{\Hom}(\CCC{A}, \CCC{B}) & \cong \Hom_{K(\Aat)}(\CCC{A}, \CCC{B}[j]).
+  \end{align*}
+\end{bem}
+
+% III.6.14
+\begin{bem}
+  p) \enspace Sei $\Aat$ eine abelsche Kategorie mit genug projektiven Objekten, $Y \in \Ob(\Aat)$.
+  Dann ist $\Ext^i(\blank, Y) \cong R^i \Hom(\blank, Y)$. \\
+  i) \enspace Sei $\Aat$ eine abelsche Kategorie mit genug injektiven Objekten, $X \in \Ob(\Aat)$.
+  Dann ist $\Ext^i(X, \blank) \cong R^i \Hom(X, \blank)$.
+\end{bem}
+
+% III.6.15
+\begin{defn}
+  Sei $R$ ein assoziativer Ring mit Einheit, $N$ ein Links-$R$-Modul.
+  Der Funktor $\blank \otimes_r N : \text{$\Mod$-$R$} \to \AbGrp$ ist rechtsexakt und flache Objekte bilden eine an ihn angepasste Klasse.
+  Der abgeleitete Funktor wird mit $\blank \otimes^L N$ bezeichnet.
+  Die \emph{Tor-Gruppen} sind die klassischen abgeleiteten Funktoren
+  \[ \Tor_i^R(M, N) \coloneqq H^{-i}(M \otimes^L N). \]
+\end{defn}
+
+% TODO: Verschieben zu angepassten Objekten oder direkt nach der Konstruktion des abgeleiten Funktors?
+% III.6.15
+\begin{defn}
+  Angenommen, der abgeleitete Funktor $RF$ eines linksexakten Funktors $F : \Aat \to \Bat$ existiert. Ein Objekt $X \in \Ob(\Aat)$ heißt \emph{$F$-azyklisch}, falls $R^i F(X) = 0$ für alle $i \neq 0$.
+\end{defn}
+
+% III.6.15
+\begin{thm}
+  Sei $F : \Aat \to \Bat$ ein linksexakter Funktor, der eine Rechtsab- leitung besitzt, $\mathcal{Z} \subset \Ob(\Aat)$ die Klasse der $F$-azyklischen Objekte.
+  \begin{itemize}
+    \item Eine an $F$ angepasste Klasse von Objekten existiert genau dann, wenn $\mathcal{Z}$ groß genug ist, \dh{} jedes Objekt aus $\Aat$ Unterobjekt eines Objektes aus $\mathcal{Z}$ ist.
+    \item Wenn $\mathcal{Z}$ groß genug ist, dann sind an $F$ angepasste Klassen dasselbe wie Unterklassen von $\mathcal{Z}$, die groß genug sind.
+    \item Wenn $\mathcal{Z}$ groß genug ist, dann enthält $\mathcal{Z}$ alle injektiven Objekte.
+  \end{itemize}
+\end{thm}
+
+
+% TODO: III.7
 
 \end{document}
