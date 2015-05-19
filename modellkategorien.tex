@@ -735,8 +735,8 @@
   Dann ist $p_* : \pi^l(X, Z) \to \pi^l(X, Y), \, [f] \mapsto [p \circ f]$ eine Bijektion.
 \end{thm}
 
-\begin{thm}[Whitehead]
-  Für einen Morphismus $f : X \to Y$ zwischen bifasernden Objekten gilt
+\begin{thm}[\emph{Whitehead}]\mbox{}\\
+  Für einen Morphismus $f : X \to Y$ zw. bifasernden Objekten gilt
   \begin{align*}
     f \in \Weak \iff & \text{$f$ ist eine Homotopieäquivalenz} \\
     \coloniff & \ex{g : Y \to X} g \circ f \simeq \id_X \wedge f \circ g \simeq \id_Y.
@@ -806,14 +806,14 @@
   $f \in \Weak \iff \gamma(f)$ ist ein Iso.
 \end{lem}
 
-\begin{bem}
+\begin{lem}
   Sei $X$ kofasernd und $Y$ fasernd. Dann ist die Abbildung
   \[
     \pi(X, Y) \to \Hom_{\Ho \ModC}(X, Y), \quad
     [f] \mapsto [RQf]
   \]
   eine Bijektion.
-\end{bem}
+\end{lem}
 
 \begin{lem}
   Ist $F : \ModC \to \Cat$ ein Funktor, der schwache Äq. auf Isos schickt, dann identifiziert $F$ links- bzw. rechtshomotope Morphismen.
@@ -848,7 +848,7 @@
 \end{bem}
 
 \begin{defn}
-  Sei $\kappa$ eine Kardinalzahl. Eine Kategorie heißt $\kappa$-klein, falls sie nur $\kappa$-viele Morphismen besitzt.
+  Sei $\kappa$ eine Kardinalzahl. Eine Kategorie heißt \emph{$\kappa$-klein}, falls sie nur $\kappa$-viele Morphismen besitzt.
 \end{defn}
 
 \begin{bem}
@@ -856,7 +856,7 @@
 \end{bem}
 
 \begin{defn}
-  Eine Kategorie heißt genau dann $\kappa$-filtriert, wobei $\kappa$ eine reguläre Kardinalzahl ist, wenn jedes $\kappa$-kleine Diagramm in der Kategorie einen Kokegel besitzt.
+  Eine Kategorie heißt genau dann \emph{$\kappa$-filtriert}, wobei $\kappa$ eine reguläre Kardinalzahl ist, wenn jedes $\kappa$-kleine Diagramm in der Kategorie einen Kokegel besitzt.
 \end{defn}
 
 \begin{bem}
@@ -868,7 +868,7 @@
   \[
     \Colim_i \Hom_\Cat(X, T_i) \xrightarrow{\cong} \Hom_\Cat(X, \Colim_i T_i)
   \]
-  für alle $\kappa$-filtrierte Diagramme $T_i$.
+  für alle $\kappa$-filtrierte Diagramme $(T_i)_{i \in \Iat}$.
 \end{defn}
 
 \begin{defn}
@@ -915,6 +915,8 @@
 \begin{fun}
   Sei $\Cat$ lokal präsentierbar. Wenn auch $\Cat^\op$ lokal präsen- tierbar ist, dann ist $\Cat$ die zu einer Quasiordnung gehörige Kategorie!
 \end{fun}
+
+% TODO: 2-aus-6-Eigenschaft von Isos, schwachen Äquivalenzen
 
 \pagebreak
 
