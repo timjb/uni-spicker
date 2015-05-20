@@ -40,6 +40,7 @@
 \DeclareMathOperator{\Ho}{Ho} % Homotopiekategorie
 \DeclareMathOperator{\Cell}{Cell} % Zellkomplexe
 \DeclareMathOperator{\Coff}{Cof} % Kofaserungen
+\newcommand{\ModStr}{$(\Weak, \Cof, \Fib)$} % Daten einer Modellstruktur
 
 \newenvironment{centertikzcd}
   {\begin{center}\begin{tikzcd}}
@@ -549,7 +550,7 @@
 \end{defn}
 
 \begin{defn}
-  Eine bivollständige Kategorie $\ModC$ zusammen mit einer Modellstruktur $(\Weak, \Cof, \Fib)$ heißt eine \emph{Modellkategorie}.
+  Eine bivollständige Kategorie $\ModC$ zusammen mit einer Modellstruktur \ModStr{} heißt eine \emph{Modellkategorie}.
 \end{defn}
 
 \begin{sprech}
@@ -834,7 +835,7 @@
 \end{thm}
 
 % §5. Kombinatorische und eigentliche Modellkategorien
-\section{Kombinatorische und eigentliche Modellkategorien}
+\section{Klassen von Modellkategorien}
 
 % §5.1
 \subsection{Lokal präsentierbare Kategorien}
@@ -935,11 +936,64 @@
   $\alpha$-kleine Kolimiten $\alpha$-kleiner Objekte sind wieder $\alpha$-kompakt.
 \end{bsp}
 
+\subsection{Kombinatorische Modellkategorien}
+
 \begin{lem}[\emph{Kleines-Objekt-Argument}]\mbox{}\\
   Sei $\Cat$ lokal präsentierbar, $\Iat \subset \Mor(\Cat)$ eine Menge, $\Cell(\Iat)$ die Unterkat. der relativen $\Iat$-Zellenkomplexe und $\Coff(\Iat)$ die Unterkat. der Retrakte von $\Cell(\Iat)$.
   Dann ist $(\Coff(\Iat), \Iat^\lhhe)$ ein SFS.
 \end{lem}
 
+\begin{defn}
+  Eine \emph{kombinatorische Modellkategorie} ist eine lokal präsentierte Modellkat. $\ModC$ mit Modellstr. \ModStr{}, sodass Mengen $\Iat, \Jat \subset \Mor(\ModC)$ existieren, sodass $\Cof = \Cof(\Iat)$ und $\Cof \cap \Weak = \Cof(\Jat)$.
+\end{defn}
+
+\begin{sprech}
+  Die Kofaserungen in $\Iat$ heißen \emph{erzeugende Kofaserungen}, die in $\Jat$ \emph{azyklische erzeugende Kofaserungen}.
+\end{sprech}
+
+\begin{satz}
+  Sei $\ModC$ eine lokal präsentierbare Kategorie. % => $\ModC$ bivollständig
+  Sei $\Weak \subseteq \Mor(\ModC)$ eine Unterkat. schw. Äquivalenzen.
+  Seien $\Iat, \Jat \subseteq \Mor(\ModC)$ Mengen.
+  Dann sind $\Iat$ und $\Jat$ genau dann erzeugende (azyklische) Kofaserungen einer Modellstruktur auf $\ModC$, falls \\[2pt]
+  \inlineitem{$\Cell(\Jat) \subseteq \Iat$ \enspace (Azyklizität)} \quad
+  \inlineitem{$\Iat^\lhhe = \Jat^\lhhe \cap \Weak$ \enspace (Kompatibilität)}
+\end{satz}
+
+\subsection{Eigentliche Modellkategorien}
+
+\begin{defn}
+  Eine Modellkategorie $\ModC$ heißt \emph{linkseigentlich}, falls für alle Pushouts der Form
+  \begin{centertikzcd}
+    A \arrow[r, "\sim"] \arrow[d, hook] \arrow[rd, phantom, "\ulcorner", very near end] & B \arrow[d, hook] \\
+    X \arrow[r, "g"] & Y
+  \end{centertikzcd}
+  auch der Morphismus $g : X \to Y$ eine schwache Äquivalenz ist. \\
+  $\ModC$ heißt rechtseigentlich, falls $\ModC^\op$ linkseigentlich ist, \dh{} Pullbacks schwacher Äquivalenzen längs Faserungen wieder schwache Äquivalenzen sind.
+\end{defn}
+
+\begin{bsp}
+  Eine Modellkategorie, in der jedes Objekt kofasernd ist, ist linkseigentlich.
+\end{bsp}
+
+\begin{defn}
+  $\ModC$ heißt \emph{eigentlich}, falls $\ModC$ links- und rechtseigentlich ist.
+\end{defn}
+
+\begin{prop}
+  In jeder Modellkategorie ist der Pushout einer schwachen Äquivalenz zwischen kofasernden Objekten längs Kofaserungen wieder eine schache Äquivalenz.
+\end{prop}
+
+% Einschub: Homotopie-Erweiterungs-Eigenschaft
+\begin{bem}
+  Gute Homotopien kann man längs Kofaserungen erweitern:
+  \begin{centertikzcd}
+    A \arrow[r, "H"] \arrow[d, hook, "i"] & Y^I \arrow{d}{p_0}[swap, twoheadrightarrow]{{\sim}} \\
+    X \arrow[r, "f"] \arrow[ru, dashed, "\overline{h}"] & Y
+  \end{centertikzcd}
+\end{bem}
+
+% TODO: Scheibenkategorien als Modellkategorien
 % TODO: 2-aus-6-Eigenschaft von Isos, schwachen Äquivalenzen
 
 \pagebreak
