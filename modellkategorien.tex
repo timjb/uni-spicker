@@ -38,6 +38,8 @@
 \newcommand{\gut}{\text{gut}}
 \newcommand{\sg}{\text{sehr gut}}
 \DeclareMathOperator{\Ho}{Ho} % Homotopiekategorie
+\DeclareMathOperator{\Cell}{Cell} % Zellkomplexe
+\DeclareMathOperator{\Coff}{Cof} % Kofaserungen
 
 \newenvironment{centertikzcd}
   {\begin{center}\begin{tikzcd}}
@@ -831,6 +833,10 @@
   Ein Morphismus $p : Z \to Y$ zw. fasernden Objekten ist genau dann eine schwache Äquivalenz, wenn $p_* : \pi(X, Z) \to \pi(X, Y)$ bijektiv ist für alle kofasernden Objekte $X \in \ModC$.
 \end{thm}
 
+% §5. Kombinatorische und eigentliche Modellkategorien
+\section{Kombinatorische und eigentliche Modellkategorien}
+
+% §5.1
 \subsection{Lokal präsentierbare Kategorien}
 
 % soll andeuten: Die Objekte einer lokal präsentierbareen Kategorien sind präsentierbar, nicht die Kategorie als solche
@@ -840,7 +846,7 @@
 \end{motto}
 
 \begin{defn}
-  Eine $\infty$-große Kardinalzahl $\kappa$ heißt genau dann \emph{regulär}, wenn die Vereinigung von weniger als $\kappa$ vielen Mengen, die alle weniger als $\kappa$-viele Elem. enthalten, selbst weniger als $\kappa$-viele Elemente enthält.
+  Eine $\infty$-große Kardinalzahl $\kappa$ heißt \emph{regulär}, wenn die Vereinigung von weniger als $\kappa$ vielen Mengen, die alle weniger als $\kappa$-viele Elem. enthalten, selbst weniger als $\kappa$-viele Elemente enthält.
 \end{defn}
 
 \begin{bem}
@@ -856,7 +862,11 @@
 \end{bem}
 
 \begin{defn}
-  Eine Kategorie heißt genau dann \emph{$\kappa$-filtriert}, wobei $\kappa$ eine reguläre Kardinalzahl ist, wenn jedes $\kappa$-kleine Diagramm in der Kategorie einen Kokegel besitzt.
+  Eine Kategorie heißt \emph{$\kappa$-filtriert}, wobei $\kappa$ eine reguläre Kardinalzahl ist, wenn jedes $\alpha$-kleine Diagramm in der Kategorie einen Kokegel besitzt, wobei $\alpha < \kappa$.
+\end{defn}
+
+\begin{defn}
+  Eine teilweise geordnete Menge $(I, \leq)$ heißt \emph{$\alpha$-gerichtet}, falls die zugehörige Kategorie $\alpha$-filtriert ist, \dh{} jeweils weniger als $\alpha$-viele Elemente haben eine obere Schranke.
 \end{defn}
 
 \begin{bem}
@@ -864,7 +874,7 @@
 \end{bem}
 
 \begin{defn}
-  Ein Objekt $X$ einer Kat. $\Cat$ heißt genau dann \emph{$\kappa$-kompakt}, wenn $\Hom(X, \blank) : \Cat \to \SetC$ mit $\kappa$-filtrierten Kolimiten vertauscht:
+  Ein Objekt $X$ einer Kat. $\Cat$ heißt \emph{$\kappa$-kompakt} oder \emph{$\alpha$-klein}, wenn $\Hom(X, \blank) : \Cat \to \SetC$ mit $\kappa$-filtrierten Kolimiten vertauscht:
   \[
     \Colim_i \Hom_\Cat(X, T_i) \xrightarrow{\cong} \Hom_\Cat(X, \Colim_i T_i)
   \]
@@ -915,6 +925,20 @@
 \begin{fun}
   Sei $\Cat$ lokal präsentierbar. Wenn auch $\Cat^\op$ lokal präsen- tierbar ist, dann ist $\Cat$ die zu einer Quasiordnung gehörige Kategorie!
 \end{fun}
+
+\begin{lem}
+  Sei $X : \Iat \times \Jat \to \SetC$ ein Funktor, wobei $\Iat$ $\alpha$-filtriert und $\Jat$ $\alpha$-klein.
+  Dann ist der kanonische Isomorphismus $\colim_i \lim_j X(i, j) \to \lim_j \colim_i X(i, j)$ eine Bijektion.
+\end{lem}
+
+\begin{bsp}
+  $\alpha$-kleine Kolimiten $\alpha$-kleiner Objekte sind wieder $\alpha$-kompakt.
+\end{bsp}
+
+\begin{lem}[\emph{Kleines-Objekt-Argument}]\mbox{}\\
+  Sei $\Cat$ lokal präsentierbar, $\Iat \subset \Mor(\Cat)$ eine Menge, $\Cell(\Iat)$ die Unterkat. der relativen $\Iat$-Zellenkomplexe und $\Coff(\Iat)$ die Unterkat. der Retrakte von $\Cell(\Iat)$.
+  Dann ist $(\Coff(\Iat), \Iat^\lhhe)$ ein SFS.
+\end{lem}
 
 % TODO: 2-aus-6-Eigenschaft von Isos, schwachen Äquivalenzen
 
