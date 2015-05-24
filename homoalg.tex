@@ -3389,6 +3389,21 @@ Sei $\Aat$ eine abelsche Kategorie.
   i) \enspace Wenn $\Aat$ genug injektive Objekte enthält, dann ist deren Klasse $\Inj$ angepasst an jeden links-exakten Funktor $F : \Aat \to \Bat$.
 \end{thm}
 
+% III.6.15
+\begin{defn}
+  Angenommen, der abgeleitete Funktor $RF$ eines linksexakten Funktors $F : \Aat \to \Bat$ existiert. Ein Objekt $X \in \Ob(\Aat)$ heißt \emph{$F$-azyklisch}, falls $R^i F(X) = 0$ für alle $i \neq 0$.
+\end{defn}
+
+% III.6.15
+\begin{thm}
+  Sei $F : \Aat \to \Bat$ ein linksexakter Funktor, der eine Rechtsab- leitung besitzt, $\mathcal{Z} \subset \Ob(\Aat)$ die Klasse der $F$-azyklischen Objekte.
+  \begin{itemize}
+    \item Eine an $F$ angepasste Klasse von Objekten existiert genau dann, wenn $\mathcal{Z}$ groß genug ist, \dh{} jedes Objekt aus $\Aat$ Unterobjekt eines Objektes aus $\mathcal{Z}$ ist.
+    \item Wenn $\mathcal{Z}$ groß genug ist, dann sind an $F$ angepasste Klassen dasselbe wie Unterklassen von $\mathcal{Z}$, die groß genug sind.
+    \item Wenn $\mathcal{Z}$ groß genug ist, dann enthält $\mathcal{Z}$ alle injektiven Objekte.
+  \end{itemize}
+\end{thm}
+
 % III.6.13
 \begin{defn}
   Ein Funktor $H$ von einer abgeleiteten Kat. oder Homotopie- Kategorie in eine abelsche Kategorie heißt \emph{kohomologisch}, falls für jedes ausgezeichnete Dreieck $X \to Y \to Z \to X[1]$ die Sequenz
@@ -3457,23 +3472,28 @@ Sei $\Aat$ eine abelsche Kategorie.
   \[ \Tor_i^R(M, N) \coloneqq H^{-i}(M \otimes^L N). \]
 \end{defn}
 
-% TODO: Verschieben zu angepassten Objekten oder direkt nach der Konstruktion des abgeleiten Funktors?
-% III.6.15
-\begin{defn}
-  Angenommen, der abgeleitete Funktor $RF$ eines linksexakten Funktors $F : \Aat \to \Bat$ existiert. Ein Objekt $X \in \Ob(\Aat)$ heißt \emph{$F$-azyklisch}, falls $R^i F(X) = 0$ für alle $i \neq 0$.
-\end{defn}
+% III.7 Der abgeleitete Funktor der Komposition und Spektralsequenzen
 
-% III.6.15
+% III.7.1
+% TODO: Kann man auch einfach voraussetzen, dass die abgeleiten Funktoren existieren?
 \begin{thm}
-  Sei $F : \Aat \to \Bat$ ein linksexakter Funktor, der eine Rechtsab- leitung besitzt, $\mathcal{Z} \subset \Ob(\Aat)$ die Klasse der $F$-azyklischen Objekte.
-  \begin{itemize}
-    \item Eine an $F$ angepasste Klasse von Objekten existiert genau dann, wenn $\mathcal{Z}$ groß genug ist, \dh{} jedes Objekt aus $\Aat$ Unterobjekt eines Objektes aus $\mathcal{Z}$ ist.
-    \item Wenn $\mathcal{Z}$ groß genug ist, dann sind an $F$ angepasste Klassen dasselbe wie Unterklassen von $\mathcal{Z}$, die groß genug sind.
-    \item Wenn $\mathcal{Z}$ groß genug ist, dann enthält $\mathcal{Z}$ alle injektiven Objekte.
-  \end{itemize}
+  Seien $\Aat$, $\Bat$ und $\Cat$ ab. Kategorien, $F : \Aat \to \Bat$ und $G : \Bat \to \Cat$ linksexakte Funktoren.
+  Sei $\Ada_\Aat \!\subset\! \Ob(\Aat)$ an $F$ und $\Ada_\Bat \!\subset\! \Ob(\Bat)$ an $G$ angepasst.
+  Angenommen, $F(\Ada_\Aat) \subseteq \Ada_\Bat$.
+  Dann existieren $RF$, $RG$ und $R(G \circ F)$ und die von der univ. Eigenschaft induzierte natürliche Transformation $R(G \circ F) \to RG \circ RF$ ist ein Isomorphismus.
 \end{thm}
 
+\begin{bem}
+  Eine analoge Aussage gilt für rechtsexakte Funktoren.
+\end{bem}
 
-% TODO: III.7
+% Ausgelassen: III.7.2 (Motivation von Spektralsequenzen)
+
+% III.7.3
+\begin{bem}
+  Es gibt eine separate \spickerref{spektralsequenzen}{Zusammenfassung zu Spektralsequenzen}.
+\end{bem}
+
+% TODO: II.7.5. Spektralsequenz eines Doppelkomplexes
 
 \end{document}

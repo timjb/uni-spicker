@@ -24,6 +24,8 @@
 \newcommand{\leS}{l.\,e.\,S.} % lange exakte Sequenz
 \newcommand{\nacong}{\!\cong\!} % narrow cong
 %\newcommand{\ZM}[1]{\Z_{#1}} % \Z modulo n
+\newcommand{\CC}[1]{{#1}_{\bullet}} % Kettenkomplex (chain complex)
+\newcommand{\CCC}[1]{{#1}^{\bullet}} % Ko-Kettenkomplex (cochain complex)
 
 \newenvironment{centertikzcd}
   {\begin{center}\begin{tikzcd}}
@@ -129,7 +131,7 @@ Sei $\Aat$ im Folgenden eine abelsche Kategorie.
 \end{defn}
 
 \begin{defn}
-  Eine Spektralsequenz \emph{konvergiert}, falls für alle $p, q \in \Z$ ein $R \in \N$ existiert, sodass für alle $r \geq R$ die Differentiale von und nach $E^r_{p,q}$ null sind und damit $E^\infty_{p,q} \coloneqq E^R_{p,q} \cong E^{R+1}_{p,q} \cong E^{R+2}_{p,q} \ldots$ \\
+  Eine Spektralsequenz \emph{konvergiert}, falls für alle $p, q \in \Z$ ein $R \in \N$ existiert, sodass für alle $r \geq R$ die Differentiale von und nach $E^r_{p,q}$ null sind und damit $E^\infty_{p,q} \coloneqq E^R_{p,q} \cong E^{R+1}_{p,q} \cong E^{R+2}_{p,q} \ldots$ \\[2pt]
   Der \emph{Grenzwert} der SS ist die Unendlich-Seite $E^\infty \coloneqq \{ E^\infty_{p,q} \}_{p,q}$.
 \end{defn}
 
@@ -137,20 +139,71 @@ Sei $\Aat$ im Folgenden eine abelsche Kategorie.
   $E^r \Rightarrow E^\infty$
 \end{nota}
 
+\begin{bem}
+  Viele Spektralsequenzen leben im ersten Quadranten, \dh{} $E^r_{p,q} = 0$ wenn $p < 0$ oder $q < 0$. Das impliziert, dass für $p$, $q$ fest und $r$ groß alle Differentiale von und nach $E^r_{p,q}$ aus dem ersten Quadranten heraus- oder hineinführen und damit Null sind. \\
+  Somit konvergieren solche Spektralsequenzen immer.
+\end{bem}
+
 \begin{defn}
   Eine SS \emph{degeneriert} auf Seite $R$, wenn $d^r_{p,q} \!=\! 0$ für alle $r \!\geq\! R$.
 \end{defn}
 
-\iffalse
 \begin{bem}
   Das entspricht einer Art gleichmäßigen Konvergenz.
 \end{bem}
-\fi
+
+\begin{defn}
+  Eine \emph{Filtrierung} eines Obj. $M \in \Ob(\Aat)$ ist eine aufsteigende Folge $\nldots \subseteq F_p M \subseteq F_{p+1} M \subseteq \nldots$ von Unterobjekten von $M$, $p \!\in\! \Z$, sodass $0 = \cap_p F_p M \coloneqq \lim_{\mathclap{p \to -\!\infty}} F_p M$ und $M = \cup_p F_p M \coloneqq \underset{\mathclap{p \to \infty}}{\colim} F_p M$.
+\end{defn}
+% XXX: beschränkte Filtrierungen
+
+\begin{defn}
+  Eine SS $E$ \emph{konvergiert gegen} eine Folge $(E_n)_{n \in \Z}$ von Objekten aus $\Aat$ mit Filtrierungen $\ldots \subseteq F_p E_n \subseteq F_{p+1} E_{n+1} \subseteq \ldots$ falls $E^\infty_{p,q} \cong F_{p+1} E_{p+q} / F_p E_{p+q}$ für alle $p, q \in \Z$.
+\end{defn}
 
 \begin{bem}
-  Viele Spektralsequenzen leben im ersten Quadranten, \dh{} $E^r_{p,q} = 0$ wenn $p < 0$ oder $q < 0$. Das impliziert, dass für $p$, $q$ fest und $r$ groß alle Differentiale von und nach $E^r_{p,q}$ aus dem ersten Quadranten heraus- oder hineinführen und damit Null sind.
-  %Somit konvergieren solche Spektralsequenzen immer.
+  Bei vielen SS sind die Objekte $E^1_{p,q}$ oder $E^2_{p,q}$ bekannt und man möchte mithilfe der Spektralsequenz die Objekte $E_n$ berechnen.
+  In anderen Anw. kennt man $E_n$ und schließt daraus auf $E^r_{p,q}$.
+  Allgemein gilt: Je mehr Objekte Null sind, desto leichter lässt sich die SS für konkrete Berechnungen verwenden.
 \end{bem}
+
+\begin{bem}
+  Es gibt Invarianten, die in einer SS von Seite zu Seite unverändert bleiben:
+\end{bem}
+
+% III.7.4 in "Methods of Homological Algebra"
+\begin{defn}
+  Sei $C$ eine abelsche Gruppe und $\chi : \Ob(\Aat) \to C$ eine additive Funktion, \dh{} $\chi(X) = \chi(Y) + \chi(X/Y)$ für alle $(Y \hookrightarrow X) \in \Aat$ und $\chi(X) = \chi(X')$ falls $X \cong X'$.
+  Für einen endl. Komplex $\CCC{K}$ heißt dann
+  \[
+    \chi(\CCC{K}) \coloneqq \sum_i (-1)^i \chi(K^i) \qquad
+    \text{\emph{Euler-Charakteristik} von $\CCC{K}$.}
+  \]
+\end{defn}
+
+\begin{lem}
+  $\chi(\CCC{K}) \cong \sum_i (-1)^i \chi(H^i(\CCC{K}))$.
+\end{lem}
+
+\begin{samepage}
+
+\begin{bem}
+  Sei $E$ eine SS, die gegen $(E_n)_{n \in \Z}$ konvergiert. Setze
+  \[
+    E_n^r \coloneqq \oplus_{p+q=n} E^r_{p,q}, \quad
+    d^r_n \coloneqq \oplus_{p+q=n} d^r_{p,q} \qquad
+    \text{für } r \in \N \cup \{ \infty \}.
+  \]
+  Angenommen, für ein $r_0 \in \N$ sind alle obigen direkten Summen sowie $\CC{E^{r_0}}$ endlich.
+  Dann gilt selbiges für alle $r \geq r_0$ und
+  \begin{align*}
+    \chi(\CC{E}^r) \!&=\! \sum_i (-1)^i \chi(H_i(\CC{E}^r)) \!=\! \chi(\CC{E}^{r+1}) \!=\! \chi(\CC{E}^\infty) \!=\! \sum_n (-1)^n \chi(E^n), \\
+    \chi(E_n) & = \sum_p \chi(F_{p+1} E_n / F_p E_n) = \sum_{\mathclap{p+q=n}} \chi(E^\infty_{p,q}). \\
+  \end{align*}
+\end{bem}
+
+\subsection{Exakte Pärchen}
+\end{samepage}
 
 \begin{defn}
   Ein \emph{exaktes Pärchen} $(A, E)$ in $\Aat$ ist gegeben durch Objekte $A, E \in \Ob(\Aat)$ und Morphismen wie folgt
@@ -216,11 +269,6 @@ Sei $\Aat$ im Folgenden eine abelsche Kategorie.
     & \phantom{A^2_{n+1,p+3}} \arrow[ru] & \, & \phantom{A^2_{n,p+1}} \arrow[ru] & \, & \, &
   \end{centertikzcd}
 \end{bem}
-
-\begin{defn}
-  Eine \emph{Filtrierung} eines $A$-Moduls $M$ ist eine aufsteigende Folge $\nldots \subseteq F_p M \subseteq F_{p+1} M \subseteq \nldots$ von Untermodulen von $M$ mit $p \in \Z$, sodass $0 = \cap_p F_p M$ und $M = \cup_p F_p M$.
-\end{defn}
-% XXX: beschränkte Filtrierungen
 
 % 1.2 im Hatcher
 \begin{prop}

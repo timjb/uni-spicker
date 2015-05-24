@@ -120,6 +120,9 @@
 \newcommand*{\rom}[1]{\expandafter\@slowromancap\romannumeral #1@}
 \makeatother
 
+% Cross-Referenzen
+\newcommand{\spickerref}[2]{\href{http://timbaumann.info/uni-spicker/#1.pdf}{#2}}
+
 % Mathematische Symbole
 \newcommand{\R}{\mathbb{R}} % Reelle Zahlen
 \newcommand{\ER}{\overline\R} % Erweiterte reelle Zahlen
