@@ -41,6 +41,10 @@
 
 Sei $\Aat$ im Folgenden eine abelsche Kategorie.
 
+\begin{bem}
+  Die \spickerref{homoalg}{Homologische-Algebra-Zusammenfassung} enthält Grundlagen zu ab. Kategorien, Komplexen und Kohomologie.
+\end{bem}
+
 \begin{defn}
   Eine (homologische) \emph{Spektralsequenz} (SS) besteht aus
   \begin{itemize}
@@ -49,8 +53,6 @@ Sei $\Aat$ im Folgenden eine abelsche Kategorie.
     \item und Isos $\alpha : H_{p,q}(E^r) \!\coloneqq\! \ker(d^r_{p,q}) / \im(d^r_{p+r,q-r+1}) \xrightarrow{\cong} E^{r+1}_{p,q}$.
   \end{itemize}
 \end{defn}
-
-% XXX: Morphismus von Spektralsequenzen
 
 \begin{sprech}
   \begin{itemize}
@@ -153,7 +155,18 @@ Sei $\Aat$ im Folgenden eine abelsche Kategorie.
 \end{bem}
 
 \begin{defn}
-  Eine \emph{Filtrierung} eines Obj. $M \in \Ob(\Aat)$ ist eine aufsteigende Folge $\nldots \subseteq F_p M \subseteq F_{p+1} M \subseteq \nldots$ von Unterobjekten von $M$, $p \!\in\! \Z$, sodass $0 = \cap_p F_p M \coloneqq \lim_{\mathclap{p \to -\!\infty}} F_p M$ und $M = \cup_p F_p M \coloneqq \underset{\mathclap{p \to \infty}}{\colim} F_p M$.
+  Eine \emph{Filtrierung} eines Obj. $M \in \Ob(\Aat)$ ist eine aufsteigende Folge $\ldots \subseteq F_p M \subseteq F_{p+1} M \subseteq \ldots$ von Unterobjekten von $M$, $p \!\in\! \Z$.
+  Eine Filtrierung heißt \emph{regulär}, falls
+  \[
+    0 = \cap_p F_p M \coloneqq \lim_{\mathclap{p \to -\!\infty}} F_p M
+    \quad \text{und} \quad
+    M = \cup_p F_p M \coloneqq \underset{\mathclap{p \to \infty}}{\colim} F_p M.
+  \]
+  Eine Filtrierung heißt \emph{endlich}, falls $p_{-}, p_{+} \in \Z$ existieren mit
+  \[
+    0 = F_{p_{-}} M, \quad
+    M = F_{p_{+}} M.
+  \]
 \end{defn}
 % XXX: beschränkte Filtrierungen
 
@@ -420,6 +433,22 @@ Sei $\Aat$ im Folgenden eine abelsche Kategorie.
     Die induzierte Abbildung auf dem Quotienten $F^m_p/F^m_{p+1} \times F^n_s/F^n_{s+1} \to F^{m+n}_{p+s} / F^{m+n}_{p+s+1}$ entspricht $d_\infty : E_\infty^{p,m-p} \times E_\infty^{s,n-s} \to E_\infty^{p+s,m+n-p-s}$.
   \end{itemize}
 \end{lem}
+
+\subsection{Die Spektralsequenz eines filtrierten Komplexes}
+
+% TODO: Allgemeinere Notation wie in http://people.mpim-bonn.mpg.de/matschke/SpectralSequences.pdf
+% III.7.5 im Gelfand-Manin
+\begin{defn}
+  Sei $\CCC{K} \in \Kom(\Aat)$ ein Kokettenkomplex mit absteigender Filtrierung $\ldots \supset F^p \CCC{K} \supset F^{p+1} \CCC{K} \supset \ldots$ durch Unterkomplexe. \\
+  Dann gibt es eine Spektralsequenz $E$ mit
+  \begin{align*}
+    E^{pq}_r & \cong Z^{pq}_r / (Z^{p+1,q-1}_{r-1} + d(Z^{p-r+1,q+r-2}_{r-1})), \\
+    Z^{pq}_r & \coloneqq (d^{-1}(F^{p+r} K^{p+q+1}) \cap F^p K^{p+q})
+  \end{align*}
+  Angenommen, die Filtrierung $\ldots \supset F^p K^n \supset F^{p+1} K^n \supset \ldots$ von $K^n$ ist für alle $n \in \Z$ endlich.
+  Dann konvergiert die SS gegen $H^*(\CCC{K})$, \dh{} es gilt $E^{pq}_\infty \cong F^p E^n / F^{p+1} E^n$ mit
+  \[ F^p E^n \coloneqq \im(H^n(F^p \CCC{K} \to \CCC{K})) \subset H^n\CCC{K}. \]
+\end{defn}
 
 % TODO: Leray Spectral Sequence
 % TODO: May Spectral Sequence
