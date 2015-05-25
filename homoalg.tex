@@ -3041,6 +3041,17 @@ Sei $\Aat$ eine abelsche Kategorie.
   Ein Komplex $\CCC{K}$ heißt \emph{$i$-Komplex} falls $K^k = 0$ und \emph{$H^i$-Komplex}, falls $H^k(\CCC{K}) = 0$ für $i \neq k$.
 \end{defn}
 
+% III.7.5
+\begin{defn}
+  Die \emph{schlechte Abschneidung} eines Komplexes $\CCC{K}$ ist
+  \[
+    (\sigma_{\geq n} \CCC{K})^i \coloneqq \begin{cases}
+      0 & \text{für $i < n$,} \\
+      K^i & \text{für $i \geq n$.}
+    \end{cases}
+  \]
+\end{defn}
+
 % Übungsblatt 19, Aufgabe 5
 \begin{defn}
   Die \emph{gute Abschneidung} eines Komplexes $\CCC{K}$ ist
@@ -3052,6 +3063,22 @@ Sei $\Aat$ eine abelsche Kategorie.
     \end{cases}
   \]
 \end{defn}
+
+\begin{bem}
+  Es gilt
+  \vspace{-12pt}
+  \begin{align*}
+    H^i(\sigma_{\geq n} \CCC{K}) & \cong \begin{cases}
+      0 & \text{für $i < n$,} \\
+      \ker(\delta^n : K^n \to K^{n+1}) & \text{für $i = n$,} \\
+      H^i(\CCC{K}) & \text{für $i > n$.}
+    \end{cases} \\
+    H^i(\tau_{\leq n} \CCC{K}) & \cong \begin{cases}
+      H^i(\CCC{K}) & \text{für $i \leq n$,} \\
+      0 & \text{für $i > n$.}
+    \end{cases}
+  \end{align*}
+\end{bem}
 
 \begin{bem}
   Jeder $H^0$-Kompl. $\CCC{K}$ ist in $\Der^*(\Aat)$ isom. zu einem $0$-Komplex:
