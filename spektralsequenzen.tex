@@ -26,6 +26,8 @@
 %\newcommand{\ZM}[1]{\Z_{#1}} % \Z modulo n
 \newcommand{\CC}[1]{{#1}_{\bullet}} % Kettenkomplex (chain complex)
 \newcommand{\CCC}[1]{{#1}^{\bullet}} % Ko-Kettenkomplex (cochain complex)
+\newcommand{\DC}[1]{{#1}^{\bullet \bullet}} % Doppelkomplex (kohomologisch)
+\newcommand{\DKom}{\mathbf{DKom}} % Kategorie der Doppelkomplexe
 
 \newenvironment{centertikzcd}
   {\begin{center}\begin{tikzcd}}
@@ -450,8 +452,65 @@ Sei $\Aat$ im Folgenden eine abelsche Kategorie.
   \[ F^p E^n \coloneqq \im(H^n(F^p \CCC{K} \to \CCC{K})) \subset H^n\CCC{K}. \]
 \end{defn}
 
+\begin{defn}
+  Ein \emph{Doppelkomplex} $\DC{L}$ besteht aus einem 2-dim. Raster $(L^{ij})_{i, j \in \Z}$ von Objekten und horiz. und vertikalen Differentialen $d^{ij}_I : L^{ij} \to L^{i+1,j}$ und $d^{ij}_{II} : L^{ij} \to L^{i,j+1}$, für die gilt:
+  \[
+    d^{i+1,j}_I \circ d^{ij}_I = 0, \quad
+    d^{i,j+1}_{II} \circ d^{ij}_{II}, \quad
+    d^{i,j+1}_I \circ d^{ij}_{II} = d^{i+1,j}_{II} \circ d^{ij}_I.
+  \]
+  Ein Morphismus $f : \DC{L} \to \DC{K}$ zwischen Doppelkomplexen besteht aus Abb. $f^{ij} : L^{ij} \to K^{ij}$, die mit beiden Differentialen vertauschen.
+\end{defn}
+
+\begin{nota}
+  $\DKom(\Aat) \coloneqq $ Kat. der Doppelkomplexe mit Obj. aus $\Aat$
+\end{nota}
+
+\begin{defn}
+  Der \emph{Diagonalkomplex} $\CCC{(SL)}$ eines Doppelkomplexes $\DC{L}$ ist
+  \[
+    (SL)^n \coloneqq \oplus_{i+j=n} L^{ij}, \quad
+    d^n_{\CCC{SL}}(l^{ij}) \coloneqq d^{ij}_I(l^{ij}) + (-1)^i d^{ij}_{II}(l^{ij}).
+  \]
+\end{defn}
+
+\begin{bem}
+  $S : \DKom(\Aat) \to \Kom(\Aat)$ ist ein Funktor.
+\end{bem}
+
+% Ausgelassen: Homotopien zwischen Abbildungen von Doppelkomplexen, diese induzieren Homotopien zwischen den Abbildungen der jeweiligen Diagonalkomplexe
+
+\begin{defn}
+  Sei $\DC{L}$ ein Doppelkomplex. Definiere
+  \[
+    H^{ij}_I(\DC{L}) \coloneqq \ker(d^{ij}_I) / \im(d^{i-1,j}_I).
+    %H^{ij}_{II}(\DC{L}) \coloneqq \ker(d^{ij}_{II}) / \im(d^{i,j-1}_{II})
+  \]
+  Dann induziert $d_{II}$ Abbildungen $d^{ij}_{II,*} : H^{ij}_I(\DC{L}) \to H^{i,j+1}_I(\DC{L})$. \\
+  Diese sind Differentiale im Kettenkomplex $(H_I^{p,\bullet}(\DC{L}), d^{i, \bullet}_{II,*})$. \\
+  Setze $H^{ij}_{II,I} \coloneqq H_{II}^{j}(H_I^{i,\bullet}(\DC{L}))$
+  und analog $H^{ij}_{I,II} \coloneqq H_{I}^{i}(H_{II}^{\bullet,j}(\DC{L}))$.
+\end{defn}
+
+\begin{bem}
+  Sei $\DC{L}$ ein Doppelkomplex. Dann gibt es zwei absteigende Filtrationen von $\CCC{SL}$:
+  \[
+    F^p_I(SL)^n \coloneqq \oplus_{i+j=n,i \geq p} L^{ij}, \quad
+    F^q_{II}(SL)^n \coloneqq \oplus_{i+j=n,j \geq q} L^{ij}.
+  \]
+  Angenommen, für alle $n \in \Z$ sind beide Filtrationen von $(SL)^n$ endlich (das ist \zB{} der Fall, wenn $\DC{L}$ im ersten Quadranten lebt).
+  Dann konvergieren die zu den Filtrierungen assoziierten Spektralsequenzen $\prescript{I}{}\!E$ und $\prescript{II}{}\!E$ beide gegen $H^*(\CCC{SL})$.
+\end{bem}
+
+\begin{prop}
+  Es gilt in dieser Situation:
+  \[
+    \prescript{I}{}\!E^{pq}_2 \cong H^{pq}_{I,II}(\DC{L}), \quad
+    \prescript{II}{}\!E^{pq}_2 \cong H^{pq}_{II,I}(\DC{L}).
+  \]
+\end{prop}
+
 % TODO: Leray Spectral Sequence
 % TODO: May Spectral Sequence
-% TODO: Spektralsequenz eines Doppelkomplexes
 
 \end{document}
