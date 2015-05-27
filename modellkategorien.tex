@@ -316,7 +316,7 @@
 \subsection{Algebraische Strukturen in Kategorien}
 
 \begin{defn}
-  Eine \emph{Retrakt} ist ein Morphismus $r : Y \to X$, sodass ein Morphismus $i : X \to Y$ mit $r \circ i = \id_X$ existiert.
+  Eine \emph{Retrakt} ist ein Morphismus $r : Y \to X$, sodass ein Morphismus $i : X \to Y$ mit $r \circ i = \id_X$ existiert. \\
   Sprechweise: $X$ ist ein Retrakt von $Y$ (vermöge $i$).
 \end{defn}
 
@@ -331,13 +331,13 @@
 \end{prop}
 
 \begin{defn}
-  Ein \emph{Retrakt eines Morphismus} $(A \xrightarrow{f} B) \!\in\! \Cat$ ist ein Morph. $g : X \to Y$, sodass es ein komm. Diagramm folgender Form gibt:
+  Ein \emph{Retrakt eines Morphismus} $(X \xrightarrow{g} Y) \!\in\! \Cat$ ist ein Mor. $f : A \to B$, sodass es ein komm. Diagramm folgender Form gibt:
   \vspace{-8pt}
   \begin{centertikzcd}
-    A \arrow[r, "i"] \arrow[d, "f"] &
+    A \arrow[r, "i"] \arrow[d, "f"] \arrow[rr, bend left, swap, "id_A"] &
     X \arrow[r, "r"] \arrow[d, "g"] &
     A \arrow[d, "f"] \\
-    B \arrow[r, "j"] &
+    B \arrow[r, "j"] \arrow[rr, bend right, "id_B"] &
     Y \arrow[r, "s"] &
     B
   \end{centertikzcd}
