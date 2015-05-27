@@ -35,12 +35,15 @@
 \newcommand{\Cof}{\mathcal{C}} % cofibrations
 \newcommand{\Fib}{\mathcal{F}} % fibrations
 \newcommand{\ModC}{\mathcal{M}} % model category
+\newcommand{\NodC}{\mathcal{N}} % another model category
 \newcommand{\gut}{\text{gut}}
 \newcommand{\sg}{\text{sehr gut}}
 \DeclareMathOperator{\Ho}{Ho} % Homotopiekategorie
 \DeclareMathOperator{\Cell}{Cell} % Zellkomplexe
 \DeclareMathOperator{\Coff}{Cof} % Kofaserungen
 \newcommand{\ModStr}{$(\Weak, \Cof, \Fib)$} % Daten einer Modellstruktur
+\newcommand{\LD}[1]{\mathbb{L} #1} % linksabgeleiteter Funktor
+\newcommand{\RD}[1]{\mathbb{R} #1} % linksabgeleiteter Funktor
 
 \newenvironment{centertikzcd}
   {\begin{center}\begin{tikzcd}}
@@ -999,6 +1002,130 @@
     X \arrow[r, "f"] \arrow[ru, dashed, "\overline{h}"] & Y
   \end{centertikzcd}
 \end{bem}
+
+% Vorlesung vom 27.5.2015
+
+\begin{prop}
+  Eine Modellkategorie $\ModC$ ist genau dann links-eigentlich, wenn für alle Diagramme der Form
+  \begin{centertikzcd}
+    A \arrow{d}{f}[swap]{{\sim}} \arrow[r, hookleftarrow, "i"] & C \arrow[r, "k"] \arrow{d}{g}[swap]{{\sim}} & B \arrow{d}{h}[swap]{{\sim}} \\
+    A \arrow[r, hookleftarrow, "j"] & C \arrow[r, "l"] & B
+  \end{centertikzcd}
+  auch der ind. Mor. $A \cup_C B \to A' \cup_{C'} B'$ eine schwache Äq. ist.
+\end{prop}
+
+% §6. Quillen-Adjunktionen
+\subsection{Quillen-Adjunktionen}
+
+\begin{motto}
+  Wir wollen Modellstrukturen und -kategorien vergleichen.
+\end{motto}
+
+% 6.1. Abgeleitete Funktoren
+
+\begin{defn}
+  Sei $\ModC$ eine Modellkategorie, $\HatC$ eine beliebige Kategorie.
+  Ein Funktor $F : \ModC \to \HatC$ heißt \emph{homotopisch}, falls $F$ die schwachen Äquivalenzen in $\ModC$ auf Isomorphismen in $\HatC$ abbildet.
+\end{defn}
+
+\begin{bem}
+  Homotopische Funktoren faktorisieren über $\ModC[\Weak^{-1}]$.
+\end{bem}
+
+\begin{bsp}
+  Sei $F : \ModC \to \NodC$ ein Funktor zw. Modellkategorien, der schwache Äquivalenzen erhält.
+  Dann ist $\delta \circ F : \ModC \to \Ho(\NodC)$ homotopisch, wobei $\delta : \NodC \to \Ho(\NodC)$ die Lokalisierung ist.
+\end{bsp}
+
+\begin{bem}
+  Solch ein Funktor $F : \ModC \to \NodC$ induziert einen Funktor $\Ho(M) \to \Ho(\NodC)$.
+\end{bem}
+
+% XXX: Definition kürzen?
+\begin{defn}
+  Ein \emph{linksabgeleiteter Funktor} eine Funktors $F : \ModC \to \HatC$ ist ein Funktor $\LD{F} : \Ho(\ModC) \to \HatC$ zusammen mit einer natürlichen Transformation $\mu : \LD{F} \circ \gamma \Rightarrow F$, sodass für alle weiteren Funktoren $G : \Ho(\ModC) \to \HatC$ und nat. Transformationen $\xi : G \circ \gamma \Rightarrow F$ genau eine natürliche Transformation $\nu : G \Rightarrow \LD{F}$ existiert mit $\xi = \mu \circ \nu$, \dh{} $\Nat(G, \LD{F}) \cong \Nat(G \circ \gamma, F)$ ist für alle $G$ eine Bijektion, \dh{} eine Linksableitung von $F$ ist nichts anderes als eine Rechts-Kan-Erweiterung von $F$ längs $\gamma$.
+  \begin{centertikzcd}
+    \ModC \arrow[d, "\gamma"] \arrow[r, "F"] & \HatC \\
+    \Ho(\ModC) \arrow[ru, "\LD{F}"]
+  \end{centertikzcd}
+  Analog ist eine \emph{Rechtsableitung} $\RD{F}$ von $F$ eine Linkskanerweiterung von $F$ längs $\gamma : \ModC \to \Ho(\ModC)$.
+\end{defn}
+
+\begin{satz}
+  Sei $F : \ModC \to \HatC$ ein Funktor, der azyklische Kofaserungen zwischen kof. Obj. auf Isomorphismen abbildet.
+  Dann existiert $\LD{F}$ und $\mu_X : \LD{F}(X) \to F(X)$ ist ein Iso für alle kofasernden $X$.
+\end{satz}
+
+\begin{defn}
+  Sei $F : \ModC \to \NodC$ ein Funktor zwischen Modellkategorien.
+  Eine \emph{totale Linksableitung} $\LD{F}$ ist ein Funktor $\LD{F} : \Ho(\ModC) \to \Ho(\NodC)$, sodass $\LD{F}$ die Linksableitung von $\delta \circ F$ ist:
+  \begin{centertikzcd}
+    \ModC \arrow[r, "F"] \arrow[d, "\gamma"] & \NodC \arrow[d, "\delta"] \\
+    \Ho(\ModC) \arrow[r, "\LD{F}"] \arrow[ru, Rightarrow] & \Ho(\NodC)
+  \end{centertikzcd}
+  Ein Funktor $F : \ModC \to \NodC$ bilde azyklische Kofaserungen zwischen kofasernden Objekten auf schache Äquivalenzen ab.
+  Dann existiert seine totale Linksableitung $\LD{F} : \Ho(\ModC) \to \Ho(\NodC)$.
+\end{defn}
+
+% 6.2. Quillen-Adjunktionen und -Äquivalenzen
+
+\begin{defn}
+  Eine Adjunktion $F : \ModC \rightleftarrows \NodC : U$ von Modellkategorien heißt \emph{Quillen-Adjunktion}, falls eine der folgenden äquivalenten Bedingungen erfüllt ist:
+  \begin{itemize}
+    \item $F$ erhält Kofaserungen und $U$ erhält Faserungen,
+    \item $F$ erhält Kofaserungen und azyklische Kofaserungen,
+    \item $U$ erhält Faserungen und azyklische Faserungen,
+    \item $F$ erhält azyklische Faserungen und $U$ azyklische Faserungen.
+  \end{itemize}
+\end{defn}
+
+\begin{bem}
+  Die Äquivalenz folgt aus $Fi \lhhe p \iff i \lhhe Up$.
+\end{bem}
+
+\begin{defn}
+  Eine Quillen-Adj. $(F, U)$ heißt \emph{Quillen-Äquivalenz}, falls
+  \[ \fa{X \in \ModC_c, Y \in \NodC_f} (FX \to Y) \in \Weak \iff (X \to UY) \in \Weak. \]
+\end{defn}
+
+\begin{satz}
+  Sei $(F, U)$ eine Quillenadjunktion. Dann existieren $\LD{F}$, $\RD{U}$ und bilden eine Adjunktion $\LD{F} : \Ho(\ModC) \rightleftarrows \Ho(\NodC) : \RD{U}$. \\
+  Ist $(F, U)$ sogar eine Quillenäquivalenz, so ist $(\LD{F}, \RD{U})$ eine Adjunktion aus Äquivalenzen.
+\end{satz}
+
+\begin{kor}
+  %Quillenäquivalente Modellkategorien besitzen äquivalente Homotopiekategorien.
+  Quillenäq. Modellkat'n haben äquivalente Homotopiekat'n.
+\end{kor}
+
+\begin{prop}
+  Sei $(F, U)$ eine Quillenäq. von $\ModC$ nach $\NodC$.
+  Dann sind äquivalent:
+  \begin{itemize}
+    \item $(F, U)$ ist Quillenäquivalenz
+    \item $(\LD{F}, \RD{U})$ ist Adjunktion von Äquivalenzen
+    % TODO: zwei weitere Bedingungen vom ÜB
+  \end{itemize}
+\end{prop}
+
+\begin{lem}
+  Sei $F \ladj U$ eine Quillenadjunktion.
+  Angenommen, $U$ erzeugt schwache Äquivalenzen in $\NodC$.
+  Dann sind äquivalent:
+  \begin{itemize}
+    \item $(F, U)$ ist eine Quillenäquivalenz.
+    \item $\eta : X \to UFX$ ist eine schwache Äq. für alle kofasernden $X$.
+  \end{itemize}
+\end{lem}
+
+\begin{defn}
+  Sei $f : A \to B$ ein Mor. in der Modellkat. $\ModC$. Dieser induziert Funktoren $f^* : B/\ModC \to A/\ModC$ und $f_* : \ModC/A \to \ModC/B$.
+  Der Funktor $f^*$ besitzt einen Linksadj. $f_{!} : A/\ModC \to B/\ModC$, der durch Pushout entlang $f$ geg. ist, und $f_*$ besitzt einen Rechtsadj. $f^{!} : \ModC/B \!\to\! \ModC/A$.
+\end{defn}
+
+\begin{prop}
+  $\ModC$ ist genau dann linkseigentlich, wenn $(f_{!}, f^*)$ eine Quillenadjunktion ist und genau dann rechtseigentlich, wenn $(f_*, f^{!})$ eine Quillenadjunktion ist für alle schwachen Äquivalenzen $f$.
+\end{prop}
 
 % TODO: Scheibenkategorien als Modellkategorien
 % TODO: 2-aus-6-Eigenschaft von Isos, schwachen Äquivalenzen
