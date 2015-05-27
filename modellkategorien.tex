@@ -1056,6 +1056,16 @@
   Dann existiert $\LD{F}$ und $\mu_X : \LD{F}(X) \to F(X)$ ist ein Iso für alle kofasernden $X$.
 \end{satz}
 
+\begin{konstr}
+  Sei $h \ModC_c$ die volle Unterkategorie der kof. Objekte von $\ModC$ modulo Rechts-Homotopie.
+  Betrachte die Komposition
+  \[ \ModC \xrightarrow{Q} h \ModC_c \xrightarrow{F_*} \HatC. \]
+  Dabei ist $Q$ der kofasernde Ersatz und $F_*$ wird induziert von $F$, da $F$ homotope Morphismen identifiziert.
+  Die Komposition bildet schwache Äquivalenzen auf Isos ab und induziert daher den gesuchten Funktor $\LD{F} : \Ho(\ModC) \to \HatC$.
+  Definiere $\mu : \LD{F} \circ \gamma \to F$ durch $\mu_X \coloneqq F(q : QX \to X)$ für $X \in \Ob(\ModC)$.
+  Falls $X$ selbst kofasernd ist, so ist $q$ eine schwache Äquivalenz zwischen kofasernden Objekten und somit $\mu_X = F(q)$ ein Isomorphismen.
+\end{konstr}
+
 \begin{defn}
   Sei $F : \ModC \to \NodC$ ein Funktor zwischen Modellkategorien.
   Eine \emph{totale Linksableitung} $\LD{F}$ ist ein Funktor $\LD{F} : \Ho(\ModC) \to \Ho(\NodC)$, sodass $\LD{F}$ die Linksableitung von $\delta \circ F$ ist:
@@ -1099,8 +1109,7 @@
 \end{kor}
 
 \begin{prop}
-  Sei $(F, U)$ eine Quillenäq. von $\ModC$ nach $\NodC$.
-  Dann sind äquivalent:
+  Für eine Quillenadjunktion $F : \ModC \rightleftarrows \NodC : U$ sind äquivalent:
   \begin{itemize}
     \item $(F, U)$ ist Quillenäquivalenz
     \item $(\LD{F}, \RD{U})$ ist Adjunktion von Äquivalenzen
