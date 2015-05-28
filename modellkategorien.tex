@@ -1061,9 +1061,9 @@
   Betrachte die Komposition
   \[ \ModC \xrightarrow{Q} h \ModC_c \xrightarrow{F_*} \HatC. \]
   Dabei ist $Q$ der kofasernde Ersatz und $F_*$ wird induziert von $F$, da $F$ homotope Morphismen identifiziert.
-  Die Komposition bildet schwache Äquivalenzen auf Isos ab und induziert daher den gesuchten Funktor $\LD{F} : \Ho(\ModC) \to \HatC$.
-  Definiere $\mu : \LD{F} \circ \gamma \to F$ durch $\mu_X \coloneqq F(q : QX \to X)$ für $X \in \Ob(\ModC)$.
-  Falls $X$ selbst kofasernd ist, so ist $q$ eine schwache Äquivalenz zwischen kofasernden Objekten und somit $\mu_X = F(q)$ ein Isomorphismen.
+  Nach Ken Brown bildet die Komposition schwache Äquivalenzen auf Isos ab und induziert daher den gesuchten Funktor $\LD{F} : \Ho(\ModC) \to \HatC$ mit $\LD{F} \circ \gamma = F_* \circ Q$.
+  Definiere $\mu : \LD{F} \circ \gamma \!\to\! F$ durch $\mu_X \!\coloneqq\! F(q : QX \!\to\! X)$ für $X \!\in\! \Ob(\ModC)$.
+  Falls $X$ selbst kofasernd ist, so ist $q$ eine schwache Äquivalenz zw. kofasernden Objekten und somit $\mu_X = F(q)$ ein Isomorphismus.
 \end{konstr}
 
 \begin{defn}
@@ -1085,7 +1085,7 @@
     \item $F$ erhält Kofaserungen und $U$ erhält Faserungen,
     \item $F$ erhält Kofaserungen und azyklische Kofaserungen,
     \item $U$ erhält Faserungen und azyklische Faserungen,
-    \item $F$ erhält azyklische Faserungen und $U$ azyklische Faserungen.
+    \item $F$ erhält azyklische Kofaserungen und $U$ azyklische Faserungen.
   \end{itemize}
 \end{defn}
 
@@ -1104,28 +1104,22 @@
 \end{satz}
 
 \begin{kor}
-  %Quillenäquivalente Modellkategorien besitzen äquivalente Homotopiekategorien.
   Quillenäq. Modellkat'n haben äquivalente Homotopiekat'n.
 \end{kor}
 
 \begin{prop}
   Für eine Quillenadjunktion $F : \ModC \rightleftarrows \NodC : U$ sind äquivalent:
   \begin{itemize}
-    \item $(F, U)$ ist Quillenäquivalenz
-    \item $(\LD{F}, \RD{U})$ ist Adjunktion von Äquivalenzen
-    % TODO: zwei weitere Bedingungen vom ÜB
+    \item $(F, U)$ ist eine Quillenäquivalenz
+    \item $(\LD{F}, \RD{U})$ ist eine Adjunktion von Äquivalenzen
+    \item $F$ reflektiert schw. Äq'n zw. kof. Objekten und die Komposition $FQUY \xrightarrow{F(q_{UY})} FUY \xrightarrow{\epsilon} Y$ ist eine schw. Äq. für alle fas. $Y$.
+    \item $U$ reflektiert schw. Äq'n zw. fas. Objekten und die Komposition $X \xrightarrow{\eta} UFX \xrightarrow{U(r_{FX})} URFX$ ist eine schw. Äq. für alle kof. $X$.
   \end{itemize}
+  Falls $U$ schw. Äq'n in $\NodC$ erzeugt, dann ist auch äquivalent: \\
+  \inlineitem{$\eta : X \to UFX$ ist eine schwache Äq. für alle kofasernden $X$.} \\[2pt]
+  Falls $F$ schw. Äq'n in $\ModC$ erzeugt, dann ist auch äquivalent: \\
+  \inlineitem{$\eta : X \to UFX$ ist eine schwache Äq. für alle kofasernden $X$.}
 \end{prop}
-
-\begin{lem}
-  Sei $F \ladj U$ eine Quillenadjunktion.
-  Angenommen, $U$ erzeugt schwache Äquivalenzen in $\NodC$.
-  Dann sind äquivalent:
-  \begin{itemize}
-    \item $(F, U)$ ist eine Quillenäquivalenz.
-    \item $\eta : X \to UFX$ ist eine schwache Äq. für alle kofasernden $X$.
-  \end{itemize}
-\end{lem}
 
 \begin{defn}
   Sei $f : A \to B$ ein Mor. in der Modellkat. $\ModC$. Dieser induziert Funktoren $f^* : B/\ModC \to A/\ModC$ und $f_* : \ModC/A \to \ModC/B$.
