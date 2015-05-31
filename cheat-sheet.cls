@@ -82,6 +82,7 @@
 \newtheorem*{bemn}{Bemerkungen}
 \newtheorem*{beweisidee}{Beweisidee}
 \newtheorem*{umformulierung}{Umformulierung}
+\newtheorem*{referenz}{Ref}
 
 % Listenstil
 \usepackage{paralist} % Für Inline-Listen

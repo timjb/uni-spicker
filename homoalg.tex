@@ -34,6 +34,7 @@
 \DeclareMathOperator{\sk}{sk} % Skelett
 \newcommand{\CC}[1]{{#1}_{\bullet}} % Kettenkomplex (chain complex)
 \newcommand{\CCC}[1]{{#1}^{\bullet}} % Ko-Kettenkomplex (cochain complex)
+\newcommand{\DC}[1]{{#1}^{\bullet \bullet}} % Doppelkomplex (kohomologisch)
 \newcommand{\keS}{k.\,e.\,S.} % kurze exakte Sequenz
 \newcommand{\leS}{l.\,e.\,S.} % lange exakte Sequenz
 \newcommand{\Lg}{\mathfrak{g}} % Lie-g
@@ -2563,6 +2564,10 @@ Sei $\Aat$ eine abelsche Kategorie.
   \end{center}
 \end{bem}
 
+\begin{lem}
+  Direkte Summanden von injektiven bzw. projektiven Objekten sind selbst injektiv bzw. projektiv.
+\end{lem}
+
 % II.6.10 (Projektive und freie Moduln)
 \begin{lem}
   Ein $A$-Modul $X$ ist genau dann projektiv, wenn er ein direkter Summand eines freien $A$-Moduls ist, \dh{} wenn ein \\
@@ -3445,11 +3450,11 @@ Sei $\Aat$ eine abelsche Kategorie.
 % III.6.13
 \begin{defn}
   Die \emph{klassischen abgeleiteten Funktoren} sind
-  \[
-    R^i F \coloneqq H^i \circ RF = H^0 \circ T^i \circ RF
-    \quad \text{bzw.} \quad
-    L^i G \coloneqq H^i \circ LG = H^0 \circ T^i \circ LG.
-  \]
+  \begin{align*}
+    & R^i F \coloneqq H^i \circ RF = H^0 \circ T^i \circ RF
+    \qquad \text{bzw.} \\
+    & L^i G \coloneqq H^i \circ LG = H^0 \circ T^i \circ LG.
+  \end{align*}
 \end{defn}
 
 \begin{bem}
@@ -3500,27 +3505,134 @@ Sei $\Aat$ eine abelsche Kategorie.
 \end{defn}
 
 % III.7 Der abgeleitete Funktor der Komposition und Spektralsequenzen
+\subsection{Der abgeleitete Funktor der Komposition}
+
+\begin{situation}
+  Seien $\Aat$, $\Bat$ und $\Cat$ abelsche Kategorien, $F : \Aat \to \Bat$ und $G : \Bat \to \Cat$ linksexakte Funktoren.
+  Sei $\Ada_\Aat \subset \Ob(\Aat)$ an $F$ und $\Ada_\Bat \subset \Ob(\Bat)$ an $G$ angepasst.
+  Gelte $F(\Ada_\Aat) \subseteq \Ada_\Bat$.
+\end{situation}
 
 % III.7.1
 % TODO: Kann man auch einfach voraussetzen, dass die abgeleiten Funktoren existieren?
 \begin{thm}
-  Seien $\Aat$, $\Bat$ und $\Cat$ ab. Kategorien, $F : \Aat \to \Bat$ und $G : \Bat \to \Cat$ linksexakte Funktoren.
-  Sei $\Ada_\Aat \!\subset\! \Ob(\Aat)$ an $F$ und $\Ada_\Bat \!\subset\! \Ob(\Bat)$ an $G$ angepasst.
-  Angenommen, $F(\Ada_\Aat) \subseteq \Ada_\Bat$.
-  Dann existieren $RF$, $RG$ und $R(G \circ F)$ und die von der univ. Eigenschaft induzierte natürliche Transformation $R(G \circ F) \to RG \circ RF$ ist ein Isomorphismus.
+  In dieser Situation existieren $RF$, $RG$ und $R(G \circ F)$ und die von der universellen Eigenschaft von $R(G \circ F)$ induzierte natürliche Transformation $R(G \circ F) \Rightarrow RG \circ RF$ ist ein Isomorphismus.
 \end{thm}
 
 \begin{bem}
   Eine analoge Aussage gilt für rechtsexakte Funktoren.
 \end{bem}
 
-% Ausgelassen: III.7.2 (Motivation von Spektralsequenzen)
+\begin{frage}
+  Was ist der Zusammenhang des klassischen abgeleiteten Funktors $R^n(G \circ F)(X)$ mit $R^p G(R^q F(X))$? Lässt sich ersteres Objekt durch die letzteren Objekte berechnen?
+\end{frage}
 
 % III.7.3
+\begin{referenz}
+  Zur Formulierung der Antwort werden Spektralsequenzen benötigt.
+  Zu ihnen gibt es eine \spickerref{spektralsequenzen}{separate Zusammenfassung}, in der auch Doppelkomplexe definiert werden.
+\end{referenz}
+
+% Ausgelassen: III.7.2 (Motivation von Spektralsequenzen)
+
+% III.7.7
+\begin{defn}
+  Eine (injektive) \emph{Cartan-Eilenberg-Auflösung} eines Komplexes $\CCC{K}$ ist ein Doppelkomplex $\DC{L}$, bestehend aus injektiven Objekten, der in der unteren Halbebene lebt (\dh{} $L^{pq} \!=\! 0$ für $q < 0$) zusammen mit einem Morphismus $\epsilon : \CCC{K} \to L^{\bullet,0}$ sodass gilt: \\
+  Für alle $p \in \Z$ sind folgende (ind.) Komplexe injektive Auflösungen
+  \begin{centertikzcd}[column sep=0.6cm, row sep=0.05cm]
+    0 \arrow[r] & K^p \arrow[r, "\epsilon"] & L^{p,0} \arrow[r, "d_{II}"] & L^{p,1} \arrow[r] & \ldots \\
+    0 \arrow[r] & B^p(\CCC{K}) \arrow[r, "\epsilon_*"] & B_{I}^{p,0}(\DC{L}) \arrow[r, "d_{II*}"] & B_{I}^{p,1}(\DC{L}) \arrow[r] & \ldots \\
+    0 \arrow[r] & Z^p(\CCC{K}) \arrow[r, "\epsilon_*"] & Z_{I}^{p,0}(\DC{L}) \arrow[r, "d_{II*}"] & Z_{I}^{p,1}(\DC{L}) \arrow[r] & \ldots \\
+    0 \arrow[r] & H^p(\CCC{K}) \arrow[r, "\epsilon_*"] & H_{I}^{p,0}(\DC{L}) \arrow[r, "d_{II*}"] & H_{I}^{p,1}(\DC{L}) \arrow[r] & \ldots \\
+  \end{centertikzcd}
+  von dem obigen $\uparrow$ Objekt und außerdem gilt $L^{pq} = 0$ falls $K^p = 0$.
+\end{defn}
+
+% III.7.11 (Behauptung A im Beweis)
+\begin{lem}[Hufeisenlemma]
+  Sei $0 \to X' \to X \to X'' \to 0$ eine \keS{} in einer ab. Kat. und $0 \to X' \to \CCC{I_{X'}}$ und $0 \to X'' \to \CCC{I_{X'}}$ injektive Auflösungen.
+  Dann gibt es eine inj. Auflösung $0 \to X \to \CCC{I_{X}}$ von $X$ und eine \keS{} $0 \to \CCC{I_{X'}} \to \CCC{I_{X}} \to \CCC{I_{X''}} \to 0$, sodass
+  \begin{centertikzcd}[column sep=0.6cm, row sep=0.3cm]
+    0 \arrow[r] & X' \arrow[r] \arrow[d] & X \arrow[r] \arrow[d] & X'' \arrow[r] \arrow[d] & 0 \\
+    0 \arrow[r] & I_{X'}^0 \arrow[r] & I_{X}^0 \arrow[r] & I_{X''}^0 \arrow[r] & 0
+  \end{centertikzcd}
+  kommutiert.
+  Außerdem gilt $I_{X}^n \cong I_{X'}^n \oplus I_{X''}^n$ für alle $n$.
+\end{lem}
+
+% Ausgelassen: Behauptung B im Beweis von III.7.11
+
+% III.7.11
+\begin{lem}
+  Angenommen, $\Aat$ besitzt genug injektive Objekte.
+  \begin{itemize}
+    \item Jeder nach links beschränkte Komplex $\CCC{K} \in \Kom^+(\Aat)$ besitzt eine CE-Auflösung.
+    \item Jeder Morphismus $f \in \Hom_{\Kom^+(\Aat)}(\CCC{K}, \CCC{L})$ kann auf beliebige CE-Auflösungen der Komplexe fortgesetzt werden.
+    \item Wenn zwei Morphismen zwischen zwei Komplexen homotop sind, so sind es auch zwei beliebige Fortsetzungen auf beliebige CE-Auflösungen der Komplexe.
+  \end{itemize}
+\end{lem}
+
 \begin{bem}
-  Es gibt eine separate \spickerref{spektralsequenzen}{Zusammenfassung zu Spektralsequenzen}.
+  Zusammengefasst: CE-Auflösung stiftet einen Funktor
+  \[ \mathrm{CE} : K^+(\Aat) \to K^{++}(\Iat_\Aat), \]
+  wobei $K^{++}(\Iat_\Aat)$ die Homotopiekategorie der nach links und oben beschr. Doppelkomplexe bestehend aus inj. Objekten aus $\Aat$ ist.
 \end{bem}
 
-% TODO: II.7.5. Spektralsequenz eines Doppelkomplexes
+% III.7.12
+\begin{lem}
+  Sei $\CCC{K}$ ein Komplex, $\DC{L}$ ein Doppelkomplex und $\epsilon : \CCC{K} \to L^{\bullet,0}$ ein Morphismus von Komplexen mit $d_{II} \circ \epsilon = 0$. \\
+  Dann kann man $\CCC{K}$ als in der $0$-ten Zeile konzentr. Doppelkomplex und $\epsilon$ als Mor. von Doppelkomplexen auffassen.
+  Angenommen, die Komplexe
+  $0 \to K^p \to L^{p0} \to L^{p1} \to \ldots$
+  sind azyklisch für alle $p$.
+  Dann ist der Morphismus $S(\epsilon) : \CCC{K} = \CCC{(SK)} \to \CCC{(SL)}$ ein Qis.
+\end{lem}
+
+% Ausgelassen: Korollar III.7.12
+
+\begin{thm}
+  Angenommen, in Situation vom Anfang des Abschnitts ist $\Ada_\Aat$ gerade die Klasse $\Inj_\Aat$ der injektiven Objekte in $\Aat$ und $\Iat_\Bat$ ist groß genug.
+  Dann gibt es für alle $X \!\in\! \Ob(\Aat)$ eine Spektralseq. mit
+  \[ E^{pq}_2 = R^p G(R^q F(X)), \]
+  die gegen $R^*(G \circ F)(X)$ konvergiert.
+  Außerdem ist die Konstruktion funktoriell in $X$.
+\end{thm}
+
+\begin{defn}
+  Diese Spektralseq. heißt \emph{Grothendieck-Spektralsequenz}.
+\end{defn}
+
+% III.7.7 und III.7.15
+\begin{beweis}
+  Sei $0 \to X \to \CCC{I}_X$ eine injektive Auflösung von $X$ und $\DC{L}$ eine Cartan-Eilenberg-Auflösung von $F(\CCC{I}_X)$.
+  Setze $\DC{D} \coloneqq G(\DC{L})$. \\
+  Aus dem letzten Lemma folgt
+  \[ R^n (G \circ F)(X) = H^n(G(F(\CCC{I}_X))) \cong H^n(G(\CCC{(SL)})) \cong H^n(\CCC{(SD)}). \]
+  Sei $\prescript{II}{}\!E$ die Spektralsequenz, die durch die vertikale Filtrierung von $\CCC{SD}$ induziert wird. Diese konv. gegen $H^*(\CCC{(SD)})$ und es gilt:
+  \[ \prescript{II}{}\!E^{pq}_2 \cong H_{II}^{p}(H_I^{q,\bullet}(\DC{D})) \cong H_{II}^p(G(H_I^{q,\bullet}(\DC{L}))) \cong R^p G(R^q F(X)), \]
+  wobei die zweite Isomorphie daraus folgt, dass
+  \begin{align*}
+    & 0 \to Z^{qp}_I(\DC{L}) \to L^{qp} \to B^{q+1,p}_I(\DC{L}) \to 0
+    \qquad \text{und} \\
+    & 0 \to B^{qp}_I(\DC{L}) \to Z^{qp}_I(\DC{L}) \to H^{qp}_I(\DC{L}) \to 0
+  \end{align*}
+  kurze ex. Sequenzen bestehend aus inj. Obj. sind und somit von $G$ auf \keS{} abgebildet werden und die dritte Isomorphie gilt, da $0 \to H^q(\CCC{I}_X) \to H^{q,\bullet}_I(\DC{L})$ eine inj. Aufl. von $R^q F(X) \cong H^q(\CCC{I}_X)$ ist.
+\end{beweis}
+
+\begin{defn}
+  Angenommen, $\Inj_\Bat$ ist groß genug.
+  Sei $\CCC{K} \in \Kom^+(\Bat)$ ein nach links beschränkter Komplex.
+  Dann heißt $R^* G(\CC{K})$ \emph{Hyperkohomologie} des Funktors $G$ bezüglich $\CCC{K}$.
+\end{defn}
+
+\begin{bem}
+  Sei in dieser Situation $\CCC{L}$ eine CE-Auflösung von $\CCC{K}$.
+  Es gilt dann $R^n G(\CC{K}) \cong H^n (G(\CCC{(SL)}))$.
+  Sei $\prescript{II}{}\!E$ die SS zur vertikalen Filtration von $G(\CCC{(SL)}) \cong \CCC{(S G(L))}$. Diese konvergiert gegen die Hyperkohomologie von $G$ bzgl. $\CCC{K}$ und ähnlich wie oben gilt
+  \[ \prescript{II}{}\!E^{pq}_2 \cong R^p G(H^q (\CCC{K})). \]
+\end{bem}
+
+% TODO: III.8 (Garbenkohomologie)
+
 
 \end{document}

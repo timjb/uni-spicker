@@ -493,7 +493,7 @@ Sei $\Aat$ im Folgenden eine abelsche Kategorie.
 \end{defn}
 
 \begin{bem}
-  Sei $\DC{L}$ ein Doppelkomplex. Dann gibt es zwei absteigende Filtrationen von $\CCC{SL}$:
+  Sei $\DC{L}$ ein Doppelkomplex. Dann gibt es eine horizontale und eine vertikale absteigende Filtration von $\CCC{SL}$:
   \[
     F^p_I(SL)^n \coloneqq \oplus_{i+j=n,i \geq p} L^{ij}, \quad
     F^q_{II}(SL)^n \coloneqq \oplus_{i+j=n,j \geq q} L^{ij}.
@@ -506,8 +506,9 @@ Sei $\Aat$ im Folgenden eine abelsche Kategorie.
   Es gilt in dieser Situation:
   \[
     \prescript{I}{}\!E^{pq}_2 \cong H^{pq}_{I,II}(\DC{L}), \quad
-    \prescript{II}{}\!E^{pq}_2 \cong H^{pq}_{II,I}(\DC{L}).
+    \prescript{II}{}\!E^{pq}_2 \cong H^{qp}_{II,I}(\DC{L}).
   \]
+  % Man beachte die Indexvertauschung!
 \end{prop}
 
 % TODO: Leray Spectral Sequence
