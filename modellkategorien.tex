@@ -44,6 +44,7 @@
 \newcommand{\ModStr}{$(\Weak, \Cof, \Fib)$} % Daten einer Modellstruktur
 \newcommand{\LD}[1]{\mathbb{L} #1} % linksabgeleiteter Funktor
 \newcommand{\RD}[1]{\mathbb{R} #1} % linksabgeleiteter Funktor
+\newcommand{\LonelyHeart}{\{ \, \heartsuit \, \}} % Menge mit genau einem Element
 
 \newenvironment{centertikzcd}
   {\begin{center}\begin{tikzcd}}
@@ -913,7 +914,7 @@
 \end{bspe}
 
 \begin{defn}
-  Eine \emph{lokal $\kappa$-präsentierbare Kategorie} ist eine lokal kleine und kovollständige Kategorie, sodass eine Menge $S \subseteq \Ob(\Cat)$ von $\kappa$-kompakten Objekten existiert, sodass jedes Objekt aus $\Cat$ kleiner Kolimes von Objekten aus $S$ ist.
+  Eine \emph{lokal $\kappa$-präsentierbare Kategorie} ist eine lokal kleine und kovollständige Kategorie, sodass eine {\em Menge} $S \subseteq \Ob(\Cat)$ von $\kappa$-kompakten Objekten existiert, sodass jedes Objekt aus $\Cat$ kleiner Kolimes von Objekten aus $S$ ist.
 \end{defn}
 
 % Ausgelassen: Intuition
@@ -1129,6 +1130,66 @@
 \begin{prop}
   $\ModC$ ist genau dann linkseigentlich, wenn $(f_{!}, f^*)$ eine Quillenadjunktion ist und genau dann rechtseigentlich, wenn $(f_*, f^{!})$ eine Quillenadjunktion ist für alle schwachen Äquivalenzen $f$.
 \end{prop}
+
+% Vorlesung vom 3.6.2015
+
+\begin{satz}
+  Sei $F : \ModC \rightleftarrows \NodC : U$ eine Adj. von einer kombinatorischen Modellkategorie $\ModC$ mit erzeugenden Kofaserungen $I$ und erzeugenden azyklischen Kofaserungen $J$ und einer lokal präsentierbaren Kategorie $\NodC$.
+  Der Funktur $U$ erzeuge schwache Äquivalenzen in $\NodC$ (\dh{} wir nennen $f \in \Mor(\NodC)$ eine schwache Äquivalenz, falls $U(f)$ eine schwache Äq. ist).
+  Dann wird $\NodC$ eine Modellkategorie mit erzeugenden Kofaserungen $FI$ und erzeugenden azyklischen Kofaserungen $FJ$, falls gilt:
+  Jeder relative $FJ$-Zellenkomplex ist eine schwache Äquivalenz (\dh{} $U(\Cell(FJ)) \subset \Weak_\ModC$).
+  Bzgl. dieser Modellstruktur auf $\NodC$ wird $(F, U)$ eine Quillenadjunktion.
+\end{satz}
+
+% 6.3. Monoidale Modellkategorien
+\subsection{Monoidale Modellkategorien}
+
+\begin{defn}
+  Eine \emph{monoidale Kategorie} ist eine Kategorie $\Cat$ zusammen mit einem Bifunktor $\otimes : \Cat \times \Cat \to \Cat$, einem Objekt $\mathbf{1} \in \Ob(\Cat)$, natürlichen Isomorphismen $\alpha : (\blank \otimes \blank) \circ \blank \Rightarrow \blank \otimes (\blank \circ \blank)$, $\lambda : \mathbf{1} \otimes \blank \Rightarrow \blank$ und $\rho : \blank \otimes \mathbf{1} \Rightarrow \blank$, sodass die Kohärenzdiagramme aus der Definition einer schwachen 2-Kategorie kommutieren.
+\end{defn}
+
+\begin{bem}
+  Eine monoidale Kategorie ist das gleiche wie eine 2-Kategorie mit einem Objekt.
+\end{bem}
+
+\begin{bspe}
+  \begin{itemize}
+    \item Sei $R$ ein Ring (mit Eins). Dann ist $(R\text{-Bi}\ModC, \otimes_R, R)$ eine monoidale Kategorie.
+    \item $(\SetC, \times, \LonelyHeart)$ ist eine monoidale Kategorie.
+  \end{itemize}
+\end{bspe}
+
+\begin{defn}
+  Eine \emph{symmetrische monoidale Kategorie} ist eine monoidale Kategorie zusammen mit einem natürlichen Isomorphismus $\gamma : X \otimes Y \to Y \otimes X$, sodass die geeigneten Kohärenzdiagramme kommutieren. Es reicht aus, zu zeigen, dass folgendes Diagramm kommutiert:
+  \begin{centertikzcd}
+    (Y \otimes X) \otimes Z \arrow[d, "\alpha"] & (X \otimes Y) \otimes Z \arrow[l, "\gamma"] \arrow[r, "\gamma"] & Z \otimes (X \otimes Y) \arrow[d, "\gamma"] \\
+    Y \otimes (X \otimes Z) \arrow[r, "\gamma"] & Y \otimes (Z \otimes X) & (Y \otimes Z) \otimes X \arrow[l, "\alpha"]
+  \end{centertikzcd}
+  \begin{centertikzcd}
+    \mathbf{1} \otimes X \arrow[rr, "\gamma"] \arrow[dr, "\lambda"] && X \otimes \mathbf{1} \arrow[dl, "\rho"] \\
+    & X
+  \end{centertikzcd}
+\end{defn}
+
+\begin{defn}
+  Ein monoidaler Funktor zwischen (symm.) monoidalen Kategorien $\Cat$ und $\Dat$ ist ein Funktor $F : \Cat \to \Dat$ zusammen mit natürlichen Isomorphismen $F \blank \otimes_\Dat F \blank \Rightarrow F (\blank \otimes_\Cat \blank)$ und $F \mathbf{1}_\Cat \Rightarrow \mathbf{1}_\Dat$, welche verträglich mit $\alpha$, $\lambda$, $\rho$ (und evt. $\gamma$) sind.
+\end{defn}
+
+\begin{bsp}
+  $\SetC \to \RMod, \enspace X \mapsto \text{freier $R$-Modul mit Basis $X$}$
+  ist ein monoidaler Funktor.
+\end{bsp}
+
+\begin{defn}
+  $F, G : \Cat \to \Dat$ monoidale Funktoren. Eine nat. Transformation $\eta : F \Rightarrow G$ lässt \zB{}
+  \begin{centertikzcd}
+    FX \otimes FY \arrow[r] \arrow[d] & F(X \otimes Y) \arrow[d] \\
+    GX \otimes GY \arrow[r] & G(X \otimes Y)
+  \end{centertikzcd}
+  kommutieren.
+\end{defn}
+
+% Ausgelassen: Beispiel: Supervektorräume
 
 % TODO: Scheibenkategorien als Modellkategorien
 % TODO: 2-aus-6-Eigenschaft von Isos, schwachen Äquivalenzen
