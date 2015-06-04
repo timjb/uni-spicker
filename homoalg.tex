@@ -63,10 +63,6 @@
 \newcommand{\Proj}{\mathcal{P}} % Klasse der projektiven Objekte
 \newcommand{\Ada}{\mathcal{R}} % Klasse von angepassten (adapted) Objekten
 
-% TODO
-\newcommand{\AMod}{\text{$A$-$\Mod$}} % Kategorie der A-Linksmoduln
-\newcommand{\ModA}{\text{$\Mod$-$A$}} % Kategorie der A-Rechtsmoduln
-
 % Kleinere Klammern
 \delimiterfactor=701
 
@@ -890,7 +886,7 @@ Sei $\Cat$ eine Kategorie.
 \begin{bspe}
   Ab. Kategorien sind: \enspace
   \inlineitem{$\AbGrp$,} \enspace
-  \inlineitem{$R$-$\Mod$,} \enspace
+  \inlineitem{$\LMod{R}$,} \enspace
   \inlineitem{$\PShAb(X)$.}
   % Ausgelassen: Kategorie der Koeffizientensysteme
 \end{bspe}
@@ -2497,18 +2493,18 @@ Sei $\Aat$ eine abelsche Kategorie.
 
 % II.6.6
 \begin{prop}
-  Sei $A$ ein Ring, $\AMod$ und $\ModA$ die Kategorien der $A$-Links- bzw. $A$-Rechtsmoduln.
+  Sei $A$ ein Ring, $\LMod{A}$ und $\RMod{A}$ die Kategorien der $A$-Links- bzw. $A$-Rechtsmoduln.
   Dann sind die Funktoren
   \begin{align*}
-    \AMod \to \AbGrp, \enspace & Y \mapsto X \otimes_A Y \qquad \text{($X \in \Ob(\ModA)$ fest)}, \\
-    \ModA \to \AbGrp, \enspace & X \mapsto X \otimes_A Y \qquad \text{($Y \in \Ob(\AMod)$ fest)}
+    \LMod{A} \to \AbGrp, \enspace & Y \mapsto X \otimes_A Y \qquad \text{($X \in \Ob(\RMod{A})$ fest)}, \\
+    \RMod{A} \to \AbGrp, \enspace & X \mapsto X \otimes_A Y \qquad \text{($Y \in \Ob(\LMod{A})$ fest)}
   \end{align*}
   beide rechts-exakt.
 \end{prop}
 
 % II.6.8
 \begin{defn}
-  Sei $A$ ein Ring. Ein Modul $X \!\in\! \Ob \ModA$ / $Y \!\in\! \Ob \AMod$
+  Sei $A$ ein Ring. Ein Modul $X \!\in\! \Ob \RMod{A}$ / $Y \!\in\! \Ob \LMod{A}$
   heißt \emph{flach}, falls der Funktor $Y \mapsto X \otimes_A Y$ / $X \mapsto X \otimes_A Y$ exakt ist.
 \end{defn}
 
@@ -2659,7 +2655,7 @@ Sei $\Aat$ eine abelsche Kategorie.
 \begin{defn}
   Eine \emph{projektive Auflösung} $\CC{F} \xrightarrow{\epsilon} E$ eines Obj. $E \in \Ob(\Aat)$ ist ein Kettenkomplex $\CC{F}$ bestehend aus projektiven Objekten in $\Aat$ und ein Augmentierungsmorphismus $\epsilon : F_0 \to E$, sodass
   \[ \ldots \to F_3 \to F_2 \to F_1 \to F_0 \xrightarrow{\epsilon} E \to 0 \]
-  azyklisch ist. Entsprechend besteht bei einer \emph{freien Auflösung} eines Obj. aus $\Aat \!=\! \AMod$ der Komplex $\CC{F}$ aus freien $A$-Moduln. \\
+  azyklisch ist. Entsprechend besteht bei einer \emph{freien Auflösung} eines Obj. aus $\Aat \!=\! \LMod{A}$ der Komplex $\CC{F}$ aus freien $A$-Moduln. \\
   Eine \emph{injektive Auflösung} von $E$ ist eine proj. Auflösung in $\Aat^\op$.
 \end{defn}
 
@@ -3158,7 +3154,7 @@ Sei $\Aat$ eine abelsche Kategorie.
 
 % III.5.8 (Kategorien von Dimension 1)
 \begin{bspe}
-  $\dimh(\AbGrp) = \dimh(\text{$k[x]$-$\Mod$}) = 1$ \enspace ($k$ ein Körper)
+  $\dimh(\AbGrp) = \dimh(\LMod{k[x]}) = 1$ \enspace ($k$ ein Körper)
 \end{bspe}
 
 % III.5.7
@@ -3245,13 +3241,13 @@ Sei $\Aat$ eine abelsche Kategorie.
 
 % III.5.17 (Das klassische Theorem von Hilbert)
 \begin{thm}[Hilbert]
-  Sei $k$ ein Körper. Es ist $\dimh(\text{$k[t_1, \nldots, t_n]$-$\Mod$}) = n$.
+  Sei $k$ ein Körper. Es ist $\dimh(\LMod{k[t_1, \nldots, t_n]}) = n$.
 \end{thm}
 
 \begin{beweisidee}
   Sei $\Aat_r$ die Kategorie der $k[t_1, \nldots, t_r]$-Moduln. \\
   Es gibt eine Kategorienäquivalenz zwischen $\Aat_r[T]$ und $\Aat_{r+1}$. \\
-  Die Aussage folgt dann induktiv mit $\dimh(\Aat_0) \!=\! \dimh(\text{$k$-$\Mod$}) \!=\! 0$ und
+  Die Aussage folgt dann induktiv mit $\dimh(\Aat_0) \!=\! \dimh(\LMod{k}) \!=\! 0$ und
   \[ \dimh(\Aat_{r+1}) = \dimh(\Aat_r[T]) = \dimh(\Aat_r) + 1 = r + 1. \]
 \end{beweisidee}
 
@@ -3498,7 +3494,7 @@ Sei $\Aat$ eine abelsche Kategorie.
 % III.6.15
 \begin{defn}
   Sei $R$ ein assoziativer Ring mit Einheit, $N$ ein Links-$R$-Modul.
-  Der Funktor $\blank \otimes_r N : \text{$\Mod$-$R$} \to \AbGrp$ ist rechtsexakt und flache Objekte bilden eine an ihn angepasste Klasse.
+  Der Funktor $\blank \otimes_r N : \RMod{R} \to \AbGrp$ ist rechtsexakt und flache Objekte bilden eine an ihn angepasste Klasse.
   Der abgeleitete Funktor wird mit $\blank \otimes^L N$ bezeichnet.
   Die \emph{Tor-Gruppen} sind die klassischen abgeleiteten Funktoren
   \[ \Tor_i^R(M, N) \coloneqq H^{-i}(M \otimes^L N). \]

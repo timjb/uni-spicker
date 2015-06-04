@@ -1238,11 +1238,11 @@
 \end{nota}
 
 \begin{bsp}
-  Seien $R$, $S$, $T$ drei Ringe, $\Cat \coloneqq \RMod\text{-}S$, $\Dat \coloneqq S\text{-}\ModC\text{-}T$, $\Eat \coloneqq R\text{-}\ModC\text{-}T$,
+  Seien $R$, $S$, $T$ drei Ringe, $\Cat \coloneqq \BMod{R}{S}$, $\Dat \coloneqq \BMod{S}{T}$, $\Eat \coloneqq \BMod{R}{T}$,
   \begin{align*}
-    & \otimes : \Cat \times \Dat \o \Eat, \quad (M, N) \mapsto M \otimes_S N \\
-    & \Hom_r : \Dat^\op \times \Eat \to \Cat, \quad (N, P) \mapsto \Hom_{\ModC\text{-}T}(N, P) \\
-    & \Hom_l : \Cat^\op \times \Eat \to \Dat, \quad (M, P) \mapsto \Hom_{\RMod}(M, P)
+    & \otimes : \Cat \times \Dat \to \Eat, \quad (M, N) \mapsto M \otimes_S N \\
+    & \Hom_r : \Dat^\op \times \Eat \to \Cat, \quad (N, P) \mapsto \Hom_{\RMod{T}}(N, P) \\
+    & \Hom_l : \Cat^\op \times \Eat \to \Dat, \quad (M, P) \mapsto \Hom_{\RMod{R}}(M, P)
   \end{align*}
 \end{bsp}
 
@@ -1252,7 +1252,7 @@
 
 \begin{bspe}
   \begin{itemize}
-    \item $(R\text{-}\ModC\text{-}R, \otimes_R, R)$
+    \item $(\BMod{R}{R}, \otimes_R, R)$
     \item $(\SetC, \times, \LonelyHeart)$
   \end{itemize}
 \end{bspe}
@@ -1261,7 +1261,7 @@
 % Aber es funktioniert: kompakt erzeugte schwach-Hausdorff-Räume
 
 \begin{defn}
-  Sei $\otimes : \Cat \times \Dat \to \Eat$ eine Biadjunktion, $\Dat$, $\Dat$ und $\Eat$ Modellkategorien.
+  Sei $\otimes : \Cat \times \Dat \to \Eat$ eine Biadjunktion, $\Cat$, $\Dat$ und $\Eat$ Modellkategorien.
   Dann heißt $\otimes$ \emph{Quillen-Biadjunktion}, falls für alle $(f : U \hookrightarrow V) \in \Cat$, $(g : W \hookrightarrow X) \in \Dat$ der Morphismus $f \square g : P(f, g) \coloneqq V \otimes W \cup_{U \otimes W} U \otimes X \to V \otimes X$ eine Kofaserung in $\Eat$ ist, welche azyklisch ist, sobald $f$ oder $g$ azyklisch ist.
 \end{defn}
 
