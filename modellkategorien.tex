@@ -11,6 +11,7 @@
 
 \usepackage{mathabx} % für \boxslash
 \usepackage{stmaryrd} % für \leftarrowtriangle
+\usepackage{bbm} % Für 1 mit Doppelstrich (Einheitsobjekt in monoidaler Kategorie)
 
 % http://tex.stackexchange.com/questions/117732/tikz-and-babel-error
 % Es ist schierer Wahnsinn, welche Hacks LaTeX benötigt!
@@ -45,6 +46,7 @@
 \newcommand{\LD}[1]{\mathbb{L} #1} % linksabgeleiteter Funktor
 \newcommand{\RD}[1]{\mathbb{R} #1} % linksabgeleiteter Funktor
 \newcommand{\LonelyHeart}{\{ \, \heartsuit \, \}} % Menge mit genau einem Element
+\newcommand{\UnitOb}{\mathbbm{1}} % Einheitsobjekt in einer monoidalen Kategorie
 
 \newenvironment{centertikzcd}
   {\begin{center}\begin{tikzcd}}
@@ -262,7 +264,7 @@
 \end{bspe}
 
 \begin{bsp}
-  Sei $K : \ModC \to \mathbf{1}, \enspace * \mapsto 1$ und $T : \ModC \to \Aat$ irgendein Funktor. Dann ist eine RKE von $T$ längs $K$ dasselbe wie ein Limes von $T$.
+  Sei $K : \ModC \to \UnitOb, \enspace * \mapsto 1$ und $T : \ModC \to \Aat$ irgendein Funktor. Dann ist eine RKE von $T$ längs $K$ dasselbe wie ein Limes von $T$.
 \end{bsp}
 
 \begin{thm}
@@ -1145,28 +1147,27 @@
 \subsection{Monoidale Modellkategorien}
 
 \begin{defn}
-  Eine \emph{monoidale Kategorie} ist eine Kategorie $\Cat$ zusammen mit einem Bifunktor $\otimes : \Cat \times \Cat \to \Cat$, einem Objekt $\mathbf{1} \in \Ob(\Cat)$, natürlichen Isomorphismen $\alpha : (\blank \otimes \blank) \circ \blank \Rightarrow \blank \otimes (\blank \circ \blank)$, $\lambda : \mathbf{1} \otimes \blank \Rightarrow \blank$ und $\rho : \blank \otimes \mathbf{1} \Rightarrow \blank$, sodass die Kohärenzdiagramme aus der Definition einer schwachen 2-Kategorie kommutieren.
+  Eine \emph{monoidale Kategorie} ist eine Kategorie $\Cat$ zusammen mit einem Bifunktor $\otimes : \Cat \times \Cat \to \Cat$, einem Objekt $\UnitOb \in \Ob(\Cat)$, natürlichen Isomorphismen $\alpha : (\blank \otimes \blank) \circ \blank \Rightarrow \blank \otimes (\blank \circ \blank)$, $\lambda : \UnitOb \otimes \blank \Rightarrow \blank$ und $\rho : \blank \otimes \UnitOb \Rightarrow \blank$, sodass die Kohärenzdiagramme aus der Definition einer schwachen 2-Kategorie kommutieren.
 \end{defn}
 
 \begin{bem}
-  Eine monoidale Kategorie ist das gleiche wie eine 2-Kategorie mit einem Objekt.
+  Eine monoidale Kategorie ist das gleiche wie eine 2-Kategorie mit nur einem Objekt.
 \end{bem}
 
 \begin{bspe}
-  \begin{itemize}
-    \item Sei $R$ ein Ring (mit Eins). Dann ist $(R\text{-Bi}\ModC, \otimes_R, R)$ eine monoidale Kategorie.
-    \item $(\SetC, \times, \LonelyHeart)$ ist eine monoidale Kategorie.
-  \end{itemize}
+  Monoidale Kategorien sind: \quad
+  \inlineitem{$(\SetC, \times, \LonelyHeart)$} \\
+  \inlineitem{$(\BMod{R}{R}, \otimes_R, R)$ wobei $R$ ein Ring mit Eins ist}
 \end{bspe}
 
 \begin{defn}
-  Eine \emph{symmetrische monoidale Kategorie} ist eine monoidale Kategorie zusammen mit einem natürlichen Isomorphismus $\gamma : X \otimes Y \to Y \otimes X$, sodass die geeigneten Kohärenzdiagramme kommutieren. Es reicht aus, zu zeigen, dass folgendes Diagramm kommutiert:
-  \begin{centertikzcd}
-    (Y \otimes X) \otimes Z \arrow[d, "\alpha"] & (X \otimes Y) \otimes Z \arrow[l, "\gamma"] \arrow[r, "\gamma"] & Z \otimes (X \otimes Y) \arrow[d, "\gamma"] \\
-    Y \otimes (X \otimes Z) \arrow[r, "\gamma"] & Y \otimes (Z \otimes X) & (Y \otimes Z) \otimes X \arrow[l, "\alpha"]
+  Eine \emph{symm. monoidale Kategorie} ist eine monoidale Kat. zusammen mit einem nat. Isomorphismus $\gamma : X \otimes Y \to Y \otimes X$, sodass die geeigneten Kohärenzdiagramme kommutieren. Es reicht aus, zu zeigen, dass folgende Diagramme kommutierten:
+  \begin{centertikzcd}[column sep=1.5cm, row sep=0.5cm]
+    (Y \otimes X) \otimes Z \arrow[d, "\alpha"] & (X \otimes Y) \otimes Z \arrow[l, swap, "\gamma \otimes \id_Z"] \arrow[r, "\alpha"] & X \otimes (Y \otimes Z) \arrow[d, "\gamma"] \\
+    Y \otimes (X \otimes Z) \arrow[r, "\id_Y \otimes \gamma"] & Y \otimes (Z \otimes X) & (Y \otimes Z) \otimes X \arrow[l, swap, "\alpha"]
   \end{centertikzcd}
   \begin{centertikzcd}
-    \mathbf{1} \otimes X \arrow[rr, "\gamma"] \arrow[dr, "\lambda"] && X \otimes \mathbf{1} \arrow[dl, "\rho"] \\
+    \UnitOb \otimes X \arrow[rr, "\gamma"] \arrow[dr, "\lambda"] && X \otimes \UnitOb \arrow[dl, "\rho"] \\
     & X
   \end{centertikzcd}
 \end{defn}
@@ -1174,25 +1175,24 @@
 % Ausgelassen: Beispiel: Supervektorräume
 
 \begin{defn}
-  Ein monoidaler Funktor zwischen (symm.) monoidalen Kategorien $\Cat$ und $\Dat$ ist ein Funktor $F : \Cat \to \Dat$ zusammen mit natürlichen Isomorphismen $F \blank \otimes_\Dat F \blank \Rightarrow F (\blank \otimes_\Cat \blank)$ und $F \mathbf{1}_\Cat \Rightarrow \mathbf{1}_\Dat$, welche verträglich mit $\alpha$, $\lambda$, $\rho$ (und evt. $\gamma$) sind.
+  Ein monoidaler Funktor zwischen (symm.) monoidalen Kategorien $\Cat$ und $\Dat$ ist ein Funktor $F : \Cat \to \Dat$ zusammen mit natürlichen Isomorphismen $F \blank \otimes_\Dat F \blank \Rightarrow F (\blank \otimes_\Cat \blank)$ und $F \UnitOb_\Cat \Rightarrow \UnitOb_\Dat$, welche verträglich mit $\alpha$, $\lambda$, $\rho$ (und eventuell $\gamma$) sind.
 \end{defn}
 
 \begin{bsp}
-  $\SetC \to \RMod, \enspace X \mapsto \text{freier $R$-Modul mit Basis $X$}$
-  ist ein monoidaler Funktor.
+  $\SetC \to \LMod{R}, \enspace X \mapsto \text{freier $R$-Modul mit Basis $X$}$
+  %ist ein monoidaler Funktor.
 \end{bsp}
 
 \begin{defn}
-  $F, G : \Cat \to \Dat$ monoidale Funktoren. Eine nat. Transformation $\eta : F \Rightarrow G$ lässt \zB{}
+  Seien $F, G : \Cat \to \Dat$ monoidale Funktoren. Eine natürliche Transformation $\eta : F \Rightarrow G$ heißt \emph{monoidal}, wenn folgende Diagramme kommutieren:
   \begin{centertikzcd}
-    FX \otimes FY \arrow[r] \arrow[d] & F(X \otimes Y) \arrow[d] \\
-    GX \otimes GY \arrow[r] & G(X \otimes Y)
+    FX \otimes FY \arrow[r] \arrow[d, "\eta_X \otimes \eta_Y"] & F(X \otimes Y) \arrow[d, "\eta_{X \otimes Y}"] && \UnitOb \arrow[ld] \arrow[rd] \\
+    GX \otimes GY \arrow[r] & G(X \otimes Y) & F(\UnitOb) \arrow[rr, "\eta_\UnitOb"] && G(\UnitOb)
   \end{centertikzcd}
-  kommutieren.
 \end{defn}
 
 \begin{defn}
-  Sei $\Cat$ eine monoidale Kategorie. Dann ist ein Rechts-$\Cat$-Modul eine Kategorie $\Dat$ mit $\otimes : \Dat \times \Cat \to \Dat$ und \ldots
+  Sei $\Cat$ eine monoidale Kategorie. Dann ist ein Rechts-$\Cat$-Modul eine Kategorie $\Dat$ mit einem Funktor $\otimes : \Dat \times \Cat \to \Dat$ und \ldots
 \end{defn}
 
 \begin{bsp}
@@ -1247,7 +1247,7 @@
 \end{bsp}
 
 \begin{defn}
-  Eine monoidale Kategorie $(\Cat, \otimes, \mathbf{1})$ heißt \emph{monoidal abgeschlossen}, wenn $\otimes$ Teil einer Biadjunktion ist.
+  Eine monoidale Kategorie $(\Cat, \otimes, \UnitOb)$ heißt \emph{monoidal abgeschlossen}, wenn $\otimes$ Teil einer Biadjunktion ist.
 \end{defn}
 
 \begin{bspe}
@@ -1292,21 +1292,19 @@
 \end{satz}
 
 \begin{defn}
-  Eine \emph{monoidale Modellkategorie} ist eine Modellkategorie $\ModC$ mit monoidal abgeschlossener Struktur $(M, \otimes, \mathbf{1})$, sodass
+  Eine \emph{monoidale Modellkategorie} ist eine Modellkategorie $\ModC$ mit monoidal abgeschlossener Struktur $(M, \otimes, \UnitOb)$, sodass
   \begin{itemize}
     \item $\otimes : \ModC \times \ModC \to \ModC$ ein Quillenbifunktor und
-    \item $Q \mathbf{1} \otimes X \to \mathbf{1} \otimes X \cong X$ und $X \otimes Q \mathbf{1} \to X \otimes \mathbf{1} \cong X$ für alle kofasernden $X$ jeweils schwache Äquivalenzen sind.
+    \item $Q \UnitOb \otimes X \to \UnitOb \otimes X \cong X$ und $X \otimes Q \UnitOb \to X \otimes \UnitOb \cong X$ für alle kofasernden $X$ jeweils schwache Äquivalenzen sind.
   \end{itemize}
 \end{defn}
 
 \begin{bem}
-  Die zweite Bedingung ist äquivalent zu: $X \cong \Hom_r(\mathbf{1}, X) \to \Hom_r(Q \mathbb{1}, X)$ und $X \cong \Hom_l(\mathbb{1}, X) \to \Hom_l(Q \mathbb{1}), X$ sind schwache Äq. für alle fasernden $X$
+  Die zweite Bedingung ist äquivalent zu: $X \cong \Hom_r(\UnitOb, X) \to \Hom_r(Q \UnitOb, X)$ und $X \cong \Hom_l(\UnitOb, X) \to \Hom_l(Q \UnitOb, X)$ sind schwache Äq. für alle fasernden $X$
 \end{bem}
 
 % TODO: Scheibenkategorien als Modellkategorien
 % TODO: 2-aus-6-Eigenschaft von Isos, schwachen Äquivalenzen
-
-% TODO: \mathbf{1} ausbessern (zu mathbb), $\Mod$ != $\ModC$ korregieren
 
 \pagebreak
 
