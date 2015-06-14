@@ -939,6 +939,10 @@
   Eine Kategorie heißt genau dann \emph{lokal präsentierbar}, wenn sie lokal $\kappa$-präsentierbar für eine reguläre Kardinalzahl $\kappa$ ist.
 \end{defn}
 
+\begin{lem}
+  Ist $\Cat$ lokal präsentierbar, so auch $\Cat/X$ mit $X \in \Ob(X)$.
+\end{lem}
+
 \begin{bspe}
   \begin{itemize}
     \item $\sSet$ ist lokal präsentierbar.
@@ -1157,6 +1161,22 @@
   Bezüglich dieser Modellstruktur auf $\NodC$ wird $(F, U)$ zu einer Quillenadjunktion.
 \end{satz}
 
+\subsection{Scheibenkategorien als Modellkategorien}
+
+\begin{lem}
+  Sei $\ModC$ eine Modellkategorie, $X \in \Ob(\ModC)$ ein Objekt. \\
+  Dann sind die Scheibenkategorien $X/\ModC$ und $\ModC/X$ Modellkat'n, wobei die Modellstruktur vom Vergissfunktor $U : X/\ModC \to \ModC$ bzw. $U : \ModC/X \to \ModC$ erzeugt wird, \dh{} ein Mor. $f$ ist genau dann eine Faserung/Kofaserung/schwache Äquivalenz, wenn $U(f)$ es ist.
+\end{lem}
+
+\begin{lem}
+  \begin{itemize}
+    \item Ist $\ModC$ links- oder rechtseigentlich, so auch $\ModC/X$ und $X/\ModC$
+    \item Ist $\ModC$ eigentlich, so auch $\ModC/X$ und $X/\ModC$
+    \item Ist $\ModC$ kofasernd erzeugt, so auch $\ModC/X$
+    \item Ist $\ModC$ kombinatorisch, so auch $\ModC/X$
+  \end{itemize}
+\end{lem}
+
 % 6.3. Monoidale Modellkategorien
 \subsection{Monoidale Modellkategorien}
 
@@ -1336,8 +1356,6 @@
   Es gilt
   \[ i \lhhe p \iff (\Hom_\ModC(X, E) \to P(i, p)) \text{ ist surjektiv.} \]
 \end{beob}
-
-% TODO: Scheibenkategorien als Modellkategorien
 
 \pagebreak
 
