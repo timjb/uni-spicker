@@ -844,6 +844,20 @@
   Ein Morphismus $p : Z \to Y$ zw. fasernden Objekten ist genau dann eine schwache Äquivalenz, wenn $p_* : \pi(X, Z) \to \pi(X, Y)$ bijektiv ist für alle kofasernden Objekte $X \in \ModC$.
 \end{thm}
 
+\begin{defn}
+  Eine Klasse $W \subseteq \Mor(\Cat)$ besitzt die \emph{2-aus-6-Eigenschaft}, wenn für alle Folgen von Morphismen
+  \[ X \xrightarrow{u} Y \xrightarrow{v} Z \xrightarrow{w} K \qquad \in \Cat \]
+  gilt: Wenn $v \circ u$ und $w \circ v$ aus $W$ sind, so auch $u$, $v$, $w$ und $w \circ v \circ u$.
+\end{defn}
+
+\begin{beob}
+  Die Klasse der Isomor. besitzt die 2-aus-6-Eigenschaft.
+\end{beob}
+
+\begin{kor}
+  Die Klasse der schwache Äquivalenzen in einer Modellkategorie besitzt die 2-aus-6-Eigenschaft.
+\end{kor}
+
 % §5. Kombinatorische und eigentliche Modellkategorien
 \section{Klassen von Modellkategorien}
 
@@ -1324,7 +1338,6 @@
 \end{beob}
 
 % TODO: Scheibenkategorien als Modellkategorien
-% TODO: 2-aus-6-Eigenschaft von Isos, schwachen Äquivalenzen
 
 \pagebreak
 
