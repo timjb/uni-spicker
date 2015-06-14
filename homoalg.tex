@@ -1113,9 +1113,14 @@ Sei $\Cat$ eine Kategorie.
   Geom. Realisierung ist ein Funktor $\abs{\blank} : \sSet \to \Top$.
 \end{prop}
 
+\begin{defn}
+  Eine Überdeckung $(U_\alpha)_{\alpha \in A}$ eines topologischen Raumes heißt \emph{Verfeinerung} einer Überdeckung $(V_\beta)_{\beta \in B}$, wenn es eine Abbildung $\psi : A \to B$ gibt, sodass $U_\alpha \subset V_{\psi(\alpha)}$ für alle $\alpha \in A$.
+\end{defn}
+
 \begin{bspe}
   \begin{itemize}
-    \item Eine Überdeckung $(U_\alpha)_{\alpha \in A}$ eines topologischen Raumes ist Verfeinerung von $(V_\beta)_{\beta \in B}$, wenn es eine Abbildung $\psi : A \to B$ gibt, sodass $U_\alpha \subset V_{\psi(\alpha)}$ für alle $\alpha \in A$. Dies induziert eine simpliziale Abb. zwischen den Nerven der Überdeckungen durch
+    \item Sei $(U_\alpha)_{\alpha \in A}$ eine Verfeinerung von $(V_\beta)_{\beta \in B}$ vermöge $\psi : A \to B$.
+    Dann induziert $\psi$ eine simpliziale Abb. zwischen den Nerven der Überdeckungen durch
     \[ F_n(\alpha_0, \ldots, \alpha_n) \coloneqq (\psi(\alpha_0), \ldots, \psi(\alpha_n)). \]
     % Ausgelassen: I.2.17
     \item Ein Gruppenhomomorphismus $\phi : G \to H$ stiftet eine Abbildung $BG \to BH$ zwischen den klassifizierenden Räumen durch
@@ -2071,30 +2076,6 @@ Sei $\Aat$ eine abelsche Kategorie.
     a \mapsto \sum_{i=0}^n (-1)^i A(\partial_{n+1}^i)(a).
   \]
 \end{defn}
-
-% I.7.4 (Der Čech-Komplex)
-
-\begin{defn}
-  Sei $Y$ ein topol. Raum, $(U_\alpha)_{\alpha \in A}$ eine (nicht unbedingt offene) Überdeckung von $Y$ und $\Fais$ eine Garbe ab. Gruppen auf $Y$. Die kosimpliziale abelsche Gruppe $\check{C}(U, \Fais)$ der \emph{Čech-Koketten} ist
-  \begin{align*}
-    \check{C}^m(U, \Fais) \coloneqq \nspace{4} \prod_{\alpha_0, \ldots, \alpha_m \in A} \nspace{4} \Fais(U_{\alpha_0} \cap \ldots \cap U_{\alpha_m}), \\
-    \check{C}(U, \Fais)(f : [m] \to [n])((f_{\alpha_0, \ldots ,\alpha_m})_{\alpha_0, \ldots, \alpha_m}) \coloneqq \\
-    (f_{g(0), \ldots, g(m)}|U_{\alpha_0} \cap \ldots \cap U_{\alpha_n})_{\alpha_0, \nldots, \alpha_n}.
-  \end{align*}
-\end{defn}
-
-\begin{bem}
-  Die Randabb. im zugeh. Kokettenkomplex ist gegeben durch
-  \[ (\delta^n \phi)_{\alpha_0, \ldots, \alpha_{n+1}} \coloneqq \sum_{i=0}^{n+1} (-1)^i \phi_{\alpha_0, \ldots, \hat{\alpha_i}, \ldots, \alpha_{n+1}}. \]
-\end{bem}
-
-\begin{defn}
-  Die Kohomologiegruppen dieses Komplexes heißen \emph{Čech-Homologiegruppen} von $\Fais$ bzgl. der Überdeckung $(U_\alpha)_{\alpha \in A}$.
-\end{defn}
-
-\begin{bem}
-  $\check{H}(U, \Fais) \cong \Gamma(X, \Fais)$ hängt nicht von der Überdeckung ab.
-\end{bem}
 
 % Ausgelassen: I.7.6 (Homologie und Kohomologie von Gruppen)
 
@@ -3627,6 +3608,106 @@ Sei $\Aat$ eine abelsche Kategorie.
   Sei $\prescript{II}{}\!E$ die SS zur vertikalen Filtration von $G(\CCC{(SL)}) \cong \CCC{(S G(L))}$. Diese konvergiert gegen die Hyperkohomologie von $G$ bzgl. $\CCC{K}$ und ähnlich wie oben gilt
   \[ \prescript{II}{}\!E^{pq}_2 \cong R^p G(H^q (\CCC{K})). \]
 \end{bem}
+
+\subsection{Čech-Methoden für Garbenkohomologie}
+
+% I.7.4 (Der Čech-Komplex)
+
+\begin{defn}
+  Sei $Y$ ein topol. Raum, $\mathcal{U} = (U_\alpha)_{\alpha \in A}$ eine (nicht unbedingt offene) Überdeckung von $Y$ und $\Fais$ eine Garbe ab. Gruppen auf $Y$. \\
+  Die kosimpliziale abelsche Gruppe $\check{C}(\mathcal{U}, \Fais)$ der \emph{Čech-Koketten} ist
+  \begin{align*}
+    \check{C}^m(\mathcal{U}, \Fais) \coloneqq \nspace{4} \prod_{\alpha_0, \ldots, \alpha_m \in A} \nspace{4} \Fais(U_{\alpha_0} \cap \ldots \cap U_{\alpha_m}), \\
+    \check{C}(\mathcal{U}, \Fais)(f : [m] \to [n])((f_{\alpha_0, \ldots ,\alpha_m})_{\alpha_0, \ldots, \alpha_m}) \coloneqq \\
+    (f_{g(0), \ldots, g(m)}|U_{\alpha_0} \cap \ldots \cap U_{\alpha_n})_{\alpha_0, \nldots, \alpha_n}.
+  \end{align*}
+\end{defn}
+
+\begin{bem}
+  Die Randabb. im zugeh. Kokettenkomplex ist gegeben durch
+  \[ (\delta^n \phi)_{\alpha_0, \ldots, \alpha_{n+1}} \coloneqq \sum_{i=0}^{n+1} (-1)^i \phi_{\alpha_0, \ldots, \hat{\alpha_i}, \ldots, \alpha_{n+1}}. \]
+\end{bem}
+
+\begin{defn}
+  Die Kohomologiegruppen dieses Komplexes heißen \emph{Čech-Kohomologiegruppen} von $\Fais$ bzgl. der Überdeckung $\mathcal{U}$.
+\end{defn}
+
+\begin{bem}
+  $\check{H}^0(\mathcal{U}, \Fais) \cong \Gamma(Y, \Fais)$ hängt nicht von der Überdeckung ab.
+\end{bem}
+
+\begin{bem}
+  Sei die Überdeckung $\mathcal{U} = (U_\alpha)_{\alpha \in A}$ von $Y$ eine Verfeinerung von $\mathcal{V} = (V_\beta)_{\beta \in B}$ vermöge $\psi : A \to B$.
+  Dann ind. $\psi$ die Abbildung
+  \begin{align*}
+    & \psi^* : \check{C}^*(\mathcal{V}, \Fais) \to \check{C}^*(\mathcal{U}, \Fais), \\
+    & (\psi^*)((f_{\beta_0, \ldots ,\beta_m})_{\beta_0, \ldots, \beta_m}) \coloneqq (f_{\psi(\alpha_0),\ldots,\psi(\alpha_m)}|_{U_{\alpha_0} \cap \ldots U_{\alpha_n}})_{\alpha_0, \ldots, \alpha_m}.
+  \end{align*}
+\end{bem}
+
+\begin{defn}
+  Sei $Y$ ein topologischer Raum, $\Fais$~eine Garbe abelscher Gruppen auf $Y$, $U \subseteq Y$.
+  Dann heißt
+  \[ \check{H}^n(U, \Fais) \coloneqq \colim_\mathcal{U} \check{H}^n(\mathcal{U}, \Fais). \]
+  $n$-te \emph{Čech-Kohomologiegruppe} von $\Fais$.
+  Der Kolimes läuft dabei über die Kategorie der offenen Überdeckungen von $U$ und Verfeinerungen als Morphismen.
+\end{defn}
+
+% XXX: Verallgemeinerung auf Modulgarben?
+\begin{defn}[\emph{Garbenkohomologie}]
+  Sei $Y$ ein topologischer Raum, $\Fais$~eine Garbe abelscher Gruppen auf $Y$, $U \subseteq Y$.
+  Dann heißt
+  \[ H^n(U, \Fais) \coloneqq (R^n \Gamma_U)(\Fais) \]
+  $n$-te Kohomologiegruppe von $\Fais$ auf $U$.
+\end{defn}
+
+\begin{frage}
+  Wann stimmen $\check{H}^n(Y, \Fais)$ und $H^n(Y, \Fais)$ überein?
+\end{frage}
+
+% Wunschzettel 25, Aufgabe 1
+
+\begin{lemdefn}
+  Sei $\Fais$ eine Garbe abelscher Gruppen auf $Y$. \\
+  Dann definiert $V \mapsto H^q(V, \Fais)$ eine Garbe \emph{$\mathcal{H}^q(\Fais)$} auf $Y$.
+\end{lemdefn}
+
+\begin{thm}
+  Sei $Y$ ein topologischer Raum, $\mathcal{U}$ eine Überdeckung von $Y$, $\Fais$~eine Garbe ab. Gruppen auf $Y$.
+  Es gibt eine Spektralseq. mit
+  \[
+    E^{pq}_2 = \check{H}^p(\mathcal{U}, \mathcal{H}^q(\Fais))
+    \quad \text{und} \quad
+    E^{pq}_* \Rightarrow H^{p+q}(Y, \Fais).
+  \]
+\end{thm}
+
+\begin{konstr}
+  Die SS ist die Grothendieck-SS der Komposition
+  \[ \ShAb(Y) \xrightarrow{\iota} \PShAb(Y) \xrightarrow{\check{H}^0} \AbGrp. \]
+  Für diese ist $E^{pq}_2 \!=\! R^p \check{H}^0 (R^q \iota (\Fais))$ und es gilt $E^{pq}_* \Rightarrow R^{p+q} (\check{H}^0 \!\circ\! \iota) \Fais$.
+  Die gewünschte Form ergibt sich mit den Isomorphismen
+  \[
+    R^p \check{H}^0 \cong \check{H}^p(\mathcal{U}, \blank), \quad
+    R^q \iota \Fais \cong \mathcal{H}^q(\Fais), \quad
+    \check{H}^0 \circ \iota \cong \Gamma_Y.
+  \]
+\end{konstr}
+
+\begin{lem}
+  Angenommen, $H^q(U_{i_0} \cap \nldots \cap U_{i_p}, \Fais) \!=\! 0$ für $q \!>\! 0$ und $p \!\geq\! 0$. \\
+  Dann ist obige Spektralsequenz auf der zweiten Seite in $p \geq 0$, $q = 0$ konzentriert.
+  Somit gilt in diesem Fall
+  \[ H^n(Y, \Fais) \cong \check{H}^n(\mathcal{U}, \mathcal{H}^0(\Fais)) \cong \check{H}^n(\mathcal{U}, \Fais) \]
+\end{lem}
+
+\begin{lem}
+  Aus den Spektralsequenzen aller Überdeckungen ergeben sich Homomorphismen $\check{H}^n(Y, \Fais) \to H^n(Y, \Fais)$.
+  \begin{itemize}
+    \item Diese Abbildung ist ein Isomorphismus für $n = 0, 1$ und ein Monomorphismus für $n = 2$.
+    \item Falls $Y$ parakompakt ist, so ist die Abbildung für alle $n$ ein Isomorphismus.
+  \end{itemize}
+\end{lem}
 
 % TODO: III.8 (Garbenkohomologie)
 

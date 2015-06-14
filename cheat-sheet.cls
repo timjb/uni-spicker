@@ -45,6 +45,7 @@
 \newtheorem*{situation}{Situation}
 \newtheorem*{thm}{Thm} % Theorem
 \newtheorem*{lem}{Lem} % Lemma
+\newtheorem*{lemdefn}{Lem/Def} % Lemma/Definition
 \newtheorem*{kor}{Kor} % Korollar
 \newtheorem*{voraussetzung}{Voraussetzung}
 \newtheorem*{acht}{Achtung}
