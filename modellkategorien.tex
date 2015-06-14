@@ -1225,7 +1225,7 @@
   \[
     \otimes : \Cat \times \Dat \to \Eat, \quad
     \Hom_r : \Dat^\op \times \Eat \to \Cat,
-    \Hom_l : \Cat^op \times \Eat \to \Dat
+    \Hom_l : \Cat^\op \times \Eat \to \Dat
   \]
   und natürlichen Isomorphismen
   \[
@@ -1237,6 +1237,10 @@
   $\prescript{C}{} E \coloneqq \Hom_l(C, E)$,
   $E^D \coloneqq \Hom_r(D, E)$
 \end{nota}
+
+\begin{bem}
+  $k \otimes i \lhhe p \iff k \lhhe \Hom_r(i, p) \iff i \lhhe \Hom_l(k, p)$
+\end{bem}
 
 \begin{bsp}
   Seien $R$, $S$, $T$ drei Ringe, $\Cat \coloneqq \BMod{R}{S}$, $\Dat \coloneqq \BMod{S}{T}$, $\Eat \coloneqq \BMod{R}{T}$. Eine Biadjunktion ist dann gegeben durch
@@ -1266,13 +1270,13 @@
   eine Kofaserung in $\Eat$ ist, welche azyklisch ist, wenn $f$ oder $g$ azyklisch ist.
 \end{defn}
 
-\begin{bem}
-  Das ist äquivalent zu:
-  Für alle Kof. $(g : W \hookrightarrow X) \in \Dat$ und Faserungen $(p : Y \twoheadrightarrow Z) \in \Eat$ ist
+\begin{lem}
+  Die Bedingung ist äquivalent zu:
+  Für alle Kofaserungen $(g : W \hookrightarrow X) \in \Dat$ und Faserungen $(p : Y \twoheadrightarrow Z) \in \Eat$ ist
   \[ \Hom_{r,\square} : \Hom_r(X, Y) \to \Hom_r(X, Z) \times_{\Hom_r(W, Z)} \Hom_r(W, Y) \]
   eine Faserung und azyklisch, wenn $g$ oder $p$ es ist.
   Analog für $\Hom_l$.
-\end{bem}
+\end{lem}
 
 \begin{prop}
   Sei $\Cat \!\times\! \Dat \to \Eat$ ein Quillenbifunktor.
@@ -1281,7 +1285,7 @@
 
 \begin{bem}
   Analog: Sei $E$ fasernd.
-  Dann ist $\Hom_r(\blank, E) : \Dat \to \Cat^\op$ Quillen-Links-Adj. zu $\Hom_l(\blank, E) : \Cat^\op \to \Dat$.
+  Dann ist $\Hom_r(\blank, E) : \Dat \to \Cat^\op$ ein Quillen-Links-Adjungierter zu $\Hom_l(\blank, E) : \Cat^\op \to \Dat$.
 \end{bem}
 
 \begin{lem}
@@ -1297,7 +1301,7 @@
 \end{satz}
 
 \begin{defn}
-  Eine \emph{monoidale Modellkategorie} ist eine Modellkategorie $\ModC$ mit monoidal abgeschlossener Struktur $(M, \otimes, \UnitOb)$, sodass
+  Eine \emph{monoidale Modellkategorie} ist eine Modellkategorie $\ModC$ mit monoidal abgeschlossener Struktur $(\ModC, \otimes, \UnitOb)$, sodass
   \begin{itemize}
     \item $\otimes : \ModC \times \ModC \to \ModC$ ein Quillenbifunktor und
     \item $Q \UnitOb \otimes X \to \UnitOb \otimes X \cong X$ und $X \otimes Q \UnitOb \to X \otimes \UnitOb \cong X$ für alle kofasernden $X$ jeweils schwache Äquivalenzen sind.
@@ -1312,6 +1316,12 @@
   \]
   sind schwache Äquivalenzen für alle fasernden $X$.
 \end{bem}
+
+\begin{beob}
+  Sei $\ModC$ eine mon. Modellkat, $(A \xrightarrow{i} X), (E \xrightarrow{p} B) \in \ModC$.
+  Es gilt
+  \[ i \lhhe p \iff (\Hom_\ModC(X, E) \to P(i, p)) \text{ ist surjektiv.} \]
+\end{beob}
 
 % TODO: Scheibenkategorien als Modellkategorien
 % TODO: 2-aus-6-Eigenschaft von Isos, schwachen Äquivalenzen
