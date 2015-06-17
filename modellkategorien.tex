@@ -844,6 +844,10 @@
   Ein Morphismus $p : Z \to Y$ zw. fasernden Objekten ist genau dann eine schwache Äquivalenz, wenn $p_* : \pi(X, Z) \to \pi(X, Y)$ bijektiv ist für alle kofasernden Objekte $X \in \ModC$.
 \end{thm}
 
+\begin{beob}
+  Sei $X$ kofasernd und $Y$ fasernd. Dann ist $\Hom_{\Ho(\ModC)}(X, Y) = \Hom_\ModC(X, Y)/{\sim}$.
+\end{beob}
+
 \begin{defn}
   Eine Klasse $W \subseteq \Mor(\Cat)$ besitzt die \emph{2-aus-6-Eigenschaft}, wenn für alle Folgen von Morphismen
   \[ X \xrightarrow{u} Y \xrightarrow{v} Z \xrightarrow{w} K \qquad \in \Cat \]
@@ -1356,6 +1360,102 @@
   Es gilt
   \[ i \lhhe p \iff (\Hom_\ModC(X, E) \to P(i, p)) \text{ ist surjektiv.} \]
 \end{beob}
+
+% Vorlesung vom 10.6.2015
+
+\section{Simpliziale Mengen}
+
+% TODO
+
+% Vorlesung vom 17.6.2015
+
+% Ergänzung zur letzten Vorlesung, an der passenden Stelle einfügen!
+\begin{bem}
+  Sei $\otimes : \Cat \times \Dat \to \Eat$ ein Quillen-Bifunktor.
+  Ist dann $C \times I$ ein Zylinderobjekt zu $C \in \Ob(\Cat)$, so ist $(C \times I) \otimes D$ ein Zylinderobjekt zu $C \otimes D$, $D \in \Ob(\Dat)$.
+\end{bem}
+
+\begin{defn}
+  Ein Morphismus $f : X \to Y$ zwischen simplizialen Mengen heißt \emph{Kan-Faserungen}, falls er die Rechtshochhebeeigenschaft bzgl. $\{\, \Lambda^i[n] \to \Delta[n] \,\}$ hat.
+\end{defn}
+
+\begin{defn}
+  Eine simpliziale Menge $X$ heißt \emph{Kan-Komplex}, falls $X \to *$ eine Kan-Faserung ist.
+\end{defn}
+
+\begin{defn}
+  Eine \emph{anodyne Erweiterung} ist ein Morphismus $i : A \to B$ von simplizialen Mengen, welcher die Linkshochhebungseigenschaft welcher die LHHE bzgl. aller Kan-Faserungen hat, \dh{} die Unterkategorie der anodynen Erweiterungen ist die Saturierung von $\{\, \Lambda^i[n] \to \Delta[n] \,\}$, also $\Coff(\{\, \Lambda^i[n] \to \Delta[n] \,\})$.
+\end{defn}
+
+\begin{satz}
+  Die Monomorphismen in $\sSet$ sind genau die Retrakte von Zellkomplexen über $\{\, \partial \Delta[n] \hookrightarrow \Delta[n] \,\}$.
+\end{satz}
+
+\begin{defn}
+  Eine \emph{triviale Faserung} ist ein Morphismus in $\sSet$, welcher die RHE bzgl. $\{\, \partial \Delta[n] \hookrightarrow \Delta[n] \,\}$, \dh{} bzgl. aller Monomorphismen hat.
+\end{defn}
+
+\begin{satz}
+  $(\text{anodyne Erweiterungen}, \text{Kan-Faserungen})$ und $(\text{Monomorphismen}, \text{triviale Faserungen})$ sind jeweils schwache Faktorisierungssysteme von $\sSet$.
+\end{satz}
+
+\begin{satz}[Gabriel-Zisman]
+  Sei $k : Y \to Z$ ein Monomorphismus. Ist dann $i : A \to B$ anodyn, so ist $i \square k : A \times Z \cup_{A \times Y} B \times Y \to B \times Z$ (mit ${\otimes} \coloneqq {\times}$) ebenfalls anodyn.
+\end{satz}
+
+\begin{bem}
+  Damit wird folgen, dass $\sSet$ eine kartesisch abgeschlossene Modellkategorie wird (\dh{} $\times$ ist ein Quillen-Bifunktor).
+\end{bem}
+
+% Vorbereitungen:
+% $\mathcal{A} \coloneqq \{\, \text{anodyne Erweiterungen}$ \,\}
+% $\mathcal{B} \coloneqq \Coff(\{\, \Lambda^\epsilon[1] \times \Delta[n] \cup_{\Lambda^\epsilon[1] \times \partial \Delta[n]} \Delta[1] \partial \Delta[n] \xrightarrow{\square} \Delta[1] \times \Delta[n] \,\}) ($\epsilon \in \{0,1\}$; Erzeuger: Inklusion eines Hohlprismas ohne Deckel/Boden in das Vollprisma
+% $\mathcal{B} \coloneqq \Coff(\{\, \Lambda^\epsilon[1] \times Y \cup_{\Lambda^\epsilon[1] \times \partial X} \Delta[1] \partial X \xrightarrow{\square} \Delta[1] \otimes Y | X \hookrightarrow Y \,\}) ($\epsilon \in \{0,1\}$; Inklusion eines verallgemeinerten Hohlprismas ohne Deckel/Boden in das Vollprisma
+
+\begin{lem}
+  Es gilt $\mathcal{B} \subseteq \mathcal{A}$ und $\mathcal{A} = \mathcal{C}$.
+\end{lem}
+
+\begin{defn}
+  Seien $X$, $Y$ simpliziale Mengen. Dann ist der \emph{Funktionenkomplex} $Y^X \in \Ob(\sSet)$ definiert durch
+  \[ (Y^X)_n \coloneqq \Hom_\sSet(\Delta[n] \times X, Y) \]
+\end{defn}
+
+\begin{bem}
+  Es gilt $\Hom(Z, Y^X) = \Hom(\colim_{Z_n} \Delta[n], Y^X) = \lim_{Z_n} \Hom(\Delta[n], Y^X) = \lim_{Z_n} \Hom_\sSet(\Delta[n] \times X, Y) = \Hom(\colim_{Z_n} (\Delta[n] \times X), Y) = \Hom((\colim_{Z_n} \Delta[n]) \times X, Y) = \Hom(Z \times X, Y)$
+\end{bem}
+
+\begin{kor}
+  Ist $Y$ ein Kan-Komplex, so ist $Y^X$ wieder ein Kan-Komplex.
+\end{kor}
+
+\begin{defn}
+  Morphismen $f, g : X \to Y$ in $\sSet$ heißen \emph{homotop}, falls $f ~ g$ in $Y^X$, \dh{} die Menge der Homotopieklassen von Morphismen ist $\pi_0(Y^X)$.
+\end{defn}
+
+\begin{kor}[\emph{Homotopieerweiterungseigenschaft, HEE}]\mbox{}\\
+  Sei $p : E \to X$ eine Kan-Faserung und $i : Y \to Z$ ein Monomorphismus.
+  Im kommutativen Diagramm
+  \begin{centertikzcd}
+    Y \times I \arrow[r, "h'"] \arrow[d, hook, "i \times \id_I"] & E \arrow[d, "p"] \\
+    Z \times I \arrow[r, "h"] \arrow[ru, dashed, "\overline{h}"] & X \\
+    Z \times \Lambda^\epsilon[1] \arrow[ru] \arrow[u] \arrow[uur]
+  \end{centertikzcd}
+  existiert der gestrichelte Pfeil.
+\end{kor}
+
+\begin{defn}
+  Ein Monomorphismus $i : A \to B$ in $\sSet$ heißt \emph{starker Deformationsretrakt} (SDR), falls ein $r : B \to A$ mit $ri = \id_A$ und $[ir] = [\id_B] \in \pi_0(B^B \text{ in } A/\sSet)$, \dh{} es existiert $h : B \times I \to B$ mit $h_0 = \id_B$, $h_1 = ir$, $h|_{A \times I} = \id_{A \times I}$ oder ein Zigzag solcher $h$'s.
+\end{defn}
+
+\begin{bspe}
+  $\Lambda^0[1], \Lambda^1[1] \subset \Delta[1]$ sind starke Deformationsretrakte.
+\end{bspe}
+
+\begin{prop}
+  Sei $i : A \to B$ anodyn, $A$, $B$ Kan-Komplexe.
+  Dann ist $A$ ein SDR von $B$.
+\end{prop}
 
 \pagebreak
 
