@@ -1363,28 +1363,134 @@
 
 % Vorlesung vom 10.6.2015
 
-\section{Simpliziale Mengen}
+\begin{defn}
+  % XXX: Warum wurde in der Vorlesung noch Bivollständigkeit gefordert?
+  Eine Kategorie $\Cat$ heißt \emph{kartesisch abgeschlossen}, falls $(\Cat, \times, *)$ eine abgeschlossene monoidale Kategorie ist.
+\end{defn}
 
-% TODO
+\begin{bsp}
+  Sei $\Cat$ eine bivollständige, kartesisch abgeschlossene Kategorie.
+  Sei $\Cat_* \coloneqq */\Cat$.
+  Das initiale und terminale Objekt dieser Kategorie ist $\id_*$, sie ist also punktiert.
+  Für $X, Y \in \Ob(\Cat_*)$ definiere $X \wedge Y \in \Ob(\Cat)$ durch folgenden Pushout:
+  \begin{centertikzcd}
+    X \amalg Y \arrow[r] \arrow[d] & X \times Y \arrow[d] \\
+    * \arrow[r] & X \wedge Y
+  \end{centertikzcd}
+  Für $X \in \Ob(\Cat)$ sei $X_+ \coloneqq X \amalg * \in \Ob(\Cat_*)$. \\
+  Es besteht die Adj. $(\blank)_+ : \Cat \rightleftarrows \Cat_* : U$, wobei $U$ der Vergissfunktor ist.
+  Mit $S^0 \coloneqq *_+ = * \amalg *$ wird $(\Cat_*, \wedge, S^0)$ zu einer symmetrischen monoidalen Kategorie und $(\blank)_+$ zu einem monoidalen Funktor. \\
+  % \dh{} $(X \times Y)_+ \cong X_+ \wedge Y_+$ und $*_+ = S^0$.
+  Für $V, W \in \Ob(\Cat_*)$ definiere $\IHom_{\Cat_*}(V, W)$ als Pullback
+  \begin{centertikzcd}
+    \IHom_{\Cat_*}(V, W) \arrow[r] \arrow[d] & \IHom_\Cat(V, W) \arrow[d] \\
+    \IHom_\Cat(*, *) \arrow[r] & \IHom_\Cat(*, W)
+  \end{centertikzcd}
+  Dann ist $\IHom_{\Cat_*}(X, \blank)$ rechtsadjungiert zu $\blank \wedge X$ für alle $X \in \Ob(\Cat_*)$ und damit $\Cat_*$ soagar monoidal abgeschlossen. \\
+  Trage $\Cat$ zusätzlich eine Modellstruktur, sodass $\times : \Cat \times \Cat \to \Cat$ ein Quillenfunktor und $*$ kofasernd ist (also $(\Cat, \times, *)$ eine monoidale Modellkategorie ist).
+  Dann erzeugt $U : \Cat_* \to \Cat$ eine symmetrische monoidale Modellstruktur auf $(\Cat_*, \wedge, S^0)$ und $(\blank)_+ \ladj U$ ist eine Quillenadjunktion, sogar eine monoidale:
+\end{bsp}
 
-% Vorlesung vom 17.6.2015
+\begin{defn}
+  Seien $\Cat$, $\Dat$ monoidale Modellkategorien. \\
+  Eine Quillen-Adjunktion $F : \Cat \rightleftarrows \Dat : U$ heißt \emph{monoidal}, falls
+  \begin{itemize}
+    \item $F$ monoidal ist und
+    \item $FQ \UnitOb_\Cat \xrightarrow{Fq} F \UnitOb_\Cat$ eine schwache Äquivalenz ist.
+  \end{itemize}
+\end{defn}
 
-% Ergänzung zur letzten Vorlesung, an der passenden Stelle einfügen!
+\begin{defn}
+  Sei $\Cat$ eine mon. Modellkat.
+  Eine \emph{$\Cat$-Modellkategorie} ist eine Modellkat. $\Dat$ mit Struktur $\otimes : \Dat \times \Cat \to \Cat$ als $\Cat$-Rechtsmodul, sodass
+  \begin{itemize}
+    \item $\otimes : \Dat \times \Cat \to \Cat$ ist eine Quillenadjunktion,
+    \item $X \otimes Q \UnitOb \xrightarrow{\id_X \otimes q} X \otimes \UnitOb$ ist eine schw. Äq. für alle kof. $X \!\in\! \Ob(\Dat)$.
+  \end{itemize}
+\end{defn}
+
+\begin{bem}
+  Wenn $\Cat$ punktiert ist, so auch $\Dat$.
+\end{bem}
+
+\begin{prop}
+  Sei $(\Cat, {\times}, *)$ eine monoidale Modellkategorie und $*$ kofasernd.
+  Ist dann $\Dat$ eine $\Cat$-Modellkategorie, so ist $\Dat_*$ eine $\Cat_*$-Modellkategorie.
+  Damit gibt es eine Äquivalenz
+  \[ \{\, \text{punktierte $\Cat$-Modellkategorie} \,\} \longleftrightarrow \{\, \text{$\Cat_*$-Modellkategorien} \,\}. \]
+\end{prop}
+
+% Die Homotopiekategorie monoidaler Modellkatgorien
+
+\begin{prop}
+  Seien $\Cat$, $\Dat$, $\Eat$ Modellkategorien und $\otimes : \Cat \times \Dat \to \Eat$ eine Quillen-Biadjunktion.
+  Dann ist $\otimes^\LD{\,} : \Ho(\Cat) \times \Ho(\Dat) \to \Ho(\Eat)$ eine Biadjunktion mit Adjungierten $\RD{\Hom_r}$ und $\RD{\Hom_l}$.
+\end{prop}
+
+\iffalse
 \begin{bem}
   Sei $\otimes : \Cat \times \Dat \to \Eat$ ein Quillen-Bifunktor.
   Ist dann $C \times I$ ein Zylinderobjekt zu $C \in \Ob(\Cat)$, so ist $(C \times I) \otimes D$ ein Zylinderobjekt zu $C \otimes D$, $D \in \Ob(\Dat)$.
 \end{bem}
+\fi
+
+\begin{satz}
+  Ist $\Cat$ eine (symm.) monoidale Modellkategorie, so ist $\Ho(\Cat)$ eine monoidal abgeschlossene Kategorie.
+\end{satz}
+
+% §7. Simpliziale Mengen
+\section{Simpliziale Mengen}
+
+\begin{referenz}
+  Die \spickerref{homoalg}{Homologische-Algebra-Zusammenfassung} enthält eine Einführung in simpliziale Mengen.
+\end{referenz}
+
+% XXXX: In HomoAlg-Zusammenfassung integrieren
+
+\begin{bspe}
+  \begin{itemize}
+    \item $I \coloneqq \Delta[1]$ heißt \emph{Intervall},
+    \item $\Delta^i[n] \coloneqq \Set{x \!\in\! \Delta[n]}{i \!\not\in\! \im(x)} \!\subset\! \Delta[n]$ heißt \emph{$i$-Seite},
+    \item $S^n \coloneqq \cup_{i=0}^n \Delta^i[n]$ heißt \emph{$n$-Sphäre}.
+    \item $\Lambda^i[n] \coloneqq \cup_{j \neq i} \Delta^j[n]$ heißt \emph{$i$-Horn}.
+  \end{itemize}
+\end{bspe}
 
 \begin{defn}
-  Ein Morphismus $f : X \to Y$ zwischen simplizialen Mengen heißt \emph{Kan-Faserungen}, falls er die Rechtshochhebeeigenschaft bzgl. $\{\, \Lambda^i[n] \to \Delta[n] \,\}$ hat.
+  Ein Morphismus $p : E \to X$ simplizialer Mengen heißt \emph{Kan-Faserung}, falls $\Set{\Lambda^i[n] \hookrightarrow \Delta[n]}{0 \leq i \leq n} \lhhe p$
 \end{defn}
 
 \begin{defn}
-  Eine simpliziale Menge $X$ heißt \emph{Kan-Komplex}, falls $X \to *$ eine Kan-Faserung ist.
+  Eine simpl. Menge heißt \emph{Kan-Komplex}, falls $X \to * \coloneqq \Delta[0]$ eine Kan-Faserung ist.
 \end{defn}
 
 \begin{defn}
-  Eine \emph{anodyne Erweiterung} ist ein Morphismus $i : A \to B$ von simplizialen Mengen, welcher die Linkshochhebungseigenschaft welcher die LHHE bzgl. aller Kan-Faserungen hat, \dh{} die Unterkategorie der anodynen Erweiterungen ist die Saturierung von $\{\, \Lambda^i[n] \to \Delta[n] \,\}$, also $\Coff(\{\, \Lambda^i[n] \to \Delta[n] \,\})$.
+  \begin{itemize}
+    \item Ein \emph{inneres Horn} ist ein $\Lambda^i[n] \subset \Delta[n]$ mit $0 \!<\! i \!<\! n$.
+    \item Eine simpl. Menge $X$ heißt \emph{innerer Kan-Komplex}, falls
+    \[ \Set{\Lambda^i[n] \hookrightarrow \Delta[n]}{0 < i < n} \lhhe (X \to *). \]
+  \end{itemize}
+\end{defn}
+
+\begin{bem}
+  Es ist $X$ also genau dann ein (innerer) Kan-Komplex, wenn man (innere) Hörner in $X$ füllen kann.
+\end{bem}
+
+\begin{defn}
+  Seien $X \in \sSet$, $x, y \in X_0$, \dh{} $x, y : \Delta[0] \to X_0$.
+  Setze
+  \[ x \sim y \coloniff \ex{\alpha : I \to X} \alpha(0)  = x \wedge \alpha(1) = y. \]
+  mit $\alpha(\epsilon) \coloneqq \alpha \circ (\Lambda^\epsilon[1] \hookrightarrow I)$ für $\epsilon = 0, 1$. Setze $\pi_0(X) \coloneqq X/{\sim}$.
+\end{defn}
+
+\begin{prop}
+  Ist $X$ ein Kan-Komplex, so ist $\sim$ eine Äq'relation.
+\end{prop}
+
+% Vorlesung vom 17.6.2015
+
+\begin{defn}
+  Eine \emph{anodyne Erweiterung} ist ein Morphismus $i : A \to B$ von simpl. Mengen, welcher die LHHE bzgl. aller Kan-Faserungen hat, \dh{} die Unterkategorie der anodynen Erweiterungen ist die Saturierung von $\{\, \Lambda^i[n] \to \Delta[n] \,\}$, also $\Coff(\{\, \Lambda^i[n] \to \Delta[n] \,\})$.
 \end{defn}
 
 \begin{satz}
@@ -1392,15 +1498,16 @@
 \end{satz}
 
 \begin{defn}
-  Eine \emph{triviale Faserung} ist ein Morphismus in $\sSet$, welcher die RHE bzgl. $\{\, \partial \Delta[n] \hookrightarrow \Delta[n] \,\}$, \dh{} bzgl. aller Monomorphismen hat.
+  Eine \emph{triviale Faserung} ist ein Mor. in $\sSet$, welcher die RHHE bzgl. $\{\, \partial \Delta[n] \hookrightarrow \Delta[n] \,\}$, \dh{} bzgl. allen Monomor. hat.
 \end{defn}
 
 \begin{satz}
   $(\text{anodyne Erweiterungen}, \text{Kan-Faserungen})$ und $(\text{Monomorphismen}, \text{triviale Faserungen})$ sind jeweils schwache Faktorisierungssysteme von $\sSet$.
 \end{satz}
 
-\begin{satz}[Gabriel-Zisman]
-  Sei $k : Y \to Z$ ein Monomorphismus. Ist dann $i : A \to B$ anodyn, so ist $i \square k : A \times Z \cup_{A \times Y} B \times Y \to B \times Z$ (mit ${\otimes} \coloneqq {\times}$) ebenfalls anodyn.
+\begin{satz}[\emph{Gabriel-Zisman}]
+  Sei $k : Y \to Z$ ein Monomorphismus. \\
+  Ist dann $i : A \to B$ anodyn, so ist $i \square k : A \!\times\! Z \cup_{A \times Y} B \!\times\! Y \to B \!\times\! Z$ (mit ${\otimes} \coloneqq {\times}$) ebenfalls anodyn.
 \end{satz}
 
 \begin{bem}
@@ -1412,9 +1519,9 @@
 % $\mathcal{B} \coloneqq \Coff(\{\, \Lambda^\epsilon[1] \times \Delta[n] \cup_{\Lambda^\epsilon[1] \times \partial \Delta[n]} \Delta[1] \partial \Delta[n] \xrightarrow{\square} \Delta[1] \times \Delta[n] \,\}) ($\epsilon \in \{0,1\}$; Erzeuger: Inklusion eines Hohlprismas ohne Deckel/Boden in das Vollprisma
 % $\mathcal{B} \coloneqq \Coff(\{\, \Lambda^\epsilon[1] \times Y \cup_{\Lambda^\epsilon[1] \times \partial X} \Delta[1] \partial X \xrightarrow{\square} \Delta[1] \otimes Y | X \hookrightarrow Y \,\}) ($\epsilon \in \{0,1\}$; Inklusion eines verallgemeinerten Hohlprismas ohne Deckel/Boden in das Vollprisma
 
-\begin{lem}
-  Es gilt $\mathcal{B} \subseteq \mathcal{A}$ und $\mathcal{A} = \mathcal{C}$.
-\end{lem}
+%\begin{lem}
+%  Es gilt $\mathcal{B} \subseteq \mathcal{A}$ und $\mathcal{A} = \mathcal{C}$.
+%\end{lem}
 
 \begin{defn}
   Seien $X$, $Y$ simpliziale Mengen. Dann ist der \emph{Funktionenkomplex} $Y^X \in \Ob(\sSet)$ definiert durch
@@ -1422,7 +1529,8 @@
 \end{defn}
 
 \begin{bem}
-  Es gilt $\Hom(Z, Y^X) = \Hom(\colim_{Z_n} \Delta[n], Y^X) = \lim_{Z_n} \Hom(\Delta[n], Y^X) = \lim_{Z_n} \Hom_\sSet(\Delta[n] \times X, Y) = \Hom(\colim_{Z_n} (\Delta[n] \times X), Y) = \Hom((\colim_{Z_n} \Delta[n]) \times X, Y) = \Hom(Z \times X, Y)$
+  %Es gilt $\Hom(Z, Y^X) = \Hom(\colim_{Z_n} \Delta[n], Y^X) = \lim_{Z_n} \Hom(\Delta[n], Y^X) = \lim_{Z_n} \Hom_\sSet(\Delta[n] \times X, Y) = \Hom(\colim_{Z_n} (\Delta[n] \times X), Y) = \Hom((\colim_{Z_n} \Delta[n]) \times X, Y) = \Hom(Z \times X, Y)$
+  Es gilt $\Hom(Z, Y^X) \cong \Hom(Z \times X, Y)$.
 \end{bem}
 
 \begin{kor}
@@ -1430,14 +1538,14 @@
 \end{kor}
 
 \begin{defn}
-  Morphismen $f, g : X \to Y$ in $\sSet$ heißen \emph{homotop}, falls $f ~ g$ in $Y^X$, \dh{} die Menge der Homotopieklassen von Morphismen ist $\pi_0(Y^X)$.
+  Zwei Morphismen $f, g : X \to Y$ zwischen simpl. Mengen $X$, $Y$ heißen \emph{homotop}, falls $f \sim g$ in $Y^X$, \dh{} die Menge der Homotopieklassen von Morphismen ist $\pi_0(Y^X)$.
 \end{defn}
 
 \begin{kor}[\emph{Homotopieerweiterungseigenschaft, HEE}]\mbox{}\\
   Sei $p : E \to X$ eine Kan-Faserung und $i : Y \to Z$ ein Monomorphismus.
   Im kommutativen Diagramm
   \begin{centertikzcd}
-    Y \times I \arrow[r, "h'"] \arrow[d, hook, "i \times \id_I"] & E \arrow[d, "p"] \\
+    Y \times I \arrow[r, "h'"] \arrow[d, hook, swap, "i \times \id_I"] & E \arrow[d, "p"] \\
     Z \times I \arrow[r, "h"] \arrow[ru, dashed, "\overline{h}"] & X \\
     Z \times \Lambda^\epsilon[1] \arrow[ru] \arrow[u] \arrow[uur]
   \end{centertikzcd}
@@ -1453,7 +1561,7 @@
 \end{bspe}
 
 \begin{prop}
-  Sei $i : A \to B$ anodyn, $A$, $B$ Kan-Komplexe.
+  Sei $i : A \to B$ anodyn, $A$, $B$ Kan-Komplexe. \\
   Dann ist $A$ ein SDR von $B$.
 \end{prop}
 

@@ -1061,8 +1061,13 @@ Sei $\Cat$ eine Kategorie.
 
 % I.2.5
 \begin{defn}
-  $\Delta[p]_n \coloneqq \{ \, g : [n] \to [p] \text{ monoton steigend} \, \}$, $\Delta[p](f)(g) \coloneqq g \circ f$
+  $\Delta[n] \coloneqq \Hom_\Delta(\blank, [n])$ heißt \emph{$n$-Simplex} o. \emph{$n$-dim. Scheibe}
+  %$\Delta[p]_n \coloneqq \{ \, g : [n] \to [p] \text{ monoton steigend} \, \}$, $\Delta[p](f)(g) \coloneqq g \circ f$
 \end{defn}
+
+\begin{bem}
+  Aus dem Yoneda-Lemma folgt $\Hom_\sSet(\Delta[n], X) \cong X([n]) \cong X_n$.
+\end{bem}
 
 % I.2.8
 \begin{defn}
@@ -1080,12 +1085,13 @@ Sei $\Cat$ eine Kategorie.
 \end{defn}
 
 % I.2.6
-\begin{defn}
-  Seien $X$ Verklebedaten. Wir konstruieren eine dazugehörende simpliziale Menge $\tilde{X}$ wie folgt:
+\begin{konstr}
+  Verklebedaten $X$ $\rightsquigarrow$ simpliziale Menge $\tilde{X}$
+  %Seien $X$ Verklebedaten. Die dazugehörende simpliziale Menge $\tilde{X}$ ist:
   \[ \tilde{X}_n \coloneqq \Set{ (x, g) }{ x \in X_{(k)}, g : [n] \to [k] \text{ monoton und surjektiv} }, \]
   Für eine monotone Abbildung $f : [m] \to [n]$ und $(x, g) \in \tilde{X}_n$ schreiben wir zunächst $g \circ f = f_1 \circ f_2$ mit einer Injektion $f_1$ und einer Surjektion $f_2$ und setzen
   $\tilde{X}(f)(x, g) \coloneqq (X(f)(x), f_2)$.
-\end{defn}
+\end{konstr}
 
 % I.2.7
 \begin{prop}
