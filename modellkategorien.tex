@@ -1553,7 +1553,7 @@
 \end{kor}
 
 \begin{defn}
-  Ein Monomorphismus $i : A \to B$ in $\sSet$ heißt \emph{starker Deformationsretrakt} (SDR), falls ein $r : B \to A$ mit $ri = \id_A$ und $[ir] = [\id_B] \in \pi_0(B^B \text{ in } A/\sSet)$, \dh{} es existiert $h : B \times I \to B$ mit $h_0 = \id_B$, $h_1 = ir$, $h|_{A \times I} = \id_{A \times I}$ oder ein Zigzag solcher $h$'s.
+  Ein Monomorphismus $i : A \to B$ in $\sSet$ heißt \emph{starker Deformationsretrakt} (SDR), falls ein $r : B \to A$ mit $ri = \id_A$ und $[ir] = [\id_B] \in \pi_0(B^B \text{ in } A/\sSet)$, \dh{} es existiert $h : B \times I \to B$ mit $h_0 = \id_B$, $h_1 = ir$, $h|_{A \times I} = \id_{A \times I}$ oder ein Zickzack solcher $h$'s.
 \end{defn}
 
 \begin{bspe}
@@ -1562,7 +1562,24 @@
 
 \begin{prop}
   Sei $i : A \to B$ anodyn, $A$, $B$ Kan-Komplexe. \\
-  Dann ist $A$ ein SDR von $B$.
+  Dann ist $A$ ein SDR von $B$ vermöge $i$.
+\end{prop}
+
+% Vorlesung vom 24.6.2015
+
+\begin{prop}
+  Sei $i : A \to B$ ein Monomorphismus, sodass $A$ ein SDR von $B$ ist.
+  Dann ist $i$ anodyn.
+\end{prop}
+
+\begin{prop}
+  Für eine Kan-Faserung $p : E \to X$ sind äquivalent:
+  \begin{itemize}
+    \item $p$ ist trivial.
+    \item Es existiert ein Schnitt $s : X \to E$ und ein $h : E \times \Delta[1] \to E$ mit $ps = \id_X$ und $h : \id_E \sim sp$ (mod $X$)
+    % "Das ist sowas wie ein starker Deformationsretrakt in der dualen Kategorie"
+    \item $p$ ist eine Homotopieäquivalenz, \dh{} es existiert ein $s : X \to E$ mit Homotopien $k : ps \sim \id_X$ und $h : sp \sim \id_E$.
+  \end{itemize}
 \end{prop}
 
 \pagebreak
