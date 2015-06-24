@@ -1582,6 +1582,102 @@
   \end{itemize}
 \end{prop}
 
+\begin{prop}
+  Sei $p : E \to X$ eine Faserung, $i : A \to X$ ein SDR.
+  Dann ist $p^{-1}(A) \to E$ im Diagramm
+  \begin{centertikzcd}
+    p^{-1}(A) \arrow[r] \arrow[d] \arrow[dr, phantom, "\ulcorner", very near start] &
+    E \arrow[d] \\
+    A \arrow[r] &
+    X
+  \end{centertikzcd}
+  ebenfalls ein SDR.
+\end{prop}
+
+\begin{kor}
+  Sei $p : E \to X \times \Delta[1]$ eine Faserung.
+  Sei $p_0 \coloneqq p|_{p^{-1}(X \times \Lambda^0[1])}$, $p_1 \coloneqq p|_{p^{-1}(X \times \Lambda^1[1])} : E_i \to X$
+  Dann sind $p_0, p_1 : E_i \to X$ faserweise homotopieäquivalent, \dh{} es existieren $f$, $g$ in
+  \begin{centertikzcd}
+    E_0 \arrow[r, "f"] \arrow[rd, "p_0"] &
+    E_1 \arrow[r, "g"] \arrow[d, "p_1"] &
+    E_0 \arrow[ld, "p_0"] \\
+    & X
+  \end{centertikzcd}
+  mit $\id_{E_0} \sim gf$ (mod $X$) und $fg \sim \id_{E_1}$ (mod $X$)
+\end{kor}
+
+\begin{kor}
+  Sei $p : E \to Y$ eine Faserung und $f, g : X \to Y$ homotop.
+  Dann sind die Pullbacks $f^* E$ und $g^* E$ faserweise homotop (also mod $Y$).
+\end{kor}
+
+\begin{kor}
+  Sei $X$ zshgd (\dh{} $\pi_0(X) = *$), $p : E \to X$ eine Faserung.
+  Dann sind je zwei Fasern von $p$ homotopieäquivalent.
+\end{kor}
+
+% Minimale Komplexe
+
+\begin{defn}
+  \begin{itemize}
+    \item Seien $x, y : \Delta[n] \to X$ zwei $n$-Simplizes in einer simplizialen Menge $X$ mit $x|_{\partial \Delta[n]} = a = x|_{\partial \Delta[n]}$.
+    Schreibe $x \sim y$ ($\partial \Delta[n]$), falls $\exists \, h : \Delta[n] \times \Delta[1] \to X$ mit $h|_{\Lambda^0[1]} = x$, $h_{\Lambda^1[1]} = y$, $h_{\partial \Delta[n]} = \id$.
+    \item Ein Kan-Komplex $X$ heißt \emph{minimal}, falls
+    \[ x \sim y \text{ ($\partial \Delta[n]$)} \enspace\iff\enspace x = y. \]
+  \end{itemize}
+\end{defn}
+
+\begin{lem}
+  Sei $X$ ein Kan-Komplex. Dann existiert ein SDR $X'$ von $X$, sodass $X'$ minimal ist.
+\end{lem}
+
+\begin{lem}
+  Sei $X$ minimal und $f : X \to X$ mit $f \sim \id_X$. Dann ist $f$ ein Isomorphismus.
+\end{lem}
+
+\begin{kor}
+  Sei $f : X \to Y$ eine Homotopieäquivalenz zwischen minimalen Komplexen.
+  Dann ist $f$ schon ein Isomorphismus.
+\end{kor}
+
+\begin{defn}
+  Ein Morphismus $f : X \to Y$ in $\sSet$ heißt \emph{schwache Äquivalenz}, falls für alle Kan-Komplexe $K$ der induzierte Morphismus $[f, K] : [Y, K] \to [X, K]$ (mit $[Y, K] \coloneqq \pi_0(K^Y)$)
+\end{defn}
+
+\begin{bspe}
+  \begin{itemize}
+    \item Homotopieäquivalenzen ist eine schwache Äquivalenzen.
+    \item Triviale Faserungen sind schwache Äquivalenzen.
+    \item Sei $i : A \to B$ eine anodyne Erweiterung.
+    Für jeden Kan-Komplex $K$ ist dann $K^i : K^B \to K^A$ eine triviale Faserung, insbesondere also eine schwache Homotopieäquivalenz.
+    \item Ist $f : X \to Y$ eine schwache Äquivalenz zwischen Kan-Komplexen $X$, $Y$, so ist $f$ eine Homotopieäquivalenz.
+  \end{itemize}
+\end{bspe}
+
+\begin{bem}
+  $f$ ist genau dann eine schwache Äquivalenz, wenn in allen Diagrammen der Form
+  \begin{centertikzcd}
+    X \arrow[r] \arrow[d, "f"] &
+    \overline{X} \arrow[d, "\overline{f}"] \\
+    Y \arrow[r] &
+    \overline{Y}
+  \end{centertikzcd}
+  mit $\overline{X}$, $\overline{Y}$ Kankomplexe, $X \to \overline{X}$, $Y \to \overline{Y}$ anodyn der Morphismus $\overline{f}$ eine schwache Äquivalenz ist.
+\end{bem}
+
+\begin{prop}
+  \begin{itemize}
+    \item Eine Faserung $p : E \to X$ ist genau dann trivial, wenn $p$ eine schwache Äquivalenz ist.
+    \item Eine Kofaserung $i : A \to B$ ist genau dann anodyn, wenn $i$ eine schwache Äquivalenz ist.
+  \end{itemize}
+\end{prop}
+
+\begin{satz}[Quillen]
+  Die Kategorie der simplizialen Mengen mit den schwachen Äquivalenzen wird zu einer kartesisch abgeschlossenen, eigentlichen, kombinatorischen Modellkategorie, wenn als Kofaserungen die Monomorphismen und als Faserungen die Kan-Faserungen gewählt werden.
+\end{satz}
+
+
 \pagebreak
 
 \input{ordinalzahlen} % Ordinalzahlen-Anhang
