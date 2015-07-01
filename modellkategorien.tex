@@ -47,6 +47,7 @@
 \newcommand{\RD}[1]{\mathbb{R} #1} % linksabgeleiteter Funktor
 \newcommand{\LonelyHeart}{\{ \, \heartsuit \, \}} % Menge mit genau einem Element
 \newcommand{\UnitOb}{\mathbbm{1}} % Einheitsobjekt in einer monoidalen Kategorie
+\DeclareMathOperator{\Ch}{Ch} % Kategorie der Kettenkomplexe
 
 \newenvironment{centertikzcd}
   {\begin{center}\begin{tikzcd}}
@@ -1707,6 +1708,103 @@
   Die Kategorie der simplizialen Mengen mit den schwachen Äquivalenzen wird zu einer kartesisch abgeschlossenen, eigentlichen, kombinatorischen Modellkategorie, wenn als Kofaserungen die Monomorphismen und als Faserungen die Kan-Faserungen gewählt werden.
 \end{satz}
 
+% §6. Kettenkomplexe
+\subsection{Kettenkomplexe}
+
+Sei $R$ ein Ring und $\RMod{R}$ die Kategorie der $R$-Moduln.
+
+\begin{defn}
+  Ein $P \in \Ob(\RMod{R})$ heißt \emph{projektiv}, falls $\Hom_r(P, f) : \Hom(P, M) \to \Hom(P, N)$ für alle surjektiven $f : M \to N$ surjektiv ist.
+\end{defn}
+
+\begin{bem}
+  Eine Abb. $f : M \to N$ ist genau dann surjektiv, wenn $\Hom(P, f)$ surjektiv für alle projektiven $P$.
+\end{bem}
+
+\begin{bspe}
+  \begin{itemize}
+    \item $R$ ist projektiv
+    \item Direkte Summen projektiver Moduln sind projektiv.
+    \item Retrakte projektiver Moduln sind wieder projektiv.
+  \end{itemize}
+\end{bspe}
+
+\begin{bem}
+  Damit hat $\RMod{R}$ genügend viele projektive, \dh{} jedes Modul $M$ erlaubt eine Surjektion $P \to M$ mit $P$ projektiv.
+\end{bem}
+
+\begin{defn}
+  Sei $\Ch_*(R)$ die Kategorie der Kettenkomplexe, die in nichtnegativen Graden konzentriert sind, \dh{} Objekte sind Diagramme der Form
+  \[
+    \ldots \to C_3 \xrightarrow{\partial_3} C_2 \xrightarrow{\partial_2} C_1 \xrightarrow{\partial_1} C_0
+    \quad \text{mit $\partial_i \circ \partial_{i+1} = 0$.}
+  \]
+  Elemente in $Z_n C \coloneqq \Set{x \in C_n}{\partial_n(x) = 0}$ heißen \emph{$n$-Zykel} und Elemente in $B_n C \coloneqq \Set{\partial_n(y)}{y \in C_{n+1}} \subseteq Z_n C$ heißen \emph{$n$-Ränder}.
+  Die Gruppe $H_n(C) \coloneqq Z_n C / B_n C$ heißt \emph{$n$-te Homologie}.
+  Ist $f : C \to C'$ ein Morphismus von Kettenkomplexen, so induziert dieser einen Morphismus $H_n(f) : H_n(C) \to H_n(C')$.
+  Es heißt $f$ ein Homologie-Isomorphismus (oder Quasi-Isomorphismus), falls $H_n(f)$ für alle $n \geq 0$ ein Isomorphismus ist.
+\end{defn}
+
+\begin{satz}
+  Zusammen mit den Homologie-Isomorphismen als schwache Äquivalenzen wird $\Ch_*(R)$ zu einer kombinatorischen Modellkategorie, wenn wir als Kofaserungen gradweise Monomorphismen mit gradweise projektivem Kokern und als Faserungen Morphismen, die im positiven Grad gradweise Surjektionen sind, wählen.
+\end{satz}
+
+\begin{defn}
+  Diese Modellstruktur heißt \emph{projektive Modellstruktur} auf $\Ch_*(R)$.
+\end{defn}
+
+\begin{bem}
+  Alle Komplexe in die projektive Modellstruktur sind fasernd, insbesondere ist $\Ch_*(R)$ rechtseigentlich.
+  Die kofasernden Objekte sind die Komplexe projektiver Moduln.
+  Projektive Auflösung entspricht dem kofasernden Ersatz.
+\end{bem}
+
+% Aufgabe:
+% 1) Ist $\Ch_*(R)$ links-eigentlich?
+% 2) Ist $(\Ch_*(R), \otimes_R)$ symmetrisch monoidal?
+
+\begin{defn}
+  Es sei $D(n)$ der Komplex $\ldots \to R \xrightarrow{\id} R \to 0 \to \ldots$ mit $R$ im Grad $n$ und $n-1$ und
+  $S(n)$ der Komplex $\ldots \to 0 \to R \to 0 \to \ldots$ mit $R$ im Grad $n$.
+\end{defn}
+
+\begin{defn}
+  Der \emph{Einhängungsfunktor} ist
+  \[
+    \Sigma : \Ch_*(R) \to \Ch_*(R), \quad
+    (\Sigma C)_{n+1} \coloneqq C_n, \enspace (\Sigma C)_0 \coloneqq 0.
+  \]
+\end{defn}
+
+\begin{bem}
+  Es gilt $D(n+1) = \Sigma(D(n))$ und $S(n+1) = \Sigma(S(n))$.
+\end{bem}
+
+\begin{bem}
+  Es gilt $\Hom(D(n), C) \cong C_n$ und $\Hom(S(n), C) \cong Z_n C$.
+\end{bem}
+
+\begin{lem}
+  Ein Morphismus $f : C \to C'$ ist genau dann eine Faserung (\dh{} im positiven Grad surjektiv), wenn $f$ die RHHE bzgl. aller $\Set{0 \to D(n)}{n \geq 1}$ hat.
+\end{lem}
+
+\begin{bem}
+  Folglich ist $\Set{0 \to D(n)}{n \geq 1}$ die Menge der erz. azykl. Kof. der projektiven Modellstruktur.
+\end{bem}
+
+\begin{lem}
+  Sei $f : C \to C'$ ein Mor. in $\Ch_*(R)$.
+  Dann sind äquivalent:
+  \begin{itemize}
+    \item $f$ ist ein Homologie-Isomorphismus und in positiven Graden surjektiv
+    \item Für alle $n \geq 0$ ist $C_n \to Z_{n-1} C \times_{Z_{n-1} C'} C'_n, x \mapsto (\partial x, f(x))$ surjektiv.
+    \item $f$ hat die RHE bzgl. $\Set{S(n) \to D(n)}{n \geq 0}$
+  \end{itemize}
+\end{lem}
+
+\begin{bem}
+  Folglich ist $\Set{S(n) \to D(n)}{n \geq 0}$ die Menge der erz. Kof. der projektiven Modellstruktur.
+\end{bem}
 
 \pagebreak
 
