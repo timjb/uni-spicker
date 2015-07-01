@@ -1642,6 +1642,18 @@
 \end{kor}
 
 \begin{defn}
+  Eine Faserung $p : E \to X$ heißt \emph{minimal}, falls für alle Simplizes $x, y : \Hom(\Delta[n], E)$ mit $p \circ x = p \circ y$ mit $x \sim y$ (mod $\partial \Delta[n]$).
+\end{defn}
+
+\begin{defn}
+  Ein \emph{Bündel} mit Faser $F$ ist eine Abb. $p : E \to B$, sodass für alle Simplizes $\sigma : \Delta[n] \to B$ der Pullback $\Delta[n] \times_B E$ homotopieäquivalent zu $\Delta[n] \times F$ ist.
+\end{defn}
+
+\begin{lem}
+  Eine minimale Faserung $p : E \to X$ ist ein Bündel.
+\end{lem}
+
+\begin{defn}
   Ein Morphismus $f : X \to Y$ in $\sSet$ heißt \emph{schwache Äquivalenz}, falls für alle Kan-Komplexe $K$ der induzierte Morphismus $[f, K] : [Y, K] \to [X, K]$ (mit $[Y, K] \coloneqq \pi_0(K^Y)$)
 \end{defn}
 
@@ -1666,12 +1678,30 @@
   mit $\overline{X}$, $\overline{Y}$ Kankomplexe, $X \to \overline{X}$, $Y \to \overline{Y}$ anodyn der Morphismus $\overline{f}$ eine schwache Äquivalenz ist.
 \end{bem}
 
+\begin{lem}
+  Sei $i : A \to B$ anodyn, $p : E \to A$ ein Bündel.
+  Dann existiert ein Pullback-Diagramm
+  \begin{centertikzcd}
+    E \arrow[d, "p"] \arrow[r, hook] &
+    E' \arrow[d, "p'"] \\
+    A \arrow[r, hook] &
+    B
+  \end{centertikzcd}
+  mit einem Bündel $p'$.
+  Weiter ist $p'$ eindeutig bis auf Isomorphie.
+  Außerdem ist $E \hookrightarrow E'$ anodyn.
+\end{lem}
+
 \begin{prop}
   \begin{itemize}
     \item Eine Faserung $p : E \to X$ ist genau dann trivial, wenn $p$ eine schwache Äquivalenz ist.
     \item Eine Kofaserung $i : A \to B$ ist genau dann anodyn, wenn $i$ eine schwache Äquivalenz ist.
   \end{itemize}
 \end{prop}
+
+\begin{lem}
+  Pullbacks längs Bündeln erhalten schwache Äquivalenzen.
+\end{lem}
 
 \begin{satz}[Quillen]
   Die Kategorie der simplizialen Mengen mit den schwachen Äquivalenzen wird zu einer kartesisch abgeschlossenen, eigentlichen, kombinatorischen Modellkategorie, wenn als Kofaserungen die Monomorphismen und als Faserungen die Kan-Faserungen gewählt werden.
