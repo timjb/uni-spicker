@@ -43,6 +43,8 @@
 \DeclareMathOperator{\Cell}{Cell} % Zellkomplexe
 \DeclareMathOperator{\Coff}{Cof} % Kofaserungen
 \newcommand{\ModStr}{$(\Weak, \Cof, \Fib)$} % Daten einer Modellstruktur
+\newcommand{\LL}{\mathbb{L}} % linksabgeleiteter
+\newcommand{\RR}{\mathbb{R}} % rechtsabgeleiteter
 \newcommand{\LD}[1]{\mathbb{L} #1} % linksabgeleiteter Funktor
 \newcommand{\RD}[1]{\mathbb{R} #1} % linksabgeleiteter Funktor
 \newcommand{\LonelyHeart}{\{ \, \heartsuit \, \}} % Menge mit genau einem Element
@@ -1746,11 +1748,11 @@ Sei $R$ ein Ring und $\RMod{R}$ die Kategorie der $R$-Moduln.
 \end{defn}
 
 \begin{satz}
-  Zusammen mit den Homologie-Isomorphismen als schwache Äquivalenzen wird $\Ch_*(R)$ zu einer kombinatorischen Modellkategorie, wenn wir als Kofaserungen gradweise Monomorphismen mit gradweise projektivem Kokern und als Faserungen Morphismen, die im positiven Grad gradweise Surjektionen sind, wählen.
+  Zusammen mit den Homologie-Isomorphismen als schwache Äquivalenzen wird $\Ch_*(R)$ zu einer komb. Modellkategorie, wenn wir als Kofaserungen gradweise Monomorphismen mit gradweise projektivem Kokern und als Faserungen Morphismen, die im positiven Grad gradweise Surjektionen sind, wählen.
 \end{satz}
 
 \begin{defn}
-  Diese Modellstruktur heißt \emph{projektive Modellstruktur} auf $\Ch_*(R)$.
+  Diese Modellstr. heißt \emph{proj. Modellstruktur} auf $\Ch_*(R)$.
 \end{defn}
 
 \begin{bem}
@@ -1805,6 +1807,216 @@ Sei $R$ ein Ring und $\RMod{R}$ die Kategorie der $R$-Moduln.
 \begin{bem}
   Folglich ist $\Set{S(n) \to D(n)}{n \geq 0}$ die Menge der erz. Kof. der projektiven Modellstruktur.
 \end{bem}
+
+% Vorlesung vom 8.7.2015
+
+\subsection{Die Homotopiekategorie als $\Ho(\sSet)$-Modul}
+
+\begin{defn}
+  Die \emph{Kategorie der Räume} ist $\Sat \coloneqq \Ho(\sSet)$.
+\end{defn}
+
+\begin{ziel}
+  Zeige, dass $\Ho(\ModC)$ für jede Modellkategorie $\ModC$ in natürlicher Weise ein Modul über $\Sat$ ist, \dh{} wir wollen Funktoren
+  \begin{align*}
+    \Ho(\ModC) \times \Sat \to \Ho(\ModC), \enspace & X \otimes^\LL K, \\
+    \Ho(\ModC) \times \Ho(\ModC) \to \Sat, \enspace & \text{Map}(X, Y) =: Y^X, \\
+    \Sat \times \Ho(\ModC) \to \Ho(\ModC), \enspace & \RD{\Hom(K, X)} := X^K,
+  \end{align*}
+  sodass gilt:
+  \[ \Hom_{\Ho(\ModC)}(X \otimes^\LL K, Y) \cong \Hom_\Sat(K, Y^X) \cong \Hom_{\Ho(\ModC)}(X, Y^K). \]
+  Weiter gilt: $X \otimes^\LL \Delta[0] \cong X$, \dh{} $\Hom_{\Ho(\ModC)}(X, Y) \cong \Hom_{\Ho(\ModC)}(X \times \Delta[0], Y) \cong \Hom_\Sat(\Delta[0], Y^X) = \pi_0(Y^X)$.
+\end{ziel}
+
+% Kategorien von Diagrammen
+
+\begin{defn}
+  Sei $\Bat$ eine kleine Kategorie und $\lambda$ eine Ordinalzahl.
+  Ein Funktor $f : \Bat \to \lambda$ heißt \emph{lineare Einbettung}, falls:
+  \[ \fa{u : b \to c} F(u) = \id \implies u = \id. \]
+  In diesem Fall heißt $F(i)$ für $i \in \Ob(\Bat)$ der \emph{Grad von $i$}.
+  Eine Kategorie mit einer linearen Erweiterung heißt \emph{gerichtet}.
+  Ist $\Bat^\op$ gerichtet, so heißt $\Bat$ inverse Kategorie.
+\end{defn}
+
+\begin{defn}
+  Sei $\Cat$ kovollständig, $\Bat$ gerichtet, $i \in \Ob(\Bat)$
+  Das $i$-te \emph{Latching-Objekt} $L_i X$ eines Funktors $X \in \Ob(\Cat^\Bat)$ ist $L_i X \coloneqq \colim_{j \xrightarrow{{+}} i} X_j$.
+  Die Indexkategorie ist dabei die Scheibenkategorie der Objekte vom Grad $< i$ über $X_i$.
+\end{defn}
+
+\begin{bem}
+  Es gibt eine natürliche Transformation $L_i X \to X_i$. \\
+  Ist $\Bat$ invers und $\Cat$ vollständig, so heißt analog
+  \[ M_i X \coloneqq \lim_{i \xrightarrow{{-}} j} X_j \]
+  das $i$-te \emph{Matching-Objekt} von $X$.
+\end{bem}
+
+% Bem: Haben X_i \to M_i X
+
+\begin{satz}
+  Sei $\ModC$ eine Modellkategorie, $\Bat$ gerichtet.
+  Dann gibt es folgende Modellstruktur auf $\ModC^\Bat$: Ein Funktor $\tau : X \to Y$ ist eine
+  \begin{itemize}
+    \item schw. Äq. $\iff$ $\fa{i \in \Ob(\Bat)} \tau_i : X_i \to Y_i$ ist schw. Äq,
+    \item Faserung $\iff$ $\fa{i \in \Ob(\Bat)} \tau_i : X_i \to Y_i$ ist Faserung,
+    \item Kof. $\iff$ $\fa{i \in \Ob(\Bat)} X_i \cup_{L_i X} L_i Y \to Y_i$ ist eine Kof,
+    \item triv. Kof. $\iff$ $\fa{i \in \Ob(\Bat)} X_i \cup_{L_i X} L_i Y \to Y_i$ ist eine triv. Kof,
+  \end{itemize}
+  Bzgl. dieser Modellstruktur ist $\colim : \Cat^\Bat \to \Cat$ ein Linksquillenfunktor.
+\end{satz}
+
+\begin{bem}
+  Dual: $\ModC^{\Bat^\op} \simeq (\ModC^\op)^\Bat$
+\end{bem}
+
+\begin{bem}
+  Ist $\tau$ Kofaserung. in $\ModC^\Bat$, $\Bat$ gerichtet, so ist insbesondere $\fa{i} \tau_i : X_i \to Y_i$ eine Kofaserung.
+\end{bem}
+
+\begin{beweis}
+  Da $\colim$ ein Linksquillenfunktor: $L_i X \to L_i Y$ Kofaserung.
+  Damit ist auch $X_i \to X_i \cup_{L_i X} L_i Y$ als Pushout von $L_i X \to L_i Y$ eine Kofaserung.
+  Damit ist auch die Komposition mit der Kofaserung $X_i \cup_{L_i X} L_i Y \to Y_i$ wieder eine Kofaserung.
+\end{beweis}
+
+% Diagramme über Reedy-Kategorien
+
+\begin{defn}
+  Eine \emph{Reedy-Kategorie} ist eine Kategorie $\Bat$ zusammen mit Unterkategorien $\Bat_{+}$ und $\Bat_{-}$ und einem Funktor $d : \Bat \to \lambda$, der Gradfunktion, wobei $\lambda$ eine Ordinalzahl ist, sodass folgendes gilt:
+  \begin{itemize}
+    \miniitem{0.48 \linewidth}{$\Bat_{+}$ ist bzgl. $d$ gerichtet}
+    \miniitem{0.48 \linewidth}{$\Bat_{-}$ ist bzgl. $d$ invers}
+    \item Jeder Morphismus $f \in \Mor(\Bat)$ lässt sich eindeutig faktorisieren als $f = ip$ mit $i \in \Bat_{+}$ und $p \in \Bat_{-}$.
+  \end{itemize}
+\end{defn}
+
+\begin{bsp}
+  $\Delta$ ist Reedy mit $\Delta_{+} \coloneqq \{\text{ injektive }\}$ und $\Delta_{-} \coloneqq \{\text{ surjektive }\}$.
+\end{bsp}
+
+\begin{bsp}
+  Sei $A$ ein komsimpliziales Objekt in $\Cat$, \dh{} $A^\bullet \in \Ob(\Cat^\Delta)$.
+  Schreibweise $A^\bullet [n] \coloneqq A^\bullet_{[n]}$.
+  $L_0 A^\bullet = \emptyset$, $L_1 A^\bullet = A^\bullet[0] \amalg A^\bullet [0]$, $M_0 A^\bullet = *$, $M_1 A^\bullet = A^\bullet [0]$.
+\end{bsp}
+
+\begin{bsp}
+  Sei $X_\bullet$ ein simpl. Objekt in $\Cat$, \dh{} $X \in \Ob(\Cat^{\Delta^\op})$. Dann
+  \[ L_0 X_\bullet = \emptyset, \quad L_1 A_\bullet = X_0, M_0 X_\bullet = *, M_1 X= X_0 \times X_0. \]
+\end{bsp}
+
+\begin{bem}
+  Sei $\Bat$ eine Reedy-Kategorie.
+  Rekursive Konstruktion von Objekten $X \in \Ob(\Cat^\Bat)$.
+  Sei dazu $d : \Bat \to \lambda$ die Gradfunktion und $X|_{\Bat_{< \beta}}$ schon definiert.
+  Sei dann $i \in \Bat$ mit $d(i) = \beta$.
+  Wähle Faktorisierung
+  \[ L_i X \to X_i \to M_i X. \]
+  Sei $i \to j$ mit $d(i), d(j) \leq \beta$.
+  Gesucht $X_i \to X_j$.
+  Ohne Einschränkung $(i \to j) \neq \id$.
+  Faktorisiere $(i \to j) = (k \xrightarrow{{+}} j) \circ (i \xrightarrow{{-}} k)$.
+  Gesucht ist also $X_i \to X_k$ und $X_k \to X_j$ für $i \xrightarrow{{-}} k$, $k \xrightarrow{{+}} j$.
+  Dazu betrachte $X_i \xrightarrow{\text{gew}} M_i X \xrightarrow{\text{kan}} X_k$, $X_k \xrightarrow{\text{kan}} L_j X \xrightarrow{\text{gew}} X_j$.
+\end{bem}
+
+\iffalse
+\begin{bsp}
+  $\Bat = \Delta$. Sei $A \in \Cat$. Ziel: Konstruktion $X^\bullet \in \Cat^{\Delta}$.
+\end{bsp}
+\fi
+
+\begin{defn}
+  $\Bat = \Delta$. Sei $A \in \Cat$.
+  Dann sind $\ell^\bullet A, r^\bullet A \in \Ob(\Cat^\Delta)$ definiert durch
+  \[
+    \ell^\bullet A [i] = A \times [i] \coloneqq A \amalg \ldots \amalg A, \quad
+    r^\bullet A [i] \coloneqq A.
+  \]
+\end{defn}
+
+\begin{bem}
+  $\ell^\bullet \ladj (\text{Ev}^\bullet : X^\bullet \to X^\bullet [0]) \ladj r^\bullet$
+\end{bem}
+
+\begin{satz}
+  Sei $\ModC$ eine Modellkategorie und $\Bat$ eine Reedy-Kategorie.
+  Dann existiert folgende Modellstruktur auf $\ModC^\Bat$: Ein Mor. $f : X \to Y$ ist eine
+  \begin{itemize}
+    \item schw. Äq. $\iff$ $\fa{i \in \Ob(\Bat)} f_i : X_i \to Y_i$ ist schwache Äquivalenz.
+    \item (triv.) Kof. $\iff$ $\fa{i \in \Ob(\Bat)} X_i \cup_{L_i X} L_i Y \to Y_i$ ist (triv.) Kof.
+    \item (triv.) Fas. $\iff$ $\fa{i \in \Ob(\Bat)} X_i \to Y_i \times_{M_i Y} M_i X$ ist (triv.) Faserung.
+  \end{itemize}
+\end{satz}
+
+\begin{bsp}
+  $\ModC^\Delta$, $\ModC^{\Delta^\op}$ sind wieder Modellkategorien.
+\end{bsp}
+
+\begin{defn}
+  Sei $\Cat$ eine Modellkategorie, $A \in \Ob(\Cat)$.
+  Ein \emph{kosimplizialer Rahmen von $A$} ist dann eine Faktorisierung von $\ell^\bullet A \to r^\bullet A$ der Form $\ell^\bullet A \hookrightarrow A^* \xrightarrow{{\sim}} r^\bullet A$., sodass $A^* [0] = A = \ell^\bullet A [0] = r^\bullet A [0]$.
+\end{defn}
+
+\begin{bem}
+  Dual: simplizialer Rahmen: $l_\bullet A \xrightarrow{{\sim}} A_* ->> r_\bullet A$.
+\end{bem}
+
+\begin{bem}
+  Ist $A^*$ ein kosimplizialer Rahmen von $A$ so ist $A^*[1]$ ein gutes Zylinderobjekt.
+\end{bem}
+
+\begin{bsp}
+  Sei $\Cat$ eine simpliziale Modellkategorie.
+  Ist dann $A$ kofasernd, so ist $A \otimes \Delta^\op$ mit $(A \otimes \Delta^\bullet)[n] = A \otimes (\Delta^\bullet [n])$ ein kosimplizialer Rahmen von $A$.
+  Insbesondere ist $A \otimes \Delta^\bullet [i]$ ein gutes Zylinderobjekt.
+\end{bsp}
+
+% Die Wirkung von $S = \Ho(\sSet)$.
+
+Sei $\ModC$ eine Modellkategorie.
+Sei $K$ eine simpliziale Menge, $X$ ein Objekt aus $\ModC$.
+Wir wollen $X \otimes^{\LL} K \in \Ob(\Ho(\ModC))$ definieren:
+\begin{itemize}
+  \item Wähle kofasernden Ersatz $QX \xrightarrow{{\sim}} >> X$
+  \item Wähle kosimplizialen Rahmen $\ell^\bullet Q X \hookrightarrow X^* \xrightarrow{{\sim}} r^\bullet Q X$
+  \item Setze $X \otimes^{\LL} K \coloneqq \CoEndC{n}{X^*[n] \times K_n}$.
+  \item Fasse $X \otimes^{\LL} K$ als Objekt in $\Ho(\ModC)$ auf.
+\end{itemize}
+
+Sei $Y \in \Ob(\ModC)$.
+Wir wollen $Y^K \in \Ob(\Ho(\ModC))$ wie folgt definieren:
+\begin{itemize}
+  \item Wähle fasernden Ersatz $Y \xhookrightarrow{{\sim}} RY$.
+  \item Wähle simplizialen Rahmen $\ell_\bullet RY \to Y_* \to r_\bullet RY$.
+  \item Setze $Y^K = \RD \Hom(K, Y) = \EndC{n} Y_*[n]^{K_n}$.
+  \item Fasse $Y^K$ als Objekt in $\Ho(\ModC)$ auf.
+\end{itemize}
+
+Wir definieren $Y^X \in \Ob(S)$ wie folgt:
+\begin{itemize}
+  \item Wähle $QX \to X$ und $Y \to RY$ wie eben.
+  \item Wähle $X^*$, $Y_*$ wie eben.
+  \item Setze $Y^X = \text{Map}(X, Y) = \text{diag} \Hom(X^*, Y_*) = \Hom(X^*, Y) = \Hom(X, Y_*)$.
+  \item Fasse $Y^X$ als Objekt von $\Ho(\sSet) = S$ auf.
+\end{itemize}
+
+\begin{satz}
+  Diese Konstruktion macht $\Ho(\ModC)$ zu einem wohldefinierten, abgeschlossenen $S$-Modul.
+  Diese Konstruktion ist mit Quillenadjunktionen verträglich. % XXX: wie genau?
+\end{satz}
+
+\begin{satz}
+  Analog wird die Homotopiekategorie einer jeden punktierten Modellkategorie $\ModC$ in kanonischer Weise zu einem $(S_* = \Ho(\sSet_*))$-Modul.
+  Wir erhalten
+  \begin{align*}
+    \Ho(\ModC) \times S_* \to \Ho(\ModC), \enspace & (X, K) \mapsto X \wedge^{\LL} K, \\
+    \Ho(\ModC) \times \Ho(\ModC) \to S_*, \enspace & (X, Y) \mapsto \text{Map}_*(X, Y), \\
+    S_* \times \Ho(\ModC) \to \Ho(\ModC), \enspace & (K, Y) \mapsto \RR \Hom_*(K, Y).
+  \end{align*}
+  Es gilt dann $A \wedge^{\LL} K_* = A \otimes^{\LL} K$.
+\end{satz}
 
 \pagebreak
 
