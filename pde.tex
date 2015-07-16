@@ -327,7 +327,7 @@
 \subsection{Hausdorff-Maß}
 
 \begin{defn}
-  Sei $A \subset \R^n$, $k \in \cointerval{0}{\infty}$, $\delta > 0$. Das \emph{approximierende Maß} $H_\delta^k$ von $A$ ist definiert als
+  Sei $A \subset \R^n$, $k \in \cointerval{0}{\infty}$, $\delta > 0$. Das \emph{approximierende Maß} $H_\delta^k$ von $A$ ist definiert durch
   \[
     \HM_\delta^k(A) \coloneqq \inf \Set{ \sum_{i=1}^\infty \omega_k r_i^k }{ A \subset \bigcup_{i=1}^\infty \overline{B_{r_i}(x_i)}, r_i < \delta }
   \]
@@ -391,7 +391,7 @@
 
 \iffalse
   Physikalische Motivation/Herleitung
-  % siehe auch: Skript Schmidt 
+  % siehe auch: Skript Schmidt
 
   Beschreibung von Gleichgewichtszuständen von physikalischen Zuständen $u$ (Temperatur / Konzentration)
 
@@ -815,7 +815,7 @@
 \begin{satz}
   Die Greensche Funktion für $\R^n_+$ lautet
   \[
-    G_{\R^n_+}(x, y) \coloneqq \Phi(x - y) - \Phi(x^* - y) \quad
+    G_{\R^n_+}(x, y) \coloneqq \Phi(x - y) - \Phi(\overline{x} - y) \quad
     \text{für $x, y \in \R^n_+$ mit $x \not= y$.}
   \]
 \end{satz}
@@ -1187,7 +1187,7 @@
 \end{defn}
 
 \begin{bem}[Invarianzen der Lösungseigenschaft]
-  Wenn $u \in \mathcal{C}^2_t(\Omega_T)$ kalorisch, dann auch (auf geeigneten Zylindern):
+  Wenn $u \in \mathcal{C}^2_1(\Omega_T)$ kalorisch, dann auch (auf geeigneten Zylindern):
   \begin{alignat*}{3}
     u_{0,x_0}(t,x) &\coloneqq u(t, x-x_0) &&\text{ für } x_0 \in \R^n\\
     u_{\Tau, 0}(t,x) &\coloneqq u(t-\Tau, x) &&\text{ für } \Tau \in \R\\
@@ -1237,7 +1237,7 @@
 \begin{bem}
   Für die Fundamentallösung der Laplace-Gleichung gilt:
   \[
-    \fa{x_0 \in \R^n} B_1(x_0) = \Set{ x \in \R^n }{ \Phi(x_0 - x) > \Phi(r e_1) }
+    \fa{x_0 \in \R^n} B_r(x_0) = \Set{ x \in \R^n }{ \Phi(x_0 - x) > \Phi(r e_1) }
   \] % "`Superniveaumenge"'
 \end{bem}
 
@@ -1328,27 +1328,27 @@
 
 \begin{bem}["`unendliche Ausbreitungsgeschwindigkeit"']\mbox{}\\
   Sei $\Omega \subset \R^n$ beschränkt, offen, zusammenhängend, $T > 0$ und $u \in \mathcal{C}_1^2(\Omega_T) \cap \mathcal{C}(\overline{\Omega_T})$ eine kalorische Funktion, die auf $\cinterval{0}{T} \times \partial \Omega$ verschwindet. Dann gilt
-  \[ \min_{\{ 0 \} \times \partial \Omega} u < \max_{\{ 0 \} \times \partial \Omega} u \enspace\implies\enspace \min_{\partial \{ 0 \} \times \Omega} u < u < \max_{\{ 0 \} \times \partial \Omega} u \text{ in $\Omega_T$}. \]
+  \[ \min_{\{ 0 \} \times \Omega} u < \max_{\{ 0 \} \times \Omega} u \enspace\implies\enspace \min_{\{ 0 \} \times \Omega} u < u < \max_{\{ 0 \} \times \Omega} u \text{ in $\Omega_T$}. \]
 \end{bem}
 
 % 3.4.
 \begin{kor}[Eindeutigkeit]
   Sei $\Omega \subset \R^n$ offen, beschränkt, $T > 0$, $u, v \in \mathcal{C}^2_1(\Omega_T) \cap \mathcal{C}(\overline{\Omega_T})$ mit
   \[
-    \left\{ \begin{array}{ll}
-      u_t - \Delta u = v_t - \Delta v & \text{in } \Omega_T\\
-      u = v & \text{auf } \partial_p \Omega_T
+    \left\{ \begin{array}{rlll}
+      u_t - \Delta u &=& v_t - \Delta v & \text{in } \Omega_T\\
+      u &=& v & \text{auf } \partial_p \Omega_T
     \end{array} \right.
   \]
   Dann gilt $u \equiv v$ in $\Omega_T$.
 \end{kor}
 
 \begin{prop}
-  Sei $\Omega \subset \R^n$ beschränkt, offen mit regulären Rand- punkten und $f \in \mathcal{C}^{0,\alpha}(\Omega) \cap L^\infty(\Omega)$ für ein $\alpha \in \ointerval{0}{1}$ und $g \in \mathcal{C}(\partial \Omega)$. Dann gilt für jede Lösung $u \in \mathcal{C}_1^2(\Omega \times \ointerval{0}{\infty}) \cap \mathcal{C}(\Omega \times \cointerval{0}{\infty})$ von
+  Sei $\Omega \subset \R^n$ beschränkt, offen mit regulären Randpunkten und $f \in \mathcal{C}^{0,\alpha}(\Omega) \cap L^\infty(\Omega)$ für ein $\alpha \in \ointerval{0}{1}$ und $g \in \mathcal{C}(\partial \Omega)$. Dann gilt für jede Lösung $u \in \mathcal{C}_1^2(\Omega \times \ointerval{0}{\infty}) \cap \mathcal{C}(\Omega \times \cointerval{0}{\infty})$ von
   \[
-    \left\{ \begin{array}{ll}
-      u_t - \Delta u = f & \text{in } \ointerval{0}{\infty} \times \Omega\\
-      u = g & \text{auf } \partial_p \Omega_T
+    \left\{ \begin{array}{rlll}
+      u_t - \Delta u &=& f & \text{in } \ointerval{0}{\infty} \times \Omega\\
+      u &=& g & \text{auf } \partial_p \Omega_T
     \end{array} \right.
   \]
   mit beliebigen Anfangswerten auf $\{ 0 \} \times \Omega$:
@@ -1357,9 +1357,9 @@
   \]
   wobei $v \in \mathcal{C}^2(\Omega) \cap \mathcal{C}(\overline{\Omega})$ die eindeutige Lösung der folgender Poisson-Gleichung ist:
   \[
-    \left\{ \begin{array}{ll}
-      \Delta u = f & \text{in } \Omega,\\
-      u = g & \text{auf } \partial \Omega.
+    \left\{ \begin{array}{rlll}
+      \Delta u &=& f & \text{in } \Omega,\\
+      u &=& g & \text{auf } \partial \Omega.
     \end{array} \right.
   \]
 \end{prop}
