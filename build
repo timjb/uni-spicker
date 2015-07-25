@@ -1,0 +1,22 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" == "-h" -o "$1" == "--help" -o $# != 1 ]; then
+  echo "Usage: ./build spickzettel | ./build --all"
+  exit 0
+fi
+
+function build() {
+  mkdir -p output
+  pdflatex -output-directory output "$1.tex"
+  cp "output/$1.pdf" .
+}
+
+if [ "$1" == "--all" -o "$1" == "-a" ]; then
+  for file in *.tex; do
+    build "${file%.*}"
+  done
+else
+  build "${1%.*}"
+fi
