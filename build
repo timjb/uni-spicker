@@ -3,7 +3,9 @@
 set -e
 
 if [ "$1" == "-h" -o "$1" == "--help" -o $# != 1 ]; then
-  echo "Usage: ./build spickzettel | ./build --all"
+  echo "Usage: ./build spickzettel | ./build --all | ./build --changed"
+  echo "  --all      builds all cheat-sheats"
+  echo "  --changed  builds only the cheat-sheats that have been changed according to git"
   exit 0
 fi
 
@@ -15,6 +17,10 @@ function build() {
 
 if [ "$1" == "--all" -o "$1" == "-a" ]; then
   for file in *.tex; do
+    build "${file%.*}"
+  done
+elif [ "$1" == "--changed" -o "$1" == "-c" ]; then
+  for file in $(git status --porcelain | awk '(($1 == "M") && match($2, /\.tex$/)) { print $2 }'); do
     build "${file%.*}"
   done
 else
