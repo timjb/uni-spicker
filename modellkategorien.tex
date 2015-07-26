@@ -12,6 +12,7 @@
 \usepackage{mathabx} % für \boxslash
 \usepackage{stmaryrd} % für \leftarrowtriangle
 \usepackage{bbm} % Für 1 mit Doppelstrich (Einheitsobjekt in monoidaler Kategorie)
+\usepackage{dsfont} % \mathds
 
 % http://tex.stackexchange.com/questions/117732/tikz-and-babel-error
 % Es ist schierer Wahnsinn, welche Hacks LaTeX benötigt!
@@ -29,16 +30,17 @@
 \newcommand{\Prop}{\mathbf{Prop}} % Typ der Propositionen
 \newcommand{\xtwoheadrightarrow}[1]{\xrightarrow{#1}\nspace{8}\to\,\,} % Pfeil mit zwei Spitzen (HACK!!!)
 \DeclareMathOperator{\Quot}{Quot} % Quotientenkörper
+\newcommand{\gut}{\text{gut}}
+\newcommand{\sg}{\text{sehr gut}}
 \newcommand{\Cyl}[1]{#1 \!\times\! I} % Zylinderobjekt
 \newcommand{\PO}[1]{{#1}^I} % Pfadobjekt
+\newcommand{\gutCyl}[1]{#1 \!\times_\gut\! I} % gutes Zylinderobjekt
 \newcommand{\lhhe}{\boxslash} % Linkshochhebungseigenschaftsdiagramm-im-Miniaturformat-Symbol
 \newcommand{\Weak}{\mathcal{W}} % weak equivalences
 \newcommand{\Cof}{\mathcal{C}} % cofibrations
 \newcommand{\Fib}{\mathcal{F}} % fibrations
 \newcommand{\ModC}{\mathcal{M}} % model category
 \newcommand{\NodC}{\mathcal{N}} % another model category
-\newcommand{\gut}{\text{gut}}
-\newcommand{\sg}{\text{sehr gut}}
 \DeclareMathOperator{\Ho}{Ho} % Homotopiekategorie
 \DeclareMathOperator{\Cell}{Cell} % Zellkomplexe
 \DeclareMathOperator{\Coff}{Cof} % Kofaserungen
@@ -51,6 +53,11 @@
 \newcommand{\UnitOb}{\mathbbm{1}} % Einheitsobjekt in einer monoidalen Kategorie
 \DeclareMathOperator{\Ch}{Ch} % Kategorie der Kettenkomplexe
 \newcommand{\Simpl}{\mathcal{S}} % Homotopiekategorie von sSet
+\DeclareMathOperator{\Map}{Map} % Objekt von Morphismen
+\DeclareMathOperator{\fib}{fib} % Faser
+\DeclareMathOperator{\cofib}{cofib} % Kofaser
+\newcommand{\Sph}{\mathds{S}} % Sphäre
+\DeclareMathOperator{\sk}{sk} % Skelett
 
 \newenvironment{centertikzcd}
   {\begin{center}\begin{tikzcd}}
@@ -1821,8 +1828,8 @@ Sei $R$ ein Ring und $\RMod{R}$ die Kategorie der $R$-Moduln.
   Zeige, dass $\Ho(\ModC)$ für jede Modellkategorie $\ModC$ in natürlicher Weise ein Modul über $\Simpl$ ist, \dh{} wir wollen Funktoren
   \begin{align*}
     \Ho(\ModC) \times \Simpl \to \Ho(\ModC), \quad & (X, K) \mapsto X \otimes^\LL K, \\
-    \Ho(\ModC) \times \Ho(\ModC) \to \Simpl, \quad & (X, Y) \mapsto \text{Map}(X, Y) =: Y^X, \\
-    \Simpl \times \Ho(\ModC) \to \Ho(\ModC), \quad & (K, X) \mapsto \RD{\Hom(K, X)} := X^K,
+    \Ho(\ModC)^\op \times \Ho(\ModC) \to \Simpl, \quad & (X, Y) \mapsto \Map(X, Y) =: Y^X, \\
+    \Simpl^\op \times \Ho(\ModC) \to \Ho(\ModC), \quad & (K, X) \mapsto \RD{\Hom(K, X)} := X^K,
   \end{align*}
   sodass gilt:
   \[ \Hom_{\Ho(\ModC)}(X \otimes^\LL K, Y) \cong \Hom_\Simpl(K, Y^X) \cong \Hom_{\Ho(\ModC)}(X, Y^K). \]
@@ -1907,7 +1914,8 @@ Sei $R$ ein Ring und $\RMod{R}$ die Kategorie der $R$-Moduln.
     \item Sei $X_\bullet$ ein simpl. Objekt in $\Cat$, \dh{} $X \in \Ob(\Cat^{\Delta^\op})$. Dann
     \[
       L_0 X_\bullet = \emptyset, \quad
-      L_1 A_\bullet = X_0, M_0 X_\bullet = *, \quad
+      L_1 A_\bullet = X_0, \quad
+      M_0 X_\bullet = *, \quad
       M_1 X = X_0 \times X_0.
     \]
   \end{itemize}
@@ -2023,11 +2031,256 @@ Sei $R$ ein Ring und $\RMod{R}$ die Kategorie der $R$-Moduln.
   Wir erhalten
   \begin{align*}
     \Ho(\ModC) \times \Simpl_* \to \Ho(\ModC), \quad & (X, K) \mapsto X \wedge^{\LL} K, \\
-    \Ho(\ModC) \times \Ho(\ModC) \to \Simpl_*, \quad & (X, Y) \mapsto \text{Map}_*(X, Y), \\
-    \Simpl_* \times \Ho(\ModC) \to \Ho(\ModC), \quad & (K, Y) \mapsto \RR \Hom_*(K, Y).
+    \Ho(\ModC)^\op \times \Ho(\ModC) \to \Simpl_*, \quad & (X, Y) \mapsto \Map_*(X, Y), \\
+    \Simpl_*^\op \times \Ho(\ModC) \to \Ho(\ModC), \quad & (K, Y) \mapsto \RR \Hom_*(K, Y).
   \end{align*}
-  Es gilt dann $A \wedge^{\LL} K_* = A \otimes^{\LL} K$.
+  Es gilt dann $A \wedge^{\LL} K_+ = A \otimes^{\LL} K$.
 \end{satz}
+
+% Mittwochs-Vorlesung der letzten Vorlesungswoche
+
+\subsection{Punktierte Modellkategorien}
+
+\begin{defn}
+  Sei $\Cat_*$ eine punktierte Kategorie und $f : X \to Y$ ein Morphismus in $\Cat_*$.
+  Sei $0 : X \to * \to Y$ der eindeutig bestimmte Morphismus.
+  \begin{itemize}
+    \item Die \emph{Kofaser} $\cofib f$ von $f$ ist der Differenzkokern von $f, 0 : X \to Y$.
+    \item Die \emph{Faser} $\fib f$ von $f$ ist der Differenzkern von $f, 0$.
+  \end{itemize}
+\end{defn}
+
+\begin{bem}
+  Folgende Diagramme sind Pushout- bzw. Pullbackdiagramm:
+  \begin{centertikzcd}
+    X \arrow[d] \arrow[r, "f"] \arrow[rd, phantom, "\ulcorner", very near end] &
+    Y \arrow[d] &
+    \fib f \arrow[d] \arrow[r] \arrow[rd, phantom, "\lrcorner", very near start] &
+    X \arrow[d, "f"] \\
+    * \arrow[r] &
+    \cofib f &
+    * \arrow[r] &
+    Y
+  \end{centertikzcd}
+\end{bem}
+
+\begin{defn}
+  $\Sph^0 \coloneqq \Delta[0]_{+} \in \Ob(\sSet_*) = \Ob(\Simpl_*)$, \quad
+  $\Sph^1 \coloneqq \Delta[1]_{+} / \partial \Delta[1]_{+}$
+\end{defn}
+
+\begin{defn}
+  Sei $\Cat_*$ eine punktierte Modellkategorie.
+  Dann heißt
+  \begin{alignat*}{4}
+    & \Sigma : \Ho(\Cat_*) \to \Ho(\Cat_*), \enspace X \mapsto X \wedge^{\LL} \Sph^1 &&
+    \text{\enspace\emph{Einhängung} und} \\
+    & \Omega : \Ho(\Cat_*) \to \Ho(\Cat_*), \enspace Y \mapsto \RR \Hom_*(\Sph^1, Y) &&
+    \text{\enspace\emph{Verschleifung}.}
+  \end{alignat*}
+\end{defn}
+
+\begin{bem}
+  $\Sigma \ladj \Omega$
+\end{bem}
+
+\begin{konstr}
+  Sei $X \in \Ob(\Ho(\Cat_*))$.
+  Wähle einen kofasernden Repräsentanten $QX \in \Ob(\Cat_*)$ von $X$.
+  Wähle dann einen komsimplizialen Rahmen $(QX)^o$.
+  Dann ist
+  \begin{alignat*}{2}
+    & (QX)^o \wedge^{\LL} \Sph^1 \quad
+    = \left( (QX)^o \wedge \Delta[1]_+ \right) / \left( (QX)^o \wedge \delta \Delta[1]_+ \right) \\
+    = & \left( (QX)^o \otimes \Delta[1] \right) / \left( (QX)^o \otimes \partial \Delta[1] \right) \quad
+    = \left( QX \times I \right) / (QX \vee QX) \\
+    = & \cofib(QX \vee QX \to \Cyl{QX})
+  \end{alignat*}
+  für einen gutes Zylinderobjekt $\Cyl{QX}$ zu $QX$.
+  Ist $X$ kofasernd, so gilt $X \wedge^\LL \Sph^1 = \cofib(X \vee X \to \Cyl{X})$.
+  Dual gilt für ein kofaserndes $Y$: $\Omega Y = \fib(\PO{Y} \to Y)$ für ein gutes Wegeobjekt $\PO{Y}$.
+\end{konstr}
+
+\begin{defn}
+  $\Sph^l \coloneqq \Sigma^l \Sph^0$ heißt \emph{$l$-Sphäre}.
+\end{defn}
+
+% TODO: Ist [X, Y] := basispunkterhaltende Abbildungen irgendwo definiert?
+
+\begin{nota}
+  $[X, Y] \coloneqq \Hom_{\Ho(\ModC)}(X, Y)$ für $X, Y \in \Ob(\ModC)$
+\end{nota}
+
+\begin{bem}
+  $\pi_0 \Map_*(X, Y) \cong [\Sph^0, \Map_*(X, Y)]$, \quad
+  $\pi_l \Map_*(X, Y) = [\Sigma^l X, Y]$
+\end{bem}
+
+\begin{bem}
+  $\Sph^1$ ist eine folgendermaßen ein Kogruppenobjekt in $\Simpl_*$: \\
+  Für $X \in \Ob(\sSet)$ sei $\tilde{X}$ definiert als Pushout
+  \begin{centertikzcd}
+    \sk_0 X \arrow[d] \arrow[r, hook] \arrow[rd, phantom, "\ulcorner", very near end] &
+    X \arrow[d] \\
+    \Delta[0] \arrow[r] &
+    \tilde{X}
+  \end{centertikzcd}
+  Zum Beispiel ist $\widetilde{\Delta[1]} = \Sph^1$.
+  Die Inklusionen $i : \Delta^1 [2] \to \Delta [2]$ und $s : \Lambda^1 [2] \to \Delta [2]$ induzieren Abbildungen $\tilde{i} : \Sph^1 = \widetilde{\Delta^1 [2]} \to \widetilde{\Delta [2]}$ und $\tilde{s} : \Sph^1 \vee \Sph^1 = \Lambda^1 [2] \to \Delta [2]$.
+  Da $s$ eine anodyne Erweiterung ist, ist auch $\tilde{s}$ als Pushout von $s$ anodyn, also eine schwache Äquivalenz.
+  Dann ist die Kogruppenkomultiplikation der Morphismus
+  \[
+    \Sph^1 \xrightarrow{\tilde{i}} \widetilde{\Delta [2]} \xrightarrow{\tilde{s}^{-1}} \Sph^1 \vee \Sph^1 \quad
+    \text{in $\Simpl_*$.}
+  \]
+\end{bem}
+
+\begin{satz}
+  Sei $X \in \Ho(\Cat_*)$. Dann ist
+  \begin{itemize}
+    \item $\Sigma^l X$ kanonisch eine Kogruppe für $l \geq 1$ und abelsch für $l \geq 2$,
+    \item $\Omega^l Y$ kanonisch eine Gruppe für $l \geq 1$ und abelsch für $l \geq 2$.
+  \end{itemize}
+\end{satz}
+
+\begin{kor}
+  $\pi_l X \coloneqq \pi_0 \RR \Hom_*(\Sph^l, X) = [\Sph^l, X]$ ist eine Gruppe für $l \geq 1$ und abelsch für $l \geq 2$.
+\end{kor}
+
+% Unterkapitel: Homotopie-Kofaser
+
+\begin{bem}
+  Die Index-Kategorie $I \coloneqq \{ \bullet \leftarrow \bullet \to \bullet \}$ von Pushoutdiagrammen ist gerichtet, \dh{} $\Cat_*^I$ trägt eine Modellstruktur.
+  Bzgl. dieser ist $\colim : \Cat_*^I \to \Cat_*$ ein Linksquillenfunktor.
+  Wir erhalten einen Funktor $\colim^\LL : \Ho(\Cat_*^I) \to \Ho(\Cat_*)$.
+\end{bem}
+
+\begin{defn}
+  Die \emph{Homotopiekofaser} eines Morphismus $(A \xrightarrow{f} B) \in \Cat_*$ ist
+  \[ \cofib^\LL(f) \coloneqq \colim^\LL(* \leftarrow A \xrightarrow{f} B). \]
+\end{defn}
+
+\begin{konstr}
+  Wir haben das Diagramm $\left( * \leftarrow A \xrightarrow{f} B \right) \in \Ob(\Cat_*^I)$.
+  Durch Faktorisierung finden wir ein Diagramm $\left( C \hookleftarrow{} QA \hookrightarrow QB \right) \in \Ob(\Cat_*^I)$, in dem $C$, $QA$ und $QB$ kofasernde Ersatzobjekte für $*$, $A$, bzw. $B$ und die Morphismen Kofaserungen sind.
+  Dieses Diagramm ist dann ein kof. Ersatz für das originale Diagramm in $\Cat_*^I$ und somit gilt $\cofib^\LL(f) = QB \cup_{QA} C$.
+\end{konstr}
+
+\begin{defn}
+  Dual ist die \emph{Homotopiekofaser} eines Mor. $(A \xrightarrow{f} B) \in \Cat_*$
+  \[ \fib^\RR(f) \coloneqq \lim^\RR(* \to B \xleftarrow{f} A). \]
+\end{defn}
+
+\begin{bspe}
+  \begin{itemize}
+    \item $\Omega Y = \fib^\RR(X \xrightarrow{\Delta} X \times X)$
+    \item $X \wedge^\LL \Sph^1 = \cofib(QX \vee QX \to \gutCyl{QX}) = \cofib^\LL(X \vee X \xrightarrow{\nabla} X)$
+  \end{itemize}
+\end{bspe}
+
+\begin{defn}
+  Die Folge $A \xrightarrow{f} B \xrightarrow{g} C = \cofib^\LL(f)$ heißt \emph{Kofasersequenz}
+  und $X = \fib^\RR(h) \to Y \xrightarrow{h} Z$ heißt \emph{Fasersequenz}.
+\end{defn}
+
+\begin{bem}
+  $\Sigma A$ kooperiert folgendermaßen auf $C = \cofib^\LL(f)$: \\
+  Die Kooperationsabbildung $C \to C \vee \Sigma A$ entspricht nach dem Yoneda-Lemma einer Operation $[\Sigma A, X] \times [C, X] \to [C, X]$, welche natürlich in $X \in \Ob(\Ho(\Cat_*))$ ist.
+  Sei zunächst $RX$ ein faserner Ersatz von $X$. Sei $j \in [\Sigma A, X]$ und $k \in [C, X]$. Dann ist die Wirkung der Morphismus $C \xrightarrow{\beta} RX \times RX \xrightarrow{\mathrm{pr}_1} RX$ in folgendem Diagramm:
+  \begin{centertikzcd}[column sep=0.5cm, row sep=0.5cm]
+    QA \arrow[d, hook, "Qf"] \arrow[r] &
+    A \arrow[r, "j^*"] &
+    \Omega X \arrow[r] &
+    \PO{RX} \arrow[d, twoheadrightarrow] \\
+    QB \arrow[d] \arrow[rrru, dashed, "\exists \, \alpha"] &&&
+    RX \times RX \arrow[d, twoheadrightarrow, "\mathrm{pr}_0"] \arrow[r, twoheadrightarrow, "\mathrm{pr}_1"] &
+    RX \\
+    \cofib^\LL(f) \arrow[rr, "k"] \arrow[rrru, dashed, "\exists ! \, \beta"] &&
+    X \arrow[r] &
+    RX
+  \end{centertikzcd}
+  Dabei ist $\PO{RX}$ ein sehr gutes Pfadobjekt.
+  Dabei wird $\alpha$ als Lift konstruiert (beachte, dass die Komposition der vertikalen rechten Morphismen azyklisch ist nach der 2-aus-3-Eigenschaft und dass $\mathrm{pr}_0$ und $\mathrm{pr}_1$ Faserungen sind als Pullback von $RX \twoheadrightarrow *$).
+  % TODO:
+  Wer dies hier liest, und mir verraten kann, welche universelle Eigenschaft $\beta$ induziert, bekommt ein Ü-Ei geschenkt!
+\end{bem}
+
+\begin{dual}
+  Sei $X = \fib^\RR(h) \to Y \xrightarrow{h} Z$ eine Fasersequenz.
+  Dann operiert die Gruppe $\Omega Z$ auf $X$.
+  In einem Setting von topologischen Räumen ist die Wirkung folgendermaßen gegeben:
+  Ein Element von $\Omega Z$ wird repräsentiert durch einen geschlossenen Weg $\gamma : I \to Z$ mit $\gamma(0) = \gamma(1) = z_0$.
+  Sei $x$ ein Element der Homotopie-Faser von $h$.
+  Dann ist $[\gamma].x = \tilde{\gamma}(1)$, wobei $\tilde{\gamma} : I \to Y$ ein Lift von $\gamma$ ist.
+\end{dual}
+
+\begin{satz}
+  Das sind in der Tat (Ko-) Operationen.
+\end{satz}
+
+\begin{defn}
+  Sei $A \xrightarrow{f} B \xrightarrow{g} C$ eine Kofasersequenz.
+  Dann heißt
+  \[ \partial : C \xrightarrow{\text{Koop}} C \vee \Sigma A \xrightarrow{(C \to *) \vee \id} * \vee \Sigma A = \Sigma A \]
+  der \emph{Korandoperator} $A \xrightarrow{f} B \xrightarrow{g} C \xrightarrow{\partial} \Sigma A$
+\end{defn}
+
+\begin{dual}
+  Sei $X \xrightarrow{f} Y \xrightarrow{g} Z$ eine Fasersequenz.
+  Dann heißt
+  \[ \partial : \Omega Z = * \times \Omega Z \xrightarrow{(* \to X) \times \Omega Z} \xrightarrow{\text{Op}} X \]
+  der \emph{Randoperator} $\Omega Z \xrightarrow{\partial} X \xrightarrow{f} Y \xrightarrow{g} Z$.
+\end{dual}
+
+\begin{bsp}
+  $* \to X \xrightarrow{\id} X \xrightarrow{\partial} * = \Sigma *$ ist eine Kofasersequenz und als
+  $* = \Omega * \xrightarrow{\partial} X \xrightarrow{\id} X \to *$ gleichzeitig eine Fasersequenz.
+\end{bsp}
+
+\begin{prop}
+  Sei $X \xrightarrow{f} Y \xrightarrow{g} Z$ eine Kofasersequenz (in $\Ho(\Cat_*)$). \\
+  Dann ist $Y \xrightarrow{g} Z \xrightarrow{\partial} \Sigma X$ wieder eine Kofasersequenz, wobei die Kooperation von $\Sigma Y$ auf $\Sigma X$ wie folgt ist:
+  \[ \Sigma X \xrightarrow{\text{Komult.}} \Sigma X \vee \Sigma X \xrightarrow{\id \vee \Sigma f} \Sigma X \vee \Sigma Y \xrightarrow{\id \vee \text{Inv.}} \Sigma X \vee \Sigma Y. \]
+\end{prop}
+
+\begin{dual}
+  Ist $X \xrightarrow{f} Y \xrightarrow{g} Y$ eine Fasersequenz, so ist $\Omega Z \xrightarrow{\partial} X \xrightarrow{f} Y$ mit geeigneter Operation von $\Omega A$ auf $\Omega Z$ eine Fasersequenz.
+\end{dual}
+
+\begin{kor}
+  Ausgehend von $X \xrightarrow{f} Y$ gibt eine lange Sequenz
+  \[ X \xrightarrow{f} Y \xrightarrow{g} Z = \cofib^\LL(f) \xrightarrow{\partial} \Sigma X \xrightarrow{- \Sigma f} \Sigma Y \xrightarrow{- \Sigma g} \Sigma Z \xrightarrow{- \Sigma \partial} \to \ldots \]
+  in der jedes Objekt die Homotopiekofaser der vorh. Mor. ist.
+\end{kor}
+
+\begin{dual}
+  $\ldots \to \Omega X \to \Omega Y \to \Omega Z \to X \to Y \to Z$
+\end{dual}
+
+\begin{satz}
+  \begin{itemize}
+    \item Ist $X \to Y \to Z$ eine Kofasersequenz, so ist
+    \begin{align*}
+      \ldots & \to [\Sigma Z, W] \to [\Sigma Y, W] \to [\Sigma X, W] \to \\
+      & \to [Z, W] \to [Y, W] \to [X, W]
+    \end{align*}
+    für alle $W \in \Ob(\Ho(\Cat_*))$ eine exakte Sequenz von Gruppen bzw. punktierten Mengen.
+    \item Ist $X \to Y \to Z$ eine Fasersequenz, so ist
+    \begin{align*}
+      \ldots & \to [W, \Omega X] \to [W, \Omega Y] \to [W, \Omega Z] \to \\
+      & \to [W, X] \to [W, Y] \to [W, Z]
+    \end{align*}
+    für alle $W$ eine exakte Sequenz.
+  \end{itemize}
+\end{satz}
+
+\begin{bem}
+  Für $\Omega = \Sph^0$ erhält man eine lange exakte Sequenz von Homotopiegruppen:
+  \begin{align*}
+    \ldots \to \pi_2(Z) & \to \pi_1(X) \to \pi_1(Y) \to \pi_1(Z) \to \\
+    & \to \pi_1(X) \to \pi_1(Y) \to \pi_1(Z)
+  \end{align*}
+\end{bem}
 
 % TODO: Dold-Kan vom Übungsblatt
 % TODO: Vorlesungen der letzten Woche

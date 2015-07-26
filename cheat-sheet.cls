@@ -76,6 +76,7 @@
 \newtheorem*{motto}{Motto}
 \newtheorem*{fun}{Fun Fact}
 \newtheorem*{ziel}{Ziel}
+\newtheorem*{dual}{Dual}
 
 \theoremstyle{remark}
 \newtheorem*{bem}{Bem}
