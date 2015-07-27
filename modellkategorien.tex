@@ -2282,8 +2282,204 @@ Sei $R$ ein Ring und $\RMod{R}$ die Kategorie der $R$-Moduln.
   \end{align*}
 \end{bem}
 
+% Bonusvorlesung der letzten Woche
+
+\begin{lem}
+  Es sei der durchgezogene Teil des folgenden Diagramms gegeben.
+  Dann existiert der gestrichelte Teil.
+  \begin{centertikzcd}
+    X \arrow[r, "f"] \arrow[d] & Y \arrow[d] \arrow[r, dashed] & \cofib^\LL(f) \arrow[d, dashed, "s"] \\
+    X' \arrow[r, "f'"] & Y' \arrow[r, dashed] & \cofib^\LL(f)
+  \end{centertikzcd}
+  Außerdem ist $s$ verträglich mit den Kooperationen.
+\end{lem}
+
+\begin{lem}
+  Sei der durchgezogene Teil des folgenden Diagramms gegeben:
+  \begin{centertikzcd}[column sep=0.5cm, row sep=0.3cm]
+    X \arrow[rr] \arrow[rd, "v"] && Z \arrow[rr] \arrow[rd] && W \\
+    & Y \arrow[ru, "u"] \arrow[rd] && V \arrow[ru, dashed, "s"] \\
+    && U \arrow[ru, dashed, "r"]
+  \end{centertikzcd}
+  Dabei sind $X \to Y \to U$, $Y \to Z \to W$ und $X \to Z \to V$ Kofasersequenzen.
+  Dann existieren $r$, $s$ wie eingezeichnet und $r$ ist $\Sigma U$-äquivariant, $s$ ist $\Sigma v$-äquivariant.
+  Des Weiteren ist $U \to V \to W$ eine Kofasersequenz mit Kowirkung $W \xrightarrow{\text{Koop}} W \vee \Sigma Y \xrightarrow{\id \vee \Sigma d}$.
+\end{lem}
+
+\begin{kor}
+  $\Sigma \cofib^\LL(uv) = \cofib^\LL(\cofib^\LL u \to \Sigma \cofib^\LL v)$
+\end{kor}
+
+\begin{lem}
+  Sei $X \xrightarrow{f} Y \xrightarrow{g} Z$ eine Kofasersequenz in $\Ho(\Cat_*)$, $X' \xrightarrow{i} Y' \xrightarrow{p} Z'$ eine Fasersequenz.
+  Dann gilt
+  \begin{centertikzcd}
+    X \arrow[r, "f"] \arrow[d, "\alpha"] &
+    Y \arrow[r, "g"] \arrow[d, "\beta"] &
+    Z \arrow[r, "\partial"] \arrow[d, dashed, "\exists"] &
+    \Sigma X \arrow[d, "- \alpha^*"] \\
+    \Omega Z' \arrow[r, "\partial"] &
+    X' \arrow[r, "i"] &
+    Y' \arrow[r, "p"] &
+    Z'
+  \end{centertikzcd}
+\end{lem}
+
+\begin{lem}
+  Ist $F : \Cat_* \rightleftarrows \Dat_* : U$ eine Quillenadjunktion, so erhält $\LD{F}$ Kofasersequenzen und $\RD{U}$ Fasersequenzen.
+\end{lem}
+
+\begin{satz}
+  Der Funktor $\blank \wedge^\LL \blank : \Ho(\Cat_*) \times \Simpl_* \to \Ho(\Cat_*)$ ist mit Kofasersequenzen verträglich, \dh{}
+  \begin{itemize}
+    \item Ist $A \in \Ob(\Ho(\Cat_*))$, $X \to Y \to Z$ eine Kofaserseq. in $\Simpl_*$, so ist $A \wedge^\LL X \to A \wedge^\LL Y \to A \wedge^\LL Z$ eine Kofaserseq. mit Kowirkung
+    \begin{align*}
+      A \wedge^\LL Z \to A \wedge^\LL (Z \vee \Sigma X) & \cong (A \wedge^\LL Z) \vee (A \wedge^\LL \Sigma X) \\
+      & \cong (A \wedge^\LL Z) \vee \Sigma (A \wedge^\LL X).
+    \end{align*}
+    \item Ist $K \in \Simpl_*$, $X \to Y \to Z$ eine Kofasersequenz in $\Ho(\Cat_*)$, so ist $X \wedge^\LL K \to Y \wedge^\LL K \to Z \wedge^\LL K$ eine Kofasersequenz mit Kowirkung
+    \begin{align*}
+      Z \wedge^\LL K \to (Z \vee \Sigma X) \wedge^\LL K & \cong (Z \wedge^\LL K) \vee (\Sigma X \wedge^\LL K) \\
+      & \cong (Z \wedge^\LL K) \vee \Sigma (X \wedge^\LL K).
+    \end{align*}
+  \end{itemize}
+\end{satz}
+
+\begin{acht}
+  Man beachte das Vorzeichen:
+  \begin{centertikzcd}
+    \Sph^n \wedge^\LL \Sph^m \arrow{r}{\text{kan}}[swap]{{\sim}} \arrow{d}{\gamma}[swap]{{\sim}} &
+    \Sph^{m+n} \arrow[d, "(-1)^{mn} \id"] \\
+    \Sph^m \wedge^\LL \Sph^n \arrow{r}{\text{kan}}[swap]{{\sim}} &
+    \Sph^{n+m} \\
+  \end{centertikzcd}
+\end{acht}
+
+\subsection{Stabile Modellkategorien}
+
+\begin{defn}
+  Eine punktierte Modellkategorie $\Cat_*$ heißt stabil, falls $\Sigma : \Ho(\Cat_*) \to \Ho(\Cat_*)$ eine Kategorienäquivalenz ist.
+\end{defn}
+
+\begin{bem}
+  Es folgt, dass dann $\Omega = \Sigma^{-1}$.
+\end{bem}
+
+\begin{prop}
+  Damit wird $\Ho(\Cat_*)$ zu einer additiven Kategorie.
+\end{prop}
+
+\begin{proof}
+  Jedes Objekt $X \in \Ob(\Ho(\Cat_*))$ ist natürlicherweise eine abelsche Gruppe: $X \cong \Omega^2 \Sigma^2 X$.
+\end{proof}
+
+\begin{bem}
+  Die Kowirkung von $\Sigma X$ auf $Z$ zu einer Kofasersequenz $X \xrightarrow{f} Y \xrightarrow{g} Z$ in einer stabilen Modellkategorie ist schon durch $\partial : Z \to \Sigma X$ gegeben:
+  \begin{centertikzcd}[column sep=0.8cm]
+    Z \arrow[r, "\text{Kowirk}"] \arrow[bend right]{rr}{(\id, \partial)}{} &
+    Z \vee \Sigma X \arrow[r, equal] &
+    Z \times \Sigma X
+  \end{centertikzcd}
+  Produkt und Koprodukt fallen zusammen, da $\Ho(\Cat_*)$ additiv ist.
+\end{bem}
+
+\begin{lem}
+  Sei $\Cat_*$ stabil. Dann gilt
+  \begin{alignat*}{4}
+    & X \xrightarrow{f} Y \xrightarrow{g} Z \xrightarrow{\partial} \Sigma X \quad &&
+    \text{ist Kofaserseq.} \\
+    \iff \quad & \Sigma X \xrightarrow{- \Sigma f} \Sigma Y \xrightarrow{- \Sigma g} \Sigma Z \xrightarrow{- \Sigma \partial} \Sigma^2 X \quad &&
+    \text{ist Kofaserseq.}
+  \end{alignat*}
+\end{lem}
+
+\begin{prop}
+  Es gilt
+  \begin{alignat*}{4}
+    & X \xrightarrow{f} Y \xrightarrow{g} Z \xrightarrow{\partial} \Sigma X \quad &&
+    \text{ist Kofaserseq.} \\
+    \iff \quad & \Omega Z \xrightarrow{- \partial^*} X \xrightarrow{f} Y \xrightarrow{g} \Sigma \Omega Z = Z \quad &&
+    \text{ist Faserseq.}
+  \end{alignat*}
+  Mit anderen Worten fallen Faser- und Kofasersequenzen zusammen und $\Ho(\Cat_*)$ ist eine triangulierte Kategorie.
+\end{prop}
+
+\begin{kor}
+  Ist $X \to Y \to Z \xrightarrow{\partial} \Sigma X$ ein exaktes Dreieck, so ist
+  \begin{align*}
+    \ldots \to [W, \Sigma^{-1} Z] & \to [W, X] \to [W, Y] \to [W, Z] \to \\
+    & \to [W, \Sigma X] \to [W, \Sigma Y] \to [W, \Sigma Z] \to \ldots
+  \end{align*}
+  eine lange exakte Sequenz.
+\end{kor}
+
+% Kapitel: Ausblick
+
+% Ausgelassen: Ein Satz
+
+\begin{defn}[\emph{Bousfield-Lokalisierung}]
+  Sei $S \subseteq \Mor(\ModC)$ eine Menge von Mor. einer Modellkat. $\ModC$.
+  Dann heißt $X \in \Ob(\ModC)$ \emph{$S$-lokal}, falls
+  \[
+    \fa{(A \xrightarrow{f} B) \in S} \Map(B, X) \xrightarrow{f^*} \Map(Y, X) \quad
+    \text{ist schwache Äq.}
+  \]
+  Weiter heißt $f : A \to B$ eine \emph{$S$-lokale Äquivalenz}, falls für alle $S$-lokalen Objekte $X$ der Morphismus $f^*$ wie eben eine schwache Äquivalenz ist.
+  (Offensichtlich gilt dann $S \subseteq \{ \text{ $S$-lokale Äq. } \}$.) \\
+  Ist dann $\ModC$ links-eigentlich und kombinatorisch, so existiert eine Modellstruktur $L_S \ModC$ auf $\ModC$, deren Kofaserungen diesselben sind wie von $\ModC$ und deren schwachen Äq. die $S$-lokalen Äq. sind.
+\end{defn}
+
+% TODO: Definieren, was eine simpliziale Modellkategorie ist!
+\begin{defn}
+  Sei $\Cat_*$ eine (punktierte), simpliziale, links-eigentliche, kombinatorische Modellkategorie.
+  Die \emph{Kategorie der Spektren} $\Cat_*^\infty$ hat als Objekte Familien $(X_i)_{i \in \N}$ von Objekten aus $\Cat_*$ zusammen mit Morphismen $(\alpha_i : \Sigma X_i \to X_{i+1})_{i \in \N}$.
+  Wir schreiben
+  \[ X^\infty : X_0 \dashrightarrow X_1 \dashrightarrow X_2 \dashrightarrow \ldots \]
+  Ein Morphismus besteht aus Morphismen $(X_i \to X_i')_{i /in \N}$, welche mit den $\alpha_i$ und $\alpha_i'$ verträglich sind.
+\end{defn}
+
+\begin{bsp}
+  Sei $X \in \Ob(\Cat_*)$.
+  Dann heißt
+  \[
+    \Sigma^\infty X : X \dashrightarrow \Sigma X \dashrightarrow \Sigma^2 X \dashrightarrow \ldots \enspace \text{\emph{Einhängungsspektrum} von $X$.}
+  \]
+  Das \emph{Sphärenspektrum} ist $\Sph^\infty \coloneqq \Sigma^\infty \Sph^0$.
+\end{bsp}
+
+\begin{defn}
+  Die \emph{projektive Modellstruktur} auf $\Cat_*^\infty$ ist diejenige, für die gilt:
+  Ein Mor. $f : X^\infty \to Y^\infty$ ist eine
+  \begin{itemize}
+    \item schwache Äq. $\iff$ alle $f_i : X_i^\infty \to Y_i^\infty$ sind schw. Äq.
+    \item Faserung $\iff$ alle $f_i : X_i^\infty \to Y_i^\infty$ sind Faserungen.
+  \end{itemize}
+\end{defn}
+
+\begin{defn}
+  Ein Spektrum $X^\infty$ heißt $\Omega$-Spektrum, falls alle $\alpha_i^* : X_i \to \Omega X_{i+1}$ schwache Äquivalenzen sind.
+\end{defn}
+
+\begin{lem}
+  Es gibt eine Klasse $S \subseteq \Mor(\Cat_*^\infty)$, sodass gilt:
+  \[
+    X^\infty \text{ ist $S$-lokal} \iff
+    X^\infty \text{ ist ein $\Omega$-Spektrum.}
+  \]
+\end{lem}
+
+\begin{bem}
+  Damit existiert die Bousfield-Lokalisierung der projektiven Modellstruktur auf $\Cat_*^\infty$ nach den $\Omega$-Spektren.
+  Diese Modellstruktur ist die übliche Modellstruktur auf $\Cat_*^\infty$.
+\end{bem}
+
+\begin{satz}
+  Mit dieser Modellstr. wird $\Cat_*^\infty$ zu einer stabilen Modellkat.
+\end{satz}
+
+% Ausgelassen: Eilenberg-MacLance-simpliziale-Mengen (K(G, n)'s)
+
 % TODO: Dold-Kan vom Übungsblatt
-% TODO: Vorlesungen der letzten Woche
 
 \pagebreak
 
