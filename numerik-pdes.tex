@@ -1,0 +1,77 @@
+\documentclass{cheat-sheet}
+
+\pdfinfo{
+  /Title (Zusammenfassung Numerik von partiellen Differentialgleichungen)
+  /Author (Tim Baumann)
+}
+
+% Kleinere Klammern
+\delimiterfactor=701
+
+
+\begin{document}
+
+\maketitle{Zusammenfassung Numerik von PDEs}
+
+% 1. Einführung
+
+% Ausgelassen: Notationen
+
+% 1.1. Klassifikation von partiellen DGLn
+
+\begin{defn}
+  Sei $\Omega \subseteq \R^n$ offen.
+  Eine DGL der Form
+  \[ F(x, u, Du, \ldots, D^k u) = 0 \]
+  heißt \emph{partielle DGL/PDE} der Ordnung $k \geq 1$, wobei
+  \[ F : \Omega \times \R \times \R^n \times \ldots \times \R^{n^k} \to \R \]
+  eine gegebene Funktion und $u : \Omega \to \R$ gesucht ist.
+\end{defn}
+
+\begin{defn}[\emph{Klassifikation von PDEs}]\mbox{}\\
+  \begin{itemize}
+    \item Die PDE heißt \emph{linear}, wenn sie die Form
+    \[ \sum_{\abs{\alpha} \leq k} a_\alpha(x) D^\alpha u = f(x) \]
+    mit Funktionen $a_\alpha, f : \Omega \to \R$ besitzt.
+    \item Die PDE heißt \emph{semilinear}, wenn sie die Form
+    \[ \sum_{\abs{\alpha} = k} a_\alpha(x) D^\alpha u + a_0(x, u, D_u, \ldots, D^{k-1} u) = 0 \]
+    besitzt, wobei $a_\alpha : \Omega \to \R$ und $a_0 : \Omega \times \R \times \R^n \times \ldots \times \R^{n^k} \to \R$ gegeben sind.
+    \item Die PDE heißt \emph{quasilinear}, wenn sie die Form
+    \[ \sum_{\abs{\alpha} = k} a_\alpha(x, u, Du, \ldots, D^{k-1} u) D^\alpha u + a_0(x, u, D_u, \ldots, D^{k-1} u) = 0 \]
+    hat, wobei $a_\alpha, a_0 : \Omega \times \R \times \R^n \times \ldots \times \R^{n^k}$ gegeben sind.
+    \item Die PDE heißt \emph{nichtlinear}, falls die Ableitungen der höchsten Ordnung nicht linear vorkommen.
+  \end{itemize}
+\end{defn}
+
+% Ausgelassen: Beispiele: Poisson-, Laplace-, Wärmeleitungs-, Wellengleichung sowie Navier-Stokes-Gleichung
+
+\begin{defn}
+  Sei $\Omega \subseteq \R^n$ offen und $F : \Omega \times \R \times \R^n \times \R^{n \times n} \to \R$ eine gegebene Funktion.
+  Eine PDE der Form
+  \[ F(x, u, \partial_{x_1} u, \ldots, \partial_{x_n} u, \partial_{x_1} \partial_{x_1} u, \ldots, \partial{x_1} \partial_{x_n} u, \ldots, \partial_{x_n} \partial_{x_n} u) = 0 \]
+  heißt \emph{PDE zweiter Ordnung}.
+\end{defn}
+
+\begin{nota}
+  $p_i \coloneqq \partial_{x_i} u$, $p_{ij} \coloneqq \partial^2_{x_i x_j} u$
+  \[
+    M(x) \coloneqq \begin{pmatrix}
+      \tfrac{\partial F}{\partial p_{11}} & \hdots & \tfrac{\partial F}{\partial p_{1n}} \\
+      \vdots && \vdots \\
+      \tfrac{\partial F}{\partial p_{n1}} & \hdots & \tfrac{\partial F}{\partial p_{nn}}
+    \end{pmatrix} = M(x)^{T}.
+  \]
+\end{nota}
+
+\begin{defn}[\emph{Typeneinteilung für PDEs der 2. Ordnung}]\mbox{}\\
+  Obige PDE zweiter Ordnung heißt
+  \begin{itemize}
+    \item \emph{elliptisch} in $x$, falls die Matrix $M(x)$ positiv o. definit ist.
+    \item \emph{parabolisch} in $x$, falls genau ein EW von $M(x)$ gleich null ist und alle anderen dasselbe Vorzeichen haben.
+    \item \emph{hyperbolisch} in $x$, falls genau ein EW ein anderes Vorzeichen als die anderen EWe hat.
+  \end{itemize}
+\end{defn}
+
+% Ausgelassen: Beispiele
+
+\end{document}
