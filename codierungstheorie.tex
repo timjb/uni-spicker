@@ -1,0 +1,161 @@
+\documentclass{cheat-sheet}
+
+\pdfinfo{
+  /Title (Zusammenfassung Codierungstheorie)
+  /Author (Tim Baumann)
+}
+
+% Kleinere Klammern
+\delimiterfactor=701
+
+\newcommand{\F}{\mathbb{F}} % endlicher Körper
+\renewcommand{\Pr}{\mathbb{P}} % Wahrscheinlichkeit
+\newcommand{\CP}[2]{\Pr({#1}\mid{#2})} % Conditional Probability
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\begin{document}
+
+\maketitle{Zusammenfassung Codierungstheorie}
+
+% 1. Grundproblemstellung
+% §1.1 Aufgaben der Codierungstheorie
+
+\[
+  \text{Datenquelle} \enspace
+  \xrightarrow{\text{senden}} \enspace
+  \text{Kanal} \enspace
+  \xrightarrow{\text{empfangen}} \enspace
+  \text{Senke}
+\]
+Die Daten liegen bereits digitalisiert vor.
+Mit dem Problem wie Daten wie bspw. natürliche Sprache möglichst effizient codiert werden, befasst sich die Informationstheorie.
+In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu übersetzen, dass Fehler, die bei einer Übertragung über einen fehlerhaften Kanal, korrigiert oder zumindest bemerkt werden.
+
+% (1.1) Bsp
+% Nord = 00
+% Ost = 01
+% Süd = 10
+% West = 11
+%
+% Nachrichtenmenge = Sendermenge = Empfängermenge
+
+% §1.2 Einführende Beispiele
+
+\begin{align*}
+  \text{Datenquelle} \enspace
+  & \xrightarrow[E]{\text{codieren}}
+  \text{Code} \enspace
+  \xrightarrow{\text{senden}} \enspace
+  \text{Kanal} \enspace
+  \xrightarrow{\text{empfangen}} \enspace
+  \square \enspace \\
+  & \xrightarrow[D]{\text{decodieren}} \enspace
+  \text{Code}
+  \xrightarrow[E^{-1}]{} \enspace
+  \text{Senke}
+\end{align*}
+
+% (1.2) Bsp (Fortsetzung von (1.1))
+
+% (1) Einführung eines Paritätsbit: $ab \mapsto c \coloneqq a+b (mod 2)$
+% Nachrichtenmenge = {00,01,10,11}
+% Sendermenge = {000,011,101,110}
+% Empfängermenge = {000,001,010,011,100,101,110,111}
+
+% 110 --> 010
+
+% (2) Triple-Repetition
+
+% Codieren
+
+% 00 \mapsto 000000
+% 01 \mapsto 010101
+% 10 \mapsto 101010
+% 11 \mapsto 111111
+
+% decodieren mit dem Nächster-Nachbar-Prinzip
+% Informationsrate 1/3
+
+% (3) Optimaler Code zur 1-Fehlerkorrektur: Ein (5,4,3)-Code, binär
+
+% 00 \mapsto 00000
+% 01 \mapsto 01101
+% 10 \mapsto 10110
+% 11 \mapsto 11011
+
+% 2^2 aus 2^5: Die Codes unterscheiden sich paarweise an mindestens 3 Positionen
+% Informationsrate: 2/5
+
+% 2. Formalisierung der Grundbegriffe
+
+% §2.1 q-närer Code und Hamming-Abstand
+
+\begin{defn}
+  Ein \emph{Alphabet} ist eine Menge $Q$ mit $q > 1$ Elementen, typischerweise $\{ 0, 1, \ldots, q-1 \} \cong \Z_q$.
+\end{defn}
+
+\begin{bem}
+  $\Z_q$ trägt die Struktur eines Ringes.
+  Falls $q$ eine Primzahlpotenz ist, so gibt es einen Körper $\F_q$ mit $q$ Elementen.
+\end{bem}
+
+\begin{defn}
+  Sei $n \geq 1$. Eine nichtleere Menge $C \subseteq Q^n$ mit $q = \abs{Q}$ heißt \emph{Blockcode} der Länge $n$ über $Q$ oder \emph{$q$-närer Code} der Länge $n$. Jedes $c = (c_1, \ldots, c_n) \in C$ heißt ein \emph{Codewort}.
+  Falls $M = \abs{C}$, so nennt man $C$ einen \emph{$(n, M)$-Code} über $Q$.
+\end{defn}
+
+\begin{defn}
+  Die \emph{Informationsrate} von $C$ ist dann $R(C) \coloneqq \log_n(M) / n$.
+  Falls $\abs{M} = q^k$, dann ist $R(C) = k/n$.
+\end{defn}
+
+\begin{bem}
+  Ist $Q \cong \F_q$, dann ist $Q^n$ ein $\F_q$-VR. Falls $C$ ein Unterraum von $Q^n$ ist, so ist $R(C) = \dim_{\F_q}(C) / n$.
+\end{bem}
+
+\begin{defn}
+  Der \emph{Hamming-Abstand} von $u, v \in Q^n$ ist
+  \[ d(u, v) \coloneqq \abs{\Set{i=1,\ldots,n}{u_i \neq v_i}}. \]
+\end{defn}
+
+\begin{lem}
+  Der Hamming-Abstand ist eine Metrik auf $Q^n$.
+\end{lem}
+
+\begin{nota}
+  Es sei $C \subseteq Q^n$ ein Code und $y \in Q^n$.
+  Wenn $y$ empfangen wurde, so geht man davon aus, dass das gesendete Wort dasjenige des Codes mit den wenigsten Unterschieden zu $y$ ist, also ein Wort, welches den \emph{Hamming-Abstand} $d(y, C) \coloneqq \min_{c \in C} d(y, c)$ von $y$ zu $C$ realisiert.
+  Es existiert i.\,A. kein eindeutiges solches Element, sondern eine Menge
+  \[ N_c(y) \coloneqq \Set{\overline{c}}{d(y, C) = d(y, \overline{c})}. \]
+\end{nota}
+
+% §2.2 Das Decodierprinzip des nächsten Nachbarn
+
+\begin{defn}
+  \begin{itemize}
+    \item Man nennt einen Kanal einen \emph{$q$-nären symmetrischen Kanal}, falls ein $p \in \R$ mit $0 < p < (q-1)/q$ existiert, sodass
+    \[ \CP{\text{$\beta$ empfangen}}{\text{$\alpha$ gesendet}} = \tfrac{p}{q-1} \]
+    für alle $\beta \neq \alpha \in Q$, also $\CP{\text{$\alpha$ empfangen}}{\text{$\alpha$ gesendet}} = 1-p$.
+    \item Man nennt einen Kanal \emph{gedächtnislos}, falls
+    \[ \CP{\text{$y$ empfangen}}{\text{$c$ gesendet}} = \prod_{i=1}^n \CP{\text{$y_i$ empfangen}}{\text{$c_i$ gesendet}} \]
+    für alle Wörter $x, y \in Q^n$ gilt.
+  \end{itemize}
+\end{defn}
+
+\begin{defn}[\emph{Maximum-Likelihood-Prinzip}]
+  Gegeben sei ein Code $C \subseteq Q^n$ und $y \in Q^n$.
+  Gesucht ist $\hat{c} = \argmax_{c \in C} \CP{y}{c}$.
+\end{defn}
+
+\begin{satz}
+  Es seien ein $q$-närer symm, gedächtnisloser Kanal und ein Code $C \subseteq Q^n$ gegeben.
+  Sei $y \in Q^n$ und $\hat{c} \in C$.
+  Dann sind äquivalent:
+  \begin{itemize}
+    \miniitem{0.48 \linewidth}{$\CP{y}{\hat{c}} = \max_{c \in C} \CP{y}{c}$}
+    \miniitem{0.48 \linewidth}{$\hat{c} \in N_c(y)$}
+  \end{itemize}
+\end{satz}
+
+\end{document}
