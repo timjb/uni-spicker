@@ -1,0 +1,81 @@
+\documentclass{cheat-sheet}
+
+\pdfinfo{
+  /Title (Zusammenfassung Platzeffiziente Algorithmen)
+  /Author (Tim Baumann)
+}
+
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+
+% Kleinere Klammern
+\delimiterfactor=701
+
+\newcommand{\ceil}[1]{\lceil #1 \rceil} % Aufrunden
+\newcommand{\floor}[1]{\lfloor #1 \rfloor} % Abrunden
+\renewcommand{\O}{\mathcal{O}} % Landau-O
+
+\begin{document}
+
+\maketitle{Zusammenfassung Platzeffiziente Alg.}
+
+% Vorlesung vom 14.10.2015
+
+% 1. Introduction
+
+\begin{ziel}
+  Algorithmen entwerfen, die wenig Speicherplatz und Speicherzugriffe benötigen, aber trotzdem schnell sind.
+\end{ziel}
+
+% 2. Reachability
+
+\begin{prob}[Erreichbarkeit]
+  Gegeben sei ein gerichteter oder ungerichteter Graph, ein Startknoten und ein Zielknoten darin. \\
+  Frage: Ist der Zielknoten vom Startknoten erreichbar?
+\end{prob}
+
+\begin{alg}
+  Algorithmen, mit denen man Problem lösen kann, sind Breiten- und Tiefensuche.
+\end{alg}
+
+% 2.1. Depth-First-Search and Recursion
+
+\begin{lem}
+  Es sei ein Graph mit $n$ Knoten und $m$ Kanten gegeben.
+  Tiefensuche benötigt $\Theta(n+m)$ Zeit und $\Theta(n \log n)$ Speicherplatz.
+\end{lem}
+
+% 2.2. Savitch's Algorithm
+
+\begin{alg}[\emph{Savitch}]\mbox{}\\[4pt]
+%\begin{algorithm}
+  %\caption{Savitch's Algorithmus}
+  \begin{algorithmic}[1]
+    \Function{sReachable}{$u, v, k$}
+      \If{$u = v$} \Return true \EndIf
+      \If{$k = 0$} \Return false \EndIf
+      \If{$(u,v) \in E$} \Return true \EndIf
+      \If{$k=1$} \Return false \EndIf
+      \For{$x \in V$}
+        \If{\Call{reachable}{$u, x, \floor{\tfrac{n}{2}}$} $\wedge$ \Call{reachable}{$x, v, \ceil{\tfrac{n}{2}}$}}
+          \State \Return true
+        \EndIf
+      \EndFor
+      \State \Return false
+    \EndFunction
+    \Statex
+    \State \Return reachable(s,t,n-1)
+  \end{algorithmic}
+%\end{algorithm}
+\end{alg}
+
+% Thm 2.1
+\begin{lem}
+  Savitch's Algorithmus löst das Erreichbarkeits-Problem in $\O((\log n)^2)$ Speicherplatz.
+\end{lem}
+
+\begin{bem}
+  Die Laufzeit von Savitch's Alg. ist allerding sehr schlecht.
+\end{bem}
+
+\end{document}
