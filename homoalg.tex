@@ -145,8 +145,8 @@ Dies ist eine übersetzte, korrigierte Zusammenfassung des Buches "`Methods of H
 
 \begin{defn}
   \begin{itemize}
-    \item Ein Objekt $X \in \Ob(\Cat)$ heißt \emph{initiales Objekt}, falls für alle $Y \in \Ob(Y)$ genau ein Morphismus $f \in \Hom_\Cat(X, Y)$ existiert.
-    \item Ein Objekt $Z \in \Ob(\Cat)$ heißt \emph{terminales Objekt}, falls für alle $Y \in \Ob(Y)$ genau ein Morphismus $f \in \Hom_\Cat(Y, Z)$ existiert.
+    \item Ein Objekt $X \in \Ob(\Cat)$ heißt \emph{initiales Objekt}, falls für alle $Y \in \Ob(\Cat)$ genau ein Morphismus $f \in \Hom_\Cat(X, Y)$ existiert.
+    \item Ein Objekt $Z \in \Ob(\Cat)$ heißt \emph{terminales Objekt}, falls für alle $Y \in \Ob(\Cat)$ genau ein Morphismus $f \in \Hom_\Cat(Y, Z)$ existiert.
   \end{itemize}
 \end{defn}
 
@@ -561,7 +561,7 @@ Dies ist eine übersetzte, korrigierte Zusammenfassung des Buches "`Methods of H
 \end{samepage}
 
 \begin{defn}
-  Ein Funktor $F : \Cat \to \Dat$ heißt \emph{linksadjungiert} zum Funktor $G : \Cat \to \Dat$, wenn es einen natürlichen Isomorphismus
+  Ein Funktor $F : \Cat \to \Dat$ heißt \emph{linksadjungiert} zum Funktor $G : \Dat \to \Cat$, wenn es einen natürlichen Isomorphismus
   \[
     \Hom_\Dat(F(\blank), \blank) \cong \Hom_\Cat(\blank, G(\blank))
   \]
@@ -752,7 +752,7 @@ Sei $\Cat$ eine Kategorie.
 % II.5.4
 \begin{axiom}
   $\Cat$ erfüllt \textbf{A3}, wenn es für alle $X, Y \in \Ob(\Cat)$ ein Objekt $X \oplus Y \in \Ob(\Cat)$ (genannt \emph{direkte Summe}) und Morphismen
-  \[ X \stackrel[i_x]{p_X}{\leftrightarrows} X \oplus Y \stackrel[i_Y]{p_Y}{\rightleftarrows} Y \]
+  \[ X \stackrel[i_X]{p_X}{\leftrightarrows} X \oplus Y \stackrel[i_Y]{p_Y}{\rightleftarrows} Y \]
   gibt mit
   \inlineitem{$p_X \circ i_X = \id_X$}, \enspace
   \inlineitem{$p_Y \circ i_Y = \id_Y$}, \enspace
@@ -772,7 +772,7 @@ Sei $\Cat$ eine Kategorie.
 \begin{defn}
   Der \emph{Kern} $\ker \varphi$ eines Morphismus $\varphi \in \Hom_\Cat(X, Y)$ ist
   ein Paar $(K \in \Ob(\Cat), k \in \Hom_\Cat(K, X))$ mit
-  sodass $\varphi \circ k = 0$, sodass es für alle $k' \in \Hom(K', X)$ mit $\varphi \circ k'$ einen eindeutigen Morphismus $h \in \Hom_\Cat(K', K)$ mit $k' = k \circ h$ gibt.
+  $\varphi \circ k = 0$, sodass es für alle $k' \in \Hom(K', X)$ mit $\varphi \circ k' = 0$ einen eindeutigen Morphismus $h \in \Hom_\Cat(K', K)$ mit $k' = k \circ h$ gibt.
 \end{defn}
 
 \begin{bem}
@@ -796,7 +796,7 @@ Sei $\Cat$ eine Kategorie.
 
 \begin{bem}
   Die Definition des Kokerns ist äquivalent zur folgenden: \\
-  Der Kern von $\varphi$ ist ein Morphismus $c \in \Hom_\Cat(Y, C)$, sodass
+  Der Kokern von $\varphi$ ist ein Morphismus $c \in \Hom_\Cat(Y, C)$, sodass
   \[ 0 \to \Hom_\Cat(C, Z) \xrightarrow{c \circ \blank} \Hom_\Cat(Y, Z) \xrightarrow{\varphi \circ \blank} \Hom_\Cat(X, Z) \to 0 \]
   für alle $Z \in \Ob(\Cat)$ exakt ist.
 \end{bem}
@@ -1090,7 +1090,7 @@ Sei $\Cat$ eine Kategorie.
   %Seien $X$ Verklebedaten. Die dazugehörende simpliziale Menge $\tilde{X}$ ist:
   \[ \tilde{X}_n \coloneqq \Set{ (x, g) }{ x \in X_{(k)}, g : [n] \to [k] \text{ monoton und surjektiv} }, \]
   Für eine monotone Abbildung $f : [m] \to [n]$ und $(x, g) \in \tilde{X}_n$ schreiben wir zunächst $g \circ f = f_1 \circ f_2$ mit einer Injektion $f_1$ und einer Surjektion $f_2$ und setzen
-  $\tilde{X}(f)(x, g) \coloneqq (X(f)(x), f_2)$.
+  $\tilde{X}(f)(x, g) \coloneqq (X(f_1)(x), f_2)$.
 \end{konstr}
 
 % I.2.7
@@ -1178,7 +1178,7 @@ Sei $\Cat$ eine Kategorie.
     \item Setze $\abs{X}^D \coloneqq \abs{DX}$.
     \item Definiere einen simplizialen topologischen Raum $X^I$ durch
     \[ X^I_n \coloneqq \abs{X_{\bullet n}}, \quad X^I(g) \coloneqq \abs{X(\id, g)}. \]
-    Setze $\abs{X}^{I,II} \coloneqq \abs{II,I}$.
+    Setze $\abs{X}^{I,II} \coloneqq \abs{X^I}$.
     \item Definiere analog $\abs{X}^{II,I}$.
   \end{itemize}
 \end{defn}
@@ -1274,7 +1274,7 @@ Sei $\Cat$ eine Kategorie.
 \end{bem}
 
 \begin{bem}
-  Sei $\Fais$ eine (Prä-)Garbe auf $X$ und $U \subseteq X$ offen. Dann definiert $(\Fais|U)(V) \coloneqq \Fais(U \cap V)$ eine (Prä-)Garbe auf $U$.
+  Sei $\Fais$ eine (Prä-)Garbe auf $X$ und $U \subseteq X$ offen. Dann definiert $(\Fais|_U)(V) \coloneqq \Fais(U \cap V)$ eine (Prä-)Garbe auf $U$.
 \end{bem}
 
 % Notation abgeguckt von http://stacks.math.columbia.edu/download/sheaves.pdf
@@ -1332,10 +1332,10 @@ Sei $\Cat$ eine Kategorie.
 % I.5.5 (Keime und Halme)
 
 \begin{defn}
-  Sei $\Fais$ eine Garbe auf $X$. Der \emph{Halm} von $\Fais$ in $x \in X$ ist
+  Sei $\Fais$ eine Garbe auf $X$. Der \emph{Halm} o. die \emph{Faser} von $\Fais$ in $x \in X$ ist
   \begin{align*}
-    \Fais_y & \coloneqq \Set{(U, s)}{U \subseteq X \text{offen}, x \in U, s \in \Fais(U)} / {\sim}, \\
-    (U, s) \sim (V, t) & \coloniff \ex{W \subset U \cap V \text{ offen}, y \in W} s|_W = t|_W.
+    \Fais_x & \coloneqq \Set{(U, s)}{U \subseteq X \text{offen}, x \in U, s \in \Fais(U)} / {\sim}, \\
+    (U, s) \sim (V, t) & \coloniff \ex{W \subset U \cap V \text{ offen}, x \in W} s|_W = t|_W.
   \end{align*}
 \end{defn}
 
@@ -1372,7 +1372,7 @@ Sei $\Cat$ eine Kategorie.
 \end{bem}
 
 \begin{defn}
-  Sei $\Fais$ eine Prägarbe von Mengen auf $Y$. Die \emph{Garbifizierung} $\Fais^+$ von $\Fais$ ist die Garbe der stetigen Schnitte von $\pi : F \to X$, also
+  Sei $\Fais$ eine Prägarbe von Mengen auf $X$. Die \emph{Garbifizierung} $\Fais^+$ von $\Fais$ ist die Garbe der stetigen Schnitte von $\pi : F \to X$, also
   \[ \Fais^+(U) \coloneqq \Set{f : U \to F}{\pi \circ f = (i : U \hookrightarrow X)}. \]
 \end{defn}
 
@@ -1432,7 +1432,7 @@ Sei $\Cat$ eine Kategorie.
 
 % I.5.9
 \begin{defn}
-  Eine Garbe $\Fais$ auf $X$ heißt \emph{lokal konstant}, falls jeder Punkt in $X$ eine offene Umgebung $U$ besitzt, sodass $F|_U$ isomorph zu einer konstanten Garbe ist.
+  Eine Garbe $\Fais$ auf $X$ heißt \emph{lokal konstant}, falls jeder Punkt in $X$ eine offene Umgebung $U$ besitzt, sodass $\Fais|_U$ isomorph zu einer konstanten Garbe ist.
 \end{defn}
 
 \begin{defn}
@@ -1534,7 +1534,7 @@ Sei $\Cat$ eine Kategorie.
 \begin{defn}
   Sei $A$ ein komm. Ring. Das \emph{Spektrum} von $A$ ist
   \[ \Spec(A) \coloneqq \{ \, \text{Primideale $\mathfrak{p} \subsetneq A$} \, \} \]
-  mit der sogenannten \emph{Zariski-Topologie} mit offenen Mengen
+  mit der sogenannten \emph{Zariski-Topologie} mit offenen Mengen 
   \[
     \Tau \coloneqq \Set{D(S)}{S \subseteq A} \subset \Pow(\Spec(A)), \enspace
     D(S) \coloneqq \Set{\mathfrak{p} \in \Spec(A)}{S \not\subseteq \mathfrak{p}}.
@@ -1689,7 +1689,7 @@ Sei $\Cat$ eine Kategorie.
 
 % II.4.14
 \begin{defn}
-  Eine \emph{Grothendieck-Topologie} auf einer Kategorie $\Sit$ ist gegeben durch eine Menge $C(U)$ von Sieben auf $U$ für jedes $U \in \Ob(\Sit)$ (den sogenannten \emph{überdeckenden Sieben}), sodass gilt:
+  Eine \emph{Grothendieck-Topologie} auf einer Kategorie $\Sit$ ist gegeben durch eine Familie $C(U)$ von Sieben auf $U$ für jedes $U \in \Ob(\Sit)$ (den sogenannten \emph{überdeckenden Sieben}), sodass gilt:
   \begin{itemize}
     \item Für alle $U \in \Ob(\Sit)$ ist das Sieb aller Abb. nach $U$ in $C(U)$.
     \item Die Einschränkung $f^*(\Phi)$ eines Siebes $\Phi \in C(U)$ über $f \in \Hom_\Sit(V, U)$ ist in $C(U)$.
@@ -1712,7 +1712,7 @@ Sei $\Cat$ eine Kategorie.
 \begin{defn}
   \begin{itemize}
     %\item Eine \emph{Prägarbe} von Mengen auf einem Situs $\Sit$ ist ein kontravarianter Funktor $\Garb : \Sit^\op \to \SetC$.
-    \item Eine $\mathcal{C}$-wertige Prägarbe ist ein Funktor $\Fais : \Sit^\op \to \Cat$ \\
+    \item Eine $\mathcal{C}$-wertige Prägarbe auf einem Situs $\Sit$ ist ein Funktor $\Fais : \Sit^\op \to \Cat$ \\
     (z.\,B. $\Cat = \SetC, \AbGrp, \RMod, \Top$).
     \item Ein Morphismus zwischen Prägarben $\Fais$ und $\Garb$ auf demselben Situs ist eine natürliche Transformation zwischen $\Fais$ und $\Garb$.
   \end{itemize}
@@ -1917,7 +1917,7 @@ Sei $\Aat$ eine abelsche Kategorie.
   Sei $X$ eine simpl. Menge. Sei $C_n(X)$ die von den $n$-Simplizes $X_n$ erzeugte abelsche Gruppe (\dh{} die Gruppe der endl. formalen Linearkombinationen mit Koeffizienten in $\Z$). Sei $\delta_n^i : [n{-}1] \to [n]$ diejenige streng monotone Abb. mit $i \not\in \im \delta_n^i$. Definiere
   \[
     \partial_n : C_n(X) \to C_{n-1}(X), \quad
-    \sum_{\sigma \in X_n} \lambda_\sigma \cdot \sigma \, \mapsto \nspace{3} \sum_{\sigma \in X_n} \lambda_\sigma \sum_{i=0}^n (-1)^i X(\partial_n^i)(\sigma).
+    \sum_{\sigma \in X_n} \lambda_\sigma \cdot \sigma \, \mapsto \nspace{3} \sum_{\sigma \in X_n} \lambda_\sigma \sum_{i=0}^n (-1)^i X(\delta_n^i)(\sigma).
   \]
 \end{defn}
 
@@ -1934,9 +1934,9 @@ Sei $\Aat$ eine abelsche Kategorie.
       C_n(X; A) \coloneqq C_n(X) \otimes_{\Z} A, \enspace
       \partial_n \coloneqq \partial_n \otimes \id : C_n(X; A) \to C_{n-1}(X; A).
     \]
-    \item Der \emph{Kokomplex} $(C^\bullet(X; A), \delta^\bullet)$ von $X$ mit \emph{Koeff.} in $A$ ist
+    \item Der \emph{Kokomplex} $(C^\bullet(X; A), \delta^\bullet)$ von $X$ \emph{mit Koeff.} in $A$ ist
     \begin{align*}
-      & C^n(X; A) \coloneqq \Hom(C^n(X), A), \\
+      & C^n(X; A) \coloneqq \Hom(X_n, A), \\
       \delta^n : \,\, & C^n(X; A) \to C^{n+1}(X; A), \enspace f \mapsto f \circ \delta_{n+1}.
     \end{align*}
   \end{itemize}
@@ -2018,7 +2018,7 @@ Sei $\Aat$ eine abelsche Kategorie.
 
 \begin{defn}
   Sei $\mathcal{B}$ ein kohomologisches Koeffizientensystem auf einer simplizialen Menge $X$. Wir setzen
-  \[ C^n(X; \mathcal{B}) \coloneqq \{ \text{ Funktionen } f : (\sigma \in X_n) \to \mathcal{B}_\sigma \, \} \]
+  \[ C^n(X; \mathcal{B}) \coloneqq \{ \text{ Funktionen } f : X_n \to \coprod_{\sigma \in X_n} \mathcal{B}_\sigma | f(\sigma) \in X_n \, \} \]
   und definieren $\delta_n : C^n(X; \mathcal{B}) \to C_{n+1}(X; \mathcal{B})$ durch
   \[ \delta^n(f)(\sigma) \coloneqq \sum_{i=0}^{n+1} (-1)^i \mathcal{B}(\partial_{n+1}^i, \sigma)(f(X(\partial_{n+1}^i)(\sigma))). \]
   Die Kohomologiegruppen des so def. Kokettenkomplexes $C^\bullet(X; \mathcal{B})$ heißen \emph{Kohomologiegruppen} von $X$ \emph{mit Koeffizienten in $\mathcal{B}$}.
@@ -2391,7 +2391,7 @@ Sei $\Aat$ eine abelsche Kategorie.
 
 % Übungsblatt 6, Aufgabe 5b),5c)
 \begin{lem}
-  Sei $0 \to \Fais \to \Garb \to \Harb \to \O \in \ShAb(X)$ eine \keS{} von Garben abelscher Gruppen auf einem topologischen Raum $X$.
+  Sei $0 \to \Fais \to \Garb \to \Harb \to O \in \ShAb(X)$ eine \keS{} von Garben abelscher Gruppen auf einem topologischen Raum $X$.
   \begin{itemize}
     \item Sei $\Fais$ welk und $U \subseteq X$ offen. Dann ist auch
     \[
@@ -2404,7 +2404,7 @@ Sei $\Aat$ eine abelsche Kategorie.
 
 % Übungsblatt 6, Aufgabe 6c),6d)
 \begin{lem}
-  Sei $0 \to \Fais \to \Garb \to \Harb \to \O \in \ShAb(X)$ eine \keS{} von Garben abelscher Gruppen auf einem parakompakten Hausdorffraum $X$.
+  Sei $0 \to \Fais \to \Garb \to \Harb \to O \in \ShAb(X)$ eine \keS{} von Garben abelscher Gruppen auf einem parakompakten Hausdorffraum $X$.
   \begin{itemize}
     \item Sei $\Fais$ weich und $A \subseteq X$ abgeschlossen. Dann ist auch
     \[
@@ -2439,10 +2439,10 @@ Sei $\Aat$ eine abelsche Kategorie.
   \end{alignat*}
 \end{defn}
 
-\begin{defn}
+\begin{prop}
   Sei $F : \Aat \to \Bat$ ein additiver Funktor zwischen abelschen Kategorien und $0 \to X \to Y \to Z \to 0$ eine zerfallende \keS{} in $\Aat$. \\
   Dann ist auch $0 \to FX \to FY \to FZ \to 0$ eine zerfallende \keS{}
-\end{defn}
+\end{prop}
 
 % II.6.7
 \begin{prop}
@@ -2558,7 +2558,7 @@ Sei $\Aat$ eine abelsche Kategorie.
 \end{lem}
 
 % II.6.11 (Injektive Moduln und Teilbarkeit), http://ncatlab.org/nlab/show/Baer%27s+criterion
-\begin{lem}[Baer-Kriterium]
+\begin{lem}[\emph{Baer-Kriterium}]
   Ein $A$-Linksmodul $X$ ist genau dann injektiv, wenn für alle $A$-Linksideale $I \subset X$ und Modul-Morphismen $q : I \to Q$ eine Fortsetzung $\tilde{q} : Q \to Q$ mit $q = \tilde{q}|_I$ existiert.
 \end{lem}
 
@@ -2657,7 +2657,7 @@ Sei $\Aat$ eine abelsche Kategorie.
 
 % III.1.4a)
 \begin{kor}
-  Seien $\CC{P} \to X$ und $\CC{P} \to X$ projektive Auflösungen desselben Obj. $X \in \Ob(\Aat)$. Dann gibt es Morphismen von Auflösungen $f : \CC{P} \to \CC{Q}$ und $g : \CC{Q} \to \CC{P}$ mit $f \circ g \simeq \id$ und $g \circ f \simeq \id$.
+  Seien $\CC{P} \to X$ und $\CC{Q} \to X$ projektive Auflösungen desselben Obj. $X \in \Ob(\Aat)$. Dann gibt es Morphismen von Auflösungen $f : \CC{P} \to \CC{Q}$ und $g : \CC{Q} \to \CC{P}$ mit $f \circ g \simeq \id$ und $g \circ f \simeq \id$.
 \end{kor}
 
 % Ausgelassen: III.1.4b)
@@ -2744,7 +2744,7 @@ Sei $\Aat$ eine abelsche Kategorie.
 % III.2.2
 \begin{lem}
   Die Lokalisierung erfüllt folgende universelle Eigenschaft: \\
-  Jeder andere Funktor $F : \Cat \to \Dat$, der die Morphismen aus $S$ auf Isomorphismen abbildet, faktorisiert eindeutig über $Q$, \dh{} es gibt gibt genau einen Funktor $G : \Cat[S^{-1}] \to \Dat$ mit $F = G \circ Q$.
+  Jeder andere Funktor $F : \Cat \to \Dat$, der die Morphismen aus $S$ auf Isomorphismen abbildet, faktorisiert eindeutig über $Q$, \dh{} es gibt genau einen Funktor $G : \Cat[S^{-1}] \to \Dat$ mit $F = G \circ Q$.
 \end{lem}
 
 \begin{bspe}
@@ -2939,7 +2939,7 @@ Sei $\Aat$ eine abelsche Kategorie.
 \begin{defn}
   \begin{itemize}
     \item Ein \emph{Dreieck} ($\Delta$) in einer Kategorie von Komplexen \\
-    (\zB{} $\Kom$, $D$, $D^+$, etc.) ist ein Diagramm der Form
+    (\zB{} $\Kom$, $\Der$, $\Der^+$, etc.) ist ein Diagramm der Form
     \[ \CCC{K} \xrightarrow{u} \CCC{L} \xrightarrow{v} \CCC{M} \xrightarrow{w} \CCC{K[1]} \]
     \item Es heißt \emph{ausgezeichnet}, wenn es isomorph zur mittleren Zeile
     \[ \CCC{K} \xrightarrow{\overline{f}} \Cyl(f) \xrightarrow{\pi} C(f) \xrightarrow{\delta} \CCC{K[1]} \]
@@ -3085,8 +3085,8 @@ Sei $\Aat$ eine abelsche Kategorie.
 
 \begin{bem}
   \begin{itemize}
-    \item $\Ext^i_\Aat(X, Y) \cong \Hom_{\Der(\Aat)}(X[k], Y[i+k])$ für alle $i \in \Z$
-    \item Komposition von Morphismen zwischen passend verschobenen Komplexen liefert eine bilineare Multiplikation
+    \item $\Ext^i_\Aat(X, Y) \cong \Hom_{\Der(\Aat)}(X[k], Y[i+k])$ für alle $i,k \in \Z$
+    \item Komposition von Morphismen zwischen passend verschobenen Komplexen liefert eine bilineare Multiplikation (\emph{Yoneda-Produkt})
     \[ \Ext^i_\Aat(X, Y) \times \Ext^j_\Aat(Y, Z) \to \Ext^{i+j}_\Aat(X, Z). \]
     \item Funktorialität: $\Ext^i_\Aat : \Aat^\op \times \Aat \to \AbGrp$
     \item Eine k.\,e.\,S. $0 \to X' \to X \to X'' \to 0$ in $\Aat$ ind. l.\,e. Sequenzen
@@ -3102,7 +3102,7 @@ Sei $\Aat$ eine abelsche Kategorie.
 % III.5.5 a,b)
 \begin{lem}
   \inlineitem{$\Ext^i_\Aat(X, Y) = 0$ für $i < 0$} \quad
-  \inlineitem{$\Ext^0_\Aat(X, Y) \cong \Hom(X, Y)$}
+  \inlineitem{$\Ext^0_\Aat(X, Y) \cong \Hom_\Aat(X, Y)$}
 \end{lem}
 
 \begin{konstr}[\emph{Yoneda}]
@@ -3365,7 +3365,7 @@ Sei $\Aat$ eine abelsche Kategorie.
     K^+(\Aat) \arrow[r, "K^+(F)"] \arrow[d, swap, "Q_\Aat"] & K^+(\Bat) \arrow[d, "Q_\Bat"] \arrow[ld, Rightarrow, "\epsilon"] \\
     \Der^+(\Aat) \arrow[r, swap, "RF"] & \Der^+(\Bat)
   \end{centertikzcd}
-  der folgende univ. Eigenschaft erfüllt: Für jeden exakten Funktor $F : \Der^+(\Aat) \to \Der^+(\Bat)$ und alle $\epsilon : Q_\Bat \circ K^+(F) \Rightarrow G \circ Q_\Aat$ gibt es ein eindeutiges $\eta : RF \Rightarrow G$, sodass folgendes Diagramm kommutiert:
+  der folgende univ. Eigenschaft erfüllt: Für jeden exakten Funktor $G : \Der^+(\Aat) \to \Der^+(\Bat)$ und alle $\epsilon : Q_\Bat \circ K^+(F) \Rightarrow G \circ Q_\Aat$ gibt es ein eindeutiges $\eta : RF \Rightarrow G$, sodass folgendes Diagramm kommutiert:
   \begin{centertikzcd}
     & Q_\Bat \circ K^+(F) \arrow[ld, "\epsilon_F"] \arrow[rd, "\epsilon"] \\
     RF \circ Q_\Aat \arrow[rr, "\eta Q_\Aat"] && G \circ Q_\Aat
@@ -3481,7 +3481,7 @@ Sei $\Aat$ eine abelsche Kategorie.
 % III.6.15
 \begin{defn}
   Sei $R$ ein assoziativer Ring mit Einheit, $N$ ein Links-$R$-Modul.
-  Der Funktor $\blank \otimes_r N : \RMod{R} \to \AbGrp$ ist rechtsexakt und flache Objekte bilden eine an ihn angepasste Klasse.
+  Der Funktor $\blank \otimes_R N : \RMod{R} \to \AbGrp$ ist rechtsexakt und flache Objekte bilden eine an ihn angepasste Klasse.
   Der abgeleitete Funktor wird mit $\blank \otimes^L N$ bezeichnet.
   Die \emph{Tor-Gruppen} sind die klassischen abgeleiteten Funktoren
   \[ \Tor_i^R(M, N) \coloneqq H^{-i}(M \otimes^L N). \]
