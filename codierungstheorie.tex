@@ -9,14 +9,19 @@
 \delimiterfactor=701
 
 \newcommand{\F}{\mathbb{F}} % endlicher Körper
-\renewcommand{\Pr}{\mathbb{P}} % Wahrscheinlichkeit
-\newcommand{\CP}[2]{\Pr({#1}\mid{#2})} % Conditional Probability
+\renewcommand{\P}{\mathbb{P}} % Wahrscheinlichkeit
+\newcommand{\CP}[2]{\P({#1}\mid{#2})} % Conditional Probability
 \DeclareMathOperator*{\argmin}{arg\,min}
 \DeclareMathOperator*{\argmax}{arg\,max}
+\newcommand{\err}{\text{err}} % Fehler
+\newcommand{\ceil}[1]{\lceil #1 \rceil} % Aufrunden
+\newcommand{\floor}[1]{\lfloor #1 \rfloor} % Abrunden
 
 \begin{document}
 
 \maketitle{Zusammenfassung Codierungstheorie}
+
+% Vorlesung vom 13. Oktober 2015
 
 % 1. Grundproblemstellung
 % §1.1 Aufgaben der Codierungstheorie
@@ -156,6 +161,133 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
     \miniitem{0.48 \linewidth}{$\CP{y}{\hat{c}} = \max_{c \in C} \CP{y}{c}$}
     \miniitem{0.48 \linewidth}{$\hat{c} \in N_c(y)$}
   \end{itemize}
+\end{satz}
+
+% Vorlesung vom 15. Oktober 2015
+
+\begin{defn}
+  $D : Q^n \to C$ heißt \emph{vollständige Decodierabbildung}, falls
+  \[ \fa{y \in Q^n} D(y) \in N_C(y). \]
+\end{defn}
+
+\iffalse
+\begin{bem}
+  Es gilt
+  \[ \CP{y}{c} = \CP{c}{y} \cdot \tfrac{\P(y)}{\P(c)} = \CP{c}{y} \cdot \P(y) \cdot M \]
+  Also: Ist $y$ gegeben, so wird $\CP{y}{c}$ genau dann maximal, wenn $\CP{c}{y}$ maximal ist.
+\end{bem}
+\fi
+
+% §2.3 Shannons Hauptsatz der Kanalcodierung
+
+\begin{defn}
+  Die \emph{Kanalkapazität} eines $q$-nären symmetrischen Kanal ist
+  \[ \kappa(q, p) \coloneqq \log_2(q) + p \cdot \log_2 (\tfrac{p}{q-1}) + (1-p) \cdot \log_2 (1-p). \]
+  Sie ist ein Maß für die maximale Information, die über den Kanal übertragen werden kann.
+  Die \emph{Entropiefunktion} ist
+  \[ H(q, p) \coloneqq 1 - \kappa(q, p). \]
+\end{defn}
+
+% q=2. \kappa(2,p) = 1 + p \log_2(p) + (1-p) \log_2(1-p)
+% \kappa(2, \tfrac{1}{2}) = 1 + \tfrac{1}{2} \cdot (-1) + \tfrac{1}{2} \cdot (-1) = 0
+
+% Ausgelassen: Skizze von \kappa(2, p)
+
+\begin{defn}
+  Sei $C$ ein Code und $D$ sei eine zugehörige (vollständige) Decodierabbildung.
+  Die \emph{Restfehlerwahrscheinlichkeit} zu $(C, D)$:
+  \[ \P_{\text{err}}(C) \coloneqq \max_{y \in Q^n, c \in C} \CP{D(y) \neq c}{\text{$c$ gesendet, $y$ empfangen}} \]
+\end{defn}
+
+% 2.9
+\begin{satz}[\emph{Shannon}]
+  Sei $0 < R < \kappa(q, p)$.
+  Dann gibt es eine Folge $(C_n)_{n \in \N}$ von Codes und zugehörigen Decodierabbildungen $D_n$ mit: %folgenden Eigenschaften:
+  \begin{itemize}
+    \item $C_n$ ist ein $(n, M_n)$-Code mit Informationsrate $R \!\leq\! R(C_n) \!<\! \kappa(q, p)$
+    \item $\lim_{n \to \infty} \left( \P_\err(C_n) \right) = 0$
+  \end{itemize}
+\end{satz}
+
+% 3. Korrektureigenschaften und zwei Schranken
+
+% §3.1 Fehlererkennung und -korrektur
+
+% 3.1
+\begin{defn}
+  Der \emph{Minimalabstand} eines $(n, M)$-Codes $C$ über $Q$ ist
+  \[ d \coloneqq d(C) \coloneqq \min_{c,c' \in C, c \neq c'} d(c,c'). \]
+  Man sagt dann, $C$ ist ein $q$-närer $(n, M, d)$-Code.
+\end{defn}
+
+\begin{nota}
+  Zu $u \in Q^n$ und zu $l \in \N$ sei $B_l(u) \coloneqq \Set{x \in Q^n}{d(x, x) \leq l}$.
+\end{nota}
+
+\begin{defn}
+  \begin{itemize}
+    \item Ein Code $C$ heißt \emph{$l$-fehlerkorrigierend}, falls $B_l(c) \cap B_{l'}(c') = \emptyset$ für alle $c, c' \in C$ mit $c \neq c'$.
+    \item $C$ heißt \emph{$m$-fehlererkennend}, wenn $B_m(c) \cap C = \{ c \}$ f.\,a. $c \in C$.
+    \item $C$ heißt \emph{genau $l$-fehlerkorrigierend/-erkennend}, falls $C$ $m$-fehlerkorr./-erkennend für $m \coloneqq l$ aber nicht $m \coloneqq l+1$ ist.
+  \end{itemize}
+\end{defn}
+
+% 3.3
+\begin{satz}
+  Jeder $(n, M, d)$-Code $C$ ist genau
+  \begin{itemize}
+    \miniitem{0.49 \linewidth}{$(d{-}1)$-fehlererkennend und}
+    \miniitem{0.48 \linewidth}{$(t \coloneqq \floor{\tfrac{d-1}{2}})$-fehlerkorrigierend.}
+  \end{itemize}
+\end{satz}
+
+\begin{bsp}
+  $C = \{ 000, 111 \}$ ist ein binärer $(3, 2, 3)$-Code.
+\end{bsp}
+
+% Hauptproblemstellung
+\begin{prob}
+  Gegeben: $q$, Länge $n$, Minimalabstand $d$.
+  Gesucht:
+  \[ A_q(n, d) \coloneqq \max \Set{M}{\exists\,\text{$(n,M,d)$-Code}} \]
+\end{prob}
+
+\begin{defn}
+  Ein $(n, M, d)$-Code heißt \emph{optimal}, falls $M = A_q(n, d)$.
+\end{defn}
+
+% §3.2 Singleton-Schranke
+
+% 3.5
+\begin{lem}
+  Seien $q, n \in \N$, $q \geq 2$, $n \geq 1$.
+  \begin{itemize}
+    \item $A_q(n,1) = q^n$, realisiert durch $C = Q^n$.
+    \item $A_q(n,n) = q$, realisiert durch $C = \Set{(a, \ldots, a)}{a \in Q} \subseteq Q^n$
+    \item $d \leq d' \implies A_q(n, d) \geq A_q(n, d')$
+    \item Sei $n \geq 2$ und $d \geq 2$. Dann gilt $A_q(n, d) \leq A_q(n-1,d-1)$.
+  \end{itemize}
+\end{lem}
+
+% 3.6
+\begin{kor}[\emph{Singletonschranke}]
+  $A_q(n, d) \leq q^{n-d+1}$
+\end{kor}
+
+% 3.7
+\begin{defn}
+  Ein Code, der die Singletonschranke mit Gleichheit erfüllt, heißt ein \emph{MDS-Code} (MDS = maximum distance separable).
+\end{defn}
+
+\begin{bem}
+  Sei $C \subseteq Q^n$ ein $(n, M, d)$-Code,
+  $T = \{ 1 \!\leq t_1 < \ldots < t_{\abs{T}} \leq\! n \}$ und
+  $\pi_T : C \to Q^{\abs{T}}, \enspace c \mapsto (c_{t_1}, \ldots, c_{t_{\abs{T}}})$.
+  Ist $C$ ein MDS-Code, so ist $\pi_T$ bijektiv für alle $T$ mit $\abs{T} = n - d + 1$.
+\end{bem}
+
+\begin{satz}
+  $A_q(n, 2) = q^{n-1}$, realisiert durch einen Code mit Prüfziffer
 \end{satz}
 
 \end{document}
