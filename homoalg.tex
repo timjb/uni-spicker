@@ -1332,7 +1332,7 @@ Sei $\Cat$ eine Kategorie.
 % I.5.5 (Keime und Halme)
 
 \begin{defn}
-  Sei $\Fais$ eine Garbe auf $X$. Der \emph{Halm} o. die \emph{Faser} von $\Fais$ in $x \in X$ ist
+  Sei $\Fais$ eine Garbe auf $X$. Der \emph{Halm} von $\Fais$ in $x \in X$ ist
   \begin{align*}
     \Fais_x & \coloneqq \Set{(U, s)}{U \subseteq X \text{offen}, x \in U, s \in \Fais(U)} / {\sim}, \\
     (U, s) \sim (V, t) & \coloniff \ex{W \subset U \cap V \text{ offen}, x \in W} s|_W = t|_W.
@@ -1936,8 +1936,8 @@ Sei $\Aat$ eine abelsche Kategorie.
     \]
     \item Der \emph{Kokomplex} $(C^\bullet(X; A), \delta^\bullet)$ von $X$ \emph{mit Koeff.} in $A$ ist
     \begin{align*}
-      & C^n(X; A) \coloneqq \Hom(X_n, A), \\
-      \delta^n : \,\, & C^n(X; A) \to C^{n+1}(X; A), \enspace f \mapsto f \circ \delta_{n+1}.
+      & C^n(X; A) \coloneqq \Hom(C_n(X_n), A), \\
+      \delta^n : \,\, & C^n(X; A) \to C^{n+1}(X; A), \enspace f \mapsto f \circ \partial_{n+1}.
     \end{align*}
   \end{itemize}
 \end{defn}
@@ -2018,9 +2018,9 @@ Sei $\Aat$ eine abelsche Kategorie.
 
 \begin{defn}
   Sei $\mathcal{B}$ ein kohomologisches Koeffizientensystem auf einer simplizialen Menge $X$. Wir setzen
-  \[ C^n(X; \mathcal{B}) \coloneqq \{ \text{ Funktionen } f : X_n \to \coprod_{\sigma \in X_n} \mathcal{B}_\sigma | f(\sigma) \in X_n \, \} \]
-  und definieren $\delta_n : C^n(X; \mathcal{B}) \to C_{n+1}(X; \mathcal{B})$ durch
-  \[ \delta^n(f)(\sigma) \coloneqq \sum_{i=0}^{n+1} (-1)^i \mathcal{B}(\partial_{n+1}^i, \sigma)(f(X(\partial_{n+1}^i)(\sigma))). \]
+  \[ C^n(X; \mathcal{B}) \coloneqq \{ \text{ Familien } f = (f_\sigma \in \mathcal{B}_\sigma)_{\sigma \in X_n} \} \]
+  und definieren $\delta^n : C^n(X; \mathcal{B}) \to C^{n+1}(X; \mathcal{B})$ durch
+  \[ \delta^n(f)_\sigma \coloneqq \sum_{i=0}^{n+1} (-1)^i \mathcal{B}(\partial_{n+1}^i, \sigma)(f_{X(\partial_{n+1}^i)(\sigma)}). \]
   Die Kohomologiegruppen des so def. Kokettenkomplexes $C^\bullet(X; \mathcal{B})$ heißen \emph{Kohomologiegruppen} von $X$ \emph{mit Koeffizienten in $\mathcal{B}$}.
 \end{defn}
 
