@@ -77,6 +77,7 @@
 \newtheorem*{fun}{Fun Fact}
 \newtheorem*{ziel}{Ziel}
 \newtheorem*{dual}{Dual}
+\newtheorem*{terminologie}{Terminologie}
 
 \theoremstyle{remark}
 \newtheorem*{bem}{Bem}

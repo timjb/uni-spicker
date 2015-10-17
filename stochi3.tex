@@ -1,0 +1,151 @@
+\documentclass{cheat-sheet}
+
+\pdfinfo{
+  /Title (Zusammenfassung Stochastik 3)
+  /Author (Tim Baumann)
+}
+
+\usepackage{bbm} % Für 1 mit Doppelstrich (Indikatorfunktion)
+
+% Kleinere Klammern
+\delimiterfactor=701
+
+%\newcommand{\Alg}{\mathfrak{A}} % (Mengen-)Algebra
+%\newcommand{\Ring}{\mathfrak{R}} % (Mengen-)Ring
+%\newcommand{\LebAlg}{\mathfrak{L}} % Lebesgue-Borel-Mengen
+\renewcommand{\P}{\mathbb{P}} % Wahrscheinlichkeitsmaß
+\newcommand{\E}{\mathbb{E}} % Erwartungswert
+\newcommand{\Bor}{\mathfrak{B}} % Borel
+%\newcommand{\Leb}{\mathcal{L}} % Lebesgue
+\newcommand{\ind}{\mathbbm{1}} % Indikatorfunktion
+
+\DeclareMathOperator{\var}{Var} % Varianz
+\DeclareMathOperator{\cov}{Cov} % Kovarianz
+\DeclareMathOperator{\cor}{Cor} % Korrelation
+
+\newcommand{\Normal}{\mathcal{N}} % Gaußsche Normalverteilung
+
+\begin{document}
+
+\maketitle{Zusammenfassung Stochastik 3}
+
+% Vorlesung vom 12.10.2015
+
+% 1. Wiederholung
+
+% 1.1 Grundbegriffe der Testtheorie
+
+\begin{modell}
+  Gegeben sei ein Parametrisches Modell, \dh eine Zufallsgröße $X$, deren Verteilungsfunktion $P_X \in \Set{P_\vartheta}{\vartheta \in \Theta \subset \R^n}$ von einem Parameter $\vartheta$ abhängt.
+\end{modell}
+
+\begin{prob}
+  Anhand einer \emph{Stichprobe} $x_1, \ldots, x_n \in \R^1$ von $X$ (\dh{} $x_1, \ldots, x_n$ sind Realisierung von iid ZGen $X_1, \ldots, X_n \sim P_X$) ist zu entscheiden, ob die sogenannte \emph{Nullhypothese} $H_0 : \vartheta \in \Theta_0 \subset \Theta$ oder eine \emph{Gegenhypothese} $H_1 : \vartheta \in \Theta_1 = \Theta \setminus \Theta_0$ angenommen oder abgelehnt werden soll.
+\end{prob}
+
+\begin{defn}
+  Der \emph{Stichprobenraum} ist $(\R^n, \Bor(\R^n), P_\vartheta \times \ldots \times P_\vartheta)$
+\end{defn}
+
+\begin{terminologie}
+  Die Hypothese $H_i$ heißt \emph{einfach}, falls $\abs{H_i} = 1$, andernfalls \emph{zusammengesetzt}.
+\end{terminologie}
+
+\begin{defn}
+  Ein (nichtrandomisierter) \emph{Test} für $H_0$ gegen $H_1$ ist eine Entscheidungsregel über die Annahme von $H_0$ basierend auf einer Stichprobe, die durch eine messbare Abbildung $\varphi : \R^n \to \{ 0, 1 \}$ augedrückt wird und zwar durch
+  \[ \varphi(x_1, \ldots, x_n) = \begin{cases}
+    0 & \text{bei Annahme von $H_0$,} \\
+    1 & \text{bei Ablehung von $H_0$.}
+  \end{cases} \]
+\end{defn}
+
+\begin{defn}
+  Der \emph{Ablehungsbereich} oder \emph{kritische Bereich} von $\varphi$ ist
+  \[ K_n \coloneqq \Set{(x_1, \ldots, x_n) \in \R^n}{\varphi(x_1, \ldots, x_n) = 1}. \]
+\end{defn}
+
+\begin{bem}
+  Es gilt $\varphi = \ind_{K_n}$.
+\end{bem}
+
+\begin{defn}
+  Ein \emph{Fehler 1. Art} ist eine Ablehnung der Nullhypothese $H_0$, obwohl $H_0$ richtig ist;
+  ein \emph{Fehler 2. Art} ist eine Annahme von $H_0$, obwohl $H_0$ falsch ist.
+\end{defn}
+
+% Ausgelassen: Stichprobenraum ist [R^n, B(R^n), P_\vartheta \times \ldots \times P_\vartheta]
+
+\begin{defn}
+  Die \emph{Güte- oder Machtfunktion} des Tests $\varphi$ ist
+  \begin{align*}
+    m_\varphi : \Theta \to \cinterval{0}{1},
+    m_\varphi(\vartheta) & \coloneqq
+    \E_\vartheta \varphi(X_1, \ldots, X_n) \\
+    & = \P_\vartheta ((X_1, \ldots, X_n) \in K_n) \\
+    & = (P_\vartheta \times \ldots \times P_\vartheta)(K_n)
+  \end{align*}
+  Die Gegenwsk. $(1 {-} m_\varphi(\vartheta))$ heißt \emph{Operationscharakteristik} von $\varphi$.
+\end{defn}
+
+\begin{bem}
+  Es gilt
+  \begin{alignat*}{2}
+    \P_\vartheta(\text{Fehler 1. Art}) &= m_\varphi(\vartheta) & \enspace\text{für $\vartheta \in \Theta_0$,} \\
+    \P_\vartheta(\text{Fehler 2. Art}) &= 1 - m_\varphi(\vartheta) & \enspace\text{für $\vartheta \in \Theta_1$.}
+  \end{alignat*}
+\end{bem}
+
+% Ausgelassen: Graph einer "fast idealen Kurve"
+
+\begin{defn}
+  Ein Test $\varphi : \R^n \to \{ 0, 1 \}$ mit
+  \[ \sup_{\vartheta \in \Theta_0} m_\varphi(\vartheta) \leq \alpha \]
+  heißt \emph{$\alpha$-Test} o. \emph{Signifikanztest} zum \emph{Signifikanzniveau} $\alpha \in \ointerval{0}{1}$. \\[2pt]
+  Ein $\alpha$-Test $\varphi$ heißt \emph{unverfälscht} (erwartungstreu, unbiased), falls
+  \[ \inf_{\vartheta \in \Theta_1} m_\varphi(\vartheta) \geq \alpha. \]
+\end{defn}
+
+% Konstruktion nichtrandomisierter Tests mittels Stichprobenfunktionen (= Statistiken) im Falle einfacher Nullhypothesen
+
+\begin{situation}
+  Sei nun eine Stichprobenfunktion oder \emph{Teststatistik} $T : \R^n \to \R^1$ gegeben.
+  Wir wollen einen Test der einfachen Nullhypothese $H_0 : \vartheta \in \Theta_0 = \{ \vartheta_0 \}$ entwickeln.
+\end{situation}
+
+\begin{defn}
+  $K_n^T \subset \R^1$ heißt \emph{kritischer Bereich der Teststatistik}, falls
+  \[ K_n = T^{-1}(K_n^T). \]
+\end{defn}
+
+\begin{bem}
+  Es gilt
+  \begin{alignat*}{4}
+    m_\varphi(\vartheta_0) &= \P_{\vartheta_0} \left( (X_1, \ldots, X_n) \in K_n \right)
+    &&= \\
+    &= \P_{\vartheta_0} \left( (T(X_1), \ldots, T(X_n)) \in K_n^T \right)
+    &&= \Int{K_n^T}{}{f_T(x)}{x} \leq \alpha,
+  \end{alignat*}
+  wobei $f_T$ die Dichte von $T(X_1, \ldots, X_n)$ unter $H_0$ ist.
+\end{bem}
+
+\begin{bsp}
+  Sei $X \sim \Normal(\mu, \sigma^2)$, $\sigma$ bekannt und $\alpha \in \ointerval{0}{1}$ vorgegeben. \\
+  Zum Test der Nullhypothese $H_0 : \mu = \mu_0$ wählen wir als Statistik
+  \[
+    T(X_1, \ldots, X_n) \coloneqq \tfrac{\sqrt{n}}{\sigma} \left( \overline{X_n} - \mu_0 \right) \enspace
+    \text{mit }
+    \overline{X_n} \coloneqq \tfrac{1}{n} \left( X_1 + \ldots + X_n \right).
+  \]
+  Unter Annahme von $H_0$ gilt $T(X_1, \ldots, X_n) \sim \Normal(0,1)$. \\
+  Der Ablehnungsbereich der Statistik ist
+  \[
+    K_n^T = \Set{t \in \R^1}{\abs{t} > z_{1 - \alpha/2}}
+    \quad \text{mit} \quad
+    z_{1 - \alpha/2} \coloneqq \Phi^{-1}(1 - \alpha/2).
+  \]
+  Für $\alpha = 0,5$ gilt beispielsweise $z_{1 - \alpha/2} \approx 1,96$.
+\end{bsp}
+
+% Vorlesung vom 15.10.2015
+
+\end{document}
