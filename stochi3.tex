@@ -148,4 +148,70 @@
 
 % Vorlesung vom 15.10.2015
 
+\begin{bem}
+  Es gilt
+  \begin{align*}
+    t \in (K_n^T)^c
+    &\iff \abs{t} \leq z_{1-\alpha/2}
+    \iff \abs{\overline{X_n} - \mu_0} \leq \tfrac{\sigma}{\sqrt{n}} z_{1-\alpha/2} \\
+    &\iff \mu_0 \in \cinterval{\overline{X_n} - \tfrac{\sigma}{\sqrt{n}} z_{1-\alpha/2}}{\overline{X_n} + \tfrac{\sigma}{\sqrt{n}} z_{1-\alpha/2}}.
+  \end{align*}
+  Letzteres Intervall wird \emph{Konfidenzintervall} für $\mu_0$ zum Konfidenz- niveau $1-\alpha$ genannt.
+\end{bem}
+
+\begin{bsp}
+  Sei wieder $X \sim \Normal(\mu, \sigma^2)$, $\sigma^2$ aber diesmal unbekannt.
+  \[
+    \hat{T}(X_1, \ldots, X_n) = \tfrac{\sqrt{n}}{S_n} \left( \overline{X_n} - \mu_0 \right), \quad
+    S_n^2 \coloneqq \tfrac{1}{n-1} \sum_{i=1}^n \left( X_i - \overline{X_n} \right)^2
+  \]
+  Dabei ist $S_n$ die \emph{(korrigierte) Stichprobenvarianz}.
+  Man kann zeigen, dass $\hat{T}(X_1, \ldots, X_n) \sim t_{n-1}$.
+  Dabei ist $t_m$ die \emph{Student'sche $t$-Verteilung} mit $m$ Freiheitsgraden.
+  Der Ablehnungsbereich ist
+  \[ K_n^T = \Set{t \in \R^1}{\abs{t} > t_{n-1,1-\alpha/2}}. \]
+\end{bsp}
+
+\begin{bem}
+  $S_n^2$ und $\overline{X_n}$ sind unabhängig für $n \geq 2$. % und umgekehrt?
+\end{bem}
+
+\begin{diskussion}
+  \begin{itemize}
+    \item Je kleiner $\alpha$ ist, desto "`nullhypothesenfreundlicher"' ist der Test.
+    Häufig verwendet wird $\alpha \in \{ 10\%, 5\%, 1\%, 0,5\% \}$.
+    \item Einseitige Tests: Die Gegenhypothese zu $H_0 \!:\! \mu \!=\! \mu_0$ ist $H_1 \!:\! \mu \!>\! \mu_0$.
+    Die Nullhypothese wird nur abgelehnt, falls zu große Stichproben- mittelwerte $\overline{x_n}$ vorliegen. Es ist dann $K_n^T = \ointerval{z_{1-\alpha}}{\infty}$.
+  \end{itemize}
+\end{diskussion}
+
+% 1.2. Prüfverteilung bei normalverteilten Grundgesamtheit
+
+\begin{defn}
+  Es seien $X_1, \ldots, X_n \sim \Normal(0, 1)$.
+  Dann heißt die Summe $X_1^2 + \ldots + X_n^2 \sim \chi_n^2$ \emph{Chi-Quadrat-verteilt} mit $n$ Freiheitsgraden.
+\end{defn}
+
+\begin{defn}
+  Falls $X \sim \Normal(0,1)$ und $Y_n \sim \chi_n^2$ unabhängig sind, so heißt
+  \[ \tfrac{X}{\sqrt{\tfrac{Y_n}{n}}} \sim t_n \]
+  \emph{$t$-verteilt} mit $n$-Freiheitsgraden.
+\end{defn}
+
+\begin{lem}
+  $\tfrac{n-1}{\sigma^2} S_n^2 \sim \chi_{n-1}^2$
+\end{lem}
+
+\begin{kor}
+  $\hat{T}$ aus dem zweiten obigen Bsp ist tatsächlich $t$-verteilt.
+\end{kor}
+
+\begin{defn}
+  Seien $Y_{n_i} \sim \chi_{n_i}^2$, $i = 1, 2$ zwei unabhängige ZGen.
+  Dann heißt %der Quotient
+  \[ \tfrac{Y_{n_1} / n_1}{Y_{n_2} / n_2} \sim F_{n_1, n_2} \]
+  \emph{F-verteilt} (wie Fisher) mit $(n_1, n_2)$ Freiheitsgraden.
+  % auch: Suedecor-verteilt
+\end{defn}
+
 \end{document}

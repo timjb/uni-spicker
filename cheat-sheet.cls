@@ -78,6 +78,7 @@
 \newtheorem*{ziel}{Ziel}
 \newtheorem*{dual}{Dual}
 \newtheorem*{terminologie}{Terminologie}
+\newtheorem*{diskussion}{Diskussion}
 
 \theoremstyle{remark}
 \newtheorem*{bem}{Bem}
