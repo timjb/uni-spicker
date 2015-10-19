@@ -8,10 +8,14 @@
 % Kleinere Klammern
 \delimiterfactor=701
 
+\newcommand{\Cont}{\mathcal{C}} % Menge der stetigen/diff'baren Funktionen
+\newcommand{\clos}[1]{\overline{#1}} % topologischer Abschluss
 
 \begin{document}
 
 \maketitle{Zusammenfassung Numerik von PDEs}
+
+% Vorlesung vom 13. Oktober 2015
 
 % 1. Einführung
 
@@ -73,5 +77,106 @@
 \end{defn}
 
 % Ausgelassen: Beispiele
+
+% Vorlesung vom 19. Oktober 2015
+
+% 2. Klassische Lösungstheorie für elliptische PDEs
+
+\begin{defn}
+  Sei $\Omega \subset \R^n$ offen, zusammenhängend und beschränkt.
+  \begin{itemize}
+    \item $\Cont(\clos{\Omega}, \R^m)$ ist der Raum aller auf $\clos{\Omega}$ stetigen Funktionen $u : \Omega \to \R^m$, $\Cont(\clos{\Omega}) \coloneqq \Cont(\clos{\Omega}, \R)$, $\norm{u}_{\Cont(\clos{\Omega}, \R^m)} = \sup_{x \in \clos{\Omega}} \norm{u(x)}$.
+    (Damit wird $(\Cont(\clos{\Omega}, \R^m), \norm{\blank}_{\Cont(\clos{\Omega}, \R^m)})$ zu einem Banach-Raum.)
+    \item $\Cont^k(\clos{\Omega}, \R^m)$, $k \in \N$ ist der Raum aller auf $\Omega$ $k$-mal stetig diff'baren Funktionen $u : \Omega \to \R^m$, die zusammen mit ihren Ableitungen bis zur Ordnung $k$ stetig auf $\clos{\Omega}$ fortgesetzt werden können.
+    \[ \norm{u}_{\Cont^k(\overline{\Omega}, \R^m)} = \sum_{\abs{\alpha} \leq k} \norm{D^\alpha u}_{\Cont(\overline{\Omega}, \R^m)} \]
+    % ist wieder ein Banachraum
+    \item $\Cont^{0,\alpha}(\clos{\Omega}, \R^m) = \Set{u \in \Cont(\clos{\Omega}, \R^m)}{H_\alpha(u, \clos{\Omega}) \coloneqq \sup_{x, y \in \clos{\Omega}, x \neq y} \frac{\norm{u(x)-u(y)}}{\norm{x-y}^\alpha} < \infty}$ heißt \emph{Raum aller gleichmäßig Hölder-stetigen Funktionen zum Exponent $\alpha \in \cointerval{0}{1}$}.
+  \end{itemize}
+\end{defn}
+
+\begin{bem}
+  \begin{itemize}
+    \item $\Cont^{0,1}(\clos{\Omega}, \R^m)$ heißt \emph{Raum der Lipschitz-stetigen Funktionen},
+    \item Jede Hölder-stetige Funktion ist gleichmäßig stetig
+    \item $\Cont^{k,\alpha}(\clos{\Omega}, \R^m) \coloneqq \Set{u \in \Cont^k(\clos{\Omega}, \R^m)}{\fa{\abs{\gamma} = k} D^\gamma u \in \Cont^{0, \alpha}(\clos{\Omega}, \R^m)}$
+    \[ \norm{u}_{\Cont^{k,\alpha}(\clos{\Omega}, \R^m)} \coloneqq \norm{u}_{\Cont^k(\clos{\Omega}, \R^m)} + \sum_{\abs{\gamma} = k} H_\alpha(D^\gamma u, \clos{\Omega}) \]
+    Damit wird $(\Cont^{k,\alpha}(\clos{\Omega}, \R^m), \norm{\blank}_{\Cont^{k,\alpha}(\clos{\Omega}, \R^m)})$ zu einem Banach-Raum.
+  \end{itemize}
+\end{bem}
+
+\begin{bsp}
+  Betrachte $u(x) = \abs{x}^\beta$ auf $\ointerval{-1}{1} = \Omega$. Dann ist
+  \[ \frac{\abs{u(x) - u(0)}}{\abs{x - 0}^\alpha} = \abs{X}^{\beta - \alpha} \]
+  genau dann beschränkt, falls $\beta \geq \alpha$. In dem Fall ist $u$ Hölder-stetig zum Exponent $\alpha$.
+\end{bsp}
+
+\begin{defn}
+  Sei $\Omega \subset \R^n$ offen, zusammenhängend und beschränkt.
+  Das Gebiet $\Omega$ gehört zur Klasse $\Cont^{k,\alpha}$, wenn in jedem Punkt $x \in \partial \Omega$ eine Umgebung in $\partial \Omega$ existiert, die sich in einem geeigneten Koordinatensystem als ein Graph einer Funktion aus $\Cont^{k,\alpha}$ darstellen lässt und $\Omega$ liegt lokal immer auf einer Seite von $\partial \Omega$.
+\end{defn}
+
+% Ausgelassen: Beispiele und Gegenbeispiele von Gebieten aus $\Cont^{k,\alpha}$
+
+\begin{satz}[Gauß'scher Integralsatz]
+  Sei $\Omega \subset \R^n$ ein Lipschitz-Gebiet und $u \in \Cont(\clos{\Omega}, \R^n) \cap \Cont^1(\Omega, \R^n)$.
+  Dann gilt
+  \[ \Int{\Omega}{}{\div u}{x} \Int{\Omega}{}{\sum_{i=1}^n \tfrac{\partial u_i}{\partial x_i}}{x} = \Int{\partial \Omega}{}{\sum_{i=1}^n u_i \nu_i}{\rho(x)} = \Int{\partial \Omega}{}{u \cdot \nu}{\rho(x)}, \]
+  wobei $\nu = (\nu_1, \ldots, \nu_n)$ der äußere Normalenvektoran an den RAnd von $\Omega$ ist.
+\end{satz}
+
+% TODO: Klammer um die Gleichungen, Beschriftung: "(RWP)"
+\begin{align*}
+  \mathcal{L} u &= f \text{in $\Omega$ (PDE)} \\
+  \mathcal{R} u &= g \text{auf $\partial \Omega$ (Randbedingung)}
+\end{align*}
+wobei $\mathcal{L} u = - \sum_{i,j=1}^n a_{ij}(x) \frac{\partial^2 u}{\partial x_i \partial x_j} + \sum_{i=1}^n b_i(x) \frac{\partial u}{\partial x_i} + c(x) u$ (linearer Differentialoperator)
+mit $a_{ij}, b_i, c, f : \Omega \to \R$, $g : \partial \Omega \to \R$, $A(x) \coloneqq (a_{ij}(x))_{i,j}$ symmetrisch. \\
+
+Randbedingungen:
+\begin{itemize}
+  \item \emph{Dirichlet-Randbedingung}: $u = g$ auf $\partial \Omega$
+  \item \emph{Neumann-Randbedingung}: $(A(x) \nabla u) \cdot \nu = g$ auf $\partial \Omega$
+  \item \emph{Robin-Randbedingung}: $A(x) \nabla u \cdot \nu + \delta u = g$ auf $\partial \Omega$
+\end{itemize}
+
+\begin{bem}
+  Man kann auch auf verschiedenen Teilstücken des Randes verschiedene Bedingungen stellen.
+\end{bem}
+
+\begin{bem}
+  Falls $a_{ij}$ differenzierbar sind, kann $\mathcal{L}$ in Divergenzform geschrieben werden:
+  \[
+    \mathcal{L} u
+    = - \sum_{i,j=1}^n a_{ij}(x) \frac{\partial^2 u}{\partial x_i \partial x_j} + \sum_{i=1}^n b_i(x) \frac{\partial u}{\partial x_i} + c(x) u 
+    = - \sum_{i,j=1}^n \left( \frac{\partial}{\partial x_j} \left( a_{ij}(x) \frac{\partial u}{\partial x_i} \right) - \left( \tfrac{\partial}{\partial x_j} a_{ij}(x) \right) \frac{\partial u}{\partial x_i} \right) + \sum_{i=1}^n b_i(x) \frac{\partial u}{\partial x_i} + c(x) u
+    = - \sum_{i,j=1}^n \frac{\partial}{\partial x_j} \left( a_{ij}(x) \frac{\partial u}{\partial x_i} \right) + \sum_{i=1}^n \left( \left( \sum_{j=1}^n \frac{\partial}{\partial x_j} a_{ij}(x) \right) + b_i(x) \right) \frac{\partial u}{\partial x_i} + c(x) u = - \div(A(x) \nabla u) + \tilde{b}(x) \cdot \nabla u + c(x) u
+  \]
+\end{bem}
+% \tilde{b}_i(x) ist der Term in Klammern im mittleren Term
+
+% TODO: \nabla ~> \grad
+
+% TODO: Divergenz-makro
+
+Voraussetzungen:
+
+\begin{itemize}
+  \item $\mathcal{L}$ ist \emph{gleichmäßig elliptisch}, \dh{}
+  \[ \exists{\lambda_0 > 0} \fa{\xi \in \R^n} \fa{x \in \Omega} \xi^T A(x) \xi \geq \lambda_0 \norm{\xi}^2 \]
+  Dabei heißt $\lambda_0$ \emph{Elliptizitätskonstante}
+  Bemerkung: $\mathcal{L} = f$ ist elliptisch auf $\Omega$ $\iff$ $A(x) > 0$ (spd) für alle $x \in \Omega$
+  \item $a_{ij}, b_i, c, f \in \Cont(\clos{\Omega})$, $g \in \Cont(\partial \Omega)$
+\end{itemize}
+
+\begin{defn}
+  Eine Funktion $u \in \Cont^2(\Omega) \cap \Cont(\clos{\Omega})$ heißt \emph{klassische Lsg} vom (RWP) mit $Ru \coloneqq u$, wenn die beiden Gleichungen in (RWP) in jedem Punkt von $\Omega$ bzw. des Randes $\partial \Omega$ erfüllt sind.
+\end{defn}
+
+% 2.1
+\begin{satz}[Maximumsprinzip]
+  Sei $\Omega \subset \R^n$ offen, zusammenhängend und beschränkt.
+  Sei $u \in \Cont^2(\omega) \cap \Cont(\clos{\Omega})$ eine Lösung vom (RWP) und $f \leq 0$ in $\Omega$ und $c \equiv 0$. Dann nimmt $u$ sein Maximum auf dem Rand $\partial \Omega$ an, \dh{}
+  \[ \sup_{x \in \clos{\Omega}} u(x) = \sup_{x \in \partial \Omega} u(x) = \sup_{x \in \partial \Omega} g(x) \]
+\end{satz}
 
 \end{document}
