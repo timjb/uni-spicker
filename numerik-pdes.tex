@@ -10,6 +10,10 @@
 
 \newcommand{\Cont}{\mathcal{C}} % Menge der stetigen/diff'baren Funktionen
 \newcommand{\clos}[1]{\overline{#1}} % topologischer Abschluss
+\newcommand{\cOmega}{\clos{\Omega}} % weil's so häufig gebraucht wird
+\newcommand{\bOmega}{\partial \Omega} % weil's so häufig gebraucht wird
+\renewcommand{\L}{\mathcal{L}} % Lösungsoperator
+\newcommand{\Laplace}{\Delta}
 
 \begin{document}
 
@@ -85,22 +89,22 @@
 \begin{defn}
   Sei $\Omega \subset \R^n$ offen, zusammenhängend und beschränkt.
   \begin{itemize}
-    \item $\Cont(\clos{\Omega}, \R^m)$ ist der Raum aller auf $\clos{\Omega}$ stetigen Funktionen $u : \Omega \to \R^m$, $\Cont(\clos{\Omega}) \coloneqq \Cont(\clos{\Omega}, \R)$, $\norm{u}_{\Cont(\clos{\Omega}, \R^m)} = \sup_{x \in \clos{\Omega}} \norm{u(x)}$.
-    (Damit wird $(\Cont(\clos{\Omega}, \R^m), \norm{\blank}_{\Cont(\clos{\Omega}, \R^m)})$ zu einem Banach-Raum.)
-    \item $\Cont^k(\clos{\Omega}, \R^m)$, $k \in \N$ ist der Raum aller auf $\Omega$ $k$-mal stetig diff'baren Funktionen $u : \Omega \to \R^m$, die zusammen mit ihren Ableitungen bis zur Ordnung $k$ stetig auf $\clos{\Omega}$ fortgesetzt werden können.
+    \item $\Cont(\cOmega, \R^m)$ ist der Raum aller auf $\cOmega$ stetigen Funktionen $u : \Omega \to \R^m$, $\Cont(\cOmega) \coloneqq \Cont(\cOmega, \R)$, $\norm{u}_{\Cont(\cOmega, \R^m)} = \sup_{x \in \cOmega} \norm{u(x)}$.
+    (Damit wird $(\Cont(\cOmega, \R^m), \norm{\blank}_{\Cont(\cOmega, \R^m)})$ zu einem Banach-Raum.)
+    \item $\Cont^k(\cOmega, \R^m)$, $k \in \N$ ist der Raum aller auf $\Omega$ $k$-mal stetig diff'baren Funktionen $u : \Omega \to \R^m$, die zusammen mit ihren Ableitungen bis zur Ordnung $k$ stetig auf $\cOmega$ fortgesetzt werden können.
     \[ \norm{u}_{\Cont^k(\overline{\Omega}, \R^m)} = \sum_{\abs{\alpha} \leq k} \norm{D^\alpha u}_{\Cont(\overline{\Omega}, \R^m)} \]
     % ist wieder ein Banachraum
-    \item $\Cont^{0,\alpha}(\clos{\Omega}, \R^m) = \Set{u \in \Cont(\clos{\Omega}, \R^m)}{H_\alpha(u, \clos{\Omega}) \coloneqq \sup_{x, y \in \clos{\Omega}, x \neq y} \frac{\norm{u(x)-u(y)}}{\norm{x-y}^\alpha} < \infty}$ heißt \emph{Raum aller gleichmäßig Hölder-stetigen Funktionen zum Exponent $\alpha \in \cointerval{0}{1}$}.
+    \item $\Cont^{0,\alpha}(\cOmega, \R^m) = \Set{u \in \Cont(\cOmega, \R^m)}{H_\alpha(u, \cOmega) \coloneqq \sup_{x, y \in \cOmega, x \neq y} \frac{\norm{u(x)-u(y)}}{\norm{x-y}^\alpha} < \infty}$ heißt \emph{Raum aller gleichmäßig Hölder-stetigen Funktionen zum Exponent $\alpha \in \cointerval{0}{1}$}.
   \end{itemize}
 \end{defn}
 
 \begin{bem}
   \begin{itemize}
-    \item $\Cont^{0,1}(\clos{\Omega}, \R^m)$ heißt \emph{Raum der Lipschitz-stetigen Funktionen},
+    \item $\Cont^{0,1}(\cOmega, \R^m)$ heißt \emph{Raum der Lipschitz-stetigen Funktionen},
     \item Jede Hölder-stetige Funktion ist gleichmäßig stetig
-    \item $\Cont^{k,\alpha}(\clos{\Omega}, \R^m) \coloneqq \Set{u \in \Cont^k(\clos{\Omega}, \R^m)}{\fa{\abs{\gamma} = k} D^\gamma u \in \Cont^{0, \alpha}(\clos{\Omega}, \R^m)}$
-    \[ \norm{u}_{\Cont^{k,\alpha}(\clos{\Omega}, \R^m)} \coloneqq \norm{u}_{\Cont^k(\clos{\Omega}, \R^m)} + \sum_{\abs{\gamma} = k} H_\alpha(D^\gamma u, \clos{\Omega}) \]
-    Damit wird $(\Cont^{k,\alpha}(\clos{\Omega}, \R^m), \norm{\blank}_{\Cont^{k,\alpha}(\clos{\Omega}, \R^m)})$ zu einem Banach-Raum.
+    \item $\Cont^{k,\alpha}(\cOmega, \R^m) \coloneqq \Set{u \in \Cont^k(\cOmega, \R^m)}{\fa{\abs{\gamma} = k} D^\gamma u \in \Cont^{0, \alpha}(\cOmega, \R^m)}$
+    \[ \norm{u}_{\Cont^{k,\alpha}(\cOmega, \R^m)} \coloneqq \norm{u}_{\Cont^k(\cOmega, \R^m)} + \sum_{\abs{\gamma} = k} H_\alpha(D^\gamma u, \cOmega) \]
+    Damit wird $(\Cont^{k,\alpha}(\cOmega, \R^m), \norm{\blank}_{\Cont^{k,\alpha}(\cOmega, \R^m)})$ zu einem Banach-Raum.
   \end{itemize}
 \end{bem}
 
@@ -112,31 +116,31 @@
 
 \begin{defn}
   Sei $\Omega \subset \R^n$ offen, zusammenhängend und beschränkt.
-  Das Gebiet $\Omega$ gehört zur Klasse $\Cont^{k,\alpha}$, wenn in jedem Punkt $x \in \partial \Omega$ eine Umgebung in $\partial \Omega$ existiert, die sich in einem geeigneten Koordinatensystem als ein Graph einer Funktion aus $\Cont^{k,\alpha}$ darstellen lässt und $\Omega$ liegt lokal immer auf einer Seite von $\partial \Omega$.
+  Das Gebiet $\Omega$ gehört zur Klasse $\Cont^{k,\alpha}$, wenn in jedem Punkt $x \in \bOmega$ eine Umgebung in $\bOmega$ existiert, die sich in einem geeigneten Koordinatensystem als ein Graph einer Funktion aus $\Cont^{k,\alpha}$ darstellen lässt und $\Omega$ liegt lokal immer auf einer Seite von $\bOmega$.
 \end{defn}
 
 % Ausgelassen: Beispiele und Gegenbeispiele von Gebieten aus $\Cont^{k,\alpha}$
 
 \begin{satz}[Gauß'scher Integralsatz]
-  Sei $\Omega \subset \R^n$ ein Lipschitz-Gebiet und $u \in \Cont(\clos{\Omega}, \R^n) \cap \Cont^1(\Omega, \R^n)$.
+  Sei $\Omega \subset \R^n$ ein Lipschitz-Gebiet und $u \in \Cont(\cOmega, \R^n) \cap \Cont^1(\Omega, \R^n)$.
   Dann gilt
-  \[ \Int{\Omega}{}{\div u}{x} \Int{\Omega}{}{\sum_{i=1}^n \tfrac{\partial u_i}{\partial x_i}}{x} = \Int{\partial \Omega}{}{\sum_{i=1}^n u_i \nu_i}{\rho(x)} = \Int{\partial \Omega}{}{u \cdot \nu}{\rho(x)}, \]
+  \[ \Int{\Omega}{}{\div u}{x} \Int{\Omega}{}{\sum_{i=1}^n \tfrac{\partial u_i}{\partial x_i}}{x} = \Int{\bOmega}{}{\sum_{i=1}^n u_i \nu_i}{\rho(x)} = \Int{\bOmega}{}{u \cdot \nu}{\rho(x)}, \]
   wobei $\nu = (\nu_1, \ldots, \nu_n)$ der äußere Normalenvektoran an den RAnd von $\Omega$ ist.
 \end{satz}
 
 % TODO: Klammer um die Gleichungen, Beschriftung: "(RWP)"
 \begin{align*}
-  \mathcal{L} u &= f \text{in $\Omega$ (PDE)} \\
-  \mathcal{R} u &= g \text{auf $\partial \Omega$ (Randbedingung)}
+  \L u &= f \text{in $\Omega$ (PDE)} \\
+  \mathcal{R} u &= g \text{auf $\bOmega$ (Randbedingung)}
 \end{align*}
-wobei $\mathcal{L} u = - \sum_{i,j=1}^n a_{ij}(x) \frac{\partial^2 u}{\partial x_i \partial x_j} + \sum_{i=1}^n b_i(x) \frac{\partial u}{\partial x_i} + c(x) u$ (linearer Differentialoperator)
-mit $a_{ij}, b_i, c, f : \Omega \to \R$, $g : \partial \Omega \to \R$, $A(x) \coloneqq (a_{ij}(x))_{i,j}$ symmetrisch. \\
+wobei $\L u = - \sum_{i,j=1}^n a_{ij}(x) \frac{\partial^2 u}{\partial x_i \partial x_j} + \sum_{i=1}^n b_i(x) \frac{\partial u}{\partial x_i} + c(x) u$ (linearer Differentialoperator)
+mit $a_{ij}, b_i, c, f : \Omega \to \R$, $g : \bOmega \to \R$, $A(x) \coloneqq (a_{ij}(x))_{i,j}$ symmetrisch. \\
 
 Randbedingungen:
 \begin{itemize}
-  \item \emph{Dirichlet-Randbedingung}: $u = g$ auf $\partial \Omega$
-  \item \emph{Neumann-Randbedingung}: $(A(x) \nabla u) \cdot \nu = g$ auf $\partial \Omega$
-  \item \emph{Robin-Randbedingung}: $A(x) \nabla u \cdot \nu + \delta u = g$ auf $\partial \Omega$
+  \item \emph{Dirichlet-Randbedingung}: $u = g$ auf $\bOmega$
+  \item \emph{Neumann-Randbedingung}: $(A(x) \nabla u) \cdot \nu = g$ auf $\bOmega$
+  \item \emph{Robin-Randbedingung}: $A(x) \nabla u \cdot \nu + \delta u = g$ auf $\bOmega$
 \end{itemize}
 
 \begin{bem}
@@ -144,9 +148,9 @@ Randbedingungen:
 \end{bem}
 
 \begin{bem}
-  Falls $a_{ij}$ differenzierbar sind, kann $\mathcal{L}$ in Divergenzform geschrieben werden:
+  Falls $a_{ij}$ differenzierbar sind, kann $\L$ in Divergenzform geschrieben werden:
   \[
-    \mathcal{L} u
+    \L u
     = - \sum_{i,j=1}^n a_{ij}(x) \frac{\partial^2 u}{\partial x_i \partial x_j} + \sum_{i=1}^n b_i(x) \frac{\partial u}{\partial x_i} + c(x) u 
     = - \sum_{i,j=1}^n \left( \frac{\partial}{\partial x_j} \left( a_{ij}(x) \frac{\partial u}{\partial x_i} \right) - \left( \tfrac{\partial}{\partial x_j} a_{ij}(x) \right) \frac{\partial u}{\partial x_i} \right) + \sum_{i=1}^n b_i(x) \frac{\partial u}{\partial x_i} + c(x) u
     = - \sum_{i,j=1}^n \frac{\partial}{\partial x_j} \left( a_{ij}(x) \frac{\partial u}{\partial x_i} \right) + \sum_{i=1}^n \left( \left( \sum_{j=1}^n \frac{\partial}{\partial x_j} a_{ij}(x) \right) + b_i(x) \right) \frac{\partial u}{\partial x_i} + c(x) u = - \div(A(x) \nabla u) + \tilde{b}(x) \cdot \nabla u + c(x) u
@@ -161,22 +165,125 @@ Randbedingungen:
 Voraussetzungen:
 
 \begin{itemize}
-  \item $\mathcal{L}$ ist \emph{gleichmäßig elliptisch}, \dh{}
+  \item $\L$ ist \emph{gleichmäßig elliptisch}, \dh{}
   \[ \exists{\lambda_0 > 0} \fa{\xi \in \R^n} \fa{x \in \Omega} \xi^T A(x) \xi \geq \lambda_0 \norm{\xi}^2 \]
   Dabei heißt $\lambda_0$ \emph{Elliptizitätskonstante}
-  Bemerkung: $\mathcal{L} = f$ ist elliptisch auf $\Omega$ $\iff$ $A(x) > 0$ (spd) für alle $x \in \Omega$
-  \item $a_{ij}, b_i, c, f \in \Cont(\clos{\Omega})$, $g \in \Cont(\partial \Omega)$
+  Bemerkung: $\L = f$ ist elliptisch auf $\Omega$ $\iff$ $A(x) > 0$ (spd) für alle $x \in \Omega$
+  \item $a_{ij}, b_i, c, f \in \Cont(\cOmega)$, $g \in \Cont(\bOmega)$
 \end{itemize}
 
 \begin{defn}
-  Eine Funktion $u \in \Cont^2(\Omega) \cap \Cont(\clos{\Omega})$ heißt \emph{klassische Lsg} vom (RWP) mit $Ru \coloneqq u$, wenn die beiden Gleichungen in (RWP) in jedem Punkt von $\Omega$ bzw. des Randes $\partial \Omega$ erfüllt sind.
+  Eine Funktion $u \in \Cont^2(\Omega) \cap \Cont(\cOmega)$ heißt \emph{klassische Lsg} vom (RWP) mit $Ru \coloneqq u$, wenn die beiden Gleichungen in (RWP) in jedem Punkt von $\Omega$ bzw. des Randes $\bOmega$ erfüllt sind.
 \end{defn}
 
 % 2.1
-\begin{satz}[Maximumsprinzip]
+\begin{satz}[\emph{Maximumsprinzip}]
   Sei $\Omega \subset \R^n$ offen, zusammenhängend und beschränkt.
-  Sei $u \in \Cont^2(\omega) \cap \Cont(\clos{\Omega})$ eine Lösung vom (RWP) und $f \leq 0$ in $\Omega$ und $c \equiv 0$. Dann nimmt $u$ sein Maximum auf dem Rand $\partial \Omega$ an, \dh{}
-  \[ \sup_{x \in \clos{\Omega}} u(x) = \sup_{x \in \partial \Omega} u(x) = \sup_{x \in \partial \Omega} g(x) \]
+  Sei $u \in \Cont^2(\omega) \cap \Cont(\cOmega)$ eine Lösung vom (RWP) und $f \leq 0$ in $\Omega$ und $c \equiv 0$. Dann nimmt $u$ sein Maximum auf dem Rand $\bOmega$ an, \dh{}
+  \[ \sup_{x \in \cOmega} u(x) = \sup_{x \in \bOmega} u(x) = \sup_{x \in \bOmega} g(x) \]
 \end{satz}
+
+% Vorlesung vom 20.10.2015
+
+% 2.2
+\begin{kor}
+  Sei $c \geq 0$ und $f \leq 0$.
+  Dann gilt
+  \[ \sup_{x \in \cOmega} u(x) \leq \max \{ \sup_{x \in \bOmega} u(x), 0 \}. \]
+\end{kor}
+
+% 2.3
+\begin{kor}[\emph{Vergleichsprinzip}]
+  Für $u_1, u_2 \in \Cont^2(\Omega) \cap \Cont(\cOmega)$ und $c \geq 0$ gelte $\L u_1 \leq \L u_2$ in $\Omega$ und $u_1 \leq u_2$ auf $\bOmega$.
+  Dann gilt $u_1 \leq u_2$ auf $\cOmega$.
+\end{kor}
+
+% 2.4
+\begin{kor}[Eindeutigkeit]
+  Sei $c \geq 0$. Dann hat (RWP) höchstens eine Lösung $u \in \Cont^2(\Omega) \cap \Cont(\cOmega)$.
+\end{kor}
+
+\begin{bsp}
+  % TODO: geschweifte Klammern
+  $-u'' - \lambda u = 0$ in $\Omega = \ointerval{0}{1}$ mit $\lambda > 0$, $u(0) = u(1) = 0$.
+  1) $u \equiv 0$ ist eine Lösung \\
+  2) Für $\lambda = k^2 \pi^2$ ist $u(x) = a \sin(k \pi x)$ auch eine Lösung
+\end{bsp}
+
+% 2.5
+\begin{satz}
+  Sei $\Omega$ ein beschränktes Lipschitz-Gebiet, $a_{ij}, b_i, c, f \in \Cont(\cOmega)$, $c \geq 0$, $g \in \Cont(\bOmega)$.
+  Dann besitzt (RWP) genau eine Lösung $u \in \Cont^2(\Omega) \cap \Cont(\cOmega)$.
+\end{satz}
+
+% Beweis siehe J.H.Michael, "A general theory for linear elliptic partial differential equations", 1977
+
+\begin{bspe}
+  \begin{itemize}
+    \item $- \Laplace u = 0$ in $\ointerval{0}{1} \times \ointerval{0}{1}$, $u(0, x_2) = 0$, $u(1, x_2) = x_2$, $u(x_1, 0) = 0$, $u(x_1, 1) = x_1$ für $x_1, x_2 \in \cinterval{0}{1}$.
+    Lösung: $u(x_1, x_2) = x_1 x_2$
+    % TODO: geschweifte Klammern
+    \item $- \Laplace u = 0$ in $\Omega = \ointerval{0}{1} \times \ointerval{0}{1}$,
+    $u(x_1, x_2) = x_1^2$.
+    Nach Satz 2.5 existiert eine Lösung $u \in \Cont^2(\Omega) \cap \Cont(\cOmega)$ aber $u \not\in \Cont^2(\cOmega)$, denn
+    \[ \frac{\partial^2 u}{\partial x_1^2} + \frac{\partial^2 u}{\partial x_2^2} = 2 \neq 0 \] auf $\bOmega$.
+  \end{itemize}
+\end{bspe}
+
+% 3. Differenzenverfahren
+\section{Differenzenverfahren}
+
+3.1. Differenzenverfahren für die Poisson-Gleichung in $\Omega = \ointerval{0}{1}$
+
+Poisson-Problem:
+
+$- \Laplace u = f in \Omega = \ointerval{0}{1}$ \\
+$u(0) = g_0, u(1) = g_1$
+
+\begin{alg}
+  \begin{enumerate}
+    \item Diskretisierung: Sei $n \in \N$, $h \coloneqq \tfrac{1}{n}$, $\Omega_h \coloneqq \Set{x_i \coloneqq ih}{i = 1, \ldots, n-1}$ die Menge innerer Gitterpunkte, $\partial \Omega_h = \{ x_0 = 0, x_n = 1 \}$ die Menge der Randpunkte
+    \item Approximation der Ableitungen durch Differenzenquotienten
+    \begin{align*}
+      u'(x_i) \approx \tfrac{1}{h} \left(u(x_i + h) - u(x_i)\right)
+      u'(x_i) \approx \tfrac{1}{h} \left(u(x_i) - u(x_i - h)\right)
+      u'(x_i) \approx \tfrac{1}{2h} \left(u(x_i + h) - u(x_i - h)\right)
+    \end{align*}
+    heißen \emph{Vorwärtsdifferenzenquotient} (VDQ), \emph{Rückwärtsdifferenzenquotient} (RDQ) bzw. \emph{zentraler Differenzenquotient} (ZDQ)
+    \[ u''(x_i) = (u'(x_i)) \approx \frac{u'(x_i + h) - u'(x_i)}{h} \approx \frac{\tfrac{1}{h} \left( u(x_i + h) - x(x_i) \right) - \tfrac{1}{h} \left( u(x_i) - u(x_i - h) \right)}{h} = \tfrac{1}{h^2} \left( u(x_i + h) - 2 \cdot u(x_i) + u(x_i - h) =: \Laplace_h u \right) \]
+    wobei $\Laplace_h u$ der diskrete 1D-Laplace-Operator ist.
+    
+    Das diskretisierte Randwertproblem ist
+    $- \Laplace_h u_h = f$ in $\Omega_h$, \\
+    $u_h(0) = g_0$, $u_h(1) = g_1$
+    \item Aufstellen des linearen Gleichungssystems
+    $i=1$ $- \tfrac{- u_h(x_0)}{h^2} + \tfrac{2}{h^2} u_h(x_1) - \tfrac{1}{h^2} u_h(x_2) = f(x_1)$, also $\tfrac{2}{h^2} u_h(x_1) - \tfrac{1}{h^2} u_h(x_2) = f(x_1) - \tfrac{g_0}{h^2}$ \\
+    $i=2, \ldots, n-2$: $- \tfrac{1}{h^2} u_h(x_{i-1}) + \tfrac{2}{h^2} u_h(x_i) - \tfrac{1}{h^2} u_h(x_{i+1}) = f(x_i)$ \\
+    $i = n-1$: $- \tfrac{1}{h^2} u_h(x_n-2) + \tfrac{2}{h^2} u_h(x_{n-1}) - \tfrac{1}{h^2} u_h(x_n) = f(x_{n-1})$, also $- \tfrac{1}{h^2} u_h(x_{n-2}) + \tfrac{2}{h^2} u_h(x_{n-1}) = f(x_{n-1}) + \tfrac{g_1}{h^2}$.
+    
+    Als lineares Gleichungssystem: $- \tilde{\Laplace}_h \tilde{u}_h = \tilde{f}_h$ mit
+    \[
+      - \tilde{\Laplace}_h = \tfrac{1}{h^2} \begin{pmatrix}
+        2 & -1 & 0 & \ldots & \ldots & 0 \\
+        -1 & 2 & -1 & 0 & \ldots & 0 \\
+        &&&& -1 & 2
+      \end{pmatrix}
+    \]
+    \[
+      \tilde{u}_h = \begin{pmatrix}
+        u_h(x_1) \\ \vdots \\ u_h(v_{n-1})
+      \end{pmatrix}
+    \]
+    \[
+      \tilde{f}_h = \begin{pmatrix}
+        f(x_1) + \tfrac{g_0}{h^2} \\
+        f(x_2) \\
+        \vdots \\
+        f(x_{n-2}) \\
+        f(x_{n-1}) + \tfrac{g_1}{h^2}
+      \end{pmatrix}
+    \]
+  \end{enumerate}
+\end{alg}
 
 \end{document}
