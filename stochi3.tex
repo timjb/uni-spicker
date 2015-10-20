@@ -6,11 +6,12 @@
 }
 
 \usepackage{bbm} % Für 1 mit Doppelstrich (Indikatorfunktion)
+\usepackage{mathtools} % psmallmatrix environment
 
 % Kleinere Klammern
 \delimiterfactor=701
 
-%\newcommand{\Alg}{\mathfrak{A}} % (Mengen-)Algebra
+\newcommand{\Alg}{\mathfrak{A}} % (Mengen-)Algebra
 %\newcommand{\Ring}{\mathfrak{R}} % (Mengen-)Ring
 %\newcommand{\LebAlg}{\mathfrak{L}} % Lebesgue-Borel-Mengen
 \renewcommand{\P}{\mathbb{P}} % Wahrscheinlichkeitsmaß
@@ -130,11 +131,11 @@
 
 \begin{bsp}
   Sei $X \sim \Normal(\mu, \sigma^2)$, $\sigma$ bekannt und $\alpha \in \ointerval{0}{1}$ vorgegeben. \\
-  Zum Test der Nullhypothese $H_0 : \mu = \mu_0$ wählen wir als Statistik
+  Zum Test von $H_0 : \mu = \mu_0$ vs. $H_1 : \mu \neq \mu_0$ wählen wir als Statistik
   \[
-    T(X_1, \ldots, X_n) \coloneqq \tfrac{\sqrt{n}}{\sigma} \left( \overline{X_n} - \mu_0 \right) \enspace
+    T(X_1, \ldots, X_n) \coloneqq \tfrac{\sqrt{n}}{\sigma} \left( \overline{X}_n - \mu_0 \right) \enspace
     \text{mit }
-    \overline{X_n} \coloneqq \tfrac{1}{n} \left( X_1 + \ldots + X_n \right).
+    \overline{X}_n \coloneqq \tfrac{1}{n} \left( X_1 + \ldots + X_n \right).
   \]
   Unter Annahme von $H_0$ gilt $T(X_1, \ldots, X_n) \sim \Normal(0,1)$. \\
   Der Ablehnungsbereich der Statistik ist
@@ -153,27 +154,28 @@
   \begin{align*}
     t \in (K_n^T)^c
     &\iff \abs{t} \leq z_{1-\alpha/2}
-    \iff \abs{\overline{X_n} - \mu_0} \leq \tfrac{\sigma}{\sqrt{n}} z_{1-\alpha/2} \\
-    &\iff \mu_0 \in \cinterval{\overline{X_n} - \tfrac{\sigma}{\sqrt{n}} z_{1-\alpha/2}}{\overline{X_n} + \tfrac{\sigma}{\sqrt{n}} z_{1-\alpha/2}}.
+    \iff \abs{\overline{X}_n - \mu_0} \leq \tfrac{\sigma}{\sqrt{n}} z_{1-\alpha/2} \\
+    &\iff \mu_0 \in \cinterval{\overline{X}_n - \tfrac{\sigma}{\sqrt{n}} z_{1-\alpha/2}}{\overline{X}_n + \tfrac{\sigma}{\sqrt{n}} z_{1-\alpha/2}}.
   \end{align*}
   Letzteres Intervall wird \emph{Konfidenzintervall} für $\mu_0$ zum Konfidenz- niveau $1-\alpha$ genannt.
 \end{bem}
 
 \begin{bsp}
-  Sei wieder $X \sim \Normal(\mu, \sigma^2)$, $\sigma^2$ aber diesmal unbekannt.
+  Sei wieder $X \sim \Normal(\mu, \sigma^2)$, $\sigma^2$ aber diesmal unbekannt. \\
+  Zum Testen von $H_0 : \mu = \mu_0$ vs. $H_1 : \mu \neq \mu_0$ verwenden wir
   \[
-    \hat{T}(X_1, \ldots, X_n) = \tfrac{\sqrt{n}}{S_n} \left( \overline{X_n} - \mu_0 \right), \quad
-    S_n^2 \coloneqq \tfrac{1}{n-1} \sum_{i=1}^n \left( X_i - \overline{X_n} \right)^2
+    \hat{T}(X_1, \ldots, X_n) = \tfrac{\sqrt{n}}{S_n} \left( \overline{X}_n - \mu_0 \right), \quad
+    S_n^2 \coloneqq \tfrac{1}{n-1} \sum_{i=1}^n \left( X_i - \overline{X}_n \right)^2.
   \]
   Dabei ist $S_n$ die \emph{(korrigierte) Stichprobenvarianz}.
-  Man kann zeigen, dass $\hat{T}(X_1, \ldots, X_n) \sim t_{n-1}$.
-  Dabei ist $t_m$ die \emph{Student'sche $t$-Verteilung} mit $m$ Freiheitsgraden.
+  Man kann zeigen, dass $\hat{T}(X_1, \ldots, X_n) \sim t_{n-1}$ unter $H_0$.
+  Dabei ist $t_m$ die \emph{Student'sche $t$-Verteilung} mit $m$ Freiheitsgraden. \\
   Der Ablehnungsbereich ist
   \[ K_n^T = \Set{t \in \R^1}{\abs{t} > t_{n-1,1-\alpha/2}}. \]
 \end{bsp}
 
 \begin{bem}
-  $S_n^2$ und $\overline{X_n}$ sind unabhängig für $n \geq 2$. % und umgekehrt?
+  $S_n^2$ und $\overline{X}_n$ sind unabhängig für $n \geq 2$. % und umgekehrt?
 \end{bem}
 
 \begin{diskussion}
@@ -181,7 +183,7 @@
     \item Je kleiner $\alpha$ ist, desto "`nullhypothesenfreundlicher"' ist der Test.
     Häufig verwendet wird $\alpha \in \{ 10\%, 5\%, 1\%, 0,5\% \}$.
     \item Einseitige Tests: Die Gegenhypothese zu $H_0 \!:\! \mu \!=\! \mu_0$ ist $H_1 \!:\! \mu \!>\! \mu_0$.
-    Die Nullhypothese wird nur abgelehnt, falls zu große Stichproben- mittelwerte $\overline{x_n}$ vorliegen. Es ist dann $K_n^T = \ointerval{z_{1-\alpha}}{\infty}$.
+    Die Nullhypothese wird nur abgelehnt, falls zu große Stichproben- mittelwerte $\overline{x}_n$ vorliegen. Es ist dann $K_n^T = \ointerval{z_{1-\alpha}}{\infty}$.
   \end{itemize}
 \end{diskussion}
 
@@ -213,5 +215,78 @@
   \emph{F-verteilt} (wie Fisher) mit $(n_1, n_2)$ Freiheitsgraden.
   % auch: Suedecor-verteilt
 \end{defn}
+
+% Vorlesung vom 19.10.2015
+
+\begin{bsp}
+  Sei $X \sim \Normal(\mu, \sigma^2)$ mit $\mu$ unbekannt.
+  Wir testen $H_0 : \sigma = \sigma_0$ vs. $H_1 : \sigma \neq \sigma_0$ mit
+  \[ T \coloneqq \tfrac{n-1}{\sigma_0^2} S_n^2 \]
+  Unter Annahme von $H_0$ gilt $T ~ \chi_{n-1}^2$.
+  Falls $\mu$ bekannt ist, muss man
+  \[
+    \widetilde{T} \coloneqq \tfrac{n}{\sigma_0^2} \widetilde{S}_n^2, \quad
+    \widetilde{S}_n^2 \coloneqq \tfrac{1}{n} \sum_{i=1}^n (X_i - \mu)^2.
+  \]
+  als Statistik wählen. Unter Annahme von $H_0$ ist $\widetilde{T} \sim \chi_n^2$.
+\end{bsp}
+
+\begin{bsp}
+  Seien Stichproben $X_1^{(1)}, \ldots, X_{n_1}^{(1)} \sim \Normal(\mu_1, \sigma_1^2)$ und $X_1^{(2)}, \ldots, X_{n_2}^{(2)} \sim \Normal(\mu_2, \sigma_2^2)$ gegeben.
+  Wir wollen $H_0 : \sigma_1 = \sigma_2$ gegen $H_1 : \sigma_1 \neq \sigma_2$ testen.
+  Dazu verwenden wir
+  \[
+    T = \frac{S_{X^{(1)}}^2}{S_{X^{(2)}}^2}, \quad
+    S_{X^{(j)}}^2 \coloneqq \tfrac{1}{n-1} \sum_{i=1}^{n_j} \left( X_i^{(j)} - \overline{X}^{(j)}_n \right)^n.
+  \]
+  Falls $H_0$ gilt, so ist $T \sim F_{n_1-1,n_2-1}$.
+\end{bsp}
+
+\begin{bsp}
+  Situation wie im letzten Beispiel mit $\sigma_1 = \sigma_2$.
+  Wir testen $H_0 : \mu_1 = \mu_2$ vs. $H_1 : \mu_1 \neq \mu_2$ mit
+  \[
+    T = \sqrt{\frac{n_1 \cdot n_2}{n_1 + n_2}} \cdot \frac{\overline{X}_{n_1}^{(1)} - \overline{X}_{n_2}^{(2)}}{S_{n_1,n_2}}, \quad
+    S_{n_1,n_2}^2 = \frac{(n_1{-}1) S_{X^{(1)}}^2 + (n_2{-}1) S_{X^{(2)}}^2}{n_1 + n_2 - 2}
+  \]
+  Unter $H_0$ gilt $T \sim t_{n_1 + n_2 - 2}$.
+\end{bsp}
+
+\begin{bsp}
+  Seien $\begin{psmallmatrix} X_1 \\ Y_1 \end{psmallmatrix}, \ldots, \begin{psmallmatrix} X_n \\ Y_n \end{psmallmatrix} \sim \Normal\left(
+    \begin{psmallmatrix}
+      \mu_1\vphantom{\sigma_1^2} \\
+      \mu_2\vphantom{\sigma_2^2}
+    \end{psmallmatrix},
+    \begin{psmallmatrix}
+      \sigma_1^2 & \sigma_1 \sigma_2 \rho \\
+      \sigma_1 \sigma_2 \rho & \sigma_2^2
+    \end{psmallmatrix} \right)$. \\[2pt]
+  Wir testen $H_0 : \rho = 0$ vs. $H_1 : \rho \neq 0$ mit
+  \[
+    T \coloneqq \frac{\sqrt{n-2} \cdot \hat{\rho}_n}{\sqrt{1 - \hat{\rho}_n^2}}, \quad
+    \hat{\rho}_n \coloneqq \frac{\tfrac{1}{n-1} \sum_{i=1}^n (X_i - \overline{X}_n) (Y_i - \overline{Y}_n)}{S_{X,n} \cdot S_{Y,n}}.
+    % Nenner ausgeschrieben: \sqrt{\tfrac{1}{n-1} \sum_{i=1}^n (X_i - \overline{X}_n)^2 \tfrac{1}{n-1} \sum_{i=1}^n (Y_i - \overline{Y}_n)^2}
+  \]
+  Falls $H_0$ richtig ist, so gilt $T \sim t_{n-2}$. \\[2pt]
+  Um $H_0 : \rho = \rho_0 \in \ointerval{0}{1}$ vs. $H_1 : \rho \neq \rho_0$ zu testen, kann man
+  \[ T = \tfrac{\sqrt{n-3}}{2} \left( \log \tfrac{1 + \hat{\rho}_n}{1 - \hat{\rho}_n} - \log \tfrac{1+\rho_0}{1-\rho_0} \right) \]
+  verwenden. Für $n$ groß gilt $T \sim \Normal(0, 1)$ unter $H_0$.
+\end{bsp}
+
+% 1.4. Lemma von Slutzky und varianzstabilisiernde Transformationen
+
+\begin{lem}
+  Seien $(X_n)$, $(Y_n)$ zwei Folgen von ZGn über $(\Omega, \Alg, \P)$ mit $X_n \xrightarrow[n \to \infty]{\P} c = \text{const}$ (\dh{} $\fa{\epsilon > 0} \P(\abs{X_n - c} > \epsilon) \to 0$) und $Y_n \xrightarrow[n \to \infty]{d} Y$ (\dh{} $\P(Y_n \leq y) \to \P(Y \leq y)$ für alle Stetigkeitspunkte $y$ der VF $y \mapsto \P(Y \leq y)$). Dann:
+  \[
+    X_n + Y_n \xrightarrow{d} c + Y, \quad
+    X_n \cdot Y_n \xrightarrow{d} c \cdot Y, \quad
+    Y_n / X_n \xrightarrow{d} Y / c \enspace \text{(falls $c \neq 0$)}.
+  \]
+\end{lem}
+
+\begin{bem}
+  Unabhängigkeit von $(X_n)$ und $(Y_n)$ wird nicht vorausgesetzt!
+\end{bem}
 
 \end{document}
