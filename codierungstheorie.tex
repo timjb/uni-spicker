@@ -16,6 +16,8 @@
 \newcommand{\err}{\text{err}} % Fehler
 \newcommand{\ceil}[1]{\lceil #1 \rceil} % Aufrunden
 \newcommand{\floor}[1]{\lfloor #1 \rfloor} % Abrunden
+\DeclareMathOperator{\wt}{wt} % Hamming-Gewicht
+%\DeclareMathOperator{\supp}{supp} % Träger (support)
 
 \begin{document}
 
@@ -289,5 +291,75 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 \begin{satz}
   $A_q(n, 2) = q^{n-1}$, realisiert durch einen Code mit Prüfziffer
 \end{satz}
+
+% Vorlesung vom 20.10.2015
+% §3.3
+
+% 
+\begin{defn}
+  Sei $(G, +, 0)$ eine kommutative Gruppe.
+  Das \emph{Hamming-Gewicht} von $x \in G^n$ ist
+  \[
+    \wt(x) \coloneqq \abs{\supp(x)},
+    \quad \text{wobei} \quad
+    \supp(x) \coloneqq \Set{i}{x_i \neq 0}.
+  \]
+\end{defn}
+
+\begin{lem}
+  Sei $G$ wie oben, $x, y \in G^n$.
+  Dann $\wt(x-y) = d(x, y)$.
+\end{lem}
+
+\begin{satz}
+  $A_q(n, 2) = q^{n-1}$ für alle $q \geq 2$ und alle $n \geq 2$.
+\end{satz}
+
+\begin{proof}
+  Wir konstruieren einen $(n, q^{n-1}, 2)$-Code.
+  Sei $R$ ein kommutativer Ring mit $q$ Elementen, $\lambda_1, \ldots, \lambda_{n-1} \in R$ Einheiten und $\lambda_n \coloneqq -1$. Wir betrachten die Kontrollgleichung
+  \[
+    \kappa : R^n \to R, \quad
+    z \mapsto \lambda_1 z_1 + \ldots + \lambda_n z_n.
+  \]
+  Dann ist $C \coloneqq \ker(\kappa)$ ein 1-fehlererkennender Code.
+\end{proof}
+
+\begin{lem}
+  Falls $\lambda_2 - \lambda_1, \ldots, \lambda_n - \lambda_{n-1}$ ebenfalls Einheiten sind, so sind Nachbarvertauschungen als Fehler erkennbar.
+\end{lem}
+
+\begin{bspe}
+  \begin{itemize}
+    \item Für $q=2, R=\Z_2, \lambda_1 = \ldots = \lambda_{n-1} = 1$ heißt $C \coloneqq \ker(\kappa)$ \emph{Parity-Check-Erweiterung}.
+    \item Beim ISBN-Code ist $R \!=\! \Z_{11}$, $\lambda_1 \!=\! 1, \nldots, \lambda_9 \!=\! 9$, also $\kappa(z) = \sum_{i=1}^{10} i z_i$.
+  \end{itemize}
+\end{bspe}
+
+\begin{bem}
+  Es gilt $A_q(4,3) = q^2$ $\iff$ es gibt ein Paar orthogonaler lateinischer Quadrate der Größe $q$ $\iff$ $q \neq 2$ oder $q \neq 6$.
+\end{bem}
+
+% Betrachte nun q=2
+
+\begin{lem}
+  Für $x, y \in \Z_2^n$ gilt $d(x,y) = \wt(x) + \wt(y) - 2 \cdot \wt(x \cdot y)$.
+\end{lem}
+
+\begin{satz}
+  Für alle $n \geq 1$ und $d$ ungerade gilt $A_2(n, d) = A_2(n+1,d+1)$, realisiert durch die Parity-Check-Erweiterung.
+\end{satz}
+
+\begin{defn}
+  Zwei $(n,M)$-Codes $C$, $C'$ über $Q$ heißen \emph{äquivalent}, falls gilt:
+  Es gibt eine Permutation $\gamma$ auf $\{ 1, \ldots, n \}$ und Permutationen $\sigma_1, \ldots, \sigma_n$ auf $Q$, sodass
+  \[
+    \alpha : Q^n \to Q^n, \quad
+    (x_1, \ldots, x_n) \mapsto (\sigma_1(x_{\gamma(1)}), \ldots, \sigma_n(x_{\gamma(n)}))
+  \]
+  den Code $C$ auf $C'$ abbildet.
+\end{defn}
+
+% Ausgelassen: Beispiel
 
 \end{document}
