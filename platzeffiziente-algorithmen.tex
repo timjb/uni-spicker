@@ -59,14 +59,14 @@
       \If{$(u,v) \in E$} \Return true \EndIf
       \If{$k=1$} \Return false \EndIf
       \For{$x \in V$}
-        \If{\Call{reachable}{$u, x, \floor{\tfrac{k}{2}}$} $\wedge$ \Call{reachable}{$x, v, \ceil{\tfrac{k}{2}}$}}
+        \If{\Call{sReachable}{$u, x, \floor{\tfrac{k}{2}}$} $\wedge$ \Call{sReachable}{$x, v, \ceil{\tfrac{k}{2}}$}}
           \State \Return true
         \EndIf
       \EndFor
       \State \Return false
     \EndFunction
     \Statex
-    \State \Return reachable(s,t,n-1)
+    \State \Return sReachable(s,t,n-1)
   \end{algorithmic}
 %\end{algorithm}
 \end{alg}
@@ -128,11 +128,11 @@
         \State $color[u] \coloneqq gray$
         \State $\Call{preprocess}{u}$
         \If{$p \neq null$}
-          \State $S \Push (u, \Call{adjnext}(p))$
-          \State $v \coloneqq \Call{adjhead}(u, p)$
-          \State $\Call{preexplore}(u, v, color[v])$
-          \If{$color[v] = white$} \State $S \Push (v, \Call{adjfirst}(v))$ \EndIf
-          \State $\Call{postexplore}(u, v)$
+          \State $S \Push (u, \Call{adjnext}{p})$
+          \State $v \coloneqq \Call{adjhead}{u, p}$
+          \State $\Call{preexplore}{u, v, color[v]}$
+          \If{$color[v] = white$} \State $S \Push (v, \Call{adjfirst}{v})$ \EndIf
+          \State $\Call{postexplore}{u, v}$
         \Else
           \State $\Call{preprocess}{u}$
           \State $color[u] \coloneqq black$
