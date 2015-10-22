@@ -14,6 +14,8 @@
 \newcommand{\ceil}[1]{\lceil #1 \rceil} % Aufrunden
 \newcommand{\floor}[1]{\lfloor #1 \rfloor} % Abrunden
 \renewcommand{\O}{\mathcal{O}} % Landau-O
+\newcommand{\Push}{\Leftarrow} % etwas auf den Stack pushen
+\newcommand{\Pop}{\Leftarrow} % etwas vom Stack nehmen
 
 \begin{document}
 
@@ -57,7 +59,7 @@
       \If{$(u,v) \in E$} \Return true \EndIf
       \If{$k=1$} \Return false \EndIf
       \For{$x \in V$}
-        \If{\Call{reachable}{$u, x, \floor{\tfrac{n}{2}}$} $\wedge$ \Call{reachable}{$x, v, \ceil{\tfrac{n}{2}}$}}
+        \If{\Call{reachable}{$u, x, \floor{\tfrac{k}{2}}$} $\wedge$ \Call{reachable}{$x, v, \ceil{\tfrac{k}{2}}$}}
           \State \Return true
         \EndIf
       \EndFor
@@ -75,7 +77,85 @@
 \end{lem}
 
 \begin{bem}
-  Die Laufzeit von Savitch's Alg. ist allerding sehr schlecht.
+  Die Laufzeit von Savitch's Alg. ist allerdings sehr schlecht, im schlechtesten Fall $O(n \cdot \log n)$.
 \end{bem}
+
+% Vorlesung vom 21.10.2015
+
+% §3. The Representation of Graphs
+
+% 3.1. Adjacency Matrices and Adjacency Lists
+% und 3.2. Graph Representation with Little Memory
+
+\begin{bem}
+  Eine Darstellung eines Graphen als Adjazenzmatrix benötigt $O(n^2)$, eine Darstellung als Adjazenzliste/-array $O(m \cdot \log n)$ Bits.
+  Manchmal ist es nützlich, zusätzlich Rückwärtskanten oder Aus- und Ingrad von Knoten zu speichern, um diese Informationen nicht mehrmals berechnen zu müssen. Bei bestimmten Algorithmen werden sie auch als gegeben angenommen.
+  % Ausgelassen: 'mates', Multigraphen
+\end{bem}
+
+% 3.3 Common Input Requirements
+
+\begin{konv}
+  Wir werden folgende Graphfunktionen benutzen:
+  
+  \begin{tabular}{r l}
+    Funktion & Ergebnis \\[3pt] \hline
+    $\text{adjfirst} : V \to P$ & ersten Eintrag in der Adjazenzliste \\
+    $\text{adjhead} : P \to V$ & Knoten zum Eintrag in der Adjazenzliste \\
+    $\text{adjnext} : P \to P$ & nächsten Eintrag in der Adjazenzliste \\
+    $\text{deg} : V \to \N$ & Ausgrad eines Knoten \\
+    $\text{head} : A \to V$ & den $k$-ten Nachbar eines Knoten \\
+    $\text{tail} : B \to V$ & den $k$-ten In-Nachbar eines Knoten \\
+    $\text{mate} : A \to A$ & den "`Mate"' einer Kante (bei unger. Graphen)
+  \end{tabular}
+  \begin{align*}
+    \text{wobei} \quad
+    A &\coloneqq \Set{(v, k) \in V \times \N}{1 \leq k \leq \text{deg}(v)} \\
+    B &\coloneqq \Set{(v, k) \in V \times \N}{1 \leq k \leq \text{indeg}(v)}
+  \end{align*}
+\end{konv}
+
+% §4. Depth-First search
+
+
+\begin{alg}
+  Bei einer Tiefensuche in einem Graphen wird am meisten Platz für den Laufzeitstack verbraucht. Um diesen Platz zu optimieren, ist es geschickt, zunächst den Algorithmus mit explizitem Keller aufzuschreiben:
+  \begin{algorithmic}[1]
+    \Function{process}{$u$}
+      \State $S \Push (u, \Call{adjfirst}{u})$
+      \While{$S \neq \emptyset$}
+        \State $(u, p) \Pop S$
+        \State $color[u] \coloneqq gray$
+        \State $\Call{preprocess}{u}$
+        \If{$p \neq null$}
+          \State $S \Push (u, \Call{adjnext}(p))$
+          \State $v \coloneqq \Call{adjhead}(u, p)$
+          \State $\Call{preexplore}(u, v, color[v])$
+          \If{$color[v] = white$} \State $S \Push (v, \Call{adjfirst}(v))$ \EndIf
+          \State $\Call{postexplore}(u, v)$
+        \Else
+          \State $\Call{preprocess}{u}$
+          \State $color[u] \coloneqq black$
+        \EndIf
+      \EndWhile
+    \EndFunction
+    \iffalse
+    \Function{sReachable}{$u, v, k$}
+      \If{$u = v$} \Return true \EndIf
+      \If{$k = 0$} \Return false \EndIf
+      \If{$(u,v) \in E$} \Return true \EndIf
+      \If{$k=1$} \Return false \EndIf
+      \For{$x \in V$}
+        \If{\Call{reachable}{$u, x, \floor{\tfrac{k}{2}}$} $\wedge$ \Call{reachable}{$x, v, \ceil{\tfrac{k}{2}}$}}
+          \State \Return true
+        \EndIf
+      \EndFor
+      \State \Return false
+    \EndFunction
+    \Statex
+    \State \Return reachable(s,t,n-1)
+    \fi
+  \end{algorithmic}
+\end{alg}
 
 \end{document}
