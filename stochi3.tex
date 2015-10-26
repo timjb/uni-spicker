@@ -22,6 +22,7 @@
 %\newcommand{\Leb}{\mathcal{L}} % Lebesgue
 \newcommand{\ind}{\mathbbm{1}} % Indikatorfunktion
 \newcommand{\Cont}{\mathcal{C}} % Menge der stetigen/diff'baren Funktionen
+\newcommand{\scp}[2]{\left( #1 \!\mid\! #2 \right)} % Skalarprodukt
 
 \DeclareMathOperator{\var}{Var} % Varianz
 \DeclareMathOperator{\cov}{Cov} % Kovarianz
@@ -333,5 +334,36 @@
     \[ f(\theta) \coloneqq \myint{}{} \tfrac{\d p}{\sqrt{p (1-p)}} = 2 \arcsin(\sqrt{\theta}). \]
   \end{itemize}
 \end{bspe}
+
+% 1.5. Mehrdimensionale Normalverteilung
+
+\begin{defn}
+  Die $k$-dim (Gaußsche) Normalverteilung $\Normal_k(m, C)$ mit EW~$m \in \R^k$ und einer nichtnegativ-definiten, symmetrischen Kovarianzmatrix~$C \in \R^{k \times k}$ ist gegeben durch die Dichte
+  \[ f_{\Normal_k(m, C)}(x) \coloneqq \left( (2\pi)^{k/2} \sqrt{\det(C)} \right)^{-1} \exp \left( - \tfrac{1}{2} (x-m) C^{-1} (x-m)^T \right). \]
+\end{defn}
+
+\begin{bem}
+  Bei $k=2$ schreibt man oft $C = \begin{psmallmatrix}
+    \sigma_1^2 & \sigma_1 \sigma_2 \rho \\
+    \sigma_1 \sigma_2 \rho & \sigma_2^2
+  \end{psmallmatrix}$ mit $\rho \coloneqq \cor(X_1, X_2)$.
+\end{bem}
+
+\begin{defn}
+  Die \emph{charakteristische Fkt} eines ZV $X = (X_1, \ldots, X_k)^T$ ist
+  \[
+    \varphi : \R^k \to \R, \enspace
+    t \mapsto \E e^{i \scp{t}{X}} = \Int{\R^k}{}{e^{i (t_1 x_1 + \ldots + t_k x_k)}}{F_X(x_1, \ldots, x_k)}.
+  \]
+\end{defn}
+
+\begin{bem}
+  Die charakteristische Funktion von $\Normal_k(m, C)$ ist
+  \[ \varphi_{\Normal_k(m, C)}(t) = \exp \left( i \sum_{i=1}^k t_i m_i - \tfrac{1}{2} \sum_{i,j=1}^k t_i c_{ij} t_j \right). \]
+\end{bem}
+
+\begin{satz}
+  Für $A \in R^{k \times l}$ gilt $\Normal_k(m, C) \cdot A = \Normal_l(m \cdot A, A^T C A)$.
+\end{satz}
 
 \end{document}
