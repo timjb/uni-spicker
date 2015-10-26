@@ -366,4 +366,45 @@
   Für $A \in R^{k \times l}$ gilt $\Normal_k(m, C) \cdot A = \Normal_l(m \cdot A, A^T C A)$.
 \end{satz}
 
+% Vorlesung vom 26.10.2015
+
+% 2. Anpassungstests und weitere nichtparametrische Tests
+
+% 2.1. Chi-Quadrat-Anpassungstest
+
+\begin{aufgabe}
+  Prüfe, ob eine vorliegende Stichprobe $x_1, \ldots, x_n$ aus einer bestimmten (stetig oder diskret verteilten) Grundgesamtheit gezogen wurde. Wir testen also $H_0 : F = F_0$ vs. $H_1 : F \neq F_0$.
+\end{aufgabe}
+
+% Ausgelassen: Bemerkung über Einordnung in parametrische Tests via. $\Theta \coloneqq \{ \text{Verteilungsfunktionen auf $\R$} \}}$ und $\Theta_0 \coloneqq \{ F_0 \}$.
+
+\begin{verf}
+  Wir teilen zunächst $\R$ in Klassen ein,
+  \begin{align*}
+    & \R = \bigcup_{i=1}^{s+1} I_j
+    \quad \text{mit} \quad
+    I_j \coloneqq \ocinterval{y_{j-1}}{y_j},
+    \quad
+    \text{wobei} \\
+    & - \infty = y_0 < y_1 < \ldots < y_s < y_{s+1} = + \infty.
+  \end{align*}
+  Wir setzen
+  \begin{align*}
+    & h_{n_j} \coloneqq \abs{\Set{k \in \{ 1, \ldots, n \}}{X_k \in I_j}} \tag{absolute Klassenhäufigkeit} \\
+    & p_j^{(0)} \coloneqq \P(X \in I_j) = F_0(y_j) - F_0(y_{j-1}) \tag{Klassenwktn unter $H_0$}
+  \end{align*}
+  Die Klassenhäufigkeiten sind nun multinomialverteilt:
+  \[ \P(h_{n_1} \!=\! n_1, \nldots, h_{n_{s+1}} \!=\! n_{s+1}) = {n \choose n_1, \nldots, n_{s+1}} (p_1^{(0)})^{n_1} \cdots (p_{s+1}^{(0)})^{n_{s+1}}. \]
+  Als Maß für die Abweichung einer empirischen Verteilung von $F_0$ bei gegebener Klasseneinteilung dient
+  \[ T_{n,s+1} \coloneqq \sum_{j=1}^{s+1} \frac{(h_{n_j} - n p_j^{(0)})^2}{n p_j^{(0)}}. \]
+\end{verf}
+
+\begin{satz}
+  $T_{n,s+1} \xra[n \to \infty]{d} \chi_s^2$
+\end{satz}
+
+\begin{faustregel}
+  Für $n p_j^{(0)} \geq 5$, $j = 1, \ldots, s+1$ ist $T_{n,s+1}$ mit guter Näherung $\chi_s^2$-verteilt.
+\end{faustregel}
+
 \end{document}

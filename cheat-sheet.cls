@@ -79,6 +79,8 @@
 \newtheorem*{dual}{Dual}
 \newtheorem*{terminologie}{Terminologie}
 \newtheorem*{diskussion}{Diskussion}
+\newtheorem*{aufgabe}{Aufgabe}
+\newtheorem*{faustregel}{Faustregel}
 
 \theoremstyle{remark}
 \newtheorem*{bem}{Bem}
