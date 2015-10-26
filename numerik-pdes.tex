@@ -343,4 +343,121 @@
   \end{enumerate}
 \end{verf}
 
+% Vorlesung vom 26.10.2015
+
+% Konvergenz, Konsistenz, Stabilität
+
+\[
+  (RWP) \left\{ \begin{array}{rl}
+    - \LL u = f &\text{ in $\Omega$,} \\
+    u = g &\text{ auf $\partial \Omega$}
+  \end{array} \right.
+\]
+
+\[
+  (RWP)_h \left\{ \begin{array}{rl}
+    - \LL_h u = f &\text{ in $\Omega_h$,} \\
+    u_h = g &\text{ auf $\partial \Omega_h$}
+  \end{array} \right.
+\]
+
+\[ (LGS) \tilde{\LL}_h \tilde{u}_h = \tilde{f}_h \]
+
+\begin{defn}
+  Sei $U_h$ der Raum aller Funktionen mit Werten in $\R$, die auf dem Gitter $\Omega_h$ definiert sind und sei $R_h : \Cont{\cOmega} \to U_h$ die Einschränkung stetiger Funktionen auf $\Omega_h$.
+  Dann heißt das Differenzenverfahren $(RWP)_h$ \emph{konvergent} von der Ordnung $p$, falls $C > 0$ und $h_0 > 0$ existieren, sodass für die Lösung $u$ von (RWP) und die Lösung $u_h$ von $(RWP)_h$ gilt: $\norm{u_h - R_h u}_h \leq C h^p$ für alle $0 < h \leq h_0$, wobei $\norm{\blank}_h$ eine zu $U_h$ passenede Norm ist, wie \zB{} $\norm{u_h}_h \coloneqq \max_{x \in \Omega_h} \abs{u_h(x)}$
+\end{defn}
+
+\begin{defn}
+  Das Differenzenverfahren $(RWP)_h$ heißt \emph{konsistent von der Ordnung $p$}, falls $\norm{\LL_h R_h u - R_h \LL u}_h \leq c h^p \norm{u}_{\Cont^{p+2}(\cOmega)}$ für alle $u \in \Cont^{p+2}(\cOmega)$.
+\end{defn}
+
+\[ \LL_h \RR_h u - \RR_h \LL u = \LL_h \RR_h u - \RR_h f = \LL_h u - f \]
+
+% Was ist das Residuum??? Was heißt Konditionierung eines Problems?
+
+\begin{defn}
+  Das Differenzenverfahren $(RWP)_h$ heißt \emph{stabil}, falls $\tilde{L}_h$ invertierbar ist und ein $h_0 > 0$ existiert mit $\sup_{0 < h \leq h_0} \norm{\tilde{\LL}_h^{-1}}_h < \infty$, wobei $\norm{\tilde{\LL}_h^{-1}}_h = \sup_{f \neq 0} \frac{\norm{\LL^{-1}_h f}_h}{\norm{f}_h}$
+  (induzierte Matrixnorm: $\norm{\tilde{\LL}_h^{-1}}_h = \norm{\tilde{\LL}_h^{-1}}_\infty = \max_{1 \leq i \leq n} \sum_{j=1}^n \abs{l_{ij}}$)
+\end{defn}
+
+% 3.1
+\begin{satz}
+  Ist das Differenzenverfahren $(RWP)_h$ konsistent und stabil, so auch konvergent.
+  Falls darüber hinaus $(RWP)_h$ konsistent von der Ordnung $p$ ist und $u \in \Cont^{p+2}(\cOmega)$, dann ist es konvergent von der Ordnung $p$.
+\end{satz}
+
+% Was ist Spalten-, Spektrale und Zeilensummennorm?
+% Spa-Spe-Zei
+
+\begin{proof}
+  Sie $w_h \coloneqq u_h - R_h u$.
+  Für $x \in \partial \Omega_h$ gilt $w_h(x) = 0$, für $x \in \Omega_h$ gilt
+  \begin{align*}
+    \tilde{\LL}_h w_h(x) = \LL_h w_h(x) &= \LL_h u_h(x) - \LL_h \RR_h u(x) = f_h(x) - \LL_h R_h u(x) = R_h f(x) - \LL_h R_h u(x) \\
+    &= R_h \LL u(x) - \LL_h R_h u(x)
+  \end{align*}
+  Somit gilt in $\Omega_h$
+  \[ w_h = \tilde{L}_h^{-1} \left( R_h \LL u - \LL_h R_h u \right), \]
+  \[ \norm{w_h}_h = \norm{\tilde{L}_h^{-1} \left( R_h \LL u - \LL_h R_h u \right)} \leq \norm{\tilde{L}_h^{-1}}_h \cdot \norm{R-h \LL u - \LL_h R_h u}_h \leq c_1 \cdot c_2 h^p \norm{u}_{\Cont^{p+2}{\cOmega}} \leq C h^p \]
+  für $0 < h \leq h_0$.
+\end{proof}
+
+% 3.2
+\begin{lem}
+  Das Differenzenverfahren $(RWP1)_h$ ist konsistent von der Ordnung 2.
+  Es gilt
+  \[ \norm{\Laplace_h R_h u - R_h \Laplace u}_h \leq \tfrac{1}{12} \norm{u}_{\Cont^4}(\cOmega) h^2 \]
+  für alle $u \in \Cont^4(\cOmega)$.
+\end{lem}
+
+% Beweis ähnlich wie auf ÜB2 mit Taylorn
+
+Es ist zu zeigen, dass $\tilde{L}_h = - \tilde{\Laplace}_h$ invertierbar ist und $\sup_{0 < h \leq h_0} \norm{\tilde{\Laplace}_h} < \infty$.
+
+\begin{defn}
+  Eine Matrix $A = (a_{ij}) \in \R^{n \times n}$ heißt M-Matrix, falls
+  \begin{itemize}
+    \item $a_{ii} > 0$ für $i = 1, \ldots, n$,
+    \item $a_{ij} \leq 0$ für $i \neq j$, $i, j = 1, \ldots, n$,
+    \item $A$ invertierbar ist und
+    \item für $A^{-1} = B = (b_{ij})$ gilt $b_{ij} \geq 0$.
+  \end{itemize}
+\end{defn}
+
+\begin{bem}
+  Es gilt folgende Monotonie-Eigenschaft für M-Matrizen:
+  \[
+    x \leq y \implies
+    A^{-1} x \leq A^{-1} y.
+  \]
+  % je komponentenweise
+\end{bem}
+
+\begin{defn}
+  \begin{itemize}
+    \item Eine Matrix $A = (a_{ij})$ heißt \emph{schwach diagonaldominant}, falls $\sum_{j=1, j \neq i}^n \abs{a_{ij}} \leq \abs{a_{ii}}$ für $i = 1, \ldots, n$ und ein $i_0$ existiert, sodass die Ungleichung strikt ist.
+    \item Eine Matrix $A \in \R^{n \times n}$ heißt \emph{diagonaldominant}, falls $\sum_{j=1, j \neq i}^n \abs{a_{ij}} < \abs{a_{ii}}$ für $i = 1, \ldots, n$.
+  \end{itemize}
+\end{defn}
+
+\begin{bem}
+  $- \tilde{\Laplace}_h$ ist schwach diagonaldominant
+\end{bem}
+
+\begin{defn}
+  Eine Matrix $A \in \R^{n \times n}$ heißt \emph{reduzibel} (oder zerlegbar), wenn es eine Permutationsmatrix $P \in \R^{n \times n}$ gibt, sodass $PAP^T = \begin{psmallmatrix}
+    A_{11} & A_{12} \\
+    0 & A_{22}
+  \end{psmallmatrix}$
+  mit $A_{11} \in R^{k \times k}$, $0 < k < n$.
+  % Ist $A$ nicht redzibel, so heißt $A$ irreduzibel
+\end{defn}
+
+% Ausgelassen: Beispiel einer reduziblen Matrix
+
+\begin{bem}
+  $- \tilde{\Laplace}_h$ ist irreduzibel
+\end{bem}
+
 \end{document}
