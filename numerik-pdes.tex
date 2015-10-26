@@ -16,6 +16,7 @@
 \newcommand{\RR}{\mathcal{R}} % Randoperator
 \newcommand{\Laplace}{\Delta}
 \DeclareMathOperator{\dive}{div} % Divergenz
+\newcommand{\tss}[1]{\textsubscript{#1}} % Subskript, kürzer
 
 \begin{document}
 
@@ -266,7 +267,7 @@
 
 % 3.1. Differenzenverfahren für die Poisson-Gleichung in $\Omega = \ointerval{0}{1}$
 
-\begin{verf}
+\begin{verf}[\emph{DV}]
   Am Beispiel des Poisson-Problems
   \[
     \left\{ \begin{array}{rl}
@@ -302,6 +303,7 @@
     Das diskretisierte Randwertproblem ist nun
     % TODO: Bezeichnung davon?
     \[
+      \text{(RWP\tss{1})\tss{h}} \enspace
       \left\{ \begin{array}{rl}
         - \Laplace_h u_h = f &\text{ in $\Omega_h$,} \\
         u_h(0) = g_0, u_h(1) = g_1 &\text{ auf $\partial \Omega_h$.}
@@ -347,81 +349,110 @@
 
 % Konvergenz, Konsistenz, Stabilität
 
-\[
-  (RWP) \left\{ \begin{array}{rl}
-    - \LL u = f &\text{ in $\Omega$,} \\
-    u = g &\text{ auf $\partial \Omega$}
-  \end{array} \right.
-\]
+\begin{ziel}
+  Herausfinden, was die Lösung~$u_h$ von (RWP)\tss{h} (die man durch Lösen von (LGS) erhält) mit der Lösung~$u$ zum ursprünglichen Problem (RWP) zu tun hat.
+  Ist etwa~$u_h$ die Einschränkung von~$u$, oder zumindest annäherungsweise?
+  Wenn ja, wie klein muss man~$h$ wählen, damit die Approximation gut wird?
+  \begin{align*}
+    \text{(RWP)} \enspace & \left\{ \begin{array}{rl}
+      - \LL u = f &\text{ in $\Omega$,} \\
+      u = g &\text{ auf $\partial \Omega$}
+    \end{array} \right. \\
+    \text{(RWP)\tss{h}} \enspace & \left\{ \begin{array}{rl}
+      - \LL_h u = f_h &\text{ in $\Omega_h$,} \\
+      u_h = g_h &\text{ auf $\partial \Omega_h$}
+    \end{array} \right. \\
+    \text{(LGS)} \enspace & \tilde{\LL}_h \tilde{u}_h = \tilde{f}_h
+  \end{align*}
+\end{ziel}
 
-\[
-  (RWP)_h \left\{ \begin{array}{rl}
-    - \LL_h u = f &\text{ in $\Omega_h$,} \\
-    u_h = g &\text{ auf $\partial \Omega_h$}
-  \end{array} \right.
-\]
-
-\[ (LGS) \tilde{\LL}_h \tilde{u}_h = \tilde{f}_h \]
+\begin{nota}
+  %Sei $U_h$ der Raum aller Funktionen mit Werten in $\R$, die auf dem Gitter $\Omega_h$ definiert sind und sei  die Einschränkung stetiger Funktionen auf $\Omega_h$. \\
+  $U_h \coloneqq \{ \Omega_h \to \R \}$, \quad
+  $R_h : \Cont(\cOmega) \to U_h, \enspace u \mapsto u|_{\Omega_h}$
+\end{nota}
 
 \begin{defn}
-  Sei $U_h$ der Raum aller Funktionen mit Werten in $\R$, die auf dem Gitter $\Omega_h$ definiert sind und sei $R_h : \Cont{\cOmega} \to U_h$ die Einschränkung stetiger Funktionen auf $\Omega_h$.
-  Dann heißt das Differenzenverfahren $(RWP)_h$ \emph{konvergent} von der Ordnung $p$, falls $C > 0$ und $h_0 > 0$ existieren, sodass für die Lösung $u$ von (RWP) und die Lösung $u_h$ von $(RWP)_h$ gilt: $\norm{u_h - R_h u}_h \leq C h^p$ für alle $0 < h \leq h_0$, wobei $\norm{\blank}_h$ eine zu $U_h$ passenede Norm ist, wie \zB{} $\norm{u_h}_h \coloneqq \max_{x \in \Omega_h} \abs{u_h(x)}$
+  Das Differenzenverfahren (RWP)\tss{h} heißt
+  \begin{itemize}
+    \item \emph{konvergent} von der Ordnung~$p$, falls $C > 0$, $h_0 > 0$ existieren, sodass für die Lösung~$u$ von (RWP) und die Lösung~$u_h$ von (RWP)\tss{h} gilt:
+    \[
+      \norm{u_h - R_h u}_h \leq C h^p \quad
+      \text{für alle $0 < h \leq h_0$,}
+    \]
+    wobei~$\norm{\blank}_h$ eine Norm zu~$U_h$ ist, wie \zB{} $\norm{u_h}_h \coloneqq \max_{x \in \Omega_h} \abs{u_h(x)}$.
+    \item \emph{konsistent} von der Ordnung~$p$, falls
+    \[
+      \norm{\LL_h R_h u - R_h \LL u}_h \leq c h^p \norm{u}_{\Cont^{p+2}(\cOmega)} \quad
+      \forall u \in \Cont^{p+2}(\cOmega).
+    \]
+    % Falls u eine Lösung von (RWP) ist, so gilt
+    %\[ \LL_h R_h u - R_h \LL u = \LL_h R_h u - R_h f = \LL_h u - f_h \]
+    \item \emph{stabil}, falls $\tilde{L}_h$ invertierbar ist und ein $h_0 > 0$ existiert mit
+    \[
+      \sup_{0 < h \leq h_0} \norm{\tilde{\LL}_h^{-1}}_h < \infty, \quad
+      \text{wobei} \enspace
+      \norm{\tilde{\LL}_h^{-1}}_h \coloneqq \sup_{f \neq 0} \tfrac{\norm{\tilde{\LL}^{-1}_h f}_h}{\norm{f}_h}.
+    \]
+  \end{itemize}
 \end{defn}
 
-\begin{defn}
-  Das Differenzenverfahren $(RWP)_h$ heißt \emph{konsistent von der Ordnung $p$}, falls $\norm{\LL_h R_h u - R_h \LL u}_h \leq c h^p \norm{u}_{\Cont^{p+2}(\cOmega)}$ für alle $u \in \Cont^{p+2}(\cOmega)$.
-\end{defn}
-
-\[ \LL_h \RR_h u - \RR_h \LL u = \LL_h \RR_h u - \RR_h f = \LL_h u - f \]
+\begin{bem}
+  Die ind. Matrixnorm ist $\norm{\tilde{\LL}_h^{-1}}_h = \norm{\tilde{\LL}_h^{-1}}_\infty = \max_{1 \leq i \leq n} \sum_{j=1}^n \abs{l_{ij}}$.
+\end{bem}
 
 % Was ist das Residuum??? Was heißt Konditionierung eines Problems?
 
-\begin{defn}
-  Das Differenzenverfahren $(RWP)_h$ heißt \emph{stabil}, falls $\tilde{L}_h$ invertierbar ist und ein $h_0 > 0$ existiert mit $\sup_{0 < h \leq h_0} \norm{\tilde{\LL}_h^{-1}}_h < \infty$, wobei $\norm{\tilde{\LL}_h^{-1}}_h = \sup_{f \neq 0} \frac{\norm{\LL^{-1}_h f}_h}{\norm{f}_h}$
-  (induzierte Matrixnorm: $\norm{\tilde{\LL}_h^{-1}}_h = \norm{\tilde{\LL}_h^{-1}}_\infty = \max_{1 \leq i \leq n} \sum_{j=1}^n \abs{l_{ij}}$)
-\end{defn}
-
 % 3.1
 \begin{satz}
-  Ist das Differenzenverfahren $(RWP)_h$ konsistent und stabil, so auch konvergent.
-  Falls darüber hinaus $(RWP)_h$ konsistent von der Ordnung $p$ ist und $u \in \Cont^{p+2}(\cOmega)$, dann ist es konvergent von der Ordnung $p$.
+  Ist das DV (RWP)\tss{h} konsistent und stabil, so auch konvergent.
+  Genauer gilt: Ist (RWP)\tss{h} stabil und konsistent von der Ordnung~$p$ und $u \in \Cont^{p+2}(\cOmega)$, dann ist (RWP)\tss{h} konvergent von der Ordnung~$p$.
 \end{satz}
 
 % Was ist Spalten-, Spektrale und Zeilensummennorm?
 % Spa-Spe-Zei
 
 \begin{proof}
-  Sie $w_h \coloneqq u_h - R_h u$.
-  Für $x \in \partial \Omega_h$ gilt $w_h(x) = 0$, für $x \in \Omega_h$ gilt
+  Setze $w_h \coloneqq u_h - R_h u$.
+  Für $x \in \partial \Omega_h$ gilt dann $w_h(x) = 0$ und für $x \in \Omega_h$ gilt
   \begin{align*}
-    \tilde{\LL}_h w_h(x) = \LL_h w_h(x) &= \LL_h u_h(x) - \LL_h \RR_h u(x) = f_h(x) - \LL_h R_h u(x) = R_h f(x) - \LL_h R_h u(x) \\
+    \tilde{\LL}_h w_h(x) &= \LL_h w_h(x) = \LL_h u_h(x) - \LL_h R_h u(x) \\
+    &= f_h(x) - \LL_h R_h u(x) = R_h f(x) - \LL_h R_h u(x) \\
     &= R_h \LL u(x) - \LL_h R_h u(x)
   \end{align*}
-  Somit gilt in $\Omega_h$
-  \[ w_h = \tilde{L}_h^{-1} \left( R_h \LL u - \LL_h R_h u \right), \]
-  \[ \norm{w_h}_h = \norm{\tilde{L}_h^{-1} \left( R_h \LL u - \LL_h R_h u \right)} \leq \norm{\tilde{L}_h^{-1}}_h \cdot \norm{R-h \LL u - \LL_h R_h u}_h \leq c_1 \cdot c_2 h^p \norm{u}_{\Cont^{p+2}{\cOmega}} \leq C h^p \]
-  für $0 < h \leq h_0$.
+  Somit gilt $w_h = \tilde{\LL}_h^{-1} \left( R_h \LL u - \LL_h R_h u \right)$ in $\Omega_h$, also
+  \begin{align*}
+    \norm{w_h}_h &= \norm{\tilde{\LL}_h^{-1} \left( R_h \LL u - \LL_h R_h u \right)}
+    \leq \norm{\tilde{\LL}_h^{-1}}_h \cdot \norm{R_h \LL u - \LL_h R_h u}_h \\
+    & \leq c_1 \cdot c_2 \cdot h^p \cdot \norm{u}_{\Cont^{p+2}(\cOmega)}
+    \leq C h^p \qquad
+    \text{für $0 < h \leq h_0$.}
+  \end{align*}
 \end{proof}
 
 % 3.2
 \begin{lem}
-  Das Differenzenverfahren $(RWP1)_h$ ist konsistent von der Ordnung 2.
+  Das DV (RWP\tss{1})\tss{h} ist konsistent von der Ordnung 2.
   Es gilt
-  \[ \norm{\Laplace_h R_h u - R_h \Laplace u}_h \leq \tfrac{1}{12} \norm{u}_{\Cont^4}(\cOmega) h^2 \]
-  für alle $u \in \Cont^4(\cOmega)$.
+  \[
+    \norm{\Laplace_h R_h u - R_h \Laplace u}_h \leq \tfrac{1}{12} \norm{u}_{\Cont^4(\cOmega)} h^2 \quad
+    \forall u \in \Cont^4(\cOmega).
+  \]
 \end{lem}
 
 % Beweis ähnlich wie auf ÜB2 mit Taylorn
 
-Es ist zu zeigen, dass $\tilde{L}_h = - \tilde{\Laplace}_h$ invertierbar ist und $\sup_{0 < h \leq h_0} \norm{\tilde{\Laplace}_h} < \infty$.
+\begin{bem}
+  Um zu zeigen, dass (RWP\tss{1})\tss{h} konvergent ist, müssen wir noch zeigen, dass $\tilde{L}_h = - \tilde{\Laplace}_h$ invertierbar ist und $\sup_{0 < h \leq h_0} \norm{\tilde{\Laplace}_h} < \infty$.
+\end{bem}
 
 \begin{defn}
-  Eine Matrix $A = (a_{ij}) \in \R^{n \times n}$ heißt M-Matrix, falls
+  Eine Matrix $A = (a_{ij}) \in \R^{n \times n}$ heißt \emph{M-Matrix}, falls
   \begin{itemize}
-    \item $a_{ii} > 0$ für $i = 1, \ldots, n$,
-    \item $a_{ij} \leq 0$ für $i \neq j$, $i, j = 1, \ldots, n$,
-    \item $A$ invertierbar ist und
-    \item für $A^{-1} = B = (b_{ij})$ gilt $b_{ij} \geq 0$.
+    \miniitem{0.43 \linewidth}{$a_{ii} > 0$ für $i = 1, \ldots, n$,}
+    \miniitem{0.53 \linewidth}{$a_{ij} \leq 0$ für $i \neq j$, $i, j = 1, \ldots, n$,}
+    \miniitem{0.43 \linewidth}{$A$ invertierbar ist und}
+    \miniitem{0.53 \linewidth}{für $A^{-1} =: B = (b_{ij})$ gilt $b_{ij} \geq 0$.}
   \end{itemize}
 \end{defn}
 
@@ -435,9 +466,19 @@ Es ist zu zeigen, dass $\tilde{L}_h = - \tilde{\Laplace}_h$ invertierbar ist und
 \end{bem}
 
 \begin{defn}
+  Sei $A = (a_{ij}) \in \R^{n \times n}$ eine Matrix.
   \begin{itemize}
-    \item Eine Matrix $A = (a_{ij})$ heißt \emph{schwach diagonaldominant}, falls $\sum_{j=1, j \neq i}^n \abs{a_{ij}} \leq \abs{a_{ii}}$ für $i = 1, \ldots, n$ und ein $i_0$ existiert, sodass die Ungleichung strikt ist.
-    \item Eine Matrix $A \in \R^{n \times n}$ heißt \emph{diagonaldominant}, falls $\sum_{j=1, j \neq i}^n \abs{a_{ij}} < \abs{a_{ii}}$ für $i = 1, \ldots, n$.
+    \item $A$ heißt \emph{schwach diagonaldominant}, falls
+    \[
+      \sum_{\substack{j=1\\j \neq i}}^n \abs{a_{ij}} \leq \abs{a_{ii}} \quad
+      \text{für $i = 1, \ldots, n$}
+    \]
+    und ein $i_0$ existiert, sodass die Ungleichung strikt ist.
+    \item $A$ heißt \emph{diagonaldominant}, falls
+    \[
+      \sum_{\substack{j=1\\j \neq i}}^n \abs{a_{ij}} < \abs{a_{ii}} \quad
+      \text{für $i = 1, \ldots, n$}
+    \]
   \end{itemize}
 \end{defn}
 
@@ -446,11 +487,14 @@ Es ist zu zeigen, dass $\tilde{L}_h = - \tilde{\Laplace}_h$ invertierbar ist und
 \end{bem}
 
 \begin{defn}
-  Eine Matrix $A \in \R^{n \times n}$ heißt \emph{reduzibel} (oder zerlegbar), wenn es eine Permutationsmatrix $P \in \R^{n \times n}$ gibt, sodass $PAP^T = \begin{psmallmatrix}
-    A_{11} & A_{12} \\
-    0 & A_{22}
-  \end{psmallmatrix}$
-  mit $A_{11} \in R^{k \times k}$, $0 < k < n$.
+  Eine Matrix $A \in \R^{n \times n}$ heißt \emph{reduzibel} (oder zerlegbar), wenn es eine Permutationsmatrix $P \in \R^{n \times n}$ gibt, sodass
+  \[
+    PAP^T = \begin{psmallmatrix}
+      A_{11} & A_{12} \\
+      0 & A_{22}
+    \end{psmallmatrix} \quad
+    \text{mit $A_{11} \in R^{k \times k}$, $0 < k < n$.}
+  \]
   % Ist $A$ nicht redzibel, so heißt $A$ irreduzibel
 \end{defn}
 
