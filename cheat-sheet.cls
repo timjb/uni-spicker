@@ -171,6 +171,9 @@
 \newcommand{\zB}{z.\,B.}
 \renewcommand{\dh}{d.\,h.} % das heißt
 
+% Pfeile
+\newcommand{\xra}{\xrightarrow}
+
 % Schöne Mengen { #1 | #2 }
 % siehe http://tex.stackexchange.com/questions/13634/define-pretty-sets-in-latex-esp-how-to-do-the-condition-separator
 \usepackage{mathtools}

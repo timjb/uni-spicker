@@ -11,6 +11,8 @@
 % Kleinere Klammern
 \delimiterfactor=701
 
+% TODO: Include-File für Stochastik
+
 \newcommand{\Alg}{\mathfrak{A}} % (Mengen-)Algebra
 %\newcommand{\Ring}{\mathfrak{R}} % (Mengen-)Ring
 %\newcommand{\LebAlg}{\mathfrak{L}} % Lebesgue-Borel-Mengen
@@ -19,12 +21,15 @@
 \newcommand{\Bor}{\mathfrak{B}} % Borel
 %\newcommand{\Leb}{\mathcal{L}} % Lebesgue
 \newcommand{\ind}{\mathbbm{1}} % Indikatorfunktion
+\newcommand{\Cont}{\mathcal{C}} % Menge der stetigen/diff'baren Funktionen
 
 \DeclareMathOperator{\var}{Var} % Varianz
 \DeclareMathOperator{\cov}{Cov} % Kovarianz
 \DeclareMathOperator{\cor}{Cor} % Korrelation
 
+% Verteilungen
 \newcommand{\Normal}{\mathcal{N}} % Gaußsche Normalverteilung
+\DeclareMathOperator{\Exp}{Exp} % Exponentialverteilung
 
 \begin{document}
 
@@ -277,16 +282,56 @@
 % 1.4. Lemma von Slutzky und varianzstabilisiernde Transformationen
 
 \begin{lem}
-  Seien $(X_n)$, $(Y_n)$ zwei Folgen von ZGn über $(\Omega, \Alg, \P)$ mit $X_n \xrightarrow[n \to \infty]{\P} c = \text{const}$ (\dh{} $\fa{\epsilon > 0} \P(\abs{X_n - c} > \epsilon) \to 0$) und $Y_n \xrightarrow[n \to \infty]{d} Y$ (\dh{} $\P(Y_n \leq y) \to \P(Y \leq y)$ für alle Stetigkeitspunkte $y$ der VF $y \mapsto \P(Y \leq y)$). Dann:
+  Seien $(X_n)$, $(Y_n)$ zwei Folgen von ZGn über $(\Omega, \Alg, \P)$ mit $X_n \xra[n \to \infty]{\P} c = \text{const}$ (\dh{} $\fa{\epsilon > 0} \P(\abs{X_n - c} > \epsilon) \to 0$) und $Y_n \xra[n \to \infty]{d} Y$ (\dh{} $\P(Y_n \leq y) \to \P(Y \leq y)$ für alle Stetigkeitspunkte $y$ der VF $y \mapsto \P(Y \leq y)$). Dann gilt:
   \[
-    X_n + Y_n \xrightarrow{d} c + Y, \quad
-    X_n \cdot Y_n \xrightarrow{d} c \cdot Y, \quad
-    Y_n / X_n \xrightarrow{d} Y / c \enspace \text{(falls $c \neq 0$)}.
+    X_n + Y_n \xra{d} c + Y, \quad
+    X_n \cdot Y_n \xra{d} c \cdot Y, \quad
+    Y_n / X_n \xra{d} Y / c \enspace \text{(falls $c \neq 0$)}
   \]
+  und allgemeiner $f(X_n, Y_n) \xra[n \to \infty]{d} f(c, Y)$ für jede Fkt $f \in \Cont(\R^2, \R)$.
 \end{lem}
 
 \begin{bem}
   Unabhängigkeit von $(X_n)$ und $(Y_n)$ wird nicht vorausgesetzt!
 \end{bem}
+
+% Vorlesung vom 22.10.2015
+
+% Varianzstabilisierende Transformationen
+
+\begin{situation}
+  Sei $T_n = T(X_1, \ldots, X_n)$ eine Statistik.
+  Falls der ZGWS für $T_n$ die Form
+  \[ \sqrt{n} (T_n - \vartheta) \xra[n \to \infty]{d} \Normal(0, g(\vartheta)) \]
+  besitzt, so benötigen wir für Hypothesentests eine Möglichkeit, die Abhängigkeit der Varianz von Parameter $\vartheta$ zu beseitigen.
+  Man sagt, man führt eine \emph{varianzstabilisierende Transformation} durch. \\
+  Wir suchen dazu eine stetig diff'bare Funktion $f : \Theta \to \R^1$, sodass
+  \[ \sqrt{n} (f(T_n) - f(\vartheta)) \xra[n \to \infty]{d} \Normal(0, 1). \]
+  Man zeigt, dass dafür gelten muss:
+  \[
+    f'(\vartheta) = \tfrac{1}{\sqrt{g(\vartheta)}}, \quad \text{also} \quad
+    f(\theta) = \myint{}{} \tfrac{\d \vartheta}{\sqrt{g(\vartheta)}}.
+  \]
+\end{situation}
+
+\begin{bspe}
+  \begin{itemize}
+    \item Sei $X \sim \Exp(\mu)$, $\hat{\mu}_n \coloneqq \tfrac{1}{\overline{X}_n}$.
+    Dann gilt
+    \begin{align*}
+      & \sqrt{n} (\overline{X}_n - \tfrac{1}{\mu}) \xra{d} \Normal(0, g(\tfrac{1}{\mu}))
+      \quad \text{mit} \quad
+      g(\vartheta) \coloneqq \vartheta^2. \\
+      \leadsto \enspace & \text{Mit } f(\theta) \coloneqq \myint{}{} \tfrac{\d \vartheta}{\sqrt{g(\vartheta)}} = \myint{}{} \tfrac{\d \vartheta}{\vartheta} = \log \theta \\
+      & \text{gilt } \sqrt{n} (\log(\overline{X}_n - \log(\tfrac{1}{\mu}))) \xra[n \to \infty]{d} \Normal(0, 1).
+    \end{align*}
+    \item Wir wollen eine unbek. Wahrscheinlichkeit~$p$ schätzen, etwa durch Wurf einer Münze.
+    Der ZGWS von de-Moirre-Laplace besagt
+    \[ \sqrt{n} ( \hat{p}_n - p) \xra[n \to \infty]{d} \Normal(0, p (1-p)), \]
+    wobei~$\hat{p}_n$ die relative Häufigkeit ist.
+    Zur Stabilisierung der Varianz verwenden wir nun
+    \[ f(\theta) \coloneqq \myint{}{} \tfrac{\d p}{\sqrt{p (1-p)}} = 2 \arcsin(\sqrt{\theta}). \]
+  \end{itemize}
+\end{bspe}
 
 \end{document}
