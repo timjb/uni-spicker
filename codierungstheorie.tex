@@ -20,6 +20,7 @@
 \DeclareMathOperator{\wt}{wt} % Hamming-Gewicht
 \DeclareMathOperator{\spann}{span} % aufgespannte (lineare) Hülle
 \newcommand{\lin}{\text{lin}} % linear
+\newcommand{\scp}[2]{\left( #1 \!\mid\! #2 \right)} % Skalarprodukt
 
 \begin{document}
 
@@ -508,5 +509,117 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 
 % Nordstrom-Robinson-Code:
 % Ein (16, 256, 6)-Code über $\F_2$
+
+% §4.4 Die Generatormatrix
+
+Sei $C$ ein $[n,k]$-Code über $\F_q$ (die Informationrate ist $\tfrac{k}{n}$).
+$\dim_{\F_q} C = k$, also $C \cong \F_q^k$.
+
+Codierabbildung: $E : \F_q^k \to \F_q^n$ mit $\im(E) = C$.
+Sei $g^1, \ldots, g^k \in C$ einen Basis von $C$.
+Dann heißt $G \coloneqq \begin{psmallmatrix}
+  g^1 \\ \vdots g^k
+\end{psmallmatrix} \in \F_q^{k \times n}$ \emph{Generatormatrix}.
+
+Dann ist $E(u) = uG = \sum_{j=1}^k u_j g^j \in C$
+
+% Ausgelassen: Bspe Parity-Check-Erweiterung und 5-Wiederholungscode
+
+\begin{defn}
+  Zwei $[n,k]$-Codes $C, C' \subseteq \F_q^n$ heißen \emph{linear äquivalent}, falls es~$\gamma \in S_n$ und $\lambda_1, \ldots, \lambda_n \in \F_q^{\times}$ gibt, sodass die monomiale Transf. \[ \alpha : \F_q^n \to \F_q^n, \enspace (x_1, \ldots, x_n) \mapsto (\lambda_1 x_{\gamma(1)}, \ldots, \lambda_n x_{\gamma(n)}) \]
+  den Code $C$ in $C'$ überführt.
+\end{defn}
+
+\iffalse
+\begin{bspe}
+  binäre $[5, 2, 3]$-Codes
+  
+  $C_1$ hat Generatormatrix $G_1 = \begin{psmallmatrix}
+    11100 \\
+    00111
+  \end{psmallmatrix}$,
+  $C_1 = \{ 00000, 111100, 00111, 11011 \}$
+  
+  $C_2$ hat Generatormatrix $G_2 = \begin{psmallmatrix}
+    011001 \\
+    10110
+  \end{psmallmatrix}$
+  $C_2 = \{ 00000, 01101, 10110, 11011 \}$
+\end{bspe}
+\fi
+
+\begin{defn}
+  Ein $[n,k]$-Code heißt \emph{systematisch}, falls die ersten $k$ Spalten seiner Generatormatrix die Standardbasisvektoren sind.
+\end{defn}
+
+% §4.5 Gewichtsminimale Repäsentanten und Standard-Array-Decodierung
+
+$V = \F_q^n$, $C$ ein $\F_q$-Teilraum von $V$.
+Sind $x, y \in V$, so schreiben wir $x \equiv y (\mod C) \coloniff x-y \in C$.
+Die zu $x \in V$ gehörende Kongruenzklasse modulo $C$ ist $x + C$.
+
+\begin{defn}
+  Ein Repräsentantensystem $\mathcal{R}$ dieser Klassen heißt \emph{gewichtsminimal}, falls gilt $\wt(r) = \min_{c \in C} \wt(r+c)$ für alle $r \in \mathcal{R}$.
+\end{defn}
+
+\begin{satz}
+  Sei $C$ ein $[n, k]$-Code über $\F_q$, $\mathcal{R}$ ein gewichtsminimales Repräsentantensystem modulo $C$.
+  Zu jedem $y \in \F_q^n$ sei $\mathcal{R}(y) \in \R$ mit $\mathcal{R}(y) + C = y + C$.
+  Dann ist $D : \F_q^n \to C, \enspace y \mapsto y - \mathcal{R}(y)$ eine Decodierabbildung.
+\end{satz}
+
+% Ausgelassen: Beispiel
+
+TODO: Standard-Array-Decodierung beschreiben
+
+% §4.6 Dualer Code: Kontrollmatrix und Syndromdecodierung
+
+\begin{bem}
+  Sei $\F$ ein Körper, $n \in \N^*$.
+  Das Standard-Skalarprodukt
+  \[
+    \scp{\blank}{\blank} : \F^n \times \F^n \to \F,
+    \enspace (x, y) \mapsto \sum_{i=1}^n x_i y_i
+  \]
+  ist eine nicht-ausgeartete, symmetrische Bilinearform.
+\end{bem}
+
+% Ausgelassen: Definition des Orthogonalraums
+
+\begin{acht}
+  Es ist $\dim(U^\perp) = n - k$, im Allgemeinen gilt aber $U \cap U^\perp \neq 0$, \zB{} ist $11011 \in \F_2^5$ senkrecht zu sich selbst.
+\end{acht}
+
+\begin{defn}
+  Sei $C$ ein $[n,k]$-Code über $\F_q$.
+  Dann heißt $C^\perp$ der zu $C$ gehörende \emph{duale Code}.
+\end{defn}
+
+\begin{defn}
+  Die Generatormatrix $H$ von $C^\perp$ heißt \emph{Kontrollmatrix} zu $C$.
+\end{defn}
+
+\begin{lem}
+  $x \in C \iff Hx' = 0$
+\end{lem}
+
+\begin{alg}
+  Sei $C$ ein $[n,k]$-Code, $H \in \F_q^{n-k \times n}$ die Kontrollmatrix.
+  Dann ist
+  \[ \psi_H : \F_q^n \to \F_q^{n-k}, \enspace x \mapsto H x^T \]
+  eine surjektive lineare Abbildung mit $\ker(\psi_H) = C$.
+  \begin{itemize}
+    \item Sei $c \in C$ gesendet, $y \in \F_q^n$ empfangen, etwa $y = c + e$.
+    Berechne das \emph{Syndrom} $s \coloneqq \phi_H(y) = H y^T = H c^T + H e^T = H e^T$.
+    \item $e$ ist mit größter Wkt ein gewichtsminimaler Repräsentant von $y$.
+    Sei also $\mathcal{R}$ ein minimales Repräsentantensystem.
+    $\psi \coloneqq $ Einschränkung von $\psi_H$ auf $\mathcal{R}$
+    Dann ist $\psi : \mathcal{R} \to \F_q^{n-k}$ bijektiv.
+    Haben ein Syndrom $s$ berechnet. Bilden $\psi^{-1}(s)$.
+    Dann ist $D(y) \coloneqq y - \psi^{-1}(s)$ eine Decodierabbildung.
+  \end{itemize}
+  %$\psi_H^{-1}(s) = $
+  %Sei $s \in \F_q^{n-k}$.
+\end{alg}
 
 \end{document}
