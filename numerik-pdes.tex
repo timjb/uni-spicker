@@ -270,7 +270,7 @@
 \begin{verf}[\emph{DV}]
   Am Beispiel des Poisson-Problems
   \[
-    \left\{ \begin{array}{rl}
+    \text{(RWP\tss{1})}\enspace \left\{ \begin{array}{rl}
       - \Laplace u = f &\text{ in $\Omega = \ointerval{0}{1}$} \\
       u(0) = g_0, u(1) = g_1 &\text{ auf $\bOmega$}
     \end{array} \right.
@@ -426,7 +426,7 @@
     \leq \norm{\tilde{\LL}_h^{-1}}_h \cdot \norm{R_h \LL u - \LL_h R_h u}_h \\
     & \leq c_1 \cdot c_2 \cdot h^p \cdot \norm{u}_{\Cont^{p+2}(\cOmega)}
     \leq C h^p \qquad
-    \text{für $0 < h \leq h_0$.}
+    \text{für $0 < h \leq h_0$.} \qedhere
   \end{align*}
 \end{proof}
 
@@ -500,8 +500,103 @@
 
 % Ausgelassen: Beispiel einer reduziblen Matrix
 
+% Vorlesung vom 27.10.2015
+
+\begin{defn}
+  Eine $(n \times n)$-Matrix heißt \emph{irreduzibel diagonaldominant}, falls sie irreduzibel und schwach diagonaldominant ist.
+\end{defn}
+
+% 3.3
+\begin{lem}
+  Sei $A = (a_{ij}) \in \R^{n \times n}$ eine Matrix mit $a_{ii} > 0$, $i = 1, \ldots, n$ und $a_{ij} \leq 0$, $i, j = 1, \ldots, n$, $i \neq j$, die diagonaldominant oder irreduzibel diagonaldominant ist.
+  Dann ist $A$ eine M-Matrix.
+\end{lem}
+
 \begin{bem}
-  $- \tilde{\Laplace}_h$ ist irreduzibel
+  $- \tilde{\Laplace}_h$ ist irreduzibel diagonaldominant, also eine M-Matrix.
 \end{bem}
+
+% Noch zu zeigen: $\sup_{0 < h \leq h_0} \norm{\tilde{\Laplace}_h^{-1}} < \infty$
+
+% 3.4
+\begin{lem}
+  Sei $A \in \R^{n \times n}$ eine M-Matrix und es existiere ein Vektor $v$, sodass $(Av)_j \geq 1$, $j = 1, \ldots, n$.
+  Dann gilt $\norm{A^{-1}}_\infty \leq \norm{v}_\infty$.
+\end{lem}
+
+% 3.5
+\begin{lem}
+  $\norm{\tilde{\Laplace}_h^{-1}}_\infty \leq \tfrac{1}{8}$
+\end{lem}
+
+% Beweis folgt aus dem letzten Lemma mit $v = (v_1, \ldots, v_n)^T$ mit $v_i \coloneqq h^2/2 i (n-i)$
+
+% 3.6
+\begin{satz}
+  Das DV (RWP\tss{1})\tss{h} ist konvergent von der Ordnung 2, falls die Lösung von (RWP\tss{1}) zu $\Cont^4(\cinterval{0}{1})$ gehört.
+  Es gilt die Abschätzung $\norm{u_h - R_h u}_\infty \leq \tfrac{h^2}{96} \norm{u}_{\Cont^4(\cinterval{0}{1})}$.
+\end{satz}
+
+% 3.2. Differenzenverfahren für die Poisson-Gleichung in $\Omega = \ointerval{0}{1} \times \ointerval{0}{1}$
+
+\begin{problem}
+  Wir betrachten nun
+  \[
+    \text{(RWP\tss{2})} \left\{ \begin{array}{rlll}
+      - \Laplace u &=& f &\text{ in $\Omega = \ointerval{0}{1} \times \ointerval{0}{1}$} \\
+      u &=& g &\text{ auf $\bOmega$}
+    \end{array} \right.
+  \]
+\end{problem}
+
+\begin{enumerate}
+  \item Diskretisierung: Setze $h \coloneqq \tfrac{1}{n}$, $n \in \N$ und
+  \begin{align*}
+    \Omega_h & \coloneqq \Set{(x, y) \in \Omega}{x = ih, y = jh, i,j = 1, \ldots, {n-1}} \\
+    \partial \Omega_h & \coloneqq \Set{(x, y) \in \bOmega}{x = ih, y = jh, i,j = 1, \ldots, {n-1}}
+  \end{align*}
+  \item Approximation der Ableitungen
+  \begin{align*}
+  - \Laplace u (x, y)
+  &= - \tfrac{\partial^2 u}{\partial x^2} (x,y) - \tfrac{\partial^2 u}{\partial y^2} (x, y) \\
+  &\approx - \tfrac{u(x + h, y) - 2 u(x, y) + u(x-h, y)}{h^2} - \tfrac{u(x, y+h) - 2 u(x,y) + u(x, y-h)}{h^2} \\
+  &= - \tfrac{u(x+h,y) + u(x-h,y) - 4 u(x, y) + u(x, y+h) + u(x, y-h)}{h^2} =: - \Laplace_h u
+  \end{align*}
+  Dabei hat der diskrete Laplace-Operator $\Laplace_h$ die Form eines Differenzensterns.
+  Gesucht ist die Lsg $u_h : \Omega_h \cup \partial \Omega_h \to \R$ von
+  \[
+    \text{(RWP\tss{2})\tss{h}} \left\{ \begin{array}{rlll}
+      - \Laplace_h u_h &=& f_h &\text{ in $\Omega_h$} \\
+      u_h &=& g &\text{ auf $\bOmega_h$.}
+    \end{array} \right.
+  \]
+  \item Aufstellen des linearen Gleichungssystems $- \tilde{\Laplace}_h \tilde{u}_h = f_h$:
+  % wir verwenden hier die zeilenweise Nummerierung
+  \[
+    \tilde{u}_h = \begin{pmatrix}
+      u_{11} \\
+      u_{12} \\
+      \vdots \\
+      u_{n-1,n-2} \\
+      u_{n-1,n-1}
+    \end{pmatrix} \in \R^{(n-1)^2},
+  \]
+  \begin{align*}
+    - \tilde{\Laplace}_h = \frac{1}{h^2} & \begin{pmatrix}
+      A & -I & && 0 \\
+      -I & A & -I && \\
+      & \ddots & \ddots & \ddots \\
+      && -I & A & -I \\
+      0 &&& -I & A
+    \end{pmatrix} \in \R^{(n-1)^2 \times (n-1)^2}, \\
+    A = & \begin{pmatrix}
+      4 & -1 & && 0 \\
+      -1 & 4 & -1 && \\
+      & \ddots & \ddots & \ddots \\
+      && -1 & 4 & -1 \\
+      0 &&& -1 & 4
+    \end{pmatrix} \in \R^{n-1 \times n-1}
+  \end{align*}
+\end{enumerate}
 
 \end{document}
