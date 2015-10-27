@@ -510,18 +510,24 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 % Nordstrom-Robinson-Code:
 % Ein (16, 256, 6)-Code über $\F_2$
 
+% Vorlesung vom 27.10.2015
+
 % §4.4 Die Generatormatrix
 
-Sei $C$ ein $[n,k]$-Code über $\F_q$ (die Informationrate ist $\tfrac{k}{n}$).
-$\dim_{\F_q} C = k$, also $C \cong \F_q^k$.
+\begin{defn}
+  Sei $C$ ein $[n,k]$-Code über $\F_q$, \dh{} es gibt eine injektive Codierabbildung $E : \F_q^k \to \F_q^n$ mit $\im(E) = C$.
+  Dann heißt für jede Basis $g^1, \ldots, g^k \in C$ von $C$ die Matrix
+  \[
+    G \coloneqq \begin{psmallmatrix}
+      g^1 \\ \vdots \\ g^k
+    \end{psmallmatrix} \in \F_q^{k \times n} \qquad
+    \text{eine \emph{Generatormatrix} von $C$.}
+  \]
+\end{defn}
 
-Codierabbildung: $E : \F_q^k \to \F_q^n$ mit $\im(E) = C$.
-Sei $g^1, \ldots, g^k \in C$ einen Basis von $C$.
-Dann heißt $G \coloneqq \begin{psmallmatrix}
-  g^1 \\ \vdots g^k
-\end{psmallmatrix} \in \F_q^{k \times n}$ \emph{Generatormatrix}.
-
-Dann ist $E(u) = uG = \sum_{j=1}^k u_j g^j \in C$
+\begin{bem}
+  Dann ist $E(u) = uG = \sum_{j=1}^k u_j g^j \in C$
+\end{bem}
 
 % Ausgelassen: Bspe Parity-Check-Erweiterung und 5-Wiederholungscode
 
@@ -554,23 +560,25 @@ Dann ist $E(u) = uG = \sum_{j=1}^k u_j g^j \in C$
 
 % §4.5 Gewichtsminimale Repäsentanten und Standard-Array-Decodierung
 
-$V = \F_q^n$, $C$ ein $\F_q$-Teilraum von $V$.
-Sind $x, y \in V$, so schreiben wir $x \equiv y (\mod C) \coloniff x-y \in C$.
-Die zu $x \in V$ gehörende Kongruenzklasse modulo $C$ ist $x + C$.
+\begin{nota}
+  Sei $C \subset \F_q^n$ ein UVR. Für $x, y \in \F_q^n$ schreiben wir
+  \[ x \equiv y \pmod{C} \coloniff x-y \in C. \]
+  Die zu $x \in V$ gehörende Kongruenzklasse modulo $C$ ist $x + C$.
+\end{nota}
 
 \begin{defn}
-  Ein Repräsentantensystem $\mathcal{R}$ dieser Klassen heißt \emph{gewichtsminimal}, falls gilt $\wt(r) = \min_{c \in C} \wt(r+c)$ für alle $r \in \mathcal{R}$.
+  Ein Repräsentantensystem $\mathcal{R}$ dieser Klassen heißt \emph{gewichtsminimal}, falls $\wt(r) = \min_{c \in C} \wt(r+c)$ für alle $r \in \mathcal{R}$.
 \end{defn}
 
 \begin{satz}
-  Sei $C$ ein $[n, k]$-Code über $\F_q$, $\mathcal{R}$ ein gewichtsminimales Repräsentantensystem modulo $C$.
-  Zu jedem $y \in \F_q^n$ sei $\mathcal{R}(y) \in \R$ mit $\mathcal{R}(y) + C = y + C$.
+  Sei $C$ ein $[n, k]$-Code über $\F_q$, $\mathcal{R}$ ein gewichtsmin. Repräsen- tantensystem mod $C$.
+  Zu $y \in \F_q^n$ sei $\mathcal{R}(y) \in \R$ mit $\mathcal{R}(y) + C = y + C$.
   Dann ist $D : \F_q^n \to C, \enspace y \mapsto y - \mathcal{R}(y)$ eine Decodierabbildung.
 \end{satz}
 
 % Ausgelassen: Beispiel
 
-TODO: Standard-Array-Decodierung beschreiben
+% TODO: Standard-Array-Decodierung beschreiben
 
 % §4.6 Dualer Code: Kontrollmatrix und Syndromdecodierung
 
@@ -600,7 +608,7 @@ TODO: Standard-Array-Decodierung beschreiben
 \end{defn}
 
 \begin{lem}
-  $x \in C \iff Hx' = 0$
+  $x \in C \iff H x^T = 0$
 \end{lem}
 
 \begin{alg}
@@ -610,16 +618,13 @@ TODO: Standard-Array-Decodierung beschreiben
   eine surjektive lineare Abbildung mit $\ker(\psi_H) = C$.
   \begin{itemize}
     \item Sei $c \in C$ gesendet, $y \in \F_q^n$ empfangen, etwa $y = c + e$.
-    Berechne das \emph{Syndrom} $s \coloneqq \phi_H(y) = H y^T = H c^T + H e^T = H e^T$.
-    \item $e$ ist mit größter Wkt ein gewichtsminimaler Repräsentant von $y$.
-    Sei also $\mathcal{R}$ ein minimales Repräsentantensystem.
-    $\psi \coloneqq $ Einschränkung von $\psi_H$ auf $\mathcal{R}$
-    Dann ist $\psi : \mathcal{R} \to \F_q^{n-k}$ bijektiv.
-    Haben ein Syndrom $s$ berechnet. Bilden $\psi^{-1}(s)$.
-    Dann ist $D(y) \coloneqq y - \psi^{-1}(s)$ eine Decodierabbildung.
+    Wir als Empfänger kennen jedoch $c$ und $e$ nicht, nur $y$.
+    Trotzdem können wir das \emph{Syndrom} $s \coloneqq \phi_H(y) = H c^T + H e^T = H e^T \in \F_q^{n-k}$ berechnen.
+    \item Wahrscheinlich ist $e$ ein gewichtsminimaler Repräsentant von $y$.
+    Sei also $\mathcal{R}$ ein minimales Repräsentantensystem. \\
+    Dann ist $\psi \coloneqq \psi_H|_{\mathcal{R}} : \mathcal{R} \to \F_q^{n-k}$ bijektiv. \\
+    Dann definiert $D(y) \coloneqq y - \psi^{-1}(s)$ eine Decodierabbildung.
   \end{itemize}
-  %$\psi_H^{-1}(s) = $
-  %Sei $s \in \F_q^{n-k}$.
 \end{alg}
 
 \end{document}
