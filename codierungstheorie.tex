@@ -21,6 +21,8 @@
 \DeclareMathOperator{\spann}{span} % aufgespannte (lineare) Hülle
 \newcommand{\lin}{\text{lin}} % linear
 \newcommand{\scp}[2]{\left( #1 \!\mid\! #2 \right)} % Skalarprodukt
+\newcommand{\homogen}{\text{hom}} % homogen
+\newcommand{\divides}{|} % teilt
 
 \begin{document}
 
@@ -626,5 +628,70 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
     Dann definiert $D(y) \coloneqq y - \psi^{-1}(s)$ eine Decodierabbildung.
   \end{itemize}
 \end{alg}
+
+% Vorlesung vom 29.10.2015
+
+\begin{satz}
+  Sei~$C$ ein linearer $[n, k, d]$-Code über $\F_q$, $H$~eine Kontrollmatrix zu~$C$.
+  Dann gilt:
+  \begin{align*}
+    d &= 1 + \max \Set{a \in \N^*}{\text{je $a$ Spalten von $H$ sind lineare unabhängig}} \\
+    &= \min \Set{m \in \N^*}{\text{es gibt $m$ linear abhängige Spalten in $H$}}
+  \end{align*}
+\end{satz}
+
+\begin{defn}
+  Sei~$C$ ein linearer Code der Länge~$n$ über $\F_q$.
+  Die \emph{Gewichtsverteilung von $C$} ist $A = A_C \in \N^{\{ 0, 1, \ldots, n \}}$ mit $A(i) \coloneqq $ Anzahl der Codeworte in $C$ mit Gewicht~$i$ ($0 \leq i \leq n$).
+\end{defn}
+
+\begin{bem}
+  Es gilt $A_0 = 1$ und $A_1 = A_2 = \ldots = A_{d-1} = 0$, falls~$d$ das Minimalgewicht von $C$ ist.
+\end{bem}
+
+\begin{defn}
+  $A_C(Z) \coloneqq \sum_{i=0}^k A_i Z^k \in \C[Z]$ heißt \emph{Gewichtszählpolynom},
+  \[ A_C^\homogen(X, Y) \coloneqq \sum_{i=0}^n A_i X^{n-i} \cdot Y^i \in \C[X, Y] \]
+  heißt \emph{homogenes Gewichtszählpolynom}.
+\end{defn}
+
+\begin{bem}
+  \inlineitem{$A_C(Z) = A_C^\homogen(1, Z)$} \quad
+  \inlineitem{$A_C^\homogen(X, Y) = X^n \cdot A_C(\tfrac{Y}{X})$}
+  \begin{itemize}
+    \item Aus $A_C(X, Y)$ erhält man durch die sogenannte Mac-Williams-Transformation $A_{C^\perp}(X, Y)$
+  \end{itemize}
+\end{bem}
+
+% §5. Hamming-Codes
+
+% §5.1. Die Parameter eines 1-fehlerkorrigierenden perfekten linearen Codes
+
+\begin{bem}
+  Sei $C$ ein perfekter $(n, M, d)$-Code. %über $Q$ mit $q = \abs{Q}$.
+  Dann ist $d$ ungerade.
+\end{bem}
+
+% Nun $t=1$, also $d=3$. Ist nun $C$ perfekt, so gilt $\abs{C} = \frac{q^n}{1 + n(q-1)}$, es ist also $1+n(q-1)$ ein Teiler von $q^n$.
+
+% Für $q \geq 2$ und $n = q+1$ ist $1 + n(q-1) = q^2$ ein Teiler von $q^n$
+
+% Das ist eine notwendige, aber nicht hinreichende Bedingung. Zum Bsp gibt es keinen perfekten Code bei $q=6$.
+
+\begin{lem}
+  Seien $p, u, v \in \N$, $p \geq 2$. Dann gilt $u \divides v \iff p^n - 1 \divides p^v - 1$.
+\end{lem}
+
+\begin{prop}
+  Sei $C$ perfekt mit $t=1$ über $Q$, wobei $\abs{Q} = q$ eine Primzahlpotenz ist.
+  Dann ist $\abs{C}$ eine $q$-Potenz.
+\end{prop}
+
+Sei $q \geq 2$ eine Primzahlpotenz, $C$ ein $q$-närer perfekter $(n, M, 3)$-Code.
+Dann $q^k = \abs{C} = M = \frac{q^n}{1 + n(q-1)}$ $\iff$ $n = \frac{q^{n-k} - 1}{q - 1}$
+
+Wie viele Lösungspaare $(n, k)$ gibt es bei festem $q$?
+
+Ein Parameter $m \in \N$, $m \geq 2$: $k(m) \coloneqq n - m$, $n(m) \coloneqq \tfrac{q^m - 1}{q - 1}$.
 
 \end{document}
