@@ -81,6 +81,7 @@
 \newtheorem*{diskussion}{Diskussion}
 \newtheorem*{aufgabe}{Aufgabe}
 \newtheorem*{faustregel}{Faustregel}
+\newtheorem*{entscheidungsregel}{Entscheidungsregel}
 
 \theoremstyle{remark}
 \newtheorem*{bem}{Bem}

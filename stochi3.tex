@@ -23,6 +23,8 @@
 \newcommand{\ind}{\mathbbm{1}} % Indikatorfunktion
 \newcommand{\Cont}{\mathcal{C}} % Menge der stetigen/diff'baren Funktionen
 \newcommand{\scp}[2]{\left( #1 \!\mid\! #2 \right)} % Skalarprodukt
+%\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
 
 \DeclareMathOperator{\var}{Var} % Varianz
 \DeclareMathOperator{\cov}{Cov} % Kovarianz
@@ -31,6 +33,7 @@
 % Verteilungen
 \newcommand{\Normal}{\mathcal{N}} % Gaußsche Normalverteilung
 \DeclareMathOperator{\Exp}{Exp} % Exponentialverteilung
+\newcommand{\MN}{\mathcal{M}} % Multinomialverteilung
 
 \begin{document}
 
@@ -55,7 +58,7 @@
 \end{defn}
 
 \begin{terminologie}
-  Die Hypothese $H_i$ heißt \emph{einfach}, falls $\abs{H_i} = 1$, andernfalls \emph{zusammengesetzt}.
+  Die Hypothese $H_i$ heißt \emph{einfach}, falls $\abs{\Theta_i} = 1$, andernfalls \emph{zusammengesetzt}.
 \end{terminologie}
 
 \begin{defn}
@@ -343,10 +346,15 @@
 \end{defn}
 
 \begin{bem}
-  Bei $k=2$ schreibt man oft $C = \begin{psmallmatrix}
-    \sigma_1^2 & \sigma_1 \sigma_2 \rho \\
-    \sigma_1 \sigma_2 \rho & \sigma_2^2
-  \end{psmallmatrix}$ mit $\rho \coloneqq \cor(X_1, X_2)$.
+  Bei $k=2$ schreibt man oft
+  \[
+    C = \begin{psmallmatrix}
+      \sigma_1^2 & \sigma_1 \sigma_2 \rho \\
+      \sigma_1 \sigma_2 \rho & \sigma_2^2
+    \end{psmallmatrix}
+    \quad \text{mit} \quad
+    \rho \coloneqq \cor(X_1, X_2).
+  \]
 \end{bem}
 
 \begin{defn}
@@ -395,7 +403,7 @@
   \end{align*}
   Die Klassenhäufigkeiten sind nun multinomialverteilt:
   \[ \P(h_{n_1} \!=\! n_1, \nldots, h_{n_{s+1}} \!=\! n_{s+1}) = {n \choose n_1, \nldots, n_{s+1}} (p_1^{(0)})^{n_1} \cdots (p_{s+1}^{(0)})^{n_{s+1}}. \]
-  Als Maß für die Abweichung einer empirischen Verteilung von $F_0$ bei gegebener Klasseneinteilung dient
+  Als (näherungsweises) Maß für die Abweichung einer empirischen Verteilung von $F_0$ bei gegebener Klasseneinteilung dient
   \[ T_{n,s+1} \coloneqq \sum_{j=1}^{s+1} \frac{(h_{n_j} - n p_j^{(0)})^2}{n p_j^{(0)}}. \]
 \end{verf}
 
@@ -406,5 +414,75 @@
 \begin{faustregel}
   Für $n p_j^{(0)} \geq 5$, $j = 1, \ldots, s+1$ ist $T_{n,s+1}$ mit guter Näherung $\chi_s^2$-verteilt.
 \end{faustregel}
+
+% Vorlesung vom 29.10.2015
+
+\begin{entscheidungsregel}[$\chi^2$-Anpassungstest]
+  Die Nullhypothese $H_0 : F = F_0$ wird genau dann verworfen, wenn $T_{n,s+1} > \chi^2_{s,1-\alpha}$.
+\end{entscheidungsregel}
+
+\begin{bemn}
+  \begin{itemize}
+    \item $T_{n,s+1}$ misst eigentlich nicht die Abweichung von der VF~$F_0$, sondern von der Multinomialverteilung $\MN(n, p^{(0)})$.
+    \item Der $\chi^2$-Anpassungstest gilt als hypothesenfreundlich.
+    \item Es ist üblich, zunächst die Parameter $\vartheta = (\vartheta_1, \ldots, \vartheta_r)$ der VF~$F_0$ durch MLE zu schätzen, also durch
+    \begin{align*}
+      & \hat{\vartheta}_n \coloneqq \argmax L(h_{n_1}, \ldots, h_{n_{s+1}}; \vartheta), \quad \text{wobei} \\
+      & L(h_{n_1}, \ldots, h_{n_{s+1}}; \vartheta) \coloneqq \prod_{j=1}^{s+1} \left( p_j^{(0)} \right)^{h_{n_j}}.
+    \end{align*}
+    % Natürliche Bedingungen: Rao-Cramér-Regularität
+    Es kann (unter "`natürlichen"' Bedingungen) gezeigt werden, dass
+    \[ T_{n,s+1}(\hat{\vartheta}_n) = \sum_{j=1}^{s+1} \frac{(h_{n_j} - n p_j^{(0)}(\hat{\vartheta}_n))^2}{n p_j^{(0)}(\hat{\vartheta}_n)} \xra[n \to \infty]{d} \chi_{s-r}^2, \]
+    wobei $r$ die Anzahl der geschätzten Parameter ist. %$\hat{\vartheta}_n = (\hat{\vartheta}_{n,1}, \ldots, \hat{\vartheta}_{n,r})$.
+    \item Manchmal wird die Parameter-Schätzung auch direkt aus der SP $x_1, \ldots, x_n$ ermittelt (\zB{} $\tilde{\mu}_n \coloneqq \tfrac{1}{n} (x_1 + \ldots + x_n)$ für den MW einer Normalverteilung).
+    In manchen Fällen kann dann auf die Reduktion der Freiheitsgrade von $s$ auf $s-r$ verzichtet werden.
+  \end{itemize}
+\end{bemn}
+
+% Klassisches Beispiel: Hufschlagtote in der preußischen Armee
+
+% 2.2. Chi-Quadrat-Unabhängigkeitstest, Kontingenztafeln
+
+\begin{ziel}
+  Überprüfen, ob die Komponenten $X$ und $Y$ eines zweidim. Zufallsvektors $(X, Y)^T$ unabhängig sind.
+\end{ziel}
+
+\begin{verf}
+  Seien $I_1, \ldots, I_k \subset \R^{n_1}$ und $J_1, \ldots, J_l \subset \R^{n_2}$ jeweils Familien paarweise disjunkter Mengen mit $\P(X \in I_1 \cup \ldots \cup I_k) = 1$ bzw. $\P(Y \in J_1 \cup \ldots \cup J_l) = 1$.
+  Wir setzen
+  \begin{align*}
+    & p_{ij} \coloneqq \P((X, Y) \in I_i \times J_j) = \P(\{ X \in I_i \} \cap \{ X_j \in J_j \}), \\
+    & p_{i\bullet} \coloneqq \sum_{j=1}^l p_{ij} = \P(X \in I_i), \quad
+    p_{\bullet j} \coloneqq \sum_{i=1}^k p_{ij} = \P(Y \in J_j).
+  \end{align*}
+  Wir wollen nun die Nullhypothese $H_0 : \fa{(i, j)} p_{ij} = p_{i \bullet} \cdot p_{\bullet j}$ gegen $H_1 : \ex{(i,j)} p_{ij} \neq p_{i \bullet} \cdot p_{\bullet j}$ testen.
+  Wir zählen dazu die Häufigkeiten einer Stichprobe $(X_1, Y_1), \ldots, (X_n, Y_n)$:
+  \begin{align*}
+    & h_{ij}^{(n)} \coloneqq \abs{\Set{m \in \{ 1, \ldots, n \}}{(X_m, Y_m) \in I_i \times J_j}}, \\
+    & h_{i \bullet} \coloneqq \sum_{j=1}^l h_{ij}, \quad
+    h_{\bullet j} \coloneqq \sum_{i=1}^k h_{ij}.
+  \end{align*}
+  Diese Häufigkeiten werden in einer \emph{Kontingenztafel} dargestellt:
+  \begin{center}
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{c | c c c c | c}
+      & $1$ & $2$ & $\cdots$ & $l$ & \\ \hline
+      $1$ & $h_{11}^{(n)}$ & $h_{12}^{(n)}$ & $\cdots$ & $h_{1l}^{(n)}$ & $h_{1 \bullet}^{(n)}$ \\
+      $2$ & $h_{21}^{(n)}$ & $h_{22}^{(n)}$ & $\cdots$ & $h_{2l}^{(n)}$ & $h_{2 \bullet}^{(n)}$ \\
+      \vdots & \vdots & \vdots & & \vdots & $\vdots$ \\
+      $k$ & $h_{k1}^{(n)}$ & $h_{k2}^{(n)}$ & $\cdots$ & $h_{kl}^{(n)}$ & $h_{k \bullet}^{(n)}$ \\ \hline
+      & $h_{\bullet 1}^{(n)}$ & $h_{\bullet 2}^{(n)}$ & $\cdots$ & $h_{\bullet l}^{(n)}$ & n
+    \end{tabular}
+  \end{center}
+  Wir können den Test nun wie folgt als Spezialfall des $\chi^2$-Anpas- sungstests verstehen: Die Nullhypothese ist, dass die Verteilung von $(X, Y)$ das Produkt der Verteilungen von $X$ und $Y$ ist.
+  Dabei schätzen wir zunächst die Verteilungen von $X$ und $Y$ durch Maximieren von
+  \begin{align*}
+    & L(h_{1 \bullet}^{(n)}, \ldots, h_{k \bullet}^{(n)}, h_{\bullet 1}^{(n)}, \ldots, h_{\bullet l}^{(n)}; p_{1 \bullet}, \ldots p_{k-1, \bullet}, p_{\bullet 1}, \ldots, p_{\bullet, l-1}) \\
+    \coloneqq & \prod_{i=1}^{k} (p_{i \bullet})^{h_{i \bullet}^{(n)}} \cdot \prod_{j=1}^l (p_{\bullet j})^{h_{\bullet j}^{(n)}}.
+  \end{align*}
+  % Das sind insgesamt $k+l-2$ zu schätzende Parameter.
+  Wir haben dann
+  \[ T_{k,l}^{(n)} \coloneqq \sum_{i=1}^k \sum_{j=1}^l \frac{(h_{ij}^{(n)} - n p_{i \bullet} p_{\bullet j})^2}{n \cdot p_{i \bullet} p_{\bullet j}} \]
+\end{verf}
 
 \end{document}
