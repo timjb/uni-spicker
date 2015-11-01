@@ -5,6 +5,8 @@
   /Author (Tim Baumann)
 }
 
+\usepackage{nicefrac}
+
 % Kleinere Klammern
 \delimiterfactor=701
 
@@ -147,7 +149,7 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 \begin{defn}
   \begin{itemize}
     \item Man nennt einen Kanal einen \emph{$q$-nären symmetrischen Kanal}, falls ein $p \in \R$ mit $0 < p < (q-1)/q$ existiert, sodass
-    \[ \CP{\text{$\beta$ empfangen}}{\text{$\alpha$ gesendet}} = \tfrac{p}{q-1} \]
+    \[ \CP{\text{$\beta$ empfangen}}{\text{$\alpha$ gesendet}} = \nicefrac{p}{q-1} \]
     für alle $\beta \neq \alpha \in Q$, also $\CP{\text{$\alpha$ empfangen}}{\text{$\alpha$ gesendet}} = 1-p$.
     \item Man nennt einen Kanal \emph{gedächtnislos}, falls
     \[ \CP{\text{$y$ empfangen}}{\text{$c$ gesendet}} = \prod_{i=1}^n \CP{\text{$y_i$ empfangen}}{\text{$c_i$ gesendet}} \]
@@ -189,7 +191,7 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 
 \begin{defn}
   Die \emph{Kanalkapazität} eines $q$-nären symmetrischen Kanal ist
-  \[ \kappa(q, p) \coloneqq \log_2(q) + p \cdot \log_2 (\tfrac{p}{q-1}) + (1-p) \cdot \log_2 (1-p). \]
+  \[ \kappa(q, p) \coloneqq \log_2(q) + p \cdot \log_2 (\nicefrac{p}{q-1}) + (1-p) \cdot \log_2 (1-p). \]
   Sie ist ein Maß für die maximale Information, die über den Kanal übertragen werden kann.
   Die \emph{Entropiefunktion} ist
   \[ H(q, p) \coloneqq 1 - \kappa(q, p). \]
@@ -243,8 +245,8 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 \begin{satz}
   Jeder $(n, M, d)$-Code $C$ ist genau
   \begin{itemize}
-    \miniitem{0.49 \linewidth}{$(d{-}1)$-fehlererkennend und}
-    \miniitem{0.48 \linewidth}{$(t \coloneqq \floor{\tfrac{d-1}{2}})$-fehlerkorrigierend.}
+    \miniitem{0.48 \linewidth}{$(d{-}1)$-fehlererkennend und}
+    \miniitem{0.49 \linewidth}{$(t \coloneqq \floor{\nicefrac{d-1}{2}})$-fehlerkorrigierend.}
   \end{itemize}
 \end{satz}
 
@@ -302,7 +304,7 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 
 % 
 \begin{defn}
-  Sei $(G, +, 0)$ eine kommutative Gruppe.
+  Sei $(G, +, 0)$ eine kommutative Gruppe. \\
   Das \emph{Hamming-Gewicht} von $x \in G^n$ ist
   \[
     \wt(x) \coloneqq \abs{\supp(x)},
@@ -632,7 +634,7 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 % Vorlesung vom 29.10.2015
 
 \begin{satz}
-  Sei~$C$ ein linearer $[n, k, d]$-Code über $\F_q$, $H$~eine Kontrollmatrix zu~$C$.
+  Sei~$C$ ein linearer $[n, k, d]$-Code über $\F_q$, $H$~eine Kontroll- matrix zu~$C$.
   Dann gilt:
   \begin{align*}
     d &= 1 + \max \Set{a \in \N^*}{\text{je $a$ Spalten von $H$ sind lineare unabhängig}} \\
@@ -641,8 +643,13 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 \end{satz}
 
 \begin{defn}
-  Sei~$C$ ein linearer Code der Länge~$n$ über $\F_q$.
-  Die \emph{Gewichtsverteilung von $C$} ist $A = A_C \in \N^{\{ 0, 1, \ldots, n \}}$ mit $A(i) \coloneqq $ Anzahl der Codeworte in $C$ mit Gewicht~$i$ ($0 \leq i \leq n$).
+  Sei~$C$ ein linearer Code der Länge~$n$ über $\F_q$. \\
+  Die \emph{Gewichtsverteilung von~$C$} ist
+  $A = A_C \in \N^{\{ 0, 1, \ldots, n \}}$ mit
+  \[
+    A(i) \coloneqq \Set{w \in C}{\wt(w) = i}, \quad
+    0 \leq i \leq n.
+  \]
 \end{defn}
 
 \begin{bem}
@@ -667,19 +674,21 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 
 % §5.1. Die Parameter eines 1-fehlerkorrigierenden perfekten linearen Codes
 
-\begin{bem}
+\begin{lem}
   Sei $C$ ein perfekter $(n, M, d)$-Code. %über $Q$ mit $q = \abs{Q}$.
   Dann ist $d$ ungerade.
+\end{lem}
+
+\begin{bem}
+  Wir betrachten nun perfekte Codes $C$ mit $t=1$, also $d=3$.
+  Es gilt dann $\abs{C} = \nicefrac{q^n}{1 + n(q-1)}$, es ist also $1+n(q-1)$ ein Teiler von~$q^n$.
+  Beispielsweise ist für~$q \geq 2$ und~$n = q+1$ die Zahl $1 + n(q-1) = q^2$ ein Teiler von~$q^n$.
+  Diese Teilbarkeit ist eine notwendige, aber nicht hinreichende Bedingung für die Existenz eines perfekten $(n, M, 3)$-Codes über $Q$ mit $q = \abs{Q}$.
+  %Zum Bsp gibt es keinen perfekten Code bei $q=6$.
 \end{bem}
 
-% Nun $t=1$, also $d=3$. Ist nun $C$ perfekt, so gilt $\abs{C} = \frac{q^n}{1 + n(q-1)}$, es ist also $1+n(q-1)$ ein Teiler von $q^n$.
-
-% Für $q \geq 2$ und $n = q+1$ ist $1 + n(q-1) = q^2$ ein Teiler von $q^n$
-
-% Das ist eine notwendige, aber nicht hinreichende Bedingung. Zum Bsp gibt es keinen perfekten Code bei $q=6$.
-
 \begin{lem}
-  Seien $p, u, v \in \N$, $p \geq 2$. Dann gilt $u \divides v \iff p^n - 1 \divides p^v - 1$.
+  Seien $p, u, v \in \N$, $p \geq 2$. Dann gilt $u \divides v \iff p^u - 1 \divides p^v - 1$.
 \end{lem}
 
 \begin{prop}
@@ -687,11 +696,14 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
   Dann ist $\abs{C}$ eine $q$-Potenz.
 \end{prop}
 
-Sei $q \geq 2$ eine Primzahlpotenz, $C$ ein $q$-närer perfekter $(n, M, 3)$-Code.
-Dann $q^k = \abs{C} = M = \frac{q^n}{1 + n(q-1)}$ $\iff$ $n = \frac{q^{n-k} - 1}{q - 1}$
-
-Wie viele Lösungspaare $(n, k)$ gibt es bei festem $q$?
-
-Ein Parameter $m \in \N$, $m \geq 2$: $k(m) \coloneqq n - m$, $n(m) \coloneqq \tfrac{q^m - 1}{q - 1}$.
+\begin{bem}
+  Sei nun $q \geq 2$ eine Primzahlpotenz, $C$ ein $q$-närer perfekter $(n, M, 3)$-Code.
+  Dann ist
+  \[ q^k = \abs{C} = M = \nicefrac{q^n}{1 + n(q-1)} \iff n = \nicefrac{(q^{n-k} - 1)}{q - 1} \]
+  Wie viele Lösungspaare $(n, k)$ gibt es bei festem $q$?
+  Wir setzen $m \coloneqq n - k$.
+  Dann ist $k(m) \coloneqq n - m$ und $n(m) \coloneqq \tfrac{q^m - 1}{q - 1}$.
+  Die Lösungspaare hängen damit nur noch vom Parameter $m$ ab.
+\end{bem}
 
 \end{document}
