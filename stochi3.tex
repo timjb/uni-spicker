@@ -7,6 +7,7 @@
 
 \usepackage{bbm} % Für 1 mit Doppelstrich (Indikatorfunktion)
 \usepackage{mathtools} % psmallmatrix environment
+\usepackage{nicefrac}
 
 % Kleinere Klammern
 \delimiterfactor=701
@@ -25,6 +26,8 @@
 \newcommand{\scp}[2]{\left( #1 \!\mid\! #2 \right)} % Skalarprodukt
 %\DeclareMathOperator*{\argmin}{arg\,min}
 \DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\eqqd}{\stackrel{d}{=}} % Gleichheit in Verteilung (equality in distribution)
+\newcommand{\iid}{i.\,i.\,d.} % identisch unabhängig verteilt
 
 \DeclareMathOperator{\var}{Var} % Varianz
 \DeclareMathOperator{\cov}{Cov} % Kovarianz
@@ -475,14 +478,68 @@
     \end{tabular}
   \end{center}
   Wir können den Test nun wie folgt als Spezialfall des $\chi^2$-Anpas- sungstests verstehen: Die Nullhypothese ist, dass die Verteilung von $(X, Y)$ das Produkt der Verteilungen von $X$ und $Y$ ist.
-  Dabei schätzen wir zunächst die Verteilungen von $X$ und $Y$ durch Maximieren von
+  Dabei schätzen wir zunächst die Verteilungen von $X$ und $Y$ mit
   \begin{align*}
     & L(h_{1 \bullet}^{(n)}, \ldots, h_{k \bullet}^{(n)}, h_{\bullet 1}^{(n)}, \ldots, h_{\bullet l}^{(n)}; p_{1 \bullet}, \ldots p_{k-1, \bullet}, p_{\bullet 1}, \ldots, p_{\bullet, l-1}) \\
     \coloneqq & \prod_{i=1}^{k} (p_{i \bullet})^{h_{i \bullet}^{(n)}} \cdot \prod_{j=1}^l (p_{\bullet j})^{h_{\bullet j}^{(n)}}.
   \end{align*}
+  Diese Funktion wird maximal bei $\hat{p}_{i \bullet} = \nicefrac{h_{i \bullet}^{(n)}}{n}$ und $\hat{p}_{\bullet j}^{(n)} = \nicefrac{h_{\bullet j}^{(n)}}{n}$. \\
   % Das sind insgesamt $k+l-2$ zu schätzende Parameter.
-  Wir haben dann
-  \[ T_{k,l}^{(n)} \coloneqq \sum_{i=1}^k \sum_{j=1}^l \frac{(h_{ij}^{(n)} - n p_{i \bullet} p_{\bullet j})^2}{n \cdot p_{i \bullet} p_{\bullet j}} \]
+  % Vorlesung vom 2.11.2015
+  Als Test-Statistik verwenden wir
+  \begin{align*}
+    \hat{T}_{k,l}^{(n)} \coloneqq &
+    \sum_{i=1}^k \sum_{j=1}^l \frac{(h_{ij}^{(n)} - n \hat{p}_{i \bullet} \hat{p}_{\bullet j})^2}{n \cdot \hat{p}_{i \bullet} \hat{p}_{\bullet j}} =
+    n \sum_{i=1}^k \sum_{j=1}^l \frac{\left( h_{ij}^{(n)} - \nicefrac{h_{i \bullet}^{(n)} \cdot h_{\bullet j}^{(n)}}{n} \right)^2}{h_{i \bullet}^{(n)} \cdot h_{\bullet j}^{(n)}} \\
+    & \xra[n \to \infty]{d} \chi^2_{kl - 1 - (k{-}1) - (l{-}1)} = \chi^2_{(k-1)(l-1)}
+  \end{align*}
+  Testregel: Die Nullhypothese wird genau dann abgelehnt, falls
+  \[ \hat{T}_{k,l}^{(n)} > \chi^2_{(k-1)(l-1),1-\alpha}. \]
 \end{verf}
+
+\begin{bemn}
+  \begin{itemize}
+    \item Zum Testen eines höherdim. ZV $(X_1, \ldots, X_r)$ auf Unabhängigkeit aller Komponenten untersuchen wir die Ereignisse
+    \[
+      (X_1, \ldots, X_r) \in I_{i_1}^{(1)} \times \ldots \times I_{i_r}^{(r)} \quad
+      \text{für $(i_1, \ldots, i_r) \in \bigtimes_{j=1}^r \{ 1, \ldots, k_j \}$}
+    \]
+    für eine passende Intervalleinteilung.
+    Wir verwenden dann
+    \begin{align*}
+      \hat{T}_{k_1, \ldots, k_r}^{(n)} \coloneqq
+      & n^{r-1} \sum_{i_1=1}^{k_1} \cdots \sum_{i_r=1}^{k_r} \frac{\left(h_{i_1 \cdots i_r}^{(n)} - n^{-r + 1} \prod_{s=1}^r h_{\bullet \cdots i_j \cdots \bullet}^{(n)}\right)^2}{\prod_{s=1}^r h_{\bullet \cdots i_j \cdots \bullet}} \\
+      & \xra[n \to \infty]{d} \chi^2_{k_1 \cdots k_s - k_1 - \ldots - k_r + r - 1}
+    \end{align*}
+    \item Im Spezialfall $k \!=\! l \!=\! 2$ (Vierfeldertafel) hat die Statistik die Form
+    \[
+      \hat{T}_{2,2}^{(n)} =
+      n \cdot \frac{\left(h_{11}^{(n)} \cdot h_{22}^{(n)} - h_{12}^{(n)} \cdot h_{21}^{(n)}\right)^2}{h_{\bullet 1}^{(n)} \cdot h_{\bullet 2}^{(n)} \cdot h_{1 \bullet}^{(n)} \cdot h_{2 \bullet}^{(n)}}
+      \xra[n \to \infty]{d} \chi^2_n = \Normal^2(0, 1)
+    \]
+    und wir lehnen $H_0$ genau dann ab, wenn $\hat{T}_{2,2}^{(n)} > \chi^2_{1,1-\alpha} = z^2_{1 - \nicefrac{\alpha}{2}}$.
+  \end{itemize}
+\end{bemn}
+
+% 2.3. Kolmogorow-Smirnow-Test
+
+\begin{situation}
+  Sei $X_1, \ldots, X_n \sim F$ eine math. SP.
+  Wir sortieren die dabei gezogenen Werte aufsteigend: $X_{1:n} \leq X_{2:n} \leq \ldots \leq X_{n:n}$.
+  Dann heißt $\hat{F}_n(x) \coloneqq \nicefrac{1}{n} \sum_{i=1}^n \ind_{\ocinterval{-\infty}{x}}(X_{i:n})$ \emph{empirische VF}.
+\end{situation}
+
+\begin{satz}[Gliwenko, Hauptsatz der math. Statistik]
+  \[ \sup_{x \in \R^1} \abs{\hat{F}_n(x) - F(x)} \xra[n \to \infty]{\text{$\P$-f.\,s.}} 0 \]
+\end{satz}
+
+\begin{lem}
+  Sei $F$ stetig.
+  Dann ist die Verteilung von $\sup_x \abs{\hat{F}_n(x) - F(x)}$ nicht von der VF $F$ abhängig.
+  Genauer:
+  \[ \sup_x \abs{\hat{F}_n(x) - F(x)} \eqqd \sup_{0 \leq y \leq 1} \abs{\hat{G}_n(y) - G(y)}, \]
+  wobei $\hat{G}_n(y) \coloneqq \nicefrac{1}{n} \sum_{i=1}^n \ind_{\cinterval{0}{y}}(U_i)$ für $U_1, \ldots, U_n \sim \mathcal{R} \cinterval{0}{1}$ \iid{}
+  % TODO: Was ist das für eine Verteilung?
+\end{lem}
 
 \end{document}
