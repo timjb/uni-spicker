@@ -6,6 +6,7 @@
 }
 
 \usepackage{nicefrac}
+\usepackage{tikz}
 
 % Kleinere Klammern
 \delimiterfactor=701
@@ -21,6 +22,7 @@
 \newcommand{\tss}[1]{\textsubscript{#1}} % Subskript, kürzer
 \newcommand{\rn}{\text{rn}} % randnah
 \newcommand{\rf}{\text{rf}} % randfern
+\renewcommand{\O}{\mathcal{O}} % Landau-Symbol
 
 \begin{document}
 
@@ -654,45 +656,92 @@
 
 % 3.3. Diskretisierung in einem beschränkten Gebiet in R^2
 
-Sei $\Omega \subset \R^2$ beschränkt, $\Omega_h = \Set{x, y \in \Omega}{\nicefrac{x}{h}, \nicefrac{y}{h} \in \Z}$ % Menge der inneren Gitterpunkte
+\begin{situation}
+  Sei $\Omega \subset \R^2$ beschränkt.
+\end{situation}
 
 \begin{defn}
   \begin{itemize}
+    \item $\Omega_h \coloneqq \Set{x, y \in \Omega}{\nicefrac{x}{h}, \nicefrac{y}{h} \in \Z}$ heißen \emph{innere Gitterpkte}.
     \item Ein Punkt $z_R \in \bOmega$ heißt \emph{Randgitterpunkt}, falls es einen inneren Gitterpunkt $z \in \Omega_h$ gibt, sodass $z_R = r + \alpha h e_1$ oder $z_R = z + \alpha h e_2$ mit $\abs{\alpha} \leq 1$.
     \item Ein Punkt $(x, y) \in \Omega_h$ heißt \emph{randnah}, falls $(x, y)$ die Nachbarn $(x - s_l h, y)$, $(x + s_r h, y)$, $(x, y - s_u h)$, $(x, y+ s_o h)$ hat mit mindestens einem $s_i < 1$.
     Ansonsten heißt $(x, y)$ \emph{randfern}.
   \end{itemize}
 \end{defn}
 
-Wir haben eine Einteilung $\Omega_h = \Omega_h^\rn \sqcup \Omega_h^\rf$ der Gitterpunkte in randnahe und randferne Punkte.
+\begin{nota}
+  Wir haben eine Einteilung $\Omega_h = \Omega_h^\rn \sqcup \Omega_h^\rf$ der Gitterpunkte in randnahe und randferne Punkte.
+\end{nota}
 
-% TODO: Zeichung
+\begin{center}
+  \begin{tikzpicture}[scale=0.6]
+    \draw[->] (-3,1.5) -- node [left] {$s_o$} (-3,2.5);
+    \draw[->] (-3,1.5) -- node [left] {$s_u$} (-3,0);
+    \draw[->] (-3,1.5) -- node [below] {$s_r$} (-1.5,1.5);
+    \draw[->] (-3,1.5) -- node [below] {$s_l$} (-4.5,1.5);
+    \draw [magenta,fill=magenta] (-3,1.5) circle (.06) node [above right] {$x$};
+    \draw [blue,fill=blue] (-3,2.6) circle (.06);
+    \draw [blue,fill=blue] (-1.4,1.5) circle (.06);
+    \draw [green,fill=green] (-3,-0.1) circle (.06);
+    \draw [green,fill=green] (-4.6,1.5) circle (.06);
+    
+    
+    \draw (-0.5,0) -- (3.5,0);
+    \draw (-0.5,1) -- (3.5,1);
+    \draw (-0.5,2) -- (3.5,2);
+    \draw (-0.5,3) -- (3.5,3);
+    \draw (0,-0.5) -- (0,3.5);
+    \draw (1,-0.5) -- (1,3.5);
+    \draw (2,-0.5) -- (2,3.5);
+    \draw (3,-0.5) -- (3,3.5);
+    \draw (-0.5,2.5) .. controls (0.5,2.75) and (0,3.3) .. (2.75,3.3) .. controls (3.5,3.3) and (3.5,2) .. (3, 1.5) .. controls (2.5,1) and (2.5,1.75) .. (2,1) .. controls (1.5,0) and (1.5,0) .. (1.5,-0.5);
+    \foreach \point in {(1,1), (2,2), (1,2), (0,0), (0,1)} {
+      \draw [green,fill=green] \point circle (.06);
+    }
+    \foreach \point in {(0,2), (1,3), (2,3), (3,3), (3,2), (1,0)} {
+      \draw [magenta,fill=magenta] \point circle (.06);
+    }
+    \foreach \point in {(0,2.7), (1,3.16), (2,3.28), (3,3.22), (3.22,3), (3.28,2), (3,1.5), (2,1), (1.55,0)} {
+      \draw [blue,fill=blue] \point circle (.06);
+    }
+    
+    \draw [blue,fill=blue] (4.5,3) circle (.1);
+    \node at (5,3) [right] { Randgitterpunkt };
+    \draw [magenta,fill=magenta] (4.5,2) circle (.1);
+    \node at (5,2) [right] { randnaher Punkt };
+    \draw [green,fill=green] (4.5,1) circle (.1);
+    \node at (5,1) [right] { randferner Punkt };
+  \end{tikzpicture}
+\end{center}
 
 % 3.3.1 Shortley-Weller-Diskretisierung
 
-Dividierte Differenzen von Newton:
+\begin{verf}[Dividierte Differenzen von Newton]\mbox{}\\
+  Für $u \in \Cont^3(\cinterval{x_l}{x_r})$ ist
 
-Sei $u \in \Cont^3(\cinterval{x_l}{x_r})$.
+  \begin{align*}
+    u''(x) = & \frac{2}{x_r - x_l} \left( \frac{u(x_r) - u(x)}{x_r - x} - \frac{u(x) - u(x_l)}{x - x_l} \right) + \O(x_r - x_l) \\
+    = & \frac{2}{x_r - x_l} \left( \tfrac{1}{x_r - x} u(x_r) + \tfrac{1}{x - x_l} u(x_l) \right) \\
+    & - \frac{2}{(x_r - x)(x - x_l)} u(x) + \O(x_r - x_l).
+  \end{align*}
 
-\begin{align*}
-  u''(x) & = \frac{2}{x_r - x_l} \left( \frac{u(x_r) - u(x)}{x_r - x} - \frac{u(x) - u(x_l)}{x - x_l} \right) + \vartheta(x_r - x_l) \\
-  & = \frac{2}{x_r - x_l} \left( \frac{1}{x_r - x} u(x_r) + \frac{1}{x - x_l} u(x_l) \right) - \frac{2}{(x_r - x)(x - x_l)} u(x) + \vartheta(x_r - x_l)
-\end{align*}
+  Somit ist
 
-\[
-  \mathcal{D}_h u(x, y) = \nicefrac{1}{h^2} \left( \frac{2}{s_l (s_r + s_l)} u(x - s_l h, y) + \frac{2}{s_r (s_r + s_l)} u(x+s_r h, y) + \frac{2}{s_u (s_o + s_u)} u(x, y - s_u h) + \frac{2}{s_o (s_o + s_u)} u(x, y + s_o h) - (\frac{2}{s_l s_r} + \frac{2}{s_o s_u}) u(x, y) \right)
-\]
+  \begin{align*}
+    \mathcal{D}_h u(x, y) = \nicefrac{1}{h^2} & \left( \frac{2}{s_l (s_r + s_l)} u(x - s_l h, y) + \frac{2}{s_r (s_r + s_l)} u(x+s_r h, y) \right. \\
+    & \left. + \frac{2}{s_u (s_o + s_u)} u(x, y - s_u h) + \frac{2}{s_o (s_o + s_u)} u(x, y + s_o h) \right. \\
+    & \left. - (\frac{2}{s_l s_r} + \frac{2}{s_o s_u}) u(x, y) \right)
+  \end{align*}
 
-$x_r - x_l = (s_r + s_l) h$
-
-$x_r - x =  s_r h$
-
-$x - x_l = s_l h$
-
-$y_o - y_u = (s_o - s_u) h$
-
-$y_o - y = s_o h$
-
-$y - y_u = s_u h$
+  wobei
+  \begin{align*}
+    & x_r - x_l = (s_r + s_l) h, \quad
+    x_r - x = s_r h, \quad
+    x - x_l = s_l h \\
+    & y_o - y_u = (s_o - s_u) h, \quad
+    y_o - y = s_o h, \quad
+    y - y_u = s_u h
+  \end{align*}
+\end{verf}
 
 \end{document}
