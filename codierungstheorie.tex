@@ -6,6 +6,9 @@
 }
 
 \usepackage{nicefrac}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage[normalem]{ulem} % \sout
 
 % Kleinere Klammern
 \delimiterfactor=701
@@ -25,6 +28,7 @@
 \newcommand{\scp}[2]{\left( #1 \!\mid\! #2 \right)} % Skalarprodukt
 \newcommand{\homogen}{\text{hom}} % homogen
 \newcommand{\divides}{|} % teilt
+\DeclareMathOperator{\Ham}{Ham} % Hamming-Code (was sonst?)
 
 \begin{document}
 
@@ -705,5 +709,95 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
   Dann ist $k(m) \coloneqq n - m$ und $n(m) \coloneqq \tfrac{q^m - 1}{q - 1}$.
   Die Lösungspaare hängen damit nur noch vom Parameter $m$ ab.
 \end{bem}
+
+% Vorlesung vom 3.11.2015
+
+% 5.5
+\begin{satz}
+  Zu jedem $m \geq 2$ und zu jeder Primzahlpotenz $q \geq 2$ gibt es einen linearen perfekten $[\tfrac{q^m - 1}{q - 1}, \tfrac{q^m - 1}{q - 1} - m, 3]$-Code über $\F_q$.
+\end{satz}
+
+% 5.6
+\begin{kor}
+  Ist $q \geq 2$ eine Primzahlpotenz, so gilt
+  \[
+    A^\lin_q \left( \tfrac{q^m - 1}{q - 1}, 3 \right) =
+    A_q \left( \tfrac{q^m - 1}{q - 1}, 3 \right) =
+    q^{q^0 + \ldots + q^{m-1} - m}
+    \quad
+    \forall m \geq 2, m \in \N
+  \]
+\end{kor}
+
+% §5.2 Konstruktion und Decodierung der binären Hamming-Codes
+
+% ausgelassen: Tabelle von binären Hamming-Codes
+
+\begin{konstr}
+  Ein bin. \emph{Hamming-Code} $\Ham_2(m)$ (ein $[n, n {-} m, 3]$- Code mit $n \coloneqq 2^m - 1$) ist geg. durch die Kontrollmatrix $H \in \F_2^{m \times n}$, welche jeden Vektor aus $\F_2^m \setminus \{ 0 \}$ in genau einer Spalte stehen hat.
+\end{konstr}
+
+\begin{alg}[Decodierung von binären Hamming-Codes]\mbox{}\\
+  Angenommen, die Spalten der Kontrollmatrix $H$ codieren die Zahlen $1, \ldots, 2^m - 1$ im Binärsystem und sind geordnet.
+  Sei $y \in \F_2^n$ empfangen worden.
+  Falls $Hy = 0$, so wurde wsl. $y$ gesendet.
+  Falls das Syndrom $Hy$ ungleich null ist, so ist vermutlich das $j$-te Bit gekippt, wobei $j$ die Zahl ist, deren Binärcodierung $Hy$ ist.
+\end{alg}
+
+% §5.3 Untersuchung des binären [7,4]-Hamming-Codes
+
+% 5.2
+\begin{prop}
+  Sei $m \geq 2$, $n = 2^m - 1$ und $A \in \N^{0, 1, \ldots, \N}$ die Gewichtsverteilung des $[n, n - m, 3]$-Hamming-Codes.
+  Dann gilt $A_{n-j} = A_j$ für alle $j = 0, 1, \ldots, 2^{m-1} - 1$.
+\end{prop}
+
+% 5.11
+\begin{satz}
+  Die Gewichtsverteilung des binären $[7,4]$-Hamming-Codes ist
+  \[ A = (1, 0, 0, 7, 7, 0, 0, 1). \]
+\end{satz}
+
+\begin{bem}
+  Sei $C = \Ham_2(3)$, $C_3 \coloneqq \Set{c \in C}{\wt(c) = 3}$.
+  Für $c \in C_3$ seien $P(c) \coloneqq \Set{i = 1, \ldots, 7}{c_i = 1}$ die Positionen der in $c$ gesetzten Bits. \\
+  Falls $i \in P(c)$, so sagen wir, dass $i$ auf der Geraden $c$ liege. \\
+  Dies definiert die folgende geometrische Struktur:
+\begin{center}
+  % http://tex.stackexchange.com/a/208907
+  \begin{tikzpicture}[scale=0.6]
+    \draw (30:1)  -- (210:2)
+          (150:1) -- (330:2)
+          (270:1) -- (90:2)
+          (90:2)  -- (210:2) -- (330:2) -- cycle
+          (0:0)   circle (1);
+    \fill (0:0)   circle(3pt)
+          (30:1)  circle(3pt)
+          (90:2)  circle(3pt)
+          (150:1) circle(3pt)
+          (210:2) circle(3pt)
+          (270:1) circle(3pt)
+          (330:2) circle(3pt);
+    \node at (2,2) [right] {\sout{Die Heiligtümer des Todes}};
+    \node at (2,1.25) [right] {\emph{Fano-Ebene}};
+    \node at (2,0.5) [right] {$S_1(2,3,7)$-Blockplan};
+    \node at (2,-0.25) [right] {Steinersystem};
+    \node at (2,-1) [right] {Projektive Ebene $PG(2, \F_2)$};
+  \end{tikzpicture}
+\end{center}
+  Wir bemerken, dass jede Gerade drei Punkte enthält, jeder Punkt auf drei Geraden liegt, durch je zwei verschiedene Punkte genau eine Gerade verläuft und jedes Paar von Geraden sich in genau einem Punkt schneidet.
+  Die Vierecke in der Fano-Ebene sind die Komplemente von Geraden.
+  Sie entsprechen den Codeworten mit Hamming-Gewicht 4.
+  % ausgelassen: andere Möglichkeit, wie man aus $C$ die Fano-Ebene erhält
+\end{bem}
+
+% 5.14
+\begin{satz}
+  Die Parity-Check-Erweiterung des $[7, 4]$-Hamming-Codes ist ein binärer $[8, 4, 4]$-Code.
+  Dieser ist selbst-dual und optimal.
+  Sein homogenes Gewichtszählpolynom ist $X^8 + 14 X^4 Y^4 + Y^8$.
+\end{satz}
+
+% §5.4 q-näre lineare Hamming-Codes
 
 \end{document}
