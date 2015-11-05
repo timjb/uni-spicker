@@ -29,6 +29,8 @@
 \newcommand{\homogen}{\text{hom}} % homogen
 \newcommand{\divides}{|} % teilt
 \DeclareMathOperator{\Ham}{Ham} % Hamming-Code (was sonst?)
+\DeclareMathOperator{\Sim}{Sim} % Simplex-Code
+\newcommand{\Proj}{\mathbb{P}} % Projektiver Raum
 
 \begin{document}
 
@@ -791,6 +793,8 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
   % ausgelassen: andere Möglichkeit, wie man aus $C$ die Fano-Ebene erhält
 \end{bem}
 
+% Vorlesung vom 5.11.2015
+
 % 5.14
 \begin{satz}
   Die Parity-Check-Erweiterung des $[7, 4]$-Hamming-Codes ist ein binärer $[8, 4, 4]$-Code.
@@ -799,5 +803,66 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 \end{satz}
 
 % §5.4 q-näre lineare Hamming-Codes
+
+\begin{konstr}
+  Wir definieren auf $A \coloneqq \F_q^n \setminus \{ 0 \}$ eine Äq'relation durch
+  \[ u \sim v \coloniff \ex{\lambda \in \F_q} u = \lambda v. \]
+  Wir setzen $\Proj \coloneqq PG(m-1, \F_q) \coloneqq A/{\sim}$.
+  Es gilt $\abs{\Proj} = \nicefrac{q^m - 1}{q - 1} = n$. \\
+  Sei $v_1, \ldots, v_n$ ein Representantensystem der Äquivalenzklassen. \\
+  Dann definiert die Kontrollmatrix $H_q(m) \coloneqq (v_1 \cdots v_n)^T \in \F_q^{m \times n}$ den \emph{$q$-nären Hamming-Code} $\Ham_q(n)$.
+\end{konstr}
+
+\begin{bem}
+  % Wir wählen das Representantensystem so, dass für alle $i = 1, \ldots, n$ gilt:
+  % Sei $j$ minimal mit $(v_i)_j \neq 0$. Dann ist $v_i = 1$.
+  Wir wählen das Representantensystem wie folgt:
+  \[
+    \left\{ \begin{psmallmatrix} 0 \\ \vdots \\ 0 \\ 0 \\ 1 \end{psmallmatrix} \right\} \cup
+    \left\{ \begin{psmallmatrix} 0 \\ \vdots \\ 0 \\ 1 \\ * \end{psmallmatrix} \right\} \cup \ldots \cup
+    \left\{ \begin{psmallmatrix} 1 \\ * \\ \vdots \\ * \\ * \end{psmallmatrix} \right\},
+  \]
+  also so, dass der erste Eintrag jedes Vektors eine 1 ist.
+\end{bem}
+
+% 5.16
+\begin{alg}[Decodieren des $q$-nären Hamming-Codes]
+  Sei $y$ empfangen mit höchstens einem Fehler.
+  Berechne das Syndrom $s = H_q(m)y^T$.
+  Falls $s = 0$, so ist $D(y) \coloneqq y$.
+  Angenommen, $s_i \neq 0$.
+  Sei $i$ minimal mit $s_i \neq 0$.
+  Dann ist $\nicefrac{s}{s_i}$ eine Spalte von $H_q(m)$, etwa die $l$-te Spalte.
+  Decodiere $D(y) \coloneqq y - s_i \cdot e_l$.
+\end{alg}
+
+% §5.5 Die Familie der Simplex-Codes
+
+\begin{defn}
+  Sei $q \geq 2$ eine Primzahlpotenz und $m \geq 2$.
+  Der Code $\Sim_q(m) \coloneqq \Ham_q(m)^\perp$ heißt \emph{Simplex-Code}.
+\end{defn}
+
+\begin{bem}
+  $\Sim_q(m)$ ist ein $[n, m]$-Code.
+\end{bem}
+
+\begin{satz}
+  $\Sim_q(m)$ ist \emph{gewichtskonstant}, \dh{} jedes vom Nullwort verschiedene Codewort hat Gewicht $q^{m-1}$.
+\end{satz}
+
+\begin{bem}
+  Also ist $A_{\Sim_q(m)}(z) = 1 + (q^m - 1) \cdot z^{q^{m-1}}$.
+\end{bem}
+
+% §5.6 Gewichtsverteilung der binären Hamming-Codes
+
+\begin{satz}
+  $A_{\Ham_2(m)}(z) = \tfrac{1}{n+1} (1+z)^n + \tfrac{n}{n+1} (1+z)^{\tfrac{n-1}{2}} \cdot (1-z)^{\tfrac{n+1}{2}}$,
+  wobei $n = 2^m - 1$.
+  Es gilt die Rekursionsgleichung
+  \[ {n \choose l-1} = (n-l+2) \cdot A_{l-2} + A_{l-1} + l \cdot A_l. \]
+\end{satz}
+
 
 \end{document}
