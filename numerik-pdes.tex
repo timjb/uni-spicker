@@ -455,13 +455,21 @@
 
 \begin{defn}
   Eine Matrix $A = (a_{ij}) \in \R^{n \times n}$ heißt \emph{M-Matrix}, falls
-  \begin{itemize}
+  \begin{enumerate}[label=\alph*),leftmargin=1.6em]
     \miniitem{0.43 \linewidth}{$a_{ii} > 0$ für $i = 1, \ldots, n$,}
     \miniitem{0.53 \linewidth}{$a_{ij} \leq 0$ für $i \neq j$, $i, j = 1, \ldots, n$,}
     \miniitem{0.43 \linewidth}{$A$ invertierbar ist und}
     \miniitem{0.53 \linewidth}{für $A^{-1} =: B = (b_{ij})$ gilt $b_{ij} \geq 0$.}
-  \end{itemize}
+  \end{enumerate}
 \end{defn}
+
+% 4.3.9 im Hackbusch
+\begin{lem}
+  Erfülle $A \in \R^{n \times n}$ die Bedingungen a) und b).
+  Zerlege $A = D + L + R$ in eine Diagonalmatrix und strikte untere/obere Dreiecksmatrizen.
+  Dann ist $A$ genau dann eine M-Matrix wenn
+  \[ \rho(D^{-1}(L + R)) < 1. \]
+\end{lem}
 
 \begin{bem}
   Es gilt folgende Monotonie-Eigenschaft für M-Matrizen:
@@ -471,6 +479,33 @@
   \]
   % je komponentenweise
 \end{bem}
+
+\begin{defn}
+  Eine Matrix $A \in \R^{n \times n}$ heißt \emph{reduzibel} (oder zerlegbar), wenn es eine Permutationsmatrix $P \in \R^{n \times n}$ gibt, sodass
+  \[
+    PAP^T = \begin{psmallmatrix}
+      A_{11} & A_{12} \\
+      0 & A_{22}
+    \end{psmallmatrix} \quad
+    \text{mit $A_{11} \in R^{k \times k}$, $0 < k < n$.}
+  \]
+  % Ist $A$ nicht reduzibel, so heißt $A$ irreduzibel
+\end{defn}
+
+% Lem 4.3.4 im Hackbusch
+\begin{lem}[Gerschgorin]
+  Alle EWe einer Matrix $A = (a_{ij}) \in \C^{n \times n}$ liegen in der Menge
+  \[
+    \bigcup_{i=1}^n \clos{B_{r_i}(a_{ii})}
+    \quad \text{mit} \quad
+    r_i \coloneqq \sum_{j=1}^n \abs{a_{ij}}.
+  \]
+  Falls $A$ irreduzibel ist, so liegen sie sogar in
+  \[
+    \left( \bigcup_{i=1}^n B_{r_i}(a_{ii}) \right) \cup
+    \left( \bigcap_{i=1}^n \partial B_{r_i}(a_{ii}) \right)
+  \]
+\end{lem}
 
 \begin{defn}
   Sei $A = (a_{ij}) \in \R^{n \times n}$ eine Matrix.
@@ -486,31 +521,10 @@
       \sum_{\substack{j=1\\j \neq i}}^n \abs{a_{ij}} < \abs{a_{ii}} \quad
       \text{für $i = 1, \ldots, n$}
     \]
+    % Ausgelassen: Beispiel einer reduziblen Matrix
+    % Vorlesung vom 27.10.2015
+    \item $A$ heißt \emph{irreduzibel diagonaldominant}, falls $A$ irreduzibel und schwach diagonaldominant ist.
   \end{itemize}
-\end{defn}
-
-\begin{bem}
-  $- \tilde{\Laplace}_h$ ist schwach diagonaldominant
-\end{bem}
-
-\begin{defn}
-  Eine Matrix $A \in \R^{n \times n}$ heißt \emph{reduzibel} (oder zerlegbar), wenn es eine Permutationsmatrix $P \in \R^{n \times n}$ gibt, sodass
-  \[
-    PAP^T = \begin{psmallmatrix}
-      A_{11} & A_{12} \\
-      0 & A_{22}
-    \end{psmallmatrix} \quad
-    \text{mit $A_{11} \in R^{k \times k}$, $0 < k < n$.}
-  \]
-  % Ist $A$ nicht redzibel, so heißt $A$ irreduzibel
-\end{defn}
-
-% Ausgelassen: Beispiel einer reduziblen Matrix
-
-% Vorlesung vom 27.10.2015
-
-\begin{defn}
-  Eine $(n \times n)$-Matrix heißt \emph{irreduzibel diagonaldominant}, falls sie irreduzibel und schwach diagonaldominant ist.
 \end{defn}
 
 % 3.3
@@ -522,6 +536,11 @@
 \begin{bem}
   $- \tilde{\Laplace}_h$ ist irreduzibel diagonaldominant, also eine M-Matrix.
 \end{bem}
+
+% 4.3.11 im Hackbusch
+\begin{lem}
+  Sei $A$ eine irreduzible M-Matrix. Dann gilt $A^{-1} > 0$.
+\end{lem}
 
 % Noch zu zeigen: $\sup_{0 < h \leq h_0} \norm{\tilde{\Laplace}_h^{-1}} < \infty$
 
@@ -541,7 +560,8 @@
 % 3.6
 \begin{satz}
   Das DV (RWP\tss{1})\tss{h} ist konvergent von der Ordnung 2, falls die Lösung von (RWP\tss{1}) zu $\Cont^4(\cinterval{0}{1})$ gehört.
-  Es gilt die Abschätzung $\norm{u_h - R_h u}_\infty \leq \tfrac{h^2}{96} \norm{u}_{\Cont^4(\cinterval{0}{1})}$.
+  Es gilt die Abschätzung
+  \[ \norm{u_h - R_h u}_\infty \leq \tfrac{h^2}{96} \norm{u}_{\Cont^4(\cinterval{0}{1})}. \]
 \end{satz}
 
 % 3.2. Differenzenverfahren für die Poisson-Gleichung in $\Omega = \ointerval{0}{1} \times \ointerval{0}{1}$
