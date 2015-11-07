@@ -584,8 +584,8 @@
   \end{align*}
   \item Approximation der Ableitungen
   \begin{align*}
-  - \Laplace u (x, y)
-  &= - \tfrac{\partial^2 u}{\partial x^2} (x,y) - \tfrac{\partial^2 u}{\partial y^2} (x, y) \\
+  - & \Laplace u (x, y)
+  = - \tfrac{\partial^2 u}{\partial x^2} (x,y) - \tfrac{\partial^2 u}{\partial y^2} (x, y) \\
   &\approx - \tfrac{u(x + h, y) - 2 u(x, y) + u(x-h, y)}{h^2} - \tfrac{u(x, y+h) - 2 u(x,y) + u(x, y-h)}{h^2} \\
   &= - \tfrac{u(x+h,y) + u(x-h,y) - 4 u(x, y) + u(x, y+h) + u(x, y-h)}{h^2} =: - \Laplace_h u
   \end{align*}
@@ -684,7 +684,8 @@
 \begin{defn}
   \begin{itemize}
     \item $\Omega_h \coloneqq \Set{x, y \in \Omega}{\nicefrac{x}{h}, \nicefrac{y}{h} \in \Z}$ heißen \emph{innere Gitterpkte}.
-    \item Ein Punkt $z_R \in \bOmega$ heißt \emph{Randgitterpunkt}, falls es einen inneren Gitterpunkt $z \in \Omega_h$ gibt, sodass $z_R = r + \alpha h e_1$ oder $z_R = z + \alpha h e_2$ mit $\abs{\alpha} \leq 1$.
+    \item Ein Punkt $z_R \in \bOmega$ heißt \emph{Randgitterpunkt} (notiert $z_R \in \partial \Omega_h$), falls es einen inneren Gitterpunkt $z \in \Omega_h$ gibt, sodass $z_R = r + \alpha h e_1$ oder $z_R = z + \alpha h e_2$ mit $\abs{\alpha} \leq 1$.
+    Die Nachbarn $N(x, y)$ eines Punktes $(x, y)$ sind $(x + s_r h, y)$, $(x - s_l h, y)$, $(x, y + y_o h)$, $(x, y - s_u h) $, falls $s_r, s_l, s_o, s_u \in \ocinterval{0}{1}$ und die Verbindungsstrecken zu $(x, y)$ in $\Omega$ liegen.
     \item Ein Punkt $(x, y) \in \Omega_h$ heißt \emph{randnah}, falls $(x, y)$ die Nachbarn $(x - s_l h, y)$, $(x + s_r h, y)$, $(x, y - s_u h)$, $(x, y+ s_o h)$ hat mit mindestens einem $s_i < 1$.
     Ansonsten heißt $(x, y)$ \emph{randfern}.
   \end{itemize}
@@ -737,70 +738,59 @@
 
 % 3.3.1 Shortley-Weller-Diskretisierung
 
-\begin{verf}[Dividierte Differenzen von Newton]\mbox{}\\
-  Für $u \in \Cont^3(\cinterval{x_l}{x_r})$ ist
+\begin{lem}[\emph{Dividierte Differenzen von Newton}]\mbox{}\\
+  Für $u \in \Cont^3(\cinterval{x_l}{x_r})$, $x \in \ointerval{x_l}{x_r}$ gilt
+  \[
+    u''(x) = \underbrace{\frac{2}{x_r - x_l} \left( \frac{u(x_r) - u(x)}{x_r - x} - \frac{u(x) - u(x_l)}{x - x_l} \right)}_{\mathclap{= \frac{2}{x_r - x_l} \left( \tfrac{1}{x_r - x} u(x_r) + \tfrac{1}{x - x_l} u(x_l) \right) - \frac{2}{(x_r - x)(x - x_l)} u(x)}} + \O(x_r - x_l)
+  \]
+  % = & \frac{2}{x_r - x_l} \left( \tfrac{1}{x_r - x} u(x_r) + \tfrac{1}{x - x_l} u(x_l) \right) \\
+  % & - \frac{2}{(x_r - x)(x - x_l)} u(x) + \O(x_r - x_l).
+\end{lem}
 
+\begin{verf}[\emph{Shortley-Weller-Diskretisierung}] \mbox{}\\
+  Dadurch inspiriert approximieren wir den Laplace-Operator durch
   \begin{align*}
-    u''(x) = & \frac{2}{x_r - x_l} \left( \frac{u(x_r) - u(x)}{x_r - x} - \frac{u(x) - u(x_l)}{x - x_l} \right) + \O(x_r - x_l) \\
-    = & \frac{2}{x_r - x_l} \left( \tfrac{1}{x_r - x} u(x_r) + \tfrac{1}{x - x_l} u(x_l) \right) \\
-    & - \frac{2}{(x_r - x)(x - x_l)} u(x) + \O(x_r - x_l).
+    \DO_h & u(x, y) = \frac{1}{h^2} \left( \frac{2 u(x - s_l h, y)}{s_l (s_r {+} s_l)} + \frac{2 u(x+s_r h, y)}{s_r (s_r {+} s_l)} \right. \\
+    & \left. + \frac{2 u(x, y {-} s_u h)}{s_u (s_o {+} s_u)}  + \frac{2 u(x, y {+} s_o h)}{s_o (s_o {+} s_u)} - \left( \frac{2}{s_l s_r} + \frac{2}{s_o s_u} \right) u(x, y) \right)
   \end{align*}
-
-  Somit ist
-
+  wobei
+  $x_r - x = s_r h$, \enspace
+  $x - x_l = s_l h$, \enspace
+  $y_o - y = s_o h$, \enspace
+  $y - y_u = s_u h$.
+  % Vorlesung vom 3.11.2015
+  Wir betrachten nun
   \begin{align*}
-    \DO_h u(x, y) = \nicefrac{1}{h^2} & \left( \frac{2}{s_l (s_r + s_l)} u(x - s_l h, y) + \frac{2}{s_r (s_r + s_l)} u(x+s_r h, y) \right. \\
-    & \left. + \frac{2}{s_u (s_o + s_u)} u(x, y - s_u h) + \frac{2}{s_o (s_o + s_u)} u(x, y + s_o h) \right. \\
-    & \left. - (\frac{2}{s_l s_r} + \frac{2}{s_o s_u}) u(x, y) \right)
+    \text{(RWP\tss{2})'\tss{h}}\enspace & \left\{ \begin{array}{rrcl}
+      - \DO_h u_h &=& f_h &\text{ in $\Omega_h$} \\
+      u_h &=& g &\text{ auf $\bOmega_h$}
+    \end{array} \right. \\
+    \text{(LGS\tss{2})'}\enspace & \left\{ \begin{array}{rcl}
+      - \tilde{\DO}_h \tilde{u}_h &=& \tilde{f}_h \\
+      \tilde{f}_h &=& f_h + g_h
+    \end{array} \right.
   \end{align*}
-
+  \[
+    \text{mit} \quad
+    g_h(x, y) = \nicefrac{1}{h^2} \qquad \sum_{\mathclap{(x_N, y_N) \in N(x, y) \cap \partial \Omega_h}} \qquad S_{x_N,y_N} g(x_N, y_N)
+  \]
   wobei
   \begin{align*}
-    & x_r - x_l = (s_r + s_l) h, \quad
-    x_r - x = s_r h, \quad
-    x - x_l = s_l h \\
-    & y_o - y_u = (s_o - s_u) h, \quad
-    y_o - y = s_o h, \quad
-    y - y_u = s_u h
-  \end{align*}
-  
-  % Vorlesung vom 3.11.2015
-  
-  \[
-    \text{(RWP\tss{2})'\tss{h}}\enspace \left\{ \begin{array}{rl}
-      - \DO_h u_h = f_h &\text{ in $\Omega_h$} \\
-      u_h = g &\text{ auf $\bOmega_h$}
-    \end{array} \right.
-  \]
-  \[
-    \text{(LGS\tss{2})'}\enspace \left\{ \begin{array}{rl}
-      - \tilde{\DO}_h \tilde{u}_h & = \tilde{f}_h \\
-      \tilde{f}_h & = f_h + g_h
-    \end{array} \right.
-  \]
-  \[ g_h(x, y) = \nicefrac{1}{h^2} \sum_{(x_N, y_N) \in N(x, y) \cap \partial \Omega_h} S_{x_N,y_N} g(x_N, y_N) \]
-  mit
-  \[
-    S_{x_N,y_N} \coloneqq \begin{cases}
-      \nicefrac{2}{s_l (s_l + s_r)} & \text{falls $(x_N, y_N) = (x - s_l h, y)$} \\
-      \nicefrac{2}{s_r (s_l + s_r)} & \text{falls $(x_N, y_N) = (x + s_r h, y)$} \\
-      \nicefrac{2}{s_o (s_o + s_u)} & \text{falls $(x_N, y_N) = (x, y + s_o h)$} \\
-      \nicefrac{2}{s_u (s_o + s_u)} & \text{falls $(x_N, y_N) = (x, y - s_u h)$} \\
-    \end{cases}
-  \]
-  % N(x, y) := Menge der Nachbarn von (x, y)
-  \[
-    - \tilde{\DO}_h = (d_{ij}) \quad \text{mit} \quad
-    d_{ii} = \nicefrac{1}{h^2} \left( \tfrac{2}{s_{il} s_{ir}} + \tfrac{2}{s_{iu} s_{io}} \right),
-  \]
-  \[
-    d_{ij} = \nicefrac{1}{h^2} \begin{cases}
+    S_{x_N,y_N} \coloneqq & \begin{cases}
+      \nicefrac{2}{s_l (s_l + s_r)} & \text{falls $(x_N, y_N) = (x - s_l h, y)$,} \\
+      \nicefrac{2}{s_r (s_l + s_r)} & \text{falls $(x_N, y_N) = (x + s_r h, y)$,} \\
+      \nicefrac{2}{s_o (s_o + s_u)} & \text{falls $(x_N, y_N) = (x, y + s_o h)$,} \\
+      \nicefrac{2}{s_u (s_o + s_u)} & \text{falls $(x_N, y_N) = (x, y - s_u h)$,} \\
+    \end{cases} \\
+    - \tilde{\DO}_h = (d_{ij}) & \quad \text{mit} \quad
+    d_{ii} = \nicefrac{1}{h^2} \left( \tfrac{2}{s_{il} s_{ir}} + \tfrac{2}{s_{iu} s_{io}} \right) \quad \text{und} \\
+    d_{ij} = \nicefrac{1}{h^2} & \begin{cases}
       - \nicefrac{2}{s_{il} (s_{il} + s_{ir})} & \text{falls $j$ der linke Nachbar von $i$ ist,} \\
       - \nicefrac{2}{s_{ir} (s_{il} + s_{ir})} & \text{falls $j$ der rechte Nachbar von $i$ ist,} \\
       - \nicefrac{2}{s_{iu} (s_{iu} + s_{io})} & \text{falls $j$ der untere Nachbar von $i$ ist,} \\
-      - \nicefrac{2}{s_{io} (s_{iu} + s_{io})} & \text{falls $j$ der obere Nachbar von $i$ ist,} \\
+      - \nicefrac{2}{s_{io} (s_{iu} + s_{io})} & \text{falls $j$ der obere Nachbar von $i$ ist.} \\
     \end{cases}
-  \]
+  \end{align*}
 \end{verf}
 
 % 3.10
@@ -815,17 +805,26 @@
 % Beweis: W. Hackbusch, Thm. 4.8.4
 
 \begin{bem}
-  Das DV (RWP\tss{2})'\tss{h} hat in den randnahen Punkten nur die Konsistenzordnung 1.
+  Das DV (RWP\tss{2})'\tss{h} hat in den randnahen Punkten nur die Konsistenzordnung 1. Dennoch gilt:
+  \iffalse
   Sei $u \in \Cont^4(\cOmega)$.
   Dann ist
-  \[ u(x + s_r h, y) = u(x, y) + s_r h u_x(x, y) + \tfrac{s_r^2 h^2}{2} u_{xx}(x,y) + \tfrac{s_r^3 h^3}{6} u_{xxx}(x, y) + \tfrac{s_r^4 h^4}{24} u_{xxxx}(\xi_1, y) \]
-  für ein $\xi_1 \in \ointerval{x}{x+s_r h}$.
-  \[ u(x - s_l h, y) = u(x, y) - s_l h u_x(x, y) + \tfrac{s_l^2 h^2}{2} u_{xx}(x, y) - \tfrac{s_l^3 h^3}{6} u_{xxx}(x, y) + \tfrac{s_r^4 h^4}{24} u_{xxxx}(\xi_2, y), \]
-  $\xi_2 \in \ointerval{x - s_l h}{x}$.
+  \begin{align*}
+    u(x + s_r h, y) & = u(x, y) + s_r h u_x(x, y) + \tfrac{s_r^2 h^2}{2} u_{xx}(x,y) + \tfrac{s_r^3 h^3}{6} u_{xxx}(x, y) \\
+    & + \tfrac{s_r^4 h^4}{24} u_{xxxx}(\xi_1, y)
+    \qquad \text{für ein $\xi_1 \in \ointerval{x}{x+s_r h}$,} \\
+    u(x - s_l h, y) & = u(x, y) - s_l h u_x(x, y) + \tfrac{s_l^2 h^2}{2} u_{xx}(x, y) - \tfrac{s_l^3 h^3}{6} u_{xxx}(x, y) \\
+    & + \tfrac{s_r^4 h^4}{24} u_{xxxx}(\xi_2, y)
+    \qquad \text{für ein $\xi_2 \in \ointerval{x - s_l h}{x}$.}
+  \end{align*}
+  
   Es folgt
-  \[ \nicefrac{1}{h^2} \left( \tfrac{2}{s_l (s_l + s_r)} u(x - x_l h, y) + \tfrac{2}{s_r (s_r + s_l)} u(x+s_r h, y) - \tfrac{2}{s_r s_l} u(x, y) \right) = u_{xx}(x, y) + \tfrac{1}{3} (s_r - s_l) h u_{xxx}(x, y) + \tfrac{1}{12} h^2 \left( \tfrac{s_r^3 u_{xxxx}(\xi_1, y)}{s_r + s_l} + \tfrac{s_l^3 u_{xxxx}(\xi_2, y)}{s_r + s_l} \right) \]
+  \begin{align*}
+    & \nicefrac{1}{h^2} \left( \tfrac{2}{s_l (s_l + s_r)} u(x - x_l h, y) + \tfrac{2}{s_r (s_r + s_l)} u(x+s_r h, y) - \tfrac{2}{s_r s_l} u(x, y) \right) = \\
+    & u_{xx}(x, y) + \tfrac{1}{3} (s_r - s_l) h u_{xxx}(x, y) + \tfrac{1}{12} h^2 \left( \tfrac{s_r^3 u_{xxxx}(\xi_1, y)}{s_r + s_l} + \tfrac{s_l^3 u_{xxxx}(\xi_2, y)}{s_r + s_l} \right)
+  \end{align*}
   % 0)
-  \[ \nicefrac{1}{h^2} \left( \tfrac{2}{s_l (s_r + s_l)} + \tfrac{2}{s_r (s_l + s_r)} + \tfrac{2}{s_r sl} \right) u(x, y) = 0 \]
+  \[ \nicefrac{1}{h^2} \left( \tfrac{2}{s_l (s_r + s_l)} + \tfrac{2}{s_r (s_l + s_r)} + \tfrac{2}{s_r s_l} \right) u(x, y) = 0 \]
   % 1)
   \[ \nicefrac{1}{h^2} \left( \tfrac{2 s_r h}{s_r (s_r + s_l)} + \tfrac{- 2 s_l h}{s_l (s_r + s_l)} \right) u_x(x,y) = 0 \]
   % 2)
@@ -837,13 +836,14 @@
     \norm{\DO_h R_h u - R_h \Laplace u}_h \leq
     \begin{cases}
       \nicefrac{1}{6} h^2 \norm{u}_{\Cont^4(\cOmega)} & \text{falls $s_r = s_l$, $s_o = s_u$}, \\
-      \left( \tfrac{s_r^2 + s_l^2}{s (s_r + s_l)} + \tfrac{s_u^2 + s_o^2}{3 (s_u + s_o)} \right) h \norm{u}_{\Cont^3(\cOmega)}
+      \left( \tfrac{s_r^2 + s_l^2}{s (s_r + s_l)} + \tfrac{s_u^2 + s_o^2}{3 (s_u + s_o)} \right) h \norm{u}_{\Cont^3(\cOmega)} & \text{sonst}
     \end{cases}
   \]
   Somit: Konsistenzordnung = 1
+  \fi
 \end{bem}
 
-% 3.11
+% 3.11, 4.8.6 im Hackbusch
 \begin{satz}
   Sei $\Omega \subset \R^3$ beschränkt und Teilmenge des Streifens $\ointerval{x_0}{x_0 + d} \times \R$ oder $\R \times (y_0, y_0 + d)$.
   Dann ist das Verfahren (RWP\tss{2})'\tss{h} konvergent von der Ordnung 2.
