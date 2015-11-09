@@ -851,4 +851,94 @@
   \[ \norm{u_h - R_h u}_h \leq \left( \nicefrac{1}{3} h^3 + \nicefrac{d^2}{48} h^2 \right) \norm{u}_{\Cont^4(\cOmega)}. \]
 \end{satz}
 
+% Vorlesung vom 9.11.2015
+
+% §3.3.2 Interpolation
+
+\begin{idee}
+  Bestimme den Wert von $u$ bei randnahen Punkten $(x, y)$ durch lineare Interpolation:
+  \begin{itemize}
+    \item $u(x, y) \approx \frac{s_r}{s_r + s_l} u(x - s_l h, y) + \frac{s_l}{s_r + s_l} u(x+s_r h, y)$
+    \item $u(x, y) \approx \frac{s_o}{s_u + s_o} u(x, y - s_u h) + \frac{s_u}{s_u + s_o} u(x, y + s_o h)$
+  \end{itemize}
+\end{idee}
+
+\[
+  \text{(RWP\tss{2})''\tss{h}} \enspace \left\{ \begin{array}{rlll}
+    - \DO_h u &=& f_h &\text{ in $\Omega_h$} \\
+    u_h &=& g &\text{ auf $\bOmega_h$}
+  \end{array} \right.
+\]
+\[
+  \text{(LGS\tss{2})''} \enspace
+  - \tilde{\DO}_h \tilde{u}_h = \tilde{f}_h
+\]
+
+\begin{lem}
+  Dieses Verfahren besitzt Konsistenzordnung (und somit Konvergenzordnung) 2.
+\end{lem}
+
+\iffalse
+Konsistenz: Mit Taylorn ...
+
+\begin{itemize}
+  \item \[ -s_r u_h(x - s_l h, y) + (s_r + s_l) u_h(x, y) - s_l u(x + s_r h, y) = 0 \]
+  \item \[ -s_o u_h(x, y - s_u h) + (s_o + s_u) u_h(x, y) - s_u u(x, y + s_o h) = 0 \]
+\end{itemize}
+\fi
+
+% §3.4 Allgemeine Differentialoperatoren
+
+\[ \text{(RWP\tss{3})} \enspace \left\{ \begin{array}{rlll}
+  - \LL u &=& f &\text{ in $\Omega = \ointerval{0}{1} \times \ointerval{0}{1}$} \\
+  u &=& g &\text{ auf $\bOmega$}
+\end{array} \right. \]
+mit
+\[ - \LL u = - (a_{11}(x, y) u_{xx} + 2 a_{12}(x, y) u_{xy} + a_{22}(x, y) u_{yy}) + b_1(x, y) u_x + b_2(x, y) u_y + c(x, y) u \]
+wobei $c(x, y) \leq 0$, $\xi^T A(x, y) \xi \geq \lambda \norm{\xi}^2$ und $A(x, y) = \begin{pmatrix}
+  a_{11}(x,y) & a_{12}(x,y) \\
+  a_{21}(x,y) & a_{22}(x,y)
+\end{pmatrix}$
+
+1. Diskretisierung: $h = \nicefrac{1}{n}$, $\Omega_h$, $\partial \Omega_h$ wie früher.
+
+2. Approximation: $u_{xx}(x, y) \approx \frac{u(x + h, y) - 2 u(x, y) + u(x - h, y)}{h^2}$, $u_{yy}(x, y) \approx \ldots$, $u_x(x, y) \approx \frac{u(x + h, y) - u(x - h, y)}{2h}$, $u_y(x, y) \approx \frac{u(y+h) - u(x, y-h)}{2 h}$,
+
+Mehrere Möglichkeiten für Approx. von $u_{xy}$:
+
+\begin{itemize}
+  \item $u_{xy}(x, y) \approx \frac{u(x + h, y+h) - u(x + h, y - h) - u(x-h, y+h) + u(x-h, y-h)}{4 h^2}$ % 2-mal zentraller DQ, Konsistenzordnung = 2
+  % Nachteil: ergibt keine M-Matrix!
+  \item $u_{xy}(x, y) \approx \tfrac{1}{2 h^2} \left(- u(x-h, y) + 2 u(x,y) - u(x+h,y) + u(x-h,y-h) - u(x, y+h) - u(x,y-h)+u(x+h, y+h) \right)$ falls $a_{12}(x, y) \geq 0$,
+  $u_{xy}(x, y) \approx \tfrac{1}{2 h^2} \left( u(x-h, y) - 2 u(x, y) + u(x+h, y) + u(x, y+h) - u(x-h, y+h) - u(x+h, y-h) + u(x,y-h) \right)$ falls $a_{12}(x, y) < 0$
+\end{itemize}
+
+Beziehungsweise als 9-Punkte-Stern
+\[ \tfrac{1}{2 h^2} \begin{pmatrix}
+  0 & -1 & 1 \\
+  -1 & 2 & -1 \\
+  1 & -1 & 0
+\end{pmatrix} \]
+für $a_{12} \geq 0$ und
+
+\[ \tfrac{1}{2 h^2} \begin{pmatrix}
+  -1 & 1 & 0 \\
+  1 & -2 & 1 \\
+  0 & 1 & -1
+\end{pmatrix} \]
+
+Insgesamt haben wir als Approximation
+
+\[ - \LL u(x, y) \approx \tfrac{1}{h^2} \left( (-a_{11} + \abs{a_{12}} + \nicefrac{h}{2} b_1) u(x-h, y) + (-a_{11} + \abs{a_{12}} - \nicefrac{h}{2} b_1) u(x + h, y) + (2 a_{11} + 2 a_{22} - 2 \abs{a_{12}} + h^2 c) u(x, y) + (-a_{22} + \abs{a_{12}} + \nicefrac{h}{2} b_2) u(x, y-h) + (-a_{22} + \abs{a_{12}} - \nicefrac{h}{2} b_2) u(x, y+h) + (- \max(a_{12}, 0) u(x-h, y-h) + (- \max(a_{12}, 0)) u(x+h, y+h) + \min(a_{12}, 0) u(x-h, y+h) + \min(a_{12}, 0) u(x + h, x - h)) \right) \]
+
+\[ \text{(RWP\tss{3})\tss{h}} \enspace \left\{ \begin{array}{rlll}
+  - \LL_h u_h &=& f_h &\text{ in $\Omega_h$} \\
+  u_h &=& g &\text{ auf $\bOmega_h$}
+\end{array} \right. \]
+
+\[
+  \text{(LGS\tss{3})} \enspace
+  - \tilde{\LL}_h \tilde{u}_h = \tilde{f}_h
+\]
+
 \end{document}

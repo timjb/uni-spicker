@@ -82,6 +82,7 @@
 \newtheorem*{aufgabe}{Aufgabe}
 \newtheorem*{faustregel}{Faustregel}
 \newtheorem*{entscheidungsregel}{Entscheidungsregel}
+\newtheorem*{idee}{Idee}
 
 \theoremstyle{remark}
 \newtheorem*{bem}{Bem}
