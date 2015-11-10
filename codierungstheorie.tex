@@ -31,6 +31,7 @@
 \DeclareMathOperator{\Ham}{Ham} % Hamming-Code (was sonst?)
 \DeclareMathOperator{\Sim}{Sim} % Simplex-Code
 \newcommand{\Proj}{\mathbb{P}} % Projektiver Raum
+\newcommand{\Goley}{\mathcal{G}} % Goley-Code
 
 \begin{document}
 
@@ -864,5 +865,96 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
   \[ {n \choose l-1} = (n-l+2) \cdot A_{l-2} + A_{l-1} + l \cdot A_l. \]
 \end{satz}
 
+% Vorlesung vom 10.11.2015
+
+% §6. Die Golay-Codes und deren Erweiterungen
+
+\begin{prop}
+  Ist $n \geq 3$ ungerade, so ist der binäre $n$-Wiederholungscode ein perfekter Code.
+\end{prop}
+
+\begin{bem}
+  Es sei $d \geq 5$, $q$ eine Primzahlpotenz.
+  Für $n \leq 1000$, $\log_q(M) \leq 1000$ und $q \leq 1000$ könnte es nur Codes mit folgenden Parametern geben:
+  \begin{itemize}
+    \item $q=2$, $n=23$, $d=7$, $M=2^{12} = 4096$ % \Goley(24)
+    \item $q=2$, $n=90$, $d=5$, $M=2^{78}$
+    \item $q=3$, $n=11$, $d=5$, $M=3^6=729$ % \Goley(12)
+  \end{itemize}
+\end{bem}
+
+\begin{satz}
+  Es gibt keinen binären $(90, 2^{78}, 5)$-Code.
+\end{satz}
+
+\begin{bem}
+  Sei $q$ eine Primzahlpotenz, $C$ ein perfekter $q$-närer $(n, M, 2t+1)$-Code.
+  Dann hat das \emph{Lloyd-Polynom}
+  \[ L_t(X) \coloneqq \sum_{j=0}^t (-1)^j \cdot (q-1)^{t-j} \cdot {X-1 \choose j} {n-1-X \choose t-j} \]
+  mindestens $t$ verschiedene Nullstellen in $\{ 1, \ldots, n \}$.
+\end{bem}
+
+\begin{bsp}
+  Für $n=90$, $q=2$, $t=2$ ist $L_2(X) = 2 (X^2 - 90 + 2003)$.
+  Dessen Diskriminante ist $88$, also keine Quadratzahl.
+  Somit besitzt $L_2(X)$ keine natürlichen Nullstellen.
+\end{bsp}
+
+\begin{prop}
+  Sei $C$ ein binärer selbst-dualer Code (insb. linear).
+  Dann gilt:
+  \begin{itemize}
+    \item Jedes Codewort hat ein gerades Gewicht.
+    \item $\fa{c \in C} 4 \divides \wt(c) \iff$ $C$ hat eine Basis $B$ mit $\fa{b \in B} 4 \divides \wt(c)$
+  \end{itemize}
+\end{prop}
+
+\begin{prop}
+  Für jeden ternären selbstdualen Code $C$ gilt $\fa{c \!\in\! C\!}\! 3 \divides \wt(c)$.
+\end{prop}
+
+\begin{konstr}
+  Beginne mit dem $[7, 4, 3]$-Hamming-Code $C_1$ mit Generatormatrix
+  \[
+    G_1 = \begin{pmatrix}
+      1 & 1 & 0 & 1 & 0 & 0 & 0 \\
+      0 & 1 & 1 & 0 & 1 & 0 & 0 \\
+      0 & 0 & 1 & 1 & 0 & 1 & 0 \\
+      0 & 0 & 0 & 1 & 1 & 0 & 1
+    \end{pmatrix}
+  \]
+  Sei $\overline{C}_1$ die Parity-Check-Erweiterung von $C_1$ mit Generatormatrix
+  \[
+    \overline{G}_1 = \begin{pmatrix}
+      & 1 \\
+      G_1 & 1 \\
+      & 1 \\
+      & 1
+    \end{pmatrix}
+  \]
+  Dann ist $\overline{C}_1$ eine selbstdualer $[8,4,4]$-Code über $\F_2$.
+  
+  Sei $G_2$ die Matrix $G_1$ mit Spalten in umgekehrter Reihenfolge,
+  \[
+    G_2 = \begin{pmatrix}
+      0 & 0 & 0 & 1 & 0 & 1 & 1 \\
+      0 & 0 & 1 & 0 & 1 & 1 & 0 \\
+      0 & 1 & 0 & 1 & 1 & 0 & 0 \\
+      1 & 0 & 1 & 1 & 0 & 0 & 0
+    \end{pmatrix}
+  \]
+  der Code $C_2$ von $G_2$ erzeugt, $\overline{C}_2$ die Parity-Check-Erw. von $C_2$.
+  Dann ist $\overline{C}_2$ selbstdual.
+\end{konstr}
+
+\begin{satz}
+  Sei $\Gamma \subset \F_2^{24}$ definiert durch
+  \[ \Gamma \coloneqq \Set{(a+f, b+f, a+b+f)}{a, b \in \overline{C}_1, f \in \overline{C}_2} \]
+  Dann ist $\Gamma$ ein selbst-dualer binärer $[24, 12, 8]$-Code.
+\end{satz}
+
+\begin{defn}
+  $\Gamma$ wird \emph{erweiterter binärer Goley-Code} $\Goley(24)$ genannt.
+\end{defn}
 
 \end{document}
