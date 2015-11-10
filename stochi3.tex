@@ -28,6 +28,7 @@
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\eqqd}{\stackrel{d}{=}} % Gleichheit in Verteilung (equality in distribution)
 \newcommand{\iid}{i.\,i.\,d.} % identisch unabhängig verteilt
+\newcommand{\Uniform}{\mathcal{R}} % Gleichverteilung
 
 \DeclareMathOperator{\var}{Var} % Varianz
 \DeclareMathOperator{\cov}{Cov} % Kovarianz
@@ -538,8 +539,55 @@
   Dann ist die Verteilung von $\sup_x \abs{\hat{F}_n(x) - F(x)}$ nicht von der VF $F$ abhängig.
   Genauer:
   \[ \sup_x \abs{\hat{F}_n(x) - F(x)} \eqqd \sup_{0 \leq y \leq 1} \abs{\hat{G}_n(y) - G(y)}, \]
-  wobei $\hat{G}_n(y) \coloneqq \nicefrac{1}{n} \sum_{i=1}^n \ind_{\cinterval{0}{y}}(U_i)$ für $U_1, \ldots, U_n \sim \mathcal{R} \cinterval{0}{1}$ \iid{}
-  % TODO: Was ist das für eine Verteilung?
+  wobei $\hat{G}_n(y) \coloneqq \nicefrac{1}{n} \sum_{i=1}^n \ind_{\cinterval{0}{y}}(U_i)$ für $U_1, \ldots, U_n \sim \Uniform \cinterval{0}{1}$ \iid{}
 \end{lem}
+
+% Vorlesung vom 10.11.2015
+
+\begin{kor}
+  Sei $F$ stetig, $n \geq 1$.
+  Dann ist die VF
+  \[ K_n(z) \coloneqq \P(\sqrt{n} \cdot \sup_{x \in \R} \abs{\hat{F}_n(x) - F(x)} \leq z) \]
+  unabhängig von $F$.
+\end{kor}
+
+\begin{satz}
+  Falls $F$ stetig ist, gilt
+  \[ K_n(z) \xra[n \to \infty]{} K(z) \coloneqq \sum_{k = - \infty}^\infty (-1)^k \exp(-2 k^2 z^2). \]
+\end{satz}
+
+\begin{defn}
+  Dabei ist $K$ die VF der \emph{Kolmogorow-Verteilung}.
+\end{defn}
+
+\begin{entscheidungsregel}[\emph{Kolmogorow-(Smirnow-)Test}] \mbox{}\\
+  Wir testen $H_0 : F = F_0$ gegen $H_1 : F \neq F_1$.
+  Dabei muss $F_0$ eine stetige VF sein.
+  Wir verwenden dazu
+  \[ T_n \coloneqq \sqrt{n} \cdot \sup_{x \in \R} \abs{\hat{F}_n(x) - F(x)}. \]
+  Wir lehnen $H_0$ genau dann ab, wenn $T_n > K_{1-\alpha}$.
+\end{entscheidungsregel}
+
+\begin{bemn}
+  \begin{itemize}
+    \item Für kleine $n \in \N$ sollte man $K_{n,1-\alpha}$ verwenden.
+    \item Für große $z$ ist $K(z) \approx 1 - 2 \exp(-2 z^2)$, also $K_{1-\alpha} \approx \sqrt{- \nicefrac{1}{2} \cdot \log(\nicefrac{\alpha}{2})}$ für $\alpha$ klein.
+    \item Das Supremum in $T_n$ liegt bei einer Sprungstelle von $\hat{F}_n$.
+  \end{itemize}
+\end{bemn}
+
+\begin{entscheidungsregel}
+  Um $H_0 : F = F_0$ gegen $H_1 : F > F_0$ mit %der Statistik
+  \[ T_n^{+} \coloneqq \sqrt{n} \cdot \sup_{x \in \R} (\hat{F}_n(x) - F(x)). \]
+  Es gilt
+  \[ K_n^{+}(z) \coloneqq \P(T_n^{+} \leq z) \xra[n \to \infty] K^{+}(z) \coloneqq K^+(z) \coloneqq 1 - \exp(-2 \max(0, z)^2) \]
+  Wir lehnen $H_0$ ab, falls $T_n^{+} > K^+_{1-\alpha}$.
+\end{entscheidungsregel}
+
+\begin{acht}
+  Der Kolmogorow-Test kann nicht verwendet werden, wenn die Parameter von $F_0$ aus der Stichprobe geschätzt werden.
+\end{acht}
+
+% Bemerkung: Es gibt keine Entsprechung für mehrdimensionale ZVen
 
 \end{document}
