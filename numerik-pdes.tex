@@ -895,7 +895,7 @@ Konsistenz: Mit Taylorn ...
 \end{array} \right. \]
 mit
 \[ - \LL u = - (a_{11}(x, y) u_{xx} + 2 a_{12}(x, y) u_{xy} + a_{22}(x, y) u_{yy}) + b_1(x, y) u_x + b_2(x, y) u_y + c(x, y) u \]
-wobei $c(x, y) \leq 0$, $\xi^T A(x, y) \xi \geq \lambda \norm{\xi}^2$ und $A(x, y) = \begin{pmatrix}
+wobei $c(x, y) \leq 0$, $\xi^T A(x, y) \xi \geq \lambda_0 \norm{\xi}^2$, $\lambda_0 > 0$ und $A(x, y) = \begin{pmatrix}
   a_{11}(x,y) & a_{12}(x,y) \\
   a_{21}(x,y) & a_{22}(x,y)
 \end{pmatrix}$
@@ -907,11 +907,18 @@ wobei $c(x, y) \leq 0$, $\xi^T A(x, y) \xi \geq \lambda \norm{\xi}^2$ und $A(x, 
 Mehrere Möglichkeiten für Approx. von $u_{xy}$:
 
 \begin{itemize}
-  \item $u_{xy}(x, y) \approx \frac{u(x + h, y+h) - u(x + h, y - h) - u(x-h, y+h) + u(x-h, y-h)}{4 h^2}$ % 2-mal zentraller DQ, Konsistenzordnung = 2
+  \item $u_{xy}(x, y) \approx \tfrac{1}{4 h^2} \left( u(x{+}h, y{+}h) - u(x{+}h, y{-}h) - u(x{-}h, y{+}h) + u(x{-}h, y{-}h) \right)$ % 2-mal zentraller DQ, Konsistenzordnung = 2
   % Nachteil: ergibt keine M-Matrix!
-  \item $u_{xy}(x, y) \approx \tfrac{1}{2 h^2} \left(- u(x-h, y) + 2 u(x,y) - u(x+h,y) + u(x-h,y-h) - u(x, y+h) - u(x,y-h)+u(x+h, y+h) \right)$ falls $a_{12}(x, y) \geq 0$,
-  $u_{xy}(x, y) \approx \tfrac{1}{2 h^2} \left( u(x-h, y) - 2 u(x, y) + u(x+h, y) + u(x, y+h) - u(x-h, y+h) - u(x+h, y-h) + u(x,y-h) \right)$ falls $a_{12}(x, y) < 0$
+  %\item
 \end{itemize}
+  \begin{align*}
+    u_{xy}(x, y) & \approx \tfrac{1}{2 h^2} (- u(x-h, y) + 2 u(x,y) - u(x+h,y) \\
+    & + u(x-h,y-h) - u(x, y+h) - u(x,y-h) \\
+    & + u(x+h, y+h) ) \text{ falls $a_{12}(x, y) \geq 0$,} \\
+    u_{xy}(x, y) & \approx \tfrac{1}{2 h^2} ( u(x-h, y) - 2 u(x, y) + u(x+h, y) \\
+    & + u(x, y+h) - u(x-h, y+h) - u(x+h, y-h) \\
+    & + u(x,y-h) ) \text{falls $a_{12}(x, y) < 0$}
+  \end{align*}
 
 Beziehungsweise als 9-Punkte-Stern
 \[ \tfrac{1}{2 h^2} \begin{pmatrix}
@@ -929,7 +936,18 @@ für $a_{12} \geq 0$ und
 
 Insgesamt haben wir als Approximation
 
-\[ - \LL u(x, y) \approx \tfrac{1}{h^2} \left( (-a_{11} + \abs{a_{12}} + \nicefrac{h}{2} b_1) u(x-h, y) + (-a_{11} + \abs{a_{12}} - \nicefrac{h}{2} b_1) u(x + h, y) + (2 a_{11} + 2 a_{22} - 2 \abs{a_{12}} + h^2 c) u(x, y) + (-a_{22} + \abs{a_{12}} + \nicefrac{h}{2} b_2) u(x, y-h) + (-a_{22} + \abs{a_{12}} - \nicefrac{h}{2} b_2) u(x, y+h) + (- \max(a_{12}, 0) u(x-h, y-h) + (- \max(a_{12}, 0)) u(x+h, y+h) + \min(a_{12}, 0) u(x-h, y+h) + \min(a_{12}, 0) u(x + h, x - h)) \right) \]
+\begin{align*}
+  - \LL u(x, y) & \approx \tfrac{1}{h^2} \left( (-a_{11} + \abs{a_{12}} + \nicefrac{h}{2} b_1) u(x-h, y) \right. \\
+  & + (-a_{11} + \abs{a_{12}} - \nicefrac{h}{2} b_1) u(x + h, y) \\
+  & + (2 a_{11} + 2 a_{22} - 2 \abs{a_{12}} + h^2 c) u(x, y) \\
+  & + (-a_{22} + \abs{a_{12}} + \nicefrac{h}{2} b_2) u(x, y-h) \\
+  & + (-a_{22} + \abs{a_{12}} - \nicefrac{h}{2} b_2) u(x, y+h) \\
+  & + (- \max(a_{12}, 0) u(x-h, y-h) \\
+  & + (- \max(a_{12}, 0)) u(x+h, y+h) \\
+  & + \min(a_{12}, 0) u(x-h, y+h) \\
+  & \left. + \min(a_{12}, 0) u(x + h, x - h)) \right)
+\end{align*}
+
 
 \[ \text{(RWP\tss{3})\tss{h}} \enspace \left\{ \begin{array}{rlll}
   - \LL_h u_h &=& f_h &\text{ in $\Omega_h$} \\
@@ -940,5 +958,69 @@ Insgesamt haben wir als Approximation
   \text{(LGS\tss{3})} \enspace
   - \tilde{\LL}_h \tilde{u}_h = \tilde{f}_h
 \]
+
+% Vorlesung vom 10.11.2015
+
+\begin{satz}
+  Sei $\abs{a_{12}} \leq \min(a_{11}, a_{22})$, $c \geq 0$ in $\Omega$, $\LL$ gleichmäßig elliptisch.
+  Falls $a_{ii} > \abs{a_{12}} + \tfrac{h}{2} \abs{b_i}$ für $i = 1, 2$ in $\Omega$ und $u \in \Cont^4(\cOmega)$, so ist das DV (RWP\tss{3})\tss{h} konvergent von der Ordnung 2.
+\end{satz}
+
+% 3.5 Differenzenverfahren für parabolische DGLn
+
+\[ \text{(RWP\tss{4})} \enspace \left\{ \begin{array}{rlll}
+  u_t(x,t) - \Laplace_x u(x, t) &=& f(x,t) &\text{ in $\Omega = \ointerval{0}{1} \times \ointerval{0}{T}$} \\
+  u(x,0) &=& g(x) & x \in \ointerval{0}{1} \\
+  u(0, t) &=& g_0(t) & t \in \cinterval{0}{T} \\
+  u(1, t) &=& g_1(t) & t \in \cinterval{0}{T}
+\end{array} \right. \]
+
+1. Diskretisierung: $x_i = ih$, $h = \nicefrac{1}{n}$, $t_k = k \tau$, $\tau = \nicefrac{T}{m}$, $u(x_i, t_k) \approx u_i^k$
+2. Approximation der Ableitungen
+$u_{xx}(x,t) \approx \tfrac{1}{h^2} \left( u(x-h, t) - 2u(x,t) + u(x+h, t) \right) =: \Laplace_h u(x,t)$
+
+\[ \left\{ \begin{array}{rll}
+  \dot{u}_h(t) - \tilde{\Laplace}_h u_h(t) &=& f_h(t) \\
+  u_h(0) &=& g_h
+\end{array} \right. \]
+
+mit
+
+\[
+  u_h(t) = \begin{pmatrix}
+    u_h(h, t) \\
+    u_h(2h, t) \\
+    \vdots \\
+    u_h(1-h,t)
+  \end{pmatrix},
+  f_h(t) = \begin{pmatrix}
+    f(h, t) + \tfrac{1}{h^2} g_0(t) \\
+    f(2h, t) \\
+    \vdots \\
+    f(1-h,t) + \tfrac{1}{h^2} g_1(t)
+  \end{pmatrix}
+\]
+
+Einschrittverfahren:
+\begin{itemize}
+  \item Explizites Euler-Verfahren: $\frac{u_i^{k+1} - u_i^k}{\tau} - \tilde{\Laplace}_h u_i^k = f_i^k$, $u_i^0 = g_h$
+  % TODO: Geschweifte Klammer um die beiden Gleichungen (EEV)
+  \item Implizites Euler-Verfahren
+  $\frac{u_i^{k+1} - u_i^k}{\tau} - \tilde{\Laplace} u_i^{k+1} = f_i^{k+1}$, $u_i^0 = g_h$
+  % (IEV)
+  \item Crank-Nicolson-Verfahren
+  $\frac{u_i^{k+1} - u_i^k}{\tau} - \tfrac{1}{2} \tilde{\Laplace}_h (u_i^k + u_i^{k+1}) = f(x_i, t_k + \tfrac{\tau}{2})$, $u_i^0 = g_h$
+  % (CNV)
+\end{itemize}
+
+% 3.13
+\begin{lem}
+  Sei $f(x, \blank) \in \Cont^1(\cinterval{0}{T})$ für alle $x \in \cinterval{0}{1}$.
+  Dann gilt für die Approximation von (RWP\tss{4}):
+  \begin{itemize}
+    \item Die Verfahren (EEV) und (IEV) besitzen einen Konsistenzfehler von $\O(h^2 + \tau)$, falls $u \in \Cont^4(\cinterval{0}{1} \times \cinterval{0}{T})$
+    \item Das Verfahren (CNV) besitzt einen Konsistenzfehler von $\O(h^2 + \tau^2)$, falls $u \in \Cont^4(\cinterval{0}{1} \times \cinterval{0}{T})$.
+  \end{itemize}
+\end{lem}
 
 \end{document}
