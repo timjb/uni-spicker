@@ -590,4 +590,84 @@
 
 % Bemerkung: Es gibt keine Entsprechung für mehrdimensionale ZVen
 
+% Vorlesung vom 12.11.2015
+
+Analoges Vorgehen beim Cramér-von-Mises-Test
+
+\begin{defn}
+  \[ \omega_n^2(g) = n \Int{\R^1}{}{g(F(x)) \left( \hat{F}_n(x) - F(x) \right)^2}{F(x)}, \]
+  heißt gewichtete \emph{Cramér-von-Mises-Statistik} oder $\omega^2$-Statistik.
+  wobei $g : \cinterval{0}{1} \to \cinterval{0}{\infty}$ eine Gewichtsfunktion ist.
+\end{defn}
+
+$g(x) = 1$,
+$g(x) = \nicefrac{1}{x (1-x)}$ Anderson-Darling-Statistik
+
+\begin{satz}
+  Sei $F$ stetig.
+  Dann ist
+  \[
+    \omega_n^2(g) \eqqd n \Int{0}{1}{g(u) \left( \hat{G}_n(u) - u \right)^2}{u}
+    \xra[n \to \infty]{d} \Int{0}{1}{g(u) (\dot{B}(u))^2}{u} =: \omega^2(g).
+  \]
+\end{satz}
+
+\begin{entscheidungsregel}
+  Wir testen $H_0 : F = F_0$ vs. $H_1 : F \neq F_0$ anhand der CvM-Statistik.
+  Wir lehnen $H_0$ genau dann ab, wenn $\omega_n^2(g) > \omega_{1-\alpha}^2(g)$.
+\end{entscheidungsregel}
+
+% KS-(2-Stichproben)-Test
+
+\begin{situation}
+  Gegeben seien zwei unabhängige SPn $X_1, \ldots, X_n \sim F$ \iid{} und $X_1^*, \ldots, X_m^* \sim F^*$ \iid{}, wobei $F$ und $F^*$ stetig sind.
+  Wir wollen testen, ob $H_0 : F = F^*$ oder $H_1 : F \neq F^*$ gilt, indem wir die empirischen VFen $\hat{F}_n$ und $\hat{F}_m^*$ vergleichen.
+  Dazu verwenden wir
+  \[ T_{m,n} \coloneqq \sqrt{\tfrac{m \cdot n}{m + n}} \sup_{x \in \R^1} \abs{\hat{F}_n(x) - \hat{F}_n^*(x)} \]
+\end{situation}
+
+\begin{satz}
+  Falls $F = F^*$ stetig ist, so gilt $T_{m,n} \eqqd \sqrt{\tfrac{m \cdot n}{m + n}} \sup_{0 \leq u \leq 1} \abs{\tfrac{1}{n} \sum_{i=1}^n \ind_{\cinterval{0}{u}} (U_i) - \tfrac{1}{m} \sum_{j=1}^m \ind_{\cinterval{0}{U}} (U_j^*)}$, wobei $X_i \eqqd F^{-}(U_i)$, $i = 1, \ldots, n$, $X_j^* \eqqd F^{*,-}(U_j^*)$, $j = 1, \ldots, m$
+\end{satz}
+
+Die Quantilfunktion ist
+$F^{-}(t) = \begin{cases}
+  \min \Set{x \in \R^1}{F(x) \geq t} & 0 < t \leq 1, \\
+  \lim_{t \to 0} F^{-}(t) & t = 0
+\end{cases}$
+% (nichtfallend, linksstetig)
+
+\begin{bem}
+  Asymptotik von $T_{n,m}$ für $m, n \to \infty$
+  \[
+    X_{m,n}(u) \coloneqq \sqrt{\tfrac{m \cdot n}{m + n}} \left( \hat{G}_n(u) - \hat{G}^*_m(u) \right), \quad
+    0 \leq u \leq 1.
+  \]
+  \[
+    \E X_{m,n} = \sqrt{\tfrac{m \cdot n}{m + n}} \left( \E \ind_{\cinterval{0}{u}}(U_1) - \E \ind_{\cinterval{0}{u}}(U^*_1) \right) = 0
+  \]
+  \[
+    \var(X_{m,n}) = \tfrac{m+n}{m \cdot n} \left( \E (\hat{G}_n(u))^2 + \E (\hat{G}_m(u))^2 - 2 \E \hat{G}^*_n(u) \cdot \E \hat{G}^*_m(u) \right)
+  \]
+  % (ausgelassen)
+\end{bem}
+
+Genauso wie oben ergibt sich
+\[
+  (X_{m,n}(u_1), \ldots, X_{m,n}(u_k)) \xra[n \to \infty]{d} \Normal_k(0, \Sigma)
+  \quad \text{mit} \quad
+  \Sigma_{ij} = u_i \wedge u_j - u_i \cdot u_j
+\]
+
+Daraus folgt die schwache Konvergenz
+
+\[ X_{m,n}(\blank) \xra[n \to \infty]{d} \dot{B}(\blank) \]
+im Skorodoch-Raum $\mathcal{D} \cinterval{0}{1}$
+
+Somit $T_{m,n} = \sup_{0 \leq u \leq 1} \abs{X_{m,n}(u)} \xra[n \to \infty]{d} \sup_{0 \leq u \leq 1} \abs{\dot{B}(u)} \sim K$
+
+\begin{entscheidungsregel}
+  Die Nullhypothese $F = F^*$ wird abgelehnt, falls $T_{m,n} > k_{1-\alpha}$.
+\end{entscheidungsregel}
+
 \end{document}
