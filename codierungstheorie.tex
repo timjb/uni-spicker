@@ -9,6 +9,7 @@
 \usepackage{tikz}
 \usetikzlibrary{calc}
 \usepackage[normalem]{ulem} % \sout
+\usepackage{multirow}
 
 % Kleinere Klammern
 \delimiterfactor=701
@@ -31,7 +32,7 @@
 \DeclareMathOperator{\Ham}{Ham} % Hamming-Code (was sonst?)
 \DeclareMathOperator{\Sim}{Sim} % Simplex-Code
 \newcommand{\Proj}{\mathbb{P}} % Projektiver Raum
-\newcommand{\Goley}{\mathcal{G}} % Goley-Code
+\newcommand{\Golay}{\mathcal{G}} % Golay-Code
 
 \begin{document}
 
@@ -877,9 +878,9 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
   Es sei $d \geq 5$, $q$ eine Primzahlpotenz.
   Für $n \leq 1000$, $\log_q(M) \leq 1000$ und $q \leq 1000$ könnte es nur Codes mit folgenden Parametern geben:
   \begin{itemize}
-    \item $q=2$, $n=23$, $d=7$, $M=2^{12} = 4096$ % \Goley(24)
+    \item $q=2$, $n=23$, $d=7$, $M=2^{12} = 4096$ % \Golay(24)
     \item $q=2$, $n=90$, $d=5$, $M=2^{78}$
-    \item $q=3$, $n=11$, $d=5$, $M=3^6=729$ % \Goley(12)
+    \item $q=3$, $n=11$, $d=5$, $M=3^6=729$ % \Golay(12)
   \end{itemize}
 \end{bem}
 
@@ -925,12 +926,12 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
   \]
   Sei $\overline{C}_1$ die Parity-Check-Erweiterung von $C_1$ mit Generatormatrix
   \[
-    \overline{G}_1 = \begin{pmatrix}
+    \overline{G}_1 = \left( \begin{array}{c | c}
+      \multirow{4}{*}{$G_1$} & 1 \\
       & 1 \\
-      G_1 & 1 \\
       & 1 \\
       & 1
-    \end{pmatrix}
+    \end{array} \right)
   \]
   Dann ist $\overline{C}_1$ eine selbstdualer $[8,4,4]$-Code über $\F_2$.
   
@@ -954,7 +955,49 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 \end{satz}
 
 \begin{defn}
-  $\Gamma$ wird \emph{erweiterter binärer Goley-Code} $\Goley(24)$ genannt.
+  $\Gamma$ wird \emph{erweiterter binärer Golay-Code $\Golay(24)$} genannt.
 \end{defn}
+
+% Vorlesung vom 12.11.2015
+
+\begin{satz}
+  Es gibt einen perfekten binären $[23, 12, 7]$-Code, den \emph{Golay-Code $\Golay(23)$}.
+  Diesen erhält man aus $\Golay(24)$ durch Streichen einer Koordinate.
+\end{satz}
+
+\begin{bem}
+  Umgekehrt ist $\Golay(24)$ eine Parity-Check-Erw. von $\Golay(23)$.
+\end{bem}
+
+\begin{satz}
+  \begin{itemize}
+    \item $A_{\Golay(24)}(z) = 1 (z^0 + z^{24}) + 759 (z^8 + z^{16}) + 2576 z^{12}$
+    \item $A_{\Golay(23)}(z) = 1 (z^0 \!+\! z^{23}) + 253 (z^7 \!+\! z^{16}) + 506 (z^8 \!+\! z^{15}) + 1288 (z^{11} \!+\! z^{12})$
+  \end{itemize}
+\end{satz}
+
+\begin{bem}
+  $\Golay(24)$ hat eine Generatormatrizen der Form $G_1 = [E|M]$ und $G_2 = [M|E]$, wobei $M$ symmetrisch ist.
+  Beide Matrizen sind gleichzeitig auch Kontrollmatrizen.
+  Die Matrix $M$ hat dabei besondere Eigenschaften, die zum Decodieren ausnutzen kann.
+\end{bem}
+
+\iffalse
+  Decodierung: Schreibe $x \in \F_2^{24}$ als $x_1 | x_2$ mit $x_1, x_2 \in \F_2^{12}$.
+  % Fall (a)
+  Berechne Syndome $S_1 = G_1 y = G_1 e = e_1 + M e_2$ und $S_2 = G_2 y = M e_1 + e_2$.
+  Es gilt:
+  \begin{itemize}
+    \item $\wt(S_1) \leq 3 \iff e_2 = 0 \implies S_1 = e_1 \implies e = e_1 | 0 = S_1 | 0$
+    \item $\wt(S_2) \leq 3 \implies e_1 = 0 \implies S_2 = e_2 \implies e = 0 | S_2$
+  \end{itemize}
+  % Fall (b)
+  $\wt(S_1), \wt(S_2) \geq 4$.
+  Berechne $S_i = G_2 \cdot (y + (\epsilon_i|0)) = m(e_1 + \epsilon_i) + e_2$
+  Beachte: $(\wt(e_1), \wt(e_2)) \in \{ (1,2), (1,1), (2,1) \}$
+  $\wt(e_1) = 2 \iff \wt(S_i) \geq 4$ für alle $i = 1, \ldots, 12$
+  $\wt(e_1) = 1 \iff$ es gibt genau ein $l$ mit $\wt(s_l) \leq 2$ nämlich das $l$ wodurch $e_1 = \epsilon_l$
+  % Falls (b_2)
+\fi
 
 \end{document}
