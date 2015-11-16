@@ -7,6 +7,7 @@
 
 \usepackage{algorithm}
 \usepackage[noend]{algpseudocode}
+\usepackage{nicefrac}
 
 % Kleinere Klammern
 \delimiterfactor=701
@@ -117,7 +118,6 @@
 
 % §4. Depth-First search
 
-
 \begin{alg}
   Bei einer Tiefensuche in einem Graphen wird am meisten Platz für den Laufzeitstack verbraucht. Um diesen Platz zu optimieren, ist es geschickt, zunächst den Algorithmus mit explizitem Keller aufzuschreiben:
   \begin{algorithmic}[1]
@@ -150,5 +150,42 @@
     \EndFunction
   \end{algorithmic}
 \end{alg}
+
+% §4.1 DFS with logarithmic slowdown
+
+% 4.1
+\begin{thm}
+  Für alle $\epsilon > 0$ gibt es ein $n_0 \in \N$, sodass eine Tiefensuche eines Graphen (repräsentiert mit Adjazenzlisten) mit $n \geq n_0$ Ecken und $m$ Kanten in $\O((n+m) \log n)$ Zeit und $(\log_2 3 + \epsilon) n$ Bits an Arbeitsspeicher durchgeführt werden kann.
+\end{thm}
+
+\begin{alg}[\emph{DFS with logarithmic slowdown}] \mbox{}\\
+  Teile den Stack in Segmente der Größe $q$ auf, wobei $q = \Theta(\nicefrac{n}{\log n})$.
+  Wir behalten immer nur die obersten beiden Segmente des imaginä- ren vollständigen Stacks~$S$ auf dem Stack~$S'$ unseres Algorithmus.
+  Falls~$S'$ leerläuft, so müssen wir die obersten Segmente rekonstru- ieren: Dazu färben wir alle grauen Knoten wieder weiß und führen eine erneute Tiefensuche beginnend beim Startknoten aus.
+\end{alg}
+
+% §4.2 Space-Efficient DFS in Linear Time
+
+% 4.2
+\begin{thm}
+  Eine Tiefensuche eines Graphen (repräsentiert mit Adjazenz- \textit{arrays}) mit $n$ Ecken kann in $\O(n+m)$ Zeit und $\O(n \log \log n)$ Bits an Arbeitsspeicher durchgeführt werden.
+\end{thm}
+
+\begin{alg}[\emph{$\log n$ shades of gray}] \mbox{}\\
+  Wir ändern den vorhergehenden Algorithmus folgendermaßen ab:
+  Wir behalten nicht bloß die obersten beiden Segmente von $S$ auf dem Stack $S'$, sondern auch zusätzlich von jedem Segment den obersten Knoten, den \textit{Trailer}.
+  Wir starten die Rekonstruktion nicht beim Startknoten, sondern beim Trailer des Segments unter dem Segment, das wir rekonstruieren wollen.
+  Vor dem Rekonstruieren löschen wir die Farben nicht, da dies zu viel Laufzeit kosten würde.
+  Während des Rekonstruierens müssen wir für jeden graue Knoten wissen, ob er weiter unten im Stack liegt, oder ob wir ihn rekonstruieren müssen.
+  Dazu verwenden wir $\O(\nicefrac{n}{q}) = \O(\log n)$ Grautöne, einen für jede Segmenttiefe, wobei tiefere Segmente dunklere Grautöne bekommen.
+  Zum Speichern der Grautöne für jeden Knoten benötigen wir $\O(n \log \log n)$ Bits.
+  Damit wir beim Rekonstruieren die Adjazenzlisten der Knoten nicht wiederholt durchlaufen müssen, speichern wir für jeden Knoten (annähernd), wie weit wir in der Liste schon fortgeschritten sind.
+  Genauer speichern wir die exakte Position für Knoten mit $\geq \nicefrac{m}{q}$ ausgehenden Kanten.
+  Falls ein Knoten weniger ausgehende Kanten besitzt, so speichern wir nur eine Approximation $\O(\log \log n)$ Bits.
+\end{alg}
+
+% §5. Applications of DFS
+
+% TODO
 
 \end{document}
