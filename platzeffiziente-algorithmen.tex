@@ -186,6 +186,96 @@
 
 % §5. Applications of DFS
 
+% §5.1 Topological Sorting
+
+\begin{alg}[Topologisches Sortieren eines azyklischen Graphen]
+  Führe eine Tiefensuche durch.
+  Lege in $\Call{postProcess}{u}$ den Knoten $u$ auf einen Stack.
+  Gebe nach Abschluss der Tiefensuche alle Knoten auf dem Stack aus, also in umgekehrter Reihenfolge, wie sie auf den Stack gelegt wurden.
+\end{alg}
+
+\begin{problem}
+  Die Maximalgröße des Stacks beträgt $\O(n \log n)$.
+\end{problem}
+
+\begin{lem}
+  Wenn eine Folge von $n$ Elementen à $\O(\log n)$ Bits in $t(n)$ Zeit und mit $s(n)$ Bits berechnet werden kann, so kann die umgekehrte Folge in $\O(t(n) \log n)$ Zeit und $\O(s(n) + n)$ Bits berechnet werden.
+\end{lem}
+
+\begin{proof}
+  Wir berechnen die Folge mehrmals und speichern jeweils ein Segment mit $\O(\nicefrac{n}{\log n})$ Elementen der Ausgabe, angefangen beim letzten, drehen dieses um und geben es aus.
+\end{proof}
+
+\begin{kor}
+  Die topologische Sortierung eines azyklischen Graphen, der mit Adjazenzarrays repräsentiert wird, kann in $\O((n + m) \log n)$ Zeit und mit $\O(n \log \log n)$ Bits an Speicher berechnet werden.
+\end{kor}
+
+\begin{bezeichnung}
+  Wir nennen die Aufrufe von $\Call{preProcess}$ und $\Call{postProcess}$ und Aufrufe, denen ein Aufruf einer dieser Prozeduren vorausgeht oder folgt, \textit{Hauptaufrufe}.
+\end{bezeichnung}
+
+\begin{bem}
+  Während der Tiefensuche eines Graphen mit $n$ Knoten passieren maximal $6 n$ Hauptaufrufe.
+\end{bem}
+
+% 5.1
+\begin{lem}
+  Sei $G$ ein gerichteter Graph mit $n$ Knoten und $m$ Kanten.
+  Eine umgekehrte Folge von (symbolischen Repräsentationen von) Hauptaufrufen während einer Tiefensuche von $G$ kann mit $\O(n \log \log n)$ Bits an Speicher und in
+  \[
+    \begin{cases}
+      \O((n+m) \log n) & \text{falls $G$ mit Adjazenzlisten repräsentiert wird,} \\
+      \O(n \log \log n) & \text{falls $G$ mit Adjazenzarrays repräsentiert wird}
+    \end{cases}
+  \]
+  Zeit berechnet werden.
+\end{lem}
+
+\begin{proof}
+  Wir teilen die Ausführung einer Tiefensuche auf $G$ in $\O(\log n)$ \textit{Epochen} auf, in denen jeweils $\O(\nicefrac{n}{\log n})$ Hauptaufrufe stattfinden.
+  Wir führen dann jede Epoche, beginnend bei der letzten erneut aus, wobei wir die Hauptaufrufe mitloggen und danach in umgekehrter Reihenfolge ausgeben.
+  Es bleibt noch zu klären, wie wir den Zustand des Stacks zu Beginn einer Epoche wiederherstellen können.
+  Dazu speichern wir für jede Epoche den obersten Knoten $H$ auf dem Stack sowie den tiefsten Knoten $\hat{H}$, der während der Epoche verändert wird.
+  Dann brauchen wir bloß den Teil des Stacks ab $\hat{H}$ bis $H$ rekonstruieren.
+  Dazu müssen wir noch wissen, welche Farbe ein jeder Knoten zu Beginn einer jeden Epoche besitzt.
+  Dies können wir uns merken, indem wir für jeden Knoten speichern, in welcher Epoche er grau und in welcher er schwarz geworden ist.
+\end{proof}
+
+% 5.2
+\begin{kor}
+  Eine topologische Sortierung eines gerichteten azyklischen Graphen mit $n$ Knoten und $m$ Kanten, der mit Adjazenzarrays repräsentiert wird, kann in $\O(n + m)$ Zeit und $\O(n \log \log n)$ Bits berechnet werden.
+\end{kor}
+
+% §5.2 Computing Strongly Connected Components
+
+% TODO
+
+\begin{alg}[Starke Zshgskomponenten durch TS] \mbox{}\\
+  Führe eine Tiefensuche $S$ auf $G$ durch.
+  Führe dann eine Tiefensuche $\overleftarrow{S}$ auf dem Graph $\overleftarrow{G}$ durch, wobei man neue Tiefensuchbäume bei dem Knoten beginnt, bei dem $S$ als letztes fertig wurde, und gebe alle Knoten aus.
+  Wenn $\overleftarrow{S}$ einen Tiefensuchbaum abschließt, so endet auch eine starke Zshgskomponente.
+\end{alg}
+
+% 5.3
+\begin{thm}
+  Die starken Zusammenhangskomponenten eines gerichteten Graphen mit $n$ Knoten und $m$ Kanten, der mit Aus- und In-Adjazenzarrays repräsentiert wird, kann in $\O(n + m)$ Zeit mit $\O(n \log \log n)$ Bits an Speicher berechnet werden.
+\end{thm}
+
+\begin{bem}
+  Die Ausgabe ist dabei eine Liste von Knoten, in einer beliebigen Reihenfolge, gruppiert nach starken Zshgskomponenten.
+  Es ist kein Algorithmus mit gleichen Platz- und Zeitanforderungen bekannt, der die Knoten sortiert zusammen mit der Nummer der Zshgskomponente ausgibt.
+\end{bem}
+
+% §5.3 Streams
+
+\begin{folgerung}
+  Im platzbeschränkten Setting ist es wichtig, genau zu spezifizieren, wie die Ausgabe eines Algorithmus auszusehen hat.
+  Die Ausgabe ist dabei häufig ein \textit{Stream}, eine Liste, die kontinuierlich produziert wird.
+  Sie muss oft direkt weiterverarbeitet werden, weil man nicht den Platz hat, ihn zu speichern.
+\end{folgerung}
+
+% §6. Connected Components and BFS
+
 % TODO
 
 \end{document}
