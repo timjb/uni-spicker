@@ -688,4 +688,82 @@
   $H_0 : F = F^*$ wird genau dann abgelehnt, falls $T_{m,n} > K_{1-\alpha}$.
 \end{entscheidungsregel}
 
+% Vorlesung vom 16.11.2015
+
+% §2.4. 2-Stichprobentest von Wilcoxon-Mann-Whitney (U-Test)
+
+\begin{situation}
+  Gegeben seien zwei unabhängige SPn $X_1, \ldots, X_n \sim F$ und $X_1^{*}, \ldots, X_m^{*} \sim F^{*}$, wobei $F$ und $F^*$ stetig sind.
+  Ziel: Prüfen von $H_0 : F = F^{*}$ vs. $H_1 : F \neq F^{*}$.
+  Konstruktion einer Rangstatistik für konkrete SPn $x_1, \ldots, x_n$ und $x_1^{*}, \ldots, x_m^{*}$.
+  \begin{enumerate}
+    \item Ordnen: $x_{1:n} < \ldots < x_{n:n}$ und $x_{1:m}^{*} < \ldots < x_{m:m}^{*}$
+    \item $\nu_1, \ldots, \nu_m \in \{ 1, \ldots, m+n \}$ seien die Ränge der Werte $x_{i:m}^{*}$ innerhalb der Gesamt-SP:
+    \begin{align*}
+      x_{1:n} & < \ldots < x_{\nu_1 - 1:n} < x_1^{*} < x_{\nu_1:n} < \ldots < x_{\nu_2 - 2:n} < x_{2:m}^{*} < x_{\nu_2 - 1:n} \\
+      & < \ldots < x_{\nu_m-m:n} < x_{m:m}^{*} < x_{\nu_m - m + 1 : n} < \ldots < x_{n:n}
+    \end{align*}
+  \end{enumerate}
+  Heuristik: $H_0$ wird angenommen, falls sich die $x$- und $x^{*}$-Werte "`gut durchmischen"', \dh{} die Anzahl der $x$-Werte, die vor bzw. nach den $x^{*}$-Werten liegen, darf nicht zu groß werden.
+  Testgröße:
+  \begin{align*}
+    W_{m,n} & \coloneqq \abs{\Set{(i, j) \in \{ 1, \ldots, n \} \times \{ 1, \ldots, m \}}{ X_i < X_j^{*}}} = \sum_{i=1}^n \sum_{j=1}^m \ind_{\{ X_i < X_j^{*} \}} \\
+    & = \sum_{j=1}^m \abs{\Set{i}{X_i < X_{j:m}^{*}}} = \sum_{j=1}^m (\nu_j - j) = \nu_1 + \ldots + \nu_m - \tfrac{m}{2} (m+1)
+  \end{align*}
+  Unter $H_0$ gilt:
+  \begin{align*}
+    \E W_{m,n} & = \sum_{i=1}^n \sum_{j=1}^m \E \ind_{\{ X_i < X_j^{*} \}} = \tfrac{m \cdot n}{2} \\
+    \var W_{m,n} & = \tfrac{m \cdot n}{12} (m + n + 1)
+  \end{align*}
+\end{situation}
+
+\begin{lem}
+  Unter $H_0 : F = F^*$ stetig gilt
+  \begin{align*}
+    g_{m,n}(z) & \coloneqq \sum_{k=0}^{n \cdot m} \P(W_{m,n} = k) z^k = \frac{z^{-m (m+1) / 2}}{{m + n \choose m}} \enspace\qquad \sum_{\mathclap{1 \leq \nu_1 < \ldots < \nu_m \leq m+m}} \enspace z^{\nu_1 + \ldots + \nu_m} \\
+    & = \tfrac{1}{{m + n \choose m}} \prod_{k=1}^m \frac{1 - z^{n+k}}{1 - z^k}
+  \end{align*}
+\end{lem}
+
+\begin{entscheidungsregel}
+  Ablehnung von $H_0$, falls $w_{m,n} \leq c_{\nicefrac{\alpha}{2}}$ oder $w_{m,n} \geq m \cdot n - c_{\nicefrac{\alpha}{2}}$, wobei $c_{\nicefrac{\alpha}{2}} = \min \Set{k \geq 0}{\P(W_{m,n} \leq k) = \P(W_{m,n} \geq m \cdot n - k) \geq \nicefrac{\alpha}{2}}$
+  ($c_{\nicefrac{\alpha}{2}} - \tfrac{m \cdot n}{2}$ ist Quanil der Ordnung $\tfrac{\alpha}{2}$ der ZG $W_{m,n} - \tfrac{m \cdot n}{2}$).
+\end{entscheidungsregel}
+
+Annahme von $H_0$ genau dann, wenn $\abs{w_{m,n} - \tfrac{m \cdot n}{2}} < \tfrac{m \cdot n}{2} - c_{\nicefrac{\alpha}{2}}$
+
+\begin{satz}
+  Unter $H_0 : F = F^{*}$ stetig gilt
+  \[ T_{m,n} \coloneqq \frac{W_{m,n} - \tfrac{m \cdot n}{2}}{\sqrt{\tfrac{m \cdot n}{2} (m + n + 1)}} \xra[m, n \to \infty]{d} \Normal(0, 1) \]
+\end{satz}
+
+% §2.5 Kruskal-Wallis-Test
+
+\begin{bem}[\emph{Kruskal-Wallis-Test}]
+  Gegeben seien $k$ Messreihen $X_{i,1}, \ldots, X_{i,n_i} \sim F_i$, $i = 1, \ldots, k$ unabhängige SPn, $F_i$ stetig. \\
+  Ziel: Testen von $H_0 : F_1 = \ldots = F_k$.
+  Vorgehen:
+  \begin{enumerate}
+    \item Ordnen der Beobachtungen der Größe nach
+    \item $\nu_{i,1} < \ldots < \nu_{i,n_i}$ Platznummern der $n_i$ Beobachtungen der $i$-ten Messreihe in der Gesamt-SP
+    \item $\overline{\nu}_i \coloneqq \tfrac{1}{n_i} (\nu_{i,1} + \ldots + \nu_{i,n_i})$, $\overline{\nu} \coloneqq \tfrac{1}{n} \sum_{i=1}^k n_i \overline{\nu}_i$ mit $n \coloneqq n_1 + \ldots + n_k$.
+  \end{enumerate}
+  Heuristik: $H_0$ ist richtig, falls $\overline{\nu}_i \approx \overline{\nu}$ für alle $i$.
+  Testgröße:
+  \[ \tfrac{12}{n (n+1)} \sum_{i=1}^k n_i (\overline{\nu}_i - \tfrac{n+1}{2})^2 \xra[n_i \to \infty]{d} \chi^2_{k-1} \]
+\end{bem}
+
+% §3. U-Statistiken
+
+% §3.1. Hoeffdings Projektionsmethode und ZGWS
+
+\begin{situation}
+  Sei $n \geq m$, $X_1, \ldots, X_n \sim F$ \iid{}, $h : \R^m \to \R^1$ Borel-messbar und symmetrisch. $\E \abs{h(X_1, \ldots, X_m)} < \infty$
+\end{situation}
+
+\begin{defn}
+  Die \emph{U-Statistik der Ordnung $m$} mit Kernfunktion $h$ ist
+  \[ U_i^{(m)} \coloneqq \tfrac{1}{{n \choose m}} \sum_{1 \leq i_1 < \ldots < i_m \leq n} h(X_{i_1}, \ldots, X_{i_m}). \]
+\end{defn}
+
 \end{document}
