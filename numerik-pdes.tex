@@ -1086,4 +1086,81 @@ Konsistenz: Mit Taylorn ...
   \end{itemize}
 \end{lem}
 
+% Vorlesung vom 16.11.2015
+
+% Stabilität: $u_i^k \xra[k \to \infty]{} 0$
+
+% 3.14
+\begin{lem}
+  Es gelte für (EEV) $2 \tau \leq h^2$.
+  Die Verfahren (EEV), (IEV) und (CNV) sind stabil.
+\end{lem}
+
+\[
+  (I - \sigma \tau \tilde{\Laplace}_h ) u_h(t_{k+1}) = (I + (1 - \sigma) \tau \tilde{\Laplace}_h ) u_h(t_k) + \tau f_h(t_k + \sigma \tau)
+\]
+
+Man erhält für $\sigma=0$ das EEV, für $\sigma=1$ das IEV und für $\sigma = \nicefrac{1}{2}$ das CNV.
+Es folgt
+
+\begin{align*}
+  u_h(t_{k+1}) & = (I - \sigma \tau \tilde{\Laplace}_h)^{-1} (I + (1-\sigma) \tau \tilde{\Laplace}_h) u_h(t_k) + (I - \sigma \tau \tilde{\Laplace}_h)^{-1} f_h(t_k + \sigma \tau) = \ldots \\
+  & \left( (I - \sigma \tau \tilde{\Laplace}_h)^{-1} (I + (1-\sigma) \tau \tilde{\Laplace}_h) \right)^{k} u_h(t_0) + (I - \sigma \tau \tilde{\Laplace}_h)^{-1} \sum_{j=0}^k \mu_j f_h(t_j + \sigma \tau)
+\end{align*}
+
+Ziel: $u_h(t_{k+1}) \xra[k \to \infty]{} 0$
+
+Für Stabilität sollte $\abs{\lambda_j(M)} < 1$ gelten, wobei $M = (I - \sigma \tau \tilde{\Laplace}_h)^{-1} (I + (1-\sigma) \tau \tilde{\Laplace}_h)$.
+
+Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})}{1 - \sigma \tau \lambda_j(\tilde{\Laplace})}$
+
+\begin{bem}
+  Konsistenz + Stabilität $\implies$ Konvergenz
+\end{bem}
+
+% §3.6 Differenzenverfahren für hyperbolische Gleichungen
+
+Wellengleichung:
+
+\[
+  \left\{ \begin{array}{rl}
+    \partial_{tt} u - c^2 \partial_{xx} u = f(x,t) \\
+    u(0, t) = g_0(t), u(1, t) = g_1(t) & \text{für $t \in \cinterval{0}{T}$} \\
+    u(x, 0) = q_0(x), u_t(x, 0) = q_1(x) & \text{für $ \in \ointerval{0}{1}$}
+    %\LL u &=& f &\text{ in $\Omega$} & \text{(PDE)} \\
+    %\RR u &=& g &\text{ auf $\bOmega$} & \text{(Randbedingung)}
+  \end{array} \right.
+\]
+
+\begin{enumerate}
+  \item Diskretisierung: $x_i = ih$, $h = \tfrac{1}{n}$, $t_k = k \tau$, $\tau = \tfrac{T}{m}$
+  \item Approximation:
+  \begin{align*}
+    \partial_{xx} u(x_i, t_k) & \approx \tfrac{1}{h^2} \left( u(x_{i-1}, t_k) - 2 u(x_i, t_k) + u(x_{i+1}, t_k) \right) \\
+    \partial_{tt} u(x_i, t_k) & \approx \tfrac{1}{\tau^2} \left( u(x_i, t_{k-1}) - 2 u(x_i, t_k) + u(x_i, t_{k+1}) \right) \\
+    \partial_t u(x_i, 0) & \approx \tfrac{1}{2 \tau} ( u(x_i, t_1) - u(x_i, t_{-1}) )
+  \end{align*}
+  Somit:
+  \[
+    \left\{ \begin{array}{r}
+      \tfrac{1}{\tau^2} (u_i^{k-1} - 2 u_i^k + u_i^{k+1}) - \tfrac{c^2}{h^2} ( U_{i-1}^k - 2 u_i^k + u_{i+1}^k) = f_i^k \\
+      \text{für $i = 1, \ldots, n-1$ und $k = 0, \ldots, m$.} \\
+      u_0^k = g_0^k = g_0(t_k), \quad
+      u_n^k = g_1^k = g_1(t_k), \\
+      u_i^0 = q_{0,i} = q_0(x_i), \quad
+      \tfrac{1}{2 \tau} ( u_i^1 - u_i^{-1} ) = q_{1,i} = q_1(x_i)
+    \end{array} \right.
+  \]
+  % (ausgelassen: wie man jetzt ein LGS bekommt)
+\end{enumerate}
+
+\begin{bem}
+  Das Differenzenverfahren \ldots
+  \begin{itemize}
+    \item \ldots{} ist einfach in der Herleitung und Implementierung.
+    \item \ldots{} besitzt eine gute Konvergenz (\zB{} Ordnung 2) bei genügend glatter Lösung.
+    \item \ldots{} ermöglicht Adaptivität bzw. unregelmäßige Gitter nur sehr schwer.
+  \end{itemize}
+\end{bem}
+
 \end{document}
