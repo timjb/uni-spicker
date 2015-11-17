@@ -8,6 +8,7 @@
 \usepackage{nicefrac}
 \usepackage{tikz}
 \usepackage{bbm} % Für 1 mit Doppelstrich (Indikatorfunktion)
+\usepackage{tikzsymbols} % Smileys!
 
 % Kleinere Klammern
 \delimiterfactor=701
@@ -29,6 +30,7 @@
 \DeclareMathOperator*{\esssup}{ess\,sup} % Essentielles Supremum
 \newcommand{\loc}{\text{loc}} % lokal
 \newcommand{\ind}{\mathbbm{1}} % Indikatorfunktion
+\newcommand{\Testfun}{\mathcal{D}} % Raum der Testfunktionen
 
 \begin{document}
 
@@ -1097,10 +1099,11 @@ Konsistenz: Mit Taylorn ...
 
 % 3.14
 \begin{lem}
-  Es gelte für (EEV) $2 \tau \leq h^2$.
+  Es gelte $2 \tau \leq h^2$ für (EEV).
   Die Verfahren (EEV), (IEV) und (CNV) sind stabil.
 \end{lem}
 
+\iffalse
 \[
   (I - \sigma \tau \tilde{\Laplace}_h ) u_h(t_{k+1}) = (I + (1 - \sigma) \tau \tilde{\Laplace}_h ) u_h(t_k) + \tau f_h(t_k + \sigma \tau)
 \]
@@ -1122,55 +1125,57 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
 \begin{bem}
   Konsistenz + Stabilität $\implies$ Konvergenz
 \end{bem}
+\fi
 
 % §3.6 Differenzenverfahren für hyperbolische Gleichungen
 
-Wellengleichung:
-
-\[
-  \left\{ \begin{array}{rl}
-    \partial_{tt} u - c^2 \partial_{xx} u = f(x,t) \\
-    u(0, t) = g_0(t), u(1, t) = g_1(t) & \text{für $t \in \cinterval{0}{T}$} \\
-    u(x, 0) = q_0(x), u_t(x, 0) = q_1(x) & \text{für $ \in \ointerval{0}{1}$}
-    %\LL u &=& f &\text{ in $\Omega$} & \text{(PDE)} \\
-    %\RR u &=& g &\text{ auf $\bOmega$} & \text{(Randbedingung)}
-  \end{array} \right.
-\]
-
-\begin{enumerate}
-  \item Diskretisierung: $x_i = ih$, $h = \tfrac{1}{n}$, $t_k = k \tau$, $\tau = \tfrac{T}{m}$
-  \item Approximation:
-  \begin{align*}
-    \partial_{xx} u(x_i, t_k) & \approx \tfrac{1}{h^2} \left( u(x_{i-1}, t_k) - 2 u(x_i, t_k) + u(x_{i+1}, t_k) \right) \\
-    \partial_{tt} u(x_i, t_k) & \approx \tfrac{1}{\tau^2} \left( u(x_i, t_{k-1}) - 2 u(x_i, t_k) + u(x_i, t_{k+1}) \right) \\
-    \partial_t u(x_i, 0) & \approx \tfrac{1}{2 \tau} ( u(x_i, t_1) - u(x_i, t_{-1}) )
-  \end{align*}
-  Somit:
+\begin{prob}
+  Wellengleichung
   \[
-    \left\{ \begin{array}{r}
-      \tfrac{1}{\tau^2} (u_i^{k-1} - 2 u_i^k + u_i^{k+1}) - \tfrac{c^2}{h^2} ( U_{i-1}^k - 2 u_i^k + u_{i+1}^k) = f_i^k \\
-      \text{für $i = 1, \ldots, n-1$ und $k = 0, \ldots, m$.} \\
-      u_0^k = g_0^k = g_0(t_k), \quad
-      u_n^k = g_1^k = g_1(t_k), \\
-      u_i^0 = q_{0,i} = q_0(x_i), \quad
-      \tfrac{1}{2 \tau} ( u_i^1 - u_i^{-1} ) = q_{1,i} = q_1(x_i)
+    \left\{ \begin{array}{rl}
+      \partial_{tt} u - c^2 \partial_{xx} u = f(x,t) & \text{in $\Omega = \ointerval{0}{1} \times \cinterval{0}{T}$} \\
+      u(0, t) = g_0(t), u(1, t) = g_1(t) & \text{für $t \in \cinterval{0}{T}$} \\
+      u(x, 0) = q_0(x), u_t(x, 0) = q_1(x) & \text{für $x \in \ointerval{0}{1}$}
     \end{array} \right.
   \]
-  % (ausgelassen: wie man jetzt ein LGS bekommt)
-\end{enumerate}
+\end{prob}
+
+\begin{verf}
+  \begin{enumerate}
+    \item Diskretisierung: $x_i = ih$, $h = \tfrac{1}{n}$, $t_k = k \tau$, $\tau = \tfrac{T}{m}$
+    \item Approximation:
+    \begin{align*}
+      \partial_{xx} u(x_i, t_k) & \approx \tfrac{1}{h^2} \left( u(x_{i-1}, t_k) - 2 u(x_i, t_k) + u(x_{i+1}, t_k) \right) \\
+      \partial_{tt} u(x_i, t_k) & \approx \tfrac{1}{\tau^2} \left( u(x_i, t_{k-1}) - 2 u(x_i, t_k) + u(x_i, t_{k+1}) \right) \\
+      \partial_t u(x_i, 0) & \approx \tfrac{1}{2 \tau} ( u(x_i, t_1) - u(x_i, t_{-1}) )
+    \end{align*}
+    Wir erhalten das lineare Gleichungssystem
+    \[
+      \left\{ \begin{array}{r}
+        \tfrac{1}{\tau^2} (u_i^{k-1} - 2 u_i^k + u_i^{k+1}) - \tfrac{c^2}{h^2} ( U_{i-1}^k - 2 u_i^k + u_{i+1}^k) = f_i^k \\
+        \text{für $i = 1, \ldots, n-1$ und $k = 0, \ldots, m$.} \\
+        u_0^k = g_0^k = g_0(t_k), \quad
+        u_n^k = g_1^k = g_1(t_k), \\
+        u_i^0 = q_{0,i} = q_0(x_i), \quad
+        \tfrac{1}{2 \tau} ( u_i^1 - u_i^{-1} ) = q_{1,i} = q_1(x_i)
+      \end{array} \right.
+    \]
+    % (ausgelassen: wie man jetzt ein LGS in Matrixschreibweise bekommt)
+  \end{enumerate}
+\end{verf}
 
 \begin{bem}
   Das Differenzenverfahren \ldots
-  \begin{itemize}
-    \item \ldots{} ist einfach in der Herleitung und Implementierung.
-    \item \ldots{} besitzt eine gute Konvergenz (\zB{} Ordnung 2) bei genügend glatter Lösung.
-    \item \ldots{} ermöglicht Adaptivität bzw. unregelmäßige Gitter nur sehr schwer.
-  \end{itemize}
+  \begin{description}
+    \item[{\Smiley[1.2]}] \ldots{} ist einfach in der Herleitung und Implementierung. 
+    \item[{\Neutrey[1.2]}] \ldots{} besitzt eine gute Konvergenz (\zB{} Ordnung 2) bei genügend glatter Lösung. 
+    \item[{\Sadey[1.2]}] \ldots{} ermöglicht Adaptivität bzw. unregelm. Gitter nur schwer. 
+  \end{description}
 \end{bem}
 
 % Vorlesung vom 17.11.2015
 
-\section{Schwache Lösungstheorie für elliptische DGLn}
+\section{Schwache Lsgstheorie für elliptische DGLn}
 
 \iffalse
 \begin{bspe}
@@ -1184,23 +1189,23 @@ Wellengleichung:
 % §4.1 Grundlagen aus der Funktionalanalysis
 
 \begin{defn}
-  \begin{itemize}
-    \item Für $1 \leq p < \infty$ heißt
-    \begin{align*}
-      & L^p(\Omega) \coloneqq \Set{v : \Omega \to \R}{\norm{v}_p < \infty}, \quad \text{mit}
-      & \norm{v}_p \coloneqq \left( \Int{\Omega}{}{\abs{v(x)}^p}{x} \right)^{\nicefrac{1}{p}}
-    \end{align*}
-    heißt \emph{$L^p$-Raum}.
-    \item $L^\infty(\Omega) \coloneqq \Set{v : \Omega \to \R}{\norm{v}_\infty < \infty}$,
-    $\norm{v}_\infty \coloneqq \esssup_{x \in \Omega} \abs{v(x)}$
-  \end{itemize}
+  Der \emph{$L^p$-Raum} ist für $1 \leq p < \infty$ definiert durch
+  \[
+    L^p(\Omega) \coloneqq \Set{v : \Omega \to \R}{\norm{v}_p < \infty}
+    \quad \text{mit} \enspace
+    \norm{v}_p \coloneqq \left( \Int{\Omega}{}{\abs{v(x)}^p}{x} \right)^{\nicefrac{1}{p}},
+  \]
+  für $p = \infty$ durch
+  \[
+    L^\infty(\Omega) \coloneqq \Set{v : \Omega \to \R}{\norm{v}_\infty < \infty}
+    \quad \text{mit} \enspace
+    \norm{v}_\infty \coloneqq \esssup_{x \in \Omega} \abs{v(x)}.
+  \]
 \end{defn}
 
-\begin{bemn}
-  \begin{itemize}
-    \item $(L^p(\Omega), \norm{\blank}_p)$ ist eine Banachrau, für $p = 2$ sogar ein Hilbertraum mit Skalarprodukt $\scp{u}{v}_{L^2(\Omega)} \coloneqq \Int{\Omega}{}{u(x) v(x)}{x}$.
-  \end{itemize}
-\end{bemn}
+\begin{bem}
+  $(L^p(\Omega), \norm{\blank}_p)$ ist ein Banachraum, für $p = 2$ sogar ein Hilbertraum mit Skalarprodukt $\scp{u}{v}_{L^2(\Omega)} \coloneqq \Int{\Omega}{}{u(x) v(x)}{x}$.
+\end{bem}
 
 \begin{satz}[\emph{Höldersche Ungleichung}]
   Sei $u \in L^p(\Omega)$ und $v \in L^q(\Omega)$ mit $1 \leq p, q < \infty$ und $\nicefrac{1}{p} + \nicefrac{1}{q} = 1$.
@@ -1209,41 +1214,42 @@ Wellengleichung:
 \end{satz}
 
 \begin{defn}
-  Die Menge aller $k$-mal stetig diff'baren Funktionen auf $\Omega$ mit \emph{kompaktem Träger} ist
-  \[ \Cont_0^k(\Omega) \coloneqq \Set{\varphi \in \Cont^k(\Omega)}{\supp(\varphi) \coloneqq \clos{\Set{x \in \Omega}{\varphi(x) \neq 0}}} \]
+  Die Menge aller $k$-mal stetig differenzierbaren Funktionen auf $\Omega$ mit \emph{kompaktem Träger} ist
+  \[ \Cont_0^k(\Omega) \coloneqq \Set{\varphi \in \Cont^k(\Omega)}{\supp(\varphi) \coloneqq \clos{\Set{x \in \Omega}{\varphi(x) \neq 0}} \text{ ist kompakt}}. \]
 \end{defn}
 
 \begin{defn}
-  $\mathcal{D}(\Omega) \coloneqq \Cont^\infty_0 (\Omega)$ heißt Raum der \emph{Testfunktionen} in $\Omega$
+  $\Testfun(\Omega) \coloneqq \Cont^\infty_0 (\Omega)$ heißt Raum der \emph{Testfunktionen} in $\Omega$.
 \end{defn}
 
 \begin{lem}[Partielle Intgration]
   Für $u, v \in \Cont^1(\cOmega)$ gilt
-  \[ \Int{\Omega}{}{v(x) \DO_i u(x)}{x} = \Int{\partial \Omega}{}{v(x) u(x) \eta_i(x)}{x} - \Int{\Omega}{}{\DO_i v(x) u(x)}{x} \]
+  \[ \Int{\Omega}{}{v(x) \DO_i u(x)}{x} = \Int{\partial \Omega}{}{v(x) u(x) \eta_i(x)}{x} - \Int{\Omega}{}{\DO_i v(x) u(x)}{x}. \]
   % Falls $v(x) = 0$ auf $\partial \Omega$: $\Int{\Omega}{}{v(x) \DO_i u(x)}{x} = - \Int{\Omega}{}{\DO_i v(x) u(x)}{x}$
   Für $u \in \Cont^k(\cOmega)$, $\varphi \in \Cont_0^k(\Omega)$ und $\alpha = (\alpha_1, \ldots, \alpha_n)$, $\abs{\alpha} \leq k$ gilt
   \[ \Int{\Omega}{}{\varphi(x) \DO^\alpha u(x)}{x} = (-1)^{\abs{\alpha}} \Int{\Omega}{}{\DO^\alpha \varphi(x) u(x)}{x}. \]
 \end{lem}
 
 \begin{defn}
-  $L_\loc^1(\Omega) \coloneqq \Set{v : \Omega \to \R}{v|_K \in L^1(K) \text{ für jede kompakte Teilmenge $K \subset \Omega$}}$
+  $L_\loc^1(\Omega) \coloneqq \Set{v : \Omega \to \R}{v|_K \in L^1(K) \text{ für jedes kpkte $K \subset \Omega$}}$
+  heißt Raum der \emph{lokal integrierbaren Funktionen}.
 \end{defn}
 
 \begin{defn}
   Sei $u \in L^1_\loc(\Omega)$ und $\alpha \in \N^n$.
-  Eine Funktion $v \in L^1_\loc(\Omega)$ heißt \emph{schwache (partielle) Ableitung} von $u$ der Ordung $\alpha$ (oder die Ableitung im distributionellen Sinn), wenn
+  Eine Funktion $v \in L^1_\loc(\Omega)$ heißt \emph{schwache (partielle) Ableitung} von $u$ der Ordung $\alpha$ (oder die Ableitung von $u$ im distributionellen Sinn), wenn
   \[
     \Int{\Omega}{}{\DO^\alpha \varphi(x)}{x} = (-1)^{\abs{\alpha}} \Int{\Omega}{}{v(x)}{\varphi(x)}{x}
-    \quad \text{für alle $\varphi \in \mathcal{D}(\Omega)$}.
+    \quad \text{für alle $\varphi \in \Testfun(\Omega)$}.
   \]
 \end{defn}
 
 \begin{bem}
-  Ist eine Funktion im klassischen Sinne diff'bar, so stimmen die schwachen und klassischen Ableitungen überein.
+  Ist eine Funktion im klassischen Sinne diff'bar, so auch im schwachen mit derselben Ableitung.
 \end{bem}
 
-\begin{lem}[Fundamentallemma der Variationsrechung]
-  Sei $u \in L^1_\loc$ und $\Int{\Omega}{}{u(x) \varphi(x)}{x} = 0$ für alle $\varphi \in \mathcal{D}(\Omega)$.
+\begin{lem}[Fundamentallemma der Variationsrechung] \mbox{}\\
+  Sei $u \in L^1_\loc$ und $\Int{\Omega}{}{u(x) \varphi(x)}{x} = 0$ für alle $\varphi \in \Testfun(\Omega)$. \\
   Dann gilt $u(x) = 0$ für fast alle $x \in \Omega$.
 \end{lem}
 
@@ -1256,24 +1262,20 @@ Wellengleichung:
 \end{bsp}
 
 \begin{lem}
-  \begin{itemize}
-    \item $\DO^\alpha (u + \lambda v) = \DO^\alpha u + \lambda \DO^\alpha v$
-    \item $\DO^{\alpha + \beta} u = \DO^\alpha (\DO^\beta u)$
-  \end{itemize}
+  \inlineitem{$\DO^\alpha (u + \lambda v) = \DO^\alpha u + \lambda \DO^\alpha v$} \quad
+  \inlineitem{$\DO^{\alpha + \beta} u = \DO^\alpha (\DO^\beta u)$}
 \end{lem}
 
 % 4.1.2
 \begin{defn}
-  Sei $1 \leq p < \infty$.
-  Dann heißt der Raum
+  Der \emph{Sobolev-Raum} für $1 \leq p < \infty$ ist
   \begin{align*}
-    W^{k,p}(\Omega) & = \Set{u \in L^p(\Omega)}{\begin{array}{l}
+    W^{k,p}(\Omega) & = \left\{ u \in L^p(\Omega) \;\middle|\; \begin{array}{l}
       \fa{\alpha \in \N^n \text{ mit } \abs{\alpha} \leq k} \\
-      \exists \, \text{schwache Abl. $\DO^\alpha u \in L^p(\Omega)$}
-    \end{array}} \\
-    \norm{u}_{k,p} & \coloneqq \left( \sum_{\abs{\alpha} \leq k} \norm{\DO^\alpha u}_p^p \right)^{\nicefrac{1}{p}}
+      \exists \, \text{schwache Ableitung $\DO^\alpha u \in L^p(\Omega)$}
+    \end{array} \right\} \\
+    \norm{u}_{k,p} & \coloneqq \left( \sum_{\abs{\alpha} \leq k} \norm{\DO^\alpha u}_p^p \right)^{\nicefrac{1}{p}}.
   \end{align*}
-  \emph{Sobolev-Raum}.
 \end{defn}
 
 \begin{nota}
