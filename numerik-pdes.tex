@@ -7,6 +7,7 @@
 
 \usepackage{nicefrac}
 \usepackage{tikz}
+\usepackage{bbm} % Für 1 mit Doppelstrich (Indikatorfunktion)
 
 % Kleinere Klammern
 \delimiterfactor=701
@@ -24,6 +25,10 @@
 \newcommand{\rf}{\text{rf}} % randfern
 \renewcommand{\O}{\mathcal{O}} % Landau-Symbol
 \newcommand{\DO}{\mathcal{D}} % Differentialoperator
+\newcommand{\scp}[2]{\left( #1 \!\mid\! #2 \right)} % Skalarprodukt
+\DeclareMathOperator*{\esssup}{ess\,sup} % Essentielles Supremum
+\newcommand{\loc}{\text{loc}} % lokal
+\newcommand{\ind}{\mathbbm{1}} % Indikatorfunktion
 
 \begin{document}
 
@@ -1162,5 +1167,124 @@ Wellengleichung:
     \item \ldots{} ermöglicht Adaptivität bzw. unregelmäßige Gitter nur sehr schwer.
   \end{itemize}
 \end{bem}
+
+% Vorlesung vom 17.11.2015
+
+\section{Schwache Lösungstheorie für elliptische DGLn}
+
+\iffalse
+\begin{bspe}
+  \begin{itemize}
+    \item $u''(x) = f$ in $\Omega = \ointerval{0}{1}$, $u(0) = g_0$, $u'(0) = g_1$
+    \item $u_t(x, t) + c u_x(x, t) = 0$, $u(x, 0) = g(x)$, $g \in \Cont^1$. Lösung: $u(x, t) = g(x - c t)$
+  \end{itemize}
+\end{bspe}
+\fi
+
+% §4.1 Grundlagen aus der Funktionalanalysis
+
+\begin{defn}
+  \begin{itemize}
+    \item Für $1 \leq p < \infty$ heißt
+    \begin{align*}
+      & L^p(\Omega) \coloneqq \Set{v : \Omega \to \R}{\norm{v}_p < \infty}, \quad \text{mit}
+      & \norm{v}_p \coloneqq \left( \Int{\Omega}{}{\abs{v(x)}^p}{x} \right)^{\nicefrac{1}{p}}
+    \end{align*}
+    heißt \emph{$L^p$-Raum}.
+    \item $L^\infty(\Omega) \coloneqq \Set{v : \Omega \to \R}{\norm{v}_\infty < \infty}$,
+    $\norm{v}_\infty \coloneqq \esssup_{x \in \Omega} \abs{v(x)}$
+  \end{itemize}
+\end{defn}
+
+\begin{bemn}
+  \begin{itemize}
+    \item $(L^p(\Omega), \norm{\blank}_p)$ ist eine Banachrau, für $p = 2$ sogar ein Hilbertraum mit Skalarprodukt $\scp{u}{v}_{L^2(\Omega)} \coloneqq \Int{\Omega}{}{u(x) v(x)}{x}$.
+  \end{itemize}
+\end{bemn}
+
+\begin{satz}[\emph{Höldersche Ungleichung}]
+  Sei $u \in L^p(\Omega)$ und $v \in L^q(\Omega)$ mit $1 \leq p, q < \infty$ und $\nicefrac{1}{p} + \nicefrac{1}{q} = 1$.
+  Dann ist $uv \in L^1(\Omega)$ und es gilt
+  \[ \norm{uv}_1 \leq \norm{u}_p \cdot \norm{v}_q. \]
+\end{satz}
+
+\begin{defn}
+  Die Menge aller $k$-mal stetig diff'baren Funktionen auf $\Omega$ mit \emph{kompaktem Träger} ist
+  \[ \Cont_0^k(\Omega) \coloneqq \Set{\varphi \in \Cont^k(\Omega)}{\supp(\varphi) \coloneqq \clos{\Set{x \in \Omega}{\varphi(x) \neq 0}}} \]
+\end{defn}
+
+\begin{defn}
+  $\mathcal{D}(\Omega) \coloneqq \Cont^\infty_0 (\Omega)$ heißt Raum der \emph{Testfunktionen} in $\Omega$
+\end{defn}
+
+\begin{lem}[Partielle Intgration]
+  Für $u, v \in \Cont^1(\cOmega)$ gilt
+  \[ \Int{\Omega}{}{v(x) \DO_i u(x)}{x} = \Int{\partial \Omega}{}{v(x) u(x) \eta_i(x)}{x} - \Int{\Omega}{}{\DO_i v(x) u(x)}{x} \]
+  % Falls $v(x) = 0$ auf $\partial \Omega$: $\Int{\Omega}{}{v(x) \DO_i u(x)}{x} = - \Int{\Omega}{}{\DO_i v(x) u(x)}{x}$
+  Für $u \in \Cont^k(\cOmega)$, $\varphi \in \Cont_0^k(\Omega)$ und $\alpha = (\alpha_1, \ldots, \alpha_n)$, $\abs{\alpha} \leq k$ gilt
+  \[ \Int{\Omega}{}{\varphi(x) \DO^\alpha u(x)}{x} = (-1)^{\abs{\alpha}} \Int{\Omega}{}{\DO^\alpha \varphi(x) u(x)}{x}. \]
+\end{lem}
+
+\begin{defn}
+  $L_\loc^1(\Omega) \coloneqq \Set{v : \Omega \to \R}{v|_K \in L^1(K) \text{ für jede kompakte Teilmenge $K \subset \Omega$}}$
+\end{defn}
+
+\begin{defn}
+  Sei $u \in L^1_\loc(\Omega)$ und $\alpha \in \N^n$.
+  Eine Funktion $v \in L^1_\loc(\Omega)$ heißt \emph{schwache (partielle) Ableitung} von $u$ der Ordung $\alpha$ (oder die Ableitung im distributionellen Sinn), wenn
+  \[
+    \Int{\Omega}{}{\DO^\alpha \varphi(x)}{x} = (-1)^{\abs{\alpha}} \Int{\Omega}{}{v(x)}{\varphi(x)}{x}
+    \quad \text{für alle $\varphi \in \mathcal{D}(\Omega)$}.
+  \]
+\end{defn}
+
+\begin{bem}
+  Ist eine Funktion im klassischen Sinne diff'bar, so stimmen die schwachen und klassischen Ableitungen überein.
+\end{bem}
+
+\begin{lem}[Fundamentallemma der Variationsrechung]
+  Sei $u \in L^1_\loc$ und $\Int{\Omega}{}{u(x) \varphi(x)}{x} = 0$ für alle $\varphi \in \mathcal{D}(\Omega)$.
+  Dann gilt $u(x) = 0$ für fast alle $x \in \Omega$.
+\end{lem}
+
+\begin{kor}
+  Die schwache Ableitung ist eindeutig bestimmt, \dh{} sind $v, w \in L^1_\loc(\Omega)$ schwache Ableitungen von $u$, so gilt $v = w$ f.\,ü. in $\Omega$.
+\end{kor}
+
+\begin{bsp}
+  Die schw. Abl. von $u(x) = \abs{x}$ ist $v(x) = \ind_{\ointerval{0}{\infty}} - \ind_{\ointerval{- \infty}{0}}$.
+\end{bsp}
+
+\begin{lem}
+  \begin{itemize}
+    \item $\DO^\alpha (u + \lambda v) = \DO^\alpha u + \lambda \DO^\alpha v$
+    \item $\DO^{\alpha + \beta} u = \DO^\alpha (\DO^\beta u)$
+  \end{itemize}
+\end{lem}
+
+% 4.1.2
+\begin{defn}
+  Sei $1 \leq p < \infty$.
+  Dann heißt der Raum
+  \begin{align*}
+    W^{k,p}(\Omega) & = \Set{u \in L^p(\Omega)}{\begin{array}{l}
+      \fa{\alpha \in \N^n \text{ mit } \abs{\alpha} \leq k} \\
+      \exists \, \text{schwache Abl. $\DO^\alpha u \in L^p(\Omega)$}
+    \end{array}} \\
+    \norm{u}_{k,p} & \coloneqq \left( \sum_{\abs{\alpha} \leq k} \norm{\DO^\alpha u}_p^p \right)^{\nicefrac{1}{p}}
+  \end{align*}
+  \emph{Sobolev-Raum}.
+\end{defn}
+
+\begin{nota}
+  $H^k(\Omega) \coloneqq W^{k,2}(\Omega)$
+\end{nota}
+
+% Bem: $W^{0,p}(\Omega) = L^p(\Omega)$
+
+\begin{satz}
+  $(W^{k,p}(\Omega), \norm{\blank}_{k,p})$ ist ein Banachraum.
+\end{satz}
+
 
 \end{document}
