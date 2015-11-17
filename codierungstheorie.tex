@@ -10,6 +10,7 @@
 \usetikzlibrary{calc}
 \usepackage[normalem]{ulem} % \sout
 \usepackage{multirow}
+\usepackage{upgreek} % für \upsigma
 
 % Kleinere Klammern
 \delimiterfactor=701
@@ -33,6 +34,8 @@
 \DeclareMathOperator{\Sim}{Sim} % Simplex-Code
 \newcommand{\Proj}{\mathbb{P}} % Projektiver Raum
 \newcommand{\Golay}{\mathcal{G}} % Golay-Code
+\newcommand{\Design}{\mathcal{D}} % Design, Inzidenzstruktur
+\newcommand{\Blocks}{\mathcal{B}} % Blöcke einer Inzidenzstruktur
 
 \begin{document}
 
@@ -800,7 +803,7 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 % 5.14
 \begin{satz}
   Die Parity-Check-Erweiterung des $[7, 4]$-Hamming-Codes ist ein binärer $[8, 4, 4]$-Code.
-  Dieser ist selbst-dual und optimal.
+  Dieser ist selbst-dual und optimal. \\
   Sein homogenes Gewichtszählpolynom ist $X^8 + 14 X^4 Y^4 + Y^8$.
 \end{satz}
 
@@ -1015,7 +1018,7 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
       1 & 2 & 2 & 1 & 0 & 2
     \end{pmatrix}
   \]
-  Dann ist $\Omega$ ein $[12, 6, 6]$-Code über $\F_3$, selbstdual.
+  Dann ist $\Omega$ ein selbstdualer $[12, 6, 6]$-Code über $\F_3$.
 \end{satz}
 
 % 6.13
@@ -1031,51 +1034,53 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 % §7. Grundlagen aus der Designtheorie
 
 \begin{defn}
-  Eine \emph{Inzidenzstruktur} ist ein Tupel $\mathcal{D} = (V, \mathcal{B}, I)$ bestehend aus
+  Eine \emph{Inzidenzstruktur} (IS) ist ein Tupel $\Design = (V, \Blocks, I)$ mit
   \begin{itemize}
     \item einer (nichtleere) Menge von \emph{Punkten} (oder \textit{Knoten}) $V$,
-    \item einer (nichtleere) Menge von \emph{Blöcken} (oder \textit{Geraden}) $\mathcal{B}$ und
-    \item einer \emph{Inzidenzrelation} $I \subseteq V \times \mathcal{B}$
+    \item einer (nichtleere) Menge von \emph{Blöcken} (oder \textit{Geraden}) $\Blocks$ und
+    \item einer \emph{Inzidenzrelation} $I \subseteq V \times \Blocks$.
   \end{itemize}
 \end{defn}
 
 \begin{nota}
-  $p I B \iff (p, B) \in I$
+  $p I B \coloniff (p, B) \in I$
 \end{nota}
 
 \begin{bem}
-  Wir können die Inzidenzrelation durch eine Matrix $M \in \C^{\abs{V} \times \abs{\mathcal{B}}}$ darstellen, welche Einträge in $\{ 0, 1 \}$ besitzt.
+  Wir können die Inzidenzrelation durch eine Matrix $M \in \C^{\abs{V} \times \abs{\Blocks}}$ darstellen, welche Einträge in $\{ 0, 1 \}$ besitzt.
 \end{bem}
 
-\begin{nota}
-  $\sigma(p) \coloneqq \Set{B \in \mathcal{B}}{p I B}$ \\
-  $\Sigma(B) \coloneqq \Set{p \in V}{p I B}$
-\end{nota}
+\begin{defn}
+  $\sigma(p) \coloneqq \Set{B \in \Blocks}{p I B}$, \quad
+  $\upsigma(B) \coloneqq \Set{p \in V}{p I B}$
+\end{defn}
 
 \begin{defn}
-  $\mathcal{D}$ heißt \emph{einfach}, falls $\Sigma$ injektiv ist.
+  $\Design$ heißt \emph{einfach}, falls $\upsigma$ injektiv ist.
 \end{defn}
 
 \begin{nota}
-  Falls $\mathcal{D}$ einfach: $p \in B \coloniff p I B$
+  Falls $\Design$ einfach: \quad
+  $p \in B \coloniff p I B$
 \end{nota}
 
 \begin{nota}
-  $v \coloneqq \abs{V}$, $b \coloneqq \abs{\mathcal{B}}$
+  $v \coloneqq \abs{V}$, \enspace
+  $b \coloneqq \abs{\Blocks}$
 \end{nota}
 
 \begin{defn}
-  Eine endliche Inzidenzstruktur $\mathcal{D} = (V, \mathcal{B}, I)$ heißt \emph{linearer Raum}, falls gilt:
+  Eine endl. IS $\Design = (V, \Blocks, I)$ heißt \emph{linearer Raum}, falls
   \begin{itemize}
-    \item $\abs{\Sigma(B)} \geq 2$ für alle $B \in \mathcal{B}$
-    \item $\abs{\sigma{x} \cap \sigma{y}} = 1$ für alle $x \neq y \in V$.
+    \item $\abs{\upsigma(B)} \geq 2$ für alle $B \in \Blocks$
+    \item $\abs{\sigma(x) \cap \sigma(y)} = 1$ für alle $x \neq y \in V$.
   \end{itemize}
 \end{defn}
 
 % ausgelassen: langweiliges Bsp
 
 \begin{satz}
-  $\mathcal{D} = (V, \mathcal{B}, {\in})$ sei ein linearer Raum mit $b \leq 2$.
+  $\Design = (V, \Blocks, {\in})$ sei ein lin. Raum mit $b \leq 2$.
   Dann gilt $b \geq v$.
 \end{satz}
 
@@ -1085,9 +1090,9 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
   Die Inzidenzstruktur
   \begin{align*}
     & V = \{ x_1, \ldots, x_{v-1}, x_v \}, \quad
-    \mathcal{B} = \{ L_1, \ldots, L_{v-1}, B \} \\
-    & \Sigma(L_i) = \{ x_i, x_v \}, \quad
-    \Sigma(B) = \{ x_1, \ldots, x_{v-1} \}
+    \Blocks = \{ L_1, \ldots, L_{v-1}, B \} \\
+    & \upsigma(L_i) = \{ x_i, x_v \}, \quad
+    \upsigma(B) = \{ x_1, \ldots, x_{v-1} \}
   \end{align*}
   ist ein linearer Raum mit $b = v$.
   Dieser heißt \emph{entartet}.
