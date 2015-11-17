@@ -1000,4 +1000,123 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
   % Falls (b_2)
 \fi
 
+% Vorlesung vom 17.11.2015
+
+% 6.12
+\begin{satz}
+  $\Golay(12) \coloneqq \Omega \subset \F_3^{12}$ sei der Code mit Generatormatrix $G=[E_6|M] \in \F_3^{6 \times 12}$, wobei
+  \[
+    M = \begin{pmatrix}
+      1 & 1 & 1 & 1 & 1 & 0 \\
+      0 & 1 & 2 & 2 & 1 & 2 \\
+      1 & 0 & 1 & 2 & 2 & 2 \\
+      2 & 1 & 0 & 1 & 2 & 2 \\
+      2 & 2 & 1 & 0 & 1 & 2 \\
+      1 & 2 & 2 & 1 & 0 & 2
+    \end{pmatrix}
+  \]
+  Dann ist $\Omega$ ein $[12, 6, 6]$-Code über $\F_3$, selbstdual.
+\end{satz}
+
+% 6.13
+
+\begin{satz}
+  Es gibt einen $[11, 6, 5]$-Code über $\F_3$. Dieser ist perfekt und heißt \emph{ternärer Golay-Code $\Golay(11)$}.
+\end{satz}
+
+\begin{konstr}
+  Streichen der letzten Koordinate von $\Golay(12)$.
+\end{konstr}
+
+% §7. Grundlagen aus der Designtheorie
+
+\begin{defn}
+  Eine \emph{Inzidenzstruktur} ist ein Tupel $\mathcal{D} = (V, \mathcal{B}, I)$ bestehend aus
+  \begin{itemize}
+    \item einer (nichtleere) Menge von \emph{Punkten} (oder \textit{Knoten}) $V$,
+    \item einer (nichtleere) Menge von \emph{Blöcken} (oder \textit{Geraden}) $\mathcal{B}$ und
+    \item einer \emph{Inzidenzrelation} $I \subseteq V \times \mathcal{B}$
+  \end{itemize}
+\end{defn}
+
+\begin{nota}
+  $p I B \iff (p, B) \in I$
+\end{nota}
+
+\begin{bem}
+  Wir können die Inzidenzrelation durch eine Matrix $M \in \C^{\abs{V} \times \abs{\mathcal{B}}}$ darstellen, welche Einträge in $\{ 0, 1 \}$ besitzt.
+\end{bem}
+
+\begin{nota}
+  $\sigma(p) \coloneqq \Set{B \in \mathcal{B}}{p I B}$ \\
+  $\Sigma(B) \coloneqq \Set{p \in V}{p I B}$
+\end{nota}
+
+\begin{defn}
+  $\mathcal{D}$ heißt \emph{einfach}, falls $\Sigma$ injektiv ist.
+\end{defn}
+
+\begin{nota}
+  Falls $\mathcal{D}$ einfach: $p \in B \coloniff p I B$
+\end{nota}
+
+\begin{nota}
+  $v \coloneqq \abs{V}$, $b \coloneqq \abs{\mathcal{B}}$
+\end{nota}
+
+\begin{defn}
+  Eine endliche Inzidenzstruktur $\mathcal{D} = (V, \mathcal{B}, I)$ heißt \emph{linearer Raum}, falls gilt:
+  \begin{itemize}
+    \item $\abs{\Sigma(B)} \geq 2$ für alle $B \in \mathcal{B}$
+    \item $\abs{\sigma{x} \cap \sigma{y}} = 1$ für alle $x \neq y \in V$.
+  \end{itemize}
+\end{defn}
+
+% ausgelassen: langweiliges Bsp
+
+\begin{satz}
+  $\mathcal{D} = (V, \mathcal{B}, {\in})$ sei ein linearer Raum mit $b \leq 2$.
+  Dann gilt $b \geq v$.
+\end{satz}
+
+% Dieser Satz motiviert die Betrachtung von linearen Räumen mit $b = v$.
+
+\begin{bsp}
+  Die Inzidenzstruktur
+  \begin{align*}
+    & V = \{ x_1, \ldots, x_{v-1}, x_v \}, \quad
+    \mathcal{B} = \{ L_1, \ldots, L_{v-1}, B \} \\
+    & \Sigma(L_i) = \{ x_i, x_v \}, \quad
+    \Sigma(B) = \{ x_1, \ldots, x_{v-1} \}
+  \end{align*}
+  ist ein linearer Raum mit $b = v$.
+  Dieser heißt \emph{entartet}.
+\end{bsp}
+
+\begin{defn}
+  Ein nicht-entarteter linearer Raum mit $v = b$ heißt eine (endliche) \emph{projektive Ebene}.
+\end{defn}
+
+\begin{satz}
+  Sei $\pi = (V, G, {\in})$ eine projektive Ebene.
+  Dann gilt:
+  \begin{itemize}
+    \item Je zwei verschiedene Geraden schneiden sich in genau einem Pkt.
+    \item Es gibt ein $n \in \N$ mit $n \geq 2$, sodass:
+    \begin{itemize}
+      \item Jede Gerade enthält $n+1$ Punkte.
+      \item Jeder Punkt liegt auf genau $n+1$ Geraden.
+      \item $b = v = n^2 + n + 1$
+    \end{itemize}
+  \end{itemize}
+\end{satz}
+
+\begin{defn}
+  $n$ heißt \emph{Ordnung} von $\pi$.
+\end{defn}
+
+\begin{bsp}
+  Die Fano-Ebene ist die projektive Ebene der Ordnung 2.
+\end{bsp}
+
 \end{document}
