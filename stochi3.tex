@@ -753,6 +753,8 @@ Annahme von $H_0$ genau dann, wenn $\abs{w_{m,n} - \tfrac{m \cdot n}{2}} < \tfra
   \[ \tfrac{12}{n (n+1)} \sum_{i=1}^k n_i (\overline{\nu}_i - \tfrac{n+1}{2})^2 \xra[n_i \to \infty]{d} \chi^2_{k-1} \]
 \end{bem}
 
+% Faustregel: $\min_{1 \leq i \leq k} n_i \geq 5$, $k \geq 4$
+
 % §3. U-Statistiken
 
 % §3.1. Hoeffdings Projektionsmethode und ZGWS
@@ -765,5 +767,45 @@ Annahme von $H_0$ genau dann, wenn $\abs{w_{m,n} - \tfrac{m \cdot n}{2}} < \tfra
   Die \emph{U-Statistik der Ordnung $m$} mit Kernfunktion $h$ ist
   \[ U_i^{(m)} \coloneqq \tfrac{1}{{n \choose m}} \sum_{1 \leq i_1 < \ldots < i_m \leq n} h(X_{i_1}, \ldots, X_{i_m}). \]
 \end{defn}
+
+\begin{bem}
+  Offenbar: $\E U_i^{(m)} = \E h(X_1, \ldots, X_m)$.
+\end{bem}
+
+\begin{bsp}
+  Für $m=2$ gilt $\sigma^2 = \var(X_1) = \tfrac{1}{2} \E (X_1 - X_2)^2$.
+  Davon inspiriert setzen wir $h(x_1, x_2) \coloneqq \tfrac{1}{2}(x_1 - x_2)^2$.
+  Damit haben wir
+  \[ U_n^{(2)} = \tfrac{2}{n (n-1)} \sum_{1 \leq i < j \leq n} \tfrac{1}{2} (X_i - X_j)^2 = \tfrac{1}{n (n-1)} ( (n-1) \sum_{i=1}^n X_i^2 - (X_1 + \ldots X_n)^2 + \sum_{i=1}^n X_i^2 ) - X_n = \tfrac{1}{n} (X_1 + \ldots + X_n) = \tfrac{1}{n-1} ( \sum_{i=1}^n X_i^2 - n (\overline{X}_n)^2 ) = \tfrac{1}{n-1} \sum_{i=1}^n (X_i - \overline{X}_n)^2 = S_n^2 \]
+\end{bsp}
+
+\begin{lem}[\emph{Hoeffdings Projektionsmethode}]
+  Sei $g(x) = \E[h(X_1, \ldots, X_n) | X_1 = x ] = \E h(x, X_2, \ldots, X_m) = \Int{}{}{\cdots \Int{}{}{h(x, x_2, \ldots, x_n)}{F(x_2)} \cdots}{F(x_n)}$
+  \[ \tilde{U}_n^{(m)} = \theta + \sum_{i=1}^n (\E(U_n^{(m)} | X_i) - \theta) \]
+  wobei $\theta \coloneqq \E U_n^{(m)}$.
+  Falls $\E h^2(X_1, \ldots, X_m) < \infty$, so gilt
+  \begin{itemize}
+    \item $\var(U_n^{(m)} - \tilde{U}_n^{(m)}) = \var(U_n^{(m)})$
+    \item $\E (U_n^{(m)} | X_i = x) = \theta + \tfrac{m}{n} (g(x) - \theta)$
+  \end{itemize}
+\end{lem}
+
+\begin{lem}
+  \begin{itemize}
+    \item $\var(\tilde{U}^{(m)}_n) = \tfrac{m^2}{n} \cdot \var(g(X_1)) = \frac{m^2}{2} ( \E g^2(X_1) - \theta^2 )$
+    \item $\var(U_n) = \tfrac{1}{{n \choose m}} \sum_{k=1}^m {m \choose k} {n - m \choose m - k} \left( \E[h(X_1, \ldots, X_k, X_{k+1}, \ldots, X_m) \cdot h(X_1, \ldots, X_k, X_{m+1}, \ldots, X_{2m-k})] - \theta^2 \right)$ sofern $\E h(X_1, \ldots, X_m) < \infty$.
+  \end{itemize}
+\end{lem}
+
+\begin{kor}
+  Für $m=2$ folgt
+  \begin{align*}
+    & \var(U_n - \tilde{U}_n) = \var(U_n) - \var(\tilde{U}_n) \\
+    & = \tfrac{1}{n (n-1)} \left( \E (\overline{h}(X_1, X_2)^2) - 2 (n-2) \E \overline{h}(X_1, X_2) \overline{h}(X_2, X_3) \right) - \tfrac{4}{n} \var(g(X_1)) \\
+    & = \tfrac{1}{n (n-1)} ( \var(h(X_1, X_2)) - 2 \var g(X_1) )
+  \end{align*}
+  Also $\var(U_n^{(m)} - \tilde{U}_n^{(m)}) \leq c_m \frac{\var(h(X_1, \ldots, X_m))}{n^2}$.
+\end{kor}
+
 
 \end{document}
