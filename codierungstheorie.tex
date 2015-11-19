@@ -36,6 +36,7 @@
 \newcommand{\Golay}{\mathcal{G}} % Golay-Code
 \newcommand{\Design}{\mathcal{D}} % Design, Inzidenzstruktur
 \newcommand{\Blocks}{\mathcal{B}} % Blöcke einer Inzidenzstruktur
+\newcommand{\Pow}{\mathcal{P}} % Potenzmenge (powerset)
 
 \begin{document}
 
@@ -1051,8 +1052,9 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 \end{bem}
 
 \begin{defn}
-  $\sigma(p) \coloneqq \Set{B \in \Blocks}{p I B}$, \quad
-  $\upsigma(B) \coloneqq \Set{p \in V}{p I B}$
+  $\sigma(p) \coloneqq \Set{B \in \Blocks}{p I B}$,
+  $\upsigma(B) \coloneqq \Set{p \in V}{p I B}$ \enspace
+  heißen \emph{Bahnen}
 \end{defn}
 
 \begin{defn}
@@ -1060,8 +1062,8 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 \end{defn}
 
 \begin{nota}
-  Falls $\Design$ einfach: \quad
-  $p \in B \coloniff p I B$
+  Falls $\Design$ einfach, ist kann man $\Blocks$ als Teilmenge von~$\Pow(V)$ auffassen. Man schreibt daher
+  $p \in B \coloniff p I B$.
 \end{nota}
 
 \begin{nota}
@@ -1095,8 +1097,13 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
     \upsigma(B) = \{ x_1, \ldots, x_{v-1} \}
   \end{align*}
   ist ein linearer Raum mit $b = v$.
-  Dieser heißt \emph{entartet}.
+  Dieser besitzt einen Block, der alle Pkte bis auf einen enthält und dual einen Punkt, der in allen Blöcken bis auf einen liegt.
+  Solche Inzidenzstrukturen heißen \emph{entartet}.
 \end{bsp}
+
+\begin{lem}
+  Für je zwei Punkte $x$, $y$ eines nicht-entarteten Raumes gibt es eine Gerade, die weder $x$ noch $y$ enthält.
+\end{lem}
 
 \begin{defn}
   Ein nicht-entarteter linearer Raum mit $v = b$ heißt eine (endliche) \emph{projektive Ebene}.
@@ -1122,6 +1129,107 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 
 \begin{bsp}
   Die Fano-Ebene ist die projektive Ebene der Ordnung 2.
+\end{bsp}
+
+% Vorlesung vom 19.11.2015
+
+% Existenz projektiver Ebenen
+
+\begin{fakten}
+  \begin{itemize}
+    \item Es gibt keine proj. Ebene der Ordnung 10.
+    \item Jede \textit{heute bekannte} proj. Ebene hat Primzahlpotenzordnung.
+    \item Zu jeder Primzahlpotenz $q \geq 2$ ex. eine proj. Ebene der Ord. $q$.
+    \item alle weiteren $n$ die ausgeschlossen sind entsprechen dem Resultat von Bruck und Roger
+    \item Es ist nicht bekannt, ob eine proj. Ebene mit $n = 12$ existiert.
+  \end{itemize}
+\end{fakten}
+
+\begin{satz}
+  Sei $n \geq 2$.
+  Angenommen, $n \equiv 1 \bmod 4$ oder $n \equiv 2 \bmod 4$.
+  Ist $p$ ein Primteiler von $n$ mit $p \equiv 3 \bmod 4$ und ist die Vielfachheit von $p$ in $n$ ungerade, so git es keine projektive Ebene der Ordnung $n$.
+\end{satz}
+
+\begin{kor}
+  Ist $n \equiv 6 \bmod 8$, so gibt es keine proj. Ebene der Ordung~$n$.
+\end{kor}
+
+\begin{satz}
+  Sei $q \geq 2$ eine Primzahlpotenz.
+  Dann gibt es eine projektive Ebene der Ordnung $q$.
+\end{satz}
+
+\begin{konstr}\mbox{}
+  \vspace{-16pt}
+  \begin{align*}
+    \text{Punkte } p & \coloneqq \text{die ein-dim. Teilräume von $\F_q^3$,} \\
+    \text{Geraden } B & \coloneqq \text{die zwei-dim. Teilräume von $\F_q^3$,} \\
+    p \in B & \coloniff p \subseteq B.
+  \end{align*}
+\end{konstr}
+
+\begin{defn}
+  Sei $\Design = (V, \Blocks, I)$ eine endliche Inzidenzstruktur.
+  Es gebe $r, k \in \N$ mit $r \geq 2$ und $k \geq 2$ mit $\abs{\sigma(x)} = r$ für alle $x \in V$ und $\abs{\upsigma(B)} = k$ für alle $B \in \Blocks$.
+  Dann heißt $\Design$ eine \emph{taktische Konfiguration}.
+\end{defn}
+
+\begin{bem}
+  Doppeltes Zählen der Inzidenzen $I$ ergibt: \enspace
+  \[ v \cdot r = \abs{I} = b \cdot k. \]
+\end{bem}
+
+\begin{defn}
+  Sie $\Design = (V, \Blocks, I)$ eine endliche Inzidenzstruktur.
+  Es gebe $k, t, \lambda \in \N$ mit:
+  \begin{itemize}
+    \item $v = \abs{V} \geq k \geq t$,
+    \item $\abs{\upsigma(B)} = k$ für alle $B \in \Blocks$,
+    \item Zu jeder $t$-elementigen Teilmenge $T \subseteq V$ gibt es genau $\lambda$ Blöcke aus $\Blocks$ mit $T \subseteq \upsigma(B)$.
+  \end{itemize}
+  Dann heißt $\Design$ ein \emph{$t$-$(v, k, \lambda)$-Blockplan}, \emph{$S_\lambda(t, k, v)$-Steinersystem} oder \emph{$t$-Design}.
+\end{defn}
+
+\begin{bsp}
+  Eine proj. Ebene der Ordnung $n$ ist ein $S_1(2, n + 1, n^2 + n + 1)$
+\end{bsp}
+
+\begin{bsp}
+  Sei $V$ eine Menge, $v \geq 2$, $t \leq k$.
+  Sei $\Blocks \coloneqq \Set{B \subseteq V}{\abs{B} = k}$.
+  Dann ist $(V, \Blocks, {\in})$ ein $t$-Design mit $\lambda = {v - t \choose k - t}$.
+\end{bsp}
+
+\begin{prop}
+  Sei $\Design = (V, \Blocks, I)$ ein $S_\lambda(t, k, v)$.
+  Ist $s \in \N$ mit $s \leq t$, dann ist $\Design$ auch ein $s$-Design und zwar mit $\lambda_s = \frac{\lambda \cdot {v -s t-s}}{{k-s \choose t-s}}$.
+\end{prop}
+
+\begin{bem}
+  Insbesondere:
+  \begin{itemize}
+    \item $t \geq 1$, dann $\lambda_1 = \frac{\lambda {v-1 \choose t-1}}{{k-1 \choose t-1}}$.
+    \item $\lambda_0 = b = \frac{\lambda {v \choose t}}{{k \choose t}}$
+    % für $\lambda=1$, $t \geq 4$ kennt man $S_1(4,5,11)$, $S_1(4,7,23)$, $S_1(5,6,12)$, $S_1(5,8,24)$
+  \end{itemize}
+\end{bem}
+
+\begin{satz}
+  Sei $C$ ein binärer linearer perfekter Code mit Länge $n$ und Minimalgewicht $d = 2t+1$.
+  Setze
+  \[
+    V \coloneqq \{ 1, \ldots, n \}, \quad
+    \Blocks \coloneqq \Set{\supp(c)}{c \in C \text{ mit } \wt(c) = d}.
+  \]
+  Dann ist $(V, \Blocks, {\in})$ ein $S_1(\tau, d, n)$ wobei $\tau \coloneqq t+1$.
+\end{satz}
+
+\begin{bsp}
+  Ein $[2^m-1, 2^m-1-m, 3]$-Hamming-Code über $\F_2$ liefert ein $S_1(2, 3, 2^m-1)$.
+  % ~> $\tau = 1+t = t+1 = 2$, $k=3$, $v = 2^m-1$.
+  
+  
 \end{bsp}
 
 \end{document}

@@ -85,6 +85,7 @@
 \newtheorem*{idee}{Idee}
 \newtheorem*{bezeichnung}{Bezeichnung}
 \newtheorem*{folgerung}{Folgerung}
+\newtheorem*{fakten}{Fakten}
 
 \theoremstyle{remark}
 \newtheorem*{bem}{Bem}
