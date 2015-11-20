@@ -1,0 +1,86 @@
+# Copy these into your 'snippets.cson' file ('Atom > Open Your Snippets')
+
+'.text.tex':
+  'Emphasis':
+    'prefix': 'em'
+    'body': '\\\\emph{$1}'
+  'Backslash':
+    # weil so unangenehm zu tippen
+    'prefix': '7'
+    'body': '\\\\'
+  'Set-Builder-Notation':
+    'prefix': 'set'
+    'body': '\\\\Set{$1}{$2}'
+  'Integral':
+    'prefix': 'inte'
+    'body': '\\\\Int{$1}{$2}{$3}{$4}'
+  'All-Quantor':
+    'prefix': 'fa'
+    'body': '\\\\fa{$1} $2'
+  'Existence-Quantor':
+    'prefix': 'ex'
+    'body': '\\\\ex{$1} $2'
+  'Definitions-Istgleich':
+    'prefix': 'ce'
+    'body': '\\\\coloneqq'
+  'Intervall':
+    'prefix': 'iv'
+    'body': '\\\\$1interval{$2}{$3}'
+  'Bruch':
+    'prefix': 'frac'
+    'body': '\\\\frac{$1}{$2}'
+  'Lemma':
+    'prefix': 'lem'
+    'body': """
+      \\\\begin{lem}
+        $1
+      \\\\end{lem}
+    """
+  'Betrag':
+    'prefix': 'abs'
+    'body': '\\\\abs{$1}'
+  'Norm':
+    'prefix': 'norm'
+    'body': '\\\\norm{$1}'
+  'Definition':
+    'prefix': 'defn'
+    'body': """
+      \\\\begin{defn}
+        $1
+      \\\\end{defn}
+    """
+  'Beispiel':
+    'prefix': 'bsp'
+    'body': """
+      \\\\begin{bsp}
+        $1
+      \\\\end{bsp}
+    """
+  'Satz':
+    'prefix': 'satz'
+    'body': """
+      \\\\begin{satz}
+        $1
+      \\\\end{satz}
+    """
+  'Theorem':
+    'prefix': 'thm'
+    'body': """
+      \\\\begin{thm}
+        $1
+      \\\\end{thm}
+    """
+  'Korollar':
+    'prefix': 'kor'
+    'body': """
+      \\\\begin{kor}
+        $1
+      \\\\end{kor}
+    """
+  'Bemerkung':
+    'prefix': 'bem'
+    'body': """
+      \\\\begin{bem}
+        $1
+      \\\\end{bem}
+    """
