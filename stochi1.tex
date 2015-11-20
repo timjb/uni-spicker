@@ -293,13 +293,13 @@
 \end{defn}
 
 \begin{nota}
-  Sei $\Omega$ eine Menge, $A \subset \Omega$. Dann heißt
+  Sei $\Omega$ eine Menge.
+  Die \emph{Indikatorfktn} von $A \subset \Omega$ ist
   \[ \chi_1 = \ind_A : \Omega \to \R, \quad \omega \mapsto \abs{\Set{ \star }{ \omega \in A }} =
   \begin{cases}
     1, & \text{falls } \omega \in A \\
-    0, & \text{falls } \omega \not\in A
+    0, & \text{falls } \omega \not\in A.
   \end{cases} \]
-  \emph{Indikatorfunktion} von $A$.
 \end{nota}
 
 \begin{bsp}
@@ -1003,7 +1003,7 @@
 \end{defn}
 
 \begin{satz}
-  Falls $f : (\Omega, \Alg) \to (\ER, \overline\Bor)$ messbar, dann auch $\abs{f}$, $f^+$ und $f^-$.
+  Falls $f : (\Omega, \Alg) \to (\ER, \overline\Bor)$ messbar, dann auch $\abs{f}$, $f^+$ u. $f^-$.
 \end{satz}
 
 
@@ -1039,14 +1039,12 @@
 \end{defn}
 
 \begin{satz}
-  Es sind messbar:
-  \begin{itemize}
-    \begin{multicols}{2}
-      \item Monotone Funktionen
-      \item Càdlàg-Funktionen
-    \end{multicols}
-    \item Funktionen von beschränkter Variation
-  \end{itemize}
+  Es sind messbar: \enspace
+  \begin{minipage}[t]{0.6 \linewidth}
+    \inlineitem{Monotone Fktn,} \enspace
+    \inlineitem{Càdlàg-Fktn,} \\
+    \inlineitem{Fktn von beschränkter Variation}
+  \end{minipage}
 \end{satz}
 
 \begin{defn}
@@ -1771,9 +1769,10 @@
 
 \begin{satz}
   \begin{itemize}
-    \item Falls $X, Y$ unabhängig, so gilt $\cov(X, Y) = \cor(X, Y) = 0$
-    \miniitem{0.28 \linewidth}{$\abs{\cor(X, Y)} \leq 1$}
-    \miniitem{0.70 \linewidth}{$\cor(X, Y) {=} 1 \!\iff\! \exists \, a,b \in \R : \P(Y {=} aX {+} b) {=} 1$}
+    \item $\abs{\cor(X, Y)} \leq 1$
+    \item Falls $X, Y$ unabhängig, dann gilt $\cov(X, Y) = \cor(X, Y) = 0$.
+    \item $\cor(X, Y) = +1 \iff \ex{a > 0, \, b \in \R} \P(Y = aX + b) = 1$
+    \item $\cor(X, Y) = -1 \iff \ex{a < 0, \, b \in \R} \P(Y = aX + b) = 1$
   \end{itemize}
 \end{satz}
 
@@ -1783,7 +1782,7 @@
 
 \begin{sprech}
   \begin{itemize}
-    \item $\cor(X, Y) \approx 1$: positive Korrelation
+    \item $\cor(X, Y) \approx +1$: positive Korrelation
     \item $\cor(X, Y) \approx -1$: negative Korrelation
     %\item $\cor(X, Y) = 0$: Unkorreliertheit
   \end{itemize}
