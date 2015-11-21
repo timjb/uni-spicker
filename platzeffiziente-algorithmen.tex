@@ -5,7 +5,7 @@
   /Author (Tim Baumann)
 }
 
-\usepackage{algorithm}
+\usepackage{algorithmicx}
 \usepackage[noend]{algpseudocode}
 \usepackage{nicefrac}
 
@@ -17,6 +17,8 @@
 \renewcommand{\O}{\mathcal{O}} % Landau-O
 \newcommand{\Push}{\Leftarrow} % etwas auf den Stack pushen
 \newcommand{\Pop}{\Leftarrow} % etwas vom Stack nehmen
+\algnewcommand\To{\textbf{to}}
+\algnewcommand\Continue{\textbf{continue}}
 
 \begin{document}
 
@@ -277,5 +279,128 @@
 % §6. Connected Components and BFS
 
 % TODO
+\begin{bem}
+  Die Zshgskomponenten eines ungerichteten Graphen können mit Tiefensuche berechnet werden.
+  Mit anderen Explorierungs- strategien sind jedoch effizientere Algorithmen möglich.
+\end{bem}
+
+\begin{alg}[\emph{Connected Components} mit Lücken] \mbox{}
+  \begin{algorithmic}[1]
+    \Function{CC}{$G$}
+      \State $k \coloneqq 0$
+      \For{$u := 1 \ \To\ n$}
+        \State $color[u] \coloneqq white$ \EndFor
+      \For{$u := 1 \ \To\ n$}
+        \If{$color[u] \neq white$}
+          \State \Continue
+        \EndIf
+        \State $k \coloneqq k + 1$
+        \While{at least one vertex is gray}
+          \State Let $v$ be a gray vertex
+          \State $\Call{output}{v, k}$
+          \ForAll{neighbors $w$ of $v$}
+            \If{$color[w] = white$}
+              \State $color[w] \coloneqq gray$
+            \EndIf
+            \State $color[v] \coloneqq black$
+          \EndFor
+        \EndWhile
+      \EndFor
+    \EndFunction
+  \end{algorithmic}
+\end{alg}
+
+\begin{bem}
+  Um diesen Algorithmus zu implementieren, benötigt man eine Datenstruktur, die sich die grauen Knoten merkt:
+\end{bem}
+
+% 6.1 Choice dictionaries
+
+\begin{defn}
+  Ein \emph{Choice Dictionary} der Größe $n$ ist eine Datenstruktur, welche eine (initial leere) Teilmenge $I \subset [n] \coloneqq \{ 1, \ldots, n \}$ verwaltet und folgende Operationen unterstützt:
+  
+  \begin{tabular}{r l}
+    Aufruf & Resultat \\[3pt] \hline
+    $\Call{insert}{i}$ & Füge $i \in [n]$ zu $I$ hinzu \\
+    $\Call{delete}{i}$ & Nehme $i \in I$ aus $I$ heraus \\
+    $\Call{isMember}{i}$ & Prüfe, ob $i \in [n]$ in $I$ enthalten ist \\
+    $\Call{someId}{\,}$ & Gebe ein beliebiges Element von $I$ zurück \\
+    $\Call{allIds}{\,}$ & Gebe alle Elemente von $I$ zurück (als Stream)
+  \end{tabular}
+\end{defn}
+
+\begin{lem}[CD\textsubscript{1}]
+  Man kann ein Choice-Dictionary der Größe $n$, welches die ersten vier Operationen in konstanter Zeit und $\Call{allIds}{}$ in $\O(\abs{I} + 1)$ unterstützt, mit $n \cdot (1 + 2 \cdot \ceil{\log_2 n})$ Bits realisieren.
+\end{lem}
+
+\begin{proof}
+  Mit einem $n$-Bit-Array merken wir uns für jede Zahl $i \in [n]$, ob sie in $I$ enthalten ist.
+  Wir verwenden außerdem zwei Arrays $A$ und $B$ bestehend aus je $n$ Einträgen à $\ceil{\log_2 n}$ Bits und einen Zähler $k \in \{ 0, \ldots, n \}$, welcher die Größe von~$I$ speichert.
+  %Das Array~$A$ verwenden wir als Liste von Elementen aus $I$
+  In~$A$ sind die ersten~$k$ Einträge beliebige Elemente aus~$I$.
+  Das Array~$B$ wird verwendet, um für jedes $i \in [n]$ zu merken, an welcher Stelle es in~$A$ vorkommt (falls überhaupt $i \in I$ gilt).
+  In anderen Worten:
+  \[
+    \fa{i \in I} A[B[i]] = i, \quad
+    \fa{0 \leq j < k = \abs{I}} B[A[j]] = j.
+    \qedhere
+  \]
+\end{proof}
+
+\begin{technik}
+  Sei $f : A \to B$ eine Funktion, $A$ endlich.
+  Wenn $f$ in einem Programm häufig aufgerufen wird, so kann es günstiger sein, die Werte von $f$ im Voraus (beim Kompilieren oder Initialisieren) zu berechnen und im einem Array, der \emph{Lookup-Table}, zu speichern.
+  Werte können dann einfach nachgeschlagen werden. \\
+  Die Voraussetzung dafür ist, dass $\abs{A}$ relativ klein ist und die Werte von~$f$ wenig Speicher benötigen. \\
+  Genauer: Angenommen, für einen Parameter $n \in \N$ gilt, dass
+  \begin{itemize}
+    \item Elemente von $A$ binär mit $m \leq \nicefrac{1}{2} \log_2 n$ Bits repräsentiert werden können (folglich $\abs{A} \leq 2^{\nicefrac{1}{2} \log_2 n} = \sqrt{n}$),
+    \item $f$ in polynomieller Zeit in $m$ auf binär repräsentierten Elementen von $A$ ausgewertet werden kann,
+    \item die Werte von $f$ polynomiell in $m$ viel Platz benötigen.
+  \end{itemize}
+  Dann kann eine Lookup-Table in $\sqrt{n} (\log_n 2)^C$ Zeit berechnet und in $\sqrt{n} (\log_n 2)^D$ Bit gespeichert werden. \\
+  Durch Verwendung dieser Technik kann man Funktionen mit kleinen Argumenten als in konstanter Zeit auswertbar betrachten.
+\end{technik}
+
+\begin{bspe}
+  Lookup-Tables können verwendet werden, um folgende Funktionen zu berechnen:
+  \begin{itemize}
+    \miniitem{0.3 \linewidth}{Sinus (approx.)}
+    \miniitem{0.68 \linewidth}{Anzahl/Position der 1-Bits in einem Byte}
+  \end{itemize}
+\end{bspe}
+
+% 6.2
+\begin{lem}[CD\textsubscript{2}]
+  Es gibt ein Choice-Dictionary, welches $\O(n)$ Platz benötigt, die ersten vier Operationen in konstanter Zeit und $\Call{allIds}{}$ in Zeit $\O(\abs{I} + 1)$ unterstützt.
+  % Initialisierung in $\O(n)$ Zeit
+\end{lem}
+
+\begin{proof}
+  Wir merken uns in einem Array~$V$ von~$n$ Bit, welche Elemente in~$I$ enthalten sind.
+  Wir teilen die Menge~$[n]$ in $\O(\nicefrac{n}{\log n})$ Gruppen, \dh{} disjunkte zusammenhängende Teilmengen, zu je $\leq \nicefrac{1}{2} \log_2 n$ ganzen Zahlen auf.
+  Sei~$I^{*}$ die Menge aller Gruppen, die Elemente aus~$I$ enthalten.
+  Da die Zahlen jeder Gruppe nur höchstens zwei Maschinenworte im Bitarray~$V$ umfassen, können wir in kon- stanter Zeit prüfen, ob eine Gruppe Zahlen in~$I$ enthält, also ob die Gruppe in~$I^{*}$ liegt.
+  Um schnell Gruppen aus $I^{*}$ zu finden, verwenden wir zwei Arrays~$A$ und~$B$ zu je $\O(\nicefrac{n}{\log n} \cdot \log(\nicefrac{n}{\log n})) = \O(n)$ Bits wie im Beweis von~CD\textsubscript{1}.
+  Wir implementieren $\Call{someId}{}$ wie folgt: Zunächst ist $G \coloneqq A[0]$ eine nichtleere Gruppe. Sei $q$ das zugehörige Wort in~$V$. Sei~$f$ eine Funktion, welche für ein Maschinenwort den Index eines 1-Bits im Wort zurückgibt. Dann ist $(\min G) + f(q) \in I$.
+  Wir benutzen eine Lookup-Table, um $f$ effizient auszuwerten.
+\end{proof}
+
+% 6.3
+\begin{thm}[CD\textsubscript{3}]
+  Es gibt ein Choice-Dictionary, welches $n + \O(\nicefrac{n}{\log n})$ Bits an Platz benötigt, die ersten vier Operationen in konstanter Zeit und $\Call{allIds}{}$ in Zeit $\O(\abs{I} + 1)$ unterstützt.
+\end{thm}
+
+\begin{proof}
+  Wir verwenden diesselbe Konstr. wie im Beweis von~CD\textsubscript{2}, speziell das Bitarray $V$ mit $n$ Bits und die Einteilung in Gruppen.
+  Um $I^{*} \subseteq [m]$ mit $m = \O(\nicefrac{m}{\log n})$ zu verwalten, gebrauchen wir das Choice-Dictionary von~CD\textsubscript{2}, welches nur~$\O(m)$ Bits benötigt.
+\end{proof}
+
+% 6.4
+\begin{kor}
+  Man kann die Zshgskomponenten eines ungerichteten Graphen in Zeit $\O(n + m)$ mit $n + \O(\nicefrac{n}{\log n})$ Bits berechnen.
+\end{kor}
+
+% TODO: Unmöglichkeitsbeweis aus der Vorlesung, noch besseres Resultat
 
 \end{document}
