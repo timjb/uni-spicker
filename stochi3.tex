@@ -289,8 +289,8 @@
 
 % 1.4. Lemma von Slutzky und varianzstabilisiernde Transformationen
 
-\begin{lem}
-  Seien $(X_n)$, $(Y_n)$ zwei Folgen von ZGn über $(\Omega, \Alg, \P)$ mit $X_n \xra[n \to \infty]{\P} c = \text{const}$ (\dh{} $\fa{\epsilon > 0} \P(\abs{X_n - c} > \epsilon) \to 0$) und $Y_n \xra[n \to \infty]{d} Y$ (\dh{} $\P(Y_n \leq y) \to \P(Y \leq y)$ für alle Stetigkeitspunkte $y$ der VF $y \mapsto \P(Y \leq y)$). Dann gilt:
+\begin{lem}[\emph{Slutzky}]
+  Seien $(X_n)$, $(Y_n)$ Folgen von ZGn über $(\Omega, \Alg, \P)$ mit $X_n \xra[n \to \infty]{\P} c = \text{const}$ (\dh{} $\fa{\epsilon > 0} \P(\abs{X_n - c} > \epsilon) \to 0$) und $Y_n \xra[n \to \infty]{d} Y$ (\dh{} $\P(Y_n \leq y) \to \P(Y \leq y)$ für alle Stetigkeitspunkte $y$ der VF $y \mapsto \P(Y \leq y)$). Dann gilt:
   \[
     X_n + Y_n \xra{d} c + Y, \quad
     X_n \cdot Y_n \xra{d} c \cdot Y, \quad
@@ -707,30 +707,30 @@
   Heuristik: $H_0$ wird angenommen, falls sich die $x$- und $x^{*}$-Werte "`gut durchmischen"', \dh{} die Anzahl der $x$-Werte, die vor bzw. nach den $x^{*}$-Werten liegen, darf nicht zu groß werden.
   Testgröße:
   \begin{align*}
-    W_{m,n} & \coloneqq \abs{\Set{(i, j) \in \{ 1, \ldots, n \} \times \{ 1, \ldots, m \}}{ X_i < X_j^{*}}} = \sum_{i=1}^n \sum_{j=1}^m \ind_{\{ X_i < X_j^{*} \}} \\
-    & = \sum_{j=1}^m \abs{\Set{i}{X_i < X_{j:m}^{*}}} = \sum_{j=1}^m (\nu_j - j) = \nu_1 + \ldots + \nu_m - \tfrac{m}{2} (m+1)
+    W_{m,n} & \coloneqq \! \sum_{i=1}^n \sum_{j=1}^m \ind_{\{ X_i < X_j^{*} \}} \!=\! \abs{\Set{(i, j)}{ X_i \!<\! X_j^{*}}} \!=\! \sum_{j=1}^m \abs{\Set{i}{X_i \!<\! X_{j:m}^{*}}} \\
+    & = \sum_{j=1}^m (\nu_j - j) = \nu_1 + \ldots + \nu_m - \tfrac{m}{2} (m+1)
   \end{align*}
-  Unter $H_0$ gilt:
-  \begin{align*}
-    \E W_{m,n} & = \sum_{i=1}^n \sum_{j=1}^m \E \ind_{\{ X_i < X_j^{*} \}} = \tfrac{m \cdot n}{2} \\
-    \var W_{m,n} & = \tfrac{m \cdot n}{12} (m + n + 1)
-  \end{align*}
+  Unter $H_0$ gilt \quad
+  $\E W_{m,n} = \tfrac{m \cdot n}{2}$, \quad
+  $\var W_{m,n} = \tfrac{m \cdot n}{12} (m + n + 1)$.
 \end{situation}
 
 \begin{lem}
   Unter $H_0 : F = F^*$ stetig gilt
   \begin{align*}
-    g_{m,n}(z) & \coloneqq \sum_{k=0}^{n \cdot m} \P(W_{m,n} = k) z^k = \frac{z^{-m (m+1) / 2}}{{m + n \choose m}} \enspace\qquad \sum_{\mathclap{1 \leq \nu_1 < \ldots < \nu_m \leq m+m}} \enspace z^{\nu_1 + \ldots + \nu_m} \\
+    g_{m,n}(z) & \coloneqq \sum_{k=0}^{n \cdot m} \P(W_{m,n} = k) \cdot z^k = \frac{z^{-m (m+1) / 2}}{{m + n \choose m}} \enspace\qquad \sum_{\mathclap{1 \leq \nu_1 < \ldots < \nu_m \leq m+n}} \enspace z^{\nu_1 + \ldots + \nu_m} \\
     & = \tfrac{1}{{m + n \choose m}} \prod_{k=1}^m \frac{1 - z^{n+k}}{1 - z^k}
   \end{align*}
 \end{lem}
 
 \begin{entscheidungsregel}
-  Ablehnung von $H_0$, falls $w_{m,n} \leq c_{\nicefrac{\alpha}{2}}$ oder $w_{m,n} \geq m \cdot n - c_{\nicefrac{\alpha}{2}}$, wobei $c_{\nicefrac{\alpha}{2}} = \min \Set{k \geq 0}{\P(W_{m,n} \leq k) = \P(W_{m,n} \geq m \cdot n - k) \geq \nicefrac{\alpha}{2}}$
-  ($c_{\nicefrac{\alpha}{2}} - \tfrac{m \cdot n}{2}$ ist Quanil der Ordnung $\tfrac{\alpha}{2}$ der ZG $W_{m,n} - \tfrac{m \cdot n}{2}$).
+  Ablehnung von $H_0$, falls $w_{m,n} \leq c_{\nicefrac{\alpha}{2}}$ oder $w_{m,n} \geq m \cdot n - c_{\nicefrac{\alpha}{2}}$, wobei
+  \[
+    c_{\nicefrac{\alpha}{2}} = \min \Set{k \geq 0}{\P(W_{m,n} \leq k) = \P(W_{m,n} \geq m \cdot n - k) \geq \nicefrac{\alpha}{2}}.
+  \]
+  % ($c_{\nicefrac{\alpha}{2}} - \tfrac{m \cdot n}{2}$ ist Quantil der Ordnung $\tfrac{\alpha}{2}$ der ZG $W_{m,n} - \tfrac{m \cdot n}{2}$).
+  Annahme von $H_0$ genau dann, wenn $\abs{w_{m,n} - \tfrac{m \cdot n}{2}} < \tfrac{m \cdot n}{2} - c_{\nicefrac{\alpha}{2}}$
 \end{entscheidungsregel}
-
-Annahme von $H_0$ genau dann, wenn $\abs{w_{m,n} - \tfrac{m \cdot n}{2}} < \tfrac{m \cdot n}{2} - c_{\nicefrac{\alpha}{2}}$
 
 \begin{satz}
   Unter $H_0 : F = F^{*}$ stetig gilt
@@ -760,51 +760,86 @@ Annahme von $H_0$ genau dann, wenn $\abs{w_{m,n} - \tfrac{m \cdot n}{2}} < \tfra
 % §3.1. Hoeffdings Projektionsmethode und ZGWS
 
 \begin{situation}
-  Sei $n \geq m$, $X_1, \ldots, X_n \sim F$ \iid{}, $h : \R^m \to \R^1$ Borel-messbar und symmetrisch. $\E \abs{h(X_1, \ldots, X_m)} < \infty$
+  Sei $n \geq m$, $X_1, \ldots, X_n \sim F$ \iid{}, $h : \R^m \to \R^1$ Borel-messbar und symmetrisch, \dh{}
+  \[
+    h(x_1, \ldots, x_n) = h(x_{\sigma(1)}, \ldots, x_{\sigma(n)}) \quad
+    \forall \, \sigma \in S_n.
+  \]
+  Gelte $\E \abs{h(X_1, \ldots, X_m)} < \infty$.
 \end{situation}
 
 \begin{defn}
   Die \emph{U-Statistik der Ordnung $m$} mit Kernfunktion $h$ ist
-  \[ U_i^{(m)} \coloneqq \tfrac{1}{{n \choose m}} \sum_{1 \leq i_1 < \ldots < i_m \leq n} h(X_{i_1}, \ldots, X_{i_m}). \]
+  \[ U_n^{(m)} \coloneqq \tfrac{1}{{n \choose m}} \sum_{1 \leq i_1 < \ldots < i_m \leq n} h(X_{i_1}, \ldots, X_{i_m}). \]
 \end{defn}
 
 \begin{bem}
-  Offenbar: $\E U_i^{(m)} = \E h(X_1, \ldots, X_m)$.
+  Offenbar: $\E U_n^{(m)} = \E h(X_1, \ldots, X_m)$.
 \end{bem}
 
 \begin{bsp}
   Für $m=2$ gilt $\sigma^2 = \var(X_1) = \tfrac{1}{2} \E (X_1 - X_2)^2$.
   Davon inspiriert setzen wir $h(x_1, x_2) \coloneqq \tfrac{1}{2}(x_1 - x_2)^2$.
   Damit haben wir
-  \[ U_n^{(2)} = \tfrac{2}{n (n-1)} \sum_{1 \leq i < j \leq n} \tfrac{1}{2} (X_i - X_j)^2 = \tfrac{1}{n (n-1)} ( (n-1) \sum_{i=1}^n X_i^2 - (X_1 + \ldots X_n)^2 + \sum_{i=1}^n X_i^2 ) - X_n = \tfrac{1}{n} (X_1 + \ldots + X_n) = \tfrac{1}{n-1} ( \sum_{i=1}^n X_i^2 - n (\overline{X}_n)^2 ) = \tfrac{1}{n-1} \sum_{i=1}^n (X_i - \overline{X}_n)^2 = S_n^2 \]
+  \[
+    U_n^{(2)} = \tfrac{2}{n (n-1)} \sum_{1 \leq i < j \leq n} \tfrac{1}{2} (X_i - X_j)^2
+    %= \tfrac{1}{n (n-1)} ( (n-1) \sum_{i=1}^n X_i^2 - (X_1 + \ldots X_n)^2 + \sum_{i=1}^n X_i^2 ) - X_n
+    %= \tfrac{1}{n} (X_1 + \ldots + X_n)
+    %= \tfrac{1}{n-1} ( \sum_{i=1}^n X_i^2 - n (\overline{X}_n)^2 )
+    = \tfrac{1}{n-1} \sum_{i=1}^n (X_i - \overline{X}_n)^2 = S_n^2
+  \]
 \end{bsp}
 
+\begin{ziel}
+  Wir würden gerne den ZGWS auf $U_n^{(m)}$ anwenden.
+  Problem dabei: Die Summanden in der Def. von $U_n^{(m)}$ sind nicht unabhängig.
+  Wir approximieren deshalb $U_n^{(m)}$ mit einer Summe von \iid{} ZGn.
+\end{ziel}
+
 \begin{lem}[\emph{Hoeffdings Projektionsmethode}]
-  Sei $g(x) = \E[h(X_1, \ldots, X_n) | X_1 = x ] = \E h(x, X_2, \ldots, X_m) = \Int{}{}{\cdots \Int{}{}{h(x, x_2, \ldots, x_n)}{F(x_2)} \cdots}{F(x_n)}$
-  \[ \tilde{U}_n^{(m)} = \theta + \sum_{i=1}^n (\E(U_n^{(m)} | X_i) - \theta) \]
-  wobei $\theta \coloneqq \E U_n^{(m)}$.
+  Sei
+  \begin{align*}
+    g(x) & = \E[h(X_1, \ldots, X_n) | X_1 = x ] = \E h(x, X_2, \ldots, X_m) \\
+    & = \Int{}{}{\cdots \Int{}{}{h(x, x_2, \ldots, x_n)}{F(x_2)} \cdots}{F(x_n)} \\
+    \tilde{U}_n^{(m)} & = \theta + \sum_{i=1}^n (\underbrace{\E(U_n^{(m)} | X_i)}_{\text{\iid{}}} - \theta)
+    \qquad \text{wobei } \theta \coloneqq \E U_n^{(m)}.
+  \end{align*}
   Falls $\E h^2(X_1, \ldots, X_m) < \infty$, so gilt
-  \begin{itemize}
-    \item $\var(U_n^{(m)} - \tilde{U}_n^{(m)}) = \var(U_n^{(m)})$
+  \begin{enumerate}[label=(\arabic*), itemindent=6pt]
+    \item $\var(U_n^{(m)} - \tilde{U}_n^{(m)}) = \var(U_n^{(m)}) - \var(\tilde{U}_n^{(m)})$
     \item $\E (U_n^{(m)} | X_i = x) = \theta + \tfrac{m}{n} (g(x) - \theta)$
-  \end{itemize}
+  \end{enumerate}
 \end{lem}
 
 \begin{lem}
-  \begin{itemize}
-    \item $\var(\tilde{U}^{(m)}_n) = \tfrac{m^2}{n} \cdot \var(g(X_1)) = \frac{m^2}{2} ( \E g^2(X_1) - \theta^2 )$
-    \item $\var(U_n) = \tfrac{1}{{n \choose m}} \sum_{k=1}^m {m \choose k} {n - m \choose m - k} \left( \E[h(X_1, \ldots, X_k, X_{k+1}, \ldots, X_m) \cdot h(X_1, \ldots, X_k, X_{m+1}, \ldots, X_{2m-k})] - \theta^2 \right)$ sofern $\E h(X_1, \ldots, X_m) < \infty$.
-  \end{itemize}
+  \begin{enumerate}[label=(\arabic*), itemindent=6pt]
+    \setcounter{enumi}{1}
+    \item $\var(\tilde{U}^{(m)}_n) = \tfrac{m^2}{n} \cdot \var(g(X_1)) = \tfrac{m^2}{2} ( \E g^2(X_1) - \theta^2 )$
+    \item Falls $\E \abs{h(X_1, \ldots, X_m)} < \infty$, so gilt
+    \begin{align*}
+      \var(U_n^{(m)}) & = \tfrac{1}{{n \choose m}} \sum_{k=1}^m {m \choose k} {n - m \choose m - k} \cdot \zeta_k \quad \text{mit} \\
+      h_k(x_1, \ldots, x_k) & \coloneqq \E(h(x_1, \ldots, x_k, X_{k+1}, \ldots, X_m) \\
+      \zeta_k & \coloneqq \var(h_k(X_1, \ldots, X_k)) \\
+      & =
+      \arraycolsep=0.2pt
+      \begin{array}[t]{l l}
+        \E[ & h(X_1, \nldots, X_k, X_{k+1}, \nldots, X_m) \cdot \\
+        & h(X_1, \nldots, X_k, X_{m+1}, \nldots, X_{2m-k})] - \theta^2
+      \end{array}
+    \end{align*}
+  \end{enumerate}
 \end{lem}
 
 \begin{kor}
-  Für $m=2$ folgt
-  \begin{align*}
-    & \var(U_n - \tilde{U}_n) = \var(U_n) - \var(\tilde{U}_n) \\
-    & = \tfrac{1}{n (n-1)} \left( \E (\overline{h}(X_1, X_2)^2) - 2 (n-2) \E \overline{h}(X_1, X_2) \overline{h}(X_2, X_3) \right) - \tfrac{4}{n} \var(g(X_1)) \\
-    & = \tfrac{1}{n (n-1)} ( \var(h(X_1, X_2)) - 2 \var g(X_1) )
-  \end{align*}
-  Also $\var(U_n^{(m)} - \tilde{U}_n^{(m)}) \leq c_m \frac{\var(h(X_1, \ldots, X_m))}{n^2}$.
+  Aus (1), (3) und (4) folgt für $m=2$:
+  \[
+    \var(U_n - \tilde{U}_n)
+    = \var(U_n) - \var(\tilde{U}_n)
+    %& = \tfrac{1}{n (n-1)} \left( \E (\overline{h}(X_1, X_2)^2) - 2 (n-2) \E \overline{h}(X_1, X_2) \overline{h}(X_2, X_3) \right) - \tfrac{4}{n} \var(g(X_1)) \\
+    = \ldots
+    = - \tfrac{4}{n (n-1)} \var(g(X_1))
+  \]
+  Für $m \geq 2$ gilt $\var(U_n^{(m)} - \tilde{U}_n^{(m)}) \leq \tfrac{c(m)}{n^2} \var(h(X_1, \ldots, X_m))$.
 \end{kor}
 
 
