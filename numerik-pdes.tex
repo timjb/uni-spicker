@@ -1291,7 +1291,7 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
 % Vorlesung vom 23.11.2015
 
 % 4.2
-\begin{satz}
+\begin{bem}
   \begin{itemize}
     \item Auf $H^k(\Omega)$ wird durch
     \[
@@ -1300,7 +1300,7 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
     ein Skalarprodukt definiert, das die Norm $\norm{\blank}_{k,2}$ induziert.
     \item $(H^k(\Omega), \scp{\blank}{\blank}_{H^k(\Omega)})$ ist ein Hilbertraum.
   \end{itemize}
-\end{satz}
+\end{bem}
 
 % Beispiel: $H_1(\Omega)$, $\scp{u}{v}_{H^1(\Omega)} = \Int{\Omega}{}{uv}{x} + \Int{\Omega}{}{\nabla u \cdot \nabla v}{x}$.
 
@@ -1381,35 +1381,39 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
 
 % 4.2. Variationsgleichungen
 
-$\Omega \subset \R^d$ beschränkt
+\begin{situation}
+  Sei $\Omega \subset \R^d$ beschränkt.
+  Wir betrachten nun wieder
+  \[
+    \text{(RWP\tss{1})} \enspace \left\{ \begin{array}{rlll}
+      \LL u &=& f &\text{ in $\Omega$} \\
+      u &=& 0 &\text{ auf $\bOmega$}
+    \end{array} \right.
+  \]
+  \begin{align*}
+    \text{mit} \quad
+    \LL u & = - \sum_{i=1}^d \DO_i (\sum_{j=1}^d a_{ij}(x) \DO_j u) + \sum_{i=1}^d b_i(x) \DO_i u + c(x) u \\
+    & = - \dive(A(x) \DO u) + b(x) \cdot \DO u + c(x) u.
+  \end{align*}
+  Sei $u$ eine Lsg von (RWP\tss{1}) und $\phi \in \Testfun(\Omega)$.
+  Dann gilt
+  \begin{align*}
+    & \enspace \Int{\Omega}{}{f(x) \phi(x)}{x}
+    = \enspace \Int{\Omega}{}{\LL u \phi}{x} \\
+    = & \enspace - \Int{\Omega}{}{\dive(A(x) \DO u(x)) \phi(x)}{x} + \Int{\Omega}{}{\left( b(x) \cdot \DO u(x) + c(x) u(x) \right) \cdot \phi(x)}{x} \\
+    = & \enspace \Int{\Omega}{}{A(x) \DO u(x) \cdot \DO \phi(x)}{x} + \Int{\Omega}{}{\left( b(x) \cdot \DO u(x) + c(x) u(x) \right) \cdot \phi(x)}{x}
+  \end{align*}
 
-\[
-  \text{(RWP\tss{1})} \left\{ \begin{array}{rlll}
-    \LL u &=& f &\text{ in $\Omega$} \\
-    u &=& 0 &\text{ auf $\bOmega$}
-  \end{array} \right.
-\]
-
-\begin{align*}
-  \LL u & = - \sum_{i=1}^d \DO_i (\sum_{j=1}^d a_{ij}(x) \DO_j u) + \sum_{i=1}^d b_i(x) \DO_i u + c(x) u \\
-  & = - \dive(A(x) \DO u) + b(x) \cdot \DO u + c(x) u
-\end{align*}
-
-Sei $\phi \in \Testfun(\Omega)$
-\[
-  \Int{\Omega}{}{\LL u \phi}{x} = - \Int{\Omega}{}{\dive(A(x) \DO u(x)) \phi(x)}{x} + \Int{\Omega}{}{b(x) \cdot \DO(u(x)) \phi(x)}{x} + \Int{\Omega}{}{c(x) u(x) \phi(x)}{x}
-\]
-
-\[
-  \Int{\Omega}{}{f(x) \phi(x)}{x} = \Int{\Omega}{}{A(x) \DO u(x) \cdot \DO \phi(x)}{x} + \Int{\Omega}{}{b(x) \cdot \DO u(x) \phi(x)}{x} + \Int{\Omega}{}{c(x) u(x) \phi(x)}{x}
-\]
-
-Nebenrechnung:
-\begin{align*}
-  - \Int{\Omega}{}{\sum_i \DO_i (\sum_j a_{ij}(x) \DO_j u(x) \phi(x))}{x}
-  & = - \Int{\partial \Omega}{}{\sum_i (\sum_j a_{ij}(x) \DO_j u(x)) \eta_i(x) \phi(x)}{s(x)} + \Int{\Omega}{}{\sum_i (\sum_j a_{ij}(x) \DO_j u(x)) \DO_i \phi(x)}{x} \\
-  & = \Int{\Omega}{}{A(x) \DO u(x) \cdot \DO \phi(x)}{x}
-  % weil die Testfunktion auf dem Rand verschwindet
-\end{align*}
+  \iffalse
+  Nebenrechnung:
+  \begin{align*}
+    & - \Int{\Omega}{}{\sum_i \DO_i (\sum_j a_{ij}(x) \DO_j u(x) \phi(x))}{x} \\
+    = & - \Int{\partial \Omega}{}{\sum_i (\sum_j a_{ij}(x) \DO_j u(x)) \eta_i(x) \phi(x)}{s(x)} \\
+    & + \Int{\Omega}{}{\sum_i (\sum_j a_{ij}(x) \DO_j u(x)) \DO_i \phi(x)}{x} \\
+    = & \Int{\Omega}{}{A(x) \DO u(x) \cdot \DO \phi(x)}{x}
+    % weil die Testfunktion auf dem Rand verschwindet
+  \end{align*}
+  \fi
+\end{situation}
 
 \end{document}
