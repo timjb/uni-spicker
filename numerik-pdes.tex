@@ -26,7 +26,7 @@
 \newcommand{\rf}{\text{rf}} % randfern
 \renewcommand{\O}{\mathcal{O}} % Landau-Symbol
 \newcommand{\DO}{\mathcal{D}} % Differentialoperator
-\newcommand{\scp}[2]{\left( #1 \!\mid\! #2 \right)} % Skalarprodukt
+\newcommand{\scp}[2]{\left\langle #1 , #2 \right\rangle} % Skalarprodukt
 \DeclareMathOperator*{\esssup}{ess\,sup} % Essentielles Supremum
 \newcommand{\loc}{\text{loc}} % lokal
 \newcommand{\ind}{\mathbbm{1}} % Indikatorfunktion
@@ -1208,9 +1208,9 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
 \end{bem}
 
 \begin{satz}[\emph{Höldersche Ungleichung}]
-  Sei $u \in L^p(\Omega)$ und $v \in L^q(\Omega)$ mit $1 \leq p, q < \infty$ und $\nicefrac{1}{p} + \nicefrac{1}{q} = 1$.
-  Dann ist $uv \in L^1(\Omega)$ und es gilt
-  \[ \norm{uv}_1 \leq \norm{u}_p \cdot \norm{v}_q. \]
+  Sei $u \in L^p(\Omega)$ und $v \in L^q(\Omega)$ mit $1 \leq p, q, r < \infty$ und $\nicefrac{1}{p} + \nicefrac{1}{q} = \tfrac{1}{r}$.
+  Dann ist $uv \in L^r(\Omega)$ und es gilt
+  \[ \norm{uv}_r \leq \norm{u}_p \cdot \norm{v}_q. \]
 \end{satz}
 
 \begin{defn}
@@ -1288,5 +1288,128 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
   $(W^{k,p}(\Omega), \norm{\blank}_{k,p})$ ist ein Banachraum.
 \end{satz}
 
+% Vorlesung vom 23.11.2015
+
+% 4.2
+\begin{satz}
+  \begin{itemize}
+    \item Auf $H^k(\Omega)$ wird durch
+    \[
+      \scp{u}{v}_{H^k(\Omega)} \coloneqq \Int{\Omega}{}{\sum_{\alpha \leq k} D^\alpha u D^\alpha v}{x}
+    \]
+    ein Skalarprodukt definiert, das die Norm $\norm{\blank}_{k,2}$ induziert.
+    \item $(H^k(\Omega), \scp{\blank}{\blank}_{H^k(\Omega)})$ ist ein Hilbertraum.
+  \end{itemize}
+\end{satz}
+
+% Beispiel: $H_1(\Omega)$, $\scp{u}{v}_{H^1(\Omega)} = \Int{\Omega}{}{uv}{x} + \Int{\Omega}{}{\nabla u \cdot \nabla v}{x}$.
+
+\begin{satz}["`$H = W$"'] % Meyers/Serrin
+  $W^{k,p}(\Omega) \cap \Cont^\infty(\Omega)$ liegt dicht in $W^{k,p}(\Omega)$, \dh{}
+  \[
+    %H^{k,p} \coloneqq
+    \clos{W^{k,p}(\Omega) \cap \Cont^\infty(\Omega)}^{\norm{\blank}_{k,p}} = W^{k,p}(\Omega).
+  \]
+\end{satz}
+
+\begin{defn}
+  $W_0^{k,p}(\Omega) \coloneqq \clos{\Testfun(\Omega)}^{\norm{\blank}_{k,p}}$, \quad
+  $H_0^1(\Omega) \coloneqq W^{1,2}_0(\Omega)$
+\end{defn}
+
+\begin{satz}
+  Sei $\Omega$ ein beschränktes $\Cont^1$-Gebiet und $1 \leq p < \infty$. \\
+  Dann existiert eine lineare stetige Abbildung $\tau : W^{1,p}(\Omega) \to L^p(\partial \Omega)$, sodass für alle $u \in W^{1,p}(\Omega) \cap \Cont(\clos{\Omega})$ gilt: $\tau(u) = u|_{\partial \Omega}$.
+\end{satz}
+
+% Beweis: Buch von Evans, Satz 1 in Abschnitt 5.5
+
+\begin{defn}
+  Die Abbildung $\tau$ heißt \emph{Spuroperator}, $\tau(u)$ heißt die \emph{Spur} von $u \in W^{1,p}(\Omega)$ auf $\partial \Omega$.
+\end{defn}
+
+\begin{satz}
+  Sei $\Omega$ ein beschränktes $\Cont^1$-Gebiet.
+  Dann gilt
+  \[
+    W_0^{1,p}(\Omega) = \Set{v \in W^{1,p}(\Omega)}{\tau(v) = 0}.
+  \]
+\end{satz}
+
+% Beweis: Evans, Satz 2 in Abschnitt 5.5
+
+% 4.1.3 Dualräume
+
+\begin{defn}
+  Sei $(U, \norm{\blank}_U)$ ein Banachraum. \\
+  Der \emph{Dualraum} von $U$ ist $(U', \norm{\blank}_{U'})$ mit
+  \begin{align*}
+    U' & \coloneqq \{ \text{lineare, stetige Abbildungen } \psi : U \to \R \} \\
+    \norm{\psi}_{U'} & \coloneqq \sup_{u \in U \setminus \{ 0 \}} \frac{\abs{\psi(u)}}{\norm{u}_U}.
+  \end{align*}
+\end{defn}
+
+\begin{bsp}
+  %$(L^p(\Omega))' \cong L^q(\Omega)$
+  Gelte $\nicefrac{1}{p} + \nicefrac{1}{q} = 1$ mit $p, q \in \ointerval{0}{\infty}$ Die Abbildung
+  \[
+    j : L^q(\Omega) \to (L^p(\Omega))', \quad
+    f \mapsto (g \mapsto \Int{\Omega}{}{f(x) g(x)}{x})
+  \]
+  ist ein isometrischer Isomorphismus.
+\end{bsp}
+
+\begin{nota}
+  $\scp{\psi}{u}_{U', U} \coloneqq \psi(u)$ für $\psi \in U'$, $u \in U$.
+\end{nota}
+
+% 4.6
+\begin{satz}[\emph{Riesz'scher Darstellungssatz}] \mbox{} \\
+  Sei $(H, \scp{\blank}{\blank}_H)$ ein Hilbertraum.
+  Dann ist 
+  \[
+    j : H \to H', \quad
+    \psi \mapsto (\phi \mapsto \scp{\psi}{\phi}_H)
+  \]
+  ein isometrischer Isomorphismus.
+\end{satz}
+
+\begin{defn}
+  $W^{-1,q} \coloneqq (W_0^{1,p}(\Omega))'$, \quad
+  $H^{-1}(\Omega) \coloneqq (H_0^1(\Omega))'$.
+\end{defn}
+
+% 4.2. Variationsgleichungen
+
+$\Omega \subset \R^d$ beschränkt
+
+\[
+  \text{(RWP\tss{1})} \left\{ \begin{array}{rlll}
+    \LL u &=& f &\text{ in $\Omega$} \\
+    u &=& 0 &\text{ auf $\bOmega$}
+  \end{array} \right.
+\]
+
+\begin{align*}
+  \LL u & = - \sum_{i=1}^d \DO_i (\sum_{j=1}^d a_{ij}(x) \DO_j u) + \sum_{i=1}^d b_i(x) \DO_i u + c(x) u \\
+  & = - \dive(A(x) \DO u) + b(x) \cdot \DO u + c(x) u
+\end{align*}
+
+Sei $\phi \in \Testfun(\Omega)$
+\[
+  \Int{\Omega}{}{\LL u \phi}{x} = - \Int{\Omega}{}{\dive(A(x) \DO u(x)) \phi(x)}{x} + \Int{\Omega}{}{b(x) \cdot \DO(u(x)) \phi(x)}{x} + \Int{\Omega}{}{c(x) u(x) \phi(x)}{x}
+\]
+
+\[
+  \Int{\Omega}{}{f(x) \phi(x)}{x} = \Int{\Omega}{}{A(x) \DO u(x) \cdot \DO \phi(x)}{x} + \Int{\Omega}{}{b(x) \cdot \DO u(x) \phi(x)}{x} + \Int{\Omega}{}{c(x) u(x) \phi(x)}{x}
+\]
+
+Nebenrechnung:
+\begin{align*}
+  - \Int{\Omega}{}{\sum_i \DO_i (\sum_j a_{ij}(x) \DO_j u(x) \phi(x))}{x}
+  & = - \Int{\partial \Omega}{}{\sum_i (\sum_j a_{ij}(x) \DO_j u(x)) \eta_i(x) \phi(x)}{s(x)} + \Int{\Omega}{}{\sum_i (\sum_j a_{ij}(x) \DO_j u(x)) \DO_i \phi(x)}{x} \\
+  & = \Int{\Omega}{}{A(x) \DO u(x) \cdot \DO \phi(x)}{x}
+  % weil die Testfunktion auf dem Rand verschwindet
+\end{align*}
 
 \end{document}
