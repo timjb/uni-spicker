@@ -29,6 +29,7 @@
 \DeclareMathOperator*{\eqqd}{\stackrel{d}{=}} % Gleichheit in Verteilung (equality in distribution)
 \newcommand{\iid}{i.\,i.\,d.} % identisch unabhängig verteilt
 \newcommand{\Uniform}{\mathcal{R}} % Gleichverteilung
+\DeclareMathOperator{\Cum}{Cum} % Kumulante
 
 \DeclareMathOperator{\var}{Var} % Varianz
 \DeclareMathOperator{\cov}{Cov} % Kovarianz
@@ -842,5 +843,76 @@
   Für $m \geq 2$ gilt $\var(U_n^{(m)} - \tilde{U}_n^{(m)}) \leq \tfrac{c(m)}{n^2} \var(h(X_1, \ldots, X_m))$.
 \end{kor}
 
+% Vorlesung vom 23.11.2015
+
+% §3.2. ZGWS für (nichtentartete) U-Statistiken
+
+\begin{satz}[W. Hoeffding]
+  Für eine U-Statistik $m$-ter Ordnung $U_n^{(m)}$ mit Kern $h : \R^m \to \R^1$, sodass $\E h^2(X_1, \ldots, X_m) < \infty$ und $\sigma_g^2 \coloneqq \var(G(X_1)) > 0$, gilt
+  \[ \sqrt{n} (U_n^{(m)} - \theta) \xra[d]{n \to \infty} \Normal(0, \sigma_g^2). \]
+\end{satz}
+
+\begin{bemn}
+  \begin{itemize}
+    \item Der Fall $\var(g(X_1)) = 0$ (entarteter Fall) zieht eine kompliziertere Asymptotik nach sich. % (Übungsaufgabe dazu)
+    \item $\E g^2(X_1) < \infty$ ist schwächer als $\E h^2(X_1, \ldots, X_m) < \infty$.
+    Man kann zeigen, das aus $E \abs{h(X_1, \ldots, X_m)}^{1+q} < \infty$, $0 < q \leq 1$ die Abschätzung $\E \abs{\sqrt{n} U_n^{(m)} - \tilde{U}_n^{(m)}}^{1+q} \leq c(q, m) n^{\nicefrac{1+q}{2}} \frac{\E \abs{h(X_1, \ldots, X_m)}^{1+q}}{n^{2q}}$
+    Mit einer Abschneidetechnik zeigt man, dass $\E \abs{h(X_1, \ldots, X_m)}^{\nicefrac{4}{3}} < \infty$ ausreichend ist für $\P(\sqrt{n} \abs{U_n^{(m)} - \tilde{U}_n^{(m)}} < \epsilon) \to 0$ für alle $\epsilon > 0$.
+    \item U-Statistiken erweisen sich (unter gewissen Bedingungen) als suffiziente Schätzer mit minimaler Varianz.
+  \end{itemize}
+\end{bemn}
+
+\begin{bsp}
+  $S_n^2 = \tfrac{1}{{n \choose 2}} \sum_{1 \leq i < j \leq n} \tfrac{1}{2} (X_i - X_j)^2$
+  $g(x) = \tfrac{1}{2} \E (x - X_1)^2 = \tfrac{1}{2} (x^2 - 2 \E X_1 + \E X_1^2) = \tfrac{1}{2} (x - \E X_1)^2 + \tfrac{1}{2} \var(X_1)$
+  $\sqrt{n} (S_n^2 - \sigma^2) \xra[n \to \infty]{d} \Normal(0, 4 \sigma_g^2)$ mit $\sigma_g^2 = \E g^2(X_2) - (\E g(X_2))^2 = \tfrac{1}{4} \E (X_1 - \E X_2)^4 - \tfrac{1}{4} \sigma^4$
+\end{bsp}
+
+Spezialfall: $X_i \sim \Normal(\mu, \sigma^2)$, $\E (X_1 - \E X_2)^4 = 3 \sigma^4$. Dann: $\sqrt{n} (S_n^2 - \sigma^2) \xra[n \to \infty]{d} \Normal(0, 2 \sigma^4)$. Wende varianzstab. Transformation an: $\sqrt{n} (f(S_n^2) - f(\sigma^2)) \xra[n \to \infty]{d} \Normal(0, 1)$ mit $f(x) = \Int{}{x}{\tfrac{1}{\sqrt{G(y)}}}{y} = \tfrac{\log x}{\sqrt{2}}$.
+
+\begin{defn}
+  Die \emph{Kumulante} oder \emph{Semi-Invariante} $m$-ter Ordnung ist
+  \[ \Cum_m(X) = \tfrac{1}{m! 2^m} \tfrac{\partial^m}{\partial t^m}|_{t=0} \log \E e^{it X}. \]
+\end{defn}
+
+\begin{bem}
+  Falls $X_1$, \ldots, $X_n$ unabhängig sind, so gilt $\Cum_m(X_1 + \ldots + X_n) = \Cum_m(X_1) + \ldots + \Cum_m(X_n)$.
+  Für $m=3$ gilt $\Cum_3(X) = \E X^3 - 3 \E X \cdot \E X^2 + 2 (\E X)^3$
+\end{bem}
+
+\begin{bsp}
+  Schätzung der Kumulante $m$-ter Ordnung mittels der SP $X_1, \ldots, X_n$:
+  \begin{align*}
+    (\widehat{\Cum_3(X)})_n & \coloneqq \tfrac{1}{n (n-1) (n-2)} (n^2 \hat{M}_3^{(n)} - 3 n \hat{M}_1^{(n)} \hat{M}_2^{(n)} - 2 (\hat{M}_1^{(n)})^3) \\
+    & = \tfrac{1}{{n \choose 3}} \sum_{1 \leq i < j < j \leq n} h(X_i, X_j, X_k) \\
+    \text{mit} \enspace
+    h(x, y, z) \coloneqq \tfrac{1}{3} (x^3 + y^3 + z^3) - \tfrac{1}{2} (xy^2 + x^2 y + x z^2 + x^2 z + y z^2 + x^2 z + y z^2 + y^2 z) + 2 xyz. \\
+    \enspace \text{wobei} \enspace
+    \hat{M}_j^{(n)} & \coloneqq \tfrac{1}{n} \sum_{i=1}^n X_i^j
+  \end{align*}
+\end{bsp}
+
+\begin{bsp}[\emph{Wilcoxon-1-SP-Test} auf Symmetrie]
+  Sei $X_1, \ldots, X_n \sim F$ eine math. SP mit $F$ stetig.
+  Angenommen, $F$ ist symmetrisch bzgl. $\vartheta_0 \in \R^1$, \dh{} $F(\vartheta_0 - x) = 1 - F(\vartheta_0 + x)$ für alle $x \in \R^1$.
+  Dann sind $Z_i = X_i - \vartheta_0$ symmetrisch bzgl. $0$.
+  Seien $\nu_1^{+}, \ldots, \nu_n^{+}$ die Ränge der ZGn $\abs{Z_1}, \ldots, \abs{Z_n}$.
+  \[ T_n^{+} = \sum_{i=1}^n \ind_{\{ Z_i > 0 \}} \nu_i^{+} \]
+  Unter $H_0$ gilt $\E T_n^{+} = \tfrac{1}{2} \sum_{i=1}^n \E \nu_i^{+} = \tfrac{n+1}{4}$, $\var(T_n^{+}) = \tfrac{n}{24} (n+1) (2n+1)$
+\end{bsp}
+
+Alternativ können wir folgende U-Statistik zum Test auf Symmetrie betrachten:
+\[
+  U_n = \tfrac{1}{{n \choose 2}} \sum_{1 \leq i < j \leq n} \ind_{Z_i + Z_j > 0}.
+\]
+Dann gilt
+\[
+  \E \ind_{\{ Z_i + Z_j > 0 \}} = \P(X_1 > - X_2) = \Int{}{}{(1 - F(x))}{F(x)} = \Int{}{}{F(x)}{F(x)} = \tfrac{1}{2}.
+\]
+Anwendung des ZGWS für U-Statistiken:
+\[
+  \sqrt{n} (U_n - \tfrac{1}{2}) \xra[n \to \infty]{d} \Normal(0, \tfrac{1}{3}).
+\]
+Testregel: Wir lehenen $H_0$ genau dann ab, wenn $\abs{U_n - \tfrac{1}{2}} > \tfrac{z_{1 - \nicefrac{\alpha}{2}}}{\sqrt{3n}}$.
 
 \end{document}
