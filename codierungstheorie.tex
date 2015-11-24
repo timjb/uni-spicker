@@ -1170,7 +1170,7 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 \end{konstr}
 
 \begin{defn}
-  Sei $\Design = (V, \Blocks, I)$ eine endliche Inzidenzstruktur.
+  Sei $\Design = (V, \Blocks, I)$ eine endl. Inzidenzstruktur.
   Es gebe $r, k \in \N$ mit $r \geq 2$ und $k \geq 2$ mit $\abs{\sigma(x)} = r$ für alle $x \in V$ und $\abs{\upsigma(B)} = k$ für alle $B \in \Blocks$.
   Dann heißt $\Design$ eine \emph{taktische Konfiguration}.
 \end{defn}
@@ -1181,11 +1181,11 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 \end{bem}
 
 \begin{defn}
-  Sie $\Design = (V, \Blocks, I)$ eine endliche Inzidenzstruktur.
+  Sei $\Design = (V, \Blocks, I)$ eine endl. IS.
   Es gebe $k, t, \lambda \in \N$ mit:
   \begin{itemize}
-    \item $v = \abs{V} \geq k \geq t$,
-    \item $\abs{\upsigma(B)} = k$ für alle $B \in \Blocks$,
+    \miniitem{0.4 \linewidth}{$v = \abs{V} \geq k \geq t$,}
+    \miniitem{0.4 \linewidth}{$\abs{\upsigma(B)} = k$ für alle $B \in \Blocks$,}
     \item Zu jeder $t$-elementigen Teilmenge $T \subseteq V$ gibt es genau $\lambda$ Blöcke aus $\Blocks$ mit $T \subseteq \upsigma(B)$.
   \end{itemize}
   Dann heißt $\Design$ ein \emph{$t$-$(v, k, \lambda)$-Blockplan}, \emph{$S_\lambda(t, k, v)$-Steinersystem} oder \emph{$t$-Design}.
@@ -1203,20 +1203,20 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 
 \begin{prop}
   Sei $\Design = (V, \Blocks, I)$ ein $S_\lambda(t, k, v)$.
-  Ist $s \in \N$ mit $s \leq t$, dann ist $\Design$ auch ein $s$-Design und zwar mit $\lambda_s = \frac{\lambda \cdot {v -s t-s}}{{k-s \choose t-s}}$.
+  Ist $s \in \N$ mit $s \leq t$, dann ist~$\Design$ auch ein $s$-Design und zwar mit $\lambda_s = \frac{\lambda \cdot {v -s t-s}}{{k-s \choose t-s}}$.
 \end{prop}
 
 \begin{bem}
   Insbesondere:
   \begin{itemize}
-    \item $t \geq 1$, dann $\lambda_1 = \frac{\lambda {v-1 \choose t-1}}{{k-1 \choose t-1}}$.
-    \item $\lambda_0 = b = \frac{\lambda {v \choose t}}{{k \choose t}}$
+    \miniitem{0.5 \linewidth}{$t \geq 1$, dann $\lambda_1 = \frac{\lambda {v-1 \choose t-1}}{{k-1 \choose t-1}}$.}
+    \miniitem{0.4 \linewidth}{$\lambda_0 = b = \frac{\lambda {v \choose t}}{{k \choose t}}$}
     % für $\lambda=1$, $t \geq 4$ kennt man $S_1(4,5,11)$, $S_1(4,7,23)$, $S_1(5,6,12)$, $S_1(5,8,24)$
   \end{itemize}
 \end{bem}
 
 \begin{satz}
-  Sei $C$ ein binärer linearer perfekter Code mit Länge $n$ und Minimalgewicht $d = 2t+1$.
+  Sei $C$ ein binärer perfekter $(n, M, d)$-Code wobei $d = 2t+1$.
   Setze
   \[
     V \coloneqq \{ 1, \ldots, n \}, \quad
@@ -1225,11 +1225,69 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
   Dann ist $(V, \Blocks, {\in})$ ein $S_1(\tau, d, n)$ wobei $\tau \coloneqq t+1$.
 \end{satz}
 
+\begin{bspe}
+  \begin{itemize}
+    \item Ein $[2^m-1, 2^m-1-m, 3]$-Hamming-Code über $\F_2$ liefert ein $S_1(2, 3, 2^m-1)$.
+    % ~> $\tau = 1+t = t+1 = 2$, $k=3$, $v = 2^m-1$.
+    % Vorlesung vom 24.11.2015
+    \item $\Golay(23)$ ist ein perfekter, binärer $[23, 12, 7]$-Code $\implies$ $\exists$ $S_1(4, 7, 23)$.
+    \item Angenommen, es gibt einen binären $(90, 2^{78}, 5)$-Code.
+    Dann wäre dieser perfekt.
+    Dann $\exists$ ein $S_1(3, 5, 90)$, etwa $\Design$.
+    Dann ist $\Design$ ein $S_{\lambda_2}(2, 5, 90)$ mit
+    \[ \lambda_2 = \frac{\lambda {v-2 \choose t-2}}{{k-2 \choose t-2}} = \frac{1 {88 \choose 1}}{{3 \choose 1}} = \tfrac{88}{3} \neq\in \N. \]
+  \end{itemize}
+\end{bspe}
+
+\begin{bem}
+  Sei $C$ ein binärer perfekter $(n, M, d)$-Code, $\overline{C}$ dessen Parity-Check-Erweiterung (ein $(n+1, M, d+1)$-Code).
+  Dann gibt es ein $S(t+2, d+1, n+1)$.
+  Konstruktion:
+  \[
+    \Blocks = \Set{\supp(\overline{c})}{\overline{c} \in \overline{C}, \wt(\overline{c}) = d+1}, \quad
+    V = \{ 1, \ldots, n+1 \}
+  \]
+  Insbesondere $\Golay(23) \rightsquigarrow \Golay(24)$ $\implies$ $\exists$ $S_1(5, 8, 24)$
+\end{bem}
+
+\begin{satz}
+  Es gibt ein $S_1(5, 6, 12)$
+\end{satz}
+
+\begin{konstr}
+  Sei $\Golay(12)$ der ternäre $[12,6,6]$-Code.
+  \[
+    V = \{ 1, \ldots, 12 \}, \quad
+    \Blocks = \Set{\supp(c)}{c \in \Golay(12), \, \wt(c) = 6}
+  \]
+\end{konstr}
+
+\begin{satz}
+  Es gibt ein $S_1(4, 5, 11)$
+\end{satz}
+
+% §7.5
+
+\begin{defn}
+  Sei $n \geq 2$.
+  Ein $S_1(2, n, n^2)$ nennt man eine \emph{affine Ebene} der Ordnung $n$.
+\end{defn}
+
+\begin{satz}
+  $\exists \, S_1(2, n, n^2) \iff \exists \, S_1(2, n+1, n^2 + n + 1)$
+\end{satz}
+
+TODO: Konstruktion beschreiben
+
+\begin{bem}
+  $\Design$ sei ein $S_\lambda(t, k, v)$, wobei $t \geq 2$.
+  Sei $x \in V$.
+  Definiere $\Design' \coloneqq (V', \Blocks', \in)$, wobei $V' \coloneqq V \setminus \{ x \}$, $\Blocks' \coloneqq \Set{B \setminus \{ x \}}{B \in \Blocks, x \in B}$ das nach $x$ \emph{abgeleitete Design}.
+  Dann ist $\Design'$ ein $S_\lambda(t-1, k-1, v-1)$.
+\end{bem}
+
 \begin{bsp}
-  Ein $[2^m-1, 2^m-1-m, 3]$-Hamming-Code über $\F_2$ liefert ein $S_1(2, 3, 2^m-1)$.
-  % ~> $\tau = 1+t = t+1 = 2$, $k=3$, $v = 2^m-1$.
-  
-  
+  $S_1(5,6,12)'''' = S_1(4,5,11)''' = S_1(3,4,10)'' = S_1(2,3,9)' = S_1(1,2,8)$
 \end{bsp}
 
 \end{document}
