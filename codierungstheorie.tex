@@ -37,6 +37,7 @@
 \newcommand{\Design}{\mathcal{D}} % Design, Inzidenzstruktur
 \newcommand{\Blocks}{\mathcal{B}} % Blöcke einer Inzidenzstruktur
 \newcommand{\Pow}{\mathcal{P}} % Potenzmenge (powerset)
+\newcommand{\Geraden}{\mathcal{G}} % Geraden in Blocksystem
 
 \begin{document}
 
@@ -1181,7 +1182,7 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 \end{bem}
 
 \begin{defn}
-  Sei $\Design = (V, \Blocks, I)$ eine endl. IS.
+  Sei $\Design = (V, \Blocks, I)$ eine endliche IS.
   Es gebe $k, t, \lambda \in \N$ mit:
   \begin{itemize}
     \miniitem{0.4 \linewidth}{$v = \abs{V} \geq k \geq t$,}
@@ -1192,7 +1193,7 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 \end{defn}
 
 \begin{bsp}
-  Eine proj. Ebene der Ordnung $n$ ist ein $S_1(2, n + 1, n^2 + n + 1)$
+  Eine proj. Ebene der Ordnung $n$ ist ein $S_1(2, n + 1, n^2 + n + 1)$.
 \end{bsp}
 
 \begin{bsp}
@@ -1207,16 +1208,14 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 \end{prop}
 
 \begin{bem}
-  Insbesondere:
-  \begin{itemize}
-    \miniitem{0.5 \linewidth}{$t \geq 1$, dann $\lambda_1 = \frac{\lambda {v-1 \choose t-1}}{{k-1 \choose t-1}}$.}
-    \miniitem{0.4 \linewidth}{$\lambda_0 = b = \frac{\lambda {v \choose t}}{{k \choose t}}$}
-    % für $\lambda=1$, $t \geq 4$ kennt man $S_1(4,5,11)$, $S_1(4,7,23)$, $S_1(5,6,12)$, $S_1(5,8,24)$
-  \end{itemize}
+  Insbesondere: \enspace
+  \inlineitem{$t \geq 1 \implies \lambda_1 = \frac{\lambda {v-1 \choose t-1}}{{k-1 \choose t-1}}$} \quad
+  \inlineitem{$\lambda_0 = b = \frac{\lambda {v \choose t}}{{k \choose t}}$}
+  % für $\lambda=1$, $t \geq 4$ kennt man $S_1(4,5,11)$, $S_1(4,7,23)$, $S_1(5,6,12)$, $S_1(5,8,24)$
 \end{bem}
 
 \begin{satz}
-  Sei $C$ ein binärer perfekter $(n, M, d)$-Code wobei $d = 2t+1$.
+  Sei $C$ ein bin. perfekter $(n, M, d)$-Code wobei $d = 2t+1$.
   Setze
   \[
     V \coloneqq \{ 1, \ldots, n \}, \quad
@@ -1231,8 +1230,7 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
     % ~> $\tau = 1+t = t+1 = 2$, $k=3$, $v = 2^m-1$.
     % Vorlesung vom 24.11.2015
     \item $\Golay(23)$ ist ein perfekter, binärer $[23, 12, 7]$-Code $\implies$ $\exists$ $S_1(4, 7, 23)$.
-    \item Angenommen, es gibt einen binären $(90, 2^{78}, 5)$-Code.
-    Dann wäre dieser perfekt.
+    \item Angenommen, es gibt einen bin. $(90, 2^{78}, 5)$-Code (also perfekt).
     Dann $\exists$ ein $S_1(3, 5, 90)$, etwa $\Design$.
     Dann ist $\Design$ ein $S_{\lambda_2}(2, 5, 90)$ mit
     \[ \lambda_2 = \frac{\lambda {v-2 \choose t-2}}{{k-2 \choose t-2}} = \frac{1 {88 \choose 1}}{{3 \choose 1}} = \tfrac{88}{3} \neq\in \N. \]
@@ -1270,20 +1268,51 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 
 \begin{defn}
   Sei $n \geq 2$.
-  Ein $S_1(2, n, n^2)$ nennt man eine \emph{affine Ebene} der Ordnung $n$.
+  Ein $S_1(2, n, n^2)$ heißt \emph{affine Ebene} der Ord. $n$.
 \end{defn}
 
 \begin{satz}
   $\exists \, S_1(2, n, n^2) \iff \exists \, S_1(2, n+1, n^2 + n + 1)$
 \end{satz}
 
-TODO: Konstruktion beschreiben
+\begin{konstr}
+  \begin{itemize}
+    \item Sei zunächst $(V, \Geraden, \in)$ eine projektive Ebene der Ord. $n$.
+    Wähle eine Gerade $L \in \Geraden$.
+    Dann ist
+    \[ \alpha \coloneqq (V', \Geraden', \in) \coloneqq (V \setminus L, \Geraden \setminus \{ L \}, \in) \]
+    eine affine Ebene der Ordnung $n$. \\
+    \item Sei umgekehrt $(W, \mathcal{H}, \in)$ eine aff. Ebene der Ord. $n$.
+    Dann def.
+    \[ L \text{ ist parallel zu } K \coloniff L \parallel K \coloniff (L = K) \vee (L \cap K = \emptyset) \]
+    eine Äq'relation auf $\mathcal{H}$.
+    Dann ist
+    \[
+      (V, \Geraden, \in)
+      \quad \text{mit} \quad
+      V \coloneqq W \,\amalg\, (\mathcal{H}/{\parallel}), \quad
+      \Geraden \coloneqq \Set{K \,\amalg\, \{ [K] \}}{K \in \mathcal{H}} \,\amalg\, \{ \mathcal{H}/{\parallel} \}
+    \]
+    eine projektive Ebene der Ordnung $n$.
+  \end{itemize}
+\end{konstr}
 
-\begin{bem}
+\begin{defn}
   $\Design$ sei ein $S_\lambda(t, k, v)$, wobei $t \geq 2$.
   Sei $x \in V$.
-  Definiere $\Design' \coloneqq (V', \Blocks', \in)$, wobei $V' \coloneqq V \setminus \{ x \}$, $\Blocks' \coloneqq \Set{B \setminus \{ x \}}{B \in \Blocks, x \in B}$ das nach $x$ \emph{abgeleitete Design}.
-  Dann ist $\Design'$ ein $S_\lambda(t-1, k-1, v-1)$.
+  Dann heißt
+  %Definiere $\Design' \coloneqq (V', \Blocks', \in)$, wobei $V' \coloneqq V \setminus \{ x \}$, $\Blocks' \coloneqq \Set{B \setminus \{ x \}}{B \in \Blocks, x \in B}$
+  \[
+    \Design' \coloneqq (V', \Blocks', \in),
+    \enspace \text{wobei } V' \coloneqq V \setminus \{ x \},
+    \quad \Blocks' \coloneqq \Set{B \setminus \{ x \}}{B \in \Blocks, x \in B}
+  \]
+  das nach $x$ \emph{abgeleitete Design}.
+  Es ist $\Design'$ ein $S_\lambda(t-1, k-1, v-1)$.
+\end{defn}
+
+\begin{bem}
+  Wie in Analysis gilt: Ableiten ist leicht, "`Integrieren"' schwer.
 \end{bem}
 
 \begin{bsp}
