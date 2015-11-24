@@ -1416,4 +1416,69 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
   \fi
 \end{situation}
 
+% Vorlesung vom 24.11.2015
+
+\begin{defn}
+  Die Funktion $u \in H_0^1(\Omega)$ heißt \emph{schwache Lösung} von (RWP\tss{1}), wenn $u$ folgende Variationsgleichung erfüllt:
+  \begin{align*}
+    & \Int{\Omega}{}{A(x) \DO u(x) \cdot \DO \phi(x) + b(x) \cdot \DO u(x) \phi(x) + c(x) u(x) \phi(x)}{x} \\
+    = \enspace & \Int{\Omega}{}{f(x) \phi(x)}{x}
+    \quad \text{für alle } \phi \in H_0^1(\Omega).
+    \tag{VGL\tss{1}}
+  \end{align*}
+\end{defn}
+
+% Fragen:
+% 1) Ist jede klassische Lösung von (RWP\tss{1}) auch Lösung von (VGL\tss{1})?
+% 2) Ist (VGL\tss{1}) lösbar? Ist die Lösung von (VGL\tss{1}) eindeutig? Hängt die Lösung von (VGL\tss{1}) stetig von den Daten ab?
+% 3) Wie löst man (VGL\tss{1}) numberisch?
+% 4) Wie lautet die Variationsgleichungbei inhomogenen RWBn?
+
+\begin{prob}[Allgemeines Variationsproblem] \mbox{} \\
+  Seien Abbildungen $B : H_0^1(\Omega) \times H_0^1(\Omega) \to \R$ und $l : H_0^1(\Omega) \to \R$ gegeben.
+  Gesucht: $u \in H_0^1(\Omega)$, sodass $B(u, \phi) = l(\phi)$ für alle $\phi \in H_0^1(\Omega)$.
+\end{prob}
+
+\begin{bem}
+  Im obigen Setting ist \enspace $l(\phi) \coloneqq \Int{\Omega}{}{f(x) \phi(x)}{x}$,
+  \begin{align*}
+    & B(u, \phi) \coloneqq \Int{\Omega}{}{A(x) \DO u(x) \cdot \DO \phi(x) + b(x) \cdot \DO u(x) \phi(x) + c(x) u(x) \phi(x)}{x} \\
+    & 
+  \end{align*}
+\end{bem}
+
+\begin{defn}
+  Sei $X$ ein Banachraum.
+  Eine Abb. $B : X \times X \to X$ heißt
+  \begin{itemize}
+    %\item \emph{bilinear}, falls $B(u, \blank)$ und $B(\blank, \phi)$ linear für alle $u, \phi \in X$ sind,
+    %\item \emph{symmetrisch}, falls $B(u, \phi) = B(\phi, u)$ für alle $u, \phi \in X$,
+    \item \emph{positiv}, falls $B(u, u) > 0$ für alle $u \in X \setminus \{ 0 \}$,
+    \item \emph{stark positiv} (oder \emph{koerziv}), falls $\lambda > 0$ existiert, sodass
+    \[ \fa{u \in X} B(u, u) \geq \lambda \norm{u}_X^2, \]
+    \item \emph{beschränkt}, falls ein $\mu > 0$ existiert, sodass
+    \[ \fa{u, \phi \in X} \abs{B(u, \phi)} \leq \mu \norm{u}_X \norm{\phi}_X. \]
+  \end{itemize}
+\end{defn}
+
+\begin{lem}
+  \begin{itemize}
+    \item Die Abbildung $B$ in (VGL\tss{1})' ist bilinear und beschränkt.
+    \item Die Abbildung $l$ in (VGL\tss{1})' linear und stetig.
+  \end{itemize}
+\end{lem}
+
+\begin{satz}
+  Sei $\Omega$ ein beschr. Lipschitz-Gebiet.
+  Dann ist jede klassische Lsg $u \in \Cont^2 \cap \Cont^1(\bOmega)$ von (RWP\tss{1}) eine schwache Lsg von (VGL\tss{1})'.
+\end{satz}
+
+% 4.3 Eindeutige Lösung elliptischer PDEs
+
+% 4.9
+\begin{satz}[\emph{Lax-Milgram}]
+  Sei H ein Hilbertraum, $B : H \times H \to H$ eine beschränkte, koerzitive Bilinearform.
+  Dann gibt es für jedes $l \in H'$ eine eindeutige Lösung $u \in H$ von  $\fa{\phi \!\in\! H\!\!}\!\! B(u, \phi) \!=\! l(\phi)$.
+\end{satz}
+
 \end{document}
