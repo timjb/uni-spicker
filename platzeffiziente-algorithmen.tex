@@ -401,6 +401,59 @@
   Man kann die Zshgskomponenten eines ungerichteten Graphen in Zeit $\O(n + m)$ mit $n + \O(\nicefrac{n}{\log n})$ Bits berechnen.
 \end{kor}
 
-% TODO: Unmöglichkeitsbeweis aus der Vorlesung, noch besseres Resultat
+% Vorlesung vom 25.11.2015
+
+\begin{defn}
+  Ein Choice-Dictionary $D$ heißt \emph{systematisch}, falls es (nach der Initialisierung von $D$) $n$ von $D$ verwaltete Bits $z_1, \ldots, z_n$ gibt, sodass $z_i = 1 \iff i \in I$ für alle $i = 1, \ldots, n$ ab dem ersten Schreiben von $z_i$ durch $D$ gilt.
+\end{defn}
+
+\begin{defn}
+  \begin{itemize}
+    \item Ein \emph{Rot-Blau-Baum} ist ein Binärbaum, dessen inneren Knoten alle entweder rot oder blau gefärbt sind.
+    \item Die \emph{blaue Tiefe} eines Blattes ist die Zahl der blauen Vorfahren.
+    \item Die \emph{rechts-rote (rr) Tiefe} eines Blattes ist die Anzahl der Vorfahren, die rechtes Kind eines roten Knotens sind.
+    \item Ein \emph{$(d, r, s)$-Baum} ist ein Rot-Blau-Baum, in dem jedes Blatt Tiefe $= d$, blaue Tiefe $\leq s$ und rechts-rote Tiefe $\leq r$ besitzt.
+  \end{itemize}
+\end{defn}
+
+\begin{nota}
+  $N(d, r, s) \coloneqq$ maximale Anzahl Blätter eines $(d, r, s)$-Baums
+\end{nota}
+
+\begin{lem}
+  $N(d, r, s) =$
+  \[
+    \begin{cases}
+      0 & \text{wenn $d < 0 \vee r < 0 \vee s < 0$,} \\
+      1 & \text{wenn $d = 0$ und $r, s \geq 0$,} \\
+      \max \left\{
+        \begin{array}{l}
+          2 N(d-1, r, s-1), \\
+          N(d{-}1, r, s) + N(d{-}1, r{-}1, s)
+        \end{array}
+      \right\} & \text{wenn $d > 0$ und $r, s \geq 0$.}
+    \end{cases}
+  \]
+\end{lem}
+
+\begin{lem}
+  %Für alle $d, r, s \in \Z$ gilt
+  $N(d, r, s) \leq 2^{s'} {d - s' + r \choose r}$ \enspace
+  wobei $s' \coloneqq \min \{ d, s \}$
+\end{lem}
+
+\begin{thm}
+  Seien $n, s, t \in \N$.
+  Sei $D$ ein systematisches Choice-Dictionary, das nach dem Initialisieren neben $z_1, \ldots, z_n$ weitere~$s$ Bits benutzt.
+  Angenommen, für $0 \leq r \leq n$ gibt es eine Berechnung $C_r$, die alle Teilmengen $A \subset I$ mit $\abs{A} = r$ unterscheiden kann und dabei $\leq rt$ Bits der internen Repräsentation von $D$ liest.
+  Dann gilt $st \geq \tfrac{n}{2}$.
+\end{thm}
+
+\begin{kor}
+  Seien $n, s \in \N$ und $D$ ein systematisches Choice-Dictionary, welches nach dem Initialisieren $n + s$ Bits an Speicher belegt. \\
+  Seien $t_{\text{choice}}$ und $t_{\text{delete}}$ die maximalen Anzahlen an Bits, die bei einer \textit{choice}- bzw. \textit{delete}-Operation gelesen werden. \\
+  Dann gilt $s (t_{\text{choice}} + t_{\text{delete}}) \leq \tfrac{n}{2}$.
+\end{kor}
+
 
 \end{document}
