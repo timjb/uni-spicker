@@ -1059,8 +1059,8 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 \begin{defn}
   Eine \emph{Inzidenzstruktur} (IS) ist ein Tupel $\Design = (V, \Blocks, I)$ mit
   \begin{itemize}
-    \item einer (nichtleere) Menge von \emph{Punkten} (oder \textit{Knoten}) $V$,
-    \item einer (nichtleere) Menge von \emph{Blöcken} (oder \textit{Geraden}) $\Blocks$ und
+    \item einer (nichtleeren) Menge von \emph{Punkten} (oder \textit{Knoten}) $V$,
+    \item einer (nichtleeren) Menge von \emph{Blöcken} (oder \textit{Geraden}) $\Blocks$ und
     \item einer \emph{Inzidenzrelation} $I \subseteq V \times \Blocks$.
   \end{itemize}
 \end{defn}
@@ -1084,7 +1084,7 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 \end{defn}
 
 \begin{nota}
-  Falls $\Design$ einfach, ist kann man $\Blocks$ als Teilmenge von~$\Pow(V)$ auffassen. Man schreibt daher
+  Falls $\Design$ einfach ist, kann man $\Blocks$ als Teilmenge von~$\Pow(V)$ auffassen. Man schreibt daher
   $p \in B \coloniff p I B$.
 \end{nota}
 
@@ -1112,12 +1112,14 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 
 \begin{bsp}
   Die Inzidenzstruktur
-  \begin{align*}
-    & V = \{ x_1, \ldots, x_{v-1}, x_v \}, \quad
-    \Blocks = \{ L_1, \ldots, L_{v-1}, B \} \\
-    & \upsigma(L_i) = \{ x_i, x_v \}, \quad
-    \upsigma(B) = \{ x_1, \ldots, x_{v-1} \}
-  \end{align*}
+  \[
+    \begin{array}{l l}
+      V = \{ x_1, \ldots, x_{v-1}, x_v \},
+      & \Blocks = \{ L_1, \ldots, L_{v-1}, B \} \\
+      \upsigma(L_i) = \{ x_i, x_v \},
+      & \upsigma(B) = \{ x_1, \ldots, x_{v-1} \}
+    \end{array}
+  \]
   ist ein linearer Raum mit $b = v$.
   Dieser besitzt einen Block, der alle Pkte bis auf einen enthält und dual einen Punkt, der in allen Blöcken bis auf einen liegt.
   Solche Inzidenzstrukturen heißen \emph{entartet}.
@@ -1162,15 +1164,16 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
     \item Es gibt keine proj. Ebene der Ordnung 10.
     \item Jede \textit{heute bekannte} proj. Ebene hat Primzahlpotenzordnung.
     \item Zu jeder Primzahlpotenz $q \geq 2$ ex. eine proj. Ebene der Ord. $q$.
-    \item alle weiteren $n$ die ausgeschlossen sind entsprechen dem Resultat von Bruck und Roger
+    %\item Alle weiteren $n$, die ausgeschlossen sind, entsprechen dem Resultat von Bruck und Roger
     \item Es ist nicht bekannt, ob eine proj. Ebene mit $n = 12$ existiert.
   \end{itemize}
 \end{fakten}
 
-\begin{satz}
+\begin{satz}[\emph{Bruck, Ryser}]
   Sei $n \geq 2$.
   Angenommen, $n \equiv 1 \bmod 4$ oder $n \equiv 2 \bmod 4$.
-  Ist $p$ ein Primteiler von $n$ mit $p \equiv 3 \bmod 4$ und ist die Vielfachheit von $p$ in $n$ ungerade, so git es keine projektive Ebene der Ordnung $n$.
+  Sei $n = p_1^{a_1} \cdot \ldots \cdot p_l^{a_l}$ eine Primfaktorzerlegung von $n$.
+  Gibt es ein $i$ mit $p_i \equiv 3 \bmod 4$ und $a_i$ ungerade, so existiert keine projektive Ebene der Ordnung $n$.
 \end{satz}
 
 \begin{kor}
@@ -1182,13 +1185,12 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
   Dann gibt es eine projektive Ebene der Ordnung $q$.
 \end{satz}
 
-\begin{konstr}\mbox{}
-  \vspace{-16pt}
-  \begin{align*}
+\begin{konstr}
+  $\begin{array}[t]{r l}
     \text{Punkte } p & \coloneqq \text{die ein-dim. Teilräume von $\F_q^3$,} \\
-    \text{Geraden } B & \coloneqq \text{die zwei-dim. Teilräume von $\F_q^3$,} \\
-    p \in B & \coloniff p \subseteq B.
-  \end{align*}
+    \text{Geraden } \Blocks & \coloneqq \text{die zwei-dim. Teilräume von $\F_q^3$,} \\
+    p \in B & \!\!\!\coloniff p \subseteq B.
+  \end{array}$
 \end{konstr}
 
 \begin{defn}
@@ -1199,7 +1201,7 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 
 \begin{bem}
   Doppeltes Zählen der Inzidenzen $I$ ergibt: \enspace
-  \[ v \cdot r = \abs{I} = b \cdot k. \]
+  $v \cdot r = \abs{I} = b \cdot k$.
 \end{bem}
 
 \begin{defn}
@@ -1228,12 +1230,14 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
   Ist $s \in \N$ mit $s \leq t$, dann ist~$\Design$ auch ein $s$-Design und zwar mit $\lambda_s = \frac{\lambda \cdot {v -s t-s}}{\binom{k-s}{t-s}}$.
 \end{prop}
 
-\begin{bem}
-  Insbesondere: \enspace
-  \inlineitem{$t \geq 1 \implies \lambda_1 = \frac{\lambda \binom{v-1}{t-1}}{\binom{k-1}{t-1}}$} \quad
-  \inlineitem{$\lambda_0 = b = \frac{\lambda \binom{v}{t}}{\binom{k}{t}}$}
-  % für $\lambda=1$, $t \geq 4$ kennt man $S_1(4,5,11)$, $S_1(4,7,23)$, $S_1(5,6,12)$, $S_1(5,8,24)$
-\end{bem}
+\begin{kor}
+  Ist $t \geq 1$, so ist $\Design$ eine taktische Konf. mit Replikationszahl
+  \[ r = \lambda_1 = \frac{\lambda \binom{v-1}{t-1}}{\binom{k-1}{t-1}} \]
+  Die Anzahl der Blöcke in einem Blockplan ist
+  \[ b = \lambda_0 = \frac{\lambda \binom{v}{t}}{\binom{k}{t}}. \]
+\end{kor}
+
+% Bem: für $\lambda=1$, $t \geq 4$ kennt man $S_1(4,5,11)$, $S_1(4,7,23)$, $S_1(5,6,12)$, $S_1(5,8,24)$
 
 \begin{satz}
   Sei $C$ ein bin. perfekter $(n, M, d)$-Code wobei $d = 2t+1$.
@@ -1339,5 +1343,72 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 \begin{bsp}
   $S_1(5,6,12)'''' = S_1(4,5,11)''' = S_1(3,4,10)'' = S_1(2,3,9)' = S_1(1,2,8)$
 \end{bsp}
+
+% Vorlesung vom 26.11.2015
+
+% 7.7 Elementares über symmetrische Blockpläne
+
+\begin{lem}[\emph{Fisher}]
+  Für jeden $2$-$(v,k,\lambda)$-Blockplan mit $v \!>\! k$ gilt $b \geq v$. \\
+  Falls $v = b > k$, so ist die Inzidenzmatrix invertierbar.
+\end{lem}
+
+\begin{defn}
+  Ein $2$-$(v, k, \lambda)$-Blockplan mit $v = b > k$ heißt \emph{symmetrisch} mit \emph{Ordnung} $n \coloneqq k - \lambda$.
+\end{defn}
+
+\begin{acht}
+  "`symmetrisch"' bezieht sich nicht auf die Inzidenzmatrix!
+\end{acht}
+
+\begin{bsp}
+  Endliche projektive Ebenen sind symmetrisch (mit $\lambda = 1$).
+\end{bsp}
+
+\begin{satz}[\emph{Ryser}]
+  Sei $\Design = (V, \Blocks, I)$ ein symm. $2$-$(v, k, \lambda)$-Blockplan.
+  Dann gilt $r = k$ und je zwei verschiedene Blöcke haben genau $\lambda$ gemeinsame Punkte.
+\end{satz}
+
+\begin{bem}
+  Somit ist der duale Blockplan zu $\Design$, der durch Vertauschen der Rollen von Blöcken und Punkten entsteht, ebenfalls ein $2$-$(v = b, k = r, \lambda)$-Blockplan.
+  Darauf bezieht sich das "`symmetrisch"'.
+\end{bem}
+
+% Bruck, Ryser, Chowla
+\begin{satz}
+  Sei $\Design$ ein symm. $2$-$(v, k, \lambda)$-Blockplan der Ordung $n$.
+  \begin{itemize}
+    \item Ist $n$ gerade, so ist $n$ eine Quadratzahl.
+    \item Ist $v$ ungerade, so gibt es ein ganzzahliges Tripel $z = (z_1, z_2, z_3) \neq (0, 0, 0)$ mit
+    \[ z_1^2 = n \cdot z_2^2 + (-1)^{\nicefrac{(v-1)}{2}} \lambda \cdot z_3^2. \]
+  \end{itemize}
+\end{satz}
+
+\begin{bem}
+  Der Satz von Bruck und Ryser ist eine Korollar hiervon.
+\end{bem}
+
+\begin{bem}
+  Sei $\Design = (V, \Blocks, I)$ ein symm. $2$-$(v, k, \lambda)$-Blockplan.
+  Das zu $\Design$ \emph{komplementäre Design} ist $\Design^c \coloneqq (V, \Blocks, I^c)$, $p I^c B \!\!\coloniff\!\! \neg (p I B)$.
+  Dann ist $\Design^c$ ein $2$-$(v, v-k, \lambda^c)$-Blockplan mit $\lambda^c = v - 2n - \lambda$.
+\end{bem}
+
+\begin{satz}
+  Sei $\Design$ ein symmetrischer $2$-$(v, k, \lambda)$-Blockplan der Ordnung $n$ mit $1 < k < v - 1$.
+  Dann gilt \enspace
+  $4n - 1 \leq v \leq n^2 + n + 1$.
+  Das Polynom $X^2 + (2n - v) X + (n-1) n = 0$ besitzt die Nullstellen $\lambda$ und $\lambda^c$.
+\end{satz}
+
+\begin{bem}
+  Projektive Ebenen besitzen also die maximale Anzahl an Punkten unter allen symmetrischen Blockplänen der Ordnung $n$. \\
+  Blockpläne, deren Punktanzahl die untere Schranke erfüllt, besitzen auch eine eigene Bezeichnung:
+\end{bem}
+
+\begin{defn}
+  $2$-$(4n{-}1, 2n{-}1, n{-}1)$-Designs heißen \emph{Hadamard-Designs}.
+\end{defn}
 
 \end{document}
