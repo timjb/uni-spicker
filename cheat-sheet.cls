@@ -154,7 +154,9 @@
 \newcommand{\nldots}{...} % narrow ...
 
 % Integrale
+\newcommand{\intsign}{{\textstyle \int}}
 \newcommand{\myint}[2]{{\textstyle \int\limits_{#1}^{#2}}}
+\newcommand{\IInt}[2]{\intsign #1 \,\d #2} % Integral mit implizitem Bereich
 \newcommand{\Int}[4]{\myint{#1}{#2} #3 \,\d #4}
 \newcommand{\Intdx}[3]{\Int{#1}{#2}{#3}{x}} % Integral mit dx
 \newcommand{\Intab}[2]{\Int{a}{b}{#1}{#2}} % Integral über [a, b]

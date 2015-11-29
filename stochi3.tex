@@ -693,7 +693,7 @@
 
 % §2.4. 2-Stichprobentest von Wilcoxon-Mann-Whitney (U-Test)
 
-\begin{situation}
+\begin{situation}[\emph{2-SP-Test von Wilcoxon-Mann-Whitney}, U-Test]
   Gegeben seien zwei unabhängige SPn $X_1, \ldots, X_n \sim F$ und $X_1^{*}, \ldots, X_m^{*} \sim F^{*}$, wobei $F$ und $F^*$ stetig sind.
   Ziel: Prüfen von $H_0 : F = F^{*}$ vs. $H_1 : F \neq F^{*}$.
   Konstruktion einer Rangstatistik für konkrete SPn $x_1, \ldots, x_n$ und $x_1^{*}, \ldots, x_m^{*}$.
@@ -797,13 +797,13 @@
   Wir approximieren deshalb $U_n^{(m)}$ mit einer Summe von \iid{} ZGn.
 \end{ziel}
 
-\begin{lem}[\emph{Hoeffdings Projektionsmethode}]
-  Sei
+\begin{lem}
+  Sei \enspace
+  $\tilde{U}_n^{(m)} = \theta + \sum_{i=1}^n (\underbrace{\E(U_n^{(m)} | X_i)}_{\text{\iid{}}} - \theta)$ \enspace
+  mit $\theta \coloneqq \E U_n^{(m)}$ und
   \begin{align*}
     g(x) & = \E[h(X_1, \ldots, X_n) | X_1 = x ] = \E h(x, X_2, \ldots, X_m) \\
-    & = \Int{}{}{\cdots \Int{}{}{h(x, x_2, \ldots, x_n)}{F(x_2)} \cdots}{F(x_n)} \\
-    \tilde{U}_n^{(m)} & = \theta + \sum_{i=1}^n (\underbrace{\E(U_n^{(m)} | X_i)}_{\text{\iid{}}} - \theta)
-    \qquad \text{wobei } \theta \coloneqq \E U_n^{(m)}.
+    & = \Int{}{}{\cdots \Int{}{}{h(x, x_2, \ldots, x_n)}{F(x_2)} \cdots}{F(x_n)}.
   \end{align*}
   Falls $\E h^2(X_1, \ldots, X_m) < \infty$, so gilt
   \begin{enumerate}[label=(\arabic*), itemindent=6pt]
@@ -848,7 +848,7 @@
 % §3.2. ZGWS für (nichtentartete) U-Statistiken
 
 \begin{satz}[\emph{Hoeffding}]
-  Sei $U_n^{(m)}$ eine U-Statistik mit Kern $h : \R^m \to \R$, sodass $\E h^2(X_1, \ldots, X_m) < \infty$ und $\sigma_g^2 \coloneqq \var(G(X_1)) > 0$.
+  Sei $U_n^{(m)}$ eine U-Statistik mit Kern $h : \R^m \to \R$, sodass $\E h^2(X_1, \ldots, X_m) < \infty$ und $\sigma_g^2 \coloneqq \var(g(X_1)) > 0$.
   Dann gilt
   %Für eine U-Statistik $U_n^{(m)}$ mit Kern $h : \R^m \to \R$, sodass $\E h^2(X_1, \ldots, X_m) < \infty$ und $\sigma_g^2 \coloneqq \var(G(X_1)) > 0$, gilt
   \[ \sqrt{n} (U_n^{(m)} - \theta) \xra[n \to \infty]{d} \Normal(0, \sigma_g^2). \]
@@ -950,5 +950,158 @@
   Testregel: Wir lehnen $H_0$ genau dann ab, wenn \enspace
   $\abs{U_n - \tfrac{1}{2}} > \tfrac{z_{1 - \nicefrac{\alpha}{2}}}{\sqrt{3n}}$.
 \end{bsp}
+
+% Vorlesung vom 26.11.2015
+
+% Ausgelassen: Beispiel: U-Statistiken in der stochastischen Geometrie
+
+\begin{defn}
+  Sei $h : \R^{m_1} \times \R^{m_2} \to \R^1$ Borel-messbar, symmetrisch in den ersten $m_1$ und den letzten $m_2$ Argumenten.
+  Seien $X_1, \ldots, X_{n_1} \sim F$ und $X_1^*, \ldots, X_{n_2}^* \sim F^*$ zwei unabh. math. SPn.
+  Dann heißt
+  \[
+    U_{n_1, n_2}^{(m_1, m_2)} \coloneqq \left( \binom{n_1}{m_1} \binom{n_2}{m_2} \right)^{-1} \qquad
+    \sum_{\mathclap{\substack{1 \leq i_1 < \ldots < i_{m_1} \leq n_1 \\ 1 \leq j_1 < \ldots < j_{m_2} \leq n_2}}} \enspace
+    h(X_{i_1}, \nldots, X_{i_{m_1}}, X_{j_1}^*, \nldots, X_{j_{m_2}}^*)
+  \]
+  (verallg.) \emph{U-Statistik} der Ordnung $(m_1, m_2)$ mit Kernfunktion $h$.
+\end{defn}
+
+\begin{nota}
+  Sei $m_1 = m_2 = 1$.
+  Wir setzen
+  \begin{align*}
+    \theta & \coloneqq \E h(X_1, X_1^*) = \E U_{n_1, n_2}^{(1, 1)} \\
+    g_1(x) & \coloneqq \E( h(X_1, X_1^*) \mid X_1 = x), \quad
+    \sigma_1^2 \coloneqq \var g(X_1), \\
+    g_2(y) & \coloneqq \E( h(X_1, X_1^*) \mid X_1^* = y), \quad
+    \sigma_2^2 \coloneqq \var g(X_1^*), \\
+    \tilde{U}_{n_1, n_2}^{(1,1)} & \coloneqq \tfrac{1}{n_1} \sum_{i=1}^{n_1} g_1(X_i) + \tfrac{1}{n_2} \sum_{j=1}^{n_2} g_2(X_j^*) - \theta
+  \end{align*}
+\end{nota}
+
+\begin{lem}
+  Es seien $\E h^2(X_1, X_1^*) < \infty$ und $\sigma_1^2, \sigma_2^2 \in \ointerval{0}{\infty}$.
+  Dann gilt
+  \[
+    \sqrt{\frac{n_1 n_2}{n_2 \sigma_1^2 + n_1 \sigma_2^2}} \cdot
+    (U_{n_1, n_2} - \theta) \xra[n_1, n_2 \to \infty]{d} \Normal(0, 1).
+  \]
+\end{lem}
+
+\begin{bsp}
+  Die Wilcoxon-2-SP-Statistik ist eine U-Statistik mit
+  \[ h(x, y) \coloneqq \abs{\Set{\heartsuit}{x < y}}. \]
+\end{bsp}
+
+% §5. Dichteschätzung und Regressionskurvenschätzer
+
+% §5.1 Dichteschätzung (allgemein)
+
+\begin{nota}
+  Sei $\mathcal{P}$ die Menge aller bezüglich des Lebesgue-Maß $\lambda_1$ absolut stetigen Wahrscheinlichkeitsmaße auf $\R^1$ und
+  \[ \mathcal{F}_c \coloneqq \Set{f \in \Cont(\R^1)}{f = \nicefrac{\d P}{\d \lambda_1} \text{ für ein } P \in \mathcal{P}} \]
+  die Menge der stetigen W-Dichtefunktionen.
+\end{nota}
+
+\begin{ziel}
+  Finden einer Dichteschätzung $\hat{f}_n(X, \blank) : \R^1 \to \R^1$, wobei $X = (X_1, \ldots, X_n)$ eine math. SP ist, in Form einer messbaren Abb. $\hat{f}_n(\blank, \blank) : \R^n \times \R^1 \to \R^1$.
+\end{ziel}
+
+\begin{nota}
+  $\hat{f}_n(t) \coloneqq \hat{f}_n(X_1, \ldots, X_n)$
+\end{nota}
+
+\begin{lem}
+  Es gibt keinen Dichteschätzer $\hat{f}_n(\blank)$ mit
+  \[
+    \E_f \hat{f}_n(t) = f(t) \quad
+    \text{für $\lambda_1$-fast alle $t$ für alle $f \in \mathcal{F}_c$.}
+  \]
+\end{lem}
+
+\begin{defn}
+  Sei $x_0 \in \R$, $h > 0$.
+  Setze $I_j \coloneqq \cointerval{x_0 + jh}{x_0 + (j+1) h}$ für $j \in \Z$.
+  Das \emph{Histogramm} ist der (naive) Dichte-Schätzer
+  \[
+    \hat{f}_n(t) \coloneqq \tfrac{1}{nh} \sum_{i=1}^n \ind_{I_j}(X_i), \quad
+    \text{wobei $z \in \Z$ so ist, dass $t \in I_j$}.
+  \]
+\end{defn}
+
+\begin{bem}
+  Nach dem Gesetz der großen Zahlen gilt
+  \[
+    \hat{f}_n(t) \xra[n \to \infty]{\text{$\P_f$-f.s.}}
+    h^{-1} \Int{I_j}{}{f(x)}{x} \quad
+    \text{für $t \in I_j$.}
+  \]
+\end{bem}
+
+\begin{defn}
+  Sei $\hat{f}_n(\blank)$ ein Dichteschätzer und $f \in \mathcal{F}_c$.
+  Dann heißt
+  \[
+    \Delta_n \coloneqq \E_f \Int{\R}{}{(\hat{f}_n(t) - f(t))^2}{t}
+  \]
+  \emph{MISE} (mean integrated squared error) bzgl. $f$.
+\end{defn}
+
+\begin{satz}[Freedman, Diaconis]
+  Sei $f \in L^2(\R^1)$ und $f$ absolut stetig, \dh{} fast überall differenzierbar mit $\gamma \coloneqq \Int{\R^1}{}{(f'(t))^2}{t} > 0$.
+  Setze
+  \[
+    \alpha \coloneqq \sqrt[3]{6} \cdot \gamma^{- \nicefrac{1}{3}}, \quad
+    \beta \coloneqq \frac{3}{2 \sqrt[3]{6}} \gamma^{\nicefrac{1}{3}}.
+  \]
+  Dann gilt:
+  \[
+    \min_{h = h_n > 0} \Delta_n^2 = \tfrac{\beta}{n^{\nicefrac{2}{3}}} + o \left( \tfrac{1}{n^{\nicefrac{2}{3}}} \right) \quad
+    \text{für }
+    h_n = \tfrac{\alpha}{n^{\nicefrac{1}{3}}} + o \left( \tfrac{1}{n^{\nicefrac{1}{3}}} \right).
+  \]
+  % TODO: Was ist die Aussage davon???
+\end{satz}
+
+\begin{defn}
+  Sei $K \in L^1(\R)$ eine Fktn mit $\IInt{K(t)}{t} = 1$ und $(h_n)_{n \in \N}$ eine Folge in $\ointerval{0}{\infty}$ mit $h_n \to 0$.
+  Dann heißt
+  \[
+    \hat{f}_n(t) = \hat{f}_n(X_1, \ldots, X_n; t) \coloneqq \tfrac{1}{n \cdot h_n} \sum_{i=1}^n K \left( \tfrac{X_i - t}{h_n} \right)
+  \]
+  \emph{Kerndichteschätzer} für $f$ mit \emph{Kernfunktion} $K$.
+  % auch: Parzen-Rosenblatt-Schätzung
+\end{defn}
+
+\begin{bspe}
+  Mit der \emph{empirischen Dichte} $K(x) \coloneqq \tfrac{1}{2} \ind_{\ocinterval{-1}{1}}(x)$ gilt
+  \[ \hat{f}_n(t) = \tfrac{1}{2 h_n} \left( \hat{F}_n(t + h_n) - \hat{F}_n(t - h_n) \right), \]
+  mit dem \emph{Gauß-Kern} $K(x) \coloneqq \tfrac{1}{\sqrt{2 \pi}}\exp( \tfrac{- x^2}{2})$ gilt $\hat{f}_n(\blank) \in \Cont^\infty(\R)$.
+\end{bspe}
+
+\begin{lem}
+  \begin{itemize}
+    \item $\E_f \hat{f}_n(t) = \IInt{K(x) f(t + h_n x)}{x}$
+    \item Falls $K \!\in\! L^2(\R)$: \enspace
+    $\var_f (\hat{f}_n(t)) = 
+    \begin{array}[t]{l}
+      \tfrac{1}{n \cdot h_n} \IInt{K^2(x) \cdot f(t + h_n x)}{x} \\
+      - \tfrac{1}{n} \cdot \left( \IInt{K(x) \cdot f(t + h_n x)}{x} \right)^2
+    \end{array}$
+  \end{itemize}
+\end{lem}
+
+\begin{satz}
+  Sei $f$ eine beschränkte W-Dichtefktn, $\fa{x \in \R} f(x) \leq M$, mit Stetigkeitsstellen $C \subseteq \R$.
+  Sei $K \in L^2(\R)$. \\
+  Angenommen, $n \cdot h_n \xra[n \to \infty]{} \infty$.
+  Dann gilt
+  \begin{itemize}
+    \item $\E_f \hat{f}_n(t) \xra[n \to \infty]{} f(t) \quad \forall \, t \in C$,
+    \item $n \cdot h_n \cdot \var_f (\hat{f}_n(t)) \xra[n \to \infty]{} f(t) + \IInt{K^2(x)}{x} \quad \forall \, t \in C$
+    \item $\sup_{t \in \R} \left( \hat{f}_n(t) - f(t) \right)^2 \xra[n \to \infty]{} 0$, falls $f$ glm. stetig auf $\R$.
+  \end{itemize}
+\end{satz}
 
 \end{document}
