@@ -114,7 +114,7 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 % 2^2 aus 2^5: Die Codes unterscheiden sich paarweise an mindestens 3 Positionen
 % Informationsrate: 2/5
 
-% 2. Formalisierung der Grundbegriffe
+% §2. Formalisierung der Grundbegriffe
 
 % §2.1 q-närer Code und Hamming-Abstand
 
@@ -221,6 +221,8 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
   \[ \P_{\text{err}}(C) \coloneqq \max_{y \in Q^n, c \in C} \CP{D(y) \neq c}{\text{$c$ gesendet, $y$ empfangen}} \]
 \end{defn}
 
+\begin{samepage}
+
 % 2.9
 \begin{satz}[\emph{Shannon}]
   Sei $0 < R < \kappa(q, p)$.
@@ -232,6 +234,9 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 \end{satz}
 
 % 3. Korrektureigenschaften und zwei Schranken
+\section{Fehlerkorrektur und zwei Schranken}
+
+\end{samepage}
 
 % §3.1 Fehlererkennung und -korrektur
 
@@ -398,13 +403,13 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 \begin{lem}
   Sei $Q$ ein Alphabet, $u \in Q^n$. %$B_l(u) \coloneqq \Set{x \in Q^n}{d(x,u) \leq l}$.
   Dann gilt
-  \[ \abs{B_l(u)} = \sum_{j=0}^l {n \choose j} (\abs{Q}-1)^j. \]
+  \[ \abs{B_l(u)} = \sum_{j=0}^l \binom{n}{j} (\abs{Q}-1)^j. \]
 \end{lem}
 
 % 3.18
 \begin{satz}[\emph{Kugelpackungsschranke} (KPS)]
   Sei $q \geq 2$, $n \geq 2$, $1 \leq d \leq n$, $t \coloneqq \floor{\tfrac{d-1}{2}}$. Dann ist
-  \[ A_q(n, d) \leq q^n / \sum_{j=0}^t {n \choose j} (q-1)^j. \]
+  \[ A_q(n, d) \leq q^n / \sum_{j=0}^t \binom{n}{j} (q-1)^j. \]
 \end{satz}
 
 \begin{defn}
@@ -415,9 +420,11 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 \begin{bsp}
   $n = 6$, $q = 2$, $d = 3$. \\
   Singleton-Schranke: $A_2(6, 3) \leq 2^{6-3+1} = 2^4 = 16$ \\
-  Kugelpackungsschranke: $A_2(6, 3) \leq \floor{\frac{\floor{2^6}}{{6 \choose 0} (2-1)^0 + {6 \choose 1} (2-1)^1}} = 9$
+  Kugelpackungsschranke: $A_2(6, 3) \leq \floor{\frac{\floor{2^6}}{\binom{6}{0} (2-1)^0 + \binom{6}{1} (2-1)^1}} = 9$
 \end{bsp}
 \fi
+
+\begin{samepage}
 
 \begin{bem}
   Die KPS kann zur \emph{Johnsen-Schranke} verbessert werden.
@@ -431,6 +438,9 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 \end{bsp}
 
 % §4. Grundlagen zu linearen Codes
+\section{Lineare Codes}
+
+\end{samepage}
 
 % §4.1. Grundlagen zu endlichen Körpern
 
@@ -675,6 +685,8 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
   heißt \emph{homogenes Gewichtszählpolynom}.
 \end{defn}
 
+\begin{samepage}
+
 \begin{bem}
   \inlineitem{$A_C(Z) = A_C^\homogen(1, Z)$} \quad
   \inlineitem{$A_C^\homogen(X, Y) = X^n \cdot A_C(\tfrac{Y}{X})$}
@@ -684,6 +696,9 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 \end{bem}
 
 % §5. Hamming-Codes
+\section{Hamming-Codes}
+
+\end{samepage}
 
 % §5.1. Die Parameter eines 1-fehlerkorrigierenden perfekten linearen Codes
 
@@ -864,16 +879,21 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 
 % §5.6 Gewichtsverteilung der binären Hamming-Codes
 
+\begin{samepage}
+
 \begin{satz}
   $A_{\Ham_2(m)}(z) = \tfrac{1}{n+1} (1+z)^n + \tfrac{n}{n+1} (1+z)^{\tfrac{n-1}{2}} \cdot (1-z)^{\tfrac{n+1}{2}}$,
   wobei $n = 2^m - 1$.
   Es gilt die Rekursionsgleichung
-  \[ {n \choose l-1} = (n-l+2) \cdot A_{l-2} + A_{l-1} + l \cdot A_l. \]
+  \[ \binom{n}{l-1} = (n-l+2) \cdot A_{l-2} + A_{l-1} + l \cdot A_l. \]
 \end{satz}
 
 % Vorlesung vom 10.11.2015
 
 % §6. Die Golay-Codes und deren Erweiterungen
+\section{Golay-Codes und ihre Erweiterungen}
+
+\end{samepage}
 
 \begin{prop}
   Ist $n \geq 3$ ungerade, so ist der binäre $n$-Wiederholungscode ein perfekter Code.
@@ -896,7 +916,7 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 \begin{bem}
   Sei $q$ eine Primzahlpotenz, $C$ ein perfekter $q$-närer $(n, M, 2t+1)$-Code.
   Dann hat das \emph{Lloyd-Polynom}
-  \[ L_t(X) \coloneqq \sum_{j=0}^t (-1)^j \cdot (q-1)^{t-j} \cdot {X-1 \choose j} {n-1-X \choose t-j} \]
+  \[ L_t(X) \coloneqq \sum_{j=0}^t (-1)^j \cdot (q-1)^{t-j} \cdot \binom{X-1}{j} \binom{n-1-X}{t-j} \]
   mindestens $t$ verschiedene Nullstellen in $\{ 1, \ldots, n \}$.
 \end{bem}
 
@@ -1034,6 +1054,7 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 \end{konstr}
 
 % §7. Grundlagen aus der Designtheorie
+\section{Verbindungen mit der Designtheorie}
 
 \begin{defn}
   Eine \emph{Inzidenzstruktur} (IS) ist ein Tupel $\Design = (V, \Blocks, I)$ mit
@@ -1199,18 +1220,18 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 \begin{bsp}
   Sei $V$ eine Menge, $v \geq 2$, $t \leq k$.
   Sei $\Blocks \coloneqq \Set{B \subseteq V}{\abs{B} = k}$.
-  Dann ist $(V, \Blocks, {\in})$ ein $t$-Design mit $\lambda = {v - t \choose k - t}$.
+  Dann ist $(V, \Blocks, {\in})$ ein $t$-Design mit $\lambda = \binom{v - t}{k - t}$.
 \end{bsp}
 
 \begin{prop}
   Sei $\Design = (V, \Blocks, I)$ ein $S_\lambda(t, k, v)$.
-  Ist $s \in \N$ mit $s \leq t$, dann ist~$\Design$ auch ein $s$-Design und zwar mit $\lambda_s = \frac{\lambda \cdot {v -s t-s}}{{k-s \choose t-s}}$.
+  Ist $s \in \N$ mit $s \leq t$, dann ist~$\Design$ auch ein $s$-Design und zwar mit $\lambda_s = \frac{\lambda \cdot {v -s t-s}}{\binom{k-s}{t-s}}$.
 \end{prop}
 
 \begin{bem}
   Insbesondere: \enspace
-  \inlineitem{$t \geq 1 \implies \lambda_1 = \frac{\lambda {v-1 \choose t-1}}{{k-1 \choose t-1}}$} \quad
-  \inlineitem{$\lambda_0 = b = \frac{\lambda {v \choose t}}{{k \choose t}}$}
+  \inlineitem{$t \geq 1 \implies \lambda_1 = \frac{\lambda \binom{v-1}{t-1}}{\binom{k-1}{t-1}}$} \quad
+  \inlineitem{$\lambda_0 = b = \frac{\lambda \binom{v}{t}}{\binom{k}{t}}$}
   % für $\lambda=1$, $t \geq 4$ kennt man $S_1(4,5,11)$, $S_1(4,7,23)$, $S_1(5,6,12)$, $S_1(5,8,24)$
 \end{bem}
 
@@ -1233,7 +1254,7 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
     \item Angenommen, es gibt einen bin. $(90, 2^{78}, 5)$-Code (also perfekt).
     Dann $\exists$ ein $S_1(3, 5, 90)$, etwa $\Design$.
     Dann ist $\Design$ ein $S_{\lambda_2}(2, 5, 90)$ mit
-    \[ \lambda_2 = \frac{\lambda {v-2 \choose t-2}}{{k-2 \choose t-2}} = \frac{1 {88 \choose 1}}{{3 \choose 1}} = \tfrac{88}{3} \neq\in \N. \]
+    \[ \lambda_2 = \frac{\lambda \binom{v-2}{t-2}}{\binom{k-2}{t-2}} = \frac{1 \binom{88}{1}}{\binom{3}{1}} = \tfrac{88}{3} \neq\in \N. \]
   \end{itemize}
 \end{bspe}
 
