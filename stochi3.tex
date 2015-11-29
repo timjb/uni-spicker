@@ -46,12 +46,14 @@
 
 % Vorlesung vom 12.10.2015
 
+\section{Hypothesentests mittels Stichprobenfktn}
+
 % 1. Wiederholung
 
 % 1.1 Grundbegriffe der Testtheorie
 
 \begin{modell}
-  Gegeben sei ein Parametrisches Modell, \dh eine Zufallsgröße $X$, deren Verteilungsfunktion $P_X \in \Set{P_\vartheta}{\vartheta \in \Theta \subset \R^n}$ von einem Parameter $\vartheta$ abhängt.
+  Gegeben sei ein parametrisches Modell, \dh eine Zufallsgröße $X$, deren Verteilungsfunktion $P_X \in \Set{P_\vartheta}{\vartheta \in \Theta \subset \R^n}$ von einem Parameter $\vartheta$ abhängt.
 \end{modell}
 
 \begin{prob}
@@ -103,11 +105,11 @@
 \end{defn}
 
 \begin{bem}
-  Es gilt
-  \begin{alignat*}{2}
-    \P_\vartheta(\text{Fehler 1. Art}) &= m_\varphi(\vartheta) & \enspace\text{für $\vartheta \in \Theta_0$,} \\
-    \P_\vartheta(\text{Fehler 2. Art}) &= 1 - m_\varphi(\vartheta) & \enspace\text{für $\vartheta \in \Theta_1$.}
-  \end{alignat*}
+  Es gilt \enspace
+  $\begin{array}[t]{r c l l}
+    \P_\vartheta(\text{Fehler 1. Art}) &=& m_\varphi(\vartheta) & \enspace\text{für $\vartheta \in \Theta_0$,} \\
+    \P_\vartheta(\text{Fehler 2. Art}) &=& 1 - m_\varphi(\vartheta) & \enspace\text{für $\vartheta \in \Theta_1$.}
+  \end{array}$
 \end{bem}
 
 % Ausgelassen: Graph einer "fast idealen Kurve"
@@ -382,6 +384,7 @@
 % Vorlesung vom 26.10.2015
 
 % 2. Anpassungstests und weitere nichtparametrische Tests
+\section{Chi-Quadrat-Anpassungstest}
 
 % 2.1. Chi-Quadrat-Anpassungstest
 
@@ -524,6 +527,7 @@
 \end{bemn}
 
 % 2.3. Kolmogorow-Smirnow-Test
+\section{Ein- und Zwei-SP-Tests für VFen}
 
 \begin{situation}
   Sei $X_1, \ldots, X_n \sim F$ eine math. SP.
@@ -740,6 +744,8 @@
 
 % §2.5 Kruskal-Wallis-Test
 
+\begin{samepage}
+
 \begin{bem}[\emph{Kruskal-Wallis-Test}]
   Gegeben seien $k$ Messreihen $X_{i,1}, \ldots, X_{i,n_i} \sim F_i$, $i = 1, \ldots, k$ unabhängige SPn, $F_i$ stetig. \\
   Ziel: Testen von $H_0 : F_1 = \ldots = F_k$.
@@ -757,6 +763,9 @@
 % Faustregel: $\min_{1 \leq i \leq k} n_i \geq 5$, $k \geq 4$
 
 % §3. U-Statistiken
+\section{Theorie der U-Statistiken}
+
+\end{samepage}
 
 % §3.1. Hoeffdings Projektionsmethode und ZGWS
 
@@ -995,6 +1004,7 @@
 \end{bsp}
 
 % §5. Dichteschätzung und Regressionskurvenschätzer
+\section{Dichte- und Regressionskurvenschätzer}
 
 % §5.1 Dichteschätzung (allgemein)
 
