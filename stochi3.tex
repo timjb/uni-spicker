@@ -1003,6 +1003,58 @@
   \[ h(x, y) \coloneqq \abs{\Set{\heartsuit}{x < y}}. \]
 \end{bsp}
 
+% §4. Das allgemeine lineare Modell
+% (Modell I  der Regressions- und Varianzanalyse)
+\section{Das allgemeine lineare Modell}
+
+\begin{modell}[allgemein]
+  Für Zufallsgrößen $X$ und $Y$ gilt $Y = g(X) + \epsilon$ mit einer Funktion $g$, wobei $\E \epsilon = 0$ und $\sigma^2 \coloneqq \var (Y - g(X)) = \E \epsilon^2$.
+  %Bei einfacher linearer Regression nimmt man an, dass $g(x) = a + bx$.
+\end{modell}
+
+\begin{modell}[\emph{Lineare Regression}]
+  $Y = X \beta + \epsilon$, wobei
+  \[
+    \begin{array}{r l}
+      Y = (Y_1, \ldots, Y_n)^T & \text{\emph{Beobachtungsvektor},} \\
+      X = (x_{ij}) \in \R^{n \times p} & \text{Matrix der \emph{Einstellgrößen}, Versuchsplanmatrix,} \\
+      \beta = (\beta_1, \ldots, \beta_p)^T & \text{(unbekannter) \emph{Parametervektor}, Regressionskoeffizienten,} \\
+      \epsilon = (\epsilon_1, \ldots, \epsilon_n)^T & \text{(nicht beobachtbarer) \emph{Fehlervektor} heißt.}
+    \end{array}
+  \]
+  Wir nehmen an, dass $\cov(Y_i, Y_j) = \cov(\epsilon_i, \epsilon_j) = \sigma^2 \delta_{ij}$ und dass $n > p$.
+  Dabei heißt $\sigma$ \emph{Modellstreuung}.
+\end{modell}
+
+% Bem: Zunächst keine Verteilungsvoraussetzungen
+
+\begin{bem}
+  Falls $Y$ eine bekannte Kovarianzmatrix $K \in \R^{n \times n}$ besitzt, so können wir $X^* \coloneqq K^{\nicefrac{-1}{2}} X$, $Y^* \coloneqq K^{\nicefrac{-1}{2}} Y$, $\epsilon^* \coloneqq K^{\nicefrac{-1}{2}} \epsilon$ setzen und erhalten $Y^* = X^* \beta + \epsilon^*$ und $\cov(Y*) = I_n$.
+\end{bem}
+
+% Aufgaben:
+% * Schätzung von $\beta$ mit der Methode der kleinsten Quadrate (Problem dabei: $\rk X < p$)
+% * Schätzung der linearen Funktion $c^T \beta = \sum_{j=1}^p c_j \beta_j$
+% * Schätzung der Modellstreuung
+% * Test- und Konfidenzintervalle
+
+% §4.2 Die MkQ-Schätzung
+
+\begin{problem}
+  Gegeben seien $[Y, X \beta, \sigma^2 I_n]$.
+  Gesucht sind Schätzungen $\hat{\beta}(y) = (\hat{\beta}_1(y), \ldots, \hat{\beta}_p(y))^T$ für $\beta$.
+\end{problem}
+
+\begin{defn}
+  Eine Schätzfunktion $\hat{\beta}(y)$ heißt \emph{MkQ-Schätzung} (Methode der kleinsten Quadrate) für $\beta$, falls
+  \[ S(y, \hat{\beta}) = \min_{\beta \in \R^p} S(y, \beta) \]
+  wobei TODO ...
+\end{defn}
+
+% §4.1 Definition und Aufgabenstellung
+
+\iffalse
+
 % §5. Dichteschätzung und Regressionskurvenschätzer
 \section{Dichte- und Regressionskurvenschätzer}
 
@@ -1113,5 +1165,7 @@
     \item $\sup_{t \in \R} \left( \hat{f}_n(t) - f(t) \right)^2 \xra[n \to \infty]{} 0$, falls $f$ glm. stetig auf $\R$.
   \end{itemize}
 \end{satz}
+
+\fi
 
 \end{document}
