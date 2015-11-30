@@ -161,7 +161,7 @@
 \begin{prob}
   Wir betrachten das Randwertproblem
   \[
-    \text{(RWP)} \left\{ \begin{array}{rllll}
+    \text{(RWP)} \enspace \left\{ \begin{array}{rllll}
       \LL u &=& f &\text{ in $\Omega$} & \text{(PDE)} \\
       \RR u &=& g &\text{ auf $\bOmega$} & \text{(Randbedingung)}
     \end{array} \right.
@@ -1209,7 +1209,7 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
 
 \begin{satz}[\emph{Höldersche Ungleichung}]
   Sei $u \in L^p(\Omega)$ und $v \in L^q(\Omega)$ mit $1 \leq p, q, r < \infty$ und $\nicefrac{1}{p} + \nicefrac{1}{q} = \tfrac{1}{r}$.
-  Dann ist $uv \in L^r(\Omega)$ und es gilt
+  Dann ist $uv \in L^r(\Omega)$ mit
   \[ \norm{uv}_r \leq \norm{u}_p \cdot \norm{v}_q. \]
 \end{satz}
 
@@ -1435,7 +1435,7 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
 % 4) Wie lautet die Variationsgleichungbei inhomogenen RWBn?
 
 \begin{prob}[Allgemeines Variationsproblem] \mbox{} \\
-  Seien Abbildungen $B : H_0^1(\Omega) \times H_0^1(\Omega) \to \R$ und $l : H_0^1(\Omega) \to \R$ gegeben.
+  Seien Abb. $B : H_0^1(\Omega) \times H_0^1(\Omega) \to \R$ und $l : H_0^1(\Omega) \to \R$ gegeben. \\
   Gesucht: $u \in H_0^1(\Omega)$, sodass $B(u, \phi) = l(\phi)$ für alle $\phi \in H_0^1(\Omega)$.
 \end{prob}
 
@@ -1479,6 +1479,56 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
 \begin{satz}[\emph{Lax-Milgram}]
   Sei H ein Hilbertraum, $B : H \times H \to H$ eine beschränkte, koerzitive Bilinearform.
   Dann gibt es für jedes $l \in H'$ eine eindeutige Lösung $u \in H$ von  $\fa{\phi \!\in\! H\!\!}\!\! B(u, \phi) \!=\! l(\phi)$.
+  Es gilt $\norm{u}_H \leq \nicefrac{1}{\lambda} \norm{l}_{H'}$
 \end{satz}
+
+% Vorlesung vom 30.11.2015
+
+% 4.10
+\begin{lem}[\emph{Poincaré-Ungleichung}]
+  Sei $\Omega \subset \R^d$ beschränkt.
+  Dann existiert eine Konstante $C > 0$, sodass
+  \[
+    \norm{u}_{L^2(\Omega)} \leq C \left( \Int{\Omega}{}{\sum \abs{\DO_i u}^2}{x} \right)^{\nicefrac{1}{2}} \quad
+    \forall \, u \in H_0^1(\Omega)
+  \]
+\end{lem}
+
+\begin{kor}
+  $C_1 \norm{u}_{L^2(\Omega)} \leq \left( \Int{\Omega}{}{\sum \abs{\DO_i u}^2}{x} \right)^{\nicefrac{1}{2}} \leq C_2 \norm{u}_{H'(\Omega)}$
+  mit $C_1 \coloneqq (1 + C^2)^{\nicefrac{-1}{2}}$, $C_2 \coloneqq 1$.
+\end{kor}
+
+% 4.11
+\begin{lem}
+  Falls $b(x) = 0$ und $c(x) \geq 0$ in $\Omega$, so ist $B$ in (VGL\tss{1})' koerziv.
+\end{lem}
+
+% 4.12
+\begin{satz}
+  Sei $\Omega \subset \R^d$ beschränkt und sei $\mathcal{L} u = - \dive (A(x) \DO u) + c(x) u$ glm. elliptisch, $c(x) \geq 0$ in $\Omega$, $a_{ij}, c_j \in L^\infty(\Omega)$, $f \in L^2(\Omega)$.
+  Dann besitzt (VGL\tss{1})' eine eindeutige Lösung $u \in H_0^1(\Omega)$.
+  Außerdem existiert ein $\hat{C} > 0$, sodass $\norm{u}_{H'(\Omega)} \leq \hat{C} \norm{f}_{L^2(\Omega)}$.
+\end{satz}
+
+\begin{bemn}
+  \begin{itemize}
+    \item Sei $f \in H^{-1}(\Omega)$.
+    Eine Fktn $u \in H_0^1(\Omega)$ heißt schw. Lsg von (RWP\tss{1}), falls $B(u, \phi) = \scp{f}{\phi}_{H^{-1}(\Omega), H_0'(\Omega)}$ $\forall \, \phi \in H_0'(\Omega)$.
+    Gelte $b = 0$, $c \geq 0$, glm. Elliptizität, $c, a_{ij} \in L^\infty(\Omega)$. \\
+    Dann ex. nach Lax-Milgram genau ein $u \in H_0^1(\Omega)$ mit \[
+      B(u, \phi) = \scp{f}{\phi}_{H^{-1}(\Omega), H_0^1(\Omega)} \quad
+      \text{für alle $\phi$.}
+    \]
+    \item Es existiert ein $\mu_0 > 0$, sodass für alle $\mu > \mu_0$ das RWP
+    \[
+      \text{(RWP)} \enspace \left\{ \begin{array}{rlll}
+        \LL u + \mu u &=& f &\text{ in $\Omega$} \\
+        u &=& 0 &\text{ auf $\bOmega$}
+      \end{array} \right.
+    \]
+    für alle $f \in H^{-1}(\Omega)$ eine eindeutige Lsg $u \in H_0^1(\Omega)$ besitzt.
+  \end{itemize}
+\end{bemn}
 
 \end{document}
