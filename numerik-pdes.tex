@@ -1486,17 +1486,17 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
 
 % 4.10
 \begin{lem}[\emph{Poincaré-Ungleichung}]
-  Sei $\Omega \subset \R^d$ beschränkt.
+  Sei $\Omega \subset \R^d$ beschränkt. \\
   Dann existiert eine Konstante $C > 0$, sodass
   \[
-    \norm{u}_{L^2(\Omega)} \leq C \left( \Int{\Omega}{}{\sum \abs{\DO_i u}^2}{x} \right)^{\nicefrac{1}{2}} \quad
+    \norm{u}_{L^2(\Omega)} \leq C \norm{\nabla u}_{L^2(\Omega, \R^d)} = C \left( \Int{\Omega}{}{\sum_i \abs{\DO_i u}^2}{x} \right)^{\nicefrac{1}{2}} \quad
     \forall \, u \in H_0^1(\Omega)
   \]
 \end{lem}
 
 \begin{kor}
-  Mit $C_1 \coloneqq (1 + C^2)^{\nicefrac{-1}{2}}$ und $C_2 \coloneqq 1$ gilt
-  \[ C_1 \norm{u}_{L^2(\Omega)} \leq \left( \Int{\Omega}{}{\sum \abs{\DO_i u}^2}{x} \right)^{\nicefrac{1}{2}} \leq C_2 \norm{u}_{H'(\Omega)}. \]
+  Mit $C_1 \coloneqq (1 + C^2)^{\nicefrac{-1}{2}}$ und $C_2 \coloneqq 1$ gilt f.\,a. $u \in H_0^1(\Omega)$
+  \[ C_1 \norm{u}_{H^1(\Omega)} \leq \norm{\nabla u}_{L^2(\Omega, \R^d)} \leq C_2 \norm{u}_{H^1(\Omega)}. \]
 \end{kor}
 
 % 4.11
