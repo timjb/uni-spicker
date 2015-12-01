@@ -1411,4 +1411,106 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
   $2$-$(4n{-}1, 2n{-}1, n{-}1)$-Designs heißen \emph{Hadamard-Designs}.
 \end{defn}
 
+% Vorlesung vom 1.12.2015
+
+% §8. Reed-Muller-Codes
+\section{Reed-Muller-Codes}
+
+% Mars-Sonde "Mariner-9": Informationsraum $\F_2^6$, Anforderung an Code: $d = 16$
+% $A_q(n, d) = \max \Set{M}{\text{es gibt einen $q$-nären $(n, M, d)$-Code}}$
+% $q = 2$, $\min \Set{n \in \N}{A_2(n, 16) \geq 64} = 32$
+% In der Tat: $A_2(32, 16) = 64$, sogar $A_2^\lin(32, 16) = 64$.
+% Es gibt also einen $[32, 6, 16]$-Code über $\F_2$.
+% Informationsrate dieses Codes: $\tfrac{6}{32} = 18,75$
+% Zum Vergleich die Informationsrate des Wiederholungscodes $[6 \cdot 16, 6, 16] über $\F_2$: $\tfrac{6}{6 \cdot 16} = 6,25$
+
+% §8.2 Die Plotkin-Schranke
+
+\begin{satz}[\emph{Plotkin-Schranke}]
+  Sei $q \geq 2$, $d > \tfrac{q-1}{q} \cdot n$.
+  Dann gilt
+  \[ A_q(n, d) \leq \tfrac{d}{d - \tfrac{q-1}{q} \cdot n}. \]
+\end{satz}
+
+\begin{lem}
+  Sei $n \geq 2$, $1 \leq d < n$.
+  Dann: $A_2(n, d) \leq 2 \cdot A_2(n-1, d)$
+\end{lem}
+
+\begin{satz}
+  Für $l \geq 1$ gilt $A_2(4 l, 2 l) \leq 8 l$.
+\end{satz}
+
+\begin{bsp}
+  Für $l=8$ gilt $A_2(32, 16) \leq 64$.
+\end{bsp}
+
+\begin{bsp}
+  %Sei $m = 2$.
+  $G_2 \coloneqq \begin{psmallmatrix}
+    0 & 0 & 1 & 1 \\
+    0 & 1 & 0 & 1 \\
+    1 & 1 & 1 & 1
+  \end{psmallmatrix}$
+  erzeugt einen $[4, 3, 2]$-Code $C_2$ über $\F_2$.
+\end{bsp}
+
+\begin{bsp}
+  %Sei $m = 3$.
+  Die Parity-Check-Erw. von $\Ham_2(3)$ ist ein $[8, 4, 4]$-Code $C_3$ über $\F_2$.
+\end{bsp}
+
+\iffalse
+\begin{kor}
+  $A_2(4, 2) = A_2^\lin(4, 2) = 8$, \enspace
+  $A_2(8, 4) = A_2^\lin(8, 4) = 16$
+\end{kor}
+\fi
+
+\begin{satz}
+  Für $m \geq 1$ gilt $A_2^\lin(2^m, 2^{m-1}) = A_2(2^m, 2^{m-1}) = 2^{m+1}$.
+\end{satz}
+
+\begin{konstr}
+  Man definiert rekursiv Generatormatrizen durch
+  \[
+    G_{m+1} = \left( \begin{array}{c c c | c c c}
+      0 & \cdots & 0 & 1 & \cdots & 1 \\ \hline
+      \multicolumn{3}{c}{G_m} & \multicolumn{3}{c}{G_m}
+    \end{array} \right), \quad
+    G_1 \coloneqq \begin{pmatrix}
+      0 & 1 \\
+      1 & 1
+    \end{pmatrix}
+  \]
+\end{konstr}
+
+% §8.3 Die Algebra der Booleschen Funktionen
+
+% Sei $M$ eine Menge, $\F_2^M = $ der $\F_2$-Vektorraum aller Abb. von $M$ nach $\F_2$.
+
+\begin{defn}
+  Sei $m \geq 1$.
+  Eine \emph{Boolesche Funktion} in $m$ Variablen ist eine Abbildung von $\F_2^m$ nach $\F_2$.
+\end{defn}
+
+\begin{nota}
+  $\mathcal{B}_m \coloneqq \F_2^{\F_2^m} = $ Algebra der Booleschen Fktn in $m$ Var.
+\end{nota}
+
+Führe Variablen $x_1, \ldots, x_m$ ein.
+
+Betrachte die Polynomalgebra über $\F_2$ in diesen Variablen, $\F_2[x_1, \ldots, x_m]$.
+
+Dann ist
+
+\[
+  \F_2[x_1, \ldots, x_m] \to \mathcal{B}_m, \quad
+  f(x) \mapsto (\overline{f} : v \mapsto f(v_1, \ldots, v_m))
+\]
+
+ein surjektiver Algebra-Homomorphismus mit Kern $\langle x_1^2 + x_1, \ldots, x_m^2 + x_m \rangle$.
+Somit
+$\mathcal{B}_m \cong \F_2[x_1, \ldots, x_m] / \langle x_1^2 + x_1, \ldots, x_m^2 + x_m \rangle$.
+
 \end{document}
