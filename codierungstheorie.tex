@@ -1441,6 +1441,7 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
   Für $l \geq 1$ gilt $A_2(4 l, 2 l) \leq 8 l$.
 \end{satz}
 
+\iffalse
 \begin{bsp}
   Für $l=8$ gilt $A_2(32, 16) \leq 64$.
 \end{bsp}
@@ -1460,7 +1461,6 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
   Die Parity-Check-Erw. von $\Ham_2(3)$ ist ein $[8, 4, 4]$-Code $C_3$ über $\F_2$.
 \end{bsp}
 
-\iffalse
 \begin{kor}
   $A_2(4, 2) = A_2^\lin(4, 2) = 8$, \enspace
   $A_2(8, 4) = A_2^\lin(8, 4) = 16$
@@ -1468,7 +1468,7 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 \fi
 
 \begin{satz}
-  Für $m \geq 1$ gilt $A_2^\lin(2^m, 2^{m-1}) = A_2(2^m, 2^{m-1}) = 2^{m+1}$.
+  Für $m \geq 1$ gilt $A_2^\lin(2^m, 2^{m-1}) = A_2(2^m, 2^{m-1}) = 2^{m+1}$, \dh{} es existiert ein $[2^m, m+1, 2^m]$-Code.
 \end{satz}
 
 \begin{konstr}
@@ -1498,19 +1498,17 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
   $\mathcal{B}_m \coloneqq \F_2^{\F_2^m} = $ Algebra der Booleschen Fktn in $m$ Var.
 \end{nota}
 
-Führe Variablen $x_1, \ldots, x_m$ ein.
-
-Betrachte die Polynomalgebra über $\F_2$ in diesen Variablen, $\F_2[x_1, \ldots, x_m]$.
-
-Dann ist
-
-\[
-  \F_2[x_1, \ldots, x_m] \to \mathcal{B}_m, \quad
-  f(x) \mapsto (\overline{f} : v \mapsto f(v_1, \ldots, v_m))
-\]
-
-ein surjektiver Algebra-Homomorphismus mit Kern $\langle x_1^2 + x_1, \ldots, x_m^2 + x_m \rangle$.
-Somit
-$\mathcal{B}_m \cong \F_2[x_1, \ldots, x_m] / \langle x_1^2 + x_1, \ldots, x_m^2 + x_m \rangle$.
+\begin{bem}
+  % Führe Variablen $x_1, \ldots, x_m$ ein.
+  % Betrachte die Polynomalgebra über $\F_2$ in diesen Variablen, $\F_2[x_1, \ldots, x_m]$.
+  Die Abbildung
+  \[
+    \F_2[x_1, \ldots, x_m] \to \mathcal{B}_m, \quad
+    f(x) \mapsto (\overline{f} : v \mapsto f(v_1, \ldots, v_m))
+  \]
+  ist ein surj. Algebra-Homomor. mit Kern $\langle x_1^2 + x_1, \ldots, x_m^2 + x_m \rangle$.
+  Somit gilt
+  $\mathcal{B}_m \cong \F_2[x_1, \ldots, x_m] / \langle x_1^2 + x_1, \ldots, x_m^2 + x_m \rangle$.
+\end{bem}
 
 \end{document}
