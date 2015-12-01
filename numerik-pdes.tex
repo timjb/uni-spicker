@@ -1495,8 +1495,8 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
 \end{lem}
 
 \begin{kor}
-  $C_1 \norm{u}_{L^2(\Omega)} \leq \left( \Int{\Omega}{}{\sum \abs{\DO_i u}^2}{x} \right)^{\nicefrac{1}{2}} \leq C_2 \norm{u}_{H'(\Omega)}$
-  mit $C_1 \coloneqq (1 + C^2)^{\nicefrac{-1}{2}}$, $C_2 \coloneqq 1$.
+  Mit $C_1 \coloneqq (1 + C^2)^{\nicefrac{-1}{2}}$ und $C_2 \coloneqq 1$ gilt
+  \[ C_1 \norm{u}_{L^2(\Omega)} \leq \left( \Int{\Omega}{}{\sum \abs{\DO_i u}^2}{x} \right)^{\nicefrac{1}{2}} \leq C_2 \norm{u}_{H'(\Omega)}. \]
 \end{kor}
 
 % 4.11
@@ -1537,93 +1537,84 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
 
 % a)
 
-Wir untersuchen nun das inhomogene RWP
-
-\[
-  (RWP\tss{2}) \enspace
-  \left\{ \begin{array}{r c l l}
-    \LL u & = & f & \text{in } \Omega, \\
-    u & = & g & \text{auf } \bOmega
-  \end{array} \right.
-\]
-
-Angenommen, $g : \bOmega \to \R$ besitzt eine Fortsetzung $\tilde{g} : \cOmega \to \R$ mit $\tilde{g}|_{\bOmega} = g$.
-Dann ist $u \in \Cont^2(\Omega) \cap \Cont(\cOmega)$ genau dann eine Lösung von (RWP\tss{2}), wenn $v \coloneqq u - \tilde{g} \in \Cont^2(\Omega) \cap \Cont(\cOmega)$ eine Lösung von
-
-\[
-  (RWP\tss{2})' \enspace
-  \left\{ \begin{array}{r c l l}
-    \LL v & = & f - \LL \tilde{g} & \text{in } \Omega, \\
-    v & = & 0 & \text{auf } \bOmega
-  \end{array} \right.
-\]
-
-ist.
-Schwache Formulierung von (RWP\tss{2})':
-Ges. ist $v \in H_0'(\Omega)$ mit
-
-\begin{align*}
-  & \Int{\Omega}{}{(A(x) \DO v(x) \cdot \DO \phi(x) + b(x) \cdot \DO v(x) \phi(x) + c(x) v(x) \phi(x))}{x} \\
-  = & \Int{\Omega}{}{f(x) \phi(x)}{x} + \Int{\Omega}{}{(A(x) \DO \tilde{g}(x) \DO \phi(x) + b \DO \tilde{g} \phi + c \tilde{g} \phi)}{x} \quad
-  \forall \, \phi \in H_0^1(\Omega).
-\end{align*}
-
-Voraussetzungen: $a_{ij}, b_i, c \in L^\infty(\Omega)$, $f \in L^2(\Omega)$, $\tilde{g} \in \Cont(\cOmega) \cap H^1(\Omega)$.
-
-Gesucht ist also ein $u \in U \coloneqq \Set{w \in H^1(\Omega)}{\tau(w) = g}$. % Dabei ist $\tau : H^1(\Omega) \to L^2(\bOmega)$ der Spuroperator
-
-\[
-  \underbrace{\Int{\Omega}{}{A(x) \DO u \cdot \DO \phi + b(x) \DO u \phi + c(x) u \phi}{x}}_{B(u, \phi) \coloneqq} =
-  \underbrace{\Int{\Omega}{}{f \phi}{x}}_{l(\phi) \coloneqq} \quad
-  \forall \, \phi \in H_0^1(\Omega).
-  \tag{VGL\tss{2}}
-\]
+\begin{prob}
+  Wir untersuchen nun das inhomogene Randwertproblem
+  \[
+    \text{(RWP\tss{2})} \enspace
+    \left\{ \begin{array}{r c l l}
+      \LL u & = & f & \text{in } \Omega, \\
+      u & = & g & \text{auf } \bOmega
+    \end{array} \right.
+  \]
+  Angenommen, $g : \bOmega \to \R$ besitzt eine Fortsetzung $\tilde{g} : \cOmega \to \R$ mit $\tilde{g}|_{\bOmega} = g$.
+  Dann ist $u \in \Cont^2(\Omega) \cap \Cont(\cOmega)$ genau dann eine Lösung von (RWP\tss{2}), wenn $v \coloneqq u - \tilde{g} \in \Cont^2(\Omega) \cap \Cont(\cOmega)$ eine Lösung von
+  \[
+    \text{(RWP\tss{2})'} \enspace
+    \left\{ \begin{array}{r c l l}
+      \LL v & = & f - \LL \tilde{g} & \text{in } \Omega, \\
+      v & = & 0 & \text{auf } \bOmega
+    \end{array} \right.
+  \]
+  ist.
+  Schwache Formulierung von (RWP\tss{2})':
+  Ges. ist $v \in H_0'(\Omega)$ mit
+  \begin{align*}
+    & \Int{\Omega}{}{(A(x) \DO v(x) \cdot \DO \phi(x) + b(x) \cdot \DO v(x) \phi(x) + c(x) v(x) \phi(x))}{x} \\
+    = \enspace & \Int{\Omega}{}{f \cdot \phi}{x} + \Int{\Omega}{}{(A(x) \DO \tilde{g} \cdot \DO \phi + b \cdot \DO \tilde{g} \phi + c \tilde{g} \phi)}{x} \quad
+    \forall \, \phi \in H_0^1(\Omega).
+  \end{align*}
+  Voraussetzungen: $a_{ij}, b_i, c \in L^\infty(\Omega)$, $f \in L^2(\Omega)$, $\tilde{g} \in \Cont(\cOmega) \cap H^1(\Omega)$. \\
+  Gesucht ist also ein $u \in U \coloneqq \Set{w \in H^1(\Omega)}{\tau(w) = g}$ mit
+  % Dabei ist $\tau : H^1(\Omega) \to L^2(\bOmega)$ der Spuroperator
+  \[
+    \underbrace{\Int{\Omega}{}{A(x) \DO u \cdot \DO \phi + b \DO u \phi + c u \phi}{x}}_{B(u, \phi) \coloneqq} =
+    \underbrace{\Int{\Omega}{}{f \phi}{x}}_{l(\phi) \coloneqq} \quad
+    \forall \, \phi \in H_0^1(\Omega).
+    \tag{VGL\tss{2}}
+  \]
+\end{prob}
 
 \begin{satz}
-  Sei $B : H_0^1(\Omega) \times H_0^1(\Omega) \to \R$ beschränkt und koerziv.
+  Sei $B : H_0^1(\Omega) \times H_0^1(\Omega) \to \R$ beschränkt und koerziv. \\
   Dann besitzt (VGL\tss{2}) genau dann eine eindeutige Lösung $u \in U$, wenn ein $u_0 \in H^1(\Omega)$ existiert, sodass $\tau(u_0) = g$.
 \end{satz}
 
 % b)
 
-\[
-  (RWP\tss{3}) \enspace
-  \left\{ \begin{array}{r c l l}
-    \LL u & = & f & \text{in } \Omega, \\
-    A(x) \DO u \cdot |nu + \mu u & = & g & \text{auf } \bOmega
-  \end{array} \right.
-\]
-
-$u \in \Cont^2(\Omega) \cap \Cont(\cOmega)$, $\phi \in \Cont^\infty(\cOmega)$
-
-\begin{align*}
-  \Int{\Omega}{}{f \phi}{x}
-  & = - \Int{\Omega}{}{\dive(A(x) \DO u) \phi + b \DO u \phi + c u \phi}{x} \\
-  & = - \Int{\bOmega}{}{A(x) \DO u \cdot \nu \phi}{s} + \Int{\Omega}{}{A(x) \DO u \DO \phi}{x} + \Int{\Omega}{}{b(x) \DO u \phi}{x} + \Int{\Omega}{}{c u \phi}{x}
-\end{align*}
-
-Randbedingung:
-
-\[
-  \Int{\partial \Omega}{}{A(x) \DO u \cdot \nu \phi}{s} + \mu \Int{\partial \Omega}{}{u \phi}{s} = \Int{\partial \Omega}{}{g \phi}{s}
-\]
-
-\[
-  \mu \Int{\partial \Omega}{}{u \phi}{s} + \Int{\Omega}{}{A(x) \DO u \DO \phi + b(x) \cdot \DO u \phi + c(x) u \phi}{x} = \Int{\Omega}{}{f \phi}{x} + \Int{\partial \Omega}{}{g \phi}{s} \quad
-  \forall \, \phi \in C^\infty(\cOmega).
-\]
-
-Da $\Cont^\infty(\bOmega)$ dicht in $H^1(\Omega)$ liegt, ...
+\begin{prob}
+  Wir betrachten nun die Randbedingung
+  \[
+    \text{(RWP\tss{3})} \enspace
+    \left\{ \begin{array}{r c l l}
+      \LL u & = & f & \text{in } \Omega, \\
+      A(x) \DO u \cdot \nu + \mu u & = & g & \text{auf } \bOmega
+    \end{array} \right.
+  \]
+  Falls $u \in \Cont^2(\Omega) \cap \Cont(\cOmega)$ ein Lösung ist und $\phi \in \Cont^\infty(\cOmega)$, so gilt
+  \begin{align*}
+    \Int{\Omega}{}{f \phi}{x}
+    & = - \Int{\Omega}{}{\dive(A(x) \DO u) \phi + b \DO u \phi + c u \phi}{x} \\
+    & = - \Int{\bOmega}{}{A(x) \DO u \cdot \nu \phi}{s} + \Int{\Omega}{}{A(x) \DO u \DO \phi}{x} + \Int{\Omega}{}{b(x) \DO u \phi}{x} + \Int{\Omega}{}{c u \phi}{x}.
+  \end{align*}
+  Aus der Randbedingung bekommen wir
+  \[
+    \Int{\partial \Omega}{}{A(x) \DO u \cdot \nu \phi}{s} + \mu \Int{\partial \Omega}{}{u \phi}{s} = \Int{\partial \Omega}{}{g \phi}{s}.
+  \]
+  Zusammengesetzt erhalten wir die Variationsgleichung
+  \[
+    \mu \Int{\partial \Omega}{}{u \phi}{s} + \Int{\Omega}{}{A(x) \DO u \DO \phi + b(x) \cdot \DO u \phi + c(x) u \phi}{x} = \Int{\Omega}{}{f \phi}{x} + \Int{\partial \Omega}{}{g \phi}{s}.
+  \]
+  Wegen Dichtheit gilt diese Gleichung nicht nur für $\phi \in C^\infty(\cOmega)$ sondern allgemeiner für $\phi \in H^1(\Omega)$.
+\end{prob}
 
 \begin{defn}
   Sei $\mu \in \R$, $f \in L^2(\Omega)$, $g \in L^2(\partial \Omega)$.
-  Eine Funktion $u \in H^1(\Omega)$ heißt schwache Lösung von (RWP\tss{3}), falls
+  Eine Fktn $u \in H^1(\Omega)$ heißt \emph{schwache Lösung} von (RWP\tss{3}), falls sie folgende Gleichung erfüllt:
   \[
     \mu \Int{\bOmega}{}{u \phi}{s} + \Int{\Omega}{}{A \DO u \O \phi + b \DO u \phi + c u \phi}{x} =
     \Int{\Omega}{}{f \phi}{x} + \Int{\bOmega}{}{g \phi}{s} \quad
     \forall \, \phi \in H^1(\Omega)
   \]
-  erfüllt.
 \end{defn}
 
 \end{document}
