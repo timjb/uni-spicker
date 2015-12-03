@@ -1217,4 +1217,91 @@
 
 \fi
 
+% Vorlesung vom 3.12.2015
+
+Multiple lineare Regression
+
+$Y_i = \beta_0 + \beta_1 X_1^{(i)} + \ldots + \beta_m X_m^{(i)} + \epsilon_i$
+
+$\beta = (\beta_1, \ldots, \beta_m)^T$
+
+Regressionskoeffizienten $X = ...$
+
+Quasilineare (multiple) Regression
+
+$Y_i = \beta_0^{(i)} + \beta_1 f(x_1^{(i)}) + \ldots + \beta_m f(x_m^{(i)}) + \epsilon_i$
+
+$f_1$, \ldots, $f_m$ (nichtlineare) Funktionen
+
+\begin{defn}
+  Eine Matrix $A^{-} \in \R^{n \times m}$ heißt \emph{g-Inverse} (g = generalized) von $A \in \R^{m \times n}$, wenn für jedes $y \in \R^m$, für welches $Ax = y$ lösbar ist, auch $x = A^{-} y$ eine Lösung ist.
+\end{defn}
+
+\begin{satz}
+  $A^{-}$ ist eine g-Inverse von $A$ $\iff$ $A A^{-} A = A$
+\end{satz}
+
+\begin{bem}
+  \begin{itemize}
+    \item Falls $n = m$ und $A^{-1}$ existiert, so ist $A^{-} = A^{-1}$ eindeutig.
+    \item $A^{-}$ ist im Allgemeinen nicht eindeutig.
+    Man erhält Eindeutigkeit durch Zusatzforderungen:
+  \end{itemize}
+\end{bem}
+
+\begin{defn}
+  Eine \emph{Moore-Penrose-Inverse} $A^{+}$ ist eine g-Inverse, welche folgende Bedingungen erfüllt:
+  \[
+    A^{+} A A^{+} = A^{+}, \quad
+    (A A^{+})^T = A A^{+}, \quad
+    (A^{+} A)^T = A^{+} A.
+  \]
+\end{defn}
+
+% Allgemeine Lösung von (N)
+
+\begin{satz}
+  Die allgemeine Lösung von (N) lautet mit $S \coloneqq X^T X$:
+  \[
+    \beta = S^{-} X^T y + (S^{-} S - I_p) z, \quad
+    z \in \R^p.
+  \]
+  % Andererseits kann jede Lösung von (N) in dieser Form angegeben werden.
+  Für die spezielle Lösung $z = 0$ gilt
+  \[
+    \hat{\beta} = S^{-} X^T Y
+  \]
+  für die MkQ-Schätzung für $\beta$.
+  Es gilt
+  \[
+    \E \hat{\beta} = S^{-} S \beta
+    \quad \text{und} \quad
+    \cov(\hat{\beta}) = \sigma^2 S^{-} S S^{-}.
+  \]
+\end{satz}
+
+\begin{bem}
+  Bei Nichteindeutigkeit der Lsg von (N) gilt i.\,A. $S^{-} S \neq I_p$. \\
+  Falls $\rk X = \rk S = p$, so gilt $\E \hat{\beta} = \beta$ und $\cov \hat{\beta} = \sigma^2 S^{-1}$
+\end{bem}
+
+% Der Begriff der schätzbaren Funktion (estimable function)
+
+\begin{defn}
+  Eine Linearkombination $l(\beta) = c^T \beta$ mit $c \in \R^p$, $\beta \in \R^p$ heißt bzgl. des linearen Modells $[Y, X \beta, \sigma^2 I_n]$ \emph{schätzbare Funktion}, falls ein $a \in \R^n$ mit $c = X^T a$ existiert.
+\end{defn}
+
+% Die Bedeutung schätzbarer Funktionen ergibt sich aus
+
+\begin{satz}
+  Es sind äquivalent:
+  \begin{itemize}
+    \item $l(\beta) = c^T \beta$ ist eine schätzbare Funktion
+    \item $\hat{l} \coloneqq l(\hat{\beta}) \coloneqq c^T \hat{\beta}$ (wobei $\hat{\beta}$ MkQ-Schätzung) ist eine lin. Funktion von~$Y$ und eine erwartungstreue Schätzung für $l(\beta)$ %(\dh{} $\E l(\hat{\beta}) = l(\beta)$)
+    \item $c \in \im(X^T) = \im(X^T X)$
+    \item $l(\hat{\beta}) = c^T \hat{\beta}$ ist konstant für alle $\hat{\beta}$, die Lösung von (N) sind, \dh{} $X^T X \hat{\beta} = X^T y$.
+    \item Es existiert ein $a \in \R^n$ mit $\E (a^T Y) = c^T \beta$.
+  \end{itemize}
+\end{satz}
+
 \end{document}
