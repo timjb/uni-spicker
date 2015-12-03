@@ -38,6 +38,7 @@
 \newcommand{\Blocks}{\mathcal{B}} % Blöcke einer Inzidenzstruktur
 \newcommand{\Pow}{\mathcal{P}} % Potenzmenge (powerset)
 \newcommand{\Geraden}{\mathcal{G}} % Geraden in Blocksystem
+\newcommand{\RM}{\mathcal{R}} % Reed-Muller-Code
 
 \begin{document}
 
@@ -1468,7 +1469,7 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 \fi
 
 \begin{satz}
-  Für $m \geq 1$ gilt $A_2^\lin(2^m, 2^{m-1}) = A_2(2^m, 2^{m-1}) = 2^{m+1}$, \dh{} es existiert ein $[2^m, m+1, 2^m]$-Code.
+  Für $m \geq 1$ gilt $A_2^\lin(2^m, 2^{m-1}) = A_2(2^m, 2^{m-1}) = 2^{m+1}$, \dh{} es existiert ein $[2^m, m+1, 2^{m-1}]$-Code.
 \end{satz}
 
 \begin{konstr}
@@ -1498,17 +1499,92 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
   $\mathcal{B}_m \coloneqq \F_2^{\F_2^m} = $ Algebra der Booleschen Fktn in $m$ Var.
 \end{nota}
 
-\begin{bem}
+\begin{defn}
   % Führe Variablen $x_1, \ldots, x_m$ ein.
   % Betrachte die Polynomalgebra über $\F_2$ in diesen Variablen, $\F_2[x_1, \ldots, x_m]$.
-  Die Abbildung
-  \[
-    \F_2[x_1, \ldots, x_m] \to \mathcal{B}_m, \quad
+  %Die Abbildung
+  $
+    \Gamma : \F_2[x_1, \ldots, x_m] \to \mathcal{B}_m, \quad
     f(x) \mapsto (\overline{f} : v \mapsto f(v_1, \ldots, v_m))
+  $
+\end{defn}
+
+% Vorlesung vom 3.12.2015
+
+\begin{satz}
+  $\Gamma$ ist ein surjektiver Algebra-Homomorphismus mit
+  \[ \ker \Gamma = \langle x_1^2 + x_1, \ldots, x_m^2 + x_m \rangle \subset \F_2[x_1, \ldots, x_m] = \F_2[\vec{x}]. \]
+\end{satz}
+
+\begin{kor}
+  $
+    \arraycolsep=2pt
+    \begin{array}[t]{r c l}
+      \mathcal{B}_m & \cong & \F_2[\vec{x}] / \langle x_1^2 + x_1, \ldots, x_m^2 + x_m \rangle \\
+      & \cong & \F_2[\vec{x}]_{\text{red}} \coloneqq \text{span} \{ \text{Monome } x^\alpha \text{ mit } \alpha \leq (1, \nldots, 1) \}
+    \end{array}
+  $
+\end{kor}
+
+% §8.4 Die binären Reed-Muller-Codes
+
+\begin{nota}
+  $x_I \coloneqq \prod_{i \in I} x_i$ für $I \subset \{ 1, \ldots, m \}$
+\end{nota}
+
+\begin{defn}
+  Der (binäre) \emph{Reed-Muller-Code} zu $(r, m)$ ist
+  \[
+    \RM(r, m) \coloneqq \Gamma(X(r, m))
+    \enspace \text{mit} \enspace
+    X(r, m) \coloneqq \spann \Set{x_I}{I \subset \{ 1, \ldots, m \}, \abs{I} \leq r}
   \]
-  ist ein surj. Algebra-Homomor. mit Kern $\langle x_1^2 + x_1, \ldots, x_m^2 + x_m \rangle$.
-  Somit gilt
-  $\mathcal{B}_m \cong \F_2[x_1, \ldots, x_m] / \langle x_1^2 + x_1, \ldots, x_m^2 + x_m \rangle$.
+\end{defn}
+
+\begin{bspe}
+  \begin{itemize}
+    \item $\RM(0, m) = \{ 0 \cdots 0, 1 \cdots 1 \} = (2^m)\text{-Wiederholungscode}$
+    \miniitem{0.4 \linewidth}{$\RM(-1, m) \coloneqq \{ 0 \cdots 0 \}$}
+    \miniitem{0.4 \linewidth}{$\RM(m, m) \coloneqq \mathcal{B}_m$}
+  \end{itemize}
+\end{bspe}
+
+\begin{bem}
+  \begin{itemize}
+    \item 
+    $
+      \arraycolsep=3pt
+      \begin{array}[t]{c c c c c c c}
+        \RM(-1, m) & \subseteq & \RM(0, m) & \subseteq & \RM(1, m) & \subseteq & \cdots \\
+        \perp && \perp && \perp \\
+        \RM(m, m) & \supseteq & \RM(m-1, m) & \supseteq & \RM(m-2, m) & \supseteq & \cdots
+      \end{array}
+    $
+    \item $\dim \RM(r, m) = \sum_{j=0}^r \binom{m}{j}$
+  \end{itemize}
 \end{bem}
+
+\begin{satz}
+  $\RM(1, m)$ hat Minimalgewicht $2^{m-1}$.
+  Gewichtsverteilung: $A_0 = 1$, $A_{2^m} = 1$, $A_{2^{m-1}} = 2^{m+1} - 2$, $A_i = 0$ für alle anderen $i$.
+\end{satz}
+
+% $\RM(1, m)$ entspricht dem Vektorraum aller affinen Linearformen in $m$ Variablen
+
+\begin{bem}
+  %$\Ham_2(m) : [2^m - 1, 2^m - 1 - m, 3]$
+  %$\Sim_2(m) = \Ham_2(m)^\perp : [2^m - 1, m, 2^{m-1}]$
+  %$\widehat{\Sim_2(m)} : [2^m, m, 2^{m-1}]$
+  %Es gilt
+  $\RM(1, m) = \Gamma(\spann \{ 1 \}) \oplus \widehat{\Sim_2(m)}$
+\end{bem}
+
+\begin{satz}
+  $\RM(r, m)^\perp = \RM(m - r - r, m)$ für alle $r$
+\end{satz}
+
+\begin{kor}
+  Ist $m$ ungerade, so ist $\RM(\tfrac{m-1}{2}, m)$ selbstdual.
+\end{kor}
 
 \end{document}
