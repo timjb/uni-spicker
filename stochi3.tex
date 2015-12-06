@@ -1219,19 +1219,18 @@
 
 % Vorlesung vom 3.12.2015
 
-Multiple lineare Regression
+\begin{bsp}[\emph{Multiple lineare Regression}]
+  \[ Y_i = \beta_0 + \beta_1 X_1^{(i)} + \ldots + \beta_m X_m^{(i)} + \epsilon_i \]
+  % $\beta = (\beta_1, \ldots, \beta_m)^T$
+  % Regressionskoeffizienten $X = ...$
+\end{bsp}
 
-$Y_i = \beta_0 + \beta_1 X_1^{(i)} + \ldots + \beta_m X_m^{(i)} + \epsilon_i$
 
-$\beta = (\beta_1, \ldots, \beta_m)^T$
+\begin{bsp}[\emph{Quasilineare (multiple) Regression}]
+  \[ Y_i = \beta_0^{(i)} + \beta_1 f(X_1^{(i)}) + \ldots + \beta_m f(X_m^{(i)}) + \epsilon_i \]
+  mit (nichtlineare) Funktionen $f_1$, \ldots, $f_m$
+\end{bsp}
 
-Regressionskoeffizienten $X = ...$
-
-Quasilineare (multiple) Regression
-
-$Y_i = \beta_0^{(i)} + \beta_1 f(x_1^{(i)}) + \ldots + \beta_m f(x_m^{(i)}) + \epsilon_i$
-
-$f_1$, \ldots, $f_m$ (nichtlineare) Funktionen
 
 \begin{defn}
   Eine Matrix $A^{-} \in \R^{n \times m}$ heißt \emph{g-Inverse} (g = generalized) von $A \in \R^{m \times n}$, wenn für jedes $y \in \R^m$, für welches $Ax = y$ lösbar ist, auch $x = A^{-} y$ eine Lösung ist.
@@ -1264,13 +1263,11 @@ $f_1$, \ldots, $f_m$ (nichtlineare) Funktionen
   Die allgemeine Lösung von (N) lautet mit $S \coloneqq X^T X$:
   \[
     \beta = S^{-} X^T y + (S^{-} S - I_p) z, \quad
-    z \in \R^p.
+    \text{wobei } z \in \R^p.
   \]
   % Andererseits kann jede Lösung von (N) in dieser Form angegeben werden.
-  Für die spezielle Lösung $z = 0$ gilt
-  \[
-    \hat{\beta} = S^{-} X^T Y
-  \]
+  Für die spezielle Lsg $z = 0$ gilt
+  $\hat{\beta} = S^{-} X^T Y$
   für die MkQ-Schätzung für $\beta$.
   Es gilt
   \[
