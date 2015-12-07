@@ -1301,4 +1301,75 @@
   \end{itemize}
 \end{satz}
 
+% Vorlesung vom 7.12.2015
+
+\begin{satz}[\emph{Gauß-Markov}]
+  In einem lin. Modell $[Y, X \beta, \sigma^2 I_n]$ ex. für jede schätzbare (lin.) Funktion $l(\beta) = c^T \beta$ eine eindeutig bestimmte, in $Y$ lin. erwartungstreue Schätzung $\hat{l} = a_*^T Y$ (für genau ein $a_* \in \im(X) \subseteq \R^n$) und diese hat die Gestalt $\hat{l} = l(\hat{\beta}) = c^T \hat{\beta}$, wobei $\hat{\beta}$ eine MkQ-Schätzung ist.
+  Außerdem besitzt $\hat{l}$ minimale Varianz in der Klasse aller linearen erwartungstreuen Schätzungen $\hat{l} = a^T Y$.
+\end{satz}
+
+\begin{konstr}
+  $a_* = X (X^T X)^{-} c$
+\end{konstr}
+
+\begin{defn}
+  Der Schätzer heißt Best Linear Unbiased Estimation (\emph{BLUE}).
+\end{defn}
+
+% §4.3 Schätzung der Modellstreuung $\sigma^2$
+
+\begin{bem}
+  Es gilt
+  %Darstellung von $S(Y, \hat{\beta})$:
+  \begin{align*}
+    S(Y, \hat{\beta}) & = \min_{\beta \in \R^p} \norm{Y - X \beta}^2 = \norm{Y - X \hat{\beta}}^2 = (Y - X \hat{\beta})^T (Y - X \hat{\beta}) = \\
+    & = Y^T Y - \underbrace{Y^T X \hat{\beta}}_{\mathclap{= (X \hat{\beta})^T X \hat{\beta}}} - (X \hat{\beta})^T Y + \underbrace{(X \hat{\beta})^T X \hat{\beta}}_{\mathclap{= \hat{\beta}^T X^T X \hat{\beta} = \beta^T X^T Y}} = \norm{Y}^2 - \norm{X \hat{\beta}}^2.
+  \end{align*}
+\end{bem}
+
+\begin{defn}
+  $(Y - X \hat{\beta})$ \enspace
+  heißt \emph{Restvektor} oder \emph{Residuum}.
+\end{defn}
+
+\begin{lem}
+  Falls $\hat{\beta}$ MkQ-Schätzung, so gilt
+  \begin{itemize}
+    \item $\E (Y - X \hat\beta) = 0$
+    \item $c^T \beta$ ist eine schätzbare Funktion und $\E (c^T \hat{\beta} (Y - X \hat\beta)) = 0$
+    \item $\cov(Y - X \hat\beta) = \cov(Y) - \cov(X \hat\beta)$.
+  \end{itemize}
+\end{lem}
+
+Orthogonale Transformation von $[Y, X \beta, \sigma^2 I_n]$
+
+$X = (\tilde{x}_1 \cdots \tilde{x}_p)$ mit $\tilde{x}_i \in \R^p$, $\rk X = r \leq p$.
+
+Es existiert eine orthonormale Basis $o_1, \ldots, o_r$ von $\im(X)$ und $\sigma_{r+1}, \ldots, \sigma_n \in \im(X)^\perp$.
+
+$Y = \sum_{i=1}^n o_i Z_i$, $Z = (Z_1 \cdots Z_n)^T$, \dh{} $Y = O Z$, wobei $O (o_1 \cdots o_n)$, $O_1 = (a_1 \cdots a_r)^T$, $O_2 = (a_{r+1} \cdots a_n)^T$
+
+$Z = O^{-1} Z = O^T Y$
+
+$\E Z = O^T \E Y = O^T X \beta = \begin{psmallmatrix}
+  O_1^T \\ O_2^T
+\end{psmallmatrix} X \beta$
+
+$\E Z_i = o_i^T X \beta = \begin{cases}
+  o_i^T X \beta & \text{für $i = 1, \ldots, r$,} \\
+  0 & \text{für $i = r+1, \ldots, n$.}
+\end{cases}$
+
+$\E Z = \begin{psmallmatrix}
+  O_1^T X \beta \\ 0
+\end{psmallmatrix}$, $\cov(Z) = \cov(O^T Y) = O^T \cov(Y) O = \sigma^2 I$
+
+Transformation: $[Y, X \beta, \sigma^2 I_n] \rightsquigarrow [Z, O^T X \beta, \sigma^2 I_n]$ mit $Z = O^T Y$
+
+\begin{satz}
+  In einem linearen Modell $[Y, X \beta, \sigma^2 I_n]$ mit $\rk X = r \leq p$ und einer MkQ-Schätzung $\hat{\beta}$ ist
+  \[ \sigma^2 = \tfrac{1}{n-r} S(Y, \hat{\beta}) = \tfrac{1}{n-r} \norm{Y - X \hat\beta}^2 = \tfrac{1}{n-r} \sum_{i=1}^n (Y_i - \sum_{j=1}^p x_{ij} \hat\beta_r)^2 \]
+  eine erwartungstreue Schätzung für $\sigma^2$.
+\end{satz}
+
 \end{document}
