@@ -31,6 +31,7 @@
 \newcommand{\loc}{\text{loc}} % lokal
 \newcommand{\ind}{\mathbbm{1}} % Indikatorfunktion
 \newcommand{\Testfun}{\mathcal{D}} % Raum der Testfunktionen
+\DeclareMathOperator{\spann}{span} % Spann
 
 \begin{document}
 
@@ -1616,5 +1617,66 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
     \forall \, \phi \in H^1(\Omega)
   \]
 \end{defn}
+
+% Vorlesung vom 7.12.2015
+
+% §4.5 Approximation von Variationsgleichungen
+
+Gegeben: Hilbertraum $H$, $B : H \times H \to \R$ eine beschränkte, koerzive Bilinearform, $l : H \to \R$ linear, stetig.
+
+Gesucht: ist $u \in H$ mit $\fa{\phi \in H} B(u, \phi) = l(\phi)$ (VGL).
+
+Idee: Seien $U_n \subset H$ ein normierter Raum mit $\dim(U_n) = d_n < \infty$, $B_n : U_n \times U_n \to \R$ eine beschränkte, koerzive Bilinearform, $l_n \in U'_n.$
+
+Gesucht ist $u_n \in U_n$ mit $\fa{\phi \in U_n} B(u_n, \phi) = l_n(\phi)$ (VGL)\tss{n}
+
+Fragen: Wie wählt man $U_n$, $B_n$ und $l_n$ so, dass $u_n \xra[n \to \infty]{} u$, wobei $u$ die Lösung von (VGL) ist?
+Wie berechnet man die Lösung $u_n$ von (VGL)\tss{n}?
+
+\begin{defn}
+  Die Approximation von (VGL) mittels (VGL)\tss{n} mit $U_n \subset H$ und $B_n = B|_{U_n \times U_n}$ heißt \emph{konforme Approximation} von (VGL).
+  Eine solche Methode wird als \emph{Verfahren von Ritz} bezeichnet.
+\end{defn}
+
+Sei $\{ w_1, \ldots, w_{d_n} \}$ eine Basis von $U_n$ und sei $u_n$ eine Lösung von (VGL)\tss{n}.
+
+$u_n = \sum_{i=1}^{d_n} \gamma_i w_i$
+
+$B_n(u_n, \phi) = \sum_{i=1}^{d_n} \gamma_i B(w_i, \phi)$
+
+$\sum_{j=1}^{d_n} \gamma_j B(w_j, w_i) = l(w_i)$ für $i = 1, \ldots, d_n$
+
+$\hat{B} \gamma = \hat{l}$ mit $\hat{B} = (B_{ij})$ mit $B_{ij} = B(w_j, w_i)$, $\hat{l} = (l_n(w_1), \ldots, l_n(w_{d_n}))^T$ (Galerkin-Gleichung)
+
+% 4.14
+\begin{satz}
+  Für die Lösungen $u_n$ der konformen Approximation (VGL)\tss{n} und die Lösung $u$ von (VGL) gilt
+  \[ \norm{u_n - u}_H \leq c \left( \inf_{v \in U_n} \norm{u - v}_H + \norm{l_n - l}_{U_n'} \right) \]
+\end{satz}
+
+\begin{folgerung}
+  Es genügt, $U_n$ und $l_n$ so zu wählen, dass
+  \begin{itemize}
+    \item $\fa{u \in H} \inf_{v_n \in U_n} \norm{u - v_n}_H \xra[n \to \infty]{} 0$ und
+    \item $\norm{l_n - l}_{U'_n} \xra[n \to \infty]{} 0$.
+  \end{itemize}
+\end{folgerung}
+
+Wahl von $U_n$:
+\begin{itemize}
+  \item Eigenfunktionen: $\LL w_j = \lambda_j w_j$
+\end{itemize}
+
+\begin{bsp}
+  \[
+    \left\{ \begin{array}{r c l l}
+      - u_{xx} & = & f & \text{in } \Omega = \ointerval{0}{1} \\
+      u(u) & = & u(1) = 0
+    \end{array} \right.
+  \]
+  Die Eigenfunktionen sind $w_j(x) = \sin(\pi j x)$ für $j > 0$.
+  Wir setzen $U_n = \spann \Set{w_j}{j = 1, \ldots, n}$.
+\end{bsp}
+
 
 \end{document}
