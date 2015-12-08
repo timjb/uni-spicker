@@ -1678,5 +1678,109 @@ Wahl von $U_n$:
   Wir setzen $U_n = \spann \Set{w_j}{j = 1, \ldots, n}$.
 \end{bsp}
 
+% Vorlesung vom 8.12.2015
+
+% 2) Polynome als Basisfunktionen:
+% U_n \coloneqq \spann \Set{w_j(x) = x^j (1 - x)}{j = 1, \ldots, n \subset H_0^1(\Omega) }
+
+3) $0 = x_0 < x_1 < \ldots < x_n < x_{n+1} = 1$
+$h = \nicefrac{1}{n+1}$, $x_i = i h$.
+$U_n = \Set{v \in \Cont(0, 1)}{v|_{\cinterval{x_{i-1}}{x_i}} \in \mathbb{P}_1[X], i = 1, \ldots, n+1, v(0) = v(1) = 0}$
+
+Hutfunktionen:
+
+\[
+  w_j (x) = \begin{cases}
+    \tfrac{x - x_{j-1}}{h} & \text{ falls } x \in \ocinterval{x_{j-1}}{x_j} \\
+    \tfrac{x_{j+1} - x}{h} & \text{ falls } x \in \cointerval{x_j}{x_{j+1}} \\
+    0 & \text{sonst.}
+  \end{cases}
+\]
+
+\[
+  \hat{B} = \frac{1}{h} \begin{pmatrix}
+    2 & -1 & &&& 0 \\
+    -1 & 2 & -1 &&& \\
+    & -1 & 2 & -1 && \\
+    && \ddots & \ddots & \ddots \\
+    &&& -1 & 2 & -1 \\
+    0 &&&& -1 & 2
+  \end{pmatrix}, \quad
+  l_n(w_j) = h f(x_j)
+\]
+
+Wenn wir also die Hutfunktionen als Basisfunktionen wählen, so erhalten wir das finite-Differenzen-Verfahren.
+
+% §5. Methode der finiten Elementen (FEM)
+\section{Methode der finiten Elementen}
+
+\[
+  \text{(VGL)} \enspace
+  \left\{
+  \begin{array}{r c l l}
+    B(u, \phi) &=& l(\phi) & \forall \, \phi \in H \\
+    u &\in& H
+  \end{array}
+  \right.
+\]
+
+\[
+  \text{(VGL)\tss{n}} \enspace
+  \left\{
+  \begin{array}{r c l l}
+    B_n(u_n, \phi) &=& l_n(\phi) & \forall \, \phi \in U_n \subset H \\
+    u_n &\in& U_n
+  \end{array}
+  \right.
+\]
+
+\begin{idee}
+  Wähle als Ansatzfunktionen zur Approximation von (VGL) mittels (VGL)\tss{n} eine Zusammensetzung von auf endlich vielen Teilstücken von $\Omega$ definierten Funktionen.
+\end{idee}
+
+\begin{bem}
+  Als Teilgebiete verwendet man
+  in $\R^1$ regelmäßige Teilintervalle, 
+  in $\R^2$ Dreiecke oder Rechtecke und
+  in $\R^3$ Tetraeder.
+  Als lokale Ansatzfunktionen über den Teilgebieten verwenden wir Polynome.
+  Globale Ansatzfktn über $\Omega$ sind lokale Ansatzfktn mit best. Glattheitsbedingungen am Rand der Teilgebiete.
+\end{bem}
+
+\begin{defn}
+  Ein \emph{finites Element} in $\R^d$ ist ein Tripel $(K, P, \Sigma)$ mit %den Eigenschaften
+  \begin{itemize}
+    \item $K \subset \R^d$ ist kompakt, $\partial K$ ist Lipschitz-stetig,
+    \item $P$ ist ein endlichdimensionaler linearer Raum von Funktionen $p \in \Cont^s(K, \R)$
+    \item $\Sigma = \{ b_1, \ldots, b_m \}$ mit $b_j \in (\Cont^s(K, \R))'$ ist \emph{P-unisolvent}, \dh{}
+    \[
+      \fa{\alpha \in \R^m} \exu{p \in P} b_j(p) = \alpha_j, \enspace j = 1, \ldots, m
+    \]
+  \end{itemize}
+\end{defn}
+
+\begin{bemn}
+  \begin{itemize}
+    \item Sei $\Sigma = \{ b_1, \ldots, b_m \}$ P-unisolvent.
+    Dann sind $b_1, \ldots b_m$ linear unabhängig.
+    \item Sei $p_j \in P$ so gewählt, dass $b_i(p_j) = \delta_{ij}$.
+    Dann ist $\{ p_1, \ldots, p_m \}$ eine Basis von $P$.
+    \item Sei $\{ p_1, \ldots, p_m \}$ eine Basis von $P$ und seien $b_i \in (\Cont^s(K, \R))'$ mit $b_i(p_j) = \delta_{ij}$, $i, j = 1, \ldots, m$.
+    Dann ist $\{ b_1, \ldots, b_m \}$ P-unisolvent.
+  \end{itemize}
+\end{bemn}
+
+% §5.1 Finite Elemente vom Lagrange-Typ
+
+\begin{defn}
+  Seien $a_1, \ldots, a_{d+1} \in \R^d$.
+  Dann heißt
+  \[
+    K = \Set{x = \sum_{j=1}^{d+1} \mu_j a_j}{0 \leq \mu_j \leq 1, \, j = 1, \ldots, d + 1, \mu_1 + \ldots + \mu_{d+1} = 1} \subset \R^d
+  \]
+  ein \emph{$d$-Simplex} mit Ecken $a_1, \ldots, a_{d+1}$.
+  Dabei heißen $\mu_1, \ldots, \mu_{d+1}$ baryzentrische Koordinaten von $x$.
+  Der $d$-Simplex $K$ heißt \emph{nicht entartet}, falls $a_1, \ldots, a_{d+1}$ affin unabhängig sind.
+\end{defn}
 
 \end{document}
