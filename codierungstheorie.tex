@@ -39,6 +39,7 @@
 \newcommand{\Pow}{\mathcal{P}} % Potenzmenge (powerset)
 \newcommand{\Geraden}{\mathcal{G}} % Geraden in Blocksystem
 \newcommand{\RM}{\mathcal{R}} % Reed-Muller-Code
+\newcommand{\PCE}[1]{\widehat{#1}} % Parity-Check-Erweiterung
 
 \begin{document}
 
@@ -463,7 +464,7 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 \end{defn}
 
 \begin{nota}
-  Sei $C$ ein $\R_q$-linearer Code.
+  Sei $C$ ein $\F_q$-linearer Code.
   Sei $k \coloneqq \dim(C)$.
   Dann ist $\abs{C} = q^k$, also $C$ ein $(n, q^k)$-Code.
   Man sagt, $C$ ist ein $[n, k]$-Code. \\
@@ -1536,8 +1537,8 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
   Der (binäre) \emph{Reed-Muller-Code} zu $(r, m)$ ist
   \[
     \RM(r, m) \coloneqq \Gamma(X(r, m))
-    \enspace \text{mit} \enspace
-    X(r, m) \coloneqq \spann \Set{x_I}{I \subset \{ 1, \ldots, m \}, \abs{I} \leq r}
+    \enspace \text{mit }
+    X(r, m) \coloneqq \spann \Set{x_I}{I \subset \{ 1, \nldots, m \}, \abs{I} \leq r}
   \]
 \end{defn}
 
@@ -1586,5 +1587,135 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 \begin{kor}
   Ist $m$ ungerade, so ist $\RM(\tfrac{m-1}{2}, m)$ selbstdual.
 \end{kor}
+
+% Vorlesung vom 8.12.2015
+
+\begin{bsp}
+  $\RM(1, 3) = \PCE{\Ham_2}(3)$ ist ein selbst-dualer $[2^3, 3 + 1, 2^2]$-Code.
+\end{bsp}
+
+\begin{lem}
+  $\PCE{\Ham_2(m)} = \RM(m-2, m)$
+\end{lem}
+
+\begin{satz}
+  Sei $0 \leq r \leq m \geq 1$. Der binäre Reed-Muller-Code $\RM(r, m)$ hat das Minimalgewicht $2^{m-r}$
+\end{satz}
+
+\begin{kor}
+   $\RM(r, m)$ ist ein $[2^m, \sum_{i=0}^r \binom{m}{i}, 2^{m-r}]$-Code
+\end{kor}
+
+% §8.5 Hadamard-Matrizen und Hadamard-Designs
+\subsection{Hadamard-Matrizen und Hadamard-Designs}
+
+\begin{satz}
+  Für $A \in \R^{n \times n}$ mit $\abs{A_{ij}} \leq 1$ gilt $\abs{\det(A)} \leq \sqrt{n^n}$. \\
+  Gleichheit liegt genau dann vor, wenn $\abs{A_{ij}} = 1$ für alle $i$, $j$ und wenn $A A^T = n E_n$.
+\end{satz}
+
+\begin{defn}
+  Eine Matrix $H \in \R^{n \times n}$ mit $H_{ij} \in \{ \pm 1 \}$ heißt \emph{Hadamard-Matrix} der Ordnung $n$, falls $H H^T = n E_n$.
+\end{defn}
+
+\begin{bsp}
+  $H_2 = \begin{psmallmatrix}
+    1 & 1 \\
+    1 & -1
+  \end{psmallmatrix}$
+  ist eine Hadamard-Matrix.
+\end{bsp}
+
+\begin{satz}
+  Ist $H \!\in\! \R^{n \times n}$ eine Hadamard-Matrix, so gilt $n \!\in\! \{ 1, 2 \} \cup 4 \N$.
+\end{satz}
+
+\begin{satz}
+  Sei $l \geq 1$ und $H$ eine Hadamard-Matrix der Ordnung $4 l$.
+  %Dann gilt:
+  \begin{itemize}
+    \item Es gibt einen symmetrischen $S_{l-1}(2, 2l - 1, 4l - 1)$-Blockplan.
+    \item Es gibt einen binären $(4l, 8l, 2l)$-Code. \\
+    Dieser ist optimal, also $A_2(4l, 2l) = 8l$.
+  \end{itemize}
+\end{satz}
+
+\begin{konstr}
+  \begin{itemize}
+    \item Wir können davon ausgehen, dass die erste Zeile und Spalte von $H$ nur Einsen enthalten (durch Multiplizieren mit $-1$).
+    Durch Streichen der ersten Zeile und Spalte erhalten wir aus $H$ eine Matrix $M \in \R^{4l - 1, 4l - 1}$.
+    In $M$ ersetzen wir $-1$ durch $0$ und bekommen so die Inzidenzmatrix des gesuchten Blockplans.
+    (Diese Konstruktion lässt sich umkehren.)
+    \item Der Code besteht aus den Zeilen von $H$ und $-H$ (wobei wir $\{ 0, 1 \} \leftrightarrow \{ -1, 1 \}$ anwenden).
+  \end{itemize}
+\end{konstr}
+
+\begin{lem}[\emph{Produktkonstruktion}]
+  Das Kronecker-Produkt $H \otimes L$ von Hadamard-Matrizen $H$ und $L$ der Ordnung $n$ bzw. $m$ ist selbst eine Hadamard-Matrix der Ordnung $n \cdot m$.
+\end{lem}
+
+% Ausgelassen: Beispiel
+
+\begin{satz}[\emph{Paley}]
+  Sei $p > 2$ prim, $q = p^k$.
+  Sei $\epsilon \in \N$ sodass $4 \divides 2^\epsilon \cdot (q + 1)$.
+  Dann existiert eine Hadamard-Matrix der Ord. $n = 2^\epsilon \cdot (q+1)$.
+\end{satz}
+
+\begin{konstr}
+  Der \emph{quadratische Charakter} von $\F_q$ ist die Abbildung
+  \[
+    \psi : \F_q \to \C, \quad
+    x \mapsto \begin{cases}
+      0 & \text{falls } x = 0, \\
+      1 & \text{falls } \ex{y \in \F_q \setminus \{ 0 \}} x = y^2, \\
+      -1 & \text{sonst.}
+    \end{cases}
+  \]
+  \begin{itemize}
+    \item Falls $q \equiv 3 \bmod{4}$: Dann definiert
+    \[
+      M_{xy} \coloneqq \begin{cases}
+        \psi(x - y) & \text{falls } x \neq y \\
+        -1 & \text{falls } x = y
+      \end{cases}
+    \]
+    eine Matrix $M \in \{ \pm 1 \}^{\F_q \times \F_q}$.
+    Durch Hinzufügen einer $1$-Spalte und $1$-Zeile erhalten wir eine Hadamard-Matrix $H \in \R^{q+1 \times q+1}$.
+    Durch die Produkt- konstruktion mit $H_2$ erhält man die gesuchten Matrizen.
+    \item Falls $q \equiv 1 \bmod{1}$:
+    Dann ist $2 (q+1)$ durch $4$ teilbar.
+    Setze $\F_q' \coloneqq \F_q \cup \{ \infty \}$.
+    Wir definieren $M \in \{ -1, 0, 1 \}^{\F_q' \times \F_q'}$ durch
+    \[
+      M_{xy} \coloneqq \begin{cases}
+        1 & \text{falls } \infty \in \{ x, y \} \neq \{ \infty \}, \\
+        0 & \text{falls } x = y = \infty, \\
+        \psi(x - y) & \text{sonst.}
+      \end{cases}
+    \]
+    Weiter sei \enspace
+    $
+      A = H_2 = \begin{psmallmatrix}
+        1 & 1 \\ 1 & -1
+      \end{psmallmatrix}, \enspace
+      B = \begin{psmallmatrix}
+        1 & -1 \\ -1 & -1
+      \end{psmallmatrix}.
+    $ \\[2pt]
+    Schließlich bestehe $H = (H_{xy})_{x, y \in \F_q'}$ aus den $(2 \times 2)$-Blöcken
+    \[
+      H_{xy} \coloneqq \begin{cases}
+        B & \text{falls } M_{xy} = 0, \\
+        A & \text{falls } M_{xy} = 1, \\
+        -A & \text{falls } M_{xy} = -1.
+      \end{cases}
+    \]
+    Dann ist $H$ eine Hadamard-Matrix der Größe $2 (q + 1)$.
+    Durch Produktbildung mit $H_2$ erhält man Hadamard-Matrizen der gesuchten Ordung.
+  \end{itemize}
+\end{konstr}
+
+% §8.6 Zur Decodierung der binären Reed-Muller-Codes erster Ordnung
 
 \end{document}
