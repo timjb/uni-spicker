@@ -24,6 +24,8 @@
 
 \maketitle{Zusammenfassung Platzeffiziente Alg.}
 
+Basierend auf dem Skript zur gleichnamigen Vorlesung von Torben Hagerupp an der Universität Augsburg im WS15/16.
+
 % Vorlesung vom 14.10.2015
 
 % 1. Introduction
@@ -455,5 +457,43 @@
   Dann gilt $s (t_{\text{choice}} + t_{\text{delete}}) \leq \tfrac{n}{2}$.
 \end{kor}
 
+% Vorlesung vom 2.12.2015
+
+% Breadth-First-Search
+
+\begin{defn}
+  Sei ein Graph gegeben.
+  Eine allgemeine Suche durch den Graphen geht wie folgt:
+  Es gibt weiße, graue und schwarze Knoten, explorierte und unexplorierte Kanten.
+  Zunächst sind alle Knoten weiß, bis auf einen grauen Startknoten und alle Kanten unexploriert.
+  Solange es noch einen grauen Knoten $u$ gibt, wählen wir einen solchen aus.
+  Hat $u$ keine unexplorierten Kanten, so färben wir $u$ schwarz.
+  Wenn $u$ noch eine unexplorierte Kante $(u, v)$ hat, so \textit{explorieren} wir $(u, v)$, \dh{} falls $v$ weiß ist, so färben wir $v$ grau und rufen eine Benutzerfunktion mit $(u, v)$ auf.
+\end{defn}
+
+\begin{bem}
+  Verschiedene Suchstrategien unterscheiden sich darin, wie $u$ gewählt wird.
+\end{bem}
+
+\begin{defn}[\emph{Breitensuche}]
+  Drei Varianten:
+  %\setlength{\leftmargin}{20pt}
+  \begin{enumerate}[label=\Alph*.,leftmargin=2em]
+    \item $u$ ist der älteste graue Knoten
+    \item Der graue Knoten $u$ aus der vorherigen Iteration wird weiterverwendet, falls er noch unexplorierte Kanten besitzt.
+    Andernfalls ist $u$ wie in C.
+    \item $u$ ist ein grauer Knoten mit minimaler Distanz vom Startknoten.
+  \end{enumerate}
+\end{defn}
+
+% 6.11
+\begin{thm}
+  Sei ein Graph mit $n$ Knoten und $m$ Kanten gegeben, $r$ ein Startknoten, von dem aus alle anderen Knoten erreichbar sind.
+  Die Variante B der Breitensuche kann in $O(n + m)$ Zeit mit $O(n)$ Bits an Speicher durchgeführt werden.
+\end{thm}
+
+\begin{idee}
+  Verwende zwei Choice-Dictionaries, um graue Knoten zu speichern: Eines für alle Knoten in Entfernung $d$, eines für alle Knoten in Entfernung $d + 1$ vom Startknoten.
+\end{idee}
 
 \end{document}
