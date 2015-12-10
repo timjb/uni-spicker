@@ -1372,4 +1372,50 @@ Transformation: $[Y, X \beta, \sigma^2 I_n] \rightsquigarrow [Z, O^T X \beta, \s
   eine erwartungstreue Schätzung für $\sigma^2$.
 \end{satz}
 
+% Vorlesung vom 10.12.2015
+
+% §4.4 Das normalverteilte lineare Modell $[Y, \Normal_n(X \beta, \sigma^2 I_n)]$
+
+\begin{satz}
+  Für ein normalverteiltes lineares Modell $[Y, \Normal_n(X \beta, \sigma^2 I_n)]$ mit $\rk X = r \leq p$ gilt:
+  \begin{itemize}
+    \item Die ML-Schätzung für $\beta \in \R^p$ stimmt mit der MkQ-Schätzung $\hat\beta$ überein und es gilt $\hat\beta \sim \Normal_p(\E \hat\beta, \cov(\hat{\beta}))$.
+    \item Die ML-Schätzung für $\sigma^2$ lautet $\hat\sigma_n^2 = \tfrac{S(Y, \hat{\beta})}{n} = \tfrac{n-r}{n} \hat\sigma^2$ mit $\E \hat\sigma_n^2 = \tfrac{n-r}{n} \sigma^2 \xra[n \to \infty]{} \sigma^2$ (asympt. erw.-treu) und $\tfrac{S(Y, \hat\beta)}{\sigma^2} \sim \chi_{n-r}^2$
+    \item Für einen Vektor $l^T(\beta) = (l_1(\beta), \ldots, l_q(\beta))$ von $q \leq r$ linear unabhängigen schätzbaren Funktionen $l_i(\beta) = c_i^T \beta$, $c_i \in \R^p$
+    gilt $\hat{l} \coloneqq l(\hat{\beta}) \sim \Normal_q(l(\beta), \sigma^2 A_* A_*^T)$ mit $\rk A_* = q$, wobei
+    \begin{align*}
+      A_* = (a_{*,1}, \ldots, a_{*,q})^T \quad
+      \text{mit } a_{*,i} \in L(X) \enspace & \text{optimal gemäß} \\
+      & \text{Gauß-Markov-Theorem}
+      % $c_i^T \hat{\beta} = a_{*,i}^T Y$ für $i = 1, \ldots, q$
+    \end{align*}
+    \item Die Schätzungen $\hat{l} = l(\hat\beta)$ und $\hat\sigma^2$ (bzw. $\hat\sigma_n^2$) sind unabhängig.
+  \end{itemize}
+\end{satz}
+
+\begin{kor}
+  Für $\rk X = p$ gilt $\hat{\beta} \sim \Normal_p(\beta, \sigma^2 (X^T X)^{-1})$ und $\hat\beta$ und $\hat\sigma^2$ sind unabhängig.
+  (Grund: $\beta_i = e_i^T \beta$ sind schätzbare Funktionen)
+\end{kor}
+
+\begin{test}[$\sigma^2$-Streuungstest im Modell $(Y, \Normal_n(X \beta, \sigma^2 I_n))$]
+  % TODO: Ersetze runde Klammern durch eckige (Problem: LaTeX-Kompilierfehler)
+  $H_0 : \sigma^2 = \sigma_0^2$, $\alpha > 0$ vorgegeben, $\rk X = r \leq p$
+  $T \coloneqq \tfrac{\norm{Y - X \hat{\beta}}^2}{\sigma_0^2} \sim \chi_{n-r}^2$ (unter $H_0$)
+  Kritischer Berech für $T$: $K^* = \cinterval{0, \chi_{n-r, \nicefrac{\alpha}{2}^2}} \cup \cointerval{\chi_{n-r, 1 - \nicefrac{\alpha}{2}}}{\infty}$
+\end{test}
+
+Konfidenzschätzung für den Vektor der schätzbaren Funktionen
+\[
+  l(\beta) = (l_1(\beta), \ldots, l_q(\beta))^T, \enspace
+  1 \leq q \leq r \leq p < n, \enspace
+  l_1(\beta), \ldots, l_q(\beta) \text{ lin. unabh.}
+\]
+
+\[
+  \P((l(\hat\beta) - l(\beta))^T (A_* A_*^T)^{-1} (l(\hat\beta) - l(\beta)) \leq \tfrac{q}{n-r} \norm{Y - X \hat\beta}^2 \cdot F_{q, n - r, 1 - \alpha}) = 1 - \alpha.
+\]
+% wobei $F_{n_1, n_2}$ die F-Verteilung mit $(n_1, n_2)$ Freiheitsgraden ist.
+
+
 \end{document}
