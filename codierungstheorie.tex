@@ -27,7 +27,7 @@
 \DeclareMathOperator{\wt}{wt} % Hamming-Gewicht
 \DeclareMathOperator{\spann}{span} % aufgespannte (lineare) Hülle
 \newcommand{\lin}{\text{lin}} % linear
-\newcommand{\scp}[2]{\left( #1 \!\mid\! #2 \right)} % Skalarprodukt
+\newcommand{\scp}[2]{\left\langle #1, #2 \right\rangle} % Skalarprodukt
 \newcommand{\homogen}{\text{hom}} % homogen
 \newcommand{\divides}{|} % teilt
 \DeclareMathOperator{\Ham}{Ham} % Hamming-Code (was sonst?)
@@ -44,6 +44,8 @@
 \begin{document}
 
 \maketitle{Zusammenfassung Codierungstheorie}
+
+% Dieses Skript basiert auf einer Vorlesung von Prof. Dirk Hachenberger an der Universität Augsburg im WS\,15/16.
 
 % Vorlesung vom 13. Oktober 2015
 
@@ -1656,6 +1658,8 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 
 % Ausgelassen: Beispiel
 
+% Vorlesung vom 10.12.2015
+
 \begin{satz}[\emph{Paley}]
   Sei $p > 2$ prim, $q = p^k$.
   Sei $\epsilon \in \N$ sodass $4 \divides 2^\epsilon \cdot (q + 1)$.
@@ -1717,5 +1721,10 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 \end{konstr}
 
 % §8.6 Zur Decodierung der binären Reed-Muller-Codes erster Ordnung
+
+\begin{prop}
+  Sei $H \in \{ 1, -1 \}^{\F_2^m \times \F_2^m}$ definiert durch $H_{uv} \coloneqq (-1)^{\scp{u}{v}}$ für alle $u, v \in \F_2^m$.
+  Dann ist $H$ eine Hadamard-Matrix der Ordnung $2^m$.
+\end{prop}
 
 \end{document}
