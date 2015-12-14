@@ -1751,13 +1751,18 @@ Wenn wir also die Hutfunktionen als Basisfunktionen wählen, so erhalten wir das
   Ein \emph{finites Element} in $\R^d$ ist ein Tripel $(K, P, \Sigma)$ mit %den Eigenschaften
   \begin{itemize}
     \item $K \subset \R^d$ ist kompakt, $\partial K$ ist Lipschitz-stetig,
-    \item $P$ ist ein endlichdimensionaler linearer Raum von Funktionen $p \in \Cont^s(K, \R)$
-    \item $\Sigma = \{ b_1, \ldots, b_m \}$ mit $b_j \in (\Cont^s(K, \R))'$ ist \emph{P-unisolvent}, \dh{}
+    \item $P$ ist ein endlichdim. lin. Raum von Funktionen $p \in \Cont^s(K, \R)$
+    \item $\Sigma = \{ b_1, \ldots, b_m \}$ mit $b_j \in (\Cont^s(K, \R))'$ ist \emph{$P$-unisolvent}, \dh{}
     \[
       \fa{\alpha \in \R^m} \exu{p \in P} b_j(p) = \alpha_j, \enspace j = 1, \ldots, m
     \]
   \end{itemize}
 \end{defn}
+
+\begin{bem}
+  % Beobachtung von Christian
+  $\Sigma$ ist genau dann $P$-unisolvent, falls $\Sigma$ eine Basis von $P' \subset (\Cont^s(K, \R))'$ ist.
+\end{bem}
 
 \begin{bemn}
   \begin{itemize}
@@ -1782,5 +1787,34 @@ Wenn wir also die Hutfunktionen als Basisfunktionen wählen, so erhalten wir das
   Dabei heißen $\mu_1, \ldots, \mu_{d+1}$ baryzentrische Koordinaten von $x$.
   Der $d$-Simplex $K$ heißt \emph{nicht entartet}, falls $a_1, \ldots, a_{d+1}$ affin unabhängig sind.
 \end{defn}
+
+% Vorlesung vom 14.12.2015
+
+% ausgelassen: erstes Beispiel
+
+$K = $ Dreieck mit den Ecken $a_1, a_2, a_3 \in \R^2$
+
+$P = \Set{ \gamma_1 x_1  + \gamma_2 x_2 + \gamma_3}{\gamma_j \in \R, (x_1, x_2)^T \in K}$
+$\Sigma = \{ b_1, b_2, b_3 \}$ mit $b_1(p) = p(a_1)$, $b_2(p) = p(a_2)$, $b_3(p) = p(a_3)$
+Wenn $K$ nicht entartet ist, so ist $\Sigma$ $P$-unisolvent.
+
+\begin{defn}
+  Das Simplex mit den Ecken $a_{d+1} = 0$, $a_j = e_j \in \R^d$, $j = 1, \ldots, d$ heißt $d$-Einheitssimplex.
+\end{defn}
+
+\begin{lem}
+  Jedes nicht entartete $d$-Simplex $K$ ist affin äquivalenz zum $d$-Einheitssimplex $\hat{K}$, \dh{} es gibt genau eine Abbidung $F : \hat{K} \to K, \enspace \hat{x} \mapsto A_K \hat{x} + b_K$ mit einer invertierbaren Matrix $A_K$, sodass $F(e_j) = a_j$ und $F(0) = a_{d+1}$.
+\end{lem}
+
+\begin{defn}
+  $(K, P, \Sigma)$ heißt \emph{simpliziales finites Element vom Lagrange-Typ}, falls
+  \begin{itemize}
+    \item $K$ ist eine $d$-Simplex,
+    \item $P = P_k$ ist die Menge aller Polynome zum Grad $k$ in $d$ Variablen.
+    \item $\Sigma = \Set{b : P \to \R}{b(p) = p(a)}$ mit $a \in \mathcal{K}_k = \Set{x = \sum_{j=1}^{d+1} \mu_j a_j}{\sum \mu_j = 1, \enspace \mu_j \in \{ 0, \tfrac{1}{k}, \ldots, \tfrac{k-1}{k}, 1 \}}$
+  \end{itemize}
+\end{defn}
+
+% (Rechnungen ausgelassen)
 
 \end{document}
