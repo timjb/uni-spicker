@@ -1417,5 +1417,123 @@ Konfidenzschätzung für den Vektor der schätzbaren Funktionen
 \]
 % wobei $F_{n_1, n_2}$ die F-Verteilung mit $(n_1, n_2)$ Freiheitsgraden ist.
 
+% Vorlesung vom 14.12.2015
+
+% §4.5 Anwendung auf das Modell I der Varianzanalyse (ANOVA)
+
+% 4.5.1 Einfache Klassifikation, Einwegklassifikation
+
+Vergleich von Erwartungswerten von $p$ Stufen (Populationen), $\Normal(\mu, \sigma^2)$-verteilter unabhängiger Beobachtungen ($i = 1, \ldots, p$)
+
+Versuchsplan:
+
+\begin{center}
+  \renewcommand{\arraystretch}{1.5}
+  \begin{tabular}{c | c c c c}
+    & $1$ & $2$ & $\cdots$ & $n_i$ \\ \hline
+    $1$ & $y_{11}$ & $y_{12}$ & $\cdots$ & $y_{1,n_1}$ \\
+    $2$ & $y_{21}$ & $y_{22}$ & $\cdots$ & $y_{2,n_2}$ \\
+    \vdots & \vdots & \vdots & & \vdots \\
+    $p$ & $y_{p1}$ & $y_{p2}$ & $\cdots$ & $y_{p,n_p}$ \\
+  \end{tabular}
+\end{center}
+
+Mathematisches Modell: $Y_{ik} = \mu_i + \epsilon_{ik}$, $n = 1, \ldots, n_i$, $i = 1, \ldots, p$, $\beta = (\mu_1, \ldots, \mu_p)^T$, $\epsilon_{ik} \sim \Normal(0, \sigma^2)$ \iid{}
+
+% ausgelassen: Matrixgleichung
+
+Wichtig: Prüfen, ob tatsächlich die Varianz von $\epsilon_{ik}$ gleich sind (Bartlett-Test).
+
+Normalengleichung: $X^T X \beta = X^T Y$
+
+$X^T X = \begin{pmatrix}
+  n_1 & 0 & & 0 \\
+  0 & n_2 & 0 & 0 \\
+  & 0 & \ddots & 0 & 0 \\
+  0 & & 0 & n_p
+\end{pmatrix}$
+
+$X^T Y = \begin{pmatrix}
+  Y_{1 \bullet} = \sum_{k=1}^{n_1} Y_{1k} \\
+  \vdots \\
+  Y_{p \bullet} = \sum_{k=1}^{n_p} Y_{pk}
+\end{pmatrix}$
+
+$\hat{\mu}_i = \overline{Y}_{i \bullet} = \tfrac{1}{n_i} \sum_{k=1}^{n_i} Y_{ik}$ für $i = 1, \ldots, p$
+
+Schätzung der Modellstreuung:
+
+%$\hat{\beta} =$
+
+$\hat{\sigma}^2 = \tfrac{1}{n-p} \norm{Y - X \hat{\beta}}^2 = \tfrac{1}{n-p} \sum_{i=1}^p \sum_{k=1}^{n_i} (Y_{ik} - \overline{Y}_{i \bullet})^2$
+
+Dann ist $(n-p) \frac{\hat{\sigma}^2}{\sigma^2} \sim \chi_{n-p}^2$
+
+Test auf Gleichheit der Erwartungswerte:
+
+$H_0 : \mu_1 = \mu_2 = \ldots = \mu_p$
+
+Testgröße: $T = \tfrac{n-p}{p-1} \tfrac{S_1^2 - S_0^2}{S_0^2} \sim F_{p-1, n-p}$
+
+Ablehnung von $H_0$, falls $T \geq T_{p-1,n-p,1-\alpha}$ % wobei $\alpha > 0$ die Irrtumswahrscheinlichkeit
+
+$C = \begin{pmatrix}
+  1 & -1 & 0 \\
+  0 & 1 & -1 & 0 \\
+  && \ddots & \ddots \\
+  && 0 & 1 & -1
+\end{pmatrix}$
+
+$S_0^2 \coloneqq \norm{Y - X \hat{\beta}}^2 = (n-p) \hat{\sigma}^2 = \sum_{i=1}^p \sum_{k=1}^{n_i} (Y_{ik} - \overline{Y}_{i \bullet})^2$
+
+$S_1^2 = \min_{\beta : C \beta = 0} \norm{Y - X \beta}^2$
+
+Berechnung von $S_1^2$ mittels Lagrange-Multiplikatoren ergibt:
+$S_1^2 = \sum_{i=1}^p \sum_{k=1}^{n_i} (Y_{ik} - \overline{Y}_{i \bullet})^2$
+% $F(\beta, \lambda) = (Y - X \beta)^T (Y - X \beta) + (C \beta)^T \lambda$ mit $\beta^T = (\mu_1, \ldots, \mu_p)$, $\lambda^T = (\lambda_1, \ldots, \lambda_{p-1})$
+
+$S_1^2 - S_0^2 = \ldots = \sum_{i=1}^p n_i (\overline{Y}_{i \bullet} - \overline{Y}_{\bullet \bullet})^2$
+
+\begin{sprechweise}
+  Übliche Bezeichnungen:
+  \begin{align*}
+    S_1^2 & = \text{SQG} = \text{Summe der Quadrate der Abweichungen in der Gesamtheit} \\
+    S_1^2 - S_0^2 = \text{SQA} = \text{Summe der Quadrate der Abweichungen zwischen den Stufen des Faktors $A$} \\
+    S_0^2 = \text{SQR} = \text{Summe der Quadrate der Abweichungen innerhalb der Stufen des Faktors $A$ (Restquadratesumme)}
+  \end{align*}
+\end{sprechweise}
+
+Bartlett-Test: Prüfen der Hypothese, dass $p$ unabhänige ZGn $X_i \sim \Normal(\mu_i, \sigma^2)$, $i = 1, \ldots, p$ dieselbe Streuung $\sigma^2$ besitzen. $H_0 : \sigma_1^2 = \ldots = \sigma_p^2 = \sigma^2$
+Gegeben seien $p$ unabhängige Stichproben $X_{i 1}, \ldots, X_{i n_i}$, $i = 1, \ldots, p$, $n = n_1 + \ldots + n_p$.
+
+Testgröße: $T_{n_1, \ldots, n_p} = \tfrac{1}{D} \left( (n-p) \log S^2 - \sum_{i=1}^p (n_i - 1) \log S_i^2 \right)$ mit $D \coloneqq 1 + \tfrac{1}{3 (- 1)} \left( \sum_{i=1}^p \tfrac{1}{n_i - 1} - \tfrac{1}{n-p} \right)$, $S_i^2 = \tfrac{1}{n_i - 1} \sum_{k=1}^{n_i} (X_{ik} - \overline{X}_{i \bullet})^2$, $S^2 = \tfrac{1}{n-p} \sum_{i=1}^p S_i^2$
+
+Für $\min(n_1, \ldots, n_p) \to \infty$ gilt $T_{n_1, \ldots, n_p} \xra{d} \chi_{p-1}^2$.
+
+Faustregel: $\min(n_1, \ldots, n_p) \geq 5$
+
+Ablehnung von $H_0$, falls $T_{n_1, \ldots, n_p} > \chi_{p-1, 1-\alpha}^2$.
+
+\iffalse
+Beispiel: Wirkung vonschmerzstillenden Medikamenten
+Verabreichung von 2 Medikamenten und einem Placebo.
+Gemessen wird die Zeitdauer nach Einnahme, in der sich der Patient schmerzfrei fühlt
+
+5 Patienten mit Placebo \\ 
+4 Patienten mit Droge A \\
+6 Patienten mit Droge B
+
+\begin{tabular}
+  Placebo & 2,2 & 0,3 & 1,1 & 2,0 & 3,4 && $\sim \Normal(\mu_1, \sigma^2)$ \\
+  Droge A & 2,8 & 1,4 & 1,7 & 4,3 &&& $\sim \Normal(\mu_2, \sigma^2)$ \\
+  Droge B & 1,1 & 4,2 & 3,8 & 2,6 & 0,5 & 4,3 & $\sim \Normal(\mu_2, \sigma^2)$
+\end{tabular}
+
+$H_0 : \mu_1 = \mu_2 = \mu_3$
+
+% Rechnen...
+
+$T = 0,652$, damit Annahme von $H_0$
+\fi
 
 \end{document}
