@@ -32,6 +32,8 @@
 \newcommand{\ind}{\mathbbm{1}} % Indikatorfunktion
 \newcommand{\Testfun}{\mathcal{D}} % Raum der Testfunktionen
 \DeclareMathOperator{\spann}{span} % Spann
+\DeclareMathOperator{\inte}{int} % Inneres (interior)
+\newcommand{\Poly}{\mathbbm{P}} % Menge der Polynome
 
 \begin{document}
 
@@ -1816,5 +1818,72 @@ Wenn $K$ nicht entartet ist, so ist $\Sigma$ $P$-unisolvent.
 \end{defn}
 
 % (Rechnungen ausgelassen)
+
+% Vorlesung vom 15.12.2015
+
+$\hat{x} = (x_1, x_2)^T = \mu_1(\hat{x}) \hat{a}_1 + \mu_2(\hat{x}) \hat{a}_2 + \mu_3(\hat{x}) \hat{a}_3$
+
+Es gilt
+
+\begin{align*}
+  \mu_1(\hat{x}) = x_1 = \hat{p}_1(\hat{x}), \\
+  \mu_2(\hat{x}) = x_2 = \hat{p}_2(\hat{x}), \\
+  \mu_3(\hat{x}) = 1 - \mu_1(\hat{x}) - \mu_2(\hat{x}) = 1 - x_1 - x_2 = \hat{p}_3(\hat{x}).
+\end{align*}
+
+Allgemein: $\mathcal{K}_1 = \{ \hat{a}_1, \ldots, \hat{a}_{d+1} \}$
+
+$\hat{x} = (\mu_1(\hat{x}), \ldots, \mu_d(\hat{x}))^T = (x_1, \ldots, x_d)^T$ mit $\sum_{i=1}^{d+1} \mu_j(\hat{x}) = 1$
+
+$\hat{p}_j(\hat{x}) \coloneqq \mu_j(\hat{x})$, $j = 1, \ldots, d+1$
+
+$\hat{p}_j(\hat{a}_i) = \delta_{ij}$, $i, j = 1, \ldots, d+1$
+
+Dann ist $\{ \hat{p}_1, \ldots, \hat{p}_{d+1} \}$ die kanonische Basis von $P = P_1$.
+
+Allgemein: $\mathcal{K}_2 = \Set{\hat{a}_i}{i = 1, \ldots, d+1} \cup \Set{\tfrac{\hat{a}_i + \hat{a}_j}{2}}{1 \leq i < j \leq d+1}$
+
+$\hat{x} = \sum_{i=1}^{d+1} \mu_j(\hat{x}) \hat{a}_j$ mit $\mu_{d+1}(\hat{x}) = 1 - \mu_1(\hat{x}) - \ldots - \mu_d(\hat{x})$
+
+Dann ist
+$\hat{p}_j(\hat{x}) = \mu_j(\hat{x}) (2 \mu_j(\hat{x}) - 1)$, $j = 1, \ldots, d+1$,
+$\hat{p}_{ij}(\hat{x}) = 4 \mu_i(\hat{x}) \mu_j(\hat{x})$, $1 \leq i < j \leq d+1$
+eine Basis von $P = P_2$
+
+% §5.2 Räume von Finite-Elemente-Funktionen auf $\bOmega$
+
+\begin{ziel}
+  Finde endlichdimensionalen Raum $U_n$ und eine Basis davon.
+\end{ziel}
+
+\begin{defn}
+  Sei $\Omega \subset \R^d$ ein beschränktes, polygonal berandetes Gebiet.
+  Eine \emph{Triangulierung} von $\Omega$ mit simplizialen Elementen vom Lagrange-Typ ist eine endliche Menge $T(\bOmega) = \Set{(K_i, P(K_i), \Sigma(K_i))}{i = 1, \ldots, N}$ mit
+  \begin{itemize}
+    \item $\bOmega = \bigcup_{i=1}^N K_i$, $K_i$ ist ein $d$-Simplex
+    \item $\inte(K_i) \cap \inte(K_j) = \emptyset$ für $i \neq j$
+    \item Jeder Rand von $K_i$, \dh{} jedes $(d+1)$-dimensionale Simplex mit $d$ Eckpunkten von $K_i$ ist entweder Teil des Gebietrandes $\partial \Omega$ oder der vollständige Rand eines anderen Simplex $K_j$.
+  \end{itemize}
+\end{defn}
+
+\begin{defn}
+  Ein Raum der linearen finiten Elemente zu einer Triangulierung $T(\bOmega)$ ist definiert durch
+  \[
+    %U_n = \Set{v \in \Cont(\bOmega)}{v|_{K_i} \text{ ist ein Polynom der Ordnung 1 für } i = 1, \ldots, N}
+    U_n = \Set{v \in \Cont(\bOmega)}{v|_{K_i} \in \Poly_1(K_i) \text{ für } i = 1, \ldots, N}.
+  \]
+\end{defn}
+
+\begin{satz}[\emph{Lineare Finite Elemente}] \mbox{} \\
+  \begin{item}
+    \item Sei $K$ ein nichtentarteter $d$-Simplex mit Ecken $a_1$, \ldots, $a_{d+1}$.
+    Dann ist durch die Vorgabe von $p(a_j)$, $j = 1, \ldots, d+1$ ein Polynom $p \in \Poly_1(K)$ eindeutig bestimmt.
+    Für alle $p \in \Poly_1(K)$ gilt $p(x) = \sum_{j=1}^{d+1} p(a_j) \mu_j$, $x \in K$.
+    \item Sind $\tilde{a}_j \in \mathcal{K}_1$, $j = 1, \ldots, n$ die Knoten der Triangulierung, so ist eine Funktion $v \in U_n$ durch die Vorgabe von Funktionswerten $v(\tilde{a}_j)$ eindeutig definiert.
+    Es gilt $U_1 \subset H^1(\Omega)$.
+    \item Eine Basis von $U_n$ ist gegeben durch die Funktionen $p_j \in U_n$ mit $p_j(\tilde{a}_i) = \delta_{ij}$ für $i, j = 1, \ldots, n$.
+    Insbesondere gilt $\dim U_n = n$.
+  \end{item}
+\end{satz}
 
 \end{document}
