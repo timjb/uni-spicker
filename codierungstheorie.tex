@@ -1727,4 +1727,117 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
   Dann ist $H$ eine Hadamard-Matrix der Ordnung $2^m$.
 \end{prop}
 
+% Vorlesung vom 15.12.2015
+
+\begin{defn}
+  Sei $F \in \R^{\F_2^m} = \text{Abbildungen } \F_2^m \to \R$.
+  Die \emph{Hadamard-Transformierte} von $F$ ist
+  \[
+    \hat{F} : \F_2^m \to \R, \enspace
+    u \mapsto \sum_{v \in \F_2^m} (-1)^{\scp{u}{v}} F(v).
+  \]
+  Die \emph{inverse Hadamard-Transformation} ist gegeben durch
+  \[
+    G \in \R^{\F_2^m} \mapsto G^* \in \R^{\F_2^m}
+    \enspace \text{mit} \enspace
+    G^*(u) = \tfrac{1}{2^m} \cdot \sum_{v \in \F_2^m} (-1)^{\scp{u}{v}} G(v).
+  \]
+\end{defn}
+
+\begin{nota}
+  Für $\beta \in \mathcal{B}_m$, also eine boolsche Funktion in $m$ Variablen, sei $B_\beta$ definiert durch $B_\beta(u) \coloneqq (-1)^{\beta(u)}$.
+\end{nota}
+
+% Bem: Die Hadamard-Transformierte von $B_\beta$ ist
+% $\hat{B}_\beta$ mit $\hat{B}_\beta(u) = \sum_{v \in \F_2^m} (-1)^{\scp{u}{v} + \beta(v)}$.
+
+\begin{align*}
+  \RM(1, m) & \widehat{=} \spann \{ 1, x_1, \ldots, x_m \} \\
+  & = \spann \{ 1 \} \oplus \underbrace{\spann \{ x_1, \ldots, x_m \}}_{O(1, m) \coloneqq} = O(1, m) \sqcup [1 + O(1, m)]
+\end{align*}
+
+Sei $\phi \in \RM(1, m)$ gesendet, $\beta \in \mathcal{B}_m$ empfangen.
+Gesucht: $\gamma \in \RM(1, m)$ mit $d(\gamma, \beta)$ minimal.
+
+\begin{satz}
+  Sei $\beta \in \mathcal{B}_m$, $\gamma \in O(1, m)$; schreibe $\gamma = \lambda_1 x_1 + \ldots + \lambda_m x_m$.
+  %Dann gilt
+  \begin{itemize}
+    \miniitem{0.48 \linewidth}{$d(\beta, \gamma) = \tfrac{1}{2} (2^m - \hat{B}_\beta(\lambda))$}
+    \miniitem{0.48 \linewidth}{$d(\beta, 1+\gamma) = \tfrac{1}{2} (2^m + \hat{B}_\beta(\lambda))$}
+  \end{itemize}
+\end{satz}
+
+Zur Decodierung von $\RM(1, m)$: Dies ist ein $[2^m, 1+m, 2^{m-1}]$-Code, also $t = \tfrac{2^{m-1} - 1}{2} < 2^{m-2}$.
+Angenommen, $\phi \in \RM(1, m)$ ist gesendet, es sind höchstens $t$ Fehler aufgetreten, $\beta$ empfangen.
+Dann gilt $d(\phi, \beta) \leq t$ und
+\begin{itemize}
+  \item Falls $\phi \in O(1, m)$: $\phi = \sum_{i=1}^m \alpha_i x_i$, $\hat{B}_\beta(\alpha) = 2^m - 2 \cdot d(\beta, \phi) > 0$.
+  \item Falls $\phi \in 1 + O(1, m)$: $\phi = 1 + \sum_{i=1}^m \alpha_i x_i$.
+\end{itemize}
+
+Beachte: $\min \{ d(\beta, \gamma), d(\beta, 1 + \gamma) \} = \tfrac{1}{2} \cdot (2^m - \abs{\hat{B}_\beta(\lambda)})$ für $\gamma \in O(1, m)$.
+Gesucht ist ein $\gamma$ mit $\tfrac{1}{2} (2^m - \abs{\hat{B}_\beta(\lambda)})$ minimal $\iff$ $\abs{\hat{B}_\beta(\lambda)}$ maximal.
+
+(Beachte: $\hat{B}_\beta = H \cdot B_\beta$ mit $H = H_2 \otimes \ldots \otimes H_2$ ($m$-mal) mit schneller Hadamard-Transformation berechenbar.)
+
+$\hat{B}_\beta$ liegt vor, das heißt $\hat{B}_\beta(\lambda)$ ist bekannt für alle $\lambda \in \F_2^m$.
+
+Suche nun ein $\lambda \in \F_2^m$ mit $\abs{\hat{B}_\beta(\lambda)}$ ist minimal.
+
+\begin{itemize}
+  \item Annahme, $\hat{B}_\beta(\lambda) > 0$.
+  Decodiere $\beta$ zu $\sum_{i=1}^m \lambda_i x_i \in o(1, m)$.
+  \item Annahme, $\hat{B}_\beta(\lambda) < 0$. Decodiere $\beta$ zu $1 + \sum_{i=1}^m \lambda_i x_i \in 1 + o(1, m)$.
+\end{itemize}
+
+% ausgelassen: Beispiel
+
+% §9. Die Gewichtsverteilung von dualen Codes
+\section{Die Gewichtsverteilung von dualen Codes}
+
+% §9.1 Die MacWilliams-Transformation
+
+\begin{defn}
+  Betrachte einen Code $C \subseteq \F_q^n$.
+  Für $j = 0, \ldots, n$ sei
+  \[
+    \Delta_C(j) \coloneqq \tfrac{1}{\abs{C}} \abs{\Set{(x, y) \in C \times C}{d(x, y) = j}}.
+  \]
+  $\Delta_C \in \Q^\{0, \ldots, n\}$ heißt \emph{Distanzverteilung} von $C$.
+\end{defn}
+
+\begin{prop}
+  Ist speziell $C$ ein $\F_q$-linearer Code, dann gilt: $\Delta_C = A_C = $ Gewichtsverteilung von $C$.
+\end{prop}
+
+\begin{satz}
+  Sei $C \subseteq \F_q^m$ ein linearer Code.
+  Betrachte den dualen Code $C^\perp$ zu $C$.
+  Dann:
+  \[
+    A_{C^\perp}^\homogen(X, Y) = \tfrac{1}{\abs{C}} \cdot A_C^\homogen(X + (q-1)Y, X-Y), \quad
+    A_{C^\perp}(Z) = \tfrac{1}{\abs{C}} \cdot (1 + (q-1) Z)^n \cdot A_C(\frac{1-Z}{1+(q-1)Z}).
+  \]
+\end{satz}
+
+% §9.2 Additive Charaktere
+
+\begin{defn}
+  Ein \emph{additiver Character} von $\F_q$ ist eine Gruppen-Homomorphismus von $(\F_q, +, 0)$ nach $(\C^*, \cdot, 1)$.
+\end{defn}
+
+\begin{nota}
+  $\hat{\F_q} \coloneqq $ Menge aller additiven Charactere
+\end{nota}
+
+\begin{bem}
+  $\hat{\F_q}$ ist eine Gruppe mit
+  \[
+    [\chi \cdot \psi](x) \coloneqq \chi(x) \cdot \psi(x), \quad
+    \chi_0(x) \coloneqq 1.
+  \]
+  Es gilt $(\hat{\F_q}, \cdot, \chi_0) \cong (\F_q, +, 0)$.
+\end{bem}
+
 \end{document}
