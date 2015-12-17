@@ -40,6 +40,7 @@
 \newcommand{\Geraden}{\mathcal{G}} % Geraden in Blocksystem
 \newcommand{\RM}{\mathcal{R}} % Reed-Muller-Code
 \newcommand{\PCE}[1]{\widehat{#1}} % Parity-Check-Erweiterung
+\DeclareMathOperator{\trace}{trace} % Spur
 
 \begin{document}
 
@@ -1811,16 +1812,6 @@ Suche nun ein $\lambda \in \F_2^m$ mit $\abs{\hat{B}_\beta(\lambda)}$ ist minima
   Ist speziell $C$ ein $\F_q$-linearer Code, dann gilt: $\Delta_C = A_C = $ Gewichtsverteilung von $C$.
 \end{prop}
 
-\begin{satz}
-  Sei $C \subseteq \F_q^m$ ein linearer Code.
-  Betrachte den dualen Code $C^\perp$ zu $C$.
-  Dann:
-  \[
-    A_{C^\perp}^\homogen(X, Y) = \tfrac{1}{\abs{C}} \cdot A_C^\homogen(X + (q-1)Y, X-Y), \quad
-    A_{C^\perp}(Z) = \tfrac{1}{\abs{C}} \cdot (1 + (q-1) Z)^n \cdot A_C(\frac{1-Z}{1+(q-1)Z}).
-  \]
-\end{satz}
-
 % §9.2 Additive Charaktere
 
 \begin{defn}
@@ -1839,5 +1830,80 @@ Suche nun ein $\lambda \in \F_2^m$ mit $\abs{\hat{B}_\beta(\lambda)}$ ist minima
   \]
   Es gilt $(\hat{\F_q}, \cdot, \chi_0) \cong (\F_q, +, 0)$.
 \end{bem}
+
+% Vorlesung vom 17.12.2015
+
+Für $q = p$ prim ist
+
+\[
+  \gamma : (\F_p = \Z_p, +, 0) \to (\C^*, \cdot, 1), \quad
+  z \mapsto \exp(\tfrac{2 \pi z i}{p})
+\]
+
+ein additiver Charakter.
+
+Für $q = p^k$, $k \geq 2$ verwenden wir die Spurabbildung
+$\trace : \F_q \to \F_p, \enspace x \mapsto \sum_{j=0}^{k-1} x^{p^j}$.
+(Dies ist eine nicht-triviale Linearform.)
+Dann ist
+\[
+  \chi : \F_q \to \C^*, \quad
+  x \mapsto \gamma \circ \trace(x)
+\]
+eine nicht-triavialer Charakter, der sogenannte \emph{Hauptcharakter}.
+
+\begin{bem}
+  Zu jedem $y \in \F_q$ ist $\chi_y : \F_q \to \C^*, \enspace x \mapsto \exp(\frac{2 \pi \trace(xy) i}{p})$ ein weiterer Charakter und es gilt
+  \[ \hat{\F_q} = \Set{\chi_y}{y \in \F^q}. \]
+\end{bem}
+
+Sei $V$ ein $\C$-Vektorraum.
+Wir betrachten Abbildung von $\F_q^n$ nach $V$.
+Sei $\chi \hat{\F_q}$, $\chi \neq \chi_0$
+Zu $f : \F_q^n \to V$ definieren wir eine \emph{transformierte Abbildung} durch
+\[ \hat{f} : \F_q^n \to V, \enspace u \mapsto \sum_{v \in \F_q^n} \chi(\scp{u}{v}) \cdot f(v). \]
+
+\begin{satz}
+  Sei $U$ ein $\F_q$-Teilraum von $\F_q^n$ und $f : \F_q^n \to V$ eine Abbildung.
+  Dann gilt
+  \[
+    \sum_{u \in U} \hat{f}(u) = \abs{U} \cdot \sum_{w \in U^\perp} f(w).
+  \]
+\end{satz}
+
+\begin{satz}
+  Sei $C \subseteq \F_q^m$ ein linearer Code.
+  Betrachte den dualen Code $C^\perp$ zu $C$.
+  Dann:
+  \[
+    A_{C^\perp}^\homogen(X, Y) = \tfrac{1}{\abs{C}} \cdot A_C^\homogen(X + (q-1)Y, X-Y), \quad
+    A_{C^\perp}(Z) = \tfrac{1}{\abs{C}} \cdot (1 + (q-1) Z)^n \cdot A_C(\frac{1-Z}{1+(q-1)Z}).
+  \]
+\end{satz}
+
+\begin{beweisidee}
+  Verwende den letzten Satz mit $V = \C[X, Y]$ und $f(v) \coloneqq X^{n - \wt(v)} Y^{\wt(v)}$.
+\end{beweisidee}
+
+\begin{bsp}
+  Sei $m \geq 1$.
+  Für den Simplex-Code gilt
+  \[
+    A_{\Sim_q(m)}^\homogen (X, Y) = X^n + (q^m - 1) X^{n - q^{m-1}} Y^{q^{m-1}}.
+  \]
+  Somit gilt für den Hamming-Code $\Ham_q(m) = \Sim_q(m)^\perp$:
+  \[
+    A_{\Ham_q(m)}^\homogen (X, Y) = \tfrac{1}{q^m} \left( [X+(q-1)Y]^n + (q^m - 1) \cdot [X + (q-1) Y]^{n - q^{m-1}} \cdot [X-Y]^{q^{m-1}} \right).
+  \]
+\end{bsp}
+
+\begin{bsp}
+  Wir betrachten den $[24, 8, 12]$-Code $C = \Golay(24) = C^\perp$.
+  Es gilt
+  \[
+    A_C^\homogen (X, Y) = X^{24} + A_8 X^{16} Y^8 + A_{12} X^{12} Y^{12} + A_8 X^8 Y^{16} + Y^{24}.
+  \]
+  TODO: weiter?
+\end{bsp}
 
 \end{document}
