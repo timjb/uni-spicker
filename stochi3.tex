@@ -1536,4 +1536,96 @@ $H_0 : \mu_1 = \mu_2 = \mu_3$
 $T = 0,652$, damit Annahme von $H_0$
 \fi
 
+% Vorlesung vom 17.12.2015
+
+Zweifache Varianzanalyse (Zweiwegklassifikation, Kreuzwegkassifikation)
+
+Wirkung eines Faktors $A$ in $p$ Stufen und Wirkung eines Faktors $B$ in $q$ Stufen mit $s$ Wiederholungen in jdeder Stufe von Faktor $A$ und $B$.
+
+\begin{bsp}
+  Faktor A: Düngemittel
+  Faktor B: Bodenart
+  $Y_{ijk}$: Ernteertrag in Stufe $i$ von Faktor A, in Stufe $j$ von Faktor B in $k$-ter Wiederholung.
+  Es geht um den Vergleich von Mittelwerten bei eventueller Wechselwirkung zwischen den Stufen der Faktoren.
+\end{bsp}
+
+\begin{modell}
+  $Y_{ijk} = \mu_0 + \alpha_i + \beta_j + \gamma_{ij} + \epsilon_{ijk}$
+  $\alpha_i$: mittlerer Effekt in Stufe $i$ von Faktor A
+  $\beta_j$: mittlerer Effekt in Stufe $j$ von Faktor B
+  $\gamma_{ij}$: mittlerer Effekt aus Wechselwikrung von Stufe $i$ und Stufe $j$
+  Voraussetzung: Alle Beobachtungen sind normalverteilt und unabhängig mit $\E \epsilon_{ijk} = 0$, $\E \epsilon_{ijk}^2 = \sigma^2$
+  (eventuell Prüfung mit Bartlett-Test)
+\end{modell}
+
+% ausgelassen: Versuchsplan
+
+Prüfen der folgenden Hypothese:
+$H_A : \alpha_1 = \ldots = \alpha_p = 0$,
+$H_B : \beta_1 = \ldots = \beta_q = 0$,
+$H_{AB} : \gamma_{11} = \ldots = \gamma_{pq} = 0$
+
+Schreibweise als lineares Modell:
+
+$Y = X \beta$ mit $\dim Y = p \dots q \cdot s$, $X \in \R^{pqs \times (1+p+q+pq)}$.
+
+$(p+1) \cdot (q+1)$ Parameter, $\beta = (\mu_0, \alpha_1, \ldots, \alpha_p, \beta_1, \ldots, \beta_q, \gamma_{11}, \ldots, \gamma_{pq})$
+
+$\rk X = pq - 1 < \min \{ pqs, (p+1) \cdot (q+1) \}$
+
+Reparametrisierung ist notwendig, \dh{} es werden Gleichungen zwischen den Parametern hinzugefügt, die die eindeutige Lösbarkeit von (N) garantieren:
+
+\[
+  \alpha_\bullet = 0, \quad
+  \beta_\bullet = 0, \quad
+  \gamma_{1 \bullet} = \ldots = \gamma_{p \bullet} = 0, \quad
+  \gamma_{\bullet 1} = \ldots = \gamma_{\bullet q} = 0.
+\]
+
+Wegen $pq - 1 + (2 + p + q) = (p+1) \cdot (q+1)$ kann die Eindeutigkeit der MkQ-Schätzung gesichtert werden.
+Diese Bedingungen bedeuten keine Einschränkung der Allgemeinheit der Darstellung $Y_{ijk} = \mu_0 + \alpha_i + \beta_j + \gamma_{ij} + \epsilon_{ijk}$ denn:
+
+% TODO: Summenkonvention erklären
+
+$\mu_0^* = \mu_0 + \overline{\alpha}_\bullet + \overline{\beta}_\bullet + \overline{\gamma}_\bullet$,
+$\alpha_i^* = \alpha_i - \overline{\alpha}_\bullet + \overline{\gamma}_{i \bullet} - \overline{\gamma}_{\bullet \bullet}$,
+$\beta_j^* = \beta_j - \overline{\beta}_\bullet + \overline{\gamma}_{\bullet j} - \overline{\gamma}_{\bullet \bullet}$ und
+$\gamma_{ij}^* = \gamma_{ij} - \overline{\gamma_{i \bullet}} - \overline{\gamma_{\bullet j}} + \overline{\gamma}_{\bullet \bullet}$
+für $i = 1, \ldots, p$, $j = 1, \ldots, q$.
+
+Es ergeben sich die Gleichungen
+
+$Y_{ijk} = \mu_0^* + \alpha_i^* + \beta_j^* + \gamma_{ij}^* + \epsilon_{ijk}$ für $i = 1, \ldots, p$, $j = 1, \ldots, q$, $k = 1, \ldots, s$
+
+Bezeichnungen für Mittelwert:
+
+$\hat{\mu}_0 = \overline{Y}_{\bullet \bullet \bullet}$, $\hat{\alpha}_i = \overline{Y}_{i \bullet \bullet} - \overline{Y}_{\bullet \bullet \bullet}$, $\hat{\beta}_j = \overline{Y}_{\bullet j \bullet} - \overline{Y}_{\bullet \bullet \bullet}$
+
+$\hat{\gamma}_{ij} = \overline{Y}_{ij \bullet} - \overline{Y}_{i \bullet \bullet} - \overline{Y}_{\bullet j \bullet} + \overline{Y}_{\bullet \bullet \bullet}$
+
+Zum Prüfen der Hypothese $H_A$, $H_B$, $H_{AB}$ verwendet man folgende Testgrößen:
+
+\begin{align*}
+  S_{pqs}^2 & \coloneqq \sum_{i=1}^p \sum_{j=1}^q \sum_{k=1}^s (Y_{ijk} - \overline{Y}_{i j \bullet})^2, \\
+  F_A & \coloneqq \frac{pq \cdot (s-1)}{p-1} \frac{qs \sum_{i=1}^p (\overline{Y}_{i \bullet \bullet} - \overline{Y}_{\bullet \bullet \bullet})^2}{S_{pqs}^2}
+  \sim F_{p-1,pq(s-1)} \\
+  F_B & \coloneqq \frac{pq \cdot (s-1)}{q-1} \frac{ps \sum_{i=1}^q (\overline{Y}_{\bullet j \bullet} - \overline{Y}_{\bullet \bullet \bullet})^2}{S_{pqs}^2}
+  \sim F_{q-1,(pq(s-1))} \\
+  F_{AB} & \coloneqq \frac{pq (s-1)}{(p-1)(q-1)} \frac{s \sum_{i=1}^p \sum_{j=1}^q (\overline{Y}_{i j \bullet} - \overline{Y}_{i \bullet \bullet} - \overline{Y}_{\bullet j \bullet} + \overline{Y}_{\bullet \bullet \bullet})^2}{S_{pqs}^2} \sim F_{(p+1)(q+1), pq(s-1)}
+\end{align*}
+
+Entscheidungsregel: % $\alpha > 0$ sei ein gegebenes Signifikanzniveau
+Die Hypothesen $H_A$, $H_B$ bzw. $H_{AB}$ werden abgelehnt, falls
+\[
+  F_A > F_{p-1,pq(s-1),1-\alpha}, \quad
+  F_B > F_{q-1,pq(s-1),1-\alpha}
+  \enspace \text{bzw.} \enspace
+  F_{AB} > F_{(p-1)(q-1),pq(s-1),1-\alpha}.
+\]
+
+\begin{bem}
+  Die Anzahl der Wiederholungen kann auch in den einzelnen Stufen variieren.
+  % für Details siehe: V. Nollau, Statistische Analysen, Leipzig, 1978, H. Ahrens, J. Läuter: Mehrdimensionale Varianzanalyse, Berlin, 1981
+\end{bem}
+
 \end{document}
