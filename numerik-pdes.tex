@@ -1875,7 +1875,7 @@ eine Basis von $P = P_2$
 \end{defn}
 
 \begin{satz}[\emph{Lineare Finite Elemente}] \mbox{} \\
-  \begin{item}
+  \begin{itemize}
     \item Sei $K$ ein nichtentarteter $d$-Simplex mit Ecken $a_1$, \ldots, $a_{d+1}$.
     Dann ist durch die Vorgabe von $p(a_j)$, $j = 1, \ldots, d+1$ ein Polynom $p \in \Poly_1(K)$ eindeutig bestimmt.
     Für alle $p \in \Poly_1(K)$ gilt $p(x) = \sum_{j=1}^{d+1} p(a_j) \mu_j$, $x \in K$.
@@ -1883,7 +1883,40 @@ eine Basis von $P = P_2$
     Es gilt $U_1 \subset H^1(\Omega)$.
     \item Eine Basis von $U_n$ ist gegeben durch die Funktionen $p_j \in U_n$ mit $p_j(\tilde{a}_i) = \delta_{ij}$ für $i, j = 1, \ldots, n$.
     Insbesondere gilt $\dim U_n = n$.
-  \end{item}
+  \end{itemize}
 \end{satz}
+
+% Vorlesung vom 21.12.2015
+
+% ausgelassen: Beispiel
+
+\begin{bem}
+  Sei $K$ ein $d$-Simplex mit Ecken $a_1, \ldots, a_{d+1} \in \R^d$, $\mathcal{K}_2 = \Set{x = \sum_{j=1}^{d+1} \mu_j a_j}{\sum_{j=1}^{d+1} \mu_j = 1, \enspace \mu_j \in \{ 0, \tfrac{1}{2}, 1 \}} = \{ a_1, \ldots, a_{d+1} \} \cup \Set{a_{ij} \coloneqq \tfrac{a_i + a_j}{2}}{1 \leq i < j \leq d+1}$.
+  Dann ist $p \in \Poly_2(K)$ eindeutig bestimmt durch seine Werte an den Knotenpunkten aus $\mathcal{K}_2$.
+  Somit gilt $\dim(\mathcal{K}_2) = (d+1) + \binom{d+1}{2} = \tfrac{1}{2} (d+1) (d+2)$
+\end{bem}
+
+\begin{satz}[\emph{Allgemeiner Finite-Elemente-Raum}]
+  Sei $T(\bOmega) = \Set{(K_i, P(K_i), \Sigma(K_i))}{i = 1, \ldots, N}$ eine zulässige Triangulierung und $\mathcal{K}_k = \bigcup_{i=1}^N \mathcal{K}_k(K_i) = \Set{\tilde{a}_i}{i = 1, \ldots, N}$ das Lagrange-Gitter $k$-ter Ordnung, wobei
+  \[
+    \mathcal{K}_k = \Set{x = \sum_{j=1}^{d+1} \mu_j a_j^i}{\sum_{j=1}^{d+1} \mu_j = 1, \enspace \mu_j \in \{ 0, \tfrac{1}{k}, \ldots, \tfrac{k-1}{k}, 1 \}}
+  \]
+  und $a_j^i$ die Eecken von $K_i$ sind.
+  Dann ist durch Vorgabe von $v|_{\mathcal{K}_k}$ eindeutig ein $v \in U_n \subset H^1(\Omega)$ mit $U_n = \Set{v \in \Cont(\bOmega)}{v|_{K_i} \in \Poly_k(K_i), i = 1, \ldots, N}$ bestimmt.
+  Eine Basis von $U_n$ ist durch $p_j \in U_n$ mit $p_j(\tilde{a}_i) = \delta_{ij}$, $i, j = 1, \ldots, n$ gegeben.
+\end{satz}
+
+% §5.3 Realisierung der Finite-Elemente-Methode
+
+\begin{enumerate}
+  \item Eingabe und Beschreibung des RWPs.
+  \item Generierung eines Gitters (Zerlegung des Gebiets $\Omega$)
+  \item Erzeugung eines endlich-dimensionalen Problems, \dh{} Bereitstellung der Koeffizientenmatrix und der rechten Seite (der Galerkin-Gleichung) im Ritz-Verfahren
+  \item Lösung der Galerkin-Gleichung
+  \item Bewertung des Ergebnisses (Fehlerabschätzungen) und eventuell Wiederholung der Schritte 2-5.
+  \item Aufbereitung der erhaltenen Ergebnisse, graphische Darstellung der Lösung.
+\end{enumerate}
+
+
 
 \end{document}
