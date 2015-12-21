@@ -1628,4 +1628,75 @@ Die Hypothesen $H_A$, $H_B$ bzw. $H_{AB}$ werden abgelehnt, falls
   % für Details siehe: V. Nollau, Statistische Analysen, Leipzig, 1978, H. Ahrens, J. Läuter: Mehrdimensionale Varianzanalyse, Berlin, 1981
 \end{bem}
 
+% Vorlesung vom 21.12.2015
+
+% §4.6 Regressionkurvenschätzer
+
+Problem der Ausgleichsrechnung:
+
+Zu $n$ Messwerten $(x_1, y_1)$, \ldots, $(x_n, y_n)$ soll eine Funktion $\mu(x)$ gefunden werden, deren Funktionswerte $\mu(x_i)$ die $y_i$ möglichst gut approximieren.
+Wir betrachten ein nichtparametrisches Regressionsmodell (Modell I)
+\[
+  Y_i = \mu(x_i) + \epsilon_i, \quad
+  i = 1, \ldots, n (*)
+\]
+
+mit unbekannter Regressionsfunktion $\mu : \cinterval{a}{b} \to \R^1$.
+(Im Modell II werden die $x_i$'s druch ZGn $X_i$ ersetzt)
+
+Annahme: $a \leq x_1 < x_2 < \ldots < x_n \leq b$ (bewählte Messstellen) und $\E \epsilon_i = 0$, $i = 1, \ldots, n$, $\E \epsilon_i \epsilon_j = \sigma^2 \delta_{ij}$ für $i, j = 1, \ldots, n$.
+
+Kernschätzer für $\mu(x)$, $a \leq x \leq b$
+
+Kernfunktion: $K \in L^1(\R)$, $\IInt{K(x)}{x} = 1$, $K(-x) = K(x)$, $\supp K$ beschränkt, $\sup \abs{K(x)} < \infty$.
+Bandweite: $h_n \to 0$, $h \cdot n \to \infty$.
+\[
+  \hat{\mu}_1(x) = \tfrac{1}{n h_n} \sum_{i=1}^n Y_i \Int{s_{i-1}}{s_i}{K(\tfrac{x-s}{h_n})}{s}
+\]
+mit $s_0 = a$, $s_{i-1} < x_i \leq s_i$, $s_n = b$. % Z.B. $s_i = \tfrac{1}{2} (x_{i-1} + x_i)$
+heißt \emph{Gasser-Müller-Schätzer}.
+Verbessert: $\hat{\mu}_n(x) = \tfrac{b-a}{n h_n} \sum_{i=1}^n Y_i K(\tfrac{x-x_i}{h_n})$.
+
+Motivation: $\E \hat{\mu}_n(x) = \tfrac{1}{n h_n} \sum_{i=1}^n \E Y_i \Int{s_{i-1}}{s_i}{K(\tfrac{x-s}{h_n})}{s} = \tfrac{1}{n} \sum_{i=1}^n \mu(x_i) \Int{s_{i-1}/h_n}{s_i/h_n}{K(\tfrac{x}{h_n} - t)}{t} = \tfrac{1}{h} \sum_{i=1}^n \mu(x_i) \Int{(x-s_{i-1})/h_n}{(x-s_i)/h_n}{K(y)}{y} \approx \mu(x)$
+
+Kernschätzer für Modell II:
+$(X_1, Y_1)$, \ldots, $(X_n, Y_n)$ \iid{} mit Dichte $f_{(X,Y)}$, $K$ sei eine Kernfunktion wie oben und $(h_n)$ eine Bandbreitenfolge.
+\[
+  \hat{\mu}_n (x) = \frac{\sum_{i=1}^n K(\tfrac{x - X_i}{h_n})}{\sum_{i=1}^n K(\tfrac{x - X_i}{h_n})}, \quad
+  a \leq x \leq b
+\]
+\emph{Nadaraya-Watson-Schätzer}.
+
+Bedingte Erwartung: $\E (Y - \E(Y | \tilde{\sigma}))^2 = \min_{Z \text{ $\mathcal{F}$-messbar}, \E Z^2 < \infty} \E (Y-Z)^2$, $\mathcal{F} \subseteq \Alg$, $(\Omega, \Alg, \P)$
+
+Falls $\mathcal{F} = \sigma(X) = $ von $X$ erzeugte $\sigma$-Algebra, so schreiben wir $\E(Y|X)$ anstelle $\E(Y|\sigma(X)$ und es gilt: eine Borel-messbare Funktion $g : \R \to \R \cup \{ \pm \infty \}$ mit $\E(Y|X) = g(X)$ (Faktorisierungslemma).
+Wir können dann schreiben: $g(x) = \E(Y|X=x) = \IInt{y f_{Y|X}(y|x)}{y}$, wobei $f_{Y|X}(y|x) =$ bedingte Dichte von Y bei gegebenen $X=x$ $= \frac{f_{(X, Y)}(x, y)}{f_X(x)}$ mit $f_X(x) = \IInt{f_{(X, Y)}(x,y)}{y}$.
+
+Motivation für $(i_1)$:
+\[
+  \mu(x) = \E(Y|X=x) = \IInt{y \tfrac{f_{(X,Y)}(x,y)}{f_X(x)}}{y} \cdot f_X(x) = \IInt{f_{(X,Y)} (x,y)}{y}
+\]
+Schätzung von $f(x,y)$ mittels Produktkern: $K(x, y) = K1(x) \cdot K_2(y)$ mit $K_1$, $K_2$ wie oben. % => $\IInt{\IInt{K(x,y)}{x}}{y} = 1$
+\begin{align*}
+  \hat{f}_n(x, y) & \coloneqq \tfrac{1}{n h_n^2} \sum_{i=1}^n K_1(\tfrac{x-X_i}{h_n}) K_2(\tfrac{y-Y_i}{h_n}), \\
+  \hat{f}_n(x) & = \tfrac{1}{n h_n} \sum_{i=1}^n K_1(\tfrac{x - X_i}{h_n}) = \IInt{\hat{f}_n(x,y)}{y} \\
+  \hat{\mu}_n = \IInt{y \tfrac{\hat{f}_n(x,y)}{\hat{f}_n(x)}}{y} = \tfrac{1}{\hat{f}_n(x)} \tfrac{1}{n h_n^2} \sum_{i=1}^n K_1(\tfrac{x - X_i}{h_n}) \IInt{y K_2(\tfrac{y - Y_i}{h_n})}{y} \xra[n \to \infty]{} 
+\end{align*}
+
+Eigenschaften des Gasser-Müller-Schätzers:
+
+$\mathrm{MASE}(\hat{\mu}_n) = \tfrac{1}{n} \sum_{i=1}^n \mathrm{MSE}(\hat{\mu}_n (x_i))$, $\mathrm{MSE}(\hat{\theta}_n) = \E (\hat{\theta}_n - \theta)^2 = \var(\hat{\theta}_n) + (\E (\hat{\theta} - \theta))^2$
+
+\begin{satz}
+  Unter den Bedingungen (*), (**), $K(x) = 0$ für $\abs{x} > 1$, $a=0$, $b=1$, $\abs{K(x) - K(x')} \leq L \abs{x - x'}$, $h_n \downarrow 0$, $n h_n \to \infty$, $\mu \in \Cont^2(\cinterval{0}{1})$, $x = (i - \tfrac{1}{2}) / n$, $i = 1, \ldots, n$.
+  Dann gilt:
+  \[
+    \E \hat{\mu}_n(x) = \mu(x) + \tfrac{h_n^2}{2} \Int{0}{1}{x^2 K(x)}{x} \mu''(x) + o(h_n^2) + O(\tfrac{1}{n})
+  \]
+  \[
+    \mathrm{MSE(\hat{\mu}(x))} = \tfrac{\sigma^2}{n h_n} \Int{0}{1}{K^2 (x)}{x} + \tfrac{h_n^4}{4} \IInt{x^2 K(x)}{x} (\mu''(x))^2 + o(\tfrac{1}{n h_n}) + o(h_n^4)
+  \]
+  % ausgelassen: "optimal" = ?
+\end{satz}
+
 \end{document}
