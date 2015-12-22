@@ -41,6 +41,7 @@
 \newcommand{\RM}{\mathcal{R}} % Reed-Muller-Code
 \newcommand{\PCE}[1]{\widehat{#1}} % Parity-Check-Erweiterung
 \DeclareMathOperator{\trace}{trace} % Spur
+\DeclareMathOperator{\ggT}{ggT} % größter gemeinsamer Teiler
 
 \begin{document}
 
@@ -1905,5 +1906,65 @@ Zu $f : \F_q^n \to V$ definieren wir eine \emph{transformierte Abbildung} durch
   \]
   TODO: weiter?
 \end{bsp}
+
+% Vorlesung vom 22.12.2015
+
+% §10. MDS-Codes
+
+% §10.1 MDS-Codes der Länge 4
+
+\begin{defn}
+  Eine Matrix $A \in \Z_q^{q \times q}$ heißt \emph{lateinisches Quadrat} der Ordnung $q$, falls in jeder Zeile und Spalte jede Zahl aus $\Z_q$ genau einmal vorkommt.
+\end{defn}
+
+\begin{defn}
+  Zwei lateinische Quadrate $A, B \in \Z_q^{q \times q}$ heißen \emph{orthogonal} ($A \perp B$), falls die Abbildung
+  \[
+    \{ 1, \ldots, q \}^2 \to \Z_q^2, \quad
+    (i, j) \mapsto (A_{ij}, B_{ij})
+  \]
+  bijektiv ist.
+\end{defn}
+
+\begin{satz}
+  Es gibt genau dann ein Paar orthogonaler Quadrate der Ordnung~$q$, wenn $q \not\in \{ 2, 6 \}$.
+\end{satz}
+
+\begin{satz}
+  Sei $n=4$, $d=3$.
+  Dann gilt
+  \begin{itemize}
+    \item $A_2(4, 3) = 2 < 4 = 2^{4-3+1}$
+    \item $A_6(4,3) = 34 < 36 = 6^{4-3+1}$
+    \item $A_q(4,3) = q^2 = q^{4-3+1}$ für $q \geq 3$, $q \neq 6$
+  \end{itemize}
+\end{satz}
+
+\begin{beweisidee}
+  Man zeigt: Existenz eines MDS-Codes $\iff$ es gibt ein Paar orthogonaler lateinischer Quadrate der Ordnung $q$.
+\end{beweisidee}
+
+\begin{satz}
+  Es gibt keinen $6$-ären $(7, 6^5, 3)$-Code. (Solch ein Code wäre perfekt.)
+\end{satz}
+
+\begin{defn}
+  Seien $\psi_1, \ldots, \psi_l$ lateinische Quadrate der Ordnung $q$ über $\Z_q$.
+  Diese heißen \emph{paarweise orthogonal}, falls $\psi_i \perp \psi_j$ für alle $i \neq j$.
+  Man sagt, $\psi_1, \ldots, \psi_l$ ist eine Liste von MOLS (mutually orthogonal latin squares) der Ordnung $q$.
+\end{defn}
+
+\begin{bem}
+  Sei $N(q) \coloneqq $ die maximale Anzahl von MOLS der Ordnung~$q$.
+  \begin{itemize}
+    \item Es gilt $N(q) \leq q - 1$.
+    \item Eine Produkt-Konstruktion liefert: $N(q) \geq \min \{ N(r), N(s) \}$, falls $q = rs$ mit $\ggT(r, s) = 1$.
+    $q = \prod_{i=1}^m p_i^{a_i}$ Primfaktorzerlegung.
+    Dann: $N(q) \geq \min \Set{N(p_i^{a_i})}{i = 1, \ldots, m}$.
+    % In dieser Formel kann Ungleichheit gelten!
+    \item Sei $q \geq 2$ eine Primzahlpotenz. Dann ist $N(q) = q-1$.
+    \item $N(q) = q - 1$ $\iff$ $\exists$ projektive Ebene der Ordnung $q$
+  \end{itemize}
+\end{bem}
 
 \end{document}
