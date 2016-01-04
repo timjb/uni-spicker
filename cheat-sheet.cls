@@ -39,6 +39,8 @@
 \newtheorem*{defn}{Def} % Kurzform!
 \newtheorem*{bsp}{Bsp}
 \newtheorem*{bspe}{Bspe}
+\newtheorem*{gegenbsp}{Gegenbsp}
+\newtheorem*{gegenbspe}{Gegenbspe}
 \newtheorem*{satz}{Satz}
 \newtheorem*{beweis}{Beweis}
 \newtheorem*{frage}{Frage}

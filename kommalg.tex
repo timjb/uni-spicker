@@ -1,0 +1,402 @@
+\documentclass{cheat-sheet}
+
+\usepackage{stmaryrd} % \mapsfrom
+
+\pdfinfo{
+  /Title (Zusammenfassung Kommutative Algebra)
+  /Author (Tim Baumann)
+}
+
+% Bezeichnungen für Ideale
+\newcommand{\aaa}{\mathfrak{a}}
+\newcommand{\bbb}{\mathfrak{b}}
+\newcommand{\ccc}{\mathfrak{c}}
+\newcommand{\jjj}{\mathfrak{j}}
+\newcommand{\ppp}{\mathfrak{p}}
+\newcommand{\qqq}{\mathfrak{q}}
+\newcommand{\mmm}{\mathfrak{m}}
+\newcommand{\nnn}{\mathfrak{n}}
+
+\begin{document}
+
+\maketitle{Zusammenfassung Kommutative Algebra}
+
+% I. Ringe und Ideale
+\section{Ringe und Ideale}
+
+% 1. Ringe und Ringhomomorphismen
+
+% 1.1. Ringe
+
+\begin{defn}
+  Ein Ring ist ein Tupel $(A, +, \cdot, 0, 1)$ mit einer Menge~$A$, Operationen $+, \cdot : A \times A \to A$ und Elementen $0, 1 \in A$, sodass
+  \begin{itemize}
+    \item $(A, +, 0)$ eine abelsche Gruppe ist,
+    \item $(A, \cdot, 1)$ ein Monoid ist und
+    \item die Multiplikation distributiv über die Addition ist, \dh{}
+    \[
+      x (y + z) = x y + x z
+      \enspace \text{und} \enspace
+      (y + z) x = y x + z x
+      \quad \forall \, x, y, z \in A.
+    \]
+  \end{itemize}
+\end{defn}
+
+\begin{bspe}
+  \inlineitem{$\Z$,} \enspace
+  \inlineitem{$K[x_1, \ldots, x_n]$,} \enspace
+  \inlineitem{\emph{Nullring}: der Ring mit $0 = 1$}
+\end{bspe}
+
+% 1.2. Unterringe
+
+\begin{defn}
+  Sei $(A, +, \cdot)$ ein Ring.
+  Eine Teilmenge $B \subseteq A$ heißt \emph{Unterring}, falls $0, 1 \in B$ und $B$ unter $+$ und $\cdot$ abgeschlossen ist.
+\end{defn}
+
+\begin{bspe}
+  \inlineitem{$\Z \subset \Q$}, \enspace
+  \inlineitem{$K \subset K[X]$}
+\end{bspe}
+
+% 1.3. Ringhomomorphismen
+
+\begin{defn}
+  Ein \emph{Ringhomomorphismus} $\phi : A \to B$ ist eine Abbildung, welche sowohl ein Gruppenhomomor. $(A, +_A, 0_A) \to (B, +_B, 0_B)$ als auch ein Ringhomomorphismus $(A, \cdot_A, 1_A) \to (B, \cdot_B, 1_B)$ ist.
+\end{defn}
+
+\begin{bem}
+  Ringe und Ringhomomorphismen bilden eine Kategorie.
+\end{bem}
+
+\begin{lem}
+  Ein Ringhomomorphismus ist genau dann ein Isomorphismus (in dieser Kategorie), wenn er bijektiv ist.
+\end{lem}
+
+\begin{konv}
+  Seien $A$ im Folgenden Ringe und $\phi : A \to B$ ein Ringhomomorphismus.
+\end{konv}
+
+% 2. Ideale und Quotientenringe
+
+% 2.1. Ideale
+
+\begin{defn}
+  Eine Teilmenge $\aaa \subseteq A$ heißt (beidseitiges) \emph{Ideal} von $A$, falls
+  \begin{itemize}
+    \item $\aaa \subseteq A$ eine Untergruppe ist und
+    \item für alle $a \in A$ und $x \in \aaa$ gilt: $ax, xa \in \aaa$.
+  \end{itemize}
+\end{defn}
+
+\begin{lem}
+  Der Schnitt von (beliebig vielen) Idealen ist selbst ein Ideal.
+\end{lem}
+
+\begin{defn}
+  Sei $M \subseteq A$ eine Teilmenge.
+  Das von $M$ \emph{erzeugte Ideal} ist der Schnitt aller Ideale von~$A$, die $M$ umfassen.
+\end{defn}
+
+\begin{nota}
+  $(x_1, \ldots, x_n) \subseteq A$ ist das von $\{ x_1, \ldots, x_n \}$ erzeugte Ideal.
+\end{nota}
+
+\begin{bem}
+  \begin{minipage}[t]{0.85 \linewidth}
+    \begin{itemize}
+      \item Das \emph{Nullideal} $(0)$ ist das kleinste Ideal, denn $(0) = \{ 0 \}$.
+      \item Das \emph{Einsideal} $(1)$ ist das größte Ideal, denn $(1) = A$.
+    \end{itemize}
+  \end{minipage}
+\end{bem}
+
+% 2.2. Bild und Kern
+
+\begin{prop}
+  \begin{itemize}
+    \item Sei $\bbb \subseteq B$ ein Ideal.
+    Dann ist auch $\phi^{-1}(\bbb) \subseteq A$ ein Ideal.
+    \item Sei $A' \subseteq A$ ein Unterring.
+    Dann ist auch $\phi(A') \subseteq B$ ein Unterring.
+  \end{itemize}
+\end{prop}
+
+\begin{defn}
+  Das Ideal $\ker \phi \coloneqq \phi^{-1}((0))$ heißt \emph{Kern} von $\phi$.
+\end{defn}
+
+\begin{bem}
+  $\phi$ ist injektiv $\iff$ $\ker \phi = 0$
+\end{bem}
+
+% selbst hinzugefügt
+\begin{prop}
+  Sei $\phi : A \to B$ surjektiv, $\aaa \subseteq A$ ein Ideal.
+  Dann ist auch das Bild $\phi(A) \subseteq B$ ein Ideal.
+\end{prop}
+
+% 2.3. Quotientenringe
+
+\begin{prop}
+  Sei $\aaa \subseteq A$ ein Ideal.
+  Dann gibt es einen Ring $A/\aaa$ und einen Ringhomomor. $\pi : A \to A/\aaa$ mit folgender universeller Eigenschaft:
+
+  \hfill\begin{minipage}{0.95 \linewidth}
+    Für jeden Ring $B$ und Ringhomomor. $\psi : A \to B$ mit $\aaa \subseteq \ker \psi$ gibt es genau einen Ringhomomor. $\widetilde{\psi} : A/\aaa \to B$ mit $\psi = \widetilde{\psi} \circ \pi$.
+  \end{minipage}
+\end{prop}
+
+\begin{konstr}
+  Sei durch $x \sim y \coloniff x - y \in \aaa$ eine Äq'relation $\sim$ auf~$A$ definiert.
+  Setze $A/\aaa \coloneqq A/{\sim}$ und $\pi(x) \coloneqq [x]$.
+  Die Addition und Multiplikation auf~$A$ ind. die Addition bzw. Multiplikation auf $A/\aaa$.
+\end{konstr}
+
+\begin{defn}
+  $A/\aaa$ heißt \emph{Quotientenring} von $A$ nach $\aaa$.
+\end{defn}
+
+\begin{nota}
+  Man lässt häufig die Äquivalenzklammern weg, man schreibt also
+  "`$x = y$ in $A/\aaa$"' anstatt "`$[x] = [y]$"'.
+\end{nota}
+
+\begin{prop}
+  Sei $\aaa \subseteq A$ ein Ideal.
+  Folgende Korresp. ist bij. und monoton:
+  \[
+    \begin{array}{r c l}
+      \{ \text{ Ideale $\bbb \subseteq A$ mit $\bbb \supseteq \aaa$ } \} & \leftrightarrow & \{ \text{ Ideale $\ccc \subseteq A/\aaa$ } \} \\
+      \bbb & \mapsto & \pi(\bbb) \\
+      \pi^{-1}(\ccc) & \mapsfrom & \ccc
+    \end{array}
+  \]
+\end{prop}
+
+\begin{prop}[\emph{Homomorphiesatz}]
+  Sei $\phi : A \to B$ ein Ringhomomor.
+  Dann ist $\underline{\phi} : A / \ker(\phi) \to \im(\phi), \enspace [x] \mapsto \phi(x)$ ein Ringisomorphismus.
+\end{prop}
+
+% 3. Nullteiler, nilpotente Elemente und Einheiten
+
+% 3.1. Integritätsbereiche
+
+Im Folgenden seien alle Ringe \emph{kommutativ}, \dh{} $xy = yx$ f.\,a. $x, y$.
+
+\begin{defn}
+  Sei $A$ ein kommutativer Ring.
+  Ein Element $x \in A$ heißt
+  \begin{itemize}
+    \item \emph{regulär}, falls $\fa{y \in A} xy = 0 \implies y = 0$.
+    \item \emph{Nullteiler}, falls es nicht regulär ist, \dh{} wenn ein $y \in A \setminus \{ 0 \}$ mit $xy = 0$ existiert.
+  \end{itemize}
+\end{defn}
+
+\begin{defn}
+  Ein Ring $A$ heißt \emph{Integritätsbereich}, wenn $0 \in A$ der einzige Nullteiler in $A$ ist.
+\end{defn}
+
+\begin{acht}
+  Die Null im Nullring ist regulär!
+\end{acht}
+
+\begin{bem}
+  Ein Ring $A$ ist genau dann ein Integritätsbereich, wenn
+  \[
+    0 \neq 1 \text{ in $A$}
+    \qquad \text{und} \qquad
+    \fa{x, y \in } xy = 0 \implies x = 0 \vee y = 0.
+  \]
+\end{bem}
+
+% weglassen?
+\begin{beob}
+  Sei $\phi : A \to B$ ein injektiver Ringhomomorphismus.
+  Ist $B$ ein Integritätsbereich, so auch $A$.
+\end{beob}
+
+\begin{defn}
+  Ein Ideal $\aaa \subseteq A$ heißt \emph{Hauptideal}, falls $\aaa = (a)$ für ein $a \in A$. \\
+  Ein Ring~$A$ heißt \emph{Hauptidealbereich}, falls jedes Ideal in $A$ ein Hauptideal ist.
+\end{defn}
+
+\begin{bspe}
+  \inlineitem{$\Z$,} \enspace
+  \inlineitem{$K[x]$}
+\end{bspe}
+
+\begin{gegenbsp}
+  \inlineitem{$K[x_1, \ldots, x_n]$ für $n \geq 2$}
+\end{gegenbsp}
+
+% 3.2. Nilpotente Elemente
+
+\begin{defn}
+  Ein Element $x \in A$ heißt \emph{nilpotent}, falls $\ex{n \geq 0} x^n = 0$.
+\end{defn}
+
+% weglassen?
+\begin{beob}
+  Ist $A$ ein Integritätsbereich, so ist $0 \in A$ das einzige nilpotente Element in $A$.
+\end{beob}
+
+% 3.3. Einheiten
+
+\begin{defn}
+  Sei $A$ ein Ring, nicht notwendigerweise kommutativ. \\
+  Ein Element $x \in A$ heißt \emph{Einheit}, falls ein $y \in A$ mit $xy = yx = 1$ existiert.
+  $A^\times \coloneqq \{ \text{ Einheiten in $A$ } \}$ heißt \emph{Einheitengruppe}. \\
+  Der Ring $A$ heißt \emph{Schiefkörper}, falls $0$ die einzige Nicht-Einheit ist. \\
+  Falls zusätzlich $A$ kommutativ ist, so heißt $A$ ein \emph{Körper}.
+\end{defn}
+
+\begin{beob}
+  \begin{itemize}
+    \item $x \in A$ ist eine Einheit $\iff$ $(x) = (1)$ $\iff$ $A/(x) = 0$
+    \item Einheiten sind regulär.
+  \end{itemize}
+\end{beob}
+
+% 3.4. Charakterisierung von Körpern
+
+\begin{prop}
+  Sei $A$ ein kommutativer Ring.
+  Dann sind äquivalent:
+  \begin{itemize}
+    \item $A$ ist ein Körper.
+    \item $A$ besitzt genau zwei Ideale (nämlich $(0)$ und $(1)$).
+    \item Ein Ringhomomorphismus $A \to B$ ist genau dann injektiv, wenn~$B$ nicht der Nullring ist.
+  \end{itemize}
+\end{prop}
+
+% 4. Primideale und maximale Ideale
+
+\begin{defn}
+  \begin{itemize}
+    \item Ein Ideal $\ppp \subset A$ heißt \emph{Primideal}, falls $1 \not\in \ppp$ und $\fa{a, b \in A} ab \in \ppp \implies a \in \ppp \vee b \in \ppp$.
+    \item Ein Ideal $\mmm \subset A$ heißt \emph{maximal}, falls für jedes Ideal $\ppp \subseteq \aaa \subseteq A$ \textit{entweder} $\ppp = \aaa$ oder $\aaa = A$ (nicht beides!) gilt.
+  \end{itemize}
+\end{defn}
+
+\begin{bspe}
+  \begin{itemize}
+    \item Jedes Ideal in $\Z$ hat die Form $(m)$ mit $m \in \N$.
+    Das Ideal $(m)$ ist genau dann prim, wenn $m=0$ oder $m$ eine Primzahl ist.
+    \item Sei $f \in K[x_1, \ldots, x_n]$ ein irred. Polynom.
+    Dann ist $(f)$ prim.
+\end{itemize}
+\end{bspe}
+
+\begin{lem}
+  \begin{minipage}[t]{0.85 \linewidth}
+    $
+      \begin{array}[t]{l c l}
+        \text{$\ppp \subseteq A$ ist prim} & \iff & \text{$A/\ppp$ ist ein Integritätsbereich} \\
+        \text{$\mmm \subseteq A$ ist maximal} & \iff & \text{$A/\mmm$ ist ein Körper} \\
+      \end{array}
+    $
+  \end{minipage}
+\end{lem}
+
+\begin{kor}
+  Maximale Ideale sind prim.
+\end{kor}
+
+\begin{prop}
+  Sei $\aaa \subseteq A$ ein Ideal.
+  Folgende Korresp. ist bij. und monoton:
+  \[
+    \begin{array}{r c l}
+      \{ \text{ Primideale $\ppp \subseteq A$ mit $\ppp \supseteq \aaa$ } \} & \leftrightarrow & \{ \text{ Primideale $\qqq \subseteq A/\aaa$ } \} \\
+      \ppp & \mapsto & \pi(\ppp) \\
+      \pi^{-1}(\qqq) & \mapsfrom & \qqq
+    \end{array}
+  \]
+  Genauso bekommt man eine bijektive, monotone Korrespondenz
+  \[
+    \begin{array}{r c l}
+      \{ \text{ max. Ideale $\mmm \subseteq A$ mit $\mmm \supseteq \aaa$ } \} & \leftrightarrow & \{ \text{ max. Ideale $\nnn \subseteq A/\aaa$ } \}
+    \end{array}
+  \]
+\end{prop}
+
+% 4.2. Maximale Ideale
+
+\begin{prop}
+  Ein Ring besitzt genau dann ein maximales Ideal, wenn er nicht der Nullring ist.
+\end{prop}
+
+\begin{kor}
+  \begin{itemize}
+    \item Sei $\aaa \subseteq A$ ein Ideal.
+    Dann gibt es genau dann ein maximales Ideal $\ppp \subset A$ mit $\ppp \supseteq \aaa$, wenn $\aaa \neq (1)$.
+    \item Ein Element $x \in A$ liegt genau dann in einem maximalen Ideal von~$A$, wenn~$x$ keine Einheit ist.
+  \end{itemize}
+\end{kor}
+
+% 4.3. Lokale Ringe
+
+\begin{defn}
+  Ein \emph{lokaler Ring} ist ein komm. Ring~$A$ mit genau einem max. Ideal $\mmm$.
+  Der Körper $F \coloneqq A/\mmm$ heißt \emph{Restklassenkörper} von~$A$.
+\end{defn}
+
+\begin{nota}
+  Man schreibt "`Sei $(A, \mmm, F)$ ein lokaler Ring."'
+\end{nota}
+
+\begin{defn}
+  Ein \emph{halblokaler Ring} ist ein kommutativer Ring mit nur endlich vielen maximalen Idealen.
+\end{defn}
+
+\begin{lem}
+  Sei $\mmm \subset A$ ein Ideal mit $A \setminus \mmm = A^\times$.
+  Dann ist $(A, \mmm)$ ein lokaler Ring.
+\end{lem}
+
+\begin{prop}
+  Sei $\mmm \subset A$ ein maximales Ideal, sodass $1 + x$ für alle $x \in \mmm$ eine Einheit ist.
+  Dann ist $A \setminus \mmm = A^\times$, also $(A, \mmm)$ ein lokaler Ring.
+\end{prop}
+
+% 5. Das Nil- und das Jacobsonsche Ideal
+
+% 5.1. Das Nilradikal
+
+\begin{prop}
+  Die Menge $\nnn \coloneqq \{ \text{ nilpotente Elemente } \} \subseteq A$ ist ein Ideal, das sogenannte \emph{Nilradikal}.
+\end{prop}
+
+\begin{bem}
+  Der Ring $A/\nnn$ hat außer $0$ keine nilpotenten Elemente.
+\end{bem}
+
+\begin{prop}
+  Das Nilradikal eines kommutativen Ringes ist der Schnitt aller seiner Primideale.
+\end{prop}
+
+% 5.2. Das Jacobsonsche Ideal
+
+\begin{defn}
+  Das \emph{Jacobsonsche Ideal} $\jjj \subset A$ ist der Schnitt aller maximalen Ideale von $A$.
+\end{defn}
+
+\begin{prop}
+  Ein Element $x \!\in\! A$ liegt genau dann im Jacobsonschen Ideal~$\jjj$, wenn $1 - xy$ für alle $y \in A$ eine Einheit ist.
+\end{prop}
+
+% 6. Operationen mit Idealen
+
+% 6.1. Summe, Schnitt und Produkt von Idealen
+
+
+
+% TODO: Summe von Idealen
+% TODO: was ist ein faktorieller Ring
+% TODO: Umkehrung von Proposition 4.19 im Skript
+
+\end{document}
