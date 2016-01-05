@@ -56,6 +56,13 @@
         $1
       \\\\end{bsp}
     """
+  'Beispiele':
+    'prefix': 'bspe'
+    'body': """
+      \\\\begin{bspe}
+        $1
+      \\\\end{bspe}
+    """
   'Satz':
     'prefix': 'satz'
     'body': """
@@ -83,4 +90,33 @@
       \\\\begin{bem}
         $1
       \\\\end{bem}
+    """
+  'Proposition':
+    'prefix': 'prop'
+    'body': """
+      \\\\begin{prop}
+        $1
+      \\\\end{prop}
+    """
+  'Konstruktion':
+    'prefix': 'konstr'
+    'body': """
+      \\\\begin{konstr}
+        $1
+      \\\\end{konstr}
+    """
+    """
+  'Notation':
+    'prefix': 'nota'
+    'body': """
+      \\\\begin{nota}
+        $1
+      \\\\end{nota}
+    """
+  'Beobachtung':
+    'prefix': 'beob'
+    'body': """
+      \\\\begin{beob}
+        $1
+      \\\\end{beob}
     """
