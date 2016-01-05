@@ -7,6 +7,11 @@
   /Author (Tim Baumann)
 }
 
+\DeclareMathOperator{\ggT}{ggT} % größter gemeinsamer Teiler
+\DeclareMathOperator{\kgV}{kgV} % kleinstes gemeinsames Vielfaches
+\newcommand{\Ring}{\mathbf{Ring}} % Kategorie der Ringe
+\DeclareMathOperator{\ann}{ann} % Annulator
+
 % Bezeichnungen für Ideale
 \newcommand{\aaa}{\mathfrak{a}}
 \newcommand{\bbb}{\mathfrak{b}}
@@ -68,7 +73,7 @@
 \end{defn}
 
 \begin{bem}
-  Ringe und Ringhomomorphismen bilden eine Kategorie.
+  Ringe und Ringhomomorphismen bilden eine Kategorie $\Ring$.
 \end{bem}
 
 \begin{lem}
@@ -99,6 +104,13 @@
   Sei $M \subseteq A$ eine Teilmenge.
   Das von $M$ \emph{erzeugte Ideal} ist der Schnitt aller Ideale von~$A$, die $M$ umfassen.
 \end{defn}
+
+\begin{bem}
+  Falls $A$ kommutativ ist, so gilt
+  \[
+    \text{von $M$ erzeugtes Ideal} = \Set{\sum_{k=1}^n \lambda_k x_k}{n \in \N, \lambda_k \in A, x_k \in M}.
+  \]
+\end{bem}
 
 \begin{nota}
   $(x_1, \ldots, x_n) \subseteq A$ ist das von $\{ x_1, \ldots, x_n \}$ erzeugte Ideal.
@@ -393,10 +405,255 @@ Im Folgenden seien alle Ringe \emph{kommutativ}, \dh{} $xy = yx$ f.\,a. $x, y$.
 
 % 6.1. Summe, Schnitt und Produkt von Idealen
 
+\begin{defn}
+  Die \emph{Summe von Idealen} $(\aaa_i)_{i \in I}$ von~$A$ ist das Ideal
+  \[
+    \sum_{i \in I} \aaa_i \coloneqq \Set{\sum_{k=1}^n x_k}{k \in \N, x_k \in \aaa_{i_k}, i_k \in I}.
+  \]
+\end{defn}
 
+\begin{bem}
+  $\sum_{i \in I} \aaa_i$ ist das kleinste Ideal, das alle $\aaa_i$ umfasst.
+\end{bem}
 
-% TODO: Summe von Idealen
-% TODO: was ist ein faktorieller Ring
+\begin{beob}
+  $(x_1) + \ldots + (x_n) = (x_1, \ldots, x_n)$
+\end{beob}
+
+\begin{bem}
+  Ideale eines Ringes $A$ bilden mit Schnitt und Summe einen vollständigen Verband bezüglich der Inklusionsordnung.
+\end{bem}
+
+\begin{defn}
+  Das \emph{Produkt zweier Ideale} $\aaa, \bbb \subseteq A$ ist
+  \[
+    \aaa \bbb \coloneqq \text{von $\Set{ab}{a \in \aaa, b \in \bbb}$ erzeugtes Ideal.}
+  \]
+\end{defn}
+
+\begin{beob}
+  \inlineitem{$\aaa \bbb \subseteq \aaa \cap \bbb$,} \quad
+  \inlineitem{$(x_1) \cdot \ldots \cdot (x_n) = (x_1 \cdot \ldots \cdot x_n)$}
+\end{beob}
+
+\begin{bsp}
+  In $A = \Z$ gilt für $m, n \in \N$ \\
+  \inlineitem{$(m) + (n) = (m, n) = (\ggT(m, n))$,} \quad
+  \inlineitem{$(m) \cap (n) = (\kgV(m, n))$.}
+\end{bsp}
+
+\begin{beob}
+  \begin{itemize}
+    \item Summe, Schnitt und Produkt von Idealen sind assoziativ.
+    \item Summe und Schnitt sind kommutativ. Das Produkt von Idealen ist kommutativ, wenn der Ring kommutativ ist.
+    \item Distributivgesetz: \enspace $\aaa (\bbb + \ccc) = \aaa \bbb + \aaa \ccc$
+    \item Modularitätsgesetz: \enspace Ist $\aaa \supseteq \bbb$ oder $\aaa \supseteq \ccc$, so folgt
+    \[
+      \aaa \cap (\bbb + \ccc) = (\aaa \cap \bbb) + (\aaa \cap \ccc).
+    \]
+  \end{itemize}
+\end{beob}
+
+\begin{defn}
+  Zwei Ideale $\aaa, \bbb \subseteq A$ heißen \emph{koprim}, falls $\aaa + \bbb = (1)$.
+\end{defn}
+
+\begin{bsp}
+  In $A = \Z$ gilt: \enspace
+  $(m)$, $(n)$ sind koprim $\iff$ $\ggT(m, n) = 1$
+\end{bsp}
+
+\begin{prop}
+  Seien $\aaa_1, \ldots \aaa_n \subseteq A$ paarweise koprime Ideale.
+  Dann gilt
+  \[
+    \bigcap_{i=1}^n \aaa_i = \prod_{i=1}^n \aaa_i.
+  \]
+\end{prop}
+
+% 6.2. Direkte Produkte
+
+\begin{defn}
+  Das \emph{direkte Produkt} einer Familie $(A_i)_{i \in I}$ von Ringen ist der Ring $\prod_{i \in I} A_i \coloneqq \{ (a_i \in A_i)_{i \in I} \}$ mit kmpnntnwsr Verknüpfung.
+\end{defn}
+
+\begin{bem}
+  Das direkte Produkt ist das kategorienth. Produkt in $\Ring$.
+\end{bem}
+
+\begin{prop}
+  Seien $\aaa_1, \ldots \aaa_n \subseteq A$ Ideale.
+  Dann ist
+  \[
+    \phi : A \to \prod_{i=1}^n (A/\aaa_i), \quad x \mapsto ([x], \ldots, [x])
+  \]
+  genau dann surjektiv, wenn die Ideale $\aaa_i$ paarweise koprim sind.
+\end{prop}
+
+\begin{bem}
+  %Es gilt $\ker \phi = \bigcap_{i=1}^n \aaa_i$.
+  Der Ringhomomor. $\phi$ ist genau dann injektiv, wenn $\bigcap_{i=1}^n \aaa_i = 0$.
+\end{bem}
+
+% 6.3. Ideale in Primidealen
+
+\begin{prop}
+  Seien $\ppp_1, \ldots, \ppp_n \subseteq A$ Primideale und $\aaa \subseteq A$ ein Ideal. \\
+  Gilt $\aaa \subseteq \bigcup_{i=1}^n \ppp_i$, so gibt es ein $j \in \{ 1, \ldots, n \}$ mit $\aaa \subseteq \ppp_j$.
+\end{prop}
+
+\begin{prop}
+  Seien $\aaa_1, \ldots, \aaa_n \subseteq A$ Ideale und $\ppp \subseteq A$ ein Primideal. \\
+  Gilt $\ppp \supseteq \bigcap_{i=1}^n \aaa_i$, so gibt es ein $j \in \{ 1, \ldots, n \}$ mit $\ppp \supseteq \aaa_j$.
+\end{prop}
+
+% 6.4. Der Idealquotient
+
+\begin{defn}
+  Seien $\aaa, \bbb \subseteq A$ zwei Ideale.
+  Der \emph{Idealquotient} von $\aaa$ nach $\bbb$ ist das Ideal $(\aaa : \bbb) \coloneqq \Set{x \in A}{x \bbb \subseteq \aaa}$.
+\end{defn}
+
+\begin{nota}
+  \inlineitem{$(x : \bbb) \coloneqq ((x) : \bbb)$,} \quad
+  \inlineitem{$(\aaa : y) \coloneqq (\aaa : (y))$}
+\end{nota}
+
+\begin{defn}
+  Der \emph{Annulator} eines Ideals $\bbb \subseteq A$ ist
+  $\ann(\bbb) \coloneqq (0 : \bbb)$.
+\end{defn}
+
+\begin{lem}
+  \inlineitem{$\aaa \subseteq (\aaa : \bbb)$} \quad
+  \inlineitem{$(\aaa : \bbb) \bbb \subseteq \aaa$} \quad
+  \inlineitem{$((\aaa : \bbb) : \ccc) = (\aaa : \bbb \ccc)$} \\[2pt]
+  \inlineitem{$(\bigcap_{i \in I} \aaa_i : \bbb) = \bigcap_{i \in I} (\aaa_i : \bbb)$} \quad
+  \inlineitem{$(\aaa : \sum_{i \in I} \bbb) = \bigcap_{i \in I} (\aaa : \bbb_i)$}
+\end{lem}
+
+% 6.5. Das Wurzelideal
+
+\begin{defn}
+  Das \emph{Wurzelideal} eines Ideals $\aaa \subseteq A$ ist das Ideal
+  \[
+    \sqrt{\aaa} \coloneqq \Set{x \in A}{\ex{n \in \N} x^n \in \aaa}.
+  \]
+\end{defn}
+
+\begin{bem}
+  Das Nilradikal ist $\sqrt{(0)}$, das Wurzelideal des Nullideals. \\
+  Es gilt $\sqrt{\aaa} = \pi^{-1}(\sqrt{(0)})$ mit $\pi : A \to A/\aaa, \enspace x \mapsto [x]$.
+\end{bem}
+
+\begin{lem}
+  \inlineitem{$\sqrt{\aaa} \supseteq \aaa$} \enspace
+  \inlineitem{$\sqrt{\aaa^n} = \sqrt{\aaa}$ für $n \!\geq\! 1$} \enspace
+  \inlineitem{$\sqrt{\aaa} = (1) \iff \aaa = (1)$} \\[2pt]
+  \inlineitem{$\sqrt{\sqrt{\aaa}} = \sqrt{\aaa}$} \enspace
+  \inlineitem{$\sqrt{\aaa \bbb} = \sqrt{\aaa \cap \bbb} = \sqrt{\aaa} \cap \sqrt{\bbb}$} \enspace
+  \inlineitem{$\sqrt{\aaa + \bbb} = \sqrt{\sqrt{\aaa} + \sqrt{\bbb}}$}
+\end{lem}
+
+\begin{defn}
+  Ein Ideal $\aaa \subseteq A$ heißt \emph{Wurzelideal}, falls $\aaa = \sqrt{\aaa}$.
+\end{defn}
+
+\begin{prop}
+  Das Wurzelideal von $\sqrt{\aaa}$ ist der Schnitt aller Primideale von~$A$, die $\aaa$ enthalten.
+\end{prop}
+
+\begin{prop}
+  $\{ \text{ Nullteiler von $A$ } \} = \bigcup_{\mathclap{x \in A \setminus \{ 0 \}}} \sqrt{\ann(x)}$
+\end{prop}
+
+\begin{lem}
+  $\sqrt{\aaa}$ und $\sqrt{\bbb}$ koprim $\implies$ $\aaa$ und $\bbb$ koprim
+\end{lem}
+
+% 7. Erweiterungen und Kontraktionen von Idealen
+
+% 7.1. Kontraktionen
+
+\begin{defn}
+  Sei $\phi : A \to B$ ein Homomorphismus komm. Ringe. \\
+  Die \emph{Kontraktion} von $\bbb \subseteq B$ (bzgl. $\phi$) ist das Ideal $A \cap \bbb \coloneqq \phi^{-1}(\bbb)$.
+\end{defn}
+
+\begin{bem}
+  Es wird also $\phi$ in der Notation unterdrückt.
+  Falls $\phi$ die Inklusion eines Unterrings ist, so ist $A \cap \bbb$ wörtlich zu verstehen.
+\end{bem}
+
+\begin{beob}
+  $A \cap \bbb = \ker(A \to B \to B/\bbb)$
+\end{beob}
+
+\begin{lem}
+  Ist $\qqq \subseteq B$ ein Primideal, so auch $A \cap \qqq \subseteq A$.
+\end{lem}
+
+\begin{acht}
+  %Für $\phi : \Z \hookrightarrow \Q$ und $\mmm = (0) \subset \Q$ gilt: $\mmm$ ist maximal, $\Z \cap \mmm$ aber nicht.
+  Die Kontraktion max. Ideale ist i.\,A. nicht maximal!
+\end{acht}
+
+% TODO: Distributiv- und Modularitätsgesetz für unendliche Summen?
+% TODO: was ist ein faktorieller Ring?
 % TODO: Umkehrung von Proposition 4.19 im Skript
+
+% 7.2. Erweiterungen
+
+\begin{defn}
+  Sei $\phi : A \to B$ ein Homomorphismus komm. Ringe. \\
+  Die \emph{Erweiterung} von $\aaa \subseteq A$ (bzgl. $\phi$) ist das Ideal $B \aaa \coloneqq (\phi(\aaa))$, das von $\phi(\aaa)$ erzeugte Ideal.
+\end{defn}
+
+\begin{bem}
+  Ist $\phi$ die Inklusion eines Unterrings, so ist $B \aaa$ tatsächlich die Menge der $B$-Linearkombinationen von Elementen in~$\aaa$.
+\end{bem}
+
+\begin{bem}
+  Die Erweiterung eines Primideals ist i.\,A. nicht mehr prim.
+\end{bem}
+
+% 7.3. Operationen mit Erweiterungen und Kontraktionen
+
+\begin{prop}
+  Sei $\phi : A \to B$ ein Homomorphismus komm. Ringe. \\
+  Die Erweiterung und Kontraktion von Idealen (bzgl. $\phi$) bilden eine Galois-Verbindung, \dh{} für Ideale $\aaa \subseteq A$ und $\bbb \subseteq B$ gilt
+  \[
+    B \aaa \subseteq \bbb \iff \aaa \subseteq A \cap \bbb.
+  \]
+  Äquivalent dazu sind Erw. und Kontraktion monoton und es gelten
+  \[
+    \aaa \subseteq A \cap (B \aaa)
+    \quad \text{und} \quad
+    \bbb \supseteq B (A \cap \bbb).
+  \]
+  Außerdem folgt aus den Eigenschaften einer Galois-Verbindung, dass
+  \[
+    B \aaa = B (A \cap (B \aaa))
+    \quad \text{und} \quad
+    A \cap \bbb = A \cap (B (A \cap \bbb)).
+  \]
+  Damit induzieren Erweiterung und Kontraktion eine bijektive ordnungserhaltende Korrespondenz zwischen den kontrahierten Idealen von~$A$ und den erweiterten Idealen von~$B$.
+\end{prop}
+
+\begin{lem}
+  Für Ideale $\aaa, \aaa_1, \aaa_2 \subseteq A$ und $\bbb, \bbb_1, \bbb_2 \subseteq B$ gilt
+  \begin{itemize}
+    \miniitem{0.45 \linewidth}{$B \sqrt{\aaa} \subseteq \sqrt{B \aaa}$}
+    \miniitem{0.51 \linewidth}{$A \cap \sqrt{\bbb} = \sqrt{A \cap \bbb}$} \\
+    \miniitem{0.45 \linewidth}{$B (\aaa_1 + \aaa_2) = B \aaa_1 + B \aaa_2$}
+    \miniitem{0.51 \linewidth}{$A \cap (\bbb_1 + \bbb_2) \supseteq A \cap \bbb_1 + A \cap \bbb_2$} \\
+    \miniitem{0.45 \linewidth}{$B (\aaa_1 \cap \aaa_2) \subseteq B \aaa_1 \cap B \aaa_2$}
+    \miniitem{0.51 \linewidth}{$A \cap (\bbb_1 \cap \bbb_2) = (A \cap \bbb_1) \cap (A \cap \bbb_2)$} \\
+    \miniitem{0.45 \linewidth}{$B (\aaa_1 \aaa_2) = (B \aaa_1) (B \aaa_2)$}
+    \miniitem{0.51 \linewidth}{$A \cap (\bbb_1 \bbb_2) \supseteq (A \cap \bbb_1) (A \cap \bbb_2)$} \\
+    \miniitem{0.45 \linewidth}{$B (\aaa_1 : \aaa_2) \subseteq (B \aaa_1 : B \aaa_2)$}
+    \miniitem{0.51 \linewidth}{$A \cap (\bbb_1 : \bbb_2) \subseteq (A \cap \bbb_1 : A \cap \bbb_2)$}
+  \end{itemize}
+\end{lem}
 
 \end{document}
