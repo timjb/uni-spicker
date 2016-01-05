@@ -7,10 +7,40 @@
   /Author (Tim Baumann)
 }
 
+\usepackage{tikz}
+\usetikzlibrary{matrix,arrows,cd}
+
+% http://tex.stackexchange.com/questions/117732/tikz-and-babel-error
+% Es ist schierer Wahnsinn, welche Hacks LaTeX benötigt!
+\tikzset{
+  every picture/.prefix style={
+    execute at begin picture=\shorthandoff{"}
+  }
+}
+
+\newenvironment{centertikz}
+  {\begin{center}\begin{tikzpicture}}
+  {\end{tikzpicture}\end{center}}
+\newenvironment{centertikzcd}
+  {\begin{center}\begin{tikzcd}}
+  {\end{tikzcd}\end{center}}
+
 \DeclareMathOperator{\ggT}{ggT} % größter gemeinsamer Teiler
 \DeclareMathOperator{\kgV}{kgV} % kleinstes gemeinsames Vielfaches
-\newcommand{\Ring}{\mathbf{Ring}} % Kategorie der Ringe
 \DeclareMathOperator{\ann}{ann} % Annulator
+\DeclareMathOperator{\coker}{coker} % Kokern
+\newcommand{\SC}{\mathfrak{C}} % Serre-Klasse
+\newcommand{\PS}{\mathcal{P}} % Potenzmenge
+
+% Kategorientheorie
+\newcommand{\Ring}{\mathbf{Ring}} % Kategorie der Ringe
+\newcommand{\Mod}{\mathbf{Mod}} % Kategorie der Moduln über einem Ring
+\newcommand{\LMod}[1]{{#1}\text{-}\Mod} % Kategorie der (#1)-Linksmoduln
+\DeclareMathOperator{\Hom}{Hom} % Homomorphisms
+\DeclareMathOperator{\End}{End} % Endomorphismen
+\newcommand{\ladj}{\dashv} % Links-adjungiert (left-adjoint)
+\newcommand{\Alg}{\mathbf{Alg}} % Kategorie der Algebren über einem Körper/Ring
+\newcommand{\AAlg}[1]{{#1}\text{-}\Alg} % Kategorie der Algebren über einem Ring A
 
 % Bezeichnungen für Ideale
 \newcommand{\aaa}{\mathfrak{a}}
@@ -21,6 +51,9 @@
 \newcommand{\qqq}{\mathfrak{q}}
 \newcommand{\mmm}{\mathfrak{m}}
 \newcommand{\nnn}{\mathfrak{n}}
+
+% Abkürzungen
+\newcommand{\keS}{k.\,e.\,S.} % kurze exakte Sequenz
 
 \begin{document}
 
@@ -323,7 +356,7 @@ Im Folgenden seien alle Ringe \emph{kommutativ}, \dh{} $xy = yx$ f.\,a. $x, y$.
   Folgende Korresp. ist bij. und monoton:
   \[
     \begin{array}{r c l}
-      \{ \text{ Primideale $\ppp \subseteq A$ mit $\ppp \supseteq \aaa$ } \} & \leftrightarrow & \{ \text{ Primideale $\qqq \subseteq A/\aaa$ } \} \\
+      \{ \text{ Primideale $\ppp \subset A$ mit $\ppp \supseteq \aaa$ } \} & \leftrightarrow & \{ \text{ Primideale $\qqq \subset A/\aaa$ } \} \\
       \ppp & \mapsto & \pi(\ppp) \\
       \pi^{-1}(\qqq) & \mapsfrom & \qqq
     \end{array}
@@ -331,7 +364,7 @@ Im Folgenden seien alle Ringe \emph{kommutativ}, \dh{} $xy = yx$ f.\,a. $x, y$.
   Genauso bekommt man eine bijektive, monotone Korrespondenz
   \[
     \begin{array}{r c l}
-      \{ \text{ max. Ideale $\mmm \subseteq A$ mit $\mmm \supseteq \aaa$ } \} & \leftrightarrow & \{ \text{ max. Ideale $\nnn \subseteq A/\aaa$ } \}
+      \{ \text{ max. Ideale $\mmm \subset A$ mit $\mmm \supseteq \aaa$ } \} & \leftrightarrow & \{ \text{ max. Ideale $\nnn \subset A/\aaa$ } \}
     \end{array}
   \]
 \end{prop}
@@ -498,12 +531,12 @@ Im Folgenden seien alle Ringe \emph{kommutativ}, \dh{} $xy = yx$ f.\,a. $x, y$.
 % 6.3. Ideale in Primidealen
 
 \begin{prop}
-  Seien $\ppp_1, \ldots, \ppp_n \subseteq A$ Primideale und $\aaa \subseteq A$ ein Ideal. \\
+  Seien $\ppp_1, \ldots, \ppp_n \subset A$ Primideale und $\aaa \subseteq A$ ein Ideal. \\
   Gilt $\aaa \subseteq \bigcup_{i=1}^n \ppp_i$, so gibt es ein $j \in \{ 1, \ldots, n \}$ mit $\aaa \subseteq \ppp_j$.
 \end{prop}
 
 \begin{prop}
-  Seien $\aaa_1, \ldots, \aaa_n \subseteq A$ Ideale und $\ppp \subseteq A$ ein Primideal. \\
+  Seien $\aaa_1, \ldots, \aaa_n \subseteq A$ Ideale und $\ppp \subset A$ ein Primideal. \\
   Gilt $\ppp \supseteq \bigcap_{i=1}^n \aaa_i$, so gibt es ein $j \in \{ 1, \ldots, n \}$ mit $\ppp \supseteq \aaa_j$.
 \end{prop}
 
@@ -590,7 +623,7 @@ Im Folgenden seien alle Ringe \emph{kommutativ}, \dh{} $xy = yx$ f.\,a. $x, y$.
 \end{beob}
 
 \begin{lem}
-  Ist $\qqq \subseteq B$ ein Primideal, so auch $A \cap \qqq \subseteq A$.
+  Ist $\qqq \subset B$ ein Primideal, so auch $A \cap \qqq \subset A$.
 \end{lem}
 
 \begin{acht}
@@ -655,5 +688,821 @@ Im Folgenden seien alle Ringe \emph{kommutativ}, \dh{} $xy = yx$ f.\,a. $x, y$.
     \miniitem{0.51 \linewidth}{$A \cap (\bbb_1 : \bbb_2) \subseteq (A \cap \bbb_1 : A \cap \bbb_2)$}
   \end{itemize}
 \end{lem}
+
+% II. Moduln
+\section{Moduln}
+
+% 8. Moduln und Modulhomomorphismen
+
+\begin{defn}
+  Sei $A$ ein Ring.
+  Ein \emph{$A$-(Links-)Modul} ist eine abelsche Gruppe $(M, +, 0)$ zusammen mit einer Abb. $\cdot : A \times M \to M$, sodass
+  \begin{itemize}
+    \item die Multiplikation eine Operation von $(A, \cdot, 1)$ auf $M$ ist, \dh{} $(ab) x = a (bx)$ und $1 \cdot x = x$ für alle $a, b \in A$ und $x \in M$.
+    \item die Multiplikation distributiv über die Addition ist, \dh{} $a (x + y) = a x + a y$ und $(a + b) x = a x + b x$ f.\,a. $a, b \in A$, $x, y \in M$.
+  \end{itemize}
+\end{defn}
+
+\begin{acht}
+  Es heißt \textit{der} Modul, nicht \textit{das} Modul!
+\end{acht}
+
+\begin{bspe}
+  \begin{itemize}
+    \item Der Ring $A$ ist selbst ein $A$-Modul.
+    \item Jedes Ideal $\aaa \subseteq A$ ist (durch Einschränkung der Multiplikation) ein $A$-Modul.
+    \item Ein $K$-Modul ($K$ ein Körper) ist dasselbe wie ein $K$-VR.
+    \item Ein $\Z$-Modul ist dasselbe wie eine abelsche Gruppe.
+    \item Ein $K[x]$-Modul ist dasselbe wie ein $K$-Vektorraum $V$ zusammen mit einem Endomorphismus $V \to V$.
+    \item Sei $G$ eine endliche Gruppe und
+    \[
+      A \coloneqq K[G] \coloneqq \Set{\sum_{g \in G} a_g \cdot g}{g \in G, a_g \in K}
+    \]
+    die \emph{Gruppenalgebra} von $G$ über $K$.
+    Ein $A$-Modul ist dasselbe wie ein $K$-VR $V$ mit einer linearen Darstellung $G \to \End_K(V)$.
+  \end{itemize}
+\end{bspe}
+
+\begin{defn}
+  Ein $A$-Modulhomomorphismus ist eine Abbildung $\phi : M \to N$ zwischen $A$-Moduln $M$ und $N$, welche ein Gruppenhomomorphismus $(M, +_M, 0_M) \to (N, +_N, 0_N)$ und verträglich mit der Wirkung des multiplikativen Monoids von $M$ und $N$ ist, \dh{} $\phi(ax) = a \phi(x)$ für alle $a \in A$ und $x \in M$.
+\end{defn}
+
+\begin{bem}
+  $A$-Moduln und $A$-Modulhomomor. bilden eine Kat. $\LMod{A}$.
+  %Diese ist kartesisch abgeschlossen, \dh{} für $A$-Moduln $M$ und $N$ ist $\Hom_A(M, N)$ auch ein Objekt von $\LMod{A}$.
+\end{bem}
+
+\begin{lem}
+  Ein $A$-Modulhomomorphismus ist genau dann ein Isomorphismus (in dieser Kategorie), wenn er bijektiv ist.
+\end{lem}
+
+% 9. Untermoduln und Quotientenmoduln
+
+% 9.1. Untermoduln und Quotientenmoduln, Kerne und Kokerne
+
+\begin{defn}
+  Sei $M$ ein $A$-Modul.
+  Eine Teilmenge $M' \subseteq M$ heißt \emph{Untermodul} von $M$, falls
+  \begin{itemize}
+    \item $M'$ eine Untergruppe von $(M, +, 0)$ ist und
+    \item $M'$ abgeschlossen unter Multiplikation mit Elementen aus~$A$ ist, \dh{} $a x \in M'$ für alle $a \in A$ und $x \in M'$.
+  \end{itemize}
+\end{defn}
+
+\begin{bsp}
+  Sei $A$ kommutativ.
+  Eine Teilmenge $\aaa \subseteq A$ ist genau dann ein Ideal von~$A$, wenn $\aaa$ ein Untermodul von $A$ ist.
+\end{bsp}
+
+\begin{defn}
+  Sei $\phi : M \to N$ eine $A$-Modulhomomorphismus. \\
+  Der \emph{Kern} v. $\phi$ ist der Untermodul $\ker \phi \coloneqq \Set{x \in M}{\phi(x) = 0} \subseteq M$. \\
+  Das \emph{Bild} von $\phi$ ist der Untermodul $\im \phi \coloneqq \phi(M) \subseteq N$.
+\end{defn}
+
+\begin{prop}
+  Sei $M$ ein $A$-Modul und $M' \subseteq M$ ein Untermodul.
+  Dann gibt es ein $A$-Modul $M/M'$ und einen Ringhomomor. $\pi : M \to M/M'$ mit folgender universeller Eigenschaft:
+
+  \hfill\begin{minipage}{0.95 \linewidth}
+    Für jeden $A$-Modul $N$ und $A$-Modulhomomor. $\psi : M \to N$ mit $M' \subseteq \ker \psi$ gibt es genau einen $A$-Modulhomomor. $\widetilde{\psi} : M/M' \to N$ mit $\psi = \widetilde{\psi} \circ \pi$.
+  \end{minipage}
+\end{prop}
+
+\begin{konstr}
+  $M/M' \coloneqq M/{\sim}$ \enspace mit \enspace $x \sim y \coloniff x - y \in M'$
+\end{konstr}
+
+\begin{defn}
+  Der Modul $M/M'$ heißt \emph{Quotientenmodul} von $M$ nach $M'$.
+\end{defn}
+
+\begin{prop}
+  Sei $M$ ein $A$-Modul und $M' \subseteq M$ ein Untermodul. \\
+  Folgende Korrespondenz ist bijektiv und monoton:
+  \[
+    \begin{array}{r c l}
+      \{ \text{ Untermoduln $M' \subseteq N \subseteq M$ } \} & \leftrightarrow & \{ \text{ Untermoduln $\overline{N} \subseteq M/M'$ } \} \\
+      N & \mapsto & \pi(N) \\
+      \pi^{-1}(\overline{N}) & \mapsfrom & \overline{N}
+    \end{array}
+  \]
+\end{prop}
+
+\begin{defn}
+  Der \emph{Kokern} eines $A$-Modulhomomorphismus $\phi : M \to N$ ist
+  \[
+    \coker \phi \coloneqq N/\im(\phi).
+  \]
+\end{defn}
+
+% XXX: universelle Eigenschaft von Kern, Kokern?
+
+\begin{bem}
+  \inlineitem{$\phi$ injektiv $\iff$ $\ker \phi = 0$} \quad
+  \inlineitem{$\phi$ surjektiv $\iff$ $\coker \phi = 0$}
+\end{bem}
+
+\begin{prop}[\emph{Homomorphiesatz}]
+  Sei $\phi : M \to N$ ein $A$-Modulhomom.
+  Dann ist $\underline{\phi} : M / \ker(\phi) \to \im(\phi), \enspace [x] \mapsto \phi(x)$ ein $A$-Modulisomor.
+\end{prop}
+
+% 10. Operationen auf Untermoduln
+
+\begin{defn}
+  Sei $M$ ein $A$-Modul.
+  Die \emph{Summe} einer Familie $(M_i)_{i \in I}$ von Untermoduln von $M$ ist
+  \[
+    \sum_{i \in I} M_i \coloneqq \Set{\sum_{i \in I} x_i}{x_i \in M_i}
+  \]
+  (Dabei ist $\sum_{i \in I} x_i$ endlich, \dh{} $x_i = 0$ für alle bis auf endl. viele $i \in I$.)
+\end{defn}
+
+\begin{prop}
+  Sei $(M_i)_{i \in I}$ eine Familie von Untermoduln von $M$.
+  Dann ist auch der Schnitt $\bigcap_{i \in I} M_i$ ein Untermodul von~$M$.
+\end{prop}
+
+\begin{bem}
+  Untermoduln eines Moduls $M$ bilden mit Schnitt und Summe einen vollständigen Verband bezüglich der Inklusionsordnung.
+\end{bem}
+
+% 10.2. Die Isomorphiesätze
+
+\begin{prop}[\emph{Isomorphiesätze}]
+  Sei $A$ ein Ring.
+  \begin{enumerate}
+    \item Sei $M$ ein $A$-Modul und $M_1, M_2 \subseteq M$ zwei Untermoduln. \\
+    Dann existiert ein kanonischer $A$-Modulisomorphismus
+    \[
+      (M_1 + M_2)/M_1 \cong M_2 / (M_1 \cap M_2).
+    \]
+    \item Sei $L$ ein $A$-Modul und $N \subseteq M \subseteq L$ Untermoduln.
+    Dann existiert ein kanonischer $A$-Modulisomorphismus
+    \[
+      (L/N) / (M/N) \cong L/M.
+    \]
+  \end{enumerate}
+\end{prop}
+
+% 10.3. Operationen mit Moduln
+
+\begin{defn}
+  Sei $A$ kommutativ, $M$ ein $A$-Modul und $\aaa \subset A$ ein Ideal. \\
+  Das \emph{Produkt} von $\aaa$ und $M$ ist $\aaa M \coloneqq \Set{a x}{a \in \aaa, x \in M}$.
+\end{defn}
+
+\begin{nota}
+  $a M \coloneqq (a) M = \Set{a x}{x \in M}$ für $a \in A$
+\end{nota}
+
+\begin{defn}
+  Sei $A$ komm. und $N$, $P$ Untermoduln eines $A$-Moduls $M$.
+  Das Ideal $(N \!:\! P) \coloneqq \Set{a \!\in\! A}{a P \subseteq N} \!\subseteq\! A$ heißt \emph{Quotient} von~$N$ nach~$P$.
+\end{defn}
+
+\begin{defn}
+  Das Ideal $\ann M \coloneqq (0 : M)$ heißt \emph{Annulator} von $M$.
+\end{defn}
+
+\begin{bem}
+  Ist $\aaa \subseteq A$ ein Ideal mit $\aaa \subseteq \ann M$, so können wir $M$ auch als $A/\aaa$-Modul auffassen.
+\end{bem}
+
+\begin{defn}
+  Der $A$-Modul $M$ heißt \emph{treu}, falls $\ann M = 0$.
+\end{defn}
+
+\begin{lem}
+  Sei $A$ kommutativ, $N, P \subseteq M$ Untermoduln. Dann gilt \\[2pt]
+  \inlineitem{$\ann(N + P) = \ann(N) + \ann(P)$} \quad
+  \inlineitem{$(N : P) = \ann((N+P)/N)$}
+\end{lem}
+
+% 10.4. Endlich erzeugte Moduln
+
+\begin{defn}
+  Sei $M$ ein $A$-Modul, $X \subset M$ eine Teilmenge. \\
+  Der von $X$ \emph{erzeugte Untermodul} ist
+  \[
+    L(X) \coloneqq \sum_{x \in X} A x = \sum_{x \in X} \Set{a x}{a \in A} = \Set{\sum_{x \in X} \lambda_x x}{\lambda_x \in A}.
+  \]
+\end{defn}
+
+\begin{defn}
+  Eine Teilmenge $X \subset M$ heißt \emph{Erzeugendensystem}, falls $L(X) = M$.
+  Ein $A$-Modul $M$ heißt \emph{endlich erzeugt}, falls ein endliches Erzeugendensystem von $M$ existiert.
+\end{defn}
+
+\begin{bem}
+  Ein $A$-Modul $M$ ist ganau dann endlich erzeugt, wenn ein $n \in \N$ und ein surj. $A$-Modulhomomorphismus $\phi : A^n \to M$ existiert.
+\end{bem}
+
+% 11. Direkte Summen und Produkte
+
+% 11.1. Definition von direkter Summe und Produkt
+
+\begin{defn}
+  Das \emph{direkte Produkt} einer Familie $(M_i)_{i \in I}$ von $A$-Moduln ist das $A$-Modul $\prod_{i \in I} M_i \coloneqq \{ (x_i \in M_i)_{i \in I} \}$ mit kmpnntnwsr Verkn.
+\end{defn}
+
+\begin{bem}
+  Das direkte Produkt ist das kategorienth. Produkt in $\LMod{A}$.
+\end{bem}
+
+\begin{defn}
+  Die \emph{direkte Summe} einer Familie $(M_i)_{i \in I}$ von $A$-Moduln ist %das Untermodul
+  \begin{align*}
+    \bigoplus_{i \in I} M_i & \coloneqq
+    \Set{(x_i \in M_i)_{i \in I}}{x_i = 0 \text{ für alle bis auf endl. viele $i \in I$}} \\[-8pt]
+    & \subseteq \prod_{i \in I} M_i.
+  \end{align*}
+\end{defn}
+
+\begin{bem}
+  Die dir. Summe ist das kategorienth. Koprodukt in $\LMod{A}$. \\
+  Ist $I$ endlich, so gilt $\bigoplus_{i \in I} M_i \cong \prod_{i \in I} M_i$.
+\end{bem}
+
+% 11.2. Direkte Summenzerlegung von Ringen
+
+\begin{bsp}[Direkte Summenzerlegung]
+  Sei $A = \prod_{i=1}^n A_i$ ein endl. direktes Produkt komm. Ringe.
+  Dann gilt $A \cong \aaa_1 \oplus \ldots \oplus \aaa_n$ als $A$-Modul mit
+  \[
+    \aaa_i \coloneqq \Set{(x_i)_{i=1}^n}{x_j = 0 \text{ für } j \neq i}.
+  \]
+\end{bsp}
+
+% 12. Endlich erzeugte Moduln
+
+% 12.1. Freie Moduln
+
+\begin{defn}
+  Ein \emph{$A$-Modul} $M$ heißt frei, falls eine Menge $I$ existiert, sodass $M \cong \bigoplus_{i \in I}$ als $A$-Modul.
+\end{defn}
+
+\begin{bem}
+  Ein endlicher freier Modul ist ein Modul, der zu $A^n \coloneqq A \oplus \ldots \oplus A$ für ein $n \in \N$ isomorph ist.
+\end{bem}
+
+\begin{prop}
+  Sei $A$ ein Ring. Ein $A$-Modul $M$ ist genau dann endl. erzeugt, wenn $M$ der Quotient eines $A$-Moduls der Form $A^n$ für ein $n \in \N$ ist.
+\end{prop}
+
+% 12.2. Das Nakayamasche Lemma
+
+\begin{prop}
+  Sei $A$ ein komm. Ring, $M$ ein endlich erzeugter $A$-Modul und $\aaa \subseteq A$ ein Ideal.
+  Sei $\phi \in \End_A(M)$ mit $\im \phi \subseteq \aaa M$.
+  Dann erfüllt $\phi$ eine Gleichung der Form $\phi^n + a_1 \phi^{n-1} + \ldots + a_n = 0$ mit $a_i \in \aaa$.
+\end{prop}
+
+\begin{kor}
+  Sei $\aaa \subseteq A$ ein Ideal und $M$ ein $A$-Modul mit $\aaa M = M$.
+  Dann existiert ein $x \in A$ mit $x = 1$ modulo $\aaa$ und $x M = 0$.
+\end{kor}
+
+\begin{lem}[\emph{Nakayama}]
+  Sei $\aaa$ ein Ideal von $A$, welches im Jacobsonschen Radikal $\jjj$ von $A$ enthalten ist.
+  Dann folgt aus $\aaa M = M$ schon $M = 0$.
+\end{lem}
+
+\begin{kor}
+  Sei $N \subseteq M$ ein Untermodul und $\aaa \subseteq A$ ein Ideal, welches im Jacobsonschen Ideal $\jjj$ enthalten ist.
+  Dann folgt aus $M = \aaa M + N$ schon $M = N$.
+\end{kor}
+
+\begin{defn}
+  Sei $(A, \mmm, F)$ ein lokaler Ring.
+  Sei $M$ ein endlich erz. $A$-Modul.
+  Setze $M(\mmm) \coloneqq M/\mmm M$.
+  Wegen $\mmm \subseteq \ann(M(\mmm))$ ist $M(\mmm)$ in natürl. Art ein (endlich-dim.) $F$-Vektorraum, die \emph{spezielle Faser} von $M$.
+  Das Bild eines Elements $x \in M$ in $M(\mmm)$ wird \emph{Wert des Schnittes} $x$ in der speziellen Faser genannt.
+\end{defn}
+
+\begin{prop}
+  Sei $(A, \mmm, F)$ ein lokaler Ring, $M$ ein endlich erz. $A$-Modul.
+  Seien $x_1, \ldots, x_n$ Schnitte von $M$, deren Werte in $M(\mmm)$ eine Basis bilden.
+  Dann erzeugen $x_1, \ldots, x_n$ den $A$-Modul $M$.
+\end{prop}
+
+% 13. Exakte Sequenzen
+\subsection{Exakte Sequenzen}
+
+% 13.1. Definition und erste Eigenschaften
+
+\begin{defn}
+  Sei $A$ ein Ring.
+  Eine Sequenz
+  \[
+    \ldots \to M^{i-1} \xra{\phi^{i-1}} M^i \xra{\phi^i} M^{i+1} \to \ldots
+  \]
+  von $A$-Moduln und $A$-Modulhomomorphismen heißt \emph{exakt} bei $M^i$, falls $\im \phi^{i-1} = \ker \phi^i$.
+  Die Sequenz heißt \emph{exakt}, falls sie exakt bei jedem $M^i$ ist.
+\end{defn}
+
+\begin{bsp}
+  Sei $\phi : M \to N$ ein $A$-Modulhomomorphismus.
+  Dann gilt
+  \[
+    \begin{array}{l c l}
+      \text{$\phi$ ist injektiv} & \iff & 0 \to M \xra{\phi} N \text{ ist exakt} \\
+      \text{$\phi$ ist surjektiv} & \iff & M \xra{\phi} N \to 0 \text{ ist exakt}
+    \end{array}
+  \]
+\end{bsp}
+
+\begin{defn}
+  Eine \emph{kurze exakte Sequenz} \keS{} von $A$-Moduln ist eine exakte Sequenz der Form $0 \to M' \to M \to M'' \to 0$.
+\end{defn}
+
+\begin{bem}
+  Jede lange exakte Sequenz $\ldots \to M^{i-1} \to M^i \to M^{i+1} \to \ldots$ zerfällt in kurze exakte Sequenzen: Mit $N^i = \im \phi^{i-1} = \ker \phi^i$ haben wir kurze exakte Sequenzen $0 \to N^i \to M^i \to N^{i+1} \to 0$.
+  Andersherum kann man solche kurzen exakten Sequenzen zu einer langen exakten Sequenz zusammenkleben.
+\end{bem}
+
+\begin{lem}
+  Sei $A$ ein komm. Ring.
+  Eine Seq. $E : M' \xra{\phi} M \xra{\psi} M'' \to 0$ ist genau dann exakt, wenn für alle $A$-Moduln $N$ die Sequenz
+  \[
+    \Hom(E, N) : 0 \to \Hom(M'', N) \xra{\psi^*} \Hom(M, N) \xra{\phi^*} \Hom(M', N).
+  \]
+  exakt ist.
+\end{lem}
+
+\begin{lem}
+  Sei $A$ ein kommutativer Ring.
+  \begin{itemize}
+    \item Eine Sequenz $E : M' \xra{\phi} M \xra{\psi} M'' \to 0$ ist genau dann exakt, wenn für alle $A$-Moduln $N$ folgende induzierte Sequenz exakt ist:
+    \[
+      \Hom(E, N) : 0 \to \Hom(M'', N) \xra{\psi^*} \Hom(M, N) \xra{\phi^*} \Hom(M', N).
+    \]
+    \item Eine Sequenz $F : 0 \to N' \xra{\phi} N \xra{\psi} N''$ ist genau dann exakt, wenn für alle $A$-Moduln $M$ folgende induzierte Sequenz exakt ist:
+    \[
+      \Hom(M, F) : \Hom(M, N') \xra{\phi_*} \Hom(M, N) \xra{\psi_*} \Hom(M, N'') \to 0.
+    \]
+  \end{itemize}
+\end{lem}
+
+% 13.2. Das Schlangenlemma
+
+% Aus der HomoAlg-Zusammenfassung, angepasst
+\begin{lem}[\emph{Schlangenlemma}]
+  Sei $A$ ein Ring.
+  Sei folgendes komm. Diagramm von $A$-Moduln mit exakten Zeilen gegeben:
+  \vspace{-8pt}
+  \begin{centertikz}
+    \matrix (mat) [matrix of nodes, column sep=1cm, row sep=0.45cm]{
+      &
+      \node (A) {$M'$}; &
+      \node (B) {$M$}; &
+      \node (C) {$M''$}; &
+      \node (O) {$0$}; \\
+      \node (O') {$0$}; &
+      \node (A') {$N'$}; &
+      \node (B') {$N$}; &
+      \node (C') {$N''$}; \\
+    };
+    \draw[->] (A) to node {} (B);
+    \draw[->] (B) to node {} (C);
+    \draw[->] (C) to node {} (O);
+    \draw[->] (O') to node {} (A');
+    \draw[->] (A') to node {} (B');
+    \draw[->] (B') to node {} (C');
+    \draw[->] (A) to node [right] {$\phi'$} (A');
+    \draw[->] (B) to node [right] {$\phi$} (B');
+    \draw[->] (C) to node [right] {$\phi''$} (C');
+  \end{centertikz}
+  \vspace{-10pt}
+  Dann gibt es einen Verbindungshomomorphismus $\delta : \ker \phi'' \to \coker \phi'$, mit dem folgende Sequenz exakt ist:
+  \[ \ker \phi' \to \ker \phi \to \ker \phi'' \xrightarrow{\delta} \coker \phi' \to \coker \phi \to \coker \phi''. \]
+\end{lem}
+
+% 13.3. Additive Funktionen
+
+\iffalse
+\begin{defn}
+  Sei $A$ ein Ring.
+  Eine Klasse $\SC$ von $A$-Moduln heißt \emph{Serre-Klasse}, falls $0 \in \SC$ und für alle kurzen exakten Sequenzen $0 \to M' \to M \to M'' \to 0$ von $A$-Moduln gilt: $M', M'' \in \SC \iff M \in \SC$.
+\end{defn}
+\fi
+
+\begin{defn}
+  Sei $A$ ein Ring und $\SC$ eine Klasse von $A$-Moduln. \\
+  Eine Abb. $\lambda : \SC \to G$ in eine ab. Gruppe heißt \emph{additive Funktion}, falls für alle kurzen exakten Seq. $0 \to C' \to C \to C'' \to 0$ von Moduln aus $\SC$ gilt, dass $\lambda(C) = \lambda(C') + \lambda(C'')$.
+\end{defn}
+
+\begin{bsp}
+  Sei $K$ ein Körper und $\SC$ die Klasse der endlich-dim. VR über $K$.
+  Dann ist $\dim : \SC \to \Z$ eine additive Funktion.
+\end{bsp}
+
+\begin{prop}
+  Sei $A$ ein Ring, $\SC$ eine Klasse von $A$-Moduln und $\lambda : \SC \to G$ eine additive Funktion.
+  Sei
+  \[
+    0 \to M^0 \xra{\phi^0} M^1 \to \ldots \to M^{n-1} \xra{\phi^{n-1}} M^n \to 0
+  \]
+  eine exakte Sequenz von Moduln in $\SC$, sodass auch die Kerne der $\phi^i$ in $\SC$ liegen.
+  Dann gilt
+  $\sum_{i=0}^n (-1)^i \lambda(M^i) = 0$.
+\end{prop}
+
+% 14. Tensorprodukte von Moduln
+\subsection{Tensorprodukt}
+
+% 14.1. Bilineare Abbildungen und das Tensorprodukt
+
+\begin{defn}
+  Seien $M$, $N$ und $P$ drei $A$-Moduln.
+  Eine Abbildung $\beta : M \times N \to P$ heißt \emph{$A$-bilinear}, falls für alle $x \in M$ die Abbildung $\beta(x, \blank)$ und für alle $y \in N$ die Abbildung $\beta(\blank, y)$ ein $A$-Modulhomomorphismus ist.
+\end{defn}
+
+\begin{bsp}
+  Die Multiplikation $\cdot : A \times A \to A$ ist $A$-bilinear.
+\end{bsp}
+
+\begin{prop}
+  Seien $M$ und $N$ zwei $A$-Moduln.
+  Dann existiert ein $A$-Modul $M \otimes_A N$ und eine bilineare Abbildung $\gamma : M \times N \to M \otimes_A N$ mit folgender universellen Eigenschaft:
+
+  \hfill\begin{minipage}{0.95 \linewidth}
+    Für jeden $A$-Modul $P$ und für jede bilineare Abbildung $\beta : M \times N \to P$ gibt es genau einen $A$-Modulhomomorphismus $\underline{\beta} : M \otimes_A N \to P$ mit $\beta = \underline{\beta} \circ \gamma$.
+  \end{minipage}
+\end{prop}
+
+\begin{defn}
+  $M \otimes_A N$ heißt \emph{Tensorprodukt} von $M$ und $N$ über $A$.
+\end{defn}
+
+\begin{konstr}
+  \begin{itemize}
+    \item Sei $C$ der freie $A$-Modul $A^I$ mit $I \coloneqq M \times N$.
+    Elemente von $C$ haben die Form $\sum_{i=1}^n \lambda_i (x_i, y_i)$ mit $\lambda_i \in A$, $x_i \in M$, $y_i \in N$.
+    \item Sei $D \subset C$ der von allen Elementen der Form
+    \begin{align*}
+      (x + x', y) - (x, y) - (x', y), \qquad
+      & (ax, y) - a (x, y), \\
+      (x, y + y') - (x, y) - (x, y'), \qquad
+      & (x, ay) - a (x, y)
+    \end{align*}
+    mit $x, x' \in M$, $y, y' \in N$ und $a \in A$ erzeugte Untermodul.
+    \item Setze $M \otimes_A N \coloneqq C/D$.
+  \end{itemize}
+\end{konstr}
+
+\begin{nota}
+  $x \otimes y \coloneqq \gamma(x, y)$
+\end{nota}
+
+\begin{bem}
+  Jedes Element in $M \otimes_A N$ lässt sich als $\sum_{i=1}^n x_i \otimes y_i$ mit $x_i \in M$, $y_i \in N$ schreiben.
+  In $M \otimes_A N$ gelten folgende Rechenregeln:
+  \begin{align*}
+    & x \otimes (ay) = a (x \otimes y) = (ax) \otimes y \\
+    & (x + x') \otimes (y + y') = x \otimes y + x' \otimes y + x \otimes y' + x' \otimes y'
+  \end{align*}
+\end{bem}
+
+% 14.4. Funktorialität des Tensorproduktes (vorgezogen)
+\begin{lem}
+  Das Tensorprodukt induziert einen Bifunktor
+  \[
+    \otimes_A : \LMod{A} \times \LMod{A} \to \LMod{A}.
+  \]
+\end{lem}
+
+\begin{lem}
+  Sei $A$ ein komm. Ring, $M$ und $N$ zwei $A$-Moduln, $x_i \in M$ und $y_i \in N$ mit $\sum_{i=1}^n x_i \otimes y_i = 0$ in $M \otimes_A N$.
+  Dann gibt es endlich erzeugte Untermoduln $M_0 \subseteq M$ und $N_0 \subseteq N$ mit $x_1, \ldots, x_n \in M_0$, $y_1, \ldots, y_n \in N_0$ und $\sum_{i=1}^n x_i \otimes y_i = 0$ in $M_0 \otimes_A N_0$
+\end{lem}
+
+% 14.2. Multilineare Abbildungen und mehrfache Tensorprodukte
+
+\begin{defn}
+  Sei $A$ ein komm. Ring, $M_1, \ldots, M_r$ und $P$ $A$-Moduln. \\
+  Eine Abbildung $\mu : M_1 \times \ldots \times M_r \to P$ heißt \emph{$A$-multilinear}, falls sie linear in jedem Argument ist.
+\end{defn}
+
+\begin{prop}
+  Sei $A$ ein komm. Ring, $M_1, \ldots, M_r$ $A$-Moduln.
+  Es existiert ein $A$-Modul $M_1 \otimes_A \ldots \otimes_A M_r$ und eine multilineare Abbildung $\gamma : M_1 \times \ldots \times M_r \to M_1 \otimes_A \ldots \otimes_A M_r$ mit der univ. Eigenschaft
+
+  \hfill\begin{minipage}{0.95 \linewidth}
+    Für jeden $A$-Modul $P$ und für jede multilineare Abbildung $\mu : M_1 \times \ldots \times M_r \to P$ gibt es genau einen $A$-Modulhomomorphismus $\underline{\mu} : M_1 \otimes_A \ldots \otimes_A M_r \to P$ mit $\mu = \underline{\mu} \circ \gamma$.
+  \end{minipage}
+\end{prop}
+
+\begin{konstr}
+  $M_1 \otimes_A \ldots \otimes_A M_r \coloneqq M_1 \otimes_A (M_2 \otimes_A (\ldots \otimes_A M_r))$
+\end{konstr}
+
+% 14.3. Kanonische Isomorphismen zwischen Tensorprodukten
+
+\begin{prop}
+  Sei $A$ ein komm. Ring und $M$, $N$ und $P$ drei $A$-Moduln.
+  Es existieren kanonische Isomorphismen
+  \begin{align*}
+    & M \otimes_A N \cong N \otimes_A M, \qquad
+    (M \otimes_A N) \otimes_A P \cong M \otimes_A (N \otimes_A P), \\
+    & (M \oplus N) \otimes_A P \cong (M \otimes_A P) \oplus (N \otimes_A P), \qquad
+    A \otimes_A M \cong M.
+  \end{align*}
+\end{prop}
+
+\begin{defn}
+  Seien $A$ und $B$ zwei komm. Ringe.
+  Ein $(A, B)$-Bimodul ist eine abelsche Gruppe, welche sowohl ein $A$- als auch ein $B$-Modul ist, sodass die Modulstrukturen miteinander verträglich sind, \dh{} für alle $a \in A$, $b \in B$ und $x \in N$ gilt $a (bx) = b (ax)$.
+\end{defn}
+
+\begin{lem}
+  Sei $M$ ein $A$-Modul, $P$ ein $B$-Modul und $N$ ein $(A, B)$-Bi- modul.
+  Dann gibt es einen kanon. Isomorphismus abelscher Gruppen
+  \[
+    (M \otimes_A N) \otimes_B P \cong M \otimes_A (N \otimes_B P).
+  \]
+\end{lem}
+
+% 15. Skalareinschränkungen und -erweiterungen
+
+% 15.1. Skalareinschränkung
+% 15.2. Skalarerweiterung
+
+\begin{defn}
+  Sei $\phi : A \to B$ ein Morphismus kommutativer Ringe. \\
+  \begin{itemize}
+    \item Die \emph{Skalareinschränkung} eines $B$-Moduls $N$ (vermöge $\phi$) ist der $A$-Modul~$N^A$, der als Menge und ab. Gruppe $N$ ist und dessen Skalarmult. durch $a \cdot x \coloneqq \phi(a) \cdot x$ definiert ist.
+    \item Die \emph{Skalarerweiterung} eines $A$-Moduls $M$ (vermöge $\phi$) ist der $B$-Modul~$M_B \coloneqq B^A \otimes_A M$ mit der Skalarmultiplikation definiert durch $b (b' \otimes x) \coloneqq (b b') \otimes x$.
+  \end{itemize}
+\end{defn}
+
+\begin{prop}
+  Sei $\phi : A \to B$ ein Morphismus kommutativer Ringe.
+  \begin{itemize}
+    \item Sei $N$ ein $B$-Modul.
+    Ist $B^A$ als $A$-Modul endlich erzeugt und $N$ als $B$-Modul endlich erzeugt, so ist $N^A$ als $A$-Modul endlich erzeugt.
+    \item Sei $M$ ein $A$-Modul.
+    Ist $m$ als $A$-Modul endlich erzeugt, so ist $M_B$ als $B$-Modul endlich erzeugt.
+  \end{itemize}
+\end{prop}
+
+\begin{lem}
+  Sei $M$ ein $A$-Modul und $N$ ein $B$-Modul.
+  Dann existiert ein kanonischer Isomorphismus $N \otimes_B M_B \cong N^A \otimes_A M$ von $B$-Moduln.
+\end{lem}
+
+% 16. Exaktheitseigenschaften des Tensorproduktes
+
+% 16.1. Tensorprodukte und Homomorphismeneigenschaften
+
+\begin{prop}
+  Sei $A$ ein komm. Ring und $M$, $N$ und $P$ drei $A$-Moduln. \\
+  Dann ist folgende Abbildung ein $A$-Modulisomorphismus:
+  \begin{align*}
+    \Hom_A(M \otimes_A N, P) & \to \Hom_A(M, \Hom_A(N, P)), \\
+    \beta & \mapsto (x \mapsto (y \mapsto \beta(x \otimes y))).
+  \end{align*}
+\end{prop}
+
+\begin{bem}
+  Mit anderen Worten: Es ex. eine Adj. \enspace $\blank \otimes_A N \ladj \Hom_A(N, \blank)$
+\end{bem}
+
+% 16.2. Rechtsexaktheit des Tensorprodukts
+
+\begin{prop}
+  Sei $A$ ein komm. Ring.
+  Das Tensorprodukt ist rechtsexakt, \dh{} ist $E : M' \to M \to M'' \to 0$ eine exakte Sequenz von $A$-Moduln und $N$ ein weiterer $A$-Modul, so ist auch die induzierte Sequenz
+  \[
+    E \otimes_A N : M' \otimes_A N \to M \otimes_A N \to M'' \otimes_A N \to 0
+    \quad \text{exakt.}
+  \]
+\end{prop}
+
+\begin{bem}
+  Dies folgt daraus, dass das Tensorprodukt als Linksadjungierter Kolimiten erhält.
+\end{bem}
+
+\begin{acht}
+  Das Tensorprodukt ist i.\,A. nicht exakt.
+  Insbesondere erhält es keine injektiven Abbildungen.
+\end{acht}
+
+% 16.3. Flachheit
+
+\begin{defn}
+  Sei $A$ ein kommutativer Ring.
+  Ein $A$-Modul $M$ heißt flach, falls $(\blank \otimes_A M)$ exakt ist, \dh{} falls für jede (lange) exakte Sequenz $E$ auch $E \otimes_A M$ exakt ist.
+\end{defn}
+
+\begin{prop}
+  Sei $A$ komm. und $M$ ein $A$-Modul.
+  Es sind äquivalent:
+  \begin{itemize}
+    \item Der $A$-Modul $M$ ist flach.
+    \item Für jede kurze exakte Sequenz $E : 0 \to N' \to N \to N'' \to 0$ ist die tensorierte Sequenz $E \otimes_A M$ exakt.
+    \item Für jede injektive $A$-lineare Abbildung $\phi : N \to N'$ ist auch $\phi \otimes \id_M : N \otimes_A M \to N' \otimes_A M$ injektiv.
+    \item Für jede inj. $A$-lineare Abb. $\phi : N \to N'$ zw. endl. erzeugten $A$-Moduln ist auch $\phi \otimes \id_M : N \otimes_A M \to N' \otimes_A M$ injektiv.
+  \end{itemize}
+\end{prop}
+
+\begin{prop}
+  Sei $\phi : A \to B$ ein Homomorphismus kommutativer Ringe.
+  Ist $M$ ein flacher $A$-Modul, so ist $M_B$ ein flacher $B$-Modul.
+\end{prop}
+
+% 17. Algebren
+\subsection{Algebren}
+
+% 17.1. Definition von Algebren
+
+\begin{defn}
+  Eine kommutative \emph{$A$-Algebra} $B$ ist ein kommutativer Ring $B$ zusammen mit einem Ringhomomorphismus $\phi : A \to B$, dem \textit{Strukturmorphismus} der Algebra.
+\end{defn}
+
+\begin{bem}
+  Ist $a \in A$ und $b \in B$, so definieren wir $a b \coloneqq \phi(a) b$ (wie bei der Skalareinschränkung).
+\end{bem}
+
+\begin{bspe}
+  \begin{itemize}
+    \item Sei $K$ ein Körper.
+    Eine nichttriviale $K$-Algebra ist dasselbe wie ein Ring, der $K$ als Unterring enthält.
+    \item Jeder Ring ist auf genau eine Weise eine $\Z$-Algebra.
+  \end{itemize}
+\end{bspe}
+
+\begin{defn}
+  Ein \textit{Homomorphismus} von $A$-Algebren $B$ und $C$ ist ein Ringhomomorphismus $\chi : B \to C$, welcher einen Homomorphismus $\chi : B^A \to C^A$ von $A$-Moduln induziert.
+\end{defn}
+
+\begin{bem}
+  Ein Ringhomomorphismus $\chi : B \to C$ ist also genau dann ein $A$-Algebrenhomomor., wenn $\chi(ab) = a \chi(b)$ für alle $a \in A$ und $b \in B$.
+\end{bem}
+
+\begin{bem}
+  $A$-Algebren und ihre Homomor. bilden eine Kategorie $\AAlg{A}$.
+\end{bem}
+
+% 17.2. Endliche Algebren und Algebren endlichen Typs
+
+\begin{defn}
+  Sei $A$ ein kommutativer Ring.
+  Eine kommutative $A$-Algebra $B$ heißt eine \ldots
+  \begin{itemize}
+    \item \ldots \emph{endliche $A$-Algebra}, falls $B^A$ als $A$-Modul endlich erzeugt ist, \dh{} falls endlich viele Elemente $b_1, \ldots, b_n \in B$ existieren, sodass jedes Element aus $B$ als $A$-Linearkombination der $b_i$ geschrieben werden kann.
+    \item \ldots $A$-Algebra \emph{endlichen Typs}, falls endlich viele Elemente $b_1, \ldots, b_n \in B$ existieren, sodass jedes andere Element von $B$ als Polynom in den $b_i$ mit Koeffizienten aus $A$ geschrieben werden kann.
+  \end{itemize}
+\end{defn}
+
+\begin{defn}
+  Ein kommutativer Ring heißt \emph{endlich erzeugt}, falls er eine $\Z$-Algebra endlichen Typs ist.
+\end{defn}
+
+% 18. Tensorprodukte von Algebren
+
+% 18.1. Definition des Tensorproduktes zweier Algebren
+
+\begin{defn}
+  Sei $A$ ein kommutativer Ring.
+  Seien $\phi : A \to B$ und $\psi : A \to C$ die Strukturabbildungen zweier $A$-Algebren $B$ und $C$.
+  Dann ist auf $D \coloneqq B^A \otimes_A C^A$ eine Multiplikation durch
+  \[
+    \mu : D \times D \to D, \quad (b \otimes c, b' \otimes c') \mapsto (b b') \otimes (c c')
+  \]
+  definiert.
+  Der Ring $D$ wird mit der Strukturabbildung
+  \[
+    \rho : A \to D, \quad a \mapsto \phi(a) \otimes 1 = 1 \otimes \psi(A)
+  \]
+  zu einer $A$-Algebra.
+  Diese heißt \emph{Tensorprodukt} $B \otimes_A C$ der kommutativen Algebren $B$ und $C$.
+\end{defn}
+
+% 19. Gerichtete Limiten
+\subsection{Gerichtete Limiten}
+
+% 19.1. Definition des gerichteten Limes
+
+\begin{defn}
+  Eine \emph{gerichtete Menge} ist eine nichtleere teilweise geordnete Menge $(I, \leq)$, sodass für alle $i, j \in I$ ein $k \in I$ mit $i \leq k$ und $j \leq k$ existiert.
+\end{defn}
+
+\begin{bem}
+  Eine teilweise geordnete Menge $(I, \leq)$ ist genau dann gerichtet, wenn in $I$, aufgefasst als Präordnungskategorie, jedes endliche Diagramm einen Kokegel besitzt.
+\end{bem}
+
+\begin{defn}
+  Sei $(I, \leq)$ eine gerichtete Menge und $A$ ein Ring. \\
+  Ein \emph{gerichtetes System} $M_\bullet$ von $A$-Moduln über $I$ ist ein Funktor
+  \[
+    M_\bullet : I \to \LMod{A}, \quad i \mapsto M_i, \quad (i \leq j) \mapsto \mu^i_j : M_i \to M_j,
+  \]
+  wobei wir $I$ als Präordnungskategorie auffassen.
+\end{defn}
+
+\begin{prop}
+  Sei $M_\bullet$ ein gerichtetes System von $A$-Moduln.
+  Dann existiert der Kolimes $\varinjlim_{i \in I} M_i$ von $M_\bullet$.
+\end{prop}
+
+\begin{defn}
+  Dieser Kolimes wird \emph{gerichteter Limes} von $M_\bullet$ genannt.
+\end{defn}
+
+\begin{konstr}
+  \begin{itemize}
+    \item Sei $C \coloneqq \bigoplus_{i \in I} M_i$.
+    \item Sei $D \subseteq C$ der Untermodul, der von allen Elementen der Form $x_i - \mu^i_j(x_i)$ mit $i \leq j$ und $x_i \in M_i$ erzeugt wird.
+    \item Dann erfüllt $M \coloneqq C/D$ die geforderte universelle Eigenschaft.
+  \end{itemize}
+\end{konstr}
+
+% 19.2. Universelle Eigenschaft des gerichteten Limes
+
+\begin{bem}
+  \begin{itemize}
+    \item Jedes $x \in \varinjlim_{i \in I} M_i$ wird durch ein $x_i \in M_i$ repräsentiert.
+    \item Ein Element $x_i \in M_i$ repräsentiert dabei genau dann das Null- element, falls ein $j \in I$ mit $i \leq j$ existiert, sodass $\mu^i_j(x_i) = 0$.
+  \end{itemize}
+\end{bem}
+
+\begin{lem}
+  Jeder $A$-Modul ist der gerichtete Limes seiner endlich erzeugten Untermoduln.
+\end{lem}
+
+% 19.3. Exakte Sequenzen gerichteter Systeme
+
+\begin{defn}
+  Sei $(I, \leq)$ eine gerichtete Menge.
+  Ein \textit{Homomorphismus} von gerichteten Systemen $M_\bullet$ und $N_\bullet$ von $A$-Moduln über $I$ ist eine natürliche Transformation $\phi_\bullet : M_\bullet \to N_\bullet$.
+\end{defn}
+
+\begin{bem}
+  Damit bilden gerichtete Systeme von $A$-Moduln über $I$ zusammen mit ihren Homomorphismen eine Kategorie $[I, \LMod{A}]$.
+\end{bem}
+
+\begin{prop}
+  Sei $\phi_\bullet : M_\bullet \to N_\bullet$ ein Morphismus zwischen gerichtete Systeme von $A$-Moduln über $I$, $M \coloneqq \varinjlim_{i \in I} M_i$ und $N \coloneqq \varinjlim_{i \in I} N_i$. \\
+  Dann gibt es genau einen Morphismus $\phi \coloneqq \varinjlim_{i \in I} \phi_i : M \to N$ mit
+  \[
+    (M_i \to M \xra{\phi} N) = (M_i \xra{\phi_i} N_i \to N) \quad
+    \text{für alle } i \in I.
+  \]
+\end{prop}
+
+\begin{bem}
+  Damit ist der gerichtete Limes ein Funktor
+  \[
+    \varinjlim_{i \in I} : [I, \LMod{A}] \to \LMod{A}.
+  \]
+\end{bem}
+
+\begin{defn}
+  Eine Sequenz $M_\bullet \xra{\phi_\bullet} N_\bullet \xra{\psi_\bullet} P_\bullet$ von gerichteten Systemen von $A$-Moduln über $I$ heißt \emph{exakt}, falls für alle $i \in I$ die Sequenz $M_i \xra{\phi_i} N_i \xra{\psi_i} P_i$ exakt ist.
+\end{defn}
+
+\begin{prop}
+  Der Gerichteter-Limes-Funktor ist exakt: \\
+  Sei $M_\bullet \xra{\phi_\bullet} N_\bullet \xra{\psi_\bullet} P_\bullet$ eine exakte Sequenz gerichteter Systeme von $A$-Moduln über $I$.
+  Dann ist die induzierte Sequenz
+  \[
+    \varinjlim_{i \in I} M_i \xra{\varinjlim \phi_i}
+    \varinjlim_{i \in I} N_i \xra{\varinjlim \psi_i}
+    \varinjlim_{i \in I} P_i
+    \qquad \text{auch exakt.}
+  \]
+\end{prop}
+
+% 19.4. Tensorprodukte und gerichtete Limiten
+
+\begin{prop}
+  Sei $M_\bullet$ ein gerichtes System von $A$-Moduln über $I$ und $N$ ein $A$-Modul.
+  Dann gibt es einen kanonischen Isomorphismus
+  \[
+    \varinjlim_{i \in I} \, (M_i \otimes_A N) \cong ( \varinjlim_{i \in I} M_i) \otimes_A N.
+  \]
+\end{prop}
+
+% 19.5. Gerichtete Limiten von Ringen
+
+\begin{prop}
+  Sei $A_\bullet$ ein gerichtetes System von Ringen und Ringhomo- morphismen.
+  Fasse $A_\bullet$ als gerichtetes System von ab. Gruppen (\dh{} $\Z$-Moduln) auf.
+  Dann gibt es $A \coloneqq \varinjlim_{i \in I} A_i$ eine Multiplikation, sodass $A$ ein Ring ist und die Gruppenhomomorphismen $A_i \to A$ sogar Ringhomomorphismen sind.
+\end{prop}
+
+\begin{prop}
+  Ist $\varinjlim_{i \in I} A_i = 0$, so gibt es ein $i \in I$ mit $A_i = 0$.
+\end{prop}
+
+\begin{defn}
+  Sei $(B_i)_{i \in I}$ eine Familie kommutativer $A$-Algebren. \\
+  Für eine endliche Teilmenge $J \subset I$ setzen wir $B_J \coloneqq \bigotimes_{i \in J} B_i$. \\
+  Dann ist $B_\bullet$ ein gerichtetes System über $(\PS(I)_{\text{fin}}, \subseteq)$.
+  Der Limes $\bigotimes_{i \in I} B_i \coloneqq \varinjlim_{J \subseteq I} B_J$ heißt \emph{Tensorprodukt} über die Familie $(B_i)_{i \in I}$.
+\end{defn}
 
 \end{document}
