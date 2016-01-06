@@ -49,6 +49,7 @@
 \newcommand{\jjj}{\mathfrak{j}}
 \newcommand{\ppp}{\mathfrak{p}}
 \newcommand{\qqq}{\mathfrak{q}}
+\newcommand{\rrr}{\mathfrak{r}}
 \newcommand{\mmm}{\mathfrak{m}}
 \newcommand{\nnn}{\mathfrak{n}}
 
@@ -1387,7 +1388,8 @@ Im Folgenden seien alle Ringe \emph{kommutativ}, \dh{} $xy = yx$ f.\,a. $x, y$.
 % 19.1. Definition des gerichteten Limes
 
 \begin{defn}
-  Eine \emph{gerichtete Menge} ist eine nichtleere teilweise geordnete Menge $(I, \leq)$, sodass für alle $i, j \in I$ ein $k \in I$ mit $i \leq k$ und $j \leq k$ existiert.
+  Eine \emph{gerichtete Menge} ist eine nichtleere teilweise geordnete Menge $(I, \leq)$, sodass $\fa{i, j \in I} \ex{k \in I} i \leq k \wedge j \leq k$.
+  %für alle $i, j \in I$ ein $k \in I$ mit $i \leq k$ und $j \leq k$ existiert.
 \end{defn}
 
 \begin{bem}
@@ -1504,5 +1506,354 @@ Im Folgenden seien alle Ringe \emph{kommutativ}, \dh{} $xy = yx$ f.\,a. $x, y$.
   Dann ist $B_\bullet$ ein gerichtetes System über $(\PS(I)_{\text{fin}}, \subseteq)$.
   Der Limes $\bigotimes_{i \in I} B_i \coloneqq \varinjlim_{J \subseteq I} B_J$ heißt \emph{Tensorprodukt} über die Familie $(B_i)_{i \in I}$.
 \end{defn}
+
+% III. Lokalisierungen von Ringen und Moduln
+\section{Lokalisierung}
+
+% 20. Lokalisierung von Ringen und Moduln
+
+% 20.1. Lokalisierung eines Ringes
+
+\begin{defn}
+  Sei $A$ ein Ring.
+  Eine \emph{multiplikativ abgeschl. Teilmenge} von $A$ ist eine Teilmenge $S \subseteq A$ mit $1 \in S$ und $xy \in S$ für alle $x, y \in S$.
+\end{defn}
+
+\begin{bspe}
+  \begin{itemize}
+    \item Ein Ring $A$ ist genau dann ein Integritätsbereich, wenn $A \setminus \{ 0 \}$ multiplikativ abgeschlossen ist.
+    \item Sei $\aaa \subseteq A$ ein Ideal. Dann ist $1 + \aaa$ mult. abgeschlossen.
+  \end{itemize}
+\end{bspe}
+
+\begin{prop}
+  Sei $A$ ein komm. Ring und $S \subseteq A$ mult. abgeschlossen. \\
+  Dann gibt es einen komm. Ring $S^{-1} A$ und einen Ringhomomor. $\iota : A \to S^{-1} A$ mit folgender universeller Eigenschaft:
+  
+  \hfill\begin{minipage}{0.95 \linewidth}
+    Für jeden Ring $B$ und Ringhomomor. $\phi : A \to B$ mit $\phi(S) \subseteq B^{\times}$ gibt es genau einen Ringhomomor. $\psi : S^{-1} A \to B$ mit $\phi = \psi \circ \iota$.
+  \end{minipage}
+\end{prop}
+
+\begin{konstr}
+  \begin{itemize}
+    \item Führe auf der Menge der Paare $(a, s) \in A \times S$ eine Äquivalenzrelation ein durch
+    \[
+      (a, s) \sim (b, t) \coloniff \ex{u \in S} u (at - bs) = 0.
+    \]
+    \item Setze $S^{-1} A \coloneqq (A \times S)/{\sim}$.
+    \item Wir schreiben $\tfrac{a}{s}$ für die Äquivalenzklasse von $(a, s)$ in $S^{-1} A$.
+    \item Auf $S^{-1} A$ sind  Addition und Mult. (wohl!) definiert durch
+    \[
+      \tfrac{a}{s} + \tfrac{b}{t} \coloneqq \tfrac{at + bs}{st}, \quad
+      \tfrac{a}{s} \cdot \tfrac{b}{t} \coloneqq \tfrac{ab}{st}.
+    \]
+    \item Der Ringhomomorphismus ist gegeben durch $\iota(a) \coloneqq \tfrac{a}{1}$.
+  \end{itemize}
+\end{konstr}
+
+\begin{defn}
+  Der kommutative Ring $S^{-1} A$ heißt \emph{Lokalisierung} von~$A$ nach~$S$ und $\iota : A \to S^{-1} A$ ihr \textit{Strukturhomomorphismus}.
+\end{defn}
+
+% 20.2. Eigenschaften der Lokalisierung
+
+\begin{prop}
+  Sei $A$ komm. und $S \subseteq A$ mult. abgeschlossen.
+  Dann gilt:
+  \begin{itemize}
+    \item Für alle $s \in S$ ist $\iota(s)$ eine Einheit in $S^{-1} A$.
+    \item Ist $a \in A$ mit $\iota(a) = 0$, so gibt es ein $s \in S$ mit $as = 0$ in $A$.
+    \item Jedes Element in $S^{-1} A$ hat die Form $\iota(a) \iota(s)^{-1}$ für ein $a \in A$ und ein $s \in S$.
+  \end{itemize}
+\end{prop}
+
+\begin{bem}
+  Diese drei Eigenschaften charakterisieren die Lokalisierung eindeutig:
+  Ist $\phi : A \to B$ ein Ringhomomorphismus, der die drei Eigenschaften von $\iota$ aus der letzten Prop. erfüllt, so gilt $B \cong S^{-1} A$.
+\end{bem}
+
+% 20.3. Beispiele von Lokalisierungen
+
+\begin{defn}
+  Sei $A$ ein komm. Ring und $\ppp \subset A$ ein Primideal.
+  Dann ist $A \setminus \ppp$ multiplikativ abgeschlossen.
+  Der komm. Ring $A_\ppp \coloneqq (A \setminus \ppp)^{-1} A$ heißt \emph{Lokalisierung} von~$A$ bei~$\ppp$ oder \emph{Halm} von~$A$ an~$\ppp$.
+\end{defn}
+
+\begin{bem}
+  $A_\ppp$ ist ein lokaler Ring mit maximalem Ideal
+  \[
+    \mmm \coloneqq A_\ppp \ppp = \Set{\tfrac{a}{s}}{a \in \ppp, s \in A \setminus \ppp}.
+  \]
+\end{bem}
+
+\begin{defn}
+  Sei $A$ ein Integritätsbereich.
+  Dann ist $S \coloneqq A \setminus \{ 0 \}$ mult. abgeschlossen.
+  Die Lokal. $S^{-1} A$ heißt \emph{Quotientenkörper} von $A$.
+\end{defn}
+
+\begin{bem}
+  Der Strukturhomomorphismus $A \to S^{-1} A$ ist in diesem Fall injektiv, wir können daher $A$ als Unterring von $S^{-1} A$ ansehen.
+  Der Körper $S^{-1} A$ ist der kleinste Körper, der $A$ als Unterring enthält.
+\end{bem}
+
+\begin{bsp}
+  $\Q$ ist der Quotientenkörper von $\Z$
+\end{bsp}
+
+\begin{bsp}
+  $S^{-1} A = 0 \iff 0 \in S$
+\end{bsp}
+
+\begin{defn}
+  Sei $A$ ein komm. Ring, $f \in A$.
+  Dann ist $S \coloneqq \Set{f^n}{n \geq 0}$ mult. abgeschlossen.
+  Die Lokalisierung $A[f^{-1}] \coloneqq S^{-1} A$ heißt \emph{Lokalisierung} von $A$ \emph{außerhalb} von $f$.
+\end{defn}
+
+% 20.4. Lokalisierung von Moduln
+
+\begin{konstr}
+  Sei $A$ ein kommutativer Ring, $S \subseteq A$ multiplikativ abgeschlossen und $M$ ein $A$-Modul.
+  \begin{itemize}
+    \item Wir definieren auf der Menge der Paare $M \times S$ eine Äquivalenzrelation durch
+    \[
+      (m, s) \sim (m', s') \coloniff \ex{u \in S} u (m s' - m' s) = 0.
+    \]
+    \item Wir schreiben $\tfrac{m}{s}$ für die Äquivalenzklasse von $(m, s)$.
+    \item Vermöge der Addition und der Skalarmultiplikation
+    \[
+      \tfrac{m}{s} + \tfrac{n}{t} \coloneqq \tfrac{m t + n s}{s t}
+      \qquad \text{bzw.} \qquad
+      \tfrac{a}{s} \cdot \tfrac{m}{t} \coloneqq \tfrac{a m}{s t}
+    \]
+    wird $S^{-1} M \coloneqq (M \times S)/{\sim}$ zu einem $S^{-1} A$-Modul.
+  \end{itemize}
+\end{konstr}
+
+\begin{defn}
+  Der $S^{-1} A$-Modul $S^{-1} M$ heißt \emph{Lokalisierung} von $M$ nach $S$ und $\iota : M \to (S^{-1} M)^A, \enspace m \mapsto \tfrac{m}{1}$ sein \textit{Strukturhomomorphismus}.
+\end{defn}
+
+\begin{defn}
+  Sei $\ppp \subset A$ ein Primideal.
+  Der $A_\ppp$-Modul $M_\ppp \coloneqq (A \setminus \ppp)^{-1} M$ heißt \textit{Lokalisierung} von~$M$ bei~$\ppp$ oder \textit{Halm} von~$M$ an~$\ppp$. \\
+  Das Bild von $m \in M$ in $M_\ppp$ heißt \emph{Keim} von~$m$ an~$\ppp$.
+\end{defn}
+
+\begin{defn}
+  Sei $f \in A$.
+  Dann heißt $M[f^{-1}] \coloneqq \Set{f^n}{n \geq 0}^{-1} M$ die \textit{Lokalisierung} von $M$ außerhalb von~$f$.
+  Das Bild von $m \in M$ in $M[f^{-1}]$ heißt \textit{Einschränkung} von~$m$ außerhalb von~$f$.
+\end{defn}
+
+% 20.5. Exaktheit der Lokalisierung
+
+\begin{bem}
+  Sei $A$ ein kommutativer Ring und $S \subseteq A$ mult. abgeschlossen.
+  Die Lokalisierung von $A$-Moduln nach~$S$ stiftet einen Funktor $\LMod{A} \to \LMod{(S^{-1} A)}$:
+  Für einen Morphismus $\phi : M \to N$ ist
+  \[
+    S^{-1} \phi : S^{-1} M \to S^{-1} N, \quad
+    \tfrac{m}{s} \mapsto \tfrac{\phi(m)}{s}.
+  \]
+\end{bem}
+
+\begin{prop}
+  Die Lokalisierung ist exakt:
+  Sei $A$ ein komm. Ring und $S \subseteq A$ mult. abgeschlossen.
+  Ist $M' \xra{\phi} M \xra{\psi} M''$ exakt, so ist auch $S^{-1} M' \xra{S^{-1} \phi} S^{-1} M \xra{S^{-1} \psi} S^{-1} M''$ exakt.
+\end{prop}
+
+\begin{prop}
+  Sei $A$ ein komm. Ring und $S \subseteq A$ mult. abgeschlossen.
+  Sei $M$ ein $A$-Modul und $P, N \subseteq M$ Untermoduln.
+  Dann gilt:
+  \begin{itemize}
+    \item $S^{-1} (N + P) = S^{-1} N + S^{-1} P \subseteq S^{-1} M$
+    \item $S^{-1} (M / N) \cong S^{-1} M / S^{-1} N$ als $S^{-1} A$-Moduln
+    \item $S^{-1} (N \cap P) = S^{-1} N \cap S^{-1} P \subseteq S^{-1} M$
+  \end{itemize}
+\end{prop}
+
+% 20.6. Lokalisierung als Basiswechsel
+
+\begin{prop}
+  Sei $A$ ein komm. Ring und $S \subseteq A$ mult. abgeschlossen.
+  Sei $M$ ein $A$-Modul.
+  Dann ist folgende Abb. ein Iso von $S^{-1} A$-Moduln:
+  \[
+    \phi : S^{-1} A \otimes_A M \to S^{-1} M, \enspace \tfrac{a}{s} \otimes m \mapsto \tfrac{a m}{s}
+  \]
+\end{prop}
+
+\begin{kor}
+  Sei $A$ ein komm. Ring und $S \subseteq A$ mult. abgeschlossen.
+  Dann ist $S^{-1} A$ eine flache $A$-Algebra.
+\end{kor}
+
+\begin{prop}
+  Sei $A$ ein kommutativer Ring und $S \subseteq A$ mult. abgeschlossen. \\
+  Seien $M$ und $N$ zwei $A$-Moduln.
+  Dann ist folgende Abbildung ein Isomorphismus von $S^{-1} A$-Moduln:
+  \[
+    \phi : S^{-1} M \otimes_{S^{-1} A} S^{-1} N \to S^{-1} (M \otimes N), \quad
+    \tfrac{m}{s} \otimes \tfrac{n}{t} \mapsto \tfrac{m \otimes n}{s t}
+  \]
+\end{prop}
+
+\begin{bsp}
+  Sei $\ppp \subset A$ ein Primideal.
+  Dann gilt $M_\ppp \otimes_{A_\ppp} N_\ppp \cong (M \otimes_A N)_\ppp$.
+\end{bsp}
+
+% 21. Lokale Eigenschaften
+\subsection{Lokale Eigenschaften}
+
+\begin{sprech}
+  Eine Eigenschaft kommutativer Ringe (oder Moduln über einem solchen) heißt \emph{lokal}, falls gilt: \\[2pt]
+  Ein Ring~$A$ (bzw. Modul~$M$) besitzt die Eigenschaft genau dann, wenn all seine Halme~$A_\ppp$ (bzw.~$M_\ppp$) die Eigenschaft besitzen.
+\end{sprech}
+
+% 21.1. Trivialität von Moduln
+
+\begin{prop}
+  Sei~$A$ ein kommutativer Ring und $M$ ein $A$-Modul. \\
+  Dann sind äquivalent:
+  \begin{itemize}
+    \item $M = 0$
+    \item $M_\ppp = 0$ für alle Primideale $\ppp \subset A$
+    \item $M_\mmm = 0$ für alle max. Ideale $\mmm \subset A$
+  \end{itemize}
+\end{prop}
+
+% 21.2. Injektivität und Surjektivität
+
+Mit der Exaktheit der Lokalisierung folgt:
+
+\begin{kor}
+  Sei $A$ ein kommutativer Ring und $\phi : M \to N$ ein Homomorphismus von $A$-Moduln.
+  \begin{itemize}
+    \item Es sind äquivalent:
+    \begin{itemize}
+      \item $\phi : M \to N$ ist injektiv.
+      \item $\phi_\ppp : M_\ppp \to N_\ppp$ ist injektiv für alle Primideale $\ppp \subset A$.
+      \item $\phi_\mmm : M_\mmm \to N_\mmm$ ist injektiv für alle max. Ideale $\mmm \subset A$.
+    \end{itemize}
+    \item Es sind äquivalent:
+    \begin{itemize}
+      \item $\phi : M \to N$ ist surjektiv.
+      \item $\phi_\ppp : M_\ppp \to N_\ppp$ ist surjektiv für alle Primideale $\ppp \subset A$.
+      \item $\phi_\mmm : M_\mmm \to N_\mmm$ ist surjektiv für alle max. Ideale $\mmm \subset A$.
+    \end{itemize}
+  \end{itemize}
+\end{kor}
+
+% 21.3. Flachheit
+
+\begin{prop}
+  Sei~$A$ ein kommutativer Ring und $M$ ein $A$-Modul.
+  Dann sind äquivalent:
+  \begin{itemize}
+    \item $M$ ist ein flacher $A$-Modul.
+    \item $M_\ppp$ ist ein flacher $A_\ppp$-Modul für alle Primideale $\ppp \subset A$.
+    \item $M_\ppp$ ist ein flacher $A_\mmm$-Modul für alle max. Ideale $\mmm \subset A$.
+  \end{itemize}
+\end{prop}
+
+% 22. Idealerweiterungen und -kontraktionen in Lokalisierungen
+\subsection{Ideale in Lokalisierungen}
+
+% 22.1. Erweiterungen und Kontraktionen
+
+\begin{nota}
+  Sei $A$ ein komm. Ring und $S \subseteq A$ mult. abgeschlossen.
+  Für ein Ideal $\aaa \subseteq A$ schreiben wir $S^{-1} \aaa \coloneqq (S^{-1} A) \aaa$.
+\end{nota}
+
+\begin{bem}
+  Dies ist gerechtfertigt, denn jedes Element in $(S^{-1} A) \aaa$ hat die Form $\sum_i \tfrac{a_i}{s_i}$ und diese Terme können wir auf einen gemeinsamen Nenner bringen.
+\end{bem}
+
+\begin{prop}
+  Alle Ideale in $S^{-1} A$ sind erweiterte Ideale, \dh{} von der Form $S^{-1} \aaa$ für ein Ideal $\aaa \subseteq A$.
+\end{prop}
+
+\begin{prop}
+  $A \cap (S^{-1} \aaa) = \bigcup_{s \in S} (\aaa : s)$
+\end{prop}
+
+\begin{bsp}
+  $S^{-1} \aaa = (1) \iff \aaa \cap S \neq \emptyset$
+\end{bsp}
+
+\begin{prop}
+  Sei $A$ ein komm. Ring und $S \subseteq A$ mult. abgeschlossen.
+  Ein Ideal $\aaa \subset A$ ist genau dann ein kontrahiertes Ideal bezüglich $A \to S^{-1} A$, wenn kein Element von $S$ ein Nullteiler in $A/\aaa$ ist.
+\end{prop}
+
+\begin{prop}
+  Sei $A$ ein komm. Ring.
+  Die Lokalisierung nach einer mult. abg. Teilmenge $S \subseteq A$ vertauscht mit folgenden Ideal-Operationen: \\
+  endl. Summen, endl. Produkte, endl. Schnitte und Wurzeln.
+\end{prop}
+
+\begin{kor}
+  $\sqrt{(0)} = S^{-1} \sqrt{(0)} \subseteq S^{-1} A$
+\end{kor}
+
+% 22.2. Primideale und Lokalisierungen
+
+\begin{prop}
+  Sei $A$ ein komm. Ring und $S \subseteq A$ mult. abgeschlossen.
+  Folgende Korrespondenz ist bijektiv und monoton:
+  \[
+    \begin{array}{r c l}
+      \{ \text{ Primideale $\ppp \subset A$ mit $\ppp \cap S = \emptyset$ } \} & \leftrightarrow & \{ \text{ Primideale $\qqq \subset S^{-1} A$ } \} \\
+      \ppp & \mapsto & S^{-1} \ppp = (S^{-1} A) \ppp \\
+      A \cap \qqq & \mapsfrom & \qqq
+    \end{array}
+  \]
+\end{prop}
+
+\begin{kor}
+  Für ein Primideal $\rrr \subset A$ liefert dies eine Korrespondenz
+  \[
+    \begin{array}{r c l}
+      \{ \text{ Primideale $\ppp \subset A$ mit $\ppp \subseteq \rrr$ } \} & \leftrightarrow & \{ \text{ Primideale $\qqq \subset A_\rrr$ } \}
+    \end{array}
+  \]
+\end{kor}
+
+\begin{bem}
+  Sei $\ppp \subset A$ ein Primideal und $\qqq \subseteq \ppp$ ein weiteres Primideal.
+  Lokalisieren bei $\ppp$ schneidet alle Primideale heraus, die nicht in $\ppp$ enthalten sind.
+  Der Wechsel nach $A/\qqq$ schneidet alle Primideale heraus außer denen, die $\qqq$ enthalten.
+  Somit enthält $A_\ppp / (A_\ppp \qqq) = (A/\qqq)_\ppp$ nur Primideale zwischen $\qqq$ und $\ppp$.
+\end{bem}
+
+\begin{defn}
+  Sei $A$ ein komm. Ring und $\ppp \subset A$ ein Primideal.
+  Der Körper $A(\ppp) \coloneqq A_\ppp / (A_\ppp \qqq) = (A/\qqq)_\ppp$ heißt \emph{Restklassenkörper} von~$A$ an~$\ppp$.
+\end{defn}
+
+\begin{prop}
+  Sei $\phi : A \to B$ ein Homomorphismus kommutativer Ringe.
+  Dann ist ein Primideal $\ppp \subset A$ genau dann eine Kontraktion eines Primideals in~$B$, falls $A \cap (B \ppp) = \ppp$.
+\end{prop}
+
+% 22.3. Lokalisierungen und der Annulator
+
+\begin{prop}
+  Sei $A$ ein komm. Ring, $S \subseteq A$ mult. abgeschlossen und $M$ ein endlich erzeugter $A$-Modul.
+  Dann ist $S^{-1} \ann(M) = \ann(S^{-1} M)$.
+\end{prop}
+
+\begin{kor}
+  Sei $A$ ein komm. Ring, $S \subseteq A$ mult. abgeschlossen, $M$ ein $A$-Modul und $N, P \subseteq M$ zwei Untermoduln.
+  Ist $P$ endlich erzeugt, so gilt $S^{-1} (N : P) = (S^{-1} N : S^{-1} P)$.
+\end{kor}
 
 \end{document}
