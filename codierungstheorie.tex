@@ -1918,12 +1918,11 @@ Zu $f : \F_q^n \to V$ definieren wir eine \emph{transformierte Abbildung} durch
 \end{defn}
 
 \begin{defn}
-  Zwei lateinische Quadrate $A, B \in \Z_q^{q \times q}$ heißen \emph{orthogonal} ($A \perp B$), falls die Abbildung
+  Zwei lateinische Quadrate $A, B \in \Z_q^{q \times q}$ heißen \emph{orthogonal} ($A \perp B$), falls folgende Abbildung bijektiv ist:
   \[
     \{ 1, \ldots, q \}^2 \to \Z_q^2, \quad
     (i, j) \mapsto (A_{ij}, B_{ij})
   \]
-  bijektiv ist.
 \end{defn}
 
 \begin{satz}
@@ -1966,5 +1965,73 @@ Zu $f : \F_q^n \to V$ definieren wir eine \emph{transformierte Abbildung} durch
     \item $N(q) = q - 1$ $\iff$ $\exists$ projektive Ebene der Ordnung $q$
   \end{itemize}
 \end{bem}
+
+% Vorlesung vom 7.1.2015
+
+% §10.2. Verfeinerung der Gewichtsverteilung eines linearen Codes
+
+\begin{nota}
+  $[n] \coloneqq \{ 1, \ldots, n \}$ \\
+  Für $I \subseteq [n]$ sei $U_I \coloneqq \spann \Set{e_i}{i \in I} \subseteq \F_q^n$
+\end{nota}
+
+
+\begin{defn}
+  Sei $C$ ein lin. Code.
+  Dann sei $\delta_C(I) \coloneqq \delta(I) \coloneqq \dim(C \cap U_i)$.
+\end{defn}
+
+% 10.4
+\begin{prop}
+  \begin{itemize}
+    \item $\delta(I) = 0$ falls $\abs{I} < d$
+    \item $\ex{I \subseteq [n]} \abs{I} = d \wedge \delta(I) = 1$
+    \item $\fa{I \subseteq [n]} \abs{I} = d \wedge \delta(I) = 1 \implies \delta(I) = 1$
+  \end{itemize}
+\end{prop}
+
+\begin{defn}
+  \begin{minipage}[t]{0.88 \linewidth}
+    \begin{itemize}
+      \item Für $i \in [n]$ sei $A_C(i) \coloneqq A_i \coloneqq \abs{\Set{w \in C}{\wt(w) = i}}$
+      \item Für $I \subseteq [n]$ sei $a_C(I) \coloneqq a(I) \coloneqq \abs{\Set{w \in C}{\supp(w) = I}}$
+    \end{itemize}
+  \end{minipage}
+\end{defn}
+
+\begin{bem}
+  $A_i = \sum_{I \subseteq [n], \abs{I} = i} a(I)$
+\end{bem}
+
+% 10.5
+\begin{satz}
+  Sei $C$ ein $[n, k, d]$-Code über $\F_q$.
+  Dann ist
+  \[
+    a(I) = \sum_{K \subseteq I} (-1)^{\abs{I} - \abs{K}} \cdot q^{\delta(K)}.
+  \]
+\end{satz}
+
+\begin{bem}
+  Es gibt auch eine invertierte Formel:
+  \[
+    \abs{C \cap U_I} = q^{\delta(I)} = \sum_{K \subseteq I} a(K).
+  \]
+\end{bem}
+
+% §10.3. 
+
+% 10.6 und 10.7
+\begin{satz}
+  Sei $C$ ein $[n, k, d]$-MDS-Code über $\F_q$. % (\dh{} $k = n - d + 1$).
+  Dann gilt
+  \begin{itemize}
+    \item $\delta(I) = \max ( 0, \abs{I} - (d-1) )$ \enspace
+    für alle $I \subseteq [n]$
+    \item $A_j = \binom{n}{j} \sum_{l=d}^j \binom{j}{l} \cdot (-1)^{j-l} \cdot (q^{l-d+1} - 1)$ \enspace
+    für $j \geq d$
+  \end{itemize}
+\end{satz}
+
 
 \end{document}
