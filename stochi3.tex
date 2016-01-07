@@ -23,7 +23,7 @@
 %\newcommand{\Leb}{\mathcal{L}} % Lebesgue
 \newcommand{\ind}{\mathbbm{1}} % Indikatorfunktion
 \newcommand{\Cont}{\mathcal{C}} % Menge der stetigen/diff'baren Funktionen
-\newcommand{\scp}[2]{\left( #1 \!\mid\! #2 \right)} % Skalarprodukt
+\newcommand{\scp}[2]{\langle #1, #2 \rangle} % Skalarprodukt
 %\DeclareMathOperator*{\argmin}{arg\,min}
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\eqqd}{\stackrel{d}{=}} % Gleichheit in Verteilung (equality in distribution)
@@ -35,6 +35,11 @@
 \DeclareMathOperator{\var}{Var} % Varianz
 \DeclareMathOperator{\cov}{Cov} % Kovarianz
 \DeclareMathOperator{\cor}{Cor} % Korrelation
+
+% Hervorhebung der Nullhypothese und der Gegenhypothese
+%\definecolor{TestColor}{rgb}{0.1,0.5,0.4}
+\definecolor{TestColor}{rgb}{0.7,0.2,0.0}
+\newcommand{\testh}[1]{\textcolor{TestColor}{\textbf{#1}}}
 
 % Verteilungen
 \newcommand{\Normal}{\mathcal{N}} % Gaußsche Normalverteilung
@@ -62,7 +67,7 @@
 \end{prob}
 
 \begin{defn}
-  Der \emph{Stichprobenraum} ist $(\R^n, \Bor(\R^n), P_\vartheta \times \ldots \times P_\vartheta)$
+  Der \emph{Stichprobenraum} ist $(\R^n, \Bor(\R^n), P_\vartheta \times \ldots \times P_\vartheta)$.
 \end{defn}
 
 \begin{terminologie}
@@ -73,12 +78,12 @@
   Ein (nichtrandomisierter) \emph{Test} für $H_0$ gegen $H_1$ ist eine Entscheidungsregel über die Annahme von $H_0$ basierend auf einer Stichprobe, die durch eine messbare Abbildung $\varphi : \R^n \to \{ 0, 1 \}$ augedrückt wird und zwar durch
   \[ \varphi(x_1, \ldots, x_n) = \begin{cases}
     0 & \text{bei Annahme von $H_0$,} \\
-    1 & \text{bei Ablehung von $H_0$.}
+    1 & \text{bei Ablehnung von $H_0$.}
   \end{cases} \]
 \end{defn}
 
 \begin{defn}
-  Der \emph{Ablehungsbereich} oder \emph{kritische Bereich} von $\varphi$ ist
+  Der \emph{Ablehnungsbereich} oder \emph{kritische Bereich} von $\varphi$ ist
   \[ K_n \coloneqq \Set{(x_1, \ldots, x_n) \in \R^n}{\varphi(x_1, \ldots, x_n) = 1}. \]
 \end{defn}
 
@@ -87,8 +92,10 @@
 \end{bem}
 
 \begin{defn}
-  Ein \emph{Fehler 1. Art} ist eine Ablehnung der Nullhypothese $H_0$, obwohl $H_0$ richtig ist;
-  ein \emph{Fehler 2. Art} ist eine Annahme von $H_0$, obwohl $H_0$ falsch ist.
+  \begin{minipage}[t]{0.88 \linewidth}
+    \emph{Fehler 1. Art}: \enspace Ablehnung von $H_0$, obwohl $H_0$ richtig ist \\
+    \emph{Fehler 2. Art}: \enspace \makebox[0pt][l]{Annahme}\phantom{Ablehnung} von $H_0$, obwohl $H_0$ falsch ist
+  \end{minipage}
 \end{defn}
 
 % Ausgelassen: Stichprobenraum ist [R^n, B(R^n), P_\vartheta \times \ldots \times P_\vartheta]
@@ -96,7 +103,7 @@
 \begin{defn}
   Die \emph{Güte- oder Machtfunktion} des Tests $\varphi$ ist
   \begin{align*}
-    m_\varphi : \Theta \to \cinterval{0}{1},
+    m_\varphi : \Theta \to \cinterval{0}{1}, \enspace
     m_\varphi(\vartheta) & \coloneqq
     \E_\vartheta \varphi(X_1, \ldots, X_n) \\
     & = \P_\vartheta ((X_1, \ldots, X_n) \in K_n) \\
@@ -140,15 +147,15 @@
   \begin{alignat*}{4}
     m_\varphi(\vartheta_0) &= \P_{\vartheta_0} \left( (X_1, \ldots, X_n) \in K_n \right)
     &&= \\
-    &= \P_{\vartheta_0} \left( (T(X_1), \ldots, T(X_n)) \in K_n^T \right)
-    &&= \Int{K_n^T}{}{f_T(x)}{x} \leq \alpha,
+    &= \P_{\vartheta_0} \left( T(X_1, \ldots, X_n) \in K_n^T \right)
+    &&= \Int{K_n^T}{}{f_T(x)}{x},
   \end{alignat*}
   wobei $f_T$ die Dichte von $T(X_1, \ldots, X_n)$ unter $H_0$ ist.
 \end{bem}
 
-\begin{bsp}
+\begin{test}
   Sei $X \sim \Normal(\mu, \sigma^2)$, $\sigma$ bekannt und $\alpha \in \ointerval{0}{1}$ vorgegeben. \\
-  Zum Test von $H_0 : \mu = \mu_0$ vs. $H_1 : \mu \neq \mu_0$ wählen wir als Statistik
+  Zum Test von \testh{$H_0 : \mu = \mu_0$ vs. $H_1 : \mu \neq \mu_0$} wählen wir als Statistik
   \[
     T(X_1, \ldots, X_n) \coloneqq \tfrac{\sqrt{n}}{\sigma} \left( \overline{X}_n - \mu_0 \right) \enspace
     \text{mit }
@@ -157,12 +164,12 @@
   Unter Annahme von $H_0$ gilt $T(X_1, \ldots, X_n) \sim \Normal(0,1)$. \\
   Der Ablehnungsbereich der Statistik ist
   \[
-    K_n^T = \Set{t \in \R^1}{\abs{t} > z_{1 - \alpha/2}}
+    K_n^T = \Set{t \in \R^1}{\abs{t} > z_{1 - \nicefrac{\alpha}{2}}}
     \quad \text{mit} \quad
-    z_{1 - \alpha/2} \coloneqq \Phi^{-1}(1 - \alpha/2).
+    z_{1 - \nicefrac{\alpha}{2}} \coloneqq \Phi^{-1}(1 - \nicefrac{\alpha}{2}).
   \]
-  Für $\alpha = 0,5$ gilt beispielsweise $z_{1 - \alpha/2} \approx 1,96$.
-\end{bsp}
+  Für $\alpha = 0,05$ gilt beispielsweise $z_{1 - \nicefrac{\alpha}{2}} \approx 1,96$.
+\end{test}
 
 % Vorlesung vom 15.10.2015
 
@@ -170,26 +177,29 @@
   Es gilt
   \begin{align*}
     t \in (K_n^T)^c
-    &\iff \abs{t} \leq z_{1-\alpha/2}
-    \iff \abs{\overline{X}_n - \mu_0} \leq \tfrac{\sigma}{\sqrt{n}} z_{1-\alpha/2} \\
-    &\iff \mu_0 \in \cinterval{\overline{X}_n - \tfrac{\sigma}{\sqrt{n}} z_{1-\alpha/2}}{\overline{X}_n + \tfrac{\sigma}{\sqrt{n}} z_{1-\alpha/2}}.
+    &\iff \abs{t} \leq z_{1-\nicefrac{\alpha}{2}}
+    \iff \abs{\overline{X}_n - \mu_0} \leq \tfrac{\sigma}{\sqrt{n}} z_{1-\nicefrac{\alpha}{2}} \\
+    &\iff \mu_0 \in \cinterval{\overline{X}_n - \tfrac{\sigma}{\sqrt{n}} z_{1-\nicefrac{\alpha}{2}}}{\overline{X}_n + \tfrac{\sigma}{\sqrt{n}} z_{1-\nicefrac{\alpha}{2}}}.
   \end{align*}
-  Letzteres Intervall wird \emph{Konfidenzintervall} für $\mu_0$ zum Konfidenz- niveau $1-\alpha$ genannt.
 \end{bem}
 
-\begin{bsp}
+\begin{defn}
+  Dieses Intervall heißt \emph{Konfidenzintervall} für $\mu_0$ zum Konfidenzniveau $1-\alpha$.
+\end{defn}
+
+\begin{test}
   Sei wieder $X \sim \Normal(\mu, \sigma^2)$, $\sigma^2$ aber diesmal unbekannt. \\
-  Zum Testen von $H_0 : \mu = \mu_0$ vs. $H_1 : \mu \neq \mu_0$ verwenden wir
+  Zum Testen von \testh{$H_0 : \mu = \mu_0$ vs. $H_1 : \mu \neq \mu_0$} verwenden wir
   \[
     \hat{T}(X_1, \ldots, X_n) = \tfrac{\sqrt{n}}{S_n} \left( \overline{X}_n - \mu_0 \right), \quad
     S_n^2 \coloneqq \tfrac{1}{n-1} \sum_{i=1}^n \left( X_i - \overline{X}_n \right)^2.
   \]
   Dabei ist $S_n$ die \emph{(korrigierte) Stichprobenvarianz}.
   Man kann zeigen, dass $\hat{T}(X_1, \ldots, X_n) \sim t_{n-1}$ unter $H_0$.
-  Dabei ist $t_m$ die \emph{Student'sche $t$-Verteilung} mit $m$ Freiheitsgraden. \\
+  Dabei ist $t_m$ die \emph{Student'sche $t$-Verteilung} mit $m$ Freiheitsgraden (siehe unten). \\
   Der Ablehnungsbereich ist
-  \[ K_n^T = \Set{t \in \R^1}{\abs{t} > t_{n-1,1-\alpha/2}}. \]
-\end{bsp}
+  \[ K_n^T = \Set{t \in \R^1}{\abs{t} > t_{n-1,1-\nicefrac{\alpha}{2}}}. \]
+\end{test}
 
 \begin{bem}
   $S_n^2$ und $\overline{X}_n$ sind unabhängig für $n \geq 2$. % und umgekehrt?
@@ -235,41 +245,42 @@
 
 % Vorlesung vom 19.10.2015
 
-\begin{bsp}
-  Sei $X \sim \Normal(\mu, \sigma^2)$ mit $\mu$ unbekannt.
-  Wir testen $H_0 : \sigma = \sigma_0$ vs. $H_1 : \sigma \neq \sigma_0$ mit
+\begin{test}
+  Sei $X \sim \Normal(\mu, \sigma^2)$ mit $\mu$ unbekannt. \\
+  Wir testen \testh{$H_0 : \sigma = \sigma_0$ vs. $H_1 : \sigma \neq \sigma_0$} mit
   \[ T \coloneqq \tfrac{n-1}{\sigma_0^2} S_n^2 \]
-  Unter Annahme von $H_0$ gilt $T ~ \chi_{n-1}^2$.
-  Falls $\mu$ bekannt ist, muss man
+  Unter Annahme von $H_0$ gilt $T \sim \chi_{n-1}^2$.
+  Falls $\mu$ bekannt ist, muss
   \[
     \widetilde{T} \coloneqq \tfrac{n}{\sigma_0^2} \widetilde{S}_n^2, \quad
     \widetilde{S}_n^2 \coloneqq \tfrac{1}{n} \sum_{i=1}^n (X_i - \mu)^2.
   \]
-  als Statistik wählen. Unter Annahme von $H_0$ ist $\widetilde{T} \sim \chi_n^2$.
-\end{bsp}
+  als Statistik gewählt werden.
+  Unter Annahme von $H_0$ ist $\widetilde{T} \sim \chi_n^2$.
+\end{test}
 
-\begin{bsp}
-  Seien Stichproben $X_1^{(1)}, \ldots, X_{n_1}^{(1)} \sim \Normal(\mu_1, \sigma_1^2)$ und $X_1^{(2)}, \ldots, X_{n_2}^{(2)} \sim \Normal(\mu_2, \sigma_2^2)$ gegeben.
-  Wir wollen $H_0 : \sigma_1 = \sigma_2$ gegen $H_1 : \sigma_1 \neq \sigma_2$ testen.
+\begin{test}
+  Seien Stichproben $X_1^{(i)}, \nldots, X_{n_i}^{(i)} \sim \Normal(\mu_i, \sigma_i^2)$, $i = 1, 2$ gegeben.
+  Wir testen \testh{$H_0 : \sigma_1 = \sigma_2$ vs. $H_1 : \sigma_1 \neq \sigma_2$}.
   Dazu verwenden wir
   \[
     T = \frac{S_{X^{(1)}}^2}{S_{X^{(2)}}^2}, \quad
-    S_{X^{(j)}}^2 \coloneqq \tfrac{1}{n-1} \sum_{i=1}^{n_j} \left( X_i^{(j)} - \overline{X}^{(j)}_n \right)^n.
+    S_{X^{(j)}}^2 \coloneqq \tfrac{1}{n-1} \sum_{i=1}^{n_j} \left( X_i^{(j)} - \overline{X}^{(j)}_n \right)^2.
   \]
   Falls $H_0$ gilt, so ist $T \sim F_{n_1-1,n_2-1}$.
-\end{bsp}
+\end{test}
 
-\begin{bsp}
-  Situation wie im letzten Beispiel mit $\sigma_1 = \sigma_2$.
-  Wir testen $H_0 : \mu_1 = \mu_2$ vs. $H_1 : \mu_1 \neq \mu_2$ mit
+\begin{test}
+  Situation wie im letzten Test mit $\sigma_1 = \sigma_2$. \\
+  Wir testen \testh{$H_0 : \mu_1 = \mu_2$ vs. $H_1 : \mu_1 \neq \mu_2$} mit
   \[
-    T = \sqrt{\frac{n_1 \cdot n_2}{n_1 + n_2}} \cdot \frac{\overline{X}_{n_1}^{(1)} - \overline{X}_{n_2}^{(2)}}{S_{n_1,n_2}}, \quad
+    T = \sqrt{\tfrac{n_1 \cdot n_2}{n_1 + n_2}} \cdot \frac{\overline{X}_{n_1}^{(1)} - \overline{X}_{n_2}^{(2)}}{S_{n_1,n_2}}, \quad
     S_{n_1,n_2}^2 = \frac{(n_1{-}1) S_{X^{(1)}}^2 + (n_2{-}1) S_{X^{(2)}}^2}{n_1 + n_2 - 2}
   \]
   Unter $H_0$ gilt $T \sim t_{n_1 + n_2 - 2}$.
-\end{bsp}
+\end{test}
 
-\begin{bsp}
+\begin{test}
   Seien $\begin{psmallmatrix} X_1 \\ Y_1 \end{psmallmatrix}, \ldots, \begin{psmallmatrix} X_n \\ Y_n \end{psmallmatrix} \sim \Normal\left(
     \begin{psmallmatrix}
       \mu_1\vphantom{\sigma_1^2} \\
@@ -279,17 +290,18 @@
       \sigma_1^2 & \sigma_1 \sigma_2 \rho \\
       \sigma_1 \sigma_2 \rho & \sigma_2^2
     \end{psmallmatrix} \right)$. \\[2pt]
-  Wir testen $H_0 : \rho = 0$ vs. $H_1 : \rho \neq 0$ mit
+  Wir testen \testh{$H_0 : \rho = 0$ vs. $H_1 : \rho \neq 0$} mit
   \[
     T \coloneqq \frac{\sqrt{n-2} \cdot \hat{\rho}_n}{\sqrt{1 - \hat{\rho}_n^2}}, \quad
     \hat{\rho}_n \coloneqq \frac{\tfrac{1}{n-1} \sum_{i=1}^n (X_i - \overline{X}_n) (Y_i - \overline{Y}_n)}{S_{X,n} \cdot S_{Y,n}}.
     % Nenner ausgeschrieben: \sqrt{\tfrac{1}{n-1} \sum_{i=1}^n (X_i - \overline{X}_n)^2 \tfrac{1}{n-1} \sum_{i=1}^n (Y_i - \overline{Y}_n)^2}
   \]
   Falls $H_0$ richtig ist, so gilt $T \sim t_{n-2}$. \\[2pt]
-  Um $H_0 : \rho = \rho_0 \in \ointerval{0}{1}$ vs. $H_1 : \rho \neq \rho_0$ zu testen, kann man
+  Um \testh{$H_0 : \rho = \rho_0 \in \ointerval{-1}{1}$ vs. $H_1 : \rho \neq \rho_0$} zu testen, kann man
   \[ T = \tfrac{\sqrt{n-3}}{2} \left( \log \tfrac{1 + \hat{\rho}_n}{1 - \hat{\rho}_n} - \log \tfrac{1+\rho_0}{1-\rho_0} \right) \]
-  verwenden. Für $n$ groß gilt $T \sim \Normal(0, 1)$ unter $H_0$.
-\end{bsp}
+  verwenden.
+  Für $n$ groß gilt approx. $T \sim \Normal(0, 1)$ unter $H_0$.
+\end{test}
 
 % 1.4. Lemma von Slutzky und varianzstabilisiernde Transformationen
 
@@ -315,11 +327,11 @@
   Sei $T_n = T(X_1, \ldots, X_n)$ eine Statistik.
   Falls der ZGWS für $T_n$ die Form
   \[ \sqrt{n} (T_n - \vartheta) \xra[n \to \infty]{d} \Normal(0, g(\vartheta)) \]
-  besitzt, so benötigen wir für Hypothesentests eine Möglichkeit, die Abhängigkeit der Varianz von Parameter $\vartheta$ zu beseitigen.
+  besitzt, so benötigen wir für Hypothesentests eine Möglichkeit, die Abhängigkeit der Varianz vom Parameter $\vartheta$ zu beseitigen.
   Man sagt, man führt eine \emph{varianzstabilisierende Transformation} durch. \\
   Wir suchen dazu eine stetig diff'bare Funktion $f : \Theta \to \R^1$, sodass
   \[ \sqrt{n} (f(T_n) - f(\vartheta)) \xra[n \to \infty]{d} \Normal(0, 1). \]
-  Man zeigt, dass dafür gelten muss:
+  Man zeigt mit dem MWS und Slutzky, dass dafür gelten muss:
   \[
     f'(\vartheta) = \tfrac{1}{\sqrt{g(\vartheta)}}, \quad \text{also} \quad
     f(\theta) = \myint{}{} \tfrac{\d \vartheta}{\sqrt{g(\vartheta)}}.
@@ -328,10 +340,10 @@
 
 \begin{bspe}
   \begin{itemize}
-    \item Sei $X \sim \Exp(\mu)$, $\hat{\mu}_n \coloneqq \tfrac{1}{\overline{X}_n}$.
+    \item Sei $X \sim \Exp(\mu)$ (also $\E X = \mu^{-1}$).
     Dann gilt
     \begin{align*}
-      & \sqrt{n} (\overline{X}_n - \tfrac{1}{\mu}) \xra{d} \Normal(0, g(\tfrac{1}{\mu}))
+      & \sqrt{n} (\overline{X}_n - \tfrac{1}{\mu}) \xra[n \to \infty]{d} \Normal(0, g(\tfrac{1}{\mu}))
       \quad \text{mit} \quad
       g(\vartheta) \coloneqq \vartheta^2. \\
       \leadsto \enspace & \text{Mit } f(\theta) \coloneqq \myint{}{} \tfrac{\d \vartheta}{\sqrt{g(\vartheta)}} = \myint{}{} \tfrac{\d \vartheta}{\vartheta} = \log \theta \\
@@ -342,15 +354,15 @@
     \[ \sqrt{n} ( \hat{p}_n - p) \xra[n \to \infty]{d} \Normal(0, p (1-p)), \]
     wobei~$\hat{p}_n$ die relative Häufigkeit ist.
     Zur Stabilisierung der Varianz verwenden wir nun
-    \[ f(\theta) \coloneqq \myint{}{} \tfrac{\d p}{\sqrt{p (1-p)}} = 2 \arcsin(\sqrt{\theta}). \]
+    \[ f(\theta) \coloneqq \myint{0}{\theta} \tfrac{\d p}{\sqrt{p (1-p)}} = 2 \arcsin(\sqrt{\theta}). \]
   \end{itemize}
 \end{bspe}
 
 % 1.5. Mehrdimensionale Normalverteilung
 
 \begin{defn}
-  Die $k$-dim (Gaußsche) Normalverteilung $\Normal_k(m, C)$ mit EW~$m \in \R^k$ und einer nichtnegativ-definiten, symmetrischen Kovarianzmatrix~$C \in \R^{k \times k}$ ist gegeben durch die Dichte
-  \[ f_{\Normal_k(m, C)}(x) \coloneqq \left( (2\pi)^{k/2} \sqrt{\det(C)} \right)^{-1} \exp \left( - \tfrac{1}{2} (x-m) C^{-1} (x-m)^T \right). \]
+  Die $k$-dim \emph{(Gaußsche) Normalverteilung} $\Normal_k(m, C)$ mit EW~$m \in \R^k$ und einer nichtnegativ-definiten, symmetrischen Kovarianzmatrix~$C \in \R^{k \times k}$ ist gegeben durch die Dichte
+  \[ f_{\Normal_k(m, C)}(x) \coloneqq \tfrac{1}{(2\pi)^{k/2} \sqrt{\det(C)}} \exp \left( - \tfrac{1}{2} (x-m) C^{-1} (x-m)^T \right). \]
 \end{defn}
 
 \begin{bem}
@@ -379,7 +391,7 @@
 \end{bem}
 
 \begin{satz}
-  Für $A \in R^{k \times l}$ gilt $\Normal_k(m, C) \cdot A = \Normal_l(m \cdot A, A^T C A)$.
+  Für $A \in \R^{k \times l}$ gilt $\Normal_k(m, C) \cdot A = \Normal_l(m \cdot A, A^T C A)$.
 \end{satz}
 
 % Vorlesung vom 26.10.2015
@@ -390,7 +402,7 @@
 % 2.1. Chi-Quadrat-Anpassungstest
 
 \begin{aufgabe}
-  Prüfe, ob eine vorliegende Stichprobe $x_1, \ldots, x_n$ aus einer bestimmten (stetig oder diskret verteilten) Grundgesamtheit gezogen wurde. Wir testen also $H_0 : F = F_0$ vs. $H_1 : F \neq F_0$.
+  Prüfe, ob eine vorliegende Stichprobe $x_1, \ldots, x_n$ aus einer bestimmten (stetig oder diskret verteilten) Grundgesamtheit gezogen wurde. Wir testen also \testh{$H_0 : F = F_0$ vs. $H_1 : F \neq F_0$}.
 \end{aufgabe}
 
 % Ausgelassen: Bemerkung über Einordnung in parametrische Tests via. $\Theta \coloneqq \{ \text{Verteilungsfunktionen auf $\R$} \}}$ und $\Theta_0 \coloneqq \{ F_0 \}$.
@@ -410,7 +422,7 @@
     & h_{n_j} \coloneqq \abs{\Set{k \in \{ 1, \ldots, n \}}{X_k \in I_j}} \tag{absolute Klassenhäufigkeit} \\
     & p_j^{(0)} \coloneqq \P(X \in I_j) = F_0(y_j) - F_0(y_{j-1}) \tag{Klassenwktn unter $H_0$}
   \end{align*}
-  Die Klassenhäufigkeiten sind nun multinomialverteilt:
+  Die Klassenhäufigkeiten sind multinomialverteilt unter $H_0$:
   \[ \P(h_{n_1} \!=\! n_1, \nldots, h_{n_{s+1}} \!=\! n_{s+1}) = \binom{n}{n_1, \nldots, n_{s+1}} (p_1^{(0)})^{n_1} \cdots (p_{s+1}^{(0)})^{n_{s+1}}. \]
   Als (näherungsweises) Maß für die Abweichung einer empirischen Verteilung von $F_0$ bei gegebener Klasseneinteilung dient
   \[ T_{n,s+1} \coloneqq \sum_{j=1}^{s+1} \frac{(h_{n_j} - n p_j^{(0)})^2}{n p_j^{(0)}}. \]
@@ -426,9 +438,11 @@
 
 % Vorlesung vom 29.10.2015
 
-\begin{entscheidungsregel}[$\chi^2$-Anpassungstest]
+\begin{entscheidungsregel}[\emph{$\chi^2$-Anpassungstest}]
   Die Nullhypothese $H_0 : F = F_0$ wird genau dann verworfen, wenn $T_{n,s+1} > \chi^2_{s,1-\alpha}$.
 \end{entscheidungsregel}
+
+\begin{samepage}
 
 \begin{bemn}
   \begin{itemize}
@@ -451,9 +465,12 @@
 % Klassisches Beispiel: Hufschlagtote in der preußischen Armee
 
 % 2.2. Chi-Quadrat-Unabhängigkeitstest, Kontingenztafeln
+\section{Chi-Quadrat-Unabhängigkeitstest}
+
+\end{samepage}
 
 \begin{ziel}
-  Überprüfen, ob die Komponenten $X$ und $Y$ eines zweidim. Zufallsvektors $(X, Y)^T$ unabhängig sind.
+  Überprüfen, ob die Komponenten $X \in \R^{n_1}$ und $Y \in \R^{n_2}$ eines zweidim. Zufallsvektors $(X, Y)^T$ \testh{unabhängig} sind.
 \end{ziel}
 
 \begin{verf}
@@ -495,13 +512,16 @@
   Als Test-Statistik verwenden wir
   \begin{align*}
     \hat{T}_{k,l}^{(n)} \coloneqq &
-    \sum_{i=1}^k \sum_{j=1}^l \frac{(h_{ij}^{(n)} - n \hat{p}_{i \bullet} \hat{p}_{\bullet j})^2}{n \cdot \hat{p}_{i \bullet} \hat{p}_{\bullet j}} =
+    \sum_{i=1}^k \sum_{j=1}^l \frac{(h_{ij}^{(n)} - n \hat{p}_{i \bullet} \hat{p}_{\bullet j})^2}{n \hat{p}_{i \bullet} \hat{p}_{\bullet j}} =
     n \sum_{i=1}^k \sum_{j=1}^l \frac{\left( h_{ij}^{(n)} - \nicefrac{h_{i \bullet}^{(n)} \cdot h_{\bullet j}^{(n)}}{n} \right)^2}{h_{i \bullet}^{(n)} \cdot h_{\bullet j}^{(n)}} \\
     & \xra[n \to \infty]{d} \chi^2_{kl - 1 - (k{-}1) - (l{-}1)} = \chi^2_{(k-1)(l-1)}
   \end{align*}
-  Testregel: Die Nullhypothese wird genau dann abgelehnt, falls
-  \[ \hat{T}_{k,l}^{(n)} > \chi^2_{(k-1)(l-1),1-\alpha}. \]
 \end{verf}
+
+\begin{entscheidungsregel}
+  $H_0$ wird genau dann abgelehnt, falls
+  \[ \hat{T}_{k,l}^{(n)} > \chi^2_{(k-1)(l-1),1-\alpha}. \]
+\end{entscheidungsregel}
 
 \begin{bemn}
   \begin{itemize}
@@ -514,51 +534,51 @@
     Wir verwenden dann
     \begin{align*}
       \hat{T}_{k_1, \ldots, k_r}^{(n)} \coloneqq
-      & n^{r-1} \sum_{i_1=1}^{k_1} \cdots \sum_{i_r=1}^{k_r} \frac{\left(h_{i_1 \cdots i_r}^{(n)} - n^{-r + 1} \prod_{s=1}^r h_{\bullet \cdots i_j \cdots \bullet}^{(n)}\right)^2}{\prod_{s=1}^r h_{\bullet \cdots i_j \cdots \bullet}} \\
+      & n^{r-1} \sum_{i_1=1}^{k_1} \cdots \sum_{i_r=1}^{k_r} \frac{\left(h_{i_1 \cdots i_r}^{(n)} - n^{-r + 1} \prod_{j=1}^r h_{\bullet \cdots i_j \cdots \bullet}^{(n)}\right)^2}{\prod_{j=1}^r h_{\bullet \cdots i_j \cdots \bullet}} \\
       & \xra[n \to \infty]{d} \chi^2_{k_1 \cdots k_s - k_1 - \ldots - k_r + r - 1}
     \end{align*}
     \item Im Spezialfall $k \!=\! l \!=\! 2$ (Vierfeldertafel) hat die Statistik die Form
     \[
       \hat{T}_{2,2}^{(n)} =
       n \cdot \frac{\left(h_{11}^{(n)} \cdot h_{22}^{(n)} - h_{12}^{(n)} \cdot h_{21}^{(n)}\right)^2}{h_{\bullet 1}^{(n)} \cdot h_{\bullet 2}^{(n)} \cdot h_{1 \bullet}^{(n)} \cdot h_{2 \bullet}^{(n)}}
-      \xra[n \to \infty]{d} \chi^2_n = \Normal^2(0, 1)
+      \xra[n \to \infty]{d} \chi^2_1 = \Normal^2(0, 1)
     \]
     und wir lehnen $H_0$ genau dann ab, wenn $\hat{T}_{2,2}^{(n)} > \chi^2_{1,1-\alpha} = z^2_{1 - \nicefrac{\alpha}{2}}$.
   \end{itemize}
 \end{bemn}
 
 % 2.3. Kolmogorow-Smirnow-Test
-\section{Ein- und Zwei-SP-Tests für VFen}
+\section{Kolmogorow-Smirnow-1SP-Test}
 
 \begin{situation}
   Sei $X_1, \ldots, X_n \sim F$ eine math. SP.
   Wir sortieren die dabei gezogenen Werte aufsteigend: $X_{1:n} \leq X_{2:n} \leq \ldots \leq X_{n:n}$.
-  Dann heißt $\hat{F}_n(x) \coloneqq \nicefrac{1}{n} \sum_{i=1}^n \ind_{\ocinterval{-\infty}{x}}(X_{i:n})$ \emph{empirische VF}.
+  Dann heißt $\hat{F}_n(x) \coloneqq \tfrac{1}{n} \sum_{i=1}^n \ind_{\ocinterval{-\infty}{x}}(X_{i:n})$ \emph{empirische VF}.
 \end{situation}
 
-\begin{satz}[Gliwenko, Hauptsatz der math. Statistik]
+\begin{satz}[\emph{Gliwenko-Cantelli}, Hauptsatz der math. Statistik]
   \[ \sup_{x \in \R^1} \abs{\hat{F}_n(x) - F(x)} \xra[n \to \infty]{\text{$\P$-f.\,s.}} 0 \]
 \end{satz}
 
 \begin{lem}
   Sei $F$ stetig.
-  Dann ist die Verteilung von $\sup_x \abs{\hat{F}_n(x) - F(x)}$ nicht von der VF $F$ abhängig.
+  Dann ist die Verteilung von $\sup_x \abs{\hat{F}_n(x) - F(x)}$ nicht von der Verteilungsfunktion $F$ abhängig.
   Genauer:
-  \[ \sup_x \abs{\hat{F}_n(x) - F(x)} \eqqd \sup_{0 \leq y \leq 1} \abs{\hat{G}_n(y) - G(y)}, \]
-  wobei $\hat{G}_n(y) \coloneqq \nicefrac{1}{n} \sum_{i=1}^n \ind_{\cinterval{0}{y}}(U_i)$ für $U_1, \ldots, U_n \sim \Uniform \cinterval{0}{1}$ \iid{}
+  \[ \sup_x \abs{\hat{F}_n(x) - F(x)} \enspace\eqqd\enspace \sup_{0 \leq y \leq 1} \abs{\hat{G}_n(y) - G(y)}, \]
+  wobei $G$ die Verteilungsfunktion von $\Uniform \cinterval{0}{1}$ ist (also $G(y) = y$) und $\hat{G}_n(y) \coloneqq \tfrac{1}{n} \sum_{i=1}^n \ind_{\cinterval{0}{y}}(U_i)$ für $U_1, \ldots, U_n \sim \Uniform \cinterval{0}{1}$ \iid{}
 \end{lem}
 
 % Vorlesung vom 10.11.2015
 
 \begin{kor}
   Sei $F$ stetig, $n \geq 1$.
-  Dann ist die VF
+  Dann ist die Verteilungsfunktion
   \[ K_n(z) \coloneqq \P(\sqrt{n} \cdot \sup_{x \in \R} \abs{\hat{F}_n(x) - F(x)} \leq z) \]
   unabhängig von $F$.
 \end{kor}
 
 \begin{satz}
-  Falls $F$ stetig ist, gilt
+  Falls $F$ stetig ist, so gilt für alle $z \in \R^1$:
   \[ K_n(z) \xra[n \to \infty]{} K(z) \coloneqq \sum_{k = - \infty}^\infty (-1)^k \exp(-2 k^2 z^2). \]
 \end{satz}
 
@@ -572,11 +592,11 @@
   \[ \sup_{0 \leq x \leq 1} \abs{\dot{B}(x)} \sim K. \]
 \end{bem}
 
-\begin{entscheidungsregel}[\emph{Kolmogorow(-Smirnow)-1SP-Test}] \mbox{}\\
-  Wir testen $H_0 : F = F_0$ gegen $H_1 : F \neq F_1$.
+\begin{entscheidungsregel}[\emph{Kolmogorow-(Smirnow-)1SP-Test}] \mbox{}\\
+  Wir testen \testh{$H_0 : F = F_0$ gegen $H_1 : F \neq F_0$}.
   Dabei muss $F_0$ eine stetige VF sein.
   Wir verwenden dazu
-  \[ T_n \coloneqq \sqrt{n} \cdot \sup_{x \in \R} \abs{\hat{F}_n(x) - F(x)}. \]
+  \[ T_n \coloneqq \sqrt{n} \cdot \sup_{x \in \R} \abs{\hat{F}_n(x) - F_0(x)}. \]
   Wir lehnen $H_0$ genau dann ab, wenn $T_n > K_{1-\alpha}$.
 \end{entscheidungsregel}
 
@@ -588,19 +608,23 @@
   \end{itemize}
 \end{bemn}
 
-\begin{entscheidungsregel}
-  Um $H_0 : F = F_0$ gegen $H_1 : F > F_0$ mit %der Statistik
+\begin{test}[einseitiger Kolmogorow-(Smirnow-)1SP-Test] \mbox{}\\
+  Wir testen \testh{$H_0 : F = F_0$ gegen $H_1 : F > F_0$} mit %der Statistik
   \[ T_n^{+} \coloneqq \sqrt{n} \cdot \sup_{x \in \R} (\hat{F}_n(x) - F(x)). \]
-  Es gilt
-  \[ K_n^{+}(z) \coloneqq \P(T_n^{+} \leq z) \xra[n \to \infty]{} K^{+}(z) \coloneqq 1 - \exp(-2 \max(0, z)^2) \]
+  Für alle $z \in \R^1$ gilt
+  \[ K_n^{+}(z) \coloneqq \P(T_n^{+} \leq z) \xra[n \to \infty]{} K^{+}(z) \coloneqq 1 - \exp(-2 \max(0, z)^2). \]
   Wir lehnen $H_0$ ab, falls $T_n^{+} > K^+_{1-\alpha}$.
-\end{entscheidungsregel}
+\end{test}
 
 \begin{acht}
   Der Kolmogorow-Test kann nicht verwendet werden, wenn die Parameter von $F_0$ aus der Stichprobe geschätzt werden.
 \end{acht}
 
-% Bemerkung: Es gibt keine Entsprechung für mehrdimensionale ZVen
+\begin{bem}
+  Es gibt keine Entsprechung für mehrdimensionale ZVen
+\end{bem}
+
+\section{Cramér-von-Mises-Test}
 
 % Vorlesung vom 12.11.2015
 
@@ -625,7 +649,7 @@
 \end{satz}
 
 \begin{entscheidungsregel}[\emph{CvM-Test}]
-  Wir testen $H_0 : F = F_0$ vs. $H_1 : F \neq F_0$ anhand der CvM-Statistik.
+  Wir testen \testh{$H_0 : F = F_0$ vs. $H_1 : F \neq F_0$} anhand der CvM-Statistik.
   Wir lehnen $H_0$ genau dann ab, wenn $\omega_n^2(g) > \omega_{1-\alpha}^2(g)$.
 \end{entscheidungsregel}
 
@@ -634,17 +658,20 @@
 \end{bem}
 
 % KS-(2-Stichproben)-Test
+\section{Kolmogorow-Smirnow-2SP-Test}
 
 \begin{situation}
   Gegeben seien zwei unabhängige SPn $X_1, \ldots, X_n \sim F$ \iid{} und $X_1^*, \ldots, X_m^* \sim F^*$ \iid{}, wobei $F$ und $F^*$ stetig sind. \\
-  Wir wollen testen, ob $H_0 : F = F^*$ oder $H_1 : F \neq F^*$ gilt, indem wir die empirischen VFen $\hat{F}_n$ und $\hat{F}_m^*$ vergleichen.
+  Wir wollen \testh{$H_0 : F = F^*$ vs. $H_1 : F \neq F^*$} testen, indem wir die empirischen VFen $\hat{F}_n$ und $\hat{F}_m^*$ vergleichen.
   Dazu verwenden wir
   \[ T_{m,n} \coloneqq \sqrt{\tfrac{m \cdot n}{m + n}} \sup_{x \in \R^1} \abs{\hat{F}_n(x) - \hat{F}_n^*(x)} \]
 \end{situation}
 
 \begin{satz}
   Falls $F = F^*$ stetig ist, so gilt
-  \[ T_{m,n} \eqqd \sqrt{\tfrac{m \cdot n}{m + n}} \sup_{0 \leq u \leq 1} \abs{\tfrac{1}{n} \sum_{i=1}^n \ind_{\cinterval{0}{u}} (U_i) - \tfrac{1}{m} \sum_{j=1}^m \ind_{\cinterval{0}{u}} (U_j^*)}, \]
+  \[ T_{m,n} \enspace\eqqd\enspace \sqrt{\tfrac{m \cdot n}{m + n}} \sup_{0 \leq u \leq 1} \abs{\tfrac{1}{n} \sum_{i=1}^n \ind_{\cinterval{0}{u}} (U_i) - \tfrac{1}{m} \sum_{j=1}^m \ind_{\cinterval{0}{u}} (U_j^*)}, \]
+  wobei $U_k \coloneqq F(X_k)$, $k = 1, \ldots, n$ und $U^*_l \coloneqq F(X^*_l)$, $l = 1, \ldots, m$ jeweils $\Uniform \cinterval{0}{1}$-verteilt sind.
+  \iffalse
   wobei $X_i \eqqd F^{-}(U_i)$, $i = 1, \ldots, n$, \enspace
   $X_j^* \eqqd F^{*,-}(U_j^*)$, $j = 1, \ldots, m$ und
   %$F^{-}$ die Quantilfunktion ist:
@@ -656,6 +683,7 @@
     \tag{Quantilfunktion}
   \]
   % (nichtfallend, linksstetig)
+  \fi
 \end{satz}
 
 \iffalse
@@ -690,42 +718,47 @@
   $T_{m,n} \xra[n \to \infty]{d} \sup_{0 \leq u \leq 1} \abs{\dot{B}(u)} \sim K$
 \end{lem}
 
-\begin{entscheidungsregel}[\emph{Kolmogorow(-Smirnow)-2SP-Test}] \mbox{}\\
+\begin{entscheidungsregel}[\emph{Kolmogorow-(Smirnow-)2SP-Test}] \mbox{}\\
   $H_0 : F = F^*$ wird genau dann abgelehnt, falls $T_{m,n} > K_{1-\alpha}$.
 \end{entscheidungsregel}
+
+\section{2SP-Test von Wilcoxon-Mann-Whitney} % (U-Test)
 
 % Vorlesung vom 16.11.2015
 
 % §2.4. 2-Stichprobentest von Wilcoxon-Mann-Whitney (U-Test)
 
 \begin{situation}[\emph{2-SP-Test von Wilcoxon-Mann-Whitney}, U-Test]
-  Gegeben seien zwei unabhängige SPn $X_1, \ldots, X_n \sim F$ und $X_1^{*}, \ldots, X_m^{*} \sim F^{*}$, wobei $F$ und $F^*$ stetig sind.
-  Ziel: Prüfen von $H_0 : F = F^{*}$ vs. $H_1 : F \neq F^{*}$.
-  Konstruktion einer Rangstatistik für konkrete SPn $x_1, \ldots, x_n$ und $x_1^{*}, \ldots, x_m^{*}$.
+  Geg. seien zwei unabh. SPn $X_1, \ldots, X_n \sim F$ und $X_1^{*}, \ldots, X_m^{*} \sim F^{*}$, wobei $F$ und $F^*$ stetig sind.
+  Ziel: Prüfen von \testh{$H_0 : F = F^{*}$ vs. $H_1 : F \neq F^{*}$}.
+  Dazu konstruieren wir eine Rangstatistik für konkrete Stichproben $x_1, \ldots, x_n$ und $x_1^{*}, \ldots, x_m^{*}$:
   \begin{enumerate}
     \item Ordnen: $x_{1:n} < \ldots < x_{n:n}$ und $x_{1:m}^{*} < \ldots < x_{m:m}^{*}$
-    \item $\nu_1, \ldots, \nu_m \in \{ 1, \ldots, m+n \}$ seien die Ränge der Werte $x_{i:m}^{*}$ innerhalb der Gesamt-SP:
+    \item $\nu_1, \ldots, \nu_m \in \{ 1, \ldots, m+n \}$ seien die Ränge der Werte $x_{i:m}^{*}$ innerhalb der Gesamtstichprobe, \dh{}
     \begin{align*}
-      x_{1:n} & < \ldots < x_{\nu_1 - 1:n} < x_1^{*} < x_{\nu_1:n} < \ldots < x_{\nu_2 - 2:n} < x_{2:m}^{*} < x_{\nu_2 - 1:n} \\
-      & < \ldots < x_{\nu_m-m:n} < x_{m:m}^{*} < x_{\nu_m - m + 1 : n} < \ldots < x_{n:n}
+      x_{1:n} & \!<\! \ldots \!<\! x_{\nu_1 - 1:n} \!<\! x_1^{*} \!<\! x_{\nu_1:n} \!<\! \ldots \!<\! x_{\nu_2 - 2:n} \!<\! x_{2:m}^{*} < x_{\nu_2 - 1:n} \\
+      & < \ldots < x_{\nu_m-m:n} < x_{m:m}^{*} < x_{\nu_m - m + 1 : n} < \ldots < x_{n:n}.
     \end{align*}
   \end{enumerate}
   Heuristik: $H_0$ wird angenommen, falls sich die $x$- und $x^{*}$-Werte "`gut durchmischen"', \dh{} die Anzahl der $x$-Werte, die vor bzw. nach den $x^{*}$-Werten liegen, darf nicht zu groß werden.
-  Testgröße:
+  Die Testgröße dafür ist
   \begin{align*}
     W_{m,n} & \coloneqq \! \sum_{i=1}^n \sum_{j=1}^m \ind_{\{ X_i < X_j^{*} \}} \!=\! \abs{\Set{(i, j)}{ X_i \!<\! X_j^{*}}} \!=\! \sum_{j=1}^m \abs{\Set{i}{X_i \!<\! X_{j:m}^{*}}} \\
-    & = \sum_{j=1}^m (\nu_j - j) = \nu_1 + \ldots + \nu_m - \tfrac{m}{2} (m+1)
+    & = \sum_{j=1}^m (\nu_j - j) = \nu_1 + \ldots + \nu_m - \tfrac{m (m+1)}{2}
   \end{align*}
-  Unter $H_0$ gilt \quad
-  $\E W_{m,n} = \tfrac{m \cdot n}{2}$, \quad
-  $\var W_{m,n} = \tfrac{m \cdot n}{12} (m + n + 1)$.
 \end{situation}
 
 \begin{lem}
-  Unter $H_0 : F = F^*$ stetig gilt
+  Unter $H_0 : F = F^*$ stetig gilt:
   \begin{align*}
-    g_{m,n}(z) & \coloneqq \sum_{k=0}^{n \cdot m} \P(W_{m,n} = k) \cdot z^k = \frac{z^{-m (m+1) / 2}}{\binom{m + n}{m}} \enspace\qquad \sum_{\mathclap{1 \leq \nu_1 < \ldots < \nu_m \leq m+n}} \enspace z^{\nu_1 + \ldots + \nu_m} \\
-    & = \tfrac{1}{\binom{m + n}{m}} \prod_{k=1}^m \frac{1 - z^{n+k}}{1 - z^k}
+    \text{a)} \enspace
+    & \E W_{m,n} = \tfrac{m \cdot n}{2} \qquad
+    \text{b)} \enspace
+    \var W_{m,n} = \tfrac{m \cdot n}{12} (m + n + 1) \\
+    \text{c)} \enspace
+    & g_{m,n}(z) \coloneqq \sum_{k=0}^{n \cdot m} \P(W_{m,n} = k) \cdot z^k = \\
+    & = \frac{z^{-m (m+1) / 2}}{\binom{m + n}{m}} \enspace\qquad \sum_{\mathclap{1 \leq \nu_1 < \ldots < \nu_m \leq m+n}} \enspace z^{\nu_1 + \ldots + \nu_m}
+    = \tfrac{1}{\binom{m + n}{m}} \prod_{k=1}^m \frac{1 - z^{n+k}}{1 - z^k}
   \end{align*}
 \end{lem}
 
@@ -735,21 +768,26 @@
     c_{\nicefrac{\alpha}{2}} = \min \Set{k \geq 0}{\P(W_{m,n} \leq k) = \P(W_{m,n} \geq m \cdot n - k) \geq \nicefrac{\alpha}{2}}.
   \]
   % ($c_{\nicefrac{\alpha}{2}} - \tfrac{m \cdot n}{2}$ ist Quantil der Ordnung $\tfrac{\alpha}{2}$ der ZG $W_{m,n} - \tfrac{m \cdot n}{2}$).
-  Annahme von $H_0$ genau dann, wenn $\abs{w_{m,n} - \tfrac{m \cdot n}{2}} < \tfrac{m \cdot n}{2} - c_{\nicefrac{\alpha}{2}}$
+  Annahme von $H_0$ genau dann, wenn $\abs{w_{m,n} - \tfrac{m \cdot n}{2}} < \tfrac{m \cdot n}{2} - c_{\nicefrac{\alpha}{2}}$.
 \end{entscheidungsregel}
 
 \begin{satz}
   Unter $H_0 : F = F^{*}$ stetig gilt
-  \[ T_{m,n} \coloneqq \frac{W_{m,n} - \tfrac{m \cdot n}{2}}{\sqrt{\tfrac{m \cdot n}{2} (m + n + 1)}} \xra[m, n \to \infty]{d} \Normal(0, 1) \]
+  \[ T_{m,n} \coloneqq \frac{W_{m,n} - \tfrac{m \cdot n}{2}}{\sqrt{\tfrac{m \cdot n}{2} (m + n + 1)}} \xra[m, n \to \infty]{d} \Normal(0, 1). \]
 \end{satz}
 
+% XXX: Hat dieser Test auch einen Namen?
+\begin{entscheidungsregel}
+  Man erhält aus dem letzten Satz einen asymptotischen Test, den man für große $m$, $n$ verwenden kann: \\
+  Wir lehnen genau dann $H_0 : F = F^*$ ab, falls $\abs{T_{m,n}} \geq z_{1 - \nicefrac{\alpha}{2}}$.
+\end{entscheidungsregel}
+
 % §2.5 Kruskal-Wallis-Test
+\section{Kruskal-Wallis-Test}
 
-\begin{samepage}
-
-\begin{bem}[\emph{Kruskal-Wallis-Test}]
+\begin{test}[\emph{Kruskal-Wallis}]
   Gegeben seien $k$ Messreihen $X_{i,1}, \ldots, X_{i,n_i} \sim F_i$, $i = 1, \ldots, k$ unabhängige SPn, $F_i$ stetig. \\
-  Ziel: Testen von $H_0 : F_1 = \ldots = F_k$.
+  Ziel: Testen von \testh{$H_0 : F_1 = \ldots = F_k$}.
   Vorgehen:
   \begin{enumerate}
     \item Ordnen der Beobachtungen der Größe nach
@@ -758,15 +796,19 @@
   \end{enumerate}
   Heuristik: $H_0$ ist richtig, falls $\overline{\nu}_i \approx \overline{\nu}$ für alle $i$.
   Testgröße:
-  \[ \tfrac{12}{n (n+1)} \sum_{i=1}^k n_i (\overline{\nu}_i - \tfrac{n+1}{2})^2 \xra[n_i \to \infty]{d} \chi^2_{k-1} \]
-\end{bem}
+  \[
+    H \coloneqq \tfrac{12}{n (n+1)} \sum_{i=1}^k n_i (\overline{\nu}_i - \tfrac{n+1}{2})^2
+    \xra[n_i \to \infty]{d} \chi^2_{k-1}
+  \]
+  Wir lehnen $H_0$ genau dann ab, wenn $H > \chi^2_{k-1,1-\alpha}$.
+\end{test}
 
-% Faustregel: $\min_{1 \leq i \leq k} n_i \geq 5$, $k \geq 4$
+\begin{faustregel}
+  Die Approx. ist gut, wenn $\min_{1 \leq i \leq k} n_i \geq 5$ und $k \geq 4$.
+\end{faustregel}
 
 % §3. U-Statistiken
 \section{Theorie der U-Statistiken}
-
-\end{samepage}
 
 % §3.1. Hoeffdings Projektionsmethode und ZGWS
 
@@ -1700,3 +1742,9 @@ $\mathrm{MASE}(\hat{\mu}_n) = \tfrac{1}{n} \sum_{i=1}^n \mathrm{MSE}(\hat{\mu}_n
 \end{satz}
 
 \end{document}
+
+TODO:
+
+Cochran's Theorem
+Verschiedene Arten der Konvergenz von ZGn
+Charakteristische Funktionen
