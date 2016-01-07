@@ -1350,8 +1350,8 @@ Im Folgenden seien alle Ringe \emph{kommutativ}, \dh{} $xy = yx$ f.\,a. $x, y$.
 % 17.2. Endliche Algebren und Algebren endlichen Typs
 
 \begin{defn}
-  Sei $A$ ein kommutativer Ring.
-  Eine kommutative $A$-Algebra $B$ heißt eine \ldots
+  Sei $A$ ein komm. Ring.
+  Eine komm. $A$-Algebra $B$ heißt eine \ldots
   \begin{itemize}
     \item \ldots \emph{endliche $A$-Algebra}, falls $B^A$ als $A$-Modul endlich erzeugt ist, \dh{} falls endlich viele Elemente $b_1, \ldots, b_n \in B$ existieren, sodass jedes Element aus $B$ als $A$-Linearkombination der $b_i$ geschrieben werden kann.
     \item \ldots $A$-Algebra \emph{endlichen Typs}, falls endlich viele Elemente $b_1, \ldots, b_n \in B$ existieren, sodass jedes andere Element von $B$ als Polynom in den $b_i$ mit Koeffizienten aus $A$ geschrieben werden kann.
@@ -1668,7 +1668,7 @@ Im Folgenden seien alle Ringe \emph{kommutativ}, \dh{} $xy = yx$ f.\,a. $x, y$.
 \end{prop}
 
 \begin{prop}
-  Sei $A$ ein komm. Ring und $S \subseteq A$ mult. abgeschlossen.
+  Sei $A$ ein kommutativer Ring und $S \subseteq A$ mult. abgeschlossen. \\
   Sei $M$ ein $A$-Modul und $P, N \subseteq M$ Untermoduln.
   Dann gilt:
   \begin{itemize}
@@ -1677,6 +1677,7 @@ Im Folgenden seien alle Ringe \emph{kommutativ}, \dh{} $xy = yx$ f.\,a. $x, y$.
     \item $S^{-1} (N \cap P) = S^{-1} N \cap S^{-1} P \subseteq S^{-1} M$
   \end{itemize}
 \end{prop}
+
 
 % 20.6. Lokalisierung als Basiswechsel
 
@@ -1797,7 +1798,15 @@ Mit der Exaktheit der Lokalisierung folgt:
 \begin{prop}
   Sei $A$ ein komm. Ring.
   Die Lokalisierung nach einer mult. abg. Teilmenge $S \subseteq A$ vertauscht mit folgenden Ideal-Operationen: \\
-  endl. Summen, endl. Produkte, endl. Schnitte und Wurzeln.
+  endl. Summen, endl. Produkte, endl. Schnitte und Wurzeln. \\
+  Das heißt, für zwei Ideale $\aaa, \bbb \subseteq A$ gilt:
+  \begin{itemize}
+    \miniitem{0.48 \linewidth}{$S^{-1} (\aaa + \bbb) = S^{-1} \aaa + S^{-1} \bbb$}
+    \miniitem{0.48 \linewidth}{$S^{-1} (\aaa \cdot \bbb) = S^{-1} \aaa \cdot S^{-1} \bbb$}
+    \miniitem{0.48 \linewidth}{$S^{-1} (\aaa \cap \bbb) = S^{-1} \aaa \cap S^{-1} \bbb$}
+    \miniitem{0.48 \linewidth}{$S^{-1} \sqrt{\aaa} = \sqrt{S^{-1} \aaa}$}
+  \end{itemize}
+  % (doppelt: der Satz zum Merken, die Formeln zum schnellen Finden, wenn man nach ihnen sucht)
 \end{prop}
 
 \begin{kor}
@@ -1854,6 +1863,219 @@ Mit der Exaktheit der Lokalisierung folgt:
 \begin{kor}
   Sei $A$ ein komm. Ring, $S \subseteq A$ mult. abgeschlossen, $M$ ein $A$-Modul und $N, P \subseteq M$ zwei Untermoduln.
   Ist $P$ endlich erzeugt, so gilt $S^{-1} (N : P) = (S^{-1} N : S^{-1} P)$.
+\end{kor}
+
+% III. Primärzerlegung
+\section{Primärzerlegung}
+
+% 23. Primärzerlegung I
+
+% 23.1. Primäre Ideale
+
+\begin{defn}
+  Ein Ideal $\qqq \subset A$ heißt \emph{primär}, falls $1 \not\in \qqq$ und falls aus $x y \in \qqq$ schon $x \in \qqq$ oder $\ex{n \in \N} y^n \in \qqq$ folgt.
+\end{defn}
+
+\begin{lem}
+  $\qqq \subsetneq A$ ist primär $\iff$ $\{ \text{ Nullteiler } \} = \sqrt{(0)}$ in $A/\qqq$
+\end{lem}
+
+\begin{bspe}
+  \begin{itemize}
+    \item Primideale sind primär.
+    \item Sei $\phi : A \to B$ ein Homomorphismus kommutativer Ringe. \\
+    Ist $\bbb \subset B$ primär, so auch $A \cap \bbb \subset A$.
+  \end{itemize}
+\end{bspe}
+
+\begin{lem}
+  Sei $\qqq$ primär.
+  Dann ist $\sqrt{\qqq}$ das kleinste Primideal mit $\ppp \supseteq \qqq$.
+\end{lem}
+
+\begin{defn}
+  Sei $\qqq \subset A$ ein primäres Ideal und $\ppp \coloneqq \sqrt{\qqq}$.
+  Dann heißt $\qqq$ ein \emph{$\ppp$-primäres} Ideal.
+\end{defn}
+
+\begin{bem}
+  $\begin{array}[t]{l c l}
+    \text{Primzahlen} & \hat{=} & \text{Primideale} \\
+    \text{Primzahlpotenzen} & \hat{=} & \text{primäre Ideale} \\
+  \end{array}$
+\end{bem}
+
+\begin{bsp}
+  Die primären Ideale in $\Z$ sind die Ideale der Form $(0)$ und $(p^n)$ für eine Primzahl $p$.
+\end{bsp}
+
+\begin{acht}
+  Im Allgemeinen ist ein primäres Ideal keine Potenz eines Primideals!
+  Andersherum ist die Potenz eines Primideals auch nicht notwendigerweise primär.
+  Analoges gilt aber für max. Ideale:
+\end{acht}
+
+\begin{prop}
+  Sei $\aaa \subset A$ ein Ideal.
+  Ist $\mmm \coloneqq \sqrt{\aaa}$ ein maximales Ideal, so ist~$\aaa$ ein $\mmm$-primäres Ideal.
+\end{prop}
+
+\begin{kor}
+  Ist $\mmm$ ein max. Ideal, so sind $\mmm^n$ mit $n \geq 1$ alle $\mmm$-primär.
+\end{kor}
+
+% vorgezogen aus 23.3.
+\begin{defn}
+  Sei $A$ ein komm. Ring und $\aaa \subseteq A$ ein Ideal.
+  Eine Darstellung von $\aaa$ als Schnitt $\aaa = \qqq_1 \cap \ldots \cap \qqq_n$ endlich vieler primärer Ideale $\qqq_i$ heißt \emph{Primärzerlegung} von $\aaa$.
+  Sind die $\sqrt{\qqq_i}$ paarweise verschieden und gilt $\qqq_i \not\supset \bigcap_{i \neq j} \qqq_j$ für alle $i$, so heißt die Primärzerlegung \emph{minimal}.
+\end{defn}
+
+\begin{defn}
+  Ein Ideal $\aaa \subseteq A$ heißt \emph{zerlegbar}, wenn es eine Primärzerlegung besitzt.
+\end{defn}
+
+% 23.2. Schnitte und Idealquotienten primärer Ideale
+
+\begin{lem}
+  Sei $\ppp \subset A$ ein Primideal und $\qqq_1, \ldots, \qqq_n$ alle $\ppp$-primär. \\
+  Dann ist auch $(\qqq_1 \cap \ldots \cap \qqq_n)$ wieder $\ppp$-primär.
+\end{lem}
+
+\begin{kor}
+  Man kann eine Primärzerlegung eines Ideals zu einer minimalen Primärzerlegung reduzieren.
+\end{kor}
+
+\begin{lem}
+  Sei $\ppp \subset A$ prim, $\qqq$ ein $\ppp$-primäres Ideal und $x \in A$.
+  Dann gilt:
+  \begin{itemize}
+    \item Ist $x \in \qqq$, so gilt $(\qqq : x) = (1)$.
+    \item Ist $x \not\in \qqq$, so ist $(\qqq : x)$ ein $\ppp$-primäres Ideal.
+    \item Ist $x \not\in \ppp$, so ist $(\qqq : x) = \qqq$.
+  \end{itemize}
+\end{lem}
+
+% 23.3. Primärzerlegungen
+
+\begin{satz}[erster Eindeutigkeitssatz]
+  Sei $A$ ein komm. Ring und $\aaa \subseteq A$ ein Ideal mit minimaler Primärzerlegung $\aaa = \qqq_1 \cap \ldots \cap \qqq_n$. \\
+  Sei $\ppp_i = \sqrt{\qqq_i}$.
+  Dann sind die Ideale $\ppp_i$ genau die Ideale, die von der Form $\sqrt{(\aaa : x)}$ mit $x \in A$ sind.
+\end{satz}
+
+\begin{bem}
+  Insb. sind die Ideale $\ppp_i$ unabh. von der Primärzerlegung.
+\end{bem}
+
+\begin{defn}
+  Die Ideale $\ppp_i$ heißen die zu $\aaa$ \emph{assozierten Primideale}.
+\end{defn}
+
+\begin{lem}
+  Sei $\ppp$ ein zu $\aaa$ assoziiertes Primideal.
+  Dann gibt es ein $x \in A$, sodass $(\aaa : x)$ ein $\ppp$-primäres Ideal ist.
+\end{lem}
+
+% 23.4. Isolierte und minimale Primideale
+
+\begin{defn}
+  Sei $A$ ein komm. Ring und $\aaa \subseteq A$ ein Ideal mit minimaler Primärzerlegung $\aaa = \qqq_1 \cap \ldots \cap \qqq_n$.
+  Sei $\ppp_i \coloneqq \sqrt{\qqq_i}$.
+  Die minimalen Elemente der Menge der zu~$\aaa$ assoz. Primideale heißen \emph{isolierte Primideale}, alle anderen zu~$\aaa$ assoz. Primideale \emph{eingebettete Primideale}.
+  Ein primäres Ideal $\qqq_i$ heißt isolierte / eingebettete \emph{Primärkomponente} von $\aaa$, wenn $\ppp_i$ isoliert / eingebettet ist.
+\end{defn}
+
+\begin{prop}
+  Sei $\aaa \subseteq A$ ein zerlegbares Primideal. \\
+  Jedes Primideal $\ppp$ mit $\ppp \supseteq \aaa$ enthält ein assoziiertes (und damit auch ein isoliertes) Primideal zu~$\aaa$.
+\end{prop}
+
+\begin{kor}
+  Die isolierten Primideale zu~$\aaa$ sind genau die min. Elemente von $\{ \text{ Primideale $\ppp \subset A$ mit $\ppp \supseteq \aaa$ } \} \cong \{ \text{ Primideale in $A/\aaa$ } \}$.
+\end{kor}
+
+% 24. Primärzerlegung II
+
+% 24.1. Primärzerlegung und das Nullideal
+
+\begin{prop}
+  Sei $\aaa \subseteq A$ ein Ideal mit min. Primärzerl. $\aaa = \qqq_1 \cap \ldots \cap \qqq_n$. \\
+  Sei $\ppp_i = \sqrt{\qqq_i}$.
+  Dann gilt $\bigcup_{i=1}^n \ppp_i = \Set{x \in A}{(a : x) \neq \aaa}$.
+\end{prop}
+
+\begin{prop}
+  Sei $A$ ein komm. Ring, in dem $(0)$ zerlegbar ist.
+  Dann gilt:
+  \begin{itemize}
+    \item Die Menge $D$ der Nullteiler in~$A$ ist die Vereinigung der zu $(0)$ assoziierten Primideale.
+    \item Die Menge der nilpotenten Elemente ist der Schnitt aller (isolierten) Primideale, die zu $(0)$ assoziiert sind.
+  \end{itemize}
+\end{prop}
+
+% 24.2. Primäre Ideale und Lokalisierung
+
+\begin{prop}
+  Sei $\ppp \subset A$ ein Primideal, $\qqq$ ein $\ppp$-primäres Ideal und $S \subseteq A$ multiplikativ abgeschlossen.
+  Dann gilt:
+  \begin{itemize}
+    \item Ist $S \cap \ppp \neq \emptyset$, so folgt $S^{-1} \qqq = (1)$.
+    \item Ist $S \cap \ppp = \emptyset$, so ist $S^{-1} \qqq$ ein $S^{-1} \ppp$-primäres Ideal und es gilt $A \cap S^{-1} \qqq = \qqq$.
+  \end{itemize}
+\end{prop}
+
+\begin{kor}
+  Sei $A$ ein komm. Ring und $S \subseteq A$ multiplikativ abgeschlossen. \\
+  Dann ist folgende Korrespondenz bijektiv und monoton:
+  \[
+    \begin{array}{r c l}
+      \{ \text{ $\qqq \subset A$ primär mit $\sqrt{\qqq} \cap S = \emptyset$ } \} & \leftrightarrow & \{ \text{ $\rrr \subset S^{-1} A$ primär } \} \\
+      \qqq & \mapsto & S^{-1} \qqq \\
+      A \cap \rrr & \mapsfrom & \rrr
+    \end{array}
+  \]
+\end{kor}
+
+% 24.3. Sättigung eines Ideals
+
+\begin{defn}
+  Sei $A$ ein komm. Ring und $S \subseteq A$ mult. abgeschlossen.
+  Die \emph{Sättigung} eines Ideals $\aaa \subseteq A$ bzgl. $S$ ist das Ideal $S(\aaa) \coloneqq A \cap S^{-1} \aaa$.
+\end{defn}
+
+\begin{prop}
+  Sei $A$ ein komm. Ring und $S \subseteq A$ mult. abgeschlossen. \\
+  Sei $\aaa \subseteq A$ ein Ideal mit minimaler Primärzerlegung $\aaa = \qqq_1 \cap \ldots \cap \qqq_n$. \\
+  Sei $\ppp_i = \sqrt{\qqq_i}$.
+  Seien die $\qqq_i$ so sortiert, dass ein $m$ existiert mit $S \cap \ppp_i = \emptyset \iff i \leq m$.
+  Dann sind $S^{-1} \aaa = S^{-1} \qqq_1 \cap \ldots \cap S^{-1} \qqq_m$ und $S(\aaa) = \qqq_1 \cap \ldots \cap \qqq_n$ minimale Primärzerlegungen.
+\end{prop}
+
+\begin{defn}
+  Sei $\aaa \subseteq A$ ein zerlegbares Ideal in einem kommutativen Ring. \\
+  Eine Menge $\mathfrak{S}$ von zu $\aaa$ assoz. Primidealen heißt \emph{isoliert}, falls gilt:
+  \[
+    \ppp' \subseteq \ppp \in \mathfrak{S} \implies \ppp' \in \mathfrak{S}
+    \quad \text{für zu $\aaa$ assoz. Ideale $\ppp, \ppp'$.}
+  \]
+\end{defn}
+
+\begin{prop}
+  Sei $\mathfrak{S}$ eine isolierte Menge von zu $\aaa$ assoziierten Primidealen.
+  Dann ist $S \coloneqq A \setminus \bigcup_{\ppp \in \mathfrak{S}} \ppp$ multiplikativ abgeschlossen und für jedes an $\aaa$ assoziierte Primideal $\ppp'$ gilt: $\ppp' \in \mathfrak{S} \iff \ppp' \cap S = \emptyset$.
+\end{prop}
+
+\begin{satz}[zweiter Eindeutigkeitssatz]
+  Sei $\aaa \subseteq A$ ein Ideal mit minimaler Primärzerlegung $\aaa = \qqq_1 \cap \ldots \cap \qqq_n$.
+  Sei $\ppp_i = \sqrt{\qqq_i}$.
+  Ist $\{ \ppp_1, \ldots, \ppp_m \}$ eine isolierte Menge von zu $\aaa$ assoziierten Primidealen, so ist $\qqq_1 \cap \ldots \cap \qqq_m$ unabhängig von der Zerlegung.
+\end{satz}
+
+Für $m=1$ folgt:
+
+\begin{kor}
+  Die isolierten Primärkomp. von $\aaa$ sind eindeutig bestimmt.
 \end{kor}
 
 \end{document}
