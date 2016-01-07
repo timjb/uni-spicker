@@ -31,6 +31,7 @@
 \newcommand{\Uniform}{\mathcal{R}} % Gleichverteilung
 \DeclareMathOperator{\Cum}{Cum} % Kumulante
 \DeclareMathOperator{\rk}{rk} % Rang einer Matrix
+\DeclareMathOperator{\MISE}{MISE} % mean integrated squared error
 
 \DeclareMathOperator{\var}{Var} % Varianz
 \DeclareMathOperator{\cov}{Cov} % Kovarianz
@@ -815,8 +816,8 @@
 \begin{situation}
   Sei $n \geq m$, $X_1, \ldots, X_n \sim F$ \iid{}, $h : \R^m \to \R^1$ Borel-messbar und symmetrisch, \dh{}
   \[
-    h(x_1, \ldots, x_n) = h(x_{\sigma(1)}, \ldots, x_{\sigma(n)}) \quad
-    \forall \, \sigma \in S_n.
+    h(x_1, \ldots, x_m) = h(x_{\sigma(1)}, \ldots, x_{\sigma(m)}) \quad
+    \forall \, \sigma \in S_m.
   \]
   Gelte $\E \abs{h(X_1, \ldots, X_m)} < \infty$.
 \end{situation}
@@ -1144,120 +1145,6 @@
 
 % §4.1 Definition und Aufgabenstellung
 
-\iffalse
-
-% §5. Dichteschätzung und Regressionskurvenschätzer
-\section{Dichte- und Regressionskurvenschätzer}
-
-% §5.1 Dichteschätzung (allgemein)
-
-\begin{nota}
-  Sei $\mathcal{P}$ die Menge aller bezüglich des Lebesgue-Maß $\lambda_1$ absolut stetigen Wahrscheinlichkeitsmaße auf $\R^1$ und
-  \[ \mathcal{F}_c \coloneqq \Set{f \in \Cont(\R^1)}{f = \nicefrac{\d P}{\d \lambda_1} \text{ für ein } P \in \mathcal{P}} \]
-  die Menge der stetigen W-Dichtefunktionen.
-\end{nota}
-
-\begin{ziel}
-  Finden einer Dichteschätzung $\hat{f}_n(X, \blank) : \R^1 \to \R^1$, wobei $X = (X_1, \ldots, X_n)$ eine math. SP ist, in Form einer messbaren Abb. $\hat{f}_n(\blank, \blank) : \R^n \times \R^1 \to \R^1$.
-\end{ziel}
-
-\begin{nota}
-  $\hat{f}_n(t) \coloneqq \hat{f}_n(X_1, \ldots, X_n)$
-\end{nota}
-
-\begin{lem}
-  Es gibt keinen Dichteschätzer $\hat{f}_n(\blank)$ mit
-  \[
-    \E_f \hat{f}_n(t) = f(t) \quad
-    \text{für $\lambda_1$-fast alle $t$ für alle $f \in \mathcal{F}_c$.}
-  \]
-\end{lem}
-
-\begin{defn}
-  Sei $x_0 \in \R$, $h > 0$.
-  Setze $I_j \coloneqq \cointerval{x_0 + jh}{x_0 + (j+1) h}$ für $j \in \Z$.
-  Das \emph{Histogramm} ist der (naive) Dichte-Schätzer
-  \[
-    \hat{f}_n(t) \coloneqq \tfrac{1}{nh} \sum_{i=1}^n \ind_{I_j}(X_i), \quad
-    \text{wobei $z \in \Z$ so ist, dass $t \in I_j$}.
-  \]
-\end{defn}
-
-\begin{bem}
-  Nach dem Gesetz der großen Zahlen gilt
-  \[
-    \hat{f}_n(t) \xra[n \to \infty]{\text{$\P_f$-f.s.}}
-    h^{-1} \Int{I_j}{}{f(x)}{x} \quad
-    \text{für $t \in I_j$.}
-  \]
-\end{bem}
-
-\begin{defn}
-  Sei $\hat{f}_n(\blank)$ ein Dichteschätzer und $f \in \mathcal{F}_c$.
-  Dann heißt
-  \[
-    \Delta_n \coloneqq \E_f \Int{\R}{}{(\hat{f}_n(t) - f(t))^2}{t}
-  \]
-  \emph{MISE} (mean integrated squared error) bzgl. $f$.
-\end{defn}
-
-\begin{satz}[Freedman, Diaconis]
-  Sei $f \in L^2(\R^1)$ und $f$ absolut stetig, \dh{} fast überall differenzierbar mit $\gamma \coloneqq \Int{\R^1}{}{(f'(t))^2}{t} > 0$.
-  Setze
-  \[
-    \alpha \coloneqq \sqrt[3]{6} \cdot \gamma^{- \nicefrac{1}{3}}, \quad
-    \beta \coloneqq \frac{3}{2 \sqrt[3]{6}} \gamma^{\nicefrac{1}{3}}.
-  \]
-  Dann gilt:
-  \[
-    \min_{h = h_n > 0} \Delta_n^2 = \tfrac{\beta}{n^{\nicefrac{2}{3}}} + o \left( \tfrac{1}{n^{\nicefrac{2}{3}}} \right) \quad
-    \text{für }
-    h_n = \tfrac{\alpha}{n^{\nicefrac{1}{3}}} + o \left( \tfrac{1}{n^{\nicefrac{1}{3}}} \right).
-  \]
-  % TODO: Was ist die Aussage davon???
-\end{satz}
-
-\begin{defn}
-  Sei $K \in L^1(\R)$ eine Fktn mit $\IInt{K(t)}{t} = 1$ und $(h_n)_{n \in \N}$ eine Folge in $\ointerval{0}{\infty}$ mit $h_n \to 0$.
-  Dann heißt
-  \[
-    \hat{f}_n(t) = \hat{f}_n(X_1, \ldots, X_n; t) \coloneqq \tfrac{1}{n \cdot h_n} \sum_{i=1}^n K \left( \tfrac{X_i - t}{h_n} \right)
-  \]
-  \emph{Kerndichteschätzer} für $f$ mit \emph{Kernfunktion} $K$.
-  % auch: Parzen-Rosenblatt-Schätzung
-\end{defn}
-
-\begin{bspe}
-  Mit der \emph{empirischen Dichte} $K(x) \coloneqq \tfrac{1}{2} \ind_{\ocinterval{-1}{1}}(x)$ gilt
-  \[ \hat{f}_n(t) = \tfrac{1}{2 h_n} \left( \hat{F}_n(t + h_n) - \hat{F}_n(t - h_n) \right), \]
-  mit dem \emph{Gauß-Kern} $K(x) \coloneqq \tfrac{1}{\sqrt{2 \pi}}\exp( \tfrac{- x^2}{2})$ gilt $\hat{f}_n(\blank) \in \Cont^\infty(\R)$.
-\end{bspe}
-
-\begin{lem}
-  \begin{itemize}
-    \item $\E_f \hat{f}_n(t) = \IInt{K(x) f(t + h_n x)}{x}$
-    \item Falls $K \!\in\! L^2(\R)$: \enspace
-    $\var_f (\hat{f}_n(t)) = 
-    \begin{array}[t]{l}
-      \tfrac{1}{n \cdot h_n} \IInt{K^2(x) \cdot f(t + h_n x)}{x} \\
-      - \tfrac{1}{n} \cdot \left( \IInt{K(x) \cdot f(t + h_n x)}{x} \right)^2
-    \end{array}$
-  \end{itemize}
-\end{lem}
-
-\begin{satz}
-  Sei $f$ eine beschränkte W-Dichtefktn, $\fa{x \in \R} f(x) \leq M$, mit Stetigkeitsstellen $C \subseteq \R$.
-  Sei $K \in L^2(\R)$. \\
-  Angenommen, $n \cdot h_n \xra[n \to \infty]{} \infty$.
-  Dann gilt
-  \begin{itemize}
-    \item $\E_f \hat{f}_n(t) \xra[n \to \infty]{} f(t) \quad \forall \, t \in C$,
-    \item $n \cdot h_n \cdot \var_f (\hat{f}_n(t)) \xra[n \to \infty]{} f(t) + \IInt{K^2(x)}{x} \quad \forall \, t \in C$
-    \item $\sup_{t \in \R} \left( \hat{f}_n(t) - f(t) \right)^2 \xra[n \to \infty]{} 0$, falls $f$ glm. stetig auf $\R$.
-  \end{itemize}
-\end{satz}
-
-\fi
 
 % Vorlesung vom 3.12.2015
 
@@ -1740,6 +1627,134 @@ $\mathrm{MASE}(\hat{\mu}_n) = \tfrac{1}{n} \sum_{i=1}^n \mathrm{MSE}(\hat{\mu}_n
   \]
   % ausgelassen: "optimal" = ?
 \end{satz}
+
+% Vorlesung vom 7.1.2015
+
+% §5. Dichteschätzungen
+\section{Dichteschätzungen}
+
+% §5.1 Einführungen
+
+\begin{nota}
+  Sei $\mathcal{P}$ die Menge aller bezüglich des Lebesgue-Maß $\lambda_1$ absolut stetigen Wahrscheinlichkeitsmaße auf $\R^1$ und
+  \[ \mathcal{F}_c \coloneqq \Set{f \in \Cont(\R^1)}{f = \nicefrac{\d P}{\d \lambda_1} \text{ für ein } P \in \mathcal{P}} \]
+  die Menge der stetigen W-Dichtefunktionen.
+\end{nota}
+
+\begin{ziel}
+  Finden einer "`guten"' Dichteschätzung $\hat{f}_n(X, \blank) : \R^1 \to \R^1$, wobei $X = (X_1, \ldots, X_n)$ eine math. Stichprobe ist, in Form einer Borel-messbaren Abbildung $\hat{f}_n(\blank, \blank) : \R^n \times \R^1 \to \R^1$.
+\end{ziel}
+
+\begin{nota}
+  $\hat{f}_n(t) \coloneqq \hat{f}_n(X_1, \ldots, X_n, t)$
+\end{nota}
+
+\begin{lem}
+  Es gibt keinen Dichteschätzer $\hat{f}_n(\blank)$ mit
+  \[
+    \E_f \hat{f}_n(t) = f(t) \quad
+    \text{für $\lambda_1$-fast alle $t$ für alle $f \in \mathcal{F}_c$.}
+  \]
+\end{lem}
+
+% §5.2. Naiver Dichteschätzer-Histogramm (Säulendiagramm)
+
+\begin{defn}
+  Sei $x_0 \in \R$ und $h > 0$ fest.
+  Setze $I_j \coloneqq \cointerval{x_0 + jh}{x_0 + (j\!+\!1) h}$ für $j \in \Z$.
+  Das \emph{Histogramm} ist der (naive) Dichte-Schätzer
+  \[
+    \hat{f}_n(t) \coloneqq \tfrac{1}{nh} \sum_{i=1}^n \ind_{I_j}(X_i), \quad
+    \text{wobei $j \in \Z$ so ist, dass $t \in I_j$}.
+  \]
+\end{defn}
+
+\begin{bem}
+  Der Graph der geschätzten Histogramm-Dichte ist ein Säulendiagramm.
+  Verbindet man die Mitten der Säulen mit einer Linie, so bekommt man einen \emph{Häufigkeitspolygonzug}.
+\end{bem}
+
+\begin{bem}
+  Nach dem Gesetz der großen Zahlen gilt
+  \[
+    \hat{f}_n(t) \xra[n \to \infty]{\text{$\P_f$-f.s.}}
+    h^{-1} \Int{I_j}{}{f(x)}{x} \quad
+    \text{für $t \in I_j$.}
+  \]
+\end{bem}
+
+\begin{defn}
+  Sei $\hat{f}_n(\blank)$ ein Dichteschätzer und $f \in \mathcal{F}_c$.
+  Dann heißt
+  \[
+    \MISE(\hat{f}_n) \coloneqq \Delta_n \coloneqq \E_f \Int{\R}{}{(\hat{f}_n(t) - f(t))^2}{t}
+  \]
+  \emph{MISE} (mean integrated squared error) von $\hat{f}_n$ bzgl. $f$.
+\end{defn}
+
+\begin{satz}[Freedman, Diaconis]
+  Sei $f : \R^1 \to \R^1$ eine Dichtefkt mit
+  \begin{enumerate}[label=(\roman*), itemindent=10pt]
+    \item $f \in L^2(\R^1)$ und $f$ absolut stetig, \dh{} f.\,ü. differenzierbar
+    \item $f' \in L^2(\R^1)$ und $f'$ absolut stetig, \dh{} f.\,ü. differenzierbar
+    \item $f'' \in L^p(\R^1)$ für ein $p \in \cinterval{1}{2}$
+  \end{enumerate}
+  Wir schreiben
+  \[
+    \alpha \coloneqq \sqrt[3]{6} \cdot \gamma^{- \nicefrac{1}{3}}, \quad
+    \beta \coloneqq \frac{3}{2 \sqrt[3]{6}} \gamma^{\nicefrac{1}{3}}, \quad
+    \gamma \coloneqq \Int{\R^1}{}{(f'(t))^2}{t}.
+  \]
+  Dann gilt \enspace
+  $\min_{h = h_n > 0} \Delta_n^2 = \tfrac{\beta}{n^{\nicefrac{2}{3}}} + O \left( \tfrac{1}{n^{\nicefrac{2}{3}}} \right)$. \\
+  Das Minimum wird angenommen für \enspace
+  $h_n = \tfrac{\alpha}{\sqrt[3]{n}} + O \left( \tfrac{1}{\sqrt[3]{n}} \right)$.
+
+  Falls nur (i) und $\gamma > 0$ erfüllt ist, so gilt
+  $\min_{h = h_n > 0} \Delta_n^2 = \tfrac{\beta}{n^{\nicefrac{2}{3}}} + o \left( \tfrac{1}{n^{\nicefrac{2}{3}}} \right)$ und das Minimum wird bei $h_n = \tfrac{\alpha}{\sqrt[3]{n}} + o \left( \tfrac{1}{\sqrt[3]{n}} \right)$ angenommen.
+\end{satz}
+
+\begin{defn}
+  Sei $K \in L^1(\R)$ eine Fktn mit $\IInt{K(t)}{t} = 1$ und $(h_n)_{n \in \N}$ eine Folge in $\ointerval{0}{\infty}$ mit $h_n \downarrow 0$.
+  Dann heißt
+  \[
+    \hat{f}_n(t) = \hat{f}_n(X_1, \ldots, X_n; t) \coloneqq \tfrac{1}{n \cdot h_n} \sum_{i=1}^n K \left( \tfrac{X_i - t}{h_n} \right)
+  \]
+  \emph{Kerndichteschätzer} für $f$ mit \emph{Kernfunktion} $K$.
+  % auch: Parzen-Rosenblatt-Schätzung
+\end{defn}
+
+\iffalse
+\begin{bspe}
+  Mit der \emph{empirischen Dichte} $K(x) \coloneqq \tfrac{1}{2} \ind_{\ocinterval{-1}{1}}(x)$ gilt
+  \[ \hat{f}_n(t) = \tfrac{1}{2 h_n} \left( \hat{F}_n(t + h_n) - \hat{F}_n(t - h_n) \right), \]
+  mit dem \emph{Gauß-Kern} $K(x) \coloneqq \tfrac{1}{\sqrt{2 \pi}}\exp( \tfrac{- x^2}{2})$ gilt $\hat{f}_n(\blank) \in \Cont^\infty(\R)$.
+\end{bspe}
+
+\begin{lem}
+  \begin{itemize}
+    \item $\E_f \hat{f}_n(t) = \IInt{K(x) f(t + h_n x)}{x}$
+    \item Falls $K \!\in\! L^2(\R)$: \enspace
+    $\var_f (\hat{f}_n(t)) = 
+    \begin{array}[t]{l}
+      \tfrac{1}{n \cdot h_n} \IInt{K^2(x) \cdot f(t + h_n x)}{x} \\
+      - \tfrac{1}{n} \cdot \left( \IInt{K(x) \cdot f(t + h_n x)}{x} \right)^2
+    \end{array}$
+  \end{itemize}
+\end{lem}
+
+\begin{satz}
+  Sei $f$ eine beschränkte W-Dichtefktn, $\fa{x \in \R} f(x) \leq M$, mit Stetigkeitsstellen $C \subseteq \R$.
+  Sei $K \in L^2(\R)$. \\
+  Angenommen, $n \cdot h_n \xra[n \to \infty]{} \infty$.
+  Dann gilt
+  \begin{itemize}
+    \item $\E_f \hat{f}_n(t) \xra[n \to \infty]{} f(t) \quad \forall \, t \in C$,
+    \item $n \cdot h_n \cdot \var_f (\hat{f}_n(t)) \xra[n \to \infty]{} f(t) + \IInt{K^2(x)}{x} \quad \forall \, t \in C$
+    \item $\sup_{t \in \R} \left( \hat{f}_n(t) - f(t) \right)^2 \xra[n \to \infty]{} 0$, falls $f$ glm. stetig auf $\R$.
+  \end{itemize}
+\end{satz}
+\fi
 
 \end{document}
 
