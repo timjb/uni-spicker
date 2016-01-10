@@ -31,6 +31,7 @@
 \DeclareMathOperator{\coker}{coker} % Kokern
 \newcommand{\SC}{\mathfrak{C}} % Serre-Klasse
 \newcommand{\PS}{\mathcal{P}} % Potenzmenge
+\DeclareMathOperator*{\argmax}{arg\,max}
 
 % Kategorientheorie
 \newcommand{\Ring}{\mathbf{Ring}} % Kategorie der Ringe
@@ -1354,7 +1355,7 @@ Im Folgenden seien alle Ringe \emph{kommutativ}, \dh{} $xy = yx$ f.\,a. $x, y$.
   Eine komm. $A$-Algebra $B$ heißt eine \ldots
   \begin{itemize}
     \item \ldots \emph{endliche $A$-Algebra}, falls $B^A$ als $A$-Modul endlich erzeugt ist, \dh{} falls endlich viele Elemente $b_1, \ldots, b_n \in B$ existieren, sodass jedes Element aus $B$ als $A$-Linearkombination der $b_i$ geschrieben werden kann.
-    \item \ldots $A$-Algebra \emph{endlichen Typs}, falls endlich viele Elemente $b_1, \ldots, b_n \in B$ existieren, sodass jedes andere Element von $B$ als Polynom in den $b_i$ mit Koeffizienten aus $A$ geschrieben werden kann.
+    \item \ldots \emph{endlich erzeugte $A$-Algebra} oder $A$-Algebra \emph{endlichen Typs}, falls endlich viele Elemente $b_1, \ldots, b_n \in B$ existieren, sodass jedes andere Element von $B$ als Polynom in den $b_i$ mit Koeffizienten aus $A$ geschrieben werden kann.
   \end{itemize}
 \end{defn}
 
@@ -2076,6 +2077,285 @@ Für $m=1$ folgt:
 
 \begin{kor}
   Die isolierten Primärkomp. von $\aaa$ sind eindeutig bestimmt.
+\end{kor}
+
+% V. Ganzheit und Bewertungen
+\section{Ganzheit}
+
+% 25. Ganzheit
+
+% 25.1. Ganze Elemente
+
+\begin{defn}
+  Sei $B$ ein komm. Ring und $A \subseteq B$ ein Unterring.
+  Ein Element $x \in B$ heißt \emph{ganz} über $A$, falls $x$ eine Gleichung der Form $x^n + a_1 x^{n-1} + \ldots + a_n = 0$ mit $a_i \in A$ erfüllt.
+\end{defn}
+
+\begin{prop}
+  Sei $A \subseteq B$ eine Erw. komm. Ringe.
+  Es sind äquivalent:
+  \begin{itemize}
+    \item $x$ ist ganz über $A$.
+    \item $A[x] \subseteq B$ ist als $A$-Modul endlich erzeugt.
+    \item Es existiert ein Unterring $C \subseteq B$ mit $C \supseteq A[x]$, der als $A$-Modul endlich erzeugt ist.
+    \item Es ex. ein treuer $A[x]$-Modul $M$, der als $A$-Modul endl. erz. ist.
+  \end{itemize}
+\end{prop}
+
+\begin{kor}
+  Sei $A \subseteq B$ eine Erw. komm. Ringe.
+  \begin{itemize}
+    \item Seien $x_1, \ldots, x_n \in B$ jeweils ganz über~$A$.
+    Dann ist $A[x_1, \ldots, x_n]$ ein endlich erzeugter $A$-Modul.
+    \item Die Menge $C \coloneqq \{ \text{ über $A$ ganze Elemente $x \in B$} \} \subseteq B$ ist ein Unterring von $B$ mit $C \supseteq A$.
+  \end{itemize}
+\end{kor}
+
+% 25.2. Ganzheit
+
+\begin{defn}
+  \begin{minipage}[t]{0.88 \linewidth}
+    Die Menge $C \subseteq B$ heißt \emph{ganzer Abschluss} von $A$ in $B$. \\
+    Ist $C = A$, so heißt $A$ \emph{ganz abgeschlossen} in $B$. \\
+    Ist $C = B$, so heißt $B$ \emph{ganz über} $A$.
+  \end{minipage}
+\end{defn}
+
+\begin{bsp}
+  $\Z$ ist in $\Q$ ganz abgeschlossen.
+\end{bsp}
+
+\begin{defn}
+  Sei $\phi : A \to B$ ein Mor. komm. Ringe.
+  (Dadurch wird $B$ zu einer $A$-Algebra.)
+  Dann heißt $\phi$ ganz und $B$ eine \emph{ganze $A$-Algebra}, falls $B$ ganz über $\phi(A) \subseteq B$ ist.
+\end{defn}
+
+\begin{lem}
+  Für eine $A$-Algebra $B$ gilt:
+  \[
+    B \text{ endlich} \iff B \text{ endlich erz. } \wedge B \text{ ganz}
+    \quad \text{(jeweils als $A$-Algebra)}.
+  \]
+\end{lem}
+
+\begin{kor}
+  Seien $A \subseteq B \subseteq C$ Erweiterungen kommutativer Ringe. \\
+  Ist $B$ ganz über $A$ und $C$ ganz über $B$, so ist auch $C$ ganz über $A$.
+\end{kor}
+
+\begin{kor}
+  Sei $C$ der ganze Abschluss von $A$ in $B$. \\
+  Dann ist $C$ ganz abgeschlossen in $B$.
+\end{kor}
+
+\begin{prop}
+  Sei $A \subseteq B$ eine ganze Erw. komm. Ringe.
+  Dann gilt:
+  \begin{itemize}
+    \item Für jedes Ideal $\bbb \subseteq B$ ist $B/\bbb$ ganz über $A / (A \cap \bbb)$.
+    \item Für jede mult. abg. Teilmenge $S \subseteq A$ ist $S^{-1} B$ ganz über $S^{-1} A$.
+  \end{itemize}
+\end{prop}
+
+% 25.3. Noethersche Normalisierung
+
+\begin{prop}[\emph{Noethernormalisierung}]
+  Sei $K$ ein Körper und $\aaa$ ein Ideal in $A \coloneqq K[x_1, \ldots, x_n]$.
+  Dann gibt es algebraisch unabhängige Elemente $y_1, \ldots, y_n \in A$, sodass $A$ ganz über $B \coloneqq K[y_1, \ldots, y_n]$ ist, und ein $0 \leq r \leq n$ mit $B \cap \aaa = (y_{r+1}, \ldots, y_n)$.
+\end{prop}
+
+\begin{proof}
+  Per Ind. über $n$. Der Fall $n=0$ ist trivial. Sei nun $n > 0$.
+  \begin{itemize}
+    \item Falls $\aaa = (0)$, so setze $y_1 = x_1$, \ldots, $y_n = x_n$ und $r \coloneqq n$.
+    \item Ansonsten wähle ein Polynom $f = \sum_{\alpha \in M} \lambda_\alpha x^\alpha \in \aaa \setminus \{ 0 \}$, wobei $M \subset \N^n$ endlich ist mit $\lambda_\alpha \in K^{\times}$ für alle $\alpha \in M$.
+    \item Wähle $w_1, \ldots, w_{n-1} \in \N$ und $w_n \coloneqq 1$, sodass die Abbildung
+    \[
+      w : M \to \N, \quad
+      \alpha \mapsto \alpha \cdot w \coloneqq \alpha_1 w_1 + \ldots + \alpha_n w_n
+    \]
+    injektiv ist.
+    (Dies kann man etwa erreichen, indem man die Tupel in $M$ als Zahlen in einem Stellenwertsystem mit genügend großer Basis $b \coloneqq 1 + \max_{\alpha \in M} \enspace \max_{i = 1, \ldots, n} \alpha_i$ ansieht und $w_i \coloneqq b^{n-i}$ setzt.)
+    \item Setze $z_i = x_i - x_n^{w_i}$ für $i = 1, \ldots, n-1$ und $A' \coloneqq K[z_1, \ldots, z_{n-1}]$.
+    \item Dann kann man $f$ im Polynomring $K[z_1, \ldots, z_{n-1}, x_n] = A'[x_n]$,
+    \[
+      f = \sum_{\alpha \in M} \lambda_\alpha (z_1 + x_n^{w_1})^{\alpha_1} \cdot \ldots \cdot (z_{n-1} + x_{n-1}^{w_{n-1}})^{\alpha_{n-1}} \cdot x_n^{\alpha_n},
+    \]
+     auch schreiben als $f = \lambda_\beta \cdot x_n^{m} + \mu_1 \cdot x_n^{m - 1} + \ldots + \mu_{m}$, wobei $\beta \coloneqq \argmax_{ \alpha \in M} w(\alpha)$, $m \coloneqq w(\beta)$ und $\mu_i \in K[z_1, \ldots, z_{n-1}]$. \\
+     Somit sind $x_n$ und alle weiteren $x_i$, also $A$, ganz über $A'[f]$.
+     \item Setze $y_n \coloneqq f$.
+     Die IH, angewendet auf $A' \coloneqq K[z_1, \ldots, z_{n-1}]$, liefert algebraisch unabhängige $y_1, \ldots, y_{n-1} \in A' \subset A$ mit $A'$ ganz über $B' \coloneqq K[y_1, \ldots, y_{n-1}]$ und $0 \leq r \leq n-1$ mit $B' \cap \aaa = (y_{r+1}, \ldots, y_{n-1})$.
+     Dann sind $B = B'[y_n] \subseteq A'[y_n] \subseteq A$ ganze Körpererweiterungen und $B \cap \aaa = (y_{r+1}, \ldots, y_n)$. \qedhere
+  \end{itemize}
+\end{proof}
+
+\begin{bem}
+  Insbesondere ist $K[y_1, \ldots, y_r] \to A/\aaa$ ein endlicher injektiver Homomorphismus von $K$-Algebren.
+\end{bem}
+
+% 26. Erster Cohen–Seidenbergscher Satz
+\subsection{Die Cohen-Seidenbergsche Sätze}
+
+% 26.1. Körpererweiterungen
+
+\begin{prop}
+  Sei $A \subseteq B$ eine ganze Erweiterung von Integritätsbereichen. \\
+  Dann ist $B$ genau dann ein Körper, wenn $A$ ein Körper ist.
+\end{prop}
+
+\begin{kor}
+  Sei $A \subseteq B$ eine ganze Erweiterung komm. Ringe und $\qqq \subset B$ ein Primideal.
+  Dann gilt: \enspace
+  $\qqq \subset B$ maximal $\iff$ $A \cap \qqq \subset A$ maximal.
+\end{kor}
+
+% 26.2. Primideale in ganzen Erweiterungen
+
+\begin{kor}
+  Sei $A \subseteq B$ eine ganze Erweiterung komm. Ringe.
+  Seien $\qqq \subseteq \qqq'$ zwei Primideale in $B$ mit $\ppp \coloneqq A \cap \qqq = A \cap \qqq'$.
+\end{kor}
+
+\begin{satz}
+  Sei $A \subseteq B$ eine ganze Erweiterung komm. Ringe und $\ppp \subset A$ ein Primideal.
+  Dann existiert ein Primideal $\qqq \subset B$ mit $A \cap \qqq = \ppp$.
+\end{satz}
+
+\begin{satz}["`Going up"']
+  Sei $A \subseteq B$ eine ganze Erw. komm. Ringe. \\
+  Sei $\ppp_1 \subsetneq \nldots \subsetneq \ppp_n$ eine Kette von Primidealen in $A$ und $\qqq_1 \subset B$ ein Primideal mit $A \cap \qqq_1 = \ppp_1$.
+  Dann gibt es eine Kette $\qqq_1 \subsetneq \ldots \subsetneq \qqq_n$ von Primidealen in $B$ mit $A \cap \qqq_i = \ppp_i$ für $i = 1, \ldots, n$.
+\end{satz}
+
+% 27. Der zweite Cohen-Seidenbergsche Satz
+
+% 27.1. Ganz abgeschlossene Integritätsbereiche
+
+\begin{prop}
+  Sei $A \subseteq B$ eine Erweiterung komm. Ringe,
+  $C$ der ganze Abschluss von $A$ in $B$ und
+  $S \subseteq A$ multiplikativ abgeschlossen. \\
+  Dann ist $S^{-1} C$ der ganze Abschluss von $S^{-1} A$ in $S^{-1} C$.
+\end{prop}
+
+\begin{defn}
+  Ein Integritätsbereich heißt \emph{ganz abgeschlossen}, falls er in seinem Quotientenkörper ganz abgeschlossen ist.
+\end{defn}
+
+\begin{bspe}
+  $\Z$ und $K[x_1, \ldots, x_n]$ sind ganz abgeschlossen
+\end{bspe}
+
+\begin{prop}
+  Sei $A$ ein Integritätsbereich.
+  Dann sind äquivalent:
+  \begin{itemize}
+    \item $A$ ist ganz abgeschlossen.
+    \item Für jedes Primideal $\ppp \subset A$ ist $A_\ppp$ ganz abgeschlossen.
+    \item Für jedes maximale Ideal $\mmm \subset A$ ist $A_\mmm$ ganz abgeschlossen.
+  \end{itemize}
+\end{prop}
+
+% 27.2. Ganzheit über Idealen
+
+\begin{defn}
+  Sei $A \subseteq B$ eine Erweiterung komm. Ringe und $\aaa \subseteq A$ ein Ideal.
+  \begin{itemize}
+    \item Ein Element $x \in B$ heißt \emph{ganz} über $\aaa$, falls $x$ eine Gleichung der Form $x^n + a_1 x^{n-1} + \ldots + a_n = 0$ mit $a_i \in \aaa$ erfüllt.
+    \item Der \emph{ganze Abschluss} von $\aaa$ in $B$ ist $\Set{x \in B}{\text{$x$ ist ganz über $\aaa$}}$.
+  \end{itemize}
+\end{defn}
+
+\begin{lem}
+  Sei $A \subseteq B$ eine Erweiterung kommutativer Ringe, $\aaa \subset A$ ein Ideal und $C$ der ganze Abschluss von $A$ in $B$.
+  Dann ist $\sqrt{C \aaa}$ der ganze Abschluss von $\aaa$ in $B$.
+\end{lem}
+
+\begin{defn}
+  Sei $K \subseteq L$ eine Körpererweiterung.
+  Ein Element $x \in L$ heißt \emph{algebraisch}, wenn es ganz über $K$ ist.
+\end{defn}
+
+\begin{prop}
+  Sei $A \subseteq B$ eine Erweiterung von Integritätsbereichen.
+  Sei $A$ ganz abgeschlossen mit Quotientenkörper $K$.
+  Sei $x \in B$ ganz über einem Ideal $\aaa \subseteq A$.
+  Dann ist $x$ algebraisch über $K$ und für sein Minimalpolynom $f \in K[t]$ gilt $f \in \sqrt{\aaa}[t]$.
+\end{prop}
+
+% TODO: Häh, wie kann das sein, das Minimalpolynom hat doch den Koeffizienten 1 vor dem führenden x^n???
+% Definition von Minimalpolynom
+
+% 27.3. Der zweite Cohen-Seidenbergsche Satz
+
+\begin{satz}["`Going-down"']
+  Sei $A \subseteq B$ eine ganze Erw. von Integritäts- bereichen und $A$ ganz abgeschlossen.
+  Sei $\ppp_1 \supsetneq \nldots \supsetneq \ppp_n$ eine Kette von Primidealen in $A$ und $\qqq_1 \subset B$ ein Primideal mit $A \cap \qqq_1 = \ppp_1$. \\
+  Dann gibt es eine Kette $\qqq_1 \supsetneq \ldots \supsetneq \qqq_n$ von Primidealen in $B$ mit $A \cap \qqq_i = \ppp_i$ für $i = 1, \ldots, n$.
+\end{satz}
+
+\begin{prop}
+  Sei $A$ ein ganz abgeschl. Integritätsbereich mit Quotienten- körper $K$.
+  Sei $L \supseteq K$ eine endliche, separable Körpererweiterung und $B$ der ganze Abschluss von $A$ in $L$.
+  Dann ex. eine Basis $v_1, \ldots, v_n$ von $L$ über $K$, sodass $B \subseteq A v_1 + \ldots + A v_n$.
+\end{prop}
+
+% TODO: Seperabilität, Endlichkeit von Körpererweiterungen definieren
+
+% 28. Bewertungsringe
+\subsection{Bewertungsringe}
+
+% 28.1. Definition und erste Eigenschaften von Bewertungsringen
+
+\begin{defn}
+  Ein Integritätsbereich $B$ mit Quotientenkörper $K$ heißt \emph{Bewertungsbereich} für $K$, falls gilt: $\fa{x \in K^{\times}} x \in B \vee x^{-1} \in B$.
+\end{defn}
+
+\begin{prop}
+  Sei $B$ ein Bewertungsring.
+  Dann gilt:
+  \begin{itemize}
+    \item $B$ ist ein lokaler Ring mit maximalem Ideal $\mmm \coloneqq B \setminus B^{\times}$.
+    \item $B$ ist ganz abgeschlossen.
+  \end{itemize}
+\end{prop}
+
+% 28.2. Existenz von Bewertungsringen
+
+\begin{satz}
+  Sei $K$ ein Körper, $L \supset K$ ein algebraisch abgeschlossener Körper und $B \subseteq K$ ein Unterring.
+  Sei $\phi : B \to L$ ein nicht in $K$ fortsetzbarer Ringhomomorphismus, \dh{} ist $\hat{\phi} : B' \to L$ ein Ringhomomorphismus definiert auf einem Unterring $B' \subseteq K$ mit $B' \supseteq B$ mit $\hat{\phi}|_{B} = \phi$, so gilt $B = B'$.
+  Dann gilt:
+  \begin{itemize}
+    \item $B$ ist ein lokaler Ring mit max. Ideal $\mmm = \ker \phi$.
+    \item Sei $x \in K^{\times}$.
+    Dann gilt $\mmm[x] \neq B[x]$ oder $\mmm[x^{-1}] \neq B[x^{-1}]$.
+    \item $B$ ist ein Bewertungsring für $K$.
+  \end{itemize}
+\end{satz}
+
+\begin{kor}
+  Sei $A \subseteq K$ ein Unterring eines Körpers.
+  Dann ist der ganze Abschluss $\overline{A}$ von~$A$ in~$K$ der Schnitt aller Bewertungsringe~$B$ von~$K$ mit~$B \supseteq A$.
+\end{kor}
+
+\begin{prop}
+  Sei $A \subseteq B$ eine endlich erzeugte Erweiterung von Integritätsbereichen.
+  Sei $v \in B \setminus \{ 0 \}$.
+  Dann existiert ein $u \in A \setminus \{ 0 \}$ mit folgender Eigenschaft:
+  Jeder Homomorphismus $\phi : A \to L$ in einen algebraisch abgeschlossenen Körper $L$ mit $\phi(u) \neq 0$ kann zu einem Homomorphismus $\psi : B \to L$ mit $\psi(v) \neq 0$ fortgesetzt werden.
+\end{prop}
+
+% TODO: definieren: endliche algebraische Erweiterung
+
+\begin{kor}
+  Ist eine endlich erzeugte $K$-Algebra $B$ ein Körper, so ist $B$ eine endliche algebraische Erweiterung von $K$.
+\end{kor}
+
+\begin{kor}[Schwacher Hilbertscher Nullstellensatz]
+  Ist $\mmm$ ein maximales Ideal einer endlich erzeugten $K$-Algebra~$A$, so ist $A/\mmm$ eine endliche algebraische Erweiterung von~$K$.
+  Insbesondere ist $A/\mmm \cong K$, falls $K$ algebraisch abgeschlossen ist.
 \end{kor}
 
 \end{document}
