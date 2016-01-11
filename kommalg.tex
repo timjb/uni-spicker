@@ -25,6 +25,10 @@
   {\begin{center}\begin{tikzcd}}
   {\end{tikzcd}\end{center}}
 
+\usepackage{pifont}
+\newcommand{\cmark}{\ding{51}}
+\newcommand{\xmark}{\ding{55}}
+
 \DeclareMathOperator{\ggT}{ggT} % größter gemeinsamer Teiler
 \DeclareMathOperator{\kgV}{kgV} % kleinstes gemeinsames Vielfaches
 \DeclareMathOperator{\ann}{ann} % Annulator
@@ -32,6 +36,7 @@
 \newcommand{\SC}{\mathfrak{C}} % Serre-Klasse
 \newcommand{\PS}{\mathcal{P}} % Potenzmenge
 \DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator{\ord}{ord} % Ordnung eines Elements
 
 % Kategorientheorie
 \newcommand{\Ring}{\mathbf{Ring}} % Kategorie der Ringe
@@ -42,6 +47,7 @@
 \newcommand{\ladj}{\dashv} % Links-adjungiert (left-adjoint)
 \newcommand{\Alg}{\mathbf{Alg}} % Kategorie der Algebren über einem Körper/Ring
 \newcommand{\AAlg}[1]{{#1}\text{-}\Alg} % Kategorie der Algebren über einem Ring A
+\newcommand{\len}{\ell} % Länge eines Moduls
 
 % Bezeichnungen für Ideale
 \newcommand{\aaa}{\mathfrak{a}}
@@ -2356,6 +2362,155 @@ Für $m=1$ folgt:
 \begin{kor}[Schwacher Hilbertscher Nullstellensatz]
   Ist $\mmm$ ein maximales Ideal einer endlich erzeugten $K$-Algebra~$A$, so ist $A/\mmm$ eine endliche algebraische Erweiterung von~$K$.
   Insbesondere ist $A/\mmm \cong K$, falls $K$ algebraisch abgeschlossen ist.
+\end{kor}
+
+% VI. Kettenbedingungen
+\section{Kettenbedingungen}
+
+% 29. Kettenbedingungen I
+
+% 29.1. Kettenbedingungen
+
+\begin{prop}
+  Sei $X$ eine teilweise geordnete Menge.
+  Dann sind äquivalent:
+  \begin{itemize}
+    \item Jede aufsteigende Folge $x_1 \leq x_2 \leq \ldots$ in $X$ ist \emph{stationär}, \dh{} es existiert ein $N \in \N$ mit $x_n = x_N$ für alle $n \geq N$.
+    \item Jede nicht leere Teilmenge $A \subseteq X$ besitzt ein maximales Element, \dh{} $\ex{a \in A} \fa{b \in A} a \leq b \implies a = b$.
+  \end{itemize}
+\end{prop}
+
+\begin{defn}
+  Sei $A$ ein Ring und $M$ ein $A$-Modul.
+  \begin{itemize}
+    \item Ist jede bzgl. der Inklusion aufsteigende Folge $N_1 \subseteq N_2 \subseteq \ldots$ von Untermoduln von $N$ stationär, so heißt $M$ \emph{noethersch}.
+    \item Ist jede bzgl. der Inklusion absteigende Folge $N_1 \supseteq N_2 \supseteq \ldots$ von Untermoduln von $N$ stationär, so heißt $M$ \emph{artinsch}.
+  \end{itemize}
+\end{defn}
+
+\begin{bspe}
+  \begin{minipage}[t]{0.88 \linewidth}
+    \begin{tabular}[t]{l | l | l | l}
+      $A$ & $M$ & noethersch? & artinsch? \\ \hline
+      $\Z$ & irgendeine endl. Gruppe & \cmark & \cmark \\
+      $\Z$ & $\Set{x \in \Q/\Z}{\ord(x) = p^n}$ & \xmark & \cmark \\
+      & mit $p$ prim & & \\
+      $\Z$ & $\Set{\tfrac{a}{b} \in \Q \text{ gekürzt}}{b = p^n}$ & \xmark & \xmark
+    \end{tabular}
+  \end{minipage}
+\end{bspe}
+
+\begin{prop}
+  Sei $A$ ein Ring.
+  Ein $A$-Modul $M$ ist genau dann noethersch, wenn alle seine Untermodule endlich erzeugt sind.
+\end{prop}
+
+\begin{prop}
+  Sei $A$ ein Ring und $0 \to M' \to M \to M'' \to 0$ eine kurze exakte Sequenz von $A$-Moduln.
+  Dann gilt:
+  \begin{itemize}
+    \item $M$ noethersch $\iff$ $M'$, $M''$ noethersch
+    \item $M$ artinsch $\iff$ $M'$, $M''$ artinsch
+  \end{itemize}
+\end{prop}
+
+\begin{kor}
+  Die endliche direkt Summe von noetherschen/artinschen $A$-Moduln ist noethersch/artinsch.
+\end{kor}
+
+% 29.2. Noethersche und Artinsche Ringe
+
+\begin{defn}
+  Ein Ring $A$ heißt \emph{noethersch}/\emph{artinsch}, falls er als Modul über sich selbst noethersch/artinsch ist.
+\end{defn}
+
+\begin{bem}
+  Ein Ring ist genau dann noethersch/artinsch, wenn die Menge seiner Ideale die aufsteigende/absteigende Kettenbedingung erfüllt.
+\end{bem}
+
+\begin{bspe}
+  \begin{minipage}[t]{0.88 \linewidth}
+    \begin{tabular}[t]{l | l | l | l}
+      $A$ & noethersch? & artinsch? \\ \hline
+      $\Z$ & \cmark & \xmark \\
+      ein bel. HIB & \cmark & ? \\
+      $K[x]$ & \cmark & \xmark \\
+      $K[x_1, x_2, \ldots]$ & \xmark & \xmark
+    \end{tabular}
+  \end{minipage}
+\end{bspe}
+
+\begin{acht}
+  Unterringe von noetherschen Ringen sind nicht unbedingt noethersch.
+\end{acht}
+
+\begin{prop}
+  Ist $A$ ein noetherscher Ring und $M$ ein endlich erzeugter $A$-Modul, so ist $M$ noethersch.
+\end{prop}
+
+\begin{prop}
+  Sei $\aaa \subseteq A$ ein Ideal in einem noetherschen Ring $A$.
+  Dann ist auch der Ring $A / \aaa$ noethersch.
+\end{prop}
+
+% 30. Kettenbedingungen II
+
+% 30.1. Kompositionsreihe und Länge eines Moduls
+
+\begin{defn}
+  Sei $A$ ein Ring und $M$ ein $A$-Modul.
+  \begin{itemize}
+    \item Eine \emph{Untermodulkette} von $M$ der Länge $n$ ist eine Kette von Untermoduln der Form $M_\bullet : M = M_0 \supsetneq M_1 \supsetneq \ldots \supsetneq M_n = 0$.
+    \item $M$ heißt \emph{einfach}, falls $0$ und $M$ die einzigen Untermoduln von $M$ sind.
+    \item Eine Untermodulkette heißt \emph{Kompositionsreihe}, wenn die Quotienten $M_i/M_{i+1}$ jeweils einfach sind.
+    \item Die \emph{Länge} $\len(M) \in \N \cup \{ \infty \}$ von $M$ ist das Infimum aller Längen von Kompositionsreihen von $M$.
+  \end{itemize}
+\end{defn}
+
+\begin{prop}
+  Sei $A$ ein Ring und $M$ ein $A$-Modul der Länge $n \coloneqq \len(M) < \infty$.
+  Dann gilt:
+  \begin{itemize}
+    \item Für jeden echten Untermodul $N \subsetneq M$ gilt $\len(N) < \len(M)$.
+    \item Die Länge jeder Untermodulkette in $M$ ist $\leq \len(M)$.
+    \item Jede Kompositionsreihe von $M$ hat die Länge $n$.
+    \item Jede Untermodulkette von $M$ lässt sich zu einer Kompositionsreihe erweitern.
+  \end{itemize}
+\end{prop}
+
+% 30.2. Moduln endlicher Länge
+
+\begin{prop}
+  Sei $A$ ein kommutativer Ring.
+  Ein $A$-Modul $M$ besitzt genau dann eine Kompositionsreihe, wenn $M$ noethersch und artinsch ist.
+\end{prop}
+
+\begin{defn}
+  Ein $A$-Modul $M$ heißt \emph{von endlicher Länge}, wenn $M$ noethersch und artinsch ist.
+\end{defn}
+
+\begin{prop}
+  Sei $A$ ein Ring.
+  Die Länge ist eine additive Funktion auf $\SC \coloneqq \{ \text{ $A$-Moduln endlicher Länge } \}$.
+\end{prop}
+
+\begin{satz}[Jordan-Hölder]
+  Sind $M_\bullet$ und $M'_\bullet$ zwei Kompositionsreihen eines $A$-Moduls $M$ endlicher Länge $n$, so existiert eine Permutation $\sigma \in S_n$ mit $M_{i-1}/M_i \cong M'_{\sigma(i-1)}/M'_{\sigma(i)}$.
+\end{satz}
+
+\begin{prop}
+  Für einen VR $V$ über einem Körper $K$ sind äquivalent:
+  \begin{itemize}
+    \miniitem{0.5 \linewidth}{$V$ ist endlich-dimensional.}
+    \miniitem{0.4 \linewidth}{$V$ ist noethersch.}
+    \miniitem{0.5 \linewidth}{$V$ ist von endlicher Länge.}
+    \miniitem{0.4 \linewidth}{$V$ ist artinsch.}
+  \end{itemize}
+\end{prop}
+
+\begin{kor}
+  Seien $\mmm_1, \ldots, \mmm_n$ maximale Ideale in einem kommutativen Ring mit $(0) = \mmm_1 \cdot \ldots \cdot \mmm_n$.
+  Dann ist $A$ genau dann noethersch, wenn $A$ artinsch ist.
 \end{kor}
 
 \end{document}
