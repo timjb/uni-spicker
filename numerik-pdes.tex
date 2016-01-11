@@ -1948,7 +1948,7 @@ Wir wissen bereits: $\norm{u - u_n}_H \leq c (\inf_{v \in U_n} \norm{u-v} + \nor
 
 Problem: Wir suchen $v \in U_n$, sodass $\norm{u - v}_{U_n}$ möglichst klein ist, wobei wir $u \in H$ nicht kennen.
 
-Idee: Betrachte die Abbildung $\pi : H \to U_n, \enspace w \mapsto \pi w$, sodass $\norm{w - \pi w}_H$ klein für alle $w \in H$ ist
+Idee: Betrachte den Operator $\pi : H \to U_n, \enspace w \mapsto \pi w$, sodass $\norm{w - \pi w}_H$ klein für alle $w \in H$ ist
 
 \begin{defn}
   Sei $(K, P, \Sigma)$ ein finites Element.
@@ -1967,5 +1967,34 @@ Idee: Betrachte die Abbildung $\pi : H \to U_n, \enspace w \mapsto \pi w$, sodas
     \item $\fa{p \in P} \pi_K p = p$
   \end{itemize}
 \end{bem}
+
+% Vorlesung vom 11.1.2015
+
+\begin{defn}
+  Sei $U_n$ ein FE-Raum zu einer Triangulierung $T(\Omega)$ und sei $\{ p_1, \ldots, p_n \}$ die kanonische Basis von $U_n$, \dh{} $b_i(p_j) = \delta_{ij}$.
+  Dann heißt $\Pi \omega$ \emph{$U_n$-Interpolierend} von $\omega \in \Cont^s(\bOmega)$, falls $\Pi \omega = \sum_{i=1}^n b_i(\omega) p_i \in U_n$.
+\end{defn}
+
+\begin{lem}
+  Für alle $K_i \in T(\bOmega)$ und alle $\omega \in \Cont^3(\bOmega)$ gilt $(\Pi \omega) |_K = \Pi_{K_i} \omega|_{K_i}$ und somit $\norm{\omega - \Pi \omega}_{H'(\Omega)} = \sum_{K_i \in T(\bOmega)} \norm{\omega - \Pi_{K_i} \omega}_{H'(K_i)}$.
+\end{lem}
+
+\begin{lem}
+  Sei $F : \hat{K} \to K$ mit $F(\hat{x}) = A \hat{x} + b$, mit $A$ invertierbar. \\
+  Dann gilt für alle $l \in \N$:
+  \begin{itemize}
+    \item Es existiert eine Konstante $c > 0$, sodass
+    \[
+      \abs{v \circ F}_{H^l(\hat{K})} \leq c \norm{A}_2^l \tfrac{1}{\sqrt{\abs{\det(A)}}} \abs{v}_{H^l(K)}
+    \]
+    \[
+      \abs{\hat{v} \circ F^{-1}}_{H^l(K)} \leq c \norm{A^{-1}}_2^l \sqrt{\abs{\det(A)}} \abs{\hat{v}}_{H^l(\hat{K})}
+    \]
+    für alle $v \in H^l(K)$ bzw. $\hat{v} \in H^l(\hat{K})$ gibt, wobei
+    \[
+      \abs{v}_{H^l(K)} \coloneqq \left( \Int{K}{}{\sum_{\abs{\alpha} = l} \norm{\DO^\alpha v}^2} {x}\right)^{\nicefrac{1}{2}}.
+    \]
+  \end{itemize}
+\end{lem}
 
 \end{document}
