@@ -2426,6 +2426,7 @@ Für $m=1$ folgt:
 
 \begin{bem}
   Ein Ring ist genau dann noethersch/artinsch, wenn die Menge seiner Ideale die aufsteigende/absteigende Kettenbedingung erfüllt.
+  Ein Ring ist genau dann noethersch, wenn all seine Ideale endlich erzeugt sind.
 \end{bem}
 
 \begin{bspe}
@@ -2448,11 +2449,6 @@ Für $m=1$ folgt:
   Ist $A$ ein noetherscher Ring und $M$ ein endlich erzeugter $A$-Modul, so ist $M$ noethersch.
 \end{prop}
 
-\begin{prop}
-  Sei $\aaa \subseteq A$ ein Ideal in einem noetherschen Ring $A$.
-  Dann ist auch der Ring $A / \aaa$ noethersch.
-\end{prop}
-
 % 30. Kettenbedingungen II
 
 % 30.1. Kompositionsreihe und Länge eines Moduls
@@ -2461,7 +2457,7 @@ Für $m=1$ folgt:
   Sei $A$ ein Ring und $M$ ein $A$-Modul.
   \begin{itemize}
     \item Eine \emph{Untermodulkette} von $M$ der Länge $n$ ist eine Kette von Untermoduln der Form $M_\bullet : M = M_0 \supsetneq M_1 \supsetneq \ldots \supsetneq M_n = 0$.
-    \item $M$ heißt \emph{einfach}, falls $0$ und $M$ die einzigen Untermoduln von $M$ sind.
+    \item $M$ heißt \emph{einfach}, falls $M$ nur $0$ und $M$ als Untermoduln besitzt.
     \item Eine Untermodulkette heißt \emph{Kompositionsreihe}, wenn die Quotienten $M_i/M_{i+1}$ jeweils einfach sind.
     \item Die \emph{Länge} $\len(M) \in \N \cup \{ \infty \}$ von $M$ ist das Infimum aller Längen von Kompositionsreihen von $M$.
   \end{itemize}
@@ -2512,5 +2508,109 @@ Für $m=1$ folgt:
   Seien $\mmm_1, \ldots, \mmm_n$ maximale Ideale in einem kommutativen Ring mit $(0) = \mmm_1 \cdot \ldots \cdot \mmm_n$.
   Dann ist $A$ genau dann noethersch, wenn $A$ artinsch ist.
 \end{kor}
+
+% VII. Noethersche Ringe
+\subsection{Noethersche Ringe}
+
+% 31. Noethersche Ringe
+
+% 31.1. Elementare Eigenschaften noetherscher Ringe
+
+% nach hinten gezogen
+\begin{prop}
+  Sei $\aaa \subseteq A$ ein Ideal in einem noetherschen Ring $A$. \\
+  Dann ist auch der Ring $A / \aaa$ noethersch.
+\end{prop}
+
+\begin{kor}
+  Sei $\phi : A \to B$ ein Ringhomomorphismus. \\
+  Ist $A$ noethersch, so auch $\phi(A)$.
+\end{kor}
+
+\begin{prop}
+  Sei $A \subseteq B$ eine endliche Erweiterung kommutativer Ringe.
+  Ist $A$ noethersch, so auch $B$.
+\end{prop}
+
+\begin{bsp}
+  $\Z[i]$ ist noethersch als endl. Erw. von $\Z$
+\end{bsp}
+
+\begin{prop}
+  Sei $A$ ein kommutativer noetherscher Ring und $S \subseteq A$ multiplikativ abgeschlossen.
+  Dann ist $S^{-1} A$ noethersch.
+\end{prop}
+
+\begin{kor}
+  Die Halme $A_\ppp$ eines komm. noeth. Rings $A$ sind noethersch.
+\end{kor}
+
+% 31.2. Der Hilbertsche Basissatz
+
+\begin{satz}[\emph{Hilbertscher Basissatz}]
+  Ist $A$ ein noetherscher kommutativer Ring, so ist auch der Polynomring $A[x]$ noethersch.
+\end{satz}
+
+\begin{kor}
+  Ist $A$ ein noetherscher kommutativer Ring, so ist auch der Polynomring $A[x_1, \ldots, x_n]$ noethersch.
+  Allgemeiner ist jede endlich erzeugte $A$-Algebra noethersch.
+\end{kor}
+
+\begin{prop}
+  Seien $A \subseteq B \subseteq C$ Erweiterungen von kommutativen Ringen.
+  Sei $A$ noethersch.
+  Sei $C$ endlich erzeugt als $A$-Algebra und endlich als $B$-Algebra.
+  Dann ist $B$ endlich erzeugt als $A$-Algebra.
+\end{prop}
+
+% 32. Primärzerlegung in noetherschen Ringen
+
+% 32.1. Irreduzible Ideale
+
+\begin{defn}
+  Sei $A$ ein komm. Ring.
+  Ein Ideal $\aaa \subseteq A$ heißt \emph{irreduzibel}, falls für je zwei Ideale $\bbb, \ccc \subseteq A$ gilt: \enspace
+  Ist $\aaa = \bbb \cap \ccc$, so gilt $\aaa \in \{ \bbb, \ccc \}$.
+\end{defn}
+
+\begin{lem}
+  Ist $A$ noethersch, so ist jedes Ideal von $A$ Schnitt von endlich vielen irreduziblen Idealen.
+\end{lem}
+
+\begin{lem}
+  Sei $A$ ein noetherscher kommutativer Ring und $\aaa \subseteq A$ ein irreduzibles Ideal.
+  Dann ist $\aaa$ ein Primärideal.
+\end{lem}
+
+% 32.2. Existenz der Primärzerlegung in noetherschen Ringen
+
+\begin{kor}
+  In noetherschen kommutativen Ringen ist jedes Ideal zerlegbar.
+\end{kor}
+
+\begin{prop}
+  Sei $A$ ein noetherscher kommutativer Ring.
+  Dann enthält jedes Ideal $\aaa \subseteq A$ eine Potenz $(\sqrt{\aaa})^n$ seines Wurzelideals.
+\end{prop}
+
+\begin{kor}
+  Sei $A$ ein noeth. komm. Ring.
+  Dann ist $\sqrt{(0)} \subseteq A$ nilpotent.
+\end{kor}
+
+\begin{kor}
+  Sei $A$ ein noeth. komm. Ring.
+  Für ein maximales Ideal $\mmm \subset A$ und ein weiteres Ideal $\qqq \subseteq A$ sind äquivalent:
+  \begin{itemize}
+    \miniitem{0.44 \linewidth}{$\qqq$ ist ein $\mmm$-primäres Ideal.}
+    \miniitem{0.17 \linewidth}{$\sqrt{\qqq} = \mmm$}
+    \miniitem{0.35 \linewidth}{$\ex{n \in \N} \mmm^n \subseteq \qqq \subseteq \mmm$}
+  \end{itemize}
+\end{kor}
+
+\begin{prop}
+  Sei $A$ ein noeth. komm. Ring und $\aaa \subseteq A$ ein Ideal.
+  Dann sind die zu $\aaa$ assoz. Ideale genau die Primideale von $A$ der Form $(\aaa : x)$ mit $x \in A$.
+\end{prop}
 
 \end{document}
