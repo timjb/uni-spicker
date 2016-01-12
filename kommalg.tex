@@ -2613,4 +2613,98 @@ Für $m=1$ folgt:
   Dann sind die zu $\aaa$ assoz. Ideale genau die Primideale von $A$ der Form $(\aaa : x)$ mit $x \in A$.
 \end{prop}
 
+% VIII. Artinsche Ringe
+\subsection{Artinsche Ringe}
+
+% 33. Artinsche Ringe
+
+% 33.1. Elementare Eigenschaften Artinscher Ringe
+
+\begin{prop}
+  Jedes Primideal in einem artinschen kommutativen Ring ist ein maximales Ideal.
+\end{prop}
+
+\begin{kor}
+  In einem artinschen komm. Ring ist das Nilradikal gleich dem Jacobsonschen Ideal.
+\end{kor}
+
+\begin{prop}
+  Ein artinscher kommutativer Ring hat nur endlich viele maximale Ideale.
+\end{prop}
+
+\begin{prop}
+  In einem artinschen komm. Ring ist das Nilradikal nilpotent.
+\end{prop}
+
+% 33.2. Der Struktursatz für artinsche kommutative Ringe
+
+\begin{defn}
+  Sei $A$ ein komm. Ring.
+  Eine \emph{Primidealkette} in~$A$ der Länge~$n$ ist eine streng aufsteigende Kette $\ppp_0 \subsetneq \ppp_1 \subsetneq \ldots \subsetneq \ppp_n$ von Primidealen in $A$.
+\end{defn}
+
+\begin{defn}
+  Die \emph{Dimension} $\dim A \in \{ - \infty \} \cup \N$ eines komm. Ringes $A$ ist das Supremum über die Längen aller Primidealketten in $A$.
+\end{defn}
+
+\begin{bspe}
+  \inlineitem{$\dim A \geq 0 \iff A \neq 0$} \quad
+  \inlineitem{$\dim K = 0$} \quad
+  \inlineitem{$\dim \Z = 1$}
+\end{bspe}
+
+\begin{satz}
+  Für einen komm. Ring $A \neq 0$ gilt:
+  \[
+    \text{$A$ ist artinsch} \iff \text{$A$ ist noethersch und $\dim A = 0$}
+  \]
+\end{satz}
+
+\begin{bem}
+  Ist $(A, \mmm)$ ein artinscher lokaler Ring, so ist~$\mmm$ das einzige Primideal von~$A$ und damit $\sqrt{(0)} = \mmm$.
+  Insbesondere ist $\mmm$ nilpotent und jedes Element von~$A$ entweder nilpotent oder eine Einheit.
+\end{bem}
+
+\begin{prop}
+  Sei $(A, \mmm)$ ein noetherscher lokaler Ring. \\
+  Dann tritt genau einer der folgenden Fälle ein:
+  \begin{itemize}
+    \item Für alle $n \in \N$ ist $\mmm^n \supsetneq m^{n+1}$.
+    \item Es ist $\mmm^n = (0)$ für ein $n \in \N$ und $A$ ist artinsch.
+  \end{itemize}
+\end{prop}
+
+\begin{satz}[\emph{Struktursatz} für artinsche kommutative Ringe] \mbox{} \\
+  Jeder artinsche kommutative Ring ist eindeutig (bis auf Isomorphie der Faktoren) ein direktes Produkt artinscher lokaler Ringe.
+\end{satz}
+
+% 33.3. Artinsche lokale Ringe
+
+\begin{defn}
+  Sei $(A, \mmm, F)$ ein lokaler Ring.
+  Dann heißt der $F$-Vektorraum $\mmm / \mmm^2$ \emph{Zariskischer Kotangentialraum} von $A$.
+\end{defn}
+
+\begin{bem}
+  $\mmm / \mmm^2$ ist die spezielle Faser von $\mmm$ als $A$-Modul.
+  Ist $\mmm$ als $A$-Modul endlich erzeugt, so auch $\mmm / \mmm^2$ als $F$-Vektorraum.
+\end{bem}
+
+\begin{prop}
+  Für einen artinschen lokalen Ring $(A, \mmm, F)$ sind äquivalent:
+  \begin{itemize}
+    \item Jedes Ideal in $A$ ist ein Hauptideal (also $A$ ein HIB).
+    \item Das max. Ideal $\mmm$ ist ein Hauptideal.
+    \item Es gilt $\dim \mmm / \mmm^2 \leq 1$.
+  \end{itemize}
+\end{prop}
+
+\begin{bspe}
+  Artinsche lokale Ringe sind:
+  \begin{itemize}
+    \miniitem{0.43 \linewidth}{$\Z/(p^n)$, wobei $p$ prim ist} \quad
+    \miniitem{0.52 \linewidth}{$K[x]/(f^n)$, wobei $f$ irreduzibel ist}
+  \end{itemize}
+\end{bspe}
+
 \end{document}
