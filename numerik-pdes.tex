@@ -1994,7 +1994,57 @@ Idee: Betrachte den Operator $\pi : H \to U_n, \enspace w \mapsto \pi w$, sodass
     \[
       \abs{v}_{H^l(K)} \coloneqq \left( \Int{K}{}{\sum_{\abs{\alpha} = l} \norm{\DO^\alpha v}^2} {x}\right)^{\nicefrac{1}{2}}.
     \]
+    \item $v \in H^l(K) \iff \hat{v} \in H^l(\hat{K})$
   \end{itemize}
 \end{lem}
+
+% Vorlesung vom 12.1.2015
+
+\begin{defn}
+  Sei $K$ ein $d$-Simplex mit den Ecken $a_1, \ldots, a_{d+1}$.
+  \begin{itemize}
+    \item $h(K) \coloneqq \max_{i,j} \abs{a_i - a_j}$ heißt \emph{Durchmesser} von $K$
+    \item $\rho(K) = 2 \sup \Set{R > 0}{\ex{x \in K} B_R(x) \subseteq K}$ heißt \emph{Innendurchmesser} von $K$.
+    \item $\sigma(K) = \nicefrac{h(K)}{\rho(K)}$
+  \end{itemize}
+\end{defn}
+
+\begin{lem}
+  Sei $K$ affin äquivalent zu $\hat{K}$ vermöge $F : \hat{K} \to K$ mit $F(\hat{x}) = A \hat{x} + b$.
+  Dann gilt:
+  \[
+    \norm{A}_2 \leq \nicefrac{h(K)}{\rho(\hat{K})}, \quad
+    \norm{A^{-1}}_2 \leq \nicefrac{h(\hat{K})}{\rho(K)}.
+  \]
+\end{lem}
+
+% 5.7
+\begin{lem}
+  Sei $k \geq 0$.
+  Dann existiert eine Konstante $c > 0$, sodass
+  \[
+    \inf_{\hat{p} \in P_k(\hat{K})} \norm{\hat{v} - \hat{p}}_{H^{k+1}(\hat{K})} \leq c \abs{\hat{v}}_{H^{k+1}(\hat{K})}.
+  \]
+\end{lem}
+
+% 5.8
+\begin{satz}[Abschätzung des lokalen Interpolationsfehlers] \mbox{} \\
+  Seien $(\hat{K}, P(\hat{K}), \Sigma(\hat{K}))$ ein finites Element vom Lagrange-Typ.
+  Dann existiert eine Konstante $c_K > 0$, sodass für alle zu $(\hat{K}, P(\hat{K}), \Sigma (\hat{K}))$ affin äquivalente Elemente $(K, P(K), \Sigma(K))$ und für alle $v \in H^{k+1}(K)$ gilt:
+  \[
+    \abs{v - \Pi_k v}_{H^r(K)} \leq c_K \frac{h(K)^{k+1}}{\rho(K)^r} \abs{v}_{H^{k+1}(K)}
+  \]
+  falls $0 \leq r \leq k+1$ und $H^{k+1}(\hat{K}) \hookrightarrow \Cont^s(\hat{K})$ ($s < k+1-\tfrac{d}{2}$), $\mathbb{P}_k(\hat{K}) \subseteq P(\hat{K}) \subset H^r(\hat{K})$.
+\end{satz}
+
+Im Beweis des Satzes wird klar:
+
+$\Pi_k$ ist der $P_K$-Interpolationsoperator, da $\Pi_K v \in P(K)$, $b_j (\Pi_k v) = b_j(v)$.
+
+\begin{kor}
+  Seien die Voraussetzungen des letzten Satzes für das finite Element $(\hat{K}, P(\hat{K}), \Sigma(\hat{K}))$ erfüllt.
+  Sei eine Familie von finiten affin äquivalenten Elementen $(K, P(K), \Sigma(K))$ gegeben.
+  Dann existiert eine Konstante $\tilde{c}_K > 0$, sodass für alle Elemente der Familie $h(K) \leq 1$ und für alle $v \in H^{k+1}(K)$ gilt: $\norm{v - \Pi_k v}_{H^{k+1}(K)} \leq \tilde{c}_K \frac{h_(K)^{k+1}}{\rho(K)^r} \abs{v}_{H^{k+1}(K)} = \tilde{c}_K \sigma(K)^r h(K)^{k+1-r} \abs{v}_{H^{k+1}(K)}$.
+\end{kor}
 
 \end{document}
