@@ -42,6 +42,7 @@
 \newcommand{\PCE}[1]{\widehat{#1}} % Parity-Check-Erweiterung
 \DeclareMathOperator{\trace}{trace} % Spur
 \DeclareMathOperator{\ggT}{ggT} % größter gemeinsamer Teiler
+\DeclareMathOperator{\ord}{ord} % Ordnung
 
 \begin{document}
 
@@ -2033,5 +2034,73 @@ Zu $f : \F_q^n \to V$ definieren wir eine \emph{transformierte Abbildung} durch
   \end{itemize}
 \end{satz}
 
+% Vorlesung vom 12.1.2015
+
+Sei $C$ ein $[n, k, d]$-Code über $\F_q$.
+Dann ist $C^\perp$ ein $[n, k^\perp, d^\perp]$-Code mit $k^\perp = n - k$.
+Frage: Was ist $d^\perp$?
+Falls $C$ ein MDS-Code ist, so ist $k = n - d + 1$, also $k^\perp = n - k = d - 1$
+
+\begin{satz}
+  Ist $C$ ein linearer MDS-Code, so ist auch $C^\perp$ ein linearer MDS-Code.
+\end{satz}
+
+% §10.4. Reed-Solomon-Codes
+
+\begin{lem}
+  $(\Z_{q-1}, +, 0) \cong (\F_q^{\times}, \cdot, 1)$.
+  Der Isomorphismus ist gegeben durch $1 \mapsto \beta$, wobei $\beta \in \F_q^{\times}$ mit $\ord{\beta} = q-1$.
+  Solche $\beta$ heißen \emph{primitive Elemente}.
+\end{lem}
+
+\begin{bem}
+  Die Anzahl primitiver Elemente in $\F_q^{\times}$ ist $\phi(q-1)$, wobei $\phi$ die Eulersche $\phi$-Funktion ist.
+\end{bem}
+
+\begin{defn}
+  Betrachte $\F_q$.
+  Wähle ein $n$ mit $n \leq q-1$.
+  % $q$ groß, z.B. q = 256
+  Sei $\beta$ ein primitives Element von $\F_q$.
+  Sei $l \in \N$ mit $1 \leq l \leq n$.
+  Setze $P_l \coloneqq \Set{f(x) \in \F_q[x]}{\deg(f) < l}$
+  Betrachte
+  \[
+    \epsilon = \epsilon_\beta : P_l \to \F_q^n, \quad
+    f(x) \mapsto (f(\beta), f(\beta^2), \ldots, f(\beta^n)).
+  \]
+  Dann heißt $C \coloneqq \im \epsilon$ ein \emph{Reed-Solomon-Code}.
+\end{defn}
+
+\begin{satz}
+  Jeder Reed-Solomon-Code ist ein linearer MDS-Code.
+\end{satz}
+
+% Beweis: $\epsilon$ ist injektiv
+
+\begin{bsp}
+  Sei $q = 8$, $n = 7$.
+  Wir wollen einen 2-Fehler-korrigierenden MDS-Code $C$ über $\F_8$ konstruieren.
+  Somit $t = 2$, also $d = 2t + 1 = 5$.
+  Dann: $k = n - d + 1 = 7 - 5 + 1 = 3$.
+  Dann ist
+  \[
+    \begin{pmatrix}
+      1 & 1 & 1 & 1 & 1 & 1 & 1 \\
+      1 & \beta & \beta^2 & \beta^3 & \beta^4 & \beta^5 & \beta^6 \\
+      1 & \beta^2 & \beta^4 & \beta^6 & \beta & \beta^3 & \beta^5
+    \end{pmatrix}
+  \]
+  eine Generatormatrix von $C$.
+\end{bsp}
+
+\begin{bsp}
+  Sei $q = 11$, $\F_{11} \cong \Z_{11}$.
+  Gesucht ist ein $[10, 6, 5]$-MDS-Code $C$ über $\F_{11}$.
+  Wir wissen, dass $C^\perp$ dann ein $[10, 4, 7]$-Code ist.
+  Diesen können wir als Reed-Solomon-Code konstruieren.
+\end{bsp}
+
+% ausgelassen: Rest des Beispiels, insbesondere Decodierung
 
 \end{document}
