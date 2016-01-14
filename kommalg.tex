@@ -60,6 +60,8 @@
 \newcommand{\mmm}{\mathfrak{m}}
 \newcommand{\nnn}{\mathfrak{n}}
 
+\newcommand{\thra}{\twoheadrightarrow}
+
 % Abkürzungen
 \newcommand{\keS}{k.\,e.\,S.} % kurze exakte Sequenz
 
@@ -1798,7 +1800,7 @@ Mit der Exaktheit der Lokalisierung folgt:
 \end{bsp}
 
 \begin{prop}
-  Sei $A$ ein komm. Ring und $S \subseteq A$ mult. abgeschlossen.
+  Sei $A$ ein komm. Ring und $S \subseteq A$ mult. abgeschlossen. \\
   Ein Ideal $\aaa \subset A$ ist genau dann ein kontrahiertes Ideal bezüglich $A \to S^{-1} A$, wenn kein Element von $S$ ein Nullteiler in $A/\aaa$ ist.
 \end{prop}
 
@@ -1826,8 +1828,9 @@ Mit der Exaktheit der Lokalisierung folgt:
   Sei $A$ ein komm. Ring und $S \subseteq A$ mult. abgeschlossen.
   Folgende Korrespondenz ist bijektiv und monoton:
   \[
+    \arraycolsep=4pt
     \begin{array}{r c l}
-      \{ \text{ Primideale $\ppp \subset A$ mit $\ppp \cap S = \emptyset$ } \} & \leftrightarrow & \{ \text{ Primideale $\qqq \subset S^{-1} A$ } \} \\
+      \{ \text{ Primideale $\ppp \!\subset\! A$ mit $\ppp \cap S = \emptyset$ } \} & \leftrightarrow & \{ \text{ Primideale $\qqq \subset S^{-1} A$ } \} \\
       \ppp & \mapsto & S^{-1} \ppp = (S^{-1} A) \ppp \\
       A \cap \qqq & \mapsfrom & \qqq
     \end{array}
@@ -1837,6 +1840,7 @@ Mit der Exaktheit der Lokalisierung folgt:
 \begin{kor}
   Für ein Primideal $\rrr \subset A$ liefert dies eine Korrespondenz
   \[
+    \arraycolsep=4pt
     \begin{array}{r c l}
       \{ \text{ Primideale $\ppp \subset A$ mit $\ppp \subseteq \rrr$ } \} & \leftrightarrow & \{ \text{ Primideale $\qqq \subset A_\rrr$ } \}
     \end{array}
@@ -2151,12 +2155,11 @@ Für $m=1$ folgt:
 \end{kor}
 
 \begin{kor}
-  Sei $C$ der ganze Abschluss von $A$ in $B$. \\
-  Dann ist $C$ ganz abgeschlossen in $B$.
+  Der ganze Abschluss von $A$ in $B$ ist in $B$ ganz abgeschlossen.
 \end{kor}
 
 \begin{prop}
-  Sei $A \subseteq B$ eine ganze Erw. komm. Ringe.
+  Sei $A \subseteq B$ eine ganze Erweiterung komm. Ringe.
   Dann gilt:
   \begin{itemize}
     \item Für jedes Ideal $\bbb \subseteq B$ ist $B/\bbb$ ganz über $A / (A \cap \bbb)$.
@@ -2210,25 +2213,18 @@ Für $m=1$ folgt:
   Dann ist $B$ genau dann ein Körper, wenn $A$ ein Körper ist.
 \end{prop}
 
-\begin{kor}
-  Sei $A \subseteq B$ eine ganze Erweiterung komm. Ringe und $\qqq \subset B$ ein Primideal.
-  Dann gilt: \enspace
-  $\qqq \subset B$ maximal $\iff$ $A \cap \qqq \subset A$ maximal.
-\end{kor}
-
-% 26.2. Primideale in ganzen Erweiterungen
-
-\begin{kor}
+\begin{prop}
   Sei $A \subseteq B$ eine ganze Erweiterung komm. Ringe.
-  Seien $\qqq \subseteq \qqq'$ zwei Primideale in $B$ mit $\ppp \coloneqq A \cap \qqq = A \cap \qqq'$.
-\end{kor}
+  Dann gilt:
+  \begin{itemize}
+    \item Ein Primideal $\qqq \subset B$ ist maximal $\iff$ $A \cap \qqq \subset A$ ist maximal.
+    % 26.2. Primideale in ganzen Erweiterungen
+    \item Für Primideale $\qqq \subseteq \qqq' \subseteq B$ gilt $A \cap \qqq = A \cap \qqq' \iff \qqq = \qqq'$.
+    \item Für jedes Primideal $\ppp \subset A$ ex. ein Primideal $\qqq \subset B$ mit $A \cap \qqq = \ppp$.
+  \end{itemize}
+\end{prop}
 
-\begin{satz}
-  Sei $A \subseteq B$ eine ganze Erweiterung komm. Ringe und $\ppp \subset A$ ein Primideal.
-  Dann existiert ein Primideal $\qqq \subset B$ mit $A \cap \qqq = \ppp$.
-\end{satz}
-
-\begin{satz}["`Going up"']
+\begin{satz}["`\emph{Going up}"']
   Sei $A \subseteq B$ eine ganze Erw. komm. Ringe. \\
   Sei $\ppp_1 \subsetneq \nldots \subsetneq \ppp_n$ eine Kette von Primidealen in $A$ und $\qqq_1 \subset B$ ein Primideal mit $A \cap \qqq_1 = \ppp_1$.
   Dann gibt es eine Kette $\qqq_1 \subsetneq \ldots \subsetneq \qqq_n$ von Primidealen in $B$ mit $A \cap \qqq_i = \ppp_i$ für $i = 1, \ldots, n$.
@@ -2295,7 +2291,7 @@ Für $m=1$ folgt:
 
 % 27.3. Der zweite Cohen-Seidenbergsche Satz
 
-\begin{satz}["`Going-down"']
+\begin{satz}["`\emph{Going down}"']
   Sei $A \subseteq B$ eine ganze Erw. von Integritäts- bereichen und $A$ ganz abgeschlossen.
   Sei $\ppp_1 \supsetneq \nldots \supsetneq \ppp_n$ eine Kette von Primidealen in $A$ und $\qqq_1 \subset B$ ein Primideal mit $A \cap \qqq_1 = \ppp_1$. \\
   Dann gibt es eine Kette $\qqq_1 \supsetneq \ldots \supsetneq \qqq_n$ von Primidealen in $B$ mit $A \cap \qqq_i = \ppp_i$ für $i = 1, \ldots, n$.
@@ -2360,8 +2356,8 @@ Für $m=1$ folgt:
 \end{kor}
 
 \begin{kor}[Schwacher Hilbertscher Nullstellensatz]
-  Ist $\mmm$ ein maximales Ideal einer endlich erzeugten $K$-Algebra~$A$, so ist $A/\mmm$ eine endliche algebraische Erweiterung von~$K$.
-  Insbesondere ist $A/\mmm \cong K$, falls $K$ algebraisch abgeschlossen ist.
+  Ist $\mmm$ ein max. Ideal einer endl. erz. $K$-Algebra~$A$, so ist $A/\mmm$ eine endl. alg. Erweiterung von~$K$.
+  Insb. ist $A/\mmm \cong K$, falls $K$ algebraisch abgeschlossen ist.
 \end{kor}
 
 % VI. Kettenbedingungen
@@ -2415,7 +2411,7 @@ Für $m=1$ folgt:
 \end{prop}
 
 \begin{kor}
-  Die endliche direkt Summe von noetherschen/artinschen $A$-Moduln ist noethersch/artinsch.
+  Die endliche direkte Summe von noetherschen/artinschen $A$-Moduln ist noethersch/artinsch.
 \end{kor}
 
 % 29.2. Noethersche und Artinsche Ringe
@@ -2518,12 +2514,11 @@ Für $m=1$ folgt:
 
 % nach hinten gezogen
 \begin{prop}
-  Sei $\aaa \subseteq A$ ein Ideal in einem noetherschen Ring $A$. \\
-  Dann ist auch der Ring $A / \aaa$ noethersch.
+  Der Quotient $A / \aaa$ eines noetherschen Rings $A$ ist noethersch.
 \end{prop}
 
 \begin{kor}
-  Sei $\phi : A \to B$ ein Ringhomomorphismus. \\
+  Sei $\phi : A \to B$ ein Ringhomo.
   Ist $A$ noethersch, so auch $\phi(A)$.
 \end{kor}
 
@@ -2573,44 +2568,24 @@ Für $m=1$ folgt:
   Ist $\aaa = \bbb \cap \ccc$, so gilt $\aaa \in \{ \bbb, \ccc \}$.
 \end{defn}
 
-\begin{lem}
-  Ist $A$ noethersch, so ist jedes Ideal von $A$ Schnitt von endlich vielen irreduziblen Idealen.
-\end{lem}
-
-\begin{lem}
-  Sei $A$ ein noetherscher kommutativer Ring und $\aaa \subseteq A$ ein irreduzibles Ideal.
-  Dann ist $\aaa$ ein Primärideal.
-\end{lem}
-
-% 32.2. Existenz der Primärzerlegung in noetherschen Ringen
-
-\begin{kor}
-  In noetherschen kommutativen Ringen ist jedes Ideal zerlegbar.
-\end{kor}
-
 \begin{prop}
   Sei $A$ ein noetherscher kommutativer Ring.
-  Dann enthält jedes Ideal $\aaa \subseteq A$ eine Potenz $(\sqrt{\aaa})^n$ seines Wurzelideals.
-\end{prop}
-
-\begin{kor}
-  Sei $A$ ein noeth. komm. Ring.
-  Dann ist $\sqrt{(0)} \subseteq A$ nilpotent.
-\end{kor}
-
-\begin{kor}
-  Sei $A$ ein noeth. komm. Ring.
-  Für ein maximales Ideal $\mmm \subset A$ und ein weiteres Ideal $\qqq \subseteq A$ sind äquivalent:
+  Dann gilt:
   \begin{itemize}
-    \miniitem{0.44 \linewidth}{$\qqq$ ist ein $\mmm$-primäres Ideal.}
-    \miniitem{0.17 \linewidth}{$\sqrt{\qqq} = \mmm$}
-    \miniitem{0.35 \linewidth}{$\ex{n \in \N} \mmm^n \subseteq \qqq \subseteq \mmm$}
+    \item Jedes Ideal von~$A$ ist Schnitt von endlich vielen irred. Idealen.
+    \item Jedes irreduzible Ideal von~$A$ ist ein Primärideal.
+    % 32.2. Existenz der Primärzerlegung in noetherschen Ringen
+    \item Folglich ist in~$A$ jedes Ideal zerlegbar.
+    \item Jedes Ideal $\aaa \subseteq A$ enthält eine Potenz $(\sqrt{\aaa})^n$ seines Wurzelideals.
+    \item Insbesondere ist $\sqrt{(0)} \subseteq A$ nilpotent.
+    \item Für ein max. Ideal $\mmm \subset A$ und ein Ideal $\qqq \subseteq A$ sind äquivalent:
+    \begin{itemize}
+      \miniitem{0.46 \linewidth}{$\qqq$ ist ein $\mmm$-primäres Ideal.}
+      \miniitem{0.18 \linewidth}{$\sqrt{\qqq} = \mmm$}
+      \miniitem{0.33 \linewidth}{$\ex{n \!\in\! \N\!}\! \mmm^n \subseteq \qqq \!\subseteq\! \mmm$}
+    \end{itemize}
+    \item Die zu einem Ideal $\aaa \subseteq A$ assoziierten Ideale sind genau die Primideale von~$A$ der Form $(\aaa : x)$ mit $x \in A$.
   \end{itemize}
-\end{kor}
-
-\begin{prop}
-  Sei $A$ ein noeth. komm. Ring und $\aaa \subseteq A$ ein Ideal.
-  Dann sind die zu $\aaa$ assoz. Ideale genau die Primideale von $A$ der Form $(\aaa : x)$ mit $x \in A$.
 \end{prop}
 
 % VIII. Artinsche Ringe
@@ -2621,26 +2596,21 @@ Für $m=1$ folgt:
 % 33.1. Elementare Eigenschaften Artinscher Ringe
 
 \begin{prop}
-  Jedes Primideal in einem artinschen kommutativen Ring ist ein maximales Ideal.
-\end{prop}
-
-\begin{kor}
-  In einem artinschen komm. Ring ist das Nilradikal gleich dem Jacobsonschen Ideal.
-\end{kor}
-
-\begin{prop}
-  Ein artinscher kommutativer Ring hat nur endlich viele maximale Ideale.
-\end{prop}
-
-\begin{prop}
-  In einem artinschen komm. Ring ist das Nilradikal nilpotent.
+  Sei $A$ ein artinscher kommutativer Ring.
+  Dann gilt:
+  \begin{itemize}
+    \item Jedes Primideal $\ppp \subset A$ ist ein maximales Ideal.
+    \item Das Nilradikal ist gleich dem Jacobsonschen Ideal.
+    \item $A$ besitzt nur endlich viele maximale Ideale (\dh{} $A$ ist halblokal).
+    \item Das Nilradikal von $A$ ist nilpotent.
+  \end{itemize}
 \end{prop}
 
 % 33.2. Der Struktursatz für artinsche kommutative Ringe
 
 \begin{defn}
   Sei $A$ ein komm. Ring.
-  Eine \emph{Primidealkette} in~$A$ der Länge~$n$ ist eine streng aufsteigende Kette $\ppp_0 \subsetneq \ppp_1 \subsetneq \ldots \subsetneq \ppp_n$ von Primidealen in $A$.
+  Eine \emph{Primidealkette} der Länge~$n$ in~$A$ ist eine Kette $\ppp_0 \subsetneq \ppp_1 \subsetneq \ldots \subsetneq \ppp_n$ von Primidealen in $A$.
 \end{defn}
 
 \begin{defn}
@@ -2654,7 +2624,7 @@ Für $m=1$ folgt:
 \end{bspe}
 
 \begin{satz}
-  Für einen komm. Ring $A \neq 0$ gilt:
+  Für einen kommutativen Ring $A \neq 0$ gilt:
   \[
     \text{$A$ ist artinsch} \iff \text{$A$ ist noethersch und $\dim A = 0$}
   \]
@@ -2694,8 +2664,8 @@ Für $m=1$ folgt:
   Für einen artinschen lokalen Ring $(A, \mmm, F)$ sind äquivalent:
   \begin{itemize}
     \item Jedes Ideal in $A$ ist ein Hauptideal (also $A$ ein HIB).
-    \item Das max. Ideal $\mmm$ ist ein Hauptideal.
-    \item Es gilt $\dim \mmm / \mmm^2 \leq 1$.
+    \item Das maximale Ideal $\mmm$ ist ein Hauptideal.
+    \item Es gilt $\dim_F \mmm / \mmm^2 \leq 1$.
   \end{itemize}
 \end{prop}
 
@@ -2706,5 +2676,132 @@ Für $m=1$ folgt:
     \miniitem{0.52 \linewidth}{$K[x]/(f^n)$, wobei $f$ irreduzibel ist}
   \end{itemize}
 \end{bspe}
+
+% IX. Diskrete Bewertungsringe und Dedekindsche Bereiche
+
+% 34. Diskrete Bewertungsringe
+\section{Diskrete Bewertungsringe}
+
+% 34.1. Eindimensionale noethersche Integritätsbereiche
+
+\begin{prop}
+  Sei $A$ ein eindimensionaler noetherscher Integritätsbereich.
+  Dann kann jedes Ideal $0 \subsetneq \aaa \subseteq A$ eindeutig als Produkt von primären Idealen mit paarweise verschiedenen Wurzelidealen geschrieben werden.
+\end{prop}
+
+% 34.2. Diskrete Bewertungsringe
+
+\begin{defn}
+  Eine \emph{diskrete Bewertung} auf einem Körper $K$ ist eine surjektive Abbildung $\nu : K \thra \Z \cap \{ \infty \}$, für die gilt:
+  \[
+    \nu^{-1}(\infty) = \{ 0 \}, \quad
+    \nu(xy) = \nu(x) + \nu(y), \quad
+    \nu(x + y) \geq \min (\nu(x), \nu(y)).
+  \]
+\end{defn}
+
+\begin{lem}
+  \inlineitem{$\nu(1) = 0$} \quad
+  \inlineitem{$\nu(x^{-1}) = - \nu(x)$}
+\end{lem}
+
+\begin{defn}
+  Der \emph{Bewertungsring} von $K$ (zu $\nu$) ist der Unterring
+  \[
+    \Set{x \in K}{\nu(x) \geq 0} \subset K.
+  \]
+\end{defn}
+
+\begin{lem}
+  Der Bewertungsring von $K$ zu $\nu$ ist in der Tat ein solcher.
+\end{lem}
+
+\begin{defn}
+  Ein Integritätsbereich $A$ heißt \emph{diskreter Bewertungsring}, falls $A$ der Bewertungsring einer diskreten Bewertung auf dem Quotientenkörper~$K$ von~$A$ ist.
+\end{defn}
+
+\begin{prop}
+  Sei $A$ ein diskreter Bewertungsring mit Bewertung $\nu : K \to \Z \cup \{ \infty \}$.
+  Dann gilt:
+  \begin{itemize}
+    \miniitem{0.45 \linewidth}{$x \in A^{\times} \iff \nu(x) = 0$}
+    \miniitem{0.45 \linewidth}{$\nu(x) = \nu(y) \iff (x) = (y)$}
+    \item $A$ ist ein lokaler Ring mit max. Ideal $\mmm \coloneqq \Set{x \in A}{\nu(x) > 0}$.
+    \item Jedes Ideal in $A$ hat die Form $\mmm_k = \nu^{-1}([k, \infty])$ mit $k \in \N \cup \{ \infty \}$. \\
+    \miniitem{0.45 \linewidth}{$A$ ist noethersch.}
+    \miniitem{0.45 \linewidth}{$A$ ist eindimensional.}
+    \item Jedes nichtverschwindende Ideal in $A$ ist eine Potenz von $\mmm$.
+  \end{itemize}
+\end{prop}
+
+\begin{bspe}
+  \begin{itemize}
+    \item Sei $p$ eine Primzahl.
+    Jedes $y \in \Q^{\times}$ kann man als $y = p^n \tfrac{s}{t}$ mit $p \nmid s$, $p \nmid t$ schreiben.
+    Dabei ist $n \!=\! n_y \in \Z$ eindeutig festgelegt.
+    Setze $\nu(x) \coloneqq n_y$ und $\nu(0) \coloneqq \infty$.
+    Dann ist $\nu$ eine Bewertung auf $\Q$ mit Bewertungsring $\Z_{(p)}$.
+    \item Sei $F$ ein Körper und $F(x) \coloneqq \Set{\tfrac{h}{g}}{h, g \in F[x], g \neq 0}$ der Körper der rationalen Fktn über~$F$ in~$x$.
+    Sei $f \in F[x]$ irreduzibel.
+    Jedes $y \in F(x)^{\times}$ kann man als $y = f^n \tfrac{h}{g}$ mit $p \nmid h$, $p \nmid g$ schreiben.
+    Dabei ist $n \!=\! n_y \in \Z$ eind. festgelegt.
+    Setze $\nu(x) \coloneqq n_y$ und $\nu(0) \coloneqq \infty$.
+    Dann ist $\nu$ eine Bewertung auf $F(x)$ mit Bewertungsring $F[x]_{(f)}$.
+  \end{itemize}
+\end{bspe}
+
+% 34.3. Charakterisierungen diskreter Bewertungsringe
+
+\begin{prop}
+  Sei $(A, \mmm, F)$ ein eindimensionaler noetherscher lokaler Integritätsbereich.
+  Dann sind äquivalent:
+  \begin{itemize}
+    \miniitem{0.6 \linewidth}{$A$ ist ein diskreter Bewertungsring.}
+    \miniitem{0.35 \linewidth}{$\mmm$ ist ein Hauptideal.}
+    \miniitem{0.6 \linewidth}{$A$ ist ganz abgeschlossen.}
+    \miniitem{0.35 \linewidth}{$\dim_F \mmm/\mmm^2 = 1$}
+    \item Jedes (nicht verschwindende) Ideal von $A$ ist eine Potenz von $\mmm$.
+    \item $\ex{x \in A} \fa{\text{Ideal } \aaa \subseteq A} \ex{n \in \N} \aaa = (x^n)$
+  \end{itemize}
+\end{prop}
+
+% 36. Dedekindsche Bereiche
+\section{Dedekindsche Bereiche}
+
+% 36.1. Charakterisierung Dedekindscher Bereiche
+
+\begin{lemdefn}
+  Ein eindim. noetherscher Integritätsbereich~$A$ heißt \emph{Dedekindscher Bereich}, wenn er die folgenden äquivalenten Bedingungen erfüllt:
+  \begin{itemize}
+    \item $A$ ist ganz abgeschlossen.
+    \item Jedes Primärideal in $A$ ist Potenz eines Primideals.
+    \item Für jedes Primideal $\ppp \neq (0)$ ist $A_\ppp$ ein diskr. Bewertungsbereich.
+  \end{itemize}
+\end{lemdefn}
+
+\begin{kor}
+  In einem Dedekindschen Bereich lässt sich jedes Ideal $\aaa \neq (0)$ als eindeutiges Produkt von Primidealen schreiben.
+\end{kor}
+
+% 36.2. Beispiele Dedekindscher Bereiche
+
+\begin{bsp}
+  Jeder HIB ist ein Dedekindscher Bereich.
+\end{bsp}
+
+\begin{satz}
+  Sei $K$ ein Zahlkörper, also eine endliche Erweiterung von~$\Q$.
+  Dann ist der Ring der ganzen Zahlen in~$K$, \dh{} der ganze Abschluss von $\Z$, ein Dedekindscher Bereich.
+\end{satz}
+
+% 37. Gebrochene Ideale
+
+% 37.1. Gebrochene Ideale
+
+% 37.2. Invertierbare Ideale
+
+% 37.3. Gebrochene Ideale in Dedekindschen Bereichen
+
+% 37.4. Anmerkungen zur Idealklassengruppe
 
 \end{document}
