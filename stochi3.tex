@@ -1769,18 +1769,54 @@ $\mathrm{MASE}(\hat{\mu}_n) = \tfrac{1}{n} \sum_{i=1}^n \mathrm{MSE}(\hat{\mu}_n
   wobei die Konvergenz von $o(\blank)$ sogar gleichmäßig in abgeschlossenen $t$-Intervallen ist.
 \end{satz}
 
-Nächstes Ziel: Bestimmung einer optimalen Bandbreite $h_n$
+\begin{ziel}
+  Bestimmung einer optimalen Bandbreite $h_n$
+\end{ziel}
 
 \begin{satz}
-  Sei $f \in \Cont^2(\R^1)$ mit $f'' \in L^2(\R^1)$ und $f, \abs{f'} \leq A < \infty$.
-  Für die Kernfunktion $K$ gelte $0 \leq K(x) \leq B$, $K(-x) = K(x)$ und $\IInt{x^2 K(x)}{x} < \infty$.
-  Dann gilt für $(h_n)_{n \in \N}$ mit $h_n \downarrow 0$ und $n h_n \to \infty$ für $n \to \infty$:
+  Sei $f \in \Cont^2(\R^1)$ mit $f'' \in L^2(\R^1)$ und $f, \abs{f'} \leq A < \infty$. \\
+  Für $K$ gelte $0 \leq K(x) \leq B$, $K(-x) = K(x)$ und $\IInt{x^2 K(x)}{x} < \infty$. \\
+  Dann gilt für $(h_n)_{n \in \N}$ mit $h_n \downarrow 0$ und $n h_n \xra[n \to \infty]{} \infty$:
   \begin{align*}
     \MISE(\hat{f}_n) = & \tfrac{1}{n h_n} \IInt{K^2(x)}{x} + \tfrac{h_n^4}{4} \left( \IInt{x^2 K(x)}{x} \right)^2 \IInt{(f''(t))^2}{t} \\
     & + o(h_n^4) + o(\tfrac{1}{n h_n}) \qquad
     \text{für } n \to \infty.
   \end{align*}
 \end{satz}
+
+% Vorlesung vom 14.1.2015
+
+Optimale Wahl von $h_n$:
+
+Gleichsetzen der beiden echten Fehlerterme:
+
+\[
+  \tfrac{1}{n h_n} \IInt{K^2(x)}{x} = \tfrac{h_n^4}{4} \left( \IInt{x^2 K(x)}{x} \right) \IInt{(f''(t))^2}{t}
+\]
+
+Es folgt $h_n^{*} = \tfrac{c^*}{n^{\nicefrac{1}{5}}}$ mit $c^* \coloneqq \left( \frac{4 \IInt{K(x)^2}{x}}{(\IInt{x^2 K(x)}{x})^2 \IInt{(f''(t))^2}{t}} \right)^{\nicefrac{1}{5}}$
+
+und $\MISE(\hat{f}_n) = \tfrac{\sqrt[5]{8}}{n^{\nicefrac{4}{5}}} \left( \IInt{(f''(t))^2}{t} \right)^{\nicefrac{1}{5}} \left( \IInt{x^2 K(x)}{x} \right)^{\nicefrac{2}{5}} \left( \IInt{K(x)^2}{x} \right)^{\nicefrac{4}{5}} + o(n^{- \nicefrac{4}{5}})$
+
+Optimale Wahl der Kernfunktion $K$:
+
+\[
+  \IInt{x^2 K(x)}{x} \left( \IInt{K(x)^2}{x} \right)^2 \to \text{Min}
+\]
+unter der Nebenbedingung $\IInt{K(x)}{x} = 1$ und $K(x) \geq 0$.
+
+\begin{satz}
+  Sei $K$ eine Kernfunktion mit $\IInt{K(x)}{x} = 1$.
+  Dann gilt für $\alpha > 0$:
+  \[
+    \left( \IInt{K(x)^2}{x} \right)^\alpha \IInt{\abs{x}^\alpha \abs{K(x)}}{x} \geq \tfrac{1}{2 \alpha + 1} \left( \tfrac{\alpha + 1}{2 \alpha + 1} \right)^\alpha
+  \]
+  Gleichheit gilt für $K_0(x) = \tfrac{\alpha+1}{2 \alpha} (1 - \abs{x}^\alpha) \ind_{\cinterval{-1}{1}} (x)$
+\end{satz}
+
+\begin{defn}
+  Für $\alpha = 2$ heißt $K_0(x) \coloneqq \tfrac{3}{4} (1 - x^2) \ind_{\cinterval{-1}{1}} (x)$ \emph{Epanetschnikow-Kern}.
+\end{defn}
 
 \end{document}
 
