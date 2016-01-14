@@ -1945,7 +1945,7 @@ Zu $f : \F_q^n \to V$ definieren wir eine \emph{transformierte Abbildung} durch
 \end{beweisidee}
 
 \begin{satz}
-  Es gibt keinen $6$-ären $(7, 6^5, 3)$-Code. (Solch ein Code wäre perfekt.)
+  Es gibt keinen (perfekten) $6$-ären $(7, 6^5, 3)$-Code.
 \end{satz}
 
 \begin{defn}
@@ -2059,11 +2059,11 @@ Falls $C$ ein MDS-Code ist, so ist $k = n - d + 1$, also $k^\perp = n - k = d - 
 
 \begin{defn}
   Betrachte $\F_q$.
-  Wähle ein $n$ mit $n \leq q-1$.
+  Wähle ein $n$ mit $n < q$.
   % $q$ groß, z.B. q = 256
   Sei $\beta$ ein primitives Element von $\F_q$.
   Sei $l \in \N$ mit $1 \leq l \leq n$.
-  Setze $P_l \coloneqq \Set{f(x) \in \F_q[x]}{\deg(f) < l}$
+  Setze $P_l \coloneqq \Set{f(x) \in \F_q[x]}{\deg(f) < l}$.
   Betrachte
   \[
     \epsilon = \epsilon_\beta : P_l \to \F_q^n, \quad
@@ -2101,6 +2101,97 @@ Falls $C$ ein MDS-Code ist, so ist $k = n - d + 1$, also $k^\perp = n - k = d - 
   Diesen können wir als Reed-Solomon-Code konstruieren.
 \end{bsp}
 
-% ausgelassen: Rest des Beispiels, insbesondere Decodierung
+TODO: Rest des Beispiels, insbesondere Decodierung
+
+% Vorlesung vom 14.1.2016
+
+% §11. Zyklische Codes
+\section{Zyklische Codes}
+
+% §11.1. Beschreibung zyklischer Codes
+
+\begin{defn}
+  Ein linearer Code $C \subseteq \F_q^n$ heißt \emph{zyklischer Code}, falls
+  \[
+    (c_0, c_1, \ldots, c_{n-1}) \in C \implies
+    (c_{n-1}, c_0, \ldots, c_{n-2}) \in C.
+  \]
+\end{defn}
+
+\begin{bem}
+  Als Koordinaten verwenden wir $\{ 0, \ldots, n-1 \} \cong \Z_n$. \\
+  Der \emph{Shift-Operator} ist $S : \F_q^n \to \F_q^n, \enspace e^i \mapsto e^{i+1 (\bmod{n})}$. \\
+  Ein zyklischer Code ist ein $S$-invarianter Teilraum von $\F_q^n$.
+\end{bem}
+
+$\F_q[x]_{< n} = \Set{f \in \F_q[x]}{\deg(f) < n}$
+
+$\F_q^n \to \F_q[x]_{< n}, \enspace v \mapsto v(x) \coloneqq v_0 + v_1 x + \ldots + v_{n-1} x^{n-1}$
+
+Identifiziere $C \subseteq \F_q^n$ mit entsprechenden Polynomen aus $\F_q[x]_{< n}$.
+
+$\F_q[x]$ ist ein Euklidischer Bereich und ein Hauptidealbereich.
+
+Für $c \in \F_q^n$ gilt für die Polynom $c \in \F_q[x]$ und $\overline{c}(x) \coloneqq (S c)(x) \in \F_q[x]$:
+$x \cdot c(x) = \overline{c}(x) \bmod{(x^n - 1)}$.
+
+Also: $C$ ist ein zyklischer Code $\iff$ $x \cdot c(x) \bmod{(x^n - 1)} \in C$ für alle $c(x) \in C$.
+
+\begin{bem}
+  TODO
+\end{bem}
+
+\begin{nota}
+  $\mathcal{R} = \mathcal{R}_{q,n} \coloneqq \F_q[x] / (x^n - 1)$
+\end{nota}
+
+\begin{satz}
+  Es gibt eine bijektive Korrespondenz
+  \[
+    \begin{array}{r c l}
+      \{ \text{ zyklische Codes der Länge $n$ über $\F_q$ } \} & \leftrightarrow & \{ \text{ Ideale in $\mathcal{R}_{q,n}$ } \}
+    \end{array}
+  \]
+\end{satz}
+
+TODO: weiter
+
+% 11.6
+\begin{satz}
+  $C \subseteq \F_q[x]_{< n}$ sein ein zyklischer Code der Länge $n$.
+  Dann gibt es ein eindeutiges monisches Polynom~$g(x)$ mit minimalem Grad in $C$.
+  Es gilt weiter: $g(x) \divides (x^n - 1)$,
+  $C = \Set{f(x) g(x)}{f(x) \in \F_q[x] \text{ mit } \deg(f) < n - \deg(g)}$ und $\dim(C) = n - \deg(g)$.
+\end{satz}
+
+\begin{defn}
+  $g(x)$ heißt das \emph{Generatorpolynom} zu~$C$.
+  Das Polynom $h(x) \coloneqq \tfrac{x^n - 1}{g(x)}$ heißt das \emph{Kontrollpolynom} zu $C$.
+\end{defn}
+
+\begin{lem}
+  $c(x) \in C \iff h(x) c(x) \equiv 0 \bmod{(x^n - 1)}$
+\end{lem}
+
+\begin{bem}
+  Die Generatormatrix von $C$ ist
+  \[
+    G = \begin{pmatrix}
+      g_0 & g_1 & \cdots g_{n-k} & 0 & \cdots & \cdots & 0 \\
+      0 & g_0 & g_1 & \cdots & g_{n-k} & 0 & \cdots & 0 \\
+      % TODO: Diagonale Punkte, letzte Zeile
+    \end{pmatrix}
+  \]
+  mit $k \coloneqq n - \deg(g)$.
+\end{bem}
+
+% 10.9
+\begin{prop}
+  Sei $h(x) = h_0 + h_1 x + \ldots + h_k x^k$.
+  Dann ist die Kontrollmatrix von $C$ die Matrix
+  \[
+    H = \text{TODO}
+  \]
+\end{prop}
 
 \end{document}
