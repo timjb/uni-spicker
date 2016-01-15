@@ -37,17 +37,22 @@
 \newcommand{\PS}{\mathcal{P}} % Potenzmenge
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator{\ord}{ord} % Ordnung eines Elements
+\newcommand{\clos}[1]{\overline{#1}} % Abschluss (closure)
+\newcommand{\len}{\ell} % Länge eines Moduls
 
 % Kategorientheorie
 \newcommand{\Ring}{\mathbf{Ring}} % Kategorie der Ringe
 \newcommand{\Mod}{\mathbf{Mod}} % Kategorie der Moduln über einem Ring
 \newcommand{\LMod}[1]{{#1}\text{-}\Mod} % Kategorie der (#1)-Linksmoduln
+\newcommand{\Grp}{\mathbf{Grp}} % Kategorie der Gruppen
+\newcommand{\TopGrp}{\mathbf{TopGrp}} % Kategorie der topologischen Gruppen
+\newcommand{\ComplTopGrp}{\mathbf{TopGrp}_{\text{compl}}} % Kategorie der vollständigen topologischen Gruppen
 \DeclareMathOperator{\Hom}{Hom} % Homomorphisms
 \DeclareMathOperator{\End}{End} % Endomorphismen
 \newcommand{\ladj}{\dashv} % Links-adjungiert (left-adjoint)
 \newcommand{\Alg}{\mathbf{Alg}} % Kategorie der Algebren über einem Körper/Ring
 \newcommand{\AAlg}[1]{{#1}\text{-}\Alg} % Kategorie der Algebren über einem Ring A
-\newcommand{\len}{\ell} % Länge eines Moduls
+\newcommand{\op}{\mathrm{op}} % opposite category
 
 % Bezeichnungen für Ideale
 \newcommand{\aaa}{\mathfrak{a}}
@@ -2428,10 +2433,11 @@ Für $m=1$ folgt:
 
 \begin{bspe}
   \begin{minipage}[t]{0.88 \linewidth}
-    \begin{tabular}[t]{l | l | l | l}
+    \begin{tabular}[t]{l | l | l}
       $A$ & noethersch? & artinsch? \\ \hline
       $\Z$ & \cmark & \xmark \\
-      ein bel. HIB & \cmark & ? \\
+      ein endl. Ring & \cmark & \cmark \\
+      ein bel. HIR & \cmark & ? \\
       $K[x]$ & \cmark & \xmark \\
       $K[x_1, x_2, \ldots]$ & \xmark & \xmark
     \end{tabular}
@@ -2865,8 +2871,6 @@ Sei $A$ ein Integritätsbereich mit Quotientenkörper~$K$.
   \end{itemize}
 \end{prop}
 
-% TODO: Verstehen, wozu genau in 3=>1 die Voraussetzung eingeht, dass \rrr endlich erzeugt ist
-
 % 37.3. Gebrochene Ideale in Dedekindschen Bereichen
 
 \begin{prop}
@@ -2937,5 +2941,209 @@ Sei $A$ ein Integritätsbereich mit Quotientenkörper~$K$.
     Es ist $\mu(K) = \{ \pm 1 \}$ und $A^{\times} = \Set{\pm (1 + \sqrt{2})^n}{n \in \Z}$.
   \end{itemize}
 \end{bspe}
+
+% X. Vervollständigungen
+\section{Vervollständigungen}
+
+% 38. Vervollständigungen I
+
+% 38.1. Topologische Gruppen
+
+\begin{defn}
+  Eine \emph{topologische Gruppe} ist ein Gruppenobjekt in der Kategorie der topol. Räume, \dh{} eine Gruppe~$G$, deren zugrunde- liegende Menge eine Topologie trägt, sodass die Gruppenoperationen $G \times G \to G, \, (a, b) \mapsto ab$ und $G \to G, \, g \mapsto g^{-1}$ stetig sind.
+\end{defn}
+
+\begin{bem}
+  \begin{itemize}
+    \item Jede gewöhnliche Gruppe ist eine topologische mit der diskreten Topologie.
+    \item Sei $G$ eine topologische Gruppe und $H \subseteq G$ ein Normalteiler.
+    Dann ist $G/H$ mit der Quotiententopologie eine topol. Gruppe.
+    \item Für jedes $a \in G$ ist die Verschiebung $\tau_a : G \to G, \enspace x \mapsto ax$ ein Homöomorphismus und induziert daher eine Bijektion der Umgebungen um~$e \in G$ und um~$a$.
+    Die Umgebungen um $e$ definieren damit die Topologie von~$G$.
+  \end{itemize}
+\end{bem}
+
+\begin{lem}
+  Sei $G$ eine topologische Gruppe und $H$ der Schnitt aller (offenen) Umgebungen~$U$ von~$0$.
+  Dann gilt:
+  \begin{itemize}
+    \miniitem{0.4 \linewidth}{$H = \clos{\{ e \}}$}
+    \miniitem{0.55 \linewidth}{$H \subseteq G$ ist ein Normalteiler in $G$.}
+    \miniitem{0.4 \linewidth}{$G/H$ ist hausdorffsch.}
+    \miniitem{0.55 \linewidth}{$G$ ist hausdorfsch $\iff$ $H = \{ e \}$}
+  \end{itemize}
+\end{lem}
+
+% 38.2. Vervollständigung topologischer Gruppen
+
+\begin{voraussetzung}
+  Sei $G$ eine topologische Gruppe, die das erste Abzählbarkeitsaxiom erfüllt, \dh{} es gibt eine Folge $U_0 \supset U_1 \supset \ldots$ von Umgebungen von $e \in G$, sodass für jede Umgebung $U$ von $e$ ein $n \in \N$ mit $U_n \subseteq U$ existiert.
+\end{voraussetzung}
+
+\begin{defn}
+  Eine Folge $(g_n)_{n \in \N}$ in~$G$  heißt \emph{Cauchy-Folge}, falls für alle Umgebungen~$U$ von $e$ gilt: $\ex{N \in \N} \fa{n, m \geq N} g_n g_m^{-1} \in U$. \\
+  Zwei Cauchy-Folgen $(g_n)$ und $(h_n)$ heißen äquivalent, falls
+  \[
+    (g_n) \sim (h_n) \coloniff g_n h_n^{-1} \xra[n \to \infty]{} 0.
+  \]
+\end{defn}
+
+\begin{konstr}
+  Sei $\hat{G} \coloneqq \{ \text{ Cauchy-Folgen auf $G$ } \} / {\sim}$ ist eine Gruppe mit $(h_n)_{n \in \N} \cdot (g_n)_{n \in \N} \coloneqq (h_n \cdot g_n)_{n \in \N}$ und $(g_n)_{n \in \N}^{-1} \coloneqq (g_n^{-1})_{n \in \N}$.
+  Für eine offene Umgebung $U \ni e \in G$ sei
+  \[
+    \hat{U} \coloneqq \Set{\text{Cauchy-Folgen } (g_n)_{n \in \N}}{\ex{N \in \N} \fa{n \geq N} g_n \in U}.
+  \]
+\end{konstr}
+
+\emph{TODO: Topologie auf $\hat{G}$ konstruieren!}
+
+\begin{defn}
+  $\hat{G}$ heißt \emph{Vervollständigung} von $G$.
+\end{defn}
+
+\begin{bem}
+  Die Abbildung $\phi : G \to \hat{G}, \enspace g \mapsto (g)_{n \in \N}$ ist stetig und $\im(\phi)$ liegt dicht in $\hat{G}$.
+\end{bem}
+
+\begin{lem}
+  $\ker(\phi) = \clos{\{ e \}}$
+\end{lem}
+
+\begin{kor}
+  $\phi$ injektiv $\iff$ $G$ ist hausdorffsch
+\end{kor}
+
+\begin{bem}
+  Sei $\rho \!:\! G \to H$ ein stetiger Homomor. topol. Gruppen.
+  Dann ist
+  \[
+    \hat{\rho} : \hat{G} \to \hat{H}, \quad
+    [(g_n)_{n \in \N}] \mapsto [(\rho(g_n))_{n \in \N}]
+  \]
+  ein wohldefinierter, stetiger Homomor. zw. den Vervollständigungen.
+  Auf diese Weise wird Vervollständigung zu einem Funktor
+  \[
+    \widehat{\enspace} : \TopGrp \to \ComplTopGrp.
+  \]
+\end{bem}
+
+% 38.3. Inverse Limiten
+
+\begin{defn}
+  Eine Sequenz von Gruppen und Gruppenhomomorphismen der Form
+  \[
+    A_\bullet : \ldots \xra{\theta_3} A_2 \xra{\theta_2} A_1 \xra{\theta_1} A_0
+  \]
+  heißt ein \emph{inverses System} von Gruppen.
+\end{defn}
+
+\begin{bem}
+  Ein inverses System ist ein Funktor $\N^\op \to \Grp$.
+\end{bem}
+
+\begin{defn}
+  Sei $A_\bullet$ ein inverses System von Gruppen.
+  Eine Folge $(\xi_n \in A_n)_{n \in \N}$ heißt \emph{kohärent} in $A_\bullet$, falls $\theta_n(\xi_n) = \xi_{n-1}$ für alle $n \in \N$.
+\end{defn}
+
+\begin{prop}
+  Sei $A_\bullet$ ein inverses System von Gruppen.
+  Dann existiert der Limes $\varprojlim_{n} A_n$ von $A_\bullet$.
+\end{prop}
+
+\begin{defn}
+  Dieser Limes heißt \emph{inverser Limes} von $A_\bullet$.
+\end{defn}
+
+\begin{konstr}
+  Sei $C$ die Menge der kohärenten Folgen in $A_\bullet$.
+  Dann ist $C$ eine Gruppe vermöge
+  \[
+    (\xi_n \in A_n)_{n \in \N} + (\eta_n \in A_n)_{n \in \N} \coloneqq (\xi_n \cdot \eta_n \in A_n)_{n \in \N}
+  \]
+  und $C$ erfüllt die geforderte universelle Eigenschaft.
+\end{konstr}
+
+\begin{bem}
+  Ist $A_\bullet$ ein System topologischer Gruppen, \dh{} ein Funktor $\N^\op \to \TopGrp$, so kann man genauso den Limes ${\varprojlim}_{n} A_n$ in $\TopGrp$ genauso konstruieren.
+  Die Topologie ist dabei die Teilraumtopologie von $\prod_{n \in \N} A_n$.
+\end{bem}
+
+\begin{acht}
+  Wir fassen ein inverses System $A_\bullet$ von Gruppen als System von topol. Gruppen auf, indem wir jedem $A_n$ die diskrete Topol. geben.
+  I.\,A. trägt dann $\varprojlim_{n} A_n$ nicht die diskrete Topologie!
+\end{acht}
+
+% 38.4. Topologische Gruppen mit neutralen Umgebungsbasen aus Normalteilern
+
+\begin{prop}
+  Sei $G$ eine topol. Gruppe.
+  Sei $G_0 \supset G_1 \supset \ldots$ eine Umgebungsbasis von~$e$ von Normalteilern.
+  Dann sind die $G_n$ sowohl offen als auch abgeschlossen in~$G$.
+\end{prop}
+
+\begin{bem}
+  Sei $G$ eine Gruppe und $G \supset G_0 \supset G_1 \supset \ldots$ eine Folge von Normalteilern.
+  Dann gibt es genau eine Topol. auf~$G$, sodass $G$ eine topol. Gruppe wird und die $G_i$'s eine Umgebungsbasis von $e$ bilden.
+\end{bem}
+
+\begin{bsp}
+  Für jede Primzahl $p$ wird $\Z$ mit der Umgebungsbasis $(1) \supset (p) \supset (p^2) \supset \ldots$ zu einer topologischen Gruppe.
+  Die so definierte Topologie heißt \emph{$p$-adische Topologie} auf~$\Z$.
+\end{bsp}
+
+\begin{konstr}
+  Sei $G$ eine topologische Gruppe mit einer Umgebungsbasis $G_0 \supset G_1 \supset G_2 \supset \ldots$ von~$e$ aus Normalteilern.
+  \begin{itemize}
+    \item Setze $A_n \coloneqq G/G_n$.
+    Dann ist $A_\bullet$ mit den kanon. Abbildungen $A_n = G / G_n \thra G / G_{n-1} = A_{n-1}$ ein inv. System topol. Gruppen.
+    \item Für jede Cauchyfolge $(\xi_n)_{n \in \N}$ in~$G$ und~$k \in \N$ gibt es ein $N_k \in \N$, sodass $\xi_N = \xi_{N+1} = \xi_{N+2} = \ldots (\bmod{G_k})$.
+    \item Die Abbildung
+    \[
+      \hat{G} \to {\varprojlim}_{n} A_n, \quad
+      [(\xi_n)_{n \in \N}] \mapsto (\xi_{N_k} \in A_k)_{k \in \N}
+    \]
+    ist dann ein wohldefinierter Homomorphismus topol. Gruppen.
+  \end{itemize}
+\end{konstr}
+
+\begin{prop}
+  $\hat{G} \to \varprojlim_{n} A_n$ ist ein Isomorphismus topol. Gruppen
+\end{prop}
+
+% 39. Vervollständigungen II
+
+% 39.1. Exaktheitseigenschaften inverser Limiten
+
+% 39.2. Vollständige topologische Gruppen
+
+% 39.3. Topologische Ringe und Moduln
+
+% 40. Filtrationen
+
+% 40.1. Filtrationen
+
+% 41. Gewichtete Ringe und Moduln I
+
+% 41.1. Definition gewichteter Ringe und Moduln
+
+% 41.2. Reesche Ringe und Moduln
+
+% 41.3. Das Artin-Reesche Lemma
+
+% 42. Gewichtete Ringe und Moduln II
+
+% 42.1. Exaktheit der Vervollständigung
+
+% 42.2. Vervollständigung von Ringen
+
+% 42.3. Der Krullsche Satz
+
+% 43. Der assoziierte gewichtete Ring
+
+% 43.1. Definition und grundlegende Eigenschaften des assoziierten gewichteten Ringes
+
+% 43.2. Endlichkeitseigenschaften der Vervollständigung
 
 \end{document}
