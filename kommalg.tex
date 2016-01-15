@@ -57,6 +57,7 @@
 \newcommand{\ppp}{\mathfrak{p}}
 \newcommand{\qqq}{\mathfrak{q}}
 \newcommand{\rrr}{\mathfrak{r}}
+\newcommand{\sss}{\mathfrak{s}}
 \newcommand{\mmm}{\mathfrak{m}}
 \newcommand{\nnn}{\mathfrak{n}}
 
@@ -2794,14 +2795,147 @@ Für $m=1$ folgt:
   Dann ist der Ring der ganzen Zahlen in~$K$, \dh{} der ganze Abschluss von $\Z$, ein Dedekindscher Bereich.
 \end{satz}
 
+\section{Gebrochene und invertierbare Ideale}
 % 37. Gebrochene Ideale
 
 % 37.1. Gebrochene Ideale
 
+Sei $A$ ein Integritätsbereich mit Quotientenkörper~$K$.
+
+\begin{defn}
+  Ein $A$-Untermodul $\rrr \subseteq K$ heißt \emph{gebrochenes Ideal} von $A$, falls ein $x \in A$ mit $x \rrr \subseteq A$ existiert.
+\end{defn}
+
+\begin{bspe}
+  \begin{itemize}
+    \item Jedes gewöhnliche Ideal ist auch ein gebrochenes Ideal.
+    \item Jedes $u = \tfrac{s}{t} \in K$ erz. ein gebr. Ideal $(u) \coloneqq A u \subseteq K$, da $t (u) \subset A$.
+  \end{itemize}
+\end{bspe}
+
+\begin{sprechweise}
+  Zur Unterscheidung von gebrochenen Idealen werden gewöhnliche Ideale auch \emph{ganze Ideale} genannt.
+\end{sprechweise}
+
+\begin{prop}
+  \begin{itemize}
+    \item Ist $\rrr$ ein endlich erzeugtes Untermodul von~$K$, so ist~$\rrr$ ein gebrochenes Ideal.
+    \item Ist $A$ noethersch, so ist jedes gebrochene Ideal~$\rrr$ als $A$-Modul endlich erzeugt.
+  \end{itemize}
+\end{prop}
+
 % 37.2. Invertierbare Ideale
+
+\begin{defn}
+  Ein $A$-Untermodul $\rrr \subseteq K$ heißt \emph{invertierbares Ideal}, falls ein $A$-Untermodul $\sss \subseteq K$ mit $\rrr \sss = A$ existiert.
+\end{defn}
+
+\begin{nota}
+  Für ein $A$-Untermodul $\rrr \subseteq K$ schreiben wir $(1 : \rrr) \coloneqq \Set{x \in K}{x \rrr \subseteq A}$.
+  Dies ist ein $A$-Untermodul von $K$.
+\end{nota}
+
+\begin{prop}
+  Ist $\rrr \subseteq K$ ein invertierbares Ideal, so ist $\sss = (1 : \rrr)$ das einzige $A$-Untermodul $\sss \subseteq K$ mit $\rrr \sss = A$.
+\end{prop}
+
+\begin{nota}
+  In diesem Fall: \enspace
+  $\rrr^{-1} \coloneqq (1 : \rrr)$
+\end{nota}
+
+\begin{prop}
+  Jedes invertierbare Ideal von $A$ ist endlich erzeugt als $A$-Modul und damit insbesondere ein gebrochenes Ideal.
+\end{prop}
+
+\begin{bsp}
+  Für $u \in K^{\times}$ ist $(u) \subseteq K$ invertierbar mit $(u)^{-1} = (u^{-1})$.
+\end{bsp}
+
+\begin{bem}
+  Bezüglich der Multiplikation von Idealen bilden die invertierbaren Ideale von~$A$ eine Gruppe mit $e = (1)$.
+\end{bem}
+
+\begin{prop}
+  Für ein gebrochenes Ideal~$\rrr$ von $A$ sind äquivalent:
+  \begin{itemize}
+    \item $\rrr$ ist invertierbar
+    \item $\rrr$ ist endlich erzeugt und für alle Primideale $\ppp \subset A$ ist $\rrr_\ppp$ ein invertierbares Ideal von $A_\ppp$.
+    \item $\rrr$ ist endlich erzeugt und für alle maximalen Ideale $\mmm \subset A$ ist $\rrr_\mmm$ ein invertierbares Ideal von $A_\mmm$.
+  \end{itemize}
+\end{prop}
+
+% TODO: Verstehen, wozu genau in 3=>1 die Voraussetzung eingeht, dass \rrr endlich erzeugt ist
 
 % 37.3. Gebrochene Ideale in Dedekindschen Bereichen
 
+\begin{prop}
+  Ein lokaler Integritätsbereich, der kein Körper ist, ist genau dann ein diskreter Bewertungsring, wenn jedes nicht verschwindende gebrochene Ideal invertierbar ist.
+\end{prop}
+
+\begin{satz}
+  Ein Integritätsbereich, der kein Körper ist, ist genau dann ein Dedekindscher Bereich, wenn jedes nicht verschwindende gebrochene Ideal invertierbar ist.
+\end{satz}
+
 % 37.4. Anmerkungen zur Idealklassengruppe
+
+\begin{kor}
+  In einem Dedekindschen Bereich~$A$ bilden die nicht verschwindenden gebrochenen Ideale eine abelsche Gruppe bzgl. der Multiplikation, die \emph{Idealgruppe} $I(A)$ von~$A$.
+\end{kor}
+
+\begin{bem}
+  Der Satz über die eindeutige Faktorisierbarkeit eines Ideals in Primideale in einem Dedekindschen Bereich~$A$ impliziert, dass $I(A)$ von den Primidealen von~$A$ frei abelsch erzeugt wird.
+\end{bem}
+
+\begin{defn}
+  Sei $A$ ein Dedekindscher Bereich mit Quotientenkörper~$K$.
+\end{defn}
+
+\begin{bem}
+  Es gibt einen Gruppenhomomorphismus
+  \[
+    \phi : K^{\times} \to I(A), \quad x \mapsto (x),
+  \]
+  dessen Bild die gebrochenen Hauptideale sind.
+  Dessen Kern ist
+  \[
+    \ker \phi = \Set{u \in K^{\times}}{(u) = 1} = A^{\times}.
+  \]
+\end{bem}
+
+\begin{defn}
+  $C(A) \coloneqq I(A) / \im(\phi)$ heißt \emph{Idealklassengruppe} von~$A$.
+\end{defn}
+
+\begin{bem}
+  Es gibt eine exakte Sequenz
+  \[
+    1 \to A^{\times} = \ker(\phi) \to K^{\times} \xra{\phi} I(A) \to C(A) \to 1
+  \]
+  von (multiplikativ notierten) abelschen Gruppen.
+\end{bem}
+
+\begin{bem}
+  Sei $K$ ein Zahlkörper und $A$ sein Ring ganzer Zahlen. \\
+  Man kann dann zeigen:
+  \begin{itemize}
+    \item $C(A)$ ist endlich.
+    Die Gruppenordnung $\ord C(A)$ heißt \textit{Klassenzahl} von $K$.
+    \item $\ord C(A) = 1$ $\iff$ jedes invertierbare Ideal ist ein gebrochenes Hauptideal $\iff$ $A$ ist ein faktorieller Ring.
+    \item $A^{\times}$ ist eine endlich erzeugte abelsche Gruppe.
+    Die Elemente endlicher Ordnung sind genau die Einheitswurzeln $\mu(K)$ von~$K$.
+    Der Rang der freien abelschen Gruppe $A^{\times} / \mu(K)$ ist $r_1 + r_2 - 1$, wobei $r_1$ die Anzahl der reellen und $2 r_2$ die Anzahl der echt komplexen Einbettungen von~$K$ in~$\C$ ist.
+  \end{itemize}
+\end{bem}
+
+\begin{bspe}
+  \begin{itemize}
+    \item $\Q(\sqrt{-1})$ besitzt genau zwei echt komplexe Einbettungen, keine reellen.
+    Für dessen Ring der ganzen Zahlen, $A = \Z[i]$, gilt damit $\ord(A^{\times} / \mu(K)) = 0$, also $A^{\times} = \mu(K) = \{ \pm 1, \pm i \}$.
+    \item $\Q(\sqrt{2})$ besitzt genau zwei reelle Einbettungen, keine echt komplexen.
+    Für $A = \Z[\sqrt{2}]$ gilt damit $\ord(A^{\times} / \mu(K)) = 1$. \\
+    Es ist $\mu(K) = \{ \pm 1 \}$ und $A^{\times} = \Set{\pm (1 + \sqrt{2})^n}{n \in \Z}$.
+  \end{itemize}
+\end{bspe}
 
 \end{document}
