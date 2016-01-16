@@ -43,10 +43,12 @@
 % Kategorientheorie
 \newcommand{\Ring}{\mathbf{Ring}} % Kategorie der Ringe
 \newcommand{\Mod}{\mathbf{Mod}} % Kategorie der Moduln über einem Ring
+\newcommand{\TopMod}{\mathbf{TopMod}} % Kategorie der topologischen Moduln über einem topologischen Ring
 \newcommand{\LMod}[1]{{#1}\text{-}\Mod} % Kategorie der (#1)-Linksmoduln
 \newcommand{\Grp}{\mathbf{Grp}} % Kategorie der Gruppen
 \newcommand{\TopGrp}{\mathbf{TopGrp}} % Kategorie der topologischen Gruppen
 \newcommand{\ComplTopGrp}{\mathbf{TopGrp}_{\text{compl}}} % Kategorie der vollständigen topologischen Gruppen
+\newcommand{\TopLMod}[1]{{#1}\text{-}\TopMod} % Kategorie der topologischen (#1)-Linksmoduln
 \DeclareMathOperator{\Hom}{Hom} % Homomorphisms
 \DeclareMathOperator{\End}{End} % Endomorphismen
 \newcommand{\ladj}{\dashv} % Links-adjungiert (left-adjoint)
@@ -3029,9 +3031,10 @@ Sei $A$ ein Integritätsbereich mit Quotientenkörper~$K$.
 \end{bem}
 
 % 38.3. Inverse Limiten
+\subsection{Inverse Limiten}
 
 \begin{defn}
-  Eine Sequenz von Gruppen und Gruppenhomomorphismen der Form
+  Eine Seqenz von Gruppen und Gruppenhomomor. der Form
   \[
     A_\bullet : \ldots \xra{\theta_3} A_2 \xra{\theta_2} A_1 \xra{\theta_1} A_0
   \]
@@ -3040,11 +3043,12 @@ Sei $A$ ein Integritätsbereich mit Quotientenkörper~$K$.
 
 \begin{bem}
   Ein inverses System ist ein Funktor $\N^\op \to \Grp$.
+  Ein Morphismus inverser Systeme ist eine natürliche Transformation.
 \end{bem}
 
 \begin{defn}
   Sei $A_\bullet$ ein inverses System von Gruppen.
-  Eine Folge $(\xi_n \in A_n)_{n \in \N}$ heißt \emph{kohärent} in $A_\bullet$, falls $\theta_n(\xi_n) = \xi_{n-1}$ für alle $n \in \N$.
+  Eine Folge $(\xi_n \in A_n)_{n \in \N}$ heißt \emph{kohärent} in $A_\bullet$, falls $\theta_n(\xi_n) = \xi_{n-1}$ $\forall \, n \in \N$.
 \end{defn}
 
 \begin{prop}
@@ -3057,7 +3061,7 @@ Sei $A$ ein Integritätsbereich mit Quotientenkörper~$K$.
 \end{defn}
 
 \begin{konstr}
-  Sei $C$ die Menge der kohärenten Folgen in $A_\bullet$.
+  Sei $C$ die Menge der kohärenten Folgen in $A_\bullet$. \\
   Dann ist $C$ eine Gruppe vermöge
   \[
     (\xi_n \in A_n)_{n \in \N} + (\eta_n \in A_n)_{n \in \N} \coloneqq (\xi_n \cdot \eta_n \in A_n)_{n \in \N}
@@ -3068,6 +3072,15 @@ Sei $A$ ein Integritätsbereich mit Quotientenkörper~$K$.
 \begin{bem}
   Ist $A_\bullet$ ein System topologischer Gruppen, \dh{} ein Funktor $\N^\op \to \TopGrp$, so kann man genauso den Limes ${\varprojlim}_{n} A_n$ in $\TopGrp$ genauso konstruieren.
   Die Topologie ist dabei die Teilraumtopologie von $\prod_{n \in \N} A_n$.
+\end{bem}
+
+\begin{bem}
+  Der inverse Limes ${\varprojlim}_n$ ist ein Funktor
+  \[
+    [\N^\op, \Grp] \to \Grp
+    \quad \text{bzw.} \quad
+    [\N^\op, \TopGrp] \to \TopGrp.
+  \]
 \end{bem}
 
 \begin{acht}
@@ -3088,11 +3101,58 @@ Sei $A$ ein Integritätsbereich mit Quotientenkörper~$K$.
   Dann gibt es genau eine Topol. auf~$G$, sodass $G$ eine topol. Gruppe wird und die $G_i$'s eine Umgebungsbasis von $e$ bilden.
 \end{bem}
 
-\begin{bsp}
-  Für jede Primzahl $p$ wird $\Z$ mit der Umgebungsbasis $(1) \supset (p) \supset (p^2) \supset \ldots$ zu einer topologischen Gruppe.
-  Die so definierte Topologie heißt \emph{$p$-adische Topologie} auf~$\Z$.
-\end{bsp}
+% 39. Vervollständigungen II
 
+% 39.1. Exaktheitseigenschaften inverser Limiten
+
+\begin{defn}
+  Ein inverses System $A_\bullet : \ldots \to A_1 \to A_0$ von Gruppen heißt \emph{surjektives System}, falls die Gruppenhomomor. $A_n \to A_{n-1}$ alle surjektiv sind.
+\end{defn}
+
+\begin{defn}
+  Eine Sequenz $\ldots \to A_\bullet^{i-1} \xra{\phi_\bullet^{i-1}} A_\bullet^i \xra{\phi_\bullet^i} A_\bullet^{i+1} \to \ldots$ inverser Systeme abelscher Gruppen $A_\bullet^i$ heißt exakt bei $A_\bullet^i$, falls
+  \[
+    \ldots \to A_n^{i-1} \xra{\phi_n^{i-1}} A_n^i \xra{\phi_n^i} A_n^{i+1} \to \ldots
+  \]
+  für alle $n \in \N$ bei $A_n^i$ exakt ist.
+\end{defn}
+
+\begin{prop}
+  Sei $0 \to A_\bullet \to B_\bullet \to C_\bullet \to 0$ eine exakte Sequenz inverser Systeme abelscher Gruppen.
+  \begin{itemize}
+    \item Der Inverse-Limes-Funktor ist linksexakt, \dh{} dann ist auch
+    \[
+      0 \to \varprojlim_n A_n \to \varprojlim_n B_n \to \varprojlim_n C_n \phantom{\to 0}\,\, \qquad
+      \text{exakt.}
+    \]
+    \item Ist $A_\bullet : \ldots \xra{\alpha_2} A_1 \xra{\alpha_1} A_0$ dabei ein surjektives System, so ist
+    \[
+      0 \to \varprojlim_n A_n \to \varprojlim_n B_n \to \varprojlim_n C_n \to 0 \qquad
+      \text{exakt.}
+    \]
+  \end{itemize}
+\end{prop}
+
+\begin{bem}
+  Genauer ist die Sequenz
+  \[
+    0 \to \varprojlim_n A_n \to \varprojlim_n B_n \to \varprojlim_n C_n \to {\varprojlim_n}^1 A_n
+  \]
+  exakt, wobei ${\varprojlim_n}^1 A_n \coloneqq \coker d^A$ mit $A \coloneqq \prod_n A_n$ und
+  \[
+    d_A : A \to A, \quad
+    (a_n)_{n \in \N} \mapsto (a_n - \alpha_{n+1}(a_{n+1}))_{n \in \N}.
+  \]
+  Der Beweis benutzt das Schlangenlemma und $\ker d_A = {\varprojlim}_n A_n$.
+\end{bem}
+
+\begin{bem}
+  Die Linksexaktheit von ${\varprojlim}_n$ folgt daher, dass der Inverse- Limes-Funktor rechtsadjungiert zu $\Delta : \Grp \to [\N^\op, \Grp]$ ist.
+\end{bem}
+
+\subsection{Vollständige topologische Gruppen}
+
+% Nach hinten verschoben
 \begin{konstr}
   Sei $G$ eine topologische Gruppe mit einer Umgebungsbasis $G_0 \supset G_1 \supset G_2 \supset \ldots$ von~$e$ aus Normalteilern.
   \begin{itemize}
@@ -3108,17 +3168,94 @@ Sei $A$ ein Integritätsbereich mit Quotientenkörper~$K$.
   \end{itemize}
 \end{konstr}
 
+% Nach hinten verschoben
 \begin{prop}
   $\hat{G} \to \varprojlim_{n} A_n$ ist ein Isomorphismus topol. Gruppen
 \end{prop}
 
-% 39. Vervollständigungen II
-
-% 39.1. Exaktheitseigenschaften inverser Limiten
-
 % 39.2. Vollständige topologische Gruppen
 
+\begin{satz}
+  Sei $0 \to G' \xra{\iota} G \xra{\pi} G'' \to 0$ eine exakte Sequenz abelscher Gruppen und eine Topologie auf $G$ definiert durch eine Folge $G_0 \supset G_1 \supset \ldots$ von Untergruppen.
+  Seien die Topologie auf $G'$ und $G''$ durch $\iota^{-1} G_0 \supset \iota^{-1} G_1 \supset \ldots$ bzw. $\pi(G_0) \supset \pi(G_1) \supset \ldots$ erzeugt.
+  Dann ist die induzierte Sequenz $0 \to \hat{G}' \to \hat{G} \to \hat{G}'' \to 0$ exakt.
+\end{satz}
+
+\begin{kor}
+  Sei $G$ eine abelsche topologische Gruppe und $G_0 \supset G_1 \supset \ldots$ eine Umgebungsbasis von~$0$ aus Untergruppen.
+  Für jedes~$n$ induziert dann $\phi : G \to \hat{G}$ einen Isomorphismus $G/\hat{G}_n \to \hat{G} / \hat{G}_n$.
+\end{kor}
+
+\begin{defn}
+  Eine topologische Gruppe $G$ heißt \emph{vollständig}, falls $\phi : G \to \hat{G}$ ein Isomorphismus ist.
+\end{defn}
+
+\begin{prop}
+  Sei $G$ eine abelsche topol. Gruppe und $G_0 \supset G_1 \supset \ldots$ eine Umgebungsbasis von~$0$ aus Untergruppen.
+  Dann ist $\hat{G}$ vollständig.
+\end{prop}
+
 % 39.3. Topologische Ringe und Moduln
+\subsection{Topologische Ringe und Moduln}
+
+\begin{defn}
+  Ein \emph{topologischer Ring} ist ein Ring $(A, +, \cdot, 0, 1)$, sodass $(A, +, 0)$ eine topologische Gruppe ist und die Multiplikation $A \times A \to A, \enspace (x, y) \mapsto xy$ stetig ist.
+\end{defn}
+
+\begin{bem}
+  Sei $A$ ein topol. Ring.
+  Dann ist $\hat{A}$ wieder ein Ring und $\phi : A \to \hat{A}$ ein Ringhomomorphismus.
+\end{bem}
+
+\begin{konstr}
+  Sei $A$ ein Ring und $\aaa \subseteq A$ ein Ideal.
+  Trage die additive Gruppe $A$ die durch die Umgebungsbasen $(1) \supset \aaa \supset \aaa^2 \supset \ldots$ von~$0$ definierte Topologie, die \emph{$\aaa$-adische Topologie}
+  Die Multiplikation ist bzgl. dieser Topologie stetig, also~$A$ ein topologischer Ring. \\
+  Dieser ist genau dann hausdorffsch, wenn $\bigcap_n \aaa^n = (0)$.
+\end{konstr}
+
+\begin{defn}
+  Die Vervollständigung $\hat{A}_\aaa$ von $A$ bzgl. der $\aaa$-adischen Topologie heißt \emph{$\aaa$-adische Vervollständigung} von~$A$.
+\end{defn}
+
+\begin{defn}
+  Sei $A$ ein topol. Ring.
+  Ein \emph{topol. $A$-Modul} ist ein $A$-Modul~$M$, dessen additive Gruppe eine topologische Gruppe ist, sodass die Multiplikation $A \times M \to M, \enspace (a, x) \mapsto ax$ stetig ist.
+\end{defn}
+
+\begin{bem}
+  Die Vervollständigung $\hat{M}$ eines $A$-Moduls~$M$ ist in kanon. Art ein $\hat{A}$-Modul.
+  Außerdem ist $M \to \hat{M}$ eine stetiger Homomorphismus $M \to \hat{M}^A$ von $A$-Moduln.
+\end{bem}
+
+\begin{konstr}
+  Sei $A$ ein Ring und $\aaa \subseteq A$ ein Ideal und $M$ ein $A$-Modul.
+  Trage $M$ die durch die Folge $M \supset \aaa M \supset \aaa^2 M \supset \ldots$ von Untermoduln definierte Topologie, die \textit{$\aaa$-adische Topologie}.
+  Damit wird~$M$ zu einem~$A$, wenn~$A$ ebenfalls die $\aaa$-adische Topologie trägt.
+\end{konstr}
+
+\begin{defn}
+  Die Vervollständigung $\hat{M}_\aaa$ von $M$ bzgl. der $\aaa$-adischen Topologie ist ein $\hat{A}_\aaa$-Modul und heißt \emph{$\aaa$-adische Vervollständigung} von~$M$.
+\end{defn}
+
+\begin{bem}
+  Jeder Homomorphismus $\phi : M \to N$ von $A$-Moduln ist stetig bzgl. der $\aaa$-adischen Topologie auf beiden Moduln und induziert damit einen Homomorphismus $\hat{\phi}_\aaa : \hat{M}_\aaa \to \hat{N}_\aaa$ von $\hat{A}_\aaa$-Moduln. \\
+  Damit ist $\aaa$-adische Vervollständigung ein Funktor
+  \[
+    \widehat{(\blank)}_\aaa : \LMod{A} \to \TopLMod{\hat{A}_\aaa}.
+  \]
+\end{bem}
+
+\begin{bspe}
+  \begin{itemize}
+    \item Sei $K$ ein Körper.
+    Dann ist $\widehat{K[x]}_{(x)} = K \llbracket x \rrbracket$.
+    \item Sei $p$ eine Primzahl.
+    Dann heißt $\Z_p \coloneqq \hat{\Z}_{(p)}$ \emph{Ring der $p$-adischen Zahlen}.
+    Elemente aus $\Z_p$ kann man als Reihen ${\sum}_{n=0}^\infty a_n p^n$ mit $0 \leq a_n < p$ schreiben.
+    Es gilt dabei $\lim_{n \to \infty} p^n = 0$.
+  \end{itemize}
+\end{bspe}
 
 % 40. Filtrationen
 
