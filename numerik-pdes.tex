@@ -2044,7 +2044,95 @@ $\Pi_k$ ist der $P_K$-Interpolationsoperator, da $\Pi_K v \in P(K)$, $b_j (\Pi_k
 \begin{kor}
   Seien die Voraussetzungen des letzten Satzes für das finite Element $(\hat{K}, P(\hat{K}), \Sigma(\hat{K}))$ erfüllt.
   Sei eine Familie von finiten affin äquivalenten Elementen $(K, P(K), \Sigma(K))$ gegeben.
-  Dann existiert eine Konstante $\tilde{c}_K > 0$, sodass für alle Elemente der Familie $h(K) \leq 1$ und für alle $v \in H^{k+1}(K)$ gilt: $\norm{v - \Pi_k v}_{H^{k+1}(K)} \leq \tilde{c}_K \frac{h_(K)^{k+1}}{\rho(K)^r} \abs{v}_{H^{k+1}(K)} = \tilde{c}_K \sigma(K)^r h(K)^{k+1-r} \abs{v}_{H^{k+1}(K)}$.
+  Dann existiert eine Konstante $\tilde{c}_K > 0$, sodass für alle Elemente der Familie $h(K) \leq 1$ und für alle $v \in H^{k+1}(K)$ gilt:
+  \begin{align*}
+    \norm{v - \Pi_k v}_{H^{k+1}(K)} & \leq \tilde{c}_K \frac{h_(K)^{k+1}}{\rho(K)^r} \abs{v}_{H^{k+1}(K)} \\
+    & = \tilde{c}_K \sigma(K)^r h(K)^{k+1-r} \abs{v}_{H^{k+1}(K)}.
+  \end{align*}
 \end{kor}
+
+\begin{bsp}
+  \begin{tabular}{l l l}
+    & $k=1$ & $k=2$ \\ \hline
+    Lagrange FEM ($s = 0$) & Lagrange-Typ (1) & Lagrange-Typ (2) \\
+    Regularität für $v$ & $H^2(K)$ & $H^3(K)$ \\
+    Beschr. für $d < 2 (k+1)$ & $d \leq 3$ & $d \leq 5$ \\
+    Beschr. für $r$ & $0 \leq r \leq 2$ & $0 \leq r \leq 3$ \\
+    $\norm{v - \Pi v}_{H^r(K)}$ & $O(h^{2-r})$ & $O(h^{3-r})$
+  \end{tabular}
+\end{bsp}
+
+% 5.4.1. Abschätzung des globalen Interpolationsfehlers
+
+$H'_0(\Omega) \subseteq U \subseteq H^1(\Omega)$, $U$ ist der Lösungsraum
+
+Voraussetzungen:
+
+\begin{itemize}
+  \item $\bOmega$ ist ein Polyeder und $\mathcal{T}$ ist eine Familie von Triangulierungen $T_n(\bOmega)$, wobei $\bOmega = \bigcup_{K \in T_n(\bOmega)} K$.
+  Es sei $\mathcal{T}$ regulär, \dh{} es existiert eine Konstante $\sigma > 0$ (unabhängig von $h$), sodass $\tfrac{h(K)}{\rho(K)} \leq \sigma$ für alle $K \in T_n(\bOmega)$ und $h_n = \max_{K \in T_n(\bOmega)} h(K) \xra[n \to \infty]{} 0$.
+  \item Alle FE $(K, P(K), \Sigma(K))$ der Familie $\mathcal{T}$ sind affin äquivalent zu einem Referenzelement $(\hat{K}, P(\hat{K}), \Sigma(\hat{K}))$
+  \item Sei $U_n \subset \Cont(\bOmega)$ ein FE-Funktionenraum
+  \item Für $k+1 \geq r \geq 0$  gilt $H^{k+1}(\hat{K}) \hookrightarrow \Cont(\hat{K})$, $\Poly_K(\hat{K}) \subseteq P(\hat{K}) \subset H^k(\hat{K})$.
+\end{itemize}
+
+\begin{satz}
+  Seien obige Voraussetzungen erfüllt.
+  Sei $\Pi_n$ der zur Triangulierung $T_n(\bOmega)$ gehörende globale Interpolationsoperator.
+  Dann existert eine Konstante $c > 0$, sodass für alle $v \in H^{k+1}(\Omega) \cap U$ gilt:
+  \[
+    \left( \sum_{K \in T_n(\bOmega)} \norm{v - \Pi v}^2_{H^l(K)} \right)^{\nicefrac{1}{2}} \leq c h_n^{k+1-l} \abs{v}_{H^{k+1}(\Omega)}
+  \]
+\end{satz}
+
+\begin{bemn}
+  \begin{itemize}
+    \item Für $r = 0$ gilt $U_n \subset L^2(\Omega)$ (da $U_n \subset \Cont(\Omega)$ und $\Omega$ beschränkt).
+    Es folgt $\Pi_n v \in L^2(\Omega)$, also
+    \[
+      \norm{v - \Pi_n v}_{L^2(\Omega)} = \left( \Int{\Omega}{}{\abs{v - \Pi_n v}^2}{x} \right)^{\nicefrac{1}{2}} = \sum_{K \in T_n(\bOmega)} \norm{v - \Pi_K v}^2_{L^2(K)} \leq c h_n^{k+1} \abs{v}_{H^{k+1}(\Omega)}
+    \]
+    \item Für $r = 1$ gilt $U_n \subset H^1(\Omega)$, folglich $\Pi_n v \in H^1(\Omega)$.
+    Somit
+    \[
+      \norm{v - \Pi v}_{H^1(\Omega)} = \left( \sum_{K \in T_n(\bOmega)} \norm{v - \Pi_K v}^2_{H^1(K)} \right)^{\nicefrac{1}{2}} \leq c h_n^k \abs{v}_{H^{k+1}(\Omega)}
+    \]
+  \end{itemize}
+\end{bemn}
+
+\begin{satz}[Konvergenz der konformen Approximation]
+  Seien die Voraussetzungen (V1)-(V3) und (V4) mit $r = 1$ erfüllt.
+  Dann gilt für die Lösung $u$ von (VGL) und die Lösung $u_n$ der konformen Approximation $(VGL)\tss{n}$ mit $l_n = l|_{U_n}$ die Abschätzung $\norm{u - u_n}_{H^1(\Omega)} \leq c_0 h_n^k \abs{u}_{H^{k+1}(\Omega)}$ für ein $c_0 > 0$, falls $u \in H^{k+1}(\Omega)$.
+\end{satz}
+
+\begin{bem}
+  Für $k=1$, $u \in H^2(\Omega)$ ist die Konvergenzordnung~$1$.
+  % sonst siehe Thm 3.2.3. in Ph.G.Garlet "The FEM for elliptic problems" für Konvergenz (aber ohne bekannte Konvergenzordnung)
+\end{bem}
+
+\begin{bem}
+  $\norm{u - u_n}_{L^2(\Omega)} \leq \norm{u - u_n}_{H^1(\Omega)} \leq c_0 h_n^k \abs{u}_{H^{k+1}(\Omega)}$
+  $\norm{u - \Pi_n u}_{L^2(\Omega)} \leq C h_n^{k+1} \abs{u}_{H^{k+1}(\Omega)}$
+  % häh?
+\end{bem}
+
+\begin{satz}[Lemma von Aubin-Nitsche]
+  Seien $U$ und $H$ Hilberträume mit einer stetigen injektiven Einbettung $E : U \to H$, $U_n \subset U$ ein endlichdim. Teilraum.
+  Sei $B : U \times U \to \R$ eine beschränkte, koerzitive Bilinearfor und $l \in U'$.
+  Sind $u \in U$, $u_n \in U_n$ Lösungen von
+  \[
+    B(u, \phi) = l(\phi) \, \forall \phi \in U, \quad
+    B(u_n, \phi) = l_n(\phi) \, \forall \phi \in U_n,
+  \]
+  so gilt
+  \[
+    \norm{E (u - u_n)}_H \leq c_B \norm{u - u_n}_{U} \sup_{r \in H \setminus \{ 0 \}} \frac{\inf_{w \in U_n} \norm{w(r) - w}_U}{\norm{r}_H},
+  \]
+  wobei $w(r) \in U$ die Lösung des adjungierten Problems
+  \[
+    B(\phi, w(r)) = \scp{r}{E(\phi)}_H \, \forall \phi \in U
+  \]
+  ist.
+\end{satz}
 
 \end{document}
