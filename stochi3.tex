@@ -1629,7 +1629,7 @@ $\mathrm{MASE}(\hat{\mu}_n) = \tfrac{1}{n} \sum_{i=1}^n \mathrm{MSE}(\hat{\mu}_n
   % ausgelassen: "optimal" = ?
 \end{satz}
 
-% Vorlesung vom 7.1.2015
+% Vorlesung vom 7.1.2016
 
 % §5. Dichteschätzungen
 \section{Dichteschätzungen}
@@ -1726,7 +1726,7 @@ $\mathrm{MASE}(\hat{\mu}_n) = \tfrac{1}{n} \sum_{i=1}^n \mathrm{MSE}(\hat{\mu}_n
   % auch: Parzen-Rosenblatt-Schätzung
 \end{defn}
 
-% Vorlesung vom 11.1.2015
+% Vorlesung vom 11.1.2016
 
 \begin{bspe}
   Mit der \emph{empirischen Dichte} $K(x) \coloneqq \tfrac{1}{2} \ind_{\ocinterval{-1}{1}}(x)$ gilt
@@ -1784,7 +1784,7 @@ $\mathrm{MASE}(\hat{\mu}_n) = \tfrac{1}{n} \sum_{i=1}^n \mathrm{MSE}(\hat{\mu}_n
   \end{align*}
 \end{satz}
 
-% Vorlesung vom 14.1.2015
+% Vorlesung vom 14.1.2016
 
 Optimale Wahl von $h_n$:
 
@@ -1817,6 +1817,83 @@ unter der Nebenbedingung $\IInt{K(x)}{x} = 1$ und $K(x) \geq 0$.
 \begin{defn}
   Für $\alpha = 2$ heißt $K_0(x) \coloneqq \tfrac{3}{4} (1 - x^2) \ind_{\cinterval{-1}{1}} (x)$ \emph{Epanetschnikow-Kern}.
 \end{defn}
+
+% Vorlesung vom 18.1.2016
+
+\begin{bem}
+  Wichtige Kerne neben dem Epanetschnikow-Kern:
+  \begin{itemize}
+    \item $K_N(x) = \tfrac{1}{2} \sum_{k=-N}^N e^{i 2 \pi k x} = \tfrac{\sin((2 N + 1) \pi x)}{2 \sin (\pi x)}$ für $\abs{x} \leq 1$ heißt \emph{Dirichlet-Kern}.
+    % $1 + z + \ldots + z^N = \tfrac{z^{N+1} - 1}{z - 1}$, $z \neq 1$
+    \item $K_N(x) = \tfrac{1}{2 N} \abs{\sum_{k=0}^N e^{i k \pi x}}^2 = \tfrac{\sin^2((2 N + 1) \pi x)}{2 N \sin^2(\pi x)}$ für $\abs{x} \leq 1$ heißt \emph{Fejér-Kern}
+    \item $K(x) = (1 - \abs{x}) \ind_{\cinterval{-1}{1}}(x)$ heißt \emph{Dreieckskern}.
+    \item $K(x) = \begin{cases}
+      \tfrac{\pi}{4} \cos(\tfrac{\pi}{2} x) & \abs{x} \leq 1 \\
+      0 & \abs{x} > 1
+    \end{cases}$
+    \item $K_\epsilon(x) = c_d \epsilon^{-d} \exp \left( - \tfrac{\epsilon^2}{\epsilon^2 - \norm{x}^2} \right) \ind_{B_\epsilon(0)}(x)$ heißt \emph{Sobolev-Kern}.
+    Es gilt $K_\epsilon \in \Cont^\infty(\R^d)$.
+    \item Kerne mit der Eigenschaft $\IInt{x^k K(x)}{x} = 0$ für $k = 1, \ldots, m - 1$ und $\IInt{\abs{x}^m K(x)}{x} < \infty$.
+  \end{itemize}
+\end{bem}
+
+\begin{bem}
+  Beachte den Satz von H. Müntz:
+
+  Sei $K : \R \to \R$ eine Funktion mit $\IInt{x^{n_i} K(x)}{x} = 0$ für $0 < n_1 < n_2 < \ldots$ mit $\sum_{i=1}^\infty \tfrac{1}{n_i} = \infty$, $\supp(K) = \cinterval{a}{b}$, $K \in \Cont \cinterval{a}{b}$. Dann gilt $K \equiv 0$.
+\end{bem}
+
+\begin{bem}
+  Es gibt Kerne mit $\Int{-\infty}{\infty}{x^n K(x)}{x} = 0$ für alle (geraden) $n \in \N$, \zB{}
+  \[
+    K(x) = \tfrac{1}{2 \pi} \Int{- \infty}{\infty}{\cos(t x) g(t)}{t}
+    \quad \text{mit} \quad
+    g(t) \coloneqq \begin{cases}
+      1 - e^{- \nicefrac{1}{t^2}} & \text{falls } t \neq 0, \\
+      1 & \text{falls } t = 0
+    \end{cases}
+  \]
+\end{bem}
+
+% 5.4 Orthogonale Schätzer für W-Dichten
+
+Sei $M = \cinterval{a}{b}$ mit $- \infty < a < b < \infty$.
+Der Hilbertraum $L^2(M)$ besitzt eine abzählbare ONB $e_1, e_2, \ldots$, sodass für alle $f \in L^2(M)$ gilt:
+\[
+  f(x) = \sum_{k=1}^\infty \alpha_k e_k(x)
+  \quad \text{mit } \alpha_k = \scp{f}{e_k}
+  \quad \text{für } x \in \cinterval{a}{b}
+\]
+
+Statistisches Problem: Für eine math. SP $X_1, \ldots, X_n$ aus einer Grundgesamtheit für ein zuf. Merkmal mit Dichte $f \in L^2(M)$
+
+Schätzung von~$f$ erfolgt in zwei Schritten:
+\begin{enumerate}
+  \item Wähle einen Parameter $N = N_n$.
+  Sei $f_N$ die Projektion von $f$ auf $L(e_1, \ldots, e_N) \subseteq L^2(M)$,
+  \[
+    f_N(x) = \sum_{k=1}^N \alpha_k e_k(x), \enspace x \in M
+    \quad \text{mit } \alpha_k = \scp{f}{e_k}
+  \]
+  \item Schätzung der Koeffizienten:
+  \[
+    \hat{\alpha}_k = \hat{\alpha}_{k,n} = \tfrac{1}{n} \sum_{k=1}^n e_k(X_i), \enspace k = 1, \ldots, N_n
+  \]
+\end{enumerate}
+Der ON-Schätzer (Projektionsschätzer) $\hat{f}_n (x) = \hat{f}_{n,N} (x) \coloneqq \sum_{k=1}^N \hat{\alpha}_{k,n} e_k(x) = \tfrac{1}{n} \sum_{i=1}^n \sum_{k=1}^N e_k(X_i) e_k(x)$.
+
+Eigenschaften des Schätzers $\hat{f}_n$:
+
+% $\hat{f}_n$ hängt (stetig) von der Wahl der ONB ab
+
+\begin{lem}
+  Für $f \in L^2 (M)$ und $e_1 (x) \equiv \mathrm{const} = \tfrac{1}{\sqrt{\abs{M}}}$, $\abs{M} = b - a$ gilt
+  \[
+    \Int{M}{}{\hat{f}_n(x)}{x} = 1
+    \quad \text{und} \quad
+    \E \hat{f}_n(x) f_N(x), x \in M
+  \]
+\end{lem}
 
 \end{document}
 
