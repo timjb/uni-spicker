@@ -2100,6 +2100,7 @@ Voraussetzungen:
   \end{itemize}
 \end{bemn}
 
+% 5.9
 \begin{satz}[Konvergenz der konformen Approximation]
   Seien die Voraussetzungen (V1)-(V3) und (V4) mit $r = 1$ erfüllt.
   Dann gilt für die Lösung $u$ von (VGL) und die Lösung $u_n$ der konformen Approximation $(VGL)\tss{n}$ mit $l_n = l|_{U_n}$ die Abschätzung $\norm{u - u_n}_{H^1(\Omega)} \leq c_0 h_n^k \abs{u}_{H^{k+1}(\Omega)}$ für ein $c_0 > 0$, falls $u \in H^{k+1}(\Omega)$.
@@ -2133,6 +2134,66 @@ Voraussetzungen:
     B(\phi, w(r)) = \scp{r}{E(\phi)}_H \, \forall \phi \in U
   \]
   ist.
+\end{satz}
+
+% Vorlesung vom 19.1.2016
+
+% 5.13
+\begin{kor}
+  Seien die Voraussetzungen aus dem Satz zur Konvergenz der konformen Approximation erfüllt.
+  Zusätzlich existiere eine Konstante $ic_a > 0$, sodass für alle $r \in L^2(\Omega)$ die Lösung $w(r)$ vom adjungierten Problem
+  \[
+    B(\phi, w(r)) = \Int{\Omega}{}{r \phi}{x} \,
+    \forall \phi \in H_1(\Omega)
+  \]
+  die Abschätzung $\norm{w(r)}_{H^2(\Omega)} \leq c_a \norm{r}_{L^2(\Omega)}$ erfüllt.
+  Dann gibt es eine Konstante $c > 0$, sodass
+  \[
+    \norm{u - u_n}_{L^2(\Omega)} \leq c h^{k+1}_n \abs{u}_{H^{k+1}(\Omega)},
+  \]
+  falls $u \in H^{k+1}(\Omega)$.
+\end{kor}
+
+% 5.5. Verallgemeinerungen
+
+% 5.5.1. Rechteckige Elemente vom Lagrange-Typ
+
+\begin{defn}
+  $(K, P(K), \Sigma(K))$ ist ein rechteckiges Element vom Lagrange-Typ, falls
+  \begin{itemize}
+    \item $K = \Set{x \in \R^d}{c_j \leq x_j \leq c_j + r_j, c_j, r_j \in \R, j = 1, \ldots, d}$ ist ein Rechteck
+    \item $P(K) = \Q_k(K) = \{ p(x) = \sum_{\alpha \in \N^d, 0 \leq \alpha_i \leq k} \lambda_\alpha x_1^{\alpha_1} \cdot \ldots \cdot x_d^{\alpha_d} \} \subset \Poly_{dk}(K)$
+    \item $\Sigma(K) = \Set{b : P(K) \to \R, \enspace p \mapsto p(a)}{a \in \mathcal{K}_k}$, wobei $\mathcal{K}_k = \Set{(c_1 + i_1 \tfrac{r_1}{k}, \ldots, c_d + i_d \tfrac{r_d}{k})}{i_j \in \{ 0, \ldots, k \}, j = 1, \ldots, d}$
+  \end{itemize}
+\end{defn}
+
+% ausgelassen: Beispiel
+
+\begin{satz}
+  Jedes Polynom $p \in \Q_k(K)$ ist eindeutig durch die Werte auf der Knotenmenge $\mathcal{K}_k$ definiert.
+\end{satz}
+
+\begin{defn}
+  $T_n(\bOmega) \coloneqq \Set{(K_i, P(K_i), \Sigma(K_i))}{i = 1, \ldots, N}$ heißt Triangulierung von $\bOmega$ mit rechteckigen FE vom Lagrange-Typ, wenn
+  \begin{itemize}
+    \item $\bOmega = \bigcup_{i=1}^N K_i$
+    \item $\inte(K_i) \cap \inte(K_j) = \emptyset$ für $i \neq j$
+    \item Jede Seite von $K_i$ ist entweder ein Teil von $\partial \Omega$ oder die Seite von einem anderen $K_j$
+  \end{itemize}
+\end{defn}
+
+\begin{defn}
+  Ein Finite-Element-Raum ist definiert durch
+  \[
+    U_n = \Set{v \in \Cont(\bOmega)}{v|_{K_i} \in \Q_k(K_i), i = 1, \ldots, N}
+  \]
+\end{defn}
+
+\begin{satz}
+  \begin{itemize}
+    \item $U_n \subset H^1(\Omega)$
+    \item Eine Basis von $U_n$ ist durch Polynome $p_j \in U_n$ mit $p_i(a_j) = \partial_{ij}$ für alle $ia_j \in \mathcal{K}_k$ gegeben.
+  \end{itemize}
 \end{satz}
 
 \end{document}
