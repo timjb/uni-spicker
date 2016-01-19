@@ -43,6 +43,7 @@
 \DeclareMathOperator{\trace}{trace} % Spur
 \DeclareMathOperator{\ggT}{ggT} % größter gemeinsamer Teiler
 \DeclareMathOperator{\ord}{ord} % Ordnung
+\newcommand{\rez}{\mathrm{rez}} % reziprok
 
 \begin{document}
 
@@ -2192,6 +2193,126 @@ TODO: weiter
   \[
     H = \text{TODO}
   \]
+\end{prop}
+
+% Vorlesung vom 19.1.2016
+
+\begin{defn}
+  Sei $f(x) = f_d x^d + \ldots f_1 x + f_0 \in \F_q[x]$ mit $f_0 \neq 0$ (also $f(0) \neq 0$).
+  Das \emph{reziproke Polynom} zu $f(x)$ ist
+  \[
+    f^\rez(x) = f(\tfrac{1}{x}) \cdot x^d = f_0 x^d + f_1 x^{d-1} + \ldots + f_{n-1} x + f_n.
+  \]
+\end{defn}
+
+\begin{satz}
+  Sei $C$ ein zyklischer Code der Länge $n$ über $\F_q$ mit Generatorpolynom $g(x)$ und Kontrollpolynom $h(x)$.
+  Dann ist $C^\perp$ ebenfalls zyklisch.
+  Das Generatorpolynom von $C^\perp$ ist
+  \[
+    h^*(x) \coloneqq \tfrac{1}{h_0} \cdot h^\rez(x).
+  \]
+\end{satz}
+
+\begin{bsp}
+  $q=2$, $n=7$.
+  \[
+    x^7 - 1 = \underbrace{(x-1) \cdot (x^3 + x^2 + 1)}_{h(x) \coloneqq} \cdot \underline{(x^3 + x + 1)}_{g(x) \coloneqq}
+  \]
+  Generatormatrix zu $C_g$:
+  \[
+    G = \begin{pmatrix}
+      1 & 1 & 0 & 1 & 0 & 0 & 0 \\
+      0 & 1 & 1 & 0 & 1 & 0 & 0 \\
+      0 & 0 & 1 & 1 & 0 & 1 & 0 \\
+      0 & 0 & 0 & 1 & 1 & 0 & 1
+    \end{pmatrix}
+  \]
+  Kontrollmatrix zu $C_g$:
+  \[
+    H = \begin{pmatrix}
+      1 & 0 & 1 & 1 & 1 & 0 & 0 \\
+      0 & 1 & 0 & 1 & 1 & 1 & 0 \\
+      0 & 0 & 1 & 0 & 1 & 1 & 1
+    \end{pmatrix}
+  \]
+  Der Minimalabstand von $C_g$ ist $3$ und $C_g$ ein $[7, 4, 3]$-Code über $\F_2$.
+  $C_g$ hat Parameter wie $\Ham_2(3)$.
+\end{bsp}
+
+\begin{bsp}
+  $q = 3$, $n = 11$
+  \[
+    x^11 - 1 = \underbrace{(x-1) \cdot (x^5 + x^4 - x^3 + x^2 - 1)}_{h(x) \coloneqq} \cdot \underbrace{(x^5 - x^3 + x^2 - x - 1)}_{g(x) \coloneqq}.
+  \]
+  Betrachte $\hat{C}_g = $ Parity-Check-Erw. von $C_g$.
+  Die Generatormatrix ist
+  \[
+    \setcounter{MaxMatrixCols}{20}
+    \hat{G} = \begin{pmatrix}
+      -1 & -1 & 1 & -1 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 1 \\
+      0 & -1 & -1 & 1 & -1 & 0 & 1 & 0 & 0 & 0 & 0 & 1 \\
+      0 & 0 & -1 & -1 & 1 & -1 & 0 & 1 & 0 & 0 & 0 & 1 \\
+      0 & 0 & 0 & -1 & -1 & 1 & -1 & 0 & 1 & 0 & 0 & 1 \\
+      0 & 0 & 0 & 0 & -1 & -1 & 1 & -1 & 0 & 1 & 0 & 1 \\
+      0 & 0 & 0 & 0 & 0 & -1 & -1 & 1 & -1 & 0 & 1 & 1
+    \end{pmatrix}
+  \]
+  $\hat{C}_g$ ist selbstdual, da $\hat{G} \cdot \hat{G} = 0$.
+  Somit ist das Minimalgewicht von $\hat{C}_g$ durch drei teilbar.
+  Je drei Spalten von $\hat{G}$ sind linear unabhängig.
+  Daher gilt $d(\hat{C}_g) \geq 6$.
+  Somit ist $\hat{C}_g$ ein $[12, 6, 6]$-Code über $\F_3$.
+  Es folgt, dass $C_g$ ein $[11, 6, 5]$-Code über $\F_3$.
+  Dieser ist perfekt.
+  Also $C_g = \Golay(11)$ und $\hat{C}_g = \Golay(12)$.
+\end{bsp}
+
+\begin{bsp}
+  $q = 2$, $n = 23$.
+  Dann ist
+  \[
+    x^{23} - 1 = \underbrace{(x-1) \cdot (x^{11} + x^9 + x^7 + x^6 + x^5 + x + 1)}_{h(x) \coloneqq} \cdot \underbrace{(x^{11} + x^{10} + x^6 + x^5 + x^4 + x^2 + 1)}_{g(x) \coloneqq}
+  \]
+  Dann ist $C_g = \Golay(23)$.
+\end{bsp}
+
+% §11.3 CRC-Codes (cyclic redundancy check codes)
+
+$\F_q; n; g(x) \divides x^n - 1$; $C_g$; $\deg(g) = n - k$, $k = \dim(C_g)$
+
+Codierverfahren:
+
+Nachrichtenraum ist $\F_q^k \hat{=} \F_q[x]_{< k}$
+
+Codierabbildung:
+
+\[
+  E : \F_q[x]_{< k} \to C_g, \enspace m(x) \mapsto c(x) \coloneqq m(x) \cdot x^{n-k} - (m(x) \cdot x^{n-k} \bmod g(x))
+\]
+
+Fehlererkennung:
+
+$c(x)$ ist gesendet, $y(x)$ ist empfangen.
+
+Berechne $s(x) = y(x) \bmod g(x)$.
+
+Dann $s(x) = 0 \iff y(x) \in C_g$.
+
+\begin{defn}
+  Sei $2 \leq b \leq n$.
+  Eine Teilmenge $I \subseteq \Z_n$ heißt ein \emph{zyklisches Intervall der Länge~$b$}, \dh{} $I= \Set{l + j \bmod n}{0 \leq j \leq b-1}$ für ein $l \in \Z_n$.
+  Ein $v \in \F_q^n$ ist ein \emph{Fehlerbündel der Länge~$b$}, falls $b$ minimal ist mit:
+  Es existiert ein zyklisches Intervall $I$ der Länge $b$ mit $v_l \neq 0$, $v_{l+b-1 \bmod n} \neq 0$ und $\supp(v) \subseteq I$.
+\end{defn}
+
+\begin{bsp}
+  $v = (0,2,0,0,0,0,1,1,0)$ ist ein Fehlerbündel der Länge $b = 5$.
+\end{bsp}
+
+\begin{prop}
+  Sei $g(x)$ wie oben und $n \geq 3$.
+  Dann erkennt $C_g$ \emph{Einzelfehler} und Fehlerbündel der Länge~$b$, falls $b \leq n - k$, \dh{} ist $v$ ein solches Fehlerbündel, so gilt $v \not\in C_g$.
 \end{prop}
 
 \end{document}
