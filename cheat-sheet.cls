@@ -109,6 +109,7 @@
 \definecolor{Emph}{rgb}{0.2,0.2,0.8}
 \renewcommand{\emph}[1]{\textcolor{Emph}{\bf{#1}}}
 \newcommand{\Emph}[1]{\textcolor{Emph}{#1}}
+\newcommand{\TODO}[1]{\textcolor{orange}{TODO: #1}}
 
 \usepackage{cclicenses}
 \usepackage{hyperref}
@@ -164,6 +165,7 @@
 \newcommand{\Intdx}[3]{\Int{#1}{#2}{#3}{x}} % Integral mit dx
 \newcommand{\Intab}[2]{\Int{a}{b}{#1}{#2}} % Integral über [a, b]
 \newcommand{\Intabdx}[1]{\Intdx{a}{b}{#1}} % Integral über [a, b] mit dx
+\newcommand{\AInt}[3]{{\textstyle \int\limits_{#1}} {#2} \,\d {#3}} % Integral über ein Gebiet
 
 \DeclareMathOperator{\im}{im} % Bild (image)
 \DeclareMathOperator{\supp}{supp} % Träger (support)

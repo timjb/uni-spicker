@@ -1895,6 +1895,49 @@ Eigenschaften des Schätzers $\hat{f}_n$:
   \]
 \end{lem}
 
+% Vorlesung vom 21.1.2016
+
+\begin{kor}
+  Für $N_n \xra[n \to \infty]{} \infty$ gilt $\E \hat{f}_n(x) \xra[n \to \infty]{} f(x)$ (fast-überall), falls $f_N(x) \xra[N \to \infty] f(x)$.
+\end{kor}
+
+\begin{lem}
+  Sei $f \in L^2(M)$.
+  Dann gilt für ON-Schätzer
+  \[
+    \norm{\hat{f}_n - f}_2 = \sum_{k=1}^N (\hat{\alpha}_{k,n} - \alpha_k)^2 + \sum_{k = N+1}^\infty \alpha_k^2
+  \]
+\end{lem}
+
+% ausgelassen: Beispiel Intervall und trigonometrische Funktionen
+
+\begin{satz}
+  $J_n = \E \norm{\hat{f}_{n,N_n} - f}_2^2 = \E \AInt{M}{(\hat{f}_{n,N_n}(x) - f(x))^2}{x} \xra[n \to \infty]{} 0 \iff \tfrac{1}{n} \sum_{i=1}^{N_n} \AInt{M}{e_k^2(x) f(x)}{x} \xra[n \to \infty]{} 0$
+\end{satz}
+
+\begin{kor}
+  Aus $J_n \xra[n \to \infty]{} 0$ folgt $\norm{\hat{f}_{n,N_n} - f}_2 \xra[n \to \infty]{\P} 0$.
+\end{kor}
+
+% §6. Simulation von Zufallszahlen und Simulationstests
+\section{Simulation von Zufallszahlen und Simulationstests}
+
+% §6.1. Erzeugung von nach einer VF verteilter Zufallszahlen
+
+1. Möglichkeit: Quantilfunktionen, Inversionsmethode
+
+Sei $F$ eie VF auf $\R^1$.
+Dann heißt die Funktion $F^{-} : \cinterval{0}{1} \to \cointerval{-\infty}{\infty}$ mit $F^{-}(y) \coloneqq \min \Set{x \in \R^1}{F(x) \geq y}$ für $y \in \ocinterval{0}{1}$, $F^{-}(0) = \lim_{y \downarrow 0} F^{-}(y)$ \emph{Quantilfunktion} oder (verallgemeinerte) \emph{Pseudo-Inverse} zu~$F$.
+
+Eigenschaften:
+
+\begin{itemize}
+  \item $F^{-}$ ist monoton und linksseitig stetig
+  \item $F(F^{-}(y)) \geq y$ für alle $y \in \cinterval{0}{1}$
+  \item $U \sim \Uniform \cinterval{0}{1}$ $\implies$ $F^{-}(U) \sim F$.
+  Falls $(U_i)_{i \in \N}$ eine Folge unabhängiger gleichverteilter Zufallszahlen auf $\cinterval{0}{1}$ sind, dann ist $(F^{-}(U_i))_{i \in \N}$ eine Folge $F$-verteilter Zufallszahlen.
+\end{itemize}
+
 \end{document}
 
 TODO:
