@@ -2248,7 +2248,7 @@ TODO: weiter
   Betrachte $\hat{C}_g = $ Parity-Check-Erw. von $C_g$.
   Die Generatormatrix ist
   \[
-    \setcounter{MaxMatrixCols}{20}
+    \setcounter{MaxMatrixCols}{20} % LaTeX ist so ein Scheiß!
     \hat{G} = \begin{pmatrix}
       -1 & -1 & 1 & -1 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 1 \\
       0 & -1 & -1 & 1 & -1 & 0 & 1 & 0 & 0 & 0 & 0 & 1 \\
@@ -2314,5 +2314,70 @@ Dann $s(x) = 0 \iff y(x) \in C_g$.
   Sei $g(x)$ wie oben und $n \geq 3$.
   Dann erkennt $C_g$ \emph{Einzelfehler} und Fehlerbündel der Länge~$b$, falls $b \leq n - k$, \dh{} ist $v$ ein solches Fehlerbündel, so gilt $v \not\in C_g$.
 \end{prop}
+
+% Vorlesung vom 21.1.2016
+
+% §11.4. Nullstellen von zyklischen Codes
+
+\begin{bem}
+  Sei $n = p^s \cdot l$, wobei~$l$ nicht durch~$p$ teilbar ist.
+  Dann ist $(x^n - 1) = (x^l - 1)^{p^s}$.
+  Da $\ggT(x^l - 1, (x^l - 1)') = \ggT(x^l - 1, l x^{l-1}) = 1$, treten die irreduziblen Faktoren von $x^l - 1$ in einfacher Vielfachheit auf.
+\end{bem}
+
+\begin{nota}
+  $E(\Z_m) \coloneqq \Z_m^\times$ (Einheitengruppe von $\Z_m$)
+\end{nota}
+
+\begin{bem}
+  Betrachte $\F_{q^m}$.
+  Die Einheitengruppe $\F_{q^m}^{\times}$ ist zyklisch.
+  Wegen $n \divides (q^m - 1)$ besitzt $\F_{q^m}^{\times}$ eine eindeutige Untergruppe $Z_n$ mit~$n$ Elementen.
+  Jedes $\alpha \in Z_n$ heißt eine \emph{$n$-te Einheitswurzel}.
+  Es gilt $\alpha \in Z_n \iff \alpha^n = 1$.
+  Daher gilt $x^n - 1 = \prod_{\alpha \in Z_n} (x-\alpha)$ und $\F_{q^m}$ ist der Zerfällungskörper von $x^n - 1$.
+  Ein $\zeta \in \F_{q^m}^\times$ mit $\ord(\zeta) = n$.
+  Dann ist $Z_n = \{ 1, \zeta, \ldots, \zeta^{n-1} \}$ und $x^n - 1 = \prod_{i=1}^{n-1} (x - \zeta^i)$.
+  Ein solches $\zeta$ nennt man eine \emph{primitive $n$-te Einheitwurzel}.
+  Sei $\ord(\zeta) = n$.
+  Für $l \in \Z$ gilt dann $\ord(\zeta^l) = \tfrac{n}{\ggT(n,l)}$.
+  Insbesondere $\ord(\zeta^{\nicefrac{n}{d}}) = d$ für jeden Teiler~$d$ von~$n$.
+  Zur $d \divides n$ sei $\Gamma_d \coloneqq \Set{\alpha \in Z_n}{\ord(\alpha) = d}$ die Menge aller Erzeuger von $Z_d$.
+  Dann gilt $Z_n = \bigsqcup_{d \divides n} \Gamma_d$ mit $\abs{\Gamma_d} = \varphi(d)$.
+  Dann heißt
+  \[
+    \Phi_d(x) \coloneqq \prod_{\alpha \in \Gamma_d} (x - \alpha) \in \F_{q^m}[x]
+  \]
+  das \emph{$d$-te Kreisteilungspolynom}.
+  Es gilt $x^n - 1 = \prod_{d \divides n} \Phi_d(x)$
+  Wir behaupten, dass sogar $\Phi_d(x) \in \F_q[x]$ gilt.
+  Sei $k = \varphi(d)$, $\Gamma_d = \{ \alpha_1, \ldots, \alpha_k \}$, $\Phi_d(x) = \prod_{i=1}^k (x - \alpha_i) = \sum_{j=0}^k w_j x^j$.
+  Dann ist $w_0 = (-1)^k \prod_{i=1}^k \alpha_i$, $w_k = 1$, $w_{k-1} = - \sum_{i = 1}^k \alpha_i$.
+  Zu $I \subseteq [k] \coloneqq \{ 1, \ldots, k \}$ sei $\alpha_I \coloneqq \prod_{i \in I} \alpha_i$.
+  Für jedes $j = 0, 1, \ldots, k-1$ gilt dann $w_j = (-1)^{k-j} \sum_{I \subseteq [k], \abs{I} = k - j} \alpha_I$.
+  Die Abbildung $\beta \mapsto \beta^p$ ist eine Permutation auf $\Gamma_d$.
+  \[
+    w_j^p = [(-1)^{k-j}]^{p} \sum_{I \subseteq [k], \abs{I} = k - j} \alpha_I^p = w_j
+  \]
+  Also $w_j^p = w_j \iff w_j^{p-1} = 1 \iff w_j \in Z_{p-1} \subseteq \F_{q^m}^\times$.
+\end{bem}
+
+Betrachte $\Gamma_d$ für $d \divides n$.
+Definiere auf $Z_n$ eine Äq'relation durch $\beta \sim \gamma \coloniff $ es gibt ein $k \in \N$ mit $\beta^{q^k} = \gamma$.
+Kann innerhalb $\Z_n$ beschrieben werden: $i \sim j \coloniff j \equiv i q^k \bmod{n}$ für ein $k \in \N$.
+$[i]_\sim$ sei die Klasse von~$i$.
+$\Gamma_{n,i} \coloneqq \Set{\zeta^j}{j \in [i]_\sim}$ heißt die \emph{zu $i$ gehörende Kreisteilungsklasse}.
+Dies ist eine minimale Menge, die unter Potenzieren von $q$ invariant ist.
+Dann hat $\mu_i(x) \coloneqq \prod_{\alpha \in \Gamma_{n,i}} (x - \alpha)$ Koeffizienten aus $\F_q$ und ist als Polynom in $\F_q[x]$ irreduzibel.
+
+Also ist $K_n = $ Repräsentantensystem von Kreisteilungsklassen, also $\Gamma_n = \bigsqcup_{i \in K_n} \Gamma_{n,i}$ und $\Phi_n(x) = \prod_{i \in K_n} \mu_i(x)$ ist eine vollständige Faktorisierung über~$\F_q$.
+
+$\abs{[i]_\sim} = \abs{\Gamma_{n,i}} = \min \Set{k}{q^k \equiv 1 \bmod{n}} = \ord_n(q)$
+
+Somit zerfällt $\Phi_n(x)$ in Polynome mit jeweiligem Grad $\ord_n(q)$, also $\deg(\mu_i) = \ord_n(q)$ für alle $i \in K_n$.
+
+Die Anzahl verschiedener minimaler Faktoren von $\Phi_n(x)$ aus $\F_q[x]$ ist gleich $\tfrac{\deg(\Phi_n)}{\ord_n(q)} = \tfrac{\varphi(n)}{\ord_n(q)}$
+
+Fazit: $p$ teilt nicht $n$. Dann ist die Anzahl der irred. Faktoren von $x^n - 1$ gleich $\sum_{d \divides n} \tfrac{\varphi(d)}{\ord_d(q)}$.
 
 \end{document}
