@@ -38,7 +38,13 @@
 \newcommand{\Poly}{\mathbbm{P}} % Menge der Polynome
 \newcommand{\Qoly}{\mathbbm{Q}} % Menge der in jeder Koordinate im Grad beschränkten Polynome
 
+% Hervorhebung von Problembezeichnungen
+\definecolor{ProblemColor}{rgb}{0.7,0.2,0.0}
+\newcommand{\probl}[1]{\textcolor{ProblemColor}{#1}}
+
 \begin{document}
+
+\raggedcolumns % stretche Inhalt nicht über die gesamte Spaltenhöhe
 
 \maketitle{Zusammenfassung Numerik von PDEs}
 
@@ -77,10 +83,9 @@
 % Ausgelassen: Beispiele: Poisson-, Laplace-, Wärmeleitungs-, Wellengleichung sowie Navier-Stokes-Gleichung
 
 \begin{defn}
-  Sei $\Omega \subseteq \R^n$ offen und $F : \Omega \times \R \times \R^n \times \R^{n \times n} \to \R$ eine gegebene Funktion.
-  Eine PDE der Form
-  \[ F(x, u, \partial_{x_1} u, \ldots, \partial_{x_n} u, \partial_{x_1} \partial_{x_1} u, \ldots, \partial{x_1} \partial_{x_n} u, \ldots, \partial_{x_n} \partial_{x_n} u) = 0 \]
-  heißt \emph{PDE zweiter Ordnung}.
+  Sei $\Omega \subseteq \R^n$ offen und $F : \Omega \times \R \times \R^n \times \R^{n \times n} \to \R$ gegeben.
+  Eine \emph{PDE zweiter Ordnung} ist eine PDE der Form
+  \[ F(x, u, \partial_{x_1} u, \ldots, \partial_{x_n} u, \partial_{x_1} \partial_{x_1} u, \ldots, \partial{x_1} \partial_{x_n} u, \ldots, \partial_{x_n} \partial_{x_n} u) = 0. \]
 \end{defn}
 
 \begin{nota}
@@ -97,9 +102,9 @@
 \begin{defn}[\emph{Typeneinteilung für PDEs der 2. Ordnung}]\mbox{}\\
   Obige PDE zweiter Ordnung heißt
   \begin{itemize}
-    \item \emph{elliptisch} in $x$, falls die Matrix $M(x)$ positiv o. definit ist.
-    \item \emph{parabolisch} in $x$, falls genau ein EW von $M(x)$ gleich null ist und alle anderen dasselbe Vorzeichen haben.
-    \item \emph{hyperbolisch} in $x$, falls genau ein EW ein anderes Vorzeichen als die anderen EWe hat.
+    \item \emph{elliptisch} in~$x$, falls die Matrix~$M(x)$ positiv o. negativ definit ist.
+    \item \emph{parabolisch} in~$x$, falls genau ein EW von~$M(x)$ gleich null ist und alle anderen dasselbe Vorzeichen haben.
+    \item \emph{hyperbolisch} in~$x$, falls genau ein EW von~$M(x)$ ein anderes Vorzeichen als die anderen EWe hat.
   \end{itemize}
 \end{defn}
 
@@ -167,7 +172,7 @@
 \begin{prob}
   Wir betrachten das Randwertproblem
   \[
-    \text{(RWP)} \enspace \left\{ \begin{array}{rllll}
+    \text{\probl{(RWP)}} \enspace \left\{ \begin{array}{rllll}
       \LL u &=& f &\text{ in $\Omega$} & \text{(PDE)} \\
       \RR u &=& g &\text{ auf $\bOmega$} & \text{(Randbedingung)}
     \end{array} \right.
@@ -290,7 +295,7 @@
 \begin{verf}[\emph{DV}]
   Am Beispiel des Poisson-Problems
   \[
-    \text{(RWP\tss{1})}\enspace \left\{ \begin{array}{rl}
+    \text{\probl{(RWP\tss{1})}}\enspace \left\{ \begin{array}{rl}
       - \Laplace u = f &\text{ in $\Omega = \ointerval{0}{1}$} \\
       u(0) = g_0, u(1) = g_1 &\text{ auf $\bOmega$}
     \end{array} \right.
@@ -323,7 +328,7 @@
     Das diskretisierte Randwertproblem ist nun
     % TODO: Bezeichnung davon?
     \[
-      \text{(RWP\tss{1})\tss{h}} \enspace
+      \text{\probl{(RWP\tss{1})\tss{h}}} \enspace
       \left\{ \begin{array}{rl}
         - \Laplace_h u_h = f &\text{ in $\Omega_h$,} \\
         u_h(0) = g_0, u_h(1) = g_1 &\text{ auf $\bOmega_h$.}
@@ -368,21 +373,25 @@
 % Vorlesung vom 26.10.2015
 
 % Konvergenz, Konsistenz, Stabilität
+\subsection{Konvergenz, Konsistenz und Stabilität des DV}
 
 \begin{ziel}
   Herausfinden, was die Lösung~$u_h$ von (RWP)\tss{h} (die man durch Lösen von (LGS) erhält) mit der Lösung~$u$ zum ursprünglichen Problem (RWP) zu tun hat.
   Ist etwa~$u_h$ die Einschränkung von~$u$, oder zumindest annäherungsweise?
   Wenn ja, wie klein muss man~$h$ wählen, damit die Approximation gut wird?
   \begin{align*}
-    \text{(RWP)} \enspace & \left\{ \begin{array}{rl}
+    \text{\probl{(RWP)}} \quad
+    & \left\{ \begin{array}{rl}
       - \LL u = f &\text{ in $\Omega$,} \\
       u = g &\text{ auf $\bOmega$}
     \end{array} \right. \\
-    \text{(RWP)\tss{h}} \enspace & \left\{ \begin{array}{rl}
+    \text{\probl{(RWP)\tss{h}}} \quad
+    & \left\{ \begin{array}{rl}
       - \LL_h u = f_h &\text{ in $\Omega_h$,} \\
       u_h = g_h &\text{ auf $\bOmega_h$}
     \end{array} \right. \\
-    \text{(LGS)} \enspace & \tilde{\LL}_h \tilde{u}_h = \tilde{f}_h
+    \text{\probl{(LGS)}} \quad
+    & \qquad \tilde{\LL}_h \tilde{u}_h = \tilde{f}_h
   \end{align*}
 \end{ziel}
 
@@ -395,7 +404,7 @@
 \begin{defn}
   Das Differenzenverfahren (RWP)\tss{h} heißt
   \begin{itemize}
-    \item \emph{konvergent} von der Ordnung~$p$, falls $C > 0$, $h_0 > 0$ existieren, sodass für die Lösung~$u$ von (RWP) und die Lösung~$u_h$ von (RWP)\tss{h} gilt:
+    \item \emph{konvergent} von der Ordnung~$p$, falls $C > 0$, $h_0 > 0$ existieren, sodass für die Lsg~$u$ von (RWP) und die Lsg~$u_h$ von (RWP)\tss{h} gilt:
     \[
       \norm{u_h - R_h u}_h \leq C h^p \quad
       \text{für alle $0 < h \leq h_0$,}
@@ -452,7 +461,7 @@
 
 % 3.2
 \begin{lem}
-  Das DV (RWP\tss{1})\tss{h} ist konsistent von der Ordnung 2.
+  Das DV (RWP\tss{1})\tss{h} ist konsistent von der Ordnung~2.
   Es gilt
   \[
     \norm{\Laplace_h R_h u - R_h \Laplace u}_h \leq \tfrac{1}{12} \norm{u}_{\Cont^4(\cOmega)} h^2 \quad
@@ -578,11 +587,13 @@
 \end{satz}
 
 % 3.2. Differenzenverfahren für die Poisson-Gleichung in $\Omega = \ointerval{0}{1} \times \ointerval{0}{1}$
+\subsection{Differenzenverfahren in $\ointerval{0}{1} \times \ointerval{0}{1} \subset \R^2$}
 
 \begin{problem}
   Wir betrachten nun
   \[
-    \text{(RWP\tss{2})} \left\{ \begin{array}{rlll}
+    \text{\probl{(RWP\tss{2})}} \quad
+    \left\{ \begin{array}{rlll}
       - \Laplace u &=& f &\text{ in $\Omega = \ointerval{0}{1} \times \ointerval{0}{1}$} \\
       u &=& g &\text{ auf $\bOmega$}
     \end{array} \right.
@@ -605,7 +616,8 @@
   Dabei hat der diskrete Laplace-Operator $\Laplace_h$ die Form eines Differenzensterns.
   Gesucht ist die Lsg $u_h : \Omega_h \cup \bOmega_h \to \R$ von
   \[
-    \text{(RWP\tss{2})\tss{h}} \left\{ \begin{array}{rlll}
+    \text{\probl{(RWP\tss{2})\tss{h}}} \quad
+    \left\{ \begin{array}{rlll}
       - \Laplace_h u_h &=& f_h &\text{ in $\Omega_h$} \\
       u_h &=& g &\text{ auf $\bOmega_h$.}
     \end{array} \right.
@@ -689,6 +701,7 @@
 \end{bem}
 
 % 3.3. Diskretisierung in einem beschränkten Gebiet in R^2
+\subsection{Differenzenverfahren in allg. Gebieten $\Omega \subset \R^2$}
 
 \begin{situation}
   Sei $\Omega \subset \R^2$ beschränkt.
@@ -774,11 +787,13 @@
   % Vorlesung vom 3.11.2015
   Wir betrachten nun
   \begin{align*}
-    \text{(RWP\tss{2})'\tss{h}}\enspace & \left\{ \begin{array}{rrcl}
+    \text{\probl{(RWP\tss{2})'\tss{h}}} \quad
+    & \left\{ \begin{array}{rrcl}
       - \DO_h u_h &=& f_h &\text{ in $\Omega_h$} \\
       u_h &=& g &\text{ auf $\bOmega_h$}
     \end{array} \right. \\
-    \text{(LGS\tss{2})'}\enspace & \left\{ \begin{array}{rcl}
+    \text{\probl{(LGS\tss{2})'}} \quad
+    & \left\{ \begin{array}{rcl}
       - \tilde{\DO}_h \tilde{u}_h &=& \tilde{f}_h \\
       \tilde{f}_h &=& f_h + g_h
     \end{array} \right.
@@ -787,14 +802,17 @@
     \text{mit} \quad
     g_h(x, y) = \nicefrac{1}{h^2} \qquad \sum_{\mathclap{(x_N, y_N) \in N(x, y) \cap \bOmega_h}} \qquad S_{x_N,y_N} g(x_N, y_N)
   \]
-  wobei
+  
+  wobei\vspace{-0.3cm}
   \begin{align*}
     S_{x_N,y_N} \coloneqq & \begin{cases}
       \nicefrac{2}{s_l (s_l + s_r)} & \text{falls $(x_N, y_N) = (x - s_l h, y)$,} \\
       \nicefrac{2}{s_r (s_l + s_r)} & \text{falls $(x_N, y_N) = (x + s_r h, y)$,} \\
       \nicefrac{2}{s_o (s_o + s_u)} & \text{falls $(x_N, y_N) = (x, y + s_o h)$,} \\
       \nicefrac{2}{s_u (s_o + s_u)} & \text{falls $(x_N, y_N) = (x, y - s_u h)$,} \\
-    \end{cases} \\
+    \end{cases}
+  \end{align*}
+  \begin{align*}
     - \tilde{\DO}_h = (d_{ij}) & \quad \text{mit} \quad
     d_{ii} = \nicefrac{1}{h^2} \left( \tfrac{2}{s_{il} s_{ir}} + \tfrac{2}{s_{iu} s_{io}} \right) \quad \text{und} \\
     d_{ij} = \nicefrac{1}{h^2} & \begin{cases}
@@ -876,16 +894,15 @@
   \end{itemize}
 \end{idee}
 
-\[
-  \text{(RWP\tss{2})''\tss{h}} \enspace \left\{ \begin{array}{rlll}
+\begin{align*}
+  \text{\probl{(RWP\tss{2})\tss{h}''}} \quad
+  & \left\{ \begin{array}{rlll}
     - \DO_h u &=& f_h &\text{ in $\Omega_h$} \\
     u_h &=& g &\text{ auf $\bOmega_h$}
-  \end{array} \right.
-\]
-\[
-  \text{(LGS\tss{2})''} \enspace
-  - \tilde{\DO}_h \tilde{u}_h = \tilde{f}_h
-\]
+  \end{array} \right. \\
+  \text{\probl{(LGS\tss{2})''}} \quad
+  & \qquad - \tilde{\DO}_h \tilde{u}_h = \tilde{f}_h
+\end{align*}
 
 \begin{lem}
   Dieses Verfahren besitzt Konsistenzordnung (und somit Konvergenzordnung) 2.
@@ -901,13 +918,17 @@ Konsistenz: Mit Taylorn ...
 \fi
 
 % §3.4 Allgemeine Differentialoperatoren
+\subsection{Allgemeine Differentialoperatoren}
 
 \begin{prob}
   Wir betrachten nun
-  \[ \text{(RWP\tss{3})} \enspace \left\{ \begin{array}{rlll}
-    - \LL u &=& f &\text{ in $\Omega = \ointerval{0}{1} \times \ointerval{0}{1}$} \\
-    u &=& g &\text{ auf $\bOmega$}
-  \end{array} \right. \]
+  \[
+    \text{\probl{(RWP\tss{3})}} \quad
+    \left\{ \begin{array}{rlll}
+      - \LL u &=& f &\text{ in $\Omega = \ointerval{0}{1} \times \ointerval{0}{1}$} \\
+      u &=& g &\text{ auf $\bOmega$}
+    \end{array} \right.
+   \]
   mit
   \begin{align*}
     - \LL u&  = - (a_{11}(x, y) u_{xx} + 2 a_{12}(x, y) u_{xy} + a_{22}(x, y) u_{yy}) \\
@@ -923,89 +944,89 @@ Konsistenz: Mit Taylorn ...
 \end{prob}
 
 \begin{verf}
-  \begin{enumerate}
-    \item Diskretisierung: $h = \nicefrac{1}{n}$, $\Omega_h$, $\bOmega_h$ wie früher.
-    \item Approximation:
-    \begin{alignat*}{4}
-      u_x(x, y) & \approx \tfrac{u(x + h, y) - u(x - h, y)}{2h}, \quad
-      & u_y(x, y) & \approx \ldots \\
-      u_{xx}(x, y) & \approx \tfrac{u(x + h, y) - 2 u(x, y) + u(x - h, y)}{h^2}, \quad
-      & u_{yy}(x, y) & \approx \ldots
-    \end{alignat*}
-    Für die Approx. von $u_{xy}$ haben wir mehrere Möglichkeiten: \\ Wir könnten etwa den zentralen DQ in $x$- und $y$-Richrung verwenden und erhalten
-    \begin{align*}
-      u_{xy}(x, y) \approx \tfrac{1}{4 h^2} & \left( u(x{+}h, y{+}h) - u(x{+}h, y{-}h) \right. \\
-      & \left. - u(x{-}h, y{+}h) + u(x{-}h, y{-}h) \right)
-    \end{align*}
-    Diese Annäherung hat allerdings den Nachteil, dass sie zu keiner M-Matrix führt.
-    Stattdessen nehmen wir
-    \iffalse
-    \begin{align*}
-      u_{xy}(x, y) & \approx \tfrac{1}{2 h^2} (- u(x-h, y) + 2 u(x,y) - u(x+h,y) \\
-      & + u(x-h,y-h) - u(x, y+h) - u(x,y-h) \\
-      & + u(x+h, y+h) ) \qquad \text{falls $a_{12}(x, y) \geq 0$,} \\
-      u_{xy}(x, y) & \approx \tfrac{1}{2 h^2} ( u(x-h, y) - 2 u(x, y) + u(x+h, y) \\
-      & + u(x, y+h) - u(x-h, y+h) - u(x+h, y-h) \\
-      & + u(x,y-h) ) \qquad \text{falls $a_{12}(x, y) < 0$}
-    \end{align*}
-    \fi
-    \begin{alignat*}{4}
-      u_{xy}(x, y) \approx \qquad
-      & \tfrac{1}{2 h^2} \begin{pmatrix}
-        0 & -1 & 1 \\
-        -1 & 2 & -1 \\
-        1 & -1 & 0
-      \end{pmatrix} \qquad
-      && \tfrac{1}{2 h^2} \begin{pmatrix}
-        -1 & 1 & 0 \\
-        1 & -2 & 1 \\
-        0 & 1 & -1
-      \end{pmatrix} \\
-      & \text{für } a_{12} \geq 0
-      && \text{für } a_{12} < 0.
-    \end{alignat*}
+  1. Diskretisierung: $h = \nicefrac{1}{n}$, $\Omega_h$, $\bOmega_h$ wie früher.
 
-    \iffalse
-    Insgesamt haben wir als Approximation
-    \begin{align*}
-      - \LL u(x, y) & \approx \tfrac{1}{h^2} \left( (-a_{11} + \abs{a_{12}} + \nicefrac{h}{2} b_1) u(x-h, y) \right. \\
-      & + (-a_{11} + \abs{a_{12}} - \nicefrac{h}{2} b_1) u(x + h, y) \\
-      & + (2 a_{11} + 2 a_{22} - 2 \abs{a_{12}} + h^2 c) u(x, y) \\
-      & + (-a_{22} + \abs{a_{12}} + \nicefrac{h}{2} b_2) u(x, y-h) \\
-      & + (-a_{22} + \abs{a_{12}} - \nicefrac{h}{2} b_2) u(x, y+h) \\
-      & + (- \max(a_{12}, 0) u(x-h, y-h) \\
-      & + (- \max(a_{12}, 0)) u(x+h, y+h) \\
-      & + \min(a_{12}, 0) u(x-h, y+h) \\
-      & \left. + \min(a_{12}, 0) u(x + h, x - h)) \right)
-    \end{align*}
-    \fi
-    
-    Wir fassen diese Approx. in folgendem 7-Stern zusammen:
-    \begin{align*}
-      - \LL_h u \coloneqq \enspace
-      & \tfrac{1}{h^2} \begin{pmatrix}
-        a_{12}^{-} & \abs{a_{12}} - a_{22} & a_{12}^{+} \\
-        \abs{a_{12}} - a_{11} & 2 (a_{11} + a_{22} - \abs{a_{12}}) & \abs{a_{12}} - a_{11} \\
-        - a_{12}^{+} & \abs{a_{12}} - a_{22} & a_{12}
-      \end{pmatrix} \\
-      & + \tfrac{1}{h} \begin{pmatrix}
-        & - b_2 \\
-        - b_1 & 0 & b_1 \\
-        & b_2
-      \end{pmatrix}
-      + \begin{pmatrix}
-        \\ & c & \\ &
-      \end{pmatrix}
-    \end{align*}
-  \end{enumerate}
+  2. Approximation:
+  \begin{alignat*}{4}
+    u_x(x, y) & \approx \tfrac{u(x + h, y) - u(x - h, y)}{2h}, \quad
+    & u_y(x, y) & \approx \ldots \\
+    u_{xx}(x, y) & \approx \tfrac{u(x + h, y) - 2 u(x, y) + u(x - h, y)}{h^2}, \quad
+    & u_{yy}(x, y) & \approx \ldots
+  \end{alignat*}
+  Für die Approx. von $u_{xy}$ haben wir mehrere Möglichkeiten: \\ Wir könnten etwa den zentralen DQ in $x$- und $y$-Richrung verwenden und erhalten
+  \begin{align*}
+    u_{xy}(x, y) \approx \tfrac{1}{4 h^2} & \left( u(x{+}h, y{+}h) - u(x{+}h, y{-}h) \right. \\
+    & \left. - u(x{-}h, y{+}h) + u(x{-}h, y{-}h) \right)
+  \end{align*}
+  Diese Annäherung hat allerdings den Nachteil, dass sie zu keiner M-Matrix führt.
+  Stattdessen nehmen wir
+  \iffalse
+  \begin{align*}
+    u_{xy}(x, y) & \approx \tfrac{1}{2 h^2} (- u(x-h, y) + 2 u(x,y) - u(x+h,y) \\
+    & + u(x-h,y-h) - u(x, y+h) - u(x,y-h) \\
+    & + u(x+h, y+h) ) \qquad \text{falls $a_{12}(x, y) \geq 0$,} \\
+    u_{xy}(x, y) & \approx \tfrac{1}{2 h^2} ( u(x-h, y) - 2 u(x, y) + u(x+h, y) \\
+    & + u(x, y+h) - u(x-h, y+h) - u(x+h, y-h) \\
+    & + u(x,y-h) ) \qquad \text{falls $a_{12}(x, y) < 0$}
+  \end{align*}
+  \fi
+  \begin{alignat*}{4}
+    u_{xy}(x, y) \approx \qquad
+    & \tfrac{1}{2 h^2} \begin{pmatrix}
+      0 & -1 & 1 \\
+      -1 & 2 & -1 \\
+      1 & -1 & 0
+    \end{pmatrix} \qquad
+    && \tfrac{1}{2 h^2} \begin{pmatrix}
+      -1 & 1 & 0 \\
+      1 & -2 & 1 \\
+      0 & 1 & -1
+    \end{pmatrix} \\
+    & \text{für } a_{12} \geq 0
+    && \text{für } a_{12} < 0.
+  \end{alignat*}
+
+  \iffalse
+  Insgesamt haben wir als Approximation
+  \begin{align*}
+    - \LL u(x, y) & \approx \tfrac{1}{h^2} \left( (-a_{11} + \abs{a_{12}} + \nicefrac{h}{2} b_1) u(x-h, y) \right. \\
+    & + (-a_{11} + \abs{a_{12}} - \nicefrac{h}{2} b_1) u(x + h, y) \\
+    & + (2 a_{11} + 2 a_{22} - 2 \abs{a_{12}} + h^2 c) u(x, y) \\
+    & + (-a_{22} + \abs{a_{12}} + \nicefrac{h}{2} b_2) u(x, y-h) \\
+    & + (-a_{22} + \abs{a_{12}} - \nicefrac{h}{2} b_2) u(x, y+h) \\
+    & + (- \max(a_{12}, 0) u(x-h, y-h) \\
+    & + (- \max(a_{12}, 0)) u(x+h, y+h) \\
+    & + \min(a_{12}, 0) u(x-h, y+h) \\
+    & \left. + \min(a_{12}, 0) u(x + h, x - h)) \right)
+  \end{align*}
+  \fi
+  
+  Wir fassen diese Approx. in folgendem 7-Stern zusammen:
+  \begin{align*}
+    - \LL_h u \coloneqq \enspace
+    & \tfrac{1}{h^2} \begin{pmatrix}
+      a_{12}^{-} & \abs{a_{12}} - a_{22} & a_{12}^{+} \\
+      \abs{a_{12}} - a_{11} & 2 (a_{11} + a_{22} - \abs{a_{12}}) & \abs{a_{12}} - a_{11} \\
+      - a_{12}^{+} & \abs{a_{12}} - a_{22} & a_{12}
+    \end{pmatrix} \\
+    & + \tfrac{1}{h} \begin{pmatrix}
+      & - b_2 \\
+      - b_1 & 0 & b_1 \\
+      & b_2
+    \end{pmatrix}
+    + \begin{pmatrix}
+      \\ & c & \\ &
+    \end{pmatrix}
+  \end{align*}
   Dabei ist $a_{ij}^{+} \coloneqq \max(a_{ij}, 0)$ und $a_{ij}^{-} \coloneqq \min(a_{ij}, 0)$.
   \begin{align*}
-    \text{(RWP\tss{3})\tss{h}} \enspace & \left\{ \begin{array}{rlll}
+    \text{\probl{(RWP\tss{3})\tss{h}}} \quad
+    & \left\{ \begin{array}{rlll}
       - \LL_h u_h &=& f_h &\text{ in $\Omega_h$} \\
       u_h &=& g &\text{ auf $\bOmega_h$}
     \end{array} \right. \\
-    \text{(LGS\tss{3})} \enspace
-    & - \tilde{\LL}_h \tilde{u}_h = \tilde{f}_h
+    \text{\probl{(LGS\tss{3})}} \quad
+    & \qquad - \tilde{\LL}_h \tilde{u}_h = \tilde{f}_h
   \end{align*}
 \end{verf}
 
@@ -1017,13 +1038,14 @@ Konsistenz: Mit Taylorn ...
 \end{satz}
 
 % 3.5 Differenzenverfahren für parabolische DGLn
+\subsection{Differenzenverfahren für parabolische DGLn}
 
-\begin{prob}\mbox{}
-  \vspace{-1.5em}
+\begin{prob}
+  \emph{Wärmeleitungsgleichung}
   \[
     \arraycolsep=2.5pt
-    \text{(RWP\tss{4})} \enspace \left\{
-    \begin{array}{rcll}
+    \text{\probl{(RWP\tss{4})}} \quad
+    \left\{ \begin{array}{rcll}
       u_t(x,t) - \Laplace_x u(x, t) &=& f(x,t) &\text{in $\Omega = \ointerval{0}{1} \times \ointerval{0}{T}$} \\
       u(x,0) &=& g(x) & \text{für } x \in \ointerval{0}{1} \\
       u(0, t) &=& g_0(t) & \text{für } t \in \cinterval{0}{T} \\
@@ -1067,19 +1089,19 @@ Konsistenz: Mit Taylorn ...
     berechnen.
     Dazu verwenden wir ein Einschrittverfahren, wie das expl./impl. Gauß-Verfahren oder das Crank-Nicolson-Verfahren:
     \begin{align*}
-      \text{(EEV)} \enspace
+      \text{\probl{(EEV)}} \enspace
       & \left\{ \begin{array}{rcl}
         \tfrac{1}{\tau} (u_i^{k+1} - u_i^k) - \tilde{\Laplace}_h u_i^k &=& f_i^k \\
         u_i^0 &=& g_h
       \end{array} \right. \\
       %\tag{Expl. Euler-Verf}
-      \text{(IEV)} \enspace
+      \text{\probl{(IEV)}} \enspace
       & \left\{ \begin{array}{rcl}
         \tfrac{1}{\tau} (u_i^{k+1} - u_i^k) - \tilde{\Laplace}_h u_i^{k+1} &=& f_i^{k+1} \\
         u_i^0 &=& g_h
       \end{array} \right. \\
       %\tag{Impl. Euler-Verf}
-      \text{(CNV)} \enspace
+      \text{\probl{(CNV)}} \enspace
       & \left\{ \begin{array}{rcl}
         \tfrac{1}{\tau} (u_i^{k+1} - u_i^k) - \tfrac{1}{2} \tilde{\Laplace}_h (u_i^k + u_i^{k+1}) &=& f(x_i, t_k + \tfrac{\tau}{2}) \\
         u_i^0 &=& g_h
@@ -1133,15 +1155,18 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
 \end{bem}
 \fi
 
+\begin{samepage}
+
 % §3.6 Differenzenverfahren für hyperbolische Gleichungen
+\subsection{Differenzenverfahren für hyperbolische DGLn}
 
 \begin{prob}
-  Wellengleichung
+  \emph{Wellengleichung}
   \[
     \left\{ \begin{array}{rl}
       \partial_{tt} u - c^2 \partial_{xx} u = f(x,t) & \text{in $\Omega = \ointerval{0}{1} \times \cinterval{0}{T}$} \\
-      u(0, t) = g_0(t), u(1, t) = g_1(t) & \text{für $t \in \cinterval{0}{T}$} \\
-      u(x, 0) = q_0(x), u_t(x, 0) = q_1(x) & \text{für $x \in \ointerval{0}{1}$}
+      u(0, t) = g_0(t), \enspace u(1, t) = g_1(t) & \text{für $t \in \cinterval{0}{T}$} \\
+      u(x, 0) = q_0(x), \enspace u_t(x, 0) = q_1(x) & \text{für $x \in \ointerval{0}{1}$}
     \end{array} \right.
   \]
 \end{prob}
@@ -1170,6 +1195,8 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
   \end{enumerate}
 \end{verf}
 
+\end{samepage}
+
 \begin{bem}
   Das Differenzenverfahren \ldots
   \begin{description}
@@ -1179,7 +1206,11 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
   \end{description}
 \end{bem}
 
+\vspace{8cm}
+
 % Vorlesung vom 17.11.2015
+
+%\begin{samepage}
 
 \section{Schwache Lsgstheorie für elliptische DGLn}
 
@@ -1209,12 +1240,14 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
   \]
 \end{defn}
 
+%\end{samepage}
+
 \begin{bem}
   $(L^p(\Omega), \norm{\blank}_p)$ ist ein Banachraum, für $p = 2$ sogar ein Hilbertraum mit Skalarprodukt $\scp{u}{v}_{L^2(\Omega)} \coloneqq \AInt{\Omega}{u(x) v(x)}{x}$.
 \end{bem}
 
 \begin{satz}[\emph{Höldersche Ungleichung}]
-  Sei $u \in L^p(\Omega)$ und $v \in L^q(\Omega)$ mit $1 \leq p, q, r < \infty$ und $\nicefrac{1}{p} + \nicefrac{1}{q} = \tfrac{1}{r}$.
+  Sei $u \in L^p(\Omega)$ und $v \in L^q(\Omega)$ mit $1 \leq p, q, r \leq \infty$ und $\nicefrac{1}{p} + \nicefrac{1}{q} = \tfrac{1}{r}$.
   Dann ist $uv \in L^r(\Omega)$ mit
   \[ \norm{uv}_r \leq \norm{u}_p \cdot \norm{v}_q. \]
 \end{satz}
@@ -1228,7 +1261,7 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
   $\Testfun(\Omega) \coloneqq \Cont^\infty_0 (\Omega)$ heißt Raum der \emph{Testfunktionen} in $\Omega$.
 \end{defn}
 
-\begin{lem}[Partielle Intgration]
+\begin{lem}[Partielle Integration]
   Für $u, v \in \Cont^1(\cOmega)$ gilt
   \[ \AInt{\Omega}{v(x) \DO_i u(x)}{x} = \IntbOmega{v(x) u(x) \eta_i(x)}{x} - \AInt{\Omega}{\DO_i v(x) u(x)}{x}. \]
   % Falls $v(x) = 0$ auf $\bOmega$: $\IntOmega{v(x) \DO_i u(x)}{x} = - \IntOmega{\DO_i v(x) u(x)}{x}$
@@ -1385,31 +1418,38 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
 \end{satz}
 
 \begin{defn}
-  $W^{-1,q} \coloneqq (W_0^{1,p}(\Omega))'$, \quad
-  $H^{-1}(\Omega) \coloneqq (H_0^1(\Omega))'$.
+  \begin{minipage}[t]{0.8 \linewidth}
+    $W^{-1,q} \coloneqq (W_0^{1,p}(\Omega))'$, wobei $\tfrac{1}{p} + \tfrac{1}{q} = 1$, \\
+    $H^{-1}(\Omega) \coloneqq W^{-1,2} = (H_0^1(\Omega))'$.
+  \end{minipage}
 \end{defn}
 
+\begin{samepage}
+
 % 4.2. Variationsgleichungen
+\subsection{Variationsgleichungen}
 
 \begin{situation}
   Sei $\Omega \subset \R^d$ beschränkt.
   Wir betrachten nun wieder
   \[
-    \text{(RWP\tss{1})} \enspace \left\{ \begin{array}{rlll}
+    \text{(RWP\tss{1})} \quad
+    \left\{ \begin{array}{rlll}
       \LL u &=& f &\text{ in $\Omega$} \\
       u &=& 0 &\text{ auf $\bOmega$}
     \end{array} \right.
   \]
+  \vspace{-0.5cm}
   \begin{align*}
     \text{mit} \quad
-    \LL u & = - \sum_{i=1}^d \DO_i (\sum_{j=1}^d a_{ij}(x) \DO_j u) + \sum_{i=1}^d b_i(x) \DO_i u + c(x) u \\
+    \LL u(x) & = - \sum_{i=1}^d \DO_i (\sum_{j=1}^d a_{ij}(x) \DO_j u) + \sum_{i=1}^d b_i(x) \DO_i u + c(x) u \\
     & = - \dive(A(x) \DO u) + b(x) \cdot \DO u + c(x) u.
   \end{align*}
-  Sei $u$ eine Lsg von (RWP\tss{1}) und $\phi \in \Testfun(\Omega)$.
+  Sei $u$ eine Lösung von (RWP\tss{1}) und $\phi \in \Testfun(\Omega)$.
   Dann gilt
   \begin{align*}
     & \enspace \IntOmega{f(x) \phi(x)}{x}
-    = \enspace \IntOmega{\LL u \phi}{x} \\
+    = \enspace \IntOmega{\LL u(x) \phi(x)}{x} \\
     = & \enspace - \IntOmega{\dive(A(x) \DO u(x)) \phi(x)}{x} + \IntOmega{\left( b(x) \cdot \DO u(x) + c(x) u(x) \right) \cdot \phi(x)}{x} \\
     = & \enspace \IntOmega{A(x) \DO u(x) \cdot \DO \phi(x)}{x} + \IntOmega{\left( b(x) \cdot \DO u(x) + c(x) u(x) \right) \cdot \phi(x)}{x}
   \end{align*}
@@ -1426,17 +1466,23 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
   \fi
 \end{situation}
 
+\end{samepage}
+
 % Vorlesung vom 24.11.2015
 
 \begin{defn}
-  Die Funktion $u \in H_0^1(\Omega)$ heißt \emph{schwache Lösung} von (RWP\tss{1}), wenn $u$ folgende Variationsgleichung erfüllt:
+  Eine Funktion $u \in H_0^1(\Omega)$ heißt \emph{schwache Lösung} von (RWP\tss{1}), wenn~$u$ folgende Variationsgleichung erfüllt:
   \begin{align*}
     & \IntOmega{A(x) \DO u(x) \cdot \DO \phi(x) + b(x) \cdot \DO u(x) \phi(x) + c(x) u(x) \phi(x)}{x} \\
     = \enspace & \IntOmega{f(x) \phi(x)}{x}
     \quad \text{für alle } \phi \in H_0^1(\Omega).
-    \tag{VGL\tss{1}}
+    \qquad \qquad \text{\probl{(VGL\tss{1})}}
   \end{align*}
 \end{defn}
+
+\begin{sprechweise}
+  Der Raum, in dem man~$u$ sucht, heißt \emph{Lsgsraum} (oder \textit{Ansatzraum}), der Raum von~$\phi$ heißt \emph{Testraum}.
+\end{sprechweise}
 
 % Fragen:
 % 1) Ist jede klassische Lösung von (RWP\tss{1}) auch Lösung von (VGL\tss{1})?
@@ -1444,9 +1490,14 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
 % 3) Wie löst man (VGL\tss{1}) numberisch?
 % 4) Wie lautet die Variationsgleichungbei inhomogenen RWBn?
 
-\begin{prob}[Allgemeines Variationsproblem] \mbox{} \\
-  Seien Abb. $B : H_0^1(\Omega) \times H_0^1(\Omega) \to \R$ und $\ell : H_0^1(\Omega) \to \R$ gegeben. \\
-  Gesucht: $u \in H_0^1(\Omega)$, sodass $B(u, \phi) = \ell(\phi)$ für alle $\phi \in H_0^1(\Omega)$.
+\begin{prob}[Allg. Variationsproblem]
+  Seien Abb. $\ell : H_0^1(\Omega) \to \R$ und $B : H_0^1(\Omega) \times H_0^1(\Omega) \to \R$ gegeben.
+  Gesucht ist $u \in H_0^1(\Omega)$, sodass
+  \[
+    \text{\probl{(VGL\tss{1})'}} \qquad
+    B(u, \phi) = \ell(\phi) \quad
+    \forall \phi \in H_0^1(\Omega).
+  \]
 \end{prob}
 
 \begin{bem}
@@ -1460,7 +1511,7 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
 
 \begin{defn}
   Sei $X$ ein Banachraum.
-  Eine Abb. $B : X \times X \to X$ heißt
+  Eine bilin. Abb. $B : X \times X \to \R$ heißt
   \begin{itemize}
     %\item \emph{bilinear}, falls $B(u, \blank)$ und $B(\blank, \phi)$ linear für alle $u, \phi \in X$ sind,
     %\item \emph{symmetrisch}, falls $B(u, \phi) = B(\phi, u)$ für alle $u, \phi \in X$,
@@ -1472,12 +1523,10 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
   \end{itemize}
 \end{defn}
 
-\TODO{Was ist (VGL\tss{1})'?}
-
 \begin{lem}
   \begin{itemize}
     \item Die Abbildung $B$ in (VGL\tss{1})' ist bilinear und beschränkt.
-    \item Die Abbildung $\ell$ in (VGL\tss{1})' linear und stetig.
+    \item Die Abbildung $\ell$ in (VGL\tss{1})' ist linear und stetig.
   \end{itemize}
 \end{lem}
 
@@ -1487,12 +1536,13 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
 \end{satz}
 
 % 4.3 Eindeutige Lösung elliptischer PDEs
+\subsection{Eindeutige Lösung elliptischer DGLn}
 
 % 4.9
 \begin{satz}[\emph{Lax-Milgram}]
   Sei H ein Hilbertraum und $B : H \times H \to \R$ eine beschränkte, koerzitive Bilinearform.
   Dann gibt es für jedes $\ell \in H'$ eine eindeutige Lösung $u \in H$ von  $\fa{\phi \in H} B(u, \phi) = \ell(\phi)$.
-  Es gilt $\norm{u}_H \leq \nicefrac{1}{\lambda} \norm{\ell}_{H'}$
+  Es gilt $\norm{u}_H \leq \nicefrac{1}{\lambda} \norm{\ell}_{H'}$ mit der Koerzitivitätskonstante $\lambda$ von~$B$.
 \end{satz}
 
 % Vorlesung vom 30.11.2015
@@ -1519,50 +1569,58 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
 
 % 4.12
 \begin{satz}
-  Sei $\Omega \subset \R^d$ beschränkt und sei $\mathcal{L} u = - \dive (A(x) \DO u) + c(x) u$ glm. elliptisch, $c(x) \geq 0$ in $\Omega$, $a_{ij}, c_j \in L^\infty(\Omega)$, $f \in L^2(\Omega)$. \\
+  Sei $\Omega \subset \R^d$ beschränkt und sei $\mathcal{L} u = - \dive (A(x) \DO u) + c(x) u$ glm. elliptisch, $c(x) \geq 0$ in $\Omega$, $a_{ij}, c_j \in L^\infty(\Omega)$ und $f \in L^2(\Omega)$. \\
   Dann besitzt (VGL\tss{1})' eine eindeutige Lösung $u \in H_0^1(\Omega)$. \\
-  Außerdem existiert ein $\hat{C} > 0$, sodass $\norm{u}_{H'(\Omega)} \leq \hat{C} \norm{f}_{L^2(\Omega)}$.
+  Außerdem existiert ein $\hat{C} > 0$, sodass $\norm{u}_{H^1(\Omega)} \leq \hat{C} \cdot \norm{f}_{L^2(\Omega)}$.
 \end{satz}
 
-\begin{bemn}
-  \begin{itemize}
-    \item Sei $f \in H^{-1}(\Omega)$.
-    Eine Fktn $u \in H_0^1(\Omega)$ heißt schw. Lsg von (RWP\tss{1}), falls $B(u, \phi) = \scp{f}{\phi}_{H^{-1}(\Omega), H_0'(\Omega)}$ $\forall \, \phi \in H_0'(\Omega)$.
-    Gelte $b = 0$, $c \geq 0$, glm. Elliptizität, $c, a_{ij} \in L^\infty(\Omega)$. \\
-    Dann ex. nach Lax-Milgram genau ein $u \in H_0^1(\Omega)$ mit \[
-      B(u, \phi) = \scp{f}{\phi}_{H^{-1}(\Omega), H_0^1(\Omega)} \quad
-      \text{für alle $\phi$.}
-    \]
-    \item Es existiert ein $\mu_0 > 0$, sodass für alle $\mu > \mu_0$ das RWP
-    \[
-      \text{(RWP)} \enspace \left\{ \begin{array}{rlll}
-        \LL u + \mu u &=& f &\text{ in $\Omega$} \\
-        u &=& 0 &\text{ auf $\bOmega$}
-      \end{array} \right.
-    \]
-    für alle $f \in H^{-1}(\Omega)$ eine eindeutige Lsg $u \in H_0^1(\Omega)$ besitzt.
-  \end{itemize}
-\end{bemn}
+\begin{samepage}
+
+\begin{defn}
+  Sei $f \in H^{-1}(\Omega)$.
+  Eine Fktn $u \in H_0^1(\Omega)$ heißt \textit{schwache Lösung} von (RWP\tss{1}), falls \enspace
+  $B(u, \phi) = \scp{f}{\phi}_{H^{-1}(\Omega), H_0^1(\Omega)}$ $\forall \, \phi \in H_0^1(\Omega)$.
+\end{defn}
+
+\begin{bem}
+  Gelte $b \equiv 0$, $c \geq 0$, glm. Elliptizität, $c, a_{ij} \in L^\infty(\Omega)$. \\
+  Dann existiert nach Lax-Milgram genau eine schwache Lösung.
+\end{bem}
+
+\begin{lem}
+  Sei $A$ gleichmäßig elliptisch und $a_{ij}, b_i, c \in L^\infty(\Omega)$. \\
+  Dann existiert ein $\mu_0 > 0$, sodass für alle $\mu > \mu_0$ das RWP
+  \[
+    \left\{ \begin{array}{rlll}
+      \LL u + \mu u &=& f &\text{ in $\Omega$} \\
+      u &=& 0 &\text{ auf $\bOmega$}
+    \end{array} \right.
+  \]
+  für alle $f \in H^{-1}(\Omega)$ eine eindeutige Lösung $u \in H_0^1(\Omega)$ besitzt.
+\end{lem}
 
 % Vorlesung vom 1.12.2015
 
-% §4.4 RWPe mit inhomogenen Dirichlet- und/oder Robin-Randbedingungen
+% 4.4 RWPe mit inhomogenen Dirichlet- und/oder Robin-Randbedingungen
+\subsection{RWPe mit anderen Randbedingungen}
+
+\end{samepage}
 
 % a)
 
 \begin{prob}
   Wir untersuchen nun das inhomogene Randwertproblem
   \[
-    \text{(RWP\tss{2})} \enspace
+    \text{\probl{(RWP\tss{2})}} \quad
     \left\{ \begin{array}{r c l l}
       \LL u & = & f & \text{in } \Omega, \\
-      u & = & g & \text{auf } \bOmega
+      u & = & g & \text{auf } \bOmega.
     \end{array} \right.
   \]
-  Angenommen, $g : \bOmega \to \R$ besitzt eine Fortsetzung $\tilde{g} : \cOmega \to \R$ mit $\tilde{g}|_{\bOmega} = g$.
-  Dann ist $u \in \Cont^2(\Omega) \cap \Cont(\cOmega)$ genau dann eine Lösung von (RWP\tss{2}), wenn $v \coloneqq u - \tilde{g} \in \Cont^2(\Omega) \cap \Cont(\cOmega)$ eine Lösung von
+  Angenommen, $g \in \Cont(\bOmega) \cap L^2(\Omega)$ besitzt eine Fortsetzung $\tilde{g} \in \Cont^2(\Omega) \cap \Cont(\cOmega)$ mit $\tilde{g}|_{\bOmega} = g$.
+  Dann ist $u \in \Cont^2(\Omega) \cap \Cont(\cOmega)$ genau dann eine Lösung von (RWP\tss{2}), wenn $v \coloneqq u - \tilde{g}$ eine Lösung von
   \[
-    \text{(RWP\tss{2})'} \enspace
+    \text{\probl{(RWP\tss{2})'}} \quad
     \left\{ \begin{array}{r c l l}
       \LL v & = & f - \LL \tilde{g} & \text{in } \Omega, \\
       v & = & 0 & \text{auf } \bOmega
@@ -1576,20 +1634,26 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
     = \enspace & \IntOmega{f \cdot \phi}{x} + \IntOmega{(A(x) \DO \tilde{g} \cdot \DO \phi + b \cdot \DO \tilde{g} \phi + c \tilde{g} \phi)}{x} \quad
     \forall \, \phi \in H_0^1(\Omega).
   \end{align*}
-  Voraussetzungen: $a_{ij}, b_i, c \in L^\infty(\Omega)$, $f \in L^2(\Omega)$, $\tilde{g} \in \Cont(\cOmega) \cap H^1(\Omega)$. \\
-  Gesucht ist also ein $u \in U \coloneqq \Set{w \in H^1(\Omega)}{\tau(w) = g}$ mit
+  Voraussetzungen: $a_{ij}, b_i, c \in L^\infty(\Omega)$, $f \in L^2(\Omega)$, $\tilde{g} \in \Cont(\cOmega) \cap H^1(\Omega)$ und $g \in L^2(\Omega)$.
+  Ges. ist ein $u \in U \coloneqq \Set{w \in H^1(\Omega)}{\tau(w) = g}$ mit
   % Dabei ist $\tau : H^1(\Omega) \to L^2(\bOmega)$ der Spuroperator
   \[
     \underbrace{\IntOmega{A(x) \DO u \cdot \DO \phi + b \DO u \phi + c u \phi}{x}}_{B(u, \phi) \coloneqq} =
-    \underbrace{\IntOmega{f \phi}{x}}_{l(\phi) \coloneqq} \quad
+    \underbrace{\IntOmega{f \phi}{x}}_{\ell(\phi) \coloneqq} \quad
     \forall \, \phi \in H_0^1(\Omega).
-    \tag{VGL\tss{2}}
+    \enspace \text{\probl{(VGL\tss{2})}}
+  \]
+  Für $f \in H^{-1}(\Omega)$ verwendet man
+  \[
+    B(u, \phi) = \ell'(\phi) \coloneqq \scp{f}{\phi}_{H^{-1}(\Omega), H_0^1(\Omega)} \enspace
+    \forall \, \phi \in H_0^1(\Omega).
+    \quad \text{\probl{(VGL\tss{2})'}}
   \]
 \end{prob}
 
 \begin{satz}
   Sei $B : H_0^1(\Omega) \times H_0^1(\Omega) \to \R$ beschränkt und koerziv. \\
-  Dann besitzt (VGL\tss{2}) genau dann eine eindeutige Lösung $u \in U$, wenn ein $u_0 \in H^1(\Omega)$ existiert, sodass $\tau(u_0) = g$.
+  Dann besitzt (VGL\tss{2}) genau dann eine eindeutige Lösung $u \in U$, wenn ein $u_0 \in H^1(\Omega)$ existiert, sodass $\tau(u_0) \equiv g$ f.\,ü. auf $\bOmega$.
 \end{satz}
 
 % b)
@@ -1597,17 +1661,17 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
 \begin{prob}
   Wir betrachten nun die Randbedingung
   \[
-    \text{(RWP\tss{3})} \enspace
+    \text{\probl{(RWP\tss{3})}} \quad
     \left\{ \begin{array}{r c l l}
       \LL u & = & f & \text{in } \Omega, \\
-      A(x) \DO u \cdot \nu + \mu u & = & g & \text{auf } \bOmega
+      A(x) \DO u \cdot \nu + \mu u & = & g & \text{auf } \bOmega \text{ (glatt)}
     \end{array} \right.
   \]
-  Falls $u \in \Cont^2(\Omega) \cap \Cont(\cOmega)$ ein Lösung ist und $\phi \in \Cont^\infty(\cOmega)$, so gilt
+  Falls $u \in \Cont^2(\Omega) \cap \Cont(\cOmega)$ eine Lösung ist und $\phi \in \Cont^\infty(\cOmega)$, so gilt
   \begin{align*}
-    \IntOmega{f \phi}{x}
-    & = - \IntOmega{\dive(A(x) \DO u) \phi + b \DO u \phi + c u \phi}{x} \\
-    & = - \IntbOmega{A(x) \DO u \cdot \nu \phi}{s} + \IntOmega{A(x) \DO u \DO \phi}{x} + \IntOmega{b(x) \DO u \phi}{x} + \IntOmega{c u \phi}{x}.
+    & \IntOmega{f \phi}{x}
+    = - \IntOmega{\dive(A(x) \DO u) \phi + b(x) \DO u \phi + c(x) u \phi}{x} \\
+    = & - \IntbOmega{A(x) \DO u \cdot \nu \phi}{s} + \IntOmega{A(x) \DO u \DO \phi + b(x) \DO u \phi + c(x) u \phi}{x}.
   \end{align*}
   Aus der Randbedingung bekommen wir
   \[
@@ -1615,24 +1679,24 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
   \]
   Zusammengesetzt erhalten wir die Variationsgleichung
   \[
-    \mu \IntbOmega{u \phi}{s} + \IntOmega{A(x) \DO u \DO \phi + b(x) \cdot \DO u \phi + c(x) u \phi}{x} = \IntOmega{f \phi}{x} + \IntbOmega{g \phi}{s}.
+    \mu \IntbOmega{u \phi}{s} + \IntOmega{A \DO u \DO \phi + b \cdot \DO u \phi + c u \phi}{x} = \IntOmega{f \phi}{x} + \IntbOmega{g \phi}{s}.
   \]
-  Wegen Dichtheit gilt diese Gleichung nicht nur für $\phi \in C^\infty(\cOmega)$ sondern allgemeiner für $\phi \in H^1(\Omega)$.
+  Wegen Dichtheit von $\Cont^\infty(\cOmega)$ in $H^1(\Omega)$ ist diese Gleichung nicht nur für $\phi \in \Cont^\infty(\cOmega)$ sondern allgemeiner für $\phi \in H^1(\Omega)$ erfüllt.
 \end{prob}
 
 \begin{defn}
   Sei $\mu \in \R$, $f \in L^2(\Omega)$, $g \in L^2(\bOmega)$.
-  Eine Fktn $u \in H^1(\Omega)$ heißt \emph{schwache Lösung} von (RWP\tss{3}), falls sie folgende Gleichung erfüllt:
+  Eine Fktn $u \in H^1(\Omega)$ heißt \textit{schwache Lösung} von (RWP\tss{3}), falls für alle $\phi \in H^1(\Omega)$ gilt:
   \[
-    \mu \IntbOmega{u \phi}{s} + \IntOmega{A \DO u \O \phi + b \DO u \phi + c u \phi}{x} =
-    \IntOmega{f \phi}{x} + \IntbOmega{g \phi}{s} \quad
-    \forall \, \phi \in H^1(\Omega)
+    \underbrace{\mu \IntbOmega{u \phi}{s} + \IntOmega{A \DO u \O \phi + b \DO u \phi + c u \phi}{x}}_{B(u, \phi) \coloneqq} =
+    \underbrace{\IntOmega{f \phi}{x} + \IntbOmega{g \phi}{s}}_{\ell(\phi) \coloneqq}.
   \]
 \end{defn}
 
 % Vorlesung vom 7.12.2015
 
 % §4.5 Approximation von Variationsgleichungen
+\subsection{Approximation von Variationsgleichungen}
 
 Gegeben: Hilbertraum $H$, $B : H \times H \to \R$ eine beschränkte, koerzive Bilinearform, $l : H \to \R$ linear, stetig.
 
