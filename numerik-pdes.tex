@@ -1698,97 +1698,125 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
 % §4.5 Approximation von Variationsgleichungen
 \subsection{Approximation von Variationsgleichungen}
 
-Gegeben: Hilbertraum $H$, $B : H \times H \to \R$ eine beschränkte, koerzive Bilinearform, $l : H \to \R$ linear, stetig.
+\begin{verf}
+  Gegeben sei ein Hilbertraum~$H$, eine beschränkte, koerzive Bilinearform $B : H \times H \to \R$ und ein $\ell \in H'$. \\
+  Gesucht ist eine Lösung $u \in H$ der Variationsgleichung
+  \[
+    \text{\probl{(VGL)}} \qquad
+    B(u, \phi) = \ell(\phi) \quad
+    \forall \, \phi \in H.
+  \]
+  Wir wollen diese Lösung annähern durch die Lösung eines möglichst ähnlichen, aber \textit{endlichdim.} Problems.
+  Dazu wählen wir einen endlichdim. Unterraum $U_n \subset H$ (dieser ist wieder ein Hilbertraum), eine beschränkte, koerzitive Bilinearform $B_n : U_n \times U_n \to \R$ und ein Element $\ell_n \in U_n'$.
+  Wir bestimmen dann die Lösung~$u_n$ von
+  \[
+    \text{\probl{(VGL)\tss{n}}} \qquad
+    B_n(u_n, \phi) = \ell_n(\phi) \quad
+    \forall \, \phi \in U_n.
+  \]
+\end{verf}
 
-Gesucht: ist $u \in H$ mit $\fa{\phi \in H} B(u, \phi) = l(\phi)$ (VGL).
-
-Idee: Seien $U_n \subset H$ ein normierter Raum mit $\dim(U_n) = d_n < \infty$, $B_n : U_n \times U_n \to \R$ eine beschränkte, koerzive Bilinearform, $l_n \in U'_n.$
-
-Gesucht ist $u_n \in U_n$ mit $\fa{\phi \in U_n} B(u_n, \phi) = l_n(\phi)$ (VGL)\tss{n}
-
-Fragen: Wie wählt man $U_n$, $B_n$ und $l_n$ so, dass $u_n \xra[n \to \infty]{} u$, wobei $u$ die Lösung von (VGL) ist?
-Wie berechnet man die Lösung $u_n$ von (VGL)\tss{n}?
+\begin{fragen}
+  \begin{enumerate}
+    \item Wie berechnet man die Lösung $u_n$ von (VGL)\tss{n}?
+    \item Wie kann man $U_n$, $B_n$ und~$l_n$ wählen, sodass $u_n \xra[n \to \infty]{} u$?
+  \end{enumerate}
+\end{fragen}
 
 \begin{defn}
   Die Approximation von (VGL) mittels (VGL)\tss{n} mit $U_n \subset H$ und $B_n = B|_{U_n \times U_n}$ heißt \emph{konforme Approximation} von (VGL).
   Eine solche Methode wird als \emph{Verfahren von Ritz} bezeichnet.
 \end{defn}
 
-Sei $\{ w_1, \ldots, w_{d_n} \}$ eine Basis von $U_n$ und sei $u_n$ eine Lösung von (VGL)\tss{n}.
-
-$u_n = \sum_{i=1}^{d_n} \gamma_i w_i$
-
-$B_n(u_n, \phi) = \sum_{i=1}^{d_n} \gamma_i B(w_i, \phi)$
-
-$\sum_{j=1}^{d_n} \gamma_j B(w_j, w_i) = l(w_i)$ für $i = 1, \ldots, d_n$
-
-$\hat{B} \gamma = \hat{l}$ mit $\hat{B} = (B_{ij})$ mit $B_{ij} = B(w_j, w_i)$, $\hat{l} = (l_n(w_1), \ldots, l_n(w_{d_n}))^T$ (Galerkin-Gleichung)
+\begin{vorgehen}
+  Um die Lösung~$u_n$ von (VGL)\tss{n} zu berechnen, wählen wir zunächst eine Basis $w_1, \ldots, w_{d_n}$ von $U_n$.
+  Wir setzen
+  \begin{align*}
+    \hat{\ell} & \coloneqq (\ell_n(w_1), \ldots, \ell_n(w_{d_n}))^T \in \R^{d_n}, \quad \text{und} \\
+    \hat{B} & \coloneqq (B_{ij}) \in \R^{d_n \times d_n}
+    \enspace \text{mit} \enspace
+    B_{ij} \coloneqq B(w_i, w_j).
+  \end{align*}
+  Dann ist $u_n = \gamma_1 w_1 + \ldots + \gamma_{d_n} w_{d_n} \in U_n$ genau dann eine Lösung von (VGL)\tss{n}, wenn $\gamma = (\gamma_1, \ldots, \gamma_{d_n})^T \in \R^{d_n}$ erfüllt:
+  \[
+    \hat{B} \gamma = \hat{l} \qquad
+    \text{(\emph{Galerkin-Gleichung})}.
+  \]
+\end{vorgehen}
 
 % 4.14
-\begin{satz}
-  Für die Lösungen $u_n$ der konformen Approximation (VGL)\tss{n} und die Lösung $u$ von (VGL) gilt
-  \[ \norm{u_n - u}_H \leq c \left( \inf_{v \in U_n} \norm{u - v}_H + \norm{l_n - l}_{U_n'} \right) \]
-\end{satz}
+\begin{lem}[\emph{Céa}]
+  Für die Lsgn $u_n$ der konformen Approximation (VGL)\tss{n} und die Lösung~$u$ von (VGL) gilt
+  \[ \norm{u_n - u}_H \leq C \left( \inf_{v \in U_n} \norm{u - v}_H + \norm{\ell_n - \ell}_{U_n'} \right) \]
+\end{lem}
 
 \begin{folgerung}
-  Es genügt, $U_n$ und $l_n$ so zu wählen, dass
-  \begin{itemize}
-    \item $\fa{u \in H} \inf_{v_n \in U_n} \norm{u - v_n}_H \xra[n \to \infty]{} 0$ und
-    \item $\norm{l_n - l}_{U'_n} \xra[n \to \infty]{} 0$.
-  \end{itemize}
+  Für $u_n \xra[n \to \infty]{} u$ genügt es, $U_n$ u. $\ell_n$ so zu wählen, dass
+  \[
+    \fa{u \in H\!}\! \inf_{v_n \in U_n} \norm{u - v_n}_H \xra[n \to \infty]{} 0, \qquad
+    \norm{\ell_n - \ell}_{U'_n} \xra[n \to \infty]{} 0.
+  \]
 \end{folgerung}
 
-Wahl von $U_n$:
-\begin{itemize}
-  \item Eigenfunktionen: $\LL w_j = \lambda_j w_j$
-\end{itemize}
+\begin{bem}
+  Ist $\ell(\phi)$ durch Integration einer Funktion gegeben, so kann man für $\ell_n(\phi)$ eine Annäherung dieses Integrals etwa mittels der summierten Trapezregel verwenden.
+\end{bem}
 
-\begin{bsp}
-  \[
-    \left\{ \begin{array}{r c l l}
-      - u_{xx} & = & f & \text{in } \Omega = \ointerval{0}{1} \\
-      u(u) & = & u(1) = 0
-    \end{array} \right.
-  \]
-  Die Eigenfunktionen sind $w_j(x) = \sin(\pi j x)$ für $j > 0$.
-  Wir setzen $U_n = \spann \Set{w_j}{j = 1, \ldots, n}$.
-\end{bsp}
-
-% Vorlesung vom 8.12.2015
-
-% 2) Polynome als Basisfunktionen:
-% U_n \coloneqq \spann \Set{w_j(x) = x^j (1 - x)}{j = 1, \ldots, n \subset H_0^1(\Omega) }
-
-3) $0 = x_0 < x_1 < \ldots < x_n < x_{n+1} = 1$
-$h = \nicefrac{1}{n+1}$, $x_i = i h$.
-$U_n = \Set{v \in \Cont(0, 1)}{v|_{\cinterval{x_{i-1}}{x_i}} \in \mathbb{P}_1[X], i = 1, \ldots, n+1, v(0) = v(1) = 0}$
-
-Hutfunktionen:
-
-\[
-  w_j (x) = \begin{cases}
-    \tfrac{x - x_{j-1}}{h} & \text{ falls } x \in \ocinterval{x_{j-1}}{x_j} \\
-    \tfrac{x_{j+1} - x}{h} & \text{ falls } x \in \cointerval{x_j}{x_{j+1}} \\
-    0 & \text{sonst.}
-  \end{cases}
-\]
-
-\[
-  \hat{B} = \frac{1}{h} \begin{pmatrix}
-    2 & -1 & &&& 0 \\
-    -1 & 2 & -1 &&& \\
-    & -1 & 2 & -1 && \\
-    && \ddots & \ddots & \ddots \\
-    &&& -1 & 2 & -1 \\
-    0 &&&& -1 & 2
-  \end{pmatrix}, \quad
-  l_n(w_j) = h f(x_j)
-\]
-
-Wenn wir also die Hutfunktionen als Basisfunktionen wählen, so erhalten wir das finite-Differenzen-Verfahren.
+\begin{bem}
+  Wir betrachten (VGL\tss{1}).
+  Es gibt mehrere sinnvolle Möglichkeiten, die Basiselemente~$w_i$ zu wählen.
+  Man versucht dabei zu erreichen, dass die Matrix $\hat{B}$ möglichst einfach (wenige von null verschiedene Einträge) und gut konditioniert ist.
+  \begin{enumerate}
+    \item Angenommen, es gibt eine Basis von Eigenfunktionen~$w_j$ von~$\LL$, $\LL w_j = \lambda_j w_j$, die in $L^2(\Omega)$ eine Orthonormalbasis bilden. \\
+    Dann ist~$\hat{B}$ eine Diagonalmatrix mit Einträgen~$\lambda_j$.
+    Beispielsweise ist $w_j(x) \coloneqq \sin(\pi j x)$ eine EF von $\LL \coloneqq - \Laplace$ auf $\Omega = \ointerval{0}{1}$ zum EW~$\pi^2 j^2$ und es gilt $\scp{w_i}{w_j}_{L^2(\Omega)} = 0$ für $i \neq j$.
+    % Vorlesung vom 8.12.2015
+    \item $U_n \coloneqq \spann \Set{w_j(x) = x^j (1 - x)}{j = 1, \ldots, n } \subset H_0^1(\Omega)$ \\
+    (Das ist eine schlechte Wahl, da dann $\hat{B}$ vollbesetzt.)
+    \item Wir unterteilen $\Omega = \ointerval{0}{1}$ durch das Gitter
+    $0 = x_0 < x_1 < \ldots < x_n < x_{n+1} = 1$,
+    $x_i = i h$ mit
+    $h = \nicefrac{1}{n+1}$,
+    \[
+      U_n \coloneqq \Set{v \in \Cont(0, 1)}{\fa{i} v|_{\cinterval{x_{i-1}}{x_i}} \in \mathbb{P}_1[x], v(0) = v(1) = 0}
+    \]
+    Eine Basis von $U_n$ sind die \textit{Hutfunktionen}
+    \begin{center}
+      \scriptsize
+      \begin{tikzpicture}%[scale=0.8]
+        %\draw (-0.5,0) -- (4.5,0);
+        \draw [blue] (-0.5,0.03) -- (0,0.03) -- (1,1.03) -- (2,0.03) -- (4.5,0.03);
+        \draw [red] (-0.5,-0.03) -- (1,-0.03) -- (2,0.97) -- (3,-0.03) -- (4.5,-0.03);
+        \draw [green] (-0.5,0) -- (2,0) -- (3,1) -- (4,0) -- (4.5,0);
+        \node at (5,0.9) [right,blue] {$w_{j-1}(x)$};
+        \node at (5,0.5) [right,red] {$w_{j}(x)$};
+        \node at (5,0.1) [right,green] {$w_{j+1}(x)$};
+        \draw [fill=black] (0,0) circle (.05) node [below] {$x_{j-2}$};
+        \draw [fill=black] (1,0) circle (.05) node [below] {$x_{j-1}$};
+        \draw [fill=black] (2,0) circle (.05) node [below] {$x_{j}$};
+        \draw [fill=black] (3,0) circle (.05) node [below] {$x_{j+1}$};
+        \draw [fill=black] (4,0) circle (.05) node [below] {$x_{j+2}$};
+      \end{tikzpicture}
+    \end{center}
+    Wir betrachten die VGL zu (RWP\tss{1}) mit $g_0 = g_1 = 0$. \\
+    Wenn wir $\ell$ durch die Trapezregel approximieren, erhalten wir
+    \[
+      \hat{B} = \frac{1}{h} \begin{pmatrix}
+        2 & -1 & &&& 0 \\
+        -1 & 2 & -1 &&& \\
+        & -1 & 2 & -1 && \\
+        && \ddots & \ddots & \ddots \\
+        &&& -1 & 2 & -1 \\
+        0 &&&& -1 & 2
+      \end{pmatrix}, \quad
+      \ell_n(w_j) = h f(x_j),
+    \]
+    also das Finite-Differenzen-Verfahren.
+  \end{enumerate}
+\end{bem}
 
 % §5. Methode der finiten Elementen (FEM)
-\section{Methode der finiten Elementen}
+\section{Methode der Finiten Elemente (FEM)}
 
 \[
   \text{(VGL)} \enspace

@@ -44,6 +44,7 @@
 \newtheorem*{satz}{Satz}
 \newtheorem*{beweis}{Beweis}
 \newtheorem*{frage}{Frage}
+\newtheorem*{fragen}{Fragen}
 \newtheorem*{situation}{Situation}
 \newtheorem*{thm}{Thm} % Theorem
 \newtheorem*{lem}{Lem} % Lemma
@@ -58,6 +59,7 @@
 \newtheorem*{abk}{Abkürzung}
 \newtheorem*{alg}{Algorithmus}
 \newtheorem*{verf}{Verfahren}
+\newtheorem*{vorgehen}{Vorgehen}
 \newtheorem*{eig}{Eigenschaft}
 \newtheorem*{eign}{Eigenschaften}
 \newtheorem*{modell}{Modell}
