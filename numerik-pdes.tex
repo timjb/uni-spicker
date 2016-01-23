@@ -35,6 +35,7 @@
 \newcommand{\Testfun}{\mathcal{D}} % Raum der Testfunktionen
 \DeclareMathOperator{\spann}{span} % Spann
 \DeclareMathOperator{\inte}{int} % Inneres (interior)
+\DeclareMathOperator{\GL}{GL}
 \newcommand{\Poly}{\mathbbm{P}} % Menge der Polynome
 \newcommand{\Qoly}{\mathbbm{Q}} % Menge der in jeder Koordinate im Grad beschränkten Polynome
 
@@ -1818,28 +1819,13 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
 % §5. Methode der finiten Elementen (FEM)
 \section{Methode der Finiten Elemente (FEM)}
 
-\[
-  \text{(VGL)} \enspace
-  \left\{
-  \begin{array}{r c l l}
-    B(u, \phi) &=& l(\phi) & \forall \, \phi \in H \\
-    u &\in& H
-  \end{array}
-  \right.
-\]
-
-\[
-  \text{(VGL)\tss{n}} \enspace
-  \left\{
-  \begin{array}{r c l l}
-    B_n(u_n, \phi) &=& l_n(\phi) & \forall \, \phi \in U_n \subset H \\
-    u_n &\in& U_n
-  \end{array}
-  \right.
-\]
+\begin{ziel}
+  (VGL) mittels (VGL)\tss{n} approximieren.
+\end{ziel}
 
 \begin{idee}
-  Wähle als Ansatzfunktionen zur Approximation von (VGL) mittels (VGL)\tss{n} eine Zusammensetzung von auf endlich vielen Teilstücken von $\Omega$ definierten Funktionen.
+  Zerlege $\Omega$ in endlich viele Teilgebiete.
+  Wir wählen $U_n$ als Raum der Funktionen, die sich als Linearkombination von Basisfktn schreiben lassen, deren Träger nur auf wenige Teilgebiete umfasst.
 \end{idee}
 
 \begin{bem}
@@ -1848,13 +1834,14 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
   in $\R^2$ Dreiecke oder Rechtecke und
   in $\R^3$ Tetraeder.
   Als lokale Ansatzfunktionen über den Teilgebieten verwenden wir Polynome.
-  Globale Ansatzfktn über $\Omega$ sind lokale Ansatzfktn mit best. Glattheitsbedingungen am Rand der Teilgebiete.
+  Globale Ansatzfktn über $\Omega$ sind lokale Ansatzfktn mit bestimmten Glattheitsbedingungen am Rand der Teilgebiete.
 \end{bem}
 
 \begin{defn}
-  Ein \emph{finites Element} in $\R^d$ ist ein Tripel $(K, P, \Sigma)$ mit %den Eigenschaften
+  Ein \emph{finites Element} (FE) in $\R^d$ ist ein Tripel $(K, P, \Sigma)$ mit
   \begin{itemize}
-    \item $K \subset \R^d$ ist kompakt, $\partial K$ ist Lipschitz-stetig,
+    \miniitem{0.45 \linewidth}{$K \subset \R^d$ ist kompakt,}
+    \miniitem{0.45 \linewidth}{$\partial K$ ist Lipschitz-stetig,}
     \item $P$ ist ein endlichdim. lin. Raum von Funktionen $p \in \Cont^s(K, \R)$
     \item $\Sigma = \{ b_1, \ldots, b_m \}$ mit $b_j \in (\Cont^s(K, \R))'$ ist \emph{$P$-unisolvent}, \dh{}
     \[
@@ -1865,124 +1852,135 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
 
 \begin{bem}
   % Beobachtung von Christian
-  $\Sigma$ ist genau dann $P$-unisolvent, falls $\Sigma$ eine Basis von $P' \subset (\Cont^s(K, \R))'$ ist.
+  $\Sigma$ ist $P$-unisolvent $\iff$ $\Sigma$ ist Basis von $P' \subset (\Cont^s(K, \R))'$
 \end{bem}
 
-\begin{bemn}
+\begin{samepage}
+
+\begin{lem}
   \begin{itemize}
     \item Sei $\Sigma = \{ b_1, \ldots, b_m \}$ P-unisolvent.
-    Dann sind $b_1, \ldots b_m$ linear unabhängig.
-    \item Sei $p_j \in P$ so gewählt, dass $b_i(p_j) = \delta_{ij}$.
-    Dann ist $\{ p_1, \ldots, p_m \}$ eine Basis von $P$.
+    \begin{itemize}
+      \item $b_1, \ldots b_m$ sind linear unabhängig.
+      \item Sei $p_j \in P$ so gewählt, dass $b_i(p_j) = \delta_{ij}$. \\
+      Dann ist $\{ p_1, \ldots, p_m \}$ eine Basis von $P$.
+    \end{itemize}
     \item Sei $\{ p_1, \ldots, p_m \}$ eine Basis von $P$ und seien $b_i \in (\Cont^s(K, \R))'$ mit $b_i(p_j) = \delta_{ij}$, $i, j = 1, \ldots, m$.
     Dann ist $\{ b_1, \ldots, b_m \}$ P-unisolvent.
   \end{itemize}
-\end{bemn}
+\end{lem}
 
 % §5.1 Finite Elemente vom Lagrange-Typ
+\subsection{Finite Elemente vom Lagrange-Typ}
+
+\end{samepage}
 
 \begin{defn}
-  Seien $a_1, \ldots, a_{d+1} \in \R^d$.
-  Dann heißt
+  Der \emph{$d$-Simplex} mit Ecken $a_1, \ldots, a_{d+1} \in \R^d$ ist
   \[
-    K = \Set{x = \sum_{j=1}^{d+1} \mu_j a_j}{0 \leq \mu_j \leq 1, \, j = 1, \ldots, d + 1, \mu_1 + \ldots + \mu_{d+1} = 1} \subset \R^d
+    K = \Set{x = \sum_{j=1}^{d+1} \mu_j a_j}{0 \leq \mu_j \leq 1, \, j = 1, \ldots, d + 1, \sum_{j=1}^{d+1} \mu_j = 1} \subset \R^d.
   \]
-  ein \emph{$d$-Simplex} mit Ecken $a_1, \ldots, a_{d+1}$.
-  Dabei heißen $\mu_1, \ldots, \mu_{d+1}$ baryzentrische Koordinaten von $x$.
-  Der $d$-Simplex $K$ heißt \emph{nicht entartet}, falls $a_1, \ldots, a_{d+1}$ affin unabhängig sind.
+  Dabei heißen $\mu_1, \ldots, \mu_{d+1}$ baryzentrische Koordinaten von~$x$. \\
+  $K$ heißt \emph{nicht entartet}, falls $a_1, \ldots, a_{d+1}$ affin unabhängig sind. \\
+  Das Simplex mit den Ecken $a_j = e_j \in \R^d$, $j = 1, \ldots, d$, und $a_{d+1} = 0$ heißt \emph{$d$-Einheitssimplex}~$\hat{K}$.
 \end{defn}
 
 % Vorlesung vom 14.12.2015
 
 % ausgelassen: erstes Beispiel
 
-$K = $ Dreieck mit den Ecken $a_1, a_2, a_3 \in \R^2$
-
-$P = \Set{ \gamma_1 x_1  + \gamma_2 x_2 + \gamma_3}{\gamma_j \in \R, (x_1, x_2)^T \in K}$
-$\Sigma = \{ b_1, b_2, b_3 \}$ mit $b_1(p) = p(a_1)$, $b_2(p) = p(a_2)$, $b_3(p) = p(a_3)$
-Wenn $K$ nicht entartet ist, so ist $\Sigma$ $P$-unisolvent.
-
-\begin{defn}
-  Das Simplex mit den Ecken $a_{d+1} = 0$, $a_j = e_j \in \R^d$, $j = 1, \ldots, d$ heißt $d$-Einheitssimplex.
-\end{defn}
+\begin{bspe}
+  Ein nichtentartetes Simplex im $\R^1$ ist ein geschlossenes Intervall, im $\R^2$ ein Dreieck und im $\R^3$ ein Tetraeder.
+\end{bspe}
 
 \begin{lem}
-  Jedes nicht entartete $d$-Simplex $K$ ist affin äquivalenz zum $d$-Einheitssimplex $\hat{K}$, \dh{} es gibt genau eine Abbidung $F : \hat{K} \to K, \enspace \hat{x} \mapsto A_K \hat{x} + b_K$ mit einer invertierbaren Matrix $A_K$, sodass $F(e_j) = a_j$ und $F(0) = a_{d+1}$.
+  Jedes nicht entartete $d$-Simplex~$K$ ist affin äquivalent zu~$\hat{K}$:
+  Es gibt genau eine Abb. $F : \hat{K} \to K, \enspace \hat{x} \mapsto A_K \hat{x} + b_K$ mit einer Matrix $A_K \in \GL(d)$, sodass $F(e_j) = a_j$ und $F(0) = a_{d+1}$.
 \end{lem}
 
 \begin{defn}
-  $(K, P, \Sigma)$ heißt \emph{simpliziales finites Element vom Lagrange-Typ}, falls
+  Ein \emph{simpliziales finites Element vom Lagrange-Typ} der Ordnung~$k$ ist ein Tripel $(K, P, \Sigma)$ mit
   \begin{itemize}
-    \item $K$ ist eine $d$-Simplex,
-    \item $P = P_k$ ist die Menge aller Polynome zum Grad $k$ in $d$ Variablen.
-    \item $\Sigma = \Set{b : P \to \R}{b(p) = p(a)}$ mit $a \in \mathcal{K}_k = \Set{x = \sum_{j=1}^{d+1} \mu_j a_j}{\sum \mu_j = 1, \enspace \mu_j \in \{ 0, \tfrac{1}{k}, \ldots, \tfrac{k-1}{k}, 1 \}}$
+    \item einem $d$-Simplex $K$,
+    \item $P = \Poly_k \coloneqq \R[x_1, \ldots, x_d]_{\leq k} = \{ \text{Polynome vom Grad $\leq k$} \}$
+    \item $\Sigma = \Set{b_a : P \to \R, \enspace p \mapsto p(a)}{a \in \mathcal{K}_k}$ mit der \textit{Knotenmenge}
+    \[
+      \mathcal{K}_k = \Set{x = \sum_{j=1}^{d+1} \mu_j a_j}{\sum_{j=1}^{d+1} \mu_j = 1, \enspace \mu_j \in \{ 0, \tfrac{1}{k}, \ldots, \tfrac{k-1}{k}, 1 \}}.
+    \]
   \end{itemize}
 \end{defn}
 
-% (Rechnungen ausgelassen)
+\begin{bemn}
+  \begin{itemize}
+    \item Sei $K$ ein $d$-Simplex. Dann ist $\dim(\Poly_k) = \abs{\mathcal{K}_k} = \binom{k+d}{d}$.
+    \item Die kanonische Basis von $\Poly_1$ für $\hat{K} \subset \R^d$ ist
+    \[
+      \hat{p}_i(\hat{x}) = \hat{x}_i \text{ für } i = 1, \ldots, d, \qquad
+      \hat{p}_{d+1}(\hat{x}) = 1 - \hat{x}_1 - \ldots - \hat{x}_d.
+    \]
+    Dann bilden die $\hat{b}_j \in \Sigma$ eine Dualbasis der $\hat{p}_i$, \dh{} $\hat{b}_j(\hat{p}_i) = \delta_{ij}$.
+    \item Die duale Basis von $\Poly_2$ zu $\Sigma$ für $\hat{K} \subset \R^d$ ist
+    \begin{align*}
+      & \Set{\hat{p}_i}{i \in \{ 1, \ldots, d+1 \} } \cup \Set{\hat{p}_{ij}}{i \neq j \in \{ 1, \ldots, d+1 \}} \quad \text{wobei} \\
+      & \hat{p}_i(\hat{x}) = \mu_j(\hat{x}) (2 \mu_j(\hat{x}) - 1), \quad
+      \hat{p}_{ij}(\hat{x}) = 4 \mu_i(\hat{x}) \mu_j(\hat{x}), \\
+      & \mu_i(\hat{x}) = \hat{x}_i \text{ für } i = 1, \ldots, d, \quad
+      \mu_{d+1}(\hat{x}) = 1 - \hat{x}_1 - \ldots - \hat{x}_d
+    \end{align*}
+    \item Kanonische Basiselemente $p_1, \ldots, p_m \in \Poly_k$ für einen allgemeinen Simplex $K \subset \R^d$ kann man wie folgt berechnen:
+    \begin{enumerate}
+      \item Finde eine affin lineare Bijektion $F : \hat{K} \to K$ wie früher.
+      \item Setze $p_i(x) \coloneqq \hat{p}_i(F^{-1}(x))$ für $i = 1, \ldots, m$.
+    \end{enumerate}
+  \end{itemize}
+\end{bemn}
 
 % Vorlesung vom 15.12.2015
 
-$\hat{x} = (x_1, x_2)^T = \mu_1(\hat{x}) \hat{a}_1 + \mu_2(\hat{x}) \hat{a}_2 + \mu_3(\hat{x}) \hat{a}_3$
+% §5.2 Räume von Finite-Elemente-Funktionen auf $\Omega$
+\subsection{Räume von Finite-Elemente-Funktionen auf $\Omega$}
 
-Es gilt
-
-\begin{align*}
-  \mu_1(\hat{x}) = x_1 = \hat{p}_1(\hat{x}), \\
-  \mu_2(\hat{x}) = x_2 = \hat{p}_2(\hat{x}), \\
-  \mu_3(\hat{x}) = 1 - \mu_1(\hat{x}) - \mu_2(\hat{x}) = 1 - x_1 - x_2 = \hat{p}_3(\hat{x}).
-\end{align*}
-
-Allgemein: $\mathcal{K}_1 = \{ \hat{a}_1, \ldots, \hat{a}_{d+1} \}$
-
-$\hat{x} = (\mu_1(\hat{x}), \ldots, \mu_d(\hat{x}))^T = (x_1, \ldots, x_d)^T$ mit $\sum_{i=1}^{d+1} \mu_j(\hat{x}) = 1$
-
-$\hat{p}_j(\hat{x}) \coloneqq \mu_j(\hat{x})$, $j = 1, \ldots, d+1$
-
-$\hat{p}_j(\hat{a}_i) = \delta_{ij}$, $i, j = 1, \ldots, d+1$
-
-Dann ist $\{ \hat{p}_1, \ldots, \hat{p}_{d+1} \}$ die kanonische Basis von $P = P_1$.
-
-Allgemein: $\mathcal{K}_2 = \Set{\hat{a}_i}{i = 1, \ldots, d+1} \cup \Set{\tfrac{\hat{a}_i + \hat{a}_j}{2}}{1 \leq i < j \leq d+1}$
-
-$\hat{x} = \sum_{i=1}^{d+1} \mu_j(\hat{x}) \hat{a}_j$ mit $\mu_{d+1}(\hat{x}) = 1 - \mu_1(\hat{x}) - \ldots - \mu_d(\hat{x})$
-
-Dann ist
-$\hat{p}_j(\hat{x}) = \mu_j(\hat{x}) (2 \mu_j(\hat{x}) - 1)$, $j = 1, \ldots, d+1$,
-$\hat{p}_{ij}(\hat{x}) = 4 \mu_i(\hat{x}) \mu_j(\hat{x})$, $1 \leq i < j \leq d+1$
-eine Basis von $P = P_2$
-
-% §5.2 Räume von Finite-Elemente-Funktionen auf $\bOmega$
-
-\begin{ziel}
-  Finde endlichdimensionalen Raum $U_n$ und eine Basis davon.
-\end{ziel}
+% Ziel: Finde endlichdimensionalen Raum $U_n$ und eine Basis davon.
 
 \begin{defn}
-  Sei $\Omega \subset \R^d$ ein beschränktes, polygonal berandetes Gebiet.
-  Eine \emph{Triangulierung} von $\Omega$ mit simplizialen Elementen vom Lagrange-Typ ist eine endliche Menge $T(\bOmega) = \Set{(K_i, P(K_i), \Sigma(K_i))}{i = 1, \ldots, N}$ mit
+  Sei $\Omega \subset \R^d$ ein beschränktes, polygonal berandetes Gebiet. \\
+  Eine \emph{Triangulierung} von $\Omega$ mit simplizialen finiten Elementen vom Lagrange-Typ der Ordnung~$k$ ist eine endliche Menge
+  \[
+    T(\cOmega) = \Set{(K_i, P(K_i), \Sigma(K_i))}{i = 1, \ldots, N}
+    \quad \text{mit}
+  \]
   \begin{itemize}
-    \item $\bOmega = \bigcup_{i=1}^N K_i$, $K_i$ ist ein $d$-Simplex
-    \item $\inte(K_i) \cap \inte(K_j) = \emptyset$ für $i \neq j$
-    \item Jeder Rand von $K_i$, \dh{} jedes $(d+1)$-dimensionale Simplex mit $d$ Eckpunkten von $K_i$ ist entweder Teil des Gebietrandes $\bOmega$ oder der vollständige Rand eines anderen Simplex $K_j$.
+    \item $(K_i, P(K_i), \Sigma(K_i))$ sind simpl. El. vom Lagrange-Typ der Ord. $k$,
+    \miniitem{0.45 \linewidth}{$\cOmega = K_1 \cup \ldots \cup K_N$,}
+    \miniitem{0.48 \linewidth}{$\inte(K_i) \cap \inte(K_j) = \emptyset$ für $i \neq j$,}
+    \item Jede Seite von~$K_i$, \dh{} jedes von~$d$ Eckpunkten von~$K_i$ aufgespannte $(d-1)$-dimensionale Simplex, ist entweder Teil des Gebietrandes $\bOmega$ oder gleichzeitig Seite eines anderen Simplex $K_j$.
   \end{itemize}
 \end{defn}
 
 \begin{defn}
-  Ein Raum der linearen finiten Elemente zu einer Triangulierung $T(\cOmega)$ ist definiert durch
+  Die \textit{Knotenmenge} von $T(\cOmega)$ ist die Vereinigung der Knotenmengen der simpl. FE, \dh{} $\mathcal{K}_k = \mathcal{K}_k(K_1) \cup \ldots \cup \mathcal{K}_k(K_N)$.
+\end{defn}
+
+\begin{defn}
+  Der \emph{Raum der finiten Elemente} zu einer Triang.~$T(\cOmega)$ von~$\Omega$ mit simplizialen FE vom Lagrange-Typ der Ordnung~$k$ und Knotenmenge $\mathcal{K}_k = \{ \tilde{a}_1, \ldots, \tilde{a}_n \}$ ist
   \[
-    %U_n = \Set{v \in \Cont(\cOmega)}{v|_{K_i} \text{ ist ein Polynom der Ordnung 1 für } i = 1, \ldots, N}
     U_n = \Set{v \in \Cont(\cOmega)}{v|_{K_i} \in \Poly_1(K_i) \text{ für } i = 1, \ldots, N}.
   \]
 \end{defn}
 
-\begin{satz}[\emph{Lineare Finite Elemente}] \mbox{} \\
+\begin{satz}[$k=1$]
+  Sei $U_n$ der Raum der \textit{linearen finiten Elemente} zu einer Triang.~$T(\cOmega)$ mit simpl. FE vom Lagrange-Typ der Ord.~$1$.
   \begin{itemize}
-    \item Sei $K$ ein nichtentarteter $d$-Simplex mit Ecken $a_1$, \ldots, $a_{d+1}$.
-    Dann ist durch die Vorgabe von $p(a_j)$, $j = 1, \ldots, d+1$ ein Polynom $p \in \Poly_1(K)$ eindeutig bestimmt.
-    Für alle $p \in \Poly_1(K)$ gilt $p(x) = \sum_{j=1}^{d+1} p(a_j) \mu_j$, $x \in K$.
-    \item Sind $\tilde{a}_j \in \mathcal{K}_1$, $j = 1, \ldots, n$ die Knoten der Triangulierung, so ist eine Funktion $v \in U_n$ durch die Vorgabe von Funktionswerten $v(\tilde{a}_j)$ eindeutig definiert.
-    Es gilt $U_1 \subset H^1(\Omega)$.
+    \item Sei $K$ ein nichtentart. $d$-Simplex mit Ecken $a_1$, \ldots, $a_{d+1}$. \\
+    Dann ist durch $p(a_j)$, \ldots, $p(a_{d+1})$ ein Polynom $p \in \Poly_1(K)$ eindeutig bestimmt.
+    Für alle $p \in \Poly_1(K)$ und $x \in K$ gilt
+    \[
+      p(x) = p(a_1) p_1(x) + \ldots + p(a_{d+1}) p_{d+1}(x).
+      \enspace \text{wobei} \enspace
+      p_i(a_j) = \delta_{ij}.
+    \]
+    \item Sind $\mathcal{K} = \{ \tilde{a}_1, \ldots, \tilde{a}_n \}$ die Knoten der Triangulierung, so ist eine Funktion $v \in U_n$ durch die Vorgabe von $v(\tilde{a}_1)$, \ldots, $v(\tilde{a}_n)$ eindeutig definiert.
+    Es gilt $U_n \subset H^1(\Omega)$.
     \item Eine Basis von $U_n$ ist gegeben durch die Funktionen $p_j \in U_n$ mit $p_j(\tilde{a}_i) = \delta_{ij}$ für $i, j = 1, \ldots, n$.
     Insbesondere gilt $\dim U_n = n$.
   \end{itemize}
@@ -1990,132 +1988,117 @@ eine Basis von $P = P_2$
 
 % Vorlesung vom 21.12.2015
 
-% ausgelassen: Beispiel
+% ausgelassenes Beispiel: Triangulierung von $[0,1]^2$ mit zwei Dreiecken
+% ausgelassene Bemerkung: Fall $k = 2$, $d = 2$
 
-\begin{bem}
-  Sei $K$ ein $d$-Simplex mit Ecken $a_1, \ldots, a_{d+1} \in \R^d$, $\mathcal{K}_2 = \Set{x = \sum_{j=1}^{d+1} \mu_j a_j}{\sum_{j=1}^{d+1} \mu_j = 1, \enspace \mu_j \in \{ 0, \tfrac{1}{2}, 1 \}} = \{ a_1, \ldots, a_{d+1} \} \cup \Set{a_{ij} \coloneqq \tfrac{a_i + a_j}{2}}{1 \leq i < j \leq d+1}$.
-  Dann ist $p \in \Poly_2(K)$ eindeutig bestimmt durch seine Werte an den Knotenpunkten aus $\mathcal{K}_2$.
-  Somit gilt $\dim(\mathcal{K}_2) = (d+1) + \binom{d+1}{2} = \tfrac{1}{2} (d+1) (d+2)$
-\end{bem}
-
-\begin{satz}[\emph{Allgemeiner Finite-Elemente-Raum}]
-  Sei $T(\cOmega) = \Set{(K_i, P(K_i), \Sigma(K_i))}{i = 1, \ldots, N}$ eine zulässige Triangulierung und $\mathcal{K}_k = \bigcup_{i=1}^N \mathcal{K}_k(K_i) = \Set{\tilde{a}_i}{i = 1, \ldots, N}$ das Lagrange-Gitter $k$-ter Ordnung, wobei
-  \[
-    \mathcal{K}_k = \Set{x = \sum_{j=1}^{d+1} \mu_j a_j^i}{\sum_{j=1}^{d+1} \mu_j = 1, \enspace \mu_j \in \{ 0, \tfrac{1}{k}, \ldots, \tfrac{k-1}{k}, 1 \}}
-  \]
-  und $a_j^i$ die Eecken von $K_i$ sind.
-  Dann ist durch Vorgabe von $v|_{\mathcal{K}_k}$ eindeutig ein $v \in U_n \subset H^1(\Omega)$ mit $U_n = \Set{v \in \Cont(\cOmega)}{v|_{K_i} \in \Poly_k(K_i), i = 1, \ldots, N}$ bestimmt.
-  Eine Basis von $U_n$ ist durch $p_j \in U_n$ mit $p_j(\tilde{a}_i) = \delta_{ij}$, $i, j = 1, \ldots, n$ gegeben.
+\begin{satz}[$k \geq 1$]
+  Sei $T(\cOmega)$ eine Triangulierung mit finiten Lagrange-Elementen der Ordnung~$k$, $U_n$ der zugehörige Raum der FE und $\mathcal{K}_k$ die Knotenmenge von $T(\cOmega)$.
+  Dann ist durch Vorgabe von $v|_{\mathcal{K}_k}$ eindeutig ein $v \in U_n \subset H^1(\Omega)$ bestimmt.
+  Eine Basis von~$U_n$ ist durch $p_j \in U_n$ mit $p_j(\tilde{a}_i) = \delta_{ij}$, $i, j = 1, \ldots, n$, gegeben.
 \end{satz}
+
+\begin{samepage}
 
 % §5.3 Realisierung der Finite-Elemente-Methode
 
-\begin{enumerate}
-  \item Eingabe und Beschreibung des RWPs.
-  \item Generierung eines Gitters (Zerlegung des Gebiets $\Omega$)
-  \item Erzeugung eines endlich-dimensionalen Problems, \dh{} Bereitstellung der Koeffizientenmatrix und der rechten Seite (der Galerkin-Gleichung) im Ritz-Verfahren
-  \item Lösung der Galerkin-Gleichung
-  \item Bewertung des Ergebnisses (Fehlerabschätzungen) und eventuell Wiederholung der Schritte 2-5.
-  \item Aufbereitung der erhaltenen Ergebnisse, graphische Darstellung der Lösung.
-\end{enumerate}
+\begin{verf}[Realisierung der Finite-Elemente-Methode] \mbox{} \\
+  \begin{enumerate}
+    \item Eingabe und Beschreibung des RWPs
+    \item Umformulierung in ein Variationsproblem
+    \item Generierung einer Triangulierung. Entweder \textit{uniforme Zerlegung} oder Zerlegung mit \textit{lokaler Verfeinerung} von~$\Omega$.
+    \item Erzeugung eines endlich-dim. Problems, \dh{} Berechnen der Koeffizientenmatrix und der rechten Seite der Galerkin-Gleichung 
+    \item Lösung der Galerkin-Gleichung
+  \end{enumerate}
+\end{verf}
 
 % Vorlesung vom 22.12.2015
 
-% §5.3.1 Beschreibung des RWPs
+% §5.3.1 Beschreibung des RWPs (ausgelassen)
 
-% §5.3.2 Gittergenerierung
+% §5.3.2 Gittergenerierung (ausgelassen)
 
 % uniforme Zerlegung oder lokale Verfeinerung einer Zerlegung
 
-% §5.3.3 Erzeugung eines endlich-dim. Problems
-
-\iffalse
-\[
-  \text{(VGL)\tss{n}} \quad
-  B_n(u_n, \phi) = l_n(\phi) \enspace \forall \, \phi \in U_n
-  \quad \text{mit} \quad
-  B_n(u_n, \phi) = \IntOmega{\D u_n \cdot D \phi}{x}, \enspace
-  l_n(\phi) = \IntOmega{f(x) \phi(x)}{x}
-\]
-
-Sei $T(\Omega) = \Set{(K_i, P(K_i), \Sigma(K_i))}{i = 1, \ldots, N}$ (eine zulässige Triangulierung)
-\ldots % usw.
-\fi
+% §5.3.3 Erzeugung eines endlich-dim. Problems (ausgelassen)
 
 % §5.4 Konvergenz der FE-Methode
+\subsection{Konvergenz der FE-Methode}
 
-Sei $u \in H$ die schwache Lösung von $B(u, \phi) = l(\phi) \enspace \forall \, \phi \in H$,
-$u_n \in U_n$ die Näherungslösung mit $B_n(u_n, \phi) = l_n(\phi) \enspace \forall \, \phi \in U_n$.
-Wir wissen bereits: $\norm{u - u_n}_H \leq c (\inf_{v \in U_n} \norm{u-v} + \norm{l_n - l}_{U_n'})$.
-
-Problem: Wir suchen $v \in U_n$, sodass $\norm{u - v}_{U_n}$ möglichst klein ist, wobei wir $u \in H$ nicht kennen.
-
-Idee: Betrachte den Operator $\pi : H \to U_n, \enspace w \mapsto \pi w$, sodass $\norm{w - \pi w}_H$ klein für alle $w \in H$ ist
+\end{samepage}
 
 \begin{defn}
-  Sei $(K, P, \Sigma)$ ein finites Element.
-  Dann heißt $\pi_K w$ \emph{$P$-Interpolierende} eine Funktion $w \in \Cont^s(K)$, falls
+  Sei $(K, P, \Sigma)$ ein finites Element, $P \subset \Cont^s(K)$. \\
+  Dann heißt $\Pi_K w$ \emph{$P$-Interpolierende} einer Fktn $w \in \Cont^s(K)$, falls
   \begin{itemize}
-    \item $\pi_K w \in P$
-    \item $b_j(\pi_K w) = b_j(w)$
+    \miniitem{0.3 \linewidth}{$\Pi_K w \in P$,}
+    \miniitem{0.6 \linewidth}{$b_j(\Pi_K w) = b_j(w)$ für jedes $b_j \in \Sigma$.}
   \end{itemize}
 \end{defn}
 
 \begin{bem}
   \begin{itemize}
-    \item Für Lagrange-FE ist $s = 0$.
-    \item $w(\tilde{a}_j) = b_j(w) = b_j(\pi_K w) = \pi_K w(\tilde{a}_j)$
-    \item $\{ p_1, \ldots, p_m \}$ ist eine Basis von $P$, \dh{} $b_i(p_j) = \delta_{ij}$. Folglich ist $\pi_K w = \sum_{i=1}^m b_i(w) p_i$
-    \item $\fa{p \in P} \pi_K p = p$
+    %\item Für Lagrange-FE ist $s = 0$.
+    \item Ist $p_1$, \ldots, $p_m$ eine zu $\Sigma$ duale Basis von~$P$, \dh{} $b_i(p_j) = \delta_{ij}$, so gilt $\Pi_K w = {\sum}_{i=1}^m b_i(w) p_i$.
+    \item Für Lagrange-FE gilt \enspace
+    $w(\tilde{a}_j) = b_j(w) = b_j(\Pi_K w) = \Pi_K w(\tilde{a}_j)$
+    \item $\fa{p \in P} \Pi_K p = p$
   \end{itemize}
 \end{bem}
 
 % Vorlesung vom 11.1.2015
 
 \begin{defn}
-  Sei $U_n$ ein FE-Raum zu einer Triangulierung $T(\Omega)$ und sei $\{ p_1, \ldots, p_n \}$ die kanonische Basis von $U_n$, \dh{} $b_i(p_j) = \delta_{ij}$.
-  Dann heißt $\Pi \omega$ \emph{$U_n$-Interpolierend} von $\omega \in \Cont^s(\cOmega)$, falls $\Pi \omega = \sum_{i=1}^n b_i(\omega) p_i \in U_n$.
+  Sei $U_n$ ein FE-Raum zu einer Triangulierung $T(\cOmega)$ und sei $\{ p_1, \ldots, p_n \}$ die kanonische Basis von $U_n$, \dh{} $b_i(p_j) = \delta_{ij}$. \\
+  Die \emph{$U_n$-Interpolierende} einer Funktion $w \in \Cont^s(\cOmega)$ ist dann
+  \[
+    \Pi w \coloneqq \sum_{i=1}^n b_i(w) p_i \in U_n.
+  \]
 \end{defn}
 
 \begin{lem}
-  Für alle $K_i \in T(\cOmega)$ und alle $\omega \in \Cont^3(\cOmega)$ gilt $(\Pi \omega) |_K = \Pi_{K_i} \omega|_{K_i}$ und somit $\norm{\omega - \Pi \omega}_{H'(\Omega)} = \sum_{K_i \in T(\cOmega)} \norm{\omega - \Pi_{K_i} \omega}_{H'(K_i)}$.
+  Für alle $K_i \in T(\cOmega)$ und $w \in \Cont^s(\cOmega)$ gilt $(\Pi w) |_K = \Pi_{K_i} (w|_{K_i})$ und somit $\norm{w - \Pi w}_{H'(\Omega)} = \enspace \sum_{\mathclap{K_i \in T(\cOmega)}} \quad \norm{w - \Pi_{K_i} w}_{H'(K_i)}$.
 \end{lem}
 
+% 5.5
 \begin{lem}
-  Sei $F : \hat{K} \to K$ mit $F(\hat{x}) = A \hat{x} + b$, mit $A$ invertierbar. \\
-  Dann gilt für alle $l \in \N$:
+  Sei $F : \hat{K} \to K$ mit $F(\hat{x}) = A \hat{x} + b$, $A \in \GL(d)$, und $l \in \N$.
   \begin{itemize}
     \item Es existiert eine Konstante $c > 0$, sodass
+    \begin{align*}
+      \abs{v \circ F}_{H^l(\hat{K})} & \leq c \cdot \norm{A}_2^l \cdot \tfrac{1}{\sqrt{\abs{\det(A)}}} \cdot \abs{v}_{H^l(K)} \\
+      \abs{\hat{v} \circ F^{-1}}_{H^l(K)} & \leq c \cdot \norm{A^{-1}}_2^l \cdot \sqrt{\abs{\det(A)}} \cdot \abs{\hat{v}}_{H^l(\hat{K})}
+    \end{align*}
+    für alle $v \in H^l(K)$ bzw. $\hat{v} \in H^l(\hat{K})$ gilt, wobei
     \[
-      \abs{v \circ F}_{H^l(\hat{K})} \leq c \norm{A}_2^l \tfrac{1}{\sqrt{\abs{\det(A)}}} \abs{v}_{H^l(K)}
+      \abs{v}_{H^l(K)} \coloneqq \left( \Int{K}{}{\sum_{\abs{\alpha} = l} \norm{\DO^\alpha v}^2} {x}\right)^{\nicefrac{1}{2}}
     \]
-    \[
-      \abs{\hat{v} \circ F^{-1}}_{H^l(K)} \leq c \norm{A^{-1}}_2^l \sqrt{\abs{\det(A)}} \abs{\hat{v}}_{H^l(\hat{K})}
-    \]
-    für alle $v \in H^l(K)$ bzw. $\hat{v} \in H^l(\hat{K})$ gibt, wobei
-    \[
-      \abs{v}_{H^l(K)} \coloneqq \left( \Int{K}{}{\sum_{\abs{\alpha} = l} \norm{\DO^\alpha v}^2} {x}\right)^{\nicefrac{1}{2}}.
-    \]
-    \item $v \in H^l(K) \iff \hat{v} \in H^l(\hat{K})$
+    eine Seminorm auf $H^l(K)$ ist.
+    \item Es gilt \enspace
+    $v \in H^l(K) \iff v \circ F \in H^l(\hat{K})$
   \end{itemize}
 \end{lem}
 
 % Vorlesung vom 12.1.2015
 
 \begin{defn}
-  Sei $K$ ein $d$-Simplex mit den Ecken $a_1, \ldots, a_{d+1}$.
-  \begin{itemize}
-    \item $h(K) \coloneqq \max_{i,j} \abs{a_i - a_j}$ heißt \emph{Durchmesser} von $K$
-    \item $\rho(K) = 2 \sup \Set{R > 0}{\ex{x \in K} B_R(x) \subseteq K}$ heißt \emph{Innendurchmesser} von $K$.
-    \item $\sigma(K) = \nicefrac{h(K)}{\rho(K)}$
-  \end{itemize}
+  Sei $K$ ein $d$-Simplex mit Ecken $a_1, \ldots, a_{d+1}$.
+  Wir definieren:
+  \begin{alignat*}{3}
+    & h(K) \coloneqq {\max}_{i,j=1}^{d+1} \abs{a_i - a_j} &&
+    \text{\emph{Durchmesser}} \\
+    & \rho(K) \coloneqq 2 \sup \, \Set{R > 0}{\ex{x \!\in\! K\!}\! B_R(x) \subseteq K} \quad &&
+    \text{\emph{Innendurchmesser}} \\
+    & \sigma(K) \coloneqq \nicefrac{h(K)}{\rho(K)} &&
+    \text{(misst "`Spitzheit"')}
+  \end{alignat*}
 \end{defn}
 
+% 5.6
 \begin{lem}
-  Sei $K$ affin äquivalent zu $\hat{K}$ vermöge $F : \hat{K} \to K$ mit $F(\hat{x}) = A \hat{x} + b$.
+  Sei der $d$-Simplex $K$ affin äquivalent zu $\hat{K}$ vermöge $F : \hat{K} \to K$, \enspace $\hat{x} \mapsto A \hat{x} + b$, $A \in \GL(d)$.
   Dann gilt:
   \[
-    \norm{A}_2 \leq \nicefrac{h(K)}{\rho(\hat{K})}, \quad
+    \norm{A}_2 \leq \nicefrac{h(K)}{\rho(\hat{K})}, \qquad
     \norm{A^{-1}}_2 \leq \nicefrac{h(\hat{K})}{\rho(K)}.
   \]
 \end{lem}
@@ -2125,7 +2108,8 @@ Idee: Betrachte den Operator $\pi : H \to U_n, \enspace w \mapsto \pi w$, sodass
   Sei $k \geq 0$.
   Dann existiert eine Konstante $c > 0$, sodass
   \[
-    \inf_{\hat{p} \in P_k(\hat{K})} \norm{\hat{v} - \hat{p}}_{H^{k+1}(\hat{K})} \leq c \abs{\hat{v}}_{H^{k+1}(\hat{K})}.
+    \inf_{\hat{p} \in \Poly_k(\hat{K})} \norm{\hat{v} - \hat{p}}_{H^{k+1}(\hat{K})} \leq c \abs{\hat{v}}_{H^{k+1}(\hat{K})} \qquad
+    \forall \, \hat{v} \in H^{k+1}(\Omega).
   \]
 \end{lem}
 
