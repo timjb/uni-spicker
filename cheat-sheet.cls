@@ -51,6 +51,7 @@
 \newtheorem*{lemdefn}{Lem/Def} % Lemma/Definition
 \newtheorem*{kor}{Kor} % Korollar
 \newtheorem*{voraussetzung}{Voraussetzung}
+\newtheorem*{voraussetzungen}{Voraussetzungen}
 \newtheorem*{acht}{Achtung}
 \newtheorem*{strat}{Strategie}
 \newtheorem*{prob}{Problem}

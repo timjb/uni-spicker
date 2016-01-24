@@ -2088,7 +2088,7 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
     \text{\emph{Durchmesser}} \\
     & \rho(K) \coloneqq 2 \sup \, \Set{R > 0}{\ex{x \!\in\! K\!}\! B_R(x) \subseteq K} \quad &&
     \text{\emph{Innendurchmesser}} \\
-    & \sigma(K) \coloneqq \nicefrac{h(K)}{\rho(K)} &&
+    & \sigma(K) \coloneqq \nicefrac{h(K)}{\rho(K)} > 1 &&
     \text{(misst "`Spitzheit"')}
   \end{alignat*}
 \end{defn}
@@ -2108,148 +2108,157 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
   Sei $k \geq 0$.
   Dann existiert eine Konstante $c > 0$, sodass
   \[
-    \inf_{\hat{p} \in \Poly_k(\hat{K})} \norm{\hat{v} - \hat{p}}_{H^{k+1}(\hat{K})} \leq c \abs{\hat{v}}_{H^{k+1}(\hat{K})} \qquad
+    \inf_{\hat{p} \in \Poly_k(\hat{K})} \norm{\hat{v} - \hat{p}}_{H^{k+1}(\hat{K})} \leq c \cdot \abs{\hat{v}}_{H^{k+1}(\hat{K})} \qquad
     \forall \, \hat{v} \in H^{k+1}(\Omega).
   \]
 \end{lem}
 
 % 5.8
 \begin{satz}[Abschätzung des lokalen Interpolationsfehlers] \mbox{} \\
-  Seien $(\hat{K}, P(\hat{K}), \Sigma(\hat{K}))$ ein finites Element vom Lagrange-Typ.
-  Dann existiert eine Konstante $c_K > 0$, sodass für alle zu $(\hat{K}, P(\hat{K}), \Sigma (\hat{K}))$ affin äquivalente Elemente $(K, P(K), \Sigma(K))$ und für alle $v \in H^{k+1}(K)$ gilt:
+  Seien $(\hat{K}, P(\hat{K}), \Sigma(\hat{K}))$ ein finites Element vom Lagrange-Typ. \\
+  Dann existiert ein $c_K > 0$, sodass für alle zu $(\hat{K}, P(\hat{K}), \Sigma (\hat{K}))$ affin äquivalente FE $(K, P(K), \Sigma(K))$ und für alle $v \in H^{k+1}(K)$ gilt:
   \[
     \abs{v - \Pi_k v}_{H^r(K)} \leq c_K \frac{h(K)^{k+1}}{\rho(K)^r} \abs{v}_{H^{k+1}(K)}
   \]
-  falls $0 \leq r \leq k+1$ und $H^{k+1}(\hat{K}) \hookrightarrow \Cont^s(\hat{K})$ ($s < k+1-\tfrac{d}{2}$), $\mathbb{P}_k(\hat{K}) \subseteq P(\hat{K}) \subset H^r(\hat{K})$.
+  falls $0 \leq r \leq k+1$, $H^{k+1}(\hat{K}) \hookrightarrow \Cont^s(\hat{K})$ und $\mathbb{P}_k(\hat{K}) \subseteq P(\hat{K}) \subset H^r(\hat{K})$.
+  % die Einbettung existiert, falls $s < k+1-\tfrac{d}{2}$
+  % TODO: Sobolev-Zahl
 \end{satz}
 
-Im Beweis des Satzes wird klar:
+\TODO{genauer formulieren}
 
-$\Pi_k$ ist der $P_K$-Interpolationsoperator, da $\Pi_K v \in P(K)$, $b_j (\Pi_k v) = b_j(v)$.
+% Vorlesung vom 12.1.2016
 
 \begin{kor}
   Seien die Voraussetzungen des letzten Satzes für das finite Element $(\hat{K}, P(\hat{K}), \Sigma(\hat{K}))$ erfüllt.
-  Sei eine Familie von finiten affin äquivalenten Elementen $(K, P(K), \Sigma(K))$ gegeben.
-  Dann existiert eine Konstante $\tilde{c}_K > 0$, sodass für alle Elemente der Familie $h(K) \leq 1$ und für alle $v \in H^{k+1}(K)$ gilt:
+  Sei eine Familie von zu diesem affin äquivalenten finiten Elementen $(K_i, P(K_i), \Sigma(K_i))_{i \in I}$ gegeben.
+  Dann existiert eine Konstante $\tilde{c}_K > 0$, sodass für alle Elemente~$K_i$ der Familie mit $h(K_i) \leq 1$ und für alle $v \in H^{k+1}(K_i)$ gilt:
   \begin{align*}
-    \norm{v - \Pi_k v}_{H^{k+1}(K)} & \leq \tilde{c}_K \frac{h_(K)^{k+1}}{\rho(K)^r} \abs{v}_{H^{k+1}(K)} \\
-    & = \tilde{c}_K \sigma(K)^r h(K)^{k+1-r} \abs{v}_{H^{k+1}(K)}.
+    \norm{v - \Pi_k v}_{H^r(K_i)} & \leq \tilde{c}_K \frac{h(K_i)^{k+1}}{\rho(K_i)^r} \abs{v}_{H^{k+1}(K_i)} \\
+    & = \tilde{c}_K \sigma(K_i)^r h(K_i)^{k+1-r} \abs{v}_{H^{k+1}(K_i)}.
   \end{align*}
 \end{kor}
 
-\begin{bsp}
-  \begin{tabular}{l l l}
-    & $k=1$ & $k=2$ \\ \hline
-    Lagrange FEM ($s = 0$) & Lagrange-Typ (1) & Lagrange-Typ (2) \\
-    Regularität für $v$ & $H^2(K)$ & $H^3(K)$ \\
-    Beschr. für $d < 2 (k+1)$ & $d \leq 3$ & $d \leq 5$ \\
-    Beschr. für $r$ & $0 \leq r \leq 2$ & $0 \leq r \leq 3$ \\
-    $\norm{v - \Pi v}_{H^r(K)}$ & $O(h^{2-r})$ & $O(h^{3-r})$
+\TODO{was ist $r$?}
+
+\begin{bspe}
+  Das letzte Korollar liefert für FE vom Lagrange-Typ:
+  
+  \begin{tabular}[t]{l l l l}
+    & Ordnung & $k=1$ & $k=2$ \\ \hline
+    % Lagrange FEM ($s = 0$) & Lagrange-Typ (1) & Lagrange-Typ (2) \\
+    Voraussetzungen & Regularität für $v$ & $H^2(K)$ & $H^3(K)$ \\
+    & Beschränkung für $d$ & $d \leq 3$ & $d \leq 5$ \\
+    & Beschränkung für $r$ & $0 \leq r \leq 2$ & $0 \leq r \leq 3$ \\ \hline
+    Konvergenz & $\norm{v - \Pi v}_{H^r(K)}$ & $\O(h^{2-r})$ & $\O(h^{3-r})$
   \end{tabular}
-\end{bsp}
+\end{bspe}
 
 % 5.4.1. Abschätzung des globalen Interpolationsfehlers
 
 $H'_0(\Omega) \subseteq U \subseteq H^1(\Omega)$, $U$ ist der Lösungsraum
 
-Voraussetzungen:
-
-\begin{itemize}
-  \item $\cOmega$ ist ein Polyeder und $\mathcal{T}$ ist eine Familie von Triangulierungen $T_n(\cOmega)$, wobei $\cOmega = \bigcup_{K \in T_n(\cOmega)} K$.
-  Es sei $\mathcal{T}$ regulär, \dh{} es existiert eine Konstante $\sigma > 0$ (unabhängig von $h$), sodass $\tfrac{h(K)}{\rho(K)} \leq \sigma$ für alle $K \in T_n(\cOmega)$ und $h_n = \max_{K \in T_n(\cOmega)} h(K) \xra[n \to \infty]{} 0$.
-  \item Alle FE $(K, P(K), \Sigma(K))$ der Familie $\mathcal{T}$ sind affin äquivalent zu einem Referenzelement $(\hat{K}, P(\hat{K}), \Sigma(\hat{K}))$
-  \item Sei $U_n \subset \Cont(\cOmega)$ ein FE-Funktionenraum
-  \item Für $k+1 \geq r \geq 0$  gilt $H^{k+1}(\hat{K}) \hookrightarrow \Cont(\hat{K})$, $\Poly_K(\hat{K}) \subseteq P(\hat{K}) \subset H^k(\hat{K})$.
-\end{itemize}
+\begin{voraussetzungen}
+  Wir suchen die Lösung von (VGL) im Lösungsraum~$U$ mit $H_0^1(\Omega) \subseteq U \subseteq H^1(\Omega)$.
+  Es gelte:
+  \begin{enumerate}[leftmargin=2.5em]
+    \item[(V\tss{1})] $\cOmega$ ist ein Polyeder und $\mathcal{T} = (T_n(\cOmega))_{n \in \N}$ ist eine Familie von Triangulierungen von~$\Omega$.
+    Es sei $\mathcal{T}$ \emph{regulär}, \dh{} es existiert eine Konstante $\sigma_0 > 0$, sodass $\sigma(K) \leq \sigma_0$ für alle $n \in \N$ und $K \in T_n(\cOmega)$ und es gilt $h_n \coloneqq \enspace \max_{\mathclap{K \in T_n(\cOmega)}} \enspace h(K) \xra[n \to \infty]{} 0$.
+    \item[(V\tss{2})] Alle finiten Elemente $(K, P(K), \Sigma(K))$ der Familie $\mathcal{T}$ sind affin äquivalent zu einem Referenzelement $(\hat{K}, P(\hat{K}), \Sigma(\hat{K}))$.
+    \item[(V\tss{3})] $U_n \subset \Cont(\cOmega)$ ist der FE-Funktionenraum zu $T_n(\cOmega)$.
+    \item[(V\tss{4})] Für $k+1 \geq r \geq 0$ gilt $H^{k+1}(\hat{K}) \hookrightarrow \Cont(\hat{K})$ und $\Poly_k(\hat{K}) \subseteq P(\hat{K}) \subseteq H^r(\hat{K})$.
+  \end{enumerate}
+\end{voraussetzungen}
 
 \begin{satz}
   Seien obige Voraussetzungen erfüllt.
-  Sei $\Pi_n$ der zur Triangulierung $T_n(\cOmega)$ gehörende globale Interpolationsoperator.
-  Dann existert eine Konstante $c > 0$, sodass für alle $v \in H^{k+1}(\Omega) \cap U$ gilt:
+  Sei $\Pi_n : U \to U_n$ der zu~$T_n(\cOmega)$ gehörende \textit{$U_n$-Interpolationsoperator}.
+  Dann existiert ein $c > 0$, sodass für alle $0 \leq l \leq r$, $n \in \N$ und $v \in H^{k+1}(\Omega) \cap U$ gilt:
   \[
-    \left( \sum_{K \in T_n(\cOmega)} \norm{v - \Pi v}^2_{H^l(K)} \right)^{\nicefrac{1}{2}} \leq c h_n^{k+1-l} \abs{v}_{H^{k+1}(\Omega)}
+    \left( \sum_{K \in T_n(\cOmega)} \norm{v - \Pi_n v}^2_{H^l(K)} \right)^{\nicefrac{1}{2}} \leq c \cdot h_n^{k+1-l} \cdot \abs{v}_{H^{k+1}(\Omega)}.
   \]
 \end{satz}
 
 \begin{bemn}
-  \begin{itemize}
-    \item Für $r = 0$ gilt $U_n \subset L^2(\Omega)$ (da $U_n \subset \Cont(\Omega)$ und $\Omega$ beschränkt).
-    Es folgt $\Pi_n v \in L^2(\Omega)$, also
-    \[
-      \norm{v - \Pi_n v}_{L^2(\Omega)} = \left( \IntOmega{\abs{v - \Pi_n v}^2}{x} \right)^{\nicefrac{1}{2}} = \sum_{K \in T_n(\cOmega)} \norm{v - \Pi_K v}^2_{L^2(K)} \leq c h_n^{k+1} \abs{v}_{H^{k+1}(\Omega)}
-    \]
-    \item Für $r = 1$ gilt $U_n \subset H^1(\Omega)$, folglich $\Pi_n v \in H^1(\Omega)$.
-    Somit
-    \[
-      \norm{v - \Pi v}_{H^1(\Omega)} = \left( \sum_{K \in T_n(\cOmega)} \norm{v - \Pi_K v}^2_{H^1(K)} \right)^{\nicefrac{1}{2}} \leq c h_n^k \abs{v}_{H^{k+1}(\Omega)}
-    \]
-  \end{itemize}
+  Für $l = 0 \leq r$ gilt $U_n \subset L^2(\Omega)$ und
+  \[
+    \norm{v - \Pi_n v}_{L^2(\Omega)} = \left( \sum_{K \in T_n(\cOmega)} \!\!\! \norm{v - \Pi_K v}^2_{L^2(K)} \right)^{\nicefrac{1}{2}} \!\!\!\!\! \leq c \cdot h_n^{k+1} \cdot \abs{v}_{H^{k+1}(\Omega)}.
+  \]
+  Für $l = 1 \leq r$ gilt $U_n \subset H^1(\Omega)$ und
+  \[
+    \norm{v - \Pi_n v}_{H^1(\Omega)} = \left( \sum_{K \in T_n(\cOmega)} \!\!\! \norm{v - \Pi_K v}^2_{H^1(K)} \right)^{\nicefrac{1}{2}} \!\!\!\!\! \leq c \cdot h_n^k \cdot \abs{v}_{H^{k+1}(\Omega)}.
+  \]
 \end{bemn}
 
 % 5.9
-\begin{satz}[Konvergenz der konformen Approximation]
-  Seien die Voraussetzungen (V1)-(V3) und (V4) mit $r = 1$ erfüllt.
-  Dann gilt für die Lösung $u$ von (VGL) und die Lösung $u_n$ der konformen Approximation $(VGL)\tss{n}$ mit $l_n = l|_{U_n}$ die Abschätzung $\norm{u - u_n}_{H^1(\Omega)} \leq c_0 h_n^k \abs{u}_{H^{k+1}(\Omega)}$ für ein $c_0 > 0$, falls $u \in H^{k+1}(\Omega)$.
+\begin{satz}[Konvergenz der konformen Approximation] \mbox{} \\
+  Seien die Voraussetzungen (V\tss{1}) -- (V\tss{3}) und (V\tss{4}) mit $r = 1$ erfüllt. \\
+  Dann gilt für die Lösung $u$ von (VGL) und die Lösung $u_n$ der konformen Approximation (VGL)\tss{n} mit $\ell_n = \ell|_{U_n}$ die Abschätzung
+  \[
+    \norm{u - u_n}_{H^1(\Omega)} \in \O(h_n^k \cdot \abs{u}_{H^{k+1}(\Omega)}) \qquad
+    \text{falls $u \in H^{k+1}(\Omega)$.}
+  \]
 \end{satz}
 
-\begin{bem}
-  Für $k=1$, $u \in H^2(\Omega)$ ist die Konvergenzordnung~$1$.
-  % sonst siehe Thm 3.2.3. in Ph.G.Garlet "The FEM for elliptic problems" für Konvergenz (aber ohne bekannte Konvergenzordnung)
-\end{bem}
+\begin{bsp}
+  Für $k=1$, $u \in H^2(\Omega)$ ist die Konvergenzordnung bloß~$1$.
+  % sonst ($u \not\in H^2(\Omega)$) siehe Thm 3.2.3. in Ph.G.Garlet "The FEM for elliptic problems" für Konvergenz (aber ohne bekannte Konvergenzordnung)
+\end{bsp}
 
 \begin{bem}
-  $\norm{u - u_n}_{L^2(\Omega)} \leq \norm{u - u_n}_{H^1(\Omega)} \leq c_0 h_n^k \abs{u}_{H^{k+1}(\Omega)}$
-  $\norm{u - \Pi_n u}_{L^2(\Omega)} \leq C h_n^{k+1} \abs{u}_{H^{k+1}(\Omega)}$
-  % häh?
+  Die konforme Approximation von~$u$ hat (nach bisherigem Kenntnissstand) im Vergleich zur Interpolation von~$u$ eine um eins schlechtere Konvergenzordnung:
+  \begin{alignat*}{3}
+    \norm{u - u_n}_{L^2(\Omega)} & \leq \norm{u - u_n}_{H^1(\Omega)} && \in \O(h_n^k \cdot \abs{u}_{H^{k+1}(\Omega)}) \\
+    \norm{u - \Pi_n u}_{L^2(\Omega)} &&& \in \O(h_n^{k+1} \cdot \abs{u}_{H^{k+1}(\Omega)})
+  \end{alignat*}
+  Dieser Missstand lässt sich mit weiteren Voraussetzungen beheben:
 \end{bem}
 
-\begin{satz}[Lemma von Aubin-Nitsche]
-  Seien $U$ und $H$ Hilberträume mit einer stetigen injektiven Einbettung $E : U \to H$, $U_n \subset U$ ein endlichdim. Teilraum.
-  Sei $B : U \times U \to \R$ eine beschränkte, koerzitive Bilinearfor und $l \in U'$.
-  Sind $u \in U$, $u_n \in U_n$ Lösungen von
+% 5.12
+\begin{lem}[Aubin-Nitsche]
+  Seien $U$ und $H$ Hilberträume, $E : U \to H$ eine stetige inj. Einbettung und $U_n \subset U$ ein endlichdim. Teilraum. \\
+  Sei $B : U \times U \to \R$ eine stetige, koerzitive Bilinearform und $\ell \in U'$.
+  Seien $u \in U$, $u_n \in U_n$ die Lösungen (VGL) bzw. (VGL)\tss{n}.
+  Dann gilt
   \[
-    B(u, \phi) = l(\phi) \, \forall \phi \in U, \quad
-    B(u_n, \phi) = l_n(\phi) \, \forall \phi \in U_n,
+    \norm{E (u - u_n)}_H \leq c_B \cdot \norm{u - u_n}_{U} \cdot \enspace \sup_{\mathclap{r \in H \setminus \{ 0 \}}} \enspace \frac{\inf_{w \in U_n} \norm{w(r) - w}_U}{\norm{r}_H},
   \]
-  so gilt
+  wobei $w(r) \in U$ für $r \in H$ die Lösung des \emph{adjungierten Problems}
   \[
-    \norm{E (u - u_n)}_H \leq c_B \norm{u - u_n}_{U} \sup_{r \in H \setminus \{ 0 \}} \frac{\inf_{w \in U_n} \norm{w(r) - w}_U}{\norm{r}_H},
+    B(\phi, w(r)) = \scp{E(\phi)}{r}_H \quad \forall \phi \in U \qquad
+    \text{ist.}
   \]
-  wobei $w(r) \in U$ die Lösung des adjungierten Problems
-  \[
-    B(\phi, w(r)) = \scp{r}{E(\phi)}_H \, \forall \phi \in U
-  \]
-  ist.
-\end{satz}
+\end{lem}
 
 % Vorlesung vom 19.1.2016
 
 % 5.13
 \begin{kor}
   Seien die Voraussetzungen aus dem Satz zur Konvergenz der konformen Approximation erfüllt.
-  Zusätzlich existiere eine Konstante $ic_a > 0$, sodass für alle $r \in L^2(\Omega)$ die Lösung $w(r)$ vom adjungierten Problem
+  Zusätzlich existiere ein $c_a > 0$, sodass für alle $r \in L^2(\Omega)$ die Lösung $w(r)$ vom adjungierten Problem
   \[
-    B(\phi, w(r)) = \IntOmega{r \phi}{x} \,
-    \forall \phi \in H_1(\Omega)
+    B(\phi, w(r)) = \scp{\phi}{r}_{L^2(\Omega)} \quad
+    \forall \phi \in H^1(\Omega)
   \]
-  die Abschätzung $\norm{w(r)}_{H^2(\Omega)} \leq c_a \norm{r}_{L^2(\Omega)}$ erfüllt.
-  Dann gibt es eine Konstante $c > 0$, sodass
+  die Abschätzung $\norm{w(r)}_{H^2(\Omega)} \leq c_a \cdot \norm{r}_{L^2(\Omega)}$ erfüllt.
+  Dann gilt
   \[
-    \norm{u - u_n}_{L^2(\Omega)} \leq c h^{k+1}_n \abs{u}_{H^{k+1}(\Omega)},
+    \norm{u - u_n}_{L^2(\Omega)} \in \O(h^{k+1}_n \cdot \abs{u}_{H^{k+1}(\Omega)}) \qquad
+    \text{falls $u \in H^{k+1}(\Omega)$.}
   \]
-  falls $u \in H^{k+1}(\Omega)$.
 \end{kor}
 
 % 5.5. Verallgemeinerungen
 
 % 5.5.1. Rechteckige Elemente vom Lagrange-Typ
+\subsection{Rechteckige finite Elemente}
 
 \begin{defn}
-  $(K, P(K), \Sigma(K))$ ist ein rechteckiges Element vom Lagrange-Typ, falls
+  Ein \emph{rechteckiges finites Element vom Lagrange-Typ} der Ordnung~$k$ ist ein Tupel $(K, P(K), \Sigma(K))$ mit
   \begin{itemize}
-    \item $K = \Set{x \in \R^d}{c_j \leq x_j \leq c_j + r_j, c_j, r_j \in \R, j = 1, \ldots, d}$ ist ein Rechteck
-    \item $P(K) = \Qoly_k(K) = \{ p(x) = \sum_{\alpha \in \N^d, 0 \leq \alpha_i \leq k} \lambda_\alpha x_1^{\alpha_1} \cdot \ldots \cdot x_d^{\alpha_d} \} \subset \Poly_{dk}(K)$
-    \item $\Sigma(K) = \Set{b : P(K) \to \R, \enspace p \mapsto p(a)}{a \in \mathcal{K}_k}$, wobei $\mathcal{K}_k = \Set{(c_1 + i_1 \tfrac{r_1}{k}, \ldots, c_d + i_d \tfrac{r_d}{k})}{i_j \in \{ 0, \ldots, k \}, j = 1, \ldots, d}$
+    \item $K = \cinterval{c_1}{c_1 + r_1} \times \ldots \times \cinterval{c_d}{c_d + r_d} \subset \R^d$ ist ein Rechteck,
+    \item $P(K) = \Qoly_k(K) \coloneqq \{\, p(x) = \enspace \sum_{\mathclap{\alpha \in \{ 0, \ldots, k \}^d}} \enspace \lambda_\alpha x_1^{\alpha_1} \cdot \ldots \cdot x_d^{\alpha_d} \,\} \subset \Poly_{dk}(K)$
+    \item $\Sigma(K) = \Set{b : P(K) \to \R, \enspace p \mapsto p(a)}{a \in \mathcal{K}_k}$, wobei $\mathcal{K}_k = \Set{(c_1 + i_1 \tfrac{r_1}{k}, \ldots, c_d + i_d \tfrac{r_d}{k})}{i_j \in \{ 0, \ldots, k \}, \, j = 1, \ldots, d}$.
   \end{itemize}
 \end{defn}
 
@@ -2262,24 +2271,27 @@ Voraussetzungen:
 \begin{defn}
   $T_n(\cOmega) \coloneqq \Set{(K_i, P(K_i), \Sigma(K_i))}{i = 1, \ldots, N}$ heißt Triangulierung von $\cOmega$ mit rechteckigen FE vom Lagrange-Typ, wenn
   \begin{itemize}
-    \item $\cOmega = \bigcup_{i=1}^N K_i$
-    \item $\inte(K_i) \cap \inte(K_j) = \emptyset$ für $i \neq j$
-    \item Jede Seite von $K_i$ ist entweder ein Teil von $\bOmega$ oder die Seite von einem anderen $K_j$
+    \miniitem{0.4 \linewidth}{$\cOmega = K_1 \cup \ldots \cup K_N$,}
+    \miniitem{0.5 \linewidth}{$\inte(K_i) \cap \inte(K_j) = \emptyset$ für $i \neq j$,}
+    \item Jede Seite von $K_i$ ist entweder eine Teilmenge von $\bOmega$ oder die Seite von einem anderen $K_j$
   \end{itemize}
 \end{defn}
 
 \begin{defn}
-  Ein Finite-Element-Raum ist definiert durch
+  Der \textit{Finite-Element-Raum} zur Triangulierung $T_n(\cOmega)$ ist
   \[
-    U_n = \Set{v \in \Cont(\cOmega)}{v|_{K_i} \in \Qoly_k(K_i), i = 1, \ldots, N}
+    U_n \coloneqq \Set{v \in \Cont(\cOmega)}{v|_{K_i} \in \Qoly_k(K_i), \, i = 1, \ldots, N}.
   \]
 \end{defn}
 
-\begin{satz}
+\begin{lem}
   \begin{itemize}
     \item $U_n \subset H^1(\Omega)$
     \item Eine Basis von $U_n$ ist durch Polynome $p_j \in U_n$ mit $p_i(a_j) = \partial_{ij}$ für alle $ia_j \in \mathcal{K}_k$ gegeben.
   \end{itemize}
-\end{satz}
+\end{lem}
 
 \end{document}
+
+TODO: affine äquivalenz von Simplizes definieren
+TODO: stetige Einbettung von Sobolev-Räumen in C^r?
