@@ -2291,6 +2291,57 @@ $H'_0(\Omega) \subseteq U \subseteq H^1(\Omega)$, $U$ ist der Lösungsraum
   \end{itemize}
 \end{lem}
 
+% Vorlesung vom 25.1.2016
+
+% 5.5.2. Simpliziale Elemente vom Hermite-Typ
+\subsection{Simpliziale Elemente vom Hermite-Typ}
+
+\begin{defn}
+  Ein \emph{simpliziales finites Element vom Hermite-Typ} ist ein Tupel $(K, P(K), \Sigma(K))$ mit
+  \begin{itemize}
+    \item $K$ ist ein $d$-Simplex mit Eckpunkten $a_1, \ldots, a_d$
+    \item $P(K) \coloneqq \Poly_3(K)$
+    \item $\Sigma(K) \coloneqq ???$ $\Set{p(a_i)}{i = 1, \ldots, d+1} \cup \Set{p(a_{ijl})}{1 \leq i < j < l \leq d+1}$ $a_{ijl} \coloneqq \tfrac{1}{3} (a_i + a_j + a_l)$, $\Set{\DO p(a_i) (a_j  - a_i)}{1 \leq i \neq j \leq d+1}$
+  \end{itemize}
+  Der zugehörige Finite-Elemente-Raum zu einer Triangulierung $T(\cOmega)$ mit simpl. finiten Elementen vom Hermite-Typ ist
+  \[
+    U_n \coloneqq \Set{v \in \Cont(\cOmega)}{v|_K \in \P_3(K) \, \forall K \in T(\cOmega)}
+  \]
+\end{defn}
+
+% Ausgelassen: graphische Darstellung, Beispiel mit $d=2$, Berechnung (bzw. Aufstellen von Gleichungen) von dualer Basis
+
+\begin{bemn}
+  \begin{itemize}
+    \item $U_n \subset \Cont^1(\cOmega)$ (nur) für $d = 1$
+    \item $U_n \subset \Cont^1(\cOmega)$ für $d = 2$ erreicht man mit folgenden Elementen:
+    \begin{itemize}
+      \item \textit{Argyris-Dreieck}: $(K, P(K), \Sigma(K))$ wobei
+      $K$ ein Simplex mit Ecken $a_1, a_2, a_3$,
+      $P(K) \coloneqq \Poly_5(K)$ und $\Sigma(K) \coloneqq \Set{p(a_i)}{1 \leq i \leq 3} \cup \Set{\partial_x p(a_i)}{1 \leq i \leq 3} \cup \Set{\partial_y p(a_i)}{1 \leq i \leq 3} \cup \Set{\partial_{yy} p(a_i)}{1 \leq i \leq 3} \cup \Set{\partial_{xx} p(a_i)}{1 \leq i \leq 3} \cup \Set{\partial_{xy} p(a_i)}{1 \leq i \leq 3} \cup \Set{\DO p(\tfrac{a_i + a_j}{2}) \cdot \nu_{ij}}{1 \leq i < j \leq 3}$ (wobei $\nu_{ij} \coloneqq $ äußerer Normalenvektor an $\tfrac{a_i + a_j}{2}$) ist.
+      \item \textit{Bell-Dreieck}: $(K, P(K), \Sigma(K))$ mit
+      $P(K) \coloneqq \Set{p \in \Poly_5}{\tfrac{\partial p}{\partial \nu_{ij}} \in \Poly_3(K') \text{ für alle Kanten $K'$ von $K$}}$, $\Sigma(K) \coloneqq \Set{p(a_i)}{1 \leq i \leq 3} \cup \Set{\partial_x p(a_i)}{1 \leq i \leq 3} \cup \Set{\partial_y p(a_i)}{1 \leq i \leq 3} \cup \Set{\partial_{xx} p(a_i)}{1 \leq i \leq 3} \cup \Set{\partial_{yy} p(a_i)}{1 \leq i \leq 3} \cup \Set{\partial_{xy} p(a_i)}{1 \leq i \leq 3}$
+    \end{itemize}
+  \end{itemize}
+\end{bemn}
+
+% 5.5.3. Nichtkonforme finite Elemente
+\subsection{Nichtkonforme finite Elemente}
+
+Bisher war $B_n = B_{U_n \times U_n}$.
+Manchmal ist es schwierig, $B$ exakt auszuwerten und muss daher angenähert werden, etwa wenn $B$ durch Integration definiert ist.
+Dann hilft folgende Verallgemeinerung des Lemmas von Céa:
+
+1. Fall: $U_n \subset U$, $B_n$ nicht unbedingt $= B_{U_n \times U_n}$.
+
+\begin{satz}[1. Lemma von Strang]
+  Sei $B_ U \times U \to \R$ eine beschränkte, koerzitive Bilinearform, $U_n \subset U$, $B_n : U_n \times U_n \to \R$ eine beschränkte, \textit{gleichmäßig koerzitive} Bilinearform, \dh{} $\ex{\alpha > 0} \fa{n} B_n(u_n, u_n) \geq \alpha \norm{u_n}^2_U$ für alle $u \in U_n$.
+  Dann existiert eine Konstante $c > 0$, sodass
+  \[
+    \norm{u - u_n}_U \leq c \left( \inf_{v_n \in U_n} \norm{u - v_n}_U + \sup_{w_n \in U_n, w_n \neq 0} \tfrac{\abs{B(v_n, w_n) - B_n(v_n, w_n)}}{\norm{w_n}_U} + \norm{\ell - \ell_n}_{U'} \right)
+  \]
+\end{satz}
+
 \end{document}
 
 TODO: affine äquivalenz von Simplizes definieren
