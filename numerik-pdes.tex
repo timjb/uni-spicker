@@ -193,19 +193,18 @@ Dies ist ein verkürztes Skript zur gleichnamigen Vorlesung von Frau Prof. Dr. T
   \end{array} \]
 \end{prob}
 
-\begin{bem}
-  Man kann auch auf verschiedenen Teilstücken des Randes verschiedene Bedingungen stellen.
-\end{bem}
-
-\begin{bem}
-  Falls die Funktionen $a_{ij}$ differenzierbar sind, so kann $\LL$ in \emph{Divergenzform} geschrieben werden:
-  \begin{align*}
-    %\LL u & = - \sum_{i,j=1}^n a_{ij}(x) \tfrac{\partial^2 u}{\partial x_i \partial x_j} + \sum_{i=1}^n b_i(x) \tfrac{\partial u}{\partial x_i} + c(x) u  \\
-    %& = - \sum_{i,j=1}^n \left( \tfrac{\partial}{\partial x_j} \left( a_{ij}(x) \tfrac{\partial u}{\partial x_i} \right) - \left( \tfrac{\partial}{\partial x_j} a_{ij}(x) \right) \tfrac{\partial u}{\partial x_i} \right) + \sum_{i=1}^n b_i(x) \tfrac{\partial u}{\partial x_i} + c(x) u \\
-    \LL u & = - \!\!\! \sum_{i,j=1}^n \tfrac{\partial}{\partial x_j} \left( a_{ij}(x) \tfrac{\partial u}{\partial x_i} \right) \!+\! \sum_{i=1}^n \underbrace{\left((\sum_{j=1}^n \tfrac{\partial}{\partial x_j} a_{ij}(x) ) \!+\! b_i(x)\right)}_{\tilde{b}(x) \coloneqq} \tfrac{\partial u}{\partial x_i} \!+\! c(x) u \\
-    & = - \dive(A(x) \nabla u) + \tilde{b}(x) \cdot \nabla u + c(x) u
-  \end{align*}
-\end{bem}
+\begin{bemn}
+  \begin{itemize}
+    \item Man kann auch auf verschiedenen Teilstücken des Randes verschiedene Bedingungen stellen.
+    \item Falls die Funktionen $a_{ij}$ differenzierbar sind, so kann $\LL$ in \emph{Divergenzform} geschrieben werden:
+    \begin{align*}
+      %\LL u & = - \sum_{i,j=1}^n a_{ij}(x) \tfrac{\partial^2 u}{\partial x_i \partial x_j} + \sum_{i=1}^n b_i(x) \tfrac{\partial u}{\partial x_i} + c(x) u  \\
+      %& = - \sum_{i,j=1}^n \left( \tfrac{\partial}{\partial x_j} \left( a_{ij}(x) \tfrac{\partial u}{\partial x_i} \right) - \left( \tfrac{\partial}{\partial x_j} a_{ij}(x) \right) \tfrac{\partial u}{\partial x_i} \right) + \sum_{i=1}^n b_i(x) \tfrac{\partial u}{\partial x_i} + c(x) u \\
+      \LL u & = - \!\!\! \sum_{i,j=1}^n \tfrac{\partial}{\partial x_j} \left( a_{ij}(x) \tfrac{\partial u}{\partial x_i} \right) \!+\! \sum_{i=1}^n \underbrace{\left((\sum_{j=1}^n \tfrac{\partial}{\partial x_j} a_{ij}(x) ) \!+\! b_i(x)\right)}_{\tilde{b}(x) \coloneqq} \tfrac{\partial u}{\partial x_i} \!+\! c(x) u \\
+      & = - \dive(A(x) \nabla u) + \tilde{b}(x) \cdot \nabla u + c(x) u
+    \end{align*}
+  \end{itemize}
+\end{bemn}
 % TODO: \tilde{b}_i(x) ist der Term in Klammern im mittleren Term
 
 \begin{voraussetzung}
@@ -227,9 +226,9 @@ Dies ist ein verkürztes Skript zur gleichnamigen Vorlesung von Frau Prof. Dr. T
 \end{defn}
 
 % 2.1
-\begin{satz}[\emph{Maximumsprinzip}]
+\begin{satz}[\emph{Maximumprinzip}]
   Sei $\Omega \subset \R^n$ offen, zshgd u. beschränkt.
-  Sei $u \in \Cont^2(\omega) \cap \Cont(\cOmega)$ eine Lösung vom (RWP), $f \leq 0$ in $\Omega$ und $c \equiv 0$. \\
+  Sei $u \in \Cont^2(\Omega) \cap \Cont(\cOmega)$ eine Lösung vom (RWP), $f \leq 0$ in $\Omega$ und $c \equiv 0$. \\
   Dann nimmt $u$ sein Maximum auf dem Rand $\bOmega$ an, \dh{}
   \[ \sup_{x \in \cOmega} u(x) = \sup_{x \in \bOmega} u(x) = \sup_{x \in \bOmega} g(x) \]
 \end{satz}
@@ -266,7 +265,7 @@ Dies ist ein verkürztes Skript zur gleichnamigen Vorlesung von Frau Prof. Dr. T
 
 % 2.5
 \begin{satz}
-  Sei $\Omega$ ein beschr. Lipschitz-Gebiet, $a_{ij}, b_i, c, f \in \Cont(\cOmega)$, $c \geq 0$, $g \in \Cont(\bOmega)$.
+  Sei $\Omega$ ein beschr. Lipschitz-Gebiet, $a_{ij}, b_i, c \in \Cont(\cOmega)$, $c \geq 0$, $\LL$~glm. elliptisch, $f \in \Cont^{0,\alpha}(\cOmega)$ für ein $\alpha \in \ointerval{0}{1}$ und $g \in \Cont(\bOmega)$. \\
   Dann besitzt (RWP) genau eine Lsg $u \in \Cont^2(\Omega) \cap \Cont(\cOmega)$.
 \end{satz}
 
@@ -341,7 +340,7 @@ Dies ist ein verkürztes Skript zur gleichnamigen Vorlesung von Frau Prof. Dr. T
     \begin{align*}
       \tfrac{1}{h^2} \left( 2 u_h(x_1) - u_h(x_2) \right) &= f(x_1) + \tfrac{g_0}{h^2}
       \tag{$i\!=\!1$} \\
-      \tfrac{1}{h^2} \left( -u_h(x_{i-1}) + u_h(x_i) - u_h(x_{i+1}) \right) &= f(x_i)
+      \tfrac{1}{h^2} \left( -u_h(x_{i-1}) \!+\! 2 u_h(x_i) \!-\! u_h(x_{i+1}) \right) &= f(x_i)
       \tag{$i=2, \nldots, n-2$} \\
       \tfrac{1}{h^2} \left( -u_h(x_{n-2}) + 2 u_h(x_{n-1}) \right) &= f(x_{n-1}) + \tfrac{g_1}{h^2}
       \tag{$i\!=\!n{-}1$}
