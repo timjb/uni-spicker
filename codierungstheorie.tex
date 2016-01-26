@@ -42,6 +42,7 @@
 \newcommand{\PCE}[1]{\widehat{#1}} % Parity-Check-Erweiterung
 \DeclareMathOperator{\trace}{trace} % Spur
 \DeclareMathOperator{\ggT}{ggT} % größter gemeinsamer Teiler
+\DeclareMathOperator{\kgV}{kgV} % kleinstes gemeinsames Vielfaches
 \DeclareMathOperator{\ord}{ord} % Ordnung
 \newcommand{\rez}{\mathrm{rez}} % reziprok
 
@@ -2379,5 +2380,40 @@ Somit zerfällt $\Phi_n(x)$ in Polynome mit jeweiligem Grad $\ord_n(q)$, also $\
 Die Anzahl verschiedener minimaler Faktoren von $\Phi_n(x)$ aus $\F_q[x]$ ist gleich $\tfrac{\deg(\Phi_n)}{\ord_n(q)} = \tfrac{\varphi(n)}{\ord_n(q)}$
 
 Fazit: $p$ teilt nicht $n$. Dann ist die Anzahl der irred. Faktoren von $x^n - 1$ gleich $\sum_{d \divides n} \tfrac{\varphi(d)}{\ord_d(q)}$.
+
+% Vorlesung vom 16.1.2016
+
+\TODO{ausgelassene Beispiele}
+
+% §12. BCH-Codes
+\section{BCH-Codes}
+
+% §12.1 Die BCH-Schranke
+
+Sei $\mathcal{N} \subseteq Z_n \leftrightarrow N \subseteq Z_n$ ($N = \Set{i}{\zeta^i \in \mathcal{N}}$)
+
+Zu $N \subseteq \Z_n$ sei $g_N(x) \coloneqq \kgV \Set{\mu_i(x)}{i \in SN}$.
+Es sei $C \coloneqq C(g_N) = C(N) = C(\mathcal{N})$ der von $g_N$ erzeugte zyklische Code.
+
+Für $c(x) \in \F_q[x]{\leq n-1}$ gilt dann: $c(x) \in Ca \iff c(\zeta^i) = 0$ für alle $i \in N$.
+
+\begin{defn}
+  $b \in \{ 0, \ldots, n-1 \}$ und $\delta \in \N$ mit $2 \leq \delta \leq n$.
+  $L \coloneqq \Set{i \bmod{n}}{b \leq i \leq b + \delta - 2}$ ein zyklisches Intervall.
+  Dann heißt $C(L)$ ein BCH-Code mit designiertem Abstand $\delta$.
+  Speziell: $b=1$ (im engeren Sinne), $n = q^m - 1$ (primitiver BCH-Code)
+\end{defn}
+
+\begin{satz}
+  $L$, etc. wie in (12.1).
+  $C = C(g_L) = C(L)$
+  Dann:
+  \begin{itemize}
+    \item $d \coloneqq $ Minimalgewicht von $C$ $\geq \delta$
+    \item $k \coloneqq \dim(C) \geq n - m \cdot (\delta - 1)$
+  \end{itemize}
+\end{satz}
+
+\TODO{Beispiele}
 
 \end{document}
