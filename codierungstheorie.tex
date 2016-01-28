@@ -2416,4 +2416,36 @@ Für $c(x) \in \F_q[x]{\leq n-1}$ gilt dann: $c(x) \in Ca \iff c(\zeta^i) = 0$ f
 
 \TODO{Beispiele}
 
+% Vorlesung vom 28.1.2016
+
+\TODO{Beispiel 12.5}
+
+% §12.5 Die Methode von Lint und Wilson
+
+\begin{defn}
+  Sei $\mathcal{N} \subseteq \F_{q^m}^*$ nichtleer.
+  Ein Mengensystem $U(\mathcal{N}) \subset \Pow(\mathcal{N})$ heißt \emph{unabhängig}, falls gilt:
+  \begin{itemize}
+    \item $\emptyset \in U(\mathcal{N})$
+    \item $A \in U(\mathcal{N}), A \subseteq \mathcal{N}, \beta \in \mathcal{N} \setminus \mathcal{N} \implies A \cup \{ \beta \} \in U(\mathcal{N})$
+    \item $A \in U(\mathcal{N}), \gamma \in \F_{q^m}^* \implies \gamma A \in U(\mathcal{N})$
+  \end{itemize}
+\end{defn}
+
+\begin{prop}
+  Sei $f(x) \in \F_q[x]$, $f \neq 0$, $\mathcal{N}$ sei die Nullstellenmenge von $f$ innerhalb $\F_{q^m}^*$ und $U(\mathcal{N})$ sei ein unabhängiges Mengensystem.
+  Dann gilt \enspace $\wt(f) \geq \max \Set{\abs{A}}{A \in U(\mathcal{N})}$.
+\end{prop}
+
+\TODO{Beispiel}
+
+% §12.3. Einiges zu binären BCH-Codes
+
+\begin{satz}
+  Sei $q = 2$, $\delta = 2 \epsilon + 1$, $L = \Set{i \bmod{n}}{1 \leq i \leq \delta - 1}$ und $C = C(L)$ der zugehörige BCH-Code.
+  Dann gilt $\dim(C) \geq n - m \cdot \epsilon$.
+\end{satz}
+
+% vorher nur: $\dim(C) \geq n - m \cdot 2 \epsilon$
+
 \end{document}
