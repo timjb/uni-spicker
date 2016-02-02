@@ -91,6 +91,7 @@
 \newtheorem*{bezeichnung}{Bezeichnung}
 \newtheorem*{folgerung}{Folgerung}
 \newtheorem*{fakten}{Fakten}
+\newtheorem*{fakt}{Fakt}
 \newtheorem*{test}{Test}
 
 \theoremstyle{remark}

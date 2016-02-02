@@ -2122,189 +2122,197 @@ TODO: Rest des Beispiels, insbesondere Decodierung
 
 \begin{bem}
   Als Koordinaten verwenden wir $\{ 0, \ldots, n-1 \} \cong \Z_n$. \\
-  Der \emph{Shift-Operator} ist $S : \F_q^n \to \F_q^n, \enspace e^i \mapsto e^{i+1 (\bmod{n})}$. \\
+  Der \emph{Shift-Operator} ist $S : \F_q^n \to \F_q^n, \enspace e^i \mapsto e^{i+1 \pmod{n}}$. \\
   Ein zyklischer Code ist ein $S$-invarianter Teilraum von $\F_q^n$.
 \end{bem}
 
-$\F_q[x]_{< n} = \Set{f \in \F_q[x]}{\deg(f) < n}$
-
-$\F_q^n \to \F_q[x]_{< n}, \enspace v \mapsto v(x) \coloneqq v_0 + v_1 x + \ldots + v_{n-1} x^{n-1}$
-
-Identifiziere $C \subseteq \F_q^n$ mit entsprechenden Polynomen aus $\F_q[x]_{< n}$.
-
-$\F_q[x]$ ist ein Euklidischer Bereich und ein Hauptidealbereich.
-
-Für $c \in \F_q^n$ gilt für die Polynom $c \in \F_q[x]$ und $\overline{c}(x) \coloneqq (S c)(x) \in \F_q[x]$:
-$x \cdot c(x) = \overline{c}(x) \bmod{(x^n - 1)}$.
-
-Also: $C$ ist ein zyklischer Code $\iff$ $x \cdot c(x) \bmod{(x^n - 1)} \in C$ für alle $c(x) \in C$.
-
-\begin{bem}
-  TODO
-\end{bem}
-
 \begin{nota}
-  $\mathcal{R} = \mathcal{R}_{q,n} \coloneqq \F_q[x] / (x^n - 1)$
+  Wir identifizieren Wörter $v \in \F_q^n$ mit Polynomen $v(x) \in \F_q[x]_{< n} \coloneqq \Set{f \in \F_q[x]}{\deg(f) < n}$ vermöge
+  \[
+    \F_q^n \to \F_q[x]_{< n}, \enspace
+    v \mapsto v(x) \coloneqq v_0 + v_1 x + \ldots + v_{n-1} x^{n-1}.
+  \]
 \end{nota}
 
-\begin{satz}
-  Es gibt eine bijektive Korrespondenz
+\begin{fakt}
+  $\F_q[x]$ ist ein euklidischer Hauptidealbereich.
+\end{fakt}
+
+\begin{bem}
+  Für $c \in \F_q^n$ gilt für $c(x)$ und $ \overline{c}(x) \coloneqq (S c)(x) \in \F_q[x]$:
   \[
-    \begin{array}{r c l}
-      \{ \text{ zyklische Codes der Länge $n$ über $\F_q$ } \} & \leftrightarrow & \{ \text{ Ideale in $\mathcal{R}_{q,n}$ } \}
-    \end{array}
+    x \cdot c(x) = \overline{c}(x) \pmod{x^n - 1}.
   \]
-\end{satz}
+  Somit gilt: $C \subseteq \F_q[x]_{< n}$ ist genau dann ein zyklischer Code, wenn $x \cdot c(x) \bmod{(x^n - 1)} \in C$ für alle $c(x) \in C$.
+\end{bem}
 
-TODO: weiter
+% ausgelassen: einige (etwas unnötige) Sätze
 
-% 11.6
+\begin{nota}
+  $\mathcal{R} \coloneqq \mathcal{R}_{q,n} \coloneqq \F_q[x] / (x^n - 1)$
+\end{nota}
+
+% 11.5 und 11.6
 \begin{satz}
-  $C \subseteq \F_q[x]_{< n}$ sein ein zyklischer Code der Länge $n$.
-  Dann gibt es ein eindeutiges monisches Polynom~$g(x)$ mit minimalem Grad in $C$.
-  Es gilt weiter: $g(x) \divides (x^n - 1)$,
-  $C = \Set{f(x) g(x)}{f(x) \in \F_q[x] \text{ mit } \deg(f) < n - \deg(g)}$ und $\dim(C) = n - \deg(g)$.
+  Es gibt kanonische bijektive Korrespondenzen
+  \begin{align*}
+    & \{ \text{ zyklische Codes der Länge $n$ über $\F_q$ } \} \\
+    \cong \enspace & \{ \text{ Ideale $J \subseteq \mathcal{R}_{q,n}$ } \} \\
+    \cong \enspace & \{ \text{ Ideale $I \subseteq \F_q[x]$ mit $(x^n - 1) \in I$ } \} \\
+    \cong \enspace & \{ \text{ monische Polynome $g(x) \in \F_q[x]$ mit $g(x) \divides (x^n - 1)$ } \}
+  \end{align*}
+  Das zu einem Code $C \subseteq \F_q[x]_{< n}$ zugehörige monische Polynom ist das (eindeutige!) monische Polynom~$g(x) \in C$ mit minimalem Grad.
+  Es gilt $C = \Set{f(x) g(x)}{f(x) \in \F_q[x] \text{ mit } \deg(f) < n - \deg(g)}$ und $\dim(C) = n - \deg(g)$.
 \end{satz}
 
 \begin{defn}
-  $g(x)$ heißt das \emph{Generatorpolynom} zu~$C$.
-  Das Polynom $h(x) \coloneqq \tfrac{x^n - 1}{g(x)}$ heißt das \emph{Kontrollpolynom} zu $C$.
+  \begin{minipage}[t]{0.8 \linewidth}
+    $g(x)$ heißt das \emph{Generatorpolynom} zu~$C$. \\
+    $h(x) \coloneqq \nicefrac{(x^n - 1)}{g(x)}$ heißt \emph{Kontrollpolynom} zu $C$.
+  \end{minipage}
 \end{defn}
 
 \begin{lem}
-  $c(x) \in C \iff h(x) c(x) \equiv 0 \bmod{(x^n - 1)}$
+  $c(x) \in C \iff h(x) c(x) \equiv 0 \pmod{x^n - 1}$
 \end{lem}
+
+\begin{nota}
+  $k \coloneqq n - \deg(g)$
+\end{nota}
 
 \begin{bem}
   Die Generatormatrix von $C$ ist
   \[
     G = \begin{pmatrix}
-      g_0 & g_1 & \cdots g_{n-k} & 0 & \cdots & \cdots & 0 \\
-      0 & g_0 & g_1 & \cdots & g_{n-k} & 0 & \cdots & 0 \\
-      % TODO: Diagonale Punkte, letzte Zeile
-    \end{pmatrix}
+      g_0 & g_1 & \cdots & g_{n-k} & 0 & \cdots & 0 \\
+      0 & g_0 & g_1 & \cdots & g_{n-k} & \cdots & 0 \\
+      \vdots & \ddots & \ddots & \ddots & \cdots & \ddots & \vdots \\
+      0 & \cdots & 0 & g_0 & g_1 & \cdots & g_{n-k}
+    \end{pmatrix} \in \F_q^{k \times n}.
   \]
-  mit $k \coloneqq n - \deg(g)$.
 \end{bem}
 
 % 10.9
 \begin{prop}
   Sei $h(x) = h_0 + h_1 x + \ldots + h_k x^k$.
-  Dann ist die Kontrollmatrix von $C$ die Matrix
+  Dann ist die Kontrollmatrix von $C$
   \[
-    H = \text{TODO}
+    H = \begin{pmatrix}
+      h_k & h_{k-1} & \cdots & h_0 & 0 & \cdots & 0 \\
+      0 & h_k & h_{k-1} & \cdots & h_0 & \cdots & 0 \\
+      \vdots & \ddots & \ddots & \ddots & \cdots & \ddots & \vdots \\
+      0 & \cdots & 0 & h_k & h_{k-1} & \cdots & h_0
+    \end{pmatrix} \in \F_q^{n - k \times n}.
   \]
 \end{prop}
 
 % Vorlesung vom 19.1.2016
 
 \begin{defn}
-  Sei $f(x) = f_d x^d + \ldots f_1 x + f_0 \in \F_q[x]$ mit $f_0 \neq 0$ (also $f(0) \neq 0$).
-  Das \emph{reziproke Polynom} zu $f(x)$ ist
+  Sei $f(x) = f_d x^d + \ldots + f_0 \in \F_q[x]$ mit $f_0 \neq 0$ (also $f(0) \neq 0$). \\
+  Das zu~$f(x)$ \emph{reziproke Polynom} ist
   \[
     f^\rez(x) = f(\tfrac{1}{x}) \cdot x^d = f_0 x^d + f_1 x^{d-1} + \ldots + f_{n-1} x + f_n.
   \]
 \end{defn}
 
 \begin{satz}
-  Sei $C$ ein zyklischer Code der Länge $n$ über $\F_q$ mit Generatorpolynom $g(x)$ und Kontrollpolynom $h(x)$.
-  Dann ist $C^\perp$ ebenfalls zyklisch.
-  Das Generatorpolynom von $C^\perp$ ist
+  Sei $C$ ein zyklischer Code der Länge $n$ über $\F_q$ mit Generatorpolynom $g(x)$ und Kontrollpolynom $h(x)$. \\
+  Dann ist $C^\perp$ ebenfalls zyklisch mit Generatorpolynom $h^*(x)$ und Kontrollpolynom $g^*(x)$, wobei
   \[
-    h^*(x) \coloneqq \tfrac{1}{h_0} \cdot h^\rez(x).
+    h^*(x) \coloneqq \tfrac{1}{h_0} \cdot h^\rez(x), \qquad
+    g^*(x) \coloneqq \tfrac{1}{g_0} \cdot g^\rez(x).
   \]
 \end{satz}
 
 \begin{bsp}
-  $q=2$, $n=7$.
+  Sei $q=2$, $n=7$.
+  Wir wählen
   \[
-    x^7 - 1 = \underbrace{(x-1) \cdot (x^3 + x^2 + 1)}_{h(x) \coloneqq} \cdot \underline{(x^3 + x + 1)}_{g(x) \coloneqq}
+    x^7 - 1 = \underbrace{(x-1) \cdot (x^3 + x^2 + 1)}_{h(x) \coloneqq x^4 + x^2 + x + 1 =} \cdot \underbrace{(x^3 + x + 1)}_{g(x) \coloneqq}
   \]
-  Generatormatrix zu $C_g$:
+  Die Generator- und Kontrollmatrix zu $C_g$ sind
   \[
-    G = \begin{pmatrix}
+    G = \begin{psmallmatrix}
       1 & 1 & 0 & 1 & 0 & 0 & 0 \\
       0 & 1 & 1 & 0 & 1 & 0 & 0 \\
       0 & 0 & 1 & 1 & 0 & 1 & 0 \\
       0 & 0 & 0 & 1 & 1 & 0 & 1
-    \end{pmatrix}
-  \]
-  Kontrollmatrix zu $C_g$:
-  \[
-    H = \begin{pmatrix}
+    \end{psmallmatrix}, \quad
+    H = \begin{psmallmatrix}
       1 & 0 & 1 & 1 & 1 & 0 & 0 \\
       0 & 1 & 0 & 1 & 1 & 1 & 0 \\
       0 & 0 & 1 & 0 & 1 & 1 & 1
-    \end{pmatrix}
+    \end{psmallmatrix}.
   \]
-  Der Minimalabstand von $C_g$ ist $3$ und $C_g$ ein $[7, 4, 3]$-Code über $\F_2$.
-  $C_g$ hat Parameter wie $\Ham_2(3)$.
+  $C_g$ ist ein $[7, 4, 3]$-Code und äquivalent zu~$\Ham_2(3)$.
 \end{bsp}
 
 \begin{bsp}
-  $q = 3$, $n = 11$
+  Sei $q = 3$, $n = 11$.
+  Wir wählen
   \[
-    x^11 - 1 = \underbrace{(x-1) \cdot (x^5 + x^4 - x^3 + x^2 - 1)}_{h(x) \coloneqq} \cdot \underbrace{(x^5 - x^3 + x^2 - x - 1)}_{g(x) \coloneqq}.
+    x^{11} - 1 = \underbrace{(x-1) \cdot (x^5 + x^4 - x^3 + x^2 - 1)}_{h(x) \coloneqq x^6 + x^4 - x^3 - x^2 - x + 1 =} \cdot \underbrace{(x^5 - x^3 + x^2 - x - 1)}_{g(x) \coloneqq}.
   \]
-  Betrachte $\hat{C}_g = $ Parity-Check-Erw. von $C_g$.
+  Betrachte die Parity-Check-Erw.~$\hat{C}_g$ von~$C_g$.
   Die Generatormatrix ist
   \[
     \setcounter{MaxMatrixCols}{20} % LaTeX ist so ein Scheiß!
-    \hat{G} = \begin{pmatrix}
+    \hat{G} = \begin{psmallmatrix}
       -1 & -1 & 1 & -1 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 1 \\
       0 & -1 & -1 & 1 & -1 & 0 & 1 & 0 & 0 & 0 & 0 & 1 \\
       0 & 0 & -1 & -1 & 1 & -1 & 0 & 1 & 0 & 0 & 0 & 1 \\
       0 & 0 & 0 & -1 & -1 & 1 & -1 & 0 & 1 & 0 & 0 & 1 \\
       0 & 0 & 0 & 0 & -1 & -1 & 1 & -1 & 0 & 1 & 0 & 1 \\
       0 & 0 & 0 & 0 & 0 & -1 & -1 & 1 & -1 & 0 & 1 & 1
-    \end{pmatrix}
+    \end{psmallmatrix}
   \]
   $\hat{C}_g$ ist selbstdual, da $\hat{G} \cdot \hat{G} = 0$.
-  Somit ist das Minimalgewicht von $\hat{C}_g$ durch drei teilbar.
-  Je drei Spalten von $\hat{G}$ sind linear unabhängig.
-  Daher gilt $d(\hat{C}_g) \geq 6$.
-  Somit ist $\hat{C}_g$ ein $[12, 6, 6]$-Code über $\F_3$.
-  Es folgt, dass $C_g$ ein $[11, 6, 5]$-Code über $\F_3$.
-  Dieser ist perfekt.
+  Das Minimalgew. von~$\hat{C}_g$ ist somit durch drei teilbar.
+  Je drei Spalten von~$\hat{G}$ sind lin. unabhängig.
+  Daher ist das Minimalgewicht $\geq 6$.
+  Wegen der Kugelpackungsschranke gilt Gleichheit.
+  Somit ist $\hat{C}_g$ ein $[12, 6, 6]$-Code und $C_g$ ein $[11, 6, 5]$-Code über~$\F_3$.
+  Letzterer ist perfekt.
   Also $C_g = \Golay(11)$ und $\hat{C}_g = \Golay(12)$.
 \end{bsp}
 
 \begin{bsp}
-  $q = 2$, $n = 23$.
-  Dann ist
-  \[
-    x^{23} - 1 = \underbrace{(x-1) \cdot (x^{11} + x^9 + x^7 + x^6 + x^5 + x + 1)}_{h(x) \coloneqq} \cdot \underbrace{(x^{11} + x^{10} + x^6 + x^5 + x^4 + x^2 + 1)}_{g(x) \coloneqq}
-  \]
-  Dann ist $C_g = \Golay(23)$.
+  Sei $q = 2$, $n = 23$.
+  Die Zerlegung von $x^{23} - 1 \in \F_2[x]$ in irreduzible Faktoren ist
+  \begin{align*}
+    x^{23} - 1 = \enspace & (x-1) \cdot (x^{11} + x^9 + x^7 + x^6 + x^5 + x + 1) \\
+    & \cdot \, \underbrace{(x^{11} + x^{10} + x^6 + x^5 + x^4 + x^2 + 1)}_{g(x) \coloneqq}
+  \end{align*}
+  Es stellt sich heraus, dass $C_g = \Golay(23)$.
 \end{bsp}
 
 % §11.3 CRC-Codes (cyclic redundancy check codes)
+\subsection{CRC-Codes (\textit{cyclic redundancy check})}
 
-$\F_q; n; g(x) \divides x^n - 1$; $C_g$; $\deg(g) = n - k$, $k = \dim(C_g)$
-
-Codierverfahren:
-
-Nachrichtenraum ist $\F_q^k \hat{=} \F_q[x]_{< k}$
-
-Codierabbildung:
-
-\[
-  E : \F_q[x]_{< k} \to C_g, \enspace m(x) \mapsto c(x) \coloneqq m(x) \cdot x^{n-k} - (m(x) \cdot x^{n-k} \bmod g(x))
-\]
-
-Fehlererkennung:
-
-$c(x)$ ist gesendet, $y(x)$ ist empfangen.
-
-Berechne $s(x) = y(x) \bmod g(x)$.
-
-Dann $s(x) = 0 \iff y(x) \in C_g$.
+\begin{verf}[CRC-Codierung]
+  Sei $g(x) \in \F_q[x]_{< n}$ das Generatorpolynom des zyklischen $[n, k]$-Codes $C_g \subset \F_q^n$ mit $\deg(g) = n - k$.
+  Der Nachrichtenraum sei $\F_q^k \hat{=} \F_q[x]_{< k}$.
+  \begin{itemize}
+    \item Codierungsabbildung: \enspace $E : \F_q[x]_{< k} \to C_g, \enspace m(x) \mapsto c(x)$ \enspace mit
+    \[
+      c(x) \coloneqq m(x) \cdot x^{n-k} - [ m(x) \cdot x^{n-k} \pmod{g(x)} ].
+    \]
+    \item Decodierung und Fehlererkennung: \\
+    Angenommen, $y(x) = y_0 + y_1 x + \ldots + y_{n-1} x^{n-1} \in \F_q[x]_{< n}$ wurde empfangen.
+    Gilt $g(x) \divides y(x)$, also $y(x) \in C$, so wurde wahrscheinlich auch~$y(x)$ gesendet.
+    Die zugehörige Nachricht ist
+    \[
+      m(x) = y_{n-k} + y_{n-k+1} x + \ldots + y_{n-1} x^{n-1}.
+    \]
+  \end{itemize}
+\end{verf}
 
 \begin{defn}
   Sei $2 \leq b \leq n$.
   Eine Teilmenge $I \subseteq \Z_n$ heißt ein \emph{zyklisches Intervall der Länge~$b$}, \dh{} $I= \Set{l + j \bmod n}{0 \leq j \leq b-1}$ für ein $l \in \Z_n$.
   Ein $v \in \F_q^n$ ist ein \emph{Fehlerbündel der Länge~$b$}, falls $b$ minimal ist mit:
-  Es existiert ein zyklisches Intervall $I$ der Länge $b$ mit $v_l \neq 0$, $v_{l+b-1 \bmod n} \neq 0$ und $\supp(v) \subseteq I$.
+  Es existiert ein zyklisches Intervall $I$ der Länge $b$ mit $v_l \neq 0$, $v_{l+b-1 \pmod{n}} \neq 0$ und $\supp(v) \subseteq I$.
 \end{defn}
 
 \begin{bsp}
@@ -2313,77 +2321,168 @@ Dann $s(x) = 0 \iff y(x) \in C_g$.
 
 \begin{prop}
   Sei $g(x)$ wie oben und $n \geq 3$.
-  Dann erkennt $C_g$ \emph{Einzelfehler} und Fehlerbündel der Länge~$b$, falls $b \leq n - k$, \dh{} ist $v$ ein solches Fehlerbündel, so gilt $v \not\in C_g$.
+  Dann erkennt $C_g$ \textit{Einzelfehler} und Fehlerbündel der Länge~$b$, falls $b \leq n - k < n$, \dh{} ist~$v$ ein solches Fehlerbündel, so gilt $v \not\in C_g$.
 \end{prop}
+
+\begin{bem}
+  Diese Eigenschaft ist nützlich bei Transportmedien, bei denen sich Fehler lokal häufen \zB{} bei CDs durch Kratzer.
+\end{bem}
+
+\begin{bspe}
+  Folgende CRC-Codes mit $q = 2$ sind standardisiert:
+
+  \begin{tabular}{l | l | l}
+    Name & $g(x)$ & $\min \, \Set{\ell}{g(x) \divides (x^\ell - 1)}$ \\ \hline
+    CRC-12 & $x^{12} + x^4 + x^3 + x^2 + x + 1$ & $n = 511 = 2^9 - 1$ \\
+    CRC-16 & $x^{16} + x^{15} + x^2 + 1$ & $n = 32767 = 2^{15} - 1$ \\
+    CRC-16' & $x^{16} + x^{12} + x^5 + 1$ & $n = 32767 = 2^{15} - 1$
+  \end{tabular}
+\end{bspe}
 
 % Vorlesung vom 21.1.2016
 
 % §11.4. Nullstellen von zyklischen Codes
+\subsection{Nullstellen von zyklischen Codes}
+
+\begin{ziel}
+  Ein zyklischer Code $C \subseteq \F_q^n$ ist gegeben durch sein Generator- polynom $g(x) \in \F_q[x]$ mit $g(x) \divides (x^n - 1)$.
+  Dieses $g(x)$ können wir als Produkt einer Auswahl von irred. Faktoren von $x^n - 1$ schreiben.
+  Wir können also die zyklischen Codes $C \subseteq \F_q^n$ studieren, indem wir die irreduziblen Faktoren von $x^n - 1$ herausfinden.
+\end{ziel}
 
 \begin{bem}
-  Sei $n = p^s \cdot l$, wobei~$l$ nicht durch~$p$ teilbar ist.
-  Dann ist $(x^n - 1) = (x^l - 1)^{p^s}$.
-  Da $\ggT(x^l - 1, (x^l - 1)') = \ggT(x^l - 1, l x^{l-1}) = 1$, treten die irreduziblen Faktoren von $x^l - 1$ in einfacher Vielfachheit auf.
+  Sei $n = p^s \cdot \ell$, wobei~$\ell$ nicht durch~$p$ teilbar ist.
+  \[
+    x^n - 1 = (x^\ell - 1)^{p^s}.
+  \]
+  Die irreduziblen Faktoren von $(x^n - 1)$ sind also die gleichen wie von $(x^\ell - 1)$, jeweils mit $p^s$-facher Vielfachheit.
 \end{bem}
 
-\begin{nota}
-  $E(\Z_m) \coloneqq \Z_m^\times$ (Einheitengruppe von $\Z_m$)
-\end{nota}
+\begin{voraussetzung}
+  Wir können daher im Folgenden annehmen, dass~$n$ nicht durch~$q$ teilbar ist.
+\end{voraussetzung}
 
 \begin{bem}
-  Betrachte $\F_{q^m}$.
-  Die Einheitengruppe $\F_{q^m}^{\times}$ ist zyklisch.
-  Wegen $n \divides (q^m - 1)$ besitzt $\F_{q^m}^{\times}$ eine eindeutige Untergruppe $Z_n$ mit~$n$ Elementen.
-  Jedes $\alpha \in Z_n$ heißt eine \emph{$n$-te Einheitswurzel}.
-  Es gilt $\alpha \in Z_n \iff \alpha^n = 1$.
-  Daher gilt $x^n - 1 = \prod_{\alpha \in Z_n} (x-\alpha)$ und $\F_{q^m}$ ist der Zerfällungskörper von $x^n - 1$.
-  Ein $\zeta \in \F_{q^m}^\times$ mit $\ord(\zeta) = n$.
-  Dann ist $Z_n = \{ 1, \zeta, \ldots, \zeta^{n-1} \}$ und $x^n - 1 = \prod_{i=1}^{n-1} (x - \zeta^i)$.
-  Ein solches $\zeta$ nennt man eine \emph{primitive $n$-te Einheitwurzel}.
-  Sei $\ord(\zeta) = n$.
-  Für $l \in \Z$ gilt dann $\ord(\zeta^l) = \tfrac{n}{\ggT(n,l)}$.
-  Insbesondere $\ord(\zeta^{\nicefrac{n}{d}}) = d$ für jeden Teiler~$d$ von~$n$.
-  Zur $d \divides n$ sei $\Gamma_d \coloneqq \Set{\alpha \in Z_n}{\ord(\alpha) = d}$ die Menge aller Erzeuger von $Z_d$.
-  Dann gilt $Z_n = \bigsqcup_{d \divides n} \Gamma_d$ mit $\abs{\Gamma_d} = \varphi(d)$.
-  Dann heißt
-  \[
-    \Phi_d(x) \coloneqq \prod_{\alpha \in \Gamma_d} (x - \alpha) \in \F_{q^m}[x]
-  \]
-  das \emph{$d$-te Kreisteilungspolynom}.
-  Es gilt $x^n - 1 = \prod_{d \divides n} \Phi_d(x)$
-  Wir behaupten, dass sogar $\Phi_d(x) \in \F_q[x]$ gilt.
-  Sei $k = \varphi(d)$, $\Gamma_d = \{ \alpha_1, \ldots, \alpha_k \}$, $\Phi_d(x) = \prod_{i=1}^k (x - \alpha_i) = \sum_{j=0}^k w_j x^j$.
-  Dann ist $w_0 = (-1)^k \prod_{i=1}^k \alpha_i$, $w_k = 1$, $w_{k-1} = - \sum_{i = 1}^k \alpha_i$.
-  Zu $I \subseteq [k] \coloneqq \{ 1, \ldots, k \}$ sei $\alpha_I \coloneqq \prod_{i \in I} \alpha_i$.
-  Für jedes $j = 0, 1, \ldots, k-1$ gilt dann $w_j = (-1)^{k-j} \sum_{I \subseteq [k], \abs{I} = k - j} \alpha_I$.
-  Die Abbildung $\beta \mapsto \beta^p$ ist eine Permutation auf $\Gamma_d$.
-  \[
-    w_j^p = [(-1)^{k-j}]^{p} \sum_{I \subseteq [k], \abs{I} = k - j} \alpha_I^p = w_j
-  \]
-  Also $w_j^p = w_j \iff w_j^{p-1} = 1 \iff w_j \in Z_{p-1} \subseteq \F_{q^m}^\times$.
+  Wegen $\ggT(x^n - 1, n x^{n - 1}) = 1$ treten die irreduziblen Faktoren von $(x^n - 1)$ in einfacher Vielfachheit auf.
 \end{bem}
 
-Betrachte $\Gamma_d$ für $d \divides n$.
-Definiere auf $Z_n$ eine Äq'relation durch $\beta \sim \gamma \coloniff $ es gibt ein $k \in \N$ mit $\beta^{q^k} = \gamma$.
-Kann innerhalb $\Z_n$ beschrieben werden: $i \sim j \coloniff j \equiv i q^k \bmod{n}$ für ein $k \in \N$.
-$[i]_\sim$ sei die Klasse von~$i$.
-$\Gamma_{n,i} \coloneqq \Set{\zeta^j}{j \in [i]_\sim}$ heißt die \emph{zu $i$ gehörende Kreisteilungsklasse}.
-Dies ist eine minimale Menge, die unter Potenzieren von $q$ invariant ist.
-Dann hat $\mu_i(x) \coloneqq \prod_{\alpha \in \Gamma_{n,i}} (x - \alpha)$ Koeffizienten aus $\F_q$ und ist als Polynom in $\F_q[x]$ irreduzibel.
+\begin{defn}
+  Die \emph{Ordnung von $q$ modulo $n$} ist
+  \[
+    m \coloneqq \ord_q(n) \coloneqq \min \, \Set{\ell \geq 1}{q^\ell \equiv 1 \pmod{n}}.
+  \]
+\end{defn}
 
-Also ist $K_n = $ Repräsentantensystem von Kreisteilungsklassen, also $\Gamma_n = \bigsqcup_{i \in K_n} \Gamma_{n,i}$ und $\Phi_n(x) = \prod_{i \in K_n} \mu_i(x)$ ist eine vollständige Faktorisierung über~$\F_q$.
+\begin{bem}
+  Betrachte die Erweiterung $\F_{q^m} \supseteq \F_q$.
+  Die Einheitengruppe $(\F_{q^m}^{\times}, \cdot, 1)$ ist zyklisch, also isomorph zu $(\nicefrac{\Z}{q^m - 1}, +, 0)$. \\
+  Für $d \divides n$ gibt es wegen $d \divides (q^m - 1)$ genau eine Untergruppe $Z_d \subset \F_{q^m}^{\times}$ mit~$d$ Elementen, nämlich
+  \[
+    Z_d = \Set{\alpha \in \F_{q^m}^{\times}}{\alpha^d = 1} = \Set{\alpha \in \F_{q^m}^{\times}}{\ord(\alpha) \divides d}.
+  \]
+\end{bem}
+  
+\begin{defn}
+  Die Elemente $\alpha \in Z_d$ heißen \emph{$d$-te Einheitswurzeln}.
+\end{defn}
 
-$\abs{[i]_\sim} = \abs{\Gamma_{n,i}} = \min \Set{k}{q^k \equiv 1 \bmod{n}} = \ord_n(q)$
+\begin{bem}
+  Da jedes $\alpha \in Z_n$ eine Wurzel von $(x^n - 1)$ ist, gilt
+  \[
+    x^n - 1 = \prod_{\mathclap{\alpha \in Z_n}} \, (x - \alpha)
+  \]
+  Es ist $\F_{q^m}$ sogar der kleinste Erweiterungskörper von $\F_q$, in dem $(x^n - 1)$ in Linearfaktoren zerfällt.
+  Man nennt ihn deshalb \textit{Zerfällungskörper} von $(x^n - 1)$ über $\F_q$.
+  Wir müssen jetzt also noch die Teilmengen $J \subset Z_n$ mit $\prod_{\mathclap{\alpha \in J}} \, (x - \alpha) \in \F_q[x]$ bestimmen.
+\end{bem}
 
-Somit zerfällt $\Phi_n(x)$ in Polynome mit jeweiligem Grad $\ord_n(q)$, also $\deg(\mu_i) = \ord_n(q)$ für alle $i \in K_n$.
+\begin{defn}
+  Eine \emph{primitive $d$-te Einheitwurzel} ist ein Erzeuger von $Z_d$, also ein Element von
+  $
+    \Gamma_d \coloneqq \Set{\alpha \in \F_{q^m}^{\times}}{\ord(\alpha) = d}
+  $.
+\end{defn}
 
-Die Anzahl verschiedener minimaler Faktoren von $\Phi_n(x)$ aus $\F_q[x]$ ist gleich $\tfrac{\deg(\Phi_n)}{\ord_n(q)} = \tfrac{\varphi(n)}{\ord_n(q)}$
+\begin{bem}
+  Sei $\zeta$ eine primitive $n$-te Einheitswurzel.
+  Für jeden Teiler $d$ von $n$ ist dann $\zeta^{\nicefrac{n}{d}}$ eine primitive $d$-te Einheitswurzel.
+  Es gilt
+  \[
+    Z_n = \bigsqcup_{d \divides n} \Gamma_d
+    \enspace \text{und} \enspace
+    \abs{\Gamma_d} = \phi(n) \coloneqq \abs{\Set{1 \leq \ell \leq n}{\ggT(n, \ell) = 1}}.
+  \]
+\end{bem}
 
-Fazit: $p$ teilt nicht $n$. Dann ist die Anzahl der irred. Faktoren von $x^n - 1$ gleich $\sum_{d \divides n} \tfrac{\varphi(d)}{\ord_d(q)}$.
+\begin{defn}
+  Gelte $d \divides n$.
+  Das \emph{$d$-te Kreisteilungspolynom} ist
+  \[
+    \Phi_d(x) \coloneqq \prod_{\alpha \in \Gamma_d} (x - \alpha).
+  \]
+\end{defn}
+
+\begin{lem}
+  Es gilt sogar $\Phi_d(x) \in \F_q[x]$.
+\end{lem}
+
+\begin{kor}
+  $x^n - 1 = \prod_{d \divides n} \Phi_d(x)$
+\end{kor}
+
+\begin{bem}
+  Es bleibt zu untersuchen, wie $\Phi_d(x)$ über $\F_q$ zerfällt.
+\end{bem}
+
+\begin{defn}
+  Sei $\xi$ eine primitive $d$-te Einheitswurzel. \\
+  Die zu $\xi^i$ gehörende \emph{Kreisteilungsklasse} ist
+  \[
+    \Gamma_{d,i} \coloneqq \Gamma^{(\xi)}_{d,i} \coloneqq \Set{\xi^{i q^\ell}}{\ell \geq 1} \subseteq \Gamma_d.
+  \]
+\end{defn}
+
+\begin{bem}
+  Für versch. Wahlen $\xi$ und $\xi'$, bzw. $i$ und $i'$ sind $\Gamma^{(\xi)}_{d,i}$ und $\Gamma^{(\xi')}_{d,i'}$ entweder gleich oder disjunkt.
+  Die Kreisteilungsklassen sind daher wohldefiniert.
+  Es gilt $\abs{\Gamma_{d,i}} = \ord_d(q)$.
+  Es zerfällt $\Gamma_d$ in $\nicefrac{\phi(d)}{\ord_d(q)}$ Kreisteilungsklassen.
+  Sei nun $\xi$ fest gewählt.
+\end{bem}
+
+\begin{lem}
+  $\mu^{(d)}_i(x) \coloneqq \prod_{\mathclap{\alpha \in \Gamma_{d,i}}} (x - \alpha)$ ist ein irreduzibles Polynom in $\F_q [x]$
+\end{lem}
+
+\begin{kor}
+  Sei $K_d$ ein Repräsentantensystem von Kreisteilungsklassen, also
+  $\Gamma_d = \bigsqcup_{\mathclap{i \in K_d}} \Gamma_{d,i}$.
+  Dann ist $\Phi_d(x) = \prod_{\mathclap{i \in K_d}} \mu^{(d)}_i(x)$.
+\end{kor}
+
+\begin{fazit}
+  Sei $n = \ell p^s$ mit $\ggT(p, \ell) = 1$.
+  Die Zerlegung von $x^n - 1$ in irreduzible Faktoren über $\F_q$ ist dann
+  \[
+    x^n - 1 \enspace = \enspace \prod_{d \divides \ell} \enspace \prod_{i \in K_d} \enspace \left( \mu^{(d)}_i(x) \right)^{p^s}.
+  \]
+\end{fazit}
 
 % Vorlesung vom 16.1.2016
 
-\TODO{ausgelassene Beispiele}
+% (drei Beispiele ausgelassen)
+
+\begin{bsp}
+  Sei $q = 2$ und $n = 2^m - 1$ mit $m \geq 2$.
+  Dann ist $\ord_n(2) = m$.
+  Sei $\zeta \in \F_{2^m}$ eine primitive $n$-te Einheitswurzel und $g(x)$ das Minimalpolynom von $\zeta$.
+  Betrachte den zyklischen Code $C_g$.
+  Man kann zeigen, dass das Minimalgewicht $\geq 3$ ist.
+  Wegen der Kugelpackungsschranke gilt Gleichheit.
+  Der Code $C_g$ besitzt die gleichen Parameter wie der Hamming-Code~$\Ham_2(m)$.
+\end{bsp}
+
+\TODO{Sind diese Codes äquivalent?}
 
 % §12. BCH-Codes
 \section{BCH-Codes}
