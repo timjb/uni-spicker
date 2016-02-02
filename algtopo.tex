@@ -985,7 +985,7 @@
 \end{defn}
 
 \begin{prop}
-  Für eine Sequenz $0 \to A \xrightarrow{f} B \to \xrightarrow{g} C \to 0$ sind äquivalent:
+  Für eine Sequenz $0 \to A \xrightarrow{f} B \xrightarrow{g} C \to 0$ sind äquivalent:
   \begin{itemize}
     \item Die Sequenz spaltet.
     \item Es existiert eine Retraktion $r : B \to A$ mit $r \circ f = \id_A$.
@@ -1001,9 +1001,9 @@
 \begin{bem}
   Sei $(X, A)$ ein Raumpaar.
   Man erhält aus der k.\,e. Sequenz
-  \[ 0 \to C^n(A) \to C^n(X) \to C^n(X, A) \to 0 \]
-  durch Anwenden von $\Hom(\blank, G)$ eine kurze exakte Sequenz
-  \[ 0 \to C^n(X, A; G) \to C^n(X; G) \to C^n(A; G) \to 0. \]
+  \[ 0 \to C_*(A) \to C_*(X) \to C_*(X, A) \to 0 \]
+  von Komplexen durch Anwenden von $\Hom(\blank, G)$ eine k.\,e. Sequenz
+  \[ 0 \to C^*(X, A; G) \to C^*(X; G) \to C^*(A; G) \to 0. \]
   Daraus erhält man wiederum eine lange exakte Sequenz
   \[ \nldots \to H^*(X, A; G) \to H^*(X; G) \to H^*(A; G) \to H^{*+1}(X, A; G) \to \nldots \]
 \end{bem}
