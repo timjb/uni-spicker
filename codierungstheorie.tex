@@ -2310,7 +2310,10 @@ TODO: Rest des Beispiels, insbesondere Decodierung
 
 \begin{defn}
   Sei $2 \leq b \leq n$.
-  Eine Teilmenge $I \subseteq \Z_n$ heißt ein \emph{zyklisches Intervall der Länge~$b$}, \dh{} $I= \Set{l + j \bmod n}{0 \leq j \leq b-1}$ für ein $l \in \Z_n$.
+  Eine Teilmenge $I \subseteq \Z_n$ heißt ein \emph{zyklisches Intervall der Länge~$b$}, falls ein $\ell \in \Z_n$ existiert mit
+  \[
+    I = [\ell, \ell + b - 1]_{\bmod n} \coloneqq \Set{\ell + j \bmod n}{0 \leq j \leq b-1}.
+  \]
   Ein $v \in \F_q^n$ ist ein \emph{Fehlerbündel der Länge~$b$}, falls $b$ minimal ist mit:
   Es existiert ein zyklisches Intervall $I$ der Länge $b$ mit $v_l \neq 0$, $v_{l+b-1 \pmod{n}} \neq 0$ und $\supp(v) \subseteq I$.
 \end{defn}
@@ -2489,56 +2492,179 @@ TODO: Rest des Beispiels, insbesondere Decodierung
 
 % §12.1 Die BCH-Schranke
 
-Sei $\mathcal{N} \subseteq Z_n \leftrightarrow N \subseteq Z_n$ ($N = \Set{i}{\zeta^i \in \mathcal{N}}$)
+\begin{situation}
+  Sei $\F_q$ der endliche Körper mit $q$ Elementen.
+  Gelte $\ggT(q, n) = 1$ und $m \coloneqq \ord_n(q)$.
+  Dann ist $\F_{q^m}$ der Zerfällungskörper von $x^n - 1$.
+  Sei $\zeta \in \F_{q^m}$ eine primitive $n$-te Einheitswurzel und $Z_n = \{ \zeta^0, \ldots, \zeta^{n-1} \}$ die Menge aller $n$-ten Einheitswurzeln.
+\end{situation}
 
-Zu $N \subseteq \Z_n$ sei $g_N(x) \coloneqq \kgV \Set{\mu_i(x)}{i \in SN}$.
-Es sei $C \coloneqq C(g_N) = C(N) = C(\mathcal{N})$ der von $g_N$ erzeugte zyklische Code.
+\begin{konstr}
+  Sei $\mathcal{N} \subseteq Z_n$ eine Teilmenge.
+  Wir setzen
+  \begin{align*}
+    N(\mathcal{N}) & \coloneqq \Set{i = 0, \ldots, n-1}{\zeta^i \in \mathcal{N}} \subset \Z_n, \\
+    g_N(x) & \coloneqq \kgV \Set{\mu_i(x)}{i \in N},
+  \end{align*}
+  wobei $\mu_i(x)$ das Minimalpolynom von~$\zeta^i$ sei.
+  Zuletzt sei $C(\mathcal{N}) \coloneqq C(g_N)$ der von $g_N$ erzeugte zyklische Code.
+\end{konstr}
 
-Für $c(x) \in \F_q[x]{\leq n-1}$ gilt dann: $c(x) \in Ca \iff c(\zeta^i) = 0$ für alle $i \in N$.
+\begin{bem}
+  $C(\mathcal{N})$ ist der kleinste Code, der die Elemente von $\mathcal{N}$ als Nullstellen besitzt. 
+  Für ein Wort $c(x) \in \F_q[x]{< n}$ gilt dann:
+  \[
+    c(x) \in C(\mathcal{N}) \iff c(\zeta^i) = 0 \quad \text{für alle $i \in N$}.
+  \]
+\end{bem}
 
-\begin{defn}
-  $b \in \{ 0, \ldots, n-1 \}$ und $\delta \in \N$ mit $2 \leq \delta \leq n$.
-  $L \coloneqq \Set{i \bmod{n}}{b \leq i \leq b + \delta - 2}$ ein zyklisches Intervall.
-  Dann heißt $C(L)$ ein BCH-Code mit designiertem Abstand $\delta$.
-  Speziell: $b=1$ (im engeren Sinne), $n = q^m - 1$ (primitiver BCH-Code)
+\begin{defn}[\emph{B}ose, Ray-\emph{C}haudhuri, \emph{H}ocquenghem] \mbox{} \\
+  Sei $b \in \{ 0, \ldots, n-1 \}$ und $\delta \in \N$ mit $2 \leq \delta \leq n$.
+  Setze
+  \[
+    L \coloneqq [b, b + \delta - 2] \coloneqq \Set{i \bmod{n}}{b \leq i \leq b + \delta - 2}.
+  \]
+  Dann heißt $C(L)$ ein \emph{BCH-Code} mit \emph{designiertem Abstand}~$\delta$.
+  Für $b=1$ heißt~$C(L)$ ein BCH-Code \textit{im engeren Sinne}. \\
+  Falls $n = q^m - 1$, so ist~$\zeta$ ein primitives Element in $\F_{q^m}$ und $C(L)$ heißt ein \emph{primitiver BCH-Code}.
 \end{defn}
 
-\begin{satz}
-  $L$, etc. wie in (12.1).
-  $C = C(g_L) = C(L)$
-  Dann:
-  \begin{itemize}
-    \item $d \coloneqq $ Minimalgewicht von $C$ $\geq \delta$
-    \item $k \coloneqq \dim(C) \geq n - m \cdot (\delta - 1)$
-  \end{itemize}
+\begin{satz}[BCH-Schranke]
+  Für den Minimalabstand~$d$ und die Dimension~$k$ von $C(L)$ gilt: \quad
+  $d \geq \delta$, \enspace
+  $k \geq n - m \cdot (\delta - 1)$.
 \end{satz}
 
-\TODO{Beispiele}
+\begin{samepage}
+
+\begin{satz}
+  Sei $q = 2$, $\delta = 2 \epsilon + 1$ und $L = [1, \delta - 1]_{\bmod{n}}$. \\
+  Dann gilt \enspace $\dim(C(L)) \geq n - m \cdot \epsilon$.
+\end{satz}
+
+% ausgelassen: erstes Beispiel
+
+\begin{bsp}
+  Die Nullstellenmenge des ternären Golay-Code~$\Golay(11)$ ist $\{ \zeta, \zeta^3, \zeta^5, \zeta^9 \}$.
+  Dies ist ein BCH-Code mit $b = 3$ und $\delta = 4$. \\
+  Die Parity-Check-Erweiterung von $\Golay(11)$ hat damit Minimalgewicht mindestens~$4$, also~$6$ wegen Selbstdualität. \\
+  Für den Minimalabstand~$d$ von $C(L)$ gilt daher $d \geq 5$. \\
+  Aus der Kugelpackungsschranke folgt Gleichheit.
+\end{bsp}
+
+% ausgelassen: drittes Beispiel
 
 % Vorlesung vom 28.1.2016
 
-\TODO{Beispiel 12.5}
+% ausgelassen: Beispiel 12.5
 
 % §12.5 Die Methode von Lint und Wilson
+\subsection{Die Methode von Lint und Wilson}
+
+\end{samepage}
 
 \begin{defn}
   Sei $\mathcal{N} \subseteq \F_{q^m}^*$ nichtleer.
-  Ein Mengensystem $U(\mathcal{N}) \subset \Pow(\mathcal{N})$ heißt \emph{unabhängig}, falls gilt:
-  \begin{itemize}
-    \item $\emptyset \in U(\mathcal{N})$
-    \item $A \in U(\mathcal{N}), A \subseteq \mathcal{N}, \beta \in \mathcal{N} \setminus \mathcal{N} \implies A \cup \{ \beta \} \in U(\mathcal{N})$
-    \item $A \in U(\mathcal{N}), \gamma \in \F_{q^m}^* \implies \gamma A \in U(\mathcal{N})$
-  \end{itemize}
+  Das bzgl. $\mathcal{N}$ \emph{unabhängige Mengensystem}~$U(\mathcal{N})$ ist rekursiv definiert durch
+  \begin{enumerate}[label=\alph*), leftmargin=1.8em]
+    \miniitem{0.3 \linewidth}{$\emptyset \in U(\mathcal{N})$}
+    \miniitem{0.6 \linewidth}{$A \in U(\mathcal{N}), \, \gamma \in \F_{q^m}^* \implies \gamma A \in U(\mathcal{N})$}
+    \item $A \in U(\mathcal{N}), \, A \subseteq \mathcal{N}, \, \beta \in \F_{q^m}^* \setminus \mathcal{N} \implies A \cup \{ \beta \} \in U(\mathcal{N})$
+  \end{enumerate}
 \end{defn}
 
-\begin{prop}
-  Sei $f(x) \in \F_q[x]$, $f \neq 0$, $\mathcal{N}$ sei die Nullstellenmenge von $f$ innerhalb $\F_{q^m}^*$ und $U(\mathcal{N})$ sei ein unabhängiges Mengensystem.
-  Dann gilt \enspace $\wt(f) \geq \max \Set{\abs{A}}{A \in U(\mathcal{N})}$.
+\begin{prop}[Lint, Wilson]
+  Sei $f(x) \in \F_q[x]$, $f \neq 0$, und $\mathcal{N}$ die Nullstellenmenge von~$f$ innerhalb~$\F_{q^m}^*$.
+  Dann gilt
+  \[
+    \wt(f) \geq \max \Set{\abs{A}}{A \in U(\mathcal{N})}.
+  \]
 \end{prop}
+
+\begin{bem}
+  Die BCH-Schranke ist ein Korollar hiervon.
+\end{bem}
+
+\begin{bsp}
+  Der binäre Golay-Code $\Golay(23)$ ist der von
+  \[
+    g(x) \coloneqq x^{11} + x^{10} + x^6 + x^5 + x^4 + x^2 + 1
+  \]
+  erzeugte Code.
+  Die zugehörige Nullstellenmenge ist
+  \[
+    \Set{\zeta^i}{i \in \Gamma_1}
+    \quad \text{mit} \quad
+    \Gamma_1 \coloneqq \{ 1, 2, 3, 4, 6, 8, 9, 12, 13, 16, 18 \}.
+  \]
+  Sei $c(x) \in \Golay(23)$ und $\mathcal{N}$ dessen Nullstellenmenge.
+  Es sei $c(x)$ kein Vielfaches von $\Phi_{23}(x)$ und damit $\Gamma_1 \subseteq \mathcal{N} \cap Z_n \subseteq \Gamma_1 \cup \{ 1 \}$.
+  Man schließt nun, dass folg. Teilmengen von~$\F_{2048}$ in $U(\mathcal{N})$ liegen:
+  \begin{align*}
+    & \emptyset
+    \xra{c}
+    \{ \zeta^5 \}
+    \xra{b}
+    \{ \zeta^4 \}
+    \xra{c}
+    \{ \zeta^4\!, \zeta^5 \}
+    \xra{b}
+    \{ \zeta, \zeta^2 \}
+    \xra{c}
+    \{ \zeta, \zeta^2\!, \zeta^5 \}
+    \xra{b}
+    \{ \zeta^8\!, \zeta^9\!, \zeta^{12} \} \\
+    & \xra{c}
+    \{ \zeta^8\!, \zeta^9\!, \zeta^{12}\!, \zeta^{14} \}
+    \xra{b}
+    \{ \zeta^{12}\!, \zeta^{13}\!, \zeta^{16}\!, \zeta^{18} \}
+    \xra{c}
+    \{ \zeta^5\!, \zeta^{12}\!, \zeta^{13}\!, \zeta^{16}\!, \zeta^{18} \} \\
+    & \xra{b}
+    \{ \zeta^{18}\!, \zeta^2\!, \zeta^3\!, \zeta^6\!, \zeta^8 \}
+    \xra{c}
+    \{ \zeta^2\!, \zeta^3\!, \zeta^5\!, \zeta^6\!, \zeta^8\!, \zeta^{18} \}
+    \xra{b}
+    \{ 1, \zeta^1\!, \zeta^3\!, \zeta^4\!, \zeta^6\!, \zeta^{16} \}
+  \end{align*}
+  Aus der Prop folgt, dass $c(x)$ Gewicht $\geq 6$ hat.
+  \begin{itemize}
+    \item Falls $c(1) = \wt(c) = 0$, so ist $\{ 1, \zeta^1, \zeta^3, \zeta^4, \zeta^6, \zeta^{16} \} \in \mathcal{N}$ und somit $\{ 1, \zeta^1, \zeta^3, \zeta^5, \zeta^4, \zeta^6, \zeta^{16} \} \in U(\mathcal{N})$.
+    Mit der Prop folgt, dass $c(x)$ Gewicht $\geq 7$ hat.
+    \item Falls $c(1) = \wt(c) = 1 \bmod{2}$, so hat $c(x)$ ungerades Gewicht, also Gewicht $\geq 7$.
+  \end{itemize}
+  Somit hat $\Golay(23)$ das Minimalgewicht $\geq 7$. \\
+  Aus der Kugelpackungsschranke folgt Gleichheit.
+\end{bsp}
 
 \TODO{Beispiel}
 
+\begin{konstr}[von MDS-Codes]
+  Angenommen, $n \divides q - 1$.
+  Dann ist $m = \ord_n(q) = 1$ und $x^n - 1$ zerfällt über~$\F_q$ in Linearfaktoren. \\
+  Sei~$\zeta$ eine prim. $n$-te Einheitswurzel, $b \geq 1$ und $2 \leq \delta \leq n$.
+  Dann ist
+  \[
+    g(x) \coloneqq (x - \zeta^b) \cdot (x - \zeta^{b+1}) \cdot \ldots \cdot (x - \zeta^{b + \delta - 1})
+  \]
+  das kleinste mon. Polynom aus~$\F_q[x]$ mit $\mathcal{N} = \{ \zeta^b, \ldots, \zeta^{b+\delta-1} \}$ als Nullstellen.
+  Für BCH-Code $C = C(\mathcal{N}) = C_g$ gilt
+  \[
+    \wt(g) \leq \deg(g) + 1 = \delta \leq d(C) \leq \wt(g),
+  \]
+  also $d(C) = \delta$.
+  Es handelt sich darum um einen MDS-Code, da
+  \[
+    \dim(C) = n - \deg(g) = n - (\delta - 1) = n - d + 1.
+  \]
+\end{konstr}
+
+\begin{defn}
+  Im Falle $n = q - 1$ spricht man hier auch von einem \emph{Reed-Solomon-Code}.
+\end{defn}
+
 % §12.3. Einiges zu binären BCH-Codes
+\subsection{Einiges zu binären BCH-Codes}
 
 \begin{satz}
   Sei $q = 2$, $\delta = 2 \epsilon + 1$, $L = \Set{i \bmod{n}}{1 \leq i \leq \delta - 1}$ und $C = C(L)$ der zugehörige BCH-Code.
