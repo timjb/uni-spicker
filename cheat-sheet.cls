@@ -93,6 +93,7 @@
 \newtheorem*{fakten}{Fakten}
 \newtheorem*{fakt}{Fakt}
 \newtheorem*{test}{Test}
+\newtheorem*{motivation}{Motivation}
 
 \theoremstyle{remark}
 \newtheorem*{bem}{Bem}
