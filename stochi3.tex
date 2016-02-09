@@ -975,9 +975,9 @@
 \end{defn}
 
 \begin{bsp}[\emph{Wilcoxon-1-SP-Test} auf Symmetrie]
-  Sei $X_1, \ldots, X_n \sim F$ eine math. SP mit $F$ stetig.
-  Angenommen, $F$ ist symmetrisch bzgl. $\vartheta_0 \in \R^1$.
-  Dann sind $Z_i = X_i - \vartheta_0$ symmetrisch bzgl. $0$. \\
+  Sei $X_1, \ldots, X_n \sim F$ eine mathematische Stichprobe mit stetiger VF~$F$.
+  Wir wollen \testh{$H_0 : \text{$F$ ist symmetrisch bzgl. $\vartheta_0$}$} testen.
+  Es reicht dazu, die VF der $Z_i = X_i - \vartheta_0$ auf Symmetrie bzgl. $0$ zu prüfen. \\
   Seien $\nu_1^{+}, \ldots, \nu_n^{+}$ die Ränge der ZGn $\abs{Z_1}, \ldots, \abs{Z_n}$.
   Setze
   \[ T_n^{+} = \sum_{i=1}^n \ind_{\{ Z_i > 0 \}} \nu_i^{+}. \]
@@ -989,26 +989,30 @@
 \end{bsp}
 
 \begin{bsp}
-  Alternativ können wir die U-Statistik
+  Alternativ können wir zum Test auf Symmetrie die U-Statistik
   \[
     U_n = \tfrac{1}{\binom{n}{2}} \sum_{1 \leq i < j \leq n} \ind_{\{ Z_i + Z_j > 0 \}}.
   \]
-  zum Test auf Symmetrie betrachten.
-  Unter $H_0$ gilt
-  \begin{align*}
-    \E \ind_{\{ Z_i + Z_j > 0 \}}
-    = \P(Z_1 > - Z_2)
-    & = \IInt{(1 - F(-z))}{F(z)} \\
-    & = \IInt{F(z)}{F(z)}
+  Unter $H_0$ gilt für $h(x_1, x_2) \coloneqq \ind_{\{ x_1 + x_2 > 0 \}}$:
+  \[
+    \E h(Z_i, Z_j)
+    = \P(Z_1 \!>\! - Z_2)
+    = \IInt{(1 - F(-z))}{F(z)}
+    = \IInt{F(z)}{F(z)}
     = \tfrac{1}{2}.
-  \end{align*}
+  \]
   Aus dem ZGWS für U-Statistiken folgt
   \[
     \sqrt{n} (U_n - \tfrac{1}{2}) \xra[n \to \infty]{d} \Normal(0, \tfrac{1}{3}).
   \]
-  Testregel: Wir lehnen $H_0$ genau dann ab, wenn \enspace
-  $\abs{U_n - \tfrac{1}{2}} > \tfrac{z_{1 - \nicefrac{\alpha}{2}}}{\sqrt{3n}}$.
 \end{bsp}
+
+\begin{entscheidungsregel}
+  %Lehne $H_0$ g.\,d. ab, wenn \enspace
+  %$\abs{U_n - \tfrac{1}{2}} > \tfrac{z_{1 - \nicefrac{\alpha}{2}}}{\sqrt{3n}}$.
+  Ablehnung von $H_0$ $\iff$
+  $\abs{U_n - \tfrac{1}{2}} > \tfrac{z_{1 - \nicefrac{\alpha}{2}}}{\sqrt{3n}}$.
+\end{entscheidungsregel}
 
 % Vorlesung vom 26.11.2015
 
@@ -1073,15 +1077,20 @@
       \epsilon &=& (\epsilon_1, \ldots, \epsilon_n)^T & \text{(nicht beobachtbarer) \emph{Fehlervektor} heißt.}
     \end{array}
   \]
-  Wir nehmen an, dass $\cov(Y_i, Y_j) = \cov(\epsilon_i, \epsilon_j) = \sigma^2 \delta_{ij}$ und $n > p$. \\
-  Dabei heißt $\sigma$ \emph{Modellstreuung}.
 \end{modell}
 
 % Bem: Zunächst keine Verteilungsvoraussetzungen
 
 \begin{bem}
-  Falls $Y$ eine bekannte Kovarianzmatrix $K \in \R^{n \times n}$ besitzt, so können wir $X^* \coloneqq K^{\nicefrac{-1}{2}} X$, $Y^* \coloneqq K^{\nicefrac{-1}{2}} Y$, $\epsilon^* \coloneqq K^{\nicefrac{-1}{2}} \epsilon$ setzen und erhalten $Y^* = X^* \beta + \epsilon^*$ und $\cov(Y*) = I_n$.
+  Falls $Y$ eine bek. Kovarianzmatrix $K \in \R^{n \times n}$ hat, so können wir $X^* \coloneqq K^{\nicefrac{-1}{2}} X$, $Y^* \coloneqq K^{\nicefrac{-1}{2}} Y$, $\epsilon^* \coloneqq K^{\nicefrac{-1}{2}} \epsilon$ setzen und erhalten $Y^* = X^* \beta + \epsilon^*$ und $\cov(Y^*) = I_n$.
+  Wir dürfen daher annehmen:
 \end{bem}
+
+\begin{voraussetzung}
+  $\cov(Y_i, Y_j) = \cov(\epsilon_i, \epsilon_j) = \sigma^2 \delta_{ij}$.
+  Dabei heißt $\sigma$ \emph{Modellstreuung}.
+  Üblicherweise gilt $n > p$.
+\end{voraussetzung}
 
 % Aufgaben:
 % * Schätzung von $\beta$ mit der Methode der kleinsten Quadrate (Problem dabei: $\rk X < p$)
@@ -1097,9 +1106,11 @@
 \end{problem}
 
 \begin{defn}
-  Eine Schätzfunktion $\hat{\beta}(y)$ heißt \emph{MkQ-Schätzung} (Methode der kleinsten Quadrate) für $\beta$, falls
-  \[ S(y, \hat{\beta}) = \min_{\beta \in \R^p} S(y, \beta) \]
-  wobei $S(y, \beta) \coloneqq \norm{y - X \beta}^2 = \sum_{i=1}^n (y_i - \sum_{j=1}^n x_{ij} \beta_j)^2$.
+  Eine Schätzfunktion $\hat{\beta}(y)$ heißt \emph{MkQ-Schätzung} (\textit{Methode der kleinsten Quadrate}) für $\beta$, falls
+  $S(y, \hat{\beta}) = \min_{\beta \in \R^p} S(y, \beta)$, wobei
+  \[
+    S(y, \beta) \coloneqq \norm{y - X \beta}^2 = \sum_{i=1}^n (y_i - \sum_{j=1}^n x_{ij} \beta_j)^2.
+  \]
 \end{defn}
 
 \begin{bem}
@@ -1147,7 +1158,6 @@
 
 % §4.1 Definition und Aufgabenstellung
 
-
 % Vorlesung vom 3.12.2015
 
 \begin{bsp}[\emph{Multiple lineare Regression}]
@@ -1164,7 +1174,7 @@
 
 
 \begin{defn}
-  Eine Matrix $A^{-} \in \R^{n \times m}$ heißt \emph{g-Inverse} (g = generalized) von $A \in \R^{m \times n}$, wenn für jedes $y \in \R^m$, für welches $Ax = y$ lösbar ist, auch $x = A^{-} y$ eine Lösung ist.
+  Eine Matrix $A^{-} \in \R^{n \times m}$ heißt \emph{g-Inverse} (\textit{g = generalized}) von $A \in \R^{m \times n}$, wenn für jedes $y \in \R^m$, für welches $Ax = y$ lösbar ist, auch $x = A^{-} y$ eine Lösung ist.
 \end{defn}
 
 \begin{satz}
@@ -1189,6 +1199,7 @@
 \end{defn}
 
 % Allgemeine Lösung von (N)
+\begin{samepage}
 
 \begin{satz}
   Die allgemeine Lösung von (N) lautet mit $S \coloneqq X^T X$:
@@ -1197,10 +1208,10 @@
     \text{wobei } z \in \R^p.
   \]
   % Andererseits kann jede Lösung von (N) in dieser Form angegeben werden.
-  Für die spezielle Lsg $z = 0$ gilt
+  Für die spez. Lsg
   $\hat{\beta} = S^{-} X^T Y$
-  für die MkQ-Schätzung für $\beta$.
-  Es gilt
+  (mit $z = 0$)
+  der MkQ-Schätzung gilt
   \[
     \E \hat{\beta} = S^{-} S \beta
     \quad \text{und} \quad
@@ -1213,10 +1224,13 @@
   Falls $\rk X = \rk S = p$, so gilt $\E \hat{\beta} = \beta$ und $\cov \hat{\beta} = \sigma^2 S^{-1}$
 \end{bem}
 
-% Der Begriff der schätzbaren Funktion (estimable function)
+% §4.2. Der Begriff der schätzbaren Funktion (estimable function)
+\subsection{Schätzbare Funktionen}
+
+\end{samepage}
 
 \begin{defn}
-  Eine Linearkombination $l(\beta) = c^T \beta$ mit $c \in \R^p$, $\beta \in \R^p$ heißt bzgl. des linearen Modells $[Y, X \beta, \sigma^2 I_n]$ \emph{schätzbare Funktion}, falls ein $a \in \R^n$ mit $c = X^T a$ existiert.
+  Eine Linearkombination $\ell(\beta) = c^T \beta$ mit $c \in \R^p$, $\beta \in \R^p$ heißt bzgl. des linearen Modells $[Y, X \beta, \sigma^2 I_n]$ \emph{schätzbare Funktion}, falls ein $a \in \R^n$ mit $c = X^T a$ existiert.
 \end{defn}
 
 % Die Bedeutung schätzbarer Funktionen ergibt sich aus
@@ -1224,10 +1238,10 @@
 \begin{satz}
   Es sind äquivalent:
   \begin{itemize}
-    \item $l(\beta) = c^T \beta$ ist eine schätzbare Funktion
-    \item $\hat{l} \coloneqq l(\hat{\beta}) \coloneqq c^T \hat{\beta}$ (wobei $\hat{\beta}$ MkQ-Schätzung) ist eine lin. Funktion von~$Y$ und eine erwartungstreue Schätzung für $l(\beta)$ %(\dh{} $\E l(\hat{\beta}) = l(\beta)$)
+    \item $\ell(\beta) = c^T \beta$ ist eine schätzbare Funktion.
+    \item $\hat{\ell} \coloneqq \ell(\hat{\beta}) \coloneqq c^T \hat{\beta}$ (wobei $\hat{\beta}$ MkQ-Schätzung) ist eine lineare Funktion von~$Y$ und eine erwartungstreue Schätzung für $\ell(\beta)$ %(\dh{} $\E l(\hat{\beta}) = l(\beta)$)
     \item $c \in \im(X^T) = \im(X^T X)$
-    \item $l(\hat{\beta}) = c^T \hat{\beta}$ ist konstant für alle $\hat{\beta}$, die Lösung von (N) sind, \dh{} $X^T X \hat{\beta} = X^T y$.
+    \item $\ell(\hat{\beta}) = c^T \hat{\beta}$ ist konstant für alle $\hat{\beta}$, die Lösung von (N) sind.
     \item Es existiert ein $a \in \R^n$ mit $\E (a^T Y) = c^T \beta$.
   \end{itemize}
 \end{satz}
@@ -1235,8 +1249,8 @@
 % Vorlesung vom 7.12.2015
 
 \begin{satz}[\emph{Gauß-Markov}]
-  In einem lin. Modell $[Y, X \beta, \sigma^2 I_n]$ ex. für jede schätzbare (lin.) Funktion $l(\beta) = c^T \beta$ eine eindeutig bestimmte, in $Y$ lin. erwartungstreue Schätzung $\hat{l} = a_*^T Y$ (für genau ein $a_* \in \im(X) \subseteq \R^n$) und diese hat die Gestalt $\hat{l} = l(\hat{\beta}) = c^T \hat{\beta}$, wobei $\hat{\beta}$ eine MkQ-Schätzung ist.
-  Außerdem besitzt $\hat{l}$ minimale Varianz in der Klasse aller linearen erwartungstreuen Schätzungen $\hat{l} = a^T Y$.
+  In einem lin. Modell $[Y, X \beta, \sigma^2 I_n]$ ex. für jede schätzbare (lin.) Funktion $\ell(\beta) = c^T \beta$ eine eindeutig bestimmte, in~$Y$ lin. erwartungstreue Schätzung $\hat{\ell} = a_*^T Y$ (für genau ein $a_* \in \im(X) \subseteq \R^n$) und diese hat die Form $\hat{\ell} = \ell(\hat{\beta}) = c^T \hat{\beta}$, wobei~$\hat{\beta}$ eine MkQ-Schätzung ist.
+  Außerdem besitzt $\hat{\ell}$ minimale Varianz in der Klasse aller linearen erwartungstreuen Schätzungen $\hat{\ell} = a^T Y$.
 \end{satz}
 
 \begin{konstr}
@@ -1244,10 +1258,11 @@
 \end{konstr}
 
 \begin{defn}
-  Der Schätzer heißt Best Linear Unbiased Estimation (\emph{BLUE}).
+  Der Schätzer heißt \textit{Best Linear Unbiased Estimator} (\emph{BLUE}).
 \end{defn}
 
 % §4.3 Schätzung der Modellstreuung $\sigma^2$
+\subsection{Schätzung der Modellstreuung $\sigma^2$}
 
 \begin{bem}
   Es gilt
@@ -1264,186 +1279,230 @@
 \end{defn}
 
 \begin{lem}
-  Falls $\hat{\beta}$ MkQ-Schätzung, so gilt
+  Für die MkQ-Schätzung~$\hat{\beta}$ gilt
   \begin{itemize}
-    \item $\E (Y - X \hat\beta) = 0$
-    \item $c^T \beta$ ist eine schätzbare Funktion und $\E (c^T \hat{\beta} (Y - X \hat\beta)) = 0$
-    \item $\cov(Y - X \hat\beta) = \cov(Y) - \cov(X \hat\beta)$.
+    \item $\E (Y - X \hat\beta) = 0$,
+    \item $c^T \beta$ ist eine schätzbare Funktion und $\E (c^T \hat{\beta} (Y - X \hat\beta)) = 0$ \TODO{Was ist $c$???},
+    \item $\cov(Y \!-\! X \hat\beta) \!=\! \E S(Y, \hat{\beta}) = \E [\norm{Y}^2 - \norm{X \beta}^2] = \cov(Y) - \cov(X \hat\beta)$.
   \end{itemize}
 \end{lem}
 
-Orthogonale Transformation von $[Y, X \beta, \sigma^2 I_n]$
+\begin{verf}[Orthogonale Transformation eines linearen Modells] \mbox{} \\
+  Sei $[Y, X \beta, \sigma^2 I_n]$ geg. und $r = \rk X \leq p$.
+  Wähle eine orthonormale Basis $o_1, \ldots, o_r$ von $\im(X) \subseteq \R^n$.
+  Ergänze diese zu einer ONB $o_1, \ldots, o_n$ von $\R^n$.
+  Wir setzen
+  \[
+    O_1 = (o_1 \cdots o_r), \quad
+    O_2 = (o_{r+1} \cdots o_n), \quad
+    O = (O_1 \, O_2) = (o_1, \ldots, o_n).
+  \]
+  Wir betrachten nun das lineare Modell $[Z, O^T X \beta, \sigma I_n]$, wobei
+  \[
+    Z \coloneqq O^{-1} Y = O^T Y = \begin{psmallmatrix}
+      O_1^T \\ O_2^T
+    \end{psmallmatrix}.
+  \]
+  Es gilt \enspace
+  \begin{minipage}[t]{0.7 \linewidth}
+    $
+      \setlength\arraycolsep{1.5pt}
+      \begin{array}[t]{r l}
+        \cov(Z) & = \cov(O^T Y) = O^T \cov(Y) O = \sigma^2 I \\
+        \E Z & = O^T \E Y = O^T X \beta = \begin{psmallmatrix}
+          O_1^T X \beta \\ O_2^T X \beta
+        \end{psmallmatrix} = \begin{psmallmatrix}
+          O_1^T X \beta \\ 0
+        \end{psmallmatrix}
+      \end{array}
+    $
+  \end{minipage}
+\end{verf}
 
-$X = (\tilde{x}_1 \cdots \tilde{x}_p)$ mit $\tilde{x}_i \in \R^p$, $\rk X = r \leq p$.
-
-Es existiert eine orthonormale Basis $o_1, \ldots, o_r$ von $\im(X)$ und $\sigma_{r+1}, \ldots, \sigma_n \in \im(X)^\perp$.
-
-$Y = \sum_{i=1}^n o_i Z_i$, $Z = (Z_1 \cdots Z_n)^T$, \dh{} $Y = O Z$, wobei $O (o_1 \cdots o_n)$, $O_1 = (a_1 \cdots a_r)^T$, $O_2 = (a_{r+1} \cdots a_n)^T$
-
-$Z = O^{-1} Z = O^T Y$
-
-$\E Z = O^T \E Y = O^T X \beta = \begin{psmallmatrix}
-  O_1^T \\ O_2^T
-\end{psmallmatrix} X \beta$
-
-$\E Z_i = o_i^T X \beta = \begin{cases}
-  o_i^T X \beta & \text{für $i = 1, \ldots, r$,} \\
-  0 & \text{für $i = r+1, \ldots, n$.}
-\end{cases}$
-
-$\E Z = \begin{psmallmatrix}
-  O_1^T X \beta \\ 0
-\end{psmallmatrix}$, $\cov(Z) = \cov(O^T Y) = O^T \cov(Y) O = \sigma^2 I$
-
-Transformation: $[Y, X \beta, \sigma^2 I_n] \rightsquigarrow [Z, O^T X \beta, \sigma^2 I_n]$ mit $Z = O^T Y$
+\begin{samepage}
 
 \begin{satz}
-  In einem linearen Modell $[Y, X \beta, \sigma^2 I_n]$ mit $\rk X = r \leq p$ und einer MkQ-Schätzung $\hat{\beta}$ ist
-  \[ \sigma^2 = \tfrac{1}{n-r} S(Y, \hat{\beta}) = \tfrac{1}{n-r} \norm{Y - X \hat\beta}^2 = \tfrac{1}{n-r} \sum_{i=1}^n (Y_i - \sum_{j=1}^p x_{ij} \hat\beta_r)^2 \]
-  eine erwartungstreue Schätzung für $\sigma^2$.
+  Sei $[Y, X \beta, \sigma^2 I_n]$ geg., $r \coloneqq \rk X$ und $\hat{\beta}$ eine MkQ-Schätzung.
+  Dann ist eine erwartungstreue Schätzung für~$\sigma^2$ gegeben durch
+  \[
+    \hat{\sigma}^2
+    = \tfrac{1}{n-r} S(Y, \hat{\beta})
+    = \tfrac{1}{n-r} \norm{Y - X \hat\beta}^2
+    = \tfrac{1}{n-r} \sum_{i=1}^n (Y_i - \sum_{j=1}^p x_{ij} \hat\beta_j)^2.
+  \]
 \end{satz}
 
 % Vorlesung vom 10.12.2015
 
 % §4.4 Das normalverteilte lineare Modell $[Y, \Normal_n(X \beta, \sigma^2 I_n)]$
+\subsection{Normalverteilte lineare Modelle}
+
+\end{samepage}
 
 \begin{satz}
   Für ein normalverteiltes lineares Modell $[Y, \Normal_n(X \beta, \sigma^2 I_n)]$ mit $\rk X = r \leq p$ gilt:
   \begin{itemize}
     \item Die ML-Schätzung für $\beta \in \R^p$ stimmt mit der MkQ-Schätzung $\hat\beta$ überein und es gilt $\hat\beta \sim \Normal_p(\E \hat\beta, \cov(\hat{\beta}))$.
-    \item Die ML-Schätzung für $\sigma^2$ lautet $\hat\sigma_n^2 = \tfrac{S(Y, \hat{\beta})}{n} = \tfrac{n-r}{n} \hat\sigma^2$ mit $\E \hat\sigma_n^2 = \tfrac{n-r}{n} \sigma^2 \xra[n \to \infty]{} \sigma^2$ (asympt. erw.-treu) und $\tfrac{S(Y, \hat\beta)}{\sigma^2} \sim \chi_{n-r}^2$
-    \item Für einen Vektor $l^T(\beta) = (l_1(\beta), \ldots, l_q(\beta))$ von $q \leq r$ linear unabhängigen schätzbaren Funktionen $l_i(\beta) = c_i^T \beta$, $c_i \in \R^p$
-    gilt $\hat{l} \coloneqq l(\hat{\beta}) \sim \Normal_q(l(\beta), \sigma^2 A_* A_*^T)$ mit $\rk A_* = q$, wobei
-    \begin{align*}
-      A_* = (a_{*,1}, \ldots, a_{*,q})^T \quad
-      \text{mit } a_{*,i} \in L(X) \enspace & \text{optimal gemäß} \\
-      & \text{Gauß-Markov-Theorem}
-      % $c_i^T \hat{\beta} = a_{*,i}^T Y$ für $i = 1, \ldots, q$
-    \end{align*}
-    \item Die Schätzungen $\hat{l} = l(\hat\beta)$ und $\hat\sigma^2$ (bzw. $\hat\sigma_n^2$) sind unabhängig.
+    \item Die ML-Schätzung für $\sigma^2$ lautet $\hat\sigma_n^2 = \tfrac{S(Y, \hat{\beta})}{n} = \tfrac{n-r}{n} \hat\sigma^2$.
+    Es gilt $\E \hat\sigma_n^2 = \tfrac{n-r}{n} \sigma^2 \xra[n \to \infty]{} \sigma^2$ (asympt. erw.-treu) und $\tfrac{S(Y, \hat\beta)}{\sigma^2} \sim \chi_{n-r}^2$.
+    \item Für einen Vektor $\ell^T(\beta) = (\ell_1(\beta), \ldots, \ell_q(\beta))$ von $q \leq r$ linear unabhängigen schätzbaren Funktionen $\ell_i(\beta) = c_i^T \beta$, $c_i \in \R^p$
+    gilt
+    \[
+      \hat{\ell} \coloneqq \ell(\hat{\beta}) \sim \Normal_q(\ell(\beta), \sigma^2 A_* A_*^T) \quad
+      \text{mit } q = \rk A_*.
+    \]
+    Dabei ist $A_* = (a_{*,1}, \ldots, a_{*,q})^T$ mit $a_{*,i} \in L(X)$ optimal gemäß dem Gauß-Markov-Theorem.
+    \item Die Schätzungen $\hat{\ell} = \ell(\hat\beta)$ und $\hat\sigma^2$ (bzw. $\hat\sigma_n^2$) sind unabhängig.
   \end{itemize}
 \end{satz}
 
 \begin{kor}
   Für $\rk X = p$ gilt $\hat{\beta} \sim \Normal_p(\beta, \sigma^2 (X^T X)^{-1})$ und $\hat\beta$ und $\hat\sigma^2$ sind unabhängig.
-  (Grund: $\beta_i = e_i^T \beta$ sind schätzbare Funktionen)
+  (Grund: $\beta_i = e_i^T \beta$ sind schätzbare Funktionen.)
 \end{kor}
 
-\begin{test}[$\sigma^2$-Streuungstest im Modell $(Y, \Normal_n(X \beta, \sigma^2 I_n))$]
-  % TODO: Ersetze runde Klammern durch eckige (Problem: LaTeX-Kompilierfehler)
-  $H_0 : \sigma^2 = \sigma_0^2$, $\alpha > 0$ vorgegeben, $\rk X = r \leq p$
-  $T \coloneqq \tfrac{\norm{Y - X \hat{\beta}}^2}{\sigma_0^2} \sim \chi_{n-r}^2$ (unter $H_0$)
-  Kritischer Berech für $T$: $K^* = \cinterval{0, \chi_{n-r, \nicefrac{\alpha}{2}^2}} \cup \cointerval{\chi_{n-r, 1 - \nicefrac{\alpha}{2}}}{\infty}$
+\begin{test}[{$\sigma^2$-Streuungstest im Modell $[Y, \Normal_n(X \beta, \sigma^2 I_n)]$}] \mbox{} \\
+  Wir testen \testh{$H_0 : \sigma^2 = \sigma_0^2$ vs. $H_1 : \sigma^2 \neq \sigma_0^2$}.
+  Wir verwenden dazu
+  \[
+    T \coloneqq \tfrac{\norm{Y - X \hat{\beta}}^2}{\sigma_0^2}
+  \]
+  Unter $H_0$ gilt $T \sim \chi_{n-r}^2$, wobei $r \coloneqq \rk X \leq p$.
 \end{test}
 
-Konfidenzschätzung für den Vektor der schätzbaren Funktionen
-\[
-  l(\beta) = (l_1(\beta), \ldots, l_q(\beta))^T, \enspace
-  1 \leq q \leq r \leq p < n, \enspace
-  l_1(\beta), \ldots, l_q(\beta) \text{ lin. unabh.}
-\]
+\begin{entscheidungsregel}
+  Wir lehnen $H_0$ genau dann ab, falls
+  \[
+    T \in K^* = \cinterval{0}{\chi_{n-r, \nicefrac{\alpha}{2}}^2} \cup \cointerval{\chi_{n-r, 1 - \nicefrac{\alpha}{2}}^2}{\infty}.
+  \]
+\end{entscheidungsregel}
 
-\[
-  \P((l(\hat\beta) - l(\beta))^T (A_* A_*^T)^{-1} (l(\hat\beta) - l(\beta)) \leq \tfrac{q}{n-r} \norm{Y - X \hat\beta}^2 \cdot F_{q, n - r, 1 - \alpha}) = 1 - \alpha.
-\]
-% wobei $F_{n_1, n_2}$ die F-Verteilung mit $(n_1, n_2)$ Freiheitsgraden ist.
+\begin{bem}
+  Sei $\ell(\beta) = (\ell_1(\beta), \ldots, \ell_q(\beta))^T$ ein Vektor von linear unabh. schätzbaren Fktn, wobei $1 \leq q \leq r \leq p < n$.
+  Setze $w \coloneqq \ell(\hat\beta) - \ell(\beta)$. \\
+  Die Konfidenzschätzung für $\ell(\beta)$ ist dann
+  \[
+    \P(w^T (A_* A_*^T)^{-1} w \leq \tfrac{q}{n-r} \norm{Y - X \hat\beta}^2 \cdot F_{q, n - r, 1 - \alpha}) = 1 - \alpha.
+  \]
+  % wobei $F_{n_1, n_2}$ die F-Verteilung mit $(n_1, n_2)$ Freiheitsgraden ist.
+\end{bem}
 
 % Vorlesung vom 14.12.2015
 
 % §4.5 Anwendung auf das Modell I der Varianzanalyse (ANOVA)
+\subsection{Anwendung auf das Modell I der Varianzanalyse}
 
 % 4.5.1 Einfache Klassifikation, Einwegklassifikation
 
-Vergleich von Erwartungswerten von $p$ Stufen (Populationen), $\Normal(\mu, \sigma^2)$-verteilter unabhängiger Beobachtungen ($i = 1, \ldots, p$)
+%\begin{bsp}
+  \begin{minipage}{0.52 \linewidth}
+    \begin{bsp}
+      Ziel ist der Vergleich von Erwartungswerten von $p$ Stufen (\textit{Populationen}), je $\Normal(\mu_i, \sigma^2)$-verteilter unabhängiger Beobachtungen ($i = 1, \ldots, p$).
+      Für alle Populationen~$i$ tragen wir alle $n_i$ Messergebnisse in den \textit{Versuchsplan} (rechts) ein.
+    \end{bsp}
+  \end{minipage} \quad
+  \begin{minipage}{0.43 \linewidth}
+    \renewcommand{\arraystretch}{1.5}
+    \scalebox{0.9}{
+      \begin{tabular}{c | c c c c}
+        & $1$ & $2$ & $\cdots$ & $n_i$ \\ \hline
+        $1$ & $y_{11}$ & $y_{12}$ & $\cdots$ & $y_{1,n_1}$ \\
+        $2$ & $y_{21}$ & $y_{22}$ & $\cdots$ & $y_{2,n_2}$ \\
+        \vdots & \vdots & \vdots & & \vdots \\
+        $p$ & $y_{p1}$ & $y_{p2}$ & $\cdots$ & $y_{p,n_p}$ \\
+      \end{tabular}
+    }
+  \end{minipage}
+  \vspace{4pt}
+  In unserem math. Modell gibt es einen (unbek.) Vektor $\mu \in \R^p$ mit
+  \[
+    Y_{ik} = \mu_i + \epsilon_{ik}, \enspace
+    \epsilon_{ik} \sim \Normal(0, \sigma^2) \text{ (\iid{})} \quad
+    \text{für $n = 1, \ldots, n_i$, $i = 1, \ldots, p$.}
+  \]
+  % ausgelassen: Matrixgleichung
+  (Wichtig ist, zu prüfen, ob tatsächlich die Varianz der $\epsilon_{ik}$ gleich ist, etwa mit dem \textit{Bartlett-Test}.)
+  Die Transponierte~$X^T$ der Versuchs- planmatrix $X \in \R^{n \times p}$, $n \coloneqq n_1 + \ldots + n_p$, ist in Zeilenstufenform, wobei die $i$-te Zeile aus genau $n_i$ Einsen besteht.
+  Es gilt
+  \[
+    X^T X = \begin{psmallmatrix}
+      n_1 &&& 0 \\
+      & n_2 && \\
+      && \ddots && \\
+      0 &&& n_p
+    \end{psmallmatrix}, \quad
+    X^T Y = \begin{psmallmatrix}
+      Y_{1 \bullet} = {\sum}_{k=1}^{n_1} Y_{1k} \\
+      \vdots \\
+      Y_{p \bullet} = {\sum}_{k=1}^{n_p} Y_{pk}
+    \end{psmallmatrix}
+  \]
+  Aus der Normalengleichung $X^T X \beta = X^T Y$ folgt
+  \[
+    \hat{\mu}_i = \overline{Y}_{i \bullet} = \tfrac{1}{n_i} {\sum}_{k=1}^{n_i} Y_{ik} \quad
+    \text{für $i = 1, \ldots, p$}.
+  \]
+  Die Schätzung der Modellstreuung ist
+  \[
+    \hat{\sigma}^2 = \tfrac{1}{n-p} \norm{Y - X \hat{\beta}}^2 = \tfrac{1}{n-p} \sum_{i=1}^p \sum_{k=1}^{n_i} (Y_{ik} - \overline{Y}_{i \bullet})^2.
+  \]
+  Es gilt $(n-p) \tfrac{\hat{\sigma}^2}{\sigma^2} \sim \chi_{n-p}^2$.
+%\end{bsp}
 
-Versuchsplan:
+\begin{test}
+  Wir testen \testh{$H_0 : \mu_1 = \mu_2 = \ldots = \mu_p$ vs. $H_1 : \ex{i, j} \mu_i \neq \mu_j$}.
+  Als Testgröße verwenden wir
+  \begin{align*}
+    & T \coloneqq \tfrac{n-p}{p-1} \cdot \tfrac{S_1^2 - S_0^2}{S_0^2}
+    \quad \text{mit} \enspace
+    S_0^2 \coloneqq \norm{Y - X \hat{\beta}}^2 = \sum_{i=1}^p \sum_{k=1}^{n_i} (Y_{ik} - \overline{Y}_{i \bullet})^2, \\
+    & S_1^2 \coloneqq \sum_{i=1}^p \sum_{k=1}^{n_i} (Y_{ik} - \overline{Y}_{\bullet \bullet})^2 \quad
+    \rightsquigarrow S_1^2 - S_0^2 = \ldots = \sum_{i=1}^p n_i (\overline{Y}_{i \bullet} - \overline{Y}_{\bullet \bullet})^2
+  \end{align*}
+  % ausgelassen: Herleitung
+  Unter $H_0$ gilt $T \sim F_{p-1, n-p}$.
+\end{test}
 
-\begin{center}
-  \renewcommand{\arraystretch}{1.5}
-  \begin{tabular}{c | c c c c}
-    & $1$ & $2$ & $\cdots$ & $n_i$ \\ \hline
-    $1$ & $y_{11}$ & $y_{12}$ & $\cdots$ & $y_{1,n_1}$ \\
-    $2$ & $y_{21}$ & $y_{22}$ & $\cdots$ & $y_{2,n_2}$ \\
-    \vdots & \vdots & \vdots & & \vdots \\
-    $p$ & $y_{p1}$ & $y_{p2}$ & $\cdots$ & $y_{p,n_p}$ \\
-  \end{tabular}
-\end{center}
-
-Mathematisches Modell: $Y_{ik} = \mu_i + \epsilon_{ik}$, $n = 1, \ldots, n_i$, $i = 1, \ldots, p$, $\beta = (\mu_1, \ldots, \mu_p)^T$, $\epsilon_{ik} \sim \Normal(0, \sigma^2)$ \iid{}
-
-% ausgelassen: Matrixgleichung
-
-Wichtig: Prüfen, ob tatsächlich die Varianz von $\epsilon_{ik}$ gleich sind (Bartlett-Test).
-
-Normalengleichung: $X^T X \beta = X^T Y$
-
-$X^T X = \begin{pmatrix}
-  n_1 & 0 & & 0 \\
-  0 & n_2 & 0 & 0 \\
-  & 0 & \ddots & 0 & 0 \\
-  0 & & 0 & n_p
-\end{pmatrix}$
-
-$X^T Y = \begin{pmatrix}
-  Y_{1 \bullet} = \sum_{k=1}^{n_1} Y_{1k} \\
-  \vdots \\
-  Y_{p \bullet} = \sum_{k=1}^{n_p} Y_{pk}
-\end{pmatrix}$
-
-$\hat{\mu}_i = \overline{Y}_{i \bullet} = \tfrac{1}{n_i} \sum_{k=1}^{n_i} Y_{ik}$ für $i = 1, \ldots, p$
-
-Schätzung der Modellstreuung:
-
-%$\hat{\beta} =$
-
-$\hat{\sigma}^2 = \tfrac{1}{n-p} \norm{Y - X \hat{\beta}}^2 = \tfrac{1}{n-p} \sum_{i=1}^p \sum_{k=1}^{n_i} (Y_{ik} - \overline{Y}_{i \bullet})^2$
-
-Dann ist $(n-p) \frac{\hat{\sigma}^2}{\sigma^2} \sim \chi_{n-p}^2$
-
-Test auf Gleichheit der Erwartungswerte:
-
-$H_0 : \mu_1 = \mu_2 = \ldots = \mu_p$
-
-Testgröße: $T = \tfrac{n-p}{p-1} \tfrac{S_1^2 - S_0^2}{S_0^2} \sim F_{p-1, n-p}$
-
-Ablehnung von $H_0$, falls $T \geq T_{p-1,n-p,1-\alpha}$ % wobei $\alpha > 0$ die Irrtumswahrscheinlichkeit
-
-$C = \begin{pmatrix}
-  1 & -1 & 0 \\
-  0 & 1 & -1 & 0 \\
-  && \ddots & \ddots \\
-  && 0 & 1 & -1
-\end{pmatrix}$
-
-$S_0^2 \coloneqq \norm{Y - X \hat{\beta}}^2 = (n-p) \hat{\sigma}^2 = \sum_{i=1}^p \sum_{k=1}^{n_i} (Y_{ik} - \overline{Y}_{i \bullet})^2$
-
-$S_1^2 = \min_{\beta : C \beta = 0} \norm{Y - X \beta}^2$
-
-Berechnung von $S_1^2$ mittels Lagrange-Multiplikatoren ergibt:
-$S_1^2 = \sum_{i=1}^p \sum_{k=1}^{n_i} (Y_{ik} - \overline{Y}_{i \bullet})^2$
-% $F(\beta, \lambda) = (Y - X \beta)^T (Y - X \beta) + (C \beta)^T \lambda$ mit $\beta^T = (\mu_1, \ldots, \mu_p)$, $\lambda^T = (\lambda_1, \ldots, \lambda_{p-1})$
-
-$S_1^2 - S_0^2 = \ldots = \sum_{i=1}^p n_i (\overline{Y}_{i \bullet} - \overline{Y}_{\bullet \bullet})^2$
+\begin{entscheidungsregel}
+  Ablehnung von $H_0$ $\iff$ $T \geq F_{p-1,n-p,1-\alpha}$
+\end{entscheidungsregel}
 
 \begin{sprechweise}
-  Übliche Bezeichnungen:
+  Die üblichen Bezeichnungen sind
+  \[
+    \arraycolsep=1.4pt
+    \begin{array}{r l l}
+      S_1^2 & = \text{SQG} & = \text{S.\,d.\,Q.\,d.\,A. in der Gesamtheit} \\
+      S_1^2 - S_0^2 & = \text{SQA} & = \text{S.\,d.\,Q.\,d.\,A. zwischen den Stufen des Faktors $A$} \\
+      S_0^2 & = \text{SQR} & = \text{S.\,d.\,Q.\,d.\,A. innerhalb der Stufen des Faktors $A$} \\
+      && = \text{Restquadratesumme},
+      \end{array}
+  \]
   \begin{align*}
-    S_1^2 & = \text{SQG} = \text{Summe der Quadrate der Abweichungen in der Gesamtheit} \\
-    S_1^2 - S_0^2 = \text{SQA} = \text{Summe der Quadrate der Abweichungen zwischen den Stufen des Faktors $A$} \\
-    S_0^2 = \text{SQR} = \text{Summe der Quadrate der Abweichungen innerhalb der Stufen des Faktors $A$ (Restquadratesumme)}
   \end{align*}
+  wobei "`S.\,d.\,Q.\,d.\,A."' = "`Summe der Quadrate der Abweichungen"'.
 \end{sprechweise}
 
-Bartlett-Test: Prüfen der Hypothese, dass $p$ unabhänige ZGn $X_i \sim \Normal(\mu_i, \sigma^2)$, $i = 1, \ldots, p$ dieselbe Streuung $\sigma^2$ besitzen. $H_0 : \sigma_1^2 = \ldots = \sigma_p^2 = \sigma^2$
-Gegeben seien $p$ unabhängige Stichproben $X_{i 1}, \ldots, X_{i n_i}$, $i = 1, \ldots, p$, $n = n_1 + \ldots + n_p$.
+\begin{test}[\emph{Bartlett}]
+  Seien $X_i \sim \Normal(\mu_i, \sigma_i^2)$, $i = 1, \ldots, p$, unabh. ZGn. \\
+  Wir prüfen \testh{$H_0 : \sigma_1^2 = \ldots = \sigma_p^2 = \sigma^2$ vs. $H_1 : \ex{i, j} \sigma_i^2 \neq \sigma_j^2$}. \\
+  Dazu verwenden wir die Testgröße
+  \begin{align*}
+    T_{n_1, \ldots, n_p} & \coloneqq \tfrac{1}{D} \left( (n-p) \log S^2 - {\sum}_{i=1}^p (n_i - 1) \log S_i^2 \right), \\
+    D & \coloneqq 1 + \tfrac{1}{3 (- 1)} \left( {\sum}_{i=1}^p \tfrac{1}{n_i - 1} - \tfrac{1}{n-p} \right) \\
+    S_i^2 & \coloneqq \tfrac{1}{n_i - 1} {\sum}_{k=1}^{n_i} (X_{ik} - \overline{X}_{i \bullet})^2 \\
+    S^2 & \coloneqq \tfrac{1}{n-p} {\sum}_{i=1}^p (n_i - 1) S_i^2
+  \end{align*}
+  Unter $H_0$ gilt $T_{n_1, \ldots, n_p} \xra[\min(n_1, \ldots, n_p) \to \infty]{d} \chi_{p-1}^2$.
+\end{test}
 
-Testgröße: $T_{n_1, \ldots, n_p} = \tfrac{1}{D} \left( (n-p) \log S^2 - \sum_{i=1}^p (n_i - 1) \log S_i^2 \right)$ mit $D \coloneqq 1 + \tfrac{1}{3 (- 1)} \left( \sum_{i=1}^p \tfrac{1}{n_i - 1} - \tfrac{1}{n-p} \right)$, $S_i^2 = \tfrac{1}{n_i - 1} \sum_{k=1}^{n_i} (X_{ik} - \overline{X}_{i \bullet})^2$, $S^2 = \tfrac{1}{n-p} \sum_{i=1}^p S_i^2$
+\begin{faustregel}
+  Die Näherung ist gut, falls $\min(n_1, \ldots, n_p) \geq 5$.
+\end{faustregel}
 
-Für $\min(n_1, \ldots, n_p) \to \infty$ gilt $T_{n_1, \ldots, n_p} \xra{d} \chi_{p-1}^2$.
-
-Faustregel: $\min(n_1, \ldots, n_p) \geq 5$
-
-Ablehnung von $H_0$, falls $T_{n_1, \ldots, n_p} > \chi_{p-1, 1-\alpha}^2$.
+\begin{entscheidungsregel}
+  Ablehnung v. $H_0$ $\Leftrightarrow$ $T_{n_1, \ldots, n_p} > \chi_{p-1, 1-\alpha}^2$.
+\end{entscheidungsregel}
 
 \iffalse
 Beispiel: Wirkung vonschmerzstillenden Medikamenten
@@ -1562,6 +1621,7 @@ Die Hypothesen $H_A$, $H_B$ bzw. $H_{AB}$ werden abgelehnt, falls
 % Vorlesung vom 21.12.2015
 
 % §4.6 Regressionkurvenschätzer
+\subsection{Regressionskurvenschätzer}
 
 Problem der Ausgleichsrechnung:
 
@@ -1938,6 +1998,8 @@ Eigenschaften:
   \item $U \sim \Uniform \cinterval{0}{1}$ $\implies$ $F^{-}(U) \sim F$.
   Falls $(U_i)_{i \in \N}$ eine Folge unabhängiger gleichverteilter Zufallszahlen auf $\cinterval{0}{1}$ sind, dann ist $(F^{-}(U_i))_{i \in \N}$ eine Folge $F$-verteilter Zufallszahlen.
 \end{itemize}
+
+% Vorlesung vom 25.1.2016
 
 % §6.2. Erzeugung von Zufallszahlen über Transformation
 

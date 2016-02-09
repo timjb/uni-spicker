@@ -109,7 +109,7 @@
 \setenumerate[0]{leftmargin=10pt,itemindent=0pt,itemsep=0pt}
 
 % Färbe \emph{} violett
-\usepackage{color,graphicx,overpic}
+\usepackage{color,xcolor,graphicx,overpic}
 \definecolor{Emph}{rgb}{0.2,0.2,0.8}
 \renewcommand{\emph}[1]{\textcolor{Emph}{\bf{#1}}}
 \newcommand{\Emph}[1]{\textcolor{Emph}{#1}}
