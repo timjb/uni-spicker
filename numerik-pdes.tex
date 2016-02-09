@@ -2343,7 +2343,97 @@ Dann hilft folgende Verallgemeinerung des Lemmas von Céa:
   \]
 \end{satz}
 
+\TODO{Vorlesung vom 28.1.2016 nachtragen}
+
+% Vorlesung vom 1.2.2015
+
+% §5.6. Finite Elemente für parabolische Probleme
+
+\begin{prob}
+  Wärmeleitungsgleichung:
+  \[
+    \arraycolsep=2.5pt
+    %\text{\probl{(RWP\tss{4})}} \quad
+    \left\{ \begin{array}{rcll}
+      u_t(x,t) - \Laplace_x u(x, t) &=& f(x,t) &\text{in $\Omega \times \ointerval{0}{T}$} \\
+      u(x,0) &=& u_0(x) & \text{für } x \in \Omega \\
+      u(x, t) = 0 & \text{für } x \in \bOmega, t \in \cinterval{0}{T}
+    \end{array} \right.
+  \]
+\end{prob}
+
+\[
+  \IntOmega{u_t(x,t) \varphi(x)}{x} = \IntOmega{\Laplace u(x, t) \varphi(x)}{x} + \IntOmega{f(x,t) \varphi(x)}{x} - \IntOmega{\DO u(x, t) \cdot \DO \varphi(x)}{x}
+\]
+
+Anders geschrieben:
+
+\[
+  \tfrac{\d}{\d t} \scp{u(t, \blank)}{\varphi} + B(u, \varphi) - \scp{f(t, \blank)}{\varphi}
+\]
+
+mit $\varphi \in H_0^1(\Omega)$, $u \in \Cont^1(0, T; H_0^1(\Omega))$.
+Anfangsbedingung: $u(0) = u_0$.
+
+% §5.6.1. Die vertikale Linienmethode
+
+Idee: 1. Diskretisierung im Ort, 2. Diskretisierung in der Zeit
+
+\begin{itemize}
+  \item Sei $U_n \subset U = H_0^1(\Omega)$
+  \[
+    \tfrac{\d}{\d t} \scp{u_n(t)}{\varphi_n} + B_n(u_n, \varphi_n) = \scp{f(t, \blank)}{\varphi} \quad \forall \, \varphi \in U_n
+  \]
+  Sei $\varphi_1, \ldots, \varphi_{d_n}$ eine Basis von $U_n$, $u_n(t) = \sum_{j=1}^{d_n} \gamma_j(t) \varphi_j(x)$, $u_n^0 = \sum \gamma_j^0 \varphi_j$,
+  
+  \[
+    \text{(GGL)} \quad
+    \left\{ \begin{array}{rcl}
+      \sum_{j=1}^{d_n} \tfrac{\d}{\d t} \gamma_j(t) \scp{\varphi_j}{\varphi_i} + \sum_{j=1}^{d_n} \gamma_j(t) B_n(\varphi_j, \varphi_i) &=& \scp{f(t, \blank)}{\varphi_j} \\
+      \gamma_j(0) &=& \gamma_j^0, \, j = 1, \ldots, d_n
+    \end{array} \right.
+  \]
+  \[
+    \left\{ \begin{array}{rcl}
+      M \tfrac{\d}{\d t} \gamma(t) + B \gamma(t) &=& g(t) \\
+      \gamma(0) &=& \gamma^0
+    \end{array} \right.
+  \]
+  mit $M_{ij} = \IntOmega{\varphi_j(x) \varphi_i(x)}{x}$ (Massenmatrix), $B_{ij} = \IntOmega{\DO \varphi_j \cdot \DO \varphi_i}{x}$, $g_j(t) = \IntOmega{f(t, x) \varphi_j(x)}{x}$.
+  Dabei ist $\gamma \in \R^{d_n}$.
+  Durch Modellreduktion erhält man eine Gleichung
+  \[
+    \left\{ \begin{array}{rcl}
+      \tilde{M} \tfrac{\d}{\d t} \tilde{\gamma}(t) + \tilde{B} \tilde{\gamma}(t) &=& \tilde{g}(t) \\
+      \tilde{\gamma}(0) &=& \tilde{\gamma}^0
+    \end{array} \right.
+  \]
+  sodass $\gamma \in \R^r$, $r < d_n$ und $\gamma \approx V \tilde{\gamma}$.
+\end{itemize}
+
+% §5.6.2. Die horizontale Linienmethode (die Rothe-Methode)
+
+Idee: 1. Diskretisierung in der Zeit, 2. Diskretisierung im Ort
+
+$\tau = \nicefrac{T}{q}$, $t_i = i \cdot \tau$
+
+Sei $\psi_i (t) \coloneqq \begin{cases}
+  \nicefrac{t - t_{i-1}}{\tau} & t \in \cinterval{t_{i-1}}{t_i}, \\
+  \nicefrac{t_i - t}{\tau} & t \in \cinterval{t_i}{t_{i+1}}, \\
+  0 & \text{sonst}
+\end{cases}$
+
+$u(x,t) \approx u_\tau(x, t) = \sum_{j=1}^q \psi_j(t) c_j(x)$
+Somit $u_\tau(x, t_i) = c_i (x)$
+Implizites Euler-Verfahren: $\tfrac{\d}{\d t} u_\tau(x, t_{i+1}) \approx \tfrac{u_\tau(x, t_{i+1}) - u_\tau(x, t_i)}{\tau} = \tfrac{c_{i+1}(x) - c_i(x)}{\tau}$,
+
+$\scp{\tfrac{c_{i+1} - c_i}{\tau}}{\varphi} + B(c_{i+1}, \varphi) = \scp{f(t_{i+1})}{\varphi}$
+
+$\underbrace{\IntOmega{c_{i+1} \varphi}{x} + \tau \IntOmega{\DO c_{i+1} \cdot \DO \varphi}{x}}_{\hat{B}(c_{i+1}, \varphi)} = \underbrace{\tau \IntOmega{f(t_{i+1}, x) \varphi(x)}{x} + \IntOmega{c_i \varphi}{x}}_{\hat{\ell}(\varphi)}$
+
+2. Schritt: Löse die Variationsgleichung mittels der FEM
+
 \end{document}
 
-TODO: affine äquivalenz von Simplizes definieren
+TODO: affine Äquivalenz von Simplizes definieren
 TODO: stetige Einbettung von Sobolev-Räumen in C^r?
