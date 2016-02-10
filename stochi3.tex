@@ -35,6 +35,7 @@
 \DeclareMathOperator{\MASE}{MASE} % mean averaged squared error
 \DeclareMathOperator{\MISE}{MISE} % mean integrated squared error
 \DeclareMathOperator{\Graph}{Graph} % Funktionsgraph
+\DeclareMathOperator{\conv}{conv} % konvexe Hülle
 
 \DeclareMathOperator{\var}{Var} % Varianz
 \DeclareMathOperator{\cov}{Cov} % Kovarianz
@@ -2152,6 +2153,170 @@ wobei $J_g (x, y)$ die Jacobi-Matrix von~$g$ im Punkt $(x, y)$ ist.
     \cov(Y) = \cov(X L^T) = L \cov(X) L^T = L L^T = S.
   \]
 \end{verf}
+
+% Vorlesung vom 28.1.2016
+
+\begin{satz}
+  Seien $X_1, \ldots, X_n \sim \Normal_n(0, I_n)$ \iid{} \\
+  Dann ist der ZV $Y \coloneqq \nicefrac{X}{\norm{X}}$ gleichverteilt auf $S^{n-1}$.
+\end{satz}
+
+\begin{satz}
+  Seien $E_1, \ldots, E_{n+1} \sim \Exp(1)$.
+  \begin{itemize}
+    \item Sei $Z_i \coloneqq \tfrac{E_i}{E_1 + \ldots + E_n}$.
+    Dann ist $Z = (Z_1, \ldots, Z_n)$ gleichverteilt auf
+    \[
+      \Delta^n = \Set{x \in \cinterval{0}{1}}{x_1 + \ldots + x_n = 1} \subset \R^n.
+    \]
+    \item Sei $Z_i^* \coloneqq \tfrac{E_i}{E_1 + \ldots + E_{n+1}}$.
+    Dann ist $Z^* = (Z_1^*, \nldots, Z_n^*)$ gleichvert. auf
+    \[
+      \conv \{ 0, e_1, \ldots, e_n \} = \Set{x \in \cinterval{0}{1}}{x_1 + \ldots + x_n  1} \subset \R^n.
+    \]
+  \end{itemize}
+\end{satz}
+
+\begin{bem}
+  Seien $U_1, \ldots, U_n \sim \Uniform \cinterval{0}{1}$.
+  Wir ordnen die Werte:
+  \[
+    U_{0:n} \coloneqq 0 < U_{1:n} < \ldots U_{n:n} < 1 =: U_{n+1:n}.
+  \]
+  Dann sind die ZVn $Z_i^* \coloneqq U_{i:n} - U_{i-1 : n}$ für $i = 1, \ldots, n+1$ unabh. und können für Punkt 2 im letzten Satz verwendet werden.
+\end{bem}
+
+% §6.3 Erzeugung von Zufallszahlen über Grenzwertsätze
+\subsection{Erzeugung von Zufallszahlen über GWS}
+
+\begin{verf}
+  Seien $U_1, \ldots, U_n, \ldots \sim \Uniform \cinterval{0}{1}$ \iid{} \\
+  Es gilt $\E U_i = \tfrac{1}{2}$ und $\var U_i = \tfrac{1}{12}$.
+  Aus dem ZGWS folgt
+  \[
+    \frac{U_1 + \ldots + U_n - \tfrac{n}{2}}{\sqrt{\nicefrac{n}{12}}}
+    \xra[d \to \infty]{\d} \Normal(0, 1).
+  \]
+\end{verf}
+
+\begin{bsp}
+  $U_1 + \ldots + U_{12} - 6 \approx \Normal(0, 1)$
+\end{bsp}
+
+\begin{satz}
+  Für $\lambda > 0$ und $U_1, \ldots, U_n, \ldots \sim \Uniform \cinterval{0}{1}$ \iid{} gilt
+  \[
+    \tfrac{n}{\lambda} \min \{ U_1, \ldots, U_n \} \xra[n \to \infty]{\d} \Exp(\lambda).
+  \]
+\end{satz}
+
+% §6.4 Erzeugung von stabil-verteilten Zufallsvariablen
+\subsection{Erzeugung von stabil-verteilten Zufallsvariablen}
+
+Sei $F$ eine Verteilungsfunktion, die sich als mögliche Grenzverteilung einer geeigneten zentrierten und normierten Summe ergibt, \dh{} für \iid{} ZVn $X_1, \ldots, X_n, \ldots$ gilt
+\[
+  \P(\tfrac{X_1 + \ldots + X_n - a_n}{b_n} \leq x) \xra[n \to \infty]{} F(x)
+  \quad \text{wobei $b_n \to \infty$}.
+\]
+
+\begin{satz}
+  Die charakteristische Funktion~$\varphi(t)$ von~$F$ hat die Gestalt
+  \[
+    \varphi(t) = \exp \{ - \lambda \abs{t}^\alpha (1 - i \beta \tfrac{t}{\abs{t}} \Phi) \}, \qquad
+    \Phi = \begin{cases}
+      \tan(\tfrac{\pi \alpha}{2}) & \text{für } \alpha \neq 1, \\
+      - \tfrac{2}{\pi} \log \abs{t} & \text{für } \alpha = 1
+    \end{cases}
+  \]
+  für Parameter $\lambda \in \ointerval{0}{\infty}$, $\alpha \in \ocinterval{0}{2}$ und $\beta \in \cinterval{-1}{1}$.
+\end{satz}
+
+\begin{bsp}
+  Für $\alpha = 2$ ist $\varphi(t) = \exp \{ - \lambda t^2 \}$ und $F$ die Normalverteilung.
+\end{bsp}
+
+\begin{bemn}
+  \begin{itemize}
+    \item Für $F$ existiert eine "`glockenförmige"' Dichte $f \in \Cont^\infty(\R)$.
+    \item Für $0 < \alpha < 2$ ex. nur die Momente $\IInt{\abs{x}^\delta}{F(x)}$ für $0 < \delta < \alpha$.
+  \end{itemize}
+\end{bemn}
+
+% Vorlesung vom 1.2.2016
+
+% §5.6. Monte-Carlo-Tests (Simulationstests)
+\subsection{Monte-Carlo-Tests (Simulationstests)}
+
+Wir betrachten ein parametrisches Modell mit Parametermenge~$\Theta$.
+Angenommen, $X$ ist ein zufälliges Merkmal mit $P_X \in \Set{P_\theta}{\theta \in \Theta}$ und $X^{(n)} = (X_1, \ldots, X_n)$ eine mathematische Stichprobe von~$S$.
+
+\begin{ziel}
+  Konstr. eines $\alpha$-Tests für \testh{$H_0 : \theta \in \Theta_0 \subset \Theta$ vs. $H_1 : \theta \not\in \Theta_0$} mittels einer Teststatistik $T^{(n)}(X_1, \ldots, X_n)$.
+\end{ziel}
+
+\begin{nota}
+  $
+    \arraycolsep=0.4pt
+    \begin{array}[t]{r l}
+      F_\theta^{(n)} (t) \coloneqq & \P(T^{(n)}(X_1, \ldots, X_n) \leq t) \\
+      = & P_\theta^{(n)}(\Set{x^{(n)} \in \R^n}{T^{(n)}(x_1, \ldots, x_n) \leq t})
+    \end{array}
+  $
+\end{nota}
+
+\begin{voraussetzung}
+  Es existiert ein $\theta_0 \in \Theta_0$ mit \quad
+  \inlineitem{$F_{\theta_0}^{(n)}$ ist stetig.}
+  \begin{itemize}
+    \item $F_{\Theta_0}^{(n)} (t) \leq F_\theta^{(n)} (t) \quad \forall \, t \in \R, \, \theta \in \Theta_0$
+    \item $F_{\Theta_0}^{(n)} (t) \geq F_\theta^{(n)} (t) \quad \forall \, t \in \R, \, \theta \in \Theta \setminus \Theta_0$
+  \end{itemize}
+\end{voraussetzung}
+
+\begin{bem}
+  Die zweite Bedingung ist für $\Theta_0 = \{ \theta_0 \}$ trivial.
+\end{bem}
+
+\begin{test}
+  Sei $F_{\theta_0}^{-1}$ die Quantilfkt zu $F^{(n)}_{\theta_0}$.
+  Wir verwenden die Regel
+  $
+    \varphi^{(n)} (x_1, \ldots, x_n) \coloneqq \begin{cases}
+      1 & \text{falls } T^{(n)} (x_1, \ldots, x_n) > F_{\theta_0}^{-1}(1-\alpha), \\
+      0 & \text{falls } T^{(n)} (x_1, \ldots, x_n) \leq F_{\theta_0}^{-1}(1-\alpha)
+    \end{cases}.
+  $
+\end{test}
+
+\begin{lem}
+  $\varphi^{(n)}$ ist ein unverfälschter $\alpha$-Test.
+\end{lem}
+
+\begin{problem}
+  Die VF $F_{\theta_0}^{(n)}$ ist oft zu komplex, um sie explizit zu berechnen.
+  Gleiches gilt dann auch für $F_{\theta_0}^{-1}$.
+\end{problem}
+
+\begin{verf}[\emph{Monte-Carlo-Test}]
+  \begin{itemize}
+    \item Erzeugung von $N$ Realisierungen $x_1^{(n)}, \ldots, x_N^{(n)}$ gemäß der Verteilung~$P_{\theta_0}^{(n)}$.
+    \item Berechnen der Ordnungsstatistik $T_{N-k+1 : N}^{(n)}$ von $T^{(n)}(x_i^{(n)})$. \\
+    (Dies ist eine Schätzung von $F_{\theta_0}^{-1}(1 - \alpha)$ mit $\alpha = \nicefrac{k}{N+1}$.)
+    \item Die Entscheidungsregel des MC-Tests ist
+    \[
+      \varphi(x^{n}; x_1^{(n)}, \ldots, x_N^{(n)}) = \begin{cases}
+        1 & \text{falls } T^{(n)} (x^{(n)}) > T_{N-k+1 : N}^{(n)}, \\
+        0 & \text{falls } T^{(n)} (x^{(n)}) \leq T_{N-k+1 : N}^{(n)}
+      \end{cases}
+    \]
+  \end{itemize}
+\end{verf}
+
+% ausgelassen: Bemerkung zum praktischen Vorgehen
+
+\begin{lem}
+  Der MC-Test ist ein unverfälschter $\alpha$-Test.
+\end{lem}
 
 \end{document}
 
