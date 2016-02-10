@@ -31,8 +31,9 @@
 \newcommand{\Uniform}{\mathcal{R}} % Gleichverteilung
 \DeclareMathOperator{\Cum}{Cum} % Kumulante
 \DeclareMathOperator{\rk}{rk} % Rang einer Matrix
-\DeclareMathOperator{\MISE}{MISE} % mean integrated squared error
 \DeclareMathOperator{\MSE}{MSE} % mean squared error
+\DeclareMathOperator{\MASE}{MASE} % mean averaged squared error
+\DeclareMathOperator{\MISE}{MISE} % mean integrated squared error
 \DeclareMathOperator{\Graph}{Graph} % Funktionsgraph
 
 \DeclareMathOperator{\var}{Var} % Varianz
@@ -1655,7 +1656,7 @@ $T = 0,652$, damit Annahme von $H_0$
 \end{nota}
 
 \begin{defn}
-  Seien Messstellen $a \leq x_1 < x_2 < \ldots < x_n \leq b$ gewählt. \\
+  Seien \textit{Messstellen} $a \leq x_1 < x_2 < \ldots < x_n \leq b$ gewählt. \\
   Der \emph{Gasser-Müller-Schätzer} mit \textit{Bandweite} $h_n > 0$ ist
   \[
     \hat{\mu}^{\text{(GM)}}_n(x) \coloneqq \tfrac{1}{n h_n} \sum_{i=1}^n Y_i \Int{s_{i-1}}{s_i}{K(\tfrac{x-s}{h_n})}{s}, \quad
@@ -1702,31 +1703,45 @@ Für Modell II gibt es folgenden Kernschätzer:
     & \xra[n \to \infty]{} \mu(x) \qquad
     \text{(bei $h_n \to 0$, $h_n \cdot n \to \infty$ für $n \to \infty$)}
   \end{align*}
-  \TODO{Stimmt das? Was sind die genauen Voraussetzungen?}
+  % genauer in Helmut Pruscha, Vorlesungen über Mathematische Statistik, S. 312f
 \end{motivation}
 
 \begin{defn}
-  \begin{minipage}[t]{0.8 \linewidth}
-    $\mathrm{MASE}(\hat{\mu}_n) = \tfrac{1}{n} \sum_{i=1}^n \MSE(\hat{\mu}_n (x_i))$, \\
-    $\mathrm{MSE}(\hat{\theta}_n) = \E (\hat{\theta}_n - \theta)^2 = \var(\hat{\theta}_n) + (\E (\hat{\theta} - \theta))^2$
-  \end{minipage}
+  %\begin{minipage}[t]{0.8 \linewidth}
+    $\MSE(\hat{\theta}_n) = \E (\hat{\theta}_n - \theta)^2$ heißt \textit{mean squared error},
+    $\MASE(\hat{\mu}_n) = \tfrac{1}{n} \sum_{i=1}^n \MSE(\hat{\mu}_n (x_i))$
+     heißt \textit{mean averaged squared error}
+  %\end{minipage}
 \end{defn}
 
-\TODO{Wofür steht MASE?}
+\begin{bem}
+  Es gilt \enspace
+  $\MSE(\hat{\theta}_n) = \var(\hat{\theta}_n) + (\underbrace{\E (\hat{\theta} - \theta)}_{\text{\emph{Bias}}})^2$
+\end{bem}
 
 \begin{satz}
-  Unter den Bedingungen (*), (**), $K(x) = 0$ für $\abs{x} > 1$, $a=0$, $b=1$, $\abs{K(x) - K(x')} \leq L \abs{x - x'}$, $h_n \downarrow 0$, $n h_n \to \infty$, $\mu \in \Cont^2(\cinterval{0}{1})$, $x = (i - \tfrac{1}{2}) / n$, $i = 1, \ldots, n$.
+  Seien die Annahmen des Modell I erfüllt und $\mu \in \Cont^2(\cinterval{0}{1})$.
+  Die Messstellen seien $x_i = \nicefrac{(i - \nicefrac{1}{2})}{n}$ für $i = 1, \ldots, n$.
+  Der Kern~$K$ sei Lipschitz-stetig und es gelte $\supp K \subseteq \cinterval{-1}{1}$.
+  Angenommen, $h_n \downarrow 0$, $n h_n \to \infty$ für $n \to \infty$.
   Dann gilt für den Gasser-Müller-Schätzer:
-  \[
-    \E \hat{\mu}_n(x) = \mu(x) + \tfrac{h_n^2}{2} \Int{0}{1}{x^2 K(x)}{x} \mu''(x) + o(h_n^2) + O(\tfrac{1}{n})
-  \]
-  \[
-    \mathrm{MSE(\hat{\mu}(x))} = \tfrac{\sigma^2}{n h_n} \Int{0}{1}{K^2 (x)}{x} + \tfrac{h_n^4}{4} \IInt{x^2 K(x)}{x} (\mu''(x))^2 + o(\tfrac{1}{n h_n}) + o(h_n^4)
-  \]
+  \begin{align*}
+    \E \hat{\mu}_n(x) - \mu(x) & = \tfrac{h_n^2}{2} \IInt{x^2 K(x)}{x} \mu''(x) + o(h_n^2) + O(\tfrac{1}{n}) \\
+    \var \hat{\mu}_n (x) & = \tfrac{1}{n h_n} \sigma^2 \IInt{K^2(x)}{x} + O(\tfrac{1}{n^2 h_n^2})
+  \end{align*}
   % ausgelassen: "optimal" = ?
 \end{satz}
+% siehe Helmut Pruscha, Vorlesungen über Mathematische Statistik, S. 314ff
 
-\TODO{Was sind (*) und (**)?}
+\begin{kor}
+  $
+    \arraycolsep=0.2pt
+    \begin{array}[t]{r l}
+      \MSE(\hat{\mu}(x)) = & \tfrac{\sigma^2}{n h_n} \IInt{K^2 (x)}{x} + \tfrac{h_n^4}{4} \left( \IInt{x^2 K(x)}{x} \cdot \mu''(x) \right)^2 \\
+      & + o(\tfrac{1}{n h_n} + h_n^4)
+    \end{array}
+  $
+\end{kor}
 
 % Vorlesung vom 7.1.2016
 
@@ -1795,12 +1810,13 @@ Für Modell II gibt es folgenden Kernschätzer:
   \emph{MISE} (\textit{mean integrated squared error}) von $\hat{f}_n$ bzgl. $f$.
 \end{defn}
 
+% Original-Paper: http://math.sjtu.edu.cn/faculty/chengwang/files/2015fall/1.pdf
 \begin{satz}[Freedman, Diaconis]
-  Sei $f : \R^1 \to \R^1$ eine Dichtefkt mit
+  Sei $f : \R \to \R$ eine Dichtefkt mit
   \begin{enumerate}[label=(\roman*), itemindent=10pt]
-    \item $f \in L^2(\R^1)$ und $f$ absolut stetig, \dh{} f.\,ü. diff'bar,
-    \item $f' \in L^2(\R^1)$ und $f'$ absolut stetig, \dh{} f.\,ü. diff'bar und
-    \item $f'' \in L^p(\R^1)$ für ein $p \in \cinterval{1}{2}$.
+    \item $f \in L^2(\R)$ und $f$ absolut stetig, \dh{} f.\,ü. diff'bar,
+    \item $f' \in L^2(\R)$ und $f'$ absolut stetig, \dh{} f.\,ü. diff'bar und
+    \item $f'' \in L^p(\R)$ für ein $p \in \cinterval{1}{2}$.
   \end{enumerate}
   Wir schreiben
   \[
@@ -1808,15 +1824,23 @@ Für Modell II gibt es folgenden Kernschätzer:
     \beta \coloneqq \frac{3}{2 \sqrt[3]{6}} \gamma^{\nicefrac{1}{3}}, \quad
     \gamma \coloneqq \Int{\R^1}{}{(f'(t))^2}{t}.
   \]
-  Dann gilt \enspace
-  $\min_{h = h_n > 0} \Delta_n^2 = \tfrac{\beta}{n^{\nicefrac{2}{3}}} + O \left( \tfrac{1}{n^{\nicefrac{2}{3}}} \right)$. \\
+  Gelte $\gamma > 0$.
+  Dann ist \enspace
+  $\min_{h = h_n > 0} \Delta_n^2 = \tfrac{\beta}{n^{\nicefrac{2}{3}}} + O \left( \tfrac{1}{n} \right)$. \\
   Das Minimum wird angenommen für \enspace
-  $h_n = \tfrac{\alpha}{\sqrt[3]{n}} + O \left( \tfrac{1}{\sqrt[3]{n}} \right)$.
+  $h_n = \tfrac{\alpha}{\sqrt[3]{n}} + O \left( \tfrac{1}{\sqrt{n}} \right)$.
 
-  Falls nur (i) und $\gamma > 0$ erfüllt ist, so gilt
-  $\min_{\mathclap{h = h_n > 0}} \Delta_n^2 = \tfrac{\beta}{n^{\nicefrac{2}{3}}} + o \left( \tfrac{1}{n^{\nicefrac{2}{3}}} \right)$. \\
-  Das Minimum wird dann bei $h_n = \tfrac{\alpha}{\sqrt[3]{n}} + o \left( \tfrac{1}{\sqrt[3]{n}} \right)$ angenommen.
+  Angenommen, es gilt nur (i), $f' \in L^2(\R)$ und $\gamma > 0$.
+  Dann gilt
+  \[
+    \min_{h = h_n > 0} \Delta_n^2 = \tfrac{\beta}{n^{\nicefrac{2}{3}}} + o \left( \tfrac{1}{n^{\nicefrac{2}{3}}} \right)
+    \quad \text{mit Minimum bei} \quad
+    h_n = \tfrac{\alpha}{\sqrt[3]{n}} + o \left( \tfrac{1}{\sqrt[3]{n}} \right).
+  \]
 \end{satz}
+
+% §5.3. Kerndichteschätzer
+\subsection{Kerndichteschätzer}
 
 \begin{defn}
   Sei $K \in L^1(\R)$ eine Fktn mit $\IInt{K(t)}{t} = 1$ und $(h_n)_{n \in \N}$ eine Folge in $\ointerval{0}{\infty}$ mit $h_n \downarrow 0$.
@@ -1967,8 +1991,6 @@ Für Modell II gibt es folgenden Kernschätzer:
 \begin{satz}[H. Müntz]
   Sei $K : \R \to \R$ eine Fkt mit $\IInt{x^{n_i} K(x)}{x} = 0$ für $0 < n_1 < n_2 < \ldots$ mit ${\sum}_{i=1}^\infty \tfrac{1}{n_i} = \infty$, $\supp(K) = \cinterval{a}{b}$, $K \in \Cont \cinterval{a}{b}$. Dann gilt $K \equiv 0$.
 \end{satz}
-
-\TODO{Fehlt im letzten Abschnitt eine Zwischenüberschrift?}
 
 % 5.4 Orthogonale Schätzer für W-Dichten
 \subsection{Orthogonale Schätzer für W-Dichten}
