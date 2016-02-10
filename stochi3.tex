@@ -1865,11 +1865,11 @@ Für Modell II gibt es folgenden Kernschätzer:
   Sei $K \in L^2(\R)$ und $(h_n)_{n \in \N}$ eine Folge mit $h_n \downarrow 0$ für $n \to \infty$.
   Angenommen, $n \cdot h_n \xra[n \to \infty]{} \infty$.
   Dann gilt:
-  \begin{itemize}
-    \item $\E_f \hat{f}_n(t) \xra[n \to \infty]{} f(t) \quad \forall \, t \in C$,
-    \item $n \cdot h_n \cdot \var_f (\hat{f}_n(t)) \xra[n \to \infty]{} f(t) \cdot \IInt{K^2(x)}{x} \quad \forall \, t \in C$,
-    \item $\sup_{t \in \R} \E_f \left( \hat{f}_n(t) - f(t) \right)^2 \xra[n \to \infty]{} 0$, falls $f$ glm. stetig auf $\R$.
-  \end{itemize}
+  \begin{align*}
+    \E_f \hat{f}_n(t) & \xra[n \to \infty]{} f(t) \quad \forall \, t \in C, \\
+    n \cdot h_n \cdot \var_f (\hat{f}_n(t)) & \xra[n \to \infty]{} f(t) \cdot \IInt{K^2(x)}{x} \quad \forall \, t \in C, \\
+    \sup_{t \in \R} \E_f \left( \hat{f}_n(t) - f(t) \right)^2 & \xra[n \to \infty]{} 0, \quad \text{falls $f$ glm. stetig auf $\R$.}
+  \end{align*}
 \end{satz}
 
 \begin{satz}
@@ -2062,59 +2062,96 @@ Eigenschaften des Schätzers $\hat{f}_n$:
 
 % Im Skript von Lichtenstern kommt hier noch ein Satz von E. Liebscher
 
-% §6. Simulation von Zufallszahlen und Simulationstests
-\section{Simulation von Zufallszahlen und Simulationstests}
+% §6. Erzeugung von Zufallszahlen und Simulationstests
+\section{Erz. von Zufallszahlen und Simulationstests}
 
 % §6.1. Erzeugung von nach einer VF verteilter Zufallszahlen
 
-1. Möglichkeit: Quantilfunktionen, Inversionsmethode
+\begin{ziel}
+  Erzeugung von nach einer VF~$F$ verteilten Zufallszahlen
+\end{ziel}
 
-Sei $F$ eine VF auf $\R^1$.
-Dann heißt die Funktion $F^{-} : \cinterval{0}{1} \to \cointerval{-\infty}{\infty}$ mit $F^{-}(y) \coloneqq \min \Set{x \in \R^1}{F(x) \geq y}$ für $y \in \ocinterval{0}{1}$, $F^{-}(0) = \lim_{y \downarrow 0} F^{-}(y)$ \emph{Quantilfunktion} oder (verallgemeinerte) \emph{Pseudo-Inverse} zu~$F$.
+\begin{defn}
+  Sei $F$ eine VF auf $\R^1$.
+  Dann heißt $F^{-} : \cinterval{0}{1} \to \cointerval{-\infty}{\infty}$ mit
+  \[
+    F^{-}(y) \coloneqq \min \Set{x \in \R^1}{F(x) \geq y}
+    \text{ für } y \in \ocinterval{0}{1}, \quad
+    F^{-}(0) = \lim_{y \downarrow 0} F^{-}(y)
+  \]
+   \emph{Quantilfunktion} oder (verallgemeinerte) \emph{Pseudo-Inverse} zu~$F$.
+\end{defn}
 
-Eigenschaften:
+\begin{eign}
+  \begin{itemize}
+    \item $F^{-}$ ist monoton und linksseitig stetig.
+    \miniitem{0.48 \linewidth}{$F(F^{-}(y)) \geq y \enspace \forall \, y \in \cinterval{0}{1}$}
+    \miniitem{0.48 \linewidth}{$U \sim \Uniform \cinterval{0}{1}$ $\implies$ $F^{-}(U) \sim F$}
+  \end{itemize}
+\end{eign}
 
-\begin{itemize}
-  \item $F^{-}$ ist monoton und linksseitig stetig
-  \item $F(F^{-}(y)) \geq y$ für alle $y \in \cinterval{0}{1}$
-  \item $U \sim \Uniform \cinterval{0}{1}$ $\implies$ $F^{-}(U) \sim F$.
-  Falls $(U_i)_{i \in \N}$ eine Folge unabhängiger gleichverteilter Zufallszahlen auf $\cinterval{0}{1}$ sind, dann ist $(F^{-}(U_i))_{i \in \N}$ eine Folge $F$-verteilter Zufallszahlen.
-\end{itemize}
+\begin{verf}[\emph{Inversionsmethode}]
+  Ist $(U_i)_{i \in \N}$ eine Folge unabhängiger gleichverteilter Zufallszahlen auf $\cinterval{0}{1}$, dann ist $(F^{-}(U_i))_{i \in \N}$ eine Folge $F$-verteilter Zufallszahlen.
+\end{verf}
 
 % Vorlesung vom 25.1.2016
 
 % §6.2. Erzeugung von Zufallszahlen über Transformation
+\subsection{Erzeugung von Zufallszahlen über Transformation}
 
-1. Verwerfungsmethode (rejection method)
-
-Voraussetzung: $X$ besitze eine Dichte $f$ mit einem beschränkten Träger $\subseteq \cinterval{a}{b}$ und $f(x) \leq M$ für alle $x \in \cinterval{a}{b}$.
-Wir erzeugen Zufallszahlen $V_1 = a + (b-a) U_1 \sim \Uniform \cinterval{a}{b}$ und $V_2 = M U_2$.
-Wir nehmen $X \coloneqq V_1$ falls $(V_1, V_2) \in \Graph(f) \iff V_2 \leq f(V_1)$, andernfalls wiederholen wir das Verfahren mit neuen Werten~$V_1$ und~$V_2$.
+% 1. Verwerfungsmethode (rejection method)
+\begin{verf}[\emph{Verwerfungsmethode}]
+  Angenommen, $X$ besitze eine Dichte $f$ mit beschr. Träger $\supp f \subseteq \cinterval{a}{b}$ und $\sup f(x) \leq M$.
+  Wir erzeugen unabh. Zufallszahlen $U_1, U_2 \sim \Uniform \cinterval{0}{1}$ und setzen
+  \[
+    V_1 = a + (b-a) U_1 \sim \Uniform \cinterval{a}{b}
+    \quad \text{und} \quad
+    V_2 = M U_2 \sim \Uniform \cinterval{0}{M}.
+  \]
+  Wir nehmen $X \coloneqq V_1$ falls $(V_1, V_2) \in \Graph(f) \iff V_2 \leq f(V_1)$, andernfalls beginnen wir mit neuen Werten~$V_1$ und~$V_2$ von vorn.
+\end{verf}
 
 % Ausgelassen: Beweis
 
-2. Box-Muller-Verfahren
+\begin{verf}[\emph{Box-Muller}] \mbox{} \\
+  Seien $U_1, U_2 \sim \Uniform \cinterval{0}{1}$ unabhängig.
+  Dann sind auch unabhängig:
+  \begin{align*}
+    X_1 & \coloneqq g_1(U_1, U_2) \coloneqq \sqrt{- 2 \log U_1} \sin(2 \pi u_2) \sim \Normal(0, 1), \\
+    X_2 & \coloneqq g_2(U_1, U_2) \coloneqq \sqrt{- 2 \log U_1} \cos(2 \pi U_2) \sim \Normal(0, 1)
+  \end{align*}
+\end{verf}
 
-Seien $U_1, U_2 \sim \Uniform \cinterval{0}{1}$ unabhängig.
-Dann sind $X_1 \coloneqq g_1(U_1, U_2) \coloneqq \sqrt{- 2 \log U_1} \sin(2 \pi u_2) \sim \Normal(0, 1)$, $X_2 \coloneqq g_2(U_1, U_2) \coloneqq \sqrt{- 2 \log U_1} \cos(2 \pi U_2) \sim \Normal(0, 1)$ unabhängig.
-
-Allgemein sei $h = \begin{psmallmatrix} h_1 \\ h_2 \end{psmallmatrix}$ die Umkehrfunktion von $g = \begin{psmallmatrix}
-  g_1 \\ g_2
-\end{psmallmatrix}$, also $\begin{psmallmatrix}
-  u_1 \\ u_2
-\end{psmallmatrix} = \begin{psmallmatrix}
-  h_1(X_1, X_2) \\ h_2(X_1, X_2)
-\end{psmallmatrix}$.
-Dann gilt $f_{(X_1, X_2)}(x_1, x_2) = \frac{f_{U_1, U_2}(h_1(x_1, x_2), h_2(x_1, x_2))}{\det(J_g (h_1(x_1, x_2), h_2(x_1, x_2)))}$,
+\begin{bem}
+  Allgemein sei $h = \begin{psmallmatrix} h_1 \\ h_2 \end{psmallmatrix}$ die Inverse von $g = \begin{psmallmatrix} g_1 \\ g_2 \end{psmallmatrix}$.
+  Dann gilt
+  \[
+    f_{(X_1, X_2)}(x_1, x_2) = \frac{f_{U_1, U_2}(u_1, u_2)}{\det(J_g (u_1, u_2))}
+    \quad \text{mit} \quad
+    \begin{psmallmatrix}
+      u_1 \\ u_2
+    \end{psmallmatrix} = \begin{psmallmatrix}
+      h_1(x_1, x_2) \\ h_2(x_1, x_2)
+    \end{psmallmatrix}
+  \]
 wobei $J_g (x, y)$ die Jacobi-Matrix von~$g$ im Punkt $(x, y)$ ist.
+\end{bem}
 
 % Ausgelassen: Rechnung für Box-Muller
 
-Erzeugung eines $n$-dim. ZV $\Normal(n)(m, S)$, $m \in \R^n$, $S \in \R^{n \times n}$ Kovarianzmatrix, positiv semidefinit und symmetrisch.
-Mit Cholesky-Zerlegung bekommt man eine untere Dreiecksmatrix $L \in \R^{n \times n}$ mit $S = L \cdot L^T$.
-
-$Y = (Y_1, \ldots, Y_n)^T \coloneqq m + X \cdot X L^T$, $X = (X_1, \ldots, X_n)$, $X_1, \ldots, X_n \sim \Normal(0, 1)$ \iid{}.
-Dann ist $\cov(Y) = \cov(X L^T) = L \cov(X) L^T = L L^T = S$.
+\begin{verf}[Erzeugung eines $n$-dim. ZV $Y \sim \Normal_n(m, S)$] \mbox{} \\
+  Sei $m \in \R^n$ und $S \in \R^{n \times n}$ eine Kovarianzmatrix, \dh{} positiv semidefinit und symmetrisch.
+  Mit Cholesky-Zerlegung bekommt man eine untere Dreiecksmatrix $L \in \R^{n \times n}$ mit $S = L \cdot L^T$. \\
+  Wir erzeugen \iid{} Zufallszahlen $X_1, \ldots, X_n \sim \Normal(0, 1)$ und setzen
+  \[
+    Y = (Y_1, \ldots, Y_n)^T \coloneqq m + X L^T, \quad
+    X = (X_1, \ldots, X_n).
+  \]
+  Dann gilt $X \sim \Normal_n(0, I_n)$ und $Y \sim \Normal_n(m, \cov(Y))$ mit
+  \[
+    \cov(Y) = \cov(X L^T) = L \cov(X) L^T = L L^T = S.
+  \]
+\end{verf}
 
 \end{document}
 
