@@ -1619,7 +1619,7 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
       u & = & g & \text{auf } \bOmega.
     \end{array} \right.
   \]
-  Angenommen, $g \in \Cont(\bOmega) \cap L^2(\Omega)$ besitzt eine Fortsetzung $\tilde{g} \in \Cont^2(\Omega) \cap \Cont(\cOmega)$ mit $\tilde{g}|_{\bOmega} = g$.
+  Angenommen, $g \in \Cont(\bOmega) \cap L^2(\bOmega)$ besitzt eine Fortsetzung $\tilde{g} \in \Cont^2(\Omega) \cap \Cont(\cOmega)$ mit $\tilde{g}|_{\bOmega} = g$.
   Dann ist $u \in \Cont^2(\Omega) \cap \Cont(\cOmega)$ genau dann eine Lösung von (RWP\tss{2}), wenn $v \coloneqq u - \tilde{g}$ eine Lösung von
   \[
     \text{\probl{(RWP\tss{2})'}} \quad
@@ -1636,7 +1636,7 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
     = \enspace & \IntOmega{f \cdot \phi}{x} + \IntOmega{(A(x) \DO \tilde{g} \cdot \DO \phi + b \cdot \DO \tilde{g} \phi + c \tilde{g} \phi)}{x} \quad
     \forall \, \phi \in H_0^1(\Omega).
   \end{align*}
-  Voraussetzungen: $a_{ij}, b_i, c \in L^\infty(\Omega)$, $f \in L^2(\Omega)$, $\tilde{g} \in \Cont(\cOmega) \cap H^1(\Omega)$ und $g \in L^2(\Omega)$.
+  Voraussetzungen: $a_{ij}, b_i, c \in L^\infty(\Omega)$, $f \in L^2(\Omega)$, $\tilde{g} \in \Cont(\cOmega) \cap H^1(\Omega)$ und $g \in L^2(\bOmega)$.
   Ges. ist ein $u \in U \coloneqq \Set{w \in H^1(\Omega)}{\tau(w) = g}$ mit
   % Dabei ist $\tau : H^1(\Omega) \to L^2(\bOmega)$ der Spuroperator
   \[
