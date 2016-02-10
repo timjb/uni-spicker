@@ -52,15 +52,17 @@
 
 \begin{document}
 
+\raggedcolumns % stretche Inhalt nicht über die gesamte Spaltenhöhe
+
 \maketitle{Zusammenfassung Stochastik 3}
 
 % Vorlesung vom 12.10.2015
 
 \section{Hypothesentests mittels Stichprobenfktn}
 
-% 1. Wiederholung
+% §1. Wiederholung
 
-% 1.1 Grundbegriffe der Testtheorie
+% §1.1 Grundbegriffe der Testtheorie
 
 \begin{modell}
   Gegeben sei ein parametrisches Modell, \dh eine Zufallsgröße $X$, deren Verteilungsfunktion $P_X \in \Set{P_\vartheta}{\vartheta \in \Theta \subset \R^n}$ von einem Parameter $\vartheta$ abhängt.
@@ -200,7 +202,7 @@
   \]
   Dabei ist $S_n$ die \emph{(korrigierte) Stichprobenvarianz}.
   Man kann zeigen, dass $\hat{T}(X_1, \ldots, X_n) \sim t_{n-1}$ unter $H_0$.
-  Dabei ist $t_m$ die \emph{Student'sche $t$-Verteilung} mit $m$ Freiheitsgraden (siehe unten). \\
+  Dabei ist $t_m$ die \emph{Student'sche $t$-Verteilung} mit $m$ \textit{Freiheitsgraden} (siehe unten). \\
   Der Ablehnungsbereich ist
   \[ K_n^T = \Set{t \in \R^1}{\abs{t} > t_{n-1,1-\nicefrac{\alpha}{2}}}. \]
 \end{test}
@@ -219,16 +221,19 @@
 \end{diskussion}
 
 % 1.2. Prüfverteilung bei normalverteilten Grundgesamtheit
+\subsection{Prüfverteilung bei normalvert. Grundgesamtheit}
 
 \begin{defn}
   Es seien $X_1, \ldots, X_n \sim \Normal(0, 1)$.
-  Dann heißt die Summe $X_1^2 + \ldots + X_n^2 \sim \chi_n^2$ \emph{Chi-Quadrat-verteilt} mit $n$ Freiheitsgraden.
+  Dann heißt die Summe $X_1^2 + \ldots + X_n^2 \sim \chi_n^2$ \emph{Chi-Quadrat-verteilt} mit $n$ \textit{Freiheitsgraden}.
 \end{defn}
 
 \begin{defn}
   Falls $X \sim \Normal(0,1)$ und $Y_n \sim \chi_n^2$ unabhängig sind, so heißt
-  \[ \tfrac{X}{\sqrt{\tfrac{Y_n}{n}}} \sim t_n \]
-  \emph{$t$-verteilt} mit $n$-Freiheitsgraden.
+  \[
+    \tfrac{X}{\sqrt{\nicefrac{Y_n}{n}}} \sim t_n
+    \qquad \text{\emph{$t$-verteilt} mit $n$-Freiheitsgraden.}
+  \]
 \end{defn}
 
 \begin{lem}
@@ -242,8 +247,10 @@
 \begin{defn}
   Seien $Y_{n_i} \sim \chi_{n_i}^2$, $i = 1, 2$ zwei unabhängige ZGen.
   Dann heißt %der Quotient
-  \[ \tfrac{Y_{n_1} / n_1}{Y_{n_2} / n_2} \sim F_{n_1, n_2} \]
-  \emph{F-verteilt} (wie Fisher) mit $(n_1, n_2)$ Freiheitsgraden.
+  \[
+    \tfrac{Y_{n_1} / n_1}{Y_{n_2} / n_2} \sim F_{n_1, n_2} \quad
+    \text{\emph{F-verteilt} (\textit{Fisher}) mit $(n_1, n_2)$ Freiheitsgraden.}
+  \]
   % auch: Suedecor-verteilt
 \end{defn}
 
@@ -252,7 +259,7 @@
 \begin{test}
   Sei $X \sim \Normal(\mu, \sigma^2)$ mit $\mu$ unbekannt. \\
   Wir testen \testh{$H_0 : \sigma = \sigma_0$ vs. $H_1 : \sigma \neq \sigma_0$} mit
-  \[ T \coloneqq \tfrac{n-1}{\sigma_0^2} S_n^2 \]
+  $T \coloneqq \nicefrac{(n-1)}{\sigma_0^2} S_n^2$. \\
   Unter Annahme von $H_0$ gilt $T \sim \chi_{n-1}^2$.
   Falls $\mu$ bekannt ist, muss
   \[
@@ -301,13 +308,17 @@
     % Nenner ausgeschrieben: \sqrt{\tfrac{1}{n-1} \sum_{i=1}^n (X_i - \overline{X}_n)^2 \tfrac{1}{n-1} \sum_{i=1}^n (Y_i - \overline{Y}_n)^2}
   \]
   Falls $H_0$ richtig ist, so gilt $T \sim t_{n-2}$. \\[2pt]
+\end{test}
+
+\begin{bem}
   Um \testh{$H_0 : \rho = \rho_0 \in \ointerval{-1}{1}$ vs. $H_1 : \rho \neq \rho_0$} zu testen, kann man
   \[ T = \tfrac{\sqrt{n-3}}{2} \left( \log \tfrac{1 + \hat{\rho}_n}{1 - \hat{\rho}_n} - \log \tfrac{1+\rho_0}{1-\rho_0} \right) \]
   verwenden.
   Für $n$ groß gilt approx. $T \sim \Normal(0, 1)$ unter $H_0$.
-\end{test}
+\end{bem}
 
-% 1.4. Lemma von Slutzky und varianzstabilisiernde Transformationen
+% §1.4. Lemma von Slutzky und varianzstabilisiernde Transformationen
+\subsection{Lemma von Slutzky und varianzstab. Trafos}
 
 \begin{lem}[\emph{Slutzky}]
   Seien $(X_n)$, $(Y_n)$ Folgen von ZGn über $(\Omega, \Alg, \P)$ mit $X_n \xra[n \to \infty]{\P} c = \text{const}$ (\dh{} $\fa{\epsilon > 0} \P(\abs{X_n - c} > \epsilon) \to 0$) und $Y_n \xra[n \to \infty]{d} Y$ (\dh{} $\P(Y_n \leq y) \to \P(Y \leq y)$ für alle Stetigkeitspunkte $y$ der VF $y \mapsto \P(Y \leq y)$). Dann gilt:
@@ -362,42 +373,6 @@
   \end{itemize}
 \end{bspe}
 
-% 1.5. Mehrdimensionale Normalverteilung
-
-\begin{defn}
-  Die $k$-dim \emph{(Gaußsche) Normalverteilung} $\Normal_k(m, C)$ mit EW~$m \in \R^k$ und einer nichtnegativ-definiten, symmetrischen Kovarianzmatrix~$C \in \R^{k \times k}$ ist gegeben durch die Dichte
-  \[ f_{\Normal_k(m, C)}(x) \coloneqq \tfrac{1}{(2\pi)^{k/2} \sqrt{\det(C)}} \exp \left( - \tfrac{1}{2} (x-m) C^{-1} (x-m)^T \right). \]
-\end{defn}
-
-\begin{bem}
-  Bei $k=2$ schreibt man oft
-  \[
-    C = \begin{psmallmatrix}
-      \sigma_1^2 & \sigma_1 \sigma_2 \rho \\
-      \sigma_1 \sigma_2 \rho & \sigma_2^2
-    \end{psmallmatrix}
-    \quad \text{mit} \quad
-    \rho \coloneqq \cor(X_1, X_2).
-  \]
-\end{bem}
-
-\begin{defn}
-  Die \emph{charakteristische Fkt} eines ZV $X = (X_1, \ldots, X_k)^T$ ist
-  \[
-    \varphi : \R^k \to \R, \enspace
-    t \mapsto \E e^{i \scp{t}{X}} = \Int{\R^k}{}{e^{i (t_1 x_1 + \ldots + t_k x_k)}}{F_X(x_1, \ldots, x_k)}.
-  \]
-\end{defn}
-
-\begin{bem}
-  Die charakteristische Funktion von $\Normal_k(m, C)$ ist
-  \[ \varphi_{\Normal_k(m, C)}(t) = \exp \left( i \sum_{i=1}^k t_i m_i - \tfrac{1}{2} \sum_{i,j=1}^k t_i c_{ij} t_j \right). \]
-\end{bem}
-
-\begin{satz}
-  Für $A \in \R^{k \times l}$ gilt $\Normal_k(m, C) \cdot A = \Normal_l(m \cdot A, A^T C A)$.
-\end{satz}
-
 % Vorlesung vom 26.10.2015
 
 % 2. Anpassungstests und weitere nichtparametrische Tests
@@ -446,8 +421,6 @@
   Die Nullhypothese $H_0 : F = F_0$ wird genau dann verworfen, wenn $T_{n,s+1} > \chi^2_{s,1-\alpha}$.
 \end{entscheidungsregel}
 
-\begin{samepage}
-
 \begin{bemn}
   \begin{itemize}
     \item $T_{n,s+1}$ misst eigentlich nicht die Abweichung von der VF~$F_0$, sondern von der Multinomialverteilung $\MN(n, p^{(0)})$.
@@ -470,8 +443,6 @@
 
 % 2.2. Chi-Quadrat-Unabhängigkeitstest, Kontingenztafeln
 \section{Chi-Quadrat-Unabhängigkeitstest}
-
-\end{samepage}
 
 \begin{ziel}
   Überprüfen, ob die Komponenten $X \in \R^{n_1}$ und $Y \in \R^{n_2}$ eines zweidim. Zufallsvektors $(X, Y)^T$ \testh{unabhängig} sind.
@@ -617,8 +588,11 @@
   \[ T_n^{+} \coloneqq \sqrt{n} \cdot \sup_{x \in \R} (\hat{F}_n(x) - F(x)). \]
   Für alle $z \in \R^1$ gilt
   \[ K_n^{+}(z) \coloneqq \P(T_n^{+} \leq z) \xra[n \to \infty]{} K^{+}(z) \coloneqq 1 - \exp(-2 \max(0, z)^2). \]
-  Wir lehnen $H_0$ ab, falls $T_n^{+} > K^+_{1-\alpha}$.
 \end{test}
+
+\begin{entscheidungsregel}
+  Ablehnung von $H_0$ $\iff$ $T_n^{+} > K^+_{1-\alpha}$
+\end{entscheidungsregel}
 
 \begin{acht}
   Der Kolmogorow-Test kann nicht verwendet werden, wenn die Parameter von $F_0$ aus der Stichprobe geschätzt werden.
@@ -626,39 +600,6 @@
 
 \begin{bem}
   Es gibt keine Entsprechung für mehrdimensionale ZVen
-\end{bem}
-
-\section{Cramér-von-Mises-Test}
-
-% Vorlesung vom 12.11.2015
-
-% Analoges Vorgehen beim Cramér-von-Mises-Test:
-
-\begin{defn}
-  $\omega_n^2(g) = n \Int{\R^1}{}{g(F(x)) \left( \hat{F}_n(x) - F(x) \right)^2}{F(x)}$ \\
-  heißt gewichtete \emph{Cramér-von-Mises-Statistik} oder $\omega^2$-Statistik.
-  Dabei ist $g : \cinterval{0}{1} \to \cinterval{0}{\infty}$ eine Gewichtsfktn.
-  Häufig verwendet wird
-  $g(x) \coloneqq 1$
-  und die \emph{Anderson-Darling-Statistik} $g(x) \coloneqq \tfrac{1}{x (1-x)}$.
-\end{defn}
-
-\begin{satz}
-  Sei $F$ stetig.
-  Dann ist
-  \[
-    \omega_n^2(g) \eqqd n \Int{0}{1}{g(u) \left( \hat{G}_n(u) - u \right)^2}{u}
-    \xra[n \to \infty]{d} \Int{0}{1}{g(u) (\dot{B}(u))^2}{u} =: \omega^2(g).
-  \]
-\end{satz}
-
-\begin{entscheidungsregel}[\emph{CvM-Test}]
-  Wir testen \testh{$H_0 : F = F_0$ vs. $H_1 : F \neq F_0$} anhand der CvM-Statistik.
-  Wir lehnen $H_0$ genau dann ab, wenn $\omega_n^2(g) > \omega_{1-\alpha}^2(g)$.
-\end{entscheidungsregel}
-
-\begin{bem}
-  Der rechte Wert ist tabelliert für wichtige Funktionen $g$.
 \end{bem}
 
 % KS-(2-Stichproben)-Test
@@ -725,6 +666,37 @@
 \begin{entscheidungsregel}[\emph{Kolmogorow-(Smirnow-)2SP-Test}] \mbox{}\\
   $H_0 : F = F^*$ wird genau dann abgelehnt, falls $T_{m,n} > K_{1-\alpha}$.
 \end{entscheidungsregel}
+
+\section{Cramér-von-Mises-Test}
+
+% Vorlesung vom 12.11.2015
+
+\begin{defn}
+  $\omega_n^2(g) = n \Int{\R^1}{}{g(F(x)) \left( \hat{F}_n(x) - F(x) \right)^2}{F(x)}$ \\
+  heißt gewichtete \emph{Cramér-von-Mises-Statistik} oder $\omega^2$-Statistik.
+  Dabei ist $g : \cinterval{0}{1} \to \cinterval{0}{\infty}$ eine \textit{Gewichtsfktn}.
+  Häufig verwendet wird
+  $g(x) \coloneqq 1$
+  und die \emph{Anderson-Darling-Statistik} $g(x) \coloneqq \tfrac{1}{x (1-x)}$.
+\end{defn}
+
+\begin{satz}
+  Sei $F$ stetig.
+  Dann ist
+  \[
+    \omega_n^2(g) \eqqd n \Int{0}{1}{g(u) \left( \hat{G}_n(u) - u \right)^2}{u}
+    \xra[n \to \infty]{d} \Int{0}{1}{g(u) (\dot{B}(u))^2}{u} =: \omega^2(g).
+  \]
+\end{satz}
+
+\begin{entscheidungsregel}[\emph{CvM-Test}]
+  Wir testen \testh{$H_0 : F = F_0$ vs. $H_1 : F \neq F_0$} anhand der CvM-Statistik.
+  Wir lehnen $H_0$ genau dann ab, wenn $\omega_n^2(g) > \omega_{1-\alpha}^2(g)$.
+\end{entscheidungsregel}
+
+\begin{bem}
+  Der rechte Wert ist tabelliert für wichtige Funktionen $g$.
+\end{bem}
 
 \section{2SP-Test von Wilcoxon-Mann-Whitney} % (U-Test)
 
@@ -902,6 +874,7 @@
 % Vorlesung vom 23.11.2015
 
 % §3.2. ZGWS für (nichtentartete) U-Statistiken
+\subsection{ZGWS für U-Statistiken}
 
 \begin{satz}[\emph{Hoeffding}]
   Sei $U_n^{(m)}$ eine U-Statistik mit Kern $h : \R^m \to \R$, sodass $\E h^2(X_1, \ldots, X_m) < \infty$ und $\sigma_g^2 \coloneqq \var(g(X_1)) > 0$.
@@ -967,6 +940,8 @@
   \end{align*}
 \end{bsp}
 
+\subsection{Test auf Symmetrie der VF}
+
 \begin{defn}
   Eine VF $F$ heißt \emph{symmetrisch} bzgl. $\vartheta_0 \in \R^1$, falls
   \[
@@ -1014,6 +989,8 @@
   Ablehnung von $H_0$ $\iff$
   $\abs{U_n - \tfrac{1}{2}} > \tfrac{z_{1 - \nicefrac{\alpha}{2}}}{\sqrt{3n}}$.
 \end{entscheidungsregel}
+
+\subsection{Verallgemeinerte U-Statistiken}
 
 % Vorlesung vom 26.11.2015
 
@@ -1743,6 +1720,8 @@ Für Modell II gibt es folgenden Kernschätzer:
   $
 \end{kor}
 
+\columnbreak
+
 % Vorlesung vom 7.1.2016
 
 % §5. Dichteschätzungen
@@ -1834,10 +1813,12 @@ Für Modell II gibt es folgenden Kernschätzer:
   Dann gilt
   \[
     \min_{h = h_n > 0} \Delta_n^2 = \tfrac{\beta}{n^{\nicefrac{2}{3}}} + o \left( \tfrac{1}{n^{\nicefrac{2}{3}}} \right)
-    \quad \text{mit Minimum bei} \quad
+    \enspace \text{mit Minimum bei} \enspace
     h_n = \tfrac{\alpha}{\sqrt[3]{n}} + o \left( \tfrac{1}{\sqrt[3]{n}} \right).
   \]
 \end{satz}
+
+\begin{samepage}
 
 % §5.3. Kerndichteschätzer
 \subsection{Kerndichteschätzer}
@@ -1854,6 +1835,8 @@ Für Modell II gibt es folgenden Kernschätzer:
   \emph{Kerndichteschätzer} für $f$ mit \textit{Kernfunktion} $K$.
   % auch: Parzen-Rosenblatt-Schätzung
 \end{defn}
+
+\end{samepage}
 
 % Vorlesung vom 11.1.2016
 
@@ -2142,3 +2125,41 @@ Verschiedene Arten der Konvergenz von ZGn
 Charakteristische Funktionen
 Was ist Konsistenz von Schätzern?
 Summenkonvention erklären
+
+Folgendes Kapitel an passende Stelle verschieben:
+
+% 1.5. Mehrdimensionale Normalverteilung
+
+\begin{defn}
+  Die $k$-dim \emph{(Gaußsche) Normalverteilung} $\Normal_k(m, C)$ mit EW~$m \in \R^k$ und einer nichtnegativ-definiten, symmetrischen Kovarianzmatrix~$C \in \R^{k \times k}$ ist gegeben durch die Dichte
+  \[ f_{\Normal_k(m, C)}(x) \coloneqq \tfrac{1}{(2\pi)^{k/2} \sqrt{\det(C)}} \exp \left( - \tfrac{1}{2} (x-m) C^{-1} (x-m)^T \right). \]
+\end{defn}
+
+\begin{bem}
+  Bei $k=2$ schreibt man oft
+  \[
+    C = \begin{psmallmatrix}
+      \sigma_1^2 & \sigma_1 \sigma_2 \rho \\
+      \sigma_1 \sigma_2 \rho & \sigma_2^2
+    \end{psmallmatrix}
+    \quad \text{mit} \quad
+    \rho \coloneqq \cor(X_1, X_2).
+  \]
+\end{bem}
+
+\begin{defn}
+  Die \emph{charakteristische Fkt} eines ZV $X = (X_1, \ldots, X_k)^T$ ist
+  \[
+    \varphi : \R^k \to \R, \enspace
+    t \mapsto \E e^{i \scp{t}{X}} = \Int{\R^k}{}{e^{i (t_1 x_1 + \ldots + t_k x_k)}}{F_X(x_1, \ldots, x_k)}.
+  \]
+\end{defn}
+
+\begin{bem}
+  Die charakteristische Funktion von $\Normal_k(m, C)$ ist
+  \[ \varphi_{\Normal_k(m, C)}(t) = \exp \left( i \sum_{i=1}^k t_i m_i - \tfrac{1}{2} \sum_{i,j=1}^k t_i c_{ij} t_j \right). \]
+\end{bem}
+
+\begin{satz}
+  Für $A \in \R^{k \times l}$ gilt $\Normal_k(m, C) \cdot A = \Normal_l(m \cdot A, A^T C A)$.
+\end{satz}
