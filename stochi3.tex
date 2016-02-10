@@ -1787,19 +1787,20 @@ Für Modell II gibt es folgenden Kernschätzer:
 \begin{defn}
   Sei $\hat{f}_n(\blank)$ ein Dichteschätzer und $f \in \mathcal{F}_c$.
   Dann heißt
-  \begin{align*}
-    \MISE(\hat{f}_n) \coloneqq \Delta_n & \coloneqq \E_f \Int{\R}{}{(\hat{f}_n(t) - f(t))^2}{t} \\[-4pt]
-    & = \Int{\R}{}{\underbrace{\E_f (\hat{f}_n(t) - f(t))^2}_{=: \MSE(\hat{f}_n(t))}}{t}
-  \end{align*}
-  \emph{MISE} (mean integrated squared error) von $\hat{f}_n$ bzgl. $f$.
+  \[
+    \underbrace{\MISE(\hat{f}_n)}_{\Delta_n \coloneqq} \coloneqq
+    \E_f \Int{\R}{}{(\hat{f}_n(t) - f(t))^2}{t} =
+    \Int{\R}{}{\underbrace{\E_f (\hat{f}_n(t) - f(t))^2}_{=: \MSE(\hat{f}_n(t))}}{t}
+  \]
+  \emph{MISE} (\textit{mean integrated squared error}) von $\hat{f}_n$ bzgl. $f$.
 \end{defn}
 
 \begin{satz}[Freedman, Diaconis]
   Sei $f : \R^1 \to \R^1$ eine Dichtefkt mit
   \begin{enumerate}[label=(\roman*), itemindent=10pt]
-    \item $f \in L^2(\R^1)$ und $f$ absolut stetig, \dh{} f.\,ü. differenzierbar
-    \item $f' \in L^2(\R^1)$ und $f'$ absolut stetig, \dh{} f.\,ü. differenzierbar
-    \item $f'' \in L^p(\R^1)$ für ein $p \in \cinterval{1}{2}$
+    \item $f \in L^2(\R^1)$ und $f$ absolut stetig, \dh{} f.\,ü. diff'bar,
+    \item $f' \in L^2(\R^1)$ und $f'$ absolut stetig, \dh{} f.\,ü. diff'bar und
+    \item $f'' \in L^p(\R^1)$ für ein $p \in \cinterval{1}{2}$.
   \end{enumerate}
   Wir schreiben
   \[
@@ -1813,16 +1814,20 @@ Für Modell II gibt es folgenden Kernschätzer:
   $h_n = \tfrac{\alpha}{\sqrt[3]{n}} + O \left( \tfrac{1}{\sqrt[3]{n}} \right)$.
 
   Falls nur (i) und $\gamma > 0$ erfüllt ist, so gilt
-  $\min_{h = h_n > 0} \Delta_n^2 = \tfrac{\beta}{n^{\nicefrac{2}{3}}} + o \left( \tfrac{1}{n^{\nicefrac{2}{3}}} \right)$ und das Minimum wird bei $h_n = \tfrac{\alpha}{\sqrt[3]{n}} + o \left( \tfrac{1}{\sqrt[3]{n}} \right)$ angenommen.
+  $\min_{\mathclap{h = h_n > 0}} \Delta_n^2 = \tfrac{\beta}{n^{\nicefrac{2}{3}}} + o \left( \tfrac{1}{n^{\nicefrac{2}{3}}} \right)$. \\
+  Das Minimum wird dann bei $h_n = \tfrac{\alpha}{\sqrt[3]{n}} + o \left( \tfrac{1}{\sqrt[3]{n}} \right)$ angenommen.
 \end{satz}
 
 \begin{defn}
   Sei $K \in L^1(\R)$ eine Fktn mit $\IInt{K(t)}{t} = 1$ und $(h_n)_{n \in \N}$ eine Folge in $\ointerval{0}{\infty}$ mit $h_n \downarrow 0$.
   Dann heißt
   \[
-    \hat{f}_n(t) = \hat{f}_n(X_1, \ldots, X_n; t) \coloneqq \tfrac{1}{n \cdot h_n} \sum_{i=1}^n K \left( \tfrac{X_i - t}{h_n} \right)
+    \hat{f}_n(t) =
+    \hat{f}_n(X_1, \ldots, X_n; t) \coloneqq
+    \tfrac{1}{n \cdot h_n} \sum_{i=1}^n K \left( \tfrac{X_i - t}{h_n} \right) =
+    \tfrac{1}{n} \sum_{i=1}^n K_{h_n} (X_i - t)
   \]
-  \emph{Kerndichteschätzer} für $f$ mit \emph{Kernfunktion} $K$.
+  \emph{Kerndichteschätzer} für $f$ mit \textit{Kernfunktion} $K$.
   % auch: Parzen-Rosenblatt-Schätzung
 \end{defn}
 
@@ -1866,7 +1871,7 @@ Für Modell II gibt es folgenden Kernschätzer:
   \[
     \E_f \hat{f}_n(t) = f(t) + h_n f'(t) \IInt{x K(x)}{x} + \tfrac{1}{2} h_n^2 f''(t) \IInt{x^2 K(x)}{x} + o(h_n^2).
   \]
-  wobei die Konvergenz von $o(\blank)$ sogar gleichmäßig in abgeschlossenen $t$-Intervallen ist.
+  wobei die Konvergenz von $o(\blank)$ sogar glm. in abg. $t$-Intervallen ist.
 \end{satz}
 
 \begin{ziel}
@@ -1886,36 +1891,44 @@ Für Modell II gibt es folgenden Kernschätzer:
 
 % Vorlesung vom 14.1.2016
 
-Optimale Wahl von $h_n$:
+\begin{bem}
+  Wir wollen zunächst $h_n$ irgendwie optimal wählen. \\
+  Setzen wir die beiden echten Fehlerterme gleich, also
+  \[
+    \tfrac{1}{n h_n} \IInt{K^2(x)}{x} = \tfrac{h_n^4}{4} \left( \IInt{x^2 K(x)}{x} \right) \IInt{(f''(t))^2}{t},
+  \]
+  so folgt $h_n^{*} = \tfrac{c^*}{n^{\nicefrac{1}{5}}}$ mit $c^* \coloneqq \left( \frac{4 \IInt{K(x)^2}{x}}{(\IInt{x^2 K(x)}{x})^2 \IInt{(f''(t))^2}{t}} \right)^{\nicefrac{1}{5}}$
+  und
+  \begin{align*}
+    \MISE(\hat{f}_n) = \, & \tfrac{\sqrt[5]{8}}{n^{\nicefrac{4}{5}}} \left( \IInt{(f''(t))^2}{t} \right)^{\nicefrac{1}{5}} \left( \IInt{x^2 K(x)}{x} \right)^{\nicefrac{2}{5}} \left( \IInt{K(x)^2}{x} \right)^{\nicefrac{4}{5}} \\
+    & + o(n^{- \nicefrac{4}{5}}).
+  \end{align*}
+\end{bem}
 
-Gleichsetzen der beiden echten Fehlerterme:
-
-\[
-  \tfrac{1}{n h_n} \IInt{K^2(x)}{x} = \tfrac{h_n^4}{4} \left( \IInt{x^2 K(x)}{x} \right) \IInt{(f''(t))^2}{t}
-\]
-
-Es folgt $h_n^{*} = \tfrac{c^*}{n^{\nicefrac{1}{5}}}$ mit $c^* \coloneqq \left( \frac{4 \IInt{K(x)^2}{x}}{(\IInt{x^2 K(x)}{x})^2 \IInt{(f''(t))^2}{t}} \right)^{\nicefrac{1}{5}}$
-
-und $\MISE(\hat{f}_n) = \tfrac{\sqrt[5]{8}}{n^{\nicefrac{4}{5}}} \left( \IInt{(f''(t))^2}{t} \right)^{\nicefrac{1}{5}} \left( \IInt{x^2 K(x)}{x} \right)^{\nicefrac{2}{5}} \left( \IInt{K(x)^2}{x} \right)^{\nicefrac{4}{5}} + o(n^{- \nicefrac{4}{5}})$
-
-Optimale Wahl der Kernfunktion $K$:
-
-\[
-  \IInt{x^2 K(x)}{x} \left( \IInt{K(x)^2}{x} \right)^2 \to \text{Min}
-\]
-unter der Nebenbedingung $\IInt{K(x)}{x} = 1$ und $K(x) \geq 0$.
+\begin{bem}
+  Nun wollen wir die Kernfunktion $K$ optimal wählen, also so, dass der IMSE in der letzten Gleichung möglichst klein wird. \\
+  Dazu suchen wir eine Funktion $K$, sodass
+  \[
+    \IInt{x^2 K(x)}{x} \left( \IInt{K(x)^2}{x} \right)^2
+  \]
+  minimal wird unter den Nebenbed. $\IInt{K(x)}{x} = 1$ und $K(x) \geq 0$.
+\end{bem}
 
 \begin{satz}
-  Sei $K$ eine Kernfunktion mit $\IInt{K(x)}{x} = 1$.
+  Sei $K$ eine Kernfkt mit $\IInt{K(x)}{x} = 1$.
   Dann gilt für $\alpha > 0$:
   \[
     \left( \IInt{K(x)^2}{x} \right)^\alpha \IInt{\abs{x}^\alpha \abs{K(x)}}{x} \geq \tfrac{1}{2 \alpha + 1} \left( \tfrac{\alpha + 1}{2 \alpha + 1} \right)^\alpha
   \]
-  Gleichheit gilt für $K_0(x) = \tfrac{\alpha+1}{2 \alpha} (1 - \abs{x}^\alpha) \ind_{\cinterval{-1}{1}} (x)$
+  Gleichheit gilt für $K_0(x) = \tfrac{\alpha+1}{2 \alpha} (1 - \abs{x}^\alpha) \ind_{\cinterval{-1}{1}} (x)$.
 \end{satz}
 
 \begin{defn}
-  Für $\alpha = 2$ heißt $K_0(x) \coloneqq \tfrac{3}{4} (1 - x^2) \ind_{\cinterval{-1}{1}} (x)$ \emph{Epanetschnikow-Kern}.
+  Im Speziallfall $\alpha = 2$ heißt
+  \[
+    K_0(x) \coloneqq \tfrac{3}{4} (1 - x^2) \ind_{\cinterval{-1}{1}} (x) \quad
+    \text{\emph{Epanetschnikow-Kern}}.
+  \]
 \end{defn}
 
 % Vorlesung vom 18.1.2016
@@ -1923,65 +1936,83 @@ unter der Nebenbedingung $\IInt{K(x)}{x} = 1$ und $K(x) \geq 0$.
 \begin{bem}
   Wichtige Kerne neben dem Epanetschnikow-Kern:
   \begin{itemize}
-    \item $K_N(x) = \tfrac{1}{2} \sum_{k=-N}^N e^{i 2 \pi k x} = \tfrac{\sin((2 N + 1) \pi x)}{2 \sin (\pi x)}$ für $\abs{x} \leq 1$ heißt \emph{Dirichlet-Kern}.
+    \item \emph{Dirichlet-Kern}: \enspace $K_N(x) = \tfrac{1}{2} \sum_{k=-N}^N e^{i 2 \pi k x} = \tfrac{\sin((2 N + 1) \pi x)}{2 \sin (\pi x)}$ % für $\abs{x} \leq 1$ 
     % $1 + z + \ldots + z^N = \tfrac{z^{N+1} - 1}{z - 1}$, $z \neq 1$
-    \item $K_N(x) = \tfrac{1}{2 N} \abs{\sum_{k=0}^N e^{i k \pi x}}^2 = \tfrac{\sin^2((2 N + 1) \pi x)}{2 N \sin^2(\pi x)}$ für $\abs{x} \leq 1$ heißt \emph{Fejér-Kern}
-    \item $K(x) = (1 - \abs{x}) \ind_{\cinterval{-1}{1}}(x)$ heißt \emph{Dreieckskern}.
-    \item $K(x) = \begin{cases}
+    \item \emph{Fejér-Kern}: \enspace $K_N(x) = \tfrac{1}{2 N} \abs{\sum_{k=0}^N e^{i k \pi x}}^2 = \tfrac{\sin^2((2 N + 1) \pi x)}{2 N \sin^2(\pi x)}$ % für $\abs{x} \leq 1$
+    \item \emph{Dreieckskern}: \enspace $K(x) = (1 - \abs{x}) \ind_{\cinterval{-1}{1}}(x)$
+    \item \emph{Kosinuskern}: \enspace $K(x) = \begin{cases}
       \tfrac{\pi}{4} \cos(\tfrac{\pi}{2} x) & \abs{x} \leq 1 \\
       0 & \abs{x} > 1
     \end{cases}$
-    \item $K_\epsilon(x) = c_d \epsilon^{-d} \exp \left( - \tfrac{\epsilon^2}{\epsilon^2 - \norm{x}^2} \right) \ind_{B_\epsilon(0)}(x)$ heißt \emph{Sobolev-Kern}.
-    Es gilt $K_\epsilon \in \Cont^\infty(\R^d)$.
-    \item Kerne mit der Eigenschaft $\IInt{x^k K(x)}{x} = 0$ für $k = 1, \ldots, m - 1$ und $\IInt{\abs{x}^m K(x)}{x} < \infty$.
+    \item \emph{Sobolev-Kern}: \enspace $K_\epsilon(x) = c_d \epsilon^{-d} \exp \left( - \tfrac{\epsilon^2}{\epsilon^2 - \norm{x}^2} \right) \ind_{B_\epsilon(0)}(x)$ \\
+    Das Besondere an ihm ist $K_\epsilon \in \Cont^\infty(\R^d)$.
   \end{itemize}
 \end{bem}
 
-\begin{bem}
-  Beachte den Satz von H. Müntz:
+\begin{bemn}
+  \begin{itemize}
+    \item Es gibt Kerne mit der Eigenschaft $\IInt{x^k K(x)}{x} = 0$ für $k = 1, \ldots, m - 1$ und $\IInt{\abs{x}^m K(x)}{x} < \infty$ für $m \geq 2$.
+    \item Es gibt Kerne mit $\IInt{x^n K(x)}{x} = 0$ für alle $n \in \N$, \zB{}
+    \[
+      K(x) = \tfrac{1}{2 \pi} \Int{- \infty}{\infty}{\cos(t x) g(t)}{t}
+      \quad \text{mit} \quad
+      g(t) \coloneqq \begin{cases}
+        1 - e^{- \nicefrac{1}{t^2}} & \text{falls } t \neq 0, \\
+        1 & \text{falls } t = 0
+      \end{cases}
+    \]
+  \end{itemize}
+\end{bemn}
 
-  Sei $K : \R \to \R$ eine Funktion mit $\IInt{x^{n_i} K(x)}{x} = 0$ für $0 < n_1 < n_2 < \ldots$ mit $\sum_{i=1}^\infty \tfrac{1}{n_i} = \infty$, $\supp(K) = \cinterval{a}{b}$, $K \in \Cont \cinterval{a}{b}$. Dann gilt $K \equiv 0$.
-\end{bem}
+\begin{satz}[H. Müntz]
+  Sei $K : \R \to \R$ eine Fkt mit $\IInt{x^{n_i} K(x)}{x} = 0$ für $0 < n_1 < n_2 < \ldots$ mit ${\sum}_{i=1}^\infty \tfrac{1}{n_i} = \infty$, $\supp(K) = \cinterval{a}{b}$, $K \in \Cont \cinterval{a}{b}$. Dann gilt $K \equiv 0$.
+\end{satz}
 
-\begin{bem}
-  Es gibt Kerne mit $\Int{-\infty}{\infty}{x^n K(x)}{x} = 0$ für alle (geraden) $n \in \N$, \zB{}
-  \[
-    K(x) = \tfrac{1}{2 \pi} \Int{- \infty}{\infty}{\cos(t x) g(t)}{t}
-    \quad \text{mit} \quad
-    g(t) \coloneqq \begin{cases}
-      1 - e^{- \nicefrac{1}{t^2}} & \text{falls } t \neq 0, \\
-      1 & \text{falls } t = 0
-    \end{cases}
-  \]
-\end{bem}
+\TODO{Fehlt im letzten Abschnitt eine Zwischenüberschrift?}
 
 % 5.4 Orthogonale Schätzer für W-Dichten
 \subsection{Orthogonale Schätzer für W-Dichten}
 
-Sei $M = \cinterval{a}{b}$ mit $- \infty < a < b < \infty$.
-Der Hilbertraum $L^2(M)$ besitzt eine abzählbare ONB $e_1, e_2, \ldots$, sodass für alle $f \in L^2(M)$ gilt:
-\[
-  f(x) = \sum_{k=1}^\infty \alpha_k e_k(x)
-  \quad \text{mit } \alpha_k = \scp{f}{e_k}
-  \quad \text{für } x \in \cinterval{a}{b}
-\]
+\begin{voraussetzung}
+  Sei $M = \cinterval{a}{b}$ mit $- \infty < a < b < \infty$.
+\end{voraussetzung}
 
-Statistisches Problem: Für eine math. SP $X_1, \ldots, X_n$ aus einer Grundgesamtheit für ein zuf. Merkmal mit Dichte $f \in L^2(M)$
-
-Schätzung von~$f$ erfolgt in zwei Schritten:
-\begin{enumerate}
-  \item Wähle einen Parameter $N = N_n$.
-  Sei $f_N$ die Projektion von $f$ auf $L(e_1, \ldots, e_N) \subseteq L^2(M)$,
+\begin{bem}
+  Der Hilbertraum $L^2(M)$ besitzt eine abzählbare ONB $e_1, e_2, \ldots$, sodass für alle $f \in L^2(M)$ gilt:
   \[
-    f_N(x) = \sum_{k=1}^N \alpha_k e_k(x), \enspace x \in M
+    f(x) = \sum_{k=1}^\infty \alpha_k e_k(x)
     \quad \text{mit } \alpha_k = \scp{f}{e_k}
+    \quad \text{für } x \in \cinterval{a}{b}
   \]
-  \item Schätzung der Koeffizienten:
+\end{bem}
+
+\begin{problem}
+  Gegeben sei eine math. SP $X_1, \ldots, X_n$ aus einer Grundgesamtheit für ein zuf. Merkmal mit Dichte $f \in L^2(M)$.
+  Gesucht ist eine Schätzung der Dichte~$f$.
+\end{problem}
+
+\begin{verf}
+  Schätzung von~$f$ erfolgt in zwei Schritten:
+  \begin{enumerate}
+    \item Wähle einen Parameter $N = N_n$.
+    Sei $f_N$ die Projektion von $f$ auf $L(e_1, \ldots, e_N) \subseteq L^2(M)$,
+    \[
+      f_N(x) = \sum_{k=1}^N \alpha_k e_k(x), \enspace x \in M
+      \quad \text{mit } \alpha_k = \scp{f}{e_k}
+    \]
+    \item Schätzung der Koeffizienten:
+    \[
+      \hat{\alpha}_k = \hat{\alpha}_{k,n} = \tfrac{1}{n} \sum_{k=1}^n e_k(X_i), \enspace k = 1, \ldots, N_n
+    \]
+  \end{enumerate}
+\end{verf}
+
+\begin{defn}
+  Der \emph{ON-Schätzer} (oder \textit{Projektionsschätzer}) ist
   \[
-    \hat{\alpha}_k = \hat{\alpha}_{k,n} = \tfrac{1}{n} \sum_{k=1}^n e_k(X_i), \enspace k = 1, \ldots, N_n
+    \hat{f}_n (x) = \hat{f}_{n,N} (x) \coloneqq \sum_{k=1}^N \hat{\alpha}_{k,n} e_k(x) = \tfrac{1}{n} \sum_{i=1}^n \sum_{k=1}^N e_k(X_i) e_k(x).
   \]
-\end{enumerate}
-Der ON-Schätzer (Projektionsschätzer) $\hat{f}_n (x) = \hat{f}_{n,N} (x) \coloneqq \sum_{k=1}^N \hat{\alpha}_{k,n} e_k(x) = \tfrac{1}{n} \sum_{i=1}^n \sum_{k=1}^N e_k(X_i) e_k(x)$.
+\end{defn}
 
 Eigenschaften des Schätzers $\hat{f}_n$:
 
@@ -1992,14 +2023,14 @@ Eigenschaften des Schätzers $\hat{f}_n$:
   \[
     \Int{M}{}{\hat{f}_n(x)}{x} = 1
     \quad \text{und} \quad
-    \E \hat{f}_n(x) f_N(x), x \in M
+    \E \hat{f}_n(x) = f_N(x) \, \forall x \in M.
   \]
 \end{lem}
 
 % Vorlesung vom 21.1.2016
 
-\begin{kor}
-  Für $N_n \xra[n \to \infty]{} \infty$ gilt $\E \hat{f}_n(x) \xra[n \to \infty]{} f(x)$ (fast-überall), falls $f_N(x) \xra[N \to \infty] f(x)$.
+\begin{kor}[Pktweise asympt. Erwartungstreue]
+  Für $N_n \xra[n \to \infty]{} \infty$ gilt $\E \hat{f}_n(x) \xra[n \to \infty]{\text{f.\,ü.}} f(x)$, falls $f_N(x) \xra[N \to \infty]{\text{f.\,ü.}} f(x)$.
 \end{kor}
 
 \begin{lem}
@@ -2013,12 +2044,18 @@ Eigenschaften des Schätzers $\hat{f}_n$:
 % ausgelassen: Beispiel Intervall und trigonometrische Funktionen
 
 \begin{satz}
-  $J_n = \E \norm{\hat{f}_{n,N_n} - f}_2^2 = \E \AInt{M}{(\hat{f}_{n,N_n}(x) - f(x))^2}{x} \xra[n \to \infty]{} 0 \iff \tfrac{1}{n} \sum_{i=1}^{N_n} \AInt{M}{e_k^2(x) f(x)}{x} \xra[n \to \infty]{} 0$
+  Es sind äquivalent:
+  \begin{itemize}
+    \item $J_n = \E \norm{\hat{f}_{n,N_n} - f}_2^2 = \E \AInt{M}{(\hat{f}_{n,N_n}(x) - f(x))^2}{x} \xra[n \to \infty]{} 0$
+    \item $\tfrac{1}{n} \sum_{i=1}^{N_n} \AInt{M}{e_k^2(x) f(x)}{x} \xra[n \to \infty]{} 0$
+  \end{itemize}
 \end{satz}
 
 \begin{kor}
   Aus $J_n \xra[n \to \infty]{} 0$ folgt $\norm{\hat{f}_{n,N_n} - f}_2 \xra[n \to \infty]{\P} 0$.
 \end{kor}
+
+% Im Skript von Lichtenstern kommt hier noch ein Satz von E. Liebscher
 
 % §6. Simulation von Zufallszahlen und Simulationstests
 \section{Simulation von Zufallszahlen und Simulationstests}
@@ -2081,4 +2118,5 @@ TODO:
 Cochran's Theorem
 Verschiedene Arten der Konvergenz von ZGn
 Charakteristische Funktionen
+Was ist Konsistenz von Schätzern?
 Summenkonvention erklären
