@@ -2666,11 +2666,89 @@ TODO: Rest des Beispiels, insbesondere Decodierung
 % §12.3. Einiges zu binären BCH-Codes
 \subsection{Einiges zu binären BCH-Codes}
 
+Sei $q = 2$ und $C$ ein binärer BCH-Code im engeren Sinne.
+Gelte $n = 2^m - 1$.
+Sei $\zeta \in \F_{2^m}$ eine primitive $n$-te Einheitswurzel.
+
+\begin{satz}
+  $C$ hat ungerades Minimalgewicht.
+\end{satz}
+
+Zusammen mit der Kugelpackungsschranke folgt:
+
+\begin{prop}
+  Hat $C$ den designierten Abstand $\delta = 2 \epsilon + 1$ und gilt $2^{m \epsilon} < {\sum}_{i=0}^{\epsilon + 1} \binom{n}{i}$, so hat $C$ das Minimalgewicht~$\delta$.
+\end{prop}
+
+\begin{satz}
+  Gelte $m \geq 4$.
+  Der designierte Abstand von~$C$ sei $\delta = 5$.
+  Dann:
+  \begin{itemize}
+    \miniitem{0.3 \linewidth}{$d = d(C) = 5$}
+    \miniitem{0.5 \linewidth}{$k = \dim(C) = 2^m - 1 - 2m$}
+  \end{itemize}
+\end{satz}
+
+\begin{bem}
+  Der Code $C$ mit $\delta = 5$ wird von $g(x) = \mu_1(x) \mu_3(x)$ erzeugt.
+\end{bem}
+
+\begin{defn}
+  Sei $C$ ein $q$-närer Code der Länge~$n$.
+  Dann heißt
+  \begin{align*}
+    \rho(C) & \coloneqq \max \Set{r \!\geq\! 0}{\forall \, c, c' \in C : B_r(c) \cap B_r(c') \!=\! \emptyset} \quad
+    \text{\emph{Packungsradius}} \\
+    \sigma(C) & \coloneqq \min \Set{s \geq 0}{\F_q^n = \bigcup_{c \in C} B_s(c)} \geq \rho(C) \qquad
+    \text{\emph{Überdeckungsradius}}
+  \end{align*}
+\end{defn}
+
+\begin{bem}
+  $\rho(C) = \sigma(C) \iff $ $C$ ist ein perfekter Code
+\end{bem}
+
+\begin{defn}
+  Codes mit $\rho + 1 = \sigma$ heißen \emph{quasi-perfekt}.
+\end{defn}
+
+\begin{bsp}
+  Man kann zeigen: Binäre, primitive BCH-Codes im engeren Sinne mit $\delta = 5$ sind quasi-perfekt.
+  % siehe Buch von MacWilliams und Sloane auf Seite 279
+\end{bsp}
+
+\begin{prop}
+  Sei~$C$ ein primitiver BCH-Code im engeren Sinne der Länge $n = q^m - 1$ und designiertem Abstand~$\delta$ über~$\F_q$.
+  Falls $\delta \divides n$, so ist $\delta$ das Minimalgewicht von~$C$.
+\end{prop}
+
+\TODO{Wo ist der folgende Satz im Skript?}
+
 \begin{satz}
   Sei $q = 2$, $\delta = 2 \epsilon + 1$, $L = \Set{i \bmod{n}}{1 \leq i \leq \delta - 1}$ und $C = C(L)$ der zugehörige BCH-Code.
   Dann gilt $\dim(C) \geq n - m \cdot \epsilon$.
 \end{satz}
 
 % vorher nur: $\dim(C) \geq n - m \cdot 2 \epsilon$
+
+% §12.4. Zur Decodierung von BCH-Codes
+\subsection{Decodierung von BCH-Codes}
+
+\begin{satz}
+  Sei $m \geq 4$ und $C$ der binäre, primitive BCH-Code im engeren Sinne mit Minimalabstand~$d = 5$, \dh{}~$C$ hat $\zeta, \zeta^2, \zeta^3, \zeta^4$ als Null- stellen für ein prim. Element $\zeta \in \F_{2^m}$.
+  Angenommen, $c(x)$ wurde gesendet und $u(x) = c(x) + e(x)$ empfangen, wobei für das Fehlerpo- lynom $\wt(e(x)) \leq 2$ gilt.
+  Setze $s_1 \coloneqq u(\zeta)$ und $s_3 \coloneqq u(\zeta^3)$.
+  Dann gilt:
+  \begin{itemize}
+    \item Falls $s_1 = 0$, so ist $e(x) = 0$.
+    \item Falls $s_3 = s_1^3 \neq 0$, so ist $e(x) = x^\ell$, wobei $s_1 = \zeta^\ell$.
+    \item Falls $s_1 \neq 0$ und $s_1^3 \neq s_3$, so gilt $e(x) = x^i + x^j$, wobei $\zeta^{-i}$ und $\zeta^{-j}$ die Nullstellen von $L(z) = 1 - s_1 z + (\tfrac{s_3}{s_1} - s_1^2) z^2 \in \F_{2^m}[z]$ sind.
+  \end{itemize}
+\end{satz}
+
+% ausgelassen: Beispiel
+
+\TODO{Weiter: Decodierverfahren für allgemeine BCH-Codes}
 
 \end{document}
