@@ -46,6 +46,10 @@
 \DeclareMathOperator{\ord}{ord} % Ordnung
 \newcommand{\rez}{\mathrm{rez}} % reziprok
 
+% http://tex.stackexchange.com/a/7045
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=1pt] (char) {\scriptsize #1};}}
+
 \begin{document}
 
 \maketitle{Zusammenfassung Codierungstheorie}
@@ -2698,9 +2702,9 @@ Zusammen mit der Kugelpackungsschranke folgt:
   Sei $C$ ein $q$-närer Code der Länge~$n$.
   Dann heißt
   \begin{align*}
-    \rho(C) & \coloneqq \max \Set{r \!\geq\! 0}{\forall \, c, c' \in C : B_r(c) \cap B_r(c') \!=\! \emptyset} \quad
+    \rho(C) & \coloneqq \max \Set{r \!\geq\! 0}{\forall \, c, c' \in C : B_r(c) \cap B_r(c') \!=\! \emptyset} \enspace
     \text{\emph{Packungsradius}} \\
-    \sigma(C) & \coloneqq \min \Set{s \geq 0}{\F_q^n = \bigcup_{c \in C} B_s(c)} \geq \rho(C) \qquad
+    \sigma(C) & \coloneqq \min \Set{s \geq 0}{\F_q^n = \bigcup_{c \in C} B_s(c)} \geq \rho(C) \quad
     \text{\emph{Überdeckungsradius}}
   \end{align*}
 \end{defn}
@@ -2743,12 +2747,235 @@ Zusammen mit der Kugelpackungsschranke folgt:
   \begin{itemize}
     \item Falls $s_1 = 0$, so ist $e(x) = 0$.
     \item Falls $s_3 = s_1^3 \neq 0$, so ist $e(x) = x^\ell$, wobei $s_1 = \zeta^\ell$.
-    \item Falls $s_1 \neq 0$ und $s_1^3 \neq s_3$, so gilt $e(x) = x^i + x^j$, wobei $\zeta^{-i}$ und $\zeta^{-j}$ die Nullstellen von $L(z) = 1 - s_1 z + (\tfrac{s_3}{s_1} - s_1^2) z^2 \in \F_{2^m}[z]$ sind.
+    \item Falls $s_1 \neq 0$ und $s_1^3 \neq s_3$, so gilt $e(x) = x^i + x^j$, wobei $\zeta^{-i}$ u. $\zeta^{-j}$ die Nullstellen von $L(z) = 1 - s_1 z + (\tfrac{s_3}{s_1} - s_1^2) z^2 \in \F_{2^m}[z]$ sind.
   \end{itemize}
 \end{satz}
 
 % ausgelassen: Beispiel
 
-\TODO{Weiter: Decodierverfahren für allgemeine BCH-Codes}
+\begin{situation}
+  Sei $C$ ein BHC-Code im engeren Sinne mit designiertem Abstand~$\delta$.
+  Wir nehmen an, dass $c(x) \in C$ gesendet und $u(x) = c(x) + e(x) \in \F_q[x]_{< n}$ empfangen wurde.
+  Dabei habe das Fehlerpolynom~$e(x)$ das Gewicht $w \coloneqq \wt(e(x)) \leq \tau \coloneqq \floor{\tfrac{\delta-1}{2}}$. \\
+  Die Fehlerstellen seien $1 \leq \varphi(1) < \ldots < \varphi(w) \leq n$, also
+  \[
+    e(x) = \sum_{i=1}^w e_{\varphi(i)} x^{\varphi(i)}
+    \quad \text{mit} \quad
+    e_{\varphi(i)} \in \F_q^*.
+  \]
+\end{situation}
+
+\begin{ziel}
+  Bestimmung \circled{1} der Anzahl~$w$ von Fehlern, \circled{2} der Fehlerpo- sitionen $\varphi(i)$ und \circled{3} der nötigen Korrekturen~$e_{\varphi(i)}$ gegeben~$u(x)$.
+\end{ziel}
+
+\begin{nota}
+  \begin{minipage}[t]{0.7 \linewidth}
+    \begin{itemize}
+      \item $X_i \coloneqq \zeta^{\varphi(i)}$,
+      $Y_i \coloneqq e_{\varphi(i)}$ für $1 \leq i \leq w$,
+      \item $X_j \coloneqq Y_j \coloneqq 0$ für $w < j \leq \tau$,
+      \item $s_k \coloneqq u(\zeta^k)$ für $1 \leq k \leq \delta - 1$ \quad (\textit{Syndrom})
+    \end{itemize}
+  \end{minipage}
+\end{nota}
+
+\begin{bem}
+  Die $X_i$'s codieren \circled{2}, die $Y_i$'s \circled{3}.
+  Für $1 \leq j \leq \delta - 1$ gilt
+  \[
+    s_j = u(\zeta^j) = e(\zeta^j) = \sum_{i=1}^w e_{\varphi(i)} \zeta^{j \varphi(i)} = \sum_{i=1}^w Y_i X_i^j = \sum_{i=1}^\tau Y_i X_i^j
+  \]
+\end{bem}
+
+\begin{satz}
+  Für $\ell \in \N$ mit $w \leq \ell \leq \tau$ sei
+  \[
+    M_\ell \coloneqq \begin{psmallmatrix}
+      s_1 & s_2 & \cdots & s_\ell \\
+      s_2 & s_3 & \cdots & s_{\ell + 1} \\
+      \vdots & \vdots & \ddots & \vdots \\
+      s_\ell & s_{\ell + 1} & \cdots & s_{2 \ell - 1}
+    \end{psmallmatrix}.
+  \]
+  Dann gilt: \enspace
+  \inlineitem{$M_w$ ist invertierbar} \\
+  \inlineitem{$M_{w+1}, \ldots, M_\tau$ sind nicht invertierbar (falls $w < \tau$)}
+\end{satz}
+
+\begin{kor}
+  $w = \max \, \Set{\ell \leq \tau}{\det(M_\ell) \neq 0}$
+  \hfill (Lsg von \circled{1})
+\end{kor}
+
+\begin{defn}
+  Das \emph{Lokatorpolynom} ist
+  \[
+    L(z) \coloneqq (1 - X_1 z) \cdot \ldots \cdot (1 - X_w z) \in \F_{q^m} [z].
+  \]
+\end{defn}
+
+\begin{bem}
+  Die Nullstellen von $L(z)$ sind $\zeta^{- \varphi(1)}$, \ldots, $\zeta^{- \varphi(w)}$.
+  Es gilt
+  \[
+    L(z) = \sum_{i=0}^w (-1)^i \cdot p_i \cdot z^i
+    \quad \text{wobei} \quad
+    p_i \coloneqq \enspace \sum_{\mathclap{I \subseteq [w], \enspace \abs{I} = i}} \enspace X_I, \quad
+    X_I \coloneqq \prod_{j \in I} X_j
+  \]
+\end{bem}
+
+\begin{satz}
+  Die eindeutige Lösung des linearen Gleichungssystems
+  \[
+    M_w \cdot x = - \begin{psmallmatrix}
+      s_{w+1} \\ s_{w+2} \\ \vdots \\ s_{2w-1} \\ s_{2w}
+    \end{psmallmatrix}
+    \qquad \text{ist} \qquad
+    P \coloneqq \begin{psmallmatrix}
+      (-1)^w p_w \\
+      (-1)^{w-1} p_{w-1} \\
+      \vdots \\
+      p_2 \\
+      - p_1
+    \end{psmallmatrix}.
+  \]
+\end{satz}
+
+\begin{folgerung}
+  Die elementarsymm. Fktn $p_0, \ldots, p_w$ in $X_1, \ldots, X_w$ kann man aus $s_1, \ldots, s_{2 w}$ berechnen.
+  Gleiches gilt somit für $L(z)$.
+  Die Exponenten in der Darstellung der Nullstellen von $L(z)$ als $\zeta$-Potenz geben dann die Fehlerstellen an.
+  \hfill (Lsg von \circled{2})
+\end{folgerung}
+
+\begin{satz}
+  Die eindeutige Lösung des linearen Gleichungssystems
+  \[
+    \begin{psmallmatrix}
+      X_1 & X_2 & \cdots & X_w \\
+      X_1^2 & X_2^2 & \cdots & X_w^2 \\
+      \vdots & \vdots & \ddots & \vdots \\
+      X_1^w & X_2^w & \cdots & X_w^w
+    \end{psmallmatrix} \cdot z = \begin{psmallmatrix}
+      s_1 \\ s_2 \\ \vdots \\ s_w
+    \end{psmallmatrix}
+    \qquad \text{ist} \qquad
+    z = \begin{psmallmatrix}
+      Y_1 \\ Y_2 \\ \vdots \\ Y_w
+    \end{psmallmatrix}
+  \]
+\end{satz}
+
+\begin{folgerung}
+  Da sich, wie schon gesehen, die Werte~$X_i$ aus den Syndromen~$s_k$ berechnen lassen, liefert dies eine Methode, die Werte~$Y_i$ aus den Syndromen zu berechnen.
+  \hfill (Lsg von \circled{3})
+\end{folgerung}
+
+% §12.5. Ein weiteres Decodierverfahren
+\subsection{Ein weiteres Decodierverfahren}
+
+\begin{ziel}
+  Entwicklung eines effizienteren Decodierverfahrens für die gleiche Situation wie im letzten Abschnitt.
+\end{ziel}
+
+\begin{defn}
+  Das \emph{Fehlerauswertungspolynom} ist
+  \[
+    F(z) \coloneqq \sum_{i=1}^w Y_i X_i \cdot \prod_{\ell = 1, \ell \neq i} (1 - X_\ell \cdot z) \in \F_{q^m} [z].
+  \]
+\end{defn}
+
+\begin{satz}
+  Sei $L'(z)$ die formale Ableitung des Lokatorpolynoms.
+  Dann:
+  \[
+    Y_k = - \frac{F(X_k^{-1})}{L'(X_k^{-1})} \qquad
+    \text{für alle } k = 1, \ldots, w.
+  \]
+\end{satz}
+
+\begin{defn}
+  Das \emph{Syndrompolynom} ist
+  \[
+    S(z) \coloneqq \sum_{j=1}^{\delta - 1} s_j z^{j-1} \in \F_{q^m} [z].
+  \]
+\end{defn}
+
+\begin{prop}
+  $F(z) = S(z) \cdot L(z) \pmod{z^{\delta - 1}}$
+\end{prop}
+
+\begin{bem}
+  In anderen Worten: Es gibt ein Polynom~$v(z) \in \F_{q^m} [z]$ mit
+  \[
+    v(z) \cdot z^{\delta - 1} + L(z) \cdot S(z) = F(z).
+  \]
+  Der erweiterte euklidische Algorithmus berechnet eine \textit{Bézout-Darstellung} des ggT, \dh{} Polynome $a(z), b(z) \in \F_{q^m} [z]$ mit
+  \[
+    a(z) \cdot z^{\delta - 1} + b(z) \cdot S(z) = \ggT(z^{\delta - 1}, S(z)).
+  \]
+\end{bem}
+
+\begin{alg}
+  Wir initialisieren dazu
+  \[
+    \begin{psmallmatrix}
+      r_{-1} (z) \\ r_0 (z)
+    \end{psmallmatrix} \coloneqq \begin{psmallmatrix}
+      z^{\delta - 1} \\ S(z)
+    \end{psmallmatrix}
+    \quad \text{sowie} \quad
+    \begin{psmallmatrix}
+      a_{-1} (z) & b_{-1} (z) \\
+      a_0 (z) & b_0 (z)
+    \end{psmallmatrix} \coloneqq \begin{psmallmatrix}
+      1 & 0 \\
+      0 & 1
+    \end{psmallmatrix}
+  \]
+  Solange $r_k (z) \neq 0$ ist, führen wir eine Division von $r_{k-1} (z)$ durch $r_k (z)$ mit Rest durch und erhalten $q_{k+1} (z), r_{k+1} (z) \in \F_{q^m} [z]$ mit
+  \[
+    r_{k-1} (z) = q_{k+1} (z) \cdot r_k (z) + r_{k+1} (z)
+    \enspace \text{und} \enspace
+    \deg(r_{k+1} (z)) < \deg(r_k (z)).
+  \]
+  Wir setzen \enspace $
+    \arraycolsep=1pt
+    \begin{array}[t]{l l}
+      a_{k+1} (z) & \coloneqq a_{k-1} (z) - q_{k+1} (z) \cdot a_k (z), \\
+      b_{k+1} (z) & \coloneqq b_{k-1} (z) - q_{k+1} (z) \cdot b_k (z).
+    \end{array}
+  $ \\[2pt]
+  Man prüft leicht nach, dass bei dieser Update-Regel die Invariante
+  \[
+    a_k (z) \cdot z^{\delta - 1} + b_k (z) \cdot S(z) = r_k (z)
+  \]
+  erhalten bleibt.
+  Sei $m$ maximal unter $r_m (z) \neq 0$.
+  Dann ist
+  \[
+    a_m (z) \cdot z^{\delta - 1} + b_m (z) \cdot S(z) = r_m (z) = \ggT(z^{\delta - 1}, S(z))
+  \]
+  die gesuchte Bézout-Darstellung des ggT.
+\end{alg}
+
+\begin{satz}
+  Sei $\ell$ minimal unter $\deg(r_\ell (z)) < \nicefrac{(\delta - 1)}{2}$.
+  Dann gilt:
+  \begin{itemize}
+    \miniitem{0.45 \linewidth}{$L(z) = b_\ell(0)^{-1} \cdot b_\ell(z)$}
+    \miniitem{0.45 \linewidth}{$F(z) = b_\ell(0)^{-1} \cdot r_\ell(z)$}
+  \end{itemize}
+\end{satz}
+
+\begin{folgerung}
+  Man kann aus den Syndromen das Lokatorpolynom $L(z)$ mit hilfe des erweiterten euklidischen Algorithmus berechnen. \\
+  Dieses enthält alle Informationen über \circled{1} und \circled{2}.
+  Mit dem letzten Satz aus dem letzen Abschnitt kann man \circled{3} bestimmen.
+\end{folgerung}
+
+% ausgelassen: Beispiel
 
 \end{document}
