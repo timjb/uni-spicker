@@ -54,13 +54,17 @@
 
 \begin{document}
 
+\raggedcolumns % stretche Inhalt nicht über die gesamte Spaltenhöhe
+
 \maketitle{Zusammenfassung Codierungstheorie}
 
-% Dieses Skript basiert auf einer Vorlesung von Prof. Dirk Hachenberger an der Universität Augsburg im WS\,15/16.
+Diese Zusammenfassung basiert auf der Vorlesung von Prof. Dr. Dirk Hachenberger an der Universität Augsburg im WS\,15/16.
 
 % Vorlesung vom 13. Oktober 2015
 
-% 1. Grundproblemstellung
+% §1. Grundproblemstellung
+\section{§1. Grundproblemstellung}
+
 % §1.1 Aufgaben der Codierungstheorie
 
 \[
@@ -71,8 +75,8 @@
   \text{Senke}
 \]
 Die Daten liegen bereits digitalisiert vor.
-Mit dem Problem wie Daten wie bspw. natürliche Sprache möglichst effizient codiert werden, befasst sich die Informationstheorie.
-In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu übersetzen, dass Fehler, die bei einer Übertragung über einen fehlerhaften Kanal, korrigiert oder zumindest bemerkt werden.
+Mit dem Problem wie Daten wie bspw. nat. Sprache möglichst effizient codiert werden, befasst sich die Informationstheorie.
+In der Codierungstheorie geht es darum, Daten mit einer Kanalcodierung so zu übersetzen, dass Fehler, die bei einer Übertragung über einen fehlerhaften Kanal, korrigiert oder zumindest bemerkt werden.
 
 % (1.1) Bsp
 % Nord = 00
@@ -130,6 +134,7 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 % Informationsrate: 2/5
 
 % §2. Formalisierung der Grundbegriffe
+\section{§2. Formalisierung der Grundbegriffe}
 
 % §2.1 q-närer Code und Hamming-Abstand
 
@@ -148,13 +153,15 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 \end{defn}
 
 \begin{defn}
-  Die \emph{Informationsrate} von $C$ ist dann $R(C) \coloneqq \log_n(M) / n$.
+  Die \emph{Informationsrate} von $C$ ist dann $R(C) \coloneqq \nicefrac{\log_q(M)}{n}$.
   Falls $\abs{M} = q^k$, dann ist $R(C) = k/n$.
 \end{defn}
 
 \begin{bem}
-  Ist $Q \cong \F_q$, dann ist $Q^n$ ein $\F_q$-VR. Falls $C$ ein Unterraum von $Q^n$ ist, so ist $R(C) = \dim_{\F_q}(C) / n$.
+  Ist $Q \cong \F_q$, dann ist $Q^n$ ein $\F_q$-VR. Falls $C$ ein Unterraum von $Q^n$ ist, so ist $R(C) = \nicefrac{\dim_{\F_q}(C)}{n}$.
 \end{bem}
+
+\begin{samepage}
 
 \begin{defn}
   Der \emph{Hamming-Abstand} von $u, v \in Q^n$ ist
@@ -165,29 +172,31 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
   Der Hamming-Abstand ist eine Metrik auf $Q^n$.
 \end{lem}
 
-\begin{nota}
-  Es sei $C \subseteq Q^n$ ein Code und $y \in Q^n$.
-  Wenn $y$ empfangen wurde, so geht man davon aus, dass das gesendete Wort dasjenige des Codes mit den wenigsten Unterschieden zu $y$ ist, also ein Wort, welches den \emph{Hamming-Abstand} $d(y, C) \coloneqq \min_{c \in C} d(y, c)$ von $y$ zu $C$ realisiert.
-  Es existiert i.\,A. kein eindeutiges solches Element, sondern eine Menge
-  \[ N_c(y) \coloneqq \Set{\overline{c}}{d(y, C) = d(y, \overline{c})}. \]
-\end{nota}
-
 % §2.2 Das Decodierprinzip des nächsten Nachbarn
+\subsection{Das Decodierprinzip des nächsten Nachbarn}
+
+\end{samepage}
+
+\begin{nota}
+  Es sei $C \subseteq Q^n$ ein Code.
+  Wenn $y \in Q^n$ empfangen wurde, so geht man davon aus, dass das gesendete Wort dasjenige des Codes mit den wenigsten Unterschieden zu $y$ ist, also ein Wort, welches den Hamming-Abstand $d(y, C) \coloneqq {\min}_{c \in C} d(y, c)$ von $y$ zu $C$ realisiert.
+  Es existiert i.\,A. kein eindeutiges solches Element, sondern eine Menge
+  \[ N_C(y) \coloneqq \Set{\overline{c}}{d(y, C) = d(y, \overline{c})}. \]
+\end{nota}
 
 \begin{defn}
   \begin{itemize}
     \item Man nennt einen Kanal einen \emph{$q$-nären symmetrischen Kanal}, falls ein $p \in \R$ mit $0 < p < (q-1)/q$ existiert, sodass
     \[ \CP{\text{$\beta$ empfangen}}{\text{$\alpha$ gesendet}} = \nicefrac{p}{q-1} \]
     für alle $\beta \neq \alpha \in Q$, also $\CP{\text{$\alpha$ empfangen}}{\text{$\alpha$ gesendet}} = 1-p$.
-    \item Man nennt einen Kanal \emph{gedächtnislos}, falls
+    \item Ein Kanal heißt \emph{gedächtnislos}, falls für alle $x, y \in Q^n$ gilt:
     \[ \CP{\text{$y$ empfangen}}{\text{$c$ gesendet}} = \prod_{i=1}^n \CP{\text{$y_i$ empfangen}}{\text{$c_i$ gesendet}} \]
-    für alle Wörter $x, y \in Q^n$ gilt.
   \end{itemize}
 \end{defn}
 
 \begin{defn}[\emph{Maximum-Likelihood-Prinzip}]
   Gegeben sei ein Code $C \subseteq Q^n$ und $y \in Q^n$.
-  Gesucht ist $\hat{c} = \argmax_{c \in C} \CP{y}{c}$.
+  Gesucht ist $\hat{c} = {\argmax}_{c \in C} \CP{y}{c}$.
 \end{defn}
 
 \begin{satz}
@@ -195,7 +204,7 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
   Sei $y \in Q^n$ und $\hat{c} \in C$.
   Dann sind äquivalent:
   \begin{itemize}
-    \miniitem{0.48 \linewidth}{$\CP{y}{\hat{c}} = \max_{c \in C} \CP{y}{c}$}
+    \miniitem{0.48 \linewidth}{$\CP{y}{\hat{c}} = {\max}_{c \in C} \CP{y}{c}$}
     \miniitem{0.48 \linewidth}{$\hat{c} \in N_c(y)$}
   \end{itemize}
 \end{satz}
@@ -216,6 +225,7 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 \fi
 
 % §2.3 Shannons Hauptsatz der Kanalcodierung
+\subsection{Shannons Hauptsatz der Kanalcodierung}
 
 \begin{defn}
   Die \emph{Kanalkapazität} eines $q$-nären symmetrischen Kanal ist
@@ -233,7 +243,7 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 \begin{defn}
   Sei $C$ ein Code und $D$ sei eine zugehörige (vollständige) Decodierabbildung.
   Die \emph{Restfehlerwahrscheinlichkeit} zu $(C, D)$:
-  \[ \P_{\text{err}}(C) \coloneqq \max_{y \in Q^n, c \in C} \CP{D(y) \neq c}{\text{$c$ gesendet, $y$ empfangen}} \]
+  \[ \P_{\text{err}}(C) \coloneqq {\max}_{y \in Q^n, c \in C} \, \CP{D(y) \neq c}{\text{$c$ gesendet, $y$ empfangen}} \]
 \end{defn}
 
 \begin{samepage}
@@ -249,7 +259,7 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 \end{satz}
 
 % 3. Korrektureigenschaften und zwei Schranken
-\section{Fehlerkorrektur und zwei Schranken}
+\section{§3. Fehlerkorrektur und zwei Schranken}
 
 \end{samepage}
 
@@ -258,19 +268,19 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 % 3.1
 \begin{defn}
   Der \emph{Minimalabstand} eines $(n, M)$-Codes $C$ über $Q$ ist
-  \[ d \coloneqq d(C) \coloneqq \min_{c,c' \in C, c \neq c'} d(c,c'). \]
+  \[ d \coloneqq d(C) \coloneqq {\min}_{c,c' \in C, c \neq c'} \, d(c,c'). \]
   Man sagt dann, $C$ ist ein $q$-närer $(n, M, d)$-Code.
 \end{defn}
 
 \begin{nota}
-  Für $u \in Q^n$, $l \in \N$ sei $B_l(u) \coloneqq \Set{x \in Q^n}{d(x, x) \leq l}$.
+  Für $u \in Q^n$, $\ell \in \N$ sei $B_\ell(u) \coloneqq \Set{x \in Q^n}{d(x, u) \leq \ell}$.
 \end{nota}
 
 \begin{defn}
   \begin{itemize}
-    \item Ein Code $C$ heißt \emph{$l$-fehlerkorrigierend}, falls $B_l(c) \cap B_{l'}(c') = \emptyset$ für alle $c, c' \in C$ mit $c \neq c'$.
+    \item Ein Code $C$ heißt \emph{$\ell$-fehlerkorrigierend}, falls $B_\ell(c) \cap B_\ell(c') = \emptyset$ für alle $c, c' \in C$ mit $c \neq c'$.
     \item $C$ heißt \emph{$m$-fehlererkennend}, wenn $B_m(c) \cap C = \{ c \}$ f.\,a. $c \in C$.
-    \item $C$ heißt \emph{genau $l$-fehlerkorrigierend/-erkennend}, falls $C$ $m$-fehlerkorr./-erkennend für $m \coloneqq l$ aber nicht $m \coloneqq l+1$ ist.
+    \item $C$ heißt \emph{genau $\ell$-fehlerkorrigierend/-erkennend}, falls $C$ $m$-fehlerkorr./-erkennend für $m \coloneqq \ell$ aber nicht $m \coloneqq \ell+1$ ist.
   \end{itemize}
 \end{defn}
 
@@ -278,8 +288,8 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 \begin{satz}
   Jeder $(n, M, d)$-Code $C$ ist genau
   \begin{itemize}
-    \miniitem{0.48 \linewidth}{$(d{-}1)$-fehlererkennend und}
-    \miniitem{0.49 \linewidth}{$(t \coloneqq \floor{\nicefrac{d-1}{2}})$-fehlerkorrigierend.}
+    \miniitem{0.46 \linewidth}{$(d{-}1)$-fehlererkennend und}
+    \miniitem{0.52 \linewidth}{$(t \coloneqq \floor{\nicefrac{(d-1)}{2}})$-fehlerkorrigierend.}
   \end{itemize}
 \end{satz}
 
@@ -291,14 +301,17 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 \begin{prob}
   Gegeben: $q$, Länge $n$, Minimalabstand $d$.
   Gesucht:
-  \[ A_q(n, d) \coloneqq \max \Set{M}{\exists\,\text{$(n,M,d)$-Code}} \]
+  \[ A_q(n, d) \coloneqq \max \, \Set{M}{\exists\,\text{$(n,M,d)$-Code}} \]
 \end{prob}
 
 \begin{defn}
   Ein $(n, M, d)$-Code heißt \emph{optimal}, falls $M = A_q(n, d)$.
 \end{defn}
 
+\columnbreak
+
 % §3.2 Singleton-Schranke
+\subsection{Die Singleton-Schranke}
 
 % 3.5
 \begin{lem}
@@ -318,8 +331,10 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 
 % 3.7
 \begin{defn}
-  Ein Code, der die Singletonschranke mit Gleichheit erfüllt, heißt ein \emph{MDS-Code} (MDS = maximum distance separable).
+  Ein Code, der die Singletonschranke mit Gleichheit erfüllt, heißt ein \emph{MDS-Code} (MDS = \textit{maximum distance separable}).
 \end{defn}
+
+\begin{samepage}
 
 \begin{bem}
   Sei $C \subseteq Q^n$ ein $(n, M, d)$-Code,
@@ -328,14 +343,12 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
   Ist $C$ ein MDS-Code, so ist $\pi_T$ bijektiv für alle $T$ mit $\abs{T} = n - d + 1$.
 \end{bem}
 
-\begin{satz}
-  $A_q(n, 2) = q^{n-1}$, realisiert durch einen Code mit Prüfziffer
-\end{satz}
-
 % Vorlesung vom 20.10.2015
-% §3.3
+% §3.3. Abelsche Gruppen als Alphabete
+\subsection{Abelsche Gruppen als Alphabete}
 
-% 
+\end{samepage}
+
 \begin{defn}
   Sei $(G, +, 0)$ eine kommutative Gruppe. \\
   Das \emph{Hamming-Gewicht} von $x \in G^n$ ist
@@ -348,7 +361,7 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 
 \begin{lem}
   Sei $G$ wie oben, $x, y \in G^n$.
-  Dann $\wt(x-y) = d(x, y)$.
+  Dann ist $\wt(x-y) = d(x, y)$.
 \end{lem}
 
 \begin{satz}
@@ -375,10 +388,6 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
     \item Beim ISBN-Code ist $R \!=\! \Z_{11}$, $\lambda_1 \!=\! 1, \nldots, \lambda_9 \!=\! 9$, also $\kappa(z) = \sum_{i=1}^{10} i z_i$.
   \end{itemize}
 \end{bspe}
-
-\begin{bem}
-  Es gilt $A_q(4,3) = q^2$ $\iff$ es gibt ein Paar orthogonaler lateinischer Quadrate der Größe $q$ $\iff$ $q \neq 2$ oder $q \neq 6$.
-\end{bem}
 
 % Betrachte nun q=2
 
@@ -411,6 +420,7 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 \end{bsp}
 
 % §3.5 Kugelpackungsschranke
+\subsection{Die Kugelpackungsschranke}
 
 % Ausgelassen: Zeichnung
 
@@ -418,11 +428,11 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 \begin{lem}
   Sei $Q$ ein Alphabet, $u \in Q^n$. %$B_l(u) \coloneqq \Set{x \in Q^n}{d(x,u) \leq l}$.
   Dann gilt
-  \[ \abs{B_l(u)} = \sum_{j=0}^l \binom{n}{j} (\abs{Q}-1)^j. \]
+  \[ \abs{B_\ell(u)} = \sum_{j=0}^\ell \binom{n}{j} (\abs{Q}-1)^j. \]
 \end{lem}
 
 % 3.18
-\begin{satz}[\emph{Kugelpackungsschranke} (KPS)]
+\begin{satz}[\emph{Kugelpackungsschranke} (KPS)] \mbox{} \\
   Sei $q \geq 2$, $n \geq 2$, $1 \leq d \leq n$, $t \coloneqq \floor{\tfrac{d-1}{2}}$. Dann ist
   \[ A_q(n, d) \leq q^n / \sum_{j=0}^t \binom{n}{j} (q-1)^j. \]
 \end{satz}
@@ -453,18 +463,19 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 \end{bsp}
 
 % §4. Grundlagen zu linearen Codes
-\section{Lineare Codes}
+\section{§4. Grundlagen zu linearen Codes}
 
 \end{samepage}
 
 % §4.1. Grundlagen zu endlichen Körpern
 
 \begin{bem}
-  Zu jeder Primzahlpotenz $q = p^m \geq 2$ gibt es bis auf Isomorphie genau einen Körper $\GF_q = \F_q$ mit $q$ Elementen. Die Charakteristik dieses Körpers ist $p$. Ist $q$ keine Primzahlpotenz, so gibt es auch keinen Körper mit $q$ Elementen.
+  Zu jeder Primzahlpotenz $q = p^m \geq 2$ gibt es bis auf Isomorphie genau einen Körper $\GF_q = \F_q$ mit $q$ Elementen. \\
+  Die Charakteristik dieses Körpers ist $p$. Ist $q$ keine Primzahlpotenz, so gibt es auch keinen Körper mit $q$ Elementen.
 \end{bem}
 
 \begin{konstr}
-  Sei $q = p^m$, $p$ prim. Dann gibt es ein irreduzibles Polynom $g(x)$ in $\Z_p$ mit $\deg(g) = m$.
+  Sei $q = p^m$, $p$ prim. Dann gibt es ein irreduzibles Polynom $g(x) \in \Z_p [x]$ mit $\deg(g) = m$.
   Dann ist $\F_q \coloneqq \Z_p[x]/(g(x))$.
 \end{konstr}
 
@@ -485,7 +496,7 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 \end{nota}
 
 \begin{defn}
-  Sei $C$ ein $\F_q$-linearer Code mit $\dim(C) \geq 1$.
+  Sei $C$ ein $\F_q$-linearer Code mit $\dim(C) \geq 1$. \\
   Das \emph{Minimalgewicht} von $C$ ist $\min \Set{\wt(c)}{c \in C, c \neq 0}$.
 \end{defn}
 
@@ -529,17 +540,15 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 
 % 4.6
 \begin{lem}
+  \inlineitem{$A_q^\lin(n, 1) = q^n = A_q(n, 1)$} \quad
+  \inlineitem{$A_q^\lin(n, n) = q = A_q(n, n)$}
   \begin{itemize}
-    \item $A_q^\lin(n, 1) = q^n = A_q(n, 1)$
-    \item $A_q^\lin(n, n) = q = A_q(n, n)$
     \item $d \leq d' \implies A_q^\lin(n, d) \geq A_q^\lin(n, d')$
     \item Für $n \geq 2$, $d \geq 2$ ist $A_q^\lin(n, d) \leq A_q^\lin(n-1, d-1)$.
   \end{itemize}
 \end{lem}
 
-\begin{bem}
-  Da die Parity-Check-Erweiterung durch eine lineare Abbildung geschieht, gilt:
-\end{bem}
+Da die Parity-Check-Erw. durch eine lin. Abb. geschieht, gilt:
 
 \begin{satz}
   $A_1^\lin(n, 2) = q^{n-1} = A_q(n,2)$
@@ -549,12 +558,15 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
   Falls $d$ ungerade, so ist $A_2^\lin(n, d) = A_2^\lin(n+1, d+1)$
 \end{satz}
 
+\columnbreak
+
 % Nordstrom-Robinson-Code:
 % Ein (16, 256, 6)-Code über $\F_2$
 
 % Vorlesung vom 27.10.2015
 
 % §4.4 Die Generatormatrix
+\subsection{Die Generatormatrix}
 
 \begin{defn}
   Sei $C$ ein $[n,k]$-Code über $\F_q$, \dh{} es gibt eine injektive Codierabbildung $E : \F_q^k \to \F_q^n$ mit $\im(E) = C$.
@@ -568,7 +580,11 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 \end{defn}
 
 \begin{bem}
-  Dann ist $E(u) = uG = \sum_{j=1}^k u_j g^j \in C$
+  Dann ist folgende Abbildung eine Codierabbildung:
+  \[
+    E : \F_q^k \to C, \quad
+    u \mapsto uG = {\sum}_{j=1}^k u_j g^j \in C.
+  \]
 \end{bem}
 
 % Ausgelassen: Bspe Parity-Check-Erweiterung und 5-Wiederholungscode
@@ -600,7 +616,8 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
   Ein $[n,k]$-Code heißt \emph{systematisch}, falls die ersten $k$ Spalten seiner Generatormatrix die Standardbasisvektoren sind.
 \end{defn}
 
-% §4.5 Gewichtsminimale Repäsentanten und Standard-Array-Decodierung
+% §4.5 Gewichtsminimale Repräsentanten und Standard-Array-Decodierung
+\subsection{Gewichtsminimale Repräsentanten}
 
 \begin{nota}
   Sei $C \subset \F_q^n$ ein UVR. Für $x, y \in \F_q^n$ schreiben wir
@@ -614,46 +631,54 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 
 \begin{satz}
   Sei $C$ ein $[n, k]$-Code über $\F_q$, $\mathcal{R}$ ein gewichtsmin. Repräsen- tantensystem mod $C$.
-  Zu $y \in \F_q^n$ sei $\mathcal{R}(y) \in \R$ mit $\mathcal{R}(y) + C = y + C$.
+  Zu $y \in \F_q^n$ sei $\mathcal{R}(y) \in \mathcal{R}$ mit $\mathcal{R}(y) + C = y + C$.
   Dann ist $D : \F_q^n \to C, \enspace y \mapsto y - \mathcal{R}(y)$ eine Decodierabbildung.
 \end{satz}
 
+\begin{samepage}
+
+\begin{verf}[\emph{Standard-Array-Decodierung}]
+  Speichere die Werte der Funktion $y \mapsto \mathcal{R}(y)$ in einer Lookup-Tabelle. \\
+  Dann müssen wir zum Decodieren von~$y$ nur noch in dieser Tabelle den Wert von $\mathcal{R}(y)$ nachschlagen und $c \coloneqq y - \mathcal{R}(y)$ berechnen.
+\end{verf}
+
 % Ausgelassen: Beispiel
 
-% TODO: Standard-Array-Decodierung beschreiben
-
 % §4.6 Dualer Code: Kontrollmatrix und Syndromdecodierung
+\subsection{Dualer Code: Kontrollmatrix, Syndromdecod.}
+
+\end{samepage}
 
 \begin{bem}
   Sei $\F$ ein Körper, $n \in \N^*$.
   Das Standard-Skalarprodukt
   \[
     \scp{\blank}{\blank} : \F^n \times \F^n \to \F,
-    \enspace (x, y) \mapsto \sum_{i=1}^n x_i y_i
+    \enspace (x, y) \mapsto {\sum}_{i=1}^n x_i y_i
   \]
   ist eine nicht-ausgeartete, symmetrische Bilinearform.
 \end{bem}
 
 % Ausgelassen: Definition des Orthogonalraums
 
-\begin{acht}
-  Es ist $\dim(U^\perp) = n - k$, im Allgemeinen gilt aber $U \cap U^\perp \neq 0$, \zB{} ist $11011 \in \F_2^5$ senkrecht zu sich selbst.
-\end{acht}
-
 \begin{defn}
   Sei $C$ ein $[n,k]$-Code über $\F_q$.
   Dann heißt $C^\perp$ der zu $C$ gehörende \emph{duale Code}.
 \end{defn}
+
+\begin{acht}
+  Es ist $\dim(U^\perp) = n - k$, im Allgemeinen gilt aber $U \cap U^\perp \neq 0$, \zB{} ist $11011 \in \F_2^5$ senkrecht zu sich selbst.
+\end{acht}
 
 \begin{defn}
   Die Generatormatrix $H$ von $C^\perp$ heißt \emph{Kontrollmatrix} zu $C$.
 \end{defn}
 
 \begin{lem}
-  $x \in C \iff H x^T = 0$
+  $\fa{x \in \F_q^n} x \in C \iff H x^T = 0$
 \end{lem}
 
-\begin{alg}
+\begin{alg}[\emph{Syndromdecodierung}] \mbox{} \\
   Sei $C$ ein $[n,k]$-Code, $H \in \F_q^{n-k \times n}$ die Kontrollmatrix.
   Dann ist
   \[ \psi_H : \F_q^n \to \F_q^{n-k}, \enspace x \mapsto H x^T \]
@@ -675,8 +700,8 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
   Sei~$C$ ein linearer $[n, k, d]$-Code über $\F_q$, $H$~eine Kontroll- matrix zu~$C$.
   Dann gilt:
   \begin{align*}
-    d &= 1 + \max \Set{a \in \N^*}{\text{je $a$ Spalten von $H$ sind lineare unabhängig}} \\
-    &= \min \Set{m \in \N^*}{\text{es gibt $m$ linear abhängige Spalten in $H$}}
+    d &= 1 + \max \, \Set{a \in \N}{\text{je $a$ Spalten von $H$ sind linear unabhängig}} \\
+    &= \min \, \Set{m \in \N}{\text{es gibt $m$ linear abhängige Spalten in $H$}}
   \end{align*}
 \end{satz}
 
@@ -691,12 +716,12 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 \end{defn}
 
 \begin{bem}
-  Es gilt $A_0 = 1$ und $A_1 = A_2 = \ldots = A_{d-1} = 0$, falls~$d$ das Minimalgewicht von $C$ ist.
+  Es gilt $A_0 = 1$ und $A_1 = A_2 = \ldots = A_{d-1} = 0$ für $d = d(C)$.
 \end{bem}
 
 \begin{defn}
-  $A_C(Z) \coloneqq \sum_{i=0}^k A_i Z^k \in \C[Z]$ heißt \emph{Gewichtszählpolynom},
-  \[ A_C^\homogen(X, Y) \coloneqq \sum_{i=0}^n A_i X^{n-i} \cdot Y^i \in \C[X, Y] \]
+  $A_C(Z) \coloneqq {\sum}_{i=0}^k A_i Z^k \in \C[Z]$ heißt \emph{Gewichtszählpolynom},
+  \[ A_C^\homogen(X, Y) \coloneqq {\sum}_{i=0}^n A_i X^{n-i} \cdot Y^i \in \C[X, Y] \]
   heißt \emph{homogenes Gewichtszählpolynom}.
 \end{defn}
 
@@ -705,13 +730,10 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 \begin{bem}
   \inlineitem{$A_C(Z) = A_C^\homogen(1, Z)$} \quad
   \inlineitem{$A_C^\homogen(X, Y) = X^n \cdot A_C(\tfrac{Y}{X})$}
-  \begin{itemize}
-    \item Aus $A_C(X, Y)$ erhält man durch die sogenannte Mac-Williams-Transformation $A_{C^\perp}(X, Y)$
-  \end{itemize}
 \end{bem}
 
 % §5. Hamming-Codes
-\section{Hamming-Codes}
+\section{§5. Hamming-Codes}
 
 \end{samepage}
 
@@ -731,7 +753,7 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 \end{bem}
 
 \begin{lem}
-  Seien $p, u, v \in \N$, $p \geq 2$. Dann gilt $u \divides v \iff p^u - 1 \divides p^v - 1$.
+  Seien $p, u, v \in \N$, $p \geq 2$. Dann gilt $u \divides v \iff (p^u - 1) \divides (p^v - 1)$.
 \end{lem}
 
 \begin{prop}
@@ -769,6 +791,7 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 \end{kor}
 
 % §5.2 Konstruktion und Decodierung der binären Hamming-Codes
+\subsection{Der binäre lineare Hamming-Code}
 
 % ausgelassen: Tabelle von binären Hamming-Codes
 
@@ -832,6 +855,8 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 
 % Vorlesung vom 5.11.2015
 
+\begin{samepage}
+
 % 5.14
 \begin{satz}
   Die Parity-Check-Erweiterung des $[7, 4]$-Hamming-Codes ist ein binärer $[8, 4, 4]$-Code.
@@ -840,6 +865,9 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 \end{satz}
 
 % §5.4 q-näre lineare Hamming-Codes
+\subsection{$q$-näre lineare Hamming-Codes}
+
+\end{samepage}
 
 \begin{konstr}
   Wir definieren auf $A \coloneqq \F_q^n \setminus \{ 0 \}$ eine Äq'relation durch
@@ -859,24 +887,25 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
     \left\{ \begin{psmallmatrix} 0 \\ \vdots \\ 0 \\ 1 \\ * \end{psmallmatrix} \right\} \cup \ldots \cup
     \left\{ \begin{psmallmatrix} 1 \\ * \\ \vdots \\ * \\ * \end{psmallmatrix} \right\},
   \]
-  also so, dass der erste Eintrag jedes Vektors eine 1 ist.
+  also so, dass der erste Eintrag $\neq 0$ jedes Vektors eine 1 ist.
 \end{bem}
 
 % 5.16
-\begin{alg}[Decodieren des $q$-nären Hamming-Codes]
+\begin{alg}[Decodieren des $q$-nären Hamming-Codes] \mbox{} \\
   Sei $y$ empfangen mit höchstens einem Fehler.
   Berechne das Syndrom $s = H_q(m)y^T$.
   Falls $s = 0$, so ist $D(y) \coloneqq y$.
   Angenommen, $s_i \neq 0$.
   Sei $i$ minimal mit $s_i \neq 0$.
-  Dann ist $\nicefrac{s}{s_i}$ eine Spalte von $H_q(m)$, etwa die $l$-te Spalte.
-  Decodiere $D(y) \coloneqq y - s_i \cdot e_l$.
+  Dann ist $\nicefrac{s}{s_i}$ eine Spalte von $H_q(m)$, etwa die $\ell$-te Spalte.
+  Decodiere $D(y) \coloneqq y - s_i \cdot e_\ell$.
 \end{alg}
 
 % §5.5 Die Familie der Simplex-Codes
+\subsection{Die Familie der Simplex-Codes}
 
 \begin{defn}
-  Sei $q \geq 2$ eine Primzahlpotenz und $m \geq 2$.
+  Sei $q \geq 2$ eine Primzahlpotenz und $m \geq 2$. \\
   Der Code $\Sim_q(m) \coloneqq \Ham_q(m)^\perp$ heißt \emph{Simplex-Code}.
 \end{defn}
 
@@ -888,25 +917,35 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
   $\Sim_q(m)$ ist \emph{gewichtskonstant}, \dh{} jedes vom Nullwort verschiedene Codewort hat Gewicht $q^{m-1}$.
 \end{satz}
 
+\begin{samepage}
+
 \begin{bem}
   Also ist $A_{\Sim_q(m)}(z) = 1 + (q^m - 1) \cdot z^{q^{m-1}}$.
 \end{bem}
 
 % §5.6 Gewichtsverteilung der binären Hamming-Codes
+\subsection{Gewichtsverteilung der binären Hamming-Codes}
 
-\begin{samepage}
+Wir betrachten den binären Hamming-Code $C = \Ham_2(m) \subset \F_2^n$ mit $n = 2^m - 1$.
+
+\begin{lem}
+  Für $2 \leq \ell \leq n$ gilt die Rekursionsgleichung
+  \[
+    \binom{n}{\ell-1} = (n-\ell+2) \cdot A_{\ell-2} + A_{\ell-1} + \ell \cdot A_\ell.
+  \]
+\end{lem}
 
 \begin{satz}
-  $A_{\Ham_2(m)}(z) = \tfrac{1}{n+1} (1+z)^n + \tfrac{n}{n+1} (1+z)^{\tfrac{n-1}{2}} \cdot (1-z)^{\tfrac{n+1}{2}}$,
-  wobei $n = 2^m - 1$.
-  Es gilt die Rekursionsgleichung
-  \[ \binom{n}{l-1} = (n-l+2) \cdot A_{l-2} + A_{l-1} + l \cdot A_l. \]
+  Das Gewichtszählpolynom von $C$ ist
+  \[
+    A_C(z) = \tfrac{1}{n+1} (1+z)^n + \tfrac{n}{n+1} (1+z)^{\nicefrac{(n-1)}{2}} \cdot (1-z)^{\nicefrac{(n+1)}{2}}.
+  \]
 \end{satz}
 
 % Vorlesung vom 10.11.2015
 
 % §6. Die Golay-Codes und deren Erweiterungen
-\section{Golay-Codes und ihre Erweiterungen}
+\section{§6. Golay-Codes und ihre Erweiterungen}
 
 \end{samepage}
 
@@ -955,7 +994,8 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 \end{prop}
 
 \begin{konstr}
-  Beginne mit dem $[7, 4, 3]$-Hamming-Code $C_1$ mit Generatormatrix
+  Sei $C_1$ der $[7, 4, 3]$-Hamming-Code und $\overline{C}_1$ dessen Parity-Check-Erweiterung.
+  Die Generatormatrizen dieser Codes sind
   \[
     G_1 = \begin{pmatrix}
       1 & 1 & 0 & 1 & 0 & 0 & 0 \\
@@ -963,15 +1003,13 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
       0 & 0 & 1 & 1 & 0 & 1 & 0 \\
       0 & 0 & 0 & 1 & 1 & 0 & 1
     \end{pmatrix}
-  \]
-  Sei $\overline{C}_1$ die Parity-Check-Erweiterung von $C_1$ mit Generatormatrix
-  \[
+    \quad \text{bzw.} \quad
     \overline{G}_1 = \left( \begin{array}{c | c}
       \multirow{4}{*}{$G_1$} & 1 \\
       & 1 \\
       & 1 \\
       & 1
-    \end{array} \right)
+    \end{array} \right).
   \]
   Dann ist $\overline{C}_1$ eine selbstdualer $[8,4,4]$-Code über $\F_2$.
   
@@ -1069,7 +1107,7 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 \end{konstr}
 
 % §7. Grundlagen aus der Designtheorie
-\section{Verbindungen mit der Designtheorie}
+\section{§7. Verbindungen mit der Designtheorie}
 
 \begin{defn}
   Eine \emph{Inzidenzstruktur} (IS) ist ein Tupel $\Design = (V, \Blocks, I)$ mit
@@ -1429,7 +1467,7 @@ In dieser Vorlesung soll es darum gehen, Daten mit einer Kanalcodierung so zu ü
 % Vorlesung vom 1.12.2015
 
 % §8. Reed-Muller-Codes
-\section{Reed-Muller-Codes}
+\section{§8. Reed-Muller-Codes}
 
 % Mars-Sonde "Mariner-9": Informationsraum $\F_2^6$, Anforderung an Code: $d = 16$
 % $A_q(n, d) = \max \Set{M}{\text{es gibt einen $q$-nären $(n, M, d)$-Code}}$
@@ -1805,7 +1843,7 @@ Suche nun ein $\lambda \in \F_2^m$ mit $\abs{\hat{B}_\beta(\lambda)}$ ist minima
 % ausgelassen: Beispiel
 
 % §9. Die Gewichtsverteilung von dualen Codes
-\section{Die Gewichtsverteilung von dualen Codes}
+\section{§9. Die Gewichtsvert. von dualen Codes}
 
 % §9.1 Die MacWilliams-Transformation
 
@@ -1840,6 +1878,8 @@ Suche nun ein $\lambda \in \F_2^m$ mit $\abs{\hat{B}_\beta(\lambda)}$ ist minima
   \]
   Es gilt $(\hat{\F_q}, \cdot, \chi_0) \cong (\F_q, +, 0)$.
 \end{bem}
+
+\TODO{Mac-Williams-Transformation erwähnen}
 
 % Vorlesung vom 17.12.2015
 
@@ -1919,6 +1959,7 @@ Zu $f : \F_q^n \to V$ definieren wir eine \emph{transformierte Abbildung} durch
 % Vorlesung vom 22.12.2015
 
 % §10. MDS-Codes
+\section{§10. MDS-Codes}
 
 % §10.1 MDS-Codes der Länge 4
 
@@ -2114,7 +2155,7 @@ TODO: Rest des Beispiels, insbesondere Decodierung
 % Vorlesung vom 14.1.2016
 
 % §11. Zyklische Codes
-\section{Zyklische Codes}
+\section{§11. Zyklische Codes}
 
 % §11.1. Beschreibung zyklischer Codes
 
@@ -2494,7 +2535,7 @@ TODO: Rest des Beispiels, insbesondere Decodierung
 \TODO{Sind diese Codes äquivalent?}
 
 % §12. BCH-Codes
-\section{BCH-Codes}
+\section{§12. BCH-Codes}
 
 % §12.1 Die BCH-Schranke
 
