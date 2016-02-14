@@ -11,10 +11,12 @@
 \usepackage[normalem]{ulem} % \sout
 \usepackage{multirow}
 \usepackage{upgreek} % für \upsigma
+\usepackage{stmaryrd} % für \llbracket
 
 % Kleinere Klammern
 \delimiterfactor=701
 
+\newcommand{\K}{\mathbb{K}} % Körper
 \newcommand{\F}{\mathbb{F}} % endlicher Körper
 \newcommand{\GF}{\mathbb{GF}} % endlicher Körper
 \renewcommand{\P}{\mathbb{P}} % Wahrscheinlichkeit
@@ -2977,5 +2979,24 @@ Zusammen mit der Kugelpackungsschranke folgt:
 \end{folgerung}
 
 % ausgelassen: Beispiel
+
+% §12.6. Abschließende Bemerkungen
+
+\begin{satz}[\emph{Newton-Identitäten}]
+  Sei $\K$ ein Körper und $x_1, \ldots, x_t$ sowie~$z$ Variablen.
+  Für $k \in \N$ sei
+  $\sigma_k \coloneqq x_1^k + \ldots + x_t^k$ (insb. $\sigma_0 = t$).
+  Wir betrachten
+  \begin{alignat*}{3}
+    S(z) & \coloneqq \sum_{k=0}^\infty \sigma_k z^k && \in \K [x_1, \ldots, x_t] \llbracket z \rrbracket \subseteq \K (x_1, \ldots, x_t) \llbracket z \rrbracket, \\
+    L(z) & \coloneqq \prod_{j=1}^t (1 - x_j z) && \in \K [x_1, \ldots, x_t] [z] \subseteq \K (x_1, \ldots, x_t) \llbracket z \rrbracket.
+  \end{alignat*}
+  Dann ist $L(z) \cdot S(z)$ ein Polynom mit Grad $\leq t - 1$.
+  Genauer gilt
+  \[
+    L(z) \cdot S(z) = \sum_{r=0}^{t-1} (-1)^{r} \cdot p_r \cdot (t - r) \cdot z^r,
+  \]
+  wobei $p_0, \ldots, p_t$ die elementarsymm. Fktn in $x_1, \ldots, x_t$ sind.
+\end{satz}
 
 \end{document}
