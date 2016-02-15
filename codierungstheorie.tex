@@ -324,6 +324,8 @@ In der Codierungstheorie geht es darum, Daten mit einer Kanalcodierung so zu üb
   \end{itemize}
 \end{lem}
 
+Letztere Aussage bekommt man durch \textit{Punktieren}, \dh{} Streichen einer Koordinate von~$Q^n$.
+
 % 3.6
 \begin{kor}[\emph{Singletonschranke}]
   $A_q(n, d) \leq q^{n-d+1}$
@@ -810,7 +812,7 @@ Da die Parity-Check-Erw. durch eine lin. Abb. geschieht, gilt:
 
 % 5.2
 \begin{prop}
-  Sei $m \geq 2$, $n = 2^m - 1$ und $A \in \N^{0, 1, \ldots, \N}$ die Gewichtsverteilung des $[n, n - m, 3]$-Hamming-Codes.
+  Sei $m \geq 2$, $n = 2^m - 1$ und $A \in \N^{0, 1, \ldots, \N}$ die Gewichtsverteilung des $[n, n - m, 3]$-Hamming-Codes. \\
   Dann gilt $A_{n-j} = A_j$ für alle $j = 0, 1, \ldots, 2^{m-1} - 1$.
 \end{prop}
 
@@ -947,15 +949,24 @@ Wir betrachten den binären Hamming-Code $C = \Ham_2(m) \subset \F_2^n$ mit $n =
 % §6. Die Golay-Codes und deren Erweiterungen
 \section{§6. Golay-Codes und ihre Erweiterungen}
 
+\begin{ziel}
+  Konstruktion des binären Golay-Codes $\Golay(23)$ und seiner Erweiterung $\Golay(24)$ und des ternären Golay-Codes~$\Golay(11)$ und seiner Erweiterung~$\Golay(12)$.
+  Diese vier Codes sind optimal, $\Golay(23)$ und $\Golay(11)$ sogar perfekt.
+\end{ziel}
+
+% §6.1. Übersicht über die Existenz perfekter Codes
+\subsection{Existenz perfekter Codes}
+
 \end{samepage}
 
 \begin{prop}
-  Ist $n \geq 3$ ungerade, so ist der binäre $n$-Wiederholungscode ein perfekter Code.
+  Ist $n \geq 3$ ungerade, so ist der binäre $n$-Wiederholungscode ein perfekter Code, der sogenannte \emph{triviale perfekte} Code.
 \end{prop}
 
 \begin{bem}
-  Es sei $d \geq 5$, $q$ eine Primzahlpotenz.
-  Für $n \leq 1000$, $\log_q(M) \leq 1000$ und $q \leq 1000$ könnte es nur Codes mit folgenden Parametern geben:
+  Es sei $d \geq 5$ (\dh{} wir schließen \zB{} die Hamming-Codes aus), $q$ eine Primzahlpotenz.
+  Durch Computer-Suche kann man zeigen:
+  Für $n \leq 1000$, $\log_q(M) \leq 1000$ und $q \leq 1000$ könnte es nur perfekte lineare Codes mit folgenden Parametern geben:
   \begin{itemize}
     \item $q=2$, $n=23$, $d=7$, $M=2^{12} = 4096$ % \Golay(24)
     \item $q=2$, $n=90$, $d=5$, $M=2^{78}$
@@ -967,18 +978,42 @@ Wir betrachten den binären Hamming-Code $C = \Ham_2(m) \subset \F_2^n$ mit $n =
   Es gibt keinen binären $(90, 2^{78}, 5)$-Code.
 \end{satz}
 
+\begin{beweisidee}
+  Angenommen, $C$ wäre ein solcher Code.
+  Man zeigt, dass es für jedes $w \in \F_2^{90}$ mit $\wt(w) = 3$ genau ein $\varphi(w) \in C$ mit $\supp(w) \subset \supp(\varphi(w))$ und $\wt(\varphi(w)) = 5$ gibt.
+  Somit ist die Abbildung $\varphi : X \to Y$ mit
+  \begin{align*}
+    X & \coloneqq \Set{w \in \F_2^{90}}{\wt(w) = 3 \text{ und } w_1 = w_2 = 1}, \\
+    Y & \coloneqq \Set{c \in C}{\wt(c) = 6 \text{ und } c_1 = c_2 = 1}
+  \end{align*}
+  surjektiv.
+  Die Fasern $\varphi^{-1}(c)$ haben je drei Elemente. \\
+  Wegen $\tfrac{\abs{X}}{\abs{\varphi^{-1}(c)}} = \tfrac{88}{3} \not\in \N$ folgt der Widerspruch. \qed
+\end{beweisidee}
+
 \begin{bem}
+  Tietäväinen sowie Zinov'ev und Leont'ev konnten zeigen, dass jeder $q$-näre $t$-fehlerkorrigierende perfekte Code mit Primzahlpotenz $q \geq 2$ und $t \geq 2$ entweder ein binärer $(23, 2^{12}, 7)$-Code oder ein ternärer $(11, 3^6, 5)$-Code ist.
+\end{bem}
+
+Mit einer Methode aus ihrem Beweis lässt sich ein alternativer Beweis des letzten Satzes führen:
+
+\begin{satz}
   Sei $q$ eine Primzahlpotenz, $C$ ein perfekter $q$-närer $(n, M, 2t+1)$-Code.
   Dann hat das \emph{Lloyd-Polynom}
   \[ L_t(X) \coloneqq \sum_{j=0}^t (-1)^j \cdot (q-1)^{t-j} \cdot \binom{X-1}{j} \binom{n-1-X}{t-j} \]
   mindestens $t$ verschiedene Nullstellen in $\{ 1, \ldots, n \}$.
-\end{bem}
+\end{satz}
+
+\begin{samepage}
 
 \begin{bsp}
   Für $n=90$, $q=2$, $t=2$ ist $L_2(X) = 2 (X^2 - 90 + 2003)$.
   Dessen Diskriminante ist $88$, also keine Quadratzahl.
   Somit besitzt $L_2(X)$ keine natürlichen Nullstellen.
 \end{bsp}
+
+% §6.3. Grundlagen über selbstduale Codes
+\subsection{Selbstduale Codes}
 
 \begin{prop}
   Sei $C$ ein binärer selbst-dualer Code (insb. linear).
@@ -992,6 +1027,11 @@ Wir betrachten den binären Hamming-Code $C = \Ham_2(m) \subset \F_2^n$ mit $n =
 \begin{prop}
   Für jeden ternären selbstdualen Code $C$ gilt $\fa{c \!\in\! C\!}\! 3 \divides \wt(c)$.
 \end{prop}
+
+% §6.3. Der binäre Golay-Code und seine Erweiterung
+\subsection{Der binäre Golay-Code und seine Erweiterung}
+
+\end{samepage}
 
 \begin{konstr}
   Sei $C_1$ der $[7, 4, 3]$-Hamming-Code und $\overline{C}_1$ dessen Parity-Check-Erweiterung.
@@ -1023,7 +1063,7 @@ Wir betrachten den binären Hamming-Code $C = \Ham_2(m) \subset \F_2^n$ mit $n =
     \end{pmatrix}
   \]
   der Code $C_2$ von $G_2$ erzeugt, $\overline{C}_2$ die Parity-Check-Erw. von $C_2$.
-  Dann ist $\overline{C}_2$ selbstdual.
+  Dann ist $\overline{C}_2$ ein selbstdualer $[8, 4, 4]$-Code.
 \end{konstr}
 
 \begin{satz}
@@ -1080,6 +1120,9 @@ Wir betrachten den binären Hamming-Code $C = \Ham_2(m) \subset \F_2^n$ mit $n =
 
 % Vorlesung vom 17.11.2015
 
+% §6.4. Der ternäre Golay-Code und seine Erweiterung
+\subsection{Der ternäre Golay-Code und seine Erweiterung}
+
 % 6.12
 \begin{satz}
   $\Golay(12) \coloneqq \Omega \subset \F_3^{12}$ sei der Code mit Generatormatrix $G=[E_6|M] \in \F_3^{6 \times 12}$, wobei
@@ -1128,8 +1171,8 @@ Wir betrachten den binären Hamming-Code $C = \Ham_2(m) \subset \F_2^n$ mit $n =
 
 \begin{defn}
   $\sigma(p) \coloneqq \Set{B \in \Blocks}{p I B}$,
-  $\upsigma(B) \coloneqq \Set{p \in V}{p I B}$ \enspace
-  heißen \emph{Bahnen}
+  $\upsigma(B) \coloneqq \Set{p \in V}{p I B}$
+  heißen \emph{Bahnen}.
 \end{defn}
 
 \begin{defn}
@@ -1157,8 +1200,8 @@ Wir betrachten den binären Hamming-Code $C = \Ham_2(m) \subset \F_2^n$ mit $n =
 % ausgelassen: langweiliges Bsp
 
 \begin{satz}
-  $\Design = (V, \Blocks, {\in})$ sei ein lin. Raum mit $b \leq 2$.
-  Dann gilt $b \geq v$.
+  Sei $\Design$ ein lin. Raum.
+  Dann gilt entweder $b = 1$ oder $b \geq v$.
 \end{satz}
 
 % Dieser Satz motiviert die Betrachtung von linearen Räumen mit $b = v$.
@@ -1280,11 +1323,11 @@ Wir betrachten den binären Hamming-Code $C = \Ham_2(m) \subset \F_2^n$ mit $n =
 
 \begin{prop}
   Sei $\Design = (V, \Blocks, I)$ ein $S_\lambda(t, k, v)$.
-  Ist $s \in \N$ mit $s \leq t$, dann ist~$\Design$ auch ein $s$-Design und zwar mit $\lambda_s = \frac{\lambda \cdot {v -s t-s}}{\binom{k-s}{t-s}}$.
+  Ist $s \in \N$ mit $s \leq t$, dann ist~$\Design$ auch ein $s$-Design und zwar mit $\lambda_s = \frac{\lambda \cdot \binom{v - s}{t-s}}{\binom{k-s}{t-s}}$.
 \end{prop}
 
 \begin{kor}
-  Ist $t \geq 1$, so ist $\Design$ eine taktische Konf. mit Replikationszahl
+  Ist $t \geq 1$, so ist $\Design$ eine taktische Konf. mit \textit{Replikationszahl}
   \[ r = \lambda_1 = \frac{\lambda \binom{v-1}{t-1}}{\binom{k-1}{t-1}} \]
   Die Anzahl der Blöcke in einem Blockplan ist
   \[ b = \lambda_0 = \frac{\lambda \binom{v}{t}}{\binom{k}{t}}. \]
@@ -1304,14 +1347,14 @@ Wir betrachten den binären Hamming-Code $C = \Ham_2(m) \subset \F_2^n$ mit $n =
 
 \begin{bspe}
   \begin{itemize}
-    \item Ein $[2^m-1, 2^m-1-m, 3]$-Hamming-Code über $\F_2$ liefert ein $S_1(2, 3, 2^m-1)$.
+    \item Ein $[2^m-1, 2^m-1-m, 3]$-Hamming-Code über~$\F_2$ liefert ein $S_1(2, 3, 2^m-1)$-Steinersystem.
     % ~> $\tau = 1+t = t+1 = 2$, $k=3$, $v = 2^m-1$.
     % Vorlesung vom 24.11.2015
     \item $\Golay(23)$ ist ein perfekter, binärer $[23, 12, 7]$-Code $\implies$ $\exists$ $S_1(4, 7, 23)$.
     \item Angenommen, es gibt einen bin. $(90, 2^{78}, 5)$-Code (also perfekt).
     Dann $\exists$ ein $S_1(3, 5, 90)$, etwa $\Design$.
     Dann ist $\Design$ ein $S_{\lambda_2}(2, 5, 90)$ mit
-    \[ \lambda_2 = \frac{\lambda \binom{v-2}{t-2}}{\binom{k-2}{t-2}} = \frac{1 \binom{88}{1}}{\binom{3}{1}} = \tfrac{88}{3} \neq\in \N. \]
+    \[ \lambda_2 = \frac{\lambda \binom{v-2}{t-2}}{\binom{k-2}{t-2}} = \frac{1 \binom{88}{1}}{\binom{3}{1}} = \tfrac{88}{3} \not\in \N. \]
   \end{itemize}
 \end{bspe}
 
@@ -1363,12 +1406,12 @@ Wir betrachten den binären Hamming-Code $C = \Ham_2(m) \subset \F_2^n$ mit $n =
     \item Sei umgekehrt $(W, \mathcal{H}, \in)$ eine aff. Ebene der Ord. $n$.
     Dann def.
     \[ L \text{ ist parallel zu } K \coloniff L \parallel K \coloniff (L = K) \vee (L \cap K = \emptyset) \]
-    eine Äq'relation auf $\mathcal{H}$.
+    eine Äquivalenzrelation auf $\mathcal{H}$.
     Dann ist
     \[
       (V, \Geraden, \in)
-      \quad \text{mit} \quad
-      V \coloneqq W \,\amalg\, (\mathcal{H}/{\parallel}), \quad
+      \enspace \text{mit} \enspace
+      V \coloneqq W \,\amalg\, (\mathcal{H}/{\parallel}), \enspace
       \Geraden \coloneqq \Set{K \,\amalg\, \{ [K] \}}{K \in \mathcal{H}} \,\amalg\, \{ \mathcal{H}/{\parallel} \}
     \]
     eine projektive Ebene der Ordnung $n$.
@@ -1478,6 +1521,7 @@ Wir betrachten den binären Hamming-Code $C = \Ham_2(m) \subset \F_2^n$ mit $n =
 % Zum Vergleich die Informationsrate des Wiederholungscodes $[6 \cdot 16, 6, 16] über $\F_2$: $\tfrac{6}{6 \cdot 16} = 6,25$
 
 % §8.2 Die Plotkin-Schranke
+\subsection{Die Plotkin-Schranke}
 
 \begin{satz}[\emph{Plotkin-Schranke}]
   Sei $q \geq 2$, $d > \tfrac{q-1}{q} \cdot n$.
@@ -1539,6 +1583,7 @@ Wir betrachten den binären Hamming-Code $C = \Ham_2(m) \subset \F_2^n$ mit $n =
 \end{konstr}
 
 % §8.3 Die Algebra der Booleschen Funktionen
+\subsection{Die Algebra der Booleschen Funktionen}
 
 % Sei $M$ eine Menge, $\F_2^M = $ der $\F_2$-Vektorraum aller Abb. von $M$ nach $\F_2$.
 
@@ -1578,11 +1623,12 @@ Wir betrachten den binären Hamming-Code $C = \Ham_2(m) \subset \F_2^n$ mit $n =
   $
 \end{kor}
 
-% §8.4 Die binären Reed-Muller-Codes
-
 \begin{nota}
   $x_I \coloneqq \prod_{i \in I} x_i$ für $I \subset \{ 1, \ldots, m \}$
 \end{nota}
+
+% §8.4 Die binären Reed-Muller-Codes
+\subsection{Die binären Reed-Muller-Codes}
 
 \begin{defn}
   Der (binäre) \emph{Reed-Muller-Code} zu $(r, m)$ ist
@@ -1694,7 +1740,7 @@ Wir betrachten den binären Hamming-Code $C = \Ham_2(m) \subset \F_2^n$ mit $n =
 \begin{konstr}
   \begin{itemize}
     \item Wir können davon ausgehen, dass die erste Zeile und Spalte von $H$ nur Einsen enthalten (durch Multiplizieren mit $-1$).
-    Durch Streichen der ersten Zeile und Spalte erhalten wir aus $H$ eine Matrix $M \in \R^{4l - 1, 4l - 1}$.
+    Durch Streichen der ersten Zeile und Spalte erhalten wir aus $H$ eine Matrix $M \in \R^{(4l - 1) \times (4l - 1)}$.
     In $M$ ersetzen wir $-1$ durch $0$ und bekommen so die Inzidenzmatrix des gesuchten Blockplans.
     (Diese Konstruktion lässt sich umkehren.)
     \item Der Code besteht aus den Zeilen von $H$ und $-H$ (wobei wir $\{ 0, 1 \} \leftrightarrow \{ -1, 1 \}$ anwenden).
@@ -2107,22 +2153,19 @@ Falls $C$ ein MDS-Code ist, so ist $k = n - d + 1$, also $k^\perp = n - k = d - 
 \end{bem}
 
 \begin{defn}
-  Betrachte $\F_q$.
-  Wähle ein $n$ mit $n < q$.
-  % $q$ groß, z.B. q = 256
-  Sei $\beta$ ein primitives Element von $\F_q$.
-  Sei $l \in \N$ mit $1 \leq l \leq n$.
-  Setze $P_l \coloneqq \Set{f(x) \in \F_q[x]}{\deg(f) < l}$.
+  Wähle $n, \ell \in \N$ mit $1 \leq \ell \leq n < q$.
+  Sei $\beta \in \F_q$ ein primitives Element.
+  Setze $P_\ell \coloneqq \Set{f(x) \in \F_q[x]}{\deg(f) < \ell}$.
   Betrachte
   \[
-    \epsilon = \epsilon_\beta : P_l \to \F_q^n, \quad
+    \epsilon = \epsilon_\beta : P_\ell \to \F_q^n, \quad
     f(x) \mapsto (f(\beta), f(\beta^2), \ldots, f(\beta^n)).
   \]
   Dann heißt $C \coloneqq \im \epsilon$ ein \emph{Reed-Solomon-Code}.
 \end{defn}
 
 \begin{satz}
-  Jeder Reed-Solomon-Code ist ein linearer MDS-Code.
+  Der konstruierte Reed-Solomon-Code ist ein linearer $[n, \ell, n - \ell + 1]$-MDS-Code.
 \end{satz}
 
 % Beweis: $\epsilon$ ist injektiv
@@ -2362,7 +2405,7 @@ TODO: Rest des Beispiels, insbesondere Decodierung
     I = [\ell, \ell + b - 1]_{\bmod n} \coloneqq \Set{\ell + j \bmod n}{0 \leq j \leq b-1}.
   \]
   Ein $v \in \F_q^n$ ist ein \emph{Fehlerbündel der Länge~$b$}, falls $b$ minimal ist mit:
-  Es existiert ein zyklisches Intervall $I$ der Länge $b$ mit $v_l \neq 0$, $v_{l+b-1 \pmod{n}} \neq 0$ und $\supp(v) \subseteq I$.
+  Es existiert ein zyklisches Intervall $I$ der Länge $b$ mit $v_\ell \neq 0$, $v_{\ell+b-1 \pmod{n}} \neq 0$ und $\supp(v) \subseteq I$.
 \end{defn}
 
 \begin{bsp}
@@ -2692,9 +2735,9 @@ TODO: Rest des Beispiels, insbesondere Decodierung
   Sei~$\zeta$ eine prim. $n$-te Einheitswurzel, $b \geq 1$ und $2 \leq \delta \leq n$.
   Dann ist
   \[
-    g(x) \coloneqq (x - \zeta^b) \cdot (x - \zeta^{b+1}) \cdot \ldots \cdot (x - \zeta^{b + \delta - 1})
+    g(x) \coloneqq (x - \zeta^b) \cdot (x - \zeta^{b+1}) \cdot \ldots \cdot (x - \zeta^{b + \delta - 2})
   \]
-  das kleinste mon. Polynom aus~$\F_q[x]$ mit $\mathcal{N} = \{ \zeta^b, \ldots, \zeta^{b+\delta-1} \}$ als Nullstellen.
+  das kleinste mon. Polynom aus~$\F_q[x]$ mit $\mathcal{N} = \{ \zeta^b, \ldots, \zeta^{b+\delta-2} \}$ als Nullstellen.
   Für BCH-Code $C = C(\mathcal{N}) = C_g$ gilt
   \[
     \wt(g) \leq \deg(g) + 1 = \delta \leq d(C) \leq \wt(g),
