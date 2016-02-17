@@ -1,6 +1,6 @@
 \documentclass{cheat-sheet}
 
-\usepackage{stmaryrd} % \mapsfrom
+\usepackage{stmaryrd} % \mapsfrom, \llbracket
 
 \pdfinfo{
   /Title (Zusammenfassung Kommutative Algebra)
@@ -525,7 +525,7 @@ Im Folgenden seien alle Ringe \emph{kommutativ}, \dh{} $xy = yx$ f.\,a. $x, y$.
 % 6.2. Direkte Produkte
 
 \begin{defn}
-  Das \emph{direkte Produkt} einer Familie $(A_i)_{i \in I}$ von Ringen ist der Ring $\prod_{i \in I} A_i \coloneqq \{ (a_i \in A_i)_{i \in I} \}$ mit kmpnntnwsr Verknüpfung.
+  Das \emph{direkte Produkt} einer Familie $(A_i)_{i \in I}$ von Ringen ist der Ring ${\prod}_{i \in I} A_i \coloneqq \{ (a_i \in A_i)_{i \in I} \}$ mit kmpnntnwsr Verknüpfung.
 \end{defn}
 
 \begin{bem}
@@ -922,7 +922,7 @@ Im Folgenden seien alle Ringe \emph{kommutativ}, \dh{} $xy = yx$ f.\,a. $x, y$.
 % 11.1. Definition von direkter Summe und Produkt
 
 \begin{defn}
-  Das \emph{direkte Produkt} einer Familie $(M_i)_{i \in I}$ von $A$-Moduln ist das $A$-Modul $\prod_{i \in I} M_i \coloneqq \{ (x_i \in M_i)_{i \in I} \}$ mit kmpnntnwsr Verkn.
+  Das \emph{direkte Produkt} einer Familie $(M_i)_{i \in I}$ von $A$-Moduln ist das $A$-Modul ${\prod}_{i \in I} M_i \coloneqq \{ (x_i \in M_i)_{i \in I} \}$ mit kmpnntnwsr Verkn.
 \end{defn}
 
 \begin{bem}
@@ -945,8 +945,10 @@ Im Folgenden seien alle Ringe \emph{kommutativ}, \dh{} $xy = yx$ f.\,a. $x, y$.
 
 % 11.2. Direkte Summenzerlegung von Ringen
 
+\begin{samepage}
+
 \begin{bsp}[Direkte Summenzerlegung]
-  Sei $A = \prod_{i=1}^n A_i$ ein endl. direktes Produkt komm. Ringe.
+  Sei $A = {\prod}_{i=1}^n A_i$ ein endl. direktes Produkt komm. Ringe.
   Dann gilt $A \cong \aaa_1 \oplus \ldots \oplus \aaa_n$ als $A$-Modul mit
   \[
     \aaa_i \coloneqq \Set{(x_i)_{i=1}^n}{x_j = 0 \text{ für } j \neq i}.
@@ -954,11 +956,14 @@ Im Folgenden seien alle Ringe \emph{kommutativ}, \dh{} $xy = yx$ f.\,a. $x, y$.
 \end{bsp}
 
 % 12. Endlich erzeugte Moduln
+\subsection{Endlich erzeugte Moduln}
+
+\end{samepage}
 
 % 12.1. Freie Moduln
 
 \begin{defn}
-  Ein \emph{$A$-Modul} $M$ heißt frei, falls eine Menge $I$ existiert, sodass $M \cong \bigoplus_{i \in I}$ als $A$-Modul.
+  Ein \emph{$A$-Modul} $M$ heißt \emph{frei}, falls eine Menge $I$ existiert, sodass $M \cong {\bigoplus}_{i \in I} M_i$ als $A$-Modul.
 \end{defn}
 
 \begin{bem}
@@ -1013,11 +1018,11 @@ Im Folgenden seien alle Ringe \emph{kommutativ}, \dh{} $xy = yx$ f.\,a. $x, y$.
 
 \begin{defn}
   Sei $A$ ein Ring.
-  Eine Sequenz
+  Die Sequenz von $A$-Moduln
   \[
     \ldots \to M^{i-1} \xra{\phi^{i-1}} M^i \xra{\phi^i} M^{i+1} \to \ldots
   \]
-  von $A$-Moduln und $A$-Modulhomomorphismen heißt \emph{exakt} bei $M^i$, falls $\im \phi^{i-1} = \ker \phi^i$.
+  heißt \emph{exakt} bei $M^i$, falls $\im \phi^{i-1} = \ker \phi^i$. \\
   Die Sequenz heißt \emph{exakt}, falls sie exakt bei jedem $M^i$ ist.
 \end{defn}
 
@@ -1042,15 +1047,6 @@ Im Folgenden seien alle Ringe \emph{kommutativ}, \dh{} $xy = yx$ f.\,a. $x, y$.
 \end{bem}
 
 \begin{lem}
-  Sei $A$ ein komm. Ring.
-  Eine Seq. $E : M' \xra{\phi} M \xra{\psi} M'' \to 0$ ist genau dann exakt, wenn für alle $A$-Moduln $N$ die Sequenz
-  \[
-    \Hom(E, N) : 0 \to \Hom(M'', N) \xra{\psi^*} \Hom(M, N) \xra{\phi^*} \Hom(M', N).
-  \]
-  exakt ist.
-\end{lem}
-
-\begin{lem}
   Sei $A$ ein kommutativer Ring.
   \begin{itemize}
     \item Eine Sequenz $E : M' \xra{\phi} M \xra{\psi} M'' \to 0$ ist genau dann exakt, wenn für alle $A$-Moduln $N$ folgende induzierte Sequenz exakt ist:
@@ -1059,7 +1055,7 @@ Im Folgenden seien alle Ringe \emph{kommutativ}, \dh{} $xy = yx$ f.\,a. $x, y$.
     \]
     \item Eine Sequenz $F : 0 \to N' \xra{\phi} N \xra{\psi} N''$ ist genau dann exakt, wenn für alle $A$-Moduln $M$ folgende induzierte Sequenz exakt ist:
     \[
-      \Hom(M, F) : \Hom(M, N') \xra{\phi_*} \Hom(M, N) \xra{\psi_*} \Hom(M, N'') \to 0.
+      \Hom(M, F) : 0 \to \Hom(M, N') \xra{\phi_*} \Hom(M, N) \xra{\psi_*} \Hom(M, N'').
     \]
   \end{itemize}
 \end{lem}
@@ -1113,7 +1109,7 @@ Im Folgenden seien alle Ringe \emph{kommutativ}, \dh{} $xy = yx$ f.\,a. $x, y$.
 \end{defn}
 
 \begin{bsp}
-  Sei $K$ ein Körper und $\SC$ die Klasse der endlich-dim. VR über $K$.
+  Sei~$K$ ein Körper und~$\SC$ die Klasse der endlich-dim. VR über~$K$.
   Dann ist $\dim : \SC \to \Z$ eine additive Funktion.
 \end{bsp}
 
@@ -1125,7 +1121,7 @@ Im Folgenden seien alle Ringe \emph{kommutativ}, \dh{} $xy = yx$ f.\,a. $x, y$.
   \]
   eine exakte Sequenz von Moduln in $\SC$, sodass auch die Kerne der $\phi^i$ in $\SC$ liegen.
   Dann gilt
-  $\sum_{i=0}^n (-1)^i \lambda(M^i) = 0$.
+  ${\sum}_{i=0}^n (-1)^i \lambda(M^i) = 0$.
 \end{prop}
 
 % 14. Tensorprodukte von Moduln
@@ -1135,7 +1131,7 @@ Im Folgenden seien alle Ringe \emph{kommutativ}, \dh{} $xy = yx$ f.\,a. $x, y$.
 
 \begin{defn}
   Seien $M$, $N$ und $P$ drei $A$-Moduln.
-  Eine Abbildung $\beta : M \times N \to P$ heißt \emph{$A$-bilinear}, falls für alle $x \in M$ die Abbildung $\beta(x, \blank)$ und für alle $y \in N$ die Abbildung $\beta(\blank, y)$ ein $A$-Modulhomomorphismus ist.
+  Eine Abb. $\beta : M \times N \to P$ heißt \emph{$A$-bilinear}, falls für alle $x \in M$ die Abbildung $\beta(x, \blank)$ und für alle $y \in N$ die Abbildung $\beta(\blank, y)$ ein $A$-Modulhomomorphismus ist.
 \end{defn}
 
 \begin{bsp}
@@ -1262,7 +1258,7 @@ Im Folgenden seien alle Ringe \emph{kommutativ}, \dh{} $xy = yx$ f.\,a. $x, y$.
     \item Sei $N$ ein $B$-Modul.
     Ist $B^A$ als $A$-Modul endlich erzeugt und $N$ als $B$-Modul endlich erzeugt, so ist $N^A$ als $A$-Modul endlich erzeugt.
     \item Sei $M$ ein $A$-Modul.
-    Ist $m$ als $A$-Modul endlich erzeugt, so ist $M_B$ als $B$-Modul endlich erzeugt.
+    Ist $M$ als $A$-Modul endlich erzeugt, so ist $M_B$ als $B$-Modul endlich erzeugt.
   \end{itemize}
 \end{prop}
 
@@ -3256,6 +3252,10 @@ Sei $A$ ein Integritätsbereich mit Quotientenkörper~$K$.
     Es gilt dabei $\lim_{n \to \infty} p^n = 0$.
   \end{itemize}
 \end{bspe}
+
+\begin{defn}
+  Elemente des Quotientenkörpers~$\Q_p$ von~$\Z_p$ heißen \emph{$p$-adische Zahlen}.
+\end{defn}
 
 % 40. Filtrationen
 
