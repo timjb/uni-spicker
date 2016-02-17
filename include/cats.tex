@@ -68,3 +68,34 @@
 \newcommand{\Wat}{\mathcal{W}} % Category-W (whaaaatt?)
 \newcommand{\Xat}{\mathcal{X}} % Category-X
 \newcommand{\Yat}{\mathcal{Y}} % Category-Y
+
+% Makros für Adjunktionen. Geklaut von
+% http://sma.epfl.ch/~werndli/latex/adjunction.pdf
+% http://sma.epfl.ch/~werndli/latex/adjunction.tex
+\usepackage[all]{xy}
+\newcommand{\adj}[1][]{\def\ArgI{#1}\adjRelayI}
+\newcommand{\adjRelayI}[1][]{\def\ArgII{#1}\adjRelayII}
+\newcommand{\adjRelayII}[3][2.2em]{
+  \ensuremath{\SelectTips{lu}{10}\xymatrix@C=#1@1{
+    {#2\,}
+    \ar@<1ex>[r]^-{\ArgI}^-{}="1" &
+    {\,#3}
+    \ar@<1ex>[l]^-{\ArgII}^-{}="2"
+    \ar@{}"1";"2"|(.3){\hbox{}}="7"
+    \ar@{}"1";"2"|(.7){\hbox{}}="8"
+    \ar@{|-} "8" ;"7"
+  }}
+}
+\newcommand{\radj}[1][]{\def\ArgI{#1}\radjRelayI}
+\newcommand{\radjRelayI}[1][]{\def\ArgII{#1}\radjRelayII}
+\newcommand{\radjRelayII}[3][2.2em]{
+  \ensuremath{\SelectTips{lu}{10}\xymatrix@C=#1@1{
+  {#2\,}
+  \ar@<-1ex>[r]_-{\ArgI}^-{}="1" &
+  {\,#3}
+  \ar@<-1ex>[l]_-{\ArgII}^-{}="2"
+  \ar@{}"1";"2"|(.3){\hbox{}}="7"
+  \ar@{}"1";"2"|(.7){\hbox{}}="8"
+  \ar@{|-} "7" ;"8"
+  }}
+}

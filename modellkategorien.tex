@@ -63,6 +63,9 @@
   {\begin{center}\begin{tikzcd}}
   {\end{tikzcd}\end{center}}
 
+% Abkürzungen
+\newcommand{\kD}{k.\,D.} % kommutatives Diagramm
+
 % Kleinere Klammern
 \delimiterfactor=701
 
@@ -86,9 +89,9 @@
     \[
       \Hom_{\C}(\Cat, \Dat) = \left\{\,
       \begin{tikzcd}
-        A \arrow[r, bend left=50, "F"{above}, ""{name=U, below}]
+        \Cat \arrow[r, bend left=50, "F"{above}, ""{name=U, below}]
         \arrow[r, bend right=50, "G"{below}, ""{name=D, above}]
-        & B
+        & \Dat
         \arrow[Rightarrow, from=U, to=D]
       \end{tikzcd}
       \,\right\},
@@ -359,7 +362,7 @@
 \end{defn}
 
 \begin{bem}
-  Ein Retrakt von $f \in \Mor(\Cat)$ ist ein Retrakt von $f \in \Ob(\Cat^{\to})$.
+  Ein Retrakt von $g \in \Mor(\Cat)$ ist ein Retrakt von $g \in \Ob(\Cat^{\to})$.
 \end{bem}
 
 \begin{prop}
@@ -381,8 +384,8 @@
     \miniitem{0.3 \linewidth}{$p$ ist \emph{$i$-injektiv}}
     \miniitem{0.35 \linewidth}{$i$ ist \emph{$p$-projektiv}}
     \miniitem{0.3 \linewidth}{$i \lhhe p$}
-    \item $i$ hat die Linkshochhebungseigenschaft (LHHE) bzgl. $p$
-    \item $p$ hat die Rechtshochhebungseigenschaft (RHHE) bzgl. $i$
+    \item $i$ hat die \textit{Linkshochhebungseigenschaft} (LHHE) bzgl. $p$
+    \item $p$ hat die \textit{Rechtshochhebungseigenschaft} (RHHE) bzgl. $i$
     \item Für alle $f$, $g$ wie unten, sodass das Quadrat kommutiert, gibt es ein diagonales $\lambda$, sodass die Dreiecke kommutieren:
     \begin{centertikzcd}
       A \arrow[r, "g"] \arrow[d, "i"] &
@@ -448,7 +451,7 @@
       \phantom{\text{$\leftarrowtriangle$ \emph{Anklebeabbildung}}}
     \end{centertikzcd}
     mit $f \in I$ existiert. Sprechweise: \\
-    "`$Z_{\alpha+1}$ entsteht aus $Z_\alpha$, indem wir $B$ längs $C$ ankleben"'
+    "`$Z_{\alpha+1}$ entsteht aus $Z_\alpha$, indem wir $B$ längs $C$ ankleben."'
     \item Ein Objekt $A \in \Ob(\Cat)$ heißt \emph{$I$-Zellenkomplex}, wenn der Morph. $0 \to A$ aus dem initialen Obj. ein relativer $I$-Zellenkomplex ist.
   \end{itemize}
 \end{defn}
@@ -469,7 +472,7 @@
 \begin{samepage}
 \begin{lem}
   Sei $Z : \lambda \to \Cat$ eine $\lambda$-Sequenz.
-  Sei jeder Morphismus $Z_\beta \to Z_{\beta + 1}$ ($\beta + 1 < \lambda$) ein Pushout eines Morphismus aus $I$. \\
+  Sei jeder Mor. $Z_\beta \to Z_{\beta + 1}$ ($\beta + 1 < \lambda$) ein Pushout eines Morphismus aus $I$ oder ein Iso. \\
   Dann ist die transfinite Komposition von $Z$ ein $I$-Zellenkomplex.
 \end{lem}
 
@@ -704,10 +707,10 @@
 \end{defn}
 
 \begin{defn}
-  Eine Rechtshomotopie $h : f \simeq^r g$ ist ein Diagramm der Form
+  Eine \emph{Rechtshomotopie} $h : f \simeq^r g$ ist ein \kD{} der Form
   \begin{centertikzcd}[row sep=0.2cm]
     && Y \\
-    X \arrow[r, "h"] \arrow[rru, bend left, "f"] \arrow[rrd, bend right, "g"] & Y^I \arrow[ru, "p_0"] \arrow[rd, "p_1"] \\
+    X \arrow[r, "h"] \arrow[rru, bend left, "f"] \arrow[rrd, bend right, "g"] & Y^I \arrow{ru}{p_0}[swap]{{\sim}} \arrow{rd}{{\sim}}[swap]{p_1} \\
     && Y
   \end{centertikzcd}
 \end{defn}
@@ -1060,7 +1063,7 @@
 % 6.1. Abgeleitete Funktoren
 
 \begin{defn}
-  Sei $\ModC$ eine Modellkategorie, $\HatC$ eine beliebige Kategorie.
+  Sei $\ModC$ eine Modellkategorie, $\HatC$ eine beliebige Kategorie. \\
   Ein Funktor $F : \ModC \to \HatC$ heißt \emph{homotopisch}, falls $F$ die schwachen Äquivalenzen in $\ModC$ auf Isomorphismen in $\HatC$ abbildet.
 \end{defn}
 
@@ -1116,7 +1119,7 @@
 % 6.2. Quillen-Adjunktionen und -Äquivalenzen
 
 \begin{defn}
-  Eine Adjunktion $F : \ModC \rightleftarrows \NodC : U$ von Modellkategorien heißt \emph{Quillen-Adjunktion}, falls eine der folgenden äquivalenten Bedingungen erfüllt ist:
+  Eine Adjunktion $F : \adj{\ModC}{\NodC} : U$ von Modellkategorien heißt \emph{Quillen-Adjunktion}, falls eine der folgenden äquivalenten Bedingungen erfüllt ist:
   \begin{itemize}
     \item $F$ erhält Kofaserungen und $U$ erhält Faserungen,
     \item $F$ erhält Kofaserungen und azyklische Kofaserungen,
@@ -1185,10 +1188,10 @@
 
 \begin{lem}
   \begin{itemize}
-    \item Ist $\ModC$ links- oder rechtseigentlich, so auch $\ModC/X$ und $X/\ModC$
-    \item Ist $\ModC$ eigentlich, so auch $\ModC/X$ und $X/\ModC$
-    \item Ist $\ModC$ kofasernd erzeugt, so auch $\ModC/X$
-    \item Ist $\ModC$ kombinatorisch, so auch $\ModC/X$
+    \item Ist $\ModC$ links- oder rechtseigentlich, so auch $\ModC/X$ u. $X/\ModC$.
+    \item Ist $\ModC$ eigentlich, so auch $\ModC/X$ und $X/\ModC$.
+    \item Ist $\ModC$ kofasernd erzeugt, so auch $\ModC/X$.
+    \item Ist $\ModC$ kombinatorisch, so auch $\ModC/X$.
   \end{itemize}
 \end{lem}
 
@@ -1196,7 +1199,7 @@
 \subsection{Monoidale Modellkategorien}
 
 \begin{defn}
-  Eine \emph{monoidale Kategorie} ist eine Kategorie $\Cat$ zusammen mit einem Bifunktor $\otimes : \Cat \times \Cat \to \Cat$, einem Objekt $\UnitOb \in \Ob(\Cat)$, natürlichen Isomorphismen $\alpha : (\blank \otimes \blank) \circ \blank \Rightarrow \blank \otimes (\blank \circ \blank)$, $\lambda : \UnitOb \otimes \blank \Rightarrow \blank$ und $\rho : \blank \otimes \UnitOb \Rightarrow \blank$, sodass die Kohärenzdiagramme aus der Definition einer schwachen 2-Kategorie kommutieren.
+  Eine \emph{monoidale Kategorie} ist eine Kategorie $\Cat$ zusammen mit einem Bifunktor $\otimes : \Cat \times \Cat \to \Cat$, einem Objekt $\UnitOb \in \Ob(\Cat)$, natürlichen Isomorphismen $\alpha : (\blank \otimes \blank) \otimes \blank \Rightarrow \blank \otimes (\blank \otimes \blank)$, $\lambda : \UnitOb \otimes \blank \Rightarrow \blank$ und $\rho : \blank \otimes \UnitOb \Rightarrow \blank$, sodass die Kohärenzdiagramme aus der Definition einer schwachen 2-Kategorie kommutieren.
 \end{defn}
 
 \begin{bem}
@@ -1397,14 +1400,14 @@
     \IHom_{\Cat_*}(V, W) \arrow[r] \arrow[d] & \IHom_\Cat(V, W) \arrow[d] \\
     \IHom_\Cat(*, *) \arrow[r] & \IHom_\Cat(*, W)
   \end{centertikzcd}
-  Dann ist $\IHom_{\Cat_*}(X, \blank)$ rechtsadjungiert zu $\blank \wedge X$ für alle $X \in \Ob(\Cat_*)$ und damit $\Cat_*$ soagar monoidal abgeschlossen. \\
+  Dann ist $\IHom_{\Cat_*}(X, \blank)$ rechtsadjungiert zu $\blank \wedge X$ für alle $X \in \Ob(\Cat_*)$ und damit $\Cat_*$ sogar monoidal abgeschlossen. \\
   Trage $\Cat$ zusätzlich eine Modellstruktur, sodass $\times : \Cat \times \Cat \to \Cat$ ein Quillenfunktor und $*$ kofasernd ist (also $(\Cat, \times, *)$ eine monoidale Modellkategorie ist).
   Dann erzeugt $U : \Cat_* \to \Cat$ eine symmetrische monoidale Modellstruktur auf $(\Cat_*, \wedge, S^0)$ und $(\blank)_+ \ladj U$ ist eine Quillenadjunktion, sogar eine monoidale:
 \end{bsp}
 
 \begin{defn}
   Seien $\Cat$, $\Dat$ monoidale Modellkategorien. \\
-  Eine Quillen-Adjunktion $F : \Cat \rightleftarrows \Dat : U$ heißt \emph{monoidal}, falls
+  Eine Quillen-Adjunktion $F : \adj{\Cat}{\Dat} : U$ heißt \emph{monoidal}, falls
   \begin{itemize}
     \item $F$ monoidal ist und
     \item $FQ \UnitOb_\Cat \xrightarrow{Fq} F \UnitOb_\Cat$ eine schwache Äquivalenz ist.
@@ -1633,9 +1636,10 @@
 \begin{defn}
   \begin{itemize}
     \item Seien $x, y : \Delta[n] \to X$ zwei $n$-Simplizes in einer simplizialen Menge $X$ mit $x|_{\partial \Delta[n]} = a = x|_{\partial \Delta[n]}$.
-    Schreibe $x \sim y$ ($\partial \Delta[n]$), falls $\exists \, h : \Delta[n] \times \Delta[1] \to X$ mit $h|_{\Lambda^0[1]} = x$, $h_{\Lambda^1[1]} = y$, $h_{\partial \Delta[n]} = \id$.
+    Schreibe $x \sim y$ ($\partial \Delta[n]$), falls $\exists \, h : \Delta[n] \times \Delta[1] \to X$ mit $h|_{\Lambda^0[1]} = x$, $h_{\Lambda^1[1]} = y$, $h_{\partial \Delta[n]} = a$.
     \item Ein Kan-Komplex $X$ heißt \emph{minimal}, falls
     \[ x \sim y \text{ ($\partial \Delta[n]$)} \enspace\iff\enspace x = y. \]
+    \TODO{Definition vervollständigen}
   \end{itemize}
 \end{defn}
 
@@ -1665,7 +1669,7 @@
 \end{lem}
 
 \begin{defn}
-  Ein Morphismus $f : X \to Y$ in $\sSet$ heißt \emph{schwache Äquivalenz}, falls für alle Kan-Komplexe $K$ der induzierte Morphismus $[f, K] : [Y, K] \to [X, K]$ (mit $[Y, K] \coloneqq \pi_0(K^Y)$)
+  Ein Morphismus $f : X \to Y$ in $\sSet$ heißt \emph{schwache Äquivalenz}, falls für alle Kan-Komplexe $K$ die ind. Abb. $[f, K] : [Y, K] \to [X, K]$ (mit $[Y, K] \coloneqq \pi_0(K^Y)$) bij. ist.
 \end{defn}
 
 \begin{bspe}
@@ -1988,7 +1992,7 @@ Sei $R$ ein Ring und $\RMod{R}$ die Kategorie der $R$-Moduln.
 \begin{bsp}
   Sei $\Cat$ eine simpliziale Modellkategorie.
   Ist dann $A$ kofasernd, so ist $A \otimes \Delta^\op$ mit $(A \otimes \Delta^\bullet)[n] = A \otimes (\Delta^\bullet [n])$ ein kosimplizialer Rahmen von $A$.
-  Insbesondere ist $A \otimes \Delta^\bullet [i]$ ein gutes Zylinderobjekt.
+  Insbesondere ist $A \otimes \Delta^\bullet [1]$ ein gutes Zylinderobjekt.
 \end{bsp}
 
 \subsection{Die Wirkung von $\Simpl = \Ho(\sSet)$}
@@ -2126,7 +2130,7 @@ Sei $R$ ein Ring und $\RMod{R}$ die Kategorie der $R$-Moduln.
     \tilde{X}
   \end{centertikzcd}
   Zum Beispiel ist $\widetilde{\Delta[1]} = \Sph^1$.
-  Die Inklusionen $i : \Delta^1 [2] \to \Delta [2]$ und $s : \Lambda^1 [2] \to \Delta [2]$ induzieren Abbildungen $\tilde{i} : \Sph^1 = \widetilde{\Delta^1 [2]} \to \widetilde{\Delta [2]}$ und $\tilde{s} : \Sph^1 \vee \Sph^1 = \Lambda^1 [2] \to \Delta [2]$.
+  Die Inklusionen $i : \Delta^1 [2] \to \Delta [2]$ und $s : \widetilde{\Lambda^1 [2]} \to \widetilde{\Delta [2]}$ induzieren Abbildungen $\tilde{i} : \Sph^1 = \widetilde{\Delta^1 [2]} \to \widetilde{\Delta [2]}$ und $\tilde{s} : \Sph^1 \vee \Sph^1 = \Lambda^1 [2] \to \Delta [2]$.
   Da $s$ eine anodyne Erweiterung ist, ist auch $\tilde{s}$ als Pushout von $s$ anodyn, also eine schwache Äquivalenz.
   Dann ist die Kogruppenkomultiplikation der Morphismus
   \[
@@ -2161,14 +2165,17 @@ Sei $R$ ein Ring und $\RMod{R}$ die Kategorie der $R$-Moduln.
 \end{defn}
 
 \begin{konstr}
-  Wir haben das Diagramm $\left( * \leftarrow A \xrightarrow{f} B \right) \in \Ob(\Cat_*^I)$.
-  Durch Faktorisierung finden wir ein Diagramm $\left( C \hookleftarrow{} QA \hookrightarrow QB \right) \in \Ob(\Cat_*^I)$, in dem $C$, $QA$ und $QB$ kofasernde Ersatzobjekte für $*$, $A$, bzw. $B$ und die Morphismen Kofaserungen sind.
-  Dieses Diagramm ist dann ein kof. Ersatz für das originale Diagramm in $\Cat_*^I$ und somit gilt $\cofib^\LL(f) = QB \cup_{QA} C$.
+  Wir haben das Diagramm $(* \leftarrow A \xrightarrow{f} B) \in \Ob(\Cat_*^I)$. \\
+  Durch Faktorisierung finden wir $\left( Q* \hookleftarrow{} QA \hookrightarrow QB \right) \in \Ob(\Cat_*^I)$, wobei $Q*$, $QA$ und $QB$ kofasernde Ersatzobjekte für $*$, $A$, bzw. $B$ und die Morphismen Kofaserungen sind.
+  Dieses Diagramm ist dann ein kof. Ersatz für das originale Diagramm in $\Cat_*^I$ und somit gilt
+  \[
+    \cofib^\LL(f) = QB \cup_{QA} Q*.
+  \]
 \end{konstr}
 
 \begin{defn}
-  Dual ist die \emph{Homotopiekofaser} eines Mor. $(A \xrightarrow{f} B) \in \Cat_*$
-  \[ \fib^\RR(f) \coloneqq \lim^\RR(* \to B \xleftarrow{f} A). \]
+  Dual ist die \emph{Homotopiefaser} eines Mor. $(A \xrightarrow{f} B) \in \Cat_*$
+  \[ {\fib}^\RR(f) \coloneqq {\lim}^\RR(* \to B \xleftarrow{f} A). \]
 \end{defn}
 
 \begin{bspe}
@@ -2188,21 +2195,29 @@ Sei $R$ ein Ring und $\RMod{R}$ die Kategorie der $R$-Moduln.
   Die Kooperationsabbildung $C \to C \vee \Sigma A$ entspricht nach dem Yoneda-Lemma einer Operation $[\Sigma A, X] \times [C, X] \to [C, X]$, welche natürlich in $X \in \Ob(\Ho(\Cat_*))$ ist.
   Sei zunächst $RX$ ein faserner Ersatz von $X$. Sei $j \in [\Sigma A, X]$ und $k \in [C, X]$. Dann ist die Wirkung der Morphismus $C \xrightarrow{\beta} RX \times RX \xrightarrow{\mathrm{pr}_1} RX$ in folgendem Diagramm:
   \begin{centertikzcd}[column sep=0.5cm, row sep=0.5cm]
-    QA \arrow[d, hook, "Qf"] \arrow[r] &
+    QA \arrow[d, hook, "Qf"] \arrow[r, twoheadrightarrow, "\sim"] &
     A \arrow[r, "j^*"] &
     \Omega X \arrow[r] &
-    \PO{RX} \arrow[d, twoheadrightarrow] \\
-    QB \arrow[d] \arrow[rrru, dashed, "\exists \, \alpha"] &&&
+    \PO{RX} \arrow[d, twoheadrightarrow] \arrow[dd, "\sim", twoheadrightarrow, rounded corners, to path={
+      -- ([xshift=14ex]\tikztostart.east)
+      -- ([xshift=14ex]\tikztotarget.east) \tikztonodes
+      -- (\tikztotarget.east)
+      }] \\ % controls={+(3,-0.5) and +(4,0.5)}] \\
+    QB \arrow[d, hook] \arrow[rrru, dashed, "\exists \, \alpha"] &&&
     RX \times RX \arrow[d, twoheadrightarrow, "\mathrm{pr}_0"] \arrow[r, twoheadrightarrow, "\mathrm{pr}_1"] &
     RX \\
-    \cofib^\LL(f) \arrow[rr, "k"] \arrow[rrru, dashed, "\exists ! \, \beta"] &&
-    X \arrow[r] &
+    C = \cofib^\LL(f) \arrow[rr, "k"] \arrow[rrru, dashed, "\exists ! \, \beta"] &&
+    X \arrow[r, hook, "\sim"] &
     RX
   \end{centertikzcd}
-  Dabei ist $\PO{RX}$ ein sehr gutes Pfadobjekt.
-  Dabei wird $\alpha$ als Lift konstruiert (beachte, dass die Komposition der vertikalen rechten Morphismen azyklisch ist nach der 2-aus-3-Eigenschaft und dass $\mathrm{pr}_0$ und $\mathrm{pr}_1$ Faserungen sind als Pullback von $RX \twoheadrightarrow *$).
-  % TODO:
-  Wer dies hier liest, und mir verraten kann, welche universelle Eigenschaft $\beta$ induziert, bekommt ein Ü-Ei geschenkt!
+  Beachte:
+  \begin{itemize}
+    \item Dabei ist $\PO{RX}$ ist ein sehr gutes Pfadobjekt.
+    \item Die ganz rechte Faserung ist azyklisch nach der 2-aus-3-Eigenschaft.
+    \item $\mathrm{pr}_0$ und $\mathrm{pr}_1$ sind Faserungen sind als Pullback von $RX \twoheadrightarrow *$.
+    \item Der Morphismus $QB \hookrightarrow C$ ist als Pushout einer Kofaserung selbst eine Kofaserung (siehe Konstruktion der Homotopiekofaser).
+  \end{itemize}
+  \TODO{Wie genau sind jetzt $\alpha$ und $\beta$ definiert? Und mit welcher Eigenschaft ist dann $\beta$ eindeutig und warum? Wer dies hier liest, und mir diese Fragen beantworten kann, bekommt ein Ü-Ei geschenkt!}
 \end{bem}
 
 \begin{dual}
@@ -2222,14 +2237,20 @@ Sei $R$ ein Ring und $\RMod{R}$ die Kategorie der $R$-Moduln.
   Sei $A \xrightarrow{f} B \xrightarrow{g} C$ eine Kofasersequenz.
   Dann heißt
   \[ \partial : C \xrightarrow{\text{Koop}} C \vee \Sigma A \xrightarrow{(C \to *) \vee \id} * \vee \Sigma A = \Sigma A \]
-  der \emph{Korandoperator} $A \xrightarrow{f} B \xrightarrow{g} C \xrightarrow{\partial} \Sigma A$
+  der \emph{Korandoperator} in der Kofasersequenz $A \xrightarrow{f} B \xrightarrow{g} C \xrightarrow{\partial} \Sigma A$.
 \end{defn}
 
 \begin{dual}
   Sei $X \xrightarrow{f} Y \xrightarrow{g} Z$ eine Fasersequenz.
   Dann heißt
-  \[ \partial : \Omega Z = * \times \Omega Z \xrightarrow{(* \to X) \times \Omega Z} \xrightarrow{\text{Op}} X \]
-  der \emph{Randoperator} $\Omega Z \xrightarrow{\partial} X \xrightarrow{f} Y \xrightarrow{g} Z$.
+  \[
+    \partial : \Omega Z = \Omega Z \times *
+    \xrightarrow{\Omega Z \times (* \to X)}
+    \Omega Z \times X
+    \xrightarrow{\text{Op}}
+    X
+  \]
+  der \emph{Randoperator} in der Fasersequenz $\Omega Z \xrightarrow{\partial} X \xrightarrow{f} Y \xrightarrow{g} Z$.
 \end{dual}
 
 \begin{bsp}
@@ -2244,7 +2265,7 @@ Sei $R$ ein Ring und $\RMod{R}$ die Kategorie der $R$-Moduln.
 \end{prop}
 
 \begin{dual}
-  Ist $X \xrightarrow{f} Y \xrightarrow{g} Y$ eine Fasersequenz, so ist $\Omega Z \xrightarrow{\partial} X \xrightarrow{f} Y$ mit geeigneter Operation von $\Omega A$ auf $\Omega Z$ eine Fasersequenz.
+  Ist $X \xrightarrow{f} Y \xrightarrow{g} Z$ eine Fasersequenz, so ist $\Omega Z \xrightarrow{\partial} X \xrightarrow{f} Y$ mit geeigneter Operation von $\Omega Y$ auf $\Omega Z$ eine Fasersequenz.
 \end{dual}
 
 \begin{kor}
@@ -2275,10 +2296,10 @@ Sei $R$ ein Ring und $\RMod{R}$ die Kategorie der $R$-Moduln.
 \end{satz}
 
 \begin{bem}
-  Für $\Omega = \Sph^0$ erhält man eine lange exakte Sequenz von Homotopiegruppen:
+  Für $W = \Sph^0$ erhält man eine lange exakte Sequenz von Homotopiegruppen:
   \begin{align*}
     \ldots \to \pi_2(Z) & \to \pi_1(X) \to \pi_1(Y) \to \pi_1(Z) \to \\
-    & \to \pi_1(X) \to \pi_1(Y) \to \pi_1(Z)
+    & \to \pi_0(X) \to \pi_0(Y) \to \pi_0(Z)
   \end{align*}
 \end{bem}
 
@@ -2298,12 +2319,15 @@ Sei $R$ ein Ring und $\RMod{R}$ die Kategorie der $R$-Moduln.
   Sei der durchgezogene Teil des folgenden Diagramms gegeben:
   \begin{centertikzcd}[column sep=0.5cm, row sep=0.3cm]
     X \arrow[rr] \arrow[rd, "v"] && Z \arrow[rr] \arrow[rd] && W \\
-    & Y \arrow[ru, "u"] \arrow[rd] && V \arrow[ru, dashed, "s"] \\
+    & Y \arrow[ru, "u"] \arrow[rd, "d"] && V \arrow[ru, dashed, "s"] \\
     && U \arrow[ru, dashed, "r"]
   \end{centertikzcd}
   Dabei sind $X \to Y \to U$, $Y \to Z \to W$ und $X \to Z \to V$ Kofasersequenzen.
   Dann existieren $r$, $s$ wie eingezeichnet und $r$ ist $\Sigma U$-äquivariant, $s$ ist $\Sigma v$-äquivariant.
-  Des Weiteren ist $U \to V \to W$ eine Kofasersequenz mit Kowirkung $W \xrightarrow{\text{Koop}} W \vee \Sigma Y \xrightarrow{\id \vee \Sigma d}$.
+  Des Weiteren ist $U \to V \to W$ eine Kofasersequenz mit Kowirkung
+  \[
+    W \xrightarrow{\text{Koop}} W \vee \Sigma Y \xrightarrow{\id \vee \Sigma d} W \vee \Sigma U.
+  \]
 \end{lem}
 
 \begin{kor}
@@ -2477,9 +2501,9 @@ Sei $R$ ein Ring und $\RMod{R}$ die Kategorie der $R$-Moduln.
   Mit dieser Modellstr. wird $\Cat_*^\infty$ zu einer stabilen Modellkat.
 \end{satz}
 
-% Ausgelassen: Eilenberg-MacLance-simpliziale-Mengen (K(G, n)'s)
+\TODO{Eilenberg-MacLance-simpliziale-Mengen (K(G, n)'s)}
 
-% TODO: Dold-Kan vom Übungsblatt
+\TODO{Dold-Kan vom Übungsblatt}
 
 \pagebreak
 
