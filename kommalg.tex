@@ -934,21 +934,22 @@ Im Folgenden seien alle Ringe \emph{kommutativ}, \dh{} $xy = yx$ f.\,a. $x, y$.
   \begin{align*}
     \bigoplus_{i \in I} M_i & \coloneqq
     \Set{(x_i \in M_i)_{i \in I}}{x_i = 0 \text{ für alle bis auf endl. viele $i \in I$}} \\[-8pt]
-    & \subseteq \prod_{i \in I} M_i.
+    & \subseteq {\prod}_{i \in I} M_i.
   \end{align*}
 \end{defn}
 
 \begin{bem}
   Die dir. Summe ist das kategorienth. Koprodukt in $\LMod{A}$. \\
-  Ist $I$ endlich, so gilt $\bigoplus_{i \in I} M_i \cong \prod_{i \in I} M_i$.
+  Ist $I$ endlich, so gilt \quad
+  ${\bigoplus}_{i \in I} M_i \cong {\prod}_{i \in I} M_i$.
 \end{bem}
 
 % 11.2. Direkte Summenzerlegung von Ringen
 
 \begin{samepage}
 
-\begin{bsp}[Direkte Summenzerlegung]
-  Sei $A = {\prod}_{i=1}^n A_i$ ein endl. direktes Produkt komm. Ringe.
+\begin{bsp}[Direkte Summenzerl.]
+  Sei $A = {\prod}_{i=1}^n A_i$ ein endliches direktes Produkt komm. Ringe.
   Dann gilt $A \cong \aaa_1 \oplus \ldots \oplus \aaa_n$ als $A$-Modul mit
   \[
     \aaa_i \coloneqq \Set{(x_i)_{i=1}^n}{x_j = 0 \text{ für } j \neq i}.
@@ -963,7 +964,7 @@ Im Folgenden seien alle Ringe \emph{kommutativ}, \dh{} $xy = yx$ f.\,a. $x, y$.
 % 12.1. Freie Moduln
 
 \begin{defn}
-  Ein \emph{$A$-Modul} $M$ heißt \emph{frei}, falls eine Menge $I$ existiert, sodass $M \cong {\bigoplus}_{i \in I} M_i$ als $A$-Modul.
+  Ein $A$-Modul $M$ heißt \emph{frei}, falls eine Menge $I$ existiert, sodass $M \cong {\bigoplus}_{i \in I} M_i$ als $A$-Modul.
 \end{defn}
 
 \begin{bem}
@@ -983,7 +984,7 @@ Im Folgenden seien alle Ringe \emph{kommutativ}, \dh{} $xy = yx$ f.\,a. $x, y$.
 \end{prop}
 
 \begin{kor}
-  Sei $\aaa \subseteq A$ ein Ideal und $M$ ein $A$-Modul mit $\aaa M = M$.
+  Sei $\aaa \subseteq A$ ein Ideal und $M$ ein $A$-Modul mit $\aaa M = M$. \\
   Dann existiert ein $x \in A$ mit $x = 1$ modulo $\aaa$ und $x M = 0$.
 \end{kor}
 
@@ -3166,7 +3167,8 @@ Sei $A$ ein Integritätsbereich mit Quotientenkörper~$K$.
 
 % Nach hinten verschoben
 \begin{prop}
-  $\hat{G} \to \varprojlim_{n} A_n$ ist ein Isomorphismus topol. Gruppen
+  $\hat{G} \to \varprojlim_{n} A_n$ \enspace
+  ist sogar ein Isomorphismus topol. Gruppen.
 \end{prop}
 
 % 39.2. Vollständige topologische Gruppen
@@ -3231,7 +3233,7 @@ Sei $A$ ein Integritätsbereich mit Quotientenkörper~$K$.
 \end{konstr}
 
 \begin{defn}
-  Die Vervollständigung $\hat{M}_\aaa$ von $M$ bzgl. der $\aaa$-adischen Topologie ist ein $\hat{A}_\aaa$-Modul und heißt \emph{$\aaa$-adische Vervollständigung} von~$M$.
+  Die Vervollständigung $\hat{M}_\aaa$ von $M$ bzgl. der $\aaa$-adischen Topol. ist ein $\hat{A}_\aaa$-Modul und heißt \emph{$\aaa$-adische Vervollständigung}. % von~$M$.
 \end{defn}
 
 \begin{bem}
@@ -3261,26 +3263,333 @@ Sei $A$ ein Integritätsbereich mit Quotientenkörper~$K$.
 
 % 40.1. Filtrationen
 
+\begin{defn}
+  Sei $A$ ein Ring und~$M$ ein $A$-Modul.
+  Eine \emph{Filtration} von~$M$ ist eine (unendliche) Folge
+  \[
+    M_\bullet : M = M_0 \supseteq M_1 \supseteq M_2 \supseteq \ldots
+  \]
+  von Untermoduln von~$M$.
+  Sei $\aaa \subseteq A$ ein Ideal.
+  Die Filtration $M_\bullet$ heißt \emph{$\aaa$-Filtration}, falls $\fa{n} \aaa M_n \subseteq M_{n+1}$.
+  Eine $\aaa$-Filtration heißt \emph{stabil}, falls ein $N \in \N$ existiert mit $\aaa M_n = M_{n+1}$ für alle $n \geq N$.
+\end{defn}
+
+\begin{bsp}
+  Die \emph{$\aaa$-adische Filtration} $M \supseteq \aaa M \supseteq \aaa^2 M \supseteq \ldots$ ist eine stabile $\aaa$-Filtration.
+\end{bsp}
+
+\begin{lem}
+  Sei $\aaa \subseteq A$ ein Ideal.
+  Je zwei stabile $\aaa$-adische Filtrationen~$M_\bullet$ und~$M_\bullet'$ haben eine beschränkte Differenz, \dh{}
+  \[
+    \ex{n_0 \in \N} \quad
+    M_{n + n_0} \subseteq M'_n
+    \enspace\wedge\enspace
+    M'_{n + n_0} \subseteq M_n.
+  \]
+\end{lem}
+
+\begin{kor}
+  Zwei stabile $\aaa$-adische Filtrationen sind Umgebungsbasen derselben Topologie auf~$M$.
+\end{kor}
+
 % 41. Gewichtete Ringe und Moduln I
+\subsection{Gewichtete Ringe und Moduln}
 
 % 41.1. Definition gewichteter Ringe und Moduln
 
+\begin{defn}
+  Ein \emph{gewichteter Ring} ist ein Ring~$A$ mit einer Familie $(A_n)_{n \in \N}$ von UG von $(A, +, 0)$, sodass
+  \[
+    {\bigoplus}_{n \in \N} A_n \to A, \quad
+    (a_n)_{n \in \N} \mapsto {\sum}_{n \in \N} a_n
+  \]
+  ein Gruppenisomorph. ist und $A_n A_m \subseteq A_{n+m}$ für alle $n, m \in \N$.
+\end{defn}
+
+\begin{defn}
+  $A_+ \coloneqq {\sum}_{n \geq 1} A_n$ heißt \emph{irrelevantes Ideal} in~$A$.
+\end{defn}
+
+\begin{bsp}
+  $A = K[x_1, \ldots, x_n]$, $A_n = \{ \text{ homog. Polynome vom Grad $n$ } \}$
+\end{bsp}
+
+\begin{prop}
+  $A_0 \to A / A_+, \enspace x \mapsto [x]$ \quad
+  ist ein Ringisomorphismus.
+\end{prop}
+
+\begin{defn}
+  Sei $A$ ein gewichteter Ring.
+  Ein \emph{gewichteter $A$-Modul} ist ein $A$-Modul~$M$ zusammen mit einer Familie $(M_n)_{n \in \N}$ von UG von $(M, +, 0)$, sodass
+  \[
+    {\bigoplus}_{n \in \N} M_n \to M, \quad
+    (x_n)_{n \in \N} \mapsto {\sum}_{n \in \N} x_n
+  \]
+  ein Gruppenisomorph. ist und $A_n M_m \subseteq M_{n+m}$ für alle $n, m \in \N$.
+\end{defn}
+
+\begin{bem}
+  Insbesondere ist jedes $M_n$ ein $A_0$-Modul.
+\end{bem}
+
+\begin{sprechweise}
+  Sei $A$ ein gew. Ring und~$M$ ein gew. $A$-Modul.
+  Ein Element $x \in M$ heißt \emph{homogen} \textit{vom Gewicht $n$}, falls $x \in M_n$.
+\end{sprechweise}
+
+\begin{bem}
+  Jedes $x \in M$ kann man als Summe $x = {\sum}_{n \in \N} x_n$ schreiben, wobei~$x_n$ homogen vom Gewicht~$n$.
+  Die nicht verschwindenden~$x_n$ heißen die \textit{homogenen Komponenten} von~$x$.
+\end{bem}
+
+\begin{defn}
+  Sei $A$ ein gewichteter Ring.
+  Ein \textit{Homomorphismus gewichteter $A$-Moduln} $M$ und~$N$. ist ein Modulhomomorphismus $\phi : M \to N$ mit
+  \[
+    \fa{n \in \N} \phi(M_n) \subseteq N_n.
+  \]
+\end{defn}
+
+% TODO: Entsprechende Kategorie definieren
+
+\begin{prop}
+  Ein komm. gewichteter Ring ist genau dann noethersch, wenn $A_0$ noethersch ist und~$A$ als $A$-Algebra endlich erzeugt ist.
+\end{prop}
+
 % 41.2. Reesche Ringe und Moduln
 
+\begin{defn}
+  Sei~$A$ ein komm. Ring und $\aaa \subseteq A$ ein Ideal. \\
+  Der \emph{Reesche Ring} \textit{von~$A$ bzgl.~$\aaa$} ist der gewichtete komm. Ring
+  \begin{align*}
+    R_\aaa(t) & \coloneqq R_\aaa(A, t) \coloneqq \{ \text{Polynome } a_n t^n + \ldots + a_0 \in A[t] \text{ mit } a_i \in \aaa^i \}, \\
+    R_\aaa(t)_n & \coloneqq \Set{a_n t^n}{a_n \in \aaa^n}.
+  \end{align*}
+\end{defn}
+
+\begin{prop}
+  Ist~$A$ noethersch, so auch $R_\aaa(A, t)$.
+\end{prop}
+
+\begin{defn}
+  Sei~$A$ ein komm. Ring und $\aaa \subseteq A$ ein Ideal.
+  Sei~$M$ ein $A$-Modul mit einer $\aaa$-Filtration~$M_\bullet$.
+  Der \emph{Reesche Modul} \textit{zur Filtration~$M_\bullet$} ist der gewichtete $R_\aaa(A, t)$-Modul
+  \begin{align*}
+    R(M_\bullet, t) & \coloneqq \{ \text{Polynome } m_n t^n + \ldots + m_0 \in A[t] \text{ mit } m_i \in M_i \}, \\
+    R(M_\bullet, t)_n & \coloneqq \Set{m_n t^n}{m_n \in M_n}.
+  \end{align*}
+\end{defn}
+
+\begin{nota}
+  Für die $\aaa$-adische Filtration~$M_\bullet$ mit $M_n = \aaa^n M$ schreiben wir
+  $
+    R_\aaa(M, t) \coloneqq R(M_\bullet, t)
+  $.
+\end{nota}
+
+\begin{prop}
+  Sei~$A$ kommutativ, noethersch und $M$ endlich erzeugt. \\
+  Dann ist $R(M_\bullet, t)$ genau dann ein endl. erzeugter $R_\aaa(A, t)$-Modul, wenn die Filtration~$M_\bullet$ stabil ist.
+\end{prop}
+
 % 41.3. Das Artin-Reesche Lemma
+
+\begin{prop}[Artin-Reesches Lemma]
+  Sei~$A$ kommutativ, noethersch und $M$ endlich erzeugt.
+  Für jeden Untermodul~$M'$ von~$M$ ist dann
+  \[
+    M' \cap M_\bullet : M' \cap M_0 \supseteq M' \cap M_1 \supseteq \ldots
+  \]
+   eine stabile $\aaa$-Filtration von~$M'$.
+\end{prop}
+
+\begin{kor}
+  Für jeden Untermodul $M' \subseteq M$ gibt es ein $n_0 \in \N$ mit
+  \[
+    \fa{n \geq n_0} (\aaa^n M) \cap M' = \aaa^{n - n_0} ((\aaa^{n_0} M) \cap M').
+  \]
+\end{kor}
+
+\begin{kor}
+  Sei~$A$ kommutativ, noethersch und $M$ endlich erzeugt. \\
+  Sei $M' \subseteq M$ ein Untermodul.
+  Dann haben die Filtrationen
+  \begin{align*}
+    & M' \supseteq \aaa M' \supseteq \aaa^2 M' \supseteq \ldots
+    \enspace \text{und} \enspace
+    M' \supseteq (\aaa M) \cap M' \cap (\aaa^2 M) \cap M' \supseteq \ldots
+  \end{align*}
+  beschränkte Differenz.
+\end{kor}
 
 % 42. Gewichtete Ringe und Moduln II
 
 % 42.1. Exaktheit der Vervollständigung
+\subsection{Exaktheit der Vervollständigung}
+
+\begin{prop}
+  Sei~$A$ ein noetherscher kommutativer Ring.
+  Sei $0 \to M' \to M \to M'' \to 0$ eine \keS{} endlich erzeugter $A$-Moduln.
+  Für jedes Ideal $\aaa \subset A$ ist dann
+  \[
+    0 \to \hat{M}'_\aaa \to \hat{M}_\aaa \to \hat{M}''_\aaa \to 0 \quad
+    \text{exakt.}
+  \]
+\end{prop}
+
+\begin{prop}
+  Sei $A$ kommutativ, $\aaa \subseteq A$ ein Ideal.
+  Ist~$M$ ein endlich erzeugter $A$-Modul, so ist die Abbildung $M_{\hat{A}_\aaa} \to \hat{M}_\aaa$ surjektiv. \\
+  Ist~$A$ noethersch, so ist die Abbildung sogar ein Isomorphismus.
+\end{prop}
+
+\begin{prop}
+  Sei $A$ noethersch und kommutativ.
+  Für jedes Ideal $\aaa \subseteq A$ ist~$\hat{A}_\aaa$ eine flache $A$-Algebra.
+\end{prop}
 
 % 42.2. Vervollständigung von Ringen
 
+\begin{prop}
+  Sei $A$ kommutativ u. noethersch, $\aaa \subseteq A$ ein Ideal.
+  Dann gilt:
+  \begin{itemize}
+    \miniitem{0.35 \linewidth}{$\hat{\aaa}_\aaa = \hat{A}_\aaa \aaa \cong \aaa_{\hat{A}_\aaa}$}
+    \miniitem{0.25 \linewidth}{$\widehat{\aaa^n}_\aaa = \hat{\aaa}^n_\aaa$}
+    \miniitem{0.35 \linewidth}{$\aaa^n / \aaa^{n+1} \cong \hat{\aaa}_\aaa^n / \hat{\aaa}_\aaa^{n+1}$}
+    \item $\widehat{\aaa}_\aaa$ liegt im Jacobsonschen Radikal von~$\hat{A}_\aaa$.
+  \end{itemize}
+\end{prop}
+
+\begin{kor}
+  \begin{minipage}[t]{0.8 \linewidth}
+    Sei~$(A, \mmm, F)$ ein noetherscher lokaler Ring. \\
+    Dann ist auch $(\hat{A}_\mmm, \hat{\mmm}_\mmm, F)$ ein lokaler Ring.
+  \end{minipage}
+\end{kor}
+
 % 42.3. Der Krullsche Satz
 
+\begin{satz}[\emph{Krull}]
+  Sei $A$ kommutativ u. noethersch, $\aaa \subseteq A$ ein Ideal.
+  Sei~$M$ ein endlich erzeugter $A$-Modul.
+  Dann gilt:
+  \[
+    \ker(M \to \hat{M}_\aaa) = {\bigcap}_{n=1}^\infty \aaa^n M = \Set{x \in M}{(1 + \aaa) \cap \ann(x) \neq \emptyset}.
+  \]
+\end{satz}
+
+\begin{bem}
+  In der Situation des letzten Satzes sei $S \coloneqq 1 + \aaa$.
+  Die univ. Eigenschaft von $S^{-1} A$ induziert dann einen Homomorphismus
+  \[
+    S^{-1} A \to \hat{A}_\aaa, \quad
+    \tfrac{a}{s} \mapsto s^{-1} a.
+  \]
+  Der Satz von Krull impliziert, dass $\ker(A \to S^{-1} A) = \ker(A \to \hat{A}_\aaa)$.
+  Somit ist obiger Morphismus injektiv, wir können also $S^{-1} A$ als einen Unterring von $\hat{A}_\aaa$ auffassen
+\end{bem}
+
+\begin{kor}
+  \begin{minipage}[t]{0.8 \linewidth}
+    Sei~$A$ ein noetherscher Integritätsbereich. \\
+    Für jedes echte Ideal $\aaa \subsetneq A$ gilt dann ${\bigcap}_{n=1}^\infty \aaa^n = 0$.
+  \end{minipage}
+\end{kor}
+
+\begin{kor}
+  Sei~$A$ ein noetherscher komm. Ring, $\aaa \subseteq \jjj \subseteq A$ ein Ideal, das im Jacobsonschen Ideal enthalten ist.
+  Für jeden $A$-Modul~$M$ ist dann die $\aaa$-adische Topologie hausdorffsch, \dh{} ${\bigcap}_{n=1}^\infty \aaa^n M = 0$.
+\end{kor}
+
+\begin{kor}
+  Sei $(A, \mmm)$ ein noetherscher lokaler Ring.
+  Für jeden endlich erzeugten $A$-Modul ist die $\aaa$-adische Topologie hausdorffsch.
+\end{kor}
+
+\begin{kor}
+  Sei $\ppp \subset A$ ein Primideal in einem noeth. komm. Ring~$A$.
+  Dann:
+  \[
+    \ker (A \to A_\ppp) = \bigcap \, \{ \text{ $\ppp$-primäre Ideale in $A$ } \}.
+  \]
+\end{kor}
+
 % 43. Der assoziierte gewichtete Ring
+\subsection{Der assoziierte gewichtete Ring}
 
 % 43.1. Definition und grundlegende Eigenschaften des assoziierten gewichteten Ringes
 
+\begin{defn}
+  Sei $A$ kommutativ, $\aaa \subseteq A$ ein Ideal.
+  Der \emph{assoziierte gewichtete Ring} \textit{zur $\aaa$-adischen Filtrierung von~$A$} ist
+  \[
+    G_\aaa (t) \coloneqq G_\aaa (A, t) \coloneqq R_\aaa (A, t) / t^{-1} R_\aaa (A, t)_{+} \cong {\bigoplus}_{n=0}^\infty (\aaa^n / \aaa^{n+1}) t^n.
+  \]
+\end{defn}
+
+\begin{defn}
+  Sei $A$ kommutativ, $\aaa \subseteq A$ ein Ideal.
+  Sei~$M$ ein $A$-Modul mit einer $\aaa$-Filtrierung~$M_\bullet$.
+  Der \emph{assoziierte gewichtete $A$-Modul} \textit{zur Filtrierung~$M_\bullet$ von~$M$} ist der $G_\aaa(t)$-Modul
+  \[
+    G(M_\bullet, t) \coloneqq R(M_\bullet, t) / t^{-1} R(M_\bullet, t)_{+} \cong \bigoplus_{n=0}^\infty (M_n / M_{n+1}) t^n.
+  \]
+\end{defn}
+
+\begin{nota}
+  Für die $\aaa$-adische Filtrierung $M_\bullet$ mit $M_n = \aaa^n M$ schreiben wir $G_\aaa(M, t) \coloneqq G(M_\bullet, t)$.
+\end{nota}
+
+\begin{bem}
+  $G(\blank, t)$ ist funktoriell:
+  Für einen \textit{filtrierten Morphismus} $\phi : M \to N$ von filtrierten $A$-Moduln, \dh{} $\fa{n} \phi(M_n) \subseteq N_n$, ist
+  \[
+    G(\phi) : G(M_\bullet, t) \to G(N_\bullet, t), \quad
+    \overline{x} t^n \mapsto \overline{\varphi(x)} t^n.
+  \]
+\end{bem}
+
+\begin{prop}
+  Für jeden noeth. komm. Ring~$A$ und ein Ideal $\aaa \subseteq A$ gilt:
+  \begin{itemize}
+    \item Der Ring $G_\aaa(A, t)$ ist noethersch.
+    \item $G_\aaa(A, t) \cong G_{\hat{\aaa}_\aaa}(\hat{A}_\aaa, t)$ als gewichtete Ringe.
+    \item Für jeden endlich erzeugten $A$-Modul~$M$ mit einer stabilen $\aaa$-Filtrierung~$M_\bullet$ ist $G(M_\bullet, t)$ ein endl. erzeugter $G_\aaa(A, t)$-Modul.
+  \end{itemize}
+\end{prop}
+
 % 43.2. Endlichkeitseigenschaften der Vervollständigung
+
+\begin{lem}
+  Seien $A$ und $B$ abelsche Gruppen mit Filtrationen $A_\bullet$ bzw. $B_\bullet$ und $\phi : A \to B$ ein filtr. Gruppenhomomorphismus.
+  Dann gilt:
+  Ist $G(\varphi) : G(A_\bullet, t) \to G(B_\bullet, t)$ injektiv/surjektiv, so auch $\hat{\phi} : \hat{A} \to \hat{B}$.
+\end{lem}
+
+\begin{prop}
+  Sei $A$ kommutativ und $\aaa \subseteq A$ ein Ideal.
+  Sei $M$ ein bzgl. der $\aaa$-adischen Topol. vollständiger $A$-Modul mit einer $\aaa$-Filtration~$M_\bullet$, deren Topologie hausdorffsch ist (\dh{} ${\bigcap}_{n=0}^\infty M_n = 0$).
+  Angenommen, $G(M_\bullet, t)$ ist als $G_\aaa(A, t)$-Modul endlich erzeugt.
+  Dann ist $M$ ein endlich erzeugter $A$-Modul.
+\end{prop}
+
+\begin{kor}
+  In der Situation vom letzten Satz sei $G(M_\bullet, t)$ sogar ein noetherscher $G_\aaa(A, t)$-Modul.
+  Dann ist~$M$ ein noetherscher $A$-Modul.
+\end{kor}
+
+\begin{satz}
+  Sei~$A$ ein noetherscher kommutativer Ring.
+  Für jedes Ideal~$\aaa$ von~$A$ ist $\hat{A}_\aaa$ noethersch.
+\end{satz}
+
+\begin{folgerung}
+  Für jeden noetherschen komm. Ring~$A$ ist der Potenz- reihenring $A \llbracket X_1, \ldots, X_n \rrbracket$ als Vervollständigung von $A [X_1, \ldots, X_n]$ bzgl. der $(X_1, \ldots, X_n)$-adischen Topologie vollständig.
+\end{folgerung}
 
 \end{document}
