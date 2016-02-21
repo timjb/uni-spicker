@@ -1705,23 +1705,23 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
   Gesucht ist eine Lösung $u \in H$ der Variationsgleichung
   \[
     \text{\probl{(VGL)}} \qquad
-    B(u, \phi) = \ell(\phi) \quad
-    \forall \, \phi \in H.
+    B(u, \varphi) = \ell(\varphi) \quad
+    \forall \, \varphi \in H.
   \]
   Wir wollen diese Lösung annähern durch die Lösung eines möglichst ähnlichen, aber \textit{endlichdim.} Problems.
   Dazu wählen wir einen endlichdim. Unterraum $U_n \subset H$ (dieser ist wieder ein Hilbertraum), eine beschränkte, koerzitive Bilinearform $B_n : U_n \times U_n \to \R$ und ein Element $\ell_n \in U_n'$.
   Wir bestimmen dann die Lösung~$u_n$ von
   \[
     \text{\probl{(VGL)\tss{n}}} \qquad
-    B_n(u_n, \phi) = \ell_n(\phi) \quad
-    \forall \, \phi \in U_n.
+    B_n(u_n, \varphi) = \ell_n(\varphi) \quad
+    \forall \, \varphi \in U_n.
   \]
 \end{verf}
 
 \begin{fragen}
   \begin{enumerate}
     \item Wie berechnet man die Lösung $u_n$ von (VGL)\tss{n}?
-    \item Wie kann man $U_n$, $B_n$ und~$l_n$ wählen, sodass $u_n \xra[n \to \infty]{} u$?
+    \item Wie kann man $U_n$, $B_n$ und~$\ell_n$ wählen, sodass $u_n \xra[n \to \infty]{} u$?
   \end{enumerate}
 \end{fragen}
 
@@ -1902,7 +1902,7 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
 \begin{defn}
   Ein \emph{simpliziales finites Element vom Lagrange-Typ} der Ordnung~$k$ ist ein Tripel $(K, P, \Sigma)$ mit
   \begin{itemize}
-    \item einem $d$-Simplex $K$,
+    \item einem $d$-Simplex $K$ mit Ecken $a_1$, \ldots, $a_{d+1}$,
     \item $P = \Poly_k \coloneqq \R[x_1, \ldots, x_d]_{\leq k} = \{ \text{Polynome vom Grad $\leq k$} \}$
     \item $\Sigma = \Set{b_a : P \to \R, \enspace p \mapsto p(a)}{a \in \mathcal{K}_k}$ mit der \textit{Knotenmenge}
     \[
@@ -2300,31 +2300,51 @@ $H'_0(\Omega) \subseteq U \subseteq H^1(\Omega)$, $U$ ist der Lösungsraum
 \begin{defn}
   Ein \emph{simpliziales finites Element vom Hermite-Typ} ist ein Tupel $(K, P(K), \Sigma(K))$ mit
   \begin{itemize}
-    \item $K$ ist ein $d$-Simplex mit Eckpunkten $a_1, \ldots, a_d$
+    \item einem $d$-Simplex $K$ mit Ecken $a_1$, \ldots, $a_{d+1}$,
     \item $P(K) \coloneqq \Poly_3(K)$
-    \item $\Sigma(K) \coloneqq ???$ $\Set{p(a_i)}{i = 1, \ldots, d+1} \cup \Set{p(a_{ijl})}{1 \leq i < j < l \leq d+1}$ $a_{ijl} \coloneqq \tfrac{1}{3} (a_i + a_j + a_l)$, $\Set{\DO p(a_i) (a_j  - a_i)}{1 \leq i \neq j \leq d+1}$
+    \item $\Sigma(K) \coloneqq
+      \arraycolsep=0.5pt
+      \begin{array}[t]{l l}
+        & \Set{p \mapsto p(a_i)}{i = 1, \ldots, d+1} \\
+        \cup & \Set{p \mapsto p(a_{ijl})}{1 \!\leq\! i \!<\! j \!<\! l \!\leq\! d\!+\!1, \, a_{ijl} \coloneqq \tfrac{1}{3} (a_i \!+\! a_j \!+\! a_l)} \\
+        \cup & \Set{p \mapsto \DO p(a_i) (a_j - a_i)}{1 \leq i \neq j \leq d+1}
+      \end{array}$
   \end{itemize}
   Der zugehörige Finite-Elemente-Raum zu einer Triangulierung $T(\cOmega)$ mit simpl. finiten Elementen vom Hermite-Typ ist
   \[
-    U_n \coloneqq \Set{v \in \Cont(\cOmega)}{v|_K \in \P_3(K) \, \forall K \in T(\cOmega)}
+    U_n \coloneqq \Set{v \in \Cont(\cOmega)}{v|_K \in \Poly_3(K) \, \forall K \in T(\cOmega)}
   \]
 \end{defn}
 
 % Ausgelassen: graphische Darstellung, Beispiel mit $d=2$, Berechnung (bzw. Aufstellen von Gleichungen) von dualer Basis
 
-\begin{bemn}
+\begin{bem}
+  $U_n \subset \Cont^1(\cOmega)$ gilt (nur) für $d = 1$. \\
+  $U_n \subset \Cont^1(\cOmega)$ für $d = 2$ erreicht man mit folgenden Elementen:
   \begin{itemize}
-    \item $U_n \subset \Cont^1(\cOmega)$ (nur) für $d = 1$
-    \item $U_n \subset \Cont^1(\cOmega)$ für $d = 2$ erreicht man mit folgenden Elementen:
+    \item \emph{Argyris-Dreieck}: $(K, P(K), \Sigma(K))$ mit
     \begin{itemize}
-      \item \textit{Argyris-Dreieck}: $(K, P(K), \Sigma(K))$ wobei
-      $K$ ein Simplex mit Ecken $a_1, a_2, a_3$,
-      $P(K) \coloneqq \Poly_5(K)$ und $\Sigma(K) \coloneqq \Set{p(a_i)}{1 \leq i \leq 3} \cup \Set{\partial_x p(a_i)}{1 \leq i \leq 3} \cup \Set{\partial_y p(a_i)}{1 \leq i \leq 3} \cup \Set{\partial_{yy} p(a_i)}{1 \leq i \leq 3} \cup \Set{\partial_{xx} p(a_i)}{1 \leq i \leq 3} \cup \Set{\partial_{xy} p(a_i)}{1 \leq i \leq 3} \cup \Set{\DO p(\tfrac{a_i + a_j}{2}) \cdot \nu_{ij}}{1 \leq i < j \leq 3}$ (wobei $\nu_{ij} \coloneqq $ äußerer Normalenvektor an $\tfrac{a_i + a_j}{2}$) ist.
-      \item \textit{Bell-Dreieck}: $(K, P(K), \Sigma(K))$ mit
-      $P(K) \coloneqq \Set{p \in \Poly_5}{\tfrac{\partial p}{\partial \nu_{ij}} \in \Poly_3(K') \text{ für alle Kanten $K'$ von $K$}}$, $\Sigma(K) \coloneqq \Set{p(a_i)}{1 \leq i \leq 3} \cup \Set{\partial_x p(a_i)}{1 \leq i \leq 3} \cup \Set{\partial_y p(a_i)}{1 \leq i \leq 3} \cup \Set{\partial_{xx} p(a_i)}{1 \leq i \leq 3} \cup \Set{\partial_{yy} p(a_i)}{1 \leq i \leq 3} \cup \Set{\partial_{xy} p(a_i)}{1 \leq i \leq 3}$
+      \item einem $2$-Simplex~$K$ mit Ecken $a_1, a_2, a_3$,
+      \item $P(K) \coloneqq \Poly_5(K)$ und
+      \item $\Sigma(K) \coloneqq \Set{p(a_i)}{1 \leq i \leq 3} \cup \Set{\partial_x p(a_i)}{1 \leq i \leq 3} \cup \Set{\partial_y p(a_i)}{1 \leq i \leq 3} \cup \Set{\partial_{yy} p(a_i)}{1 \leq i \leq 3} \cup \Set{\partial_{xx} p(a_i)}{1 \leq i \leq 3} \cup \Set{\partial_{xy} p(a_i)}{1 \leq i \leq 3} \cup \Set{\DO p(\tfrac{a_i + a_j}{2}) \cdot \nu_{ij}}{1 \leq i < j \leq 3}$ (wobei $\nu_{ij} \coloneqq $ äußerer Normalenvektor an $\tfrac{a_i + a_j}{2}$) ist.
+    \end{itemize}
+    \item \emph{Bell-Dreieck}: $(K, P(K), \Sigma(K))$ mit
+    \begin{itemize}
+      \item einem $2$-Simplex~$K$ mit Ecken $a_1, a_2, a_3$,
+      \item $P(K) \coloneqq \Set{p \in \Poly_5}{\tfrac{\partial p}{\partial \nu_{ij}} \in \Poly_3(K') \text{ für alle Kanten $K'$ von $K$}}$
+      \item $\Sigma(K) \coloneqq
+        \arraycolsep=1pt
+        \begin{array}[t]{l l l l}
+          & \Set{p \mapsto p(a_i)}{1 \leq i \leq 3} \\
+          \cup & \Set{p \mapsto \partial_x p(a_i)}{1 \!\leq\! i \!\leq\! 3} &
+          \cup & \Set{p \mapsto \partial_y p(a_i)}{1 \!\leq\! i \!\leq\! 3} \\
+          \cup & \Set{p \mapsto \partial_{xx} p(a_i)}{1 \!\leq\! i \!\leq\! 3} &
+          \cup & \Set{p \mapsto \partial_{yy} p(a_i)}{1 \!\leq\! i \!\leq\! 3} \\
+          \cup & \Set{p \mapsto \partial_{xy} p(a_i)}{1 \!\leq\! i \!\leq\! 3}
+        \end{array}$
     \end{itemize}
   \end{itemize}
-\end{bemn}
+\end{bem}
 
 % Vorlesung vom 27.1.2016
 
@@ -2402,9 +2422,8 @@ Wir betrachten nun
   wobei $\tilde{f} \in L^2(\Omega_n \cup \Omega)$ mit $\tilde{f}|_\Omega = f$
 \end{problem}
 
-\TODO{etwas ausgelassen; wichtig?}
-
 % §5.5.4. Isoparametrische Finite Elemente
+\subsection{Isoparametrische Finite Elemente}
 
 \begin{defn}
   Sei $(\hat{K}, \hat{P}, \hat{\Sigma})$ ein gerades (simpliziales oder rechteckiges) FE vom Lagrange-Typ.
@@ -2415,8 +2434,8 @@ Wir betrachten nun
   \]
   mit $F_1, \ldots, F_d \in \hat{P}$ existiert sodass
   \begin{itemize}
-    \item $K = F(\hat{K})$
-    \item $P = \Set{p = \hat{p} \circ F^{-1}}{\hat{p} \in \hat{P}}$
+    \miniitem{0.3 \linewidth}{$K = F(\hat{K})$}
+    \miniitem{0.65 \linewidth}{$P = \Set{p = \hat{p} \circ F^{-1}}{\hat{p} \in \hat{P}}$}
     \item $\Sigma = \Set{p \mapsto p(a_i)}{\text{ für Punkte } a_i \coloneqq F(\hat{a}_i), \hat{a}_i \in \mathcal{K}_k}$
   \end{itemize}
 \end{defn}
@@ -2424,6 +2443,8 @@ Wir betrachten nun
 \begin{bem}
   Die zu $(K, P, \Sigma)$ isoparametrische Abbildung~$F$ ist für isoparametrische FE vom Langrange-Typ (k) eindeutig durch die Werte an den Knoten~$\hat{a}_i$ definiert.
 \end{bem}
+
+\columnbreak
 
 % Vorlesung vom 1.2.2015
 
@@ -2437,50 +2458,64 @@ Wir betrachten nun
     \left\{ \begin{array}{rcll}
       u_t(x,t) - \Laplace_x u(x, t) &=& f(x,t) &\text{in $\Omega \times \ointerval{0}{T}$} \\
       u(x,0) &=& u_0(x) & \text{für } x \in \Omega \\
-      u(x, t) = 0 & \text{für } x \in \bOmega, t \in \cinterval{0}{T}
+      u(x, t) &=& 0 & \text{für } x \in \bOmega, t \in \cinterval{0}{T}
     \end{array} \right.
   \]
 \end{prob}
 
-\[
-  \IntOmega{u_t(x,t) \varphi(x)}{x} = \IntOmega{\Laplace u(x, t) \varphi(x)}{x} + \IntOmega{f(x,t) \varphi(x)}{x} - \IntOmega{\DO u(x, t) \cdot \DO \varphi(x)}{x}
-\]
-
+Variationsgleichung: \enspace
+Gesucht ist $u \in \Cont^1(\cinterval{0}{T}; H_0^1(\Omega))$ mit
+\begin{align*}
+  \IntOmega{u_t(x,t) \varphi(x)}{x}
+  = \IntOmega{\Laplace u(x, t) \varphi(x)}{x} + \IntOmega{f(x,t) \varphi(x)}{x}
+  & \quad \forall t \in \cinterval{0}{T} \\
+  = - \IntOmega{\DO u(x, t) \cdot \DO \varphi(x)}{x} + \IntOmega{f(x,t) \varphi(x)}{x}
+  & \quad \forall \varphi \in H_0^1(\Omega)
+\end{align*}
+und Anfangsbedingung $u(0) = u_0$.
 Anders geschrieben:
-
 \[
-  \tfrac{\d}{\d t} \scp{u(t, \blank)}{\varphi} + B(u, \varphi) - \scp{f(t, \blank)}{\varphi}
+  \tfrac{\d}{\d t} \scp{u(t, \blank)}{\varphi} + B(u, \varphi) - \scp{f(t, \blank)}{\varphi} \qquad
+  \forall \varphi \in H_0^1(\Omega).
 \]
 
-mit $\varphi \in H_0^1(\Omega)$, $u \in \Cont^1(0, T; H_0^1(\Omega))$.
-Anfangsbedingung: $u(0) = u_0$.
 
 % §5.6.1. Die vertikale Linienmethode
 
-Idee: 1. Diskretisierung im Ort, 2. Diskretisierung in der Zeit
-
-\begin{itemize}
-  \item Sei $U_n \subset U = H_0^1(\Omega)$
-  \[
-    \tfrac{\d}{\d t} \scp{u_n(t)}{\varphi_n} + B_n(u_n, \varphi_n) = \scp{f(t, \blank)}{\varphi} \quad \forall \, \varphi \in U_n
-  \]
-  Sei $\varphi_1, \ldots, \varphi_{d_n}$ eine Basis von $U_n$, $u_n(t) = \sum_{j=1}^{d_n} \gamma_j(t) \varphi_j(x)$, $u_n^0 = \sum \gamma_j^0 \varphi_j$,
+\begin{verf}[\emph{Vertikale Linienmethode}] \mbox{} \\
+  Idee: \enspace Erst Diskretisierung im Ort, dann Diskretisierung in der Zeit
   
+  Wir wählen dazu einen endlichdim. Teilraum $U_n \subset U = H_0^1(\Omega)$ und betrachten dann die approximierte VGL
   \[
-    \text{(GGL)} \quad
-    \left\{ \begin{array}{rcl}
-      \sum_{j=1}^{d_n} \tfrac{\d}{\d t} \gamma_j(t) \scp{\varphi_j}{\varphi_i} + \sum_{j=1}^{d_n} \gamma_j(t) B_n(\varphi_j, \varphi_i) &=& \scp{f(t, \blank)}{\varphi_j} \\
-      \gamma_j(0) &=& \gamma_j^0, \, j = 1, \ldots, d_n
+    \tfrac{\d}{\d t} \scp{u_n(t)}{\varphi_n} + B_n(u_n, \varphi_n) = \scp{f(t, \blank)}{\varphi_n} \quad \forall \, \varphi_n \in U_n
+  \]
+  Sei $\varphi_1, \ldots, \varphi_{d_n}$ eine Basis von $U_n$. Wir schreiben
+  \[
+    u_n(t, x) = {\sum}_{j=1}^{d_n} \gamma_j(t) \varphi_j(x).
+  \]
+  Sei $u_n^0 = \sum \gamma_j^0 \varphi_j$ eine Approximation von $u_0$.
+  Wir erhalten die GGL
+  \[
+    \arraycolsep=2.5pt
+    \left\{ \begin{array}{rcll}
+      {\sum}_{i=1}^{d_n} \tfrac{\d}{\d t} \gamma_i(t) \scp{\varphi_j}{\varphi_i} + {\sum}_{i=1}^{d_n} \gamma_i(t) B_n(\varphi_j, \varphi_i) &=& \scp{f(t, \blank)}{\varphi_j} & \forall \, j, \\
+      \gamma_j(0) &=& \gamma_j^0 & \forall \, j
     \end{array} \right.
   \]
+  mit $\gamma(t) \!\in\! \R^{d_n}$.
+  Wir definieren die \textit{Massenmatrix} $M \in \R^{d_n \times d_n}$, die Matrix $B \in \R^{d_n \times d_n}$ und $g : \cinterval{0}{T} \to \R^{d_n}$ durch
+  \[
+    M_{ij} = \IntOmega{\varphi_j(x) \varphi_i(x)}{x}, \enspace
+    B_{ij} = \IntOmega{\DO \varphi_j \cdot \DO \varphi_i}{x}, \enspace
+    g_j(t) = \IntOmega{f(t, x) \varphi_j(x)}{x}
+  \]
+  Dann können wir obige GGL wie folgt umschreiben:
   \[
     \left\{ \begin{array}{rcl}
       M \tfrac{\d}{\d t} \gamma(t) + B \gamma(t) &=& g(t) \\
       \gamma(0) &=& \gamma^0
     \end{array} \right.
   \]
-  mit $M_{ij} = \IntOmega{\varphi_j(x) \varphi_i(x)}{x}$ (Massenmatrix), $B_{ij} = \IntOmega{\DO \varphi_j \cdot \DO \varphi_i}{x}$, $g_j(t) = \IntOmega{f(t, x) \varphi_j(x)}{x}$.
-  Dabei ist $\gamma \in \R^{d_n}$.
   Durch Modellreduktion erhält man eine Gleichung
   \[
     \left\{ \begin{array}{rcl}
@@ -2489,29 +2524,39 @@ Idee: 1. Diskretisierung im Ort, 2. Diskretisierung in der Zeit
     \end{array} \right.
   \]
   sodass $\gamma \in \R^r$, $r < d_n$ und $\gamma \approx V \tilde{\gamma}$.
-\end{itemize}
+\end{verf}
 
 % §5.6.2. Die horizontale Linienmethode (die Rothe-Methode)
 
-Idee: 1. Diskretisierung in der Zeit, 2. Diskretisierung im Ort
+\begin{verf}[\emph{Horizontale Linienmethode}, \textit{Rothe-Methode}] \mbox{} \\
+  Idee: \enspace Erst Diskretisierung in der Zeit, dann Diskretisierung im Ort
 
-$\tau = \nicefrac{T}{q}$, $t_i = i \cdot \tau$
-
-Sei $\psi_i (t) \coloneqq \begin{cases}
-  \nicefrac{t - t_{i-1}}{\tau} & t \in \cinterval{t_{i-1}}{t_i}, \\
-  \nicefrac{t_i - t}{\tau} & t \in \cinterval{t_i}{t_{i+1}}, \\
-  0 & \text{sonst}
-\end{cases}$
-
-$u(x,t) \approx u_\tau(x, t) = \sum_{j=1}^q \psi_j(t) c_j(x)$
-Somit $u_\tau(x, t_i) = c_i (x)$
-Implizites Euler-Verfahren: $\tfrac{\d}{\d t} u_\tau(x, t_{i+1}) \approx \tfrac{u_\tau(x, t_{i+1}) - u_\tau(x, t_i)}{\tau} = \tfrac{c_{i+1}(x) - c_i(x)}{\tau}$,
-
-$\scp{\tfrac{c_{i+1} - c_i}{\tau}}{\varphi} + B(c_{i+1}, \varphi) = \scp{f(t_{i+1})}{\varphi}$
-
-$\underbrace{\IntOmega{c_{i+1} \varphi}{x} + \tau \IntOmega{\DO c_{i+1} \cdot \DO \varphi}{x}}_{\hat{B}(c_{i+1}, \varphi)} = \underbrace{\tau \IntOmega{f(t_{i+1}, x) \varphi(x)}{x} + \IntOmega{c_i \varphi}{x}}_{\hat{\ell}(\varphi)}$
-
-2. Schritt: Löse die Variationsgleichung mittels der FEM
+  Sei $\tau \coloneqq \nicefrac{T}{q}$, $t_i \coloneqq i \cdot \tau$ und
+  \[
+    \psi_i (t) \coloneqq \begin{cases}
+      \nicefrac{t - t_{i-1}}{\tau} & \text{für } t \in \cinterval{t_{i-1}}{t_i}, \\
+      \nicefrac{t_i - t}{\tau} & \text{für } t \in \cinterval{t_i}{t_{i+1}}, \\
+      0 & \text{sonst.}
+    \end{cases}
+  \]
+  Wir verwenden die Approx. $u(x,t) \approx u_\tau(x, t) = {\sum}_{j=1}^q \psi_j(t) c_j(x)$, also $u_\tau (x, t_i) = c_i (x)$.
+  Implizites Euler-Verfahren:
+  \[
+    \tfrac{\d}{\d t} u_\tau(x, t_{i+1}) \approx \tfrac{u_\tau(x, t_{i+1}) - u_\tau(x, t_i)}{\tau} = \tfrac{c_{i+1}(x) - c_i(x)}{\tau},
+  \]
+  Dies führt pro Zeitpunkt $t_i$ zu je einer VGL
+  \[
+    \scp{\tfrac{c_{i+1} - c_i}{\tau}}{\varphi} + B(c_{i+1}, \varphi) = \scp{f(t_{i+1})}{\varphi} \enspace
+    \forall \, \varphi \quad
+    \text{bzw.}
+  \]
+  \[
+    \underbrace{\IntOmega{c_{i+1} \varphi}{x} + \tau \IntOmega{\DO c_{i+1} \cdot \DO \varphi}{x}}_{\hat{B}(c_{i+1}, \varphi)}
+    = \underbrace{\tau \IntOmega{f(t_{i+1}, x) \varphi(x)}{x} + \IntOmega{c_i \varphi}{x}}_{\hat{\ell}(\varphi)} \enspace
+    \forall \, \varphi.
+  \]
+  Diese VGLn lösen wir dann mittels der FEM iterativ für $i = 1, \ldots, q$.
+\end{verf}
 
 \end{document}
 
