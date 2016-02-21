@@ -2326,6 +2326,8 @@ $H'_0(\Omega) \subseteq U \subseteq H^1(\Omega)$, $U$ ist der Lösungsraum
   \end{itemize}
 \end{bemn}
 
+% Vorlesung vom 27.1.2016
+
 % 5.5.3. Nichtkonforme finite Elemente
 \subsection{Nichtkonforme finite Elemente}
 
@@ -2333,27 +2335,105 @@ Bisher war $B_n = B_{U_n \times U_n}$.
 Manchmal ist es schwierig, $B$ exakt auszuwerten und muss daher angenähert werden, etwa wenn $B$ durch Integration definiert ist.
 Dann hilft folgende Verallgemeinerung des Lemmas von Céa:
 
-1. Fall: $U_n \subset U$, $B_n$ nicht unbedingt $= B_{U_n \times U_n}$.
-
-\begin{satz}[1. Lemma von Strang]
-  Sei $B_ U \times U \to \R$ eine beschränkte, koerzitive Bilinearform, $U_n \subset U$, $B_n : U_n \times U_n \to \R$ eine beschränkte, \textit{gleichmäßig koerzitive} Bilinearform, \dh{} $\ex{\alpha > 0} \fa{n} B_n(u_n, u_n) \geq \alpha \norm{u_n}^2_U$ für alle $u \in U_n$.
-  Dann existiert eine Konstante $c > 0$, sodass
+\begin{satz}[1. Lemma von \emph{Strang}]
+  Sei $B_ U \times U \to \R$ eine beschränkte, koerzitive Bilinearform, $U_n \subset U$, $B_n : U_n \times U_n \to \R$ eine beschränkte, \textit{gleichmäßig koerzitive} Bilinearform, \dh{}
   \[
-    \norm{u - u_n}_U \leq c \left( \inf_{v_n \in U_n} \norm{u - v_n}_U + \sup_{w_n \in U_n, w_n \neq 0} \tfrac{\abs{B(v_n, w_n) - B_n(v_n, w_n)}}{\norm{w_n}_U} + \norm{\ell - \ell_n}_{U'} \right)
+    \ex{\alpha > 0} \fa{n} B_n(u_n, u_n) \geq \alpha \norm{u_n}^2_U \quad
+    \text{für alle $u \in U_n$.}
   \]
+  Dann existiert eine Konstante $c > 0$, sodass
+  \begin{align*}
+    & \norm{u - u_n}_U \leq c \left( \inf_{v_n \in U_n} \Phi(v_n) + \norm{\ell - \ell_n}_{U'} \right) \\
+    & \Phi(v_n) \coloneqq \norm{u - v_n}_U + \sup_{w_n \in U_n, w_n \neq 0} \tfrac{\abs{B(v_n, w_n) - B_n(v_n, w_n)}}{\norm{w_n}_U}
+  \end{align*}
 \end{satz}
 
-\TODO{Vorlesung vom 28.1.2016 nachtragen}
+\begin{defn}
+  Das \emph{Fehlerfunktional der Quadraturformel} mit \textit{Stützpunkten}~$x_i^K$ und \textit{Gewichten}~$w_i^K$ ist
+  \[
+    E_K (\psi) \coloneqq \AInt{K}{\psi(x)}{x} - \sum_{i=1}^q w_i^K \psi(x_i^K).
+  \]
+\end{defn}
+
+% 5.11
+\begin{satz}[Konvergenzsatz für das Modellproblem] \mbox{} \\
+  Seien die Voraussetzungen (V\tss{1}) -- (V\tss{3}) erfüllt, $P(\hat{K}) = \Poly_k(\hat{k})$ mit $k > \nicefrac{d}{2}$ (damit $H^{k+1}(\Omega) \hookrightarrow \Cont^s(\hat{K})$).
+  Sei die Quadraturformel so gewählt, dass $E_{\hat{K}}(p) = 0$ für alle $p \in \Poly_{2k - 2}$.
+  Für die Lösung $u \in H_0^1(\Omega)$ von (VGL) mit $B(u, \varphi) \coloneqq \IntOmega{\DO u \cdot \DO \varphi}{x}$, $\ell(\varphi) \coloneqq \IntOmega{f \varphi}{x}$ mit $f \in H^k(\Omega)$ gelte $u \in H^{k+1}(\Omega)$.
+  Dann gilt:
+  \begin{itemize}
+    \item Es gibt eine Konstante $C_1 > 0$, sodass
+    $\forall \, p, q \in \Poly_k(K)$:
+    \[
+      E_K(\DO p \cdot \DO q) \leq C_1 \cdot h^k(K) \cdot \norm{p}_{H^k(K)} \cdot \norm{q}_{H^1(K)}
+    \]
+    \item Es gibt eine Konstante $C_2 > 0$, sodass
+    $\forall$ $f \in H^k(K)$, $\varphi \in H^1(K)$:
+    \[
+      E_K(f \varphi) \leq C_2 \cdot h^k(K) \cdot \norm{f}_{H^k(K)} \cdot \norm{\varphi}_{H^1(K)}
+    \]
+    \item Für die Lsg $u_n \!\in\! U_n$ von (VGL)\tss{n} mit der nicht-konformen Approx. $B_n(u, \varphi)$ und $\ell_n(\varphi)$ mittels der Quadraturformel gilt:
+    \[
+      \norm{u - u_n}_{H^1(\Omega)} \leq C \cdot \left( \norm{u}_{H^{k+1}(\Omega)} + \norm{f}_{H^k(\Omega)} \right)
+    \]
+  \end{itemize}
+\end{satz}
+
+% Beweis: Ciarlet 4.1.4--4.1.6
+
+\begin{defn}
+  Sei $\Omega \subset \R^d$ ein Gebiet mit glattem Rand.
+  Dann heißt $(\Omega_n, T(\cOmega_n))$ \emph{zulässige Gebietsapproximation}, falls $T_n(\cOmega_n)$ eine zulässige Triangulierung von~$\Omega_n$ ist und
+  \[
+    \bOmega_n \cap \{ \text{ Eckpunkte der Simplizes in $T(\cOmega_n)$ } \} \subset \bOmega.
+  \]
+\end{defn}
+
+Wir betrachten nun
+
+\begin{problem} \mbox{}
+  \vspace{-1em}
+  \[
+    \text{\probl{(VGL\tss{n})}} \enspace \left\{ \begin{array}{l}
+       \overbrace{\AInt{\Omega_n}{\DO u_n \cdot \DO \varphi_n}{x}}^{B_n(u_n, \varphi_n) \coloneqq} = \overbrace{\AInt{\Omega_n}{\tilde{f} \varphi_n}{x}}^{\ell_n (\varphi_n) \coloneqq} \quad \forall \, \varphi \in U_n \\
+      u_n \in U_n
+    \end{array} \right.
+  \]
+  wobei $\tilde{f} \in L^2(\Omega_n \cup \Omega)$ mit $\tilde{f}|_\Omega = f$
+\end{problem}
+
+\TODO{etwas ausgelassen; wichtig?}
+
+% §5.5.4. Isoparametrische Finite Elemente
+
+\begin{defn}
+  Sei $(\hat{K}, \hat{P}, \hat{\Sigma})$ ein gerades (simpliziales oder rechteckiges) FE vom Lagrange-Typ.
+  Ein finites Element $(K, P, \Sigma)$ vom Langrange-Typ (k) heißt \emph{isometrisch äquivalent} zu $(\hat{K}, \hat{P}, \hat{\Sigma})$, falls eine umkehrbare Abbildung
+  \[
+    F : \hat{K} \to K, \quad
+    \hat{x} \mapsto (F_1(\hat{x}), \ldots, F_d(\hat{x}))
+  \]
+  mit $F_1, \ldots, F_d \in \hat{P}$ existiert sodass
+  \begin{itemize}
+    \item $K = F(\hat{K})$
+    \item $P = \Set{p = \hat{p} \circ F^{-1}}{\hat{p} \in \hat{P}}$
+    \item $\Sigma = \Set{p \mapsto p(a_i)}{\text{ für Punkte } a_i \coloneqq F(\hat{a}_i), \hat{a}_i \in \mathcal{K}_k}$
+  \end{itemize}
+\end{defn}
+
+\begin{bem}
+  Die zu $(K, P, \Sigma)$ isoparametrische Abbildung~$F$ ist für isoparametrische FE vom Langrange-Typ (k) eindeutig durch die Werte an den Knoten~$\hat{a}_i$ definiert.
+\end{bem}
 
 % Vorlesung vom 1.2.2015
 
 % §5.6. Finite Elemente für parabolische Probleme
+\subsection{Finite Elemente für parabolische Probleme}
 
 \begin{prob}
   Wärmeleitungsgleichung:
   \[
     \arraycolsep=2.5pt
-    %\text{\probl{(RWP\tss{4})}} \quad
     \left\{ \begin{array}{rcll}
       u_t(x,t) - \Laplace_x u(x, t) &=& f(x,t) &\text{in $\Omega \times \ointerval{0}{T}$} \\
       u(x,0) &=& u_0(x) & \text{für } x \in \Omega \\
