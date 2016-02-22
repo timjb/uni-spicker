@@ -62,7 +62,7 @@ Dies ist ein verkürztes Skript zur gleichnamigen Vorlesung von Frau Prof. Dr. T
 \begin{defn}
   Sei $\Omega \subseteq \R^n$ offen.
   Eine DGL der Form
-  \[ F(x, u, Du, \ldots, D^k u) = 0 \]
+  \[ F(x, u, \DO u, \ldots, \DO^k u) = 0 \]
   heißt \emph{partielle DGL/PDE} der Ordnung $k \geq 1$, wobei
   \[ F : \Omega \times \R \times \R^n \times \ldots \times \R^{n^k} \to \R \]
   eine gegebene Funktion und $u : \Omega \to \R$ gesucht ist.
@@ -71,13 +71,13 @@ Dies ist ein verkürztes Skript zur gleichnamigen Vorlesung von Frau Prof. Dr. T
 \begin{defn}[\emph{Klassifikation von PDEs}]\mbox{}\\
   \begin{itemize}
     \item Die PDE heißt \emph{linear}, wenn sie die Form
-    \[ \sum_{\abs{\alpha} \leq k} a_\alpha(x) D^\alpha u = f(x) \]
-    mit Funktionen $a_\alpha, f : \Omega \to \R$ besitzt.
+    \[ \sum_{\abs{\alpha} \leq k} a_\alpha(x) \DO^\alpha u = f(x) \]
+    mit Funktionen $a_\alpha$, $f : \Omega \to \R$ besitzt.
     \item Die PDE heißt \emph{semilinear}, wenn sie die Form
-    \[ \sum_{\abs{\alpha} = k} a_\alpha(x) D^\alpha u + a_0(x, u, D_u, \ldots, D^{k-1} u) = 0 \]
-    besitzt, wobei $a_\alpha : \Omega \to \R$ und $a_0 : \Omega \times \R \times \R^n \times \ldots \times \R^{n^k} \to \R$ gegeben sind.
+    \[ \sum_{\abs{\alpha} = k} a_\alpha(x) \DO^\alpha u + a_0(x, u, \DO u, \ldots, \DO^{k-1} u) = 0 \]
+    besitzt, wobei $a_\alpha : \Omega \to \R$ und $a_0 : \Omega \times \R \times \R^n \times \ldots \times \R^{n^{k-1}} \to \R$ gegeben sind.
     \item Die PDE heißt \emph{quasilinear}, wenn sie die Form
-    \[ \sum_{\abs{\alpha} = k} a_\alpha(x, u, Du, \ldots, D^{k-1} u) D^\alpha u + a_0(x, u, D_u, \ldots, D^{k-1} u) = 0 \]
+    \[ \sum_{\abs{\alpha} = k} a_\alpha(x, u, \DO u, \ldots, \DO^{k-1} u) \DO^\alpha u + a_0(x, u, \DO_u, \ldots, \DO^{k-1} u) = 0 \]
     hat, wobei $a_\alpha, a_0 : \Omega \times \R \times \R^n \times \ldots \times \R^{n^k}$ gegeben sind.
     \item Die PDE heißt \emph{nichtlinear}, falls die Ableitungen der höchsten Ordnung nicht linear vorkommen.
   \end{itemize}
@@ -88,11 +88,12 @@ Dies ist ein verkürztes Skript zur gleichnamigen Vorlesung von Frau Prof. Dr. T
 \begin{defn}
   Sei $\Omega \subseteq \R^n$ offen und $F : \Omega \times \R \times \R^n \times \R^{n \times n} \to \R$ gegeben.
   Eine \emph{PDE zweiter Ordnung} ist eine PDE der Form
-  \[ F(x, u, \partial_{x_1} u, \ldots, \partial_{x_n} u, \partial_{x_1} \partial_{x_1} u, \ldots, \partial{x_1} \partial_{x_n} u, \ldots, \partial_{x_n} \partial_{x_n} u) = 0. \]
+  \[ F(x, u, \partial_{x_1} u, \ldots, \partial_{x_n} u, \partial_{x_1} \partial_{x_1} u, \ldots, \partial_{x_1} \partial_{x_n} u, \ldots, \partial_{x_n} \partial_{x_n} u) = 0. \]
 \end{defn}
 
 \begin{nota}
-  $p_i \coloneqq \partial_{x_i} u$, $p_{ij} \coloneqq \partial^2_{x_i x_j} u$
+  Für eine PDE 2. Ordnung sei
+  $p_i \coloneqq \partial_{x_i} u$, $p_{ij} \coloneqq \partial^2_{x_i x_j} u$,
   \[
     M(x) \coloneqq \begin{pmatrix}
       \tfrac{\partial F}{\partial p_{11}} & \hdots & \tfrac{\partial F}{\partial p_{1n}} \\
@@ -106,7 +107,7 @@ Dies ist ein verkürztes Skript zur gleichnamigen Vorlesung von Frau Prof. Dr. T
   Obige PDE zweiter Ordnung heißt
   \begin{itemize}
     \item \emph{elliptisch} in~$x$, falls die Matrix~$M(x)$ positiv o. negativ definit ist.
-    \item \emph{parabolisch} in~$x$, falls genau ein EW von~$M(x)$ gleich null ist und alle anderen dasselbe Vorzeichen haben.
+    \item \emph{parabolisch} in~$x$, falls genau ein EW von~$M(x)$ gleich null ist und alle anderen EWe dasselbe Vorzeichen haben.
     \item \emph{hyperbolisch} in~$x$, falls genau ein EW von~$M(x)$ ein anderes Vorzeichen als die anderen EWe hat.
   \end{itemize}
 \end{defn}
@@ -123,21 +124,21 @@ Dies ist ein verkürztes Skript zur gleichnamigen Vorlesung von Frau Prof. Dr. T
   \begin{itemize}
     \item $\Cont(\cOmega, \R^m) \coloneqq \Set{u : \cOmega \to \R^m}{u \text{ stetig}}$, $\Cont(\cOmega) \coloneqq \Cont(\cOmega, \R)$, mit Norm
     \[
-      \norm{u}_{\Cont(\cOmega, \R^m)} = \sup_{x \in \cOmega} \norm{u(x)}.
-      \tag{Supremumsnorm}
+      \norm{u}_{\Cont(\cOmega, \R^m)} \coloneqq {\sup}_{x \in \cOmega} \norm{u(x)}.
+      \tag{\textit{Supremumsnorm}}
     \]
-    \item $\Cont^k(\cOmega, \R^m)$, $k \in \N$ ist der Raum aller auf $\Omega$ $k$-mal stetig diff'baren Funktionen $u : \Omega \to \R^m$, die zusammen mit ihren Ableitungen bis zur Ordnung $k$ stetig auf $\cOmega$ fortgesetzt werden können.
-    \[ \norm{u}_{\Cont^k(\overline{\Omega}, \R^m)} = \sum_{\abs{\alpha} \leq k} \norm{D^\alpha u}_{\Cont(\overline{\Omega}, \R^m)} \]
-    \item Sei $\alpha \in \cointerval{0}{1}$. $\Cont^{0,\alpha}(\cOmega, \R^m) = \Set{u \in \Cont(\cOmega, \R^m)}{H_\alpha(u, \cOmega) < \infty}$ mit
+    \item $\Cont^k(\cOmega, \R^m)$, $k \in \N$ ist der Raum aller auf $\Omega$ $k$-mal stetig diff'baren Funktionen $u : \Omega \to \R^m$, die zusammen mit ihren Ableitungen bis zur Ordnung $k$ stetig auf $\cOmega$ fortgesetzt werden können mit Norm
+    \[ \norm{u}_{\Cont^k(\overline{\Omega}, \R^m)} \coloneqq \sum_{\abs{\alpha} \leq k} \norm{\DO^\alpha u}_{\Cont(\overline{\Omega}, \R^m)}. \]
+    \item Für $\alpha \!\in\! \ocinterval{0}{1}$ ist $\Cont^{0,\alpha}(\cOmega, \R^m) \!\coloneqq\! \Set{u \!\in\! \Cont(\cOmega, \R^m)}{H_\alpha(u, \cOmega) \!<\! \infty}$ mit
     \[
       H_\alpha(u, \cOmega) \coloneqq \sup_{x, y \in \cOmega, x \neq y} \tfrac{\norm{u(x)-u(y)}}{\norm{x-y}^\alpha}
-      \tag{Hölder-Koeffizient}
+      \tag{\textit{Hölder-Koeffizient}}
     \]
-    heißt \emph{Raum der glm. Hölder-stetigen Fktn} zum Exponent $\alpha$.
+    der \emph{Raum der glm. Hölder-stetigen Fktn} zum Exponent $\alpha$.
     Der Hölder-Koeffizient ist dabei eine Seminorm auf $\Cont^{0,\alpha}(\cOmega, \R^m)$.
-    \item $\Cont^{k,\alpha}(\cOmega, \R^m) \coloneqq \Set{u \in \Cont^k(\cOmega, \R^m)}{\fa{\abs{\gamma} = k} D^\gamma u \in \Cont^{0, \alpha}(\cOmega, \R^m)}$ heißt \emph{Hölder-Raum}.
+    \item $\Cont^{k,\alpha}(\cOmega, \R^m) \coloneqq \Set{u \in \Cont^k(\cOmega, \R^m)}{\fa{\abs{\gamma} = k} \DO^\gamma u \in \Cont^{0, \alpha}(\cOmega, \R^m)}$ heißt \emph{Hölder-Raum}.
     Eine Norm ist gegeben durch
-    \[ \norm{u}_{\Cont^{k,\alpha}(\cOmega, \R^m)} \coloneqq \norm{u}_{\Cont^k(\cOmega, \R^m)} + \sum_{\abs{\gamma} = k} H_\alpha(D^\gamma u, \cOmega). \]
+    \[ \norm{u}_{\Cont^{k,\alpha}(\cOmega, \R^m)} \coloneqq \norm{u}_{\Cont^k(\cOmega, \R^m)} + \sum_{\abs{\gamma} = k} H_\alpha(\DO^\gamma u, \cOmega). \]
   \end{itemize}
 \end{defn}
 
@@ -205,20 +206,19 @@ Dies ist ein verkürztes Skript zur gleichnamigen Vorlesung von Frau Prof. Dr. T
     \end{align*}
   \end{itemize}
 \end{bemn}
-% TODO: \tilde{b}_i(x) ist der Term in Klammern im mittleren Term
 
 \begin{voraussetzung}
   Wir nehmen im Folgenden an:
   \begin{itemize}
     \item $\LL$ ist \emph{gleichmäßig elliptisch}, \dh{}
     \[ \ex{\lambda_0 > 0} \fa{\xi \in \R^n} \fa{x \in \Omega} \xi^T A(x) \xi \geq \lambda_0 \norm{\xi}^2. \]
-    Dabei heißt $\lambda_0$ \emph{Elliptizitätskonstante}.
+    Dabei heißt $\lambda_0$ \textit{Elliptizitätskonstante}.
     \item $a_{ij}, b_i, c, f \in \Cont(\cOmega)$, $g \in \Cont(\bOmega)$
   \end{itemize}
 \end{voraussetzung}
 
 \begin{bem}
-  $\LL$ ist elliptisch auf $\Omega$ $\iff$ $A(x) > 0$ (spd) für alle $x \in \Omega$
+  $\LL$ ist elliptisch auf $\Omega$ $\coloniff$ $A(x) > 0$ (spd) für alle $x \in \Omega$
 \end{bem}
 
 \begin{defn}
@@ -230,7 +230,7 @@ Dies ist ein verkürztes Skript zur gleichnamigen Vorlesung von Frau Prof. Dr. T
   Sei $\Omega \subset \R^n$ offen, zshgd u. beschränkt.
   Sei $u \in \Cont^2(\Omega) \cap \Cont(\cOmega)$ eine Lösung vom (RWP), $f \leq 0$ in $\Omega$ und $c \equiv 0$. \\
   Dann nimmt $u$ sein Maximum auf dem Rand $\bOmega$ an, \dh{}
-  \[ \sup_{x \in \cOmega} u(x) = \sup_{x \in \bOmega} u(x) = \sup_{x \in \bOmega} g(x) \]
+  \[ \sup_{x \in \cOmega} u(x) = \sup_{x \in \bOmega} u(x) = \sup_{x \in \bOmega} g(x). \]
 \end{satz}
 
 % Vorlesung vom 20.10.2015
