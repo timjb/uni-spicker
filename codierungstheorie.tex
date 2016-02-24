@@ -154,7 +154,7 @@ In der Codierungstheorie geht es darum, Daten mit einer Kanalcodierung so zu üb
 
 \begin{defn}
   Die \emph{Informationsrate} von $C$ ist dann $R(C) \coloneqq \nicefrac{\log_q(M)}{n}$.
-  Falls $\abs{M} = q^k$, dann ist $R(C) = k/n$.
+  Falls $\abs{C} = M = q^k$, dann ist $R(C) = k/n$.
 \end{defn}
 
 \begin{bem}
@@ -189,7 +189,7 @@ In der Codierungstheorie geht es darum, Daten mit einer Kanalcodierung so zu üb
     \item Man nennt einen Kanal einen \emph{$q$-nären symmetrischen Kanal}, falls ein $p \in \R$ mit $0 < p < (q-1)/q$ existiert, sodass
     \[ \CP{\text{$\beta$ empfangen}}{\text{$\alpha$ gesendet}} = \nicefrac{p}{q-1} \]
     für alle $\beta \neq \alpha \in Q$, also $\CP{\text{$\alpha$ empfangen}}{\text{$\alpha$ gesendet}} = 1-p$.
-    \item Ein Kanal heißt \emph{gedächtnislos}, falls für alle $x, y \in Q^n$ gilt:
+    \item Ein Kanal heißt \emph{gedächtnislos}, falls für alle $y \in Q^n$ gilt:
     \[ \CP{\text{$y$ empfangen}}{\text{$c$ gesendet}} = \prod_{i=1}^n \CP{\text{$y_i$ empfangen}}{\text{$c_i$ gesendet}} \]
   \end{itemize}
 \end{defn}
@@ -624,7 +624,7 @@ Da die Parity-Check-Erw. durch eine lin. Abb. geschieht, gilt:
 \begin{nota}
   Sei $C \subset \F_q^n$ ein UVR. Für $x, y \in \F_q^n$ schreiben wir
   \[ x \equiv y \pmod{C} \coloniff x-y \in C. \]
-  Die zu $x \in V$ gehörende Kongruenzklasse modulo $C$ ist $x + C$.
+  Die zu $x \in \F_q^n$ gehörende Kongruenzklasse modulo $C$ ist $x + C$.
 \end{nota}
 
 \begin{defn}
@@ -688,7 +688,7 @@ Da die Parity-Check-Erw. durch eine lin. Abb. geschieht, gilt:
   \begin{itemize}
     \item Sei $c \in C$ gesendet, $y \in \F_q^n$ empfangen, etwa $y = c + e$.
     Wir als Empfänger kennen jedoch $c$ und $e$ nicht, nur $y$.
-    Trotzdem können wir das \emph{Syndrom} $s \coloneqq \phi_H(y) = H c^T + H e^T = H e^T \in \F_q^{n-k}$ berechnen.
+    Trotzdem können wir das \emph{Syndrom} $s \coloneqq \psi_H(y) = H c^T + H e^T = H e^T \in \F_q^{n-k}$ berechnen.
     \item Wahrscheinlich ist $e$ ein gewichtsminimaler Repräsentant von $y$.
     Sei also $\mathcal{R}$ ein minimales Repräsentantensystem. \\
     Dann ist $\psi \coloneqq \psi_H|_{\mathcal{R}} : \mathcal{R} \to \F_q^{n-k}$ bijektiv. \\
@@ -712,7 +712,7 @@ Da die Parity-Check-Erw. durch eine lin. Abb. geschieht, gilt:
   Die \emph{Gewichtsverteilung von~$C$} ist
   $A = A_C \in \N^{\{ 0, 1, \ldots, n \}}$ mit
   \[
-    A(i) \coloneqq \Set{w \in C}{\wt(w) = i}, \quad
+    A(i) \coloneqq |\Set{w \in C}{\wt(w) = i}|, \quad
     0 \leq i \leq n.
   \]
 \end{defn}
@@ -798,7 +798,7 @@ Da die Parity-Check-Erw. durch eine lin. Abb. geschieht, gilt:
 % ausgelassen: Tabelle von binären Hamming-Codes
 
 \begin{konstr}
-  Ein bin. \emph{Hamming-Code} $\Ham_2(m)$ (ein $[n, n {-} m, 3]$- Code mit $n \coloneqq 2^m - 1$) ist geg. durch die Kontrollmatrix $H \in \F_2^{m \times n}$, welche jeden Vektor aus $\F_2^m \setminus \{ 0 \}$ in genau einer Spalte stehen hat.
+  Ein  \emph{bin. Hamming-Code} $\Ham_2(m)$ (ein $[n, n {-} m, 3]$- Code mit $n \coloneqq 2^m - 1$) ist geg. durch die Kontrollmatrix $H \in \F_2^{m \times n}$, welche jeden Vektor aus $\F_2^m \setminus \{ 0 \}$ in genau einer Spalte stehen hat.
 \end{konstr}
 
 \begin{alg}[Decodierung von binären Hamming-Codes]\mbox{}\\
@@ -872,8 +872,8 @@ Da die Parity-Check-Erw. durch eine lin. Abb. geschieht, gilt:
 \end{samepage}
 
 \begin{konstr}
-  Wir definieren auf $A \coloneqq \F_q^n \setminus \{ 0 \}$ eine Äq'relation durch
-  \[ u \sim v \coloniff \ex{\lambda \in \F_q} u = \lambda v. \]
+  Wir definieren auf $A \coloneqq \F_q^m \setminus \{ 0 \}$ eine Äq'relation durch
+  \[ u \sim v \coloniff \ex{\lambda \in \F_q^{\times}} u = \lambda v. \]
   Wir setzen $\Proj \coloneqq PG(m-1, \F_q) \coloneqq A/{\sim}$.
   Es gilt $\abs{\Proj} = \nicefrac{q^m - 1}{q - 1} = n$. \\
   Sei $v_1, \ldots, v_n$ ein Representantensystem der Äquivalenzklassen. \\
@@ -897,7 +897,7 @@ Da die Parity-Check-Erw. durch eine lin. Abb. geschieht, gilt:
   Sei $y$ empfangen mit höchstens einem Fehler.
   Berechne das Syndrom $s = H_q(m)y^T$.
   Falls $s = 0$, so ist $D(y) \coloneqq y$.
-  Angenommen, $s_i \neq 0$.
+  Angenommen, $s \neq 0$.
   Sei $i$ minimal mit $s_i \neq 0$.
   Dann ist $\nicefrac{s}{s_i}$ eine Spalte von $H_q(m)$, etwa die $\ell$-te Spalte.
   Decodiere $D(y) \coloneqq y - s_i \cdot e_\ell$.
@@ -1020,7 +1020,7 @@ Mit einer Methode aus ihrem Beweis lässt sich ein alternativer Beweis des letzt
   Dann gilt:
   \begin{itemize}
     \item Jedes Codewort hat ein gerades Gewicht.
-    \item $\fa{c \in C} 4 \divides \wt(c) \iff$ $C$ hat eine Basis $B$ mit $\fa{b \in B} 4 \divides \wt(c)$
+    \item $\fa{c \in C} 4 \divides \wt(c) \iff$ $C$ hat eine Basis $B$ mit $\fa{b \in B} 4 \divides \wt(b)$
   \end{itemize}
 \end{prop}
 
@@ -1097,7 +1097,7 @@ Mit einer Methode aus ihrem Beweis lässt sich ein alternativer Beweis des letzt
 \begin{bem}
   $\Golay(24)$ hat eine Generatormatrizen der Form $G_1 = [E|M]$ und $G_2 = [M|E]$, wobei $M$ symmetrisch ist.
   Beide Matrizen sind gleichzeitig auch Kontrollmatrizen.
-  Die Matrix $M$ hat dabei besondere Eigenschaften, die zum Decodieren ausnutzen kann.
+  Die Matrix $M$ hat dabei besondere Eigenschaften, die man zum Decodieren ausnutzen kann.
 \end{bem}
 
 \iffalse
@@ -1482,7 +1482,7 @@ Mit einer Methode aus ihrem Beweis lässt sich ein alternativer Beweis des letzt
 \end{satz}
 
 \begin{bem}
-  Der Satz von Bruck und Ryser ist eine Korollar hiervon.
+  Der Satz von Bruck und Ryser ist ein Korollar hiervon.
 \end{bem}
 
 \begin{bem}
@@ -1899,7 +1899,7 @@ Suche nun ein $\lambda \in \F_2^m$ mit $\abs{\hat{B}_\beta(\lambda)}$ ist minima
   \[
     \Delta_C(j) \coloneqq \tfrac{1}{\abs{C}} \abs{\Set{(x, y) \in C \times C}{d(x, y) = j}}.
   \]
-  $\Delta_C \in \Q^\{0, \ldots, n\}$ heißt \emph{Distanzverteilung} von $C$.
+  $\Delta_C \in \Q^{\{0, \ldots, n\}}$ heißt \emph{Distanzverteilung} von $C$.
 \end{defn}
 
 \begin{prop}
@@ -1954,7 +1954,7 @@ eine nicht-triavialer Charakter, der sogenannte \emph{Hauptcharakter}.
 \end{bem}
 
 Sei $V$ ein $\C$-Vektorraum.
-Wir betrachten Abbildung von $\F_q^n$ nach $V$.
+Wir betrachten Abbildungen von $\F_q^n$ nach $V$.
 Sei $\chi \hat{\F_q}$, $\chi \neq \chi_0$
 Zu $f : \F_q^n \to V$ definieren wir eine \emph{transformierte Abbildung} durch
 \[ \hat{f} : \F_q^n \to V, \enspace u \mapsto \sum_{v \in \F_q^n} \chi(\scp{u}{v}) \cdot f(v). \]
@@ -1967,12 +1967,14 @@ Zu $f : \F_q^n \to V$ definieren wir eine \emph{transformierte Abbildung} durch
   \]
 \end{satz}
 
-\begin{satz}
+\begin{satz}[\emph{Mac-Williams-Transformation}]
   Sei $C \subseteq \F_q^m$ ein linearer Code.
   Betrachte den dualen Code $C^\perp$ zu $C$.
   Dann:
   \[
-    A_{C^\perp}^\homogen(X, Y) = \tfrac{1}{\abs{C}} \cdot A_C^\homogen(X + (q-1)Y, X-Y), \quad
+    A_{C^\perp}^\homogen(X, Y) = \tfrac{1}{\abs{C}} \cdot A_C^\homogen(X + (q-1)Y, X-Y), \quad 
+  \] 
+  \[
     A_{C^\perp}(Z) = \tfrac{1}{\abs{C}} \cdot (1 + (q-1) Z)^n \cdot A_C(\frac{1-Z}{1+(q-1)Z}).
   \]
 \end{satz}
@@ -2452,7 +2454,7 @@ TODO: Rest des Beispiels, insbesondere Decodierung
 \end{bem}
 
 \begin{voraussetzung}
-  Wir können daher im Folgenden annehmen, dass~$n$ nicht durch~$q$ teilbar ist.
+  Wir können daher im Folgenden annehmen, dass~$n$ nicht durch~$p$ teilbar ist.
 \end{voraussetzung}
 
 \begin{bem}
@@ -2462,7 +2464,7 @@ TODO: Rest des Beispiels, insbesondere Decodierung
 \begin{defn}
   Die \emph{Ordnung von $q$ modulo $n$} ist
   \[
-    m \coloneqq \ord_q(n) \coloneqq \min \, \Set{\ell \geq 1}{q^\ell \equiv 1 \pmod{n}}.
+    m \coloneqq \ord_n(q) \coloneqq \min \, \Set{\ell \geq 1}{q^\ell \equiv 1 \pmod{n}}.
   \]
 \end{defn}
 
