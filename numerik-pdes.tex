@@ -38,6 +38,7 @@
 \DeclareMathOperator{\GL}{GL}
 \newcommand{\Poly}{\mathbbm{P}} % Menge der Polynome
 \newcommand{\Qoly}{\mathbbm{Q}} % Menge der in jeder Koordinate im Grad beschränkten Polynome
+\newcommand{\tprime}{\ensuremath{^\prime}} % im Textmodus verwendbares \prime
 
 % Hervorhebung von Problembezeichnungen
 \definecolor{ProblemColor}{rgb}{0.7,0.2,0.0}
@@ -789,12 +790,12 @@ Dies ist ein verkürztes Skript zur gleichnamigen Vorlesung von Frau Prof. Dr. T
   % Vorlesung vom 3.11.2015
   Wir betrachten nun
   \begin{align*}
-    \text{\probl{(RWP\tss{2})'\tss{h}}} \quad
+    \text{\probl{(RWP\tss{2})\tss{h}\tprime}} \quad
     & \left\{ \begin{array}{rrcl}
       - \DO_h u_h &=& f_h &\text{ in $\Omega_h$} \\
       u_h &=& g &\text{ auf $\bOmega_h$}
     \end{array} \right. \\
-    \text{\probl{(LGS\tss{2})'}} \quad
+    \text{\probl{(LGS\tss{2})\tprime}} \quad
     & \left\{ \begin{array}{rcl}
       - \tilde{\DO}_h \tilde{u}_h &=& \tilde{f}_h \\
       \tilde{f}_h &=& f_h + g_h
@@ -838,7 +839,7 @@ Dies ist ein verkürztes Skript zur gleichnamigen Vorlesung von Frau Prof. Dr. T
 % Beweis: W. Hackbusch, Thm. 4.8.4
 
 \begin{bem}
-  Das DV (RWP\tss{2})'\tss{h} hat in den randnahen Punkten nur die Konsistenzordnung 1. Dennoch gilt:
+  Das DV (RWP\tss{2})\tss{h}\tprime hat in den randnahen Punkten nur die Konsistenzordnung 1. Dennoch gilt:
   \iffalse
   Sei $u \in \Cont^4(\cOmega)$.
   Dann ist
@@ -879,7 +880,7 @@ Dies ist ein verkürztes Skript zur gleichnamigen Vorlesung von Frau Prof. Dr. T
 % 3.11, 4.8.6 im Hackbusch
 \begin{satz}
   Sei $\Omega \subset \R^3$ beschränkt und Teilmenge des Streifens $\ointerval{x_0}{x_0 + d} \times \R$ oder $\R \times (y_0, y_0 + d)$.
-  Dann ist das Verfahren (RWP\tss{2})'\tss{h} konvergent von der Ordnung 2.
+  Dann ist das Verfahren (RWP\tss{2})\tss{h}\tprime konvergent von der Ordnung 2.
   Es gilt
   \[ \norm{u_h - R_h u}_h \leq \left( \nicefrac{1}{3} h^3 + \nicefrac{d^2}{48} h^2 \right) \norm{u}_{\Cont^4(\cOmega)}. \]
 \end{satz}
@@ -897,12 +898,12 @@ Dies ist ein verkürztes Skript zur gleichnamigen Vorlesung von Frau Prof. Dr. T
 \end{idee}
 
 \begin{align*}
-  \text{\probl{(RWP\tss{2})\tss{h}''}} \quad
+  \text{\probl{(RWP\tss{2})\tss{h}\ensuremath{^{\prime\prime}}}} \quad
   & \left\{ \begin{array}{rlll}
     - \DO_h u &=& f_h &\text{ in $\Omega_h$} \\
     u_h &=& g &\text{ auf $\bOmega_h$}
   \end{array} \right. \\
-  \text{\probl{(LGS\tss{2})''}} \quad
+  \text{\probl{(LGS\tss{2})\ensuremath{^{\prime\prime}}}} \quad
   & \qquad - \tilde{\DO}_h \tilde{u}_h = \tilde{f}_h
 \end{align*}
 
@@ -1496,7 +1497,7 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
   Seien Abb. $\ell : H_0^1(\Omega) \to \R$ und $B : H_0^1(\Omega) \times H_0^1(\Omega) \to \R$ gegeben.
   Gesucht ist $u \in H_0^1(\Omega)$, sodass
   \[
-    \text{\probl{(VGL\tss{1})'}} \qquad
+    \text{\probl{(VGL\tss{1})\tprime}} \qquad
     B(u, \phi) = \ell(\phi) \quad
     \forall \phi \in H_0^1(\Omega).
   \]
@@ -1527,14 +1528,14 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
 
 \begin{lem}
   \begin{itemize}
-    \item Die Abbildung $B$ in (VGL\tss{1})' ist bilinear und beschränkt.
-    \item Die Abbildung $\ell$ in (VGL\tss{1})' ist linear und stetig.
+    \item Die Abbildung~$B$ in (VGL\tss{1})\tprime ist bilinear und beschränkt.
+    \item Die Abbildung $\ell$ in (VGL\tss{1})\tprime ist linear und stetig.
   \end{itemize}
 \end{lem}
 
 \begin{satz}
   Sei $\Omega$ ein beschr. Lipschitz-Gebiet.
-  Dann ist jede klassische Lsg $u \in \Cont^2 \cap \Cont^1(\bOmega)$ von (RWP\tss{1}) eine schwache Lsg von (VGL\tss{1})'.
+  Dann ist jede klassische Lsg $u \in \Cont^2 \cap \Cont^1(\bOmega)$ von (RWP\tss{1}) eine schwache Lsg von (VGL\tss{1})\tprime.
 \end{satz}
 
 % 4.3 Eindeutige Lösung elliptischer PDEs
@@ -1566,13 +1567,13 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
 
 % 4.11
 \begin{lem}
-  Falls $b(x) \equiv 0$ und $c(x) \geq 0$ in $\Omega$, so ist $B$ in (VGL\tss{1})' koerziv.
+  Falls $b(x) \equiv 0$ und $c(x) \geq 0$ in $\Omega$, so ist $B$ in (VGL\tss{1})\tprime koerziv.
 \end{lem}
 
 % 4.12
 \begin{satz}
   Sei $\Omega \subset \R^d$ beschränkt und sei $\mathcal{L} u = - \dive (A(x) \DO u) + c(x) u$ glm. elliptisch, $c(x) \geq 0$ in $\Omega$, $a_{ij}, c_j \in L^\infty(\Omega)$ und $f \in L^2(\Omega)$. \\
-  Dann besitzt (VGL\tss{1})' eine eindeutige Lösung $u \in H_0^1(\Omega)$. \\
+  Dann besitzt (VGL\tss{1})\tprime eine eindeutige Lösung $u \in H_0^1(\Omega)$. \\
   Außerdem existiert ein $\hat{C} > 0$, sodass $\norm{u}_{H^1(\Omega)} \leq \hat{C} \cdot \norm{f}_{L^2(\Omega)}$.
 \end{satz}
 
@@ -1622,14 +1623,14 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
   Angenommen, $g \in \Cont(\bOmega) \cap L^2(\bOmega)$ besitzt eine Fortsetzung $\tilde{g} \in \Cont^2(\Omega) \cap \Cont(\cOmega)$ mit $\tilde{g}|_{\bOmega} = g$.
   Dann ist $u \in \Cont^2(\Omega) \cap \Cont(\cOmega)$ genau dann eine Lösung von (RWP\tss{2}), wenn $v \coloneqq u - \tilde{g}$ eine Lösung von
   \[
-    \text{\probl{(RWP\tss{2})'}} \quad
+    \text{\probl{(RWP\tss{2})\tprime}} \quad
     \left\{ \begin{array}{r c l l}
       \LL v & = & f - \LL \tilde{g} & \text{in } \Omega, \\
       v & = & 0 & \text{auf } \bOmega
     \end{array} \right.
   \]
   ist.
-  Schwache Formulierung von (RWP\tss{2})':
+  Schwache Formulierung von (RWP\tss{2})\tprime:
   Ges. ist $v \in H_0'(\Omega)$ mit
   \begin{align*}
     & \IntOmega{(A(x) \DO v(x) \cdot \DO \phi(x) + b(x) \cdot \DO v(x) \phi(x) + c(x) v(x) \phi(x))}{x} \\
@@ -1649,7 +1650,7 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
   \[
     B(u, \phi) = \ell'(\phi) \coloneqq \scp{f}{\phi}_{H^{-1}(\Omega), H_0^1(\Omega)} \enspace
     \forall \, \phi \in H_0^1(\Omega).
-    \quad \text{\probl{(VGL\tss{2})'}}
+    \quad \text{\probl{(VGL\tss{2})\tprime}}
   \]
 \end{prob}
 
