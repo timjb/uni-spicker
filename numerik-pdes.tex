@@ -24,8 +24,6 @@
 \newcommand{\Laplace}{\Delta}
 \DeclareMathOperator{\dive}{div} % Divergenz
 \newcommand{\tss}[1]{\textsubscript{#1}} % Subskript, kürzer
-\newcommand{\rn}{\text{rn}} % randnah
-\newcommand{\rf}{\text{rf}} % randfern
 \renewcommand{\O}{\mathcal{O}} % Landau-Symbol
 \newcommand{\DO}{\mathcal{D}} % Differentialoperator
 \newcommand{\scp}[2]{\left\langle #1 , #2 \right\rangle} % Skalarprodukt
@@ -39,6 +37,12 @@
 \newcommand{\Poly}{\mathbbm{P}} % Menge der Polynome
 \newcommand{\Qoly}{\mathbbm{Q}} % Menge der in jeder Koordinate im Grad beschränkten Polynome
 \newcommand{\tprime}{\ensuremath{^\prime}} % im Textmodus verwendbares \prime
+
+% Folgender Code wird benötigt, um in einer Array-Umgebung eine rechtsausgerichtete Spalte einer bestimmten Breite zu erzeugen
+% http://tex.stackexchange.com/a/21332
+\usepackage{array}
+\newcolumntype{R}[1]{>{\hbox to #1\bgroup\hfill$}c<{$\egroup}}
+% LaTeX ist so ein Kack!
 
 % Hervorhebung von Problembezeichnungen
 \definecolor{ProblemColor}{rgb}{0.7,0.2,0.0}
@@ -295,14 +299,17 @@ Dies ist ein verkürztes Skript zur gleichnamigen Vorlesung von Frau Prof. Dr. T
 
 % 3.1. Differenzenverfahren für die Poisson-Gleichung in $\Omega = \ointerval{0}{1}$
 
-\begin{verf}[\emph{DV}]
-  Am Beispiel des Poisson-Problems
+\begin{problem}[\emph{Poisson-Problem}]
   \[
-    \text{\probl{(RWP\tss{1})}}\enspace \left\{ \begin{array}{rl}
+    \text{\probl{(RWP\tss{1})}}\enspace
+    \left\{ \begin{array}{rl}
       - \Laplace u = f &\text{ in $\Omega = \ointerval{0}{1}$} \\
       u(0) = g_0, u(1) = g_1 &\text{ auf $\bOmega$}
     \end{array} \right.
   \]
+\end{problem}
+
+\begin{verf}[\emph{DV}]
   Wir führen folgende Schritte durch:
   \begin{enumerate}
     \item Diskretisierung: Wähle $n \in \N$, setze $h \coloneqq \tfrac{1}{n}$ und
@@ -407,20 +414,20 @@ Dies ist ein verkürztes Skript zur gleichnamigen Vorlesung von Frau Prof. Dr. T
 \begin{defn}
   Das Differenzenverfahren (RWP)\tss{h} heißt
   \begin{itemize}
-    \item \emph{konvergent} von der Ordnung~$p$, falls $C > 0$, $h_0 > 0$ existieren, sodass für die Lsg~$u$ von (RWP) und die Lsg~$u_h$ von (RWP)\tss{h} gilt:
+    \item \emph{konvergent} von der \textit{Ordnung}~$p$, falls $C > 0$, $h_0 > 0$ existieren, sodass für die Lsg~$u$ von (RWP) und die Lsg~$u_h$ von (RWP)\tss{h} gilt:
     \[
       \norm{u_h - R_h u}_h \leq C h^p \quad
       \text{für alle $0 < h \leq h_0$,}
     \]
-    wobei~$\norm{\blank}_h$ eine Norm zu~$U_h$ ist, wie \zB{} $\norm{u_h}_h \coloneqq \max_{x \in \Omega_h} \abs{u_h(x)}$.
-    \item \emph{konsistent} von der Ordnung~$p$, falls
+    wobei~$\norm{\blank}_h$ die Maximums-Norm ist, \dh{} $\norm{u_h}_h \coloneqq \max_{x \in \Omega_h} \abs{u_h(x)}$.
+    \item \emph{konsistent} von der \textit{Ordnung}~$p$, falls
     \[
       \norm{\LL_h R_h u - R_h \LL u}_h \leq c h^p \norm{u}_{\Cont^{p+2}(\cOmega)} \quad
       \forall u \in \Cont^{p+2}(\cOmega).
     \]
     % Falls u eine Lösung von (RWP) ist, so gilt
     %\[ \LL_h R_h u - R_h \LL u = \LL_h R_h u - R_h f = \LL_h u - f_h \]
-    \item \emph{stabil}, falls $\tilde{L}_h$ invertierbar ist und ein $h_0 > 0$ existiert mit
+    \item \emph{stabil}, falls $\tilde{\LL}_h$ invertierbar ist und ein $h_0 > 0$ existiert mit
     \[
       \sup_{0 < h \leq h_0} \norm{\tilde{\LL}_h^{-1}}_h < \infty, \quad
       \text{wobei} \enspace
@@ -475,7 +482,7 @@ Dies ist ein verkürztes Skript zur gleichnamigen Vorlesung von Frau Prof. Dr. T
 % Beweis ähnlich wie auf ÜB2 mit Taylorn
 
 \begin{bem}
-  Um zu zeigen, dass (RWP\tss{1})\tss{h} konvergent ist, müssen wir noch zeigen, dass $\tilde{L}_h = - \tilde{\Laplace}_h$ invertierbar ist und $\sup_{0 < h \leq h_0} \norm{\tilde{\Laplace}_h} < \infty$.
+  Um zu zeigen, dass (RWP\tss{1})\tss{h} konvergent ist, müssen wir noch zeigen, dass $\tilde{L}_h = - \tilde{\Laplace}_h$ invertierbar ist und dass $\sup_{0 < h \leq h_0} \norm{\tilde{\Laplace}_h} < \infty$.
 \end{bem}
 
 \begin{defn}
@@ -506,7 +513,7 @@ Dies ist ein verkürztes Skript zur gleichnamigen Vorlesung von Frau Prof. Dr. T
 \end{bem}
 
 \begin{defn}
-  Eine Matrix $A \in \R^{n \times n}$ heißt \emph{reduzibel} (oder zerlegbar), wenn es eine Permutationsmatrix $P \in \R^{n \times n}$ gibt, sodass
+  Eine Matrix $A \in \R^{n \times n}$ heißt \emph{reduzibel} (oder \textit{zerlegbar}), wenn es eine Permutationsmatrix $P \in \R^{n \times n}$ gibt, sodass
   \[
     PAP^T = \begin{psmallmatrix}
       A_{11} & A_{12} \\
@@ -535,20 +542,19 @@ Dies ist ein verkürztes Skript zur gleichnamigen Vorlesung von Frau Prof. Dr. T
 \begin{defn}
   Sei $A = (a_{ij}) \in \R^{n \times n}$ eine Matrix.
   \begin{itemize}
-    \item $A$ heißt \emph{schwach diagonaldominant}, falls
+    \item $A$ heißt \emph{(schwach) diagonaldominant}, falls für $i = 1, \ldots, n$ gilt:
     \[
-      \sum_{\substack{j=1\\j \neq i}}^n \abs{a_{ij}} \leq \abs{a_{ii}} \quad
-      \text{für $i = 1, \ldots, n$}
-    \]
-    und ein $i_0$ existiert, sodass die Ungleichung strikt ist.
-    \item $A$ heißt \emph{diagonaldominant}, falls
-    \[
-      \sum_{\substack{j=1\\j \neq i}}^n \abs{a_{ij}} < \abs{a_{ii}} \quad
-      \text{für $i = 1, \ldots, n$}
+      \sum_{\substack{j=1\\j \neq i}}^n \abs{a_{ij}}
+      \quad
+      %\underset{(\leq)}{<}
+      {< \atop (\leq)}
+      \quad
+      \abs{a_{ii}}.
+      \tag{$\ddagger$}
     \]
     % Ausgelassen: Beispiel einer reduziblen Matrix
     % Vorlesung vom 27.10.2015
-    \item $A$ heißt \emph{irreduzibel diagonaldominant}, falls $A$ irreduzibel und schwach diagonaldominant ist.
+    \item $A$ heißt \emph{irreduzibel diagonaldominant}, falls $A$ irreduzibel und schwach diagonaldominant ist und für mind. ein $i \in \{ 1, \ldots, n \}$ die strikte Ungleichung in ($\ddagger$) gilt.
   \end{itemize}
 \end{defn}
 
@@ -603,56 +609,59 @@ Dies ist ein verkürztes Skript zur gleichnamigen Vorlesung von Frau Prof. Dr. T
   \]
 \end{problem}
 
-\begin{enumerate}
-  \item Diskretisierung: Setze $h \coloneqq \tfrac{1}{n}$, $n \in \N$ und
-  \begin{align*}
-    \Omega_h & \coloneqq \Set{(x, y) \in \Omega}{x = ih, y = jh, i,j = 1, \ldots, {n-1}} \\
-    \bOmega_h & \coloneqq \Set{(x, y) \in \bOmega}{x = ih, y = jh, i,j = 1, \ldots, {n-1}}
-  \end{align*}
-  \item Approximation der Ableitungen
-  \begin{align*}
-  - & \Laplace u (x, y)
-  = - \tfrac{\partial^2 u}{\partial x^2} (x,y) - \tfrac{\partial^2 u}{\partial y^2} (x, y) \\
-  &\approx - \tfrac{u(x + h, y) - 2 u(x, y) + u(x-h, y)}{h^2} - \tfrac{u(x, y+h) - 2 u(x,y) + u(x, y-h)}{h^2} \\
-  &= - \tfrac{u(x+h,y) + u(x-h,y) - 4 u(x, y) + u(x, y+h) + u(x, y-h)}{h^2} =: - \Laplace_h u
-  \end{align*}
-  Dabei hat der diskrete Laplace-Operator $\Laplace_h$ die Form eines Differenzensterns.
-  Gesucht ist die Lsg $u_h : \Omega_h \cup \bOmega_h \to \R$ von
-  \[
-    \text{\probl{(RWP\tss{2})\tss{h}}} \quad
-    \left\{ \begin{array}{rlll}
-      - \Laplace_h u_h &=& f_h &\text{ in $\Omega_h$} \\
-      u_h &=& g &\text{ auf $\bOmega_h$.}
-    \end{array} \right.
-  \]
-  \item Aufstellen des linearen Gleichungssystems $- \tilde{\Laplace}_h \tilde{u}_h = f_h$:
-  % wir verwenden hier die zeilenweise Nummerierung
-  \[
-    \tilde{u}_h = \begin{pmatrix}
-      u_{11} \\
-      u_{12} \\
-      \vdots \\
-      u_{n-1,n-2} \\
-      u_{n-1,n-1}
-    \end{pmatrix} \in \R^{(n-1)^2},
-  \]
-  \begin{align*}
-    - \tilde{\Laplace}_h = \frac{1}{h^2} & \begin{pmatrix}
-      A & -I & && 0 \\
-      -I & A & -I && \\
-      & \ddots & \ddots & \ddots \\
-      && -I & A & -I \\
-      0 &&& -I & A
-    \end{pmatrix} \in \R^{(n-1)^2 \times (n-1)^2}, \\
-    A = & \begin{pmatrix}
-      4 & -1 & && 0 \\
-      -1 & 4 & -1 && \\
-      & \ddots & \ddots & \ddots \\
-      && -1 & 4 & -1 \\
-      0 &&& -1 & 4
-    \end{pmatrix} \in \R^{n-1 \times n-1}
-  \end{align*}
-\end{enumerate}
+\begin{verf}
+  \begin{enumerate}
+    \item Diskretisierung: Setze $h \coloneqq \tfrac{1}{n}$, $n \in \N$ und
+    \begin{align*}
+      \Omega_h & \coloneqq \Set{(x, y) \in \Omega}{x = ih, y = jh, i,j = 1, \ldots, {n-1}} \\
+      \bOmega_h & \coloneqq \Set{(x, y) \in \bOmega}{x = ih, y = jh, i,j = 1, \ldots, {n-1}}
+    \end{align*}
+    \item Approximation der Ableitungen
+    \begin{align*}
+    - & \Laplace u (x, y)
+    = - \tfrac{\partial^2 u}{\partial x^2} (x,y) - \tfrac{\partial^2 u}{\partial y^2} (x, y) \\
+    &\approx - \tfrac{u(x + h, y) - 2 u(x, y) + u(x-h, y)}{h^2} - \tfrac{u(x, y+h) - 2 u(x,y) + u(x, y-h)}{h^2} \\
+    &= - \tfrac{u(x+h,y) + u(x-h,y) - 4 u(x, y) + u(x, y+h) + u(x, y-h)}{h^2} =: - \Laplace_h u
+    \end{align*}
+    Dabei hat der diskrete Laplace-Operator $\Laplace_h$ die Form eines \textit{Differenzensterns}.
+    Gesucht ist die Lsg $u_h : \Omega_h \cup \bOmega_h \to \R$ von
+    \[
+      \text{\probl{(RWP\tss{2})\tss{h}}} \quad
+      \left\{ \begin{array}{rlll}
+        - \Laplace_h u_h &=& f_h &\text{ in $\Omega_h$} \\
+        u_h &=& g &\text{ auf $\bOmega_h$.}
+      \end{array} \right.
+    \]
+    \item Aufstellen des linearen Gleichungssystems $- \tilde{\Laplace}_h \tilde{u}_h = \tilde{f}_h$:
+    % wir verwenden hier die zeilenweise Nummerierung
+    \[
+      \tilde{u}_h = \begin{pmatrix}
+        u_{11} \\
+        u_{12} \\
+        \vdots \\
+        u_{n-1,n-2} \\
+        u_{n-1,n-1}
+      \end{pmatrix} \in \R^{(n-1)^2}, \quad
+      \tilde{f}_h = \ldots \in \R^{(n-1)^2},
+    \]
+    \begin{align*}
+      - \tilde{\Laplace}_h = \frac{1}{h^2} & \begin{pmatrix}
+        A & -I & && 0 \\
+        -I & A & -I && \\
+        & \ddots & \ddots & \ddots \\
+        && -I & A & -I \\
+        0 &&& -I & A
+      \end{pmatrix} \in \R^{(n-1)^2 \times (n-1)^2}, \\
+      A = & \begin{pmatrix}
+        4 & -1 & && 0 \\
+        -1 & 4 & -1 && \\
+        & \ddots & \ddots & \ddots \\
+        && -1 & 4 & -1 \\
+        0 &&& -1 & 4
+      \end{pmatrix} \in \R^{n-1 \times n-1}
+    \end{align*}
+  \end{enumerate}
+\end{verf}
 
 % Vorlesung vom 2.11.2015
 
@@ -679,7 +688,7 @@ Dies ist ein verkürztes Skript zur gleichnamigen Vorlesung von Frau Prof. Dr. T
 \end{satz}
 
 \begin{bem}
-  Durch die Einbeziehung weiterer Gitterpunkte zur Approximation des Differentialoperators lässt sich die Konvergenzordnung erhöhen:
+  Ein \textit{9-Punkte-Stern} bezieht weitere Gitterpunkte zur Approximation des Differentialoperators ein und erhöht die Konvergenzordnung auf~$4$:
   % Dies geht mit dem 9-Punkte-Stern
   %             1
   %             |
@@ -695,7 +704,6 @@ Dies ist ein verkürztes Skript zur gleichnamigen Vorlesung von Frau Prof. Dr. T
     & \left. - 16 u(x{+}h, y) + u(x{+}2h, y) + u(x, y{-}2h) - 16 u(x, y{-}h) \right. \\
     & \left. + 30 u(x, y) - 16 u(x, y{+}h) + u(x, y{+}2h) \right) \approx - \Laplace u(x, y)
   \end{align*}
-  Damit erreicht man die Konsistenzordnung 4.
   % oder:
   % -1/3  -1/3  -1/3
   % -1/3   8/3  -1/3
@@ -719,10 +727,6 @@ Dies ist ein verkürztes Skript zur gleichnamigen Vorlesung von Frau Prof. Dr. T
     Ansonsten heißt $(x, y)$ \emph{randfern}.
   \end{itemize}
 \end{defn}
-
-\begin{nota}
-  Wir haben eine Einteilung $\Omega_h = \Omega_h^\rn \sqcup \Omega_h^\rf$ der Gitterpunkte in randnahe und randferne Punkte.
-\end{nota}
 
 \begin{center}
   \begin{tikzpicture}[scale=0.6]
@@ -796,10 +800,7 @@ Dies ist ein verkürztes Skript zur gleichnamigen Vorlesung von Frau Prof. Dr. T
       u_h &=& g &\text{ auf $\bOmega_h$}
     \end{array} \right. \\
     \text{\probl{(LGS\tss{2})\tprime}} \quad
-    & \left\{ \begin{array}{rcl}
-      - \tilde{\DO}_h \tilde{u}_h &=& \tilde{f}_h \\
-      \tilde{f}_h &=& f_h + g_h
-    \end{array} \right.
+    & - \tilde{\DO}_h \tilde{u}_h = \tilde{f}_h \coloneqq f_h + g_h
   \end{align*}
   \[
     \text{mit} \quad
@@ -839,7 +840,7 @@ Dies ist ein verkürztes Skript zur gleichnamigen Vorlesung von Frau Prof. Dr. T
 % Beweis: W. Hackbusch, Thm. 4.8.4
 
 \begin{bem}
-  Das DV (RWP\tss{2})\tss{h}\tprime hat in den randnahen Punkten nur die Konsistenzordnung 1. Dennoch gilt:
+  Das DV (RWP\tss{2})\tss{h}\tprime{} hat in den randnahen Punkten nur die Konsistenzordnung 1. Dennoch gilt:
   \iffalse
   Sei $u \in \Cont^4(\cOmega)$.
   Dann ist
@@ -879,15 +880,18 @@ Dies ist ein verkürztes Skript zur gleichnamigen Vorlesung von Frau Prof. Dr. T
 
 % 3.11, 4.8.6 im Hackbusch
 \begin{satz}
-  Sei $\Omega \subset \R^3$ beschränkt und Teilmenge des Streifens $\ointerval{x_0}{x_0 + d} \times \R$ oder $\R \times (y_0, y_0 + d)$.
-  Dann ist das Verfahren (RWP\tss{2})\tss{h}\tprime konvergent von der Ordnung 2.
-  Es gilt
+  Sei $\Omega \subset \R^2$ beschränkt.
+  Dann ist das Verfahren (RWP\tss{2})\tss{h}\tprime{} konvergent von der Ordnung~2.
+  Genauer gilt:
+  Ist $\Omega$ eine Teilmenge des Streifens $\ointerval{x_0}{x_0 + d} \times \R$ oder $\R \times (y_0, y_0 + d)$, so ist
   \[ \norm{u_h - R_h u}_h \leq \left( \nicefrac{1}{3} h^3 + \nicefrac{d^2}{48} h^2 \right) \norm{u}_{\Cont^4(\cOmega)}. \]
 \end{satz}
 
 % Vorlesung vom 9.11.2015
 
 % §3.3.2 Interpolation
+
+Ein weiteres Verfahren beruht auf:
 
 \begin{idee}
   Bestimme den Wert von $u$ bei randnahen Punkten $(x, y)$ durch lineare Interpolation:
@@ -896,6 +900,8 @@ Dies ist ein verkürztes Skript zur gleichnamigen Vorlesung von Frau Prof. Dr. T
     \item $u(x, y) \approx \frac{s_o}{s_u + s_o} u(x, y - s_u h) + \frac{s_u}{s_u + s_o} u(x, y + s_o h)$
   \end{itemize}
 \end{idee}
+
+Dies führt auf Gleichungen
 
 \begin{align*}
   \text{\probl{(RWP\tss{2})\tss{h}\ensuremath{^{\prime\prime}}}} \quad
@@ -920,7 +926,7 @@ Konsistenz: Mit Taylorn ...
 \end{itemize}
 \fi
 
-% §3.4 Allgemeine Differentialoperatoren
+% §3.4. Allgemeine Differentialoperatoren
 \subsection{Allgemeine Differentialoperatoren}
 
 \begin{prob}
@@ -958,8 +964,8 @@ Konsistenz: Mit Taylorn ...
   \end{alignat*}
   Für die Approx. von $u_{xy}$ haben wir mehrere Möglichkeiten: \\ Wir könnten etwa den zentralen DQ in $x$- und $y$-Richrung verwenden und erhalten
   \begin{align*}
-    u_{xy}(x, y) \approx \tfrac{1}{4 h^2} & \left( u(x{+}h, y{+}h) - u(x{+}h, y{-}h) \right. \\
-    & \left. - u(x{-}h, y{+}h) + u(x{-}h, y{-}h) \right)
+    & u_{xy}(x, y) \approx \tfrac{1}{2 h} \left( u_x (x, y+h) - u_x (x, y-h) \right) \\
+    \approx \, & \tfrac{1}{4 h^2} \left( u(x{+}h, y{+}h) - u(x{+}h, y{-}h)  - u(x{-}h, y{+}h) + u(x{-}h, y{-}h) \right)
   \end{align*}
   Diese Annäherung hat allerdings den Nachteil, dass sie zu keiner M-Matrix führt.
   Stattdessen nehmen wir
@@ -985,37 +991,22 @@ Konsistenz: Mit Taylorn ...
       1 & -2 & 1 \\
       0 & 1 & -1
     \end{pmatrix} \\
-    & \text{für } a_{12} \geq 0
+    & \text{für } a_{12} \geq 0,
     && \text{für } a_{12} < 0.
   \end{alignat*}
-
-  \iffalse
-  Insgesamt haben wir als Approximation
-  \begin{align*}
-    - \LL u(x, y) & \approx \tfrac{1}{h^2} \left( (-a_{11} + \abs{a_{12}} + \nicefrac{h}{2} b_1) u(x-h, y) \right. \\
-    & + (-a_{11} + \abs{a_{12}} - \nicefrac{h}{2} b_1) u(x + h, y) \\
-    & + (2 a_{11} + 2 a_{22} - 2 \abs{a_{12}} + h^2 c) u(x, y) \\
-    & + (-a_{22} + \abs{a_{12}} + \nicefrac{h}{2} b_2) u(x, y-h) \\
-    & + (-a_{22} + \abs{a_{12}} - \nicefrac{h}{2} b_2) u(x, y+h) \\
-    & + (- \max(a_{12}, 0) u(x-h, y-h) \\
-    & + (- \max(a_{12}, 0)) u(x+h, y+h) \\
-    & + \min(a_{12}, 0) u(x-h, y+h) \\
-    & \left. + \min(a_{12}, 0) u(x + h, x - h)) \right)
-  \end{align*}
-  \fi
   
-  Wir fassen diese Approx. in folgendem 7-Stern zusammen:
+  Wir fassen diese Approx. in folgendem \textit{7-Stern} zusammen:
   \begin{align*}
     - \LL_h u \coloneqq \enspace
     & \tfrac{1}{h^2} \begin{pmatrix}
-      a_{12}^{-} & \abs{a_{12}} - a_{22} & a_{12}^{+} \\
+      a_{12}^{-} & \abs{a_{12}} - a_{22} & - a_{12}^{+} \\
       \abs{a_{12}} - a_{11} & 2 (a_{11} + a_{22} - \abs{a_{12}}) & \abs{a_{12}} - a_{11} \\
-      - a_{12}^{+} & \abs{a_{12}} - a_{22} & a_{12}
+      - a_{12}^{+} & \abs{a_{12}} - a_{22} & a_{12}^{-}
     \end{pmatrix} \\
-    & + \tfrac{1}{h} \begin{pmatrix}
-      & - b_2 \\
+    & + \tfrac{1}{2 h} \begin{pmatrix}
+      & b_2 \\
       - b_1 & 0 & b_1 \\
-      & b_2
+      & - b_2
     \end{pmatrix}
     + \begin{pmatrix}
       \\ & c & \\ &
@@ -1035,8 +1026,9 @@ Konsistenz: Mit Taylorn ...
 
 % Vorlesung vom 10.11.2015
 
+% 5.1.16 im Hackenbusch
 \begin{satz}
-  Sei $\abs{a_{12}} \leq \min(a_{11}, a_{22})$, $c \geq 0$ in $\Omega$, $\LL$ gleichmäßig elliptisch.
+  Sei $c \geq 0$ in $\Omega$ und $\LL$ gleichmäßig elliptisch. \\
   Falls $a_{ii} > \abs{a_{12}} + \tfrac{h}{2} \abs{b_i}$ für $i = 1, 2$ in $\Omega$ und $u \in \Cont^4(\cOmega)$, so ist das DV (RWP\tss{3})\tss{h} konvergent von der Ordnung 2.
 \end{satz}
 
@@ -1090,22 +1082,22 @@ Konsistenz: Mit Taylorn ...
       \end{pmatrix}
     \]
     berechnen.
-    Dazu verwenden wir ein Einschrittverfahren, wie das expl./impl. Gauß-Verfahren oder das Crank-Nicolson-Verfahren:
+    Dazu verwenden wir ein \textit{Einschrittverfahren}, wie das \textit{expl./impl. Gauß-Verfahren} oder das \textit{Crank-Nicolson-Verfahren}:
     \begin{align*}
       \text{\probl{(EEV)}} \enspace
-      & \left\{ \begin{array}{rcl}
+      & \left\{ \begin{array}{R{130pt} c l}
         \tfrac{1}{\tau} (u_i^{k+1} - u_i^k) - \tilde{\Laplace}_h u_i^k &=& f_i^k \\
         u_i^0 &=& g_h
       \end{array} \right. \\
       %\tag{Expl. Euler-Verf}
       \text{\probl{(IEV)}} \enspace
-      & \left\{ \begin{array}{rcl}
+      & \left\{ \begin{array}{R{130pt} c l}
         \tfrac{1}{\tau} (u_i^{k+1} - u_i^k) - \tilde{\Laplace}_h u_i^{k+1} &=& f_i^{k+1} \\
         u_i^0 &=& g_h
       \end{array} \right. \\
       %\tag{Impl. Euler-Verf}
       \text{\probl{(CNV)}} \enspace
-      & \left\{ \begin{array}{rcl}
+      & \left\{ \begin{array}{R{130pt} c l}
         \tfrac{1}{\tau} (u_i^{k+1} - u_i^k) - \tfrac{1}{2} \tilde{\Laplace}_h (u_i^k + u_i^{k+1}) &=& f(x_i, t_k + \tfrac{\tau}{2}) \\
         u_i^0 &=& g_h
       \end{array} \right.
@@ -1186,7 +1178,7 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
     Wir erhalten das lineare Gleichungssystem
     \[
       \left\{ \begin{array}{r}
-        \tfrac{1}{\tau^2} (u_i^{k-1} - 2 u_i^k + u_i^{k+1}) - \tfrac{c^2}{h^2} ( U_{i-1}^k - 2 u_i^k + u_{i+1}^k) = f_i^k \\
+        \tfrac{1}{\tau^2} (u_i^{k-1} - 2 u_i^k + u_i^{k+1}) - \tfrac{c^2}{h^2} ( u_{i-1}^k - 2 u_i^k + u_{i+1}^k) = f_i^k \\
         \text{für $i = 1, \ldots, n-1$ und $k = 0, \ldots, m$.} \\
         u_0^k = g_0^k = g_0(t_k), \quad
         u_n^k = g_1^k = g_1(t_k), \\
@@ -1200,16 +1192,14 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
 
 \end{samepage}
 
-\begin{bem}
-  Das Differenzenverfahren \ldots
-  \begin{description}
-    \item[{\Smiley[1.2]}] \ldots{} ist einfach in der Herleitung und Implementierung. 
-    \item[{\Neutrey[1.2]}] \ldots{} besitzt eine gute Konvergenz (\zB{} Ordnung 2) bei genügend glatter Lösung. 
-    \item[{\Sadey[1.2]}] \ldots{} ermöglicht Adaptivität bzw. unregelm. Gitter nur schwer. 
-  \end{description}
-\end{bem}
+\subsection{Fazit}
 
-\vspace{8cm}
+Das Differenzenverfahren \ldots
+\begin{description}
+  \item[{\Smiley[1.2]}] \ldots{} ist einfach in der Herleitung und Implementierung. 
+  \item[{\Neutrey[1.2]}] \ldots{} besitzt eine gute Konvergenz (\zB{} Ordnung 2) bei genügend glatter Lösung. 
+  \item[{\Sadey[1.2]}] \ldots{} ermöglicht Adaptivität bzw. unregelm. Gitter nur schwer. 
+\end{description}
 
 % Vorlesung vom 17.11.2015
 
@@ -1250,13 +1240,13 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
 \end{bem}
 
 \begin{satz}[\emph{Höldersche Ungleichung}]
-  Sei $u \in L^p(\Omega)$ und $v \in L^q(\Omega)$ mit $1 \leq p, q, r \leq \infty$ und $\nicefrac{1}{p} + \nicefrac{1}{q} = \tfrac{1}{r}$.
+  Sei $u \in L^p(\Omega)$ und $v \in L^q(\Omega)$ mit $1 \leq p, q, r \leq \infty$ und $\nicefrac{1}{p} + \nicefrac{1}{q} = \nicefrac{1}{r}$.
   Dann ist $uv \in L^r(\Omega)$ mit
   \[ \norm{uv}_r \leq \norm{u}_p \cdot \norm{v}_q. \]
 \end{satz}
 
 \begin{defn}
-  Die Menge aller $k$-mal stetig differenzierbaren Funktionen auf~$\Omega$ mit \emph{kompaktem Träger} ist
+  Der Raum aller $k$-mal stetig differenzierbaren Funktionen auf~$\Omega$ mit \emph{kompaktem Träger} ist
   \[ \Cont_0^k(\Omega) \coloneqq \Set{\varphi \in \Cont^k(\Omega)}{\supp(\varphi) \coloneqq \clos{\Set{x \in \Omega}{\varphi(x) \neq 0}} \text{ ist kompakt}}. \]
 \end{defn}
 
@@ -1291,7 +1281,7 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
 \end{bem}
 
 \begin{lem}[Fundamentallemma der Variationsrechung]
-  Für $u \in L^1_\loc$:
+  Für $u \in L^1_\loc(\Omega)$:
   \[
     \IntOmega{u(x) \varphi(x)}{x} = 0 \enspace \forall \varphi \in \Testfun(\Omega)
     \enspace \implies \enspace
@@ -1346,8 +1336,8 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
 
 % Beispiel: $H_1(\Omega)$, $\scp{u}{v}_{H^1(\Omega)} = \IntOmega{uv}{x} + \IntOmega{\nabla u \cdot \nabla v}{x}$.
 
-\begin{satz}["`$H = W$"'] % Meyers/Serrin
-  $W^{k,p}(\Omega) \cap \Cont^\infty(\Omega)$ liegt dicht in $W^{k,p}(\Omega)$, \dh{}
+\begin{satz}[Meyers/Serrin]
+  $W^{k,p}(\Omega) \cap \Cont^\infty(\Omega)$ liegt dicht in $W^{k,p}(\Omega)$,
   \[
     %H^{k,p} \coloneqq
     \clos{W^{k,p}(\Omega) \cap \Cont^\infty(\Omega)}^{\norm{\blank}_{k,p}} = W^{k,p}(\Omega).
@@ -1397,12 +1387,12 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
 \begin{bsp}
   %$(L^p(\Omega))' \cong L^q(\Omega)$
   Gelte $\nicefrac{1}{p} + \nicefrac{1}{q} = 1$ mit $p, q \in \ointerval{1}{\infty}$.
-  Dann ist die Abb.
+  Dann ist die Abbildung
   \[
     j : L^q(\Omega) \to (L^p(\Omega))', \quad
     f \mapsto (g \mapsto \IntOmega{f(x) g(x)}{x})
   \]
-  ist ein isometrischer Isomorphismus.
+  ein isometrischer Isomorphismus.
 \end{bsp}
 
 \begin{nota}
@@ -1422,10 +1412,19 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
 
 \begin{defn}
   \begin{minipage}[t]{0.8 \linewidth}
-    $W^{-1,q} \coloneqq (W_0^{1,p}(\Omega))'$, wobei $\tfrac{1}{p} + \tfrac{1}{q} = 1$, \\
+    $W^{-1,q} \coloneqq (W_0^{1,p}(\Omega))'$, wobei $\nicefrac{1}{p} + \nicefrac{1}{q} = 1$, \\
     $H^{-1}(\Omega) \coloneqq W^{-1,2} = (H_0^1(\Omega))'$.
   \end{minipage}
 \end{defn}
+
+\begin{defn}
+  Für $\Omega \subset \R^d$ heißt $\gamma \coloneqq k - \nicefrac{d}{p}$ \emph{Sobolev-Zahl} zu $W^{k,p}(\Omega)$.
+\end{defn}
+
+\begin{satz}
+  %Für $m < \gamma$ existiert eine stetige Einbettung $W^{k,p}(\Omega) \hookrightarrow \Cont^m(\Omega)$.
+  Für $m < \gamma$ ist $W^{k,p}(\Omega) \hookrightarrow \Cont^m(\Omega)$ wohldefiniert und stetig.
+\end{satz}
 
 \begin{samepage}
 
@@ -1448,22 +1447,22 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
     \LL u(x) & = - \sum_{i=1}^d \DO_i (\sum_{j=1}^d a_{ij}(x) \DO_j u) + \sum_{i=1}^d b_i(x) \DO_i u + c(x) u \\
     & = - \dive(A(x) \DO u) + b(x) \cdot \DO u + c(x) u.
   \end{align*}
-  Sei $u$ eine Lösung von (RWP\tss{1}) und $\phi \in \Testfun(\Omega)$.
+  Sei $u$ eine Lösung von (RWP\tss{1}) und $\varphi \in \Testfun(\Omega)$.
   Dann gilt
   \begin{align*}
-    & \enspace \IntOmega{f(x) \phi(x)}{x}
-    = \enspace \IntOmega{\LL u(x) \phi(x)}{x} \\
-    = & \enspace - \IntOmega{\dive(A(x) \DO u(x)) \phi(x)}{x} + \IntOmega{\left( b(x) \cdot \DO u(x) + c(x) u(x) \right) \cdot \phi(x)}{x} \\
-    = & \enspace \IntOmega{A(x) \DO u(x) \cdot \DO \phi(x)}{x} + \IntOmega{\left( b(x) \cdot \DO u(x) + c(x) u(x) \right) \cdot \phi(x)}{x}
+    & \enspace \IntOmega{f(x) \varphi(x)}{x}
+    = \enspace \IntOmega{\LL u(x) \varphi(x)}{x} \\
+    = & \enspace - \IntOmega{\dive(A(x) \DO u(x)) \varphi(x)}{x} + \IntOmega{\left( b(x) \cdot \DO u(x) + c(x) u(x) \right) \cdot \varphi(x)}{x} \\
+    = & \enspace \IntOmega{A(x) \DO u(x) \cdot \DO \varphi(x)}{x} + \IntOmega{\left( b(x) \cdot \DO u(x) + c(x) u(x) \right) \cdot \varphi(x)}{x}
   \end{align*}
 
   \iffalse
   Nebenrechnung:
   \begin{align*}
-    & - \IntOmega{\sum_i \DO_i (\sum_j a_{ij}(x) \DO_j u(x) \phi(x))}{x} \\
-    = & - \IntbOmega{\sum_i (\sum_j a_{ij}(x) \DO_j u(x)) \eta_i(x) \phi(x)}{s(x)} \\
-    & + \IntOmega{\sum_i (\sum_j a_{ij}(x) \DO_j u(x)) \DO_i \phi(x)}{x} \\
-    = & \IntOmega{A(x) \DO u(x) \cdot \DO \phi(x)}{x}
+    & - \IntOmega{\sum_i \DO_i (\sum_j a_{ij}(x) \DO_j u(x) \varphi(x))}{x} \\
+    = & - \IntbOmega{\sum_i (\sum_j a_{ij}(x) \DO_j u(x)) \eta_i(x) \varphi(x)}{s(x)} \\
+    & + \IntOmega{\sum_i (\sum_j a_{ij}(x) \DO_j u(x)) \DO_i \varphi(x)}{x} \\
+    = & \IntOmega{A(x) \DO u(x) \cdot \DO \varphi(x)}{x}
     % weil die Testfunktion auf dem Rand verschwindet
   \end{align*}
   \fi
@@ -1476,15 +1475,15 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
 \begin{defn}
   Eine Funktion $u \in H_0^1(\Omega)$ heißt \emph{schwache Lösung} von (RWP\tss{1}), wenn~$u$ folgende Variationsgleichung erfüllt:
   \begin{align*}
-    & \IntOmega{A(x) \DO u(x) \cdot \DO \phi(x) + b(x) \cdot \DO u(x) \phi(x) + c(x) u(x) \phi(x)}{x} \\
-    = \enspace & \IntOmega{f(x) \phi(x)}{x}
-    \quad \text{für alle } \phi \in H_0^1(\Omega).
+    & \IntOmega{A(x) \DO u(x) \cdot \DO \varphi(x) + b(x) \cdot \DO u(x) \varphi(x) + c(x) u(x) \varphi(x)}{x} \\
+    = \enspace & \IntOmega{f(x) \varphi(x)}{x}
+    \quad \text{für alle } \varphi \in H_0^1(\Omega).
     \qquad \qquad \text{\probl{(VGL\tss{1})}}
   \end{align*}
 \end{defn}
 
 \begin{sprechweise}
-  Der Raum, in dem man~$u$ sucht, heißt \emph{Lsgsraum} (oder \textit{Ansatzraum}), der Raum von~$\phi$ heißt \emph{Testraum}.
+  Der Raum, in dem man~$u$ sucht, heißt \emph{Lsgsraum} (oder \textit{Ansatzraum}), der Raum von~$\varphi$ heißt \emph{Testraum}.
 \end{sprechweise}
 
 % Fragen:
@@ -1498,17 +1497,17 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
   Gesucht ist $u \in H_0^1(\Omega)$, sodass
   \[
     \text{\probl{(VGL\tss{1})\tprime}} \qquad
-    B(u, \phi) = \ell(\phi) \quad
-    \forall \phi \in H_0^1(\Omega).
+    B(u, \varphi) = \ell(\varphi) \quad
+    \forall \varphi \in H_0^1(\Omega).
   \]
 \end{prob}
 
 \begin{bem}
   Im obigen Setting ist \enspace
-  $\ell(\phi) \coloneqq \IntOmega{f(x) \phi(x)}{x}$ \enspace
+  $\ell(\varphi) \coloneqq \IntOmega{f(x) \varphi(x)}{x}$ \enspace
   und
   \[
-    B(u, \phi) \coloneqq \IntOmega{A(x) \DO u(x) \cdot \DO \phi(x) + b(x) \cdot \DO u(x) \phi(x) + c(x) u(x) \phi(x)}{x}
+    B(u, \varphi) \coloneqq \IntOmega{A(x) \DO u(x) \cdot \DO \varphi(x) + b(x) \cdot \DO u(x) \varphi(x) + c(x) u(x) \varphi(x)}{x}
   \]
 \end{bem}
 
@@ -1516,26 +1515,26 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
   Sei $X$ ein Banachraum.
   Eine bilin. Abb. $B : X \times X \to \R$ heißt
   \begin{itemize}
-    %\item \emph{bilinear}, falls $B(u, \blank)$ und $B(\blank, \phi)$ linear für alle $u, \phi \in X$ sind,
-    %\item \emph{symmetrisch}, falls $B(u, \phi) = B(\phi, u)$ für alle $u, \phi \in X$,
+    %\item \emph{bilinear}, falls $B(u, \blank)$ und $B(\blank, \varphi)$ linear für alle $u, \varphi \in X$ sind,
+    %\item \emph{symmetrisch}, falls $B(u, \varphi) = B(\varphi, u)$ für alle $u, \varphi \in X$,
     \item \emph{positiv}, falls $B(u, u) > 0$ für alle $u \in X \setminus \{ 0 \}$,
-    \item \emph{stark positiv} (oder \emph{koerziv}), falls $\lambda > 0$ existiert, sodass
+    \item \emph{stark positiv} (\textit{koerziv}, \textit{koerzitiv}), falls ein $\lambda > 0$ existiert, sodass
     \[ \fa{u \in X} B(u, u) \geq \lambda \norm{u}_X^2, \]
     \item \emph{beschränkt} (oder \textit{stetig}), falls ein $\mu > 0$ existiert, sodass
-    \[ \fa{u, \phi \in X} \abs{B(u, \phi)} \leq \mu \norm{u}_X \norm{\phi}_X. \]
+    \[ \fa{u, \varphi \in X} \abs{B(u, \varphi)} \leq \mu \norm{u}_X \norm{\varphi}_X. \]
   \end{itemize}
 \end{defn}
 
 \begin{lem}
   \begin{itemize}
-    \item Die Abbildung~$B$ in (VGL\tss{1})\tprime ist bilinear und beschränkt.
-    \item Die Abbildung $\ell$ in (VGL\tss{1})\tprime ist linear und stetig.
+    \item Die Abbildung~$B$ in (VGL\tss{1})\tprime{} ist bilinear und beschränkt.
+    \item Die Abbildung $\ell$ in (VGL\tss{1})\tprime{} ist linear und stetig.
   \end{itemize}
 \end{lem}
 
 \begin{satz}
   Sei $\Omega$ ein beschr. Lipschitz-Gebiet.
-  Dann ist jede klassische Lsg $u \in \Cont^2 \cap \Cont^1(\bOmega)$ von (RWP\tss{1}) eine schwache Lsg von (VGL\tss{1})\tprime.
+  Dann ist jede klassische Lsg $u \in \Cont^2 \cap \Cont^1(\bOmega)$ von (RWP\tss{1}) eine schwache Lsg von (VGL\tss{1})\tprime{}.
 \end{satz}
 
 % 4.3 Eindeutige Lösung elliptischer PDEs
@@ -1544,16 +1543,16 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
 % 4.9
 \begin{satz}[\emph{Lax-Milgram}]
   Sei H ein Hilbertraum und $B : H \times H \to \R$ eine beschränkte, koerzitive Bilinearform.
-  Dann gibt es für jedes $\ell \in H'$ eine eindeutige Lösung $u \in H$ von  $\fa{\phi \in H} B(u, \phi) = \ell(\phi)$.
+  Dann gibt es für jedes $\ell \in H'$ eine eindeutige Lösung $u \in H$ von  $\fa{\varphi \in H} B(u, \varphi) = \ell(\varphi)$.
   Es gilt $\norm{u}_H \leq \nicefrac{1}{\lambda} \norm{\ell}_{H'}$ mit der Koerzitivitätskonstante $\lambda$ von~$B$.
 \end{satz}
 
 % Vorlesung vom 30.11.2015
 
 % 4.10
-\begin{lem}[\emph{Poincaré-Ungleichung}] \mbox{} \\
-  Sei $\Omega \subset \R^d$ beschränkt.
-  Dann existiert eine Konstante $C > 0$, sodass
+\begin{lem}[\emph{Poincaré-Ungleichung}] 
+  Sei $\Omega$ beschränkt.
+  Dann $\exists \, C > 0 :$
   \[
     \norm{u}_{L^2(\Omega)} \leq C \norm{\nabla u}_{L^2(\Omega, \R^d)} = C \left( \IntOmega{\sum_i \abs{\DO_i u}^2}{x} \right)^{\nicefrac{1}{2}} \quad
     \forall \, u \in H_0^1(\Omega).
@@ -1567,13 +1566,13 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
 
 % 4.11
 \begin{lem}
-  Falls $b(x) \equiv 0$ und $c(x) \geq 0$ in $\Omega$, so ist $B$ in (VGL\tss{1})\tprime koerziv.
+  Falls $\LL$ glm. elliptisch ist und $b(x) \equiv 0$ sowie $c(x) \geq 0$ in~$\Omega$ gelten, so ist~$B$ in (VGL\tss{1})\tprime{} koerziv.
 \end{lem}
 
 % 4.12
 \begin{satz}
   Sei $\Omega \subset \R^d$ beschränkt und sei $\mathcal{L} u = - \dive (A(x) \DO u) + c(x) u$ glm. elliptisch, $c(x) \geq 0$ in $\Omega$, $a_{ij}, c_j \in L^\infty(\Omega)$ und $f \in L^2(\Omega)$. \\
-  Dann besitzt (VGL\tss{1})\tprime eine eindeutige Lösung $u \in H_0^1(\Omega)$. \\
+  Dann besitzt (VGL\tss{1})\tprime{} eine eindeutige Lösung $u \in H_0^1(\Omega)$. \\
   Außerdem existiert ein $\hat{C} > 0$, sodass $\norm{u}_{H^1(\Omega)} \leq \hat{C} \cdot \norm{f}_{L^2(\Omega)}$.
 \end{satz}
 
@@ -1582,7 +1581,7 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
 \begin{defn}
   Sei $f \in H^{-1}(\Omega)$.
   Eine Fktn $u \in H_0^1(\Omega)$ heißt \textit{schwache Lösung} von (RWP\tss{1}), falls \enspace
-  $B(u, \phi) = \scp{f}{\phi}_{H^{-1}(\Omega), H_0^1(\Omega)}$ $\forall \, \phi \in H_0^1(\Omega)$.
+  $B(u, \varphi) = \scp{f}{\varphi}_{H^{-1}(\Omega), H_0^1(\Omega)}$ $\forall \, \varphi \in H_0^1(\Omega)$.
 \end{defn}
 
 \begin{bem}
@@ -1599,7 +1598,7 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
       u &=& 0 &\text{ auf $\bOmega$}
     \end{array} \right.
   \]
-  für alle $f \in H^{-1}(\Omega)$ eine eindeutige Lösung $u \in H_0^1(\Omega)$ besitzt.
+  für alle $f \in H^{-1}(\Omega)$ eine eind. schwache Lösung $u \in H_0^1(\Omega)$ besitzt.
 \end{lem}
 
 % Vorlesung vom 1.12.2015
@@ -1630,26 +1629,26 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
     \end{array} \right.
   \]
   ist.
-  Schwache Formulierung von (RWP\tss{2})\tprime:
-  Ges. ist $v \in H_0'(\Omega)$ mit
+  Schwache Formulierung von (RWP\tss{2})\tprime{}:
+  Ges. ist $v \in H_0^1(\Omega)$ mit
   \begin{align*}
-    & \IntOmega{(A(x) \DO v(x) \cdot \DO \phi(x) + b(x) \cdot \DO v(x) \phi(x) + c(x) v(x) \phi(x))}{x} \\
-    = \enspace & \IntOmega{f \cdot \phi}{x} + \IntOmega{(A(x) \DO \tilde{g} \cdot \DO \phi + b \cdot \DO \tilde{g} \phi + c \tilde{g} \phi)}{x} \quad
-    \forall \, \phi \in H_0^1(\Omega).
+    & \IntOmega{(A(x) \DO v(x) \cdot \DO \varphi(x) + b(x) \cdot \DO v(x) \varphi(x) + c(x) v(x) \varphi(x))}{x} \\
+    = \enspace & \IntOmega{f \cdot \varphi}{x} + \IntOmega{(A(x) \DO \tilde{g} \cdot \DO \varphi + b \cdot \DO \tilde{g} \varphi + c \tilde{g} \varphi)}{x} \quad
+    \forall \, \varphi \in H_0^1(\Omega).
   \end{align*}
   Voraussetzungen: $a_{ij}, b_i, c \in L^\infty(\Omega)$, $f \in L^2(\Omega)$, $\tilde{g} \in \Cont(\cOmega) \cap H^1(\Omega)$ und $g \in L^2(\bOmega)$.
   Ges. ist ein $u \in U \coloneqq \Set{w \in H^1(\Omega)}{\tau(w) = g}$ mit
   % Dabei ist $\tau : H^1(\Omega) \to L^2(\bOmega)$ der Spuroperator
   \[
-    \underbrace{\IntOmega{A(x) \DO u \cdot \DO \phi + b \DO u \phi + c u \phi}{x}}_{B(u, \phi) \coloneqq} =
-    \underbrace{\IntOmega{f \phi}{x}}_{\ell(\phi) \coloneqq} \quad
-    \forall \, \phi \in H_0^1(\Omega).
+    \underbrace{\IntOmega{A(x) \DO u \cdot \DO \varphi + b \DO u \varphi + c u \varphi}{x}}_{B(u, \varphi) \coloneqq} =
+    \underbrace{\IntOmega{f \varphi}{x}}_{\ell(\varphi) \coloneqq} \quad
+    \forall \, \varphi \in H_0^1(\Omega).
     \enspace \text{\probl{(VGL\tss{2})}}
   \]
   Für $f \in H^{-1}(\Omega)$ verwendet man
   \[
-    B(u, \phi) = \ell'(\phi) \coloneqq \scp{f}{\phi}_{H^{-1}(\Omega), H_0^1(\Omega)} \enspace
-    \forall \, \phi \in H_0^1(\Omega).
+    B(u, \varphi) = \ell'(\varphi) \coloneqq \scp{f}{\varphi}_{H^{-1}(\Omega), H_0^1(\Omega)} \enspace
+    \forall \, \varphi \in H_0^1(\Omega).
     \quad \text{\probl{(VGL\tss{2})\tprime}}
   \]
 \end{prob}
@@ -1670,29 +1669,29 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
       A(x) \DO u \cdot \nu + \mu u & = & g & \text{auf } \bOmega \text{ (glatt)}
     \end{array} \right.
   \]
-  Falls $u \in \Cont^2(\Omega) \cap \Cont(\cOmega)$ eine Lösung ist und $\phi \in \Cont^\infty(\cOmega)$, so gilt
+  Falls $u \in \Cont^2(\Omega) \cap \Cont(\cOmega)$ eine Lösung ist und $\varphi \in \Cont^\infty(\cOmega)$, so gilt
   \begin{align*}
-    & \IntOmega{f \phi}{x}
-    = - \IntOmega{\dive(A(x) \DO u) \phi + b(x) \DO u \phi + c(x) u \phi}{x} \\
-    = & - \IntbOmega{A(x) \DO u \cdot \nu \phi}{s} + \IntOmega{A(x) \DO u \DO \phi + b(x) \DO u \phi + c(x) u \phi}{x}.
+    & \IntOmega{f \varphi}{x}
+    = - \IntOmega{\dive(A(x) \DO u) \varphi + b(x) \DO u \varphi + c(x) u \varphi}{x} \\
+    = & - \IntbOmega{A(x) \DO u \cdot \nu \varphi}{s} + \IntOmega{A(x) \DO u \DO \varphi + b(x) \DO u \varphi + c(x) u \varphi}{x}.
   \end{align*}
   Aus der Randbedingung bekommen wir
   \[
-    \IntbOmega{A(x) \DO u \cdot \nu \phi}{s} + \mu \IntbOmega{u \phi}{s} = \IntbOmega{g \phi}{s}.
+    \IntbOmega{A(x) \DO u \cdot \nu \varphi}{s} + \mu \IntbOmega{u \varphi}{s} = \IntbOmega{g \varphi}{s}.
   \]
   Zusammengesetzt erhalten wir die Variationsgleichung
   \[
-    \mu \IntbOmega{u \phi}{s} + \IntOmega{A \DO u \DO \phi + b \cdot \DO u \phi + c u \phi}{x} = \IntOmega{f \phi}{x} + \IntbOmega{g \phi}{s}.
+    \mu \IntbOmega{u \varphi}{s} + \IntOmega{A \DO u \DO \varphi + b \cdot \DO u \varphi + c u \varphi}{x} = \IntOmega{f \varphi}{x} + \IntbOmega{g \varphi}{s}.
   \]
-  Wegen Dichtheit von $\Cont^\infty(\cOmega)$ in $H^1(\Omega)$ ist diese Gleichung nicht nur für $\phi \in \Cont^\infty(\cOmega)$ sondern allgemeiner für $\phi \in H^1(\Omega)$ erfüllt.
+  Wegen Dichtheit von $\Cont^\infty(\cOmega)$ in $H^1(\Omega)$ ist diese Gleichung nicht nur für $\varphi \in \Cont^\infty(\cOmega)$ sondern allgemeiner für $\varphi \in H^1(\Omega)$ erfüllt.
 \end{prob}
 
 \begin{defn}
   Sei $\mu \in \R$, $f \in L^2(\Omega)$, $g \in L^2(\bOmega)$.
-  Eine Fktn $u \in H^1(\Omega)$ heißt \textit{schwache Lösung} von (RWP\tss{3}), falls für alle $\phi \in H^1(\Omega)$ gilt:
+  Eine Fktn $u \in H^1(\Omega)$ heißt \textit{schwache Lösung} von (RWP\tss{3}), falls für alle $\varphi \in H^1(\Omega)$ gilt:
   \[
-    \underbrace{\mu \IntbOmega{u \phi}{s} + \IntOmega{A \DO u \O \phi + b \DO u \phi + c u \phi}{x}}_{B(u, \phi) \coloneqq} =
-    \underbrace{\IntOmega{f \phi}{x} + \IntbOmega{g \phi}{s}}_{\ell(\phi) \coloneqq}.
+    \underbrace{\mu \IntbOmega{u \varphi}{s} + \IntOmega{A \DO u \DO \varphi + b \DO u \varphi + c u \varphi}{x}}_{B(u, \varphi) \coloneqq} =
+    \underbrace{\IntOmega{f \varphi}{x} + \IntbOmega{g \varphi}{s}}_{\ell(\varphi) \coloneqq}.
   \]
 \end{defn}
 
@@ -1742,14 +1741,14 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
   \end{align*}
   Dann ist $u_n = \gamma_1 w_1 + \ldots + \gamma_{d_n} w_{d_n} \in U_n$ genau dann eine Lösung von (VGL)\tss{n}, wenn $\gamma = (\gamma_1, \ldots, \gamma_{d_n})^T \in \R^{d_n}$ erfüllt:
   \[
-    \hat{B} \gamma = \hat{l} \qquad
+    \hat{B} \gamma = \hat{\ell} \qquad
     \text{(\emph{Galerkin-Gleichung})}.
   \]
 \end{vorgehen}
 
 % 4.14
 \begin{lem}[\emph{Céa}]
-  Für die Lsgn $u_n$ der konformen Approximation (VGL)\tss{n} und die Lösung~$u$ von (VGL) gilt
+  Für die Lösungen $u_n$ der konformen Approximation (VGL)\tss{n} und die Lösung~$u$ von (VGL) gilt
   \[ \norm{u_n - u}_H \leq C \left( \inf_{v \in U_n} \norm{u - v}_H + \norm{\ell_n - \ell}_{U_n'} \right) \]
 \end{lem}
 
@@ -1762,7 +1761,7 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
 \end{folgerung}
 
 \begin{bem}
-  Ist $\ell(\phi)$ durch Integration einer Funktion gegeben, so kann man für $\ell_n(\phi)$ eine Annäherung dieses Integrals etwa mittels der summierten Trapezregel verwenden.
+  Ist $\ell(\varphi)$ durch Integration einer Funktion gegeben, so kann man für $\ell_n(\varphi)$ eine Annäherung dieses Integrals etwa mittels der summierten Trapezregel verwenden.
 \end{bem}
 
 \begin{bem}
@@ -1783,7 +1782,7 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
     \[
       U_n \coloneqq \Set{v \in \Cont(0, 1)}{\fa{i} v|_{\cinterval{x_{i-1}}{x_i}} \in \mathbb{P}_1[x], v(0) = v(1) = 0}
     \]
-    Eine Basis von $U_n$ sind die \textit{Hutfunktionen}
+    Eine Basis von $U_n$ sind die \textit{Hutfunktionen} $w_1, \ldots, w_n$:
     \begin{center}
       \scriptsize
       \begin{tikzpicture}%[scale=0.8]
@@ -1827,7 +1826,7 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
 
 \begin{idee}
   Zerlege $\Omega$ in endlich viele Teilgebiete.
-  Wir wählen $U_n$ als Raum der Funktionen, die sich als Linearkombination von Basisfktn schreiben lassen, deren Träger nur auf wenige Teilgebiete umfasst.
+  Wir wählen $U_n$ als Raum der Funktionen, die sich als Linearkombination von Basisfktn schreiben lassen, deren Träger nur wenige Teilgebiete umfasst.
 \end{idee}
 
 \begin{bem}
@@ -1872,6 +1871,16 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
   \end{itemize}
 \end{lem}
 
+% Ciarlet, §2.3
+\begin{defn}
+  Ein finites Element $(K, P, \Sigma)$ heißt zu einem anderen FE $(\hat{K}, \hat{P}, \hat{\Sigma})$ \emph{affin äquivalent} \textit{vermöge} einer invertierbaren affinen Abbildung $F : \R^d \to \R^d, \enspace \hat{x} \mapsto B \hat{x} + b$, falls gilt:
+  \begin{itemize}
+    \miniitem{0.3 \linewidth}{$K = F(\hat{K})$}
+    \miniitem{0.4 \linewidth}{$P = \Set{p \coloneqq \hat{p} \circ F^{-1}}{\hat{p} \in \hat{P}}$}
+    \item $\Sigma = \Set{b_i : p \mapsto b_i(p \circ F)}{\hat{b}_i \in \hat{\Sigma}}$
+  \end{itemize}
+\end{defn}
+
 % §5.1 Finite Elemente vom Lagrange-Typ
 \subsection{Finite Elemente vom Lagrange-Typ}
 
@@ -1900,6 +1909,7 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
   Es gibt genau eine Abb. $F : \hat{K} \to K, \enspace \hat{x} \mapsto A_K \hat{x} + b_K$ mit einer Matrix $A_K \in \GL(d)$, sodass $F(e_j) = a_j$ und $F(0) = a_{d+1}$.
 \end{lem}
 
+\begin{samepage}
 \begin{defn}
   Ein \emph{simpliziales finites Element vom Lagrange-Typ} der Ordnung~$k$ ist ein Tripel $(K, P, \Sigma)$ mit
   \begin{itemize}
@@ -1911,6 +1921,7 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
     \]
   \end{itemize}
 \end{defn}
+\end{samepage}
 
 \begin{bemn}
   \begin{itemize}
@@ -1955,7 +1966,7 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
     \item $(K_i, P(K_i), \Sigma(K_i))$ sind simpl. El. vom Lagrange-Typ der Ord. $k$,
     \miniitem{0.45 \linewidth}{$\cOmega = K_1 \cup \ldots \cup K_N$,}
     \miniitem{0.48 \linewidth}{$\inte(K_i) \cap \inte(K_j) = \emptyset$ für $i \neq j$,}
-    \item Jede Seite von~$K_i$, \dh{} jedes von~$d$ Eckpunkten von~$K_i$ aufgespannte $(d-1)$-dimensionale Simplex, ist entweder Teil des Gebietrandes $\bOmega$ oder gleichzeitig Seite eines anderen Simplex $K_j$.
+    \item Jede Seite von~$K_i$, \dh{} jedes von~$d$ Eckpunkten von~$K_i$ aufgesp. $(d-1)$-dimensionale Simplex, ist entweder Teil des Gebietrandes $\bOmega$ oder gleichzeitig Seite genau eines anderen Simplex~$K_j$.
   \end{itemize}
 \end{defn}
 
@@ -2065,6 +2076,8 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
 \begin{lem}
   Sei $F : \hat{K} \to K$ mit $F(\hat{x}) = A \hat{x} + b$, $A \in \GL(d)$, und $l \in \N$.
   \begin{itemize}
+    \item Es gilt \enspace
+    $v \in H^l(K) \iff v \circ F \in H^l(\hat{K})$
     \item Es existiert eine Konstante $c > 0$, sodass
     \begin{align*}
       \abs{v \circ F}_{H^l(\hat{K})} & \leq c \cdot \norm{A}_2^l \cdot \tfrac{1}{\sqrt{\abs{\det(A)}}} \cdot \abs{v}_{H^l(K)} \\
@@ -2075,8 +2088,6 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
       \abs{v}_{H^l(K)} \coloneqq \left( \Int{K}{}{\sum_{\abs{\alpha} = l} \norm{\DO^\alpha v}^2} {x}\right)^{\nicefrac{1}{2}}
     \]
     eine Seminorm auf $H^l(K)$ ist.
-    \item Es gilt \enspace
-    $v \in H^l(K) \iff v \circ F \in H^l(\hat{K})$
   \end{itemize}
 \end{lem}
 
@@ -2116,32 +2127,31 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
 \end{lem}
 
 % 5.8
+% 3.1.5 im Ciarlet
 \begin{satz}[Abschätzung des lokalen Interpolationsfehlers] \mbox{} \\
-  Seien $(\hat{K}, P(\hat{K}), \Sigma(\hat{K}))$ ein finites Element vom Lagrange-Typ. \\
-  Dann existiert ein $c_K > 0$, sodass für alle zu $(\hat{K}, P(\hat{K}), \Sigma (\hat{K}))$ affin äquivalente FE $(K, P(K), \Sigma(K))$ und für alle $v \in H^{k+1}(K)$ gilt:
+  Sei $(\hat{K}, P(\hat{K}), \Sigma(\hat{K}))$ ein finites Element mit $\Sigma(\hat{K}) \subset \Cont^s(\hat{K})'$. \\
+  Angenommen, für $r, k \in \N$ mit $0 \leq r \leq k+1$ gilt
   \[
-    \abs{v - \Pi_k v}_{H^r(K)} \leq c_K \frac{h(K)^{k+1}}{\rho(K)^r} \abs{v}_{H^{k+1}(K)}
+    H^{k+1}(\hat{K}) \hookrightarrow \Cont^s(\hat{K})
+    \quad \text{und} \quad
+    \mathbb{P}_k(\hat{K}) \subseteq P(\hat{K}) \subset H^r(\hat{K}).
   \]
-  falls $0 \leq r \leq k+1$, $H^{k+1}(\hat{K}) \hookrightarrow \Cont^s(\hat{K})$ und $\mathbb{P}_k(\hat{K}) \subseteq P(\hat{K}) \subset H^r(\hat{K})$.
-  % die Einbettung existiert, falls $s < k+1-\tfrac{d}{2}$
-  % TODO: Sobolev-Zahl
+  Dann existiert ein $C > 0$, sodass für alle zu $(\hat{K}, P(\hat{K}), \Sigma (\hat{K}))$ affin äquivalente FE $(K, P(K), \Sigma(K))$ und für alle $v \in H^{k+1}(K)$ gilt:
+  \[
+    \abs{v - \Pi_K v}_{H^r(K)} \leq C \cdot \frac{h(K)^{k+1}}{\rho(K)^r} \abs{v}_{H^{k+1}(K)}.
+  \]
 \end{satz}
-
-\TODO{genauer formulieren}
 
 % Vorlesung vom 12.1.2016
 
+% 3.1.6 im Ciarlet
 \begin{kor}
-  Seien die Voraussetzungen des letzten Satzes für das finite Element $(\hat{K}, P(\hat{K}), \Sigma(\hat{K}))$ erfüllt.
-  Sei eine Familie von zu diesem affin äquivalenten finiten Elementen $(K_i, P(K_i), \Sigma(K_i))_{i \in I}$ gegeben.
-  Dann existiert eine Konstante $\tilde{c}_K > 0$, sodass für alle Elemente~$K_i$ der Familie mit $h(K_i) \leq 1$ und für alle $v \in H^{k+1}(K_i)$ gilt:
+  Es gibt eine Konstante $\tilde{C} > 0$, sodass für jedes zu $(\hat{K}, P(\hat{K}), \Sigma(\hat{K}))$ affin äquivalente FE $(K, P(K), \Sigma(K))$ mit $h(K) \leq 1$ und jedes $v \in H^{k+1}(K_i)$ gilt:
   \begin{align*}
-    \norm{v - \Pi_k v}_{H^r(K_i)} & \leq \tilde{c}_K \frac{h(K_i)^{k+1}}{\rho(K_i)^r} \abs{v}_{H^{k+1}(K_i)} \\
+    \norm{v - \Pi_K v}_{H^r(K_i)} & \leq \tilde{C} \cdot \frac{h(K_i)^{k+1}}{\rho(K_i)^r} \abs{v}_{H^{k+1}(K_i)} \\
     & = \tilde{c}_K \sigma(K_i)^r h(K_i)^{k+1-r} \abs{v}_{H^{k+1}(K_i)}.
   \end{align*}
 \end{kor}
-
-\TODO{was ist $r$?}
 
 \begin{bspe}
   Das letzte Korollar liefert für FE vom Lagrange-Typ:
@@ -2158,17 +2168,21 @@ Es gilt: $\lambda_j(M) = \frac{1 + (1 - \sigma) \tau \lambda_j(\tilde{\Laplace})
 
 % 5.4.1. Abschätzung des globalen Interpolationsfehlers
 
-$H'_0(\Omega) \subseteq U \subseteq H^1(\Omega)$, $U$ ist der Lösungsraum
-
 \begin{voraussetzungen}
   Wir suchen die Lösung von (VGL) im Lösungsraum~$U$ mit $H_0^1(\Omega) \subseteq U \subseteq H^1(\Omega)$.
   Es gelte:
   \begin{enumerate}[leftmargin=2.5em]
-    \item[(V\tss{1})] $\cOmega$ ist ein Polyeder und $\mathcal{T} = (T_n(\cOmega))_{n \in \N}$ ist eine Familie von Triangulierungen von~$\Omega$.
+    \item[(V\tss{1})] $\cOmega$ ist ein Polyeder und $\mathcal{T} = (T_n(\cOmega))_{n \in \N}$ ist eine Familie von Triangulierungen von~$\Omega$ mit finiten Elementen. \\
     Es sei $\mathcal{T}$ \emph{regulär}, \dh{} es existiert eine Konstante $\sigma_0 > 0$, sodass $\sigma(K) \leq \sigma_0$ für alle $n \in \N$ und $K \in T_n(\cOmega)$ und es gilt $h_n \coloneqq \enspace \max_{\mathclap{K \in T_n(\cOmega)}} \enspace h(K) \xra[n \to \infty]{} 0$.
-    \item[(V\tss{2})] Alle finiten Elemente $(K, P(K), \Sigma(K))$ der Familie $\mathcal{T}$ sind affin äquivalent zu einem Referenzelement $(\hat{K}, P(\hat{K}), \Sigma(\hat{K}))$.
+    \item[(V\tss{2})] Alle FE $(K, P(K), \Sigma(K))$ der Familie $\mathcal{T}$ sind affin äquiv. zu einem Referenzelement $(\hat{K}, P(\hat{K}), \Sigma(\hat{K}))$ mit $\Sigma(\hat{K}) \subset \Cont^s(\hat{K})'$.
     \item[(V\tss{3})] $U_n \subset \Cont(\cOmega)$ ist der FE-Funktionenraum zu $T_n(\cOmega)$.
-    \item[(V\tss{4})] Für $k+1 \geq r \geq 0$ gilt $H^{k+1}(\hat{K}) \hookrightarrow \Cont(\hat{K})$ und $\Poly_k(\hat{K}) \subseteq P(\hat{K}) \subseteq H^r(\hat{K})$.
+    \item[(V\tss{4})]
+    Für $r, k \in \N$ mit $0 \leq r \leq k+1$ gilt
+    \[
+      H^{k+1}(\hat{K}) \hookrightarrow \Cont^s(\hat{K})
+      \quad \text{und} \quad
+      \mathbb{P}_k(\hat{K}) \subseteq P(\hat{K}) \subset H^r(\hat{K}).
+    \]
   \end{enumerate}
 \end{voraussetzungen}
 
@@ -2193,6 +2207,7 @@ $H'_0(\Omega) \subseteq U \subseteq H^1(\Omega)$, $U$ ist der Lösungsraum
 \end{bemn}
 
 % 5.9
+% 3.2.2 im Ciarlet
 \begin{satz}[Konvergenz der konformen Approximation] \mbox{} \\
   Seien die Voraussetzungen (V\tss{1}) -- (V\tss{3}) und (V\tss{4}) mit $r = 1$ erfüllt. \\
   Dann gilt für die Lösung $u$ von (VGL) und die Lösung $u_n$ der konformen Approximation (VGL)\tss{n} mit $\ell_n = \ell|_{U_n}$ die Abschätzung
@@ -2208,7 +2223,7 @@ $H'_0(\Omega) \subseteq U \subseteq H^1(\Omega)$, $U$ ist der Lösungsraum
 \end{bsp}
 
 \begin{bem}
-  Die konforme Approximation von~$u$ hat (nach bisherigem Kenntnissstand) im Vergleich zur Interpolation von~$u$ eine um eins schlechtere Konvergenzordnung:
+  Die konforme Approximation von~$u$ hat gemessen mit der $L^2$-Norm (nach bisherigem Kenntnissstand) im Vergleich zur Interpolation von~$u$ eine um eins schlechtere Konvergenzordnung:
   \begin{alignat*}{3}
     \norm{u - u_n}_{L^2(\Omega)} & \leq \norm{u - u_n}_{H^1(\Omega)} && \in \O(h_n^k \cdot \abs{u}_{H^{k+1}(\Omega)}) \\
     \norm{u - \Pi_n u}_{L^2(\Omega)} &&& \in \O(h_n^{k+1} \cdot \abs{u}_{H^{k+1}(\Omega)})
@@ -2217,7 +2232,7 @@ $H'_0(\Omega) \subseteq U \subseteq H^1(\Omega)$, $U$ ist der Lösungsraum
 \end{bem}
 
 % 5.12
-\begin{lem}[Aubin-Nitsche]
+\begin{lem}[\emph{Aubin-Nitsche}]
   Seien $U$ und $H$ Hilberträume, $E : U \to H$ eine stetige inj. Einbettung und $U_n \subset U$ ein endlichdim. Teilraum. \\
   Sei $B : U \times U \to \R$ eine stetige, koerzitive Bilinearform und $\ell \in U'$.
   Seien $u \in U$, $u_n \in U_n$ die Lösungen (VGL) bzw. (VGL)\tss{n}.
@@ -2227,7 +2242,7 @@ $H'_0(\Omega) \subseteq U \subseteq H^1(\Omega)$, $U$ ist der Lösungsraum
   \]
   wobei $w(r) \in U$ für $r \in H$ die Lösung des \emph{adjungierten Problems}
   \[
-    B(\phi, w(r)) = \scp{E(\phi)}{r}_H \quad \forall \phi \in U \qquad
+    B(\varphi, w(r)) = \scp{E(\varphi)}{r}_H \quad \forall \varphi \in U \qquad
     \text{ist.}
   \]
 \end{lem}
@@ -2239,8 +2254,8 @@ $H'_0(\Omega) \subseteq U \subseteq H^1(\Omega)$, $U$ ist der Lösungsraum
   Seien die Voraussetzungen aus dem Satz zur Konvergenz der konformen Approximation erfüllt.
   Zusätzlich existiere ein $c_a > 0$, sodass für alle $r \in L^2(\Omega)$ die Lösung $w(r)$ vom adjungierten Problem
   \[
-    B(\phi, w(r)) = \scp{\phi}{r}_{L^2(\Omega)} \quad
-    \forall \phi \in H^1(\Omega)
+    B(\varphi, w(r)) = \scp{\varphi}{r}_{L^2(\Omega)} \quad
+    \forall \varphi \in H^1(\Omega)
   \]
   die Abschätzung $\norm{w(r)}_{H^2(\Omega)} \leq c_a \cdot \norm{r}_{L^2(\Omega)}$ erfüllt.
   Dann gilt
@@ -2275,7 +2290,7 @@ $H'_0(\Omega) \subseteq U \subseteq H^1(\Omega)$, $U$ ist der Lösungsraum
   \begin{itemize}
     \miniitem{0.4 \linewidth}{$\cOmega = K_1 \cup \ldots \cup K_N$,}
     \miniitem{0.5 \linewidth}{$\inte(K_i) \cap \inte(K_j) = \emptyset$ für $i \neq j$,}
-    \item Jede Seite von $K_i$ ist entweder eine Teilmenge von $\bOmega$ oder die Seite von einem anderen $K_j$
+    \item Jede Seite von $K_i$ ist entweder eine Teilmenge von $\bOmega$ oder die Seite von genau einem anderen~$K_j$.
   \end{itemize}
 \end{defn}
 
@@ -2303,10 +2318,10 @@ $H'_0(\Omega) \subseteq U \subseteq H^1(\Omega)$, $U$ ist der Lösungsraum
   \begin{itemize}
     \item einem $d$-Simplex $K$ mit Ecken $a_1$, \ldots, $a_{d+1}$,
     \item $P(K) \coloneqq \Poly_3(K)$
-    \item $\Sigma(K) \coloneqq
-      \arraycolsep=0.5pt
-      \begin{array}[t]{l l}
-        & \Set{p \mapsto p(a_i)}{i = 1, \ldots, d+1} \\
+    \item $
+      \arraycolsep=2pt
+      \begin{array}[t]{r l}
+        \Sigma(K) \coloneqq & \Set{p \mapsto p(a_i)}{i = 1, \ldots, d+1} \\
         \cup & \Set{p \mapsto p(a_{ijl})}{1 \!\leq\! i \!<\! j \!<\! l \!\leq\! d\!+\!1, \, a_{ijl} \coloneqq \tfrac{1}{3} (a_i \!+\! a_j \!+\! a_l)} \\
         \cup & \Set{p \mapsto \DO p(a_i) (a_j - a_i)}{1 \leq i \neq j \leq d+1}
       \end{array}$
@@ -2327,20 +2342,31 @@ $H'_0(\Omega) \subseteq U \subseteq H^1(\Omega)$, $U$ ist der Lösungsraum
     \begin{itemize}
       \item einem $2$-Simplex~$K$ mit Ecken $a_1, a_2, a_3$,
       \item $P(K) \coloneqq \Poly_5(K)$ und
-      \item $\Sigma(K) \coloneqq \Set{p(a_i)}{1 \leq i \leq 3} \cup \Set{\partial_x p(a_i)}{1 \leq i \leq 3} \cup \Set{\partial_y p(a_i)}{1 \leq i \leq 3} \cup \Set{\partial_{yy} p(a_i)}{1 \leq i \leq 3} \cup \Set{\partial_{xx} p(a_i)}{1 \leq i \leq 3} \cup \Set{\partial_{xy} p(a_i)}{1 \leq i \leq 3} \cup \Set{\DO p(\tfrac{a_i + a_j}{2}) \cdot \nu_{ij}}{1 \leq i < j \leq 3}$ (wobei $\nu_{ij} \coloneqq $ äußerer Normalenvektor an $\tfrac{a_i + a_j}{2}$) ist.
+      \item $
+        \arraycolsep=0.5pt
+        \begin{array}[t]{r l l l}
+          \Sigma(K) \coloneqq & \Set{p \mapsto p(a_i)}{1 \leq i \leq 3} &
+          \cup & \Set{p \mapsto \partial_x p(a_i)}{1 \leq i \leq 3} \\
+          \cup & \Set{p \mapsto \partial_y p(a_i)}{1 \leq i \leq 3} &
+          \cup & \Set{p \mapsto \partial_{yy} p(a_i)}{1 \leq i \leq 3} \\
+          \cup & \Set{p \mapsto \partial_{xx} p(a_i)}{1 \leq i \leq 3} &
+          \cup & \Set{p \mapsto \partial_{xy} p(a_i)}{1 \leq i \leq 3} \\
+          \cup & \multicolumn{3}{l}{\Set{p \mapsto \DO p(\tfrac{a_i + a_j}{2}) \cdot \nu_{ij}}{1 \leq i < j \leq 3}}
+        \end{array}$
+       (wobei $\nu_{ij}$ der äußere Normalenvektor an $\nicefrac{(a_i + a_j)}{2}$ ist)
     \end{itemize}
     \item \emph{Bell-Dreieck}: $(K, P(K), \Sigma(K))$ mit
     \begin{itemize}
       \item einem $2$-Simplex~$K$ mit Ecken $a_1, a_2, a_3$,
       \item $P(K) \coloneqq \Set{p \in \Poly_5}{\tfrac{\partial p}{\partial \nu_{ij}} \in \Poly_3(K') \text{ für alle Kanten $K'$ von $K$}}$
-      \item $\Sigma(K) \coloneqq
-        \arraycolsep=1pt
-        \begin{array}[t]{l l l l}
-          & \Set{p \mapsto p(a_i)}{1 \leq i \leq 3} \\
-          \cup & \Set{p \mapsto \partial_x p(a_i)}{1 \!\leq\! i \!\leq\! 3} &
-          \cup & \Set{p \mapsto \partial_y p(a_i)}{1 \!\leq\! i \!\leq\! 3} \\
-          \cup & \Set{p \mapsto \partial_{xx} p(a_i)}{1 \!\leq\! i \!\leq\! 3} &
-          \cup & \Set{p \mapsto \partial_{yy} p(a_i)}{1 \!\leq\! i \!\leq\! 3} \\
+      \item $
+        \arraycolsep=2pt
+        \begin{array}[t]{r l l l}
+          \Sigma(K) \coloneqq & \Set{p \mapsto p(a_i)}{1 \leq i \leq 3} &
+          \cup & \Set{p \mapsto \partial_x p(a_i)}{1 \!\leq\! i \!\leq\! 3} \\
+          \cup & \Set{p \mapsto \partial_y p(a_i)}{1 \!\leq\! i \!\leq\! 3} &
+          \cup & \Set{p \mapsto \partial_{xx} p(a_i)}{1 \!\leq\! i \!\leq\! 3} \\
+          \cup & \Set{p \mapsto \partial_{yy} p(a_i)}{1 \!\leq\! i \!\leq\! 3} &
           \cup & \Set{p \mapsto \partial_{xy} p(a_i)}{1 \!\leq\! i \!\leq\! 3}
         \end{array}$
     \end{itemize}
@@ -2352,19 +2378,21 @@ $H'_0(\Omega) \subseteq U \subseteq H^1(\Omega)$, $U$ ist der Lösungsraum
 % 5.5.3. Nichtkonforme finite Elemente
 \subsection{Nichtkonforme finite Elemente}
 
-Bisher war $B_n = B_{U_n \times U_n}$.
+Bisher war $B_n = B|_{U_n \times U_n}$.
 Manchmal ist es schwierig, $B$ exakt auszuwerten und muss daher angenähert werden, etwa wenn $B$ durch Integration definiert ist.
 Dann hilft folgende Verallgemeinerung des Lemmas von Céa:
 
 \begin{satz}[1. Lemma von \emph{Strang}]
-  Sei $B_ U \times U \to \R$ eine beschränkte, koerzitive Bilinearform, $U_n \subset U$, $B_n : U_n \times U_n \to \R$ eine beschränkte, \textit{gleichmäßig koerzitive} Bilinearform, \dh{}
+  Sei $U$ ein Hilbertraum und $(U_n)_{n \in \N}$ eine Familie von Unterräumen.
+  Sei $B : U \times U \to \R$ eine beschränkte, koerzitive Bilinearform und $(B_n : U_n \times U_n \to \R)_{n \in \N}$ eine \textit{gleichmäßig koerzitive} Familie beschränkter Bilinearformen, \dh{}
   \[
     \ex{\alpha > 0} \fa{n} B_n(u_n, u_n) \geq \alpha \norm{u_n}^2_U \quad
-    \text{für alle $u \in U_n$.}
+    \text{für alle $n \in \N$, $u \in U_n$.}
   \]
   Dann existiert eine Konstante $c > 0$, sodass
   \begin{align*}
-    & \norm{u - u_n}_U \leq c \left( \inf_{v_n \in U_n} \Phi(v_n) + \norm{\ell - \ell_n}_{U'} \right) \\
+    & \norm{u - u_n}_U \leq c \left( \inf_{v_n \in U_n} \Phi(v_n) + \norm{\ell - \ell_n}_{U_n'} \right)
+    \quad \text{wobei} \\
     & \Phi(v_n) \coloneqq \norm{u - v_n}_U + \sup_{w_n \in U_n, w_n \neq 0} \tfrac{\abs{B(v_n, w_n) - B_n(v_n, w_n)}}{\norm{w_n}_U}
   \end{align*}
 \end{satz}
@@ -2379,8 +2407,8 @@ Dann hilft folgende Verallgemeinerung des Lemmas von Céa:
 % 5.11
 \begin{satz}[Konvergenzsatz für das Modellproblem] \mbox{} \\
   Seien die Voraussetzungen (V\tss{1}) -- (V\tss{3}) erfüllt, $P(\hat{K}) = \Poly_k(\hat{k})$ mit $k > \nicefrac{d}{2}$ (damit $H^{k+1}(\Omega) \hookrightarrow \Cont^s(\hat{K})$).
-  Sei die Quadraturformel so gewählt, dass $E_{\hat{K}}(p) = 0$ für alle $p \in \Poly_{2k - 2}$.
-  Für die Lösung $u \in H_0^1(\Omega)$ von (VGL) mit $B(u, \varphi) \coloneqq \IntOmega{\DO u \cdot \DO \varphi}{x}$, $\ell(\varphi) \coloneqq \IntOmega{f \varphi}{x}$ mit $f \in H^k(\Omega)$ gelte $u \in H^{k+1}(\Omega)$.
+  Sei die Quadraturformel so gewählt, dass $E_{\hat{K}}(p) = 0$ für alle $p \in \Poly_{2k - 2}(\hat{K})$.
+  Für die Lösung $u \in H_0^1(\Omega)$ von (VGL) mit $B(u, \varphi) \coloneqq \IInt{\DO u \cdot \DO \varphi}{x}$, $\ell(\varphi) \coloneqq \IInt{f \varphi}{x}$ mit $f \in H^k(\Omega)$ gelte $u \in H^{k+1}(\Omega)$.
   Dann gilt:
   \begin{itemize}
     \item Es gibt eine Konstante $C_1 > 0$, sodass
@@ -2428,12 +2456,12 @@ Wir betrachten nun
 
 \begin{defn}
   Sei $(\hat{K}, \hat{P}, \hat{\Sigma})$ ein gerades (simpliziales oder rechteckiges) FE vom Lagrange-Typ.
-  Ein finites Element $(K, P, \Sigma)$ vom Langrange-Typ (k) heißt \emph{isometrisch äquivalent} zu $(\hat{K}, \hat{P}, \hat{\Sigma})$, falls eine umkehrbare Abbildung
+  Ein finites Element $(K, P, \Sigma)$ vom Lagrange-Typ (k) heißt \emph{isometrisch äquivalent} zu $(\hat{K}, \hat{P}, \hat{\Sigma})$, falls eine umkehrbare Abbildung
   \[
     F : \hat{K} \to K, \quad
     \hat{x} \mapsto (F_1(\hat{x}), \ldots, F_d(\hat{x}))
   \]
-  mit $F_1, \ldots, F_d \in \hat{P}$ existiert sodass
+  mit $F_1, \ldots, F_d \in \hat{P}$ existiert, sodass
   \begin{itemize}
     \miniitem{0.3 \linewidth}{$K = F(\hat{K})$}
     \miniitem{0.65 \linewidth}{$P = \Set{p = \hat{p} \circ F^{-1}}{\hat{p} \in \hat{P}}$}
@@ -2442,7 +2470,7 @@ Wir betrachten nun
 \end{defn}
 
 \begin{bem}
-  Die zu $(K, P, \Sigma)$ isoparametrische Abbildung~$F$ ist für isoparametrische FE vom Langrange-Typ (k) eindeutig durch die Werte an den Knoten~$\hat{a}_i$ definiert.
+  Die zu $(K, P, \Sigma)$ isoparametrische Abbildung~$F$ ist für isoparametrische FE vom Lagrange-Typ (k) eindeutig durch die Werte an den Knoten~$\hat{a}_i$ definiert.
 \end{bem}
 
 \columnbreak
@@ -2560,6 +2588,3 @@ Anders geschrieben:
 \end{verf}
 
 \end{document}
-
-TODO: affine Äquivalenz von Simplizes definieren
-TODO: stetige Einbettung von Sobolev-Räumen in C^r?
