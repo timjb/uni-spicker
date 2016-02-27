@@ -673,7 +673,7 @@ Da die Parity-Check-Erw. durch eine lin. Abb. geschieht, gilt:
 \end{acht}
 
 \begin{defn}
-  Die Generatormatrix $H$ von $C^\perp$ heißt \emph{Kontrollmatrix} zu $C$.
+  Die Generatormatrix~$H$ von~$C^\perp$ heißt \emph{Kontrollmatrix} zu~$C$.
 \end{defn}
 
 \begin{lem}
@@ -712,7 +712,7 @@ Da die Parity-Check-Erw. durch eine lin. Abb. geschieht, gilt:
   Die \emph{Gewichtsverteilung von~$C$} ist
   $A = A_C \in \N^{\{ 0, 1, \ldots, n \}}$ mit
   \[
-    A(i) \coloneqq |\Set{w \in C}{\wt(w) = i}|, \quad
+    A(i) \coloneqq \abs{\Set{w \in C}{\wt(w) = i}}, \quad
     0 \leq i \leq n.
   \]
 \end{defn}
@@ -1014,6 +1014,10 @@ Mit einer Methode aus ihrem Beweis lässt sich ein alternativer Beweis des letzt
 
 % §6.3. Grundlagen über selbstduale Codes
 \subsection{Selbstduale Codes}
+
+\begin{defn}
+  Ein Code $C$ heißt \emph{selbstdual}, falls $C = C^\perp$.
+\end{defn}
 
 \begin{prop}
   Sei $C$ ein binärer selbst-dualer Code (insb. linear).
@@ -1925,8 +1929,6 @@ Suche nun ein $\lambda \in \F_2^m$ mit $\abs{\hat{B}_\beta(\lambda)}$ ist minima
   Es gilt $(\hat{\F_q}, \cdot, \chi_0) \cong (\F_q, +, 0)$.
 \end{bem}
 
-\TODO{Mac-Williams-Transformation erwähnen}
-
 % Vorlesung vom 17.12.2015
 
 Für $q = p$ prim ist
@@ -1970,13 +1972,11 @@ Zu $f : \F_q^n \to V$ definieren wir eine \emph{transformierte Abbildung} durch
 \begin{satz}[\emph{Mac-Williams-Transformation}]
   Sei $C \subseteq \F_q^m$ ein linearer Code.
   Betrachte den dualen Code $C^\perp$ zu $C$.
-  Dann:
-  \[
-    A_{C^\perp}^\homogen(X, Y) = \tfrac{1}{\abs{C}} \cdot A_C^\homogen(X + (q-1)Y, X-Y), \quad 
-  \] 
-  \[
-    A_{C^\perp}(Z) = \tfrac{1}{\abs{C}} \cdot (1 + (q-1) Z)^n \cdot A_C(\frac{1-Z}{1+(q-1)Z}).
-  \]
+  Dann gilt:
+  \begin{align*}
+    A_{C^\perp}^\homogen(X, Y) & = \tfrac{1}{\abs{C}} \cdot A_C^\homogen(X + (q-1)Y, X-Y), \\
+    A_{C^\perp}(Z) & = \tfrac{1}{\abs{C}} \cdot (1 + (q-1) Z)^n \cdot A_C \left( \frac{1-Z}{1+(q-1)Z} \right).
+  \end{align*}
 \end{satz}
 
 \begin{beweisidee}
@@ -1990,9 +1990,11 @@ Zu $f : \F_q^n \to V$ definieren wir eine \emph{transformierte Abbildung} durch
     A_{\Sim_q(m)}^\homogen (X, Y) = X^n + (q^m - 1) X^{n - q^{m-1}} Y^{q^{m-1}}.
   \]
   Somit gilt für den Hamming-Code $\Ham_q(m) = \Sim_q(m)^\perp$:
-  \[
-    A_{\Ham_q(m)}^\homogen (X, Y) = \tfrac{1}{q^m} \left( [X+(q-1)Y]^n + (q^m - 1) \cdot [X + (q-1) Y]^{n - q^{m-1}} \cdot [X-Y]^{q^{m-1}} \right).
-  \]
+  \begin{align*}
+    A_{\Ham_q(m)}^\homogen & (X, Y) = 
+    \tfrac{1}{q^m} \left( [X+(q-1)Y]^n + \vphantom{[X + (q-1) Y]^{n - q^{m-1}}} \right. \\
+    + & \left. (q^m - 1) \cdot [X + (q-1) Y]^{n - q^{m-1}} \cdot [X-Y]^{q^{m-1}} \right).
+  \end{align*}
 \end{bsp}
 
 \begin{bsp}
@@ -2530,19 +2532,19 @@ TODO: Rest des Beispiels, insbesondere Decodierung
 \end{bem}
 
 \begin{defn}
-  Sei $\xi$ eine primitive $d$-te Einheitswurzel. \\
-  Die zu $\xi^i$ gehörende \emph{Kreisteilungsklasse} ist
+  Sei $\zeta$ eine primitive $d$-te Einheitswurzel. \\
+  Die zu $\zeta^i$ gehörende \emph{Kreisteilungsklasse} ist
   \[
-    \Gamma_{d,i} \coloneqq \Gamma^{(\xi)}_{d,i} \coloneqq \Set{\xi^{i q^\ell}}{\ell \geq 1} \subseteq \Gamma_d.
+    \Gamma_{d,i} \coloneqq \Gamma^{(\zeta)}_{d,i} \coloneqq \Set{\zeta^{i q^\ell}}{\ell \geq 1} \subseteq \Gamma_d.
   \]
 \end{defn}
 
 \begin{bem}
-  Für versch. Wahlen $\xi$ und $\xi'$, bzw. $i$ und $i'$ sind $\Gamma^{(\xi)}_{d,i}$ und $\Gamma^{(\xi')}_{d,i'}$ entweder gleich oder disjunkt.
+  Für versch. Wahlen $\zeta$ und $\zeta'$, bzw. $i$ und $i'$ sind $\Gamma^{(\zeta)}_{d,i}$ und $\Gamma^{(\zeta')}_{d,i'}$ entweder gleich oder disjunkt.
   Die Kreisteilungsklassen sind daher wohldefiniert.
   Es gilt $\abs{\Gamma_{d,i}} = \ord_d(q)$.
   Es zerfällt $\Gamma_d$ in $\nicefrac{\phi(d)}{\ord_d(q)}$ Kreisteilungsklassen.
-  Sei nun $\xi$ fest gewählt.
+  Sei nun~$\zeta$ fest gewählt.
 \end{bem}
 
 \begin{lem}
