@@ -3592,4 +3592,141 @@ Sei $A$ ein Integritätsbereich mit Quotientenkörper~$K$.
   Für jeden noetherschen komm. Ring~$A$ ist der Potenz- reihenring $A \llbracket X_1, \ldots, X_n \rrbracket$ als Vervollständigung von $A [X_1, \ldots, X_n]$ bzgl. der $(X_1, \ldots, X_n)$-adischen Topologie vollständig.
 \end{folgerung}
 
+% XI. Dimensionstheorie
+\section{Dimensionstheorie}
+
+% 44. Hilbertfunktionen
+\subsection{Hilbertfunktionen}
+
+% 44.1. Poincarésche Reihe
+
+Sei $A = {\bigoplus}_{n \in \N} A_n$ ein noetherscher gewichteter kommutativer Ring. \\
+(Dann ist $A$ als $A_0$-Algebra endlich erzeugt.)
+Sei $\lambda$ eine $\Z$-wertige additive Funktion auf der Klasse aller endlich erzeugten $A_0$-Moduln.
+
+\begin{prop}
+  Sei $M = {\bigoplus}_{n \in \N} M_n$ ein endlich erz. gewichteter $A$-Modul. \\
+  Dann ist $M_n$ für alle $n \in \N$ ein endlich erzeugter $A_0$-Modul.
+\end{prop}
+
+\begin{defn}
+  Die \emph{Poincarésche Reihe} eines gewichteten endlich erzeugten $A$-Modul~$M$ ist
+  \[
+    \lambda (M, t) \coloneqq \sum_{n=0}^\infty \lambda(M_n) t^n \in \Z \llbracket t \rrbracket.
+  \]
+\end{defn}
+
+% 44.2. Der Hilbert-Serresche Satz
+
+\begin{satz}[\emph{Hilbert-Serre}]
+  Für jeden endl. erz. gewichteten $A$-Modul~$M$ ist dann $\lambda(M, t)$ eine rationale Funktion der Form
+  \[
+    \lambda(M, t) = f(t) \cdot \prod_{i=1}^s (1 - t^{k_i})^{-1} \qquad
+    \text{mit } f \in \Z [t], \text{ und } k_i \in \N.
+  \]
+\end{satz}
+
+\begin{defn}
+  Die Polordnung von $\lambda(M, t)$ an $t = 1$ heißt \emph{Größe} $\d_\lambda(M)$ \textit{von}~$M$ \textit{zu}~$\lambda$.
+\end{defn}
+
+\begin{prop}
+  Angenommen, $A$ wird als $A_0$-Algebra von~$A_1$ erzeugt. \\
+  Sei~$M$ ein endlich erzeugter gewichteter $A$-Modul. \\
+  Dann existiert ein $p \in \Q [n]$ vom Grad $\deg(p) = \d_\lambda(M, t) - 1$ mit
+  \[
+    \ex{N \in \N} \fa{n \geq N} \lambda(M_n) = p(n).
+  \]
+\end{prop}
+
+\begin{bem}
+  Insbesondere nimmt $p(n)$ für $n \geq N$ nur ganzzahlige Werte an und ist damit ein \textit{numerisches Polynom}.
+\end{bem}
+
+% ausgelassen: Beispiel 44.9
+
+\begin{prop}
+  Sei $M$ ein endlich erzeugter gewichteter $A$-Modul. \\
+  Ist $x \in A_k$, $k \in \N$, \textit{regulär} in~$M$, \dh{} $\fa{m \!\in\! M\!}\! xm \!=\! 0 \implies \!m\! = 0$, so gilt $\d_\lambda(M / xM) = \d_\lambda(M) - 1$.
+\end{prop}
+
+\begin{bsp}
+  Ist $A_0$ ein artinscher Ring, so ist die Länge~$\ell$ von $A_0$-Moduln eine additive Funktion auf der Klasse der endlich erz. $A_0$-Moduln. \\
+  Für den gew. Ring $A = A_0 [X_1, \ldots, X_s]$ wird $A_n$ als $A_0$-Modul frei von den Monomen $X^\alpha$ mit $\alpha \in \N^s$, $\abs{\alpha} = n$, erzeugt.
+  Somit
+  \[
+    \ell(A_n) = \abs{\Set{\alpha \in \N^s}{\abs{\alpha} = n}} = \binom{s+n-1}{s-1}.
+  \]
+  Mit Taylorentwicklung folgt \enspace
+  $
+    \ell(A, t) = \tfrac{1}{(1-t)^s}.
+  $
+\end{bsp}
+
+% 44.3. Das charakteristische Polynom primärer Ideale
+
+\begin{prop}
+  Sei~$(A, \mmm)$ ein noetherscher lokaler Ring. \\
+  Sei~$\qqq$ ein $\mmm$-primäres Ideal, das von minimal $s$~Elementen erz. wird. \\
+  Sei~$M$ ein endlich erzeugter $A$-Modul mit einer stabilen $\qqq$-Filtration. \\
+  Dann gibt es genau ein Polynom~$\chi_\qqq^{M_\bullet} \in \Q [n]$ mit $\deg \chi_\qqq^{M_\bullet} \leq s$ und
+  \[
+    \ex{N \in \N} \fa{n \geq N} \underbrace{\ell(M/M_n)}_{\mathclap{= \, {\sum}_{r=0}^{n-1} \ell(M_r/M_{r+1})}} = \chi_\qqq^{M_\bullet}(n).
+  \]
+\end{prop}
+
+\begin{defn}
+  $\chi_\qqq^{M_\bullet}$ heißt \emph{charakteristisches Polynom} von~$\qqq$ über~$M_\bullet$.
+\end{defn}
+
+\begin{beweisidee}
+  Existenz: $\chi_\qqq^{M_\bullet}$ ist die bestimmte Summe (im Sinne der Differenzenrechnung) des Polynoms $p(n) \in \Q [n]$ mit
+  \[
+    \ex{N \in \N} \fa{n \geq N} \lambda(M^n / M^{n+1}) = p(n).
+  \]
+\end{beweisidee}
+
+\begin{bem}
+  Dabei hängen Grad und Leitkoeffizient von~$\chi_\qqq^{M_\bullet}$ nur von~$M$ und~$\qqq$, nicht aber von der Filtrierung~$M_\bullet$ ab.
+\end{bem}
+
+\begin{nota}
+  Im Falle der $\qqq$-adischen Filtration $A_\bullet$ von~$M = A$ heißt $\chi_\qqq \coloneqq \chi_\qqq^{A_\bullet}$ \textit{charakteristisches Polynom} von~$\qqq$.
+\end{nota}
+
+\begin{bem}
+  Betrachte das char. Polynom $\chi_\mmm$ des maximalen Ideals~$\mmm$ in einem noeth. lokalen Ring~$A$.
+  Nach einer früheren Prop. besitzt das Polynom~$p(n)$ aus der Beweisidee zur letzten Prop. den Grad $(\d_\lambda(G_\mmm(A, t)) - 1)$.
+  Somit hat $\chi_\mmm$ den Grad $\deg(\chi_\mmm) = \d_\lambda(G_\mmm(A, t))$.
+\end{bem}
+
+\begin{defn}
+  $\d_\lambda(A) \coloneqq \deg \chi_\mmm = \d_\lambda(G_\mmm(A, t))$ heißt \emph{Größe} des lokalen noetherschen Rings~$(A, \mmm)$.
+\end{defn}
+
+\begin{prop}
+  Sei $(A, \mmm)$ ein noetherscher lokaler Ring und $\qqq$ ein $\mmm$-primäres Ideal.
+  Dann ist $\deg \chi_\qqq = \deg \chi_\mmm$.
+\end{prop}
+
+% 45. Dimensionstheorie noetherscher lokaler Ringe
+
+% 45.1. Die Größe regulärer Quotienten
+
+% 45.2. Die Dimension noetherscher lokaler Ringe
+
+% 45.3. Der Dimensionssatz
+
+% 45.4. Parametersysteme
+
+% 46. Reguläre lokale Ringe
+
+% 46.1. Charakterisierung regulärer lokaler Ringe
+
+% 46.2. Regularität als analytische Eigenschaft
+
+% 47. Transzendente Dimension
+
+% 47.1. Transzendente Dimension
+
 \end{document}
