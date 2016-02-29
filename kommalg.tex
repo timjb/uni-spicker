@@ -55,6 +55,8 @@
 \newcommand{\Alg}{\mathbf{Alg}} % Kategorie der Algebren über einem Körper/Ring
 \newcommand{\AAlg}[1]{{#1}\text{-}\Alg} % Kategorie der Algebren über einem Ring A
 \newcommand{\op}{\mathrm{op}} % opposite category
+\DeclareMathOperator{\height}{ht} % Höhe eines Primideals
+\DeclareMathOperator{\depth}{depth} % Höhe eines Primideals
 
 % Bezeichnungen für Ideale
 \newcommand{\aaa}{\mathfrak{a}}
@@ -284,7 +286,6 @@ Im Folgenden seien alle Ringe \emph{kommutativ}, \dh{} $xy = yx$ f.\,a. $x, y$.
 
 \begin{defn}
   Ein Ideal $\aaa \subseteq A$ heißt \emph{Hauptideal}, falls $\aaa = (a)$ für ein $a \in A$. \\
-  %Ein Ring~$A$ heißt \emph{Hauptidealring}, falls jedes Ideal in $A$ ein Hauptideal ist.
   Ein \emph{Hauptidealring} ist ein Ring, dessen Ideale alle Hauptideale sind.
   Er heißt \emph{Hauptidealbereich} (HIB), falls er zusätzlich ein Integritätsbereich ist.
 \end{defn}
@@ -1987,7 +1988,7 @@ Mit der Exaktheit der Lokalisierung folgt:
 \end{bem}
 
 \begin{defn}
-  Die Ideale $\ppp_i$ heißen die zu $\aaa$ \emph{assozierten Primideale}.
+  Die Ideale $\ppp_i$ heißen die zu $\aaa$ \emph{assoziierten Primideale}.
 \end{defn}
 
 \begin{lem}
@@ -3712,22 +3713,140 @@ Sei $\lambda$ eine $\Z$-wertige additive Funktion auf der Klasse aller endlich e
 \end{prop}
 
 % 45. Dimensionstheorie noetherscher lokaler Ringe
+\subsection{Dimensionstheorie noetherscher lokaler Ringe}
 
 % 45.1. Die Größe regulärer Quotienten
 
+\begin{prop}
+  Sei $(A, \mmm)$ ein noetherscher lokaler Ring und $\qqq$ ein $\mmm$-primäres Ideal.
+  Sei~$M$ ein endlich erzeugter $A$-Modul.
+  Sei $x \in A$ regulär in~$M$ und $M'' \coloneqq M/xM$.
+  Dann gilt $\deg \chi_\qqq^{M''} \leq \deg \chi_\qqq^M - 1$.
+\end{prop}
+
 % 45.2. Die Dimension noetherscher lokaler Ringe
+
+\begin{defn}
+  Sei~$A$ ein kommutativer Ring und $\ppp \subset A$ ein Primideal.
+  \begin{itemize}
+    \item Die \emph{Höhe}~$\height \ppp$ von~$\ppp$ ist das Supremum der Längen von Primidealketten der Form
+    $\ppp_0 \subsetneq \ppp_1 \subsetneq \ldots \subsetneq \ppp_r = \ppp$.
+    \item Die \emph{Tiefe}~$\depth \ppp$ von~$\ppp$ ist das Supremum der Längen von Primidealketten der Form
+    $\ppp = \ppp_0 \subsetneq \ppp_1 \subsetneq \ldots \subsetneq \ppp_r$.
+  \end{itemize}
+\end{defn}
+
+\begin{bem}
+  Es gilt \enspace
+  $\height \ppp = \dim A_\ppp$
+  \enspace und \enspace
+  $\depth \ppp = \dim A/\ppp$.
+\end{bem}
 
 % 45.3. Der Dimensionssatz
 
+\begin{satz}[\emph{Dimensionssatz}]
+  Sei $(A, \mmm)$ ein noetherscher lokaler Ring.
+  Dann sind folgende Größen gleich:
+  \begin{itemize}
+    \item die maximale Länge $\dim A$ von Primidealketten in~$A$,
+    \item der Grad $\d(A)$ des charakteristischen Polynoms~$\chi_\mmm$ von~$A$ und
+    \item die minimale Anzahl $\delta(A)$ von Erzeugern $\mmm$-primärer Ideale von~$A$
+  \end{itemize}
+\end{satz}
+
+\begin{kor}
+  Sei $(A, \mmm, F)$ ein noetherscher lokaler Ring.
+  Dann ist
+  \[
+    \dim A \leq \dim_F \mmm/\mmm^2.
+  \]
+\end{kor}
+
+\begin{kor}
+  Sei $A$ ein komm. noetherscher Ring.
+  Seien $x_1, \ldots, x_r \in A$. \\
+  Ist~$\ppp$ ein minimales Primideal mit $\ppp \supseteq (x_1, \ldots, x_r)$, so gilt $\height \ppp \leq r$.
+\end{kor}
+
+\begin{kor}[\emph{Krulls Hauptidealsatz}]
+  Sei $A$ ein kommutativer noetherscher Ring und $x \in A$ regulär.
+  Sei~$\ppp \subset A$ ein mit der Eigenschaft $\ppp \supset (x)$ minimales Primideal.
+  Dann gilt $\height \ppp = 1$.
+\end{kor}
+
+\begin{kor}
+  Sei $(A, \mmm)$ ein noetherscher lokaler Ring und $x \in \mmm$ regulär.
+  Dann gilt $\dim A/(x) = \dim A - 1$.
+\end{kor}
+
+\begin{kor}
+  Sei~$(A, \mmm)$ ein lokaler noetherscher Ring und $\hat{A}$ seien $\mmm$-adische Vervollständigung.
+  Dann gilt $\dim \hat{A} = \dim A$.
+\end{kor}
+
 % 45.4. Parametersysteme
 
+\begin{defn}
+  Sei $(A, \mmm)$ ein noetherscher lokaler Ring mit $\dim A = d$. \\
+  Ein \emph{Parametersystem} für~$A$ ist eine $d$ elementige Menge von Erzeugern eines $\mmm$-primären Ideals von~$A$.
+\end{defn}
+
+\begin{prop}
+  Sei $(A, \mmm)$ ein noetherscher lokaler Ring.
+  Sei $\{ x_1, \ldots, x_d \}$ ein Parametersystem für~$A$ mit erzeugten Ideal $\qqq \coloneqq (x_1, \ldots, x_d)$. \\
+  Ist $f \in A [X_1, \ldots, X_d]$ homogen vom Grad~$s$ mit $f(x_1, \ldots, x_d) \in \qqq^{s+1}$, so folgt $f \in \mmm [X_1, \ldots, X_d]$.
+\end{prop}
+
+\begin{kor}
+  Sei $K$ ein Körper und $(A, \mmm)$ eine lokale $K$-Algebra, sodass~$K$ isomorph auf $A/\mmm$ abgebildet wird.
+  Ist $\{ x_1, \ldots, x_d \}$ ein Parameter- system für~$A$, so sind $x_1, \ldots, x_d$ algebraisch unabhängig über~$K$.
+\end{kor}
+
 % 46. Reguläre lokale Ringe
+\subsection{Reguläre lokale Ringe}
 
 % 46.1. Charakterisierung regulärer lokaler Ringe
 
+\begin{lemdefn}
+  Ein noeth. lokaler Ring $(A, \mmm, F)$ der Dimension~$d$ heißt \emph{regulär}, falls er folgende äquivalente Eigenschaften besitzt:
+  \begin{itemize}
+    \item $G_\mmm(A, t) \cong F [X_1, \ldots, X_d]$ als gewichtete $F$-Algebren.
+    \item Für die Dim. des Zarisk. Kotangentialraums gilt $\dim_F \mmm^2 / \mmm = d$.
+    \item Es ex. ein Parametersystem $\{ x_1, \nldots, x_d \}$ von~$A$ mit $(x_1, \nldots, x_d) \!=\! \mmm$.
+  \end{itemize}
+\end{lemdefn}
+
+% ausgelassen: Hilfssatz
+
+\begin{lem}
+  Reguläre lokale Ringe sind Integritätsbereiche.
+\end{lem}
+
 % 46.2. Regularität als analytische Eigenschaft
 
+\begin{prop}
+  Sei $(A, \mmm)$ ein noeth. lokaler Ring.
+  Wir wissen, dass dann auch die $\mmm$-adische Vervollständigung $(\hat{A}, \hat{\mmm})$ ein lokaler Ring ist. \\
+  Es gilt: \enspace
+  $(A, \mmm)$ ist genau dann regulär, wenn $(\hat{A}, \hat{\mmm})$ regulär ist.
+\end{prop}
+
+% ausgelassen: Bemerkung 46.7
+
+\begin{bsp}
+  Sei $K$ ein Körper und $(A, \mmm, F)$ eine reguläre lok. $K$-Algebra, sodass~$K$ isomorph auf~$F$ abgebildet wird.
+  Sei $d \coloneqq \dim A$. \\
+  Dann gilt $G_\mmm(A, t) \cong K [X_1, \ldots, X_d]$ und somit $\hat{A} \cong K \llbracket X_1, \ldots, X_d \rrbracket$.
+\end{bsp}
+
+\begin{bsp}
+  Sei $K$ ein Körper und $\mmm = (X_1 - x_1, \ldots, X_d - x_d)$ ein max. Ideal in $A \coloneqq K [X_1, \ldots, X_d]$.
+  Dann ist $A_\mmm$ ein regulärer lokaler Ring.
+\end{bsp}
+
 % 47. Transzendente Dimension
+%\subsection{Transzendente Dimension}
 
 % 47.1. Transzendente Dimension
 
