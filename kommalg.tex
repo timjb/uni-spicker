@@ -57,6 +57,7 @@
 \newcommand{\op}{\mathrm{op}} % opposite category
 \DeclareMathOperator{\height}{ht} % Höhe eines Primideals
 \DeclareMathOperator{\depth}{depth} % Höhe eines Primideals
+\DeclareMathOperator{\trdim}{trdim} % transzendente Dimension
 
 % Bezeichnungen für Ideale
 \newcommand{\aaa}{\mathfrak{a}}
@@ -3846,8 +3847,48 @@ Sei $\lambda$ eine $\Z$-wertige additive Funktion auf der Klasse aller endlich e
 \end{bsp}
 
 % 47. Transzendente Dimension
-%\subsection{Transzendente Dimension}
+\subsection{Transzendente Dimension}
 
 % 47.1. Transzendente Dimension
+
+\begin{defn}
+  Sei $L \supset K$ eine Körpererweiterung.
+  Eine \emph{Transzendenzbasis} von~$L$ über~$K$ ist eine max. Menge von über~$K$ algebraisch unabh. Elementen in~$L$.
+  Der \emph{Transzendenzgrad} der Körpererweiterung $L \supset K$ ist die Länge einer Transzendenzbasis von~$L$ über~$K$.
+\end{defn}
+
+\begin{situation}
+  Sei $K$ ein Körper und $A$ eine endlich erzeugte $K$-Algebra, welche ein Integritätsbereich ist.
+\end{situation}
+
+\begin{defn}
+  Die \emph{(transzendente) Dimension} $\trdim_K A$ von~$A$ über~$K$ ist der Transzendenzgrad der Körpererweiterung $K(A) \supset K$, wobei $K(A)$ der Quotientenkörper von~$A$ ist.
+\end{defn}
+
+\begin{bsp}
+  $\trdim_K K [X_1, \ldots, X_n] = \text{Transz'grad von } K (X_1, \ldots, X_n) = n$
+\end{bsp}
+
+% TODO: verschieben als Korollar von Going-up und Going-down?
+Aus Going-Up und Going-Down folgt:
+\begin{lem}
+  Sei $A \subset B$ eine ganze Erweiterung von Integritätsbereichen und $A$ ganz abgeschlossen.
+  Sei $\qqq \subset B$ ein Primideal.
+  Sei $\ppp \coloneqq A \cap \qqq$.
+  Dann gilt \enspace
+  $\height \qqq = \height \ppp$ und $\depth \qqq = \depth \ppp$.
+\end{lem}
+
+\begin{satz}
+  Für alle maximalen Ideale $\mmm \subset A$ gilt:
+  \[
+    \dim A = \dim A_\mmm = \trdim_K A.
+  \]
+\end{satz}
+
+\begin{satz}
+  Für alle Primideale $\ppp \subset A$ gilt \enspace
+  $\height \ppp + \depth \ppp = \dim A$.
+\end{satz}
 
 \end{document}
