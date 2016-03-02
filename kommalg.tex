@@ -451,14 +451,58 @@ Im Folgenden seien alle Ringe \emph{kommutativ}, \dh{} $xy = yx$ f.\,a. $x, y$.
   Dann ist $A \setminus \mmm = A^\times$, also $(A, \mmm)$ ein lokaler Ring.
 \end{prop}
 
+% eigenes Kapitel
+\subsection{Dimension, Tiefe und Höhe}
+
+% vorgezogen aus Kapitel 33.2.
+\begin{defn}
+  Sei $A$ ein komm. Ring.
+  Eine \emph{Primidealkette} der Länge~$n$ in~$A$ ist eine Kette $\ppp_0 \subsetneq \ppp_1 \subsetneq \ldots \subsetneq \ppp_n$ von Primidealen in~$A$.
+\end{defn}
+
+% vorgezogen aus Kapitel 33.2.
+\begin{defn}
+  Die \emph{Dimension} $\dim A \in \{ - \infty \} \cup \N$ eines komm. Ringes $A$ ist das Supremum über die Längen aller Primidealketten in $A$.
+\end{defn}
+
+% vorgezogen aus Kapitel 33.2.
+\begin{bspe}
+  \inlineitem{$\dim A \geq 0 \iff A \neq 0$} \quad
+  \inlineitem{$\dim K = 0$} \quad
+  \inlineitem{$\dim \Z = 1$}
+\end{bspe}
+
+% vorgezogen:
+% 45.2. Die Dimension noetherscher lokaler Ringe
+
+\begin{defn}
+  Sei~$A$ ein kommutativer Ring und $\ppp \subset A$ ein Primideal.
+  \begin{itemize}
+    \item Die \emph{Höhe}~$\height \ppp$ von~$\ppp$ ist das Supremum der Längen von Primidealketten der Form
+    $\ppp_0 \subsetneq \ppp_1 \subsetneq \ldots \subsetneq \ppp_r = \ppp$.
+    \item Die \emph{Tiefe}~$\depth \ppp$ von~$\ppp$ ist das Supremum der Längen von Primidealketten der Form
+    $\ppp = \ppp_0 \subsetneq \ppp_1 \subsetneq \ldots \subsetneq \ppp_r$.
+  \end{itemize}
+\end{defn}
+
+\begin{bemn}
+  \begin{itemize}
+    \item $\height \ppp + \depth \ppp \leq \dim A$
+    \item Es gilt \enspace
+    $\height \ppp = \dim A_\ppp$
+    \enspace und \enspace
+    $\depth \ppp = \dim A/\ppp$.
+  \end{itemize}
+\end{bemn}
+
 % 5. Das Nil- und das Jacobsonsche Ideal
 \subsection{Das Nil- und das Jacobsonsche Ideal}
 
 % 5.1. Das Nilradikal
 
-\begin{prop}
+\begin{lemdefn}
   Die Menge $\nnn \coloneqq \{ \text{ nilpotente Elemente } \} \subseteq A$ ist ein Ideal, das sogenannte \emph{Nilradikal}.
-\end{prop}
+\end{lemdefn}
 
 \begin{bem}
   Der Ring $A/\nnn$ hat außer $0$ keine nilpotenten Elemente.
@@ -474,6 +518,8 @@ Im Folgenden seien alle Ringe \emph{kommutativ}, \dh{} $xy = yx$ f.\,a. $x, y$.
   Das \emph{Jacobsonsche Ideal} $\jjj \subset A$ ist der Schnitt aller maximalen Ideale von $A$.
 \end{defn}
 
+\begin{samepage}
+
 \begin{prop}
   Ein Element $x \!\in\! A$ liegt genau dann im Jacobsonschen Ideal~$\jjj$, wenn $1 - xy$ für alle $y \in A$ eine Einheit ist.
 \end{prop}
@@ -481,17 +527,19 @@ Im Folgenden seien alle Ringe \emph{kommutativ}, \dh{} $xy = yx$ f.\,a. $x, y$.
 % 6. Operationen mit Idealen
 \subsection{Operationen mit Idealen}
 
+\end{samepage}
+
 % 6.1. Summe, Schnitt und Produkt von Idealen
 
 \begin{defn}
   Die \emph{Summe von Idealen} $(\aaa_i)_{i \in I}$ von~$A$ ist das Ideal
   \[
-    \sum_{i \in I} \aaa_i \coloneqq \Set{\sum_{k=1}^n x_k}{k \in \N, x_k \in \aaa_{i_k}, i_k \in I}.
+    {\sum}_{i \in I} \aaa_i \coloneqq \Set{{\sum}_{k=1}^n x_k}{k \in \N, x_k \in \aaa_{i_k}, i_k \in I}.
   \]
 \end{defn}
 
 \begin{bem}
-  $\sum_{i \in I} \aaa_i$ ist das kleinste Ideal, das alle $\aaa_i$ umfasst.
+  ${\sum}_{i \in I} \aaa_i$ ist das kleinste Ideal, das alle $\aaa_i$ umfasst.
 \end{bem}
 
 \begin{beob}
@@ -545,7 +593,9 @@ Im Folgenden seien alle Ringe \emph{kommutativ}, \dh{} $xy = yx$ f.\,a. $x, y$.
   Seien $\aaa_1, \ldots \aaa_n \subseteq A$ paarweise koprime Ideale.
   Dann gilt
   \[
-    \bigcap_{i=1}^n \aaa_i = \prod_{i=1}^n \aaa_i.
+    {\bigcap}_{i=1}^n \aaa_i
+    \enspace = \enspace
+    {\prod}_{i=1}^n \aaa_i.
   \]
 \end{prop}
 
@@ -563,7 +613,7 @@ Im Folgenden seien alle Ringe \emph{kommutativ}, \dh{} $xy = yx$ f.\,a. $x, y$.
   Seien $\aaa_1, \ldots \aaa_n \subseteq A$ Ideale.
   Dann ist
   \[
-    \phi : A \to \prod_{i=1}^n (A/\aaa_i), \quad x \mapsto ([x], \ldots, [x])
+    \phi : A \to {\prod}_{i=1}^n (A/\aaa_i), \quad x \mapsto ([x], \ldots, [x])
   \]
   genau dann surjektiv, wenn die Ideale $\aaa_i$ paarweise koprim sind.
 \end{prop}
@@ -700,7 +750,7 @@ Im Folgenden seien alle Ringe \emph{kommutativ}, \dh{} $xy = yx$ f.\,a. $x, y$.
 
 \begin{prop}
   Sei $\phi : A \to B$ ein Homomorphismus komm. Ringe. \\
-  Die Erweiterung und Kontraktion von Idealen (bzgl. $\phi$) bilden eine Galois-Verbindung, \dh{} für Ideale $\aaa \subseteq A$ und $\bbb \subseteq B$ gilt
+  Die Erweiterung und Kontraktion von Idealen (bzgl. $\phi$) bilden eine \textit{Galois-Verbindung}, \dh{} für Ideale $\aaa \subseteq A$ und $\bbb \subseteq B$ gilt
   \[
     B \aaa \subseteq \bbb \iff \aaa \subseteq A \cap \bbb.
   \]
@@ -1556,7 +1606,7 @@ Im Folgenden seien alle Ringe \emph{kommutativ}, \dh{} $xy = yx$ f.\,a. $x, y$.
 
 \begin{defn}
   Sei $A$ ein Ring.
-  Eine \emph{multiplikativ abgeschl. Teilmenge} von $A$ ist eine Teilmenge $S \subseteq A$ mit $1 \in S$ und $xy \in S$ für alle $x, y \in S$.
+  Eine \emph{multipl. abgeschl. Teilmenge} von~$A$ ist eine Teilmenge $S \subseteq A$ mit $1 \in S$ und $xy \in S$ für alle $x, y \in S$.
 \end{defn}
 
 \begin{bspe}
@@ -1815,7 +1865,7 @@ Mit der Exaktheit der Lokalisierung folgt:
 \end{nota}
 
 \begin{bem}
-  Dies ist gerechtfertigt, denn jedes Element in $(S^{-1} A) \aaa$ hat die Form $\sum_i \tfrac{a_i}{s_i}$ und diese Terme können wir auf einen gemeinsamen Nenner bringen.
+  Dies ist gerechtfertigt, denn jedes Element in $(S^{-1} A) \aaa$ hat die Form ${\sum}_i \tfrac{a_i}{s_i}$ und diese Terme können wir auf einen gemeinsamen Nenner bringen.
 \end{bem}
 
 \begin{prop}
@@ -2000,10 +2050,10 @@ Mit der Exaktheit der Lokalisierung folgt:
 
 % 23.3. Primärzerlegungen
 
-\begin{satz}[erster Eindeutigkeitssatz]
-  Sei $A$ ein komm. Ring und $\aaa \subseteq A$ ein Ideal mit minimaler Primärzerlegung $\aaa = \qqq_1 \cap \ldots \cap \qqq_n$. \\
+\begin{satz}[1. Eindeutigkeitssatz]
+  Sei $A$ ein komm. Ring und $\aaa \subseteq A$ ein Ideal mit min. Primärzerlegung $\aaa = \qqq_1 \cap \ldots \cap \qqq_n$.
   Sei $\ppp_i = \sqrt{\qqq_i}$.
-  Dann sind die Ideale $\ppp_i$ genau die Ideale, die von der Form $\sqrt{(\aaa : x)}$ mit $x \in A$ sind.
+  Dann sind die Ideale $\ppp_i$ genau die Ideale der Form $\sqrt{(\aaa : x)}$ mit $x \in A$.
 \end{satz}
 
 \begin{bem}
@@ -2136,8 +2186,8 @@ Für $m=1$ folgt:
   Sei $A \subseteq B$ eine Erw. komm. Ringe.
   Es sind äquivalent:
   \begin{itemize}
-    \item $x$ ist ganz über $A$.
-    \item $A[x] \subseteq B$ ist als $A$-Modul endlich erzeugt.
+    \miniitem{0.33 \linewidth}{$x$ ist ganz über $A$.}
+    \miniitem{0.65 \linewidth}{$A[x] \subseteq B$ ist als $A$-Modul endlich erzeugt.}
     \item Es existiert ein Unterring $C \subseteq B$ mit $C \supseteq A[x]$, der als $A$-Modul endlich erzeugt ist.
     \item Es ex. ein treuer $A[x]$-Modul $M$, der als $A$-Modul endl. erz. ist.
   \end{itemize}
@@ -2218,11 +2268,11 @@ Für $m=1$ folgt:
     injektiv ist.
     (Dies kann man etwa erreichen, indem man die Tupel in $M$ als Zahlen in einem Stellenwertsystem mit genügend großer Basis $b \coloneqq 1 + \max_{\alpha \in M} \enspace \max_{i = 1, \ldots, n} \alpha_i$ ansieht und $w_i \coloneqq b^{n-i}$ setzt.)
     \item Setze $z_i = x_i - x_n^{w_i}$ für $i = 1, \ldots, n-1$ und $A' \coloneqq K[z_1, \ldots, z_{n-1}]$.
-    \item Dann kann man $f$ im Polynomring $K[z_1, \ldots, z_{n-1}, x_n] = A'[x_n]$,
+    \item Dann kann man~$f$ im Polynomring $K[z_1, \ldots, z_{n-1}, x_n] = A'[x_n]$,
     \[
-      f = \sum_{\alpha \in M} \lambda_\alpha (z_1 + x_n^{w_1})^{\alpha_1} \cdot \ldots \cdot (z_{n-1} + x_{n-1}^{w_{n-1}})^{\alpha_{n-1}} \cdot x_n^{\alpha_n},
+      f = {\sum}_{\alpha \in M} \lambda_\alpha (z_1 + x_n^{w_1})^{\alpha_1} \cdot \ldots \cdot (z_{n-1} + x_{n-1}^{w_{n-1}})^{\alpha_{n-1}} \cdot x_n^{\alpha_n},
     \]
-     auch schreiben als $f = \lambda_\beta \cdot x_n^{m} + \mu_1 \cdot x_n^{m - 1} + \ldots + \mu_{m}$, wobei $\beta \coloneqq \argmax_{ \alpha \in M} w(\alpha)$, $m \coloneqq w(\beta)$ und $\mu_i \in K[z_1, \ldots, z_{n-1}]$. \\
+     auch schreiben als $f = \lambda_\beta \cdot x_n^{m} + \mu_1 \cdot x_n^{m - 1} + \ldots + \mu_{m}$, wobei $\beta \coloneqq {\argmax}_{\alpha \in M} w(\alpha)$, $m \coloneqq w(\beta)$ und $\mu_i \in K[z_1, \ldots, z_{n-1}]$. \\
      Somit sind $x_n$ und alle weiteren $x_i$, also $A$, ganz über $A'[f]$.
      \item Setze $y_n \coloneqq f$.
      Die IH, angewendet auf $A' \coloneqq K[z_1, \ldots, z_{n-1}]$, liefert algebraisch unabhängige $y_1, \ldots, y_{n-1} \in A' \subset A$ mit $A'$ ganz über $B' \coloneqq K[y_1, \ldots, y_{n-1}]$ und $0 \leq r \leq n-1$ mit $B' \cap \aaa = (y_{r+1}, \ldots, y_{n-1})$.
@@ -2328,6 +2378,16 @@ Für $m=1$ folgt:
   Dann gibt es eine Kette $\qqq_1 \supsetneq \ldots \supsetneq \qqq_n$ von Primidealen in $B$ mit $A \cap \qqq_i = \ppp_i$ für $i = 1, \ldots, n$.
 \end{satz}
 
+Aus Going-Up und Going-Down folgt:
+
+\begin{lem}
+  Sei $A \subset B$ eine ganze Erweiterung von Integritätsbereichen und $A$ ganz abgeschlossen.
+  Sei $\qqq \subset B$ ein Primideal.
+  Sei $\ppp \coloneqq A \cap \qqq$.
+  Dann gilt \enspace
+  $\height \qqq = \height \ppp$ und $\depth \qqq = \depth \ppp$.
+\end{lem}
+
 \begin{prop}
   Sei $A$ ein ganz abgeschl. Integritätsbereich mit Quotienten- körper $K$.
   Sei $L \supseteq K$ eine endliche, separable Körpererweiterung und $B$ der ganze Abschluss von $A$ in $L$.
@@ -2374,10 +2434,13 @@ Für $m=1$ folgt:
 \end{kor}
 
 \begin{prop}
-  Sei $A \subseteq B$ eine endlich erzeugte Erweiterung von Integritätsbereichen.
+  Sei $A \subseteq B$ eine endlich erz. Erw. von Integritätsbereichen. \\
   Sei $v \in B \setminus \{ 0 \}$.
-  Dann existiert ein $u \in A \setminus \{ 0 \}$ mit folgender Eigenschaft:
-  Jeder Homomorphismus $\phi : A \to L$ in einen algebraisch abgeschlossenen Körper $L$ mit $\phi(u) \neq 0$ kann zu einem Homomorphismus $\psi : B \to L$ mit $\psi(v) \neq 0$ fortgesetzt werden.
+  Dann ex. ein $u \in A \setminus \{ 0 \}$ mit folgender Eigenschaft:
+  
+  \hfill\begin{minipage}{0.95 \linewidth}
+    Jeder Homomorphismus $\phi : A \to L$ in einen algebraisch abgeschlossenen Körper $L$ mit $\phi(u) \neq 0$ kann zu einem Homomorphismus $\psi : B \to L$ mit $\psi(v) \neq 0$ fortgesetzt werden.
+  \end{minipage}
 \end{prop}
 
 % TODO: definieren: endliche algebraische Erweiterung
@@ -2643,21 +2706,6 @@ Für $m=1$ folgt:
 \end{prop}
 
 % 33.2. Der Struktursatz für artinsche kommutative Ringe
-
-\begin{defn}
-  Sei $A$ ein komm. Ring.
-  Eine \emph{Primidealkette} der Länge~$n$ in~$A$ ist eine Kette $\ppp_0 \subsetneq \ppp_1 \subsetneq \ldots \subsetneq \ppp_n$ von Primidealen in $A$.
-\end{defn}
-
-\begin{defn}
-  Die \emph{Dimension} $\dim A \in \{ - \infty \} \cup \N$ eines komm. Ringes $A$ ist das Supremum über die Längen aller Primidealketten in $A$.
-\end{defn}
-
-\begin{bspe}
-  \inlineitem{$\dim A \geq 0 \iff A \neq 0$} \quad
-  \inlineitem{$\dim K = 0$} \quad
-  \inlineitem{$\dim \Z = 1$}
-\end{bspe}
 
 \begin{satz}
   Für einen kommutativen Ring $A \neq 0$ gilt:
@@ -3753,25 +3801,6 @@ Sei $\lambda$ eine $\Z$-wertige additive Funktion auf der Klasse aller endlich e
   Dann gilt $\deg \chi_\qqq^{M''} \leq \deg \chi_\qqq^M - 1$.
 \end{prop}
 
-% 45.2. Die Dimension noetherscher lokaler Ringe
-
-\begin{defn}
-  Sei~$A$ ein kommutativer Ring und $\ppp \subset A$ ein Primideal.
-  \begin{itemize}
-    \item Die \emph{Höhe}~$\height \ppp$ von~$\ppp$ ist das Supremum der Längen von Primidealketten der Form
-    $\ppp_0 \subsetneq \ppp_1 \subsetneq \ldots \subsetneq \ppp_r = \ppp$.
-    \item Die \emph{Tiefe}~$\depth \ppp$ von~$\ppp$ ist das Supremum der Längen von Primidealketten der Form
-    $\ppp = \ppp_0 \subsetneq \ppp_1 \subsetneq \ldots \subsetneq \ppp_r$.
-  \end{itemize}
-\end{defn}
-
-\begin{bem}
-  Es gilt \enspace
-  $\height \ppp = \dim A_\ppp$
-  \enspace und \enspace
-  $\depth \ppp = \dim A/\ppp$.
-\end{bem}
-
 % 45.3. Der Dimensionssatz
 
 \begin{satz}[\emph{Dimensionssatz}]
@@ -3896,16 +3925,6 @@ Sei $\lambda$ eine $\Z$-wertige additive Funktion auf der Klasse aller endlich e
 \begin{bsp}
   $\trdim_K K [X_1, \ldots, X_n] = \text{Transz'grad von } K (X_1, \ldots, X_n) = n$
 \end{bsp}
-
-% TODO: verschieben als Korollar von Going-up und Going-down?
-Aus Going-Up und Going-Down folgt:
-\begin{lem}
-  Sei $A \subset B$ eine ganze Erweiterung von Integritätsbereichen und $A$ ganz abgeschlossen.
-  Sei $\qqq \subset B$ ein Primideal.
-  Sei $\ppp \coloneqq A \cap \qqq$.
-  Dann gilt \enspace
-  $\height \qqq = \height \ppp$ und $\depth \qqq = \depth \ppp$.
-\end{lem}
 
 \begin{satz}
   Für alle maximalen Ideale $\mmm \subset A$ gilt:
