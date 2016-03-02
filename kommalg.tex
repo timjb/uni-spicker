@@ -78,7 +78,13 @@
 
 \begin{document}
 
+\raggedcolumns % stretche Inhalt nicht über die gesamte Spaltenhöhe
+
 \maketitle{Zusammenfassung Kommutative Algebra}
+
+Dies ist eine übersetzte Zusammenfassung des Buches "`Commutative Algebra"' von M.\,F.\,Atiyah und I.\,G.\,MacDonald.
+Sie entstand im Rahmen der gleichnamigen Vorlesung von Herr Prof. Dr. Marc Nieper-Wißkirchen an der Universität Augsburg im WS\,15/16.
+
 
 % I. Ringe und Ideale
 \section{Ringe und Ideale}
@@ -134,11 +140,16 @@
   Ein Ringhomomorphismus ist genau dann ein Isomorphismus (in dieser Kategorie), wenn er bijektiv ist.
 \end{lem}
 
+\begin{samepage}
+
 \begin{konv}
   Seien $A$ im Folgenden Ringe und $\phi : A \to B$ ein Ringhomomorphismus.
 \end{konv}
 
 % 2. Ideale und Quotientenringe
+\subsection{Ideale und Quotientenringe}
+
+\end{samepage}
 
 % 2.1. Ideale
 
@@ -242,12 +253,17 @@
   \]
 \end{prop}
 
+\begin{samepage}
+
 \begin{prop}[\emph{Homomorphiesatz}]
   Sei $\phi : A \to B$ ein Ringhomomor.
   Dann ist $\underline{\phi} : A / \ker(\phi) \to \im(\phi), \enspace [x] \mapsto \phi(x)$ ein Ringisomorphismus.
 \end{prop}
 
 % 3. Nullteiler, nilpotente Elemente und Einheiten
+\subsection{Nullteiler, nilpotente Elemente und Einheiten}
+
+\end{samepage}
 
 % 3.1. Integritätsbereiche
 
@@ -330,6 +346,8 @@ Im Folgenden seien alle Ringe \emph{kommutativ}, \dh{} $xy = yx$ f.\,a. $x, y$.
 
 % 3.4. Charakterisierung von Körpern
 
+\begin{samepage}
+
 \begin{prop}
   Sei $A$ ein kommutativer Ring.
   Dann sind äquivalent:
@@ -341,6 +359,9 @@ Im Folgenden seien alle Ringe \emph{kommutativ}, \dh{} $xy = yx$ f.\,a. $x, y$.
 \end{prop}
 
 % 4. Primideale und maximale Ideale
+\subsection{Primideale und maximale Ideale}
+
+\end{samepage}
 
 \begin{defn}
   \begin{itemize}
@@ -431,6 +452,7 @@ Im Folgenden seien alle Ringe \emph{kommutativ}, \dh{} $xy = yx$ f.\,a. $x, y$.
 \end{prop}
 
 % 5. Das Nil- und das Jacobsonsche Ideal
+\subsection{Das Nil- und das Jacobsonsche Ideal}
 
 % 5.1. Das Nilradikal
 
@@ -457,6 +479,7 @@ Im Folgenden seien alle Ringe \emph{kommutativ}, \dh{} $xy = yx$ f.\,a. $x, y$.
 \end{prop}
 
 % 6. Operationen mit Idealen
+\subsection{Operationen mit Idealen}
 
 % 6.1. Summe, Schnitt und Produkt von Idealen
 
@@ -627,6 +650,7 @@ Im Folgenden seien alle Ringe \emph{kommutativ}, \dh{} $xy = yx$ f.\,a. $x, y$.
 \end{lem}
 
 % 7. Erweiterungen und Kontraktionen von Idealen
+\subsection{Erweiterungen und Kontraktionen von Idealen}
 
 % 7.1. Kontraktionen
 
@@ -732,7 +756,7 @@ Im Folgenden seien alle Ringe \emph{kommutativ}, \dh{} $xy = yx$ f.\,a. $x, y$.
 \begin{bspe}
   \begin{itemize}
     \item Der Ring $A$ ist selbst ein $A$-Modul.
-    \item Jedes Ideal $\aaa \subseteq A$ ist (durch Einschränkung der Multiplikation) ein $A$-Modul.
+    \item Jedes Ideal $\aaa \subseteq A$ ist (durch Einschr. der Multiplik.) ein $A$-Modul.
     \item Ein $K$-Modul ($K$ ein Körper) ist dasselbe wie ein $K$-VR.
     \item Ein $\Z$-Modul ist dasselbe wie eine abelsche Gruppe.
     \item Ein $K[x]$-Modul ist dasselbe wie ein $K$-Vektorraum $V$ zusammen mit einem Endomorphismus $V \to V$.
@@ -746,7 +770,7 @@ Im Folgenden seien alle Ringe \emph{kommutativ}, \dh{} $xy = yx$ f.\,a. $x, y$.
 \end{bspe}
 
 \begin{defn}
-  Ein $A$-Modulhomomorphismus ist eine Abbildung $\phi : M \to N$ zwischen $A$-Moduln $M$ und $N$, welche ein Gruppenhomomorphismus $(M, +_M, 0_M) \to (N, +_N, 0_N)$ und verträglich mit der Wirkung des multiplikativen Monoids von $M$ und $N$ ist, \dh{} $\phi(ax) = a \phi(x)$ für alle $a \in A$ und $x \in M$.
+  Ein $A$-Modulhomomorphismus ist eine Abbildung $\phi : M \to N$ zwischen $A$-Moduln $M$ und $N$, welche ein Gruppenhomomorphismus $(M, +_M, 0_M) \to (N, +_N, 0_N)$ und verträglich mit der Wirkung des mult. Monoids von $M$ u. $N$ ist, \dh{} $\fa{a \!\in\! A, x \!\in\! M} \phi(ax) = a \phi(x)$.
 \end{defn}
 
 \begin{bem}
@@ -836,14 +860,14 @@ Im Folgenden seien alle Ringe \emph{kommutativ}, \dh{} $xy = yx$ f.\,a. $x, y$.
   Sei $M$ ein $A$-Modul.
   Die \emph{Summe} einer Familie $(M_i)_{i \in I}$ von Untermoduln von $M$ ist
   \[
-    \sum_{i \in I} M_i \coloneqq \Set{\sum_{i \in I} x_i}{x_i \in M_i}
+    {\sum}_{i \in I} M_i \coloneqq \Set{{\sum}_{i \in I} x_i}{x_i \in M_i}
   \]
   (Dabei ist $\sum_{i \in I} x_i$ endlich, \dh{} $x_i = 0$ für alle bis auf endl. viele $i \in I$.)
 \end{defn}
 
 \begin{prop}
   Sei $(M_i)_{i \in I}$ eine Familie von Untermoduln von $M$.
-  Dann ist auch der Schnitt $\bigcap_{i \in I} M_i$ ein Untermodul von~$M$.
+  Dann ist auch der Schnitt ${\bigcap}_{i \in I} M_i$ ein Untermodul von~$M$.
 \end{prop}
 
 \begin{bem}
@@ -1153,13 +1177,13 @@ Im Folgenden seien alle Ringe \emph{kommutativ}, \dh{} $xy = yx$ f.\,a. $x, y$.
 \end{prop}
 
 \begin{defn}
-  $M \otimes_A N$ heißt \emph{Tensorprodukt} von $M$ und $N$ über $A$.
+  $M \otimes_A N$ heißt \emph{Tensorprodukt} von $M$ und $N$ über~$A$.
 \end{defn}
 
 \begin{konstr}
   \begin{itemize}
     \item Sei $C$ der freie $A$-Modul $A^I$ mit $I \coloneqq M \times N$.
-    Elemente von $C$ haben die Form $\sum_{i=1}^n \lambda_i (x_i, y_i)$ mit $\lambda_i \in A$, $x_i \in M$, $y_i \in N$.
+    Elemente von $C$ haben die Form ${\sum}_{i=1}^n \lambda_i (x_i, y_i)$ mit $\lambda_i \!\in\! A$, $x_i \!\in\! M$, $y_i \!\in\! N$.
     \item Sei $D \subset C$ der von allen Elementen der Form
     \begin{align*}
       (x + x', y) - (x, y) - (x', y), \qquad
@@ -1177,7 +1201,7 @@ Im Folgenden seien alle Ringe \emph{kommutativ}, \dh{} $xy = yx$ f.\,a. $x, y$.
 \end{nota}
 
 \begin{bem}
-  Jedes Element in $M \otimes_A N$ lässt sich als $\sum_{i=1}^n x_i \otimes y_i$ mit $x_i \in M$, $y_i \in N$ schreiben.
+  Jedes Element in $M \otimes_A N$ lässt sich als ${\sum}_{i=1}^n x_i \otimes y_i$ mit $x_i \in M$, $y_i \in N$ schreiben.
   In $M \otimes_A N$ gelten folgende Rechenregeln:
   \begin{align*}
     & x \otimes (ay) = a (x \otimes y) = (ax) \otimes y \\
@@ -1187,15 +1211,13 @@ Im Folgenden seien alle Ringe \emph{kommutativ}, \dh{} $xy = yx$ f.\,a. $x, y$.
 
 % 14.4. Funktorialität des Tensorproduktes (vorgezogen)
 \begin{lem}
-  Das Tensorprodukt induziert einen Bifunktor
-  \[
-    \otimes_A : \LMod{A} \times \LMod{A} \to \LMod{A}.
-  \]
+  Tensorieren ist ein Bifunktor \enspace
+  $\otimes_A : (\LMod{A})^2 \to \LMod{A}$.
 \end{lem}
 
 \begin{lem}
-  Sei $A$ ein komm. Ring, $M$ und $N$ zwei $A$-Moduln, $x_i \in M$ und $y_i \in N$ mit $\sum_{i=1}^n x_i \otimes y_i = 0$ in $M \otimes_A N$.
-  Dann gibt es endlich erzeugte Untermoduln $M_0 \subseteq M$ und $N_0 \subseteq N$ mit $x_1, \ldots, x_n \in M_0$, $y_1, \ldots, y_n \in N_0$ und $\sum_{i=1}^n x_i \otimes y_i = 0$ in $M_0 \otimes_A N_0$
+  Sei $A$ ein komm. Ring, $M$ und $N$ zwei $A$-Moduln, $x_i \in M$ und $y_i \in N$ mit ${\sum}_{i=1}^n x_i \otimes y_i = 0$ in $M \otimes_A N$.
+  Dann gibt es endlich erzeugte Untermoduln $M_0 \subseteq M$ und $N_0 \subseteq N$ mit $x_1, \ldots, x_n \in M_0$, $y_1, \ldots, y_n \in N_0$ und ${\sum}_{i=1}^n x_i \otimes y_i = 0$ in $M_0 \otimes_A N_0$
 \end{lem}
 
 % 14.2. Multilineare Abbildungen und mehrfache Tensorprodukte
@@ -1233,7 +1255,7 @@ Im Folgenden seien alle Ringe \emph{kommutativ}, \dh{} $xy = yx$ f.\,a. $x, y$.
 
 \begin{defn}
   Seien $A$ und $B$ zwei komm. Ringe.
-  Ein $(A, B)$-Bimodul ist eine abelsche Gruppe, welche sowohl ein $A$- als auch ein $B$-Modul ist, sodass die Modulstrukturen miteinander verträglich sind, \dh{} für alle $a \in A$, $b \in B$ und $x \in N$ gilt $a (bx) = b (ax)$.
+  Ein $(A, B)$-\emph{Bimodul} ist eine abelsche Gruppe, welche sowohl ein $A$- als auch ein $B$-Modul ist, sodass die Modulstrukturen miteinander verträglich sind, \dh{} für alle $a \in A$, $b \in B$ und $x \in N$ gilt $a (bx) = b (ax)$.
 \end{defn}
 
 \begin{lem}
@@ -1312,8 +1334,8 @@ Im Folgenden seien alle Ringe \emph{kommutativ}, \dh{} $xy = yx$ f.\,a. $x, y$.
 % 16.3. Flachheit
 
 \begin{defn}
-  Sei $A$ ein kommutativer Ring.
-  Ein $A$-Modul $M$ heißt flach, falls $(\blank \otimes_A M)$ exakt ist, \dh{} falls für jede (lange) exakte Sequenz $E$ auch $E \otimes_A M$ exakt ist.
+  %Sei $A$ ein komm. Ring.
+  Ein $A$-Modul $M$ heißt \emph{flach}, falls $(\blank \otimes_A M)$ exakt ist, \dh{} falls für jede (lange) exakte Sequenz $E$ auch $E \otimes_A M$ exakt ist.
 \end{defn}
 
 \begin{prop}
@@ -1952,7 +1974,7 @@ Mit der Exaktheit der Lokalisierung folgt:
 \end{defn}
 
 \begin{defn}
-  Ein Ideal $\aaa \subseteq A$ heißt \emph{zerlegbar}, wenn es eine Primärzerlegung besitzt.
+  Ein Ideal heißt \emph{zerlegbar}, wenn es eine Primärzerlegung hat.
 \end{defn}
 
 % 23.2. Schnitte und Idealquotienten primärer Ideale
@@ -1970,9 +1992,9 @@ Mit der Exaktheit der Lokalisierung folgt:
   Sei $\ppp \subset A$ prim, $\qqq$ ein $\ppp$-primäres Ideal und $x \in A$.
   Dann gilt:
   \begin{itemize}
-    \item Ist $x \in \qqq$, so gilt $(\qqq : x) = (1)$.
+    \miniitem{0.5 \linewidth}{Ist $x \in \qqq$, so gilt $(\qqq : x) = (1)$.}
+    \miniitem{0.47 \linewidth}{Ist $x \not\in \ppp$, so ist $(\qqq : x) = \qqq$.}
     \item Ist $x \not\in \qqq$, so ist $(\qqq : x)$ ein $\ppp$-primäres Ideal.
-    \item Ist $x \not\in \ppp$, so ist $(\qqq : x) = \qqq$.
   \end{itemize}
 \end{lem}
 
@@ -2510,6 +2532,8 @@ Für $m=1$ folgt:
   \end{itemize}
 \end{prop}
 
+\begin{samepage}
+
 \begin{kor}
   Seien $\mmm_1, \ldots, \mmm_n$ maximale Ideale in einem kommutativen Ring mit $(0) = \mmm_1 \cdot \ldots \cdot \mmm_n$.
   Dann ist $A$ genau dann noethersch, wenn $A$ artinsch ist.
@@ -2517,6 +2541,8 @@ Für $m=1$ folgt:
 
 % VII. Noethersche Ringe
 \subsection{Noethersche Ringe}
+
+\end{samepage}
 
 % 31. Noethersche Ringe
 
@@ -2538,7 +2564,7 @@ Für $m=1$ folgt:
 \end{prop}
 
 \begin{bsp}
-  $\Z[i]$ ist noethersch als endl. Erw. von $\Z$
+  $\Z[i]$ ist noethersch als endliche Erweiterung von~$\Z$.
 \end{bsp}
 
 \begin{prop}
@@ -2646,11 +2672,11 @@ Für $m=1$ folgt:
 \end{bem}
 
 \begin{prop}
-  Sei $(A, \mmm)$ ein noetherscher lokaler Ring. \\
-  Dann tritt genau einer der folgenden Fälle ein:
+  Sei $(A, \mmm)$ ein noetherscher lokaler Ring.
+  Dann gilt \textit{entweder}
   \begin{itemize}
-    \item Für alle $n \in \N$ ist $\mmm^n \supsetneq m^{n+1}$.
-    \item Es ist $\mmm^n = (0)$ für ein $n \in \N$ und $A$ ist artinsch.
+    \item für alle $n \in \N$ ist $\mmm^n \supsetneq m^{n+1}$ \textit{oder}
+    \item es ist $\mmm^n = (0)$ für ein $n \in \N$ und $A$ ist artinsch.
   \end{itemize}
 \end{prop}
 
@@ -2673,9 +2699,9 @@ Für $m=1$ folgt:
 \begin{prop}
   Für einen artinschen lokalen Ring $(A, \mmm, F)$ sind äquivalent:
   \begin{itemize}
-    \item Jedes Ideal in $A$ ist ein Hauptideal (also $A$ ein HIB).
-    \item Das maximale Ideal $\mmm$ ist ein Hauptideal.
-    \item Es gilt $\dim_F \mmm / \mmm^2 \leq 1$.
+    \item Jedes Ideal in $A$ ist ein Hauptideal (also $A$ ein HIR).
+    \miniitem{0.63 \linewidth}{Das max. Ideal $\mmm$ ist ein Hauptideal.}
+    \miniitem{0.35 \linewidth}{Es gilt $\dim_F \mmm / \mmm^2 \leq 1$.}
   \end{itemize}
 \end{prop}
 
@@ -3213,7 +3239,7 @@ Sei $A$ ein Integritätsbereich mit Quotientenkörper~$K$.
   Sei $A$ ein Ring und $\aaa \subseteq A$ ein Ideal.
   Trage die additive Gruppe $A$ die durch die Umgebungsbasen $(1) \supset \aaa \supset \aaa^2 \supset \ldots$ von~$0$ definierte Topologie, die \emph{$\aaa$-adische Topologie}.
   Die Multiplikation ist bzgl. dieser Topologie stetig, also~$A$ ein topologischer Ring. \\
-  Dieser ist genau dann hausdorffsch, wenn $\bigcap_n \aaa^n = (0)$.
+  Dieser ist genau dann hausdorffsch, wenn ${\bigcap}_n \aaa^n = (0)$.
 \end{konstr}
 
 \begin{defn}
@@ -3260,7 +3286,7 @@ Sei $A$ ein Integritätsbereich mit Quotientenkörper~$K$.
 \end{bspe}
 
 \begin{defn}
-  Elemente des Quotientenkörpers~$\Q_p$ von~$\Z_p$ heißen \emph{$p$-adische Zahlen}.
+  Elemente von~$\Q_p \!\coloneqq\! (\Z_p \!\setminus\! \{ 0 \})^{-1} \Z_p$ heißen \emph{$p$-adische Zahlen}.
 \end{defn}
 
 % 40. Filtrationen
@@ -3595,6 +3621,8 @@ Sei $A$ ein Integritätsbereich mit Quotientenkörper~$K$.
 \begin{folgerung}
   Für jeden noetherschen komm. Ring~$A$ ist der Potenz- reihenring $A \llbracket X_1, \ldots, X_n \rrbracket$ als Vervollständigung von $A [X_1, \ldots, X_n]$ bzgl. der $(X_1, \ldots, X_n)$-adischen Topologie vollständig.
 \end{folgerung}
+
+\newpage
 
 % XI. Dimensionstheorie
 \section{Dimensionstheorie}
