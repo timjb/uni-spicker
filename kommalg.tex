@@ -94,7 +94,7 @@ Sie entstand im Rahmen der gleichnamigen Vorlesung von Herr Prof. Dr. Marc Niepe
 % 1.1. Ringe
 
 \begin{defn}
-  Ein Ring ist ein Tupel $(A, +, \cdot, 0, 1)$ mit einer Menge~$A$, Operationen $+, \cdot : A \times A \to A$ und Elementen $0, 1 \in A$, sodass
+  Ein \emph{Ring} ist ein Tupel $(A, +, \cdot, 0, 1)$ mit einer Menge~$A$, Operationen $+, \cdot : A \times A \to A$ und Elementen $0, 1 \in A$, sodass
   \begin{itemize}
     \item $(A, +, 0)$ eine abelsche Gruppe ist,
     \item $(A, \cdot, 1)$ ein Monoid ist und
@@ -129,7 +129,7 @@ Sie entstand im Rahmen der gleichnamigen Vorlesung von Herr Prof. Dr. Marc Niepe
 % 1.3. Ringhomomorphismen
 
 \begin{defn}
-  Ein \emph{Ringhomomorphismus} $\phi : A \to B$ ist eine Abbildung, welche sowohl ein Gruppenhomomor. $(A, +_A, 0_A) \to (B, +_B, 0_B)$ als auch ein Ringhomomorphismus $(A, \cdot_A, 1_A) \to (B, \cdot_B, 1_B)$ ist.
+  Ein \emph{Ringhomomorphismus} $\phi : A \to B$ ist eine Abbildung, welche sowohl ein Gruppenhomomor. $(A, +_A, 0_A) \to (B, +_B, 0_B)$ als auch ein Monoidhomomorphismus $(A, \cdot_A, 1_A) \to (B, \cdot_B, 1_B)$ ist.
 \end{defn}
 
 \begin{bem}
@@ -143,7 +143,7 @@ Sie entstand im Rahmen der gleichnamigen Vorlesung von Herr Prof. Dr. Marc Niepe
 \begin{samepage}
 
 \begin{konv}
-  Seien $A$ im Folgenden Ringe und $\phi : A \to B$ ein Ringhomomorphismus.
+  Seien im Folgenden~$A$ und~$B$ Ringe und $\phi : A \to B$ ein Ringhomomorphismus.
 \end{konv}
 
 % 2. Ideale und Quotientenringe
@@ -173,7 +173,7 @@ Sie entstand im Rahmen der gleichnamigen Vorlesung von Herr Prof. Dr. Marc Niepe
 \begin{bem}
   Falls $A$ kommutativ ist, so gilt
   \[
-    \text{von $M$ erzeugtes Ideal} = \Set{\sum_{k=1}^n \lambda_k x_k}{n \in \N, \lambda_k \in A, x_k \in M}.
+    \text{von $M$ erzeugtes Ideal} = \Set{{\sum}_{k=1}^n \lambda_k x_k}{n \in \N, \lambda_k \in A, x_k \in M}.
   \]
 \end{bem}
 
@@ -366,7 +366,7 @@ Im Folgenden seien alle Ringe \emph{kommutativ}, \dh{} $xy = yx$ f.\,a. $x, y$.
 \begin{defn}
   \begin{itemize}
     \item Ein Ideal $\ppp \subset A$ heißt \emph{Primideal}, falls $1 \not\in \ppp$ und $\fa{a, b \in A} ab \in \ppp \implies a \in \ppp \vee b \in \ppp$.
-    \item Ein Ideal $\mmm \subset A$ heißt \emph{maximal}, falls für jedes Ideal $\ppp \subseteq \aaa \subseteq A$ \textit{entweder} $\ppp = \aaa$ oder $\aaa = A$ (nicht beides!) gilt.
+    \item Ein Ideal $\mmm \subset A$ heißt \emph{maximal}, falls für jedes Ideal $\ppp \subseteq \aaa \subseteq A$ \textit{entweder} $\ppp = \aaa$ \textit{oder} $\aaa = A$ (nicht beides!) gilt.
   \end{itemize}
 \end{defn}
 
@@ -442,8 +442,12 @@ Im Folgenden seien alle Ringe \emph{kommutativ}, \dh{} $xy = yx$ f.\,a. $x, y$.
 \end{defn}
 
 \begin{lem}
-  Sei $\mmm \subset A$ ein Ideal mit $A \setminus \mmm = A^\times$.
-  Dann ist $(A, \mmm)$ ein lokaler Ring.
+  Sei $\mmm \subset A$ ein Ideal. Dann gilt:
+  \[
+    (A, \mmm) \text{ ist ein lokaler Ring}
+    \iff
+    A \setminus \mmm = A^\times.
+  \]
 \end{lem}
 
 \begin{prop}
@@ -1845,12 +1849,12 @@ Mit der Exaktheit der Lokalisierung folgt:
 % 21.3. Flachheit
 
 \begin{prop}
-  Sei~$A$ ein kommutativer Ring und $M$ ein $A$-Modul.
+  Sei~$A$ ein kommutativer Ring und $M$ ein $A$-Modul. \\
   Dann sind äquivalent:
   \begin{itemize}
     \item $M$ ist ein flacher $A$-Modul.
     \item $M_\ppp$ ist ein flacher $A_\ppp$-Modul für alle Primideale $\ppp \subset A$.
-    \item $M_\ppp$ ist ein flacher $A_\mmm$-Modul für alle max. Ideale $\mmm \subset A$.
+    \item $M_\mmm$ ist ein flacher $A_\mmm$-Modul für alle max. Ideale $\mmm \subset A$.
   \end{itemize}
 \end{prop}
 
@@ -2259,7 +2263,7 @@ Für $m=1$ folgt:
   Per Ind. über $n$. Der Fall $n=0$ ist trivial. Sei nun $n > 0$.
   \begin{itemize}
     \item Falls $\aaa = (0)$, so setze $y_1 = x_1$, \ldots, $y_n = x_n$ und $r \coloneqq n$.
-    \item Ansonsten wähle ein Polynom $f = \sum_{\alpha \in M} \lambda_\alpha x^\alpha \in \aaa \setminus \{ 0 \}$, wobei $M \subset \N^n$ endlich ist mit $\lambda_\alpha \in K^{\times}$ für alle $\alpha \in M$.
+    \item Ansonsten wähle ein Polynom $f = {\sum}_{\alpha \in M} \lambda_\alpha x^\alpha \in \aaa \setminus \{ 0 \}$, wobei $M \subset \N^n$ endlich ist mit $\lambda_\alpha \in K^{\times}$ für alle $\alpha \in M$.
     \item Wähle $w_1, \ldots, w_{n-1} \in \N$ und $w_n \coloneqq 1$, sodass die Abbildung
     \[
       w : M \to \N, \quad
@@ -2402,7 +2406,7 @@ Aus Going-Up und Going-Down folgt:
 % 28.1. Definition und erste Eigenschaften von Bewertungsringen
 
 \begin{defn}
-  Ein Integritätsbereich $B$ mit Quotientenkörper $K$ heißt \emph{Bewertungsbereich} für $K$, falls gilt: $\fa{x \in K^{\times}} x \in B \vee x^{-1} \in B$.
+  Ein Integritätsbereich $B$ mit Quotientenkörper $K$ heißt \emph{Bewertungsring} für $K$, falls gilt: $\fa{x \in K^{\times}} x \in B \vee x^{-1} \in B$.
 \end{defn}
 
 \begin{prop}
@@ -2492,7 +2496,7 @@ Aus Going-Up und Going-Down folgt:
 
 \begin{prop}
   Sei $A$ ein Ring.
-  Ein $A$-Modul $M$ ist genau dann noethersch, wenn alle seine Untermodule endlich erzeugt sind.
+  Ein $A$-Modul $M$ ist genau dann noethersch, wenn alle seine Untermoduln endlich erzeugt sind.
 \end{prop}
 
 \begin{prop}
@@ -2859,7 +2863,7 @@ Aus Going-Up und Going-Down folgt:
   \begin{itemize}
     \item $A$ ist ganz abgeschlossen.
     \item Jedes Primärideal in $A$ ist Potenz eines Primideals.
-    \item Für jedes Primideal $\ppp \neq (0)$ ist $A_\ppp$ ein diskr. Bewertungsbereich.
+    \item Für jedes Primideal $\ppp \neq (0)$ ist $A_\ppp$ ein diskr. Bewertungsring.
   \end{itemize}
 \end{lemdefn}
 
