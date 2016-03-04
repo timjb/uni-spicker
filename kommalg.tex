@@ -466,7 +466,7 @@ Im Folgenden seien alle Ringe \emph{kommutativ}, \dh{} $xy = yx$ f.\,a. $x, y$.
 
 % vorgezogen aus Kapitel 33.2.
 \begin{defn}
-  Die \emph{Dimension} $\dim A \in \{ - \infty \} \cup \N$ eines komm. Ringes $A$ ist das Supremum über die Längen aller Primidealketten in $A$.
+  Die \emph{Dimension} $\dim A \in \{ \pm \infty \} \cup \N$ eines komm. Ringes $A$ ist das Supremum über die Längen aller Primidealketten in $A$.
 \end{defn}
 
 % vorgezogen aus Kapitel 33.2.
@@ -996,7 +996,7 @@ Im Folgenden seien alle Ringe \emph{kommutativ}, \dh{} $xy = yx$ f.\,a. $x, y$.
 \end{defn}
 
 \begin{bem}
-  Ein $A$-Modul $M$ ist ganau dann endlich erzeugt, wenn ein $n \in \N$ und ein surj. $A$-Modulhomomorphismus $\phi : A^n \to M$ existiert.
+  Ein $A$-Modul $M$ ist genau dann endlich erzeugt, wenn ein $n \in \N$ und ein surj. $A$-Modulhomomorphismus $\phi : A^n \to M$ existiert.
 \end{bem}
 
 % 11. Direkte Summen und Produkte
@@ -1704,7 +1704,7 @@ Im Folgenden seien alle Ringe \emph{kommutativ}, \dh{} $xy = yx$ f.\,a. $x, y$.
 \begin{defn}
   Sei $A$ ein komm. Ring, $f \in A$.
   Dann ist $S \coloneqq \Set{f^n}{n \geq 0}$ mult. abgeschlossen.
-  Die Lokalisierung $A[f^{-1}] \coloneqq S^{-1} A$ heißt \emph{Lokalisierung} von $A$ \emph{außerhalb} von $f$.
+  Die Lokalisierung $A[f^{-1}] \coloneqq S^{-1} A$ heißt \emph{Lokalisierung} von $A$ \textit{außerhalb} von $f$.
 \end{defn}
 
 % 20.4. Lokalisierung von Moduln
@@ -1941,7 +1941,7 @@ Mit der Exaktheit der Lokalisierung folgt:
 
 \begin{defn}
   Sei $A$ ein komm. Ring und $\ppp \subset A$ ein Primideal.
-  Der Körper $A(\ppp) \coloneqq A_\ppp / (A_\ppp \qqq) = (A/\qqq)_\ppp$ heißt \emph{Restklassenkörper} von~$A$ an~$\ppp$.
+  Der Körper $A(\ppp) \coloneqq A_\ppp / (A_\ppp \ppp) = (A/\ppp)_\ppp$ heißt \emph{Restklassenkörper} von~$A$ an~$\ppp$.
 \end{defn}
 
 \begin{prop}
@@ -2145,7 +2145,7 @@ Mit der Exaktheit der Lokalisierung folgt:
   Sei $\aaa \subseteq A$ ein Ideal mit minimaler Primärzerlegung $\aaa = \qqq_1 \cap \ldots \cap \qqq_n$. \\
   Sei $\ppp_i = \sqrt{\qqq_i}$.
   Seien die $\qqq_i$ so sortiert, dass ein $m$ existiert mit $S \cap \ppp_i = \emptyset \iff i \leq m$.
-  Dann sind $S^{-1} \aaa = S^{-1} \qqq_1 \cap \ldots \cap S^{-1} \qqq_m$ und $S(\aaa) = \qqq_1 \cap \ldots \cap \qqq_n$ minimale Primärzerlegungen.
+  Dann sind $S^{-1} \aaa = S^{-1} \qqq_1 \cap \ldots \cap S^{-1} \qqq_m$ und $S(\aaa) = \qqq_1 \cap \ldots \cap \qqq_m$ minimale Primärzerlegungen.
 \end{prop}
 
 \begin{defn}
@@ -3045,13 +3045,13 @@ Sei $A$ ein Integritätsbereich mit Quotientenkörper~$K$.
 \end{bem}
 
 \begin{lem}
-  Sei $G$ eine topologische Gruppe und $H$ der Schnitt aller (offenen) Umgebungen~$U$ von~$0$.
+  Sei $G$ eine topologische Gruppe und $H$ der Schnitt aller (offenen) Umgebungen~$U$ von~$e$.
   Dann gilt:
   \begin{itemize}
     \miniitem{0.4 \linewidth}{$H = \clos{\{ e \}}$}
     \miniitem{0.55 \linewidth}{$H \subseteq G$ ist ein Normalteiler in $G$.}
     \miniitem{0.4 \linewidth}{$G/H$ ist hausdorffsch.}
-    \miniitem{0.55 \linewidth}{$G$ ist hausdorfsch $\iff$ $H = \{ e \}$}
+    \miniitem{0.55 \linewidth}{$G$ ist hausdorffsch $\iff$ $H = \{ e \}$}
   \end{itemize}
 \end{lem}
 
@@ -3237,7 +3237,7 @@ Sei $A$ ein Integritätsbereich mit Quotientenkörper~$K$.
   \begin{itemize}
     \item Setze $A_n \coloneqq G/G_n$.
     Dann ist $A_\bullet$ mit den kanon. Abbildungen $A_n = G / G_n \thra G / G_{n-1} = A_{n-1}$ ein inv. System topol. Gruppen.
-    \item Für jede Cauchyfolge $(\xi_n)_{n \in \N}$ in~$G$ und~$k \in \N$ gibt es ein $N_k \in \N$, sodass $\xi_N = \xi_{N+1} = \xi_{N+2} = \ldots (\bmod{G_k})$.
+    \item Für jede Cauchyfolge $(\xi_n)_{n \in \N}$ in~$G$ und~$k \in \N$ gibt es ein $N_k \in \N$, sodass $\xi_{N_k} = \xi_{N_k+1} = \xi_{N_k+2} = \ldots \pmod{G_k}$.
     \item Die Abbildung
     \[
       \hat{G} \to {\varprojlim}_{n} A_n, \quad
@@ -3263,7 +3263,7 @@ Sei $A$ ein Integritätsbereich mit Quotientenkörper~$K$.
 
 \begin{kor}
   Sei $G$ eine abelsche topologische Gruppe und $G_0 \supset G_1 \supset \ldots$ eine Umgebungsbasis von~$0$ aus Untergruppen.
-  Für jedes~$n$ induziert dann $\phi : G \to \hat{G}$ einen Isomorphismus $G/\hat{G}_n \to \hat{G} / \hat{G}_n$.
+  Für jedes~$n$ induziert dann $\phi : G \to \hat{G}$ einen Isomorphismus $G / G_n \to \hat{G} / \hat{G}_n$.
 \end{kor}
 
 \begin{defn}
@@ -3438,7 +3438,7 @@ Sei $A$ ein Integritätsbereich mit Quotientenkörper~$K$.
 % TODO: Entsprechende Kategorie definieren
 
 \begin{prop}
-  Ein komm. gewichteter Ring ist genau dann noethersch, wenn $A_0$ noethersch ist und~$A$ als $A$-Algebra endlich erzeugt ist.
+  Ein komm. gewichteter Ring ist genau dann noethersch, wenn $A_0$ noethersch ist und~$A$ als $A_0$-Algebra endlich erzeugt ist.
 \end{prop}
 
 % 41.2. Reesche Ringe und Moduln
@@ -3480,14 +3480,14 @@ Sei $A$ ein Integritätsbereich mit Quotientenkörper~$K$.
 
 % 41.3. Das Artin-Reesche Lemma
 
-\begin{prop}[Artin-Reesches Lemma]
+\begin{lem}[\emph{Artin-Reesch}]
   Sei~$A$ kommutativ, noethersch und $M$ endlich erzeugt.
   Für jeden Untermodul~$M'$ von~$M$ ist dann
   \[
     M' \cap M_\bullet : M' \cap M_0 \supseteq M' \cap M_1 \supseteq \ldots
   \]
    eine stabile $\aaa$-Filtration von~$M'$.
-\end{prop}
+\end{lem}
 
 \begin{kor}
   Für jeden Untermodul $M' \subseteq M$ gibt es ein $n_0 \in \N$ mit
@@ -3526,7 +3526,7 @@ Sei $A$ ein Integritätsbereich mit Quotientenkörper~$K$.
 \begin{prop}
   Sei $A$ kommutativ, $\aaa \subseteq A$ ein Ideal.
   Ist~$M$ ein endlich erzeugter $A$-Modul, so ist die Abbildung $M_{\hat{A}_\aaa} \to \hat{M}_\aaa$ surjektiv. \\
-  Ist~$A$ noethersch, so ist die Abbildung sogar ein Isomorphismus.
+  Ist zus.~$A$ noethersch, so ist die Abb. sogar ein Isomorphismus.
 \end{prop}
 
 \begin{prop}
