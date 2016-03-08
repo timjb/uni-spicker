@@ -2552,7 +2552,7 @@ Aus Going-Up und Going-Down folgt:
   Sei $A$ ein Ring und $M$ ein $A$-Modul.
   \begin{itemize}
     \item Eine \emph{Untermodulkette} von $M$ der Länge $n$ ist eine Kette von Untermoduln der Form $M_\bullet : M = M_0 \supsetneq M_1 \supsetneq \ldots \supsetneq M_n = 0$.
-    \item $M$ heißt \emph{einfach}, falls $M$ nur $0$ und $M$ als Untermoduln besitzt.
+    \item $M$ heißt \emph{einfach}, falls er genau zwei Untermoduln besitzt (also $0$ und $M$ selbst).
     \item Eine Untermodulkette heißt \emph{Kompositionsreihe}, wenn die Quotienten $M_i/M_{i+1}$ jeweils einfach sind.
     \item Die \emph{Länge} $\len(M) \in \N \cup \{ \infty \}$ von $M$ ist das Infimum aller Längen von Kompositionsreihen von $M$.
   \end{itemize}
@@ -3438,7 +3438,7 @@ Sei $A$ ein Integritätsbereich mit Quotientenkörper~$K$.
 % TODO: Entsprechende Kategorie definieren
 
 \begin{prop}
-  Ein komm. gewichteter Ring ist genau dann noethersch, wenn $A_0$ noethersch ist und~$A$ als $A_0$-Algebra endlich erzeugt ist.
+  Ein komm. gewichteter Ring~$A$ ist genau dann noethersch, wenn $A_0$ noethersch ist und~$A$ als $A_0$-Algebra endlich erzeugt ist.
 \end{prop}
 
 % 41.2. Reessche Ringe und Moduln
@@ -3503,7 +3503,7 @@ Sei $A$ ein Integritätsbereich mit Quotientenkörper~$K$.
   \begin{align*}
     & M' \supseteq \aaa M' \supseteq \aaa^2 M' \supseteq \ldots
     \enspace \text{und} \enspace
-    M' \supseteq (\aaa M) \cap M' \cap (\aaa^2 M) \cap M' \supseteq \ldots
+    M' \supseteq (\aaa M) \cap M' \subseteq (\aaa^2 M) \cap M' \supseteq \ldots
   \end{align*}
   beschränkte Differenz.
 \end{kor}
@@ -3543,7 +3543,7 @@ Sei $A$ ein Integritätsbereich mit Quotientenkörper~$K$.
     \miniitem{0.35 \linewidth}{$\hat{\aaa}_\aaa = \hat{A}_\aaa \aaa \cong \aaa_{\hat{A}_\aaa}$}
     \miniitem{0.25 \linewidth}{$\widehat{\aaa^n}_\aaa = \hat{\aaa}^n_\aaa$}
     \miniitem{0.35 \linewidth}{$\aaa^n / \aaa^{n+1} \cong \hat{\aaa}_\aaa^n / \hat{\aaa}_\aaa^{n+1}$}
-    \item $\widehat{\aaa}_\aaa$ liegt im Jacobsonschen Radikal von~$\hat{A}_\aaa$.
+    \item $\widehat{\aaa}_\aaa$ liegt im Jacobsonschen Radikal von~$\hat{A}_\aaa$, falls $\aaa \neq (1)$.
   \end{itemize}
 \end{prop}
 
@@ -3843,7 +3843,7 @@ Sei $\lambda$ eine $\Z$-wertige additive Funktion auf der Klasse aller endlich e
 \end{kor}
 
 \begin{kor}
-  Sei~$(A, \mmm)$ ein lokaler noetherscher Ring und $\hat{A}$ seien $\mmm$-adische Vervollständigung.
+  Sei~$(A, \mmm)$ ein lokaler noetherscher Ring und $\hat{A}$ seine $\mmm$-adische Vervollständigung.
   Dann gilt $\dim \hat{A} = \dim A$.
 \end{kor}
 
