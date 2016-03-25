@@ -1297,10 +1297,10 @@
 \end{defn}
 
 \begin{defn}
-  Das \emph{Tensorprodukt} zweier Kettenkomplexe $(C_*, \partial^C_*)$ und $(D_*, \partial^D_*)$ ist definiert durch
+  Das \emph{Tensorprodukt}~$(C_* \otimes D_*, \partial^{C \otimes C'}_*)$ zweier Kettenkomplexe $(C_*, \partial^C_*)$ und $(D_*, \partial^D_*)$ ist definiert durch
   \begin{align*}
     (C \otimes D)_n & \coloneqq \bigoplus_{k+l=n} C_k \otimes D_l, \\
-    \delta^{C \otimes C'}_n & \coloneqq \bigoplus_{k+l=n} (\partial^C_k \otimes \id_{D_l} + (-1)^k \id_{C_k} \oplus \partial^D_l)
+    \partial^{C \otimes C'}_n & \coloneqq \bigoplus_{k+l=n} (\partial^C_k \otimes \id_{D_l} + (-1)^k \id_{C_k} \oplus \partial^D_l)
   \end{align*}
 \end{defn}
 
@@ -1374,8 +1374,8 @@
 
 \begin{bsp}[Homologie von wichtigen Räumen]
   \begin{align*}
-    H_i(S^n) \cong H_i(\R^n|\{0\}) & = \begin{cases}
-      \Z, & \text{wenn $i=0,n$} \\
+    \RH_i(S^n) \cong H_i(\R^n|\{0\}) & = \begin{cases}
+      \Z, & \text{wenn $i=n$} \\
       0, & \text{sonst}
     \end{cases} \\
     H_i(\R P^n) & = \begin{cases}
