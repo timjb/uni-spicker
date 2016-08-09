@@ -22,9 +22,11 @@
 
 \begin{document}
 
+\raggedcolumns % stretche Inhalt nicht über die gesamte Spaltenhöhe
+
 \maketitle{Zusammenfassung Platzeffiziente Alg.}
 
-Basierend auf dem Skript zur gleichnamigen Vorlesung von Torben Hagerup an der Universität Augsburg im WS15/16.
+Basierend auf dem Skript zur gleichnamigen Vorlesung von Prof. Dr. Torben Hagerup an der Universität Augsburg im WS15/16.
 
 % Vorlesung vom 14.10.2015
 
@@ -35,15 +37,18 @@ Basierend auf dem Skript zur gleichnamigen Vorlesung von Torben Hagerup an der U
 \end{ziel}
 
 % 2. Reachability
+\section{Erreichbarkeit in Graphen}
 
-\begin{prob}[Erreichbarkeit]
+\begin{prob}[\emph{Erreichbarkeit}]
   Gegeben sei ein gerichteter oder ungerichteter Graph, ein Startknoten und ein Zielknoten darin. \\
   Frage: Ist der Zielknoten vom Startknoten erreichbar?
 \end{prob}
 
+\iffalse
 \begin{alg}
-  Algorithmen, mit denen man Problem lösen kann, sind Breiten- und Tiefensuche.
+  Algorithmen, mit denen man das Erreichbarkeits-Problem lösen kann, sind Breiten- und Tiefensuche.
 \end{alg}
+\fi
 
 % 2.1. Depth-First-Search and Recursion
 
@@ -70,7 +75,6 @@ Basierend auf dem Skript zur gleichnamigen Vorlesung von Torben Hagerup an der U
       \EndFor
       \State \Return false
     \EndFunction
-    \Statex
     \State \Return sReachable(s,t,n-1)
   \end{algorithmic}
 %\end{algorithm}
@@ -78,16 +82,21 @@ Basierend auf dem Skript zur gleichnamigen Vorlesung von Torben Hagerup an der U
 
 % Thm 2.1
 \begin{lem}
-  Savitch's Algorithmus löst das Erreichbarkeits-Problem in $\O((\log n)^2)$ Speicherplatz.
+  Savitch's Alg. löst Erreichbarkeit mit $\O((\log n)^2)$ Bits.
 \end{lem}
 
+\begin{samepage}
+
 \begin{bem}
-  Die Laufzeit von Savitch's Alg. ist allerdings sehr schlecht, im schlechtesten Fall $n^{\Theta(\log n)}$.
+  Die Laufzeit von Savitch's Alg. ist allerdings sehr schlecht, im schlechtesten Fall (\zB{} bei einer verketteten Liste) $n^{\Theta(\log n)}$.
 \end{bem}
 
 % Vorlesung vom 21.10.2015
 
 % §3. The Representation of Graphs
+\section{Die Repräsentation von Graphen}
+
+\end{samepage}
 
 % 3.1. Adjacency Matrices and Adjacency Lists
 % und 3.2. Graph Representation with Little Memory
@@ -121,6 +130,7 @@ Basierend auf dem Skript zur gleichnamigen Vorlesung von Torben Hagerup an der U
 \end{konv}
 
 % §4. Depth-First search
+\section{Tiefensuche}
 
 \begin{alg}
   Bei einer Tiefensuche in einem Graphen wird am meisten Platz für den Laufzeitstack verbraucht. Um diesen Platz zu optimieren, ist es geschickt, zunächst den Algorithmus mit explizitem Keller aufzuschreiben:
@@ -180,17 +190,32 @@ Basierend auf dem Skript zur gleichnamigen Vorlesung von Torben Hagerup an der U
   Wir behalten nicht bloß die obersten beiden Segmente von $S$ auf dem Stack $S'$, sondern auch zusätzlich von jedem Segment den obersten Knoten, den \textit{Trailer}.
   Wir starten die Rekonstruktion nicht beim Startknoten, sondern beim Trailer des Segments unter dem Segment, das wir rekonstruieren wollen.
   Vor dem Rekonstruieren löschen wir die Farben nicht, da dies zu viel Laufzeit kosten würde.
-  Während des Rekonstruierens müssen wir für jeden graue Knoten wissen, ob er weiter unten im Stack liegt, oder ob wir ihn rekonstruieren müssen.
-  Dazu verwenden wir $\O(\nicefrac{n}{q}) = \O(\log n)$ Grautöne, einen für jede Segmenttiefe, wobei tiefere Segmente dunklere Grautöne bekommen.
-  Zum Speichern der Grautöne für jeden Knoten benötigen wir $\O(n \log \log n)$ Bits.
-  Damit wir beim Rekonstruieren die Adjazenzlisten der Knoten nicht wiederholt durchlaufen müssen, speichern wir für jeden Knoten (annähernd), wie weit wir in der Liste schon fortgeschritten sind.
-  Genauer speichern wir die exakte Position für Knoten mit $\geq \nicefrac{m}{q}$ ausgehenden Kanten.
-  Falls ein Knoten weniger ausgehende Kanten besitzt, so speichern wir nur eine Approximation $\O(\log \log n)$ Bits.
 \end{alg}
 
+\begin{samepage}
+
+% sollte eigentlich Teil der Algorithmus-Umgebung sein, ich habe aber leider nicht rausfinden können, wie man Spalten-Umbrüche innerhalb einer solchen Umgebung zulässt
+Während des Rekonstruierens müssen wir für jeden grauen Knoten wissen, ob er weiter unten im Stack liegt, oder ob wir ihn rekonstruieren müssen.
+Dazu verwenden wir $\O(\nicefrac{n}{q}) = \O(\log n)$ Grautöne, einen für jede Segmenttiefe, wobei tiefere Segmente dunklere Grautöne bekommen.
+Zum Speichern der Grautöne von allen Knoten benötigen wir $\O(n \log \log n)$ Bits.
+
+Damit wir beim Rekonstruieren die Adjazenzlisten der Knoten nicht wiederholt durchlaufen müssen, speichern wir für jeden Knoten (annähernd), wie weit wir in der Liste schon fortgeschritten sind.
+Genauer speichern wir die exakte Position für Knoten mit $\geq \nicefrac{m}{q}$ ausgehenden Kanten.
+Falls ein Knoten~$u$ weniger ausgehende Kanten besitzt, so speichern wir nur die $\O(\log \log n)$-Bit-Approximation
+\[
+  f_u \coloneqq \floor{\tfrac{k-1}{g_u}}, \quad
+  \text{mit} \quad
+  g_u \coloneqq \ceil{\tfrac{\deg(u)}{\ell}}, \enspace
+  \ell \coloneqq \Theta(\log n).
+\]
+
 % §5. Applications of DFS
+\section{Anwendungen von Tiefensuche}
+
+\end{samepage}
 
 % §5.1 Topological Sorting
+\subsection{Topologisches Sortieren}
 
 \begin{alg}[Topologisches Sortieren eines azyklischen Graphen]
   Führe eine Tiefensuche durch.
@@ -224,8 +249,8 @@ Basierend auf dem Skript zur gleichnamigen Vorlesung von Torben Hagerup an der U
 
 % 5.1
 \begin{lem}
-  Sei $G$ ein gerichteter Graph mit $n$ Knoten und $m$ Kanten.
-  Eine umgekehrte Folge von (symbolischen Repräsentationen von) Hauptaufrufen während einer Tiefensuche von $G$ kann mit $\O(n \log \log n)$ Bits an Speicher und in
+  Sei $G$ ein gericht. Graph mit $n$ Knoten und $m$ Kanten. \\
+  Ein Stream der Hauptaufrufe bei einer Tiefensuche von~$G$ in umge- kehrter Reihenfolge kann mit $\O(n \log \log n)$ Bits an Speicher und in
   \[
     \begin{cases}
       \O((n+m) \log n) & \text{falls $G$ mit Adjazenzlisten repräsentiert wird,} \\
@@ -251,6 +276,7 @@ Basierend auf dem Skript zur gleichnamigen Vorlesung von Torben Hagerup an der U
 \end{kor}
 
 % §5.2 Computing Strongly Connected Components
+\subsection{Starke Zusammenhangskomponenten}
 
 % TODO
 
@@ -279,10 +305,11 @@ Basierend auf dem Skript zur gleichnamigen Vorlesung von Torben Hagerup an der U
 \end{folgerung}
 
 % §6. Connected Components and BFS
+\section{Zshgskomponenten und Breitensuche}
 
 % TODO
 \begin{bem}
-  Die Zshgskomponenten eines ungerichteten Graphen können mit Tiefensuche berechnet werden.
+  Die Zshgskomponenten eines ungerichteten Graphen kann mit Tiefensuche berechnet werden.
   Mit anderen Explorierungs- strategien sind jedoch effizientere Algorithmen möglich.
 \end{bem}
 
@@ -317,6 +344,7 @@ Basierend auf dem Skript zur gleichnamigen Vorlesung von Torben Hagerup an der U
 \end{bem}
 
 % 6.1 Choice dictionaries
+\subsection{Choice Dictionaries}
 
 \begin{defn}
   Ein \emph{Choice Dictionary} der Größe $n$ ist eine Datenstruktur, welche eine (initial leere) Teilmenge $I \subset [n] \coloneqq \{ 1, \ldots, n \}$ verwaltet und folgende Operationen unterstützt:
@@ -332,7 +360,7 @@ Basierend auf dem Skript zur gleichnamigen Vorlesung von Torben Hagerup an der U
 \end{defn}
 
 \begin{lem}[CD\textsubscript{1}]
-  Man kann ein Choice-Dictionary der Größe $n$, welches die ersten vier Operationen in konstanter Zeit und $\Call{allIds}{}$ in $\O(\abs{I} + 1)$ unterstützt, mit $n \cdot (1 + 2 \cdot \ceil{\log_2 n})$ Bits realisieren.
+  Man kann ein Choice-Dictionary der Größe $n$, welches die ersten vier Operationen in konstanter Zeit und $\Call{allIds}{}$ in Zeit $\O(\abs{I} + 1)$ unterstützt, mit $n \cdot (1 + 2 \cdot \ceil{\log_2 n})$ Bits realisieren.
 \end{lem}
 
 \begin{proof}
@@ -341,10 +369,14 @@ Basierend auf dem Skript zur gleichnamigen Vorlesung von Torben Hagerup an der U
   %Das Array~$A$ verwenden wir als Liste von Elementen aus $I$
   In~$A$ sind die ersten~$k$ Einträge beliebige Elemente aus~$I$.
   Das Array~$B$ wird verwendet, um für jedes $i \in [n]$ zu merken, an welcher Stelle es in~$A$ vorkommt (falls überhaupt $i \in I$ gilt).
-  In anderen Worten:
+  Anders ausgedrückt:
   \[
     \fa{i \in I} A[B[i]] = i, \quad
     \fa{0 \leq j < k = \abs{I}} B[A[j]] = j.
+  \]
+  Folgende Invariante ermöglicht zu prüfen, ob $i \in I$:
+  \[
+    \fa{i \in [n]} \quad i \in I \iff 0 \leq B[i] < k \wedge A[B[i]] = i.
     \qedhere
   \]
 \end{proof}
@@ -360,7 +392,7 @@ Basierend auf dem Skript zur gleichnamigen Vorlesung von Torben Hagerup an der U
     \item $f$ in polynomieller Zeit in $m$ auf binär repräsentierten Elementen von $A$ ausgewertet werden kann,
     \item die Werte von $f$ polynomiell in $m$ viel Platz benötigen.
   \end{itemize}
-  Dann kann eine Lookup-Table in $\sqrt{n} (\log_n 2)^C$ Zeit berechnet und in $\sqrt{n} (\log_n 2)^D$ Bit gespeichert werden. \\
+  Dann kann eine Lookup-Table in $\sqrt{n} (\log_2 n)^C$ Zeit berechnet und in $\sqrt{n} (\log_2 n)^D$ Bit gespeichert werden. \\
   Durch Verwendung dieser Technik kann man Funktionen mit kleinen Argumenten als in konstanter Zeit auswertbar betrachten.
 \end{technik}
 
@@ -400,10 +432,17 @@ Basierend auf dem Skript zur gleichnamigen Vorlesung von Torben Hagerup an der U
 
 % 6.4
 \begin{kor}
-  Man kann die Zshgskomponenten eines ungerichteten Graphen in Zeit $\O(n + m)$ mit $n + \O(\nicefrac{n}{\log n})$ Bits berechnen.
+  Man kann die Zshgskomponenten eines ungerichteten Graphen in Zeit $\O(n + m)$ mit $2 n + \O(\nicefrac{n}{\log n})$ Bits berechnen.
 \end{kor}
 
+\begin{bem}
+  Man benötigt sogar nur $c n + \O(1)$ Bits für belieb. $c > \log_2 3$.
+\end{bem}
+
 % Vorlesung vom 25.11.2015
+
+% §6.2. A Lower Bound for Choice Dictionaries
+\subsection{Eine untere Schranke für Choice Dictionaries}
 
 \begin{defn}
   Ein Choice-Dictionary $D$ heißt \emph{systematisch}, falls es (nach der Initialisierung von $D$) $n$ von $D$ verwaltete Bits $z_1, \ldots, z_n$ gibt, sodass $z_i = 1 \iff i \in I$ für alle $i = 1, \ldots, n$ ab dem ersten Schreiben von $z_i$ durch $D$ gilt.
@@ -419,14 +458,14 @@ Basierend auf dem Skript zur gleichnamigen Vorlesung von Torben Hagerup an der U
 \end{defn}
 
 \begin{nota}
-  $N(d, r, s) \coloneqq$ maximale Anzahl Blätter eines $(d, r, s)$-Baums
+  $N(d, r, s) \coloneqq$ max. Anzahl Blätter eines $(d, r, s)$-Baums
 \end{nota}
 
 \begin{lem}
   $N(d, r, s) =$
   \[
     \begin{cases}
-      0 & \text{wenn $d < 0 \vee r < 0 \vee s < 0$,} \\
+      0 & \text{wenn $\min \{ d, r, s \} < 0$,} \\
       1 & \text{wenn $d = 0$ und $r, s \geq 0$,} \\
       \max \left\{
         \begin{array}{l}
@@ -459,7 +498,8 @@ Basierend auf dem Skript zur gleichnamigen Vorlesung von Torben Hagerup an der U
 
 % Vorlesung vom 2.12.2015
 
-% Breadth-First-Search
+% §6.3. Breadth-First-Search
+\subsection{Breitensuche}
 
 \begin{defn}
   Sei ein Graph gegeben.
