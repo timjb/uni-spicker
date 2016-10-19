@@ -8,6 +8,8 @@
 \usepackage{tikz}
 \usetikzlibrary{matrix,shapes,arrows,positioning}
 
+\usepackage{nicefrac}
+
 \newcommand{\Tau}{\mathcal{T}} % Großes Tau
 \newcommand{\angles}[1]{\langle #1 \rangle}
 \renewcommand{\O}{\mathcal{O}} % Offene Mengen im $\R^n$
@@ -43,9 +45,14 @@
 \maketitle{Kurzfassung Riemannsche Geometrie}
 
 % §1. Mannigfaltigkeiten
+\section{Mannigfaltigkeiten}
+
+\begin{konv}
+  $U_p$~ist eine Umgebung von~$p$.
+\end{konv}
 
 \begin{defn}
-  Eine \emph{topologische Mannigfaltigkeit} (Mft) der Dim. $m$ ist ein topologischer Raum $M^m$ mit folgenden Eigenschaften:
+  Eine \emph{topologische Mannigfaltigkeit} (Mft) der Dim.~$m$ ist ein topologischer Raum $M^m$ mit folgenden Eigenschaften:
   \begin{itemize}
     \item $M^m$ ist \emph{hausdorffsch}, \dh{}
     \begin{align*}
@@ -62,27 +69,32 @@
   lokal euklidisch $\not\Rightarrow$ hausdorffsch
 \end{bem}
 
-\begin{prop}
+\begin{lem}
   Sei $M$ eine topologische Mannigfaltigkeit. Dann gilt
   \[ \text{$M$ zusammenhängend} \iff \text{$M$ wegzusammenhängend.} \]
-\end{prop}
+\end{lem}
+
+\begin{samepage}
 
 \begin{defn}
   \begin{itemize}
-    \item Sei $M$ eine $m$-dim. topol. Mft. Ein \emph{Atlas} ist eine Menge $\A = \Set{(U_j, \phi_j : U_j \to \O_j)}{j \in J}$ mit $U_j \opn M$ und $\O_j \subset \R^n$ offen und Homöomorphismen $\phi_j$, für die gilt $\bigcup_{j \in J} U_j = M$.
+    \item Sei $M$ eine $m$-dim. topol. Mft. Ein \emph{Atlas} ist eine Menge $\A = \Set{(U_j, \phi_j : U_j \to \O_j)}{j \in J}$ mit $U_j \opn M$ und $\O_j \subset \R^n$ offen und Homöomorphismen~$\phi_j$, für die gilt ${\bigcup}_{j \in J} U_j = M$.
     \item Die Paare $(U_j, \phi_j)$ werden \emph{Karten} genannt.
     \item Für je zwei Karten $(U_j, \phi_j)$ und $(U_k, \phi_k)$ gibt es eine \emph{Kartenwechselabbildung}
     \[ \phi_{kj} \coloneqq \phi_k \circ \phi_j^{-1} |_{\phi_j(U_j \cap U_k)} : \phi_j(U_j \cap U_k) \to \phi_k(U_j \cap U_k). \]
-    \item Ein Atlas heißt \emph{differenzierbar}, wenn alle Kartenwechselabbildungen $\Cont^\infty$-Abbildungen sind.
+    \item Ein Atlas heißt \emph{diff'bar}, wenn alle Kartenwechselabb.~$\Cont^\infty$ sind.
     \item Ein Atlas $\A$ heißt \emph{differenzierbare Struktur} von $M$, wenn gilt: Ist $(\tilde{U}, \tilde{\phi_j})$ eine Karte von $M$ und $\tilde{\A} \coloneqq \A \cup \{ (\tilde{U}, \tilde{\phi_j}) \}$ ein differenzierbarer Atlas, dann gilt $\A = \tilde{\A}$.
     \item Eine topol. Mft versehen mit einer differenzierbaren Struktur heißt \emph{differenzierbare Mannigfaltigkeit}.
   \end{itemize}
 \end{defn}
 
 % §2. Differenzierbare Abbildungen
+\section{Differenzierbare Abbildungen}
+  
+\end{samepage}
 
 \begin{nota}
-  Seien ab jetzt $M^m$ und $N^n$ differenzierbare Mften der Dimensionen $m$ und $n$.
+  Seien ab jetzt $M^m$ und $N^n$ differenzierbare Mften der Dimensionen~$m$ und~$n$.
 \end{nota}
 
 \begin{defn}
@@ -111,7 +123,7 @@
 % §3. Tangentialvektoren
 
 \begin{defn}
-  Sei $p \in M$. Zwei Funktionen $f : U_p \to \R$ und $g : V_p \to \R$ mit $U_p, V_p \opn M$ heißen äquivalent, falls es eine offene Umgebung $W \subset U_p \cap V_p$ mit $f|_W = g|_W$ gibt. Die Äquivalenzklasse $[f]$ bezüglich der so definierten Äq'relation heißt \emph{Funktionskeim} in $p$.
+  Sei $p \in M$. Zwei Funktionen $f : U_p \to \R$ und $g : V_p \to \R$ mit $U_p, V_p \opn M$ heißen \textit{äquivalent}, falls es eine offene Umgebung $W_p \subset U_p \cap V_p$ mit $f|_{W_p} = g|_{W_p}$ gibt. Die Äquivalenzklasse $[f]$ bezüglich der so definierten Äq'relation heißt \emph{Funktionskeim} in~$p$.
 \end{defn}
 
 \begin{nota}
@@ -128,31 +140,28 @@
 \end{defn}
 
 \begin{defn}
-  Der gewöhnliche Tangentialraum des $\R^n$ im Punkt $p$ ist
+  Der gewöhnliche \textit{Tangentialraum} des $\R^n$ im Punkt $p$ ist
   \[ \tilde{T}_p \R^n \coloneqq \Set{(p, v)}{v \in \R^n} \]
   mit $(p, v) + (p, w) \coloneqq (p, v + w)$ und $\lambda \cdot (p, v) \coloneqq (p, \lambda \cdot v)$.
 \end{defn}
 
 \begin{defn}
-  Der \emph{Tangentialraum} von $M$ im Punkt $p \in M$ ist
+  Der \emph{Tangentialraum} von~$M$ im Punkt $p \in M$ ist
   \[ T_p M \coloneqq \Set{ \partial : \Cont^\infty(\R^n, p) \to \R }{ \text{$\partial$ linear, derivativ} } \]
-  Ein Element $v \in T_p M$ heißt \emph{Tangentialvektor} an $M$ in $p$.
+  Ein Element~$v \in T_p M$ heißt \emph{Tangentialvektor} an $M$ in $p$.
 \end{defn}
 
 \begin{bem}
-  Wir erhalten eine Abbildung
+  $T_p M$ ist ein $\R$-Vektorraum.
+  Wir erhalten eine bilin. Abb.
   \[
     T_p M \times \Cont^\infty(M, p) \to \R, \quad
     (v, [f]) \mapsto v.f \coloneqq v[f].
   \]
 \end{bem}
 
-\begin{bem}
-  $T_p M$ ist ein $\R$-Vektorraum.
-\end{bem}
-
 \begin{satz}
-  Die Vektorräume $T_p \R^n$ und $\tilde{T}_p \R^n$ sind isomorph. Insbesondere gilt $\dim(T_p \R^n) = n$.
+  Die Vektorräume $T_p \R^n$ und $\tilde{T}_p \R^n$ sind isomorph vermöge $\tilde{T}_p \R^n \to T_p \R^n, \enspace (p, v) \mapsto \tfrac{\partial}{\partial v} |_p$. Insbesondere gilt $\dim(T_p \R^n) = n$.
 \end{satz}
 
 \begin{kor}
@@ -165,19 +174,18 @@
 \end{bem}
 
 \begin{bem}
-  Sei $(U, \phi)$ eine Karte von $M$. Wir setzen
+  Sei $(U, \phi)$ eine Karte und $p \in U$. Wir def. $\tfrac{\partial^\phi}{\partial x^i}|_{p} \in T_p M$ durch
   \begin{align*}
     \tfrac{\partial^{\phi}}{\partial x_i}|_p [f] & \coloneqq (\phi^{-1} \circ \alpha_i)^{{\cdot}} (0) [f] = \tfrac{\d}{\d t}|_{t=0} (f \circ \phi^{-1} \circ \alpha_i)\\
     & \text{mit } \alpha_i : \ointerval{-\epsilon}{\epsilon} \to U, \enspace t \mapsto \phi(p) + t e_i.
   \end{align*}
-  Wir erhalten $\tfrac{\partial^{\phi}}{\partial x_i}|_p \in T_p M$.
 \end{bem}
 
 \begin{defn}
   Sei $f : M \to N$ diff'bar. Die \emph{Ableitung} von $f$ in $p \in M$ ist %die Abbildung
   \[
-    T_p f \!=\! f_{*p} : T_p M \to T_{f(p)} N, \enspace v \mapsto f_{*p}, \quad
-     \text{wobei } f_{*p}(v).[g] \coloneqq v.[g \circ f].
+    T_p f \!=\! f_{*p} : T_p M \to T_{f(p)} N, \enspace v \mapsto f_{*p}(v), \enspace
+    \text{wobei } f_{*p}(v).[g] \coloneqq v.[g \circ f].
   \]
 \end{defn}
 
@@ -186,7 +194,7 @@
   \begin{itemize}
     \miniitem{0.3 \linewidth}{$f_{*p}$ ist linear}
     \miniitem{0.3 \linewidth}{$(\id_M)_{*p} = \id_{T_p M}$}
-    \item Kettenregel: Seien $N$, $P$ diff'bare Mften. Dann gilt
+    \item \textit{Kettenregel}: Seien $N$, $P$ diff'bare Mften. Dann gilt
     \[ \fa{p \in M} (f \circ g)_{*p} = f_{* g(p)} \circ g_{*p}. \]
   \end{itemize}
 \end{lem}
@@ -204,7 +212,7 @@
 \end{satz}
 
 \begin{defn}
-  $TM \coloneqq \!\! \bigsqcup_{p \in M} \!\! T_p M$ heißt \emph{Tangentialbündel} von $M$.
+  $TM \coloneqq {\bigsqcup}_{p \in M} T_p M$ heißt \emph{Tangentialbündel} von~$M$.
 \end{defn}
 
 % Ausgelassen: Bemerkung, dass es sich dabei um eine disjunkte Vereinigung handelt (weil $M$ hausdorffsch)
@@ -214,15 +222,18 @@
   $\pi : TM \to M, \enspace v \in T_p M \mapsto p$.
 \end{defn}
 
+% §3. Vektorfelder
+\section{Vektorfelder}
+
 \begin{defn}
-  Ein \emph{Vektorfeld} auf $M$ ist eine Abbildung $X : M \to TM$, sodass $\pi \circ X = \id_M$. Dies ist äquivalent zu $\fa{p \in M} X(p) \in T_p(M)$.
+  Ein \emph{Vektorfeld} (VF) auf~$M$ ist eine Abbildung $X : M \to TM$, sodass $\pi \circ X = \id_M$. Dies ist äquivalent zu $\fa{p \in M} X(p) \in T_p(M)$.
 \end{defn}
 
-\begin{bem}
+\begin{lem}
   Sei $X : M \to TM$ ein Vektorfeld, $(U, \phi)$ eine Karte. \\
   Dann gibt es Funktionen $\xi^j : U \to \R$, $j = 1, \ldots, n$ mit
   \[ \fa{p \in U} X(p) = \sum_{j=1}^n \xi^j(p) \coord{j}|_p. \]
-\end{bem}
+\end{lem}
 
 \begin{defn}
   \begin{itemize}
@@ -238,14 +249,17 @@
 \begin{defn}
   Sei $M$ eine $m$-dimensionale diff'bare Mft mit diff'barer Struktur $\A = \Set{(U_j, \phi_j)}{j \in J}$. Dann ist $TM$ eine $2m$-dimensionale Mft mit Atlas $\tilde{\A} \coloneqq \Set{(\tilde{U}_j \coloneqq \pi^{-1}(U_j), \tilde{\Phi}_j)}{j \in J}$, wobei
   \[
-    \tilde{\Phi}_j : \pi^{-1}(U_j) \to \phi_j(U_j) \times \R^m, \quad
-    \sum_{k=1}^m \xi^k(p) \tfrac{\partial^{\phi_j}}{\partial x^k}|_p \mapsto (\phi_j(p), \xi^1(p), \nldots, \xi^n(p)).
+    \arraycolsep=1.5pt
+    \begin{array}{rll}
+      \tilde{\Phi}_j : & \pi^{-1}(U_j) & \to \phi_j(U_j) \times \R^m, \\
+      & {\sum}_{k=1}^m \xi^k(p) \tfrac{\partial^{\phi_j}}{\partial x^k}|_p & \mapsto (\phi_j(p), \xi^1(p), \nldots, \xi^n(p)).
+    \end{array}
   \]
-  Eine Menge $V \subseteq TM$ heißt offen, wenn $\tilde{\Phi}_j(V \cap \pi^{-1}(U_j)) \opn \R^{2n}$ offen ist für alle $j \in J$.
+  Eine Menge $V \subseteq TM$ heißt \textit{offen}, wenn $\tilde{\Phi}_j(V \cap \pi^{-1}(U_j)) \opn \R^{2n}$ offen ist für alle $j \in J$.
 \end{defn}
 
 \begin{nota}
-  $\VF(M) \coloneqq \{\text{ diff'bare Vektorfelder auf $M$ }\}$
+  $\VF(M) \coloneqq \{\text{ differenzierbare Vektorfelder auf $M$ }\}$
 \end{nota}
 
 \begin{bem}
@@ -256,7 +270,7 @@
   Jedes $X \in \VF(M)$ induziert eine lineare, derivative Abb.
   \[
     X : \Cont^\infty(M) \to \Cont^\infty(M), \quad
-    \phi \mapsto X(\phi) \coloneqq p \mapsto X(p) . [\phi].
+    \phi \mapsto X(\phi) \coloneqq (p \mapsto X(p) . [\phi]).
   \]
 \end{lem}
 
@@ -266,7 +280,7 @@
 \end{lem}
 
 \begin{defn}
-  Der \emph{Kommutator} (o. \emph{Lie-Klammer}) von $X, Y \in \VF(M)$ ist das Vektorfeld $[X, Y] \in \VF(M)$ definiert durch
+  Der \emph{Kommutator} (o. \emph{Lie-Klammer}) von $X, Y \in \VF(M)$ ist das Vektorfeld $[X, Y] \in \VF(M)$, das definiert ist durch
   \[
     [X, Y] : \Cont^\infty(M) \to \Cont^\infty(M), \enspace
     f \mapsto X(Y(f)) - Y(X(f)).
@@ -285,17 +299,19 @@
   $\fa{t \in \ointerval{a}{b}} \dot{c}(t) = X_{c(t)}$.
 \end{defn}
 
-\begin{lem}
-  Sei $X \in \VF(M)$, $p \in M$ und $v \in T_p M$. Dann hat das AWP
+\begin{lemdefn}
+  Sei $X \!\in\! \VF(M)$, $p \!\in\! M$ und $v \!\in\! T_p M$.
+  Dann hat das AWP
   \[ \dot{c}(t) = X_{c(t)}, \enspace c(0) = p \]
   eine eindeutige lokale Lösung $c = c_p^X : \vinterval \to M$.
-\end{lem}
+\end{lemdefn}
 
 \begin{defn}
   $\Phi_X : U \times \vinterval \to M, \enspace (p, t) \mapsto c_p^X(t)$ heißt \emph{Fluss} von $X$.
 \end{defn}
 
 % §5. Lie-Algebren und Lie-Gruppen
+\section{Lie-Algebren und Lie-Gruppen}
 
 \begin{defn}
   Ein $\K$-Vektorraum $V$ mit einer $\K$-bilinearen Abbildung $[\blank,\blank] : V \times V \to V, \enspace (v, w) \mapsto [v,w]$ heißt \emph{Lie-Algebra}, falls
@@ -314,25 +330,25 @@
 \end{bspe}
 
 \begin{defn}
-  Eine Gruppe $G$, welche ebenfalls eine diff'bare Mft ist, heißt \emph{Lie-Gruppe}, wenn gilt:
-  \begin{itemize}
-    \item $\mu : G \times G \to G, \enspace (g_1, g_2) \mapsto g_1 \cdot g_2$ ist diff'bar.
-    \item $\iota : G \to G, \enspace g \mapsto g^{-1}$ ist diff'bar.
-  \end{itemize}
+  Eine Gruppe $G$, welche ebenfalls eine diff'bare Mft ist, heißt \emph{Lie-Gruppe}, wenn folgende Abbildungen differenzierbar sind:
+  \[
+    \mu : G \times G \to G, \enspace (g_1, g_2) \mapsto g_1 \cdot g_2, \qquad
+    \iota : G \to G, \enspace g \mapsto g^{-1}.
+  \]
 \end{defn}
 
 \begin{bsp}
-  Die allg. lin. Gruppe $\GL(n, \R) \subset \R^{n \times n} \approx \R^{(n^2)}$ ist eine Lie-
+  Die allg. lin. Gruppe $\GL(n, \R) \subset \R^{n \times n} \approx \R^{n^2}$ ist eine Lie-
   Gruppe. Die Diff'barkeit der Inv. folgt aus der Cramerschen Regel.
 \end{bsp}
 
 \begin{defn}
   Sei $G$ eine Lie-Gruppe und $g \in G$. Dann sind
   \begin{align*}
-    lg : G \to G, &\quad x \mapsto g \cdot x = \mu(g, x)\\
+    \ell g : G \to G, &\quad x \mapsto g \cdot x = \mu(g, x)\\
     rg : G \to G, &\quad x \mapsto x \cdot g = \mu(x, g)
   \end{align*}
-  Diffeomorphismen mit Umkehrabbildung $l(g^{-1})$ bzw. $r(g^{-1})$.
+  Diffeomorphismen mit Umkehrabbildung $\ell(g^{-1})$ bzw. $r(g^{-1})$.
 \end{defn}
 
 % Vorlesung vom 24.10.2014
@@ -347,7 +363,7 @@
 \end{bsp}
 
 \begin{defn}
-  Sei $f : M \to N$ ein Diffeomorphismus und $X \in \VF(M)$. Dann ist
+  Sei $f : M \to N$ ein Diffeomor. und $X \in \VF(M)$. Dann ist
   \[
     f_* X : N \to TN, \enspace
     x \mapsto f_{*f^{-1}(x)} X(f^{-1}(x))
@@ -357,8 +373,8 @@
 \begin{defn}
   Ein Vektorfeld $X \in \VF(G)$ heißt \emph{linksinvariant}, wenn gilt:
   \[
-    \fa{g, h \in G} X(g \cdot h) = lg_{*h} X(h) \quad
-    \text{(kürzer: $\fa{g \in G} lg_* X = X$).}
+    \fa{g, h \in G} X(g \cdot h) = \ell g_{*h} X(h) \quad
+    \text{(kürzer: $\fa{g \in G} \ell g_* X = X$).}
   \]
 \end{defn}
 
@@ -389,11 +405,7 @@
 \end{nota}
 
 % §6. Riemannsche Mannigfaltigkeiten
-
-\begin{defn}
-  Ein Skalarprodukt auf einem Vektorraum $V$ ist eine symmetrische, positiv definite Bilinearform $\langle \blank, \blank \rangle$. \\
-  Die davon induzierte Norm ist $\norm{v} \coloneqq \sqrt{\abs{\langle v, v \rangle}}$.
-\end{defn}
+\section{Riemannsche Mannigfaltigkeiten}
 
 \begin{defn}
   Eine \emph{Riemannsche Metrik} auf einer diff. Mft $M$ ist eine Familie $g = (g_p)_{p \in M}$ von Skalarprodukten $g_p : T_p M \times T_p M \to \R$, die differenzierbar von $p$ abhängt, \dh{} für alle $X, Y \in \VF(M)$ ist $g(X, Y) : M \to \R, p \mapsto g_p(X(p), Y(p))$ differenzierbar ($\Cont^\infty$).\\
@@ -406,7 +418,8 @@
     g_{ij}^{\phi} : U \to \R, \enspace
     p \mapsto g(\coord{i}|_p, \coord{j}|_p).
   \]
-  Seien $X = \sum_{i=1}^n v^i \coord{i}$ und $Y = \sum_{j=1}^n w^j \coord{j}$ zwei VF in $U$. Dann gilt
+  Seien $X = {\sum}_{i=1}^n v^i \coord{i}$ und $Y = {\sum}_{j=1}^n w^j \coord{j}$ zwei VF in $U$.
+  Dann:
   \[
     g(X, Y)(p) = g_p(X(p), Y(p)) = \sum_{i,j=1}^n v^i(p) w^j(p) g_{ij}(p).
   \]
@@ -436,11 +449,21 @@
   Jede diff'bare Mannigfaltigkeit hat eine Riemannsche Metrik.
 \end{satz}
 
+\begin{technik}[\emph{Teilung der Eins}]
+  Sei $M$ eine Mannigfaltigkeit.
+  Es gibt eine Familie von stetigen Fktn $(\varphi_i : M \to \cinterval{0}{1})_{i \in I}$, sodass gilt:
+  \begin{itemize}
+    \item Für alle $x \in M$ gibt es eine Umgebung~$U_p$, sodass alle bis auf endlich viele der Funktionen in~$U_p$ verschwinden.
+    \item Für alle $x \in M$ gilt ${\sum}_{i \in I} \varphi_i(x) = 1$.
+    \item Der Träger jeder Funktion ist in einer Karte enthalten.
+  \end{itemize}
+\end{technik}
+
 \begin{bsp}
-  Das Oberer-Halbraum-Modell des hyperbolischen Raum ist
+  Das Oberer-Halbraum-Modell des \textit{hyperbolischen Raums} ist
   \[ H^n \coloneqq \Set{x \in \R^n}{\langle x, e_n \rangle_{\text{eukl}} > 0} \opn \R^n \]
   mit dem offensichtlichen Atlas und der Riemannschen Metrik
-  \[ g_p^{\text{Hyp}} ((p, \tilde{v}), (p, \tilde{w})) \coloneqq \frac{\langle \tilde{v}, \tilde{w} \rangle_{\text{eukl}}}{\langle p, e_n \rangle^2}. \]
+  \[ g_p^{\text{Hyp}} ((p, \tilde{v}), (p, \tilde{w})) \coloneqq \frac{\langle \tilde{v}, \tilde{w} \rangle_{\text{eukl}}}{\langle p, e_n \rangle_{\text{eukl}}^2}. \]
 \end{bsp}
 
 \begin{defn}
@@ -482,6 +505,7 @@
 \end{bem}
 
 % §7. Kovariante Ableitungen
+\section{Kovariante Ableitungen}
 
 \begin{defn}
   Ein \emph{Zusammenhang} (kov. Ableitung) ist eine Abbildung
@@ -493,7 +517,7 @@
   \begin{itemize}
     \item $\nabla_{X_1 + f X_2} Y = \nabla_{X_1} Y + f \nabla_{X_2} Y$
     \item $\nabla_X (Y_1 + Y_2) = \nabla_X Y_1 + \nabla_X Y_2$
-    \item $\nabla_X (f Y) = f \left( \nabla_X Y \right) + (X(f)) \cdot Y$ \enspace (Leibniz-Regel)
+    \item $\nabla_X (f Y) = f \left( \nabla_X Y \right) + (X(f)) \cdot Y$ \enspace (\textit{Leibniz-Regel})
   \end{itemize}
 \end{defn}
 
@@ -513,10 +537,13 @@
 
 \begin{satz}
   Auf jeder Riem. Mft. $(M, g)$ gibt es genau einen torsionsfreien, metrischen Zusammenhang. Für diesen gilt:
-  \begin{align*}
-    2 g(\nabla_X Y, Z) = \, & X g(Y, Z) + Y g(X, Z) - Z g(X, Y)\\
-    & + g([X, Y], Z) + g([Z, X], Y) + g([Z, Y], X)
-  \end{align*}
+  \[
+    \arraycolsep=1.5pt
+    \begin{array}{r c l}
+      2 g(\nabla_X Y, Z) = && X g(Y, Z) + Y g(X, Z) - Z g(X, Y)\\
+      &+& g([X, Y], Z) + g([Z, X], Y) + g([Z, Y], X)
+    \end{array}
+  \]
 \end{satz}
 
 \begin{defn}
@@ -528,8 +555,11 @@
   \[
     \nabla_{\left( \coord{i} \right)} \left( \coord{j} \right) = \sum_{k=1}^n \Gamma_{ij}^k \coord{k}.
   \]
-  Die Funktionen $\Gamma_{ij}^k$ heißen \emph{Christoffel-Symbole} von $\nabla$.
 \end{bem}
+
+\begin{defn}
+  Die Funktionen $\Gamma_{ij}^k$ heißen \emph{Christoffel-Symbole} von $\nabla$.
+\end{defn}
 
 % Vorlesung vom 5.11.2014
 
@@ -542,11 +572,13 @@
 \begin{satz}
   Für die Christoffel-Symbole gilt
   \[ \Gamma_{ij}^k = \tfrac{1}{2} \sum_{l=1}^n g^{kl} \left( \Coord{j} g_{il} + \Coord{i} g_{jl} - \Coord{l} g_{ij} \right), \]
-  wobei
-  \begin{align*}
-    g_{ij} : U \to \R, & \enspace p \mapsto g_p \left( \coord{i} (p), \coord{j} (p) \right) \\
-    g^{kl} : U \to \R & \enspace \text{definiert ist durch} \enspace \sum_{r=1}^n g^{jr} g_{rk} = \delta_k^j.
-  \end{align*}
+  \[
+    \arraycolsep=1.5pt
+    \begin{array}{r r l}
+      \text{wobei \enspace} & g_{ij} : U \to \R, & \enspace p \mapsto g_p \left( \coord{i} (p), \coord{j} (p) \right) \\
+      & g^{kl} : U \to \R & \enspace \text{definiert ist durch} \enspace {\sum}_{r=1}^n g^{jr} g_{rk} = \delta_k^j.
+    \end{array}
+  \]
 \end{satz}
 
 \begin{defn}
@@ -555,10 +587,14 @@
   verschwindet.
 \end{defn}
 
+% §8. Tensorfelder
+\section{Tensorfelder}
+
 \begin{defn}
-  Ein \emph{Tensorfeld} vom Typ $(j, k)$ mit $k \in \N$ und $j \in \{ 0, 1 \}$ ist eine multilineare Abbildung
+  Ein \emph{Tensorfeld} vom Typ $(j, k)$ mit $k \in \N$ und $j \in \{ 0, 1 \}$ ist eine $\Cont^\infty(M)$-multilineare Abb.
+  \vspace{-0.6em}
   \[
-    T : \VF(M) \times \ldots \times \VF(M) \to
+    T : \VF(M)^k = \VF(M) \times \ldots \times \VF(M) \to
     \begin{cases}
       \Cont^\infty(M), & \text{falls } j = 0,\\
       \VF(M), & \text{falls } j = 1.
@@ -575,6 +611,10 @@
   \end{itemize}
 \end{bspe}
 
+\begin{gegenbsp}
+  $X \mapsto \nabla_Y X$ ist \textit{kein} Tensor
+\end{gegenbsp}
+
 % 8.1
 \begin{satz}
   Sei $T$ ein Tensorfeld auf $M$ vom Typ $(j, k)$. Sei $p \in M$. Seien $X_1, \ldots, X_k \in \VF(M)$. Dann hängt $T(X_1, \ldots, X_k)(p)$ nur von $X_1(p), \ldots, X_k(p)$ ab.
@@ -584,15 +624,19 @@
 
 \begin{bem}
   Sei $(U, \phi)$ eine Karte von $M$ und $T$ ein Tensorfeld vom Typ $(1, k)$ auf $M$. Dann gibt es Funktionen $T_{i_1, \ldots, i_k}^l$, sodass
-  \[ T(\coord{i_1}, \ldots, \coord{i_k}) = \sum_{l=1}^n T_{i_1, \ldots, i_k}^l \coord{l}. \]
+  \[
+    T(\coord{i_1}, \ldots, \coord{i_k}) = {\sum}_{l=1}^n T_{i_1, \ldots, i_k}^l \coord{l}.
+  \]
 \end{bem}
 
 \begin{nota}
   $\nabla_v Y \coloneqq (\nabla_X Y)(p)$ für $v \in T_p M$ und $X$ ein VF mit $X_p = v$ (wohldefiniert).
 \end{nota}
 
+\begin{samepage}
+
 \begin{satz}
-  Sei $\nabla$ ein Zusammenhang auf $M$. Sei $p \in M$, $v \in T_p M$ und $Y, \tilde{Y} \in \VF(M)$. Falls für eine diff'bare Kurve $c : \vinterval \to M$ gilt
+  Sei $\nabla$ ein Zusammenhang auf $M$. Sei $p \in M$, $v \in T_p M$ und $Y, \tilde{Y} \in \VF(M)$. Falls für eine $\Cont^\infty$-Kurve $c : \vinterval \to M$ gilt
   \[
     c(0) = p, \enspace
     \dot{c}(0) = v \enspace \text{und} \enspace
@@ -602,6 +646,9 @@
 \end{satz}
 
 % §9. Kovariante Ableitung längs Kurven
+\section{Kovariante Ableitung längs Kurven}
+  
+\end{samepage}
 
 \begin{defn}
   Ein \emph{VF längs einer Kurve} $c : I \to M$ ist eine Abbildung
@@ -641,21 +688,24 @@
 \end{satz}
 
 \begin{defn}
-  $\tfrac{D}{\d t}$ heißt von $\nabla$ \emph{induzierte kovariante Ableitung längs $c$}.
+  $\tfrac{D}{\d t}$ heißt \textit{von $\nabla$ induzierte} \emph{kovariante Ableitung längs~$c$}.
 \end{defn}
 
 % Vorlesung vom 11.11.2014
 
 % 9.2.
 \begin{satz}
-  Sei $(M, g)$ eine Riem. Mft, $\nabla$ der Levi-Civita-Zusammenhang und $c : I \to M$ diff'bar. Dann gilt
-  \[ \fa{X, Y \in \VF_c} g(X, Y)' = g(\tfrac{D X}{\d t}, Y) + g(X, \tfrac{D Y}{\d t}). \]
+  Sei $(M, g)$ eine Riem. Mft, $\nabla$ der Levi-Civita-Zusammenhang und $c : I \to M$ diff'bar. Dann gilt für alle $X, Y \in \VF_c$:
+  \[
+    g(X, Y)' = g(\tfrac{D X}{\d t}, Y) + g(X, \tfrac{D Y}{\d t}).
+  \]
 \end{satz}
 
 % §10. Parallelverschiebung
+\section{Parallelverschiebung}
 
 \begin{defn}
-  $X \in \VF_c$ heißt \emph{parallel} längs $c$ (bzgl. $\nabla$), wenn $\tfrac{D X}{\d t} = 0$.
+  $X \in \VF_c$ heißt \emph{parallel} \textit{längs}~$c$ (bzgl.~$\nabla$), wenn $\tfrac{D X}{\d t} = 0$.
 \end{defn}
 
 \begin{bem}
@@ -679,13 +729,13 @@
       \xi_n
     \end{pmatrix}
   \]
-  Dieses System ist linear beschränkt, es folgt daher die Existenz von parallelen Vektorfeldern in Kartenumgebungen.
+  Dieses System ist linear beschränkt, es folgt daher die Existenz von parallelen Vektorfeldern in Kartenumgebungen mit vorg. AW~$X(t_0)$.
 \end{bem}
 
 % 10.1
 \begin{satz}
   Sei $t_0 \in I = \ointerval{a}{b}$ und $v \in T_{c(t_0)} M$ vorgegeben. \\
-  Dann gibt es genau ein VF $X \in \VF_c$ mit
+  Dann gibt es genau ein Vektorfeld $X \in \VF_c$ mit
   \[
     \tfrac{D X}{\d t} \equiv 0
     \quad \text{und} \quad
@@ -694,23 +744,19 @@
 \end{satz}
 
 \begin{defn}
-  Die \emph{Parallelverschiebung} längs einer diff'baren Kurve $c : \abinterval \to M$ bzgl. eines Zshg $\nabla$ ist
+  Die \emph{Parallelverschiebung} längs einer diff'baren Kurve $c : \abinterval \to M$ bzgl. eines Zshgs $\nabla$ ist
   \[
     P_c : T_{c(a)} M \to T_{c(b)} M, \enspace v \mapsto X^{v}(b),
     \enspace \text{wobei} \enspace \tfrac{D X^v}{\d t} \!\equiv\! 0 \text{ und } X^{v}(a) \!=\! v.
   \]
 \end{defn}
 
-% 10.1 bis
-\begin{satz}
-  $P_c$ ist linear.
-\end{satz}
-
 % 10.2
 \begin{satz}
-  Ist $(M, g)$ Riem. Mft und $\nabla$ der LC-Zshg, dann gilt
+  $P_c$ ist linear.
+  Ist $(M, g)$ Riem. und $\nabla$ der LC-Zshg, dann gilt
   \[ g_{c(b)}(P_c(v), P_c(w)) = g_{c(a)}(v, w). \]
-  Mit anderen Worten: $P_c$ ist eine lineare Isometrie.
+  Mit anderen Worten: $P_c$ ist dann eine lineare Isometrie.
 \end{satz}
 
 \begin{bem}
@@ -719,12 +765,12 @@
 \end{bem}
 
 \begin{bem}
-  Parallelverschiebung ist auch möglich und sinnvoll entlang stückweise glatter Kurven.
+  Parallelverschiebung ist auch möglich und sinnvoll entlang \textit{stückweise} glatter Kurven.
 \end{bem}
 
 \begin{defn}
   Die \emph{Holonomiegruppe} von $M$ in $x \in M$ bzgl. $\nabla$ ist
-  \[ \Hol_x^\nabla \coloneqq \Set{ P_c : T_x M \to T_x M }{ \text{$c$ stückweise glatt mit $c(0) = c(1) = x$.} } \]
+  \[ \Hol_x^\nabla \coloneqq \Set{ P_c : T_x M \to T_x M }{ \text{$c$ stückweise glatt mit $c(0) = c(1) = x$} }. \]
   Dabei ist $P_{c} \circ P_{\tilde{c}} = P_{c \circ \tilde{c}}$ und $(P_c)^{-1} = P_{c^{-1}}$.
 \end{defn}
 
@@ -733,6 +779,7 @@
 \end{bem}
 
 % §11. Geodäten
+\section{Geodäten}
 
 \begin{defn}
   Eine glatte Kurve $c : I \to M$ heißt \emph{Geodäte} bzgl. $\nabla$, falls
@@ -757,12 +804,12 @@
 \end{satz}
 
 % 11.2
-\begin{satz}
+\begin{lem}
   Seien $c_{1,2} : I_{1,2} \to M$ zwei Geodäten bzgl $\nabla$ mit $0 \in I_1 \cap I_2$. Falls $c_1(0) = c_2(0)$ und $\dot{c}_1(0) = \dot{c}_2(0)$, dann gilt $c_1|_{I_1 \cap I_2} \equiv c_2|_{I_1 \cap I_2}$.
-\end{satz}
+\end{lem}
 
 % 11.3
-\begin{satz}
+\begin{lemdefn}
   Gegeben $p \in M$ und $v \in T_p M$, dann gibt es genau ein Intervall $I_v \opn \R$ mit $0 \in I_v$ und eine Geodäte
   \[
     c_v : I_v \to M
@@ -770,17 +817,18 @@
     c_v(0) = p, \enspace \dot{c}_v(0) = v,
   \]
   die maximal im folgenden Sinn ist: Für jede Geodäte $c : I \to M$ mit $\dot{c}(0) = v$ gilt: $I \subseteq I_v$ und $c = c_v|_I$.
-\end{satz}
+\end{lemdefn}
 
 \begin{nota}
   Für $v \in T_p M$ sei $c_v : I_v \to M$ die zugeh. max. Geodäte.
 \end{nota}
 
 \begin{defn}
-  Ein Zshg $\nabla$ auf $M$ heißt \emph{vollständig}, wenn $\fa{v \in TM} I_v {=} \R$.
+  Ein Zshg $\nabla$ auf $M$ heißt \emph{geodätisch vollständig}, wenn jede Geodäte auf ganz~$\R$ definiert ist, \dh{} $\fa{v \in TM} I_v {=} \R$.
 \end{defn}
 
 % §12. Die Exponentialabbildung
+\section{Die Exponentialabbildung}
 
 % 12.1
 \begin{lem}[\emph{Spray-Eigenschaft}]
@@ -803,13 +851,14 @@
     v \mapsto c_v(1), \quad
     \widetilde{T_p M} \coloneqq \Set{ v \in T_p M }{ 1 \in I_v }
   \]
-  \emph{Exponentialabbildung} von $\nabla$ in $p$.
+  \emph{Exponentialabbildung} von~$\nabla$ in $p$.
+  Ist $\nabla = \LC$, so wird sie \emph{Riemannsche Exponentialabb.} genannt.
 \end{defn}
 
 % 12.2
 \begin{lem}
   \begin{itemize}
-    \item $\widetilde{T_p M}$ ist sternförmig bzgl. $0$
+    \item $\widetilde{T_p M}$ ist sternförmig bzgl.~$0$.
     \item $\fa{v \in \widetilde{T_p M}} \fa{t \in \cinterval{0}{1}} \Exp_p(tv) = c_v(t)$
   \end{itemize}
 \end{lem}
@@ -826,7 +875,7 @@
   Man kann zeigen: \enspace
   \inlineitem{$\widetilde{T_p M} \opn T_p M$}
   \begin{itemize}
-    \item $\Exp_p : \widetilde{T_p M} \to M$ ist überall $\Cont^\infty$, aber nicht überall ein lokaler Diffeomorphismus (Schnittpunkt-Phänomen)
+    \item $\Exp_p : \widetilde{T_p M} \to M$ ist überall $\Cont^\infty$, aber nicht überall ein lokaler Diffeomorphismus (\textit{Schnittpunkt-Phänomen})
     \item Ist $(M, \nabla)$ geodätisch vollständig, dann gilt $\widetilde{T_p M} = T_p M$.
   \end{itemize}
 \end{bem}
@@ -834,6 +883,7 @@
 % Vorlesung vom 21.11.2014
 
 % §13. Erste Variationsformel
+\section{Erste Variationsformel}
 
 \begin{defn}
   Eine Kurve $c : I \to M$ heißt \emph{nach} / \emph{proportional zur BL parametrisiert}, wenn gilt:
@@ -847,7 +897,7 @@
 \begin{bem}
   \begin{itemize}
     \item Jede Geodäte ist proportional zur BL parametrisiert.
-    \item Eine Kurve ist genau dann prop. zur BL parametrisiert, wenn es $\alpha \geq 0$ gibt mit $L(c|_{\abinterval}) = \alpha \cdot (b - a)$.
+    \item Eine Kurve~$c : I \to M$ ist genau dann prop. zur BL parametrisiert, wenn es ein $\alpha \geq 0$ gibt mit $L(c|_{\abinterval}) = \alpha \cdot (b - a)$ für alle $\cinterval{a}{b} \subseteq I$.
   \end{itemize}
 \end{bem}
 
@@ -867,17 +917,20 @@
 \end{defn}
 
 \begin{sprech}
-  $s$ heißt \emph{Variationsparameter}
+  $s$ heißt \textit{Variationsparameter}
 \end{sprech}
 
 \begin{defn}
-  Eine Variation einer stückweise glatten Kurve $c : \abinterval \to M$ (mit $c$ glatt auf den Teilintervallen $\cinterval{t_{i-1}}{t_i}$) ist eine stetige Abb.
+  Eine \textit{Variation einer stückweise glatten Kurve} $c : \abinterval \to M$ (mit $c$ glatt auf den Teilintervallen $\cinterval{t_{i-1}}{t_i}$) ist eine stetige Abb.
   \[
     \alpha : \vinterval \times \abinterval \to M,
     \enspace (s, t) \mapsto \alpha_s(t)
-    \quad \text{mit }
-    \alpha|_{\vinterval \times \cinterval{t_{i-1}}{t_i}} \text{ ist } \Cont^\infty.
   \]
+  mit
+  $
+    \alpha|_{\vinterval \times \cinterval{t_{i-1}}{t_i}} \text{ ist } \Cont^\infty.
+  $
+  für alle~$t$ und $\alpha_0 = c$.
 \end{defn}
 
 \begin{nota}
@@ -888,15 +941,15 @@
 \end{nota}
 
 \begin{defn}
-  Eine Abbildung $X : \vinterval \times \abinterval \to TM$ mit $X(s, t) \in T_{\alpha(s, t)} M$ heißt \emph{Vektorfeld längs $\alpha$}, wenn $X$ differenzierbar (bzw. stückweise diff'bar) ist.
+  Eine Abb. $X : \vinterval \times \abinterval \to TM$ mit $X(s, t) \in T_{\alpha(s, t)} M$ heißt \emph{Vektorfeld längs $\alpha$}, wenn~$X$ (stückweise) differenzierbar ist.
 \end{defn}
 
 \begin{nota}
-  Sei $X$ ein VF längs $\alpha(s, t)$. Dann
-  \begin{align*}
-    \tfrac{D X}{\partial s} (s_0, t_0) & \coloneqq \tfrac{D}{\d s} |_{s=s_0} (s \mapsto X(s, t_0)) \\
-    \tfrac{D X}{\partial t} (s_0, t_0) & \coloneqq \tfrac{D}{\d t} |_{t=t_0} (s \mapsto X(s_0, t))
-  \end{align*}
+  Für ein VF~$X$ längs $\alpha(s, t)$ setze
+  \[
+    \tfrac{D X}{\partial s} (s_0, t_0) \coloneqq \tfrac{D}{\d s} |_{s=s_0} X(s, t_0), \quad
+    \tfrac{D X}{\partial t} (s_0, t_0) \coloneqq \tfrac{D}{\d t} |_{t=t_0} X(s_0, t).
+  \]
 \end{nota}
 
 % 13.1
@@ -904,30 +957,36 @@
   $\frac{D}{\partial s} \frac{\partial \alpha}{\partial t} = \frac{D}{\partial t} \frac{\partial \alpha}{\partial s}$
 \end{lem}
 
-% 13.2
-\begin{satz}[\emph{1. Variationsformel}]
-  Sei $\alpha : \vinterval \times \abinterval \to M$ eine $\Cont^\infty$-Variation von einer $\Cont^\infty$-Kurve $c = \alpha_0 : \abinterval \to M$. Sei $\norm{\dot{c}(t)} = \text{konst} \not= 0$. Dann gilt mit $X(t) \coloneqq \tfrac{\partial \alpha}{\partial s} (0, t)$
-  \[ \frac{\d}{\d s} |_{s=0} L(\alpha_s) = \frac{1}{\norm{\dot{c}}} \left( g(X, \dot{c})|_a^b - \Int{a}{b}{g(X(\tau), \tfrac{D \dot{c}}{\d t})}{\tau} \right) \]
-\end{satz}
-
 \begin{sprech}
   $X(t) \!\coloneqq\! \tfrac{\partial \alpha}{\partial s} (0, t)$ heißt \emph{Variationsvektorfeld} (VVF).
 \end{sprech}
+
+% 13.2
+\begin{satz}[\emph{1. Variationsformel}]
+  Sei $\alpha : \vinterval \times \abinterval \to M$ eine $\Cont^\infty$-Variation von einer $\Cont^\infty$-Kurve $c = \alpha_0 : \abinterval \to M$. \\
+  Sei $\norm{\dot{c}(t)} = \text{konst} \not= 0$.
+  Dann gilt mit $X(t) \coloneqq \tfrac{\partial \alpha}{\partial s} (0, t)$
+  \[ \tfrac{\d}{\d s} |_{s=0} L(\alpha_s) = \frac{1}{\norm{\dot{c}}} \left( g(X, \dot{c})|_a^b - \Int{a}{b}{g(X(\tau), \tfrac{D \dot{c}}{\d t})}{\tau} \right) \]
+\end{satz}
 
 % Satz 13.2bis
 
 \begin{satz}[\emph{1. Variationsformel} für stückweise glattes $c$]\mbox{}\\
   Sei $\alpha : \vinterval \times \abinterval \to M$ eine stückweise glatte Variation, glatt auf $\vinterval \times \cinterval{t_{i-1}}{t_i}$ mit $a = t_0 < \ldots < t_k = b$. Dann ist
   \begin{align*}
-    \frac{\d \alpha_s}{\d s} |_{s=0} = & \frac{1}{\norm{\dot{c}}} \left( g(X, \dot{c})|_a^b + \sum_{i=1}^{k-1} g(X(t_i), \nabla_i \dot{c}) - \Int{a}{b}{g(X, \frac{D \dot{c}}{\d t})}{t} \right) \\
+    \tfrac{\d}{\d s} |_{s=0} L(\alpha_s) = & \frac{1}{\norm{\dot{c}}} \left( g(X, \dot{c})|_a^b + \sum_{i=1}^{k-1} g(X(t_i), \nabla_i \dot{c}) - \Int{a}{b}{g(X, \tfrac{D \dot{c}}{\d t})}{t} \right) \\
     & \text{mit } \nabla_i \dot{c} = \dot{c}(t_i^-) - \dot{c}(t_i^+)
   \end{align*}
 \end{satz}
 
 \begin{nota}
-  $\dot{c}(t_i^+) = \lim_{t \downarrow t_i} \dot{c}(t)$, \enspace
-  $\dot{c}(t_i^-) = \lim_{t \uparrow t_i} \dot{c}(t)$
+  $\dot{c}(t_i^+) = {\lim}_{t \downarrow t_i} \dot{c}(t)$, \enspace
+  $\dot{c}(t_i^-) = {\lim}_{t \uparrow t_i} \dot{c}(t)$
 \end{nota}
+
+\begin{frage}
+  Welche $X \in \VF_c$ sind Variations-VF?
+\end{frage}
 
 % 13.3
 \begin{satz}
@@ -963,6 +1022,7 @@
 \end{bem}
 
 % §14. Geodäten sind lokal kürzeste
+\section{Geodäten sind lokal kürzeste}
 
 \begin{nota}
   $S_\rho(0) = \Set{ x \in T_p M }{ \norm{x} = \rho }$
@@ -970,9 +1030,9 @@
 
 % 14.1
 \begin{satz}[\emph{Gaußlemma}] % 1827
-  Sei $(M, g)$ eine zshgde Riem. Mft, $\nabla = \LC$. Sei $p \in M$ und $\epsilon > 0$, sodass
-  \[ \Exp_p|_{B_{\epsilon}(0)} : B_{\epsilon}(0) \to \Exp_p(B_{\epsilon}(0)) \]
-  ein Diffeo ist. Dann schneiden die radialen Geodäten
+  Sei $(M, g)$ eine zshgde Riem. Mft, $\nabla = \LC$.
+  Sei $p \in M$ und $\epsilon > 0$, sodass $\Exp_p|_{B_{\epsilon}(0)}$ ein Diffeo ist.
+  Dann schneiden die radialen Geodäten
   \[ t \mapsto \Exp_p(tv) = c_v(t), \quad v \in T_p M \setminus \{ 0 \},  \]
   die Hyperflächen $\Exp_p(S_\rho(0))$, $\rho \in \ointerval{0}{\epsilon}$ orthogonal.
 \end{satz}
@@ -993,8 +1053,10 @@
 % Vorlesung vom 2.12.2014
 
 \begin{defn}
-  $i(p) \coloneqq \sup \Set{ \epsilon > 0 }{ \Exp_p|B_{\epsilon}(0) \text{ ist Diffeo aufs Bild } }$
-  heißt \emph{Injektivitätsradius} von $M$ in $p$.
+  \begin{minipage}[t]{0.8 \linewidth}
+    $i(p) \coloneqq \sup \Set{ \epsilon > 0 }{ \Exp_p|B_{\epsilon}(0) \text{ ist Diffeo aufs Bild } }$ \\
+    heißt \textit{Injektivitätsradius} von $M$ in $p$.
+  \end{minipage}
 \end{defn}
 
 % 14.3
@@ -1013,6 +1075,9 @@
 
 % Vorlesung vom 5.12.2014
 
+% §15. Sätze von Hopf-Rinow
+\section{Sätze von Hopf-Rinow}
+
 % 15.1
 \begin{satz}[\emph{Hopf-Rinow} 1]
   Sei $M$ eine zshgde Riem. Mft, $p \in M$. Angenommen, alle Geodäten $\gamma$ auf $M$ mit $\gamma(0) = p$ sind auf ganz $\R$ definiert (m.a.W: $\Exp_p$ ist auf ganz $T_p M$ definiert). Dann gibt es für alle $q \in M$ eine kürzeste Geodäte von $p$ nach $q$.
@@ -1025,12 +1090,12 @@
     \item $M$ ist geodätisch vollständig.
     \item $\fa{p \in M} \Exp_p$ ist auf ganz $T_p M$ definiert.
     \item Beschränkte und abgeschlossene Teilmengen von $M$ sind kompakt.
-    \item $M$ ist ein vollständiger metrischer Raum.
+    \item $(M, d)$ ist ein vollständiger metrischer Raum.
   \end{itemize}
 \end{satz}
 
 \begin{kor}
-  Jede kompakte Riemannsche Mft ist geodätisch vollständig und zwei ihrer Punkte können durch eine kürzeste Geodäte verbunden werden.
+  Jede kompakte Riem. Mft ist geodätisch vollständig und zwei ihrer Punkte können durch eine kürzeste Geodäte verbunden werden.
 \end{kor}
 
 \begin{kor}
@@ -1038,6 +1103,7 @@
 \end{kor}
 
 % §16. Krümmung
+\section{Krümmung}
 
 \begin{defn}
   Der \emph{Krümmungstensor} von einem Zshg $\nabla$ auf $M$ ist
@@ -1083,6 +1149,7 @@
 \end{lem}
 
 % §17. 2. Variation der Länge
+\section{Zweite Variation der Länge}
 
 % 17.1
 \begin{satz}
@@ -1102,6 +1169,7 @@
 \end{satz}
 
 % §18. Satz von Myers
+\section{Satz von Myers}
 
 \begin{defn}
   Der \emph{Durchmesser} einer Riemannschen Mft $(M, g)$ ist
@@ -1119,20 +1187,25 @@
 
 % 18.2
 \begin{kor}
-  Sei $M$ eine vollständige zshge Mft, $\dim(M) \geq 2$ mit $\sec \geq \delta > 0$. Dann ist $\pi_1(M)$ endlich.
+  Sei $M$ eine vollständige zshgde Riem. Mft, $\dim(M) \geq 2$ mit $\sec \geq \delta > 0$. Dann ist $\pi_1(M)$ endlich.
 \end{kor}
 
 \begin{defn}
   Sei $p \in M$, $v \in T_p M$ mit $\norm{v} = 1$, $v = e_1, e_2, \ldots, e_n$ eine ONB von $T_p M$. Die \emph{Ricci-Krümmung} von $M$ in Richtung $v$ ist dann
-  \[ \Ric(v) \coloneqq \sum_{j=2}^n \sec(\Span(v, e_j)). \]
+  \[
+    \Ric(v) \coloneqq \sum_{j=2}^n \sec(\Span(v, e_j)).
+  \]
 \end{defn}
 
 \begin{bem}
   $\Ric(v)$ ist unabhängig von der Wahl der ONB:
-  \begin{align*}
-    \Ric(v) & = \sum_{j=2}^n \sec(v,e_j) = \sum_{j=2}^n g(R(e_j,v)v, e_j) =\\
-    & = \sum_{j=1}^n g(R(e_j,v)v, e_j) = \spur(x \mapsto R(x,v)v)
-  \end{align*}
+  \[
+    \arraycolsep=2pt
+    \begin{array}{r c l c l}
+      \Ric(v) &=& {\sum}_{j=2}^n \, \sec(v,e_j) &=& {\sum}_{j=2}^n \, g(R(e_j,v)v, e_j)\\
+      &=& {\sum}_{j=1}^n \, g(R(e_j,v)v, e_j) &=& \spur(x \mapsto R(x,v)v)
+    \end{array}
+  \]
 \end{bem}
 
 \begin{defn}
@@ -1164,17 +1237,18 @@
 \end{satz}
 
 % §19. Jacobi-Felder
+\section{Jacobi-Felder}
 
 \begin{defn}
   Sei $(M, g)$ eine Riem. Mft, $c : I \to M$ glatt, $Y \in \VF_c$ heißt \emph{Jacobi-Feld}, wenn die \emph{Jacobi-Gleichung} gilt:
   \[
     Y'' + R(Y, \dot{c}) \dot{c} = 0 \quad
-    \left( Y'' \coloneqq \tfrac{D}{\d t} \left( \tfrac{D Y}{\d t} \right) \right).
+    \left( \text{mit } Y'' \coloneqq \tfrac{D}{\d t} \left( \tfrac{D Y}{\d t} \right) \right).
   \]
 \end{defn}
 
 \begin{bem}
-  Die Jacobi-Gleichung ist linear in $Y$, somit ist $\Set{ X \in \VF_c }{ X \text{ ist ein Jacobi-Feld} }$ ein UVR von $\VF_c$.
+  $\Set{ X \in \VF_c }{ X \text{ ist ein Jacobi-Feld} }$ ist ein UVR von~$\VF_c$.
 \end{bem}
 
 % 19.1
@@ -1194,12 +1268,14 @@
 
 % 19.3
 \begin{satz}
-  Sei $v \in T_p M$, $w \in T_p M \cong T_v \left( T_p M \right)$. Dann gilt $(\Exp_p)_{*v}(w) = Y(1)$, wobei $Y \in \VF_c$ ein Jacobi-Feld längs $c_v(t) = \Exp_p(tv)$ mit $Y(0) = 0$ und $Y'(0) = w$.
+  Sei $v \in T_p M$, $w \in T_p M \cong T_v \left( T_p M \right)$. \\
+  Dann gilt $(\Exp_p)_{*v}(w) = Y(1)$, wobei $Y \in \VF_c$ ein Jacobi-Feld längs $c_v(t) = \Exp_p(tv)$ mit $Y(0) = 0$ und $Y'(0) = w$ ist.
 \end{satz}
 
 % Vorlesung vom 9.1.2015
 
 % §20. Satz von Hadamard-Cartan
+\section{Satz von Hadamard-Cartan}
 
 % 20.1
 \begin{satz}
@@ -1222,12 +1298,12 @@
 \end{kor}
 
 % 20.3
-\begin{satz}
+\begin{wdh}
   Sei $X$ wegzshgd, $Y$ einfach zshgd, $\pi : X \to Y$ eine Überlagerung. Dann ist $\pi$ ein Homöomorphismus.
-\end{satz}
+\end{wdh}
 
 \begin{defn}
-  Eine Abbildung $\pi : (M_1, g_1) \to (M_2, g_2)$ zwischen Riemannsche Mften heißt \emph{Riemannsche Überlagerung}, wenn gilt:
+  Eine Abb. $\pi : (M_1, g_1) \to (M_2, g_2)$ zwischen Riem. Mften heißt \emph{Riemannsche Überlagerung}, wenn gilt:
   \begin{itemize}
     \miniitem{0.66 \linewidth}{$\pi$ ist eine topologische Überlagerung}
     \miniitem{0.27 \linewidth}{$\pi$ ist diffbar}
@@ -1255,20 +1331,22 @@
 \end{kor}
 
 % §21. Satz von Synge
-
-% 21.1
-\begin{satz}[\emph{Synge} 1936]
-  Jede zshgde kompakte orientierte Riem. Mft gerader Dimension mit $\sec > 0$ ist einfach zshgd.
-\end{satz}
+\section{Satz von Synge}
 
 % 21.2
 \begin{satz}[\emph{Weinstein} 1968, \emph{Synge} 1936]
   Sei $M^n$ kompakte, zshgde, orientierte Riem. Mft, $\sec > 0$, $n$ gerade. Sei $f : M^n \to M^n$ eine orientierungstreue Isometrie. Dann hat $f$ einen Fixpunkt.
 \end{satz}
 
+% 21.1
+\begin{satz}[\emph{Synge} 1936]
+  Jede zshgde kompakte orientierte Riem. Mft gerader Dimension mit $\sec > 0$ ist einfach zshgd.
+\end{satz}
+
 % Vorlesung vom 16.1.2015
 
 % §22. Symmetrische Räume
+\section{Symmetrische Räume}
 
 % 22.1.
 \begin{prop}
@@ -1355,6 +1433,7 @@
 % Vorlesung vom 20.1.2015
 
 % §23. Transvektionen und Holonomie
+\section{Transvektionen und Holonomie}
 
 \begin{nota}
   Sei $P$ im Folgenden ein symmetrischer Raum.
@@ -1367,12 +1446,15 @@
 \end{defn}
 
 \begin{bsp}
-  Im $\R^n$ sind die Transvektionen genau die Translationen.
+  Im~$\R^n$ sind die Transvektionen genau die Translationen.
 \end{bsp}
 
 \begin{defn}
   Die von den Transvektionen erzeugte abgeschl. Untergruppe
-  \[ \Trans(P) \coloneqq \langle t_{pq} \,|\, p, q \in P \rangle_{c} \]
+  \[
+    \Trans(P) \coloneqq \langle t_{pq} \,|\, p, q \in P \rangle_{c}
+    \subset \Iso(P)
+  \]
   heißt \emph{Transvektionsgruppe} von $P$.
 \end{defn}
 
@@ -1388,19 +1470,20 @@
 
 % 23.2
 \begin{lem}
-  Sei $\gamma : \R \to P$ eine Geodäte. Dann gilt f.\,a. $\tau \in \R$:
+  Sei $\gamma : \R \to P$ eine Geodäte. Dann gilt für alle $\tau \in \R$:
   \begin{itemize}
-    \item $(t_{\gamma(\tau)\gamma(0)} \circ \gamma)(t) = \gamma(t + 2\tau)$
+    \item $(t_{\gamma(\tau)\gamma(0)} \circ \gamma)(t) = \gamma(t + 2\tau)$ für alle $t \in \R$
     \item $(t_{\gamma(\tau)\gamma(0)*} X)(t) = X(t + 2 \tau)$ für $X \in \VF_\gamma$ parallel.
   \end{itemize}
 \end{lem}
 
 % 23.3
 \begin{lem}
-  Sei $\gamma : \R \to P$ eine Geodäte. Dann ist die Abbildung
+  Sei $\gamma : \R \to P$ eine Geodäte.
+  Dann ist die Abbildung
   \[
     t^\gamma : \R \to \Iso(P), \quad
-    \tau \mapsto t_{\gamma(\tau)\gamma(0)}
+    \tau \mapsto t_{\gamma(\nicefrac{\tau}{2})\gamma(0)}
   \]
   eine Ein-Parameter-Untergruppe.
 \end{lem}
@@ -1550,6 +1633,7 @@
 % Bsp: Einfach zshgde de-Rham-unzerlegbare sym. Räume
 
 % §24. Killing-Felder
+\section{Killing-Felder}
 
 \begin{defn}
   Eine \emph{Wirkung} einer eine Lie-Gruppe $G$ auf einer diff'baren Mft $M$ ist ein Gruppenhomomorphismus $\phi : G \to \Diff(M)$, sodass $G \times M \to M, \enspace (g, m) \mapsto \phi(g)(m)$ glatt ist.
@@ -1615,7 +1699,7 @@
 % 24.4
 \begin{lem}
   Ein Vektorfeld $X \in \VF(M)$ ist genau dann ein Killing-VF, wenn $\nabla X$ schiefsymmetrisch ist, \dh{}
-  \[ \fa{X, Y, Z \in \VF(M)} g(\nabla_Y X, Z) = - g(\nabla_Z X, Y) \]
+  \[ \fa{Y, Z \in \VF(M)} g(\nabla_Y X, Z) = - g(\nabla_Z X, Y) \]
 \end{lem}
 
 \begin{facts}
@@ -1632,12 +1716,13 @@
 
 % 24.5
 \begin{satz}
-  Sei $P$ ein sym. Raum, $G \coloneqq \Iso(P)$, $\Gie \coloneqq \mathcal{L}(G) \cong T_e G$ die Lie-Algebra von $G$. Dann ist die Abbildung
+  Sei $P$ ein sym. Raum, $G \coloneqq \Iso(P)$, $\Gie \coloneqq \mathcal{L}(G) \cong T_e G$ die Lie-Algebra von~$G$.
+  Dann ist die Abbildung
   \[
     \iota : \Gie \to \KF(P), \quad
     x \mapsto (X : p \mapsto \tfrac{\d}{\d t}|_0 \exp(tx).p)
   \]
-  ist ein $\R$-VR-Isomorphismus.
+  ein $\R$-VR-Isomorphismus.
 \end{satz}
 
 \begin{acht}

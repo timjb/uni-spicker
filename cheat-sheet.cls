@@ -94,6 +94,7 @@
 \newtheorem*{fakt}{Fakt}
 \newtheorem*{test}{Test}
 \newtheorem*{motivation}{Motivation}
+\newtheorem*{wdh}{Wiederholung}
 
 \theoremstyle{remark}
 \newtheorem*{bem}{Bem}
