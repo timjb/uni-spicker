@@ -49,6 +49,7 @@
 \newtheorem*{thm}{Thm} % Theorem
 \newtheorem*{lem}{Lem} % Lemma
 \newtheorem*{lemdefn}{Lem/Def} % Lemma/Definition
+\newtheorem*{satzdefn}{Satz/Def} % Satz/Definition
 \newtheorem*{kor}{Kor} % Korollar
 \newtheorem*{voraussetzung}{Voraussetzung}
 \newtheorem*{voraussetzungen}{Voraussetzungen}
@@ -103,6 +104,7 @@
 \newtheorem*{beweisidee}{Beweisidee}
 \newtheorem*{umformulierung}{Umformulierung}
 \newtheorem*{referenz}{Ref}
+\newtheorem*{teaser}{Teaser}
 
 % Listenstil
 \usepackage{paralist} % Für Inline-Listen

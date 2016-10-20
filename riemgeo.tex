@@ -42,6 +42,8 @@
 
 \begin{document}
 
+\raggedcolumns % stretche Inhalt nicht über die gesamte Spaltenhöhe
+
 \maketitle{Kurzfassung Riemannsche Geometrie}
 
 % §1. Mannigfaltigkeiten
@@ -117,7 +119,7 @@
 \end{bem}
 
 \begin{defn}
-  Eine Abbildung $f : M \to N$ heißt \emph{Diffeomorphismus}, wenn $f$ ein Homöo ist und $f$ und $f^{-1}$ differenzierbar sind.
+  Eine Abbildung $f : M \to N$ heißt \emph{Diffeomorphismus}, wenn $f$ ein Homöomor. ist und $f$ und $f^{-1}$ differenzierbar sind.
 \end{defn}
 
 % §3. Tangentialvektoren
@@ -279,13 +281,13 @@
   $\fa{X, Y \!\in\! \VF(M)\!}\! (\fa{f \!\in\! \Cont^\infty(M)\!}\! X(f) \!=\! Y(f)) \!\iff\! X \equiv Y$
 \end{lem}
 
-\begin{defn}
-  Der \emph{Kommutator} (o. \emph{Lie-Klammer}) von $X, Y \in \VF(M)$ ist das Vektorfeld $[X, Y] \in \VF(M)$, das definiert ist durch
+\begin{lemdefn}
+  Der \emph{Kommutator} (oder \emph{Lie-Klammer}) von $X, Y \!\in\! \VF(M)$ ist das Vektorfeld $[X, Y] \in \VF(M)$, das def. ist durch
   \[
     [X, Y] : \Cont^\infty(M) \to \Cont^\infty(M), \enspace
     f \mapsto X(Y(f)) - Y(X(f)).
   \]
-\end{defn}
+\end{lemdefn}
 
 \begin{satz}
   Für $X, Y_1, Y_2 \in \VF(M)$ und $f \in \Cont^\infty(M)$ gilt
@@ -363,11 +365,13 @@
 \end{bsp}
 
 \begin{defn}
-  Sei $f : M \to N$ ein Diffeomor. und $X \in \VF(M)$. Dann ist
+  Sei $f : M \to N$ ein Diffeomor. und $X \in \VF(M)$.
+  Dann heißt
   \[
     f_* X : N \to TN, \enspace
     x \mapsto f_{*f^{-1}(x)} X(f^{-1}(x))
   \]
+  \emph{Pushforward} von $X$ längs $f$.
 \end{defn}
 
 \begin{defn}
@@ -500,9 +504,9 @@
   \end{align*}
 \end{defn}
 
-\begin{bem}
+\begin{teaser}
   Nach dem Satz von Hopf-Rinow stimmt die von $d_g$ induzierte Topologie mit der von $M$ überein.
-\end{bem}
+\end{teaser}
 
 % §7. Kovariante Ableitungen
 \section{Kovariante Ableitungen}
@@ -535,8 +539,9 @@
   \[ \fa{X, Y, Z \in \VF(M)} g(\nabla_X Y, Z) + g(Y, \nabla_X Z) = X g(Y, Z). \]
 \end{defn}
 
-\begin{satz}
-  Auf jeder Riem. Mft. $(M, g)$ gibt es genau einen torsionsfreien, metrischen Zusammenhang. Für diesen gilt:
+\begin{lemdefn}
+  Auf jeder Riem. Mft. $(M, g)$ gibt es genau einen torsionsfreien, metrischen Zusammenhang, den sogenannten \emph{Levi-Civita-Zusammenhang} $\nabla = \LC$.
+  Für diesen gilt:
   \[
     \arraycolsep=1.5pt
     \begin{array}{r c l}
@@ -544,11 +549,7 @@
       &+& g([X, Y], Z) + g([Z, X], Y) + g([Z, Y], X)
     \end{array}
   \]
-\end{satz}
-
-\begin{defn}
-  Der eindeutige torsionsfreie und metrische Zusammenhang auf $(M, g)$ heißt \emph{Levi-Civita-Zusammenhang} auf $(M, g)$.
-\end{defn}
+\end{lemdefn}
 
 \begin{bem}
   Sei $(M, g)$ eine Riemannsche Mft., $(U, \phi)$ eine Karte von $M$. Dann gibt es diff'bare Ftk. $\Gamma_{ij}^k : U \to \R$ für $i,j,k \in \{ 1, \ldots, n \}$, sodass
@@ -567,6 +568,10 @@
 \begin{lem}
   $\lie{\coord{j}}{\coord{k}} = 0$
 \end{lem}
+
+\begin{bem}
+  Aus dem Satz von Schwarz folgt die Symm. $\Gamma_{ij}^k = \Gamma_{ji}^k$
+\end{bem}
 
 % 7.3
 \begin{satz}
@@ -617,7 +622,9 @@
 
 % 8.1
 \begin{satz}
-  Sei $T$ ein Tensorfeld auf $M$ vom Typ $(j, k)$. Sei $p \in M$. Seien $X_1, \ldots, X_k \in \VF(M)$. Dann hängt $T(X_1, \ldots, X_k)(p)$ nur von $X_1(p), \ldots, X_k(p)$ ab.
+  Sei $T$ ein Tensorfeld auf $M$ vom Typ $(j, k)$.
+  Sei $p \in M$. \\
+  Seien $X_1, \ldots, X_k \in \VF(M)$. Dann hängt $T(X_1, \ldots, X_k)(p)$ nur von $X_1(p), \ldots, X_k(p)$ ab.
 \end{satz}
 
 % Vorlesung vom 7.11.2014
@@ -769,7 +776,7 @@
 \end{bem}
 
 \begin{defn}
-  Die \emph{Holonomiegruppe} von $M$ in $x \in M$ bzgl. $\nabla$ ist
+  Die \emph{Holonomiegruppe} von~$M$ in $x \in M$ bzgl.~$\nabla$ ist
   \[ \Hol_x^\nabla \coloneqq \Set{ P_c : T_x M \to T_x M }{ \text{$c$ stückweise glatt mit $c(0) = c(1) = x$} }. \]
   Dabei ist $P_{c} \circ P_{\tilde{c}} = P_{c \circ \tilde{c}}$ und $(P_c)^{-1} = P_{c^{-1}}$.
 \end{defn}
@@ -935,7 +942,7 @@
 
 \begin{nota}
   \begin{itemize}
-    \item $\tfrac{\partial \alpha}{\partial s} (s_0, t_0)$ ist der Tang.-Vektor an $s {\mapsto} \alpha(s, t_0)$ in $s_0$.
+    \item $\tfrac{\partial \alpha}{\partial s} (s_0, t_0)$ ist der Tangentialv. an $s \mapsto \alpha(s, t_0)$ in $s_0$.
     \item $\tfrac{\partial \alpha}{\partial t} (s_0, t_0)$ ist der Tangentialvektor an $s \mapsto \alpha(s_0, t)$ in $t_0$.
   \end{itemize}
 \end{nota}
@@ -1018,7 +1025,12 @@
 \end{nota}
 
 \begin{bem}
-  Geodäten sind "`kritische Punkte"' von $L : \Omega_{p,q} \to \R$ unter der Nebenbedingung $\norm{\dot{c}} = \text{konst}$. Ersetzt man das Längenfunktional durch die Energie, so ist diese NB unnötig.
+  Geodäten sind "`kritische Punkte"' von $L : \Omega_{p,q} \to \R$ unter der Nebenbedingung $\norm{\dot{c}} = \text{konst}$.
+  Nimmt man stattdessen die \textit{Energie}
+  \[
+    E(c) \coloneqq \Intab{\norm{\dot{c}(t)}}{t},
+  \]
+  so ist diese Nebenbedingung unnötig.
 \end{bem}
 
 % §14. Geodäten sind lokal kürzeste
@@ -1090,7 +1102,7 @@
     \item $M$ ist geodätisch vollständig.
     \item $\fa{p \in M} \Exp_p$ ist auf ganz $T_p M$ definiert.
     \item Beschränkte und abgeschlossene Teilmengen von $M$ sind kompakt.
-    \item $(M, d)$ ist ein vollständiger metrischer Raum.
+    \item $(M, d)$ ist als metrischer Raum vollständig, \dh{} jede Cauchy-Folge konvergiert.
   \end{itemize}
 \end{satz}
 
@@ -1148,6 +1160,13 @@
   $\sec(\sigma)$ ist unabhängig von der Basiswahl.
 \end{lem}
 
+\begin{bem}
+  Gauß' \textit{Theorema egregium} für Flächen $M \subset \R^3$ besagt:
+  \[
+    \fa{p \in M} \kappa(p) = \sec(T_p M) = \tfrac{R_{1221}(p)}{\det(g_p)}
+  \]
+\end{bem}
+
 % §17. 2. Variation der Länge
 \section{Zweite Variation der Länge}
 
@@ -1168,6 +1187,10 @@
   \]
 \end{satz}
 
+\begin{kor}
+  Ist $(M, g)$ eine Riem. Mft mit $\sec \leq 0$, so ist die Geodäte~$c$ ein (lokales) Minimum für alle Variationen~$\alpha$ von $c$ mit festen Endpunkten und Variations-VF~$X$ mit $X^\perp \neq 0$.
+\end{kor}
+
 % §18. Satz von Myers
 \section{Satz von Myers}
 
@@ -1182,7 +1205,7 @@
 \end{satz}
 
 \begin{bem}
-  Das Bsp der Sphären zeigt: Die Schranke ist optimal.
+  $M = S_r^n \implies \sec = r^{-2} \implies \text{Schranke ist optimal}$
 \end{bem}
 
 % 18.2
@@ -1209,8 +1232,10 @@
 \end{bem}
 
 \begin{defn}
-  $\Ric_p : T_p M \times T_p M \to \R, \enspace (v,w) \mapsto \spur(x \mapsto R(x,v)w)$\\
-  heißt \emph{Ricci-Tensor}.
+  \begin{minipage}[t]{0.8 \linewidth}
+    $\Ric_p : T_p M \times T_p M \to \R, \enspace (v,w) \mapsto \spur(x \mapsto R(x,v)w)$ \\
+    heißt \emph{Ricci-Tensor}.
+  \end{minipage}
 \end{defn}
 
 \begin{bem}
@@ -1266,6 +1291,11 @@
   \]
 \end{satz}
 
+\begin{kor}
+  Umkehrung zum vorletzen Satz: Jedes Jacobi-Feld längs einer Geodäten ist das Variations-VF einer Variation durch Geodäten. \\
+  Die Variation lässt sich expl. über die Exponentialabb. konstruieren.
+\end{kor}
+
 % 19.3
 \begin{satz}
   Sei $v \in T_p M$, $w \in T_p M \cong T_v \left( T_p M \right)$. \\
@@ -1284,7 +1314,7 @@
   \begin{itemize}
     \item $(t \mapsto \norm{Y(t)}^2)$ ist konvex.
     \item Wenn $Y$ zwei verschiedene Nullstellen hat, dann $Y \equiv 0$.
-    \item Es gibt keine konjugierten Punkte längs $c$.
+    \item Es gibt keine konjugierten Punkte längs~$c$, \dh{} für je zwei versch. Punkte $a, b \in \im(c)$ gibt es kein Jacobi-Feld~$Y$ längs~$c$ mit $Y(a) = 0$, $Y(b) = 0$, aber $Y_{\cinterval{a}{b}} \not\equiv 0$.
   \end{itemize}
 \end{satz}
 
@@ -1343,6 +1373,10 @@
   Jede zshgde kompakte orientierte Riem. Mft gerader Dimension mit $\sec > 0$ ist einfach zshgd.
 \end{satz}
 
+\begin{bem}
+  Keine der Voraussetzung kann weggelassen werden, wie die Beispiele der projektiven Räume $\R P^2$ und $\R P^3$ zeigen.
+\end{bem}
+
 % Vorlesung vom 16.1.2015
 
 % §22. Symmetrische Räume
@@ -1354,11 +1388,13 @@
 \end{prop}
 
 \begin{defn}
-  Eine zshgde Riem. Mft $P$ heißt \emph{Symmetrischer Raum}, wenn
+  Sei~$P$ eine zusammenhängende Riemannsche Mannigfaltigkeit. \\
+  Die Mft~$P$ heißt \emph{symmetrischer Raum}, wenn
   \[
     \fa{p \in P} \ex{s_p \in \Iso(P)}
     s_p(p) = p \enspace \wedge \enspace (s_p)_{*p} = - \id_{T_p P}.
   \]
+  Sie heißt \emph{lokal symm. Raum}, falls für jeden Punkt $p \in P$ eine \textit{lokale} Isometrie $s_p : U_p \to M$ mit obigen Eigenschaften existiert.
 \end{defn}
 
 \begin{sprech}
@@ -1423,12 +1459,8 @@
 \end{defn}
 
 \begin{satz}
-  $P$ symmetrisch $\implies$ $\LC R = 0$
+  $P$ lokal symmetrisch $\iff$ $\LC R = 0$
 \end{satz}
-
-\begin{bem}
-  Die Umkehrung gilt nur lokal.
-\end{bem}
 
 % Vorlesung vom 20.1.2015
 
@@ -1568,11 +1600,11 @@
 
 \begin{bem}
   \begin{itemize}
-    \item Umkehrung: Sei $M$ einfach zshgde, Riem. Mft. mit $\Hol_p(M) \subseteq \phi(\Iso_p(M))$. Dann ist $P$ ein symmetrischer Raum. % Berger/Simons/Olmos
+    \item Umkehrung: Sei~$M$ eine einfach zshgde, Riem. Mft. mit $\Hol_p(M) \subseteq \phi(\Iso_p(M))$. Dann ist $P$ ein symmetrischer Raum. % Berger/Simons/Olmos
     \item Für $P = \R^n$, $p = 0$ gilt $\Hol_p(P) \subsetneq \phi(\Iso_p(P))$.
     \item Für eine zshgde, vollst. Riem. Mft. $M$ gilt:
     \begin{align*}
-      \phi(\Iso_p(M)) & = \text{Normalisator von $\Hol_p(M)$ in $O(T_p M)$} \\
+      \phi(\Iso_p(M)) & \subseteq \text{Normalisator von $\Hol_p(M)$ in $O(T_p M)$} \\
       & = \Set{ g \in O(T_p M) }{ g \Hol_p(M) g^{-1} = \Hol_p(M) }.
     \end{align*}
   \end{itemize}
@@ -1593,23 +1625,33 @@
 
 \begin{defn}
   Eine Darstellung $\rho : G \to \GL(V)$ heißt \emph{irreduzibel}, wenn
-  \[ \fa{U \subset V \text{ UVR}} (\fa{g \in G} \rho(g)(U) = U) \implies U \in \{ \{ 0 \}, V \}. \]
+  \[
+    \fa{U \subset V \text{ UVR}} (\fa{g \in G} \rho(g)(U) = U) \implies U \in \{ \{ 0 \}, V \}.
+  \]
 \end{defn}
-
-\begin{satz}[de Rham]
-  Sei $(M, g)$ eine einfach zshgde vollständige Riem. Mft. Dann ist $M$ isometrisch zu einem Riemannschen Produkt
-  \[ M \cong M_0 \times M_1 \times \ldots \times M_k \quad \text{mit} \]
-  \begin{itemize}
-    \item $M_0$ ist ein euklidischer VR (evtl. $\{ 0 \}$)
-    \item $M_1, \ldots, M_k$ sind vollständige, einfach zshgde, unzerlegbare (im Sinne dieses Satzes) Riem. Mft, für die gilt:
-    $\Hol_{p_j}(M_j)$ wirkt irreduzibel auf $T_{p_j} M_j$.
-  \end{itemize}
-\end{satz}
 
 \begin{defn}
-  Eine Riem. Mft $(M, g)$ heißt \emph{Isotropie-irreduzibel}, wenn gilt:
-  Für alle $p \in M$ wirkt $\Iso_p(M)$ irreduzibel auf $T_p M$.
+  Eine Riem. Mft~$M$ heißt \emph{Isotropie/Holonomie-irreduzibel}, wenn gilt:
+  Für alle $p \in M$ wirkt $\Iso_p(M)$ / $\Hol_p(M)$ irred. auf~$T_p M$.
 \end{defn}
+
+\begin{bem}
+  Für $P$~symmetrisch: $P$ Holonomie-irr. $\implies$ $P$ Isotropie-irr.
+\end{bem}
+
+\begin{satzdefn}
+  Sei $(M, g)$ eine einfach zshgde vollständige Riem. Mft. \\
+  Dann ist $M$ isometrisch zu einem Riemannschen Produkt
+  \[
+    M \cong M_0 \times M_1 \times \ldots \times M_k
+    \quad \text{(\emph{De-Rham-Zerlegung})}
+    \quad \text{mit}
+  \]
+  \begin{itemize}
+    \item $M_0$ ist ein euklidischer VR (evtl. $\{ 0 \}$).
+    \item $M_1, \ldots, M_k$ sind vollständige, einfach zshgde, unzerlegbare (im Sinne dieses Satzes), Holonomie-irreduzible Riem. Mften.
+  \end{itemize}
+\end{satzdefn}
 
 % 23.11
 \begin{satz}
@@ -1695,6 +1737,11 @@
 \begin{nota}
   $\KF(M) \coloneqq \Set{X \in \VF(M)}{X \text{ Killing}}$
 \end{nota}
+
+\begin{lem}
+  Für $X \in \KF(M)$ gilt:
+  $\fa{v \in T_p M} \tfrac{D}{\d t}|_{t=0} \Phi_{t*} v = \nabla_v X$
+\end{lem}
 
 % 24.4
 \begin{lem}
@@ -1800,7 +1847,7 @@
 \end{kor}
 
 % §25. Konstruktion symmetrischer Räume
-
+% (ausgelassen)
 
 
 \end{document}
