@@ -1,0 +1,251 @@
+\documentclass{cheat-sheet}
+
+\pdfinfo{
+  /Title (Zusammenfassung Term Rewriting and All That)
+  /Author (Tim Baumann)
+}
+
+%\usepackage{nicefrac}
+%\usepackage{tikz}
+%\usetikzlibrary{calc}
+%\usepackage[normalem]{ulem} % \sout
+%\usepackage{multirow}
+
+\newcommand{\from}{\leftarrow}
+\newcommand{\reducesTo}{\xrightarrow{*}}
+\newcommand{\strictlyReducesTo}{\xrightarrow{+}}
+\newcommand{\reducesFrom}{\xleftarrow{*}}
+\newcommand{\toOrEq}{\xrightarrow{=}}
+\newcommand{\fromOrEq}{\xleftarrow{=}}
+\newcommand{\joinable}{\downarrow}
+\newcommand{\zzEq}{\xleftrightarrow{*}} % Zigzag-Equivalent
+\newcommand{\NF}[1]{{#1}\!\downarrow\,\,} % Normalform
+\newcommand{\Multisets}{\mathcal{M}} % Multimengen über einer Menge
+
+% Kleinere Klammern
+\delimiterfactor=701
+
+\setlength{\tabcolsep}{2pt}
+
+\begin{document}
+
+\raggedcolumns % stretche Inhalt nicht über die gesamte Spaltenhöhe
+
+\maketitle{Zusammenfassung Term Rewriting aAT}
+
+Dies ist eine übersetzte Zusammenfassung des Buches Term Rewriting and All That von Franz Baader und Tobias Nipkow.
+
+% §2. Abstrakte Reduktionssysteme
+\section{Abstrakte Reduktionssysteme}
+
+\begin{defn}
+  Ein \emph{abstraktes Reduktionssystem} ist ein Tupel $(A, {\to})$, wobei ${\to} \in A \times A$ eine Relation auf $A$ ist.
+\end{defn}
+
+% §2.1. Äquivalenz und Reduktion
+
+\begin{defn}
+  \,
+  \begin{minipage}[t]{0.88 \linewidth}
+    \begin{tabular}[t]{ r l l }
+      $\xrightarrow{0}$ & $\coloneqq \Set{(a, a)}{a \in A}$ & Identität \\
+      $\xrightarrow{i+1}$ & $\coloneqq {\xrightarrow{i}} \circ {\to}$ & $(i+1)$-fache Komposition, $i \geq 0$ \\
+      $\from$ & $\coloneqq \Set{(t, s)}{(s, t) \in {\to}}$ & Inverse Relation \\
+      $\toOrEq$ & $\coloneqq (\to) \cup (\xrightarrow{0})$ & refl. Hülle \\
+      $\reducesTo$ & $\coloneqq \cup_{i \geq 0} (\xrightarrow{i})$ & refl. trans. Hülle \\
+      $\strictlyReducesTo$ & $\coloneqq \cup_{i \geq 1} (\xrightarrow{i})$ & refl. trans. Hülle \\
+      $\xleftrightarrow{}$ & $\coloneqq {\to} \cup {\from}$ & symm. Hülle \\
+      $\zzEq$ & $\coloneqq (\xleftrightarrow{})^{*}$ & refl. trans. symm. Hülle
+    \end{tabular}
+  \end{minipage}
+\end{defn}
+
+\begin{defn}
+  Sei $x \in A$ ein Term.
+  \begin{itemize}
+    \item Der Term $x$ heißt \emph{reduzibel}, falls ein $y \in A$ mit $x \to y$ existiert,
+    \item \emph{irreduzibel} (oder in \emph{Normalform}) falls $x$ nicht reduzibel ist.
+    \item Ein Term $y \in A$ heißt \emph{Normalform} von~$x$, falls $x \reducesTo y$ und~$y$ irreduzibel ist.
+    \item Eine Term~$y$ heißt \emph{direkter Nachfolger} von~$x$, falls $x \to y$.
+    \item Eine Term~$y$ heißt \emph{Nachfolger} von~$x$, falls $x \strictlyReducesTo y$.
+    \item $x$ und~$y$ heißen \textit{joinable}, notiert \emph{$x \joinable y$}, falls $\ex{z} x \reducesTo z \reducesFrom y$.
+  \end{itemize}
+\end{defn}
+
+\begin{defn}
+  Eine Reduktion ${\to}$ heißt
+  \begin{tabular}{r l l}
+    \emph{Church-Rosser} & $\coloniff$ & $x \zzEq y \implies x \joinable y$ \\
+    \emph{konfluent} & $\coloniff$ & $y_1 \reducesFrom y \reducesTo y_2 \implies y_1 \joinable y_2$ \\
+    \emph{semi-konfluent} & $\coloniff$ & $y_1 \from y \reducesTo y_2 \implies y_1 \joinable y_2$ \\
+    \emph{terminierend} & $\coloniff$ &
+      \begin{minipage}[t]{0.8 \linewidth}
+        es gibt keine unendlich absteigende Kette \\
+        $x_0 \to x_1 \to x_2 \to \ldots$
+        \quad (auch: \textit{noethersch})
+      \end{minipage} \\
+    \emph{normalisierend} & $\coloniff$ & jeder Term besitzt eine Normalform \\
+    \emph{konvergent} & $\coloniff$ & konfluent $\wedge$ normalisierend \\
+  \end{tabular}
+\end{defn}
+
+\begin{lem}
+  Für eine Reduktion ${\to}$ sind äquivalent:
+  \begin{itemize}
+    \item ${\to}$ ist Church-Rosser
+    \item ${\to}$ ist konfluent
+    \item ${\to}$ ist semi-konfluent
+  \end{itemize}
+\end{lem}
+
+\begin{lem}
+  Ist die Reduktion ${\to}$ konfluent/terminierend/konvergent, so besitzt jeder Term höchstens/mindestens/genau eine Normalform.
+\end{lem}
+
+\begin{nota}
+  Falls~$x$ eine NF~$y$ besitzt, so schreibe $x \NF \coloneqq y$.
+\end{nota}
+
+\begin{thm}
+  Ist ${\to}$ konvergent, so gilt $x \zzEq y \iff \NF{x} = \NF{y}$.
+\end{thm}
+
+\begin{bem}
+  Dies liefert einen einfachen Algorithmus, um $x \zzEq y$ zu entscheiden: Reduziere die Terme~$x$ und~$y$ zu Normalformen und vergleiche diese.
+\end{bem}
+
+% §2.2. Wohlfundierte Induktion
+\subsection{Terminierungsbeweise}
+
+\begin{lem}
+  ${\to}$ ist terminierend $\iff$ ${\to}$ ist eine Wohlordnung
+\end{lem}
+
+\begin{defn}
+  Eine Relation ${\to}$ heißt
+  \begin{itemize}
+    \item \emph{endlich verzweigend}, falls jeder Term nur endlich viele direkte Nachfolger besitzt,
+    \item \emph{global endlich}, falls jeder Term nur endl. viele Nachfolger hat,
+    \item \emph{azyklisch}, falls kein Term~$a$ mit $a \strictlyReducesTo a$ existiert.
+  \end{itemize}
+\end{defn}
+
+\begin{lem}
+  \begin{itemize}
+    \item Eine endlich verzweigende Relation ist global endlich, falls sie terminierend ist.
+    \item Eine azykl. Relation ist terminierend, falls sie global endlich ist.
+  \end{itemize}
+\end{lem}
+
+% §2.3. Terminierungsbeweise
+
+\begin{lem}
+  Sei $(A, {\to})$ ein Reduktionssystem und $(B, {>})$ eine wohlgeordnete Menge.
+  Gibt es eine streng monotone Abbildung $\varphi : A \to B$, so ist~$A$ terminierend.
+\end{lem}
+
+\begin{lem}
+  Ein endlich verzweigendes Reduktionssystem~$(A, {\to})$ ist genau dann terminierend, falls es eine streng monotone Abbildung $\varphi : (A, {\to}) \to (\N, >)$ gibt.
+\end{lem}
+
+% §2.4. Lexikographische Ordnungen
+
+\begin{defn}
+  Seien $(A_i, >_i)_{i = 1, \ldots, n}$ geordnete Mengen.
+  Die \emph{lexikalische Ordnung}~$>_{\text{lex}}$ auf $A_1 \times \ldots \times A_n$ ist definiert durch
+  \[
+    (x_1, \nldots, x_n) >_{\text{lex}} (y_1, \nldots, y_n) \!\!\coloniff\! \ex{k {\leq} n\!}\! (\fa{i {<} k\!}\! x_i \!=\! y_i) \,\wedge\, x_k <_k y_k.
+  \]
+\end{defn}
+
+\begin{lem}
+  Ist $>$ eine strikte (Wohl-) Ordnung, so auch $>_{\textit{lex}}$.
+\end{lem}
+
+% ausgelassen: $>_{lex}^*$, $>_{Lex}$
+
+% §2.5. Multimengen-Ordnungen
+
+\begin{defn}
+  Eine \textit{Multimenge}~$M$ über einer Menge~$A$ ist eine Abbildung $M : A \to \N$.
+  Sie ist endlich, falls ${\sum}_{a \in A} M(a) < \infty$.
+\end{defn}
+
+\begin{nota}
+  \begin{minipage}[t]{0.8 \linewidth}
+    $\Multisets(A) \coloneqq \{ \text{ Multimengen über $A$ } \}$ \\
+    $a \in M \coloniff M(a) \geq 1$
+  \end{minipage}
+\end{nota}
+
+\begin{defn}
+  Die \textit{Differenz} von Multimengen~$M, N \in \Multisets(A)$ ist $M - N \in \Multisets(A)$ mit
+  $(M - N)(a) \coloneqq \max \{ 0, M(a) - N(a) \}$.
+\end{defn}
+
+\begin{defn}
+  Sei ${>}$ eine strikte Ordung auf~$A$.
+  Die \emph{Multimengenordnung} $>_{\text{mul}}$ auf $\Multisets(A)$ ist dann definiert durch
+  \[
+    M >_{\text{mul}} N \coloniff M \neq N \wedge \fa{n \in N - M} \ex{m \in M - N} m > n.
+  \]
+\end{defn}
+
+\begin{lem}
+  Ist $>$ eine strikte (Wohl-) Ordnung, so auch $>_{\textit{mul}}$.
+\end{lem}
+
+% §2.6. Ordnungen in ML (ausgelassen)
+
+% §2.7. Konfluenzbeweise
+\subsection{Konfluenzbeweise}
+
+% TODO: ist die Diamant-Eigenschaft relevant?
+\begin{defn}
+  Eine Relation ${\to}$
+  \begin{itemize}
+    \item heißt \emph{lokal konfluent}, falls $y_1 \!\from\! y \to y_2 \implies y_1 \joinable y_2$.
+    \item heißt \emph{stark konfluent}, falls $y_1 \!\from\! y \!\to\! y_2 \implies \ex{z\!}\! y_1 \reducesTo z \fromOrEq y_2$.
+    \item besitzt die \emph{Diamant-Eigenschaft}, falls
+    \[
+      y_1 \!\from\! y \!\to\! y_2 \implies \ex{z} y_1 \to z \from y_2.
+    \]
+  \end{itemize}
+\end{defn}
+
+\begin{lem}
+  Falls ${\to_1} \leq {\to_2} \leq {\xrightarrow{*}_1}$, so gilt ${\xrightarrow{*}_1} = {\xrightarrow{*}_2}$.
+  Ist zusätzlich~$\to_2$ (stark) konfluent, so auch ${\to_1}$.
+\end{lem}
+
+\begin{lem}
+  \begin{itemize}
+    \item Stark konfluente Relationen sind konfluent.
+    \item Eine terminierende Rel. ist konfluent, falls sie lokal konfluent ist.
+  \end{itemize}
+\end{lem}
+
+% §2.7.1. Kommutation
+
+% TODO: sind die beiden letzen Definitionen relevant?
+\begin{defn}
+  Zwei Relationen~${\to_1}$ und~${\to_2}$ auf~$A$
+  \begin{itemize}
+    \item \emph{kommutieren}, falls $y_1 \reducesFrom_1 x \reducesTo_2 y_2 \implies \ex{z} y_1 \reducesTo_2 z \reducesFrom_1 y_2$.
+    \item \emph{kommutieren stark}, falls
+    \[
+      y_1 \from_1 x \to_2 y_2 \implies \ex{z} y_1 \toOrEq_2 z \reducesFrom_1 y_2.
+    \]
+    \item besitzen die \emph{Kommutierender-Diamant-Eigenschaft}, falls
+    \[
+      y_1 \from_1 x \to_2 y_2 \implies \ex{z} y_1 \to_2 z \from_1 y_2.
+    \]
+  \end{itemize}
+\end{defn}
+
+\begin{lem}
+  Angenommen, $\to_1$ und~$\to_2$ sind konfluent und kommutieren. \\
+  Dann ist auch ${\to_1} \cup {\to_2}$ konfluent.
+\end{lem}
+
+\end{document}
