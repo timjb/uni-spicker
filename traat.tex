@@ -11,6 +11,8 @@
 %\usepackage[normalem]{ulem} % \sout
 %\usepackage{multirow}
 
+\input{include/cats} % Kategorientheorie-Makros
+
 \newcommand{\from}{\leftarrow}
 \newcommand{\reducesTo}{\xrightarrow{*}}
 \newcommand{\strictlyReducesTo}{\xrightarrow{+}}
@@ -21,6 +23,15 @@
 \newcommand{\zzEq}{\xleftrightarrow{*}} % Zigzag-Equivalent
 \newcommand{\NF}[1]{{#1}\!\downarrow\,\,} % Normalform
 \newcommand{\Multisets}{\mathcal{M}} % Multimengen über einer Menge
+\DeclareMathOperator{\Pos}{Pos} % Menge der Positionen eines Terms
+\newcommand{\size}[1]{\abs{{#1}}} % Größe eines Terms
+\DeclareMathOperator{\Var}{Var} % Menge der Variablen eines Terms
+\DeclareMathOperator{\Dom}{Dom} % Domain einer Ersetzung
+\DeclareMathOperator{\Subst}{Sub} % Menge der Ersetzungen
+\newcommand{\ident}{\approx} % Identität
+\renewcommand{\Alg}{\mathcal{A}} % Sigma-Algebra
+\newcommand{\SigmaAlgC}{\text{$\Sigma$-$\mathbf{Alg}$}} % Kategorie der Sigma-Algebren
+\newcommand{\Variety}{\mathcal{V}} % Sigma-Varietät
 
 % Kleinere Klammern
 \delimiterfactor=701
@@ -247,5 +258,326 @@ Dies ist eine übersetzte Zusammenfassung des Buches Term Rewriting and All That
   Angenommen, $\to_1$ und~$\to_2$ sind konfluent und kommutieren. \\
   Dann ist auch ${\to_1} \cup {\to_2}$ konfluent.
 \end{lem}
+
+% §3. Universelle Algebra
+\section{Universelle Algebra}
+
+% §3.1. Terme, Ersetzungen und Identitäten
+
+\begin{defn}
+  Eine \emph{Signatur}~$\Sigma$ ist eine Menge von \textit{Funktionssymbolen} zusammen mit einer Aritätsabbildung $\mathrm{arity} : \Sigma \to \N$.
+  % Elemente von $\Sigma^{(0)}$ heißen \emph{konstante Symbole}
+\end{defn}
+
+\begin{nota}
+  $\Sigma^{(n)} \coloneqq \mathrm{arity}^{-1}(n)$
+\end{nota}
+
+\begin{defn}
+  Sei~$\Sigma$ eine Signatur und~$X$ eine Menge von Variablen (\dh{} es gilt $X \cap \Sigma = \emptyset$).
+  Die Menge~$T(\Sigma, X)$ der \emph{$\Sigma$-Terme über~$X$} ist induktiv definiert durch
+  \begin{itemize}
+    \item $X \subseteq T(\Sigma, X)$
+    \item $\fa{f \in \Sigma^{(n)}, t_1 \in T(\Sigma, X), \nldots, t_n \in T(\Sigma, X)} f(t_1, \nldots, t_n) \in T(\Sigma, X)$
+  \end{itemize}
+\end{defn}
+
+\begin{bem}
+  Falls $X \subseteq Y$, $Y \cap \Sigma = \emptyset$, so gilt $T(\Sigma, X) \subseteq T(\Sigma, Y)$.
+\end{bem}
+
+\begin{defn}
+  Terme~$t$ ohne freie Variablen (\dh{} $t \in T(\Sigma, \emptyset)$) heißen \emph{Grundterme} oder \emph{geschlossene Terme}.
+\end{defn}
+
+\begin{defn}
+  Die Menge der \emph{Positionen}~$\Pos(s)$ eines Terms~$s \in T(\Sigma, X)$ ist folgende Menge von Listen von natürlichen Zahlen
+  \begin{itemize}
+    \item Falls $s = x \in X$: $\Pos(s) \coloneqq \{ \epsilon \}$
+    \item Falls $s = f(s_1, \ldots, s_n)$: $\Pos(s) \coloneqq \{ \epsilon \} \cup {\bigcup}_{i=1}^n \Set{i p}{p \in \Pos(s_i)}$
+  \end{itemize}
+\end{defn}
+
+\begin{defn}
+  Die \emph{Größe} eines Terms~$s \in T(\Sigma, X)$ ist $\size{s} \coloneqq \abs{\Pos(s)}$.
+\end{defn}
+
+\begin{defn}
+  Der \emph{Subterm}~$s|_p$ an der Position~$p \in \Pos(s)$ eines Terms~$s$ ist
+  \[
+    s|_\epsilon \coloneqq s, \qquad
+    f(s_1, \ldots, s_n)|_{i q} \coloneqq s_i|_q.
+  \]
+  Die \emph{Ersetzung}~$s[t]_p$ von~$s|_p$ durch einen Term~$t \in T(\Sigma, X)$ ist
+  \[
+    s[t]_\epsilon \coloneqq t, \qquad
+    f(s_1, \ldots, s_n)[t]_{i q} \coloneqq s_i[t]_q.
+  \]
+\end{defn}
+
+\begin{defn}
+  Die \emph{Menge der Variablen} in~$s \in T(\Sigma, X)$ ist
+  \[
+    \Var(s) \coloneqq \Set{x \in X}{\ex{p \in \Pos(s)} s|_p = x}.
+  \]
+\end{defn}
+
+\begin{bem}
+  Für jeden Term~$t \in T(\Sigma, X)$ gilt $t \in T(\Sigma, \Var(t))$.
+\end{bem}
+
+% Ausgelassen: Lemma 3.1.4 über Gleichheiten mit Subtermen, Termersetzung
+
+\begin{defn}
+  Sei~$\Sigma$ eine Signatur und~$V$ eine abzählbar unendliche Menge von Variablen.
+  Eine $T(\Sigma, V)$-\emph{Ersetzung} ist eine Abbildung $\sigma : V \to T(\Sigma, V)$, für die gilt:
+  \[
+    \Dom(\sigma) \coloneqq \Set{v \in V}{\sigma(v) \neq v}
+  \]
+  ist endlich.
+  Die Menge der $T(\Sigma, V)$-Ersetzungen ist $\Subst(T(\Sigma, V))$.
+  % Ausgelassen: Ran, VRan
+  Wir können~$\sigma$ ausdehnen zu einer Abb.~$\hat{\sigma} : T(\Sigma, V) \to T(\Sigma, V)$ durch
+  \[
+    \hat{\sigma}(v) \coloneqq \sigma(v), \qquad
+    \hat{\sigma}(f(s_1, \ldots, s_n)) \coloneqq f(\hat{\sigma}(s_1), \ldots, \hat{\sigma}(s_n)).
+  \]
+  Die \textit{Komposition} zweier Ersetzungen~$\sigma$ und~$\tau$ ist $\sigma \circ \tau \coloneqq \hat{\sigma} \circ \tau$.
+\end{defn}
+
+\begin{defn}
+  Eine \emph{$\Sigma$-Identität} ist ein Paar $(s, t) \in T(\Sigma, V) \times T(\Sigma, V)$, auch geschrieben $s \ident t$.
+\end{defn}
+
+% 3.1.8
+\begin{defn}
+  Die \emph{Reduktionsrelation}~$\to_E$ zu einer Menge~$E$ von $\Sigma$-Identitäten ist
+  \begin{align*}
+    s \to_E t \coloniff \, & \ex{(l \ident r) \in E, p \in \Pos(s), \sigma \in \Subst(T(\Sigma, V))} \\
+    & s|_p = \sigma(l) \wedge t = s[\sigma(r)]_p.
+  \end{align*}
+\end{defn}
+
+% 3.1.9
+\begin{defn}
+  Eine Relation~$\equiv$ auf~$T(\Sigma, V)$ heißt
+  \begin{itemize}
+    \item \emph{abgeschlossen unter Ersetzungen}, falls $s = t \implies \sigma(s) = \sigma(t)$
+    \item \emph{abgeschlossen unter $\Sigma$-Operationen}, falls
+    \[
+      s_1 \equiv t_1, \ldots, s_n \equiv t_n \implies f(s_1, \ldots, s_n) \equiv f(t_1, \ldots, t_n)
+    \]
+    \item \emph{kompatibel mit $\Sigma$-Operationen}, falls
+    \[
+      s \equiv t \implies f(s_1, \ldots, s_{i-1}, s, s_{i+1}, s_n) \equiv f(s_1, \ldots, s_{i-1}, t, s_{i+1}, s_n)
+    \]
+    \item \emph{kompatibel mit $\Sigma$-Kontexten}, falls
+    \[
+      s \equiv s' \implies t[s]_p \equiv t[s']_p
+    \]
+  \end{itemize}
+\end{defn}
+
+% 3.1.11
+\begin{lem}
+  Es sind äquivalent:
+  \begin{itemize}
+    \item $\equiv$ ist kompatibel mit $\Sigma$-Operationen
+    \item $\equiv$ ist kompatibel mit $\Sigma$-Kontexten
+  \end{itemize}
+  Ist~$\equiv$ reflexiv und transitiv, so ist außerdem äquivalent:
+  \begin{itemize}
+    \item $\equiv$ ist abgeschlossen unter $\Sigma$-Operationen
+  \end{itemize}
+\end{lem}
+
+\begin{thm}
+  Sei~$E$ eine Menge von $\Sigma$-Identitäten.
+  \begin{itemize}
+    % 3.1.10
+    \item $\to_E$ ist abgeschlossen unter Ersetzungen und kompatibel mit $\Sigma$-Operationen
+    % 3.1.12
+    \item Die Relation $\zzEq_E$ ist die kleinste Äquivalenzrelation, die~$E$ enthält und abg. ist unter Ersetzungen und $\Sigma$-Operationen.
+  \end{itemize}
+\end{thm}
+
+% §3.2. Algebren, Homomorphismen und Kongruenzen
+
+% 3.2.1
+\begin{defn}
+  Eine \emph{$\Sigma$-Algebra}~$\Alg$ besteht aus
+  \begin{itemize}
+    \item einer \textit{Trägermenge}~$A$ und
+    \item einer Abbildung $f^\Alg : A^n \to A$ für alle $f \in \Sigma^{(n)}$.
+  \end{itemize}
+\end{defn}
+
+% 3.4.1
+\begin{bsp}
+  $T(\Sigma, V)$ ist eine $\Sigma$-Algebra mit
+  \[
+    f^{T(\Sigma, V)} : T(\Sigma, V)^n \to T(\Sigma, V), \quad
+    (t_1, \ldots, t_n) \mapsto f(t_1, \ldots, t_n).
+  \]
+\end{bsp}
+
+% 3.2.2
+\begin{defn}
+  \begin{itemize}
+    \item Eine \emph{$\Sigma$-Subalgebra} von~$A$ ist eine Teilmenge~$B \subset A$, sodass $f^\Alg(b_1, \ldots, b_n) \in B$ für alle $f \in \Sigma^{(n)}$ und $b_1, \ldots, b_n \in B$.
+    \item Die von $X \subseteq A$ \emph{erzeugte $\Sigma$-Subalgebra} ist die kleinste $\Sigma$-Subalgebra, die~$X$ enthält.
+  \end{itemize}
+\end{defn}
+
+% 3.2.3
+\begin{defn}
+  Ein \textit{Homomorphismus}~$\phi$ zwischen $\Sigma$-Algebren~$\Alg$ und~$\mathcal{B}$ (mit Trägermengen~$A$ bzw.~$B$) ist eine Abbildung $\phi : A \to B$, sodass
+  \[
+    \phi(f^\Alg(a_1, \ldots, a_n)) = f^\mathcal{B}(\phi(a_1), \ldots, \phi(a_n)).
+  \]
+\end{defn}
+
+\begin{bem}
+  Damit bilden $\Sigma$-Algebren eine Kategorie.
+\end{bem}
+
+% 3.2.4
+\begin{defn}
+  %Sei~$\Alg$ eine $\Sigma$-Algebra.
+  Eine Äquivalenzrelation~$\equiv$ auf~$A$ heißt \emph{Kongruenz} auf~$\Alg$, falls
+  \[
+    a_1 \equiv b_1, \ldots, a_n \equiv b_n \implies f^\Alg(a_1, \ldots, a_n) \equiv f^\Alg(b_1, \ldots, b_n).
+  \]
+\end{defn}
+
+\begin{lemdefn}
+  Ist $\equiv$ eine Äquivalenz, so wird $A/\equiv$ mit
+  \[
+    f^{\Alg/\equiv}([a_1], \ldots, [a_n]) \coloneqq [f^\Alg(a_1, \ldots, a_n)]
+  \]
+  eine $\Sigma$-Algebra, die \emph{Quotientenalgebra} $\Alg/\equiv$.
+\end{lemdefn}
+
+% ausgelassen: Lemma 3.2.5 (Eigenschaften der Quotientenalgebra)
+
+% Def 3.2.6 umformuliert und verallgemeinert
+\begin{lem}
+  Die Kategorie der $\Sigma$-Algebren enthält kleine Limiten.
+\end{lem}
+
+% §3.3. Freie Algebren
+
+\begin{defn}
+  Eine $\Sigma$-Algebra heißt \emph{frei}, falls sie isomorph ist zu $F(X) \coloneqq T(\Sigma, X)$ für eine Menge~$X$ von Variablen.
+\end{defn}
+
+\begin{bem}
+  Diese Setzung definiert einen Funktor $F : \SetC \to \SigmaAlgC$.
+\end{bem}
+
+\begin{lem}
+  $F \ladj U$, wobei $U : \SetC \to \SigmaAlgC$ der Vergissfunktor ist.
+\end{lem}
+
+\begin{kor}
+  $F(\emptyset) = T(\Sigma, \emptyset)$ ist das initiale Objekt in~$\SigmaAlgC$.
+\end{kor}
+
+% Lemma 3.3.3. ausgelassen, da es allein daraus folgt, dass initiale Objekte eindeutig bis auf eindeutige Isomorphie sind
+
+% §3.4. Termalgebren
+
+% Def 3.4.1 ist vorgezogen worden
+
+% Lem 3.4.2 ist redundant
+
+% §3.5. Gleichheitsklassen
+
+% 3.5.1 und 3.5.2
+\begin{defn}
+  \begin{itemize}
+    \item Eine $\Sigma$-Identität $s \ident t$ \emph{gilt in einer $\Sigma$-Algebra}~$\Alg$, falls für alle Homomorphismen $\phi : T(\Sigma, V) \to \Alg$ gilt: $\phi(s) = \phi(t)$.
+    \item $\Alg$ ist ein \emph{Modell} einer Menge~$E$ von $\Sigma$-Algebren (notiert $\Alg \models E$), falls jede Identität aus~$E$ in~$\Alg$ gilt.
+    \item Die Subkategorie von~$\SigmaAlgC$ der Modelle von~$E$ heißt \textit{durch~$E$ definierte} \emph{$\Sigma$-Varietät}~$\Variety(E)$.
+  \end{itemize}
+\end{defn}
+
+\begin{defn}
+  \begin{itemize}
+    \item Die Identität $s \ident t$ ist eine \emph{semantische Konsequenz} von~$E$ (notiert $E \models s \ident t$), falls $s \ident t$ in allen $\Alg \in \Variety(E)$ gilt.
+    \item ${\ident_E} \coloneqq \Set{(s,t)}{E \models s \approx t}$ heißt von~$E$ \emph{induzierte Theorie}. % von Gleichheiten
+  \end{itemize}
+\end{defn}
+
+% 3.5.4
+\begin{defn}
+  Eine Relation~$\equiv$ auf~$T(\Sigma, V)$ heißt \emph{voll invariant}, falls $s \equiv t \implies \phi(s) \equiv \phi(t)$ für alle Mor. $\phi : T(\Sigma, V) \to T(\Sigma, V)$.
+\end{defn}
+
+% 3.5.4
+\begin{lem}
+  $\ident_E$ ist eine voll invariante Kongruenz.
+  % zweiter Teil weggelassen
+\end{lem}
+
+% 3.5.5
+\begin{lemdefn}
+  Es sind äquivalent:
+  \begin{itemize}
+    \item $E$ heißt \emph{trivial}
+    \item $\ident_E = T(\Sigma, V) \times T(\Sigma, V)$
+    \item $x \ident_E y$ gilt für Variablen $x, y \in V$, $x \neq y$
+    \item $\Variety(E)$ besteht aus Algebren der Kardinalität $\leq 1$.
+  \end{itemize}
+\end{lemdefn}
+
+\begin{thm}
+  Sei~$V$ eine abzählbar unendliche Menge von Variablen.
+  \begin{itemize}
+    % 3.5.6
+    \item $T(\Sigma, V)/{\ident_E}$ ist eine freie Algebra in~$\Variety(E)$ mit erz. Menge~$V/{\ident_E}$. Falls~$E$ nicht trivial ist, so ist $V/{\ident_E}$ abzählbar unendlich.
+    % 3.5.7
+    \item $T(\Sigma, V)/{\ident_E} \models s \ident t \iff s \ident_E t$
+  \end{itemize}
+\end{thm}
+
+% ausgelassen: 3.5.8
+
+\begin{defn}
+  Die durch~$E$ \emph{induzierte induktive Theorie} ist
+  \[
+    {\ident_E^I} \coloneqq \Set{(s, t)}{T(\Sigma, \emptyset) \models s \ident t} \subseteq T(\Sigma, V) \times T(\Sigma, V).
+  \]
+\end{defn}
+
+\begin{bem}
+  ${\ident_E} \subseteq {\ident_E^I}$
+\end{bem}
+
+% ausgelassen: 3.5.11
+
+% 3.5.12
+\begin{umformulierung}
+  Die Relation $\zzEq_E$ ist die kleinste voll invariante Kongruenz auf $T(\Sigma, V)$, die~$E$ enthält.
+\end{umformulierung}
+
+% 3.5.13
+\begin{lem}
+  Für eine voll invariante Kongruenz~$\equiv$ auf $T(\Sigma, V)$ gilt:
+  \[ E \subseteq {\equiv} \implies {\ident_E} \subseteq {\equiv}. \]
+\end{lem}
+
+\begin{kor}[\emph{Birkhoffs Lemma}]
+  $\zzEq_E \enspace = \enspace \ident_E$
+\end{kor}
+
+% 3.5.15
+\begin{thm}
+  Für eine Klasse~$\mathcal{K}$ von $\Sigma$-Algebren sind äquivalent:
+  \begin{itemize}
+    \item $\mathcal{K}$ ist eine Varietät, \dh{} $\mathcal{K} = \Variety(E)$ für eine Menge~$E$ von Identitäten.
+    \item $\mathcal{K}$ ist abgeschlossen unter dem Bilden von Unteralgebren, Bildalgebren und direkten Produkten.
+  \end{itemize}
+\end{thm}
 
 \end{document}
