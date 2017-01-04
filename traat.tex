@@ -5,11 +5,8 @@
   /Author (Tim Baumann)
 }
 
-%\usepackage{nicefrac}
-%\usepackage{tikz}
-%\usetikzlibrary{calc}
-%\usepackage[normalem]{ulem} % \sout
-%\usepackage{multirow}
+\usepackage{algorithmicx}
+\usepackage[noend]{algpseudocode}
 
 \input{include/cats} % Kategorientheorie-Makros
 
@@ -21,8 +18,9 @@
 \newcommand{\fromOrEq}{\xleftarrow{=}}
 \newcommand{\joinable}{\downarrow}
 \newcommand{\zzEq}{\xleftrightarrow{*}} % Zigzag-Equivalent
-\newcommand{\NF}[1]{{#1}\!\downarrow\,\,} % Normalform
+\newcommand{\NF}[1]{{{#1}\!\downarrow}} % Normalform
 \newcommand{\Multisets}{\mathcal{M}} % Multimengen über einer Menge
+\DeclareMathOperator{\arity}{arity} % Arität (einer Funktion)
 \DeclareMathOperator{\Pos}{Pos} % Menge der Positionen eines Terms
 \newcommand{\size}[1]{\abs{{#1}}} % Größe eines Terms
 \DeclareMathOperator{\Var}{Var} % Menge der Variablen eines Terms
@@ -32,6 +30,9 @@
 \renewcommand{\Alg}{\mathcal{A}} % Sigma-Algebra
 \newcommand{\SigmaAlgC}{\text{$\Sigma$-$\mathbf{Alg}$}} % Kategorie der Sigma-Algebren
 \newcommand{\Variety}{\mathcal{V}} % Sigma-Varietät
+\DeclareMathOperator{\CongClos}{CC} % kongruente Hülle
+\newcommand{\inferrule}[2]{\frac{{#1}}{{#2}}} % logische Inferenzregel
+\DeclareMathOperator{\Subterms}{Subterms} % Unterterme
 
 % Kleinere Klammern
 \delimiterfactor=701
@@ -122,7 +123,7 @@ Dies ist eine übersetzte Zusammenfassung des Buches Term Rewriting and All That
 \end{thm}
 
 \begin{bem}
-  Dies liefert einen einfachen Algorithmus, um $x \zzEq y$ zu entscheiden: Reduziere die Terme~$x$ und~$y$ zu Normalformen und vergleiche diese.
+  Dies liefert einen einfachen Algorithmus, um $x \zzEq y$ zu entscheiden: Reduziere die Terme~$x$ und~$y$ zu Normalformen~$\NF{x}$ bzw.~$\NF{y}$ und vergleiche diese.
 \end{bem}
 
 % §2.2. Wohlfundierte Induktion
@@ -265,7 +266,7 @@ Dies ist eine übersetzte Zusammenfassung des Buches Term Rewriting and All That
 % §3.1. Terme, Ersetzungen und Identitäten
 
 \begin{defn}
-  Eine \emph{Signatur}~$\Sigma$ ist eine Menge von \textit{Funktionssymbolen} zusammen mit einer Aritätsabbildung $\mathrm{arity} : \Sigma \to \N$.
+  Eine \emph{Signatur}~$\Sigma$ ist eine Menge von \textit{Funktionssymbolen} zusammen mit einer Aritätsabbildung $\arity : \Sigma \to \N$.
   % Elemente von $\Sigma^{(0)}$ heißen \emph{konstante Symbole}
 \end{defn}
 
@@ -375,6 +376,8 @@ Dies ist eine übersetzte Zusammenfassung des Buches Term Rewriting and All That
     \[
       s \equiv s' \implies t[s]_p \equiv t[s']_p
     \]
+    % 4.2.2
+    \item \emph{Umschreibungsrelation}, falls sie kompatibel mit $\Sigma$-Operationen und abgeschlossen unter Ersetzungen ist.
   \end{itemize}
 \end{defn}
 
@@ -395,7 +398,7 @@ Dies ist eine übersetzte Zusammenfassung des Buches Term Rewriting and All That
   Sei~$E$ eine Menge von $\Sigma$-Identitäten.
   \begin{itemize}
     % 3.1.10
-    \item $\to_E$ ist abgeschlossen unter Ersetzungen und kompatibel mit $\Sigma$-Operationen
+    \item ${\to_E}$, ${\strictlyReducesTo_E}$ und ${\reducesTo_E}$ sind Umschreibungsrelationen.
     % 3.1.12
     \item Die Relation $\zzEq_E$ ist die kleinste Äquivalenzrelation, die~$E$ enthält und abg. ist unter Ersetzungen und $\Sigma$-Operationen.
   \end{itemize}
@@ -579,5 +582,187 @@ Dies ist eine übersetzte Zusammenfassung des Buches Term Rewriting and All That
     \item $\mathcal{K}$ ist abgeschlossen unter dem Bilden von Unteralgebren, Bildalgebren und direkten Produkten.
   \end{itemize}
 \end{thm}
+
+% §4. Gleichheitsprobleme
+\section{Gleichheitsprobleme}
+
+\begin{defn}
+  Sei~$E$ eine Menge von Identitäten.
+  Eine Gleichheit~$s \ident t$ heißt
+  \begin{itemize}
+    \item \emph{gültig} in~$E$, falls $s \ident_E t$,
+    \item \emph{erfüllbar} in~$E$, falls es eine Ersetzung~$\sigma$ mit $\sigma(s) \ident_E \sigma(t)$ gibt.
+  \end{itemize}
+\end{defn}
+
+% §4.1. Eine Entscheidungsprozedur für $\ident_E$
+
+\begin{problem}[\emph{matching problem}]
+  Gegeben Terme~$s$ und~$l$, gibt es eine Ersetzung~$\sigma$, sodass $\sigma(s) = l$?
+\end{problem}
+
+% 4.1.1
+\begin{thm}
+  Ist~$E$ endlich und $\to_E$ konvergent, so ist ${\approx_E}$ entscheidbar.
+\end{thm}
+
+\begin{alg}
+  Seien~$x$ und~$y$ gegeben.
+  Wegen der Endlichkeit von~$E$ sind~$\NF{x}$ und $\NF{y}$ berechenbar.
+  Es gilt $x \ident_E y \iff \NF{x} = \NF{y}$.
+\end{alg}
+
+% 4.1.2.
+\begin{defn}
+  \begin{itemize}
+    \item \emph{Wortproblem}: \,\,Gegeben $x, y \in T(\Sigma, V)$, gilt $x \ident_E y$?
+    \item \emph{Grundwortproblem}: Gegeben $x, y \in T(\Sigma, \emptyset)$,\,\, gilt $x \ident_E y$?
+  \end{itemize}
+\end{defn}
+
+% Bsp 4.1.3
+\begin{bem}
+  Das Wortproblem ist im Allgemeinen unentscheidbar, denn:
+  \begin{itemize}
+    \item Man kann den turingvollständigen SKI-Kalkül als Reduktions- system durch Angabe einer Menge von Gleichheiten spezifizieren.
+    \item Gleichheit von Programmen ist unentscheidbar.
+  \end{itemize}
+\end{bem}
+
+% §4.2. Termumschreibungssysteme
+
+\begin{defn}
+  \begin{itemize}
+    \item Eine \emph{Umschreibungsregel} ist eine Identität $l \ident r$ bei der~$s$ keine Variable ist und $\Var(l) \supseteq \Var(r)$.
+    \item Ein \emph{Termumschreibungssystem} ist eine Menge von Umschreibungsregeln.
+  \end{itemize}
+  % ausgelassen: regex, contraction
+\end{defn}
+
+\begin{bem}
+  Die zwei Bedingungen für Umschreibungsregeln sind notwendig (aber nicht hinreichend) dafür, dass Termumschreibungssysteme terminierend sind.
+\end{bem}
+
+% §4.3. Die kongruente Hülle
+\subsection{Die kongruente Hülle}
+
+\begin{defn}
+  Die \emph{kongruente Hülle}~$\CongClos(E)$ von~$E \subseteq T(\Sigma, V) \times T(\Sigma, V)$ ist die kleinste Kongruenzrelation, die $\equiv$ enthält.
+\end{defn}
+
+\begin{bem}
+  $(s, t) \in \CongClos(E)$ gilt genau dann, wenn die Aussage aus folgenden Inferenzregeln herleitbar ist:
+  \[
+    \inferrule
+      {\,}
+      {(t, t) \in \CongClos(E)} \quad
+    \inferrule
+      {(t, s) \in \CongClos(E)}
+      {(s, t) \in \CongClos(E)} \quad
+    \inferrule
+      {(r, s) \in \CongClos(E) \quad
+       (s, t) \in \CongClos(E)}
+      {(r, t) \in \CongClos(E)}
+  \]
+  \[
+    \inferrule
+      {(s, t) \in E}
+      {(s, t) \in \CongClos(E)} \quad
+    \inferrule
+      {f \in \Sigma^{(n)} \quad
+       (s_1, t_1) \in \CongClos(E), \ldots, (s_n, t_n) \in \CongClos(E)}
+      {(f(s_1, \ldots, s_n), f(t_1, \ldots, t_n)) \in \CongClos(E)}
+  \]
+\end{bem}
+
+\begin{defn}
+  Eine Id. $l \ident r$ heißt \emph{Grundidentität}, falls $\Var(l) \!=\! \Var(r) \!=\! \emptyset$.
+\end{defn}
+
+\begin{nota}
+  Sei~$G$ im Folgenden eine Menge von Grundidentitäten.
+\end{nota}
+
+\begin{lem}
+  $\CongClos(G) = {\ident_G}$
+\end{lem}
+
+\begin{defn}
+  Die Menge der \emph{Unterterme} ist
+  \begin{align*}
+    \Subterms(t) & \coloneqq \Set{t|_p}{p \in \Pos(t)} \quad \text{für $t \in T(\Sigma, V)$ bzw.} \\
+    \Subterms(G) & \coloneqq {\bigcup}_{l \ident r} \Subterms(l) \cup \Subterms(r).
+  \end{align*}
+\end{defn}
+
+% ausgelassen: Lemma 4.3.4
+
+% 4.3.5
+\begin{thm}
+  Fixiere zwei Terme $s, t \in T(\Sigma, V)$.
+  Setze
+  \[
+    S \coloneqq \Subterms(s) \cup \Subterms(t) \cup \Subterms(G).
+  \]
+  Es gilt $G \subseteq S \times S$.
+  Es sei $\CongClos_S(G)$ die kongruente Hülle von~$G$ innerhalb von~$S \times S$.
+  Dann gilt:
+  \[
+    \CongClos_S(G) = {\ident_G} \cap (S \times S).
+  \]
+\end{thm}
+
+% 4.3.6
+\begin{kor}
+  Das Wortproblem ist für endliche Mengen~$G$ von Grundidentitäten entscheidbar.
+\end{kor}
+
+\begin{beweisidee}
+  Seien~$s$ und~$t$ gegeben. Berechne die endliche Menge~$\CongClos_S(G)$.
+  Es gilt dann:
+  $s \ident_G t \iff (s, t) \in \CongClos_S(G)$.
+\end{beweisidee}
+
+\begin{bem}
+  Dies liefert einen Entscheidungsalgorithmus mit polynomieller Laufzeit in~$G$, $s$ und~$t$.
+\end{bem}
+
+% §4.4 Kongruente Hülle auf Graphen
+
+\begin{alg}
+  Effiziente Realisierung:
+
+  \begin{itemize}
+    \item Repräsentiere die Termmenge~$S$ als gerichteter Graph, wobei jeder Knoten~$v$ mit einem Symbol~$f \in \Sigma$ beschriftet ist und dessen Auskanten mit $i = 1, \ldots, \arity(f)$ nummeriert sind.
+    \item Wir repräsentieren Identifikationen von Knoten im Graph über Zeiger wie in der Union-Find-Datenstruktur.
+    Wir definieren $u \sim v \coloniff \Call{find}{u} = \Call{find}{v}$ für Knoten~$u$ und~$v$.
+  \end{itemize}
+
+  \begin{algorithmic}[1]
+    \Function{merge}{$u$, $v$}
+      \If{$u \not\sim v$}
+        \State $P \coloneqq \Call{pred}{u}$, $Q \coloneqq \Call{pred}{v}$
+        \State $\Call{union}{u, v}$
+        \For{$(p, q) \in P \times Q$}
+          \If{$p \not\sim q \wedge \Call{congruent}{p, q}$} \State $\Call{merge}{p, q}$ \EndIf
+        \EndFor
+      \EndIf
+    \EndFunction
+    \Function{congruent}{$p = f(p_1, \ldots, p_n)$, $q = g(q_1, \ldots, q_m)$}
+      \If{$f \not= g \in \Sigma$} \Return false \EndIf
+      \For{$i = 1, \ldots, n$}
+        \If{$p_i \not\sim q_i$} \Return false \EndIf
+      \EndFor
+      \Return true
+    \EndFunction
+  \end{algorithmic}
+
+  \begin{itemize}
+    \item Rufe zu Beginn des Algorithmus $\Call{merge}{l, r}$ für alle Grundidentitäten $(l \ident r) \in G$ auf.
+    \item Das Ergebnis ist nun $s \sim t$.
+  \end{itemize}
+\end{alg}
+
+% §4.5 Syntaktische Unifikation
 
 \end{document}
