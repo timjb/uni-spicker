@@ -96,6 +96,7 @@
 \newtheorem*{test}{Test}
 \newtheorem*{motivation}{Motivation}
 \newtheorem*{wdh}{Wiederholung}
+\newtheorem*{gesucht}{Gesucht}
 
 \theoremstyle{remark}
 \newtheorem*{bem}{Bem}

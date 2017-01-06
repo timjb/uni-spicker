@@ -7,6 +7,7 @@
 
 \usepackage{algorithmicx}
 \usepackage[noend]{algpseudocode}
+\usepackage{framed}
 
 \input{include/cats} % Kategorientheorie-Makros
 
@@ -33,6 +34,7 @@
 \DeclareMathOperator{\CongClos}{CC} % kongruente Hülle
 \newcommand{\inferrule}[2]{\frac{{#1}}{{#2}}} % logische Inferenzregel
 \DeclareMathOperator{\Subterms}{Subterms} % Unterterme
+\newcommand{\Unifiers}{\mathcal{U}} % Lösungen eines Unifikationsproblems
 
 % Kleinere Klammern
 \delimiterfactor=701
@@ -639,12 +641,16 @@ Dies ist eine übersetzte Zusammenfassung des Buches Term Rewriting and All That
   % ausgelassen: regex, contraction
 \end{defn}
 
+\begin{samepage}
+
 \begin{bem}
   Die zwei Bedingungen für Umschreibungsregeln sind notwendig (aber nicht hinreichend) dafür, dass Termumschreibungssysteme terminierend sind.
 \end{bem}
 
 % §4.3. Die kongruente Hülle
 \subsection{Die kongruente Hülle}
+  
+\end{samepage}
 
 \begin{defn}
   Die \emph{kongruente Hülle}~$\CongClos(E)$ von~$E \subseteq T(\Sigma, V) \times T(\Sigma, V)$ ist die kleinste Kongruenzrelation, die $\equiv$ enthält.
@@ -764,5 +770,146 @@ Dies ist eine übersetzte Zusammenfassung des Buches Term Rewriting and All That
 \end{alg}
 
 % §4.5 Syntaktische Unifikation
+\subsection{Syntaktische Unifikation}
+
+% 4.5.1
+\begin{defn}
+  Eine Substitution~$\sigma$ heißt \emph{allgemeiner} (notiert $\sigma \lesssim \sigma'$) als~$\sigma'$, falls eine Substitution~$\delta$ mit $\sigma' = \delta \sigma$ existiert.
+\end{defn}
+
+% 4.5.2
+\begin{lem}
+  $\lesssim$ ist eine Quasiordnung
+\end{lem}
+
+\begin{defn}
+  Eine \emph{Umbenennung} ist eine Ersetzung~$\rho$ mit $\im(\rho) \subseteq V$ ($\implies \im(\rho) = V$).
+\end{defn}
+
+% 4.5.3
+\begin{lem}
+  $\sigma \lesssim \sigma' \wedge \sigma' \lesssim \sigma \iff \ex{\text{Umbenennung~$\rho$}} \sigma = \rho \sigma'$
+\end{lem}
+
+% 4.5.4
+\begin{defn}
+  Ein \emph{Unifikationsproblem} ist gegeben durch eine endliche Menge von Gleichungen
+  \[
+    S = \{ s_1 \overset{?}= t_1, \ldots, s_n \overset{?}= t_n \}.
+  \]
+  Eine \textit{Lösung} von~$S$ ist eine Ersetzung~$\sigma$ mit $\hat{\sigma}(s_i) = \hat{\sigma}(t_i)$ für $i = 1, \ldots, n$.
+  Notation: $\Unifiers(S) \coloneqq \{ \text{ Lösungen von~$S$ } \}$
+\end{defn}
+
+\begin{gesucht}
+  Eine \emph{allgemeinste Lösung} von~$S$, das ist ein bezüglich~$\lesssim$ kleinstes Element in~$\Unifiers(S)$.
+\end{gesucht}
+
+% 4.5.8
+\begin{thm}
+  Hat ein Unifikationsproblem eine Lösung, so hat es auch eine idempotente, allgemeinste Lösung.
+\end{thm}
+
+% §4.6 Unifikation durch Transformation
+
+% 4.6.1
+\begin{defn}
+  Ein Unifikationsproblem $S = \{ x_1 \overset{?}= t_1, \ldots, x_n \overset{?}= t_n \}$ ist in \emph{gelöster Form}, falls $x_1, \ldots, x_n$ paarweise verschieden Variablen sind, die nicht in den Termen $t_1, \ldots, t_n$ auftreten.
+  In diesem Fall ist
+  \[
+    \vec{S} \coloneqq \{ x_1 \mapsto t_1, \ldots, x_n \mapsto t_n \}.
+  \]
+\end{defn}
+
+% 4.6.2 und 4.6.3
+\begin{lem}
+  Sei~$S$ in gelöster Form.
+  Dann gilt:
+  \begin{itemize}
+    \item $\fa{\sigma \in \Unifiers(S)} \sigma = \sigma \vec{S}$
+    \item $\vec{S}$ ist eine idempotente, allgemeinste Lösung von~$S$.
+  \end{itemize}
+\end{lem}
+
+\begin{alg}[$\Call{unify}{S}$]
+  Wende wiederholt folgende Transformationsregeln (in beliebiger Reihenfolge) auf~$S$ an:
+  \FrameSep0pt
+  \begin{framed}
+    \[
+      \begin{array}{l r c l}
+        \text{Delete}
+          & \{ t \overset{?}= t \} \sqcup S
+          & \rightsquigarrow
+          & S \\
+        \text{Decompose}
+          & \{ f(\vec{s}) \overset{?}= f(\vec{t})
+          & \rightsquigarrow
+          & \{ s_1 \overset{?}= t_1, \ldots, s_n \overset{?}= t_n \} \cup S \\
+        \text{Orient}
+          & \{ t = x \} \sqcup S
+          & \rightsquigarrow
+          & \{ x = t \} \cup S \text{falls $t \not\in V$} \\
+        \text{Eliminate}
+          & \{ x \overset{?}= t \} \sqcup S
+          & \rightsquigarrow
+          & \{ x \overset{?}= t \} \cup [t/x]S \\
+          &&& \text{ falls $x \in \Var(S) \setminus \Var(t)$}
+      \end{array}
+    \]
+  \end{framed}
+  Wenn keine Tranformationsregel mehr angewandt werden kann, so
+  \begin{itemize}
+    \item gib $\vec{T}$ zurück, falls die nach Anwendung aller Transformationen erhaltene Gleichungsmenge~$T$ in gelöster Form ist,
+    \item ansonsten gib $\bot$ zurück.
+  \end{itemize}
+\end{alg}
+
+% 4.6.6
+\begin{lem}
+  Falls $S \rightsquigarrow T$, so gilt $\Unifiers(S) = \Unifiers(T)$.
+\end{lem}
+
+% 4.6.7 und 4.6.10
+\begin{thm}
+  $\Call{unify}{S}$ ist korrekt:
+  \begin{itemize}
+    \item Der Algorithmus terminiert für alle Eingaben.
+    \item Die Ausgabe ist eine idempotente, allgemeinste Lösung von~$S$ oder~$\bot$, falls~$S$ keine Lösung besitzt.
+  \end{itemize}
+\end{thm}
+
+\begin{bem}
+  Folgende Regeln bewirken einen frühen Abbruch:
+  \begin{framed}
+    \[
+      \begin{array}{l r c l l}
+        \text{Clash}
+          & \{ f(\vec{s}) \overset{?}= g(\vec{t}) \} \sqcup S
+          & \rightsquigarrow
+          & \bot
+          & \text{falls $f \neq g$} \\
+        \text{Occurs-Check}
+          & \{ x \overset{?}= t \} \sqcup S
+          & \rightsquigarrow
+          & \bot
+          & \text{falls $x \in \Var(t)$} \\
+          &&&& \text{und $x \neq t$}
+      \end{array}
+    \]
+  \end{framed}
+\end{bem}
+
+% §4.7 Unifikation und Termumschreibung in ML
+
+% (ausgelassen)
+
+% §4.8 Unifikation auf Termgraphen
+
+\begin{bem}
+  Naive Implementierungen von Unifikation benötigen exponentielle Zeit.
+  Es gibt einen Algorithmus auf Termgraphen, der nur (fast) lineare Zeit benötigt.
+\end{bem}
+
+% §5. Terminierung
 
 \end{document}
