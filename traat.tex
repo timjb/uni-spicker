@@ -35,6 +35,12 @@
 \newcommand{\inferrule}[2]{\frac{{#1}}{{#2}}} % logische Inferenzregel
 \DeclareMathOperator{\Subterms}{Subterms} % Unterterme
 \newcommand{\Unifiers}{\mathcal{U}} % Lösungen eines Unifikationsproblems
+\newcommand{\emb}{\trianglerighteq_\text{emb}} % homöomorphe Einbettung
+\newcommand{\strictlyEmb}{>_\text{emb}} % strikte homöomorphe Einbettung
+\newcommand{\lpo}{\geq_\text{lpo}} % lexikographische Pfadordnung
+\newcommand{\strictLpo}{>_\text{lpo}} % lexikographische Pfadordnung
+\newcommand{\strictMpo}{>_\text{mpo}} % Multimengenpfadordnung
+\newcommand{\kbo}{>_\text{kbo}} % Knuth-Bendix-Ordnung
 
 % Kleinere Klammern
 \delimiterfactor=701
@@ -372,7 +378,11 @@ Dies ist eine übersetzte Zusammenfassung des Buches Term Rewriting and All That
     \]
     \item \emph{kompatibel mit $\Sigma$-Operationen}, falls
     \[
-      s \equiv t \implies f(s_1, \ldots, s_{i-1}, s, s_{i+1}, s_n) \equiv f(s_1, \ldots, s_{i-1}, t, s_{i+1}, s_n)
+      \begin{array}{r c l}
+        s \equiv t \implies &&
+        f(s_1, \ldots, s_{i-1}, s, s_{i+1}, \ldots, s_n) \\
+        &\equiv& f(s_1, \ldots, s_{i-1}, t, s_{i+1}, \ldots, s_n)
+      \end{array}
     \]
     \item \emph{kompatibel mit $\Sigma$-Kontexten}, falls
     \[
@@ -636,7 +646,7 @@ Dies ist eine übersetzte Zusammenfassung des Buches Term Rewriting and All That
 \begin{defn}
   \begin{itemize}
     \item Eine \emph{Umschreibungsregel} ist eine Identität $l \ident r$ bei der~$s$ keine Variable ist und $\Var(l) \supseteq \Var(r)$.
-    \item Ein \emph{Termumschreibungssystem} ist eine Menge von Umschreibungsregeln.
+    \item Ein \emph{Termumschreibungssystem} (TUS) ist eine Menge von Umschreibungsregeln.
   \end{itemize}
   % ausgelassen: regex, contraction
 \end{defn}
@@ -735,6 +745,8 @@ Dies ist eine übersetzte Zusammenfassung des Buches Term Rewriting and All That
 
 % §4.4 Kongruente Hülle auf Graphen
 
+\begin{samepage}
+
 \begin{alg}
   Effiziente Realisierung:
 
@@ -771,6 +783,8 @@ Dies ist eine übersetzte Zusammenfassung des Buches Term Rewriting and All That
 
 % §4.5 Syntaktische Unifikation
 \subsection{Syntaktische Unifikation}
+  
+\end{samepage}
 
 % 4.5.1
 \begin{defn}
@@ -911,5 +925,302 @@ Dies ist eine übersetzte Zusammenfassung des Buches Term Rewriting and All That
 \end{bem}
 
 % §5. Terminierung
+\section{Terminierung}
+
+% §5.1 Das Entscheidungsproblem
+
+% §5.1.1 Unentscheidbarkeit des allgemeinen Falls
+
+% ausgelassen: Def 5.1.1 (Turingmaschine)
+
+\begin{problem}
+  Gegeben ein Termumschreibungssystem~$R$, gibt es einen Algorithmus, der entscheidet, ob~$R$ terminierend ist oder nicht?
+\end{problem}
+
+% 5.1.7
+\begin{thm}
+  Dieses Problem ist im Allgemeinen unentscheidbar.
+\end{thm}
+
+\begin{beweisidee}
+  Man kann Turingmaschinen als Termumschreibungs- systeme kodieren.
+  Die Aussage folgt daraus, dass das das Halteproblem für Turingmaschinen unentscheidbar ist.
+\end{beweisidee}
+
+% §5.1.2 Ein entscheidbarer Unterfall
+
+\begin{defn}
+  Ein TUS~$R$ heißt \emph{rechtsseitig geschlossen}, falls für alle $(l \to r) \in R$ der rechte Term~$r$ geschlossen ist (\dh{} $\Var(r) = \emptyset$).
+\end{defn}
+
+% 5.1.8
+\begin{lem}
+  Sei~$R$ ein endliches, rechtsseitig geschlossenes Termumschreibungssystem.
+  Dann sind äquivalent:
+  \begin{itemize}
+    \item $R$ ist \textit{nicht} terminierend
+    \item Es gibt eine Regel $(l \to r) \in R$ und einen Term~$t$, sodass $r \strictlyReducesTo_R{t}$ und~$t$ den Subterm~$r$ besitzt.
+  \end{itemize}
+\end{lem}
+
+% 5.1.9
+\begin{thm}
+  Für endliche, rechtsseitig geschlossene TUSe ist das Terminierungsproblem entscheidbar.
+\end{thm}
+
+\begin{beweisidee}
+  Führe Breitensuche (gemäß $\to_R$) auf der Menge der Terme durch, beginnend bei der Wurzelmenge $\Set{r}{(l \to r) \in R}$.
+  Falls~$R$ terminiert, so endet diese Suche.
+  Ansonsten findet man bei der Suche in endlicher Zeit eine Verletzung von Punkt zwei aus dem vorherigen Lemma.
+\end{beweisidee}
+
+% §5.2 Reduktionsordnungen
+
+% 5.2.1
+\begin{defn}
+  Eine strikte Ordnung~$>$ auf $T(\Sigma, V)$ heißt \emph{Umschreibungsordnung} (UO), falls sie
+  \begin{itemize}
+    \item \textit{kompatibel mit $\Sigma$-Operationen} ist, \dh{} aus $s > t$ folgt
+    \[
+      f(s_1, \ldots, s_{i-1}, s, s_{i+1}, \ldots, s_n) > f(s_1, \ldots, s_{i-1}, t, s_{i+1}, \ldots, s_n)
+    \]
+    \item und \textit{abgeschlossen unter Ersetzungen} ist, \dh{}
+    \[
+      s_1 > s_2 \implies \sigma(s_1) > \sigma(s_2).
+    \]
+  \end{itemize}
+  Eine \emph{Reduktionsordnung} ist eine wohlfundierte Umschreibungsordnung.
+\end{defn}
+
+% 5.2.3
+\begin{thm}
+  Für eine Termumschreibungssystem~$R$ sind äquivalent:
+  \begin{itemize}
+    \item $R$ terminiert.
+    \item Es gibt eine Reduktionsordnung~$>$ mit $l > r$ für alle $(l \to r) \in R$.
+  \end{itemize}
+\end{thm}
+
+% §5.3 Die Interpretationsmethode
+\subsection{Die Interpretationsmethode}
+
+% 5.3.3
+\begin{lemdefn}
+  Sei~$\Alg$ eine nichtleere $\Sigma$-Algebra und~$>$ eine wohlfundierte Ordnung auf deren Trägermenge~$A$.
+  Angenommen, $f^\Alg : A^n \to A$ ist in jedem Argument streng monoton für alle $n \in \N$, $f \in \Sigma^{(n)}$.
+  Dann definiert
+  \[
+    s >_\Alg t \coloniff \pi(s) > \pi(t) \text{ für alle Mor. $\pi : T(\Sigma, V) \to \Alg$}
+  \]
+  eine Reduktionsordnung auf $T(\Sigma, V)$.
+\end{lemdefn}
+
+% Polynomielle Ordnungen
+
+\begin{defn}
+  Eine \emph{polynomielle Interpretation} von~$\Sigma$ ist eine $\Sigma$-Algebra~$\Alg$ mit
+  \begin{itemize}
+    \item Trägermenge $A \subseteq \N \setminus \{ 0 \}$
+    \item Es gilt $f^\Alg(a_1, \ldots, a_n) = P_f(a_1, \ldots, a_n)$ mit einem Polynom $P_f \in \N[X_1, \ldots, X_n]$ für alle $n \in \N$, $f \in \Sigma^{(n)}$.
+  \end{itemize}
+\end{defn}
+
+\begin{defn}
+  Ein Polynom $P \in \N[X_1, \ldots, X_n]$ heißt \emph{strikt monoton}, falls $P \not\in \N[X_1, \ldots, \widehat{X_i}, \ldots, X_n]$ für $i = 1, \ldots, n$.
+\end{defn}
+
+\begin{lemdefn}
+  Sei~$\Alg$ eine polynomielle Interpretation~$\Alg$, deren Polynome~$P_f$ alle strikt monoton sind.
+  Dann ist die von~$\Alg$ induziert Ordnung~$>_\Alg$ eine Reduktionsordnung.
+  Solche Ordnungen auf~$T(\Sigma, V)$ heißen \emph{Polynomordnungen}.
+\end{lemdefn}
+
+% ausgelassen: Lemma 5.3.8
+
+% 5.3.10
+\begin{prop}
+  Angenommen, die Terminierung eines TUS~$R$ kann mit einer Polynomordnung gezeigt werden.
+  Dann gibt es eine Konstante $C > 0$, sodass für alle Terme~$t$ gilt, dass jede Reduktionssequenz ausgehend von~$t$ eine Länge $\leq 2^{2^{C \size{t}}}$ hat.
+\end{prop}
+
+% §5.4 Vereinfachungsordnungen
+\subsection{Vereinfachungsordnungen}
+
+% 5.4.1
+\begin{defn}
+  Eine Umschreibungsordnung~$>$ auf $T(\Sigma, V)$ heißt \emph{Verein- fachungsordnung}, falls sie die \emph{Subtermeigenschaft} erfüllt:
+  \[
+    \fa{t \in T(\Sigma, V)} \fa{p \in \Pos(t) \setminus \{ \epsilon \}} t > t|_p
+  \]
+\end{defn}
+
+% 5.4.2
+\begin{defn}
+  Die \emph{homöomorphe Einbettung} ${\emb} \subseteq T(\Sigma, X) \times T(\Sigma, X)$ ist definiert durch die Schlussregeln
+  \[
+    \inferrule
+      {x \in X}
+      {x \emb x} \quad
+    \inferrule
+      {s_1 \emb t_1 \enspace \cdots \enspace s_n \emb t_n}
+      {f(s_1, \ldots, s_n) \emb f(t_1, \ldots, t_n)} \quad
+    \inferrule
+      {s_j \emb t \enspace (1 \leq j \leq n)}
+      {f(s_1, \ldots, s_n) \emb t}
+  \]
+\end{defn}
+
+\begin{bem}
+  Es gilt ${\emb} = {\reducesTo}_R$ mit dem Termumschreibungssystem
+  \[
+    R \coloneqq \Set{f(x_1, \ldots, x_n) \to x_i}{n \in \N, f \in \Sigma^{(n)}, 1 \leq i \leq n}
+  \]
+  Da~$R$ terminiert ist ${\emb}$ wohlfundiert.
+  Für $\Sigma$, $X$ endlich gilt sogar:
+\end{bem}
+
+\begin{lem}
+  Eine \emph{Wohlpartialordnung} ist eine Partialordnung~$\geq$ mit der Eigenschaft, dass es in jeder unendlichen Folge $x_1, x_2, \ldots$ Indizes $i < j$ mit $x_i \leq x_j$ gibt.
+\end{lem}
+
+\begin{bem}
+  Wohlpartialordnungen sind wohlfundiert.
+\end{bem}
+
+% ausgelassen: Lemmas 5.4.4 und 5.4.5
+
+\begin{thm}[\emph{Kruskal}]
+  Sei~$\Sigma$ eine endliche Signatur und~$X$ eine endliche Menge von Variablen.
+  Dann ist ${\strictlyEmb}$ eine Wohlordnung auf~$T(\Sigma, X)$.
+\end{thm}
+
+\begin{lem}
+  Sei~${>}$ eine Vereinfachungsordnung auf~$T(\Sigma, V)$.
+  Dann gilt
+  \[
+    s \emb t \implies s \geq t \qquad
+    \text{für alle $s, t \in T(\Sigma, V)$.}
+  \]
+\end{lem}
+
+% 5.4.8
+\begin{thm}
+  Sei~$\Sigma$ endlich.
+  Jede Vereinfachungsordnung~${>}$ auf $T(\Sigma, V)$ ist wohlfundiert, also eine Reduktionsordnung.
+\end{thm}
+
+% 5.4.10
+\begin{prop}
+  Sei~${>}$ eine Reduktionsord. auf~$T(\Sigma, V)$, deren Einschränkung auf~$T(\Sigma, \emptyset)$ total ist.
+  Dann erfüllt~${>}$ die Subtermeig. für~$t \in T(\Sigma, \emptyset)$.
+\end{prop}
+
+% §5.4.1 Polynomielle Vereinfachungsordnungen
+
+\begin{defn}
+  Eine \emph{polynomielle Interpretation über~$\R$} von~$\Sigma$ ist eine $\Sigma$-Algebra~$\Alg$ mit
+  \begin{itemize}
+    \item nichtleerer Trägermenge $A \subseteq \R$ und
+    \item $f^\Alg(a_1, \ldots, a_n) = P_f(a_1, \ldots, a_n)$ mit einem Polynom $P_f \in \R[X_1, \ldots, X_n]$ für alle $n \in \N$, $f \in \Sigma^{(n)}$
+  \end{itemize}
+  sodass folgende Eigenschaften erfüllt sind:
+  \begin{itemize}
+    \item Für alle $n \in \N$, $f \in \Sigma^{(n)}$ und $a, b, a_1, \ldots, a_n \in A$ mit $a > b$ gilt
+    \[
+      P_f(a_1, \nldots, a_{i-1}, a, a_{i+1}, \nldots, a_n) > P_f(a_1, \nldots, a_{i-1}, b, a_{i+1}, \nldots, a_n).
+    \]
+    \item Für alle $n \in \N$, $f \in \Sigma^{(n)}$ und $a_1, \ldots, a_n \in A$ gilt
+    \[
+      P_f(a_1, \ldots, a_n) > \max \{ a_1, \ldots, a_n \}.
+    \]
+  \end{itemize}
+\end{defn}
+
+\begin{beob}
+  Sei~$\Sigma$ endlich.
+  Dann ist die von~$A$ induzierte \emph{polynomielle Vereinfachungsordnung}~$>_\Alg$ eine Reduktionsordnung.
+\end{beob}
+
+\begin{bem}
+  Ist $A$ in der Theorie der reellen Zahlen in Prädikatenlogik erster Stufe beschrieben, so sind die beiden Eigenschaften aus der Definition sowie ${>_\Alg}$ entscheidbar.
+\end{bem}
+
+% §5.4.2 Rekursive Pfadordnungen
+
+\begin{defn}
+  Die durch eine strikte Ordnung~${>}$ auf~$\Sigma$ induzierte \emph{lexiko- graphische Pfadordnung}~${\strictLpo}$ ist def. durch $s \strictLpo t \coloniff\,$
+  \begin{itemize}
+    \item $t \in \Var(s)$ und $s \neq t$ \textit{oder}
+    \item $s = f(s_1, \ldots, s_m)$, $t = g(t_1, \ldots, t_n)$ und
+    \begin{itemize}
+      \item $\ex{i} s_i \lpo t$ \textit{oder}
+      \item $f > g$ und $\fa{j} s \strictLpo t_j$ \textit{oder}
+      \item $f = g$ und $\fa{j} s \strictLpo t_j$ und \\
+      \emph{($\star$)} $\ex{i} s_1 = t_1 \wedge \ldots \wedge s_{i-1} = t_{i-1} \wedge s_i \strictLpo t_i$
+    \end{itemize}
+  \end{itemize}
+\end{defn}
+
+\begin{thm}
+  Sei~$\Sigma$ endlich.
+  Die lexikographische Pfadordnung ${\lpo}$ ist eine Vereinfachungsordnung auf~$T(\Sigma, V)$.
+\end{thm}
+
+% 5.4.16
+\begin{prop}
+  $s \lpo t$ ist in polynomieller Zeit (in~$s$ und~$t$) entscheidbar.
+  % ausgelassen: Teil 2
+\end{prop}
+
+\begin{bemn}
+  \begin{itemize}
+    \item Ersetzt man \emph{($\star$)} in der Def. der lex. Pfadordnung durch
+    \[
+      \{ s_1, \ldots, s_m \} \strictMpo^\text{mul} \{ t_1, \ldots, t_n \},
+    \]
+    wobei ${\strictMpo^\text{mul}}$ die von ${\strictMpo}$ induzierte Multimengenordnung ist, so erhält man die \emph{Multimengenpfadordnung}~${\strictMpo}$.
+    \item Man kann auch "`gemischte"' Pfadordnungen bilden, bei denen je nach Signatur~$f = g \in \Sigma$ die lexikographische oder die Multimengenordnung für die Subterme $s_1, \ldots, s_m, t_1, \ldots, t_n$ verwendet wird.
+  \end{itemize}
+\end{bemn}
+
+% §5.4.3 Pfadordnungen in ML
+
+% (ausgelassen)
+
+% §5.4.4 Knuth-Bendix-Ordnungen
+
+\begin{defn}
+  Sei~$\Sigma$ endlich, $w : \Sigma \cup V \to \R_{\geq 0}$ eine \emph{Gewichtsfunktion} und~${>}$ eine strikte Ordnung auf~$\Sigma$.
+  Die Gewichtsfunktion heißt \emph{zulässig}, falls
+  \begin{itemize}
+    \item $\ex{w_0 > 0} \fa{v \in V} w(v) = w_0 \wedge \fa{c \in \Sigma^{(0)}} w(c) \geq w_0$
+    \item $\fa{f \in \Sigma^{(1)}} w(f) = 0 \implies f \geq g$
+  \end{itemize}
+  Die \emph{Knuth-Bendix-Ordnung}~${\kbo}$ induziert durch~${>}$ und~$w$ ist definiert durch: $s \kbo t \coloniff\,$
+  \begin{itemize}
+    \item $\fa{x \in V} \size{s}_x \geq \size{t}_x$ und $w(s) > w(t)$ \textit{oder}
+    \item $\fa{x \in V} \size{s}_x \geq \size{t}_x$ und $w(s) = w(t)$ \textit{und}
+    \begin{itemize}
+      \item $\ex{f \in \Sigma^{(1)}} \ex{n \in \N_{> 0}} s = f^n(t)$ und $t \in X$ \textit{oder}
+      \item $s = f(\cdots)$, $t = g(\cdots)$ und $f > g$ \textit{oder}
+      \item $s = f(s_1, \ldots, s_n)$, $t = f(t_1, \ldots, t_n)$ und $\ex{i} s_1 = t_1 \wedge \ldots \wedge s_{i-1} = t_{i-1} \wedge s_i \kbo t_i$
+    \end{itemize}
+  \end{itemize}
+\end{defn}
+
+% ausgelassen: Prop 5.4.19
+
+% 5.4.20
+\begin{thm}
+  ${\kbo}$ ist eine Vereinfachungsordnung.
+\end{thm}
+
+% ausgelassen: Lemmas 5.4.21, 5.4.22, 5.4.23, 5.4.
+
+% 5.4.26
+\begin{prop}
+  $s \kbo t$ ist in polynomieller Zeit (in~$s$ und~$t$) entscheidbar.
+  % zweiter Teil ausgelassen
+\end{prop}
 
 \end{document}
