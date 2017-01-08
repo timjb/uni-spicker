@@ -992,6 +992,8 @@ Dies ist eine übersetzte Zusammenfassung des Buches Term Rewriting and All That
   Eine \emph{Reduktionsordnung} ist eine wohlfundierte Umschreibungsordnung.
 \end{defn}
 
+\begin{samepage}
+
 % 5.2.3
 \begin{thm}
   Für eine Termumschreibungssystem~$R$ sind äquivalent:
@@ -1003,6 +1005,8 @@ Dies ist eine übersetzte Zusammenfassung des Buches Term Rewriting and All That
 
 % §5.3 Die Interpretationsmethode
 \subsection{Die Interpretationsmethode}
+  
+\end{samepage}
 
 % 5.3.3
 \begin{lemdefn}
@@ -1090,8 +1094,8 @@ Dies ist eine übersetzte Zusammenfassung des Buches Term Rewriting and All That
 % ausgelassen: Lemmas 5.4.4 und 5.4.5
 
 \begin{thm}[\emph{Kruskal}]
-  Sei~$\Sigma$ eine endliche Signatur und~$X$ eine endliche Menge von Variablen.
-  Dann ist ${\strictlyEmb}$ eine Wohlordnung auf~$T(\Sigma, X)$.
+  Sei~$\Sigma$ eine endliche Signatur und~$X$ eine endliche Variablenmenge.
+  Dann ist ${\strictlyEmb}$ eine Wohlpartialord. auf~$T(\Sigma, X)$.
 \end{thm}
 
 \begin{lem}
@@ -1191,7 +1195,7 @@ Dies ist eine übersetzte Zusammenfassung des Buches Term Rewriting and All That
 
 \begin{defn}
   Sei~$\Sigma$ endlich, $w : \Sigma \cup V \to \R_{\geq 0}$ eine \emph{Gewichtsfunktion} und~${>}$ eine strikte Ordnung auf~$\Sigma$.
-  Die Gewichtsfunktion heißt \emph{zulässig}, falls
+  Es gelte:
   \begin{itemize}
     \item $\ex{w_0 > 0} \fa{v \in V} w(v) = w_0 \wedge \fa{c \in \Sigma^{(0)}} w(c) \geq w_0$
     \item $\fa{f \in \Sigma^{(1)}} w(f) = 0 \implies f \geq g$
