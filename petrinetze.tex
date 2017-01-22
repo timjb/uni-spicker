@@ -1,0 +1,397 @@
+\documentclass{cheat-sheet}
+
+\pdfinfo{
+  /Title (Zusammenfassung Petrinetze)
+  /Author (Tim Baumann)
+}
+
+
+\newcommand{\transition}{\square} % Transition
+\newcommand{\place}{\bigcirc} % Stelle, Platz
+\newcommand{\preset}[1]{{}^\bullet{#1}} % Vorbereich
+\newcommand{\postset}[1]{{#1}^\bullet} % Nachbereich
+\newcommand{\activeTransition}[1]{[{#1}\rangle} % aktive Transition
+\DeclareMathOperator{\FS}{FS} % Menge der Schaltfolgen (firing sequences)
+\newcommand{\ReachabilityGraph}{\mathfrak{R}} % Erreichbarkeitsgraph
+\newcommand{\StepReachabilityGraph}{\mathfrak{SR}} % Schritt-Erreichbarkeitsgraph
+\DeclareMathOperator{\Parikh}{Parikh} % Parikh-Bild
+\newcommand{\inferrule}[2]{\frac{{#1}}{{#2}}} % logische Inferenzregel
+\newcommand{\Markings}{\mathfrak{M}} % Menge von Markierungen
+\DeclareMathOperator{\Fin}{Fin} % Menge von Endzuständen
+\newcommand{\Lang}{\mathfrak{L}} % Sprachen von beschrifteten Netzen mit Endmarkierung
+\newcommand{\fin}{\mathrm{fin}} % endlich
+\newcommand{\Multisets}{\mathfrak{M}} % Multimengen
+\DeclareMathOperator{\StepSequences}{SS} % Schrittfolgen
+
+% Kleinere Klammern
+\delimiterfactor=701
+
+\setlength{\tabcolsep}{2pt}
+
+\begin{document}
+
+\raggedcolumns % stretche Inhalt nicht über die gesamte Spaltenhöhe
+
+\maketitle{Zusammenfassung Petrinetze}
+
+% §2. Grundbegriffe
+
+% 2.1
+\begin{defn}
+  Ein \emph{Netzgraph} ist ein Tripel $(S, T, W)$, wobei~$S$ und~$T$ disjunkte, endliche Mengen sind und $W : S \times T \cup T \times S \to \N$.
+  Dadurch ist ein gerichteter, gewichteter, bipartiter Graph mit Kantenmenge $F = \Set{(x, y)}{W(x, y) \neq 0}$ gegeben.
+\end{defn}
+
+\begin{center}
+  \begin{tabular}{r l l}
+    Notation & Bezeichnung & Symbol \\ \hline
+    $t \in T$ & Transition & $\transition$ \\
+    $s \in S$ & Stelle, Platz & $\place$ \\
+    $(x, y) \in F$ & Kante & $\xrightarrow{\enspace}$ falls $W(x, y) = 1$ \\
+    && $\xrightarrow{w}$ falls $w \coloneqq W(x, y) > 1$
+  \end{tabular}
+\end{center}
+
+\begin{defn}
+  Sei $x \in S \cup T$.
+  \begin{itemize}
+    \item $\preset{x} \coloneqq \Set{y}{(y, x) \in F}$ heißt \emph{Vorbereich} von~$x$ und
+    \item $\postset{x} \coloneqq \Set{y}{(x, y) \in F}$ heißt \emph{Nachbereich} von~$x$.
+    \item $x$ heißt \emph{isoliert}, falls $\preset{x} \cup \postset{x} = \emptyset$.
+    \item $x$ heißt \emph{vorwärts-verzweigt}, falls $\card{\postset{x}} \geq 2$ 
+    \item $x$ heißt \emph{rückwärts-verzweigt}, falls $\card{\preset{x}} \geq 2$ 
+  \end{itemize}
+\end{defn}
+
+\begin{defn}
+  $(x, y) \in S \times T \cup T \times S$ bilden eine \emph{Schlinge} falls $(x, y) \in F$ und $(y, x) \in F$.
+\end{defn}
+
+\begin{defn}
+  Eine \emph{Markierung} ist eine Abbildung $M : S \to \N$. \\
+  Eine Teilmenge $S' \subseteq S$ heißt \emph{markiert} unter~$M$, falls $\ex{s \in S'} M(s') > 0$, andernfalls \textit{unmarkiert}. \\
+  Ein Element $s \in S$ heißt \textit{(un-)markiert}, falls $\{ s \} \subseteq S$ es ist.
+\end{defn}
+
+\begin{nota}
+  $\Markings(S) \coloneqq \{ M : S \to \N \}$
+\end{nota}
+
+\begin{defn}
+  Ein \emph{Petrinetz} $N = (S, T, W, M_N)$ besteht aus
+  \begin{itemize}
+    \item einem Netzgraphen $(S, T, W)$ und
+    \item einer \textit{Anfangsmarkierung}~$M_N : S \to \N$.
+  \end{itemize}
+\end{defn}
+
+\begin{nota}
+  Für eine feste Transition $t \in T$ ist
+  \[
+    t^{-} : S \to \N, \enspace s \mapsto W(s, t), \qquad
+    t^{+} : S \to \N, \enspace s \mapsto W(t, s)
+  \]
+\end{nota}
+
+% 2.2
+\begin{defn}
+  Eine Transition $t \in T$ heißt \emph{aktiviert} unter einer Markierung~$M$, notiert $M \activeTransition{t}$, falls
+  \[
+    \fa{s \in S} W(s, t) \leq M(s) \iff
+    t^{-} \leq M.
+  \]
+  Ist~$t$ aktiviert, so kann~$t$ \textit{schalten} und es entsteht die \textit{Folgemarkierung} $M' \coloneqq M + \Delta t$, wobei
+  \[
+    \Delta t : S \to \Z, \enspace s \mapsto W(t, s) - W(s, t).
+  \]
+\end{defn}
+
+\begin{nota}
+  $M \activeTransition{t} M'$
+\end{nota}
+
+\begin{defn}
+  Für $w = t_1 \cdots t_n \in T^{*}$ und Markierungen~$M$ und~$M'$ gilt
+  \[ M \activeTransition{w} M' \coloniff M \activeTransition{t_1} M_1 \activeTransition{t_2} \cdots \activeTransition{t_{n-1}} M_{n-1} \activeTransition{t_n} M' \]
+  für (eindeutig bestimmte) Markierungen $M_1, \ldots, M_{n-1}$. \\
+  Ein Wort $w \in T^{*}$ heißt \emph{Schaltfolge} (\textit{firing sequence}) von~$N$, notiert $M_N \activeTransition{w}$, falls $\ex{M'} M_N \activeTransition{w} M'$.
+\end{defn}
+
+\begin{nota}
+  \begin{minipage}[t]{0.8 \linewidth}
+    $\activeTransition{M} \coloneqq \Set{M'}{\ex{w \in T^{*}} M \activeTransition{w} M'}$ \\
+    $\FS(N) \coloneqq \Set{w \in T^{*}}{M_N \activeTransition{w}}$ \enspace
+    für ein Petrinetz~$N$
+  \end{minipage}
+\end{nota}
+
+\begin{defn}
+  $M'$ heißt \emph{erreichbar} von~$M$, falls $M' \in \activeTransition{M}$.
+\end{defn}
+
+\begin{defn}
+  $w \in T^\omega$ heißt \emph{unendliche Schaltfolge} von~$N$, falls alle endlichen Präfixe von~$w$ Schaltfolgen von~$N$ sind.
+\end{defn}
+
+\begin{defn}
+  Der \emph{Erreichbarkeitsgraph} $\ReachabilityGraph(N)$ zu~$N$ besitzt die Knoten~$\activeTransition{M_N}$ und die Kanten $\Set{(M, M')}{\ex{t} M \activeTransition{t} M'}$.
+\end{defn}
+
+% 2.5
+\begin{defn}
+  Für $w = a_1 \cdots a_n \in A^{*}$ ist $\Parikh(w) : A \to \N, \enspace a \mapsto \card{i}{a_i = a}$.
+\end{defn}
+
+% 2.6
+\begin{lem}
+  In $M \activeTransition{w} M'$ hängt~$M'$ nur von~$M$ und $\Parikh(w)$ ab, genauer
+  \[
+    M' = M + {\sum}_{t \in T} \Parikh(w)(t) \cdot \Delta t.
+  \]
+\end{lem}
+
+% 2.7
+\begin{lem}
+  $M_1 \activeTransition{w} M_2 \implies M + M_1 \activeTransition{w} M + M_2$
+\end{lem}
+
+\TODO{Satz 2.8}
+
+% 2.10
+\begin{lem}
+  Sei $N$ ein Petri-Netz.
+  Dann gilt:
+  \begin{itemize}
+    \item $\FS(N)$ ist \textit{präfix-abg.}, \dh{} $w = v u \in \FS(N) \implies v \in \FS(N)$.
+    \item Ist $\activeTransition{M_N}$ endlich, so ist $\FS(N)$ regulär.
+  \end{itemize}
+\end{lem}
+
+% 2.11
+\begin{defn}
+  Ein \emph{beschriftetes Petrinetz} $N = (S, T, W, M_N, \ell)$ best. aus
+  \begin{itemize}
+    \item einem Petrinetz $(S, T, W, M_N)$ und
+    \item einer Transitionsbeschriftung (\textit{labelling}) $\ell : T \to \Sigma \cup \{ \lambda \}$, wobei~$\Sigma$ eine Menge von \textit{Aktionen} ist.
+  \end{itemize}
+\end{defn}
+
+\begin{sprechweise}
+  $t \in T$ mit $\ell(t) = \lambda$ heißt \textit{intern} oder \textit{unsichtbar}.
+\end{sprechweise}
+
+\begin{nota}
+  \begin{minipage}[t]{0.8 \linewidth}
+    Für $t \in T^{*}$ ist $\ell(w) \coloneqq \ell(t_1) \cdots \ell(t_n) \in \Sigma^{*}$. \\
+    Dabei wird $\lambda$ als das leere Wort in $\Sigma^{*}$ aufgefasst.
+  \end{minipage}
+\end{nota}
+
+\begin{defn}
+  Mit $t \in T$, $w \in T^{*}$ und Markierungen $M$, $M'$ ist definiert:
+  \[
+    \inferrule
+      {M \activeTransition{t} M'}
+      {M \activeTransition{\ell(t)} M'} \quad
+    \inferrule
+      {M \activeTransition{t}}
+      {M \activeTransition{\ell(t)}} \quad
+    \inferrule
+      {M \activeTransition{w} M'}
+      {M \activeTransition{\ell(w)} M'} \quad
+    \inferrule
+      {M \activeTransition{w}}
+      {M \activeTransition{\ell(w)}}
+  \]
+\end{defn}
+
+\begin{defn}
+  Die \emph{Sprache} eines beschrifteten Netzes~$N$ ist
+  \[
+    L(N) \coloneqq \Set{v \in \Sigma^{*}}{M_n \activeTransition{v}}.
+  \]
+\end{defn}
+
+% 2.12
+\begin{defn}
+  Ein \emph{beschriftetes Netz mit Endmarkierung} ist ein Tupel $N = (S, T, W, M_N, \ell, \Fin)$ wobei
+  \begin{itemize}
+    \item $(S, T, W, M_N, \ell)$ ein beschriftetes Netz und
+    \item $\Fin \subseteq \Markings(S)$ eine endliche Menge ist.
+  \end{itemize}
+  Die entspr. Sprache ist $L_\fin(N) \coloneqq \Set{v \in \Sigma^{*}}{\ex{M \in \Fin} M_N \activeTransition{v} M}$.
+\end{defn}
+
+\begin{nota}
+  $\Lang^\lambda \coloneqq \Set{L_\fin(N)}{N \text{ beschr. Netz mit Endmarkierung}}$ \\
+  $\Lang \coloneqq \Set{L_\fin(N)}{N \text{ beschr. Netz mit Endmark. ohne interne Trans.}}$
+\end{nota}
+
+% 2.13
+\begin{satz}
+  $\{ \text{ reguläre Sprachen } \} \subseteq \Lang$
+\end{satz}
+
+\subsection{Nebenläufigkeit I}
+
+% 2.14
+\begin{defn}
+  Eine Multimenge über~$X$ ist eine Funktion $\mu : X \to \N$.
+\end{defn}
+
+\begin{nota}
+  \begin{minipage}[t]{0.8 \linewidth}
+    $\Multisets(X) \coloneqq \{ \mu : X \to \N \}$ \\
+    $\mu_Y \in \Multisets(X), x \mapsto \card{\Set{\star}{x \in Y}}$ für $Y \subset X$, \\
+    $\emptyset \coloneqq \mu_\emptyset \in \Multisets(X)$, \enspace
+    $\mu_x \coloneqq \mu_{\{ x \}} \in \Multisets(X)$ für $x \in X$
+  \end{minipage}
+\end{nota}
+
+% 2.15
+\begin{defn}
+  Ein \emph{Schritt}~$\mu$ ist eine Multimenge $\mu \neq \emptyset \in \Multisets(T)$. \\
+  Der Schritt~$\mu$ ist \emph{aktiviert} unter~$M$, notiert $M \activeTransition{\mu}$, falls
+  \[
+    \fa{s \in S} \mu^{-}(s) \coloneqq {\sum}_{t \in T} \mu(t) W(s, t) \leq M(s).
+  \]
+  Durch \textit{Schalten} von~$\mu$ entsteht die Folgemarkierung $M' \in \Markings(S)$ mit
+  \[
+    M'(s) = M(s) + {\sum}_{t \in T} \mu(t) \cdot (W(t, s) - W(s, t)).
+  \]
+\end{defn}
+
+\begin{bem}
+  Analog wird verallgemeinert:
+  $M \activeTransition{\mu} M'$, $M \activeTransition{w}$, $M \activeTransition{w} M'$
+  für $\mu \in \Markings(T) \setminus \{ \emptyset \}$ bzw. $w \in (\Markings(T) \setminus \{ \emptyset \})^{*}$.
+\end{bem}
+
+\begin{defn}
+  \begin{minipage}[t]{0.8 \linewidth}
+    $\StepSequences(N) \coloneqq \Set{w \in (\Markings(T) \setminus \{ \emptyset \})^{*}}{M_N \activeTransition{w}}$ \\
+    heißen \emph{Schrittfolgen} (\textit{step sequences}).
+  \end{minipage}
+\end{defn}
+
+\begin{defn}
+  Zwei Transitionen $t, t' \in T$ sind
+  \begin{itemize}
+    \item \emph{nebenläufig} \textit{unter~$M$}, falls $M \activeTransition{t + t'}$,
+    \item \emph{in Konflikt} \textit{unter~$M$}, falls $\neg M \activeTransition{t + t'}$.
+  \end{itemize}
+\end{defn}
+
+\begin{nota}
+  Für $\mu \in \Multisets(T)$ ist $\ell(\mu)$ die Multimenge mit
+  \[
+    \ell(\mu) : \Sigma \to \N, x \mapsto {\sum}_{t \in T, \ell(t) = x} \mu(t)
+  \]
+  (falls die rechte Zahl endlich ist für alle $x \in \Sigma$). \\
+  Für $w = \mu_1 \cdots \mu_n \in \Multisets(T)^{*}$ ist 
+  $\ell(w) \coloneqq \ell(\mu_1) \cdots \ell(\mu_n)$.
+\end{nota}
+
+\begin{defn}
+  Mit $\mu \in \Markings(T) \setminus \{ 0 \}$, $w \in (\Markings(T) \setminus \{ 0 \})^{*}$ und $M$, $M'$ ist defin.:
+  \[
+    \inferrule
+      {M \activeTransition{\mu} M'}
+      {M \activeTransition{\ell(\mu)} M'} \quad
+    \inferrule
+      {M \activeTransition{\mu}}
+      {M \activeTransition{\ell(\mu)}} \quad
+    \inferrule
+      {M \activeTransition{w} M'}
+      {M \activeTransition{\ell(w)} M'} \quad
+    \inferrule
+      {M \activeTransition{w}}
+      {M \activeTransition{\ell(w)}}
+  \]
+\end{defn}
+
+% 2.16
+\begin{lem}
+  $M \activeTransition{t_1}, \ldots, M \activeTransition{t_n} \wedge \fa{i \neq j} \preset{t_i} \cap \preset{t_j} = \emptyset \implies M \activeTransition{t_1 + \ldots t_n}$
+\end{lem}
+
+% 2.17
+\begin{lem}
+  $M \activeTransition{\mu} M' \wedge \Parikh(w) = \mu \implies M \activeTransition{w} M'$
+\end{lem}
+
+\begin{bem}
+  Über Schrittfolgen werden somit dieselben Markierungen erreicht wie über Schaltfolgen.
+\end{bem}
+
+\begin{defn}
+  Der \emph{schrittweise Erreichbarkeitsgraph}~$\StepReachabilityGraph(N)$ besitzt die Knoten $\activeTransition{M}$ und die Kanten $\Set{(M, M')}{\ex{\mu \in \Markings(T) \!\setminus\! \{ \emptyset \}} M \activeTransition{\mu} M'}$.
+\end{defn}
+
+% 2.18
+\begin{lem}
+  Sei~$N$ schlingenfrei. Dann gilt:
+  \[
+    (\fa{w \in T^{*}, \Parikh(w) = \mu} M \activeTransition{w}) \iff M \activeTransition{\mu}
+  \]
+\end{lem}
+
+% Erreichbarkeit
+
+\begin{problem}[\emph{Erreichbarkeit}]
+  Gegeben seien ein Netz~$N$ und eine Markierung~$M$.
+  Frage: Ist~$M$ erreichbar in~$N$?
+\end{problem}
+
+\begin{problem}[\emph{$0$-Erreichbarkeit}]
+  Gegeben seien ein Netz~$N$.
+  Frage: Ist die Nullmarkierung erreichbar?
+\end{problem}
+
+\begin{bem}
+  Diese Probleme sind lösbar, falls der Erreichbarkeitsgraph endlich ist.
+\end{bem}
+
+% 2.19
+\begin{defn}
+  Eine Stelle $s \in S$ heißt \emph{$n$-beschränkt} / \emph{beschränkt}, falls
+  \[
+    \sup \Set{M(s)}{M \in \activeTransition{M_N}} \leq n
+    \quad / \quad
+    \sup \Set{M(s)}{M \in \activeTransition{M_N}} < \infty.
+  \]
+  Ein Netz heißt ($n$-) \textit{beschränkt}, wenn alle Stellen $s \in S$ ($n$-) beschränkt sind.
+  Ein Netz heißt \emph{sicher}, wenn es 1-beschränkt ist.
+\end{defn}
+
+% 2.20
+\begin{prop}
+  $\activeTransition{M_N}$ endlich $\iff$ $N$ beschränkt
+\end{prop}
+
+% Verklemmung
+
+% 2.21
+\begin{defn}
+  Eine Transition $t \in T$ heißt \emph{tot} \textit{unter~$M$}, falls $\fa{M' \in \activeTransition{M}} \neg M' \activeTransition{t}$.
+  \begin{itemize}
+    \item $M$ heißt \textit{tot}, falls alle Transitionen unter~$M$ tot sind.
+    \item $N$ heißt \textit{tot}, falls $M_N$ tot ist.
+    \item $N$ heißt \emph{verklemmungsfrei}, falls $\fa{M \in \activeTransition{M_N}} \neg (M \text{ tot})$
+    \item $t$ heißt \emph{lebendig} \textit{unter $M$}, falls $\fa{M' \in \activeTransition{M}} \neg (t \text{ ist tot unter~$M$})$
+    \item $t$ heißt \textit{lebendig}, falls $t$ lebendig unter~$M_N$ ist.
+    \item $M$ heißt \textit{lebendig}, wenn alle $t \in T$ unter~$M$ lebendig sind.
+    \item $N$ heißt \textit{lebendig}, wenn $M_N$ lebendig ist.
+  \end{itemize}
+\end{defn}
+
+\begin{problem}[\emph{Lebendigkeit}]
+  Gegeben $N$. Frage: Ist $N$ lebendig?
+\end{problem}
+
+\begin{problem}[\emph{Einzellebendigkeit}]
+  Gegeben seien $N$ und $t \in T$.
+  Frage: Ist $t$ lebendig?
+\end{problem}
+
+\end{document}

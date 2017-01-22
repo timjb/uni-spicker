@@ -205,8 +205,10 @@
 
 % Absolutwert, Norm
 % siehe http://tex.stackexchange.com/questions/43008/absolute-value-symbols
-\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
-\DeclarePairedDelimiter\norm{\lVert}{\rVert}%
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}
+% Kardinalität
+\DeclarePairedDelimiter\card{\lvert}{\rvert}
 
 % Offene und abgeschlossene Teilmengen
 % http://tex.stackexchange.com/questions/22371/subseteq-circ-as-a-single-symbol-open-subset
