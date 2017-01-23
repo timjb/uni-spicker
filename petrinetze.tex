@@ -22,6 +22,8 @@
 \newcommand{\fin}{\mathrm{fin}} % endlich
 \newcommand{\Multisets}{\mathfrak{M}} % Multimengen
 \DeclareMathOperator{\StepSequences}{SS} % Schrittfolgen
+\newcommand{\SInv}{S\text{-}\mathrm{Inv}} % S-Invarianten
+\newcommand{\TInv}{T\text{-}\mathrm{Inv}} % T-Invarianten
 
 % Kleinere Klammern
 \delimiterfactor=701
@@ -361,7 +363,9 @@
     \sup \Set{M(s)}{M \in \activeTransition{M_N}} < \infty.
   \]
   Ein Netz heißt ($n$-) \textit{beschränkt}, wenn alle Stellen $s \in S$ ($n$-) beschränkt sind.
-  Ein Netz heißt \emph{sicher}, wenn es 1-beschränkt ist.
+  Ein Netz heißt \emph{sicher}, wenn es 1-beschränkt ist. \\
+  % Def 3.6:
+  Ein Netz heißt \emph{strukturell beschränkt}, wenn es bei beliebig geänderter Anfangsmarkierung beschränkt ist.
 \end{defn}
 
 % 2.20
@@ -393,5 +397,109 @@
   Gegeben seien $N$ und $t \in T$.
   Frage: Ist $t$ lebendig?
 \end{problem}
+
+% §3. S- und T-Invarianten
+\section{$S$- und $T$-Invarianten}
+
+% Ausgelassen: Beispiel mit 3 lesenden, zwei schreibenden Prozessen
+
+% 3.1
+\begin{defn}
+  Die \emph{Inzidenzmatrix} \textit{eines Netzes~$N$} ist die Matrix $C(N) \in \Z^{\card{T} \times \card{S}}$ mit $C(N)_{s t} = \Delta t (s)$ für $s \in S$ und $t \in T$.
+\end{defn}
+
+\begin{bem}
+  Folglich ist $\Delta t = C(N) \cdot t$ (wenn man $t$ als One-Hot-Vektor auffasst) und für $M \activeTransition{w} M'$ ist $M' = M + C(N) \cdot \Parikh(w)$.
+\end{bem}
+
+% 3.2
+\begin{defn}
+  Eine \emph{$S$-Invariante} $y : S \to \Z$ ist eine Lsg von $C(N)^T \cdot y = 0$. \\
+  Der \emph{Träger} $\supp(y)$ \textit{einer $S$-Invarianten~$y$} ist $\Set{s \in S}{y(s) \neq 0}$. \\
+\end{defn}
+
+\begin{nota}
+  $\SInv(N) \coloneqq \{ \text{ $S$-Invarianten von~$N$ } \} = \ker(C(N)^T)$
+\end{nota}
+
+\begin{lemdefn}
+  Das Netz~$N$ heißt \emph{von $S$-Invarianten überdeckt}, falls folgende äquivalente Bedingungen gelten:
+  \begin{itemize}
+    \item $N$ besitzt eine positive (\dh{} $\fa{s \in S} y(s) > 0$) $S$-Invariante.
+    \item Für alle $s \in S$ gibt es eine nichtnegative (\dh{} $\fa{s \in S} y(s) \geq 0$) $S$-Invariante mit $s \in \supp(y)$.
+  \end{itemize}
+\end{lemdefn}
+
+% 3.3
+\begin{lem}
+  $y \in \SInv(N) \implies \fa{M \in \activeTransition{M_N}} y^T \cdot M = y^T \cdot M_N$
+\end{lem}
+
+\begin{bem}
+  Das Lemma kann verwendet werden um zu zeigen, dass ein~$M$ nicht erreichbar ist.
+\end{bem}
+
+% 3.4
+\begin{lem}
+  Sei keine Transition in~$N$ tot.
+  Dann gilt für $y \in \Z^S$:
+  \[
+    \fa{M \in \activeTransition{M_N}} y^T \cdot M = y^T \cdot M_N \implies
+    y \in \SInv(N)
+  \]
+\end{lem}
+
+% 3.5
+\begin{lem}
+  Sei $s \in S$ und $y \in \SInv(N)$ nichtnegativ mit $y(s) > 0$. \\
+  Dann ist $s$ beschränkt, genauer $(y^T \cdot M_N / y(s))$-beschränkt.
+\end{lem}
+
+% 3.6
+\begin{lem}
+  Ist~$N$ von $S$-Invarianten überdeckt, so ist~$N$ strukturell beschränkt.
+\end{lem}
+
+\TODO{Umkehrung, siehe Buch von Starke}
+
+\begin{defn}
+  Ein \emph{home state} ist eine Markierung~$M$ mit
+  \[
+    \fa{M' \in \activeTransition{M}} M \in \activeTransition{M'}.
+  \]
+  Ein Netz~$N$ heißt \emph{reversibel}, wenn $M_N$ ein home state ist.
+\end{defn}
+
+\begin{lem}
+  Angenommen, $N$ ist reversibel und keine Transitionen sind tot unter~$M_N$.
+  Dann ist $N$ lebendig.
+\end{lem}
+
+\begin{bem}
+  Es gibt lebendige, sichere Netze, die \textit{nicht} von $S$-Invarianten überdeckt sind.
+\end{bem}
+
+% 3.8
+\begin{defn}
+  Eine \emph{$T$-Invariante} $x : T \to \Z$ ist eine Lsg von $C(N) \cdot x = 0$.
+  Das Netz~$N$ heißt \emph{von $T$-Invarianten überdeckt}, wenn es eine positive $T$-Invariante gibt.
+\end{defn}
+
+\begin{nota}
+  $\TInv(N) \coloneqq \{ \text{ $T$-Invarianten von~$N$ } \} = \ker(C(N))$
+\end{nota}
+
+% 3.9
+\begin{lem}
+  Sei $w \in T^*$ mit $M \activeTransition{w} M'$.
+  Dann gilt:
+  \[
+    \Parikh(w) \in \TInv(N) \iff M = M'
+  \]
+\end{lem}
+
+\begin{satz}
+  Ist~$N$ lebendig und beschränkt, so ist $N$ von $T$-Invarianten überdeckt.
+\end{satz}
 
 \end{document}
