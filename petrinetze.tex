@@ -24,6 +24,9 @@
 \DeclareMathOperator{\StepSequences}{SS} % Schrittfolgen
 \newcommand{\SInv}{S\text{-}\mathrm{Inv}} % S-Invarianten
 \newcommand{\TInv}{T\text{-}\mathrm{Inv}} % T-Invarianten
+\newcommand{\reducesTo}{\mapsto} % reduziert zu (entscheidungsprobleme)
+\newcommand{\reducesManyOneToLin}{\xmapsto{\mathrm{lin}}_M} % reduziert zu ... in linearer Zeit (entscheidungsprobleme)
+\newcommand{\reducesManyOneToPoly}{\xmapsto{\mathrm{poly}}_M} % reduziert zu ... in polynomieller Zeit (entscheidungsprobleme)
 
 % Kleinere Klammern
 \delimiterfactor=701
@@ -340,19 +343,7 @@
 
 % Erreichbarkeit
 
-\begin{problem}[\emph{Erreichbarkeit}]
-  Gegeben seien ein Netz~$N$ und eine Markierung~$M$.
-  Frage: Ist~$M$ erreichbar in~$N$?
-\end{problem}
-
-\begin{problem}[\emph{$0$-Erreichbarkeit}]
-  Gegeben seien ein Netz~$N$.
-  Frage: Ist die Nullmarkierung erreichbar?
-\end{problem}
-
-\begin{bem}
-  Diese Probleme sind lösbar, falls der Erreichbarkeitsgraph endlich ist.
-\end{bem}
+% (Problemdefinitionen nach hinten verschoben)
 
 % 2.19
 \begin{defn}
@@ -388,15 +379,6 @@
     \item $N$ heißt \textit{lebendig}, wenn $M_N$ lebendig ist.
   \end{itemize}
 \end{defn}
-
-\begin{problem}[\emph{Lebendigkeit}]
-  Gegeben $N$. Frage: Ist $N$ lebendig?
-\end{problem}
-
-\begin{problem}[\emph{Einzellebendigkeit}]
-  Gegeben seien $N$ und $t \in T$.
-  Frage: Ist $t$ lebendig?
-\end{problem}
 
 % §3. S- und T-Invarianten
 \section{$S$- und $T$-Invarianten}
@@ -501,5 +483,122 @@
 \begin{satz}
   Ist~$N$ lebendig und beschränkt, so ist $N$ von $T$-Invarianten überdeckt.
 \end{satz}
+
+% §4. Einige Entscheidbarkeitsprobleme
+
+\section{Einige Entscheidbarkeitsprobleme}
+
+\begin{problem}[E -- \emph{Erreichbarkeit}]
+  Gegeben seien ein Netz~$N$ und eine Markierung~$M$.
+  Frage: Ist~$M$ erreichbar in~$N$?
+\end{problem}
+
+\begin{problem}[0-E -- \emph{$0$-Erreichbarkeit}]
+  Gegeben seien ein Netz~$N$.
+  Frage: Ist die Nullmarkierung erreichbar?
+\end{problem}
+
+\begin{bem}
+  Diese Probleme sind lösbar, falls der Erreichbarkeitsgraph endlich ist.
+\end{bem}
+
+\begin{problem}[TE -- \emph{Teilerreichbarkeit}]
+  Gegeben ein Netz~$N$, eine Teilmenge $S' \subseteq S$ und $M : S' \to \N$.
+  Frage: Gibt es eine erreichbare Markierung~$M \in \Markings(S)$ mit $M|_{S'} = M'$?
+\end{problem}
+
+% ausgelassen: Definition 4.1 von Entscheidungsproblem und Entscheidungsverfahren
+
+\begin{defn}
+  \begin{itemize}
+    \item Ein Entscheidungsproblem~$A$ ist auf ein Entscheidungs- problem~$B$ \emph{reduzierbar} (notiert $A \reducesTo B$), falls ein Lösungsalgo- rithmus für~$A$ existiert, welcher einen (vllt. gar nicht existenten!) Lösungsalgorithmus für~$B$ verwenden darf.
+    \item $A$ ist \emph{linear / polynomiell many-one-reduzierbar} \textit{auf~$B$}, falls aus einer Instanz~$I$ von~$A$ in linearer / polynomieller Zeit eine Instanz~$I'$ von~$B$ berechnet werden kann, sodass die Antwort auf~$I$ gleich der Antwort auf~$I'$ ist.
+    Notation: $A \reducesManyOneToLin B$ / $A \reducesManyOneToPoly B$
+  \end{itemize}
+\end{defn}
+
+% 4.2
+\begin{satz}
+  $\text{(0-E)} \reducesManyOneToLin \text{(E)} \reducesManyOneToLin \text{(TE)}  \reducesManyOneToLin \text{(0-E)}$
+\end{satz}
+
+\begin{beweis}[$\text{(TE)}  \reducesManyOneToLin \text{(0-E)}$]
+  Konstruiere $\overline{N} = (\overline{S}, \overline{T}, \overline{W}, M_{\overline{N}})$ mit
+  \begin{align*}
+    \overline{S} & \coloneqq S \amalg \Set{\overline{s'}}{s' \in S'} \\
+    \overline{T} & \coloneqq T \amalg \Set{t_{s'}}{s' \in S'} \amalg \Set{t_s}{s \in S \setminus S'} \\
+    \overline{W} & \coloneqq W \cup \Set{s \to t_s}{s \in S \setminus S'} \cup \Set{s' \to t_{s'} \leftarrow \overline{s'}}{s' \in S'} \\
+    M_{\overline{N}} & \coloneqq (s \in S \mapsto M_N(s), \enspace \overline{s'} \mapsto M'(s'))
+  \end{align*}
+  Dann: $M'$ teilerreichbar in~$N$ $\iff$ Nullmark. erreichbar in~$\overline{N}$
+\end{beweis}
+
+% 4.3
+\begin{satz}
+  (E) ist entscheidbar.
+\end{satz}
+
+\TODO{Beweis lesen, zusammenfassen}
+
+\begin{problem}[L -- \emph{Lebendigkeit}]
+  Gegeben $N$. Frage: Ist $N$ lebendig?
+\end{problem}
+
+\begin{problem}[EL -- \emph{Einzellebendigkeit}]
+  Gegeben seien $N$ und $t \in T$.
+  Frage: Ist $t$ lebendig?
+\end{problem}
+
+% 4.4 a)
+\begin{satz}
+  (L) ist reduzierbar auf (EL)
+\end{satz}
+
+\begin{beweis}
+  Konstruiere $\overline{N} = (\overline{S}, \overline{T}, \overline{W}, M_{\overline{N}})$ mit
+  \begin{align*}
+    \overline{S} & \coloneqq S \amalg \Set{s_t}{t \in T} \\
+    \overline{T} & \coloneqq T \amalg \{ t_\mathrm{afterall} \} \\
+    \overline{W} & \coloneqq W \cup \Set{t \to s_t}{t \in T} \cup \Set{s_t \to t_\mathrm{afterall}}{t \in T} \\
+    M_{\overline{N}} & \coloneqq (s \in S \mapsto M_N(s), \enspace s_t \mapsto 0)
+  \end{align*}
+  Dann: $N$ lebendig $\iff$ $t_\mathrm{afterall}$ lebendig in $\overline{N}$.
+\end{beweis}
+
+% 4.4 b)
+\begin{satz}
+  (EL) ist reduzierbar auf (TE)
+\end{satz}
+
+\TODO{Beweis verstehen, zusammenfassen}
+
+% 4.4 c)
+\begin{satz}
+  (0-E) $\reducesManyOneToLin$ Co-(L), das ist (L) mit umgekehrter Antwort
+\end{satz}
+
+\begin{beweis}
+  Konstruiere $\overline{N} = (\overline{S}, \overline{T}, \overline{W}, M_{\overline{N}})$ mit
+  \begin{align*}
+    \overline{S} & \coloneqq S \amalg \{ s_\mathrm{distr}, s_\mathrm{control} \} \\
+    \overline{T} & \coloneqq T \amalg \Set{t_s}{s \in S} \amalg \{ t_\mathrm{distr}, t_\mathrm{blackhole} \} \\
+    \overline{W} & \coloneqq W \cup \Set{t \rightleftarrows s_\mathrm{control}}{t \in T} \cup \Set{t_\mathrm{distr} \to s \to t_s \to s_\mathrm{distr}}{s \in S} \\
+    & \cup \{ s_\mathrm{distr} \rightleftarrows t_\mathrm{distr} \} \cup \{ s_\mathrm{control} \to t_\mathrm{blackhole} \} \\
+    M_{\overline{N}} & \coloneqq (s \in S \mapsto M_N(s), \enspace s_\mathrm{distr} \mapsto 0, \enspace s_\mathrm{control} \mapsto 1)
+  \end{align*}
+  (Bemerke: Jede Markierung $\hat{M}$ mit $\hat{M}(s_\mathrm{distr}) > 0$ ist lebendig.) \\
+  Dann: Nullmarkierung in $N$ erreichbar $\iff$ $\overline{N}$ nicht lebendig
+\end{beweis}
+
+% 4.5
+\begin{satz}
+  $\text{(L)} \reducesManyOneToLin \text{(EL)} \reducesManyOneToLin \text{(L)}$
+\end{satz}
+
+\TODO{Beweise nachvollziehen, aufschreiben}
+
+\begin{fazit}
+  (L) und (EL) sind entscheidbar, aber mindestens so schwer wie (E), (0-E) und (TE).
+\end{fazit}
 
 \end{document}
