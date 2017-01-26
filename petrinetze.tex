@@ -5,6 +5,8 @@
   /Author (Tim Baumann)
 }
 
+\usepackage{algorithmicx}
+\usepackage[noend]{algpseudocode}
 
 \newcommand{\transition}{\square} % Transition
 \newcommand{\place}{\bigcirc} % Stelle, Platz
@@ -17,6 +19,7 @@
 \DeclareMathOperator{\Parikh}{Parikh} % Parikh-Bild
 \newcommand{\inferrule}[2]{\frac{{#1}}{{#2}}} % logische Inferenzregel
 \newcommand{\Markings}{\mathfrak{M}} % Menge von Markierungen
+\newcommand{\ExtMarkings}{\mathfrak{M}^\omega} % Menge von erweiterten Markierungen
 \DeclareMathOperator{\Fin}{Fin} % Menge von Endzuständen
 \newcommand{\Lang}{\mathfrak{L}} % Sprachen von beschrifteten Netzen mit Endmarkierung
 \newcommand{\fin}{\mathrm{fin}} % endlich
@@ -27,6 +30,8 @@
 \newcommand{\reducesTo}{\mapsto} % reduziert zu (entscheidungsprobleme)
 \newcommand{\reducesManyOneToLin}{\xmapsto{\mathrm{lin}}_M} % reduziert zu ... in linearer Zeit (entscheidungsprobleme)
 \newcommand{\reducesManyOneToPoly}{\xmapsto{\mathrm{poly}}_M} % reduziert zu ... in polynomieller Zeit (entscheidungsprobleme)
+\DeclareMathOperator{\Cov}{Cov} % Überdeckungsgraph
+\newcommand{\nil}{\mathbf{nil}} % NULL
 
 % Kleinere Klammern
 \delimiterfactor=701
@@ -600,5 +605,160 @@
 \begin{fazit}
   (L) und (EL) sind entscheidbar, aber mindestens so schwer wie (E), (0-E) und (TE).
 \end{fazit}
+
+% §5. Beschränktheit und Überdeckbarkeit
+\section{Beschränktheit und Überdeckbarkeit}
+
+% 5.3
+\begin{lem}[\emph{Dickson}]
+  $\leq$ ist eine Wohlquasiordnung auf~$\N^n$, \dh{} für alle unendlichen Folgen $(M_i)_{i \in \N}$ in~$\N^n$ gibt es eine Teilfolge $(M_{i_j})_{j \in \N}$ mit $M_{i_j} \leq M_{i_{j+1}}$ für alle $j \in \N$.
+\end{lem}
+
+\begin{defn}
+  Ein \emph{Weg} in einem Graphen~$(V, E)$ ist eine Folge $v_1 \ldots v_n$ in~$V$ mit $\fa{i \neq j} v_i \neq v_j$ und $(v_i, v_{i+1}) \in E$.
+\end{defn}
+
+\begin{defn}
+  Ein Graph~$(V, E)$ heißt \emph{lokal endlich}, falls für alle $v \in V$ die Menge $\Set{w \in V}{(v, w) \in E}$ endlich ist.
+\end{defn}
+
+\begin{lem}[\emph{König}]
+  Sei $(V, E)$ ein lokal endlicher gerichteter Graph und $v_0 \in V$ ein Knoten, sodass für alle $v \in V$ ein Weg von~$v_0$ nach~$v$ existiert. 
+  Dann gibt es einen unendlichen Weg ausgehend von~$v_0$.
+\end{lem}
+
+% 5.2
+\begin{satz}
+  $
+    N \text{ ist unbeschränkt} \enspace \iff
+    \begin{array}[t]{l}
+      \ex{M, M' \in \activeTransition{M_N}} \ex{w \in T^*} \\
+      M \activeTransition{w} M' \wedge M \leq M' \wedge M \neq M'
+    \end{array}
+  $
+\end{satz}
+
+% 5.1
+\begin{defn}
+  Eine \emph{erweiterte Markierung} \textit{von~$N$} ist eine Abbildung
+  \[
+    M : S \to \N \cup \{ \omega \}.
+  \]
+\end{defn}
+
+\begin{nota}
+  $\ExtMarkings(S) \coloneqq \{ \text{ erw. Mark. von~$N$ } \} \coloneqq (\N \cup \{ \omega \})^S$
+\end{nota}
+
+% 5.7
+\begin{defn}
+  Sei $N$ ein Netz und $M_1$, $M_2$ erweiterte Markierungen.
+  \begin{itemize}
+    \item $M_2$ \emph{überdeckt} $M_1$ $\coloniff$ $M_1 \leq M_2$
+    \item $M_1$ ist \emph{überdeckbar} $\coloniff$ $\ex{M \in \activeTransition{M_N}} M_1 \leq M$
+  \end{itemize}
+\end{defn}
+
+\begin{defn}
+  Eine Menge $S' \subseteq S$ heißt \emph{simultan unbeschränkt}, falls
+  \[
+    \fa{n \in \N} \ex{M \in \activeTransition{M_N}} \fa{s \in S} M(s) \geq n.
+  \]
+\end{defn}
+
+\begin{defn}
+  Sei $N = (S, T, W, M_N)$ ein Netz.
+  Ein \emph{Überdeckungsgraph} von~$N$ ist ein kantenbeschrifteter, gericht. Graph $\Cov(N) = (V, E)$, der von folgendem (nichtdet.) Algorithmus berechnet wird:
+  \begin{algorithmic}[1]
+    \State{
+      $V \coloneqq \emptyset \subset \ExtMarkings(S)$, \enspace
+      $A \coloneqq \{ M_N \} \subset \ExtMarkings(S)$,
+    }
+    \State{
+      $E \coloneqq \emptyset \subset \ExtMarkings(S) \times T \times \ExtMarkings(S)$,
+    }
+    \State{
+      $\Call{pred}{} \coloneqq \mathrm{const} \, \nil \in (\ExtMarkings(S) \cup \{\nil\})^{\ExtMarkings(S)}$
+    }
+    \While{$A \neq \emptyset$}
+      \State wähle $M \in A$
+      \State $A \coloneqq A \setminus \{ M \}$, \enspace $V \coloneqq V \cup \{ M \}$
+      \For{$t \in T$ mit $M \activeTransition{t}$}
+        \State $M' \coloneqq M + \Delta t$, \enspace $M^* \coloneqq M$
+        \While{$M^* \neq \nil \wedge M^* \not\leq M'$}
+          $M^* \coloneqq \Call{pred}{M^*}$
+        \EndWhile
+        \If{$M^* \neq \nil$}
+          $M' \coloneqq M' + \omega \cdot (M' - M^*)$ %= (s \mapsto \max (\{ M'(s) \} \cup \Set{\omega}{M'(s) > M^*(s)}) )
+        \EndIf
+        \State $E \coloneqq \{ (M, t, M') \}$
+        \If{$M' \not\in V \cup A$}
+          $A \coloneqq A \cup \{ M' \}$, \enspace
+          $\Call{pred}{M'} \coloneqq M$
+        \EndIf
+      \EndFor
+    \EndWhile
+  \end{algorithmic}
+\end{defn}
+
+% 5.8
+\begin{satz}
+  $\Cov(N)$ ist endlich ($\!\iff\!$ der Algorithmus terminiert)
+\end{satz}
+
+\begin{kor}
+  Es ist entscheidbar, ob~$N$ beschränkt ist.
+\end{kor}
+
+\begin{beweis}
+  Konstruiere $\Cov(N) = (V, E)$ wobei $V \subset \ExtMarkings(S)$ endl. ist.
+  Überprüfe, ob sogar $V \subset \Markings(S)$ gilt.
+  Falls ja, so ist $\ReachabilityGraph(N) = \Cov(N)$ endlich.
+  Falls nein, so gibt es $M$, $M'$ wie im letzten Satz und~$N$ ist somit unbeschränkt.
+\end{beweis}
+
+\begin{bem}
+  Jedes $\Cov(N)$ ist (nach Einführen eines Fehlerzustandes und Kanten dorthin) ein determ. endl. Automat mit Startzustand~$M_N$.
+\end{bem}
+
+\begin{defn}
+  $L(\Cov(N)) \subseteq T^*$ ist die Sprache der von einem $\Cov(N)$ akzeptierten Wörter. 
+\end{defn}
+
+\begin{nota}
+  $M_w \coloneqq $ durch $w \in L(\Cov(N))$ erreichter Zust. in $\Cov(N)$
+\end{nota}
+
+% 5.10 a)
+\begin{lem}
+  $
+    M_N \activeTransition{w} M \enspace \implies
+    \begin{array}[t]{l}
+      w \in L(\Cov(N)) \wedge \\
+      \fa{s \in S} M_w(s) \in \{ M(s), \omega \}
+    \end{array}
+  $
+  % ausgelassen: triviales Korollar
+\end{lem}
+
+% 5.11
+\begin{lem}
+  Für alle $M$ in $\Cov(N)$ u. alle $n \in \N$ gibt es ein $M' \!\in\! \activeTransition{M_N}$ mit
+  \[
+    \begin{cases}
+      M'(s) = M(s) & \text{falls } M(s) \neq \omega, \\
+      M'(s) > n & \text{falls } M(s) = \omega.
+    \end{cases}
+  \]
+\end{lem}
+
+% 5.12, 5.13, 5.14
+\begin{kor}
+  \begin{itemize}
+    \item $S'$ ist simultan unbeschränkt $\iff$ $(\mathrm{const} \, \omega) \in \Cov(N)$
+    \item Sei $\tilde{M}$ eine Markierung von~$N$. Dann gilt: $\tilde{M}$ ist überdeckbar in~$N$ $\iff$ $\tilde{M}$ wird von einem $M$ in~$\Cov(N)$ überdeckt
+    \item $t$ ist nicht tot in~$N$ $\iff$ $t$ ist Kantenbeschriftung in $\Cov(N)$
+  \end{itemize}
+\end{kor}
 
 \end{document}
