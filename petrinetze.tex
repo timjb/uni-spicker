@@ -761,4 +761,141 @@
   \end{itemize}
 \end{kor}
 
+% §6. Strukturtheorie und Free-Choice-Netze
+\section{Strukturtheorie und Free-Choice-Netze}
+
+\begin{konv}
+  In diesem Abschn. seien alle Kantengewichte 0 oder~1.
+\end{konv}
+
+\begin{defn}
+  Eine Teilmenge $R \subseteq S$ heißt
+  \begin{itemize}
+    \miniitem{0.4 \linewidth}{\emph{Siphon}, falls $\preset{R} \subseteq \postset{R}$}
+    \miniitem{0.4 \linewidth}{\emph{Falle}, falls $\postset{R} \subseteq \preset{R}$}
+  \end{itemize}
+\end{defn}
+
+\begin{lem}
+  \begin{itemize}
+    \item Ist $R$ ein Siphon und unmarkiert unter~$M$, so ist~$R$ unmarkiert unter allen $M' \in \activeTransition{M}$.
+    \item Ist $R$ eine Falle und markiert unter~$M$, so ist~$R$ markiert unter allen $M' \in \activeTransition{M}$.
+  \end{itemize}
+\end{lem}
+
+% 6.4
+\begin{lem}
+  Angenommen, $N$ hat keine isolierten Stellen.
+  Ist $R \neq \emptyset$ ein Siphon und unmarkiert unter $M \in \activeTransition{M_n}$, so ist~$N$ nicht lebendig.
+\end{lem}
+
+% 6.5
+\begin{lem}
+  Sei $T \neq \emptyset$ und $M$ eine tote Markierung. \\
+  Dann ist $R = M^{-1}(\{ 0 \})$ ein nichtleerer, unmarkierter Siphon.
+\end{lem}
+
+% 6.6
+\begin{lem}
+  Sei $T \neq \emptyset$.
+  Enthält jeder nichtleere Siphon eine markierte Falle, so ist~$N$ verklemmungsfrei.
+\end{lem}
+
+\begin{defn}
+  Ein Netz $N$ heißt \emph{Free-Choice-Netz} (\textit{FC-Netz}), falls
+  \[
+    \fa{t, t' \in T} t \neq t' \wedge s \in \preset{t} \cap \preset{t'} \implies \preset{t} = \preset{t'} = \{ s \}.
+  \]
+  Ein Netz $N$ heißt \emph{erweit. Free-Choice-Netz} (\textit{EFC-Netz}), falls
+  \[
+    \fa{t, t' \in T} t \neq t' \wedge s \in \preset{t} \cap \preset{t'} \implies \preset{t} = \preset{t'}.
+  \]
+\end{defn}
+
+% 6.8
+\begin{bem}
+  Ist $N$ ein EFC-Netz, $s \in S$, $t_1, t_2 \in \postset{s}$ und~$M$ eine Markierung, so gilt $M \activeTransition{t_1} \iff M \activeTransition{t_2}$.
+\end{bem}
+
+\TODO{Definition von Konfusion}
+
+% 6.9
+\begin{lem}
+  Die Vereinigung von Siphons / Fallen ist wieder ein Siphon / eine Falle.
+  Damit bilden Siphons / Fallen mit der Vereinigung einen beschränkten Halbverband.
+\end{lem}
+
+% 6.9
+\begin{kor}
+  \begin{itemize}
+    \item Jedes $R \subseteq S$ enthält eine größte Falle.
+    \item $R \subseteq S$ enthält eine markierte Falle $\iff$ die größte Falle in~$R$ ist markiert
+  \end{itemize}
+\end{kor}
+
+\begin{defn}
+  Sei $P \subseteq S$ und ${<}$ eine Totalordnung auf~$P$.
+  Die durch ${<}$ induzierte \emph{lexikographische Ordnung}~${<_\mathrm{lex}}$ auf~$\Markings(S)$ ist
+  \[
+    M_1 <_\mathrm{lex} M_2 \coloniff \ex{p \in P}
+    \begin{array}[t]{r l}
+      & \fa{q < p} M_1(q) = M_2(q) \\
+      \wedge & M_1(p) < M_2(p).
+    \end{array}
+  \]
+\end{defn}
+
+% 6.10
+\begin{lem}
+  $<_P$ ist Noethersch (wohlfundiert)
+\end{lem}
+
+% 6.11
+\begin{lem}
+  Sei $N$ ein EFC-Netz, $R \subseteq S$ und $Q \subseteq R$ die größte Falle in~$R$.
+  Dann gibt es eine Totalordnung~${<}$ auf $R \setminus Q$, sodass: \\[0.2em]
+  Für alle Markierungen $M$ mit $M|_Q \equiv 0$ und $\ex{t \in \postset{R}} M \activeTransition{t}$ gilt
+  \[
+    \ex{M' \in \activeTransition{M}} M' <_\mathrm{lex} M \wedge M'|_Q \equiv 0.
+  \]
+\end{lem}
+
+\begin{beweis}
+  Setze $n \coloneqq \card{R \setminus Q}$.
+  Wähle
+  \begin{itemize}
+    \item $t_1 \in \postset{R} \setminus \preset{R}$ und $s_1 \in \preset{t_1} \cap (R \setminus Q)$
+    \item $t_2 \in \postset{(R \setminus \{ s_1 \})} \setminus \preset{(R \setminus \{ s_1 \})}$ und $s_2 \in \preset{t_1} \cap (R \setminus (Q \cup \{ s_1 \}))$
+    \item \ldots
+    \item $t_n \in \postset{(R \setminus \{ s_1, \ldots, s_{n-1} \})} \setminus \preset{(R \setminus \{ s_1, \ldots, s_{n-1} \})}$ und $s_n \in \preset{t_1} \cap (R \setminus (Q \cup \{ s_1, \ldots, s_{n-1} \}))$
+  \end{itemize}
+  Definiere ${<}$ durch $s_n < \ldots < s_2 < s_1$.
+  Für~$t$ mit $M \activeTransition{t}$ gibt es ein $i \in \{ 1, \ldots, n \}$ mit $s_i \in \preset{t}$.
+  Da~$N$ EFC ist, gilt $\preset{t_i} = \preset{t}$. \\
+  Somit existiert~$M'$ mit $M \activeTransition{t_i} M'$.
+  Es stimmen $M$ und $M'$ auf $Q \cup \{ s_{i+1}, \ldots, s_n \}$ überein, aber $M'(s_i) < M(s_i)$.
+  Also $M' <_\mathrm{lex} M$.
+\end{beweis}
+
+% 6.11
+\begin{kor}
+  Die Aussage des letzten Satzes gilt auch für alle Markierungen~$M$ mit $M|_Q \equiv 0$ und $\ex{t \in \postset{R}}$ $t$ ist nicht tot unter~$M$, falls~$R$ ein Siphon ist.
+\end{kor}
+
+\begin{satz}[\emph{Commoner}]
+  Sei $N$ ein EFC-Netz ohne isol. Stellen.
+  Dann:
+  \[
+    \text{$N$ ist lebendig $\iff$ jeder Siphon $\neq \emptyset$ enth. eine markierte Falle}
+  \]
+\end{satz}
+
+\begin{beweis}
+  "`$\Rightarrow$"'.
+  Sei $R$ ein nichtleerer Siphon und $Q \subseteq R$ die größte Falle in~$R$.
+  Wähle $t \in \postset{R}$.
+  Angenommen, $M_N|_Q \equiv 0$.
+  Durch mehrmalige Anwendung des vorh. Korollar (beachte: $t$ ist nicht tot) erhalten wir eine unendliche absteigende Reihe $M_N >_\mathrm{lex} M_1 >_\mathrm{lex} \ldots$ im Widerspruch zur Noetherianität von ${<_\mathrm{lex}}$.
+\end{beweis}
+
 \end{document}
