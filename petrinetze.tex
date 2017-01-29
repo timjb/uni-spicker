@@ -32,6 +32,8 @@
 \newcommand{\reducesManyOneToPoly}{\xmapsto{\mathrm{poly}}_M} % reduziert zu ... in polynomieller Zeit (entscheidungsprobleme)
 \DeclareMathOperator{\Cov}{Cov} % Überdeckungsgraph
 \newcommand{\nil}{\mathbf{nil}} % NULL
+\DeclareMathOperator{\trans}{trans} % Transitionsabbildung
+\DeclareMathOperator{\resTime}{res} % Restzeit, residual time
 
 % Kleinere Klammern
 \delimiterfactor=701
@@ -897,5 +899,97 @@
   Angenommen, $M_N|_Q \equiv 0$.
   Durch mehrmalige Anwendung des vorh. Korollar (beachte: $t$ ist nicht tot) erhalten wir eine unendliche absteigende Reihe $M_N >_\mathrm{lex} M_1 >_\mathrm{lex} \ldots$ im Widerspruch zur Noetherianität von ${<_\mathrm{lex}}$.
 \end{beweis}
+
+% §7. Netzvariationen
+\section{Netzvariationen}
+
+% §7.1. High-level-Netze
+
+\begin{defn}
+  Ein \emph{High-Level-Netz}~$N$ ist gegeben durch
+  \begin{itemize}
+    \item eine endliche Menge $S$ von \textit{Stellen},
+    \item eine endliche Menge $T$ von \textit{Transitionen},
+    \item eine Menge $L$ von \textit{Marken} (eine \textit{Markierung} von~$N$ ist gegeben durch eine Multimenge von~$L$ für jede Stelle von~$N$, also durch eine Abbildung in $\Multisets(L)^S$)
+    \item für jede Transition $t \in T$ eine (berechenbare) \textit{Transitionsregel} $r_t \subseteq \Multisets(S \times L) \times \Multisets(S \times L)$
+    \item und eine \textit{Anfangsmarkierung} $M_N : S \to \Multisets(L)$.
+  \end{itemize}
+\end{defn}
+
+% §7.2. Netze mit Zeit
+
+\begin{defn}
+  Ein \emph{Netz mit Zeit} ist ein Tupel $N = (S, T, W, M_N, \tau)$, wobei
+  \begin{itemize}
+    \item $(S, T, W, M_N)$ ein sicheres Petrinetz ist mit $\fa{t \in T} \preset{t} \neq \emptyset$ und
+    \item $\tau : S \to \N_1$ die \emph{Latenzzeit} aller Transitionen angibt.
+  \end{itemize}
+  Ein \emph{Zustand} von~$N$ ist ein Tupel $(M, \resTime)$, wobei~$M$ eine Markierung ist und $\resTime : T \to \N_0$ die \textit{Restzeit} jeder Transition angibt.
+  Es gibt zwei verschiedene Schaltschritte:
+  \begin{align*}
+    (M, \resTime) \activeTransition{\sigma} (M, \resTime') & \coloniff
+    \resTime \geq 1 \wedge \resTime' = \resTime - 1 \tag{\emph{Zeitschritt}} \\
+    (M, \resTime) \activeTransition{t} (M', \resTime') & \coloniff
+    M \activeTransition{t} M' \wedge \tag{\emph{Transition}} \\
+    & \wedge \resTime'(t') = \begin{cases}
+      \tau(t') & \text{falls $\neg (M \activeTransition{t'}) \wedge M' \activeTransition{t'}$} \\
+      \resTime(t') & \text{sonst}
+    \end{cases}
+  \end{align*}
+\end{defn}
+
+% §7.3 Netze mit Prioritäten
+
+\begin{defn}
+  Ein \emph{Netz mit Prioritäten} ist ein Petri-Netz $N = (S, T, W, M_N)$ mit einer Halbordnung ${\sqsubset}$. \\
+  Das Netz schaltet unter Beachtung der Priorität, falls
+  \[
+    M \activeTransition{t}_{\sqsubset} M' \coloniff M \activeTransition{t} M' \wedge \fa{t' \in T} M \activeTransition{t'} \implies t' \not\sqsubset t
+  \]
+\end{defn}
+
+% §7.4 Netze mit Inhibitor-Kanten
+
+\begin{defn}
+  Ein \emph{Netz mit Inhibitor-Kanten} ist eine Petri-Netz $N = (S, T, W, M_N)$ zusammen mit einer Menge $I \subseteq S \times T$ von \textit{Inhibitor-Kanten}.
+  Man definiert:
+  \[
+    M \activeTransition{t}_I M' \coloniff M \activeTransition{t} M' \wedge \fa{s \in S} (s, t) \in I \implies M(s) = 0
+  \]
+\end{defn}
+
+\begin{defn}
+  Eine \emph{Zählermaschine} besteht aus $\N$-wertigen Registern $c_1, \ldots, c_n$ und einem Programm bestehend aus den Instruktionen
+  \begin{itemize}
+    \item $\Call{incr}{c_i}$ -- erhöhe $c_i$ um eins
+    \item $\Call{jzdec}{c_i, m}$ -- springe zu Adresse $m$, falls $c_i = 0$, ansonsten erniedrige $c_i$ um eins.
+  \end{itemize}
+\end{defn}
+
+\begin{prop}
+  Für jede Turingmaschine gibt es eine 2-Zählermaschine, die die Turingmaschine simuliert (bei passender Kodierung der Eingabe und Ausgabe).
+\end{prop}
+
+\begin{kor}
+  Das Halteproblem für 2-Zählermaschinen ist unentscheidbar.
+\end{kor}
+
+\begin{lem}
+  Zählermaschinen lassen sich als Netze mit Zeit, mit Prioritäten oder mit Inhibitor-Kanten kodieren.
+\end{lem}
+
+\begin{kor}
+  Das Erreichbarkeitsproblem ist für solche Netze unentscheidbar.
+\end{kor}
+
+% §7.6 Kapazitäten
+
+\begin{defn}
+  Ein \emph{Netz mit Kapazitäten} ist eine Petri-Netz $N = (S, T, W, M_N)$ zusammen mit einer Abbildung $k : S \to \N \cup \{ \infty \}$.
+  Man definiert:
+  \[
+    M \activeTransition{t}_k M' \coloniff M \activeTransition{t} M' \wedge M' \leq k
+  \]
+\end{defn}
 
 \end{document}
