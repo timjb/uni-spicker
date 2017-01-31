@@ -13,6 +13,7 @@
 \newcommand{\preset}[1]{{}^\bullet{#1}} % Vorbereich
 \newcommand{\postset}[1]{{#1}^\bullet} % Nachbereich
 \newcommand{\activeTransition}[1]{[{#1}\rangle} % aktive Transition
+\newcommand{\labelledTransition}[1]{[{#1}\rangle\rangle} % beschriftete, aktive Transition
 \DeclareMathOperator{\FS}{FS} % Menge der Schaltfolgen (firing sequences)
 \newcommand{\ReachabilityGraph}{\mathfrak{R}} % Erreichbarkeitsgraph
 \newcommand{\StepReachabilityGraph}{\mathfrak{SR}} % Schritt-Erreichbarkeitsgraph
@@ -34,6 +35,9 @@
 \newcommand{\nil}{\mathbf{nil}} % NULL
 \DeclareMathOperator{\trans}{trans} % Transitionsabbildung
 \DeclareMathOperator{\resTime}{res} % Restzeit, residual time
+\DeclareMathOperator{\ready}{ready} % ready-Semantik
+\newcommand{\Failure}{\mathfrak{F}} % Failure-Semantik
+\newcommand{\parallelComposition}{\parallel} % Parallel-Komposition
 
 % Kleinere Klammern
 \delimiterfactor=701
@@ -204,23 +208,23 @@
   \[
     \inferrule
       {M \activeTransition{t} M'}
-      {M \activeTransition{\ell(t)} M'} \quad
+      {M \labelledTransition{\ell(t)} M'} \quad
     \inferrule
       {M \activeTransition{t}}
-      {M \activeTransition{\ell(t)}} \quad
+      {M \labelledTransition{\ell(t)}} \quad
     \inferrule
       {M \activeTransition{w} M'}
-      {M \activeTransition{\ell(w)} M'} \quad
+      {M \labelledTransition{\ell(w)} M'} \quad
     \inferrule
       {M \activeTransition{w}}
-      {M \activeTransition{\ell(w)}}
+      {M \labelledTransition{\ell(w)}}
   \]
 \end{defn}
 
 \begin{defn}
   Die \emph{Sprache} eines beschrifteten Netzes~$N$ ist
   \[
-    L(N) \coloneqq \Set{v \in \Sigma^{*}}{M_n \activeTransition{v}}.
+    L(N) \coloneqq \Set{v \in \Sigma^{*}}{M_n \labelledTransition{v}}.
   \]
 \end{defn}
 
@@ -309,16 +313,16 @@
   \[
     \inferrule
       {M \activeTransition{\mu} M'}
-      {M \activeTransition{\ell(\mu)} M'} \quad
+      {M \labelledTransition{\ell(\mu)} M'} \quad
     \inferrule
       {M \activeTransition{\mu}}
-      {M \activeTransition{\ell(\mu)}} \quad
+      {M \labelledTransition{\ell(\mu)}} \quad
     \inferrule
       {M \activeTransition{w} M'}
-      {M \activeTransition{\ell(w)} M'} \quad
+      {M \labelledTransition{\ell(w)} M'} \quad
     \inferrule
       {M \activeTransition{w}}
-      {M \activeTransition{\ell(w)}}
+      {M \labelledTransition{\ell(w)}}
   \]
 \end{defn}
 
@@ -991,5 +995,258 @@
     M \activeTransition{t}_k M' \coloniff M \activeTransition{t} M' \wedge M' \leq k
   \]
 \end{defn}
+
+% §8 Nichtdeterminismus und modulare Konstruktion
+\section{Nichtdeterminismus und modulare Konstruktion}
+
+% 8.1
+\begin{defn}
+  Zwei Netze $N_1$ und $N_2$ heißen \emph{sprachäquivalent}, wenn $L(N_1) = L(N_2)$.
+\end{defn}
+
+% 8.2
+\begin{satz}
+  Für beschränkte Netze ist Sprachäquivalenz entscheidbar.
+\end{satz}
+
+\begin{beweis}
+  Für beschränkte Netze~$N$ ist $L(N)$ regulär (man erhält einen endlichen Automaten aus~$\ReachabilityGraph(N)$).
+  Gleichheit von regulären Sprachen ist entscheidbar.
+\end{beweis}
+
+\begin{bem}
+  Sprachäquivalenz ist unzureichend für den Systemvergleich.
+\end{bem}
+
+% 8.3
+\begin{defn}
+  Die \emph{ready-Semantik} eines Netzes~$N$ ist
+  \[
+    \ready(N) \coloneqq \Set{(w, X)}{\ex{M} M_N \labelledTransition{w} M \wedge X = \Set{a \in \Sigma}{M \labelledTransition{a}}}.
+  \]
+  $N_1$, $N_2$ heißen \emph{ready-äquivalent}, falls $\ready(N_1) = \ready(N_2)$.
+\end{defn}
+
+% 8.4
+\begin{defn}
+  Die \emph{Failure-Semantik} (\textit{Verweigerungssemantik}) eines Netzes~$N$ ist
+  \[
+    \Failure(N) \coloneqq \Set{(w, X)}{X \subseteq \Sigma, \ex{M} M_N \labelledTransition{w} M \wedge \fa{a \in X} \neg M \labelledTransition{a}}.
+  \]
+  Dabei heißt~$X$ \textit{Verweigerungsmenge}. \\
+  $N_1$, $N_2$ sind \emph{failure-äquivalent}, falls $\Failure(N_1) = \Failure(N_2)$.
+\end{defn}
+
+% 8.5
+\begin{lem}
+  \begin{itemize}
+    \item $(w, X) \in \Failure(N), Y \subseteq X \implies (w, Y) \in \Failure(N)$
+    \item $(w, \emptyset) \in \Failure(N) \iff w \in L(N)$
+    \item $(w, X) \in \Failure(N), \fa{a \in Y} (wa, \emptyset) \not\in L(N) \implies (w, X \cup Y) \in \Failure(N)$
+    \item $(w, X) \in \Failure(N), Y \subseteq \Sigma \setminus \ell(T) \implies (w, X \cup Y) \in \Failure(N)$
+  \end{itemize}
+\end{lem}
+
+\begin{lem}
+  $
+    (w, X) \in \Failure(N) \iff \ex{Y \subseteq \Sigma \setminus X} (w, Y) \in \ready(N)
+  $
+\end{lem}
+
+% 8.6
+\begin{satz}
+  Ready-Äquivalenz $\implies$ $\Failure$-Äquivalenz $\implies$ Sprachäquivalenz
+\end{satz}
+
+\begin{bem}
+  Die Umkehrungen sind falsch.
+\end{bem}
+
+% 8.7
+\begin{satz}
+  Für beschränkte Netze ist $\Failure$-Äquivalenz entscheidbar.
+\end{satz}
+
+\begin{beweisidee}
+  Aus jedem Netz~$N$ kann man einen endlichen Automaten konstruieren, dessen Sprache kanonisch isomorph zu~$\Failure(N)$ ist.
+  Gleichheit von regulären Sprachen ist entscheidbar.
+\end{beweisidee}
+
+% Ausgelassen: Semi-formale Definition von Kompositionalität von Semantiken
+
+% 8.8
+\begin{defn}
+  Seien $N_1$ und $N_2$ mit~$\Sigma$ beschriftete Petrinetze und $A \subseteq \Sigma$.
+  Die \emph{parallele Komposition} \textit{mit Synchronisation über~$A$} ist das beschriftete Netz $N \parallelComposition_A N_2 = (S, T, W, M_N, \ell)$ mit
+  \begin{itemize}
+    \item $S = S_1 \amalg S_2$
+    \item
+      $
+        T =
+        \begin{array}[t]{r l}
+          & \Set{(t_1, \lambda)}{t_1 \in T_1, \ell_1(t_1) \not\in A} \\
+          \amalg & \Set{(\lambda, t_2)}{t_2 \in T_2, \ell_2(t_2) \not\in A} \\
+          \amalg & \Set{(t_1, t_2) \in T_1 \times T_2}{\ell_1(t_1) = \ell_2(t_2) \in A}
+        \end{array}
+      $
+      \item
+        $
+          \begin{array}[t]{r c l}
+            W(s_1 \in S_1, (t_1, t_2)) &\coloneqq& W_1(s_1, t_1) \enspace \text{falls $t_1 \in T_1$} \\
+            W(s_2 \in S_1, (t_1, t_2)) &\coloneqq& W_2(s_2, t_2) \enspace \text{falls $t_2 \in T_2$} \\
+            W(s \in S, t \in T) &\coloneqq& 0 \enspace \text{(sonst)} \\
+            W((t_1, t_2), s_1 \in S_1) &\coloneqq& W_1(t_1, s_1) \enspace \text{falls $t_1 \in T_1$} \\
+            W((t_1, t_2), s_2 \in S_1) &\coloneqq& W_2(t_2, s_2) \enspace \text{falls $t_2 \in T_2$} \\
+            W(t \in T, s \in S) &\coloneqq& 0 \enspace \text{(sonst)}
+          \end{array}
+        $
+        \item $M_N \coloneqq M_{N_1} \amalg M_{N_2}$
+        \item
+          $
+            \begin{array}[t]{r c l}
+              \ell((t_1, t_2) \in T_1 \times T_2) &\coloneqq& \ell_1(t_1) = \ell_2(t_2) \\
+              \ell(t_1 \in T_1) &\coloneqq& \ell_1(t_1) \\
+              \ell(t_2 \in T_2) &\coloneqq& \ell_2(t_2) \\
+            \end{array}
+          $
+  \end{itemize}
+\end{defn}
+
+\begin{bem}
+  Die Menge der mit~$\Sigma$ beschr. Netze wird mit $\parallelComposition_A$ zu einem komm. Monoid mit neutralem Element $(S = \emptyset, T = \Sigma, \blank, \blank, \ell = \id)$
+\end{bem}
+
+% 8.9
+\begin{lem}
+  Sei $N = N_1 \parallelComposition N_2$, $M_1, M_1' \in \Markings(S_1)$, $M_2, M_2' \in \Markings(S_2)$ und $(t_1^{(1)}, t_2^{(1)}), \ldots, (t_1^{(n)}, t_2^{(n)}) \in T_N$.
+  Dann gilt:
+  \begin{align*}
+    & M_1 \amalg M_2 \activeTransition{(t_1^{(1)}, t_2^{(1)}), \ldots, (t_1^{(n)}, t_2^{(n)})} M_1' \amalg M_2' \\
+    \iff & M_1 \activeTransition{t_1^{(1)}, \ldots, t_1^{(n)}} M_1' \wedge
+    M_2 \activeTransition{t_2^{(1)}, \ldots, t_2^{(n)}} M_2'
+  \end{align*}
+\end{lem}
+
+\begin{bem}
+  Dabei gilt $M \activeTransition{\lambda} M$ immer.
+\end{bem}
+
+% 8.10
+\begin{lem}
+  Sei $a \in \Sigma \cup \{ \lambda \}$.
+  Es gilt $M_1 \amalg M_2 \labelledTransition{a} M_1' \amalg M_2'$ g.\,d.\,wenn
+  \begin{itemize}
+    \item Falls $a \in A$: \enspace $M_1 \labelledTransition{a} M_1' \wedge M_2 \labelledTransition{a} M_2'$
+    \item Falls $a \not\in A$: \enspace $M_1 \labelledTransition{a} M_1' \wedge M_2 \labelledTransition{\lambda} M_2'$ oder $M_1 \labelledTransition{\lambda} M_1' \wedge M_2 \labelledTransition{a} M_2'$
+  \end{itemize}
+\end{lem}
+
+% 8.11
+\begin{defn}
+  Seien $u, v \in \Sigma^*$.
+  Dann ist
+  \[
+    \arraycolsep=0.4pt
+    u \parallelComposition_A v \coloneqq
+      \left\{
+        \begin{array}{r l}
+          w &= w_1 \cdots w_n \\
+          &\in \Sigma^*
+        \end{array}
+      \,\middle|\,
+        \begin{array}{l}
+          u = u_1 \cdots u_n, v = v_1 \cdots v_n \text{ mit } \\
+          u_i, v_i \in \Sigma \cup \{ \lambda \} \text{ sodass } \\
+          \fa{1 \leq i \leq n} u_i = v_i = w_i \in A \\
+          \qquad \vee u_i v_i = w_i \not\in A
+        \end{array}
+      \right\}
+  \]
+\end{defn}
+
+\begin{bem}
+  Im Fall $u_i v_i = w_i$ gilt $u_i = \lambda$ oder $v_i = \lambda$.
+\end{bem}
+
+% 8.12
+\begin{lem}
+  Es sind äquivalent:
+  \begin{itemize}
+    \item in $N_1 \parallelComposition_A N_2$ gilt $M_1 \amalg M_2 \labelledTransition{w} M_1' \amalg M_2'$
+    \item $\ex{u, v \in \Sigma^*} M_1 \labelledTransition{u} M_1' \wedge M_2 \labelledTransition{v} M_2' \wedge w \in u \parallelComposition_A v$
+  \end{itemize}
+\end{lem}
+
+% 8.13
+\begin{satz}
+  \begin{itemize}
+    \item $L(N_1 \parallelComposition_A N_2) = \cup \Set{u \parallelComposition_A v}{u \in L(N_1), v \in L(N_2)}$
+    \item
+      $
+        \Failure(N_1 \parallelComposition_A N_2) =
+        \left\{
+        (w, Z)
+        \,\middle|\,
+        \begin{array}{l}
+          \ex{(u, X) \in \Failure(N_1), (v, Y) \in \Failure(N_2)} \\
+          w \in u \parallelComposition_A v \text{ und } \\
+          Z \cap A \subseteq X \cup A \text{ und } Z \setminus A \subseteq X \cap Y
+        \end{array}
+        \right\}
+      $
+  \end{itemize}
+\end{satz}
+
+% ausgelassen: Korollar 8.14: Sprach und F-Äquivalenz sind Kongruenzen bzgl. $\parallelComposition_A$
+
+% 8.15
+\begin{defn}
+  Ein \textit{beschriftetes} Netz heißt \emph{verklemmungsfrei}, wenn
+  \[
+    \fa{M \in \activeTransition{M_N}} \ex{a \in \Sigma} M \labelledTransition{a}.
+  \]
+  Zwei Netze heißen \emph{v-äquivalent}, falls beide verklemmungsfrei oder beide nicht verklemmungsfrei sind.
+\end{defn}
+
+% 8.17
+\begin{lem}
+  $N$ ist verklemmungsfrei $\iff$ $\fa{w \in \Sigma^*} (w, \Sigma) \not\in \Failure(N)$
+\end{lem}
+
+% 8.16
+\begin{defn}
+  \emph{VA-Äquivalenz} sei die kongruente Hülle von v-Äquivalenz unter der Operation $\parallelComposition_A$.
+\end{defn}
+
+% 8.18
+\begin{satz}
+  $\Failure$- und VA-Äquivalenz stimmen überein.
+\end{satz}
+
+\begin{beweisidee}
+  Seien $N_1$ und $N_2$ VA-äquivalent. \\
+  Setze $A \coloneqq (\ell_1(T_1) \cup \ell_2(T_2)) \setminus \{ \lambda \}$.
+  Zeige: \\
+  Es gibt ein Netz~$N$, sodass für alle~$N'$ mit $l'(N') \setminus \{ \lambda \} \subseteq A$ gilt:
+  \[
+    N \parallelComposition_A N' \text{ ist verklemmungsfrei} \iff (w, X) \not\in \Failure(N')
+  \]
+  Dann:
+  \[
+    \begin{array}{c c c}
+      (w, X) \not\in \Failure(N_1)
+      && 
+      (w, X) \not\in \Failure(N_2) \\
+      \Updownarrow && \Updownarrow \\
+      N \parallelComposition_A N_1 \text{ verklemmungsfrei}
+      & \iff &
+      N \parallelComposition_A N_2 \text{ verklemmungsfrei}
+    \end{array}
+  \]
+  \begin{align*}
+  \end{align*}
+\end{beweisidee}
+
+\TODO{Verstehen: Zusammenhang zum Testen}
 
 \end{document}
