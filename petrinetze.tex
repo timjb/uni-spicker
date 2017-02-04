@@ -150,6 +150,25 @@
 \end{defn}
 
 \begin{defn}
+  Eine Schaltfolge ist \emph{maximal}, falls sie
+  \begin{itemize}
+    \item endlich ist und in einer toten Markierung endet
+    \item \textit{oder} unendlich ist.
+  \end{itemize}
+  Eine Schaltfolge ist \emph{schwach/stark fair} für eine Trans.~$t \in T$ falls
+  \begin{itemize}
+    \item sie endlich ist und in einer Markierung endet, die~$t$ nicht aktiviert
+    \item \textit{oder} $t$ unendlich ist und $t$ unendlich oft deaktiviert ist / $t$ nur endlich oft aktiviert ist
+    \item \textit{oder} $t$ unendlich oft enthält.
+  \end{itemize}
+  Die Schaltfolge heißt \textit{schwach/stark fair}, falls sie für jede Transition schwach/stark fair ist.
+\end{defn}
+
+\begin{bem}
+  stark fair $\implies$ schwach fair $\implies$ maximal
+\end{bem}
+
+\begin{defn}
   Der \emph{Erreichbarkeitsgraph} $\ReachabilityGraph(N)$ zu~$N$ besitzt die Knoten~$\activeTransition{M_N}$ und die Kanten $\Set{(M, M')}{\ex{t} M \activeTransition{t} M'}$.
 \end{defn}
 
@@ -377,17 +396,46 @@
 
 % Verklemmung
 
+\section{Lebendigkeit}
+
 % 2.21
 \begin{defn}
-  Eine Transition $t \in T$ heißt \emph{tot} \textit{unter~$M$}, falls $\fa{M' \in \activeTransition{M}} \neg M' \activeTransition{t}$.
+  Sei $t \in T$ eine Trans. in einem Netz~$N$ und~$M$ eine Markierung.
+  \begin{itemize}
+    \item $t$ heißt \emph{tot} (oder \textit{0-lebendig}) \textit{unter~$M$}, falls $\fa{M' \in \activeTransition{M}} \neg M' \activeTransition{t}$.
+    \item $t$ heißt \textit{1-lebendig unter~$M$}, falls $\ex{w \in T^*} M \activeTransition{w t}$
+    \item $t$ heißt \textit{2-lebendig unter~$M$}, falls
+    \[ \fa{n \in \N} \ex{w_1, \ldots, w_n \in T^*} M \activeTransition{w_1 t w_2 t \cdots w_n t} \]
+    \item $t$ heißt \textit{3-lebendig unter~$M$}, falls eine unendliche Schaltfolge~$w$ existiert, $M \activeTransition{w}$, die~$t$ unendlich oft enthält.
+    \item $t$ heißt \emph{(4-)\,lebendig} \textit{unter $M$}, falls
+    \[ \fa{M' \in \activeTransition{M}} \neg (t \text{ ist tot unter~$M$}) \]
+    \item $t$ heißt \textit{lebendig}, falls $t$ lebendig unter~$M_N$ ist.
+  \end{itemize}
+\end{defn}
+
+\begin{bem}
+  \begin{minipage}[t]{0.8 \linewidth}
+    $t$ 4-lebendig $\implies$ $t$ 3-lebendig $\implies$ $t$ 2-lebendig $\implies$ \\
+    $t$ 1-lebendig $\iff$ $\neg$ ($t$ 0-lebendig)
+  \end{minipage}
+\end{bem}
+
+\begin{defn}
+  Bezogen auf eine Markierung~$M$:
   \begin{itemize}
     \item $M$ heißt \textit{tot}, falls alle Transitionen unter~$M$ tot sind.
+    \item $M$ heißt \textit{lebendig}, wenn alle $t \in T$ unter~$M$ lebendig sind.
+    \item $M$ heißt \emph{monoton lebendig}, wenn alle $M' \geq M$ lebendig sind.
+  \end{itemize}
+\end{defn}
+
+\begin{defn}
+  Bezogen auf ein Netz~$N$:
+  \begin{itemize}
     \item $N$ heißt \textit{tot}, falls $M_N$ tot ist.
     \item $N$ heißt \emph{verklemmungsfrei}, falls $\fa{M \in \activeTransition{M_N}} \neg (M \text{ tot})$
-    \item $t$ heißt \emph{lebendig} \textit{unter $M$}, falls $\fa{M' \in \activeTransition{M}} \neg (t \text{ ist tot unter~$M$})$
-    \item $t$ heißt \textit{lebendig}, falls $t$ lebendig unter~$M_N$ ist.
-    \item $M$ heißt \textit{lebendig}, wenn alle $t \in T$ unter~$M$ lebendig sind.
     \item $N$ heißt \textit{lebendig}, wenn $M_N$ lebendig ist.
+    \item $N$ heißt \textit{monoton lebendig}, wenn $M_N$ monoton lebendig ist.
   \end{itemize}
 \end{defn}
 
@@ -560,12 +608,15 @@
   Frage: Ist $t$ lebendig?
 \end{problem}
 
-% 4.4 a)
+% ausgelassen: 4.4 da gleichzeitig 4.5
+
+% 4.5
 \begin{satz}
-  (L) ist reduzierbar auf (EL)
+  $\text{(L)} \reducesManyOneToLin \text{(EL)} \reducesManyOneToLin \text{(L)}$
 \end{satz}
 
 \begin{beweis}
+  "`$\text{(L)} \reducesManyOneToLin \text{(EL)}$"'.
   Konstruiere $\overline{N} = (\overline{S}, \overline{T}, \overline{W}, M_{\overline{N}})$ mit
   \begin{align*}
     \overline{S} & \coloneqq S \amalg \Set{s_t}{t \in T} \\
@@ -574,6 +625,12 @@
     M_{\overline{N}} & \coloneqq (s \in S \mapsto M_N(s), \enspace s_t \mapsto 0)
   \end{align*}
   Dann: $N$ lebendig $\iff$ $t_\mathrm{afterall}$ lebendig in $\overline{N}$.
+
+  "`$\text{(EL)} \reducesManyOneToLin \text{(L)}$"'.
+  Sei $t$ die Transition, deren Lebendigkeit untersucht werden soll.
+  Konstruiere $\tilde{N} = (S, T, \tilde{W}, M_N)$ mit
+  $\tilde{W}(t', s) \coloneqq W(t', s) + \delta^t_{t'}$.
+  Dann: $t$ lebendig in~$N$ $\iff$ $\tilde{N}$ lebendig
 \end{beweis}
 
 % 4.4 b)
@@ -601,12 +658,31 @@
   Dann: Nullmarkierung in $N$ erreichbar $\iff$ $\overline{N}$ nicht lebendig
 \end{beweis}
 
-% 4.5
+\begin{problem}{SR -- Spezielles Reproduktionsproblem}
+  Gegeben ein Netz~$N$, gibt es eine nicht-leere Schaltfolge~$w$ mit $M_N \activeTransition{w} M_N$?
+\end{problem}
+
+% ÜB 8, Aufgabe 1
 \begin{satz}
-  $\text{(L)} \reducesManyOneToLin \text{(EL)} \reducesManyOneToLin \text{(L)}$
+  $\text{(SR)} \reducesManyOneToLin \text{(0-E)}$
 \end{satz}
 
-\TODO{Beweise nachvollziehen, aufschreiben}
+\begin{beweis}
+  Konstruiere $\widetilde{N} = (\widetilde{S}, \widetilde{T}, \widetilde{W}, M_{\widetilde{N}})$ mit
+  \begin{align*}
+    & \widetilde{S} \coloneqq S \times \{ \text{active}, \text{comparison} \} \amalg \{ s_{\mathrm{control}} \} \\
+    & \widetilde{T} \coloneqq T \times \{ \text{one-shot}, \mathrm{multiple} \} \amalg \Set{t_s}{s \in S} \\
+    & \widetilde{W}((t, \_\_), (s, \mathrm{active})) \coloneqq W(t, s), \qquad
+    \widetilde{W}(s_\text{control}, (t, \text{one-shot})) \coloneqq 1, \\
+    & \widetilde{W}((s, \text{active}), (t, \_\_)) \coloneqq W(s, t) \qquad
+    \widetilde{W}((s, \_\_), t_s) \coloneqq 1, \\
+    & \widetilde{W}(\_\_, \_\_) \coloneqq 0 \text{ sonst}, \quad
+    M_{\widetilde{N}}(s, \_\_) \coloneqq M_N(s), \quad
+    M_{\widetilde{N}}(s_\mathrm{control}) \coloneqq 1
+  \end{align*}
+  Dann gilt: \quad
+  $\ex{w \in t^* \setminus \{\lambda\}} M_N \activeTransition{w} M_N \iff 0 \in \activeTransition{M_{\widetilde{N}}}$
+\end{beweis}
 
 \begin{fazit}
   (L) und (EL) sind entscheidbar, aber mindestens so schwer wie (E), (0-E) und (TE).
@@ -767,6 +843,19 @@
   \end{itemize}
 \end{kor}
 
+% Übungsblatt 11, Aufgabe 2a)
+\begin{lem}
+  Für jedes Netz~$N$ mit Transition $t \in T$ sind äquivalent:
+  \begin{itemize}
+    \item $t$ ist 2-lebendig
+    \item $t$ ist Beschriftung in einem Kreis in $\Cov(N)$
+  \end{itemize}
+\end{lem}
+
+\begin{kor}
+  2-Lebendigkeit von Transitionen ist entscheidbar.
+\end{kor}
+
 % §6. Strukturtheorie und Free-Choice-Netze
 \section{Strukturtheorie und Free-Choice-Netze}
 
@@ -808,14 +897,17 @@
 \end{lem}
 
 \begin{defn}
-  Ein Netz $N$ heißt \emph{Free-Choice-Netz} (\textit{FC-Netz}), falls
-  \[
-    \fa{t, t' \in T} t \neq t' \wedge s \in \preset{t} \cap \preset{t'} \implies \preset{t} = \preset{t'} = \{ s \}.
-  \]
-  Ein Netz $N$ heißt \emph{erweit. Free-Choice-Netz} (\textit{EFC-Netz}), falls
-  \[
-    \fa{t, t' \in T} t \neq t' \wedge s \in \preset{t} \cap \preset{t'} \implies \preset{t} = \preset{t'}.
-  \]
+  Ein Netz $N$ mit Kantengewichten in $\{ 0, 1 \}$ heißt
+  \begin{itemize}
+    \item \emph{Free-Choice-Netz} (\textit{FC-Netz}), falls
+    \[
+      \fa{t, t' \in T} t \neq t' \wedge s \in \preset{t} \cap \preset{t'} \implies \preset{t} = \preset{t'} = \{ s \}.
+    \]
+    \item \emph{erweitertes Free-Choice-Netz} (\textit{EFC-Netz}), falls
+    \[
+      \fa{t, t' \in T} \preset{t} \cap \preset{t'} \neq \emptyset \implies \preset{t} = \preset{t'}.
+    \]
+  \end{itemize}
 \end{defn}
 
 % 6.8
@@ -903,6 +995,10 @@
   Angenommen, $M_N|_Q \equiv 0$.
   Durch mehrmalige Anwendung des vorh. Korollar (beachte: $t$ ist nicht tot) erhalten wir eine unendliche absteigende Reihe $M_N >_\mathrm{lex} M_1 >_\mathrm{lex} \ldots$ im Widerspruch zur Noetherianität von ${<_\mathrm{lex}}$.
 \end{beweis}
+
+\begin{kor}
+  Jedes lebendige EFC-Netz ist monoton lebendig.
+\end{kor}
 
 % §7. Netzvariationen
 \section{Netzvariationen}
