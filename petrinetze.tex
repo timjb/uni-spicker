@@ -61,9 +61,9 @@
 \begin{center}
   \begin{tabular}{r l l}
     Notation & Bezeichnung & Symbol \\ \hline
-    $t \in T$ & Transition & $\transition$ \\
-    $s \in S$ & Stelle, Platz & $\place$ \\
-    $(x, y) \in F$ & Kante & $\xrightarrow{\enspace}$ falls $W(x, y) = 1$ \\
+    $t \in T$ & \emph{Transition} & $\transition$ \\
+    $s \in S$ & \emph{Stelle}, \emph{Platz} & $\place$ \\
+    $(x, y) \in F$ & \emph{Kante} & $\xrightarrow{\enspace}$ falls $W(x, y) = 1$ \\
     && $\xrightarrow{w}$ falls $w \coloneqq W(x, y) > 1$
   \end{tabular}
 \end{center}
@@ -150,11 +150,7 @@
 \end{defn}
 
 \begin{defn}
-  Eine Schaltfolge ist \emph{maximal}, falls sie
-  \begin{itemize}
-    \item endlich ist und in einer toten Markierung endet
-    \item \textit{oder} unendlich ist.
-  \end{itemize}
+  Eine Schaltfolge ist \emph{maximal}, falls sie endlich ist und in einer toten Markierung endet \textit{oder} unendlich ist. \\
   Eine Schaltfolge ist \emph{schwach/stark fair} für eine Trans.~$t \in T$ falls
   \begin{itemize}
     \item sie endlich ist und in einer Markierung endet, die~$t$ nicht aktiviert
@@ -190,7 +186,7 @@
   $M_1 \activeTransition{w} M_2 \implies M + M_1 \activeTransition{w} M + M_2$
 \end{lem}
 
-\TODO{Satz 2.8}
+% ausgelassen: Satz 2.8, da trivial
 
 % 2.10
 \begin{lem}
@@ -501,7 +497,14 @@
   Ist~$N$ von $S$-Invarianten überdeckt, so ist~$N$ strukturell beschränkt.
 \end{lem}
 
-\TODO{Umkehrung, siehe Buch von Starke}
+% Satz 11.10 in "Analyse von Petri-Netz-Modellen" von Peter H. Starke
+\begin{satz}
+  Besitzt $N$ eine lebendige Markierung, so gilt:
+  \[
+    \text{$N$ ist strukturell beschr.} \iff
+    \text{$N$ ist von $S$-Invarianten überdeckt.}
+  \]
+\end{satz}
 
 \begin{defn}
   Ein \emph{home state} ist eine Markierung~$M$ mit
@@ -593,11 +596,9 @@
 \end{beweis}
 
 % 4.3
-\begin{satz}
+\begin{satz}[schwierig!]
   (E) ist entscheidbar.
 \end{satz}
-
-\TODO{Beweis lesen, zusammenfassen}
 
 \begin{problem}[L -- \emph{Lebendigkeit}]
   Gegeben $N$. Frage: Ist $N$ lebendig?
@@ -638,7 +639,12 @@
   (EL) ist reduzierbar auf (TE)
 \end{satz}
 
-\TODO{Beweis verstehen, zusammenfassen}
+% siehe 5.1.4 in "Petri-Netze" von Priese und Wimmel
+\begin{beweisidee}
+  Gefragt sei, ob eine Transition~$t_0$ in Netz~$N$ lebendig ist.
+  Erweitere~$N$ zu einem Netz~$\hat{N}$, sodass jede Transition~$t$ aus~$N$ außer~$t_0$ und jede neue Transition lebendig ist (indem man die nötigen Marken zum Schalten von~$t$ bereitstellt und nach dem Schalten die durch~$t$ erzeugten Marken entfernt). \\
+  Dann zeige: \enspace $\hat{N}$ lebendig $\iff$ $t_0$ lebendig in~$N$.
+\end{beweisidee}
 
 % 4.4 c)
 \begin{satz}
@@ -914,8 +920,6 @@
 \begin{bem}
   Ist $N$ ein EFC-Netz, $s \in S$, $t_1, t_2 \in \postset{s}$ und~$M$ eine Markierung, so gilt $M \activeTransition{t_1} \iff M \activeTransition{t_2}$.
 \end{bem}
-
-\TODO{Definition von Konfusion}
 
 % 6.9
 \begin{lem}
@@ -1311,7 +1315,11 @@
 
 % 8.16
 \begin{defn}
-  \emph{VA-Äquivalenz} sei die kongruente Hülle von v-Äquivalenz unter der Operation $\parallelComposition_A$.
+  Zwei Netze $N_1$ und $N_2$ heißen \emph{VA-äquivalent}, falls: \\[0.4em]
+  \hfill\begin{minipage}{0.95 \linewidth}
+    Für alle Netze~$N$ und alle $A \subseteq \Sigma$ gilt: \\
+    Die Netze $N_1 \parallelComposition_A N$ und $N_2 \parallelComposition_A N$ sind v-äquivalent.
+  \end{minipage}
 \end{defn}
 
 % 8.18
@@ -1342,7 +1350,5 @@
   \begin{align*}
   \end{align*}
 \end{beweisidee}
-
-\TODO{Verstehen: Zusammenhang zum Testen}
 
 \end{document}
