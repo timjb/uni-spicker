@@ -57,6 +57,7 @@
 \newtheorem*{strat}{Strategie}
 \newtheorem*{prob}{Problem}
 \newtheorem*{problem}{Problem}
+\newtheorem*{probleme}{Probleme}
 \newtheorem*{lsg}{Lsg}
 \newtheorem*{abk}{Abkürzung}
 \newtheorem*{alg}{Algorithmus}

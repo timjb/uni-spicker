@@ -7,6 +7,10 @@
 
 \usepackage{algorithmicx}
 \usepackage[noend]{algpseudocode}
+\usepackage{tikz}
+\tikzset{
+  font={\fontsize{6pt}{12}\selectfont}
+}
 
 \newcommand{\transition}{\square} % Transition
 \newcommand{\place}{\bigcirc} % Stelle, Platz
@@ -170,7 +174,7 @@
 
 % 2.5
 \begin{defn}
-  Für $w = a_1 \cdots a_n \in A^{*}$ ist $\Parikh(w) : A \to \N, \enspace a \mapsto \card{i}{a_i = a}$.
+  $\Parikh : A^{*} \to \N^A, \enspace \Parikh(w)(a) \coloneqq \card{\Set{i}{w_i = a}}$
 \end{defn}
 
 % 2.6
@@ -248,14 +252,14 @@
   Ein \emph{beschriftetes Netz mit Endmarkierung} ist ein Tupel $N = (S, T, W, M_N, \ell, \Fin)$ wobei
   \begin{itemize}
     \item $(S, T, W, M_N, \ell)$ ein beschriftetes Netz und
-    \item $\Fin \subseteq \Markings(S)$ eine endliche Menge ist.
+    \item $\Fin \subseteq \Markings(S)$ eine endliche Menge von \textit{Endmarkierungen} ist.
   \end{itemize}
   Die entspr. Sprache ist $L_\fin(N) \coloneqq \Set{v \in \Sigma^{*}}{\ex{M \in \Fin} M_N \activeTransition{v} M}$.
 \end{defn}
 
 \begin{nota}
-  $\Lang^\lambda \coloneqq \Set{L_\fin(N)}{N \text{ beschr. Netz mit Endmarkierung}}$ \\
-  $\Lang \coloneqq \Set{L_\fin(N)}{N \text{ beschr. Netz mit Endmark. ohne interne Trans.}}$
+  $\Lang^\lambda \coloneqq \Set{L_\fin(N)}{N \text{ beschrift. Netz mit Endmarkierung}}$ \\
+  $\Lang \coloneqq \Set{L_\fin(N)}{N \text{ beschrift. Netz mit Endmark. ohne interne Trans.}}$
 \end{nota}
 
 % 2.13
@@ -273,7 +277,7 @@
 \begin{nota}
   \begin{minipage}[t]{0.8 \linewidth}
     $\Multisets(X) \coloneqq \{ \mu : X \to \N \}$ \\
-    $\mu_Y \in \Multisets(X), x \mapsto \card{\Set{\star}{x \in Y}}$ für $Y \subset X$, \\
+    $\mu_Y \in \Multisets(X), \, \mu_Y(x) \coloneqq \card{\Set{\star}{x \in Y}}$ für $Y \subset X$, \\
     $\emptyset \coloneqq \mu_\emptyset \in \Multisets(X)$, \enspace
     $\mu_x \coloneqq \mu_{\{ x \}} \in \Multisets(X)$ für $x \in X$
   \end{minipage}
@@ -293,9 +297,11 @@
 \end{defn}
 
 \begin{bem}
-  Analog wird verallgemeinert:
-  $M \activeTransition{\mu} M'$, $M \activeTransition{w}$, $M \activeTransition{w} M'$
-  für $\mu \in \Markings(T) \setminus \{ \emptyset \}$ bzw. $w \in (\Markings(T) \setminus \{ \emptyset \})^{*}$.
+  \begin{minipage}[t]{0.8 \linewidth}
+    Analog wird verallgemeinert:
+    $M \activeTransition{\mu} M'$, $M \activeTransition{w}$, $M \activeTransition{w} M'$ \\
+    für $\mu \in \Markings(T) \setminus \{ \emptyset \}$ bzw. $w \in (\Markings(T) \setminus \{ \emptyset \})^{*}$.
+  \end{minipage}
 \end{bem}
 
 \begin{defn}
@@ -316,7 +322,8 @@
 \begin{nota}
   Für $\mu \in \Multisets(T)$ ist $\ell(\mu)$ die Multimenge mit
   \[
-    \ell(\mu) : \Sigma \to \N, x \mapsto {\sum}_{t \in T, \ell(t) = x} \mu(t)
+    \ell(\mu) : \Sigma \to \N, \enspace
+    x \mapsto {\sum}_{t \in T, \ell(t) = x} \mu(t)
   \]
   (falls die rechte Zahl endlich ist für alle $x \in \Sigma$). \\
   Für $w = \mu_1 \cdots \mu_n \in \Multisets(T)^{*}$ ist 
@@ -425,6 +432,10 @@
   \end{itemize}
 \end{defn}
 
+\begin{bem}
+  $M \text{ ist tot} \iff \fa{t \in T} \neg M \activeTransition{t}$
+\end{bem}
+
 \begin{defn}
   Bezogen auf ein Netz~$N$:
   \begin{itemize}
@@ -442,7 +453,7 @@
 
 % 3.1
 \begin{defn}
-  Die \emph{Inzidenzmatrix} \textit{eines Netzes~$N$} ist die Matrix $C(N) \in \Z^{\card{T} \times \card{S}}$ mit $C(N)_{s t} = \Delta t (s)$ für $s \in S$ und $t \in T$.
+  Die \emph{Inzidenzmatrix} \textit{eines Netzes~$N$} ist die Matrix $C(N) \in \Z^{T \times S}$ mit $C(N)_{s t} = \Delta t (s)$ für $s \in S$ und $t \in T$.
 \end{defn}
 
 \begin{bem}
@@ -467,24 +478,21 @@
   \end{itemize}
 \end{lemdefn}
 
-% 3.3
+% 3.3 + 3.4
 \begin{lem}
-  $y \in \SInv(N) \implies \fa{M \in \activeTransition{M_N}} y^T \cdot M = y^T \cdot M_N$
+  Für $y \in \Z^S$ gilt
+  \[
+    y \in \SInv(N) \implies \fa{M \in \activeTransition{M_N}} y^T \cdot M = y^T \cdot M_N.
+  \]
+  Ist jede Transition in~$N$ 1-lebendig, so gilt auch die Rückrichtung:
+  \[
+    y \in \SInv(N) \iff \fa{M \in \activeTransition{M_N}} y^T \cdot M = y^T \cdot M_N
+  \]
 \end{lem}
 
 \begin{bem}
-  Das Lemma kann verwendet werden um zu zeigen, dass ein~$M$ nicht erreichbar ist.
+  Das Lemma kann verwendet werden um zu zeigen, dass eine Markierung~$M$ nicht erreichbar ist.
 \end{bem}
-
-% 3.4
-\begin{lem}
-  Sei keine Transition in~$N$ tot.
-  Dann gilt für $y \in \Z^S$:
-  \[
-    \fa{M \in \activeTransition{M_N}} y^T \cdot M = y^T \cdot M_N \implies
-    y \in \SInv(N)
-  \]
-\end{lem}
 
 % 3.5
 \begin{lem}
@@ -493,13 +501,10 @@
 \end{lem}
 
 % 3.6
-\begin{lem}
-  Ist~$N$ von $S$-Invarianten überdeckt, so ist~$N$ strukturell beschränkt.
-\end{lem}
-
-% Satz 11.10 in "Analyse von Petri-Netz-Modellen" von Peter H. Starke
 \begin{satz}
-  Besitzt $N$ eine lebendige Markierung, so gilt:
+  Ist~$N$ von $S$-Invarianten überdeckt, so ist~$N$ strukturell beschränkt.
+  % Satz 11.10 in "Analyse von Petri-Netz-Modellen" von Peter H. Starke
+  Besitzt $N$ eine lebendige Markierung, so gilt sogar:
   \[
     \text{$N$ ist strukturell beschr.} \iff
     \text{$N$ ist von $S$-Invarianten überdeckt.}
@@ -550,31 +555,30 @@
 
 \section{Einige Entscheidbarkeitsprobleme}
 
-\begin{problem}[E -- \emph{Erreichbarkeit}]
-  Gegeben seien ein Netz~$N$ und eine Markierung~$M$.
-  Frage: Ist~$M$ erreichbar in~$N$?
-\end{problem}
-
-\begin{problem}[0-E -- \emph{$0$-Erreichbarkeit}]
-  Gegeben seien ein Netz~$N$.
-  Frage: Ist die Nullmarkierung erreichbar?
-\end{problem}
+\begin{probleme}
+  Gegeben sei eine Netz~$N$
+  \begin{itemize}
+    \item \emph{Erreichbarkeit} (E):
+      \ldots und eine Markierung~$M$.
+      Frage: Ist~$M$ erreichbar in~$N$, gilt also $M \in \activeTransition{M_N}$?
+    \item \emph{$0$-Erreichbarkeit} (O-E):
+      Frage: Ist $0 \in \activeTransition{M_N}$?
+    \item \emph{Teilerreichbarkeit} (TE):
+      \ldots eine Teilmenge $S' \subseteq S$ und $M : S' \to \N$.
+      Frage: Gibt es ein $M \in \activeTransition{M_N}$ mit $M|_{S'} = M'$?
+  \end{itemize}
+\end{probleme}
 
 \begin{bem}
   Diese Probleme sind lösbar, falls der Erreichbarkeitsgraph endlich ist.
 \end{bem}
-
-\begin{problem}[TE -- \emph{Teilerreichbarkeit}]
-  Gegeben ein Netz~$N$, eine Teilmenge $S' \subseteq S$ und $M : S' \to \N$.
-  Frage: Gibt es eine erreichbare Markierung~$M \in \Markings(S)$ mit $M|_{S'} = M'$?
-\end{problem}
 
 % ausgelassen: Definition 4.1 von Entscheidungsproblem und Entscheidungsverfahren
 
 \begin{defn}
   \begin{itemize}
     \item Ein Entscheidungsproblem~$A$ ist auf ein Entscheidungs- problem~$B$ \emph{reduzierbar} (notiert $A \reducesTo B$), falls ein Lösungsalgo- rithmus für~$A$ existiert, welcher einen (vllt. gar nicht existenten!) Lösungsalgorithmus für~$B$ verwenden darf.
-    \item $A$ ist \emph{linear / polynomiell many-one-reduzierbar} \textit{auf~$B$}, falls aus einer Instanz~$I$ von~$A$ in linearer / polynomieller Zeit eine Instanz~$I'$ von~$B$ berechnet werden kann, sodass die Antwort auf~$I$ gleich der Antwort auf~$I'$ ist.
+    \item $A$ ist \emph{linear / polynomiell many-one-reduzierbar} \textit{auf~$B$}, falls aus einer Instanz~$I$ von~$A$ in linearer / polynomieller Zeit eine Instanz~$I'$ von~$B$ berechnet werden kann, sodass die Antwort auf~$I$ gleich der Antwort auf~$I'$ ist. \\
     Notation: $A \reducesManyOneToLin B$ / $A \reducesManyOneToPoly B$
   \end{itemize}
 \end{defn}
@@ -593,6 +597,35 @@
     M_{\overline{N}} & \coloneqq (s \in S \mapsto M_N(s), \enspace \overline{s'} \mapsto M'(s'))
   \end{align*}
   Dann: $M'$ teilerreichbar in~$N$ $\iff$ Nullmark. erreichbar in~$\overline{N}$
+  \begin{center}\begin{tikzpicture}
+    \draw (0,-0.25) rectangle (8, 4.25);
+    \node[anchor=west] at (0.15, 0.15) {$\text{(TE)}  \reducesManyOneToLin \text{(0-E)}$};
+    \node at (0.75, 3.75) {\normalsize $N$};
+    \draw (4, 3) ellipse (3.5 and 0.75);
+    \node[circle,draw] (s1) at (1.5,3) {$s_1$};
+    \node[draw] (ts1) at (1.5, 1.75) {$t_{s_1}$};
+    \draw[->] (s1) -- (ts1);
+    \node at (2.25, 3) {$\cdots$};
+    \node at (2.25, 1.75) {$\cdots$};
+    \node[circle,draw] (sn) at (3,3) {$s_n$};
+    \node[draw] (tsn) at (3, 1.75) {$t_{s_n}$};
+    \draw[->] (sn) -- (tsn);
+    \node at (4, 3.5) {\normalsize $S'$};
+    \draw (5.5, 3) ellipse (1.5 and 0.5);
+    \node[circle,draw] (sp1) at (4.75,3) {$s'_1$};
+    \node[draw] (tsp1) at (4.75, 1.75) {$t_{s'_1}$};
+    \node[circle,draw] (sp1o) at (4.75, 0.5) {$\overline{s'_1}$};
+    \draw[->] (sp1) -- (tsp1);
+    \draw[->] (sp1o) -- (tsp1);
+    \node at (5.5, 3) {$\cdots$};
+    \node at (5.5, 1.75) {$\cdots$};
+    \node at (5.5, 0.5) {$\cdots$};
+    \node[circle,draw] (spm) at (6.25,3) {$s'_m$};
+    \node[draw] (tspm) at (6.25, 1.75) {$t_{s'_m}$};
+    \node[circle,draw] (spmo) at (6.25,0.5) {$\overline{s'_m}$};
+    \draw[->] (spm) -- (tspm);
+    \draw[->] (spmo) -- (tspm);
+  \end{tikzpicture}\end{center}
 \end{beweis}
 
 % 4.3
@@ -600,14 +633,16 @@
   (E) ist entscheidbar.
 \end{satz}
 
-\begin{problem}[L -- \emph{Lebendigkeit}]
-  Gegeben $N$. Frage: Ist $N$ lebendig?
-\end{problem}
-
-\begin{problem}[EL -- \emph{Einzellebendigkeit}]
-  Gegeben seien $N$ und $t \in T$.
-  Frage: Ist $t$ lebendig?
-\end{problem}
+\begin{probleme}
+  Gegeben sei ein Petrinetz~$N$
+  \begin{itemize}
+    \item \emph{Lebendigkeit} (L): 
+      Frage: Ist $N$ lebendig?
+    \item \emph{Einzellebendigkeit} (EL):
+      \ldots und $t \in T$.
+      Frage: Ist $t$ lebendig?
+  \end{itemize}
+\end{probleme}
 
 % ausgelassen: 4.4 da gleichzeitig 4.5
 
@@ -626,12 +661,31 @@
     M_{\overline{N}} & \coloneqq (s \in S \mapsto M_N(s), \enspace s_t \mapsto 0)
   \end{align*}
   Dann: $N$ lebendig $\iff$ $t_\mathrm{afterall}$ lebendig in $\overline{N}$.
+  
+  \begin{center}\begin{tikzpicture}
+    \draw (0,0) rectangle (6, 3.5);
+    \node[anchor=west] at (0.15, 0.4) {$\text{(TE)}  \reducesManyOneToLin \text{(0-E)}$};
+    \node at (0.55, 3.15) {\normalsize $N$};
+    \draw (1.25, 2) ellipse (0.75 and 1.25);
+    \node[draw] (t1) at (1.25, 2.75) {$t_1$};
+    \node at (1.25, 2.1) {$\vdots$};
+    \node[draw] (tn) at (1.25, 1.25) {$t_n$};
+    \node[draw,circle] (st1) at (3, 2.75) {$s_{t_1}$};
+    \node at (3, 2.1) {$\vdots$};
+    \node[draw,circle] (stn) at (3, 1.25) {$s_{t_n}$};
+    \draw[->] (t1) -- (st1);
+    \draw[->] (tn) -- (stn);
+    \node[draw] (tafterall) at (5, 2) {$t_\mathrm{afterall}$};
+    \draw[->] (st1) to [bend left=30] (tafterall);
+    \draw[->] (stn) to [bend right=30] (tafterall);
+  \end{tikzpicture}\end{center}
 
-  "`$\text{(EL)} \reducesManyOneToLin \text{(L)}$"'.
-  Sei $t$ die Transition, deren Lebendigkeit untersucht werden soll.
-  Konstruiere $\tilde{N} = (S, T, \tilde{W}, M_N)$ mit
-  $\tilde{W}(t', s) \coloneqq W(t', s) + \delta^t_{t'}$.
-  Dann: $t$ lebendig in~$N$ $\iff$ $\tilde{N}$ lebendig
+  "`$\text{(L)} \reducesManyOneToLin \text{(EL)}$"'.
+  Beweisidee: 
+  % siehe 5.1.4 in "Petri-Netze" von Priese und Wimmel
+  Gefragt sei, ob eine Transition~$t_0$ in Netz~$N$ lebendig ist.
+  Erweitere~$N$ zu einem Netz~$\hat{N}$, sodass jede Transition~$t$ aus~$N$ außer~$t_0$ und jede neue Transition lebendig ist (indem man die nötigen Marken zum Schalten von~$t$ bereitstellt und nach dem Schalten die durch~$t$ erzeugten Marken entfernt). \\
+  Dann zeige: \enspace $\hat{N}$ lebendig $\iff$ $t_0$ lebendig in~$N$.
 \end{beweis}
 
 % 4.4 b)
@@ -639,32 +693,75 @@
   (EL) ist reduzierbar auf (TE)
 \end{satz}
 
-% siehe 5.1.4 in "Petri-Netze" von Priese und Wimmel
 \begin{beweisidee}
-  Gefragt sei, ob eine Transition~$t_0$ in Netz~$N$ lebendig ist.
-  Erweitere~$N$ zu einem Netz~$\hat{N}$, sodass jede Transition~$t$ aus~$N$ außer~$t_0$ und jede neue Transition lebendig ist (indem man die nötigen Marken zum Schalten von~$t$ bereitstellt und nach dem Schalten die durch~$t$ erzeugten Marken entfernt). \\
-  Dann zeige: \enspace $\hat{N}$ lebendig $\iff$ $t_0$ lebendig in~$N$.
+  Setze
+  \begin{align*}
+    T_{t_0} & \coloneqq \Set{M \in \ExtMarkings(N)}{\text{$t_0$ tot in~$M$}} \\
+    T_{t_0}^{\mathrm{max}} & \coloneqq \Set{M \in T_{t_0}}{\text{$M$ ist maximal in $T_{t_0}$}} \\
+    S'(M) & \coloneqq \Set{s \in S}{M(s) < \infty} \enspace \text{für $M \in \ExtMarkings(N)$}
+  \end{align*}
+  Es gilt:
+  \[
+    \arraycolsep=1pt
+    \begin{array}{l l}
+      & t_0 \text{ ist nicht lebendig} \\
+      \iff & \ex{M \in \activeTransition{M_N}} t \text{ tot in~$M$} \\
+      \iff & \ex{M \in \activeTransition{M_N}} \ex{M^\omega \in T_{t_0}^{\mathrm{max}}} M \leq M^\omega \\
+      \iff & \ex{M^\omega \in T_{t_0}^{\mathrm{max}}} \ex{M' \leq M^\omega|_{S'(M^\omega)}} M' \text{ teilerreichbar in } N
+    \end{array}
+  \]
+  Nach dem Lemma von Dickson ist $T_{t_0}^{\mathrm{max}}$ endlich.
+  Man kann zeigen, dass~$T_{t_0}^{\mathrm{max}}$ auch berechenbar ist.
+  Somit ist die Bedingung der letzten Zeile algorithmisch nachprüfbar.
 \end{beweisidee}
 
-% 4.4 c)
+% 4.4 c), abgewandelt (Reduktion auf EL statt auf L, siehe Priese, Wimmel, "Petrinetze", Satz 5.1.5)
 \begin{satz}
-  (0-E) $\reducesManyOneToLin$ Co-(L), das ist (L) mit umgekehrter Antwort
+  (0-E) $\reducesManyOneToLin$ Co-(EL), das ist (EL) mit umgekehrter Antwort
 \end{satz}
 
 \begin{beweis}
   Konstruiere $\overline{N} = (\overline{S}, \overline{T}, \overline{W}, M_{\overline{N}})$ mit
   \begin{align*}
-    \overline{S} & \coloneqq S \amalg \{ s_\mathrm{distr}, s_\mathrm{control} \} \\
-    \overline{T} & \coloneqq T \amalg \Set{t_s}{s \in S} \amalg \{ t_\mathrm{distr}, t_\mathrm{blackhole} \} \\
-    \overline{W} & \coloneqq W \cup \Set{t \rightleftarrows s_\mathrm{control}}{t \in T} \cup \Set{t_\mathrm{distr} \to s \to t_s \to s_\mathrm{distr}}{s \in S} \\
-    & \cup \{ s_\mathrm{distr} \rightleftarrows t_\mathrm{distr} \} \cup \{ s_\mathrm{control} \to t_\mathrm{blackhole} \} \\
-    M_{\overline{N}} & \coloneqq (s \in S \mapsto M_N(s), \enspace s_\mathrm{distr} \mapsto 0, \enspace s_\mathrm{control} \mapsto 1)
+    \overline{S} & \coloneqq S \amalg \{ s_\text{s-ctrl}, s_\text{t-ctrl} \} \\
+    \overline{T} & \coloneqq T \amalg \Set{t_s}{s \in S} \amalg \{ t_0 \} \\
+    \overline{W} & \coloneqq W \cup \Set{t \rightleftarrows s_\text{t-ctrl}}{t \in T} \cup \Set{s \rightleftarrows t_s}{s \in S} \\
+    & \cup \Set{s_\text{s-ctrl} \to t_s \to s_\text{t-ctrl}}{s \in S} \cup \{ s_\text{t-ctrl} \to t_0 \to s_\text{s-ctrl} \} \\
+    M_{\overline{N}} & \coloneqq (s \in S \mapsto M_N(s), \enspace s_\text{s-ctrl} \mapsto 0, \enspace s_\text{t-ctrl} \mapsto 1)
   \end{align*}
-  (Bemerke: Jede Markierung $\hat{M}$ mit $\hat{M}(s_\mathrm{distr}) > 0$ ist lebendig.) \\
-  Dann: Nullmarkierung in $N$ erreichbar $\iff$ $\overline{N}$ nicht lebendig
+  Dann: Nullmark. in $N$ erreichbar $\iff$ $t_0$ in $\overline{N}$ nicht lebendig
+
+  \begin{center}\begin{tikzpicture}
+    \draw (0,-0.25) rectangle (8, 4.25);
+    \node[anchor=west] at (0.15, 0.15) {(0-E) $\reducesManyOneToLin$ Co-(EL)};
+    \node at (0.75, 3.75) {\normalsize $N$};
+    \draw (4, 3) ellipse (3.5 and 0.75);
+    \node[circle,draw] (s1) at (1.5,3) {$s_1$};
+    \node[circle,draw] (sn) at (3,3) {$s_n$};
+    \node at (2.25, 3) {$\cdots$};
+    \node[draw] (ts1) at (1.5, 1.75) {$t_{s_1}$};
+    \node[draw] (tsn) at (3, 1.75) {$t_{s_n}$};
+    \node at (2.25, 1.75) {$\cdots$};
+    \node[circle,draw] (ssc) at (2.25, 0.5) {$\,\,$};
+    \node[draw] (t1) at (5,3) {$t_1$};
+    \node[draw] (tm) at (6.5,3) {$t_m$};
+    \node at (5.75, 3) {$\cdots$};
+    \node[circle,draw] (stc) at (5.75, 0.5) {$\bullet$};
+    \node[draw] (t0) at (4, 0.5) {$t_0$};
+    \draw[<->] (s1) -- (ts1);
+    \draw[<->] (sn) -- (tsn);
+    \draw[->] (ts1) to [bend left=3] (stc);
+    \draw[->] (tsn) to [bend left=12] (stc);
+    \draw[->] (ssc) to [bend left=20] (ts1);
+    \draw[->] (ssc) to [bend right=20] (tsn);
+    \draw[<->] (t1) to [bend right=10] (stc);
+    \draw[<->] (tm) to [bend left=10] (stc);
+    \draw[->] (stc) -- (t0);
+    \draw[->] (t0) -- (ssc);
+  \end{tikzpicture}\end{center}
 \end{beweis}
 
-\begin{problem}{SR -- Spezielles Reproduktionsproblem}
+\begin{problem}[\emph{Spezielles Reproduktionsproblem} (SR)]
   Gegeben ein Netz~$N$, gibt es eine nicht-leere Schaltfolge~$w$ mit $M_N \activeTransition{w} M_N$?
 \end{problem}
 
@@ -691,6 +788,26 @@
 \end{beweis}
 
 \begin{fazit}
+  Im folgenden Bild sind alle Reduktionen eingezeichnet.
+  Dabei handelt es sich um lineare Many-One-Reduktionen mit Ausnahme von (EL) $\reducesTo$ (TE).
+
+  \begin{center}\begin{tikzpicture}
+    \node (SR) at (-1.5, 3) {(SR)};
+    \node (NE) at (0,3) {(0-E)};
+    \node (E) at (0,2) {(E)};
+    \node (TE) at (0,1) {(TE)};
+    \node (L) at (1.5,2.5) {(L)};
+    \node (EL) at (1.5,1.5) {(EL)};
+    \draw[|->] (SR) to (NE);
+    \draw[|->] (NE) to (E);
+    \draw[|->] (E) to (TE);
+    \draw[|->] (TE) to [bend left=60] (NE);
+    \draw[|->] (L) to [bend left=20] (EL);
+    \draw[|->] (EL) to [bend left=20] (L);
+    \draw[|->] (NE) to [bend right=5] (EL);
+    \draw[|->] (EL) to [bend left=10] (TE);
+  \end{tikzpicture}\end{center}
+
   (L) und (EL) sind entscheidbar, aber mindestens so schwer wie (E), (0-E) und (TE).
 \end{fazit}
 
@@ -845,7 +962,7 @@
   \begin{itemize}
     \item $S'$ ist simultan unbeschränkt $\iff$ $(\mathrm{const} \, \omega) \in \Cov(N)$
     \item Sei $\tilde{M}$ eine Markierung von~$N$. Dann gilt: $\tilde{M}$ ist überdeckbar in~$N$ $\iff$ $\tilde{M}$ wird von einem $M$ in~$\Cov(N)$ überdeckt
-    \item $t$ ist nicht tot in~$N$ $\iff$ $t$ ist Kantenbeschriftung in $\Cov(N)$
+    \item $t$ ist 1-lebendig in~$N$ $\iff$ $t$ ist Kantenbeschriftung in $\Cov(N)$
   \end{itemize}
 \end{kor}
 
