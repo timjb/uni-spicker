@@ -42,6 +42,7 @@
 \DeclareMathOperator{\ready}{ready} % ready-Semantik
 \newcommand{\Failure}{\mathfrak{F}} % Failure-Semantik
 \newcommand{\parallelComposition}{\parallel} % Parallel-Komposition
+\newcommand{\Powerset}{\mathcal{P}} % Potenzmenge
 
 % Kleinere Klammern
 \delimiterfactor=701
@@ -312,7 +313,7 @@
 \end{defn}
 
 \begin{defn}
-  Zwei Transitionen $t, t' \in T$ sind
+  Zwei Transitionen $t, t' \in T$ mit $M \activeTransition{t}$ und $M \activeTransition{t'}$ sind
   \begin{itemize}
     \item \emph{nebenläufig} \textit{unter~$M$}, falls $M \activeTransition{t + t'}$,
     \item \emph{in Konflikt} \textit{unter~$M$}, falls $\neg M \activeTransition{t + t'}$.
@@ -550,6 +551,63 @@
 \begin{satz}
   Ist~$N$ lebendig und beschränkt, so ist $N$ von $T$-Invarianten überdeckt.
 \end{satz}
+
+\section{State Transition Graphs}
+
+\begin{defn}
+  Ein \emph{State Transition Graph} (STG) mit \textit{Eingangssignal- menge}~$I$ und \textit{Ausgangssignalmenge}~$O$ ist ein sicheres Petri-Netz~$N$, dessen Transitionen mit \textit{Signalflanken} $a{+}$ oder $a{-}$ mit $a \in A \coloneqq I \cup O$ beschriftet sind, \dh{}
+  \[ \Sigma = \Set{a{+}}{a \in A} \cup \Set{a{-}}{a \in A}. \]
+\end{defn}
+
+\begin{defn}
+  Der STG~$N$ heißt \emph{konsistent}, falls es für jede erreichbare Markierung $M \in \activeTransition{M_N}$ einen Code $C(M) \in \{ 0, 1 \}^A$ gibt, sodass
+  \begin{itemize}
+    \item $C(M_N)(a) = 0$
+    \item $M \labelledTransition{a{+}} M' \implies C(M)(a) = 0 \wedge C(M')(a) = 1$
+    \item $M \labelledTransition{a{-}} M' \implies C(M)(a) = 1 \wedge C(M')(a) = 0$
+  \end{itemize}
+  für alle Markierungen $M, M' \in \activeTransition{M_N}$ und Signale $a \in A$.
+\end{defn}
+
+\begin{bem}
+  Der Code ist (im Falle der Existenz) eindeutig bestimmt durch
+  \[
+    C(M)(a) \coloneqq \card{\Set{i}{w_i = a{+}}} - \card{\Set{i}{w_i = a{-}}}
+  \]
+  für ein $w \in \Sigma^*$ mit $M_N \labelledTransition{w} M$.
+\end{bem}
+
+\begin{beob}
+  Ist der STG $N$ konsistent, so gibt es
+  \begin{enumerate}
+    \item kein $w = u \, a{+} \, v \, a{+} \in \Sigma^*$ mit $u \in \Sigma^*$ und $v \in (\Sigma \setminus \{ a{-} \})$,
+    \item kein $w = u \, a{-} \, v \, a{-} \in \Sigma^*$ mit $u \in \Sigma^*$ und $v \in (\Sigma \setminus \{ a{+} \})$ und
+    \item kein $w = u \, a{-} \in \Sigma^*$ mit $u \in (\Sigma \setminus \{ a{+} \})^*$
+  \end{enumerate}
+  sodass jeweils $M_N \labelledTransition{w}$ gilt.
+\end{beob}
+
+\begin{defn}
+  Der STG~$N$ \emph{hat CSC} (\textit{Complete State Coding}), falls für alle $M, M' \in \activeTransition{M_N}$ mit $C(M) = C(M')$ und \textit{Ausgabesignale} $a \in O$ gilt:
+  \[
+    M \activeTransition{a {+}} \iff M' \activeTransition{a {+}}
+    \quad \text{bzw.} \quad
+    M \activeTransition{a {-}} \iff M' \activeTransition{a {-}}.
+  \]
+  Ansonsten hat~$N$ einen \textit{CSC-Konflikt}.
+\end{defn}
+
+\begin{defn}
+  Der STG hat einen \emph{IO-Konflikt}, falls eine Markierung $M \in \activeTransition{M_N}$ und Transitionen $t_i \in \Sigma_I \coloneqq \Set{a{+}}{a \in I} \cup \Set{a{-}}{a \in I}$ sowie $t_o \in \Sigma_O \coloneqq \Set{b{+}}{b \in O} \cup \Set{b{-}}{b \in O}$ existieren, sodass $t_i$ und $t_o$ unter~$M$ in Konflikt stehen, \dh{}
+  \[
+    M \activeTransition{t_i}
+    \enspace \text{und} \enspace
+    M \activeTransition{t_o}
+    \enspace \text{aber} \enspace
+    \neg (M \activeTransition{t_i + t_o}).
+  \]
+\end{defn}
+
 
 % §4. Einige Entscheidbarkeitsprobleme
 
@@ -816,7 +874,7 @@
 
 % 5.3
 \begin{lem}[\emph{Dickson}]
-  $\leq$ ist eine Wohlquasiordnung auf~$\N^n$, \dh{} für alle unendlichen Folgen $(M_i)_{i \in \N}$ in~$\N^n$ gibt es eine Teilfolge $(M_{i_j})_{j \in \N}$ mit $M_{i_j} \leq M_{i_{j+1}}$ für alle $j \in \N$.
+  $\leq$ ist eine Wohlquasiordnung auf~$(\N \cup \{ \omega \})^n$, \dh{} für alle unendlichen Folgen $(M_i)_{i \in \N}$ in~$(\N \cup \{ \omega \})^n$ gibt es eine Teilfolge $(M_{i_j})_{j \in \N}$ mit $M_{i_j} \leq M_{i_{j+1}}$ für alle $j \in \N$.
 \end{lem}
 
 \begin{defn}
@@ -828,7 +886,7 @@
 \end{defn}
 
 \begin{lem}[\emph{König}]
-  Sei $(V, E)$ ein lokal endlicher gerichteter Graph und $v_0 \in V$ ein Knoten, sodass für alle $v \in V$ ein Weg von~$v_0$ nach~$v$ existiert. 
+  Sei $(V, E)$ ein unendlicher, lokal endl. gericht. Graph und $v_0 \in V$ ein Knoten, sodass für alle $v \in V$ ein Weg von~$v_0$ nach~$v$ existiert. 
   Dann gibt es einen unendlichen Weg ausgehend von~$v_0$.
 \end{lem}
 
@@ -896,7 +954,7 @@
         \If{$M^* \neq \nil$}
           $M' \coloneqq M' + \omega \cdot (M' - M^*)$ %= (s \mapsto \max (\{ M'(s) \} \cup \Set{\omega}{M'(s) > M^*(s)}) )
         \EndIf
-        \State $E \coloneqq \{ (M, t, M') \}$
+        \State $E \coloneqq E \cup \{ (M, t, M') \}$
         \If{$M' \not\in V \cup A$}
           $A \coloneqq A \cup \{ M' \}$, \enspace
           $\Call{pred}{M'} \coloneqq M$
@@ -963,21 +1021,21 @@
     \item $S'$ ist simultan unbeschränkt $\iff$ $(\mathrm{const} \, \omega) \in \Cov(N)$
     \item Sei $\tilde{M}$ eine Markierung von~$N$. Dann gilt: $\tilde{M}$ ist überdeckbar in~$N$ $\iff$ $\tilde{M}$ wird von einem $M$ in~$\Cov(N)$ überdeckt
     \item $t$ ist 1-lebendig in~$N$ $\iff$ $t$ ist Kantenbeschriftung in $\Cov(N)$
+    % Übungsblatt 11, Aufgabe 2a)
+    \item $t$ ist 2-lebendig $\iff$ $t$ ist Beschriftung in einem Kreis in $\Cov(N)$
   \end{itemize}
 \end{kor}
-
-% Übungsblatt 11, Aufgabe 2a)
-\begin{lem}
-  Für jedes Netz~$N$ mit Transition $t \in T$ sind äquivalent:
-  \begin{itemize}
-    \item $t$ ist 2-lebendig
-    \item $t$ ist Beschriftung in einem Kreis in $\Cov(N)$
-  \end{itemize}
-\end{lem}
 
 \begin{kor}
-  2-Lebendigkeit von Transitionen ist entscheidbar.
+  Es sind anhand von~$\Cov(N)$ entscheidbar:
+  \begin{itemize}
+    \miniitem{0.48 \linewidth}{Simultane Unbeschränktheit}
+    \miniitem{0.48 \linewidth}{Überdeckbarkeit von Markier.}
+    \item 1-Lebendigkeit und 2-Lebendigkeit von Transitionen
+  \end{itemize}
 \end{kor}
+
+\newpage
 
 % §6. Strukturtheorie und Free-Choice-Netze
 \section{Strukturtheorie und Free-Choice-Netze}
@@ -1002,10 +1060,10 @@
 \end{lem}
 
 % 6.4
-\begin{lem}
+\begin{beob}
   Angenommen, $N$ hat keine isolierten Stellen.
   Ist $R \neq \emptyset$ ein Siphon und unmarkiert unter $M \in \activeTransition{M_n}$, so ist~$N$ nicht lebendig.
-\end{lem}
+\end{beob}
 
 % 6.5
 \begin{lem}
@@ -1066,7 +1124,7 @@
 
 % 6.10
 \begin{lem}
-  $<_P$ ist Noethersch (wohlfundiert)
+  $<_\mathrm{lex}$ ist Noethersch (wohlfundiert)
 \end{lem}
 
 % 6.11
@@ -1089,7 +1147,7 @@
     \item $t_n \in \postset{(R \setminus \{ s_1, \ldots, s_{n-1} \})} \setminus \preset{(R \setminus \{ s_1, \ldots, s_{n-1} \})}$ und $s_n \in \preset{t_1} \cap (R \setminus (Q \cup \{ s_1, \ldots, s_{n-1} \}))$
   \end{itemize}
   Definiere ${<}$ durch $s_n < \ldots < s_2 < s_1$.
-  Für~$t$ mit $M \activeTransition{t}$ gibt es ein $i \in \{ 1, \ldots, n \}$ mit $s_i \in \preset{t}$.
+  Für~$t$ mit $M \activeTransition{t}$ gibt es ein maximales $i \in \{ 1, \ldots, n \}$ mit $s_i \in \preset{t}$.
   Da~$N$ EFC ist, gilt $\preset{t_i} = \preset{t}$. \\
   Somit existiert~$M'$ mit $M \activeTransition{t_i} M'$.
   Es stimmen $M$ und $M'$ auf $Q \cup \{ s_{i+1}, \ldots, s_n \}$ überein, aber $M'(s_i) < M(s_i)$.
@@ -1098,7 +1156,7 @@
 
 % 6.11
 \begin{kor}
-  Die Aussage des letzten Satzes gilt auch für alle Markierungen~$M$ mit $M|_Q \equiv 0$ und $\ex{t \in \postset{R}}$ $t$ ist nicht tot unter~$M$, falls~$R$ ein Siphon ist.
+  Die Aussage des letzten Satzes gilt auch für alle Markierungen~$M$ mit $M|_Q \equiv 0$ und $\ex{t \in \postset{R}}$ $t$ ist 1-lebendig unter~$M$, falls~$R$ ein Siphon ist.
 \end{kor}
 
 \begin{satz}[\emph{Commoner}]
@@ -1114,7 +1172,24 @@
   Sei $R$ ein nichtleerer Siphon und $Q \subseteq R$ die größte Falle in~$R$.
   Wähle $t \in \postset{R}$.
   Angenommen, $M_N|_Q \equiv 0$.
-  Durch mehrmalige Anwendung des vorh. Korollar (beachte: $t$ ist nicht tot) erhalten wir eine unendliche absteigende Reihe $M_N >_\mathrm{lex} M_1 >_\mathrm{lex} \ldots$ im Widerspruch zur Noetherianität von ${<_\mathrm{lex}}$.
+  Durch mehrmalige Anwendung des vorh. Korollar (beachte: $t$ ist lebendig) erhalten wir eine unendliche absteigende Reihe $M_N >_\mathrm{lex} M_1 >_\mathrm{lex} \ldots$ im Widerspruch zur Noetherianität von ${<_\mathrm{lex}}$.
+  
+  "`$\Leftarrow$"'.
+  Angenommen, $t_0$ ist nicht lebendig.
+  Wir können o.\,B.\,d.\,A. annehmen, dass $t_0$ tot und alle weiteren Transitionen entweder lebendig oder tot sind.
+  Zeige: Für jede tote Transition $t$ ist
+  \[
+    R(t) \coloneqq \Set{s \in \preset(t)}{M_N(s) = 0 \wedge \fa{t' \in \preset{s}} t' \text{ tot}}
+  \]
+  nichtleer.
+  Wir definieren:
+  \[
+    T_R^{(0)} \coloneqq \{ t_0 \}, \enspace
+    R^{(i)} \coloneqq {\bigcup}_{t \in T_R^{(i)}} R(t), \enspace
+    T_R^{(i+1)} \coloneqq T_R^{(i)} \cup {\bigcup}_{s \in R^{(i)}} \preset{s}
+  \]
+  Dann ist $R \coloneqq {\bigcup}_{i \geq 0} R^{(i)}$ ein unmarkierter Siphon.
+  Somit sind auch alle Fallen in~$R$ unmarkiert (und immer unmarkiert gewesen).
 \end{beweis}
 
 \begin{kor}
@@ -1163,7 +1238,7 @@
 
 \begin{defn}
   Ein \emph{Netz mit Prioritäten} ist ein Petri-Netz $N = (S, T, W, M_N)$ mit einer Halbordnung ${\sqsubset}$. \\
-  Das Netz schaltet unter Beachtung der Priorität, falls
+  Das Netz \textit{schaltet unter Beachtung der Priorität}, falls
   \[
     M \activeTransition{t}_{\sqsubset} M' \coloniff M \activeTransition{t} M' \wedge \fa{t' \in T} M \activeTransition{t'} \implies t' \not\sqsubset t
   \]
@@ -1172,7 +1247,7 @@
 % §7.4 Netze mit Inhibitor-Kanten
 
 \begin{defn}
-  Ein \emph{Netz mit Inhibitor-Kanten} ist eine Petri-Netz $N = (S, T, W, M_N)$ zusammen mit einer Menge $I \subseteq S \times T$ von \textit{Inhibitor-Kanten}.
+  Ein \emph{Netz mit Inhibitor-Kanten} ist ein Petri-Netz $N = (S, T, W, M_N)$ zusammen mit einer Menge $I \subseteq S \times T$ von \textit{Inhibitor-Kanten}.
   Man definiert:
   \[
     M \activeTransition{t}_I M' \coloniff M \activeTransition{t} M' \wedge \fa{s \in S} (s, t) \in I \implies M(s) = 0
@@ -1206,7 +1281,7 @@
 % §7.6 Kapazitäten
 
 \begin{defn}
-  Ein \emph{Netz mit Kapazitäten} ist eine Petri-Netz $N = (S, T, W, M_N)$ zusammen mit einer Abbildung $k : S \to \N \cup \{ \infty \}$.
+  Ein \emph{Netz mit Kapazitäten} ist ein Petri-Netz $N = (S, T, W, M_N)$ zusammen mit einer Abbildung $k : S \to \N \cup \{ \infty \}$.
   Man definiert:
   \[
     M \activeTransition{t}_k M' \coloniff M \activeTransition{t} M' \wedge M' \leq k
@@ -1218,7 +1293,10 @@
 
 % 8.1
 \begin{defn}
-  Zwei Netze $N_1$ und $N_2$ heißen \emph{sprachäquivalent}, wenn $L(N_1) = L(N_2)$.
+  Zwei Netze $N_1$ und $N_2$ heißen \emph{sprachäquivalent}, wenn
+  \[
+    N_1 \sim_L N_2 \coloniff L(N_1) = L(N_2).
+  \]
 \end{defn}
 
 % 8.2
@@ -1232,7 +1310,7 @@
 \end{beweis}
 
 \begin{bem}
-  Sprachäquivalenz ist unzureichend für den Systemvergleich.
+  Sprachäquivalenz ist unzureichend für den Systemvergleich, denn es interessiert nicht nur, welche Aktionen ein Netz hintereinander ausführen kann, sondern auch in welchem Zustand es sich danach befindet und insbesondere welche Aktionen es dann in der Zukunft ausführen kann.
 \end{bem}
 
 % 8.3
@@ -1251,8 +1329,14 @@
     \Failure(N) \coloneqq \Set{(w, X)}{X \subseteq \Sigma, \ex{M} M_N \labelledTransition{w} M \wedge \fa{a \in X} \neg M \labelledTransition{a}}.
   \]
   Dabei heißt~$X$ \textit{Verweigerungsmenge}. \\
-  $N_1$, $N_2$ sind \emph{failure-äquivalent}, falls $\Failure(N_1) = \Failure(N_2)$.
+  $N_1$, $N_2$ sind \emph{failure-äquivalent} ($\Failure$-äqu.), falls
+  \[
+    N_1 \sim_\Failure N_2 \coloniff \Failure(N_1) = \Failure(N_2).
+  \]
 \end{defn}
+
+\begin{nota}
+\end{nota}
 
 % 8.5
 \begin{lem}
@@ -1279,13 +1363,13 @@
   Die Umkehrungen sind falsch.
 \end{bem}
 
-% 8.7
+% 8.7, erweitert um Ready-Äquivalenz
 \begin{satz}
-  Für beschränkte Netze ist $\Failure$-Äquivalenz entscheidbar.
+  Für beschränkte Netze ist Ready- und $\Failure$-Äquiv. entscheidbar.
 \end{satz}
 
 \begin{beweisidee}
-  Aus jedem Netz~$N$ kann man einen endlichen Automaten konstruieren, dessen Sprache kanonisch isomorph zu~$\Failure(N)$ ist.
+  Aus jedem Netz~$N$ kann man einen endlichen Automaten konstruieren, dessen Sprache kanonisch isomorph zu~$\ready(N)$ bzw. $\Failure(N)$ ist.
   Gleichheit von regulären Sprachen ist entscheidbar.
 \end{beweisidee}
 
@@ -1407,14 +1491,28 @@
         \begin{array}{l}
           \ex{(u, X) \in \Failure(N_1), (v, Y) \in \Failure(N_2)} \\
           w \in u \parallelComposition_A v \text{ und } \\
-          Z \cap A \subseteq X \cup A \text{ und } Z \setminus A \subseteq X \cap Y
+          Z \cap A \subseteq X \cup Y \text{ und } Z \setminus A \subseteq X \cap Y
         \end{array}
         \right\}
       $
   \end{itemize}
 \end{satz}
 
-% ausgelassen: Korollar 8.14: Sprach und F-Äquivalenz sind Kongruenzen bzgl. $\parallelComposition_A$
+\begin{kor}
+  Sprach- und $\Failure$-Äquivalenzen sind Kongruenzen bzgl.~$\parallelComposition_A$, \dh{}
+  \begin{align*}
+    N_1 \sim_L N_1', \, N_2 \sim_L N_2' &
+    \implies (N_1 \parallelComposition_A N_2) \sim_L (N_1' \parallelComposition_A N_2') \\
+    N_1 \sim_\Failure N_1', \, N_2 \sim_\Failure N_2' &
+    \implies (N_1 \parallelComposition_A N_2) \sim_\Failure (N_1' \parallelComposition_A N_2')
+  \end{align*}
+\end{kor}
+
+% TODO: Ready-Äquivalenz ist auch eine Kongruenz, oder?
+
+\begin{bem}
+  Dies ist wichtig für den modularen Entwurf von Systemen.
+\end{bem}
 
 % 8.15
 \begin{defn}
@@ -1439,6 +1537,10 @@
   \end{minipage}
 \end{defn}
 
+\begin{bem}
+  Offensichtlich ist VA-Äquivalenz eine Kongruenz bzgl.~$\parallelComposition_A$.
+\end{bem}
+
 % 8.18
 \begin{satz}
   $\Failure$- und VA-Äquivalenz stimmen überein.
@@ -1448,11 +1550,11 @@
   Seien $N_1$ und $N_2$ VA-äquivalent. \\
   Setze $A \coloneqq (\ell_1(T_1) \cup \ell_2(T_2)) \setminus \{ \lambda \}$.
   Zeige: \\
-  Es gibt ein Netz~$N$, sodass für alle~$N'$ mit $l'(N') \setminus \{ \lambda \} \subseteq A$ gilt:
+  Für alle $(w, X) \in A^* \times \Powerset(A)$ gibt es ein Netz~$N_{w,X}$, sodass für alle~$N'$ mit $l'(N') \setminus \{ \lambda \} \subseteq A$ gilt:
   \[
-    N \parallelComposition_A N' \text{ ist verklemmungsfrei} \iff (w, X) \not\in \Failure(N')
+    N_{w,X} \parallelComposition_A N' \text{ ist verklemmungsfrei} \iff (w, X) \not\in \Failure(N')
   \]
-  Dann:
+  Dann gilt für alle $(w, X)$ mit $N \coloneqq N_{w,X}$:
   \[
     \begin{array}{c c c}
       (w, X) \not\in \Failure(N_1)
