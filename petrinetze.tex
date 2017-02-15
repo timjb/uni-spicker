@@ -1192,12 +1192,16 @@
   Somit sind auch alle Fallen in~$R$ unmarkiert (und immer unmarkiert gewesen).
 \end{beweis}
 
+\begin{samepage}
+
 \begin{kor}
   Jedes lebendige EFC-Netz ist monoton lebendig.
 \end{kor}
 
 % §7. Netzvariationen
 \section{Netzvariationen}
+
+\end{samepage}
 
 % §7.1. High-level-Netze
 
@@ -1218,9 +1222,9 @@
   Ein \emph{Netz mit Zeit} ist ein Tupel $N = (S, T, W, M_N, \tau)$, wobei
   \begin{itemize}
     \item $(S, T, W, M_N)$ ein sicheres Petrinetz ist mit $\fa{t \in T} \preset{t} \neq \emptyset$ und
-    \item $\tau : S \to \N_1$ die \emph{Latenzzeit} aller Transitionen angibt.
+    \item $\tau : T \to \N$ die \emph{Latenzzeit} aller Transitionen angibt.
   \end{itemize}
-  Ein \emph{Zustand} von~$N$ ist ein Tupel $(M, \resTime)$, wobei~$M$ eine Markierung ist und $\resTime : T \to \N_0$ die \textit{Restzeit} jeder Transition angibt.
+  Ein \emph{Zustand} von~$N$ ist ein Tupel $(M, \resTime)$, wobei~$M$ eine Markierung ist und $\resTime : T \to \N \cup \{ \infty \}$ die \textit{Restzeit} jeder Transition angibt.
   Es gibt zwei verschiedene Schaltschritte:
   \begin{align*}
     (M, \resTime) \activeTransition{\sigma} (M, \resTime') & \coloniff
@@ -1229,9 +1233,17 @@
     M \activeTransition{t} M' \wedge \tag{\emph{Transition}} \\
     & \wedge \resTime'(t') = \begin{cases}
       \tau(t') & \text{falls $\neg (M \activeTransition{t'}) \wedge M' \activeTransition{t'}$} \\
-      \resTime(t') & \text{sonst}
+      \resTime(t') & \text{falls $M \activeTransition{t'} \wedge M' \activeTransition{t'}$} \\
+      \infty & \text{falls $\neg (M' \activeTransition{t'})$}
     \end{cases}
   \end{align*}
+  Der Anfangszustand ist $(M_N, \resTime_N)$, wobei
+  \[
+    \resTime_N(t) \coloneqq \begin{cases}
+      \tau(t) & \text{falls } M_N \activeTransition{t} \\
+      \infty & \text{falls } \neg (M_N \activeTransition{t})
+    \end{cases}
+  \]
 \end{defn}
 
 % §7.3 Netze mit Prioritäten
