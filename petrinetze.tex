@@ -55,6 +55,8 @@
 
 \maketitle{Zusammenfassung Petrinetze}
 
+Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Walter Vogler im Wintersemester 2016/17.
+
 % §2. Grundbegriffe
 
 % 2.1
@@ -85,7 +87,7 @@
 \end{defn}
 
 \begin{defn}
-  $(x, y) \in S \times T \cup T \times S$ bilden eine \emph{Schlinge} falls $(x, y) \in F$ und $(y, x) \in F$.
+  $(s, t) \in S \times T$ bilden eine \emph{Schlinge} falls $\{ (s, t), (t, s) \} \subseteq F$
 \end{defn}
 
 \begin{defn}
@@ -135,6 +137,9 @@
   Für $w = t_1 \cdots t_n \in T^{*}$ und Markierungen~$M$ und~$M'$ gilt
   \[ M \activeTransition{w} M' \coloniff M \activeTransition{t_1} M_1 \activeTransition{t_2} \cdots \activeTransition{t_{n-1}} M_{n-1} \activeTransition{t_n} M' \]
   für (eindeutig bestimmte) Markierungen $M_1, \ldots, M_{n-1}$. \\
+\end{defn}
+
+\begin{defn}
   Ein Wort $w \in T^{*}$ heißt \emph{Schaltfolge} (\textit{firing sequence}) von~$N$, notiert $M_N \activeTransition{w}$, falls $\ex{M'} M_N \activeTransition{w} M'$.
 \end{defn}
 
@@ -242,7 +247,7 @@
 \end{defn}
 
 \begin{defn}
-  Die \emph{Sprache} eines beschrifteten Netzes~$N$ ist
+  Die \emph{Sprache} eines beschrift. Netzes~$N$ ist
   \[
     L(N) \coloneqq \Set{v \in \Sigma^{*}}{M_n \labelledTransition{v}}.
   \]
@@ -251,10 +256,8 @@
 % 2.12
 \begin{defn}
   Ein \emph{beschriftetes Netz mit Endmarkierung} ist ein Tupel $N = (S, T, W, M_N, \ell, \Fin)$ wobei
-  \begin{itemize}
-    \item $(S, T, W, M_N, \ell)$ ein beschriftetes Netz und
-    \item $\Fin \subseteq \Markings(S)$ eine endliche Menge von \textit{Endmarkierungen} ist.
-  \end{itemize}
+  $(S, T, W, M_N, \ell)$ ein beschriftetes Netz und
+  $\Fin \subseteq \Markings(S)$ eine endl. Menge von \textit{Endmarkierungen} ist.
   Die entspr. Sprache ist $L_\fin(N) \coloneqq \Set{v \in \Sigma^{*}}{\ex{M \in \Fin} M_N \activeTransition{v} M}$.
 \end{defn}
 
