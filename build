@@ -11,8 +11,12 @@ fi
 
 function build() {
   mkdir -p output
-  pdflatex -output-directory output "$1.tex"
-  cp "output/$1.pdf" .
+  if pdflatex -interaction=nonstopmode -output-directory output "$1.tex"; then
+    cp "output/$1.pdf" .
+  else
+    echo "\n  === ERROR WHILE COMPILING (SEE ABOVE) ===" >&1
+    exit 1
+  fi
 }
 
 if [ "$1" == "--all" -o "$1" == "-a" ]; then
