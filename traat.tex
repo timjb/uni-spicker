@@ -131,7 +131,8 @@ Dies ist eine übersetzte Zusammenfassung des Buches Term Rewriting and All That
 \end{thm}
 
 \begin{bem}
-  Dies liefert einen einfachen Algorithmus, um $x \zzEq y$ zu entscheiden: Reduziere die Terme~$x$ und~$y$ zu Normalformen~$\NF{x}$ bzw.~$\NF{y}$ und vergleiche diese.
+  Dies liefert einen einfachen Algorithmus, um $x \zzEq y$ zu entscheiden:
+  Reduziere die Terme~$x$ und~$y$ zu Normalformen~$\NF{x}$ bzw.~$\NF{y}$ und vergleiche diese.
 \end{bem}
 
 % §2.2. Wohlfundierte Induktion
@@ -233,16 +234,20 @@ Dies ist eine übersetzte Zusammenfassung des Buches Term Rewriting and All That
   \end{itemize}
 \end{defn}
 
-\begin{lem}
-  Falls ${\to_1} \leq {\to_2} \leq {\xrightarrow{*}_1}$, so gilt ${\xrightarrow{*}_1} = {\xrightarrow{*}_2}$.
-  Ist zusätzlich~$\to_2$ (stark) konfluent, so auch ${\to_1}$.
-\end{lem}
+\begin{bem}
+  starke $\implies$ schwache/normale $\implies$ lokale Konfluenz
+\end{bem}
 
 \begin{lem}
-  \begin{itemize}
-    \item Stark konfluente Relationen sind konfluent.
-    \item Eine terminierende Rel. ist konfluent, falls sie lokal konfluent ist.
-  \end{itemize}
+  \begin{minipage}[t]{0.8 \linewidth}
+    Falls ${\to_1} \leq {\to_2} \leq {\xrightarrow{*}_1}$, so gilt ${\xrightarrow{*}_1} = {\xrightarrow{*}_2}$. \\
+    Ist zusätzlich~$\to_2$ (stark) konfluent, so auch ${\to_1}$.
+  \end{minipage}
+\end{lem}
+
+% 2.7.2
+\begin{lem}[\emph{Newman}]
+  Eine terminierende Relation ist genau dann konfluent, falls sie lokal konfluent ist.
 \end{lem}
 
 % §2.7.1. Kommutation
@@ -371,7 +376,7 @@ Dies ist eine übersetzte Zusammenfassung des Buches Term Rewriting and All That
 \begin{defn}
   Eine Relation~$\equiv$ auf~$T(\Sigma, V)$ heißt
   \begin{itemize}
-    \item \emph{abgeschlossen unter Ersetzungen}, falls $s = t \implies \sigma(s) = \sigma(t)$
+    \item \emph{abgeschlossen unter Ersetzungen}, falls $s \equiv t \implies \sigma(s) \equiv \sigma(t)$
     \item \emph{abgeschlossen unter $\Sigma$-Operationen}, falls
     \[
       s_1 \equiv t_1, \ldots, s_n \equiv t_n \implies f(s_1, \ldots, s_n) \equiv f(t_1, \ldots, t_n)
@@ -1226,5 +1231,109 @@ Dies ist eine übersetzte Zusammenfassung des Buches Term Rewriting and All That
   $s \kbo t$ ist in polynomieller Zeit (in~$s$ und~$t$) entscheidbar.
   % zweiter Teil ausgelassen
 \end{prop}
+
+% §6. Konfluenz
+\section{Konfluenz}
+
+% §6.1 Das Entscheidungsproblem
+
+\begin{problem}[\emph{Konfluenz}]
+  Gegeben ein TUS~$R$.
+  Frage: Ist~$R$ konfluent?
+\end{problem}
+
+% 6.1.1
+\begin{satz}
+  Das Konfluenz-Problem ist unentscheidbar.
+\end{satz}
+
+\begin{beweisskizze}
+  Sei $E$ eine Gleichungsmenge mit $\Var(l) = \Var(r)$ für alle $l \ident r \in E$ und unentscheidbarem Grundwortproblem über~$E$.
+  Für Terme $t, s \in T(\Sigma, \emptyset)$ betrachte das TUS
+  \[ R_{st} \coloneqq E \cup E^{-1} \cup \{ a \to s, a \to t \}. \]
+  Dann gilt: $R_{st}$ ist konfluent $\iff$ $t \ident_E s$
+\end{beweisskizze}
+
+% §6.2
+\subsection{Kritische Paare}
+
+\begin{situation}
+  Angenommen, der Term $s$ wird für $i = 1, 2$ mittels $l_i \to r_i \in R$ zu~$t_i$ umgeschrieben, \dh{} es gibt je eine Position~$p_i$ und eine Ersetzung $\sigma_i$ mit
+  \[
+    s|_{p_i} = \sigma_i l_i
+    \enspace \text{und} \enspace
+    t_i = s [\sigma_i r_i]_{p_i}.
+  \]
+  Um lokale Konfluenz nachzuweisen, müssen wir zeigen, dass $t_1 \joinable t_2$. \\
+  Wir können drei Fälle unterscheiden:
+  \begin{enumerate}
+    \item
+      $s|_{p_1}$ und $s|_{p_2}$ sind zwei disjunkte Subterme von~$s$, \\
+      \dh{} weder~$p_1$ ist ein Präfix von~$p_2$, noch umgekehrt
+    \item
+      $s|_{p_2}$ ist ein Subterm von $s|_{p_1}$ (bzw. umgekehrt), \\
+      \dh{} $p_2 = p_1 p$ für ein möglicherweise leeres $p \in \N^*$
+      \begin{enumerate}
+        \item
+          \emph{Nichkritischer Überlapp}:
+          $s|_{p_2}$ ist Subterm einer ersetzten Variable in~$l_1$,
+          \dh{} $p = q_1 q_2$, wobei $l_i|_{q_1} \in V$.
+        \item
+          \emph{Kritischer Überlapp}:
+          $l_1$ und $l_2$ überlappen, \\
+          \dh{} $p \in \Pos(l_1)$ und $l_1|_p \not\in V$.
+      \end{enumerate}
+  \end{enumerate}
+\end{situation}
+
+\begin{lem}
+  \begin{itemize}
+    \item In den Fällen 1 und 2a gilt $t_1 \joinable t_2$.
+    \item Im Fall 2b gilt $t_1 \joinable t_2$, falls $t_1|_{p_1} \!\!=\! \sigma_1 r_1 \,\,\joinable\,\, t_2|_{p_1} \!=\! (s|_{p_1}) [\sigma_2 r_2]_p$.
+  \end{itemize}
+\end{lem}
+
+% 6.2.1
+\begin{defn}
+  Seien $l_1 \to r_1, l_2 \to r_2 \in E$ Regeln mit so umbenannten Variablen, dass $(\Var(l_1) \cup \Var(r_1)) \cap (\Var(l_2) \cup \Var(r_2)) = \emptyset$. \\
+  Sei $p \in \Pos(l_1)$ mit $l_1|_p \not\in V$ und~$\theta$ eine allgemeinste Lösung von $l_1|_p =^{?} l_2$.
+  Dann heißt $(\theta r_1, (\theta l_1)[\theta r_2]_p)$ ein \emph{kritisches Paar}.
+\end{defn}
+
+\begin{acht}
+  Bei den beiden Regeln $l_1 \to r_1$ und $l_2 \to r_2$ kann es sich auch um Kopien derselben Regel handeln!
+\end{acht}
+
+% Lemma 6.2.3
+\begin{beob}
+  Im Fall 2b gibt es ein kritisches Paar $(k_1, k_2)$ (konstruiert aus den beiden gegebenen Gleichungen zusammen mit~$p$ wie oben) und eine Ersetzung~$\tau$ mit $t_1|_{p_1} = \tau k_1$ und $t_2|_{p_1} = \tau k_2$.
+\end{beob}
+
+% 6.2.4
+\begin{satz}
+  Ein TUS ist genau dann lokal konfluent, falls für alle kritischen Paare $(k_1, k_2)$ gilt, dass $k_1 \joinable k_2$.
+\end{satz}
+
+% 6.2.5
+Da für terminierende TUS Konfluenz und lokale Konfluenz übereinstimmen, folgt:
+
+% 6.2.6
+\begin{kor}
+  Die Konfluenz eines endlichen, terminierenden TUS ist entscheidbar.
+\end{kor}
+
+\begin{beweisskizze}
+  Es gibt nur endlich viele kritische Paare $(k_1, k_2)$ bis auf $\alpha$-Äquivalenz.
+  Prüfe für jedes solche Paar, ob $\NF{k_1} = \NF{k_2}$.
+  \begin{itemize}
+    \item Falls ja: Dann gilt $k_1 \joinable k_2$.
+    \item Falls nein: Dann ist das TUS nicht konfluent, denn es gilt: \\
+    $(\NF{k_1}) \reducesFrom k_1 \from l_1 \to k_2 \reducesTo (\NF{k_2})$ aber nicht $(\NF{k_1}) \joinable (\NF{k_2})$.
+  \end{itemize}
+\end{beweisskizze}
+
+% ausgelassen: Abschnitt über kritische Paare in ML
+
+% TODO: §6.3 Orthogonalität
 
 \end{document}

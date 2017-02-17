@@ -42,7 +42,6 @@
 \newtheorem*{gegenbsp}{Gegenbsp}
 \newtheorem*{gegenbspe}{Gegenbspe}
 \newtheorem*{satz}{Satz}
-\newtheorem*{beweis}{Beweis}
 \newtheorem*{frage}{Frage}
 \newtheorem*{fragen}{Fragen}
 \newtheorem*{situation}{Situation}
@@ -103,7 +102,9 @@
 \newtheorem*{bem}{Bem}
 \newtheorem*{konstr}{Konstr}
 \newtheorem*{bemn}{Bemn}
+\newtheorem*{beweis}{Beweis}
 \newtheorem*{beweisidee}{Beweisidee}
+\newtheorem*{beweisskizze}{Beweisskizze}
 \newtheorem*{umformulierung}{Umformulierung}
 \newtheorem*{referenz}{Ref}
 \newtheorem*{teaser}{Teaser}
