@@ -41,6 +41,7 @@
 \newcommand{\strictLpo}{>_\text{lpo}} % lexikographische Pfadordnung
 \newcommand{\strictMpo}{>_\text{mpo}} % Multimengenpfadordnung
 \newcommand{\kbo}{>_\text{kbo}} % Knuth-Bendix-Ordnung
+\newcommand{\parallelTo}{\rightrightarrows} % parallele Reduktion
 
 % Kleinere Klammern
 \delimiterfactor=701
@@ -234,9 +235,9 @@ Dies ist eine übersetzte Zusammenfassung des Buches Term Rewriting and All That
   \end{itemize}
 \end{defn}
 
-\begin{bem}
-  starke $\implies$ schwache/normale $\implies$ lokale Konfluenz
-\end{bem}
+\begin{lem}
+  starke Konfluenz $\implies$ Konfluenz
+\end{lem}
 
 \begin{lem}
   \begin{minipage}[t]{0.8 \linewidth}
@@ -1334,6 +1335,105 @@ Da für terminierende TUS Konfluenz und lokale Konfluenz übereinstimmen, folgt:
 
 % ausgelassen: Abschnitt über kritische Paare in ML
 
-% TODO: §6.3 Orthogonalität
+% §6.3 Orthogonalität
+\subsection{Orthogonalität}
+
+% 6.3.1
+\begin{defn}
+  Eine Umschreibungsregel $l \to r$ heißt \emph{links-/ rechts-linear}, falls jede Variable auf der linken/rechten Seite höchstens ein Mal auftritt.
+  Sie heißt \emph{linear}, falls sie links- und rechts-linear ist. \\
+  Ein TUS~$R$ ist (links-/rechts-) linear, falls alle Regeln es sind.
+\end{defn}
+
+% 6.3.2
+\begin{defn}
+  Zwei Terme $s_1$, $s_2$ heißen \emph{stark zusammenführbar}, falls
+  \[
+    \ex{t_1, t_2} \quad
+    s_1 \toOrEq{} t_1 \reducesFrom{} s_2
+    \quad \wedge \quad
+    s_1 \reducesTo{} t_2 \fromOrEq{} s_2.
+  \]
+\end{defn}
+
+% 6.3.3
+\begin{lem}[\emph{Starke-Konfluenz-Lemma}]
+  Ist $R$ linear und ist jedes kritische Paar in~$R$ stark zusammenführbar, so ist~$R$ stark konfluent.
+\end{lem}
+
+% 6.3.6
+\begin{defn}
+  Ein TUS heißt \emph{orthogonal}, falls es links-linear ist und keine kritischen Paare besitzt.
+\end{defn}
+
+% 6.3.7
+\begin{defn}
+  \begin{itemize}
+    \item Eine Menge~$P$ von Positionen heißt \emph{parallel}, falls $p \parallel q$ für alle $p, q \in P$ mit $p \not= q$.
+    \item
+      Sei $s$ ein Term und $P = \{ p_1, \ldots, p_n \} \subseteq \Pos(s)$ parallel. \\
+      Sei ein Term $t_p$ für jedes $p \in P$ gegeben.
+      Dann ist
+      \[ s[t_p]_{p \in P} \coloneqq s[t_{p_1}]_{p_1} \cdots [t_{p_n}]_{p_n} \]
+    \item
+      Sei für jedes $p \in P$ eine Regel $l_p \to r_p \in R$ und eine Ersetzung~$\sigma_p$ mit $s|_p = \sigma_p l_p$ gegeben.
+      Dadurch ist ein
+      \[
+        \text{\emph{paralleler Reduktionsschritt}} \qquad
+        s \, \parallelTo_R^P \, s [\sigma_p r_p]_{p \in P}
+      \]
+      gegeben.
+      Die so definierte Reduktion ist
+      \[
+        {\parallelTo} \coloneqq {\parallelTo_R} \coloneqq \cup_{s \in T(\Sigma, V)} \cup_{P \subseteq \Pos(s)} \Set{(s, t)}{s \parallelTo_R^P t}.
+      \]
+  \end{itemize}
+\end{defn}
+
+\begin{fakt}
+  ${\to} \subseteq {\parallelTo} \subseteq {\reducesTo}$
+\end{fakt}
+
+% ausgelassen: Lemma 6.3.9
+
+\begin{thm}
+  Ist~$R$ orthogonal, so hat ${\parallelTo}_R$ die Diamant-Eigenschaft.
+\end{thm}
+
+% 6.3.11
+\begin{kor}
+  Jedes orthogonale TUS ist konfluent.
+\end{kor}
+
+% 6.3.13
+\begin{defn}
+  Ein TUS~$R$ ist ein \emph{Konstruktor-TUS}, falls eine Zerlegung $\Sigma = \Sigma_c \sqcup \Sigma_d$ existiert, sodass
+  $l = f(t_1, \ldots, t_m)$ mit $f \in \Sigma_d^{(n)}$ und $t_1, \ldots, t_m \in T(\Sigma_c, V)$ für jedes $l \to r \in R$.
+\end{defn}
+
+\begin{bem}
+  Jedes Programm in einer ML-artigen funktionalen Programmiersprache lässt sich als Konstruktor-TUS schreiben.
+  Dieses hat genau dann keine kritischen Paare, falls keine zwei Definitionen überlappen.
+  Es folgt, dass die Auswertung in funktionalen Programmiersprachen deterministisch ist.
+\end{bem}
+
+% §6.4. Beyond orthogonality
+
+% 6.4.5
+\begin{defn}
+  Ein TUS heißt \emph{parallel abgeschlossen}, falls $u_2 \parallelTo u_1$ für alle kritischen Paare $(u_1, u_2)$ gilt.
+\end{defn}
+
+% ausgelassen: Definition 6.4.6 und Lemma 6.4.7
+
+% 6.4.8
+\begin{thm}
+  Ist $R$ links-linear und parallel abgeschlossen, so besitzt ${\parallelTo}$ die Diamant-Eigenschaft.
+\end{thm}
+
+% 6.4.9
+\begin{kor}
+  Links-lineare, parallel abgeschlossene TUSe sind konfluent.
+\end{kor}
 
 \end{document}
