@@ -1,0 +1,169 @@
+\documentclass{cheat-sheet}
+
+\pdfinfo{
+  /Title (Zusammenfassung Algorithmen für NP-harte Probleme)
+  /Author (Tim Baumann)
+}
+
+%\usepackage{algorithmicx}
+%\usepackage[noend]{algpseudocode}
+%\usepackage{tikz}
+%\tikzset{
+%  font={\fontsize{6pt}{12}\selectfont}
+%}
+
+\newcommand{\Instances}{\mathcal{X}} % set of instances (of an optimization problem)
+\newcommand{\Feasible}{\mathcal{F}} % set of feasible solutions (of an optimization problem)
+\newcommand{\ObjFun}{Z} % objective function (of an optimization problem)
+\newcommand{\OptTuple}{(\Instances{}, \Feasible{}, \ObjFun{})} % tuple defining an optimization problem
+\DeclareMathOperator{\Opt}{Opt} % optimal value
+\newcommand{\size}[1]{\abs{#1}} % Größe (eines Terms)
+\DeclareMathOperator{\NPO}{NPO} % non-deterministic polynomial-time optimization problem
+\DeclareMathOperator{\PO}{PO} % polynomial-time optimization problem
+\newcommand{\Prob}{\mathcal{P}} % Optimierungsproblem
+\newcommand{\ManyOneRed}{\leq_m} % Many-To-One-Reduzierbarkeit
+\newcommand{\TuringRed}{\leq_T} % Turing-Reduzierbarkeit
+\newcommand{\TuringEq}{\equiv_T} % Turing-Äquivalenz
+
+% Kleinere Klammern
+\delimiterfactor=701
+
+\setlength{\tabcolsep}{2pt}
+
+\begin{document}
+
+\raggedcolumns % stretche Inhalt nicht über die gesamte Spaltenhöhe
+
+\maketitle{Algorithmen für NP-harte Probleme}
+
+Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torben Hagerup im Sommersemester 2017.
+
+% §1. Introduction
+
+% §2. Basic Definitions
+
+% §2.1. Basic Definitions
+
+% 2.1
+\begin{defn}
+  Ein \emph{Optimierungsproblem} ist ein Tupel $\OptTuple$ wobei
+  \begin{itemize}
+    \item $\Instances$ eine Menge von \emph{Instanzen},
+    \item $\Feasible$ eine Abbildung ist, welche jeder Instanz~$x$ eine Menge $\Feasible(x)$ von \emph{möglichen Lösungen} zuordnet und
+    \item $\ObjFun$ eine reellwertige Abbildung (die \emph{Zielfunktion}) ist, die jedem $x \in \Instances$ und $y \in \Feasible(x)$ einen \textit{Zielwert} zuordnet.
+  \end{itemize}
+\end{defn}
+
+% 2.2
+\begin{defn}
+  Eine \emph{optimale Lösung} eines Optimierungsproblems~$\OptTuple$ zu einer Instanz~$x \in \Instances$ ist ein $y \in \Feasible(x)$ mit
+  \[ \ObjFun(x, y) = \min_{y \in \Feasible(x)} Z(x, y) =: \Opt(x). \]
+\end{defn}
+
+% 2.3
+\begin{defn}
+  Ein Algorithmus \emph{löst} ein Optimierungsproblem~$\OptTuple$, falls er für jedes $x \in \Instances$
+  \begin{itemize}
+    \item eine optimale Lösung $y \in \Feasible(x)$ berechnet, falls solch eine existiert,
+    \item "`unmöglich"' ausgibt, falls keine Lösung existiert oder
+    \item "`möglich, aber keine optimale Lösung"' sonst.
+  \end{itemize}
+\end{defn}
+
+% 2.4
+\begin{defn}
+  \emph{$\NPO$} ist die Klasse aller Optimierungsprobleme~$\OptTuple$ mit
+  \begin{itemize}
+    \item $\Instances{} \in P$
+    \item Es gibt ein Polynom~$p$, sodass für alle $x \in X$
+    \begin{itemize}
+      \item $\size{y} \leq p(\size{x})$ für alle $y \in \Feasible(x)$ und
+      \item für alle Wörter~$w$ der Länge $\size{w} \leq p(\size{x})$ in polynomieller Zeit~(in~$\size{x}$) entscheidbar ist, ob $w \in \Feasible(x)$.
+    \end{itemize}
+    \item Die Funktion $\ObjFun$ ist in polynomieller Zeit berechenbar.
+  \end{itemize}
+\end{defn}
+
+% 2.5
+\begin{defn}
+  $\text{\emph{$\PO$}} \subseteq \NPO$ ist die Subklasse für die ein Lösungsalgorithmus existiert, der in Polynomialzeit läuft.
+\end{defn}
+
+% 2.6
+\begin{beob}
+  $\PO = \NPO \implies \text{P} = \text{NP}$
+\end{beob}
+
+% §2.2. Evaluation and Decision Problems
+
+% 2.7
+\begin{defn}
+  Sei $\Prob = \OptTuple$ ein Optimierungsproblem.
+  \begin{itemize}
+    \item Das zugeh. \emph{Auswertungsproblem}~$\Prob_E$ ist: Gegeben $x \in \Instances$,
+    \begin{itemize}
+      \item berechne $\Opt(x)$, falls $x$ eine optimale Lösung besitzt,
+      \item berechne $\inf \Feasible(x) \in \R \cup \{ -\infty \}$, falls es Lösungen gibt, aber keine optimale
+      \item oder gib "`unmöglich"' aus, falls keine Lösung existiert.
+    \end{itemize}
+    \item Das zugeh. \emph{Entscheidungsproblem}~$\Prob_D$ ist: Gegeben $x \in \Instances$ und $k \in \Q$, gibt es eine Lösung $y \in \Feasible(x)$ mit $Z(x, y) \leq k$?
+  \end{itemize}
+\end{defn}
+
+% 2.8
+\begin{defn}
+  $\Prob \in \NPO \implies \Prob_D \in \mathrm{NP}$
+\end{defn}
+
+% 2.9
+\begin{defn}
+  \begin{itemize}
+    \item Ein Entscheidungsproblem~$\Prob_1$ ist (in Polynomialzeit) auf ein Entscheidungsproblem~$\Prob_2$ \emph{many-to-one-reduzierbar} (notiert $\Prob_1 \ManyOneRed \Prob_2$) falls eine (in Polynomialzeit) berechenbare Funktion $f : \{ \text{Instanzen von~$\Prob_1$} \} \to \{ \text{Instanzen von~$\Prob_2$} \}$ existiert, sodass die Antwort auf eine Instanz~$x$ von~$\Prob_1$ gleich der Antwort auf die Instanz $f(x)$ von~$\Prob_2$ ist.
+    \item Ein Problem $\Prob_1$ ist (in Polynomialzeit) auf ein Problem~$\Prob_2$ \emph{Turing-reduzierbar} (notiert $\Prob_1 \TuringRed \Prob_2$) falls ein Algorithmus existiert, der unter Verwendung eines Orakels für~$\Prob_2$ das Problem~$\Prob_1$ (in Polynomialzeit) löst.
+  \end{itemize}
+\end{defn}
+
+% 2.12
+\begin{beob}
+  $
+    \Prob_1 \ManyOneRed \Prob_2 \implies
+    \Prob_1 \TuringRed \Prob_2
+  $
+\end{beob}
+
+% 2.10
+\begin{beob}
+  Für $\Prob \in \NPO$ gilt $\Prob_D \TuringRed \Prob_E \TuringRed \Prob$.
+\end{beob}
+
+% 2.11 und 2.13
+\begin{satz}
+  Habe $\Prob = \OptTuple \in \NPO$ eine Zielfunktion mit Werten in den ganzen Zahlen.
+  \begin{itemize}
+    \item Es gilt $\Prob_D \TuringEq \Prob_E$.
+    \item Angenommen, $\Prob_D$ ist NP-vollständig. Dann gilt $\Prob \TuringEq \Prob_D$.
+  \end{itemize}
+\end{satz}
+
+% 2.14
+\begin{defn}
+  Ein Optimierungsproblem~$\Prob$ heißt \emph{NP-hart}, falls $\Prob' \TuringRed \Prob$ für jedes Entscheidungsproblem $\Prob'$ in~NP.
+\end{defn}
+
+% 2.15
+\begin{beob}
+  $\Prob \in \NPO$, $\Prob$ NP-vollständig $\implies$ $\Prob$ NP-hart
+\end{beob}
+
+% §3. The Greedy Strategy
+
+\begin{bspe}
+  \begin{itemize}
+    \item Minimum Vertex Cover
+    \item Cabin Manager's Problem
+    \item Maximum Independent Set
+    \item Minimum Makespan Scheduling
+  \end{itemize}
+\end{bspe}
+
+\end{document}
