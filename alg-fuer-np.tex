@@ -25,6 +25,12 @@
 \newcommand{\TuringRed}{\leq_T} % Turing-Reduzierbarkeit
 \newcommand{\TuringEq}{\equiv_T} % Turing-Äquivalenz
 
+% Hervorhebung von Algorithmen und Problemen
+\definecolor{AlgorithmColor}{rgb}{0.7,0.2,0.0}
+\newcommand{\Algorithm}[1]{\textcolor{AlgorithmColor}{\textbf{#1}}}
+\definecolor{ProblemColor}{rgb}{0.1,0.5,0.4}
+\newcommand{\Problem}[1]{\textcolor{ProblemColor}{\textbf{#1}}}
+
 % Kleinere Klammern
 \delimiterfactor=701
 
@@ -156,14 +162,68 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
 \end{beob}
 
 % §3. The Greedy Strategy
+\section{Die Gierige Strategie}
 
-\begin{bspe}
-  \begin{itemize}
-    \item Minimum Vertex Cover
-    \item Cabin Manager's Problem
-    \item Maximum Independent Set
-    \item Minimum Makespan Scheduling
-  \end{itemize}
-\end{bspe}
+% §3.1 A cabin manager's problem
+
+\begin{problem}[Cabin Manager's Problem]
+  MIS auf Intervallgraphen
+\end{problem}
+
+% §3.2 Maximum Independent Set for Interval Models
+
+\begin{alg}[\Algorithm{Greedy MIS für Intervallgraphen}] \mbox{}\\
+  Beginne mit $C \coloneqq \emptyset$, füge dann wiederholt gierig das vom aktuellen~$C$ unabhängige Intervall mit dem kleinsten Endpunkt zu~$C$ hinzu, bis es kein solches Intervall mehr gibt.
+\end{alg}
+
+\begin{satz}
+  Dieser Algorithmus berechnet tatsächlich ein MIS.
+\end{satz}
+
+% §3.3. Minimum Makespan Scheduling
+
+\begin{alg}[\Algorithm{Greedy Minimum Makespan Scheduling}] \mbox{}\\
+  Gehe die Jobs in nach Dauer absteigender Reihenfolge durch, weise jeden Job dem Arbeiter zu, der bisher am wenigsten ausgelastet ist.
+\end{alg}
+
+\section{Probleme}
+
+\begin{problem}[\Problem{Maximum Independent Set}, MIS]
+  Geg. einen unger. Graphen~$G = (V, E)$, berechne eine \textit{unabhängige Menge}~$M \subseteq V$, \dh{}
+  \[
+    \fa{v \in M} \fa{w \in V} (v, w) \in E \implies w \not\in M,
+  \]
+  die maximale Größe~$\size{M}$ unter allen unabhängigen Mengen besitzt.
+\end{problem}
+
+\begin{problem}[\Problem{Minimum Vertex Cover}, MVC]
+  Geg. einen unger. Graphen~$G = (V, E)$, berechne eine \textit{Knotenüberdeckung}~$C$, \dh{}
+  \[
+    \fa{v, w \in V} (v, w) \in E \implies v \in C \vee w \in C,
+  \]
+  die minimale Größe~$\size{C}$ unter allen Knotenüberdeckungen besitzt.
+\end{problem}
+
+\begin{defn}
+  Ein \emph{Intervallmodell} eines Graphen $G = (V, E)$ ist eine Abbildung $\phi : E \to \Set{\cinterval{a}{b}}{a, b \in \Q}$, sodass
+  \[
+    \fa{v \neq w \in V} \enspace
+    (v, w) \in E \iff \phi(v) \cap \phi(w) \neq \emptyset.
+  \]
+  Ein Graph heißt \emph{Intervallgraph}, falls er ein Intervallmodell besitzt.
+\end{defn}
+
+\begin{problem}[\Problem{Minimum Makespan Scheduling}]
+  Seien $p, n \in \N$ und $l_1, \ldots, l_n \in \R_{> 0}$ gegeben.
+  Für $f : \{ 1, \ldots, n \} \to \{ 1, \ldots, p \}$ setze
+  \[ t(f) \coloneqq \max_{1 \leq i \leq p} \sum_{j \in f^{-1}(i) l_j}. \]
+  Berechne das~$f$, für das $t(f)$ minimal wird!
+\end{problem}
+
+\begin{interp}
+  $p$ ist die Anzahl von \textit{Arbeitern},
+  $l_1, \ldots, l_n$ sind die Längen von zu erledigenden \textit{Jobs}
+  und $t(f)$ ist die \textit{Gesamtdauer} bei der durch~$f$ gegebenen Verteilung der Jobs auf die Arbeiter an.
+\end{interp}
 
 \end{document}
