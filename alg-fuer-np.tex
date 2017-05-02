@@ -12,6 +12,8 @@
 %  font={\fontsize{6pt}{12}\selectfont}
 %}
 
+\usepackage{nicefrac}
+
 \newcommand{\Instances}{\mathcal{X}} % set of instances (of an optimization problem)
 \newcommand{\Feasible}{\mathcal{F}} % set of feasible solutions (of an optimization problem)
 \newcommand{\ObjFun}{Z} % objective function (of an optimization problem)
@@ -24,6 +26,7 @@
 \newcommand{\ManyOneRed}{\leq_m} % Many-To-One-Reduzierbarkeit
 \newcommand{\TuringRed}{\leq_T} % Turing-Reduzierbarkeit
 \newcommand{\TuringEq}{\equiv_T} % Turing-Äquivalenz
+\DeclareMathOperator*{\argmax}{arg\,max}
 
 % Hervorhebung von Algorithmen und Problemen
 \definecolor{AlgorithmColor}{rgb}{0.7,0.2,0.0}
@@ -186,6 +189,32 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
   Gehe die Jobs in nach Dauer absteigender Reihenfolge durch, weise jeden Job dem Arbeiter zu, der bisher am wenigsten ausgelastet ist.
 \end{alg}
 
+\begin{satz}
+  Die Lösung, die der Algorithmus liefert, ist höchstens um den Faktor
+  \[ \tfrac{4}{3} - \tfrac{1}{3 p} \]
+  schlechter als eine optimale Lösung.
+\end{satz}
+
+\begin{beweisskizze}
+  Sei $t$ die Länge des letzten Jobs des am längsten beschäftigten Arbeiters und $z^*$ die minimale Gesamtdauer.
+  \begin{itemize}
+    \item Falls $t > \nicefrac{z^*}{3}$, so hat der Algorithmus sogar eine optimale Lösung gefunden.
+    \item Falls $t \leq \nicefrac{z^*}{3}$, so folgt die Behauptung durch geeign. Abschätzen.
+  \end{itemize}
+\end{beweisskizze}
+
+% §3.4. Maximum Knapsack
+
+\begin{alg}[\Algorithm{Greedy Knapsack Packing}]
+  Gehe die Sachen absteigend nach ihrem Nutzen-Kosten-Verhältnis~$\nicefrac{v_i}{w_i}$ durch und packe jede Sache ein, die noch in den Rucksack passt.
+  Sei~$z$ der Gesamtnutzen des so zusammengestellten Sets.
+  Falls eine Sache mit Nutzen $v_j > z$ (und $w_j \leq W$) nicht eingepackt wurde, so räume den Rucksack wieder aus und packe als einziges diese Sache ein.
+\end{alg}
+
+\begin{satz}
+  Der Gesamtnutzen der durch den Algorithmus erhaltenen Lösung ist mindestens halb so groß wie der Gesamtnutzen einer optimalen Lösung.
+\end{satz}
+
 \section{Probleme}
 
 \begin{problem}[\Problem{Maximum Independent Set}, MIS]
@@ -224,6 +253,21 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
   $p$ ist die Anzahl von \textit{Arbeitern},
   $l_1, \ldots, l_n$ sind die Längen von zu erledigenden \textit{Jobs}
   und $t(f)$ ist die \textit{Gesamtdauer} bei der durch~$f$ gegebenen Verteilung der Jobs auf die Arbeiter an.
+\end{interp}
+
+\begin{bem}
+  MMS ist NP-hart, da das zugeh. Entscheidungsproblem Bin Packing bekannterweise NP-hart ist.
+\end{bem}
+
+\begin{problem}[\Problem{Maximum Knapsack}]
+  Seien $n \in \N$ und $v_1, \ldots, v_n$, $w_1, \ldots, w_n, W \in \R_{> 0}$ gegeben.
+  Die Menge der möglichen Lsgn sei
+  \[ \Feasible \coloneqq \Set{S \subseteq \{ 1, \ldots, n \}}{{\sum}_{i \in S} w_i \leq W}. \]
+  Gesucht: ${\argmax}_{S \in \Feasible} {\sum}_{i \in S} v_i$
+\end{problem}
+
+\begin{interp}
+  Man wählt unter $n$ Sachen mit jeweils einem \textit{Gewicht}~$w_i$ und einem \textit{Nutzwert}~$v_i$ diejenigen aus, die man in einen Rucksack packt, sodass das Gesamtgewicht eine festgelegte Grenze~$W$ nicht übersteigt und der Nutzen maximal wird.
 \end{interp}
 
 \end{document}

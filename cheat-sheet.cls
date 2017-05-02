@@ -97,7 +97,6 @@
 \newtheorem*{motivation}{Motivation}
 \newtheorem*{wdh}{Wiederholung}
 \newtheorem*{gesucht}{Gesucht}
-\newtheorem*{interp}{Interpretation}
 
 \theoremstyle{remark}
 \newtheorem*{bem}{Bem}
@@ -109,6 +108,7 @@
 \newtheorem*{umformulierung}{Umformulierung}
 \newtheorem*{referenz}{Ref}
 \newtheorem*{teaser}{Teaser}
+\newtheorem*{interp}{Interpretation}
 
 % Listenstil
 \usepackage{paralist} % Für Inline-Listen
