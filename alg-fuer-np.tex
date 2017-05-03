@@ -239,7 +239,7 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
 \section{Probleme}
 
 \begin{problem}[\Problem{Maximum Independent Set}, MIS]
-  Geg. einen unger. Graphen~$G = (V, E)$, berechne eine \textit{unabhängige Menge}~$M \subseteq V$, \dh{}
+  Geg. einen unger. Graphen~$(V, E)$, berechne eine \textit{unabh. Menge}~$M \subseteq V$, \dh{}
   \[
     \fa{v \in M} \fa{w \in V} (v, w) \in E \implies w \not\in M,
   \]
@@ -253,6 +253,12 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
   \]
   die minimale Größe~$\size{C}$ unter allen Knotenüberdeckungen besitzt.
 \end{problem}
+
+\begin{bem}
+  Für einen Graphen $(V, E)$ und eine Teilmenge $S \subseteq V$ gilt: \\
+  $S$ ist eine unabhängige Menge $\iff$ $V \setminus S$ ist ein Vertex Cover \\
+  Die Probleme MIS und MVC sind damit äquivalent.
+\end{bem}
 
 \begin{defn}
   Ein \emph{Intervallmodell} eines Graphen $G = (V, E)$ ist eine Abbildung $\phi : E \to \Set{\cinterval{a}{b}}{a, b \in \Q}$, sodass
