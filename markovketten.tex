@@ -1,0 +1,185 @@
+\documentclass{cheat-sheet}
+
+\pdfinfo{
+  /Title (Zusammenfassung Markovketten)
+  /Author (Tim Baumann)
+}
+
+\usepackage{bbm} % Für 1 mit Doppelstrich (Indikatorfunktion)
+\usepackage{mathtools} % psmallmatrix environment
+\usepackage{nicefrac}
+
+\usepackage{tikz}
+\usetikzlibrary{matrix}
+
+% Kleinere Klammern
+\delimiterfactor=701
+
+% TODO: Include-File für Stochastik
+
+\newcommand{\Alg}{\mathfrak{A}} % (Mengen-)Algebra
+\renewcommand{\P}{\mathbb{P}} % Wahrscheinlichkeitsmaß
+\newcommand{\E}{\mathbb{E}} % Erwartungswert
+\newcommand{\ind}{\mathbbm{1}} % Indikatorfunktion
+%\newcommand{\iid}{i.\,i.\,d.} % identisch unabhängig verteilt
+
+\DeclareMathOperator{\var}{Var} % Varianz
+\DeclareMathOperator{\cov}{Cov} % Kovarianz
+\DeclareMathOperator{\cor}{Cor} % Korrelation
+
+\begin{document}
+
+\raggedcolumns % stretche Inhalt nicht über die gesamte Spaltenhöhe
+
+\maketitle{Zusammenfassung Markovketten}
+
+% Vorlesung vom 4.5.2017
+
+% Kapitel II. Abzählbare Markovketten
+\section{Abzählbare Markovketten}
+
+% §2.1. Rekurrenz und Transienz
+
+\begin{nota}
+  Sei im Folgenden $\{ Z_n \}$ eine Markovkette auf einem abzählbaren Zustandsraum~$E$.
+\end{nota}
+
+% 2.1
+\begin{defn}
+  Für $x \in E$ definiere die Zufallsvariablen
+  \[ \begin{array}{r l}
+    \tau_x^{(1)} & \coloneqq \inf \Set{n > 0}{Z_n = x} \in \N \cup \{ \infty \} \\
+    \tau_x^{(k)} & \coloneqq \inf \Set{n > \tau_x^{(k-1)}}{Z_n = x}, \enspace k > 1.
+  \end{array} \]
+  (Beachte: $\tau_x^{(k)}$ ist eine messbare Abbildung.)
+\end{defn}
+
+\begin{bem}
+  Ferner gilt $\{ \tau_x^{(k)} = n \} \in \sigma(Z_0, Z_1, \ldots, Z_n)$.
+\end{bem}
+
+\begin{defn}
+  Für $x, y \in E$ sei
+  $F(x, y) \coloneqq P(\tau_y^{(i)} < \infty \mid Z_0 = x)$
+\end{defn}
+
+% 2.2
+\begin{lem}
+  Für alle $x, y \in E$ und $k \geq 1$ gilt
+  \[ P(\tau_y^{(k)} < \infty \mid Z_0 = x) = F(x, y) \cdot F(y, y)^{k-1}. \]
+\end{lem}
+
+\begin{nota}
+  $\tilde{\ell}(y) = \sum_{k=j}^\infty \ind \{ Z_k = y \}$
+\end{nota}
+
+Dann gilt $P(\tau_y^{(k)} < \infty \mid Z_0 = x) = P(\tilde{\ell} \geq k \mid Z_0 = x)$
+
+% 2.3
+\begin{defn}
+  Ein Zustand $x \in E$ heißt
+  \begin{itemize}
+    \item \emph{absorbierend}, falls $p(x, x) = 1$,
+    \item \emph{rekurrent}, falls $F(x, x) = 1$ und
+    \item \emph{transient}, falls $F(x, x) < 1$.
+  \end{itemize}
+\end{defn}
+
+\begin{bem}
+  Absorbierende Zustände sind rekurrent.
+\end{bem}
+
+% ausgelassenes  Beispiel: a+1 Zustände nebeneinander, der linke und rechte sind absorbierend, die dazwischen haben eine Übergangswahrscheinlichkeit von 1/2 nach links und 1/2 nach rechts
+
+% ausgelassenes Beispiel: Irrfahrt auf \N
+% Falls $p \leq \nicefrac{1}{2}$, so ist Anfangszustand rekurrent
+% Falls $p > \nicefrac{1}{2}$, so ist Anfangszustand transient
+% Parondo-Paradoxon
+
+\begin{bsp}
+  In der Markovkette
+  \begin{center}\begin{tikzpicture}
+    \matrix [matrix of nodes, column sep=1cm, row sep=0.8cm] {
+      \node (N0) {(0)}; &
+      \node (N1) {(1)}; &
+      \node (N2) {(2)}; &
+      \node (N3) {(3)}; &
+      \node (N4) {\ldots}; \\
+    };
+    \draw[->, bend left=30] (N0) to node [above] {$1$} (N1);
+    \draw[->, bend left=30] (N1) to node [below] {$1 - p$} (N0);
+    \draw[->, bend left=30] (N1) to node [above] {$p$} (N2);
+    \draw[->, bend left=30] (N2) to node [below] {$1 - p$} (N1);
+    \draw[->, bend left=30] (N2) to node [above] {$p$} (N3);
+    \draw[->, bend left=30] (N3) to node [below] {$1 - p$} (N2);
+    \draw[->, bend left=30] (N3) to node [above] {$p$} (N4);
+    \draw[->, bend left=30] (N4) to node [below] {$1 - p$} (N3);
+  \end{tikzpicture}\end{center}
+  ist (0) genau dann rekurrent, falls $p \leq \nicefrac{1}{2}$, ansonsten transient.
+  \TODO{genauer!}
+\end{bsp}
+
+% 2.6
+\begin{defn}
+  Für $y \in E$ sei
+  \[
+    \ell(y) \coloneqq \sum_{k=0}^\infty \ind \{ Z_k = y \}
+  \]
+  die \emph{Anzahl der Besuche in~$y$}.
+  Die \emph{Green'sche Funktion} von $\{ Z_n \}$ ist $G : E \times E \to \cinterval{0}{\infty}$ mit
+  \[
+    G(x, y) \coloneqq \E(\ell(y) \mid Z_0 = x).
+  \]
+\end{defn}
+
+\begin{bem}
+  $G(x, y) = \E \left( \sum_{k=0}^\infty \ind \{ Z_k = y \} \mid Z_0 = x \right) = \sum_{k=0}^\infty P(Z_k = y \mid Z_0 = x) = \delta_{xy} + \sum_{k=1}^\infty p^{(k)}(x, y)$
+\end{bem}
+
+% 2.7
+\begin{satz}
+  Für alle $x, y \in E$ gilt
+  \[
+    G(x, y) = 
+    \begin{cases}
+      \tfrac{F(x, y)}{1 - F(y, y)} & \text{falls $x \neq y$}, \\
+      \tfrac{1}{1 - F(y, y)} & \text{falls $x = y$}. \\
+    \end{cases}
+  \]
+\end{satz}
+
+\begin{kor}
+  $x$ ist rekurrent $\iff$ $G(x, x) = \infty$
+\end{kor}
+
+% 2.8
+\begin{satz}
+  ist $x \in E$ rekurrent und $F(x, y) > 0$, so ist $y$ auch rekurrent und $F(x, y) = F(y, x) = 1$.
+\end{satz}
+
+\iffalse
+% 2.9
+\begin{interp}
+  %Die Aussage kann man wie folgt deuten:
+  $F(x, y) > 0$ bedeutet, dass nach jedem Besuch in~$x$ der Zustand $y$ auch besucht wird mit positiver Wahrscheinlichkeit und die Rekurrenz von~$x$ bedeutet, dass $x$ unendlich oft besucht wird.
+  Der Satz sagt, dass dann auch $y$ unendlich oft besucht wird.
+\end{interp}
+\fi
+
+% 2.9
+\begin{bem}
+  $F(x, y) > 0 \iff \ex{n \geq 1} P^{(n)}(x, y) > 0$
+\end{bem}
+
+% 2.10
+\begin{defn}
+  $\{ Z_n \}$ heißt \emph{irreduzibel}, falls $\fa{x, y \in E} F(x, y) > 0$.
+\end{defn}
+
+% 2.11
+\begin{satz}
+  Sei $\{ Z_n \}$ irreduzibel.
+  Dann sind entweder alle Zustände rekurrent oder alle Zustände transient.
+\end{satz}
+
+\end{document}
