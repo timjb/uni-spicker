@@ -21,7 +21,7 @@
 \renewcommand{\P}{\mathbb{P}} % Wahrscheinlichkeitsmaß
 \newcommand{\E}{\mathbb{E}} % Erwartungswert
 \newcommand{\ind}{\mathbbm{1}} % Indikatorfunktion
-%\newcommand{\iid}{i.\,i.\,d.} % identisch unabhängig verteilt
+\newcommand{\iid}{i.\,i.\,d.} % identisch unabhängig verteilt
 
 \DeclareMathOperator{\var}{Var} % Varianz
 \DeclareMathOperator{\cov}{Cov} % Kovarianz
@@ -181,5 +181,59 @@ Dann gilt $P(\tau_y^{(k)} < \infty \mid Z_0 = x) = P(\tilde{\ell} \geq k \mid Z_
   Sei $\{ Z_n \}$ irreduzibel.
   Dann sind entweder alle Zustände rekurrent oder alle Zustände transient.
 \end{satz}
+
+% Vorlesung vom 9.5.2017
+
+% 2.12
+\begin{satz}
+  Eine irreduzible Kette auf einem endlichen Raum ist immer rekurrent.
+\end{satz}
+
+% §2. Rekurrenz und Transienz von Irrfahrten
+\section{Rekurrenz und Transienz von Irrfahrten}
+
+Sei $\{ Z_n \}$ eine Irrfahrt auf $\Z^d$, \dh{} $p(x, y) = p(0, y - x) =: q(y - x)$.
+
+Mit anderen Worten: Die Zuwächse $\{ Z_n - Z_{n-1} \}_{n \geq 1}$ sind \iid{} Zufallsvariablen.
+
+\begin{bsp}
+  Einfache Irrfahrt auf~$\Z$:
+  $p(0, 1) = p$, $p(0, -1) = q = 1 - p$
+\end{bsp}
+
+%Für welche Werte von $p$ ist diese Irrfahrt rekurrent/transient?
+
+In diesem Fall kann man die Greensche Funktion exakt berechnen:
+
+\begin{align*}
+  G(x, x) = G(0,0) = \sum_{m=0}^\infty p^{(m)}(0, 0) = 1 + \sum_{n=1}^\infty p^{(2n)}(0, 0) = 1 + \sum_{n=1}^\infty \binom{2n}{n} p^n (1-p)^n
+  = 1 + \sum_{n=1}^\infty \binom{2n}{n} 4^{-n} (4 p (1-p))^n = (1 - 4 p (1-p))^{-\tfrac{1}{2}} = \tfrac{1}{\abs{2p - 1}}
+\end{align*}
+
+% 2.13
+\begin{satz}
+  Sei $\{ Z_n \}$ eine Irrfahrt auf~$\Z$ mit $\E \abs{Z_1 - Z_0} = \sum_{x \in \Z} \abs{x} p(0, x) < \infty$.
+  Dann gilt
+  \[
+    \{ Z_n \} \text{ ist rekurrent} \iff \sum_{x \in \Z} x p(0, x) = 0.
+  \]
+\end{satz}
+
+\begin{defn}
+  Einfache symmetrische Irrfahrt auf $\Z^d$ ist eine translationsinvariante Markovkette mit $p(0, \pm e_i) = \tfrac{1}{2 d}$ für $i = 1, \ldots, d$.
+\end{defn}
+
+Für einfache symm. Irrfahrten gilt:
+$p^{(2n)}(x, x) = \sum_{k_1, \ldots, k_d \in \N, k_1 + \ldots + k_d = n} \tfrac{(2n)!}{(k_1!)^2 \cdot (k_d!)^2} (\tfrac{1}{2d})^{2n}$
+
+Für $d = 2$ gilt $p^{(2n)}(0, 0) = [\binom{2n}{n} (\tfrac{1}{2})^{2n}]^2$
+
+Mit der Stirling'schen Formel folgt $p^{(2n)}(0, 0) \approx \tfrac{1}{\pi n}$.
+
+Somit gilt $\sum p^{(2n)}(0,0) = \infty$.
+
+\begin{fazit}
+  Die zweidimensionale einfache symm. Irrfahrt ist rekurrent.
+\end{fazit}
 
 \end{document}
