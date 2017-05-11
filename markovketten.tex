@@ -236,4 +236,76 @@ Somit gilt $\sum p^{(2n)}(0,0) = \infty$.
   Die zweidimensionale einfache symm. Irrfahrt ist rekurrent.
 \end{fazit}
 
+% Vorlesung vom 11.5.2017
+
+\begin{bem}
+  Man kann zeigen:
+  Für einfache symm. Irrfahrten auf~$\Z^d$ gilt:
+  \[ p^{2n}(0,0) \leq \tfrac{C_d}{n^{\nicefrac{d}{2}}} \]
+  Somit ist die einfache Irrfahrt transient für alle $d \geq 3$.
+\end{bem}
+
+\begin{defn}
+  $\varphi(t) \coloneqq \sum_{x \in \Z^d} e^{i (t \cdot x)} p(0, x)$ für $t \in \R^d$
+\end{defn}
+
+Da die Zuwächse $\{ Z_n - Z_{n-1} \}$ \iid{} sind, so gilt
+\[ \sum_{x \in \Z^d} e^{i (t \cdot x)} p^{n}(0, x) = \varphi^n(t), \quad n \geq 1 \]
+
+Inversionsformel: $p^{n}(0, x) = \tfrac{1}{(2 \pi)^d} \int{\cointerval{-\pi}{\pi}^d}{}{e^{- i (t \cdot x)} \varphi^n(t)}{t}$
+
+\begin{satz}
+  Für jede Irrfahrt $\{ Z_n \}$ auf $\Z^d$ gilt
+  \[ G(0, 0) = \left( \tfrac{1}{2 \pi} \right)^d \lim_{\lambda \uparrow 1} \int{t \in \cointerval{-\pi}{\pi}^d}{}{Re(\tfrac{1}{1 - \lambda \varphi(t)})}{t} = \infty \]
+\end{satz}
+
+\begin{bsp}
+  Für die einfache symm. Irrfahrt $\{ Z_n \}$ auf~$\Z^d$ ist
+  \[
+    \varphi(t) = \tfrac{1}{d} \sum_{k=1}^d \cos(t_k)
+  \]
+  Mit der Ungleichung $1 - \cos(u) \geq c_0 u^2$ für alle $u \in \cinterval{- \pi}{\pi}$ folgt
+  \[
+    \varphi(t) \geq \tfrac{c_0}{d} \abs{t}^2.
+  \]
+  Es folgt
+  \[
+    \tfrac{1}{1 - \lambda \varphi(t)} \leq \tfrac{d}{\lambda c_0} \abs{t}^{-2}
+  \]
+  Die Funktion $\abs{t}^{-2}$ ist auf $\cointerval{-\pi}{\pi}^d$ für jedes $d \geq 3$ integrierbar.
+  Somit ist die einfache Irrfahrt auf $\Z^d$, $d \geq 3$, transient.
+\end{bsp}
+
+% 2.16
+\begin{satz}
+  Jede irreduzible Irrfahrt auf $\Z^d$ mit $d \geq 3$ ist transient.
+\end{satz}
+
+% 2.17
+\begin{bsp}
+  Sei $\{ Z_n \}$ eine Irrfahrt auf $\Z$ mit $p(0, x) = p(0, -x)$.
+  Angenommen $x^\alpha p(0, x) \to c \in \ointerval{0}{\infty}$ für $x \to \infty$ für ein $\alpha > 1$.
+  Dann gilt
+  \[ 1 - \varphi(t) = \sum_{n=-\infty}^\infty (1 - \cos(nt)) p(0, n) \]
+  und
+  \[
+    \tfrac{1 - \varphi(t)}{\abs{t}^{\alpha - 1}} = \sum_{n=-\infty}^\infty \abs{n}^\alpha p(0, n) \abs{t} f(n t)
+  \]
+  mit $f(x) = \tfrac{1 - \cos(x)}{\abs{x}^\alpha}$.
+  Außerdem $\abs{n}^\alpha p(0, n) = c + \epsilon_n$, wobei $\epsilon_n \to 0$ für $\abs{n} \to \infty$.
+  Es folgt
+  \[
+    \tfrac{1 - \varphi(t)}{\abs{t}^{\alpha - 1}} = \sum_{n=-\infty}^\infty c \abs{t} f(n t) + \sum_{n=-\infty}^\infty \epsilon_n \abs{t} f(n t).
+  \]
+  Für $t \to 0$ hat man
+  \[ \sum_{n=-\infty}^\infty \abs{t} f(n t) \to \int{-\infty}^{\infty}{f(x)}{x} \]
+  und
+  \[ \sum_{n=-\infty}^\infty \epsilon_n \abs{t} f(n t) \to 0. \]
+  Es folgt für $\alpha < 3$
+  \[ \lim_{t \to 0} \tfrac{1 - \varphi(t)}{\abs{t}^{\alpha - 1}} = c \int{-\infty}{\infty}{\tfrac{1 - \cos(x)}{\abs{x}^\alpha}}{x} < \infty \]
+  Folglich ist $\tfrac{1}{1 - \varphi(t)}$ für $\alpha < 2$ integrierbar und somit $\{ Z_n \}$ transient.
+  Für $\alpha = 2$ ist $\tfrac{1}{1 - \varphi(t)}$ in der Umgebung von null nicht integrierbar und damit $\{ Z_n \}$ rekurrent.
+  Für $\alpha > 2$ ist $\sum \abs{x} p(0, x) < \infty$ und somit ist die Irrfahrt rekurrent, da der Erwartungswert der Zuwächse null ist.
+\end{bsp}
+
 \end{document}
