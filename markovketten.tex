@@ -22,6 +22,7 @@
 \newcommand{\E}{\mathbb{E}} % Erwartungswert
 \newcommand{\ind}{\mathbbm{1}} % Indikatorfunktion
 \newcommand{\iid}{i.\,i.\,d.} % identisch unabhängig verteilt
+\DeclareMathOperator{\ggT}{ggT} % größter gemeinsamer Teiler
 
 \DeclareMathOperator{\var}{Var} % Varianz
 \DeclareMathOperator{\cov}{Cov} % Kovarianz
@@ -307,5 +308,114 @@ Inversionsformel: $p^{n}(0, x) = \tfrac{1}{(2 \pi)^d} \int{\cointerval{-\pi}{\pi
   Für $\alpha = 2$ ist $\tfrac{1}{1 - \varphi(t)}$ in der Umgebung von null nicht integrierbar und damit $\{ Z_n \}$ rekurrent.
   Für $\alpha > 2$ ist $\sum \abs{x} p(0, x) < \infty$ und somit ist die Irrfahrt rekurrent, da der Erwartungswert der Zuwächse null ist.
 \end{bsp}
+
+% Vorlesung vom 16. Mai 2017
+
+% §3. Erneuerungstheorie
+\section{Erneuerungstheorie}
+
+\begin{situation}
+  Seien $\{ X_k \}_{k \geq 1}$ \iid{} ZVn mit Werten in~$\N$ und $P(X_k \geq 1) > 0$.
+  Dann definiert
+  \[
+  Z_n \coloneqq \sum_{k=1}^n X_k + Z_0
+  \]
+  eine Irrfahrt $\{ Z_n \}_{n \geq 0}$ mit nicht-negativen Zuwächsen auf~$\Z$.
+\end{situation}
+
+\begin{ziel}
+  Asymptotisches Verhalten von $G(0, x)$ untersuchen.
+\end{ziel}
+
+Wir werden annehmen, dass $X_1$ eine andere Verteilung haben darf.
+
+\begin{defn}
+  Sei $\{ a_n \}$ eine Folge.
+  Die Funktion
+  \[ A(s) = \sum_{n=0}^\infty a_n s^n \]
+  heißt \emph{erzeugende Funktion}.
+\end{defn}
+
+% 2.18
+\begin{bsp}
+  Setze $p_k \coloneqq P(X_2 = k)$, $k \geq 0$.
+  Wir nehmen an, dass $\E[X_2] = \sum_{k=1}^\infty k p_k =: a \in \ointerval{0}{\infty}$.
+  Definiere
+  \[ q_k \coloneqq \tfrac{1}{a} \sum_{j=k}^\infty p_j, \quad k \geq 1. \]
+  Dann ist $\sum_{k=1}^\infty q_k = 1$.
+  Sei $X_1$ sodass $P(X_1=k) = q_k$, $k \geq 1$.
+  Definiere
+  \[
+    \begin{array}{r c l}
+      f(s) &=& \sum_{k=1}^\infty p_k s^k = \E[s^{X_2}], \enspace \abs{s} \leq 1 \\
+      g(s) &=& \sum_{k=1}^\infty q_k s^k = \E[s^{X_1}] \\
+      \psi(s) &=& \sum_{x=1}^\infty G(0, x) s^x, \enspace \abs{s} < 1
+    \end{array}
+  \]
+  Dann gilt für $\abs{s} < 1$:
+  \[ \psi(s) = \sum_{k=1}^\infty g(s) f(s)^{k-1} = \frac{g(s)}{1 - f(s)} \]
+  Außerdem gilt:
+  \[ g(s) = \frac{s}{a (1-s)} (1 - f(s)) \]
+  Es folgt:
+  \[ \psi(s) = \sum_{x=1}^\infty \frac{1}{a} s^x \]
+  Somit ist $G(0, x) = \tfrac{1}{a}$.
+\end{bsp}
+
+% 2.19
+\begin{satz}
+  Angenommen, $\ggT \Set{p}{p_k > 0} = 1$.
+  Dann gilt für jede Verteilung von~$X_1$, dass
+  \[ G(0, x) \xrightarrow{x \to \infty} \tfrac{1}{a}. \]
+\end{satz}
+
+% 2.20
+\begin{lem}
+  Sei $g(\theta)$ integrierbar auf $\cointerval{-\pi}{\pi}$.
+  Dann gilt
+  \[
+    \int{\cointerval{-\pi}{\pi}}{}{e^{i \theta x} g(\theta)}{\theta} \xrightarrow{\abs{x} \to \infty}
+    \quad (x \in \Z)
+  \]
+\end{lem}
+
+% 2.21
+\begin{lem}
+  Seien alle $X_k$ identisch verteilt und $\ggT \Set{p}{p_k > 0} = 1$.
+  Dann existiert $L \coloneqq \lim_{x \to \infty} G(0, x)$.
+\end{lem}
+
+% 2.22
+\begin{defn}
+  Seien $\{ X_k \}_{k \geq 1}$ unabhängige, nichtneg. ZVn und seien $\{ X_k \}_{k \geq 2}$ identisch verteilt.
+  Setze $Z_n \coloneqq \sum_{k=1}^n X_k$.
+  Der Prozess $\eta(t) \coloneqq \min\,\Set{k \geq 1}{Z_k > t}$ heißt \emph{Erneuerungsprozess} und die Funktion $H(t) \coloneqq \E[\eta(t)]$ heißt \emph{Erneuerungsfunktion}.
+\end{defn}
+
+Falls $X_k$ nur Werte aus~$\N$ annehmen, so können wir das Verhalten von $H(t) - H(t-1)$ wie folgt beschreiben:
+\[ H(t) = \E[\eta(t)] = \sum_{k=0}^\infty P(\eta(t) > k) = \sum_{k=0}^\infty P(Z_k \leq t) \]
+Es folgt
+\[
+  H(t) - H(t-1) = \sum_{k=0}^\infty P(Z_k = t) \xrightarrow{t \to \infty} \tfrac{1}{\E[X_2]}.
+\]
+
+\begin{defn}
+  $
+    \gamma(t) \coloneqq t - Z_{\eta(t)-1} \geq 0, \quad
+    \chi(t) \coloneqq Z_{\eta(t)} - t > 0
+  $
+\end{defn}
+
+\begin{satz}
+  Sind die Bedingungen des letzten Satzes erfüllt, so gilt
+  \[
+    P(\gamma(t)=i, \chi(t)=j) \xrightarrow{t \to \infty} \frac{p_{i+j}}{\E[X_2]}
+    \qquad \text{für alle } i \geq 0, j \geq 1.
+  \]
+\end{satz}
+
+\begin{kor}
+  $P(\gamma(t) = i) \xrightarrow{t \to \infty} \frac{1}{a} \sum_{k=i+1}^\infty p_k$,
+  $P(\gamma(t) = j) \xrightarrow{t \to \infty} \frac{1}{a} \sum_{k=j}^\infty p_k$
+\end{kor}
 
 \end{document}
