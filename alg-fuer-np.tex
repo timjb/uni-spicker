@@ -17,17 +17,24 @@
 \newcommand{\Instances}{\mathcal{X}} % set of instances (of an optimization problem)
 \newcommand{\Feasible}{\mathcal{F}} % set of feasible solutions (of an optimization problem)
 \newcommand{\ObjFun}{Z} % objective function (of an optimization problem)
-\newcommand{\OptTuple}{(\Instances{}, \Feasible{}, \ObjFun{})} % tuple defining an optimization problem
+\newcommand{\Goal}{\odot} % whether to minimize or maximize
+\newcommand{\OptTuple}{(\Instances{}, \Feasible{}, \ObjFun{}, \Goal)} % tuple defining an optimization problem
+\newcommand{\MinOptTuple}{(\Instances{}, \Feasible{}, \ObjFun{}, \min)} % tuple defining an optimization problem where the goal is to minimize the objective function
 \DeclareMathOperator{\Opt}{Opt} % optimal value
 \newcommand{\size}[1]{\abs{#1}} % Größe (eines Terms)
 \DeclareMathOperator{\NPO}{NPO} % non-deterministic polynomial-time optimization problem
 \DeclareMathOperator{\PO}{PO} % polynomial-time optimization problem
+\DeclareMathOperator{\APX}{APX} % polynomial-time approximable optimization problem
+\DeclareMathOperator{\NP}{APX} % nondeterministic polynomial-time problems
+\let\P\relax % undefine \P
+\DeclareMathOperator{\P}{APX} % polynomial-time problems
 \newcommand{\Prob}{\mathcal{P}} % Optimierungsproblem
 \newcommand{\ManyOneRed}{\leq_m} % Many-To-One-Reduzierbarkeit
 \newcommand{\TuringRed}{\leq_T} % Turing-Reduzierbarkeit
 \newcommand{\TuringEq}{\equiv_T} % Turing-Äquivalenz
 \DeclareMathOperator*{\argmax}{arg\,max}
 \newcommand{\Powerset}{\mathcal{P}} % Potenzmenge
+\renewcommand{\O}{\mathcal{O}} % Landau-Notation
 
 % Hervorhebung von Algorithmen und Problemen
 \definecolor{AlgorithmColor}{rgb}{0.7,0.2,0.0}
@@ -59,15 +66,16 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
   Ein \emph{Optimierungsproblem} ist ein Tupel $\OptTuple$ wobei
   \begin{itemize}
     \item $\Instances$ eine Menge von \emph{Instanzen},
-    \item $\Feasible$ eine Abbildung ist, welche jeder Instanz~$x$ eine Menge $\Feasible(x)$ von \emph{möglichen Lösungen} zuordnet und
-    \item $\ObjFun$ eine reellwertige Abbildung (die \emph{Zielfunktion}) ist, die jedem $x \in \Instances$ und $y \in \Feasible(x)$ einen \textit{Zielwert} zuordnet.
+    \item $\Feasible$ eine Abbildung ist, welche jeder Instanz~$x$ eine Menge $\Feasible(x)$ von \emph{möglichen Lösungen} zuordnet,
+    \item $\ObjFun$ eine reellwertige Abbildung (die \emph{Zielfunktion}) ist, die jedem $x \in \Instances$ und $y \in \Feasible(x)$ einen \textit{Zielwert} zuordnet und
+    \item $\Goal \in \{ \min, \max \}$ angibt, ob die Zielfunktion minimiert oder maximiert werden soll.
   \end{itemize}
 \end{defn}
 
 % 2.2
 \begin{defn}
-  Eine \emph{optimale Lösung} eines Optimierungsproblems~$\OptTuple$ zu einer Instanz~$x \in \Instances$ ist ein $y \in \Feasible(x)$ mit
-  \[ \ObjFun(x, y) = \min_{y \in \Feasible(x)} Z(x, y) =: \Opt(x). \]
+  Eine \emph{optimale Lösung} eines Optimierungsproblems $\OptTuple$ zu einer Instanz~$x \in \Instances$ ist ein $y \in \Feasible(x)$ mit
+  \[ \ObjFun(x, y) = \Goal_{y \in \Feasible(x)} Z(x, y) =: \Opt(x). \]
 \end{defn}
 
 % 2.3
@@ -108,7 +116,7 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
 
 % 2.7
 \begin{defn}
-  Sei $\Prob = \OptTuple$ ein Optimierungsproblem.
+  Sei $\Prob = \MinOptTuple$ ein Optimierungsproblem.
   \begin{itemize}
     \item Das zugeh. \emph{Auswertungsproblem}~$\Prob_E$ ist: Gegeben $x \in \Instances$,
     \begin{itemize}
@@ -160,6 +168,8 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
   Ein Optimierungsproblem~$\Prob$ heißt \emph{NP-hart}, falls $\Prob' \TuringRed \Prob$ für jedes Entscheidungsproblem $\Prob'$ in~NP.
 \end{defn}
 
+\begin{samepage}
+
 % 2.15
 \begin{beob}
   $\Prob \in \NPO$, $\Prob$ NP-vollständig $\implies$ $\Prob$ NP-hart
@@ -173,6 +183,8 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
 \begin{problem}[Cabin Manager's Problem]
   MIS auf Intervallgraphen
 \end{problem}
+
+\end{samepage}
 
 % §3.2 Maximum Independent Set for Interval Models
 
@@ -230,11 +242,205 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
   Die vom Greedy-Algorithmus berechnete Lösung ist maximal um den Faktor $H_n \coloneqq {\sum}_{j=1}^n \nicefrac{1}{j}$ schlechter als die optimale Lösung.
 \end{satz}
 
+\begin{samepage}
+
 % §3.6. Minimum Vertex Coloring
 
 \begin{bem}
   Es gibt keinen (einfachen) Greedy-Algorithmus, der das Minimum-Vertex-Coloring-Problem in guten Schranken löst.
 \end{bem}
+
+\section{Approximationsalgorithmen}
+
+% 4.1
+\begin{defn}
+  Ein \emph{Approximationsalgorithmus} für ein Optimierungsproblem~$\OptTuple$ ist ein Algorithmus, der für jedes $x \in \Instances$ eine zulässige Lösung $y \in \Feasible(x)$ produziert.
+\end{defn}
+
+\end{samepage}
+
+% §4.1 Absolute Approximation
+
+% 4.2
+\begin{defn}
+  Sei $\OptTuple$ ein Optimierungsproblem und $x \in \Instances$ eine Instanz, für die $\Opt(x)$ existiert.
+  Der \emph{absolute Fehler} von $y \in \Feasible(x)$ ist $\abs{Z(x, y) - \Opt(x)}$.
+  % ausgelassen: zweiter Teil der Definition
+\end{defn}
+
+% 4.3
+\begin{satz}[\Algorithm{Vizings Algorithmus}]
+  Es gibt einen Algorithmus, der für jeden Graph $G = (V, E)$ eine Kantenfärbung mit höchstens $\Delta + 1$ Farben, wobei $\Delta \coloneqq {\max}_{v \in V} \deg_G(v)$, berechnet.
+  % Beweisvideo: https://www.youtube.com/watch?v=otky1bBhwgM
+\end{satz}
+
+\begin{kor}
+  Es gibt einen Polynomialzeit-Approximationsalg. für Minimum Edge Coloring mit Absolutfehler beschränkt durch~1.
+\end{kor}
+
+% §4.3. Relative Approximation
+
+% 4.5
+\begin{defn}
+  Sei $\Prob = \OptTuple$ ein Optimierungsproblem mit $Z \geq 0$. \\
+  Der \emph{relative Fehler} von $y \in \Feasible(x)$ zu~$x \in \Instances$ ist
+  \[
+    \begin{cases}
+      0 & \text{falls } \Goal = \min, \ObjFun(x, y) = \Opt(x) = 0, \\
+      (\ObjFun(x, y) - \Opt(x)) / \ObjFun(x, y) & \text{falls } \Goal = \min, Z(x, y) > 0, \\
+      (\Opt(x) - \ObjFun(x, y)) / \Opt(x) & \text{falls } \Goal = \max.
+    \end{cases}
+  \]
+\end{defn}
+
+\begin{bem}
+  Der relative Fehler ist eine Zahl in~$\cinterval{0}{1}$.
+  Eine Lösung ist genau dann optimal, falls ihr relativer Fehler $= 0$ ist.
+\end{bem}
+
+% 4.5
+\begin{defn}
+  Ein \emph{$\epsilon$-Approximationsalgorithmus} ($\epsilon \in \cinterval{0}{1}$) für~$\Prob$ ist ein Algorithmus, der für jedes $x \in \Instances$ ein $y \in \Feasible(x)$ mit relativem Fehler $\leq \epsilon$ berechnet.
+  Das Problem~$\Prob$ heißt \emph{$\epsilon$-approximierbar}, falls ein solcher Alg. mit polynomieller Laufzeit existiert.
+\end{defn}
+
+\begin{bspe}
+  \begin{itemize}
+    \item Minimum Makespan Scheduling ist $(1/4)$-approximierbar.
+    \item Maximum Knapsack ist $(1/2)$-approximierbar.
+    \item Minimum Set Cover ist $(\ln n / (1 + \ln n))$-approximierbar (bei Eingabegröße~$n$).
+  \end{itemize}
+\end{bspe}
+
+% 4.6
+\begin{defn}
+  Sei $\Prob = \OptTuple$ ein Optimierungsproblem mit $Z \geq 0$. \\
+  Das \emph{Approximationsverhältnis} von $y \in \Feasible(x)$ zu $x \in \Instances$ ist
+  \[
+    \begin{cases}
+      1 & \text{falls } \ObjFun(x, y) = \Opt(x) = 0, \\
+      \Opt(x) / \ObjFun(x, y) \in \cinterval{1}{\infty} & \text{falls } \Goal = \min, \Opt(x) > 0, \\
+      \ObjFun(x, y) / \Opt(x) \in \cinterval{1}{\infty} & \text{falls } \Goal = \max, \ObjFun(x, y) > 0.
+    \end{cases}
+  \]
+\end{defn}
+
+\begin{bem}
+  Das Approximationsverh. ist eine Zahl in~$\cinterval{1}{\infty}$.
+  Eine Lösung ist genau dann optimal, falls ihr Approximationsverh. $= 1$ ist.
+\end{bem}
+
+\begin{defn}
+  Ein Alg. heißt \emph{$r$-Approximationsalgorithmus} ($r \in \ocinterval{1}{\infty}$), falls er für jedes $x \in \Instances$ ein $y \in \Feasible(x)$ mit Approximationsverhältnis $\leq r$ liefert.
+  Das Problem~$\Prob$ heißt \emph{$r$-approximierbar}, falls ein solcher Algorithmus mit polynomieller Laufzeit existiert.
+\end{defn}
+
+\begin{bem}
+  Für das Approximationsverhältnis~$r$ und den relativen Fehler~$\epsilon$ von $y \in \Feasible(x)$ gilt
+  \[
+    r = 1 / (1-\epsilon), \qquad
+    \epsilon = 1 - 1/\epsilon.
+  \]
+\end{bem}
+
+% 4.7
+\begin{defn}
+  \emph{APX} ist die Klasse aller Probleme in NPO, die $r$-Approximierbar für ein $r > 1$ sind.
+\end{defn}
+
+\begin{satz}
+  Falls $\N \neq \NP$, so gilt Minimum TSP $\not\in \APX$.
+\end{satz}
+
+\begin{samepage}
+
+\begin{beweisidee}
+  Wäre Minimum TSP $r$-approximierbar, so könnte man diesen Algorithmus verwenden, um das NP-Problem, ob ein Graph einen Hamiltonweg besitzt, zu entscheiden.
+\end{beweisidee}
+
+% §4.3. The Traveling Salesman Problem
+\subsection{Das Problem des Handelsreisenden}
+
+\begin{erinnerung}
+  Minimale Spannbäume für einen gewichteten ungerichteten Graphen können in polynomieller Zeit mit Kruskals oder mit Prims Algorithmus berechnet werden.
+\end{erinnerung}
+
+\end{samepage}
+
+\begin{satz}
+  Minimum $\Delta$-TSP ist 2-approximierbar.
+\end{satz}
+
+\begin{beweisskizze}
+  Sei $(V, c)$ eine Instanz und $z^*$ die minimale Länge einer Tour.
+  Berechne einen minimalen Spannbaum.
+  Dessen Kanten haben eine Gesamtlänge von $\leq z^*$.
+  Führe Tiefensuche im Spannbaum durch und liste jeden neu entdeckten Knoten auf.
+  Die so erhaltene Tour hat (wegen der Dreiecksungleichung) Länge $\leq 2 z^*$.
+\end{beweisskizze}
+
+\begin{defn}
+  Ein ungerichteter Multigraph heißt \em{Eulersch}, falls er eine \textit{Eulertour} besitzt, also eine Tour, die jede Kante nur ein Mal benutzt.
+\end{defn}
+
+% 2.12
+\begin{lem}
+  Ein zshgder ungerichteter Multigraph ist genau dann Eulersch, wenn alle seine Knoten den Grad zwei haben.
+  In dem Fall kann man eine Eulertour in Polynomialzeit finden.
+\end{lem}
+
+\begin{lem}
+  Sei $(V, c)$ eine Instanz des Minimum $\Delta$-TSP.
+  Aus jedem Eulerschen Multigraph auf der Knotenmenge~$V$ mit Gesamtkantengewicht $C$ kann man eine TSP-Tour der Gesamtlänge~$\leq C$ in Polynomialzeit berechnen.
+\end{lem}
+
+% 4.13
+\begin{defn}
+  Sei $G = (V, E)$ ein ungerichteter Graph.
+  Ein \emph{Matching} in~$G$ ist eine Teilmenge $E' \subseteq E$, sodass $e \cap e' = \emptyset$ für alle $e, e' \in E'$ mit $e \neq e'$.
+  Ein Matching heißt \emph{perfekt}, falls $V = \cup_{e \in E'} e$.
+  Die \textit{Kosten} eines Matchings bzgl. einer Kostenfunktion $c : E \to \R_{\geq 0}$ sind $\sum_{e \in E'} c(e)$.
+\end{defn}
+
+% 4.14
+\begin{satz}
+  Ein perfektes Matching maximaler Größe mit minimalen Kosten (unter den Matchings maximaler Größe) kann für einen Graphen $G$ mit $n$ Knoten in Zeit $n^{o(1)}$ berechnet werden.
+\end{satz}
+
+% 4.15
+\begin{satz}[\emph{Christofides}]
+  Minimum $\Delta$-TSP ist $3/2$-approximierbar.
+\end{satz}
+
+\begin{beweisskizze}
+  Sei $(V, c)$ eine Instanz und $z^*$ die minimale Länge einer Tour.
+  Berechne einen minimalen Spannbaum.
+  Berechne ein perfektes Matching mit minimalen Kosten auf den Knoten des Stammbaums mit ungeradem Grad.
+  Die Kosten dieses Matchings sind $\leq z^* / 2$.
+  Durch Hinzufügen der Kanten des Matchings zum Spannbaum erhalten wir einen Eulerschen Multigraphen mit Gesamtkosten $\leq 3/2 z^*$.
+  Aus diesem erhalten wir eine Tour der Länge $\leq 3/2 z^*$.
+\end{beweisskizze}
+
+\subsection{Nochmal Minimum Vertex Coloring}
+
+\begin{alg}[\Algorithm{Greedy Vertex Coloring}] \mbox{}\\
+  Wiederhole folgende Schritte, bis alle Knoten gefärbt sind:
+  \begin{enumerate}
+    \item
+      Bestimme ein MIS~$I$ in~$G$ wie folgt: Setze $H \coloneqq G$ und $I \coloneqq \emptyset$, dann führe folgende Schritte aus, solange $H \neq \emptyset$:
+      \begin{enumerate}
+        \item Wähle einen Knoten~$v$ minimalen Grades aus~$H$ aus.
+        \item Füge $v$ zu~$I$ hinzu.
+        \item Lösche $v$ und seine Nachbarknoten aus~$H$.
+      \end{enumerate}
+    \item Färbe alle Knoten in~$I$ in einer noch unbenutzten Farbe.
+    \item Lösche die Knoten in~$I$ aus~$G$.
+  \end{enumerate}
+\end{alg}
+
+\begin{satz}
+  Greedy Vertex Coloring ist (für Graphen mit $n$~Knoten) ein $\O(n / \log n)$-Approximationsalgorithmus.
+\end{satz}
 
 \section{Probleme}
 
@@ -272,7 +478,7 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
 \begin{problem}[\Problem{Minimum Makespan Scheduling}]
   Seien $p, n \in \N$ und $l_1, \ldots, l_n \in \R_{> 0}$ gegeben.
   Für $f : \{ 1, \ldots, n \} \to \{ 1, \ldots, p \}$ setze
-  \[ t(f) \coloneqq \max_{1 \leq i \leq p} \sum_{j \in f^{-1}(i) l_j}. \]
+  \[ t(f) \coloneqq \max_{1 \leq i \leq p} \sum_{j \in f^{-1}(i)} l_j. \]
   Berechne das~$f$, für das $t(f)$ minimal wird!
 \end{problem}
 
@@ -309,12 +515,32 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
 \end{bem}
 
 \begin{problem}[\Problem{Minimum Vertex Coloring}]
-  Gegeben sei ein ungerichteter Graph~$G = (V, E)$.
-  Die Menge der \textit{Färbungen} ist
+  Gegeben sei ein unger. Graph~$G = (V, E)$.
+  Die Menge der \textit{Eckenfärbungen} ist
   \[
-    \Feasible \coloneqq \Set{\text{Abbildungen } c : V \to \N}{\fa{(v, w) \in E} c(v) \neq c(w)}.
+    \Feasible \coloneqq \Set{\text{Abbildungen } c : V \to \N}{\fa{\{v, w\} \in E} c(v) \neq c(w)}.
   \]
   Ziel: Finde $c \in \Feasible$ mit minimaler Anzahl $\max c(V)$ an Farben.
+\end{problem}
+
+\begin{problem}[\Problem{Minimum Edge Coloring}]
+  Gegeben sei ein unger. Graph~$G = (V, E)$.
+  Die Menge der \textit{Kantenfärbungen} ist
+  \[
+    \Feasible \coloneqq \Set{\text{Abb. } c : E \to \N}{\fa{e_1 \neq e_2 \in E} e_1 \cap e_2 \neq \emptyset \implies c(e_1) \neq c(e_2)}
+  \]
+  Ziel: Finde $c \in \Feasible$ mit minimaler Anzahl $\max c(V)$ an Farben.
+\end{problem}
+
+\begin{problem}[\Problem{Minimum TSP}]
+  Gegeben sei ein vollständiger unger. Graph $G = (V, E)$ und eine Abb. $c : E \to \R_{\geq 0}$.
+  % Gegeben sei eine endliche Menge $V$ und eine Abb. $c : V \times V \to \R_{\geq 0}$ mit $c(x, y) = c(y, x)$ für alle $x, y \in V$.
+  Gesucht ist eine zyklische Permutation $\sigma$ von~$V$ (eine \textit{Tour}), sodass die \textit{Länge} ${\sum}_{v \in V} c(\{ v, \sigma(v) \})$ minimal wird.
+\end{problem}
+
+\begin{problem}[\Problem{Minimum $\Delta$-TSP}]
+  Gegeben sei ein endlicher metrischer Raum~$(V, c)$.
+  Gesucht ist eine zyklische Permutation $\sigma$ von~$V$ (eine \textit{Tour}), sodass die \textit{Länge} ${\sum}_{v \in V} c(v, \sigma(v))$ minimal wird.
 \end{problem}
 
 \end{document}
