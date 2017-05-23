@@ -42,6 +42,9 @@
 \definecolor{ProblemColor}{rgb}{0.1,0.5,0.4}
 \newcommand{\Problem}[1]{\textcolor{ProblemColor}{\textbf{#1}}}
 
+\usepackage{algorithmicx}
+\usepackage[noend]{algpseudocode}
+
 % Kleinere Klammern
 \delimiterfactor=701
 
@@ -442,6 +445,72 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
   Greedy Vertex Coloring ist (für Graphen mit $n$~Knoten) ein $\O(n / \log n)$-Approximationsalgorithmus.
 \end{satz}
 
+% §5. Tree-Search Strategies
+\section{Baumsuche}
+
+% §5.1. Erschöpfende Suche
+
+% §5.2. Branch and Bound
+
+\begin{strategie}[\emph{Branch and Bound} für Minimierungsprobleme]
+  Organisiere den Suchraum als Baum, der zunächst nur eine Wurzel enthält, wobei mögliche Lösungen aus~$\Feasible(x)$ Blätter sind und "`partielle Lösungen"' (die zu einer möglichen Lösung erweitert werden können oder auch nicht) die Verzweigungen bilden.
+  Es ist nicht praktikabel, den gesamten Baum zu durchsuchen.
+  Darum mache folgendes:
+  Beschrifte die Verzweigungen mit einer (kostengünstig) berechneten unteren Schranke für die Kosten einer Lösung, die Erweiterung der partiellen Lösung ist.
+  Expandiere dann wiederholt eine Verzweigung im Baum, \dh{} berechne seine Kindknoten und beschrifte sie mit einer unteren Schranke der Kosten.
+  Verzweigungen, deren untere Schranke mindestens so groß ist wie die Kosten einer bisher gefundenen möglichen Lösung müssen nicht expandiert werden.
+  Gibt es keine Verzweigung mehr, die expandiert werden muss, so ist die bisher gefundene mögliche Lösung mit minimalen Kosten eine optimale Lösung.
+\end{strategie}
+
+\begin{bem}
+  Der Algorithmus kann auch früher abgebrochen werden, etwa wenn die unteren Schranken nur etwas kleiner sind als die Kosten der besten bisher gefundenen Lösung und wenn man mit einer approximativen Lösung zufrieden ist.
+\end{bem}
+
+\begin{bsp}
+  Für das TSP auf $(V, E)$ sind partielle Lösungen Pfade $p = u_0 \cdots u_m$ beginnend bei einem Startknoten~$u_0$.
+  Eine untere Kostenschranke für Touren, die Erweiterung des Pfades~$p$ sind, ist
+  \[
+    \arraycolsep=1pt
+    d \coloneqq
+    \begin{array}[t]{r l}
+      & \min \Set{c(u_0, v)}{v \in V \setminus \{ u_0, \cdots, u_k \}} \\
+      +& \min \Set{c(u_k, v)}{v \in V \setminus \{ u_0, \cdots, u_k \}} \\
+      +& \text{Summe der Kosten der $n-k-1$ kostengünstigsten} \\
+      & \text{Kanten zwischen Knoten in } \{ u_0, \cdots, u_k \}
+    \end{array}
+  \]
+\end{bsp}
+
+\begin{bem}
+  In der Praxis schaffen Branch-and-Bound-Algorithmen (für NP-schwere Probleme) oft eine drastische Verkleinerung des Suchraums.
+  Theoretisch haben sie jedoch für gewöhnlich exponentielle Laufzeit.
+\end{bem}
+
+% §5.3. 3-Satisfiability
+
+\begin{nota}
+  Für eine logische Formel $F$ und eine Variable $x$ sei $F|_{x=i}$ ($i \in \{0,1\}$) die Formel, die man erhält, wenn man $x$ durch $i$ in~$F$ ersetzt und vereinfacht.
+\end{nota}
+
+\begin{satz}
+  Eine Instanz $F$ von 3-SAT kann in Zeit $\O(\abs{F} \cdot \alpha_0^n)$ entschieden werden, wobei $\alpha_0 \approx 1.84$ und $\abs{F}$ die Gesamtzahl der Literale in~$F$ ist.
+\end{satz}
+
+\begin{algorithmic}
+  \Function{Decide}{$F$}
+    \If{\text{$F$ hat keine Clauses}}
+      \Return true
+    \EndIf
+    \State wähle eine Clause $l_1 \vee \cdots \vee l_k$ in $F$ (mit $k \in \{ 0, 1, 2, 3 \}$)
+    \For{$i := 1, \ldots, k$}
+      \If{\Call{Decide}{$F|_{l_1=0,\ldots,l_{i-1}=0,l_i=1}$}}
+        \Return true
+      \EndIf
+    \EndFor
+    \State \Return false
+  \EndFunction
+\end{algorithmic}
+
 \section{Probleme}
 
 \begin{problem}[\Problem{Maximum Independent Set}, MIS]
@@ -541,6 +610,13 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
 \begin{problem}[\Problem{Minimum $\Delta$-TSP}]
   Gegeben sei ein endlicher metrischer Raum~$(V, c)$.
   Gesucht ist eine zyklische Permutation $\sigma$ von~$V$ (eine \textit{Tour}), sodass die \textit{Länge} ${\sum}_{v \in V} c(v, \sigma(v))$ minimal wird.
+\end{problem}
+
+\begin{problem}[\Problem{$k$-Satisfiability}]
+  Gegeben sei eine Formel in konjunktiver Normalform, etwa
+  \[ (x_1 \vee x_2 \vee \overline{x_3}) \wedge (\overline{x_1} \vee \overline{x_3} \vee x_4 \vee \overline{x_5}) \wedge (x_2 \vee x_5) \wedge (x_3 \vee \overline{x_4}). \]
+  Die Maximalzahl an \textit{Literalen} in einer \textit{Clause} sei dabei $\leq k$.
+  Entscheide, ob die Formel \emph{erfüllbar} ist,\dh{} ob es eine Zuweisung der Variablen gibt, sodass die Formel wahr ist.
 \end{problem}
 
 \end{document}

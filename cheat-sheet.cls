@@ -98,6 +98,7 @@
 \newtheorem*{wdh}{Wiederholung}
 \newtheorem*{erinnerung}{Erinnerung}
 \newtheorem*{gesucht}{Gesucht}
+\newtheorem*{strategie}{Strategie}
 
 \theoremstyle{remark}
 \newtheorem*{bem}{Bem}
