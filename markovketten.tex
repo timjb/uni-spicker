@@ -28,6 +28,9 @@
 \DeclareMathOperator{\cov}{Cov} % Kovarianz
 \DeclareMathOperator{\cor}{Cor} % Korrelation
 
+\definecolor{DefinitionColor}{rgb}{0.7,0.2,0.0}
+\newcommand{\Defn}[1]{\textcolor{DefinitionColor}{#1}}
+
 \begin{document}
 
 \raggedcolumns % stretche Inhalt nicht über die gesamte Spaltenhöhe
@@ -47,10 +50,10 @@
 
 % 2.1
 \begin{defn}
-  Für $x \in E$ definiere die Zufallsvariablen
-  \[ \begin{array}{r l}
-    \tau_x^{(1)} & \coloneqq \inf \Set{n > 0}{Z_n = x} \in \N \cup \{ \infty \} \\
-    \tau_x^{(k)} & \coloneqq \inf \Set{n > \tau_x^{(k-1)}}{Z_n = x}, \enspace k > 1.
+  Für $x \in E$ und $n \in \N$ definiere die ZV \Defn{$\tau_x^{(n)}$} induktiv durch
+  \[ \begin{array}{r c l}
+    \tau_x^{(1)} &\coloneqq& \inf\,\Set{n > 0}{Z_n = x} \in \N \cup \{ \infty \} \\
+    \tau_x^{(k)} &\coloneqq& \inf\,\Set{n > \tau_x^{(k-1)}}{Z_n = x}, \enspace k > 1.
   \end{array} \]
   (Beachte: $\tau_x^{(k)}$ ist eine messbare Abbildung.)
 \end{defn}
@@ -61,7 +64,7 @@
 
 \begin{defn}
   Für $x, y \in E$ sei
-  $F(x, y) \coloneqq P(\tau_y^{(i)} < \infty \mid Z_0 = x)$
+  $\Defn{F(x, y)} \coloneqq P(\tau_y^{(1)} < \infty \mid Z_0 = x)$
 \end{defn}
 
 % 2.2
@@ -70,11 +73,11 @@
   \[ P(\tau_y^{(k)} < \infty \mid Z_0 = x) = F(x, y) \cdot F(y, y)^{k-1}. \]
 \end{lem}
 
-\begin{nota}
-  $\tilde{\ell}(y) = \sum_{k=j}^\infty \ind \{ Z_k = y \}$
-\end{nota}
-
-Dann gilt $P(\tau_y^{(k)} < \infty \mid Z_0 = x) = P(\tilde{\ell} \geq k \mid Z_0 = x)$
+\begin{bem}
+  Setze $\Defn{\widetilde{\ell}(y)} \coloneqq {\sum}_{k=j}^\infty \ind \{ Z_k = y \}$.
+  Dann gilt
+  \[ P(\tau_y^{(k)} < \infty \mid Z_0 = x) = P(\widetilde{\ell} \geq k \mid Z_0 = x). \]
+\end{bem}
 
 % 2.3
 \begin{defn}
@@ -122,19 +125,24 @@ Dann gilt $P(\tau_y^{(k)} < \infty \mid Z_0 = x) = P(\tilde{\ell} \geq k \mid Z_
 
 % 2.6
 \begin{defn}
-  Für $y \in E$ sei
+  Die \emph{Anzahl der Besuche} in~$y \in E$ ist
   \[
-    \ell(y) \coloneqq \sum_{k=0}^\infty \ind \{ Z_k = y \}
+    \Defn{\ell(y)} \coloneqq {\sum}_{k=0}^\infty \ind \{ Z_k = y \}.
   \]
-  die \emph{Anzahl der Besuche in~$y$}.
   Die \emph{Green'sche Funktion} von $\{ Z_n \}$ ist $G : E \times E \to \cinterval{0}{\infty}$ mit
   \[
-    G(x, y) \coloneqq \E(\ell(y) \mid Z_0 = x).
+    \Defn{G(x, y)} \coloneqq \E(\ell(y) \mid Z_0 = x).
   \]
 \end{defn}
 
 \begin{bem}
-  $G(x, y) = \E \left( \sum_{k=0}^\infty \ind \{ Z_k = y \} \mid Z_0 = x \right) = \sum_{k=0}^\infty P(Z_k = y \mid Z_0 = x) = \delta_{xy} + \sum_{k=1}^\infty p^{(k)}(x, y)$
+  $
+    \begin{array}[t]{r c l}
+      G(x, y) &=& \E \left( {\sum}_{k=0}^\infty \ind \{ Z_k = y \} \mid Z_0 = x \right) \\
+      &=& {\sum}_{k=0}^\infty P(Z_k = y \mid Z_0 = x) \\
+      &=& \delta_{xy} + {\sum}_{k=1}^\infty p^{(k)}(x, y).
+    \end{array}
+  $
 \end{bem}
 
 % 2.7
@@ -143,8 +151,8 @@ Dann gilt $P(\tau_y^{(k)} < \infty \mid Z_0 = x) = P(\tilde{\ell} \geq k \mid Z_
   \[
     G(x, y) = 
     \begin{cases}
-      \tfrac{F(x, y)}{1 - F(y, y)} & \text{falls $x \neq y$}, \\
-      \tfrac{1}{1 - F(y, y)} & \text{falls $x = y$}. \\
+      F(x, y)/(1 - F(y, y)) & \text{falls $x \neq y$}, \\
+      1/(1 - F(y, y)) & \text{falls $x = y$}. \\
     \end{cases}
   \]
 \end{satz}
@@ -155,7 +163,7 @@ Dann gilt $P(\tau_y^{(k)} < \infty \mid Z_0 = x) = P(\tilde{\ell} \geq k \mid Z_
 
 % 2.8
 \begin{satz}
-  ist $x \in E$ rekurrent und $F(x, y) > 0$, so ist $y$ auch rekurrent und $F(x, y) = F(y, x) = 1$.
+  Ist $x \in E$ rekurrent und $F(x, y) > 0$, so ist $y$ auch rekurrent und $F(x, y) = F(y, x) = 1$.
 \end{satz}
 
 \iffalse
@@ -169,7 +177,7 @@ Dann gilt $P(\tau_y^{(k)} < \infty \mid Z_0 = x) = P(\tilde{\ell} \geq k \mid Z_
 
 % 2.9
 \begin{bem}
-  $F(x, y) > 0 \iff \ex{n \geq 1} P^{(n)}(x, y) > 0$
+  $F(x, y) > 0 \iff \ex{n \geq 1} p^{(n)}(x, y) > 0$
 \end{bem}
 
 % 2.10
@@ -187,18 +195,20 @@ Dann gilt $P(\tau_y^{(k)} < \infty \mid Z_0 = x) = P(\tilde{\ell} \geq k \mid Z_
 
 % 2.12
 \begin{satz}
-  Eine irreduzible Kette auf einem endlichen Raum ist immer rekurrent.
+  Irreduzible Ketten auf endlichen Räumen sind rekurrent.
 \end{satz}
 
 % §2. Rekurrenz und Transienz von Irrfahrten
 \section{Rekurrenz und Transienz von Irrfahrten}
 
-Sei $\{ Z_n \}$ eine Irrfahrt auf $\Z^d$, \dh{} $p(x, y) = p(0, y - x) =: q(y - x)$.
-
-Mit anderen Worten: Die Zuwächse $\{ Z_n - Z_{n-1} \}_{n \geq 1}$ sind \iid{} Zufallsvariablen.
+\begin{situation}
+  $\{ Z_n \}$ ist eine Irrfahrt auf $\Z^d$, \dh{}
+  \[ p(x, y) = p(0, y - x) =: q(y - x). \]
+  Mit and. Worten: Die \textit{Zuwächse} $\{ Z_n - Z_{n-1} \}_{n \geq 1}$ sind \iid{} ZVn.
+\end{situation}
 
 \begin{bsp}
-  Einfache Irrfahrt auf~$\Z$:
+  Einfache Irrfahrt auf~$\Z$: \quad
   $p(0, 1) = p$, $p(0, -1) = q = 1 - p$
 \end{bsp}
 
@@ -206,32 +216,45 @@ Mit anderen Worten: Die Zuwächse $\{ Z_n - Z_{n-1} \}_{n \geq 1}$ sind \iid{} Z
 
 In diesem Fall kann man die Greensche Funktion exakt berechnen:
 
-\begin{align*}
-  G(x, x) = G(0,0) = \sum_{m=0}^\infty p^{(m)}(0, 0) = 1 + \sum_{n=1}^\infty p^{(2n)}(0, 0) = 1 + \sum_{n=1}^\infty \binom{2n}{n} p^n (1-p)^n
-  = 1 + \sum_{n=1}^\infty \binom{2n}{n} 4^{-n} (4 p (1-p))^n = (1 - 4 p (1-p))^{-\tfrac{1}{2}} = \tfrac{1}{\abs{2p - 1}}
-\end{align*}
+\[
+  \begin{array}{r c l}
+    G(x, x) &=& G(0,0) \\
+    &=& {\sum}_{m=0}^\infty p^{(m)}(0, 0) \\
+    &=& 1 + {\sum}_{n=1}^\infty p^{(2n)}(0, 0) \\
+    &=& 1 + {\sum}_{n=1}^\infty \tbinom{2n}{n} p^n (1-p)^n \\
+    &=& 1 + {\sum}_{n=1}^\infty \tbinom{2n}{n} 4^{-n} (4 p (1-p))^n \\
+    &=& (1 - 4 p (1-p))^{-1/2} \\
+    &=& 1/\abs{2p - 1}
+  \end{array}
+\]
 
 % 2.13
 \begin{satz}
-  Sei $\{ Z_n \}$ eine Irrfahrt auf~$\Z$ mit $\E \abs{Z_1 - Z_0} = \sum_{x \in \Z} \abs{x} p(0, x) < \infty$.
-  Dann gilt
-  \[
-    \{ Z_n \} \text{ ist rekurrent} \iff \sum_{x \in \Z} x p(0, x) = 0.
-  \]
+  Sei $\{ Z_n \}$ eine Irrfahrt auf~$\Z$ mit
+  \[ \E \abs{Z_1 - Z_0} = {\sum}_{x \in \Z} \abs{x} p(0, x) < \infty. \]
+  Dann gilt: \quad
+  $
+    \{ Z_n \} \text{ ist rekurrent} \iff {\sum}_{x \in \Z} \, x p(0, x) = 0.
+  $
 \end{satz}
 
 \begin{defn}
-  Einfache symmetrische Irrfahrt auf $\Z^d$ ist eine translationsinvariante Markovkette mit $p(0, \pm e_i) = \tfrac{1}{2 d}$ für $i = 1, \ldots, d$.
+  Die \emph{einfache symmetrische Irrfahrt auf $\Z^d$} ist die translationsinvariante Markovkette mit
+  \[
+    p(0, \pm e_i) = \tfrac{1}{2 d} \quad \text{für } i = 1, \ldots, d.
+  \]
 \end{defn}
 
-Für einfache symm. Irrfahrten gilt:
-$p^{(2n)}(x, x) = \sum_{k_1, \ldots, k_d \in \N, k_1 + \ldots + k_d = n} \tfrac{(2n)!}{(k_1!)^2 \cdot (k_d!)^2} (\tfrac{1}{2d})^{2n}$
+\begin{bem}
+  Für einfache symmetrische Irrfahrten gilt:
+  \[
+    p^{(2n)}(x, x) = \qquad \sum_{\mathclap{\substack{k_1, \ldots, k_d \in \N \\ k_1 + \ldots + k_d = n}}} \qquad \frac{(2n)!}{(k_1!)^2 \cdots (k_d!)^2} (\frac{1}{2d})^{2n}
+  \]
 
-Für $d = 2$ gilt $p^{(2n)}(0, 0) = [\binom{2n}{n} (\tfrac{1}{2})^{2n}]^2$
-
-Mit der Stirling'schen Formel folgt $p^{(2n)}(0, 0) \approx \tfrac{1}{\pi n}$.
-
-Somit gilt $\sum p^{(2n)}(0,0) = \infty$.
+  Für $d = 2$ gilt $p^{(2n)}(0, 0) = \left[ \tbinom{2n}{n} (\tfrac{1}{2})^{2n} \right]^2$.
+  Mit der Stirling'schen Formel folgt $p^{(2n)}(0, 0) \approx \tfrac{1}{\pi n}$.
+  Somit gilt $\sum p^{(2n)}(0,0) = \infty$.
+\end{bem}
 
 \begin{fazit}
   Die zweidimensionale einfache symm. Irrfahrt ist rekurrent.
@@ -241,29 +264,34 @@ Somit gilt $\sum p^{(2n)}(0,0) = \infty$.
 
 \begin{bem}
   Man kann zeigen:
-  Für einfache symm. Irrfahrten auf~$\Z^d$ gilt:
-  \[ p^{2n}(0,0) \leq \tfrac{C_d}{n^{\nicefrac{d}{2}}} \]
+  Für einfache symm. Irrfahrten auf~$\Z^d$ gilt
+  \[ p^{(2n)}(0,0) \leq C_d / n^{\nicefrac{d}{2}} \]
+  für eine Konstante $C_d > 0$.
   Somit ist die einfache Irrfahrt transient für alle $d \geq 3$.
 \end{bem}
 
 \begin{defn}
-  $\varphi(t) \coloneqq \sum_{x \in \Z^d} e^{i (t \cdot x)} p(0, x)$ für $t \in \R^d$
+  $\Defn{\varphi(t)} \coloneqq {\sum}_{x \in \Z^d} e^{i (t \cdot x)} p(0, x)$ \quad
+  für $t \in \R^d$
 \end{defn}
 
-Da die Zuwächse $\{ Z_n - Z_{n-1} \}$ \iid{} sind, so gilt
-\[ \sum_{x \in \Z^d} e^{i (t \cdot x)} p^{n}(0, x) = \varphi^n(t), \quad n \geq 1 \]
+\begin{bem}
+  Da die Zuwächse $\{ Z_n - Z_{n-1} \}$ \iid{} sind, gilt
+  \[ {\sum}_{x \in \Z^d} \, e^{i (t \cdot x)} p^{(n)}(0, x) = \varphi^n(t), \quad n \geq 1 \]
 
-Inversionsformel: $p^{n}(0, x) = \tfrac{1}{(2 \pi)^d} \int{\cointerval{-\pi}{\pi}^d}{}{e^{- i (t \cdot x)} \varphi^n(t)}{t}$
+  \textit{Inversionsformel}: \quad
+  $p^{(n)}(0, x) = \tfrac{1}{(2 \pi)^d} \Int{\cointerval{-\pi}{\pi}^d}{}{e^{- i (t \cdot x)} \varphi^n(t)}{t}$
+\end{bem}
 
 \begin{satz}
   Für jede Irrfahrt $\{ Z_n \}$ auf $\Z^d$ gilt
-  \[ G(0, 0) = \left( \tfrac{1}{2 \pi} \right)^d \lim_{\lambda \uparrow 1} \int{t \in \cointerval{-\pi}{\pi}^d}{}{Re(\tfrac{1}{1 - \lambda \varphi(t)})}{t} = \infty \]
+  \[ G(0, 0) = \left( \frac{1}{2 \pi} \right)^d \lim_{\lambda \uparrow 1} \Int{t \in \cointerval{-\pi}{\pi}^d}{}{Re(\tfrac{1}{1 - \lambda \varphi(t)})}{t} = \infty \]
 \end{satz}
 
 \begin{bsp}
   Für die einfache symm. Irrfahrt $\{ Z_n \}$ auf~$\Z^d$ ist
   \[
-    \varphi(t) = \tfrac{1}{d} \sum_{k=1}^d \cos(t_k)
+    \varphi(t) = \tfrac{1}{d} {\sum}_{k=1}^d \cos(t_k)
   \]
   Mit der Ungleichung $1 - \cos(u) \geq c_0 u^2$ für alle $u \in \cinterval{- \pi}{\pi}$ folgt
   \[
@@ -285,27 +313,33 @@ Inversionsformel: $p^{n}(0, x) = \tfrac{1}{(2 \pi)^d} \int{\cointerval{-\pi}{\pi
 % 2.17
 \begin{bsp}
   Sei $\{ Z_n \}$ eine Irrfahrt auf $\Z$ mit $p(0, x) = p(0, -x)$.
-  Angenommen $x^\alpha p(0, x) \to c \in \ointerval{0}{\infty}$ für $x \to \infty$ für ein $\alpha > 1$.
-  Dann gilt
-  \[ 1 - \varphi(t) = \sum_{n=-\infty}^\infty (1 - \cos(nt)) p(0, n) \]
-  und
+  Gelte
+  \[ x^\alpha p(0, x) \xrightarrow{x \to \infty} c \in \ointerval{0}{\infty} \]
+  für ein $\alpha > 1$.
+  Dann ist
   \[
-    \tfrac{1 - \varphi(t)}{\abs{t}^{\alpha - 1}} = \sum_{n=-\infty}^\infty \abs{n}^\alpha p(0, n) \abs{t} f(n t)
+    1 - \varphi(t) = \sum_{\mathclap{n=-\infty}}^\infty (1{-}\cos(nt)) p(0, n)
+    \enspace \text{und} \enspace
+    \frac{1 {-} \varphi(t)}{\abs{t}^{\alpha - 1}} = \sum_{\mathclap{n=-\infty}}^\infty \abs{n}^\alpha p(0, n) \abs{t} f(n t)
   \]
-  mit $f(x) = \tfrac{1 - \cos(x)}{\abs{x}^\alpha}$.
+  mit $f(x) = (1 - \cos(x))/\abs{x}^\alpha$.
   Außerdem $\abs{n}^\alpha p(0, n) = c + \epsilon_n$, wobei $\epsilon_n \to 0$ für $\abs{n} \to \infty$.
   Es folgt
   \[
     \tfrac{1 - \varphi(t)}{\abs{t}^{\alpha - 1}} = \sum_{n=-\infty}^\infty c \abs{t} f(n t) + \sum_{n=-\infty}^\infty \epsilon_n \abs{t} f(n t).
   \]
   Für $t \to 0$ hat man
-  \[ \sum_{n=-\infty}^\infty \abs{t} f(n t) \to \int{-\infty}^{\infty}{f(x)}{x} \]
-  und
-  \[ \sum_{n=-\infty}^\infty \epsilon_n \abs{t} f(n t) \to 0. \]
-  Es folgt für $\alpha < 3$
-  \[ \lim_{t \to 0} \tfrac{1 - \varphi(t)}{\abs{t}^{\alpha - 1}} = c \int{-\infty}{\infty}{\tfrac{1 - \cos(x)}{\abs{x}^\alpha}}{x} < \infty \]
+  \[
+    \sum_{n=-\infty}^\infty \abs{t} f(n t) \to \Int{-\infty}{\infty}{f(x)}{x}
+    \enspace \text{und} \enspace
+    \sum_{n=-\infty}^\infty \epsilon_n \abs{t} f(n t) \to 0.
+  \]
+  Es folgt für $\alpha < 3$:
+  \[ \lim_{t \to 0} \tfrac{1 - \varphi(t)}{\abs{t}^{\alpha - 1}} = c \Int{-\infty}{\infty}{\tfrac{1 - \cos(x)}{\abs{x}^\alpha}}{x} < \infty \]
   Folglich ist $\tfrac{1}{1 - \varphi(t)}$ für $\alpha < 2$ integrierbar und somit $\{ Z_n \}$ transient.
-  Für $\alpha = 2$ ist $\tfrac{1}{1 - \varphi(t)}$ in der Umgebung von null nicht integrierbar und damit $\{ Z_n \}$ rekurrent.
+
+  Für $\alpha = 2$ ist $1/(1 - \varphi(t))$ in der Umgebung von null nicht integrierbar und damit $\{ Z_n \}$ rekurrent.
+
   Für $\alpha > 2$ ist $\sum \abs{x} p(0, x) < \infty$ und somit ist die Irrfahrt rekurrent, da der Erwartungswert der Zuwächse null ist.
 \end{bsp}
 
@@ -315,55 +349,53 @@ Inversionsformel: $p^{n}(0, x) = \tfrac{1}{(2 \pi)^d} \int{\cointerval{-\pi}{\pi
 \section{Erneuerungstheorie}
 
 \begin{situation}
-  Seien $\{ X_k \}_{k \geq 1}$ \iid{} ZVn mit Werten in~$\N$ und $P(X_k \geq 1) > 0$.
+  Seien $\{ X_k \}_{k \geq 1}$ unabhängige ZVn mit Werten in~$\N$ und $P(X_k \geq 1) > 0$, wobei $\{ X_k \}_{k \geq 2}$ identisch vert. sind.
   Dann definiert
   \[
-  Z_n \coloneqq \sum_{k=1}^n X_k + Z_0
+  Z_n \coloneqq {\sum}_{k=1}^n X_k + Z_0
   \]
   eine Irrfahrt $\{ Z_n \}_{n \geq 0}$ mit nicht-negativen Zuwächsen auf~$\Z$.
 \end{situation}
 
 \begin{ziel}
-  Asymptotisches Verhalten von $G(0, x)$ untersuchen.
+  Untersuche das asympt. Verhalten von $G(0, x)$.
 \end{ziel}
 
-Wir werden annehmen, dass $X_1$ eine andere Verteilung haben darf.
-
 \begin{defn}
-  Sei $\{ a_n \}$ eine Folge.
-  Die Funktion
-  \[ A(s) = \sum_{n=0}^\infty a_n s^n \]
-  heißt \emph{erzeugende Funktion}.
+  Die \emph{erzeugende Funktion} einer Folge $\{ a_n \}$ ist
+  \[ A(s) \coloneqq \sum_{n=0}^\infty a_n s^n. \]
 \end{defn}
 
 % 2.18
 \begin{bsp}
   Setze $p_k \coloneqq P(X_2 = k)$, $k \geq 0$.
-  Wir nehmen an, dass $\E[X_2] = \sum_{k=1}^\infty k p_k =: a \in \ointerval{0}{\infty}$.
+  Wir nehmen an, dass
+  \[ a \coloneqq \E[X_2] = {\sum}_{k=1}^\infty k p_k \in \ointerval{0}{\infty}. \]
   Definiere
-  \[ q_k \coloneqq \tfrac{1}{a} \sum_{j=k}^\infty p_j, \quad k \geq 1. \]
-  Dann ist $\sum_{k=1}^\infty q_k = 1$.
-  Sei $X_1$ sodass $P(X_1=k) = q_k$, $k \geq 1$.
-  Definiere
+  $q_k \coloneqq \tfrac{1}{a} {\sum}_{j=k}^\infty p_j$
+  für $k \geq 1$.
+  Dann ist ${\sum}_{k=1}^\infty q_k = 1$. \\
+  Sei $X_1$ eine ZV mit $P(X_1=k) = q_k$, $k \geq 1$.
+  Setze
   \[
     \begin{array}{r c l}
-      f(s) &=& \sum_{k=1}^\infty p_k s^k = \E[s^{X_2}], \enspace \abs{s} \leq 1 \\
-      g(s) &=& \sum_{k=1}^\infty q_k s^k = \E[s^{X_1}] \\
-      \psi(s) &=& \sum_{x=1}^\infty G(0, x) s^x, \enspace \abs{s} < 1
+      f(s) &\coloneqq& {\sum}_{k=1}^\infty p_k s^k = \E[s^{X_2}], \enspace \abs{s} \leq 1 \\[0.1cm]
+      g(s) &\coloneqq& {\sum}_{k=1}^\infty q_k s^k = \E[s^{X_1}] \\[0.1cm]
+      \psi(s) &\coloneqq& {\sum}_{x=1}^\infty G(0, x) s^x, \enspace \abs{s} < 1
     \end{array}
   \]
   Dann gilt für $\abs{s} < 1$:
-  \[ \psi(s) = \sum_{k=1}^\infty g(s) f(s)^{k-1} = \frac{g(s)}{1 - f(s)} \]
+  \[ \psi(s) = {\sum}_{k=1}^\infty g(s) f(s)^{k-1} = g(s)/(1 - f(s)) \]
   Außerdem gilt:
-  \[ g(s) = \frac{s}{a (1-s)} (1 - f(s)) \]
+  \[ g(s) = \tfrac{s}{a (1-s)} (1 - f(s)) \]
   Es folgt:
-  \[ \psi(s) = \sum_{x=1}^\infty \frac{1}{a} s^x \]
+  \[ \psi(s) = \sum_{x=1}^\infty \tfrac{1}{a} s^x \]
   Somit ist $G(0, x) = \tfrac{1}{a}$.
 \end{bsp}
 
 % 2.19
 \begin{satz}
-  Angenommen, $\ggT \Set{p}{p_k > 0} = 1$.
+  Angenommen, $\ggT \Set{k}{p_k > 0} = 1$.
   Dann gilt für jede Verteilung von~$X_1$, dass
   \[ G(0, x) \xrightarrow{x \to \infty} \tfrac{1}{a}. \]
 \end{satz}
@@ -373,35 +405,46 @@ Wir werden annehmen, dass $X_1$ eine andere Verteilung haben darf.
   Sei $g(\theta)$ integrierbar auf $\cointerval{-\pi}{\pi}$.
   Dann gilt
   \[
-    \int{\cointerval{-\pi}{\pi}}{}{e^{i \theta x} g(\theta)}{\theta} \xrightarrow{\abs{x} \to \infty}
+    \Int{\cointerval{-\pi}{\pi}}{}{e^{i \theta x} g(\theta)}{\theta} \xrightarrow{\abs{x} \to \infty}
     \quad (x \in \Z)
   \]
 \end{lem}
 
 % 2.21
 \begin{lem}
-  Seien alle $X_k$ identisch verteilt und $\ggT \Set{p}{p_k > 0} = 1$.
-  Dann existiert $L \coloneqq \lim_{x \to \infty} G(0, x)$.
+  \begin{minipage}[t]{0.8 \linewidth}
+    Seien alle $X_k$ identisch verteilt und $\ggT \Set{p}{p_k > 0} = 1$.
+    Dann existiert $L \coloneqq {\lim}_{x \to \infty} G(0, x)$.
+  \end{minipage}
 \end{lem}
 
 % 2.22
 \begin{defn}
   Seien $\{ X_k \}_{k \geq 1}$ unabhängige, nichtneg. ZVn und seien $\{ X_k \}_{k \geq 2}$ identisch verteilt.
-  Setze $Z_n \coloneqq \sum_{k=1}^n X_k$.
-  Der Prozess $\eta(t) \coloneqq \min\,\Set{k \geq 1}{Z_k > t}$ heißt \emph{Erneuerungsprozess} und die Funktion $H(t) \coloneqq \E[\eta(t)]$ heißt \emph{Erneuerungsfunktion}.
+  Setze $Z_n \coloneqq {\sum}_{k=1}^n X_k$.
+  Dann heißt
+  \[
+    \begin{array}{r c l l}
+      \Defn{\eta(t)} &\coloneqq& \min\,\Set{k \geq 1}{Z_k > t} &
+      \text{\emph{Erneuerungsprozess} und} \\
+      \Defn{H(t)} &\coloneqq& \E[\eta(t)]
+      & \text{\emph{Erneuerungsfunktion}.}
+    \end{array}
+  \]
 \end{defn}
 
-Falls $X_k$ nur Werte aus~$\N$ annehmen, so können wir das Verhalten von $H(t) - H(t-1)$ wie folgt beschreiben:
-\[ H(t) = \E[\eta(t)] = \sum_{k=0}^\infty P(\eta(t) > k) = \sum_{k=0}^\infty P(Z_k \leq t) \]
-Es folgt
-\[
-  H(t) - H(t-1) = \sum_{k=0}^\infty P(Z_k = t) \xrightarrow{t \to \infty} \tfrac{1}{\E[X_2]}.
-\]
+Falls $X_k$ nur Werte aus~$\N$ annimmt, so können wir das Verhalten von $H(t) - H(t-1)$ wie folgt beschreiben:
+\[\begin{array}{r l}
+  & H(t) = \E[\eta(t)] = \sum_{k=0}^\infty P(\eta(t) > k) = \sum_{k=0}^\infty P(Z_k \leq t) \\
+  \rightsquigarrow & H(t) - H(t-1) = \sum_{k=0}^\infty P(Z_k = t) \xrightarrow{t \to \infty} 1/\E[X_2].
+\end{array}\]
 
 \begin{defn}
   $
-    \gamma(t) \coloneqq t - Z_{\eta(t)-1} \geq 0, \quad
-    \chi(t) \coloneqq Z_{\eta(t)} - t > 0
+    \begin{array}[t]{r c l l}
+    \Defn{\gamma(t)} &\coloneqq& t - Z_{\eta(t)-1} \geq 0 & \text{heißt \emph{Overshoot},} \\
+    \Defn{\chi(t)} &\coloneqq& Z_{\eta(t)} - t > 0 & \text{heißt \emph{Undershoot}.}
+    \end{array}
   $
 \end{defn}
 
@@ -414,13 +457,20 @@ Es folgt
 \end{satz}
 
 \begin{kor}
-  $P(\gamma(t) = i) \xrightarrow{t \to \infty} \frac{1}{a} \sum_{k=i+1}^\infty p_k$,
-  $P(\gamma(t) = j) \xrightarrow{t \to \infty} \frac{1}{a} \sum_{k=j}^\infty p_k$
+  $
+    \begin{array}[t]{r c l}
+      P(\gamma(t) = i) &\xrightarrow{t \to \infty}& \tfrac{1}{a} {\sum}_{k=i+1}^\infty p_k, \\[0.15cm]
+      P(\gamma(t) = j) &\xrightarrow{t \to \infty}& \tfrac{1}{a} {\sum}_{k=j}^\infty p_k
+    \end{array}
+  $
 \end{kor}
+
+\TODO{Eine der Gleichungen im Korollar sollte $\chi$ beinhalten.}
 
 % Vorlesung vom 23.5.2017
 
 % §4. Positive Rekurrenz
+\section{Positive Rekurrenz}
 
 % 2.25
 \begin{defn}
@@ -437,16 +487,18 @@ Es folgt
 
 % 2.26
 \begin{lem}
-  Sei $x$ ein positiv rekurrenter Zustand.
-  Ist $F(x, y) > 0$ so it auch~$y$ positiv rekurrent.
+  \begin{minipage}[t]{0.8 \linewidth}
+    Sei $x$ ein positiv rekurrenter Zustand. \\
+    Ist $F(x, y) > 0$ so ist auch~$y$ positiv rekurrent.
+  \end{minipage}
 \end{lem}
 
 % 2.27
 \begin{kor}
-  Ist die Kette $\{ Z_n \}$ irreduzibel und ist ein Zustand $x_0$ positiv rekurrent, so gilt:
+  Ist $\{ Z_n \}$ irreduzibel und $x_0 \in E$ positiv rekurrent, so gilt:
   \begin{itemize}
     \item alle Zustände sind positiv rekurrent
-    \item $m(x, y) \coloneqq \E[ \tau^{(1)}_y | Z_0 = x ] < \infty$ für alle $x, y \in E$
+    \item $\Defn{m(x, y)} \coloneqq \E[ \tau^{(1)}_y | Z_0 = x ] < \infty$ für alle $x, y \in E$
   \end{itemize}
 \end{kor}
 
