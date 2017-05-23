@@ -418,4 +418,72 @@ Es folgt
   $P(\gamma(t) = j) \xrightarrow{t \to \infty} \frac{1}{a} \sum_{k=j}^\infty p_k$
 \end{kor}
 
+% Vorlesung vom 23.5.2017
+
+% §4. Positive Rekurrenz
+
+% 2.25
+\begin{defn}
+  $x \in E$ heißt \emph{positiv rekurrent}, falls $\E [\tau_x^{(1)} | Z_0=x] < \infty$
+\end{defn}
+
+\begin{bem}
+  positive Rekurrenz $\implies$ Rekurrenz
+\end{bem}
+
+\begin{defn}
+  Falls $x$ rekurrent, aber nicht positiv rekurrent ist, so heißt $x$ \emph{nullrekurrent}.
+\end{defn}
+
+% 2.26
+\begin{lem}
+  Sei $x$ ein positiv rekurrenter Zustand.
+  Ist $F(x, y) > 0$ so it auch~$y$ positiv rekurrent.
+\end{lem}
+
+% 2.27
+\begin{kor}
+  Ist die Kette $\{ Z_n \}$ irreduzibel und ist ein Zustand $x_0$ positiv rekurrent, so gilt:
+  \begin{itemize}
+    \item alle Zustände sind positiv rekurrent
+    \item $m(x, y) \coloneqq \E[ \tau^{(1)}_y | Z_0 = x ] < \infty$ für alle $x, y \in E$
+  \end{itemize}
+\end{kor}
+
+% 2.28
+\begin{defn}
+  Die Zahl
+  $d_x \coloneqq \ggT \Set{n \geq 1}{p^{(n)}(x,x) > 0}$
+  heißt \emph{Periode} von~$x$.
+  Falls $d = d_x$ für alle $x \in E$, so heißt $d$ \textit{Periode} der Kette~$\{ Z_n \}$.
+\end{defn}
+
+% 2.29
+\begin{lem}
+  Ist $\{ Z_n \}$ irreduzibel, so gilt $d_x = d_y$ für alle $x, y \in E$.
+\end{lem}
+
+% 2.30
+\begin{satz}
+  Es gibt eine Familie $\{ \pi_y \in \R_{> 0} \}_{y \in E}$, sodass
+  \[ \fa{x, y \in E} p^{(n)}(x, y) \xrightarrow{n \to \infty} \pi_y \]
+  genau dann, wenn
+  \begin{itemize}
+    \item $\{ Z_n \}$ irreduzibel und
+    \item aperiodisch (\dh{} $d = 1$) ist und 
+    \item ein $x_0$ existiert, sodass $m(x_0, x_0) < \infty$.
+  \end{itemize}
+  Die Folge $\{ \pi_y \}_{y \in E}$ ist die eindeutige Lösung zu
+  \[
+    \left\{
+      \begin{array}{l}
+        \sum_{y \in E} \abs{P_y} < \infty \\
+        \sum_{y \in E} \pi_y = 1 \\
+        \sum_{x \in E} \pi_x p(x, y) = \pi_y \text{ für alle } y \in E
+      \end{array}
+    \right.
+  \]
+  Es gilt $\pi_y = 1/m(y,y)$.
+\end{satz}
+
 \end{document}
