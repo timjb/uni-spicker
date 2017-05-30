@@ -511,6 +511,59 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
   \EndFunction
 \end{algorithmic}
 
+% §5.4. Minimum Vertex Cover
+
+% 5.2
+\begin{satz}
+  Instanzen von Minimum Vertex Cover mit $n$~Knoten und $m$~Kanten können in Zeit $\O(3^{n/2} \cdot m + n)$ gelöst werden.
+\end{satz}
+
+\begin{nota}
+  Für einen Graphen $G = (V, E)$ und Knoten $W \subseteq V$ sei $G - W$ der Graph $(V', \Set{\{u, w\} \in E}{u, w \in V'})$ mit $V' \coloneqq V \setminus W$, der durch Löschen von~$W$ entsteht.
+\end{nota}
+
+\begin{algorithmic}
+  \Function{ComputeMVC}{$G = (V, E)$}
+    \If{$G = \emptyset$} \Return $\emptyset$ \EndIf
+    \If{$G$ hat isolierten Knoten $u$}
+      \State \Return $\Call{ComputeMVC}{G - \{ u \}}$
+    \EndIf
+    \If{$G$ hat Knoten $u$ vom Grad~1}
+      \State sei $v$ der Knoten mit $\{ u, v \} \in E$
+      \State \Return $\{ v \} \cup \Call{ComputeMVC}{G - \{ u, v \}}$
+    \EndIf
+    \If{$G$ hat Dreieck mit Eckknoten $u$, $v$, $w$}
+      \State $C_{u,v} \coloneqq \{u, v\} \cup \Call{ComputeMVC}{G - \{ u, v \}}$
+      \State $C_{u,w} \coloneqq \{u, w\} \cup \Call{ComputeMVC}{G - \{ u, w \}}$
+      \State $C_{v,w} \coloneqq \{v, w\} \cup \Call{ComputeMVC}{G - \{ v, w \}}$
+      \State \Return kleinste der Überdeckungen $C_{u,v}$, $C_{u,w}$ und $C_{v,w}$
+    \EndIf
+    \If{$G$ hat einfachen Pfad mit Knoten $u, v, w$ und $z$}
+      \State $C_{u,w} \coloneqq \{u, w\} \cup \Call{ComputeMVC}{G - \{ u, w \}}$
+      \State $C_{v,w} \coloneqq \{v, w\} \cup \Call{ComputeMVC}{G - \{ v, w \}}$
+      \State $C_{v,z} \coloneqq \{v, z\} \cup \Call{ComputeMVC}{G - \{ v, z \}}$
+      \State \Return kleinste der Überdeckungen $C_{u,w}$, $C_{v,w}$ und $C_{v,z}$
+    \EndIf
+  \EndFunction
+\end{algorithmic}
+
+\begin{bem}
+  In der Umgebung jedes Knoten eines Graphen tritt einer der vier Fälle auf.
+  Es kann daher in konstanter Zeit einer der vier Fälle ausgewählt werden.
+  (Es muss nicht darauf geachtet werden, die Fälle von oben nach unten durchzuarbeiten!)
+\end{bem}
+
+Wir sagen, ein Fall \textit{verzweigt gemäß} $A_1, \ldots, A_k$, falls er den Algorithmus rekursiv mit Argumenten $G - A_1$, \ldots, $G - A_k$ aufruft.
+Die Multimenge $\{ \size{A_1}, \ldots, \size{A_k} \}$ heißt zugehörige \textit{Verzweigungs- multimenge}.
+Für eine solche Multimenge $\{ a_1, \ldots, a_k \}$ setzen wir
+\[ \alpha(a_1, \ldots, a_k) \coloneqq \max \, \Set{x \geq 1}{x^{-a_1} + \ldots + x^{-a_k} \geq 1}. \]
+Schaffen wir es, einen Algorithmus mit $m$~Fällen mit Verzweigungs- multimengen $A_1, \ldots, A_m$ anzugeben (sodass in konstanter Zeit entschieden werden kann, welcher Fall vorliegt), so läuft der Algorithmus in Zeit $\O(\alpha_0^n \cdot m + n)$, wobei $\max \, \Set{\alpha(A_i)}{i = 1, \ldots, m}$
+
+% 5.3
+\begin{satz}
+  Instanzen von Minimum Vertex Cover mit $n$~Knoten und $m$~Kanten können in Zeit $\O(\alpha_0^n \cdot m + n)$ gelöst werden, wobei $\alpha_0 \approx 1,325$ die Wurzel von $x^3 - x - 1$ ist.
+\end{satz}
+
 \section{Probleme}
 
 \begin{problem}[\Problem{Maximum Independent Set}, MIS]
