@@ -538,4 +538,57 @@ Falls $X_k$ nur Werte aus~$\N$ annimmt, so können wir das Verhalten von $H(t) -
   Es gilt $\pi_y = 1/m(y,y)$.
 \end{satz}
 
+% Vorlesung vom 30.5.2017
+
+% 2.31
+\begin{defn}
+  Eine Verteilung $\{ \mu_x \}_{x \in E}$ auf~$E$ heißt \emph{stationär}, falls
+  \[
+    \mu_x = \sum_{y \in E} \mu_y p(y, x)
+    \quad \text{für alle $x \in E$}
+    \qquad \text{(kurz: $\mu = \mu P$).}
+  \]
+\end{defn}
+
+\begin{bem}
+  Für eine stationäre Verteilung $\{ \mu_x \}_{x \in E}$ gilt
+  \[
+    \mu_x = \sum_{y \in E} \mu_y p^{(n)}(y, x)
+    \quad \text{für alle $x \in E$ und $n \in \N$}
+  \]
+\end{bem}
+
+% 2.33
+\begin{lem}
+  Sei $x$ ein positiv rekurrenter Zustand.
+  Dann definiert
+  \[
+    \Defn{\mu_y^{(x)}} \coloneqq \E[ \sum_{k=0}^{\tau_x^{(1)} - 1} \ind \{ Z_k = y | Z_0 = x \} ] / m(x, x)
+  \]
+  für alle $y \in E$ eine stationäre Verteilung $\{ \mu_y^{(x)} \}_{y \in E}$.
+\end{lem}
+
+% 2.34
+\begin{satz}
+  Sei $\{ Z_n \}$ eine irreduzible Kette.
+  Dann gilt:
+  \[
+    \{ Z_n \} \text{ ist pos. rekurrent} \iff
+    \{ Z_n \} \text{ hat eine stationäre Verteilung.}
+  \]
+  In diesem Fall ist die stationäre Verteilung eindeutig.
+\end{satz}
+
+% $\Defn{\sigma_x^n} \coloneqq \sup \Set{k \leq n}{Z_k = x} \in \{ - \infty, 0, \ldots, n \}$
+
+% 2.35
+\begin{satz}
+  Eine irreduzible Kette auf einem endlichen Zustandsraum ist immer positiv rekurrent.
+  Ferner existieren $C > 0$ und $q \in \ointerval{0}{1}$ mit
+  \[
+    P(\tau_y^{(1)} > n | Z_0 = x) < C q^n
+    \quad \text{für alle $n \geq 1$ und $x, y \in E$.}
+  \]
+\end{satz}
+
 \end{document}
