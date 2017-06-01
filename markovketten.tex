@@ -591,4 +591,37 @@ Falls $X_k$ nur Werte aus~$\N$ annimmt, so können wir das Verhalten von $H(t) -
   \]
 \end{satz}
 
+% 2.36
+\begin{satz}
+  Sei $\{ Z_n \}$ irreduzibel und positiv rekurrent.
+  Sei $f : E \to \R$ integrierbar bezüglich der stationären Verteilung $\{ \pi_x \}$, \dh{} $\sum_{x \in E} \abs{f(x)} \pi_x < \infty$.
+  Dann gilt
+  \[
+    \tfrac{1}{n} \sum_{k=0}^{n-1} f(Z_k) \xrightarrow{\text{f.\,s.}} \sum_{x \in E} f(x) \pi_x
+  \]
+\end{satz}
+
+\begin{bsp}
+  Für $f(y) \coloneqq \ind \{ y = x_0 \}$ für eine $x_0 \in E$ erhalten wir
+  \[ \tfrac{1}{n} \sum_{k=0}^{n-1} \ind \{ Z_k = x_0 \} \xrightarrow{\text{f.\,s.}} \pi_{x_0}. \]
+  Es folgt mit majorisierter Konvergenz:
+  \[ \tfrac{1}{n} \sum_{k=0}^{n-1} p^{(k)}(x, x_0) \xrightarrow{n \to \infty} \pi_{x_0}. \]
+\end{bsp}
+
+\begin{bsp}
+  Sei $\{ Z_n \}$ irreduzibel, periodisch mit Periode $p > 1$.
+  Dann gilt
+  $p^{(dk)}(x_0, x_0) \xrightarrow d / m(x_0, x_0)$.
+\end{bsp}
+
+% 2.37
+\begin{lem}
+  Sei $\{ Z_n \}$ eine irreduzible Kette mit der Periode $d \geq 1$. \\
+  Für jedes $x \in E$ existiert ein $m_x \geq 1$ mit
+  \[
+    p^{(md)}(x, x) > 0
+    \text{für alle $m \geq m_x$.}
+  \]
+\end{lem}
+
 \end{document}
