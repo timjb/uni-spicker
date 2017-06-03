@@ -2255,7 +2255,7 @@ Für $m=1$ folgt:
 % 25.3. Noethersche Normalisierung
 
 \begin{prop}[\emph{Noethernormalisierung}]
-  Sei $K$ ein Körper und $\aaa$ ein Ideal in $A \coloneqq K[x_1, \ldots, x_n]$.
+  Sei $K$ ein Körper und $\aaa \neq (1)$ ein Ideal in $A \coloneqq K[x_1, \ldots, x_n]$.
   Dann gibt es algebraisch unabhängige Elemente $y_1, \ldots, y_n \in A$, sodass $A$ ganz über $B \coloneqq K[y_1, \ldots, y_n]$ ist, und ein $0 \leq r \leq n$ mit $B \cap \aaa = (y_{r+1}, \ldots, y_n)$.
 \end{prop}
 
@@ -2289,7 +2289,7 @@ Für $m=1$ folgt:
 \end{bem}
 
 % 26. Erster Cohen–Seidenbergscher Satz
-\subsection{Die Cohen-Seidenbergsche Sätze}
+\subsection{Die Cohen--Seidenbergschen Sätze}
 
 % 26.1. Körpererweiterungen
 
@@ -2368,11 +2368,8 @@ Für $m=1$ folgt:
   Sei $A \subseteq B$ eine Erweiterung von Integritätsbereichen.
   Sei $A$ ganz abgeschlossen mit Quotientenkörper $K$.
   Sei $x \in B$ ganz über einem Ideal $\aaa \subseteq A$.
-  Dann ist $x$ algebraisch über $K$ und für sein Minimalpolynom $f \in K[t]$ gilt $f \in \sqrt{\aaa}[t]$.
+  Dann ist $x$ algebraisch über $K$ und bis auf den Leitkoeffizienten liegen alle Koeffizienten seines Minimalpolynome $f \in K[t]$ in $\sqrt{\aaa}$.
 \end{prop}
-
-% TODO: Häh, wie kann das sein, das Minimalpolynom hat doch den Koeffizienten 1 vor dem führenden x^n???
-% Definition von Minimalpolynom
 
 % 27.3. Der zweite Cohen-Seidenbergsche Satz
 
