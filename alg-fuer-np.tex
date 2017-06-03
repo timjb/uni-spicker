@@ -25,9 +25,10 @@
 \DeclareMathOperator{\NPO}{NPO} % non-deterministic polynomial-time optimization problem
 \DeclareMathOperator{\PO}{PO} % polynomial-time optimization problem
 \DeclareMathOperator{\APX}{APX} % polynomial-time approximable optimization problem
-\DeclareMathOperator{\NP}{APX} % nondeterministic polynomial-time problems
+\DeclareMathOperator{\NP}{NP} % nondeterministic polynomial-time problems
 \let\P\relax % undefine \P
-\DeclareMathOperator{\P}{APX} % polynomial-time problems
+\DeclareMathOperator{\P}{P} % polynomial-time problems
+\DeclareMathOperator{\PTAS}{PTAS} % polynomial-time approximation schema, class of problems in NPO that possess such
 \newcommand{\Prob}{\mathcal{P}} % Optimierungsproblem
 \newcommand{\ManyOneRed}{\leq_m} % Many-To-One-Reduzierbarkeit
 \newcommand{\TuringRed}{\leq_T} % Turing-Reduzierbarkeit
@@ -35,12 +36,15 @@
 \DeclareMathOperator*{\argmax}{arg\,max}
 \newcommand{\Powerset}{\mathcal{P}} % Potenzmenge
 \renewcommand{\O}{\mathcal{O}} % Landau-Notation
+\newcommand{\floor}[1]{\lfloor #1 \rfloor} % Abrunden
 
 % Hervorhebung von Algorithmen und Problemen
 \definecolor{AlgorithmColor}{rgb}{0.7,0.2,0.0}
 \newcommand{\Algorithm}[1]{\textcolor{AlgorithmColor}{\textbf{#1}}}
 \definecolor{ProblemColor}{rgb}{0.1,0.5,0.4}
 \newcommand{\Problem}[1]{\textcolor{ProblemColor}{\textbf{#1}}}
+\definecolor{DefinitionColor}{rgb}{1,0.255,0.212}
+\newcommand{\Defn}[1]{\textcolor{DefinitionColor}{#1}}
 
 \usepackage{algorithmicx}
 \usepackage[noend]{algpseudocode}
@@ -93,7 +97,7 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
 
 % 2.4
 \begin{defn}
-  \emph{$\NPO$} ist die Klasse aller Optimierungsprobleme~$\OptTuple$ mit
+  \Defn{$\NPO$} ist die Klasse aller Opt.-Probleme~$\OptTuple$ mit
   \begin{itemize}
     \item $\Instances{} \in P$
     \item Es gibt ein Polynom~$p$, sodass für alle $x \in X$
@@ -107,7 +111,7 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
 
 % 2.5
 \begin{defn}
-  $\text{\emph{$\PO$}} \subseteq \NPO$ ist die Subklasse für die ein Lösungsalgorithmus existiert, der in Polynomialzeit läuft.
+  $\Defn{\PO} \subseteq \NPO$ ist die Subklasse für die ein Lösungsalgorithmus existiert, der in Polynomialzeit läuft.
 \end{defn}
 
 % 2.6
@@ -132,9 +136,9 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
 \end{defn}
 
 % 2.8
-\begin{defn}
+\begin{lem}
   $\Prob \in \NPO \implies \Prob_D \in \mathrm{NP}$
-\end{defn}
+\end{lem}
 
 % 2.9
 \begin{defn}
@@ -348,11 +352,11 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
 
 % 4.7
 \begin{defn}
-  \emph{APX} ist die Klasse aller Probleme in NPO, die $r$-Approximierbar für ein $r > 1$ sind.
+  $\Defn{\APX}$ ist die Klasse aller Probleme in NPO, die $r$-Approximierbar für ein $r > 1$ sind.
 \end{defn}
 
 \begin{satz}
-  Falls $\N \neq \NP$, so gilt Minimum TSP $\not\in \APX$.
+  Falls $\P \neq \NP$, so gilt Minimum TSP $\not\in \APX$.
 \end{satz}
 
 \begin{samepage}
@@ -399,10 +403,10 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
 
 % 4.13
 \begin{defn}
-  Sei $G = (V, E)$ ein ungerichteter Graph.
+  Sei $G = (V, E)$ ein unger. Graph.
   Ein \emph{Matching} in~$G$ ist eine Teilmenge $E' \subseteq E$, sodass $e \cap e' = \emptyset$ für alle $e, e' \in E'$ mit $e \neq e'$.
   Ein Matching heißt \emph{perfekt}, falls $V = \cup_{e \in E'} e$.
-  Die \textit{Kosten} eines Matchings bzgl. einer Kostenfunktion $c : E \to \R_{\geq 0}$ sind $\sum_{e \in E'} c(e)$.
+  Die \textit{Kosten} eines Matchings bzgl. einer Kostenfunktion $c : E \to \R_{\geq 0}$ sind ${\sum}_{e \in E'} c(e)$.
 \end{defn}
 
 % 4.14
@@ -564,6 +568,85 @@ Schaffen wir es, einen Algorithmus mit $m$~Fällen mit Verzweigungs- multimengen
   Instanzen von Minimum Vertex Cover mit $n$~Knoten und $m$~Kanten können in Zeit $\O(\alpha_0^n \cdot m + n)$ gelöst werden, wobei $\alpha_0 \approx 1,325$ die Wurzel von $x^3 - x - 1$ ist.
 \end{satz}
 
+% §6. Dynamic Programming
+\section{Dynamische Programmierung}
+
+% §6.1. Maximum Integer Knapsack
+
+% 6.1
+\begin{satz}
+  Sei $P = (v_1, \ldots, v_n, w_1, \ldots, w_n)$ eine Instanz von Maximum Integer Knapsack.
+  Setze $V \coloneqq v_1 + \ldots + v_n$.
+  Dann kann $P$ in Zeit $\O(n V)$ gelöst werden.
+\end{satz}
+
+\begin{alg}[\Algorithm{Knapsack mit dynam. Programmierung}] \mbox{}\\
+  Löse mit dyn. Progr. die Unterprobleme $(P_{j,v})_{1 \leq j \leq n, 1 \leq v \leq V}$ mit
+  \[
+    P_{j,v} \coloneqq
+      \begin{array}[t]{l}
+        \text{finde $S \subset \{ 1, \ldots, j \}$ mit ${\sum}_{i \in S} v_i = v$ und} \\
+        \text{${\sum}_{i \in S} w_i$ minimal unter allen solchen Teilmengen!}
+      \end{array}
+  \]
+  Die Lösung ergibt sich aus den Lösungen von $P_{n,1}, \ldots, P_{n,V}$.
+\end{alg}
+
+\begin{bem}
+  Die Laufzeit ist \emph{pseudopolynomiell}: Sie hängt polynomiell von den in der Eingabe enthaltenen Zahlen ab.
+\end{bem}
+
+% §6.2 Minimum Bin Packing
+
+% 6.2
+\begin{satz}
+  Instanzen~$P$ von Minimum Bin Packing mit $n$~Objekten in $r$~versch. Größen können in Zeit~$\O(n^{2r+2})$ gelöst werden.
+\end{satz}
+
+\begin{alg}
+  Seien $s_1, \ldots, s_r$ die verschiedenen Größen. \\
+  Wir nennen einen Vektor $A = (a_1, \ldots, a_r) \in \N^r$ einen \textit{Packungstyp}, falls ${\sum}_{i=1}^r a_i s_i \leq 1$.
+  Sei $\{ A_1, \ldots, A_t \}$ die Menge aller Packungstypen.
+  Löse mit dyn. Programmierung die Unterprobleme
+  \[
+    P_{j,B} \coloneqq
+      \begin{array}[t]{l}
+        \text{finde $f : \{ 1, \ldots, j \} \to \N$ mit ${\sum}_{i=1}^j f(i) \cdot A_i = B$ und} \\
+        \text{${\sum}_{i=1}^j f(i)$ ist minimal unter all solchen $f$.}
+      \end{array}
+  \]
+  mit $1 \leq j \leq t$ und $B \in \{ 1, \ldots, n \}^r$ mit $B \leq P$.
+  Das ursprüngliche Problem ist $P_{t,P}$.
+\end{alg}
+
+\section{Polynomialzeit-Approximationsschemata}
+
+% 7.2
+\begin{defn}
+  Ein \emph{Polynomialzeit-Approximationsschema} (PTAS) für $\Prob \in \NPO$ ist ein Algorithmus, der für jede Instanz~$x$ von~$\Prob$ und $\epsilon > 0$ eine mögliche Lösung in~$\Feasible(x)$ mit relativem Fehler $\leq \epsilon$ liefert und dessen Laufzeit für jedes fixe $\epsilon > 0$ polynomiell in~$\size{x}$ ist.
+\end{defn}
+
+\begin{defn}
+  $\Defn{\PTAS} \coloneqq \Set{\Prob \in \NPO}{\text{$\Prob$ hat ein PTAS}}$
+\end{defn}
+
+\begin{bem}
+  $\PO \subseteq \PTAS \subseteq \APX$
+\end{bem}
+
+% 7.1
+\begin{satz}
+  Es gibt einen Algorithmus, der für jedes $\epsilon > 0$ und jede Instanz $(v_1, \ldots, v_n, w_1, \ldots, w_n, W)$ von Maximum Knapsack in Zeit $\O(n^3 / \epsilon)$ eine $\epsilon$-approximative Lösung liefert.
+\end{satz}
+
+\begin{alg}
+  \begin{enumerate}
+    \item Setze $K \coloneqq \epsilon V / n^2$, wobei $V \coloneqq v_1 + \ldots + v_n$.
+    \item Löse die Instanz $(\floor{v_1/K}, \ldots, \floor{v_n/K}, w_1, \ldots, w_n, W)$ von Maximum \textit{Integer} Knapsack mit dem Algorithmus basierend auf dynamischer Programmierung.
+    \item Die Lösung dieses geänderten Problems ist eine $\epsilon$-Approximation des ursprünglichen Problems.
+  \end{enumerate}
+\end{alg}
+
 \section{Probleme}
 
 \begin{problem}[\Problem{Maximum Independent Set}, MIS]
@@ -625,6 +708,10 @@ Schaffen wir es, einen Algorithmus mit $m$~Fällen mit Verzweigungs- multimengen
   Man wählt unter $n$ Sachen mit jeweils einem \textit{Gewicht}~$w_i$ und einem \textit{Nutzwert}~$v_i$ diejenigen aus, die man in einen Rucksack packt, sodass das Gesamtgewicht eine festgelegte Grenze~$W$ nicht übersteigt und der Nutzen maximal wird.
 \end{interp}
 
+\begin{problem}[\Problem{Maximum Integer Knapsack}] \mbox{}\\
+  Wie Maximum Knapsack aber mit $v_1, \ldots, v_n \in \N_{> 0}$.
+\end{problem}
+
 \begin{problem}[\Problem{Minimum Set Cover}]
   Gegeben seien $n \in \N$ und $\mathcal{C}_0 \subseteq \Powerset(\{ 1, \ldots, n \})$.
   Die Menge der möglichen Lösungen ist
@@ -670,6 +757,16 @@ Schaffen wir es, einen Algorithmus mit $m$~Fällen mit Verzweigungs- multimengen
   \[ (x_1 \vee x_2 \vee \overline{x_3}) \wedge (\overline{x_1} \vee \overline{x_3} \vee x_4 \vee \overline{x_5}) \wedge (x_2 \vee x_5) \wedge (x_3 \vee \overline{x_4}). \]
   Die Maximalzahl an \textit{Literalen} in einer \textit{Clause} sei dabei $\leq k$.
   Entscheide, ob die Formel \emph{erfüllbar} ist,\dh{} ob es eine Zuweisung der Variablen gibt, sodass die Formel wahr ist.
+\end{problem}
+
+\begin{problem}[\Problem{Minimum Bin Packing}]
+  Gegeben seien \textit{Objektgrößen} $v_1, \ldots, v_n \in \cinterval{0}{1}$.
+  \textit{Packungen} sind Abbildungen $f : \{ 1, \ldots, n \} \to \N$, die jedem \textit{Objekt} einen \textit{Behälter} (mit Volumen 1) zuweisen, sodass
+  \[
+    {\sum}_{i \in f^{-1}(j)} v_i \leq 1 \quad
+    \text{für alle $j \in \N$.}
+  \]
+  Gesucht ist ein~$f$ mit minimaler Anzahl $\max \im(f)$ von Behältern.
 \end{problem}
 
 \end{document}
