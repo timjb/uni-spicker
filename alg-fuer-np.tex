@@ -29,6 +29,9 @@
 \let\P\relax % undefine \P
 \DeclareMathOperator{\P}{P} % polynomial-time problems
 \DeclareMathOperator{\PTAS}{PTAS} % polynomial-time approximation schema, class of problems in NPO that possess such
+\DeclareMathOperator{\APTAS}{APTAS} % asymptotic polynomial-time approximation schema, class of problems in NPO that possess such
+\DeclareMathOperator{\FPTAS}{FPTAS} % fully polynomial-time approximation schema, class of problems in NPO that possess such
+\DeclareMathOperator{\AFPTAS}{AFPTAS} % asymptotic fully polynomial-time approximation schema, class of problems in NPO that possess such
 \newcommand{\Prob}{\mathcal{P}} % Optimierungsproblem
 \newcommand{\ManyOneRed}{\leq_m} % Many-To-One-Reduzierbarkeit
 \newcommand{\TuringRed}{\leq_T} % Turing-Reduzierbarkeit
@@ -434,7 +437,7 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
   Wiederhole folgende Schritte, bis alle Knoten gefärbt sind:
   \begin{enumerate}
     \item
-      Bestimme ein MIS~$I$ in~$G$ wie folgt: Setze $H \coloneqq G$ und $I \coloneqq \emptyset$, dann führe folgende Schritte aus, solange $H \neq \emptyset$:
+      Bestimme ein nicht-vergrößerbares IS~$I$ in~$G$ wie folgt: Setze $H \coloneqq G$, $I \coloneqq \emptyset$, dann führe folgende Schritte aus, solange $H \neq \emptyset$:
       \begin{enumerate}
         \item Wähle einen Knoten~$v$ minimalen Grades aus~$H$ aus.
         \item Füge $v$ zu~$I$ hinzu.
@@ -647,6 +650,78 @@ Schaffen wir es, einen Algorithmus mit $m$~Fällen mit Verzweigungs- multimengen
   \end{enumerate}
 \end{alg}
 
+% 7.3
+\begin{lem}
+  Es gibt einen Algorithmus, der für jede Instanz von \textit{Minimum Bin Packing} mit $n$~Objekten der Größe~$\geq \delta$ eine Packung der Objekte in $(1 + \delta) z^* + 1$ Behälter in Zeit $\O(n^{2/\delta^2 + 2})$ berechnet, wobei $z^*$ die optimale Zahl der Behälter ist.
+\end{lem}
+
+% 7.4
+\begin{satz}
+  Es gibt einen Algorithmus, der für jede Instanz von \textit{Minimum Bin Packing} mit $n$~Objekten eine Packung der Objekte in $(1 + \delta) z^* + 1$ Behälter in Zeit $\O(n^{8/\delta^2 + 2})$ berechnet.
+\end{satz}
+
+% 7.5
+\begin{defn}
+  Ein \emph{asymptot. Polynomialzeit-Approximationsschema} (APTAS) für $\OptTuple{}$ ist ein Algorithmus, der für alle $x \in \Instances{}$ und $\epsilon > 0$ eine mögliche Lösung $y \in \Feasible(x)$ mit
+  \[ \abs{Z(x, y) - \Opt(x)} \leq \epsilon \cdot \max \{ Z(x,y), \Opt(x) \} + K \]
+  für eine Konstante~$K$ berechnet und dessen Laufzeit für alle festen~$\epsilon$ polynomiell in $\size{x}$ ist.
+\end{defn}
+
+\begin{defn}
+  Ein (asympt.) \emph{Voll-Polynomialzeit-Approx'schema} ((A)FPTAS) für $\Prob{}$ ist ein (A)PTAS für~$\Prob{}$, dessen Laufzeit für die Instanz $(x, \epsilon)$ durch ein Polynom in $\size{x}$ und in~$1/\epsilon$ beschränkt ist.
+\end{defn}
+
+\begin{defn}
+  $\Defn{\mathrm{(A)(F)PTAS}} \coloneqq \Set{\Prob \in \NPO}{\text{$\Prob$ hat ein (A)(F)PTAS}}$
+\end{defn}
+
+\begin{bspe}
+  \begin{itemize}
+    \item Maximum Knapsack $\in \FPTAS$
+    \item Wir haben gezeigt: Minimum Bin Packing $\in \APTAS$
+    \item Man kann zeigen: Minimum Bin Packing $\in \AFPTAS$
+  \end{itemize}
+\end{bspe}
+
+% §8. Parametrization
+\section{Parametrisierung}
+
+\begin{vorgehen}
+  Füge einen weiteren Parameter (zusätzlich zu den Größenparametern) für Probleminstanzen ein, suche nach einem Algorithmus, dessen Laufzeit wesentlich von diesem Parameter abhängt, sodass Instanzen, die einen kleinen Wert für den Parameter haben, in akzeptabler Zeit gelöst werden können.
+\end{vorgehen}
+
+% §8.1. Minimum Vertex Cover
+
+% 8.1
+\begin{satz}
+  Es gibt einen Algorithmus, der gegeben einen Graphen~$G$ mit $n$~Ecken und $m$~Kanten und ein $k \geq 0$ in Zeit $\O(n \cdot 1,325^{k} + m)$ ein Minimum Vertex Cover der Größe $\leq k$ berechnet, falls ein solches existiert (falls nicht, so soll der Algorithmus "`keine Lösung"' zurückgeben).
+\end{satz}
+
+\begin{idee}
+  Verwende den rekursiven Baumsuche-Algorithmus für Minimum-Vertex-Cover, aber breche die Rekursion ab, wenn das sich in Konstruktion befindende Cover Größe $> k$ erreicht.
+  Außerdem optimiere rekursive Aufrufe dadurch, dass der Graph nicht kopiert für den Aufruf kopiert wird.
+\end{idee}
+
+% 8.3
+\begin{satz}
+  Es gibt einen Algorithmus, der gegeben einen Graphen~$G$ mit $n$~Ecken und $m$~Kanten und ein $k \geq 0$ in Zeit $\O(k^2 \cdot 1,325^{k} + n + m)$ ein Minimum Vertex Cover der Größe $\leq k$ berechnet, falls ein solches existiert.
+\end{satz}
+
+\begin{idee}
+  Füge jeden Knoten mit Grad $\geq k$ zum Cover hinzu (da jedes Cover der Größe $\leq k$ diese enthalten muss).
+  Wir können somit annehmen, dass der Maximalgrad in~$G$ $\leq k$ ist.
+  Lösche alle isolierten Knoten aus~$G$.
+  Es gilt: Falls $G$ nun mehr als $k^2$ Kanten oder mehr als $k^2 + k$ Ecken hat, so besitzt $G$ kein Vertex Cover der Größe $\leq k$ und wir können "`keine Lösung"' ausgeben.
+  Ansonsten verwende den Algorithmus vom letzten Satz.
+\end{idee}
+
+\begin{bem}
+  Wir haben damit die Probleminstanz auf einen kleineren \text{Kern} reduziert.
+  Diese Technik heißt \textit{kernelization}.
+\end{bem}
+
+% §8.2. MaxSAT
+
 \section{Probleme}
 
 \begin{problem}[\Problem{Maximum Independent Set}, MIS]
@@ -660,7 +735,7 @@ Schaffen wir es, einen Algorithmus mit $m$~Fällen mit Verzweigungs- multimengen
 \begin{problem}[\Problem{Minimum Vertex Cover}, MVC]
   Geg. einen unger. Graphen~$G = (V, E)$, berechne eine \textit{Knotenüberdeckung}~$C$, \dh{}
   \[
-    \fa{v, w \in V} (v, w) \in E \implies v \in C \vee w \in C,
+    \fa{v, w \in V} \{v, w\} \in E \implies v \in C \vee w \in C,
   \]
   die minimale Größe~$\size{C}$ unter allen Knotenüberdeckungen besitzt.
 \end{problem}
@@ -752,11 +827,15 @@ Schaffen wir es, einen Algorithmus mit $m$~Fällen mit Verzweigungs- multimengen
   Gesucht ist eine zyklische Permutation $\sigma$ von~$V$ (eine \textit{Tour}), sodass die \textit{Länge} ${\sum}_{v \in V} c(v, \sigma(v))$ minimal wird.
 \end{problem}
 
-\begin{problem}[\Problem{$k$-Satisfiability}]
+\begin{problem}[\Problem{$k$-SAT(isfiability)}]
   Gegeben sei eine Formel in konjunktiver Normalform, etwa
   \[ (x_1 \vee x_2 \vee \overline{x_3}) \wedge (\overline{x_1} \vee \overline{x_3} \vee x_4 \vee \overline{x_5}) \wedge (x_2 \vee x_5) \wedge (x_3 \vee \overline{x_4}). \]
   Die Maximalzahl an \textit{Literalen} in einer \textit{Clause} sei dabei $\leq k$.
   Entscheide, ob die Formel \emph{erfüllbar} ist,\dh{} ob es eine Zuweisung der Variablen gibt, sodass die Formel wahr ist.
+\end{problem}
+
+\begin{problem}[\Problem{MaxSAT}]
+  Gegeben eine Formel in konjunktiver Normalform, finde eine Zuweisung der Variablen, die die Anzahl der gültigen Clauses maximiert.
 \end{problem}
 
 \begin{problem}[\Problem{Minimum Bin Packing}]
