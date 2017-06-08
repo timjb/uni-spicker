@@ -722,6 +722,61 @@ Schaffen wir es, einen Algorithmus mit $m$~Fällen mit Verzweigungs- multimengen
 
 % §8.2. MaxSAT
 
+% ausgelassen: Lemma 8.4 und 8.5
+
+% 8.7
+\begin{lem}
+  Für eine Formel~$F$ in konj. NF, in der jede Variable, die in positiver wie negativer Form vorkommt, genau zwei mal vorkommt, kann in Zeit $\O(\size{F})$ eine Zuweisung von Variablen gefunden werden, die die Anzahl der erfüllten Clauses maximiert.
+\end{lem}
+
+% 8.8
+\begin{satz}
+  Es gibt einen Algorithmus, der gegeben einer Formel in konj. NF und $k \in \N$ in Zeit $\O(k^2 \phi^k + \size{F})$, wobei $\phi = (1 + \sqrt{5}) / 2$, eine Zuweisung der Variablen in~$F$ berechnet, sodass $k$ Clauses erfüllt sind, oder entscheidet, dass es keine solche Zuweisung gibt.
+\end{satz}
+
+Folgender Algorithmus entscheidet bloß, ob es eine solche Zuweisung gibt, man kann ihn aber so abändern, dass er auch eine Zuweisung berechnet:
+
+\begin{algorithmic}
+  \Function{DecideMaxSAT}{$F$, $k$}
+    \State entferne überflüssige Literale aus allen Clauses
+    \State $m \coloneqq $ Anzahl von Clauses in~$F$
+    \If{$m < k$} \Return false \EndIf
+    \If{$k \leq \floor{m/2}$} \Return true \EndIf
+    \State $F_L \coloneqq $ Konjunktion der \textit{long Clauses} in~$F$ mit $\geq k$ Literalen
+    \State $F_S \coloneqq $ Konjunktion der \textit{short Clauses} in~$F$ mit $< k$ Literalen
+    \State $m_L \coloneqq $ Anzahl Clauses in $F_L$
+    \Return $\Call{Search}{F_S, k - m_L}$
+  \EndFunction
+
+  \Function{Search}{$F'$, $j$}
+    \If{$j \leq 0$} \Return true \EndIf
+    \If{$F'$ hat weniger als $j$ Clauses} \Return false \EndIf
+    \If{keine Variable tritt positiv und negativ in $F'$ auf}
+      \State \Return true
+    \EndIf
+    \State Wähle unter den Variablen mit positiv und negativ auftreten,
+    \State \quad eine Variable $x$, die am öftesten auftritt
+    \State $m_0 \coloneqq $ Anzahl der negativen Vorkommen von~$x$
+    \State $m_1 \coloneqq $ Anzahl der positiven Vorkommen von~$x$
+    \If{$m_0 = m_1 = 0$}
+      \State $k' \coloneqq $ max. Anzahl von erfüllb. Clauses in $F'$ (siehe Lem.)
+      \State \Return $k' \geq j$
+    \Else
+      \If{$\Call{Search}{F'|_{x=0}, j - m_0}$}
+        \Return true
+      \EndIf
+      \Return $\Call{Seach}{F'|_{x=1}, j - m_1}$
+    \EndIf
+  \EndFunction
+\end{algorithmic}
+
+Mit einer etwas einfacheren $\Call{Search}{}$-Prozedur kann man schon zeigen:
+
+% 8.6
+\begin{satz}
+  Es gibt einen Algorithmus, der gegeben einer Formel in konj. NF und $k \in \N$ in Zeit $\O(k^2 2^k + \size{F})$ eine Zuweisung der Variablen in~$F$ berechnet, sodass $k$ Clauses erfüllt sind, oder entscheidet, dass es keine solche Zuweisung gibt.
+\end{satz}
+
 \section{Probleme}
 
 \begin{problem}[\Problem{Maximum Independent Set}, MIS]
