@@ -23,6 +23,7 @@
 \newcommand{\ind}{\mathbbm{1}} % Indikatorfunktion
 \newcommand{\iid}{i.\,i.\,d.} % identisch unabhängig verteilt
 \DeclareMathOperator{\ggT}{ggT} % größter gemeinsamer Teiler
+\newcommand{\Bor}{\mathfrak{B}} % Borel
 
 \DeclareMathOperator{\var}{Var} % Varianz
 \DeclareMathOperator{\cov}{Cov} % Kovarianz
@@ -149,7 +150,7 @@
 \begin{satz}
   Für alle $x, y \in E$ gilt
   \[
-    G(x, y) = 
+    G(x, y) =
     \begin{cases}
       F(x, y)/(1 - F(y, y)) & \text{falls $x \neq y$}, \\
       1/(1 - F(y, y)) & \text{falls $x = y$}. \\
@@ -522,7 +523,7 @@ Falls $X_k$ nur Werte aus~$\N$ annimmt, so können wir das Verhalten von $H(t) -
   genau dann, wenn
   \begin{itemize}
     \item $\{ Z_n \}$ irreduzibel und
-    \item aperiodisch (\dh{} $d = 1$) ist und 
+    \item aperiodisch (\dh{} $d = 1$) ist und
     \item ein $x_0$ existiert, sodass $m(x_0, x_0) < \infty$.
   \end{itemize}
   Die Folge $\{ \pi_y \}_{y \in E}$ ist die eindeutige Lösung zu
@@ -623,5 +624,213 @@ Falls $X_k$ nur Werte aus~$\N$ annimmt, so können wir das Verhalten von $H(t) -
     \text{für alle $m \geq m_x$.}
   \]
 \end{lem}
+
+% Vorlesung vom 13. Juni 2017
+
+% 2.38
+\begin{prop}
+  Sei $\{ Z_n \}$ irreduzibel und periodisch mit $d \geq 1$.
+  Dann existieren paarweise disjunkte $C_0, C_1, \ldots, C_{d-1} \subseteq E$ mit $C_0 \cup \ldots \cup C_{d-1} = E$ mit
+  \[
+    \Set{y \in E}{x \in C_i, p(x, y) > 0} = C_{(i+1) \% d}.
+  \]
+  In anderen Worten: Die Mengen $C_i$ werden zyklisch besucht.
+\end{prop}
+
+% 2.39
+\begin{bem}
+  Die Markovkette $\{ Z_{md} \}_{m \geq 0}$ ist nicht irreduzibel (für $d > 1$) aber die Restriktion auf jedes $C_i$ ist irreduzibel und außerdem aperiodisch.
+  Mit dem Ergodensatz erhalten wir
+  \[
+    p^{(md)}(x, y) \xrightarrow{m \to \infty} d / m(y, y)
+    \quad \text{für alle $x, y \in C_i$}
+  \]
+  Falls $x \in C_0$ und wir wollen $p^{(md + r)}(x, y)$ berechnen, so recht es $y \in C_r$ zu betrachten.
+  %, weil
+  %\[
+  %  p^{(md + r)}(x, y) = 0
+  %  \quad \text{für alle $y \in E \setminus C_r$}
+  %\]
+  Definiere
+  \[
+    F_r(x, y) = P(\tau_y^{(1)} < \infty, \tau_y^{(1)} = r \mod d | Z_0 = x)
+  \]
+  Es gilt dann:
+  \[
+    p^{(md+r)}(x, y) \xrightarrow{m \to \infty} F_r(x, y) d / m(y, y)
+  \]
+\end{bem}
+
+%\begin{bsp}
+%  Seien $\{ \xi_n \}$ \iid{} mit $P(\xi_1 = 1) = P(\xi_1 = 0) = 1/2$.
+%  Setze $X_n \coloneqq {\sum}_{i=1}^n 2^{i-1} \xi_i$.
+%  Dann gilt $X_n \xrightarrow{\omega} U_{\cinterval{0}{1}}$, wobei $U_{\cinterval{0}{1}}$ die uniforme Verteilung auf~$\cinterval{0}{1}$ ist.
+%\end{bsp}
+
+% §3. Martingale
+\section{Martingale}
+
+% §3.1. Definition und einfache Eigenschaften
+
+Sei im Folgenden $(\Omega, \mathcal{F}, P)$ ein Maßraum.
+
+% 3.1
+\begin{defn}
+  Eine wachsende Folge $\mathcal{F}_0 \subseteq \mathcal{F}_1 \subseteq \ldots$ von $\sigma$-Algebren heißt \emph{Filtration}.
+  Eine Folge von ZVen $\{ M_n \}$ heißt \emph{adaptiert} an die Filtration $\{ \mathcal{F}_n \}$, falls $M_n$ $\mathcal{F}_n$-messbar ist für jedes $n \geq 0$.
+\end{defn}
+
+% 3.2
+\begin{defn}
+  Sei $X$ eine ZV mit $\E[\abs{X}] < \infty$.
+  Dann heißt $\widehat{X}$ \emph{bedingte Erwartung} von~$X$ bzgl. $\sigma$-Algebra~$\mathcal{A}$ falls
+  $\hat{X}$ $\mathcal{A}$-messbar ist und $\E[X \ind_A] = \E[\hat{X} \ind_A]$ für alle $A \in \mathcal{A}$.
+\end{defn}
+
+% 3.2
+\begin{defn}
+  Eine $\{ F_n \}$-adapt. Folge $\{ M_n \}$ mit $\fa{n\!}\! \E[\abs{M_n}] < \infty$ heißt
+  \[
+    \left. \begin{array}{l}
+      \text{\emph{Martingal}}\\
+      \text{\textit{Submartingal}}\\
+      \text{\textit{Supermartingal}}\\
+    \end{array} \right\}
+    \enspace \text{falls} \enspace
+    \E[M_{n+1} | \mathcal{F}_n]
+    \left\{ \begin{array}{l}
+      =\\
+      \geq\\
+      \leq
+    \end{array} \right\}
+    M_n
+    \quad \forall\,n \geq 0.
+  \]
+\end{defn}
+
+% 3.3
+\begin{bem}
+  \begin{itemize}
+    \item $\{ M_n \}$ ist Submartingal $\iff$ $\{ -M_n \}$ ist Supermartingal
+    \item $\{ M_n \}$ ist Martingal $\iff$ $\{ M_n \}$ ist Super- und Submartingal
+  \end{itemize}
+\end{bem}
+
+\begin{bem}
+  Martingal-Strategie für wdh. Werfen einer fairen Münze:
+  \begin{itemize}
+    \item 1. Runde: Einsatz = 1 Euro, bei Gewinn Ausstieg
+    \item 2. Runde: Einsatz = 2 Euro, bei Gewinn Ausstieg, \ldots
+    \item $n$. Runde: Einsatz = $2^{n-1}$ Euro, bei Gewinn Ausstieg
+  \end{itemize}
+  Es gilt: $T = \min \{ n \geq 1 | \text{$n$-te Runde ist gewonnen} \} < \infty$ fast sicher, der Gewinn ist $1$ Euro.
+\end{bem}
+
+\begin{bsp}
+  Seien $\{ X_i \}$ unabh. ZVen mit $\E[X_i] = 0$ for alle $i \geq 0$.
+  Sei $M_n \coloneqq X_1 + \ldots + X_n$.
+  Dann ist $\{ M_n \}$ ein Martingal bzgl. der Filtration $\{ \mathcal{F}_n \}$ mit $\mathcal{F}_n \coloneqq \sigma(X_1, \ldots, X_n)$.
+\end{bsp}
+
+\begin{defn}
+  Für eine Folge $\{ M_n \}$ von ZVen heißt $\{ \sigma(M_0, M_1, \ldots, M_n) \}_{n \geq 0}$ \emph{natürliche Filtration}.
+\end{defn}
+
+% 3.5
+\begin{lem}
+  Ist $\{ M_n \}$ ein Martingal bzgl. einer bel. Filtration, so ist $\{ M_n \}$ auch ein Martingal bzgl. der natürlichen Filtration.
+\end{lem}
+
+\begin{defn}
+  $\{ M_n \}$ ist Martingal $\coloniff$ $\{ M_n \}$ ist Martingal bzgl. der natürlichen Filtration
+\end{defn}
+
+% 3.7
+\begin{lem}
+  Ist $\{ M_n \}$ ein Submartingal, so gilt $\E[ M_{i+1} ] \geq \E[M_i]$.
+\end{lem}
+
+% 3.8
+\begin{lem}
+  Sei $\{ M_n \}$ ein Martingal bzgl. $\{ \mathcal{F}_n \}$.
+  Dann gilt:
+  \[
+    \E[M_n | \mathcal{F}_i] = M_i
+    \quad \text{für alle $i \leq n$.}
+  \]
+\end{lem}
+
+% 3.9
+\begin{lem}
+  Sei $\{ M_n \}$ ein Martingal bzgl. $\{ \mathcal{F}_n \}$ und sei $\varphi$ eine konvexe messbare Funktion.
+  Falls $\E [\abs{\varphi(M_n)}] < \infty$ für alle $n \geq 1$, so ist di Folge $\{ \varphi(M_n) \}_{n \geq 0}$ ein Submartingal bzgl. $\{ F_n \}$
+\end{lem}
+
+\begin{bem}
+  Die Aussage des vorh. Lemmas gilt auch, falls $\{ M_n \}$ nur ein Submartingal, dafür aber $\varphi$ zusätzlich monoton wachsend ist.
+\end{bem}
+
+% 3.11
+\begin{bsp}
+  Ist $\{ M_n \}$ ein Martingal, so sind $M_n^2$, $M_n^{+}$ und $\abs{M_n}$ Submartingale.
+\end{bsp}
+
+\begin{bsp}
+  Ein Anleger kauft $H_0$ Aktien einer Firma.
+  Es sei $W_0$ der Wert der Aktien beim Kauf,
+  $Y_n$ der Kurs der Aktie $n$~Tage nach dem Kauf und
+  $H_n$ die Anzal der Aktien $n$~Tage nach dem Kauf.
+  Forderung: $H_n$ soll $\sigma(Y_0, \ldots, Y_{n-1})$-messbar sein.
+  Sei $W_n$ der Wert der Aktien $n$~Tage nach dem Kauf.
+  Es gilt
+  \[ W_n = W_{n-1} + H_n (Y_n - Y_{n-1}) = W_0 + \sum_{i=1}^n H_i (Y_i - Y_{i-1}) \]
+  Falls $\{ Y_n \}$ ein Martingal ist, so gilt
+  \[
+    \E[ W_{n+1} | \mathcal{F}_n ]
+    = \E[ W_n + H_{n+1} (Y_{n+1} - Y_n) | \mathcal{F}_n ]
+    = W_n + \E[ H_{n+1} (Y_{n+1} - Y_n) | \mathcal{F}_n ]
+    = W_n + H_{n+1} \E[ Y_{n+1} - Y_n | \mathcal{F}_n ]
+    = W_n + H_{n+1} (\E[ Y_{n+1} | \mathcal{F}_n ] - Y_n)
+    = W_n (\text{bzw. $\geq W_n$ für Sub- und $\leq W_n$ für Supermartingale}).
+  \]
+  Fazit: Man kann mit der Wahl der Handelsstrategie keine Anlage verbessern.
+\end{bsp}
+
+% 3.13
+\begin{defn}
+  Eine Folge $\{ H_n \}_{n \geq 1}$ heißt \emph{prävisibel}, falls $H_n$ $\mathcal{F}_{n-1}$-messbar ist für alle $n \geq 1$.
+  Definiere $\{ H \cdot Y \}_n$ durch
+  \[
+    (H \cdot Y)_n \coloneqq \sum_{i=1}^n H_i (Y_i - Y_{i-1})
+  \]
+\end{defn}
+
+% 3.14
+\begin{satz}
+  Sei $\{ Y_n \}$ ein Supermartingal und sei $\{ H_n \}$ prävisibel jeweils bzgl. der Filtration $\{ \mathcal{F}_n \}$.
+  Falls $H_n \in \cinterval{0}{C_n}$ für Konstanten $\{ C_n \}$, so ist $\{ (H \cdot Y)_n \}$ auch ein Supermartingal.
+\end{satz}
+
+% 3.15
+\begin{bem}
+  Man kann den Satz für Submartingale und Martingale formulieren.
+  Für Martingale reicht es anzunehmen, dass $\abs{H_n} \leq C_n$.
+\end{bem}
+
+% 3.16
+\begin{defn}
+  Eine Abbildung $T : \Omega \to \{ \infty \}$ heißt \emph{Stoppzeit} bzgl. $\{ F_n \}$, falls $\{ T=n \} \in \mathcal{F}_n$ für alle $n \geq 0$.
+\end{defn}
+
+% 3.17
+\begin{bsp}
+  Sei $\{ M_n \}$ eine Folge von ZVen und sei $A \in \Bor(\R)$.
+  Dann ist $T = \inf \Set{n \geq 0}{M_n \in A}$ eine Stoppzeit bzgl. $\{ \sigma(M_0, \ldots, M_n) \}_n$.
+\end{bsp}
+
+% 3.18
+\begin{satz}
+  Ist $\{ M_n \}$ ein Supermartingal und $T$ eine Stoppzeit, so ist $\{ M_{\min(T, n)} \}$ auch ein Supermartingal.
+\end{satz}
 
 \end{document}
