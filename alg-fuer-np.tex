@@ -40,6 +40,7 @@
 \newcommand{\Powerset}{\mathcal{P}} % Potenzmenge
 \renewcommand{\O}{\mathcal{O}} % Landau-Notation
 \newcommand{\floor}[1]{\lfloor #1 \rfloor} % Abrunden
+\DeclareMathOperator{\Neighbours}{Neighbours} % Nachbarknoten (in einem Graphen)
 
 % Hervorhebung von Algorithmen und Problemen
 \definecolor{AlgorithmColor}{rgb}{0.7,0.2,0.0}
@@ -777,6 +778,104 @@ Mit einer etwas einfacheren $\Call{Search}{}$-Prozedur kann man schon zeigen:
   Es gibt einen Algorithmus, der gegeben einer Formel in konj. NF und $k \in \N$ in Zeit $\O(k^2 2^k + \size{F})$ eine Zuweisung der Variablen in~$F$ berechnet, sodass $k$ Clauses erfüllt sind, oder entscheidet, dass es keine solche Zuweisung gibt.
 \end{satz}
 
+% §8.3. Treewidth
+\subsection{Baumbreite}
+
+% Übungsaufgabe 8.3
+\begin{bem}
+  Auf Graphen, die Bäume sind, können folgende Probleme in polynomieller Zeit gelöst werden:
+  \begin{itemize}
+    \item Maximum Independent Set (bzw. Minimum Vertex Cover)
+    \item Minimum Dominating Set
+  \end{itemize}
+\end{bem}
+
+% 8.9, 8.11
+\begin{defn}
+  \begin{itemize}
+    \item
+      Ein \emph{$k$-Baum} ist ein unger. Graph, der aus einer $k$-Clique durch wiederholtes Anwenden der folgenden Operation entsteht:
+      Füge einen neuen Knoten mit Kanten zu den Knoten einer bestehenden $k$-Clique zum Graphen hinzu.
+    \item Ein \emph{partieller $k$-Baum} ist ein Subgraph eines $k$-Baums.
+  \end{itemize}
+\end{defn}
+
+\begin{bspe}
+  Ein $1$-Baum ist ein gewöhnlicher Baum, ein $2$-Baum ein "`Baum von Dreiecken"'.
+\end{bspe}
+
+\begin{lem}
+  Maximum Independent Set kann auf $2$-Bäumen in linearer Zeit gelöst werden.
+\end{lem}
+
+% 8.10
+\begin{lem}
+  \begin{minipage}[t]{0.8 \linewidth}
+    Ein $k$-Baum mit $n$ Knoten enthält genau \\
+    $\tbinom{k}{2} + (n-k) k = k n - \tbinom{k+1}{2}$ Kanten.
+  \end{minipage}
+\end{lem}
+
+% 8.12
+\begin{defn}
+  Eine \emph{Baumzerlegung} eines unger. Graphen~$G = (V, E)$ ist ein Paar $(T, B)$, wobei $T = (X, F)$ ein Baum ist und $B : X \to \Powerset(V)$ jedem Knoten $x \in X$ seinen \textit{Sack} $B(x) \subseteq V$ zuordnet, sodass
+  \begin{itemize}
+    \item $\cup_{x \in X} B(x) = V$
+    \item $\fa{\{ u, v \} \in E} \ex{x \in X} \{ u, v \} \subseteq B(x)$
+    \item Zus'hang: $\fa{x, y, z \in X} \text{$y$ liegt auf Pfad zw. $x$ und~$z$ in~$T$} \implies B(x) \cap B(z) \subseteq B(y)$.
+  \end{itemize}
+  Die \emph{Breite} einer Baumzerlegung~$(T, B)$ ist $\max_{x \in X} \size{B(x)} - 1$.
+  Die \emph{Baumbreite} von~$G$ ist die kleinstmögliche Breite einer Baumzerlegung von~$G$.
+\end{defn}
+
+%\begin{bem}
+%  Jeder Graph $G$ mit $n$~Knoten hat eine Baumzerlegung der Breite $n-1$.
+%\end{bem}
+
+TODO: Wie kann man eine Baumzerlegung zur Berechnung eines MIS verwenden?
+
+% 8.13
+\begin{defn}
+  Eine Baumzerlegung $((X, F), B)$ heißt \emph{$k$-normal}, falls
+  \begin{itemize}
+    \item $\size{B(x)} = k + 1$ für alle $x \in X$ und
+    \item $\size{B(x) \setminus B(y)} = 1$ für alle $\{ x, y \} \in F$.
+  \end{itemize}
+\end{defn}
+
+% 8.14
+\begin{lem}
+  Jeder Graph der Breite~$\leq k$ mit $\geq k + 1$ Knoten hat eine $k$-normale Baumzerlegung.
+\end{lem}
+
+% Beweisidee: Bastle aus einer bel. Baumzerlegung eine k-normale Baumzerlegung durch "Auffüllen" der Säcke und Unterteilung der Kanten.
+
+% ausgelassen: Lemma 8.15
+
+% 8.16
+\begin{lem}
+  Sei $((X,F), B)$ eine Baumzerlegung von~$G = (V, E)$ und $C \subseteq V$ die Knoten einer Clique in~$G$.
+  Dann $C \subseteq B(x)$ für ein $x \in X$.
+\end{lem}
+
+% 8.17
+\begin{satz}
+  Für jedes $k \in \N$ und jeden Graphen~$G$ sind äquivalent:
+  \begin{center}
+    $G$ ist ein $k$-partieller Graph $\iff$ $G$ hat Baumbreite $\leq k$
+  \end{center}
+\end{satz}
+
+% 8.18
+\begin{lem}
+  Jeder partielle $k$-Baum kann aus einem $k$-Baum durch Löschen von Kanten aus einem gewonnen werden.
+\end{lem}
+
+% 8.19
+\begin{lem}
+  Jeder unger. Graph der Baumbreite $\leq k$ hat $\leq k n$ Kanten.
+\end{lem}
+
 \section{Probleme}
 
 \begin{problem}[\Problem{Maximum Independent Set}, MIS]
@@ -901,6 +1000,11 @@ Mit einer etwas einfacheren $\Call{Search}{}$-Prozedur kann man schon zeigen:
     \text{für alle $j \in \N$.}
   \]
   Gesucht ist ein~$f$ mit minimaler Anzahl $\max \im(f)$ von Behältern.
+\end{problem}
+
+\begin{problem}[\Problem{Minimum Dominating Set}]
+  Eine \emph{dominierende Menge} eines Graphen $G = (V, E)$ ist eine Menge $D \subseteq V$ mit $V = D \cup \Neighbours_G(D)$.
+  Gegeben einen Graphen~$G$, finde eine dominierende Menge~$D$ kleinster Größe~$\size{D}$!
 \end{problem}
 
 \end{document}
