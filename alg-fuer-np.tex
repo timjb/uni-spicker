@@ -41,6 +41,10 @@
 \renewcommand{\O}{\mathcal{O}} % Landau-Notation
 \newcommand{\floor}[1]{\lfloor #1 \rfloor} % Abrunden
 \DeclareMathOperator{\Neighbours}{Neighbours} % Nachbarknoten (in einem Graphen)
+\DeclareMathOperator{\treewidth}{tw} % Baumbreite
+
+% https://stackoverflow.com/a/2019064
+\newcommand{\IndentState}[1]{\State \quad #1}
 
 % Hervorhebung von Algorithmen und Problemen
 \definecolor{AlgorithmColor}{rgb}{0.7,0.2,0.0}
@@ -801,7 +805,10 @@ Mit einer etwas einfacheren $\Call{Search}{}$-Prozedur kann man schon zeigen:
 \end{defn}
 
 \begin{bspe}
-  Ein $1$-Baum ist ein gewöhnlicher Baum, ein $2$-Baum ein "`Baum von Dreiecken"'.
+  \begin{minipage}{0.8 \linewidth}
+    Ein $1$-Baum ist ein gewöhnlicher Baum, \\
+    ein $2$-Baum ein "`Baum von Dreiecken"'.
+  \end{minipage}
 \end{bspe}
 
 \begin{lem}
@@ -825,7 +832,7 @@ Mit einer etwas einfacheren $\Call{Search}{}$-Prozedur kann man schon zeigen:
     \item Zus'hang: $\fa{x, y, z \in X} \text{$y$ liegt auf Pfad zw. $x$ und~$z$ in~$T$} \implies B(x) \cap B(z) \subseteq B(y)$.
   \end{itemize}
   Die \emph{Breite} einer Baumzerlegung~$(T, B)$ ist $\max_{x \in X} \size{B(x)} - 1$.
-  Die \emph{Baumbreite} von~$G$ ist die kleinstmögliche Breite einer Baumzerlegung von~$G$.
+  Die \emph{Baumbreite} $\treewidth(G)$ von~$G$ ist die kleinstmögliche Breite einer Baumzerlegung von~$G$.
 \end{defn}
 
 %\begin{bem}
@@ -875,6 +882,89 @@ TODO: Wie kann man eine Baumzerlegung zur Berechnung eines MIS verwenden?
 \begin{lem}
   Jeder unger. Graph der Baumbreite $\leq k$ hat $\leq k n$ Kanten.
 \end{lem}
+
+% §8.20. Berechnung von Baumzerlegungen
+
+\begin{bem}
+  Entscheiden, ob für ein Tuple $(G, k)$ bestehend aus einem Graph~$G$ und $k \in \N$ der Graph $G$ Baumbreite $\leq k$ besitzt, ist NP-vollständig.
+\end{bem}
+
+% 8.20
+\begin{lem}[Bodlaender und Kloks]
+  Für alle Konstanten $l \in \N$ und $m, n \in \Z$ kann das folgende Problem in Zeit~$\O(m)$ gelöst werden:
+  Gegeben eine Baumzerlegung mit $m$~Knoten mit Breite $\leq l$ eines Graphen~$G$ mit $n$~Knoten, berechne eine Baumzerlegung von~$G$ minimaler Breite mit $\leq n$ Knoten.
+\end{lem}
+
+% 8.21
+\begin{lem}
+  Der Graph $G'$ entstehe aus~$G$ durch Zusammenziehen einer Kante.
+  Dann gilt:
+  \[
+    \treewidth(G') \leq \treewidth(G)
+    \quad \text{und} \quad
+    \treewidth(G) \leq \treewidth(G') + 1.
+  \]
+\end{lem}
+
+% 8.22
+\begin{lem}
+  Der Graph $G'$ entstehe aus~$G$ durch Zusammenziehen der Kanten eines Matchings.
+  Dann gilt:
+  \[
+    \treewidth(G') \leq \treewidth(G)
+    \quad \text{und} \quad
+    \treewidth(G) \leq 2 \treewidth(G') + 1.
+  \]
+  Außerdem kann für bel. $k, m \in \N$ aus einer Baumzerlegung von~$G'$ der Breite~$k$ eine Baumzerlegung von~$G$ der Breite $\leq 2 k + 1$ in Zeit $\O(k m)$ konstruiert werden.
+\end{lem}
+
+\begin{defn}
+  Ein Matching~$M$ in einem Graphen~$G$ heißt \emph{maximal}, falls es kein Matching $M'$ mit $M \subsetneq M'$ gibt.
+\end{defn}
+
+\begin{acht}
+  Jedes ``maximum matching'' ist ein ``maximal matching'', aber nicht andersherum.
+\end{acht}
+
+\begin{bem}
+  Maximale Matchings können gierig in linearer Zeit berechnet werden.
+\end{bem}
+
+% 8.24
+\begin{satz}[\emph{Bodlaender}]
+  Sei $k \in \N_0$ konstant.
+  Für jeden Graphen~$G$ der Baumbreite $\leq k$ mit $n$~Knoten kann eine Baumzerl. minimaler Breite mit $\leq n$ Knoten in Zeit und Platz $\O(n)$ berechnet werden.
+\end{satz}
+
+\begin{algorithmic}
+  \Function{TreeDecompose}{$G = (V, E)$, $k$}
+    \If{$V = \emptyset$} \Return $(T, B)$ wobei $T = (\{ t \}, \emptyset)$ und $B : t \mapsto \emptyset$ \EndIf
+    \State $M \coloneqq $ ein maximales Matching $M$ in~$G$
+    \State $G' = (U, E') \coloneqq G$ mit den Kanten in $M$ zusammengezogen,
+    \IndentState $\phi : V \to U$ die knotenidentifizierende surj. Abbildung
+    \State $W \coloneqq \Set{u \in U}{\size{\phi^{-1}(u)} = 2}$
+    \State $L = (U, E_L) \coloneqq G'$ mit genau so vielen Kanten bel. entfernt,
+    \IndentState dass jeder Knoten in $U \setminus W$ Grad $\leq k + 1$ hat
+    \State $G'' \coloneqq (U, E'')$ mit $E'' \coloneqq E' \cup \Set{\{ u, v \}}{u, v \in W, \size{N_{u,v}} \geq k+1}$
+    \IndentState wobei $N_{u,v} \coloneqq \Neighbours_L(u) \cap \Neighbours_L(v) \cap (U \setminus W)$
+    \State $A \coloneqq \Set{u \in U \setminus W}{\text{Nachbarn von~$u$ in~$G''$ formen Clique in~$G''$}}$
+    %\State $G''' \coloneqq (U \setminus A, E''')$ mit $E''' \coloneqq \Set{\{ u, v \} \in E''}{u, v \in U \setminus A}$
+    \State $G''' \coloneqq$ Subgraph von~$G''$ mit Knotenmenge $U \setminus A$
+    \State $(T = (X, F), B) \coloneqq \Call{TreeDecompose}{G'''}$
+    \For{$a \in A$}
+      \State finde $x \in X$ mit $\Neighbours_{G''}(a) \subseteq B(x)$
+      \State füge zu $T$ einen Blattknoten $l_a$ mit Vaterknoten $x$ hinzu
+      \State setze $B(l_a) \coloneqq \{ a \} \cup \Neighbours_{G''}(a)$
+    \EndFor
+    \State definiere $B' : X \to \Powerset(V)$ durch $B'(x) \coloneqq \phi^{-1}(B(x))$
+    \State \Return mit der Schrumpfprozedur von Bodlaender und Kloks
+    \IndentState verkleinerte Baumzerlegung $(T, B')$
+  \EndFunction
+\end{algorithmic}
+
+\begin{bem}
+  Man zeigt: Der Graph $G'''$ hat $\leq (1-a) n$ Knoten, wobei $a = 1 / (k^2 + 2)$.
+\end{bem}
 
 \section{Probleme}
 
