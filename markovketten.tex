@@ -29,6 +29,8 @@
 \DeclareMathOperator{\cov}{Cov} % Kovarianz
 \DeclareMathOperator{\cor}{Cor} % Korrelation
 
+\DeclareMathOperator{\Beta}{Beta} % Beta-Verteilung
+
 \definecolor{DefinitionColor}{rgb}{0.7,0.2,0.0}
 \newcommand{\Defn}[1]{\textcolor{DefinitionColor}{#1}}
 
@@ -832,5 +834,56 @@ Sei im Folgenden $(\Omega, \mathcal{F}, P)$ ein Maßraum.
 \begin{satz}
   Ist $\{ M_n \}$ ein Supermartingal und $T$ eine Stoppzeit, so ist $\{ M_{\min(T, n)} \}$ auch ein Supermartingal.
 \end{satz}
+
+% Vorlesung vom 20.6.2017
+
+% §2. Fast sichere Konvergenz
+
+Sei $\{ M_n \}$ eine Folge von ZVen
+Seien $a < b$.
+Definiere
+\[
+  N_0 \coloneqq -1, \quad
+  N_{2k-1} \coloneqq \inf \Set{n > N_{2k-2}}{M_n < a}, \quad
+  N_{2k} \coloneqq \inf \Set{n > N_{2k}}{M_n \geq b}
+\]
+Außerdem sei
+\[
+  U_n \coloneqq \max \Set{k}{N_{2k} \leq n}.
+\]
+die Anzahl der \textit{Aufkreuzungen}.
+
+% 3.19
+\begin{satz}[Doob'sche Aufkreuzungsungleichung]
+  Ist $\{ M_n \}$ ein Submartingal, so gilt für alle $a < b$ und alle $n \geq 1$:
+  \[ \E[ U_n ] \leq (\E[ (M_n - a)^{+} ] - \E[ (M_0 - a)^{+} ]) / (b - a). \]
+\end{satz}
+
+% 3.20
+\begin{satz}[\emph{Martingalkonvergenzsatz}]
+  Sei $\{ M_n \}$ ein Submartingal mit $\sup_{n \geq 0} \E [ M_n^{+} ] < \infty$.
+  Dann existiert eine ZV $M_\infty$ mit $\E[ \abs{M_\infty} ] < \infty$ sodass $M_n \to M_\infty$ fast-sicher.
+\end{satz}
+
+% 3.21
+\begin{bsp}[Polya-Urne]
+  Urne mit $b$ blauen und $r$ roten Kugeln.
+  In jeder Runde wird eine Kugel gezogen und mit einer weiteren Kugel gleicher Farbe zurückgelegt.
+  Sei $R_n$ di Anzahl von zugefügten roten Kugeln nach $n$ Runden.
+
+  Man kann zeigen: $\{ M_n \coloneqq (r + R_n) / (r + b + n) \}_{n \geq 0}$ ist ein Martingal.
+  Außerdem gilt $\sup \E[M_n^{+}] \leq 1$
+  Nach dem vorherigen Satz gilt also $M_n \to M_\infty$ fast-sicher.
+  Man kann zeigen, dass $M_\infty \sim \Beta(r, b)$,
+  \[
+    f_{M_\infty}(x) = \frac{1}{B(r, b)} x^{r-1} (1-x)^{b-1}.
+  \]
+\end{bsp}
+
+% 3.22
+\begin{kor}
+  Sei $\{ M_n \}$ ein nichtneg. Supermartingal.
+  Dann existert $M_\infty \in L_1$ mit $M_n \to M_\infty$ fast-sicher.
+\end{kor}
 
 \end{document}
