@@ -42,6 +42,7 @@
 \newcommand{\floor}[1]{\lfloor #1 \rfloor} % Abrunden
 \DeclareMathOperator{\Neighbours}{Neighbours} % Nachbarknoten (in einem Graphen)
 \DeclareMathOperator{\treewidth}{tw} % Baumbreite
+\newcommand{\boundary}{\partial} % topologischer Rand
 
 % https://stackoverflow.com/a/2019064
 \newcommand{\IndentState}[1]{\State \quad #1}
@@ -965,6 +966,85 @@ TODO: Wie kann man eine Baumzerlegung zur Berechnung eines MIS verwenden?
 \begin{bem}
   Man zeigt: Der Graph $G'''$ hat $\leq (1-a) n$ Knoten, wobei $a = 1 / (k^2 + 2)$.
 \end{bem}
+
+% §9. Planarität
+\section{Planarität}
+
+% §9.1. Planare Graphen
+
+% 9.1
+\begin{defn}
+  Eine \emph{einfache Kurve} in~$\R^n$ mit \textit{Endpunkten} $a, b \in \R^n$ ist eine stetige Abb. $\gamma : \cinterval{0}{1} \to \R^n$ mit $\gamma(0) = a$, $\gamma(1) = b$ und $\gamma(s) \neq \gamma(t)$ für alle $s, t \in \cinterval{0}{1}$ mit $0 < \abs{s - t} < 1$.
+  Sie heißt \emph{offen}, falls $a \neq b$, und \emph{geschlossen}, falls $a = b$.
+\end{defn}
+
+% 9.2
+\begin{defn}
+  Eine \emph{planare Einbettung} $\phi = ((p_v)_{v \in V}, (\gamma_e)_{e \in E})$ eines Graphen $(V, E)$ ist geg. durch einen Punkt $p_v \in \R^2$ für jeden Knoten $v \in V$ und eine einfache Kurve $\gamma_{\{ u, v \}}$ zwischn $p_u$ und~$p_v$ für jede Kante $\{ u, v \} \in E$, sodass für alle $e \neq e' \in E$ gilt:
+  \[
+    \im \gamma_e \cap \gamma_{e'} = \{ \gamma_e(0), \gamma_e(1) \} \cap \{ \gamma_{e'}(0), \gamma_{e'}(1) \}.
+  \]
+  Ein Graph heißt \emph{planar}, falls er eine planare Einbettung besitzt.
+\end{defn}
+
+\begin{nota}
+  $\phi(G) \coloneqq \Set{p_v}{v \in V} \cup \bigcup_{e \in E} \im \gamma_e \subseteq \R^2$
+\end{nota}
+
+\begin{bem}
+  Man kann zeigen (\textit{Satz von Fáry}): Ist ein Graph $(V, E)$ mit $n$ Knoten planar, so gibt es eine planare Einbettung mit
+  \begin{itemize}
+    \item $p_v \in \{1, \ldots, n\}^2$ für alle $v \in V$ und
+    \item $p_{\{u, v\}}(t) = (1-t) p_u + t p_v$ für alle $\{u, v\} \in E$.
+  \end{itemize}
+\end{bem}
+
+\begin{defn}
+  Die \emph{Flächen} einer planaren Einbettung~$\phi$ sind die Zusammenhangskomponenten von $\R^2 \setminus \phi(G)$.
+  Alle Flächen bis auf eine sind dabei beschränkt.
+  Die beschränkten Flächen heißen \textit{innere} Flächen, die unbeschränkte \textit{äußere} Fläche.
+\end{defn}
+
+% 9.4
+\begin{satz}[\emph{Euler-Formel}]
+  Sei $G$ ein Graph mit $n$ Knoten, $m$ Kanten und $c$ Zusammenhangskomponenten.
+  Angenommen, eine planare Einbettung von~$G$ hat $f$ Flächen.
+  Dann gilt
+  \[ n - m + f = c + 1. \]
+\end{satz}
+
+% 9.5
+\begin{defn}
+  Der \emph{Rand} einer Fläche~$F$ in einer Einb.~$\phi$ von $G = (V, E)$ ist der Subgraph $G' = (V', E')$ von~$G$ mit $V' = \Set{v \in V}{p_v \in \boundary{F}}$ und $E' = \Set{e \in E}{\gamma_e \subseteq \boundary{F}}$, wobei $\boundary F \subset \R^2$ der topologische Rand ist.
+  Die Ecken in~$V'$ bzw. die Kanten in~$E'$ heißen \emph{inzident} an~$F$.
+\end{defn}
+
+% 9.6
+\begin{lem}
+  Planare Graphen mit $n \geq 3$ Ecken haben $\leq 3 n - 6$ Kanten.
+\end{lem}
+
+% 9.7
+\begin{kor}
+  Jeder planare Graph hat einen Knoten vom Grad $\leq 5$.
+\end{kor}
+
+% 9.8
+\begin{defn}
+  Ein Graph heißt \emph{außenplanar}, falls er eine planare Einb. besitzt, bei der alle Knoten inzident zur äußeren Fläche sind.
+\end{defn}
+
+% 9.9
+\begin{lem}
+  Jeder außenplanare Graph mit $\geq 4$ Knoten hat zwei nicht benachbarte Knoten mit Grad jeweils $\leq 2$.
+\end{lem}
+
+% 9.10
+\begin{lem}
+  Jeder außenplanare Graph mit $n \geq 2$ Knoten hat $\leq 2 n - 3$ Kanten.
+\end{lem}
+
+% §9.2. Parameterized Independent Set
 
 \section{Probleme}
 
