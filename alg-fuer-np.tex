@@ -37,6 +37,7 @@
 \newcommand{\TuringRed}{\leq_T} % Turing-Reduzierbarkeit
 \newcommand{\TuringEq}{\equiv_T} % Turing-Äquivalenz
 \DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
 \newcommand{\Powerset}{\mathcal{P}} % Potenzmenge
 \renewcommand{\O}{\mathcal{O}} % Landau-Notation
 \newcommand{\floor}[1]{\lfloor #1 \rfloor} % Abrunden
@@ -1051,7 +1052,51 @@ TODO: Wie kann man eine Baumzerlegung zur Berechnung eines MIS verwenden?
   \end{minipage}
 \end{lem}
 
-% §9.2. Parameterized Independent Set
+% §9.2. Parameterized Dominating Set
+
+% 9.11
+\begin{satz}
+  Gegeben einen planaren Graphen $G$ und ein $k \in \N$, kann eine unabh. Knotenmenge in Zeit $\O(6^k \cdot n)$ berechnet werden.
+\end{satz}
+
+\begin{idee}
+  Verwende rekursive Suche und die Tatsache, dass es in einem planaren Graphen einen Knoten mit Grad $\leq 5$ gibt.
+\end{idee}
+
+% 9.12
+\begin{lem}
+  Ein planarer Graph mit $n$ Knoten, von denen $n_{\leq 2}$ Grad $\leq 2$ besitzen, hat $< 3 n - n_{\leq 2}$ Kanten.
+\end{lem}
+
+% 9.13
+\begin{lem}
+  Sei $G = (V, E)$ ein planarer Graph mit $n$ Knoten und $S \subset V$ mit $S \leq n/28$.
+  Angenommen, jeder Knoten $v \in \Neighbours_G(S) \setminus S$ hat mind. zwei Nachbarknoten, die nicht in $S \cup \Neighbours_G(S)$ liegen.
+  Dann gibt es einen Knoten $v \in V \setminus (S \cup \Neighbours_G(S))$ mit $\deg(v) \leq 6$.
+\end{lem}
+
+% 9.14
+\begin{satz}
+  Für einen planaren Graph mit $n$ Ecken und $k \in \{ 0, \ldots, \floor{n / 28} \}$ kann eine dominierende Menge der Größe $\leq k$ in Zeit $\O(7^k \cdot n)$ berechnet werden, falls eine solche existiert.
+\end{satz}
+
+\begin{algorithmic}
+  \Function{DominatingSet}{$G = (V, E)$, $S \subseteq V$, $k$}
+    \If{$\size{S} > k$} \Return ``no solution'' \EndIf
+    \State $W \coloneqq S \cup \Neighbours_G(S)$
+    \State $G' \coloneqq (V, E')$ mit $E' \coloneqq E \setminus \Set{\{ u, v \}}{u, v \in W}$
+    \State $G'' \coloneqq (V'', E'')$ mit $V'' \coloneqq V \setminus \Set{v \in W}{\deg_G(v) \leq 1}$
+    \State finde $v \in V'' \setminus W$ mit $\deg_{G''}(v) \leq 6$
+    \IndentState (möglich dank vorhergehendem Lemma)
+    \State $N \coloneqq \{ v \} \cup \Neighbours_{G''}(v)$
+    \For{$w \in N$}
+      $S_w \coloneqq \Call{DominatingSet}{G'', S \cup \{ w \}, k}$
+    \EndFor
+    \State $C \coloneqq \Set{S_w}{w \in N} \setminus \{ \text{``no solution''} \}$
+    \If{$C = \emptyset$} \Return ``no solution'' \EndIf
+    \State \Return ${\argmin}_{T \in C} \size{T}$
+  \EndFunction
+\end{algorithmic}
 
 \section{Probleme}
 
@@ -1182,6 +1227,10 @@ TODO: Wie kann man eine Baumzerlegung zur Berechnung eines MIS verwenden?
 \begin{problem}[\Problem{Minimum Dominating Set}]
   Eine \emph{dominierende Menge} eines Graphen $G = (V, E)$ ist eine Menge $D \subseteq V$ mit $V = D \cup \Neighbours_G(D)$.
   Gegeben einen Graphen~$G$, finde eine dominierende Menge~$D$ kleinster Größe~$\size{D}$!
+\end{problem}
+
+\begin{problem}[\Problem{Black-and-White Dominating Set}]
+  Gegeben einen unger. Graph $G = (B \cup W, E)$ mit $B \cap W = \emptyset$, finde ein $D \subseteq B \cup W$ minimaler Größe, sodass $B \subseteq D \cup \Neighbours_G(D)$.
 \end{problem}
 
 \end{document}
