@@ -44,8 +44,10 @@
 \DeclareMathOperator{\treewidth}{tw} % Baumbreite
 \newcommand{\boundary}{\partial} % topologischer Rand
 
-% https://stackoverflow.com/a/2019064
 \newcommand{\IndentState}[1]{\State \quad #1}
+
+\definecolor{YoutubeColor}{rgb}{0.7019607843,0.0705882352941182,0.090196078431373} % https://www.youtube.com/yt/brand/en/color.html
+\newcommand{\Youtube}[1]{\href{https://www.youtube.com/watch?v=#1}{\textcolor{YoutubeColor}{$\blacktriangleright$}}}
 
 % Hervorhebung von Algorithmen und Problemen
 \definecolor{AlgorithmColor}{rgb}{0.7,0.2,0.0}
@@ -285,9 +287,8 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
 \end{defn}
 
 % 4.3
-\begin{satz}[\Algorithm{Vizings Algorithmus}]
+\begin{satz}[\Algorithm{Vizings Algorithmus}, \Youtube{otky1bBhwgM}]
   Es gibt einen Algorithmus, der für jeden Graph $G = (V, E)$ eine Kantenfärbung mit höchstens $\Delta + 1$ Farben, wobei $\Delta \coloneqq {\max}_{v \in V} \deg_G(v)$, berechnet.
-  % Beweisvideo: https://www.youtube.com/watch?v=otky1bBhwgM
 \end{satz}
 
 \begin{kor}
@@ -923,11 +924,11 @@ TODO: Wie kann man eine Baumzerlegung zur Berechnung eines MIS verwenden?
   Ein Matching~$M$ in einem Graphen~$G$ heißt \emph{maximal}, falls es kein Matching $M'$ mit $M \subsetneq M'$ gibt.
 \end{defn}
 
-\begin{acht}
+\begin{acht}[\Youtube{03PUwWef2Dg}, \Youtube{bOJC93XxoFc}]
   Jedes ``maximum matching'' ist ein ``maximal matching'', aber nicht andersherum.
 \end{acht}
 
-\begin{bem}
+\begin{bem}[\Youtube{jtgBCGVux-8}]
   Maximale Matchings können gierig in linearer Zeit berechnet werden.
 \end{bem}
 
@@ -979,7 +980,7 @@ TODO: Wie kann man eine Baumzerlegung zur Berechnung eines MIS verwenden?
 \end{defn}
 
 % 9.2
-\begin{defn}
+\begin{defn}[\Youtube{wnYtITkWAYA}]
   Eine \emph{planare Einbettung} $\phi = ((p_v)_{v \in V}, (\gamma_e)_{e \in E})$ eines Graphen $(V, E)$ ist geg. durch einen Punkt $p_v \in \R^2$ für jeden Knoten $v \in V$ und eine einfache Kurve $\gamma_{\{ u, v \}}$ zwischn $p_u$ und~$p_v$ für jede Kante $\{ u, v \} \in E$, sodass für alle $e \neq e' \in E$ gilt:
   \[
     \im \gamma_e \cap \gamma_{e'} = \{ \gamma_e(0), \gamma_e(1) \} \cap \{ \gamma_{e'}(0), \gamma_{e'}(1) \}.
@@ -988,7 +989,7 @@ TODO: Wie kann man eine Baumzerlegung zur Berechnung eines MIS verwenden?
 \end{defn}
 
 \begin{nota}
-  $\phi(G) \coloneqq \Set{p_v}{v \in V} \cup \bigcup_{e \in E} \im \gamma_e \subseteq \R^2$
+  $\phi(G) \coloneqq \Set{p_v}{v \in V} \cup {\bigcup}_{e \in E} \im \gamma_e \subseteq \R^2$
 \end{nota}
 
 \begin{bem}
@@ -1006,7 +1007,7 @@ TODO: Wie kann man eine Baumzerlegung zur Berechnung eines MIS verwenden?
 \end{defn}
 
 % 9.4
-\begin{satz}[\emph{Euler-Formel}]
+\begin{satz}[\emph{Euler-Formel}, \Youtube{5ywif1Zpeo4}]
   Sei $G$ ein Graph mit $n$ Knoten, $m$ Kanten und $c$ Zusammenhangskomponenten.
   Angenommen, eine planare Einbettung von~$G$ hat $f$ Flächen.
   Dann gilt
@@ -1020,8 +1021,10 @@ TODO: Wie kann man eine Baumzerlegung zur Berechnung eines MIS verwenden?
 \end{defn}
 
 % 9.6
-\begin{lem}
-  Planare Graphen mit $n \geq 3$ Ecken haben $\leq 3 n - 6$ Kanten.
+\begin{lem}[\Youtube{_d_6JvceAwE}]
+  \begin{minipage}[t]{0.75 \linewidth}
+    Jeder planare Graph mit $n \geq 3$ Ecken hat höchstens $3 n - 6$ Kanten.
+  \end{minipage}
 \end{lem}
 
 % 9.7
@@ -1036,12 +1039,16 @@ TODO: Wie kann man eine Baumzerlegung zur Berechnung eines MIS verwenden?
 
 % 9.9
 \begin{lem}
-  Jeder außenplanare Graph mit $\geq 4$ Knoten hat zwei nicht benachbarte Knoten mit Grad jeweils $\leq 2$.
+  \begin{minipage}[t]{0.8 \linewidth}
+    Jeder außenplanare Graph mit $\geq 4$ Knoten hat zwei nicht benachbarte Knoten mit Grad jeweils $\leq 2$.
+  \end{minipage}
 \end{lem}
 
 % 9.10
 \begin{lem}
-  Jeder außenplanare Graph mit $n \geq 2$ Knoten hat $\leq 2 n - 3$ Kanten.
+  \begin{minipage}[t]{0.72 \linewidth}
+    Jeder außenplanare Graph mit $n \geq 2$ Knoten hat höchstens $2 n - 3$ Kanten.
+  \end{minipage}
 \end{lem}
 
 % §9.2. Parameterized Independent Set
@@ -1122,7 +1129,7 @@ TODO: Wie kann man eine Baumzerlegung zur Berechnung eines MIS verwenden?
   Minimum Set Cover verallgemeinert Minimum Vertex Cover.
 \end{bem}
 
-\begin{problem}[\Problem{Minimum Vertex Coloring}]
+\begin{problem}[\Problem{Minimum Vertex Coloring}, \Youtube{4FE79y_JkCE}]
   Gegeben sei ein unger. Graph~$G = (V, E)$.
   Die Menge der \textit{Eckenfärbungen} ist
   \[
