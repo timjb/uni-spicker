@@ -886,4 +886,63 @@ die Anzahl der \textit{Aufkreuzungen}.
   Dann existert $M_\infty \in L_1$ mit $M_n \to M_\infty$ fast-sicher.
 \end{kor}
 
+% Vorlesung vom 22.6.2017
+
+% §3. Martingalungleichungen
+
+% 3.23
+\begin{satz}
+  Sei $\{ M_n \}$ ein Submartingal und sei $T$ eine Stoppzeit bzgl. derselben Filtration mit $P(T \leq N) = 1$ für ein $N \geq 1$.
+  Dann gilt:
+  \[
+    \E[M_0] \leq \E[M_T] \leq \E[M_N].
+  \]
+\end{satz}
+
+% 3.24
+\begin{satz}[\emph{Doob'sche Ungleichung}]
+  Sei $\{ M_n \}$ ein Submartingal.
+  Dann gilt:
+  \[
+    P(\max_{k \leq n} M_k \geq \lambda) \leq \tfrac{1}{\lambda} \E[ M_n \ind \{ \max_{k \leq n} M_k \geq \lambda \} \leq \E[ M_n^{+} ] / \lambda. ]
+  \]
+\end{satz}
+
+\begin{bem}
+  Die Doob'sche Ungleichung verbessert die Markov-Ungleichung.
+\end{bem}
+
+% 3.25
+\begin{kor}[\emph{Kolmogorov-Ungleichung}]
+  Seien $\{ X_i \}$ unabh. ZVen mit $\E[ X_i ] = 0$ und $\E[ X_i^2 ] < \infty$.
+  Sei $S_k = \sum_{i=1}^{k} X_i$.
+  Dann gilt:
+  \[ \P(\max_{k \leq n} \abs{S_k} \geq \lambda) \leq \var(S_n) / \lambda^2. \]
+\end{kor}
+
+% 3.26
+\begin{satz}
+  Ist $\{ M_n \}$ ein Submartingal, dann gilt für jedes $p \in \ointerval{1}{\infty}$:
+  \[
+    \E[ (\max_{k \leq n})^p ] \leq (p / (p-1))^p \E[ (M_n^{+})^p ]
+  \]
+\end{satz}
+
+% 3.27
+\begin{kor}
+  Sei $\{ M_n \}$ ein Martingal.
+  Dann gilt für jedes $p \in \ointerval{1}{\infty}$:
+  \[
+    \E[ (\max_{k \leq n} \abs{M_k})^p \leq (p / (p-1))^p \E[ \abs{M_n}^p. ]
+  \]
+\end{kor}
+
+% §4. Konvergenz in $L^p$, $p > 1$
+
+% 3.28
+\begin{satz}
+  Sei $\{ M_n \}$ ein Martingal mit $\sup_{n \geq 1} \E[\abs{M_n}^p] < \infty$ für ein $p > 1$.
+  Dann konvergiert $M_n$ fast-sicher und in~$L^p$.
+\end{satz}
+
 \end{document}
