@@ -5,12 +5,11 @@
   /Author (Tim Baumann)
 }
 
-%\usepackage{algorithmicx}
-%\usepackage[noend]{algpseudocode}
-%\usepackage{tikz}
+\usepackage{tikz}
 %\tikzset{
 %  font={\fontsize{6pt}{12}\selectfont}
 %}
+\usepackage{dashbox}
 
 \usepackage{nicefrac}
 
@@ -44,6 +43,13 @@
 \DeclareMathOperator{\Neighbours}{Neighbours} % Nachbarknoten (in einem Graphen)
 \DeclareMathOperator{\treewidth}{tw} % Baumbreite
 \newcommand{\boundary}{\partial} % topologischer Rand
+
+\newcommand{\KCircle}{\tikz{\draw (0,0) circle (2pt);}}
+\newcommand{\KSquare}{\tikz{\draw (0,0) rectangle (4pt, 4pt);}}
+\newcommand{\KCircleUnsel}{\tikz{\draw [fill=black] (0,0) circle (2pt);}}
+\newcommand{\KSquareUnsel}{\tikz{\draw [fill=black] (0,0) rectangle (4pt, 4pt);}}
+\newcommand{\KCircleSel}{\tikz{\draw [fill=red] (0,0) circle (2pt);}}
+\newcommand{\KSquareSel}{\tikz{\draw [fill=red] (0,0) rectangle (4pt, 4pt);}}
 
 \newcommand{\IndentState}[1]{\State \quad #1}
 
@@ -1056,7 +1062,7 @@ TODO: Wie kann man eine Baumzerlegung zur Berechnung eines MIS verwenden?
 
 % 9.11
 \begin{satz}
-  Gegeben einen planaren Graphen $G$ und ein $k \in \N$, kann eine unabh. Knotenmenge in Zeit $\O(6^k \cdot n)$ berechnet werden.
+  Für einen planaren Graphen $G$ und ein $k \in \N$ kann eine unabh. Knotenmenge in Zeit $\O(6^k \cdot n)$ berechnet werden (falls eine solche existiert).
 \end{satz}
 
 \begin{idee}
@@ -1097,6 +1103,74 @@ TODO: Wie kann man eine Baumzerlegung zur Berechnung eines MIS verwenden?
     \State \Return ${\argmin}_{T \in C} \size{T}$
   \EndFunction
 \end{algorithmic}
+
+% §12. A linear Vertex-Cover Kernel
+\section{Ein linearer Kernel für Vertex-Cover}
+
+% 12.1
+\begin{satz}[\emph{Egerváry-König}]
+  Sei $G$ ein bipartiter Graph mit $n$ Knoten und $m$ Kanten und $M$ ein Matching maximaler Größe in~$G$. \\
+  Dann kann ein Minimum Vertex Cover von~$G$ der Größe~$\size{M}$ in Zeit $\O(n+m)$ berechnet werden.
+\end{satz}
+
+\TODO{Beweisidee angeben}
+
+\begin{satz}
+  Für jeden unger. Graph $G = (V_G, E_G)$ und $k \in \N$ kann ein unger. Graphen $H = (V_H, E_H)$ mit $\size{V_H} \leq 2 k$ und ein $k' \in \{ 0, \ldots, k \}$ berechnet werden, sodass gilt:
+  \[
+    \text{$G$ hat ein VC der Größe $\leq k$} \iff
+    \text{$H$ hat ein VC der Größe $\leq k'$}.
+  \]
+  Desweiteren können wir in polynomieller Zeit in~$\size{V_G}$ aus einem Vertex Cover von~$H$ der Größe $\leq k'$ ein Vertex Cover von~$G$ der Größe $\leq k$ konstruieren.
+\end{satz}
+
+\begin{alg}
+  \begin{itemize}
+    \item Setze $G' \coloneqq (V', E')$ mit $V' \coloneqq V_G \times \{ \KCircle, \KSquare \}$ und $E' \coloneqq \Set{\{ (u, \KCircle), (v, \KSquare) \}}{(u, v) \in V_G \times V_G, \, \{ u, v \} \in E_G}$
+    \item Berechne ein MVC~$\mathcal{C}$ von $G'$ mit dem Satz von Egerváry-König; im Folgenden werden Knoten rot ausgefüllt dargestellt, falls sie in diesem MVC enthalten sind, andernfalls als schwarz ausgefüllt
+    \item Ersetze $\dashbox{\KCircleUnsel \enspace \KSquareSel} \rightsquigarrow \dashbox{\KCircleSel \enspace \KSquareUnsel}$ in~$\mathcal{C}$
+    \item
+      $V_2 \coloneqq \Set{v \in V_G}{(v, \KCircle) \in \mathcal{C}, \, (v, \KSquare) \in \mathcal{C}}$
+      $V_1 \coloneqq \Set{v \in V_G}{(v, \KCircle) \in \mathcal{C}, \, (v, \KSquare) \not\in \mathcal{C}}$
+      %$V_0 \coloneqq \Set{v \in V_G}{(v, \KCircle) \not\in \mathcal{C}, \, (v, \KSquare) \not\in \mathcal{C}}$
+    \item setze $k' \coloneqq k - \size{V_2}$
+    \item Falls $k' < 0$ oder $\size{V_1} \leq 2 k'$ gib $(\tikz[baseline=-0.5ex]{\draw [fill] (0,0) circle (0.5pt) -- (6pt,0) circle (0.5pt);}, 0)$ zurück (denn dann gibt es kein VC von $G$ der Größe $\leq k$)
+    \item Gib $(G|_{V_1}, k')$ zurück
+  \end{itemize}
+\end{alg}
+
+Die Korrektheit des Alg. folgt aus:
+\begin{itemize}
+  \item Es gibt ein MVC von $G$, das $V_2$ enthält. Dies sieht man wie folgt:
+    \begin{itemize}
+      \item Sei ein MVC~$\mathcal{D}$ von~$G$ gegeben. Wir markieren die darin enthaltenen Knoten durch hellblaue Kästchen, die anderen Knoten durch nicht ausgefüllte Kästchen.
+      \item Die imaginäre Ersetzung
+        \[
+          \colorbox{blue!20}{\KCircleUnsel \enspace \KSquareUnsel} \rightsquigarrow \colorbox{blue!20}{\KCircleSel \enspace \KSquareUnsel}
+          \quad \text{und} \quad
+          \framebox{\KCircleSel \enspace \KSquareSel} \rightsquigarrow \framebox{\KCircleSel \enspace \KSquareUnsel}
+        \]
+        zeigt, dass $\size{\framebox{\KCircleSel \enspace \KSquareSel}} \leq \size{\colorbox{blue!20}{\KCircleUnsel \enspace \KSquareUnsel}}$.
+      \item
+        Ändere $\mathcal{D}$ wie folgt ab:
+        \[
+          \colorbox{blue!20}{\KCircleUnsel \enspace \KSquareUnsel} \rightsquigarrow \framebox{\KCircleUnsel \enspace \KSquareUnsel}
+          \quad \text{und} \quad
+          \framebox{\KCircleSel \enspace \KSquareSel} \rightsquigarrow \colorbox{blue!20}{\KCircleSel \enspace \KSquareSel}
+        \]
+        Die vorhergehende Gleichung zeigt, dass dann $\mathcal{C}$ immer noch minimal ist.
+    \end{itemize}
+  \item $\size{V_1} \leq 2 \cdot (\text{Größe eines MVC von $G|_{V_1}$})$.
+\end{itemize}
+
+\begin{bem}
+  Das Tupel $(H, k')$ wird \textit{Kernel} von $(G, k)$ genannt.
+  Dieser Kernel ist \textit{linear} wegen $\size{V_H} \leq 2 k$.
+\end{bem}
+
+Bester Kern (Hagerup, 2012): Es gibt eine Kernelisierung von Edge Dominating Set mit $\#\text{Knoten} \leq \max \{ \tfrac{1}{2} k^2 + \tfrac{7}{2} k, 6 k \}$
+%  Carbonnel/Herbrard: Diese ist eine $\infty$-loss-less kernelization
+Offenes Problem: Gibt es Kernelization mit $\#\text{Knoten} = \O(k)$ oder $\O(k^2)$?
 
 \section{Probleme}
 
@@ -1231,6 +1305,11 @@ TODO: Wie kann man eine Baumzerlegung zur Berechnung eines MIS verwenden?
 
 \begin{problem}[\Problem{Black-and-White Dominating Set}]
   Gegeben einen unger. Graph $G = (B \cup W, E)$ mit $B \cap W = \emptyset$, finde ein $D \subseteq B \cup W$ minimaler Größe, sodass $B \subseteq D \cup \Neighbours_G(D)$.
+\end{problem}
+
+\begin{problem}[\Problem{Edge Dominating Set}]
+  Gegeben einen unger. Graph $G$ und $k \in \N$.
+  Frage: Gibt es eine Kantendominierung der Größe $\leq k$, \dh{} gibt es ein $D \subseteq E$ mit $\size{D} \leq k$, sodass jede Kante in~$E$ mindestens einen Endpunkt mit einer Kante aus~$D$ gemeinsam hat?
 \end{problem}
 
 \end{document}
