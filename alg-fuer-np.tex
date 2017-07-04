@@ -893,6 +893,7 @@ TODO: Wie kann man eine Baumzerlegung zur Berechnung eines MIS verwenden?
 \end{lem}
 
 % §8.20. Berechnung von Baumzerlegungen
+% (ausgelassen in der Vorlesung)
 
 \begin{bem}
   Entscheiden, ob für ein Tuple $(G, k)$ bestehend aus einem Graph~$G$ und $k \in \N$ der Graph $G$ Baumweite $\leq k$ besitzt, ist NP-vollständig.
@@ -903,6 +904,10 @@ TODO: Wie kann man eine Baumzerlegung zur Berechnung eines MIS verwenden?
   Für alle Konstanten $l \in \N$ und $m, n \in \Z$ kann das folgende Problem in Zeit~$\O(m)$ gelöst werden:
   Gegeben eine Baumzerlegung mit $m$~Knoten mit Weite $\leq l$ eines Graphen~$G$ mit $n$~Knoten, berechne eine Baumzerlegung von~$G$ minimaler Weite mit $\leq n$ Knoten.
 \end{lem}
+
+\begin{bem}
+  Der Algorithmus von Bodlaender und Kloks ist in der Praxis leider viel zu langsam.
+\end{bem}
 
 % 8.21
 \begin{lem}
