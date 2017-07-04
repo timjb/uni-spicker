@@ -41,7 +41,7 @@
 \renewcommand{\O}{\mathcal{O}} % Landau-Notation
 \newcommand{\floor}[1]{\lfloor #1 \rfloor} % Abrunden
 \DeclareMathOperator{\Neighbours}{Neighbours} % Nachbarknoten (in einem Graphen)
-\DeclareMathOperator{\treewidth}{tw} % Baumbreite
+\DeclareMathOperator{\treewidth}{tw} % Baumweite
 \newcommand{\boundary}{\partial} % topologischer Rand
 
 \newcommand{\KCircle}{\tikz{\draw (0,0) circle (2pt);}}
@@ -792,7 +792,7 @@ Mit einer etwas einfacheren $\Call{Search}{}$-Prozedur kann man schon zeigen:
 \end{satz}
 
 % §8.3. Treewidth
-\subsection{Baumbreite}
+\subsection{Baumweite}
 
 % Übungsaufgabe 8.3
 \begin{bem}
@@ -840,12 +840,12 @@ Mit einer etwas einfacheren $\Call{Search}{}$-Prozedur kann man schon zeigen:
     \item $\fa{\{ u, v \} \in E} \ex{x \in X} \{ u, v \} \subseteq B(x)$
     \item Zus'hang: $\fa{x, y, z \in X} \text{$y$ liegt auf Pfad zw. $x$ und~$z$ in~$T$} \implies B(x) \cap B(z) \subseteq B(y)$.
   \end{itemize}
-  Die \emph{Breite} einer Baumzerlegung~$(T, B)$ ist $\max_{x \in X} \size{B(x)} - 1$.
-  Die \emph{Baumbreite} $\treewidth(G)$ von~$G$ ist die kleinstmögliche Breite einer Baumzerlegung von~$G$.
+  Die \emph{Weite} einer Baumzerlegung~$(T, B)$ ist $\max_{x \in X} \size{B(x)} - 1$.
+  Die \emph{Baumweite} $\treewidth(G)$ von~$G$ ist die kleinstmögliche Weite einer Baumzerlegung von~$G$.
 \end{defn}
 
 %\begin{bem}
-%  Jeder Graph $G$ mit $n$~Knoten hat eine Baumzerlegung der Breite $n-1$.
+%  Jeder Graph $G$ mit $n$~Knoten hat eine Baumzerlegung der Weite $n-1$.
 %\end{bem}
 
 TODO: Wie kann man eine Baumzerlegung zur Berechnung eines MIS verwenden?
@@ -861,7 +861,7 @@ TODO: Wie kann man eine Baumzerlegung zur Berechnung eines MIS verwenden?
 
 % 8.14
 \begin{lem}
-  Jeder Graph der Breite~$\leq k$ mit $\geq k + 1$ Knoten hat eine $k$-normale Baumzerlegung.
+  Jeder Graph der Weite~$\leq k$ mit $\geq k + 1$ Knoten hat eine $k$-normale Baumzerlegung.
 \end{lem}
 
 % Beweisidee: Bastle aus einer bel. Baumzerlegung eine k-normale Baumzerlegung durch "Auffüllen" der Säcke und Unterteilung der Kanten.
@@ -878,7 +878,7 @@ TODO: Wie kann man eine Baumzerlegung zur Berechnung eines MIS verwenden?
 \begin{satz}
   Für jedes $k \in \N$ und jeden Graphen~$G$ sind äquivalent:
   \begin{center}
-    $G$ ist ein $k$-partieller Graph $\iff$ $G$ hat Baumbreite $\leq k$
+    $G$ ist ein $k$-partieller Graph $\iff$ $G$ hat Baumweite $\leq k$
   \end{center}
 \end{satz}
 
@@ -889,19 +889,19 @@ TODO: Wie kann man eine Baumzerlegung zur Berechnung eines MIS verwenden?
 
 % 8.19
 \begin{lem}
-  Jeder unger. Graph der Baumbreite $\leq k$ hat $\leq k n$ Kanten.
+  Jeder unger. Graph der Baumweite $\leq k$ hat $\leq k n$ Kanten.
 \end{lem}
 
 % §8.20. Berechnung von Baumzerlegungen
 
 \begin{bem}
-  Entscheiden, ob für ein Tuple $(G, k)$ bestehend aus einem Graph~$G$ und $k \in \N$ der Graph $G$ Baumbreite $\leq k$ besitzt, ist NP-vollständig.
+  Entscheiden, ob für ein Tuple $(G, k)$ bestehend aus einem Graph~$G$ und $k \in \N$ der Graph $G$ Baumweite $\leq k$ besitzt, ist NP-vollständig.
 \end{bem}
 
 % 8.20
 \begin{lem}[Bodlaender und Kloks]
   Für alle Konstanten $l \in \N$ und $m, n \in \Z$ kann das folgende Problem in Zeit~$\O(m)$ gelöst werden:
-  Gegeben eine Baumzerlegung mit $m$~Knoten mit Breite $\leq l$ eines Graphen~$G$ mit $n$~Knoten, berechne eine Baumzerlegung von~$G$ minimaler Breite mit $\leq n$ Knoten.
+  Gegeben eine Baumzerlegung mit $m$~Knoten mit Weite $\leq l$ eines Graphen~$G$ mit $n$~Knoten, berechne eine Baumzerlegung von~$G$ minimaler Weite mit $\leq n$ Knoten.
 \end{lem}
 
 % 8.21
@@ -924,7 +924,7 @@ TODO: Wie kann man eine Baumzerlegung zur Berechnung eines MIS verwenden?
     \quad \text{und} \quad
     \treewidth(G) \leq 2 \treewidth(G') + 1.
   \]
-  Außerdem kann für bel. $k, m \in \N$ aus einer Baumzerlegung von~$G'$ der Breite~$k$ eine Baumzerlegung von~$G$ der Breite $\leq 2 k + 1$ in Zeit $\O(k m)$ konstruiert werden.
+  Außerdem kann für bel. $k, m \in \N$ aus einer Baumzerlegung von~$G'$ der Weite~$k$ eine Baumzerlegung von~$G$ der Weite $\leq 2 k + 1$ in Zeit $\O(k m)$ konstruiert werden.
 \end{lem}
 
 \begin{defn}
@@ -942,7 +942,7 @@ TODO: Wie kann man eine Baumzerlegung zur Berechnung eines MIS verwenden?
 % 8.24
 \begin{satz}[\emph{Bodlaender}]
   Sei $k \in \N_0$ konstant.
-  Für jeden Graphen~$G$ der Baumbreite $\leq k$ mit $n$~Knoten kann eine Baumzerl. minimaler Breite mit $\leq n$ Knoten in Zeit und Platz $\O(n)$ berechnet werden.
+  Für jeden Graphen~$G$ der Baumweite $\leq k$ mit $n$~Knoten kann eine Baumzerl. minimaler Weite mit $\leq n$ Knoten in Zeit und Platz $\O(n)$ berechnet werden.
 \end{satz}
 
 \begin{algorithmic}
