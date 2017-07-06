@@ -17,13 +17,14 @@
 
 % TODO: Include-File für Stochastik
 
-\newcommand{\Alg}{\mathfrak{A}} % (Mengen-)Algebra
 \renewcommand{\P}{\mathbb{P}} % Wahrscheinlichkeitsmaß
 \newcommand{\E}{\mathbb{E}} % Erwartungswert
 \newcommand{\ind}{\mathbbm{1}} % Indikatorfunktion
 \newcommand{\iid}{i.\,i.\,d.} % identisch unabhängig verteilt
 \DeclareMathOperator{\ggT}{ggT} % größter gemeinsamer Teiler
 \newcommand{\Bor}{\mathfrak{B}} % Borel
+\newcommand{\Alg}{\mathcal{A}} % Bezeichner für eine Sigma-Algebra
+\newcommand{\Filt}{\mathcal{F}} % Filtration (von Sigma-Algebren)
 
 \DeclareMathOperator{\var}{Var} % Varianz
 \DeclareMathOperator{\cov}{Cov} % Kovarianz
@@ -678,8 +679,8 @@ Sei im Folgenden $(\Omega, \mathcal{F}, P)$ ein Maßraum.
 
 % 3.1
 \begin{defn}
-  Eine wachsende Folge $\mathcal{F}_0 \subseteq \mathcal{F}_1 \subseteq \ldots$ von $\sigma$-Algebren heißt \emph{Filtration}.
-  Eine Folge von ZVen $\{ M_n \}$ heißt \emph{adaptiert} an die Filtration $\{ \mathcal{F}_n \}$, falls $M_n$ $\mathcal{F}_n$-messbar ist für jedes $n \geq 0$.
+  Eine wachsende Folge $\Filt_0 \subseteq \Filt_1 \subseteq \ldots$ von $\sigma$-Algebren heißt \emph{Filtration}.
+  Eine Folge von ZVen $\{ M_n \}$ heißt \emph{adaptiert} an die Filtration $\{ \Filt_n \}$, falls $M_n$ $\Filt_n$-messbar ist für jedes $n \geq 0$.
 \end{defn}
 
 % 3.2
@@ -699,7 +700,7 @@ Sei im Folgenden $(\Omega, \mathcal{F}, P)$ ein Maßraum.
       \text{\textit{Supermartingal}}\\
     \end{array} \right\}
     \enspace \text{falls} \enspace
-    \E[M_{n+1} | \mathcal{F}_n]
+    \E[M_{n+1} | \Filt_n]
     \left\{ \begin{array}{l}
       =\\
       \geq\\
@@ -731,7 +732,7 @@ Sei im Folgenden $(\Omega, \mathcal{F}, P)$ ein Maßraum.
 \begin{bsp}
   Seien $\{ X_i \}$ unabh. ZVen mit $\E[X_i] = 0$ for alle $i \geq 0$.
   Sei $M_n \coloneqq X_1 + \ldots + X_n$.
-  Dann ist $\{ M_n \}$ ein Martingal bzgl. der Filtration $\{ \mathcal{F}_n \}$ mit $\mathcal{F}_n \coloneqq \sigma(X_1, \ldots, X_n)$.
+  Dann ist $\{ M_n \}$ ein Martingal bzgl. der Filtration $\{ \Filt_n \}$ mit $\Filt_n \coloneqq \sigma(X_1, \ldots, X_n)$.
 \end{bsp}
 
 \begin{defn}
@@ -754,17 +755,17 @@ Sei im Folgenden $(\Omega, \mathcal{F}, P)$ ein Maßraum.
 
 % 3.8
 \begin{lem}
-  Sei $\{ M_n \}$ ein Martingal bzgl. $\{ \mathcal{F}_n \}$.
+  Sei $\{ M_n \}$ ein Martingal bzgl. $\{ \Filt_n \}$.
   Dann gilt:
   \[
-    \E[M_n | \mathcal{F}_i] = M_i
+    \E[M_n | \Filt_i] = M_i
     \quad \text{für alle $i \leq n$.}
   \]
 \end{lem}
 
 % 3.9
 \begin{lem}
-  Sei $\{ M_n \}$ ein Martingal bzgl. $\{ \mathcal{F}_n \}$ und sei $\varphi$ eine konvexe messbare Funktion.
+  Sei $\{ M_n \}$ ein Martingal bzgl. $\{ \Filt_n \}$ und sei $\varphi$ eine konvexe messbare Funktion.
   Falls $\E [\abs{\varphi(M_n)}] < \infty$ für alle $n \geq 1$, so ist di Folge $\{ \varphi(M_n) \}_{n \geq 0}$ ein Submartingal bzgl. $\{ F_n \}$
 \end{lem}
 
@@ -788,11 +789,11 @@ Sei im Folgenden $(\Omega, \mathcal{F}, P)$ ein Maßraum.
   \[ W_n = W_{n-1} + H_n (Y_n - Y_{n-1}) = W_0 + \sum_{i=1}^n H_i (Y_i - Y_{i-1}) \]
   Falls $\{ Y_n \}$ ein Martingal ist, so gilt
   \[
-    \E[ W_{n+1} | \mathcal{F}_n ]
-    = \E[ W_n + H_{n+1} (Y_{n+1} - Y_n) | \mathcal{F}_n ]
-    = W_n + \E[ H_{n+1} (Y_{n+1} - Y_n) | \mathcal{F}_n ]
-    = W_n + H_{n+1} \E[ Y_{n+1} - Y_n | \mathcal{F}_n ]
-    = W_n + H_{n+1} (\E[ Y_{n+1} | \mathcal{F}_n ] - Y_n)
+    \E[ W_{n+1} | \Filt_n ]
+    = \E[ W_n + H_{n+1} (Y_{n+1} - Y_n) | \Filt_n ]
+    = W_n + \E[ H_{n+1} (Y_{n+1} - Y_n) | \Filt_n ]
+    = W_n + H_{n+1} \E[ Y_{n+1} - Y_n | \Filt_n ]
+    = W_n + H_{n+1} (\E[ Y_{n+1} | \Filt_n ] - Y_n)
     = W_n (\text{bzw. $\geq W_n$ für Sub- und $\leq W_n$ für Supermartingale}).
   \]
   Fazit: Man kann mit der Wahl der Handelsstrategie keine Anlage verbessern.
@@ -800,7 +801,7 @@ Sei im Folgenden $(\Omega, \mathcal{F}, P)$ ein Maßraum.
 
 % 3.13
 \begin{defn}
-  Eine Folge $\{ H_n \}_{n \geq 1}$ heißt \emph{prävisibel}, falls $H_n$ $\mathcal{F}_{n-1}$-messbar ist für alle $n \geq 1$.
+  Eine Folge $\{ H_n \}_{n \geq 1}$ heißt \emph{prävisibel}, falls $H_n$ $\Filt_{n-1}$-messbar ist für alle $n \geq 1$.
   Definiere $\{ H \cdot Y \}_n$ durch
   \[
     (H \cdot Y)_n \coloneqq \sum_{i=1}^n H_i (Y_i - Y_{i-1})
@@ -809,7 +810,7 @@ Sei im Folgenden $(\Omega, \mathcal{F}, P)$ ein Maßraum.
 
 % 3.14
 \begin{satz}
-  Sei $\{ Y_n \}$ ein Supermartingal und sei $\{ H_n \}$ prävisibel jeweils bzgl. der Filtration $\{ \mathcal{F}_n \}$.
+  Sei $\{ Y_n \}$ ein Supermartingal und sei $\{ H_n \}$ prävisibel jeweils bzgl. der Filtration $\{ \Filt_n \}$.
   Falls $H_n \in \cinterval{0}{C_n}$ für Konstanten $\{ C_n \}$, so ist $\{ (H \cdot Y)_n \}$ auch ein Supermartingal.
 \end{satz}
 
@@ -821,7 +822,7 @@ Sei im Folgenden $(\Omega, \mathcal{F}, P)$ ein Maßraum.
 
 % 3.16
 \begin{defn}
-  Eine Abbildung $T : \Omega \to \{ \infty \}$ heißt \emph{Stoppzeit} bzgl. $\{ F_n \}$, falls $\{ T=n \} \in \mathcal{F}_n$ für alle $n \geq 0$.
+  Eine Abbildung $T : \Omega \to \{ \infty \}$ heißt \emph{Stoppzeit} bzgl. $\{ F_n \}$, falls $\{ T=n \} \in \Filt_n$ für alle $n \geq 0$.
 \end{defn}
 
 % 3.17
@@ -944,5 +945,227 @@ die Anzahl der \textit{Aufkreuzungen}.
   Sei $\{ M_n \}$ ein Martingal mit $\sup_{n \geq 1} \E[\abs{M_n}^p] < \infty$ für ein $p > 1$.
   Dann konvergiert $M_n$ fast-sicher und in~$L^p$.
 \end{satz}
+
+% §5. Gleichgradige Integrierbarkeit und Konvergenz in L1
+
+\begin{defn}
+  Eine Familie $\{ X_i \}_{i \in I}$ heißt \emph{gleichgradig integrierbar}, falls
+  \[
+    \fa{\epsilon > 0} \ex{M > 0} \fa{i \in I} \E[ \abs{X_i} \ind_{\{ \abs{X_i} > M \}} ] < \epsilon.
+  \]
+\end{defn}
+
+% 3.29
+\begin{lem}
+  Sei $(\Omega, \mathcal{F}, P)$ ein Wkts-Raum, $X \in L^1(\Omega, \mathcal{F}, P)$ und $\{ \Alg_i \}_{i \in I}$ eine Famile von $\sigma$-Algebren mit $\Alg_i \subseteq \mathcal{F}$ für alle $i \in I$.
+  Dann ist die Familie $\{ \E[ X | \Alg_i ] \}_{i \in I}$ gleichgradig integrierbar.
+\end{lem}
+
+% 3.30
+\begin{lem}
+  Sei $\{ \Filt_n \}$ eine Filtration und $X \in L^1$.
+  Dann ist $\{ M_n \}$ mit $M_n \coloneqq \E[ X | \Filt_n ]$ ein gleichgradig integrierbares Martingal.
+\end{lem}
+
+% 3.31
+\begin{satz}
+  Für jedes Martingal $\{ M_n \}$ (bzgl. $\{ \Filt_n \}$) sind äquivalent:
+  \begin{itemize}
+    \item $\{ M_n \}$ ist gleichgradig integrierbar
+    \item $\{ M_n \}$ konvergiert fast sicher und in~$L^1$
+    \item $\{ M_n \}$ konvergiert in~$L^1$
+    \item $\{ \ex{M \in L^1} \fa{n \geq 0} M_n = \E[ M | \Filt_n ] \}$
+  \end{itemize}
+\end{satz}
+
+% 3.32
+\begin{satz}
+  Sei $\{ \mathcal{F}_n \}$ eine Filtration.
+  Betrachte $\mathcal{F}_\infty \coloneqq \sigma(\cup_{n=0}^\infty \mathcal{F}_n)$
+\end{satz}
+
+% 3.33
+\begin{bsp}
+  Seien $\{ X_i \}$ unabhängig und $\tau \coloneqq \cap_{n \geq 1} \sigma(X_n, X_{n+1}, \ldots)$ die terminale $\sigma$-Algebra.
+  Dann folgt aus dem vorh. Satz, dass $P(A) \in \{ 0, 1 \}$ für alle $A \in \tau$.
+\end{bsp}
+
+\begin{bsp}
+  Betrachte eine Lipschitz-stetige Funktion $f : \cointerval{0}{1} \to \R$.
+  Setze
+  \[
+    \begin{array}{r l}
+      X_n &\coloneqq {\sum}_{k=1}^{2^n} (k-1)/2^n \ind \cointerval{(k-1)/2^n}{k/2^n}, \\[0.2em]
+      M_n &\coloneqq 2^n (f(X_n + 1/2^n) - f(X_n)).
+    \end{array}
+  \]
+  Dies sind ZVen auf $\Omega = \cointerval{0}{1}$ mit dem Lebesgue-Maß.
+  Dann ist $\{ M_n \}$ ein gleichgradig integrierbares Martingal.
+  Somit gibt es ein $M \in L^1$ mit $M_n \xrightarrow{n \to \infty} M$ fast-sicher und in~$L^1$.
+  Es gilt dann
+  \[
+    f(x) - f(0) = \Int{0}{x}{M(t)}{t}
+    \quad \text{für alle } x \in \cointerval{0}{1}.
+  \]
+\end{bsp}
+
+% §6. Optional Stopping Theorem
+
+% 3.35
+\begin{satz}
+  Sei $T$ eine Stoppzeit.
+  Falls
+  \begin{itemize}
+    \item $\{ M_n \}$ ein gleichgradig integrierbares Submartingal ist \textit{oder}
+    \item $\E[ \abs{M_T} ] < \infty$ und $\{ M_n \ind \{ T > n \} \}$ gleichgradig integrierbar sind,
+  \end{itemize}
+  so ist die Folge $\{ M_{T \wedge n} \}$ ebenfalls gleichgradig integrierbar.
+\end{satz}
+
+% 3.36
+\begin{satz}
+  Sei $\{ M_n \}$ ein gleichgradig integrierbares Submartingal. \\
+  Dann gilt für jede Stoppzeit~$T$:
+  \[ \E[M_0] \leq \E[M_T] \leq \E[M_\infty]. \]
+\end{satz}
+
+% 3.37
+\begin{satz}[\emph{Optional Stopping Theorem}]
+  Seien $S \leq T$ zwei Stoppzeiten.
+  Falls $\{ M_{T \wedge n} \}$ ein gleichgradig integrierbares Submartingal ist, so gilt: $M_S \leq \E[ M_T | \Filt_S ]$
+\end{satz}
+
+% Kapitel 4: Rekurrenz und Transienz mithilfe von Sub- und Supermartingalen
+\section{Rek. und Transienz mit Martingaltheorie}
+
+% §1. Rekurrenz und Transienz von Folgen nichtnegativer ZVen
+
+Sei $\{ Y_n \}$ eine Folge nichtnegativer ZVen.
+
+% 4.1
+\begin{defn}
+  $\{ Y_n \}$ heißt \emph{(topologisch) rekurrent}, falls
+  \[ \ex{r > 0} P({\liminf}_{n \to \infty} Y_n \leq r) = 1. \]
+  $\{ Y_n \}$ heißt \emph{(topologisch) transient}, falls $P({\lim}_{n \to \infty} Y_n = \infty) = 1$.
+\end{defn}
+
+% 4.2
+\begin{satz}
+  Sei $\{ Y_n \}$ eine Folge mit $P({\limsup}_{n \to \infty} Y_n = \infty) = 1$. \\
+  Falls ein $M > 0$ mit $\E[ Y_{n+1} | Y_n = x_n, \ldots, Y_0 = x_0 ] \leq x_n$ für alle $x_n \geq M$ existiert, so ist $\{ Y_n \}$ rekurrent.
+\end{satz}
+
+Definiere $U_n^{(k)} \coloneqq Y_{k+n} \cdot \ind \{ \min(Y_k, Y_{k+1}, \ldots, Y_{n+k-1}) \geq M \}$.
+
+% 4.3
+\begin{lem}
+  \begin{minipage}[t]{0.8 \linewidth}
+    Unter Vor. des Satzes:
+    Sei $\Filt_n^{(k)} \coloneqq \sigma(Y_0, Y_1, \ldots, Y_{n+k})$. \\
+    Dann ist $\{ U_n^{(k)} \}$ ein Supermartingal bzgl. $\{ F_n^{(k)} \}$.
+  \end{minipage}
+\end{lem}
+
+% 4.4
+\begin{satz}
+  Sei $\{ Y_n \}$ und $T > 0$ mit $P(Y_n \leq T) = 1$ für alle $n \in \N$ und $P({\limsup}_{n \to \infty} Y_n = T) = 1$.
+  Falls $\E[ Y_{n+1} | Y_n = x_n, \ldots, Y_0 = x_0 ] \geq x_n$ für alle $n \in \N$ und $x_n \geq M$ für ein $M < T$, so gilt:
+  $Y_n \xrightarrow{n \to \infty} T$ fast-sicher.
+  % (jedes $\{ 0, \ldots, R \}$, $R < T$, wird nur endlich oft besucht.)
+\end{satz}
+
+Im Folgenden sei $\tau \coloneqq \inf \Set{n \geq 1}{Y_n \leq r}$.
+
+% 4.5
+\begin{satz}
+  Angenommen, für die Folge $\{ \tilde{Y}_n \}$ mit $\tilde{Y}_n \coloneqq Y_{n \wedge \tau}$ gilt
+  \[
+    \E[ \tilde{Y}_{n+1} | \sigma(Y_0, \ldots, Y_n) ] \leq \tilde{Y}_n - \epsilon \ind \{ \tau > n \}
+    \quad \text{für ein $\epsilon > 0$}.
+  \]
+  Dann gilt für jeden konst. Startwert $Y_0$ die Ungleichung
+  \[ \E[\tau] \leq Y_0 / \epsilon < \infty. \]
+\end{satz}
+
+% 4.6
+\begin{satz}
+  Falls $Y_0 > r$ und $\E[ \tilde{Y}_{n+1} | \sigma(Y_0, \ldots, Y_n) ] \geq \tilde{Y}_n$ gilt und ein $M > 0$ mit $\E[ \abs{\tilde{Y}_{n+1} - \tilde{Y}_n} | \sigma(Y_0, \ldots, Y_n) ] \leq M$ fast-sicher existiert, so gilt $\E[ \tau ] = \infty$.
+\end{satz}
+
+% Vorlesung vom 6.7.2017
+
+% §2. Transienz und Rekurrenz von Markovketten
+
+Sei $\{ Z_n \}$ eine Markovkette auf~$\N_0$.
+
+Definiere $m_1(x) \coloneqq \E[ Z_1 - Z_0 | Z_0 = x ] = \sum_{k \in \Z} k p(x, x + k)$ und $m_2(x) \coloneqq \E[ (Z_1 - Z_0)^2 | Z_0 = x ] = \sum_{k \in \Z} k^2 p(x, x + k)$.
+
+\begin{bem}
+  Falls $m_1(x) \leq - \epsilon$ für alle $x \geq x_0$, so können wir direkt Satz 4.5 verwenden:
+  Die Stoppzeit $\tau_r \coloneqq \min \Set{n \geq 0}{Z_n \leq r}$ hat endlichen Erwartungswert für jedes $r \geq x_0$.
+\end{bem}
+
+\begin{frage}
+  Was passiert in dem Fall, wenn $m_1(x)$ von Null nicht getrennt ist? Hier hängt vieles von $m_2(x)$ ab.
+\end{frage}
+
+% 4.7
+\begin{satz}
+  Falls es ein $\epsilon > 0$ gibt mit
+  \[
+    \fa{x \geq x_0} 2 x m_1(x) + m_2(x) \leq - \epsilon,
+  \]
+  so ist die Kette $\{ Z_n \}$ positiv rekurrent.
+\end{satz}
+
+\begin{beweisidee}
+  Betrachte $Y_n = Z_n^2$.
+  Dann gilt
+  \[
+    \E[ Y_{n+1} - Y_n | \sigma(Z_0, \ldots, Z_n) ] \leq - \epsilon
+    \quad
+    \text{auf } \{ Y_n \geq x_0^2 \}.
+  \]
+  Somit ist $\{ Y_n \}$ nach Satz 4.5 und damit auch $\{ Z_n \}$ rekurrent.
+\end{beweisidee}
+
+Falls $m_1(x) \sim - c / x$ und $m_2(x) \sim 1$, so ist $2 x m_1(x) + m_2(x) \sim 1 - 2 c$.
+Falls $c > \tfrac{1}{2}$, so ist die Kette positiv rekurrent.
+
+% 4.8
+\begin{satz}
+  Sei $\{ Z_n \}$ eine irreduzible Kette mit
+  % Bem: es ist möglich, ohne folgende technische Bedingung auszukommen
+  $\abs{Z_{n+1} - Z_n} \leq B$ fast-sicher für alle $n$ für ein $B > 0$.
+  Außerdem gelte $\inf_{x} m_2(x) > 0$.
+  \begin{itemize}
+    \item Falls $2 x m_1(x) \leq (1-\epsilon) m_2(x)$ für alle $x \geq x_1$, so ist $\{ Z_n \}$ rekurrent.
+    \item Falls $2 x m_1(x) \geq (1 + \epsilon) m_2(x)$ für alle $x \geq x_2$, so ist die Kette $\{ Z_n \}$ transient.
+  \end{itemize}
+\end{satz}
+
+% 4.9
+\begin{bsp}
+  Sei $\{ Z_n \}$ eine einfache Irrfahrt auf~$\Z^d$ mit
+  $Z_{n+1} - Z_n \in U_d = \{ \pm e_1, \ldots, \pm e_d \}$, alle gleich wahrscheinlich.
+
+  Wir wissen: $\{ Z_n \}$ ist rekurrent $\iff$ $d \leq 2$
+  Dies können wir auch wie folgt zeigen:
+
+  Betrachte $X_n \coloneqq \norm{Z_n}$.
+  Dann ist
+  \[ \E[ X_{n+1} - X_n | Z_n = x ] = \ldots = \tfrac{1/2 - 1/d}{\norm{x}} + O(1 / \norm{x}^2) \]
+  und
+  \[ \E[ (X_{n+1} - X_n)^2 | Z_n = x ] = \ldots = 1/d + O(1 / \norm{x}) \]
+  Für $d = 1$ ist also
+  \[ \E[ X_{n+1} - X_n | X_n = x ] \leq (1-\epsilon) \E[ (X_1 - X_0)^2 | Z_0 = x ] / (2 \norm{x}) \]
+  Mit Hilfe von $Y_n \coloneqq \log(1 + X_n)$ erhalten wir, dass $\{ X_n \}$ rekurrent ist.
+  Bei $d \geq 3$ gilt
+  \[ \E[ X_{n+1} - X_n | Z_n = x ] \geq (1+\epsilon) \E[ (X_1 - X_0)^2 | Z_0 = x ] / (2 \norm{x}) \]
+  Für $d = 2$ können wir den vorh. Satz leider nicht benutzen.
+  Man kann den Satz aber verbessern, sodass aus
+  \[ 2 x m_1(x) \leq (1 + \tfrac{1-\epsilon}{\log x}) m_2(x) \]
+  schon Rekurrenz folgt.
+\end{bsp}
 
 \end{document}
