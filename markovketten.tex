@@ -446,8 +446,8 @@ Falls $X_k$ nur Werte aus~$\N$ annimmt, so können wir das Verhalten von $H(t) -
 \begin{defn}
   $
     \begin{array}[t]{r c l l}
-    \Defn{\gamma(t)} &\coloneqq& t - Z_{\eta(t)-1} \geq 0 & \text{heißt \emph{Overshoot},} \\
-    \Defn{\chi(t)} &\coloneqq& Z_{\eta(t)} - t > 0 & \text{heißt \emph{Undershoot}.}
+    \Defn{\gamma(t)} &\coloneqq& t - Z_{\eta(t)-1} \geq 0 & \text{heißt \emph{Undershoot},} \\
+    \Defn{\chi(t)} &\coloneqq& Z_{\eta(t)} - t > 0 & \text{heißt \emph{Overshoot}.}
     \end{array}
   $
 \end{defn}
@@ -1030,9 +1030,12 @@ die Anzahl der \textit{Aufkreuzungen}.
 \end{satz}
 
 % 3.37
-\begin{satz}[\emph{Optional Stopping Theorem}]
+\begin{satz}[\emph{Optional Stopping Theorem}] \mbox{}\\
   Seien $S \leq T$ zwei Stoppzeiten.
-  Falls $\{ M_{T \wedge n} \}$ ein gleichgradig integrierbares Submartingal ist, so gilt: $M_S \leq \E[ M_T | \Filt_S ]$
+  Ist $\{ M_{T \wedge n} \}$ ein gleichgradig integrierbares Submartingal, so gilt
+  \[
+    M_S \leq \E[ M_T | \Filt_S ].
+  \]
 \end{satz}
 
 % Kapitel 4: Rekurrenz und Transienz mithilfe von Sub- und Supermartingalen
@@ -1167,5 +1170,38 @@ Falls $c > \tfrac{1}{2}$, so ist die Kette positiv rekurrent.
   \[ 2 x m_1(x) \leq (1 + \tfrac{1-\epsilon}{\log x}) m_2(x) \]
   schon Rekurrenz folgt.
 \end{bsp}
+
+% Vorlesung vom 11.7.2017
+
+% 4.10
+\begin{lem}
+  Sei $\{ Z_n \}$ eine irreduzible abzählbare Markovkette. \\
+  Falls es eine endliche Menge $A \subseteq E$ mit
+  \[
+    \E[ \tau_A | Z_0 = x ] < \infty
+    \quad \forall\, x \in A
+  \]
+  gibt, so ist $\{ Z_n \}$ positiv rekurrent.
+\end{lem}
+
+% 4.11
+\begin{satz}[\emph{Kriterium von Foster}]
+  Sei $\{ Z_n \}$ eine irreduzible abzählbare Markovkette.
+  Dann sind äquivalent:
+  \begin{itemize}
+    \item Die Kette $\{ Z_n \}$ ist positiv rekurrent.
+    \item Es gibt eine Abbildung $f : E \to \R_{\geq 0}$, ein $\epsilon > 0$ und eine endliche Teilmenge $A \subseteq E$ mit
+    \[
+      \begin{array}{r l l}
+        & \fa{x \in E} & \E[ f(Z_1) | Z_0 = x ] < \infty \\
+        \text{und} & \fa{x \in E \setminus A} & \E[ f(Z_1) - f(Z_0) | Z_0 = x ] \leq - \epsilon.
+      \end{array}
+    \]
+  \end{itemize}
+\end{satz}
+
+\begin{bem}
+  Man kann sogar immer $\epsilon = 1$ und $\card{A} = 1$ erreichen.
+\end{bem}
 
 \end{document}
