@@ -814,7 +814,7 @@ Mit einer etwas einfacheren $\Call{Search}{}$-Prozedur kann man schon zeigen:
 \end{defn}
 
 \begin{bspe}
-  \begin{minipage}{0.8 \linewidth}
+  \begin{minipage}[t]{0.8 \linewidth}
     Ein $1$-Baum ist ein gewöhnlicher Baum, \\
     ein $2$-Baum ein "`Baum von Dreiecken"'.
   \end{minipage}
@@ -900,7 +900,7 @@ TODO: Wie kann man eine Baumzerlegung zur Berechnung eines MIS verwenden?
 \end{bem}
 
 % 8.20
-\begin{lem}[Bodlaender und Kloks]
+\begin{lem}[\textit{Bodlaender und Kloks}]
   Für alle Konstanten $l \in \N$ und $m, n \in \Z$ kann das folgende Problem in Zeit~$\O(m)$ gelöst werden:
   Gegeben eine Baumzerlegung mit $m$~Knoten mit Weite $\leq l$ eines Graphen~$G$ mit $n$~Knoten, berechne eine Baumzerlegung von~$G$ minimaler Weite mit $\leq n$ Knoten.
 \end{lem}
@@ -1108,6 +1108,96 @@ TODO: Wie kann man eine Baumzerlegung zur Berechnung eines MIS verwenden?
     \State \Return ${\argmin}_{T \in C} \size{T}$
   \EndFunction
 \end{algorithmic}
+
+% ausgelassen: §9.3 Computing Planar Embeddings
+
+% §9.4 Polynomial-Time Approximation Schemes
+
+% 9.31
+\begin{defn}
+  Sei eine geometrische Einbettung eines Graphen~$G$ gegeben.
+  Führe folgenden Schritt wiederholt aus, bis der Graph leer ist:
+  \hfill\begin{minipage}{0.95 \linewidth}
+    Lösche alle Knoten, die inzident zur äußeren Fläche sind.
+  \end{minipage}
+  Die in der $j$-ten Ausführung gelöschten Knoten haben \textit{Außenplanaritätslevel~$j$}.
+  Der Graph~$G$ heißt \emph{$k$-außenplanar}, falls er eine Einbettung besitzt, bezüglich der jeder Knoten Außenplanaritätslevel $\leq k$ hat.
+\end{defn}
+
+\begin{bem}
+  1-Außenplanare Graphen = außenplanare Graphen
+\end{bem}
+
+% Übungsaufgabe 9.4
+\begin{lem}
+  Außenplanare Graphen haben Baumweite $\leq 2$.
+\end{lem}
+
+% 9.32 und 9.33
+\begin{defn}
+  Sei $T = (V, E_T)$ ein Spannwald eines unger. Graphen $G = (V, E)$.
+  \begin{itemize}
+    \item Der \emph{Fundamentalkreis} einer Kante $\{ u, v \} \in E \setminus E_T$ ist ein Kreis bestehend aus $\{ u, v \}$ und dem Pfad von~$u$ nach~$v$ in~$T$.
+    \item Für $e \in E$ / $v \in V$ sei $\mu(e)$ $\nu(v)$ die Anzahl der Fundamentalkreise, die $e$ / $v$ enthalten.
+    \item Setze $\mu(G, T) \coloneqq \max_{e \in E} \mu(e)$ und $\nu(G, T) \coloneqq \max_{v \in V} \nu(v)$.
+  \end{itemize}
+\end{defn}
+
+% 9.34
+\begin{lem}
+  Sei ein unger. Graph $G = (V, E)$ mit $n$~Knoten. und ein Spannwald $T = (V, E_T)$ von~$G$ gegeben.
+  Setze $k \coloneqq \max \{ \mu(G, T) + 1, \nu(G, T) \}$.
+  Dann kann man eine Baumzerlegung von~$G$ mit Baumweite $\leq k$ und $\leq 2n - 1$ Knoten in Zeit $\O(k n)$ berechnen.
+\end{lem}
+
+\begin{beweisskizze}
+  Ersetze jeden Knoten durch einen Bag, der initial diesen Knoten enthält, und jede Spannwaldkante durch einen Bag, der initial die beiden Endpunkte enthält.
+  Für jede Kante $\{ u, v \} \in E \setminus E_T$ füge $u$ (oder $v$) in jeden Bag zwischen dem zu~$u$ gehörenden und dem zu~$v$ gehörenden Bag ein.
+\end{beweisskizze}
+
+% 9.35
+\begin{lem}
+  Sei $G$ ein planarer Graph und $G'$ der aus~$G$ durch Entfernen der mit der Außenfläche inzidenten Knoten erhaltene Graph.
+  Sei außerdem $T'$ ein Spannbaum in~$G'$.
+  Dann existiert ein Spannbaum $T$ von~$G$, der $T'$ enthält, mit
+  \[
+    \mu(G, T) \leq \mu(G', T') + 2
+    \quad \text{und} \quad
+    \nu(G, T) \leq \mu(G', T') + d,
+  \]
+  wobei $d$ das Maximum über die Anzahl an inzidenten inneren Flächen für alle $v \in V$ ist.
+\end{lem}
+
+% 9.36
+\begin{kor}
+  \begin{itemize}
+    \item Jeder außenplanare Graph~$G$ mit Maximalgrad $\leq 3$ hat einen Spannwald~$T$ mit $\mu(G, T) \leq 2$ und $\nu(G, T) \leq 2$.
+    \item Jeder $k$-außenplanare Graph mit Maximalgrad $\leq 3$ hat einen Spannwald~$T$ mit $\mu(G, T) \leq 2 k$ und $\nu(G, T) \leq 3 k - 1$.
+  \end{itemize}
+\end{kor}
+
+% 3.38
+\begin{satz}
+  Die Baumweite eines $k$-außenplanaren Graphen ist $\leq 3k - 1$.
+\end{satz}
+
+\begin{beweisidee}
+  Folgt aus dem Korollar nach Ersetzen jedes Knoten vom Grad $d > 3$ durch $d - 2$ Knoten vom Grad~$3$, sodass $k$-Außenplanarität erhalten bleibt.
+\end{beweisidee}
+
+\begin{satz}
+  %Seien $k, n \in \N$
+  Gegeben sei ein ungerichteter, zshgder Graph~$G$ mit $n$~Knoten sowie eine kombinatorische Einbettung von~$G$, die den Graphen als $k$-außenplanar darstellt.
+  Dann können wir in Zeit~$\O(k n)$ eine Baumzerlegung von~$G$ mit Weite $\leq 3 k - 1$ und $\O(n)$ Knoten berechnen.
+\end{satz}
+
+% 9.40
+\begin{lem}
+  Gegeben sei ein Graph~$G$ mit $n$ Knoten gegeben sowie eine Baumzerlegung von~$G$ der Weite~$k$ mit $m$~Knoten.
+  Dann kann ein MIS in~$G$ in Zeit $\O(k 2^k n + k m)$ berechnet werden.
+\end{lem}
+
+% TODO: Beweisidee
 
 % §12. A linear Vertex-Cover Kernel
 \section{Ein linearer Kernel für Vertex-Cover}
