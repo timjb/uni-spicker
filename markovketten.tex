@@ -367,7 +367,7 @@ In diesem Fall kann man die Greensche Funktion exakt berechnen:
 
 \begin{defn}
   Die \emph{erzeugende Funktion} einer Folge $\{ a_n \}$ ist
-  \[ A(s) \coloneqq \sum_{n=0}^\infty a_n s^n. \]
+  \[ A(s) \coloneqq {\sum}_{n=0}^\infty a_n s^n. \]
 \end{defn}
 
 % 2.18
@@ -478,22 +478,19 @@ Falls $X_k$ nur Werte aus~$\N$ annimmt, so können wir das Verhalten von $H(t) -
 
 % 2.25
 \begin{defn}
-  $x \in E$ heißt \emph{positiv rekurrent}, falls $\E [\tau_x^{(1)} | Z_0=x] < \infty$
+  $x \in E$ heißt \emph{positiv rekurrent}, falls $\E [\tau_x^{(1)} | Z_0=x] < \infty$. \\
+  Ist $x$ rekurrent, aber nicht pos. rekurrent, so heißt $x$ \emph{nullrekurrent}.
 \end{defn}
 
 \begin{bem}
   positive Rekurrenz $\implies$ Rekurrenz
 \end{bem}
 
-\begin{defn}
-  Falls $x$ rekurrent, aber nicht positiv rekurrent ist, so heißt $x$ \emph{nullrekurrent}.
-\end{defn}
-
 % 2.26
 \begin{lem}
   \begin{minipage}[t]{0.8 \linewidth}
     Sei $x$ ein positiv rekurrenter Zustand. \\
-    Ist $F(x, y) > 0$ so ist auch~$y$ positiv rekurrent.
+    Ist $F(x, y) > 0$, so ist auch~$y$ positiv rekurrent.
   \end{minipage}
 \end{lem}
 
@@ -533,9 +530,9 @@ Falls $X_k$ nur Werte aus~$\N$ annimmt, so können wir das Verhalten von $H(t) -
   \[
     \left\{
       \begin{array}{l}
-        \sum_{y \in E} \abs{P_y} < \infty \\
-        \sum_{y \in E} \pi_y = 1 \\
-        \sum_{x \in E} \pi_x p(x, y) = \pi_y \text{ für alle } y \in E
+        {\sum}_{y \in E} \abs{P_y} < \infty \\
+        {\sum}_{y \in E} \pi_y = 1 \\
+        {\sum}_{x \in E} \pi_x p(x, y) = \pi_y \text{ für alle } y \in E
       \end{array}
     \right.
   \]
@@ -548,7 +545,7 @@ Falls $X_k$ nur Werte aus~$\N$ annimmt, so können wir das Verhalten von $H(t) -
 \begin{defn}
   Eine Verteilung $\{ \mu_x \}_{x \in E}$ auf~$E$ heißt \emph{stationär}, falls
   \[
-    \mu_x = \sum_{y \in E} \mu_y p(y, x)
+    \mu_x = {\sum}_{y \in E} \mu_y p(y, x)
     \quad \text{für alle $x \in E$}
     \qquad \text{(kurz: $\mu = \mu P$).}
   \]
@@ -557,7 +554,7 @@ Falls $X_k$ nur Werte aus~$\N$ annimmt, so können wir das Verhalten von $H(t) -
 \begin{bem}
   Für eine stationäre Verteilung $\{ \mu_x \}_{x \in E}$ gilt
   \[
-    \mu_x = \sum_{y \in E} \mu_y p^{(n)}(y, x)
+    \mu_x = {\sum}_{y \in E} \mu_y p^{(n)}(y, x)
     \quad \text{für alle $x \in E$ und $n \in \N$}
   \]
 \end{bem}
@@ -567,7 +564,7 @@ Falls $X_k$ nur Werte aus~$\N$ annimmt, so können wir das Verhalten von $H(t) -
   Sei $x$ ein positiv rekurrenter Zustand.
   Dann definiert
   \[
-    \Defn{\mu_y^{(x)}} \coloneqq \E[ \sum_{k=0}^{\tau_x^{(1)} - 1} \ind \{ Z_k = y | Z_0 = x \} ] / m(x, x)
+    \Defn{\mu_y^{(x)}} \coloneqq \frac{1}{m(x, x)} \cdot \E \left[ \sum_{k=0}^{\tau_x^{(1)} - 1} \ind \{ Z_k = y \} \middle| Z_0 = x \right]
   \]
   für alle $y \in E$ eine stationäre Verteilung $\{ \mu_y^{(x)} \}_{y \in E}$.
 \end{lem}
@@ -590,15 +587,15 @@ Falls $X_k$ nur Werte aus~$\N$ annimmt, so können wir das Verhalten von $H(t) -
   Eine irreduzible Kette auf einem endlichen Zustandsraum ist immer positiv rekurrent.
   Ferner existieren $C > 0$ und $q \in \ointerval{0}{1}$ mit
   \[
-    P(\tau_y^{(1)} > n | Z_0 = x) < C q^n
+    P(\tau_y^{(1)} > n \,|\, Z_0 = x) < C q^n
     \quad \text{für alle $n \geq 1$ und $x, y \in E$.}
   \]
 \end{satz}
 
 % 2.36
 \begin{satz}
-  Sei $\{ Z_n \}$ irreduzibel und positiv rekurrent.
-  Sei $f : E \to \R$ integrierbar bezüglich der stationären Verteilung $\{ \pi_x \}$, \dh{} $\sum_{x \in E} \abs{f(x)} \pi_x < \infty$.
+  Sei $\{ Z_n \}$ irreduzibel und positiv rekurrent. \\
+  Sei $f : E \to \R$ integrierbar bezüglich der stationären Verteilung $\{ \pi_x \}$, \dh{} ${\sum}_{x \in E} \abs{f(x)} \pi_x < \infty$.
   Dann gilt
   \[
     \tfrac{1}{n} \sum_{k=0}^{n-1} f(Z_k) \xrightarrow{\text{f.\,s.}} \sum_{x \in E} f(x) \pi_x
@@ -615,7 +612,9 @@ Falls $X_k$ nur Werte aus~$\N$ annimmt, so können wir das Verhalten von $H(t) -
 \begin{bsp}
   Sei $\{ Z_n \}$ irreduzibel, periodisch mit Periode $p > 1$.
   Dann gilt
-  $p^{(dk)}(x_0, x_0) \xrightarrow d / m(x_0, x_0)$.
+  \[
+    p^{(dk)}(x_0, x_0) \xrightarrow d / m(x_0, x_0).
+  \]
 \end{bsp}
 
 % 2.37
@@ -632,8 +631,8 @@ Falls $X_k$ nur Werte aus~$\N$ annimmt, so können wir das Verhalten von $H(t) -
 
 % 2.38
 \begin{prop}
-  Sei $\{ Z_n \}$ irreduzibel und periodisch mit $d \geq 1$.
-  Dann existieren paarweise disjunkte $C_0, C_1, \ldots, C_{d-1} \subseteq E$ mit $C_0 \cup \ldots \cup C_{d-1} = E$ mit
+  Sei $\{ Z_n \}$ irreduzibel und periodisch mit $d \geq 1$. \\
+  Dann existieren paarweise disjunkte $C_0, C_1, \ldots, C_{d-1} \subseteq E$ mit $C_0 \cup \ldots \cup C_{d-1} = E$ und
   \[
     \Set{y \in E}{x \in C_i, p(x, y) > 0} = C_{(i+1) \% d}.
   \]
@@ -648,7 +647,7 @@ Falls $X_k$ nur Werte aus~$\N$ annimmt, so können wir das Verhalten von $H(t) -
     p^{(md)}(x, y) \xrightarrow{m \to \infty} d / m(y, y)
     \quad \text{für alle $x, y \in C_i$}
   \]
-  Falls $x \in C_0$ und wir wollen $p^{(md + r)}(x, y)$ berechnen, so recht es $y \in C_r$ zu betrachten.
+  Falls $x \in C_0$ und wir wollen $p^{(md + r)}(x, y)$ berechnen, so reicht es $y \in C_r$ zu betrachten.
   %, weil
   %\[
   %  p^{(md + r)}(x, y) = 0
@@ -656,7 +655,7 @@ Falls $X_k$ nur Werte aus~$\N$ annimmt, so können wir das Verhalten von $H(t) -
   %\]
   Definiere
   \[
-    F_r(x, y) = P(\tau_y^{(1)} < \infty, \tau_y^{(1)} = r \mod d | Z_0 = x)
+    F_r(x, y) \coloneqq \P(\tau_y^{(1)} < \infty, \, \tau_y^{(1)} \equiv r \, (\mathrm{mod}\, d) \,|\, Z_0 = x)
   \]
   Es gilt dann:
   \[
@@ -726,7 +725,7 @@ Sei im Folgenden $(\Omega, \mathcal{F}, P)$ ein Maßraum.
     \item 2. Runde: Einsatz = 2 Euro, bei Gewinn Ausstieg, \ldots
     \item $n$. Runde: Einsatz = $2^{n-1}$ Euro, bei Gewinn Ausstieg
   \end{itemize}
-  Es gilt: $T = \min \{ n \geq 1 | \text{$n$-te Runde ist gewonnen} \} < \infty$ fast sicher, der Gewinn ist $1$ Euro.
+  Es gilt: $T = \inf \Set{ n \geq 1 }{ \text{$n$-te Runde ist gewonnen} } < \infty$ fast sicher, der Gewinn ist $1$ Euro.
 \end{bem}
 
 \begin{bsp}
@@ -745,7 +744,13 @@ Sei im Folgenden $(\Omega, \mathcal{F}, P)$ ein Maßraum.
 \end{lem}
 
 \begin{defn}
-  $\{ M_n \}$ ist Martingal $\coloniff$ $\{ M_n \}$ ist Martingal bzgl. der natürlichen Filtration
+  $
+    \arraycolsep=1pt
+    \begin{array}[t]{r c l}
+      \{ M_n \} \text{ ist Martingal} & \coloniff & \{ M_n \} \text{ ist Martingal bzgl.} \\
+      && \text{der natürlichen Filtration}
+    \end{array}
+  $
 \end{defn}
 
 % 3.7
@@ -789,12 +794,14 @@ Sei im Folgenden $(\Omega, \mathcal{F}, P)$ ein Maßraum.
   \[ W_n = W_{n-1} + H_n (Y_n - Y_{n-1}) = W_0 + \sum_{i=1}^n H_i (Y_i - Y_{i-1}) \]
   Falls $\{ Y_n \}$ ein Martingal ist, so gilt
   \[
-    \E[ W_{n+1} | \Filt_n ]
-    = \E[ W_n + H_{n+1} (Y_{n+1} - Y_n) | \Filt_n ]
-    = W_n + \E[ H_{n+1} (Y_{n+1} - Y_n) | \Filt_n ]
-    = W_n + H_{n+1} \E[ Y_{n+1} - Y_n | \Filt_n ]
-    = W_n + H_{n+1} (\E[ Y_{n+1} | \Filt_n ] - Y_n)
-    = W_n (\text{bzw. $\geq W_n$ für Sub- und $\leq W_n$ für Supermartingale}).
+    \begin{array}{c l}
+      & \E[ W_{n+1} | \Filt_n ] \\
+      = & \E[ W_n + H_{n+1} (Y_{n+1} - Y_n) | \Filt_n ] \\
+      = & W_n + \E[ H_{n+1} (Y_{n+1} - Y_n) | \Filt_n ] \\
+      = & W_n + H_{n+1} \E[ Y_{n+1} - Y_n | \Filt_n ] \\
+      = & W_n + H_{n+1} (\E[ Y_{n+1} | \Filt_n ] - Y_n) \\
+      = & W_n (\text{bzw. $\geq W_n$ für Sub- und $\leq W_n$ für Supermartingale}).
+    \end{array}
   \]
   Fazit: Man kann mit der Wahl der Handelsstrategie keine Anlage verbessern.
 \end{bsp}
@@ -844,30 +851,32 @@ Sei $\{ M_n \}$ eine Folge von ZVen
 Seien $a < b$.
 Definiere
 \[
-  N_0 \coloneqq -1, \quad
-  N_{2k-1} \coloneqq \inf \Set{n > N_{2k-2}}{M_n < a}, \quad
-  N_{2k} \coloneqq \inf \Set{n > N_{2k}}{M_n \geq b}
+  \arraycolsep=2pt
+  \begin{array}{l c l}
+    N_0 &\coloneqq& -1, \\
+    N_{2k-1} &\coloneqq& \inf \Set{n > N_{2k-2}}{M_n < a}, \\
+    N_{2k} &\coloneqq& \inf \Set{n > N_{2k}}{M_n \geq b}
+  \end{array}
 \]
-Außerdem sei
+Die Anzahl der \textit{Aufkreuzungen} ist dann
 \[
   U_n \coloneqq \max \Set{k}{N_{2k} \leq n}.
 \]
-die Anzahl der \textit{Aufkreuzungen}.
 
 % 3.19
-\begin{satz}[Doob'sche Aufkreuzungsungleichung]
+\begin{satz}[\emph{Doob'sche Aufkreuzungsungleichung}] \mbox{}\\
   Ist $\{ M_n \}$ ein Submartingal, so gilt für alle $a < b$ und alle $n \geq 1$:
   \[ \E[ U_n ] \leq (\E[ (M_n - a)^{+} ] - \E[ (M_0 - a)^{+} ]) / (b - a). \]
 \end{satz}
 
 % 3.20
-\begin{satz}[\emph{Martingalkonvergenzsatz}]
-  Sei $\{ M_n \}$ ein Submartingal mit $\sup_{n \geq 0} \E [ M_n^{+} ] < \infty$.
+\begin{satz}[\emph{Martingalkonvergenzsatz}] \mbox{}\\
+  Sei $\{ M_n \}$ ein Submartingal mit ${\sup}_{n \geq 0} \E [ M_n^{+} ] < \infty$.
   Dann existiert eine ZV $M_\infty$ mit $\E[ \abs{M_\infty} ] < \infty$ sodass $M_n \to M_\infty$ fast-sicher.
 \end{satz}
 
 % 3.21
-\begin{bsp}[Polya-Urne]
+\begin{bsp}[\textit{Polya-Urne}]
   Urne mit $b$ blauen und $r$ roten Kugeln.
   In jeder Runde wird eine Kugel gezogen und mit einer weiteren Kugel gleicher Farbe zurückgelegt.
   Sei $R_n$ di Anzahl von zugefügten roten Kugeln nach $n$ Runden.
@@ -884,7 +893,7 @@ die Anzahl der \textit{Aufkreuzungen}.
 % 3.22
 \begin{kor}
   Sei $\{ M_n \}$ ein nichtneg. Supermartingal.
-  Dann existert $M_\infty \in L_1$ mit $M_n \to M_\infty$ fast-sicher.
+  Dann existiert $M_\infty \in L_1$ mit $M_n \to M_\infty$ fast-sicher.
 \end{kor}
 
 % Vorlesung vom 22.6.2017
@@ -901,7 +910,7 @@ die Anzahl der \textit{Aufkreuzungen}.
 \end{satz}
 
 % 3.24
-\begin{satz}[\emph{Doob'sche Ungleichung}]
+\begin{satz}[\emph{Doob'sche Ungleichung}] \mbox{}\\
   Sei $\{ M_n \}$ ein Submartingal.
   Dann gilt:
   \[
@@ -916,7 +925,7 @@ die Anzahl der \textit{Aufkreuzungen}.
 % 3.25
 \begin{kor}[\emph{Kolmogorov-Ungleichung}]
   Seien $\{ X_i \}$ unabh. ZVen mit $\E[ X_i ] = 0$ und $\E[ X_i^2 ] < \infty$.
-  Sei $S_k = \sum_{i=1}^{k} X_i$.
+  Setze $S_k = X_1 + \ldots + X_k$.
   Dann gilt:
   \[ \P(\max_{k \leq n} \abs{S_k} \geq \lambda) \leq \var(S_n) / \lambda^2. \]
 \end{kor}
@@ -994,9 +1003,9 @@ die Anzahl der \textit{Aufkreuzungen}.
   Betrachte eine Lipschitz-stetige Funktion $f : \cointerval{0}{1} \to \R$.
   Setze
   \[
-    \begin{array}{r l}
-      X_n &\coloneqq {\sum}_{k=1}^{2^n} (k-1)/2^n \ind \cointerval{(k-1)/2^n}{k/2^n}, \\[0.2em]
-      M_n &\coloneqq 2^n (f(X_n + 1/2^n) - f(X_n)).
+    \begin{array}{r c l}
+      X_n &\coloneqq& {\sum}_{k=1}^{2^n} (k-1)/2^n \ind \cointerval{(k-1)/2^n}{k/2^n}, \\[0.2em]
+      M_n &\coloneqq& 2^n (f(X_n + 1/2^n) - f(X_n)).
     \end{array}
   \]
   Dies sind ZVen auf $\Omega = \cointerval{0}{1}$ mit dem Lebesgue-Maß.
@@ -1039,7 +1048,7 @@ die Anzahl der \textit{Aufkreuzungen}.
 \end{satz}
 
 % Kapitel 4: Rekurrenz und Transienz mithilfe von Sub- und Supermartingalen
-\section{Rek. und Transienz mit Martingaltheorie}
+\section{Rekurrenz/Transienz mit Martingaltheorie}
 
 % §1. Rekurrenz und Transienz von Folgen nichtnegativer ZVen
 
@@ -1203,5 +1212,69 @@ Falls $c > \tfrac{1}{2}$, so ist die Kette positiv rekurrent.
 \begin{bem}
   Man kann sogar immer $\epsilon = 1$ und $\card{A} = 1$ erreichen.
 \end{bem}
+
+% 4.12
+\begin{satz}
+  Sei $\{ Z_n \}$ eine irr. Markovkette auf~$E$, $E$ abzählbar.
+  Dann gilt:
+  \[
+    \arraycolsep=1pt
+    \begin{array}{r c l}
+      \{ Z_n \} \text{ ist transient}
+      &\iff&
+      \ex{A \neq \emptyset \subset E} \ex{f : E \to \R_{\geq 0}} \\
+      && \quad {\inf}_{x \in E} f(x) < {\inf}_{x \in A} f(x), \\
+      && \quad \fa{x \!\in\! E \!\setminus\! A} \E[ f(Z_1) - f(Z_0) \,|\, Z_0 = x ] \leq 0.
+    \end{array}
+  \]
+\end{satz}
+
+% 4.13
+\begin{lem}
+  \begin{minipage}[t]{0.8 \linewidth}
+    Im Kontext der rechten Seite des Satzes: \\
+    Sei $y \in E \setminus A$ mit $y < {\inf}_{x \in A} f(x)$.
+    Dann gilt:
+    \[
+      \P(\tau_A < \infty \,|\, Z_0 = y) \leq f(y) / {\inf}_{x \in A} f(x).
+    \]
+  \end{minipage}
+\end{lem}
+
+% 4.14
+\begin{kor}
+  Sei $\{ Z_n \}$ eine irr. Markovkette auf~$E$, $E$ abzählbar.
+  Dann gilt:
+  \[
+    \arraycolsep=1pt
+    \begin{array}{r c l}
+      \{ Z_n \} \text{ ist transient}
+      &\iff&
+      \ex{x_0 \in E} \ex{h : E \to \R} \\
+      && \quad \text{$h$ beschränkt, nicht konstant und} \\
+      && \quad \fa{x \neq x_0} \E[ f(Z_1) - f(Z_0) \,|\, Z_0 = x ] = 0.
+    \end{array}
+  \]
+\end{kor}
+
+\begin{defn}
+  Eine Funktion $f : X \to \R$ (mit $\card{X} = \infty$) heißt \emph{unbeschränkt}, falls ${\sup}_{x \in B} f(x) = \infty$ für jede unendliche Teilmenge $B \subseteq X$.
+\end{defn}
+
+% 4.15
+\begin{satz}
+  Sei $\{ Z_n \}$ eine irr. Markovkette auf~$E$, $E$ abzählbar.
+  Dann gilt:
+  \[
+    \arraycolsep=1pt
+    \begin{array}{r c l}
+      \{ Z_n \} \text{ ist rekurrent}
+      &\iff&
+      \ex{\text{endliche Teilmenge } A \subset E} \\
+      && \ex{\text{unbeschränkte Funktion } f : E \to \R_{\geq 0}} \\
+      && \quad \fa{x \!\in\! E \!\setminus\! A} \E[ f(Z_1) - f(Z_0) \,|\, Z_0 = x ] \leq 0.
+    \end{array}
+  \]
+\end{satz}
 
 \end{document}
