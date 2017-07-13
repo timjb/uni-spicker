@@ -165,9 +165,25 @@
   $x$ ist rekurrent $\iff$ $G(x, x) = \infty$
 \end{kor}
 
+\begin{lem}
+  Ist $F(x, y) \in \ointerval{0}{1}$, so ist $x$ nicht rekurrent.
+\end{lem}
+
 % 2.8
 \begin{satz}
   Ist $x \in E$ rekurrent und $F(x, y) > 0$, so ist $y$ auch rekurrent und $F(x, y) = F(y, x) = 1$.
+\end{satz}
+
+% nicht in der Vorlesung
+\begin{satz}
+  Es sind äquivalent:
+  \begin{itemize}
+    \miniitem{0.9 \linewidth}{$x$ ist rekurrent}
+    \miniitem{0.3 \linewidth}{$F(x, x) = 1$}
+    \miniitem{0.5 \linewidth}{$\fa{y \in E} F(x, y) \in \{ 0, 1 \}$}
+    \miniitem{0.3 \linewidth}{$G(x, x) = \infty$}
+    \miniitem{0.5 \linewidth}{$\fa{y \in E} G(x, y) \in \{ 0, \infty \}$}
+  \end{itemize}
 \end{satz}
 
 \iffalse
