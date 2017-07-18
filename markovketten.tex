@@ -41,6 +41,146 @@
 
 \maketitle{Zusammenfassung Markovketten}
 
+% Kapitel I. Endliche Markovketten
+\section{Endliche Markovketten}
+
+\begin{setting}
+  Sei $E \neq \emptyset$ eine höchstens abzählbare Menge, die \textit{Zustandsmenge}.
+  Eine \emph{stochastische Matrix}~$\Pi$ auf~$E$ ist geg. durch eine Abbildung $p : E \times E \to \cinterval{0}{1}$ mit
+  \[
+    {\sum}_{y \in E} p(x, y) = 1 \quad
+    \forall\,x \in E.
+  \]
+\end{setting}
+
+\begin{defn}
+  Für einen \textit{Vektor} $\pi : E \to \R$ ist $\pi \Pi : E \to \R$ definiert durch
+  \[
+    (\pi \Pi)(x) \coloneqq {\sum}_{z \in E} \pi(z) \cdot p(z, x).
+  \]
+  (Annahme dabei: ${\sum}_{z \in E} \abs{\pi(z)} \cdot p(z, x) < \infty$ für alle $x \in E$.)
+\end{defn}
+
+% 1.1
+\begin{defn}
+  Eine Folge von ZVen $\{ X_n \in E \}$ heißt \emph{Markovkette} \textit{auf~$E$} mit \textit{Übergangsmatrix}~$p$, falls für alle $n \geq 1$ und $x_0, \ldots, x_{n+1} \in E$ gilt:
+  \[
+    \begin{array}{r l}
+      & \P(X_{n+1} = x_{n+1} \,|\, X_0=x_0, \ldots, X_n=x_n) \\
+      = & \P(X_{n+1} = x_{n+1} \,|\, X_n=x_n)
+      = p(x_{n+1}, x_n)
+    \end{array}
+  \]
+\end{defn}
+
+\begin{interp}
+  Bei gegebener Gegenwart $X_n = x_n$ ist die Zukunft $X_{n+1}$ unabhängig von der Vergangenheit.
+\end{interp}
+
+% 1.2
+\begin{bem}
+  Die Verteilung der ganzen Folge $\{ X_n \}$ ist durch die Verteilung von $X_0$ (\textit{Startverteilung}) und durch $p$ eindeutig bestimmt:
+  \[
+    \P(X_0=x_0, \ldots, X_n=x_n) = \P(X_0=x_0) \cdot {\prod}_{k=1}^n p(x_{n-1}, x_n)
+  \]
+  Gibt $\pi_0 : E \to \cinterval{0}{1}$ die Startverteilung an, und $\pi_n$ die Verteilung nach dem $n$-ten Schritt für $n \geq 1$, so gilt:
+  \[
+    \pi_n = \Pi^n \pi_0
+  \]
+\end{bem}
+
+\begin{defn}
+  Für $n \in \N$ und $x, y \in E$ ist
+  \[
+    \Defn{p^{(n)}(x, y)} \coloneqq \P(X_n=y \,|\, X_0=x)
+  \]
+  die \emph{$n$-Schritt-Übergangswahrscheinlichkeit} von~$x$ nach~$y$.
+\end{defn}
+
+\begin{lem}[\emph{Kolmogorov-Chapman-Gleichung}]
+  Für $\ell, k \in \N$, $x, y \in E$ gilt
+  \[
+    p^{(k + \ell)}(x, y) = {\sum}_{z \in E} p^{(k)}(x, z) p^{(\ell)}(z, y).
+  \]
+\end{lem}
+
+\begin{bem}
+  Bekannte Spezialfälle:
+  \[
+    \begin{array}{r l}
+      \text{\textit{Vorwärtsgleichung:}} & p^{(k+1)}(x, y) = {\sum}_{z \in E} \, p^{(k)}(x, z) p(z, y) \\
+      \text{\textit{Rückwärtsgleichung:}} & p^{(k+1)}(x, y) = {\sum}_{z \in E} \, p(x, z) p^{(k)}(z, y)
+    \end{array}
+  \]
+\end{bem}
+
+% ausgelassen: Beispiel 1.3, 1.4, 1.5, 1.6
+
+% Vorlesung vom 27.4.2017
+
+% §2. Ergodensätze für endliche Markovketten
+
+% 1.9
+\begin{defn}
+  Eine Verteilung $\pi$ heißt \emph{stationär}, falls $\pi = \pi \Pi$.
+\end{defn}
+
+% 1.7 + 1.8 + 1.10
+\begin{satz}
+  Sei $\{ X_n \}$ eine Markovkette auf einem endlichen Zustandsraum~$E$ mit der Übergangsmatrix~$\Pi$.
+  Dann sind äquivalent:
+  \begin{itemize}
+    \item Es gibt ein $n_0 \geq 1$ mit $\fa{x, y \in E} p^{(n_0)}(x, y) > 0$.
+    \item Es existiert ein $\pi : E \to \ocinterval{0}{1}$ mit
+    \[
+      p^{(n)}(x, y) \xrightarrow{n \to \infty} \pi(y)
+      \quad \forall \, x, y \in E.
+    \]
+  \end{itemize}
+  In diesem Fall ist $\pi$ die einzige stationäre Verteilung. \\
+  Die Konvergenz ist exponentiell schnell:
+  \[
+    \abs{p^{(n)}(x, y) - \pi(y)} \leq C e^{- a n} \quad
+    \text{für Konstanten $C, a > 0$.}
+  \]
+  Desweiteren gilt unabhängig von der Startverteilung
+  \[
+    \P(X_n = y) \xrightarrow{n \to \infty} \pi(y) \quad
+    \forall \, y \in E.
+  \]
+\end{satz}
+
+\begin{acht}
+  Stationäre Verteil. können ohne Konvergenz existieren!
+\end{acht}
+
+% 1.11
+\begin{satz}
+  Falls $\fa{x, y \in E} p^{(n_0)}(x, y) > 0$ für ein $n_0 \in \N$, so gilt
+  \[
+    \tfrac{1}{n+1} \cdot {\sum}_{k=0}^n \ind \{ X_k = x \} \xrightarrow[n \to \infty]{\P} \pi(x)
+    \quad \forall \, x \in E.
+  \]
+\end{satz}
+
+% 1.12 (teilweise)
+\begin{bem}
+  Eine Übergangsmatrix heißt \emph{doppelt stochastisch}, falls
+  \[
+    {\sum}_{y \in E} p(x, y) = 1 \enspace \forall \, y \in E
+    \quad \text{und} \quad
+    {\sum}_{x \in E} p(x, y) = 1 \enspace \forall \, x \in E.
+  \]
+  Für jede solche Übergangsmatrix auf einem endlichen Raum ist die uniforme Verteilung stationär.
+\end{bem}
+
+% §. Paradoxon von Parrondo
+
+\begin{bem}[\emph{Paradox von Parrondo}]
+  Es gibt zwei Glücksspiele, bei denen man fast-sicher irgendwann all sein Geld verliert, dies aber nicht der Fall ist, falls man sie abwechselnd spielt!
+  Diese Glücksspiele kann man als Markovketten modellieren, wobei der aktuelle Zustand durch die Anzahl an Euros im Besitz des Spielers gegeben ist.
+\end{bem}
+
 % Vorlesung vom 4.5.2017
 
 % Kapitel II. Abzählbare Markovketten

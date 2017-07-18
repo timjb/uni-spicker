@@ -45,6 +45,7 @@
 \newtheorem*{frage}{Frage}
 \newtheorem*{fragen}{Fragen}
 \newtheorem*{situation}{Situation}
+\newtheorem*{setting}{Setting}
 \newtheorem*{thm}{Thm} % Theorem
 \newtheorem*{lem}{Lem} % Lemma
 \newtheorem*{lemdefn}{Lem/Def} % Lemma/Definition
