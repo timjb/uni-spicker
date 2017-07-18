@@ -787,7 +787,7 @@ Sei im Folgenden $(\Omega, \mathcal{F}, P)$ ein Maßraum.
 % 3.9
 \begin{lem}
   Sei $\{ M_n \}$ ein Martingal bzgl. $\{ \Filt_n \}$ und sei $\varphi$ eine konvexe messbare Funktion.
-  Falls $\E [\abs{\varphi(M_n)}] < \infty$ für alle $n \geq 1$, so ist di Folge $\{ \varphi(M_n) \}_{n \geq 0}$ ein Submartingal bzgl. $\{ F_n \}$
+  Falls $\E [\abs{\varphi(M_n)}] < \infty$ für alle $n \geq 1$, so ist die Folge $\{ \varphi(M_n) \}_{n \geq 0}$ ein Submartingal bzgl. $\{ F_n \}$
 \end{lem}
 
 \begin{bem}
@@ -796,18 +796,18 @@ Sei im Folgenden $(\Omega, \mathcal{F}, P)$ ein Maßraum.
 
 % 3.11
 \begin{bsp}
-  Ist $\{ M_n \}$ ein Martingal, so sind $M_n^2$, $M_n^{+}$ und $\abs{M_n}$ Submartingale.
+  $\{ M_n \}$ Martingal $\implies$ $M_n^2$, $M_n^{+}$, $\abs{M_n}$ Submartingale
 \end{bsp}
 
 \begin{bsp}
   Ein Anleger kauft $H_0$ Aktien einer Firma.
   Es sei $W_0$ der Wert der Aktien beim Kauf,
   $Y_n$ der Kurs der Aktie $n$~Tage nach dem Kauf und
-  $H_n$ die Anzal der Aktien $n$~Tage nach dem Kauf.
+  $H_n$ die Anzahl der Aktien $n$~Tage nach dem Kauf.
   Forderung: $H_n$ soll $\sigma(Y_0, \ldots, Y_{n-1})$-messbar sein.
   Sei $W_n$ der Wert der Aktien $n$~Tage nach dem Kauf.
   Es gilt
-  \[ W_n = W_{n-1} + H_n (Y_n - Y_{n-1}) = W_0 + \sum_{i=1}^n H_i (Y_i - Y_{i-1}) \]
+  \[ W_n = W_{n-1} + H_n (Y_n - Y_{n-1}) = W_0 + {\sum}_{i=1}^n H_i (Y_i - Y_{i-1}) \]
   Falls $\{ Y_n \}$ ein Martingal ist, so gilt
   \[
     \begin{array}{c l}
@@ -816,10 +816,10 @@ Sei im Folgenden $(\Omega, \mathcal{F}, P)$ ein Maßraum.
       = & W_n + \E[ H_{n+1} (Y_{n+1} - Y_n) | \Filt_n ] \\
       = & W_n + H_{n+1} \E[ Y_{n+1} - Y_n | \Filt_n ] \\
       = & W_n + H_{n+1} (\E[ Y_{n+1} | \Filt_n ] - Y_n) \\
-      = & W_n (\text{bzw. $\geq W_n$ für Sub- und $\leq W_n$ für Supermartingale}).
+      = & W_n \enspace (\text{bzw. $\geq W_n$ für Sub- und $\leq W_n$ für Supermartingale}).
     \end{array}
   \]
-  Fazit: Man kann mit der Wahl der Handelsstrategie keine Anlage verbessern.
+  Fazit: Mit Handelsstrategie kann man keine Anlage verbessern.
 \end{bsp}
 
 % 3.13
@@ -827,7 +827,7 @@ Sei im Folgenden $(\Omega, \mathcal{F}, P)$ ein Maßraum.
   Eine Folge $\{ H_n \}_{n \geq 1}$ heißt \emph{prävisibel}, falls $H_n$ $\Filt_{n-1}$-messbar ist für alle $n \geq 1$.
   Definiere $\{ H \cdot Y \}_n$ durch
   \[
-    (H \cdot Y)_n \coloneqq \sum_{i=1}^n H_i (Y_i - Y_{i-1})
+    (H \cdot Y)_n \coloneqq {\sum}_{i=1}^n H_i (Y_i - Y_{i-1})
   \]
 \end{defn}
 
@@ -845,7 +845,11 @@ Sei im Folgenden $(\Omega, \mathcal{F}, P)$ ein Maßraum.
 
 % 3.16
 \begin{defn}
-  Eine Abbildung $T : \Omega \to \{ \infty \}$ heißt \emph{Stoppzeit} bzgl. $\{ F_n \}$, falls $\{ T=n \} \in \Filt_n$ für alle $n \geq 0$.
+  Eine Abb. $T : \Omega \to \N \cup \{ \infty \}$ heißt \emph{Stoppzeit} bzgl. $\{ F_n \}$, falls
+  \[
+    \{ T=n \} \in \Filt_n
+    \quad \text{für alle } n \geq 0.
+  \]
 \end{defn}
 
 % 3.17
@@ -855,8 +859,9 @@ Sei im Folgenden $(\Omega, \mathcal{F}, P)$ ein Maßraum.
 \end{bsp}
 
 % 3.18
-\begin{satz}
-  Ist $\{ M_n \}$ ein Supermartingal und $T$ eine Stoppzeit, so ist $\{ M_{\min(T, n)} \}$ auch ein Supermartingal.
+\begin{satz}[\emph{Optional Stopping Theorem 1}] \mbox{} \\
+  Ist $\{ M_n \}$ ein (Sub-/Super-) Martingal und $T$ eine Stoppzeit, \\
+  so ist $\{ M_{\min(T, n)} \}$ auch ein (Sub-/Super-) Martingal.
 \end{satz}
 
 % Vorlesung vom 20.6.2017
@@ -908,7 +913,7 @@ Die Anzahl der \textit{Aufkreuzungen} ist dann
 
 % 3.22
 \begin{kor}
-  Sei $\{ M_n \}$ ein nichtneg. Supermartingal.
+  Sei $\{ M_n \}$ ein nichtnegatives Supermartingal. \\
   Dann existiert $M_\infty \in L_1$ mit $M_n \to M_\infty$ fast-sicher.
 \end{kor}
 
@@ -930,12 +935,12 @@ Die Anzahl der \textit{Aufkreuzungen} ist dann
   Sei $\{ M_n \}$ ein Submartingal.
   Dann gilt:
   \[
-    P(\max_{k \leq n} M_k \geq \lambda) \leq \tfrac{1}{\lambda} \E[ M_n \ind \{ \max_{k \leq n} M_k \geq \lambda \} \leq \E[ M_n^{+} ] / \lambda. ]
+    P(\max_{k \leq n} M_k \geq \lambda) \leq 1/\lambda \cdot \E[ M_n \ind \{ \max_{k \leq n} M_k \geq \lambda \}] \leq 1/\lambda \cdot \E[ M_n^{+} ].
   \]
 \end{satz}
 
 \begin{bem}
-  Die Doob'sche Ungleichung verbessert die Markov-Ungleichung.
+  Die Doob'sche Ungl. verbessert die Markov-Ungleichung.
 \end{bem}
 
 % 3.25
@@ -967,7 +972,7 @@ Die Anzahl der \textit{Aufkreuzungen} ist dann
 
 % 3.28
 \begin{satz}
-  Sei $\{ M_n \}$ ein Martingal mit $\sup_{n \geq 1} \E[\abs{M_n}^p] < \infty$ für ein $p > 1$.
+  Sei $\{ M_n \}$ ein Martingal mit ${\sup}_{n \geq 1} \E[\abs{M_n}^p] < \infty$ für ein $p > 1$.
   Dann konvergiert $M_n$ fast-sicher und in~$L^p$.
 \end{satz}
 
@@ -982,7 +987,7 @@ Die Anzahl der \textit{Aufkreuzungen} ist dann
 
 % 3.29
 \begin{lem}
-  Sei $(\Omega, \mathcal{F}, P)$ ein Wkts-Raum, $X \in L^1(\Omega, \mathcal{F}, P)$ und $\{ \Alg_i \}_{i \in I}$ eine Famile von $\sigma$-Algebren mit $\Alg_i \subseteq \mathcal{F}$ für alle $i \in I$.
+  Sei $(\Omega, \mathcal{F}, P)$ ein Wkts-Raum, $X \in L^1(\Omega, \mathcal{F}, P)$ und $\{ \Alg_i \}_{i \in I}$ eine Famile von $\sigma$-Algebren mit $\Alg_i \subseteq \mathcal{F}$ für alle $i \in I$. \\
   Dann ist die Familie $\{ \E[ X | \Alg_i ] \}_{i \in I}$ gleichgradig integrierbar.
 \end{lem}
 
@@ -1055,7 +1060,7 @@ Die Anzahl der \textit{Aufkreuzungen} ist dann
 \end{satz}
 
 % 3.37
-\begin{satz}[\emph{Optional Stopping Theorem}] \mbox{}\\
+\begin{satz}[\emph{Optional Stopping Theorem 2}] \mbox{}\\
   Seien $S \leq T$ zwei Stoppzeiten.
   Ist $\{ M_{T \wedge n} \}$ ein gleichgradig integrierbares Submartingal, so gilt
   \[
@@ -1292,5 +1297,139 @@ Falls $c > \tfrac{1}{2}$, so ist die Kette positiv rekurrent.
     \end{array}
   \]
 \end{satz}
+
+% Kapitel 5: Harmonische Funktionen für transiente Übergangskerne
+\section{Harmonische Fktn für Übergangskerne}
+
+% §1. Motivation, Definition und einfache Eigenschaften
+
+\begin{defn}
+  $P = (p(x, y))_{x, y \in E}$ heißt \emph{substochast. Übergangskern}, falls
+  \begin{itemize}
+    \item $p(x, y) \geq 0$ für alle $x, y \in E$ und
+    \item ${\sum}_{y \in E} p(x, y) \leq 1$ für alle $x \in E$.
+  \end{itemize}
+  Er heißt \textit{strikt substochastisch}, falls ${\sum}_{y \in E} p(x_0, y) < 1$ für mindestens ein $x_0 \in E$.
+\end{defn}
+
+\begin{nota}
+  Für $h : E \to \R$ sei $P h : E \to \R$ definiert durch
+  \[
+    (P h)(x) \coloneqq {\sum}_{y \in E} p(x, y) h(y).
+  \]
+  (Annahme dabei: $h$ ist \textit{integrierbar}, \dh{} ${\sum}_{y \in E} p(x, y) \abs{h(y)} < \infty$.) \\
+\end{nota}
+
+% 5.1
+\begin{defn}
+  Eine integrierbare Funktion $h : E \to \R$ heißt
+  \[
+    \arraycolsep=0pt
+    \left\{ \begin{array}{r}
+      \text{\emph{harmonisch}} \\
+      \text{\emph{superharmonisch}}
+    \end{array} \right\}
+    \enspace \text{falls} \enspace
+    h(x)
+    \left\{ \begin{array}{c}
+      = \\
+      \geq
+    \end{array} \right\}
+    %\sum_{y \in E} p(x, y) h(y)
+    (P h)(x)
+    \enspace \forall \, x \in E.
+  \]
+  $h$ heißt \textit{strikt superharmonisch}, falls $h(x_0) > {\sum}_{y \in E} p(x_0, y) h(y)$ für mindestens ein $x_0 \in E$.
+\end{defn}
+
+\begin{bsp}
+  Bei Diskretisierung der Laplace-Gleichung auf~$\R^2$ mit der Finite-Differenzen-Methode erhält man das Gleichungssystem
+  \[ P h = h, \]
+  wobei $P$ der stochastische Übergangskern der einfachen symmetrischen Irrfahrt auf~$\Z^2$ ist.
+\end{bsp}
+
+% 5.2
+\begin{bsp}
+  Sei $\{ Z_n \}$ eine irreduzible Irrfahrt auf~$\Z$.
+  Setze
+  \[
+    h(x) \coloneqq \P(\fa{n \geq 0} Z_n > 0 \,|\, Z_0 = x)
+    \quad \text{für } x \in \Z.
+  \]
+  Dann ist $h$ harmonisch für den substochastischen Übergangskern
+  \[
+    P(x, y) \coloneqq p(x, y) \ind \{ x \geq 1, y \geq 1 \}.
+  \]
+\end{bsp}
+
+\begin{verf}
+  Falls $P$ substochastisch ist, so kann man die Gleichung für harmonische Fktn zu einer Gleichung mit einem stochastischen (aber leider nicht irreduziblen) Kern umformulieren: Setze
+  \[ E' \coloneqq E \sqcup \{ \dag \} \]
+  und definiere $p' : E' \times E' \to \cinterval{0}{1}$ für $x, y \in E$ durch
+  \[
+    \begin{array}{l l}
+      p'(x, y) \coloneqq p(x, y),
+      & p'(x, \dag) \coloneqq 1 - {\sum}_{y \in E} p(x, y), \\
+      p'(\dag, y) \coloneqq 0,
+      & p'(\dag, \dag) = 1.
+    \end{array}
+  \]
+  Beachte: $p'$ ist stochastisch.
+  Für $h : E \to \R$ sei $h' : E' \to \R$ def. durch
+  \[
+    h'|_E \coloneqq h
+    \quad \text{und} \quad
+    h'(\dag) \coloneqq 0.
+  \]
+  Dann gilt für alle $h : E \to \R$:
+  \[
+    \text{$h$ ist harmonisch für $p$} \iff
+    \text{$h'$ ist harmonisch für $p'$.}
+  \]
+\end{verf}
+
+% 5.3
+\begin{bem}
+  Ist $P$ stochastisch, so ist jede Konstante harmonisch. \\
+  Ist $P$ strikt substochastisch, so ist jede Konstante $\neq 0$ strikt superharmonisch.
+\end{bem}
+
+% 5.3
+\begin{bsp}
+  Sei $P$ ein substochastischer Kern und
+  \[ G(x, y) \coloneqq {\sum}_{n=0}^\infty p^{(n)}(x, y) \]
+  die \textit{Greensche Funktion}.
+  Für festes $y \in E$ betrachte die Funktion
+  \[ h_y(x) \coloneqq G(x, y). \]
+  Ist $y$ \textit{transient} (\dh{} $G(y, y)$), so ist $h_y$ superharmonisch.
+  Ist $P$ \textit{irreduzibel} (\dh{} $\fa{x, y \in E} \ex{n \geq 1} p^{(n)}(x, y) > 0$), so gilt außerdem $h_y(x) > 0$ für alle $x \in E$.
+\end{bsp}
+
+% 5.4
+\begin{lem}[\textit{Maximumsprinzip}]
+  Sei $P$ irreduzibel, substochastisch und $h$ harmonisch für $P$.
+  Falls ein Zustand $x_0 \in E$ mit
+  \[
+    M \coloneqq h(x_0) = \max_{x \in E} h(x)
+  \]
+  existiert, so ist $h \equiv M$ konstant. \\
+  Ferner gilt: Falls $M \neq 0$, so ist $P$ stochastisch.
+\end{lem}
+
+% 5.5
+\begin{lem}
+  Sei $P$ irreduzibel und $h \geq 0$ superharmonisch.
+  Dann gilt:
+  \begin{itemize}
+    \item $P^{(n)} h$ ist superharmonisch für alle $n \geq 0$.
+    \item Entweder ist $h \equiv 0$ konstant oder $\fa{x \in E} h(x) > 0$.
+  \end{itemize}
+\end{lem}
+
+% 5.6
+\begin{lem}
+  Sei $\{ h_i \}_{i \in I}$ eine Familie von superharmon. Funktionen. \\
+  Ist $h(x) \coloneqq {\inf}_{i \in I} h(x)$ integrierbar, so ist auch $h$ superharmonisch.
+\end{lem}
 
 \end{document}
