@@ -1241,9 +1241,13 @@ Definiere $U_n^{(k)} \coloneqq Y_{k+n} \cdot \ind \{ \min(Y_k, Y_{k+1}, \ldots, 
 
 % 4.4
 \begin{satz}
-  Sei $\{ Y_n \}$ und $T > 0$ mit $P(Y_n \leq T) = 1$ für alle $n \in \N$ und $P({\limsup}_{n \to \infty} Y_n = T) = 1$.
-  Falls $\E[ Y_{n+1} | Y_n = x_n, \ldots, Y_0 = x_0 ] \geq x_n$ für alle $n \in \N$ und $x_n \geq M$ für ein $M < T$, so gilt:
-  $Y_n \xrightarrow{n \to \infty} T$ fast-sicher.
+  Angenommen, es gibt Konstanten $T > M \geq 0$ mit $\fa{n \in \N} P(Y_n \leq T) = 1$ und $P({\limsup}_{n \to \infty} Y_n = T) = 1$ sowie
+  %Sei $\{ Y_n \}$ und $T > 0$ mit $P(Y_n \leq T) = 1$ für alle $n \in \N$ und $P({\limsup}_{n \to \infty} Y_n = T) = 1$.
+  \[
+    \E[ Y_{n+1} | Y_n = x_n, \ldots, Y_0 = x_0 ] \geq x_n
+    \quad \text{für alle $n \in \N$ und $x_n \geq M$.}
+  \]
+  Dann gilt $Y_n \xrightarrow{n \to \infty} T$ fast-sicher.
   % (jedes $\{ 0, \ldots, R \}$, $R < T$, wird nur endlich oft besucht.)
 \end{satz}
 
@@ -1262,7 +1266,13 @@ Im Folgenden sei $\tau \coloneqq \inf \Set{n \geq 1}{Y_n \leq r}$.
 
 % 4.6
 \begin{satz}
-  Falls $Y_0 > r$ und $\E[ \tilde{Y}_{n+1} | \sigma(Y_0, \ldots, Y_n) ] \geq \tilde{Y}_n$ gilt und ein $M > 0$ mit $\E[ \abs{\tilde{Y}_{n+1} - \tilde{Y}_n} | \sigma(Y_0, \ldots, Y_n) ] \leq M$ fast-sicher existiert, so gilt $\E[ \tau ] = \infty$.
+  Angenommen, $Y_0 > r$, $\E[ \tilde{Y}_{n+1} | \sigma(Y_0, \ldots, Y_n) ] \geq \tilde{Y}_n$ und
+  \[
+    \ex{M > 0}
+    \E[ \abs{\tilde{Y}_{n+1} - \tilde{Y}_n} | \sigma(Y_0, \ldots, Y_n) ] \leq M
+    \quad \text{fast sicher}.
+  \]
+  Dann gilt $\E[ \tau ] = \infty$.
 \end{satz}
 
 % Vorlesung vom 6.7.2017
@@ -1270,11 +1280,17 @@ Im Folgenden sei $\tau \coloneqq \inf \Set{n \geq 1}{Y_n \leq r}$.
 % §2. Transienz und Rekurrenz von Markovketten
 
 Sei $\{ Z_n \}$ eine Markovkette auf~$\N_0$.
-
-Definiere $m_1(x) \coloneqq \E[ Z_1 - Z_0 | Z_0 = x ] = \sum_{k \in \Z} k p(x, x + k)$ und $m_2(x) \coloneqq \E[ (Z_1 - Z_0)^2 | Z_0 = x ] = \sum_{k \in \Z} k^2 p(x, x + k)$.
+Definiere
+\[
+  \arraycolsep=2pt
+  \begin{array}{l l l l l l}
+    m_1(x) &\coloneqq& \E[ Z_1 - Z_0 &| Z_0 = x ] &=& {\sum}_{k \in \Z} k p(x, x + k), \\
+    m_2(x) &\coloneqq& \E[ (Z_1 - Z_0)^2 &| Z_0 = x ] &=& {\sum}_{k \in \Z} k^2 p(x, x + k).
+  \end{array}
+\]
 
 \begin{bem}
-  Falls $m_1(x) \leq - \epsilon$ für alle $x \geq x_0$, so können wir direkt Satz 4.5 verwenden:
+  Falls $m_1(x) \leq - \epsilon$ für alle $x \geq x_0$, so können wir direkt den vorletzten Satz verwenden:
   Die Stoppzeit $\tau_r \coloneqq \min \Set{n \geq 0}{Z_n \leq r}$ hat endlichen Erwartungswert für jedes $r \geq x_0$.
 \end{bem}
 
@@ -1299,47 +1315,57 @@ Definiere $m_1(x) \coloneqq \E[ Z_1 - Z_0 | Z_0 = x ] = \sum_{k \in \Z} k p(x, x
     \quad
     \text{auf } \{ Y_n \geq x_0^2 \}.
   \]
-  Somit ist $\{ Y_n \}$ nach Satz 4.5 und damit auch $\{ Z_n \}$ rekurrent.
+  Somit ist $\{ Y_n \}$ und damit auch $\{ Z_n \}$ rekurrent.
 \end{beweisidee}
 
-Falls $m_1(x) \sim - c / x$ und $m_2(x) \sim 1$, so ist $2 x m_1(x) + m_2(x) \sim 1 - 2 c$.
-Falls $c > \tfrac{1}{2}$, so ist die Kette positiv rekurrent.
+\begin{bsp}
+  Angenommen, $m_1(x) \sim - c / x$ und $m_2(x) \sim 1$.
+  Dann ist $2 x m_1(x) + m_2(x) \sim 1 - 2 c$.
+  Für $c > 1/2$ ist die Kette pos. rekurrent.
+\end{bsp}
 
 % 4.8
 \begin{satz}
-  Sei $\{ Z_n \}$ eine irreduzible Kette mit
+  Sei $\{ Z_n \}$ eine irred. Kette mit
   % Bem: es ist möglich, ohne folgende technische Bedingung auszukommen
-  $\abs{Z_{n+1} - Z_n} \leq B$ fast-sicher für alle $n$ für ein $B > 0$.
-  Außerdem gelte $\inf_{x} m_2(x) > 0$.
+  $\abs{Z_{n+1} - Z_n} \leq B$ fast-sicher für alle $n$ und ein $B > 0$.
+  Außerdem gelte ${\inf}_{x} m_2(x) > 0$.
   \begin{itemize}
-    \item Falls $2 x m_1(x) \leq (1-\epsilon) m_2(x)$ für alle $x \geq x_1$, so ist $\{ Z_n \}$ rekurrent.
-    \item Falls $2 x m_1(x) \geq (1 + \epsilon) m_2(x)$ für alle $x \geq x_2$, so ist die Kette $\{ Z_n \}$ transient.
+    \item Falls $\fa{x \geq x_1} 2 x m_1(x) \leq (1-\epsilon) m_2(x)$, so ist $\{ Z_n \}$ rekurrent.
+    \item Falls $\fa{x \geq x_2} 2 x m_1(x) \geq (1 + \epsilon) m_2(x)$, so ist $\{ Z_n \}$ transient.
   \end{itemize}
 \end{satz}
 
 % 4.9
 \begin{bsp}
   Sei $\{ Z_n \}$ eine einfache Irrfahrt auf~$\Z^d$ mit
-  $Z_{n+1} - Z_n \in U_d = \{ \pm e_1, \ldots, \pm e_d \}$, alle gleich wahrscheinlich.
-
-  Wir wissen: $\{ Z_n \}$ ist rekurrent $\iff$ $d \leq 2$
+  $Z_{n+1} - Z_n \in U_d$ wobei $U_d = \{ \pm e_1, \ldots, \pm e_d \}$, alle gleich wahrscheinlich.
+  Wir wissen:
+  \[
+    \{ Z_n \} \text{ ist rekurrent} \iff d \leq 2.
+  \]
   Dies können wir auch wie folgt zeigen:
-
   Betrachte $X_n \coloneqq \norm{Z_n}$.
-  Dann ist
-  \[ \E[ X_{n+1} - X_n | Z_n = x ] = \ldots = \tfrac{1/2 - 1/d}{\norm{x}} + O(1 / \norm{x}^2) \]
-  und
-  \[ \E[ (X_{n+1} - X_n)^2 | Z_n = x ] = \ldots = 1/d + O(1 / \norm{x}) \]
+  Dann:
+  \[
+    \arraycolsep=2pt
+    \begin{array}{r l l}
+      \E[ X_{n+1} - X_n | Z_n = x ] & = \ldots = & \tfrac{1/2 - 1/d}{\norm{x}} + O(1 / \norm{x}^2) \\
+      \E[ (X_{n+1} - X_n)^2 | Z_n = x ] & = \ldots = & 1/d + O(1 / \norm{x})
+    \end{array}
+  \]
   Für $d = 1$ ist also
   \[ \E[ X_{n+1} - X_n | X_n = x ] \leq (1-\epsilon) \E[ (X_1 - X_0)^2 | Z_0 = x ] / (2 \norm{x}) \]
   Mit Hilfe von $Y_n \coloneqq \log(1 + X_n)$ erhalten wir, dass $\{ X_n \}$ rekurrent ist.
   Bei $d \geq 3$ gilt
   \[ \E[ X_{n+1} - X_n | Z_n = x ] \geq (1+\epsilon) \E[ (X_1 - X_0)^2 | Z_0 = x ] / (2 \norm{x}) \]
-  Für $d = 2$ können wir den vorh. Satz leider nicht benutzen.
+  Für $d = 2$ können wir den vorh. Satz leider nicht benutzen. \\
   Man kann den Satz aber verbessern, sodass aus
   \[ 2 x m_1(x) \leq (1 + \tfrac{1-\epsilon}{\log x}) m_2(x) \]
   schon Rekurrenz folgt.
 \end{bsp}
+
+\section{Charakt. von (pos.) Rekurrenz / Transienz}
 
 % Vorlesung vom 11.7.2017
 
@@ -1373,6 +1399,8 @@ Falls $c > \tfrac{1}{2}$, so ist die Kette positiv rekurrent.
 \begin{bem}
   Man kann sogar immer $\epsilon = 1$ und $\card{A} = 1$ erreichen.
 \end{bem}
+
+\TODO{Konstruktion aus dem Beweis beschreiben}
 
 % 4.12
 \begin{satz}
