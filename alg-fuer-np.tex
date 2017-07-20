@@ -1187,8 +1187,8 @@ TODO: Wie kann man eine Baumzerlegung zur Berechnung eines MIS verwenden?
 
 \begin{satz}
   %Seien $k, n \in \N$
-  Gegeben sei ein ungerichteter, zshgder Graph~$G$ mit $n$~Knoten sowie eine kombinatorische Einbettung von~$G$, die den Graphen als $k$-außenplanar darstellt.
-  Dann können wir in Zeit~$\O(k n)$ eine Baumzerlegung von~$G$ mit Weite $\leq 3 k - 1$ und $\O(n)$ Knoten berechnen.
+  Gegeben sei ein zshgder, unger. Graph~$G$ mit $n$~Knoten sowie eine kombinatorische Einbettung von~$G$, die den Graphen als $k$-außenplanar darstellt.
+  Dann können wir in Zeit~$\O(k n)$ eine Baum- zerlegung von~$G$ mit Weite $\leq 3 k - 1$ und $\O(n)$ Knoten berechnen.
 \end{satz}
 
 % 9.40
@@ -1198,6 +1198,120 @@ TODO: Wie kann man eine Baumzerlegung zur Berechnung eines MIS verwenden?
 \end{lem}
 
 % TODO: Beweisidee
+
+\TODO{hier weiter}
+
+% §10. Linear Programming Methods
+\section{Reduktion auf Lineare Programmierung}
+
+% §10.1. Lineare Programmierung
+
+\begin{defn}
+  Ein \emph{Lineares Programm} (LP) ist gegeben durch eine Matrix $A \in \R^{m \times n}$ und Vektoren $b \in \R^m$, $c \in \R^n$.
+  Gesucht ist ein Vektor $x \in \R^n$, der $A x \leq b$ erfüllt und $c^T x$ maximiert.
+\end{defn}
+
+% 10.1
+\begin{satz}
+  Jedes lineare Programm~$P$ (mit ganzzahligen Koeffizienten) kann in Zeit~$\O(\size{P})$ gelöst werden, wobei $\size{P}$ die Anzahl Bits in einer Repräsentation von~$P$ ist.
+\end{satz}
+
+\begin{bem}
+  In der Praxis lassen sich die meisten LPs effizient mit dem \textit{Simplex-Verfahren} lösen.
+\end{bem}
+
+\begin{defn}
+  Ein \emph{Integer Linear Program} (ILP) ist gegeben durch eine Matrix $A \in \Z^{m \times n}$ und Vektoren $b \in \Z^m$, $c \in \Z^n$.
+  Gesucht ist ein Vektor $x \in \Z^n$, der $A x \leq b$ erfüllt und $c^T x$ maximiert.
+\end{defn}
+
+% §10.2 Minimum weighted Vertex Cover
+
+% 10.2
+\begin{satz}
+  Es gibt einen Polynomialzeit-2-Approximationsalgorithmus für Minimum Weighted Vertex Cover.
+\end{satz}
+
+\begin{beweisskizze}
+  Wir können das Problem in ein ILP mit Variablen $\{ x_v \in \Z \}_{v \in V}$ übersetzen:
+  \[
+    \begin{array}{r l l}
+      \text{minimiere} & {\sum}_{v \in V} c(v) x_v \\
+      \text{unter den NBn} & x_v + x_w \geq 1 & \quad \text{für alle Kanten } \{ v, w \} \in E \\
+      & 0 \leq x_v \leq 1 & \quad \text{für alle $v \in V$}
+    \end{array}
+  \]
+  Es ist aufwendig, dieses zu lösen.
+  Es ist dagegen leicht, eine optimale Lsg $\{ \hat{x}_v \in \R \}_{v \in V}$ des durch obige Spezifikation geg. LP zu finden.
+  Dann ist $C \coloneqq \Set{v \in V}{\hat{x}_v \geq 1/2}$ ein 2-optimales Vertex Cover.
+\end{beweisskizze}
+
+% §10.3. MaxSAT and Randomization
+
+\begin{alg}[\emph{Randomized Rounding}] \mbox{} \\
+  Eingabe: Formel in KNF mit Variablen~$V$ und Clauses $\mathcal{C}$, \\
+  Ausgabe: Variablenbelegung $V \to \{ 0, 1 \}$
+  \begin{itemize}
+    \item Löse das LP mit Variablen $\Set{y_v}{v \in V} \cup \Set{x_C}{C \in \mathcal{C}}$
+    \[
+      \begin{array}{r l}
+        \text{maximiere} & {\sum}_{C \in \mathcal{C}} x_C \\
+        \text{unter den NBn}
+          & x_C \leq {\sum}_{v \in V^{+}(C)} y_v + {\sum}_{v \in V^{-}(C)} (1 - y_v), \\
+          & 0 \leq x_C \leq 1 \quad \text{für alle } C \in \mathcal{C}, \\
+          & 0 \leq \makebox[0pt][l]{$y_v$}\phantom{x_C} \leq 1 \quad \text{für alle } v \in V,
+      \end{array}
+    \]
+    wobei $V^{+}(C)$ die positiv und $V^{-}(C)$ die negativ auftretenden Variablen in einer Clause $C \in \mathcal{C}$ sind.
+    (Eine Lsg des entspr. ILP wäre eine exakte Lösung von MaxSAT. Bemerke: ${\sum}_{C \in \mathcal{C}} x_C \geq z^*$)
+    \item
+      Seien die Zufallsvariablen $\Set{Y_v \in \{ 0, 1\}}{v \in V}$ unabhängig mit $\P(Y_v = 1) = \hat{y}_v$ für alle $v \in V$.
+      Bestimme eine Variablenbelegung durch Ziehen all dieser ZVn.
+  \end{itemize}
+\end{alg}
+
+% ausgelassen: Lemma 10.3
+% ausgelassen: Lemma 10.4
+
+\begin{lem}
+  Jede Clause $\mathcal{C}$ mit Länge $k$ der Formel ist damit mit Wahrscheinlichkeit $\geq (1 - (1 - 1/k)^k) \cdot \hat{x}_C$ erfüllt.
+\end{lem}
+
+\begin{alg}[\textit{Symmetric Algorithm}]
+  Eingabe: Formel in KNF mit Variablen~$V$,
+  Ausgabe: Variablenbelegung $V \to \{ 0, 1 \}$ \\[0.2em]
+  Seien die Zufallsvariablen $\Set{Y_v \in \{ 0, 1\}}{v \in V}$ unabhängig mit $\P(Y_v = 1) = 1/2$ für alle $v \in V$.
+  Bestimme eine Variablenbelegung durch Ziehen all dieser ZVn.
+\end{alg}
+
+\begin{bem}
+  Jede Clause $\mathcal{C}$ mit Länge $k$ der Formel ist damit mit Wahrscheinlichkeit $1 - (1/2)^k$ erfüllt.
+\end{bem}
+
+% 10.5
+\begin{satz}
+  Es gibt einen randomisierten Polynomialzeit-Algorithmus, der für jede MaxSAT-Instanz eine Variablenbelegung liefert, sodass in Erwartung mindestens $3/4 \cdot z^*$ Clauses erfüllt sind, wobei $z^*$ die Anzahl maximal erfüllbarer Clauses ist.
+\end{satz}
+
+\begin{beweis}
+  Verwende folgenden Algorithmus: \\[0.2em]
+  1. Wirf eine faire Münze.
+  2. Bei Kopf wende \textit{Randomized Rounding}, bei Zahl den \textit{Symmetric Algorithm} an.
+\end{beweis}
+
+% §10.4. Minimum Steiner Forest
+
+Für $S \subseteq V$ sei $\delta(S) \coloneqq \Set{e \in E}{\size{e \cap S} = 1}$ und $g(S) \coloneqq 1$, falls $u \in S$ und $v \in V \setminus S$ mit $r(u) = r(v)$ existieren, und $g(S) \coloneqq 0$ sonst.
+
+Betrachte das LP
+\[
+  \begin{array}{r l l}
+    \text{minimiere} & {\sum}_{e \in E} c(e) x_e \\
+    \text{unter den NBn}
+      & {\sum}_{e \in \delta(S)} x_e \geq g(S) & \text{für alle } S \subseteq V \\
+      & 0 \leq x_e \leq 1 & \text{für alle } e \in E
+  \end{array}
+\]
 
 % §12. A linear Vertex-Cover Kernel
 \section{Ein linearer Kernel für Vertex-Cover}
@@ -1283,6 +1397,10 @@ Offenes Problem: Gibt es Kernelization mit $\#\text{Knoten} = \O(k)$ oder $\O(k^
     \fa{v, w \in V} \{v, w\} \in E \implies v \in C \vee w \in C,
   \]
   die minimale Größe~$\size{C}$ unter allen Knotenüberdeckungen besitzt.
+\end{problem}
+
+\begin{problem}[\Problem{Minimum Weighted Vertex Cover}]
+  Geg. einen unger. Graphen~$G = (V, E)$ und eine \textit{Kostenfunktion} $c : V \to \R_{\geq 0}$, berechne eine \textit{Knotenüberdeckung}~$C$, die minimale \textit{Kosten} ${\sum}_{v \in C} c(v)$ unter allen Knotenüberdeckungen besitzt.
 \end{problem}
 
 \begin{bem}
@@ -1372,7 +1490,7 @@ Offenes Problem: Gibt es Kernelization mit $\#\text{Knoten} = \O(k)$ oder $\O(k^
   Gesucht ist eine zyklische Permutation $\sigma$ von~$V$ (eine \textit{Tour}), sodass die \textit{Länge} ${\sum}_{v \in V} c(v, \sigma(v))$ minimal wird.
 \end{problem}
 
-\begin{problem}[\Problem{$k$-SAT(isfiability)}]
+\begin{problem}[\Problem{$k$-SAT(isfiability)}] \mbox{} \\
   Gegeben sei eine Formel in konjunktiver Normalform, etwa
   \[ (x_1 \vee x_2 \vee \overline{x_3}) \wedge (\overline{x_1} \vee \overline{x_3} \vee x_4 \vee \overline{x_5}) \wedge (x_2 \vee x_5) \wedge (x_3 \vee \overline{x_4}). \]
   Die Maximalzahl an \textit{Literalen} in einer \textit{Clause} sei dabei $\leq k$.
@@ -1405,6 +1523,12 @@ Offenes Problem: Gibt es Kernelization mit $\#\text{Knoten} = \O(k)$ oder $\O(k^
 \begin{problem}[\Problem{Edge Dominating Set}]
   Gegeben einen unger. Graph $G$ und $k \in \N$.
   Frage: Gibt es eine Kantendominierung der Größe $\leq k$, \dh{} gibt es ein $D \subseteq E$ mit $\size{D} \leq k$, sodass jede Kante in~$E$ mindestens einen Endpunkt mit einer Kante aus~$D$ gemeinsam hat?
+\end{problem}
+
+\begin{problem}[\Problem{Minimum Steiner Forest}]
+  Geg. sei ein unger. Graph $G = (V, E)$ eine \textit{Kostenfktn} $c : E \to \R_{\geq 0}$ und eine Abb. $r : V \to \N$.
+  Mögliche Lsgn sind Teilmengen $F \subseteq E$ von~$G$, sodass alle $u, v \in V$ mit $r(u) = r(v)$ durch einen Pfad mit Kanten in~$F$ verbunden sind.
+  Gesucht ist ein solcher Subgraph, der ${\sum}_{e \in E_F} c(e)$ minimiert.
 \end{problem}
 
 \end{document}
