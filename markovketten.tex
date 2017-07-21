@@ -1600,4 +1600,111 @@ Definiere
   Ist $h(x) \coloneqq {\inf}_{i \in I} h(x)$ integrierbar, so ist auch $h$ superharmonisch.
 \end{lem}
 
+% 5.7
+\begin{satz}
+  Sei $\{ Z_n \}$ eine irred. Kette mit Übergangsmatrix~$P$.
+  Dann gilt:
+  \[
+    \{ Z_n \} \text{ ist rekurrent} \iff
+    \text{jedes für~$P$ superharmon. $f \geq 0$ ist konstant}.
+  \]
+\end{satz}
+
+% 5.8
+\begin{bem}
+  Jeder strikt substochastische, irreduzible Kern ist transient:
+  \[
+    {\sum}_{n=0}^\infty p^{(n)}(x, y) < \infty \quad
+    \forall \, x, y \in E
+  \]
+\end{bem}
+
+% 5.9
+\begin{lemdefn}
+  Sei $P$ ein substoch. Kern und $h > 0$ superharmonisch.
+  Die \emph{Doob'sche $h$-Transformation} von~$P$ ist der durch
+  \[
+    p_h(x, y) \coloneqq \tfrac{h(y)}{h(x)} \cdot p(x, y), \quad
+    x, y \in E
+  \]
+  definierte substochastische Übergangskern.
+  Des Weiteren gilt:
+  \[
+    h \text{ harmonisch} \iff P_h \textit{ stochastisch}.
+  \]
+\end{lemdefn}
+
+\begin{lem}
+  $(P_h)^n = (P^n)_h$ für alle $n \in \N$ und $h$ substochastisch für $P$
+\end{lem}
+
+% 5.10
+\begin{bsp}
+  Sei $P$ der strikt substoch. Übergangskern auf~$\N_1$ mit
+  \[
+    p(i, j) = 1/2 \enspace \text{für $i, j \in \N_1$ mit $\abs{i - j} = 1$}, \quad
+    p(i, j) = 0 \enspace \text{sonst.}
+  \]
+  Die harmonischen Funktionen sind $\Set{h_c}{c \in \R}$ mit $h_c(k) \coloneqq k \cdot c$.
+  Die $h_c$-transformierte für bel. $c > 0$ ist dann
+  \[
+    \arraycolsep=0pt
+    \begin{array}{r c l}
+      p_h(i, j) &=& \tfrac{j}{2i} = \tfrac{1}{2} + \tfrac{j - i}{2i} \enspace \text{für $i, j \in \N_1$ mit $\abs{i - j} = 1$}, \\[0.2em]
+      p_h(i, j) &=& 0 \enspace \text{sonst.}
+    \end{array}
+  \]
+  Sei $\{ Z_n \}$ die Markovkette auf~$\N_1$ mit Übergangsmatrix~$P_h$ und $\{ \tilde{Z}_n \}$ die einfache symm. Irrfahrt auf~$\Z$.
+  Dann gilt
+  \[
+    \arraycolsep=1pt
+    \begin{array}{r c l}
+      p_h^{(n)}(x, y)
+        &=& y/x \cdot p^{(n)}(x, y) \\
+        &=& y/x \cdot \P(\tilde{Z}_n = y, \fa{0 \leq k \leq n} \tilde{Z}_k > 0 \,|\, Z_0 = x) \\
+        &=& y/x \cdot 2^{-n} \cdot \left( \binom{n}{1/2 \cdot (n + y - x)} - \binom{n}{1/2 \cdot (n - y - x)} \right).
+    \end{array}
+  \]
+\end{bsp}
+
+% §2. Potentiale und Ladungen
+\subsection{Potentiale und Ladungen}
+
+Sei $G$ im folgenden transient und irreduzibel, \dh{}
+\[
+  0 < G(x, y) < \infty \quad
+  \forall \, x, y \in E.
+\]
+
+% 5.11
+\begin{defn}
+  Eine Funktion $f : E \to \R$ heißt \emph{$G$-integrierbar}, falls
+  \[
+    {\sum}_{y \in E} G(x, y) \abs{f(y)} < \infty \quad
+    \forall \, x \in E.
+  \]
+  Das \emph{Potential} $g = Gf$ von einem solchen $f$ ist def. durch
+  \[
+    g(x) \coloneqq {\sum}_{y \in E} G(x, y) f(y) \quad x \in E.
+  \]
+  Dann heißt $f$ auch \emph{Ladung} von~$g$.
+\end{defn}
+
+% 5.12
+\begin{lem}
+  Für $g = G f$ gilt:
+  \begin{itemize}
+    \item $f(x) = g(x) - P g(x)$
+    \item Ist $f \geq 0$, so ist $g$ superharmonisch auf~$E$ und harmonisch auf $\Set{x \in E}{f(x) = 0}$.
+    \item $P^n g \to 0$ für $n \to \infty$ punktweise
+  \end{itemize}
+\end{lem}
+
+% 5.13
+\begin{satz}[\emph{Riesz'sche Zerlegung}]
+  Für jede superharmonische Funktion~$u \geq 0$ existiert ein Potential $g = G f$ und eine harmonische Funktion $h \geq 0$ mit $u = g + h$.
+  Diese Zerlegung ist eindeutig.
+\end{satz}
+
+
 \end{document}
