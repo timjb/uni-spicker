@@ -1117,10 +1117,12 @@ TODO: Wie kann man eine Baumzerlegung zur Berechnung eines MIS verwenden?
 \begin{defn}
   Sei eine geometrische Einbettung eines Graphen~$G$ gegeben.
   Führe folgenden Schritt wiederholt aus, bis der Graph leer ist:
+
   \hfill\begin{minipage}{0.95 \linewidth}
     Lösche alle Knoten, die inzident zur äußeren Fläche sind.
   \end{minipage}
-  Die in der $j$-ten Ausführung gelöschten Knoten haben \textit{Außenplanaritätslevel~$j$}.
+
+  Die in der $j$-ten Iteration gelöschten Knoten haben \textit{Außenplanaritätslevel~$j$}. \\
   Der Graph~$G$ heißt \emph{$k$-außenplanar}, falls er eine Einbettung besitzt, bezüglich der jeder Knoten Außenplanaritätslevel $\leq k$ hat.
 \end{defn}
 
@@ -1135,7 +1137,7 @@ TODO: Wie kann man eine Baumzerlegung zur Berechnung eines MIS verwenden?
 
 % 9.32 und 9.33
 \begin{defn}
-  Sei $T = (V, E_T)$ ein Spannwald eines unger. Graphen $G = (V, E)$.
+  Sei $T \!=\! (V, E_T)$ ein Spannwald eines unger. Gr. $G \!=\! (V, E)$.
   \begin{itemize}
     \item Der \emph{Fundamentalkreis} einer Kante $\{ u, v \} \in E \setminus E_T$ ist ein Kreis bestehend aus $\{ u, v \}$ und dem Pfad von~$u$ nach~$v$ in~$T$.
     \item Für $e \in E$ / $v \in V$ sei $\mu(e)$ $\nu(v)$ die Anzahl der Fundamentalkreise, die $e$ / $v$ enthalten.
@@ -1198,9 +1200,30 @@ TODO: Wie kann man eine Baumzerlegung zur Berechnung eines MIS verwenden?
   Dann kann ein MIS in~$G$ in Zeit $\O(k 2^k n + k m)$ berechnet werden.
 \end{lem}
 
-TODO: Beweisidee
+\begin{beweisskizze}
+  Berechne eine $k$-normale Baumzerlegung $(T, B)$.
+  Wähle eine Wurzel in~$T$.
+  Stelle durch Duplizieren von Knoten sicher, dass jeder Knoten in~$T$ höchstens zwei Kinder hat.
+  Berechne dann von den Blättern zur Wurzel für jeden Knoten $x \in T$ und alle $S \subseteq B(x)$ ein MIS~$I$ mit $I \cap B(x) = S$ (falls ein solches existiert).
+\end{beweisskizze}
 
-\TODO{hier weiter}
+% 9.41
+\begin{satz}
+  Geg. sei $k \in \N$ und eine kombin. Einbettung eines Graphen~$G$ mit $n$~Knoten.
+  Dann kann man in Zeit $\O(k^2 2^{3k} n)$ eine unabh. Menge in~$G$ berechnen, die mind. $\tfrac{k}{k+1}$-mal so groß ist wie ein MIS.
+\end{satz}
+
+\begin{alg}[\textit{Baker's Technik}]
+  Für $j = 0, \ldots, k$ sei $G_j$ der Graph, den man durch Löschen der Knoten mit Außenplanaritäts- level $\equiv j \enspace (\mathrm{mod } (k+1))$ erhält.
+  Bemerke: Alle $G_j$ sind $k$-außenplanar.
+  Mit dem vorh. Lemma können wir ein MIS $I_j$ in~$G_j$ für $j = 0, \ldots, k$ berechnen.
+  Gib $G_\ell$ zurück, wobei $\size{G_\ell} = {\max}_{0 \leq j \leq k} \size{G_j}$.
+\end{alg}
+
+% 9.42
+\begin{kor}
+  Es gibt einen PTAS für Maximum Independent Set.
+\end{kor}
 
 % §10. Linear Programming Methods
 \section{Reduktion auf Lineare Programmierung}
