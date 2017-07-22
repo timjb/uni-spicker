@@ -1139,14 +1139,15 @@ TODO: Wie kann man eine Baumzerlegung zur Berechnung eines MIS verwenden?
   \begin{itemize}
     \item Der \emph{Fundamentalkreis} einer Kante $\{ u, v \} \in E \setminus E_T$ ist ein Kreis bestehend aus $\{ u, v \}$ und dem Pfad von~$u$ nach~$v$ in~$T$.
     \item Für $e \in E$ / $v \in V$ sei $\mu(e)$ $\nu(v)$ die Anzahl der Fundamentalkreise, die $e$ / $v$ enthalten.
-    \item Setze $\mu(G, T) \coloneqq \max_{e \in E} \mu(e)$ und $\nu(G, T) \coloneqq \max_{v \in V} \nu(v)$.
+    \item Setze $\mu(G, T) \coloneqq {\max}_{e \in E} \mu(e)$ und $\nu(G, T) \coloneqq {\max}_{v \in V} \nu(v)$.
   \end{itemize}
 \end{defn}
 
 % 9.34
 \begin{lem}
-  Sei ein unger. Graph $G = (V, E)$ mit $n$~Knoten. und ein Spannwald $T = (V, E_T)$ von~$G$ gegeben.
-  Setze $k \coloneqq \max \{ \mu(G, T) + 1, \nu(G, T) \}$.
+  Sei ein ungerichteter Graph $G = (V, E)$ mit $n$~Knoten und ein Spannwald $T = (V, E_T)$ von~$G$ gegeben.
+  Setze
+  \[ k \coloneqq \max \{ \mu(G, T) + 1, \nu(G, T) \}. \]
   Dann kann man eine Baumzerlegung von~$G$ mit Baumweite $\leq k$ und $\leq 2n - 1$ Knoten in Zeit $\O(k n)$ berechnen.
 \end{lem}
 
@@ -1193,11 +1194,11 @@ TODO: Wie kann man eine Baumzerlegung zur Berechnung eines MIS verwenden?
 
 % 9.40
 \begin{lem}
-  Gegeben sei ein Graph~$G$ mit $n$ Knoten gegeben sowie eine Baumzerlegung von~$G$ der Weite~$k$ mit $m$~Knoten.
+  Gegeben sei ein Graph~$G$ mit $n$ Knoten sowie eine Baumzerlegung von~$G$ der Weite~$k$ mit $m$~Knoten.
   Dann kann ein MIS in~$G$ in Zeit $\O(k 2^k n + k m)$ berechnet werden.
 \end{lem}
 
-% TODO: Beweisidee
+TODO: Beweisidee
 
 \TODO{hier weiter}
 
@@ -1225,7 +1226,8 @@ TODO: Wie kann man eine Baumzerlegung zur Berechnung eines MIS verwenden?
   Gesucht ist ein Vektor $x \in \Z^n$, der $A x \leq b$ erfüllt und $c^T x$ maximiert.
 \end{defn}
 
-% §10.2 Minimum weighted Vertex Cover
+% §10.2 Minimum Weighted Vertex Cover
+\subsection{Minimum Weighted Vertex Cover}
 
 % 10.2
 \begin{satz}
@@ -1300,18 +1302,72 @@ TODO: Wie kann man eine Baumzerlegung zur Berechnung eines MIS verwenden?
 \end{beweis}
 
 % §10.4. Minimum Steiner Forest
+\subsection{Minimum Steiner Forest}
 
-Für $S \subseteq V$ sei $\delta(S) \coloneqq \Set{e \in E}{\size{e \cap S} = 1}$ und $g(S) \coloneqq 1$, falls $u \in S$ und $v \in V \setminus S$ mit $r(u) = r(v)$ existieren, und $g(S) \coloneqq 0$ sonst.
+% 10.7
+\begin{satz}
+  Es gibt einen Polynomialzeit-Approximationsalgorithmus für Minimum Steiner Forest mit Approximationsverhältnis 2.
+\end{satz}
 
-Betrachte das LP
-\[
-  \begin{array}{r l l}
-    \text{minimiere} & {\sum}_{e \in E} c(e) x_e \\
-    \text{unter den NBn}
-      & {\sum}_{e \in \delta(S)} x_e \geq g(S) & \text{für alle } S \subseteq V \\
-      & 0 \leq x_e \leq 1 & \text{für alle } e \in E
-  \end{array}
-\]
+\begin{alg}
+  \begin{itemize}
+    \item Simuliere Feuer, die sich von jedem Knoten, der noch nicht über eine Feuerstrecke mit allen Gleichfarbigen verbunden sind, entlang der Kanten ausbreiten.
+    Jedes Feuer erzeugt so einen Feuerbaum.
+    Wenn zwei Feuer sich treffen, so verschmelzen die Feuerbäume zu einem Baum.
+    Wenn in einem Feuerbaum alle Knoten mit allen Knoten gleicher Farbe verbunden sind, so wird das Feuer inaktiv und setzt sich nicht mehr fort.
+    \item
+      Entferne aus dem so generierten Feuerwald alle Kanten, die nicht benötigt werden, um Knoten gleicher Farbe zu verbinden.
+      Gebe den Wald bestehend aus den verbleibenden Kanten aus.
+  \end{itemize}
+\end{alg}
+
+\begin{beweisidee}
+  Für $S \subseteq V$ sei $\delta(S) \coloneqq \Set{e \in E}{\size{e \cap S} = 1}$ und
+  \[
+     g(S) \coloneqq
+     \begin{cases}
+       1 & \text{falls $u \in S$ und $v \in V \setminus S$ mit $r(u) = r(v)$ existieren,} \\
+       0 & \text{sonst}
+     \end{cases}
+  \]
+  Man kann zeigen, dass das Problem äquivalent zu folgendem ILP ist:
+  \[
+    \begin{array}{r l l}
+      \text{minimiere} & {\sum}_{e \in E} c(e) x_e \\
+      \text{unter den NBn}
+        & {\sum}_{e \in \delta(S)} x_e \geq g(S) & \text{für alle } S \subseteq V \\
+        & 0 \leq x_e \leq 1 & \text{für alle } e \in E
+    \end{array}
+  \]
+  (Dieses ILP ist aber exponentiell groß!)
+  Wir betrachten das entspr. (\textit{primale}) LP und dessen \textit{duales LP} mit Variablen $\Set{y_S}{S \subseteq V}$:
+  \[
+    \begin{array}{r l l}
+      \text{maximiere} & {\sum}_{S \subseteq V} g(S) y_S \\
+      \text{unter den NBn}
+        & {\sum}_{S : e \in \delta(S)} y_S \leq c(e) & \text{für alle } e \subseteq E \\
+        & 0 \leq y_S & \text{für alle } S \subseteq V
+    \end{array}
+  \]
+  Für jede zul. Lösung $\{x_e\}_{e \in E}$ des \textit{primalen} und jede zul. Lösung $\{y_S\}_{S \subseteq V}$ des dualen Problems gilt dann wegen \textit{schwacher Dualität}:
+  \[ {\sum}_{S \subseteq V} g(S) y_S \leq {\sum}_{e \in E} c(e) x_e \]
+  Insbesondere gilt dies für die zulässige Lösung $\{y_S\}_{S \subseteq V}$ mit
+  \[
+    y_S \coloneqq \text{Brenndauer des Feuers mit Knotenmenge $S$}
+  \]
+  des dualen Problems.
+  Dann kann man zeigen:
+  \[
+    \begin{array}{r l}
+      & \text{Gesamtkosten der vom obigen Alg. berechneten Lösung} \\
+      \leq & 2 \cdot {\sum}_{S \subseteq V} g(S) y_S \\
+      \leq & 2 \cdot \text{optimaler Wert des dualen LP} \\
+      \leq & 2 \cdot \text{optimaler Wert des primalen LP (es gilt sogar $=$)} \\
+      \leq & 2 \cdot \text{optimaler Wert des primalen ILP} \\
+      = & 2 \cdot \text{optimaler Wert des Minimum-Steiner-Forest-Problems}
+    \end{array}
+  \]
+\end{beweisidee}
 
 % §12. A linear Vertex-Cover Kernel
 \section{Ein linearer Kernel für Vertex-Cover}
