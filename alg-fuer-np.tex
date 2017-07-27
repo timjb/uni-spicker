@@ -31,6 +31,7 @@
 \DeclareMathOperator{\APTAS}{APTAS} % asymptotic polynomial-time approximation schema, class of problems in NPO that possess such
 \DeclareMathOperator{\FPTAS}{FPTAS} % fully polynomial-time approximation schema, class of problems in NPO that possess such
 \DeclareMathOperator{\AFPTAS}{AFPTAS} % asymptotic fully polynomial-time approximation schema, class of problems in NPO that possess such
+\DeclareMathOperator{\PCP}{PCP} % probabilistically checkable proofs
 \newcommand{\Prob}{\mathcal{P}} % Optimierungsproblem
 \newcommand{\ManyOneRed}{\leq_m} % Many-To-One-Reduzierbarkeit
 \newcommand{\TuringRed}{\leq_T} % Turing-Reduzierbarkeit
@@ -1392,14 +1393,63 @@ TODO: Wie kann man eine Baumzerlegung zur Berechnung eines MIS verwenden?
   \]
 \end{beweisidee}
 
+% §11. Limits to Approximability
+\section{Grenzen der Approximierbarkeit}
+
+% §11.1 Probabilistically Checkable Proofs
+
+\begin{defn}[\emph{Probabilistically Checkable Proofs}]
+  Sei $L$ eine Sprache und $r, q : \N_0 \to \N$ Funktionen.
+  Ein \emph{Verifizierer} ist ein Programm, das testen soll, ob (angebliche) Beweise in Form von Binärworten der Aussage $x \in L$ für ein gegebenes Wort~$x$ korrekt sind.
+  Der Verifizierer bekommt dazu das Wort~$x$ der Länge~$n$ sowie $\O(r(n))$ unabhängig und gleichmäßig verteilte Zufallsbits.
+  Dann erzeugt der Verifizierer $\O(q(n))$ Positionen von Bits.
+  Der Verifizierer bekommt dann die Bits an den von ihm verlangten Positionen in einem (potentiellen) Beweis~$B$ für die Aussage $x \in L$.
+  Dann muss der Verifizierer entscheiden, ob er glaubt, ob $B$ ein richtiger Beweis ist.
+\end{defn}
+
+\begin{defn}
+  Eine Sprache $L$ gehört zur Komplexitätsklasse $\Defn{\PCP(r(n), q(n))}$, falls ein Verifizierer für~$L$ existiert, der $\O(r(n))$ Zufallsbits bekommt und vom Beweis $\O(q(n))$ Bits liest, sodass gilt:
+  \begin{itemize}
+    \item Falls $x \in L$, so gibt es einen Beweis~$B$, sodass der Verifizierer~$B$ mit Wahrscheinlichkeit~1 (also immer, egal was die Zufallsbits sind) akzeptiert.
+    \item Falls $x \not\in L$, so wird jeder angebliche Beweis nur mit Wahrscheinlichkeit $< 1/2$ akzeptiert.
+  \end{itemize}
+\end{defn}
+
+\begin{resultat}[\emph{PCP-Theorem}]
+  $\NP = \PCP(\log n, 1)$
+\end{resultat}
+
+% §11.2. Inapproximability of MaxSAT
+
+\begin{satz}
+  $\mathrm{MaxSAT} \not\in \PTAS$ falls $\P \neq \NP$
+\end{satz}
+
+\begin{beweisskizze}
+  Sei $L$ eine NP-vollständige Sprache. \\
+  Nach dem PCP-Theorem gibt es einen Verifizierer~$V$ für~$L$, der $r(n)$ Zufallsbits nimmt und $q$ Bits liest, wobei $r(n) = \O(\log n)$. \\
+  Sei ein Wort $x$ gegeben.
+  Erzeuge eine Formel~$F$ wie folgt: \\
+  Für Zufallsbits $y \in \{ 0, 1 \}^{r(n)}$ und jede Kombination $(b_1, \ldots, b_q) \in \{ 0, 1 \}^q$ von Bits an den verlangten Positionen, die zusammen zur Ablehnung führen, generiere eine Klausel $l_1 \vee \ldots \vee l_q$ mit $l_i \coloneqq v_{y,i}$ falls $b_i = 0$ und $l_i \coloneqq \overline{v_{y,i}}$ sonst.
+  Dann gilt:
+  \begin{itemize}
+    \item Ist $x \in L$, so ist $F$ erfüllbar.
+    \item Ist $x \not\in L$, so gilt für jede mögliche Variablenbelegung: Für mehr als die Hälfte der möglichen Werte von~$y$ gibt es mindestens eine für~$y$ generierte Klausel, die nicht erfüllt ist. \\
+    Somit sind immer $> 2^{r(n) - 1}$ der insgesamt $\leq 2^{r(n) + q}$, also ein Anteil von $> 2^{-q-1} =: \epsilon$ nicht erfüllt.
+  \end{itemize}
+  Wäre $\mathrm{MaxSAT} \in \PTAS$, so könnte man durch Anwendung des PTAS mit~$\epsilon$ entscheiden, welcher Fall vorliegt.
+\end{beweisskizze}
+
+% ausgelassen: §11.3 Inapproximability of Maximum Clique
+
 % §12. A linear Vertex-Cover Kernel
 \section{Ein linearer Kernel für Vertex-Cover}
 
 % 12.1
-\begin{satz}[\emph{Egerváry-König}]
+\begin{resultat}[\emph{Egerváry-König}]
   Sei $G$ ein bipartiter Graph mit $n$ Knoten und $m$ Kanten und $M$ ein Matching maximaler Größe in~$G$. \\
   Dann kann ein Minimum Vertex Cover von~$G$ der Größe~$\size{M}$ in Zeit $\O(n+m)$ berechnet werden.
-\end{satz}
+\end{resultat}
 
 \TODO{Beweisidee angeben}
 
@@ -1427,7 +1477,7 @@ TODO: Wie kann man eine Baumzerlegung zur Berechnung eines MIS verwenden?
   \end{itemize}
 \end{alg}
 
-Die Korrektheit des Alg. folgt aus:
+Die Korrektheit des Algorithmus folgt aus:
 \begin{itemize}
   \item Es gibt ein MVC von $G$, das $V_2$ enthält. Dies sieht man wie folgt:
     \begin{itemize}
