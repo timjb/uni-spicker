@@ -1569,7 +1569,7 @@ Definiere
   die \textit{Greensche Funktion}.
   Für festes $y \in E$ betrachte die Funktion
   \[ h_y(x) \coloneqq G(x, y). \]
-  Ist $y$ \textit{transient} (\dh{} $G(y, y)$), so ist $h_y$ superharmonisch.
+  Ist $y$ \textit{transient} (\dh{} $G(y, y)$), so ist $h_y$ superharmonisch. \\
   Ist $P$ \textit{irreduzibel} (\dh{} $\fa{x, y \in E} \ex{n \geq 1} p^{(n)}(x, y) > 0$), so gilt außerdem $h_y(x) > 0$ für alle $x \in E$.
 \end{bsp}
 
@@ -1630,7 +1630,7 @@ Definiere
   definierte substochastische Übergangskern.
   Des Weiteren gilt:
   \[
-    h \text{ harmonisch} \iff P_h \textit{ stochastisch}.
+    h \text{ harmonisch} \iff P_h \text{ stochastisch}.
   \]
 \end{lemdefn}
 
@@ -1670,7 +1670,7 @@ Definiere
 % §2. Potentiale und Ladungen
 \subsection{Potentiale und Ladungen}
 
-Sei $G$ im folgenden transient und irreduzibel, \dh{}
+Sei $P$ im Folgenden transient, \dh{}
 \[
   0 < G(x, y) < \infty \quad
   \forall \, x, y \in E.
@@ -1706,5 +1706,81 @@ Sei $G$ im folgenden transient und irreduzibel, \dh{}
   Diese Zerlegung ist eindeutig.
 \end{satz}
 
+% §3. Martin-Kompaktifizierung
+\subsection{Martin-Kompaktifizierung}
+
+\TODO{Beispiel noch ergänzen?}
+
+\begin{situation}
+  Sei $E$ abzählbar, $P$ transient und es existiere $x_0 \in E$ mit $G(x_0, y) > 0$ für alle $y \in E$.
+  Sei $N : E \to \N$ abzählbar.
+\end{situation}
+
+\begin{defn}
+  Der \emph{Martin-Kern} ist dann die Abbildung
+  \[
+    K(x, y) \coloneqq G(x, y) / G(x_0, y).
+  \]
+\end{defn}
+
+\begin{lem}
+  $K(x, y) \leq F(x_0, x)^{-1}$ für alle $x, y \in E$
+\end{lem}
+
+\begin{defn}
+  Auf $E$ ist eine Metrik $\rho$ definiert durch
+  \[
+    \rho(y, z) \coloneqq \abs{2^{-N(y)} - 2^{-N(z)}} + \sum_{x \in E} \abs{K(x, y) - K(x, z)} F(x_0, x) 2^{-N(x)}.
+  \]
+\end{defn}
+
+\begin{defn}
+  \begin{minipage}[t]{0.85 \linewidth}
+    $(E^*, \rho)$ sei die (Cauchy-)Vervollständigung von~$(E, \rho)$. \\
+    Der \emph{Martin-Rand} ist $\partial E \coloneqq E^* \setminus E$.
+  \end{minipage}
+\end{defn}
+
+\begin{bem}
+  Der Martin-Rand besteht aus Äquivalenzklassen von Folgen $(x_n)_{n \in \N}$ in~$E$ mit
+  \begin{itemize}
+    \item $N(x_n) \to \infty$ für $n \to \infty$ und
+    \item $K(x, x_n)$ ist Cauchyfolge für alle $x \in E$.
+  \end{itemize}
+\end{bem}
+
+\begin{lem}
+  Jede Folge in~$E$ hat eine Teilfolge, die eine Cauchy-Folge ist (und somit in~$E^*$ konvergiert).
+\end{lem}
+
+\begin{kor}
+  $(E^*, \rho)$ ist kompakt.
+\end{kor}
+
+\begin{lemdefn}
+  $K(x, \blank)$ ist gleichmäßig stetig auf~$E$ und lässt sich deswegen eindeutig auf~$E^*$ fortsetzen durch
+  \[
+    K(x, \alpha) \coloneqq \lim_{n \to \infty} K(x, \alpha_n) \quad
+    \text{für } \alpha = [(\alpha_n)_{n \in \N}].
+  \]
+\end{lemdefn}
+
+\begin{satz}[\emph{Martin-Darstellung}]
+  Für jede harmonische Funktion $h \geq 0$ existiert ein Maß $\mu_h(\mathrm{d}\,\alpha)$ auf~$\partial E$, sodass
+  \[
+    h(x) = \myint{\partial E}{} K(x, \alpha) \mu_h(\mathrm{d}\,\alpha).
+  \]
+\end{satz}
+
+\begin{lem}
+  Sei $u \geq 0$ superharmonisch.
+  Dann gilt:
+  \begin{itemize}
+    \item $u$ ist Potential $\iff$ $P^n u \to 0$ punktweise für $n \to \infty$
+    \item $u \leq v$, $v$ Potential $\implies$ $u$ Potential
+    % $u, v \geq 0$ superharmonisch $\implies$ $\min(u, v)$ superharmonisch
+    \item $K(x, \alpha)$ ist für jedes $\alpha \in \delta E$ superharmonisch in~$x$.
+  \end{itemize}
+\end{lem}
 
 \end{document}
