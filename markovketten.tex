@@ -1709,7 +1709,21 @@ Sei $P$ im Folgenden transient, \dh{}
 % §3. Martin-Kompaktifizierung
 \subsection{Martin-Kompaktifizierung}
 
-\TODO{Beispiel noch ergänzen?}
+\begin{bsp}
+  Sei $P$ irreduzibel auf $E = E_0 \sqcup R$, wobei $E_0$ endlich ist und wir $R$ als den Rand ansehen.
+  Setze $\widetilde{E} \coloneqq E \cup \{ \dagger \}$ und betrachte $\widetilde{P}$ mit
+  \[
+    \widetilde{P}(x, y) \coloneqq P(x, y) \text{ für } x \in E_0, y \in E, \quad
+    \widetilde{P}(x, \dagger) \coloneqq 1 \text{ für } x \in R \cup \{ \dagger \}.
+  \]
+  Für alle $r \in R$ ist dann $\widetilde{G}(\blank, r)$ harmonisch auf~$E_0$.
+  Man kann zeigen, dass jede harmonische Funktion $f : E \to \R$ eindeutig durch $f|_R$ festgelegt ist.
+  Somit gilt
+  \[
+    f = \sum_{s \in R} \widetilde{G}(\blank, s) f(s),
+  \]
+  da beide Funktionen harmonisch sind und auf~$R$ übereinstimmen.
+\end{bsp}
 
 \begin{situation}
   Sei $E$ abzählbar, $P$ transient und es existiere $x_0 \in E$ mit $G(x_0, y) > 0$ für alle $y \in E$.
@@ -1765,13 +1779,6 @@ Sei $P$ im Folgenden transient, \dh{}
   \]
 \end{lemdefn}
 
-\begin{satz}[\emph{Martin-Darstellung}]
-  Für jede harmonische Funktion $h \geq 0$ existiert ein Maß $\mu_h(\mathrm{d}\,\alpha)$ auf~$\partial E$, sodass
-  \[
-    h(x) = \myint{\partial E}{} K(x, \alpha) \mu_h(\mathrm{d}\,\alpha).
-  \]
-\end{satz}
-
 \begin{lem}
   Sei $u \geq 0$ superharmonisch.
   Dann gilt:
@@ -1782,5 +1789,79 @@ Sei $P$ im Folgenden transient, \dh{}
     \item $K(x, \alpha)$ ist für jedes $\alpha \in \delta E$ superharmonisch in~$x$.
   \end{itemize}
 \end{lem}
+
+\begin{satz}[\emph{Martin-Darstellung}]
+  Für jede harmonische Funktion $h \geq 0$ existiert ein Maß $\mu_h(\mathrm{d}\,\alpha)$ auf~$\partial E$, sodass
+  \[
+    h(x) = \myint{\partial E}{} K(x, \alpha) \mu_h(\d\,\alpha).
+  \]
+\end{satz}
+
+\begin{kor}
+  Jede superharmonische Funktion $u \geq 0$ lässt sich schreiben als
+  \[
+    u(x) = \myint{E^*}{} K(x, y) \mu_u(\d\,y)
+  \]
+  mit einem Maß $\mu_u$ auf~$E^*$.
+\end{kor}
+
+\begin{bem}
+  Man kann zeigen: Die Martin-Darstellung wird eindeutig wenn man den \emph{minimalen Martin-Rand}
+  \[
+    \partial_m E \coloneqq \Set{\alpha \in \partial E}{K(\blank, \alpha) \text{ ist minimal harmonisch}}
+  \]
+  anstatt $\partial E$ betrachtet.
+  Dabei heißt eine harmonische Funktion~$h$ \textit{minimal harmonisch}, falls alle harmonischen Funktionen $v \leq h$ von der Form $v = c \cdot h$ mit $c \in \R$ sind.
+\end{bem}
+
+\begin{resultat}
+  Für alle $A \subset \Bor(\partial_m E)$ gilt
+  \[
+    \P(\lim_{n \to \infty} Z_n = Z_\infty \in A \,|\, Z_0 = x) =
+    \myint{A}{} K(x, \alpha) \mu_1(\d\,\alpha).
+  \]
+\end{resultat}
+
+\begin{bem}
+  Insbesondere $\P(\lim_{n \to \infty} Z_n = Z_\infty \in A \,|\, Z_0 = x_0) = \mu_1(A)$
+\end{bem}
+
+\begin{bem}
+  Sei $h > 0$ harmonisch mit $h(x_0) = 1$.
+  Sei $P_h$ die $h$-Transformation von~$P$.
+  Für den zugeh. Martin-Kern gilt dann $K_h(x, y) = K(x, y) / h(x)$.
+  Es folgt
+  \[
+    1 = \myint{\partial E}{} K_h(x, \alpha) \mu_h(\d\,\alpha) \quad
+    \text{für alle } x \in E.
+  \]
+  Somit stellt $\mu_h$ die konstante Funktion~$1$ bzgl. $K_h$ dar.
+  Mit dem Resultat folgt für die Markovkette $\{ Z_n^h \}$ mit Übergangskern~$P_h$:
+  \[
+    \P(\lim_{n \to \infty} Z_n^h = Z_\infty^h \in A \,|\, Z_0^h = x) = \myint{A}{} K_h(x, \alpha) \mu_h(\d\,\alpha) \quad
+  \]
+  für alle $A \in \Bor(\partial E)$.
+  Für $h = K(\blank, \beta)$ mit $\beta \in \partial_m E$ kann man zeigen: $\mu_{K(\blank, \beta)} = \delta_\beta$.
+  Somit ist
+  \[
+    \P(\lim_{n \to \infty} Z_n^{K(\blank, \beta)} \in A \,|\, Z_0 = x_0) = \ind \{ \beta \in A \}.
+  \]
+\end{bem}
+
+\begin{bsp}
+  Sei $\{ Z_n \}$ die Markovkette auf $\N_0^2$ mit
+  \[
+    p((x, y), (x+1, y)) = \tfrac{1}{2} = p((x, y), (x, y+1)).
+  \]
+  Startpunkt ist $(x_0, y_0) = (0, 0)$.
+  Dann gilt
+  \[
+    K((x, y), (m, n)) \sim
+    2^{x+y} \alpha_{m,n}^x (1-\alpha_{m,n})^y
+  \]
+  mit $\alpha_{m,n} \coloneqq m / (m+n)$.
+  Die Folge $\{ K((x, y), (m_k, n_k)) \}$ mit $(m_k, n_k) = Z_k$ konvergiert genau dann, falls $\{ \alpha_{m_k,n_k} \}$ konvergiert.
+  Diese Folgen bilden den Martin-Rand.
+\end{bsp}
 
 \end{document}

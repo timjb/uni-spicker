@@ -100,6 +100,7 @@
 \newtheorem*{erinnerung}{Erinnerung}
 \newtheorem*{gesucht}{Gesucht}
 \newtheorem*{strategie}{Strategie}
+\newtheorem*{resultat}{Resultat}
 
 \theoremstyle{remark}
 \newtheorem*{bem}{Bem}
