@@ -113,6 +113,7 @@
 \newtheorem*{referenz}{Ref}
 \newtheorem*{teaser}{Teaser}
 \newtheorem*{interp}{Interpretation}
+\newtheorem*{rechnung}{Rechnung}
 
 % Listenstil
 \usepackage{paralist} % Für Inline-Listen

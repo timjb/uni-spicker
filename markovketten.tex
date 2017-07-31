@@ -83,9 +83,9 @@
   \[
     \P(X_0=x_0, \ldots, X_n=x_n) = \P(X_0=x_0) \cdot {\prod}_{k=1}^n p(x_{n-1}, x_n)
   \]
-  Gibt $\pi_0 : E \to \cinterval{0}{1}$ die Startverteilung an, und $\pi_n$ die Verteilung nach dem $n$-ten Schritt für $n \geq 1$, so gilt:
+  Gibt $\pi_0 : E \to \cinterval{0}{1}$ die Startverteilung an, und $\pi_n$ die Verteilung nach dem $n$-ten Schritt für $n \geq 1$, so gilt
   \[
-    \pi_n = \Pi^n \pi_0
+    \pi_n = \pi_0 \Pi^n.
   \]
 \end{bem}
 
@@ -97,7 +97,7 @@
   die \emph{$n$-Schritt-Übergangswahrscheinlichkeit} von~$x$ nach~$y$.
 \end{defn}
 
-\begin{lem}[\emph{Kolmogorov-Chapman-Gleichung}]
+\begin{lem}[\emph{Kolmogorov-Chapman-Gleichung}] \mbox{}\\
   Für $\ell, k \in \N$, $x, y \in E$ gilt
   \[
     p^{(k + \ell)}(x, y) = {\sum}_{z \in E} p^{(k)}(x, z) p^{(\ell)}(z, y).
@@ -127,7 +127,7 @@
 
 % 1.7 + 1.8 + 1.10
 \begin{satz}
-  Sei $\{ X_n \}$ eine Markovkette auf einem endlichen Zustandsraum~$E$ mit der Übergangsmatrix~$\Pi$.
+  Sei $\{ X_n \}$ eine Markovkette auf einem endl. Zustandsraum~$E$ mit der Übergangsmatrix~$\Pi$.
   Dann sind äquivalent:
   \begin{itemize}
     \item Es gibt ein $n_0 \geq 1$ mit $\fa{x, y \in E} p^{(n_0)}(x, y) > 0$.
@@ -149,6 +149,21 @@
     \forall \, y \in E.
   \]
 \end{satz}
+
+\begin{beweisidee}
+  Def. Folgen $\{ m_j^{(n)} \}_{n \in \N}$ und $\{ M_j^{(n)} \}_{n \in \N}$ für $j \in E$ durch
+  \[
+    m_j^{(n)} \coloneqq {\min}_{i \in E} p^{(n)}(i, j), \quad
+    M_j^{(n)} \coloneqq {\max}_{i \in E} p^{(n)}(i, j).
+  \]
+  Dann ist $\{ m_j^{(n)} \}$ monoton steigend und $\{ M_j^{(n)} \}_{n \in \N}$ monoton fallend, also konvergent gegen $m_j^{(\infty)}$ bzw. $M_j^{(\infty)}$.
+  Außerdem kann man zeigen:
+  \[
+    M_j^{(n+n_0)} - m_j^{(n+n_0)} \leq (1-\epsilon) \cdot (M_j^{(n)} - m_j^{(n)}),
+  \]
+  wobei $\epsilon \coloneqq {\min}_{i, j \in E} p^{(n_0)}(i, j)$.
+  Somit gilt $m_j^{(\infty)} = M_j^{(\infty)}$ und nach dem Sandwichsatz konvergieren alle $p^{(n)}(i, j)$.
+\end{beweisidee}
 
 \begin{acht}
   Stationäre Verteil. können ohne Konvergenz existieren!
@@ -174,6 +189,8 @@
   Für jede solche Übergangsmatrix auf einem endlichen Raum ist die uniforme Verteilung stationär.
 \end{bem}
 
+\begin{samepage}
+
 % §. Paradoxon von Parrondo
 
 \begin{bem}[\emph{Paradox von Parrondo}]
@@ -186,6 +203,8 @@
 % Kapitel II. Abzählbare Markovketten
 \section{Abzählbare Markovketten}
 
+\end{samepage}
+
 % §2.1. Rekurrenz und Transienz
 
 \begin{nota}
@@ -194,13 +213,18 @@
 
 % 2.1
 \begin{defn}
-  Für $x \in E$ und $n \in \N$ definiere die ZV \Defn{$\tau_x^{(n)}$} induktiv durch
+  Für $x \in E$ und $n \in \N$ def. die ZV $\Defn{\tau_x^{(n)}} \in \N \cup \{ \infty \}$ ind. durch
   \[ \begin{array}{r c l}
-    \tau_x^{(1)} &\coloneqq& \inf\,\Set{n > 0}{Z_n = x} \in \N \cup \{ \infty \} \\
+    \tau_x^{(1)} &\coloneqq& \inf\,\Set{n > 0}{Z_n = x}, \\
     \tau_x^{(k)} &\coloneqq& \inf\,\Set{n > \tau_x^{(k-1)}}{Z_n = x}, \enspace k > 1.
   \end{array} \]
   (Beachte: $\tau_x^{(k)}$ ist eine messbare Abbildung.)
 \end{defn}
+
+% 2.9
+\begin{bem}
+  $F(x, y) > 0 \iff \ex{n \geq 1} p^{(n)}(x, y) > 0$
+\end{bem}
 
 \begin{bem}
   Ferner gilt $\{ \tau_x^{(k)} = n \} \in \sigma(Z_0, Z_1, \ldots, Z_n)$.
@@ -218,9 +242,8 @@
 \end{lem}
 
 \begin{bem}
-  Setze $\Defn{\widetilde{\ell}(y)} \coloneqq {\sum}_{k=j}^\infty \ind \{ Z_k = y \}$.
-  Dann gilt
-  \[ P(\tau_y^{(k)} < \infty \mid Z_0 = x) = P(\widetilde{\ell} \geq k \mid Z_0 = x). \]
+  Mit $\Defn{\widetilde{\ell}(y)} \coloneqq {\sum}_{k=1}^\infty \ind \{ Z_k = y \}$
+  gilt $\{ \tau_y^{(k)} \!<\! \infty \} = \{ \widetilde{\ell} \geq k \}$.
 \end{bem}
 
 % 2.3
@@ -238,11 +261,6 @@
 \end{bem}
 
 % ausgelassenes  Beispiel: a+1 Zustände nebeneinander, der linke und rechte sind absorbierend, die dazwischen haben eine Übergangswahrscheinlichkeit von 1/2 nach links und 1/2 nach rechts
-
-% ausgelassenes Beispiel: Irrfahrt auf \N
-% Falls $p \leq \nicefrac{1}{2}$, so ist Anfangszustand rekurrent
-% Falls $p > \nicefrac{1}{2}$, so ist Anfangszustand transient
-% Parondo-Paradoxon
 
 \begin{bsp}
   In der Markovkette
@@ -264,7 +282,6 @@
     \draw[->, bend left=30] (N4) to node [below] {$1 - p$} (N3);
   \end{tikzpicture}\end{center}
   ist (0) genau dann rekurrent, falls $p \leq \nicefrac{1}{2}$, ansonsten transient.
-  \TODO{genauer!}
 \end{bsp}
 
 % 2.6
@@ -311,7 +328,9 @@
 
 % 2.8
 \begin{satz}
-  Ist $x \in E$ rekurrent und $F(x, y) > 0$, so ist $y$ auch rekurrent und $F(x, y) = F(y, x) = 1$.
+  \begin{minipage}[t]{0.88 \linewidth}
+    Ist $x \in E$ rekurrent und $F(x, y) > 0$, so ist $y$ auch rekurrent und $F(x, y) = F(y, x) = 1$.
+  \end{minipage}
 \end{satz}
 
 % nicht in der Vorlesung
@@ -334,11 +353,6 @@
   Der Satz sagt, dass dann auch $y$ unendlich oft besucht wird.
 \end{interp}
 \fi
-
-% 2.9
-\begin{bem}
-  $F(x, y) > 0 \iff \ex{n \geq 1} p^{(n)}(x, y) > 0$
-\end{bem}
 
 % 2.10
 \begin{defn}
@@ -370,23 +384,22 @@
 \begin{bsp}
   Einfache Irrfahrt auf~$\Z$: \quad
   $p(0, 1) = p$, $p(0, -1) = q = 1 - p$
+  In diesem Fall kann man die Green'sche Funktion exakt berechnen:
+  \[
+    G(x, x) = \ldots = 1/\abs{2p - 1}
+  \]
+  %\[
+  %  \begin{array}{r c l}
+  %    G(x, x) &=& G(0,0) \\
+  %    &=& {\sum}_{m=0}^\infty p^{(m)}(0, 0) \\
+  %    &=& 1 + {\sum}_{n=1}^\infty p^{(2n)}(0, 0) \\
+  %    &=& 1 + {\sum}_{n=1}^\infty \tbinom{2n}{n} p^n (1-p)^n \\
+  %    &=& 1 + {\sum}_{n=1}^\infty \tbinom{2n}{n} 4^{-n} (4 p (1-p))^n \\
+  %    &=& (1 - 4 p (1-p))^{-1/2} \\
+  %    &=& 1/\abs{2p - 1}
+  %  \end{array}
+  %\]
 \end{bsp}
-
-%Für welche Werte von $p$ ist diese Irrfahrt rekurrent/transient?
-
-In diesem Fall kann man die Greensche Funktion exakt berechnen:
-
-\[
-  \begin{array}{r c l}
-    G(x, x) &=& G(0,0) \\
-    &=& {\sum}_{m=0}^\infty p^{(m)}(0, 0) \\
-    &=& 1 + {\sum}_{n=1}^\infty p^{(2n)}(0, 0) \\
-    &=& 1 + {\sum}_{n=1}^\infty \tbinom{2n}{n} p^n (1-p)^n \\
-    &=& 1 + {\sum}_{n=1}^\infty \tbinom{2n}{n} 4^{-n} (4 p (1-p))^n \\
-    &=& (1 - 4 p (1-p))^{-1/2} \\
-    &=& 1/\abs{2p - 1}
-  \end{array}
-\]
 
 % 2.13
 \begin{satz}
@@ -408,12 +421,12 @@ In diesem Fall kann man die Greensche Funktion exakt berechnen:
 \begin{bem}
   Für einfache symmetrische Irrfahrten gilt:
   \[
-    p^{(2n)}(x, x) = \qquad \sum_{\mathclap{\substack{k_1, \ldots, k_d \in \N \\ k_1 + \ldots + k_d = n}}} \qquad \frac{(2n)!}{(k_1!)^2 \cdots (k_d!)^2} (\frac{1}{2d})^{2n}
+    p^{(2n)}(x, x) = \qquad \sum_{\mathclap{\substack{k_1, \ldots, k_d \in \N \\ k_1 + \ldots + k_d = n}}} \qquad \frac{(2n)!}{(k_1!)^2 \cdots (k_d!)^2} (2d)^{-2n}
   \]
 
   Für $d = 2$ gilt $p^{(2n)}(0, 0) = \left[ \tbinom{2n}{n} (\tfrac{1}{2})^{2n} \right]^2$.
   Mit der Stirling'schen Formel folgt $p^{(2n)}(0, 0) \approx \tfrac{1}{\pi n}$.
-  Somit gilt $\sum p^{(2n)}(0,0) = \infty$.
+  Somit gilt ${\sum}_{n = 0}^\infty p^{(2n)}(0,0) = \infty$.
 \end{bem}
 
 \begin{fazit}
@@ -422,13 +435,14 @@ In diesem Fall kann man die Greensche Funktion exakt berechnen:
 
 % Vorlesung vom 11.5.2017
 
-\begin{bem}
-  Man kann zeigen:
+\begin{resultat}
   Für einfache symm. Irrfahrten auf~$\Z^d$ gilt
-  \[ p^{(2n)}(0,0) \leq C_d / n^{\nicefrac{d}{2}} \]
-  für eine Konstante $C_d > 0$.
+  \[
+    p^{(2n)}(0,0) \leq C_d / n^{\nicefrac{d}{2}} \quad
+    \text{für eine Konstante $C_d > 0$.}
+  \]
   Somit ist die einfache Irrfahrt transient für alle $d \geq 3$.
-\end{bem}
+\end{resultat}
 
 \begin{defn}
   $\Defn{\varphi(t)} \coloneqq {\sum}_{x \in \Z^d} e^{i (t \cdot x)} p(0, x)$ \quad
@@ -445,24 +459,23 @@ In diesem Fall kann man die Greensche Funktion exakt berechnen:
 
 \begin{satz}
   Für jede Irrfahrt $\{ Z_n \}$ auf $\Z^d$ gilt
-  \[ G(0, 0) = \left( \frac{1}{2 \pi} \right)^d \lim_{\lambda \uparrow 1} \Int{t \in \cointerval{-\pi}{\pi}^d}{}{Re(\tfrac{1}{1 - \lambda \varphi(t)})}{t} = \infty \]
+  \[ G(0, 0) = \tfrac{1}{(2 \pi)^d} \lim_{\lambda \uparrow 1} \Int{\cointerval{-\pi}{\pi}^d}{}{Re(\tfrac{1}{1 - \lambda \varphi(t)})}{t} = \infty \]
 \end{satz}
 
 \begin{bsp}
   Für die einfache symm. Irrfahrt $\{ Z_n \}$ auf~$\Z^d$ ist
   \[
-    \varphi(t) = \tfrac{1}{d} {\sum}_{k=1}^d \cos(t_k)
+    \varphi(t) = \tfrac{1}{d} {\sum}_{k=1}^d \cos(t_k).
   \]
   Mit der Ungleichung $1 - \cos(u) \geq c_0 u^2$ für alle $u \in \cinterval{- \pi}{\pi}$ folgt
   \[
-    \varphi(t) \geq \tfrac{c_0}{d} \abs{t}^2.
+    \begin{array}{r r c l}
+      & \varphi(t) &\geq& \tfrac{c_0}{d} \abs{t}^2 \\
+      \implies & \tfrac{1}{1 - \lambda \varphi(t)} &\leq& \tfrac{d}{\lambda c_0} \abs{t}^{-2}
+    \end{array}
   \]
-  Es folgt
-  \[
-    \tfrac{1}{1 - \lambda \varphi(t)} \leq \tfrac{d}{\lambda c_0} \abs{t}^{-2}
-  \]
-  Die Funktion $\abs{t}^{-2}$ ist auf $\cointerval{-\pi}{\pi}^d$ für jedes $d \geq 3$ integrierbar.
-  Somit ist die einfache Irrfahrt auf $\Z^d$, $d \geq 3$, transient.
+  Die Funktion $\abs{t}^{-2}$ ist $\forall \, d \geq 3$ auf $\cointerval{-\pi}{\pi}^d$ integrierbar.
+  Somit:
 \end{bsp}
 
 % 2.16
@@ -483,10 +496,10 @@ In diesem Fall kann man die Greensche Funktion exakt berechnen:
     \frac{1 {-} \varphi(t)}{\abs{t}^{\alpha - 1}} = \sum_{\mathclap{n=-\infty}}^\infty \abs{n}^\alpha p(0, n) \abs{t} f(n t)
   \]
   mit $f(x) = (1 - \cos(x))/\abs{x}^\alpha$.
-  Außerdem $\abs{n}^\alpha p(0, n) = c + \epsilon_n$, wobei $\epsilon_n \to 0$ für $\abs{n} \to \infty$.
+  Außerdem ist $\abs{n}^\alpha p(0, n) = c + \epsilon_n$, wobei $\epsilon_n \to 0$ für $\abs{n} \to \infty$.
   Es folgt
   \[
-    \tfrac{1 - \varphi(t)}{\abs{t}^{\alpha - 1}} = \sum_{n=-\infty}^\infty c \abs{t} f(n t) + \sum_{n=-\infty}^\infty \epsilon_n \abs{t} f(n t).
+    \frac{1 - \varphi(t)}{\abs{t}^{\alpha - 1}} = \sum_{n=-\infty}^\infty c \abs{t} f(n t) + \sum_{n=-\infty}^\infty \epsilon_n \abs{t} f(n t).
   \]
   Für $t \to 0$ hat man
   \[
@@ -495,11 +508,12 @@ In diesem Fall kann man die Greensche Funktion exakt berechnen:
     \sum_{n=-\infty}^\infty \epsilon_n \abs{t} f(n t) \to 0.
   \]
   Es folgt für $\alpha < 3$:
-  \[ \lim_{t \to 0} \tfrac{1 - \varphi(t)}{\abs{t}^{\alpha - 1}} = c \Int{-\infty}{\infty}{\tfrac{1 - \cos(x)}{\abs{x}^\alpha}}{x} < \infty \]
-  Folglich ist $\tfrac{1}{1 - \varphi(t)}$ für $\alpha < 2$ integrierbar und somit $\{ Z_n \}$ transient.
-
-  Für $\alpha = 2$ ist $1/(1 - \varphi(t))$ in der Umgebung von null nicht integrierbar und damit $\{ Z_n \}$ rekurrent.
-
+  \[ \lim_{t \to 0} \frac{1 - \varphi(t)}{\abs{t}^{\alpha - 1}} = c \Int{-\infty}{\infty}{\frac{1 - \cos(x)}{\abs{x}^\alpha}}{x} < \infty. \]
+  Folglich ist $1/(1 - \varphi(t))$ für
+  \begin{itemize}
+    \item $\alpha < 2$ integrierbar und somit $\{ Z_n \}$ transient und für
+    \item $\alpha = 2$ in der Umg. von~0 nicht int'bar und damit $\{ Z_n \}$ rekurrent.
+  \end{itemize}
   Für $\alpha > 2$ ist $\sum \abs{x} p(0, x) < \infty$ und somit ist die Irrfahrt rekurrent, da der Erwartungswert der Zuwächse null ist.
 \end{bsp}
 
@@ -509,12 +523,15 @@ In diesem Fall kann man die Greensche Funktion exakt berechnen:
 \section{Erneuerungstheorie}
 
 \begin{situation}
-  Seien $\{ X_k \}_{k \geq 1}$ unabhängige ZVn mit Werten in~$\N$ und $P(X_k \geq 1) > 0$, wobei $\{ X_k \}_{k \geq 2}$ identisch vert. sind.
+  Seien $\{ X_k \}_{k \geq 1}$ unabhängige ZVn mit Werten in~$\N_0$ und $P(X_k \geq 1) > 0$, wobei $\{ X_k \}_{k \geq 2}$ identisch vert. sind.
   Dann definiert
   \[
-  Z_n \coloneqq {\sum}_{k=1}^n X_k + Z_0
+    Z_n \coloneqq {\sum}_{k=1}^n X_k
   \]
-  eine Irrfahrt $\{ Z_n \}_{n \geq 0}$ mit nicht-negativen Zuwächsen auf~$\Z$.
+  eine Irrfahrt $\{ Z_n \}_{n \geq 0}$ mit nicht-negativen Zuwächsen auf~$\Z$. \\
+  Setze $p_k \coloneqq P(X_2 = k)$ für $k \geq 0$.
+  Wir nehmen an, dass
+  \[ a \coloneqq \E[X_2] = {\sum}_{k=1}^\infty k p_k \in \ointerval{0}{\infty}. \]
 \end{situation}
 
 \begin{ziel}
@@ -527,31 +544,27 @@ In diesem Fall kann man die Greensche Funktion exakt berechnen:
 \end{defn}
 
 % 2.18
-\begin{bsp}
-  Setze $p_k \coloneqq P(X_2 = k)$, $k \geq 0$.
-  Wir nehmen an, dass
-  \[ a \coloneqq \E[X_2] = {\sum}_{k=1}^\infty k p_k \in \ointerval{0}{\infty}. \]
-  Definiere
+\begin{rechnung}
+  Def.
   $q_k \coloneqq \tfrac{1}{a} {\sum}_{j=k}^\infty p_j$
   für $k \geq 1$.
   Dann ist ${\sum}_{k=1}^\infty q_k = 1$. \\
   Sei $X_1$ eine ZV mit $P(X_1=k) = q_k$, $k \geq 1$.
   Setze
   \[
-    \begin{array}{r c l}
-      f(s) &\coloneqq& {\sum}_{k=1}^\infty p_k s^k = \E[s^{X_2}], \enspace \abs{s} \leq 1 \\[0.1cm]
-      g(s) &\coloneqq& {\sum}_{k=1}^\infty q_k s^k = \E[s^{X_1}] \\[0.1cm]
-      \psi(s) &\coloneqq& {\sum}_{x=1}^\infty G(0, x) s^x, \enspace \abs{s} < 1
+    \begin{array}{r c l l}
+      f(s) &\coloneqq& {\sum}_{k=1}^\infty p_k s^k = \E[s^{X_2}], & \enspace \abs{s} \leq 1 \\[0.1cm]
+      g(s) &\coloneqq& {\sum}_{k=1}^\infty q_k s^k = \E[s^{X_1}], & \enspace \abs{s} \leq 1 \\[0.1cm]
+      \psi(s) &\coloneqq& {\sum}_{x=1}^\infty G(0, x) s^x, & \enspace \abs{s} < 1
     \end{array}
   \]
   Dann gilt für $\abs{s} < 1$:
   \[ \psi(s) = {\sum}_{k=1}^\infty g(s) f(s)^{k-1} = g(s)/(1 - f(s)) \]
   Außerdem gilt:
-  \[ g(s) = \tfrac{s}{a (1-s)} (1 - f(s)) \]
-  Es folgt:
-  \[ \psi(s) = \sum_{x=1}^\infty \tfrac{1}{a} s^x \]
+  \[ g(s) = \tfrac{1}{a} (1 - f(s)) {\sum}_{x=1}^\infty s^x = \tfrac{s}{a (1-s)} (1 - f(s)) \]
+  Es folgt $\psi(s) = {\sum}_{x=1}^\infty \tfrac{1}{a} s^x$.
   Somit ist $G(0, x) = \tfrac{1}{a}$.
-\end{bsp}
+\end{rechnung}
 
 % 2.19
 \begin{satz}
@@ -560,23 +573,23 @@ In diesem Fall kann man die Greensche Funktion exakt berechnen:
   \[ G(0, x) \xrightarrow{x \to \infty} \tfrac{1}{a}. \]
 \end{satz}
 
-% 2.20
-\begin{lem}
-  Sei $g(\theta)$ integrierbar auf $\cointerval{-\pi}{\pi}$.
-  Dann gilt
-  \[
-    \Int{\cointerval{-\pi}{\pi}}{}{e^{i \theta x} g(\theta)}{\theta} \xrightarrow{\abs{x} \to \infty}
-    \quad (x \in \Z)
-  \]
-\end{lem}
-
-% 2.21
-\begin{lem}
-  \begin{minipage}[t]{0.8 \linewidth}
-    Seien alle $X_k$ identisch verteilt und $\ggT \Set{p}{p_k > 0} = 1$.
-    Dann existiert $L \coloneqq {\lim}_{x \to \infty} G(0, x)$.
-  \end{minipage}
-\end{lem}
+% % 2.20
+% \begin{lem}
+%   Sei $g(\theta)$ integrierbar auf $\cointerval{-\pi}{\pi}$.
+%   Dann gilt
+%   \[
+%     \Int{\cointerval{-\pi}{\pi}}{}{e^{i \theta x} g(\theta)}{\theta} \xrightarrow{\abs{x} \to \infty} \Int{\cointerval{-\pi}{\pi}}{}{g(\theta)}{\theta}
+%     \quad (x \in \Z)
+%   \]
+% \end{lem}
+%
+% % 2.21
+% \begin{lem}
+%   \begin{minipage}[t]{0.8 \linewidth}
+%     Seien alle $X_k$ identisch verteilt und $\ggT \Set{p}{p_k > 0} = 1$.
+%     Dann existiert $L \coloneqq {\lim}_{x \to \infty} G(0, x)$.
+%   \end{minipage}
+% \end{lem}
 
 % 2.22
 \begin{defn}
@@ -618,14 +631,12 @@ Falls $X_k$ nur Werte aus~$\N$ annimmt, so können wir das Verhalten von $H(t) -
 
 \begin{kor}
   $
-    \begin{array}[t]{r c l}
-      P(\gamma(t) = i) &\xrightarrow{t \to \infty}& \tfrac{1}{a} {\sum}_{k=i+1}^\infty p_k, \\[0.15cm]
-      P(\gamma(t) = j) &\xrightarrow{t \to \infty}& \tfrac{1}{a} {\sum}_{k=j}^\infty p_k
+    \begin{array}[t]{r c l l}
+      P(\gamma(t) = i) &\xrightarrow{t \to \infty}& \tfrac{1}{a} {\sum}_{k=i+1}^\infty p_k & \enspace \text{für $i \geq 0$}, \\[0.15cm]
+      P(\chi(t) = j) &\xrightarrow{t \to \infty}& \tfrac{1}{a} {\sum}_{k=j}^\infty p_k & \enspace \text{für $j \geq 0$}
     \end{array}
   $
 \end{kor}
-
-\TODO{Eine der Gleichungen im Korollar sollte $\chi$ beinhalten.}
 
 % Vorlesung vom 23.5.2017
 
@@ -695,6 +706,8 @@ Falls $X_k$ nur Werte aus~$\N$ annimmt, so können wir das Verhalten von $H(t) -
   Es gilt $\pi_y = 1/m(y,y)$.
 \end{satz}
 
+\TODO{Beweisidee aufschreiben}
+
 % Vorlesung vom 30.5.2017
 
 % 2.31
@@ -711,7 +724,7 @@ Falls $X_k$ nur Werte aus~$\N$ annimmt, so können wir das Verhalten von $H(t) -
   Für eine stationäre Verteilung $\{ \mu_x \}_{x \in E}$ gilt
   \[
     \mu_x = {\sum}_{y \in E} \mu_y p^{(n)}(y, x)
-    \quad \text{für alle $x \in E$ und $n \in \N$}
+    \quad \text{für alle $x \in E$ und $n \in \N$.}
   \]
 \end{bem}
 
@@ -749,36 +762,41 @@ Falls $X_k$ nur Werte aus~$\N$ annimmt, so können wir das Verhalten von $H(t) -
 \end{satz}
 
 % 2.36
-\begin{satz}
+\begin{satz}[\emph{Ergodizität}]
   Sei $\{ Z_n \}$ irreduzibel und positiv rekurrent. \\
   Sei $f : E \to \R$ integrierbar bezüglich der stationären Verteilung $\{ \pi_x \}$, \dh{} ${\sum}_{x \in E} \abs{f(x)} \pi_x < \infty$.
   Dann gilt
   \[
-    \tfrac{1}{n} \sum_{k=0}^{n-1} f(Z_k) \xrightarrow{\text{f.\,s.}} \sum_{x \in E} f(x) \pi_x
+    \tfrac{1}{n} \sum_{k=0}^{n-1} f(Z_k) \xrightarrow[n \to \infty]{\text{f.\,s.}} \sum_{x \in E} f(x) \pi_x
   \]
 \end{satz}
 
-\begin{bsp}
-  Für $f(y) \coloneqq \ind \{ y = x_0 \}$ für eine $x_0 \in E$ erhalten wir
-  \[ \tfrac{1}{n} \sum_{k=0}^{n-1} \ind \{ Z_k = x_0 \} \xrightarrow{\text{f.\,s.}} \pi_{x_0}. \]
-  Es folgt mit majorisierter Konvergenz:
-  \[ \tfrac{1}{n} \sum_{k=0}^{n-1} p^{(k)}(x, x_0) \xrightarrow{n \to \infty} \pi_{x_0}. \]
-\end{bsp}
+\TODO{Beweisidee}
 
 \begin{bsp}
-  Sei $\{ Z_n \}$ irreduzibel, periodisch mit Periode $p > 1$.
-  Dann gilt
+  Für $f(y) \coloneqq \ind \{ y = x_0 \}$ für eine $x_0 \in E$ erhalten wir
   \[
-    p^{(dk)}(x_0, x_0) \xrightarrow d / m(x_0, x_0).
+    \begin{array}{r l c l}
+      & \tfrac{1}{n} \sum_{k=0}^{n-1} \ind \{ Z_k = x_0 \} &\xrightarrow[n \to \infty]{\text{f.\,s.}}& \pi_{x_0}, \\
+      \implies & \tfrac{1}{n} \sum_{k=0}^{n-1} p^{(k)}(x, x_0) &\xrightarrow[n \to \infty]{}& \pi_{x_0}.
+    \end{array}
   \]
 \end{bsp}
+
+% \begin{bsp}
+%   Sei $\{ Z_n \}$ irreduzibel, periodisch mit Periode $p > 1$.
+%   Dann gilt
+%   \[
+%     p^{(dk)}(x_0, x_0) \xrightarrow[n \to \infty]{} d / m(x_0, x_0).
+%   \]
+% \end{bsp}
 
 % 2.37
 \begin{lem}
   Sei $\{ Z_n \}$ eine irreduzible Kette mit der Periode $d \geq 1$. \\
   Für jedes $x \in E$ existiert ein $m_x \geq 1$ mit
   \[
-    p^{(md)}(x, x) > 0
+    p^{(md)}(x, x) > 0 \quad
     \text{für alle $m \geq m_x$.}
   \]
 \end{lem}
@@ -795,12 +813,14 @@ Falls $X_k$ nur Werte aus~$\N$ annimmt, so können wir das Verhalten von $H(t) -
   In anderen Worten: Die Mengen $C_i$ werden zyklisch besucht.
 \end{prop}
 
+\begin{samepage}
+
 % 2.39
 \begin{bem}
   Die Markovkette $\{ Z_{md} \}_{m \geq 0}$ ist nicht irreduzibel (für $d > 1$) aber die Restriktion auf jedes $C_i$ ist irreduzibel und außerdem aperiodisch.
   Mit dem Ergodensatz erhalten wir
   \[
-    p^{(md)}(x, y) \xrightarrow{m \to \infty} d / m(y, y)
+    p^{(md)}(x, y) \xrightarrow[m \to \infty]{} d / m(y, y)
     \quad \text{für alle $x, y \in C_i$}
   \]
   Falls $x \in C_0$ und wir wollen $p^{(md + r)}(x, y)$ berechnen, so reicht es $y \in C_r$ zu betrachten.
@@ -815,7 +835,7 @@ Falls $X_k$ nur Werte aus~$\N$ annimmt, so können wir das Verhalten von $H(t) -
   \]
   Es gilt dann:
   \[
-    p^{(md+r)}(x, y) \xrightarrow{m \to \infty} F_r(x, y) d / m(y, y)
+    p^{(md+r)}(x, y) \xrightarrow[m \to \infty]{} F_r(x, y) d / m(y, y)
   \]
 \end{bem}
 
@@ -825,12 +845,18 @@ Falls $X_k$ nur Werte aus~$\N$ annimmt, so können wir das Verhalten von $H(t) -
 %  Dann gilt $X_n \xrightarrow{\omega} U_{\cinterval{0}{1}}$, wobei $U_{\cinterval{0}{1}}$ die uniforme Verteilung auf~$\cinterval{0}{1}$ ist.
 %\end{bsp}
 
+\columnbreak
+
 % §3. Martingale
 \section{Martingale}
 
+\end{samepage}
+
 % §3.1. Definition und einfache Eigenschaften
 
-Sei im Folgenden $(\Omega, \mathcal{F}, P)$ ein Maßraum.
+\begin{setting}
+  Sei im Folgenden $(\Omega, \mathcal{F}, P)$ ein Maßraum.
+\end{setting}
 
 % 3.1
 \begin{defn}
@@ -841,8 +867,11 @@ Sei im Folgenden $(\Omega, \mathcal{F}, P)$ ein Maßraum.
 % 3.2
 \begin{defn}
   Sei $X$ eine ZV mit $\E[\abs{X}] < \infty$.
-  Dann heißt $\widehat{X}$ \emph{bedingte Erwartung} von~$X$ bzgl. $\sigma$-Algebra~$\mathcal{A}$ falls
-  $\hat{X}$ $\mathcal{A}$-messbar ist und $\E[X \ind_A] = \E[\hat{X} \ind_A]$ für alle $A \in \mathcal{A}$.
+  Eine ZVe $\widehat{X}$ heißt \emph{bedingte Erwartung} von~$X$ bzgl. einer $\sigma$-Alg.~$\mathcal{A}$, falls sie $\mathcal{A}$-messbar ist u.
+  \[
+    \E[X \ind_A] = \E[\widehat{X} \ind_A] \quad
+    \text{für alle $A \in \mathcal{A}$.}
+  \]
 \end{defn}
 
 % 3.2
@@ -894,10 +923,10 @@ Sei im Folgenden $(\Omega, \mathcal{F}, P)$ ein Maßraum.
   Für eine Folge $\{ M_n \}$ von ZVen heißt $\{ \sigma(M_0, M_1, \ldots, M_n) \}_{n \geq 0}$ \emph{natürliche Filtration}.
 \end{defn}
 
-% 3.5
-\begin{lem}
-  Ist $\{ M_n \}$ ein Martingal bzgl. einer bel. Filtration, so ist $\{ M_n \}$ auch ein Martingal bzgl. der natürlichen Filtration.
-\end{lem}
+% % 3.5
+% \begin{lem}
+%   Ist $\{ M_n \}$ ein Martingal bzgl. einer bel. Filtration, so ist $\{ M_n \}$ auch ein Martingal bzgl. der natürlichen Filtration.
+% \end{lem}
 
 \begin{defn}
   $
@@ -1008,15 +1037,14 @@ Sei im Folgenden $(\Omega, \mathcal{F}, P)$ ein Maßraum.
 
 % §2. Fast sichere Konvergenz
 
-Sei $\{ M_n \}$ eine Folge von ZVen
-Seien $a < b$.
+Sei $\{ M_n \}$ eine Folge von ZVen und $a < b$ reelle Zahlen.
 Definiere
 \[
   \arraycolsep=2pt
   \begin{array}{l c l}
     N_0 &\coloneqq& -1, \\
-    N_{2k-1} &\coloneqq& \inf \Set{n > N_{2k-2}}{M_n < a}, \\
-    N_{2k} &\coloneqq& \inf \Set{n > N_{2k}}{M_n \geq b}
+    N_{2k-1} &\coloneqq& \inf \Set{n > N_{2k-2}}{M_n \leq a}, \\
+    N_{2k} &\coloneqq& \inf \Set{n > N_{2k-1}}{M_n \geq b}.
   \end{array}
 \]
 Die Anzahl der \textit{Aufkreuzungen} ist dann
@@ -1030,17 +1058,34 @@ Die Anzahl der \textit{Aufkreuzungen} ist dann
   \[ \E[ U_n ] \leq (\E[ (M_n - a)^{+} ] - \E[ (M_0 - a)^{+} ]) / (b - a). \]
 \end{satz}
 
+% Beweis: https://fenix.tecnico.ulisboa.pt/downloadFile/563568428738000/InesAlmeida_Martingales.pdf
+\begin{beweisskizze}
+  Def. Submartingal $\{ Y_n \}$ durch $Y_n \coloneqq \max \{ a, M_n \}$. \\
+  Sei $\{ H_m \}$ Folge mit $H_m \coloneqq \ind \{ \ex{k} N_{2k-1} < m \leq N_{2k} \}$.
+  Dann gilt
+  \[ (H \cdot Y)_n \geq U_n \cdot (b - a). \]
+  Die Aussage folgt nun zusammen mit der Abschätzung
+  \[ \E[(H \cdot Y)_n] = \E[Y_n - Y_0] - \E[((1-H) \cdot Y)_n] \leq \E[Y_n - Y_0]. \]
+\end{beweisskizze}
+
 % 3.20
 \begin{satz}[\emph{Martingalkonvergenzsatz}] \mbox{}\\
   Sei $\{ M_n \}$ ein Submartingal mit ${\sup}_{n \geq 0} \E [ M_n^{+} ] < \infty$.
   Dann existiert eine ZV $M_\infty$ mit $\E[ \abs{M_\infty} ] < \infty$ sodass $M_n \to M_\infty$ fast-sicher.
 \end{satz}
 
+\begin{beweisskizze}
+  Aus der Aufkreuzungsungleichung folgt, dass $\P({\lim}_{n \to \infty} U_n < \infty) = 1$.
+  Somit ist
+  \[ \P({\cup}_{a, b \in \Q} \{ {\liminf}_{n \to \infty} M_n < a < b < {\limsup}_{n \to \infty} M_n \}) = 0. \]
+  Dies ist äquivalent dazu, dass $\{ M_n \}$ fast-überall konvergiert.
+\end{beweisskizze}
+
 % 3.21
 \begin{bsp}[\textit{Polya-Urne}]
   Urne mit $b$ blauen und $r$ roten Kugeln.
   In jeder Runde wird eine Kugel gezogen und mit einer weiteren Kugel gleicher Farbe zurückgelegt.
-  Sei $R_n$ di Anzahl von zugefügten roten Kugeln nach $n$ Runden.
+  Sei $R_n$ die Anzahl von zugefügten roten Kugeln nach $n$ Runden.
 
   Man kann zeigen: $\{ M_n \coloneqq (r + R_n) / (r + b + n) \}_{n \geq 0}$ ist ein Martingal.
   Außerdem gilt $\sup \E[M_n^{+}] \leq 1$
@@ -1365,6 +1410,8 @@ Definiere
   schon Rekurrenz folgt.
 \end{bsp}
 
+\columnbreak
+
 \section{Charakt. von (pos.) Rekurrenz / Transienz}
 
 % Vorlesung vom 11.7.2017
@@ -1566,7 +1613,7 @@ Definiere
 \begin{bsp}
   Sei $P$ ein substochastischer Kern und
   \[ G(x, y) \coloneqq {\sum}_{n=0}^\infty p^{(n)}(x, y) \]
-  die \textit{Greensche Funktion}.
+  die \textit{Green'sche Funktion}.
   Für festes $y \in E$ betrachte die Funktion
   \[ h_y(x) \coloneqq G(x, y). \]
   Ist $y$ \textit{transient} (\dh{} $G(y, y)$), so ist $h_y$ superharmonisch. \\
