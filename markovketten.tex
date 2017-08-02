@@ -63,7 +63,7 @@
 
 % 1.1
 \begin{defn}
-  Eine Folge von ZVen $\{ X_n \in E \}$ heißt \emph{Markovkette} \textit{auf~$E$} mit \textit{Übergangsmatrix}~$p$, falls für alle $n \geq 1$ und $x_0, \ldots, x_{n+1} \in E$ gilt:
+  Eine Folge von ZVn $\{ X_n \in E \}$ heißt \emph{Markovkette} \textit{auf~$E$} mit \textit{Übergangsmatrix}~$p$, falls für alle $n \geq 1$ und $x_0, \ldots, x_{n+1} \in E$ gilt:
   \[
     \begin{array}{r l}
       & \P(X_{n+1} = x_{n+1} \,|\, X_0=x_0, \ldots, X_n=x_n) \\
@@ -861,7 +861,7 @@ Falls $X_k$ nur Werte aus~$\N$ annimmt, so können wir das Verhalten von $H(t) -
 % 3.1
 \begin{defn}
   Eine wachsende Folge $\Filt_0 \subseteq \Filt_1 \subseteq \ldots$ von $\sigma$-Algebren heißt \emph{Filtration}.
-  Eine Folge von ZVen $\{ M_n \}$ heißt \emph{adaptiert} an die Filtration $\{ \Filt_n \}$, falls $M_n$ $\Filt_n$-messbar ist für jedes $n \geq 0$.
+  Eine Folge von ZVn $\{ M_n \}$ heißt \emph{adaptiert} an die Filtration $\{ \Filt_n \}$, falls $M_n$ $\Filt_n$-messbar ist für jedes $n \geq 0$.
 \end{defn}
 
 % 3.2
@@ -914,13 +914,13 @@ Falls $X_k$ nur Werte aus~$\N$ annimmt, so können wir das Verhalten von $H(t) -
 \end{bem}
 
 \begin{bsp}
-  Seien $\{ X_i \}$ unabh. ZVen mit $\E[X_i] = 0$ for alle $i \geq 0$.
+  Seien $\{ X_i \}$ unabh. ZVn mit $\E[X_i] = 0$ for alle $i \geq 0$.
   Sei $M_n \coloneqq X_1 + \ldots + X_n$.
   Dann ist $\{ M_n \}$ ein Martingal bzgl. der Filtration $\{ \Filt_n \}$ mit $\Filt_n \coloneqq \sigma(X_1, \ldots, X_n)$.
 \end{bsp}
 
 \begin{defn}
-  Für eine Folge $\{ M_n \}$ von ZVen heißt $\{ \sigma(M_0, M_1, \ldots, M_n) \}_{n \geq 0}$ \emph{natürliche Filtration}.
+  Für eine Folge $\{ M_n \}$ von ZVn heißt $\{ \sigma(M_0, M_1, \ldots, M_n) \}_{n \geq 0}$ \emph{natürliche Filtration}.
 \end{defn}
 
 % % 3.5
@@ -981,7 +981,7 @@ Falls $X_k$ nur Werte aus~$\N$ annimmt, so können wir das Verhalten von $H(t) -
   \[
     \begin{array}{c l}
       & \E[ W_{n+1} | \Filt_n ] \\
-      = & \E[ W_n + H_{n+1} (Y_{n+1} - Y_n) | \Filt_n ] \\
+      %= & \E[ W_n + H_{n+1} (Y_{n+1} - Y_n) | \Filt_n ] \\
       = & W_n + \E[ H_{n+1} (Y_{n+1} - Y_n) | \Filt_n ] \\
       = & W_n + H_{n+1} \E[ Y_{n+1} - Y_n | \Filt_n ] \\
       = & W_n + H_{n+1} (\E[ Y_{n+1} | \Filt_n ] - Y_n) \\
@@ -1023,9 +1023,11 @@ Falls $X_k$ nur Werte aus~$\N$ annimmt, so können wir das Verhalten von $H(t) -
 
 % 3.17
 \begin{bsp}
-  Sei $\{ M_n \}$ eine Folge von ZVen und sei $A \in \Bor(\R)$.
+  Sei $\{ M_n \}$ eine Folge von ZVn und sei $A \in \Bor(\R)$.
   Dann ist $T = \inf \Set{n \geq 0}{M_n \in A}$ eine Stoppzeit bzgl. $\{ \sigma(M_0, \ldots, M_n) \}_n$.
 \end{bsp}
+
+\begin{samepage}
 
 % 3.18
 \begin{satz}[\emph{Optional Stopping Theorem 1}] \mbox{} \\
@@ -1036,8 +1038,11 @@ Falls $X_k$ nur Werte aus~$\N$ annimmt, so können wir das Verhalten von $H(t) -
 % Vorlesung vom 20.6.2017
 
 % §2. Fast sichere Konvergenz
+\subsection{Fast sichere Konvergenz}
 
-Sei $\{ M_n \}$ eine Folge von ZVen und $a < b$ reelle Zahlen.
+\end{samepage}
+
+Sei $\{ M_n \}$ eine Folge von ZVn und $a < b$ reelle Zahlen.
 Definiere
 \[
   \arraycolsep=2pt
@@ -1075,7 +1080,7 @@ Die Anzahl der \textit{Aufkreuzungen} ist dann
 \end{satz}
 
 \begin{beweisskizze}
-  Aus der Aufkreuzungsungleichung folgt, dass $\P({\lim}_{n \to \infty} U_n < \infty) = 1$.
+  Aus der Aufkreuzungsungleichung folgt, dass $\P({\lim}_{n \to \infty} U_n < \infty) = 1$ (unabh. von~$a$ und~$b$).
   Somit ist
   \[ \P({\cup}_{a, b \in \Q} \{ {\liminf}_{n \to \infty} M_n < a < b < {\limsup}_{n \to \infty} M_n \}) = 0. \]
   Dies ist äquivalent dazu, dass $\{ M_n \}$ fast-überall konvergiert.
@@ -1105,9 +1110,10 @@ Die Anzahl der \textit{Aufkreuzungen} ist dann
 % Vorlesung vom 22.6.2017
 
 % §3. Martingalungleichungen
+\subsection{Martingalungleichungen}
 
 % 3.23
-\begin{satz}
+\begin{satz}[\emph{Optional Stopping Theorem 2}] \mbox{}\\
   Sei $\{ M_n \}$ ein Submartingal und sei $T$ eine Stoppzeit bzgl. derselben Filtration mit $P(T \leq N) = 1$ für ein $N \geq 1$.
   Dann gilt:
   \[
@@ -1118,11 +1124,23 @@ Die Anzahl der \textit{Aufkreuzungen} ist dann
 % 3.24
 \begin{satz}[\emph{Doob'sche Ungleichung}] \mbox{}\\
   Sei $\{ M_n \}$ ein Submartingal.
-  Dann gilt:
+  Setze $M_n^* \coloneqq \max \{ M_1, \ldots, M_n \}$.
+  Dann:
   \[
-    P(\max_{k \leq n} M_k \geq \lambda) \leq 1/\lambda \cdot \E[ M_n \ind \{ \max_{k \leq n} M_k \geq \lambda \}] \leq 1/\lambda \cdot \E[ M_n^{+} ].
+    \lambda \cdot P(M_n^* \geq \lambda) \leq \E[ M_n \ind \{ M_n^* \geq \lambda \}] \leq \E[ M_n^{+} ].
   \]
 \end{satz}
+
+\begin{beweis}
+  Definiere disjunkte Mengen $F_1, \ldots, F_n$ durch
+  \[
+    F_k \coloneqq \{ M_1 < \lambda, \ldots, M_{k-1} < \lambda, M_k \geq \lambda \} \in \mathcal{F}_n.
+  \]
+  Summieren folg. Ungleichung für $k = 1, \ldots, n$ liefert Behauptung:
+  \[
+    \lambda \cdot \P(M_k \geq \lambda) \leq \E[ M_k \cdot \ind \{ M_k \geq \lambda \} \leq \E[ M_n \cdot \ind \{ M_k \geq \lambda \} ].
+  \]
+\end{beweis}
 
 \begin{bem}
   Die Doob'sche Ungl. verbessert die Markov-Ungleichung.
@@ -1130,7 +1148,7 @@ Die Anzahl der \textit{Aufkreuzungen} ist dann
 
 % 3.25
 \begin{kor}[\emph{Kolmogorov-Ungleichung}]
-  Seien $\{ X_i \}$ unabh. ZVen mit $\E[ X_i ] = 0$ und $\E[ X_i^2 ] < \infty$.
+  Seien $\{ X_i \}$ unabh. ZVn mit $\E[ X_i ] = 0$ und $\E[ X_i^2 ] < \infty$.
   Setze $S_k = X_1 + \ldots + X_k$.
   Dann gilt:
   \[ \P(\max_{k \leq n} \abs{S_k} \geq \lambda) \leq \var(S_n) / \lambda^2. \]
@@ -1140,7 +1158,7 @@ Die Anzahl der \textit{Aufkreuzungen} ist dann
 \begin{satz}
   Ist $\{ M_n \}$ ein Submartingal, dann gilt für jedes $p \in \ointerval{1}{\infty}$:
   \[
-    \E[ (\max_{k \leq n})^p ] \leq (p / (p-1))^p \E[ (M_n^{+})^p ]
+    \E[ (\max_{k \leq n} M_k^+)^p ] \leq (p / (p-1))^p \E[ (M_n^{+})^p ]
   \]
 \end{satz}
 
@@ -1149,9 +1167,12 @@ Die Anzahl der \textit{Aufkreuzungen} ist dann
   Sei $\{ M_n \}$ ein Martingal.
   Dann gilt für jedes $p \in \ointerval{1}{\infty}$:
   \[
-    \E[ (\max_{k \leq n} \abs{M_k})^p \leq (p / (p-1))^p \E[ \abs{M_n}^p. ]
+    \E[ (\max_{k \leq n} \abs{M_k})^p ] \leq (p / (p-1))^p \E[ \abs{M_n}^p ]
   \]
 \end{kor}
+% Beweis: https://fabricebaudoin.wordpress.com/2012/04/10/lecture-11-doobs-martingale-maximal-inequalities/
+
+\subsection{Gleichgradige Integrierbarkeit, Konvergenz in $L^1$}
 
 % §4. Konvergenz in $L^p$, $p > 1$
 
@@ -1172,7 +1193,7 @@ Die Anzahl der \textit{Aufkreuzungen} ist dann
 
 % 3.29
 \begin{lem}
-  Sei $(\Omega, \mathcal{F}, P)$ ein Wkts-Raum, $X \in L^1(\Omega, \mathcal{F}, P)$ und $\{ \Alg_i \}_{i \in I}$ eine Famile von $\sigma$-Algebren mit $\Alg_i \subseteq \mathcal{F}$ für alle $i \in I$. \\
+  Sei $(\Omega, \mathcal{F}, P)$ ein Wkts-Raum, $X \in L^1(\Omega, \mathcal{F}, P)$ und $\{ \Alg_i \}_{i \in I}$ die Famile aller $\sigma$-Subalgebren von~$\mathcal{F}$. \\
   Dann ist die Familie $\{ \E[ X | \Alg_i ] \}_{i \in I}$ gleichgradig integrierbar.
 \end{lem}
 
@@ -1189,21 +1210,26 @@ Die Anzahl der \textit{Aufkreuzungen} ist dann
     \item $\{ M_n \}$ ist gleichgradig integrierbar
     \item $\{ M_n \}$ konvergiert fast sicher und in~$L^1$
     \item $\{ M_n \}$ konvergiert in~$L^1$
-    \item $\{ \ex{M \in L^1} \fa{n \geq 0} M_n = \E[ M | \Filt_n ] \}$
+    \item $\ex{M \in L^1} \fa{n \geq 0} M_n = \E[ M | \Filt_n ] \text{ f.\,s.}$
   \end{itemize}
 \end{satz}
 
 % 3.32
-\begin{satz}
-  Sei $\{ \mathcal{F}_n \}$ eine Filtration.
-  Betrachte $\mathcal{F}_\infty \coloneqq \sigma(\cup_{n=0}^\infty \mathcal{F}_n)$
+\begin{satz}[\emph{Lévy's `Upward' Thm}]
+  Sei $\xi \in L^1(\Omega, \mathcal{F}, \P)$ und $\{ \mathcal{F}_n \}$ eine Filtration.
+  Setze $\mathcal{F}_\infty \coloneqq \sigma(\cup_{n=0}^\infty \mathcal{F}_n)$ und $M_n \coloneqq \E[ \xi \,|\, \mathcal{F}_n ]$.
+  Dann gilt für das gleichmäßig beschränkte Martingal $\{ M_n \}$:
+  \[
+    M_n \xrightarrow[n \to \infty]{} \E[ \xi \,|\, \mathcal{F}_\infty ]
+    \quad \text{fast-sicher und in $L^1$.}
+  \]
 \end{satz}
 
 % 3.33
-\begin{bsp}
-  Seien $\{ X_i \}$ unabhängig und $\tau \coloneqq \cap_{n \geq 1} \sigma(X_n, X_{n+1}, \ldots)$ die terminale $\sigma$-Algebra.
-  Dann folgt aus dem vorh. Satz, dass $P(A) \in \{ 0, 1 \}$ für alle $A \in \tau$.
-\end{bsp}
+\begin{kor}[\textit{Kolmogorow's 0-1--Gesetz}]
+  Seien $\{ X_i \}$ unabh. ZVn und $\tau \coloneqq \cap_{n \geq 1} \sigma(X_n, X_{n+1}, \ldots)$ die termin. $\sigma$-Algebra.
+  Dann folgt für alle $A \in \tau$, dass $\ind_A = \P(A)$ f.\,s. und somit $P(A) \in \{ 0, 1 \}$.
+\end{kor}
 
 \begin{bsp}
   Betrachte eine Lipschitz-stetige Funktion $f : \cointerval{0}{1} \to \R$.
@@ -1214,7 +1240,7 @@ Die Anzahl der \textit{Aufkreuzungen} ist dann
       M_n &\coloneqq& 2^n (f(X_n + 1/2^n) - f(X_n)).
     \end{array}
   \]
-  Dies sind ZVen auf $\Omega = \cointerval{0}{1}$ mit dem Lebesgue-Maß.
+  Dies sind ZVn auf $\Omega = \cointerval{0}{1}$ mit dem Lebesgue-Maß.
   Dann ist $\{ M_n \}$ ein gleichgradig integrierbares Martingal.
   Somit gibt es ein $M \in L^1$ mit $M_n \xrightarrow{n \to \infty} M$ fast-sicher und in~$L^1$.
   Es gilt dann
@@ -1225,6 +1251,7 @@ Die Anzahl der \textit{Aufkreuzungen} ist dann
 \end{bsp}
 
 % §6. Optional Stopping Theorem
+\subsection{Optional Stopping Theorem}
 
 % 3.35
 \begin{satz}
@@ -1245,7 +1272,7 @@ Die Anzahl der \textit{Aufkreuzungen} ist dann
 \end{satz}
 
 % 3.37
-\begin{satz}[\emph{Optional Stopping Theorem 2}] \mbox{}\\
+\begin{satz}[\emph{Optional Stopping Theorem 3}] \mbox{}\\
   Seien $S \leq T$ zwei Stoppzeiten.
   Ist $\{ M_{T \wedge n} \}$ ein gleichgradig integrierbares Submartingal, so gilt
   \[
@@ -1256,9 +1283,12 @@ Die Anzahl der \textit{Aufkreuzungen} ist dann
 % Kapitel 4: Rekurrenz und Transienz mithilfe von Sub- und Supermartingalen
 \section{Rekurrenz/Transienz mit Martingaltheorie}
 
-% §1. Rekurrenz und Transienz von Folgen nichtnegativer ZVen
+% §1. Rekurrenz und Transienz von Folgen nichtnegativer ZVn
+\subsection{Rekurrenz/Transienz von Folgen nichtneg. ZVn}
 
-Sei $\{ Y_n \}$ eine Folge nichtnegativer ZVen.
+\begin{setting}
+  Sei $\{ Y_n \}$ eine Folge nichtnegativer ZVn.
+\end{setting}
 
 % 4.1
 \begin{defn}
@@ -1273,16 +1303,22 @@ Sei $\{ Y_n \}$ eine Folge nichtnegativer ZVen.
   Falls ein $M > 0$ mit $\E[ Y_{n+1} | Y_n = x_n, \ldots, Y_0 = x_0 ] \leq x_n$ für alle $x_n \geq M$ existiert, so ist $\{ Y_n \}$ rekurrent.
 \end{satz}
 
-Definiere $U_n^{(k)} \coloneqq Y_{k+n} \cdot \ind \{ \min(Y_k, Y_{k+1}, \ldots, Y_{n+k-1}) \geq M \}$.
+\begin{beweisskizze}
+  Es reicht zu zeigen, dass $\P(\ex{m \geq k} Y_m \leq M) = 1$ für alle $k \in \N$.
+  Sei dazu $U_n^{(k)} \coloneqq Y_{k+n} \cdot \ind \{ Y_k \geq M, \ldots, Y_{n+k-1} \geq M \}$.
+  Dann ist $\{ U_n^{(k)} \}_{n \in \N}$ ein nichtnegatives Supermartingal.
+  Somit gibt es $U_\infty^{(k)}$ mit $U_n^{(k)} \to U_\infty^{(k)}$ fast sicher.
+  Aus
+  \[
+    \begin{array}{r l c l}
+      & \{ \fa{m \geq k} Y_m > M \} &=& \{ U_\infty^{(k)} > 0 \} \\
+      \subseteq& \{ Y_n \xrightarrow{} U_\infty^{(k)} \} &\subseteq& \Omega \setminus \{ {\limsup}_{n \to \infty} Y_n = \infty \}
+    \end{array}
+  \]
+  folgt, dass $\P(\{ \fa{m \geq k} Y_m > M \}) = 0$.
+\end{beweisskizze}
 
-% 4.3
-\begin{lem}
-  \begin{minipage}[t]{0.8 \linewidth}
-    Unter Vor. des Satzes:
-    Sei $\Filt_n^{(k)} \coloneqq \sigma(Y_0, Y_1, \ldots, Y_{n+k})$. \\
-    Dann ist $\{ U_n^{(k)} \}$ ein Supermartingal bzgl. $\{ F_n^{(k)} \}$.
-  \end{minipage}
-\end{lem}
+% in der Beweisskizze: Lemma 4.3
 
 % 4.4
 \begin{satz}
@@ -1296,18 +1332,29 @@ Definiere $U_n^{(k)} \coloneqq Y_{k+n} \cdot \ind \{ \min(Y_k, Y_{k+1}, \ldots, 
   % (jedes $\{ 0, \ldots, R \}$, $R < T$, wird nur endlich oft besucht.)
 \end{satz}
 
-Im Folgenden sei $\tau \coloneqq \inf \Set{n \geq 1}{Y_n \leq r}$.
+\begin{beweisidee}
+  Folgt aus dem Martingalkonvergenzsatz für das Submartingal $\{ V_n \}$ mit
+  $V_n \coloneqq \max \{ M, Y_n \} \leq T$.
+\end{beweisidee}
+
+\begin{setting}
+  Setze $\tau \coloneqq \inf \Set{n \geq 1}{Y_n \leq r}$ und $\tilde{Y}_n \coloneqq Y_{n \wedge \tau}$.
+\end{setting}
 
 % 4.5
 \begin{satz}
-  Angenommen, für die Folge $\{ \tilde{Y}_n \}$ mit $\tilde{Y}_n \coloneqq Y_{n \wedge \tau}$ gilt
+  Angenommen, es gibt ein $\epsilon > 0$ mit
   \[
     \E[ \tilde{Y}_{n+1} | \sigma(Y_0, \ldots, Y_n) ] \leq \tilde{Y}_n - \epsilon \ind \{ \tau > n \}
-    \quad \text{für ein $\epsilon > 0$}.
+    \quad \text{für alle $n \in \N$}.
   \]
   Dann gilt für jeden konst. Startwert $Y_0$ die Ungleichung
   \[ \E[\tau] \leq Y_0 / \epsilon < \infty. \]
 \end{satz}
+
+\begin{beweis}
+  $0 \leq \E[ \tilde{Y}_{n+1} ] \leq Y_0 - \epsilon \cdot {\sum}_{k=0}^n \P(\tau > k) \leq Y_0 - \epsilon \cdot \E[\tau]$
+\end{beweis}
 
 % 4.6
 \begin{satz}
@@ -1320,22 +1367,38 @@ Im Folgenden sei $\tau \coloneqq \inf \Set{n \geq 1}{Y_n \leq r}$.
   Dann gilt $\E[ \tau ] = \infty$.
 \end{satz}
 
+\begin{beweisskizze}
+  Zunächst gilt $\E[ \abs{\tilde{Y}_{n+1} - \tilde{Y}_n} ] \leq M \cdot \P(\tau > n)$ für alle~$n$.
+  Es folgt $\E[ \tilde{Y}_{n+1} ] \leq \E[ Y_0 ] + M \cdot {\sum}_{k=0}^n \P(\tau > k) \leq \E[ Y_0 ] + M \cdot \E[\tau]$.
+  Wäre $\E[\tau] < \infty$, so würde $\tilde{Y}_n \to Y_\tau$ konvergieren und es wäre
+  \[
+    \E[Y_\tau] \geq \E[\tilde{Y}_n] \geq \E[Y_0] > r \geq \E[Y_\tau].
+  \]
+\end{beweisskizze}
+
 % Vorlesung vom 6.7.2017
 
 % §2. Transienz und Rekurrenz von Markovketten
+\subsection{Transienz und Rekurrenz von Markovketten}
 
-Sei $\{ Z_n \}$ eine Markovkette auf~$\N_0$.
-Definiere
-\[
-  \arraycolsep=2pt
-  \begin{array}{l l l l l l}
-    m_1(x) &\coloneqq& \E[ Z_1 - Z_0 &| Z_0 = x ] &=& {\sum}_{k \in \Z} k p(x, x + k), \\
-    m_2(x) &\coloneqq& \E[ (Z_1 - Z_0)^2 &| Z_0 = x ] &=& {\sum}_{k \in \Z} k^2 p(x, x + k).
-  \end{array}
-\]
+\begin{setting}
+  Sei $\{ Z_n \}$ eine Markovkette auf~$\N_0$.
+  Definiere
+  \[
+    \arraycolsep=2pt
+    \begin{array}{l l l l l l}
+      m_1(x) &\coloneqq& \E[ Z_1 - Z_0 &| Z_0 = x ] &=& {\sum}_{k \in \Z} k p(x, x + k), \\
+      m_2(x) &\coloneqq& \E[ (Z_1 - Z_0)^2 &| Z_0 = x ] &=& {\sum}_{k \in \Z} k^2 p(x, x + k).
+    \end{array}
+  \]
+\end{setting}
+
+\begin{frage}
+  Unter welchen Voraussetzungen an $m_1$, $m_2$ ist $\{ Z_n \}$ (positiv) rekurrent oder transient?
+\end{frage}
 
 \begin{bem}
-  Falls $m_1(x) \leq - \epsilon$ für alle $x \geq x_0$, so können wir direkt den vorletzten Satz verwenden:
+  Falls $m_1(x) \leq - \epsilon$ für alle $x \geq x_0$, so folgt positive Rekurrenz aus dem vorletzten Satz:
   Die Stoppzeit $\tau_r \coloneqq \min \Set{n \geq 0}{Z_n \leq r}$ hat endlichen Erwartungswert für jedes $r \geq x_0$.
 \end{bem}
 
@@ -1345,15 +1408,15 @@ Definiere
 
 % 4.7
 \begin{satz}
-  Falls es ein $\epsilon > 0$ gibt mit
+  Falls es ein $x_0 \in \N$ und ein $\epsilon > 0$ gibt mit
   \[
-    \fa{x \geq x_0} 2 x m_1(x) + m_2(x) \leq - \epsilon,
+    \fa{x \geq x_0} 2x \cdot m_1(x) + m_2(x) \leq - \epsilon,
   \]
   so ist die Kette $\{ Z_n \}$ positiv rekurrent.
 \end{satz}
 
 \begin{beweisidee}
-  Betrachte $Y_n = Z_n^2$.
+  Betrachte $Y_n \coloneqq Z_n^2$.
   Dann gilt
   \[
     \E[ Y_{n+1} - Y_n | \sigma(Z_0, \ldots, Z_n) ] \leq - \epsilon
@@ -1371,7 +1434,7 @@ Definiere
 
 % 4.8
 \begin{satz}
-  Sei $\{ Z_n \}$ eine irred. Kette mit
+  Sei $\{ Z_n \}$ irred. mit
   % Bem: es ist möglich, ohne folgende technische Bedingung auszukommen
   $\abs{Z_{n+1} - Z_n} \leq B$ fast-sicher für alle $n$ und ein $B > 0$.
   Außerdem gelte ${\inf}_{x} m_2(x) > 0$.
@@ -1380,6 +1443,9 @@ Definiere
     \item Falls $\fa{x \geq x_2} 2 x m_1(x) \geq (1 + \epsilon) m_2(x)$, so ist $\{ Z_n \}$ transient.
   \end{itemize}
 \end{satz}
+
+% siehe: https://arxiv.org/pdf/1612.01592.pdf, Corollary 2.11 und Theorem 2.18
+\TODO{Beweisidee beschreiben?}
 
 % 4.9
 \begin{bsp}
@@ -1395,15 +1461,15 @@ Definiere
   \[
     \arraycolsep=2pt
     \begin{array}{r l l}
-      \E[ X_{n+1} - X_n | Z_n = x ] & = \ldots = & \tfrac{1/2 - 1/d}{\norm{x}} + O(1 / \norm{x}^2) \\
-      \E[ (X_{n+1} - X_n)^2 | Z_n = x ] & = \ldots = & 1/d + O(1 / \norm{x})
+      \E[ X_{n+1} - X_n \,|\, Z_n = x ] & = \ldots = & \tfrac{1/2 - 1/d}{\norm{x}} + O(1 / \norm{x}^2) \\
+      \E[ (X_{n+1} - X_n)^2 \,|\, Z_n = x ] & = \ldots = & 1/d + O(1 / \norm{x})
     \end{array}
   \]
   Für $d = 1$ ist also
-  \[ \E[ X_{n+1} - X_n | X_n = x ] \leq (1-\epsilon) \E[ (X_1 - X_0)^2 | Z_0 = x ] / (2 \norm{x}) \]
+  \[ \E[ X_{n+1} - X_n \,|\, Z_n = x ] \leq (1-\epsilon) \E[ (X_1 - X_0)^2 | Z_0 = x ] / (2 \norm{x}) \]
   Mit Hilfe von $Y_n \coloneqq \log(1 + X_n)$ erhalten wir, dass $\{ X_n \}$ rekurrent ist.
   Bei $d \geq 3$ gilt
-  \[ \E[ X_{n+1} - X_n | Z_n = x ] \geq (1+\epsilon) \E[ (X_1 - X_0)^2 | Z_0 = x ] / (2 \norm{x}) \]
+  \[ \E[ X_{n+1} - X_n \,|\, Z_n = x ] \geq (1+\epsilon) \E[ (X_1 - X_0)^2 | Z_0 = x ] / (2 \norm{x}) \]
   Für $d = 2$ können wir den vorh. Satz leider nicht benutzen. \\
   Man kann den Satz aber verbessern, sodass aus
   \[ 2 x m_1(x) \leq (1 + \tfrac{1-\epsilon}{\log x}) m_2(x) \]
@@ -1412,7 +1478,7 @@ Definiere
 
 \columnbreak
 
-\section{Charakt. von (pos.) Rekurrenz / Transienz}
+\section{Rekurrenz / Transienz mit Lyapunov-Fktn}
 
 % Vorlesung vom 11.7.2017
 
@@ -1443,11 +1509,61 @@ Definiere
   \end{itemize}
 \end{satz}
 
-\begin{bem}
-  Man kann sogar immer $\epsilon = 1$ und $\card{A} = 1$ erreichen.
-\end{bem}
+\begin{beweisskizze}
+  "`$\Leftarrow$"'
+  Sei $x \in E$ beliebig.
+  Setze
+  \[
+    G_n \coloneqq \sum_{y \in E} f(y) \P(Z_1 \not\in A, \ldots, Z_{n-1} \not\in A, Z_n = y \,|\, Z_0 = x).
+  \]
+  Dann gilt
+  \[
+    G_n \leq \ldots \leq G_1 - \epsilon \cdot {\sum}_{k=1}^{n-1} \P(\tau_A > k \,|\, Z_0 = x)
+  \]
+  und somit
+  \[
+    \E[ \tau_A \,|\, Z_0 = x ] \leq 1 + G_1 / \epsilon < \infty.
+  \]
+  Die Aussage folgt aus dem vorh. Lemma.
 
-\TODO{Konstruktion aus dem Beweis beschreiben}
+  "`$\Rightarrow$"'
+  Wähle $x_0 \in E$ beliebig und setze $A \coloneqq \{ x_0 \}$.
+  Dann erfüllt
+  \[
+    f(x) \coloneqq \begin{cases}
+      0 & \text{für } x = x_0 \\
+      m(x, x_0) = \E[ \tau_{x_0} \,|\, Z_0 = x ] & \text{für } x \neq x_0
+    \end{cases}
+  \]
+  die Gleichung $\E[f(Z_1) - f(Z_0) \,|\, Z_0 = x] = -1$ für alle $x \neq x_0$.
+\end{beweisskizze}
+
+% 4.13
+\begin{lem}
+  \begin{minipage}[t]{0.8 \linewidth}
+    Im Kontext der rechten Seite des Satzes: \\
+    Sei $y \in E \setminus A$ mit $y < {\inf}_{x \in A} f(x)$.
+    Dann gilt:
+    \[
+      \P(\tau_A < \infty \,|\, Z_0 = y) \leq f(y) / {\inf}_{x \in A} f(x).
+    \]
+  \end{minipage}
+\end{lem}
+
+\begin{beweisskizze}
+  Betrachte das nichtneg. Supermartingal $\{ Y_n \}$ mit $Y_n \coloneqq f(Z_{n \wedge \tau_A})$.
+  Es existiert dann $Y_\infty$ mit $Y_n \to Y_\infty$ fast sicher.
+  Nach dem Fatou-Lemma gilt $f(y) \geq \E[ Y_\infty \,|\, Z_0 = y]$.
+  Es gilt
+  \[ Y_\infty \cdot \ind \{ \tau_A < \infty \} \geq ({\inf}_{x \in A} f(x)) \cdot \ind \{ \tau_A < \infty \} \]
+  und somit
+  \[
+    f(y)
+    %\geq \E[ Y_\infty \,|\, Z_0 = y]
+    \geq \E[ Y_\infty \cdot \ind \{ \tau_A < \infty \} \,|\, Z_0 = y]
+    \geq ({\inf}_{x \in A} f(x)) \cdot \P(\tau_A < \infty).
+  \]
+\end{beweisskizze}
 
 % 4.12
 \begin{satz}
@@ -1465,17 +1581,21 @@ Definiere
   \]
 \end{satz}
 
-% 4.13
-\begin{lem}
-  \begin{minipage}[t]{0.8 \linewidth}
-    Im Kontext der rechten Seite des Satzes: \\
-    Sei $y \in E \setminus A$ mit $y < {\inf}_{x \in A} f(x)$.
-    Dann gilt:
-    \[
-      \P(\tau_A < \infty \,|\, Z_0 = y) \leq f(y) / {\inf}_{x \in A} f(x).
-    \]
-  \end{minipage}
-\end{lem}
+\begin{beweisskizze}
+  "`$\Leftarrow$"'
+  Aus dem vorhergehenden Lemma folgt direkt $\P(\tau_A < \infty \,|\, Z_0 = y) < 1$, was Transienz impliziert.
+
+  "`$\Rightarrow$"'
+  Wähle $x_0 \in E$ und setze $A \coloneqq \{ x_0 \}$.
+  Dann erfüllt
+  \[
+    f(x) \coloneqq \begin{cases}
+      1 & \text{für } x = x_0, \\
+      F(x, x_0) = \P(\tau_{x_0} < \infty \,|\, Z_0 = x) & \text{für } x \neq x_0
+    \end{cases}
+  \]
+  die Gleichung $\E[ f(Z_1) - f(Z_0) \,|\, Z_0 = x ] = 0$ und außerdem $f(x) < 1 = f(x_0)$ für alle $x \neq x_0$.
+\end{beweisskizze}
 
 % 4.14
 \begin{kor}
@@ -1499,7 +1619,7 @@ Definiere
 
 % 4.15
 \begin{satz}
-  Sei $\{ Z_n \}$ eine irr. Markovkette auf~$E$, $E$ abzählbar.
+  Sei $\{ Z_n \}$ eine irred. Kette auf~$E$, $E$ abz. unendlich.
   Dann gilt:
   \[
     \arraycolsep=1pt
@@ -1512,6 +1632,13 @@ Definiere
     \end{array}
   \]
 \end{satz}
+
+\begin{beweisskizze}
+  "`$\Leftarrow$"'
+  Betrachte die Folge $\{ Y_n \}$ mit $Y_n \coloneqq f(Z_n)$.
+  Es gilt $\P({\limsup}_{n \to \infty} Y_n = \infty) = 1$ und außerdem $\E[ Y_{n+1} - Y_n \,|\, Y_n = y ] \leq 0$ für alle $y \geq M \coloneqq 1 + {\max}_{a \in A} f(a)$.
+  Nach einem früheren Resultat ist $\{ Y_n \}$ topol. rekurrent und damit wegen der Unbeschränktheit von~$f$ auch $\{ Z_n \}$ rekurrent.
+\end{beweisskizze}
 
 % Kapitel 5: Harmonische Funktionen für transiente Übergangskerne
 \section{Harmonische Fktn für Übergangskerne}
