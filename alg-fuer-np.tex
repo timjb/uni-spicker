@@ -549,12 +549,17 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
 \begin{alg}
   Gehe die Sachen absteigend nach ihrem Nutzen-Kosten-Verhältnis~$\nicefrac{v_i}{w_i}$ durch und packe jede Sache ein, die noch in den Rucksack passt.
   Sei~$z$ der Gesamtnutzen des so zusammengestellten Sets.
-  Falls eine Sache mit Nutzen $v_j > z$ (und $w_j \leq W$) nicht eingepackt wurde, so räume den Rucksack wieder aus und packe als einziges diese Sache ein.
+  Falls eine Sache mit Nutzen $v_i > z$ (und $w_i \leq W$) nicht eingepackt wurde, so räume den Rucksack wieder aus und packe als einziges diese Sache ein.
 \end{alg}
 
 \begin{satz}
   Der relative Fehler der durch diesen Algorithmus berechneten Approximationslösung ist $\leq 1/2$.
 \end{satz}
+
+\begin{beweisskizze}
+  Sei $z^*$ der Gesamtnutzen einer optimalen Lösung und $j$ der Index der ersten vom gierigen Alg.\ nicht eingepackten Sache.
+  Dann gilt $z^* \leq z + v_j \leq 2 \cdot \max \{ z, v_j \}$.
+\end{beweisskizze}
 
 \begin{kor}
   Maximum Knapsack ist $(1/2)$-approximierbar.
@@ -566,18 +571,38 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
 \begin{alg}
   Beginne mit $\mathcal{C} \coloneqq \emptyset$, füge dann immer ein $T \in \mathcal{C}_0$ zu~$\mathcal{C}$ hinzu, welches
   \[ T \cap \left( {\bigcup}_{S \in \mathcal{C}_0} S \setminus {\bigcup}_{S \in \mathcal{C}} S \right) \]
-  maximiert, bis ${\bigcup}_{S \in \mathcal{C}_0} S = {\bigcup}_{S \in \mathcal{C}} S$.
+  maximiert, bis ${\bigcup}_{S \in \mathcal{C}_0} S = {\bigcup}_{S \in \mathcal{C}} S =: U$.
 \end{alg}
 
 % 3.5
 \begin{satz}
   Sei $n \coloneqq {\max}_{S \in \mathcal{C}_0} \size{S}$.
-  Die vom Greedy-Algorithmus berechnete Lösung ist maximal um den Faktor $H_n \coloneqq {\sum}_{j=1}^n \nicefrac{1}{j}$ schlechter als die optimale Lösung.
+  Die vom Greedy-Alg.\ berechnete Lösung~$\mathcal{C}$ ist maximal um den Faktor $H_n \coloneqq {\sum}_{j=1}^n \nicefrac{1}{j} \leq 1 + \ln n$ größer als die optimale Lösung.
 \end{satz}
+
+\begin{beweisskizze}
+  Seien $S_1, \ldots, S_t \in \mathcal{C}_0$ die vom Algorithmus nacheinander ausgewählten Mengen.
+  Setze $T_i \coloneqq S_i \setminus (S_1 \cup \ldots \cup S_{i-1})$ für $i = 1, \ldots, t$.
+  Für $x \in U$ sei
+  \[
+    w(x) \coloneqq 1/\size{T_i}, \quad
+    \text{wobei $i$ dasjenige mit $x \in T_i$ ist.}
+  \]
+  Dann gilt für alle $S \in \mathcal{C}_0$, dass ${\sum}_{x \in S} w(x) \leq H_{\size{S}}$.
+  Es folgt
+  \[
+    \size{\mathcal{C}} = t = \sum_{x \in U} w(x) \leq \sum_{S \in \mathcal{C}^*} \sum_{x \in S} w(x) \leq \size{\mathcal{C}^*} \cdot H_n.
+  \]
+\end{beweisskizze}
 
 \begin{kor}
   Minimum Set Cover ist $(\ln n / (1 + \ln n))$-approximierbar (bei Eingabegröße~$n$).
 \end{kor}
+
+\begin{resultat}
+  Der Worst-Case des Greedy-Algorithmus kann asympt.\ nicht verbessert werden:
+  Es gibt keinen determ. Polynomialzeit-Alg.\ für MSC, der ein Approx'verh.\ von $\ln n - \epsilon$ mit $\epsilon > 0$ erreicht.
+\end{resultat}
 
 % §4 Approximation Algorithms
 
@@ -589,14 +614,42 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
   Es gibt einen Algorithmus, der für jeden Graph $G = (V, E)$ eine Kantenfärbung mit höchstens $\Delta + 1$ Farben, wobei $\Delta \coloneqq {\max}_{v \in V} \deg_G(v)$, berechnet.
 \end{satz}
 
-\TODO{Algorithmus beschreiben}
+\begin{alg}
+  Sei $e_0 = \{ u, v_0 \} \in E$ beliebig.
+  Induktiv dürfen wir annehmen, dass $c : E \setminus \{ e_0 \} \to \{ 0, \ldots, \Delta \}$ eine Kantenfärbung von $G - \{ e_0 \}$ ist.
+  Setze $i \coloneqq 0$.
+  Führe folgendende Schritte wiederholt aus, bis Fall A oder B eintrifft:
+
+  \begin{enumerate}
+    \item Sei $c_{i+1}$ eine Farbe, die an $v_i$ frei ist.
+    \item Sei $e_{i+1} = \{ u, v_{i+1} \} \in E$ die Kante mit $c(e) = c_{i+1}$ (eine solche existiert, da A nicht gegeben ist).
+    \item Erhöhe $i$ um eins.
+  \end{enumerate}
+
+  Abbruchbedingungen:
+  \begin{enumerate}
+    \item[A.] Falls ein minimales $j = 0, \ldots, i$ existiert, für das es eine Farbe $\tilde{c}$ gibt, die an~$v_j$ und~$u$ frei ist, so färbe wie folgt um und ein:
+    \[
+      c'(e_j) \coloneqq \tilde{c}, \enspace
+      c'(e_{j-1}) \coloneqq c_j, \enspace
+      \ldots, \enspace
+      c'(e_1) \coloneqq c_2, \enspace
+      c'(e_0) \coloneqq c_1
+   \]
+    \item[B.]
+      Ansonsten, falls eine Farbe $c_k$ mit $0 \leq k < i$ an $v_i$ frei ist: \\
+      Sei $d$ eine Farbe, die an~$u$ frei ist.
+      Vertausche $c_k \leftrightarrow d$ in dem $\{ c_k, d \}$-Pfad, der~$v_i$ als Endpunkt enthält. \\
+      Durch Fallunterscheidung über den anderen Endpunkt sieht man, dass danach Fall A anwendbar ist.
+  \end{enumerate}
+\end{alg}
 
 \begin{kor}
-  Es gibt einen Polynomialzeit-Approximationsalg. für Minimum Edge Coloring mit Absolutfehler~$\leq 1$.
+  Es gibt einen Polynomialzeit-Approximationsalg.\ für Minimum Edge Coloring mit Absolutfehler~$\leq 1$.
 \end{kor}
 
 % §4.3. The Traveling Salesman Problem
-\subsection{\scriptSection{4.3} Ein Approximationsalg.\ für das \Problem{TSP}}
+\subsection{\scriptSection{4.3} Ein Approximationsalg.\ für \Problem{$\Delta$-TSP}}
 
 \begin{erinnerung}
   Minimale Spannbäume für einen gewichteten ungerichteten Graphen können in polynomieller Zeit mit Kruskals oder mit Prims Algorithmus berechnet werden.
