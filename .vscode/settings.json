@@ -2,5 +2,6 @@
 {
   // To make snippets work (otherwise the autosuggestion will have
   // words from the file at the top instead of asking to expand a snippet)
-  "editor.wordBasedSuggestions": false
+  "editor.wordBasedSuggestions": false,
+  "latex-workshop.latex.autoBuild.onSave.enabled": false
 }
