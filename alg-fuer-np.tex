@@ -64,6 +64,7 @@
 \newcommand{\Problem}[1]{\textcolor{ProblemColor}{\textbf{#1}}}
 \definecolor{DefinitionColor}{rgb}{1,0.255,0.212}
 \newcommand{\Defn}[1]{\textcolor{DefinitionColor}{#1}}
+\newcommand{\scriptSection}[1]{\textcolor{gray}{#1}\enspace}
 
 \usepackage{algorithmicx}
 \usepackage[noend]{algpseudocode}
@@ -81,6 +82,8 @@
 
 Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torben Hagerup im Sommersemester 2017.
 
+\section{\scriptSection{1} Allgemeine Definitionen}
+
 % §1. Introduction
 
 % §2. Basic Definitions
@@ -91,9 +94,9 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
 \begin{defn}
   Ein \emph{Optimierungsproblem} ist ein Tupel $\OptTuple$ wobei
   \begin{itemize}
-    \item $\Instances$ eine Menge von \emph{Instanzen},
-    \item $\Feasible$ eine Abbildung ist, welche jeder Instanz~$x$ eine Menge $\Feasible(x)$ von \emph{möglichen Lösungen} zuordnet,
-    \item $\ObjFun$ eine reellwertige Abbildung (die \emph{Zielfunktion}) ist, die jedem $x \in \Instances$ und $y \in \Feasible(x)$ einen \textit{Zielwert} zuordnet und
+    \item $\Instances \subseteq \{0,1\}^{*}$ eine Menge von \emph{Instanzen},
+    \item $\Feasible$ eine Abb.\ ist, die jeder Inst.~$x \in \Instances$ eine Menge $\Feasible(x) \subseteq \{0,1\}^{*}$ von \emph{möglichen} (oder \textit{zulässigen}) \emph{Lösungen} zuordnet,
+    \item $\ObjFun$ eine Abbildung (die \emph{Zielfunktion}) ist, die jedem $x \in \Instances$ und $y \in \Feasible(x)$ einen \textit{Zielwert} $Z(x, y) \in \R$ zuordnet und
     \item $\Goal \in \{ \min, \max \}$ angibt, ob die Zielfunktion minimiert oder maximiert werden soll.
   \end{itemize}
 \end{defn}
@@ -128,6 +131,11 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
   \end{itemize}
 \end{defn}
 
+\begin{bem}
+  Ist $\Prob \in \NPO$, so ist für jede Instanz $x \in \Instances$ die Menge der zulässigen Lösungen endlich.
+  Somit gibt es entweder eine optimale Lösung oder nicht einmal eine zulässige Lösung.
+\end{bem}
+
 % 2.5
 \begin{defn}
   $\Defn{\PO} \subseteq \NPO$ ist die Subklasse für die ein Lösungsalgorithmus existiert, der in Polynomialzeit läuft.
@@ -139,6 +147,7 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
 \end{beob}
 
 % §2.2. Evaluation and Decision Problems
+\subsection{\scriptSection{1.1} Auswertungs- und Entscheidungsproblem}
 
 % 2.7
 \begin{defn}
@@ -147,8 +156,8 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
     \item Das zugeh. \emph{Auswertungsproblem}~$\Prob_E$ ist: Gegeben $x \in \Instances$,
     \begin{itemize}
       \item berechne $\Opt(x)$, falls $x$ eine optimale Lösung besitzt,
-      \item berechne $\inf \Feasible(x) \in \R \cup \{ -\infty \}$, falls es Lösungen gibt, aber keine optimale
-      \item oder gib "`unmöglich"' aus, falls keine Lösung existiert.
+      \item gib "`zul. Lösungen, aber keine optimale"' aus, falls dies zutrifft,
+      \item oder gib "`unmöglich"' aus, falls keine zulässige Lösung existiert.
     \end{itemize}
     \item Das zugeh. \emph{Entscheidungsproblem}~$\Prob_D$ ist: Gegeben $x \in \Instances$ und $k \in \Q$, gibt es eine Lösung $y \in \Feasible(x)$ mit $Z(x, y) \leq k$?
   \end{itemize}
@@ -177,115 +186,58 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
 
 % 2.10
 \begin{beob}
-  Für $\Prob \in \NPO$ gilt $\Prob_D \TuringRed \Prob_E \TuringRed \Prob$.
+  Sei $\Prob \in \NPO$.
+  Dann gilt $\Prob_D \TuringRed \Prob_E \TuringRed \Prob$.
 \end{beob}
 
 % 2.11 und 2.13
 \begin{satz}
-  Habe $\Prob = \OptTuple \in \NPO$ eine Zielfunktion mit Werten in den ganzen Zahlen.
+  Sei $\Prob = \OptTuple \in \NPO$ mit $\im(Z) \subseteq \Z$.
   \begin{itemize}
     \item Es gilt $\Prob_D \TuringEq \Prob_E$.
     \item Angenommen, $\Prob_D$ ist NP-vollständig. Dann gilt $\Prob \TuringEq \Prob_D$.
   \end{itemize}
 \end{satz}
 
+\begin{beweisskizze}
+  \begin{itemize}
+    \item
+      Es gilt $\abs{Z(x, y)} \leq 2^{q(\size{x})}$ für ein Polynom~$x$. \\
+      Der optimale Wert lässt sich durch binäre Suche unter Verw.\ des Orakels in der Menge möglicher Werte bestimmen.
+    \item
+      O.\,B.\,d.\,A. seien die zul. Lösungen als natürliche Zahlen kodiert, sodass ein ganzzahliges Polynom $q$ existiert mit $y < q(\size{x})$ für alle $x \in \Instances{}$ und $y \in \Feasible(x)$.
+      Betrachte nun $\Prob' = (\Instances{}, \Feasible{}, \ObjFun{}', \Goal{})$ mit $\ObjFun'(x, y) \coloneqq 2^{q(\size{x})} \cdot Z(x, y) + y \in \Z$.
+      Sei $\theta$ der Optimalwert von~$\Prob'$ zur Instanz~$x \in \Instances$.
+      Dann ist $y = \theta \,\mathrm{mod}\, q(\size{x})$ eine optimale Lösung der Instanz~$x$ von~$\Prob$.
+      Dies zeigt $\Prob \TuringRed \Prob_E$.
+      Es gilt nun
+      \[
+        \Prob \TuringRed
+        \Prob'_E \TuringRed
+        \Prob'_D \TuringRed
+        \Prob_D \TuringRed
+        \Prob,
+      \]
+      wobei die zweite Reduktion aus Punkt~1 und die dritte aus der NP-Vollständigkeit von $\Prob_D$ folgt.
+  \end{itemize}
+\end{beweisskizze}
+
 % 2.14
 \begin{defn}
-  Ein Optimierungsproblem~$\Prob$ heißt \emph{NP-hart}, falls $\Prob' \TuringRed \Prob$ für jedes Entscheidungsproblem $\Prob'$ in~NP.
+  Ein Optimierungsproblem~$\Prob$ heißt \emph{NP-hart}, falls $\Prob' \TuringRed \Prob$ für jedes Entscheidungsproblem $\Prob'$ in~$\NP$.
 \end{defn}
-
-\begin{samepage}
 
 % 2.15
 \begin{beob}
   $\Prob \in \NPO$, $\Prob$ NP-vollständig $\implies$ $\Prob$ NP-hart
 \end{beob}
 
-% §3. The Greedy Strategy
-\section{Die Gierige Strategie}
-
-% §3.1 A cabin manager's problem
-
-\begin{problem}[Cabin Manager's Problem]
-  MIS auf Intervallgraphen
-\end{problem}
-
-\end{samepage}
-
-% §3.2 Maximum Independent Set for Interval Models
-
-\begin{alg}[\Algorithm{Greedy MIS für Intervallgraphen}] \mbox{}\\
-  Beginne mit $C \coloneqq \emptyset$, füge dann wiederholt gierig das vom aktuellen~$C$ unabhängige Intervall mit dem kleinsten Endpunkt zu~$C$ hinzu, bis es kein solches Intervall mehr gibt.
-\end{alg}
-
-\begin{satz}
-  Dieser Algorithmus berechnet tatsächlich ein MIS.
-\end{satz}
-
-% §3.3. Minimum Makespan Scheduling
-
-\begin{alg}[\Algorithm{Greedy Minimum Makespan Scheduling}] \mbox{}\\
-  Gehe die Jobs in nach Dauer absteigender Reihenfolge durch, weise jeden Job dem Arbeiter zu, der bisher am wenigsten ausgelastet ist.
-\end{alg}
-
-\begin{satz}
-  Die Lösung, die der Alg. liefert, ist höchstens um den Faktor
-  \[ \nicefrac{4}{3} - \nicefrac{1}{3 p} \]
-  schlechter als eine optimale Lösung.
-\end{satz}
-
-\begin{beweisskizze}
-  Sei $t$ die Länge des letzten Jobs des am längsten beschäftigten Arbeiters und $z^*$ die minimale Gesamtdauer.
-  \begin{itemize}
-    \item Falls $t > \nicefrac{z^*}{3}$, so hat der Alg. sogar eine optimale Lsg gefunden.
-    \item Falls $t \leq \nicefrac{z^*}{3}$, so folgt die Behauptung durch geeign. Abschätzen.
-  \end{itemize}
-\end{beweisskizze}
-
-% §3.4. Maximum Knapsack
-
-\begin{alg}[\Algorithm{Greedy Knapsack Packing}]
-  Gehe die Sachen absteigend nach ihrem Nutzen-Kosten-Verhältnis~$\nicefrac{v_i}{w_i}$ durch und packe jede Sache ein, die noch in den Rucksack passt.
-  Sei~$z$ der Gesamtnutzen des so zusammengestellten Sets.
-  Falls eine Sache mit Nutzen $v_j > z$ (und $w_j \leq W$) nicht eingepackt wurde, so räume den Rucksack wieder aus und packe als einziges diese Sache ein.
-\end{alg}
-
-\begin{satz}
-  Der Gesamtnutzen der durch den Algorithmus erhaltenen Lösung ist mindestens halb so groß wie der Gesamtnutzen einer optimalen Lösung.
-\end{satz}
-
-% §3.5. Minimum Set Cover
-
-\begin{alg}[\Algorithm{Greedy Minimum Set Cover}]
-  Beginne mit $\mathcal{C} \coloneqq \emptyset$, füge dann immer ein $T \in \mathcal{C}_0$ zu~$\mathcal{C}$ hinzu, welches
-  \[ T \cap \left( {\bigcup}_{S \in \mathcal{C}_0} S \setminus {\bigcup}_{S \in \mathcal{C}} S \right) \]
-  maximiert, bis ${\bigcup}_{S \in \mathcal{C}_0} S = {\bigcup}_{S \in \mathcal{C}} S$.
-\end{alg}
-
-% 3.5
-\begin{satz}
-  Sei $n \coloneqq {\max}_{S \in \mathcal{C}_0} \size{S}$.
-  Die vom Greedy-Algorithmus berechnete Lösung ist maximal um den Faktor $H_n \coloneqq {\sum}_{j=1}^n \nicefrac{1}{j}$ schlechter als die optimale Lösung.
-\end{satz}
-
-\begin{samepage}
-
-% §3.6. Minimum Vertex Coloring
-
-\begin{bem}
-  Es gibt keinen (einfachen) Greedy-Algorithmus, der das Minimum-Vertex-Coloring-Problem in guten Schranken löst.
-\end{bem}
-
-\section{Approximationsalgorithmen}
+\subsection{\scriptSection{4.1, 4.2} Approximationslösungen und -fehler}
 
 % 4.1
 \begin{defn}
   Ein \emph{Approximationsalgorithmus} für ein Optimierungsproblem~$\OptTuple$ ist ein Algorithmus, der für jedes $x \in \Instances$ eine zulässige Lösung $y \in \Feasible(x)$ produziert.
 \end{defn}
-
-\end{samepage}
-
-% §4.1 Absolute Approximation
 
 % 4.2
 \begin{defn}
@@ -293,17 +245,6 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
   Der \emph{absolute Fehler} von $y \in \Feasible(x)$ ist $\abs{Z(x, y) - \Opt(x)}$.
   % ausgelassen: zweiter Teil der Definition
 \end{defn}
-
-% 4.3
-\begin{satz}[\Algorithm{Vizings Algorithmus}, \Youtube{otky1bBhwgM}]
-  Es gibt einen Algorithmus, der für jeden Graph $G = (V, E)$ eine Kantenfärbung mit höchstens $\Delta + 1$ Farben, wobei $\Delta \coloneqq {\max}_{v \in V} \deg_G(v)$, berechnet.
-\end{satz}
-
-\begin{kor}
-  Es gibt einen Polynomialzeit-Approximationsalg. für Minimum Edge Coloring mit Absolutfehler beschränkt durch~1.
-\end{kor}
-
-% §4.3. Relative Approximation
 
 % 4.5
 \begin{defn}
@@ -326,16 +267,8 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
 % 4.5
 \begin{defn}
   Ein \emph{$\epsilon$-Approximationsalgorithmus} ($\epsilon \in \cinterval{0}{1}$) für~$\Prob$ ist ein Algorithmus, der für jedes $x \in \Instances$ ein $y \in \Feasible(x)$ mit relativem Fehler $\leq \epsilon$ berechnet.
-  Das Problem~$\Prob$ heißt \emph{$\epsilon$-approximierbar}, falls ein solcher Alg. mit polynomieller Laufzeit existiert.
+  Das Problem~$\Prob$ heißt \emph{$\epsilon$-approximierbar}, falls ein solcher Alg.\ mit polynomieller Laufzeit existiert.
 \end{defn}
-
-\begin{bspe}
-  \begin{itemize}
-    \item Minimum Makespan Scheduling ist $(1/4)$-approximierbar.
-    \item Maximum Knapsack ist $(1/2)$-approximierbar.
-    \item Minimum Set Cover ist $(\ln n / (1 + \ln n))$-approximierbar (bei Eingabegröße~$n$).
-  \end{itemize}
-\end{bspe}
 
 % 4.6
 \begin{defn}
@@ -351,12 +284,12 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
 \end{defn}
 
 \begin{bem}
-  Das Approximationsverh. ist eine Zahl in~$\cinterval{1}{\infty}$.
+  Das Approximationsverh.\ ist eine Zahl in~$\cinterval{1}{\infty}$.
   Eine Lösung ist genau dann optimal, falls ihr Approximationsverh. $= 1$ ist.
 \end{bem}
 
 \begin{defn}
-  Ein Alg. heißt \emph{$r$-Approximationsalgorithmus} ($r \in \ocinterval{1}{\infty}$), falls er für jedes $x \in \Instances$ ein $y \in \Feasible(x)$ mit Approximationsverhältnis $\leq r$ liefert.
+  Ein Alg.\ heißt \emph{$r$-Approximationsalgorithmus} ($r \in \ocinterval{1}{\infty}$), falls er für jedes $x \in \Instances$ ein $y \in \Feasible(x)$ mit Approximationsverhältnis $\leq r$ liefert.
   Das Problem~$\Prob$ heißt \emph{$r$-approximierbar}, falls ein solcher Algorithmus mit polynomieller Laufzeit existiert.
 \end{defn}
 
@@ -370,27 +303,304 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
 
 % 4.7
 \begin{defn}
-  $\Defn{\APX}$ ist die Klasse aller Probleme in NPO, die $r$-Approximierbar für ein $r > 1$ sind.
+  $\Defn{\APX}$ ist die Klasse aller Probleme in NPO, die $r$-approximierbar für ein $r > 1$ sind.
 \end{defn}
 
+% 7.2
+\begin{defn}
+  Ein \emph{Polynomialzeit-Approximationsschema} (PTAS) für $\Prob \in \NPO$ ist ein Algorithmus, der für jede Instanz~$x$ von~$\Prob$ und $\epsilon > 0$ eine mögliche Lösung in~$\Feasible(x)$ mit relativem Fehler $\leq \epsilon$ liefert und dessen Laufzeit für jedes fixe $\epsilon > 0$ polynomiell in~$\size{x}$ ist.
+\end{defn}
+
+\begin{defn}
+  $\Defn{\PTAS} \coloneqq \Set{\Prob \in \NPO}{\text{$\Prob$ hat ein PTAS}}$
+\end{defn}
+
+\begin{bem}
+  $\PO \subseteq \PTAS \subseteq \APX$
+\end{bem}
+
+% 7.5
+\begin{defn}
+  Ein \emph{asymptot. Polynomialzeit-Approximationsschema} (APTAS) für $\OptTuple{}$ ist ein Algorithmus, der für alle $x \in \Instances{}$ und $\epsilon > 0$ eine mögliche Lösung $y \in \Feasible(x)$ mit
+  \[ \abs{Z(x, y) - \Opt(x)} \leq \epsilon \cdot \max \{ Z(x,y), \Opt(x) \} + K \]
+  für eine Konstante~$K$ berechnet und dessen Laufzeit für alle festen~$\epsilon$ polynomiell in $\size{x}$ ist.
+\end{defn}
+
+\begin{defn}
+  Ein (asympt.) \emph{Voll-Polynomialzeit-Approx'schema} ((A)FPTAS) für $\Prob{}$ ist ein (A)PTAS für~$\Prob{}$, dessen Laufzeit für die Instanz $(x, \epsilon)$ durch ein Polynom in $\size{x}$ und in~$1/\epsilon$ beschränkt ist.
+\end{defn}
+
+\begin{defn}
+  $\Defn{\mathrm{(A)(F)PTAS}} \coloneqq \Set{\Prob \in \NPO}{\text{$\Prob$ hat ein (A)(F)PTAS}}$
+\end{defn}
+
+\section{Optimierungsprobleme (in $\NPO{}$)}
+
+\subsection{Überdeckungsprobleme}
+
+\begin{problem}[\Problem{Minimum Vertex Cover}, MVC]
+  Geg.\ einen unger. Graphen~$G = (V, E)$, berechne eine \textit{Knotenüberdeckung}~$C$, \dh{}
+  \[
+    \fa{v, w \in V} \{v, w\} \in E \implies v \in C \vee w \in C,
+  \]
+  die minimale Größe~$\size{C}$ unter allen Knotenüberdeckungen besitzt.
+\end{problem}
+
+\begin{problem}[\Problem{Minimum Weighted Vertex Cover}]
+  Geg.\ einen unger. Graphen~$G = (V, E)$ und eine \textit{Kostenfunktion} $c : V \to \R_{\geq 0}$, berechne eine \textit{Knotenüberdeckung}~$C$, die minimale \textit{Kosten} ${\sum}_{v \in C} c(v)$ unter allen Knotenüberdeckungen besitzt.
+\end{problem}
+
+\begin{problem}[\Problem{Maximum Independent Set}, MIS]
+  Geg.\ einen unger. Graphen~$(V, E)$, berechne eine \textit{unabh. Menge}~$M \subseteq V$, \dh{}
+  \[
+    \fa{v \in M} \fa{w \in V} (v, w) \in E \implies w \not\in M,
+  \]
+  die maximale Größe~$\size{M}$ unter allen unabhängigen Mengen besitzt.
+\end{problem}
+
+\begin{bem}
+  Für einen Graphen $(V, E)$ und eine Teilmenge $S \subseteq V$ gilt: \\
+  $S$ ist eine unabhängige Menge $\iff$ $V \setminus S$ ist ein Vertex Cover \\
+  Die Probleme MIS und MVC sind damit äquivalent.
+\end{bem}
+
+\begin{problem}[\Problem{Minimum Set Cover}]
+  Gegeben seien $n \in \N$ und $\mathcal{C}_0 \subseteq \Powerset(\{ 1, \ldots, n \})$.
+  Die Menge der möglichen Lösungen ist
+  \[ \Feasible \coloneqq \Set{\mathcal{C} \subseteq \mathcal{C}_0}{{\bigcup}_{S \in \mathcal{C}} S = {\bigcup}_{S \in \mathcal{C}_0} S} \]
+  Aufgabe: Finde $\mathcal{C} \in \Feasible$ mit minimalem $\size{\mathcal{C}}$!
+\end{problem}
+
+\begin{bem}
+  Minimum Set Cover verallgemeinert Minimum Vertex Cover, (Black-and-White) Dominating Set und Edge Dominating Set.
+\end{bem}
+
+\subsection{Graphenfärbungen}
+
+\begin{problem}[\Problem{Minimum Vertex Coloring}, \Youtube{4FE79y_JkCE}]
+  Gegeben sei ein unger. Graph~$G = (V, E)$.
+  Die Menge der \textit{Eckenfärbungen} ist
+  \[
+    \Feasible \coloneqq \Set{\text{Abbildungen } c : V \to \N}{\fa{\{v, w\} \in E} c(v) \neq c(w)}.
+  \]
+  Ziel: Finde $c \in \Feasible$ mit minimaler Anzahl $\max c(V)$ an Farben.
+\end{problem}
+
+\begin{problem}[\Problem{Minimum Edge Coloring}]
+  Gegeben sei ein unger. Graph~$G = (V, E)$.
+  Die Menge der \textit{Kantenfärbungen} ist
+  \[
+    \Feasible \coloneqq \Set{\text{Abb. } c : E \to \N}{\fa{e_1 \neq e_2 \in E} e_1 \cap e_2 \neq \emptyset \implies c(e_1) \neq c(e_2)}
+  \]
+  Ziel: Finde $c \in \Feasible$ mit minimaler Anzahl $\max c(V)$ an Farben.
+\end{problem}
+
+\subsection{Dominierende Mengen (in Graphen)}
+
+\begin{problem}[\Problem{Minimum Dominating Set}]
+  Eine \emph{dominierende Menge} eines Graphen $G = (V, E)$ ist eine Menge $D \subseteq V$ mit $V = D \cup \Neighbours_G(D)$.
+  Gegeben einen Graphen~$G$, finde eine dominierende Menge~$D$ kleinster Größe~$\size{D}$!
+\end{problem}
+
+\begin{problem}[\Problem{Black-and-White Dominating Set}]
+  Gegeben einen unger. Graph $G = (B \cup W, E)$ mit $B \cap W = \emptyset$, finde ein $D \subseteq B \cup W$ minimaler Größe, sodass $B \subseteq D \cup \Neighbours_G(D)$.
+\end{problem}
+
+\begin{problem}[\Problem{Edge Dominating Set}]
+  Gegeben einen unger. Graph $G$ und $k \in \N$.
+  Frage: Gibt es eine Kantendominierung der Größe $\leq k$, \dh{} gibt es ein $D \subseteq E$ mit $\size{D} \leq k$, sodass jede Kante in~$E$ mindestens einen Endpunkt mit einer Kante aus~$D$ gemeinsam hat?
+\end{problem}
+
+\subsection{Probleme in unger. Graphen mit Kantengewichten}
+
+\begin{problem}[\Problem{Minimum TSP}]
+  Gegeben sei ein vollständiger unger. Graph $G = (V, E)$ und eine Abb. $c : E \to \R_{\geq 0}$.
+  % Gegeben sei eine endliche Menge $V$ und eine Abb. $c : V \times V \to \R_{\geq 0}$ mit $c(x, y) = c(y, x)$ für alle $x, y \in V$.
+  Gesucht ist eine zyklische Permutation $\sigma$ von~$V$ (eine \textit{Tour}), sodass die \textit{Länge} ${\sum}_{v \in V} c(\{ v, \sigma(v) \})$ minimal wird.
+\end{problem}
+
+\begin{problem}[\Problem{Minimum $\Delta$-TSP}]
+  Gegeben sei ein endlicher metrischer Raum~$(V, c)$.
+  Gesucht ist eine zyklische Permutation $\sigma$ von~$V$ (eine \textit{Tour}), sodass die \textit{Länge} ${\sum}_{v \in V} c(v, \sigma(v))$ minimal wird.
+\end{problem}
+
+\begin{problem}[\Problem{Minimum Steiner Forest}]
+  Geg.\ sei ein unger. Graph $G = (V, E)$ eine \textit{Kostenfktn} $c : E \to \R_{\geq 0}$ und eine Abb. $r : V \to \N$.
+  Mögliche Lsgn sind Teilmengen $F \subseteq E$ von~$G$, sodass alle $u, v \in V$ mit $r(u) = r(v)$ durch einen Pfad mit Kanten in~$F$ verbunden sind.
+  Gesucht ist ein solcher Subgraph, der ${\sum}_{e \in E_F} c(e)$ minimiert.
+\end{problem}
+
+\subsection{Satisfiability}
+
+\begin{problem}[\Problem{$k$-SAT(isfiability)}] \mbox{} \\
+  Gegeben sei eine Formel in konjunktiver Normalform, etwa
+  \[ (x_1 \vee x_2 \vee \overline{x_3}) \wedge (\overline{x_1} \vee \overline{x_3} \vee x_4 \vee \overline{x_5}) \wedge (x_2 \vee x_5) \wedge (x_3 \vee \overline{x_4}). \]
+  Die Maximalzahl an \textit{Literalen} in einer \textit{Clause} sei dabei $\leq k$.
+  Entscheide, ob die Formel \emph{erfüllbar} ist,\dh{} ob es eine Zuweisung der Variablen gibt, sodass die Formel wahr ist.
+\end{problem}
+
+\begin{problem}[\Problem{MaxSAT}]
+  Gegeben eine Formel in konjunktiver Normalform, finde eine Zuweisung der Variablen, die die Anzahl der gültigen Clauses maximiert.
+\end{problem}
+
+\subsection{Packungs- und Scheduling-Probleme}
+
+\begin{problem}[\Problem{Minimum Makespan Scheduling}]
+  Seien $p, n \in \N$ und $l_1, \ldots, l_n \in \R_{> 0}$ gegeben.
+  Für $f : \{ 1, \ldots, n \} \to \{ 1, \ldots, p \}$ setze
+  \[ t(f) \coloneqq \max_{1 \leq i \leq p} \sum_{j \in f^{-1}(i)} l_j. \]
+  Berechne das~$f$, für das $t(f)$ minimal wird!
+\end{problem}
+
+\begin{interp}
+  $p$ ist die Anzahl von \textit{Arbeitern},
+  $l_1, \ldots, l_n$ sind die Längen von zu erledigenden \textit{Jobs}
+  und $t(f)$ ist die \textit{Gesamtdauer} bei der durch~$f$ gegebenen Verteilung der Jobs auf die Arbeiter an.
+\end{interp}
+
+\begin{bem}
+  MMS ist NP-hart, da das zugeh. Entscheidungsproblem Bin Packing bekannterweise NP-hart ist.
+\end{bem}
+
+\begin{problem}[\Problem{Maximum Knapsack}]
+  Seien $n \in \N$ und $v_1, \ldots, v_n$, $w_1, \ldots, w_n, W \in \R_{> 0}$ gegeben.
+  Die Menge der möglichen Lsgn sei
+  \[ \Feasible \coloneqq \Set{S \subseteq \{ 1, \ldots, n \}}{{\sum}_{i \in S} w_i \leq W}. \]
+  Gesucht: ${\argmax}_{S \in \Feasible} {\sum}_{i \in S} v_i$
+\end{problem}
+
+\begin{interp}
+  Man wählt unter $n$ Sachen mit jeweils einem \textit{Gewicht}~$w_i$ und einem \textit{Nutzwert}~$v_i$ diejenigen aus, die man in einen Rucksack packt, sodass das Gesamtgewicht eine festgelegte Grenze~$W$ nicht übersteigt und der Nutzen maximal wird.
+\end{interp}
+
+\begin{problem}[\Problem{Maximum Integer Knapsack}] \mbox{}\\
+  Wie Maximum Knapsack aber mit $v_1, \ldots, v_n \in \N_{> 0}$.
+\end{problem}
+
+\begin{problem}[\Problem{Minimum Bin Packing}]
+  Gegeben seien \textit{Objektgrößen} $v_1, \ldots, v_n \in \cinterval{0}{1}$.
+  \textit{Packungen} sind Abbildungen $f : \{ 1, \ldots, n \} \to \N$, die jedem \textit{Objekt} einen \textit{Behälter} (mit Volumen 1) zuweisen, sodass
+  \[
+    {\sum}_{i \in f^{-1}(j)} v_i \leq 1 \quad
+    \text{für alle $j \in \N$.}
+  \]
+  Gesucht ist ein~$f$ mit minimaler Anzahl $\max \im(f)$ von Behältern.
+\end{problem}
+
+\newpage
+
+\section{Algorithmen für Probleme in~$\NPO$}
+
+% §3. The Greedy Strategy
+
+% §3.1 A cabin manager's problem
+\subsection{\scriptSection{3.2} Gieriges \Problem{Cabin Manager's Problem}}
+
+\begin{defn}
+  Ein \emph{Intervallmodell} eines Graphen $G = (V, E)$ ist eine Abbildung $\phi : E \to \Set{\cinterval{a}{b}}{a, b \in \Q}$, sodass
+  \[
+    \fa{v \neq w \in V} \enspace
+    (v, w) \in E \iff \phi(v) \cap \phi(w) \neq \emptyset.
+  \]
+  Ein Graph heißt \emph{Intervallgraph}, falls er ein Intervallmodell besitzt.
+\end{defn}
+
+\begin{problem}[\textit{Cabin Manager's Problem}]
+  MIS auf Intervallgraphen
+\end{problem}
+
+% §3.2 Maximum Independent Set for Interval Models
+
+\begin{alg}
+  Beginne mit $C \coloneqq \emptyset$, füge dann wiederholt gierig das vom aktuellen~$C$ unabhängige Intervall mit dem kleinsten Endpunkt zu~$C$ hinzu, bis es kein solches Intervall mehr gibt.
+\end{alg}
+
 \begin{satz}
-  Falls $\P \neq \NP$, so gilt Minimum TSP $\not\in \APX$.
+  Dieser Algorithmus berechnet tatsächlich ein MIS\@.
 \end{satz}
 
-\begin{samepage}
+% §3.3. Minimum Makespan Scheduling
+\subsection{\scriptSection{3.3} Gieriges \Problem{Minimum Makespan Scheduling}}
 
-\begin{beweisidee}
-  Wäre Minimum TSP $r$-approximierbar, so könnte man diesen Algorithmus verwenden, um das NP-Problem, ob ein Graph einen Hamiltonweg besitzt, zu entscheiden.
-\end{beweisidee}
+\begin{alg}
+  Gehe die Jobs in nach Dauer absteigender Reihenfolge durch, weise jeden Job dem Arbeiter zu, der bisher am wenigsten ausgelastet ist.
+\end{alg}
+
+\begin{satz}
+  Das Approximationsverhältnis der berechneten zul. Lösung ist
+  \[ \leq \nicefrac{4}{3} - \nicefrac{1}{3 p}. \]
+\end{satz}
+
+\begin{beweisskizze}
+  Sei $t$ die Länge des letzten Jobs des am längsten beschäftigten Arbeiters und $z^*$ die minimale Gesamtdauer.
+  \begin{itemize}
+    \item Falls $t > z^*/3$, so hat der Alg. sogar eine optimale Lsg gefunden.
+    \item Falls $t \leq z^*/3$, so folgt die Behauptung durch geeign. Abschätzen.
+  \end{itemize}
+\end{beweisskizze}
+
+\begin{kor}
+  Minimum Makespan Scheduling ist $(1/4)$-approximierbar.
+\end{kor}
+
+% §3.4. Maximum Knapsack
+\subsection{\scriptSection{3.4} Gieriges \Problem{Maximum Knapsack Packing}}
+
+\begin{alg}
+  Gehe die Sachen absteigend nach ihrem Nutzen-Kosten-Verhältnis~$\nicefrac{v_i}{w_i}$ durch und packe jede Sache ein, die noch in den Rucksack passt.
+  Sei~$z$ der Gesamtnutzen des so zusammengestellten Sets.
+  Falls eine Sache mit Nutzen $v_j > z$ (und $w_j \leq W$) nicht eingepackt wurde, so räume den Rucksack wieder aus und packe als einziges diese Sache ein.
+\end{alg}
+
+\begin{satz}
+  Der relative Fehler der durch diesen Algorithmus berechneten Approximationslösung ist $\leq 1/2$.
+\end{satz}
+
+\begin{kor}
+  Maximum Knapsack ist $(1/2)$-approximierbar.
+\end{kor}
+
+% §3.5. Minimum Set Cover
+\subsection{\scriptSection{3.5} Gieriges \Problem{Minimum Set Cover}}
+
+\begin{alg}
+  Beginne mit $\mathcal{C} \coloneqq \emptyset$, füge dann immer ein $T \in \mathcal{C}_0$ zu~$\mathcal{C}$ hinzu, welches
+  \[ T \cap \left( {\bigcup}_{S \in \mathcal{C}_0} S \setminus {\bigcup}_{S \in \mathcal{C}} S \right) \]
+  maximiert, bis ${\bigcup}_{S \in \mathcal{C}_0} S = {\bigcup}_{S \in \mathcal{C}} S$.
+\end{alg}
+
+% 3.5
+\begin{satz}
+  Sei $n \coloneqq {\max}_{S \in \mathcal{C}_0} \size{S}$.
+  Die vom Greedy-Algorithmus berechnete Lösung ist maximal um den Faktor $H_n \coloneqq {\sum}_{j=1}^n \nicefrac{1}{j}$ schlechter als die optimale Lösung.
+\end{satz}
+
+\begin{kor}
+  Minimum Set Cover ist $(\ln n / (1 + \ln n))$-approximierbar (bei Eingabegröße~$n$).
+\end{kor}
+
+% §4 Approximation Algorithms
+
+% §4.1 Absolute Approximation
+\subsection{\scriptSection{4.1} Ein Approx'alg.\ für \Problem{Minimum Edge Coloring}}
+
+% 4.3
+\begin{satz}[\Algorithm{Vizings Algorithmus}, \Youtube{otky1bBhwgM}]
+  Es gibt einen Algorithmus, der für jeden Graph $G = (V, E)$ eine Kantenfärbung mit höchstens $\Delta + 1$ Farben, wobei $\Delta \coloneqq {\max}_{v \in V} \deg_G(v)$, berechnet.
+\end{satz}
+
+\TODO{Algorithmus beschreiben}
+
+\begin{kor}
+  Es gibt einen Polynomialzeit-Approximationsalg. für Minimum Edge Coloring mit Absolutfehler~$\leq 1$.
+\end{kor}
 
 % §4.3. The Traveling Salesman Problem
-\subsection{Das Problem des Handelsreisenden}
+\subsection{\scriptSection{4.3} Ein Approximationsalg.\ für das \Problem{TSP}}
 
 \begin{erinnerung}
   Minimale Spannbäume für einen gewichteten ungerichteten Graphen können in polynomieller Zeit mit Kruskals oder mit Prims Algorithmus berechnet werden.
 \end{erinnerung}
-
-\end{samepage}
 
 \begin{satz}
   Minimum $\Delta$-TSP ist 2-approximierbar.
@@ -405,7 +615,7 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
 \end{beweisskizze}
 
 \begin{defn}
-  Ein ungerichteter Multigraph heißt \em{Eulersch}, falls er eine \textit{Eulertour} besitzt, also eine Tour, die jede Kante nur ein Mal benutzt.
+  Ein unger. Multigraph heißt \em{Eulersch}, falls er eine \textit{Eulertour} besitzt, also eine Tour, die jede Kante nur ein Mal benutzt.
 \end{defn}
 
 % 2.12
@@ -446,7 +656,12 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
   Aus diesem erhalten wir eine Tour der Länge $\leq 3/2 z^*$.
 \end{beweisskizze}
 
-\subsection{Nochmal Minimum Vertex Coloring}
+\subsection{\scriptSection{4.4} Ein Approx'alg.\ für \Problem{Min. Vertex Coloring}}
+
+% aus §3.6. Minimum Vertex Coloring:
+\begin{bem}
+  Der naive Greedy-Algorithmus für MVC, der die Knoten absteigend nach Grad sortiert und dann in der Reihenfolge in der jeweils kleinsten verfügbaren Farbe färbt, hat ein Worst-Case-Approximationsverhältnis von $\Omega(n)$.
+\end{bem}
 
 \begin{alg}[\Algorithm{Greedy Vertex Coloring}] \mbox{}\\
   Wiederhole folgende Schritte, bis alle Knoten gefärbt sind:
@@ -468,7 +683,7 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
 \end{satz}
 
 % §5. Tree-Search Strategies
-\section{Baumsuche}
+\subsection{\scriptSection{5} Idee: Baumsuche}
 
 % §5.1. Erschöpfende Suche
 
@@ -509,6 +724,7 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
 \end{bem}
 
 % §5.3. 3-Satisfiability
+\subsection{\scriptSection{5.3} \Problem{3-Satisfiability} mit Baumsuche}
 
 \begin{nota}
   Für eine logische Formel $F$ und eine Variable $x$ sei $F|_{x=i}$ ($i \in \{0,1\}$) die Formel, die man erhält, wenn man $x$ durch $i$ in~$F$ ersetzt und vereinfacht.
@@ -534,6 +750,7 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
 \end{algorithmic}
 
 % §5.4. Minimum Vertex Cover
+\subsection{\scriptSection{5.4} \Problem{Minimum Vertex Cover} mit Baumsuche}
 
 % 5.2
 \begin{satz}
@@ -587,9 +804,9 @@ Schaffen wir es, einen Algorithmus mit $m$~Fällen mit Verzweigungs- multimengen
 \end{satz}
 
 % §6. Dynamic Programming
-\section{Dynamische Programmierung}
 
 % §6.1. Maximum Integer Knapsack
+\subsection{\scriptSection{6.1} \Problem{Maximum Integer Knapsack} mit dyn. Progr.}
 
 % 6.1
 \begin{satz}
@@ -598,8 +815,8 @@ Schaffen wir es, einen Algorithmus mit $m$~Fällen mit Verzweigungs- multimengen
   Dann kann $P$ in Zeit $\O(n V)$ gelöst werden.
 \end{satz}
 
-\begin{alg}[\Algorithm{Knapsack mit dynam. Programmierung}] \mbox{}\\
-  Löse mit dyn. Progr. die Unterprobleme $(P_{j,v})_{1 \leq j \leq n, 1 \leq v \leq V}$ mit
+\begin{alg}
+  Löse mit dynamischer Programmierung die Unterprobleme $(P_{j,v})_{1 \leq j \leq n, 1 \leq v \leq V}$ mit
   \[
     P_{j,v} \coloneqq
       \begin{array}[t]{l}
@@ -615,6 +832,7 @@ Schaffen wir es, einen Algorithmus mit $m$~Fällen mit Verzweigungs- multimengen
 \end{bem}
 
 % §6.2 Minimum Bin Packing
+\subsection{\scriptSection{6.2} \Problem{Minimum Bin Packing} mit dyn. Programmierung}
 
 % 6.2
 \begin{satz}
@@ -637,20 +855,9 @@ Schaffen wir es, einen Algorithmus mit $m$~Fällen mit Verzweigungs- multimengen
   Das ursprüngliche Problem ist $P_{t,P}$.
 \end{alg}
 
-\section{Polynomialzeit-Approximationsschemata}
+% §7. Polynomial Time Approximation Schemes
 
-% 7.2
-\begin{defn}
-  Ein \emph{Polynomialzeit-Approximationsschema} (PTAS) für $\Prob \in \NPO$ ist ein Algorithmus, der für jede Instanz~$x$ von~$\Prob$ und $\epsilon > 0$ eine mögliche Lösung in~$\Feasible(x)$ mit relativem Fehler $\leq \epsilon$ liefert und dessen Laufzeit für jedes fixe $\epsilon > 0$ polynomiell in~$\size{x}$ ist.
-\end{defn}
-
-\begin{defn}
-  $\Defn{\PTAS} \coloneqq \Set{\Prob \in \NPO}{\text{$\Prob$ hat ein PTAS}}$
-\end{defn}
-
-\begin{bem}
-  $\PO \subseteq \PTAS \subseteq \APX$
-\end{bem}
+\subsection{\scriptSection{7} Ein FPTAS für \Problem{Maximum Knapsack}}
 
 % 7.1
 \begin{satz}
@@ -665,47 +872,38 @@ Schaffen wir es, einen Algorithmus mit $m$~Fällen mit Verzweigungs- multimengen
   \end{enumerate}
 \end{alg}
 
+\subsection{\scriptSection{7} Ein APTAS für \Problem{Minimum Bin Packing}}
+
 % 7.3
 \begin{lem}
   Es gibt einen Algorithmus, der für jede Instanz von \textit{Minimum Bin Packing} mit $n$~Objekten der Größe~$\geq \delta$ eine Packung der Objekte in $(1 + \delta) z^* + 1$ Behälter in Zeit $\O(n^{2/\delta^2 + 2})$ berechnet, wobei $z^*$ die optimale Zahl der Behälter ist.
 \end{lem}
+
+\TODO{Alg. beschreiben}
 
 % 7.4
 \begin{satz}
   Es gibt einen Algorithmus, der für jede Instanz von \textit{Minimum Bin Packing} mit $n$~Objekten eine Packung der Objekte in $(1 + \delta) z^* + 1$ Behälter in Zeit $\O(n^{8/\delta^2 + 2})$ berechnet.
 \end{satz}
 
-% 7.5
-\begin{defn}
-  Ein \emph{asymptot. Polynomialzeit-Approximationsschema} (APTAS) für $\OptTuple{}$ ist ein Algorithmus, der für alle $x \in \Instances{}$ und $\epsilon > 0$ eine mögliche Lösung $y \in \Feasible(x)$ mit
-  \[ \abs{Z(x, y) - \Opt(x)} \leq \epsilon \cdot \max \{ Z(x,y), \Opt(x) \} + K \]
-  für eine Konstante~$K$ berechnet und dessen Laufzeit für alle festen~$\epsilon$ polynomiell in $\size{x}$ ist.
-\end{defn}
+\TODO{Alg. beschreiben}
 
-\begin{defn}
-  Ein (asympt.) \emph{Voll-Polynomialzeit-Approx'schema} ((A)FPTAS) für $\Prob{}$ ist ein (A)PTAS für~$\Prob{}$, dessen Laufzeit für die Instanz $(x, \epsilon)$ durch ein Polynom in $\size{x}$ und in~$1/\epsilon$ beschränkt ist.
-\end{defn}
+Somit ist Minimum Bin Packing $\in \APTAS$.
+Man kann sogar zeigen:
 
-\begin{defn}
-  $\Defn{\mathrm{(A)(F)PTAS}} \coloneqq \Set{\Prob \in \NPO}{\text{$\Prob$ hat ein (A)(F)PTAS}}$
-\end{defn}
-
-\begin{bspe}
-  \begin{itemize}
-    \item Maximum Knapsack $\in \FPTAS$
-    \item Wir haben gezeigt: Minimum Bin Packing $\in \APTAS$
-    \item Man kann zeigen: Minimum Bin Packing $\in \AFPTAS$
-  \end{itemize}
-\end{bspe}
+\begin{resultat}
+  Minimum Bin Packing $\in \AFPTAS$
+\end{resultat}
 
 % §8. Parametrization
-\section{Parametrisierung}
+\subsection{\scriptSection{8} Idee: Parametrisierung}
 
 \begin{vorgehen}
   Füge einen weiteren Parameter (zusätzlich zu den Größenparametern) für Probleminstanzen ein, suche nach einem Algorithmus, dessen Laufzeit wesentlich von diesem Parameter abhängt, sodass Instanzen, die einen kleinen Wert für den Parameter haben, in akzeptabler Zeit gelöst werden können.
 \end{vorgehen}
 
 % §8.1. Minimum Vertex Cover
+\subsection{\scriptSection{8.1} Parametrisiertes \Problem{Minimum Vertex Cover}}
 
 % 8.1
 \begin{satz}
@@ -736,6 +934,7 @@ Schaffen wir es, einen Algorithmus mit $m$~Fällen mit Verzweigungs- multimengen
 \end{bem}
 
 % §8.2. MaxSAT
+\subsection{\scriptSection{8.2} Parametrisiertes \Problem{MaxSAT}}
 
 % ausgelassen: Lemma 8.4 und 8.5
 
@@ -793,7 +992,7 @@ Mit einer etwas einfacheren $\Call{Search}{}$-Prozedur kann man schon zeigen:
 \end{satz}
 
 % §8.3. Treewidth
-\subsection{Baumweite}
+\subsection{\scriptSection{8.3} Parametrisierung durch Baumweite}
 
 % Übungsaufgabe 8.3
 \begin{bem}
@@ -849,7 +1048,7 @@ Mit einer etwas einfacheren $\Call{Search}{}$-Prozedur kann man schon zeigen:
 %  Jeder Graph $G$ mit $n$~Knoten hat eine Baumzerlegung der Weite $n-1$.
 %\end{bem}
 
-TODO: Wie kann man eine Baumzerlegung zur Berechnung eines MIS verwenden?
+\TODO{Wie kann man eine Baumzerlegung zur Berechnung eines MIS verwenden?}
 
 % 8.13
 \begin{defn}
@@ -893,11 +1092,12 @@ TODO: Wie kann man eine Baumzerlegung zur Berechnung eines MIS verwenden?
   Jeder unger. Graph der Baumweite $\leq k$ hat $\leq k n$ Kanten.
 \end{lem}
 
-% §8.20. Berechnung von Baumzerlegungen
+% §8.4. Berechnung von Baumzerlegungen
 % (ausgelassen in der Vorlesung)
+\subsection{\scriptSection{8.4} Berechnung von Baumzerlegungen}
 
 \begin{bem}
-  Entscheiden, ob für ein Tuple $(G, k)$ bestehend aus einem Graph~$G$ und $k \in \N$ der Graph $G$ Baumweite $\leq k$ besitzt, ist NP-vollständig.
+  Entscheiden, ob für ein Tupel $(G, k)$ bestehend aus einem Graph~$G$ und $k \in \N$ der Graph $G$ Baumweite $\leq k$ besitzt, ist NP-vollständig.
 \end{bem}
 
 % 8.20
@@ -982,9 +1182,9 @@ TODO: Wie kann man eine Baumzerlegung zur Berechnung eines MIS verwenden?
 \end{bem}
 
 % §9. Planarität
-\section{Planarität}
 
 % §9.1. Planare Graphen
+\subsection{\scriptSection{9.1} Grundwissen: Planarität}
 
 % 9.1
 \begin{defn}
@@ -1065,6 +1265,7 @@ TODO: Wie kann man eine Baumzerlegung zur Berechnung eines MIS verwenden?
 \end{lem}
 
 % §9.2. Parameterized Dominating Set
+\subsection{\scriptSection{9.2} Param. \Problem{Dominating Set} für planare Graphen}
 
 % 9.11
 \begin{satz}
@@ -1113,6 +1314,7 @@ TODO: Wie kann man eine Baumzerlegung zur Berechnung eines MIS verwenden?
 % ausgelassen: §9.3 Computing Planar Embeddings
 
 % §9.4 Polynomial-Time Approximation Schemes
+\subsection{\scriptSection{9.4} Baumzerlegungen von planaren Graphen}
 
 % 9.31
 \begin{defn}
@@ -1123,8 +1325,8 @@ TODO: Wie kann man eine Baumzerlegung zur Berechnung eines MIS verwenden?
     Lösche alle Knoten, die inzident zur äußeren Fläche sind.
   \end{minipage}
 
-  Die in der $j$-ten Iteration gelöschten Knoten haben \textit{Außenplanaritätslevel~$j$}. \\
-  Der Graph~$G$ heißt \emph{$k$-außenplanar}, falls er eine Einbettung besitzt, bezüglich der jeder Knoten Außenplanaritätslevel $\leq k$ hat.
+  Der \textit{Außenplanaritätslevel} eines Knoten ist die Nummer der Iteration, in der er gelöscht worden ist.
+  Der Graph~$G$ heißt \emph{$k$-außenplanar}, falls er eine Einbettung besitzt, bezüglich der jeder Knoten Außenplanaritätslevel $\leq k$ hat (\dh{} nach $k$ Iterationen war der Graph leer).
 \end{defn}
 
 \begin{bem}
@@ -1195,6 +1397,8 @@ TODO: Wie kann man eine Baumzerlegung zur Berechnung eines MIS verwenden?
   Dann können wir in Zeit~$\O(k n)$ eine Baum- zerlegung von~$G$ mit Weite $\leq 3 k - 1$ und $\O(n)$ Knoten berechnen.
 \end{satz}
 
+\subsection{\scriptSection{9.4} Ein PTAS für \Problem{MIS} auf planaren Graphen}
+
 % 9.40
 \begin{lem}
   Gegeben sei ein Graph~$G$ mit $n$ Knoten sowie eine Baumzerlegung von~$G$ der Weite~$k$ mit $m$~Knoten.
@@ -1221,13 +1425,8 @@ TODO: Wie kann man eine Baumzerlegung zur Berechnung eines MIS verwenden?
   Gib $G_\ell$ zurück, wobei $\size{G_\ell} = {\max}_{0 \leq j \leq k} \size{G_j}$.
 \end{alg}
 
-% 9.42
-\begin{kor}
-  Es gibt einen PTAS für Maximum Independent Set.
-\end{kor}
-
 % §10. Linear Programming Methods
-\section{Reduktion auf Lineare Programmierung}
+\subsection{\scriptSection{10.1} Technik: Redukt.\ auf Lin. Programmierung}
 
 % §10.1. Lineare Programmierung
 
@@ -1251,7 +1450,7 @@ TODO: Wie kann man eine Baumzerlegung zur Berechnung eines MIS verwenden?
 \end{defn}
 
 % §10.2 Minimum Weighted Vertex Cover
-\subsection{Minimum Weighted Vertex Cover}
+\subsection{\scriptSection{10.2} \Problem{Minimum Weighted Vertex Cover} mit (I)LP}
 
 % 10.2
 \begin{satz}
@@ -1273,6 +1472,7 @@ TODO: Wie kann man eine Baumzerlegung zur Berechnung eines MIS verwenden?
 \end{beweisskizze}
 
 % §10.3. MaxSAT and Randomization
+\subsection{\scriptSection{10.3} \Problem{MaxSAT} mit (I)LP und Randomisierung}
 
 \begin{alg}[\emph{Randomized Rounding}] \mbox{} \\
   Eingabe: Formel in KNF mit Variablen~$V$ und Clauses $\mathcal{C}$, \\
@@ -1289,7 +1489,8 @@ TODO: Wie kann man eine Baumzerlegung zur Berechnung eines MIS verwenden?
       \end{array}
     \]
     wobei $V^{+}(C)$ die positiv und $V^{-}(C)$ die negativ auftretenden Variablen in einer Clause $C \in \mathcal{C}$ sind.
-    (Eine Lsg des entspr. ILP wäre eine exakte Lösung von MaxSAT. Bemerke: ${\sum}_{C \in \mathcal{C}} x_C \geq z^*$)
+    (Eine Lsg des entspr. ILP wäre eine exakte Lösung von MaxSAT\@.
+    Bemerke: ${\sum}_{C \in \mathcal{C}} x_C \geq z^*$)
     \item
       Seien die Zufallsvariablen $\Set{Y_v \in \{ 0, 1\}}{v \in V}$ unabhängig mit $\P(Y_v = 1) = \hat{y}_v$ für alle $v \in V$.
       Bestimme eine Variablenbelegung durch Ziehen all dieser ZVn.
@@ -1326,7 +1527,7 @@ TODO: Wie kann man eine Baumzerlegung zur Berechnung eines MIS verwenden?
 \end{beweis}
 
 % §10.4. Minimum Steiner Forest
-\subsection{Minimum Steiner Forest}
+\subsection{\scriptSection{10.4} \Problem{Minimum Steiner Forest} mit (I)LP}
 
 % 10.7
 \begin{satz}
@@ -1393,57 +1594,8 @@ TODO: Wie kann man eine Baumzerlegung zur Berechnung eines MIS verwenden?
   \]
 \end{beweisidee}
 
-% §11. Limits to Approximability
-\section{Grenzen der Approximierbarkeit}
-
-% §11.1 Probabilistically Checkable Proofs
-
-\begin{defn}[\emph{Probabilistically Checkable Proofs}]
-  Sei $L$ eine Sprache und $r, q : \N_0 \to \N$ Funktionen.
-  Ein \emph{Verifizierer} ist ein Programm, das testen soll, ob (angebliche) Beweise in Form von Binärworten der Aussage $x \in L$ für ein gegebenes Wort~$x$ korrekt sind.
-  Der Verifizierer bekommt dazu das Wort~$x$ der Länge~$n$ sowie $\O(r(n))$ unabhängig und gleichmäßig verteilte Zufallsbits.
-  Dann erzeugt der Verifizierer $\O(q(n))$ Positionen von Bits.
-  Der Verifizierer bekommt dann die Bits an den von ihm verlangten Positionen in einem (potentiellen) Beweis~$B$ für die Aussage $x \in L$.
-  Dann muss der Verifizierer entscheiden, ob er glaubt, ob $B$ ein richtiger Beweis ist.
-\end{defn}
-
-\begin{defn}
-  Eine Sprache $L$ gehört zur Komplexitätsklasse $\Defn{\PCP(r(n), q(n))}$, falls ein Verifizierer für~$L$ existiert, der $\O(r(n))$ Zufallsbits bekommt und vom Beweis $\O(q(n))$ Bits liest, sodass gilt:
-  \begin{itemize}
-    \item Falls $x \in L$, so gibt es einen Beweis~$B$, sodass der Verifizierer~$B$ mit Wahrscheinlichkeit~1 (also immer, egal was die Zufallsbits sind) akzeptiert.
-    \item Falls $x \not\in L$, so wird jeder angebliche Beweis nur mit Wahrscheinlichkeit $< 1/2$ akzeptiert.
-  \end{itemize}
-\end{defn}
-
-\begin{resultat}[\emph{PCP-Theorem}]
-  $\NP = \PCP(\log n, 1)$
-\end{resultat}
-
-% §11.2. Inapproximability of MaxSAT
-
-\begin{satz}
-  $\mathrm{MaxSAT} \not\in \PTAS$ falls $\P \neq \NP$
-\end{satz}
-
-\begin{beweisskizze}
-  Sei $L$ eine NP-vollständige Sprache. \\
-  Nach dem PCP-Theorem gibt es einen Verifizierer~$V$ für~$L$, der $r(n)$ Zufallsbits nimmt und $q$ Bits liest, wobei $r(n) = \O(\log n)$. \\
-  Sei ein Wort $x$ gegeben.
-  Erzeuge eine Formel~$F$ wie folgt: \\
-  Für Zufallsbits $y \in \{ 0, 1 \}^{r(n)}$ und jede Kombination $(b_1, \ldots, b_q) \in \{ 0, 1 \}^q$ von Bits an den verlangten Positionen, die zusammen zur Ablehnung führen, generiere eine Klausel $l_1 \vee \ldots \vee l_q$ mit $l_i \coloneqq v_{y,i}$ falls $b_i = 0$ und $l_i \coloneqq \overline{v_{y,i}}$ sonst.
-  Dann gilt:
-  \begin{itemize}
-    \item Ist $x \in L$, so ist $F$ erfüllbar.
-    \item Ist $x \not\in L$, so gilt für jede mögliche Variablenbelegung: Für mehr als die Hälfte der möglichen Werte von~$y$ gibt es mindestens eine für~$y$ generierte Klausel, die nicht erfüllt ist. \\
-    Somit sind immer $> 2^{r(n) - 1}$ der insgesamt $\leq 2^{r(n) + q}$, also ein Anteil von $> 2^{-q-1} =: \epsilon$ nicht erfüllt.
-  \end{itemize}
-  Wäre $\mathrm{MaxSAT} \in \PTAS$, so könnte man durch Anwendung des PTAS mit~$\epsilon$ entscheiden, welcher Fall vorliegt.
-\end{beweisskizze}
-
-% ausgelassen: §11.3 Inapproximability of Maximum Clique
-
 % §12. A linear Vertex-Cover Kernel
-\section{Ein linearer Kernel für Vertex-Cover}
+\subsection{\scriptSection{12} Ein linearer Kernel für \Problem{Min. Vertex Cover}}
 
 % 12.1
 \begin{resultat}[\emph{Egerváry-König}]
@@ -1506,158 +1658,66 @@ Die Korrektheit des Algorithmus folgt aus:
   Dieser Kernel ist \textit{linear} wegen $\size{V_H} \leq 2 k$.
 \end{bem}
 
-Bester Kern (Hagerup, 2012): Es gibt eine Kernelisierung von Edge Dominating Set mit $\#\text{Knoten} \leq \max \{ \tfrac{1}{2} k^2 + \tfrac{7}{2} k, 6 k \}$
+Bester Kern (Hagerup, 2012): Es gibt eine Kernelisierung von Edge Dominating Set mit $\#\text{Knoten} \leq \max \{ \tfrac{1}{2} k^2 + \tfrac{7}{2} k, 6 k \}$.
 %  Carbonnel/Herbrard: Diese ist eine $\infty$-loss-less kernelization
 Offenes Problem: Gibt es Kernelization mit $\#\text{Knoten} = \O(k)$ oder $\O(k^2)$?
 
-\section{Probleme}
+% §11. Limits to Approximability
+\section{\scriptSection{11} Grenzen der Approximierbarkeit}
 
-\begin{problem}[\Problem{Maximum Independent Set}, MIS]
-  Geg. einen unger. Graphen~$(V, E)$, berechne eine \textit{unabh. Menge}~$M \subseteq V$, \dh{}
-  \[
-    \fa{v \in M} \fa{w \in V} (v, w) \in E \implies w \not\in M,
-  \]
-  die maximale Größe~$\size{M}$ unter allen unabhängigen Mengen besitzt.
-\end{problem}
+% aus §4.3. Relative Approximation
+\begin{satz}
+  Falls $\P \neq \NP$, so gilt Minimum TSP $\not\in \APX$.
+\end{satz}
 
-\begin{problem}[\Problem{Minimum Vertex Cover}, MVC]
-  Geg. einen unger. Graphen~$G = (V, E)$, berechne eine \textit{Knotenüberdeckung}~$C$, \dh{}
-  \[
-    \fa{v, w \in V} \{v, w\} \in E \implies v \in C \vee w \in C,
-  \]
-  die minimale Größe~$\size{C}$ unter allen Knotenüberdeckungen besitzt.
-\end{problem}
+\begin{beweisidee}
+  Wäre Minimum TSP $r$-approximierbar, so könnte man diesen Algorithmus verwenden, um das NP-Problem, ob ein Graph einen Hamiltonweg besitzt, zu entscheiden.
+\end{beweisidee}
 
-\begin{problem}[\Problem{Minimum Weighted Vertex Cover}]
-  Geg. einen unger. Graphen~$G = (V, E)$ und eine \textit{Kostenfunktion} $c : V \to \R_{\geq 0}$, berechne eine \textit{Knotenüberdeckung}~$C$, die minimale \textit{Kosten} ${\sum}_{v \in C} c(v)$ unter allen Knotenüberdeckungen besitzt.
-\end{problem}
+% §11.1 Probabilistically Checkable Proofs
 
-\begin{bem}
-  Für einen Graphen $(V, E)$ und eine Teilmenge $S \subseteq V$ gilt: \\
-  $S$ ist eine unabhängige Menge $\iff$ $V \setminus S$ ist ein Vertex Cover \\
-  Die Probleme MIS und MVC sind damit äquivalent.
-\end{bem}
-
-\begin{defn}
-  Ein \emph{Intervallmodell} eines Graphen $G = (V, E)$ ist eine Abbildung $\phi : E \to \Set{\cinterval{a}{b}}{a, b \in \Q}$, sodass
-  \[
-    \fa{v \neq w \in V} \enspace
-    (v, w) \in E \iff \phi(v) \cap \phi(w) \neq \emptyset.
-  \]
-  Ein Graph heißt \emph{Intervallgraph}, falls er ein Intervallmodell besitzt.
+\begin{defn}[\emph{Probabilistically Checkable Proofs}]
+  Sei $L$ eine Sprache und $r, q : \N_0 \to \N$ Funktionen.
+  Ein \emph{Verifizierer} ist ein Programm, das testen soll, ob (angebliche) Beweise in Form von Binärworten der Aussage $x \in L$ für ein gegebenes Wort~$x$ korrekt sind.
+  Der Verifizierer bekommt dazu das Wort~$x$ der Länge~$n$ sowie $\O(r(n))$ unabhängig und gleichmäßig verteilte Zufallsbits.
+  Dann erzeugt der Verifizierer $\O(q(n))$ Positionen von Bits.
+  Der Verifizierer bekommt dann die Bits an den von ihm verlangten Positionen in einem (potentiellen) Beweis~$B$ für die Aussage $x \in L$.
+  Dann muss der Verifizierer entscheiden, ob er glaubt, ob $B$ ein richtiger Beweis ist.
 \end{defn}
 
-\begin{problem}[\Problem{Minimum Makespan Scheduling}]
-  Seien $p, n \in \N$ und $l_1, \ldots, l_n \in \R_{> 0}$ gegeben.
-  Für $f : \{ 1, \ldots, n \} \to \{ 1, \ldots, p \}$ setze
-  \[ t(f) \coloneqq \max_{1 \leq i \leq p} \sum_{j \in f^{-1}(i)} l_j. \]
-  Berechne das~$f$, für das $t(f)$ minimal wird!
-\end{problem}
+\begin{defn}
+  Eine Sprache $L$ gehört zur Komplexitätsklasse $\Defn{\PCP(r(n), q(n))}$, falls ein Verifizierer für~$L$ existiert, der $\O(r(n))$ Zufallsbits bekommt und vom Beweis $\O(q(n))$ Bits liest, sodass gilt:
+  \begin{itemize}
+    \item Falls $x \in L$, so gibt es einen Beweis~$B$, sodass der Verifizierer~$B$ mit Wahrscheinlichkeit~1 (also immer, egal was die Zufallsbits sind) akzeptiert.
+    \item Falls $x \not\in L$, so wird jeder angebliche Beweis nur mit Wahrscheinlichkeit $< 1/2$ akzeptiert.
+  \end{itemize}
+\end{defn}
 
-\begin{interp}
-  $p$ ist die Anzahl von \textit{Arbeitern},
-  $l_1, \ldots, l_n$ sind die Längen von zu erledigenden \textit{Jobs}
-  und $t(f)$ ist die \textit{Gesamtdauer} bei der durch~$f$ gegebenen Verteilung der Jobs auf die Arbeiter an.
-\end{interp}
+\begin{resultat}[\emph{PCP-Theorem}]
+  $\NP = \PCP(\log n, 1)$
+\end{resultat}
 
-\begin{bem}
-  MMS ist NP-hart, da das zugeh. Entscheidungsproblem Bin Packing bekannterweise NP-hart ist.
-\end{bem}
+% §11.2. Inapproximability of MaxSAT
 
-\begin{problem}[\Problem{Maximum Knapsack}]
-  Seien $n \in \N$ und $v_1, \ldots, v_n$, $w_1, \ldots, w_n, W \in \R_{> 0}$ gegeben.
-  Die Menge der möglichen Lsgn sei
-  \[ \Feasible \coloneqq \Set{S \subseteq \{ 1, \ldots, n \}}{{\sum}_{i \in S} w_i \leq W}. \]
-  Gesucht: ${\argmax}_{S \in \Feasible} {\sum}_{i \in S} v_i$
-\end{problem}
+\begin{satz}
+  $\mathrm{MaxSAT} \not\in \PTAS$ falls $\P \neq \NP$
+\end{satz}
 
-\begin{interp}
-  Man wählt unter $n$ Sachen mit jeweils einem \textit{Gewicht}~$w_i$ und einem \textit{Nutzwert}~$v_i$ diejenigen aus, die man in einen Rucksack packt, sodass das Gesamtgewicht eine festgelegte Grenze~$W$ nicht übersteigt und der Nutzen maximal wird.
-\end{interp}
+\begin{beweisskizze}
+  Sei $L$ eine NP-vollständige Sprache. \\
+  Nach dem PCP-Theorem gibt es einen Verifizierer~$V$ für~$L$, der $r(n)$ Zufallsbits nimmt und $q$ Bits liest, wobei $r(n) = \O(\log n)$. \\
+  Sei ein Wort $x$ gegeben.
+  Erzeuge eine Formel~$F$ wie folgt: \\
+  Für Zufallsbits $y \in \{ 0, 1 \}^{r(n)}$ und jede Kombination $(b_1, \ldots, b_q) \in \{ 0, 1 \}^q$ von Bits an den verlangten Positionen, die zusammen zur Ablehnung führen, generiere eine Klausel $l_1 \vee \ldots \vee l_q$ mit $l_i \coloneqq v_{y,i}$ falls $b_i = 0$ und $l_i \coloneqq \overline{v_{y,i}}$ sonst.
+  Dann gilt:
+  \begin{itemize}
+    \item Ist $x \in L$, so ist $F$ erfüllbar.
+    \item Ist $x \not\in L$, so gilt für jede mögliche Variablenbelegung: Für mehr als die Hälfte der möglichen Werte von~$y$ gibt es mindestens eine für~$y$ generierte Klausel, die nicht erfüllt ist. \\
+    Somit sind immer $> 2^{r(n) - 1}$ der insgesamt $\leq 2^{r(n) + q}$, also ein Anteil von $> 2^{-q-1} =: \epsilon$ nicht erfüllt.
+  \end{itemize}
+  Wäre $\mathrm{MaxSAT} \in \PTAS$, so könnte man durch Anwendung des PTAS mit~$\epsilon$ entscheiden, welcher Fall vorliegt.
+\end{beweisskizze}
 
-\begin{problem}[\Problem{Maximum Integer Knapsack}] \mbox{}\\
-  Wie Maximum Knapsack aber mit $v_1, \ldots, v_n \in \N_{> 0}$.
-\end{problem}
-
-\begin{problem}[\Problem{Minimum Set Cover}]
-  Gegeben seien $n \in \N$ und $\mathcal{C}_0 \subseteq \Powerset(\{ 1, \ldots, n \})$.
-  Die Menge der möglichen Lösungen ist
-  \[ \Feasible \coloneqq \Set{\mathcal{C} \subseteq \mathcal{C}_0}{{\bigcup}_{S \in \mathcal{C}} S = {\bigcup}_{S \in \mathcal{C}_0} S} \]
-  Aufgabe: Finde $\mathcal{C} \in \Feasible$ mit minimalem $\size{\mathcal{C}}$!
-\end{problem}
-
-\begin{bem}
-  Minimum Set Cover verallgemeinert Minimum Vertex Cover.
-\end{bem}
-
-\begin{problem}[\Problem{Minimum Vertex Coloring}, \Youtube{4FE79y_JkCE}]
-  Gegeben sei ein unger. Graph~$G = (V, E)$.
-  Die Menge der \textit{Eckenfärbungen} ist
-  \[
-    \Feasible \coloneqq \Set{\text{Abbildungen } c : V \to \N}{\fa{\{v, w\} \in E} c(v) \neq c(w)}.
-  \]
-  Ziel: Finde $c \in \Feasible$ mit minimaler Anzahl $\max c(V)$ an Farben.
-\end{problem}
-
-\begin{problem}[\Problem{Minimum Edge Coloring}]
-  Gegeben sei ein unger. Graph~$G = (V, E)$.
-  Die Menge der \textit{Kantenfärbungen} ist
-  \[
-    \Feasible \coloneqq \Set{\text{Abb. } c : E \to \N}{\fa{e_1 \neq e_2 \in E} e_1 \cap e_2 \neq \emptyset \implies c(e_1) \neq c(e_2)}
-  \]
-  Ziel: Finde $c \in \Feasible$ mit minimaler Anzahl $\max c(V)$ an Farben.
-\end{problem}
-
-\begin{problem}[\Problem{Minimum TSP}]
-  Gegeben sei ein vollständiger unger. Graph $G = (V, E)$ und eine Abb. $c : E \to \R_{\geq 0}$.
-  % Gegeben sei eine endliche Menge $V$ und eine Abb. $c : V \times V \to \R_{\geq 0}$ mit $c(x, y) = c(y, x)$ für alle $x, y \in V$.
-  Gesucht ist eine zyklische Permutation $\sigma$ von~$V$ (eine \textit{Tour}), sodass die \textit{Länge} ${\sum}_{v \in V} c(\{ v, \sigma(v) \})$ minimal wird.
-\end{problem}
-
-\begin{problem}[\Problem{Minimum $\Delta$-TSP}]
-  Gegeben sei ein endlicher metrischer Raum~$(V, c)$.
-  Gesucht ist eine zyklische Permutation $\sigma$ von~$V$ (eine \textit{Tour}), sodass die \textit{Länge} ${\sum}_{v \in V} c(v, \sigma(v))$ minimal wird.
-\end{problem}
-
-\begin{problem}[\Problem{$k$-SAT(isfiability)}] \mbox{} \\
-  Gegeben sei eine Formel in konjunktiver Normalform, etwa
-  \[ (x_1 \vee x_2 \vee \overline{x_3}) \wedge (\overline{x_1} \vee \overline{x_3} \vee x_4 \vee \overline{x_5}) \wedge (x_2 \vee x_5) \wedge (x_3 \vee \overline{x_4}). \]
-  Die Maximalzahl an \textit{Literalen} in einer \textit{Clause} sei dabei $\leq k$.
-  Entscheide, ob die Formel \emph{erfüllbar} ist,\dh{} ob es eine Zuweisung der Variablen gibt, sodass die Formel wahr ist.
-\end{problem}
-
-\begin{problem}[\Problem{MaxSAT}]
-  Gegeben eine Formel in konjunktiver Normalform, finde eine Zuweisung der Variablen, die die Anzahl der gültigen Clauses maximiert.
-\end{problem}
-
-\begin{problem}[\Problem{Minimum Bin Packing}]
-  Gegeben seien \textit{Objektgrößen} $v_1, \ldots, v_n \in \cinterval{0}{1}$.
-  \textit{Packungen} sind Abbildungen $f : \{ 1, \ldots, n \} \to \N$, die jedem \textit{Objekt} einen \textit{Behälter} (mit Volumen 1) zuweisen, sodass
-  \[
-    {\sum}_{i \in f^{-1}(j)} v_i \leq 1 \quad
-    \text{für alle $j \in \N$.}
-  \]
-  Gesucht ist ein~$f$ mit minimaler Anzahl $\max \im(f)$ von Behältern.
-\end{problem}
-
-\begin{problem}[\Problem{Minimum Dominating Set}]
-  Eine \emph{dominierende Menge} eines Graphen $G = (V, E)$ ist eine Menge $D \subseteq V$ mit $V = D \cup \Neighbours_G(D)$.
-  Gegeben einen Graphen~$G$, finde eine dominierende Menge~$D$ kleinster Größe~$\size{D}$!
-\end{problem}
-
-\begin{problem}[\Problem{Black-and-White Dominating Set}]
-  Gegeben einen unger. Graph $G = (B \cup W, E)$ mit $B \cap W = \emptyset$, finde ein $D \subseteq B \cup W$ minimaler Größe, sodass $B \subseteq D \cup \Neighbours_G(D)$.
-\end{problem}
-
-\begin{problem}[\Problem{Edge Dominating Set}]
-  Gegeben einen unger. Graph $G$ und $k \in \N$.
-  Frage: Gibt es eine Kantendominierung der Größe $\leq k$, \dh{} gibt es ein $D \subseteq E$ mit $\size{D} \leq k$, sodass jede Kante in~$E$ mindestens einen Endpunkt mit einer Kante aus~$D$ gemeinsam hat?
-\end{problem}
-
-\begin{problem}[\Problem{Minimum Steiner Forest}]
-  Geg. sei ein unger. Graph $G = (V, E)$ eine \textit{Kostenfktn} $c : E \to \R_{\geq 0}$ und eine Abb. $r : V \to \N$.
-  Mögliche Lsgn sind Teilmengen $F \subseteq E$ von~$G$, sodass alle $u, v \in V$ mit $r(u) = r(v)$ durch einen Pfad mit Kanten in~$F$ verbunden sind.
-  Gesucht ist ein solcher Subgraph, der ${\sum}_{e \in E_F} c(e)$ minimiert.
-\end{problem}
+% ausgelassen: §11.3 Inapproximability of Maximum Clique
 
 \end{document}
