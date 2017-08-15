@@ -40,6 +40,7 @@
 \DeclareMathOperator*{\argmin}{arg\,min}
 \newcommand{\Powerset}{\mathcal{P}} % Potenzmenge
 \renewcommand{\O}{\mathcal{O}} % Landau-Notation
+\newcommand{\ceil}[1]{\lceil #1 \rceil} % Aufrunden
 \newcommand{\floor}[1]{\lfloor #1 \rfloor} % Abrunden
 \DeclareMathOperator{\Neighbours}{Neighbours} % Nachbarknoten (in einem Graphen)
 \DeclareMathOperator{\treewidth}{tw} % Baumweite
@@ -334,7 +335,7 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
   $\Defn{\mathrm{(A)(F)PTAS}} \coloneqq \Set{\Prob \in \NPO}{\text{$\Prob$ hat ein (A)(F)PTAS}}$
 \end{defn}
 
-\section{Optimierungsprobleme (in $\NPO{}$)}
+\section{Optimierungsprobleme (in $\NPO$)}
 
 \subsection{Überdeckungsprobleme}
 
@@ -673,7 +674,7 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
 
 % 2.12
 \begin{lem}
-  Ein zshgder ungerichteter Multigraph ist genau dann Eulersch, wenn alle seine Knoten den Grad zwei haben.
+  Ein zshgder ungerichteter Multigraph ist genau dann Eulersch, wenn alle seine Knoten geraden Grad haben.
   In dem Fall kann man eine Eulertour in Polynomialzeit finden.
 \end{lem}
 
@@ -700,6 +701,8 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
   Minimum $\Delta$-TSP ist $3/2$-approximierbar.
 \end{satz}
 
+\begin{samepage}
+
 \begin{beweisskizze}
   Sei $(V, c)$ eine Instanz und $z^*$ die minimale Länge einer Tour.
   Berechne einen minimalen Spannbaum.
@@ -710,11 +713,6 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
 \end{beweisskizze}
 
 \subsection{\scriptSection{4.4} Ein Approx'alg.\ für \Problem{Min. Vertex Coloring}}
-
-% aus §3.6. Minimum Vertex Coloring:
-\begin{bem}
-  Der naive Greedy-Algorithmus für MVC, der die Knoten absteigend nach Grad sortiert und dann in der Reihenfolge in der jeweils kleinsten verfügbaren Farbe färbt, hat ein Worst-Case-Approximationsverhältnis von $\Omega(n)$.
-\end{bem}
 
 \begin{alg}[\Algorithm{Greedy Vertex Coloring}] \mbox{}\\
   Wiederhole folgende Schritte, bis alle Knoten gefärbt sind:
@@ -731,9 +729,26 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
   \end{enumerate}
 \end{alg}
 
+\end{samepage}
+
 \begin{satz}
   Greedy Vertex Coloring ist (für Graphen mit $n$~Knoten) ein $\O(n / \log n)$-Approximationsalgorithmus.
 \end{satz}
+
+\begin{beweisskizze}
+  Sei $k$ die optimale Zahl an benötigten Farben. \\
+  Sei $m_i$ ($i \geq 0$) die Anzahl der Knoten in~$H$ am Beginn der $i$-ten Iteration der inneren Schleife.
+  Dann gibt es ein IS der Größe $\geq m_i/k$ in~$H$ und somit ist in~$H$ der Maximalgrad $\leq m - m/k$. \\
+  Somit ist $m_{i+1} \geq m_i/k - 1$.
+  Durch Induktion folgt $m_i \geq m_0/k^i - 2$. \\
+  Also gilt dann $\abs{I} = \min \Set{i}{m_i = 0} \geq \log(m_0/2) / \log(k)$. \\
+  Daraus kann man eine Schranke für die benötigten Iterationen der äußeren Schleife, was der Anzahl Farben entspricht, herleiten.
+\end{beweisskizze}
+
+% aus §3.6. Minimum Vertex Coloring:
+\begin{bem}
+  Der naive Greedy-Algorithmus für MVC, der die Knoten absteigend nach Grad sortiert und dann in der Reihenfolge in der jeweils kleinsten verfügbaren Farbe färbt, hat ein Worst-Case-Approximationsverhältnis von $\Omega(n)$.
+\end{bem}
 
 % §5. Tree-Search Strategies
 \subsection{\scriptSection{5} Idee: Baumsuche}
@@ -748,8 +763,8 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
   Darum mache folgendes:
   Beschrifte die Verzweigungen mit einer (kostengünstig) berechneten unteren Schranke für die Kosten einer Lösung, die Erweiterung der partiellen Lösung ist.
   Expandiere dann wiederholt eine Verzweigung im Baum, \dh{} berechne seine Kindknoten und beschrifte sie mit einer unteren Schranke der Kosten.
-  Verzweigungen, deren untere Schranke mindestens so groß ist wie die Kosten einer bisher gefundenen möglichen Lösung müssen nicht expandiert werden.
-  Gibt es keine Verzweigung mehr, die expandiert werden muss, so ist die bisher gefundene mögliche Lösung mit minimalen Kosten eine optimale Lösung.
+  Verzweigungen, deren untere Schranke mindestens so groß ist wie die Kosten einer bisher gefundenen zulässigen Lösung müssen nicht expandiert werden.
+  Gibt es keine Verzweigung mehr, die expandiert werden muss, so ist die bisher gefundene zulässige Lösung mit minimalen Kosten eine optimale Lösung.
 \end{strategie}
 
 \begin{bem}
@@ -777,14 +792,14 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
 \end{bem}
 
 % §5.3. 3-Satisfiability
-\subsection{\scriptSection{5.3} \Problem{3-Satisfiability} mit Baumsuche}
+\subsection{\scriptSection{5.3} \Problem{3-SATisfiability} mit Baumsuche}
 
 \begin{nota}
-  Für eine logische Formel $F$ und eine Variable $x$ sei $F|_{x=i}$ ($i \in \{0,1\}$) die Formel, die man erhält, wenn man $x$ durch $i$ in~$F$ ersetzt und vereinfacht.
+  Für eine Formel~$F$ (in KNF) und ein Literal~$l$ sei $F|_{l=i}$ ($i \!\in\! \{0,1\}$) die Formel, die man erhält, wenn man~$x$ durch $i$ (bzw. $1 \!-\! i$) ersetzt, wobei $l \!=\! x$ (bzw. $l \!=\! \overline{x}$) für eine Var.~$x$ und vereinfacht.
 \end{nota}
 
 \begin{satz}
-  Eine Instanz $F$ von 3-SAT kann in Zeit $\O(\abs{F} \cdot \alpha_0^n)$ entschieden werden, wobei $\alpha_0 \approx 1.84$ und $\abs{F}$ die Gesamtzahl der Literale in~$F$ ist.
+  Eine Instanz $F$ von 3-SAT kann in Zeit $\O(\abs{F} \cdot \alpha_0^n)$ entschieden werden, wobei $\alpha_0 \approx 1.84$ und $\abs{F} = \#\text{Literale in~$F$}$.
 \end{satz}
 
 \begin{algorithmic}
@@ -802,6 +817,15 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
   \EndFunction
 \end{algorithmic}
 
+\begin{beweisskizze}
+  Sei $f(n)$ die maximale Anzahl an Blättern im Rekursionsbaum für eine Formel mit $n$~Variablen. \\
+  Dann kann man $f(n) \leq \alpha^n$ mit allen $\alpha > 1$ zeigen, für die gilt:
+  \[
+    \alpha^{n-1} + \alpha^{n-2} + \alpha^{n-3} \leq \alpha^n \iff
+    \alpha^{-1} + \alpha^{-2} + \alpha^{-3} \leq 1
+  \]
+\end{beweisskizze}
+
 % §5.4. Minimum Vertex Cover
 \subsection{\scriptSection{5.4} \Problem{Minimum Vertex Cover} mit Baumsuche}
 
@@ -811,7 +835,8 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
 \end{satz}
 
 \begin{nota}
-  Für einen Graphen $G = (V, E)$ und Knoten $W \subseteq V$ sei $G - W$ der Graph $(V', \Set{\{u, w\} \in E}{u, w \in V'})$ mit $V' \coloneqq V \setminus W$, der durch Löschen von~$W$ entsteht.
+  $G - W$ ist der Graph~$G = (V, E)$ mit den Knoten in $W \subseteq V$ und den an~$W$ inzidenten Kanten gelöscht.
+  %Für einen Graphen $G = (V, E)$ und Knoten $W \subseteq V$ sei $G - W$ der Graph $(V', \Set{\{u, w\} \in E}{u, w \in V'})$ mit $V' \coloneqq V \setminus W$, der durch Löschen von~$W$ entsteht.
 \end{nota}
 
 \begin{algorithmic}
@@ -820,8 +845,7 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
     \If{$G$ hat isolierten Knoten $u$}
       \State \Return $\Call{ComputeMVC}{G - \{ u \}}$
     \EndIf
-    \If{$G$ hat Knoten $u$ vom Grad~1}
-      \State sei $v$ der Knoten mit $\{ u, v \} \in E$
+    \If{$G$ hat Knoten $u$ vom Grad~1 mit Nachbar $v$}
       \State \Return $\{ v \} \cup \Call{ComputeMVC}{G - \{ u, v \}}$
     \EndIf
     \If{$G$ hat Dreieck mit Eckknoten $u$, $v$, $w$}
@@ -830,7 +854,7 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
       \State $C_{v,w} \coloneqq \{v, w\} \cup \Call{ComputeMVC}{G - \{ v, w \}}$
       \State \Return kleinste der Überdeckungen $C_{u,v}$, $C_{u,w}$ und $C_{v,w}$
     \EndIf
-    \If{$G$ hat einfachen Pfad mit Knoten $u, v, w$ und $z$}
+    \If{$G$ hat einfachen Pfad $u$ --- $v$ --- $w$ --- $z$}
       \State $C_{u,w} \coloneqq \{u, w\} \cup \Call{ComputeMVC}{G - \{ u, w \}}$
       \State $C_{v,w} \coloneqq \{v, w\} \cup \Call{ComputeMVC}{G - \{ v, w \}}$
       \State $C_{v,z} \coloneqq \{v, z\} \cup \Call{ComputeMVC}{G - \{ v, z \}}$
@@ -839,22 +863,31 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
   \EndFunction
 \end{algorithmic}
 
+\begin{samepage}
+
 \begin{bem}
   In der Umgebung jedes Knoten eines Graphen tritt einer der vier Fälle auf.
   Es kann daher in konstanter Zeit einer der vier Fälle ausgewählt werden.
-  (Es muss nicht darauf geachtet werden, die Fälle von oben nach unten durchzuarbeiten!)
+  Auf Reihenfolge muss nicht geachtet werden!
 \end{bem}
 
 Wir sagen, ein Fall \textit{verzweigt gemäß} $A_1, \ldots, A_k$, falls er den Algorithmus rekursiv mit Argumenten $G - A_1$, \ldots, $G - A_k$ aufruft.
 Die Multimenge $\{ \size{A_1}, \ldots, \size{A_k} \}$ heißt zugehörige \textit{Verzweigungs- multimenge}.
 Für eine solche Multimenge $\{ a_1, \ldots, a_k \}$ setzen wir
-\[ \alpha(a_1, \ldots, a_k) \coloneqq \max \, \Set{x \geq 1}{x^{-a_1} + \ldots + x^{-a_k} \geq 1}. \]
-Schaffen wir es, einen Algorithmus mit $m$~Fällen mit Verzweigungs- multimengen $A_1, \ldots, A_m$ anzugeben (sodass in konstanter Zeit entschieden werden kann, welcher Fall vorliegt), so läuft der Algorithmus in Zeit $\O(\alpha_0^n \cdot m + n)$, wobei $\max \, \Set{\alpha(A_i)}{i = 1, \ldots, m}$
+\[ \alpha(a_1, \ldots, a_k) \coloneqq \text{das eindeutige $x \geq 1$ mit } x^{-a_1} + \ldots + x^{-a_k} = 1. \]
+
+\end{samepage}
+
+Schaffen wir es, einen Algorithmus mit $m$~Fällen mit Verzweigungs- multimengen $\mathcal{A}_1, \ldots, \mathcal{A}_m$ anzugeben (sodass in konstanter Zeit entschieden werden kann, welcher Fall vorliegt), so läuft der Algorithmus in Zeit $\O(\alpha_0^n \cdot m + n)$, wobei $\max \, \Set{\alpha(\mathcal{A}_i)}{i = 1, \ldots, m}$
 
 % 5.3
 \begin{satz}
   Instanzen von Minimum Vertex Cover mit $n$~Knoten und $m$~Kanten können in Zeit $\O(\alpha_0^n \cdot m + n)$ gelöst werden, wobei $\alpha_0 \approx 1,325$ die Wurzel von $x^3 - x - 1$ ist.
 \end{satz}
+
+\begin{beweisidee}
+  Richtig krasse Fallunterscheidung
+\end{beweisidee}
 
 % §6. Dynamic Programming
 
@@ -873,7 +906,7 @@ Schaffen wir es, einen Algorithmus mit $m$~Fällen mit Verzweigungs- multimengen
   \[
     P_{j,v} \coloneqq
       \begin{array}[t]{l}
-        \text{finde $S \subset \{ 1, \ldots, j \}$ mit ${\sum}_{i \in S} v_i = v$ und} \\
+        \text{finde $S \subseteq \{ 1, \ldots, j \}$ mit ${\sum}_{i \in S} v_i = v$ und} \\
         \text{${\sum}_{i \in S} w_i$ minimal unter allen solchen Teilmengen!}
       \end{array}
   \]
@@ -885,7 +918,7 @@ Schaffen wir es, einen Algorithmus mit $m$~Fällen mit Verzweigungs- multimengen
 \end{bem}
 
 % §6.2 Minimum Bin Packing
-\subsection{\scriptSection{6.2} \Problem{Minimum Bin Packing} mit dyn. Programmierung}
+\subsection{\scriptSection{6.2} \Problem{Minimum Bin Packing} mit dyn. Progr.}
 
 % 6.2
 \begin{satz}
@@ -904,8 +937,8 @@ Schaffen wir es, einen Algorithmus mit $m$~Fällen mit Verzweigungs- multimengen
         \text{${\sum}_{i=1}^j f(i)$ ist minimal unter all solchen $f$.}
       \end{array}
   \]
-  mit $1 \leq j \leq t$ und $B \in \{ 1, \ldots, n \}^r$ mit $B \leq P$.
-  Das ursprüngliche Problem ist $P_{t,P}$.
+  mit $1 \leq j \leq t$ und $B \in \N^r$ mit $B \leq P$.
+  Das urspr.\ Problem ist $P_{t,P}$.
 \end{alg}
 
 % §7. Polynomial Time Approximation Schemes
@@ -918,12 +951,31 @@ Schaffen wir es, einen Algorithmus mit $m$~Fällen mit Verzweigungs- multimengen
 \end{satz}
 
 \begin{alg}
+  (O.\,B.\,d.\,A.\ sei $w_i \leq W$ für alle~$i$.)
   \begin{enumerate}
     \item Setze $K \coloneqq \epsilon V / n^2$, wobei $V \coloneqq v_1 + \ldots + v_n$.
     \item Löse die Instanz $(\floor{v_1/K}, \ldots, \floor{v_n/K}, w_1, \ldots, w_n, W)$ von Maximum \textit{Integer} Knapsack mit dem Algorithmus basierend auf dynamischer Programmierung.
     \item Die Lösung dieses geänderten Problems ist eine $\epsilon$-Approximation des ursprünglichen Problems.
   \end{enumerate}
 \end{alg}
+
+\begin{beweisskizze}
+  Sei $S^*$ eine optimale Lösung.
+  Dann gilt:
+  \[
+    \sum_{i \in S} v_i
+    \geq K \sum_{i \in S} v_i'
+    \geq K \sum_{i \in S^*} v_i'
+    \geq K \sum_{i \in S^*} (\frac{v_i}{K} - 1)
+    \geq \sum_{i \in S^*} v_i - K n
+  \]
+  \[
+    \implies \quad
+    \frac{{\sum}_{i \in S^*} v_i - {\sum}_{i \in S} v_i}{{\sum}_{i \in S^*} v_i}
+    \leq \epsilon \frac{V}{n {\sum}_{i \in S^*} v_i}
+    \leq \epsilon.
+  \]
+\end{beweisskizze}
 
 \subsection{\scriptSection{7} Ein APTAS für \Problem{Minimum Bin Packing}}
 
@@ -932,14 +984,24 @@ Schaffen wir es, einen Algorithmus mit $m$~Fällen mit Verzweigungs- multimengen
   Es gibt einen Algorithmus, der für jede Instanz von \textit{Minimum Bin Packing} mit $n$~Objekten der Größe~$\geq \delta$ eine Packung der Objekte in $(1 + \delta) z^* + 1$ Behälter in Zeit $\O(n^{2/\delta^2 + 2})$ berechnet, wobei $z^*$ die optimale Zahl der Behälter ist.
 \end{lem}
 
-\TODO{Alg. beschreiben}
+\begin{alg}
+  Setze $k \coloneqq \ceil{\delta^2 n}$.
+  Sortiere die Objekte absteigend nach Größe und bilde Gruppen mit je~$k$ Objekten.
+  Benutze je einen eigenen Bin für jedes Objekt der ersten Gruppe.
+  Ersetze in den anderen Gruppen jedes Objekt durch eine Kopie des kleinsten Objekts der vorhergehenden Gruppe.
+  Löse das so durch "`Aufrunden"' vergrößerte Instanz mit dem Algorithmus aus §6.2.
+\end{alg}
 
 % 7.4
 \begin{satz}
   Es gibt einen Algorithmus, der für jede Instanz von \textit{Minimum Bin Packing} mit $n$~Objekten eine Packung der Objekte in $(1 + \delta) z^* + 1$ Behälter in Zeit $\O(n^{8/\delta^2 + 2})$ berechnet.
 \end{satz}
 
-\TODO{Alg. beschreiben}
+\begin{alg}
+  Setze $\delta \coloneqq \epsilon / 2$.
+  Packe die großen ($\geq \delta$) Objekte wie im vorh\@. Lemma.
+  Fülle dann mit den kleinen ($< \delta$) auf und eröffne neue Bins, falls nötig.
+\end{alg}
 
 Somit ist Minimum Bin Packing $\in \APTAS$.
 Man kann sogar zeigen:
@@ -960,22 +1022,22 @@ Man kann sogar zeigen:
 
 % 8.1
 \begin{satz}
-  Es gibt einen Algorithmus, der gegeben einen Graphen~$G$ mit $n$~Ecken und $m$~Kanten und ein $k \geq 0$ in Zeit $\O(n \cdot 1,325^{k} + m)$ ein Minimum Vertex Cover der Größe $\leq k$ berechnet, falls ein solches existiert (falls nicht, so soll der Algorithmus "`keine Lösung"' zurückgeben).
+  Es gibt einen Algorithmus, der gegeben einen Graphen~$G$ mit $n$~Ecken und $m$~Kanten und ein $k \geq 0$ in Zeit $\O(n \cdot 1,325^{k} + m)$ ein Minimum Vertex Cover der Größe $\leq k$ berechnet, falls es ein solches gibt (ansonsten soll der Algorithmus "`keine Lösung"' zurückgeben).
 \end{satz}
 
 \begin{idee}
   Verwende den rekursiven Baumsuche-Algorithmus für Minimum-Vertex-Cover, aber breche die Rekursion ab, wenn das sich in Konstruktion befindende Cover Größe $> k$ erreicht.
-  Außerdem optimiere rekursive Aufrufe dadurch, dass der Graph nicht kopiert für den Aufruf kopiert wird.
+  Außerdem optimiere rekursive Aufrufe dadurch, dass der Graph nicht für den Aufruf kopiert wird.
 \end{idee}
 
 % 8.3
 \begin{satz}
-  Es gibt einen Algorithmus, der gegeben einen Graphen~$G$ mit $n$~Ecken und $m$~Kanten und ein $k \geq 0$ in Zeit $\O(k^2 \cdot 1,325^{k} + n + m)$ ein Minimum Vertex Cover der Größe $\leq k$ berechnet, falls ein solches existiert.
+  Es gibt einen Algorithmus, der gegeben einen Graphen~$G$ mit $n$~Ecken und $m$~Kanten und ein $k \geq 0$ in Zeit $\O(k^2 \cdot 1,325^{k} + n + m)$ ein MVC der Größe $\leq k$ berechnet, falls ein solches existiert.
 \end{satz}
 
 \begin{idee}
   Füge jeden Knoten mit Grad $\geq k$ zum Cover hinzu (da jedes Cover der Größe $\leq k$ diese enthalten muss).
-  Wir können somit annehmen, dass der Maximalgrad in~$G$ $\leq k$ ist.
+  Wir können somit annehmen, dass~$G$ Maximalgrad $\leq k$ hat.
   Lösche alle isolierten Knoten aus~$G$.
   Es gilt: Falls $G$ nun mehr als $k^2$ Kanten oder mehr als $k^2 + k$ Ecken hat, so besitzt $G$ kein Vertex Cover der Größe $\leq k$ und wir können "`keine Lösung"' ausgeben.
   Ansonsten verwende den Algorithmus vom letzten Satz.
@@ -996,28 +1058,36 @@ Man kann sogar zeigen:
   Für eine Formel~$F$ in konj. NF, in der jede Variable, die in positiver wie negativer Form vorkommt, genau zwei mal vorkommt, kann in Zeit $\O(\size{F})$ eine Zuweisung von Variablen gefunden werden, die die Anzahl der erfüllten Clauses maximiert.
 \end{lem}
 
+\begin{alg}
+  Wiederhole die folgenden Schritte:
+  \begin{itemize}
+    \item Setze alle nur pos. / neg.\ vorkommenden Variablen auf~1 / 0.
+    \item Mache Unit-Propagation wo möglich.
+    \item Falls beides nicht möglich, so setze willkürlich eine Variable auf~1.
+  \end{itemize}
+\end{alg}
+
 % 8.8
 \begin{satz}
   Es gibt einen Algorithmus, der gegeben einer Formel in konj. NF und $k \in \N$ in Zeit $\O(k^2 \phi^k + \size{F})$, wobei $\phi = (1 + \sqrt{5}) / 2$, eine Zuweisung der Variablen in~$F$ berechnet, sodass $k$ Clauses erfüllt sind, oder entscheidet, dass es keine solche Zuweisung gibt.
 \end{satz}
 
-Folgender Algorithmus entscheidet bloß, ob es eine solche Zuweisung gibt, man kann ihn aber so abändern, dass er auch eine Zuweisung berechnet:
+Folgender Alg.\ entscheidet bloß, ob es eine solche Zuweisung gibt (eine Variante davon berechnet auch eine Zuweisung):
 
 \begin{algorithmic}
   \Function{DecideMaxSAT}{$F$, $k$}
     \State entferne überflüssige Literale aus allen Clauses
     \State $m \coloneqq $ Anzahl von Clauses in~$F$
     \If{$m < k$} \Return false \EndIf
-    \If{$k \leq \floor{m/2}$} \Return true \EndIf
-    \State $F_L \coloneqq $ Konjunktion der \textit{long Clauses} in~$F$ mit $\geq k$ Literalen
-    \State $F_S \coloneqq $ Konjunktion der \textit{short Clauses} in~$F$ mit $< k$ Literalen
-    \State $m_L \coloneqq $ Anzahl Clauses in $F_L$
-    \Return $\Call{Search}{F_S, k - m_L}$
+    \If{$k \leq \ceil{m/2}$} \Return true \EndIf
+    \State $F_S \coloneqq $ Konjunktion der \textit{short Clauses} mit $< k$ Literalen in~$F$
+    \State $m_L \coloneqq $ Anzahl von \textit{long Clauses} mit $\geq k$ Literalen in~$F$
+    \State \Return $\Call{Search}{F_S, k - m_L}$
   \EndFunction
 
   \Function{Search}{$F'$, $j$}
     \If{$j \leq 0$} \Return true \EndIf
-    \If{$F'$ hat weniger als $j$ Clauses} \Return false \EndIf
+    \If{$F'$ hat $< j$ Clauses} \Return false \EndIf
     \If{keine Variable tritt positiv und negativ in $F'$ auf}
       \State \Return true
     \EndIf
@@ -1025,19 +1095,22 @@ Folgender Algorithmus entscheidet bloß, ob es eine solche Zuweisung gibt, man k
     \State \quad eine Variable $x$, die am öftesten auftritt
     \State $m_0 \coloneqq $ Anzahl der negativen Vorkommen von~$x$
     \State $m_1 \coloneqq $ Anzahl der positiven Vorkommen von~$x$
-    \If{$m_0 = m_1 = 0$}
+    \If{$m_0 = m_1 = 1$}
       \State $k' \coloneqq $ max. Anzahl von erfüllb. Clauses in $F'$ (siehe Lem.)
       \State \Return $k' \geq j$
-    \Else
-      \If{$\Call{Search}{F'|_{x=0}, j - m_0}$}
-        \Return true
-      \EndIf
-      \Return $\Call{Seach}{F'|_{x=1}, j - m_1}$
     \EndIf
+    \If{$\Call{Search}{F'|_{x=0}, j - m_0}$}
+      \Return true
+    \EndIf
+    \Return $\Call{Search}{F'|_{x=1}, j - m_1}$
   \EndFunction
 \end{algorithmic}
 
-Mit einer etwas einfacheren $\Call{Search}{}$-Prozedur kann man schon zeigen:
+\begin{beweisidee}
+  Die Rekurrenzrelation für die Anzahl der Blätter im Rekursionsbaum von~$\Call{Search}{}$ ist $f(n) \leq f(n-1) + f(n-2)$.
+\end{beweisidee}
+
+Mit einer einfacheren $\Call{Search}{}$-Prozedur kann man schon zeigen:
 
 % 8.6
 \begin{satz}
@@ -1093,7 +1166,7 @@ Mit einer etwas einfacheren $\Call{Search}{}$-Prozedur kann man schon zeigen:
     \item $\fa{\{ u, v \} \in E} \ex{x \in X} \{ u, v \} \subseteq B(x)$
     \item Zus'hang: $\fa{x, y, z \in X} \text{$y$ liegt auf Pfad zw. $x$ und~$z$ in~$T$} \implies B(x) \cap B(z) \subseteq B(y)$.
   \end{itemize}
-  Die \emph{Weite} einer Baumzerlegung~$(T, B)$ ist $\max_{x \in X} \size{B(x)} - 1$.
+  Die \emph{Weite} einer Baumzerlegung~$(T, B)$ ist ${\max}_{x \in X} \size{B(x)} - 1$. \\
   Die \emph{Baumweite} $\treewidth(G)$ von~$G$ ist die kleinstmögliche Weite einer Baumzerlegung von~$G$.
 \end{defn}
 
@@ -1725,6 +1798,14 @@ Offenes Problem: Gibt es Kernelization mit $\#\text{Knoten} = \O(k)$ oder $\O(k^
 
 \begin{beweisidee}
   Wäre Minimum TSP $r$-approximierbar, so könnte man diesen Algorithmus verwenden, um das NP-Problem, ob ein Graph einen Hamiltonweg besitzt, zu entscheiden.
+\end{beweisidee}
+
+\begin{satz}
+  Falls $\P \neq \NP$, so gilt Minimum Bin Packing $\not\in \PTAS$
+\end{satz}
+
+\begin{beweisidee}
+  Ansonsten wäre das NP-vollständige Problem, zu entscheiden ob gegebene Objekte in zwei Bins passen, lösbar.
 \end{beweisidee}
 
 % §11.1 Probabilistically Checkable Proofs
