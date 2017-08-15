@@ -1121,13 +1121,15 @@ Mit einer einfacheren $\Call{Search}{}$-Prozedur kann man schon zeigen:
 \subsection{\scriptSection{8.3} Parametrisierung durch Baumweite}
 
 % Übungsaufgabe 8.3
-\begin{bem}
+\begin{motivation}
   Auf Graphen, die Bäume sind, können folgende Probleme in polynomieller Zeit gelöst werden:
   \begin{itemize}
     \item Maximum Independent Set (bzw. Minimum Vertex Cover)
     \item Minimum Dominating Set
   \end{itemize}
-\end{bem}
+  Dies ist auch möglich für Graphen mit beschränkter \textit{Baumweite}. \\
+  Für MIS wird in §9.4 ein solcher Algorithmus vorgestellt.
+\end{motivation}
 
 % 8.9, 8.11
 \begin{defn}
@@ -1173,8 +1175,6 @@ Mit einer einfacheren $\Call{Search}{}$-Prozedur kann man schon zeigen:
 %\begin{bem}
 %  Jeder Graph $G$ mit $n$~Knoten hat eine Baumzerlegung der Weite $n-1$.
 %\end{bem}
-
-\TODO{Wie kann man eine Baumzerlegung zur Berechnung eines MIS verwenden?}
 
 % 8.13
 \begin{defn}
@@ -1424,12 +1424,12 @@ Mit einer einfacheren $\Call{Search}{}$-Prozedur kann man schon zeigen:
     \If{$\size{S} > k$} \Return ``no solution'' \EndIf
     \State $W \coloneqq S \cup \Neighbours_G(S)$
     \State $G' \coloneqq (V, E')$ mit $E' \coloneqq E \setminus \Set{\{ u, v \}}{u, v \in W}$
-    \State $G'' \coloneqq (V'', E'')$ mit $V'' \coloneqq V \setminus \Set{v \in W}{\deg_G(v) \leq 1}$
+    \State $G'' \coloneqq (V'', E' \cap \Powerset(V''))$ mit $V'' \coloneqq V \setminus \Set{v \in W}{\deg_{G'}(v) \leq 1}$
     \State finde $v \in V'' \setminus W$ mit $\deg_{G''}(v) \leq 6$
     \IndentState (möglich dank vorhergehendem Lemma)
     \State $N \coloneqq \{ v \} \cup \Neighbours_{G''}(v)$
     \For{$w \in N$}
-      $S_w \coloneqq \Call{DominatingSet}{G'', S \cup \{ w \}, k}$
+      $S_w \coloneqq \Call{DominatingSet}{G, S \cup \{ w \}, k}$
     \EndFor
     \State $C \coloneqq \Set{S_w}{w \in N} \setminus \{ \text{``no solution''} \}$
     \If{$C = \emptyset$} \Return ``no solution'' \EndIf
@@ -1562,9 +1562,9 @@ Mit einer einfacheren $\Call{Search}{}$-Prozedur kann man schon zeigen:
 \end{defn}
 
 % 10.1
-\begin{satz}
+\begin{resultat}
   Jedes lineare Programm~$P$ (mit ganzzahligen Koeffizienten) kann in Zeit~$\O(\size{P})$ gelöst werden, wobei $\size{P}$ die Anzahl Bits in einer Repräsentation von~$P$ ist.
-\end{satz}
+\end{resultat}
 
 \begin{bem}
   In der Praxis lassen sich die meisten LPs effizient mit dem \textit{Simplex-Verfahren} lösen.
@@ -1615,8 +1615,8 @@ Mit einer einfacheren $\Call{Search}{}$-Prozedur kann man schon zeigen:
       \end{array}
     \]
     wobei $V^{+}(C)$ die positiv und $V^{-}(C)$ die negativ auftretenden Variablen in einer Clause $C \in \mathcal{C}$ sind.
-    (Eine Lsg des entspr. ILP wäre eine exakte Lösung von MaxSAT\@.
-    Bemerke: ${\sum}_{C \in \mathcal{C}} x_C \geq z^*$)
+    (Eine Lsg des entspr\@. ILP wäre eine exakte Lösung von MaxSAT\@.
+    Bemerke: ${\sum}_{C \in \mathcal{C}} \hat{x}_C \geq z^*$)
     \item
       Seien die Zufallsvariablen $\Set{Y_v \in \{ 0, 1\}}{v \in V}$ unabhängig mit $\P(Y_v = 1) = \hat{y}_v$ für alle $v \in V$.
       Bestimme eine Variablenbelegung durch Ziehen all dieser ZVn.
@@ -1665,7 +1665,7 @@ Mit einer einfacheren $\Call{Search}{}$-Prozedur kann man schon zeigen:
     \item Simuliere Feuer, die sich von jedem Knoten, der noch nicht über eine Feuerstrecke mit allen Gleichfarbigen verbunden sind, entlang der Kanten ausbreiten.
     Jedes Feuer erzeugt so einen Feuerbaum.
     Wenn zwei Feuer sich treffen, so verschmelzen die Feuerbäume zu einem Baum.
-    Wenn in einem Feuerbaum alle Knoten mit allen Knoten gleicher Farbe verbunden sind, so wird das Feuer inaktiv und setzt sich nicht mehr fort.
+    Wenn in einem Feuerbaum jeder Knoten mit allen Knoten gleicher Farbe verbun- den ist, so wird das Feuer inaktiv und setzt sich nicht mehr fort.
     \item
       Entferne aus dem so generierten Feuerwald alle Kanten, die nicht benötigt werden, um Knoten gleicher Farbe zu verbinden.
       Gebe den Wald bestehend aus den verbleibenden Kanten aus.
@@ -1687,7 +1687,7 @@ Mit einer einfacheren $\Call{Search}{}$-Prozedur kann man schon zeigen:
       \text{minimiere} & {\sum}_{e \in E} c(e) x_e \\
       \text{unter den NBn}
         & {\sum}_{e \in \delta(S)} x_e \geq g(S) & \text{für alle } S \subseteq V \\
-        & 0 \leq x_e \leq 1 & \text{für alle } e \in E
+        & 0 \leq x_e & \text{für alle } e \in E
     \end{array}
   \]
   (Dieses ILP ist aber exponentiell groß!)
@@ -1713,7 +1713,7 @@ Mit einer einfacheren $\Call{Search}{}$-Prozedur kann man schon zeigen:
       & \text{Gesamtkosten der vom obigen Alg. berechneten Lösung} \\
       \leq & 2 \cdot {\sum}_{S \subseteq V} g(S) y_S \\
       \leq & 2 \cdot \text{optimaler Wert des dualen LP} \\
-      \leq & 2 \cdot \text{optimaler Wert des primalen LP (es gilt sogar $=$)} \\
+      \leq & 2 \cdot \text{optimaler Wert des primalen LP \enspace (es gilt sogar "`$=$"')} \\
       \leq & 2 \cdot \text{optimaler Wert des primalen ILP} \\
       = & 2 \cdot \text{optimaler Wert des Minimum-Steiner-Forest-Problems}
     \end{array}
@@ -1729,29 +1729,27 @@ Mit einer einfacheren $\Call{Search}{}$-Prozedur kann man schon zeigen:
   Dann kann ein Minimum Vertex Cover von~$G$ der Größe~$\size{M}$ in Zeit $\O(n+m)$ berechnet werden.
 \end{resultat}
 
-\TODO{Beweisidee angeben}
-
 \begin{satz}
-  Für jeden unger. Graph $G = (V_G, E_G)$ und $k \in \N$ kann ein unger. Graphen $H = (V_H, E_H)$ mit $\size{V_H} \leq 2 k$ und ein $k' \in \{ 0, \ldots, k \}$ berechnet werden, sodass gilt:
+  Für jeden unger. Graph $G = (V_G, E_G)$ und $k \in \N$ kann in Zeit~$\O(n+m)$ ein unger. Graph $H = (V_H, E_H)$ mit $\size{V_H} \leq 2 k$ und ein $k' \in \{ 0, \ldots, k \}$ berechnet werden, sodass gilt:
   \[
     \text{$G$ hat ein VC der Größe $\leq k$} \iff
     \text{$H$ hat ein VC der Größe $\leq k'$}.
   \]
-  Desweiteren können wir in polynomieller Zeit in~$\size{V_G}$ aus einem Vertex Cover von~$H$ der Größe $\leq k'$ ein Vertex Cover von~$G$ der Größe $\leq k$ konstruieren.
+  Desweiteren können wir in Zeit~$\O(n)$ aus einem Vertex Cover von~$H$ der Größe $\leq k'$ ein Vertex Cover von~$G$ der Größe $\leq k$ konstruieren.
 \end{satz}
 
 \begin{alg}
   \begin{itemize}
     \item Setze $G' \coloneqq (V', E')$ mit $V' \coloneqq V_G \times \{ \KCircle, \KSquare \}$ und $E' \coloneqq \Set{\{ (u, \KCircle), (v, \KSquare) \}}{(u, v) \in V_G \times V_G, \, \{ u, v \} \in E_G}$
-    \item Berechne ein MVC~$\mathcal{C}$ von $G'$ mit dem Satz von Egerváry-König; im Folgenden werden Knoten rot ausgefüllt dargestellt, falls sie in diesem MVC enthalten sind, andernfalls als schwarz ausgefüllt
-    \item Ersetze $\dashbox{\KCircleUnsel \enspace \KSquareSel} \rightsquigarrow \dashbox{\KCircleSel \enspace \KSquareUnsel}$ in~$\mathcal{C}$
+    \item Berechne ein MVC~$\mathcal{C}$ von $G'$ mit dem Satz von Egerváry-König; im Folgenden werden Knoten rot ausgefüllt dargestellt, falls sie in diesem MVC enthalten sind, andernfalls als schwarz ausgefüllt.
+    \item Ersetze $\dashbox{\KCircleUnsel \enspace \KSquareSel} \rightsquigarrow \dashbox{\KCircleSel \enspace \KSquareUnsel}$ in~$\mathcal{C}$. (Danach ist $\mathcal{C}$ immer noch ein MVC.)
     \item
       $V_2 \coloneqq \Set{v \in V_G}{(v, \KCircle) \in \mathcal{C}, \, (v, \KSquare) \in \mathcal{C}}$
       $V_1 \coloneqq \Set{v \in V_G}{(v, \KCircle) \in \mathcal{C}, \, (v, \KSquare) \not\in \mathcal{C}}$
       %$V_0 \coloneqq \Set{v \in V_G}{(v, \KCircle) \not\in \mathcal{C}, \, (v, \KSquare) \not\in \mathcal{C}}$
-    \item setze $k' \coloneqq k - \size{V_2}$
-    \item Falls $k' < 0$ oder $\size{V_1} \leq 2 k'$ gib $(\tikz[baseline=-0.5ex]{\draw [fill] (0,0) circle (0.5pt) -- (6pt,0) circle (0.5pt);}, 0)$ zurück (denn dann gibt es kein VC von $G$ der Größe $\leq k$)
-    \item Gib $(G|_{V_1}, k')$ zurück
+    \item Setze $k' \coloneqq k - \size{V_2}$.
+    \item Falls $k' < 0$ oder $\size{V_1} > 2 k'$, so gib $(\tikz[baseline=-0.5ex]{\draw [fill] (0,0) circle (0.5pt) -- (6pt,0) circle (0.5pt);}, 0)$ zurück, denn dann gibt es kein VC von $G$ der Größe $\leq k$.
+    \item Ansonsten gib $(G|_{V_1}, k')$ zurück.
   \end{itemize}
 \end{alg}
 
@@ -1780,7 +1778,7 @@ Die Korrektheit des Algorithmus folgt aus:
 \end{itemize}
 
 \begin{bem}
-  Das Tupel $(H, k')$ wird \textit{Kernel} von $(G, k)$ genannt.
+  Das Tupel $(H, k')$ wird \textit{Kernel} von $(G, k)$ genannt. \\
   Dieser Kernel ist \textit{linear} wegen $\size{V_H} \leq 2 k$.
 \end{bem}
 
