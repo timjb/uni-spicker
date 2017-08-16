@@ -6,9 +6,7 @@
 }
 
 \usepackage{tikz}
-%\tikzset{
-%  font={\fontsize{6pt}{12}\selectfont}
-%}
+\usetikzlibrary{matrix}
 \usepackage{dashbox}
 
 \usepackage{nicefrac}
@@ -42,7 +40,7 @@
 \renewcommand{\O}{\mathcal{O}} % Landau-Notation
 \newcommand{\ceil}[1]{\lceil #1 \rceil} % Aufrunden
 \newcommand{\floor}[1]{\lfloor #1 \rfloor} % Abrunden
-\DeclareMathOperator{\Neighbours}{Neighbours} % Nachbarknoten (in einem Graphen)
+\DeclareMathOperator{\Neighbors}{Neighbors} % Nachbarknoten (in einem Graphen)
 \DeclareMathOperator{\treewidth}{tw} % Baumweite
 \newcommand{\boundary}{\partial} % topologischer Rand
 
@@ -137,6 +135,8 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
   Somit gibt es entweder eine optimale Lösung oder nicht einmal eine zulässige Lösung.
 \end{bem}
 
+\begin{samepage}
+
 % 2.5
 \begin{defn}
   $\Defn{\PO} \subseteq \NPO$ ist die Subklasse für die ein Lösungsalgorithmus existiert, der in Polynomialzeit läuft.
@@ -144,7 +144,7 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
 
 % 2.6
 \begin{beob}
-  $\PO = \NPO \implies \text{P} = \text{NP}$
+  $\P \neq \NP \implies \PO \neq \NPO$
 \end{beob}
 
 % §2.2. Evaluation and Decision Problems
@@ -163,6 +163,8 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
     \item Das zugeh. \emph{Entscheidungsproblem}~$\Prob_D$ ist: Gegeben $x \in \Instances$ und $k \in \Q$, gibt es eine Lösung $y \in \Feasible(x)$ mit $Z(x, y) \leq k$?
   \end{itemize}
 \end{defn}
+
+\end{samepage}
 
 % 2.8
 \begin{lem}
@@ -223,6 +225,8 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
   \end{itemize}
 \end{beweisskizze}
 
+\begin{samepage}
+
 % 2.14
 \begin{defn}
   Ein Optimierungsproblem~$\Prob$ heißt \emph{NP-hart}, falls $\Prob' \TuringRed \Prob$ für jedes Entscheidungsproblem $\Prob'$ in~$\NP$.
@@ -230,7 +234,7 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
 
 % 2.15
 \begin{beob}
-  $\Prob \in \NPO$, $\Prob$ NP-vollständig $\implies$ $\Prob$ NP-hart
+  $\Prob \in \NPO$, $\Prob_D$ NP-vollständig $\implies$ $\Prob$ NP-hart
 \end{beob}
 
 \subsection{\scriptSection{4.1, 4.2} Approximationslösungen und -fehler}
@@ -242,14 +246,16 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
 
 % 4.2
 \begin{defn}
-  Sei $\OptTuple$ ein Optimierungsproblem und $x \in \Instances$ eine Instanz, für die $\Opt(x)$ existiert.
+  Sei $x \in \Instances$ eine Instanz, für die $\Opt(x)$ existiert. \\
   Der \emph{absolute Fehler} von $y \in \Feasible(x)$ ist $\abs{Z(x, y) - \Opt(x)}$.
   % ausgelassen: zweiter Teil der Definition
 \end{defn}
 
+\end{samepage}
+
 % 4.5
 \begin{defn}
-  Sei $\Prob = \OptTuple$ ein Optimierungsproblem mit $Z \geq 0$. \\
+  Gelte $Z \geq 0$.
   Der \emph{relative Fehler} von $y \in \Feasible(x)$ zu~$x \in \Instances$ ist
   \[
     \begin{cases}
@@ -307,6 +313,8 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
   $\Defn{\APX}$ ist die Klasse aller Probleme in NPO, die $r$-approximierbar für ein $r > 1$ sind.
 \end{defn}
 
+\subsection{\scriptSection{7} Polynomialzeit-Approximationsschemata}
+
 % 7.2
 \begin{defn}
   Ein \emph{Polynomialzeit-Approximationsschema} (PTAS) für $\Prob \in \NPO$ ist ein Algorithmus, der für jede Instanz~$x$ von~$\Prob$ und $\epsilon > 0$ eine mögliche Lösung in~$\Feasible(x)$ mit relativem Fehler $\leq \epsilon$ liefert und dessen Laufzeit für jedes fixe $\epsilon > 0$ polynomiell in~$\size{x}$ ist.
@@ -315,10 +323,6 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
 \begin{defn}
   $\Defn{\PTAS} \coloneqq \Set{\Prob \in \NPO}{\text{$\Prob$ hat ein PTAS}}$
 \end{defn}
-
-\begin{bem}
-  $\PO \subseteq \PTAS \subseteq \APX$
-\end{bem}
 
 % 7.5
 \begin{defn}
@@ -332,8 +336,29 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
 \end{defn}
 
 \begin{defn}
-  $\Defn{\mathrm{(A)(F)PTAS}} \coloneqq \Set{\Prob \in \NPO}{\text{$\Prob$ hat ein (A)(F)PTAS}}$
+  $\Defn{\mathrm{(A)(F)PTAS}} \coloneqq \Set{\Prob \in \APX}{\text{$\Prob$ hat ein (A)(F)PTAS}}$
 \end{defn}
+
+\begin{center}
+  \begin{tikzpicture}
+    \matrix (mat) [matrix of nodes, column sep=0.5cm, row sep=0.3cm]{
+      && \node (PTAS) {$\PTAS$}; \\
+      \node (PO) {$\PO$}; &
+      \node (FPTAS) {$\FPTAS$}; &&
+      \node (APTAS) {$\APTAS$}; &
+      \node (APX) {$\APX$}; &
+      \node (NPO) {$\NPO$}; \\
+      && \node (AFPTAS) {$\AFPTAS$}; \\
+    };
+    \draw (PO) to (FPTAS);
+    \draw (FPTAS) to (PTAS);
+    \draw (FPTAS) to (AFPTAS);
+    \draw (PTAS) to (APTAS);
+    \draw (AFPTAS) to (APTAS);
+    \draw (APTAS) to (APX);
+    \draw (APX) to (NPO);
+  \end{tikzpicture}
+\end{center}
 
 \section{Optimierungsprobleme (in $\NPO$)}
 
@@ -361,8 +386,7 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
 
 \begin{bem}
   Für einen Graphen $(V, E)$ und eine Teilmenge $S \subseteq V$ gilt: \\
-  $S$ ist eine unabhängige Menge $\iff$ $V \setminus S$ ist ein Vertex Cover \\
-  Die Probleme MIS und MVC sind damit äquivalent.
+  $S$ ist (max.) unabh. Menge $\iff$ $V \setminus S$ ist (min.) Vertex Cover \\
 \end{bem}
 
 \begin{problem}[\Problem{Minimum Set Cover}]
@@ -399,12 +423,13 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
 \subsection{Dominierende Mengen (in Graphen)}
 
 \begin{problem}[\Problem{Minimum Dominating Set}]
-  Eine \emph{dominierende Menge} eines Graphen $G = (V, E)$ ist eine Menge $D \subseteq V$ mit $V = D \cup \Neighbours_G(D)$.
-  Gegeben einen Graphen~$G$, finde eine dominierende Menge~$D$ kleinster Größe~$\size{D}$!
+  Gegeben sei ein Graph $G \!=\! (V, E)$.
+  Mengen $D \subseteq V$ mit $V = D \cup \Neighbors_G(D)$ heißen \emph{dominierend}.
+  Ziel: finde domin. Menge~$D$ kleinster Größe~$\size{D}$!
 \end{problem}
 
 \begin{problem}[\Problem{Black-and-White Dominating Set}]
-  Gegeben einen unger. Graph $G = (B \cup W, E)$ mit $B \cap W = \emptyset$, finde ein $D \subseteq B \cup W$ minimaler Größe, sodass $B \subseteq D \cup \Neighbours_G(D)$.
+  Gegeben einen unger. Graph $G = (B \cup W, E)$ mit $B \cap W = \emptyset$, finde ein $D \subseteq B \cup W$ minimaler Größe, sodass $B \subseteq D \cup \Neighbors_G(D)$.
 \end{problem}
 
 \begin{problem}[\Problem{Edge Dominating Set}]
@@ -440,8 +465,10 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
   Entscheide, ob die Formel \emph{erfüllbar} ist,\dh{} ob es eine Zuweisung der Variablen gibt, sodass die Formel wahr ist.
 \end{problem}
 
+\begin{samepage}
+
 \begin{problem}[\Problem{MaxSAT}]
-  Gegeben eine Formel in konjunktiver Normalform, finde eine Zuweisung der Variablen, die die Anzahl der gültigen Clauses maximiert.
+  Geg.\ eine Formel in KNF, finde eine Variablenzuweisung, die die Anzahl der gültigen Clauses maximiert.
 \end{problem}
 
 \subsection{Packungs- und Scheduling-Probleme}
@@ -452,6 +479,8 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
   \[ t(f) \coloneqq \max_{1 \leq i \leq p} \sum_{j \in f^{-1}(i)} l_j. \]
   Berechne das~$f$, für das $t(f)$ minimal wird!
 \end{problem}
+
+\end{samepage}
 
 \begin{interp}
   $p$ ist die Anzahl von \textit{Arbeitern},
@@ -487,6 +516,66 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
   \]
   Gesucht ist ein~$f$ mit minimaler Anzahl $\max \im(f)$ von Behältern.
 \end{problem}
+
+\section{Übersicht}
+
+\begin{description}
+  \item[Vertex Cover]
+    für Intervallgraphen in~$\PO$ (§3.2), \\
+    lösbar in $\O(\alpha_0^n \cdot m + n)$ mit $\alpha_0 \approx 1,325$ (§5.4), \\
+    Parametrisierung mit Zeit $\O(k^2 \cdot \alpha_0^k + n + m)$ möglich (§8.1), \\
+    2-approximierbar (sogar mit Gewichten, §10.2), \\
+    linearer Kernel berechenbar in~$\O(n+m)$ (§12)
+
+  \item[Independent Set]
+    für Intervallgraphen in~$\PO$ (§3.2), \\
+    für planare Graphen Param. mit Zeit $\O(6^k \cdot n)$ möglich (§9.2), \\
+    mit Baumzerl.\ der Weite $\leq k$ lösbar in $\O(k 2^k n + k m)$ (§9.4), \\
+    PTAS mit $\tfrac{k}{k+1}$-Approx.\ in~$\O(k^2 2^{3 k} n)$ (§9.4)
+
+  \item[Set Cover]
+    $H_n$-approximierbar (§3.5)
+
+  \item[Vertex Coloring]
+    $\O(n / \log n)$-approximierbar (§4.4)
+
+  \item[Edge Coloring]
+    approximierbar mit abs. Fehler~$1$ (§4.1)
+
+  \item[Dominating Set]
+    für planare Graphen Parametrisierung mit Zeit $\O(7^k \cdot n)$ wobei $k \leq n/28$ möglich (§9.2)
+
+  \item[TSP]
+    $\not\in \APX$ (falls $\P \neq \NP$, §4.3)
+
+  \item[$\Delta$-TSP]
+    $(3/2)$-approximierbar (§4.3)
+
+  \item[Steiner Forest]
+    2-approximierbar (§10.4)
+
+  \item[3-SAT]
+    lösbar in $\O(\abs{F} \cdot \alpha_0^n)$ (§5.3)
+
+  \item[MaxSAT]
+    $\not\in \PTAS$ (falls $\P \not \in \NP$, §11), \\
+    $1/2$-approximierbar (§8.2), \\
+    Parametrisierung mit Zeit $\O(k^2 \phi^k + \abs{F})$ möglich (§8.2), \\
+    im Erwartungswert $3/4$-approximierbar (§10.3)
+
+  \item[Makespan Scheduling]
+    $(3/4)$-approximierbar (§3.3)
+
+  \item[Knapsack]
+    $(1/2)$-approximierbar (§3.4), \\
+    Integer Knapsack pseudopolynomiell in~$\O(n V)$ (§6.1), \\
+    FPTAS mit~$\O(n^3 / \epsilon)$ (§7),
+
+  \item[Bin Packing]
+    $\not\in \PTAS$ (falls $\P \neq \NP$, §7), \\
+    lösbar mit $r$ versch. Größen in~$\O(n^{2r + 2})$ (§6.2), \\
+    APTAS mit $(1+\delta) z^* + 1$ Bins in Zeit $\O(n^{8 / \delta^2 + 2})$ (§7)
+\end{description}
 
 \newpage
 
@@ -787,8 +876,8 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
 \end{bsp}
 
 \begin{bem}
-  In der Praxis schaffen Branch-and-Bound-Algorithmen (für NP-schwere Probleme) oft eine drastische Verkleinerung des Suchraums.
-  Theoretisch haben sie jedoch für gewöhnlich exponentielle Laufzeit.
+  In der Praxis schaffen Branch-and-Bound-Algorithmen oft eine drastische Verkleinerung des Suchraums.
+  Theoretisch haben sie jedoch für gew.\ dieselbe asympt. Laufzeit wie erschöpfende Suche.
 \end{bem}
 
 % §5.3. 3-Satisfiability
@@ -1067,6 +1156,11 @@ Man kann sogar zeigen:
   \end{itemize}
 \end{alg}
 
+\begin{beob}
+  Sei $F$ eine Formel in KNF mit $m$~Clauses und $\alpha$ eine bel. Zuweisung.
+  Dann erfüllt $\alpha$ oder $1 - \alpha$ mindestens $\ceil{m/2}$ Clauses.
+\end{beob}
+
 % 8.8
 \begin{satz}
   Es gibt einen Algorithmus, der gegeben einer Formel in konj. NF und $k \in \N$ in Zeit $\O(k^2 \phi^k + \size{F})$, wobei $\phi = (1 + \sqrt{5}) / 2$, eine Zuweisung der Variablen in~$F$ berechnet, sodass $k$ Clauses erfüllt sind, oder entscheidet, dass es keine solche Zuweisung gibt.
@@ -1223,7 +1317,7 @@ Mit einer einfacheren $\Call{Search}{}$-Prozedur kann man schon zeigen:
 \subsection{\scriptSection{8.4} Berechnung von Baumzerlegungen}
 
 \begin{bem}
-  Entscheiden, ob für ein Tupel $(G, k)$ bestehend aus einem Graph~$G$ und $k \in \N$ der Graph $G$ Baumweite $\leq k$ besitzt, ist NP-vollständig.
+  Entscheiden, ob für ein Tupel $(G, k)$ mit einem Graphen~$G$ und $k \in \N$ der Graph $G$ Baumweite $\leq k$ besitzt, ist NP-vollständig.
 \end{bem}
 
 % 8.20
@@ -1233,7 +1327,7 @@ Mit einer einfacheren $\Call{Search}{}$-Prozedur kann man schon zeigen:
 \end{lem}
 
 \begin{bem}
-  Der Algorithmus von Bodlaender und Kloks ist in der Praxis leider viel zu langsam.
+  Der Alg.\ von B.\ und K.\ ist in der Praxis viel zu langsam.
 \end{bem}
 
 % 8.21
@@ -1287,15 +1381,15 @@ Mit einer einfacheren $\Call{Search}{}$-Prozedur kann man schon zeigen:
     \State $L = (U, E_L) \coloneqq G'$ mit genau so vielen Kanten bel. entfernt,
     \IndentState dass jeder Knoten in $U \setminus W$ Grad $\leq k + 1$ hat
     \State $G'' \coloneqq (U, E'')$ mit $E'' \coloneqq E' \cup \Set{\{ u, v \}}{u, v \in W, \size{N_{u,v}} \geq k+1}$
-    \IndentState wobei $N_{u,v} \coloneqq \Neighbours_L(u) \cap \Neighbours_L(v) \cap (U \setminus W)$
+    \IndentState wobei $N_{u,v} \coloneqq \Neighbors_L(u) \cap \Neighbors_L(v) \cap (U \setminus W)$
     \State $A \coloneqq \Set{u \in U \setminus W}{\text{Nachbarn von~$u$ in~$G''$ formen Clique in~$G''$}}$
     %\State $G''' \coloneqq (U \setminus A, E''')$ mit $E''' \coloneqq \Set{\{ u, v \} \in E''}{u, v \in U \setminus A}$
     \State $G''' \coloneqq$ Subgraph von~$G''$ mit Knotenmenge $U \setminus A$
     \State $(T = (X, F), B) \coloneqq \Call{TreeDecompose}{G'''}$
     \For{$a \in A$}
-      \State finde $x \in X$ mit $\Neighbours_{G''}(a) \subseteq B(x)$
+      \State finde $x \in X$ mit $\Neighbors_{G''}(a) \subseteq B(x)$
       \State füge zu $T$ einen Blattknoten $l_a$ mit Vaterknoten $x$ hinzu
-      \State setze $B(l_a) \coloneqq \{ a \} \cup \Neighbours_{G''}(a)$
+      \State setze $B(l_a) \coloneqq \{ a \} \cup \Neighbors_{G''}(a)$
     \EndFor
     \State definiere $B' : X \to \Powerset(V)$ durch $B'(x) \coloneqq \phi^{-1}(B(x))$
     \State \Return mit der Schrumpfprozedur von Bodlaender und Kloks
@@ -1391,16 +1485,18 @@ Mit einer einfacheren $\Call{Search}{}$-Prozedur kann man schon zeigen:
 \end{lem}
 
 % §9.2. Parameterized Dominating Set
-\subsection{\scriptSection{9.2} Param. \Problem{Dominating Set} für planare Graphen}
+\subsection{\scriptSection{9.2} Param. \Problem{Independent Set} für planare Graphen}
 
 % 9.11
 \begin{satz}
-  Für einen planaren Graphen $G$ und ein $k \in \N$ kann eine unabh. Knotenmenge in Zeit $\O(6^k \cdot n)$ berechnet werden (falls eine solche existiert).
+  Für einen planaren Graphen $G$ und ein $k \in \N$ kann eine unabh. Knotenmenge der Größe $\leq k$ in Zeit $\O(6^k \cdot n)$ berechnet werden (falls eine solche existiert).
 \end{satz}
 
 \begin{idee}
   Verwende rekursive Suche und die Tatsache, dass es in einem planaren Graphen einen Knoten mit Grad $\leq 5$ gibt.
 \end{idee}
+
+\subsection{\scriptSection{9.2} Param. \Problem{Dominating Set} für planare Graphen}
 
 % 9.12
 \begin{lem}
@@ -1410,8 +1506,8 @@ Mit einer einfacheren $\Call{Search}{}$-Prozedur kann man schon zeigen:
 % 9.13
 \begin{lem}
   Sei $G = (V, E)$ ein planarer Graph mit $n$ Knoten und $S \subset V$ mit $S \leq n/28$.
-  Angenommen, jeder Knoten $v \in \Neighbours_G(S) \setminus S$ hat mind. zwei Nachbarknoten, die nicht in $S \cup \Neighbours_G(S)$ liegen.
-  Dann gibt es einen Knoten $v \in V \setminus (S \cup \Neighbours_G(S))$ mit $\deg(v) \leq 6$.
+  Angenommen, jeder Knoten $v \in \Neighbors_G(S) \setminus S$ hat mind. zwei Nachbarknoten, die nicht in $S \cup \Neighbors_G(S)$ liegen.
+  Dann gibt es einen Knoten $v \in V \setminus (S \cup \Neighbors_G(S))$ mit $\deg(v) \leq 6$.
 \end{lem}
 
 % 9.14
@@ -1422,12 +1518,12 @@ Mit einer einfacheren $\Call{Search}{}$-Prozedur kann man schon zeigen:
 \begin{algorithmic}
   \Function{DominatingSet}{$G = (V, E)$, $S \subseteq V$, $k$}
     \If{$\size{S} > k$} \Return ``no solution'' \EndIf
-    \State $W \coloneqq S \cup \Neighbours_G(S)$
+    \State $W \coloneqq S \cup \Neighbors_G(S)$
     \State $G' \coloneqq (V, E')$ mit $E' \coloneqq E \setminus \Set{\{ u, v \}}{u, v \in W}$
     \State $G'' \coloneqq (V'', E' \cap \Powerset(V''))$ mit $V'' \coloneqq V \setminus \Set{v \in W}{\deg_{G'}(v) \leq 1}$
     \State finde $v \in V'' \setminus W$ mit $\deg_{G''}(v) \leq 6$
     \IndentState (möglich dank vorhergehendem Lemma)
-    \State $N \coloneqq \{ v \} \cup \Neighbours_{G''}(v)$
+    \State $N \coloneqq \{ v \} \cup \Neighbors_{G''}(v)$
     \For{$w \in N$}
       $S_w \coloneqq \Call{DominatingSet}{G, S \cup \{ w \}, k}$
     \EndFor
@@ -1451,8 +1547,8 @@ Mit einer einfacheren $\Call{Search}{}$-Prozedur kann man schon zeigen:
     Lösche alle Knoten, die inzident zur äußeren Fläche sind.
   \end{minipage}
 
-  Der \textit{Außenplanaritätslevel} eines Knoten ist die Nummer der Iteration, in der er gelöscht worden ist.
-  Der Graph~$G$ heißt \emph{$k$-außenplanar}, falls er eine Einbettung besitzt, bezüglich der jeder Knoten Außenplanaritätslevel $\leq k$ hat (\dh{} nach $k$ Iterationen war der Graph leer).
+  Der \textit{Außenplanaritätslevel} eines Knoten ist die Nummer der Iteration, in der er gelöscht worden ist. \\
+  Der Graph~$G$ heißt \emph{$k$-außenplanar}, falls er eine Einbettung besitzt, bezüglich der jeder Knoten Außenplanaritätslevel $\leq k$ hat (\dh{} nach $\leq k$ Iterationen war der Graph leer).
 \end{defn}
 
 \begin{bem}
@@ -1790,7 +1886,7 @@ Offenes Problem: Gibt es Kernelization mit $\#\text{Knoten} = \O(k)$ oder $\O(k^
 \section{\scriptSection{11} Grenzen der Approximierbarkeit}
 
 % aus §4.3. Relative Approximation
-\begin{satz}
+\begin{satz}[§4.3]
   Falls $\P \neq \NP$, so gilt Minimum TSP $\not\in \APX$.
 \end{satz}
 
@@ -1798,12 +1894,12 @@ Offenes Problem: Gibt es Kernelization mit $\#\text{Knoten} = \O(k)$ oder $\O(k^
   Wäre Minimum TSP $r$-approximierbar, so könnte man diesen Algorithmus verwenden, um das NP-Problem, ob ein Graph einen Hamiltonweg besitzt, zu entscheiden.
 \end{beweisidee}
 
-\begin{satz}
+\begin{satz}[§7]
   Falls $\P \neq \NP$, so gilt Minimum Bin Packing $\not\in \PTAS$
 \end{satz}
 
 \begin{beweisidee}
-  Ansonsten wäre das NP-vollständige Problem, zu entscheiden ob gegebene Objekte in zwei Bins passen, lösbar.
+  Wäre Bin Packing $\epsilon$-approximierbar mit $\epsilon < 1/3$, so wäre das NP-vollständige Problem, zu entscheiden ob gegebene Objekte in zwei Bins passen, in~$\P$.
 \end{beweisidee}
 
 % §11.1 Probabilistically Checkable Proofs
@@ -1845,9 +1941,9 @@ Offenes Problem: Gibt es Kernelization mit $\#\text{Knoten} = \O(k)$ oder $\O(k^
   \begin{itemize}
     \item Ist $x \in L$, so ist $F$ erfüllbar.
     \item Ist $x \not\in L$, so gilt für jede mögliche Variablenbelegung: Für mehr als die Hälfte der möglichen Werte von~$y$ gibt es mindestens eine für~$y$ generierte Klausel, die nicht erfüllt ist. \\
-    Somit sind immer $> 2^{r(n) - 1}$ der insgesamt $\leq 2^{r(n) + q}$, also ein Anteil von $> 2^{-q-1} =: \epsilon$ nicht erfüllt.
+    Somit sind immer $> 2^{r(n) - 1}$ der insgesamt $\leq 2^{r(n) + q}$, also ein Anteil von $> 2^{-q-1}$ nicht erfüllt.
   \end{itemize}
-  Wäre $\mathrm{MaxSAT} \in \PTAS$, so könnte man durch Anwendung des PTAS mit~$\epsilon$ entscheiden, welcher Fall vorliegt.
+  Wäre $\mathrm{MaxSAT} \in \PTAS$, so könnte man durch Anwendung des PTAS mit $\epsilon \coloneqq 2^{-q-1}$ entscheiden, welcher Fall vorliegt.
 \end{beweisskizze}
 
 % ausgelassen: §11.3 Inapproximability of Maximum Clique
