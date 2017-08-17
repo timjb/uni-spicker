@@ -524,20 +524,24 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
     für Intervallgraphen in~$\PO$ (§3.2), \\
     lösbar in $\O(\alpha_0^n \cdot m + n)$ mit $\alpha_0 \approx 1,325$ (§5.4), \\
     Parametrisierung mit Zeit $\O(k^2 \cdot \alpha_0^k + n + m)$ möglich (§8.1), \\
+    mit Baumzerl.\ der Weite $\leq k$ lösbar in $\O(k 2^k n + k m)$ (§9.4), \\
     2-approximierbar (sogar mit Gewichten, §10.2), \\
+    für bipartite Graphen in~$\PO$ (§12), \\
     linearer Kernel berechenbar in~$\O(n+m)$ (§12)
 
   \item[Independent Set]
     für Intervallgraphen in~$\PO$ (§3.2), \\
-    für planare Graphen Param. mit Zeit $\O(6^k \cdot n)$ möglich (§9.2), \\
+    für planare Graphen Param.\ mit Zeit $\O(6^k \cdot n)$ möglich (§9.2), \\
     mit Baumzerl.\ der Weite $\leq k$ lösbar in $\O(k 2^k n + k m)$ (§9.4), \\
-    PTAS mit $\tfrac{k}{k+1}$-Approx.\ in~$\O(k^2 2^{3 k} n)$ (§9.4)
+    für planare Graphen gibt es PTAS mit $\tfrac{k}{k+1}$-Approx.\ in Zeit~$\O(k^2 2^{3 k} n)$ (§9.4), \\
+    für bipartite Graphen in~$\PO$ (§12),
 
   \item[Set Cover]
     $H_n$-approximierbar (§3.5)
 
   \item[Vertex Coloring]
-    $\O(n / \log n)$-approximierbar (§4.4)
+    $\O(n / \log n)$-approximierbar (§4.4), \\
+    bei planaren Graphen mit 5 Farben möglich (und Absolutfehler $\leq 2$, ÜA 9.5)
 
   \item[Edge Coloring]
     approximierbar mit abs. Fehler~$1$ (§4.1)
@@ -555,11 +559,11 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
     2-approximierbar (§10.4)
 
   \item[3-SAT]
-    lösbar in $\O(\abs{F} \cdot \alpha_0^n)$ (§5.3)
+    lösbar in $\O(\abs{F} \cdot \alpha_0^n)$ mit $\alpha_0 \approx 1,84$ (§5.3)
 
   \item[MaxSAT]
     $\not\in \PTAS$ (falls $\P \not \in \NP$, §11), \\
-    $1/2$-approximierbar (§8.2), \\
+    trivial $1/2$-approximierbar (§8.2), \\
     Parametrisierung mit Zeit $\O(k^2 \phi^k + \abs{F})$ möglich (§8.2), \\
     im Erwartungswert $3/4$-approximierbar (§10.3)
 
@@ -738,6 +742,11 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
   Es gibt einen Polynomialzeit-Approximationsalg.\ für Minimum Edge Coloring mit Absolutfehler~$\leq 1$.
 \end{kor}
 
+% Blatt 4, ÜA 4.1
+\begin{kor}
+  Minimum Edge Coloring ist $4/3$-approximierbar
+\end{kor}
+
 % §4.3. The Traveling Salesman Problem
 \subsection{\scriptSection{4.3} Ein Approximationsalg.\ für \Problem{$\Delta$-TSP}}
 
@@ -763,14 +772,14 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
 
 % 2.12
 \begin{lem}
-  Ein zshgder ungerichteter Multigraph ist genau dann Eulersch, wenn alle seine Knoten geraden Grad haben.
+  Ein zshgder ungerichteter Multigraph ist genau dann Eulersch, wenn alle seine Knoten geraden Grad haben. \\
   In dem Fall kann man eine Eulertour in Polynomialzeit finden.
 \end{lem}
 
-\begin{lem}
-  Sei $(V, c)$ eine Instanz des Minimum $\Delta$-TSP.
+\begin{kor}
+  Sei $(V, c)$ eine Instanz des Minimum $\Delta$-TSP. \\
   Aus jedem Eulerschen Multigraph auf der Knotenmenge~$V$ mit Gesamtkantengewicht $C$ kann man eine TSP-Tour der Gesamtlänge~$\leq C$ in Polynomialzeit berechnen.
-\end{lem}
+\end{kor}
 
 % 4.13
 \begin{defn}
@@ -782,7 +791,7 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
 
 % 4.14
 \begin{satz}
-  Ein perfektes Matching maximaler Größe mit minimalen Kosten (unter den Matchings maximaler Größe) kann für einen Graphen $G$ mit $n$ Knoten in Zeit $n^{o(1)}$ berechnet werden.
+  Ein Matching maximaler Größe mit minimalen Kosten (unter den Matchings maximaler Größe) kann für einen geg. Graphen~$G$ mit~$n$ Knoten in Zeit $n^{O(1)}$ berechnet werden.
 \end{satz}
 
 % 4.15
@@ -794,11 +803,11 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
 
 \begin{beweisskizze}
   Sei $(V, c)$ eine Instanz und $z^*$ die minimale Länge einer Tour.
-  Berechne einen minimalen Spannbaum.
+  Berechne einen min.\ Spannbaum.
   Berechne ein perfektes Matching mit minimalen Kosten auf den Knoten des Stammbaums mit ungeradem Grad.
-  Die Kosten dieses Matchings sind $\leq z^* / 2$.
-  Durch Hinzufügen der Kanten des Matchings zum Spannbaum erhalten wir einen Eulerschen Multigraphen mit Gesamtkosten $\leq 3/2 z^*$.
-  Aus diesem erhalten wir eine Tour der Länge $\leq 3/2 z^*$.
+  Die Kosten dieses Matchings sind $\leq z^* / 2$. \\
+  Der Multigraph auf~$V$ bestehend aus den Kanten des Matchings und denen des Spannbaums ist Eulersch mit Gesamtkosten $\leq 3/2 z^*$. \\
+  Aus diesem erhalten wir eine TSP-Tour der Länge $\leq 3/2 z^*$.
 \end{beweisskizze}
 
 \subsection{\scriptSection{4.4} Ein Approx'alg.\ für \Problem{Min. Vertex Coloring}}
@@ -827,7 +836,7 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
 \begin{beweisskizze}
   Sei $k$ die optimale Zahl an benötigten Farben. \\
   Sei $m_i$ ($i \geq 0$) die Anzahl der Knoten in~$H$ am Beginn der $i$-ten Iteration der inneren Schleife.
-  Dann gibt es ein IS der Größe $\geq m_i/k$ in~$H$ und somit ist in~$H$ der Maximalgrad $\leq m - m/k$. \\
+  Dann gibt es ein IS der Größe $\geq m_i/k$ in~$H$ und folglich ist in~$H$ der Minimalgrad $\leq m_i - m_i/k$. \\
   Somit ist $m_{i+1} \geq m_i/k - 1$.
   Durch Induktion folgt $m_i \geq m_0/k^i - 2$. \\
   Also gilt dann $\abs{I} = \min \Set{i}{m_i = 0} \geq \log(m_0/2) / \log(k)$. \\
@@ -875,6 +884,8 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
   \]
 \end{bsp}
 
+\begin{samepage}
+
 \begin{bem}
   In der Praxis schaffen Branch-and-Bound-Algorithmen oft eine drastische Verkleinerung des Suchraums.
   Theoretisch haben sie jedoch für gew.\ dieselbe asympt. Laufzeit wie erschöpfende Suche.
@@ -890,6 +901,8 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
 \begin{satz}
   Eine Instanz $F$ von 3-SAT kann in Zeit $\O(\abs{F} \cdot \alpha_0^n)$ entschieden werden, wobei $\alpha_0 \approx 1.84$ und $\abs{F} = \#\text{Literale in~$F$}$.
 \end{satz}
+
+\end{samepage}
 
 \begin{algorithmic}
   \Function{Decide}{$F$}
@@ -914,6 +927,17 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
     \alpha^{-1} + \alpha^{-2} + \alpha^{-3} \leq 1
   \]
 \end{beweisskizze}
+
+% ÜA 5.1
+\begin{lem}
+  Sei $F$ eine Formel in 3-KNF und $F' = F|_{l_1=a_1, \ldots, l_k=a_k}$ mit Literalen $l_1, \ldots, l_k$ und $a_1, \ldots, a_k \in \{ 0, 1 \}$.
+  Falls $F'$ keine Clause der Länge $< 3$ hat, so gilt: $F$ ist erfüllbar $\iff$ $F'$ ist erfüllbar
+\end{lem}
+
+% ÜA 5.1
+\begin{satz}
+  Eine Instanz $F$ von 3-SAT kann in Zeit $\O(\size{F} \cdot \beta^n)$ entschieden werden, wobei $\beta \approx 1,73$ die Wurzel von $\alpha^5 - \alpha^3 - 2 \alpha^2  - 2 \alpha - 1 = 0$ ist.
+\end{satz}
 
 % §5.4. Minimum Vertex Cover
 \subsection{\scriptSection{5.4} \Problem{Minimum Vertex Cover} mit Baumsuche}
@@ -1185,7 +1209,7 @@ Folgender Alg.\ entscheidet bloß, ob es eine solche Zuweisung gibt (eine Varian
     \If{keine Variable tritt positiv und negativ in $F'$ auf}
       \State \Return true
     \EndIf
-    \State Wähle unter den Variablen mit positiv und negativ auftreten,
+    \State Wähle unter den Variablen, die positiv und negativ auftreten,
     \State \quad eine Variable $x$, die am öftesten auftritt
     \State $m_0 \coloneqq $ Anzahl der negativen Vorkommen von~$x$
     \State $m_1 \coloneqq $ Anzahl der positiven Vorkommen von~$x$
@@ -1505,9 +1529,9 @@ Mit einer einfacheren $\Call{Search}{}$-Prozedur kann man schon zeigen:
 
 % 9.13
 \begin{lem}
-  Sei $G = (V, E)$ ein planarer Graph mit $n$ Knoten und $S \subset V$ mit $S \leq n/28$.
-  Angenommen, jeder Knoten $v \in \Neighbors_G(S) \setminus S$ hat mind. zwei Nachbarknoten, die nicht in $S \cup \Neighbors_G(S)$ liegen.
-  Dann gibt es einen Knoten $v \in V \setminus (S \cup \Neighbors_G(S))$ mit $\deg(v) \leq 6$.
+  Sei $G = (V, E)$ ein planarer Graph mit $n$ Knoten und $S \subset V$ mit $\size{S} \leq n/28$.
+  Angenommen, jeder Knoten $v \in \Neighbors_G(S) \setminus S$ hat $\geq 2$ Nachbarknoten, die nicht in $W \coloneqq S \cup \Neighbors_G(S)$ liegen.
+  Dann gibt es einen Knoten $v \in V \setminus W$ mit $\deg(v) \leq 6$.
 \end{lem}
 
 % 9.14
@@ -1821,9 +1845,41 @@ Mit einer einfacheren $\Call{Search}{}$-Prozedur kann man schon zeigen:
 
 % 12.1
 \begin{resultat}[\emph{Egerváry-König}]
-  Sei $G$ ein bipartiter Graph mit $n$ Knoten und $m$ Kanten und $M$ ein Matching maximaler Größe in~$G$. \\
-  Dann kann ein Minimum Vertex Cover von~$G$ der Größe~$\size{M}$ in Zeit $\O(n+m)$ berechnet werden.
+  Sei ein bipartiter Graph $G$ mit $n$ Knoten und $m$ Kanten und ein Matching $M$ maximaler Größe in~$G$ gegeben.
+  Dann kann ein Minimum Vertex Cover~$C$ von~$G$ der Größe~$\size{M}$ in Zeit $\O(n+m)$ berechnet werden.
 \end{resultat}
+
+\begin{algorithmic}
+  \State $C \coloneqq \emptyset$
+  \State $\mathrm{Matched} \coloneqq \cup_{e \in M} e$
+  \While{$V \neq \emptyset$}
+    \If{$\exists \, v \in V \setminus \mathrm{Matched}$}
+      \State $X \coloneqq \Set{x \in V}{\{ v, x \} \in E}$, \enspace $V \coloneqq V \setminus \{ v \}$
+    \Else \enspace
+      wähle $v \in V$, setze $X \coloneqq \{ v \}$
+    \EndIf
+    \While{$X \neq \emptyset$}
+      \State $Y \coloneqq \Set{y \in V}{\ex{x \in X} \{ x, y \} \in M}$
+      \State $V \coloneqq V \setminus (X \cup Y)$, \enspace $C \coloneqq C \cup X$
+      \State $X \coloneqq \Set{x \in V}{\ex{y \in Y} \{ x, y \} \in E} \subseteq \mathrm{Matched}$
+    \EndWhile
+  \EndWhile
+  %\Function{DominatingSet}{$G = (V, E)$, $S \subseteq V$, $k$}
+  %  \If{$\size{S} > k$} \Return ``no solution'' \EndIf
+  %  \State $W \coloneqq S \cup \Neighbors_G(S)$
+  %  \State $G' \coloneqq (V, E')$ mit $E' \coloneqq E \setminus \Set{\{ u, v \}}{u, v \in W}$
+  %  \State $G'' \coloneqq (V'', E' \cap \Powerset(V''))$ mit $V'' \coloneqq V \setminus \Set{v \in W}{\deg_{G'}(v) \leq 1}$
+  %  \State finde $v \in V'' \setminus W$ mit $\deg_{G''}(v) \leq 6$
+  %  \IndentState (möglich dank vorhergehendem Lemma)
+  %  \State $N \coloneqq \{ v \} \cup \Neighbors_{G''}(v)$
+  %  \For{$w \in N$}
+  %    $S_w \coloneqq \Call{DominatingSet}{G, S \cup \{ w \}, k}$
+  %  \EndFor
+  %  \State $C \coloneqq \Set{S_w}{w \in N} \setminus \{ \text{``no solution''} \}$
+  %  \If{$C = \emptyset$} \Return ``no solution'' \EndIf
+  %  \State \Return ${\argmin}_{T \in C} \size{T}$
+  %\EndFunction
+\end{algorithmic}
 
 \begin{satz}
   Für jeden unger. Graph $G = (V_G, E_G)$ und $k \in \N$ kann in Zeit~$\O(n+m)$ ein unger. Graph $H = (V_H, E_H)$ mit $\size{V_H} \leq 2 k$ und ein $k' \in \{ 0, \ldots, k \}$ berechnet werden, sodass gilt:
