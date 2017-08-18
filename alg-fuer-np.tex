@@ -936,7 +936,7 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
 
 % ÜA 5.1
 \begin{satz}
-  Eine Instanz $F$ von 3-SAT kann in Zeit $\O(\size{F} \cdot \beta^n)$ entschieden werden, wobei $\beta \approx 1,73$ die Wurzel von $\alpha^5 - \alpha^3 - 2 \alpha^2  - 2 \alpha - 1 = 0$ ist.
+  Eine Instanz $F$ von 3-SAT kann in Zeit $\O(\size{F} \cdot \beta^n)$ entschieden werden, wobei $\beta \approx 1,73$ die Wurzel von $x^5 - x^3 - 2 x^2  - 2 x - 1 = 0$ ist.
 \end{satz}
 
 % §5.4. Minimum Vertex Cover
@@ -1067,7 +1067,7 @@ Schaffen wir es, einen Algorithmus mit $m$~Fällen mit Verzweigungs- multimengen
   (O.\,B.\,d.\,A.\ sei $w_i \leq W$ für alle~$i$.)
   \begin{enumerate}
     \item Setze $K \coloneqq \epsilon V / n^2$, wobei $V \coloneqq v_1 + \ldots + v_n$.
-    \item Löse die Instanz $(\floor{v_1/K}, \ldots, \floor{v_n/K}, w_1, \ldots, w_n, W)$ von Maximum \textit{Integer} Knapsack mit dem Algorithmus basierend auf dynamischer Programmierung.
+    \item Löse die Instanz $(v_1', \ldots, v_n', w_1, \ldots, w_n, W)$ mit $v_i' \coloneqq \floor{v_i/K}$ von Maximum \textit{Integer} Knapsack mit dem Algorithmus basierend auf dynamischer Programmierung.
     \item Die Lösung dieses geänderten Problems ist eine $\epsilon$-Approximation des ursprünglichen Problems.
   \end{enumerate}
 \end{alg}
@@ -1102,7 +1102,11 @@ Schaffen wir es, einen Algorithmus mit $m$~Fällen mit Verzweigungs- multimengen
   Sortiere die Objekte absteigend nach Größe und bilde Gruppen mit je~$k$ Objekten.
   Benutze je einen eigenen Bin für jedes Objekt der ersten Gruppe.
   Ersetze in den anderen Gruppen jedes Objekt durch eine Kopie des kleinsten Objekts der vorhergehenden Gruppe.
-  Löse das so durch "`Aufrunden"' vergrößerte Instanz mit dem Algorithmus aus §6.2.
+  Finde mit dem Algorithmus aus §6.2 die opt. Anzahl $k'$ von Bins für die so durch "`Aufrunden"' vergrößerte Instanz.
+  Dann gilt:
+  \[
+    z' + k \leq z^* + \delta^2 n + 1 \leq (1 + \delta) z^* + 1.
+  \]
 \end{alg}
 
 % 7.4
@@ -1112,16 +1116,14 @@ Schaffen wir es, einen Algorithmus mit $m$~Fällen mit Verzweigungs- multimengen
 
 \begin{alg}
   Setze $\delta \coloneqq \epsilon / 2$.
-  Packe die großen ($\geq \delta$) Objekte wie im vorh\@. Lemma.
+  Packe die großen ($\geq \delta$) Objekte wie im vorhergehenden Lemma.
   Fülle dann mit den kleinen ($< \delta$) auf und eröffne neue Bins, falls nötig.
 \end{alg}
 
-Somit ist Minimum Bin Packing $\in \APTAS$.
-Man kann sogar zeigen:
-
-\begin{resultat}
-  Minimum Bin Packing $\in \AFPTAS$
-\end{resultat}
+\begin{bem}
+  Somit MBP $\in \APTAS$.
+  Es gilt sogar MBP $\in \AFPTAS$.
+\end{bem}
 
 % §8. Parametrization
 \subsection{\scriptSection{8} Idee: Parametrisierung}
