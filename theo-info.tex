@@ -35,7 +35,7 @@ Ein \emph{DFA} ist ein Tupel $(Q, \Sigma, \delta, q_{0}, F)$ mit
 \end{defn}
 
 \begin{defn}
-Ein \emph{NFA} ist ein Tupel $(Q, \Sigma, \delta, q_{0}, F)$ mit den gleichen Komponenten wie ein DFA, aber die Übergangsfunktion hat eine andere Quellmenge: $\delta : Q \times (\Sigma \cup \{ \epsilon \}) \to Q$.
+Ein \emph{NFA} ist ein Tupel $(Q, \Sigma, \delta, q_{0}, F)$ mit den gleichen Komponenten wie ein DFA, aber die Übergangsfunktion hat eine andere Quell- und Zielmenge: $\delta : Q \times (\Sigma \cup \{ \epsilon \}) \to \mathcal{P}(Q)$.
 \end{defn}
 
 \begin{alg}
