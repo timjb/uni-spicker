@@ -324,7 +324,7 @@
 \begin{defn}
   Sei $s \in \N$, $U$ eine Menge und $\mathcal{H}$ eine endliche Klasse von Funktionen von $U$ nach $\{ 0, ..., s-1 \}$. Die Klasse $\mathcal{H}$ heißt $c$-universell, wobei $c > 0$, falls
   \[
-    \abs{\Set{h \in \mathcal{H}}{ h(x) = h(y) }} \quad \text{für alle $x, y \in U$ mit $x \not= y$.}
+    \abs{\Set{h \in \mathcal{H}}{ h(x) = h(y) }} \leq c \cdot \frac{\mathcal H}{s} \quad \text{für alle $x, y \in U$ mit $x \not= y$.}
   \]
 \end{defn}
 
@@ -431,7 +431,7 @@
 \end{lem}
 
 \begin{alg}[Bellman-Ford]
-  Relaxiere $n$ mal je alle Kanten im Graphen.
+  Relaxiere $n-1$ mal je alle Kanten im Graphen.
 \end{alg}
 
 \begin{satz}
