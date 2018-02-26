@@ -522,7 +522,7 @@
 
 % 3.12.
 \begin{satz}[Generalisierungstheorem]
-  Sei $M \subset \For$ und $A \in \For$. Angenommen, es gilt $\fa{B \in M} x \not\in \FV(B)$. Dann gilt $M \vdash \fa{x} A$.
+  Sei $M \subset \For$, $A \in \For$ und $M \vdash A$. Angenommen, es gilt $\fa{B \in M} x \not\in \FV(B)$. Dann gilt $M \vdash \fa{x} A$.
 \end{satz}
 
 % 3.13.
@@ -532,7 +532,7 @@
 
 % 3.14.
 \begin{prop}[$\alpha$-Konversion]
-  Sei $y \in \FV(\fa{x} A)$. Dann gilt
+  Sei $y \notin \FV(\fa{x} A)$. Dann gilt
   \[ \vdash (\fa{x} A) \to (\fa{y} A[\subst{y}{x}]). \]
 \end{prop}
 
