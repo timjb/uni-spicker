@@ -804,7 +804,7 @@ Dies ist eine Zusammenfassung zur gleichnamigen Vorlesung von Professor Dr. Torb
 \begin{beweisskizze}
   Sei $(V, c)$ eine Instanz und $z^*$ die minimale Länge einer Tour.
   Berechne einen min.\ Spannbaum.
-  Berechne ein perfektes Matching mit minimalen Kosten auf den Knoten des Stammbaums mit ungeradem Grad.
+  Berechne ein perfektes Matching mit minimalen Kosten auf den Knoten des Spannbaums mit ungeradem Grad.
   Die Kosten dieses Matchings sind $\leq z^* / 2$. \\
   Der Multigraph auf~$V$ bestehend aus den Kanten des Matchings und denen des Spannbaums ist Eulersch mit Gesamtkosten $\leq 3/2 z^*$. \\
   Aus diesem erhalten wir eine TSP-Tour der Länge $\leq 3/2 z^*$.
@@ -1866,21 +1866,6 @@ Mit einer einfacheren $\Call{Search}{}$-Prozedur kann man schon zeigen:
       \State $X \coloneqq \Set{x \in V}{\ex{y \in Y} \{ x, y \} \in E} \subseteq \mathrm{Matched}$
     \EndWhile
   \EndWhile
-  %\Function{DominatingSet}{$G = (V, E)$, $S \subseteq V$, $k$}
-  %  \If{$\size{S} > k$} \Return ``no solution'' \EndIf
-  %  \State $W \coloneqq S \cup \Neighbors_G(S)$
-  %  \State $G' \coloneqq (V, E')$ mit $E' \coloneqq E \setminus \Set{\{ u, v \}}{u, v \in W}$
-  %  \State $G'' \coloneqq (V'', E' \cap \Powerset(V''))$ mit $V'' \coloneqq V \setminus \Set{v \in W}{\deg_{G'}(v) \leq 1}$
-  %  \State finde $v \in V'' \setminus W$ mit $\deg_{G''}(v) \leq 6$
-  %  \IndentState (möglich dank vorhergehendem Lemma)
-  %  \State $N \coloneqq \{ v \} \cup \Neighbors_{G''}(v)$
-  %  \For{$w \in N$}
-  %    $S_w \coloneqq \Call{DominatingSet}{G, S \cup \{ w \}, k}$
-  %  \EndFor
-  %  \State $C \coloneqq \Set{S_w}{w \in N} \setminus \{ \text{``no solution''} \}$
-  %  \If{$C = \emptyset$} \Return ``no solution'' \EndIf
-  %  \State \Return ${\argmin}_{T \in C} \size{T}$
-  %\EndFunction
 \end{algorithmic}
 
 \begin{satz}
