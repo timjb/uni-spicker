@@ -771,7 +771,16 @@ Falls $X_k$ nur Werte aus~$\N$ annimmt, so können wir das Verhalten von $H(t) -
   \]
 \end{satz}
 
-\TODO{Beweisidee}
+\begin{beweisskizze}
+  Für $f(y) \coloneqq \ind \{ y = x_0 \}$:
+  Betrachte die \iid{} ZVen $X_k \coloneqq \tau_{x_0}^{(k)} - \tau_{x_0}^{(k-1)}$.
+  Nach dem starken Gesetz der großen Zahlen gilt
+  \[
+    \tau_{x_0}^n / n = (X_1 + \ldots + X_n) / n \xrightarrow[n \to \infty]{} m(x_0, x_0)
+    \quad \text{fast sicher.}
+  \]
+  Dies ist äquivalent zu ${\sum}_{k=1}^{n} \ind \{ X_k = x_0 \} \to 1 / m(x_0, x_0)$ fast sicher.
+\end{beweisskizze}
 
 \begin{bsp}
   Für $f(y) \coloneqq \ind \{ y = x_0 \}$ für eine $x_0 \in E$ erhalten wir
@@ -1705,7 +1714,7 @@ Die Anzahl der \textit{Aufkreuzungen} ist dann
 \end{bsp}
 
 \begin{verf}
-  Falls $P$ substochastisch ist, so kann man die Gleichung für harmonische Fktn zu einer Gleichung mit einem stochastischen (aber leider nicht irreduziblen) Kern umformulieren: Setze
+  Falls $P$ substochastisch ist, so kann man die Gleichung für harmonische Fktn zu einer Gleichung mit einem stochastischen (aber leider nicht irreduziblen) Kern~$P'$ umformulieren: Setze
   \[ E' \coloneqq E \sqcup \{ \dag \} \]
   und definiere $p' : E' \times E' \to \cinterval{0}{1}$ für $x, y \in E$ durch
   \[
@@ -1716,7 +1725,7 @@ Die Anzahl der \textit{Aufkreuzungen} ist dann
       & p'(\dag, \dag) = 1.
     \end{array}
   \]
-  Beachte: $p'$ ist stochastisch.
+  Dann ist $P'$ stochastisch.
   Für $h : E \to \R$ sei $h' : E' \to \R$ def. durch
   \[
     h'|_E \coloneqq h
@@ -1725,8 +1734,8 @@ Die Anzahl der \textit{Aufkreuzungen} ist dann
   \]
   Dann gilt für alle $h : E \to \R$:
   \[
-    \text{$h$ ist harmonisch für $p$} \iff
-    \text{$h'$ ist harmonisch für $p'$.}
+    \text{$h$ ist harmonisch für $P$} \iff
+    \text{$h'$ ist harmonisch für $P'$.}
   \]
 \end{verf}
 
@@ -1743,7 +1752,7 @@ Die Anzahl der \textit{Aufkreuzungen} ist dann
   die \textit{Green'sche Funktion}.
   Für festes $y \in E$ betrachte die Funktion
   \[ h_y(x) \coloneqq G(x, y). \]
-  Ist $y$ \textit{transient} (\dh{} $G(y, y)$), so ist $h_y$ superharmonisch. \\
+  Ist $y$ \textit{transient} (\dh{} $G(y, y) < \infty$), so ist $h_y$ superharmonisch. \\
   Ist $P$ \textit{irreduzibel} (\dh{} $\fa{x, y \in E} \ex{n \geq 1} p^{(n)}(x, y) > 0$), so gilt außerdem $h_y(x) > 0$ für alle $x \in E$.
 \end{bsp}
 
@@ -1783,6 +1792,25 @@ Die Anzahl der \textit{Aufkreuzungen} ist dann
     \text{jedes für~$P$ superharmon. $f \geq 0$ ist konstant}.
   \]
 \end{satz}
+
+\begin{beweisskizze}
+  "`$\Rightarrow$"'
+  Betrachte das nichtneg. Supermartingal $\{ Y_n \}$ mit $Y_n \coloneqq h(Z_n)$.
+  Dieses konvergiert gegen~$Y_\infty$.
+  Wegen Rekurrenz muss aber $Y_\infty = h(y)$ fast überall für alle $y \in E$ gelten.
+
+
+  "`$\Leftarrow$"'
+  Wähle $y_1, y_2 \in E$.
+  Ist $\{ Z_n \}$ transient, so ist die Funktion $G(\blank, y_2)$ harmonisch.
+  Aus der Annahme folgt
+  \[
+    F(y_1, y_2) / (1 - F(y_2, y_2)) = G(y_1, y_2) = G(y_2, y_2) = 1 / (1 - F(y_2, y_2)).
+  \]
+  Somit $F(y_1, y_2) = 1$.
+  Analog $F(y_2, y_1) = 1$.
+  Also $y_1$, $y_2$ rekurrent.
+\end{beweisskizze}
 
 % 5.8
 \begin{bem}
@@ -1880,6 +1908,12 @@ Sei $P$ im Folgenden transient, \dh{}
   Diese Zerlegung ist eindeutig.
 \end{satz}
 
+\begin{beweisidee}
+  Setze $h(x) \coloneqq {\lim}_{n \to \infty} P^n u(x)$, \quad
+  $f(x) \coloneqq u - P u$. \\
+  Die Eindeutigkeit folgt aus $P^n h = h$ und $P^n g \to 0$ für $n \to \infty$.
+\end{beweisidee}
+
 % §3. Martin-Kompaktifizierung
 \subsection{Martin-Kompaktifizierung}
 
@@ -1901,7 +1935,7 @@ Sei $P$ im Folgenden transient, \dh{}
 
 \begin{situation}
   Sei $E$ abzählbar, $P$ transient und es existiere $x_0 \in E$ mit $G(x_0, y) > 0$ für alle $y \in E$.
-  Sei $N : E \to \N$ abzählbar.
+  Sei $N : E \to \N$ bijektiv.
 \end{situation}
 
 \begin{defn}
@@ -1941,6 +1975,10 @@ Sei $P$ im Folgenden transient, \dh{}
   Jede Folge in~$E$ hat eine Teilfolge, die eine Cauchy-Folge ist (und somit in~$E^*$ konvergiert).
 \end{lem}
 
+\begin{beweisidee}
+  Diagonalfolgenargument
+\end{beweisidee}
+
 \begin{kor}
   $(E^*, \rho)$ ist kompakt.
 \end{kor}
@@ -1971,6 +2009,21 @@ Sei $P$ im Folgenden transient, \dh{}
   \]
 \end{satz}
 
+\begin{beweisskizze}
+  Wähle eine Folge $\{ h_n \}$ von Potentialen mit $h_n \uparrow h$.
+  Sei $f_n$ die Ladung zu $h_n$.
+  Dann gilt
+  \[
+    h_n(x) = \myint{E^*}{} K(x, y) \mu_n(\d\,y)
+  \]
+  wobei $\mu_n(\{ y \}) \coloneqq f_n(y) G(x_0, y)$ für $y \in E$ und $\mu_n(\partial E) \coloneqq 0$.
+  Nach dem Satz von Prokhorov (beachte: $\mu_n(E^*) = h_n(x_0) \leq h(x_0)$) existiert eine schwach konvergente Teilfolge $\mu_{n_k} \to \mu_h$ für ein Maß $\mu_h$ auf~$E^*$.
+  Mit der Harmonizität von $h$ lässt sich zeigen, dass
+  \[
+    \supp \mu_h \subseteq \Set{\alpha \in \partial E}{K(\blank, \alpha) \text{ ist harmonisch}} \subseteq \partial E.
+  \]
+\end{beweisskizze}
+
 \begin{kor}
   Jede superharmonische Funktion $u \geq 0$ lässt sich schreiben als
   \[
@@ -1984,7 +2037,7 @@ Sei $P$ im Folgenden transient, \dh{}
   \[
     \partial_m E \coloneqq \Set{\alpha \in \partial E}{K(\blank, \alpha) \text{ ist minimal harmonisch}}
   \]
-  anstatt $\partial E$ betrachtet.
+  anstatt $\partial E$ verwendet.
   Dabei heißt eine harmonische Funktion~$h$ \textit{minimal harmonisch}, falls alle harmonischen Funktionen $v \leq h$ von der Form $v = c \cdot h$ mit $c \in \R$ sind.
 \end{bem}
 
