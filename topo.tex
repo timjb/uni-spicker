@@ -60,14 +60,14 @@
 \end{defn}
 
 \begin{prop}
-  Eine Abbildung $f : X \to Y$ zwischen metrischen Räumen ist genau dann offen, wenn für alle offenen Teilmengen $U \subset Y$ das Urbild $f^{-1}(U) \subset X$ offen ist.
+  Eine Abbildung $f : X \to Y$ zwischen metrischen Räumen ist genau dann stetig, wenn für alle offenen Teilmengen $U \subset Y$ das Urbild $f^{-1}(U) \subset X$ offen ist.
 \end{prop}
 
 \begin{defn}
-  Ein \emph{topologischer Raum} $(X, \Tau)$ besteht aus einer Menge $X$ und einer Menge $\tau \subset \Pow(X)$ mit den Eigenschaften \\
+  Ein \emph{topologischer Raum} $(X, \Tau)$ besteht aus einer Menge $X$ und einer Menge $\Tau \subset \Pow(X)$ mit den Eigenschaften \\
   \inlineitem{$\emptyset \in \Tau$,} \quad
   \inlineitem{$\fa{U, V \in \Tau} U \cap V \in \Tau$,} \quad
-  \inlineitem{$\fa{S \subset \Tau} \bigcap_{\mathclap{U \in S}} U \in \Tau$} \\
+  \inlineitem{$\fa{S \subset \Tau} \bigcup_{\mathclap{U \in S}} U \in \Tau$} \\
   Die Elemente von $\Tau$ werden \emph{offene Teilmengen} von $X$ genannt. Eine Teilmenge $A \subset X$ heißt \emph{abgeschlossen}, falls $X \setminus A$ offen ist.
 \end{defn}
 
@@ -198,7 +198,7 @@
   Seien $X, Y, Z$ topologische Räume.
   \begin{itemize}
     \item Falls $X \cap Y = \emptyset$, so ist eine Abbildung $f : X \cup Y \to Z$ genau dann stetig, falls die beiden Kompositionen $f \circ i_X : X \to Z$ und $f \circ i_Y : Y \to Z$ stetig sind.
-    \item Eine Abb. $g : Z \to X \cup Y$ ist genau dann stetig, wenn die beiden Kompositionen $\pi_X \circ g : Z \to X$ und $\pi_Y \circ g : Z \to Y$ stetig sind.
+    \item Eine Abb. $g : Z \to X \times Y$ ist genau dann stetig, wenn die beiden Kompositionen $\pi_X \circ g : Z \to X$ und $\pi_Y \circ g : Z \to Y$ stetig sind.
   \end{itemize}
 \end{prop}
 \end{samepage}
